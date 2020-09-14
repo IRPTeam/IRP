@@ -192,18 +192,21 @@ Scenario: _0154100 preparation
 					| USD  | American dollar |
 				And I activate "Description" field in "List" table
 				And I select current line in "List" table
-			* Change the document number
-				And I input "10" text in "Number" field
-				Then "1C:Enterprise" window is opened
-				And I click "Yes" button
-				And I input "10" text in "Number" field
+			// * Change the document number
+			// 	And I input "10" text in "Number" field
+			// 	Then "1C:Enterprise" window is opened
+			// 	And I click "Yes" button
+			// 	And I input "10" text in "Number" field
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberCashTransferOrder01541001$$"
+			And I save the window as "$$CashTransferOrder01541001$$"
 			And I click "Post and close" button
 			And Delay 5
 			* Check creation
 				Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 				And "List" table contains lines
 				| Number | Sender        | Receiver     | Company      |
-				| 10      | Cash desk №1 | Cash desk №2 | Main Company |
+				| $$NumberCashTransferOrder01541001$$      | Cash desk №1 | Cash desk №2 | Main Company |
 			And I close all client application windows
 		And Delay 5
 		* Create Cashtransfer order for currency exchange (cash accounts)
@@ -244,18 +247,21 @@ Scenario: _0154100 preparation
 					| 'Description' |
 					| 'Arina Brown' |
 				And I select current line in "List" table
-			* Change the document number to 11
-				And I input "11" text in "Number" field
-				Then "1C:Enterprise" window is opened
-				And I click "Yes" button
-				And I input "11" text in "Number" field
+			// * Change the document number to 11
+			// 	And I input "11" text in "Number" field
+			// 	Then "1C:Enterprise" window is opened
+			// 	And I click "Yes" button
+			// 	And I input "11" text in "Number" field
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberCashTransferOrder01541002$$"
+			And I save the window as "$$CashTransferOrder01541002$$"
 			And I click "Post and close" button
 			And Delay 5
 			* Check creation
 				Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 				And "List" table contains lines
 				| Number | Sender       | Receiver     | Company      |
-				| 11      | Cash desk №2 | Cash desk №1 | Main Company |
+				| $$NumberCashTransferOrder01541002$$      | Cash desk №2 | Cash desk №1 | Main Company |
 			And I close all client application windows
 		And Delay 5
 		* Create Cashtransfer order for currency exchange (bank accounts)
@@ -280,18 +286,21 @@ Scenario: _0154100 preparation
 					| Bank account, EUR |
 				And I select current line in "List" table
 				And I input "175,00" text in "Receive amount" field
-			* Change the document number to 13
-				And I input "13" text in "Number" field
-				Then "1C:Enterprise" window is opened
-				And I click "Yes" button
-				And I input "13" text in "Number" field
+			// * Change the document number to 13
+			// 	And I input "13" text in "Number" field
+			// 	Then "1C:Enterprise" window is opened
+			// 	And I click "Yes" button
+			// 	And I input "13" text in "Number" field
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberCashTransferOrder01541003$$"
+			And I save the window as "$$CashTransferOrder01541003$$"
 			And I click "Post and close" button
 			And Delay 5
 			* Check creation
 				Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 				And "List" table contains lines
 				| Number  | Sender            | Receiver          | Company      |
-				| 13      | Bank account, TRY | Bank account, EUR | Main Company |
+				| $$NumberCashTransferOrder01541003$$      | Bank account, TRY | Bank account, EUR | Main Company |
 			And I close all client application windows
 		And Delay 5
 		* Create Cash transfer order for cash transfer between bank accounts in one currency
@@ -339,18 +348,21 @@ Scenario: _0154100 preparation
 						| Bank account, EUR |
 					And I select current line in "List" table
 					And I input "1150,00" text in "Receive amount" field
-				* Change the document number to 14
-					And I input "14" text in "Number" field
-					Then "1C:Enterprise" window is opened
-					And I click "Yes" button
-					And I input "14" text in "Number" field
+				// * Change the document number to 14
+				// 	And I input "14" text in "Number" field
+				// 	Then "1C:Enterprise" window is opened
+				// 	And I click "Yes" button
+				// 	And I input "14" text in "Number" field
+				And I click "Post" button
+				And I save the value of "Number" field as "$$NumberCashTransferOrder01541004$$"
+				And I save the window as "$$CashTransferOrder01541004$$"
 				And I click "Post and close" button
 				And Delay 5
 				* Check creation
 					Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 					And "List" table contains lines
 					| Number  | Sender              | Receiver          | Company      |
-					| 14      | Bank account 2, EUR | Bank account, EUR | Main Company |
+					| $$NumberCashTransferOrder01541004$$      | Bank account 2, EUR | Bank account, EUR | Main Company |
 				And I close all client application windows
 
 

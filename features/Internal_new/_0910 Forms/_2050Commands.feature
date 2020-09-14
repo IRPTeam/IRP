@@ -107,17 +107,20 @@ Scenario: _0205001 preparation
 				And I input "1,000" text in "Q" field of "ItemList" table
 				And I input "100,000" text in "Price" field of "ItemList" table
 				And I finish line editing in "ItemList" table
-			* Change the document number
-				And I move to "Other" tab
-				And I input "3 900" text in "Number" field
-				Then "1C:Enterprise" window is opened
-				And I click "Yes" button
-				And I input "3 900" text in "Number" field
+			// * Change the document number
+			// 	And I move to "Other" tab
+			// 	And I input "3 900" text in "Number" field
+			// 	Then "1C:Enterprise" window is opened
+			// 	And I click "Yes" button
+			// 	And I input "3 900" text in "Number" field
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberPurchaseInvoice0205001$$"
+			And I save the window as "$$PurchaseInvoice0205001$$"
 			* Post and check saving
 				And I click "Post and close" button
 				And "List" table contains lines
 					| 'Number' |
-					| '3 900'       |
+					| '$$NumberPurchaseInvoice0205001$$'       |
 
 Scenario: _0205002 add test command to the list of documents Sales return
 	* Open Command register
@@ -3507,18 +3510,18 @@ Scenario: _010019 check the operation of the command to open an item list from I
 
 
 Scenario: _010020 check the operation of Quantity Compare plugin (comparison of the plan / fact in Goods reciept)
-	* Create Goods reciept based on PI 3900
+	* Create Goods reciept based on PI
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
 			| 'Number' |
-			| '3 900' |
+			| '$$NumberPurchaseInvoice0205001$$' |
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
 	* Check filling in Goods Receipt
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table contains lines
 			| 'Item'  | 'Quantity' | 'Currency' | 'Item key' | 'Store'    | 'Unit' | 'Receipt basis'           |
-			| 'Dress' | '8,000'    | 'TRY'      | 'L/Green'  | 'Store 02' | 'pcs'  | 'Purchase invoice 3 900*' |
-			| 'Boots' | '15,000'   | 'TRY'      | '37/18SD'  | 'Store 02' | 'pcs'  | 'Purchase invoice 3 900*' |
+			| 'Dress' | '8,000'    | 'TRY'      | 'L/Green'  | 'Store 02' | 'pcs'  | '$$PurchaseInvoice0205001$$' |
+			| 'Boots' | '15,000'   | 'TRY'      | '37/18SD'  | 'Store 02' | 'pcs'  | '$$PurchaseInvoice0205001$$' |
 	* Open Quantity Compare
 		And I click "Compare quantity" button
 	* Check of adding goods by barcode search
@@ -3690,8 +3693,8 @@ Scenario: _010020 check the operation of Quantity Compare plugin (comparison of 
 	* Collapse of the tabular part with data on documents-bases
 		And "ExpItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Base on'                 | 'Unit' | 'Q'      |
-			| 'Dress' | 'L/Green'  | 'Purchase invoice 3 900*' | 'pcs'  | '8,000'  |
-			| 'Boots' | '37/18SD'  | 'Purchase invoice 3 900*' | 'pcs'  | '15,000' |
+			| 'Dress' | 'L/Green'  | '$$PurchaseInvoice0205001$$' | 'pcs'  | '8,000'  |
+			| 'Boots' | '37/18SD'  | '$$PurchaseInvoice0205001$$' | 'pcs'  | '15,000' |
 		* Check the ExpItemList table collapse 
 			And I click "Show hide exp. item list" button
 			When I Check the steps for Exception
@@ -3700,8 +3703,8 @@ Scenario: _010020 check the operation of Quantity Compare plugin (comparison of 
 			And I click "Show hide exp. item list" button
 			And "ExpItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Base on'                 | 'Unit' | 'Q'      |
-			| 'Dress' | 'L/Green'  | 'Purchase invoice 3 900*' | 'pcs'  | '8,000'  |
-			| 'Boots' | '37/18SD'  | 'Purchase invoice 3 900*' | 'pcs'  | '15,000' |
+			| 'Dress' | 'L/Green'  | '$$PurchaseInvoice0205001$$' | 'pcs'  | '8,000'  |
+			| 'Boots' | '37/18SD'  | '$$PurchaseInvoice0205001$$' | 'pcs'  | '15,000' |
 	* Check the transfer of filled items to Goods reciept
 		And in the table "PhysItemList" I click the button named "PhysItemListSwitchItemLists"
 		And "CompareItemList" table contains lines
@@ -3711,6 +3714,6 @@ Scenario: _010020 check the operation of Quantity Compare plugin (comparison of 
 		And I click "Transfer to document" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Quantity' | 'Item key' | 'Store'    | 'Unit' | 'Receipt basis'                    |
-			| 'Boots' | '3,000'    | '37/18SD'  | 'Store 02' | 'pcs'  | 'Purchase invoice 3 900*'          |
+			| 'Boots' | '3,000'    | '37/18SD'  | 'Store 02' | 'pcs'  | '$$PurchaseInvoice0205001$$'          |
 			| 'Boots' | '1,000'    | '38/18SD'  | 'Store 02' | 'pcs'  | ''                                 |
 		And I close all client application windows

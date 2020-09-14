@@ -16,7 +16,7 @@ Scenario: _300501 check connection to Internal Supply Request report "Related do
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| 1      |
+		| $$NumberInternalSupplyRequest016501$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened
@@ -27,7 +27,7 @@ Scenario: _300502 check connection to Purchase order report "Related documents"
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| 2      |
+		| $$NumberPurchaseOrder017001$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened
@@ -38,7 +38,7 @@ Scenario: _300503 check connection to Purchase invoice report "Related documents
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| 2      |
+		| $$NumberPurchaseInvoice018006$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened
@@ -49,7 +49,7 @@ Scenario: _300504 check connection to Sales order report "Related documents"
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| 1      |
+		| $$NumberSalesOrder023001$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened
@@ -60,7 +60,7 @@ Scenario: _300505 check connection to Sales invoice report "Related documents"
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| 1      |
+		| $$NumberSalesInvoice024001$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened
@@ -71,7 +71,7 @@ Scenario: _300506 check connection to Shipment Confirmation report "Related docu
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| 181      |
+		| $$NumberShipmentConfirmation0028801$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened
@@ -83,7 +83,7 @@ Scenario: _300507 check connection to GoodsReceipt report "Related documents"
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| 1      |
+		| $$NumberGoodsReceipt028901$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened
@@ -94,7 +94,7 @@ Scenario: _300508 check connection to PurchaseReturnOrder report "Related docume
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| 1      |
+		| $$NumberPurchaseReturnOrder022001$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened
@@ -105,7 +105,7 @@ Scenario: _300509 check connection to PurchaseReturn report "Related documents"
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| 1      |
+		| $$NumberPurchaseReturn022301$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened
@@ -116,7 +116,7 @@ Scenario: _300510 check connection to SalesReturnOrder report "Related documents
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| 1      |
+		| $$NumberSalesReturnOrder028001$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened
@@ -127,7 +127,7 @@ Scenario: _300511 check connection to SalesReturn report "Related documents"
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| 2      |
+		| $$NumberSalesReturn028508$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened
@@ -138,7 +138,7 @@ Scenario: _300512 check connection to CashPayment report "Related documents"
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| 1      |
+		| $$NumberCashPayment0510011$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened
@@ -149,7 +149,7 @@ Scenario: _300513 check connection to CashReciept report "Related documents"
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| 1      |
+		| $$NumberCashReceipt0500011$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened
@@ -160,7 +160,7 @@ Scenario: _300514 check connection to BankPayment report "Related documents"
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| 1      |
+		| $$NumberBankPayment0530011$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened
@@ -171,7 +171,7 @@ Scenario: _300515 check connection to BankReciept report "Related documents"
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| 1      |
+		| $$NumberBankReceipt0520011$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened
@@ -183,7 +183,7 @@ Scenario: _300516 check connection to CashTransferOrder report "Related document
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| 1      |
+		| $$NumberCashTransferOrder054001$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened
@@ -211,7 +211,7 @@ Scenario: _300519 check connection to Bundling report "Related documents"
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| 1      |
+		| $$NumberBundling0029501$$     |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened
@@ -222,7 +222,7 @@ Scenario: _300520 check connection to Unbundling report "Related documents"
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| 1      |
+		| $$NumberUnbundling0029601$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened
@@ -263,18 +263,23 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			And I select current line in "List" table
 			And I move to "Other" tab
 			And I set checkbox "Shipment confirmations before sales invoice"
-			And I input "9 092" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 092" text in "Number" field
+			// And I input "9 092" text in "Number" field
+			// Then "1C:Enterprise" window is opened
+			// And I click "Yes" button
+			// And I input "9 092" text in "Number" field
 			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberSalesOrder300521$$"
+			And I save the window as "$$SalesOrder300521$$"
 		* Create Shipment confirmation based on SO
 			And I click "Shipment confirmation" button
-			And I move to "Other" tab
-			And I input "9 092" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 092" text in "Number" field
+			// And I move to "Other" tab
+			// And I input "9 092" text in "Number" field
+			// Then "1C:Enterprise" window is opened
+			// And I click "Yes" button
+			// And I input "9 092" text in "Number" field
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberShipmentConfirmation300521$$"
+			And I save the window as "$$ShipmentConfirmation300521$$"
 			And I click "Post and close" button
 			And Delay 5
 		* Create Sales invoice based on created SC
@@ -282,20 +287,23 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			And I click the button named "FormSelectAll"
 			And I click "Ok" button
 			And I move to "Other" tab
-			And I input "9 012" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 012" text in "Number" field
+			// And I input "9 012" text in "Number" field
+			// Then "1C:Enterprise" window is opened
+			// And I click "Yes" button
+			// And I input "9 012" text in "Number" field
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberSalesInvoice300521$$"
+			And I save the window as "$$SalesInvoice300521$$"
 			And I click "Post and close" button
 			And Delay 5
 		* Open Related documents
-			When in opened panel I select "Sales order 9 092*"
+			When in opened panel I select "$$SalesOrder300521$$"
 			And I click "Related documents" button
 			And "DocumentsTree" table contains lines
 			| 'Ref'                          |
-			| 'Sales order 9 092*'           |
-			| 'Shipment confirmation 9 092*' |
-			| 'Sales invoice 9 012*'         |
+			| '$$SalesOrder300521$$'           |
+			| '$$ShipmentConfirmation300521$$' |
+			| '$$SalesInvoice300521$$'         |
 		* Check unpost Sales invoice from report Related documents
 			And I go to the last line in "DocumentsTree" table
 			And in the table "DocumentsTree" I click the button named "DocumentsTreeUnpost"
@@ -303,7 +311,7 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			And Delay 10
 			And "List" table does not contain lines
 			| 'Recorder'             |
-			| 'Sales invoice 9 012*' |
+			| '$$SalesInvoice300521$$*' |
 		* Check post Sales invoice from report Related documents
 			When in opened panel I select "Related documents"
 			And I go to the last line in "DocumentsTree" table
@@ -313,7 +321,7 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			And Delay 10
 			And "List" table contains lines
 			| 'Recorder'             |
-			| 'Sales invoice 9 012*' |
+			| '$$SalesInvoice300521$$' |
 		* Mark for deletion Sales invoice from report Related documents
 			When in opened panel I select "Related documents"
 			And I go to the last line in "DocumentsTree" table

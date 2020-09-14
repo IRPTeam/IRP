@@ -101,15 +101,18 @@ Scenario: _2020001 test data creation
 			And I select current line in "List" table
 			And I finish line editing in "ChequeBonds" table
 		* Change the document number
-			And I move to "Other" tab
-			And I input "2" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "11" text in "Number" field
+			// And I move to "Other" tab
+			// And I input "2" text in "Number" field
+			// Then "1C:Enterprise" window is opened
+			// And I click "Yes" button
+			// And I input "11" text in "Number" field
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberChequeBondTransaction2020001$$"
+			And I save the window as "$$ChequeBondTransaction2020001$$"
 			And I click "Post and close" button
 			And "List" table contains lines
 			| 'Number' |
-			| '11'      |
+			| '$$NumberChequeBondTransaction2020001$$'      |
 	* Create an outgoing check for vendor
 		* Open catalog form
 			Given I open hyperlink "e1cib/list/Catalog.ChequeBonds"

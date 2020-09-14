@@ -47,13 +47,14 @@ Scenario: _29700101 preparation
 		And I click "Save and close" button
 	* Create SO
 		When create a test SO for VerificationPosting
-	* Change number SO to 2970
-		And I move to "Other" tab
-		And I input "2970" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "2970" text in "Number" field
-		And I click "Post" button
+	// * Change number SO to 2970
+		// And I move to "Other" tab
+		// And I input "2970" text in "Number" field
+		// Then "1C:Enterprise" window is opened
+		// And I click "Yes" button
+		// And I input "2970" text in "Number" field
+		And I save the value of "Number" field as "$$NumberSalesOrder29700101$$"
+		And I save the window as "$$SalesOrder29700101$$"
 		And I close all client application windows
 		
 
@@ -61,15 +62,15 @@ Scenario: _29700102 test filling-in SO - SI - SC by quantity
 	* Select SO 2970
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
-			| 'Number' | 'Partner' |
-			| '2 970'  | 'Foxred'  |
+			| 'Number'                       | 'Partner' |
+			| '$$NumberSalesOrder29700101$$' | 'Foxred'  |
 		And I select current line in "List" table
 	* Create SI based on SO
 		And I click "Sales invoice" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'      | 'Unit' | 'Store'    | 'Sales order'        |
-			| 'Dress' | 'L/Green'  | '20,000' | 'pcs'  | 'Store 02' | 'Sales order 2 970*' |
-			| 'Dress' | 'M/White'  | '8,000'  | 'pcs'  | 'Store 02' | 'Sales order 2 970*' |
+			| 'Item'  | 'Item key' | 'Q'      | 'Unit' | 'Store'    | 'Sales order'            |
+			| 'Dress' | 'L/Green'  | '20,000' | 'pcs'  | 'Store 02' | '$$SalesOrder29700101$$' |
+			| 'Dress' | 'M/White'  | '8,000'  | 'pcs'  | 'Store 02' | '$$SalesOrder29700101$$' |
 		* Check the prohibition of holding SI for an amount greater than specified in the order
 			* Change in the second row to 12
 				And I go to line in "ItemList" table
@@ -131,14 +132,16 @@ Scenario: _29700102 test filling-in SO - SI - SC by quantity
 				And I activate field named "ItemListItemKey" in "ItemList" table
 				And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 				And I click "Post" button
-			* Change the SO number to 2970
-				And I move to "Other" tab
-				And I input "2970" text in "Number" field
-				Then "1C:Enterprise" window is opened
-				And I click "Yes" button
-				And I input "2970" text in "Number" field
+			// * Change the SO number to 2970
+				// And I move to "Other" tab
+				// And I input "2970" text in "Number" field
+				// Then "1C:Enterprise" window is opened
+				// And I click "Yes" button
+				// And I input "2970" text in "Number" field
+				And I save the value of "Number" field as "$$NumberSalesOrder29700102$$"
+				And I save the window as "$$SalesOrder29700102$$"
 				And I click "Post and close" button
-			And I close all client application windows
+				And I close all client application windows
 	
 
 Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
@@ -146,7 +149,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
 		| 'Number' | 'Partner' |
-		| '2 970'  | 'Foxred'  |
+		| '$$NumberSalesOrder29700102$$'  | 'Foxred'  |
 		And I select current line in "List" table
 		And I click "Clear posting" button
 		Then "1C:Enterprise" window is opened
@@ -290,15 +293,17 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
 			And "ItemList" table contains lines
 			| 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Store'    | 'Shipment basis'       |
-			| 'Dress' | '8,000'    | 'M/White'  | 'pcs'  | 'Store 02' | 'Sales invoice 2 970*' |
-			| 'Dress' | '20,000'   | 'L/Green'  | 'pcs'  | 'Store 02' | 'Sales invoice 2 970*' |
-		* Change of document number
-			And I move to "Other" tab
-			And I input "0" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "2 970" text in "Number" field
+			| 'Dress' | '8,000'    | 'M/White'  | 'pcs'  | 'Store 02' | '$$SalesInvoice29700103$$' |
+			| 'Dress' | '20,000'   | 'L/Green'  | 'pcs'  | 'Store 02' | '$$SalesInvoice29700103$$' |
+		// * Change of document number
+		// 	And I move to "Other" tab
+		// 	And I input "0" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "2 970" text in "Number" field
 			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberSalesInvoice29700103$$"
+			And I save the window as "$$SalesInvoice29700103$$"
 		* Change the quantity by more than SI
 			And I move to "Items" tab
 			And I go to line in "ItemList" table
@@ -367,12 +372,12 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 			And I go to line in "List" table
 				| 'Number' | 'Partner' |
-				| '2 970'  | 'Foxred'  |
+				| '$$NumberSalesInvoice29700103$$'  | 'Foxred'  |
 			And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
 			And "ItemList" table contains lines
 				| 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Store'    | 'Shipment basis'       |
-				| 'Dress' | '8,000'    | 'M/White'  | 'pcs'  | 'Store 02' | 'Sales invoice 2 970*' |
-				| 'Dress' | '1,000'    | 'L/Green'  | 'pcs'  | 'Store 02' | 'Sales invoice 2 970*' |
+				| 'Dress' | '8,000'    | 'M/White'  | 'pcs'  | 'Store 02' | '$$SalesInvoice29700103$$' |
+				| 'Dress' | '1,000'    | 'L/Green'  | 'pcs'  | 'Store 02' | '$$SalesInvoice29700103$$' |
 			And I click "Post" button
 			Then user message window does not contain messages
 		* Change by more than the SI balance (already created by SC) and try to post
@@ -413,20 +418,22 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 Scenario: _29700104 test filling-in SO - SI - SC in different units
 	* Create SO
 		When create a test SO for VerificationPosting by package
-	* Change the document number to 2971
-		And I move to "Other" tab
-		And I input "2971" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "2971" text in "Number" field
+	// * Change the document number to 2971
+	// 	And I move to "Other" tab
+	// 	And I input "2971" text in "Number" field
+	// 	Then "1C:Enterprise" window is opened
+	// 	And I click "Yes" button
+	// 	And I input "2971" text in "Number" field
 		And I click "Post" button
+		And I save the value of "Number" field as "$$NumberSalesOrder29700104$$"
+		And I save the window as "$$SalesOrder29700104$$"
 		And I close all client application windows
 	* Create SI
 		* Select SO 2970
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
 			And I go to line in "List" table
 				| 'Number' | 'Partner' |
-				| '2 971'  | 'Foxred'  |
+				| '$$NumberSalesOrder29700104$$'  | 'Foxred'  |
 			And I select current line in "List" table
 		* Create SI based on SO
 			And I click "Sales invoice" button

@@ -15,22 +15,22 @@ Scenario: _017002 check the output of the document movement report for Purchase 
 	* Check the report output for the selected document from the list
 		And I go to line in "List" table
 		| 'Number' |
-		| '2'      |
+		| '$$NumberPurchaseOrder017001$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		Then "ResultTable" spreadsheet document is equal by template
-		| '$$PurchaseOrder017001$$'                  | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
-		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
-		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''          | ''          | ''        | 'Attributes'    |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'             | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
+		| '$$PurchaseOrder017001$$'            | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | 'Attributes'    |
+		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                   | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
 		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'M/White'   | '*'       | '*'             |
 		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'L/Green'   | '*'       | '*'             |
 		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | '36/Yellow' | '*'       | '*'             |
-		| ''                                   | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
-		| 'Register  "Order balance"'          | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''          | ''          | ''        | ''              |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Store'        | 'Order'             | 'Item key'  | 'Row key'   | ''        | ''              |
+		| ''                                   | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| 'Register  "Order balance"'          | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | ''              |
+		| ''                                   | ''            | ''       | 'Quantity'  | 'Store'        | 'Order'                   | 'Item key'  | 'Row key'   | ''        | ''              |
 		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Store 01'     | '$$PurchaseOrder017001$$' | 'M/White'   | '*'         | ''        | ''              |
 		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Store 01'     | '$$PurchaseOrder017001$$' | 'L/Green'   | '*'         | ''        | ''              |
 		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Store 01'     | '$$PurchaseOrder017001$$' | '36/Yellow' | '*'         | ''        | ''              |
@@ -39,23 +39,23 @@ Scenario: _017002 check the output of the document movement report for Purchase 
 	* Check the report output from the selected document
 		And I go to line in "List" table
 		| 'Number' |
-		| '2'      |
+		| '$$NumberPurchaseOrder017001$$'      |
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		Then "ResultTable" spreadsheet document is equal by template
-		| '$$PurchaseOrder017001$$'                  | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
-		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
-		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''          | ''          | ''        | 'Attributes'    |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'             | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
+		| '$$PurchaseOrder017001$$'            | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | 'Attributes'    |
+		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                   | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
 		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'M/White'   | '*'       | '*'             |
 		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'L/Green'   | '*'       | '*'             |
 		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | '36/Yellow' | '*'       | '*'             |
-		| ''                                   | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
-		| 'Register  "Order balance"'          | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''          | ''          | ''        | ''              |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Store'        | 'Order'             | 'Item key'  | 'Row key'   | ''        | ''              |
+		| ''                                   | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| 'Register  "Order balance"'          | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | ''              |
+		| ''                                   | ''            | ''       | 'Quantity'  | 'Store'        | 'Order'                   | 'Item key'  | 'Row key'   | ''        | ''              |
 		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Store 01'     | '$$PurchaseOrder017001$$' | 'M/White'   | '*'         | ''        | ''              |
 		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Store 01'     | '$$PurchaseOrder017001$$' | 'L/Green'   | '*'         | ''        | ''              |
 		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Store 01'     | '$$PurchaseOrder017001$$' | '36/Yellow' | '*'         | ''        | ''              |
@@ -66,7 +66,7 @@ Scenario: _0170020 clear movements Purchase Order and check that there is no mov
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| 'Number' |
-			| '2'      |
+			| '$$NumberPurchaseOrder017001$$'      |
 	* Clear movements Purchase Order and check that there is no movement on the registers
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
@@ -78,22 +78,22 @@ Scenario: _0170020 clear movements Purchase Order and check that there is no mov
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| 'Number' |
-			| '2'      |
+			| '$$NumberPurchaseOrder017001$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		Then "ResultTable" spreadsheet document is equal by template
-		| '$$PurchaseOrder017001$$'                  | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
-		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
-		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''          | ''          | ''        | 'Attributes'    |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'             | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
+		| '$$PurchaseOrder017001$$'            | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | 'Attributes'    |
+		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                   | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
 		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'M/White'   | '*'       | '*'             |
 		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'L/Green'   | '*'       | '*'             |
 		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | '36/Yellow' | '*'       | '*'             |
-		| ''                                   | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
-		| 'Register  "Order balance"'          | ''            | ''       | ''          | ''             | ''                  | ''          | ''          | ''        | ''              |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''          | ''          | ''        | ''              |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Store'        | 'Order'             | 'Item key'  | 'Row key'   | ''        | ''              |
+		| ''                                   | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| 'Register  "Order balance"'          | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | ''              |
+		| ''                                   | ''            | ''       | 'Quantity'  | 'Store'        | 'Order'                   | 'Item key'  | 'Row key'   | ''        | ''              |
 		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Store 01'     | '$$PurchaseOrder017001$$' | 'M/White'   | '*'         | ''        | ''              |
 		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Store 01'     | '$$PurchaseOrder017001$$' | 'L/Green'   | '*'         | ''        | ''              |
 		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Store 01'     | '$$PurchaseOrder017001$$' | '36/Yellow' | '*'         | ''        | ''              |
@@ -107,34 +107,34 @@ Scenario: _016502 check the output of the document movement report for Internal 
 	* Check the report generation
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'      |
+			| '$$NumberInternalSupplyRequest016501$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		Then "ResultTable" spreadsheet document is equal by template
-		| 'Internal supply request 1*'     | ''            | ''       | ''          | ''           | ''                           | ''          | ''        |
-		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''                           | ''          | ''        |
-		| 'Register  "Order balance"'      | ''            | ''       | ''          | ''           | ''                           | ''          | ''        |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                           | ''          | ''        |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                      | 'Item key'  | 'Row key' |
-		| ''                               | 'Receipt'     | '*'      | '10'        | 'Store 01'   | 'Internal supply request 1*' | '36/Yellow' | '*'       |
-		| ''                               | 'Receipt'     | '*'      | '20'        | 'Store 01'   | 'Internal supply request 1*' | '38/Black'  | '*'       |
-		| ''                               | 'Receipt'     | '*'      | '25'        | 'Store 01'   | 'Internal supply request 1*' | '36/Red'    | '*'       |
+		| '$$InternalSupplyRequest016501$$' | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
+		| 'Document registrations records'  | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
+		| 'Register  "Order balance"'       | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
+		| ''                                | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                                | ''          | ''        |
+		| ''                                | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                           | 'Item key'  | 'Row key' |
+		| ''                                | 'Receipt'     | '*'      | '10'        | 'Store 01'   | '$$InternalSupplyRequest016501$$' | '36/Yellow' | '*'       |
+		| ''                                | 'Receipt'     | '*'      | '20'        | 'Store 01'   | '$$InternalSupplyRequest016501$$' | '38/Black'  | '*'       |
+		| ''                                | 'Receipt'     | '*'      | '25'        | 'Store 01'   | '$$InternalSupplyRequest016501$$' | '36/Red'    | '*'       |
 		And I close all client application windows
 	* Check the report generation from document
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'      |
+			| '$$NumberInternalSupplyRequest016501$$'      |
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		Then "ResultTable" spreadsheet document is equal by template
-		| 'Internal supply request 1*'     | ''            | ''       | ''          | ''           | ''                           | ''          | ''        |
-		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''                           | ''          | ''        |
-		| 'Register  "Order balance"'      | ''            | ''       | ''          | ''           | ''                           | ''          | ''        |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                           | ''          | ''        |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                      | 'Item key'  | 'Row key' |
-		| ''                               | 'Receipt'     | '*'      | '10'        | 'Store 01'   | 'Internal supply request 1*' | '36/Yellow' | '*'       |
-		| ''                               | 'Receipt'     | '*'      | '20'        | 'Store 01'   | 'Internal supply request 1*' | '38/Black'  | '*'       |
-		| ''                               | 'Receipt'     | '*'      | '25'        | 'Store 01'   | 'Internal supply request 1*' | '36/Red'    | '*'       |
+		| '$$InternalSupplyRequest016501$$' | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
+		| 'Document registrations records'  | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
+		| 'Register  "Order balance"'       | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
+		| ''                                | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                                | ''          | ''        |
+		| ''                                | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                           | 'Item key'  | 'Row key' |
+		| ''                                | 'Receipt'     | '*'      | '10'        | 'Store 01'   | '$$InternalSupplyRequest016501$$' | '36/Yellow' | '*'       |
+		| ''                                | 'Receipt'     | '*'      | '20'        | 'Store 01'   | '$$InternalSupplyRequest016501$$' | '38/Black'  | '*'       |
+		| ''                                | 'Receipt'     | '*'      | '25'        | 'Store 01'   | '$$InternalSupplyRequest016501$$' | '36/Red'    | '*'       |
 		And I close all client application windows
 
 Scenario: _0170021 clear movements Internal Supply Request and check that there is no movements on the registers 
@@ -143,7 +143,7 @@ Scenario: _0170021 clear movements Internal Supply Request and check that there 
 	* Check the report generation
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'      |
+			| '$$NumberInternalSupplyRequest016501$$'      |
 	* Clear movements document and check that there is no movement on the registers
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
@@ -154,18 +154,18 @@ Scenario: _0170021 clear movements Internal Supply Request and check that there 
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'      |
+			| '$$NumberInternalSupplyRequest016501$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		Then "ResultTable" spreadsheet document is equal by template
-		| 'Internal supply request 1*'     | ''            | ''       | ''          | ''           | ''                           | ''          | ''        |
-		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''                           | ''          | ''        |
-		| 'Register  "Order balance"'      | ''            | ''       | ''          | ''           | ''                           | ''          | ''        |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                           | ''          | ''        |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                      | 'Item key'  | 'Row key' |
-		| ''                               | 'Receipt'     | '*'      | '10'        | 'Store 01'   | 'Internal supply request 1*' | '36/Yellow' | '*'       |
-		| ''                               | 'Receipt'     | '*'      | '20'        | 'Store 01'   | 'Internal supply request 1*' | '38/Black'  | '*'       |
-		| ''                               | 'Receipt'     | '*'      | '25'        | 'Store 01'   | 'Internal supply request 1*' | '36/Red'    | '*'       |
+		| '$$InternalSupplyRequest016501$$' | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
+		| 'Document registrations records'  | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
+		| 'Register  "Order balance"'       | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
+		| ''                                | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                                | ''          | ''        |
+		| ''                                | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                           | 'Item key'  | 'Row key' |
+		| ''                                | 'Receipt'     | '*'      | '10'        | 'Store 01'   | '$$InternalSupplyRequest016501$$' | '36/Yellow' | '*'       |
+		| ''                                | 'Receipt'     | '*'      | '20'        | 'Store 01'   | '$$InternalSupplyRequest016501$$' | '38/Black'  | '*'       |
+		| ''                                | 'Receipt'     | '*'      | '25'        | 'Store 01'   | '$$InternalSupplyRequest016501$$' | '36/Red'    | '*'       |
 		And I close all client application windows
 
 
@@ -177,7 +177,7 @@ Scenario: _018019 check the output of the document movement report for Purchase 
 	* Check the report output for the selected document from the list
 		And I go to line in "List" table
 		| 'Number' |
-		| '1'      |
+		| '$$NumberPurchaseInvoice018001$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		Then "ResultTable" spreadsheet document is equal by template
@@ -272,7 +272,7 @@ Scenario: _018019 check the output of the document movement report for Purchase 
 	* Check the report output from the selected document
 		And I go to line in "List" table
 		| 'Number' |
-		| '1'      |
+		| '$$NumberPurchaseInvoice018001$$'      |
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
@@ -371,7 +371,7 @@ Scenario: _01801901 clear movements Purchase invoice and check that there is no 
 	* Check the report generation
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'      |
+			| '$$NumberPurchaseInvoice018001$$'      |
 	* Clear movements document and check that there is no movement on the registers
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
@@ -386,7 +386,7 @@ Scenario: _01801901 clear movements Purchase invoice and check that there is no 
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'      |
+			| '$$NumberPurchaseInvoice018001$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		Then "ResultTable" spreadsheet document is equal by template
@@ -488,7 +488,7 @@ Scenario: _022011 check the output of the document movement report for Purchase 
 	* Check the report output for the selected document from the list
 		And I go to line in "List" table
 		| 'Number' |
-		| '1'      |
+		| '$$NumberPurchaseReturnOrder022001$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		Then "ResultTable" spreadsheet document is equal by template
@@ -521,7 +521,7 @@ Scenario: _022011 check the output of the document movement report for Purchase 
 	* Check the report output from the selected document
 		And I go to line in "List" table
 		| 'Number' |
-		| '1'      |
+		| '$$NumberPurchaseReturnOrder022001$$'      |
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
@@ -558,7 +558,7 @@ Scenario: _02201101 clear movements Purchase Return Order and check that there i
 	* Check the report generation
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'      |
+			| '$$NumberPurchaseReturnOrder022001$$'      |
 	* Clear movements document and check that there is no movement on the registers
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
@@ -572,7 +572,7 @@ Scenario: _02201101 clear movements Purchase Return Order and check that there i
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'      |
+			| '$$NumberPurchaseReturnOrder022001$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		Then "ResultTable" spreadsheet document is equal by template
@@ -612,7 +612,7 @@ Scenario: _022336 check the output of the document movement report for Purchase 
 	* Check the report output for the selected document from the list
 		And I go to line in "List" table
 		| 'Number' |
-		| '1'      |
+		| '$$NumberPurchaseReturn022301$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		Then "ResultTable" spreadsheet document is equal by template
@@ -668,7 +668,7 @@ Scenario: _022336 check the output of the document movement report for Purchase 
 	* Check the report output from the selected document
 		And I go to line in "List" table
 		| 'Number' |
-		| '1'      |
+		| '$$NumberPurchaseReturn022301$$'      |
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
@@ -729,7 +729,7 @@ Scenario: _02233601 clear movements Purchase Return and check that there is no m
 	* Check the report generation
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'      |
+			| '$$NumberPurchaseReturn022301$$'      |
 	* Clear movements document and check that there is no movement on the registers
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
@@ -745,57 +745,57 @@ Scenario: _02233601 clear movements Purchase Return and check that there is no m
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'      |
+			| '$$NumberPurchaseReturn022301$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		Then "ResultTable" spreadsheet document is equal by template
-		| '$$PurchaseReturn022301$$'                    | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| 'Document registrations records'        | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| 'Register  "Partner AR transactions"'   | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | 'Attributes'           |
-		| ''                                      | ''            | ''          | 'Amount'    | 'Company'      | 'Basis document'           | 'Partner'   | 'Legal name'        | 'Partner term'          | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
-		| ''                                      | 'Receipt'     | '*'         | '80'        | 'Main Company' | ''                         | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, USD' | 'USD'                      | 'en description is empty' | 'No'                   |
-		| ''                                      | 'Receipt'     | '*'         | '80'        | 'Main Company' | ''                         | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, USD' | 'USD'                      | 'Reporting currency'       | 'No'                   |
-		| ''                                      | 'Receipt'     | '*'         | '80'        | 'Main Company' | ''                         | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, USD' | 'USD'                      | 'USD'                      | 'No'                   |
-		| ''                                      | 'Receipt'     | '*'         | '451,98'    | 'Main Company' | ''                         | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, USD' | 'TRY'                      | 'Local currency'           | 'No'                   |
-		| ''                                      | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| 'Register  "Purchase return turnovers"' | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | 'Period'      | 'Resources' | ''          | 'Dimensions'   | ''                         | ''          | ''                  | ''                   | ''                         | 'Attributes'               | ''                     |
-		| ''                                      | ''            | 'Quantity'  | 'Amount'    | 'Company'      | 'Purchase invoice'         | 'Currency'  | 'Item key'          | 'Row key'            | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
-		| ''                                      | '*'           | '-2'        | '-451,98'   | 'Main Company' | '$$PurchaseInvoice018006$$'      | 'TRY'       | 'L/Green'           | '*'                  | 'Local currency'           | 'No'                       | ''                     |
-		| ''                                      | '*'           | '-2'        | '-80'       | 'Main Company' | '$$PurchaseInvoice018006$$'      | 'USD'       | 'L/Green'           | '*'                  | 'en description is empty' | 'No'                       | ''                     |
-		| ''                                      | '*'           | '-2'        | '-80'       | 'Main Company' | '$$PurchaseInvoice018006$$'      | 'USD'       | 'L/Green'           | '*'                  | 'Reporting currency'       | 'No'                       | ''                     |
-		| ''                                      | '*'           | '-2'        | '-80'       | 'Main Company' | '$$PurchaseInvoice018006$$'      | 'USD'       | 'L/Green'           | '*'                  | 'USD'                      | 'No'                       | ''                     |
-		| ''                                      | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| 'Register  "Inventory balance"'         | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | ''            | ''          | 'Quantity'  | 'Company'      | 'Item key'                 | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | 'Expense'     | '*'         | '2'         | 'Main Company' | 'L/Green'                  | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| 'Register  "Goods in transit outgoing"' | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | ''            | ''          | 'Quantity'  | 'Store'        | 'Shipment basis'           | 'Item key'  | 'Row key'           | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | 'Receipt'     | '*'         | '2'         | 'Store 02'     | '$$PurchaseReturn022301$$'       | 'L/Green'   | '*'                 | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| 'Register  "Order reservation"'         | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | ''            | ''          | 'Quantity'  | 'Store'        | 'Item key'                 | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | 'Expense'     | '*'         | '2'         | 'Store 02'     | 'L/Green'                  | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| 'Register  "Accounts statement"'              | ''                    | ''                    | ''                    | ''               | ''                                                  | ''               | ''                                     | ''                                     | ''                         | ''                         | ''                     |
-		| ''                                            | 'Record type'         | 'Period'              | 'Resources'           | ''               | ''                                                  | ''               | 'Dimensions'                           | ''                                     | ''                         | ''                         | ''                     |
-		| ''                                            | ''                    | ''                    | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers'                            | 'Transaction AR' | 'Company'                              | 'Partner'                              | 'Legal name'               | 'Basis document'           | 'Currency'             |
-		| ''                                            | 'Receipt'             | '*'                   | ''                    | '-80'            | ''                                                  | ''               | 'Main Company'                         | 'Ferron BP'                            | 'Company Ferron BP'        | ''                         | 'USD'                  |
-		| ''                                            | ''                    | ''                    | ''                    | ''               | ''                                                  | ''               | ''                                     | ''                                     | ''                         | ''                         | ''                     |
-		| 'Register  "Reconciliation statement"'  | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | ''            | ''          | 'Amount'    | 'Company'      | 'Legal name'               | 'Currency'  | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | 'Receipt'     | '*'         | '80'        | 'Main Company' | 'Company Ferron BP'        | 'USD'       | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| 'Register  "Order balance"'             | ''            | ''          | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                         | ''          | ''                  | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | ''            | ''          | 'Quantity'  | 'Store'        | 'Order'                    | 'Item key'  | 'Row key'           | ''                   | ''                         | ''                         | ''                     |
-		| ''                                      | 'Expense'     | '*'         | '2'         | 'Store 02'     | '$$PurchaseReturnOrder022001$$' | 'L/Green'   | '*'                 | ''                   | ''                         | ''                         | ''                     |
+		| '$$PurchaseReturn022301$$'              | ''            | ''          | ''                     | ''               | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| 'Document registrations records'        | ''            | ''          | ''                     | ''               | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| 'Register  "Partner AR transactions"'   | ''            | ''          | ''                     | ''               | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | 'Attributes'           |
+		| ''                                      | ''            | ''          | 'Amount'               | 'Company'        | 'Basis document'                | 'Partner'        | 'Legal name'        | 'Partner term'       | 'Currency'                     | 'Multi currency movement type' | 'Deferred calculation' |
+		| ''                                      | 'Receipt'     | '*'         | '80'                   | 'Main Company'   | ''                              | 'Ferron BP'      | 'Company Ferron BP' | 'Vendor Ferron, USD' | 'USD'                          | 'en description is empty'      | 'No'                   |
+		| ''                                      | 'Receipt'     | '*'         | '80'                   | 'Main Company'   | ''                              | 'Ferron BP'      | 'Company Ferron BP' | 'Vendor Ferron, USD' | 'USD'                          | 'Reporting currency'           | 'No'                   |
+		| ''                                      | 'Receipt'     | '*'         | '80'                   | 'Main Company'   | ''                              | 'Ferron BP'      | 'Company Ferron BP' | 'Vendor Ferron, USD' | 'USD'                          | 'USD'                          | 'No'                   |
+		| ''                                      | 'Receipt'     | '*'         | '451,98'               | 'Main Company'   | ''                              | 'Ferron BP'      | 'Company Ferron BP' | 'Vendor Ferron, USD' | 'TRY'                          | 'Local currency'               | 'No'                   |
+		| ''                                      | ''            | ''          | ''                     | ''               | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| 'Register  "Purchase return turnovers"' | ''            | ''          | ''                     | ''               | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | 'Period'      | 'Resources' | ''                     | 'Dimensions'     | ''                              | ''               | ''                  | ''                   | ''                             | 'Attributes'                   | ''                     |
+		| ''                                      | ''            | 'Quantity'  | 'Amount'               | 'Company'        | 'Purchase invoice'              | 'Currency'       | 'Item key'          | 'Row key'            | 'Multi currency movement type' | 'Deferred calculation'         | ''                     |
+		| ''                                      | '*'           | '-2'        | '-451,98'              | 'Main Company'   | '$$PurchaseInvoice018006$$'     | 'TRY'            | 'L/Green'           | '*'                  | 'Local currency'               | 'No'                           | ''                     |
+		| ''                                      | '*'           | '-2'        | '-80'                  | 'Main Company'   | '$$PurchaseInvoice018006$$'     | 'USD'            | 'L/Green'           | '*'                  | 'en description is empty'      | 'No'                           | ''                     |
+		| ''                                      | '*'           | '-2'        | '-80'                  | 'Main Company'   | '$$PurchaseInvoice018006$$'     | 'USD'            | 'L/Green'           | '*'                  | 'Reporting currency'           | 'No'                           | ''                     |
+		| ''                                      | '*'           | '-2'        | '-80'                  | 'Main Company'   | '$$PurchaseInvoice018006$$'     | 'USD'            | 'L/Green'           | '*'                  | 'USD'                          | 'No'                           | ''                     |
+		| ''                                      | ''            | ''          | ''                     | ''               | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| 'Register  "Inventory balance"'         | ''            | ''          | ''                     | ''               | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | ''            | ''          | 'Quantity'             | 'Company'        | 'Item key'                      | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | 'Expense'     | '*'         | '2'                    | 'Main Company'   | 'L/Green'                       | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | ''            | ''          | ''                     | ''               | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| 'Register  "Goods in transit outgoing"' | ''            | ''          | ''                     | ''               | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | ''            | ''          | 'Quantity'             | 'Store'          | 'Shipment basis'                | 'Item key'       | 'Row key'           | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | 'Receipt'     | '*'         | '2'                    | 'Store 02'       | '$$PurchaseReturn022301$$'      | 'L/Green'        | '*'                 | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | ''            | ''          | ''                     | ''               | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| 'Register  "Order reservation"'         | ''            | ''          | ''                     | ''               | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | ''            | ''          | 'Quantity'             | 'Store'          | 'Item key'                      | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | 'Expense'     | '*'         | '2'                    | 'Store 02'       | 'L/Green'                       | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | ''            | ''          | ''                     | ''               | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| 'Register  "Accounts statement"'        | ''            | ''          | ''                     | ''               | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | 'Record type' | 'Period'    | 'Resources'            | ''               | ''                              | ''               | 'Dimensions'        | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | ''            | ''          | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers'        | 'Transaction AR' | 'Company'           | 'Partner'            | 'Legal name'                   | 'Basis document'               | 'Currency'             |
+		| ''                                      | 'Receipt'     | '*'         | ''                     | '-80'            | ''                              | ''               | 'Main Company'      | 'Ferron BP'          | 'Company Ferron BP'            | ''                             | 'USD'                  |
+		| ''                                      | ''            | ''          | ''                     | ''               | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| 'Register  "Reconciliation statement"'  | ''            | ''          | ''                     | ''               | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | ''            | ''          | 'Amount'               | 'Company'        | 'Legal name'                    | 'Currency'       | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | 'Receipt'     | '*'         | '80'                   | 'Main Company'   | 'Company Ferron BP'             | 'USD'            | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | ''            | ''          | ''                     | ''               | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| 'Register  "Order balance"'             | ''            | ''          | ''                     | ''               | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                              | ''               | ''                  | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | ''            | ''          | 'Quantity'             | 'Store'          | 'Order'                         | 'Item key'       | 'Row key'           | ''                   | ''                             | ''                             | ''                     |
+		| ''                                      | 'Expense'     | '*'         | '2'                    | 'Store 02'       | '$$PurchaseReturnOrder022001$$' | 'L/Green'        | '*'                 | ''                   | ''                             | ''                             | ''                     |
 		And I close all client application windows
 
 
@@ -807,8 +807,8 @@ Scenario: _021048 check the output of the document movement report for Inventory
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	* Check the report output for the selected document from the list
 		And I go to line in "List" table
-		| 'Number' |
-		| '1'      |
+			| 'Number' |
+			| '$$NumberInventoryTransfer021001$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		Then "ResultTable" spreadsheet document is equal by template
@@ -836,7 +836,7 @@ Scenario: _021048 check the output of the document movement report for Inventory
 	* Check the report output from the selected document
 		And I go to line in "List" table
 		| 'Number' |
-		| '1'      |
+		| '$$NumberInventoryTransfer021001$$'      |
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
@@ -870,7 +870,7 @@ Scenario: _02104801 clear movements Inventory transfer and check that there is n
 	* Check the report generation
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'      |
+			| '$$NumberInventoryTransfer021001$$'      |
 	* Clear movements document and check that there is no movement on the registers
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
@@ -883,7 +883,7 @@ Scenario: _02104801 clear movements Inventory transfer and check that there is n
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'      |
+			| '$$NumberInventoryTransfer021001$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		Then "ResultTable" spreadsheet document is equal by template
@@ -915,7 +915,7 @@ Scenario: _024043 check the output of the document movement report for Sales Inv
 	* Check the report output for the selected document from the list
 		And I go to line in "List" table
 		| 'Number' |
-		| '1'      |
+		| '$$NumberSalesInvoice024001$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		Then "ResultTable" spreadsheet document is equal by template
@@ -1010,7 +1010,7 @@ Scenario: _024043 check the output of the document movement report for Sales Inv
 	* Check the report output from the selected document
 		And I go to line in "List" table
 		| 'Number' |
-		| '1'      |
+		| '$$NumberSalesInvoice024001$$'      |
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
@@ -1110,7 +1110,7 @@ Scenario: __02404301 clear movements Sales invoice and check that there is no mo
 	* Check the report generation
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'      |
+			| '$$NumberSalesInvoice024001$$'      |
 	* Clear movements document and check that there is no movement on the registers
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
@@ -1126,8 +1126,8 @@ Scenario: __02404301 clear movements Sales invoice and check that there is no mo
 	* Posting the document and check movements
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
+		| 'Number' |
+		| '$$NumberSalesInvoice024001$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		Then "ResultTable" spreadsheet document is equal by template
@@ -1228,7 +1228,7 @@ Scenario: _028013 check the output of the document movement report for Sales Ret
 	* Check the report output for the selected document from the list
 		And I go to line in "List" table
 		| 'Number' |
-		| '1'      |
+		| '$$NumberSalesReturnOrder028001$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		Then "ResultTable" spreadsheet document is equal by template
@@ -1251,7 +1251,7 @@ Scenario: _028013 check the output of the document movement report for Sales Ret
 	* Check the report output from the selected document
 		And I go to line in "List" table
 		| 'Number' |
-		| '1'      |
+		| '$$NumberSalesReturnOrder028001$$'      |
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
@@ -1278,8 +1278,8 @@ Scenario: _02801301 clear movements Sales Return Order and check that there is n
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 	* Check the report generation
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
+		| 'Number' |
+		| '$$NumberSalesReturnOrder028001$$'      |
 	* Clear movements document and check that there is no movement on the registers
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
@@ -1290,8 +1290,8 @@ Scenario: _02801301 clear movements Sales Return Order and check that there is n
 	* Posting the document and check movements
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
+		| 'Number' |
+		| '$$NumberSalesReturnOrder028001$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		Then "ResultTable" spreadsheet document is equal by template
@@ -1321,7 +1321,7 @@ Scenario: _028811 check the output of the document movement report for Shipment 
 	* Check the report output for the selected document from the list
 		And I go to line in "List" table
 		| 'Number' |
-		| '95'      |
+		| '$$NumberShipmentConfirmation0028801$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		Then "ResultTable" spreadsheet document is equal by template
@@ -1349,7 +1349,7 @@ Scenario: _028811 check the output of the document movement report for Shipment 
 	* Check the report output from the selected document
 		And I go to line in "List" table
 		| 'Number' |
-		| '95'      |
+		| '$$NumberShipmentConfirmation0028801$$'      |
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
@@ -1382,7 +1382,7 @@ Scenario: _02881101 clear movements Shipment confirmation and check that there i
 	* Check the report generation
 		And I go to line in "List" table
 			| 'Number' |
-			| '95'      |
+			| '$$NumberShipmentConfirmation0028801$$'      |
 	* Clear movements document and check that there is no movement on the registers
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
@@ -1395,7 +1395,7 @@ Scenario: _02881101 clear movements Shipment confirmation and check that there i
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
 			| 'Number' |
-			| '95'      |
+			| '$$NumberShipmentConfirmation0028801$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		Then "ResultTable" spreadsheet document is equal by template
@@ -1429,7 +1429,7 @@ Scenario: _028905 check the output of the document movement report for Goods Rec
 	* Check the report output for the selected document from the list
 		And I go to line in "List" table
 		| 'Number' |
-		| '106'      |
+		| '$$NumberGoodsReceipt028901$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		Then "ResultTable" spreadsheet document is equal by template
@@ -1461,7 +1461,7 @@ Scenario: _028905 check the output of the document movement report for Goods Rec
 	* Check the report output from the selected document
 		And I go to line in "List" table
 		| 'Number' |
-		| '106'      |
+		| '$$NumberGoodsReceipt028901$$'      |
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
@@ -1497,8 +1497,8 @@ Scenario: _02890501 clear movements Goods receipt and check that there is no mov
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 	* Check the report generation
 		And I go to line in "List" table
-			| 'Number' |
-			| '106'      |
+		| 'Number' |
+		| '$$NumberGoodsReceipt028901$$'      |
 	* Clear movements document and check that there is no movement on the registers
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
@@ -1512,7 +1512,7 @@ Scenario: _02890501 clear movements Goods receipt and check that there is no mov
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
 			| 'Number' |
-			| '106'      |
+			| '$$NumberGoodsReceipt028901$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		Then "ResultTable" spreadsheet document is equal by template
@@ -1549,7 +1549,7 @@ Scenario: _029519 check the output of the document movement report for Bundling
 	* Check the report output for the selected document from the list
 		And I go to line in "List" table
 		| 'Number' |
-		| '1'      |
+		| '$$NumberBundling0029501$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		Then "ResultTable" spreadsheet document is equal by template
@@ -1580,7 +1580,7 @@ Scenario: _029519 check the output of the document movement report for Bundling
 	* Check the report output from the selected document
 		And I go to line in "List" table
 		| 'Number' |
-		| '1'      |
+		| '$$NumberBundling0029501$$'      |
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
@@ -1616,7 +1616,7 @@ Scenario: _02951901 clear movements Bundling and check that there is no movement
 	* Check the report generation
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'      |
+			| '$$NumberBundling0029501$$'      |
 	* Clear movements document and check that there is no movement on the registers
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
@@ -1629,7 +1629,7 @@ Scenario: _02951901 clear movements Bundling and check that there is no movement
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'      |
+			| '$$NumberBundling0029501$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		Then "ResultTable" spreadsheet document is equal by template
@@ -1668,11 +1668,11 @@ Scenario: _029612 check the output of the document movement report for Unbundlin
 	* Check the report output for the selected document from the list
 		And I go to line in "List" table
 		| 'Number' |
-		| '1'      |
+		| '$$NumberUnBundling0029501$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		Then "ResultTable" spreadsheet document is equal by template
-		| 'Un$$Bundling0029501$$'                  | ''            | ''       | ''          | ''           | ''          |
+		| 'UnBundling0029501$$'                  | ''            | ''       | ''          | ''           | ''          |
 		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          |
 		| 'Register  "Stock reservation"'  | ''            | ''       | ''          | ''           | ''          |
 		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
@@ -1697,7 +1697,7 @@ Scenario: _029612 check the output of the document movement report for Unbundlin
 	* Check the report output from the selected document
 		And I go to line in "List" table
 		| 'Number' |
-		| '1'      |
+		| '$$NumberUnBundling0029501$$' |    
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
@@ -1730,7 +1730,7 @@ Scenario: _02961201 clear movements Unbundling and check that there is no moveme
 	* Check the report generation
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'      |
+			| '$$NumberUnBundling0029501$$$$'  |    
 	* Clear movements document and check that there is no movement on the registers
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
@@ -1742,7 +1742,7 @@ Scenario: _02961201 clear movements Unbundling and check that there is no moveme
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'      |
+			| '$$NumberUnBundling0029501$$' |     
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		Then "ResultTable" spreadsheet document is equal by template
@@ -1774,8 +1774,8 @@ Scenario: _023023 check the output of the document movement report for Sales Ord
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	* Check the report output for the selected document from the list
 		And I go to line in "List" table
-		| 'Number' |
-		| '1'      |
+			| 'Number' |
+			| '$$NumberSalesOrder023001$$' |   
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		Then "ResultTable" spreadsheet document is equal by template
@@ -1821,7 +1821,7 @@ Scenario: _023023 check the output of the document movement report for Sales Ord
 	* Check the report output from the selected document
 		And I go to line in "List" table
 		| 'Number' |
-		| '1'      |
+		| '$$SalesOrder023001$$' |   
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation

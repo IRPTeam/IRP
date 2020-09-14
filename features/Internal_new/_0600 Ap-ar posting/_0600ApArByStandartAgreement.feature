@@ -174,13 +174,13 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 				| 'Description' |
 				| 'Nicoletta'     |
 			And I select current line in "List" table
-		* Change the sales invoice number to 601
-			And I move to "Other" tab
-			And I expand "More" group
-			And I input "601" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "601" text in "Number" field
+		// * Change the sales invoice number to 601
+		// 	And I move to "Other" tab
+		// 	And I expand "More" group
+		// 	And I input "601" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "601" text in "Number" field
 		* Adding items to Sales Invoice
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -195,6 +195,8 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 			And I input "20,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberSalesInvoice060002$$"
+			And I save the window as "$$SalesInvoice060002$$"
 		* Check filling in sales invoice
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -203,11 +205,11 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 	* Check movements Sales Invoice by register PartnerArTransactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerArTransactions"
 		And "List" table contains lines
-		| 'Currency' | 'Recorder'           | 'Legal name'        | 'Basis document' | 'Company'      | 'Amount'    | 'Partner term' | 'Partner'   | 'Multi currency movement type'   |
-		| 'TRY'      | 'Sales invoice 601*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'TRY'                      |
-		| 'TRY'      | 'Sales invoice 601*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'Local currency'           |
-		| 'USD'      | 'Sales invoice 601*' | 'Company Nicoletta' | ''               | 'Main Company' | '1 883,56'  | 'Standard'  | 'Nicoletta' | 'Reporting currency'       |
-		| 'TRY'      | 'Sales invoice 601*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'en description is empty' |
+		| 'Currency' | 'Recorder'               | 'Legal name'        | 'Basis document' | 'Company'      | 'Amount'    | 'Partner term' | 'Partner'   | 'Multi currency movement type' |
+		| 'TRY'      | '$$SalesInvoice060002$$' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'     | 'Nicoletta' | 'TRY'                          |
+		| 'TRY'      | '$$SalesInvoice060002$$' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'     | 'Nicoletta' | 'Local currency'               |
+		| 'USD'      | '$$SalesInvoice060002$$' | 'Company Nicoletta' | ''               | 'Main Company' | '1 883,56'  | 'Standard'     | 'Nicoletta' | 'Reporting currency'           |
+		| 'TRY'      | '$$SalesInvoice060002$$' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'     | 'Nicoletta' | 'en description is empty'      |
 	And I close all client application windows
 
 Scenario: _060003 create Cash reciept with the type of settlements under standard Partner terms and check its movements
@@ -247,17 +249,20 @@ Scenario: _060003 create Cash reciept with the type of settlements under standar
 			And I activate field named "PaymentListAmount" in "PaymentList" table
 			And I input "11 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
-		* Change the document number to 601
-			And I input "0" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "601" text in "Number" field
+		// * Change the document number to 601
+		// 	And I input "0" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "601" text in "Number" field
+		And I click "Post" button
+		And I save the value of "Number" field as "$$NumberCashReceipt060003$$"
+		And I save the window as "$$CashReceipt060003$$"
 		And I click "Post and close" button
 	* Check movements by register PartnerArTransactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerArTransactions"
 		And "List" table contains lines
 		| 'Currency' | 'Recorder'          | 'Legal name'        | 'Company'      | 'Amount'    | 'Partner term' | 'Partner'   | 'Multi currency movement type'   |
-		| 'TRY'      | 'Cash receipt 601*' | 'Company Nicoletta' | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'en description is empty' |
+		| 'TRY'      | '$$CashReceipt060003$$' | 'Company Nicoletta' | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'en description is empty' |
 		And I close all client application windows
 
 Scenario: _060004 check the offset of the advance for Sales invoice with the type of settlement under standard Partner terms and check its movements
@@ -289,17 +294,20 @@ Scenario: _060004 check the offset of the advance for Sales invoice with the typ
 			And I select current line in "PaymentList" table
 			And I click Clear button of "Partner term" field
 			And I finish line editing in "PaymentList" table
-		* Change the document number to 602
-			And I input "0" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "602" text in "Number" field
+		// * Change the document number to 602
+		// 	And I input "0" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "602" text in "Number" field
+		And I click "Post" button
+		And I save the value of "Number" field as "$$NumberBankReceipt060004$$"
+		And I save the window as "$$BankReceipt060004$$"
 		And I click "Post and close" button
 	* Check movements Bank Receipt by register AdvanceFromCustomers
 		Given I open hyperlink "e1cib/list/AccumulationRegister.AdvanceFromCustomers"
 		And "List" table contains lines
-		| 'Currency' | 'Recorder'          | 'Legal name'        | 'Company'      | 'Receipt document'  | 'Partner'   | 'Multi currency movement type'   | 'Amount'    |
-		| 'TRY'      | 'Bank receipt 602*' | 'Company Nicoletta' | 'Main Company' | 'Bank receipt 602*' | 'Nicoletta' | 'en description is empty' | '12 000,00' |
+		| 'Currency' | 'Recorder'              | 'Legal name'        | 'Company'      | 'Receipt document'      | 'Partner'   | 'Multi currency movement type' | 'Amount'    |
+		| 'TRY'      | '$$BankReceipt060004$$' | 'Company Nicoletta' | 'Main Company' | '$$BankReceipt060004$$' | 'Nicoletta' | 'en description is empty'      | '12 000,00' |
 		And I close all client application windows
 	* Create Sales invoice with the type of settlements under standard Partner terms
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -310,13 +318,13 @@ Scenario: _060004 check the offset of the advance for Sales invoice with the typ
 				| 'Description' |
 				| 'Nicoletta'     |
 			And I select current line in "List" table
-		* Change the sales invoice number to 602
-			And I move to "Other" tab
-			And I expand "More" group
-			And I input "602" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "602" text in "Number" field
+		// * Change the sales invoice number to 602
+		// 	And I move to "Other" tab
+		// 	And I expand "More" group
+		// 	And I input "602" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "602" text in "Number" field
 		* Adding items to Sales Invoice
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -330,26 +338,29 @@ Scenario: _060004 check the offset of the advance for Sales invoice with the typ
 			And I activate "Q" field in "ItemList" table
 			And I input "20,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberSalesInvoice060004$$"
+			And I save the window as "$$SalesInvoice060004$$"
 			And I click "Post and close" button
 	* Check movements SalesInvoice by register PartnerArTransactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerArTransactions"
 		And "List" table contains lines
-		| 'Currency' | 'Recorder'           | 'Legal name'        | 'Basis document' | 'Company'      | 'Amount'    | 'Partner term' | 'Partner'   | 'Multi currency movement type'   |
-		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'TRY'                      |
-		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'Local currency'           |
-		| 'USD'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '1 883,56'  | 'Standard'  | 'Nicoletta' | 'Reporting currency'       |
-		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'TRY'                      |
-		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'Local currency'           |
-		| 'USD'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '1 883,56'  | 'Standard'  | 'Nicoletta' | 'Reporting currency'       |
-		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'en description is empty' |
-		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'en description is empty' |
+		| 'Currency' | 'Recorder'               | 'Legal name'        | 'Basis document' | 'Company'      | 'Amount'    | 'Partner term' | 'Partner'   | 'Multi currency movement type' |
+		| 'TRY'      | '$$SalesInvoice060004$$' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'     | 'Nicoletta' | 'TRY'                          |
+		| 'TRY'      | '$$SalesInvoice060004$$' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'     | 'Nicoletta' | 'Local currency'               |
+		| 'USD'      | '$$SalesInvoice060004$$' | 'Company Nicoletta' | ''               | 'Main Company' | '1 883,56'  | 'Standard'     | 'Nicoletta' | 'Reporting currency'           |
+		| 'TRY'      | '$$SalesInvoice060004$$' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'     | 'Nicoletta' | 'TRY'                          |
+		| 'TRY'      | '$$SalesInvoice060004$$' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'     | 'Nicoletta' | 'Local currency'               |
+		| 'USD'      | '$$SalesInvoice060004$$' | 'Company Nicoletta' | ''               | 'Main Company' | '1 883,56'  | 'Standard'     | 'Nicoletta' | 'Reporting currency'           |
+		| 'TRY'      | '$$SalesInvoice060004$$' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'     | 'Nicoletta' | 'en description is empty'      |
+		| 'TRY'      | '$$SalesInvoice060004$$' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'     | 'Nicoletta' | 'en description is empty'      |
 	* Check movements SalesInvoice by register AdvanceFromCustomers
 		Given I open hyperlink "e1cib/list/AccumulationRegister.AdvanceFromCustomers"
 		And "List" table contains lines
-		| 'Currency' | 'Recorder'           | 'Legal name'        | 'Company'      | 'Receipt document'  | 'Partner'   | 'Multi currency movement type'   | 'Amount'    | 'Deferred calculation' |
-		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | 'Main Company' | 'Bank receipt 602*' | 'Nicoletta' | 'Local currency'           | '11 000,00' | 'No'                   |
-		| 'USD'      | 'Sales invoice 602*' | 'Company Nicoletta' | 'Main Company' | 'Bank receipt 602*' | 'Nicoletta' | 'Reporting currency'       | '1 883,56'  | 'No'                   |
-		| 'TRY'      | 'Sales invoice 602*' | 'Company Nicoletta' | 'Main Company' | 'Bank receipt 602*' | 'Nicoletta' | 'en description is empty' | '11 000,00' | 'No'                   |
+		| 'Currency' | 'Recorder'               | 'Legal name'        | 'Company'      | 'Receipt document'      | 'Partner'   | 'Multi currency movement type' | 'Amount'    | 'Deferred calculation' |
+		| 'TRY'      | '$$SalesInvoice060004$$' | 'Company Nicoletta' | 'Main Company' | '$$BankReceipt060004$$' | 'Nicoletta' | 'Local currency'               | '11 000,00' | 'No'                   |
+		| 'USD'      | '$$SalesInvoice060004$$' | 'Company Nicoletta' | 'Main Company' | '$$BankReceipt060004$$' | 'Nicoletta' | 'Reporting currency'           | '1 883,56'  | 'No'                   |
+		| 'TRY'      | '$$SalesInvoice060004$$' | 'Company Nicoletta' | 'Main Company' | '$$BankReceipt060004$$' | 'Nicoletta' | 'en description is empty'      | '11 000,00' | 'No'                   |
 
 Scenario: _060005 create Purchase invoice with the type of settlements under standard contracts and check its movements
 	* Create Purchase invoice №601
@@ -361,12 +372,12 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 				| 'Description' |
 				| 'Veritas'     |
 			And I select current line in "List" table
-		* Change the document number to 601
-			And I move to "Other" tab
-			And I input "601" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "601" text in "Number" field
+		// * Change the document number to 601
+		// 	And I move to "Other" tab
+		// 	And I input "601" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "601" text in "Number" field
 		* Adding items to Purchase Invoice
 			And I move to "Item list" tab
 			And I click the button named "Add"
@@ -387,18 +398,20 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Price type'               | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '20,000' | 'en description is empty' | 'pcs'  | '1 677,97'   | '9 322,03'   | '11 000,00'    | 'Store 01' |
 			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberPurchaseInvoice060005$$"
+			And I save the window as "$$PurchaseInvoice060005$$"
 	* Check movements Purchase Invoice by register PartnerApTransactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerApTransactions"
 		And "List" table contains lines
-		| 'Currency' | 'Recorder'              | 'Legal name'       | 'Basis document' | 'Company'      | 'Amount'    | 'Partner term' | 'Partner' | 'Multi currency movement type'   |
-		| 'TRY'      | 'Purchase invoice 601*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'TRY'                      |
-		| 'TRY'      | 'Purchase invoice 601*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'Local currency'           |
-		| 'USD'      | 'Purchase invoice 601*' | 'Company Veritas ' | ''               | 'Main Company' | '1 883,56'  | 'Standard'  | 'Veritas' | 'Reporting currency'       |
-		| 'TRY'      | 'Purchase invoice 601*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'en description is empty' |
+		| 'Currency' | 'Recorder'                  | 'Legal name'       | 'Basis document' | 'Company'      | 'Amount'    | 'Partner term' | 'Partner' | 'Multi currency movement type' |
+		| 'TRY'      | '$$PurchaseInvoice060005$$' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'     | 'Veritas' | 'TRY'                          |
+		| 'TRY'      | '$$PurchaseInvoice060005$$' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'     | 'Veritas' | 'Local currency'               |
+		| 'USD'      | '$$PurchaseInvoice060005$$' | 'Company Veritas ' | ''               | 'Main Company' | '1 883,56'  | 'Standard'     | 'Veritas' | 'Reporting currency'           |
+		| 'TRY'      | '$$PurchaseInvoice060005$$' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'     | 'Veritas' | 'en description is empty'      |
 		And I close all client application windows
 	
 Scenario: _060006 create Cash payment with the type of settlements under standard contracts and check its movements
-	* Create Cash payment №601
+	* Create Cash payment
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And I click the button named "FormCreate"
 		* Select company
@@ -434,17 +447,20 @@ Scenario: _060006 create Cash payment with the type of settlements under standar
 			And I activate field named "PaymentListAmount" in "PaymentList" table
 			And I input "11 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
-		* Change the document number to 601
-			And I input "0" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "601" text in "Number" field
+		// * Change the document number to 601
+			// And I input "0" text in "Number" field
+			// Then "1C:Enterprise" window is opened
+			// And I click "Yes" button
+			// And I input "601" text in "Number" field
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberCashPayment060006$$"
+			And I save the window as "$$CashPayment060006$$"
 		And I click "Post and close" button
 	* Check movements by register PartnerArTransactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerApTransactions"
 		And "List" table contains lines
-		| 'Currency' | 'Recorder'          | 'Legal name'        | 'Company'      | 'Amount'    | 'Partner term' | 'Partner'   | 'Multi currency movement type'   |
-		| 'TRY'      | 'Cash payment 601*' | 'Company Veritas'   | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas'   | 'en description is empty' |
+		| 'Currency' | 'Recorder'              | 'Legal name'      | 'Company'      | 'Amount'    | 'Partner term' | 'Partner' | 'Multi currency movement type' |
+		| 'TRY'      | '$$CashPayment060006$$' | 'Company Veritas' | 'Main Company' | '11 000,00' | 'Standard'     | 'Veritas' | 'en description is empty'      |
 		And I close all client application windows
 
 Scenario: _060007 check the offset of Purchase invoice advance with the type of settlement under standard contracts and check its movements
@@ -474,19 +490,22 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 			And I activate field named "PaymentListAmount" in "PaymentList" table
 			And I input "12 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
-		* Change the document number to 602
-			And I input "0" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "602" text in "Number" field
+		// * Change the document number to 602
+		// 	And I input "0" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "602" text in "Number" field
+		And I click "Post" button
+		And I save the value of "Number" field as "$$NumberBankPayment060007$$"
+		And I save the window as "$$BankPayment060007$$"
 		And I click "Post and close" button
 	* Check movements Bank Payment by register AdvanceToSuppliers
 		Given I open hyperlink "e1cib/list/AccumulationRegister.AdvanceToSuppliers"
 		And "List" table contains lines
-			| 'Currency' | 'Recorder'          | 'Legal name'       | 'Company'      | 'Partner' | 'Payment document'  | 'Multi currency movement type'   | 'Amount'    | 'Deferred calculation' |
-			| 'TRY'      | 'Bank payment 602*' | 'Company Veritas ' | 'Main Company' | 'Veritas' | 'Bank payment 602*' | 'Local currency'           | '12 000,00' | 'No'                   |
-			| 'USD'      | 'Bank payment 602*' | 'Company Veritas ' | 'Main Company' | 'Veritas' | 'Bank payment 602*' | 'Reporting currency'       | '2 054,79'  | 'No'                   |
-			| 'TRY'      | 'Bank payment 602*' | 'Company Veritas ' | 'Main Company' | 'Veritas' | 'Bank payment 602*' | 'en description is empty' | '12 000,00' | 'No'                   |
+			| 'Currency' | 'Recorder'              | 'Legal name'       | 'Company'      | 'Partner' | 'Payment document'      | 'Multi currency movement type' | 'Amount'    | 'Deferred calculation' |
+			| 'TRY'      | '$$BankPayment060007$$' | 'Company Veritas ' | 'Main Company' | 'Veritas' | '$$BankPayment060007$$' | 'Local currency'               | '12 000,00' | 'No'                   |
+			| 'USD'      | '$$BankPayment060007$$' | 'Company Veritas ' | 'Main Company' | 'Veritas' | '$$BankPayment060007$$' | 'Reporting currency'           | '2 054,79'  | 'No'                   |
+			| 'TRY'      | '$$BankPayment060007$$' | 'Company Veritas ' | 'Main Company' | 'Veritas' | '$$BankPayment060007$$' | 'en description is empty'      | '12 000,00' | 'No'                   |
 		And I close all client application windows
 	* Create Purchase Invoice №602
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -497,12 +516,12 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 				| 'Description' |
 				| 'Veritas'     |
 			And I select current line in "List" table
-		* Change the document number to 602
-			And I move to "Other" tab
-			And I input "602" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "602" text in "Number" field
+		// * Change the document number to 602
+		// 	And I move to "Other" tab
+		// 	And I input "602" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "602" text in "Number" field
 		* Adding items to Purchase Invoice
 			And I move to "Item list" tab
 			And I click the button named "Add"
@@ -519,21 +538,23 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 			And I finish line editing in "ItemList" table
 			And I input "550,00" text in "Price" field of "ItemList" table
 			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberPurchaseInvoice060007$$"
+			And I save the window as "$$PurchaseInvoice060007$$"
 	* Check movements PurchaseInvoice by register PartnerApTransactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerApTransactions"
 		And "List" table contains lines
-		| 'Currency' | 'Recorder'              | 'Legal name'       | 'Basis document' | 'Company'      | 'Amount'    | 'Partner term' | 'Partner' | 'Multi currency movement type'   |
-		| 'TRY'      | 'Purchase invoice 602*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'TRY'                      |
-		| 'TRY'      | 'Purchase invoice 602*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'Local currency'           |
-		| 'USD'      | 'Purchase invoice 602*' | 'Company Veritas ' | ''               | 'Main Company' | '1 883,56'  | 'Standard'  | 'Veritas' | 'Reporting currency'       |
-		| 'TRY'      | 'Purchase invoice 602*' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Veritas' | 'en description is empty' |
+		| 'Currency' | 'Recorder'                  | 'Legal name'       | 'Basis document' | 'Company'      | 'Amount'    | 'Partner term' | 'Partner' | 'Multi currency movement type' |
+		| 'TRY'      | '$$PurchaseInvoice060007$$' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'     | 'Veritas' | 'TRY'                          |
+		| 'TRY'      | '$$PurchaseInvoice060007$$' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'     | 'Veritas' | 'Local currency'               |
+		| 'USD'      | '$$PurchaseInvoice060007$$' | 'Company Veritas ' | ''               | 'Main Company' | '1 883,56'  | 'Standard'     | 'Veritas' | 'Reporting currency'           |
+		| 'TRY'      | '$$PurchaseInvoice060007$$' | 'Company Veritas ' | ''               | 'Main Company' | '11 000,00' | 'Standard'     | 'Veritas' | 'en description is empty'      |
 		And I close all client application windows
 	* Check movements Purchase Invoice by register AdvanceFromCustomers
 		Given I open hyperlink "e1cib/list/AccumulationRegister.AdvanceToSuppliers"
 		And "List" table contains lines
-		| 'Currency' | 'Recorder'              | 'Legal name'       | 'Company'      | 'Partner' | 'Payment document'  | 'Multi currency movement type'   | 'Amount'    | 'Deferred calculation' |
-		| 'TRY'      | 'Purchase invoice 602*' | 'Company Veritas ' | 'Main Company' | 'Veritas' | 'Bank payment 602*' | 'Local currency'           | '11 000,00' | 'No'                   |
-		| 'USD'      | 'Purchase invoice 602*' | 'Company Veritas ' | 'Main Company' | 'Veritas' | 'Bank payment 602*' | 'Reporting currency'       | '1 883,56'  | 'No'                   |
-		| 'TRY'      | 'Purchase invoice 602*' | 'Company Veritas ' | 'Main Company' | 'Veritas' | 'Bank payment 602*' | 'en description is empty' | '11 000,00' | 'No'                   |
+		| 'Currency' | 'Recorder'                  | 'Legal name'       | 'Company'      | 'Partner' | 'Payment document'      | 'Multi currency movement type' | 'Amount'    | 'Deferred calculation' |
+		| 'TRY'      | '$$PurchaseInvoice060007$$' | 'Company Veritas ' | 'Main Company' | 'Veritas' | '$$BankPayment060007$$' | 'Local currency'               | '11 000,00' | 'No'                   |
+		| 'USD'      | '$$PurchaseInvoice060007$$' | 'Company Veritas ' | 'Main Company' | 'Veritas' | '$$BankPayment060007$$' | 'Reporting currency'           | '1 883,56'  | 'No'                   |
+		| 'TRY'      | '$$PurchaseInvoice060007$$' | 'Company Veritas ' | 'Main Company' | 'Veritas' | '$$BankPayment060007$$' | 'en description is empty'      | '11 000,00' | 'No'                   |
 
 

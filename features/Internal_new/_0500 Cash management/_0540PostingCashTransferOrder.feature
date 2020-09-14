@@ -699,30 +699,33 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 	* Filling Send date and Receive date
 		And I input "04.07.2019  0:00:00" text in "Send date" field
 		And I input "05.07.2019  0:00:00" text in "Receive date" field
-	* Change the document number to 6
-		And I input "6" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "6" text in "Number" field
+	// * Change the document number to 6
+	// 	And I input "6" text in "Number" field
+	// 	Then "1C:Enterprise" window is opened
+	// 	And I click "Yes" button
+	// 	And I input "6" text in "Number" field
+	And I click "Post" button
+	And I save the value of "Number" field as "$$NumberCashTransferOrder054009$$"
+	And I save the window as "$$CashTransferOrder054009$$"
 	And I click "Post and close" button
 	And Delay 5
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And "List" table contains lines
 		| Number | Sender       | Receiver     | Company      |
-		| 6      | Cash desk №2 | Cash desk №2 | Main Company |
+		| $$NumberCashTransferOrder054009$$      | Cash desk №2 | Cash desk №2 | Main Company |
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
 	And "List" table contains lines
-		| 'Currency'   | 'Recorder'         |  'Basis document'  | 'Company'      | 'Account'           | 'Cash flow direction' | 'Amount'    |
-		| 'TRY'        | 'Cash transfer order 6*' | 'Cash transfer order 6*' | 'Main Company' | 'Cash desk №2'      | 'Outgoing'            | '1 315,00'  |
-		| 'EUR'        | 'Cash transfer order 6*' | 'Cash transfer order 6*' | 'Main Company' | 'Cash desk №2'      | 'Incoming'            | '200,00'    |
+		| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Amount'   |
+		| 'TRY'      | '$$CashTransferOrder054009$$' | '$$CashTransferOrder054009$$' | 'Main Company' | 'Cash desk №2' | 'Outgoing'            | '1 315,00' |
+		| 'EUR'      | '$$CashTransferOrder054009$$' | '$$CashTransferOrder054009$$' | 'Main Company' | 'Cash desk №2' | 'Incoming'            | '200,00'   |
 	And I close all client application windows
 	* Create Cash payment based on Cash transfer order for the full amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
 			| 'Number' | 'Receive amount' |
-			| '6'      | '200,00'         |
+			| '$$NumberCashTransferOrder054009$$'      | '200,00'         |
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -731,19 +734,22 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 		And I select current line in "List" table
 		And I input "1315,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		* Change the document number to 11
-			And I move to "Other" tab
-			And I input "11" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "11" text in "Number" field
+		// * Change the document number to 11
+		// 	And I move to "Other" tab
+		// 	And I input "11" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "11" text in "Number" field
+		And I click "Post" button
+		And I save the value of "Number" field as "$$CashPayment054009$$"
+		And I save the window as "$$CashPayment054009$$"
 		And I click "Post and close" button
 		And I close all client application windows
 	* Create Cash reciept based on Cash transfer order in partial amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
 			| 'Number' | 'Receive amount' |
-			| '6'      | '200,00'         |
+			| '$$NumberCashTransferOrder054009$$'      | '200,00'         |
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -753,12 +759,15 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 		And I activate "Amount exchange" field in "PaymentList" table
 		And I input "1300,00" text in "Amount exchange" field of "PaymentList" table
 		And I input "200,00" text in "Amount" field of "PaymentList" table
-		* Change the document number to 11
-			And I move to "Other" tab
-			And I input "11" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "11" text in "Number" field
+		// * Change the document number to 11
+		// 	And I move to "Other" tab
+		// 	And I input "11" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "11" text in "Number" field
+		And I click "Post" button
+		And I save the value of "Number" field as "$$CashReceipt054009$$"
+		And I save the window as "$$CashReceipt054009$$"
 		And I click "Post and close" button
 		And I close all client application windows
 		# issued 1315, spent 1300 #
@@ -804,56 +813,65 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 	* Filling Send date and Receive date
 		And I input "04.07.2019  0:00:00" text in "Send date" field
 		And I input "05.07.2019  0:00:00" text in "Receive date" field
-	* Change the document number to 7
-		And I input "7" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "7" text in "Number" field
+	// * Change the document number to 7
+	// 	And I input "7" text in "Number" field
+	// 	Then "1C:Enterprise" window is opened
+	// 	And I click "Yes" button
+	// 	And I input "7" text in "Number" field
+	And I click "Post" button
+	And I save the value of "Number" field as "$$NumberCashTransferOrder054012$$"
+	And I save the window as "$$CashTransferOrder054012$$"
 	And I click "Post and close" button
 	And Delay 5
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And "List" table contains lines
 		| Number | Sender            | Receiver          | Company      |
-		| 7      | Bank account, TRY | Bank account, EUR | Main Company |
+		| $$NumberCashTransferOrder054012$$      | Bank account, TRY | Bank account, EUR | Main Company |
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
 	And "List" table contains lines
-		| 'Currency'   | 'Recorder'         |  'Basis document'  | 'Company'      | 'Account'                | 'Cash flow direction' | 'Amount'    |
-		| 'TRY'        | 'Cash transfer order 7*' | 'Cash transfer order 7*' | 'Main Company' | 'Bank account, TRY'      | 'Outgoing'            | '1 150,00'  |
-		| 'EUR'        | 'Cash transfer order 7*' | 'Cash transfer order 7*' | 'Main Company' | 'Bank account, EUR'      | 'Incoming'            | '175,00'    |
+		| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'           | 'Cash flow direction' | 'Amount'   |
+		| 'TRY'      | '$$CashTransferOrder054012$$' | '$$CashTransferOrder054012$$' | 'Main Company' | 'Bank account, TRY' | 'Outgoing'            | '1 150,00' |
+		| 'EUR'      | '$$CashTransferOrder054012$$' | '$$CashTransferOrder054012$$' | 'Main Company' | 'Bank account, EUR' | 'Incoming'            | '175,00'   |
 	And I close all client application windows
 	* Create Bank payment based on Cash transfer order for the full amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number' | 'Receive amount' |
-			| '7'      | '175,00'         |
+			| 'Number'                            | 'Receive amount' |
+			| '$$NumberCashTransferOrder054012$$' | '175,00'         |
 		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
 		And I input "1150,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		* Change the document number to 7
-			And I move to "Other" tab
-			And I input "5" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "5" text in "Number" field
+		// * Change the document number to 7
+		// 	And I move to "Other" tab
+		// 	And I input "5" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "5" text in "Number" field
+		And I click "Post" button
+		And I save the value of "Number" field as "$$NumberBankPayment054012$$"
+		And I save the window as "$$BankPayment054012"
 		And I click "Post and close" button
 		And I close all client application windows
 	* Create Bank reciept based on Cash transfer order for the full amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number' | 'Receive amount' |
-			| '7'      | '175,00'         |
+			| 'Number'                            | 'Receive amount' |
+			| '$$NumberCashTransferOrder054012$$' | '175,00'         |
 		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
 		And I activate "Amount exchange" field in "PaymentList" table
 		And I input "1150,00" text in "Amount exchange" field of "PaymentList" table
 		And I input "175,00" text in "Amount" field of "PaymentList" table
-		* Change the document number to 9
-			And I move to "Other" tab
-			And I input "5" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "5" text in "Number" field
+		// * Change the document number to 9
+		// 	And I move to "Other" tab
+		// 	And I input "5" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "5" text in "Number" field
+		And I click "Post" button
+		And I save the value of "Number" field as "$$NumberBankReceipt054012$$"
+		And I save the window as "$$BankReceipt054012"
 		And I click "Post and close" button
 		And I close all client application windows
 		
@@ -861,8 +879,8 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 Scenario: _054013 check Cash transfer order movements by register Cash in transit
 # in the register Cash in transit enters cash that are transferred in the same currency
 # if currency exchange takes place, then the money is credited to the person responsible for the conversion
-	Given I open hyper$$CashTransferOrder054001$$ulationRegister.CashInTransit"
-	And "List" table c$$CashTransferOrder054001$$
+	Given I open hyperlink "e1cib/list/AccumulationRegister.CashInTransit"
+	And "List" table contains lines
 		| 'Currency' |  '$$CashTransferOrder054001$$  | 'Company'      | 'From account'      | 'To account'        | 'Amount' |
 		| 'USD'      |  '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1'      | 'Cash desk №2'      | '500,00' |
 		| 'USD'      |  '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1'      | 'Cash desk №2'      | '400,00' |
@@ -873,8 +891,8 @@ Scenario: _054013 check Cash transfer order movements by register Cash in transi
 		|  'Basis document'   |
 		|  '$$CashTransferOrder054004$$' |
 		|  '$$CashTransferOrder054008$$' |
-		|  'Cash transfer order 6*' |
-		|  'Cash transfer order 7*' |
+		|  '$$CashTransferOrder054009$$' |
+		|  '$$CashTransferOrder054012$$' |
 	And I close all client application windows
 
 Scenario: _054014 check message output in case money is transferred from Cash/Bank accounts to bank account and vice versa in different currencies
@@ -969,8 +987,8 @@ Scenario: _054015 check message output in case the user tries to create a Bank p
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	* Select Cash transfer order
 		And I go to line in "List" table
-		| 'Company'      | 'Number' | 'Receiver'          | 'Sender'       |
-		| 'Main Company' | '3'      | 'Bank account, USD' | 'Cash desk №1' |
+		| 'Company'      | 'Number'                            | 'Receiver'          | 'Sender'       |
+		| 'Main Company' | '$$NumberCashTransferOrder054006$$' | 'Bank account, USD' | 'Cash desk №1' |
 	* Trying to create Bank payment and check message output
 		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
 		Then I wait that in user messages the 'You do not need to create a "Bank payment" document for the selected "Cash transfer order" document(s).' substring will appear in 30 seconds
@@ -981,8 +999,8 @@ Scenario: _054016 check message output in case the user tries to create a Cash r
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	* Select Cash transfer order
 		And I go to line in "List" table
-		| 'Company'      | 'Number' | 'Receiver'          | 'Sender'       |
-		| 'Main Company' | '3'      | 'Bank account, USD' | 'Cash desk №1' |
+		| 'Company'      | 'Number'                            | 'Receiver'          | 'Sender'       |
+		| 'Main Company' | '$$NumberCashTransferOrder054006$$' | 'Bank account, USD' | 'Cash desk №1' |
 	* Trying to create Cash receipt and check message output
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 		Then I wait that in user messages the 'You do not need to create a "Cash receipt" document for the selected "Cash transfer order" document(s).' substring will appear in 30 seconds
@@ -993,8 +1011,8 @@ Scenario: _054017 check message output in case the user tries to create Bank rec
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	* Select Cash transfer order
 		And I go to line in "List" table
-		| 'Company'      | 'Number' | 'Receiver'          | 'Sender'       |
-		| 'Main Company' | '3'      | 'Bank account, USD' | 'Cash desk №1' |
+		| 'Company'      | 'Number'                            | 'Receiver'          | 'Sender'       |
+		| 'Main Company' | '$$NumberCashTransferOrder054006$$' | 'Bank account, USD' | 'Cash desk №1' |
 	* Trying to create Bank receipt and check message output
 		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
 		Then I wait that in user messages the 'The total amount of the "Cash transfer order" document(s) is already received on the basis of the "Bank receipt" document(s).' substring will appear in 30 seconds
@@ -1005,8 +1023,8 @@ Scenario: _054018 check message output in case the user tries to create Cash pay
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	* Select Cash transfer order
 		And I go to line in "List" table
-		| 'Company'      | 'Number' | 'Receiver'          | 'Sender'       |
-		| 'Main Company' | '3'      | 'Bank account, USD' | 'Cash desk №1' |
+		| 'Company'      | 'Number'                            | 'Receiver'          | 'Sender'       |
+		| 'Main Company' | '$$NumberCashTransferOrder054006$$' | 'Bank account, USD' | 'Cash desk №1' |
 	* Trying to create Cash payment and check message output
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 		Then I wait that in user messages the 'The total amount of the "Cash transfer order" document(s) is already paid on the basis of the "Cash payment" document(s).' substring will appear in 30 seconds
@@ -1017,8 +1035,8 @@ Scenario: _054019 check message output in case the user tries to create a Bank r
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	* Select Cash transfer order
 		And I go to line in "List" table
-		| 'Company'      | 'Number' | 'Sender'            | 'Receiver'       |
-		| 'Main Company' | '4'      | 'Bank account, USD' | 'Cash desk №1' |
+		| 'Company'      | 'Number'                            | 'Sender'            | 'Receiver'     |
+		| 'Main Company' | '$$NumberCashTransferOrder054007$$' | 'Bank account, USD' | 'Cash desk №1' |
 	* Trying to create Bank receipt and check message output
 		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
 		Then I wait that in user messages the 'You do not need to create a "Bank receipt" document for the selected "Cash transfer order" document(s).' substring will appear in 30 seconds
@@ -1029,8 +1047,8 @@ Scenario: _054020 check message output in case the user tries to create a Cash p
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	* Select Cash transfer order
 		And I go to line in "List" table
-		| 'Company'      | 'Number' | 'Sender'            | 'Receiver'       |
-		| 'Main Company' | '4'      | 'Bank account, USD' | 'Cash desk №1' |
+		| 'Company'      | 'Number'                            | 'Sender'            | 'Receiver'     |
+		| 'Main Company' | '$$NumberCashTransferOrder054007$$' | 'Bank account, USD' | 'Cash desk №1' |
 	* Trying to create Cash payment and check message output
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 		Then I wait that in user messages the 'You do not need to create a "Cash payment" document for the selected "Cash transfer order" document(s).' substring will appear in 30 seconds
@@ -1041,8 +1059,8 @@ Scenario: _054021 check message output in case the user tries to create Bank pay
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	* Select Cash transfer order
 		And I go to line in "List" table
-		| 'Company'      | 'Number' | 'Sender'            | 'Receiver'       |
-		| 'Main Company' | '4'      | 'Bank account, USD' | 'Cash desk №1' |
+		| 'Company'      | 'Number'                            | 'Sender'            | 'Receiver'     |
+		| 'Main Company' | '$$NumberCashTransferOrder054007$$' | 'Bank account, USD' | 'Cash desk №1' |
 	* Trying to create Bank payment and check message output
 		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
 		Then I wait that in user messages the 'The total amount of the "Cash transfer order" document(s) is already paid on the basis of the "Bank payment" document(s).' substring will appear in 30 seconds
@@ -1053,8 +1071,8 @@ Scenario: _054022 check message output in case the user tries to create Cash rec
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	* Select Cash transfer order
 		And I go to line in "List" table
-		| 'Company'      | 'Number' | 'Sender'            | 'Receiver'       |
-		| 'Main Company' | '4'      | 'Bank account, USD' | 'Cash desk №1' |
+		| 'Company'      | 'Number'                            | 'Sender'            | 'Receiver'     |
+		| 'Main Company' | '$$NumberCashTransferOrder054007$$' | 'Bank account, USD' | 'Cash desk №1' |
 	* Trying to create Cash receipt and check message output
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 		Then I wait that in user messages the 'The total amount of the "Cash transfer order" document(s) is already received on the basis of the "Cash receipt" document(s).' substring will appear in 30 seconds

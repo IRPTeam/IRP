@@ -61,12 +61,6 @@ Scenario: _150001 basic price entry by properties (including VAT)
 				| 'Description' |
 				| 'Basic Price Types'  |
 		And I select current line in "List" table
-		And I input "0" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		Then "Price list (create) *" window is opened
-		And I input "107" text in "Number" field
-		And I input begin of the current month date in "Date" field
 	* Filling in tabular part
 		And I change "Set price" radio button value to "By Properties"
 		And I click Select button of "Item type" field
@@ -134,12 +128,15 @@ Scenario: _150001 basic price entry by properties (including VAT)
 		And I select current line in "List" table
 		And I input "415,00" text in "Price" field of "PriceKeyList" table
 		And I finish line editing in "PriceKeyList" table
-		And I input "0" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		Then "Price list (create) *" window is opened
-		And I input "107" text in "Number" field
+		// And I input "0" text in "Number" field
+		// Then "1C:Enterprise" window is opened
+		// And I click "Yes" button
+		// Then "Price list (create) *" window is opened
+		// And I input "107" text in "Number" field
 		And I input begin of the current month date in "Date" field
+		And I click "Post" button
+		And I save the value of "Number" field as "$$NumberPriceList150001$$"
+		And I save the window as "$$PriceList150001$$"
 		And I click "Post and close" button
 		And Delay 10
 	* Create Price key for Dress
@@ -170,11 +167,14 @@ Scenario: _150002 basic price entry by items (including VAT)
 			| 'Description' |
 			| 'Basic Price Types'  |
 		And I select current line in "List" table
-		And I input "0" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		Then "Price list (create) *" window is opened
-		And I input "110" text in "Number" field
+		// And I input "0" text in "Number" field
+		// Then "1C:Enterprise" window is opened
+		// And I click "Yes" button
+		// Then "Price list (create) *" window is opened
+		// And I input "110" text in "Number" field
+		And I click "Post" button
+		And I save the value of "Number" field as "$$NumberPriceList150002$$"
+		And I save the window as "$$PriceList150002$$"
 		And I input begin of the current month date in "Date" field
 	And I move to "Item keys" tab
 	And I click the button named "ItemListAdd"

@@ -548,12 +548,15 @@ Scenario: _090204 check tax transfer in Sales invoice when it is created based o
 		And I select current line in "TaxTree" table
 		And I input "62,00" text in "Manual amount" field of "TaxTree" table
 		And I finish line editing in "TaxTree" table
-		And I move to "Other" tab
-		And I expand "More" group
-		And I input "0" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "3 000" text in "Number" field
+		// And I move to "Other" tab
+		// And I expand "More" group
+		// And I input "0" text in "Number" field
+		// Then "1C:Enterprise" window is opened
+		// And I click "Yes" button
+		// And I input "3 000" text in "Number" field
+		And I click "Post" button
+		And I save the value of "Number" field as "$$NumberSalesInvoice090204$$"
+		And I save the window as "$$SalesInvoice090204$$"
 		And I click "Post" button
 	* Create Sales invoice based on Sales order and check filling Tax types
 		And I click "Sales invoice" button

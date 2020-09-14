@@ -142,13 +142,16 @@ Scenario: _095001 preparation
 		And I expand "Currency" group
 		And I move to the tab named "GroupCurrency"
 		And I expand "More" group
-		And I input "2 900" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "2 900" text in "Number" field
+		// And I input "2 900" text in "Number" field
+		// Then "1C:Enterprise" window is opened
+		// And I click "Yes" button
+		// And I input "2 900" text in "Number" field
 		And I input "01.01.2020  10:00:00" text in "Date" field
 		And Delay 1
 		And I move to "Item list" tab
+		And I click "Post" button
+		And I save the value of "Number" field as "$$NumberSalesInvoice095001$$"
+		And I save the window as "$$SalesInvoice095001$$"
 		And I click "Post and close" button
 	* Create Purchase invoice for creating vendor
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -164,12 +167,12 @@ Scenario: _095001 preparation
 				| 'Description'   |
 				| 'Company Maxim' |
 			And I select current line in "List" table
-		* Change the document number to 601
-			And I move to "Other" tab
-			And I input "2 900" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "2 900" text in "Number" field
+		// * Change the document number to 601
+		// 	And I move to "Other" tab
+		// 	And I input "2 900" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "2 900" text in "Number" field
 		* Adding items to Purchase Invoice
 			And I move to "Item list" tab
 			And I click the button named "Add"
@@ -195,6 +198,9 @@ Scenario: _095001 preparation
 			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberPurchaseInvoice095001$$"
+			And I save the window as "$$PurchaseInvoice095001$$"
 			And I click "Post and close" button
 	* Create one more Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -210,12 +216,12 @@ Scenario: _095001 preparation
 				| 'Description'   |
 				| 'Company Maxim' |
 			And I select current line in "List" table
-		* Change the document number to 2901
-			And I move to "Other" tab
-			And I input "2 901" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "2 901" text in "Number" field
+		// * Change the document number to 2901
+		// 	And I move to "Other" tab
+		// 	And I input "2 901" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "2 901" text in "Number" field
 		* Adding items to Purchase Invoice
 			And I move to "Item list" tab
 			And I click the button named "Add"
@@ -241,6 +247,9 @@ Scenario: _095001 preparation
 			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberPurchaseInvoice0950011$$"
+			And I save the window as "$$PurchaseInvoice0950011$$"
 			And I click "Post and close" button
 	
 
@@ -275,12 +284,12 @@ Scenario: _095002 check movements of the document Dedit Note (write off debts to
 		And I select current line in "" table
 		* Check the selection of basis documents for the specified partner
 		And "List" table contains lines
-			| 'Number' | 'Legal name'    | 'Partner' | 'Document amount'   | 'Currency' |
-			| '2 900'  | 'Company Maxim' | 'Maxim'   | '11 000,00'         | 'TRY'      |
-			| '2 901'  | 'Company Maxim' | 'Maxim'   | '10 000,00'         | 'TRY'      |
+			| 'Number'                           | 'Legal name'    | 'Partner' | 'Document amount' | 'Currency' |
+			| '$$NumberPurchaseInvoice095001$$'  | 'Company Maxim' | 'Maxim'   | '11 000,00'       | 'TRY'      |
+			| '$$NumberPurchaseInvoice0950011$$' | 'Company Maxim' | 'Maxim'   | '10 000,00'       | 'TRY'      |
 		And I go to line in "List" table
 			| 'Number' |
-			| '2 900'  |
+			| '$$NumberPurchaseInvoice095001$$'  |
 		And I select current line in "List" table
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "1 000,00" text in the field named "TransactionsAmount" of "Transactions" table
@@ -380,12 +389,12 @@ Scenario: _095003 check movements of the document Credit Note (increase in debt 
 		And I select current line in "" table
 	* Check the selection of basis documents for the specified partner
 		And "List" table contains lines
-			| 'Number' | 'Legal name'    | 'Partner' | 'Document amount'   | 'Currency' |
-			| '2 900'  | 'Company Maxim' | 'Maxim'   | '11 000,00'         | 'TRY'      |
-			| '2 901'  | 'Company Maxim' | 'Maxim'   | '10 000,00'         | 'TRY'      |
+			| 'Number'                           | 'Legal name'    | 'Partner' | 'Document amount' | 'Currency' |
+			| '$$NumberPurchaseInvoice095001$$'  | 'Company Maxim' | 'Maxim'   | '11 000,00'       | 'TRY'      |
+			| '$$NumberPurchaseInvoice0950011$$' | 'Company Maxim' | 'Maxim'   | '10 000,00'       | 'TRY'      |
 		And I go to line in "List" table
 			| 'Number' |
-			| '2 900'  |
+			| '$$NumberPurchaseInvoice095001$$'  |
 		And I select current line in "List" table
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "100,00" text in the field named "TransactionsAmount" of "Transactions" table
@@ -488,7 +497,7 @@ Scenario: _095004 check movements of the document Credit Note (write off custome
 		And delay 2
 		And I go to line in "List" table
 			| 'Number' |
-			| '2 900'  |
+			| '$$NumberSalesInvoice095001$$'  |
 		And I select current line in "List" table
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "1 000,00" text in the field named "TransactionsAmount" of "Transactions" table
@@ -533,10 +542,10 @@ Scenario: _095004 check movements of the document Credit Note (write off custome
 		| 'Register  "Partner AR transactions"'  | ''                         | ''                         | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
 		| ''                                     | 'Record type'              | 'Period'                   | 'Resources'            | 'Dimensions'              | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | 'Attributes'           |
 		| ''                                     | ''                         | ''                         | 'Amount'               | 'Company'                 | 'Basis document'                                | 'Partner'        | 'Legal name'    | 'Partner term'             | 'Currency'                     | 'Multi currency movement type'                  | 'Deferred calculation' |
-		| ''                                     | 'Receipt'                  | '$$CreditNoteDate095004$$' | '-1 000'               | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                          | 'en description is empty'                       | 'No'                   |
-		| ''                                     | 'Receipt'                  | '$$CreditNoteDate095004$$' | '-1 000'               | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                          | 'Local currency'                                | 'No'                   |
-		| ''                                     | 'Receipt'                  | '$$CreditNoteDate095004$$' | '-1 000'               | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                          | 'TRY'                                           | 'No'                   |
-		| ''                                     | 'Receipt'                  | '$$CreditNoteDate095004$$' | '-171,23'              | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'USD'                          | 'Reporting currency'                            | 'No'                   |
+		| ''                                     | 'Receipt'                  | '$$CreditNoteDate095004$$' | '-1 000'               | 'Main Company'            | '$$SalesInvoice095001$$' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                          | 'en description is empty'                       | 'No'                   |
+		| ''                                     | 'Receipt'                  | '$$CreditNoteDate095004$$' | '-1 000'               | 'Main Company'            | '$$SalesInvoice095001$$' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                          | 'Local currency'                                | 'No'                   |
+		| ''                                     | 'Receipt'                  | '$$CreditNoteDate095004$$' | '-1 000'               | 'Main Company'            | '$$SalesInvoice095001$$' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                          | 'TRY'                                           | 'No'                   |
+		| ''                                     | 'Receipt'                  | '$$CreditNoteDate095004$$' | '-171,23'              | 'Main Company'            | '$$SalesInvoice095001$$' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'USD'                          | 'Reporting currency'                            | 'No'                   |
 		| ''                                     | ''                         | ''                         | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
 		| 'Register  "Expenses turnovers"'       | ''                         | ''                         | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
 		| ''                                     | 'Period'                   | 'Resources'                | 'Dimensions'           | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | 'Attributes'                                    | ''                     |
@@ -549,7 +558,7 @@ Scenario: _095004 check movements of the document Credit Note (write off custome
 		| 'Register  "Accounts statement"'       | ''                         | ''                         | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
 		| ''                                     | 'Record type'              | 'Period'                   | 'Resources'            | ''                        | ''                                              | ''               | 'Dimensions'    | ''                         | ''                             | ''                                              | ''                     |
 		| ''                                     | ''                         | ''                         | 'Advance to suppliers' | 'Transaction AP'          | 'Advance from customers'                        | 'Transaction AR' | 'Company'       | 'Partner'                  | 'Legal name'                   | 'Basis document'                                | 'Currency'             |
-		| ''                                     | 'Receipt'                  | '$$CreditNoteDate095004$$' | ''                     | ''                        | ''                                              | '-1 000'         | 'Main Company'  | 'Lunch'                    | 'Company Lunch'                | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'TRY'                  |
+		| ''                                     | 'Receipt'                  | '$$CreditNoteDate095004$$' | ''                     | ''                        | ''                                              | '-1 000'         | 'Main Company'  | 'Lunch'                    | 'Company Lunch'                | '$$SalesInvoice095001$$' | 'TRY'                  |
 		| ''                                     | ''                         | ''                         | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
 		| 'Register  "Reconciliation statement"' | ''                         | ''                         | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
 		| ''                                     | 'Record type'              | 'Period'                   | 'Resources'            | 'Dimensions'              | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
@@ -637,15 +646,15 @@ Scenario: _095005 check movements of the document Debit Note (increase in custom
 		| 'Register  "Partner AR transactions"'  | ''                        | ''                        | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
 		| ''                                     | 'Record type'             | 'Period'                  | 'Resources'            | 'Dimensions'              | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | 'Attributes'           |
 		| ''                                     | ''                        | ''                        | 'Amount'               | 'Company'                 | 'Basis document'                                | 'Partner'        | 'Legal name'    | 'Partner term'             | 'Currency'                     | 'Multi currency movement type'                  | 'Deferred calculation' |
-		| ''                                     | 'Receipt'                 | '$$DeditNoteDate095005$$' | '17,12'                | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'USD'                          | 'Reporting currency'                            | 'No'                   |
-		| ''                                     | 'Receipt'                 | '$$DeditNoteDate095005$$' | '100'                  | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                          | 'en description is empty'                       | 'No'                   |
-		| ''                                     | 'Receipt'                 | '$$DeditNoteDate095005$$' | '100'                  | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                          | 'Local currency'                                | 'No'                   |
-		| ''                                     | 'Receipt'                 | '$$DeditNoteDate095005$$' | '100'                  | 'Main Company'            | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                          | 'TRY'                                           | 'No'                   |
+		| ''                                     | 'Receipt'                 | '$$DeditNoteDate095005$$' | '17,12'                | 'Main Company'            | '$$SalesInvoice095001$$' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'USD'                          | 'Reporting currency'                            | 'No'                   |
+		| ''                                     | 'Receipt'                 | '$$DeditNoteDate095005$$' | '100'                  | 'Main Company'            | '$$SalesInvoice095001$$' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                          | 'en description is empty'                       | 'No'                   |
+		| ''                                     | 'Receipt'                 | '$$DeditNoteDate095005$$' | '100'                  | 'Main Company'            | '$$SalesInvoice095001$$' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                          | 'Local currency'                                | 'No'                   |
+		| ''                                     | 'Receipt'                 | '$$DeditNoteDate095005$$' | '100'                  | 'Main Company'            | '$$SalesInvoice095001$$' | 'Lunch'          | 'Company Lunch' | 'Basic Partner terms, TRY' | 'TRY'                          | 'TRY'                                           | 'No'                   |
 		| ''                                     | ''                        | ''                        | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
 		| 'Register  "Accounts statement"'       | ''                        | ''                        | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
 		| ''                                     | 'Record type'             | 'Period'                  | 'Resources'            | ''                        | ''                                              | ''               | 'Dimensions'    | ''                         | ''                             | ''                                              | ''                     |
 		| ''                                     | ''                        | ''                        | 'Advance to suppliers' | 'Transaction AP'          | 'Advance from customers'                        | 'Transaction AR' | 'Company'       | 'Partner'                  | 'Legal name'                   | 'Basis document'                                | 'Currency'             |
-		| ''                                     | 'Receipt'                 | '$$DeditNoteDate095005$$' | ''                     | ''                        | ''                                              | '100'            | 'Main Company'  | 'Lunch'                    | 'Company Lunch'                | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | 'TRY'                  |
+		| ''                                     | 'Receipt'                 | '$$DeditNoteDate095005$$' | ''                     | ''                        | ''                                              | '100'            | 'Main Company'  | 'Lunch'                    | 'Company Lunch'                | '$$SalesInvoice095001$$' | 'TRY'                  |
 		| ''                                     | ''                        | ''                        | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
 		| 'Register  "Reconciliation statement"' | ''                        | ''                        | ''                     | ''                        | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
 		| ''                                     | 'Record type'             | 'Period'                  | 'Resources'            | 'Dimensions'              | ''                                              | ''               | ''              | ''                         | ''                             | ''                                              | ''                     |
@@ -693,11 +702,11 @@ Scenario: _095006 check Reconcilation statement
 		And I input end of the current month date in "End period" field
 		And in the table "Transactions" I click "Fill" button
 		And "Transactions" table contains lines
-		| 'Date'                     | 'Document'                                         | 'Credit'    | 'Debit'    |
-		| '01.01.2020 10:00:00'      | 'Purchase invoice 2 900 dated 01.01.2020 10:00:00' | '11 000,00' | ''         |
-		| '01.01.2020 10:00:00'      | 'Purchase invoice 2 901 dated 01.01.2020 10:00:00' | '10 000,00' | ''         |
-		| '$$DeditNoteDate095002$$'  | '$$DeditNote095002$$'                              | ''          | '1 000,00' |
-		| '$$CreditNoteDate095003$$' | '$$CreditNote095003$$'                             | '100,00'    | ''         |
+		| 'Date'                     | 'Document'                   | 'Credit'    | 'Debit'    |
+		| '01.01.2020 10:00:00'      | '$$PurchaseInvoice095001$$'  | '11 000,00' | ''         |
+		| '01.01.2020 10:00:00'      | '$$PurchaseInvoice0950011$$' | '10 000,00' | ''         |
+		| '$$DeditNoteDate095002$$'  | '$$DeditNote095002$$'        | ''          | '1 000,00' |
+		| '$$CreditNoteDate095003$$' | '$$CreditNote095003$$'       | '100,00'    | ''         |
 	* Check for Lunch
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
@@ -706,10 +715,10 @@ Scenario: _095006 check Reconcilation statement
 		And I select current line in "List" table
 		And in the table "Transactions" I click "Fill" button
 		And "Transactions" table contains lines
-		| 'Date'                     | 'Document'                                      | 'Credit'   | 'Debit'     |
-		| '01.01.2020 10:00:00'      | 'Sales invoice 2 900 dated 01.01.2020 10:00:00' | ''         | '10 500,00' |
-		| '$$CreditNoteDate095004$$' | '$$CreditNote095004$$'                          | '1 000,00' | ''          |
-		| '$$DeditNoteDate095005$$'  | '$$DeditNote095005$$'                           | ''         | '100,00'    |
+		| 'Date'                     | 'Document'               | 'Credit'   | 'Debit'     |
+		| '01.01.2020 10:00:00'      | '$$SalesInvoice095001$$' | ''         | '10 500,00' |
+		| '$$CreditNoteDate095004$$' | '$$CreditNote095004$$'   | '1 000,00' | ''          |
+		| '$$DeditNoteDate095005$$'  | '$$DeditNote095005$$'    | ''         | '100,00'    |
 		And I close all client application windows
 		
 

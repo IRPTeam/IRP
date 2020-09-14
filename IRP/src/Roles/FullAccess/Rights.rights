@@ -71,13 +71,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.ChequeBondTransactionItem</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.Labeling</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -742,10 +735,6 @@
 			<name>InteractiveDelete</name>
 			<value>false</value>
 		</right>
-		<right>
-			<name>InteractiveDeleteMarked</name>
-			<value>false</value>
-		</right>
 	</object>
 	<object>
 		<name>Document.PriceList</name>
@@ -1168,6 +1157,34 @@
 	</object>
 	<object>
 		<name>Document.StockAdjustmentAsWriteOff</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.DebitNote</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CreditNote</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ChequeBondTransactionItem</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashStatement</name>
 		<right>
 			<name>InteractiveDelete</name>
 			<value>false</value>

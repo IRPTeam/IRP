@@ -2,7 +2,7 @@
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	DocLabelingServer.AfterWriteAtServer(Object, CurrentObject, WriteParameters);
+	DocCashStatementServer.AfterWriteAtServer(Object, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -19,12 +19,12 @@ EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	DocLabelingServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	DocCashStatementServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
-	DocLabelingClient.OnOpen(Object, ThisObject, Cancel);
+	DocCashStatementClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
 &AtServer
@@ -34,51 +34,35 @@ EndProcedure
 
 #EndRegion
 
-
-#Region GroupTitleDecorationsEvents
+#Region GroupTitleDecorations
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
-	DocLabelingClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
+	DocCashStatementClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedLabelClick(Item)
-	DocLabelingClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
+	DocCashStatementClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
-	DocLabelingClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
+	DocCashStatementClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
-	DocLabelingClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
+	DocCashStatementClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
-
 
 #Region ItemDescription
 
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
-	DocLabelingClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region ItemItemList
-
-&AtClient
-Procedure ItemsItemStartChoice(Item, ChoiceData, StandardProcessing)
-	DocLabelingClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemsItemEditTextChange(Item, Text, StandardProcessing)
-	DocLabelingClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	DocCashStatementClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -108,6 +92,55 @@ EndProcedure
 &AtServer
 Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+#EndRegion
+
+#Region ItemFormEvents
+
+&AtClient
+Procedure DataPeriodOnChange(Item)
+	DocCashStatementClient.DataPeriodOnChange(Object, DataPeriod);
+EndProcedure
+
+&AtClient
+Procedure StatusOnChange(Item)
+	DocCashStatementClient.StatusOnChange(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure StoreOnChange(Item)
+	DocCashStatementClient.StoreOnChange(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure CashAccountsOnChange(Item)
+	DocCashStatementClient.CashAccountsOnChange(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure CompanyOnChange(Item)
+	DocCashStatementClient.CompanyOnChange(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure DateOnChange(Item)
+	DocCashStatementClient.DateOnChange(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure NumberOnChange(Item)
+	DocCashStatementClient.NumberOnChange(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure FillTransactions(Command)
+	FillTransactionsAtServer();
+EndProcedure
+
+&AtServer
+Procedure FillTransactionsAtServer()
+	DocCashStatementServer.FillTransactions(Object);
 EndProcedure
 
 #EndRegion

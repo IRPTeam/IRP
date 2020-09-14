@@ -129,6 +129,10 @@
   <commonPictures>CommonPicture.Quantity</commonPictures>
   <commonPictures>CommonPicture.Total</commonPictures>
   <commonPictures>CommonPicture.SerialNumber</commonPictures>
+  <commonPictures>CommonPicture.Info</commonPictures>
+  <commonPictures>CommonPicture.Payment</commonPictures>
+  <commonPictures>CommonPicture.CashOk</commonPictures>
+  <commonPictures>CommonPicture.OtherGroup</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.CurrentUser</sessionParameters>
@@ -326,6 +330,8 @@
   <commonModules>CommonModule.HardwareServer</commonModules>
   <commonModules>CommonModule.SerialLotNumbersServer</commonModules>
   <commonModules>CommonModule.SerialLotNumberClient</commonModules>
+  <commonModules>CommonModule.DocCashStatementServer</commonModules>
+  <commonModules>CommonModule.DocCashStatementClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -480,6 +486,7 @@
   <catalogs>Catalog.BankTerms</catalogs>
   <catalogs>Catalog.RetailCustomers</catalogs>
   <catalogs>Catalog.Hardware</catalogs>
+  <catalogs>Catalog.CashStatementStatuses</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>
@@ -519,6 +526,7 @@
   <documents>Document.RetailReturnReceipt</documents>
   <documents>Document.CreditNote</documents>
   <documents>Document.DebitNote</documents>
+  <documents>Document.CashStatement</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AgreementKinds</enums>

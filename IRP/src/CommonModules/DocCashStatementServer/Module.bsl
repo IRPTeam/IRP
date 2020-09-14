@@ -1,12 +1,11 @@
 #Region FormEvents
 
 Procedure AfterWriteAtServer(Object, CurrentObject, WriteParameters) Export
-	DocumentsServer.FillItemList(Object);
+	Return;
 EndProcedure
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
-	DocumentsServer.FillItemList(Object);
 	DocLabelingServer.CreateCommandsAndItems(Object);
 	SetGroupItemsList(Object, Form);
 EndProcedure
@@ -17,21 +16,16 @@ EndProcedure
 
 Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array;
-
+	AttributesArray.Add("Company");
+	AttributesArray.Add("Store");
+	AttributesArray.Add("CashAccounts");
+	AttributesArray.Add("Status");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Atr In AttributesArray Do
 		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title),
 				Form.Items[Atr].Title,
 				Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
 	EndDo;
-EndProcedure
-
-#EndRegion
-
-#Region GenerateBarcode
-
-Procedure CreateCommandsAndItems(Object) Export
-	Return;
 EndProcedure
 
 #EndRegion
@@ -48,6 +42,32 @@ EndProcedure
 
 Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ItemFormEvents
+
+Procedure FillTransactions(Object, AddInfo = Undefined) Export
+
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	AccountBalanceTurnovers.Recorder AS Document,
+		|	SUM(AccountBalanceTurnovers.AmountExpense) AS Expense,
+		|	SUM(AccountBalanceTurnovers.AmountReceipt) AS Receipt
+		|FROM
+		|	AccumulationRegister.AccountBalance.Turnovers(&BegOfPeriod, &EndOfPeriod, Record, Company = &Company) AS
+		|		AccountBalanceTurnovers
+		|GROUP BY
+		|	AccountBalanceTurnovers.Recorder";
+	
+	Query.SetParameter("BegOfPeriod", Object.BegOfPeriod);
+	Query.SetParameter("EndOfPeriod", Object.EndOfPeriod);
+	Query.SetParameter("Company", Object.Company);
+	QueryResult = Query.Execute().Unload();
+	Object.CashTransactionList.Load(QueryResult);
+	
 EndProcedure
 
 #EndRegion

@@ -215,7 +215,7 @@ Write-Output "##teamcity[compilationFinished compiler='VA settings']"]]></param>
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code"><![CDATA[If (("%dep.IRP_GitHubUpdate.env.Database1CName%" -eq "%teamcity.project.id%_develop") -or %env.RunAllTest%)
+          <param name="jetbrains_powershell_script_code"><![CDATA[If (("%dep.IRP_GitHubUpdate.env.Database1CName%" -eq "%teamcity.project.id%_develop") -or (%env.RunAllTest% -eq true))
   {
     Write-Output "Start full test"
 	$a = @("Group1", "Group2", "Group3", "Group4", "Group5", "Group6", "Group7", "Group8", "Group9", "Group10", "Group11", "Group12", "Group13", "Group14", "Group15", "Group16", "Group17", "Group18")

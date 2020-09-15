@@ -590,4 +590,8 @@ Procedure FillUnfilledPayeeInRow(Object, Item, Payee) Export
 	EndIf;
 EndProcedure
 
+Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
+	Return New Structure();
+EndFunction
+
 #EndRegion

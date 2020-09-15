@@ -118,4 +118,8 @@ Function InventoryItemKeySettings(Form)
 	Return Settings;
 EndFunction
 
+Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
+	Return New Structure();
+EndFunction
+
 #EndRegion

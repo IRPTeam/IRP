@@ -746,6 +746,10 @@ Procedure StatusEditTextChange(Object, Form, Item, Text, StandardProcessing) Exp
 	
 	DocumentsClient.StatusEditTextChange(Object, Form, Item, Text, StandardProcessing, EditSettings);
 EndProcedure
+
+Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
+	Return New Structure();
+EndFunction
 	
 #EndRegion
 	

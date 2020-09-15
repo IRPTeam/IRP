@@ -486,5 +486,9 @@ Procedure StatusOnChange(Object, Form, Item) Export
 	#EndIf
 EndProcedure
 
+Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
+	Return New Structure();
+EndFunction
+
 #EndRegion
 

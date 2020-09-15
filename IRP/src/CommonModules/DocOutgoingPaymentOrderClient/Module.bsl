@@ -116,5 +116,9 @@ Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Ex
 	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
 EndProcedure
 
+Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
+	Return New Structure();
+EndFunction
+
 #EndRegion
 

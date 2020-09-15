@@ -222,4 +222,9 @@ Function GetArrayOfTaxInfo(Form) Export
 	EndIf;
 	Return New Array();
 EndFunction
+
+Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
+	Return New Structure();
+EndFunction
+
 #EndRegion 

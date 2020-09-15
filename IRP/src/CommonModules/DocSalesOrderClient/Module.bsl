@@ -294,6 +294,10 @@ Function AgreementSettings(Object, Form, AddInfo = Undefined) Export
 	Return Settings;
 EndFunction
 
+Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
+	Return New Structure();
+EndFunction
+
 Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 	

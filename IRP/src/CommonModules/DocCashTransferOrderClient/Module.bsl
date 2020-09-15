@@ -305,4 +305,8 @@ Procedure CheckFillData(Object, Form)
 	SetReceiverCurrency(Object, Form);
 EndProcedure
 
+Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
+	Return New Structure();
+EndFunction
+
 #EndRegion

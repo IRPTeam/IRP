@@ -483,5 +483,9 @@ Procedure SearchByBarcode(Barcode, Object, Form) Export
 	DocumentsClient.SearchByBarcode(Barcode, Object, Form, , Form.CurrentPriceType);
 EndProcedure
 
+Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
+	Return New Structure();
+EndFunction
+
 #EndRegion
 

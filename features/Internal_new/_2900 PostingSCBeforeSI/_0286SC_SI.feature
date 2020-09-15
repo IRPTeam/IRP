@@ -93,12 +93,15 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 			And I activate "Quantity" field in "ItemList" table
 			And I input "4,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		* Change the document number
-			And I move to "Other" tab
-			And I input "2 013" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "5 600" text in "Number" field
+		// * Change the document number
+		// 	And I move to "Other" tab
+		// 	And I input "2 013" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "5 600" text in "Number" field
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberShipmentConfirmation0290001$$"
+			And I save the window as "$$ShipmentConfirmation0290001$$"
 			And I click "Post and close" button
 	* Create SC for Nicoletta from Store 03 (Main company)
 		* Open Shipment confirmation
@@ -150,12 +153,15 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 			And I activate "Quantity" field in "ItemList" table
 			And I input "8,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		* Change the document number
-			And I move to "Other" tab
-			And I input "5 601" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "5 601" text in "Number" field
+		// * Change the document number
+		// 	And I move to "Other" tab
+		// 	And I input "5 601" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "5 601" text in "Number" field
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberShipmentConfirmation02900011$$"
+			And I save the window as "$$ShipmentConfirmation02900011$$"
 			And I click "Post and close" button
 	* Create SC for Ferron BP from Store 03 (Company Ferron BP, Main company)
 		* OPen Shipment confirmation
@@ -228,12 +234,15 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 			And I activate "Quantity" field in "ItemList" table
 			And I input "4,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		* Change the document number
-			And I move to "Other" tab
-			And I input "5 602" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "5 602" text in "Number" field
+		// * Change the document number
+		// 	And I move to "Other" tab
+		// 	And I input "5 602" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "5 602" text in "Number" field
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberShipmentConfirmation02900012$$"
+			And I save the window as "$$ShipmentConfirmation02900012$$"
 			And I click "Post and close" button
 	* Create SC for Ferron BP from Store 03 for Second Company Ferron BP (Main company) 
 		* Open Shipment confirmation
@@ -275,11 +284,14 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 			And I input "18,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Change the document number
-			And I move to "Other" tab
-			And I input "5 603" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "5 603" text in "Number" field
+			// And I move to "Other" tab
+			// And I input "5 603" text in "Number" field
+			// Then "1C:Enterprise" window is opened
+			// And I click "Yes" button
+			// And I input "5 603" text in "Number" field
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberShipmentConfirmation02900013$$"
+			And I save the window as "$$ShipmentConfirmation02900013$$"
 			And I click "Post and close" button
 	* Create SC for Ferron BP from Store 03 for Company Ferron BP (Second company)
 		* Open Shipment confirmation
@@ -341,22 +353,25 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 			And I activate "Quantity" field in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		* Change the document number
-			And I move to "Other" tab
-			And I input "5 604" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "5 604" text in "Number" field
+		// * Change the document number
+		// 	And I move to "Other" tab
+		// 	And I input "5 604" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "5 604" text in "Number" field
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberShipmentConfirmation02900014$$"
+			And I save the window as "$$ShipmentConfirmation02900014$$"
 			And I click "Post and close" button
 	* Create Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And "List" table contains lines
-		| 'Number' | 'Company'      |
-		| '5 600'  | 'Main Company' |
-		| '5 601'  | 'Main Company' |
-		| '5 602'  | 'Main Company' |
-		| '5 603'  | 'Main Company' |
-		| '5 604'  | 'Second Company' |
+		| 'Number'                                 | 'Company'        |
+		| '$$NumberShipmentConfirmation0290001$$'  | 'Main Company'   |
+		| '$$NumberShipmentConfirmation02900011$$' | 'Main Company'   |
+		| '$$NumberShipmentConfirmation02900012$$' | 'Main Company'   |
+		| '$$NumberShipmentConfirmation02900013$$' | 'Main Company'   |
+		| '$$NumberShipmentConfirmation02900014$$' | 'Second Company' |
 
 Scenario: _0290002 create Sales invoice based on Shipment confirmation
 	# based on several Shipment confirmation creates multiple Sales invoice
@@ -365,7 +380,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 	* Select SC for creating SI 
 		And I go to line in "List" table
 			| 'Number' |
-			| '5 600'  |
+			| '$$NumberShipmentConfirmation0290001$$'  |
 		And I move one line down in "List" table and select line
 		And I move one line down in "List" table and select line
 		And I move one line down in "List" table and select line
@@ -380,8 +395,8 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				Then the form attribute named "Store" became equal to "Store 03"
 				And "ItemList" table contains lines
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
-					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
-					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
+					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900014$$' |
+					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900014$$' |
 				* Filling in an Partner term
 					And I click Select button of "Partner term" field
 					And I go to line in "List" table
@@ -393,8 +408,8 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				* Check tabular part
 					And "ItemList" table contains lines
 					| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Price type'              | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Shipment confirmation'        |
-					| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000'  | 'Basic Price without VAT' | 'pcs'  | '112,71'     | '593,22'     | '705,93'       | 'Store 03' | 'Shipment confirmation 5 604*' |
-					| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '12,000' | 'Basic Price without VAT' | 'pcs'  | '772,88'     | '4 067,76'   | '4 840,64'     | 'Store 03' | 'Shipment confirmation 5 604*' |
+					| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000'  | 'Basic Price without VAT' | 'pcs'  | '112,71'     | '593,22'     | '705,93'       | 'Store 03' | '$$ShipmentConfirmation02900014$$' |
+					| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '12,000' | 'Basic Price without VAT' | 'pcs'  | '772,88'     | '4 067,76'   | '4 840,64'     | 'Store 03' | '$$ShipmentConfirmation02900014$$' |
 				And I move to "Other" tab
 				And I input "5 604" text in "Number" field
 				And I click "Yes" button
@@ -405,7 +420,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				Then the form attribute named "Company" became equal to "Main Company"
 				And "ItemList" table contains lines
 				| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
-				| 'Trousers' | '38/Yellow' | '18,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 603*' |
+				| 'Trousers' | '38/Yellow' | '18,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900013$$' |
 				And I click Select button of "Partner term" field
 				And I go to line in "List" table
 					| 'Description'                   |
@@ -422,12 +437,12 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				Then the form attribute named "Company" became equal to "Main Company"
 				And "ItemList" table contains lines
 					| 'Item'     | 'Item key'  | 'Q'     | 'Unit' | 'Store'    | 'Shipment confirmation'        |
-					| 'Dress'    | 'M/White'   | '4,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
-					| 'Dress'    | 'XS/Blue'   | '2,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
-					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
-					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
-					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 601*' |
-					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 601*' |
+					| 'Dress'    | 'M/White'   | '4,000' | 'pcs'  | 'Store 02' | '$$ShipmentConfirmation0290001$$' |
+					| 'Dress'    | 'XS/Blue'   | '2,000' | 'pcs'  | 'Store 02' | '$$ShipmentConfirmation0290001$$' |
+					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 02' | '$$ShipmentConfirmation0290001$$' |
+					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 02' | '$$ShipmentConfirmation0290001$$' |
+					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900011$$' |
+					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900011$$' |
 				And I click Select button of "Partner term" field
 				And I go to line in "List" table
 					| 'Description'                   |
@@ -445,8 +460,8 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				Then the form attribute named "Company" became equal to "Main Company"
 				And "ItemList" table contains lines
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
-					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 602*' |
-					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 602*' |
+					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900012$$' |
+					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900012$$' |
 				And I click Select button of "Partner term" field
 				And I go to line in "List" table
 					| 'Description'                   |
@@ -467,8 +482,8 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				Then the form attribute named "Store" became equal to "Store 03"
 				And "ItemList" table contains lines
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
-					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
-					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
+					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900014$$' |
+					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900014$$' |
 				* Filling in an Partner term
 					And I click Select button of "Partner term" field
 					And I go to line in "List" table
@@ -480,8 +495,8 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				* Check tabular part
 					And "ItemList" table contains lines
 					| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Price type'              | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Shipment confirmation'        |
-					| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000'  | 'Basic Price without VAT' | 'pcs'  | '112,71'     | '593,22'     | '705,93'       | 'Store 03' | 'Shipment confirmation 5 604*' |
-					| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '12,000' | 'Basic Price without VAT' | 'pcs'  | '772,88'     | '4 067,76'   | '4 840,64'     | 'Store 03' | 'Shipment confirmation 5 604*' |
+					| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000'  | 'Basic Price without VAT' | 'pcs'  | '112,71'     | '593,22'     | '705,93'       | 'Store 03' | '$$ShipmentConfirmation02900014$$' |
+					| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '12,000' | 'Basic Price without VAT' | 'pcs'  | '772,88'     | '4 067,76'   | '4 840,64'     | 'Store 03' | '$$ShipmentConfirmation02900014$$' |
 				And I move to "Other" tab
 				And I input "5 604" text in "Number" field
 				And I click "Yes" button
@@ -492,7 +507,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				Then the form attribute named "Company" became equal to "Main Company"
 				And "ItemList" table contains lines
 				| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
-				| 'Trousers' | '38/Yellow' | '18,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 603*' |
+				| 'Trousers' | '38/Yellow' | '18,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900013$$' |
 				And I click Select button of "Partner term" field
 				And I go to line in "List" table
 					| 'Description'                   |
@@ -509,12 +524,12 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				Then the form attribute named "Company" became equal to "Main Company"
 				And "ItemList" table contains lines
 					| 'Item'     | 'Item key'  | 'Q'     | 'Unit' | 'Store'    | 'Shipment confirmation'        |
-					| 'Dress'    | 'M/White'   | '4,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
-					| 'Dress'    | 'XS/Blue'   | '2,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
-					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
-					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
-					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 601*' |
-					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 601*' |
+					| 'Dress'    | 'M/White'   | '4,000' | 'pcs'  | 'Store 02' | '$$ShipmentConfirmation0290001$$' |
+					| 'Dress'    | 'XS/Blue'   | '2,000' | 'pcs'  | 'Store 02' | '$$ShipmentConfirmation0290001$$' |
+					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 02' | '$$ShipmentConfirmation0290001$$' |
+					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 02' | '$$ShipmentConfirmation0290001$$' |
+					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900011$$' |
+					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900011$$' |
 				And I click Select button of "Partner term" field
 				And I go to line in "List" table
 					| 'Description'                   |
@@ -532,8 +547,8 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				Then the form attribute named "Company" became equal to "Main Company"
 				And "ItemList" table contains lines
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
-					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 602*' |
-					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 602*' |
+					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900012$$' |
+					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900012$$' |
 				And I click Select button of "Partner term" field
 				And I go to line in "List" table
 					| 'Description'                   |
@@ -554,8 +569,8 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				Then the form attribute named "Store" became equal to "Store 03"
 				And "ItemList" table contains lines
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
-					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
-					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
+					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900014$$' |
+					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900014$$' |
 				* Filling in an Partner term
 					And I click Select button of "Partner term" field
 					And I go to line in "List" table
@@ -567,8 +582,8 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				* Check tabular part
 					And "ItemList" table contains lines
 					| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Price type'              | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Shipment confirmation'        |
-					| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000'  | 'Basic Price without VAT' | 'pcs'  | '112,71'     | '593,22'     | '705,93'       | 'Store 03' | 'Shipment confirmation 5 604*' |
-					| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '12,000' | 'Basic Price without VAT' | 'pcs'  | '772,88'     | '4 067,76'   | '4 840,64'     | 'Store 03' | 'Shipment confirmation 5 604*' |
+					| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000'  | 'Basic Price without VAT' | 'pcs'  | '112,71'     | '593,22'     | '705,93'       | 'Store 03' | '$$ShipmentConfirmation02900014$$' |
+					| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '12,000' | 'Basic Price without VAT' | 'pcs'  | '772,88'     | '4 067,76'   | '4 840,64'     | 'Store 03' | '$$ShipmentConfirmation02900014$$' |
 				And I move to "Other" tab
 				And I input "5 604" text in "Number" field
 				And I click "Yes" button
@@ -579,7 +594,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				Then the form attribute named "Company" became equal to "Main Company"
 				And "ItemList" table contains lines
 				| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
-				| 'Trousers' | '38/Yellow' | '18,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 603*' |
+				| 'Trousers' | '38/Yellow' | '18,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900013$$' |
 				And I click Select button of "Partner term" field
 				And I go to line in "List" table
 					| 'Description'                   |
@@ -596,12 +611,12 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				Then the form attribute named "Company" became equal to "Main Company"
 				And "ItemList" table contains lines
 					| 'Item'     | 'Item key'  | 'Q'     | 'Unit' | 'Store'    | 'Shipment confirmation'        |
-					| 'Dress'    | 'M/White'   | '4,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
-					| 'Dress'    | 'XS/Blue'   | '2,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
-					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
-					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
-					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 601*' |
-					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 601*' |
+					| 'Dress'    | 'M/White'   | '4,000' | 'pcs'  | 'Store 02' | '$$ShipmentConfirmation0290001$$' |
+					| 'Dress'    | 'XS/Blue'   | '2,000' | 'pcs'  | 'Store 02' | '$$ShipmentConfirmation0290001$$' |
+					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 02' | '$$ShipmentConfirmation0290001$$' |
+					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 02' | '$$ShipmentConfirmation0290001$$' |
+					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900011$$' |
+					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900011$$' |
 				And I click Select button of "Partner term" field
 				And I go to line in "List" table
 					| 'Description'                   |
@@ -619,8 +634,8 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				Then the form attribute named "Company" became equal to "Main Company"
 				And "ItemList" table contains lines
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
-					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 602*' |
-					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 602*' |
+					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900012$$' |
+					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900012$$' |
 				And I click Select button of "Partner term" field
 				And I go to line in "List" table
 					| 'Description'                   |
@@ -641,8 +656,8 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				Then the form attribute named "Store" became equal to "Store 03"
 				And "ItemList" table contains lines
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
-					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
-					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 604*' |
+					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900014$$' |
+					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900014$$' |
 				* Filling in an Partner term
 					And I click Select button of "Partner term" field
 					And I go to line in "List" table
@@ -654,8 +669,8 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				* Check tabular part
 					And "ItemList" table contains lines
 					| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Price type'              | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Shipment confirmation'        |
-					| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000'  | 'Basic Price without VAT' | 'pcs'  | '112,71'     | '593,22'     | '705,93'       | 'Store 03' | 'Shipment confirmation 5 604*' |
-					| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '12,000' | 'Basic Price without VAT' | 'pcs'  | '772,88'     | '4 067,76'   | '4 840,64'     | 'Store 03' | 'Shipment confirmation 5 604*' |
+					| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000'  | 'Basic Price without VAT' | 'pcs'  | '112,71'     | '593,22'     | '705,93'       | 'Store 03' | '$$ShipmentConfirmation02900014$$' |
+					| '338,98' | 'Trousers' | '18%' | '38/Yellow' | '12,000' | 'Basic Price without VAT' | 'pcs'  | '772,88'     | '4 067,76'   | '4 840,64'     | 'Store 03' | '$$ShipmentConfirmation02900014$$' |
 				And I move to "Other" tab
 				And I input "5 604" text in "Number" field
 				And I click "Yes" button
@@ -666,7 +681,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				Then the form attribute named "Company" became equal to "Main Company"
 				And "ItemList" table contains lines
 				| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
-				| 'Trousers' | '38/Yellow' | '18,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 603*' |
+				| 'Trousers' | '38/Yellow' | '18,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900013$$' |
 				And I click Select button of "Partner term" field
 				And I go to line in "List" table
 					| 'Description'                   |
@@ -683,12 +698,12 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				Then the form attribute named "Company" became equal to "Main Company"
 				And "ItemList" table contains lines
 					| 'Item'     | 'Item key'  | 'Q'     | 'Unit' | 'Store'    | 'Shipment confirmation'        |
-					| 'Dress'    | 'M/White'   | '4,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
-					| 'Dress'    | 'XS/Blue'   | '2,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
-					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
-					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 02' | 'Shipment confirmation 5 600*' |
-					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 601*' |
-					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 601*' |
+					| 'Dress'    | 'M/White'   | '4,000' | 'pcs'  | 'Store 02' | '$$ShipmentConfirmation0290001$$' |
+					| 'Dress'    | 'XS/Blue'   | '2,000' | 'pcs'  | 'Store 02' | '$$ShipmentConfirmation0290001$$' |
+					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 02' | '$$ShipmentConfirmation0290001$$' |
+					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 02' | '$$ShipmentConfirmation0290001$$' |
+					| 'Trousers' | '38/Yellow' | '4,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900011$$' |
+					| 'Shirt'    | '38/Black'  | '8,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900011$$' |
 				And I click Select button of "Partner term" field
 				And I go to line in "List" table
 					| 'Description'                   |
@@ -706,8 +721,8 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				Then the form attribute named "Company" became equal to "Main Company"
 				And "ItemList" table contains lines
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Shipment confirmation'        |
-					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 602*' |
-					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | 'Shipment confirmation 5 602*' |
+					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900012$$' |
+					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' | '$$ShipmentConfirmation02900012$$' |
 				And I click Select button of "Partner term" field
 				And I go to line in "List" table
 					| 'Description'                   |

@@ -112,7 +112,7 @@ Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessin
 	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
-Function ItemListItemSettings(Form) Export
+Function ItemListItemSettings(Object, Form) Export
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AfterActionsCalculateSettings");
 	
 	Actions = New Structure();
@@ -196,7 +196,7 @@ Procedure PartnerOnChange(Object, Form, Item) Export
 	DocumentsClient.PartnerOnChange(Object, Form, ThisObject, Item);
 EndProcedure
 
-Function PartnerSettings() Export
+Function PartnerSettings(Object, Form, AddInfo = Undefined) Export
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AgreementType");
 	
 	Actions = New Structure();
@@ -241,7 +241,7 @@ Procedure AgreementOnChange(Object, Form, Item) Export
 	DocumentsClient.AgreementOnChange(Object, Form, ThisObject, Item);
 EndProcedure
 
-Function AgreementSettings() Export
+Function AgreementSettings(Object, Form, AddInfo = Undefined) Export
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
 	Actions = New Structure();
 	Actions.Insert("ChangeCompany"			, "ChangeCompany");
@@ -348,7 +348,7 @@ Procedure CompanyOnChange(Object, Form, Item) Export
 	DocumentsClient.CompanyOnChange(Object, Form, ThisObject, Item);
 EndProcedure
 
-Function CompanySettings() Export
+Function CompanySettings(Object, Form, AddInfo = Undefined) Export
 	
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
 	Actions = New Structure();
@@ -388,7 +388,7 @@ Procedure StoreOnChange(Object, Form, Item = Undefined, Settings = Undefined) Ex
 	DocumentsClient.StoreOnChange(Object, Form, ThisObject, Item);
 EndProcedure
 
-Function StoreSettings() Export
+Function StoreSettings(Object, Form, AddInfo = Undefined) Export
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
 	
 	Actions = New Structure();
@@ -407,7 +407,7 @@ Procedure PriceIncludeTaxOnChange(Object, Form, Item) Export
 	DocumentsClient.PriceIncludeTaxOnChange(Object, Form, ThisObject, Item);
 EndProcedure
 
-Function PriceIncludeTaxActions() Export
+Function PriceIncludeTaxSettings(Object, Form, AddInfo = Undefined) Export
 	Return New Structure();
 EndFunction
 
@@ -439,7 +439,7 @@ Procedure DateOnChange(Object, Form, Item = Undefined, Settings = Undefined) Exp
 	DocumentsClient.DateOnChange(Object, Form, Thisobject, Item);
 EndProcedure
 
-Function DateSettings(Form) Export
+Function DateSettings(Object, Form, AddInfo = Undefined) Export
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AgreementType, AfterActionsCalculateSettings");
 	
 	Actions = New Structure();

@@ -213,7 +213,7 @@ Write-Output "##teamcity[compilationFinished compiler='VA settings']"]]></param>
       </runner>
       <runner id="RUNNER_12" name="Start VA" type="jetbrains_powershell">
         <parameters>
-          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_execution" value="STDIN" />
           <param name="jetbrains_powershell_noprofile" value="true" />
           <param name="jetbrains_powershell_script_code"><![CDATA[If (("%dep.IRP_GitHubUpdate.env.Database1CName%" -eq "%teamcity.project.id%_develop") -or (%env.RunAllTest% -eq true))
   {

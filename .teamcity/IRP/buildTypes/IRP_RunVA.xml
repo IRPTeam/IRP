@@ -613,7 +613,7 @@ $JobTail = {
     #JobTail -elementTag $elementTag -VA_PID_Array  $global:VA_PID_Array
     $JobTailProc = start-job -scriptBlock $JobTail -ArgumentList $elementTag,$global:VA_PID_Array
     $global:JobArray += ($JobTailProc)
-  
+  	Start-Sleep 10
   } 
   do {
       Start-Sleep 1

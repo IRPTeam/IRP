@@ -379,6 +379,36 @@ Procedure CalculateTaxReverse_PriceNotIncludeTax(Object, ItemRow, ArrayOfTaxInfo
 	CalculateTax(Object, ItemRow, False, ArrayOfTaxInfo, True, AddInfo);
 EndProcedure
 
+Function GetTaxCalculationParameters(Object, ItemRow, ItemOfTaxInfo, PriceIncludeTax, Reverse, AddInfo = Undefined)
+	TaxParameters = New Structure();
+	TaxParameters.Insert("Tax", ItemOfTaxInfo.Tax);
+	TaxParameters.Insert("TaxRateOrAmount", ItemRow[ItemOfTaxInfo.Name]);
+	TaxParameters.Insert("PriceIncludeTax", PriceIncludeTax);
+	TaxParameters.Insert("Key", ItemRow.Key);
+		
+	Table = Undefined;
+	If Object.Property("ItemList") Then
+		Table = Object.ItemList;
+	ElsIf Object.Property("PaymentList") Then
+		Table = Object.PaymentList;
+	Else
+		Raise "Not supported table";
+	EndIf;
+	
+	ArrayOfItemRows = Table.FindRows(New Structure("Key", ItemRow.Key));
+	If ArrayOfItemRows.Count() <> 1 Then
+		Raise StrTemplate("Find %1 rows in table by key %2", ArrayOfItemRows.Count(), ItemRow.Key);
+	EndIf;
+	
+	ItemRow = ArrayOfItemRows[0];
+	TaxParameters.Insert("TotalAmount", ItemRow.TotalAmount);
+	TaxParameters.Insert("NetAmount" ,ItemRow.NetAmount);
+	TaxParameters.Insert("Ref" ,Object.Ref);
+		
+	TaxParameters.Insert("Reverse", Reverse);
+	Return TaxParameters;
+EndFunction	
+
 Procedure CalculateTax(Object, ItemRow, PriceIncludeTax, ArrayOfTaxInfo, Reverse, AddInfo = Undefined)
 	
 	// ArrayOfTaxInfo
@@ -398,8 +428,6 @@ Procedure CalculateTax(Object, ItemRow, PriceIncludeTax, ArrayOfTaxInfo, Reverse
 			And Not ValueIsFilled(ItemRow.ItemKey) Then
 		Return;
 	EndIf;
-	
-	//ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
 	
 	For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
 		
@@ -446,34 +474,8 @@ Procedure CalculateTax(Object, ItemRow, PriceIncludeTax, ArrayOfTaxInfo, Reverse
 			EndIf;
 		EndIf;
 		
-		// Calculate tax amount
-		TaxParameters = New Structure();
-		TaxParameters.Insert("Tax", ItemOfTaxInfo.Tax);
-		TaxParameters.Insert("TaxRateOrAmount", ItemRow[ItemOfTaxInfo.Name]);
-		TaxParameters.Insert("PriceIncludeTax", PriceIncludeTax);
-		TaxParameters.Insert("Key", ItemRow.Key);
-		//opt
-		//TaxParameters.Insert("Object", Object);
-		Table = Undefined;
-		If Object.Property("ItemList") Then
-			Table = Object.ItemList;
-		ElsIf Object.Property("PaymentList") Then
-			Table = Object.PaymentList;
-		Else
-			Raise "Not supported table";
-		EndIf;
-	
-		ArrayOfItemRows = Table.FindRows(New Structure("Key", ItemRow.Key));
-		If ArrayOfItemRows.Count() <> 1 Then
-			Raise StrTemplate("Find %1 rows in table by key %2", ArrayOfItemRows.Count(), ItemRow.Key);
-		EndIf;
-		ItemRow = ArrayOfItemRows[0];
-		TaxParameters.Insert("TotalAmount", ItemRow.TotalAmount);
-		TaxParameters.Insert("NetAmount" ,ItemRow.NetAmount);
-		TaxParameters.Insert("Ref" ,Object.Ref);
-		
-		TaxParameters.Insert("Reverse", Reverse);
-		
+		TaxParameters = GetTaxCalculationParameters(Object, ItemRow, ItemOfTaxInfo, PriceIncludeTax, Reverse, AddInfo);
+			
 		ArrayOfResultsTaxCalculation = TaxesServer.CalculateTax(TaxParameters);
 		
 		For Each RowOfResult In ArrayOfResultsTaxCalculation Do
@@ -554,14 +556,7 @@ Procedure CalculateTaxManualPriority(Object, ItemRow, PriceIncludeTax, ArrayOfTa
 			EndIf;
 		EndIf;
 		
-		// Calculate tax amount
-		TaxParameters = New Structure();
-		TaxParameters.Insert("Tax", ItemOfTaxInfo.Tax);
-		TaxParameters.Insert("TaxRateOrAmount", ItemRow[ItemOfTaxInfo.Name]);
-		TaxParameters.Insert("PriceIncludeTax", PriceIncludeTax);
-		TaxParameters.Insert("Key", ItemRow.Key);
-		TaxParameters.Insert("Object", Object);
-		TaxParameters.Insert("Reverse", Reverse);
+		TaxParameters = GetTaxCalculationParameters(Object, ItemRow, ItemOfTaxInfo, PriceIncludeTax, Reverse, AddInfo);
 		
 		ArrayOfResult = TaxesServer.CalculateTax(TaxParameters);
 		

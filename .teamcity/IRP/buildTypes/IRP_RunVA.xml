@@ -569,8 +569,6 @@ foreach ($elementTag in $TagArray) {
 
 $JobTail = {
   Param($elementTag, $VA_PID_Array)
-  
-foreach ($elementTag in $a) {
   $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
   #Write-Output "##teamcity[compilationStarted compiler='$ScriptLogFilePath']"
   $processID = $VA_PID_Array[$elementTag]

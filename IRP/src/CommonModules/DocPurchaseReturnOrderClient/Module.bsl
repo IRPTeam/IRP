@@ -113,7 +113,7 @@ Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessin
 	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
-Function ItemListItemSettings(Object, Form) Export
+Function ItemListItemSettings(Object, Form, AddInfo = Undefined) Export
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AfterActionsCalculateSettings");
 	
 	Actions = New Structure();
@@ -134,7 +134,7 @@ Procedure ItemListItemKeyOnChange(Object, Form, Item = Undefined) Export
 	DocumentsClient.ItemListItemKeyOnChange(Object, Form, ThisObject, Item);
 EndProcedure
 
-Function ItemListItemKeySettings(Form) Export
+Function ItemListItemKeySettings(Object, Form, AddInfo = Undefined) Export
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AfterActionsCalculateSettings");
 	
 	Actions = New Structure();

@@ -75,7 +75,7 @@ Procedure InventoryItemOnChange(Object, Form, Module, Item = Undefined, Settings
 	DocumentsClient.ItemListItemOnChange(Object, Form, ThisObject, Item, TransferSettings);	
 EndProcedure
 
-Function ItemListItemSettings(Object, Form) Export
+Function ItemListItemSettings(Object, Form, AddInfo = Undefined) Export
 	Return InventoryItemSettings(Form);
 EndFunction
 
@@ -100,7 +100,7 @@ Procedure InventoryItemKeyOnChange(Object, Form, Module, Item = Undefined, Setti
 	DocumentsClient.ItemListItemKeyOnChange(Object, Form, ThisObject, Item, TransferSettings);	
 EndProcedure
 
-Function ItemListItemKeySettings(Form) Export
+Function ItemListItemKeySettings(Object, Form, AddInfo = Undefined) Export
 	Return InventoryItemKeySettings(Form);
 EndFunction
 

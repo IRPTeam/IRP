@@ -1929,7 +1929,7 @@ Procedure ItemListItemKeyOnChange(Object, Form, Module, Item = Undefined, Settin
 	EndIf;
 	
 	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
-	ItemListItemKeySettings = Module.ItemListItemKeySettings(Form, Object);
+	ItemListItemKeySettings = Module.ItemListItemKeySettings(Object, Form);
 	If ItemListItemKeySettings.Property("PutServerDataToAddInfo") And ItemListItemKeySettings.PutServerDataToAddInfo Then
 		Module.ItemListItemKeyOnChangePutServerDataToAddInfo(Object, Form, CurrentRow, AddInfo);
 	EndIf;

@@ -435,7 +435,8 @@ $VA_PID_Array = @{}
 New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%/allure/base"
 $port = 48010
 foreach ($elementTag in $TagArray) {
-  $port += 1
+  $port += 10
+  $portmax = $port + 10
   $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
   #Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"
 
@@ -454,6 +455,7 @@ foreach ($elementTag in $TagArray) {
     'DownloadFeaturesOpen': 1,
     'platformversiongenerateepf': 'C:\\Program Files\\1cv8\\8.3.15.1869\\bin\\',
     'usersettingsprovider': 'FILE',
+    'testclientports': "$port - $portmax"
     'RunningScripts': {
       'makestepsasync': false,
       'SpacingStepSpecifiedUser': 0.1,

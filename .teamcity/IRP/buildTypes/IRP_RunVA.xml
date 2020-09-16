@@ -404,7 +404,6 @@ foreach ($elementTag in $a) {
   }        
   Write-Host "##teamcity[progressStart 'Read VA steps']"
   Start-Sleep 10
-  #Copy-Item -Path "allureTmp\base\*" -Destination "allure\base" -Recurse
   Write-Output "##teamcity[compilationFinished compiler='$ScriptLogFilePath']"
   Write-Output "##teamcity[compilationFinished compiler='VA settings $elementTag']"
 }]]></param>

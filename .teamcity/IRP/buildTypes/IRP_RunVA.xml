@@ -336,8 +336,8 @@ foreach ($elementTag in $a) {
   $a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value "%system.teamcity.build.tempDir%\errors$elementTag"
   $a | Add-Member -Type NoteProperty -Name 'textlogname' -Value $ScriptLogFilePath
   $a.AllureReport | Add-Member -Type NoteProperty -Name 'directorytobuildhierarchy' -Value '%env.VA.FeaturePath%'
-  $a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepath' -Value "$allurePath/tmp$elementTag"
-  $a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepathbase' -Value "$allurePath/base"
+  #$a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepath' -Value "$allurePath/tmp$elementTag"
+  $a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepathbase' -Value "$allurePath/base/$elementTag"
   
   $a.librarycatalogs += '%system.teamcity.build.workingDir%\DataProcessor'
   $a.librarycatalogs += '%env.VA.FeaturePath%External'

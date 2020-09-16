@@ -11,7 +11,6 @@
     <disabled-settings>
       <setting-ref ref="BUILD_EXT_19" />
       <setting-ref ref="RUNNER_10" />
-      <setting-ref ref="RUNNER_12" />
       <setting-ref ref="RUNNER_29" />
       <setting-ref ref="RUNNER_6" />
     </disabled-settings>

@@ -433,7 +433,9 @@ foreach ($elementTag in $a) {
   
 $VA_PID_Array = @{}
 New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%/allure/base"
+$port = 48010
 foreach ($elementTag in $TagArray) {
+  $port += 1
   $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
   #Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"
 
@@ -473,7 +475,7 @@ foreach ($elementTag in $TagArray) {
         {
         'Name': 'This client',
         'PathToInfobase': $TempDb,
-        'PortTestClient': 48001,
+        'PortTestClient': $port,
         'AddItionalParameters': $connection,
         'ClientType': 'Thin',
         'ComputerName': 'localhost'

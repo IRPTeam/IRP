@@ -432,6 +432,10 @@ Procedure PriceIncludeTaxOnChange(Object, Form, Item) Export
 	DocumentsClient.PriceIncludeTaxOnChange(Object, Form, ThisObject, Item);
 EndProcedure
 
+Function PriceIncludeTaxSettings(Object, Form, AddInfo = Undefined) Export
+	Return New Structure();
+EndFunction
+
 #EndRegion
 
 #Region GroupTitleDecorationsEvents

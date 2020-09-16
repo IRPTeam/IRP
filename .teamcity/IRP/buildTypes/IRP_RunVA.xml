@@ -436,7 +436,7 @@ New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%/allure/
 $port = 48010
 foreach ($elementTag in $TagArray) {
   $port += 10
-  $portmax = $port + 10
+  $portmax = $port + 9
   $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
   #Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"
 

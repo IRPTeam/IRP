@@ -796,6 +796,7 @@ $StartVA = {
         Write-Host "##teamcity[setParameter name='env.VA_PID' value='$VA_PID']"
         $JobTailProc = start-job -scriptBlock $JobTail -ArgumentList $elementTag, $global:VA_PID_Array
         $global:JobArray += ($JobTailProc)
+        $JobTailProc | Wait-Job
     }
 }
 

@@ -412,7 +412,7 @@ foreach ($elementTag in $a) {
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
-      <runner id="RUNNER_6" name="Start VA (1)" type="jetbrains_powershell">
+      <runner id="RUNNER_6" name="Start VA async" type="jetbrains_powershell">
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
@@ -428,9 +428,10 @@ foreach ($elementTag in $a) {
     Write-Output "Start short test"
  	$a = @("CatalogForms", "DocumentForms", "OtherForms")	
   }else{
-  	Write-Output "Skip tests"
+      Write-Output "Skip tests"
   }
   
+$VA_PID_Array = @{}
 New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%/allure/base"
 foreach ($elementTag in $a) {
   $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
@@ -560,21 +561,20 @@ foreach ($elementTag in $a) {
   $Process.StartInfo = $ProcessInfo 
   $Process.Start() | Out-Null  
   $VA_PID = $Process.Id 
+  $VA_PID_Array.Add($elementTag, $VA_PID)
   echo "##teamcity[setParameter name='env.VA_PID' value='$VA_PID']"
-
+}
   ######################################################################################
-
+foreach ($elementTag in $a) {
+  $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
   Write-Output "##teamcity[compilationStarted compiler='$ScriptLogFilePath']"
-  $processID = $VA_PID
-  $TryCount = 0
-  $ReadTail = true
+  $processID = $VA_PID_Array.$elementTag
   Write-Host "VA PID $processID"
   while (!(Test-Path $ScriptLogFilePath)) { 
       If(Get-Process -id $processID -ErrorAction SilentlyContinue ){
           Start-Sleep 5
           Write-Host "Wait for file $ScriptLogFilePath"
       } else {
-          $ReadTail = false
           Write-Host "File $ScriptLogFilePath not found"
           break
       } 

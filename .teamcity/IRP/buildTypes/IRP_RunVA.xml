@@ -662,8 +662,8 @@ $StartVA = {
     Param($elementTagArray)
     foreach ($elementTag in $elementTagArray) {
 
-        $global:port += 10
-        $portmax = $global:port + 9
+        $global:port += 5
+        $portmax = $global:port + 4
         $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
         #Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"
 
@@ -778,9 +778,9 @@ $StartVA = {
 
         $b = $a | ConvertTo-Json -depth 32
         $b | set-content %system.teamcity.build.workingDir%/va$elementTag.json
-        Write-Output "##teamcity[compilationStarted compiler='VA settings']"
-        Write-Output "$b"
-        Write-Output "##teamcity[compilationFinished compiler='VA settings']"
+        #Write-Output "##teamcity[compilationStarted compiler='VA settings']"
+       # Write-Output "$b"
+       # Write-Output "##teamcity[compilationFinished compiler='VA settings']"
 
         #####################################################################################
 

@@ -435,7 +435,7 @@ $VA_PID_Array = @{}
 New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%/allure/base"
 foreach ($elementTag in $TagArray) {
   $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
-  Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"
+  #Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"
 
   $allurePath = "%system.teamcity.build.workingDir%/allure" | ForEach-Object { $_ -replace '\\', '/' }
   $TempDb = "'/F%system.teamcity.build.workingDir%\TempDB'" | ForEach-Object { $_ -replace '\\', '/' }
@@ -625,7 +625,7 @@ $JobTail = {
         }
       }
 
-      Write-Host "Count job " $global:JobArray 
+      #Write-Host "Count job " $global:JobArray 
     } while($global:JobArray.count)]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />

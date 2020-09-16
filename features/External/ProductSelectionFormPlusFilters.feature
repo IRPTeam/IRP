@@ -24,10 +24,10 @@ Scenario: check the product selection form with price information in Sales order
 			| Clothes     |
 		And I select current line in "List" table
 		And "ItemList" table became equal
-			| Title               | Unit  | In stock | Price  | Picked out |
-			| Dress               | '*'   | '*'     | '*'    | '*'         |
-			| Trousers            | '*'   | '*'     | '*'    | '*'         |
-			| Shirt               | '*'   | '*'     | '*'    | '*'         |
+			| Title                | Unit | In stock | Price | Picked out |
+			| Dress                | '*'  | '*'      | '*'   | '*'        |
+			| Trousers             | '*'  | '*'      | '*'   | '*'        |
+			| Shirt                | '*'  | '*'      | '*'   | '*'        |
 	* Check selection updates when choosing another type of item
 		And I click Select button of "Item type" field
 		And I go to line in "List" table

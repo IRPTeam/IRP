@@ -14,12 +14,19 @@ To specify the commercial terms of cooperation
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
-
-Scenario: _012001 adding partners (customers) to a segment (register)
-	* Preparation
+Scenario: _012000 preparation (partners term)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog PartnerSegments objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog PriceTypes objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog ItemSegments objects
+
+
+
+Scenario: _012001 adding partners (customers) to a segment (register)
 	* Opening a register for Partner segments content
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/InformationRegister.PartnerSegments"
@@ -144,12 +151,7 @@ Scenario: _012003 filling in the segment of managers in the customers
 	
 
 
-Scenario: _012004 create common Partner term
-	* Preparation
-		When Create catalog Companies objects (Main company)
-		When Create catalog Stores objects
-		When Create catalog PriceTypes objects
-		When Create chart of characteristic types CurrencyMovementType objects
+Scenario: _012004 create common Partner term	
 	* Opening an Partner term catalog
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 	* Creating and checking customer Partner term Basic Partner terms, TRY
@@ -401,9 +403,7 @@ Scenario: _012005 creation of an individual Partner term in USD
 	
 
 Scenario: _012007 create common Partner term with Item Segment
-	* Preparation
-		When Create catalog ItemSegments objects
-	* Opening an Partner term catalog
+		* Opening an Partner term catalog
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 	* Creating common Partner term with Item Segment
 		And I click the button named "FormCreate"

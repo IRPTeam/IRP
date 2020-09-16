@@ -14,6 +14,28 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
+Scenario: _016501 preparation
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		
 Scenario: _016501 create document Internal Supply Request
 	* Opening the creation form Internal Supply Request
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
@@ -119,20 +141,20 @@ Scenario: _016501 create document Internal Supply Request
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
 		And "List" table contains lines
 			| 'Quantity' | 'Recorder'                   | 'Store'    | 'Order'                           | 'Item key' |
-			| '25,000'   | '$$InventoryTransferOrder$$' | 'Store 01' | '$$InternalSupplyRequest016501$$' | '36/Red'   |
-			| '20,000'   | '$$InventoryTransferOrder$$' | 'Store 01' | '$$InternalSupplyRequest016501$$' | '38/Black' |
+			| '25,000'   | '$$InventoryTransferOrder016501$$' | 'Store 01' | '$$InternalSupplyRequest016501$$' | '36/Red'   |
+			| '20,000'   | '$$InventoryTransferOrder016501$$' | 'Store 01' | '$$InternalSupplyRequest016501$$' | '38/Black' |
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
 		And "List" table contains lines
 			| 'Quantity' | 'Recorder'                   | 'Store'    | 'Item key' |
-			| '25,000'   | '$$InventoryTransferOrder$$' | 'Store 03' | '36/Red'   |
-			| '20,000'   | '$$InventoryTransferOrder$$' | 'Store 03' | '38/Black' |
+			| '25,000'   | '$$InventoryTransferOrder016501$$' | 'Store 03' | '36/Red'   |
+			| '20,000'   | '$$InventoryTransferOrder016501$$' | 'Store 03' | '38/Black' |
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
 		And "List" table contains lines
 			| 'Quantity' | 'Recorder'                   | 'Store sender' | 'Store receiver' | 'Order'                      | 'Item key' |
-			| '25,000'   | '$$InventoryTransferOrder$$' | 'Store 03'     | 'Store 01'       | '$$InventoryTransferOrder$$' | '36/Red'   |
-			| '20,000'   | '$$InventoryTransferOrder$$' | 'Store 03'     | 'Store 01'       | '$$InventoryTransferOrder$$' | '38/Black' |
+			| '25,000'   | '$$InventoryTransferOrder016501$$' | 'Store 03'     | 'Store 01'       | '$$InventoryTransferOrder016501$$' | '36/Red'   |
+			| '20,000'   | '$$InventoryTransferOrder016501$$' | 'Store 03'     | 'Store 01'       | '$$InventoryTransferOrder016501$$' | '38/Black' |
 		And I close all client application windows
 	* Create a Purchase order based on the InternalSupplyRequest document
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"

@@ -3,7 +3,7 @@
 @Positive
 
 
-Feature: filling in exchange rates in registers
+Feature: filling in currency rates in registers
 
 As an accountant
 I want to fill out the exchange rate
@@ -14,10 +14,15 @@ Background:
 
 
 
+Scenario: _006100 preparation (filling in currency rates)
+	When Create catalog Currencies objects
+	Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
+	If "List" table does not contain line Then
+		| "Description" |
+		| "Forex Seling" |
+		When create setting to download the course (Forex Seling)
+
 Scenario: _006101 filling in exchange rates in registers
-	* Preparation
-		When Create catalog Currencies objects
-		When Create catalog IntegrationSettings objects (currency source)
 	* Opening of register CurrencyRates
 		Given I open hyperlink "e1cib/list/InformationRegister.CurrencyRates"
 	* Filling the lira to euro rate

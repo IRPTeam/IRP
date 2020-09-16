@@ -455,7 +455,6 @@ foreach ($elementTag in $TagArray) {
     'DownloadFeaturesOpen': 1,
     'platformversiongenerateepf': 'C:\\Program Files\\1cv8\\8.3.15.1869\\bin\\',
     'usersettingsprovider': 'FILE',
-    'testclientports': "$port - $portmax"
     'RunningScripts': {
       'makestepsasync': false,
       'SpacingStepSpecifiedUser': 0.1,
@@ -541,6 +540,7 @@ foreach ($elementTag in $TagArray) {
   $a | Add-Member -Type NoteProperty -Name 'outputscreenshot' -Value '%system.teamcity.build.tempDir%'
   $a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value "%system.teamcity.build.tempDir%\errors$elementTag"
   $a | Add-Member -Type NoteProperty -Name 'textlogname' -Value $ScriptLogFilePath
+  $a | Add-Member -Type NoteProperty -Name 'testclientports' -Value "$port - $portmax"
   $a.AllureReport | Add-Member -Type NoteProperty -Name 'directorytobuildhierarchy' -Value '%env.VA.FeaturePath%'
   $a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepath' -Value "$allurePath/$elementTag"
   #$a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepathbase' -Value "$allurePath/base"

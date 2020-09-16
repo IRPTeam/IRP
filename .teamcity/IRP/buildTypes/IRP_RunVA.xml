@@ -419,22 +419,22 @@ foreach ($elementTag in $a) {
           <param name="jetbrains_powershell_noprofile" value="true" />
           <param name="jetbrains_powershell_script_code"><![CDATA[If ("%env.RunAllTest%" -eq "true"){
     Write-Output "One time start full test"
-	$a = @("Group1", "Group2", "Group3", "Group4", "Group5", "Group6", "Group7", "Group8", "Group9", "Group10", "Group11", "Group12", "Group13", "Group14", "Group15", "Group16", "Group17", "Group18")
+	$TagArray = @("Group1", "Group2", "Group3", "Group4", "Group5", "Group6", "Group7", "Group8", "Group9", "Group10", "Group11", "Group12", "Group13", "Group14", "Group15", "Group16", "Group17", "Group18")
   }elseif ("%dep.IRP_GitHubUpdate.env.Database1CName%" -eq "%teamcity.project.id%_develop")
   {
     Write-Output "Start full test"
-	$a = @("Group1", "Group2", "Group3", "Group4", "Group5", "Group6", "Group7", "Group8", "Group9", "Group10", "Group11", "Group12", "Group13", "Group14", "Group15", "Group16", "Group17", "Group18")
+	$TagArray = @("Group1", "Group2", "Group3", "Group4", "Group5", "Group6", "Group7", "Group8", "Group9", "Group10", "Group11", "Group12", "Group13", "Group14", "Group15", "Group16", "Group17", "Group18")
   }elseif ("%dep.IRP_GitHubUpdate.env.Database1CName%" -like "%teamcity.project.id%_develop*")
   {
     Write-Output "Start short test"
- 	$a = @("CatalogForms", "DocumentForms", "OtherForms")	
+ 	$TagArray = @("CatalogForms", "DocumentForms", "OtherForms")	
   }else{
       Write-Output "Skip tests"
   }
   
 $VA_PID_Array = @{}
 New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%/allure/base"
-foreach ($elementTag in $a) {
+foreach ($elementTag in $TagArray) {
   $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
   Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"
 
@@ -562,14 +562,19 @@ foreach ($elementTag in $a) {
   $Process.StartInfo = $ProcessInfo 
   $Process.Start() | Out-Null  
   $VA_PID = $Process.Id 
-  $VA_PID_Array.Add($elementTag, $VA_PID)
+  $global:VA_PID_Array.Add($elementTag, $Process.Id)
   echo "##teamcity[setParameter name='env.VA_PID' value='$VA_PID']"
 }
   ######################################################################################
+  $global:JobArray = @()
+
+$JobTail = {
+  Param($elementTag, $VA_PID_Array)
+  
 foreach ($elementTag in $a) {
   $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
-  Write-Output "##teamcity[compilationStarted compiler='$ScriptLogFilePath']"
-  $processID = $VA_PID_Array.$elementTag
+  #Write-Output "##teamcity[compilationStarted compiler='$ScriptLogFilePath']"
+  $processID = $VA_PID_Array[$elementTag]
   Write-Host "VA PID $processID"
   while (!(Test-Path $ScriptLogFilePath)) { 
       If(Get-Process -id $processID -ErrorAction SilentlyContinue ){
@@ -604,11 +609,27 @@ foreach ($elementTag in $a) {
   } else {
       Write-Host "File $ScriptLogFilePath not found. Skip read tail log"
   }        
-  Write-Host "##teamcity[progressStart 'Read VA steps']"
-  Start-Sleep 10
-  Write-Output "##teamcity[compilationFinished compiler='$ScriptLogFilePath']"
-  Write-Output "##teamcity[compilationFinished compiler='VA settings $elementTag']"
-}]]></param>
+}
+
+
+  foreach ($elementTag in $TagArray) {
+    #JobTail -elementTag $elementTag -VA_PID_Array  $global:VA_PID_Array
+    $JobTailProc = start-job -scriptBlock $JobTail -ArgumentList $elementTag,$global:VA_PID_Array
+    $global:JobArray += ($JobTailProc)
+  
+  } 
+  do {
+      Start-Sleep 1
+
+      foreach($job in $global:JobArray){
+        $job | Receive-Job
+        if(!($job.State -eq "Running")){
+          $global:JobArray = $global:JobArray | Where-Object { $_ –ne $job } 
+        }
+      }
+
+      Write-Host "Count job " $global:JobArray 
+    } while($global:JobArray.count)]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>

@@ -383,8 +383,10 @@ Procedure CurrencyOnChange2(Object, Form, Module, Item = Undefined, Settings  = 
 		Module.CurrencyOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 	EndIf;
 	CurrencySettings = Module.CurrencySettings(Object, Form, AddInfo);
-
-	CurrenciesClient.FullRefreshTable(Object, Form, AddInfo);
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+	If ServerData <> Undefined Then
+		CurrenciesClient.FullRefreshTable(Object, Form, AddInfo);
+	EndIf;
 EndProcedure
 
 #EndRegion

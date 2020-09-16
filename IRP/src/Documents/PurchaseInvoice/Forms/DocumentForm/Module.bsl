@@ -428,10 +428,7 @@ Procedure TaxTreeOnChange(Item, AddInfo = Undefined)
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 	
 	
-	Filter = TaxesClient.ChangeTaxAmount(Object, ThisObject, CurrentData, Object.ItemList, Undefined, AddInfo);
-	//opt
-	//CreateTaxTree_AtClient();
-	//ThisObject.Items.TaxTree.CurrentRow = TaxesClient.FindRowInTree(Filter, ThisObject.TaxTree);
+	TaxesClient.ChangeTaxAmount(Object, ThisObject, CurrentData, Object.ItemList, Undefined, AddInfo);
 EndProcedure
 
 &AtClient
@@ -671,9 +668,7 @@ Procedure SelectGoodsReceiptContinue(Result, AdditionalParameters) Export
 		EndIf;
 	EndDo;	
 	SelectGoodsReceiptFinish(ArrayOfBasisDocuments);
-	//opt
-	//Taxes_CreateTaxTree();
-	//CreateTaxTree_AtClient();
+	
 	SetTaxTreeRelevance(False);
 	Taxes_CreateFormControls();
 	SetLockedRowsByGoodsReceipts();
@@ -897,6 +892,8 @@ Procedure UpdateGoodsReceiptsTree()
 		NewRow0.ItemKey           = Row.ItemKey;
 		NewRow0.QuantityInInvoice = Row.Quantity;
 		
+		ArrayOfGoodsReceipts = Object.GoodsReceipts.FindRows(New Structure("Key", Row.Key));
+		
 		For Each ItemOfArray In ArrayOfGoodsReceipts Do
 			NewRow1 = NewRow0.GetItems().Add();
 			NewRow1.Level                  = 2;
@@ -952,137 +949,9 @@ EndProcedure
 Procedure GoodsReceiptsTreeBeforeDeleteRow(Item, Cancel)
 	Cancel = True;
 EndProcedure
-
 	
 #EndRegion
 
-
-//NEW
-
-//&AtServerNoContext
-//Function PrepareServerData_AtServerNoContext(Parameters)
-//	Result = New Structure();
-//	
-//	If Parameters.Property("ArrayOfMovementsTypes") Then
-//		Result.Insert("ArrayOfCurrenciesByMmovementTypes", GetCurrencyByMovementType_AtServerNoContext(Parameters.ArrayOfMovementsTypes));
-//	EndIf;
-//	
-//	If Parameters.Property("TaxesCache") Then
-//		ArrayOfTaxInfo = New Array;
-//		If ValueIsFilled(Parameters.TaxesCache) Then
-//			SavedData = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.TaxesCache);
-//			If SavedData.Property("ArrayOfColumnsInfo") Then
-//				ArrayOfTaxInfo = SavedData.ArrayOfColumnsInfo;
-//				For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
-//					ItemOfTaxInfo.Insert("TaxTypeIsRate", ItemOfTaxInfo.Type = Enums.TaxType.Rate);
-//				EndDo;
-//			EndIf;
-//		EndIf;
-//		Result.Insert("ArrayOfTaxInfo", ArrayOfTaxInfo);
-//	EndIf;
-//	
-//	If Parameters.Property("GetManagerSegmentByPartner") Then
-//		Result.Insert("ManagerSegmentByPartner", DocumentsServer.GetManagerSegmentByPartner(Parameters.GetManagerSegmentByPartner.Partner));
-//	EndIf;
-//	
-//	If Parameters.Property("GetLegalNameByPartner") Then
-//		Result.Insert("LegalNameByPartner", DocumentsServer.GetLegalNameByPartner(Parameters.GetLegalNameByPartner.Partner, 
-//																				  Parameters.GetLegalNameByPartner.LegalName));
-//	EndIf;
-//	
-//	If Parameters.Property("GetPartnerSettings") Then
-//		Result.Insert("PartnerSettings", GetPartnerSettings_AtServerNoContext());
-//	EndIf;
-//	
-//	If Parameters.Property("GetAgreementByPartner") Then
-//		Result.Insert("AgreementParameters", GetAgreementParameters_AtServerNoContext(Parameters.GetAgreementByPartner.Partner, 
-//																					  Parameters.GetAgreementByPartner.Agreement, 
-//																					  Parameters.GetAgreementByPartner.Date));
-//		Result.Insert("AgreementByPartner" , DocumentsServer.GetAgreementByPartner(Result.AgreementParameters));
-//	EndIf;
-//	
-//	If Parameters.Property("GetAgreementInfo") Then
-//		Result.Insert("AgreementInfo", CatAgreementsServer.GetAgreementInfo(Parameters.GetAgreementInfo.Agreement));
-//	EndIf;
-//	
-//	If Parameters.Property("GetArrayOfCurrenciesRows") Then
-//		CurrenciesColumns = Metadata.Documents.PurchaseInvoice.TabularSections.Currencies.Attributes;
-//		CurrenciesTable = New ValueTable();
-//		CurrenciesTable.Columns.Add("Key"             , CurrenciesColumns.Key.Type);
-//		CurrenciesTable.Columns.Add("CurrencyFrom"    , CurrenciesColumns.CurrencyFrom.Type);
-//		CurrenciesTable.Columns.Add("Rate"            , CurrenciesColumns.Rate.Type);
-//		CurrenciesTable.Columns.Add("ReverseRate"     , CurrenciesColumns.ReverseRate.Type);
-//		CurrenciesTable.Columns.Add("ShowReverseRate" , CurrenciesColumns.ShowReverseRate.Type);
-//		CurrenciesTable.Columns.Add("Multiplicity"    , CurrenciesColumns.Multiplicity.Type);
-//		CurrenciesTable.Columns.Add("MovementType"    , CurrenciesColumns.MovementType.Type);
-//		CurrenciesTable.Columns.Add("Amount"          , CurrenciesColumns.Amount.Type);
-//		
-//		If Result.Property("AgreementInfo") Then
-//			AgreementInfo = Result.AgreementInfo;
-//		Else
-//			AgreementInfo = CatAgreementsServer.GetAgreementInfo(Parameters.GetArrayOfCurrenciesRows.Agreement);
-//		EndIf;
-//		
-//		CurrenciesServer.FillCurrencyTable(New Structure("Currencies", CurrenciesTable), 
-//	                                   Parameters.GetArrayOfCurrenciesRows.Date, 
-//	                                   Parameters.GetArrayOfCurrenciesRows.Company, 
-//	                                   Parameters.GetArrayOfCurrenciesRows.Currency, 
-//	                                   Parameters.GetArrayOfCurrenciesRows.UUID,
-//	                                   AgreementInfo);
-//	    
-//	    ArrayOfCurrenciesRows = New Array();                               
-//	    For Each RowCurrenciesTable In CurrenciesTable Do
-//	    	NewRow = New Structure("Key, CurrencyFrom, Rate, ReverseRate, ShowReverseRate, Multiplicity, MovementType, Amount");
-//	    	FillPropertyValues(NewRow, RowCurrenciesTable);
-//	    	ArrayOfCurrenciesRows.Add(NewRow);
-//	    EndDo;
-//	    
-//	    Result.Insert("ArrayOfCurrenciesRows", ArrayOfCurrenciesRows);		
-//	EndIf;
-//	
-//	If Parameters.Property("GetMetaDataStructure") Then
-//		Result.Insert("MetaDataStructure", ServiceSystemServer.GetMetaDataStructure(Parameters.GetMetaDataStructure.Ref));
-//	EndIf;
-//	
-//	Return Result;
-//EndFunction	
-
-//&AtServerNoContext
-//Function GetPartnerSettings_AtServerNoContext()
-//	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AgreementType");
-//	
-//	Actions = New Structure();
-//	Actions.Insert("ChangeLegalName"		, "ChangeLegalName");
-//	Actions.Insert("ChangeAgreement"		, "ChangeAgreement");
-//	Settings.Actions = Actions;
-//	
-//	Settings.ObjectAttributes 	= "Company, Currency, PriceIncludeTax, Agreement, LegalName";
-//	Settings.FormAttributes		= "CurrentPriceType";
-//	Settings.AgreementType      = Enums.AgreementTypes.Vendor;
-//	Return Settings;
-//EndFunction
-//
-//&AtServerNoContext
-//Function GetAgreementParameters_AtServerNoContext(Partner, Agreement, Date)
-//	AgreementParameters = New Structure();
-//	AgreementParameters.Insert("Partner"		, Partner);
-//	AgreementParameters.Insert("Agreement"		, Agreement);
-//	AgreementParameters.Insert("CurrentDate"	, Date);
-//	AgreementParameters.Insert("AgreementType"	, Enums.AgreementTypes.Vendor);
-//	
-//	Return AgreementParameters;
-//EndFunction	
-
-//&AtServerNoContext
-//Function GetCurrencyByMovementType_AtServerNoContext(ArrayOfMovementsTypes)
-//	ArrayOfCurrenciesByMmovementTypes = New Array();
-//	For Each MovementType In ArrayOfMovementsTypes Do
-//		ArrayOfCurrenciesByMmovementTypes.Add(New Structure("MovementType, Currency", MovementType, MovementType.Currency));
-//	EndDo;
-//	Return ArrayOfCurrenciesByMmovementTypes;
-//EndFunction
-	
-//for delete
 &AtServer
 Procedure Taxes_CreateTaxTree() Export
 	TaxesTreeParameters = TaxesServer.GetCreateTaxTreeParameters();
@@ -1096,5 +965,3 @@ Procedure Taxes_CreateTaxTree() Export
 	TaxesTreeParameters.Level3Columns = "Key, Analytics";
 	TaxesServer.CreateTaxTree(Object, ThisObject, TaxesTreeParameters);
 EndProcedure
-
-

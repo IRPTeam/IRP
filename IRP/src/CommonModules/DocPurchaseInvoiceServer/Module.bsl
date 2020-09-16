@@ -247,6 +247,7 @@ Function CreateTable_GoodsReceipts()
 	GoodsReceiptsTable.Columns.Add("Key", ColumnsMetadata.Key.Type);
 	GoodsReceiptsTable.Columns.Add("GoodsReceipt", ColumnsMetadata.GoodsReceipt.Type);
 	GoodsReceiptsTable.Columns.Add("Quantity", ColumnsMetadata.Quantity.Type);
+	GoodsReceiptsTable.Columns.Add("QuantityInGoodsReceipt", ColumnsMetadata.Quantity.Type);
 	GoodsReceiptsTable.Columns.Add("Ref" , New TypeDescription("DocumentRef.PurchaseOrder"));
 	Return GoodsReceiptsTable;
 EndFunction
@@ -272,11 +273,11 @@ Procedure FillDocumentWithGoodsReceiptArray(Object, Form, ArrayOfBasisDocuments)
 		NewRow.GoodsReceipt = Row.GoodsReceipt;
 		NewRow.Key = New UUID(Row.RowKey);
 		NewRow.Quantity = Row.Quantity;
+		NewRow.QuantityInGoodsReceipt = Row.Quantity;
 	EndDo;
 	
 	ValueTable.GroupBy("Order, ItemKey, RowKey", "Quantity");
-	GoodsReceiptsTable.GroupBy("GoodsReceipt, Key, Ref", "Quantity");
-	
+	GoodsReceiptsTable.GroupBy("GoodsReceipt, Key, Ref", "Quantity, QuantityInGoodsReceipt");
 	
 	Query = New Query();
 	Query.Text =
@@ -522,9 +523,10 @@ Procedure FillDocumentWithGoodsReceiptArray(Object, Form, ArrayOfBasisDocuments)
 			Row_GoodsReceipts = Object.GoodsReceipts.Add();
 		EndIf;
 		
-		Row_GoodsReceipts.Key          = Row.Key;
-		Row_GoodsReceipts.GoodsReceipt = Row.GoodsReceipt;
-		Row_GoodsReceipts.Quantity     = Row.Quantity;
+		Row_GoodsReceipts.Key                    = Row.Key;
+		Row_GoodsReceipts.GoodsReceipt           = Row.GoodsReceipt;
+		Row_GoodsReceipts.Quantity               = Row.Quantity;
+		Row_GoodsReceipts.QuantityInGoodsReceipt = Row.QuantityInGoodsReceipt;
 	EndDo;
 EndProcedure
 

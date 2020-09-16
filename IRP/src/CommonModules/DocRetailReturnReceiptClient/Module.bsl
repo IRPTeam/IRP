@@ -489,3 +489,7 @@ EndProcedure
 
 #EndRegion
 
+Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
+	Return New Structure();
+EndFunction
+

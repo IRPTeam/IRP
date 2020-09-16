@@ -235,7 +235,7 @@ foreach ($elementTag in $a) {
   $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
   Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"
 
-  $allurePath = "%system.teamcity.build.workingDir%/allureTmp" | ForEach-Object { $_ -replace '\\', '/' }
+  $allurePath = "%system.teamcity.build.workingDir%/allure" | ForEach-Object { $_ -replace '\\', '/' }
   $TempDb = "'/F%system.teamcity.build.workingDir%\TempDB'" | ForEach-Object { $_ -replace '\\', '/' }
   #$TempDb = "'/Slocalhost/%env.Database1CName%'" | ForEach-Object { $_ -replace '\\', '/' }
   $connection = "' /N %env.LoginTo1C% /P %env.PassTo1C% /Len /UseHwLicenses+ /TComp -SDC  /DisableStartupMessages /DisplayPerformance /DisplayAllFunctions /EnableCheckModal /EnableCheckExtensionsAndAddInsSyncCalls /DEBUG -http -attach /DEBUGGERURL http://localhost:%env.DebugPort%'"
@@ -280,8 +280,6 @@ foreach ($elementTag in $a) {
     },
     'allurecreatereport': true,
     'AllureReport': {
-      'allurepath': '$allurePath/tmp',
-      'allurepathbase': '$allurePath/base',
       'reportlevel1': '#report.epic=;catalog1',
       'reportlevel2': '#report.feature=;catalog2',
       'reportlevel3': '#report.story=;scenarioname',
@@ -338,6 +336,9 @@ foreach ($elementTag in $a) {
   $a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value "%system.teamcity.build.tempDir%\errors$elementTag"
   $a | Add-Member -Type NoteProperty -Name 'textlogname' -Value $ScriptLogFilePath
   $a.AllureReport | Add-Member -Type NoteProperty -Name 'directorytobuildhierarchy' -Value '%env.VA.FeaturePath%'
+  $a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepath' -Value "$allurePath/tmp$elementTag"
+  $a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepathbase' -Value "$allurePath/base"
+  
   $a.librarycatalogs += '%system.teamcity.build.workingDir%\DataProcessor'
   $a.librarycatalogs += '%env.VA.FeaturePath%External'
   $a.filtertags += $elementTag
@@ -403,7 +404,7 @@ foreach ($elementTag in $a) {
   }        
   Write-Host "##teamcity[progressStart 'Read VA steps']"
   Start-Sleep 10
-  Copy-Item -Path "allureTmp\base\*" -Destination "allure\base" -Recurse
+  #Copy-Item -Path "allureTmp\base\*" -Destination "allure\base" -Recurse
   Write-Output "##teamcity[compilationFinished compiler='$ScriptLogFilePath']"
   Write-Output "##teamcity[compilationFinished compiler='VA settings $elementTag']"
 }]]></param>

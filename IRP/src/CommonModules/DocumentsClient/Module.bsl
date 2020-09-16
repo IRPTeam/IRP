@@ -1963,13 +1963,12 @@ EndProcedure
 Procedure ItemListUnitOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined, AddInfo = Undefined) Export
 	
 	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
-	ItemListUnitSettings = Module.ItemListUnitSettings(Form);
+	ItemListUnitSettings = Module.ItemListUnitSettings(Object, Form);
 	If ItemListUnitSettings.Property("PutServerDataToAddInfo") And ItemListUnitSettings.PutServerDataToAddInfo Then
 		Module.ItemListUnitOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 	EndIf;
-	ItemListUnitSettings = Module.ItemListUnitSettings(Form, AddInfo);
+	ItemListUnitSettings = Module.ItemListUnitSettings(Object, Form, AddInfo);
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
-	
 	
 	CurrentRow = Form.Items.ItemList.CurrentData;
 	If CurrentRow = Undefined Then
@@ -2002,11 +2001,11 @@ EndProcedure
 Procedure ItemListPriceTypeOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined, AddInfo = Undefined) Export
 	
 	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
-	ItemListPriceTypeSettings = Module.ItemListPriceTypeSettings(Form);
+	ItemListPriceTypeSettings = Module.ItemListPriceTypeSettings(Object, Form);
 	If ItemListPriceTypeSettings.Property("PutServerDataToAddInfo") And ItemListPriceTypeSettings.PutServerDataToAddInfo Then
 		Module.ItemListPriceTypeOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 	EndIf;
-	ItemListPriceTypeSettings = Module.ItemListPriceTypeSettings(Form, AddInfo);
+	ItemListPriceTypeSettings = Module.ItemListPriceTypeSettings(Object, Form, AddInfo);
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
 	
 	CurrentRow = Form.Items.ItemList.CurrentData;

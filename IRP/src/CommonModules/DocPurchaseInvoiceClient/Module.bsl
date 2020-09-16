@@ -272,7 +272,7 @@ Procedure ItemListPriceTypeOnChangePutServerDataToAddInfo(Object, Form, AddInfo 
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 EndProcedure
 
-Function ItemListPriceTypeSettings(Form, AddInfo = Undefined) Export
+Function ItemListPriceTypeSettings(Object, Form, AddInfo = Undefined) Export
 	If AddInfo = Undefined Then
 		Return New Structure("PutServerDataToAddInfo", True);
 	EndIf;
@@ -312,7 +312,7 @@ Procedure ItemListUnitOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Und
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 EndProcedure
 
-Function ItemListUnitSettings(Form, AddInfo = Undefined) Export	
+Function ItemListUnitSettings(Object, Form, AddInfo = Undefined) Export	
 	If AddInfo = Undefined Then
 		Return New Structure("PutServerDataToAddInfo", True);
 	EndIf;

@@ -149,7 +149,7 @@ Procedure ItemListPriceTypeOnChange(Object, Form, Item = Undefined) Export
 	DocumentsClient.ItemListPriceTypeOnChange(Object, Form, ThisObject, Item);
 EndProcedure
 
-Function ItemListPriceTypeSettings() Export
+Function ItemListPriceTypeSettings(Object, Form, AddInfo = Undefined) Export
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
 	Actions = New Structure();
 	Settings.Actions = Actions;
@@ -162,7 +162,7 @@ Procedure ItemListUnitOnChange(Object, Form, Item = Undefined) Export
 	DocumentsClient.ItemListUnitOnChange(Object, Form, ThisObject, Item);
 EndProcedure
 
-Function ItemListUnitSettings() Export	
+Function ItemListUnitSettings(Object, Form, AddInfo = Undefined) Export	
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
 	Actions = New Structure();
 	Settings.Actions = Actions;

@@ -498,7 +498,7 @@ If ($Proc) {
           <param name="jetbrains_powershell_noprofile" value="true" />
           <param name="jetbrains_powershell_script_code"><![CDATA[New-Item -Path "allure\base" -Name "history" -ItemType "directory" -Force
 Copy-Item -Path "allure-history\*" -Destination "allure\base\history" -Force
-%teamcity.tool.allure-commandline%\bin\allure.bat generate "allure/base" --clean -o "allure-report"
+%teamcity.tool.allure-commandline%\bin\allure.bat generate allure/* --clean -o "allure-report"
 Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />

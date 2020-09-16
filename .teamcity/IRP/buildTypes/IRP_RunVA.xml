@@ -13,7 +13,6 @@
       <setting-ref ref="RUNNER_10" />
       <setting-ref ref="RUNNER_12" />
       <setting-ref ref="RUNNER_29" />
-      <setting-ref ref="RUNNER_6" />
     </disabled-settings>
     <parameters>
       <param name="env.CloseVA" value="true" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />

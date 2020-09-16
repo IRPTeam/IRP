@@ -738,7 +738,7 @@ Procedure CompanyOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefine
 	EndDo;
 	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
 	ParametersToServer.Insert("GetAgreementInfo", New Structure("Agreement", Object.Agreement));	
-	
+	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
 	ParametersToServer.Insert("TaxesCache", 
 	New Structure ("Cache, Ref, Date, Company", 
 	Form.TaxesCache, Object.Ref, Object.Date, Object.Company));

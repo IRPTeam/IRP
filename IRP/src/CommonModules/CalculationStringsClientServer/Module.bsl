@@ -92,6 +92,13 @@ Procedure UpdateDataCollectionByArrayOfStructures(DataCollection, ArrayOfStructu
 		EndIf;
 	EndDo;
 EndProcedure	
+
+Procedure FillDataCollectionByArrayOfStructures(DataCollection, ArrayOfStructures, ColumnNames) Export
+	DataCollection.Clear();
+	For Each Row In ArrayOfStructures Do
+		FillPropertyValues(DataCollection.Add(), Row);
+	EndDo;
+EndProcedure	
 		
 Procedure CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Undefined, AddInfo = Undefined) Export
 	If Not Actions.Count() Then
@@ -124,8 +131,8 @@ Procedure CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = U
 											 AddInfo);	
 		
 		UpdateDataCollectionByArrayOfStructures(Object.ItemList      , ObjectAsStructure.ItemList      , ColumnNames_ItemList);
-		UpdateDataCollectionByArrayOfStructures(Object.TaxList       , ObjectAsStructure.TaxList       , ColumnNames_TaxList);		                                        
-		UpdateDataCollectionByArrayOfStructures(Object.SpecialOffers , ObjectAsStructure.SpecialOffers , ColumnNames_SpecilaOffers);									 
+		FillDataCollectionByArrayOfStructures(Object.TaxList         , ObjectAsStructure.TaxList       , ColumnNames_TaxList);		                                        
+		FillDataCollectionByArrayOfStructures(Object.SpecialOffers   , ObjectAsStructure.SpecialOffers , ColumnNames_SpecilaOffers);									 
 											 	
 	Else
 		For Each ItemRow In ItemRows Do

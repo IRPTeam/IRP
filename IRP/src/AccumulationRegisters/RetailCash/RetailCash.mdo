@@ -29,19 +29,6 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
-  <resources uuid="53a1786f-09fb-4a63-bf77-a6d8f750e64b">
-    <name>Percent</name>
-    <synonym>
-      <key>en</key>
-      <value>Percent</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typePercent</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
   <resources uuid="2ebf7488-6e51-45bc-848d-3cedd4010847">
     <name>Commission</name>
     <synonym>
@@ -90,6 +77,32 @@
     </synonym>
     <type>
       <types>CatalogRef.CashAccounts</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </dimensions>
+  <dimensions uuid="700f4c5a-7bf8-454a-817e-171122f59797">
+    <name>PaymentTerminal</name>
+    <synonym>
+      <key>en</key>
+      <value>Payment terminal</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.PaymentTerminals</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </dimensions>
+  <dimensions uuid="215625e3-6e0a-410b-a213-ba0005e4fd08">
+    <name>BankTerm</name>
+    <synonym>
+      <key>en</key>
+      <value>Bank term</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BankTerms</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

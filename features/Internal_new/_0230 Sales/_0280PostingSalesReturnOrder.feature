@@ -12,53 +12,119 @@ To track a product that needs to be returned from customer
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
+Scenario: _023000 preparation (Sales return order)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Partners objects (Kalipso)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	* Check or create SalesOrder023001
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesOrder023001$$" |
+			When create SalesOrder023001
+	* Check or create SalesOrder023005
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesOrder023005$$" |
+			When create SalesOrder023005
+	* Check or create SalesInvoice024001 based on SalesOrder023001
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesInvoice024001$$" |
+			When create SalesInvoice024001
+	* Check or create SalesInvoice024008 based on SalesOrder023005
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesInvoice024008$$" |
+			When create SalesInvoice024008
 
 Scenario: _028001 create document Sales return order, store use Goods receipt, based on Sales invoice + check status
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-	And I go to line in "List" table
-		| 'Number'                       | 'Partner'   |
-		| '$$NumberSalesInvoice024008$$' | 'Ferron BP' |
-	And I select current line in "List" table
-	And I click the button named "FormDocumentSalesReturnOrderGenerateSalesReturnOrder"
-	* Check the details
-		Then the form attribute named "Partner" became equal to "Ferron BP"
-		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-		Then the form attribute named "Agreement" became equal to "Basic Partner terms, without VAT"
-		Then the form attribute named "Company" became equal to "Main Company"
-	* Select store
-		And I click Select button of "Store" field
-		Then "Stores" window is opened
+	When create SalesReturnOrder028001
+	* Check for no movements in the registers
+		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+		And "List" table does not contain lines
+			| 'Quantity' | 'Recorder'              | 'Store'    | 'Order'              | 'Item key' |
+			| '1,000'    | '$$SalesReturnOrder028001$$' | 'Store 02' | '$$SalesReturnOrder028001$$' | 'L/Green'  |
+		And I close current window
+		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
+		And "List" table does not contain lines
+			| 'Quantity' | 'Recorder'              | 'Sales invoice'    | 'Item key' |
+			| '-1,000'   | '$$SalesReturnOrder028001$$' | '$$SalesInvoice024008$$' | 'L/Green'  |
+		And I close all client application windows
+	* And I set Wait status
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'  |
+			| 'Number' |
+			| '$$NumberSalesReturnOrder028001$$'      |
 		And I select current line in "List" table
-	And I select "Wait" exact value from "Status" drop-down list
-	And I move to "Item list" tab
-	And I go to line in "ItemList" table
-		| 'Item'     |
-		| 'Trousers' |
-	And I delete a line in "ItemList" table
-	And I activate "Q" field in "ItemList" table
-	And I select current line in "ItemList" table
-	And I input "1,000" text in "Q" field of "ItemList" table
-	And I input "466,10" text in "Price" field of "ItemList" table
-	And I finish line editing in "ItemList" table
-	// * Filling in the document number 1
-	// 	And I move to "Other" tab
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "1" text in "Number" field
-		And I move to "Item list" tab
-		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Store'    |
-		| 'Dress'    |  'L/Green'  | 'Store 02' |
-	And I click "Post" button
-	And I save the value of "Number" field as "$$NumberSalesReturnOrder028001$$"
-	And I save the window as "$$SalesReturnOrder028001$$"
-	And I click "Post and close" button
-	And I close all client application windows
+		And I click "Decoration group title collapsed picture" hyperlink
+		And I select "Wait" exact value from "Status" drop-down list
+		And I click "Post" button
+		And I select "Approved" exact value from "Status" drop-down list
+		And I click "Post" button
+	* Check history by status
+		And I click "History" hyperlink
+		And "List" table contains lines
+			| 'Object'                 | 'Status'   |
+			| '$$SalesReturnOrder028001$$' | 'Wait'     |
+			| '$$SalesReturnOrder028001$$' | 'Approved' |
+		And I close current window
+		And I click "Post and close" button
+
+
+Scenario: _028002 check  Sales  return order movements the OrderBalance register (store use Goods receipt, based on Sales invoice)  (+)
+	
+	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+	And "List" table contains lines
+		| 'Quantity' | 'Recorder'              | 'Store'    | 'Order'              | 'Item key' |
+		| '1,000'    | '$$SalesReturnOrder028001$$' | 'Store 02' | '$$SalesReturnOrder028001$$' | 'L/Green'  |
+
+Scenario: _028003 check  Sales  return order movements the SalesTurnovers register (store use Goods receipt, based on Sales invoice)  (-)
+	
+	Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
+	And "List" table contains lines
+		| 'Quantity' | 'Recorder'              | 'Sales invoice'    | 'Item key' |
+		| '-1,000'   | '$$SalesReturnOrder028001$$' | '$$SalesInvoice024008$$' | 'L/Green'  |
+
+
+Scenario: _028004 create document Sales return order, store doesn't use Goods receipt, based on Sales invoice
+	When create SalesReturnOrder028004
 	* Check for no movements in the registers
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
 		And "List" table does not contain lines
@@ -88,69 +154,6 @@ Scenario: _028001 create document Sales return order, store use Goods receipt, b
 		And I close current window
 		And I click "Post and close" button
 
-
-Scenario: _028002 check  Sales  return order movements the OrderBalance register (store use Goods receipt, based on Sales invoice)  (+)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'              | 'Store'    | 'Order'              | 'Item key' |
-		| '1,000'    | '$$SalesReturnOrder028001$$' | 'Store 02' | '$$SalesReturnOrder028001$$' | 'L/Green'  |
-
-Scenario: _028003 check  Sales  return order movements the SalesTurnovers register (store use Goods receipt, based on Sales invoice)  (-)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'              | 'Sales invoice'    | 'Item key' |
-		| '-1,000'   | '$$SalesReturnOrder028001$$' | '$$SalesInvoice024008$$' | 'L/Green'  |
-
-
-Scenario: _028004 create document Sales return order, store doesn't use Goods receipt, based on Sales invoice
-	
-	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-	And I go to line in "List" table
-		| 'Number' | 'Partner'     |
-		| '1'      |  'Ferron BP' |
-	And I select current line in "List" table
-	And I click the button named "FormDocumentSalesReturnOrderGenerateSalesReturnOrder"
-	* Check the details
-		Then the form attribute named "Partner" became equal to "Ferron BP"
-		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
-		Then the form attribute named "Description" became equal to "Click to enter description"
-		Then the form attribute named "Company" became equal to "Main Company"
-	And I click Select button of "Store" field
-	Then "Stores" window is opened
-	And I go to line in "List" table
-		| 'Description' |
-		| 'Store 01'  |
-	And I select current line in "List" table
-	And I select "Approved" exact value from "Status" drop-down list
-	And I move to "Item list" tab
-	And I go to line in "ItemList" table
-		| 'Item'  | 'Item key' |
-		| 'Dress' | 'L/Green'  |
-	And I select current line in "ItemList" table
-	And I activate "Q" field in "ItemList" table
-	And I input "2,000" text in "Q" field of "ItemList" table
-	And I input "550,00" text in "Price" field of "ItemList" table
-	And I finish line editing in "ItemList" table
-	And I go to line in "ItemList" table
-		| Item     | Item key  |
-		| Trousers | 36/Yellow |
-	And I select current line in "ItemList" table
-	And I input "400,00" text in "Price" field of "ItemList" table
-	And I finish line editing in "ItemList" table
-	// * Filling in the document number 2
-	// 	And I move to "Other" tab
-	// 	And I input "2" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "2" text in "Number" field
-	And I click "Post" button
-	And I save the value of "Number" field as "$$NumberSalesReturnOrder028004$$"
-	And I save the window as "$$SalesReturnOrder028004$$"
-	And I click "Post and close" button
-	And I close current window
 
 
 Scenario: _028005 check Sales return order movements the OrderBalance register (store doesn't use Goods receipt, based on Sales invoice)

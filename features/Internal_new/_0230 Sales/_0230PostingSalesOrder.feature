@@ -12,66 +12,49 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
+Scenario: _023000 preparation (Sales order)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	
+
+
+
+
 Scenario: _023001 create document Sales order - Shipment confirmation is not used
-	Given I open hyperlink "e1cib/list/Document.SalesOrder"
-	And I click the button named "FormCreate"
-	And I click Select button of "Partner" field
-	And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'  |
-	And I select current line in "List" table
-	And I click Select button of "Partner term" field
-	Then "Partner terms" window is opened
-	And I go to line in "List" table
-			| 'Description'       |
-			| 'Basic Partner terms, TRY' |
-	And I select current line in "List" table
-	And I click Select button of "Legal name" field
-	And I go to line in "List" table
-			| 'Description' |
-			| 'Company Ferron BP'  |
-	And I select current line in "List" table
-	* Filling in items table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item key' |
-			| 'L/Green'  |
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
-		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I finish line editing in "ItemList" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| Description |
-			| Trousers       |
-		And I select current line in "List" table
-		And I move to the next attribute
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "4,000" text in "Q" field of "ItemList" table
-		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Check store filling in the tabular section
-		And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    |
-		| 'Dress'    | '550,00' | 'L/Green'   | 'Store 01' |
-	* Check default sales order status
-		And I move to "Other" tab
-		Then the form attribute named "Status" became equal to "Approved"
-	* Filling Delivery date
-		And I input current date in the field named "DeliveryDate"
-	And I click "Post" button
-	And I save the window as "$$SalesOrder023001$$"
-	And I save the value of "Number" field as "$$NumberSalesOrder023001$$"
-	And I close current window
-	And I display "$$SalesOrder023001$$" variable value
+	When create SalesOrder023001
 
 Scenario: _023002 check Sales Order posting by register OrderBalance (+)
 	
@@ -98,33 +81,7 @@ Scenario: _023004 check Sales Order posting by register OrderReservation (+)
 	| '4,000'    | '$$SalesOrder023001$$' | 'Store 01' | '36/Yellow'   |
 
 Scenario: _023005 create document Sales order - Shipment confirmation used
-	Given I open hyperlink "e1cib/list/Document.SalesOrder"
-	And I click the button named "FormCreate"
-	* Filling in customer information
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'  |
-		And I select current line in "List" table
-		And I click Select button of "Partner term" field
-		And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Partner terms, without VAT' |
-		And I select current line in "List" table
-		And I click Select button of "Legal name" field
-		And I go to line in "List" table
-				| 'Description' |
-				| 'Company Ferron BP'  |
-		And I select current line in "List" table
-	When adding the items to the sales order (Dress and Trousers)
-	* Check default sales order status
-		And I move to "Other" tab
-		Then the form attribute named "Status" became equal to "Approved"
-	And I click "Post" button
-	And I save the window as "$$SalesOrder023005$$"
-	And I save the value of "Number" field as "$$NumberSalesOrder023005$$"
-	And I close current window
-	And I display "$$SalesOrder023005$$" variable value
+	When create SalesOrder023005
 
 Scenario: _023006 check Sales Order posting by register OrderBalance (+)
 	
@@ -220,5 +177,182 @@ Scenario: _023014 check movements by status and status history of a Sales Order 
 
 
 
+Scenario: _023101 displaying in the Sales order only available valid Partner terms for the selected customer
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'  |
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	And "List" table became equal
+		| 'Description'                   |
+		| 'Basic Partner terms, TRY'         |
+		| 'Basic Partner terms, $'           |
+		| 'Basic Partner terms, without VAT' |
+	And I select current line in "List" table
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'  |
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	And "List" table became equal
+		| 'Description'            |
+		| 'Basic Partner terms, TRY'         |
+		| 'Basic Partner terms, $'           |
+		| 'Basic Partner terms, without VAT' |
+		| 'Personal Partner terms, $' |
+	And I close current window
+	And I close current window
+	And I click "No" button
+	* Check that expired Partner terms are not displayed in the selection list
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+		And I go to line in "List" table
+		| 'Description'           |
+		| 'Basic Partner terms, $' |
+		And I select current line in "List" table
+		And I input "02.11.2018" text in "End of use" field
+		And I click "Save and close" button
+		And I close current window
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'  |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And "List" table became equal
+			| 'Description'                   |
+			| 'Basic Partner terms, TRY'         |
+			| 'Basic Partner terms, without VAT' |
+		And I close current window
+		And I close current window
+		And I click "No" button
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Basic Partner terms, $' |
+		And I select current line in "List" table
+		And I input "02.11.2019" text in "End of use" field
+		And I click "Save and close" button
+		And I close current window
+
+Scenario: _023102 select only your own companies in the Company field
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
+		| 'Description' |
+		| 'Ferron BP'  |
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	And I go to line in "List" table
+		| 'Description'           |
+		| 'Basic Partner terms, TRY' |
+	And I select current line in "List" table
+	And I click Select button of "Company" field
+	And "List" table became equal
+		| 'Description'  |
+		| 'Main Company' |
+	And I close current window
+	And I close current window
+	And I click "No" button
+
+Scenario: _023103 filling in Company field from the Partner term
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'  |
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	And I go to line in "List" table
+		| 'Description'           |
+		| 'Basic Partner terms, TRY' |
+	And I select current line in "List" table
+	Then the form attribute named "Company" became equal to "Main Company"
+	And I close current window
+	And I click "No" button
+
+
+Scenario: _023104 filling in Store field from the Partner term
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'  |
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	And I go to line in "List" table
+		| 'Description'       |
+		| 'Basic Partner terms, without VAT' |
+	And I select current line in "List" table
+	Then the form attribute named "Store" became equal to "Store 02"
+	And I click Select button of "Partner term" field
+	And I go to line in "List" table
+		| 'Description'       |
+		| 'Basic Partner terms, TRY' |
+	And I select current line in "List" table
+	Then the form attribute named "Store" became equal to "Store 01"
+	And I close current window
+	And I click "No" button
+
+Scenario: _023105 check that the Account field is missing from the order
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	And field "Account" is not present on the form
+
+
+Scenario: _023106 check the form of selection of items (sales order)
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'  |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+				| 'Description'       |
+				| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+				| 'Description' |
+				| 'Company Ferron BP'  |
+		And I select current line in "List" table
+	When check the product selection form with price information in Sales order
+	And in the table "ItemList" I click "% Offers" button
+	And in the table "Offers" I click the button named "FormOK"
+	And I click "Post and close" button
+	* Check Sales order Saving
+		And "List" table contains lines
+		| 'Currency'  | 'Partner'     | 'Status'   | 'Σ'         |
+		| 'TRY'       | 'Ferron BP'   | 'Approved' | '2 050,00'  |
+	And I close all client application windows
+
+
+
+
+Scenario: _023113 check totals in the document Sales order
+	* Open list form Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	* Select Sales order
+		And I go to line in "List" table
+		| Number |
+		| 1      |
+		And I select current line in "List" table
+	* Check for document results
+		Then the form attribute named "ItemListTotalOffersAmount" became equal to "0,00"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "3 686,44"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "663,56"
+		Then the form attribute named "ItemListTotalTotalAmount" became equal to "4 350,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 
 

@@ -11,74 +11,40 @@ To coordinate the transfer of items from one store to another
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
+Scenario: _020000 preparation
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+	When Create information register TaxSettings records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+
+
 # 1
 Scenario: _020001 create document Inventory Transfer Order - Store sender doesn't use Shipment confirmation, Store receiver use Goods receipt
-	* Opening a form to create Inventory transfer order
-		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
-		And I click the button named "FormCreate"
-	* Filling in Store sender and Store receiver
-		And I click Select button of "Store sender" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'  |
-		And I select current line in "List" table
-		And I click Select button of "Store receiver" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'  |
-		And I select current line in "List" table
-		And I select "Approved" exact value from "Status" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
-	// * Filling in the document number
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "201" text in "Number" field
-	* Filling in items table
-		And I move to "Item list" tab
-		And I click the button named "Add"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| Description |
-			| Dress       |
-		And I select current line in "List" table
-		And I move to the next attribute
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item key'  |
-			| 'M/White' |
-		And I select current line in "List" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I click the button named "FormChoose"
-		And I move to the next attribute
-		And I input "50,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| Description |
-			| Dress       |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item key'  |
-			| 'S/Yellow' |
-		And I select current line in "List" table
-		And I activate "Unit" field in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I click the button named "FormChoose"
-		And I move to the next attribute
-		And I input "10,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-	And I click "Post" button
-	And I save the value of "Number" field as "$$NumberInventoryTransferOrder020001$$"
-	And I save the window as "$$InventoryTransferOrder020001$$"
-	And I click "Post and close" button
+	When create InventoryTransferOrder020001
 
 Scenario: _020002 check Inventory transfer order posting by register TransferOrderBalance (Store sender doesn't use Goods receipt, Store receiver use Shipment confirmaton)
 checking Purchase Order N2 posting by register Order Balance (plus) - Goods receipt is not used
@@ -100,55 +66,7 @@ Scenario: _020003 check Inventory transfer order posting by register StockReserv
 
 # 2
 Scenario: _020004 create document Inventory Transfer Order- Store sender use Shipment confirmation, Store receiver use Goods receipt
-	* Opening a form to create Inventory transfer order
-		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
-		And I click the button named "FormCreate"
-	* Filling in Store sender and Store receiver
-		And I click Select button of "Store sender" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'  |
-		And I select current line in "List" table
-		And I click Select button of "Store receiver" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 03'  |
-		And I select current line in "List" table
-		And I select "Approved" exact value from "Status" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
-	// * Filling in the document number
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "202" text in "Number" field
-	* Filling in items table
-		And I move to "Item list" tab
-		And I click the button named "Add"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| Description |
-			| Dress       |
-		And I select current line in "List" table
-		And I move to the next attribute
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item key'  |
-			| 'L/Green' |
-		And I select current line in "List" table
-		And I activate "Unit" field in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I click the button named "FormChoose"
-		And I move to the next attribute
-		And I input "20,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-	And I click "Post" button
-	And I save the value of "Number" field as "$$NumberInventoryTransferOrder020004$$"
-	And I save the window as "$$InventoryTransferOrder020004$$"
-	And I click "Post and close" button
+	When create InventoryTransferOrder020004
 
 Scenario: _020005 check Inventory transfer order posting by register TransferOrderBalance (Store sender use Goods receipt, Store receiver use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
@@ -164,55 +82,7 @@ Scenario: _020006 check Inventory transfer order posting by register StockReserv
 
 # 3
 Scenario: _020007 create document Inventory Transfer Order- Store sender use Shipment confirmation, Store receiver doesn't use Goods receipt 
-	* Opening a form to create Inventory transfer order
-		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
-		And I click the button named "FormCreate"
-	* Filling in Store sender and Store receiver
-		And I click Select button of "Store sender" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'  |
-		And I select current line in "List" table
-		And I click Select button of "Store receiver" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'  |
-		And I select current line in "List" table
-		And I select "Approved" exact value from "Status" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
-	// * Filling in the document number
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "203" text in "Number" field
-	* Filling in items table
-		And I move to "Item list" tab
-		And I click the button named "Add"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| Description |
-			| Dress       |
-		And I select current line in "List" table
-		And I move to the next attribute
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item key'  |
-			| 'L/Green' |
-		And I select current line in "List" table
-		And I activate "Unit" field in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I click the button named "FormChoose"
-		And I move to the next attribute
-		And I input "17,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-	And I click "Post" button
-	And I save the value of "Number" field as "$$NumberInventoryTransferOrder020007$$"
-	And I save the window as "$$InventoryTransferOrder020007$$"
-	And I click "Post and close" button
+	When create InventoryTransferOrder020007
 
 
 Scenario: _020008 check Inventory transfer order posting by register TransferOrderBalance (Store sender use Goods receipt, Store receiver doesn't use Shipment confirmaton)
@@ -232,55 +102,7 @@ Scenario: _020009 check Inventory transfer order posting by register StockReserv
 
 # 4
 Scenario: _020010 create document Inventory Transfer Order- Store sender doesn't use Shipment confirmation, Store receiver doesn't use Goods receipt 
-	* Opening a form to create Inventory transfer order
-		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
-		And I click the button named "FormCreate"
-	* Filling in Store sender and Store receiver
-		And I click Select button of "Store sender" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'  |
-		And I select current line in "List" table
-		And I click Select button of "Store receiver" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 04'  |
-		And I select current line in "List" table
-		And I select "Approved" exact value from "Status" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
-	// * Filling in the document number
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "204" text in "Number" field
-	* Filling in items table
-		And I move to "Item list" tab
-		And I click the button named "Add"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| Description |
-			| Trousers       |
-		And I select current line in "List" table
-		And I move to the next attribute
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item key'  |
-			| '36/Yellow' |
-		And I select current line in "List" table
-		And I activate "Unit" field in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I click the button named "FormChoose"
-		And I move to the next attribute
-		And I input "10,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-	And I click "Post" button
-	And I save the value of "Number" field as "$$NumberInventoryTransferOrder020010$$"
-	And I save the window as "$$InventoryTransferOrder020010$$"
-	And I click "Post and close" button
+	When create InventoryTransferOrder020010
 
 Scenario: _020011 check Inventory transfer order posting by register TransferOrderBalance (Store sender doesn't use Goods receipt, Store receiver doesn't use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
@@ -360,7 +182,7 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 			Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
 			And I go to line in "List" table
 				| 'Number'   | 'Store sender' | 'Store receiver' |
-				| '205'      |  'Store 02'     | 'Store 03'       |
+				| '$$NumberInventoryTransferOrder020013$$'      |  'Store 02'     | 'Store 03'       |
 			And I select current line in "List" table
 			And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 			And I select "Approved" exact value from "Status" drop-down list

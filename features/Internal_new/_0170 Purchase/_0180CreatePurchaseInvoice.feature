@@ -13,6 +13,8 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 Scenario: _018000 preparation
+	* Constants
+		When set True value to the constant
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -41,34 +43,10 @@ Scenario: _018000 preparation
 		If "List" table does not contain lines Then
 				| "Description" |
 				| "TaxCalculateVAT_TR" |
-			* Opening a form to add Plugin sessing
-				Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-			* Addition of Plugin sessing for calculating Tax types for Turkey (VAT)
-				And I click the button named "FormCreate"
-				And I select external file "#workingDir#\DataProcessor\TaxCalculateVAT_TR.epf"
-				And I click the button named "FormAddExtDataProc"
-				And I input "" text in "Path to plugin for test" field
-				And I input "TaxCalculateVAT_TR" text in "Name" field
-				And I click Open button of the field named "Description_en"
-				And I input "TaxCalculateVAT_TR" text in the field named "Description_en"
-				And I input "TaxCalculateVAT_TR" text in the field named "Description_tr"
-				And I click "Ok" button
-				And I click "Save and close" button
-				And I wait "Plugins (create)" window closing in 10 seconds
-			* Check added processing
-				Then I check for the "ExternalDataProc" catalog element with the "Description_en" "TaxCalculateVAT_TR"
-				Given I open hyperlink "e1cib/list/Catalog.Taxes"		
-				And I go to line in "List" table
-					| 'Description' |
-					| 'VAT'         |
-				And I select current line in "List" table
-				And I click Select button of "Plugins" field
-				And I go to line in "List" table
-					| 'Description' |
-					| 'TaxCalculateVAT_TR'         |
-				And I select current line in "List" table
-				And I click "Save and close" button
-			And I close all client application windows
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
 	* Check or create PurchaseOrder017001
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		If "List" table does not contain lines Then
@@ -80,8 +58,7 @@ Scenario: _018000 preparation
 				| "Number" |
 				| "$$NumberPurchaseOrder017003$$" |
 			When create PurchaseOrder017001
-	* Constants
-		When set True value to the constant
+	
 
 
 

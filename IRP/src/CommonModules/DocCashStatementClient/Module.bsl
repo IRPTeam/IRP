@@ -25,11 +25,7 @@ Procedure StatusOnChange(Object, AddInfo = Undefined) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object.Object, Object.ThisForm);
 EndProcedure
 
-Procedure StoreOnChange(Object, AddInfo = Undefined) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object.Object, Object.ThisForm);
-EndProcedure
-
-Procedure CashAccountsOnChange(Object, AddInfo = Undefined) Export
+Procedure BusinessUnitOnChange(Object, AddInfo = Undefined) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object.Object, Object.ThisForm);
 EndProcedure
 

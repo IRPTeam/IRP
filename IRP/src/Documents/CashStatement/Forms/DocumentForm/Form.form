@@ -600,6 +600,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.BusinessUnit</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>BusinessUnitOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>BusinessUnitExtendedTooltip</name>
             <id>216</id>

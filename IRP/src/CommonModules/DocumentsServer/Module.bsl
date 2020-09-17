@@ -436,3 +436,210 @@ Procedure DeleteUnavailableTitleItemNames(ItemNames) Export
 EndProcedure
 
 #EndRegion
+
+Function PrepareServerData_AtServerNoContext(Parameters) Export
+	Result = New Structure();
+	
+	If Parameters.Property("ArrayOfMovementsTypes") Then
+		Result.Insert("ArrayOfCurrenciesByMmovementTypes", GetCurrencyByMovementType_AtServerNoContext(Parameters.ArrayOfMovementsTypes));
+	EndIf;
+	
+	If Parameters.Property("TaxesCache") Then
+		ArrayOfTaxInfo = New Array;
+		RequireCallCreateTaxesFormControls = True;
+		
+		If ValueIsFilled(Parameters.TaxesCache.Cache) Then
+			
+			ArrayOfTaxesInCache = New Array();
+			
+			SavedData = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.TaxesCache.Cache);
+			If SavedData.Property("ArrayOfColumnsInfo") Then
+				ArrayOfTaxInfo = SavedData.ArrayOfColumnsInfo;
+				For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
+					ItemOfTaxInfo.Insert("TaxTypeIsRate", ItemOfTaxInfo.Type = Enums.TaxType.Rate);
+					If Parameters.TaxesCache.Property("GetArrayOfTaxRates") Then 
+						
+						StructureOfTaxRates = GetStructureOfTaxRates(ItemOfTaxInfo.Tax, 
+																 Parameters.TaxesCache.Date, 
+																 Parameters.TaxesCache.Company,
+																 Parameters.TaxesCache.GetArrayOfTaxRates);
+																 
+						ItemOfTaxInfo.Insert("ArrayOfTaxRates"             , StructureOfTaxRates.ArrayOfTaxRates);
+						ItemOfTaxInfo.Insert("ArrayOfTaxRatesForAgreement" , StructureOfTaxRates.ArrayOfTaxRatesForAgreement);
+						ItemOfTaxInfo.Insert("ArrayOfTaxRatesForItemKey"   , StructureOfTaxRates.ArrayOfTaxRatesForItemKey);
+					EndIf;
+					ArrayOfTaxesInCache.Add(ItemOfTaxInfo.Tax);
+				EndDo;
+			EndIf;
+			
+			ArrayOfTaxes = New Array;
+			
+			DocumentName = Parameters.TaxesCache.Ref.Metadata().Name;
+			ArrayOfAllTaxes = TaxesServer.GetTaxesByCompany(Parameters.TaxesCache.Date, Parameters.TaxesCache.Company);
+			For Each ItemOfAllTaxes In ArrayOfAllTaxes Do
+				If ItemOfAllTaxes.UseDocuments.FindRows(New Structure("DocumentName", DocumentName)).Count() Then
+					ArrayOfTaxes.Add(ItemOfAllTaxes.Tax);
+				EndIf;
+			EndDo;
+			
+			AllTaxexInCache = True;
+			For Each ItemOfTaxes In ArrayOfTaxes Do
+				If ArrayOfTaxesInCache.Find(ItemOfTaxes) = Undefined Then
+					AllTaxexInCache = False;
+					Break;
+				EndIf;
+			EndDo;
+			If AllTaxexInCache Then
+				For Each ItemOfTaxesInCache In ArrayOfTaxesInCache Do
+					If ArrayOfTaxes.Find(ItemOfTaxesInCache) = Undefined Then
+						AllTaxexInCache = False;
+						Break;
+					EndIf;
+				EndDo;
+			EndIf;
+			
+			If AllTaxexInCache Then
+				RequireCallCreateTaxesFormControls = False;
+			EndIf;
+			
+		EndIf;
+		
+		Result.Insert("RequireCallCreateTaxesFormControls", RequireCallCreateTaxesFormControls);
+		Result.Insert("ArrayOfTaxInfo", ArrayOfTaxInfo);
+	EndIf;
+	
+	If Parameters.Property("GetManagerSegmentByPartner") Then
+		Result.Insert("ManagerSegmentByPartner", DocumentsServer.GetManagerSegmentByPartner(Parameters.GetManagerSegmentByPartner.Partner));
+	EndIf;
+	
+	If Parameters.Property("GetLegalNameByPartner") Then
+		Result.Insert("LegalNameByPartner", DocumentsServer.GetLegalNameByPartner(Parameters.GetLegalNameByPartner.Partner, 
+																				  Parameters.GetLegalNameByPartner.LegalName));
+	EndIf;
+		
+	If Parameters.Property("GetAgreementByPartner") Then
+		AgreementParameters = New Structure();
+		AgreementParameters.Insert("Partner"		, Parameters.GetAgreementByPartner.Partner);
+		AgreementParameters.Insert("Agreement"		, Parameters.GetAgreementByPartner.Agreement);
+		AgreementParameters.Insert("CurrentDate"	, Parameters.GetAgreementByPartner.Date);
+		AgreementParameters.Insert("AgreementType"	, Enums.AgreementTypes.Vendor);
+		
+		Result.Insert("AgreementByPartner" , DocumentsServer.GetAgreementByPartner(AgreementParameters));
+		
+		If Parameters.GetAgreementByPartner.Property("WithAgreementInfo") Then
+			Result.Insert("AgreementInfoByPartner", CatAgreementsServer.GetAgreementInfo(Result.AgreementByPartner));
+		EndIf;		
+	EndIf;
+	
+	If Parameters.Property("GetAgreementInfo") Then
+		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Parameters.GetAgreementInfo.Agreement);
+		Result.Insert("AgreementInfo", AgreementInfo);
+		Result.Insert("AgreementInfo_PriceType_Presentation", String(AgreementInfo.PriceType));
+	EndIf;
+	
+	If Parameters.Property("GetArrayOfCurrenciesRows") Then
+		CurrenciesColumns = Metadata.Documents.PurchaseInvoice.TabularSections.Currencies.Attributes;
+		CurrenciesTable = New ValueTable();
+		CurrenciesTable.Columns.Add("Key"             , CurrenciesColumns.Key.Type);
+		CurrenciesTable.Columns.Add("CurrencyFrom"    , CurrenciesColumns.CurrencyFrom.Type);
+		CurrenciesTable.Columns.Add("Rate"            , CurrenciesColumns.Rate.Type);
+		CurrenciesTable.Columns.Add("ReverseRate"     , CurrenciesColumns.ReverseRate.Type);
+		CurrenciesTable.Columns.Add("ShowReverseRate" , CurrenciesColumns.ShowReverseRate.Type);
+		CurrenciesTable.Columns.Add("Multiplicity"    , CurrenciesColumns.Multiplicity.Type);
+		CurrenciesTable.Columns.Add("MovementType"    , CurrenciesColumns.MovementType.Type);
+		CurrenciesTable.Columns.Add("Amount"          , CurrenciesColumns.Amount.Type);
+		
+		If Result.Property("AgreementInfo") Then
+			AgreementInfo = Result.AgreementInfo;
+		Else
+			AgreementInfo = CatAgreementsServer.GetAgreementInfo(Parameters.GetArrayOfCurrenciesRows.Agreement);
+		EndIf;
+		
+		CurrenciesServer.FillCurrencyTable(New Structure("Currencies", CurrenciesTable), 
+	                                   Parameters.GetArrayOfCurrenciesRows.Date, 
+	                                   Parameters.GetArrayOfCurrenciesRows.Company, 
+	                                   Parameters.GetArrayOfCurrenciesRows.Currency, 
+	                                   Parameters.GetArrayOfCurrenciesRows.UUID,
+	                                   AgreementInfo);
+	    
+	    ArrayOfCurrenciesRows = New Array();                               
+	    For Each RowCurrenciesTable In CurrenciesTable Do
+	    	NewRow = New Structure("Key, CurrencyFrom, Rate, ReverseRate, ShowReverseRate, Multiplicity, MovementType, Amount");
+	    	FillPropertyValues(NewRow, RowCurrenciesTable);
+	    	ArrayOfCurrenciesRows.Add(NewRow);
+	    EndDo;
+	    
+	    Result.Insert("ArrayOfCurrenciesRows", ArrayOfCurrenciesRows);		
+	EndIf;
+	
+	If Parameters.Property("GetMetaDataStructure") Then
+		Result.Insert("MetaDataStructure", ServiceSystemServer.GetMetaDataStructure(Parameters.GetMetaDataStructure.Ref));
+	EndIf;
+	
+	If Parameters.Property("GetItemKeyByItem") Then
+		Result.Insert("ItemKeyByItem", CatItemsServer.GetItemKeyByItem(Parameters.GetItemKeyByItem.Item));
+	EndIf;
+	
+	If Parameters.Property("GetAgreementTypes_Vendor") Then
+		Result.Insert("AgreementTypes_Vendor", PredefinedValue("Enum.AgreementTypes.Vendor"));
+	EndIf;
+
+	If Parameters.Property("GetPurchaseOrder_EmptyRef") Then
+		Result.Insert("PurchaseOrder_EmptyRef", PredefinedValue("Document.PurchaseOrder.EmptyRef"));
+	EndIf;
+	
+	If Parameters.Property("GetPriceTypes_ManualPriceType") Then
+		Result.Insert("PriceTypes_ManualPriceType", PredefinedValue("Catalog.PriceTypes.ManualPriceType"));
+	EndIf;
+	
+	If Parameters.Property("GetTaxes_EmptyRef") Then
+		Result.Insert("Taxes_EmptyRef", PredefinedValue("Catalog.Taxes.EmptyRef"));
+	EndIf;
+	
+	If Parameters.Property("GetTaxAnalytics_EmptyRef") Then	
+		Result.Insert("TaxAnalytics_EmptyRef", PredefinedValue("Catalog.TaxAnalytics.EmptyRef"));
+	EndIf;
+	
+	If Parameters.Property("GetTaxRates_EmptyRef") Then	
+		Result.Insert("TaxRates_EmptyRef", PredefinedValue("Catalog.TaxRates.EmptyRef"));
+	EndIf;
+	
+	If Parameters.Property("GetItemUnitInfo") Then
+		Result.Insert("ItemUnitInfo" , GetItemInfo.ItemUnitInfo(Parameters.GetItemUnitInfo.ItemKey));
+	EndIf;
+	
+	Return Result;
+EndFunction	
+
+Function GetCurrencyByMovementType_AtServerNoContext(ArrayOfMovementsTypes) Export
+	ArrayOfCurrenciesByMmovementTypes = New Array();
+	For Each MovementType In ArrayOfMovementsTypes Do
+		ArrayOfCurrenciesByMmovementTypes.Add(New Structure("MovementType, Currency", MovementType, MovementType.Currency));
+	EndDo;
+	Return ArrayOfCurrenciesByMmovementTypes;
+EndFunction
+
+Function GetStructureOfTaxRates(Tax, Date, Company, Parameters)
+	Result = New Structure("ArrayOfTaxRates, ArrayOfTaxRatesForItemKey, ArrayOfTaxRatesForAgreement", 
+	New Array(), New Array(), New Array());
+	
+	If Parameters.Property("Agreement") Then
+		Result.ArrayOfTaxRatesForAgreement = TaxesServer.TaxRatesForAgreement(New Structure("Date, Company, Tax, Agreement",
+		Date, Company, Tax, Parameters.Agreement));
+	EndIf;
+	
+	If Not Result.ArrayOfTaxRatesForAgreement.Count() Then
+		ItemKey = ?(Parameters.Property("ItemKey"), Parameters.ItemKey, Catalogs.ItemKeys.EmptyRef());
+		
+		Result.ArrayOfTaxRatesForItemKey = TaxesServer.GetTaxRatesForItemKey(New Structure("Date, Company, Tax, ItemKey",
+		Date, Company, Tax, ItemKey));			
+	EndIf;
+	
+	If Result.ArrayOfTaxRatesForAgreement.Count() Then
+		Result.ArrayOfTaxRates = Result.ArrayOfTaxRatesForAgreement;
+	Else
+		Result.ArrayOfTaxRates = Result.ArrayOfTaxRatesForItemKey;
+	EndIf;
+	
+	Return Result;
+EndFunction

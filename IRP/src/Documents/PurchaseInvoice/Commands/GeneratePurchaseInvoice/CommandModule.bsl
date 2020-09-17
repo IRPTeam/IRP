@@ -75,9 +75,9 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	EndDo;
 	
 	ArrayOfTables = New Array();
-	ArrayOfTables.Add(GetDocumentTable_PurchaseOrder(ArrayOf_PurchaseOrder));
+	ArrayOfTables.Add(GetDocumentTable_PurchaseOrder_NotIsService(ArrayOf_PurchaseOrder));
 	ArrayOfTables.Add(GetDocumentTable_GoodsReceipt(ArrayOf_GoodsReceipt));
-	ArrayOfTables.Add(GetDocumentTable_Service(ArrayOf_Service));
+	ArrayOfTables.Add(GetDocumentTable_PurchaseOrder_IsService(ArrayOf_Service));
 	ArrayOfTables.Add(GetDocumentTable_SalesOrder(ArrayOf_SalesOrder));
 	
 	Return JoinDocumentsStructure(ArrayOfTables, 
@@ -115,7 +115,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	ItemList.Columns.Add("DeliveryDate"		, New TypeDescription("Date"));
 	ItemList.Columns.Add("SalesOrder"		, New TypeDescription("DocumentRef.SalesOrder"));
 	
-	TaxListMetadataColumns = Metadata.Documents.SalesOrder.TabularSections.TaxList.Attributes;
+	TaxListMetadataColumns = Metadata.Documents.PurchaseInvoice.TabularSections.TaxList.Attributes;
 	TaxList = New ValueTable();
 	TaxList.Columns.Add("Key"					, TaxListMetadataColumns.Key.Type);
 	TaxList.Columns.Add("Tax"					, TaxListMetadataColumns.Tax.Type);
@@ -126,13 +126,22 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	TaxList.Columns.Add("ManualAmount"			, TaxListMetadataColumns.ManualAmount.Type);
 	TaxList.Columns.Add("Ref"					, New TypeDescription("DocumentRef.PurchaseOrder"));
 	
-	SpecialOffersMetadataColumns = Metadata.Documents.SalesOrder.TabularSections.SpecialOffers.Attributes;
+	SpecialOffersMetadataColumns = Metadata.Documents.PurchaseInvoice.TabularSections.SpecialOffers.Attributes;
 	SpecialOffers = New ValueTable();
 	SpecialOffers.Columns.Add("Key"		, SpecialOffersMetadataColumns.Key.Type);
 	SpecialOffers.Columns.Add("Offer"	, SpecialOffersMetadataColumns.Offer.Type);
 	SpecialOffers.Columns.Add("Amount"	, SpecialOffersMetadataColumns.Amount.Type);
 	SpecialOffers.Columns.Add("Percent"	, SpecialOffersMetadataColumns.Percent.Type);
 	SpecialOffers.Columns.Add("Ref"		, New TypeDescription("DocumentRef.PurchaseOrder"));
+	
+	GoodsReceiptsMetadataColumns = Metadata.Documents.PurchaseInvoice.TabularSections.GoodsReceipts.Attributes;
+	GoodsReceipts = New ValueTable();
+	GoodsReceipts.Columns.Add("Key"          , GoodsReceiptsMetadataColumns.Key.Type);
+	GoodsReceipts.Columns.Add("GoodsReceipt" , GoodsReceiptsMetadataColumns.GoodsReceipt.Type);
+	GoodsReceipts.Columns.Add("Quantity"     , GoodsReceiptsMetadataColumns.Quantity.Type);
+	GoodsReceipts.Columns.Add("QuantityInGoodsReceipt" , GoodsReceiptsMetadataColumns.QuantityInGoodsReceipt.Type);
+	GoodsReceipts.Columns.Add("Ref"          , New TypeDescription("DocumentRef.PurchaseOrder"));
+	
 	
 	For Each TableStructure In ArrayOfTables Do
 		For Each Row In TableStructure.ItemList Do
@@ -144,6 +153,9 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 		For Each Row In TableStructure.SpecialOffers Do
 			FillPropertyValues(SpecialOffers.Add(), Row);
 		EndDo;
+		For Each Row In TableStructure.GoodsReceipts Do
+			FillPropertyValues(GoodsReceipts.Add(), Row);
+		EndDo;		
 	EndDo;
 	
 	ItemListCopy = ItemList.Copy();
@@ -158,12 +170,14 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 		Result.Insert("ItemList"		, New Array());
 		Result.Insert("TaxList"			, New Array());
 		Result.Insert("SpecialOffers"	, New Array());
+		Result.Insert("GoodsReceipts"	, New Array());
 		
 		Filter = New Structure(UnjoinFileds);
 		FillPropertyValues(Filter, Row);
 		
 		ArrayOfTaxListFilters = New Array();
 		ArrayOfSpecialOffersFilters = New Array();
+		ArrayOfGoodsReceiptsFilters = New Array();
 		
 		ItemListFiltered = ItemList.Copy(Filter);
 		For Each RowItemList In ItemListFiltered Do
@@ -177,6 +191,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 			
 			ArrayOfTaxListFilters.Add(New Structure("Ref, Key", RowItemList.PurchaseOrder, NewRow.Key));
 			ArrayOfSpecialOffersFilters.Add(New Structure("Ref, Key", RowItemList.PurchaseOrder, NewRow.Key));
+			ArrayOfGoodsReceiptsFilters.Add(New Structure("Ref, Key", RowItemList.PurchaseOrder, NewRow.Key));
 			
 			Result.ItemList.Add(NewRow);
 		EndDo;
@@ -206,13 +221,24 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 			EndDo;
 		EndDo;
 		
+		For Each GoodsReceiptsFilter In ArrayOfGoodsReceiptsFilters Do
+			For Each RowGoodsReceipts In GoodsReceipts.Copy(GoodsReceiptsFilter) Do
+				NewRow = New Structure();
+				NewRow.Insert("Key", RowGoodsReceipts.Key);
+				NewRow.Insert("GoodsReceipt", RowGoodsReceipts.GoodsReceipt);
+				NewRow.Insert("Quantity", RowGoodsReceipts.Quantity);
+				NewRow.Insert("QuantityInGoodsReceipt", RowGoodsReceipts.QuantityInGoodsReceipt);
+				Result.GoodsReceipts.Add(NewRow);
+			EndDo;
+		EndDo;
+		
 		ArrayOfResults.Add(Result);
 	EndDo;
 	Return ArrayOfResults;
 EndFunction
 
 &AtServer
-Function ExtractInfoFrom_PurchaseOrder(QueryTable)
+Function ExtractInfoFrom_PurchaseOrder(QueryTable, GoodsReceiptsTable = Undefined)
 	QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
 	For Each Row In QueryTable Do
 		Row.Key = New UUID(Row.RowKey);
@@ -224,7 +250,6 @@ Function ExtractInfoFrom_PurchaseOrder(QueryTable)
 		|	QueryTable.BasedOn,
 		|	QueryTable.Store,
 		|	QueryTable.PurchaseOrder,
-		|	QueryTable.GoodsReceipt,
 		|	QueryTable.ItemKey,
 		|	QueryTable.Key,
 		|	QueryTable.RowKey,
@@ -251,6 +276,7 @@ Function ExtractInfoFrom_PurchaseOrder(QueryTable)
 		|	tmpQueryTable.RowKey,
 		|	tmpQueryTable.Unit AS QuantityUnit,
 		|	tmpQueryTable.Quantity AS Quantity,
+		|	ISNULL(ItemList.Quantity, 0) AS OriginalQuantity,
 		|	ISNULL(ItemList.Price, 0) AS Price,
 		|	ISNULL(ItemList.Unit, VALUE(Catalog.Units.EmptyRef)) AS Unit,
 		|	ISNULL(ItemList.TaxAmount, 0) AS TaxAmount,
@@ -259,7 +285,6 @@ Function ExtractInfoFrom_PurchaseOrder(QueryTable)
 		|	ISNULL(ItemList.OffersAmount, 0) AS OffersAmount,
 		|	ISNULL(ItemList.DeliveryDate, DATETIME(1, 1, 1)) AS DeliveryDate,
 		|	ISNULL(ItemList.PriceType, VALUE(Catalog.PriceTypes.EmptyRef)) AS PriceType,
-		|	tmpQueryTable.GoodsReceipt AS GoodsReceipt,
 		|	ItemList.BusinessUnit,
 		|	ItemList.ExpenseType,
 		|	CASE
@@ -272,7 +297,7 @@ Function ExtractInfoFrom_PurchaseOrder(QueryTable)
 		|		INNER JOIN tmpQueryTable AS tmpQueryTable
 		|		ON tmpQueryTable.Key = ItemList.Key
 		|		AND tmpQueryTable.PurchaseOrder = ItemList.Ref
-		|ORDER BY 
+		|ORDER BY
 		|	ItemList.LineNumber
 		|;
 		|
@@ -315,7 +340,43 @@ Function ExtractInfoFrom_PurchaseOrder(QueryTable)
 	QueryTable_TaxList = QueryResults[2].Unload();
 	QueryTable_SpecialOffers = QueryResults[3].Unload();
 	
-	Return New Structure("ItemList, TaxList, SpecialOffers", QueryTable_ItemList, QueryTable_TaxList, QueryTable_SpecialOffers);
+	For Each Row_ItemList In QueryTable_ItemList Do
+		If Row_ItemList.OriginalQuantity = 0 Then
+			Row_ItemList.TaxAmount = 0;
+			Row_ItemList.NetAmount = 0;
+			Row_ItemList.TotalAmount = 0;
+			Row_ItemList.OffersAmount = 0;
+		Else
+			Row_ItemList.TaxAmount = Row_ItemList.TaxAmount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;
+			Row_ItemList.NetAmount = Row_ItemList.NetAmount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;;
+			Row_ItemList.TotalAmount = Row_ItemList.TotalAmount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;
+			Row_ItemList.OffersAmount = Row_ItemList.OffersAmount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;
+		EndIf;	
+		
+		For Each Row_TaxList In QueryTable_TaxList.FindRows(New Structure("Key", Row_ItemList.Key)) Do
+			If Row_ItemList.OriginalQuantity = 0 Then
+				Row_TaxList.Amount = 0;
+				Row_TaxList.ManualAmount = 0;
+			Else
+				Row_TaxList.Amount = Row_TaxList.Amount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;
+				Row_TaxList.ManualAmount = Row_TaxList.ManualAmount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;;								
+			EndIf;
+		EndDo;
+		
+		For Each Row_SpecialOffers In QueryTable_SpecialOffers.FindRows(New Structure("Key", Row_ItemList.Key)) Do
+			If Row_ItemList.OriginalQuantity = 0 Then
+				Row_SpecialOffers.Amount = 0;
+			Else
+				Row_SpecialOffers.Amount = Row_SpecialOffers.Amount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;
+			EndIf;
+		EndDo;		
+	EndDo;
+
+	Return New Structure("ItemList, TaxList, SpecialOffers, GoodsReceipts", 
+	QueryTable_ItemList, 
+	QueryTable_TaxList, 
+	QueryTable_SpecialOffers,
+	?(GoodsReceiptsTable = Undefined, CreateTable_GoodsReceipts(), GoodsReceiptsTable));
 EndFunction
 
 &AtServer
@@ -339,21 +400,21 @@ Function GetDocumentTable_SalesOrder(ArrayOfBasisDocuments)
 		|	AccumulationRegister.OrderProcurement.Balance(, Order IN (&ArrayOfBasises)) AS OrderProcurement";
 	Query.SetParameter("ArrayOfBasises", ArrayOfBasisDocuments);
 	QueryResult = Query.Execute();
-	Return New Structure("ItemList, TaxList, SpecialOffers", 
+	Return New Structure("ItemList, TaxList, SpecialOffers, GoodsReceipts", 
 							QueryResult.Unload(), 
+							New ValueTable(),
 							New ValueTable(),
 							New ValueTable());
 EndFunction
 
 &AtServer
-Function GetDocumentTable_Service(ArrayOfBasisDocuments)
+Function GetDocumentTable_PurchaseOrder_IsService(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
 		"SELECT ALLOWED
 		|	""PurchaseOrder"" AS BasedOn,
 		|	OrderBalanceBalance.Store AS Store,
 		|	OrderBalanceBalance.Order AS PurchaseOrder,
-		|	VALUE(Document.GoodsReceipt.EmptyRef) AS GoodsReceipt,
 		|	OrderBalanceBalance.ItemKey,
 		|	OrderBalanceBalance.RowKey,
 		|	CASE
@@ -372,14 +433,13 @@ Function GetDocumentTable_Service(ArrayOfBasisDocuments)
 EndFunction
 
 &AtServer
-Function GetDocumentTable_PurchaseOrder(ArrayOfBasisDocuments)
+Function GetDocumentTable_PurchaseOrder_NotIsService(ArrayOfBasisDocuments)
 	Query = New Query();
 	Query.Text =
 		"SELECT ALLOWED
 		|	""PurchaseOrder"" AS BasedOn,
 		|	OrderBalanceBalance.Store AS Store,
 		|	OrderBalanceBalance.Order AS PurchaseOrder,
-		|	VALUE(Document.GoodsReceipt.EmptyRef) AS GoodsReceipt,
 		|	OrderBalanceBalance.ItemKey,
 		|	OrderBalanceBalance.RowKey,
 		|	CASE
@@ -402,29 +462,35 @@ EndFunction
 &AtServer
 Function GetDocumentTable_GoodsReceipt(ArrayOfBasisDocuments)
 	ValueTable = New ValueTable();
-	ValueTable.Columns.Add("Order", New TypeDescription("DocumentRef.PurchaseOrder"));
-	
-	ValueTable.Columns.Add("GoodsReceipt"
-		, New TypeDescription(Metadata.AccumulationRegisters.ReceiptOrders.Dimensions.GoodsReceipt.Type));
-	
+	ValueTable.Columns.Add("Order", New TypeDescription("DocumentRef.PurchaseOrder"));	
 	ValueTable.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
 	ValueTable.Columns.Add("Quantity", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
 	ValueTable.Columns.Add("RowKey", Metadata.AccumulationRegisters.ReceiptOrders.Dimensions.RowKey.Type);
 	
-	For Each Row In ArrayOfBasisDocuments Do
+	GoodsReceiptsTable = CreateTable_GoodsReceipts();
+	
+	For Each Row In ArrayOfBasisDocuments Do		
 		NewRow = ValueTable.Add();
 		NewRow.Order = Row.Order;
-		NewRow.GoodsReceipt = Row.GoodsReceipt;
 		NewRow.ItemKey = Row.ItemKey;
 		NewRow.RowKey = Row.RowKey;
 		NewRow.Quantity = Row.Quantity;
+		
+		NewRow = GoodsReceiptsTable.Add();
+		NewRow.Ref = Row.Order;
+		NewRow.GoodsReceipt = Row.GoodsReceipt;
+		NewRow.Key = New UUID(Row.RowKey);
+		NewRow.Quantity = Row.Quantity;
+		NewRow.QuantityInGoodsReceipt = Row.Quantity;
 	EndDo;
+	
+	ValueTable.GroupBy("Order, ItemKey, RowKey", "Quantity");
+	GoodsReceiptsTable.GroupBy("GoodsReceipt, Key, Ref", "Quantity, QuantityInGoodsReceipt");
 	
 	Query = New Query();
 	Query.Text =
 		"SELECT
 		|	ValueTable.Order AS Order,
-		|	ValueTable.GoodsReceipt AS GoodsReceipt,
 		|	ValueTable.ItemKey AS ItemKey,
 		|	ValueTable.RowKey AS RowKey, 
 		|	ValueTable.Quantity AS Quantity
@@ -444,7 +510,6 @@ Function GetDocumentTable_GoodsReceipt(ArrayOfBasisDocuments)
 		|	END AS Unit,
 		|	OrderBalanceBalance.Store,
 		|	tmp.Quantity,
-		|	tmp.GoodsReceipt,
 		|	OrderBalanceBalance.RowKey
 		|FROM
 		|	AccumulationRegister.OrderBalance.Balance(, (Order, ItemKey, RowKey) IN
@@ -463,7 +528,7 @@ Function GetDocumentTable_GoodsReceipt(ArrayOfBasisDocuments)
 	Query.SetParameter("ValueTable", ValueTable);
 	
 	QueryTable = Query.Execute().Unload();
-	Return ExtractInfoFrom_PurchaseOrder(QueryTable);
+	Return ExtractInfoFrom_PurchaseOrder(QueryTable, GoodsReceiptsTable);
 EndFunction
 
 &AtClient
@@ -596,6 +661,17 @@ Function GetInfoGoodsReceipt(ArrayOfGoodsReceipt)
 	EndDo;
 	Return InfoGoodsReceipt;
 	
+EndFunction
+
+Function CreateTable_GoodsReceipts()
+	ColumnsMetadata = Metadata.Documents.PurchaseInvoice.TabularSections.GoodsReceipts.Attributes;
+	GoodsReceiptsTable = New ValueTable();
+	GoodsReceiptsTable.Columns.Add("Key", ColumnsMetadata.Key.Type);
+	GoodsReceiptsTable.Columns.Add("GoodsReceipt", ColumnsMetadata.GoodsReceipt.Type);
+	GoodsReceiptsTable.Columns.Add("Quantity", ColumnsMetadata.Quantity.Type);
+	GoodsReceiptsTable.Columns.Add("QuantityInGoodsReceipt", ColumnsMetadata.Quantity.Type);
+	GoodsReceiptsTable.Columns.Add("Ref" , New TypeDescription("DocumentRef.PurchaseOrder"));
+	Return GoodsReceiptsTable;
 EndFunction
 
 #Region Errors

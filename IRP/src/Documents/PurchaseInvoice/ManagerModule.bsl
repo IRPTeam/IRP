@@ -29,9 +29,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	PurchaseInvoiceItemList.Store AS Store,
 		|	PurchaseInvoiceItemList.Store.UseGoodsReceipt AS UseGoodsReceipt,
 		|	PurchaseInvoiceItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
-		|	PurchaseInvoiceItemList.GoodsReceipt AS GoodsReceipt,
 		|	CASE
-		|		WHEN PurchaseInvoiceItemList.GoodsReceipt.Date IS NULL
+		|		WHEN MAX(GoodsReceipts.Key) IS NULL
 		|			THEN FALSE
 		|		ELSE TRUE
 		|	END
@@ -92,6 +91,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	SUM(PurchaseInvoiceItemList.NetAmount) AS NetAmount
 		|FROM
 		|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
+		|		LEFT JOIN Document.PurchaseInvoice.GoodsReceipts AS GoodsReceipts
+		|		ON PurchaseInvoiceItemList.Ref = GoodsReceipts.Ref
+		|		AND PurchaseInvoiceItemList.Key = GoodsReceipts.Key
+		|		AND PurchaseInvoiceItemList.Ref = &Ref
+		|		AND GoodsReceipts.Ref = &Ref
 		|WHERE
 		|	PurchaseInvoiceItemList.Ref = &Ref
 		|GROUP BY
@@ -209,6 +213,22 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	Query.Text =
+	"SELECT
+	|	PurchaseInvoiceGoodsReceipts.Ref,
+	|	PurchaseInvoiceGoodsReceipts.Key AS RowKeyUUID,
+	|	PurchaseInvoiceGoodsReceipts.GoodsReceipt,
+	|	PurchaseInvoiceGoodsReceipts.Quantity
+	|INTO GoodsReceipts
+	|FROM
+	|	Document.PurchaseInvoice.GoodsReceipts AS PurchaseInvoiceGoodsReceipts
+	|WHERE
+	|	PurchaseInvoiceGoodsReceipts.Ref = &Ref";
+	Query.SetParameter("Ref", Ref);
+	Query.Execute();
+	
+	Query = New Query();
+	Query.TempTablesManager = TempManager;
+	Query.Text =
 		"SELECT
 		|	QueryTable.Company AS Company,
 		|	QueryTable.Partner AS Partner,
@@ -221,7 +241,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	QueryTable.Store AS Store,
 		|	QueryTable.UseGoodsReceipt AS UseGoodsReceipt,
 		|   QueryTable.UseShipmentConfirmation AS UseShipmentConfirmation,
-		|	QueryTable.GoodsReceipt AS GoodsReceipt,
 		|	QueryTable.UseGoodsReceiptBeforeInvoice AS UseGoodsReceiptBeforeInvoice,
 		|	QueryTable.ItemKey AS ItemKey,
 		|	QueryTable.PurchaseOrder AS Order,
@@ -231,6 +250,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	QueryTable.BasisUnit AS Unit,
 		|	QueryTable.Period AS Period,
 		|	QueryTable.RowKey AS RowKey,
+		|	QueryTable.RowKeyUUID AS RowKeyUUID,
 		|	QueryTable.IsOpeningEntry AS IsOpeningEntry,
 		|	QueryTable.BusinessUnit AS BusinessUnit,
 		|	QueryTable.ExpenseType,
@@ -1292,20 +1312,23 @@ Procedure GetTables_UsePurchaseOrder_NotUseSalesOrder_UseGoodsReceiptBeforeInvoi
 		// [0] ReceiptOrders
 		"SELECT
 		|	tmp.Order AS Order,
-		|	tmp.GoodsReceipt,
+		|	GoodsReceipts.GoodsReceipt AS GoodsReceipt,
+		|	SUM(ISNULL(GoodsReceipts.Quantity, 0)) AS Quantity,
 		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
 		|	tmp.Period,
 		|	tmp.RowKey
 		|FROM
 		|	tmp AS tmp
+		|		LEFT JOIN GoodsReceipts AS GoodsReceipts
+		|		ON tmp.RowKeyUUID = GoodsReceipts.RowKeyUUID
 		|GROUP BY
 		|	tmp.Order,
 		|	tmp.Period,
-		|	tmp.GoodsReceipt,
+		|	GoodsReceipts.GoodsReceipt,
 		|	tmp.ItemKey,
 		|	tmp.RowKey
-		|;	
+		|;
+		|
 		|//[1] OrderBalance
 		|SELECT
 		|	tmp.Store,
@@ -1344,20 +1367,23 @@ Procedure GetTables_UsePurchaseOrder_NotUseSalesOrder_UseGoodsReceiptBeforeInvoi
 		// [0] ReceiptOrders
 		"SELECT
 		|	tmp.Order AS Order,
-		|	tmp.GoodsReceipt,
+		|	GoodsReceipts.GoodsReceipt AS GoodsReceipt,
+		|	SUM(ISNULL(GoodsReceipts.Quantity, 0)) AS Quantity,
 		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
 		|	tmp.Period,
 		|	tmp.RowKey
 		|FROM
 		|	tmp AS tmp
+		|		LEFT JOIN GoodsReceipts AS GoodsReceipts
+		|		ON tmp.RowKeyUUID = GoodsReceipts.RowKeyUUID
 		|GROUP BY
 		|	tmp.Order,
 		|	tmp.Period,
-		|	tmp.GoodsReceipt,
+		|	GoodsReceipts.GoodsReceipt,
 		|	tmp.ItemKey,
 		|	tmp.RowKey
-		|;	
+		|;
+		|
 		|//[1] OrderBalance
 		|SELECT
 		|	tmp.Store,
@@ -2296,20 +2322,23 @@ Procedure GetTables_UsePurchaseOrder_UseSalesOrder_GoodsReceiptBeforeInvoice_Not
 		// [0] ReceiptOrders
 		"SELECT
 		|	tmp.Order AS Order,
-		|	tmp.GoodsReceipt,
+		|	GoodsReceipts.GoodsReceipt AS GoodsReceipt,
+		|	SUM(ISNULL(GoodsReceipts.Quantity, 0)) AS Quantity,
 		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
 		|	tmp.Period,
 		|	tmp.RowKey
 		|FROM
 		|	tmp AS tmp
+		|		LEFT JOIN GoodsReceipts AS GoodsReceipts
+		|		ON tmp.RowKeyUUID = GoodsReceipts.RowKeyUUID
 		|GROUP BY
 		|	tmp.Order,
 		|	tmp.Period,
-		|	tmp.GoodsReceipt,
+		|	GoodsReceipts.GoodsReceipt,
 		|	tmp.ItemKey,
 		|	tmp.RowKey
-		|;	
+		|;
+		|
 		|//[1] OrderBalance
 		|SELECT
 		|	tmp.Store,
@@ -2348,20 +2377,23 @@ Procedure GetTables_UsePurchaseOrder_UseSalesOrder_GoodsReceiptBeforeInvoice_Not
 		// [0] ReceiptOrders
 		"SELECT
 		|	tmp.Order AS Order,
-		|	tmp.GoodsReceipt,
+		|	GoodsReceipts.GoodsReceipt AS GoodsReceipt,
+		|	SUM(ISNULL(GoodsReceipts.Quantity, 0)) AS Quantity,
 		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
 		|	tmp.Period,
 		|	tmp.RowKey
 		|FROM
 		|	tmp AS tmp
+		|		LEFT JOIN GoodsReceipts AS GoodsReceipts
+		|		ON tmp.RowKeyUUID = GoodsReceipts.RowKeyUUID
 		|GROUP BY
 		|	tmp.Order,
 		|	tmp.Period,
-		|	tmp.GoodsReceipt,
+		|	GoodsReceipts.GoodsReceipt,
 		|	tmp.ItemKey,
 		|	tmp.RowKey
-		|;	
+		|;
+		|
 		|//[1] OrderBalance
 		|SELECT
 		|	tmp.Store,
@@ -2919,20 +2951,23 @@ Procedure GetTables_UsePurchaseOrder_UseSalesOrder_GoodsReceiptBeforeInvoice_Shi
 		// [0] ReceiptOrders
 		"SELECT
 		|	tmp.Order AS Order,
-		|	tmp.GoodsReceipt,
+		|	GoodsReceipts.GoodsReceipt AS GoodsReceipt,
+		|	SUM(ISNULL(GoodsReceipts.Quantity, 0)) AS Quantity,
 		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
 		|	tmp.Period,
 		|	tmp.RowKey
 		|FROM
 		|	tmp AS tmp
+		|		LEFT JOIN GoodsReceipts AS GoodsReceipts
+		|		ON tmp.RowKeyUUID = GoodsReceipts.RowKeyUUID
 		|GROUP BY
 		|	tmp.Order,
 		|	tmp.Period,
-		|	tmp.GoodsReceipt,
+		|	GoodsReceipts.GoodsReceipt,
 		|	tmp.ItemKey,
 		|	tmp.RowKey
-		|;	
+		|;
+		|
 		|//[1] OrderBalance
 		|SELECT
 		|	tmp.Store,

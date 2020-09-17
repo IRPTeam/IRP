@@ -454,6 +454,7 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 	
 	ArrayOfColumns = New Array();
 	ArrayOfColumnsInfo = New Array();
+	ArrayOfActualTax = New Array();
 	For Each ItemOfTaxes In ArrayOfTaxes Do
 		ColumnInfo = New Structure();
 		ColumnInfo.Insert("Name", "_" + StrReplace(String(New UUID()), "-", ""));
@@ -466,8 +467,19 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 		EndIf;
 		ArrayOfColumns.Add(New FormAttribute(ColumnInfo.Name, ColumnType, Parameters.PathToTable, String(ItemOfTaxes.Tax), True));
 		ArrayOfColumnsInfo.Add(ColumnInfo);
+		ArrayOfActualTax.Add(ItemOfTaxes.Tax);
 	EndDo;
 	Form.ChangeAttributes(ArrayOfColumns);
+	
+	ArrayOfDeleteRowsFromTaxList = New Array();
+	For Each RowTaxList In Object[Parameters.TaxListName] Do
+		If ArrayOfActualTax.Find(RowTaxList.Tax) = Undefined Then
+			ArrayOfDeleteRowsFromTaxList.Add(RowTaxList);
+		EndIf;
+	EndDo;
+	For Each ItemOfDeleteRowsFromTaxList In ArrayOfDeleteRowsFromTaxList Do
+		Object[Parameters.TaxListName].Delete(ItemOfDeleteRowsFromTaxList);
+	EndDo;
 	
 	For Each ItemOfColumnsInfo In ArrayOfColumnsInfo Do
 		NewColumn = Form.Items.Insert(ItemOfColumnsInfo.Name, Type("FormField"), Parameters.ItemParent, Parameters.ColumnOffset);

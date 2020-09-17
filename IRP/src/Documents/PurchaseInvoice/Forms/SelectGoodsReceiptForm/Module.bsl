@@ -65,10 +65,20 @@ EndProcedure
 
 &AtClient
 Procedure SelectAll(Command)
+	SetSelect(True);
+EndProcedure
+
+&AtClient
+Procedure UnselectAll(Command)
+	SetSelect(False);
+EndProcedure
+
+&AtClient
+Procedure SetSelect(IsSelect)
 	For Each Row_Order In ThisObject.GoodsReceiptTree.GetItems() Do
 		For Each Row_GoodsReceipt In Row_Order.GetItems() Do
-			Row_GoodsReceipt.Use = True;
+			Row_GoodsReceipt.Use = IsSelect;
 		EndDo;
-	EndDo;
+	EndDo;	
 EndProcedure
 

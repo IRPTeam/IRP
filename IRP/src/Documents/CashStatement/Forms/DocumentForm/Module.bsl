@@ -109,18 +109,13 @@ Procedure StatusOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure StoreOnChange(Item)
-	DocCashStatementClient.StoreOnChange(ThisObject);
-EndProcedure
-
-&AtClient
-Procedure CashAccountsOnChange(Item)
-	DocCashStatementClient.CashAccountsOnChange(ThisObject);
-EndProcedure
-
-&AtClient
 Procedure CompanyOnChange(Item)
 	DocCashStatementClient.CompanyOnChange(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure BusinessUnitOnChange(Item)
+	DocCashStatementClient.BusinessUnitOnChange(ThisObject);
 EndProcedure
 
 &AtClient

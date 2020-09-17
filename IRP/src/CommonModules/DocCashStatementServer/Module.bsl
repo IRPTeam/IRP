@@ -53,8 +53,16 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 	Query.Text =
 		"SELECT
 		|	RetailCashTurnovers.Recorder AS Document,
-		|	SUM(RetailCashTurnovers.AmountExpense) AS Expense,
-		|	SUM(RetailCashTurnovers.AmountReceipt) AS Receipt
+		|	CASE
+		|		When SUM(RetailCashTurnovers.AmountReceipt) < 0
+		|			Then -SUM(RetailCashTurnovers.AmountReceipt)
+		|		Else SUM(RetailCashTurnovers.AmountExpense)
+		|	End AS Expense,
+		|	CASE
+		|		When SUM(RetailCashTurnovers.AmountReceipt) < 0
+		|			Then 0
+		|		Else SUM(RetailCashTurnovers.AmountReceipt)
+		|	End AS Receipt
 		|FROM
 		|	AccumulationRegister.RetailCash.Turnovers(&BegOfPeriod, &EndOfPeriod, Record, Company = &Company
 		|	And BusinessUnit = &BusinessUnit) AS RetailCashTurnovers

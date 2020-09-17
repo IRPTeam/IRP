@@ -207,6 +207,7 @@ Function GetQueryText_RetailSalesReceipt_RetailCash()
 	Return 
 	"SELECT
 	|	RetailSalesReceiptPayments.Ref.Company,
+	|	RetailSalesReceiptPayments.Ref.BusinessUnit,
 	|	RetailSalesReceiptPayments.Ref.Currency,
 	|	RetailSalesReceiptPayments.Account,
 	|	SUM(RetailSalesReceiptPayments.Amount) AS Amount,
@@ -222,6 +223,7 @@ Function GetQueryText_RetailSalesReceipt_RetailCash()
 	|	RetailSalesReceiptPayments.Ref = &Ref
 	|GROUP BY
 	|	RetailSalesReceiptPayments.Ref.Company,
+	|	RetailSalesReceiptPayments.Ref.BusinessUnit,
 	|	RetailSalesReceiptPayments.Ref.Currency,
 	|	RetailSalesReceiptPayments.Account,
 	|	RetailSalesReceiptPayments.Ref.Date,
@@ -264,6 +266,7 @@ Function GetQueryTextRetailSalesReceiptSalesTurnovers()
 	|	RetailSalesReceiptItemList.Key,
 	|	RetailSalesReceiptSerialLotNumbers.SerialLotNumber
 	|;
+	|
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -314,6 +317,7 @@ Function GetQueryText_RetailSalesReceipt_RetailSales()
 	Return 
 	"SELECT
 	|	RetailSalesReceiptItemList.Ref.Company AS Company,
+	|	RetailSalesReceiptItemList.Ref.BusinessUnit AS BusinessUnit,
 	|	RetailSalesReceiptItemList.ItemKey AS ItemKey,
 	|	SUM(RetailSalesReceiptItemList.Quantity) AS Quantity,
 	|	SUM(ISNULL(RetailSalesReceiptSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
@@ -337,6 +341,7 @@ Function GetQueryText_RetailSalesReceipt_RetailSales()
 	|	RetailSalesReceiptItemList.Ref = &Ref
 	|GROUP BY
 	|	RetailSalesReceiptItemList.Ref.Company,
+	|	RetailSalesReceiptItemList.Ref.BusinessUnit,
 	|	RetailSalesReceiptItemList.ItemKey,
 	|	RetailSalesReceiptItemList.Ref.Date,
 	|	RetailSalesReceiptItemList.Ref,
@@ -349,6 +354,7 @@ Function GetQueryText_RetailSalesReceipt_RetailSales()
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company AS Company,
+	|	tmp.BusinessUnit AS BusinessUnit,
 	|	tmp.ItemKey AS ItemKey,
 	|	CASE
 	|		WHEN tmp.QuantityBySerialLtNumbers = 0

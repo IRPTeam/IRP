@@ -211,8 +211,9 @@ EndFunction
 Function GetQueryText_RetailReturnReceipt_RetailCash()
 	Return 
 	"SELECT
-	|	RetailReturnReceiptPayments.Ref.Company,
-	|	RetailReturnReceiptPayments.Ref.Currency,
+	|	RetailReturnReceiptPayments.Ref.BusinessUnit AS BusinessUnit,
+	|	RetailReturnReceiptPayments.Ref.Company AS Company,
+	|	RetailReturnReceiptPayments.Ref.Currency AS Currency,
 	|	RetailReturnReceiptPayments.Account,
 	|	-SUM(RetailReturnReceiptPayments.Amount) AS Amount,
 	|	RetailReturnReceiptPayments.Ref.Date AS Period,
@@ -225,6 +226,7 @@ Function GetQueryText_RetailReturnReceipt_RetailCash()
 	|WHERE
 	|	RetailReturnReceiptPayments.Ref = &Ref
 	|GROUP BY
+	|	RetailReturnReceiptPayments.Ref.BusinessUnit,
 	|	RetailReturnReceiptPayments.Ref.Company,
 	|	RetailReturnReceiptPayments.Ref.Currency,
 	|	RetailReturnReceiptPayments.Account,
@@ -237,6 +239,7 @@ EndFunction
 Function GetQueryText_RetailReturnReceipt_RetailSales()
 	Return 
 	"SELECT
+	|	RetailReturnReceiptItemList.Ref.BusinessUnit AS BusinessUnit,
 	|	RetailReturnReceiptItemList.Ref.Company AS Company,
 	|	RetailReturnReceiptItemList.ItemKey AS ItemKey,
 	|	SUM(RetailReturnReceiptItemList.Quantity) AS Quantity,
@@ -260,6 +263,7 @@ Function GetQueryText_RetailReturnReceipt_RetailSales()
 	|WHERE
 	|	RetailReturnReceiptItemList.Ref = &Ref
 	|GROUP BY
+	|	RetailReturnReceiptItemList.Ref.BusinessUnit,
 	|	RetailReturnReceiptItemList.Ref.Company,
 	|	RetailReturnReceiptItemList.ItemKey,
 	|	RetailReturnReceiptItemList.Ref.Date,
@@ -271,6 +275,7 @@ Function GetQueryText_RetailReturnReceipt_RetailSales()
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company AS Company,
+	|	tmp.BusinessUnit AS BusinessUnit,
 	|	tmp.ItemKey AS ItemKey,
 	|	CASE
 	|		WHEN tmp.QuantityBySerialLtNumbers = 0

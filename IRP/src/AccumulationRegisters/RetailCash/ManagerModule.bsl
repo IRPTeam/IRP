@@ -7,7 +7,6 @@ Function GetLockFields(Data) Export
 	Fields.Insert("PaymentType"		, "PaymentType");
 	Fields.Insert("Account"			, "Account");
 	Fields.Insert("PaymentTerminal"	, "PaymentTerminal");
-	Fields.Insert("BankTerm"		, "BankTerm");
 	Result.Insert("LockInfo"		, New Structure("Data, Fields", Data, Fields));
 	Return Result;
 EndFunction

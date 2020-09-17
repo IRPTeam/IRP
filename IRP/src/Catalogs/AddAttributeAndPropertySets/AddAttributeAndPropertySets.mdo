@@ -441,6 +441,20 @@
         <value></value>
       </code>
     </items>
+    <items id="d68eb658-0bb7-4e59-904e-0e0d161f977a">
+      <name>Document_CashStatement</name>
+      <description>Document cash statement</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="9fc76d05-8a26-4010-993e-b9d2e703710e">
+      <name>Catalog_CashStatementStatuses</name>
+      <description>Catalog cash statement statuses</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fe6f6eab-b05d-4593-b6ee-b6d8368189dc">
+  <producedTypes>
+    <objectType typeId="0b794c91-516d-4007-994b-17d68a617329" valueTypeId="cfcd983d-f041-438e-b741-f99f567cda04"/>
+    <refType typeId="7de52911-0207-42b4-b555-d21d9506b663" valueTypeId="8d14c266-6a7d-4314-80ae-4cfc291971a5"/>
+    <selectionType typeId="4d379114-3581-4fd8-9463-eba7ed861bd9" valueTypeId="f72770bb-ef8d-4a3d-96f6-a48eb75a4fd1"/>
+    <listType typeId="3b954306-c421-480d-b2ab-66e8c5d5f2a6" valueTypeId="b771d13a-dc66-4efe-acd9-f682153a0cd5"/>
+    <managerType typeId="03a3834b-a684-4e79-8880-355082182ddf" valueTypeId="79e8a9c7-9b00-4f8a-b719-1ecca0ca9eeb"/>
+  </producedTypes>
+  <name>CashStatement</name>
+  <synonym>
+    <key>en</key>
+    <value>Cash statement</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.CashStatement.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_CashStatement</value>
+    </typesFilterValue>
+    <characteristicValues>Document.CashStatement.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Document.CashStatement.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Document.CashStatement.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Document.CashStatement.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <listPresentation>
+    <key>en</key>
+    <value>Cash statement</value>
+  </listPresentation>
+  <numberLength>9</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.CashStatement.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.CashStatement.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.CashStatement.Form.ChoiceForm</defaultChoiceForm>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="5f609f84-70f4-46bd-891d-2bc32dd4a5e5">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="cadef400-5d50-4850-8c37-63c0d94f64f2">
+    <name>BegOfPeriod</name>
+    <synonym>
+      <key>en</key>
+      <value>Beg of period</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers/>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="6f7cb2cc-279c-4848-917d-efd13d0dd70a">
+    <name>EndOfPeriod</name>
+    <synonym>
+      <key>en</key>
+      <value>End of period</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers/>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="8997302f-2b97-44f2-9516-682b17dbdb45">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a29c26ab-367c-4f2b-8db6-faf40c2837a3">
+    <name>CashAccounts</name>
+    <synonym>
+      <key>en</key>
+      <value>Cash/Bank accounts</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.CashAccounts</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <createOnInput>DontUse</createOnInput>
+    <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  </attributes>
+  <attributes uuid="009dff8c-c4d2-4c0b-8d7c-835aecb114de">
+    <name>OpeningBalance</name>
+    <synonym>
+      <key>en</key>
+      <value>Opening balance</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="aff1a3e7-737c-4664-9efc-19ed7da43159">
+    <name>ClosingBalance</name>
+    <synonym>
+      <key>en</key>
+      <value>Closing balance</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="53870fdf-84e2-40cd-9504-fa10e91acf3b">
+    <name>SalesAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Sales amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d179adbf-b0f7-475e-b521-9c5bde0f294e">
+    <name>ReturnsAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Returns amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="81ae9d0f-2a0f-4f38-99a9-bb7d8fc928ed">
+    <name>Status</name>
+    <synonym>
+      <key>en</key>
+      <value>Status</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.CashStatementStatuses</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="5d50d2e5-a75f-4c1f-afa0-a1a909beb2fd">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="41538095-bd90-49e6-a27e-e9776e0bcb7a">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="0fe4d332-79c1-415c-becd-65f4a931e9ca">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="9155c2ba-e918-4c05-9314-0707195f9ada">
+    <producedTypes>
+      <objectType typeId="1dde9633-f392-4747-9a54-0cf26129d86e" valueTypeId="07878e3f-06cd-4a3b-a071-78bd2264581d"/>
+      <rowType typeId="a88d916e-a865-4d27-a493-b5c69d469668" valueTypeId="d031182a-a419-499e-b1aa-ec3174112fdb"/>
+    </producedTypes>
+    <name>CashTransactionList</name>
+    <synonym>
+      <key>en</key>
+      <value>Cash transaction list</value>
+    </synonym>
+    <attributes uuid="a5de7dde-299a-47a9-990c-b2ddce0d7917">
+      <name>Document</name>
+      <synonym>
+        <key>en</key>
+        <value>Document</value>
+      </synonym>
+      <type>
+        <types>DocumentRef</types>
+      </type>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="48dd8703-ab73-4305-877b-bf4f1343f10a">
+      <name>Receipt</name>
+      <synonym>
+        <key>en</key>
+        <value>Receipt</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="1cbd0684-c82a-4451-8ce0-700b2d739f2a">
+      <name>Expense</name>
+      <synonym>
+        <key>en</key>
+        <value>Expense</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="1e6dbb57-5c73-49c4-ae90-da9b7039eed6">
+    <producedTypes>
+      <objectType typeId="0b4c30c1-8126-4632-bd24-f965b1c38ba7" valueTypeId="71f46336-7fc9-435a-b653-5aee1e8973ae"/>
+      <rowType typeId="f8c1c51e-89be-47b1-93e3-07a4230ee671" valueTypeId="623b6b50-920c-4001-89ab-b9743f72ecc6"/>
+    </producedTypes>
+    <name>Payments</name>
+    <synonym>
+      <key>en</key>
+      <value>Payments</value>
+    </synonym>
+    <attributes uuid="7ead24cf-8440-4ee4-9791-c754818aea0c">
+      <name>PaymentType</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.PaymentTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="0b3c39df-1c63-4c67-845d-cc23f43755e5">
+      <name>Account</name>
+      <synonym>
+        <key>en</key>
+        <value>Account</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.CashAccounts</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="511d28b5-fde5-45e4-92a2-1be0387545f8">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="484ec835-0078-4d71-a723-ad9574fccbc7">
+      <name>Percent</name>
+      <synonym>
+        <key>en</key>
+        <value>Percent</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typePercent</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ee65b6d4-0d59-4792-8105-b148f8f53c4d">
+      <name>Commission</name>
+      <synonym>
+        <key>en</key>
+        <value>Commission</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="966964e0-ee88-4a79-b838-43892686ef18">
+    <producedTypes>
+      <objectType typeId="84e516cf-22ef-430c-ac6c-587d4c73f16e" valueTypeId="424c42ad-ad16-4c84-b966-f9ffd4441ef8"/>
+      <rowType typeId="c55e5e60-8b94-4672-8562-b49b6d3f1434" valueTypeId="0dfd4644-b0b0-4856-bef4-febc69cb9a87"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="54eb3108-8c99-42b6-b8c0-4b284a6d4998">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="e30359e8-064a-4b38-8ef7-2367a6751dfb">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+</mdclass:Document>

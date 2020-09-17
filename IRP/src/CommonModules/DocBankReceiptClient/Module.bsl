@@ -61,6 +61,10 @@ Procedure CurrencyOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
+Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
+	Return New Structure();
+EndFunction
+
 #Region ItemTransactionType
 
 Procedure TransactionTypeOnChange(Object, Form, Item) Export
@@ -112,7 +116,7 @@ Procedure CompanyOnChange(Object, Form, Item) Export
 	DocumentsClient.CompanyOnChange(Object, Form, ThisObject, Item);
 EndProcedure
 
-Function CompanySettings() Export
+Function CompanySettings(Object, Form, AddInfo = Undefined) Export
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, CalculateSettings");
 	Actions = New Structure();
 	Actions.Insert("ChangeAccount"	, "ChangeAccount");

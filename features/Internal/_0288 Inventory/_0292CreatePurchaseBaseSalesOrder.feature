@@ -1054,13 +1054,13 @@ Scenario: _029204 create Purchase invoice based on Purchase order that based on 
 		And I click "OK" button
 	* Check filling of the tabular part
 		And "ItemList" table contains lines
-		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      |'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Purchase order'                             | 'Goods receipt'      | 'Sales order'      |
-		| '762,71'     | 'Trousers' | '180,00' | '36/Yellow' | '5,000'  |'137,29'     | 'pcs'  | '900,00'       | 'Store 02' | 'Purchase order 456*'                        | 'Goods receipt 457*' | 'Sales order 456*' |
-		| '1 694,92'   | 'Dress'    | '200,00' | 'XS/Blue'   | '10,000' |'305,08'     | 'pcs'  | '2 000,00'     | 'Store 02' | 'Purchase order 456*'                        | 'Goods receipt 457*' | 'Sales order 456*' |
-		| '8 898,31'   | 'Dress'    | '210,00' | 'M/White'   | '50,000' |'1 601,69'   | 'pcs'  | '10 500,00'    | 'Store 02' | 'Purchase order 456*'                        | 'Goods receipt 457*' | ''                 |
-		| '1 525,42'   | 'Trousers' | '180,00' | '38/Yellow' | '10,000' |'274,58'     | 'pcs'  | '1 800,00'     | 'Store 02' | 'Purchase order 456*'                        | 'Goods receipt 457*' | 'Sales order 456*' |
-		| '1 525,42'   | 'Trousers' | '180,00' | '38/Yellow' | '10,000' |'274,58'     | 'pcs'  | '1 800,00'     | 'Store 01' | 'Purchase order 456*'                        | ''                   | 'Sales order 455*' |
-		| '847,46'     | 'Dress'    | '200,00' | 'XS/Blue'   | '5,000'  |'152,54'     | 'pcs'  | '1 000,00'     | 'Store 01' | 'Purchase order 456*'                        | ''                   | 'Sales order 455*' |
+		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Purchase order'      | 'Sales order'      |
+		| '762,71'     | 'Trousers' | '180,00' | '36/Yellow' | '5,000'  | '137,29'     | 'pcs'  | '900,00'       | 'Store 02' | 'Purchase order 456*' | 'Sales order 456*' |
+		| '1 694,92'   | 'Dress'    | '200,00' | 'XS/Blue'   | '10,000' | '305,08'     | 'pcs'  | '2 000,00'     | 'Store 02' | 'Purchase order 456*' | 'Sales order 456*' |
+		| '8 898,31'   | 'Dress'    | '210,00' | 'M/White'   | '50,000' | '1 601,69'   | 'pcs'  | '10 500,00'    | 'Store 02' | 'Purchase order 456*' | ''                 |
+		| '1 525,42'   | 'Trousers' | '180,00' | '38/Yellow' | '10,000' | '274,58'     | 'pcs'  | '1 800,00'     | 'Store 02' | 'Purchase order 456*' | 'Sales order 456*' |
+		| '1 525,42'   | 'Trousers' | '180,00' | '38/Yellow' | '10,000' | '274,58'     | 'pcs'  | '1 800,00'     | 'Store 01' | 'Purchase order 456*' | 'Sales order 455*' |
+		| '847,46'     | 'Dress'    | '200,00' | 'XS/Blue'   | '5,000'  | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 01' | 'Purchase order 456*' | 'Sales order 455*' |
 	* Change of document number - 457
 		And I input "457" text in "Number" field
 		Then "1C:Enterprise" window is opened

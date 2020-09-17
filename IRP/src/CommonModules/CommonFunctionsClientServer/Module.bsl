@@ -59,6 +59,10 @@ Function CompositionComparisonTypeToComparisonType(CompositionComparisonType) Ex
 EndFunction
 
 Function ObjectHasProperty(Object, Property) Export
+	If TypeOf(Object) = Type("Structure") Then
+		Return Object.Property(Property);
+	EndIf;
+	
 	NewUUID = New UUID();
 	Str = New Structure(Property, NewUUID);
 	FillPropertyValues(Str, Object);
@@ -87,9 +91,20 @@ Function GetFromAddInfo(AddInfo, Key) Export
 	EndIf;
 EndFunction
 
-Function GetStructureOfProperty(Object) Export
+Procedure DeleteFromAddInfo(AddInfo, Key) Export
+	If TypeOf(AddInfo) = Type("Structure") And AddInfo.Property(Key) Then
+		AddInfo.Delete(Key);
+	EndIf;
+EndProcedure	
+
+Function GetStructureOfProperty(Object, AddInfo = Undefined) Export
 	
-	MetaDataStructure = ServiceSystemServer.GetMetaDataStructure(Object.Ref);
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+	If ServerData = Undefined Then
+		MetaDataStructure = ServiceSystemServer.GetMetaDataStructure(Object.Ref);
+	Else
+		MetaDataStructure = ServerData.MetaDataStructure;
+	EndIf;	
 	
 	CacheObject = New Structure();
 	CacheObject.Insert("Attributes", MetaDataStructure.Attributes);

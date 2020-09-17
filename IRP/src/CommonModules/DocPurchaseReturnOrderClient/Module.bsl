@@ -156,7 +156,11 @@ Procedure ItemListPriceTypeOnChange(Object, Form, Item = Undefined) Export
 EndProcedure
 
 Function ItemListPriceTypeSettings(Object, Form, AddInfo = Undefined) Export
-	Return New Structure();
+	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
+	Settings.Actions = New Structure();
+	Settings.ObjectAttributes = "";
+	Settings.FormAttributes = "";
+	Return Settings;
 EndFunction
 
 Procedure ItemListUnitOnChange(Object, Form, Item = Undefined) Export

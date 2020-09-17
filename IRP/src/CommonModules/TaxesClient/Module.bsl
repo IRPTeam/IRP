@@ -234,7 +234,7 @@ Procedure CalculateTaxOnChangeTaxValue(Object, Form, CurrentData, Item, AddInfo 
 	CalculationStringsClientServer.CalculateItemsRows(Object,
 		Form,
 		ArrayRows,
-		TaxesClient.GetCalculateRowsActions(),
+		New Structure("CalculateTax, CalculateTotalAmount, CalculateNetAmount"),
 		ServerData.ArrayOfTaxInfo,
 		AddInfo);	
 EndProcedure

@@ -950,7 +950,6 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 	EndIf;
 	
 	If Settings.CalculateSettings.Property("UpdatePrice")
-		// TODO: Refact
 		And CalculationStringsClientServer.IsPricesChanged(Object, Form, Settings, AddInfo) Then
 		QuestionStructure = New Structure;
 		QuestionStructure.Insert("ProcedureName", "PricesChangedContinue");
@@ -1916,7 +1915,6 @@ Procedure ItemListItemOnChange(Object, Form, Module, Item = Undefined, Settings 
 EndProcedure
 
 Procedure ItemListItemKeyOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined, AddInfo = Undefined) Export
-	
 	
 	ItemListName = "ItemList";
 	If Settings <> Undefined

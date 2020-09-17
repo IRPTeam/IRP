@@ -278,8 +278,7 @@ Function ItemListPriceTypeSettings(Object, Form, AddInfo = Undefined) Export
 	EndIf;
 	
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
-	Actions = New Structure();
-	Settings.Actions = Actions;
+	Settings.Actions = New Structure();
 	Settings.ObjectAttributes = "ItemKey";
 	Settings.FormAttributes = "";
 	

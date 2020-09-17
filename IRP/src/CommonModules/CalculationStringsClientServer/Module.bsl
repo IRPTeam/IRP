@@ -109,6 +109,14 @@ Procedure CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = U
 	
 	If CalculateItemRowsAtServer <> Undefined Then
 		
+		UpdateRowsAfterCalculate = True;
+		UpdateRowsAfterCalculateValue = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UpdateRowsAfterCalculate");
+		If UpdateRowsAfterCalculateValue <> Undefined Then
+			UpdateRowsAfterCalculate = UpdateRowsAfterCalculateValue;
+		EndIf;
+		
+		CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "UpdateRowsAfterCalculate");
+		
 		ColumnNames_ItemList      = GetColumnNames_ItemList(ArrayOfTaxInfo);
 		ColumnNames_TaxList       = GetColumnNames_TaxList();
 		ColumnNames_SpecilaOffers = GetColumnNames_SpecialOffers();
@@ -130,10 +138,11 @@ Procedure CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = U
 											 ArrayOfTaxInfo, 
 											 AddInfo);	
 		
-		UpdateDataCollectionByArrayOfStructures(Object.ItemList      , ObjectAsStructure.ItemList      , ColumnNames_ItemList);
-		FillDataCollectionByArrayOfStructures(Object.TaxList         , ObjectAsStructure.TaxList       , ColumnNames_TaxList);		                                        
-		FillDataCollectionByArrayOfStructures(Object.SpecialOffers   , ObjectAsStructure.SpecialOffers , ColumnNames_SpecilaOffers);									 
-											 	
+		If UpdateRowsAfterCalculate Then
+			UpdateDataCollectionByArrayOfStructures(Object.ItemList      , ObjectAsStructure.ItemList      , ColumnNames_ItemList);
+			FillDataCollectionByArrayOfStructures(Object.TaxList         , ObjectAsStructure.TaxList       , ColumnNames_TaxList);		                                        
+			FillDataCollectionByArrayOfStructures(Object.SpecialOffers   , ObjectAsStructure.SpecialOffers , ColumnNames_SpecilaOffers);									 
+		EndIf;
 	Else
 		For Each ItemRow In ItemRows Do
 			CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo, AddInfo);
@@ -706,22 +715,20 @@ Function DeleteRowsInDependedTable(Object, DependedTableName, MainTableKey, Cach
 EndFunction
 
 Function IsPricesChanged(Object, Form, Settings, AddInfo = Undefined) Export
-
-	CachedColumns = "Key, Price, PriceType, ItemKey, Unit";
-	ListCache = CopyTableToArrayOfStructures(Object, "ItemList", CachedColumns);
+	ListCache = DataCollectionToArrayOfStructures(Object.ItemList, "Key, Price, PriceType, ItemKey, Unit");
 	
 	CalculationSettings = New Structure();
-	PriceDate = GetPriceDate(Form.Object);
-	CalculationSettings.Insert("UpdatePrice",
-					New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
+	PriceDate = GetPriceDateByRefAndDate(Object.Ref, Object.Date);
+	CalculationSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
 	
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "UpdateRowsAfterCalculate", False);
 	CalculateItemsRows(Object, Form, ListCache, CalculationSettings, Undefined, AddInfo);
 
 	For Each RowCache In ListCache Do
 		FoundRows = Object.ItemList.FindRows(New Structure("Key", RowCache.Key));
 		For Each FoundRow In FoundRows Do
 			If Not FoundRow.Price = RowCache.Price Then
-				Return True;	
+				Return True;
 			EndIf;
 		EndDo;
 	EndDo;
@@ -759,18 +766,18 @@ Function GetPriceDateByRefAndDate(Ref, Date) Export
 	EndIf;
 Endfunction
 
-Function CopyTableToArrayOfStructures(Object, TableName, CachedColumns = Undefined)
-	Cache = New Array();
-	ArrayOfCachedColumns = StrSplit(CachedColumns, ",");
-	For Each Row In Object[TableName] Do
-		CacheRow = New Structure();
-		For Each ItemOfCachedColumns In ArrayOfCachedColumns Do
-			CacheRow.Insert(TrimAll(ItemOfCachedColumns), Row[TrimAll(ItemOfCachedColumns)]);
-		EndDo;
-		Cache.Add(CacheRow);
-	EndDo;
-	Return Cache;
-EndFunction
+//Function CopyTableToArrayOfStructures(Object, TableName, CachedColumns = Undefined)
+//	Cache = New Array();
+//	ArrayOfCachedColumns = StrSplit(CachedColumns, ",");
+//	For Each Row In Object[TableName] Do
+//		CacheRow = New Structure();
+//		For Each ItemOfCachedColumns In ArrayOfCachedColumns Do
+//			CacheRow.Insert(TrimAll(ItemOfCachedColumns), Row[TrimAll(ItemOfCachedColumns)]);
+//		EndDo;
+//		Cache.Add(CacheRow);
+//	EndDo;
+//	Return Cache;
+//EndFunction
 
 Function UpdateBarcode(Object, ItemRow, AddInfo = Undefined)
 	ReturnValue = "";

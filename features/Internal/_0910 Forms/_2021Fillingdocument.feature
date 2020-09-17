@@ -1721,12 +1721,15 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 				| 'Shirt' | '38/Black' |
 			And I activate "VAT" field in "ItemList" table
 			And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+			And I move to "Tax list" tab
+			And I click "Refresh" button
 			And "TaxTree" table contains lines
 				| 'Tax' | 'Tax rate' | 'Item'  | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
 				| 'VAT' | ''         | ''      | ''         | ''          | '192,60' | '192,60'        |
 				| 'VAT' | '18%'      | 'Dress' | 'L/Green'  | ''          | '99,00'  | '99,00'         |
 				| 'VAT' | '18%'      | 'Dress' | 'XS/Blue'  | ''          | '93,60'  | '93,60'         |
 				| 'VAT' | '0%'       | 'Shirt' | '38/Black' | ''          | ''       | ''              |
+			And I move to "Item list" tab
 			And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price include tax

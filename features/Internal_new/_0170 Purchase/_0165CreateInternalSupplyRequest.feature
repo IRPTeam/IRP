@@ -35,7 +35,42 @@ Scenario: _016501 preparation
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects
 		When Create chart of characteristic types CurrencyMovementType objects
-		
+		* Add plugin for taxes calculation
+			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+			If "List" table does not contain lines Then
+					| "Description" |
+					| "TaxCalculateVAT_TR" |
+				* Opening a form to add Plugin sessing
+					Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+				* Addition of Plugin sessing for calculating Tax types for Turkey (VAT)
+					And I click the button named "FormCreate"
+					And I select external file "#workingDir#\DataProcessor\TaxCalculateVAT_TR.epf"
+					And I click the button named "FormAddExtDataProc"
+					And I input "" text in "Path to plugin for test" field
+					And I input "TaxCalculateVAT_TR" text in "Name" field
+					And I click Open button of the field named "Description_en"
+					And I input "TaxCalculateVAT_TR" text in the field named "Description_en"
+					And I input "TaxCalculateVAT_TR" text in the field named "Description_tr"
+					And I click "Ok" button
+					And I click "Save and close" button
+					And I wait "Plugins (create)" window closing in 10 seconds
+				* Check added processing
+					Then I check for the "ExternalDataProc" catalog element with the "Description_en" "TaxCalculateVAT_TR"
+					Given I open hyperlink "e1cib/list/Catalog.Taxes"		
+					And I go to line in "List" table
+						| 'Description' |
+						| 'TaxCalculateVAT_TR'         |
+					And I select current line in "List" table
+					And I click Select button of "Plugins" field
+					And I go to line in "List" table
+						| 'Description' |
+						| 'VAT'         |
+					And I select current line in "List" table
+					And I click "Save and close" button
+				And I close all client application windows
+		* Constants
+			When set True value to the constant
+			
 Scenario: _016501 create document Internal Supply Request
 	* Opening the creation form Internal Supply Request
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"

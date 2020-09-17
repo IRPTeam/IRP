@@ -37,127 +37,43 @@ Scenario: _017000 preparation
 		When Create catalog Taxes objects	
 	When Create information register TaxSettings records
 	* Add plugin for taxes calculation
-		* Opening a form to add Plugin sessing
-			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		* Addition of Plugin sessing for calculating Tax types for Turkey (VAT)
-			And I click the button named "FormCreate"
-			And I select external file "#workingDir#\DataProcessor\TaxCalculateVAT_TR.epf"
-			And I click the button named "FormAddExtDataProc"
-			And I input "" text in "Path to plugin for test" field
-			And I input "TaxCalculateVAT_TR" text in "Name" field
-			And I click Open button of the field named "Description_en"
-			And I input "TaxCalculateVAT_TR" text in the field named "Description_en"
-			And I input "TaxCalculateVAT_TR" text in the field named "Description_tr"
-			And I click "Ok" button
-			And I click "Save and close" button
-			And I wait "Plugins (create)" window closing in 10 seconds
-		* Check added processing
-			Then I check for the "ExternalDataProc" catalog element with the "Description_en" "TaxCalculateVAT_TR"
-			Given I open hyperlink "e1cib/list/Catalog.Taxes"		
-			And I go to line in "List" table
-				| 'Description' |
-				| 'TaxCalculateVAT_TR'         |
-			And I select current line in "List" table
-			And I click Select button of "Plugins" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'VAT'         |
-			And I select current line in "List" table
-			And I click "Save and close" button
-		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			* Opening a form to add Plugin sessing
+				Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+			* Addition of Plugin sessing for calculating Tax types for Turkey (VAT)
+				And I click the button named "FormCreate"
+				And I select external file "#workingDir#\DataProcessor\TaxCalculateVAT_TR.epf"
+				And I click the button named "FormAddExtDataProc"
+				And I input "" text in "Path to plugin for test" field
+				And I input "TaxCalculateVAT_TR" text in "Name" field
+				And I click Open button of the field named "Description_en"
+				And I input "TaxCalculateVAT_TR" text in the field named "Description_en"
+				And I input "TaxCalculateVAT_TR" text in the field named "Description_tr"
+				And I click "Ok" button
+				And I click "Save and close" button
+				And I wait "Plugins (create)" window closing in 10 seconds
+			* Check added processing
+				Then I check for the "ExternalDataProc" catalog element with the "Description_en" "TaxCalculateVAT_TR"
+				Given I open hyperlink "e1cib/list/Catalog.Taxes"		
+				And I go to line in "List" table
+					| 'Description' |
+					| 'TaxCalculateVAT_TR'         |
+				And I select current line in "List" table
+				And I click Select button of "Plugins" field
+				And I go to line in "List" table
+					| 'Description' |
+					| 'VAT'         |
+				And I select current line in "List" table
+				And I click "Save and close" button
+			And I close all client application windows
+	* Constants
+		When set True value to the constant
 
 Scenario: _017001 create document Purchase order - Goods receipt is not used
-	* Opening a form to create Purchase Order
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I click the button named "FormCreate"
-	* Status filling
-		And I select "Approved" exact value from "Status" drop-down list
-	* Filling in vendor information
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| Description |
-			| Ferron BP   |
-		And I select current line in "List" table
-		And I click Select button of "Legal name" field
-		And I activate "Description" field in "List" table
-		And I go to line in "List" table
-			| Description       |
-			| Company Ferron BP |
-		And I select current line in "List" table
-		And I click Select button of "Partner term" field
-		And I go to line in "List" table
-			| Description        |
-			| Vendor Ferron, TRY |
-		And I select current line in "List" table
-		And I click Select button of "Store" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'  |
-		And I select current line in "List" table
-	* Filling in items table
-		And I click the button named "Add"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item key' |
-			| 'M/White'  |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
-		And I click choice button of "Item" attribute in "ItemList" table
-		Then "Items" window is opened
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		Then "Item keys" window is opened
-		And I go to line in "List" table
-			| 'Item key' |
-			| 'L/Green'  |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
-		And I click choice button of "Item" attribute in "ItemList" table
-		Then "Items" window is opened
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Unit' |
-			| '1' | 'Dress' | 'M/White' | 'pcs' |
-		And I activate "Q" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "100" text in "Q" field of "ItemList" table
-		And I input "200" text in "Price" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Unit' |
-			| '2' | 'Dress' | 'L/Green'  | 'pcs' |
-		And I select current line in "ItemList" table
-		And I input "200" text in "Q" field of "ItemList" table
-		And I input "210" text in "Price" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| '#' | 'Item'     | 'Item key' | 'Unit' |
-			| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
-		And I select current line in "ItemList" table
-		And I input "300" text in "Q" field of "ItemList" table
-		And I input "250" text in "Price" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And "ItemList" table contains lines
-			| 'Item'     | 'Q' | 'Item key'  | 'Store' | 'Unit' |
-			| 'Dress'    | '100,000'  | 'M/White'   | 'Store 01'      | 'pcs' |
-	* Post document
-		And I click "Post" button
-		And I save the value of "Number" field as "$$NumberPurchaseOrder017001$$"
-		And I save the window as "$$PurchaseOrder017001$$"
-		And I click "Post and close" button
+	When create PurchaseOrder017001
 
 Scenario: _017002 check Purchase Order N2 posting by register Order Balance (+) - Goods receipt is not used
 	* Opening register Order Balance
@@ -179,63 +95,7 @@ Scenario: _017002 check Purchase Order N2 posting by register Order Balance (+) 
 			| '300,000'  | '$$PurchaseOrder017001$$' | 'Store 01' | '$$PurchaseOrder017001$$' | '36/Yellow' |
 
 Scenario: _017003 create document Purchase order - Goods receipt is used
-	* Opening a form to create Purchase Order
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I click the button named "FormCreate"
-	* Filling in the details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-		| Description  |
-		| Main Company |
-		And I select current line in "List" table
-		And I select "Approved" exact value from "Status" drop-down list
-	* Filling in vendor information
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| Description |
-			| Ferron BP   |
-		And I select current line in "List" table
-		And I click Select button of "Legal name" field
-		And I activate "Description" field in "List" table
-		And I go to line in "List" table
-			| Description       |
-			| Company Ferron BP |
-		And I select current line in "List" table
-		And I click Select button of "Partner term" field
-		And I go to line in "List" table
-			| Description        |
-			| Vendor Ferron, USD |
-		And I select current line in "List" table
-		And I click Select button of "Store" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'  |
-		And I select current line in "List" table
-	* Filling in items table
-		And I click the button named "Add"
-		And I click choice button of "Item" attribute in "ItemList" table
-		Then "Items" window is opened
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		Then "Item keys" window is opened
-		And I go to line in "List" table
-			| 'Item key' |
-			| 'L/Green'  |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Unit' |
-			| '1' | 'Dress' | 'L/Green'  | 'pcs' |
-		And I select current line in "ItemList" table
-		And I input "500,000" text in "Q" field of "ItemList" table
-		And I input "40,00" text in "Price" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Post document
-		And I click "Post" button
-		And I save the value of "Number" field as "$$NumberPurchaseOrder017003$$"
-		And I save the window as "$$PurchaseOrder017003$$"
-		And I click "Post and close" button
+	When create PurchaseOrder017003
 
 Scenario: _017004 check Purchase Order N3 posting by register Order Balance (+) - Goods receipt is not used
 	* Opening of register Order Balance

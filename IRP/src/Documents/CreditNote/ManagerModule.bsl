@@ -48,7 +48,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Currency AS Currency,
 		|	SUM(tmp.Amount) AS Amount,
 		|	tmp.Period AS Period,
-		|	tmp.Key AS Key
+		|	tmp.Key AS Key,
+		|	tmp.IsVendor,
+		|	tmp.IsCustomer
 		|FROM
 		|	tmp AS tmp
 		|WHERE
@@ -61,7 +63,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Currency,
 		|	tmp.Period,
 		|	tmp.BasisDocument,
-		|	tmp.Key
+		|	tmp.Key,
+		|	tmp.IsVendor,
+		|	tmp.IsCustomer
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -98,7 +102,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Currency AS Currency,
 		|	-SUM(tmp.Amount) AS Amount,
 		|	tmp.Period AS Period,
-		|	tmp.Key AS Key
+		|	tmp.Key AS Key,
+		|	tmp.IsVendor,
+		|	tmp.IsCustomer
 		|FROM
 		|	tmp AS tmp
 		|WHERE
@@ -111,7 +117,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Currency,
 		|	tmp.Period,
 		|	tmp.BasisDocument,
-		|	tmp.Key
+		|	tmp.Key,
+		|	tmp.IsVendor,
+		|	tmp.IsCustomer
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -200,7 +208,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table1.Columns.Amount.Name = "TransactionAP";
 	PostingServer.AddColumnsToAccountsStatementTable(Table1);
 	For Each Row In Parameters.DocumentDataTables.PartnerApTransactions Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Vendor Then
+		If Row.IsVendor Then
 			NewRow = Table1.Add();
 			FillPropertyValues(NewRow, Row);
 			NewRow.TransactionAP = Row.Amount;
@@ -213,7 +221,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table2.Columns.Amount.Name = "TransactionAR";
 	PostingServer.AddColumnsToAccountsStatementTable(Table2);
 	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
+		If Row.IsCustomer Then
 			NewRow = Table2.Add(); 
 			FillPropertyValues(NewRow, Row);
 			NewRow.TransactionAR = Row.Amount;

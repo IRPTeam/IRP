@@ -33,7 +33,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
 		|	SalesReturnItemList.ItemKey.Item AS Item,
 		|	SalesReturnItemList.Ref.Date AS Period,
-		|	SalesReturnItemList.SalesInvoice AS SalesInvoice,
+		|	CASE
+		|		WHEN SalesReturnItemList.SalesInvoice = VALUE(Document.SalesInvoice.EmptyRef)
+		|			THEN SalesReturnItemList.Ref
+		|		ELSE SalesReturnItemList.SalesInvoice
+		|	END AS SalesInvoice,
 		|	SalesReturnItemList.Key AS RowKey,
 		|	SalesReturnItemList.Ref.IsOpeningEntry AS IsOpeningEntry
 		|FROM
@@ -67,7 +71,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	SalesReturnItemList.ItemKey.Item,
 		|	SalesReturnItemList.Ref.Date,
 		|	VALUE(Catalog.Units.EmptyRef),
-		|	SalesReturnItemList.SalesInvoice,
+		|	CASE
+		|		WHEN SalesReturnItemList.SalesInvoice = VALUE(Document.SalesInvoice.EmptyRef)
+		|			THEN SalesReturnItemList.Ref
+		|		ELSE SalesReturnItemList.SalesInvoice
+		|	END,
 		|	SalesReturnItemList.Key,
 		|	SalesReturnItemList.Ref.IsOpeningEntry";
 	
@@ -93,7 +101,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	QueryTable.SalesReturnOrder AS Order,
 		|	QueryTable.SalesReturn AS ReceiptBasis,
 		|	QueryTable.BasisDocument AS BasisDocument,
-		|
 		|	QueryTable.BasisQuantity AS Quantity,
 		|	QueryTable.BasisUnit AS Unit,
 		|	QueryTable.Period AS Period,
@@ -130,29 +137,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Period,
 		|	tmp.RowKey
 		|;
-		|
-//		|// 2//////////////////////////////////////////////////////////////////////////////
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp.Currency,
-//		|	tmp.ItemKey,
-//		|	-SUM(tmp.Quantity) AS Quantity,
-//		|	-SUM(tmp.Amount) AS Amount,
-//		|	tmp.Period,
-//		|	tmp.SalesInvoice,
-//		|	tmp.RowKey
-//		|FROM
-//		|	tmp AS tmp
-//		|WHERE
-//		|	tmp.Order = VALUE(Document.SalesReturnOrder.EmptyRef)
-//		|GROUP BY
-//		|	tmp.Company,
-//		|	tmp.Currency,
-//		|	tmp.ItemKey,
-//		|	tmp.Period,
-//		|	tmp.SalesInvoice,
-//		|	tmp.RowKey
-//		|;
 		|
 		|// 2//////////////////////////////////////////////////////////////////////////////
 		|SELECT
@@ -339,8 +323,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables.Insert("OrderBalance", QueryResults[1].Unload());
 	
-	//Tables.Insert("SalesTurnovers", QueryResults[2].Unload());
-	
 	Tables.Insert("InventoryBalance", QueryResults[2].Unload());
 	Tables.Insert("GoodsInTransitIncoming", QueryResults[3].Unload());
 	Tables.Insert("StockBalance", QueryResults[4].Unload());
@@ -373,7 +355,11 @@ Function GetQueryTextSalesReturnSalesTurnovers()
 	|	SUM(SalesReturnItemList.Quantity) AS Quantity,
 	|	SUM(ISNULL(SalesReturnSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
 	|	SalesReturnItemList.Ref.Date AS Period,
-	|	SalesReturnItemList.SalesInvoice AS SalesInvoice,
+	|	CASE
+	|		WHEN SalesReturnItemList.SalesInvoice = VALUE(Document.SalesInvoice.EmptyRef)
+	|			THEN SalesReturnItemList.Ref
+	|		ELSE SalesReturnItemList.SalesInvoice
+	|	END AS SalesInvoice,
 	|	SUM(SalesReturnItemList.TotalAmount) AS Amount,
 	|	SUM(SalesReturnItemList.NetAmount) AS NetAmount,
 	|	SUM(SalesReturnItemList.OffersAmount) AS OffersAmount,
@@ -397,7 +383,11 @@ Function GetQueryTextSalesReturnSalesTurnovers()
 	|	SalesReturnItemList.Ref,
 	|	SalesReturnItemList.Key,
 	|	SalesReturnSerialLotNumbers.SerialLotNumber,
-	|	SalesReturnItemList.SalesInvoice
+	|	CASE
+	|		WHEN SalesReturnItemList.SalesInvoice = VALUE(Document.SalesInvoice.EmptyRef)
+	|			THEN SalesReturnItemList.Ref
+	|		ELSE SalesReturnItemList.SalesInvoice
+	|	END
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////

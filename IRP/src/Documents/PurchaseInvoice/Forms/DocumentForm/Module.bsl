@@ -399,6 +399,11 @@ EndProcedure
 
 #Region Taxes
 
+&AtClient
+Procedure TaxValueOnChange(Item) Export
+	DocPurchaseInvoiceClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+EndProcedure
+
 &AtServer
 Function Taxes_CreateFormControls() Export
 	TaxesParameters = TaxesServer.GetCreateFormControlsParameters();

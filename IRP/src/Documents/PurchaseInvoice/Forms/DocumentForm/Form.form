@@ -1803,16 +1803,14 @@
         </items>
         <items xsi:type="form:FormField">
           <name>ItemListTotalAmount</name>
-          <id>157</id>
+          <id>605</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.TotalAmount</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.TotalAmount</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -1820,7 +1818,7 @@
           </handlers>
           <extendedTooltip>
             <name>ItemListTotalAmountExtendedTooltip</name>
-            <id>159</id>
+            <id>607</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1835,7 +1833,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>ItemListTotalAmountContextMenu</name>
-            <id>158</id>
+            <id>606</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>

@@ -17,8 +17,7 @@ EndProcedure
 Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array;
 	AttributesArray.Add("Company");
-	AttributesArray.Add("Store");
-	AttributesArray.Add("CashAccounts");
+	AttributesArray.Add("BusinessUnit");
 	AttributesArray.Add("Status");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Atr In AttributesArray Do
@@ -53,20 +52,53 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 	Query = New Query;
 	Query.Text =
 		"SELECT
-		|	AccountBalanceTurnovers.Recorder AS Document,
-		|	SUM(AccountBalanceTurnovers.AmountExpense) AS Expense,
-		|	SUM(AccountBalanceTurnovers.AmountReceipt) AS Receipt
+		|	RetailCashTurnovers.Recorder AS Document,
+		|	CASE
+		|		When SUM(RetailCashTurnovers.AmountReceipt) < 0
+		|			Then -SUM(RetailCashTurnovers.AmountReceipt)
+		|		Else SUM(RetailCashTurnovers.AmountExpense)
+		|	End AS Expense,
+		|	CASE
+		|		When SUM(RetailCashTurnovers.AmountReceipt) < 0
+		|			Then 0
+		|		Else SUM(RetailCashTurnovers.AmountReceipt)
+		|	End AS Receipt
 		|FROM
-		|	AccumulationRegister.AccountBalance.Turnovers(&BegOfPeriod, &EndOfPeriod, Record, Company = &Company) AS
-		|		AccountBalanceTurnovers
+		|	AccumulationRegister.RetailCash.Turnovers(&BegOfPeriod, &EndOfPeriod, Record, Company = &Company
+		|	And BusinessUnit = &BusinessUnit) AS RetailCashTurnovers
 		|GROUP BY
-		|	AccountBalanceTurnovers.Recorder";
+		|	RetailCashTurnovers.Recorder";
 	
 	Query.SetParameter("BegOfPeriod", Object.BegOfPeriod);
 	Query.SetParameter("EndOfPeriod", Object.EndOfPeriod);
+	Query.SetParameter("BusinessUnit", Object.BusinessUnit);
 	Query.SetParameter("Company", Object.Company);
 	QueryResult = Query.Execute().Unload();
 	Object.CashTransactionList.Load(QueryResult);
+	
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	RetailCash.PaymentType,
+		|	RetailCash.Account,
+		|	SUM(RetailCash.Amount) AS Amount,
+		|	SUM(RetailCash.Commission) AS Commission
+		|FROM
+		|	AccumulationRegister.RetailCash AS RetailCash
+		|WHERE
+		|	RetailCash.Company = &Company
+		|	AND RetailCash.BusinessUnit = &BusinessUnit
+		|	AND RetailCash.Period BETWEEN &BegOfPeriod AND &EndOfPeriod
+		|GROUP BY
+		|	RetailCash.PaymentType,
+		|	RetailCash.Account";
+	
+	Query.SetParameter("BegOfPeriod", Object.BegOfPeriod);
+	Query.SetParameter("EndOfPeriod", Object.EndOfPeriod);
+	Query.SetParameter("BusinessUnit", Object.BusinessUnit);
+	Query.SetParameter("Company", Object.Company);
+	QueryResult = Query.Execute().Unload();
+	Object.PaymentList.Load(QueryResult);	
 	
 EndProcedure
 

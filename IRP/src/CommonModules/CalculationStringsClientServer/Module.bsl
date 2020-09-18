@@ -49,28 +49,121 @@ Procedure ClearDependentData(Object, AddInfo = Undefined) Export
 	EndIf;
 EndProcedure
 
+Function GetColumnNames_ItemList(ArrayOfTaxInfo = Undefined) Export
+	ColumnNames = "Key, Unit, Price, PriceType, ItemKey, Quantity, OffersAmount, 
+				  |TotalAmount, NetAmount, TaxAmount, Info, Barcode";
+	If ArrayOfTaxInfo <> Undefined Then
+		For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
+			ColumnNames = ColumnNames + "," +	ItemOfTaxInfo.Name;
+		EndDo;
+	EndIf;
+	Return ColumnNames;
+EndFunction	
+
+Function GetColumnNames_TaxList() Export
+	Return "Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount";
+EndFunction
+
+Function GetColumnNames_SpecialOffers() Export
+	Return "Key, Offer, Amount, Percent";
+EndFunction
+
+Function DataCollectionToArrayOfStructures(DataCollection, ColumnNames) Export
+	ArrayOfStructures = New Array();
+	For Each Row In DataCollection Do
+		NewRow = New Structure(ColumnNames);
+		FillPropertyValues(NewRow, Row);
+		ArrayOfStructures.Add(NewRow);
+	EndDo;
+	Return ArrayOfStructures;
+EndFunction
+
+Procedure UpdateDataCollectionByArrayOfStructures(DataCollection, ArrayOfStructures, ColumnNames) Export
+	For Each Row In ArrayOfStructures Do
+		ArrayOfUpdatedRows = DataCollection.FindRows(New Structure("Key", Row.Key));
+		If ArrayOfUpdatedRows.Count() = 0 Then
+			Raise StrTemplate("Not found row by key [%1]", Row.Key);
+		ElsIf ArrayOfUpdatedRows.Count() > 1 Then
+			Raise StrTemplate("Found several row by key [%1]", Row.Key);;
+		Else
+			For Each UpdatedRow In ArrayOfUpdatedRows Do
+				FillPropertyValues(UpdatedRow, Row);
+			EndDo;
+		EndIf;
+	EndDo;
+EndProcedure	
+
+Procedure FillDataCollectionByArrayOfStructures(DataCollection, ArrayOfStructures, ColumnNames) Export
+	DataCollection.Clear();
+	For Each Row In ArrayOfStructures Do
+		FillPropertyValues(DataCollection.Add(), Row);
+	EndDo;
+EndProcedure	
+		
 Procedure CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Undefined, AddInfo = Undefined) Export
 	If Not Actions.Count() Then
 		Return;
 	EndIf;
-			
-	For Each ItemRow In ItemRows Do
-		CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo, AddInfo);
-	EndDo;
+	
+	CalculateItemRowsAtServer = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CalculateItemRowsAtServer");
+	
+	If CalculateItemRowsAtServer <> Undefined Then
+		
+		UpdateRowsAfterCalculate = True;
+		UpdateRowsAfterCalculateValue = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UpdateRowsAfterCalculate");
+		If UpdateRowsAfterCalculateValue <> Undefined Then
+			UpdateRowsAfterCalculate = UpdateRowsAfterCalculateValue;
+		EndIf;
+		
+		CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "UpdateRowsAfterCalculate");
+		
+		ColumnNames_ItemList      = GetColumnNames_ItemList(ArrayOfTaxInfo);
+		ColumnNames_TaxList       = GetColumnNames_TaxList();
+		ColumnNames_SpecilaOffers = GetColumnNames_SpecialOffers();
+	
+		ArrayOfRows_ItemList      = DataCollectionToArrayOfStructures(ItemRows             , ColumnNames_ItemList);
+		ArrayOfRows_TaxList       = DataCollectionToArrayOfStructures(Object.TaxList       , ColumnNames_TaxList);
+		ArrayOfRows_SpecialOffers = DataCollectionToArrayOfStructures(Object.SpecialOffers , ColumnNames_SpecilaOffers);
+		
+		ObjectAsStructure = New Structure("Date, Company, Partner, Agreement, PriceIncludeTax");
+		FillPropertyValues(ObjectAsStructure, Object);
+		ObjectAsStructure.Insert("Ref"           , Object.Ref);		
+		ObjectAsStructure.Insert("ItemList"      , ArrayOfRows_ItemList);
+		ObjectAsStructure.Insert("TaxList"       , ArrayOfRows_TaxList);
+		ObjectAsStructure.Insert("SpecialOffers" , ArrayOfRows_SpecialOffers);
+		
+		CalculationServer.CalculateItemsRows(ObjectAsStructure, 
+											 Undefined, 
+											 Actions, 
+											 ArrayOfTaxInfo, 
+											 AddInfo);	
+		
+		If UpdateRowsAfterCalculate Then
+			UpdateDataCollectionByArrayOfStructures(Object.ItemList      , ObjectAsStructure.ItemList      , ColumnNames_ItemList);
+			FillDataCollectionByArrayOfStructures(Object.TaxList         , ObjectAsStructure.TaxList       , ColumnNames_TaxList);		                                        
+			FillDataCollectionByArrayOfStructures(Object.SpecialOffers   , ObjectAsStructure.SpecialOffers , ColumnNames_SpecilaOffers);									 
+		EndIf;
+	Else
+		For Each ItemRow In ItemRows Do
+			CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo, AddInfo);
+		EndDo;
+	EndIf;
 	
 	#If ThinClient Then
 		
-	For Each Action In Actions Do
-		
+	For Each Action In Actions Do		
 		NotifyStructure = New Structure();
 		NotifyStructure.Insert("Object"			, Object);
-		NotifyStructure.Insert("ItemRow"		, ItemRow);
+		NotifyStructure.Insert("ItemRow"		, Undefined);
 		NotifyStructure.Insert("Actions"		, Actions);
 		NotifyStructure.Insert("ArrayOfTaxInfo"	, ArrayOfTaxInfo);
-		NotifyStructure.Insert("AddInfo"		, AddInfo);		
+		NotifyStructure.Insert("AddInfo"		, AddInfo);	
+			
 		Notify(Action.Key, NotifyStructure, Form);
 	EndDo;
-	Notify("CallbackHandler", Undefined, Form);
+
+	Notify("CallbackHandler", New Structure("AddInfo", AddInfo), Form);
+	
 	#EndIf
 EndProcedure
 
@@ -181,6 +274,8 @@ EndFunction
 
 Procedure UpdatePrice(Object, ItemRow, ChangePriceTypeSettings, AddInfo = Undefined)
 	
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+	
 	ChangePriceTypeSettings.Insert("ItemKey", ItemRow.ItemKey);
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "PriceType") Then
@@ -188,10 +283,17 @@ Procedure UpdatePrice(Object, ItemRow, ChangePriceTypeSettings, AddInfo = Undefi
 	Else
 		ChangePriceTypeSettings.Insert("RowPriceType", ChangePriceTypeSettings.PriceType);
 	EndIf;
-	If ChangePriceTypeSettings.RowPriceType = PredefinedValue("Catalog.PriceTypes.ManualPriceType") Then
-		Return;
-	EndIf;
 	
+	If ServerData = Undefined Then
+		If ChangePriceTypeSettings.RowPriceType = PredefinedValue("Catalog.PriceTypes.ManualPriceType") Then
+			Return;
+		EndIf;
+	Else
+		If ChangePriceTypeSettings.RowPriceType = ServerData.PriceTypes_ManualPriceType Then
+			Return;
+		EndIf;
+	EndIf;
+			
 	ChangePriceTypeSettings.Insert("Unit", ItemRow.Unit);
 	ChangePriceTypeSettings.Insert("Object", Object);
 	
@@ -293,6 +395,36 @@ Procedure CalculateTaxReverse_PriceNotIncludeTax(Object, ItemRow, ArrayOfTaxInfo
 	CalculateTax(Object, ItemRow, False, ArrayOfTaxInfo, True, AddInfo);
 EndProcedure
 
+Function GetTaxCalculationParameters(Object, ItemRow, ItemOfTaxInfo, PriceIncludeTax, Reverse, AddInfo = Undefined)
+	TaxParameters = New Structure();
+	TaxParameters.Insert("Tax", ItemOfTaxInfo.Tax);
+	TaxParameters.Insert("TaxRateOrAmount", ItemRow[ItemOfTaxInfo.Name]);
+	TaxParameters.Insert("PriceIncludeTax", PriceIncludeTax);
+	TaxParameters.Insert("Key", ItemRow.Key);
+		
+	Table = Undefined;
+	If Object.Property("ItemList") Then
+		Table = Object.ItemList;
+	ElsIf Object.Property("PaymentList") Then
+		Table = Object.PaymentList;
+	Else
+		Raise "Not supported table";
+	EndIf;
+	
+	ArrayOfItemRows = Table.FindRows(New Structure("Key", ItemRow.Key));
+	If ArrayOfItemRows.Count() <> 1 Then
+		Raise StrTemplate("Find %1 rows in table by key %2", ArrayOfItemRows.Count(), ItemRow.Key);
+	EndIf;
+	
+	ItemRow = ArrayOfItemRows[0];
+	TaxParameters.Insert("TotalAmount", ItemRow.TotalAmount);
+	TaxParameters.Insert("NetAmount" ,ItemRow.NetAmount);
+	TaxParameters.Insert("Ref" ,Object.Ref);
+		
+	TaxParameters.Insert("Reverse", Reverse);
+	Return TaxParameters;
+EndFunction	
+
 Procedure CalculateTax(Object, ItemRow, PriceIncludeTax, ArrayOfTaxInfo, Reverse, AddInfo = Undefined)
 	
 	// ArrayOfTaxInfo
@@ -314,53 +446,55 @@ Procedure CalculateTax(Object, ItemRow, PriceIncludeTax, ArrayOfTaxInfo, Reverse
 	EndIf;
 	
 	For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
-		If ItemOfTaxInfo.Type = PredefinedValue("Enum.TaxType.Rate")
-			And Not ValueIsFilled(ItemRow[ItemOfTaxInfo.Name]) Then
+		
+		TaxTypeIsRate = True;
+		If ItemOfTaxInfo.Property("TaxTypeIsRate") Then
+			TaxTypeIsRate = ItemOfTaxInfo.TaxTypeIsRate;
+		Else
+			TaxTypeIsRate = (ItemOfTaxInfo.Type = PredefinedValue("Enum.TaxType.Rate"));
+		EndIf;
+		
+		If TaxTypeIsRate And Not ValueIsFilled(ItemRow[ItemOfTaxInfo.Name]) Then
 			
 			ArrayOfTaxRates = New Array();
-			
-			If CommonFunctionsClientServer.ObjectHasProperty(Object, "Agreement") Then
-				Parameters = New Structure();
-				Parameters.Insert("Date", Object.Date);
-				Parameters.Insert("Company", Object.Company);
-				Parameters.Insert("Tax", ItemOfTaxInfo.Tax);
-				Parameters.Insert("Agreement", Object.Agreement);
+			If ItemOfTaxInfo.Property("ArrayOfTaxRates") Then
+				ArrayOfTaxRates = ItemOfTaxInfo.ArrayOfTaxRates;
+			Else
 				
-				ArrayOfTaxRates = TaxesServer.TaxRatesForAgreement(Parameters);
-			EndIf;
-			
-			If Not ArrayOfTaxRates.Count() Then
-				Parameters = New Structure();
-				Parameters.Insert("Date", Object.Date);
-				Parameters.Insert("Company", Object.Company);
-				Parameters.Insert("Tax", ItemOfTaxInfo.Tax);
-				
-				If CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "ItemKey") Then
-					Parameters.Insert("ItemKey", ItemRow.ItemKey);
-				Else
-					Parameters.Insert("ItemKey", PredefinedValue("Catalog.ItemKeys.EmptyRef"));
+				If CommonFunctionsClientServer.ObjectHasProperty(Object, "Agreement") Then
+					Parameters = New Structure;
+					Parameters.Insert("Date", Object.Date);
+					Parameters.Insert("Company", Object.Company);
+					Parameters.Insert("Tax", ItemOfTaxInfo.Tax);
+					Parameters.Insert("Agreement", Object.Agreement);
+					ArrayOfTaxRates = TaxesServer.TaxRatesForAgreement(Parameters);
 				EndIf;
-				
-				ArrayOfTaxRates = TaxesServer.GetTaxRatesForItemKey(Parameters);
+
+				If Not ArrayOfTaxRates.Count() Then
+					Parameters = New Structure;
+					Parameters.Insert("Date", Object.Date);
+					Parameters.Insert("Company", Object.Company);
+					Parameters.Insert("Tax", ItemOfTaxInfo.Tax);
+
+					If CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "ItemKey") Then
+						Parameters.Insert("ItemKey", ItemRow.ItemKey);
+					Else
+						Parameters.Insert("ItemKey", PredefinedValue("Catalog.ItemKeys.EmptyRef"));
+					EndIf;
+
+					ArrayOfTaxRates = TaxesServer.GetTaxRatesForItemKey(Parameters);
+				EndIf;
 			EndIf;
-			
 			If ArrayOfTaxRates.Count() Then
 				ItemRow[ItemOfTaxInfo.Name] = ArrayOfTaxRates[0].TaxRate;
 			EndIf;
 		EndIf;
 		
-		// Calculate tax amount
-		TaxParameters = New Structure();
-		TaxParameters.Insert("Tax", ItemOfTaxInfo.Tax);
-		TaxParameters.Insert("TaxRateOrAmount", ItemRow[ItemOfTaxInfo.Name]);
-		TaxParameters.Insert("PriceIncludeTax", PriceIncludeTax);
-		TaxParameters.Insert("Key", ItemRow.Key);
-		TaxParameters.Insert("Object", Object);
-		TaxParameters.Insert("Reverse", Reverse);
+		TaxParameters = GetTaxCalculationParameters(Object, ItemRow, ItemOfTaxInfo, PriceIncludeTax, Reverse, AddInfo);
+			
+		ArrayOfResultsTaxCalculation = TaxesServer.CalculateTax(TaxParameters);
 		
-		ArrayOfResult = TaxesServer.CalculateTax(TaxParameters);
-		
-		For Each RowOfResult In ArrayOfResult Do
+		For Each RowOfResult In ArrayOfResultsTaxCalculation Do
 			NewTax = Object.TaxList.Add();
 			NewTax.Key = ItemRow.Key;
 			NewTax.Tax = RowOfResult.Tax;
@@ -438,14 +572,7 @@ Procedure CalculateTaxManualPriority(Object, ItemRow, PriceIncludeTax, ArrayOfTa
 			EndIf;
 		EndIf;
 		
-		// Calculate tax amount
-		TaxParameters = New Structure();
-		TaxParameters.Insert("Tax", ItemOfTaxInfo.Tax);
-		TaxParameters.Insert("TaxRateOrAmount", ItemRow[ItemOfTaxInfo.Name]);
-		TaxParameters.Insert("PriceIncludeTax", PriceIncludeTax);
-		TaxParameters.Insert("Key", ItemRow.Key);
-		TaxParameters.Insert("Object", Object);
-		TaxParameters.Insert("Reverse", Reverse);
+		TaxParameters = GetTaxCalculationParameters(Object, ItemRow, ItemOfTaxInfo, PriceIncludeTax, Reverse, AddInfo);
 		
 		ArrayOfResult = TaxesServer.CalculateTax(TaxParameters);
 		
@@ -587,23 +714,21 @@ Function DeleteRowsInDependedTable(Object, DependedTableName, MainTableKey, Cach
 	Return Cache;
 EndFunction
 
-Function PricesChanged(Object, Form, Settings) Export
-
-	CachedColumns = "Key, Price, PriceType, ItemKey, Unit";
-	ListCache = GetCacheTable(Object, "ItemList", CachedColumns);
+Function IsPricesChanged(Object, Form, Settings, AddInfo = Undefined) Export
+	ListCache = DataCollectionToArrayOfStructures(Object.ItemList, "Key, Price, PriceType, ItemKey, Unit");
 	
 	CalculationSettings = New Structure();
-	PriceDate = GetPriceDate(Form.Object);
-	CalculationSettings.Insert("UpdatePrice",
-					New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
+	PriceDate = GetPriceDateByRefAndDate(Object.Ref, Object.Date);
+	CalculationSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
 	
-	CalculateItemsRows(Object, Form, ListCache, CalculationSettings);
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "UpdateRowsAfterCalculate", False);
+	CalculateItemsRows(Object, Form, ListCache, CalculationSettings, Undefined, AddInfo);
 
 	For Each RowCache In ListCache Do
 		FoundRows = Object.ItemList.FindRows(New Structure("Key", RowCache.Key));
 		For Each FoundRow In FoundRows Do
 			If Not FoundRow.Price = RowCache.Price Then
-				Return True;	
+				Return True;
 			EndIf;
 		EndDo;
 	EndDo;
@@ -612,7 +737,7 @@ Function PricesChanged(Object, Form, Settings) Export
 EndFunction
 
 Function GetPriceDate(Object) Export
-	If Object.Ref.IsEmpty() Then
+	If Not ValueIsFilled(Object.Ref) Then
 		If Not ValueIsFilled(Object.Date) Then
 			Return CurrentDate();
 		EndIf;
@@ -626,18 +751,33 @@ Function GetPriceDate(Object) Export
 	EndIf;
 Endfunction
 
-Function GetCacheTable(Object, TableName, CachedColumns = Undefined)
-	Cache = New Array();
-	ArrayOfCachedColumns = StrSplit(CachedColumns, ",");
-	For Each Row In Object[TableName] Do
-		CacheRow = New Structure();
-		For Each ItemOfCachedColumns In ArrayOfCachedColumns Do
-			CacheRow.Insert(TrimAll(ItemOfCachedColumns), Row[TrimAll(ItemOfCachedColumns)]);
-		EndDo;
-		Cache.Add(CacheRow);
-	EndDo;
-	Return Cache;
-EndFunction
+Function GetPriceDateByRefAndDate(Ref, Date) Export
+	If Not ValueIsFilled(Ref) Then
+		If Not ValueIsFilled(Date) Then
+			Return CurrentDate();
+		EndIf;
+		If BegOfDay(Date) = BegOfDay(CurrentDate()) Then
+			Return EndOfDay(Date);
+		Else
+			Return Date;
+		EndIf;
+	Else
+		Return Date;
+	EndIf;
+Endfunction
+
+//Function CopyTableToArrayOfStructures(Object, TableName, CachedColumns = Undefined)
+//	Cache = New Array();
+//	ArrayOfCachedColumns = StrSplit(CachedColumns, ",");
+//	For Each Row In Object[TableName] Do
+//		CacheRow = New Structure();
+//		For Each ItemOfCachedColumns In ArrayOfCachedColumns Do
+//			CacheRow.Insert(TrimAll(ItemOfCachedColumns), Row[TrimAll(ItemOfCachedColumns)]);
+//		EndDo;
+//		Cache.Add(CacheRow);
+//	EndDo;
+//	Return Cache;
+//EndFunction
 
 Function UpdateBarcode(Object, ItemRow, AddInfo = Undefined)
 	ReturnValue = "";
@@ -659,12 +799,12 @@ Procedure CalculateRow(Object, Form, Settings, Actions) Export
 	
 EndProcedure
 
-Procedure DoTableActions(Object, Form, Settings, Actions) Export
+Procedure DoTableActions(Object, Form, Settings, Actions, AddInfo = Undefined) Export
 	
 	For Each Action In Actions Do
 		
 		If Action.Key = "UpdateItemKey" Then
-			UpdateItemKey(Object, Form, Settings);
+			UpdateItemKey(Object, Form, Settings, AddInfo);
 		EndIf;
 		
 		If Action.Key = "UpdateItemType" Then
@@ -672,7 +812,7 @@ Procedure DoTableActions(Object, Form, Settings, Actions) Export
 		EndIf;
 		
 		If Action.Key = "UpdateRowUnit" Then
-			UpdateRowUnit(Object, Form, Settings);
+			UpdateRowUnit(Object, Form, Settings, AddInfo);
 		EndIf;
 		
 		If Action.Key = "UpdateRowPriceType" Then
@@ -707,40 +847,49 @@ EndProcedure
 
 #Region TableItemsChanges
 
-Procedure UpdateItemKey(Object, Form, Settings) Export
-
+Procedure UpdateItemKey(Object, Form, Settings, AddInfo = Undefined) Export
 	CurrentRow = Settings.CurrentRow;
 	CurrentItemKey = CurrentRow.ItemKey;
-
-	CurrentRow.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentRow.Item);
+	
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+	If ServerData = Undefined Then
+		CurrentRow.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentRow.Item);
+	Else
+		CurrentRow.ItemKey = ServerData.ItemKeyByItem;
+	EndIf;
+	
 	If ValueIsFilled(CurrentRow.ItemKey) Then
 		#If AtClient Then
-		If Not CurrentRow.ItemKey = CurrentItemKey Then
+		If CurrentRow.ItemKey <> CurrentItemKey Then
 			DocumentsClient.ItemListItemKeyOnChange(Object, Form, Settings.Module, , Settings);
 		EndIf;
 		#EndIf
 	Else
 		Settings.CalculateSettings.Insert("ClearRow", "ClearRow");
 	EndIf;
-	
 EndProcedure
 
 Function UpdateUnit(Object, ItemRow, AddInfo = Undefined)	
-	
 	UnitInfo = GetItemInfo.ItemUnitInfo(ItemRow.ItemKey);
     ItemRow.Unit = UnitInfo.Unit;
     Return UnitInfo.Unit;
 EndFunction
 
-Procedure UpdateRowUnit(Object, Form, Settings)
+Procedure UpdateRowUnit(Object, Form, Settings, AddInfo = Undefined)
 	
 	If Settings.Rows.Count() = 0 Then
 		Return;
 	EndIf;
 	
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+	
 	CurrentRow = Settings.Rows[0];
 	
-	UnitInfo = GetItemInfo.ItemUnitInfo(CurrentRow.ItemKey);
+	If ServerData = Undefined Then
+		UnitInfo = GetItemInfo.ItemUnitInfo(CurrentRow.ItemKey);
+	Else
+		UnitInfo = ServerData.ItemUnitInfo;
+	EndIf;
 	CurrentRow.Unit = UnitInfo.Unit;
 	
 EndProcedure
@@ -753,11 +902,9 @@ Procedure UpdateRowPriceType(Object, Form, Settings)
 	CurrentRow = Settings.Rows[0];
 	
 	CurrentRow.PriceType =  Form.CurrentPriceType;
-	
 EndProcedure
 
 Procedure UpdateItemType(Object, Form, Settings) Export
-
 	If Settings.Rows.Count() = 0 Then
 		Return;
 	EndIf;
@@ -771,11 +918,9 @@ Procedure UpdateItemType(Object, Form, Settings) Export
 	Else
 		UpdateProcurementMethod(Object, Form, Settings);
 	EndIf;
-	
 EndProcedure
 
 Procedure UpdateProcurementMethod(Object, Form, Settings) Export
-	
 	If Settings.Rows.Count() = 0 Then
 		Return;
 	EndIf;

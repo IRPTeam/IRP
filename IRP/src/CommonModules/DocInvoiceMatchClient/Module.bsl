@@ -241,6 +241,10 @@ Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 
+Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
+	Return New Structure();
+EndFunction
+
 #EndRegion
 
 #EndRegion

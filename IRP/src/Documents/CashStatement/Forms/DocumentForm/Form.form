@@ -100,6 +100,7 @@
           <type>Label</type>
           <maxWidth>100</maxWidth>
           <autoMaxHeight>true</autoMaxHeight>
+          <horizontalStretch>true</horizontalStretch>
           <extInfo xsi:type="form:LabelDecorationExtInfo">
             <handlers>
               <event>Click</event>
@@ -589,23 +590,23 @@
         <name>GroupTitleRight</name>
         <id>71</id>
         <items xsi:type="form:FormField">
-          <name>Store</name>
-          <id>119</id>
+          <name>BusinessUnit</name>
+          <id>214</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.Store</segments>
+            <segments>Object.BusinessUnit</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
-            <name>StoreOnChange</name>
+            <name>BusinessUnitOnChange</name>
           </handlers>
           <extendedTooltip>
-            <name>StoreExtendedTooltip</name>
-            <id>121</id>
+            <name>BusinessUnitExtendedTooltip</name>
+            <id>216</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -619,62 +620,8 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>StoreContextMenu</name>
-            <id>120</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <autoFill>true</autoFill>
-          </contextMenu>
-          <type>InputField</type>
-          <editMode>Enter</editMode>
-          <showInHeader>true</showInHeader>
-          <headerHorizontalAlign>Left</headerHorizontalAlign>
-          <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:InputFieldExtInfo">
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <wrap>true</wrap>
-            <chooseType>true</chooseType>
-            <typeDomainEnabled>true</typeDomainEnabled>
-            <textEdit>true</textEdit>
-          </extInfo>
-        </items>
-        <items xsi:type="form:FormField">
-          <name>CashAccounts</name>
-          <id>116</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.CashAccounts</segments>
-          </dataPath>
-          <handlers>
-            <event>OnChange</event>
-            <name>CashAccountsOnChange</name>
-          </handlers>
-          <extendedTooltip>
-            <name>CashAccountsExtendedTooltip</name>
-            <id>118</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <contextMenu>
-            <name>CashAccountsContextMenu</name>
-            <id>117</id>
+            <name>BusinessUnitContextMenu</name>
+            <id>215</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1449,6 +1396,9 @@
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
+          <footerDataPath xsi:type="form:DataPath">
+            <segments>Object.CashTransactionList.TotalReceipt</segments>
+          </footerDataPath>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -1504,6 +1454,9 @@
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
+          <footerDataPath xsi:type="form:DataPath">
+            <segments>Object.CashTransactionList.TotalExpense</segments>
+          </footerDataPath>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -1671,6 +1624,7 @@
         <selectionMode>MultiRow</selectionMode>
         <header>true</header>
         <headerHeight>1</headerHeight>
+        <footer>true</footer>
         <footerHeight>1</footerHeight>
         <horizontalScrollBar>AutoUse</horizontalScrollBar>
         <verticalScrollBar>AutoUse</verticalScrollBar>
@@ -1727,7 +1681,7 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Object.Payments</segments>
+          <segments>Object.PaymentList</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
         <items xsi:type="form:FormField">
@@ -1740,10 +1694,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.LineNumber</segments>
+              <segments>Object.PaymentList.LineNumber</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.НомерСтроки</segments>
+              <segments>Object.PaymentList.НомерСтроки</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -1795,10 +1749,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.PaymentType</segments>
+              <segments>Object.PaymentList.PaymentType</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.PaymentType</segments>
+              <segments>Object.PaymentList.PaymentType</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -1850,10 +1804,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.Account</segments>
+              <segments>Object.PaymentList.Account</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.Account</segments>
+              <segments>Object.PaymentList.Account</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -1905,10 +1859,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.Amount</segments>
+              <segments>Object.PaymentList.Amount</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.Amount</segments>
+              <segments>Object.PaymentList.Amount</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -1941,61 +1895,9 @@
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:InputFieldExtInfo">
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <wrap>true</wrap>
-            <chooseType>true</chooseType>
-            <typeDomainEnabled>true</typeDomainEnabled>
-            <textEdit>true</textEdit>
-          </extInfo>
-        </items>
-        <items xsi:type="form:FormField">
-          <name>PaymentsPercent</name>
-          <id>179</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.Percent</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.Percent</segments>
-            </paths>
-          </dataPath>
-          <extendedTooltip>
-            <name>PaymentsPercentExtendedTooltip</name>
-            <id>181</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <contextMenu>
-            <name>PaymentsPercentContextMenu</name>
-            <id>180</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <autoFill>true</autoFill>
-          </contextMenu>
-          <type>InputField</type>
-          <editMode>Enter</editMode>
-          <showInHeader>true</showInHeader>
-          <headerHorizontalAlign>Left</headerHorizontalAlign>
-          <showInFooter>true</showInFooter>
+          <footerDataPath xsi:type="form:DataPath">
+            <segments>Object.PaymentList.TotalAmount</segments>
+          </footerDataPath>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -2015,10 +1917,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.Commission</segments>
+              <segments>Object.PaymentList.Commission</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.Payments.Commission</segments>
+              <segments>Object.PaymentList.Commission</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -2051,6 +1953,9 @@
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
+          <footerDataPath xsi:type="form:DataPath">
+            <segments>Object.PaymentList.TotalCommission</segments>
+          </footerDataPath>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -2218,6 +2123,7 @@
         <selectionMode>MultiRow</selectionMode>
         <header>true</header>
         <headerHeight>1</headerHeight>
+        <footer>true</footer>
         <footerHeight>1</footerHeight>
         <horizontalScrollBar>AutoUse</horizontalScrollBar>
         <verticalScrollBar>AutoUse</verticalScrollBar>

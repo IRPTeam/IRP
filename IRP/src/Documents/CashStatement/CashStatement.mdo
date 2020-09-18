@@ -89,30 +89,17 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="8997302f-2b97-44f2-9516-682b17dbdb45">
-    <name>Store</name>
+    <name>BusinessUnit</name>
     <synonym>
       <key>en</key>
-      <value>Store</value>
+      <value>Business unit</value>
     </synonym>
     <type>
-      <types>CatalogRef.Stores</types>
+      <types>CatalogRef.BusinessUnits</types>
     </type>
     <fillChecking>ShowError</fillChecking>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="a29c26ab-367c-4f2b-8db6-faf40c2837a3">
-    <name>CashAccounts</name>
-    <synonym>
-      <key>en</key>
-      <value>Cash/Bank accounts</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.CashAccounts</types>
-    </type>
-    <fillChecking>ShowError</fillChecking>
-    <createOnInput>DontUse</createOnInput>
-    <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   </attributes>
   <attributes uuid="009dff8c-c4d2-4c0b-8d7c-835aecb114de">
     <name>OpeningBalance</name>
@@ -255,10 +242,10 @@
       <objectType typeId="0b4c30c1-8126-4632-bd24-f965b1c38ba7" valueTypeId="71f46336-7fc9-435a-b653-5aee1e8973ae"/>
       <rowType typeId="f8c1c51e-89be-47b1-93e3-07a4230ee671" valueTypeId="623b6b50-920c-4001-89ab-b9743f72ecc6"/>
     </producedTypes>
-    <name>Payments</name>
+    <name>PaymentList</name>
     <synonym>
       <key>en</key>
-      <value>Payments</value>
+      <value>Payment list</value>
     </synonym>
     <attributes uuid="7ead24cf-8440-4ee4-9791-c754818aea0c">
       <name>PaymentType</name>
@@ -296,20 +283,6 @@
       </synonym>
       <type>
         <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="484ec835-0078-4d71-a723-ad9574fccbc7">
-      <name>Percent</name>
-      <synonym>
-        <key>en</key>
-        <value>Percent</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typePercent</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

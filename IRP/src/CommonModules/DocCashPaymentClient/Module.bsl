@@ -93,7 +93,7 @@ Procedure CompanyOnChange(Object, Form, Item) Export
 	DocumentsClient.CompanyOnChange(Object, Form, ThisObject, Item);
 EndProcedure
 
-Function CompanySettings() Export
+Function CompanySettings(Object, Form, AddInfo = Undefined) Export
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, CalculateSettings");
 	Actions = New Structure();
 	Actions.Insert("ChangeCashAccount"		, "ChangeCashAccount");
@@ -589,5 +589,9 @@ Procedure FillUnfilledPayeeInRow(Object, Item, Payee) Export
 		RowPaymentList.Payee = Payee;
 	EndIf;
 EndProcedure
+
+Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
+	Return New Structure();
+EndFunction
 
 #EndRegion

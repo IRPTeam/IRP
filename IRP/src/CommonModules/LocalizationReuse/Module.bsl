@@ -29,3 +29,7 @@ EndFunction
 Function UserLanguageCode() Export
 	Return SessionParameters.LocalizationCode;
 EndFunction
+
+Function GetSessionParameter(Name) Export
+	Return ServiceSystemServer.GetSessionParameter("InterfaceLocalizationCode");
+EndFunction

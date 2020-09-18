@@ -70,6 +70,7 @@
       <types>DocumentRef.PhysicalInventory</types>
       <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.CashExpense</types>
+      <types>DocumentRef.CashStatement</types>
     </commandParameterType>
     <representation>Auto</representation>
     <shortcut></shortcut>

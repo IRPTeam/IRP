@@ -540,6 +540,7 @@ Function GetTaxByColumnName(Form, CacheName, ColumnName)
 	Raise StrTemplate(R().Error_042, ColumnName);
 EndFunction
 
+// TODO: delete
 Function GetEmptyTaxTable(MetadataTaxList)
 	TaxList = New ValueTable();
 	TaxList.Columns.Add("Key", MetadataTaxList.Attributes.Key.Type);
@@ -566,6 +567,7 @@ Function GetCreateTaxTreeParameters() Export
 	Return Parameters;
 EndFunction
 
+// TODO: delete
 Procedure CreateTaxTree(Object, Form, Parameters) Export
 	
 	PaymentList = New ValueTable();

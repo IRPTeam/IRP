@@ -39,6 +39,8 @@ Procedure ExpandTaxTree(Tree, TreeRows) Export
 	EndDo;
 EndProcedure
 
+
+// TODO: delete 
 Function ChangeTaxAmount(Object, Form, CurrentData, MainTable, Val Actions = Undefined, AddInfo = Undefined) Export
 	
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
@@ -239,4 +241,45 @@ Procedure CalculateTaxOnChangeTaxValue(Object, Form, CurrentData, Item, AddInfo 
 		AddInfo);	
 EndProcedure
 	
-
+Procedure OpenForm_ChangeTaxAmount(Object, Form, Item, RowSelected, Field, StandardProcessing, MainTableData, AddInfo = Undefined) Export
+	StandardProcessing = False;
+	
+	ArrayOfTaxListRows = New Array();
+	For Each Row In Object.TaxList.FindRows(New Structure("Key", MainTableData.Key)) Do
+		NewRowTaxList = New Structure("Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount");
+		FillPropertyValues(NewRowTaxList, Row);
+		ArrayOfTaxListRows.Add(NewRowTaxList);
+	EndDo;
+	
+	OpeningParameters = New Structure();
+	OpeningParameters.Insert("MainTableData"      , MainTableData);
+	OpeningParameters.Insert("ArrayOfTaxListRows" , ArrayOfTaxListRows);
+	
+	AdditionalParameters = New Structure("Object", Object);
+	AdditionalParameters.Insert("AddInfo", AddInfo);
+	Notify = New NotifyDescription("TaxEditContinue", ThisObject, AdditionalParameters);
+	OpenForm("CommonForm.EditTax", OpeningParameters, Form, Form.UUID, , , Notify , FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+	
+Procedure TaxEditContinue(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	Object = AdditionalParameters.Object;
+	ArrayForDelete = Object.TaxList.FindRows(New Structure("Key", Result.Key));
+	For Each ItemOfArrayForDelete In ArrayForDelete Do
+		Object.TaxList.Delete(ItemOfArrayForDelete);
+	EndDo;
+	TotalTaxAmount = 0;
+	For Each ItemOfArrayOfTaxListRows In Result.ArrayOfTaxListRows Do
+		FillPropertyValues(Object.TaxList.Add(), ItemOfArrayOfTaxListRows);
+		If ItemOfArrayOfTaxListRows.IncludeToTotalAmount Then
+			TotalTaxAmount = TotalTaxAmount + ItemOfArrayOfTaxListRows.ManualAmount;
+		EndIf;
+	EndDo;
+	ArrayOfItemListRows = Object.ItemList.FindRows(New Structure("Key", Result.Key));
+	For Each ItemOfItemListRows In ArrayOfItemListRows Do
+		ItemOfItemListRows.TaxAmount = TotalTaxAmount;
+	EndDo;
+EndProcedure
+	

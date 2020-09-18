@@ -27,7 +27,7 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	EndDo;
 	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
 	
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 	
@@ -166,7 +166,7 @@ Procedure ItemListItemOnChangePutServerDataToAddInfo(Object, Form, CurrentRow, A
 	ParametersToServer.Insert("GetItemKeyByItem", New Structure("Item", CurrentRow.Item));
 	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
 		
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 EndProcedure
@@ -219,7 +219,7 @@ Procedure ItemListItemKeyOnChangePutServerDataToAddInfo(Object, Form, CurrentRow
 	ParametersToServer.Insert("GetItemUnitInfo", New Structure("ItemKey", CurrentRow.ItemKey));
 	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
 		
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 EndProcedure
@@ -267,7 +267,7 @@ Procedure ItemListPriceTypeOnChangePutServerDataToAddInfo(Object, Form, AddInfo 
 	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
 	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
 		
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 EndProcedure
@@ -306,7 +306,7 @@ Procedure ItemListUnitOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Und
 	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
 	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
 		
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 EndProcedure
@@ -347,7 +347,7 @@ Procedure ItemListQuantityPutServerDataToAddInfo(Object, Form, CurrentData, AddI
 	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
 	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
 	
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 EndProcedure	
@@ -376,7 +376,7 @@ Procedure ItemListPricePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo
 	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
 	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
 	
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 EndProcedure	
@@ -404,7 +404,7 @@ Procedure ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, A
 	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
 	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
 	
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 EndProcedure	
@@ -432,7 +432,7 @@ Procedure ItemListTaxValuePutServerDataToAddInfo(Object, Form, CurrentData, AddI
 	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
 	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
 	
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 EndProcedure	
@@ -482,7 +482,7 @@ Procedure PartnerOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefine
 	EndDo;
 	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
 			
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CalculateItemRowsAtServer", True);
@@ -564,7 +564,7 @@ Procedure AgreementOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefi
 	ParametersToServer.Insert("GetAgreementInfo", New Structure("Agreement", Object.Agreement));	
 	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
 			
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CalculateItemRowsAtServer", True);
@@ -665,7 +665,7 @@ Procedure CurrencyOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefin
 	
 	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
 			
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CalculateItemRowsAtServer", True);
@@ -742,7 +742,7 @@ Procedure CompanyOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefine
 	New Structure ("Cache, Ref, Date, Company", 
 	Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
 	
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CalculateItemRowsAtServer", True);
@@ -809,7 +809,7 @@ Procedure StoreOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined)
 	ParametersToServer.Insert("GetMetaDataStructure", New Structure("Ref", Object.Ref));
 	ParametersToServer.Insert("GetAgreementInfo", New Structure("Agreement", Object.Agreement));	
 			
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CalculateItemRowsAtServer", True);
@@ -853,7 +853,7 @@ Procedure PriceIncludeTaxOnChangePutServerDataToAddInfo(Object, Form, AddInfo = 
 	New Structure ("Cache, Ref, Date, Company", 
 	Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
 			
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CalculateItemRowsAtServer", True);
@@ -901,7 +901,7 @@ Procedure DateOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) 
 	Object.Partner, Object.Agreement, Object.Date, True));
 	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
 		
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CalculateItemRowsAtServer", True);

@@ -437,11 +437,11 @@ EndProcedure
 
 #EndRegion
 
-Function PrepareServerData_AtServerNoContext(Parameters) Export
+Function PrepareServerData(Parameters) Export
 	Result = New Structure();
 	
 	If Parameters.Property("ArrayOfMovementsTypes") Then
-		Result.Insert("ArrayOfCurrenciesByMmovementTypes", GetCurrencyByMovementType_AtServerNoContext(Parameters.ArrayOfMovementsTypes));
+		Result.Insert("ArrayOfCurrenciesByMmovementTypes", GetCurrencyByMovementType(Parameters.ArrayOfMovementsTypes));
 	EndIf;
 	
 	If Parameters.Property("TaxesCache") Then
@@ -611,7 +611,7 @@ Function PrepareServerData_AtServerNoContext(Parameters) Export
 	Return Result;
 EndFunction	
 
-Function GetCurrencyByMovementType_AtServerNoContext(ArrayOfMovementsTypes) Export
+Function GetCurrencyByMovementType(ArrayOfMovementsTypes)
 	ArrayOfCurrenciesByMmovementTypes = New Array();
 	For Each MovementType In ArrayOfMovementsTypes Do
 		ArrayOfCurrenciesByMmovementTypes.Add(New Structure("MovementType, Currency", MovementType, MovementType.Currency));

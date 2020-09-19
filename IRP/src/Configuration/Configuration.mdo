@@ -185,10 +185,11 @@
   <commonModules>CommonModule.CatItemsClient</commonModules>
   <commonModules>CommonModule.CatItemsServer</commonModules>
   <commonModules>CommonModule.CatPartnersServer</commonModules>
+  <commonModules>CommonModule.CatUserGroupsServer</commonModules>
   <commonModules>CommonModule.CommonFormActions</commonModules>
   <commonModules>CommonModule.CommonFormActionsServer</commonModules>
-  <commonModules>CommonModule.CommonFunctionsServer</commonModules>
   <commonModules>CommonModule.CommonFunctionsClientServer</commonModules>
+  <commonModules>CommonModule.CommonFunctionsServer</commonModules>
   <commonModules>CommonModule.CurrenciesClient</commonModules>
   <commonModules>CommonModule.CurrenciesClientServer</commonModules>
   <commonModules>CommonModule.CurrenciesServer</commonModules>
@@ -204,10 +205,16 @@
   <commonModules>CommonModule.DocCashPaymentServer</commonModules>
   <commonModules>CommonModule.DocCashReceiptClient</commonModules>
   <commonModules>CommonModule.DocCashReceiptServer</commonModules>
+  <commonModules>CommonModule.DocCashStatementClient</commonModules>
+  <commonModules>CommonModule.DocCashStatementServer</commonModules>
   <commonModules>CommonModule.DocCashTransferOrderClient</commonModules>
   <commonModules>CommonModule.DocCashTransferOrderServer</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionClient</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionServer</commonModules>
+  <commonModules>CommonModule.DocCreditNoteClient</commonModules>
+  <commonModules>CommonModule.DocCreditNoteServer</commonModules>
+  <commonModules>CommonModule.DocDebitNoteClient</commonModules>
+  <commonModules>CommonModule.DocDebitNoteServer</commonModules>
   <commonModules>CommonModule.DocExpenseClient</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptServer</commonModules>
@@ -243,6 +250,10 @@
   <commonModules>CommonModule.DocPurchaseReturnServer</commonModules>
   <commonModules>CommonModule.DocReconciliationStatementClient</commonModules>
   <commonModules>CommonModule.DocReconciliationStatementServer</commonModules>
+  <commonModules>CommonModule.DocRetailReturnReceiptClient</commonModules>
+  <commonModules>CommonModule.DocRetailReturnReceiptServer</commonModules>
+  <commonModules>CommonModule.DocRetailSalesReceiptClient</commonModules>
+  <commonModules>CommonModule.DocRetailSalesReceiptServer</commonModules>
   <commonModules>CommonModule.DocSalesInvoiceClient</commonModules>
   <commonModules>CommonModule.DocSalesInvoiceServer</commonModules>
   <commonModules>CommonModule.DocSalesOrderClient</commonModules>
@@ -263,6 +274,8 @@
   <commonModules>CommonModule.DocumentsServer</commonModules>
   <commonModules>CommonModule.DocUnbundlingClient</commonModules>
   <commonModules>CommonModule.DocUnbundlingServer</commonModules>
+  <commonModules>CommonModule.DPPointOfSaleClient</commonModules>
+  <commonModules>CommonModule.DPPointOfSaleServer</commonModules>
   <commonModules>CommonModule.ExtensionServer</commonModules>
   <commonModules>CommonModule.ExternalCommandsClient</commonModules>
   <commonModules>CommonModule.ExternalCommandsServer</commonModules>
@@ -274,6 +287,8 @@
   <commonModules>CommonModule.GetItemInfo</commonModules>
   <commonModules>CommonModule.GoogleDriveClient</commonModules>
   <commonModules>CommonModule.GoogleDriveServer</commonModules>
+  <commonModules>CommonModule.HardwareClient</commonModules>
+  <commonModules>CommonModule.HardwareServer</commonModules>
   <commonModules>CommonModule.IDInfoClient</commonModules>
   <commonModules>CommonModule.IDInfoServer</commonModules>
   <commonModules>CommonModule.IntegrationClientServer</commonModules>
@@ -302,6 +317,8 @@
   <commonModules>CommonModule.Saas</commonModules>
   <commonModules>CommonModule.SaasClient</commonModules>
   <commonModules>CommonModule.ScheduledJobsForExtentions</commonModules>
+  <commonModules>CommonModule.SerialLotNumberClient</commonModules>
+  <commonModules>CommonModule.SerialLotNumbersServer</commonModules>
   <commonModules>CommonModule.ServiceSystemClient</commonModules>
   <commonModules>CommonModule.ServiceSystemClientServer</commonModules>
   <commonModules>CommonModule.ServiceSystemServer</commonModules>
@@ -315,23 +332,6 @@
   <commonModules>CommonModule.UserSettingsClient</commonModules>
   <commonModules>CommonModule.UserSettingsServer</commonModules>
   <commonModules>CommonModule.UsersEvent</commonModules>
-  <commonModules>CommonModule.CatUserGroupsServer</commonModules>
-  <commonModules>CommonModule.DocRetailSalesReceiptServer</commonModules>
-  <commonModules>CommonModule.DocRetailSalesReceiptClient</commonModules>
-  <commonModules>CommonModule.DocRetailReturnReceiptClient</commonModules>
-  <commonModules>CommonModule.DocRetailReturnReceiptServer</commonModules>
-  <commonModules>CommonModule.DPPointOfSaleClient</commonModules>
-  <commonModules>CommonModule.DocCreditNoteClient</commonModules>
-  <commonModules>CommonModule.DocCreditNoteServer</commonModules>
-  <commonModules>CommonModule.DocDebitNoteClient</commonModules>
-  <commonModules>CommonModule.DocDebitNoteServer</commonModules>
-  <commonModules>CommonModule.DPPointOfSaleServer</commonModules>
-  <commonModules>CommonModule.HardwareClient</commonModules>
-  <commonModules>CommonModule.HardwareServer</commonModules>
-  <commonModules>CommonModule.SerialLotNumbersServer</commonModules>
-  <commonModules>CommonModule.SerialLotNumberClient</commonModules>
-  <commonModules>CommonModule.DocCashStatementServer</commonModules>
-  <commonModules>CommonModule.DocCashStatementClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>

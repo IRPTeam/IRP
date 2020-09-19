@@ -2,7 +2,7 @@ Function ConnectionSetting(IntegrationSettingName, AddInfo = Undefined) Export
 	Result = New Structure("Success, Value, Message", False, Undefined, "");
 	
 	IntegrationSettings = IntegrationServerReuse.GetIntegrationSettings(IntegrationSettingName);
-	
+		
 	If Not ValueIsFilled(IntegrationSettings.Ref) Then
 		Result.Success = False;
 		Result.Message = StrTemplate(R().S_005, IntegrationSettingName);

@@ -1,22 +1,18 @@
-Function Settings() Export
-	Str = New Structure;
-	Str.Insert("client_id", "");
-	Str.Insert("client_secret", "");
-	Str.Insert("key", "");
-	oauth2 = "https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=%1&access_type=offline&scope=%2&redirect_uri=http://localhost";
+Procedure FillTokenInfo(IntegrationSettings) Export
+
+	oauth2 = "https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=%1&access_type=offline&scope=%2&redirect_uri=" + IntegrationSettings.redirect_uri;
 	
 	ScopesArray = New Array;
 	ScopesArray.Add("https://www.googleapis.com/auth/drive");
 
-	Str.Insert("oauth2", StrTemplate(oauth2, Str.client_id, StrConcat(ScopesArray, " ")));
+	IntegrationSettings.Insert("oauth2", StrTemplate(oauth2, IntegrationSettings.client_id, StrConcat(ScopesArray, " ")));
 	
-	tokenRequest = "client_id=%1&client_secret=%2&grant_type=authorization_code&access_type=offline&redirect_uri=http://localhost&code=";
-	Str.Insert("tokenRequest", StrTemplate(tokenRequest, Str.client_id, Str.client_secret));
+	tokenRequest = "client_id=%1&client_secret=%2&grant_type=authorization_code&access_type=offline&redirect_uri=%3&code=";
+	IntegrationSettings.Insert("tokenRequest", StrTemplate(tokenRequest, IntegrationSettings.client_id, IntegrationSettings.client_secret, IntegrationSettings.redirect_uri));
 	updateTokenRequest =  "grant_type=refresh_token&client_id=%1&client_secret=%2&refresh_token=";
-	Str.Insert("updateTokenRequest", StrTemplate(updateTokenRequest, Str.client_id, Str.client_secret));
-	Return Str;
+	IntegrationSettings.Insert("updateTokenRequest", StrTemplate(updateTokenRequest, IntegrationSettings.client_id, IntegrationSettings.client_secret));
 
-EndFunction
+EndProcedure
 
 Function AskGoogle(RequestBody)
 	HTTPSettings = IntegrationServer.ConnectionSettingTemplate();
@@ -35,18 +31,16 @@ Function AskGoogle(RequestBody)
 	Return AnswerStructure;
 EndFunction
 
-Function MainToken(Code) Export
-	Settings = Settings();
-	RequestBody = Settings.tokenRequest + Code;
+Function MainToken(Code, IntegrationSettings) Export
+	FillTokenInfo(IntegrationSettings);
+	RequestBody = IntegrationSettings.tokenRequest + Code;
 	Return AskGoogle(RequestBody);
 EndFunction
 
-Function UpdateAccessToken(IntegrationRef) Export
-	Settings = Settings();
-	
-	refresh_token = IntegrationRef.ConnectionSetting.FindRows(New Structure("Key", "refresh_token"));
-	If refresh_token.Count() Then
-		RequestBody = Settings.updateTokenRequest + refresh_token[0].Value;
+Function UpdateAccessToken(IntegrationSettings) Export
+	FillTokenInfo(IntegrationSettings);
+	If IntegrationSettings.Property("refresh_token") And Not IsBlankString(IntegrationSettings.refresh_token) Then
+		RequestBody = IntegrationSettings.updateTokenRequest + IntegrationSettings.refresh_token;
 		Return AskGoogle(RequestBody);			
 	EndIf;
 	
@@ -75,8 +69,8 @@ Function CurrentActiveToken(IntegrationRef) Export
 		Tmp.Next();
 		Return Tmp.Value;
 	EndIf;
-	
-	refresh_token = UpdateAccessToken(IntegrationRef);
+	ConnectionSetting = IntegrationClientServer.ConnectionSetting(IntegrationRef.UniqueID);
+	refresh_token = UpdateAccessToken(ConnectionSetting.Value);
 	
 	If refresh_token = Undefined Then
 		Return Undefined;

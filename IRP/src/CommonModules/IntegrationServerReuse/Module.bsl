@@ -30,7 +30,12 @@ Function ConnectionSettingTemplate(IntegrationType = Undefined, AddInfo = Undefi
 		ConnectionSetting.Insert("SenderName", "IRP Team");
 		ConnectionSetting.Insert("FromAddress", "noreply@irpteam.com");
 		ConnectionSetting.Insert("DisplayName", "IRP NO REPLY");
-
+	ElsIf IntegrationType = Enums.IntegrationType.GoogleDrive Then
+		ConnectionSetting.Insert("client_id", "xxxxxxxxxxxxxx.apps.googleusercontent.com");
+		ConnectionSetting.Insert("client_secret", "");
+		ConnectionSetting.Insert("key", "");
+		ConnectionSetting.Insert("redirect_uri", "http://localhost");
+		ConnectionSetting.Insert("refresh_token", "");
 	Else
 		ConnectionSetting.Insert("QueryType", "POST");
 		ConnectionSetting.Insert("ResourceAddress", "");

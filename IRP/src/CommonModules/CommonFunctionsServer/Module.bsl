@@ -55,10 +55,14 @@ Function SerializeXMLUseXDTOFactory(Value, LocalName = Undefined, URI = Undefine
 EndFunction
 
 Function XDTOFactoryObject(WSName = Undefined) Export
-	If NOT ValueIsFilled(WSName) Then
+	If IsBlankString(WSName) Then
 		Return XDTOFactory;
 	Else
-		Return WSReferences[WSName].GetWSDefinitions().XDTOFactory;
+		If TypeOf(WSName) = Type("String") Then
+			Return WSReferences[WSName].GetWSDefinitions().XDTOFactory;
+		Else
+			Return WSName.XDTOFactory;
+		EndIf;
 	EndIf;
 EndFunction
 

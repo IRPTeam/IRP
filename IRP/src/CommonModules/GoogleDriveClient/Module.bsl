@@ -10,6 +10,8 @@ EndFunction
 
 Procedure OnHTMLComplete(Document, UUID, AddInfo) Export 
 	Code = Undefined;
+	
+	// FIXIT: #292
 	If Document.location.host = "localhost" Then
 		Params = StrSplit(Document.location.search, "&?");
 		For Each Row In Params Do

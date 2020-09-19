@@ -1,14 +1,14 @@
 Procedure FillTokenInfo(IntegrationSettings) Export
 
-	oauth2 = "https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=%1&access_type=offline&scope=%2&redirect_uri=http://localhost";
+	oauth2 = "https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=%1&access_type=offline&scope=%2&redirect_uri=" + IntegrationSettings.redirect_uri;
 	
 	ScopesArray = New Array;
 	ScopesArray.Add("https://www.googleapis.com/auth/drive");
 
 	IntegrationSettings.Insert("oauth2", StrTemplate(oauth2, IntegrationSettings.client_id, StrConcat(ScopesArray, " ")));
 	
-	tokenRequest = "client_id=%1&client_secret=%2&grant_type=authorization_code&access_type=offline&redirect_uri=http://localhost&code=";
-	IntegrationSettings.Insert("tokenRequest", StrTemplate(tokenRequest, IntegrationSettings.client_id, IntegrationSettings.client_secret));
+	tokenRequest = "client_id=%1&client_secret=%2&grant_type=authorization_code&access_type=offline&redirect_uri=%3&code=";
+	IntegrationSettings.Insert("tokenRequest", StrTemplate(tokenRequest, IntegrationSettings.client_id, IntegrationSettings.client_secret, IntegrationSettings.redirect_uri));
 	updateTokenRequest =  "grant_type=refresh_token&client_id=%1&client_secret=%2&refresh_token=";
 	IntegrationSettings.Insert("updateTokenRequest", StrTemplate(updateTokenRequest, IntegrationSettings.client_id, IntegrationSettings.client_secret));
 

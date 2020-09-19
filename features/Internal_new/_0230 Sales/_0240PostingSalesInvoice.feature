@@ -13,40 +13,58 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
+Scenario: _023000 preparation (Sales invoice)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Partners objects (Kalipso)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	* Check or create SalesOrder023001
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesOrder023001$$" |
+			When create SalesOrder023001
+	* Check or create SalesOrder023005
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesOrder023005$$" |
+			When create SalesOrder023005
 
 Scenario: _024001 create document Sales Invoice based on order - Shipment confirmation doesn't used
-	Given I open hyperlink "e1cib/list/Document.SalesOrder"
-	And I go to the first line in "List" table
-	And I select current line in "List" table
-	And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
-	* Check that information is filled in when creating based on
-		Then the form attribute named "Partner" became equal to "Ferron BP"
-		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
-		Then the form attribute named "Company" became equal to "Main Company"
-	* Check adding Store
-		And I move to "Item list" tab
-		And "ItemList" table contains lines
-			| 'Item'     | Price | 'Item key'  | 'Store'    | 'Shipment confirmation' | 'Sales order'          | 'Unit' | 'Q'     | 'Offers amount' | 'Tax amount' | 'Net amount' | 'Total amount' |
-			| 'Dress'    | '*'   | 'L/Green'   | 'Store 01' | ''                      | '$$SalesOrder023001$$' | 'pcs'  | '5,000' | '*'             | '*'          | '*'          | '*'            |
-			| 'Trousers' | '*'   | '36/Yellow' | 'Store 01' | ''                      | '$$SalesOrder023001$$' | 'pcs'  | '4,000' | '*'             | '*'          | '*'          | '*'            |
-	* Check prices and type of prices
-		And "ItemList" table contains lines
-		| 'Price'  | 'Item'     | 'Item key'  | 'Q'     | 'Price type'        |
-		| '550,00' | 'Dress'    | 'L/Green'   | '5,000' | 'Basic Price Types' |
-		| '400,00' | 'Trousers' | '36/Yellow' | '4,000' | 'Basic Price Types' |	
-	// * Change of document number - 1
-	// 	And I move to "Other" tab
-	// 	And I expand "More" group
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "1" text in "Number" field
-	And I click "Post" button
-	And I save the value of "Number" field as "$$NumberSalesInvoice024001$$"
-	And I save the window as "$$SalesInvoice024001$$"
-	And I click "Post and close" button
-	And I close current window
+	When create SalesInvoice024001
 
 Scenario: _024002 check Sales invoice posting (based on order, store doesn't use Shipment confirmation) by register OrderBalance (-)
 	
@@ -99,35 +117,7 @@ Scenario: _024007 check Sales invoice posting (based on order, store doesn't use
 		| '4,000'    | '$$SalesInvoice024001$$' | '$$SalesInvoice024001$$' | '36/Yellow' |
 
 Scenario: _024008 create document Sales Invoice based on order - Shipment confirmation used
-	Given I open hyperlink "e1cib/list/Document.SalesOrder"
-	And I go to line in "List" table
-		| 'Number'                     | 'Partner'   |
-		| '$$NumberSalesOrder023005$$' | 'Ferron BP' |
-	And I select current line in "List" table
-	And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
-	* Check the details
-		Then the form attribute named "Partner" became equal to "Ferron BP"
-		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-		Then the form attribute named "Agreement" became equal to "Basic Partner terms, without VAT"
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "Store" became equal to "Store 02"
-	* Check filling prices and type of prices
-		And "ItemList" table contains lines
-		| 'Price'  | 'Item'     | 'Item key'  | 'Price type'              | 'Q'      |
-		| '466,10' | 'Dress'    | 'L/Green'   | 'Basic Price without VAT' | '10,000' |
-		| '338,98' | 'Trousers' | '36/Yellow' | 'Basic Price without VAT' | '14,000' |
-	// * Change of document number - 2
-	// 	And I move to "Other" tab
-	// 	And I expand "More" group
-	// 	And I input "2" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "2" text in "Number" field
-	And I click "Post" button
-	And I save the value of "Number" field as "$$NumberSalesInvoice024008$$"
-	And I save the window as "$$SalesInvoice024008$$"
-	And I click "Post and close" button
-	And I close current window
+	When create SalesInvoice024008
 
 Scenario: _024009  check Sales invoice posting (based on order, store use Shipment confirmation) by register SalesTurnovers
 	
@@ -524,7 +514,7 @@ Scenario: _024035 check the form of selection of items (sales invoice)
 
 Scenario: _024042 check totals in the document Sales invoice
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-	* Select Purchase Sales invoice
+	* Select Sales invoice
 		And I go to line in "List" table
 		| Number |
 		| '$$NumberSalesInvoice024001$$'      |

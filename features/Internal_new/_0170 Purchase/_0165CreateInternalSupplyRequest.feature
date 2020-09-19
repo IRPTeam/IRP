@@ -14,6 +14,63 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
+Scenario: _016501 preparation
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		* Add plugin for taxes calculation
+			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+			If "List" table does not contain lines Then
+					| "Description" |
+					| "TaxCalculateVAT_TR" |
+				* Opening a form to add Plugin sessing
+					Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+				* Addition of Plugin sessing for calculating Tax types for Turkey (VAT)
+					And I click the button named "FormCreate"
+					And I select external file "#workingDir#\DataProcessor\TaxCalculateVAT_TR.epf"
+					And I click the button named "FormAddExtDataProc"
+					And I input "" text in "Path to plugin for test" field
+					And I input "TaxCalculateVAT_TR" text in "Name" field
+					And I click Open button of the field named "Description_en"
+					And I input "TaxCalculateVAT_TR" text in the field named "Description_en"
+					And I input "TaxCalculateVAT_TR" text in the field named "Description_tr"
+					And I click "Ok" button
+					And I click "Save and close" button
+					And I wait "Plugins (create)" window closing in 10 seconds
+				* Check added processing
+					Then I check for the "ExternalDataProc" catalog element with the "Description_en" "TaxCalculateVAT_TR"
+					Given I open hyperlink "e1cib/list/Catalog.Taxes"		
+					And I go to line in "List" table
+						| 'Description' |
+						| 'TaxCalculateVAT_TR'         |
+					And I select current line in "List" table
+					And I click Select button of "Plugins" field
+					And I go to line in "List" table
+						| 'Description' |
+						| 'VAT'         |
+					And I select current line in "List" table
+					And I click "Save and close" button
+				And I close all client application windows
+		* Constants
+			When set True value to the constant
+			
 Scenario: _016501 create document Internal Supply Request
 	* Opening the creation form Internal Supply Request
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
@@ -119,20 +176,20 @@ Scenario: _016501 create document Internal Supply Request
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
 		And "List" table contains lines
 			| 'Quantity' | 'Recorder'                   | 'Store'    | 'Order'                           | 'Item key' |
-			| '25,000'   | '$$InventoryTransferOrder$$' | 'Store 01' | '$$InternalSupplyRequest016501$$' | '36/Red'   |
-			| '20,000'   | '$$InventoryTransferOrder$$' | 'Store 01' | '$$InternalSupplyRequest016501$$' | '38/Black' |
+			| '25,000'   | '$$InventoryTransferOrder016501$$' | 'Store 01' | '$$InternalSupplyRequest016501$$' | '36/Red'   |
+			| '20,000'   | '$$InventoryTransferOrder016501$$' | 'Store 01' | '$$InternalSupplyRequest016501$$' | '38/Black' |
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
 		And "List" table contains lines
 			| 'Quantity' | 'Recorder'                   | 'Store'    | 'Item key' |
-			| '25,000'   | '$$InventoryTransferOrder$$' | 'Store 03' | '36/Red'   |
-			| '20,000'   | '$$InventoryTransferOrder$$' | 'Store 03' | '38/Black' |
+			| '25,000'   | '$$InventoryTransferOrder016501$$' | 'Store 03' | '36/Red'   |
+			| '20,000'   | '$$InventoryTransferOrder016501$$' | 'Store 03' | '38/Black' |
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
 		And "List" table contains lines
 			| 'Quantity' | 'Recorder'                   | 'Store sender' | 'Store receiver' | 'Order'                      | 'Item key' |
-			| '25,000'   | '$$InventoryTransferOrder$$' | 'Store 03'     | 'Store 01'       | '$$InventoryTransferOrder$$' | '36/Red'   |
-			| '20,000'   | '$$InventoryTransferOrder$$' | 'Store 03'     | 'Store 01'       | '$$InventoryTransferOrder$$' | '38/Black' |
+			| '25,000'   | '$$InventoryTransferOrder016501$$' | 'Store 03'     | 'Store 01'       | '$$InventoryTransferOrder016501$$' | '36/Red'   |
+			| '20,000'   | '$$InventoryTransferOrder016501$$' | 'Store 03'     | 'Store 01'       | '$$InventoryTransferOrder016501$$' | '38/Black' |
 		And I close all client application windows
 	* Create a Purchase order based on the InternalSupplyRequest document
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"

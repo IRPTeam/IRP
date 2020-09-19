@@ -15,16 +15,16 @@ Scenario: _2050001 preparation
 	* Check for Purchase invoice by Crystal
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And "List" table contains lines
-		| 'Number' | 'Legal name'   | 'Partner' | 'Currency' | 'Company'      |
-		| '9 000'  | 'Company Adel' | 'Crystal' | 'TRY'      | 'Main Company' |
-		| '9 001'  | 'Company Adel' | 'Crystal' | 'TRY'      | 'Main Company' |
+		| 'Number'                            | 'Legal name'   | 'Partner' | 'Currency' | 'Company'      |
+		| '$$NumberPurchaseInvoice2040005$$'  | 'Company Adel' | 'Crystal' | 'TRY'      | 'Main Company' |
+		| '$$NumberPurchaseInvoice20400051$$' | 'Company Adel' | 'Crystal' | 'TRY'      | 'Main Company' |
 	* Check for Purchase invoice by Crystal
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And "List" table contains lines
-		| 'Number' | 'Legal name'   | 'Partner' | 'Currency' |
-		| '9 000'  | 'Company Adel' | 'Crystal' | 'TRY'      |
-		| '9 002'  | 'Company Adel' | 'Crystal' | 'TRY'      |
-		| '9 003'  | 'Company Adel' | 'Crystal' | 'TRY'      |
+		| 'Number'                         | 'Legal name'   | 'Partner' | 'Currency' |
+		| '$$NumberSalesInvoice20400022$$' | 'Company Adel' | 'Crystal' | 'TRY'      |
+		| '$$NumberSalesInvoice2040002$$'  | 'Company Adel' | 'Crystal' | 'TRY'      |
+		| '$$NumberSalesInvoice20400021$$' | 'Company Adel' | 'Crystal' | 'TRY'      |
 	* Create Bank payment without reference to the partner term and the document
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I click the button named "FormCreate"
@@ -40,11 +40,11 @@ Scenario: _2050001 preparation
 				| Description    |
 				| Bank account, TRY |
 			And I select current line in "List" table
-		* Change the document number to 700
-			And I input "0" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "700" text in "Number" field
+		// * Change the document number to 700
+		// 	And I input "0" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "700" text in "Number" field
 			And I input begin of the current month date in "Date" field
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
@@ -58,6 +58,9 @@ Scenario: _2050001 preparation
 			And I activate "Amount" field in "PaymentList" table
 			And I input "1000,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
+		And I click "Post" button
+		And I save the window as "$$BankPayment2050001$$"
+		And I save the value of "Number" field as "$$NumberBankPayment2050001$$"
 		And I click "Post and close" button
 	* Create Bank receipt without reference to the partner term and the document
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
@@ -74,11 +77,11 @@ Scenario: _2050001 preparation
 				| Description    |
 				| Bank account, TRY |
 			And I select current line in "List" table
-		* Change the document number to 700
-			And I input "0" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "700" text in "Number" field
+		// * Change the document number to 700
+		// 	And I input "0" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "700" text in "Number" field
 			And I input begin of the current month date in "Date" field
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
@@ -92,6 +95,9 @@ Scenario: _2050001 preparation
 			And I activate "Amount" field in "PaymentList" table
 			And I input "20000,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
+		And I click "Post" button
+		And I save the window as "$$BankReceipt2050001$$"
+		And I save the value of "Number" field as "$$NumberBankReceipt2050001$$"
 		And I click "Post and close" button
 	* Create Cash receipt linked by document
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
@@ -113,11 +119,11 @@ Scenario: _2050001 preparation
 				| Description    |
 				| Cash desk №3 |
 			And I select current line in "List" table
-		* Change the document number to 700
-			And I input "0" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "700" text in "Number" field
+		// * Change the document number to 700
+		// 	And I input "0" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "700" text in "Number" field
 			And I input begin of the current month date in "Date" field
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
@@ -150,6 +156,9 @@ Scenario: _2050001 preparation
 			And I activate "Amount" field in "PaymentList" table
 			And I input "5000,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
+		And I click "Post" button
+		And I save the window as "$$CashReceipt2050001$$"
+		And I save the value of "Number" field as "$$NumberCashReceipt2050001$$"
 		And I click "Post and close" button
 	* Create Cash payment without reference to the partner term and the document
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
@@ -171,11 +180,11 @@ Scenario: _2050001 preparation
 				| Description    |
 				| Cash desk №3 |
 			And I select current line in "List" table
-		* Change the document number to 700
-			And I input "0" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "700" text in "Number" field
+		// * Change the document number to 700
+		// 	And I input "0" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "700" text in "Number" field
 			And I input begin of the current month date in "Date" field
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
@@ -189,6 +198,9 @@ Scenario: _2050001 preparation
 			And I activate "Amount" field in "PaymentList" table
 			And I input "5000,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
+		And I click "Post" button
+		And I save the window as "$$CashPayment2050001$$"
+		And I save the value of "Number" field as "$$NumberCashPayment2050001$$"
 		And I click "Post and close" button
 
 Scenario: 2050002 check filling in Reconcilation statement
@@ -222,16 +234,16 @@ Scenario: 2050002 check filling in Reconcilation statement
 	* Check filling in tabular part
 		And in the table "Transactions" I click "Fill" button
 		And "Transactions" table contains lines
-		| 'Date' | 'Document'                | 'Credit'    | 'Debit'     |
-		| '*'    | 'Cash payment 700*'       | ''          | '5 000,00'  |
-		| '*'    | 'Cash receipt 700*'       | '5 000,00'  | ''          |
-		| '*'    | 'Bank payment 700*'       | ''          | '1 000,00'  |
-		| '*'    | 'Bank receipt 700*'       | '20 000,00' | ''          |
-		| '*'    | 'Sales invoice 9 000*'    | ''          | '19 240,00' |
-		| '*'    | 'Sales invoice 9 002*'    | ''          | '1 740,00'  |
-		| '*'    | 'Sales invoice 9 003*'    | ''          | '28 686,30' |
-		| '*'    | 'Purchase invoice 9 000*' | '13 570,00' | ''          |
-		| '*'    | 'Purchase invoice 9 001*' | '4 212,60'  | ''          |
+		| 'Date' | 'Document'                    | 'Credit'    | 'Debit'     |
+		| '*'    | '$$CashPayment2050001$$*'     | ''          | '5 000,00'  |
+		| '*'    | '$$CashReceipt2050001$$*'     | '5 000,00'  | ''          |
+		| '*'    | '$$BankPayment2050001$$*'     | ''          | '1 000,00'  |
+		| '*'    | '$$BankReceipt2050001$$*'     | '20 000,00' | ''          |
+		| '*'    | '$$SalesInvoice20400022$$'    | ''          | '19 240,00' |
+		| '*'    | '$$SalesInvoice2040002$$'     | ''          | '1 740,00'  |
+		| '*'    | '$$SalesInvoice20400021$$'    | ''          | '28 686,30' |
+		| '*'    | '$$PurchaseInvoice2040005$$'  | '13 570,00' | ''          |
+		| '*'    | '$$PurchaseInvoice20400051$$' | '4 212,60'  | ''          |
 	* Check document
 		And I click "Post" button
 	* Clear movements
@@ -257,7 +269,7 @@ Scenario: _2050003 check the autocomplete document Invoice match with the custom
 		And I select current line in "" table
 		And I go to line in "List" table
 			| 'Number' | 'Partner' |
-			| '9 000'  | 'Crystal' |
+			| '$$NumberSalesInvoice20400022$$'  | 'Crystal' |
 		And I activate "Partner" field in "List" table
 		And I select current line in "List" table
 	* Filling in the tabular part
@@ -265,8 +277,8 @@ Scenario: _2050003 check the autocomplete document Invoice match with the custom
 		And in the table "Advances" I click "Fill advances" button
 	* Filling check
 		And "Advances" table contains lines
-			| 'Receipt document'  | 'Closing amount' | 'Partner' | 'Amount'    | 'Legal name'   | 'Currency' |
-			| 'Bank receipt 700*' | '20 000,00'      | 'Crystal' | '20 000,00' | 'Company Adel' | 'TRY'      |
+			| 'Receipt document'        | 'Closing amount' | 'Partner' | 'Amount'    | 'Legal name'   | 'Currency' |
+			| '$$BankReceipt2050001$$*' | '20 000,00'      | 'Crystal' | '20 000,00' | 'Company Adel' | 'TRY'      |
 		Then the number of "Advances" table lines is "меньше или равно" 2
 	And I close all client application windows
 
@@ -287,8 +299,8 @@ Scenario: _2050004 check the autocomplete document Invoice match with the vendor
 			| 'Purchase invoice' |
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Number' | 'Partner' |
-			| '9 000'  | 'Crystal' |
+			| 'Number'                           | 'Partner' |
+			| '$$NumberPurchaseInvoice2040005$$' | 'Crystal' |
 		And I activate "Partner" field in "List" table
 		And I select current line in "List" table
 	* Filling in the tabular part
@@ -296,9 +308,9 @@ Scenario: _2050004 check the autocomplete document Invoice match with the vendor
 		And in the table "Advances" I click "Fill advances" button
 	* Filling check
 		And "Advances" table contains lines
-			| 'Closing amount' | 'Payment document'  | 'Partner' | 'Amount'   | 'Legal name'   | 'Currency' |
-			| '5 000,00'       | 'Cash payment 700*' | 'Crystal' | '5 000,00' | 'Company Adel' | 'TRY'      |
-			| '1 000,00'       | 'Bank payment 700*' | 'Crystal' | '1 000,00' | 'Company Adel' | 'TRY'      |
+			| 'Closing amount' | 'Payment document'        | 'Partner' | 'Amount'   | 'Legal name'   | 'Currency' |
+			| '5 000,00'       | '$$CashPayment2050001$$*' | 'Crystal' | '5 000,00' | 'Company Adel' | 'TRY'      |
+			| '1 000,00'       | '$$BankPayment2050001$$*' | 'Crystal' | '1 000,00' | 'Company Adel' | 'TRY'      |
 		Then the number of "Advances" table lines is "меньше или равно" 2
 	And I close all client application windows
 
@@ -319,8 +331,8 @@ Scenario: _2050005 check the movements of the Invoice match document with the ve
 			| 'Purchase invoice' |
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Number' | 'Partner' |
-			| '9 000'  | 'Crystal' |
+			| 'Number'                           | 'Partner' |
+			| '$$NumberPurchaseInvoice2040005$$' | 'Crystal' |
 		And I activate "Partner" field in "List" table
 		And I select current line in "List" table
 	* Filling in the tabular part on advances (manually)
@@ -358,34 +370,36 @@ Scenario: _2050005 check the movements of the Invoice match document with the ve
 		And I activate "Closing amount" field in "Advances" table
 		And I input "1 000,00" text in "Closing amount" field of "Advances" table
 		And I finish line editing in "Advances" table
-	* Change the document number
-		And I move to "Other" tab
-		And I input "1" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "1" text in "Number" field
+	// * Change the document number
+	// 	And I move to "Other" tab
+	// 	And I input "1" text in "Number" field
+	// 	Then "1C:Enterprise" window is opened
+	// 	And I click "Yes" button
+	// 	And I input "1" text in "Number" field
 		And I click "Post" button
+		And I save the window as "$$InvoiceMatch2050005$$"
+		And I save the value of "Number" field as "$$NumberInvoiceMatch2050005$$"
 	* Check movements
 		And I click "Registrations report" button
 		Then "ResultTable" spreadsheet document is equal by template
-		| 'Invoice match 1*'                    | ''            | ''       | ''          | ''             | ''                        | ''             | ''             | ''                  | ''                         | ''                         | ''                     |
-		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                        | ''             | ''             | ''                  | ''                         | ''                         | ''                     |
-		| 'Register  "Advance to suppliers"'    | ''            | ''       | ''          | ''             | ''                        | ''             | ''             | ''                  | ''                         | ''                         | ''                     |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''             | ''             | ''                  | ''                         | 'Attributes'               | ''                     |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Partner'                 | 'Legal name'   | 'Currency'     | 'Payment document'  | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
-		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Crystal'                 | 'Company Adel' | 'USD'          | 'Bank payment 700*' | 'Reporting currency'       | 'No'                       | ''                     |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'                 | 'Company Adel' | 'TRY'          | 'Bank payment 700*' | 'en description is empty' | 'No'                       | ''                     |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'                 | 'Company Adel' | 'TRY'          | 'Bank payment 700*' | 'Local currency'           | 'No'                       | ''                     |
-		| ''                                    | ''            | ''       | ''          | ''             | ''                        | ''             | ''             | ''                  | ''                         | ''                         | ''                     |
-		| 'Register  "Partner AP transactions"' | ''            | ''       | ''          | ''             | ''                        | ''             | ''             | ''                  | ''                         | ''                         | ''                     |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''             | ''             | ''                  | ''                         | ''                         | 'Attributes'           |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'          | 'Partner'      | 'Legal name'   | 'Partner term'         | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
-		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Purchase invoice 9 000*' | 'Crystal'      | 'Company Adel' | 'Vendor, TRY'       | 'USD'                      | 'Reporting currency'       | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Purchase invoice 9 000*' | 'Crystal'      | 'Company Adel' | 'Vendor, TRY'       | 'TRY'                      | 'en description is empty' | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Purchase invoice 9 000*' | 'Crystal'      | 'Company Adel' | 'Vendor, TRY'       | 'TRY'                      | 'Local currency'           | 'No'                   |
+		| '$$InvoiceMatch2050005$$'             | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                        | ''                             | ''                             | ''                     |
+		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                        | ''                             | ''                             | ''                     |
+		| 'Register  "Advance to suppliers"'    | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                        | ''                             | ''                             | ''                     |
+		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                           | ''             | ''             | ''                        | ''                             | 'Attributes'                   | ''                     |
+		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Partner'                    | 'Legal name'   | 'Currency'     | 'Payment document'        | 'Multi currency movement type' | 'Deferred calculation'         | ''                     |
+		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Crystal'                    | 'Company Adel' | 'USD'          | '$$BankPayment2050001$$*' | 'Reporting currency'           | 'No'                           | ''                     |
+		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'                    | 'Company Adel' | 'TRY'          | '$$BankPayment2050001$$*' | 'en description is empty'      | 'No'                           | ''                     |
+		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'                    | 'Company Adel' | 'TRY'          | '$$BankPayment2050001$$*' | 'Local currency'               | 'No'                           | ''                     |
+		| ''                                    | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                        | ''                             | ''                             | ''                     |
+		| 'Register  "Partner AP transactions"' | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                        | ''                             | ''                             | ''                     |
+		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                           | ''             | ''             | ''                        | ''                             | ''                             | 'Attributes'           |
+		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'             | 'Partner'      | 'Legal name'   | 'Partner term'            | 'Currency'                     | 'Multi currency movement type' | 'Deferred calculation' |
+		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | '$$PurchaseInvoice2040005$$' | 'Crystal'      | 'Company Adel' | 'Vendor, TRY'             | 'USD'                          | 'Reporting currency'           | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice2040005$$' | 'Crystal'      | 'Company Adel' | 'Vendor, TRY'             | 'TRY'                          | 'en description is empty'      | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice2040005$$' | 'Crystal'      | 'Company Adel' | 'Vendor, TRY'             | 'TRY'                          | 'Local currency'               | 'No'                   |
 		And I close all client application windows
 
-Scenario: _2050005 check the movements of the Invoice match document with the customer in advance (manual filling)
+Scenario: _2050006 check the movements of the Invoice match document with the customer in advance (manual filling)
 	* Open a creation form Invoice match
 		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
 		And I click the button named "FormCreate"
@@ -403,7 +417,7 @@ Scenario: _2050005 check the movements of the Invoice match document with the cu
 		And I select current line in "" table
 		And I go to line in "List" table
 			| 'Number' | 'Partner' |
-			| '9 000'  | 'Crystal' |
+			| '$$NumberSalesInvoice20400022$$'  | 'Crystal' |
 		And I activate "Partner" field in "List" table
 		And I select current line in "List" table
 	* Filling in the tabular part on advances (manually)
@@ -441,35 +455,37 @@ Scenario: _2050005 check the movements of the Invoice match document with the cu
 		And I activate "Closing amount" field in "Advances" table
 		And I input "1 000,00" text in "Closing amount" field of "Advances" table
 		And I finish line editing in "Advances" table
-	* Change the document number
-		And I move to "Other" tab
-		And I input "2" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "2" text in "Number" field
+	// * Change the document number
+	// 	And I move to "Other" tab
+	// 	And I input "2" text in "Number" field
+	// 	Then "1C:Enterprise" window is opened
+	// 	And I click "Yes" button
+	// 	And I input "2" text in "Number" field
 		And I click "Post" button
+		And I save the window as "$$InvoiceMatch2050006$$"
+		And I save the value of "Number" field as "$$NumberInvoiceMatch2050006$$"
 	* Check movements
 		And I click "Registrations report" button
 		Then "ResultTable" spreadsheet document is equal by template
-		| 'Invoice match 2*'                    | ''            | ''       | ''          | ''             | ''                     | ''             | ''             | ''                      | ''                         | ''                         | ''                     |
-		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                     | ''             | ''             | ''                      | ''                         | ''                         | ''                     |
-		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                     | ''             | ''             | ''                      | ''                         | ''                         | ''                     |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                     | ''             | ''             | ''                      | ''                         | ''                         | 'Attributes'           |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'       | 'Partner'      | 'Legal name'   | 'Partner term'             | 'Currency'                 | 'Multi currency movement type'   | 'Deferred calculation' |
-		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal'      | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'                      | 'Reporting currency'       | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal'      | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'                      | 'en description is empty' | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal'      | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'                      | 'Local currency'           | 'No'                   |
-		| ''                                    | ''            | ''       | ''          | ''             | ''                     | ''             | ''             | ''                      | ''                         | ''                         | ''                     |
-		| 'Register  "Advance from customers"'  | ''            | ''       | ''          | ''             | ''                     | ''             | ''             | ''                      | ''                         | ''                         | ''                     |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                     | ''             | ''             | ''                      | ''                         | 'Attributes'               | ''                     |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Partner'              | 'Legal name'   | 'Currency'     | 'Receipt document'      | 'Multi currency movement type'   | 'Deferred calculation'     | ''                     |
-		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Crystal'              | 'Company Adel' | 'USD'          | 'Bank receipt 700*'     | 'Reporting currency'       | 'No'                       | ''                     |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'              | 'Company Adel' | 'TRY'          | 'Bank receipt 700*'     | 'en description is empty' | 'No'                       | ''                     |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'              | 'Company Adel' | 'TRY'          | 'Bank receipt 700*'     | 'Local currency'           | 'No'                       | ''                     |
+		| '$$InvoiceMatch2050006$$'             | ''            | ''       | ''          | ''             | ''                         | ''             | ''             | ''                         | ''                             | ''                             | ''                     |
+		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                         | ''             | ''             | ''                         | ''                             | ''                             | ''                     |
+		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                         | ''             | ''             | ''                         | ''                             | ''                             | ''                     |
+		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''             | ''             | ''                         | ''                             | ''                             | 'Attributes'           |
+		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'           | 'Partner'      | 'Legal name'   | 'Partner term'             | 'Currency'                     | 'Multi currency movement type' | 'Deferred calculation' |
+		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal'      | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'                          | 'Reporting currency'           | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal'      | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'                          | 'en description is empty'      | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal'      | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'                          | 'Local currency'               | 'No'                   |
+		| ''                                    | ''            | ''       | ''          | ''             | ''                         | ''             | ''             | ''                         | ''                             | ''                             | ''                     |
+		| 'Register  "Advance from customers"'  | ''            | ''       | ''          | ''             | ''                         | ''             | ''             | ''                         | ''                             | ''                             | ''                     |
+		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''             | ''             | ''                         | ''                             | 'Attributes'                   | ''                     |
+		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Partner'                  | 'Legal name'   | 'Currency'     | 'Receipt document'         | 'Multi currency movement type' | 'Deferred calculation'         | ''                     |
+		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Crystal'                  | 'Company Adel' | 'USD'          | '$$BankReceipt2050001$$*'  | 'Reporting currency'           | 'No'                           | ''                     |
+		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'                  | 'Company Adel' | 'TRY'          | '$$BankReceipt2050001$$*'  | 'en description is empty'      | 'No'                           | ''                     |
+		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'                  | 'Company Adel' | 'TRY'          | '$$BankReceipt2050001$$*'  | 'Local currency'               | 'No'                           | ''                     |
 		And I close all client application windows
 
 
-Scenario: _2050006 check the movements of the Invoice match document with the client when transferring the amount from document to document
+Scenario: _2050007 check the movements of the Invoice match document with the client when transferring the amount from document to document
 	* Open a creation form Invoice match
 		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
 		And I click the button named "FormCreate"
@@ -487,7 +503,7 @@ Scenario: _2050006 check the movements of the Invoice match document with the cl
 		And I select current line in "" table
 		And I go to line in "List" table
 			| 'Number' | 'Partner' |
-			| '9 000'  | 'Crystal' |
+			| '$$NumberSalesInvoice20400022$$'  | 'Crystal' |
 		And I activate "Partner" field in "List" table
 		And I select current line in "List" table
 	* Filling in the tabular part Transaction
@@ -499,7 +515,7 @@ Scenario: _2050006 check the movements of the Invoice match document with the cl
 		And I select current line in "" table
 		And I go to line in "List" table
 			| 'Number' |
-			| '9 002'  |
+			| '$$NumberSalesInvoice2040002$$'  |
 		And I select current line in "List" table
 		And I activate field named "TransactionsPartner" in "Transactions" table
 		And I click choice button of the attribute named "TransactionsPartner" in "Transactions" table
@@ -529,37 +545,40 @@ Scenario: _2050006 check the movements of the Invoice match document with the cl
 		And I select current line in "Transactions" table
 		And I input "2 000,00" text in the field named "TransactionsClosingAmount" of "Transactions" table
 		And I finish line editing in "Transactions" table
-	* Change the document number
-		And I move to "Other" tab
-		And I input "12" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "3" text in "Number" field
+	// * Change the document number
+	// 	And I move to "Other" tab
+	// 	And I input "12" text in "Number" field
+	// 	Then "1C:Enterprise" window is opened
+	// 	And I click "Yes" button
+	// 	And I input "3" text in "Number" field
 	* Check movements
 		And I click "Post" button
+		And I click "Post" button
+		And I save the window as "$$InvoiceMatch2050007$$"
+		And I save the value of "Number" field as "$$NumberInvoiceMatch2050007$$"
 		And I click "Registrations report" button
 		Then "ResultTable" spreadsheet document is equal by template
-		| 'Invoice match 3*'                    | ''            | ''       | ''          | ''             | ''                     | ''        | ''             | ''                      | ''         | ''                         | ''                     |
-		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                     | ''        | ''             | ''                      | ''         | ''                         | ''                     |
-		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                     | ''        | ''             | ''                      | ''         | ''                         | ''                     |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                     | ''        | ''             | ''                      | ''         | ''                         | 'Attributes'           |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'       | 'Partner' | 'Legal name'   | 'Partner term'             | 'Currency' | 'Multi currency movement type'   | 'Deferred calculation' |
-		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty' | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'           | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                      | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '-342,47'   | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '342,47'    | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty' | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'           | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                      | 'No'                   |
+		| '$$InvoiceMatch2050007$$'             | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
+		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
+		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
+		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''        | ''             | ''                         | ''         | ''                             | 'Attributes'           |
+		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'           | 'Partner' | 'Legal name'   | 'Partner term'             | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '-342,47'   | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '342,47'    | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
 		And I close all client application windows
 
-Scenario: _2050007 check of movements in case of cancellation and re-post of Invoice match №3
+Scenario: _2050008 check of movements in case of cancellation and re-post of Invoice match №3
 	* Select Invoice match
 		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
 		And I go to line in "List" table
 			| 'Number' |
-			| '3'     |
+			| '$$NumberInvoiceMatch2050007$$'     |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Check for no movement
 		And I click "Registrations report" button
@@ -570,23 +589,23 @@ Scenario: _2050007 check of movements in case of cancellation and re-post of Inv
 		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
 		And I go to line in "List" table
 			| 'Number' |
-			| '3'     |
+			| '$$NumberInvoiceMatch2050007$$'     |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click "Registrations report" button
 		Then "ResultTable" spreadsheet document is equal by template
-		| 'Invoice match 3*'                    | ''            | ''       | ''          | ''             | ''                     | ''        | ''             | ''                      | ''         | ''                         | ''                     |
-		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                     | ''        | ''             | ''                      | ''         | ''                         | ''                     |
-		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                     | ''        | ''             | ''                      | ''         | ''                         | ''                     |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                     | ''        | ''             | ''                      | ''         | ''                         | 'Attributes'           |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'       | 'Partner' | 'Legal name'   | 'Partner term'             | 'Currency' | 'Multi currency movement type'   | 'Deferred calculation' |
-		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty' | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'           | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                      | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '-342,47'   | 'Main Company' | 'Sales invoice 9 002*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '342,47'    | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty' | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'           | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | 'Sales invoice 9 000*' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                      | 'No'                   |
+		| '$$InvoiceMatch2050007$$'             | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
+		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
+		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
+		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''        | ''             | ''                         | ''         | ''                             | 'Attributes'           |
+		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'           | 'Partner' | 'Legal name'   | 'Partner term'             | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '-342,47'   | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '342,47'    | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
 		And I close all client application windows
 
 Scenario: _2050008 check the availability of Purchase return and Sales return choices in the Invoice match document
@@ -607,7 +626,7 @@ Scenario: _2050008 check the availability of Purchase return and Sales return ch
 		And I select current line in "" table
 		And I go to line in "List" table
 			| 'Number' | 'Partner' |
-			| '1'      | 'Ferron BP' |
+			| '$$NumberPurchaseReturn022301$$'      | 'Ferron BP' |
 		And I select current line in "List" table
 		Then the form attribute named "PartnerArTransactionsBasisDocument" became equal to "$$PurchaseReturn022301$$" template
 	* Filling the document header (transaction type - with vendor)
@@ -624,7 +643,7 @@ Scenario: _2050008 check the availability of Purchase return and Sales return ch
 		And I select current line in "" table
 		And I go to line in "List" table
 			| 'Number' | 'Partner' |
-			| '1'      | 'Kalipso' |
+			| '$$NumberSalesReturn028501$$'      | 'Kalipso' |
 		And I select current line in "List" table
 		Then the form attribute named "PartnerArTransactionsBasisDocument" became equal to "$$PurchaseReturn022301$$" template
 	And I close all client application windows

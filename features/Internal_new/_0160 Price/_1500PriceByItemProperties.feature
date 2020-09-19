@@ -16,6 +16,17 @@ Background:
 //дописать на проверку проводок + проверка цены по айтем в документах
 
 Scenario: _150000 preparation
+	* Load info
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When  Create catalog Currencies objects
 	* Select in Item type properties that will affect the price
 		* For item type Clothes
 			Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
@@ -49,7 +60,6 @@ Scenario: _150000 preparation
 			And I click "Save and close" button
 			And Delay 5
 		And I close all client application windows
-
 
 Scenario: _150001 basic price entry by properties (including VAT)
 	* Create price list by property for item type Clothes
@@ -342,8 +352,8 @@ Scenario: _150004 check the price calculation according to the specification (ba
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key'  | 'Store'    | 'Q'     | 'Unit' |
-			| 'Dress' | '3 100,00' | 'Dress/A-8' | 'Store 01' | '1,000' | 'pcs'  |
+			| 'Item'  | 'Price'    | 'Item key'  |  'Q'     | 'Unit' |
+			| 'Dress' | '3 100,00' | 'Dress/A-8' | '1,000'  | 'pcs'  |
 		And I close all client application windows
 	* Price calculation in the Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -373,8 +383,8 @@ Scenario: _150004 check the price calculation according to the specification (ba
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key'  | 'Store'    | 'Q'     | 'Unit' |
-			| 'Dress' | '3 100,00' | 'Dress/A-8' | 'Store 01' | '1,000' | 'pcs'  |
+			| 'Item'  | 'Price'    | 'Item key'  | 'Q'     | 'Unit' |
+			| 'Dress' | '3 100,00' | 'Dress/A-8' | '1,000' | 'pcs'  |
 		And I close all client application windows
 	* Price calculation in the Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -404,8 +414,8 @@ Scenario: _150004 check the price calculation according to the specification (ba
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key'  | 'Store'    | 'Q'     | 'Unit' |
-			| 'Dress' | '3 100,00' | 'Dress/A-8' | 'Store 01' | '1,000' | 'pcs'  |
+			| 'Item'  | 'Price'    | 'Item key'  | 'Q'     | 'Unit' |
+			| 'Dress' | '3 100,00' | 'Dress/A-8' | '1,000' | 'pcs'  |
 		And I close all client application windows
 	* Price calculation in the Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -435,8 +445,8 @@ Scenario: _150004 check the price calculation according to the specification (ba
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key'  | 'Store'    | 'Q'     | 'Unit' |
-			| 'Dress' | '3 100,00' | 'Dress/A-8' | 'Store 01' | '1,000' | 'pcs'  |
+			| 'Item'  | 'Price'    | 'Item key'  | 'Q'     | 'Unit' |
+			| 'Dress' | '3 100,00' | 'Dress/A-8' | '1,000' | 'pcs'  |
 		And I close all client application windows
 
 
@@ -474,8 +484,8 @@ Scenario: _150004 check the price calculation for the bandle (based on the prope
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'              | 'Price'    | 'Item key'                      | 'Store'    | 'Q'     | 'Unit'  |
-			| 'Bound Dress+Shirt' | '1 100,00' | 'Bound Dress+Shirt/Dress+Shirt' | 'Store 01' | '1,000' |  'pcs'  |
+			| 'Item'              | 'Price'    | 'Item key'                      | 'Q'     | 'Unit'  |
+			| 'Bound Dress+Shirt' | '1 100,00' | 'Bound Dress+Shirt/Dress+Shirt' | '1,000' |  'pcs'  |
 		And I close all client application windows
 	* Price calculation in the Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -504,8 +514,8 @@ Scenario: _150004 check the price calculation for the bandle (based on the prope
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'              | 'Price'    | 'Item key'                      | 'Store'    | 'Q'     | 'Unit'  |
-			| 'Bound Dress+Shirt' | '1 100,00' | 'Bound Dress+Shirt/Dress+Shirt' | 'Store 01' | '1,000' |  'pcs'  |
+			| 'Item'              | 'Price'    | 'Item key'                      | 'Q'     | 'Unit'  |
+			| 'Bound Dress+Shirt' | '1 100,00' | 'Bound Dress+Shirt/Dress+Shirt' | '1,000' |  'pcs'  |
 		And I close all client application windows
 	* Price calculation in the Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -534,8 +544,8 @@ Scenario: _150004 check the price calculation for the bandle (based on the prope
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'              | 'Price'    | 'Item key'                      | 'Store'    | 'Q'     | 'Unit'  |
-			| 'Bound Dress+Shirt' | '1 100,00' | 'Bound Dress+Shirt/Dress+Shirt' | 'Store 01' | '1,000' |  'pcs'  |
+			| 'Item'              | 'Price'    | 'Item key'                      | 'Q'     | 'Unit'  |
+			| 'Bound Dress+Shirt' | '1 100,00' | 'Bound Dress+Shirt/Dress+Shirt' | '1,000' |  'pcs'  |
 		And I close all client application windows
 	* Price calculation in the Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -564,8 +574,8 @@ Scenario: _150004 check the price calculation for the bandle (based on the prope
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'              | 'Price'    | 'Item key'                      | 'Store'    | 'Q'     | 'Unit'  |
-			| 'Bound Dress+Shirt' | '1 100,00' | 'Bound Dress+Shirt/Dress+Shirt' | 'Store 01' | '1,000' |  'pcs'  |
+			| 'Item'              | 'Price'    | 'Item key'                      | 'Unit'  |
+			| 'Bound Dress+Shirt' | '1 100,00' | 'Bound Dress+Shirt/Dress+Shirt' |  'pcs'  |
 		And I close all client application windows
 
 Scenario: _150005 price check by properties
@@ -596,8 +606,8 @@ Scenario: _150005 price check by properties
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key'| 'Store'    | 'Q'     | 'Unit'  |
-			| 'Dress' | '350,00' | 'L/Green' | 'Store 01' | '1,000' |  'pcs'  |
+			| 'Item'  | 'Price'  | 'Item key'| 'Q'     | 'Unit'  |
+			| 'Dress' | '350,00' | 'L/Green' | '1,000' |  'pcs'  |
 		And I close all client application windows
 	* Price calculation in the Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -626,8 +636,8 @@ Scenario: _150005 price check by properties
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key'| 'Store'    | 'Q'     | 'Unit'  |
-			| 'Dress' | '350,00' | 'L/Green' | 'Store 01' | '1,000' |  'pcs'  |
+			| 'Item'  | 'Price'  | 'Item key'| 'Q'     | 'Unit'  |
+			| 'Dress' | '350,00' | 'L/Green' | '1,000' |  'pcs'  |
 		And I close all client application windows
 	* Price calculation in the Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -656,8 +666,8 @@ Scenario: _150005 price check by properties
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key'| 'Store'    | 'Q'     | 'Unit'  |
-			| 'Dress' | '350,00' | 'L/Green' | 'Store 01' | '1,000' |  'pcs'  |
+			| 'Item'  | 'Price'  | 'Item key'| 'Q'     | 'Unit'  |
+			| 'Dress' | '350,00' | 'L/Green' | '1,000' |  'pcs'  |
 		And I close all client application windows
 	* Price calculation in the Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -686,8 +696,8 @@ Scenario: _150005 price check by properties
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key'| 'Store'    | 'Q'     | 'Unit'  |
-			| 'Dress' | '350,00' | 'L/Green' | 'Store 01' | '1,000' |  'pcs'  |
+			| 'Item'  | 'Price'  | 'Item key'| 'Q'     | 'Unit'  |
+			| 'Dress' | '350,00' | 'L/Green' | '1,000' |  'pcs'  |
 		And I close all client application windows
 
 

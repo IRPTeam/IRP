@@ -13,6 +13,69 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
+Scenario: _022000 preparation
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	* Check or create PurchaseOrder017001
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberPurchaseOrder017001$$" |
+			When create PurchaseOrder017001
+	* Check or create PurchaseOrder017003
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberPurchaseOrder017003$$" |
+			When create PurchaseOrder017003
+	* Check or create PurchaseInvoice018001
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberPurchaseInvoice018001$$" |
+			When create PurchaseInvoice018001 based on PurchaseOrder017001
+	* Check or create PurchaseInvoice018006
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberPurchaseInvoice018006$$" |
+			When create PurchaseInvoice018006 based on PurchaseOrder017003
+		
+	
+	
+
+
 Scenario: _022001 create document Purchase return order, store use Shipment confirmation based on Purchase invoice + check status
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"

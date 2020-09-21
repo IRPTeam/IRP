@@ -50,6 +50,7 @@ EndProcedure
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocRetailSalesReceiptClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	Items.DetailedInformation.document.getElementById("text").innerHTML = "";
 EndProcedure
 
 &AtClient

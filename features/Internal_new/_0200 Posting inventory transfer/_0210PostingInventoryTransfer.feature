@@ -466,51 +466,7 @@ Scenario: _021029 check Inventory transfer (without order) posting by register S
 	# 6
 Scenario: _021030 create document Inventory Transfer - Store sender use Shipment confirmation, Store receiver use Goods receipt (without Purchase order)
 	
-	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
-	And I click the button named "FormCreate"
-	And I click Select button of "Store sender" field
-	And I go to line in "List" table
-		| Description |
-		| Store 02    |
-	And I select current line in "List" table
-	And I click Select button of "Store receiver" field
-	And I go to line in "List" table
-		| Description |
-		| Store 03    |
-	And I select current line in "List" table
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| 'Description'  |
-		| 'Main Company' |
-	And I select current line in "List" table
-	// * Filling in the document number
-	// 		And I input "6" text in "Number" field
-	// 		Then "1C:Enterprise" window is opened
-	// 		And I click "Yes" button
-	// 		And I input "6" text in "Number" field
-	And I move to "Items" tab
-	And I click the button named "Add"
-	And I click choice button of "Item" attribute in "ItemList" table
-	And I go to line in "List" table
-		| 'Description' |
-		| 'Dress'       |
-	And I select current line in "List" table
-	And I activate "Item key" field in "ItemList" table
-	And I click choice button of "Item key" attribute in "ItemList" table
-	And I go to line in "List" table
-		| 'Item key' |
-		| 'L/Green' |
-	And I select current line in "List" table
-	And I activate "Unit" field in "ItemList" table
-	And I click choice button of "Unit" attribute in "ItemList" table
-	And I select current line in "List" table
-	And I activate "Quantity" field in "ItemList" table
-	And I input "3,000" text in "Quantity" field of "ItemList" table
-	And I finish line editing in "ItemList" table
-	And I click "Post" button
-	And I save the value of "Number" field as "$$NumberInventoryTransfer021030$$"
-	And I save the window as "$$InventoryTransfer021030$$"
-	And I click "Post and close" button
+	When create InventoryTransfer021030
 
 Scenario: _021031 check the absence posting of Inventory transfer (InventoryTransfer) in the register TransferOrderBalanceStore sender use Shipment confirmation, Store receiver use Goods receipt
 	

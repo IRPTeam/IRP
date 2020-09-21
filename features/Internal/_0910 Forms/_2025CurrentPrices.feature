@@ -13,7 +13,22 @@ Background:
 
 Scenario: _01202501 preparation
 	* Load price type
-		When Create catalog PriceTypes objects (Current price)
+		// When Create catalog PriceTypes objects (Current price)
+			Given I open hyperlink "e1cib/list/Catalog.PriceTypes"
+			And Delay 2
+			And I click the button named "FormCreate"
+			And Delay 2
+			And I click Open button of the field named "Description_en"
+			And I input "Current price" text in the field named "Description_en"
+			And I input "Current price TR" text in the field named "Description_tr"
+			And I click "Ok" button
+			And I click Select button of "Currency" field
+			And I go to line in "List" table
+				| Code |
+				| TRY  |
+			And I select current line in "List" table
+			And I click the button named "FormWriteAndClose"
+			And I close all client application windows
 	* Create Price List (current date)
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I click the button named "FormCreate"

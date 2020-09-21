@@ -13,7 +13,45 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-Scenario: _029200 test data creation
+Scenario: _029200 preparation (create Purchase order based on a Sales order)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When  Create catalog Partners objects (Lomaniti)
+		When  Create catalog Partners objects (Ferron BP)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
 	* Create Sales order 501
 		* Open form for create order
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -455,7 +493,7 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 		| '$$NumberSalesOrder029201$$'    |
 		And I click "Registrations report" button
 		Then "ResultTable" spreadsheet document is equal by template
-		| '$$SalesOrder0292005$$'                      | ''            | ''          | ''          | ''                     | ''                      | ''          | ''          | ''        | ''                             | ''                     |
+		| '$$SalesOrder029201$$'                       | ''            | ''          | ''          | ''                     | ''                      | ''          | ''          | ''        | ''                             | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''          | ''                     | ''                      | ''          | ''          | ''        | ''                             | ''                     |
 		| 'Register  "Inventory balance"'              | ''            | ''          | ''          | ''                     | ''                      | ''          | ''          | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'           | ''                      | ''          | ''          | ''        | ''                             | ''                     |
@@ -1072,13 +1110,13 @@ Scenario: _029204 create Purchase invoice based on Purchase order that based on 
 		And I click "OK" button
 	* Check filling of the tabular part
 		And "ItemList" table contains lines
-		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Purchase order'           | 'Goods receipt'          | 'Sales order'           |
-		| '762,71'     | 'Trousers' | '180,00' | '36/Yellow' | '5,000'  | '137,29'     | 'pcs'  | '900,00'       | 'Store 02' | '$$PurchaseOrder0292012$$' | '$$GoodsReceipt029203$$' | '$$SalesOrder0292012$$' |
-		| '1 694,92'   | 'Dress'    | '200,00' | 'XS/Blue'   | '10,000' | '305,08'     | 'pcs'  | '2 000,00'     | 'Store 02' | '$$PurchaseOrder0292012$$' | '$$GoodsReceipt029203$$' | '$$SalesOrder0292012$$' |
-		| '8 898,31'   | 'Dress'    | '210,00' | 'M/White'   | '50,000' | '1 601,69'   | 'pcs'  | '10 500,00'    | 'Store 02' | '$$PurchaseOrder0292012$$' | '$$GoodsReceipt029203$$' | ''                      |
-		| '1 525,42'   | 'Trousers' | '180,00' | '38/Yellow' | '10,000' | '274,58'     | 'pcs'  | '1 800,00'     | 'Store 02' | '$$PurchaseOrder0292012$$' | '$$GoodsReceipt029203$$' | '$$SalesOrder0292012$$' |
-		| '1 525,42'   | 'Trousers' | '180,00' | '38/Yellow' | '10,000' | '274,58'     | 'pcs'  | '1 800,00'     | 'Store 01' | '$$PurchaseOrder0292012$$' | ''                       | '$$SalesOrder029201$$'  |
-		| '847,46'     | 'Dress'    | '200,00' | 'XS/Blue'   | '5,000'  | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 01' | '$$PurchaseOrder0292012$$' | ''                       | '$$SalesOrder029201$$'  |
+		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Purchase order'           | 'Sales order'           |
+		| '762,71'     | 'Trousers' | '180,00' | '36/Yellow' | '5,000'  | '137,29'     | 'pcs'  | '900,00'       | 'Store 02' | '$$PurchaseOrder0292012$$' | '$$SalesOrder0292012$$' |
+		| '1 694,92'   | 'Dress'    | '200,00' | 'XS/Blue'   | '10,000' | '305,08'     | 'pcs'  | '2 000,00'     | 'Store 02' | '$$PurchaseOrder0292012$$' | '$$SalesOrder0292012$$' |
+		| '8 898,31'   | 'Dress'    | '210,00' | 'M/White'   | '50,000' | '1 601,69'   | 'pcs'  | '10 500,00'    | 'Store 02' | '$$PurchaseOrder0292012$$' | ''                      |
+		| '1 525,42'   | 'Trousers' | '180,00' | '38/Yellow' | '10,000' | '274,58'     | 'pcs'  | '1 800,00'     | 'Store 02' | '$$PurchaseOrder0292012$$' | '$$SalesOrder0292012$$' |
+		| '1 525,42'   | 'Trousers' | '180,00' | '38/Yellow' | '10,000' | '274,58'     | 'pcs'  | '1 800,00'     | 'Store 01' | '$$PurchaseOrder0292012$$' | '$$SalesOrder029201$$'  |
+		| '847,46'     | 'Dress'    | '200,00' | 'XS/Blue'   | '5,000'  | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 01' | '$$PurchaseOrder0292012$$' | '$$SalesOrder029201$$'  |
 	* Change of document number - 457
 		// And I input "457" text in "Number" field
 		// Then "1C:Enterprise" window is opened
@@ -1253,7 +1291,7 @@ Scenario: _029206 create Sales invoice based on Sales order, procurement method 
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
 			| Number |
-			| 456   |
+			| $$NumberSalesOrder0292012$$   |
 		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
 		And I click the button named "FormSelectAll"
 		And I click "OK" button
@@ -1263,35 +1301,32 @@ Scenario: _029206 create Sales invoice based on Sales order, procurement method 
 		| 'Dress'    | '520,00' | 'XS/Blue'   | '10,000' |'793,22'     | 'pcs'  | '4 406,78'   | '5 200,00'     | 'Store 02' |
 		| 'Trousers' | '400,00' | '36/Yellow' | '5,000'  |'305,08'     | 'pcs'  | '1 694,92'   | '2 000,00'     | 'Store 02' |
 		| 'Trousers' | '400,00' | '38/Yellow' | '10,000' |'610,17'     | 'pcs'  | '3 389,83'   | '4 000,00'     | 'Store 02' |
-	* Change of document number - 456
-		And I move to "Other" tab
-		And I expand "More" group
-		And I input "456" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "456" text in "Number" field
-	* Post Sales invoice
-		And I move to "Item list" tab
-		And in the table "ItemList" I click "% Offers" button
-		Then "Pickup special offers" window is opened
-		And in the table "Offers" I click "OK" button
-		And I click "Post and close" button
+	// * Change of document number - 456
+	// 	And I move to "Other" tab
+	// 	And I expand "More" group
+	// 	And I input "456" text in "Number" field
+	// 	Then "1C:Enterprise" window is opened
+	// 	And I click "Yes" button
+	// 	And I input "456" text in "Number" field
+		And I click "Post" button
+		And I save the value of "Number" field as "$$NumberSalesInvoice0292012$$"
+		And I save the window as "$$SalesInvoice0292012$$"
 	* Check movements Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
 		| Number |
-		| 456    |
+		| $$NumberSalesInvoice0292012$$    |
 		And I click "Registrations report" button
 		Then "ResultTable" spreadsheet document is equal by template
-			| 'Sales invoice 456*'                   | ''            | ''          | ''                     | ''                 | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
+			| '$$SalesInvoice0292012$$'                   | ''            | ''          | ''                     | ''                 | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 			| 'Document registrations records'       | ''            | ''          | ''                     | ''                 | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 			| 'Register  "Partner AR transactions"'  | ''            | ''          | ''                     | ''                 | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 			| ''                                     | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'       | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | 'Attributes'                   | ''                             | ''                     |
 			| ''                                     | ''            | ''          | 'Amount'               | 'Company'          | 'Basis document'             | 'Partner'        | 'Legal name'         | 'Partner term'             | 'Currency'                     | 'Multi currency movement type' | 'Deferred calculation'         | ''                             | ''                     |
-			| ''                                     | 'Receipt'     | '*'         | '1 917,81'             | 'Main Company'     | 'Sales invoice 456*'         | 'Ferron BP'      | 'Company Ferron BP'  | 'Basic Partner terms, TRY' | 'USD'                          | 'Reporting currency'           | 'No'                           | ''                             | ''                     |
-			| ''                                     | 'Receipt'     | '*'         | '11 200'               | 'Main Company'     | 'Sales invoice 456*'         | 'Ferron BP'      | 'Company Ferron BP'  | 'Basic Partner terms, TRY' | 'TRY'                          | 'en description is empty'      | 'No'                           | ''                             | ''                     |
-			| ''                                     | 'Receipt'     | '*'         | '11 200'               | 'Main Company'     | 'Sales invoice 456*'         | 'Ferron BP'      | 'Company Ferron BP'  | 'Basic Partner terms, TRY' | 'TRY'                          | 'Local currency'               | 'No'                           | ''                             | ''                     |
-			| ''                                     | 'Receipt'     | '*'         | '11 200'               | 'Main Company'     | 'Sales invoice 456*'         | 'Ferron BP'      | 'Company Ferron BP'  | 'Basic Partner terms, TRY' | 'TRY'                          | 'TRY'                          | 'No'                           | ''                             | ''                     |
+			| ''                                     | 'Receipt'     | '*'         | '1 917,81'             | 'Main Company'     | '$$SalesInvoice0292012$$'         | 'Ferron BP'      | 'Company Ferron BP'  | 'Basic Partner terms, TRY' | 'USD'                          | 'Reporting currency'           | 'No'                           | ''                             | ''                     |
+			| ''                                     | 'Receipt'     | '*'         | '11 200'               | 'Main Company'     | '$$SalesInvoice0292012$$'         | 'Ferron BP'      | 'Company Ferron BP'  | 'Basic Partner terms, TRY' | 'TRY'                          | 'en description is empty'      | 'No'                           | ''                             | ''                     |
+			| ''                                     | 'Receipt'     | '*'         | '11 200'               | 'Main Company'     | '$$SalesInvoice0292012$$'         | 'Ferron BP'      | 'Company Ferron BP'  | 'Basic Partner terms, TRY' | 'TRY'                          | 'Local currency'               | 'No'                           | ''                             | ''                     |
+			| ''                                     | 'Receipt'     | '*'         | '11 200'               | 'Main Company'     | '$$SalesInvoice0292012$$'         | 'Ferron BP'      | 'Company Ferron BP'  | 'Basic Partner terms, TRY' | 'TRY'                          | 'TRY'                          | 'No'                           | ''                             | ''                     |
 			| ''                                     | ''            | ''          | ''                     | ''                 | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 			| 'Register  "Order reservation"'        | ''            | ''          | ''                     | ''                 | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 			| ''                                     | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'       | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
@@ -1303,39 +1338,39 @@ Scenario: _029206 create Sales invoice based on Sales order, procurement method 
 			| 'Register  "Taxes turnovers"'          | ''            | ''          | ''                     | ''                 | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 			| ''                                     | 'Period'      | 'Resources' | ''                     | ''                 | 'Dimensions'                 | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | 'Attributes'           |
 			| ''                                     | ''            | 'Amount'    | 'Manual amount'        | 'Net amount'       | 'Document'                   | 'Tax'            | 'Analytics'          | 'Tax rate'                 | 'Include to total amount'      | 'Row key'                      | 'Currency'                     | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                     | '*'           | '52,24'     | '52,24'                | '290,23'           | 'Sales invoice 456*'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'USD'                          | 'Reporting currency'           | 'No'                   |
-			| ''                                     | '*'           | '104,48'    | '104,48'               | '580,45'           | 'Sales invoice 456*'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'USD'                          | 'Reporting currency'           | 'No'                   |
-			| ''                                     | '*'           | '135,83'    | '135,83'               | '754,59'           | 'Sales invoice 456*'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'USD'                          | 'Reporting currency'           | 'No'                   |
-			| ''                                     | '*'           | '305,08'    | '305,08'               | '1 694,92'         | 'Sales invoice 456*'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'TRY'                          | 'en description is empty'      | 'No'                   |
-			| ''                                     | '*'           | '305,08'    | '305,08'               | '1 694,92'         | 'Sales invoice 456*'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'TRY'                          | 'Local currency'               | 'No'                   |
-			| ''                                     | '*'           | '305,08'    | '305,08'               | '1 694,92'         | 'Sales invoice 456*'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'TRY'                          | 'TRY'                          | 'No'                   |
-			| ''                                     | '*'           | '610,17'    | '610,17'               | '3 389,83'         | 'Sales invoice 456*'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'TRY'                          | 'en description is empty'      | 'No'                   |
-			| ''                                     | '*'           | '610,17'    | '610,17'               | '3 389,83'         | 'Sales invoice 456*'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'TRY'                          | 'Local currency'               | 'No'                   |
-			| ''                                     | '*'           | '610,17'    | '610,17'               | '3 389,83'         | 'Sales invoice 456*'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'TRY'                          | 'TRY'                          | 'No'                   |
-			| ''                                     | '*'           | '793,22'    | '793,22'               | '4 406,78'         | 'Sales invoice 456*'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'TRY'                          | 'en description is empty'      | 'No'                   |
-			| ''                                     | '*'           | '793,22'    | '793,22'               | '4 406,78'         | 'Sales invoice 456*'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'TRY'                          | 'Local currency'               | 'No'                   |
-			| ''                                     | '*'           | '793,22'    | '793,22'               | '4 406,78'         | 'Sales invoice 456*'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'TRY'                          | 'TRY'                          | 'No'                   |
+			| ''                                     | '*'           | '52,24'     | '52,24'                | '290,23'           | '$$SalesInvoice0292012$$'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'USD'                          | 'Reporting currency'           | 'No'                   |
+			| ''                                     | '*'           | '104,48'    | '104,48'               | '580,45'           | '$$SalesInvoice0292012$$'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'USD'                          | 'Reporting currency'           | 'No'                   |
+			| ''                                     | '*'           | '135,83'    | '135,83'               | '754,59'           | '$$SalesInvoice0292012$$'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'USD'                          | 'Reporting currency'           | 'No'                   |
+			| ''                                     | '*'           | '305,08'    | '305,08'               | '1 694,92'         | '$$SalesInvoice0292012$$'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'TRY'                          | 'en description is empty'      | 'No'                   |
+			| ''                                     | '*'           | '305,08'    | '305,08'               | '1 694,92'         | '$$SalesInvoice0292012$$'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'TRY'                          | 'Local currency'               | 'No'                   |
+			| ''                                     | '*'           | '305,08'    | '305,08'               | '1 694,92'         | '$$SalesInvoice0292012$$'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'TRY'                          | 'TRY'                          | 'No'                   |
+			| ''                                     | '*'           | '610,17'    | '610,17'               | '3 389,83'         | '$$SalesInvoice0292012$$'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'TRY'                          | 'en description is empty'      | 'No'                   |
+			| ''                                     | '*'           | '610,17'    | '610,17'               | '3 389,83'         | '$$SalesInvoice0292012$$'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'TRY'                          | 'Local currency'               | 'No'                   |
+			| ''                                     | '*'           | '610,17'    | '610,17'               | '3 389,83'         | '$$SalesInvoice0292012$$'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'TRY'                          | 'TRY'                          | 'No'                   |
+			| ''                                     | '*'           | '793,22'    | '793,22'               | '4 406,78'         | '$$SalesInvoice0292012$$'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'TRY'                          | 'en description is empty'      | 'No'                   |
+			| ''                                     | '*'           | '793,22'    | '793,22'               | '4 406,78'         | '$$SalesInvoice0292012$$'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'TRY'                          | 'Local currency'               | 'No'                   |
+			| ''                                     | '*'           | '793,22'    | '793,22'               | '4 406,78'         | '$$SalesInvoice0292012$$'         | 'VAT'            | ''                   | '18%'                      | 'Yes'                          | '*'                            | 'TRY'                          | 'TRY'                          | 'No'                   |
 			| ''                                     | ''            | ''          | ''                     | ''                 | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 			| 'Register  "Accounts statement"'       | ''            | ''          | ''                     | ''                 | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 			| ''                                     | 'Record type' | 'Period'    | 'Resources'            | ''                 | ''                           | ''               | 'Dimensions'         | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 			| ''                                     | ''            | ''          | 'Advance to suppliers' | 'Transaction AP'   | 'Advance from customers'     | 'Transaction AR' | 'Company'            | 'Partner'                  | 'Legal name'                   | 'Basis document'               | 'Currency'                     | ''                             | ''                     |
-			| ''                                     | 'Receipt'     | '*'         | ''                     | ''                 | ''                           | '11 200'         | 'Main Company'       | 'Ferron BP'                | 'Company Ferron BP'            | 'Sales invoice 456*'           | 'TRY'                          | ''                             | ''                     |
+			| ''                                     | 'Receipt'     | '*'         | ''                     | ''                 | ''                           | '11 200'         | 'Main Company'       | 'Ferron BP'                | 'Company Ferron BP'            | '$$SalesInvoice0292012$$'           | 'TRY'                          | ''                             | ''                     |
 			| ''                                     | ''            | ''          | ''                     | ''                 | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 			| 'Register  "Sales turnovers"'          | ''            | ''          | ''                     | ''                 | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 			| ''                                     | 'Period'      | 'Resources' | ''                     | ''                 | ''                           | 'Dimensions'     | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | 'Attributes'           |
 			| ''                                     | ''            | 'Quantity'  | 'Amount'               | 'Net amount'       | 'Offers amount'              | 'Company'        | 'Sales invoice'      | 'Currency'                 | 'Item key'                     | 'Row key'                      | 'Multi currency movement type' | 'Serial lot number'            | 'Deferred calculation' |
-			| ''                                     | '*'           | '5'         | '342,47'               | '290,23'           | ''                           | 'Main Company'   | 'Sales invoice 456*' | 'USD'                      | '36/Yellow'                    | '*'                            | 'Reporting currency'           | ''                             | 'No'                   |
-			| ''                                     | '*'           | '5'         | '2 000'                | '1 694,92'         | ''                           | 'Main Company'   | 'Sales invoice 456*' | 'TRY'                      | '36/Yellow'                    | '*'                            | 'en description is empty'      | ''                             | 'No'                   |
-			| ''                                     | '*'           | '5'         | '2 000'                | '1 694,92'         | ''                           | 'Main Company'   | 'Sales invoice 456*' | 'TRY'                      | '36/Yellow'                    | '*'                            | 'Local currency'               | ''                             | 'No'                   |
-			| ''                                     | '*'           | '5'         | '2 000'                | '1 694,92'         | ''                           | 'Main Company'   | 'Sales invoice 456*' | 'TRY'                      | '36/Yellow'                    | '*'                            | 'TRY'                          | ''                             | 'No'                   |
-			| ''                                     | '*'           | '10'        | '684,93'               | '580,45'           | ''                           | 'Main Company'   | 'Sales invoice 456*' | 'USD'                      | '38/Yellow'                    | '*'                            | 'Reporting currency'           | ''                             | 'No'                   |
-			| ''                                     | '*'           | '10'        | '890,41'               | '754,59'           | ''                           | 'Main Company'   | 'Sales invoice 456*' | 'USD'                      | 'XS/Blue'                      | '*'                            | 'Reporting currency'           | ''                             | 'No'                   |
-			| ''                                     | '*'           | '10'        | '4 000'                | '3 389,83'         | ''                           | 'Main Company'   | 'Sales invoice 456*' | 'TRY'                      | '38/Yellow'                    | '*'                            | 'en description is empty'      | ''                             | 'No'                   |
-			| ''                                     | '*'           | '10'        | '4 000'                | '3 389,83'         | ''                           | 'Main Company'   | 'Sales invoice 456*' | 'TRY'                      | '38/Yellow'                    | '*'                            | 'Local currency'               | ''                             | 'No'                   |
-			| ''                                     | '*'           | '10'        | '4 000'                | '3 389,83'         | ''                           | 'Main Company'   | 'Sales invoice 456*' | 'TRY'                      | '38/Yellow'                    | '*'                            | 'TRY'                          | ''                             | 'No'                   |
-			| ''                                     | '*'           | '10'        | '5 200'                | '4 406,78'         | ''                           | 'Main Company'   | 'Sales invoice 456*' | 'TRY'                      | 'XS/Blue'                      | '*'                            | 'en description is empty'      | ''                             | 'No'                   |
-			| ''                                     | '*'           | '10'        | '5 200'                | '4 406,78'         | ''                           | 'Main Company'   | 'Sales invoice 456*' | 'TRY'                      | 'XS/Blue'                      | '*'                            | 'Local currency'               | ''                             | 'No'                   |
-			| ''                                     | '*'           | '10'        | '5 200'                | '4 406,78'         | ''                           | 'Main Company'   | 'Sales invoice 456*' | 'TRY'                      | 'XS/Blue'                      | '*'                            | 'TRY'                          | ''                             | 'No'                   |
+			| ''                                     | '*'           | '5'         | '342,47'               | '290,23'           | ''                           | 'Main Company'   | '$$SalesInvoice0292012$$' | 'USD'                      | '36/Yellow'                    | '*'                            | 'Reporting currency'           | ''                             | 'No'                   |
+			| ''                                     | '*'           | '5'         | '2 000'                | '1 694,92'         | ''                           | 'Main Company'   | '$$SalesInvoice0292012$$' | 'TRY'                      | '36/Yellow'                    | '*'                            | 'en description is empty'      | ''                             | 'No'                   |
+			| ''                                     | '*'           | '5'         | '2 000'                | '1 694,92'         | ''                           | 'Main Company'   | '$$SalesInvoice0292012$$' | 'TRY'                      | '36/Yellow'                    | '*'                            | 'Local currency'               | ''                             | 'No'                   |
+			| ''                                     | '*'           | '5'         | '2 000'                | '1 694,92'         | ''                           | 'Main Company'   | '$$SalesInvoice0292012$$' | 'TRY'                      | '36/Yellow'                    | '*'                            | 'TRY'                          | ''                             | 'No'                   |
+			| ''                                     | '*'           | '10'        | '684,93'               | '580,45'           | ''                           | 'Main Company'   | '$$SalesInvoice0292012$$' | 'USD'                      | '38/Yellow'                    | '*'                            | 'Reporting currency'           | ''                             | 'No'                   |
+			| ''                                     | '*'           | '10'        | '890,41'               | '754,59'           | ''                           | 'Main Company'   | '$$SalesInvoice0292012$$' | 'USD'                      | 'XS/Blue'                      | '*'                            | 'Reporting currency'           | ''                             | 'No'                   |
+			| ''                                     | '*'           | '10'        | '4 000'                | '3 389,83'         | ''                           | 'Main Company'   | '$$SalesInvoice0292012$$' | 'TRY'                      | '38/Yellow'                    | '*'                            | 'en description is empty'      | ''                             | 'No'                   |
+			| ''                                     | '*'           | '10'        | '4 000'                | '3 389,83'         | ''                           | 'Main Company'   | '$$SalesInvoice0292012$$' | 'TRY'                      | '38/Yellow'                    | '*'                            | 'Local currency'               | ''                             | 'No'                   |
+			| ''                                     | '*'           | '10'        | '4 000'                | '3 389,83'         | ''                           | 'Main Company'   | '$$SalesInvoice0292012$$' | 'TRY'                      | '38/Yellow'                    | '*'                            | 'TRY'                          | ''                             | 'No'                   |
+			| ''                                     | '*'           | '10'        | '5 200'                | '4 406,78'         | ''                           | 'Main Company'   | '$$SalesInvoice0292012$$' | 'TRY'                      | 'XS/Blue'                      | '*'                            | 'en description is empty'      | ''                             | 'No'                   |
+			| ''                                     | '*'           | '10'        | '5 200'                | '4 406,78'         | ''                           | 'Main Company'   | '$$SalesInvoice0292012$$' | 'TRY'                      | 'XS/Blue'                      | '*'                            | 'Local currency'               | ''                             | 'No'                   |
+			| ''                                     | '*'           | '10'        | '5 200'                | '4 406,78'         | ''                           | 'Main Company'   | '$$SalesInvoice0292012$$' | 'TRY'                      | 'XS/Blue'                      | '*'                            | 'TRY'                          | ''                             | 'No'                   |
 			| ''                                     | ''            | ''          | ''                     | ''                 | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 			| 'Register  "Shipment orders"'          | ''            | ''          | ''                     | ''                 | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 			| ''                                     | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'       | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
@@ -1954,7 +1989,7 @@ Scenario: _029209 create Goods reciept based on Purchase invoice (Purchase invoi
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
 			| 'Number' |
-			| 'Number$$PurchaseInvoice0292008$$'  |
+			| '$$NumberPurchaseInvoice0292008$$'  |
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
 	* Check filling of the tabular part
 		And "ItemList" table contains lines
@@ -2166,8 +2201,8 @@ Scenario: _029211 create Sales invoice based on Sales orders (purchase has alrea
 	* Create Sales invoice for Sales order 461
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
-			| Number |
-			| 461  |
+			| 'Number' |
+			| '$$NumberSalesOrder0292072$$'  |
 		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
 	* Check filling of the tabular part
 		And "ItemList" table contains lines

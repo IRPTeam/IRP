@@ -41,6 +41,8 @@ Scenario: _023000 preparation (Sales invoice)
 		When Create catalog Taxes objects	
 		When Create information register TaxSettings records
 		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -178,52 +180,7 @@ Scenario: _024015 check the absence posting of Sales invoice (based on order, st
 
 
 Scenario: _024016 create document Sales Invoice order - Shipment confirmation doesn't used
-	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-	And I click the button named "FormCreate"
-	* Filling in customer information
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'     |
-		And I select current line in "List" table
-		And I click Select button of "Partner term" field
-		And I select current line in "List" table
-	* Select store 
-		And I click Select button of "Store" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'  |
-		And I select current line in "List" table
-		And I click Select button of "Legal name" field
-		And I activate "Description" field in "List" table
-		And I select current line in "List" table
-	// * Change of document number - 3
-	// 	And I move to "Other" tab
-	// 	And I expand "More" group
-	// 	And I input "3" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "3" text in "Number" field
-	* Filling in items table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item key' |
-			| 'L/Green'  |
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click "Post" button
-		And in the table "ItemList" I click "% Offers" button
-		And in the table "Offers" I click the button named "FormOK"
-	And I click "Post" button
-	And I save the value of "Number" field as "$$NumberSalesInvoice024016$$"
-	And I save the window as "$$SalesInvoice024016$$"
-	And I click "Post and close" button
+	When create SalesInvoice024016 (Shipment confirmation does not used)
 
 Scenario: _024017 check Sales invoice posting (without order, store doesn't use Shipment confirmation) by register StockReservation
 	
@@ -283,50 +240,8 @@ Scenario: _024024 check the absence posting of Sales invoice (without order, sto
 
 
 
-Scenario: _024025 create document Sales Invoice order - Shipment confirmation used
-	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-	And I click the button named "FormCreate"
-	* Filling in customer information
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'     |
-		And I select current line in "List" table
-		And I click Select button of "Partner term" field
-		And I select current line in "List" table
-		And I click Select button of "Legal name" field
-		And I activate "Description" field in "List" table
-		And I select current line in "List" table
-	// * Change of document number - 4
-	// 	And I move to "Other" tab
-	// 	And I expand "More" group
-	// 	And I input "4" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "4" text in "Number" field
-	* Change store to Store 02
-		And I click Choice button of the field named "Store"
-		And I go to line in "List" table
-			| Description |
-			| Store 02  |
-		And I select current line in "List" table
-	* Filling in items table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item key' |
-			| 'L/Green'  |
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "20,000" text in "Q" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-	And I click "Post" button
-	And I save the value of "Number" field as "$$NumberSalesInvoice024025$$"
-	And I save the window as "$$SalesInvoice024025$$"
-	And I click "Post and close" button
+Scenario: _024025 create document Sales Invoice without Sales order - Shipment confirmation used
+	When create SalesInvoice024025
 
 Scenario: _024026 check Sales invoice posting (without order, store use Shipment confirmation) by register StockReservation
 	

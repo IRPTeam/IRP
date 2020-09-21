@@ -1407,7 +1407,492 @@ Scenario:  _0154148 check that the Retail return receipt amount and the amount o
 		Then I wait that in user messages the "Payment amount [720,00] and return amount [700,00] not match" substring will appear in 10 seconds
 		And I close all client application windows
 		
-
+Scenario:  _0154149 create Cash statement
+	* Delete variables
+		And I delete '$$NumberRetailSalesReceipt01541491$$' variable
+		And I delete '$$RetailSalesReceipt01541491$$' variable
+		And I delete '$$NumberRetailSalesReceipt01541492$$' variable
+		And I delete '$$RetailSalesReceipt01541492$$' variable
+		And I delete '$$NumberRetailSalesReceipt01541493$$' variable
+		And I delete '$$RetailSalesReceipt01541493$$' variable
+		And I delete '$$NumberRetailSalesReceipt01541494$$' variable
+		And I delete '$$RetailSalesReceipt01541494$$' variable
+		And I delete '$$NumberRetailReturnReceipt01541491$$' variable
+		And I delete '$$RetailReturnReceipt01541491$$' variable
+		And I delete '$$NumberRetailReturnReceipt01541493$$' variable
+		And I delete '$$RetailReturnReceipt01541493$$' variable
+		And I delete '$$NumberRetailReturnReceipt01541494$$' variable
+		And I delete '$$RetailReturnReceipt01541494$$' variable
+	* Create Cash statement statuses
+		* Done
+			Given I open hyperlink "e1cib/list/Catalog.CashStatementStatuses"
+			And I click the button named "FormCreate"
+			And I input "Done" text in "ENG" field
+			And I change checkbox "Forbid corrections"
+			And I click "Save and close" button
+		* Create
+			And I click the button named "FormCreate"
+			And I input "Create" text in "ENG" field
+			And I click "Save and close" button
+	* Create RetailSalesReceipt01541491
+			And I close all client application windows
+		* Open the Retail Sales Receipt creation form
+			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+			And I click the button named "FormCreate"
+		* Check filling in legal name if the partner has only one
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Retail customer'         |
+			And I select current line in "List" table
+			Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		* Check filling in Partner term if the partner has only one
+			Then the form attribute named "Agreement" became equal to "Retail partner term"
+		* Check filling in Store from Partner term
+			Then the form attribute named "Store" became equal to "Store 01"
+		* Filling in item and item key
+			And I delete a line in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Trousers'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "List" table
+			And I input "1,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
+				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  |
+		* Filling in payment tab
+			And I move to "Payments" tab
+			And in the table "Payments" I click "Add" button
+			And I click choice button of "Payment type" attribute in "Payments" table
+			Then "Payment types" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Card 01'        |
+			And I select current line in "List" table
+			And I activate "Payment terminal" field in "Payments" table
+			And I click choice button of "Payment terminal" attribute in "Payments" table
+			Then "Payment terminals" window is opened
+			And I go to line in "List" table
+				| 'Description'         |
+				| 'Payment terminal 01' |
+			And I select current line in "List" table
+			And I activate "Account" field in "Payments" table
+			And I click choice button of "Account" attribute in "Payments" table
+			Then "Cash/Bank accounts" window is opened
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Transit Main' |
+			And I select current line in "List" table
+			And I activate "Amount" field in "Payments" table
+			And I input "400,00" text in "Amount" field of "Payments" table
+			And I finish line editing in "Payments" table
+			And I activate "Percent" field in "Payments" table
+			And I select current line in "Payments" table
+			And I input "1,00" text in "Percent" field of "Payments" table
+			And I finish line editing in "Payments" table
+			And I activate "Commission" field in "Payments" table
+			And I select current line in "Payments" table
+			And I input "12,90" text in "Commission" field of "Payments" table
+			And I finish line editing in "Payments" table
+		* Post Retail sales receipt
+			And I input "01.09.2020 00:00:00" text in "Date" field
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberRetailSalesReceipt01541491$$"
+			And I save the window as "$$RetailSalesReceipt01541491$$"
+			And I click "Post and close" button
+			And "List" table contains lines
+			| 'Number' |
+			| '$$NumberRetailSalesReceipt01541491$$'      |
+			And I close all client application windows
+	* Create RetailSalesReceipt01541492
+			And I close all client application windows
+		* Open the Retail Sales Receipt creation form
+			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+			And I click the button named "FormCreate"
+		* Check filling in legal name if the partner has only one
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Retail customer'         |
+			And I select current line in "List" table
+			Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		* Check filling in Partner term if the partner has only one
+			Then the form attribute named "Agreement" became equal to "Retail partner term"
+		* Check filling in Store from Partner term
+			Then the form attribute named "Store" became equal to "Store 01"
+		* Filling in item and item key
+			And I delete a line in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'     | 'Item key'  |
+				| 'Dress' | 'L/Green' |
+			And I select current line in "List" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'Item'  | 'Price'  | 'Item key' | 'Q'     | 'Unit' |
+				| 'Dress' | '550,00' | 'L/Green'  | '2,000' | 'pcs'  |
+		* Filling in payment tab
+			And I move to "Payments" tab
+			And in the table "Payments" I click "Add" button
+			And I click choice button of "Payment type" attribute in "Payments" table
+			Then "Payment types" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Cash'        |
+			And I select current line in "List" table
+			And I activate "Amount" field in "Payments" table
+			And I input "1 100,00" text in "Amount" field of "Payments" table
+			And I activate "Account" field in "Payments" table
+			And I click choice button of "Account" attribute in "Payments" table
+			Then "Cash/Bank accounts" window is opened
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Cash desk №4' |
+			And I select current line in "List" table
+			And I finish line editing in "Payments" table
+		* Post Retail sales receipt
+			And I input "01.09.2020 12:50:00" text in "Date" field
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberRetailSalesReceipt01541492$$"
+			And I save the window as "$$RetailSalesReceipt01541492$$"
+			And I click "Post and close" button
+			And "List" table contains lines
+			| 'Number' |
+			| '$$NumberRetailSalesReceipt01541492$$'      |
+			And I close all client application windows
+	* Create RetailSalesReceipt01541493
+			And I close all client application windows
+		* Open the Retail Sales Receipt creation form
+			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+			And I click the button named "FormCreate"
+		* Check filling in legal name if the partner has only one
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Retail customer'         |
+			And I select current line in "List" table
+			Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		* Check filling in Partner term if the partner has only one
+			Then the form attribute named "Agreement" became equal to "Retail partner term"
+		* Check filling in Store from Partner term
+			Then the form attribute named "Store" became equal to "Store 01"
+		* Filling in item and item key
+			And I delete a line in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Shirt'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'     | 'Item key'  |
+				| 'Shirt' | '38/Black' |
+			And I select current line in "List" table
+			And I input "4,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'Item'  | 'Price'  | 'Item key' | 'Q'     | 'Unit' |
+				| 'Shirt' | '350,00' | '38/Black'  | '4,000' | 'pcs'  |
+		* Filling in payment tab
+			And I move to "Payments" tab
+			And in the table "Payments" I click "Add" button
+			And I click choice button of "Payment type" attribute in "Payments" table
+			Then "Payment types" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Cash'        |
+			And I select current line in "List" table
+			And I activate "Amount" field in "Payments" table
+			And I input "1 200,00" text in "Amount" field of "Payments" table
+			And I click choice button of "Account" attribute in "Payments" table
+			Then "Cash/Bank accounts" window is opened
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Cash desk №4' |
+			And I select current line in "List" table
+			And I finish line editing in "Payments" table
+			And in the table "Payments" I click "Add" button
+			And I click choice button of "Payment type" attribute in "Payments" table
+			Then "Payment types" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Card 01'        |
+			And I select current line in "List" table
+			And I activate "Payment terminal" field in "Payments" table
+			And I click choice button of "Payment terminal" attribute in "Payments" table
+			Then "Payment terminals" window is opened
+			And I go to line in "List" table
+				| 'Description'         |
+				| 'Payment terminal 01' |
+			And I select current line in "List" table
+			And I activate "Account" field in "Payments" table
+			And I click choice button of "Account" attribute in "Payments" table
+			Then "Cash/Bank accounts" window is opened
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Transit Main' |
+			And I select current line in "List" table
+			And I activate "Amount" field in "Payments" table
+			And I input "200,00" text in "Amount" field of "Payments" table
+			And I finish line editing in "Payments" table
+			And I activate "Percent" field in "Payments" table
+			And I select current line in "Payments" table
+			And I input "1,00" text in "Percent" field of "Payments" table
+			And I finish line editing in "Payments" table
+			And I activate "Commission" field in "Payments" table
+			And I select current line in "Payments" table
+			And I input "12,90" text in "Commission" field of "Payments" table
+			And I finish line editing in "Payments" table
+		* Post Retail sales receipt
+			And I input "01.09.2020 16:40:04" text in "Date" field
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberRetailSalesReceipt01541493$$"
+			And I save the window as "$$RetailSalesReceipt01541493$$"
+			And I click "Post and close" button
+			And "List" table contains lines
+			| 'Number' |
+			| '$$NumberRetailSalesReceipt01541493$$'      |
+			And I close all client application windows
+		* Create RetailSalesReceipt01541494
+			And I close all client application windows
+		* Open the Retail Sales Receipt creation form
+			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+			And I click the button named "FormCreate"
+		* Check filling in legal name if the partner has only one
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Retail customer'         |
+			And I select current line in "List" table
+			Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		* Check filling in Partner term if the partner has only one
+			Then the form attribute named "Agreement" became equal to "Retail partner term"
+		* Check filling in Store from Partner term
+			Then the form attribute named "Store" became equal to "Store 01"
+		* Filling in item and item key
+			And I delete a line in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Shirt'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'     | 'Item key'  |
+				| 'Shirt' | '38/Black' |
+			And I select current line in "List" table
+			And I input "4,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'Item'  | 'Price'  | 'Item key' | 'Q'     | 'Unit' |
+				| 'Shirt' | '350,00' | '38/Black'  | '4,000' | 'pcs'  |
+		* Filling in payment tab
+			And I move to "Payments" tab
+			And in the table "Payments" I click "Add" button
+			And I click choice button of "Payment type" attribute in "Payments" table
+			Then "Payment types" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Cash'        |
+			And I select current line in "List" table
+			And I activate "Amount" field in "Payments" table
+			And I input "1 200,00" text in "Amount" field of "Payments" table
+			And I click choice button of "Account" attribute in "Payments" table
+			Then "Cash/Bank accounts" window is opened
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Cash desk №4' |
+			And I select current line in "List" table
+			And I finish line editing in "Payments" table
+			And in the table "Payments" I click "Add" button
+			And I click choice button of "Payment type" attribute in "Payments" table
+			Then "Payment types" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Card 01'        |
+			And I select current line in "List" table
+			And I activate "Payment terminal" field in "Payments" table
+			And I click choice button of "Payment terminal" attribute in "Payments" table
+			Then "Payment terminals" window is opened
+			And I go to line in "List" table
+				| 'Description'         |
+				| 'Payment terminal 01' |
+			And I select current line in "List" table
+			And I activate "Account" field in "Payments" table
+			And I click choice button of "Account" attribute in "Payments" table
+			Then "Cash/Bank accounts" window is opened
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Transit Main' |
+			And I select current line in "List" table
+			And I activate "Amount" field in "Payments" table
+			And I input "200,00" text in "Amount" field of "Payments" table
+			And I finish line editing in "Payments" table
+			And I activate "Percent" field in "Payments" table
+			And I select current line in "Payments" table
+			And I input "1,00" text in "Percent" field of "Payments" table
+			And I finish line editing in "Payments" table
+			And I activate "Commission" field in "Payments" table
+			And I select current line in "Payments" table
+			And I input "12,90" text in "Commission" field of "Payments" table
+			And I finish line editing in "Payments" table
+		* Post Retail sales receipt
+			And I input "31.08.2020 12:40:04" text in "Date" field
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberRetailSalesReceipt01541494$$"
+			And I save the window as "$$RetailSalesReceipt01541494$$"
+			And I click "Post and close" button
+			And "List" table contains lines
+			| 'Number' |
+			| '$$NumberRetailSalesReceipt01541494$$'      |
+			And I close all client application windows
+	* Create Retail return receipt based on RetailSalesReceipt01541494
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberRetailSalesReceipt01541494$$'      |
+		And I activate "Date" field in "List" table
+		And I click the button named "FormDocumentRetailReturnReceiptGenerateSalesReturn"
+		And I activate "Q" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to "Payments" tab
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I select current line in "Payments" table
+		And I input "500,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table
+		And I go to line in "Payments" table
+			| '#' | 'Account'      | 'Amount' | 'Commission' | 'Payment terminal'    | 'Payment type' | 'Percent' |
+			| '2' | 'Transit Main' | '200,00' | '12,90'      | 'Payment terminal 01' | 'Card 01'      | '1,00'    |
+		And I click Select button of "Business unit" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shop 01'     |
+		And I select current line in "List" table
+		And I input "01.09.2020 13:40:04" text in "Date" field
+		And I click "Post" button
+		And I save the value of "Number" field as "$$NumberRetailReturnReceipt01541494$$"
+		And I save the window as "$$RetailReturnReceipt01541494$$"
+		And I click "Post and close" button
+	* Create Retail return receipt based on RetailSalesReceipt01541493
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberRetailSalesReceipt01541493$$'      |
+		And I click the button named "FormDocumentRetailReturnReceiptGenerateSalesReturn"
+		Then "Retail return receipt (create)" window is opened
+		And I activate "Q" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I move to "Payments" tab
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I select current line in "Payments" table
+		And I input "350,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table
+		And I go to line in "Payments" table
+			| '#' | 'Account'      | 'Amount' | 'Commission' | 'Payment terminal'    | 'Payment type' | 'Percent' |
+			| '2' | 'Transit Main' | '200,00' | '12,90'      | 'Payment terminal 01' | 'Card 01'      | '1,00'    |
+		And I delete a line in "Payments" table
+		And I click Select button of "Business unit" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shop 01'     |
+		And I select current line in "List" table
+		And I input "01.09.2020 15:31:04" text in "Date" field
+		And I click "Post" button
+		And I save the value of "Number" field as "$$NumberRetailReturnReceipt01541493$$"
+		And I save the window as "$$RetailReturnReceipt01541493$$"
+		And I click "Post and close" button
+	* Create Retail return receipt based on RetailSalesReceipt01541491
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberRetailSalesReceipt01541491$$'      |
+		And I click the button named "FormDocumentRetailReturnReceiptGenerateSalesReturn"
+		And I move to "Payments" tab
+		And I click "Post and close" button
+		And I click Select button of "Business unit" field
+		Then "Business units" window is opened
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shop 01'     |
+		And I select current line in "List" table
+		And I input "01.09.2020 16:55:04" text in "Date" field
+		And I click "Post" button
+		And I save the value of "Number" field as "$$NumberRetailReturnReceipt01541491$$"
+		And I save the window as "$$RetailReturnReceipt01541491$$"
+		And I click "Post and close" button
+	* Create Cash Statement
+		Given I open hyperlink "e1cib/list/Document.CashStatement"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Select button of "Status" field
+		And I go to line in "List" table
+			| 'Description' | 'Reference' |
+			| 'Done'        | 'Done'      |
+		And I select current line in "List" table
+		And I click Select button of "Business unit" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shop 01'     |
+		And I select current line in "List" table
+		And I click Select button of "Transaction period" field
+		Then "Select period" window is opened
+		And I input "01.09.2020" text in "DateBegin" field
+		And I input "01.09.2020" text in "DateEnd" field
+		And I click "Select" button
+		And I click "Fill transactions" button
+		* Check filling in Cash transaction tab
+			And I move to "Cash transaction" tab
+			And "CashTransactionList" table contains lines
+				| 'Document'                        | 'Receipt'  | 'Expense' |
+				| '$$RetailSalesReceipt01541492$$'  | '1 100,00' | ''        |
+				| '$$RetailReturnReceipt01541494$$' | ''         | '700,00'  |
+				| '$$RetailReturnReceipt01541493$$' | ''         | '350,00'  |
+				| '$$RetailSalesReceipt01541493$$'  | '1 400,00' | ''        |
+				| '$$RetailSalesReceipt01541491$$'  | '400,00'   | ''        |
+				| '$$RetailReturnReceipt01541491$$' | ''         | '400,00'  |
+			And "Payments" table contains lines
+				| 'Payment type' | 'Account'      | 'Commission' | 'Amount'   |
+				| 'Cash'         | 'Cash desk №4' | ''           | '1 450,00' |
+				| 'Card 01'      | 'Transit Main' | '51,60'      | ''         |
+			Then the number of "Payments" table lines is "меньше или равно" 2
+		And I click "Post" button
+		And I save the value of "Number" field as "$$NumberCashStatement01541491$$"
+		And I save the window as "$$CashStatement01541491$$"
+		And I click "Post and close" button
+		And "List" table contains lines
+				| 'Number'                        |
+				| '$$NumberCashStatement01541491$$'  |
+			
 
 
 

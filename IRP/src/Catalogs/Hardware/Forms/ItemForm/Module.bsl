@@ -1,4 +1,5 @@
 
+#Region FormEventHandlers
 
 &AtClient
 Procedure LoadSettings(Command)
@@ -25,9 +26,13 @@ Procedure Test(Command)
 		DeviceParameters.Insert("P_" + Row.Name, Row.Value);
 	EndDo;
 	
-	Notify = New NotifyDescription("EndProcessEvent", ThisObject);
+	Notify = New NotifyDescription("EndTestDevice", ThisObject);
 	HardwareClient.BeginStartAdditionalComand(Notify, "CheckHealth", InParameters, Object.Ref, DeviceParameters);
 EndProcedure
+
+#EndRegion
+
+#Region Internal
 
 &AtClient
 Procedure EndTestDevice(ResultData, Parameters) Export	
@@ -40,3 +45,5 @@ Procedure EndTestDevice(ResultData, Parameters) Export
 		EndIf;
 	EndIf;	
 EndProcedure
+
+#EndRegion

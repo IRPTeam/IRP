@@ -1407,6 +1407,7 @@ Scenario:  _0154148 check that the Retail return receipt amount and the amount o
 		Then I wait that in user messages the "Payment amount [720,00] and return amount [700,00] not match" substring will appear in 10 seconds
 		And I close all client application windows
 		
+
 Scenario:  _0154149 create Cash statement
 	* Delete variables
 		And I delete '$$NumberRetailSalesReceipt01541491$$' variable
@@ -1561,7 +1562,13 @@ Scenario:  _0154149 create Cash statement
 			And I select current line in "List" table
 			And I activate "Amount" field in "Payments" table
 			And I input "1 100,00" text in "Amount" field of "Payments" table
-			And I finish line editing in "Payments" table
+			And I activate "Account" field in "Payments" table
+			And I click choice button of "Account" attribute in "Payments" table
+			Then "Cash/Bank accounts" window is opened
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Cash desk №4' |
+			And I select current line in "List" table
 			And I finish line editing in "Payments" table
 		* Post Retail sales receipt
 			And I input "01.09.2020 12:50:00" text in "Date" field
@@ -1620,6 +1627,12 @@ Scenario:  _0154149 create Cash statement
 			And I select current line in "List" table
 			And I activate "Amount" field in "Payments" table
 			And I input "1 200,00" text in "Amount" field of "Payments" table
+			And I click choice button of "Account" attribute in "Payments" table
+			Then "Cash/Bank accounts" window is opened
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Cash desk №4' |
+			And I select current line in "List" table
 			And I finish line editing in "Payments" table
 			And in the table "Payments" I click "Add" button
 			And I click choice button of "Payment type" attribute in "Payments" table
@@ -1710,6 +1723,12 @@ Scenario:  _0154149 create Cash statement
 			And I select current line in "List" table
 			And I activate "Amount" field in "Payments" table
 			And I input "1 200,00" text in "Amount" field of "Payments" table
+			And I click choice button of "Account" attribute in "Payments" table
+			Then "Cash/Bank accounts" window is opened
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Cash desk №4' |
+			And I select current line in "List" table
 			And I finish line editing in "Payments" table
 			And in the table "Payments" I click "Add" button
 			And I click choice button of "Payment type" attribute in "Payments" table
@@ -1864,7 +1883,7 @@ Scenario:  _0154149 create Cash statement
 				| '$$RetailReturnReceipt01541491$$' | ''         | '400,00'  |
 			And "Payments" table contains lines
 				| 'Payment type' | 'Account'      | 'Commission' | 'Amount'   |
-				| 'Cash'         | ''             | ''           | '1 450,00' |
+				| 'Cash'         | 'Cash desk №4' | ''           | '1 450,00' |
 				| 'Card 01'      | 'Transit Main' | '51,60'      | ''         |
 			Then the number of "Payments" table lines is "меньше или равно" 2
 		And I click "Post" button
@@ -1874,4 +1893,3 @@ Scenario:  _0154149 create Cash statement
 		And "List" table contains lines
 				| 'Number'                        |
 				| '$$NumberCashStatement01541491$$'  |
-			

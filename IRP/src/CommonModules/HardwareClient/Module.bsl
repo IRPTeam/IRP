@@ -223,7 +223,7 @@ Function GetDriverObject(DriverInfo, ErrorText = Undefined)
 		ObjectName.Add(ObjectName[1]);
 
 		LinkOnDriver = GetURL(DriverInfo.Driver, "Driver");
-		Результат = AttachAddIn(LinkOnDriver, ObjectName[1]);
+		Result = AttachAddIn(LinkOnDriver, ObjectName[1]);
 
 		ОбъектДрайвера = New (StrConcat(ObjectName, "."));
 	EndIf;

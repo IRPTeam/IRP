@@ -5612,27 +5612,6 @@
     <functionalOptions>FunctionalOption.ShowAlphaTestingSaas</functionalOptions>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
-  <formCommands>
-    <name>RefreshTaxTree</name>
-    <title>
-      <key>en</key>
-      <value>Refresh</value>
-    </title>
-    <id>10</id>
-    <use>
-      <common>true</common>
-    </use>
-    <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.Refresh</picture>
-    </picture>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>RefreshTaxTree</name>
-      </handler>
-    </action>
-    <representation>TextPicture</representation>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>

@@ -291,10 +291,6 @@
       <event>BeforeDeleteRow</event>
       <name>TaxTreeBeforeDeleteRow</name>
     </handlers>
-    <handlers>
-      <event>OnChange</event>
-      <name>TaxTreeOnChange</name>
-    </handlers>
     <searchStringAddition>
       <visible>true</visible>
       <enabled>true</enabled>

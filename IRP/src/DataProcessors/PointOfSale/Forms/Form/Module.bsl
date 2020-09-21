@@ -145,7 +145,10 @@ EndProcedure
 Procedure AddItemToItemList()
 	CurrentData = Items.ItemsPickup.CurrentData;
 	ItemListOnActivateRow(Items.ItemList);
-	AfterItemChoice(CurrentData.Item, True);
+	Result = AfterItemChoice(CurrentData.Item, True);
+	If Not Result Then
+		Return;
+	EndIf;
 	ItemListOnStartEdit(Items.ItemList, True, False);
 	ItemListOnChange(Items.ItemList);
 	ItemListItemOnChange(Items.ItemList);
@@ -495,7 +498,8 @@ EndProcedure
 
 
 &AtServer
-Procedure AfterItemChoice(Val ChoicedItem, AddToItemList = False)	
+Function AfterItemChoice(Val ChoicedItem, AddToItemList = False)
+	ReturnValue = False;	
 	Query = New Query;
 	Query.Text = "SELECT
 	|	CatalogItemKeys.Ref AS Ref,
@@ -514,8 +518,10 @@ Procedure AfterItemChoice(Val ChoicedItem, AddToItemList = False)
 	If QueryUnload.Count() = 1
 		And AddToItemList Then
 		ItemKeysSelectionAtServer(QueryUnload[0].Ref);
+		ReturnValue = True;
 	EndIf;
-EndProcedure
+	Return ReturnValue;
+EndFunction
 
 &AtServer
 Procedure ItemKeysSelectionAtServer(Val ChoicedItemKey)

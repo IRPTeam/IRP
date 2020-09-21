@@ -1862,10 +1862,11 @@ Scenario:  _0154149 create Cash statement
 				| '$$RetailSalesReceipt01541493$$'  | '1 400,00' | ''        |
 				| '$$RetailSalesReceipt01541491$$'  | '400,00'   | ''        |
 				| '$$RetailReturnReceipt01541491$$' | ''         | '400,00'  |
-			And "Payments" table became equal
+			And "Payments" table contains lines
 				| 'Payment type' | 'Account'      | 'Commission' | 'Amount'   |
 				| 'Cash'         | ''             | ''           | '1 450,00' |
 				| 'Card 01'      | 'Transit Main' | '51,60'      | ''         |
+			Then the number of "Payments" table lines is "меньше или равно" 2
 		And I click "Post" button
 		And I save the value of "Number" field as "$$NumberCashStatement01541491$$"
 		And I save the window as "$$CashStatement01541491$$"

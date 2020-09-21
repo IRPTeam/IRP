@@ -82,7 +82,7 @@ Function RunningOperationOnEquipmentParams(Result = False, Error = Undefined, ID
 	ResultData.Insert("ErrorDescription"		, Error);
 	ResultData.Insert("DeviceIdentifier"		, ID);
 	ResultData.Insert("OutParameters"			, Undefined);
-	Return Result;	
+	Return ResultData;	
 EndFunction
 
 Function GetConnectedDevice(ConnectionsList, ID) Export	

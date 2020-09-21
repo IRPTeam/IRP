@@ -8,43 +8,35 @@ Procedure LoadSettings(Command)
 		Row = Object.ConnectParameters.Add();
 		Row.Name = Param.Key;
 		Row.Value = Param.Value;
-	EndDo;
-	
+	EndDo;	
 EndProcedure
 
 &AtClient
 Procedure Test(Command)
-	ОчиститьСообщения();
+	ClearMessages();
 
-	ТолькоПросмотр = Истина;
-	КоманднаяПанель.Доступность = Ложь;
+	ReadOnly = True;
+	CommandBar.Enabled = False;
 	
-	ВходныеПараметры  = Неопределено;
-	ПараметрыУстройства = New Structure;
+	InParameters  = Undefined;
+	DeviceParameters = New Structure;
 	
 	For Each Row In Object.ConnectParameters Do
-		ПараметрыУстройства.Insert("P_" + Row.Name, Row.Value);
+		DeviceParameters.Insert("P_" + Row.Name, Row.Value);
 	EndDo;
 	
-	Оповещение = Новый ОписаниеОповещения("ТестУстройстваЗавершение", ЭтотОбъект);
-	HardwareClient.BeginStartAdditionalComand(Оповещение, "CheckHealth", ВходныеПараметры, Object.Ref, ПараметрыУстройства);
-
+	Notify = New NotifyDescription("EndProcessEvent", ThisObject);
+	HardwareClient.BeginStartAdditionalComand(Notify, "CheckHealth", InParameters, Object.Ref, DeviceParameters);
 EndProcedure
 
-&НаКлиенте
-Процедура ТестУстройстваЗавершение(РезультатВыполнения, Параметры) Экспорт
-	
-	ТолькоПросмотр = Ложь;
-	КоманднаяПанель.Доступность = Истина;
-	ВыходныеПараметры = РезультатВыполнения.ВыходныеПараметры;
-	
-	Если ТипЗнч(ВыходныеПараметры) = Тип("Массив") Тогда
-		
-		Если ВыходныеПараметры.Количество() >= 2 Тогда
-			Status(ВыходныеПараметры[1], , , PictureLib.Stop);
-		КонецЕсли;
-
-	КонецЕсли;
-	
-КонецПроцедуры
-
+&AtClient
+Procedure EndTestDevice(ResultData, Parameters) Export	
+	ReadOnly = Ложь;
+	CommandBar.Enabled = Истина;
+	OutParameters = ResultData.OutParameters;	
+	If TypeOf(OutParameters) = Type("Array") Then		
+		If OutParameters.Count() >= 2 Then
+			Status(OutParameters[1], , , PictureLib.Stop);
+		EndIf;
+	EndIf;	
+EndProcedure

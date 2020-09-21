@@ -1,3 +1,6 @@
+
+#Region Public
+
 Function GetDriverSettings(AddInID) Export
 	Query = New Query;
 	Query.Text =
@@ -31,7 +34,6 @@ Function GetConnectionSettings(HardwareRef = Undefined, Name = "") Export
 	If Not IsBlankString(Name) Then
 		HardwareRef = Catalogs.Hardware.FindByDescription(Name);
 	EndIf;
-	
 	
 	Query = New Query;
 	Query.Text =
@@ -68,3 +70,5 @@ Function GetConnectionSettings(HardwareRef = Undefined, Name = "") Export
 	Return Settings;
 
 EndFunction
+
+#EndRegion

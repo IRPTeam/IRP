@@ -143,11 +143,11 @@ Procedure BeginConnectEquipment(ConnectionNotify) Export
 		Result = ProccessingModule.ConnectDevice(DriverObject, Device.ConnectParameters, OutParameters);
 			
 		If OutParameters.Count() >= 2 Then
-			Device.Insert("ИсточникСобытия", OutParameters[0]);
-			Device.Insert("ИменаСобытий",    OutParameters[1]);
+			Device.Insert("EventSource", OutParameters[0]);
+			Device.Insert("EventsNames", OutParameters[1]);
 		Else
-			Device.Insert("ИсточникСобытия", "");
-			Device.Insert("ИменаСобытий",    Undefined);
+			Device.Insert("EventSource", "");
+			Device.Insert("EventsNames", Undefined);
 		EndIf;
 
 		ConnectParameters = globalEquipments.ConnectionSettings; 

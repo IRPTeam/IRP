@@ -18,11 +18,9 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 EndProcedure
 
 Procedure OnWriteAtServer(Object, Form, Cancel, CurrentObject, WriteParameters) Export
-	
 	If Not Object.Ref.Metadata().TabularSections.Find("ItemList") = Undefined Then
 		WriteSavedItems(Object, CurrentObject);
 	EndIf;
-	
 EndProcedure
 
 #EndRegion
@@ -437,6 +435,8 @@ EndProcedure
 
 #EndRegion
 
+#Region PrepareServerData
+
 Function PrepareServerData(Parameters) Export
 	Result = New Structure();
 	
@@ -584,8 +584,16 @@ Function PrepareServerData(Parameters) Export
 		Result.Insert("AgreementTypes_Vendor", PredefinedValue("Enum.AgreementTypes.Vendor"));
 	EndIf;
 
+	If Parameters.Property("GetAgreementTypes_Customer") Then
+		Result.Insert("AgreementTypes_Customer", PredefinedValue("Enum.AgreementTypes.Customer"));
+	EndIf;
+
 	If Parameters.Property("GetPurchaseOrder_EmptyRef") Then
 		Result.Insert("PurchaseOrder_EmptyRef", PredefinedValue("Document.PurchaseOrder.EmptyRef"));
+	EndIf;
+	
+	If Parameters.Property("GetSalesOrder_EmptyRef") Then
+		Result.Insert("SalesOrder_EmptyRef", PredefinedValue("Document.SalesOrder.EmptyRef"));
 	EndIf;
 	
 	If Parameters.Property("GetPriceTypes_ManualPriceType") Then
@@ -606,6 +614,16 @@ Function PrepareServerData(Parameters) Export
 	
 	If Parameters.Property("GetItemUnitInfo") Then
 		Result.Insert("ItemUnitInfo" , GetItemInfo.ItemUnitInfo(Parameters.GetItemUnitInfo.ItemKey));
+	EndIf;
+	
+	If Parameters.Property("GetItemKeysWithSerialLotNumbers") Then
+		ArrayOfItemKeysWithSerialLotNumbers = New Array();
+		For Each ItemKey In Parameters.GetItemKeysWithSerialLotNumbers Do
+			If SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(ItemKey) Then
+				ArrayOfItemKeysWithSerialLotNumbers.Add(ItemKey);
+			EndIf;
+		EndDo;
+		Result.Insert("ItemKeysWithSerialLotNumbers", ArrayOfItemKeysWithSerialLotNumbers);
 	EndIf;
 	
 	Return Result;
@@ -643,3 +661,5 @@ Function GetStructureOfTaxRates(Tax, Date, Company, Parameters)
 	
 	Return Result;
 EndFunction
+
+#EndRegion

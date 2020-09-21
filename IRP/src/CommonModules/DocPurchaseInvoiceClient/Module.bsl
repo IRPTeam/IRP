@@ -13,24 +13,8 @@ Procedure BeforeWrite(Object, Form, Cancel, WriteParameters) Export
 EndProcedure
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	
-	OnChangeItemName = "OnOpen";
-	ParametersToServer = New Structure();
-	
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", 
-	New Structure("Agreement, Date, Company, Currency, UUID", 
-	Object.Agreement, Object.Date, Object.Company, Object.Currency, Form.UUID));
-	
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-	
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
-	
+	DocumentsClient.OnOpenPutServerDataToAddInfo(Object, Form, AddInfo);
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
 	
 	Settings = New Structure;
 	Settings.Insert("UpdateInfoString");
@@ -48,11 +32,26 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	If Settings.Count() Then
 		CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.ItemList, Settings, Undefined, AddInfo);
 	EndIf;
+	
 	If Not ValueIsFilled(Object.Ref) Then
-		ItemListOnChange(Object, Form);
+		ItemListOnChange(Object, Form, Undefined);
 		If ValueIsFilled(Object.Company) Then
 			DocumentsClient.CompanyOnChange(Object, Form, ThisObject, Undefined);
 		EndIf;
+	EndIf;
+	
+	If Not ValueIsFilled(Form.CurrentStore) Then
+		DocumentsClient.SetCurrentStore(Object, Form, ServerData.AgreementInfo.Store);
+	EndIf;
+	
+	DocumentsClient.FillDeliveryDates(Object, Form);
+	If Not ValueIsFilled(Form.CurrentDeliveryDate) Then
+		DocumentsClient.SetCurrentDeliveryDate(Form, ServerData.AgreementInfo.DeliveryDate);
+		DocumentsClient.FillDeliveryDates(Object, Form);
+	EndIf;
+	
+	If Not ValueIsFilled(Form.CurrentPriceType) Then
+		DocumentsClient.SetCurrentPriceType(Form, ServerData.AgreementInfo.PriceType);
 	EndIf;
 		
 	#If AtClient Then
@@ -66,44 +65,40 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	EndIf;
 EndProcedure
 
-Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source) Export
-	If EventName = "ItemListChange" Then
-		CalculationStringsClientServer.CalculateItemsRows(Object,
-			Form,
-			Object.ItemList,
-			CalculationStringsClientServer.GetCalculationSettings(),
-			TaxesClient.GetArrayOfTaxInfo(Form));
-	EndIf;
+Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source, AddInfo = Undefined) Export
+	Return;
+EndProcedure
+
+Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
+	DocumentsClient.AfterWriteAtClientPutServerDataToAddInfo(Object, Form, AddInfo);	
+	CurrenciesClient.SetVisibleRows(Object, ThisObject, AddInfo);
 EndProcedure
 
 #EndRegion
 
 #Region ItemListEvents
 
-//Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
-//	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
-//EndProcedure
+Procedure ItemListAfterDeleteRow(Object, Form, Item, AddInfo = Undefined) Export
+	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
+EndProcedure
 
-Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings = Undefined) Export
-	
+Procedure ItemListOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	For Each Row In Object.ItemList Do
 		If Not ValueIsFilled(Row.Key) Then
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
-	
 	DocumentsClient.FillDeliveryDates(Object, Form);
 	CurrenciesClient.CalculateAmount(Object, Form); 
 EndProcedure
 
-Procedure ItemListOnActivateRow(Object, Form, Item) Export
-	
-	If Form.Items.ItemList.CurrentData = Undefined Then
-		Return;
-	EndIf;
-	
+Procedure ItemListOnActivateRow(Object, Form, Item, AddInfo = Undefined) Export
 	CurrentRow = Form.Items.ItemList.CurrentData;
 	
+	If CurrentRow = Undefined Then
+		Return;
+	EndIf;
+
 	If ValueIsFilled(CurrentRow.Store)
 		And CurrentRow.Store <> Form.CurrentStore Then
 		DocumentsClient.SetCurrentStore(Object, Form, CurrentRow.Store);
@@ -116,10 +111,28 @@ Procedure ItemListOnActivateRow(Object, Form, Item) Export
 	
 	If ValueIsFilled(CurrentRow.PriceType)
 		And CurrentRow.PriceType <> Form.CurrentPriceType Then
-			Form.CurrentPriceType = CurrentRow.PriceType;
-			//DocumentsClient.SetCurrentPriceType(Form, CurrentRow.PriceType);
-	EndIf;
-	
+		DocumentsClient.SetCurrentPriceType(Form, CurrentRow.PriceType);
+	EndIf;	
+EndProcedure
+
+Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined) Export
+	If Upper(Field.Name) = Upper("ItemListTaxAmount") Then
+		CurrentData = Form.Items.ItemList.CurrentData;
+		If CurrentData <> Undefined Then
+			
+			MainTableData = New Structure();
+			MainTableData.Insert("Key"      , CurrentData.Key);
+			MainTableData.Insert("Currency" , Object.Currency);
+			
+			TaxesClient.OpenForm_ChangeTaxAmount(Object, 
+												 Form, 
+												 Item, 
+												 RowSelected, 
+												 Field, 
+												 StandardProcessing,
+												 MainTableData);
+		EndIf;
+	EndIf; 
 EndProcedure
 
 #EndRegion
@@ -149,26 +162,7 @@ Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessin
 EndProcedure
 
 Procedure ItemListItemOnChangePutServerDataToAddInfo(Object, Form, CurrentRow, AddInfo = Undefined) Export
-	OnChangeItemName = "ItemListItem";
-	ParametersToServer = New Structure();
-		
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-	
-	GetArrayOfTaxRates = New Structure("Agreement, ItemKey", Object.Agreement, CurrentRow.ItemKey);
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company, GetArrayOfTaxRates", 
-	Form.TaxesCache, Object.Ref, Object.Date, Object.Company, GetArrayOfTaxRates));
-	
-	ParametersToServer.Insert("GetItemKeyByItem", New Structure("Item", CurrentRow.Item));
-	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
-		
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
+	DocumentsClient.ItemListItemOnChangePutServerDataToAddInfo(Object, Form, CurrentRow, AddInfo);
 EndProcedure
 
 Function ItemListItemSettings(Object, Form, AddInfo = Undefined) Export
@@ -197,31 +191,12 @@ EndFunction
 
 #Region ItemKey
 
-Procedure ItemListItemKeyOnChange(Object, Form, Item = Undefined, AddInfo = Undefined) Export
+Procedure ItemListItemKeyOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	DocumentsClient.ItemListItemKeyOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
 EndProcedure
 
 Procedure ItemListItemKeyOnChangePutServerDataToAddInfo(Object, Form, CurrentRow, AddInfo = Undefined) Export
-	OnChangeItemName = "ItemListItemKey";
-	ParametersToServer = New Structure();
-	
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-	
-	GetArrayOfTaxRates = New Structure("Agreement, ItemKey", Object.Agreement, CurrentRow.ItemKey);
-	ParametersToServer.Insert("TaxesCache",
-	New Structure ("Cache, Ref, Date, Company, GetArrayOfTaxRates", 
-	Form.TaxesCache, Object.Ref, Object.Date, Object.Company, GetArrayOfTaxRates));
-	
-	ParametersToServer.Insert("GetItemUnitInfo", New Structure("ItemKey", CurrentRow.ItemKey));
-	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
-		
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
+	DocumentsClient.ItemListItemKeyOnChangePutServerDataToAddInfo(Object, Form, CurrentRow, AddInfo);
 EndProcedure
 
 Function ItemListItemKeySettings(Object, Form, AddInfo = Undefined) Export
@@ -255,21 +230,7 @@ Procedure ItemListPriceTypeOnChange(Object, Form, Item = Undefined, AddInfo = Un
 EndProcedure
 
 Procedure ItemListPriceTypeOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-	OnChangeItemName = "ItemListPriceType";
-	ParametersToServer = New Structure();
-	
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-	
-	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
-	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
-		
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
+	DocumentsClient.ItemListPriceTypeOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 EndProcedure
 
 Function ItemListPriceTypeSettings(Object, Form, AddInfo = Undefined) Export
@@ -294,21 +255,7 @@ Procedure ItemListUnitOnChange(Object, Form, Item = Undefined, AddInfo = Undefin
 EndProcedure
 
 Procedure ItemListUnitOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-	OnChangeItemName = "ItemListUnit";
-	ParametersToServer = New Structure();
-	
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-	
-	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
-	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
-		
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
+	DocumentsClient.ItemListUnitOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 EndProcedure
 
 Function ItemListUnitSettings(Object, Form, AddInfo = Undefined) Export	
@@ -337,19 +284,7 @@ Procedure ItemListQuantityOnChange(Object, Form, Item, AddInfo = Undefined) Expo
 EndProcedure
 
 Procedure ItemListQuantityPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
-	OnChangeItemName = "ItemListQuantity";
-	
-	ParametersToServer = New Structure();
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
-	
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
+	DocumentsClient.ItemListQuantityPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
 EndProcedure	
 
 #EndRegion
@@ -365,20 +300,7 @@ Procedure ItemListPriceOnChange(Object, Form, Item, AddInfo = Undefined) Export
 EndProcedure
 
 Procedure ItemListPricePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
-	OnChangeItemName = "ItemListPrice";
-	
-	ParametersToServer = New Structure();
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
-	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
-	
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
+	DocumentsClient.ItemListPricePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
 EndProcedure	
 
 #EndRegion
@@ -394,19 +316,7 @@ Procedure ItemListTotalAmountOnChange(Object, Form, Item, AddInfo = Undefined) E
 EndProcedure
 
 Procedure ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
-	OnChangeItemName = "ItemListTotalAmount";
-	
-	ParametersToServer = New Structure();
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
-	
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
+	DocumentsClient.ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
 EndProcedure	
 
 #EndRegion
@@ -422,26 +332,14 @@ Procedure ItemListTaxValueOnChange(Object, Form, Item, AddInfo = Undefined) Expo
 EndProcedure
 
 Procedure ItemListTaxValuePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
-	OnChangeItemName = "ItemListTaxValue";
-	
-	ParametersToServer = New Structure();
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
-	
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
+	DocumentsClient.ItemListTaxValuePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
 EndProcedure	
 
 #EndRegion
 
 #Region Store
 
-Procedure ItemListStoreOnChange(Object, Form, Item = Undefined) Export
+Procedure ItemListStoreOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	DocumentsClient.ItemListStoreOnChange(Object, Form, ThisObject, Item);
 EndProcedure
 
@@ -456,41 +354,10 @@ Procedure PartnerOnChange(Object, Form, Item, AddInfo = Undefined) Export
 EndProcedure
 
 Procedure PartnerOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-	OnChangeItemName = "Partner";
-	
-	ParametersToServer = New Structure();
-	ParametersToServer.Insert("GetAgreementTypes_Vendor");
-	
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", 
-	New Structure("Agreement, Date, Company, Currency, UUID", 
-	Object.Agreement, Object.Date, Object.Company, Object.Currency, Form.UUID));
-	
-	GetArrayOfTaxRates = New Structure("Agreement", Object.Agreement);
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company, GetArrayOfTaxRates", 
-	Form.TaxesCache, Object.Ref, Object.Date, Object.Company, GetArrayOfTaxRates));
-	
-	ParametersToServer.Insert("GetAgreementInfo", New Structure("Agreement", Object.Agreement));
-	ParametersToServer.Insert("GetManagerSegmentByPartner", New Structure("Partner", Object.Partner));
-	ParametersToServer.Insert("GetLegalNameByPartner", New Structure("Partner, LegalName", Object.Partner, Object.LegalName));
-	ParametersToServer.Insert("GetAgreementByPartner", New Structure("Partner, Agreement, Date", Object.Partner, Object.Agreement, Object.Date));
-	ParametersToServer.Insert("GetMetaDataStructure", New Structure("Ref", Object.Ref));
-	
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-			
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CalculateItemRowsAtServer", True);
+	DocumentsClient.PartnerOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 EndProcedure
 
-
-Function PartnerSettings(Object, Form, AddInfo = Undefined) Export
-	
+Function PartnerSettings(Object, Form, AddInfo = Undefined) Export	
 	If AddInfo = Undefined Then
 		Return New Structure("PutServerDataToAddInfo", True);
 	EndIf;
@@ -542,32 +409,7 @@ Procedure AgreementOnChange(Object, Form, Item, AddInfo = Undefined) Export
 EndProcedure
 
 Procedure AgreementOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-	OnChangeItemName = "Agreement";
-	ParametersToServer = New Structure();
-	
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", 
-	New Structure("Agreement, Date, Company, Currency, UUID", 
-	Object.Agreement, Object.Date, Object.Company, Object.Currency, Form.UUID));
-	
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-	
-	GetArrayOfTaxRates = New Structure("Agreement", Object.Agreement);
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company, GetArrayOfTaxRates", 
-	Form.TaxesCache, Object.Ref, Object.Date, Object.Company, GetArrayOfTaxRates));
-	
-	ParametersToServer.Insert("GetMetaDataStructure", New Structure("Ref", Object.Ref));
-	ParametersToServer.Insert("GetAgreementInfo", New Structure("Agreement", Object.Agreement));	
-	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
-			
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CalculateItemRowsAtServer", True);
+	DocumentsClient.AgreementOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 EndProcedure
 
 Function AgreementSettings(Object, Form, AddInfo = Undefined) Export
@@ -646,29 +488,7 @@ Procedure CurrencyOnChange(Object, Form, Item, AddInfo = Undefined) Export
 EndProcedure
 
 Procedure CurrencyOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-	OnChangeItemName = "Currency";
-	ParametersToServer = New Structure();
-	
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", 
-	New Structure("Agreement, Date, Company, Currency, UUID", 
-	Object.Agreement, Object.Date, Object.Company, Object.Currency, Form.UUID));
-	
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-	
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company", 
-	Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
-	
-	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
-			
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CalculateItemRowsAtServer", True);
+	DocumentsClient.CurrencyOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 EndProcedure
 
 Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
@@ -724,32 +544,10 @@ Procedure CompanyOnChange(Object, Form, Item, AddInfo = Undefined) Export
 EndProcedure
 
 Procedure CompanyOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-	OnChangeItemName = "Company";
-	ParametersToServer = New Structure();
-	
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", 
-	New Structure("Agreement, Date, Company, Currency, UUID", 
-	Object.Agreement, Object.Date, Object.Company, Object.Currency, Form.UUID));
-	
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-	ParametersToServer.Insert("GetAgreementInfo", New Structure("Agreement", Object.Agreement));	
-	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company", 
-	Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
-	
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CalculateItemRowsAtServer", True);
+	DocumentsClient.CompanyOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 EndProcedure
 
 Function CompanySettings(Object, Form, AddInfo = Undefined) Export
-	
 	If AddInfo = Undefined Then
 		Return New Structure("PutServerDataToAddInfo", True);
 	EndIf;
@@ -788,33 +586,13 @@ EndProcedure
 
 #Region ItemStore
 
-Procedure StoreOnChange(Object, Form, Item = Undefined, Settings = Undefined, AddInfo = Undefined) Export
+Procedure StoreOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	DocumentsClient.StoreOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
 EndProcedure
 
 Procedure StoreOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-	OnChangeItemName = "Store";
-	ParametersToServer = New Structure();
-		
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-	
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company", 
-	Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
-	
-	ParametersToServer.Insert("GetMetaDataStructure", New Structure("Ref", Object.Ref));
-	ParametersToServer.Insert("GetAgreementInfo", New Structure("Agreement", Object.Agreement));	
-			
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CalculateItemRowsAtServer", True);
+	DocumentsClient.StoreOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 EndProcedure
-
 
 Function StoreSettings(Object, Form, AddInfo = Undefined) Export
 	If AddInfo = Undefined Then
@@ -840,23 +618,7 @@ Procedure PriceIncludeTaxOnChange(Object, Form, Item, AddInfo = Undefined) Expor
 EndProcedure
 
 Procedure PriceIncludeTaxOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-	OnChangeItemName = "Store";
-	ParametersToServer = New Structure();
-		
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-	
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company", 
-	Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
-			
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CalculateItemRowsAtServer", True);
+	DocumentsClient.PriceIncludeTaxOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 EndProcedure
 
 Function PriceIncludeTaxSettings(Object, Form, AddInfo = Undefined) Export
@@ -872,43 +634,14 @@ EndFunction
 #Region ItemDate
 
 Procedure DateOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	DocumentsClient.DateOnChange(Object, Form, Thisobject, Item, Undefined, AddInfo);
+	DocumentsClient.DateOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
 EndProcedure
 
 Procedure DateOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-	OnChangeItemName = "Date";
-	ParametersToServer = New Structure();
-	
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", 
-	New Structure("Agreement, Date, Company, Currency, UUID", 
-	Object.Agreement, Object.Date, Object.Company, Object.Currency, Form.UUID));
-	
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-	
-	ParametersToServer.Insert("TaxesCache",
-	 New Structure ("Cache, Ref, Date, Company", 
-	 Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
-	ParametersToServer.Insert("GetMetaDataStructure", New Structure("Ref", Object.Ref));
-	ParametersToServer.Insert("GetAgreementTypes_Vendor");
-	ParametersToServer.Insert("GetPurchaseOrder_EmptyRef");
-	ParametersToServer.Insert("GetManagerSegmentByPartner", New Structure("Partner", Object.Partner));
-	ParametersToServer.Insert("GetLegalNameByPartner", New Structure("Partner, LegalName", Object.Partner, Object.LegalName));
-	ParametersToServer.Insert("GetAgreementByPartner", New Structure("Partner, Agreement, Date, WithAgreementInfo", 
-	Object.Partner, Object.Agreement, Object.Date, True));
-	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
-		
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CalculateItemRowsAtServer", True);
+	DocumentsClient.DateOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 EndProcedure
 
 Function DateSettings(Object, Form, AddInfo = Undefined) Export
-	
 	If AddInfo = Undefined Then
 		Return New Structure("PutServerDataToAddInfo", True);
 	EndIf;
@@ -923,7 +656,7 @@ Function DateSettings(Object, Form, AddInfo = Undefined) Export
 	Settings.Insert("Actions", Actions);
 	
 	AfterActionsCalculateSettings = New Structure();
-	PriceDate = CalculationStringsClientServer.GetPriceDate(Form.Object);
+	PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
 	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
 	
 	Settings.Insert("AfterActionsCalculateSettings", AfterActionsCalculateSettings);

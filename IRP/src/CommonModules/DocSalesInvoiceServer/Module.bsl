@@ -1,16 +1,19 @@
 #Region FormEvents
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
-	Form.CurrentPartner = CurrentObject.Partner;
+	Form.CurrentPartner   = CurrentObject.Partner;
 	Form.CurrentAgreement = CurrentObject.Agreement;
-	Form.CurrentDate = CurrentObject.Date;
+	Form.CurrentDate      = CurrentObject.Date;
+	DocumentsServer.FillItemList(Object);
 	
 	ObjectData = DocumentsClientServer.GetStructureFillStores();
 	FillPropertyValues(ObjectData, CurrentObject);
 	DocumentsClientServer.FillStores(ObjectData, Form);
 	
-	DocumentsServer.FillItemList(Object);
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	CurrenciesServer.UpdateRatePresentation(Object);
+	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
+	Form.Taxes_CreateFormControls();
 EndProcedure
 
 Procedure BeforeWrite(Object, Form, Cancel, WriteMode, PostingMode) Export
@@ -20,23 +23,23 @@ EndProcedure
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
-
+		Form.CurrentPartner    = Object.Partner;
+		Form.CurrentAgreement  = Object.Agreement;
+		Form.CurrentDate       = Object.Date;
+		Form.StoreBeforeChange = Form.Store;
+		
 		DocumentsClientServer.FillDefinedData(Object, Form);
 		
-		Form.CurrentPartner = Object.Partner;
-		Form.CurrentAgreement = Object.Agreement;
-		Form.CurrentDate = Object.Date;
-		Form.StoreBeforeChange 		= Form.Store;
+		SetGroupItemsList(Object, Form);
+		DocumentsServer.FillItemList(Object);
 		
 		ObjectData = DocumentsClientServer.GetStructureFillStores();
 		FillPropertyValues(ObjectData, Object);
 		DocumentsClientServer.FillStores(ObjectData, Form);
 		
-		DocumentsServer.FillItemList(Object);
-		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
-	
+	Form.Taxes_CreateFormControls();
 	DocumentsServer.ShowUserMessageOnCreateAtServer(Form);
 EndProcedure
 
@@ -69,19 +72,23 @@ Procedure CalculateTableAtServer(Form, Object) Export
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
-	Form.CurrentPartner = CurrentObject.Partner;
+	Form.CurrentPartner   = CurrentObject.Partner;
 	Form.CurrentAgreement = CurrentObject.Agreement;
-	Form.CurrentDate = CurrentObject.Date;
+	Form.CurrentDate      = CurrentObject.Date;
+	
+	DocumentsServer.FillItemList(Object);
 		
 	ObjectData = DocumentsClientServer.GetStructureFillStores();
 	FillPropertyValues(ObjectData, CurrentObject);
 	DocumentsClientServer.FillStores(ObjectData, Form);
 	
-	DocumentsServer.FillItemList(Object);
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	CurrenciesServer.UpdateRatePresentation(Object);
+	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
+	Form.Taxes_CreateFormControls();
 EndProcedure
 
 #EndRegion

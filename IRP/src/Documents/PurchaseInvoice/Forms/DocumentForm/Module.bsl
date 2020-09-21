@@ -5,11 +5,8 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocPurchaseInvoiceServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
-		CurrentPartner = Object.Partner;
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
-	Taxes_CreateFormControls();
-	ThisObject.TaxAndOffersCalculated = True;
 EndProcedure
 
 &AtClient
@@ -29,7 +26,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		Return;
 	EndIf;
 	
-	DocPurchaseInvoiceClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
+	DocPurchaseInvoiceClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source, AddInfo);
 	
 	ServerData = Undefined;		
 	If TypeOf(Parameter) = Type("Structure") And Parameter.Property("AddInfo") Then
@@ -62,30 +59,13 @@ EndProcedure
 
 &AtClient
 Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
-	OnChangeItemName = "AfterWrite";
-	ParametersToServer = New Structure();
-		
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-			
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
-	
-	CurrenciesClient.SetVisibleRows(Object, ThisObject, AddInfo);
+	DocPurchaseInvoiceClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 	SetLockedRowsByGoodsReceipts();
 	UpdateGoodsReceiptsTree();	
 EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
-	CurrenciesServer.UpdateRatePresentation(Object);
-	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
-	
-	Taxes_CreateFormControls();
 	DocPurchaseInvoiceServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
@@ -93,7 +73,6 @@ EndProcedure
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocPurchaseInvoiceServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	Taxes_CreateFormControls();
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
@@ -163,11 +142,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
-	//DocPurchaseInvoiceClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
-	If ThisObject.TaxAndOffersCalculated Then
-		ThisObject.TaxAndOffersCalculated = False;
-	EndIf;
-	CalculationStringsClientServer.ClearDependentData(Object);
+	DocPurchaseInvoiceClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
 	ClearGoodsReceiptsTable();
 	UpdateGoodsReceiptsTree();
 EndProcedure
@@ -192,23 +167,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
-	If Upper(Field.Name) = Upper("ItemListTaxAmount") Then
-		CurrentData = Items.ItemList.CurrentData;
-		If CurrentData <> Undefined Then
-			
-			MainTableData = New Structure();
-			MainTableData.Insert("Key"      , CurrentData.Key);
-			MainTableData.Insert("Currency" , Object.Currency);
-			
-			TaxesClient.OpenForm_ChangeTaxAmount(Object, 
-												 ThisObject, 
-												 Item, 
-												 RowSelected, 
-												 Field, 
-												 StandardProcessing,
-												 MainTableData);
-		EndIf;
-	EndIf; 
+	DocPurchaseInvoiceClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -236,25 +195,19 @@ Procedure ItemListItemKeyOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
+Procedure ItemListPriceTypeOnChange(Item, AddInfo = Undefined) Export
+	DocPurchaseInvoiceClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure ItemListUnitOnChange(Item, AddInfo = Undefined) Export
 	DocPurchaseInvoiceClient.ItemListUnitOnChange(Object, ThisObject, Item);
 	UpdateGoodsReceiptsTree();
 EndProcedure
 
 &AtClient
-Procedure ItemListPriceTypeOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseInvoiceClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListStoreOnChange(Item)
-	DocPurchaseInvoiceClient.ItemListStoreOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
 Procedure ItemListQuantityOnChange(Item, AddInfo = Undefined) Export	
 	DocPurchaseInvoiceClient.ItemListQuantityOnChange(Object, ThisObject, Item, AddInfo);
-		
 	UpdateGoodsReceiptsTree();
 EndProcedure
 
@@ -266,6 +219,11 @@ EndProcedure
 &AtClient
 Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
 	DocPurchaseInvoiceClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListStoreOnChange(Item)
+	DocPurchaseInvoiceClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -395,39 +353,6 @@ Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
 	DocumentsClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
-#EndRegion
-
-#Region Taxes
-
-&AtClient
-Procedure TaxValueOnChange(Item) Export
-	DocPurchaseInvoiceClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtServer
-Function Taxes_CreateFormControls() Export
-	TaxesParameters = TaxesServer.GetCreateFormControlsParameters();
-	TaxesParameters.Date = Object.Date;
-	TaxesParameters.Company = Object.Company;
-	TaxesParameters.PathToTable = "Object.ItemList";
-	TaxesParameters.ItemParent = ThisObject.Items.ItemList;
-	TaxesParameters.ColumnOffset = ThisObject.Items.ItemListOffersAmount;
-	TaxesParameters.ItemListName = "ItemList";
-	TaxesParameters.TaxListName = "TaxList";
-	TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";
-	TaxesServer.CreateFormControls(Object, ThisObject, TaxesParameters);
-	
-	// update tax cache after rebuild form controls
-	
-	ParametersToServer = New Structure();
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company", 
-	ThisObject.TaxesCache, Object.Ref, Object.Date, Object.Company));
-	
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	Return ServerData.ArrayOfTaxInfo;
-EndFUnction
-	
 #EndRegion
 
 #Region Commands
@@ -562,6 +487,40 @@ Procedure SelectPurchaseOrdersContinueAtServer(Result, AdditionalParameters)
 EndProcedure
 
 #EndRegion
+
+#Region Taxes
+
+&AtClient
+Procedure TaxValueOnChange(Item) Export
+	DocPurchaseInvoiceClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtServer
+Function Taxes_CreateFormControls() Export
+	TaxesParameters = TaxesServer.GetCreateFormControlsParameters();
+	TaxesParameters.Date = Object.Date;
+	TaxesParameters.Company = Object.Company;
+	TaxesParameters.PathToTable = "Object.ItemList";
+	TaxesParameters.ItemParent = ThisObject.Items.ItemList;
+	TaxesParameters.ColumnOffset = ThisObject.Items.ItemListOffersAmount;
+	TaxesParameters.ItemListName = "ItemList";
+	TaxesParameters.TaxListName = "TaxList";
+	TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";
+	TaxesServer.CreateFormControls(Object, ThisObject, TaxesParameters);
+	
+	// update tax cache after rebuild form controls
+	
+	ParametersToServer = New Structure();
+	ParametersToServer.Insert("TaxesCache", 
+	New Structure ("Cache, Ref, Date, Company", 
+	ThisObject.TaxesCache, Object.Ref, Object.Date, Object.Company));
+	
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
+	Return ServerData.ArrayOfTaxInfo;
+EndFUnction
+	
+#EndRegion
+
 
 #Region Currencies
 

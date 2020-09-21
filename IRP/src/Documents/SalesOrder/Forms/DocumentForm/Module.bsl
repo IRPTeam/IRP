@@ -3,15 +3,11 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	LibraryLoader.RegisterLibrary(Object, ThisObject, Currencies_GetDeclaration(Object, ThisObject));	
 	DocSalesOrderServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
-	// {TAXES}
-	Taxes_CreateFormControls();
-	Taxes_CreateTaxTree();
-	// {TAXES}
+	ThisObject.TaxAndOffersCalculated = True;
 	SetConditionalAppearance();
 EndProcedure
 
@@ -30,53 +26,27 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		Return;
 	EndIf;
 	
-	If Upper(EventName) = Upper("CallbackHandler") Then
-		UpdateTotalAmounts();
-	EndIf;
-	
 	DocSalesOrderClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
 	
-	// {TAXES}
-	If EventName = "CalculateTax" Then
-		Taxes_CreateTaxTree();
-		TaxesClient.ExpandTaxTree(ThisObject.Items.TaxTree, ThisObject.TaxTree.GetItems());
+	ServerData = Undefined;		
+	If TypeOf(Parameter) = Type("Structure") And Parameter.Property("AddInfo") Then
+		ServerData = CommonFunctionsClientServer.GetFromAddInfo(Parameter.AddInfo, "ServerData");
 	EndIf;
-	// {TAXES}
-	
+		
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
-EndProcedure
-
-&AtClient
-Procedure ItemListProcurementMethodOnChange(Item)
-	UpdateTotalAmounts();
-EndProcedure
-
-&AtClient
-Procedure UpdateTotalAmounts()
-	ThisObject.TotalNetAmount = 0;
-	ThisObject.TotalTotalAmount = 0;
-	ThisObject.TotalTaxAmount = 0;
-	ThisObject.TotalOffersAmount = 0;
-	For Each Row In Object.ItemList Do
-		If Row.ProcurementMethod = PredefinedValue("Enum.ProcurementMethods.Repeal") 
-		Or Row.ProcurementMethod = PredefinedValue("Enum.ProcurementMethods.EmptyRef") Then
-			Continue;
-		Endif;
-		ThisObject.TotalNetAmount = ThisObject.TotalNetAmount + Row.NetAmount;
-		ThisObject.TotalTotalAmount = ThisObject.TotalTotalAmount + Row.TotalAmount;
+	
+	If Upper(EventName) = Upper("CallbackHandler") Then
+		UpdateTotalAmounts();
 		
-		ArrayOfTaxesRows = Object.TaxList.FindRows(New Structure("Key", Row.Key));
-		For Each RowTax In ArrayOfTaxesRows Do
-			ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + RowTax.Amount;
-		EndDo;
-			
-		ArrayOfOffersRows = Object.SpecialOffers.FindRows(New Structure("Key", Row.Key));
-		For Each RowOffer In ArrayOfOffersRows Do
-			ThisObject.TotalOffersAmount = ThisObject.TotalOffersAmount + RowOffer.Amount;
-		EndDo;
-	EndDo;
+		CurrenciesClient.CalculateAmount(Object, ThisObject);
+		CurrenciesClient.SetRatePresentation(Object, ThisObject);
+				
+		If ServerData <> Undefined Then
+			CurrenciesClient.SetVisibleRows(Object, ThisObject, Parameter.AddInfo);
+		EndIf;
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -91,15 +61,11 @@ EndProcedure
 
 &AtClient
 Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
-	DocSalesOrderClient.AfterWrite(Object, ThisObject, WriteParameters);
+	DocSalesOrderClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
-	// {TAXES}
-	Taxes_CreateFormControls();
-	// {TAXES}
-	
 	DocSalesOrderServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
@@ -107,22 +73,11 @@ EndProcedure
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocSalesOrderServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	Taxes_CreateFormControls();
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	For RowIndex = 0 To (Object.ItemList.Count() - 1) Do
-		Row = Object.ItemList[RowIndex];
-		If Not ValueIsFilled(Row.ProcurementMethod) AND Row.ItemType = Enums.ItemTypes.Product Then
-			MessageText = StrTemplate(R().Error_010, R().S_023);
-			CommonFunctionsClientServer.ShowUsersMessage(MessageText
-				, "Object.ItemList[" + RowIndex + "].ProcurementMethod"
-				, "Object.ItemList");
-			Cancel = True;
-		EndIf;
-	EndDo;
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
@@ -154,13 +109,35 @@ Procedure SetConditionalAppearance()
 	AppearanceElement.Appearance.SetParameterValue("MarkIncomplete", True);
 EndProcedure
 
+&AtClient
+Procedure UpdateTotalAmounts()
+	ThisObject.TotalNetAmount = 0;
+	ThisObject.TotalTotalAmount = 0;
+	ThisObject.TotalTaxAmount = 0;
+	ThisObject.TotalOffersAmount = 0;
+	For Each Row In Object.ItemList Do
+		If Row.ProcurementMethod = PredefinedValue("Enum.ProcurementMethods.Repeal") 
+		Or Row.ProcurementMethod = PredefinedValue("Enum.ProcurementMethods.EmptyRef") Then
+			Continue;
+		Endif;
+		ThisObject.TotalNetAmount = ThisObject.TotalNetAmount + Row.NetAmount;
+		ThisObject.TotalTotalAmount = ThisObject.TotalTotalAmount + Row.TotalAmount;
+		
+		ArrayOfTaxesRows = Object.TaxList.FindRows(New Structure("Key", Row.Key));
+		For Each RowTax In ArrayOfTaxesRows Do
+			ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + RowTax.Amount;
+		EndDo;
+			
+		ArrayOfOffersRows = Object.SpecialOffers.FindRows(New Structure("Key", Row.Key));
+		For Each RowOffer In ArrayOfOffersRows Do
+			ThisObject.TotalOffersAmount = ThisObject.TotalOffersAmount + RowOffer.Amount;
+		EndDo;
+	EndDo;
+EndProcedure
+
 #EndRegion
 
 #Region FormItemsEvents
-&AtClient
-Procedure StatusOnChange(Item)
-	DocSalesOrderClient.StatusOnChange(Object, ThisObject, Item);
-EndProcedure
 
 &AtClient
 Procedure DateOnChange(Item, AddInfo = Undefined) Export
@@ -194,11 +171,6 @@ Procedure AgreementOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
-Procedure ManagerOnChange(Item)
-	Return;
-EndProcedure
-
-&AtClient
 Procedure CompanyOnChange(Item, AddInfo = Undefined) Export
 	DocSalesOrderClient.CompanyOnChange(Object, ThisObject, Item);
 EndProcedure
@@ -206,6 +178,21 @@ EndProcedure
 &AtClient
 Procedure PriceIncludeTaxOnChange(Item)
 	DocSalesOrderClient.PriceIncludeTaxOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure CurrencyOnChange(Item)
+	DocSalesOrderClient.CurrencyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure StatusOnChange(Item)
+	DocSalesOrderClient.StatusOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ManagerOnChange(Item)
+	Return;
 EndProcedure
 
 #EndRegion
@@ -236,13 +223,28 @@ Procedure ItemListOnActivateRow(Item)
 	DocSalesOrderClient.ItemListOnActivateRow(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocSalesOrderClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
 #EndRegion
 
 #Region ItemListItemsEvents
 
 &AtClient
 Procedure ItemListItemOnChange(Item, AddInfo = Undefined) Export
-		DocSalesOrderClient.ItemListItemOnChange(Object, ThisObject, Item);
+	DocSalesOrderClient.ItemListItemOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
+	DocSalesOrderClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
+	DocSalesOrderClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -251,13 +253,13 @@ Procedure ItemListItemKeyOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
-Procedure ItemListUnitOnChange(Item, AddInfo = Undefined) Export
-	DocSalesOrderClient.ItemListUnitOnChange(Object, ThisObject, Item);
+Procedure ItemListPriceTypeOnChange(Item, AddInfo = Undefined) Export
+	DocSalesOrderClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure ItemListPriceTypeOnChange(Item, AddInfo = Undefined) Export
-	DocSalesOrderClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
+Procedure ItemListUnitOnChange(Item, AddInfo = Undefined) Export
+	DocSalesOrderClient.ItemListUnitOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -271,18 +273,18 @@ Procedure ItemListPriceOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
+Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
+	DocSalesOrderClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure ItemListStoreOnChange(Item)
 	DocSalesOrderClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
-	DocSalesOrderClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
-	DocSalesOrderClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+Procedure ItemListProcurementMethodOnChange(Item)
+	UpdateTotalAmounts();
 EndProcedure
 
 #EndRegion
@@ -420,52 +422,14 @@ EndProcedure
 #EndRegion
 
 #Region Taxes
+
 &AtClient
 Procedure TaxValueOnChange(Item) Export
-	CurrentData = Items.ItemList.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	
-	PutToTaxTable_(Item.Name, CurrentData.Key, CurrentData[Item.Name]);
-		
-	Settings = New Structure();
-	Settings.Insert("Rows", New Array());
-	Settings.Insert("CalculateSettings");
-	Settings.CalculateSettings = New Structure("CalculateTax, CalculateTotalAmount, CalculateNetAmount, CalculateNetAmount");
-	Settings.Rows.Add(CurrentData);
-	DocumentsClient.ItemListCalculateRowsAmounts(Object, ThisObject, Settings);
+	DocSalesOrderClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtServer
-Procedure PutToTaxTable_(ItemName, Key, Value)
-	TaxesServer.PutToTaxTableByColumnName(ThisObject, Key, ItemName, Value);
-EndProcedure
-
-&AtClient
-Procedure TaxTreeBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	Cancel = True;
-EndProcedure
-
-&AtClient
-Procedure TaxTreeOnChange(Item)
-	CurrentData = Items.TaxTree.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	Filter = TaxesClient.ChangeTaxAmount(Object, ThisObject, CurrentData, Object.ItemList);
-	Taxes_CreateTaxTree();
-	TaxesClient.ExpandTaxTree(ThisObject.Items.TaxTree, ThisObject.TaxTree.GetItems());
-	ThisObject.Items.TaxTree.CurrentRow = TaxesClient.FindRowInTree(Filter, ThisObject.TaxTree);
-EndProcedure
-
-&AtClient
-Procedure TaxTreeBeforeDeleteRow(Item, Cancel)
-	Cancel = True;
-EndProcedure
-
-&AtServer
-Procedure Taxes_CreateFormControls() Export
+Function Taxes_CreateFormControls() Export
 	TaxesParameters = TaxesServer.GetCreateFormControlsParameters();
 	TaxesParameters.Date = Object.Date;
 	TaxesParameters.Company = Object.Company;
@@ -476,21 +440,17 @@ Procedure Taxes_CreateFormControls() Export
 	TaxesParameters.TaxListName = "TaxList";
 	TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";
 	TaxesServer.CreateFormControls(Object, ThisObject, TaxesParameters);
-EndProcedure
-
-&AtServer
-Procedure Taxes_CreateTaxTree() Export
-	TaxesTreeParameters = TaxesServer.GetCreateTaxTreeParameters();
-	TaxesTreeParameters.MetadataMainList = Metadata.Documents.SalesOrder.TabularSections.ItemList;
-	TaxesTreeParameters.MetadataTaxList = Metadata.Documents.SalesOrder.TabularSections.TaxList;
-	TaxesTreeParameters.ObjectMainList = Object.ItemList;
-	TaxesTreeParameters.ObjectTaxList = Object.TaxList;
-	TaxesTreeParameters.MainListColumns = "Key, Item, ItemKey";
-	TaxesTreeParameters.Level1Columns = "Tax";
-	TaxesTreeParameters.Level2Columns = "Key, Item, ItemKey, TaxRate";
-	TaxesTreeParameters.Level3Columns = "Key, Analytics";
-	TaxesServer.CreateTaxTree(Object, ThisObject, TaxesTreeParameters);
-EndProcedure
+	
+	// update tax cache after rebuild form controls
+	
+	ParametersToServer = New Structure();
+	ParametersToServer.Insert("TaxesCache", 
+	New Structure ("Cache, Ref, Date, Company", 
+	ThisObject.TaxesCache, Object.Ref, Object.Date, Object.Company));
+	
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
+	Return ServerData.ArrayOfTaxInfo;
+EndFunction
 
 #EndRegion
 
@@ -512,16 +472,6 @@ Procedure SearchByBarcode(Command, Barcode = "")
 EndProcedure
 
 &AtClient
-Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
-	CurrentData = ThisObject.Items.ItemList.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	// To Do todo переписать
-	TaxesClient.CalculateReverseTaxOnChangeTotalAmount(Object, ThisObject, CurrentData);
-EndProcedure
-
-&AtClient
 Procedure DecorationStatusHistoryClick(Item)
 	ObjectStatusesClient.OpenHistoryByStatus(Object.Ref, ThisObject);
 EndProcedure
@@ -530,90 +480,28 @@ EndProcedure
 
 #Region Currencies
 
-#Region Currencies_Library_Loader
-
-&AtServerNoContext
-Function Currencies_GetDeclaration(Object, Form)
-	Declaration = LibraryLoader.GetDeclarationInfo();
-	Declaration.LibraryName = "LibraryCurrencies";
-	
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_OnOpen", "OnOpen", Form);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_AfterWriteAtServer", "AfterWriteAtServer", Form);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_AfterWrite", "AfterWrite", Form);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_NotificationProcessing", "NotificationProcessing", Form);
-	
-	ArrayOfItems_MainTableAmount = New Array();
-	ArrayOfItems_MainTableAmount.Add(Form.Items.ItemList);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableAmountOnChange", "OnChange", ArrayOfItems_MainTableAmount);
-	
-	ArrayOfItems_Header = New Array();
-	ArrayOfItems_Header.Add(Form.Items.Partner);
-	ArrayOfItems_Header.Add(Form.Items.LegalName);
-	ArrayOfItems_Header.Add(Form.Items.Agreement);
-	ArrayOfItems_Header.Add(Form.Items.Company);
-	ArrayOfItems_Header.Add(Form.Items.Date);
-	ArrayOfItems_Header.Add(Form.Items.Currency);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_HeaderOnChange", "OnChange", ArrayOfItems_Header);
-	
-	Columns = CurrenciesClientServer.GetPropertiesForReplace();
-	Columns.Amount = "TotalAmount";
-	TableColumns = New Structure("ItemList", Columns);
-	
-	LibraryData = New Structure();
-	LibraryData.Insert("TableColumns", TableColumns);
-	LibraryData.Insert("MainTableName", "ItemList");
-	LibraryData.Insert("Version", "2.0");
-	LibraryLoader.PutData(Declaration, LibraryData);
-	Return Declaration;
-EndFunction
-
-#Region Currencies_Event_Handlers
-
 &AtClient
-Procedure Currencies_OnOpen(Cancel, AddInfo = Undefined) Export
-	CurrenciesClientServer.OnOpen(Object, ThisObject, Cancel, AddInfo);
-EndProcedure
-
-&AtServer
-Procedure Currencies_AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
-	CurrenciesClientServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters, AddInfo);
-EndProcedure
-	
-&AtClient
-Procedure Currencies_AfterWrite(WriteParameters, AddInfo = Undefined) Export
-	CurrenciesClientServer.AfterWrite(Object, ThisObject, WriteParameters, AddInfo);
+Procedure CurrenciesSelection(Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined)
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ExecuteAtClient", True);
+	CurrenciesClient.CurrenciesTable_Selection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing, AddInfo);
 EndProcedure
 
 &AtClient
-Procedure Currencies_NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", "ItemList");
-	CurrenciesClientServer.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source, AddInfo);
+Procedure CurrenciesRatePresentationOnChange(Item, AddInfo = Undefined)
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ExecuteAtClient", True);
+	CurrenciesClient.CurrenciesTable_RatePresentationOnChange(Object, ThisObject, Item, AddInfo);
 EndProcedure
 
 &AtClient
-Procedure Currencies_MainTableAmountOnChange(Item, AddInfo = Undefined) Export
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", "ItemList");
-	CurrenciesClientServer.MainTableAmountOnChange(Object, ThisObject, Item, AddInfo);
+Procedure CurrenciesMultiplicityOnChange(Item, AddInfo = Undefined)
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ExecuteAtClient", True);
+	CurrenciesClient.CurrenciesTable_MultiplicityOnChange(Object, ThisObject, Item, AddInfo);
 EndProcedure
 
 &AtClient
-Procedure Currencies_HeaderOnChange(Item, AddInfo = Undefined) Export
-	ArrayOfTableNames = New Array();
-	ArrayOfTableNames.Add("ItemList");
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_ArrayOfTableNames", ArrayOfTableNames);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", "ItemList");
-	CurrenciesClientServer.HeaderOnChange(Object, ThisObject, Item, AddInfo);
-EndProcedure
-
-#EndRegion
-
-#EndRegion
-
-#Region Currencies_TableCurrencies_Events
-
-&AtClient
-Procedure CurrenciesSelection(Item, RowSelected, Field, StandardProcessing)
-	CurrenciesClient.CurrenciesTable_Selection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+Procedure CurrenciesAmountOnChange(Item, AddInfo = Undefined)
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ExecuteAtClient", True);
+	CurrenciesClient.CurrenciesTable_AmountOnChange(Object, ThisObject, Item, AddInfo);
 EndProcedure
 
 &AtClient
@@ -625,62 +513,6 @@ EndProcedure
 Procedure CurrenciesBeforeDeleteRow(Item, Cancel)
 	Cancel = True;
 EndProcedure
-
-&AtClient
-Procedure CurrenciesRatePresentationOnChange(Item)
-	CurrenciesClient.CurrenciesTable_RatePresentationOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure CurrenciesMultiplicityOnChange(Item)
-	CurrenciesClient.CurrenciesTable_MultiplicityOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure CurrenciesAmountOnChange(Item)
-	CurrenciesClient.CurrenciesTable_AmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region Currencies_Server_API
-
-&AtServer
-Procedure Currencies_SetVisibleCurrenciesRow(RowKey, IgnoreRowKey = False) Export
-	CurrenciesServer.SetVisibleCurrenciesRow(Object, RowKey, IgnoreRowKey);
-EndProcedure
-
-&AtServer
-Procedure Currencies_ClearCurrenciesTable(RowKey = Undefined) Export
-	CurrenciesServer.ClearCurrenciesTable(Object, RowKey);
-EndProcedure
-
-&AtServer
-Procedure Currencies_FillCurrencyTable(RowKey, Currency, AgreementInfo) Export
-	CurrenciesServer.FillCurrencyTable(Object, 
-	                                   Object.Date, 
-	                                   Object.Company, 
-	                                   Currency, 
-	                                   RowKey,
-	                                   AgreementInfo);
-EndProcedure
-
-&AtServer
-Procedure Currencies_UpdateRatePresentation() Export
-	CurrenciesServer.UpdateRatePresentation(Object);
-EndProcedure
-
-&AtServer
-Procedure Currencies_CalculateAmount(Amount, RowKey) Export
-	CurrenciesServer.CalculateAmount(Object, Amount, RowKey);
-EndProcedure
-
-&AtServer
-Procedure Currencies_CalculateRate(Amount, MovementType, RowKey) Export
-	CurrenciesServer.CalculateRate(Object, Amount, MovementType, RowKey);
-EndProcedure
-
-#EndRegion
 
 #EndRegion
 

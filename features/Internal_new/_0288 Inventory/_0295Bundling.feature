@@ -13,7 +13,8 @@ For joint sale of products
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
-Scenario: _029500 test data creation
+Scenario: _029500 preparation (Bundling)
+	
 	* Create store that use Goods receipt and doesn't use Shipment confirmation
 		Given I open hyperlink "e1cib/list/Catalog.Stores"
 		And I click the button named "FormCreate"

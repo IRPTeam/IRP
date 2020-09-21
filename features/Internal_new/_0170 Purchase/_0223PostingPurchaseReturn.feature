@@ -38,6 +38,8 @@ Scenario: _022300 preparation
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
 		When Create information register TaxSettings records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -227,35 +229,21 @@ Scenario: _022313 check movements of the document Purchase return order in the O
 		| '3,000'    | '$$PurchaseReturn022309$$' | '1'           | 'Store 01' | '36/Yellow' |
 
 Scenario: _022314 create document Purchase return, store use Shipment confirmation, without Purchase return order
-	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	When create PurchaseReturn022314
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	And I go to line in "List" table
 		| 'Number' |
-		| '$$NumberPurchaseInvoice018006$$'      |
-	And I select current line in "List" table
-	And I click the button named "FormDocumentPurchaseReturnGeneratePurchaseReturn"
-	* Check filling details
-		Then the form attribute named "Partner" became equal to "Ferron BP"
-		Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"
-		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-		Then the form attribute named "Company" became equal to "Main Company"
-	And I click Select button of "Store" field
-	And I go to line in "List" table
-		| 'Description' |
-		| 'Store 02'  |
+		| '$$PurchaseReturn022314$$'      |
 	And I select current line in "List" table
 	* Check that the amount from the receipt minus the previous returns is pulled into the return
 		And "ItemList" table contains lines
 			| 'Purchase return order' | 'Item'  | 'Item key' | 'Purchase invoice'          | 'Unit' | 'Q'       |
 			| ''                      | 'Dress' | 'L/Green'  | '$$PurchaseInvoice018006$$' | 'pcs'  | '498,000' |
-	And I activate "Q" field in "ItemList" table
-	And I select current line in "ItemList" table
-	And I input "10,000" text in "Q" field of "ItemList" table
-	And I finish line editing in "ItemList" table
-	And I click "Post" button
-	And I save the value of "Number" field as "$$NumberPurchaseReturn022314$$"
-	And I save the window as "$$PurchaseReturn022314$$"
-	And I click "Post and close" button
-	And I close current window
+		And I activate "Q" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "10,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post and close" button
 
 Scenario: _022315 check that there are no movements of Purchase return document by OrderBalance (store use Shipment confirmation, without Purchase return order) - minus
 	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"

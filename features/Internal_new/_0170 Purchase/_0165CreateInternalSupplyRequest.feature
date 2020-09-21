@@ -35,6 +35,8 @@ Scenario: _016501 preparation
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects
 		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
 		* Add plugin for taxes calculation
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			If "List" table does not contain lines Then

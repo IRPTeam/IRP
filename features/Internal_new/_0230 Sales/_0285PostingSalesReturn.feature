@@ -12,6 +12,88 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
+Scenario: _028500 preparation (create document Sales return)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Partners objects (Kalipso)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	* Check or create SalesOrder023001
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesOrder023001$$" |
+			When create SalesOrder023001
+	* Check or create SalesOrder023005
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesOrder023005$$" |
+			When create SalesOrder023005
+	* Check or create SalesInvoice024001 based on SalesOrder023001
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesInvoice024001$$" |
+			When create SalesInvoice024001
+	* Check or create SalesInvoice024008 based on SalesOrder023005
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesInvoice024008$$" |
+			When create SalesInvoice024008
+	* Check or create SalesReturnOrder028001
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesReturnOrder028001$$" |
+			When create SalesReturnOrder028001
+	* Check or create SalesReturnOrder028004
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesReturnOrder028004$$" |
+			When create SalesReturnOrder028004
+	* Check or create SalesInvoice024016
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesInvoice024016$$" |
+			When create SalesInvoice024016 (Shipment confirmation does not used)
+
 Scenario: _028501 create document Sales return, store use Goods receipt, without Sales return order
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"

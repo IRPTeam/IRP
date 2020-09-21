@@ -978,6 +978,167 @@ Scenario: create SalesReturnOrder028001
 	And I click "Post and close" button
 	And I close all client application windows
 
+
+Scenario: create SalesInvoice024025
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I click the button named "FormCreate"
+	* Filling in customer information
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
+	// * Change of document number - 4
+	// 	And I move to "Other" tab
+	// 	And I expand "More" group
+	// 	And I input "4" text in "Number" field
+	// 	Then "1C:Enterprise" window is opened
+	// 	And I click "Yes" button
+	// 	And I input "4" text in "Number" field
+	* Change store to Store 02
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| Description |
+			| Store 02  |
+		And I select current line in "List" table
+	* Filling in items table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'L/Green'  |
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "20,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	And I click "Post" button
+	And I save the value of "Number" field as "$$NumberSalesInvoice024025$$"
+	And I save the window as "$$SalesInvoice024025$$"
+	And I click "Post and close" button
+
+Scenario: create PurchaseReturn022314
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '$$NumberPurchaseInvoice018006$$'      |
+	And I select current line in "List" table
+	And I click the button named "FormDocumentPurchaseReturnGeneratePurchaseReturn"
+	* Check filling details
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I click Select button of "Store" field
+	And I go to line in "List" table
+		| 'Description' |
+		| 'Store 02'  |
+	And I select current line in "List" table
+	And I click "Post" button
+	And I save the value of "Number" field as "$$NumberPurchaseReturn022314$$"
+	And I save the window as "$$PurchaseReturn022314$$"
+	And I click "Post and close" button
+	
+
+
+Scenario: create InventoryTransfer021030
+	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+	And I click the button named "FormCreate"
+	And I click Select button of "Store sender" field
+	And I go to line in "List" table
+		| Description |
+		| Store 02    |
+	And I select current line in "List" table
+	And I click Select button of "Store receiver" field
+	And I go to line in "List" table
+		| Description |
+		| Store 03    |
+	And I select current line in "List" table
+	And I click Select button of "Company" field
+	And I go to line in "List" table
+		| 'Description'  |
+		| 'Main Company' |
+	And I select current line in "List" table
+	And I move to "Items" tab
+	And I click the button named "Add"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And I go to line in "List" table
+		| 'Description' |
+		| 'Dress'       |
+	And I select current line in "List" table
+	And I activate "Item key" field in "ItemList" table
+	And I click choice button of "Item key" attribute in "ItemList" table
+	And I go to line in "List" table
+		| 'Item key' |
+		| 'L/Green' |
+	And I select current line in "List" table
+	And I activate "Unit" field in "ItemList" table
+	And I click choice button of "Unit" attribute in "ItemList" table
+	And I select current line in "List" table
+	And I activate "Quantity" field in "ItemList" table
+	And I input "3,000" text in "Quantity" field of "ItemList" table
+	And I finish line editing in "ItemList" table
+	And I click "Post" button
+	And I save the value of "Number" field as "$$NumberInventoryTransfer021030$$"
+	And I save the window as "$$InventoryTransfer021030$$"
+	And I click "Post and close" button
+
+Scenario: create SalesInvoice024016 (Shipment confirmation does not used)
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		* Filling in customer information
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Kalipso'     |
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I select current line in "List" table
+		* Select store 
+			And I click Select button of "Store" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 01'  |
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I activate "Description" field in "List" table
+			And I select current line in "List" table
+		// * Change of document number - 3
+		// 	And I move to "Other" tab
+		// 	And I expand "More" group
+		// 	And I input "3" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "3" text in "Number" field
+		* Filling in items table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Item key' |
+				| 'L/Green'  |
+			And I select current line in "List" table
+			And I activate "Q" field in "ItemList" table
+			And I input "1,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post" button
+			And in the table "ItemList" I click "% Offers" button
+			And in the table "Offers" I click the button named "FormOK"
+		And I click "Post" button
+		And I save the value of "Number" field as "$$NumberSalesInvoice024016$$"
+		And I save the window as "$$SalesInvoice024016$$"
+		And I click "Post and close" button
+
+
 Scenario: set True value to the constant
 		And I set "True" value to the constant "ShowBetaTesting"
 		And I set "True" value to the constant "ShowAlphaTestingSaas"

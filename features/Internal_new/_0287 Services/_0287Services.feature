@@ -12,6 +12,39 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
+Scenario: _029100 preparation
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog Units objects
+		When Create catalog PriceTypes objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create catalog BusinessUnits objects
+		When Create catalog ExpenseAndRevenueTypes objects
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+
 Scenario: _029101 create item type for services
 	Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 	And I click the button named "FormCreate"

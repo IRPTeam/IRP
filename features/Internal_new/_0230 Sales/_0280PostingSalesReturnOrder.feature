@@ -40,6 +40,8 @@ Scenario: _023000 preparation (Sales return order)
 		When Create catalog Taxes objects	
 		When Create information register TaxSettings records
 		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then

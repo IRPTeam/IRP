@@ -1,5 +1,7 @@
 Function GetPictureURL(FileRef) Export
-	Return PictureViewerServer.GetPictureURL(FileRef);
+	URLStructure = PictureViewerServer.GetPictureURL(FileRef);
+	ProccessingCommonModule = Eval(URLStructure.ProccessingModule);
+	Return ProccessingCommonModule.PreparePictureURL(URLStructure.IntegrationSettings, URLStructure.PictureURL);
 EndFunction
 
 Function GetPictureURLByFileID(FileID) Export
@@ -85,9 +87,6 @@ EndProcedure
 
 Function UploadPicture(File, Volume) Export
 	
-	
-	
-	
 	md5 = String(PictureViewerServer.MD5ByBinaryData(File.Location));
 	FileRef = PictureViewerServer.GetFileRefByMD5(md5);
 	If ValueIsFilled(FileRef) Then
@@ -126,7 +125,8 @@ Function UploadPicture(File, Volume) Export
 		
 	ElsIf ConnectionSettings.Value.IntegrationType = PredefinedValue("Enum.IntegrationType.GoogleDrive") Then
 		Name = FileID + "." + FileInfo.Extension;
-		FileInfo.URI = GoogleDriveServer.SendToDrive(ConnectionSettings.Value.IntegrationSettingsRef, Name, RequestBody);	
+		
+		FileInfo.URI = GoogleDriveClientServer.SendToDrive(ConnectionSettings.Value.IntegrationSettingsRef, Name, RequestBody);	
 		FileInfo.Success = True;
 			
 	Else
@@ -182,6 +182,9 @@ Function PicturesInfoForSlider(ItemRef, UUID, FileRef = Undefined) Export
 	PicArray = New Array;
 	For Each Picture In Pictures Do
 		Map = New Structure("Src, Preview, ID");
+		ProccessingCommonModule = Eval(Picture.PictureURLStructure.ProccessingModule);
+		Picture.Src = ProccessingCommonModule.PreparePictureURL(
+							Picture.PictureURLStructure.IntegrationSettings, Picture.Src, UUID);
 		If Picture.SrcBD = Undefined Then
 			Map.Src = Picture.Src;
 		Else

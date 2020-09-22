@@ -7,7 +7,7 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
-  <content>CommonModule.GoogleDriveServer</content>
+  <content>CommonModule.GoogleDriveClientServer</content>
   <content>CommonForm.HTMLField</content>
   <content>InformationRegister.IntegrationInfo</content>
   <parentSubsystem>Subsystem.Settings.Subsystem.Integrations</parentSubsystem>

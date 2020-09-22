@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="228f5926-3406-4e2c-bcb9-421d33c1b877">
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d6da9241-089b-4fe3-afff-9a1399df56de">
   <name>GoogleDriveServer</name>
   <synonym>
     <key>en</key>

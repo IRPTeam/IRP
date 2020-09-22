@@ -21,10 +21,14 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		If TestRow.Count() Then
 			Object.ConnectionSetting.Delete(TestRow[0]);
 		EndIf;
-		
-		NewRow = Object.ConnectionSetting.Add();
-		NewRow.Key = "refresh_token";
-		NewRow.Value = 	Parameter.refresh_token;
+		FindRows = Object.ConnectionSetting.FindRows(New Structure("Key", "refresh_token"));
+		If FindRows.Count() Then
+			Row = FindRows[0];
+		Else
+			Row = Object.ConnectionSetting.Add();
+		EndIf;
+		Row.Key = "refresh_token";
+		Row.Value = Parameter.refresh_token;
 		
 		Modified = True;
 	EndIf;
@@ -37,7 +41,7 @@ Procedure TestConnection(Command)
 		IntegrationServer.SaveFileToFileStorage(TestRow[0].Value, "Test.png", PictureLib.DataHistory.GetBinaryData());	
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_005);
 	ElsIf Object.IntegrationType = PredefinedValue("Enum.IntegrationType.GoogleDrive") Then 
-		CurrentActiveToken = GoogleDriveServer.CurrentActiveToken(Object.Ref);
+		CurrentActiveToken = GoogleDriveClientServer.CurrentActiveToken(Object.Ref);
 		If ValueIsFilled(CurrentActiveToken) Then
 			CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_005);
 		EndIf;	

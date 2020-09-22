@@ -2266,12 +2266,5 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 			| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000'  | 'pcs'  | '610,17'     | '3 389,83'     | '4 000,00'     | 'Store 02' |
 			| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000'  | 'pcs'  | '640,68'     | '3 559,32'     | '4 200,00'     | 'Store 02' |
 			| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '961,02'     | '5 338,98'     | '6 300,00'     | 'Store 02' |
-		And I move to "Tax list" tab
-		And I click "Refresh" button
-		And "TaxTree" table contains lines
-			| 'Tax' | 'Tax rate' | 'Item'     | 'Item key'  | 'Amount'   | 'Manual amount' |
-			| 'VAT' | ''         | ''         | ''          | '2 211,87' | '2 211,87'      |
-			| 'VAT' | '18%'      | 'Dress'    | 'M/White'   | '610,17'   | '610,17'        |
-			| 'VAT' | '18%'      | 'Dress'    | 'L/Green'   | '640,68'   | '640,68'        |
-			| 'VAT' | '18%'      | 'Trousers' | '36/Yellow' | '961,02'   | '961,02'        |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "2 211,87"
 		And I close all client application windows

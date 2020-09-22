@@ -908,40 +908,6 @@
     </edit>
   </attributes>
   <attributes>
-    <name>Column_1</name>
-    <title>
-      <key>en</key>
-      <value>Column 1</value>
-    </title>
-    <id>6</id>
-    <valueType>
-      <types>AnyRef</types>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-  </attributes>
-  <attributes>
-    <name>Column_2</name>
-    <title>
-      <key>en</key>
-      <value>Column 2</value>
-    </title>
-    <id>7</id>
-    <valueType>
-      <types>AnyRef</types>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-  </attributes>
-  <attributes>
     <name>TaxTable</name>
     <title>
       <key>en</key>

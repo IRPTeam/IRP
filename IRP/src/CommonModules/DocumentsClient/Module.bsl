@@ -2216,6 +2216,20 @@ EndProcedure
 
 #Region ItemListItemsEvents
 
+Procedure ItemListSelectionPutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
+	OnChangeItemName = "ItemListSelection";
+	ParametersToServer = New Structure();
+	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
+	
+	ParametersToServer.Insert("TaxesCache", 
+	New Structure ("Cache, Ref, Date, Company", 
+	Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
+		
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
+	ServerData.Insert("OnChangeItemName", OnChangeItemName);
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
+EndProcedure	
+
 #Region Item
 
 Procedure ItemListItemOnChangePutServerDataToAddInfo(Object, Form, CurrentRow, AddInfo = Undefined) Export

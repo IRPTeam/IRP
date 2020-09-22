@@ -255,8 +255,12 @@ Procedure OpenForm_ChangeTaxAmount(Object, Form, Item, RowSelected, Field, Stand
 	OpeningParameters.Insert("MainTableData"      , MainTableData);
 	OpeningParameters.Insert("ArrayOfTaxListRows" , ArrayOfTaxListRows);
 	
-	AdditionalParameters = New Structure("Object", Object);
-	AdditionalParameters.Insert("AddInfo", AddInfo);
+	AdditionalParameters = New Structure();
+	AdditionalParameters.Insert("Object"        , Object);
+	AdditionalParameters.Insert("Form"          , Form); 
+	AdditionalParameters.Insert("AddInfo"       , AddInfo);
+	AdditionalParameters.Insert("MainTableData" , MainTableData);
+	
 	Notify = New NotifyDescription("TaxEditContinue", ThisObject, AdditionalParameters);
 	OpenForm("CommonForm.EditTax", OpeningParameters, Form, Form.UUID, , , Notify , FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
@@ -265,6 +269,8 @@ Procedure TaxEditContinue(Result, AdditionalParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AdditionalParameters.AddInfo, "ServerData");
+	
 	Object = AdditionalParameters.Object;
 	ArrayForDelete = Object.TaxList.FindRows(New Structure("Key", Result.Key));
 	For Each ItemOfArrayForDelete In ArrayForDelete Do
@@ -278,8 +284,18 @@ Procedure TaxEditContinue(Result, AdditionalParameters) Export
 		EndIf;
 	EndDo;
 	ArrayOfItemListRows = Object.ItemList.FindRows(New Structure("Key", Result.Key));
-	For Each ItemOfItemListRows In ArrayOfItemListRows Do
-		ItemOfItemListRows.TaxAmount = TotalTaxAmount;
-	EndDo;
+	
+	Actions = New Structure();
+	Actions.Insert("CalculateSpecialOffers");
+	Actions.Insert("CalculateNetAmount");
+	Actions.Insert("CalculateTax");
+	Actions.Insert("CalculateTotalAmount");
+
+	CalculationStringsClientServer.CalculateItemsRows(AdditionalParameters.Object,
+		                                              AdditionalParameters.Form,
+		                                              ArrayOfItemListRows,
+		                                              Actions,
+		                                              ServerData.ArrayOfTaxInfo,
+		                                              AdditionalParameters.AddInfo);
 EndProcedure
 	

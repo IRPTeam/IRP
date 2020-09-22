@@ -14,6 +14,7 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	DocSalesOrderClient.OnOpen(Object, ThisObject, Cancel);
+	UpdateTotalAmounts();
 EndProcedure
 
 &AtClient
@@ -46,7 +47,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		If ServerData <> Undefined Then
 			CurrenciesClient.SetVisibleRows(Object, ThisObject, Parameter.AddInfo);
 		EndIf;
-	EndIf;
+	EndIf;	
 EndProcedure
 
 &AtClient
@@ -62,6 +63,7 @@ EndProcedure
 &AtClient
 Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
 	DocSalesOrderClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+	UpdateTotalAmounts();
 EndProcedure
 
 &AtServer
@@ -115,9 +117,11 @@ Procedure UpdateTotalAmounts()
 	ThisObject.TotalTotalAmount = 0;
 	ThisObject.TotalTaxAmount = 0;
 	ThisObject.TotalOffersAmount = 0;
+	ProcurementMethods_Repeal = PredefinedValue("Enum.ProcurementMethods.Repeal");
+	ProcurementMethods_EmptyRef = PredefinedValue("Enum.ProcurementMethods.EmptyRef");
 	For Each Row In Object.ItemList Do
-		If Row.ProcurementMethod = PredefinedValue("Enum.ProcurementMethods.Repeal") 
-		Or Row.ProcurementMethod = PredefinedValue("Enum.ProcurementMethods.EmptyRef") Then
+		If Row.ProcurementMethod = ProcurementMethods_Repeal 
+		Or Row.ProcurementMethod = ProcurementMethods_EmptyRef Then
 			Continue;
 		Endif;
 		ThisObject.TotalNetAmount = ThisObject.TotalNetAmount + Row.NetAmount;
@@ -125,7 +129,8 @@ Procedure UpdateTotalAmounts()
 		
 		ArrayOfTaxesRows = Object.TaxList.FindRows(New Structure("Key", Row.Key));
 		For Each RowTax In ArrayOfTaxesRows Do
-			ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + RowTax.Amount;
+			ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount 
+			+ ?(RowTax.IncludeToTotalAmount, RowTax.ManualAmount, 0);
 		EndDo;
 			
 		ArrayOfOffersRows = Object.SpecialOffers.FindRows(New Structure("Key", Row.Key));

@@ -124,6 +124,7 @@ Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProc
 	If Upper(Field.Name) = Upper("ItemListTaxAmount") Then
 		CurrentData = Form.Items.ItemList.CurrentData;
 		If CurrentData <> Undefined Then
+			DocumentsClient.ItemListSelectionPutServerDataToAddInfo(Object, Form, AddInfo);
 			
 			MainTableData = New Structure();
 			MainTableData.Insert("Key"      , CurrentData.Key);
@@ -135,7 +136,8 @@ Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProc
 												 RowSelected, 
 												 Field, 
 												 StandardProcessing,
-												 MainTableData);
+												 MainTableData,
+												 AddInfo);
 		EndIf;
 	EndIf; 
 EndProcedure

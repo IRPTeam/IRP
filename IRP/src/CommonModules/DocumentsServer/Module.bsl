@@ -604,6 +604,14 @@ Function PrepareServerData(Parameters) Export
 		Result.Insert("SalesOrder_EmptyRef", PredefinedValue("Document.SalesOrder.EmptyRef"));
 	EndIf;
 	
+	If Parameters.Property("GetPurchaseReturnOrder_EmptyRef") Then
+		Result.Insert("PurchaseReturnOrder_EmptyRef", PredefinedValue("Document.PurchaseReturnOrder.EmptyRef"));
+	EndIf;
+
+	If Parameters.Property("GetSalesReturnOrder_EmptyRef") Then
+		Result.Insert("SalesReturnOrder_EmptyRef", PredefinedValue("Document.SalesReturnOrder.EmptyRef"));
+	EndIf;	
+	
 	If Parameters.Property("GetPriceTypes_ManualPriceType") Then
 		Result.Insert("PriceTypes_ManualPriceType", PredefinedValue("Catalog.PriceTypes.ManualPriceType"));
 	EndIf;

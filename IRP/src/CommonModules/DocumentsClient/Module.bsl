@@ -2187,6 +2187,8 @@ Procedure CommonParametersToServer(Object, Form, ParametersToServer, AddInfo = U
 	ParametersToServer.Insert("GetAgreementTypes_Customer");
 	ParametersToServer.Insert("GetSalesOrder_EmptyRef");
 	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
+	ParametersToServer.Insert("GetPurchaseReturnOrder_EmptyRef");
+	ParametersToServer.Insert("GetSalesReturnOrder_EmptyRef");	
 EndProcedure
 
 #Region FormEvents

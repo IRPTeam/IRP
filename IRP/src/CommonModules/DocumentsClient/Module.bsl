@@ -2171,6 +2171,12 @@ Procedure CommonParametersToServer(Object, Form, ParametersToServer, AddInfo = U
 	EndDo;
 	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
 	
+	ArrayOfItemKeys = New Array;
+	For Each Row In Object.ItemList Do
+		ArrayOfItemKeys.Add(Row.ItemKey);
+	EndDo;
+	ParametersToServer.Insert("GetItemKeysWithSerialLotNumbers", ArrayOfItemKeys);
+	
 	ParametersToServer.Insert("GetAgreementTypes_Vendor");
 	ParametersToServer.Insert("GetPurchaseOrder_EmptyRef");
 	ParametersToServer.Insert("GetAgreementTypes_Customer");
@@ -2251,6 +2257,16 @@ Procedure ItemListItemKeyOnChangePutServerDataToAddInfo(Object, Form, CurrentRow
 EndProcedure
 
 #EndRegion
+
+Procedure ItemListSerialLotNumbersPutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
+	OnChangeItemName = "ItemListSerialLotNumbersPresentation";
+	ParametersToServer = New Structure();
+	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
+			
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
+	ServerData.Insert("OnChangeItemName", OnChangeItemName);
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);	
+EndProcedure
 
 #Region PriceType
 

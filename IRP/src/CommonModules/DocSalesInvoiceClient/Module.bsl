@@ -363,19 +363,7 @@ EndProcedure
 #Region SerialLotNumbers
 
 Procedure ItemListSerialLotNumbersPresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
-	OnChangeItemName = "ItemListSerialLotNumbersPresentation";
-	ParametersToServer = New Structure();
-	
-	ArrayOfItemKeys = New Array;
-	For Each Row In Object.ItemList Do
-		ArrayOfItemKeys.Add(Row.ItemKey);
-	EndDo;
-	ParametersToServer.Insert("GetItemKeysWithSerialLotNumbers", ArrayOfItemKeys);
-			
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
-	
+	DocumentsClient.ItemListSerialLotNumbersPutServerDataToAddInfo(Object, Form, AddInfo);
 	SerialLotNumberClient.PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, AddInfo);
 EndProcedure	
 

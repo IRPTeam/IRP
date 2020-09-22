@@ -617,12 +617,18 @@ Function PrepareServerData(Parameters) Export
 	EndIf;
 	
 	If Parameters.Property("GetItemKeysWithSerialLotNumbers") Then
-		ArrayOfItemKeysWithSerialLotNumbers = New Array();
-		For Each ItemKey In Parameters.GetItemKeysWithSerialLotNumbers Do
-			If SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(ItemKey) Then
-				ArrayOfItemKeysWithSerialLotNumbers.Add(ItemKey);
-			EndIf;
-		EndDo;
+		Query = New Query();
+		Query.Text = 
+		"SELECT
+		|	ItemKeys.Ref AS ItemKey
+		|FROM
+		|	Catalog.ItemKeys AS ItemKeys
+		|WHERE
+		|	ItemKeys.Item.ItemType.UseSerialLotNumber
+		|	AND ItemKeys.Ref IN (&Refs)";
+		Query.SetParameter("Refs", Parameters.GetItemKeysWithSerialLotNumbers);
+		QueryResult = Query.Execute();
+		ArrayOfItemKeysWithSerialLotNumbers = QueryResult.Unload().UnloadColumn("ItemKey");
 		Result.Insert("ItemKeysWithSerialLotNumbers", ArrayOfItemKeysWithSerialLotNumbers);
 	EndIf;
 	

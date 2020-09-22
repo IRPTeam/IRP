@@ -55,7 +55,7 @@ EndProcedure
 
 &AtClient
 Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
-	DocPurchaseReturnServer.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+	DocPurchaseReturnClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 EndProcedure
 
 &AtServer

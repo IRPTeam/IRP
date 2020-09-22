@@ -9,7 +9,7 @@ Function ConnectionSetting(IntegrationSettingName, AddInfo = Undefined) Export
 		Return Result;
 	EndIf;
 	
-	ConnectionSetting = IntegrationServer.ConnectionSettingTemplate(IntegrationSettings.IntegrationType, AddInfo);
+	ConnectionSetting = ConnectionSettingTemplate(IntegrationSettings.IntegrationType, AddInfo);
 	
 	// Customize setting with according IntegrationSettings catalog
 	FillPropertyValues(ConnectionSetting, IntegrationSettings.CustomizedSetting);

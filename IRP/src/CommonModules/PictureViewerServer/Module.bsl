@@ -6,20 +6,23 @@ Function MD5ByBinaryData(TmpAddress) Export
 EndFunction
 
 Function PictureURLStructure()
-	Return New Structure("PictureURL, isLocalPictureURL", "", False);
+	Return New Structure("PictureRef, PictureURL, isLocalPictureURL, ProccessingModule, IntegrationSettings", "", False, "PictureViewerClientServer", "");
 EndFunction
 
 Function GetPictureURL(RefStructure) Export
 	Result = PictureURLStructure();
 	
-	If Not ValueIsFilled(RefStructure.Ref) Then
+	If Not ValueIsFilled(RefStructure.Ref) Or Not RefStructure.isFilledVolume Then
 		Return Result;
 	EndIf;
-	
-	If RefStructure.isFilledVolume Then
-		Result.PictureURL = GetVolumeURLByIntegrationSettings(RefStructure.GETIntegrationSettings, RefStructure.URI);
-		Result.isLocalPictureURL = RefStructure.isLocalPictureURL;
+	Result.PictureRef = RefStructure.Ref;
+	Result.PictureURL = GetVolumeURLByIntegrationSettings(RefStructure.GETIntegrationSettings, RefStructure.URI);
+	Result.isLocalPictureURL = RefStructure.isLocalPictureURL;
+	Result.IntegrationSettings = RefStructure.GETIntegrationSettings;
+	If RefStructure.GETIntegrationSettings.IntegrationType = Enums.IntegrationType.GoogleDrive Then
+		Result.ProccessingModule = "GoogleDriveClientServer";
 	EndIf;
+
 	Return Result;
 EndFunction
 
@@ -365,8 +368,9 @@ Function PicturesInfoForSlider(ItemRef, FileRef = Undefined) Export
 	
 	PicArray = New Array;
 	For Each Picture In Pictures Do
-		Map = New Structure("Src, SrcBD, Preview, PreviewBD, ID");
+		Map = New Structure("Src, SrcBD, Preview, PreviewBD, ID, PictureURLStructure");
 		PicInfo = GetPictureURL(Picture);
+		Map.PictureURLStructure = PicInfo; 
 		Map.Src = PicInfo.PictureURL;
 		If PicInfo.isLocalPictureURL Then
 			Try

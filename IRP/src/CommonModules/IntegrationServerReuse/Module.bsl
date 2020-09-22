@@ -36,6 +36,8 @@ Function ConnectionSettingTemplate(IntegrationType = Undefined, AddInfo = Undefi
 		ConnectionSetting.Insert("key", "");
 		ConnectionSetting.Insert("redirect_uri", "http://localhost");
 		ConnectionSetting.Insert("refresh_token", "");
+		ConnectionSetting.Insert("folderID", "");
+		ConnectionSetting.Insert("LocalGoogleDrivePath", "");
 	Else
 		ConnectionSetting.Insert("QueryType", "POST");
 		ConnectionSetting.Insert("ResourceAddress", "");

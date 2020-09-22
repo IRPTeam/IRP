@@ -12,3 +12,10 @@ Procedure HTMLDocumentComplete(Item)
 		GoogleDriveClient.OnHTMLComplete(Item.Document, SrcUUID, GetFromTempStorage(AddInfoAddress));	
 	EndIf;
 EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "CloseForm" And Source = SrcUUID Then
+		Close();
+	EndIf;
+EndProcedure

@@ -12,6 +12,88 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
+Scenario: _090000 preparation (Cheque bond transaction)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Partners objects (Kalipso)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Partners objects
+		When Create catalog Stores objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+		When Create catalog CashAccounts objects
+		When Create catalog BusinessUnits objects
+		When Create catalog ExpenseAndRevenueTypes objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects (pcs)
+		When Create catalog Agreements objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create information register PricesByItemKeys records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	* Create Sales invoice for DFC
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I select from "Partner" drop-down list by "dfc" string
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Partner term DFC' |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '37/18SD'  |
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "15,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		// And I move to "Other" tab
+		// And I expand "Currency" group
+		// And I move to the tab named "GroupCurrency"
+		// And I expand "More" group
+		// And I input "3 000" text in "Number" field
+		// Then "1C:Enterprise" window is opened
+		// And I click "Yes" button
+		// And I input "3 000" text in "Number" field
+		And I click "Post" button
+		And I save the value of "Number" field as "$$NumberSalesInvoice090004$$"
+		And I save the window as "$$SalesInvoice090004$$"
+		And I click "Post and close" button
+
 Scenario: _090001 check for metadata ( catalog and document) availability
 	Given I open "ChequeBondTransaction" document default form
 	Given I open "ChequeBonds" catalog default form
@@ -230,112 +312,6 @@ Scenario: _090003 create an incoming and outgoing check in the Cheque bonds cata
 		And I close all client application windows
 
 
-Scenario: _090004 preparation
-	* Create a partner and legal name from whom the cheque bond was received and to whom the heque bond was issued
-		Given I open hyperlink "e1cib/list/Catalog.Partners"
-		And I click the button named "FormCreate"
-		And I input "DFC" text in the field named "Description_en"
-		And I change checkbox "Vendor"
-		And I change checkbox "Customer"
-		And I change checkbox "Shipment confirmations before sales invoice"
-		And I change checkbox "Goods receipt before purchase invoice"
-		And I click "Save" button
-		And In this window I click command interface button "Partner segments content"
-		And I click the button named "FormCreate"
-		And I click Select button of "Segment" field
-		
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Retail'      |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "Partner segments content (create) *" window closing in 20 seconds
-		And In this window I click command interface button "Company"
-		And I click the button named "FormCreate"
-		And I input "DFC" text in the field named "Description_en"
-		And I click Select button of "Country" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Turkey'      |
-		And I select current line in "List" table
-		And I select "Company" exact value from the drop-down list named "Type"
-		Then "Company (create) *" window is opened
-		And I click "Save and close" button
-		And I wait "Company (create) *" window closing in 20 seconds
-		And In this window I click command interface button "Main"
-		And I click "Save and close" button
-		And I wait "DFC (Partner)" window closing in 20 seconds
-		And I click the button named "FormCreate"
-		And I input "Big foot" text in the field named "Description_en"
-		And I change checkbox "Customer"
-		And I change checkbox "Vendor"
-		And I change checkbox "Shipment confirmations before sales invoice"
-		And I change checkbox "Goods receipt before purchase invoice"
-		And I click "Save" button
-		And In this window I click command interface button "Partner segments content"
-		And I click the button named "FormCreate"
-		And I click Select button of "Segment" field
-		
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Retail'      |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "Partner segments content (create) *" window closing in 20 seconds
-		And In this window I click command interface button "Company"
-		And I click the button named "FormCreate"
-		And I input "Big foot" text in the field named "Description_en"
-		And I click Select button of "Country" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Turkey'      |
-		And I select current line in "List" table
-		And I select "Company" exact value from the drop-down list named "Type"
-		Then "Company (create) *" window is opened
-		And I click "Save and close" button
-		And I wait "Company (create) *" window closing in 20 seconds
-		Then "Big foot (Partner)" window is opened
-		And In this window I click command interface button "Main"
-		And I click "Save and close" button
-		And I wait "Big foot (Partner)" window closing in 20 seconds
-	* Create test Sales invoice for DFC
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I click the button named "FormCreate"
-		And I select from "Partner" drop-down list by "dfc" string
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
-		And I click Select button of "Partner term" field
-		And I select current line in "List" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'       |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | '37/18SD'  |
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "15,000" text in "Q" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		// And I move to "Other" tab
-		// And I expand "Currency" group
-		// And I move to the tab named "GroupCurrency"
-		// And I expand "More" group
-		// And I input "3 000" text in "Number" field
-		// Then "1C:Enterprise" window is opened
-		// And I click "Yes" button
-		// And I input "3 000" text in "Number" field
-		And I click "Post" button
-		And I save the value of "Number" field as "$$NumberSalesInvoice090004$$"
-		And I save the window as "$$SalesInvoice090004$$"
-		And I click "Post and close" button
 
 
 Scenario: _090005 create a document Cheque bond transaction (Cheque bond from partner + Cheque bond written to another partner)
@@ -378,7 +354,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 		And I click choice button of "Partner term" attribute in "ChequeBonds" table
 		And I go to line in "List" table
 			| 'Description'           |
-			| 'Basic Partner terms, TRY' |
+			| 'Partner term DFC' |
 		And I select current line in "List" table
 		And I finish line editing in "ChequeBonds" table
 		And in the table "ChequeBonds" I click the button named "ChequeBondsAdd"
@@ -449,10 +425,10 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 		| 'Register  "Partner AR transactions"'   | ''            | ''                     | ''                     | ''                 | ''                       | ''               | ''                    | ''                         | ''                             | ''                             | ''                     |
 		| ''                                      | 'Record type' | 'Period'               | 'Resources'            | 'Dimensions'       | ''                       | ''               | ''                    | ''                         | ''                             | ''                             | 'Attributes'           |
 		| ''                                      | ''            | ''                     | 'Amount'               | 'Company'          | 'Basis document'         | 'Partner'        | 'Legal name'          | 'Partner term'             | 'Currency'                     | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                      | 'Expense'     | '*'                    | '308,22'               | 'Main Company'     | 'Sales invoice 3 000*'   | 'DFC'            | 'DFC'                 | 'Basic Partner terms, TRY' | 'USD'                          | 'Reporting currency'           | 'No'                   |
-		| ''                                      | 'Expense'     | '*'                    | '1 800'                | 'Main Company'     | 'Sales invoice 3 000*'   | 'DFC'            | 'DFC'                 | 'Basic Partner terms, TRY' | 'TRY'                          | 'en description is empty'      | 'No'                   |
-		| ''                                      | 'Expense'     | '*'                    | '1 800'                | 'Main Company'     | 'Sales invoice 3 000*'   | 'DFC'            | 'DFC'                 | 'Basic Partner terms, TRY' | 'TRY'                          | 'Local currency'               | 'No'                   |
-		| ''                                      | 'Expense'     | '*'                    | '1 800'                | 'Main Company'     | 'Sales invoice 3 000*'   | 'DFC'            | 'DFC'                 | 'Basic Partner terms, TRY' | 'TRY'                          | 'TRY'                          | 'No'                   |
+		| ''                                      | 'Expense'     | '*'                    | '308,22'               | 'Main Company'     | '$$SalesInvoice090004$$'   | 'DFC'            | 'DFC'                 | 'Partner term DFC' | 'USD'                          | 'Reporting currency'           | 'No'                   |
+		| ''                                      | 'Expense'     | '*'                    | '1 800'                | 'Main Company'     | '$$SalesInvoice090004$$'   | 'DFC'            | 'DFC'                 | 'Partner term DFC' | 'TRY'                          | 'en description is empty'      | 'No'                   |
+		| ''                                      | 'Expense'     | '*'                    | '1 800'                | 'Main Company'     | '$$SalesInvoice090004$$'   | 'DFC'            | 'DFC'                 | 'Partner term DFC' | 'TRY'                          | 'Local currency'               | 'No'                   |
+		| ''                                      | 'Expense'     | '*'                    | '1 800'                | 'Main Company'     | '$$SalesInvoice090004$$'   | 'DFC'            | 'DFC'                 | 'Partner term DFC' | 'TRY'                          | 'TRY'                          | 'No'                   |
 		| ''                                      | ''            | ''                     | ''                     | ''                 | ''                       | ''               | ''                    | ''                         | ''                             | ''                             | ''                     |
 		| 'Register  "Planing cash transactions"' | ''            | ''                     | ''                     | ''                 | ''                       | ''               | ''                    | ''                         | ''                             | ''                             | ''                     |
 		| ''                                      | 'Period'      | 'Resources'            | 'Dimensions'           | ''                 | ''                       | ''               | ''                    | ''                         | ''                             | ''                             | 'Attributes'           |
@@ -467,7 +443,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 		| ''                                      | ''            | ''                     | 'Advance to suppliers' | 'Transaction AP'   | 'Advance from customers' | 'Transaction AR' | 'Company'             | 'Partner'                  | 'Legal name'                   | 'Basis document'               | 'Currency'             |
 		| ''                                      | 'Receipt'     | '*'                    | '-200'                 | ''                 | ''                       | ''               | 'Main Company'        | 'DFC'                      | 'DFC'                          | ''                             | 'TRY'                  |
 		| ''                                      | 'Receipt'     | '*'                    | ''                     | ''                 | '200'                    | ''               | 'Main Company'        | 'DFC'                      | 'DFC'                          | ''                             | 'TRY'                  |
-		| ''                                      | 'Expense'     | '*'                    | ''                     | ''                 | ''                       | '1 800'          | 'Main Company'        | 'DFC'                      | 'DFC'                          | 'Sales invoice 3 000*'         | 'TRY'                  |
+		| ''                                      | 'Expense'     | '*'                    | ''                     | ''                 | ''                       | '1 800'          | 'Main Company'        | 'DFC'                      | 'DFC'                          | '$$SalesInvoice090004$$'         | 'TRY'                  |
 		| ''                                      | ''            | ''                     | ''                     | ''                 | ''                       | ''               | ''                    | ''                         | ''                             | ''                             | ''                     |
 		| 'Register  "Cheque bond balance"'       | ''            | ''                     | ''                     | ''                 | ''                       | ''               | ''                    | ''                         | ''                             | ''                             | ''                     |
 		| ''                                      | 'Record type' | 'Period'               | 'Resources'            | 'Dimensions'       | ''                       | ''               | ''                    | ''                         | ''                             | 'Attributes'                   | ''                     |

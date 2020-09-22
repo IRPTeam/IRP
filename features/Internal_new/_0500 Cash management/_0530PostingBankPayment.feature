@@ -15,12 +15,73 @@ Background:
 # CashBankDocFilters export scenarios
 
 
+	
+Scenario: _053000 preparation (Bank payment)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Partners objects (Kalipso)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+		When Create catalog CashAccounts objects
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	* Check or create PurchaseOrder017001
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberPurchaseOrder017001$$" |
+			When create PurchaseOrder017001
+	* Check or create PurchaseInvoice018001
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberPurchaseInvoice018001$$" |
+			When create PurchaseInvoice018001 based on PurchaseOrder017001
+	* Check or create PurchaseInvoice29604
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberPurchaseInvoice29604$$" |
+			When create a purchase invoice for the purchase of sets and dimensional grids at the tore 02
+
+
 Scenario: _053001 create Bank payment based on Purchase invoice
 	* Open list form Purchase invoice and select PI №1
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
 			| 'Number' |
-			| '$$PurchaseInvoice018001$$'      |
+			| '$$NumberPurchaseInvoice018001$$'      |
 		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
 	* Create and filling in Purchase invoice
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -54,8 +115,8 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		And I select current line in "PaymentList" table
 		And I click choice button of "Basis document" attribute in "PaymentList" table
 		And I go to line in "List" table
-		| 'Legal name'        | 'Partner'   | 'Document amount'           |
-		| 'Company Ferron BP' | 'Ferron BP' | '496 650,00' |
+			| 'Reference'        |
+			| '$$PurchaseInvoice29604$$'      |
 		And I click "Select" button
 		And in "PaymentList" table I move to the next cell
 	* Change in payment amount
@@ -65,7 +126,7 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Amount'     | 'Basis document'      |
-			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '20 000,00' | 'Purchase invoice 6*' |
+			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '20 000,00' | '$$PurchaseInvoice29604$$' |
 	And I close all client application windows
 
 

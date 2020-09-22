@@ -13,7 +13,39 @@ Background:
 
 # Cash revenue
 
-Scenario: check tax calculation in the document Cash revenue
+	
+Scenario: _085000 preparation (Cash expence and Cash revenue)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Partners objects (Kalipso)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+		When Create catalog CashAccounts objects
+		When Create catalog BusinessUnits objects
+		When Create catalog ExpenseAndRevenueTypes objects
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	
+
+
+Scenario: _085001 check tax calculation in the document Cash revenue
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I click the button named "FormCreate"
@@ -55,7 +87,7 @@ Scenario: check tax calculation in the document Cash revenue
 			| 'VAT' | '18%'      | 'TRY'      | 'Accountants office' | '18,00'  | 'Fuel'         | '18,00'         |
 		And I close all client application windows
 
-Scenario: check movements of the document Cash revenue
+Scenario: _085002 check movements of the document Cash revenue
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I click the button named "FormCreate"
@@ -181,7 +213,7 @@ Scenario: check movements of the document Cash revenue
 
 
 
-Scenario: check the unavailability of currency selection in Cash revenue when it is strongly fixed in the Account
+Scenario: _085003 check the unavailability of currency selection in Cash revenue when it is strongly fixed in the Account
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I click the button named "FormCreate"
@@ -201,7 +233,7 @@ Scenario: check the unavailability of currency selection in Cash revenue when it
 		When I Check the steps for Exception
 			|'And I click choice button of the attribute named "PaymentListCurrency" in "PaymentList" table'|
 
-Scenario: check the availability of currency selection in Cash revenue (not fixed in the Account)
+Scenario: _085004 check the availability of currency selection in Cash revenue (not fixed in the Account)
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I click the button named "FormCreate"
@@ -223,7 +255,7 @@ Scenario: check the availability of currency selection in Cash revenue (not fixe
 
 # Cash expence
 
-Scenario: check tax calculation in the document Cash expense
+Scenario: _085005 check tax calculation in the document Cash expense
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And I click the button named "FormCreate"
@@ -265,7 +297,7 @@ Scenario: check tax calculation in the document Cash expense
 			| 'VAT' | '18%'      | 'TRY'      | 'Accountants office' | '18,00'  | 'Fuel'         | '18,00'         |
 		And I close all client application windows
 
-Scenario: check movements of the document Cash expense
+Scenario: _085006 check movements of the document Cash expense
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And I click the button named "FormCreate"
@@ -389,7 +421,7 @@ Scenario: check movements of the document Cash expense
 
 
 
-Scenario: check the unavailability of currency selection in Cash expense when it is strongly fixed in the Account
+Scenario: _085007 check the unavailability of currency selection in Cash expense when it is strongly fixed in the Account
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And I click the button named "FormCreate"
@@ -410,7 +442,7 @@ Scenario: check the unavailability of currency selection in Cash expense when it
 			|'And I click choice button of the attribute named "PaymentListCurrency" in "PaymentList" table'|
 
 
-Scenario: check the availability of currency selection in Cash revenue (not fixed in the Account)
+Scenario: _085008 check the availability of currency selection in Cash revenue (not fixed in the Account)
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And I click the button named "FormCreate"

@@ -13,6 +13,40 @@ Background:
 # The currency of reports is lira
 
 
+		
+Scenario: _054000 preparation (Cash transfer order)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog Units objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Partners objects (Kalipso)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+		When Create catalog CashAccounts objects
+		When Create catalog Partners objects (Employee)
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	
+	
+	
+
+
 Scenario: _054001 create Cash transfer order (from Cash/Bank accounts to Cash/Bank accounts in the same currency)
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	And I click the button named "FormCreate"
@@ -167,7 +201,7 @@ Scenario: _054003 create Cash payment and Cash reciept based on Cash transfer or
 	* Check movement of Cash payment and Cash reciept by register Planing cash transactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
 		And "List" table contains lines
-		| 'Currency' | 'Recorder'               | 'Basis document'              | 'Account'      | 'Cash flow direction' | 'Amount'   |
+		| 'Currency' | 'Recorder'               | 'Basis document'              | 'Company'      | 'Account' | 'Cash flow direction'   |
 		| 'USD'      | '$$CashPayment054003$$'  | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1'        | 'Outgoing' |
 		| 'USD'      | '$$CashReceipt054003$$'  | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №2'        | 'Incoming' |
 		| 'USD'      | '$$CashReceipt0540031$$' | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №2'        | 'Incoming' |
@@ -211,7 +245,7 @@ Scenario: _054004 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 		And I click Select button of "Cash advance holder" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Arina Brown' |
+			| 'Daniel Smith' |
 		And I select current line in "List" table
 	* Filling Send date and Receive date
 		And I input "02.07.2019  0:00:00" text in "Send date" field
@@ -257,8 +291,8 @@ Scenario: _054005 create Cash receipt and Cash payment based on Cash transfer or
 	* Filling in the employee responsible for curremcy exchange
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| Description |
-			| Arina Brown |
+			| 'Description' |
+			| 'Daniel Smith' |
 		And I select current line in "List" table
 	And I click "Post" button
 	And I save the value of "Number" field as "$$NumberCashPayment054005$$"
@@ -281,7 +315,7 @@ Scenario: _054005 create Cash receipt and Cash payment based on Cash transfer or
 		And Delay 5
 		And "PaymentList" table contains lines
 		| 'Planning transaction basis'         | 'Partner'            | 'Amount'      | 'Amount exchange' |
-		| '$$CashTransferOrder054004$$'            | 'Arina Brown'        | '1 150,00'    | '200,00'          |
+		| '$$CashTransferOrder054004$$'            | 'Daniel Smith'        | '1 150,00'    | '200,00'          |
 	And I click "Post" button
 	And I save the value of "Number" field as "$$NumberCashReceipt054005$$"
 	And I save the window as "$$CashReceipt054005$$"
@@ -401,7 +435,7 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 		| 'USD'      | '$$BankReceipt054006$$'       | '$$CashTransferOrder054006$$' | 'Main Company' | 'Bank account, USD' | 'Incoming'            | '-500,00' |
 		And I close all client application windows
 
-Scenario: _054007 create Cash transfer order from bank account to Cash/Bank accounts (in the same currency)
+Scenario: _054007 create Cash transfer order from bank account to Cash account (in the same currency)
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	And I click the button named "FormCreate"
 	And I click Select button of "Company" field
@@ -494,7 +528,7 @@ Scenario: _054007 create Cash transfer order from bank account to Cash/Bank acco
 		| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'           | 'Cash flow direction' | 'Amount'  |
 		| 'USD'      | '$$CashTransferOrder054007$$' | '$$CashTransferOrder054007$$' | 'Main Company' | 'Bank account, USD' | 'Outgoing'            | '100,00'  |
 		| 'USD'      | '$$CashTransferOrder054007$$' | '$$CashTransferOrder054007$$' | 'Main Company' | 'Cash desk №1'      | 'Incoming'            | '100,00'  |
-		| 'USD'      | '$CashReceipt054007$$'        | '$$CashTransferOrder054007$$' | 'Main Company' | 'Cash desk №1'      | 'Incoming'            | '-100,00' |
+		| 'USD'      | '$$CashReceipt054007$$'        | '$$CashTransferOrder054007$$' | 'Main Company' | 'Cash desk №1'      | 'Incoming'            | '-100,00' |
 		| 'USD'      | '$$BankPayment054007$$'       | '$$CashTransferOrder054007$$' | 'Main Company' | 'Bank account, USD' | 'Outgoing'            | '-100,00' |
 		And I close all client application windows
 
@@ -534,7 +568,7 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 		And I click Select button of "Cash advance holder" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Arina Brown' |
+			| 'Daniel Smith' |
 		And I select current line in "List" table
 	* Filling Send date and Receive date
 		And I input "04.07.2019  0:00:00" text in "Send date" field
@@ -569,8 +603,8 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| Description |
-			| Arina Brown |
+			| 'Description' |
+			| 'Daniel Smith' |
 		And I select current line in "List" table
 		And I input "650,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
@@ -615,12 +649,12 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| Description |
-			| Arina Brown |
+			| 'Description' |
+			| 'Daniel Smith' |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
 			| 'Partner'     | 'Amount'  | 'Planning transaction basis'    |
-			| 'Arina Brown' | '500,00'  | '$$CashTransferOrder054008$$'             |
+			| 'Daniel Smith' | '500,00'  | '$$CashTransferOrder054008$$'             |
 		// * Change the document number to 8
 		// 	And I move to "Other" tab
 		// 	And I input "8" text in "Number" field
@@ -642,7 +676,7 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 		And Delay 5
 		And "PaymentList" table contains lines
 			|'Partner'      | 'Amount' | 'Planning transaction basis'    | 'Amount exchange' |
-			| 'Arina Brown' | '75,00'     |  '$$CashTransferOrder054008$$'            | '560,00'          |
+			| 'Daniel Smith' | '75,00'     |  '$$CashTransferOrder054008$$'            | '560,00'          |
 		// * Change the document number to 10
 		// 	And I move to "Other" tab
 		// 	And I input "10" text in "Number" field
@@ -694,7 +728,7 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 		And I click Select button of "Cash advance holder" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Arina Brown' |
+			| 'Daniel Smith' |
 		And I select current line in "List" table
 	* Filling Send date and Receive date
 		And I input "04.07.2019  0:00:00" text in "Send date" field
@@ -729,8 +763,8 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| Description |
-			| Arina Brown |
+			| 'Description' |
+			| 'Daniel Smith' |
 		And I select current line in "List" table
 		And I input "1315,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
@@ -753,8 +787,8 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| Description |
-			| Arina Brown |
+			| 'Description' |
+			| 'Daniel Smith' |
 		And I select current line in "List" table
 		And I activate "Amount exchange" field in "PaymentList" table
 		And I input "1300,00" text in "Amount exchange" field of "PaymentList" table
@@ -881,12 +915,12 @@ Scenario: _054013 check Cash transfer order movements by register Cash in transi
 # if currency exchange takes place, then the money is credited to the person responsible for the conversion
 	Given I open hyperlink "e1cib/list/AccumulationRegister.CashInTransit"
 	And "List" table contains lines
-		| 'Currency' |  '$$CashTransferOrder054001$$  | 'Company'      | 'From account'      | 'To account'        | 'Amount' |
-		| 'USD'      |  '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1'      | 'Cash desk №2'      | '500,00' |
-		| 'USD'      |  '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1'      | 'Cash desk №2'      | '400,00' |
-		| 'USD'      |  '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1'      | 'Cash desk №2'      | '100,00' |
-		| 'USD'      |  '$$CashTransferOrder054006$$' | 'Main Company' | 'Cash desk №1'      | 'Bank account, USD' | '500,00' |
-		| 'USD'      |  '$$CashTransferOrder054007$$' | 'Main Company' | 'Bank account, USD' | 'Cash desk №1'      | '100,00' |
+		| 'Currency' | 'Basis document'              | 'Company'      | 'From account'      | 'To account'        | 'Amount' |
+		| 'USD'      | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1'      | 'Cash desk №2'      | '500,00' |
+		| 'USD'      | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1'      | 'Cash desk №2'      | '400,00' |
+		| 'USD'      | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1'      | 'Cash desk №2'      | '100,00' |
+		| 'USD'      | '$$CashTransferOrder054006$$' | 'Main Company' | 'Cash desk №1'      | 'Bank account, USD' | '500,00' |
+		| 'USD'      | '$$CashTransferOrder054007$$' | 'Main Company' | 'Bank account, USD' | 'Cash desk №1'      | '100,00' |
 	And "List" table does not contain lines
 		|  'Basis document'   |
 		|  '$$CashTransferOrder054004$$' |
@@ -923,13 +957,15 @@ Scenario: _054014 check message output in case money is transferred from Cash/Ba
 				| 'USD'  | 'American dollar' |
 			And I select current line in "List" table
 			And I input "200,00" text in "Receive amount" field
-		* Change the document number to 101
-			And I input "101" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "101" text in "Number" field
+		// * Change the document number to 101
+		// 	And I input "101" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "101" text in "Number" field
 		* Check the message output and that the document was not created
-			And Delay 5
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberCashTransferOrder0540141$$"
+			And I click "Post and close" button
 			And I click "Post and close" button
 			And Delay 5
 			Then I wait that in user messages the "Currency exchange is available only for the same-type accounts (cash accounts or bank accounts)." substring will appear in 30 seconds
@@ -937,7 +973,7 @@ Scenario: _054014 check message output in case money is transferred from Cash/Ba
 			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 			And "List" table does not contain lines
 			| 'Number'   | 'Sender'                 | 'Receiver'          |
-			| '101'      | 'Bank account, TRY'      | 'Cash desk №2'      |
+			| '$$NumberCashTransferOrder0540141$$'      | 'Bank account, TRY'      | 'Cash desk №2'      |
 	* Check when moving money from Cash/Bank accounts to bank account in different currencies
 		* Open a creation form
 			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -965,13 +1001,14 @@ Scenario: _054014 check message output in case money is transferred from Cash/Ba
 				| Bank account, TRY |
 			And I select current line in "List" table
 			And I input "1150,00" text in "Receive amount" field
-		* Change the document number to 102
-			And I input "102" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "102" text in "Number" field
+		// * Change the document number to 102
+		// 	And I input "102" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "102" text in "Number" field
 		* Check the message output and that the document was not created
-			And Delay 5
+			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberCashTransferOrder0540142$$"
 			And I click "Post and close" button
 			And Delay 5
 			Then I wait that in user messages the "Currency exchange is available only for the same-type accounts (cash accounts or bank accounts)." substring will appear in 30 seconds
@@ -979,7 +1016,7 @@ Scenario: _054014 check message output in case money is transferred from Cash/Ba
 			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 			And "List" table does not contain lines
 			| 'Number'   | 'Sender'            | 'Receiver'          |
-			| '102'      | 'Cash desk №2'      | 'Bank account, TRY' |
+			| '$$NumberCashTransferOrder0540142$$'      | 'Cash desk №2'      | 'Bank account, TRY' |
 
 
 Scenario: _054015 check message output in case the user tries to create a Bank payment by Cash transfer order for which he does not need to create it

@@ -15,6 +15,72 @@ Background:
 # The currency of reports is lira
 # CashBankDocFilters export scenarios
 
+		
+Scenario: _050000 preparation (Cash reciept)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Partners objects (Kalipso)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+		When Create catalog CashAccounts objects
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	* Check or create SalesOrder023001
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesOrder023001$$" |
+			When create SalesOrder023001
+	* Check or create SalesInvoice024001
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesInvoice024001$$" |
+			When create SalesInvoice024001
+	* Check or create SalesOrder023005
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesOrder023005$$" |
+			When create SalesOrder023005
+	* Check or create SalesInvoice024008
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesInvoice024008$$" |
+			When create SalesInvoice024008	
+	
 
 Scenario: _050001 create Cash reciept based on Sales invoice
 	* Open list form Sales invoice and select SI №1
@@ -307,7 +373,7 @@ Scenario: _050002 check Cash receipt movements with transaction type Payment fro
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I go to line in "List" table
 			| 'Number' |
-			| '$$CashReceipt0500011$$'      |
+			| '$$NumberCashReceipt0500011$$'      |
 	* Check movements Cash receipt 1
 		And I click "Registrations report" button
 		Then "ResultTable" spreadsheet document is equal by template
@@ -343,7 +409,7 @@ Scenario: _050002 check Cash receipt movements with transaction type Payment fro
 			Given I open hyperlink "e1cib/list/Document.CashReceipt"
 			And I go to line in "List" table
 				| 'Number' |
-				| '$$CashReceipt0500011$$'      |
+				| '$$NumberCashReceipt0500011$$'      |
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		* Check that there is no movement on the registers
 			Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerArTransactions"
@@ -364,7 +430,7 @@ Scenario: _050002 check Cash receipt movements with transaction type Payment fro
 			Given I open hyperlink "e1cib/list/Document.CashReceipt"
 			And I go to line in "List" table
 				| 'Number' |
-				| '$$CashReceipt0500011$$'      |
+				| '$$NumberCashReceipt0500011$$'      |
 			And in the table "List" I click the button named "ListContextMenuPost"
 		* Check movements
 			And I click "Registrations report" button
@@ -441,7 +507,6 @@ Scenario: _050008 check partner filter in tabular part in document Cash reciept
 
 Scenario: _050011 check currency selection in Cash reciept document in case the currency is specified in the account
 # the choice is not available
-	When create a temporary cash desk Cash account No. 4 with a strictly fixed currency (lira)
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	And I click the button named "FormCreate"
 	When check the choice of currency in the cash payment document if the currency is indicated in the account
@@ -476,6 +541,7 @@ Scenario: _050013 check the display of details on the form Cash reciept with the
 
 
 Scenario: _050014 check the display of details on the form Cash reciept with the type of operation Currency exchange
+	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	And I click the button named "FormCreate"
 	And I select "Currency exchange" exact value from "Transaction type" drop-down list
@@ -499,6 +565,7 @@ Scenario: _050014 check the display of details on the form Cash reciept with the
 
 
 Scenario: _050015 check the display of details on the form Cash reciept with the type of operation Cash transfer
+	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	And I click the button named "FormCreate"
 	And I select "Cash transfer order" exact value from "Transaction type" drop-down list

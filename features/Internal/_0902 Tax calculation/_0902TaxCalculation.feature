@@ -587,7 +587,7 @@ Scenario: _090204 check tax transfer in Sales invoice when it is created based o
 		# 	| 'SalesTax' | ''         | ''         | ''          | ''          | '17,82'  | '17,82'         |
 		# 	| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '3,96'   | '3,96'          |
 		# 	| 'SalesTax' | '1%'       | 'Boots'    | '37/18SD'   | ''          | '13,86'  | '13,86'         |
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "292,40"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "293,38"
 		And I click "Post and close" button
 		And I close all client application windows
 

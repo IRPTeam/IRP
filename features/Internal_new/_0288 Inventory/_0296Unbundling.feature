@@ -13,6 +13,39 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
+Scenario: __029600 preparation (Unbundling)
+	* Load info
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog PriceTypes objects
+		When Create catalog Currencies objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
 
 Scenario: _029601 create Unbundling on a product with a specification (specification created in advance, Store doesn't use Shipment confirmation and Goods receipt)
 # the fill button on the specification. The specification specifies all additional properties
@@ -244,13 +277,13 @@ Scenario: _029610 create Unbundling (+check movements) for bundl which was creat
 		And I select current line in "List" table
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
-			| Description |
-			| Bound Dress+Shirt       |
+			| 'Description' |
+			| 'Skittles + Chewing gum'      |
 		And I select current line in "List" table
 		And I click Select button of "Item key bundle" field
 		And I go to line in "List" table
-			| Item              | Item key  |
-			| Bound Dress+Shirt | Bound Dress+Shirt/Dress+Shirt |
+			| 'Item'                   | 'Item key'                                    |
+			| 'Skittles + Chewing gum' | 'Skittles + Chewing gum/Skittles+Chewing gum' |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Unit"
 		And I go to line in "List" table
@@ -271,8 +304,8 @@ Scenario: _029610 create Unbundling (+check movements) for bundl which was creat
 		And I click "Post and close" button
 		* Check the creation of Unbundling
 			And "List" table contains lines
-				| Item key bundle | Company      |
-				| Bound Dress+Shirt/Dress+Shirt       | Main Company |
+				| 'Item key bundle'                             | 'Company'      |
+				| 'Skittles + Chewing gum/Skittles+Chewing gum' | 'Main Company' |
 		And I close all client application windows
 
 Scenario: _029611 create Unbundling (+check movements) for bundl (there is a Bundling document) for which the specification was changed
@@ -280,25 +313,11 @@ Scenario: _029611 create Unbundling (+check movements) for bundl (there is a Bun
 	* Change specification Dress+Trousers
 		Given I open hyperlink "e1cib/list/Catalog.Specifications"
 		And I go to line in "List" table
-			| Description | Type |
-			| Trousers    | Set  |
-		And I go to line in "List" table
 			| Description    | Type   |
-			| Dress+Trousers | Bundle |
-		And I select current line in "List" table
-		And in the table "FormTable*" I click the button named "FormTable*"
-		And I click choice button of "Size" attribute in "FormTable*" table
-		And I go to line in "List" table
-			| Description |
-			| M           |
-		And I select current line in "List" table
-		And I click choice button of "Color" attribute in "FormTable*" table
-		And I go to line in "List" table
-			| Description |
-			| White       |
+			| Skittles+Chewing gum | Bundle |
 		And I select current line in "List" table
 		And I activate field named "Quantity*" in "FormTable*" table
-		And I input "2,000" text in "Quantity" field of "FormTable*" table
+		And I input "4,000" text in "Quantity" field of "FormTable*" table
 		And I finish line editing in "FormTable*" table
 		And I click "Save and close" button
 		And Delay 5
@@ -317,13 +336,13 @@ Scenario: _029611 create Unbundling (+check movements) for bundl (there is a Bun
 		And I select current line in "List" table
 		And I click Select button of "Item bundle" field
 		And I go to line in "List" table
-			| Description |
-			| Bound Dress+Trousers       |
+			| 'Description' |
+			| 'Skittles + Chewing gum'       |
 		And I select current line in "List" table
 		And I click Select button of "Item key bundle" field
 		And I go to line in "List" table
-			| Item              | Item key  |
-			| Bound Dress+Trousers | Bound Dress+Trousers/Dress+Trousers |
+			| 'Item'              | 'Item key'  |
+			| 'Skittles + Chewing gum' | 'Skittles + Chewing gum/Skittles+Chewing gum' |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Unit"
 		And I go to line in "List" table
@@ -339,17 +358,17 @@ Scenario: _029611 create Unbundling (+check movements) for bundl (there is a Bun
 		And I move to "Item list" tab
 		And in the table "ItemList" I click "By bundle content" button
 		And "ItemList" table contains lines
-			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' |
-			| 'Dress'    | '2,000'    | 'XS/Blue'   | 'pcs' |
-			| 'Trousers' | '2,000'    | '36/Yellow' | 'pcs' |
+			| 'Item'        | 'Quantity' | 'Item key'   | 'Unit' |
+			| 'Chewing gum' | '2,000'    | 'Mint/Mango' | 'pcs'  |
+			| 'Skittles'    | '2,000'    | 'Fruit'      | 'pcs'  |
 		And I click "Post" button
 		And I save the value of "Number" field as "$$NumberUnbundling0029611$$"
 		And I save the window as "$$Unbundling0029611$$"
 		And I click "Post and close" button
 		* Check the creation of Unbundling
 			And "List" table contains lines
-				| Item key bundle | Company      |
-				| Bound Dress+Trousers/Dress+Trousers       | Main Company |
+				| 'Item key bundle' | 'Company'      |
+				| 'Skittles + Chewing gum/Skittles+Chewing gum'       | 'Main Company' |
 		And I close all client application windows
 
 Scenario: _029612 create Unbundling (Store use Goods receipt and doesn't use Shipment confirmation)
@@ -416,7 +435,7 @@ Scenario: _029612 create Unbundling (Store use Goods receipt and doesn't use Shi
 			| ''                                      | 'Expense'     | '*'      | '2'         | 'Store 07'   | 'Bound Dress+Shirt/Dress+Shirt' | ''         | ''        |
 		And I close all client application windows
 	
-	Scenario: _029613 create Unbundling (Store use Shipment confirmation and does not use Goods receipt)
+Scenario: _029613 create Unbundling (Store use Shipment confirmation and does not use Goods receipt)
 	* Opening the creation form
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"

@@ -41,7 +41,7 @@ Procedure TestConnection(Command)
 		IntegrationServer.SaveFileToFileStorage(TestRow[0].Value, "Test.png", PictureLib.DataHistory.GetBinaryData());	
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_005);
 	ElsIf Object.IntegrationType = PredefinedValue("Enum.IntegrationType.GoogleDrive") Then 
-		CurrentActiveToken = GoogleDriveClientServer.CurrentActiveToken(Object.Ref);
+		CurrentActiveToken = GoogleDriveServer.CurrentActiveToken(Object.Ref);
 		If ValueIsFilled(CurrentActiveToken) Then
 			CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_005);
 		EndIf;	

@@ -111,7 +111,12 @@ Procedure PartnerOnChange(Object, Form, Module, Item = Undefined, Settings = Und
 	Else
 		PartnerInfo.Insert("ManagerSegment"	, ServerData.ManagerSegmentByPartner);
 		PartnerInfo.Insert("LegalName"		, ServerData.LegalNameByPartner);
-		PartnerInfo.Insert("Agreement"      , ServerData.AgreementByPartner);
+		
+		If PartnerSettings.AgreementType = ServerData.AgreementTypes_Customer Then
+			PartnerInfo.Insert("Agreement" , ServerData.AgreementByPartner_Customer);
+		ElsIf PartnerSettings.AgreementType = ServerData.AgreementTypes_Vendor Then
+			PartnerInfo.Insert("Agreement" , ServerData.AgreementByPartner_Vendor);
+		EndIf;
 		
 		AgreementInfo = ServerData.AgreementInfo;
 	EndIf;	
@@ -126,7 +131,6 @@ Procedure PartnerOnChange(Object, Form, Module, Item = Undefined, Settings = Und
 		Return;
 	EndIf;
 	
-	// GroupTitle
 	#If Not MobileClient Then
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	#EndIf
@@ -291,7 +295,6 @@ Procedure AgreementOnChange(Object, Form, Module, Item = Undefined, Settings  = 
 		Return;
 	EndIf;
 	
-	// GroupTitle
 	#If Not MobileClient Then
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	#EndIf
@@ -393,8 +396,7 @@ EndProcedure
 
 #Region ItemLegalName
 
-Procedure LegalNameOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined) Export
-	// GroupTitle		 
+Procedure LegalNameOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined) Export	 
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
@@ -478,7 +480,6 @@ Procedure CompanyOnChange(Object, Form, Module, Item = Undefined, Settings = Und
 		Return;
 	EndIf;
 	
-	// GroupTitle
 	#If Not MobileClient Then
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	#EndIf
@@ -822,7 +823,6 @@ Procedure PriceIncludeTaxOnChange(Object, Form, Module, Item = Undefined, Settin
 	EndIf;
 	PriceIncludeTaxSettings = Module.StoreSettings(Object, Form, AddInfo);
 	
-	// GroupTitle
 	#If Not MobileClient Then
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	#EndIf
@@ -930,8 +930,14 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 	Else
 		PartnerInfo.Insert("ManagerSegment"	, ServerData.ManagerSegmentByPartner);
 		PartnerInfo.Insert("LegalName"		, ServerData.LegalNameByPartner);
-		PartnerInfo.Insert("Agreement"      , ServerData.AgreementByPartner);		
-		AgreementInfo = ServerData.AgreementInfoByPartner;
+		
+		If DateSettings.AgreementType = ServerData.AgreementTypes_Customer Then
+			PartnerInfo.Insert("Agreement" , ServerData.AgreementByPartner_Customer);
+			AgreementInfo = ServerData.AgreementInfoByPartner_Customer;
+		ElsIf DateSettings.AgreementType = ServerData.AgreementTypes_Vendor Then
+			PartnerInfo.Insert("Agreement" , ServerData.AgreementByPartner_Vendor);
+			AgreementInfo = ServerData.AgreementInfoByPartner_Vendor;
+		EndIf;
 	EndIf;
 	
 	Settings.Insert("CurrentValuesStructure"	, CurrentValuesStructure);
@@ -940,7 +946,6 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 	
 	DoTitleActions(Object, Form, Settings, DateSettings.Actions);
 	
-	// GroupTitle
 	#If Not MobileClient Then
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	#EndIf

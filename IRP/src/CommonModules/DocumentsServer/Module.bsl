@@ -522,13 +522,21 @@ Function PrepareServerData(Parameters) Export
 		AgreementParameters.Insert("Partner"		, Parameters.GetAgreementByPartner.Partner);
 		AgreementParameters.Insert("Agreement"		, Parameters.GetAgreementByPartner.Agreement);
 		AgreementParameters.Insert("CurrentDate"	, Parameters.GetAgreementByPartner.Date);
-		AgreementParameters.Insert("AgreementType"	, Enums.AgreementTypes.Vendor);
+		AgreementParameters.Insert("AgreementType"	, Enums.AgreementTypes.EmptyRef());
 		
-		Result.Insert("AgreementByPartner" , DocumentsServer.GetAgreementByPartner(AgreementParameters));
+		AgreementParameters.AgreementType = Enums.AgreementTypes.Vendor;
+		Result.Insert("AgreementByPartner_Vendor" , DocumentsServer.GetAgreementByPartner(AgreementParameters));
 		
 		If Parameters.GetAgreementByPartner.Property("WithAgreementInfo") Then
-			Result.Insert("AgreementInfoByPartner", CatAgreementsServer.GetAgreementInfo(Result.AgreementByPartner));
-		EndIf;		
+			Result.Insert("AgreementInfoByPartner_Vendor", CatAgreementsServer.GetAgreementInfo(Result.AgreementByPartner));
+		EndIf;	
+			
+		AgreementParameters.AgreementType = Enums.AgreementTypes.Customer;
+		Result.Insert("AgreementByPartner_Customer" , DocumentsServer.GetAgreementByPartner(AgreementParameters));
+		
+		If Parameters.GetAgreementByPartner.Property("WithAgreementInfo") Then
+			Result.Insert("AgreementInfoByPartner_Customer", CatAgreementsServer.GetAgreementInfo(Result.AgreementByPartner));
+		EndIf;	
 	EndIf;
 	
 	If Parameters.Property("GetAgreementInfo") Then

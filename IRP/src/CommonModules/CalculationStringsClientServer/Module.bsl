@@ -691,9 +691,9 @@ Function GetTotalAmountByDependedTable(Object, DependedTableName, MainTableKey)
 			Continue;
 		EndIf;
 		If Row.Key = MainTableKey Then
-			Amount = Amount + ?(CommonFunctionsClientServer.ObjectHasProperty(Row, "ManualAmount"), 
+			Amount = Round(Amount + ?(CommonFunctionsClientServer.ObjectHasProperty(Row, "ManualAmount"), 
 								Row.ManualAmount, 
-								Row.Amount);
+								Row.Amount),2);
 		EndIf;
 	EndDo;
 	Return Amount;

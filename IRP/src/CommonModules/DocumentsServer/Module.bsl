@@ -528,14 +528,14 @@ Function PrepareServerData(Parameters) Export
 		Result.Insert("AgreementByPartner_Vendor" , DocumentsServer.GetAgreementByPartner(AgreementParameters));
 		
 		If Parameters.GetAgreementByPartner.Property("WithAgreementInfo") Then
-			Result.Insert("AgreementInfoByPartner_Vendor", CatAgreementsServer.GetAgreementInfo(Result.AgreementByPartner));
+			Result.Insert("AgreementInfoByPartner_Vendor", CatAgreementsServer.GetAgreementInfo(Result.AgreementByPartner_Vendor));
 		EndIf;	
 			
 		AgreementParameters.AgreementType = Enums.AgreementTypes.Customer;
 		Result.Insert("AgreementByPartner_Customer" , DocumentsServer.GetAgreementByPartner(AgreementParameters));
 		
 		If Parameters.GetAgreementByPartner.Property("WithAgreementInfo") Then
-			Result.Insert("AgreementInfoByPartner_Customer", CatAgreementsServer.GetAgreementInfo(Result.AgreementByPartner));
+			Result.Insert("AgreementInfoByPartner_Customer", CatAgreementsServer.GetAgreementInfo(Result.AgreementByPartner_Customer));
 		EndIf;	
 	EndIf;
 	

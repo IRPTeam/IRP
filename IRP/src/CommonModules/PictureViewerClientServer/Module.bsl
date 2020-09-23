@@ -34,3 +34,7 @@ Function FilterForPicturesDialog() Export
 	Return "(" + Data + ")|" + Data;
 	
 EndFunction
+
+Function PreparePictureURL(IntegrationSettings, URI, UUID = "", AddInfo = Undefined) Export
+	Return URI; 
+EndFunction

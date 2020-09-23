@@ -71,6 +71,10 @@
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
   </handlers>
+  <handlers>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
+  </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -134,6 +138,24 @@
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>AddInfoAddress</name>
+    <title>
+      <key>en</key>
+      <value>Add info address</value>
+    </title>
+    <id>4</id>
+    <valueType>
+      <types>String</types>
+      <stringQualifiers/>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <parameters>
     <name>HTML</name>
     <valueType>
@@ -157,6 +179,12 @@
       <types>UUID</types>
     </valueType>
     <keyParameter>true</keyParameter>
+  </parameters>
+  <parameters>
+    <name>AddInfo</name>
+    <valueType>
+      <types>Arbitrary</types>
+    </valueType>
   </parameters>
   <commandInterface>
     <navigationPanel/>

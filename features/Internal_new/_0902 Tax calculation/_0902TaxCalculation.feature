@@ -13,59 +13,49 @@ Background:
 
 
 
+	
 Scenario: _0902000 preparation
-	* Create item type
-		* Open a creation form ItemTypes
-			Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
-			And I click the button named "FormCreate"
-		* Create item type: Bags
-			And I click Open button of the field named "Description_en"
-			And I input "Bags" text in the field named "Description_en"
-			And I input "Bags TR" text in the field named "Description_tr"
-			And I click "Ok" button
-			And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
-			And I click choice button of "Attribute" attribute in "AvailableAttributes" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Producer'    |
-			And I select current line in "List" table
-			And I finish line editing in "AvailableAttributes" table
-			And I click "Save and close" button
-			And I close all client application windows
-	* Create Item Bag
-		* Open a creation form Items
-			Given I open hyperlink "e1cib/list/Catalog.Items"
-			And I click the button named "FormCreate"
-		* Create Item Bag
-			And I click Open button of the field named "Description_en"
-			And I input "Bag" text in the field named "Description_en"
-			And I input "Bag TR" text in the field named "Description_tr"
-			And I click "Ok" button
-			And I click Choice button of the field named "ItemType"
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Bags'       |
-			And I select current line in "List" table
-			And I click Choice button of the field named "Unit"
-			And I select current line in "List" table
-			And I click "Save" button
-	* Create item key for Bag
-		And In this window I click command interface button "Item keys"
-		And I click the button named "FormCreate"
-		And I click Select button of "Producer" field
-		And I go to line in "List" table
-			| 'Additional attribute' | 'Description' |
-			| 'Producer'      | 'ODS'         |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I click the button named "FormCreate"
-		And I click Select button of "Producer" field
-		And I go to line in "List" table
-			| 'Additional attribute' | 'Description' |
-			| 'Producer'      | 'PZU'         |
-		And I activate "Additional attribute" field in "List" table
-		And I select current line in "List" table
-		And I click "Save and close" button
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Partners objects (Kalipso)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+		When Create catalog ExpenseAndRevenueTypes objects
+		When Create catalog Countries objects
+		When Create catalog BusinessUnits objects 
+	* Tax settings
+		When filling in Tax settings for company
 	* Filling tax rates for Item key in the register
 		Given I open hyperlink "e1cib/list/InformationRegister.TaxSettings"
 		And I click the button named "FormCreate"
@@ -135,20 +125,85 @@ Scenario: _0902000 preparation
 	And I close all client application windows
 
 
-Scenario: _090200 activating Sales Tax calculation in Sales order and Sales invoice documents
-	Given I open hyperlink "e1cib/list/Catalog.Taxes"
-	And I go to line in "List" table
-		| 'Description' | 'Reference' |
-		| 'SalesTax'    | 'SalesTax'  |
-	And I select current line in "List" table
-	And I move to "Use documents" tab
-	And in the table "UseDocuments" I click the button named "UseDocumentsAdd"
-	And I select "Sales order" exact value from "Document name" drop-down list in "UseDocuments" table
-	And I finish line editing in "UseDocuments" table
-	And in the table "UseDocuments" I click the button named "UseDocumentsAdd"
-	And I select "Sales invoice" exact value from "Document name" drop-down list in "UseDocuments" table
-	And I finish line editing in "UseDocuments" table
-	And I click "Save and close" button
+Scenario: _090200 activating Sales Tax calculation in the Sales order and Sales invoice documents
+	* Opening a tax creation form
+		Given I open hyperlink "e1cib/list/Catalog.Taxes"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "SalesTax" |
+			And I click the button named "FormCreate"
+		* Filling in Sales Tax rate settings
+			And I input "SalesTax" text in the field named "Description_en"
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'        |
+				| 'TaxCalculateVAT_TR' |
+			And I select current line in "List" table
+			And in the table "TaxRates" I click the button named "TaxRatesAdd"
+			And I click choice button of "Tax rate" attribute in "TaxRates" table
+			And I click the button named "FormCreate"
+			Then "Tax rate (create)" window is opened
+			And I input "1%" text in "ENG" field
+			And I input "1,000000000000" text in "Rate" field
+			And I click "Save and close" button
+			And I go to line in "List" table
+				| 'Description' |
+				| '1%'          |
+			And I click the button named "FormChoose"
+			And I finish line editing in "TaxRates" table
+			And I click "Save" button
+			And I click "Settings" button
+			And I click "Ok" button
+			And I move to "Use documents" tab
+			And in the table "UseDocuments" I click the button named "UseDocumentsAdd"
+			And I select "Sales order" exact value from "Document name" drop-down list in "UseDocuments" table
+			And I finish line editing in "UseDocuments" table
+			And in the table "UseDocuments" I click the button named "UseDocumentsAdd"
+			And I select "Sales invoice" exact value from "Document name" drop-down list in "UseDocuments" table
+			And I finish line editing in "UseDocuments" table
+			And I click "Save and close" button
+	Given I open hyperlink "e1cib/list/InformationRegister.Taxes"
+	If "List" table does not contain lines Then
+		| 'Tax'      |
+		| 'SalesTax' |
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I input "01.01.2020" text in "Period" field
+		And I click Select button of "Tax" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'SalesTax'    |
+		And I select current line in "List" table
+		And I set checkbox "Use"
+		And I input "8" text in "Priority" field
+		And I click "Save and close" button
+	Given I open hyperlink "e1cib/list/InformationRegister.TaxSettings"
+	If "List" table does not contain lines Then
+				| "Description" |
+				| "SalesTax" |
+			And I click the button named "FormCreate"
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' |
+			And I select current line in "List" table
+			And I click Select button of "Tax" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'SalesTax'    |
+			And I select current line in "List" table
+			And I click Select button of "Tax rate" field
+			And I select "1%" exact value from "Tax rate" drop-down list	
+			And I click "Save and close" button
+	
+		
+
+
+
 
 Scenario: _090201 VAT and Sales Tax calculation in Sales order (Price include tax box is set)
 	* Open the Sales order creation form

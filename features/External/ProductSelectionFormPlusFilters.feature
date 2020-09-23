@@ -1490,6 +1490,7 @@ Scenario: create a test partner with one vendor partner term and one customer pa
 Scenario: check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
 	* Check the autofill partner term, legal name, company
 		And I click Select button of "Partner" field
+		And I click "List" button
 		And I go to line in "List" table
 			| Description |
 			| Partner Kalipso   |
@@ -1503,6 +1504,7 @@ Scenario: check the autocompletion of the partner term (by vendor) in the docume
 Scenario: check the autocompletion of the partner term (by customer) in the documents of sales/returns 
 	* Check the autofill partner term, legal name, company
 		And I click Select button of "Partner" field
+		And I click "List" button
 		And I go to line in "List" table
 			| Description |
 			| Partner Kalipso   |

@@ -15,15 +15,21 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
+Scenario: _090200 preparation (display of items marked for deletion)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+	
+
 Scenario: _090201 check that the items marked for deletion is not displayed in the PurchaseOrder
-	* Temporary markup for deletion Item Box
-		Given I open hyperlink "e1cib/list/Catalog.Items"
-		And I go to line in "List" table
-		| Description |
-		| Box         |
-		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 	And I click the button named "FormCreate"
 	And I click the button named "Add"

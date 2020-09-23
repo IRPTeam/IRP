@@ -338,7 +338,7 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			And I click "Post" button
 		* Check document movements using a report
 			And I click "Registrations report" button
-			Then "ResultTable" spreadsheet document is equal by template
+			And "ResultTable" spreadsheet document contains lines:
 			| '$$PurchaseInvoice029106$$'             | ''            | ''          | ''                     | ''               | ''                          | ''                          | ''                  | ''                    | ''                             | ''                             | ''                     | ''                             | ''                     |
 			| 'Document registrations records'        | ''            | ''          | ''                     | ''               | ''                          | ''                          | ''                  | ''                    | ''                             | ''                             | ''                     | ''                             | ''                     |
 			| 'Register  "Inventory balance"'         | ''            | ''          | ''                     | ''               | ''                          | ''                          | ''                  | ''                    | ''                             | ''                             | ''                     | ''                             | ''                     |
@@ -484,7 +484,7 @@ Scenario: _029107 create a Sales order for service and product (Store doesn't us
 		And I click "Post" button
 	* Check movements
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$SalesOrder029107$$'                       | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Order reservation"'              | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
@@ -598,7 +598,7 @@ Scenario: _029108 create a Sales order for service and product (Store use Shipme
 		And I click "Post" button
 	* Check movements
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$SalesOrder029108$$'                           | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Register  "Order reservation"'              | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
@@ -714,7 +714,7 @@ Scenario: _029109 create a Sales order for service and product (Store doesn't us
 		And I click "Post" button
 	* Check movements
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$SalesOrder029109$$'                       | ''            | ''          | ''          | ''                     | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''          | ''                     | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Inventory balance"'              | ''            | ''          | ''          | ''                     | ''                      | ''         | ''         | ''        | ''                             | ''                     |
@@ -843,7 +843,7 @@ Scenario: _029110 create a Sales order for service and product (Store use Shipme
 		And I click "Post" button
 	* Check movements
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$SalesOrder029110$$'                       | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Goods in transit outgoing"'      | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |

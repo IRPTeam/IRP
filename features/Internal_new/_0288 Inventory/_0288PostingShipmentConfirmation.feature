@@ -247,3 +247,108 @@ Scenario: _028810 create document Shipment confirmation  based on Inventory tran
 
 
 
+Scenario: _028811 check the output of the document movement report for Shipment Confirmation
+	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+	* Check the report output for the selected document from the list
+		And I go to line in "List" table
+		| 'Number' |
+		| '$$NumberShipmentConfirmation0028801$$'      |
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+	* Check the report generation
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$ShipmentConfirmation0028801$$'                  | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| 'Document registrations records'             | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| 'Register  "Goods in transit outgoing"'      | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| ''                                           | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                 | ''          | ''          | ''        | ''              |
+		| ''                                           | ''            | ''       | 'Quantity'  | 'Store'        | 'Shipment basis'   | 'Item key'  | 'Row key'   | ''        | ''              |
+		| ''                                           | 'Expense'     | '*'      | '10'        | 'Store 02'     | '$$SalesInvoice024008$$' | 'L/Green'   | '*'         | ''        | ''              |
+		| ''                                           | 'Expense'     | '*'      | '14'        | 'Store 02'     | '$$SalesInvoice024008$$' | '36/Yellow' | '*'         | ''        | ''              |
+		| ''                                           | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| 'Register  "Stock balance"'                  | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| ''                                           | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                 | ''          | ''          | ''        | ''              |
+		| ''                                           | ''            | ''       | 'Quantity'  | 'Store'        | 'Item key'         | ''          | ''          | ''        | ''              |
+		| ''                                           | 'Expense'     | '*'      | '10'        | 'Store 02'     | 'L/Green'          | ''          | ''          | ''        | ''              |
+		| ''                                           | 'Expense'     | '*'      | '14'        | 'Store 02'     | '36/Yellow'        | ''          | ''          | ''        | ''              |
+		| ''                                           | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| 'Register  "Shipment confirmation schedule"' | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| ''                                           | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                 | ''          | ''          | ''        | 'Attributes'    |
+		| ''                                           | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'            | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
+		| ''                                           | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$SalesInvoice024008$$' | 'Store 02'  | 'L/Green'   | '*'       | '*'             |
+		| ''                                           | 'Expense'     | '*'      | '14'        | 'Main Company' | '$$SalesInvoice024008$$' | 'Store 02'  | '36/Yellow' | '*'       | '*'             |
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+	* Check the report output from the selected document
+		And I go to line in "List" table
+		| 'Number' |
+		| '$$NumberShipmentConfirmation0028801$$'      |
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+	* Check the report generation
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$ShipmentConfirmation0028801$$'                  | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| 'Document registrations records'             | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| 'Register  "Goods in transit outgoing"'      | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| ''                                           | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                 | ''          | ''          | ''        | ''              |
+		| ''                                           | ''            | ''       | 'Quantity'  | 'Store'        | 'Shipment basis'   | 'Item key'  | 'Row key'   | ''        | ''              |
+		| ''                                           | 'Expense'     | '*'      | '10'        | 'Store 02'     | '$$SalesInvoice024008$$' | 'L/Green'   | '*'         | ''        | ''              |
+		| ''                                           | 'Expense'     | '*'      | '14'        | 'Store 02'     | '$$SalesInvoice024008$$' | '36/Yellow' | '*'         | ''        | ''              |
+		| ''                                           | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| 'Register  "Stock balance"'                  | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| ''                                           | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                 | ''          | ''          | ''        | ''              |
+		| ''                                           | ''            | ''       | 'Quantity'  | 'Store'        | 'Item key'         | ''          | ''          | ''        | ''              |
+		| ''                                           | 'Expense'     | '*'      | '10'        | 'Store 02'     | 'L/Green'          | ''          | ''          | ''        | ''              |
+		| ''                                           | 'Expense'     | '*'      | '14'        | 'Store 02'     | '36/Yellow'        | ''          | ''          | ''        | ''              |
+		| ''                                           | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| 'Register  "Shipment confirmation schedule"' | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| ''                                           | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                 | ''          | ''          | ''        | 'Attributes'    |
+		| ''                                           | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'            | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
+		| ''                                           | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$SalesInvoice024008$$' | 'Store 02'  | 'L/Green'   | '*'       | '*'             |
+		| ''                                           | 'Expense'     | '*'      | '14'        | 'Main Company' | '$$SalesInvoice024008$$' | 'Store 02'  | '36/Yellow' | '*'       | '*'             |
+	And I close all client application windows
+
+
+Scenario: _02881101 clear movements Shipment confirmation and check that there is no movements on the registers 
+	* Open list form Shipment confirmation
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+	* Check the report generation
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberShipmentConfirmation0028801$$'      |
+	* Clear movements document and check that there is no movement on the registers
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "Goods in transit outgoing"'      |
+			| 'Register  "Stock balance"'                  |
+			| 'Register  "Shipment confirmation schedule"' |
+		And I close all client application windows
+	* Posting the document and check movements
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberShipmentConfirmation0028801$$'      |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$ShipmentConfirmation0028801$$'                  | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| 'Document registrations records'             | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| 'Register  "Goods in transit outgoing"'      | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| ''                                           | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                 | ''          | ''          | ''        | ''              |
+		| ''                                           | ''            | ''       | 'Quantity'  | 'Store'        | 'Shipment basis'   | 'Item key'  | 'Row key'   | ''        | ''              |
+		| ''                                           | 'Expense'     | '*'      | '10'        | 'Store 02'     | '$$SalesInvoice024008$$' | 'L/Green'   | '*'         | ''        | ''              |
+		| ''                                           | 'Expense'     | '*'      | '14'        | 'Store 02'     | '$$SalesInvoice024008$$' | '36/Yellow' | '*'         | ''        | ''              |
+		| ''                                           | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| 'Register  "Stock balance"'                  | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| ''                                           | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                 | ''          | ''          | ''        | ''              |
+		| ''                                           | ''            | ''       | 'Quantity'  | 'Store'        | 'Item key'         | ''          | ''          | ''        | ''              |
+		| ''                                           | 'Expense'     | '*'      | '10'        | 'Store 02'     | 'L/Green'          | ''          | ''          | ''        | ''              |
+		| ''                                           | 'Expense'     | '*'      | '14'        | 'Store 02'     | '36/Yellow'        | ''          | ''          | ''        | ''              |
+		| ''                                           | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| 'Register  "Shipment confirmation schedule"' | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
+		| ''                                           | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                 | ''          | ''          | ''        | 'Attributes'    |
+		| ''                                           | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'            | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
+		| ''                                           | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$SalesInvoice024008$$' | 'Store 02'  | 'L/Green'   | '*'       | '*'             |
+		| ''                                           | 'Expense'     | '*'      | '14'        | 'Main Company' | '$$SalesInvoice024008$$' | 'Store 02'  | '36/Yellow' | '*'       | '*'             |
+		And I close all client application windows
+
+

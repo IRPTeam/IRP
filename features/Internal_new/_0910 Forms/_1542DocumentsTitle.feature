@@ -10,6 +10,62 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
+
+Scenario: _0154200 preparation
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog Countries objects
+		When Create catalog Companies objects (second company Ferron BP)
+		When Create catalog Companies objects (own Second company)
+		When Create catalog ExpenseAndRevenueTypes objects
+		When Create catalog BusinessUnits objects
+		When Create catalog Partners objects
+		When Create catalog Partners objects (Kalipso)
+		When Create catalog InterfaceGroups objects (Purchase and production,  Main information)
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Partners objects (Kalipso)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+		When Create catalog CashAccounts objects
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company	
+	* Check or create create SalesInvoice024016 (Shipment confirmation does not used)
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		If "List" table does not contain lines Then
+			| "Number" |
+			| "$$NumberSalesInvoice024016$$" |
+			When create SalesInvoice024016 (Shipment confirmation does not used)
+
 Scenario: check the display of the header of the collapsible group in Purchase Order
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 	When check the display of the header of the collapsible group in sales, purchase and return documents
@@ -245,7 +301,7 @@ Scenario: _053012 check the display of the header of the collapsible group in Ba
 Scenario: _056006 check the display of the header of the collapsible group in Invoice Match
 	Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
 	When check the display of the header of the collapsible group in invoice match
-	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Operation type: With customer   Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP   Partner term: Basic Partner terms, TRY" text
+	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Operation type: With customer   Company: Main Company   Partner: Kalipso   Legal name: Company Kalipso   Partner term: Basic Partner terms, TRY   " text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
         |'And I click Select button of  "Company" field'|

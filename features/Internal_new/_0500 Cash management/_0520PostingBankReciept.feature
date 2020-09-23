@@ -375,7 +375,7 @@ Scenario: _050002  check Bank receipt movements with transaction type Payment fr
 			| '$$NumberBankReceipt0520011$$'      |
 	* Check movements Bank receipt 1
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$BankReceipt0520011$$'               | ''            | ''       | ''                     | ''               | ''                       | ''               | ''                             | ''                         | ''                  | ''                             | ''                     |
 		| 'Document registrations records'       | ''            | ''       | ''                     | ''               | ''                       | ''               | ''                             | ''                         | ''                  | ''                             | ''                     |
 		| 'Register  "Partner AR transactions"'  | ''            | ''       | ''                     | ''               | ''                       | ''               | ''                             | ''                         | ''                  | ''                             | ''                     |
@@ -433,7 +433,7 @@ Scenario: _050002  check Bank receipt movements with transaction type Payment fr
 			And in the table "List" I click the button named "ListContextMenuPost"
 		* Check movements
 			And I click "Registrations report" button
-			Then "ResultTable" spreadsheet document is equal by template
+			And "ResultTable" spreadsheet document contains lines:
 			| '$$BankReceipt0520011$$'               | ''            | ''       | ''                     | ''               | ''                       | ''               | ''                             | ''                         | ''                  | ''                             | ''                     |
 			| 'Document registrations records'       | ''            | ''       | ''                     | ''               | ''                       | ''               | ''                             | ''                         | ''                  | ''                             | ''                     |
 			| 'Register  "Partner AR transactions"'  | ''            | ''       | ''                     | ''               | ''                       | ''               | ''                             | ''                         | ''                  | ''                             | ''                     |

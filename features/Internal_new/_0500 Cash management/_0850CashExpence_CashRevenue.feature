@@ -130,7 +130,7 @@ Scenario: _085002 check movements of the document Cash revenue
 		And I save the window as "$$CashRevenue1$$"
 	* Check movements
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$CashRevenue1$$'               | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
 		| 'Document registrations records' | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
 		| 'Register  "Taxes turnovers"'    | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
@@ -184,7 +184,7 @@ Scenario: _085002 check movements of the document Cash revenue
 			And in the table "List" I click the button named "ListContextMenuPost"
 		* Check movements
 			And I click "Registrations report" button
-			Then "ResultTable" spreadsheet document is equal by template
+			And "ResultTable" spreadsheet document contains lines:
 			| '$$CashRevenue1$$'               | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
 			| 'Document registrations records' | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
 			| 'Register  "Taxes turnovers"'    | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
@@ -340,7 +340,7 @@ Scenario: _085006 check movements of the document Cash expense
 		And I save the window as "$$CashExpense1$$"
 	* Check movements
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$CashExpense1$$'                | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                         | ''                     | ''                         | ''                     | ''         | ''                         | ''                     |
 		| 'Document registrations records' | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                         | ''                     | ''                         | ''                     | ''         | ''                         | ''                     |
 		| 'Register  "Expenses turnovers"' | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                         | ''                     | ''                         | ''                     | ''         | ''                         | ''                     |
@@ -394,7 +394,7 @@ Scenario: _085006 check movements of the document Cash expense
 			And in the table "List" I click the button named "ListContextMenuPost"
 		* Check movements
 			And I click "Registrations report" button
-			Then "ResultTable" spreadsheet document is equal by template
+			And "ResultTable" spreadsheet document contains lines:
 			| '$$CashExpense1$$'                | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                         | ''                     | ''                         | ''                     | ''         | ''                         | ''                     |
 			| 'Document registrations records' | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                         | ''                     | ''                         | ''                     | ''         | ''                         | ''                     |
 			| 'Register  "Expenses turnovers"' | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                         | ''                     | ''                         | ''                     | ''         | ''                         | ''                     |

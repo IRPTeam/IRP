@@ -686,3 +686,111 @@ Scenario: _021047 check Inventory transfer (without order) posting by register S
 
 
 
+
+
+
+Scenario: _021048 check the output of the document movement report for Inventory transfer
+	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+	* Check the report output for the selected document from the list
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberInventoryTransfer021001$$'      |
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+	* Check the report generation
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$InventoryTransfer021001$$'                 | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| 'Document registrations records'        | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| 'Register  "Transfer order balance"'    | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''                              | ''         | ''        |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Store sender' | 'Store receiver'        | 'Order'                         | 'Item key' | 'Row key' |
+		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 01'     | 'Store 02'              | '$$InventoryTransferOrder020001$$' | 'S/Yellow' | '*'       |
+		| ''                                      | 'Expense'     | '*'      | '50'        | 'Store 01'     | 'Store 02'              | '$$InventoryTransferOrder020001$$' | 'M/White'  | '*'       |
+		| ''                                      | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''                              | ''         | ''        |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Receipt basis'         | 'Item key'                      | 'Row key'  | ''        |
+		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'     | '$$InventoryTransfer021001$$' | 'S/Yellow'                      | '*'        | ''        |
+		| ''                                      | 'Receipt'     | '*'      | '50'        | 'Store 02'     | '$$InventoryTransfer021001$$' | 'M/White'                       | '*'        | ''        |
+		| ''                                      | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| 'Register  "Stock balance"'             | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''                              | ''         | ''        |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Item key'              | ''                              | ''         | ''        |
+		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 01'     | 'S/Yellow'              | ''                              | ''         | ''        |
+		| ''                                      | 'Expense'     | '*'      | '50'        | 'Store 01'     | 'M/White'               | ''                              | ''         | ''        |
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+	* Check the report output from the selected document
+		And I go to line in "List" table
+		| 'Number' |
+		| '$$NumberInventoryTransfer021001$$'      |
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+	* Check the report generation
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$InventoryTransfer021001$$'                 | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| 'Document registrations records'        | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| 'Register  "Transfer order balance"'    | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''                              | ''         | ''        |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Store sender' | 'Store receiver'        | 'Order'                         | 'Item key' | 'Row key' |
+		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 01'     | 'Store 02'              | '$$InventoryTransferOrder020001$$' | 'S/Yellow' | '*'       |
+		| ''                                      | 'Expense'     | '*'      | '50'        | 'Store 01'     | 'Store 02'              | '$$InventoryTransferOrder020001$$' | 'M/White'  | '*'       |
+		| ''                                      | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''                              | ''         | ''        |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Receipt basis'         | 'Item key'                      | 'Row key'  | ''        |
+		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'     | '$$InventoryTransfer021001$$' | 'S/Yellow'                      | '*'        | ''        |
+		| ''                                      | 'Receipt'     | '*'      | '50'        | 'Store 02'     | '$$InventoryTransfer021001$$' | 'M/White'                       | '*'        | ''        |
+		| ''                                      | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| 'Register  "Stock balance"'             | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''                              | ''         | ''        |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Item key'              | ''                              | ''         | ''        |
+		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 01'     | 'S/Yellow'              | ''                              | ''         | ''        |
+		| ''                                      | 'Expense'     | '*'      | '50'        | 'Store 01'     | 'M/White'               | ''                              | ''         | ''        |
+	And I close all client application windows
+
+
+
+Scenario: _02104801 clear movements Inventory transfer and check that there is no movements on the registers 
+	* Open list form Inventory transfer
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+	* Check the report generation
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberInventoryTransfer021001$$'      |
+	* Clear movements document and check that there is no movement on the registers
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "Transfer order balance"'    |
+			| 'Register  "Goods in transit incoming"' |
+			| 'Register  "Stock balance"'             |
+		And I close all client application windows
+	* Posting the document and check movements
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberInventoryTransfer021001$$'      |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$InventoryTransfer021001$$'                 | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| 'Document registrations records'        | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| 'Register  "Transfer order balance"'    | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''                              | ''         | ''        |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Store sender' | 'Store receiver'        | 'Order'                         | 'Item key' | 'Row key' |
+		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 01'     | 'Store 02'              | '$$InventoryTransferOrder020001$$' | 'S/Yellow' | '*'       |
+		| ''                                      | 'Expense'     | '*'      | '50'        | 'Store 01'     | 'Store 02'              | '$$InventoryTransferOrder020001$$' | 'M/White'  | '*'       |
+		| ''                                      | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''                              | ''         | ''        |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Receipt basis'         | 'Item key'                      | 'Row key'  | ''        |
+		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'     | '$$InventoryTransfer021001$$' | 'S/Yellow'                      | '*'        | ''        |
+		| ''                                      | 'Receipt'     | '*'      | '50'        | 'Store 02'     | '$$InventoryTransfer021001$$' | 'M/White'                       | '*'        | ''        |
+		| ''                                      | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| 'Register  "Stock balance"'             | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''                              | ''         | ''        |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Item key'              | ''                              | ''         | ''        |
+		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 01'     | 'S/Yellow'              | ''                              | ''         | ''        |
+		| ''                                      | 'Expense'     | '*'      | '50'        | 'Store 01'     | 'M/White'               | ''                              | ''         | ''        |
+		And I close all client application windows
+

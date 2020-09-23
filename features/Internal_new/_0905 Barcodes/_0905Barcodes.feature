@@ -14,7 +14,21 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-Scenario: _0905 barcode registry entry
+Scenario: _090500 preparation (Barcodes)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+	
+
+Scenario: _090501 barcode registry entry
 	* Adding barcode entries for Dress
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
@@ -105,7 +119,7 @@ Scenario: _0905 barcode registry entry
 		And I click "Save and close" button
 	And I close all client application windows
 
-Scenario: _0906 check barcode display by Item and item key
+Scenario: _090502 check barcode display by Item and item key
 	* Opening the item catalog and selecting Dress
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table

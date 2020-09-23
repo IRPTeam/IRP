@@ -132,7 +132,7 @@ Scenario: _080003 check connection to Incoming payment order of the Registration
 		| '$$NumberIncomingPaymentOrder080001$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$IncomingPaymentOrder080001$$'             | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | ''                     |
 		| 'Document registrations records'        | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | ''                     |
 		| 'Register  "Planing cash transactions"' | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | ''                     |
@@ -150,7 +150,7 @@ Scenario: _080003 check connection to Incoming payment order of the Registration
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$IncomingPaymentOrder080001$$'        | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''         | ''                | ''                             | ''                     |
 		| 'Document registrations records'        | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''         | ''                | ''                             | ''                     |
 		| 'Register  "Planing cash transactions"' | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''         | ''                | ''                             | ''                     |
@@ -306,7 +306,7 @@ Scenario: _080008 check connection to Outgoing payment order of the Registration
 		| '$$NumberOutgoingPaymentOrder080006$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$OutgoingPaymentOrder080006$$'        | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                     |
 		| 'Document registrations records'        | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                     |
 		| 'Register  "Planing cash transactions"' | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                     |
@@ -324,7 +324,7 @@ Scenario: _080008 check connection to Outgoing payment order of the Registration
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$OutgoingPaymentOrder080006$$'        | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                     |
 		| 'Document registrations records'        | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                     |
 		| 'Register  "Planing cash transactions"' | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                     |

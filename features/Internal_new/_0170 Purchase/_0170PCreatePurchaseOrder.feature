@@ -737,4 +737,94 @@ Scenario: _019908 create Purchase invoice and Goods receipt based on a Purchase 
 
 
 
+Scenario: _017002 check the output of the document movement report for Purchase Order
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+	* Check the report output for the selected document from the list
+		And I go to line in "List" table
+		| 'Number' |
+		| '$$NumberPurchaseOrder017001$$'      |
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+	* Check the report generation
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$PurchaseOrder017001$$'            | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | 'Attributes'    |
+		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                   | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
+		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'M/White'   | '*'       | '*'             |
+		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'L/Green'   | '*'       | '*'             |
+		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | '36/Yellow' | '*'       | '*'             |
+		| ''                                   | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| 'Register  "Order balance"'          | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | ''              |
+		| ''                                   | ''            | ''       | 'Quantity'  | 'Store'        | 'Order'                   | 'Item key'  | 'Row key'   | ''        | ''              |
+		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Store 01'     | '$$PurchaseOrder017001$$' | 'M/White'   | '*'         | ''        | ''              |
+		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Store 01'     | '$$PurchaseOrder017001$$' | 'L/Green'   | '*'         | ''        | ''              |
+		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Store 01'     | '$$PurchaseOrder017001$$' | '36/Yellow' | '*'         | ''        | ''              |
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+	* Check the report output from the selected document
+		And I go to line in "List" table
+		| 'Number' |
+		| '$$NumberPurchaseOrder017001$$'      |
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+	* Check the report generation
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$PurchaseOrder017001$$'            | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | 'Attributes'    |
+		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                   | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
+		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'M/White'   | '*'       | '*'             |
+		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'L/Green'   | '*'       | '*'             |
+		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | '36/Yellow' | '*'       | '*'             |
+		| ''                                   | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| 'Register  "Order balance"'          | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | ''              |
+		| ''                                   | ''            | ''       | 'Quantity'  | 'Store'        | 'Order'                   | 'Item key'  | 'Row key'   | ''        | ''              |
+		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Store 01'     | '$$PurchaseOrder017001$$' | 'M/White'   | '*'         | ''        | ''              |
+		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Store 01'     | '$$PurchaseOrder017001$$' | 'L/Green'   | '*'         | ''        | ''              |
+		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Store 01'     | '$$PurchaseOrder017001$$' | '36/Yellow' | '*'         | ''        | ''              |
+	And I close all client application windows
+
+Scenario: _0170020 clear movements Purchase Order and check that there is no movements on the registers
+	* Select Purchase order
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberPurchaseOrder017001$$'      |
+	* Clear movements Purchase Order and check that there is no movement on the registers
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document does not contain values
+		| Register  "Goods receipt schedule" |
+		| Register  "Order balance" |
+		And I close all client application windows
+	* Posting the document and check movements
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberPurchaseOrder017001$$'      |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$PurchaseOrder017001$$'            | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | 'Attributes'    |
+		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                   | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
+		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'M/White'   | '*'       | '*'             |
+		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'L/Green'   | '*'       | '*'             |
+		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | '36/Yellow' | '*'       | '*'             |
+		| ''                                   | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| 'Register  "Order balance"'          | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | ''              |
+		| ''                                   | ''            | ''       | 'Quantity'  | 'Store'        | 'Order'                   | 'Item key'  | 'Row key'   | ''        | ''              |
+		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Store 01'     | '$$PurchaseOrder017001$$' | 'M/White'   | '*'         | ''        | ''              |
+		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Store 01'     | '$$PurchaseOrder017001$$' | 'L/Green'   | '*'         | ''        | ''              |
+		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Store 01'     | '$$PurchaseOrder017001$$' | '36/Yellow' | '*'         | ''        | ''              |
+	And I close all client application windows
+
+
 

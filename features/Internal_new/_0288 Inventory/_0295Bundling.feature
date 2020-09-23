@@ -581,7 +581,7 @@ Scenario: _029519 create Bundling (Store use Goods receipt, doesn't use Shipment
 		And I click "Post" button
 		And Delay 5
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$Bundling0029519$$'                   | ''            | ''          | ''                                    | ''           | ''                    | ''                                    | ''        |
 		| 'Document registrations records'        | ''            | ''          | ''                                    | ''           | ''                    | ''                                    | ''        |
 		| 'Register  "Bundles content"'           | ''            | ''          | ''                                    | ''           | ''                    | ''                                    | ''        |
@@ -676,7 +676,7 @@ Scenario: _029520 create Bundling (Store use Shipment confirmation, doesn't use 
 		And I click "Post" button
 		And Delay 5
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 			| '$$Bundling0029520$$'                   | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
 			| 'Document registrations records'        | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
 			| 'Register  "Bundles content"'           | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
@@ -702,5 +702,120 @@ Scenario: _029520 create Bundling (Store use Shipment confirmation, doesn't use 
 			| ''                                      | 'Record type' | 'Period'    | 'Resources'                           | 'Dimensions' | ''                                    | ''          | ''        |
 			| ''                                      | ''            | ''          | 'Quantity'                            | 'Store'      | 'Item key'                            | ''          | ''        |
 			| ''                                      | 'Receipt'     | '*'         | '7'                                   | 'Store 08'   | 'Skittles + Chewing gum/Skittles+Chewing gum' | ''          | ''        |
+		And I close all client application windows
+
+
+
+
+Scenario: _029519 check the output of the document movement report for Bundling
+	Given I open hyperlink "e1cib/list/Document.Bundling"
+	* Check the report output for the selected document from the list
+		And I go to line in "List" table
+		| 'Number' |
+		| '$$NumberBundling0029501$$'      |
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+	* Check the report generation
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$Bundling0029501$$'                    | ''            | ''          | ''                              | ''           | ''                              |
+		| 'Document registrations records' | ''            | ''          | ''                              | ''           | ''                              |
+		| 'Register  "Bundles content"'    | ''            | ''          | ''                              | ''           | ''                              |
+		| ''                               | 'Period'      | 'Resources' | 'Dimensions'                    | ''           | ''                              |
+		| ''                               | ''            | 'Quantity'  | 'Item key bundle'               | 'Item key'   | ''                              |
+		| ''                               | '*'           | '1'         | 'Bound Dress+Shirt/Dress+Shirt' | 'XS/Blue'    | ''                              |
+		| ''                               | '*'           | '1'         | 'Bound Dress+Shirt/Dress+Shirt' | '36/Red'     | ''                              |
+		| ''                               | ''            | ''          | ''                              | ''           | ''                              |
+		| 'Register  "Stock reservation"'  | ''            | ''          | ''                              | ''           | ''                              |
+		| ''                               | 'Record type' | 'Period'    | 'Resources'                     | 'Dimensions' | ''                              |
+		| ''                               | ''            | ''          | 'Quantity'                      | 'Store'      | 'Item key'                      |
+		| ''                               | 'Receipt'     | '*'         | '10'                            | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' |
+		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | 'XS/Blue'                       |
+		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | '36/Red'                        |
+		| ''                               | ''            | ''          | ''                              | ''           | ''                              |
+		| 'Register  "Stock balance"'      | ''            | ''          | ''                              | ''           | ''                              |
+		| ''                               | 'Record type' | 'Period'    | 'Resources'                     | 'Dimensions' | ''                              |
+		| ''                               | ''            | ''          | 'Quantity'                      | 'Store'      | 'Item key'                      |
+		| ''                               | 'Receipt'     | '*'         | '10'                            | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' |
+		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | 'XS/Blue'                       |
+		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | '36/Red'                        |
+
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.Bundling"
+	* Check the report output from the selected document
+		And I go to line in "List" table
+		| 'Number' |
+		| '$$NumberBundling0029501$$'      |
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+	* Check the report generation
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$Bundling0029501$$'                    | ''            | ''          | ''                              | ''           | ''                              |
+		| 'Document registrations records' | ''            | ''          | ''                              | ''           | ''                              |
+		| 'Register  "Bundles content"'    | ''            | ''          | ''                              | ''           | ''                              |
+		| ''                               | 'Period'      | 'Resources' | 'Dimensions'                    | ''           | ''                              |
+		| ''                               | ''            | 'Quantity'  | 'Item key bundle'               | 'Item key'   | ''                              |
+		| ''                               | '*'           | '1'         | 'Bound Dress+Shirt/Dress+Shirt' | 'XS/Blue'    | ''                              |
+		| ''                               | '*'           | '1'         | 'Bound Dress+Shirt/Dress+Shirt' | '36/Red'     | ''                              |
+		| ''                               | ''            | ''          | ''                              | ''           | ''                              |
+		| 'Register  "Stock reservation"'  | ''            | ''          | ''                              | ''           | ''                              |
+		| ''                               | 'Record type' | 'Period'    | 'Resources'                     | 'Dimensions' | ''                              |
+		| ''                               | ''            | ''          | 'Quantity'                      | 'Store'      | 'Item key'                      |
+		| ''                               | 'Receipt'     | '*'         | '10'                            | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' |
+		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | 'XS/Blue'                       |
+		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | '36/Red'                        |
+		| ''                               | ''            | ''          | ''                              | ''           | ''                              |
+		| 'Register  "Stock balance"'      | ''            | ''          | ''                              | ''           | ''                              |
+		| ''                               | 'Record type' | 'Period'    | 'Resources'                     | 'Dimensions' | ''                              |
+		| ''                               | ''            | ''          | 'Quantity'                      | 'Store'      | 'Item key'                      |
+		| ''                               | 'Receipt'     | '*'         | '10'                            | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' |
+		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | 'XS/Blue'                       |
+		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | '36/Red'                        |
+
+	And I close all client application windows
+
+
+Scenario: _02951901 clear movements Bundling and check that there is no movements on the registers 
+	* Open list form Bundling
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+	* Check the report generation
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberBundling0029501$$'      |
+	* Clear movements document and check that there is no movement on the registers
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "Bundles content"'    |
+			| 'Register  "Stock reservation"'  |
+			| 'Register  "Stock balance"'      |
+		And I close all client application windows
+	* Posting the document and check movements
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberBundling0029501$$'      |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$Bundling0029501$$'                    | ''            | ''          | ''                              | ''           | ''                              |
+		| 'Document registrations records' | ''            | ''          | ''                              | ''           | ''                              |
+		| 'Register  "Bundles content"'    | ''            | ''          | ''                              | ''           | ''                              |
+		| ''                               | 'Period'      | 'Resources' | 'Dimensions'                    | ''           | ''                              |
+		| ''                               | ''            | 'Quantity'  | 'Item key bundle'               | 'Item key'   | ''                              |
+		| ''                               | '*'           | '1'         | 'Bound Dress+Shirt/Dress+Shirt' | 'XS/Blue'    | ''                              |
+		| ''                               | '*'           | '1'         | 'Bound Dress+Shirt/Dress+Shirt' | '36/Red'     | ''                              |
+		| ''                               | ''            | ''          | ''                              | ''           | ''                              |
+		| 'Register  "Stock reservation"'  | ''            | ''          | ''                              | ''           | ''                              |
+		| ''                               | 'Record type' | 'Period'    | 'Resources'                     | 'Dimensions' | ''                              |
+		| ''                               | ''            | ''          | 'Quantity'                      | 'Store'      | 'Item key'                      |
+		| ''                               | 'Receipt'     | '*'         | '10'                            | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' |
+		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | 'XS/Blue'                       |
+		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | '36/Red'                        |
+		| ''                               | ''            | ''          | ''                              | ''           | ''                              |
+		| 'Register  "Stock balance"'      | ''            | ''          | ''                              | ''           | ''                              |
+		| ''                               | 'Record type' | 'Period'    | 'Resources'                     | 'Dimensions' | ''                              |
+		| ''                               | ''            | ''          | 'Quantity'                      | 'Store'      | 'Item key'                      |
+		| ''                               | 'Receipt'     | '*'         | '10'                            | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' |
+		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | 'XS/Blue'                       |
+		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | '36/Red'                        |
 		And I close all client application windows
 

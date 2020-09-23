@@ -343,7 +343,7 @@ Scenario: _050002 check Cash payment movements with transaction type Payment to 
 			| '1'      |
 	* Check movements Cash payment 1
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$CashPayment0510011$$'               | ''            | ''       | ''                     | ''               | ''                          | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
 		| 'Document registrations records'       | ''            | ''       | ''                     | ''               | ''                          | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
 		| 'Register  "Accounts statement"'       | ''            | ''       | ''                     | ''               | ''                          | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
@@ -401,7 +401,7 @@ Scenario: _050002 check Cash payment movements with transaction type Payment to 
 			And in the table "List" I click the button named "ListContextMenuPost"
 		* Check movements
 			And I click "Registrations report" button
-			Then "ResultTable" spreadsheet document is equal by template
+			And "ResultTable" spreadsheet document contains lines:
 			| '$$CashPayment0510011$$'               | ''            | ''       | ''                     | ''               | ''                          | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
 			| 'Document registrations records'       | ''            | ''       | ''                     | ''               | ''                          | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
 			| 'Register  "Accounts statement"'       | ''            | ''       | ''                     | ''               | ''                          | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |

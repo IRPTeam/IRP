@@ -710,7 +710,7 @@ Scenario: _400003 opening entry advance balance
 		And I save the window as "$$OpeningEntry400003$$"
 	* Check movements
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$OpeningEntry400003$$'               | ''            | ''       | ''                     | ''               | ''                       | ''                  | ''             | ''                       | ''                             | ''                     | ''         |
 		| 'Document registrations records'       | ''            | ''       | ''                     | ''               | ''                       | ''                  | ''             | ''                       | ''                             | ''                     | ''         |
 		| 'Register  "Accounts statement"'       | ''            | ''       | ''                     | ''               | ''                       | ''                  | ''             | ''                       | ''                             | ''                     | ''         |
@@ -824,7 +824,7 @@ Scenario: _400004 opening entry AP balance by partner terms (vendors)
 		And Delay 5
 		* Check movements
 			And I click "Registrations report" button
-			Then "ResultTable" spreadsheet document is equal by template
+			And "ResultTable" spreadsheet document contains lines:
 			| '$$OpeningEntry400004$$'               | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''                            | ''           | ''                             | ''                     |
 			| 'Document registrations records'       | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''                            | ''           | ''                             | ''                     |
 			| 'Register  "Accounts statement"'       | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''                            | ''           | ''                             | ''                     |
@@ -930,7 +930,7 @@ Scenario: _400005 opening entry AR balance by partner terms (customers)
 		And Delay 5
 	* Check movements
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 			| '$$OpeningEntry400005$$'               | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''                              | ''           | ''                             | ''                     |
 			| 'Document registrations records'       | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''                              | ''           | ''                             | ''                     |
 			| 'Register  "Partner AR transactions"'  | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''                              | ''           | ''                             | ''                     |

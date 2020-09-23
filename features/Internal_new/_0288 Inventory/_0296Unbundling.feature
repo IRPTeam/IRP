@@ -415,7 +415,7 @@ Scenario: _029612 create Unbundling (Store use Goods receipt and doesn't use Shi
 		And I save the window as "$$Unbundling0029612$$"
 		And Delay 5
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 			| '$$Unbundling0029612$$'                 | ''            | ''       | ''          | ''           | ''                              | ''         | ''        |
 			| 'Document registrations records'        | ''            | ''       | ''          | ''           | ''                              | ''         | ''        |
 			| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''           | ''                              | ''         | ''        |
@@ -479,7 +479,7 @@ Scenario: _029613 create Unbundling (Store use Shipment confirmation and does no
 		And I save the window as "$$Unbundling0029613$$"
 		And Delay 5
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 			| '$$Unbundling0029613$$'                 | ''            | ''       | ''          | ''           | ''                              | ''                              | ''        |
 			| 'Document registrations records'        | ''            | ''       | ''          | ''           | ''                              | ''                              | ''        |
 			| 'Register  "Goods in transit outgoing"' | ''            | ''       | ''          | ''           | ''                              | ''                              | ''        |
@@ -499,4 +499,110 @@ Scenario: _029613 create Unbundling (Store use Shipment confirmation and does no
 			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                      | ''                              | ''        |
 			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 08'   | 'XS/Blue'                       | ''                              | ''        |
 			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 08'   | '36/Red'                        | ''                              | ''        |
+		And I close all client application windows
+
+
+
+Scenario: _029612 check the output of the document movement report for Unbundling
+	Given I open hyperlink "e1cib/list/Document.Unbundling"
+	* Check the report output for the selected document from the list
+		And I go to line in "List" table
+		| 'Number' |
+		| '$$NumberUnBundling0029501$$'      |
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+	* Check the report generation
+		And "ResultTable" spreadsheet document contains lines:
+		| 'UnBundling0029501$$'                  | ''            | ''       | ''          | ''           | ''          |
+		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          |
+		| 'Register  "Stock reservation"'  | ''            | ''       | ''          | ''           | ''          |
+		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
+		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  |
+		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'S/Yellow'  |
+		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'XS/Blue'   |
+		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'L/Green'   |
+		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
+		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
+		| ''                               | ''            | ''       | ''          | ''           | ''          |
+		| 'Register  "Stock balance"'      | ''            | ''       | ''          | ''           | ''          |
+		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
+		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  |
+		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'S/Yellow'  |
+		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'XS/Blue'   |
+		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'L/Green'   |
+		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
+		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
+
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.Unbundling"
+	* Check the report output from the selected document
+		And I go to line in "List" table
+		| 'Number' |
+		| '$$NumberUnBundling0029501$$' |    
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+	* Check the report generation
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Un$$Bundling0029501$$'                  | ''            | ''       | ''          | ''           | ''          |
+		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          |
+		| 'Register  "Stock reservation"'  | ''            | ''       | ''          | ''           | ''          |
+		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
+		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  |
+		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'S/Yellow'  |
+		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'XS/Blue'   |
+		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'L/Green'   |
+		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
+		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
+		| ''                               | ''            | ''       | ''          | ''           | ''          |
+		| 'Register  "Stock balance"'      | ''            | ''       | ''          | ''           | ''          |
+		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
+		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  |
+		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'S/Yellow'  |
+		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'XS/Blue'   |
+		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'L/Green'   |
+		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
+		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
+
+	And I close all client application windows
+
+Scenario: _02961201 clear movements Unbundling and check that there is no movements on the registers 
+	* Open list form Unbundling
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+	* Check the report generation
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberUnBundling0029501$$$$'  |    
+	* Clear movements document and check that there is no movement on the registers
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "Stock reservation"'  |
+			| 'Register  "Stock balance"'      |
+		And I close all client application windows
+	* Posting the document and check movements
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberUnBundling0029501$$' |     
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$UnBundling0029501$$'                  | ''            | ''       | ''          | ''           | ''          |
+		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          |
+		| 'Register  "Stock reservation"'  | ''            | ''       | ''          | ''           | ''          |
+		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
+		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  |
+		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'S/Yellow'  |
+		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'XS/Blue'   |
+		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'L/Green'   |
+		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
+		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
+		| ''                               | ''            | ''       | ''          | ''           | ''          |
+		| 'Register  "Stock balance"'      | ''            | ''       | ''          | ''           | ''          |
+		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
+		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  |
+		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'S/Yellow'  |
+		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'XS/Blue'   |
+		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'L/Green'   |
+		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
+		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
 		And I close all client application windows

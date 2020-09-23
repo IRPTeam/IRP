@@ -412,7 +412,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 		And I save the window as "$$ChequeBondTransaction090005$$"
 	* Check movements
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$ChequeBondTransaction090005$$'       | ''            | ''                     | ''                     | ''                 | ''                       | ''               | ''                    | ''                         | ''                             | ''                             | ''                     |
 		| 'Document registrations records'        | ''            | ''                     | ''                     | ''                 | ''                       | ''               | ''                    | ''                         | ''                             | ''                             | ''                     |
 		| 'Register  "Cheque bond statuses"'      | ''            | ''                     | ''                     | ''                 | ''                       | ''               | ''                    | ''                         | ''                             | ''                             | ''                     |
@@ -511,7 +511,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 			And I click "Post" button
 		* Check for movement changes
 			And I click "Registrations report" button
-			Then "ResultTable" spreadsheet document is equal by template
+			And "ResultTable" spreadsheet document contains lines:
 			| '$$ChequeBondTransaction090005$$'            | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 			| 'Document registrations records'        | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
 			| 'Register  "Cheque bond statuses"'      | ''            | ''                     | ''                    | ''                 | ''                       | ''               | ''                    | ''                 | ''                         | ''                         | ''                     |
@@ -621,7 +621,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 			And in the table "List" I click the button named "ListContextMenuPost"
 		* Check movements
 			And I click "Registrations report" button
-			Then "ResultTable" spreadsheet document is equal by template
+			And "ResultTable" spreadsheet document contains lines:
 			| '$$ChequeBondTransaction090005$$'       | ''            | ''                     | ''                     | ''                 | ''                       | ''               | ''                    | ''                 | ''                             | ''                             | ''                     |
 			| 'Document registrations records'        | ''            | ''                     | ''                     | ''                 | ''                       | ''               | ''                    | ''                 | ''                             | ''                             | ''                     |
 			| 'Register  "Cheque bond statuses"'      | ''            | ''                     | ''                     | ''                 | ''                       | ''               | ''                    | ''                 | ''                             | ''                             | ''                     |
@@ -716,7 +716,7 @@ Scenario: _090006 motion check when removing a cheque from document Cheque bond 
 	* Check movements
 		And I click "Registrations report" button
 		Then "Document registrations report" window is opened
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$ChequeBondTransaction090005$$'       | ''            | ''                     | ''                     | ''                 | ''                       | ''               | ''                    | ''                 | ''                             | ''                             | ''                     |
 		| 'Document registrations records'        | ''            | ''                     | ''                     | ''                 | ''                       | ''               | ''                    | ''                 | ''                             | ''                             | ''                     |
 		| 'Register  "Cheque bond statuses"'      | ''            | ''                     | ''                     | ''                 | ''                       | ''               | ''                    | ''                 | ''                             | ''                             | ''                     |
@@ -788,7 +788,7 @@ Scenario: _090006 motion check when removing a cheque from document Cheque bond 
 		And I click "Post" button
 		And I click "Registrations report" button
 		Then "Document registrations report" window is opened
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 			| '$$ChequeBondTransaction090005$$'       | ''            | ''                     | ''                     | ''                 | ''                       | ''               | ''                    | ''                 | ''                             | ''                             | ''                     |
 			| 'Document registrations records'        | ''            | ''                     | ''                     | ''                 | ''                       | ''               | ''                    | ''                 | ''                             | ''                             | ''                     |
 			| 'Register  "Cheque bond statuses"'      | ''            | ''                     | ''                     | ''                 | ''                       | ''               | ''                    | ''                 | ''                             | ''                             | ''                     |

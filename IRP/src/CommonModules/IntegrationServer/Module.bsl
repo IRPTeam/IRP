@@ -2,14 +2,14 @@ Function ConnectionSetting(IntegrationSettingName, AddInfo = Undefined) Export
 	Result = New Structure("Success, Value, Message", False, Undefined, "");
 	
 	IntegrationSettings = IntegrationServerReuse.GetIntegrationSettings(IntegrationSettingName);
-	
+		
 	If Not ValueIsFilled(IntegrationSettings.Ref) Then
 		Result.Success = False;
 		Result.Message = StrTemplate(R().S_005, IntegrationSettingName);
 		Return Result;
 	EndIf;
 	
-	ConnectionSetting = IntegrationServer.ConnectionSettingTemplate(IntegrationSettings.IntegrationType, AddInfo);
+	ConnectionSetting = ConnectionSettingTemplate(IntegrationSettings.IntegrationType, AddInfo);
 	
 	// Customize setting with according IntegrationSettings catalog
 	FillPropertyValues(ConnectionSetting, IntegrationSettings.CustomizedSetting);

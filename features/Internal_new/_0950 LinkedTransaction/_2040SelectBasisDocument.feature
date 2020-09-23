@@ -269,13 +269,16 @@ Scenario: _2040001 preparation
 				| 'Boots (12 pcs)' |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
-		* Specify shipping scheme and document number
+		* Specify shipping scheme
 			And I move to "Other" tab
 			And I remove checkbox "Shipment confirmations before sales invoice"
-			And I input "8 007" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 000" text in "Number" field
+			// And I input "8 007" text in "Number" field
+			// Then "1C:Enterprise" window is opened
+			// And I click "Yes" button
+			// And I input "9 000" text in "Number" field
+			And I click "Post" button
+			And I save the window as "$$SalesOrder20400011$$"
+			And I save the value of "Number" field as "$$NumberSalesOrder20400011$$"
 			And I click "Post and close" button
 	* * Creation of a Sales order on Crystal, Basic Partner terms, TRY, Shipment confirmation before Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -348,10 +351,13 @@ Scenario: _2040001 preparation
 		* Specify shipping scheme and document number
 			And I move to "Other" tab
 			And I set checkbox "Shipment confirmations before sales invoice"
-			And I input "9 001" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 001" text in "Number" field
+			// And I input "9 001" text in "Number" field
+			// Then "1C:Enterprise" window is opened
+			// And I click "Yes" button
+			// And I input "9 001" text in "Number" field
+			And I click "Post" button
+			And I save the window as "$$SalesOrder20400012$$"
+			And I save the value of "Number" field as "$$NumberSalesOrder20400012$$"
 			And I click "Post and close" button
 	* Creation of a Sales order on Crystal, Basic Partner terms, TRY, Sales invoice before Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -424,10 +430,13 @@ Scenario: _2040001 preparation
 		* Specify shipping scheme and document number
 			And I move to "Other" tab
 			And I remove checkbox "Shipment confirmations before sales invoice"
-			And I input "9 002" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 002" text in "Number" field
+			// And I input "9 002" text in "Number" field
+			// Then "1C:Enterprise" window is opened
+			// And I click "Yes" button
+			// And I input "9 002" text in "Number" field
+			And I click "Post" button
+			And I save the window as "$$SalesOrder20400013$$"
+			And I save the value of "Number" field as "$$NumberSalesOrder20400013$$"
 			And I click "Post and close" button
 	* Creation of a Sales order on Crystal, Basic Partner terms, without VAT, TRY, Sales invoice before Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -497,13 +506,16 @@ Scenario: _2040001 preparation
 				| 'Boots (12 pcs)' |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
-		* Specify shipping scheme and document number
+		* Specify shipping scheme
 			And I move to "Other" tab
 			And I remove checkbox "Shipment confirmations before sales invoice"
-			And I input "9 004" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 004" text in "Number" field
+			// And I input "9 004" text in "Number" field
+			// Then "1C:Enterprise" window is opened
+			// And I click "Yes" button
+			// And I input "9 004" text in "Number" field
+			And I click "Post" button
+			And I save the window as "$$SalesOrder20400014$$"
+			And I save the value of "Number" field as "$$NumberSalesOrder20400014$$"
 			And I click "Post and close" button
 		* Creation of a Sales order on Crystal, Basic Partner terms, without VAT, TRY, Shipment confirmation before Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -576,10 +588,12 @@ Scenario: _2040001 preparation
 		* Specify shipping scheme and document number
 			And I move to "Other" tab
 			And I remove checkbox "Shipment confirmations before sales invoice"
-			And I input "9 005" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 005" text in "Number" field
+			// And I input "9 005" text in "Number" field
+			// Then "1C:Enterprise" window is opened
+			// And I click "Yes" button
+			And I click "Post" button
+			And I save the window as "$$SalesOrder20400015$$"
+			And I save the value of "Number" field as "$$NumberSalesOrder20400015$$"
 			And I click "Post and close" button
 	* Create Shipment confirmation on Crystal without Sales order
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
@@ -611,10 +625,13 @@ Scenario: _2040001 preparation
 		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
-		And I input "5 607" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "8 999" text in "Number" field
+		// And I input "5 607" text in "Number" field
+		// Then "1C:Enterprise" window is opened
+		// And I click "Yes" button
+		// And I input "8 999" text in "Number" field
+		And I click "Post" button
+		And I save the window as "$$ShipmentConfirmation0400016$$"
+		And I save the value of "Number" field as "$$NumberShipmentConfirmation20400016$$"
 		And I click "Post and close" button
 		And I close all client application windows
 	* Create one more Shipment confirmation on Crystal without Sales order
@@ -647,24 +664,26 @@ Scenario: _2040001 preparation
 		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
-		And I input "5 607" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "9 000" text in "Number" field
+		// And I input "5 607" text in "Number" field
+		// Then "1C:Enterprise" window is opened
+		// And I click "Yes" button
+		// And I input "9 000" text in "Number" field
+		And I click "Post" button
+		And I save the window as "$$ShipmentConfirmation0400017$$"
+		And I save the value of "Number" field as "$$NumberShipmentConfirmation20400017$$"
 		And I click "Post and close" button
 		And I close all client application windows
-	* Create Shipment confirmation to order 9 001
+	* Create Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		Then "Sales orders" window is opened
 		And I go to line in "List" table
-			| 'Number' | 'Partner' |
-			| '9 001'  | 'Crystal' |
+			| 'Number'                       | 'Partner' |
+			| '$$NumberSalesOrder20400012$$' | 'Crystal' |
 		And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
 		And I move to "Other" tab
-		And I input "5 607" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "9 001" text in "Number" field
+		And I click "Post" button
+		And I save the window as "$$ShipmentConfirmation20400018$$"
+		And I save the value of "Number" field as "$$NumberShipmentConfirmation20400018$$"
 		And I click "Post and close" button
 		And I close all client application windows
 	* Creating Purchase order to Crystal by agreement Vendor, TRY, Goods receipt before Purchase invoice №9000
@@ -684,13 +703,13 @@ Scenario: _2040001 preparation
 				| Description        |
 				| Vendor, TRY |
 			And I select current line in "List" table
-		* Change document number to №9000
+		// * Change document number to №9000
 			And I move to "Other" tab
 			And I remove checkbox "Goods receipt before purchase invoice"
-			And I input "9 000" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 000" text in "Number" field
+			// And I input "9 000" text in "Number" field
+			// Then "1C:Enterprise" window is opened
+			// And I click "Yes" button
+			// And I input "9 000" text in "Number" field
 		* Filling in item tab
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -720,6 +739,9 @@ Scenario: _2040001 preparation
 			And I input "210" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Post document
+			And I click "Post" button
+			And I save the window as "$$PurchaseOrder20400019$$"
+			And I save the value of "Number" field as "$$NumberPurchaseOrder20400019$$"
 			And I click "Post and close" button
 	* Create Purchase order to Crystal, Vendor, TRY, Goods receipt before Purchase invoice № 9001
 		* Open form to create Purchase Order
@@ -769,10 +791,13 @@ Scenario: _2040001 preparation
 		* Specify shipping scheme and document number
 			And I move to "Other" tab
 			And I set checkbox "Goods receipt before purchase invoice"
-			And I input "9 001" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 001" text in "Number" field
+			// And I input "9 001" text in "Number" field
+			// Then "1C:Enterprise" window is opened
+			// And I click "Yes" button
+			// And I input "9 001" text in "Number" field
+			And I click "Post" button
+			And I save the window as "$$PurchaseOrder204000110$$"
+			And I save the value of "Number" field as "$$NumberPurchaseOrder204000110$$"
 			And I click "Post and close" button
 	* Create Purchase order to Crystal, Vendor, USD, Goods receipt before Purchase invoice № 9003
 		* Open form to create Purchase Order
@@ -842,10 +867,13 @@ Scenario: _2040001 preparation
 			And I finish line editing in "ItemList" table
 		* Specify shipping scheme and document number
 			And I move to "Other" tab
-			And I input "9 003" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 003" text in "Number" field
+			// And I input "9 003" text in "Number" field
+			// Then "1C:Enterprise" window is opened
+			// And I click "Yes" button
+			// And I input "9 003" text in "Number" field
+			And I click "Post" button
+			And I save the window as "$$PurchaseOrder204000111$$"
+			And I save the value of "Number" field as "$$NumberPurchaseOrder204000111$$"
 			And I click "Post and close" button
 	* Create Purchase order to Crystal, Vendor, TRY, Purchase invoice before Goods receipt № 9004
 		* Open form to create Purchase Order
@@ -931,10 +959,13 @@ Scenario: _2040001 preparation
 		* Change document number
 			And I move to "Other" tab
 			And I remove checkbox "Goods receipt before purchase invoice"
-			And I input "9 004" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 004" text in "Number" field
+			// And I input "9 004" text in "Number" field
+			// Then "1C:Enterprise" window is opened
+			// And I click "Yes" button
+			// And I input "9 004" text in "Number" field
+			And I click "Post" button
+			And I save the window as "$$PurchaseOrder204000112$$"
+			And I save the value of "Number" field as "$$NumberPurchaseOrder204000112$$"
 			And I click "Post and close" button
 	* Create Purchase order to Astar, partner term Vendor, TRY, Purchase invoice before Goods receipt № 9005
 		* Open form to create Purchase Order
@@ -1020,10 +1051,13 @@ Scenario: _2040001 preparation
 		* Change document number
 			And I move to "Other" tab
 			And I remove checkbox "Goods receipt before purchase invoice"
-			And I input "9 005" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 005" text in "Number" field
+			// And I input "9 005" text in "Number" field
+			// Then "1C:Enterprise" window is opened
+			// And I click "Yes" button
+			// And I input "9 005" text in "Number" field
+			And I click "Post" button
+			And I save the window as "$$PurchaseOrder204000113$$"
+			And I save the value of "Number" field as "$$NumberPurchaseOrder204000113$$"
 			And I click "Post and close" button
 	* Create Purchase order to Astar partner term Vendor, TRY, Purchase invoice before Goods receipt, one Store use Goods receipt the other does not № 9002
 		* Open form to create Purchase Order
@@ -1119,10 +1153,13 @@ Scenario: _2040001 preparation
 		* Change document number
 			And I move to "Other" tab
 			And I remove checkbox "Goods receipt before purchase invoice"
-			And I input "9 002" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 002" text in "Number" field
+			// And I input "9 002" text in "Number" field
+			// Then "1C:Enterprise" window is opened
+			// And I click "Yes" button
+			// And I input "9 002" text in "Number" field
+			And I click "Post" button
+			And I save the window as "$$PurchaseOrder204000114$$"
+			And I save the value of "Number" field as "$$NumberPurchaseOrder204000114$$"
 			And I click "Post and close" button
 	* Create Purchase order to Astar partner term Vendor, TRY, Goods receipt before Purchase invoice, one Store use Goods receipt the other does not № 9002
 		* Open form to create Purchase Order
@@ -1177,10 +1214,13 @@ Scenario: _2040001 preparation
 		* Specify shipping scheme and document number
 			And I move to "Other" tab
 			And I set checkbox "Goods receipt before purchase invoice"
-			And I input "9 006" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 006" text in "Number" field
+			// And I input "9 006" text in "Number" field
+			// Then "1C:Enterprise" window is opened
+			// And I click "Yes" button
+			// And I input "9 006" text in "Number" field
+			And I click "Post" button
+			And I save the window as "$$PurchaseOrder204000115$$"
+			And I save the value of "Number" field as "$$NumberPurchaseOrder204000115$$"
 			And I click "Post and close" button
 
 
@@ -1206,11 +1246,11 @@ Scenario: _2040002 Sales order selection button in the Sales invoice document
 		And in the table "ItemList" I click "Select sales orders" button
 		And "DocumentsTree" table contains lines
 		| 'Sales order'                                 | 'Use' |
-		| 'Sales order 9 000*'                          | 'No'  |
+		| '$$SalesOrder20400011$$'                          | 'No'  |
 		| 'Shirt, 38/Black, pcs, 2,000'                 | 'No'  |
 		| 'Boots, 36/18SD, Boots (12 pcs), 1,000'       | 'No'  |
 		| 'Boots, 37/18SD, pcs, 1,000'                  | 'No'  |
-		| 'Sales order 9 002*'                          | 'No'  |
+		| '$$SalesOrder20400013$$'                          | 'No'  |
 		| 'Dress, M/White, pcs, 4,000'                  | 'No'  |
 		| 'Boots, 36/18SD, Boots (12 pcs), 1,000'       | 'No'  |
 		| 'Boots, 37/18SD, pcs, 1,000'                  | 'No'  |
@@ -1218,16 +1258,16 @@ Scenario: _2040002 Sales order selection button in the Sales invoice document
 		And I click "Ok" button
 		And "ItemList" table contains lines
 		| 'Item'  | 'Item key' | 'Q'     | 'Price type'        | 'Unit'           | 'Store'    | 'Sales order'        |
-		| 'Shirt' | '38/Black' | '2,000' | 'Basic Price Types' | 'pcs'            | 'Store 02' | 'Sales order 9 000*' |
-		| 'Boots' | '36/18SD'  | '1,000' | 'Basic Price Types' | 'Boots (12 pcs)' | 'Store 02' | 'Sales order 9 000*' |
-		| 'Boots' | '37/18SD'  | '1,000' | 'Basic Price Types' | 'pcs'            | 'Store 02' | 'Sales order 9 000*' |
-		| 'Dress' | 'M/White'  | '4,000' | 'Basic Price Types' | 'pcs'            | 'Store 02' | 'Sales order 9 002*' |
-		| 'Boots' | '36/18SD'  | '1,000' | 'Basic Price Types' | 'Boots (12 pcs)' | 'Store 02' | 'Sales order 9 002*' |
+		| 'Shirt' | '38/Black' | '2,000' | 'Basic Price Types' | 'pcs'            | 'Store 02' | '$$SalesOrder20400011$$' |
+		| 'Boots' | '36/18SD'  | '1,000' | 'Basic Price Types' | 'Boots (12 pcs)' | 'Store 02' | '$$SalesOrder20400011$$' |
+		| 'Boots' | '37/18SD'  | '1,000' | 'Basic Price Types' | 'pcs'            | 'Store 02' | '$$SalesOrder20400011$$' |
+		| 'Dress' | 'M/White'  | '4,000' | 'Basic Price Types' | 'pcs'            | 'Store 02' | '$$SalesOrder20400013$$' |
+		| 'Boots' | '36/18SD'  | '1,000' | 'Basic Price Types' | 'Boots (12 pcs)' | 'Store 02' | '$$SalesOrder20400013$$' |
 		Then the number of "ItemList" table lines is "меньше или равно" 6
 	* Check that the quantity already added by rows is not available to select products from Sales order
 		And I go to the last line in "ItemList" table
 		# | 'Item'  | 'Item key' | 'Sales order'        |
-		# | 'Boots' | '37/18SD'  | 'Sales order 9 002*' |
+		# | 'Boots' | '37/18SD'  | '$$SalesOrder20400013$$' |
 		And I delete a line in "ItemList" table
 		And I go to line in "ItemList" table
 		| 'Item'  | 'Item key' | 'Q'     |
@@ -1238,16 +1278,19 @@ Scenario: _2040002 Sales order selection button in the Sales invoice document
 		And in the table "ItemList" I click "Select sales orders" button
 		And "DocumentsTree" table contains lines
 		| 'Sales order'                | 'Use' |
-		| 'Sales order 9 002*'         | 'No'  |
+		| '$$SalesOrder20400013$$'         | 'No'  |
 		| 'Dress, M/White, pcs, 2,000' | 'No'  |
 		| 'Boots, 37/18SD, pcs, 1,000' | 'No'  |
 		And I click "Cancel" button
-	* Change the document number
-		And I move to "Other" tab
-		And I input "0" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "9 000" text in "Number" field
+	// * Change the document number
+	// 	And I move to "Other" tab
+	// 	And I input "0" text in "Number" field
+	// 	Then "1C:Enterprise" window is opened
+	// 	And I click "Yes" button
+	// 	And I input "9 000" text in "Number" field
+		And I click "Post" button
+		And I save the window as "$$SalesInvoice20400022$$"
+		And I save the value of "Number" field as "$$NumberSalesInvoice20400022$$"
 		And I click "Post and close" button
 	* Create one more Sales invoice for the remainder
 		* Open a creation form SI 
@@ -1268,17 +1311,20 @@ Scenario: _2040002 Sales order selection button in the Sales invoice document
 			And in the table "ItemList" I click "Select sales orders" button
 			And "DocumentsTree" table contains lines
 			| 'Sales order'                | 'Use' |
-			| 'Sales order 9 002*'         | 'No'  |
+			| '$$SalesOrder20400013$$'         | 'No'  |
 			| 'Dress, M/White, pcs, 2,000' | 'No'  |
 			| 'Boots, 37/18SD, pcs, 1,000' | 'No'  |
 			And I click the button named "FormSelectAll"
 			And I click "Ok" button
-		* Change the document number
-			And I move to "Other" tab
-			And I input "0" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 002" text in "Number" field
+		// * Change the document number
+		// 	And I move to "Other" tab
+		// 	And I input "0" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "9 002" text in "Number" field
+			And I click "Post" button
+			And I save the window as "$$SalesInvoice2040002$$"
+			And I save the value of "Number" field as "$$NumberSalesInvoice2040002$$"
 			And I click "Post and close" button
 	* Create Sales invoice by partner term Basic Partner terms, without VAT
 		* Open a creation form SI 
@@ -1299,22 +1345,25 @@ Scenario: _2040002 Sales order selection button in the Sales invoice document
 			And in the table "ItemList" I click "Select sales orders" button
 			And "DocumentsTree" table contains lines
 			| 'Sales order'                           | 'Use' |
-			| 'Sales order 9 004*'                    | 'No'  |
+			| '$$SalesOrder20400014$$'                    | 'No'  |
 			| 'Dress, M/White, pcs, 8,000'            | 'No'  |
 			| 'Boots, 36/18SD, Boots (12 pcs), 1,000' | 'No'  |
 			| 'Boots, 37/18SD, pcs, 1,000'            | 'No'  |
-			| 'Sales order 9 005*'                    | 'No'  |
+			| '$$SalesOrder20400015$$'                    | 'No'  |
 			| 'Dress, S/Yellow, pcs, 8,000'           | 'No'  |
 			| 'Boots, 36/18SD, Boots (12 pcs), 1,000' | 'No'  |
 			| 'Boots, 37/18SD, pcs, 1,000'            | 'No'  |
 			And I click the button named "FormSelectAll"
 			And I click "Ok" button
-		* Change the document number
-			And I move to "Other" tab
-			And I input "0" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 003" text in "Number" field
+		// * Change the document number
+		// 	And I move to "Other" tab
+		// 	And I input "0" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "9 003" text in "Number" field
+			And I click "Post" button
+			And I save the window as "$$SalesInvoice20400021$$"
+			And I save the value of "Number" field as "$$NumberSalesInvoice20400021$$"
 			And I click "Post and close" button
 
 
@@ -1338,12 +1387,12 @@ Scenario: _2040003 selection button Shipment confirmation in Sales invoice docum
 		And in the table "ItemList" I click "Select shipment confirmations" button
 		And I click the button named "FormSelectAll"
 		And "ShipmentConfirmationsTree" table contains lines
-			| 'Order'                        | 'Use'                          |
-			| ''                             | ''                             |
-			| 'Shipment confirmation 8 999*' | 'Yes'                          |
-			| 'Shirt, 38/Black, pcs, 10,000' | 'Shirt, 38/Black, pcs, 10,000' |
-			| 'Shipment confirmation 9 000*' | 'Yes'                          |
-			| 'Dress, M/White, pcs, 10,000'  | 'Dress, M/White, pcs, 10,000'  |
+			| 'Order'                           | 'Use'                          |
+			| ''                                | ''                             |
+			| '$$ShipmentConfirmation0400016$$' | 'Yes'                          |
+			| 'Shirt, 38/Black, pcs, 10,000'    | 'Shirt, 38/Black, pcs, 10,000' |
+			| '$$ShipmentConfirmation0400017$$' | 'Yes'                          |
+			| 'Dress, M/White, pcs, 10,000'     | 'Dress, M/White, pcs, 10,000'  |
 		And I click "Ok" button
 		Then the number of "ItemList" table lines is "меньше или равно" 2
 		* Change of agreement and check of selection
@@ -1358,12 +1407,12 @@ Scenario: _2040003 selection button Shipment confirmation in Sales invoice docum
 			And I click "OK" button
 		And in the table "ItemList" I click "Select shipment confirmations" button
 		And "ShipmentConfirmationsTree" table contains lines
-		| 'Order'                        | 'Use'                         |
-		| 'Sales order 9 001*'           | 'Sales order 9 001*'          |
-		| 'Shipment confirmation 9 001*' | 'No'                          |
-		| 'Dress, S/Yellow, pcs, 8,000'  | 'Dress, S/Yellow, pcs, 8,000' |
-		| 'Boots, 36/18SD, pcs, 12,000'  | 'Boots, 36/18SD, pcs, 12,000' |
-		| 'Boots, 37/18SD, pcs, 1,000'   | 'Boots, 37/18SD, pcs, 1,000'  |
+		| 'Order'                            | 'Use'                         |
+		| '$$SalesOrder20400012$$'           | '$$SalesOrder20400012$$'      |
+		| '$$ShipmentConfirmation20400018$$' | 'No'                          |
+		| 'Dress, S/Yellow, pcs, 8,000'      | 'Dress, S/Yellow, pcs, 8,000' |
+		| 'Boots, 36/18SD, pcs, 12,000'      | 'Boots, 36/18SD, pcs, 12,000' |
+		| 'Boots, 37/18SD, pcs, 1,000'       | 'Boots, 37/18SD, pcs, 1,000'  |
 		And I click "Ok" button
 		Then the number of "ItemList" table lines is "меньше или равно" 5
 		And I close all client application windows
@@ -1412,11 +1461,11 @@ Scenario: _2040004 selection of base documents in line in the Shipment confirmat
 		Then "Select Receipt basises" window is opened
 		And "DocumentsTree" table contains lines
 			| 'Currency'                             |
-			| 'Sales invoice 9 003*'                 |
+			| '$$SalesInvoice20400021$$'                 |
 			| 'Dress, M/White, pcs, 8,000, Store 02' |
-			| 'Sales invoice 9 000*'                 |
+			| '$$SalesInvoice20400022$$*'                 |
 			| 'Dress, M/White, pcs, 2,000, Store 02' |
-			| 'Sales invoice 9 002*'                 |
+			| '$$SalesInvoice2040002$$'                 |
 			| 'Dress, M/White, pcs, 2,000, Store 02' |
 		And I go to the last line in "DocumentsTree" table
 		And I select current line in "DocumentsTree" table
@@ -1442,11 +1491,11 @@ Scenario: _2040004 selection of base documents in line in the Shipment confirmat
 		|'And I click choice button of "Shipment basis" attribute in "ItemList" table'|
 		And "DocumentsTree" table contains lines
 			| 'Currency'                              |
-			| 'Sales invoice 9 003*'                  |
+			| '$$SalesInvoice20400021$$'                  |
 			| 'Dress, S/Yellow, pcs, 8,000, Store 02' |
 		And "DocumentsTree" table does not contain lines
 			| 'Currency'                              |
-			| 'Sales invoice 9 002*'                  |
+			| '$$SalesInvoice2040002$$'                  |
 			| 'Dress, M/White, pcs, 2,000, Store 02' |
 		And I go to the last line in "DocumentsTree" table
 		And I select current line in "DocumentsTree" table
@@ -1476,10 +1525,10 @@ Scenario: _2040005 purchase order selection button in Purchase invoice document
 		And I click "Select purchase orders" button
 		And "DocumentsTree" table contains lines
 		| 'Purchase order'                        |
-		| 'Purchase order 9 000*'                 |
+		| '$$PurchaseOrder20400019$$'                 |
 		| 'Dress, M/White, pcs, 10,000'           |
 		| 'Trousers, 36/Yellow, pcs, 12,000'      |
-		| 'Purchase order 9 004*'                 |
+		| '$$PurchaseOrder204000112$$'                 |
 		| 'Dress, M/White, pcs, 3,000'            |
 		| 'Trousers, 36/Yellow, pcs, 10,000'      |
 		| 'Trousers, 36/Yellow, pcs, 5,000'       |
@@ -1509,16 +1558,19 @@ Scenario: _2040005 purchase order selection button in Purchase invoice document
 		And I click "Select purchase orders" button
 		And "DocumentsTree" table contains lines
 		| 'Purchase order'                        |
-		| 'Purchase order 9 004*'                 |
+		| '$$PurchaseOrder204000112$$'                 |
 		| 'Dress, M/White, pcs, 3,000'            |
 		| 'Boots, 36/18SD, Boots (12 pcs), 3,000' |
 		And I click "Cancel" button
-	* Change the document number
-		And I move to "Other" tab
-		And I input "0" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "9 000" text in "Number" field
+	// * Change the document number
+	// 	And I move to "Other" tab
+	// 	And I input "0" text in "Number" field
+	// 	Then "1C:Enterprise" window is opened
+	// 	And I click "Yes" button
+	// 	And I input "9 000" text in "Number" field
+		And I click "Post" button
+		And I save the window as "$$PurchaseInvoice2040005$$"
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice2040005$$"
 		And I click "Post and close" button
 	* Create one more Purchase invoice for the remainder
 		* Open a creation form SI 
@@ -1539,17 +1591,20 @@ Scenario: _2040005 purchase order selection button in Purchase invoice document
 			And I click "Select purchase orders" button
 			And "DocumentsTree" table contains lines
 			| 'Purchase order'                        |
-			| 'Purchase order 9 004*'                 |
+			| '$$PurchaseOrder204000112$$'            |
 			| 'Dress, M/White, pcs, 3,000'            |
 			| 'Boots, 36/18SD, Boots (12 pcs), 3,000' |
 			And I click the button named "FormSelectAll"
 			And I click "Ok" button
-		* Change the document number
-			And I move to "Other" tab
-			And I input "0" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 001" text in "Number" field
+		// * Change the document number
+		// 	And I move to "Other" tab
+		// 	And I input "0" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "9 001" text in "Number" field
+			And I click "Post" button
+			And I save the window as "$$PurchaseInvoice20400051$$"
+			And I save the value of "Number" field as "$$NumberPurchaseInvoice20400051$$"
 			And I click "Post and close" button
 	* Create Purchase invoice to Astar by partner term 'Vendor, TRY'
 		* Open a creation form PI 
@@ -1570,12 +1625,12 @@ Scenario: _2040005 purchase order selection button in Purchase invoice document
 			And I click "Select purchase orders" button
 			And "DocumentsTree" table contains lines
 			| 'Purchase order'                        |
-			| 'Purchase order 9 002*'                 |
+			| '$$PurchaseOrder204000114$$'                 |
 			| 'Trousers, 36/Yellow, pcs, 10,000'      |
 			| 'Boots, 36/18SD, Boots (12 pcs), 5,000' |
 			| 'Dress, M/White, pcs, 3,000'            |
 			| 'Trousers, 36/Yellow, pcs, 5,000'       |
-			| 'Purchase order 9 005*'                 |
+			| '$$PurchaseOrder204000113$$'                 |
 			| 'Dress, M/White, pcs, 3,000'            |
 			| 'Trousers, 36/Yellow, pcs, 5,000'       |
 			| 'Trousers, 36/Yellow, pcs, 10,000'      |
@@ -1585,12 +1640,15 @@ Scenario: _2040005 purchase order selection button in Purchase invoice document
 			Then the number of "ItemList" table lines is "меньше или равно" 8
 			And I go to the last line in "ItemList" table
 			And I delete a line in "ItemList" table
-		* Change the document number
-			And I move to "Other" tab
-			And I input "0" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 003" text in "Number" field
+		// * Change the document number
+		// 	And I move to "Other" tab
+		// 	And I input "0" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "9 003" text in "Number" field
+			And I click "Post" button
+			And I save the window as "$$PurchaseInvoice20400052$$"
+			And I save the value of "Number" field as "$$NumberPurchaseInvoice20400052$$"
 			And I click "Post and close" button
 
 Scenario: _2040006 button for filling items from the base documents in Goods receipt
@@ -1615,34 +1673,36 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 		And "DocumentsTree" table contains lines
 		| 'Currency'                                         |
 		| 'TRY'                                              |
-		| 'Purchase invoice 9 000*'                          |
+		| '$$PurchaseInvoice2040005$$'                          |
 		| 'Dress, M/White, pcs, 10,000, Store 02'            |
 		| 'Trousers, 36/Yellow, pcs, 5,000, Store 02'        |
 		| 'Trousers, 36/Yellow, pcs, 10,000, Store 02'       |
 		| 'Trousers, 36/Yellow, pcs, 12,000, Store 02'       |
 		| 'Boots, 36/18SD, Boots (12 pcs), 24,000, Store 02' |
-		| 'Purchase invoice 9 001*'                          |
+		| '$$PurchaseInvoice20400051$$'                          |
 		| 'Dress, M/White, pcs, 3,000, Store 02'             |
 		| 'Boots, 36/18SD, Boots (12 pcs), 36,000, Store 02' |
-		| 'Purchase order 9 001*'                            |
+		| '$$PurchaseOrder204000110$$'                            |
 		| 'Dress, M/White, pcs, 8,000, Store 02'             |
 		| 'Trousers, 36/Yellow, pcs, 12,000, Store 02'       |
 		| 'USD'                                              |
-		| 'Purchase order 9 003*'                            |
+		| '$$PurchaseOrder204000111$$'                            |
 		| 'Dress, M/White, pcs, 3,000, Store 02'             |
 		| 'Trousers, 36/Yellow, pcs, 5,000, Store 02'        |
 		| 'Boots, 36/18SD, Boots (12 pcs), 60,000, Store 02' |
 		And I click the button named "FormSelectAll"
 		And I click "Ok" button
 		Then the number of "ItemList" table lines is "меньше или равно" 11
-	* Change the document number
-		And I move to "Other" tab
-		And I input "0" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "9 000" text in "Number" field
+	// * Change the document number
+	// 	And I move to "Other" tab
+	// 	And I input "0" text in "Number" field
+	// 	Then "1C:Enterprise" window is opened
+	// 	And I click "Yes" button
+	// 	And I input "9 000" text in "Number" field
 	* Check the display of an error that GR documents with different currencies are selected in GR
 		And I click "Post" button
+		And I save the window as "$$GoodsReceipt2040006$$"
+		And I save the value of "Number" field as "$$NumberGoodsReceipt2040006$$"
 		Then I wait that in user messages the "Currencies in the base documents must match." substring will appear in 30 seconds
 	* Post with the same currency
 		And I move to "Items" tab
@@ -1675,10 +1735,10 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 		And "DocumentsTree" table contains lines
 		| 'Currency'                                         | 'Use' |
 		| 'TRY'                                              | 'No'  |
-		| 'Purchase invoice 9 000*'                          | 'No'  |
+		| '$$PurchaseInvoice2040005$$'                          | 'No'  |
 		| 'Trousers, 36/Yellow, pcs, 10,000, Store 02'       | 'No'  |
 		| 'Boots, 36/18SD, Boots (12 pcs), 22,000, Store 02' | 'No'  |
-		| 'Purchase invoice 9 001*'                          | 'No'  |
+		| '$$PurchaseInvoice20400051$$'                          | 'No'  |
 		| 'Boots, 36/18SD, Boots (12 pcs), 36,000, Store 02' | 'No'  |
 		Then the number of "DocumentsTree" table lines is "меньше или равно" 11
 		And I click "Cancel" button
@@ -1704,12 +1764,12 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 			And "DocumentsTree" table contains lines
 			| 'Currency'                                         |
 			| 'TRY'                                              |
-			| 'Purchase invoice 9 000*'                          |
+			| '$$PurchaseInvoice2040005$$'                          |
 			| 'Trousers, 36/Yellow, pcs, 5,000, Store 02'        |
 			| 'Trousers, 36/Yellow, pcs, 5,000, Store 02'        |
 			| 'Boots, 36/18SD, Boots (12 pcs), 24,000, Store 02' |
 			| 'USD'                                              |
-			| 'Purchase order 9 003*'                            |
+			| '$$PurchaseOrder204000111$$'                            |
 			| 'Dress, M/White, pcs, 3,000, Store 02'             |
 			| 'Trousers, 36/Yellow, pcs, 5,000, Store 02'        |
 			| 'Boots, 36/18SD, Boots (12 pcs), 60,000, Store 02' |
@@ -1739,12 +1799,15 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 				| 'pcs'         |
 			And I select current line in "List" table
 		# temporarily
-		* Change the document number
-			And I move to "Other" tab
-			And I input "0" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "9 001" text in "Number" field
+		// * Change the document number
+		// 	And I move to "Other" tab
+		// 	And I input "0" text in "Number" field
+		// 	Then "1C:Enterprise" window is opened
+		// 	And I click "Yes" button
+		// 	And I input "9 001" text in "Number" field
+			And I click "Post" button
+			And I save the window as "$$GoodsReceipt20400061$$"
+			And I save the value of "Number" field as "$$NumberGoodsReceipt20400061$$"
 			And I click "Post and close" button
 	
 Scenario: _2040007 button for filling in base documents in Goods receipt
@@ -1752,7 +1815,7 @@ Scenario: _2040007 button for filling in base documents in Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
 			| 'Number' |
-			| '9 001'     |
+			| '$$NumberGoodsReceipt20400061$$'     |
 		And I select current line in "List" table
 	* Cleaning of base documents
 		And I go to the first line in "ItemList" table
@@ -1766,9 +1829,9 @@ Scenario: _2040007 button for filling in base documents in Goods receipt
 	* Filling check
 		And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Store'    | 'Unit' | 'Receipt basis'           |
-			| 'Trousers' | '5,000'    | '36/Yellow' | 'Store 02' | 'pcs'  | 'Purchase order 9 003*'   |
-			| 'Trousers' | '5,000'    | '36/Yellow' | 'Store 02' | 'pcs'  | 'Purchase invoice 9 000*' |
-			| 'Boots'    | '24,000'   | '36/18SD'   | 'Store 02' | 'pcs'  | 'Purchase order 9 003*'   |
+			| 'Trousers' | '5,000'    | '36/Yellow' | 'Store 02' | 'pcs'  | '$$PurchaseOrder204000111$$'   |
+			| 'Trousers' | '5,000'    | '36/Yellow' | 'Store 02' | 'pcs'  | '$$PurchaseInvoice2040005$$' |
+			| 'Boots'    | '24,000'   | '36/18SD'   | 'Store 02' | 'pcs'  | '$$PurchaseOrder204000111$$'   |
 	* Filling line by line
 		And I go to the first line in "ItemList" table
 		And I click Clear button of "Receipt basis" attribute in "ItemList" table
@@ -1776,19 +1839,19 @@ Scenario: _2040007 button for filling in base documents in Goods receipt
 		And "DocumentsTree" table contains lines
 			| 'Currency'                                    |
 			| 'USD'                                         |
-			| 'Purchase order 9 003*'                       |
+			| '$$PurchaseOrder204000111$$'                       |
 			| 'Trousers, 36/Yellow, pcs, 5,000, Store 02'   |
 			| 'TRY'                                         |
-			| 'Purchase invoice 9 000*'                     |
+			| '$$PurchaseInvoice2040005$$'                     |
 			| 'Trousers, 36/Yellow, pcs, 5,000, Store 02'   |
 		And I go to the last line in "DocumentsTree" table
 		And I move one line up in "DocumentsTree" table
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Currency' | 'Item key'  | 'Store'    | 'Unit' | 'Receipt basis'           |
-			| 'Trousers' | '5,000'    | 'TRY'      | '36/Yellow' | 'Store 02' | 'pcs'  | 'Purchase invoice 9 000*' |
-			| 'Trousers' | '5,000'    | 'TRY'      | '36/Yellow' | 'Store 02' | 'pcs'  | 'Purchase invoice 9 000*' |
-			| 'Boots'    | '24,000'   | 'USD'      | '36/18SD'   | 'Store 02' | 'pcs'  | 'Purchase order 9 003*' |
+			| 'Trousers' | '5,000'    | 'TRY'      | '36/Yellow' | 'Store 02' | 'pcs'  | '$$PurchaseInvoice2040005$$' |
+			| 'Trousers' | '5,000'    | 'TRY'      | '36/Yellow' | 'Store 02' | 'pcs'  | '$$PurchaseInvoice2040005$$' |
+			| 'Boots'    | '24,000'   | 'USD'      | '36/18SD'   | 'Store 02' | 'pcs'  | '$$PurchaseOrder204000111$$' |
 		And I close all client application windows
 
 
@@ -1813,8 +1876,8 @@ Scenario: _2040008 button to fill in items from Goods receipt in Purchase invoic
 		And I click "Select goods receipt" button
 		And "GoodsReceiptTree" table contains lines
 		| 'Order'                            |
-		| 'Purchase order 9 001*'            |
-		| 'Goods receipt 9 000*'             |
+		| '$$PurchaseOrder204000110$$'            |
+		| '$$GoodsReceipt2040006$$'             |
 		| 'Dress, M/White, pcs, 8,000'       |
 		| 'Trousers, 36/Yellow, pcs, 12,000' |
 		Then the number of "GoodsReceiptTree" table lines is "меньше или равно" 4

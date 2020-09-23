@@ -191,10 +191,10 @@ find /c "No errors found" %env.LogFile1C% && ( echo Success ) || ( echo "##teamc
           <param name="teamcity.file.content.replacer.failBuild" value="true" />
           <param name="teamcity.file.content.replacer.file.encoding" value="autodetect" />
           <param name="teamcity.file.content.replacer.file.encoding.custom" value="autodetect" />
-          <param name="teamcity.file.content.replacer.pattern" value="Результат = AttachAddIn(LinkOnDriver, ObjectName[1]);" />
+          <param name="teamcity.file.content.replacer.pattern" value="Result = AttachAddIn(LinkOnDriver, ObjectName[1]);" />
           <param name="teamcity.file.content.replacer.pattern.case.sensitive" value="true" />
           <param name="teamcity.file.content.replacer.regexMode" value="FIXED_STRINGS" />
-          <param name="teamcity.file.content.replacer.replacement" value="Результат = False;" />
+          <param name="teamcity.file.content.replacer.replacement" value="Result = False;" />
           <param name="teamcity.file.content.replacer.wildcards" value="+:IRP\src\CommonModules\HardwareClient\Module.bsl" />
         </parameters>
       </extension>

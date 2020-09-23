@@ -11,6 +11,66 @@ To transfer items from one store to another
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
+
+Scenario: _0201000 preparation
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	* Check or create InventoryTransferOrder020001
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberInventoryTransferOrder020001$$" |
+			When create InventoryTransferOrder020001
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberInventoryTransferOrder020004$$" |
+			When create InventoryTransferOrder020004
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberInventoryTransferOrder020007$$" |
+			When create InventoryTransferOrder020007
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberInventoryTransferOrder020010$$" |
+			When create InventoryTransferOrder020010
+
+# 1
+
+
+
+
+
+
+
 # 1
 Scenario: _021001 create document Inventory Transfer - Store sender doesn't use Shipment confirmation, Store receiver use Goods receipt
 	
@@ -130,7 +190,7 @@ Scenario: _021006 create document Inventory Transfer - Store sender use Shipment
 
 Scenario: _021007 check Inventory transfer (based on order) posting by register TransferOrderBalance (-) (Store sender use Goods receipt, Store receiver use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
-	And "List" table does not contain lines
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                    | 'Line number' | 'Store sender' | 'Store receiver' | 'Order'                            | 'Item key' |
 		| '20,000'   | '$$InventoryTransfer021006$$' | '1'           | 'Store 02'     | 'Store 03'       | '$$InventoryTransferOrder020004$$' | 'L/Green'  |
 
@@ -222,7 +282,7 @@ Scenario: _021016 check the absence posting of Inventory transfer (based on orde
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
 	And "List" table does not contain lines
 	| 'Quantity' | 'Recorder'                    | 'Receipt basis'               | 'Line number' | 'Store'    | 'Item key' |
-	| '20,000'   | '$$InventoryTransfer021006$$' | '$$InventoryTransfer021006$$' | '1'           | 'Store 03' | 'L/Green'  |
+	| '20,000'   | '$$InventoryTransfer021012$$' | '$$InventoryTransfer021012$$' | '1'           | 'Store 03' | 'L/Green'  |
 
 
 Scenario: _021017 check the absence posting of Inventory transfer (based on order) by register StockBalance (Store sender use Goods receipt, Store receiver doesn't use Shipment confirmaton)
@@ -406,51 +466,7 @@ Scenario: _021029 check Inventory transfer (without order) posting by register S
 	# 6
 Scenario: _021030 create document Inventory Transfer - Store sender use Shipment confirmation, Store receiver use Goods receipt (without Purchase order)
 	
-	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
-	And I click the button named "FormCreate"
-	And I click Select button of "Store sender" field
-	And I go to line in "List" table
-		| Description |
-		| Store 02    |
-	And I select current line in "List" table
-	And I click Select button of "Store receiver" field
-	And I go to line in "List" table
-		| Description |
-		| Store 03    |
-	And I select current line in "List" table
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| 'Description'  |
-		| 'Main Company' |
-	And I select current line in "List" table
-	// * Filling in the document number
-	// 		And I input "6" text in "Number" field
-	// 		Then "1C:Enterprise" window is opened
-	// 		And I click "Yes" button
-	// 		And I input "6" text in "Number" field
-	And I move to "Items" tab
-	And I click the button named "Add"
-	And I click choice button of "Item" attribute in "ItemList" table
-	And I go to line in "List" table
-		| 'Description' |
-		| 'Dress'       |
-	And I select current line in "List" table
-	And I activate "Item key" field in "ItemList" table
-	And I click choice button of "Item key" attribute in "ItemList" table
-	And I go to line in "List" table
-		| 'Item key' |
-		| 'L/Green' |
-	And I select current line in "List" table
-	And I activate "Unit" field in "ItemList" table
-	And I click choice button of "Unit" attribute in "ItemList" table
-	And I select current line in "List" table
-	And I activate "Quantity" field in "ItemList" table
-	And I input "3,000" text in "Quantity" field of "ItemList" table
-	And I finish line editing in "ItemList" table
-	And I click "Post" button
-	And I save the value of "Number" field as "$$NumberInventoryTransfer021030$$"
-	And I save the window as "$$InventoryTransfer021030$$"
-	And I click "Post and close" button
+	When create InventoryTransfer021030
 
 Scenario: _021031 check the absence posting of Inventory transfer (InventoryTransfer) in the register TransferOrderBalanceStore sender use Shipment confirmation, Store receiver use Goods receipt
 	

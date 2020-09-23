@@ -15,14 +15,21 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-Scenario: _016001 base price fill (incl. VAT)
-	* Preparation
-		When Create catalog ItemTypes objects
-		When Create catalog Items objects
-		When Create catalog AddAttributeAndPropertyValues objects (Color, Size, Season)
+
+Scenario: _016000 preparation
 		When Create catalog ItemKeys objects
-		When Create chart of characteristic types AddAttributeAndProperty objects (Color, Size, Season)
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When  Create catalog Currencies objects
+
+Scenario: _016001 base price fill (incl. VAT)
+	
 	* Opening  price list
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I click the button named "FormCreate"
@@ -295,24 +302,24 @@ Scenario: _016005 check movements of the price list document by item key in regi
 		Given I open hyperlink "e1cib/list/InformationRegister.PricesByItemKeys"
 	* Check Price list movements 
 		And "List" table contains lines
-		| 'Price'    | 'Recorder'                                     | 'Price type'        | 'Item key'  |
-		| '550,00'   | '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'S/Yellow'  |
-		| '520,00'   | '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'XS/Blue'   |
-		| '520,00'   | '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'M/White'   |
-		| '550,00'   | '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'L/Green'   |
-		| '550,00'   | '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'XL/Green'  |
-		| '400,00'   | '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '36/Yellow' |
-		| '400,00'   | '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '38/Yellow' |
-		| '350,00'   | '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '36/Red'    |
-		| '350,00'   | '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '38/Black'  |
-		| '700,00'   | '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '36/18SD'   |
-		| '700,00'   | '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '37/18SD'   |
-		| '650,00'   | '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '38/18SD'   |
-		| '650,00'   | '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '39/18SD'   |
-		| '500,00'   | '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '39/19SD'   |
-		| '540,00'   | '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '37/19SD'   |
-		| '3 000,00' | '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'Dress/A-8' |
-		| '5 000,00' | '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'Boots/S-8' |
+		| 'Price'    | 'Recorder'                               | 'Price type'        | 'Item key'  |
+		| '550,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'S/Yellow'  |
+		| '520,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'XS/Blue'   |
+		| '520,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'M/White'   |
+		| '550,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'L/Green'   |
+		| '550,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'XL/Green'  |
+		| '400,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '36/Yellow' |
+		| '400,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '38/Yellow' |
+		| '350,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '36/Red'    |
+		| '350,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '38/Black'  |
+		| '700,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '36/18SD'   |
+		| '700,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '37/18SD'   |
+		| '650,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '38/18SD'   |
+		| '650,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '39/18SD'   |
+		| '500,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '39/19SD'   |
+		| '540,00'   | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | '37/19SD'   |
+		| '3 000,00' | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'Dress/A-8' |
+		| '5 000,00' | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'Boots/S-8' |
 
 
 Scenario: _016002 base price fill and special price fill (not incl. VAT)

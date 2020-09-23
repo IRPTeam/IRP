@@ -6,14 +6,104 @@ Feature: create Shipment confirmation
 
 
 As a storekeeper
-I want to create a Goods receipt
+I want to create a Shipment confirmation
 For shipment of products from store
 
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
-
+Scenario: preparation (Shipment confirmation)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Partners objects (Kalipso)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create information register CurrencyRates records
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	* Check or create SalesOrder023005
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesOrder023005$$" |
+			When create SalesOrder023005
+	* Check or create SalesInvoice024008 based on SalesOrder023005
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesInvoice024008$$" |
+			When create SalesInvoice024008
+	* Check or create SalesInvoice024025
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesInvoice024025$$" |
+			When create SalesInvoice024025
+	* Check or create PurchaseOrder017003
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberPurchaseOrder017003$$" |
+			When create PurchaseOrder017003
+	* Check or create PurchaseInvoice018006
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberPurchaseInvoice018006$$" |
+			When create PurchaseInvoice018006 based on PurchaseOrder017003
+	
+	* Check or create PurchaseReturn022314
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberPurchaseReturn022314$$" |
+			When create PurchaseReturn022314
+		 	And I go to line in "List" table
+					| 'Number'                          |
+					| "$$NumberPurchaseReturn022314$$"|
+            And I select current line in "List" table
+			And I activate "Q" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "10,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post and close" button
+	* Check or create InventoryTransfer021030
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberInventoryTransfer021030$$" |	
+			When create InventoryTransfer021030
 
 Scenario: _028801 create document Shipment confirmation based on Sales Invoice (with Sales order)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -103,7 +193,7 @@ Scenario: _028807 create document Shipment confirmation based on Purchase return
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	And I go to line in "List" table
 		| 'Number' |
-		| '$$NumberPurchaseReturn022301$$'      |
+		| '$$NumberPurchaseReturn022314$$'      |
 	And I select current line in "List" table
 	And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
 	Then the form attribute named "Company" became equal to "Main Company"
@@ -115,7 +205,7 @@ Scenario: _028807 create document Shipment confirmation based on Purchase return
 	// 	And I input "101" text in "Number" field
 	And "ItemList" table contains lines
 		| 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Shipment basis'                              |
-		| 'Dress' | '2,000'    | 'L/Green'  | 'pcs'  | '$$PurchaseReturn022301$$' |
+		| 'Dress' | '10,000'    | 'L/Green'  | 'pcs'  | '$$PurchaseReturn022314$$' |
 	And I click "Post" button
 	And I save the value of "Number" field as "$$NumberShipmentConfirmation028807$$"
 	And I save the window as "$$ShipmentConfirmation0028807$$"
@@ -126,7 +216,7 @@ Scenario: _028808 check Shipment confirmation posting (based on Purchase return)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
 	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                 | 'Line number' | 'Store'    | 'Item key' |
-		| '2,000'    | 'Shipment confirmation 101*' | '1'           | 'Store 02' | 'L/Green'  |
+		| '10,000'    | '$$ShipmentConfirmation0028807$$' | '1'           | 'Store 02' | 'L/Green'  |
 
 
 
@@ -134,29 +224,13 @@ Scenario: _028809 check Shipment confirmation posting (based on Purchase return)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
 	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                 | 'Shipment basis'     | 'Line number' | 'Store'    | 'Item key' |
-		| '2,000'   | 'Shipment confirmation 101*' | '$$PurchaseReturn022301$$' | '1'           | 'Store 02' | 'L/Green'  |
+		| '10,000'   | '$$ShipmentConfirmation0028807$$' | '$$PurchaseReturn022314$$' | '1'           | 'Store 02' | 'L/Green'  |
 
 Scenario: _028810 create document Shipment confirmation  based on Inventory transfer
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And I go to line in "List" table
-		| 'Number'                            | 'Store receiver' | 'Store sender' |
-		| '$$NumberInventoryTransfer021006$$' | 'Store 03'       | 'Store 02'     |
-	And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
-	And Delay 1
-	Then the form attribute named "Company" became equal to "Main Company"
-	// * Change of document number
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "102" text in "Number" field
-	And I click "Post" button
-	And I save the value of "Number" field as "$$NumberShipmentConfirmation0288101$$"
-	And I save the window as "$$ShipmentConfirmation00288101$$"
-	And I click "Post and close" button
-	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
-	And I go to line in "List" table
-		| 'Number' | 'Store receiver' | 'Store sender' |
-		| '$$NumberInventoryTransfer021012$$'      | 'Store 01'       | 'Store 02'     |
+		| 'Number'                           |
+		| '$$NumberInventoryTransfer021030$$' |
 	And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
 	And Delay 1
 	Then the form attribute named "Company" became equal to "Main Company"
@@ -169,38 +243,7 @@ Scenario: _028810 create document Shipment confirmation  based on Inventory tran
 	And I save the value of "Number" field as "$$NumberShipmentConfirmation028810$$"
 	And I save the window as "$$ShipmentConfirmation0028810$$"
 	And I click "Post and close" button
-	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
-	And I go to line in "List" table
-		| 'Number'                            | 'Store receiver' | 'Store sender' |
-		| '$$NumberInventoryTransfer021030$$' | 'Store 03'       | 'Store 02'     |
-	And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
-	And Delay 1
-	Then the form attribute named "Company" became equal to "Main Company"
-	// * Change of document number
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "104" text in "Number" field
-	And I click "Post" button
-	And I save the value of "Number" field as "$$NumberShipmentConfirmation0288104$$"
-	And I save the window as "$$ShipmentConfirmation00288104$$"
-	And I click "Post and close" button
-	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
-	And I go to line in "List" table
-		| 'Number'                            | 'Store receiver' | 'Store sender' |
-		| '$$NumberInventoryTransfer021036$$' | 'Store 01'       | 'Store 02'     |
-	And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
-	And Delay 1
-	Then the form attribute named "Company" became equal to "Main Company"
-	// * Change of document number
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "105" text in "Number" field
-	And I click "Post" button
-	And I save the value of "Number" field as "$$NumberShipmentConfirmation0288103$$"
-	And I save the window as "$$ShipmentConfirmation00288103$$"
-	And I click "Post and close" button
+	
 
 
 

@@ -68,8 +68,9 @@ EndFunction
 Procedure ShowPicture()
 	If Not Object.Volume.IsEmpty() And PictureViewerServer.IsPictureFile(Object.Volume) Then
 		PictureParameters = CreatePictureParameters();	
+		
 		ThisObject.PictureViewHTML = "<html><img src=""" + 
-				PictureViewerServer.GetPictureURL(PictureParameters).PictureURL + 
+				PictureViewerClient.GetPictureURL(PictureParameters) + 
 				""" height=""100%""></html>";
 	EndIf;
 EndProcedure

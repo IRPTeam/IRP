@@ -21,10 +21,14 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		If TestRow.Count() Then
 			Object.ConnectionSetting.Delete(TestRow[0]);
 		EndIf;
-		
-		NewRow = Object.ConnectionSetting.Add();
-		NewRow.Key = "refresh_token";
-		NewRow.Value = 	Parameter.refresh_token;
+		FindRows = Object.ConnectionSetting.FindRows(New Structure("Key", "refresh_token"));
+		If FindRows.Count() Then
+			Row = FindRows[0];
+		Else
+			Row = Object.ConnectionSetting.Add();
+		EndIf;
+		Row.Key = "refresh_token";
+		Row.Value = Parameter.refresh_token;
 		
 		Modified = True;
 	EndIf;

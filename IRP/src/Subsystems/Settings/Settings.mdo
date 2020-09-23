@@ -14,6 +14,7 @@
   <content>Constant.NotFirstStart</content>
   <content>Constant.DefaultPictureStorageVolume</content>
   <content>CommonForm.MainSettings</content>
+  <content>DataProcessor.DataHistory</content>
   <subsystems>AttributeAndProperty</subsystems>
   <subsystems>Contacts</subsystems>
   <subsystems>Equipment</subsystems>

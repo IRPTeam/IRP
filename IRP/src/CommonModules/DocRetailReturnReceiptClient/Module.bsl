@@ -140,7 +140,7 @@ EndProcedure
 
 Procedure ItemListItemOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	DocumentsClient.ItemListItemOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
-	SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form);
+	SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
 EndProcedure
 
 Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export																		

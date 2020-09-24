@@ -8,7 +8,24 @@ Feature: label processing
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+
+
+Scenario: _090500 preparation (label processing)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog PriceTypes objects
+		When Create information register PricesByItemKeys records
 	
+
 Scenario: create print layout
 	* Opening the constructor
 		Given I open hyperlink "e1cib/list/Catalog.PrintTemplates"

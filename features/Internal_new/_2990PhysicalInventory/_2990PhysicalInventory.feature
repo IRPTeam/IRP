@@ -15,32 +15,55 @@ Background:
 
 
 Scenario:_2990000 preparation
-	* Create store that use Shipment confirmation and Goods receipt - Store 05
-		Given I open hyperlink "e1cib/list/Catalog.Stores"
-		And I click the button named "FormCreate"
-		And Delay 2
-		And I click Open button of the field named "Description_en"
-		And I input "Store 05" text in the field named "Description_en"
-		And I input "Store 05 TR" text in the field named "Description_tr"
-		And I click "Ok" button
-		And I set checkbox named "UseGoodsReceipt"
-		And I set checkbox named "UseShipmentConfirmation"
-		Then the form attribute named "Transit" became equal to "No"
-		And I click the button named "FormWriteAndClose"
-		And Delay 5
-	* Create store that use Shipment confirmation and Goods receipt - Store 06
-		Given I open hyperlink "e1cib/list/Catalog.Stores"
-		And I click the button named "FormCreate"
-		And Delay 2
-		And I click Open button of the field named "Description_en"
-		And I input "Store 06" text in the field named "Description_en"
-		And I input "Store 06 TR" text in the field named "Description_tr"
-		And I click "Ok" button
-		And I remove checkbox named "UseGoodsReceipt"
-		And I remove checkbox named "UseShipmentConfirmation"
-		Then the form attribute named "Transit" became equal to "No"
-		And I click the button named "FormWriteAndClose"
-		And Delay 5
+	
+Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipment confirmation)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create information register Barcodes records
+		When Create catalog Companies objects (own Second company)
+		When Create catalog CashAccounts objects
+		When Create catalog Agreements objects
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects
+		When Create catalog Companies objects (partners company)
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Partners objects (Kalipso)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	* Add sales tax
+		When Create catalog Taxes objects (Sales tax)
+		When Create information register TaxSettings (Sales tax)
+		When Create information register Taxes records (Sales tax)
+		When add sales tax settings 
 	* Add balances for created store (Opening entry)
 		* Open document form opening entry
 			Given I open hyperlink "e1cib/list/Document.OpeningEntry"

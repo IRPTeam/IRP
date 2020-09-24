@@ -11,7 +11,48 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-Scenario: check filling in Store field in the document Sales order
+Scenario: _201000 preparation ( filling stores)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Partners objects (Kalipso)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	
+
+Scenario: _201001 check filling in Store field in the document Sales order
 	* Open document form Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -81,7 +122,7 @@ Scenario: check filling in Store field in the document Sales order
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
 		And I close all client application windows
 
-Scenario: check filling in Store field in the document Sales invoice
+Scenario: _201002 check filling in Store field in the document Sales invoice
 	* Open document form Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
@@ -151,7 +192,7 @@ Scenario: check filling in Store field in the document Sales invoice
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
 		And I close all client application windows
 
-Scenario: check filling in Store field in the document Purchase order
+Scenario: _201003 check filling in Store field in the document Purchase order
 	* Open document form Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -229,7 +270,7 @@ Scenario: check filling in Store field in the document Purchase order
 		And I close all client application windows
 
 
-Scenario: check filling in Store field in the document Purchase invoice
+Scenario: _201004 check filling in Store field in the document Purchase invoice
 	* Open document form Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
@@ -307,7 +348,7 @@ Scenario: check filling in Store field in the document Purchase invoice
 		And I close all client application windows
 
 
-Scenario: _0154516  check filling in Store field in the Shipment confirmation
+Scenario: _201005 check filling in Store field in the Shipment confirmation
 	* Open a creation form Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click "Create" button
@@ -399,7 +440,7 @@ Scenario: _0154516  check filling in Store field in the Shipment confirmation
 			And I close all client application windows
 
 
-Scenario: _0154517  check filling in Store field in the Goods receipt
+Scenario: _201006 check filling in Store field in the Goods receipt
 	* Open a creation form Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I click "Create" button

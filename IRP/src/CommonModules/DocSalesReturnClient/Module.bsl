@@ -29,7 +29,9 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	#EndIf
 	
 	Form.TaxAndOffersCalculated = True;
-	CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.ItemList, Settings);
+	If Settings.Count() Then
+		CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.ItemList, Settings, Undefined, AddInfo);
+	EndIf;
 	
 	If Not ValueIsFilled(Object.Ref) Then
 		ItemListOnChange(Object, Form);

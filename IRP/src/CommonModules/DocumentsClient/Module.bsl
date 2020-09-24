@@ -1052,7 +1052,7 @@ Procedure ShowUserQueryBoxContinue(Result, AdditionalParameters) Export
 	If Result.Property("UpdatePrices") Then
 		
 		Settings.CalculateSettings = New Structure();
-		PriceDate = CalculationStringsClientServer.GetPriceDate(Object);
+		PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
 		Settings.CalculateSettings.Insert("UpdatePrice",
 					New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
 					
@@ -1088,7 +1088,7 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 	CalculationSettings = New Structure;
 	If Object.Property("Agreement") Then
 		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
-		PriceDate = CalculationStringsClientServer.GetPriceDate(Object);
+		PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
 		CalculationSettings.Insert("UpdatePrice",
 					New Structure("Period, PriceType", PriceDate, AgreementInfo.PriceType));
 		FilterString = "Item, ItemKey, Unit, Price";
@@ -2030,7 +2030,7 @@ Procedure ItemListPriceTypeOnChange(Object, Form, Module, Item = Undefined, Sett
 	
 	Settings.CalculateSettings.Insert("UpdatePrice");
 	Settings.CalculateSettings.UpdatePrice = New Structure("Period, PriceType", 
-	CalculationStringsClientServer.GetPriceDate(Object), Form.CurrentPriceType);
+	CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date), Form.CurrentPriceType);
 	
 	ItemListCalculateRowsAmounts(Object, Form, Settings, Undefined, AddInfo);
 EndProcedure

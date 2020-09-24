@@ -745,21 +745,6 @@ Function IsPricesChanged(Object, Form, Settings, AddInfo = Undefined) Export
 	Return False;
 EndFunction
 
-Function GetPriceDate(Object) Export
-	If Not ValueIsFilled(Object.Ref) Then
-		If Not ValueIsFilled(Object.Date) Then
-			Return CurrentDate();
-		EndIf;
-		If BegOfDay(Object.Date) = BegOfDay(CurrentDate()) Then
-			Return EndOfDay(Object.Date);
-		Else
-			Return Object.Date;
-		EndIf;
-	Else
-		Return Object.Date;
-	EndIf;
-Endfunction
-
 Function GetPriceDateByRefAndDate(Ref, Date) Export
 	If Not ValueIsFilled(Ref) Then
 		If Not ValueIsFilled(Date) Then

@@ -107,11 +107,13 @@ Scenario: check the filter by cash account (bank account selection is not availa
 		And I click Select button of "Cash account" field
 		And I save number of "List" table lines as "QS"
 		Then "QS" variable is equal to 3
+		// change 3 to 4
 		And "List" table contains lines
 			| Description         |
 			| Cash desk №1 |
 			| Cash desk №2 |
 			| Cash desk №3 |
+			// | Cash desk №4 |
 		And I select current line in "List" table
 		Then the form attribute named "CashAccount" became equal to "Cash desk №1"
 	* Check the filter by string input

@@ -35,8 +35,8 @@ Scenario: _092001 checkbox Use serial lot number in the Item type
 	
 Scenario: _092002 check serial lot number in the Retail sales receipt
 	* Preparation
-		// And I delete '$$RetailSalesReceipt092002$$' variable
-		// And I delete '$$NumberRetailSalesReceipt092002$$' variable
+		And I delete '$$RetailSalesReceipt092002$$' variable
+		And I delete '$$NumberRetailSalesReceipt092002$$' variable
 	* Create Retail sales receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I click the button named "FormCreate"
@@ -262,8 +262,8 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 	
 Scenario: _092003 check serial lot number in the Retail return receipt
 	* Preparation
-		// And I delete '$$RetailReturnReceipt092003$$' variable
-		// And I delete '$$NumberRetailSalesReceipt092002$$' variable
+		And I delete '$$RetailReturnReceipt092003$$' variable
+		And I delete '$$NumberRetailReturnReceipt092003$$' variable
 	* Create Retail return receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
@@ -288,6 +288,12 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
         |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
+		And I move to "Other" tab
+		And I click Select button of "Business unit" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shop 01'     |
+		And I select current line in "List" table	
 	* Post Retail return receipt and check movements in the register Sales turnovers
 		And I click "Post" button
 		And I save the window as "$$RetailReturnReceipt092003$$"
@@ -341,23 +347,29 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button
+			And I move to "Payments" tab
+			And I activate "Amount" field in "Payments" table
+			And I select current line in "Payments" table
+			And I input "1 750,00" text in "Amount" field of "Payments" table
+			And I finish line editing in "Payments" table
+			And I move to "Item list" tab			
 	* Post Retail sales receipt and check movements in the register Sales turnovers
 		And I click "Post" button
 		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
 		And "List" table contains lines
-		| 'Currency' | 'Recorder'                      | 'Company'      | 'Multi currency movement type' | 'Sales invoice'                | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount'  | 'Net amount' |
-		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-400,00' | '-338,98'    |
-		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-400,00' | '-338,98'    |
-		| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-68,49'  | '-58,04'     |
-		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' | '-550,85'    |
-		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' | '-550,85'    |
-		| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'   | '-111,30' | '-94,32'     |
-		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '-1,000'   | '-700,00' | '-593,22'    |
-		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '-1,000'   | '-700,00' | '-593,22'    |
-		| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '-1,000'   | '-119,86' | '-101,58'    |
-		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-400,00' | '-338,98'    |
-		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' | '-550,85'    |
-		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '-1,000'   | '-700,00' | '-593,22'    |
+		| 'Currency' | 'Recorder'                      | 'Company'      | 'Multi currency movement type' | 'Sales invoice'                | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount'  |
+		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-400,00' |
+		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-400,00' |
+		| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-68,49'  |
+		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' |
+		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' |
+		| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'   | '-111,30' |
+		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '-1,000'   | '-700,00' |
+		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '-1,000'   | '-700,00' |
+		| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '-1,000'   | '-119,86' |
+		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-400,00' |
+		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' |
+		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '-1,000'   | '-700,00' |
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$RetailReturnReceipt092003$$" window
 		And I click the button named "Add"
@@ -389,6 +401,12 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			| 'Boots' | '37/18SD'  |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
+		And I move to "Payments" tab
+		And I activate "Amount" field in "Payments" table
+		And I select current line in "Payments" table
+		And I input "2 450,00" text in "Amount" field of "Payments" table
+		And I finish line editing in "Payments" table
+		And I move to "Item list" tab
 		And I click "Post" button
 		Then user message window does not contain messages
 	* Change item that doesn't use serial lot number to item that uses serial lot number and check user message

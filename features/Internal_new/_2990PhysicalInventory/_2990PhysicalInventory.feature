@@ -306,7 +306,7 @@ Scenario: _2990002 create Stock adjustment as surplus
 		And I save the window as "$$StockAdjustmentAsSurplus2990002$$"
 	* Check movements
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$StockAdjustmentAsSurplus2990002$$' | ''            | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                     |
 		| 'Document registrations records'      | ''            | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                     |
 		| 'Register  "Inventory balance"'       | ''            | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                     |
@@ -345,7 +345,7 @@ Scenario: _2990002 create Stock adjustment as surplus
 		And I select current line in "List" table
 		And I click "Post" button
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$StockAdjustmentAsSurplus2990002$$' | ''            | ''          | ''               | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Document registrations records' | ''            | ''          | ''               | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Register  "Inventory balance"'  | ''            | ''          | ''               | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
@@ -423,7 +423,7 @@ Scenario: _2990003 create Stock adjustment as write off
 		And I save the window as "$$StockAdjustmentAsWriteOff2990003$$"
 	* Check movements
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$StockAdjustmentAsWriteOff2990003$$' | ''            | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                     |
 		| 'Document registrations records'       | ''            | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                     |
 		| 'Register  "Inventory balance"'        | ''            | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                     |
@@ -462,7 +462,7 @@ Scenario: _2990003 create Stock adjustment as write off
 		And I select current line in "List" table
 		And I click "Post" button
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$StockAdjustmentAsWriteOff2990003$$' | ''            | ''          | ''               | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                     |
 		| 'Document registrations records'       | ''            | ''          | ''               | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                     |
 		| 'Register  "Inventory balance"'        | ''            | ''          | ''               | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                     |
@@ -528,7 +528,7 @@ Scenario: _2990004 create Physical inventory (store use GR and SC)
 		And I save the value of "Number" field as "$$NumberPhysicalInventory2990004$$"
 		And I save the window as "$$PhysicalInventory2990004$$"
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$PhysicalInventory2990004$$'              | ''            | ''       | ''          | ''           | ''                             | ''         |
 		| 'Document registrations records'            | ''            | ''       | ''          | ''           | ''                             | ''         |
 		| 'Register  "Stock adjustment as surplus"'   | ''            | ''       | ''          | ''           | ''                             | ''         |
@@ -560,7 +560,7 @@ Scenario: _2990004 create Physical inventory (store use GR and SC)
 			| '$$NumberPhysicalInventory2990004$$'       |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$PhysicalInventory2990004$$' |
 		| 'Document registrations records'                |
 		And I close all client application windows
@@ -571,7 +571,7 @@ Scenario: _2990004 create Physical inventory (store use GR and SC)
 			| '$$NumberPhysicalInventory2990004$$'       |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$PhysicalInventory2990004$$'              | ''            | ''       | ''          | ''           | ''                             | ''         |
 		| 'Document registrations records'            | ''            | ''       | ''          | ''           | ''                             | ''         |
 		| 'Register  "Stock adjustment as surplus"'   | ''            | ''       | ''          | ''           | ''                             | ''         |
@@ -640,7 +640,7 @@ Scenario: _2990005 create Physical inventory (store doesn't use GR and SC)
 		And I save the value of "Number" field as "$$NumberPhysicalInventory2990005$$"
 		And I save the window as "$$PhysicalInventory2990005$$"
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$PhysicalInventory2990005$$'                     | ''            | ''       | ''          | ''           | ''                      | ''          |
 		| 'Document registrations records'            | ''            | ''       | ''          | ''           | ''                      | ''          |
 		| 'Register  "Stock adjustment as surplus"'   | ''            | ''       | ''          | ''           | ''                      | ''          |
@@ -707,7 +707,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 		And I save the value of "Number" field as "$$NumberStockAdjustmentAsSurplus2990006$$"
 		And I save the window as "$$StockAdjustmentAsSurplus$$"
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$StockAdjustmentAsSurplus$$'          | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Document registrations records'          | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Register  "Stock adjustment as surplus"' | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
@@ -732,7 +732,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 			| '$$NumberStockAdjustmentAsSurplus$$'       |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$StockAdjustmentAsSurplus$$'          |
 		| 'Document registrations records'                |
 		And I close all client application windows
@@ -743,7 +743,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 			| '$$NumberStockAdjustmentAsSurplus$$'       |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$StockAdjustmentAsSurplus$$'          | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Document registrations records'          | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Register  "Stock adjustment as surplus"' | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
@@ -803,7 +803,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 		And I save the value of "Number" field as "$$NumberStockAdjustmentAsWriteOff2990007$$"
 		And I save the window as "$$StockAdjustmentAsWriteOff2990007$$"
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$StockAdjustmentAsWriteOff2990007$$'      | ''            | ''          | ''             | ''                     | ''                             | ''         | ''         | ''                    | ''                             | ''                     |
 		| 'Document registrations records'            | ''            | ''          | ''             | ''                     | ''                             | ''         | ''         | ''                    | ''                             | ''                     |
 		| 'Register  "Inventory balance"'             | ''            | ''          | ''             | ''                     | ''                             | ''         | ''         | ''                    | ''                             | ''                     |
@@ -828,7 +828,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 			| '$$NumberStockAdjustmentAsWriteOff2990007$$'       |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$StockAdjustmentAsWriteOff2990007$$'          |
 		| 'Document registrations records'                |
 		And I close all client application windows
@@ -839,7 +839,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 			| '$$NumberStockAdjustmentAsWriteOff2990007$$'       |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$StockAdjustmentAsWriteOff2990007$$'          | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Document registrations records'            | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
 		| 'Register  "Inventory balance"'             | ''            | ''          | ''             | ''                     | ''                      | ''         | ''         | ''                    | ''                       | ''                     |
@@ -1409,7 +1409,7 @@ Scenario: _2990011 re-filling Physical inventory based on Physical count by loca
 		And I click "Post" button
 	* Check movements Physical inventory
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$PhysicalInventory2990010$$'              | ''            | ''       | ''          | ''           | ''                             | ''         |
 		| 'Document registrations records'            | ''            | ''       | ''          | ''           | ''                             | ''         |
 		| 'Register  "Stock adjustment as surplus"'   | ''            | ''       | ''          | ''           | ''                             | ''         |

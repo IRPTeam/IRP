@@ -492,7 +492,7 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 		| 'Number' |
 		| '$$NumberSalesOrder029201$$'    |
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$SalesOrder029201$$'                       | ''            | ''          | ''          | ''                     | ''                      | ''          | ''          | ''        | ''                             | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''          | ''                     | ''                      | ''          | ''          | ''        | ''                             | ''                     |
 		| 'Register  "Inventory balance"'              | ''            | ''          | ''          | ''                     | ''                      | ''          | ''          | ''        | ''                             | ''                     |
@@ -623,7 +623,7 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 		| 'Number' |
 		| '$$NumberSalesOrder0292012$$'    |
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$SalesOrder0292012$$'                      | ''            | ''          | ''          | ''             | ''                      | ''          | ''          | ''        | ''                             | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''          | ''             | ''                      | ''          | ''          | ''        | ''                             | ''                     |
 		| 'Register  "Order reservation"'              | ''            | ''          | ''          | ''             | ''                      | ''          | ''          | ''        | ''                             | ''                     |
@@ -751,7 +751,7 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 		| 'Number' |
 		| '$$NumberPurchaseOrder0292012$$'    |
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$PurchaseOrder0292012$$'              | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'        | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
 		| 'Register  "Inventory balance"'         | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
@@ -845,7 +845,7 @@ Scenario: _029202 create Goods reciept based on Purchase order that based on Sal
 			| 'Number' |
 			| '$$NumberGoodsReceipt0292022$$'    |
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$GoodsReceipt029202$$'                    | ''            | ''       | ''          | ''                    | ''                    | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'        | ''            | ''       | ''          | ''                    | ''                    | ''          | ''          | ''        | ''              |
 		| 'Register  "Inventory balance"'         | ''            | ''       | ''          | ''                    | ''                    | ''          | ''          | ''        | ''              |
@@ -942,7 +942,7 @@ Scenario: _029203 check movements if there is an additional line in the Purchase
 			| 'Number' |
 			| '$$NumberPurchaseOrder0292012$$'    |
 			And I click "Registrations report" button
-			Then "ResultTable" spreadsheet document is equal by template
+			And "ResultTable" spreadsheet document contains lines:
 			| '$$PurchaseOrder0292012$$'                   | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
 			| 'Document registrations records'        | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
 			| 'Register  "Inventory balance"'         | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
@@ -1037,7 +1037,7 @@ Scenario: _029203 check movements if there is an additional line in the Purchase
 			| 'Number' |
 			| '$$NumberGoodsReceipt029203$$'    |
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$GoodsReceipt029203$$'                | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'        | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
 		| 'Register  "Inventory balance"'         | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
@@ -1132,7 +1132,7 @@ Scenario: _029204 create Purchase invoice based on Purchase order that based on 
 			| 'Number' |
 			| '$$NumberPurchaseInvoice029204$$'    |
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$PurchaseInvoice029204$$'            | ''            | ''          | ''                     | ''                         | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
 		| 'Document registrations records'       | ''            | ''          | ''                     | ''                         | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
 		| 'Register  "Purchase turnovers"'       | ''            | ''          | ''                     | ''                         | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
@@ -1247,7 +1247,7 @@ Scenario: _029205 create Shipment confirmation based on Sales order, procurement
 		And I click "Post" button
 	* Check movements
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$ShipmentConfirmation029205$$'             | ''            | ''       | ''          | ''                      | ''                               | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'             | ''            | ''       | ''          | ''                      | ''                               | ''          | ''          | ''        | ''              |
 		| 'Register  "Inventory balance"'              | ''            | ''       | ''          | ''                      | ''                               | ''          | ''          | ''        | ''              |
@@ -1317,7 +1317,7 @@ Scenario: _029206 create Sales invoice based on Sales order, procurement method 
 		| Number |
 		| $$NumberSalesInvoice0292012$$    |
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 			| '$$SalesInvoice0292012$$'                   | ''            | ''          | ''                     | ''                 | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 			| 'Document registrations records'       | ''            | ''          | ''                     | ''                 | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 			| 'Register  "Partner AR transactions"'  | ''            | ''          | ''                     | ''                 | ''                           | ''               | ''                   | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
@@ -1531,7 +1531,7 @@ Scenario: _029207 create Purchase order based on Sales order (Purchase invoice b
 		| 'Number' |
 		| '$$NumberSalesOrder0292071$$'    |
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$SalesOrder0292071$$'                      | ''            | ''          | ''          | ''             | ''                      | ''          | ''          | ''        | ''                             | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''          | ''             | ''                      | ''          | ''          | ''        | ''                             | ''                     |
 		| 'Register  "Order reservation"'              | ''            | ''          | ''          | ''             | ''                      | ''          | ''          | ''        | ''                             | ''                     |
@@ -1663,7 +1663,7 @@ Scenario: _029207 create Purchase order based on Sales order (Purchase invoice b
 		| 'Number' |
 		| '$$NumberSalesOrder0292072$$'   |
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$SalesOrder0292072$$'                      | ''            | ''          | ''          | ''             | ''                      | ''          | ''          | ''        | ''                             | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''          | ''             | ''                      | ''          | ''          | ''        | ''                             | ''                     |
 		| 'Register  "Order reservation"'              | ''            | ''          | ''          | ''             | ''                      | ''          | ''          | ''        | ''                             | ''                     |
@@ -1801,7 +1801,7 @@ Scenario: _029207 create Purchase order based on Sales order (Purchase invoice b
 		| 'Number' |
 		| '$$NumberPurchaseOrder0292073$$'    |
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$PurchaseOrder0292073$$'           | ''            | ''       | ''          | ''             | ''                         | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                         | ''          | ''          | ''        | ''              |
 		| 'Register  "Order procurement"'      | ''            | ''       | ''          | ''             | ''                         | ''          | ''          | ''        | ''              |
@@ -1862,7 +1862,7 @@ Scenario: _029208 create Purchase invoice based on Purchase order (Purchase invo
 			| 'Number' |
 			| '$$NumberPurchaseInvoice0292008$$'    |
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$PurchaseInvoice0292008$$'            | ''            | ''          | ''                     | ''               | ''                           | ''                           | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
 		| 'Document registrations records'        | ''            | ''          | ''                     | ''               | ''                           | ''                           | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
 		| 'Register  "Inventory balance"'         | ''            | ''          | ''                     | ''               | ''                           | ''                           | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
@@ -2012,7 +2012,7 @@ Scenario: _029209 create Goods reciept based on Purchase invoice (Purchase invoi
 			| 'Number' |
 			| '$$NumberGoodsReceipt0292009$$'    |
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$GoodsReceipt0292009$$'               | ''            | ''       | ''          | ''             | ''                           | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'        | ''            | ''       | ''          | ''             | ''                           | ''          | ''          | ''        | ''              |
 		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''             | ''                           | ''          | ''          | ''        | ''              |
@@ -2078,7 +2078,7 @@ Scenario: _029210 create Sales invoice based on Sales orders (purchase has alrea
 		| 'Number' |
 		| '$$NumberSalesInvoice0292010$$'   |
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$SalesInvoice0292010$$'                    | ''            | ''          | ''                     | ''               | ''                        | ''               | ''                        | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 		| 'Document registrations records'             | ''            | ''          | ''                     | ''               | ''                        | ''               | ''                        | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 		| 'Register  "Partner AR transactions"'        | ''            | ''          | ''                     | ''               | ''                        | ''               | ''                        | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
@@ -2229,7 +2229,7 @@ Scenario: _029211 create Sales invoice based on Sales orders (purchase has alrea
 		| 'Number' |
 		| '$$NumberSalesInvoice029211$$'    |
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 			| '$$SalesInvoice029211$$'                     | ''            | ''          | ''                     | ''               | ''                       | ''               | ''                       | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 			| 'Document registrations records'             | ''            | ''          | ''                     | ''               | ''                       | ''               | ''                       | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 			| 'Register  "Partner AR transactions"'        | ''            | ''          | ''                     | ''               | ''                       | ''               | ''                       | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |

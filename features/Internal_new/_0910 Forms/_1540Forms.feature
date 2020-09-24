@@ -12,80 +12,54 @@ Background:
 
 
 Scenario: _0154000 preparation
-	* Create one more legal name for Ferron
-		Given I open hyperlink "e1cib/list/Catalog.Partners"
-		And I go to line in "List" table
-			| Description |
-			| Ferron BP   |
-		And I select current line in "List" table
-		And In this window I click command interface button "Company"
-		And I click the button named "FormCreate"
-		And I input "Second Company Ferron BP" text in the field named "Description_en"
-		And I click Select button of "Country" field
-		And I select current line in "List" table
-		And I click Open button of "ENG" field
-		And I input "Second Company Ferron BP TR" text in the field named "Description_tr"
-		And I click "Ok" button
-		And I select "Company" exact value from the drop-down list named "Type"
-		And I click "Save and close" button
-	* Create one more own company Second Company
-		Given I open hyperlink "e1cib/list/Catalog.Companies"
-		And I click the button named "FormCreate"
-		And I input "Second Company" text in the field named "Description_en"
-		And I click Open button of "ENG" field
-		And I input "Second Company TR" text in the field named "Description_tr"
-		And I click "Ok" button
-		And I click Select button of "Country" field
-		And I go to line in "List" table
-			| Description |
-			| Ukraine      |
-		And I select current line in "List" table
-		And I set checkbox "Our"
-		And I select "Company" exact value from the drop-down list named "Type"
-		* Filling in Currency info (Local currency and Reporting currency)
-			And I move to "Currencies" tab
-			* Create and add Local currency
-				And in the table "Currencies" I click the button named "CurrenciesAdd"
-				And I click choice button of "Movement type" attribute in "Currencies" table
-				And I click the button named "FormCreate"
-				And I input "Local currency UA" text in the field named "Description_en"
-				And I click Select button of "Currency" field
-				And I go to line in "List" table
-					| 'Code' |
-					| 'UAH'  |
-				And I select current line in "List" table
-				And I click Select button of "Source" field
-				And I go to line in "List" table
-					| 'Description'  |
-					| 'Bank UA' |
-				And I select current line in "List" table
-				And I select "Legal" exact value from "Type" drop-down list
-				And I click "Save and close" button
-				And Delay 5
-				And I click the button named "FormChoose"
-				And I finish line editing in "Currencies" table
-			* Create and add Reporting currency
-				And in the table "Currencies" I click the button named "CurrenciesAdd"
-				And I click choice button of "Movement type" attribute in "Currencies" table
-				And I click the button named "FormCreate"
-				And I click Select button of "Currency" field
-				And I go to line in "List" table
-					| 'Code' |
-					| 'EUR'  |
-				And I activate "Description" field in "List" table
-				And I select current line in "List" table
-				And I click Select button of "Source" field
-				And I go to line in "List" table
-					| 'Description'  |
-					| 'Bank UA' |
-				And I select current line in "List" table
-				And I select "Reporting" exact value from "Type" drop-down list
-				And I input "Reporting currency UA" text in the field named "Description_en"
-				And I click "Save and close" button
-				And Delay 5
-				And I click the button named "FormChoose"
-				And I finish line editing in "Currencies" table
-				And I click "Save and close" button
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog Countries objects
+		When Create catalog Companies objects (second company Ferron BP)
+		When Create catalog Companies objects (own Second company)
+		When Create catalog ExpenseAndRevenueTypes objects
+		When Create catalog BusinessUnits objects
+		When Create catalog Partners objects
+		When Create catalog Partners objects (Kalipso)
+		When Create catalog InterfaceGroups objects (Purchase and production,  Main information)
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Partners objects (Kalipso)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+		When Create catalog CashAccounts objects
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+
 
 
 
@@ -138,7 +112,6 @@ Scenario: _0154001 check that additional attributes are displayed on the form wi
 		And I click Open button of "ENG" field
 		And I input "Test TR" text in the field named "Description_tr"
 		And I click "Ok" button
-		And I input "_a154" text in "Unique ID" field
 		And I click "Save and close" button
 		And I go to line in "List" table
 			| Description |
@@ -1720,7 +1693,6 @@ Scenario: _0154015 check autofilling the Partner term field in Sales return
 	And I close all client application windows
 
 Scenario: _0154016 check autofilling item key in Sales order by item only with one item key
-	When create test item with one item key
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I click the button named "FormCreate"
 	When check item key autofilling in sales/returns documents for an item that has only one item key

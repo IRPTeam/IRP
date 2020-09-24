@@ -15,6 +15,35 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
+		
+Scenario: _080000 preparation (Incoming payment order and Outgoing payment order)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Partners objects (Kalipso)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+		When Create catalog CashAccounts objects
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	
+
 Scenario: _080001 create Incoming payment order
 	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
 	And I click the button named "FormCreate"
@@ -60,8 +89,8 @@ Scenario: _080001 create Incoming payment order
 	And I save the window as "$$IncomingPaymentOrder080001$$"
 	And I click "Post and close" button
 	And "List" table contains lines
-		| Number | Company       | Account           | Currency |
-		| $$NumberIncomingPaymentOrder080001$$"      |  Main Company |  Bank account, USD | USD      |
+		| 'Number'                               | 'Company'      | 'Account'           | 'Currency' |
+		| '$$NumberIncomingPaymentOrder080001$$' | 'Main Company' | 'Bank account, USD' | 'USD'      |
 	And I close all client application windows
 
 Scenario: _080002 check Incoming payment order movements
@@ -89,7 +118,7 @@ Scenario: _080002 check Incoming payment order movements
 			| '$$NumberIncomingPaymentOrder080001$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
-		And "List" table does not contain lines
+		And "List" table contains lines
 			| 'Currency' | 'Recorder'                  | 'Basis document'             | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Amount'    |
 			| 'USD'      | '$$IncomingPaymentOrder080001$$' | '$$IncomingPaymentOrder080001$$'  | 'Main Company' | 'Bank account, USD' | 'Incoming'            | 'Lomaniti'  | 'Company Kalipso'   | '1 000,00'  |
 		And I close all client application windows
@@ -103,7 +132,7 @@ Scenario: _080003 check connection to Incoming payment order of the Registration
 		| '$$NumberIncomingPaymentOrder080001$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$IncomingPaymentOrder080001$$'             | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | ''                     |
 		| 'Document registrations records'        | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | ''                     |
 		| 'Register  "Planing cash transactions"' | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | ''                     |
@@ -121,7 +150,7 @@ Scenario: _080003 check connection to Incoming payment order of the Registration
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$IncomingPaymentOrder080001$$'        | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''         | ''                | ''                             | ''                     |
 		| 'Document registrations records'        | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''         | ''                | ''                             | ''                     |
 		| 'Register  "Planing cash transactions"' | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''         | ''                | ''                             | ''                     |
@@ -263,7 +292,7 @@ Scenario: _080007 check Outgoing payment order movements
 			| '$$NumberOutgoingPaymentOrder080006$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
-		And "List" table does not contain lines
+		And "List" table contains lines
 			| 'Currency' | 'Recorder'                       | 'Basis document'                 | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Amount'   |
 			| 'TRY'      | '$$OutgoingPaymentOrder080006$$' | '$$OutgoingPaymentOrder080006$$' | 'Main Company' | 'Bank account, TRY' | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | '3 000,00' |
 		And I close all client application windows
@@ -277,7 +306,7 @@ Scenario: _080008 check connection to Outgoing payment order of the Registration
 		| '$$NumberOutgoingPaymentOrder080006$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$OutgoingPaymentOrder080006$$'        | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                     |
 		| 'Document registrations records'        | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                     |
 		| 'Register  "Planing cash transactions"' | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                     |
@@ -295,7 +324,7 @@ Scenario: _080008 check connection to Outgoing payment order of the Registration
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$OutgoingPaymentOrder080006$$'        | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                     |
 		| 'Document registrations records'        | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                     |
 		| 'Register  "Planing cash transactions"' | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                     |

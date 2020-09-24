@@ -539,6 +539,8 @@ Scenario: change purchase order number to 103
 			And I input "200,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click "Post" button
+			And I save the value of "Number" field as "$$NumberPurchaseInvoice29604$$"
+			And I save the window as "$$PurchaseInvoice29604$$"
 		* Create Goods receipt
 			And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
 			And I click Select button of "Company" field

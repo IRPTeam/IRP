@@ -571,6 +571,7 @@
   <dataProcessors>DataProcessor.QuantityCompare</dataProcessors>
   <dataProcessors>DataProcessor.FirstStartSettings</dataProcessors>
   <dataProcessors>DataProcessor.PointOfSale</dataProcessors>
+  <dataProcessors>DataProcessor.DataHistory</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

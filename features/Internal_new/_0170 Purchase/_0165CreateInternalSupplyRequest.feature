@@ -298,6 +298,75 @@ Scenario: _016504 check display of the title of the collapsible group when creat
 
 
 
+Scenario: _016502 check the output of the document movement report for Internal Supply Request
+	* Open list form Internal Supply Request
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+	* Check the report generation
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberInternalSupplyRequest016501$$'      |
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$InternalSupplyRequest016501$$' | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
+		| 'Document registrations records'  | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
+		| 'Register  "Order balance"'       | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
+		| ''                                | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                                | ''          | ''        |
+		| ''                                | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                           | 'Item key'  | 'Row key' |
+		| ''                                | 'Receipt'     | '*'      | '10'        | 'Store 01'   | '$$InternalSupplyRequest016501$$' | '36/Yellow' | '*'       |
+		| ''                                | 'Receipt'     | '*'      | '20'        | 'Store 01'   | '$$InternalSupplyRequest016501$$' | '38/Black'  | '*'       |
+		| ''                                | 'Receipt'     | '*'      | '25'        | 'Store 01'   | '$$InternalSupplyRequest016501$$' | '36/Red'    | '*'       |
+		And I close all client application windows
+	* Check the report generation from document
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberInternalSupplyRequest016501$$'      |
+		And I select current line in "List" table
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$InternalSupplyRequest016501$$' | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
+		| 'Document registrations records'  | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
+		| 'Register  "Order balance"'       | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
+		| ''                                | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                                | ''          | ''        |
+		| ''                                | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                           | 'Item key'  | 'Row key' |
+		| ''                                | 'Receipt'     | '*'      | '10'        | 'Store 01'   | '$$InternalSupplyRequest016501$$' | '36/Yellow' | '*'       |
+		| ''                                | 'Receipt'     | '*'      | '20'        | 'Store 01'   | '$$InternalSupplyRequest016501$$' | '38/Black'  | '*'       |
+		| ''                                | 'Receipt'     | '*'      | '25'        | 'Store 01'   | '$$InternalSupplyRequest016501$$' | '36/Red'    | '*'       |
+		And I close all client application windows
+
+Scenario: _0170021 clear movements Internal Supply Request and check that there is no movements on the registers 
+	* Open list form Internal Supply Request
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+	* Check the report generation
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberInternalSupplyRequest016501$$'      |
+	* Clear movements document and check that there is no movement on the registers
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document does not contain values
+			| Register  "Order balance" |
+		And I close all client application windows
+	* Posting the document and check movements
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberInternalSupplyRequest016501$$'      |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$InternalSupplyRequest016501$$' | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
+		| 'Document registrations records'  | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
+		| 'Register  "Order balance"'       | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
+		| ''                                | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                                | ''          | ''        |
+		| ''                                | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                           | 'Item key'  | 'Row key' |
+		| ''                                | 'Receipt'     | '*'      | '10'        | 'Store 01'   | '$$InternalSupplyRequest016501$$' | '36/Yellow' | '*'       |
+		| ''                                | 'Receipt'     | '*'      | '20'        | 'Store 01'   | '$$InternalSupplyRequest016501$$' | '38/Black'  | '*'       |
+		| ''                                | 'Receipt'     | '*'      | '25'        | 'Store 01'   | '$$InternalSupplyRequest016501$$' | '36/Red'    | '*'       |
+		And I close all client application windows
+
+
+
 
 
 

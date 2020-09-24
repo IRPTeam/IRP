@@ -381,7 +381,7 @@ Scenario: _2050005 check the movements of the Invoice match document with the ve
 		And I save the value of "Number" field as "$$NumberInvoiceMatch2050005$$"
 	* Check movements
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$InvoiceMatch2050005$$'             | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                        | ''                             | ''                             | ''                     |
 		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                        | ''                             | ''                             | ''                     |
 		| 'Register  "Advance to suppliers"'    | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                        | ''                             | ''                             | ''                     |
@@ -466,7 +466,7 @@ Scenario: _2050006 check the movements of the Invoice match document with the cu
 		And I save the value of "Number" field as "$$NumberInvoiceMatch2050006$$"
 	* Check movements
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$InvoiceMatch2050006$$'             | ''            | ''       | ''          | ''             | ''                         | ''             | ''             | ''                         | ''                             | ''                             | ''                     |
 		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                         | ''             | ''             | ''                         | ''                             | ''                             | ''                     |
 		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                         | ''             | ''             | ''                         | ''                             | ''                             | ''                     |
@@ -557,7 +557,7 @@ Scenario: _2050007 check the movements of the Invoice match document with the cl
 		And I save the window as "$$InvoiceMatch2050007$$"
 		And I save the value of "Number" field as "$$NumberInvoiceMatch2050007$$"
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$InvoiceMatch2050007$$'             | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
 		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
 		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
@@ -592,7 +592,7 @@ Scenario: _2050008 check of movements in case of cancellation and re-post of Inv
 			| '$$NumberInvoiceMatch2050007$$'     |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click "Registrations report" button
-		Then "ResultTable" spreadsheet document is equal by template
+		And "ResultTable" spreadsheet document contains lines:
 		| '$$InvoiceMatch2050007$$'             | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
 		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
 		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |

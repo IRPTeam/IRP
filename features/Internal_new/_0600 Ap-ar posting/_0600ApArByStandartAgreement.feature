@@ -12,157 +12,50 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 Scenario: _060001 preparation
-	* Create a test segment of Standard clients
-		Given I open hyperlink "e1cib/list/Catalog.PartnerSegments"
-		And I click the button named "FormCreate"
-		And I input "Standard" text in the field named "Description_en"
-		And I click "Save and close" button
-	* Create vendor (Veritas) and client (Nicoletta)
-		Given I open hyperlink "e1cib/list/Catalog.Partners"
-		And I click the button named "FormCreate"
-		And I input "Nicoletta" text in the field named "Description_en"
-		And I change checkbox "Vendor"
-		And I change checkbox "Customer"
-		And I change checkbox "Shipment confirmations before sales invoice"
-		And I change checkbox "Goods receipt before purchase invoice"
-		And I click "Save" button
-		And In this window I click command interface button "Partner segments content"
-		And I click the button named "FormCreate"
-		And I click Select button of "Segment" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Standard'      |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I wait "Partner segments content (create) *" window closing in 20 seconds
-		And In this window I click command interface button "Company"
-		And I click the button named "FormCreate"
-		And I input "Company Nicoletta" text in the field named "Description_en"
-		And I click Select button of "Country" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Turkey'      |
-		And I select current line in "List" table
-		And I select "Company" exact value from the drop-down list named "Type"
-		And I click "Save and close" button
-		And In this window I click command interface button "Main"
-		And I click "Save and close" button
-		And I click the button named "FormCreate"
-		And I input "Veritas" text in the field named "Description_en"
-		And I change checkbox "Vendor"
-		And I change checkbox "Shipment confirmations before sales invoice"
-		And I change checkbox "Goods receipt before purchase invoice"
-		And I click "Save" button
-		And In this window I click command interface button "Company"
-		And I click the button named "FormCreate"
-		And I input "Company Veritas " text in the field named "Description_en"
-		And I click Select button of "Country" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Turkey'      |
-		And I select current line in "List" table
-		And I select "Company" exact value from the drop-down list named "Type"
-		And I click "Save and close" button
-		And In this window I click command interface button "Main"
-		And I click "Save and close" button
-	* Create Partner term Standard
-		Given I open hyperlink "e1cib/list/Catalog.Agreements"
-		And I click the button named "FormCreate"
-		And I change "Kind" radio button value to "Standard"
-		And I input "Standard" text in the field named "Description_en"
-		And I input "01.12.2019" text in "Date" field
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
-		And I click Select button of "Multi currency movement type" field
-		And I go to line in "List" table
-			| 'Currency' |
-			| 'TRY'      |
-		And I select current line in "List" table
-		And I input "01.12.2019" text in "Start using" field
-		And I click "Save and close" button
-	* Create an individual Partner term for the vendor with the type of settlements Standard 
-		Given I open hyperlink "e1cib/list/Catalog.Agreements"
-		And I click the button named "FormCreate"
-		And I input "Posting by Standard Partner term (Veritas)" text in the field named "Description_en"
-		And I change "Type" radio button value to "Vendor"
-		And I input "01.12.2019" text in "Date" field
-		And I change "AP/AR posting detail" radio button value to "By standard partner term"
-		And I click Select button of "Multi currency movement type" field
-		And I go to line in "List" table
-			| 'Currency' |
-			| 'TRY'      |
-		And I select current line in "List" table
-		And I click Select button of "Standard Partner term" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Standard'    |
-		And I select current line in "List" table
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Veritas'     |
-		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
-		And I click Select button of "Price type" field
-		And I go to line in "List" table
-			| 'Currency' | 'Description'       |
-			| 'TRY'      | 'Vendor price, TRY' |
-		And I select current line in "List" table
-		And I change checkbox "Price include tax"
-		And I click Select button of "Store" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
-		And I select current line in "List" table
-		And I input "01.11.2018" text in "Start using" field
-		And I click "Save and close" button
-	* Create an individual Partner term for the customer with the type of settlements Standard
-		Given I open hyperlink "e1cib/list/Catalog.Agreements"
-		And I click the button named "FormCreate"
-		And I input "Posting by Standard Partner term Customer" text in the field named "Description_en"
-		And I change "Type" radio button value to "Customer"
-		And I input "01.12.2019" text in "Date" field
-		And I change "AP/AR posting detail" radio button value to "By standard partner term"
-		And I click Select button of "Multi currency movement type" field
-		And I go to line in "List" table
-			| 'Currency' |
-			| 'TRY'      |
-		And I select current line in "List" table
-		And I click Select button of "Standard Partner term" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Standard'    |
-		And I select current line in "List" table
-		And I click Select button of "Partner segment" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Standard'     |
-		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
-		And I click Select button of "Price type" field
-		And I go to line in "List" table
-			| 'Currency' | 'Description'       |
-			| 'TRY'      | 'Basic Price Types' |
-		And I select current line in "List" table
-		And I change checkbox "Price include tax"
-		And I click Select button of "Store" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
-		And I select current line in "List" table
-		And I input "01.11.2018" text in "Start using" field
-		And I click "Save and close" button
+	
+Scenario: _095001 preparation
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+		When Create catalog CashAccounts objects
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+		When Create catalog ExpenseAndRevenueTypes objects
+		When Create catalog Countries objects
+		When Create catalog BusinessUnits objects 
+	* Tax settings
+		When filling in Tax settings for company
+
 
 Scenario: _060002 create Sales invoice with the type of settlements under standard Partner terms and check its movements
 	* Create Sales invoice №601
@@ -184,6 +77,9 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 		* Adding items to Sales Invoice
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -266,6 +162,10 @@ Scenario: _060003 create Cash reciept with the type of settlements under standar
 		And I close all client application windows
 
 Scenario: _060004 check the offset of the advance for Sales invoice with the type of settlement under standard Partner terms and check its movements
+	And I delete "$$NumberSalesInvoice060004$$" variable
+	And I delete "$$SalesInvoice060004$$" variable
+	And I delete "$$NumberBankReceipt060004$$" variable
+	And I delete "$$BankReceipt060004$$" variable
 	* Create Bank reciept №602
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
@@ -328,6 +228,9 @@ Scenario: _060004 check the offset of the advance for Sales invoice with the typ
 		* Adding items to Sales Invoice
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -382,6 +285,9 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 			And I move to "Item list" tab
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -526,6 +432,9 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 			And I move to "Item list" tab
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'     |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table

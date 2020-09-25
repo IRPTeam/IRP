@@ -1068,6 +1068,7 @@ EndProcedure
 
 #Region PickUpItems
 
+//TODO: #309
 Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 	If NOT ValueIsFilled(Result)
 		OR Not AdditionalParameters.Property("Object")
@@ -1099,8 +1100,10 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 		FillPropertyValues(FilterStructure, ResultElement);
 		ExistingRows = Object.ItemList.FindRows(FilterStructure);
 		If ExistingRows.Count() Then
+			NewRow = False;
 			Row = ExistingRows[0];
 		Else
+			NewRow = True;
 			Row = Object.ItemList.Add();
 			If Row.Property("Key") Then
 				Row.Key = New UUID();
@@ -1131,10 +1134,11 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 			ItemListCalculateRowAmounts(Object, Form, Row);
 		EndIf;	
 		Settings.Rows.Add(Row);
-	EndDo;
-	If Not Row = Undefined Then
+		
 		Form.Items.ItemList.CurrentRow = Row.GetID();
-	EndIf;
+		DocumentsClient.TableOnStartEdit(Object, Form, "Object.ItemList", Form.Items.ItemList, NewRow, False);
+	EndDo;
+	
 	Form.ItemListOnChange(Form.Items.ItemList);
 
 EndProcedure

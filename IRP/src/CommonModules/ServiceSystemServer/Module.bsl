@@ -1,7 +1,5 @@
-Procedure SetSessionParameter(Name, Value, AddInfo = Undefined) Export
-	
-	SessionParameters[Name] = Value;
-	
+Procedure SetSessionParameter(Name, Value, AddInfo = Undefined) Export	
+	SessionParameters[Name] = Value;	
 EndProcedure
 
 Function GetObjectAttribute(Ref, Name) Export

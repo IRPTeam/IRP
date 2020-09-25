@@ -59,7 +59,17 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
   </attributes>
-  <attributes uuid="a19ebf74-4e81-47cd-a246-627566cbe9c6">
+  <attributes uuid="7fd5393a-ed15-4de7-955c-be5d3715b311">
+    <name>Workstation</name>
+    <synonym>
+      <key>en</key>
+      <value>Workstation</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Workstations</types>
+    </type>
+  </attributes>
+  <attributes uuid="6f075ed4-8717-425d-a8f2-f3596b403efa">
     <name>BusinessUnit</name>
     <synonym>
       <key>en</key>
@@ -68,8 +78,6 @@
     <type>
       <types>CatalogRef.BusinessUnits</types>
     </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
   </attributes>
   <forms uuid="6e29de76-f7b4-42c8-a2b7-9df2359eb2f3">
     <name>Form</name>

@@ -9,8 +9,50 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
+Scenario: _154500 preparation (information messages)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Partners objects (Kalipso)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	
 
-Scenario: message when trying to create a Sales invoice by Sales order with Shipment confirmation before Sales invoice (Shipment confirmation has not been created yet)
+
+
+Scenario: _154501 message when trying to create a Sales invoice by Sales order with Shipment confirmation before Sales invoice (Shipment confirmation has not been created yet)
 	* Create Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click "Create" button
@@ -42,7 +84,7 @@ Scenario: message when trying to create a Sales invoice by Sales order with Ship
 		Then warning message containing text 'First, create a "Shipment confirmation" document or clear the "Shipment confirmation before Sales invoice" check box on the "Other" tab.' appears
 		And I close all client application windows
 
-Scenario: message when trying to create a Purchase invoice by Purchase order with Goods receipt before Purchase invoice (Goods receipt has not been created yet)
+Scenario: _154503 message when trying to create a Purchase invoice by Purchase order with Goods receipt before Purchase invoice (Goods receipt has not been created yet)
 	* Create Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -78,7 +120,9 @@ Scenario: message when trying to create a Purchase invoice by Purchase order wit
 		* Filling in items table
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
-			Then "Items" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -106,7 +150,7 @@ Scenario: message when trying to create a Purchase invoice by Purchase order wit
 		Then warning message containing text 'First, create a "Goods receipt" document or clear the "Goods receipt before Purchase invoice" check box on the "Other" tab.' appears
 		And I close all client application windows
 
-Scenario: message when trying to create Sales returm order based on Sales invoice when all products have already been returned
+Scenario: _154505 message when trying to create Sales returm order based on Sales invoice when all products have already been returned
 	* Create Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
@@ -136,6 +180,9 @@ Scenario: message when trying to create Sales returm order based on Sales invoic
 		* Filling in items tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -163,7 +210,7 @@ Scenario: message when trying to create Sales returm order based on Sales invoic
 			And I click "OK" button
 			And I close all client application windows
 
-Scenario: message when trying to create Purchase return order and Purchase return based on Purchase invoice document if all products have already been returned.
+Scenario: _154507 message when trying to create Purchase return order and Purchase return based on Purchase invoice document if all products have already been returned.
 	* Create Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
@@ -198,7 +245,9 @@ Scenario: message when trying to create Purchase return order and Purchase retur
 		* Filling in items table
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
-			Then "Items" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -231,7 +280,7 @@ Scenario: message when trying to create Purchase return order and Purchase retur
 			And I click "OK" button
 			And I close all client application windows
 
-Scenario: message when trying to re-create Sales invoice based on Shipment confirmation
+Scenario: _154509 message when trying to re-create Sales invoice based on Shipment confirmation
 	* Create Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click "Create" button
@@ -322,6 +371,9 @@ Scenario: message when trying to re-create Sales invoice based on Shipment confi
 		* Filling in items tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -336,7 +388,7 @@ Scenario: message when trying to re-create Sales invoice based on Shipment confi
 			And I save the value of "Number" field as "$$NumberSalesInvoice154504$$"
 			And I save the window as "$$SalesInvoice154504$$"
 
-Scenario: message when trying to re-create Purchase invoice based on Goods reciept
+Scenario: _154510 message when trying to re-create Purchase invoice based on Goods reciept
 	* Create Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -372,7 +424,9 @@ Scenario: message when trying to re-create Purchase invoice based on Goods recie
 		* Filling in items table
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
-			Then "Items" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -426,7 +480,7 @@ Scenario: message when trying to re-create Purchase invoice based on Goods recie
 		Then warning message containing text 'There are no lines for which you need to create a "Purchase invoice" document in the "Goods receipt" document.' appears
 		And I close all client application windows
 
-Scenario: message when trying to re-create Purchase invoice based on Purchase order
+Scenario: _154512 message when trying to re-create Purchase invoice based on Purchase order
 	* Create Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -462,6 +516,9 @@ Scenario: message when trying to re-create Purchase invoice based on Purchase or
 		* Filling in items table
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -486,7 +543,7 @@ Scenario: message when trying to re-create Purchase invoice based on Purchase or
 		Then warning message containing text 'There are no lines for which you need to create a "Purchase invoice" document in the "Purchase order" document.' appears
 		And I close all client application windows
 
-Scenario: message when trying to re-create Goods reciept based on Purchase order
+Scenario: _154514 message when trying to re-create Goods reciept based on Purchase order
 	* Create Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -522,7 +579,9 @@ Scenario: message when trying to re-create Goods reciept based on Purchase order
 		* Filling in items table
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
-			Then "Items" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -566,7 +625,7 @@ Scenario: message when trying to re-create Goods reciept based on Purchase order
 		Then warning message containing text 'All items in the "Purchase order" document(s) are already received using the "Goods receipt" document(s).' appears
 		And I close all client application windows
 
-Scenario: message when trying to re-create Sales invoice based on Sales order (Sales invoice before Shipment confirmation)
+Scenario: _154516 message when trying to re-create Sales invoice based on Sales order (Sales invoice before Shipment confirmation)
 	* Create Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click "Create" button
@@ -617,7 +676,7 @@ Scenario: message when trying to re-create Sales invoice based on Sales order (S
 		Then warning message containing text 'There are no lines for which you need to create a "Sales invoice" document in the "Sales order" document.' appears
 		And I close all client application windows
 		
-Scenario: message when trying to re-create Shipment confirmation based on Sales order (Shipment confirmation before Sales invoic)
+Scenario: _154518 message when trying to re-create Shipment confirmation based on Sales order (Shipment confirmation before Sales invoic)
 	* Create Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click "Create" button
@@ -667,7 +726,7 @@ Scenario: message when trying to re-create Shipment confirmation based on Sales 
 		Then warning message containing text 'There are no lines for which you need to create a "Shipment confirmation" document in the "Sales order" document.' appears
 		And I close all client application windows
 
-Scenario: message when trying to re-create Shipment confirmation based on Sales invoice
+Scenario: _154520 message when trying to re-create Shipment confirmation based on Sales invoice
 	* Create Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
@@ -686,7 +745,7 @@ Scenario: message when trying to re-create Shipment confirmation based on Sales 
 				| 'Store 02'  |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
-		// 	And I select current line in "List" table
+			And I select current line in "List" table
 		// * Change the document number to2000
 		// 	And I move to "Other" tab
 		// 	And I expand "More" group
@@ -697,6 +756,9 @@ Scenario: message when trying to re-create Shipment confirmation based on Sales 
 		* Filling in items tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -726,7 +788,7 @@ Scenario: message when trying to re-create Shipment confirmation based on Sales 
 		Then warning message containing text 'There are no lines for which you need to create a "Shipment confirmation" document in the "Sales invoice" document.' appears
 		And I close all client application windows
 
-Scenario: message when trying to create Shipment confirmation based on Sales invoice (Stor doesn't use Shipment confirmation)
+Scenario: _154522 message when trying to create Shipment confirmation based on Sales invoice (Stor doesn't use Shipment confirmation)
 	* Create Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
@@ -756,6 +818,9 @@ Scenario: message when trying to create Shipment confirmation based on Sales inv
 		* Filling in items tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -774,7 +839,7 @@ Scenario: message when trying to create Shipment confirmation based on Sales inv
 		Then warning message containing text 'There are no lines for which you need to create a "Shipment confirmation" document in the "Sales invoice" document.' appears
 		And I close all client application windows
 
-Scenario: message when trying to create Shipment confirmation based on Sales invoice with Service
+Scenario: _154524 message when trying to create Shipment confirmation based on Sales invoice with Service
 	* Create Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
@@ -826,7 +891,7 @@ Scenario: message when trying to create Shipment confirmation based on Sales inv
 		Then warning message containing text 'There are no lines for which you need to create a "Shipment confirmation" document in the "Sales invoice" document.' appears
 		And I close all client application windows
 
-Scenario: message when trying to create Goods reciept based on Purchase invoice with Service
+Scenario: _154526 message when trying to create Goods reciept based on Purchase invoice with Service
 	* Create Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
@@ -877,7 +942,7 @@ Scenario: message when trying to create Goods reciept based on Purchase invoice 
 		Then warning message containing text 'There are no lines for which you need to create a "Goods receipt" document in the "Purchase invoice" document.' appears
 		And I close all client application windows
 
-Scenario: message when trying to create Purchase order based on Sales order with procurement method stock and repeal, with Service
+Scenario: _154528 message when trying to create Purchase order based on Sales order with procurement method stock and repeal, with Service
 	* Create Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click "Create" button
@@ -957,7 +1022,7 @@ Scenario: message when trying to create Purchase order based on Sales order with
 		Then warning message containing text 'There are no more items that you need to order from suppliers in the "Sales order" document.' appears
 		And I close all client application windows
 
-Scenario: message when trying to re-create Purchase order/Inventory transfer order based on Internal supply request
+Scenario: _154530 message when trying to re-create Purchase order/Inventory transfer order based on Internal supply request
 	* Create Internal supply request
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I click the button named "FormCreate"
@@ -1033,7 +1098,7 @@ Scenario: message when trying to re-create Purchase order/Inventory transfer ord
 		And I close all client application windows
 
 
-Scenario: user notification when create a second partial sales invoice based on sales order
+Scenario: _154532 user notification when create a second partial sales invoice based on sales order
 	* Create Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click "Create" button
@@ -1089,7 +1154,7 @@ Scenario: user notification when create a second partial sales invoice based on 
 		| 'there is already another "Sales invoice" document that partially covered this "Sales order" document.'|
 		And I close all client application windows
 
-Scenario: user notification when create a second partial purchase invoice based on purchase order
+Scenario: _154534 user notification when create a second partial purchase invoice based on purchase order
 	* Create Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click "Create" button
@@ -1151,7 +1216,7 @@ Scenario: user notification when create a second partial purchase invoice based 
 		|  'there is already another "Purchase invoice" document that partially covered this "Purchase order" document.'|
 		And I close all client application windows
 
-Scenario: _0154513 check message output for SO when trying to create a purchase order/SC
+Scenario: _015450 check message output for SO when trying to create a purchase order/SC
 	* Open the Sales order creation form
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -1312,14 +1377,14 @@ Scenario: _0154513 check message output for SO when trying to create a purchase 
 				Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 				And I go to line in "List" table
 				| 'Number' | 'Partner'   |
-				| '3 024'  | 'Ferron BP' |
+				| '$$NumberSalesOrder0154513$$'  | 'Ferron BP' |
 				And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
 				And I click "Post and close" button
 			* Create SC
 				Given I open hyperlink "e1cib/list/Document.SalesOrder"
 				And I go to line in "List" table
 				| 'Number' | 'Partner'   |
-				| '3 024'  | 'Kalipso'       |
+				| '$$NumberSalesOrder0154513$$'  | 'Kalipso'       |
 				And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
 				And "ItemList" table contains lines
 				| 'Item'     | 'Quantity' | 'Item key'  | 'Store'    |
@@ -1332,7 +1397,7 @@ Scenario: _0154513 check message output for SO when trying to create a purchase 
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
 			And I go to line in "List" table
 			| 'Number' | 'Partner'   |
-			| '3 024'  | 'Kalipso'       |
+			| '$$NumberSalesOrder0154513$$'  | 'Kalipso'       |
 			And I select current line in "List" table
 			And I click "Purchase order" button
 			And I select "Approved" exact value from "Status" drop-down list
@@ -1360,7 +1425,7 @@ Scenario: _0154513 check message output for SO when trying to create a purchase 
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
 			And I go to line in "List" table
 			| 'Number' | 'Partner'   |
-			| '3 024'  | 'Kalipso'       |
+			| '$$NumberSalesOrder0154513$$'  | 'Kalipso'       |
 			And I click the button named "FormDocumentPurchaseOrderGeneratePurchaseOrder"
 			Then the form attribute named "Message" became equal to "All items in the sales order document are already ordered using the purchase order document(s)."
 			And I close all client application windows
@@ -1410,7 +1475,7 @@ Scenario: _0154513 check message output for SO when trying to create a purchase 
 			And I click "OK" button
 			And I close all client application windows
 
-Scenario: _0154514 check message output when trying to create a subsequent order document with the status without movements
+Scenario: _015452 check message output when trying to create a subsequent order document with the status without movements
 	* Check the output of messages when creating documents based on SO with the status "unposted"
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click "Create" button
@@ -1526,7 +1591,7 @@ Scenario: _0154514 check message output when trying to create a subsequent order
 			And I click "OK" button
 			And I close all client application windows
 
-Scenario: _0154515 check the message output when trying to uncheck a tick for Store "Use shipment confirmation" and "Use Goods receipt" for which there were already Shipment confirmation and  Goods receipt
+Scenario: _015454 check the message output when trying to uncheck a tick for Store "Use shipment confirmation" and "Use Goods receipt" for which there were already Shipment confirmation and  Goods receipt
 	* Open Store 02
 		Given I open hyperlink "e1cib/list/Catalog.Stores"
 		And I go to line in "List" table
@@ -1550,7 +1615,7 @@ Scenario: _0154515 check the message output when trying to uncheck a tick for St
 
 
 
-Scenario: _0154516 notification when trying to post a Sales order without filling procurement method
+Scenario: _015456 notification when trying to post a Sales order without filling procurement method
 	* Create Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"

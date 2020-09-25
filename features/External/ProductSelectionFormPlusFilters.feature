@@ -1386,8 +1386,8 @@ Scenario: check the display of the header of the collapsible group in invoice ma
 			| Sales invoice |
 		And I select current line in "" table
 		And I go to line in "List" table
-			| Number |
-			| 1    |
+			| 'Number' |
+			| '$$NumberSalesInvoice024016$$'    |
 		And I select current line in "List" table
 
 Scenario: check the display of the header of the collapsible group in planned incoming/outgoing documents

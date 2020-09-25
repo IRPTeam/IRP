@@ -12,7 +12,23 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-Scenario: check load currency rate
+
+Scenario: _020000 preparation (SerialLotNumbers)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog CashAccounts objects
+		When Create catalog PriceTypes objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects
+		When Create catalog Companies objects (partners company)
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog IntegrationSettings objects
+		
+
+Scenario: _020001 check load currency rate
 	And I turn on asynchronous execution mode with interval "1"
 	* Filling in the setting for currency rate loading from Bank UA
 		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"

@@ -645,7 +645,9 @@ Scenario: change purchase order number to 103
 Scenario: adding the items to the sales order (Dress and Trousers)
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
-	Then "Items" window is opened
+	And I go to line in "List" table
+		| 'Description' |
+		| 'Dress'  |
 	And I select current line in "List" table
 	And I activate "Item key" field in "ItemList" table
 	And I click choice button of "Item key" attribute in "ItemList" table

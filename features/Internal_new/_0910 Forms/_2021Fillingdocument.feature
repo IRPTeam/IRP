@@ -9,92 +9,64 @@ Feature: check filling in and re-filling in documents forms + currency form conn
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
-Scenario: _0154100 preparation
-	* For a test of price and rate changes depending on the date
-	# check the Sales order reset when the date changes, check the Sales invoice reset when the date changes
-		* Input lira exchange rate to dollar 01.11.2018
-			Given I open hyperlink "e1cib/list/InformationRegister.CurrencyRates"
-			And I click the button named "FormCreate"
-			And I click Select button of "Currency from" field
-			And I go to line in "List" table
-				| 'Code' | 'Description'  |
-				| 'TRY'  | 'Turkish lira' |
-			And I select current line in "List" table
-			And I click Select button of "Currency to" field
-			And I go to line in "List" table
-				| 'Code' | 'Description'     |
-				| 'USD'  | 'American dollar' |
-			And I activate "Description" field in "List" table
-			And I select current line in "List" table
-			And I input "01.11.2018  0:00:00" text in "Period" field
-			And I click Select button of "Source" field
-			And I go to line in "List" table
-				| 'Description'  |
-				| 'Forex Seling' |
-			And I select current line in "List" table
-			And I input "1" text in "Multiplicity" field
-			And I input "5,0000" text in "Rate" field
-			And I click "Save and close" button
-			And I close all client application windows
-		* Create price list of the previous period
-			Given I open hyperlink "e1cib/list/Document.PriceList"
-			And I click the button named "FormCreate"
-			And I change "Set price" radio button value to "By Item keys"
-			And I click Select button of "Price type" field
-			And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Price Types' |
-			And I select current line in "List" table
-			And I click the button named "ItemKeyListAdd"
-			And I click choice button of "Item" attribute in "ItemKeyList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
-			And I select current line in "List" table
-			And I activate "Item key" field in "ItemKeyList" table
-			And I click choice button of "Item key" attribute in "ItemKeyList" table
-			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'M/Brown'  |
-			And I select current line in "List" table
-			And I activate "Price" field in "ItemKeyList" table
-			And I input "1 000,00" text in "Price" field of "ItemKeyList" table
-			And I finish line editing in "ItemKeyList" table
-			And I move to "Other" tab
-			And I input "18.11.2017  0:00:00" text in "Date" field
-			And I click "Post and close" button
-		* Add Dress M/Brown to price list 100
-			And I go to line in "List" table
-				| 'Description' | 'Number' |
-				| 'Basic price' | '100'    |
-			And I select current line in "List" table
-			And I click the button named "ItemKeyListAdd"
-			And I click choice button of "Item" attribute in "ItemKeyList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
-			And I select current line in "List" table
-			And I activate "Item key" field in "ItemKeyList" table
-			And I click choice button of "Item key" attribute in "ItemKeyList" table
-			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'M/Brown'  |
-			And I select current line in "List" table
-			And I activate "Price" field in "ItemKeyList" table
-			And I input "500,00" text in "Price" field of "ItemKeyList" table
-			And I finish line editing in "ItemKeyList" table
-			And I click "Post and close" button
+	
+Scenario: _0154100 preparation ( filling documents)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create information register Barcodes records
+		When Create catalog Companies objects (own Second company)
+		When Create catalog CashAccounts objects
+		When Create catalog Agreements objects
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	* Add sales tax
+		When Create catalog Taxes objects (Sales tax)
+		When Create information register TaxSettings (Sales tax)
+		When Create information register Taxes records (Sales tax)
+		When add sales tax settings 
 	* For the test of completing the purchase documents
-		* Preparation: creating a vendor partner term for DFC
+		* Preparation: creating a vendor partner term for NDB
 			Given I open hyperlink "e1cib/list/Catalog.Agreements"
 			And I click the button named "FormCreate"
-			And I input "Partner term vendor DFC" text in "ENG" field
+			And I input "Partner term vendor NDB" text in "ENG" field
 			And I change "Type" radio button value to "Vendor"
 			And I change "AP/AR posting detail" radio button value to "By documents"
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
 				| 'Description' |
-				| 'DFC'         |
+				| 'NDB'         |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I select current line in "List" table
@@ -121,7 +93,7 @@ Scenario: _0154100 preparation
 			And I select current line in "List" table
 			And I click "Save and close" button
 			And I close all client application windows
-		* Preparation: creating a vendor partner term for Partner Kalipso Vendor
+		* Preparation: creating a vendor partner term for Avira Vendor
 			Given I open hyperlink "e1cib/list/Catalog.Agreements"
 			And I click the button named "FormCreate"
 			And I input "Partner term vendor Partner Kalipso" text in "ENG" field
@@ -130,7 +102,7 @@ Scenario: _0154100 preparation
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Partner Kalipso'         |
+				| 'Avira'         |
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I select current line in "List" table
@@ -375,16 +347,16 @@ Scenario: _0154101 check filling in and re-filling Sales order
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'DFC'         |
+			| 'NDB'         |
 		And I select current line in "List" table
-		Then the form attribute named "LegalName" became equal to "DFC"
+		Then the form attribute named "LegalName" became equal to "Company NDB"
 	* Check filling in Partner term if the partner has only one
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'DFC'         |
+			| 'NDB'         |
 		And I select current line in "List" table
-		Then the form attribute named "Agreement" became equal to "Partner term DFC"
+		Then the form attribute named "Agreement" became equal to "Partner term NDB"
 	* Check filling in Company from Partner term
 		* Change company in Sales order
 			And I click Select button of "Company" field
@@ -688,16 +660,16 @@ Scenario: _0154102 check filling in and re-filling Sales invoice
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'DFC'         |
+			| 'NDB'         |
 		And I select current line in "List" table
-		Then the form attribute named "LegalName" became equal to "DFC"
+		Then the form attribute named "LegalName" became equal to "Company NDB"
 	* Check filling in Partner term if the partner has only one
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'DFC'         |
+			| 'NDB'         |
 		And I select current line in "List" table
-		Then the form attribute named "Agreement" became equal to "Partner term DFC"
+		Then the form attribute named "Agreement" became equal to "Partner term NDB"
 	* Check filling in Company from Partner term
 		* Change company in Sales order
 			And I click Select button of "Company" field
@@ -1143,16 +1115,16 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'DFC'         |
+			| 'NDB'         |
 		And I select current line in "List" table
-		Then the form attribute named "LegalName" became equal to "DFC"
+		Then the form attribute named "LegalName" became equal to "Company NDB"
 	* Check filling in Partner term if the partner has only one
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'DFC'         |
+			| 'NDB'         |
 		And I select current line in "List" table
-		Then the form attribute named "Agreement" became equal to "Partner term vendor DFC"
+		Then the form attribute named "Agreement" became equal to "Partner term vendor NDB"
 	* Check filling in Company from Partner term
 		* Change company in the Purchase order
 			And I click Select button of "Company" field
@@ -1180,6 +1152,7 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 	* Check clearing legal name, Partner term when re-selecting a partner
 		* Re-select partner
 			And I click Select button of "Partner" field
+			And I click "List" button					
 			And I go to line in "List" table
 				| 'Description' |
 				| 'Partner Kalipso'     |
@@ -1192,7 +1165,7 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
 				| 'Description'            |
-				| 'Partner Kalipso Vendor' |
+				| Partner Kalipso Vendor |
 			And I select current line in "List" table
 			And I click Open button of "Partner term" field
 			And I click Select button of "Price type" field
@@ -1287,7 +1260,7 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
 				| 'Description'           |
-				| 'Partner Kalipso Vendor' |
+				| Partner Kalipso Vendor |
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
 			And I change checkbox "Do you want to update filled stores on Store 02?"
@@ -1365,7 +1338,7 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
 				| 'Description'                   |
-				| 'Partner Kalipso Vendor' |
+				| Partner Kalipso Vendor |
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
 			And I click "OK" button
@@ -1475,16 +1448,16 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'DFC'         |
+			| 'NDB'         |
 		And I select current line in "List" table
-		Then the form attribute named "LegalName" became equal to "DFC"
+		Then the form attribute named "LegalName" became equal to "Company NDB"
 	* Check filling in Partner term if the partner has only one
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'DFC'         |
+			| 'NDB'         |
 		And I select current line in "List" table
-		Then the form attribute named "Agreement" became equal to "Partner term vendor DFC"
+		Then the form attribute named "Agreement" became equal to "Partner term vendor NDB"
 	* Check filling in Company from Partner term
 		* Change company in the Purchase invoice
 			And I click Select button of "Company" field
@@ -1524,7 +1497,7 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
 				| 'Description'            |
-				| 'Partner Kalipso Vendor' |
+				| Partner Kalipso Vendor |
 			And I select current line in "List" table
 			And I click Open button of "Partner term" field
 			And I click Select button of "Price type" field
@@ -1617,7 +1590,7 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
 				| 'Description'           |
-				| 'Partner Kalipso Vendor' |
+				| Partner Kalipso Vendor |
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
 			And I change checkbox "Do you want to update filled stores on Store 02?"
@@ -1693,7 +1666,7 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
 				| 'Description'                   |
-				| 'Partner Kalipso Vendor' |
+				| Partner Kalipso Vendor |
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
 			And I click "OK" button
@@ -1733,12 +1706,6 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 				| 'Shirt' | '38/Black' |
 			And I activate "VAT" field in "ItemList" table
 			And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
-			And "TaxTree" table contains lines
-				| 'Tax' | 'Tax rate' | 'Item'  | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
-				| 'VAT' | ''         | ''      | ''         | ''          | '192,60' | '192,60'        |
-				| 'VAT' | '18%'      | 'Dress' | 'L/Green'  | ''          | '99,00'  | '99,00'         |
-				| 'VAT' | '18%'      | 'Dress' | 'XS/Blue'  | ''          | '93,60'  | '93,60'         |
-				| 'VAT' | '0%'       | 'Shirt' | '38/Black' | ''          | ''       | ''              |
 			And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price include tax
@@ -1844,11 +1811,11 @@ Scenario: _0154107 check filling in and re-filling Cash reciept (transaction typ
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description' |
-			| 'DFC'         |
+			| 'NDB'         |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payer'|
-			| 'DFC'       | 'DFC'  |
+			| 'NDB'       | 'Company NDB'  |
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -2053,11 +2020,11 @@ Scenario: _0154109 check filling in and re-filling Bank reciept (transaction typ
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description' |
-			| 'DFC'         |
+			| 'NDB'         |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payer'|
-			| 'DFC'       | 'DFC'  |
+			| 'NDB'       | 'NDB'  |
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -2279,11 +2246,11 @@ Scenario: _0154111 check filling in and re-filling Cash payment (transaction typ
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description' |
-			| 'DFC'         |
+			| 'NDB'         |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payee'|
-			| 'DFC'       | 'DFC'  |
+			| 'NDB'       | 'NDB'  |
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -2499,11 +2466,11 @@ Scenario: _0154113 check filling in and re-filling Bank payment (transaction typ
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description' |
-			| 'DFC'         |
+			| 'NDB'         |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payee'|
-			| 'DFC'       | 'DFC'  |
+			| 'NDB'       | 'NDB'  |
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -4379,7 +4346,7 @@ Scenario: _0154131  check currency form in  Bank Receipt
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description' |
-				| 'DFC'         |
+				| 'NDB'         |
 			And I select current line in "List" table
 			And I input "200,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
@@ -4474,7 +4441,7 @@ Scenario: _0154132  check currency form in Incoming payment order
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description' |
-				| 'DFC'         |
+				| 'NDB'         |
 			And I select current line in "List" table
 			And I input "200,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
@@ -4568,7 +4535,7 @@ Scenario: _0154133  check currency form in Outgoing payment order
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description' |
-				| 'DFC'         |
+				| 'NDB'         |
 			And I select current line in "List" table
 			And I input "200,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table

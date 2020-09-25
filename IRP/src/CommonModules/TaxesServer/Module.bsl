@@ -507,6 +507,31 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 	SetSavedData(Form, AttrNames.CacheName, New Structure("ArrayOfColumnsInfo", ArrayOfColumnsInfo));
 EndProcedure
 
+Function CreateFormControls_RetailDocuments(Object, Form, AddInfo) Export
+	TaxesParameters = GetCreateFormControlsParameters();
+	TaxesParameters.Date                  = Object.Date;
+	TaxesParameters.Company               = Object.Company;
+	TaxesParameters.PathToTable           = "Object.ItemList";
+	TaxesParameters.ItemParent            = Form.Items.ItemList;
+	TaxesParameters.ColumnOffset          = Form.Items.ItemListOffersAmount;
+	TaxesParameters.ItemListName          = "ItemList";
+	TaxesParameters.TaxListName           = "TaxList";
+	TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";
+	
+	CreateFormControls(Object, Form, TaxesParameters);
+	
+	// update tax cache after rebuild form controls
+	TaxesCache = New Structure();
+	TaxesCache.Insert("Cache"   , Form.TaxesCache);
+	TaxesCache.Insert("Ref"     , Object.Ref);
+	TaxesCache.Insert("Date"    , Object.Date);
+	TaxesCache.Insert("Company" , Object.Company);
+	
+	ParametersToServer = New Structure("TaxesCache" , TaxesCache);
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
+	Return ServerData.ArrayOfTaxInfo;
+EndFunction	
+
 Function GetCreateFormControlsParameters() Export
 	Return New Structure("Date
 		|, Company
@@ -540,7 +565,6 @@ Function GetTaxByColumnName(Form, CacheName, ColumnName)
 	Raise StrTemplate(R().Error_042, ColumnName);
 EndFunction
 
-// TODO: delete
 Function GetEmptyTaxTable(MetadataTaxList)
 	TaxList = New ValueTable();
 	TaxList.Columns.Add("Key", MetadataTaxList.Attributes.Key.Type);
@@ -567,7 +591,6 @@ Function GetCreateTaxTreeParameters() Export
 	Return Parameters;
 EndFunction
 
-// TODO: delete
 Procedure CreateTaxTree(Object, Form, Parameters) Export
 	
 	PaymentList = New ValueTable();

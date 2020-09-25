@@ -306,27 +306,8 @@ Procedure TaxValueOnChange(Item) Export
 EndProcedure
 
 &AtServer
-Function Taxes_CreateFormControls() Export
-	TaxesParameters = TaxesServer.GetCreateFormControlsParameters();
-	TaxesParameters.Date = Object.Date;
-	TaxesParameters.Company = Object.Company;
-	TaxesParameters.PathToTable = "Object.ItemList";
-	TaxesParameters.ItemParent = ThisObject.Items.ItemList;
-	TaxesParameters.ColumnOffset = ThisObject.Items.ItemListOffersAmount;
-	TaxesParameters.ItemListName = "ItemList";
-	TaxesParameters.TaxListName = "TaxList";
-	TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";
-	TaxesServer.CreateFormControls(Object, ThisObject, TaxesParameters);
-		
-	// update tax cache after rebuild form controls
-	
-	ParametersToServer = New Structure();
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company", 
-	ThisObject.TaxesCache, Object.Ref, Object.Date, Object.Company));
-	
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	Return ServerData.ArrayOfTaxInfo;
+Function Taxes_CreateFormControls(AddInfo = Undefined) Export
+	Return TaxesServer.CreateFormControls_RetailDocuments(Object, ThisObject, AddInfo);
 EndFunction
 
 #EndRegion

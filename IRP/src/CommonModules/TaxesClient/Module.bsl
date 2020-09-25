@@ -38,9 +38,7 @@ Procedure ExpandTaxTree(Tree, TreeRows) Export
 		Tree.Expand(ItemTreeRows.GetID());
 	EndDo;
 EndProcedure
-
-
-// TODO: delete 
+ 
 Function ChangeTaxAmount(Object, Form, CurrentData, MainTable, Val Actions = Undefined, AddInfo = Undefined) Export
 	
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
@@ -241,7 +239,7 @@ Procedure CalculateTaxOnChangeTaxValue(Object, Form, CurrentData, Item, AddInfo 
 		AddInfo);	
 EndProcedure
 	
-Procedure OpenForm_ChangeTaxAmount(Object, Form, Item, RowSelected, Field, StandardProcessing, MainTableData, AddInfo = Undefined) Export
+Procedure OpenForm_ChangeTaxAmount(Object, Form, Item, StandardProcessing, MainTableData, AddInfo = Undefined) Export
 	StandardProcessing = False;
 	
 	ArrayOfTaxListRows = New Array();

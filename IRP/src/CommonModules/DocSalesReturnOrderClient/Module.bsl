@@ -113,8 +113,6 @@ Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProc
 			TaxesClient.OpenForm_ChangeTaxAmount(Object, 
 												 Form, 
 												 Item, 
-												 RowSelected, 
-												 Field, 
 												 StandardProcessing,
 												 MainTableData,
 												 AddInfo);

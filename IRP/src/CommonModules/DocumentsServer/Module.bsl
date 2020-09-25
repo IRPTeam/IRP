@@ -6,7 +6,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		AddAttributesAndPropertiesServer.OnCreateAtServer(Form, "GroupOther");
 		ExtensionServer.AddAtributesFromExtensions(Form, Object.Ref, Form.Items.GroupOther);
 	EndIf;
-	// TODO: Cut If after fix all documents
+
 	If Form.Items.Find("GroupTitleCollapsed") <> Undefined Then
 		DocumentsClientServer.ChangeTitleCollapse(Object, Form, Not ValueIsFilled(Object.Ref));
 	EndIf;	
@@ -441,7 +441,7 @@ Function PrepareServerData(Parameters) Export
 	Result = New Structure();
 	
 	If Parameters.Property("ArrayOfMovementsTypes") Then
-		Result.Insert("ArrayOfCurrenciesByMmovementTypes", GetCurrencyByMovementType(Parameters.ArrayOfMovementsTypes));
+		Result.Insert("ArrayOfCurrenciesByMovementTypes", GetCurrencyByMovementType(Parameters.ArrayOfMovementsTypes));
 	EndIf;
 	
 	If Parameters.Property("TaxesCache") Then
@@ -652,11 +652,11 @@ Function PrepareServerData(Parameters) Export
 EndFunction	
 
 Function GetCurrencyByMovementType(ArrayOfMovementsTypes)
-	ArrayOfCurrenciesByMmovementTypes = New Array();
+	ArrayOfCurrenciesByMovementTypes = New Array();
 	For Each MovementType In ArrayOfMovementsTypes Do
-		ArrayOfCurrenciesByMmovementTypes.Add(New Structure("MovementType, Currency", MovementType, MovementType.Currency));
+		ArrayOfCurrenciesByMovementTypes.Add(New Structure("MovementType, Currency", MovementType, MovementType.Currency));
 	EndDo;
-	Return ArrayOfCurrenciesByMmovementTypes;
+	Return ArrayOfCurrenciesByMovementTypes;
 EndFunction
 
 Function GetStructureOfTaxRates(Tax, Date, Company, Parameters)

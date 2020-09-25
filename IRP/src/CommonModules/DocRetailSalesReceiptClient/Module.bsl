@@ -122,8 +122,6 @@ Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProc
 			TaxesClient.OpenForm_ChangeTaxAmount(Object, 
 												 Form, 
 												 Item, 
-												 RowSelected, 
-												 Field, 
 												 StandardProcessing,
 												 MainTableData,
 												 AddInfo);
@@ -322,19 +320,7 @@ Procedure ItemListTaxValueOnChange(Object, Form, Item, AddInfo = Undefined) Expo
 EndProcedure
 
 Procedure ItemListTaxValuePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
-	OnChangeItemName = "ItemListTaxValue";
-	
-	ParametersToServer = New Structure();
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
-	
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
+	DocumentsClient.ItemListTaxValuePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
 EndProcedure	
 
 #EndRegion

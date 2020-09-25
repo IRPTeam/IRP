@@ -11,7 +11,6 @@ Function GetCalculationSettings(Actions = Undefined, AddInfo = Undefined) Export
 	Return Actions;
 EndFunction
 
-// TODO: Test
 Procedure ClearDependentData(Object, AddInfo = Undefined) Export
 	If AddInfo = Undefined OR Not AddInfo.Property("TableParent") Then
 		TableName = "ItemList";
@@ -702,7 +701,7 @@ Function GetTotalAmountByDependedTable(Object, DependedTableName, MainTableKey)
 		If Row.Key = MainTableKey Then
 			Amount = Round(Amount + ?(CommonFunctionsClientServer.ObjectHasProperty(Row, "ManualAmount"), 
 								Row.ManualAmount, 
-								Row.Amount),2);
+								Row.Amount), 2);
 		EndIf;
 	EndDo;
 	Return Amount;
@@ -892,7 +891,6 @@ Procedure UpdateItemType(Object, Form, Settings) Export
 	
 	CurrentRow = Settings.Rows[0];
 	
-	// TODO: SalesOrder???
 	CurrentRow.ItemType = DocSalesOrderServer.GetItemRowType(CurrentRow.Item);
 	If CurrentRow.ItemType = PredefinedValue("Enum.ItemTypes.Service") Then
 		CurrentRow.ProcurementMethod = Undefined;

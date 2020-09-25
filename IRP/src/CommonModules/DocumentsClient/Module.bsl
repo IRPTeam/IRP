@@ -116,6 +116,8 @@ Procedure PartnerOnChange(Object, Form, Module, Item = Undefined, Settings = Und
 			PartnerInfo.Insert("Agreement" , ServerData.AgreementByPartner_Customer);
 		ElsIf PartnerSettings.AgreementType = ServerData.AgreementTypes_Vendor Then
 			PartnerInfo.Insert("Agreement" , ServerData.AgreementByPartner_Vendor);
+		Else
+			Raise "Not supported Agreement type";
 		EndIf;
 		
 		AgreementInfo = ServerData.AgreementInfo;
@@ -319,7 +321,6 @@ Procedure AgreementOnChange(Object, Form, Module, Item = Undefined, Settings  = 
 	
 EndProcedure
 
-// TODO: Start choice functions are similar.
 Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
 	If  OpenSettings = Undefined Then
 		OpenSettings = GetOpenSettingsStructure();
@@ -353,7 +354,6 @@ Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
-// TODO: Edit text change functions are similar.
 Procedure AgreementEditTextChange(Object, Form, Item, Text,
 		StandardProcessing, ArrayOfFilters = Undefined,
 		AdditionalParameters = Undefined) Export
@@ -838,22 +838,18 @@ EndProcedure
 
 #Region GroupTitleDecorationsEvents
 
-// TODO: Delete parameter Object
 Procedure DecorationGroupTitleCollapsedPictureClick(Object = Undefined, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(, Form, True);
 EndProcedure
 
-// TODO: Delete parameter Object
 Procedure DecorationGroupTitleCollapsedLabelClick(Object = Undefined, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(, Form, True);
 EndProcedure
 
-// TODO: Delete parameter Object
 Procedure DecorationGroupTitleUncollapsedPictureClick(Object = Undefined, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(, Form, False);
 EndProcedure
 
-// TODO: Delete parameter Object
 Procedure DecorationGroupTitleUncollapsedLabelClick(Object = Undefined, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(, Form, False);
 EndProcedure
@@ -937,6 +933,8 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 		ElsIf DateSettings.AgreementType = ServerData.AgreementTypes_Vendor Then
 			PartnerInfo.Insert("Agreement" , ServerData.AgreementByPartner_Vendor);
 			AgreementInfo = ServerData.AgreementInfoByPartner_Vendor;
+		Else
+			Raise "Not supported Agreement type";
 		EndIf;
 	EndIf;
 	
@@ -1159,7 +1157,6 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 	
 EndProcedure
 
-// TODO: Some parameters do not exist. Fix
 Function PickupItemsParameters(Object, Form)
 	ReturnValue = New Structure();
 	
@@ -2182,6 +2179,13 @@ Procedure CommonParametersToServer(Object, Form, ParametersToServer, AddInfo = U
 	EndDo;
 	ParametersToServer.Insert("GetItemKeysWithSerialLotNumbers", ArrayOfItemKeys);
 	
+	TaxesCacheParameters = New Structure();
+	TaxesCacheParameters.Insert("Cache"   , Form.TaxesCache); 
+	TaxesCacheParameters.Insert("Ref"     , Object.Ref);
+	TaxesCacheParameters.Insert("Date"    , Object.Date);
+	TaxesCacheParameters.Insert("Company" , Object.Company);
+	ParametersToServer.Insert("TaxesCache", TaxesCacheParameters);
+	
 	ParametersToServer.Insert("GetAgreementTypes_Vendor");
 	ParametersToServer.Insert("GetPurchaseOrder_EmptyRef");
 	ParametersToServer.Insert("GetAgreementTypes_Customer");
@@ -2198,11 +2202,17 @@ Procedure OnOpenPutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
 	
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", 
-	New Structure("Agreement, Date, Company, Currency, UUID", 
-	Object.Agreement, Object.Date, Object.Company, Object.Currency, Form.UUID));
+	ArrayOfCurrenciesRowsParameters = New Structure();
+	ArrayOfCurrenciesRowsParameters.Insert("Agreement" , Object.Agreement);
+	ArrayOfCurrenciesRowsParameters.Insert("Date"      , Object.Date);
+	ArrayOfCurrenciesRowsParameters.Insert("Company"   , Object.Company);
+	ArrayOfCurrenciesRowsParameters.Insert("Currency"  , Object.Currency);
+	ArrayOfCurrenciesRowsParameters.Insert("UUID"      , Form.UUID);
+	ParametersToServer.Insert("GetArrayOfCurrenciesRows", ArrayOfCurrenciesRowsParameters);
 	
-	ParametersToServer.Insert("GetAgreementInfo" , New Structure("Agreement", Object.Agreement));
+	AgreementInfoParameters = New Structure();
+	AgreementInfoParameters.Insert("Agreement", Object.Agreement);
+	ParametersToServer.Insert("GetAgreementInfo", AgreementInfoParameters);	
 	
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
@@ -2227,11 +2237,7 @@ Procedure ItemListSelectionPutServerDataToAddInfo(Object, Form, AddInfo = Undefi
 	OnChangeItemName = "ItemListSelection";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
-	
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company", 
-	Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
-		
+			
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
@@ -2244,12 +2250,14 @@ Procedure ItemListItemOnChangePutServerDataToAddInfo(Object, Form, CurrentRow, A
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
 	
-	GetArrayOfTaxRates = New Structure("Agreement, ItemKey", Object.Agreement, CurrentRow.ItemKey);
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company, GetArrayOfTaxRates", 
-	Form.TaxesCache, Object.Ref, Object.Date, Object.Company, GetArrayOfTaxRates));
+	ArrayOfTaxRatesParameters = New Structure();
+	ArrayOfTaxRatesParameters.Insert("Agreement", Object.Agreement);
+	ArrayOfTaxRatesParameters.Insert("ItemKey"  , CurrentRow.ItemKey);
+	ParametersToServer.TaxesCache.Insert("GetArrayOfTaxRates" , ArrayOfTaxRatesParameters);
 	
-	ParametersToServer.Insert("GetItemKeyByItem", New Structure("Item", CurrentRow.Item));
+	ItemKeyByItemParameters = New Structure();
+	ItemKeyByItemParameters.Insert("Item", CurrentRow.Item);
+	ParametersToServer.Insert("GetItemKeyByItem", ItemKeyByItemParameters);
 		
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
@@ -2265,12 +2273,14 @@ Procedure ItemListItemKeyOnChangePutServerDataToAddInfo(Object, Form, CurrentRow
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
 		
-	GetArrayOfTaxRates = New Structure("Agreement, ItemKey", Object.Agreement, CurrentRow.ItemKey);
-	ParametersToServer.Insert("TaxesCache",
-	New Structure ("Cache, Ref, Date, Company, GetArrayOfTaxRates", 
-	Form.TaxesCache, Object.Ref, Object.Date, Object.Company, GetArrayOfTaxRates));
+	ArrayOfTaxRatesParameters = New Structure();
+	ArrayOfTaxRatesParameters.Insert("Agreement", Object.Agreement); 
+	ArrayOfTaxRatesParameters.Insert("ItemKey"  , CurrentRow.ItemKey);
+	ParametersToServer.TaxesCache.Insert("GetArrayOfTaxRates" , ArrayOfTaxRatesParameters);
 	
-	ParametersToServer.Insert("GetItemUnitInfo", New Structure("ItemKey", CurrentRow.ItemKey));
+	ItemUnitInfoParameters = New Structure();
+	ItemUnitInfoParameters.Insert("ItemKey", CurrentRow.ItemKey);
+	ParametersToServer.Insert("GetItemUnitInfo", ItemUnitInfoParameters);
 		
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
@@ -2295,8 +2305,6 @@ Procedure ItemListPriceTypeOnChangePutServerDataToAddInfo(Object, Form, AddInfo 
 	OnChangeItemName = "ItemListPriceType";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
-	
-	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
 		
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
@@ -2312,8 +2320,6 @@ Procedure ItemListUnitOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Und
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
 		
-	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
-		
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
@@ -2327,7 +2333,6 @@ Procedure ItemListQuantityPutServerDataToAddInfo(Object, Form, CurrentData, AddI
 	OnChangeItemName = "ItemListQuantity";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
-	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
 	
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
@@ -2342,7 +2347,6 @@ Procedure ItemListPricePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo
 	OnChangeItemName = "ItemListPrice";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
-	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
 	
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
@@ -2357,7 +2361,6 @@ Procedure ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, A
 	OnChangeItemName = "ItemListTotalAmount";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
-	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
 	
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
@@ -2372,7 +2375,6 @@ Procedure ItemListTaxValuePutServerDataToAddInfo(Object, Form, CurrentData, AddI
 	OnChangeItemName = "ItemListTaxValue";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
-	ParametersToServer.Insert("TaxesCache", New Structure ("Cache, Ref, Date, Company", Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
 	
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
@@ -2390,20 +2392,40 @@ Procedure PartnerOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefine
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
 	
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", 
-	New Structure("Agreement, Date, Company, Currency, UUID", 
-	Object.Agreement, Object.Date, Object.Company, Object.Currency, Form.UUID));
+	ArrayOfCurrenciesRowsParameters = New Structure();
+	ArrayOfCurrenciesRowsParameters.Insert("Agreement" , Object.Agreement);
+	ArrayOfCurrenciesRowsParameters.Insert("Date"      , Object.Date);
+	ArrayOfCurrenciesRowsParameters.Insert("Company"   , Object.Company);
+	ArrayOfCurrenciesRowsParameters.Insert("Currency"  , Object.Currency);
+	ArrayOfCurrenciesRowsParameters.Insert("UUID"      , Form.UUID);
+	ParametersToServer.Insert("GetArrayOfCurrenciesRows", ArrayOfCurrenciesRowsParameters);
 	
-	GetArrayOfTaxRates = New Structure("Agreement", Object.Agreement);
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company, GetArrayOfTaxRates", 
-	Form.TaxesCache, Object.Ref, Object.Date, Object.Company, GetArrayOfTaxRates));
+	ArrayOfTaxRatesParameters = New Structure();
+	ArrayOfTaxRatesParameters.Insert("Agreement", Object.Agreement);
+	ParametersToServer.TaxesCache.Insert("GetArrayOfTaxRates", ArrayOfTaxRatesParameters);
 	
-	ParametersToServer.Insert("GetAgreementInfo", New Structure("Agreement", Object.Agreement));
-	ParametersToServer.Insert("GetManagerSegmentByPartner", New Structure("Partner", Object.Partner));
-	ParametersToServer.Insert("GetLegalNameByPartner", New Structure("Partner, LegalName", Object.Partner, Object.LegalName));
-	ParametersToServer.Insert("GetAgreementByPartner", New Structure("Partner, Agreement, Date", Object.Partner, Object.Agreement, Object.Date));
-	ParametersToServer.Insert("GetMetaDataStructure", New Structure("Ref", Object.Ref));
+	AgreementInfoParameters = New Structure();
+	AgreementInfoParameters.Insert("Agreement", Object.Agreement);
+	ParametersToServer.Insert("GetAgreementInfo", AgreementInfoParameters);	
+	
+	ManagerSegmentByPartnerParameters = New Structure();
+	ManagerSegmentByPartnerParameters.Insert("Partner", Object.Partner);
+	ParametersToServer.Insert("GetManagerSegmentByPartner", ManagerSegmentByPartnerParameters);
+	
+	LegalNameByPartnerParameters = New Structure();
+	LegalNameByPartnerParameters.Insert("Partner"     , Object.Partner);
+	LegalNameByPartnerParameters.Insert("LegalName"   , Object.LegalName);
+	ParametersToServer.Insert("GetLegalNameByPartner" , LegalNameByPartnerParameters);
+	
+	AgreementByPartnerParameters = New Structure();
+	AgreementByPartnerParameters.Insert("Partner"           , Object.Partner);
+	AgreementByPartnerParameters.Insert("Agreement"         , Object.Agreement);
+	AgreementByPartnerParameters.Insert("Date"              , Object.Date);
+	ParametersToServer.Insert("GetAgreementByPartner", AgreementByPartnerParameters);
+	
+	MetaDataStructureParameters = New Structure();
+	MetaDataStructureParameters.Insert("Ref", Object.Ref);	
+	ParametersToServer.Insert("GetMetaDataStructure", MetaDataStructureParameters);
 			
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
@@ -2419,17 +2441,26 @@ Procedure AgreementOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefi
 	OnChangeItemName = "Agreement";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", 
-	New Structure("Agreement, Date, Company, Currency, UUID", 
-	Object.Agreement, Object.Date, Object.Company, Object.Currency, Form.UUID));
 	
-	GetArrayOfTaxRates = New Structure("Agreement", Object.Agreement);
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company, GetArrayOfTaxRates", 
-	Form.TaxesCache, Object.Ref, Object.Date, Object.Company, GetArrayOfTaxRates));
+	ArrayOfCurrenciesRowsParameters = New Structure();
+	ArrayOfCurrenciesRowsParameters.Insert("Agreement" , Object.Agreement);
+	ArrayOfCurrenciesRowsParameters.Insert("Date"      , Object.Date);
+	ArrayOfCurrenciesRowsParameters.Insert("Company"   , Object.Company);
+	ArrayOfCurrenciesRowsParameters.Insert("Currency"  , Object.Currency);
+	ArrayOfCurrenciesRowsParameters.Insert("UUID"      , Form.UUID);
+	ParametersToServer.Insert("GetArrayOfCurrenciesRows", ArrayOfCurrenciesRowsParameters);
 	
-	ParametersToServer.Insert("GetMetaDataStructure", New Structure("Ref", Object.Ref));
-	ParametersToServer.Insert("GetAgreementInfo", New Structure("Agreement", Object.Agreement));	
+	ArrayOfTaxRatesParameters = New Structure();
+	ArrayOfTaxRatesParameters.Insert("Agreement", Object.Agreement);
+	ParametersToServer.TaxesCache.Insert("GetArrayOfTaxRates", ArrayOfTaxRatesParameters);
+	
+	MetaDataStructureParameters = New Structure();
+	MetaDataStructureParameters.Insert("Ref", Object.Ref);	
+	ParametersToServer.Insert("GetMetaDataStructure", MetaDataStructureParameters);
+	
+	AgreementInfoParameters = New Structure();
+	AgreementInfoParameters.Insert("Agreement", Object.Agreement);
+	ParametersToServer.Insert("GetAgreementInfo", AgreementInfoParameters);	
 			
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
@@ -2445,13 +2476,14 @@ Procedure CurrencyOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefin
 	OnChangeItemName = "Currency";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", 
-	New Structure("Agreement, Date, Company, Currency, UUID", 
-	Object.Agreement, Object.Date, Object.Company, Object.Currency, Form.UUID));
 	
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company", 
-	Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
+	ArrayOfCurrenciesRowsParameters = New Structure();
+	ArrayOfCurrenciesRowsParameters.Insert("Agreement" , Object.Agreement);
+	ArrayOfCurrenciesRowsParameters.Insert("Date"      , Object.Date);
+	ArrayOfCurrenciesRowsParameters.Insert("Company"   , Object.Company);
+	ArrayOfCurrenciesRowsParameters.Insert("Currency"  , Object.Currency);
+	ArrayOfCurrenciesRowsParameters.Insert("UUID"      , Form.UUID);
+	ParametersToServer.Insert("GetArrayOfCurrenciesRows", ArrayOfCurrenciesRowsParameters);
 	
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
@@ -2467,14 +2499,18 @@ Procedure CompanyOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefine
 	OnChangeItemName = "Company";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", 
-	New Structure("Agreement, Date, Company, Currency, UUID", 
-	Object.Agreement, Object.Date, Object.Company, Object.Currency, Form.UUID));
 	
-	ParametersToServer.Insert("GetAgreementInfo", New Structure("Agreement", Object.Agreement));	
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company", 
-	Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
+	ArrayOfCurrenciesRowsParameters = New Structure();
+	ArrayOfCurrenciesRowsParameters.Insert("Agreement" , Object.Agreement);
+	ArrayOfCurrenciesRowsParameters.Insert("Date"      , Object.Date);
+	ArrayOfCurrenciesRowsParameters.Insert("Company"   , Object.Company);
+	ArrayOfCurrenciesRowsParameters.Insert("Currency"  , Object.Currency);
+	ArrayOfCurrenciesRowsParameters.Insert("UUID"      , Form.UUID);
+	ParametersToServer.Insert("GetArrayOfCurrenciesRows", ArrayOfCurrenciesRowsParameters);
+	
+	AgreementInfoParameters = New Structure();
+	AgreementInfoParameters.Insert("Agreement", Object.Agreement);
+	ParametersToServer.Insert("GetAgreementInfo", AgreementInfoParameters);	
 	
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
@@ -2490,12 +2526,14 @@ Procedure StoreOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined)
 	OnChangeItemName = "Store";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);	
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company", 
-	Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
 	
-	ParametersToServer.Insert("GetMetaDataStructure", New Structure("Ref", Object.Ref));
-	ParametersToServer.Insert("GetAgreementInfo", New Structure("Agreement", Object.Agreement));	
+	MetaDataStructureParameters = New Structure();
+	MetaDataStructureParameters.Insert("Ref", Object.Ref);	
+	ParametersToServer.Insert("GetMetaDataStructure", MetaDataStructureParameters);
+	
+	AgreementInfoParameters = New Structure();
+	AgreementInfoParameters.Insert("Agreement", Object.Agreement);
+	ParametersToServer.Insert("GetAgreementInfo", AgreementInfoParameters);	
 			
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
@@ -2511,10 +2549,7 @@ Procedure PriceIncludeTaxOnChangePutServerDataToAddInfo(Object, Form, AddInfo = 
 	OnChangeItemName = "PriceIncludeTax";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);	
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company", 
-	Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
-			
+		
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
@@ -2529,19 +2564,34 @@ Procedure DateOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) 
 	OnChangeItemName = "Date";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", 
-	New Structure("Agreement, Date, Company, Currency, UUID", 
-	Object.Agreement, Object.Date, Object.Company, Object.Currency, Form.UUID));
-		
-	ParametersToServer.Insert("TaxesCache",
-	 New Structure ("Cache, Ref, Date, Company", 
-	 Form.TaxesCache, Object.Ref, Object.Date, Object.Company));
-	ParametersToServer.Insert("GetMetaDataStructure", New Structure("Ref", Object.Ref));
 	
-	ParametersToServer.Insert("GetManagerSegmentByPartner", New Structure("Partner", Object.Partner));
-	ParametersToServer.Insert("GetLegalNameByPartner", New Structure("Partner, LegalName", Object.Partner, Object.LegalName));
-	ParametersToServer.Insert("GetAgreementByPartner", New Structure("Partner, Agreement, Date, WithAgreementInfo", 
-	Object.Partner, Object.Agreement, Object.Date, True));
+	ArrayOfCurrenciesRowsParameters = New Structure();
+	ArrayOfCurrenciesRowsParameters.Insert("Agreement" , Object.Agreement);
+	ArrayOfCurrenciesRowsParameters.Insert("Date"      , Object.Date);
+	ArrayOfCurrenciesRowsParameters.Insert("Company"   , Object.Company);
+	ArrayOfCurrenciesRowsParameters.Insert("Currency"  , Object.Currency);
+	ArrayOfCurrenciesRowsParameters.Insert("UUID"      , Form.UUID);
+	ParametersToServer.Insert("GetArrayOfCurrenciesRows", ArrayOfCurrenciesRowsParameters);
+		
+	MetaDataStructureParameters = New Structure();
+	MetaDataStructureParameters.Insert("Ref", Object.Ref);	
+	ParametersToServer.Insert("GetMetaDataStructure", MetaDataStructureParameters);
+	
+	ManagerSegmentByPartnerParameters = New Structure();
+	ManagerSegmentByPartnerParameters.Insert("Partner", Object.Partner);
+	ParametersToServer.Insert("GetManagerSegmentByPartner", ManagerSegmentByPartnerParameters);
+	
+	LegalNameByPartnerParameters = New Structure();
+	LegalNameByPartnerParameters.Insert("Partner"     , Object.Partner);
+	LegalNameByPartnerParameters.Insert("LegalName"   , Object.LegalName);
+	ParametersToServer.Insert("GetLegalNameByPartner" , LegalNameByPartnerParameters);
+	
+	AgreementByPartnerParameters = New Structure();
+	AgreementByPartnerParameters.Insert("Partner"           , Object.Partner);
+	AgreementByPartnerParameters.Insert("Agreement"         , Object.Agreement);
+	AgreementByPartnerParameters.Insert("Date"              , Object.Date);
+	AgreementByPartnerParameters.Insert("WithAgreementInfo" , True);
+	ParametersToServer.Insert("GetAgreementByPartner", AgreementByPartnerParameters);
 		
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
@@ -2552,6 +2602,3 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
-
-

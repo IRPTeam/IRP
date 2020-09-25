@@ -68,6 +68,18 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="58bd26ff-45c9-41e3-8c13-0020d0aa178f">
+    <name>Enabled</name>
+    <synonym>
+      <key>en</key>
+      <value>Enabled</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="fd9a6894-9c06-4625-91a4-5db398bbb9ac">
     <producedTypes>
       <objectType typeId="b8fed1f0-7596-48b4-9c7e-bbe156d72e69" valueTypeId="1acf60ec-ede0-41cf-8e2a-c53aee5f71c5"/>

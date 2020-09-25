@@ -1,6 +1,7 @@
 
 #Region Public
 
+//
 Function GetDriverSettings(AddInID) Export
 	Query = New Query;
 	Query.Text =
@@ -29,12 +30,8 @@ Function GetDriverSettings(AddInID) Export
 	Return Settings;
 EndFunction
 
-Function GetConnectionSettings(HardwareRef = Undefined, Name = "") Export
-	
-	If Not IsBlankString(Name) Then
-		HardwareRef = Catalogs.Hardware.FindByDescription(Name);
-	EndIf;
-	
+//
+Function GetConnectionSettings(HardwareRef) Export
 	Query = New Query;
 	Query.Text =
 		"SELECT
@@ -46,12 +43,10 @@ Function GetConnectionSettings(HardwareRef = Undefined, Name = "") Export
 		|FROM
 		|	Catalog.Hardware AS Hardware
 		|WHERE
-		|	Hardware.Ref = &Ref";
-	
-	Query.SetParameter("Ref", HardwareRef);
-	
+		|	Hardware.Ref = &Ref";	
+	Query.SetParameter("Ref", HardwareRef);	
 	QueryResult = Query.Execute();
-	
+		
 	SelectionDetailRecords = QueryResult.Select();
 	Settings = New Structure;
 	If SelectionDetailRecords.Next() Then
@@ -67,8 +62,32 @@ Function GetConnectionSettings(HardwareRef = Undefined, Name = "") Export
 		EndDo;
 		Settings.Insert("ConnectParameters", ConnectParameters);
 	EndIf;
+	
 	Return Settings;
+EndFunction
 
+//
+Function GetWorkstationHardwareByEquipmentType(Workstation, EquipmentType) Export
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	Hardware.Ref
+		|FROM
+		|	Catalog.Hardware AS Hardware
+		|WHERE
+		|	Hardware.Workstation = &Workstation
+		|	And Hardware.EquipmentType = &EquipmentType
+		|	And Hardware.Enabled
+		|	And Not Hardware.DeletionMark";
+	Query.SetParameter("Workstation", Workstation);
+	Query.SetParameter("EquipmentType", EquipmentType);	
+	QueryResult = Query.Execute();
+	SelectionDetailRecords = QueryResult.Select();
+	HardwareList = New Array;
+	If SelectionDetailRecords.Next() Then
+		HardwareList.Add(SelectionDetailRecords.Ref);
+	EndIf;	
+	Return HardwareList;
 EndFunction
 
 #EndRegion

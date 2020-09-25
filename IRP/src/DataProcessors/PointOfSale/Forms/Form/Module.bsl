@@ -12,25 +12,10 @@ EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
+	ConnectBarcodeScanners();
 	NewTransaction();
 	SetShowItems();
-	Try
-	NotifyDescription_ConnectEquipments_End = New NotifyDescription("ConnectEquipments_End", ThisObject);                                 
-	HardwareClient.BeginConnectEquipment(NotifyDescription_ConnectEquipments_End);
-	Except
-	EndTry;
 EndProcedure
-
-&AtClient
-Procedure ConnectEquipments_End(Result, Param) Export
-	
-	If Result.Result Then
-		Status(R().Eq_004);
-	Else
-		Status(R().Eq_005);
-	EndIf;
-EndProcedure
-
 
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
@@ -233,8 +218,7 @@ Procedure qPayment(Command)
 	If Not CheckFilling() Then
 		Cancel = True;
 		Return;
-	EndIf;
-	
+	EndIf;	
 	
 	Cancel = False;
 	DPPointOfSaleClient.BeforePayment(ThisObject, Cancel);
@@ -247,6 +231,7 @@ Procedure qPayment(Command)
 	ObjectParameters = New Structure;
 	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
 	ObjectParameters.Insert("BusinessUnit", Object.BusinessUnit);
+	ObjectParameters.Insert("Workstation", SessionParametersClientServer.GetSessionParameter("Workstation"));
 	OpenFormParameters = New Structure;
 	OpenFormParameters.Insert("Parameters", ObjectParameters);
 	OpenForm("DataProcessor.PointOfSale.Form.Payment"
@@ -356,6 +341,28 @@ EndProcedure
 #EndRegion
 
 #Region Private
+
+#Region Hardwares
+
+&AtClient
+Procedure ConnectBarcodeScanners()
+	HardwareParameters = New Structure;
+	HardwareParameters.Insert("Workstation", SessionParametersClientServer.GetSessionParameter("Workstation"));
+	HardwareParameters.Insert("EquipmentType", PredefinedValue("Enum.EquipmentTypes.BarcodeScanner"));
+	HardwareParameters.Insert("ConnectionNotify" , New NotifyDescription("ConnectHardware_End", ThisObject));		                                 
+	HardwareClient.BeginConnectEquipment(HardwareParameters);
+EndProcedure
+
+&AtClient
+Procedure ConnectHardware_End(Result, Param) Export	
+	If Result.Result Then
+		Status(R().Eq_004);
+	Else
+		Status(R().Eq_005);
+	EndIf;
+EndProcedure
+
+#EndRegion
 
 #Region PictureViewer
 

@@ -35,12 +35,34 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.Workstations.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.Workstations.Form.ListForm</defaultListForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="757286e6-1359-4443-8450-2781d00eded7">
+    <name>CashAccount</name>
+    <synonym>
+      <key>en</key>
+      <value>Cash account</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.CashAccounts</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="be6907cb-f1a0-4a12-bd73-1d703dca564f">
     <name>ItemForm</name>
     <synonym>
       <key>en</key>
       <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="9378dd86-666f-42b8-9d6b-42607e974020">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

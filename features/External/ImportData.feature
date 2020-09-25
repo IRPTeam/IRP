@@ -97,6 +97,7 @@ Scenario: Create catalog Agreements objects
 		| 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf1383f3b4363' | 'No'           | '126'    | '01.01.0001 00:00:00' | ''                                                                        | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf1383f3b4361' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef005' | ''                                                                     | '07.09.2020 00:00:00' | '01.01.0001 00:00:00' | ''               | 'No'              | '0'                        | ''                                                               | 'Enum.AgreementTypes.Vendor'   | ''                                                                  | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | 'Enum.ApArPostingDetail.ByAgreements'        | ''                                                                   | 'Enum.AgreementKinds.Regular'  | 'Vendor Ferron Discount'                     | ''                 | ''               | ''                                 |
 		| 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf1383f3b4365' | 'No'           | '126'    | '01.01.0001 00:00:00' | ''                                                                        | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf1383f3b4364' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef005' | ''                                                                     | '07.09.2020 00:00:00' | '01.01.0001 00:00:00' | ''               | 'No'              | '0'                        | ''                                                               | 'Enum.AgreementTypes.Vendor'   | ''                                                                  | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | 'Enum.ApArPostingDetail.ByAgreements'        | ''                                                                   | 'Enum.AgreementKinds.Regular'  | 'Vendor Ferron Partner 2'                    | ''                 | ''               | ''                                 |
 		| 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf13dc8cb47ec' | 'No'           | ''       | '01.01.0001 00:00:00' | ''                                                                        | ''                                                                 | ''                                                                  | ''                                                                   | ''                                                                     | '01.01.0001 00:00:00' | '01.01.0001 00:00:00' | ''               | 'No'              | '0'                        | ''                                                               | ''                             | ''                                                                  | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c1860' | 'Enum.ApArPostingDetail.ByAgreements'        | ''                                                                   | 'Enum.AgreementKinds.Standard' | ''                                           | ''                 | ''               | 'Standard, EUR'                    |
+		| 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced15eaf12effe70fb8' | 'No'           | ''       | '01.01.0001 00:00:00' | ''                                                                        | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf134a6a475a9' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef002' | ''                                                                     | '01.01.2019 00:00:00' | '01.01.0001 00:00:00' | ''               | 'No'              | '0'                        | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d' | 'Enum.AgreementTypes.Customer' |                                                                     | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | 'Enum.ApArPostingDetail.ByDocuments'         | ''                                                                   | 'Enum.AgreementKinds.Regular'  | 'Partner term NDB'                           | ''                 | ''               | ''                                 |
 
 Scenario: Create catalog BusinessUnits objects
 
@@ -174,6 +175,8 @@ Scenario: Create catalog Companies objects (partners company)
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf134a6a475a2' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | ''            | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf134a6a475a1' | 'Enum.CompanyLegalType.Company' | 'No'  | 'Company Adel'             | ''                 | ''               | ''                            |
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf134a6a475a4' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | ''            | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf134a6a475a3' | 'Enum.CompanyLegalType.Company' | 'No'  | 'Company Astar'            | ''                 | ''               | ''                            |
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf13c5c2df439' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | ''            | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf13c5c2df438' | 'Enum.CompanyLegalType.Company' | 'No'  | 'Company Foxred'           | ''                 | ''               | ''                            |
+		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf174a6a475a4' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | ''            | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf135a6a475a9' | 'Enum.CompanyLegalType.Company' | 'No'  | 'Company Avira'            | ''                 | ''               | ''                            |
+		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced12eaf13c5c2df439' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | ''            | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf134a6a475a9' | 'Enum.CompanyLegalType.Company' | 'No'  | 'Company NDB'              | ''                 | ''               | ''                            |
 
 Scenario: Create catalog Companies objects (second company Ferron BP)
 	And I check or create catalog "Companies" objects:
@@ -655,6 +658,8 @@ Scenario: Create catalog Partners objects
 		| 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf116b32709a6' | 'No'           | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf116b32709a7' | 'Yes'      | 'No'     | 'No'       | 'No'       | 'e1cib/data/Catalog.PartnerSegments?ref=aa78120ed92fbced11eaf116b327099c' | 'No'                                      | 'No'                                | 'MIO'              | ''                 | ''               | 'MIO TR'             |
 		| 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf134a6a475a3' | 'No'           | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf134a6a475a1' | 'Yes'      | 'Yes'    | 'No'       | 'No'       | 'e1cib/data/Catalog.PartnerSegments?ref=aa78120ed92fbced11eaf116b327099c' | 'Yes'                                     | 'Yes'                               | 'Astar'            | ''                 | ''               | ''                   |
 		| 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf134a6a475a5' | 'No'           | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf134a6a475a1' | 'Yes'      | 'Yes'    | 'No'       | 'No'       | 'e1cib/data/Catalog.PartnerSegments?ref=aa78120ed92fbced11eaf116b327099c' | 'Yes'                                     | 'Yes'                               | 'Crystal'          | ''                 | ''               | ''                   |
+		| 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf134a6a475a9' | 'No'           | ''                                                                 | 'Yes'      | 'Yes'    | 'No'       | 'No'       | ''                                                                        | 'Yes'                                     | 'Yes'                               | 'NDB'              | ''                 | ''               | ''                   |
+		| 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf135a6a475a9' | 'No'           | ''                                                                 | 'Yes'      | 'Yes'    | 'No'       | 'No'       | ''                                                                        | 'Yes'                                     | 'Yes'                               | 'Avira'            | ''                 | ''               | ''                   |
 
 	And I refill object tabular section "AddAttributes":
 		| 'Ref'                                                              | 'Property'                                                                                           | 'Value'                                                                                 |
@@ -1010,7 +1015,7 @@ Scenario: Create catalog TaxRates objects
 		| 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' | 'No'           | '18'   | '18%'            | ''                 | ''               | '18% TR'         |
 		| 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef011' | 'No'           | '0'    | 'Without VAT'    | ''                 | ''               | 'Without VAT TR' |
 		| 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef012' | 'No'           | '0'    | '0%'             | ''                 | ''               | '0%'             |
-
+		| 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef013' | 'No'           | '1'    | '1%'             | ''                 | ''               | '1%'             |
 Scenario: Create catalog Taxes objects
 
 	And I check or create catalog "Taxes" objects:
@@ -1042,6 +1047,21 @@ Scenario: Create catalog Taxes objects
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailSalesReceipt'  |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailReturnReceipt' |
 
+Scenario: Create catalog Taxes objects (Sales tax)
+	
+	And I check or create catalog "Taxes" objects:
+		| 'Ref'                                                           | 'DeletionMark' | 'ExternalDataProcSettings' | 'ExternalDataProc' | 'Type'              | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5' | 'No'           | 'ValueStorage'             | ''                 | 'Enum.TaxType.Rate' | 'SalesTax'       | ''                 | ''               | ''               |
+
+	And I refill object tabular section "TaxRates":
+		| 'Ref'                                                           | 'TaxRate'                                                          |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5' | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef013' |
+
+	And I refill object tabular section "UseDocuments":
+		| 'Ref'                                                           | 'DocumentName' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5' | 'SalesOrder'   |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5' | 'SalesInvoice' |
+
 Scenario: Create information register TaxSettings records
 
 	And I check or create information register "TaxSettings" records:
@@ -1055,6 +1075,17 @@ Scenario: Create information register Taxes records (VAT)
 		| 'Period'              | 'Company'                                                           | 'Tax'                                                           | 'Use' | 'Priority' |
 		| '01.01.2020 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'Yes' | '5'        |
 
+Scenario: Create information register TaxSettings (Sales tax)
+	
+	And I check or create information register "TaxSettings" records:
+		| 'Period'              | 'Company'                                                           | 'Tax'                                                           | 'ItemKey' | 'Item' | 'ItemType' | 'Agreement' | 'TaxRate'                                                          |
+		| '01.10.2019 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5' | ''        | ''     | ''         | ''          | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef013' |
+
+Scenario: Create information register Taxes records (Sales tax)
+
+	And I check or create information register "Taxes" records:
+		| 'Period'              | 'Company'                                                           | 'Tax'                                                           | 'Use' | 'Priority' |
+		| '01.10.2019 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5' | 'Yes' | '2'        |
 
 Scenario: Create information register PricesByItemKeys records
 
@@ -1217,3 +1248,13 @@ Scenario: Create information register CurrencyRates records
 		| '07.09.2020 00:00:00' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1858' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185b' | '1'            | '3,7248'  |
 		| '07.09.2020 00:00:00' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1858' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856' | 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185b' | '1'            | '27,7325' |
 		| '07.09.2020 00:00:00' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1858' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1857' | 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185b' | '1'            | '32,8589' |
+
+Scenario: Create information register Barcodes records
+
+	And I check or create information register "Barcodes" records:
+		| 'Barcode'       | 'ItemKey'                                                          | 'SerialLotNumber' | 'Unit'                                                          | 'Presentation'  |
+		| '2202283705'    | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '2202283705'    |
+		| '2202283713'    | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fb' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '2202283713'    |
+		| '2202283739'    | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fe' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '2202283739'    |
+		| '4820024700016' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c604' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '4820024700016' |
+		| '978020137962'  | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c605' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '978020137962'  |

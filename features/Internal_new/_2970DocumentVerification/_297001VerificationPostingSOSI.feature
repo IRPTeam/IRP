@@ -13,38 +13,55 @@ Background:
 
 
 Scenario: _29700101 preparation
-	* Create customer
-		Given I open hyperlink "e1cib/list/Catalog.Partners"
-		And I click the button named "FormCreate"
-		And I input "Foxred" text in the field named "Description_en"
-		And I change checkbox "Vendor"
-		And I change checkbox "Customer"
-		And I click Select button of "Manager segment" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Region 2'    |
-		And I select current line in "List" table
-		And I click "Save" button
-		And In this window I click command interface button "Partner segments content"
-		And I click the button named "FormCreate"
-		And I click Select button of "Segment" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Retail'      |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And In this window I click command interface button "Company"
-		And I click the button named "FormCreate"
-		And I input "Company Foxred" text in the field named "Description_en"
-		And I click Select button of "Country" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Turkey'      |
-		And I select current line in "List" table
-		And I select "Company" exact value from the drop-down list named "Type"
-		And I click "Save and close" button
-		And In this window I click command interface button "Main"
-		And I click "Save and close" button
+	
+Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipment confirmation)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create information register Barcodes records
+		When Create catalog Companies objects (own Second company)
+		When Create catalog CashAccounts objects
+		When Create catalog Agreements objects
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects
+		When Create catalog Companies objects (partners company)
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Partners objects (Kalipso)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	* Add sales tax
+		When Create catalog Taxes objects (Sales tax)
+		When Create information register TaxSettings (Sales tax)
+		When Create information register Taxes records (Sales tax)
+		When add sales tax settings 
 	* Create SO
 		When create a test SO for VerificationPosting
 	// * Change number SO to 2970

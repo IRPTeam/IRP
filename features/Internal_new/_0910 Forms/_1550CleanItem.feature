@@ -12,9 +12,50 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
+Scenario: _155000 preparation (check that the item is not cleared)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Partners objects (Kalipso)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	
 
 
-Scenario: saving information about an Item without a completed item key in a document Sales order
+
+Scenario: _155001 saving information about an Item without a completed item key in a document Sales order
 	* Open document form Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -75,7 +116,7 @@ Scenario: saving information about an Item without a completed item key in a doc
 			| 'Sales order*'  | 'Dress' |
 		And I close all client application windows
 
-Scenario: saving information about an Item without a completed item key in a document Sales invoice
+Scenario: _155002 saving information about an Item without a completed item key in a document Sales invoice
 	* Open document form Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
@@ -133,7 +174,7 @@ Scenario: saving information about an Item without a completed item key in a doc
 			| 'Sales invoice*'  | 'Dress' |
 		And I close all client application windows
 
-Scenario: saving information about an Item without a completed item key in a document SalesReturn
+Scenario: _155003 saving information about an Item without a completed item key in a document SalesReturn
 	* Open document form SalesReturn
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I click the button named "FormCreate"
@@ -190,7 +231,7 @@ Scenario: saving information about an Item without a completed item key in a doc
 			| 'Sales return*'  | 'Dress' |
 		And I close all client application windows
 
-Scenario: saving information about an Item without a completed item key in a document SalesReturnOrder
+Scenario: _155004 saving information about an Item without a completed item key in a document SalesReturnOrder
 	* Open document form SalesReturnOrder
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		And I click the button named "FormCreate"
@@ -247,7 +288,7 @@ Scenario: saving information about an Item without a completed item key in a doc
 			| 'Sales return order*'  | 'Dress' |
 		And I close all client application windows
 	
-Scenario: saving information about an Item without a completed item key in a document PurchaseOrder
+Scenario: _155005 saving information about an Item without a completed item key in a document PurchaseOrder
 	* Open document form PurchaseOrder
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -316,7 +357,7 @@ Scenario: saving information about an Item without a completed item key in a doc
 			| 'Purchase order*'  | 'Dress' |
 		And I close all client application windows
 
-Scenario: saving information about an Item without a completed item key in a document PurchaseInvoice
+Scenario: _155006 saving information about an Item without a completed item key in a document PurchaseInvoice
 	* Open document form PurchaseInvoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
@@ -384,7 +425,7 @@ Scenario: saving information about an Item without a completed item key in a doc
 			| 'Purchase invoice*'  | 'Dress' |
 		And I close all client application windows
 
-Scenario: saving information about an Item without a completed item key in a document PurchaseReturn
+Scenario: _155007 saving information about an Item without a completed item key in a document PurchaseReturn
 	* Open document form PurchaseReturn
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I click the button named "FormCreate"
@@ -452,7 +493,7 @@ Scenario: saving information about an Item without a completed item key in a doc
 			| 'Purchase return*'  | 'Dress' |
 		And I close all client application windows
 
-Scenario: saving information about an Item without a completed item key in a document PurchaseReturnOrder
+Scenario: _155008 saving information about an Item without a completed item key in a document PurchaseReturnOrder
 	* Open document form PurchaseReturnOrder
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 		And I click the button named "FormCreate"
@@ -522,7 +563,7 @@ Scenario: saving information about an Item without a completed item key in a doc
 
 
 
-Scenario: saving information about an Item without a completed item key in a document Bundling
+Scenario: _155009 saving information about an Item without a completed item key in a document Bundling
 	* Open document form Bundling
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I click the button named "FormCreate"
@@ -585,7 +626,7 @@ Scenario: saving information about an Item without a completed item key in a doc
 			| 'Bundling*'    | 'Dress' |
 		And I close all client application windows
 
-Scenario: saving information about an Item without a completed item key in a document Unbundling
+Scenario: _155010 saving information about an Item without a completed item key in a document Unbundling
 	* Open document form Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"
@@ -662,7 +703,7 @@ Scenario: saving information about an Item without a completed item key in a doc
 		And I close all client application windows
 
 
-Scenario: saving information about an Item without a completed item key in a document GoodsReceipt
+Scenario: _155011 saving information about an Item without a completed item key in a document GoodsReceipt
 	* Open document form GoodsReceipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I click the button named "FormCreate"
@@ -717,7 +758,7 @@ Scenario: saving information about an Item without a completed item key in a doc
 			| 'GoodsReceipt*'  | 'Dress' |
 		And I close all client application windows
 
-Scenario: saving information about an Item without a completed item key in a document ShipmentConfirmation
+Scenario: _155012 saving information about an Item without a completed item key in a document ShipmentConfirmation
 	* Open document form ShipmentConfirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click the button named "FormCreate"
@@ -772,7 +813,7 @@ Scenario: saving information about an Item without a completed item key in a doc
 			| 'ShipmentConfirmation*'  | 'Dress' |
 		And I close all client application windows
 
-Scenario: saving information about an Item without a completed item key in a document InternalSupplyRequest
+Scenario: _155013 saving information about an Item without a completed item key in a document InternalSupplyRequest
 	* Open document form InternalSupplyRequest
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I click the button named "FormCreate"
@@ -827,7 +868,7 @@ Scenario: saving information about an Item without a completed item key in a doc
 			| 'InternalSupplyRequest*'  | 'Dress' |
 		And I close all client application windows
 
-Scenario: saving information about an Item without a completed item key in a document InventoryTransfer
+Scenario: _155014 saving information about an Item without a completed item key in a document InventoryTransfer
 	* Open document form InventoryTransfer
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I click the button named "FormCreate"
@@ -888,7 +929,7 @@ Scenario: saving information about an Item without a completed item key in a doc
 		And I close all client application windows
 
 
-Scenario: saving information about an Item without a completed item key in a document InventoryTransferOrder
+Scenario: _155015 saving information about an Item without a completed item key in a document InventoryTransferOrder
 	* Open document form InventoryTransferOrder
 		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
 		And I click the button named "FormCreate"

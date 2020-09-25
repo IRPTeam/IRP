@@ -11,7 +11,7 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 EndProcedure
 
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
+Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
@@ -136,6 +136,11 @@ EndProcedure
 &AtServer
 Procedure FillTransactionsAtServer()
 	DocCashStatementServer.FillTransactions(Object);
+EndProcedure
+
+&AtClient
+Procedure PaymentListOnChange(Item, AddInfo = Undefined) Export
+	Return;
 EndProcedure
 
 #EndRegion

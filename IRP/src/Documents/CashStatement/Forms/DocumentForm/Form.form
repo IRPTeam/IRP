@@ -1673,7 +1673,7 @@
       <name>GroupPayments</name>
       <id>152</id>
       <items xsi:type="form:Table">
-        <name>Payments</name>
+        <name>PaymentList</name>
         <id>154</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1908,6 +1908,56 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
+          <name>PaymentListCurrency</name>
+          <id>344</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.PaymentList.Currency</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>PaymentListCurrencyExtendedTooltip</name>
+            <id>346</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>PaymentListCurrencyContextMenu</name>
+            <id>345</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
           <name>PaymentsCommission</name>
           <id>182</id>
           <visible>true</visible>
@@ -1966,7 +2016,7 @@
           </extInfo>
         </items>
         <autoCommandBar>
-          <name>PaymentsCommandBar</name>
+          <name>PaymentListCommandBar</name>
           <id>155</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1976,16 +2026,20 @@
           <horizontalAlign>Left</horizontalAlign>
           <autoFill>true</autoFill>
         </autoCommandBar>
+        <handlers>
+          <event>OnChange</event>
+          <name>PaymentListOnChange</name>
+        </handlers>
         <searchStringAddition>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
-          <name>PaymentsSearchString</name>
+          <name>PaymentListSearchString</name>
           <id>158</id>
           <extendedTooltip>
-            <name>PaymentsSearchStringExtendedTooltip</name>
+            <name>PaymentListSearchStringExtendedTooltip</name>
             <id>160</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2000,7 +2054,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>PaymentsSearchStringContextMenu</name>
+            <name>PaymentListSearchStringContextMenu</name>
             <id>159</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2019,10 +2073,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <name>PaymentsViewStatus</name>
+          <name>PaymentListViewStatus</name>
           <id>164</id>
           <extendedTooltip>
-            <name>PaymentsViewStatusExtendedTooltip</name>
+            <name>PaymentListViewStatusExtendedTooltip</name>
             <id>166</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2037,7 +2091,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>PaymentsViewStatusContextMenu</name>
+            <name>PaymentListViewStatusContextMenu</name>
             <id>165</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2058,10 +2112,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <name>PaymentsSearchControl</name>
+          <name>PaymentListSearchControl</name>
           <id>161</id>
           <extendedTooltip>
-            <name>PaymentsSearchControlExtendedTooltip</name>
+            <name>PaymentListSearchControlExtendedTooltip</name>
             <id>163</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2076,7 +2130,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>PaymentsSearchControlContextMenu</name>
+            <name>PaymentListSearchControlContextMenu</name>
             <id>162</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2091,7 +2145,7 @@
           </extInfo>
         </searchControlAddition>
         <extendedTooltip>
-          <name>PaymentsExtendedTooltip</name>
+          <name>PaymentListExtendedTooltip</name>
           <id>157</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -2106,7 +2160,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>PaymentsContextMenu</name>
+          <name>PaymentListContextMenu</name>
           <id>156</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -2356,6 +2410,11 @@
           <common>true</common>
         </edit>
       </columns>
+    </additionalColumns>
+    <additionalColumns>
+      <tablePath xsi:type="form:DataPath">
+        <segments>Object.Currencies</segments>
+      </tablePath>
     </additionalColumns>
   </attributes>
   <attributes>

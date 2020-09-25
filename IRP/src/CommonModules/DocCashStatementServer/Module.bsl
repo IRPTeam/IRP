@@ -82,7 +82,8 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 		|	RetailCash.PaymentType,
 		|	RetailCash.Account,
 		|	SUM(RetailCash.Amount) AS Amount,
-		|	SUM(RetailCash.Commission) AS Commission
+		|	SUM(RetailCash.Commission) AS Commission,
+		|	RetailCash.Account.Currency AS Currency
 		|FROM
 		|	AccumulationRegister.RetailCash AS RetailCash
 		|WHERE
@@ -91,7 +92,8 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 		|	AND RetailCash.Period BETWEEN &BegOfPeriod AND &EndOfPeriod
 		|GROUP BY
 		|	RetailCash.PaymentType,
-		|	RetailCash.Account";
+		|	RetailCash.Account,
+		|	RetailCash.Account.Currency";
 	
 	Query.SetParameter("BegOfPeriod", Object.BegOfPeriod);
 	Query.SetParameter("EndOfPeriod", Object.EndOfPeriod);
@@ -100,6 +102,14 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 	QueryResult = Query.Execute().Unload();
 	Object.PaymentList.Load(QueryResult);	
 	
+	Object.Currencies.Clear();
+	For Each Row In Object.PaymentList Do
+		Row.Key = New UUID;
+		If Row.Account.Type = Enums.CashAccountTypes.POS Then
+			CurrenciesServer.FillCurrencyTable(Object, Object.Date, Object.Company, Row.Currency, Row.Key, Undefined);
+			CurrenciesServer.CalculateAmount(Object, Row.Amount, Row.Key, Undefined);
+		EndIf; 
+	EndDo;
 EndProcedure
 
 #EndRegion

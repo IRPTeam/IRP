@@ -5,16 +5,13 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
 	Tables.Insert("AccountBalance", PostingServer.CreateTable(AccReg.AccountBalance));
-	
-	
 
 	QueryPaymentList = New Query();
 	QueryPaymentList.Text = GetQueryTextRetailSalesReceiptPaymentList();
 	QueryPaymentList.SetParameter("Ref", Ref);
 	QueryResultPaymentList = QueryPaymentList.Execute();
 	QueryTablePaymentList = QueryResultPaymentList.Unload();
-	
-	
+
 	Tables.AccountBalance = QueryTablePaymentList;
 	Return Tables;
 EndFunction
@@ -25,16 +22,19 @@ Function GetQueryTextRetailSalesReceiptPaymentList()
 	|	Table.Account.Currency AS Currency,
 	|	Table.Account,
 	|	SUM(Table.Amount) AS Amount,
-	|	Table.Ref.Date AS Period
+	|	Table.Ref.Date AS Period,
+	|	Table.Key
 	|FROM
 	|	Document.CashStatement.PaymentList AS Table
 	|WHERE
 	|	Table.Ref = &Ref
+	|	AND Table.Account.Type = VALUE(Enum.CashAccountTypes.POS)
 	|GROUP BY
 	|	Table.Ref.Company,
 	|	Table.Account.Currency,
 	|	Table.Account,
-	|	Table.Ref.Date";
+	|	Table.Ref.Date,
+	|	Table.Key";
 EndFunction	
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export

@@ -14,6 +14,8 @@
   <content>CommonCommand.IDInfo</content>
   <content>CommonForm.EditIDInfo</content>
   <content>Catalog.PrintTemplates</content>
+  <content>Catalog.PaymentTypes</content>
+  <content>Catalog.BankTerms</content>
   <subsystems>PurchaseAndSales</subsystems>
   <subsystems>Finance</subsystems>
   <subsystems>OpeningEntry</subsystems>

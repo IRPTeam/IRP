@@ -457,9 +457,13 @@ EndProcedure
 
 &AtClient
 Procedure AccountReceivableByAgreementsAgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	ArrayOfApArPostingDetail = New Array();
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement"));
+	
 	AgreementStartChoice("AccountReceivableByAgreements", 
 	                     PredefinedValue("Enum.AgreementTypes.Customer"),
-	                     PredefinedValue("Enum.ApArPostingDetail.ByAgreements"),
+	                     ArrayOfApArPostingDetail,
 	                     Item, 
 	                     ChoiceData, 
 	                     StandardProcessing);
@@ -467,9 +471,12 @@ EndProcedure
 
 &AtClient
 Procedure AccountReceivableByDocumentsAgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	ArrayOfApArPostingDetail = New Array();
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
+	
 	AgreementStartChoice("AccountReceivableByDocuments", 
 	                     PredefinedValue("Enum.AgreementTypes.Customer"),
-	                     PredefinedValue("Enum.ApArPostingDetail.ByDocuments"),
+	                     ArrayOfApArPostingDetail,
 	                     Item, 
 	                     ChoiceData, 
 	                     StandardProcessing);	
@@ -477,9 +484,13 @@ EndProcedure
 
 &AtClient
 Procedure AccountPayableByAgreementsAgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	ArrayOfApArPostingDetail = New Array();
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement"));
+	
 	AgreementStartChoice("AccountPayableByAgreements", 
 	                     PredefinedValue("Enum.AgreementTypes.Vendor"),
-	                     PredefinedValue("Enum.ApArPostingDetail.ByAgreements"),
+	                     ArrayOfApArPostingDetail,
 	                     Item, 
 	                     ChoiceData, 
 	                     StandardProcessing);
@@ -487,16 +498,19 @@ EndProcedure
 
 &AtClient
 Procedure AccountPayableByDocumentsAgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	ArrayOfApArPostingDetail = New Array();
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
+	
 	AgreementStartChoice("AccountPayableByDocuments", 
 	                     PredefinedValue("Enum.AgreementTypes.Vendor"),
-	                     PredefinedValue("Enum.ApArPostingDetail.ByDocuments"),
+	                     ArrayOfApArPostingDetail,
 	                     Item, 
 	                     ChoiceData, 
 	                     StandardProcessing);
 EndProcedure
 
 &AtClient
-Procedure AgreementStartChoice(TableName, AgreementType, ApArPostingDetail, Item, ChoiceData, StandardProcessing)
+Procedure AgreementStartChoice(TableName, AgreementType, ArrayOfApArPostingDetail, Item, ChoiceData, StandardProcessing)
 	CurrentData = Items[TableName].CurrentData;
 	If CurrentData = Undefined Then
 		Return;
@@ -512,8 +526,8 @@ Procedure AgreementStartChoice(TableName, AgreementType, ApArPostingDetail, Item
 	                                AgreementType, 
 	                                DataCompositionComparisonType.Equal));
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ApArPostingDetail", 
-	                                ApArPostingDetail, 
-	                                DataCompositionComparisonType.Equal));
+	                                ArrayOfApArPostingDetail, 
+	                                DataCompositionComparisonType.InList));
 	OpenSettings.FormParameters = New Structure();
 	OpenSettings.FormParameters.Insert("Partner", CurrentData.Partner);
 	OpenSettings.FormParameters.Insert("IncludeFilterByPartner", True);
@@ -525,16 +539,20 @@ Procedure AgreementStartChoice(TableName, AgreementType, ApArPostingDetail, Item
 	OpenSettings.FillingData.Insert("LegalName", CurrentData.LegalName);
 	OpenSettings.FillingData.Insert("Company", Object.Company);
 	OpenSettings.FillingData.Insert("Type", AgreementType);
-	OpenSettings.FillingData.Insert("ApArPostingDetail", ApArPostingDetail);
+	OpenSettings.FillingData.Insert("ApArPostingDetail", ArrayOfApArPostingDetail[0]);
 	
 	DocumentsClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 &AtClient
 Procedure AccountReceivableByAgreementsAgreementEditTextChange(Item, Text, StandardProcessing)
+	ArrayOfApArPostingDetail = New Array();
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement"));
+	
 	AgreementEditTextChange("AccountReceivableByAgreements",
 		                     PredefinedValue("Enum.AgreementTypes.Customer"),
-	                         PredefinedValue("Enum.ApArPostingDetail.ByAgreements"),
+	                         ArrayOfApArPostingDetail,
 	                         Item,
 	                         Text,
 	                         StandardProcessing); 
@@ -543,9 +561,12 @@ EndProcedure
 
 &AtClient
 Procedure AccountReceivableByDocumentsAgreementEditTextChange(Item, Text, StandardProcessing)
+	ArrayOfApArPostingDetail = New Array();
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
+	
 	AgreementEditTextChange("AccountReceivableByDocuments",
 	                        PredefinedValue("Enum.AgreementTypes.Customer"),
-	                        PredefinedValue("Enum.ApArPostingDetail.ByDocuments"),
+	                        ArrayOfApArPostingDetail,
 	                        Item,
 	                        Text,
 	                        StandardProcessing);
@@ -553,9 +574,13 @@ EndProcedure
 
 &AtClient
 Procedure AccountPayableByAgreementsAgreementEditTextChange(Item, Text, StandardProcessing)
+	ArrayOfApArPostingDetail = New Array();
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement"));
+	
 	AgreementEditTextChange("AccountPayableByAgreements",
 	                        PredefinedValue("Enum.AgreementTypes.Vendor"),
-	                        PredefinedValue("Enum.ApArPostingDetail.ByAgreements"),
+	                        ArrayOfApArPostingDetail,
 	                        Item,
 	                        Text,
 	                        StandardProcessing);
@@ -563,23 +588,28 @@ EndProcedure
 
 &AtClient
 Procedure AccountPayableByDocumentsAgreementEditTextChange(Item, Text, StandardProcessing)
+	ArrayOfApArPostingDetail = New Array();
+	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
+	
 	AgreementEditTextChange("AccountPayableByDocuments",
 		                    PredefinedValue("Enum.AgreementTypes.Vendor"),
-	                        PredefinedValue("Enum.ApArPostingDetail.ByDocuments"),
+	                        ArrayOfApArPostingDetail,
 	                         Item,
 	                         Text,
 	                         StandardProcessing);
 EndProcedure
 
 &AtClient
-Procedure AgreementEditTextChange(TableName, AgreementType, ApArPostingDetail, Item, Text, StandardProcessing)
+Procedure AgreementEditTextChange(TableName, AgreementType, ArrayOfApArPostingDetail, Item, Text, StandardProcessing)
 	CurrentData = Items[TableName].CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", AgreementType, ComparisonType.Equal));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ApArPostingDetail", ApArPostingDetail, ComparisonType.Equal));
+	ListOfApArPostingDetail = New ValueList();
+	ListOfApArPostingDetail.LoadValues(ArrayOfApArPostingDetail);
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ApArPostingDetail", ListOfApArPostingDetail, ComparisonType.InList));
 	AdditionalParameters = New Structure();
 	AdditionalParameters.Insert("IncludeFilterByEndOfUseDate", True);
 	AdditionalParameters.Insert("IncludeFilterByPartner", True);

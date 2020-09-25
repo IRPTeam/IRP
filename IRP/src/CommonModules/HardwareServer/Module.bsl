@@ -67,7 +67,7 @@ Function GetConnectionSettings(HardwareRef) Export
 EndFunction
 
 //
-Function GetWorkstationHardwaresByEquipmentType(Workstation, EquipmentType) Export
+Function GetWorkstationHardwareByEquipmentType(Workstation, EquipmentType) Export
 	Query = New Query;
 	Query.Text =
 		"SELECT

@@ -135,7 +135,7 @@ Procedure BeginConnectEquipment(HardwareParameters) Export
 	HardwareParameters.Property("ConnectionNotify", ConnectionNotify);
 	Workstation = HardwareParameters.Workstation;
 	EquipmentType = HardwareParameters.EquipmentType;
-	Hardwares = HardwareServer.GetWorkstationHardwaresByEquipmentType(Workstation, EquipmentType);
+	Hardwares = HardwareServer.GetWorkstationHardwareByEquipmentType(Workstation, EquipmentType);
 	
 	For Each Hardware In Hardwares Do
 		DriverObject = Undefined;

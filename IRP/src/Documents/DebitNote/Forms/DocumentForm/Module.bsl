@@ -69,7 +69,7 @@ EndProcedure
 
 &AtClient
 Procedure TransactionsOnStartEdit(Item, NewRow, Clone)
-	Return;
+	UserSettingsClient.TableOnStartEdit(Object, ThisObject, "Object.Transactions", Item, NewRow, Clone);
 EndProcedure
 
 #Region ItemTransactionsPartner

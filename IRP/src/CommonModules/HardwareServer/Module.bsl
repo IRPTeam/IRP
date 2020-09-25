@@ -67,7 +67,7 @@ Function GetConnectionSettings(HardwareRef) Export
 EndFunction
 
 //
-Function GetWorkstationHardwaresByEquipmentType(Worstation, EquipmentType) Export
+Function GetWorkstationHardwaresByEquipmentType(Workstation, EquipmentType) Export
 	Query = New Query;
 	Query.Text =
 		"SELECT
@@ -75,19 +75,19 @@ Function GetWorkstationHardwaresByEquipmentType(Worstation, EquipmentType) Expor
 		|FROM
 		|	Catalog.Hardware AS Hardware
 		|WHERE
-		|	Hardware.Workstation = &Worstation
+		|	Hardware.Workstation = &Workstation
 		|	And Hardware.EquipmentType = &EquipmentType
 		|	And Hardware.Enabled
 		|	And Not Hardware.DeletionMark";
-	Query.SetParameter("Worstation", Worstation);
+	Query.SetParameter("Workstation", Workstation);
 	Query.SetParameter("EquipmentType", EquipmentType);	
 	QueryResult = Query.Execute();
 	SelectionDetailRecords = QueryResult.Select();
-	Hardwares = New Array;
+	HardwareList = New Array;
 	If SelectionDetailRecords.Next() Then
-		Hardwares.Add(SelectionDetailRecords.Ref);
+		HardwareList.Add(SelectionDetailRecords.Ref);
 	EndIf;	
-	Return Hardwares;
+	Return HardwareList;
 EndFunction
 
 #EndRegion

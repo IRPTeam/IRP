@@ -1,4 +1,7 @@
 
+#Region Public
+
+//
 Function GetWorkstationByUniqueID(UniqueIDValue) Export
 	Query = New Query;
 	Query.Text = "SELECT
@@ -18,3 +21,5 @@ Function GetWorkstationByUniqueID(UniqueIDValue) Export
 	EndIf;
 	Return ReturnValue;
 EndFunction
+
+#EndRegion

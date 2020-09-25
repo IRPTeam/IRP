@@ -349,12 +349,12 @@ Procedure ConnectBarcodeScanners()
 	HardwareParameters = New Structure;
 	HardwareParameters.Insert("Workstation", SessionParametersClientServer.GetSessionParameter("Workstation"));
 	HardwareParameters.Insert("EquipmentType", PredefinedValue("Enum.EquipmentTypes.BarcodeScanner"));
-	HardwareParameters.Insert("ConnectionNotify" , New NotifyDescription("ConnectEquipments_End", ThisObject));		                                 
+	HardwareParameters.Insert("ConnectionNotify" , New NotifyDescription("ConnectHardware_End", ThisObject));		                                 
 	HardwareClient.BeginConnectEquipment(HardwareParameters);
 EndProcedure
 
 &AtClient
-Procedure ConnectEquipments_End(Result, Param) Export	
+Procedure ConnectHardware_End(Result, Param) Export	
 	If Result.Result Then
 		Status(R().Eq_004);
 	Else

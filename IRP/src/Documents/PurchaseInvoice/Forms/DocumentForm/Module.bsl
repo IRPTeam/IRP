@@ -1,14 +1,12 @@
 
 #Region FormEvents
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocPurchaseInvoiceServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
-		CurrentPartner = Object.Partner;
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
-	Taxes_CreateFormControls();
-	ThisObject.TaxAndOffersCalculated = True;
 EndProcedure
 
 &AtClient
@@ -16,8 +14,6 @@ Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	DocPurchaseInvoiceClient.OnOpen(Object, ThisObject, Cancel);
 	SetLockedRowsByGoodsReceipts();
 	UpdateGoodsReceiptsTree();
-	
-	SetTaxTreeRelevance(False);
 EndProcedure
 
 &AtClient
@@ -30,17 +26,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		Return;
 	EndIf;
 	
-	DocPurchaseInvoiceClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
+	DocPurchaseInvoiceClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source, AddInfo);
 	
 	ServerData = Undefined;		
 	If TypeOf(Parameter) = Type("Structure") And Parameter.Property("AddInfo") Then
 		ServerData = CommonFunctionsClientServer.GetFromAddInfo(Parameter.AddInfo, "ServerData");
-	EndIf;
-		
-	If EventName = "CalculateTax" Then
-		If ServerData <> Undefined And ServerData.OnChangeItemName <> "TaxTree" Then
-			SetTaxTreeRelevance(False);
-		EndIf;
 	EndIf;
 	
 	If EventName = "NewBarcode" And IsInputAvailable() Then
@@ -69,30 +59,13 @@ EndProcedure
 
 &AtClient
 Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
-	OnChangeItemName = "AfterWrite";
-	ParametersToServer = New Structure();
-		
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-			
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
-	
-	CurrenciesClient.SetVisibleRows(Object, ThisObject, AddInfo);
+	DocPurchaseInvoiceClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 	SetLockedRowsByGoodsReceipts();
 	UpdateGoodsReceiptsTree();	
 EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
-	CurrenciesServer.UpdateRatePresentation(Object);
-	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
-	
-	Taxes_CreateFormControls();
 	DocPurchaseInvoiceServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
@@ -100,7 +73,6 @@ EndProcedure
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocPurchaseInvoiceServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	Taxes_CreateFormControls();
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
@@ -170,12 +142,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
-	//DocPurchaseInvoiceClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
-	If ThisObject.TaxAndOffersCalculated Then
-		ThisObject.TaxAndOffersCalculated = False;
-	EndIf;
-	CalculationStringsClientServer.ClearDependentData(Object);
-	SetTaxTreeRelevance(False);
+	DocPurchaseInvoiceClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
 	ClearGoodsReceiptsTable();
 	UpdateGoodsReceiptsTree();
 EndProcedure
@@ -196,6 +163,11 @@ EndProcedure
 &AtClient
 Procedure ItemListOnActivateRow(Item)
 	DocPurchaseInvoiceClient.ItemListOnActivateRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocPurchaseInvoiceClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -223,25 +195,19 @@ Procedure ItemListItemKeyOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
+Procedure ItemListPriceTypeOnChange(Item, AddInfo = Undefined) Export
+	DocPurchaseInvoiceClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure ItemListUnitOnChange(Item, AddInfo = Undefined) Export
 	DocPurchaseInvoiceClient.ItemListUnitOnChange(Object, ThisObject, Item);
 	UpdateGoodsReceiptsTree();
 EndProcedure
 
 &AtClient
-Procedure ItemListPriceTypeOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseInvoiceClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListStoreOnChange(Item)
-	DocPurchaseInvoiceClient.ItemListStoreOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
 Procedure ItemListQuantityOnChange(Item, AddInfo = Undefined) Export	
 	DocPurchaseInvoiceClient.ItemListQuantityOnChange(Object, ThisObject, Item, AddInfo);
-		
 	UpdateGoodsReceiptsTree();
 EndProcedure
 
@@ -253,6 +219,11 @@ EndProcedure
 &AtClient
 Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
 	DocPurchaseInvoiceClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListStoreOnChange(Item)
+	DocPurchaseInvoiceClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -384,244 +355,6 @@ EndProcedure
 
 #EndRegion
 
-#Region Taxes
-&AtClient
-Procedure TaxValueOnChange(Item) Export
-	DocPurchaseInvoiceClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure TaxTreeBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	Cancel = True;
-EndProcedure
-
-&AtClient
-Procedure TaxTreeOnChange(Item, AddInfo = Undefined)
-	CurrentData = Items.TaxTree.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	
-	OnChangeItemName = "TaxTree";
-	ParametersToServer = New Structure();
-	
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", 
-	New Structure("Agreement, Date, Company, Currency, UUID", 
-	Object.Agreement, Object.Date, Object.Company, Object.Currency, ThisObject.UUID));
-	
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-	
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company", 
-	ThisObject.TaxesCache, Object.Ref, Object.Date, Object.Company));
-		
-	ParametersToServer.Insert("GetTaxes_EmptyRef");
-	ParametersToServer.Insert("GetTaxAnalytics_EmptyRef");
-	ParametersToServer.Insert("GetTaxRates_EmptyRef");
-			
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
-	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
-	
-	
-	TaxesClient.ChangeTaxAmount(Object, ThisObject, CurrentData, Object.ItemList, Undefined, AddInfo);
-EndProcedure
-
-&AtClient
-Procedure TaxTreeBeforeDeleteRow(Item, Cancel)
-	Cancel = True;
-EndProcedure
-
-&AtServer
-Function Taxes_CreateFormControls() Export
-	TaxesParameters = TaxesServer.GetCreateFormControlsParameters();
-	TaxesParameters.Date = Object.Date;
-	TaxesParameters.Company = Object.Company;
-	TaxesParameters.PathToTable = "Object.ItemList";
-	TaxesParameters.ItemParent = ThisObject.Items.ItemList;
-	TaxesParameters.ColumnOffset = ThisObject.Items.ItemListOffersAmount;
-	TaxesParameters.ItemListName = "ItemList";
-	TaxesParameters.TaxListName = "TaxList";
-	TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";
-	TaxesServer.CreateFormControls(Object, ThisObject, TaxesParameters);
-	
-	// update tax cache after rebuild form controls
-	
-	ParametersToServer = New Structure();
-	ParametersToServer.Insert("TaxesCache", 
-	New Structure ("Cache, Ref, Date, Company", 
-	ThisObject.TaxesCache, Object.Ref, Object.Date, Object.Company));
-	
-	ServerData = DocumentsServer.PrepareServerData_AtServerNoContext(ParametersToServer);
-	Return ServerData.ArrayOfTaxInfo;
-EndFUnction
-
-&AtClient
-Procedure SetTaxTreeRelevance(IsRelevanse)
-	Items.GroupRelevanceStates.CurrentPage = 
-	?(IsRelevanse, Items.GroupTaxTreeIsRelevanse, Items.GroupTaxTreeIsNotRelevanse);
-EndProcedure
-	
-&AtClient
-Procedure RefreshTaxTree(Command)
-	ThisObject.TaxTree.GetItems().Clear();
-	TableColumns = "Item, ItemKey, Key, Tax, Analytics, TaxRate, ManualAmount, Amount, TotalAmount, TotalManualAmount";
-	Table1 = New Array;
-	Table1_With_Analytics = New Array;
-	For Each RowItemList In Object.ItemList Do
-		ArrayOfTaxListRows = Object.TaxList.FindRows(New Structure("Key", RowItemList.Key));
-
-		For Each RowTaxList In ArrayOfTaxListRows Do
-
-			NewRow = New Structure(TableColumns);
-			Table1.Add(NewRow);
-			NewRow.Item              = RowItemList.Item;
-			NewRow.ItemKey           = RowItemList.ItemKey;
-			NewRow.Key               = RowTaxList.Key;
-			NewRow.Tax               = RowTaxList.Tax;
-			NewRow.Analytics         = RowTaxList.Analytics;
-			NewRow.TaxRate           = RowTaxList.TaxRate;
-			NewRow.ManualAmount      = RowTaxList.ManualAmount;
-			NewRow.Amount            = RowTaxList.Amount;
-			NewRow.TotalAmount       = ?(RowTaxList.IncludeToTotalAmount, RowTaxList.Amount, 0);
-			NewRow.TotalManualAmount = ?(RowTaxList.IncludeToTotalAmount, RowTaxList.ManualAmount, 0);
-			If ValueIsFilled(NewRow.Analytics) Then
-				Table1_With_Analytics.Add(NewRow);
-			EndIf;
-		EndDo;
-	EndDo;
-	
-	//Table1.GroupBy("Tax", "TotalManualAmount, TotalAmount")
-	Table1_Grupped = New Array;
-	For Each RowTable1 In Table1 Do
-		FindRow = Undefined;
-		For Each RowTable1_Grupped In Table1_Grupped Do
-			If RowTable1.Tax = RowTable1_Grupped.Tax Then
-				FindRow = RowTable1_Grupped;
-				Break;
-			EndIf;
-		EndDo;
-		If FindRow = Undefined Then
-			Table1_Grupped.Add(New Structure("Tax, TotalAmount, TotalManualAmount", RowTable1.Tax,
-				RowTable1.TotalAmount, RowTable1.TotalManualAmount));
-		Else
-			FindRow.TotalAmount = FindRow.TotalAmount + RowTable1.TotalAmount;
-			FindRow.TotalManualAmount = FindRow.TotalManualAmount + RowTable1.TotalManualAmount;
-		EndIf;
-	EndDo;
-
-	For Each Row1 In Table1_Grupped Do
-		NewRow1 = ThisObject.TaxTree.GetItems().Add();
-		FillPropertyValues(NewRow1, Row1);
-		NewRow1.Amount = Row1.TotalAmount;
-		NewRow1.ManualAmount = Row1.TotalManualAmount;
-		NewRow1.Level = 1;
-		NewRow1.ReadOnly = True;
-		NewRow1.PictureEdit = 1;
-		
-		//Table2 = QueryTable.Copy(New Structure("Tax", Row1.Tax));
-		Table2 = New Array;
-		For Each RowTable1 In Table1 Do
-			If RowTable1.Tax = Row1.Tax Then
-				NewRowTable2 = New Structure(TableColumns);
-				FillPropertyValues(NewRowTable2, RowTable1);
-				Table2.Add(NewRowTable2);
-			EndIf;
-		EndDo;
-		
-		//Table2.GroupBy("Key, Item, ItemKey, TaxRate", "TotalManualAmount, TotalAmount");
-		Table2_Grupped = New Array;
-		For Each RowTable2 In Table2 Do
-			FindRow = Undefined;
-			For Each RowTable2_Grupped In Table2_Grupped Do
-				If RowTable2.Key = RowTable2_Grupped.Key And RowTable2.Item = RowTable2_Grupped.Item
-					And RowTable2.ItemKey = RowTable2_Grupped.ItemKey And RowTable2.TaxRate
-					= RowTable2_Grupped.TaxRate Then
-					FindRow = RowTable2_Grupped;
-					Break;
-				EndIf;
-			EndDo;
-			If FindRow = Undefined Then
-				Table2_Grupped.Add(New Structure("Key, Item, ItemKey, TaxRate, TotalAmount, TotalManualAmount",
-					RowTable2.Key, RowTable2.Item, RowTable2.ItemKey, RowTable2.TaxRate, RowTable2.TotalAmount,
-					RowTable2.TotalManualAmount));
-			Else
-				FindRow.TotalAmount = FindRow.TotalAmount + RowTable2.TotalAmount;
-				FindRow.TotalManualAmount = FindRow.TotalManualAmount + RowTable2.TotalManualAmount;
-			EndIf;
-		EndDo;
-
-		For Each Row2 In Table2_Grupped Do
-			NewRow2 = NewRow1.GetItems().Add();
-			FillPropertyValues(NewRow2, Row1);
-			FillPropertyValues(NewRow2, Row2);
-
-			NewRow2.Amount = Row2.TotalAmount;
-			NewRow2.ManualAmount = Row2.TotalManualAmount;
-
-			NewRow2.Level = 2;
-			If Not ValueIsFilled(Row2.TaxRate) Then
-				NewRow2.ReadOnly = True;
-				NewRow2.PictureEdit = 1;
-			EndIf;
-			
-			//Filter2 = New Structure("Tax, Key, Item, ItemKey, TaxRate",
-			//Row1.Tax, Row2.Key, Row2.Item, Row2.ItemKey, Row2.TaxRate);
-			//Table3 = QueryTable.Copy(Filter2);
-
-			Table3 = New Array;
-			For Each RowTable1 In Table1_With_Analytics Do
-				If RowTable1.Tax = Row1.Tax And RowTable1.Key = Row2.Key And RowTable1.Item = Row2.Item
-					And RowTable1.ItemKey = Row2.ItemKey And RowTable1.TaxRate = Row2.TaxRate Then
-					NewRowTable3 = New Structure(TableColumns);
-					FillPropertyValues(NewRowTable3, RowTable1);
-					Table3.Add(NewRowTable3);
-				EndIf;
-			EndDo;
-		
-			//Table3.GroupBy("Key, Analytics", "ManualAmount, Amount");
-			Table3_Grupped = New Array;
-			For Each RowTable3 In Table3 Do
-				FindRow = Undefined;
-				For Each RowTable3_Grupped In Table3_Grupped Do
-					If RowTable3.Key = RowTable3_Grupped.Key And RowTable3.Analytics = RowTable3_Grupped.Analytics Then
-						FindRow = RowTable3_Grupped;
-						Break;
-					EndIf;
-				EndDo;
-				If FindRow = Undefined Then
-					Table3_Grupped.Add(New Structure("Key, Analytics, Amount, ManualAmount", RowTable3.Key,
-						RowTable3.Analytics, RowTable3.Amount, RowTable3.ManualAmount));
-				Else
-					FindRow.Amount = FindRow.Amount + RowTable3.TotalAmount;
-					FindRow.ManualAmount = FindRow.ManualAmount + RowTable3.ManualAmount;
-				EndIf;
-			EndDo;
-
-			For Each Row3 In Table3_Grupped Do
-				If ValueIsFilled(Row3.Analytics) Then
-					NewRow2.ReadOnly = True;
-					NewRow2.PictureEdit = 1;
-					NewRow3 = NewRow2.GetItems().Add();
-
-					FillPropertyValues(NewRow3, Row1);
-					FillPropertyValues(NewRow3, Row2);
-					FillPropertyValues(NewRow3, Row3);
-					NewRow3.Level = 3;
-				EndIf;
-			EndDo;
-		EndDo;
-	EndDo;
-	TaxesClient.ExpandTaxTree(ThisObject.Items.TaxTree, ThisObject.TaxTree.GetItems());
-	SetTaxTreeRelevance(True);
-EndProcedure
-	
-#EndRegion
-
 #Region Commands
 
 &AtClient
@@ -669,7 +402,6 @@ Procedure SelectGoodsReceiptContinue(Result, AdditionalParameters) Export
 	EndDo;	
 	SelectGoodsReceiptFinish(ArrayOfBasisDocuments);
 	
-	SetTaxTreeRelevance(False);
 	Taxes_CreateFormControls();
 	SetLockedRowsByGoodsReceipts();
 	UpdateGoodsReceiptsTree();	
@@ -714,12 +446,10 @@ EndProcedure
 
 &AtServer
 Procedure SelectPurchaseOrdersContinueAtServer(Result, AdditionalParameters)
-	
 	Settings = New Structure();
 	Settings.Insert("Rows", New Array());
 	Settings.Insert("CalculateSettings", New Structure());
 	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
-	
 	
 	For Each ResultRow In Result Do
 		RowsByKey = Object.ItemList.FindRows(New Structure("Key", ResultRow.Key));
@@ -758,8 +488,21 @@ EndProcedure
 
 #EndRegion
 
-#Region Currencies
+#Region Taxes
 
+&AtClient
+Procedure TaxValueOnChange(Item) Export
+	DocPurchaseInvoiceClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtServer
+Function Taxes_CreateFormControls(AddInfo = Undefined) Export
+	Return TaxesServer.CreateFormControls_RetailDocuments(Object, ThisObject, AddInfo);
+EndFunction
+	
+#EndRegion
+
+#Region Currencies
 
 &AtClient
 Procedure CurrenciesSelection(Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined)
@@ -951,17 +694,3 @@ Procedure GoodsReceiptsTreeBeforeDeleteRow(Item, Cancel)
 EndProcedure
 	
 #EndRegion
-
-&AtServer
-Procedure Taxes_CreateTaxTree() Export
-	TaxesTreeParameters = TaxesServer.GetCreateTaxTreeParameters();
-	TaxesTreeParameters.MetadataMainList = Metadata.Documents.PurchaseInvoice.TabularSections.ItemList;
-	TaxesTreeParameters.MetadataTaxList = Metadata.Documents.PurchaseInvoice.TabularSections.TaxList;
-	TaxesTreeParameters.ObjectMainList = Object.ItemList;
-	TaxesTreeParameters.ObjectTaxList = Object.TaxList;
-	TaxesTreeParameters.MainListColumns = "Key, Item, ItemKey";
-	TaxesTreeParameters.Level1Columns = "Tax";
-	TaxesTreeParameters.Level2Columns = "Key, Item, ItemKey, TaxRate";
-	TaxesTreeParameters.Level3Columns = "Key, Analytics";
-	TaxesServer.CreateTaxTree(Object, ThisObject, TaxesTreeParameters);
-EndProcedure

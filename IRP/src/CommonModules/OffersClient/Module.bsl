@@ -87,6 +87,5 @@ Procedure RecalculateTaxAndOffers(Object, Form) Export
 		Form.TaxAndOffersCalculated = False;
 	EndIf;
 	CalculationStringsClientServer.ClearDependentData(Object);
-	Form.Taxes_CreateTaxTree();
 EndProcedure
 

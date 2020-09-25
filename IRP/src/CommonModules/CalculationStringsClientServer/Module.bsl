@@ -11,7 +11,6 @@ Function GetCalculationSettings(Actions = Undefined, AddInfo = Undefined) Export
 	Return Actions;
 EndFunction
 
-// TODO: Test
 Procedure ClearDependentData(Object, AddInfo = Undefined) Export
 	If AddInfo = Undefined OR Not AddInfo.Property("TableParent") Then
 		TableName = "ItemList";
@@ -100,9 +99,10 @@ Procedure FillDataCollectionByArrayOfStructures(DataCollection, ArrayOfStructure
 	EndDo;
 EndProcedure	
 		
-Procedure CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Undefined, AddInfo = Undefined) Export
+Function CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Undefined, AddInfo = Undefined) Export
+	Result = New Structure("ItemList, TaxList, SpecialOffers");
 	If Not Actions.Count() Then
-		Return;
+		Return Result;
 	EndIf;
 	
 	CalculateItemRowsAtServer = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CalculateItemRowsAtServer");
@@ -138,6 +138,10 @@ Procedure CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = U
 											 ArrayOfTaxInfo, 
 											 AddInfo);	
 		
+		Result.ItemList      = ObjectAsStructure.ItemList;
+		Result.TaxList       = ObjectAsStructure.TaxList;
+		Result.SpecialOffers = ObjectAsStructure.SpecialOffers;
+		
 		If UpdateRowsAfterCalculate Then
 			UpdateDataCollectionByArrayOfStructures(Object.ItemList      , ObjectAsStructure.ItemList      , ColumnNames_ItemList);
 			FillDataCollectionByArrayOfStructures(Object.TaxList         , ObjectAsStructure.TaxList       , ColumnNames_TaxList);		                                        
@@ -147,6 +151,9 @@ Procedure CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = U
 		For Each ItemRow In ItemRows Do
 			CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo, AddInfo);
 		EndDo;
+		Result.ItemList      = Object.ItemList;
+		Result.TaxList       = Object.TaxList;
+		Result.SpecialOffers = Object.SpecialOffers;		
 	EndIf;
 	
 	#If ThinClient Then
@@ -165,7 +172,8 @@ Procedure CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = U
 	Notify("CallbackHandler", New Structure("AddInfo", AddInfo), Form);
 	
 	#EndIf
-EndProcedure
+	Return Result;
+EndFunction
 
 Procedure CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo = Undefined, AddInfo = Undefined) Export
 	
@@ -691,9 +699,9 @@ Function GetTotalAmountByDependedTable(Object, DependedTableName, MainTableKey)
 			Continue;
 		EndIf;
 		If Row.Key = MainTableKey Then
-			Amount = Amount + ?(CommonFunctionsClientServer.ObjectHasProperty(Row, "ManualAmount"), 
+			Amount = Round(Amount + ?(CommonFunctionsClientServer.ObjectHasProperty(Row, "ManualAmount"), 
 								Row.ManualAmount, 
-								Row.Amount);
+								Row.Amount), 2);
 		EndIf;
 	EndDo;
 	Return Amount;
@@ -722,12 +730,12 @@ Function IsPricesChanged(Object, Form, Settings, AddInfo = Undefined) Export
 	CalculationSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
 	
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "UpdateRowsAfterCalculate", False);
-	CalculateItemsRows(Object, Form, ListCache, CalculationSettings, Undefined, AddInfo);
+	CalculatedTables = CalculateItemsRows(Object, Form, ListCache, CalculationSettings, Undefined, AddInfo);
 
-	For Each RowCache In ListCache Do
-		FoundRows = Object.ItemList.FindRows(New Structure("Key", RowCache.Key));
+	For Each RowCalculatedTables In CalculatedTables.ItemList Do
+		FoundRows = Object.ItemList.FindRows(New Structure("Key", RowCalculatedTables.Key));
 		For Each FoundRow In FoundRows Do
-			If Not FoundRow.Price = RowCache.Price Then
+			If Not FoundRow.Price = RowCalculatedTables.Price Then
 				Return True;
 			EndIf;
 		EndDo;
@@ -735,21 +743,6 @@ Function IsPricesChanged(Object, Form, Settings, AddInfo = Undefined) Export
 	
 	Return False;
 EndFunction
-
-Function GetPriceDate(Object) Export
-	If Not ValueIsFilled(Object.Ref) Then
-		If Not ValueIsFilled(Object.Date) Then
-			Return CurrentDate();
-		EndIf;
-		If BegOfDay(Object.Date) = BegOfDay(CurrentDate()) Then
-			Return EndOfDay(Object.Date);
-		Else
-			Return Object.Date;
-		EndIf;
-	Else
-		Return Object.Date;
-	EndIf;
-Endfunction
 
 Function GetPriceDateByRefAndDate(Ref, Date) Export
 	If Not ValueIsFilled(Ref) Then
@@ -765,19 +758,6 @@ Function GetPriceDateByRefAndDate(Ref, Date) Export
 		Return Date;
 	EndIf;
 Endfunction
-
-//Function CopyTableToArrayOfStructures(Object, TableName, CachedColumns = Undefined)
-//	Cache = New Array();
-//	ArrayOfCachedColumns = StrSplit(CachedColumns, ",");
-//	For Each Row In Object[TableName] Do
-//		CacheRow = New Structure();
-//		For Each ItemOfCachedColumns In ArrayOfCachedColumns Do
-//			CacheRow.Insert(TrimAll(ItemOfCachedColumns), Row[TrimAll(ItemOfCachedColumns)]);
-//		EndDo;
-//		Cache.Add(CacheRow);
-//	EndDo;
-//	Return Cache;
-//EndFunction
 
 Function UpdateBarcode(Object, ItemRow, AddInfo = Undefined)
 	ReturnValue = "";
@@ -911,7 +891,6 @@ Procedure UpdateItemType(Object, Form, Settings) Export
 	
 	CurrentRow = Settings.Rows[0];
 	
-	// TODO: SalesOrder???
 	CurrentRow.ItemType = DocSalesOrderServer.GetItemRowType(CurrentRow.Item);
 	If CurrentRow.ItemType = PredefinedValue("Enum.ItemTypes.Service") Then
 		CurrentRow.ProcurementMethod = Undefined;

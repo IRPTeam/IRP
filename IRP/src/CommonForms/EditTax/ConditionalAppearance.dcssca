@@ -3,41 +3,20 @@
 	<item>
 		<selection>
 			<item>
-				<field>ObjectCurrenciesMovementType</field>
-			</item>
-			<item>
-				<field>ObjectCurrenciesMovementTypeType</field>
-			</item>
-			<item>
-				<field>ObjectCurrenciesCurrencyFrom</field>
-			</item>
-			<item>
-				<field>ObjectCurrenciesRatePresentation</field>
-			</item>
-			<item>
-				<field>ObjectCurrenciesMultiplicity</field>
-			</item>
-			<item>
-				<field>ObjectCurrenciesAmount</field>
-			</item>
-			<item>
-				<field>ObjectCurrenciesMovementTypeCurrency</field>
-			</item>
-			<item>
-				<field>ObjectCurrenciesShowReverseRate</field>
+				<field>TaxTreeManualAmount</field>
 			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.Currencies.IsVisible</left>
+				<left xsi:type="dcscor:Field">TaxTree.ReadOnly</left>
 				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:boolean">false</right>
+				<right xsi:type="xs:boolean">true</right>
 			</item>
 		</filter>
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>Visible</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+				<dcscor:parameter>ReadOnly</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
 			</dcscor:item>
 		</appearance>
 	</item>

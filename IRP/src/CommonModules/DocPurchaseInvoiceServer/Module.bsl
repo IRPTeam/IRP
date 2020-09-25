@@ -3,10 +3,10 @@
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
-		Form.CurrentPartner = Object.Partner;
-		Form.CurrentAgreement = Object.Agreement;
-		Form.CurrentDate = Object.Date;
-		Form.StoreBeforeChange 		= Form.Store;
+		Form.CurrentPartner    = Object.Partner;
+		Form.CurrentAgreement  = Object.Agreement;
+		Form.CurrentDate       = Object.Date;
+		Form.StoreBeforeChange = Form.Store;
 		
 		DocumentsClientServer.FillDefinedData(Object, Form);
 		
@@ -19,68 +19,15 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
-	
-	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
-	
-	If Not ValueIsFilled(Form.CurrentStore) Then	
-		If Not AgreementInfo.Store = Undefined And AgreementInfo.Store.IsEmpty() Then
-			Form.StoreBeforeChange = Form.CurrentStore;
-		EndIf;
-	
-		If ValueIsFilled(AgreementInfo.Store) Then
-			Form.CurrentStore = AgreementInfo.Store;
-		ElsIf ValueIsFilled(Form.Store) Then
-			Form.CurrentStore = Form.Store;
-		ElsIf ValueIsFilled(Form.CurrentStore) Then
-			Return;
-		Else
-			ObjectData = DocumentsClientServer.GetStructureFillStores();
-			FillPropertyValues(ObjectData, Object);
-			Form.CurrentStore = DocumentsServer.GetCurrentStore(ObjectData);
-		EndIf;
-	EndIf;
-	
-	FillDeliveryDates(Object, Form);
-	If Not ValueIsFilled(Form.CurrentDeliveryDate) Then
-		Form.CurrentDeliveryDate = AgreementInfo.DeliveryDate;
-		FillDeliveryDates(Object, Form);
-	EndIf;
-	
-	If Not ValueIsFilled(Form.CurrentPriceType) Then
-		Form.CurrentPriceType = AgreementInfo.PriceType;
-	EndIf;
+	Form.Taxes_CreateFormControls();
 	DocumentsServer.ShowUserMessageOnCreateAtServer(Form);
 EndProcedure
 
-Procedure FillDeliveryDates(Object, Form)
-	DeliveryDatesArray = New Array;
-	For Each Row In Object.ItemList Do
-		If ValueIsFilled(Row.DeliveryDate) Then
-			If DeliveryDatesArray.Find(Row.DeliveryDate) = Undefined Then
-				DeliveryDatesArray.Add(Row.DeliveryDate);
-			EndIf;
-		EndIf;
-	EndDo;
-	If DeliveryDatesArray.Count() = 0 Then
-		Form.Items.DeliveryDate.Tooltip = "";
-		Form.DeliveryDate = Form.CurrentDeliveryDate;
-	ElsIf DeliveryDatesArray.Count() = 1 Then
-		Form.Items.DeliveryDate.Tooltip = "";
-		Form.DeliveryDate = DeliveryDatesArray[0];
-	Else
-		DeliveryDatesFormattedArray = New Array();
-		For Each Row In DeliveryDatesArray Do
-			DeliveryDatesFormattedArray.Add(Format(Row, "DF=dd.MM.yy;"));
-		EndDo;
-		Form.DeliveryDate = Date(1, 1, 1);
-		Form.Items.DeliveryDate.Tooltip = StrConcat(DeliveryDatesFormattedArray, "; ");
-	EndIf;
-EndProcedure
-
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
-	Form.CurrentPartner = CurrentObject.Partner;
+	Form.CurrentPartner   = CurrentObject.Partner;
 	Form.CurrentAgreement = CurrentObject.Agreement;
-	Form.CurrentDate = CurrentObject.Date;
+	Form.CurrentDate      = CurrentObject.Date;
+	
 	DocumentsServer.FillItemList(Object);
 	
 	ObjectData = DocumentsClientServer.GetStructureFillStores();
@@ -88,12 +35,15 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	DocumentsClientServer.FillStores(ObjectData, Form);
 	
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	CurrenciesServer.UpdateRatePresentation(Object);
+	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
+	Form.Taxes_CreateFormControls();
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
-	Form.CurrentPartner = CurrentObject.Partner;
+	Form.CurrentPartner   = CurrentObject.Partner;
 	Form.CurrentAgreement = CurrentObject.Agreement;
-	Form.CurrentDate = CurrentObject.Date;
+	Form.CurrentDate      = CurrentObject.Date;
 		
 	DocumentsServer.FillItemList(Object);
 	
@@ -105,6 +55,9 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	CurrenciesServer.UpdateRatePresentation(Object);
+	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
+	Form.Taxes_CreateFormControls();
 EndProcedure
 
 #EndRegion

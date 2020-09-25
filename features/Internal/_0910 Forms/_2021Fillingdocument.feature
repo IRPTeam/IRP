@@ -357,7 +357,7 @@ Scenario: _0154100 preparation
 Scenario: _0154101 check filling in and re-filling Sales order
 	And I close all client application windows
 	* Open the Sales order creation form
-		Given I open hyper link "e1cib/list/Document.SalesOrder"
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
 		And I click Select button of "Partner" field
@@ -547,7 +547,6 @@ Scenario: _0154101 check filling in and re-filling Sales order
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
 		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
@@ -851,15 +850,10 @@ Scenario: _0154102 check filling in and re-filling Sales invoice
 				| '350,00' | 'Shirt'    | '38/Black'  | '113,71'     | '1%'       | '2,000' | 'pcs'  | '586,29'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress'    | 'L/Green'   | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress'    | 'XS/Blue'   | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
-	* Check the line clearing in the tax tree when deleting a line from an order
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
-		And "ItemList" table does not contain lines
-			| 'Item'  | 'Item key' |
-			| 'Trousers' | '38/Yellow' |
 	* Check tax recalculation when uncheck/re-check Price include Tax
 		* Unchecking box Price include Tax
 			And I move to "Other" tab
@@ -927,16 +921,17 @@ Scenario: _0154102 check filling in and re-filling Sales invoice
 				| 'Shirt' | '38/Black' |
 			And I activate "VAT" field in "ItemList" table
 			And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
-			And "TaxTree" table contains lines
-				| 'Tax'      | 'Tax rate' | 'Item'  | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
-				| 'VAT'      | ''         | ''      | ''         | ''          | '163,22' | '163,22'        |
-				| 'VAT'      | '18%'      | 'Dress' | 'L/Green'  | ''          | '83,90'  | '83,90'         |
-				| 'VAT'      | '18%'      | 'Dress' | 'XS/Blue'  | ''          | '79,32'  | '79,32'         |
-				| 'VAT'      | '0%'       | 'Shirt' | '38/Black' | ''          | ''       | ''              |
-				| 'SalesTax' | ''         | ''      | ''         | ''          | '17,53'  | '17,53'         |
-				| 'SalesTax' | '1%'       | 'Dress' | 'L/Green'  | ''          | '5,45'   | '5,45'          |
-				| 'SalesTax' | '1%'       | 'Dress' | 'XS/Blue'  | ''          | '5,15'   | '5,15'          |
-				| 'SalesTax' | '1%'       | 'Shirt' | '38/Black' | ''          | '6,93'   | '6,93'          |
+			# And "TaxTree" table contains lines
+			# 	| 'Tax'      | 'Tax rate' | 'Item'  | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
+			# 	| 'VAT'      | ''         | ''      | ''         | ''          | '163,22' | '163,22'        |
+			# 	| 'VAT'      | '18%'      | 'Dress' | 'L/Green'  | ''          | '83,90'  | '83,90'         |
+			# 	| 'VAT'      | '18%'      | 'Dress' | 'XS/Blue'  | ''          | '79,32'  | '79,32'         |
+			# 	| 'VAT'      | '0%'       | 'Shirt' | '38/Black' | ''          | ''       | ''              |
+			# 	| 'SalesTax' | ''         | ''      | ''         | ''          | '17,53'  | '17,53'         |
+			# 	| 'SalesTax' | '1%'       | 'Dress' | 'L/Green'  | ''          | '5,45'   | '5,45'          |
+			# 	| 'SalesTax' | '1%'       | 'Dress' | 'XS/Blue'  | ''          | '5,15'   | '5,15'          |
+			# 	| 'SalesTax' | '1%'       | 'Shirt' | '38/Black' | ''          | '6,93'   | '6,93'          |
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "180,75"
 			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
@@ -1317,15 +1312,10 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 03' |
 				| '440,68' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | '67,22'      | 'pcs'  | '373,46'     | '440,68'       | 'Store 03' |
-	* Check the line clearing in the tax tree when deleting a line from an order
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
-		And "ItemList" table does not contain lines
-			| 'Item'     | 'Item key' |
-			| 'Trousers' | '38/Yellow' |
 	* Check tax recalculation when uncheck/re-check Price include Tax
 		* Unchecking box Price include Tax
 			And I move to "Other" tab
@@ -1393,12 +1383,13 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 				| 'Shirt' | '38/Black' |
 			And I activate "VAT" field in "ItemList" table
 			And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
-			And "TaxTree" table contains lines
-				| 'Tax' | 'Tax rate' | 'Item'  | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
-				| 'VAT' | ''         | ''      | ''         | ''          | '192,60' | '192,60'        |
-				| 'VAT' | '18%'      | 'Dress' | 'L/Green'  | ''          | '99,00'  | '99,00'         |
-				| 'VAT' | '18%'      | 'Dress' | 'XS/Blue'  | ''          | '93,60'  | '93,60'         |
-				| 'VAT' | '0%'       | 'Shirt' | '38/Black' | ''          | ''       | ''              |
+			# And "TaxTree" table contains lines
+			# 	| 'Tax' | 'Tax rate' | 'Item'  | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
+			# 	| 'VAT' | ''         | ''      | ''         | ''          | '192,60' | '192,60'        |
+			# 	| 'VAT' | '18%'      | 'Dress' | 'L/Green'  | ''          | '99,00'  | '99,00'         |
+			# 	| 'VAT' | '18%'      | 'Dress' | 'XS/Blue'  | ''          | '93,60'  | '93,60'         |
+			# 	| 'VAT' | '0%'       | 'Shirt' | '38/Black' | ''          | ''       | ''              |
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "192,60"
 			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
@@ -1647,15 +1638,10 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
 				| '466,10' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | '71,10'      | 'pcs'  | '395,00'     | '466,10'       | 'Store 03' |
 				| '440,68' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | '67,22'      | 'pcs'  | '373,46'     | '440,68'       | 'Store 03' |
-	* Check the line clearing in the tax tree when deleting a line from an order
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
-		And "ItemList" table does not contain lines
-			| 'Item'     | 'Item key' |
-			| 'Trousers' | '38/Yellow' |
 	* Check tax recalculation when uncheck/re-check Price include Tax
 		* Unchecking box Price include Tax
 			And I move to "Other" tab
@@ -1721,14 +1707,15 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 				| 'Shirt' | '38/Black' |
 			And I activate "VAT" field in "ItemList" table
 			And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
-			And I move to "Tax list" tab
-			And I click "Refresh" button
-			And "TaxTree" table contains lines
-				| 'Tax' | 'Tax rate' | 'Item'  | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
-				| 'VAT' | ''         | ''      | ''         | ''          | '192,60' | '192,60'        |
-				| 'VAT' | '18%'      | 'Dress' | 'L/Green'  | ''          | '99,00'  | '99,00'         |
-				| 'VAT' | '18%'      | 'Dress' | 'XS/Blue'  | ''          | '93,60'  | '93,60'         |
-				| 'VAT' | '0%'       | 'Shirt' | '38/Black' | ''          | ''       | ''              |
+			// And I move to "Tax list" tab
+			// And I click "Refresh" button
+			# And "TaxTree" table contains lines
+			# 	| 'Tax' | 'Tax rate' | 'Item'  | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
+			# 	| 'VAT' | ''         | ''      | ''         | ''          | '192,60' | '192,60'        |
+			# 	| 'VAT' | '18%'      | 'Dress' | 'L/Green'  | ''          | '99,00'  | '99,00'         |
+			# 	| 'VAT' | '18%'      | 'Dress' | 'XS/Blue'  | ''          | '93,60'  | '93,60'         |
+			# 	| 'VAT' | '0%'       | 'Shirt' | '38/Black' | ''          | ''       | ''              |
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "192,60"
 			And I move to "Item list" tab
 			And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
 		* Check recalculate Total amount and Net amount when change Tax rate
@@ -3184,10 +3171,10 @@ Scenario: _0154116 check filling in and re-filling Cash expence
 		And "PaymentList" table contains lines
 			| 'Net amount' | 'Business unit' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '8%'  | '16,00'      | '216,00'       |
-		And "TaxTree" table contains lines
-			| 'Tax' | 'Currency' | 'Business unit' | 'Amount' | 'Expense type' | 'Tax rate' | 'Manual amount' |
-			| 'VAT' | 'USD'      | ''              | '16,00'  | ''             | ''         | '16,00'         |
-			| 'VAT' | 'USD'      | 'Front office'  | '16,00'  | 'Software'     | '8%'       | '16,00'         |
+		# And "TaxTree" table contains lines
+		# 	| 'Tax' | 'Currency' | 'Business unit' | 'Amount' | 'Expense type' | 'Tax rate' | 'Manual amount' |
+		# 	| 'VAT' | 'USD'      | ''              | '16,00'  | ''             | ''         | '16,00'         |
+		# 	| 'VAT' | 'USD'      | 'Front office'  | '16,00'  | 'Software'     | '8%'       | '16,00'         |
 	And I close all client application windows
 
 

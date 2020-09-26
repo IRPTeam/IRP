@@ -455,7 +455,6 @@ Procedure SelectSalesOrdersContinueAtServer(Result, AdditionalParameters)
 	Settings.Insert("Rows", New Array());
 	Settings.Insert("CalculateSettings", New Structure());
 	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
-	AgreementInfo = Catalogs.Agreements.GetAgreementInfo(Object.Agreement);
 		
 	For Each ResultRow In Result Do
 		RowsByKey = Object.ItemList.FindRows(New Structure("Key", ResultRow.Key));

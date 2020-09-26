@@ -195,8 +195,6 @@ Procedure FullRefreshTable(Object, Form, AddInfo = Undefined) Export
 EndProcedure	
 
 Procedure SerFaceTable(Object, Form, AddInfo = Undefined) Export
-	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
-	
 	SetRatePresentation(Object, Form);
 	SetVisibleRows(Object, Form, AddInfo);	
 EndProcedure	

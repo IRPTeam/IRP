@@ -2,6 +2,8 @@
 @tree
 @Positive
 @Group5
+@Sales
+
 Feature: create document Sales order
 
 As a sales manager
@@ -48,6 +50,7 @@ Scenario: _023000 preparation (Sales order)
 				| "TaxCalculateVAT_TR" |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
+		When Create catalog Partners objects (Kalipso)
 	* Tax settings
 		When filling in Tax settings for company
 	
@@ -191,8 +194,8 @@ Scenario: _023101 displaying in the Sales order only available valid Partner ter
 	And "List" table became equal
 		| 'Description'                   |
 		| 'Basic Partner terms, TRY'         |
-		| 'Basic Partner terms, $'           |
 		| 'Basic Partner terms, without VAT' |
+		| 'Ferron, USD'           |
 	And I select current line in "List" table
 	And I click Select button of "Partner" field
 	And I go to line in "List" table
@@ -203,44 +206,12 @@ Scenario: _023101 displaying in the Sales order only available valid Partner ter
 	And "List" table became equal
 		| 'Description'            |
 		| 'Basic Partner terms, TRY'         |
-		| 'Basic Partner terms, $'           |
 		| 'Basic Partner terms, without VAT' |
 		| 'Personal Partner terms, $' |
 	And I close current window
 	And I close current window
 	And I click "No" button
-	* Check that expired Partner terms are not displayed in the selection list
-		Given I open hyperlink "e1cib/list/Catalog.Agreements"
-		And I go to line in "List" table
-		| 'Description'           |
-		| 'Basic Partner terms, $' |
-		And I select current line in "List" table
-		And I input "02.11.2018" text in "End of use" field
-		And I click "Save and close" button
-		And I close current window
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I click the button named "FormCreate"
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'  |
-		And I select current line in "List" table
-		And I click Select button of "Partner term" field
-		And "List" table became equal
-			| 'Description'                   |
-			| 'Basic Partner terms, TRY'         |
-			| 'Basic Partner terms, without VAT' |
-		And I close current window
-		And I close current window
-		And I click "No" button
-		Given I open hyperlink "e1cib/list/Catalog.Agreements"
-		And I go to line in "List" table
-			| 'Description'           |
-			| 'Basic Partner terms, $' |
-		And I select current line in "List" table
-		And I input "02.11.2019" text in "End of use" field
-		And I click "Save and close" button
-		And I close current window
+	
 
 Scenario: _023102 select only your own companies in the Company field
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -412,7 +383,7 @@ Scenario: _023023 check the output of the document movement report for Sales Ord
 	* Check the report output from the selected document
 		And I go to line in "List" table
 		| 'Number' |
-		| '$$SalesOrder023001$$' |   
+		| '$$NumberSalesOrder023001$$' |   
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation

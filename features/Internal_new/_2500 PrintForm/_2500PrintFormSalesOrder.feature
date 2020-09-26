@@ -59,7 +59,7 @@ Scenario: _25001 adding print plugin for sales order
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		And I click the button named "FormCreate"
 	* Filling plugin data and adding it to the database
-		And I select external file "#workingDir#\DataProcessor\PrintFormSalesOrder.epf"
+		And I select external file "C:\Users\Severnity\Desktop\ExtDataProc\PrintFormSalesOrder.epf"
 		And I click the button named "FormAddExtDataProc"
 		And I input "" text in "Path to plugin for test" field
 		And I input "PrintFormSalesOrder" text in "Name" field

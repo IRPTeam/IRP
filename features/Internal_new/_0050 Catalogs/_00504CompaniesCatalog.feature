@@ -3,6 +3,7 @@
 @Positive
 @Test
 @Group01
+@Catalogs
 
 Feature: filling in Companies catalog
 
@@ -23,7 +24,7 @@ Background:
 Scenario: _005013 filling in the "Companies" catalog
 	* Preparation
 		And I close all client application windows
-		When Create catalog IntegrationSettings objects (currency source)
+		When Create catalog IntegrationSettings objects
 		When Create catalog Currencies objects
 		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
 		And I go to line in "List" table

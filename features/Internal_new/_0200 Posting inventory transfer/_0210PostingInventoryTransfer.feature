@@ -2,6 +2,8 @@
 @tree
 @Positive
 @Group4
+@InventoryTransfer
+
 Feature: create document Inventory transfer
 
 As a procurement manager
@@ -285,9 +287,9 @@ Scenario: _021016 check the absence posting of Inventory transfer (based on orde
 	| '20,000'   | '$$InventoryTransfer021012$$' | '$$InventoryTransfer021012$$' | '1'           | 'Store 03' | 'L/Green'  |
 
 
-Scenario: _021017 check the absence posting of Inventory transfer (based on order) by register StockBalance (Store sender use Goods receipt, Store receiver doesn't use Shipment confirmaton)
+Scenario: _021017 check posting of Inventory transfer (based on order) by register StockBalance (Store sender use Goods receipt, Store receiver doesn't use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table does not contain lines
+	And "List" table contains lines
 	| 'Recorder'              |
 	| '$$InventoryTransfer021012$$' |
 
@@ -592,7 +594,7 @@ Scenario: _021040 check the absence posting of Inventory transfer (without order
 Scenario: _021041 check the absence posting of Inventory transfer (without order) posting by register StockBalance (+) Store sender use Shipment confirmation, Store receiver doesn't use Goods receipt
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table does not contain lines
+	And "List" table contains lines
 	| 'Recorder'                    |
 	| '$$InventoryTransfer021036$$' |
 

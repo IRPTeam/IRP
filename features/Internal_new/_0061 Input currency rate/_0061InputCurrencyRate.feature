@@ -1,6 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
+@CurrencyRate
 
 
 Feature: filling in currency rates in registers

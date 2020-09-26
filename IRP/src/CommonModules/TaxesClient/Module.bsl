@@ -185,10 +185,11 @@ Procedure CalculateReverseTaxOnChangeTotalAmount(Object, Form, CurrentData, AddI
 	
 	If Object.Property("PriceIncludeTax") And Object.PriceIncludeTax Then
 		CalculationStringsClientServer.CalculateTaxReverse_PriceIncludeTax(Object, CurrentData, ArrayOfTaxInfo);
+		CurrentData.Price = ?(CurrentData.Quantity = 0, 0, CurrentData.TotalAmount / CurrentData.Quantity);
 	Else
 		CalculationStringsClientServer.CalculateTaxReverse_PriceNotIncludeTax(Object, CurrentData, ArrayOfTaxInfo);
+		CurrentData.Price = ?(CurrentData.Quantity = 0, 0, (CurrentData.TotalAmount - CurrentData.TaxAmount) / CurrentData.Quantity);	
 	EndIf;
-	CurrentData.Price = ?(CurrentData.Quantity = 0, 0, (CurrentData.TotalAmount - CurrentData.TaxAmount) / CurrentData.Quantity);
 	
 	ArrayRows = New Array();
 	ArrayRows.Add(CurrentData);

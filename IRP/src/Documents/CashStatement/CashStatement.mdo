@@ -42,6 +42,8 @@
   <defaultListForm>Document.CashStatement.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.CashStatement.Form.ChoiceForm</defaultChoiceForm>
   <registerRecords>AccumulationRegister.AccountBalance</registerRecords>
+  <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
+  <registerRecords>AccumulationRegister.PlaningCashTransactions</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -160,6 +162,23 @@
       <types>CatalogRef.CashStatementStatuses</types>
     </type>
     <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="cf75c174-9559-410d-9365-1721cbe35af9">
+    <name>CashAccount</name>
+    <synonym>
+      <key>en</key>
+      <value>Cash account</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.CashAccounts</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <choiceParameterLinks>
+      <name>Filter.Company</name>
+      <field>Document.CashStatement.Attribute.Company</field>
+    </choiceParameterLinks>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>

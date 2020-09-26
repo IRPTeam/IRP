@@ -52,22 +52,12 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 	Query = New Query;
 	Query.Text =
 		"SELECT
-		|	RetailCashTurnovers.Recorder AS Document,
-		|	CASE
-		|		When SUM(RetailCashTurnovers.AmountReceipt) < 0
-		|			Then -SUM(RetailCashTurnovers.AmountReceipt)
-		|		Else SUM(RetailCashTurnovers.AmountExpense)
-		|	End AS Expense,
-		|	CASE
-		|		When SUM(RetailCashTurnovers.AmountReceipt) < 0
-		|			Then 0
-		|		Else SUM(RetailCashTurnovers.AmountReceipt)
-		|	End AS Receipt
+		|	AccountBalanceTurnovers.Recorder AS Document,
+		|	AccountBalanceTurnovers.AmountExpense AS Expense,
+		|	AccountBalanceTurnovers.AmountReceipt AS Receipt
 		|FROM
-		|	AccumulationRegister.RetailCash.Turnovers(&BegOfPeriod, &EndOfPeriod, Record, Company = &Company
-		|	And BusinessUnit = &BusinessUnit) AS RetailCashTurnovers
-		|GROUP BY
-		|	RetailCashTurnovers.Recorder";
+		|	AccumulationRegister.AccountBalance.Turnovers(&BegOfPeriod, &EndOfPeriod, Record,
+		|		Account.BusinessUnit = &BusinessUnit AND Company = &Company) AS AccountBalanceTurnovers";
 	
 	Query.SetParameter("BegOfPeriod", Object.BegOfPeriod);
 	Query.SetParameter("EndOfPeriod", Object.EndOfPeriod);

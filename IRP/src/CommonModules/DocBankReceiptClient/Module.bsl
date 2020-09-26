@@ -7,6 +7,7 @@ EndProcedure
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
+	SetAvailability(Object, Form);
 EndProcedure
 
 Procedure SetAvailability(Object, Form) Export
@@ -16,7 +17,8 @@ Procedure SetAvailability(Object, Form) Export
 	DocumentsClientServer.SetVisibilityItemsByArray(Form.Items, ArrayAll, ArrayByType);
 	
 	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange")
-		OR Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder") Then
+		OR Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder")
+		OR Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS") Then
 		BasedOnCashTransferOrder = False;
 		For Each Row In Object.PaymentList Do
 			If TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder")
@@ -31,7 +33,11 @@ Procedure SetAvailability(Object, Form) Export
 		Form.Items.Currency.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
 
 		ArrayTypes = New Array();
-		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
+		If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS") Then
+			ArrayTypes.Add(Type("DocumentRef.CashStatement"));
+		Else
+			ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
+		EndIf;
 		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	Else
 		ArrayTypes = New Array();
@@ -68,6 +74,7 @@ EndFunction
 #Region ItemTransactionType
 
 Procedure TransactionTypeOnChange(Object, Form, Item) Export
+	SetAvailability(Object, Form);
 	CleanDataByTransactionType(Object, Form);
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure

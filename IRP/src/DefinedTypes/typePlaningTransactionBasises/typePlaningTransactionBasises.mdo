@@ -13,5 +13,6 @@
     <types>DocumentRef.IncomingPaymentOrder</types>
     <types>DocumentRef.OutgoingPaymentOrder</types>
     <types>DocumentRef.ChequeBondTransactionItem</types>
+    <types>DocumentRef.CashStatement</types>
   </type>
 </mdclass:DefinedType>

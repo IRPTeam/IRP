@@ -44,7 +44,8 @@ Function GetQueryTextBankReceiptPaymentList()
 		|	CASE
 		|		WHEN BankReceiptPaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
 		|			THEN CASE
-		|				WHEN VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+		|				WHEN (VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+		|						OR VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement))
 		|				AND
 		|				NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
 		|				AND
@@ -61,7 +62,8 @@ Function GetQueryTextBankReceiptPaymentList()
 		|	END
 		|	AND
 		|	NOT CASE
-		|		WHEN VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+		|		WHEN (VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+		|					OR VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement))
 		|		AND
 		|		NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
 		|		AND
@@ -82,7 +84,8 @@ Function GetQueryTextBankReceiptPaymentList()
 		|	BankReceiptPaymentList.Amount AS Amount,
 		|	BankReceiptPaymentList.AmountExchange AS AmountExchange,
 		|	CASE
-		|		WHEN VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+		|		WHEN (VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+		|					OR VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement))
 		|		AND
 		|		NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
 		|		AND
@@ -91,7 +94,8 @@ Function GetQueryTextBankReceiptPaymentList()
 		|		ELSE FALSE
 		|	END AS IsMoneyTransfer,
 		|	CASE
-		|		WHEN VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+		|		WHEN (VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+		|					OR VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement))
 		|		AND
 		|		NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
 		|		AND
@@ -533,7 +537,8 @@ Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
 	ArrayAll.Add("PaymentList.AmountExchange");
 	
 	ArrayByType = New Array();
-	If TransactionType = Enums.IncomingPaymentTransactionType.CashTransferOrder Then
+	If TransactionType = Enums.IncomingPaymentTransactionType.CashTransferOrder
+		OR TransactionType = Enums.IncomingPaymentTransactionType.TransferFromPOS Then
 		ArrayByType.Add("Account");
 		ArrayByType.Add("Company");
 		ArrayByType.Add("Currency");

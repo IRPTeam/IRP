@@ -216,6 +216,11 @@ Procedure ItemListTaxAmountOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure ItemListDontCalculateRowOnChange(Item)
+	DocPurchaseReturnOrderClient.ItemListDontCalculateRowOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure ItemListStoreOnChange(Item)
 	DocPurchaseReturnOrderClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure

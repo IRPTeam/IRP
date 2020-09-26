@@ -1589,6 +1589,18 @@ Procedure ItemListCalculateRowAmounts_TaxAmountChange(Object, Form, CurrentData,
 	TaxesClient.UpdateTaxList(Object, Form, CurrentData.Key, ArrayOfTaxListRows, AddInfo);
 EndProcedure
 
+Procedure ItemListCalculateRowAmounts_DontCalculateRowChange(Object, Form, CurrentData, Item, Module = Undefined, AddInfo = Undefined) Export	
+	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
+	If Module <> Undefined Then
+		Module.ItemListDontCalculateRowPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+	EndIf;
+	ArrayForDelete = Object.TaxList.FindRows(New Structure("Key", CurrentData.Key));
+	For Each ItemOfArrayForDelete In ArrayForDelete Do
+		Object.TaxList.Delete(ItemOfArrayForDelete);
+	EndDo;
+	ItemListCalculateRowAmounts(Object, Form, CurrentData, Module, AddInfo);
+EndProcedure
+
 Procedure ItemListCalculateRowAmounts_TaxValueChange(Object, Form, CurrentData, Item, Module = Undefined, AddInfo = Undefined) Export	
 	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
 	If Module <> Undefined Then
@@ -1599,10 +1611,14 @@ EndProcedure
 
 Procedure ItemListCalculateRowAmounts(Object, Form, CurrentData, Module = Undefined, AddInfo = Undefined) Export
 	Settings = New Structure();
+	
 	Settings.Insert("Rows", New Array());
-	Settings.Insert("CalculateSettings");
-	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
 	Settings.Rows.Add(CurrentData);
+	
+	Settings.Insert("CalculateSettings");
+	Settings.CalculateSettings = 
+	CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
+	
 	ItemListCalculateRowsAmounts(Object, Form, Settings, ,AddInfo);
 EndProcedure
 
@@ -1626,7 +1642,6 @@ Procedure ItemListCalculateRowsAmounts(Object, Form, Settings, Item = Undefined,
 	If Not ArrayOfTaxInfo = Undefined Then	
 		Form.TaxAndOffersCalculated = False;
 	EndIf;
-	
 EndProcedure
 
 Procedure CalculateTable(Object, Form, Settings, AddInfo = Undefined) Export
@@ -2396,6 +2411,20 @@ EndProcedure
 
 Procedure ItemListTaxAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
 	OnChangeItemName = "ItemListTaxAmount";
+	ParametersToServer = New Structure();
+	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
+	
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
+	ServerData.Insert("OnChangeItemName", OnChangeItemName);
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
+EndProcedure	
+
+#EndRegion
+
+#Region DontCalculateRow
+
+Procedure ItemListDontCalculateRowPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+	OnChangeItemName = "DontCalculateRow";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
 	

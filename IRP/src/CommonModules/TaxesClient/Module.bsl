@@ -312,17 +312,28 @@ Procedure UpdateTaxList(Object, Form, Key, ArrayOfTaxListRows, AddInfo = Undefin
 	EndDo;
 	ArrayOfItemListRows = Object.ItemList.FindRows(New Structure("Key", Key));
 	
-	Actions = New Structure();
-	Actions.Insert("CalculateSpecialOffers");
-	Actions.Insert("CalculateNetAmount");
-	Actions.Insert("CalculateTax");
-	Actions.Insert("CalculateTotalAmount");
+	IsCalculatedRow = True;
+	For Each ItemOfItemListRows In ArrayOfItemListRows Do
+		If CommonFunctionsClientServer.ObjectHasProperty(ItemOfItemListRows, "DontCalculateRow")
+		  And ItemOfItemListRows.DontCalculateRow Then
+			IsCalculatedRow = False;
+			ItemOfItemListRows.TaxAmount = TotalTaxAmount;	
+		EndIf;
+	EndDo;
+	
+	If IsCalculatedRow Then
+		Actions = New Structure();
+		Actions.Insert("CalculateSpecialOffers");
+		Actions.Insert("CalculateNetAmount");
+		Actions.Insert("CalculateTax");
+		Actions.Insert("CalculateTotalAmount");
 
-	CalculationStringsClientServer.CalculateItemsRows(Object,
-		                                              Form,
-		                                              ArrayOfItemListRows,
-		                                              Actions,
-		                                              ServerData.ArrayOfTaxInfo,
-		                                              AddInfo);
+		CalculationStringsClientServer.CalculateItemsRows(Object,
+		                                              	  Form,
+		                                              	  ArrayOfItemListRows,
+		                                              	  Actions,
+		                                              	  ServerData.ArrayOfTaxInfo,
+		                                              	  AddInfo);
+	EndIf;
 EndProcedure
 	

@@ -239,8 +239,28 @@ Procedure CalculateTaxOnChangeTaxValue(Object, Form, CurrentData, Item, AddInfo 
 		ServerData.ArrayOfTaxInfo,
 		AddInfo);	
 EndProcedure
+
+Procedure ChangeTaxAmount2(Object, Form, Parameters, StandardProcessing, AddInfo = Undefined) Export
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+	If  ServerData.ArrayOfTaxInfo.Count() = 1 And
+		Object.TaxList.FindRows(New Structure("Key", Parameters.CurrentData.Key)).Count() = 1 Then
+		Parameters.Field.ReadOnly  = False;
+	Else
+		Parameters.Field.ReadOnly  = True;
+		MainTableData = New Structure();
+		MainTableData.Insert("Key"      , Parameters.CurrentData.Key);
+		MainTableData.Insert("Currency" , Object.Currency);
+			
+		OpenForm_ChangeTaxAmount(Object, 
+								 Form, 
+								 Parameters.Item, 
+								 StandardProcessing,
+								 MainTableData,
+								 AddInfo);
+	EndIf;
+EndProcedure	
 	
-Procedure OpenForm_ChangeTaxAmount(Object, Form, Item, StandardProcessing, MainTableData, AddInfo = Undefined) Export
+Procedure OpenForm_ChangeTaxAmount(Object, Form, Item, StandardProcessing, MainTableData, AddInfo = Undefined)
 	StandardProcessing = False;
 	
 	ArrayOfTaxListRows = New Array();
@@ -268,21 +288,29 @@ Procedure TaxEditContinue(Result, AdditionalParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
-	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AdditionalParameters.AddInfo, "ServerData");
-	
-	Object = AdditionalParameters.Object;
-	ArrayForDelete = Object.TaxList.FindRows(New Structure("Key", Result.Key));
+
+	UpdateTaxList(AdditionalParameters.Object, 
+	              AdditionalParameters.Form, 
+	              Result.Key, 
+	              Result.ArrayOfTaxListRows, 
+	              AdditionalParameters.AddInfo);
+EndProcedure
+
+Procedure UpdateTaxList(Object, Form, Key, ArrayOfTaxListRows, AddInfo = Undefined) Export
+		
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+	ArrayForDelete = Object.TaxList.FindRows(New Structure("Key", Key));
 	For Each ItemOfArrayForDelete In ArrayForDelete Do
 		Object.TaxList.Delete(ItemOfArrayForDelete);
 	EndDo;
 	TotalTaxAmount = 0;
-	For Each ItemOfArrayOfTaxListRows In Result.ArrayOfTaxListRows Do
+	For Each ItemOfArrayOfTaxListRows In ArrayOfTaxListRows Do
 		FillPropertyValues(Object.TaxList.Add(), ItemOfArrayOfTaxListRows);
 		If ItemOfArrayOfTaxListRows.IncludeToTotalAmount Then
 			TotalTaxAmount = TotalTaxAmount + ItemOfArrayOfTaxListRows.ManualAmount;
 		EndIf;
 	EndDo;
-	ArrayOfItemListRows = Object.ItemList.FindRows(New Structure("Key", Result.Key));
+	ArrayOfItemListRows = Object.ItemList.FindRows(New Structure("Key", Key));
 	
 	Actions = New Structure();
 	Actions.Insert("CalculateSpecialOffers");
@@ -290,11 +318,11 @@ Procedure TaxEditContinue(Result, AdditionalParameters) Export
 	Actions.Insert("CalculateTax");
 	Actions.Insert("CalculateTotalAmount");
 
-	CalculationStringsClientServer.CalculateItemsRows(AdditionalParameters.Object,
-		                                              AdditionalParameters.Form,
+	CalculationStringsClientServer.CalculateItemsRows(Object,
+		                                              Form,
 		                                              ArrayOfItemListRows,
 		                                              Actions,
 		                                              ServerData.ArrayOfTaxInfo,
-		                                              AdditionalParameters.AddInfo);
+		                                              AddInfo);
 EndProcedure
 	

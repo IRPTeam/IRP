@@ -1570,6 +1570,25 @@ Procedure ItemListCalculateRowAmounts_TotalAmountChange(Object, Form, CurrentDat
 	TaxesClient.CalculateReverseTaxOnChangeTotalAmount(Object, Form, CurrentData, AddInfo);
 EndProcedure
 
+Procedure ItemListCalculateRowAmounts_TaxAmountChange(Object, Form, CurrentData, Item, Module = Undefined, AddInfo = Undefined) Export	
+	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
+	If Module <> Undefined Then
+		Module.ItemListTaxAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+	EndIf;
+	ArrayOfTaxListRowsForChange = Object.TaxList.FindRows(New Structure("Key", CurrentData.Key));
+	If ArrayOfTaxListRowsForChange.Count() <> 1 Then
+		Raise "ArrayOfTaxListRowsForChange.Count() <> 1";
+	EndIf;
+	ArrayOfTaxListRows = New Array();
+	For Each Row In ArrayOfTaxListRowsForChange Do
+		NewRowTaxList = New Structure("Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount");
+		FillPropertyValues(NewRowTaxList, Row);
+		NewRowTaxList.ManualAmount = CurrentData.TaxAmount;
+		ArrayOfTaxListRows.Add(NewRowTaxList);
+	EndDo;
+	TaxesClient.UpdateTaxList(Object, Form, CurrentData.Key, ArrayOfTaxListRows, AddInfo);
+EndProcedure
+
 Procedure ItemListCalculateRowAmounts_TaxValueChange(Object, Form, CurrentData, Item, Module = Undefined, AddInfo = Undefined) Export	
 	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
 	If Module <> Undefined Then
@@ -2363,6 +2382,20 @@ EndProcedure
 
 Procedure ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
 	OnChangeItemName = "ItemListTotalAmount";
+	ParametersToServer = New Structure();
+	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
+	
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
+	ServerData.Insert("OnChangeItemName", OnChangeItemName);
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
+EndProcedure	
+
+#EndRegion
+
+#Region TaxAmount
+
+Procedure ItemListTaxAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+	OnChangeItemName = "ItemListTaxAmount";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
 	

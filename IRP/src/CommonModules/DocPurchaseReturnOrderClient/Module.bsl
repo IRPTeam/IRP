@@ -106,17 +106,11 @@ Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProc
 		CurrentData = Form.Items.ItemList.CurrentData;
 		If CurrentData <> Undefined Then
 			DocumentsClient.ItemListSelectionPutServerDataToAddInfo(Object, Form, AddInfo);
-			
-			MainTableData = New Structure();
-			MainTableData.Insert("Key"      , CurrentData.Key);
-			MainTableData.Insert("Currency" , Object.Currency);
-			
-			TaxesClient.OpenForm_ChangeTaxAmount(Object, 
-												 Form, 
-												 Item, 
-												 StandardProcessing,
-												 MainTableData,
-												 AddInfo);
+			Parameters = New Structure();
+			Parameters.Insert("CurrentData", CurrentData);
+			Parameters.Insert("Item"       , Item);
+			Parameters.Insert("Field"      , Field);
+			TaxesClient.ChangeTaxAmount2(Object, Form, Parameters, StandardProcessing, AddInfo);
 		EndIf;
 	EndIf; 
 EndProcedure
@@ -270,6 +264,22 @@ EndProcedure
 
 Procedure ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
 	DocumentsClient.ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+EndProcedure	
+
+#EndRegion
+
+#Region TaxAmount
+
+Procedure ItemListTaxAmountOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;	
+	DocumentsClient.ItemListCalculateRowAmounts_TaxAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+EndProcedure
+
+Procedure ItemListTaxAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+	DocumentsClient.ItemListTaxAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
 EndProcedure	
 
 #EndRegion

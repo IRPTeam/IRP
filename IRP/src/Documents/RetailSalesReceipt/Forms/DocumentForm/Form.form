@@ -1416,6 +1416,10 @@
               <segments>Object.ItemList.TaxAmount</segments>
             </paths>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListTaxAmountOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ItemListTaxAmountExtendedTooltip</name>
             <id>83</id>

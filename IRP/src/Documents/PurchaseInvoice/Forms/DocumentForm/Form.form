@@ -1705,6 +1705,10 @@
               <segments>Object.ItemList.TaxAmount</segments>
             </paths>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListTaxAmountOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ItemListTaxAmountExtendedTooltip</name>
             <id>156</id>
@@ -1734,9 +1738,6 @@
           <readOnly>true</readOnly>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
-          <headerPicture xsi:type="core:PictureRef">
-            <picture>StdPicture.Change</picture>
-          </headerPicture>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">

@@ -2161,7 +2161,7 @@ EndProcedure
 
 #Region DocumentsPurchasingAndSales
 
-Procedure TableOnStartEdit(Object, Form, DataPath, Item, NewRow, Clone) Export
+Procedure TableOnStartEdit(Object, Form, DataPath, Item, NewRow, Clone, AddInfo = Undefined) Export
 	CurrentData = Item.CurrentData;
 	
 	If CurrentData = Undefined Then
@@ -2171,14 +2171,11 @@ Procedure TableOnStartEdit(Object, Form, DataPath, Item, NewRow, Clone) Export
 	If Not NewRow Then
 		Return;
 	ElsIf Clone Then
-		Settings = New Structure();
-		Settings.Insert("Rows", New Array());
-		Settings.Rows.Add(CurrentData);
-		Settings.Insert("CalculateSettings", New Structure());
-		Settings.CalculateSettings.Insert("CalculateSpecialOffers");
-		Settings.CalculateSettings.Insert("CalculateTax");
-		
-		DocumentsClient.ItemListCalculateRowsAmounts(Object, Form, Settings);
+		If CurrentData.Property("DontCalculateRow") Then	
+			CurrentData.DontCalculateRow = False;
+		EndIf;
+	
+		ItemListCalculateRowAmounts(Object, Form, CurrentData, Undefined, AddInfo);
 		Return;
 	EndIf;
 	

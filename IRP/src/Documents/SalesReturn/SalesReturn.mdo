@@ -521,6 +521,18 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="d1a066ed-65b9-4c5d-9293-0178aa69fc74">
+      <name>DontCalculateRow</name>
+      <synonym>
+        <key>en</key>
+        <value>Dont calculate row</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="f7fdf31f-fafd-4287-9cec-2e46be7ee60e">
     <producedTypes>

@@ -154,9 +154,15 @@ Function CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Un
 		For Each ItemRow In ItemRows Do
 			CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo, AddInfo);
 		EndDo;
-		Result.ItemList      = Object.ItemList;
-		Result.TaxList       = Object.TaxList;
-		Result.SpecialOffers = Object.SpecialOffers;		
+		If Object.Property("ItemList") Then
+			Result.ItemList      = Object.ItemList;
+		EndIf;
+		If Object.Property("TaxList") Then
+			Result.TaxList       = Object.TaxList;
+		EndIf;
+		If Object.Property("SpecialOffers") Then
+			Result.SpecialOffers = Object.SpecialOffers;
+		EndIf;		
 	EndIf;
 	
 	#If ThinClient Then

@@ -1290,7 +1290,7 @@ Scenario: create a Purchase Order document
 		And I input "200,000" text in "Q" field of "ItemList" table
 		And I input "180,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-	And I click "Post and close" button
+	And I click "Post" button
 
 
 

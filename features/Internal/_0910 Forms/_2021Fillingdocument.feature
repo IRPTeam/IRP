@@ -216,6 +216,7 @@ Scenario: _0154100 preparation
 			And I select current line in "List" table
 			* Filling Sender and Send amount
 				And I click Select button of "Sender" field
+				
 				And I go to line in "List" table
 					| Description    |
 					| Cash desk №2 |

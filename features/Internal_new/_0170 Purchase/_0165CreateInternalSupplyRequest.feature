@@ -2,6 +2,7 @@
 @tree
 @Positive
 @Group3
+@Purchase
 
 Feature: create document an Internal supply request 
 
@@ -15,6 +16,8 @@ Background:
 
 
 Scenario: _016501 preparation
+	* Constants
+			When set True value to the constant
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -37,6 +40,10 @@ Scenario: _016501 preparation
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When Create catalog Taxes objects	
+		When Create catalog TaxRates objects
+		When Create information register CurrencyRates records
+		When Create catalog IntegrationSettings objects
 		* Add plugin for taxes calculation
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			If "List" table does not contain lines Then
@@ -46,7 +53,7 @@ Scenario: _016501 preparation
 					Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 				* Addition of Plugin sessing for calculating Tax types for Turkey (VAT)
 					And I click the button named "FormCreate"
-					And I select external file "#workingDir#\DataProcessor\TaxCalculateVAT_TR.epf"
+					And I select external file "C:\Users\Severnity\Desktop\ExtDataProc\TaxCalculateVAT_TR.epf"
 					And I click the button named "FormAddExtDataProc"
 					And I input "" text in "Path to plugin for test" field
 					And I input "TaxCalculateVAT_TR" text in "Name" field
@@ -61,17 +68,16 @@ Scenario: _016501 preparation
 					Given I open hyperlink "e1cib/list/Catalog.Taxes"		
 					And I go to line in "List" table
 						| 'Description' |
-						| 'TaxCalculateVAT_TR'         |
+						| 'VAT'         |
 					And I select current line in "List" table
 					And I click Select button of "Plugins" field
 					And I go to line in "List" table
 						| 'Description' |
-						| 'VAT'         |
+						| 'TaxCalculateVAT_TR'         |
 					And I select current line in "List" table
 					And I click "Save and close" button
 				And I close all client application windows
-		* Constants
-			When set True value to the constant
+		
 			
 Scenario: _016501 create document Internal Supply Request
 	* Opening the creation form Internal Supply Request

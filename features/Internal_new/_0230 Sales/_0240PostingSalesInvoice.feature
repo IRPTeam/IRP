@@ -2,6 +2,8 @@
 @tree
 @Positive
 @Group5
+@Sales
+
 Feature: create document Sales invoice
 
 As a sales manager

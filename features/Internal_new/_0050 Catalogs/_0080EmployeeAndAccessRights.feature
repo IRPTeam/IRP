@@ -1,7 +1,9 @@
 ﻿#language: en
 @tree
 @Positive
-@Test
+@Group01
+@Catalogs
+
 
 Feature: access rights
 

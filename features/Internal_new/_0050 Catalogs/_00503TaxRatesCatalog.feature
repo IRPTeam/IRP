@@ -3,7 +3,7 @@
 @Positive
 @Test
 @Group01
-
+@Catalogs
 
 Feature: filling in Tax rates catalog
 

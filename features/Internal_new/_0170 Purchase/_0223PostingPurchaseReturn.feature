@@ -233,7 +233,7 @@ Scenario: _022314 create document Purchase return, store use Shipment confirmati
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	And I go to line in "List" table
 		| 'Number' |
-		| '$$PurchaseReturn022314$$'      |
+		| '$$NumberPurchaseReturn022314$$'      |
 	And I select current line in "List" table
 	* Check that the amount from the receipt minus the previous returns is pulled into the return
 		And "ItemList" table contains lines
@@ -353,15 +353,15 @@ Scenario: _022326 check movements of the document Purchase return order in the S
 		| 'Quantity' | 'Recorder'           | 'Line number' | 'Store'    | 'Item key' |
 		| '12,000'   | '$$PurchaseReturn022322$$' | '1'           | 'Store 01' | '36/Yellow'  |
 
-Scenario: _022327 check movements of the document Purchase return order in the StockReservation (store doesn't use Shipment confirmation, without Purchase return order) - minus
+Scenario: _022327 check movements of the document Purchase return in the StockReservation (store doesn't use Shipment confirmation, without Purchase return order) - minus
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
 	And "List" table contains lines
 		| 'Quantity' | 'Recorder'           | 'Line number' | 'Store'    | 'Item key' |
 		| '12,000'   | '$$PurchaseReturn022322$$' | '1'           | 'Store 01' | '36/Yellow'  |
 
-Scenario: _022328 check that there are no movements of Purchase return in register StockReservation (store doesn't use Shipment confirmation, without Purchase return order)
+Scenario: _022328 check movements of Purchase return in register StockReservation (store doesn't use Shipment confirmation, without Purchase return order)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table does not contain lines
+	And "List" table contain lines
 		| 'Quantity' | 'Recorder'                 | 'Line number' | 'Store'    | 'Item key'  |
 		| '12,000'   | '$$PurchaseReturn022322$$' | '1'           | 'Store 01' | '36/Yellow' |
 

@@ -334,6 +334,8 @@ Procedure UpdateTaxList(Object, Form, Key, ArrayOfTaxListRows, AddInfo = Undefin
 		                                              	  Actions,
 		                                              	  ServerData.ArrayOfTaxInfo,
 		                                              	  AddInfo);
+	Else
+		Notify("CallbackHandler", New Structure("AddInfo", AddInfo), Form);
 	EndIf;
 EndProcedure
 	

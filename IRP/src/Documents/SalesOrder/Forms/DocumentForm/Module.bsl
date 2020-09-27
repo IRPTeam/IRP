@@ -280,11 +280,20 @@ EndProcedure
 &AtClient
 Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
 	DocSalesOrderClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData <> Undefined And CurrentData.DontCalculateRow Then
+		UpdateTotalAmounts();
+	EndIf;
 EndProcedure
 
 &AtClient
 Procedure ItemListTaxAmountOnChange(Item)
 	DocSalesOrderClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);	
+EndProcedure
+
+&AtClient
+Procedure ItemListDontCalculateRowOnChange(Item)
+	DocSalesOrderClient.ItemListDontCalculateRowOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -294,6 +303,11 @@ EndProcedure
 
 &AtClient
 Procedure ItemListProcurementMethodOnChange(Item)
+	UpdateTotalAmounts();
+EndProcedure
+
+&AtClient
+Procedure ItemListNetAmountOnChange(Item)
 	UpdateTotalAmounts();
 EndProcedure
 

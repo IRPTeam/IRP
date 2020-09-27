@@ -645,7 +645,6 @@ Function DateSettings(Object, Form, AddInfo = Undefined) Export
 	AfterActionsCalculateSettings = New Structure;
 	
 	Settings.Insert("TableName"			, "ItemList");
-	Settings.Insert("EmptyBasisDocument", New Structure("SalesReturnOrder", ServerData.SalesReturnOrder_EmptyRef));
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax, Agreement, LegalName";
 	Settings.FormAttributes = "CurrentPriceType";

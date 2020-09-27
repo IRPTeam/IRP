@@ -194,7 +194,7 @@ Procedure FullRefreshTable(Object, Form, AddInfo = Undefined) Export
 	SetVisibleRows(Object, Form, AddInfo);
 EndProcedure	
 
-Procedure SerFaceTable(Object, Form, AddInfo = Undefined) Export
+Procedure SetSurfaceTable(Object, Form, AddInfo = Undefined) Export
 	SetRatePresentation(Object, Form);
 	SetVisibleRows(Object, Form, AddInfo);	
 EndProcedure	

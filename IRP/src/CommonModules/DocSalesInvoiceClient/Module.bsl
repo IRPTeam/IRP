@@ -57,7 +57,7 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	#EndIf
 	
 	If ValueIsFilled(Object.Ref) Then
-		CurrenciesClient.SerFaceTable(Object, Form, AddInfo);
+		CurrenciesClient.SetSurfaceTable(Object, Form, AddInfo);
 	Else
 		CurrenciesClient.FullRefreshTable(Object, Form, AddInfo);
 	EndIf;

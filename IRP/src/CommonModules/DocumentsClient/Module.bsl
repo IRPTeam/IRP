@@ -285,7 +285,8 @@ Procedure AgreementOnChange(Object, Form, Module, Item = Undefined, Settings  = 
 	If ServerData = Undefined Then
 		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
 	Else
-		AgreementInfo = ServerData.AgreementInfo;	
+		AgreementInfo = ServerData.AgreementInfo;
+		CurrenciesClient.FullRefreshTable(Object, Form, AddInfo);
 	EndIf;
 	
 	Settings.Insert("CurrentValuesStructure", CurrentValuesStructure);
@@ -300,10 +301,6 @@ Procedure AgreementOnChange(Object, Form, Module, Item = Undefined, Settings  = 
 	#If Not MobileClient Then
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	#EndIf
-	
-	If Item = Undefined Then
-		Return;
-	EndIf;
 	
 	If Settings.Questions.Count() > 0  Then
 		Settings.Insert("CacheObject", CacheObject);
@@ -426,10 +423,12 @@ Procedure CompanyOnChange(Object, Form, Module, Item = Undefined, Settings = Und
 		If ServiceSystemClientServer.ObjectHasAttribute("TaxList", Object) Then
 			Form.Taxes_CreateFormControls();
 		EndIf;
-	ElsIf ServerData.RequireCallCreateTaxesFormControls Then
-		ServerData.ArrayOfTaxInfo = Form.Taxes_CreateFormControls();
+	Else
+		CurrenciesClient.FullRefreshTable(Object, Form, AddInfo);
+		If ServerData.RequireCallCreateTaxesFormControls Then
+			ServerData.ArrayOfTaxInfo = Form.Taxes_CreateFormControls();
+		EndIf;
 	EndIf;
-	
 	CurrentValuesStructure = CreateCurrentValuesStructure(Object, Settings.ObjectAttributes, Settings.FormAttributes);
     FillPropertyValues(CurrentValuesStructure, Form, Settings.FormAttributes);
 	Settings.Insert("CurrentValuesStructure"	, CurrentValuesStructure);
@@ -886,8 +885,11 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 		If ServiceSystemClientServer.ObjectHasAttribute("TaxList", Object) Then
 			Form.Taxes_CreateFormControls();
 		EndIf;
-	ElsIf ServerData.RequireCallCreateTaxesFormControls Then
-		ServerData.ArrayOfTaxInfo = Form.Taxes_CreateFormControls();
+	Else
+		CurrenciesClient.FullRefreshTable(Object, Form, AddInfo);
+		If ServerData.RequireCallCreateTaxesFormControls Then
+			ServerData.ArrayOfTaxInfo = Form.Taxes_CreateFormControls();
+		EndIf;
 	EndIf;
 	
 	If DateSettings.Property("EmptyBasisDocument") Then
@@ -1015,6 +1017,11 @@ Procedure ShowUserQueryBoxContinue(Result, AdditionalParameters) Export
 		EndIf;
 		
 		Form.Modified = False;
+		
+		If AdditionalParameters.Property("AddInfo") Then
+			CurrenciesClient.SetSurfaceTable(Object, Form, AdditionalParameters.AddInfo);
+		EndIf;
+		
 		Return;
 	EndIf;
 	
@@ -2046,7 +2053,6 @@ Procedure ItemListPriceTypeOnChange(Object, Form, Module, Item = Undefined, Sett
 		Return;
 	EndIf;
 	
-	// If Item was Changed we hawe to clear itemkey
 	If Settings = Undefined Then
 		Settings = GetSettingsStructure(Module);
 	EndIf;
@@ -2549,6 +2555,10 @@ Procedure CurrencyOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefin
 	ArrayOfCurrenciesRowsParameters.Insert("Currency"  , Object.Currency);
 	ArrayOfCurrenciesRowsParameters.Insert("UUID"      , Form.UUID);
 	ParametersToServer.Insert("GetArrayOfCurrenciesRows", ArrayOfCurrenciesRowsParameters);
+	
+	AgreementInfoParameters = New Structure();
+	AgreementInfoParameters.Insert("Agreement", Object.Agreement);
+	ParametersToServer.Insert("GetAgreementInfo", AgreementInfoParameters);	
 	
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);

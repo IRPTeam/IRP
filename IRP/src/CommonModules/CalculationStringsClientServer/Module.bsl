@@ -86,7 +86,7 @@ Procedure UpdateDataCollectionByArrayOfStructures(DataCollection, ArrayOfStructu
 		If ArrayOfUpdatedRows.Count() = 0 Then
 			Raise StrTemplate("Not found row by key [%1]", Row.Key);
 		ElsIf ArrayOfUpdatedRows.Count() > 1 Then
-			Raise StrTemplate("Found several row by key [%1]", Row.Key);;
+			Raise StrTemplate("Found several row by key [%1]", Row.Key);
 		Else
 			For Each UpdatedRow In ArrayOfUpdatedRows Do
 				FillPropertyValues(UpdatedRow, Row);
@@ -318,7 +318,7 @@ Procedure UpdatePrice(Object, ItemRow, ChangePriceTypeSettings, AddInfo = Undefi
 	ChangePriceTypeSettings.Insert("Unit", ItemRow.Unit);
 	ChangePriceTypeSettings.Insert("Object", Object);
 	
-	PriceInfo = GetItemInfo.ItemPriceInfo(ChangePriceTypeSettings);
+	PriceInfo = GetItemInfo.ItemPriceInfo(ChangePriceTypeSettings, AddInfo);
 	ItemRow.Price = ?(PriceInfo = Undefined, 0, PriceInfo.Price);
 	
 EndProcedure

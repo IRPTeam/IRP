@@ -35,8 +35,10 @@ Procedure SetAvailability(Object, Form) Export
 		ArrayTypes = New Array();
 		If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS") Then
 			ArrayTypes.Add(Type("DocumentRef.CashStatement"));
+			Form.Items.PaymentListPOSAccount.Visible = True;
 		Else
 			ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
+			Form.Items.PaymentListPOSAccount.Visible = False;
 		EndIf;
 		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	Else

@@ -57,7 +57,7 @@ Function GetQueryText_CashStatement_PlaningCashTransactions()
 	Return "SELECT
 	|	Table.Ref.Company AS Company,
 	|	&Ref AS BasisDocument,
-	|	Table.Account,
+	|	Table.Ref.CashAccount AS Account,
 	|	Table.Account.Currency AS Currency,
 	|	VALUE(Enum.CashFlowDirections.Incoming) AS CashFlowDirection,
 	|	SUM(Table.Amount) AS Amount,
@@ -71,7 +71,7 @@ Function GetQueryText_CashStatement_PlaningCashTransactions()
 	|GROUP BY
 	|	Table.Ref.Company,
 	|	Table.Account.Currency,
-	|	Table.Account,
+	|	Table.Ref.CashAccount,
 	|	Table.Ref.Date,
 	|	Table.Key,
 	|	VALUE(Enum.CashFlowDirections.Incoming)";
@@ -136,7 +136,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	// CashInTransit
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit,
 		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
+			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.CashInTransit));
 			
 	// PlaningCashTransactions

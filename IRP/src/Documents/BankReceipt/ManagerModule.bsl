@@ -10,6 +10,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("AdvanceFromCustomers", PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
 	Tables.Insert("ReconciliationStatement", PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("AccountBalance_Expense", PostingServer.CreateTable(AccReg.AccountBalance));
+	Tables.Insert("CashInTransit_POS", PostingServer.CreateTable(AccReg.CashInTransit));
+	Tables.Insert("PlaningCashTransactions_POS", PostingServer.CreateTable(AccReg.PlaningCashTransactions));
 	
 	QueryPaymentList = New Query();
 	QueryPaymentList.Text = GetQueryTextBankReceiptPaymentList();
@@ -29,6 +31,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.AdvanceFromCustomers = QueryResults[5].Unload();
 	Tables.ReconciliationStatement = QueryResults[6].Unload();
 	Tables.AccountBalance_Expense = QueryResults[7].Unload();
+	Tables.CashInTransit_POS = QueryResults[8].Unload();
+	Tables.PlaningCashTransactions_POS = QueryResults[9].Unload();
 	
 	Return Tables;
 EndFunction
@@ -81,23 +85,29 @@ Function GetQueryTextBankReceiptPaymentList()
 		|	BankReceiptPaymentList.Amount AS Amount,
 		|	BankReceiptPaymentList.AmountExchange AS AmountExchange,
 		|	CASE
-		|		WHEN (VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+		|		WHEN VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
 		|		AND NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
 		|		AND
-		|			BankReceiptPaymentList.PlaningTransactionBasis.SendCurrency = BankReceiptPaymentList.PlaningTransactionBasis.ReceiveCurrency)
-		|		OR VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement)
+		|			BankReceiptPaymentList.PlaningTransactionBasis.SendCurrency = BankReceiptPaymentList.PlaningTransactionBasis.ReceiveCurrency
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS IsMoneyTransfer,
 		|	CASE
-		|		WHEN (VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+		|		WHEN VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
 		|		AND NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
 		|		AND
-		|			BankReceiptPaymentList.PlaningTransactionBasis.SendCurrency <> BankReceiptPaymentList.PlaningTransactionBasis.ReceiveCurrency)
-		|		AND Not VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement)
+		|			BankReceiptPaymentList.PlaningTransactionBasis.SendCurrency <> BankReceiptPaymentList.PlaningTransactionBasis.ReceiveCurrency
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS IsMoneyExchange,
+		|	CASE
+		|		WHEN VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement)
+		|		AND NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
+		|			THEN TRUE
+		|		ELSE FALSE
+		|	END AS TransferFromPOS,
+		|	BankReceiptPaymentList.Ref.Account AS ToAccount_POS,
+		|	BankReceiptPaymentList.POSAccount AS FromAccount_POS,
 		|	BankReceiptPaymentList.PlaningTransactionBasis.Sender AS FromAccount,
 		|	BankReceiptPaymentList.PlaningTransactionBasis.Receiver AS ToAccount,
 		|	BankReceiptPaymentList.Ref AS ReceiptDocument,
@@ -130,7 +140,10 @@ Function GetQueryTextQueryTable()
 		|	QueryTable.FromAccount AS FromAccount,
 		|	QueryTable.ToAccount AS ToAccount,
 		|	QueryTable.ReceiptDocument AS ReceiptDocument,
-		|	QueryTable.Key AS Key
+		|	QueryTable.Key AS Key,
+		|	QueryTable.TransferFromPOS AS TransferFromPOS,
+		|	QueryTable.ToAccount_POS AS ToAccount_POS,
+		|	QueryTable.FromAccount_POS AS FromAccount_POS
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable
@@ -207,7 +220,7 @@ Function GetQueryTextQueryTable()
 		|FROM
 		|	tmp AS tmp
 		|WHERE
-		|	NOT tmp.PlaningTransactionBasis.Date IS NULL
+		|	tmp.IsMoneyTransfer OR tmp.IsMoneyExchange
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Account,
@@ -268,6 +281,8 @@ Function GetQueryTextQueryTable()
 		|	NOT tmp.IsMoneyTransfer
 		|	AND
 		|	NOT tmp.IsMoneyExchange
+		|	AND
+		|	NOT tmp.TransferFromPOS
 		|	AND tmp.IsAdvance
 		|GROUP BY
 		|	tmp.Company,
@@ -293,6 +308,8 @@ Function GetQueryTextQueryTable()
 		|	NOT tmp.IsMoneyTransfer
 		|	AND
 		|	NOT tmp.IsMoneyExchange
+		|	AND
+		|	NOT tmp.TransferFromPOS
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Payer,
@@ -329,7 +346,58 @@ Function GetQueryTextQueryTable()
 		|		ELSE tmp.Currency
 		|	END,
 		|	tmp.Period,
-		|	tmp.Key";
+		|	tmp.Key
+		|;
+		|//[8]//////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmp.Company AS Company,
+		|	tmp.PlaningTransactionBasis AS BasisDocument,
+		|	tmp.FromAccount_POS AS FromAccount,
+		|	tmp.ToAccount_POS AS ToAccount,
+		|	tmp.Currency AS Currency,
+		|	SUM(tmp.Amount) AS Amount,
+		|	tmp.Period,
+		|	tmp.Key
+		|FROM
+		|	tmp AS tmp
+		|WHERE
+		|	tmp.TransferFromPOS
+		|GROUP BY
+		|	tmp.Company,
+		|	tmp.PlaningTransactionBasis,
+		|	tmp.FromAccount_POS,
+		|	tmp.ToAccount_POS,
+		|	tmp.Currency,
+		|	tmp.Period,
+		|	tmp.Key
+		|;
+		|//[9]//////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmp.Company AS Company,
+		|	tmp.ToAccount_POS AS Account,
+		|	tmp.Currency AS Currency,
+		|	tmp.PlaningTransactionBasis AS BasisDocument,
+		| 	VALUE(Catalog.Partners.EmptyRef) AS Partner,
+	 	|	VALUE(Catalog.Companies.EmptyRef) AS LegalName,
+		|	VALUE(Enum.CashFlowDirections.Incoming) AS CashFlowDirection,
+		|	-SUM(tmp.Amount) AS Amount,
+		|	tmp.Period,
+		|	tmp.Key
+		|FROM
+		|	tmp AS tmp
+		|WHERE
+		|	tmp.TransferFromPOS
+		|GROUP BY
+		|	tmp.Company,
+		|	tmp.ToAccount_POS,
+		|	tmp.Currency,
+		|	tmp.PlaningTransactionBasis,
+		|	tmp.Period,
+		| 	VALUE(Catalog.Partners.EmptyRef),
+	 	|	VALUE(Catalog.Companies.EmptyRef),
+		|	VALUE(Enum.CashFlowDirections.Incoming),
+		|	tmp.Key
+		|";	
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -461,14 +529,37 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			Parameters.IsReposting));
 	
 	// PlaningCashTransactions
+	ArrayOfTables = New Array();
+	Table1 = Parameters.DocumentDataTables.PlaningCashTransactions.Copy();
+	ArrayOfTables.Add(Table1);
+	
+	Table2 = Parameters.DocumentDataTables.PlaningCashTransactions_POS.Copy();
+	ArrayOfTables.Add(Table2);
+	
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PlaningCashTransactions,
-		New Structure("RecordSet", Parameters.DocumentDataTables.PlaningCashTransactions));
+		New Structure("RecordSet",
+			PostingServer.JoinTables(ArrayOfTables,
+				"Period, Company, BasisDocument, Account, Currency, 
+				|CashFlowDirection, Partner, LegalName, Amount, Key"),
+			));
 	
 	// CashInIransit
+	ArrayOfTables = New Array();
+	Table1 = Parameters.DocumentDataTables.CashInTransit.Copy();
+	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
+	ArrayOfTables.Add(Table1);
+	
+	Table2 = Parameters.DocumentDataTables.CashInTransit_POS.Copy();
+	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
+	ArrayOfTables.Add(Table2);
+	
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.CashInTransit));
+		New Structure("RecordSet, WriteInTransaction",
+			PostingServer.JoinTables(ArrayOfTables,
+				"RecordType, Period, Company, BasisDocument, FromAccount, ToAccount, Currency, Amount, Key"),
+			Parameters.IsReposting));
 	
 	// AdvanceFromCustomers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AdvanceFromCustomers,

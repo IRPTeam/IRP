@@ -313,6 +313,18 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="f7f7cf2d-add2-41e8-86e2-cf67e4889221">
+      <name>POSAccount</name>
+      <synonym>
+        <key>en</key>
+        <value>POSAccount</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.CashAccounts</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="2434d324-00b7-4acc-847b-a51fc5c9af2e">
     <producedTypes>

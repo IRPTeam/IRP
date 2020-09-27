@@ -182,6 +182,48 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="775dd2bf-e9d6-4e4e-bfd6-18435bf95f97">
+    <name>BasisDocument</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.CashStatement</types>
+    </type>
+    <choiceParameterLinks>
+      <name>Filter.BusinessUnit</name>
+      <field>Document.CashStatement.Attribute.BusinessUnit</field>
+    </choiceParameterLinks>
+    <choiceParameterLinks>
+      <name>Filter.CashAccount</name>
+      <field>Document.CashStatement.Attribute.CashAccount</field>
+    </choiceParameterLinks>
+    <choiceParameterLinks>
+      <name>Filter.Company</name>
+      <field>Document.CashStatement.Attribute.Company</field>
+    </choiceParameterLinks>
+    <choiceParameters>
+      <name>Filter.Posted</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
+      </value>
+    </choiceParameters>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a68ee09b-438a-41a8-b65b-0b150dc8a38a">
+    <name>RealCashBalance</name>
+    <synonym>
+      <key>en</key>
+      <value>Real cash balance</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="5d50d2e5-a75f-4c1f-afa0-a1a909beb2fd">
     <name>DocumentForm</name>
     <synonym>

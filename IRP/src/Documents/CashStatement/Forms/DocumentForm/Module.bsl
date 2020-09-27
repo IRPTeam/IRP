@@ -139,6 +139,16 @@ Procedure FillTransactionsAtServer()
 EndProcedure
 
 &AtClient
+Procedure BasisDocumentOnChange(Item)
+	BasisDocumentOnChangeAtServer();
+EndProcedure
+
+&AtServer
+Procedure BasisDocumentOnChangeAtServer()
+	DocCashStatementServer.FillOnBasisDocument(Object);
+EndProcedure
+
+&AtClient
 Procedure PaymentListOnChange(Item, AddInfo = Undefined) Export
 	Return;
 EndProcedure

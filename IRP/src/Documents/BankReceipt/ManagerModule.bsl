@@ -45,9 +45,8 @@ Function GetQueryTextBankReceiptPaymentList()
 		|		WHEN BankReceiptPaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
 		|			THEN CASE
 		|				WHEN (VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
-		|						OR VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement))
-		|				AND
-		|				NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
+		|				OR VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement))
+		|				AND NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
 		|				AND
 		|					BankReceiptPaymentList.PlaningTransactionBasis.SendCurrency <> BankReceiptPaymentList.PlaningTransactionBasis.ReceiveCurrency
 		|					THEN BankReceiptPaymentList.PlaningTransactionBasis
@@ -60,12 +59,10 @@ Function GetQueryTextBankReceiptPaymentList()
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END
-		|	AND
-		|	NOT CASE
+		|	AND NOT CASE
 		|		WHEN (VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
-		|					OR VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement))
-		|		AND
-		|		NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
+		|		OR VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement))
+		|		AND NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
 		|		AND
 		|			BankReceiptPaymentList.PlaningTransactionBasis.SendCurrency <> BankReceiptPaymentList.PlaningTransactionBasis.ReceiveCurrency
 		|			THEN TRUE
@@ -85,21 +82,19 @@ Function GetQueryTextBankReceiptPaymentList()
 		|	BankReceiptPaymentList.AmountExchange AS AmountExchange,
 		|	CASE
 		|		WHEN (VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
-		|					OR VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement))
+		|		AND NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
 		|		AND
-		|		NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
-		|		AND
-		|			BankReceiptPaymentList.PlaningTransactionBasis.SendCurrency = BankReceiptPaymentList.PlaningTransactionBasis.ReceiveCurrency
+		|			BankReceiptPaymentList.PlaningTransactionBasis.SendCurrency = BankReceiptPaymentList.PlaningTransactionBasis.ReceiveCurrency)
+		|		OR VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement)
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS IsMoneyTransfer,
 		|	CASE
 		|		WHEN (VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
-		|					OR VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement))
+		|		AND NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
 		|		AND
-		|		NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
-		|		AND
-		|			BankReceiptPaymentList.PlaningTransactionBasis.SendCurrency <> BankReceiptPaymentList.PlaningTransactionBasis.ReceiveCurrency
+		|			BankReceiptPaymentList.PlaningTransactionBasis.SendCurrency <> BankReceiptPaymentList.PlaningTransactionBasis.ReceiveCurrency)
+		|		AND Not VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement)
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS IsMoneyExchange,

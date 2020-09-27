@@ -302,8 +302,8 @@ Procedure FillCheckBankCashDocuments(Object, CheckedAttributes) Export
 		CheckedAttributes.Add("PaymentList.PlaningTransactionBasis");
 		CheckedAttributes.Add("CurrencyExchange");	
 			
-	ElsIf Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder") Or
-		Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder") Then
+	ElsIf Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder") 
+		Or Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder") Then
 			
 		CheckedAttributes.Add("PaymentList.PlaningTransactionBasis");	
 		

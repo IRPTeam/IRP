@@ -57,14 +57,17 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 		|	AccountBalanceTurnovers.AmountReceipt AS Receipt
 		|FROM
 		|	AccumulationRegister.AccountBalance.Turnovers(&BegOfPeriod, &EndOfPeriod, Record,
-		|		Account.BusinessUnit = &BusinessUnit AND Company = &Company) AS AccountBalanceTurnovers";
+		|		Account.BusinessUnit = &BusinessUnit
+		|	AND Company = &Company) AS AccountBalanceTurnovers
+		|WHERE
+		|	AccountBalanceTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)";
 	
 	Query.SetParameter("BegOfPeriod", Object.BegOfPeriod);
 	Query.SetParameter("EndOfPeriod", Object.EndOfPeriod);
 	Query.SetParameter("BusinessUnit", Object.BusinessUnit);
 	Query.SetParameter("Company", Object.Company);
-	QueryResult = Query.Execute().Unload();
-	Object.CashTransactionList.Load(QueryResult);
+	CashTransactionList = Query.Execute().Unload();
+	Object.CashTransactionList.Load(CashTransactionList);
 	
 	Query = New Query;
 	Query.Text =
@@ -100,6 +103,21 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 			CurrenciesServer.CalculateAmount(Object, Row.Amount, Row.Key, Undefined);
 		EndIf; 
 	EndDo;
+	
+	RecalculateClosingBalance(Object);
+	
 EndProcedure
 
+
+Procedure RecalculateClosingBalance(Object)
+	Object.ClosingBalance = Object.OpeningBalance +
+			Object.CashTransactionList.Total("Receipt") - Object.CashTransactionList.Total("Expense");
+EndProcedure
+
+
+Procedure FillOnBasisDocument(Object, AddInfo = Undefined) Export
+
+	Object.OpeningBalance = Object.BasisDocument.ClosingBalance;
+	RecalculateClosingBalance(Object);
+EndProcedure
 #EndRegion

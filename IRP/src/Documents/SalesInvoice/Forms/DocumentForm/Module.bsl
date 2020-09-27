@@ -218,6 +218,16 @@ Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
+Procedure ItemListTaxAmountOnChange(Item)
+	DocSalesInvoiceClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListDontCalculateRowOnChange(Item)
+	DocSalesInvoiceClient.ItemListDontCalculateRowOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure ItemListStoreOnChange(Item)
 	DocSalesInvoiceClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure
@@ -450,7 +460,6 @@ Procedure SelectSalesOrdersContinueAtServer(Result, AdditionalParameters)
 	Settings.Insert("Rows", New Array());
 	Settings.Insert("CalculateSettings", New Structure());
 	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
-	AgreementInfo = Catalogs.Agreements.GetAgreementInfo(Object.Agreement);
 		
 	For Each ResultRow In Result Do
 		RowsByKey = Object.ItemList.FindRows(New Structure("Key", ResultRow.Key));

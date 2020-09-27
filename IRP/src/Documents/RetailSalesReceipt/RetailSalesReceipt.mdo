@@ -530,6 +530,18 @@
       <createOnInput>Use</createOnInput>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="5f154da9-c440-4260-a0a0-aeac7a3706ef">
+      <name>DontCalculateRow</name>
+      <synonym>
+        <key>en</key>
+        <value>Dont calculate row</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="0d32dd7b-16e6-4c0b-a360-865e3d47dc78">
     <producedTypes>

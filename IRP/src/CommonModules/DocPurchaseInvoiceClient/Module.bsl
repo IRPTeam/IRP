@@ -59,7 +59,7 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	#EndIf
 	
 	If ValueIsFilled(Object.Ref) Then
-		CurrenciesClient.SerFaceTable(Object, Form, AddInfo);
+		CurrenciesClient.SetSurfaceTable(Object, Form, AddInfo);
 	Else
 		CurrenciesClient.FullRefreshTable(Object, Form, AddInfo);
 	EndIf;
@@ -120,17 +120,11 @@ Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProc
 		CurrentData = Form.Items.ItemList.CurrentData;
 		If CurrentData <> Undefined Then
 			DocumentsClient.ItemListSelectionPutServerDataToAddInfo(Object, Form, AddInfo);
-			
-			MainTableData = New Structure();
-			MainTableData.Insert("Key"      , CurrentData.Key);
-			MainTableData.Insert("Currency" , Object.Currency);
-			
-			TaxesClient.OpenForm_ChangeTaxAmount(Object, 
-												 Form, 
-												 Item, 
-												 StandardProcessing,
-												 MainTableData,
-												 AddInfo);
+			Parameters = New Structure();
+			Parameters.Insert("CurrentData", CurrentData);
+			Parameters.Insert("Item"       , Item);
+			Parameters.Insert("Field"      , Field);
+			TaxesClient.ChangeTaxAmount2(Object, Form, Parameters, StandardProcessing, AddInfo);
 		EndIf;
 	EndIf; 
 EndProcedure
@@ -311,12 +305,48 @@ Procedure ItemListTotalAmountOnChange(Object, Form, Item, AddInfo = Undefined) E
 	CurrentData = Form.Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
-	EndIf;	
-	DocumentsClient.ItemListCalculateRowAmounts_TotalAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+	EndIf;
+	If Not CurrentData.DontCalculateRow Then
+		DocumentsClient.ItemListCalculateRowAmounts_TotalAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+	EndIf;
 EndProcedure
 
 Procedure ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
 	DocumentsClient.ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+EndProcedure	
+
+#EndRegion
+
+#Region TaxAmount
+
+Procedure ItemListTaxAmountOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;	
+	DocumentsClient.ItemListCalculateRowAmounts_TaxAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+EndProcedure
+
+Procedure ItemListTaxAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+	DocumentsClient.ItemListTaxAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+EndProcedure	
+
+#EndRegion
+
+#Region DontCalculateRow
+
+Procedure ItemListDontCalculateRowOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	If Not CurrentData.DontCalculateRow Then
+		DocumentsClient.ItemListCalculateRowAmounts_DontCalculateRowChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+	EndIf;
+EndProcedure
+
+Procedure ItemListDontCalculateRowPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+	DocumentsClient.ItemListDontCalculateRowPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
 EndProcedure	
 
 #EndRegion

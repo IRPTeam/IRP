@@ -224,6 +224,16 @@ Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
+Procedure ItemListTaxAmountOnChange(Item)
+	DocPurchaseOrderClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListDontCalculateRowOnChange(Item)
+	DocPurchaseOrderClient.ItemListDontCalculateRowOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure ItemListStoreOnChange(Item)
 	DocPurchaseOrderClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure
@@ -449,6 +459,7 @@ Procedure AddAttributesCreateFormControl()
 EndProcedure
 
 #EndRegion
+
 #Region ExternalCommands
 
 &AtClient

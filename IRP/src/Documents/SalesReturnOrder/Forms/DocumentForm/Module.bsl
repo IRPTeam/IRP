@@ -219,6 +219,16 @@ Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
+Procedure ItemListTaxAmountOnChange(Item)
+	DocSalesReturnOrderClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListDontCalculateRowOnChange(Item)
+	DocSalesReturnOrderClient.ItemListDontCalculateRowOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure ItemListStoreOnChange(Item, AddInfo = Undefined)
 	DocSalesReturnOrderClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure

@@ -7,7 +7,10 @@ Function GetCalculationSettings(Actions = Undefined, AddInfo = Undefined) Export
 	Actions.Insert("CalculateNetAmount");
 	Actions.Insert("CalculateTax");
 	Actions.Insert("CalculateTotalAmount");
+	#If MobileClient Then
 	Actions.Insert("UpdateInfoString");
+	#EndIf
+	
 	Return Actions;
 EndFunction
 
@@ -50,7 +53,7 @@ EndProcedure
 
 Function GetColumnNames_ItemList(ArrayOfTaxInfo = Undefined) Export
 	ColumnNames = "Key, Unit, Price, PriceType, ItemKey, Quantity, OffersAmount, 
-				  |TotalAmount, NetAmount, TaxAmount, Info, Barcode";
+				  |TotalAmount, NetAmount, TaxAmount, Info, Barcode, DontCalculateRow";
 	If ArrayOfTaxInfo <> Undefined Then
 		For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
 			ColumnNames = ColumnNames + "," +	ItemOfTaxInfo.Name;
@@ -151,9 +154,15 @@ Function CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Un
 		For Each ItemRow In ItemRows Do
 			CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo, AddInfo);
 		EndDo;
-		Result.ItemList      = Object.ItemList;
-		Result.TaxList       = Object.TaxList;
-		Result.SpecialOffers = Object.SpecialOffers;		
+		If Object.Property("ItemList") Then
+			Result.ItemList      = Object.ItemList;
+		EndIf;
+		If Object.Property("TaxList") Then
+			Result.TaxList       = Object.TaxList;
+		EndIf;
+		If Object.Property("SpecialOffers") Then
+			Result.SpecialOffers = Object.SpecialOffers;
+		EndIf;		
 	EndIf;
 	
 	#If ThinClient Then
@@ -176,7 +185,12 @@ Function CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Un
 EndFunction
 
 Procedure CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo = Undefined, AddInfo = Undefined) Export
-	
+	IsCalculatedRow = True;
+	If CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "DontCalculateRow")
+		And ItemRow.DontCalculateRow Then
+			IsCalculatedRow = False;
+	EndIf;
+			
 	If Actions.Property("UpdateUnit") Then
 		UpdateUnit(Object, ItemRow, AddInfo);
 	EndIf;
@@ -206,52 +220,52 @@ Procedure CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo = Undefined
 	
 	If CheckingStructure.PriceIncludeTax <> Undefined Then
 		If Object.PriceIncludeTax Then
-			If Actions.Property("CalculateTotalAmount") Then
+			If Actions.Property("CalculateTotalAmount") And IsCalculatedRow Then
 				CalculateTotalAmount_PriceIncludeTax(Object, ItemRow, AddInfo);
 			EndIf;
 			
-			If Actions.Property("CalculateTax") Then
+			If Actions.Property("CalculateTax") And IsCalculatedRow Then
 				CalculateTax_PriceIncludeTax(Object, ItemRow, ArrayOfTaxInfo, AddInfo);
 			EndIf;
 			
-			If Actions.Property("CalculateNetAmount") Then
+			If Actions.Property("CalculateNetAmount") And IsCalculatedRow Then
 				CalculateNetAmount_PriceIncludeTax(Object, ItemRow, AddInfo);
 			EndIf;
 		Else
-			If Actions.Property("CalculateNetAmount") Then
+			If Actions.Property("CalculateNetAmount") And IsCalculatedRow Then
 				CalculateNetAmount_PriceNotIncludeTax(Object, ItemRow, AddInfo);
 			EndIf;
 			
-			If Actions.Property("CalculateTax") Then
+			If Actions.Property("CalculateTax") And IsCalculatedRow Then
 				CalculateTax_PriceNotIncludeTax(Object, ItemRow, ArrayOfTaxInfo, AddInfo);
 			EndIf;
 			
-			If Actions.Property("CalculateTotalAmount") Then
+			If Actions.Property("CalculateTotalAmount") And IsCalculatedRow Then
 				CalculateTotalAmount_PriceNotIncludeTax(Object, ItemRow, AddInfo);
 			EndIf;
 		EndIf;
 	Else
-		If Actions.Property("CalculateTax") Then
+		If Actions.Property("CalculateTax") And IsCalculatedRow Then
 			CalculateTaxManualPriority(Object, ItemRow, False, ArrayOfTaxInfo, False, AddInfo);
 		EndIf;
 		
-		If Actions.Property("CalculateTotalAmount") Then
+		If Actions.Property("CalculateTotalAmount") And IsCalculatedRow Then
 			CalculateTotalAmount_PriceNotIncludeTax(Object, ItemRow, AddInfo);
 		EndIf;
 		
-		If Actions.Property("CalculateTaxByNetAmount") Then
+		If Actions.Property("CalculateTaxByNetAmount") And IsCalculatedRow Then
 			CalculateTaxManualPriority(Object, ItemRow, False, ArrayOfTaxInfo, False, AddInfo);
 		EndIf;
 		
-		If Actions.Property("CalculateTaxByTotalAmount") Then
+		If Actions.Property("CalculateTaxByTotalAmount") And IsCalculatedRow Then
 			CalculateTaxManualPriority(Object, ItemRow, True, ArrayOfTaxInfo, False, AddInfo);
 		EndIf;
 		
-		If Actions.Property("CalculateNetAmountByTotalAmount") Then
+		If Actions.Property("CalculateNetAmountByTotalAmount") And IsCalculatedRow Then
 			CalculateNetAmount_PriceIncludeTax(Object, ItemRow, AddInfo);
 		EndIf;
 		
-		If Actions.Property("CalculateTotalAmountByNetAmount") Then
+		If Actions.Property("CalculateTotalAmountByNetAmount") And IsCalculatedRow Then
 			CalculateTotalAmount_PriceNotIncludeTax(Object, ItemRow, AddInfo);
 		EndIf;
 	EndIf;
@@ -266,7 +280,6 @@ Procedure CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo = Undefined
 	If Actions.Property("UpdateBarcode") Then
 		UpdateBarcode(Object, ItemRow, AddInfo);
 	EndIf;
-	
 EndProcedure
 
 Function ChangePriceType(Object, ItemRow, ChangePriceTypeSettings, AddInfo = Undefined)
@@ -723,7 +736,7 @@ Function DeleteRowsInDependedTable(Object, DependedTableName, MainTableKey, Cach
 EndFunction
 
 Function IsPricesChanged(Object, Form, Settings, AddInfo = Undefined) Export
-	ListCache = DataCollectionToArrayOfStructures(Object.ItemList, "Key, Price, PriceType, ItemKey, Unit");
+	ListCache = DataCollectionToArrayOfStructures(Object.ItemList, GetColumnNames_ItemList());
 	
 	CalculationSettings = New Structure();
 	PriceDate = GetPriceDateByRefAndDate(Object.Ref, Object.Date);

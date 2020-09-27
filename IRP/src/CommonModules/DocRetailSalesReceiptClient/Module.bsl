@@ -294,7 +294,9 @@ Procedure ItemListTotalAmountOnChange(Object, Form, Item, AddInfo = Undefined) E
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;	
-	DocumentsClient.ItemListCalculateRowAmounts_TotalAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+	If Not CurrentData.DontCalculateRow Then
+		DocumentsClient.ItemListCalculateRowAmounts_TotalAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+	EndIf;
 EndProcedure
 
 Procedure ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
@@ -315,6 +317,24 @@ EndProcedure
 
 Procedure ItemListTaxAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
 	DocumentsClient.ItemListTaxAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+EndProcedure	
+
+#EndRegion
+
+#Region DontCalculateRow
+
+Procedure ItemListDontCalculateRowOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	If Not CurrentData.DontCalculateRow Then
+		DocumentsClient.ItemListCalculateRowAmounts_DontCalculateRowChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+	EndIf;
+EndProcedure
+
+Procedure ItemListDontCalculateRowPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+	DocumentsClient.ItemListDontCalculateRowPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
 EndProcedure	
 
 #EndRegion

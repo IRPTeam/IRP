@@ -2185,8 +2185,10 @@ Procedure TableOnStartEdit(Object, Form, DataPath, Item, NewRow, Clone, AddInfo 
 		EndIf;
 	EndIf;
 	
-	If Not ValueIsFilled(CurrentData.PriceType) Then
-		CurrentData.PriceType = Form.CurrentPriceType;
+	If CurrentData.Property("PriceType") Then
+		If Not ValueIsFilled(CurrentData.PriceType) Then
+			CurrentData.PriceType = Form.CurrentPriceType;
+		EndIf;
 	EndIf;
 	
 	If CurrentData.Property("DeliveryDate")

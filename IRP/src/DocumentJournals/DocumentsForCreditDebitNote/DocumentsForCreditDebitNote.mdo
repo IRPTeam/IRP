@@ -5,11 +5,7 @@
     <listType typeId="5a160d9c-104b-4d8d-8875-edd005ba3645" valueTypeId="4855ec57-0f68-4d9a-a805-82dfc20f736e"/>
     <managerType typeId="5f5ffb67-1bcd-4a05-b1e2-f92aecd1d81e" valueTypeId="bf4e1301-2150-43fc-85c3-c77815b5b0ad"/>
   </producedTypes>
-  <name>DocumentsForDebitNote</name>
-  <synonym>
-    <key>en</key>
-    <value>Documents for debit note</value>
-  </synonym>
+  <name>DocumentsForCreditDebitNote</name>
   <useStandardCommands>true</useStandardCommands>
   <registeredDocuments>Document.PurchaseInvoice</registeredDocuments>
   <registeredDocuments>Document.SalesReturn</registeredDocuments>

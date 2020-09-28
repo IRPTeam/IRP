@@ -2,131 +2,169 @@
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
-	DocCreditNoteServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	DocCreditDebitNoteServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	SetBasisDocumentReadOnly(CurrentObject, ThisObject);
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
-	DocCreditNoteServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	DocCreditDebitNoteServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetBasisDocumentReadOnly(CurrentObject, ThisObject);
 EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LibraryLoader.RegisterLibrary(Object, ThisObject, Currencies_GetDeclaration(Object, ThisObject));	
-	DocCreditNoteServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
-	SetConditionalAppearance();
+	DocCreditDebitNoteServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	If Parameters.Key.IsEmpty() Then
+		SetBasisDocumentReadOnly(Object, ThisObject);
+	EndIf;
 EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
-	DocCreditNoteClient.OnOpen(Object, ThisObject, Cancel);
+	DocCreditDebitNoteClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
-&AtServer
-Procedure SetConditionalAppearance() Export
-	Return;
+&AtClientAtServerNoContext
+Procedure SetBasisDocumentReadOnly(Object, Form, CurrentData = Undefined)
+	If CurrentData <> Undefined Then
+		If ValueIsFilled(CurrentData.Agreement) Then
+			CurrentData.BasisDocumentReadOnly = IsBasisDocumentReadOnly(CurrentData.Agreement);
+		Else
+			CurrentData.BasisDocumentReadOnly = False;
+		EndIf;  
+	Else
+		For Each Row In Form.Object.Transactions Do
+			If ValueIsFilled(Row.Agreement) Then
+				Row.BasisDocumentReadOnly = IsBasisDocumentReadOnly(Row.Agreement);
+			Else
+				Row.BasisDocumentReadOnly = False;
+			EndIf;	
+		EndDo;
+	EndIf;
+EndProcedure
+
+&AtServerNoContext
+Function IsBasisDocumentReadOnly(Agreement)
+	Return ServiceSystemServer.GetCompositeObjectAttribute(Agreement, "ApArPostingDetail") <>
+		PredefinedValue("Enum.ApArPostingDetail.ByDocuments");
+EndFunction
+
+#EndRegion
+
+#Region _Date
+
+&AtClient
+Procedure DateOnChange(Item, AddInfo = Undefined) Export
+	DocCreditDebitNoteClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
 
-&AtClient
-Procedure DateOnChange(Item, AddInfo = Undefined) Export
-	DocCreditNoteClient.DateOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#Region ItemCompany
+#Region Company
 
 &AtClient
 Procedure CompanyOnChange(Item, AddInfo = Undefined) Export
-	DocCreditNoteClient.CompanyOnChange(Object, ThisObject, Item);
+	DocCreditDebitNoteClient.CompanyOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCreditNoteClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocCreditDebitNoteClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
-	DocCreditNoteClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	DocCreditDebitNoteClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
 
-#Region ItemPartner
+#Region Partner
 
 &AtClient
 Procedure TransactionsPartnerOnChange(Item, AddInfo = Undefined) Export
-	DocCreditNoteClient.TransactionsPartnerOnChange(Object, ThisObject, Item);	
+	DocCreditDebitNoteClient.TransactionsPartnerOnChange(Object, ThisObject, Item);
+	CurrentData = Items.Transactions.CurrentData;
+	If CurrentData <> Undefined Then
+		SetBasisDocumentReadOnly(Object, ThisObject, CurrentData);
+	EndIf;
 EndProcedure
 
 &AtClient
-Procedure TransactionsOnActivateCell(Item)
-	DocCreditNoteClient.TransactionsOnActivateCell(Object, ThisObject, Item);
+Procedure TransactionsPartnerStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCreditDebitNoteClient.TransactionsPartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure TransactionsPartnerEditTextChange(Item, Text, StandardProcessing)
+	DocCreditDebitNoteClient.TransactionsPartnerEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
+
+#Region Agreement
+
+&AtClient
+Procedure TransactionsAgreementOnChange(Item, AddInfo = Undefined) Export
+	DocCreditDebitNoteClient.TransactionsAgreementOnChange(Object, ThisObject, Item);
+	CurrentData = Items.Transactions.CurrentData;
+	If CurrentData <> Undefined Then
+		SetBasisDocumentReadOnly(Object, ThisObject, CurrentData);
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure TransactionsAgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCreditDebitNoteClient.TransactionsAgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure TransactionsAgreementEditTextChange(Item, Text, StandardProcessing)
+	DocCreditDebitNoteClient.TransactionsAgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region LegalName
+
+&AtClient
+Procedure TransactionsLegalNameOnChange(Item, AddInfo = Undefined) Export
+	DocCreditDebitNoteClient.TransactionsLegalNameOnChange(Object, ThisObject, Item);
+	CurrentData = Items.Transactions.CurrentData;
+	If CurrentData <> Undefined Then
+		SetBasisDocumentReadOnly(Object, ThisObject, CurrentData);
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure TransactionsLegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCreditDebitNoteClient.TransactionsLegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure TransactionsLegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocCreditDebitNoteClient.TransactionsLegalNameEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region BasisDocument
+
+&AtClient
+Procedure TransactionsBasisDocumentStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCreditDebitNoteClient.TransactionsBasisDocumentStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region Transaction
 
 &AtClient
 Procedure TransactionsOnStartEdit(Item, NewRow, Clone)
 	UserSettingsClient.TableOnStartEdit(Object, ThisObject, "Object.Transactions", Item, NewRow, Clone);
 EndProcedure
-
-#Region ItemTransactionsPartner
-
-&AtClient
-Procedure TransactionsPartnerStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCreditNoteClient.TransactionsPartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure TransactionsPartnerEditTextChange(Item, Text, StandardProcessing)
-	DocCreditNoteClient.TransactionsPartnerEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region ItemTransactionsBasisDocument
-
-&AtClient
-Procedure TransactionsBasisDocumentOnChange(Item, AddInfo = Undefined) Export
-	DocCreditNoteClient.TransactionsBasisDocumentOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region ItemDescription
-
-&AtClient
-Procedure DescriptionClick(Item, StandardProcessing)
-	DocCreditNoteClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region GroupTitleDecorations
-
-&AtClient
-Procedure DecorationGroupTitleCollapsedPictureClick(Item)
-	DocCreditNoteClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure DecorationGroupTitleCollapsedLabelClick(Item)
-	DocCreditNoteClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
-	DocCreditNoteClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
-	DocCreditNoteClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
 
 &AtClient
 Procedure TransactionsOnChange(Item)
@@ -136,6 +174,41 @@ Procedure TransactionsOnChange(Item)
 		EndIf;
 	EndDo;
 EndProcedure
+
+#EndRegion
+
+#Region ItemDescription
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	DocCreditDebitNoteClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region GroupTitleDecorations
+
+&AtClient
+Procedure DecorationGroupTitleCollapsedPictureClick(Item)
+	DocCreditDebitNoteClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleCollapsedLabelClick(Item)
+	DocCreditDebitNoteClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
+	DocCreditDebitNoteClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
+	DocCreditDebitNoteClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
 
 #Region Currencies
 
@@ -322,37 +395,3 @@ EndProcedure
 
 #EndRegion
 
-#Region Agreement
-&AtClient
-Procedure TransactionsAgreementOnChange(Item, AddInfo = Undefined) Export
-	DocCreditNoteClient.TransactionsAgreementOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure TransactionsAgreementStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCreditNoteClient.TransactionsAgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure TransactionsAgreementEditTextChange(Item, Text, StandardProcessing)
-	DocCreditNoteClient.TransactionsAgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-#EndRegion
-
-#Region LegalName
-&AtClient
-Procedure TransactionsLegalNameOnChange(Item, AddInfo = Undefined) Export
-	DocCreditNoteClient.TransactionsLegalNameOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure TransactionsLegalNameStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCreditNoteClient.TransactionsLegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure TransactionsLegalNameEditTextChange(Item, Text, StandardProcessing)
-	DocCreditNoteClient.TransactionsLegalNameEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion

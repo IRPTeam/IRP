@@ -23,7 +23,7 @@ Function CreateFilterByParameters(Parameters) Export
 		|	Obj.Ref.Agreement AS Agreement,
 		|	Obj.Ref.DocumentAmount AS DocumentAmount
 		|FROM
-		|	DocumentJournal.DocumentsForDebitNote AS Obj
+		|	DocumentJournal.DocumentsForCreditDebitNote AS Obj
 		|WHERE
 		|	True");
 	

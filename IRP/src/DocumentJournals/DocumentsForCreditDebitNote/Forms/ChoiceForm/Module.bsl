@@ -12,6 +12,6 @@ EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	JorDocumentsForOutgoingPaymentServer.OnCreateAtServer(Cancel, StandardProcessing, ThisObject, Parameters);
+	JorDocumentsForDebitNoteServer.OnCreateAtServer(Cancel, StandardProcessing, ThisObject, Parameters);
 EndProcedure
 

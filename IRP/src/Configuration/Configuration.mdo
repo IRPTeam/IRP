@@ -212,10 +212,8 @@
   <commonModules>CommonModule.DocCashTransferOrderServer</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionClient</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionServer</commonModules>
-  <commonModules>CommonModule.DocCreditNoteClient</commonModules>
-  <commonModules>CommonModule.DocCreditNoteServer</commonModules>
-  <commonModules>CommonModule.DocDebitNoteClient</commonModules>
-  <commonModules>CommonModule.DocDebitNoteServer</commonModules>
+  <commonModules>CommonModule.DocCreditDebitNoteClient</commonModules>
+  <commonModules>CommonModule.DocCreditDebitNoteServer</commonModules>
   <commonModules>CommonModule.DocExpenseClient</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptServer</commonModules>
@@ -535,7 +533,7 @@
   <documents>Document.CashStatement</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
-  <documentJournals>DocumentJournal.DocumentsForDebitNote</documentJournals>
+  <documentJournals>DocumentJournal.DocumentsForCreditDebitNote</documentJournals>
   <enums>Enum.AgreementKinds</enums>
   <enums>Enum.AgreementTypes</enums>
   <enums>Enum.ApArPostingDetail</enums>

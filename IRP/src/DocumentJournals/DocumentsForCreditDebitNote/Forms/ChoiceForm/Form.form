@@ -600,7 +600,6 @@
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
   </handlers>
-  <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
   <autoFillCheck>true</autoFillCheck>
@@ -630,8 +629,8 @@
 	DebitNoteDocuments.Ref.DocumentAmount AS DocumentAmount,
 	DebitNoteDocuments.Ref.Agreement AS Agreement
 FROM
-	DocumentJournal.DocumentsForDebitNote AS DebitNoteDocuments</queryText>
-      <mainTable>DocumentJournal.DocumentsForDebitNote</mainTable>
+	DocumentJournal.DocumentsForCreditDebitNote AS DebitNoteDocuments</queryText>
+      <mainTable>DocumentJournal.DocumentsForCreditDebitNote</mainTable>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>

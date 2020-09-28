@@ -1,3 +1,8 @@
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	JorDocumentsServer.OnCreateAtServer(Cancel, StandardProcessing, ThisObject, Parameters);
+EndProcedure
+
 &AtClient
 Procedure CommandSelect(Command)
 	If Items.List.CurrentData <> Undefined Then
@@ -9,9 +14,3 @@ EndProcedure
 Procedure ListSelection(Item, RowSelected, Field, StandardProcessing)
 	Close(Items.List.CurrentData.Ref);
 EndProcedure
-
-&AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	JorDocumentsForOutgoingPaymentServer.OnCreateAtServer(Cancel, StandardProcessing, ThisObject, Parameters);
-EndProcedure
-

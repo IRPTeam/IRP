@@ -294,8 +294,6 @@
   <commonModules>CommonModule.IntegrationClientServer</commonModules>
   <commonModules>CommonModule.IntegrationServer</commonModules>
   <commonModules>CommonModule.IntegrationServerReuse</commonModules>
-  <commonModules>CommonModule.JorDocumentsForIncomingPaymentServer</commonModules>
-  <commonModules>CommonModule.JorDocumentsForOutgoingPaymentServer</commonModules>
   <commonModules>CommonModule.LibraryLoader</commonModules>
   <commonModules>CommonModule.Localization</commonModules>
   <commonModules>CommonModule.LocalizationClient</commonModules>
@@ -334,7 +332,8 @@
   <commonModules>CommonModule.UsersEvent</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.JorDocumentsForDebitNoteServer</commonModules>
+  <commonModules>CommonModule.JorDocumentsServer</commonModules>
+  <commonModules>CommonModule.JorDocumentsClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>

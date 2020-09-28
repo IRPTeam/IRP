@@ -200,7 +200,6 @@ EndProcedure
 #Region BasisDocument
 
 Procedure TransactionsBasisDocumentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	
 	StandardProcessing = False;
 	
 	CurrentData = Form.Items.Transactions.CurrentData;
@@ -208,39 +207,18 @@ Procedure TransactionsBasisDocumentStartChoice(Object, Form, Item, ChoiceData, S
 		Return;
 	EndIf;
 	
-	TransferParameters = New Structure;
-	TransferParameters.Insert("Unmarked", True);
-	If ValueIsFilled(CurrentData.Partner) Then
-		TransferParameters.Insert("Partner", CurrentData.Partner);
+	Parameters = New Structure();
+	Parameters.Insert("Filter", New Structure());
+	If Not ValueIsFilled(CurrentData.Agreement) Then
+		Parameters.Filter.Insert("Agreement_ApArPostingDetail", PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
 	EndIf;
-	If ValueIsFilled(CurrentData.LegalName) Then
-		TransferParameters.Insert("LegalName", CurrentData.LegalName);
-	EndIf;
-	If ValueIsFilled(CurrentData.Agreement) Then
-		TransferParameters.Insert("Agreement", CurrentData.Agreement);
-	Else
-		TransferParameters.Insert("Agreement_ApArPostingDetail", 
-		PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
-	EndIf;
-	TransferParameters.Insert("Posted", True);
 	
-	FilterStructure = JorDocumentsForDebitNoteServer.CreateFilterByParameters(TransferParameters);
-	FormParameters = New Structure("CustomFilter", FilterStructure);
+	Parameters.Insert("FilterFromCurrentData", "Partner, LegalName, Agreement");
 	
-	NotifyChoiceFormCloseParameters = New Structure();
-	NotifyChoiceFormCloseParameters.Insert("Form", Form);
-	
-	NotifyChoiceFormClose = New NotifyDescription("TransactionsBasisDocumentStartChoiceEnd",
-				ThisObject, NotifyChoiceFormCloseParameters);
-	
-	OpenForm("DocumentJournal.DocumentsForCreditDebitNote.Form.ChoiceForm",
-		FormParameters,
-		Item,
-		Form.UUID,
-		,
-		Form.URL,
-		NotifyChoiceFormClose,
-		FormWindowOpeningMode.LockWholeInterface);
+	Notify = New NotifyDescription("TransactionsBasisDocumentStartChoiceEnd", ThisObject, New Structure("Form", Form));
+	Parameters.Insert("Notify", Notify);
+	Parameters.Insert("TableName", "DocumentsForCreditDebitNote");
+	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
 EndProcedure
 
 Procedure TransactionsBasisDocumentStartChoiceEnd(Result, AdditionalParameters) Export

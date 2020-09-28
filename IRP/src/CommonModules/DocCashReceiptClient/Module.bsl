@@ -337,39 +337,25 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 EndProcedure
 
 Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	
 	StandardProcessing = False;
 	
-	TransferParameters = New Structure;
-	TransferParameters.Insert("Unmarked", True);
-	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Partner) Then
-		TransferParameters.Insert("Partner", Form.Items.PaymentList.CurrentData.Partner);
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
 	EndIf;
+	
+	Parameters = New Structure();
+	Parameters.Insert("Filter", New Structure());
 	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Payer) Then
-		TransferParameters.Insert("LegalName", Form.Items.PaymentList.CurrentData.Payer);
+		Parameters.Filter.Insert("LegalName", Form.Items.PaymentList.CurrentData.Payer);
 	EndIf;
-	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Agreement) Then
-		TransferParameters.Insert("Agreement", Form.Items.PaymentList.CurrentData.Agreement);
-	EndIf;
-	TransferParameters.Insert("Posted", True);
 	
-	FilterStructure = JorDocumentsForIncomingPaymentServer.CreateFilterByParameters(TransferParameters);
-	FormParameters = New Structure("CustomFilter", FilterStructure);
+	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
 	
-	NotifyChoiceFormCloseParameters = New Structure();
-	NotifyChoiceFormCloseParameters.Insert("Form", Form);
-	
-	NotifyChoiceFormClose = New NotifyDescription("PaymentListBasisDocumentStartChoiceEnd", 
-			ThisObject, NotifyChoiceFormCloseParameters);
-	
-	OpenForm("DocumentJournal.DocumentsForIncomingPayment.Form.ChoiceForm",
-		FormParameters,
-		Item,
-		Form.UUID,
-		,
-		Form.URL,
-		NotifyChoiceFormClose,
-		FormWindowOpeningMode.LockWholeInterface);
+	Notify = New NotifyDescription("PaymentListBasisDocumentStartChoiceEnd", ThisObject, New Structure("Form", Form));
+	Parameters.Insert("Notify", Notify);
+	Parameters.Insert("TableName", "DocumentsForIncomingPayment");
+	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
 EndProcedure
 
 Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) Export

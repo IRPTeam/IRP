@@ -1,21 +1,38 @@
-Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 
-	CustomFilter = Undefined;
-	If Parameters.Property("CustomFilter", CustomFilter) Then
-		Form.List.CustomQuery = True;
-		Form.List.QueryText = CustomFilter.QueryText;
-		For Each QueryParameter In CustomFilter.QueryParameters Do
-			Form.List.Parameters.SetParameterValue(QueryParameter.Key, QueryParameter.Value);
+Procedure BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters) Export
+	TransferParameters = New Structure();
+	TransferParameters.Insert("Unmarked", True);
+	TransferParameters.Insert("Posted", True);
+	If Parameters.Property("Filter") Then
+		For Each KeyValue In Parameters.Filter Do
+			TransferParameters.Insert(KeyValue.Key, KeyValue.Value);
 		EndDo;
 	EndIf;
+	ArrayOfFilterFromCurrentData = StrSplit(Parameters.FilterFromCurrentData, ",");
+	For Each ItemOfFilterFromCurrentData In ArrayOfFilterFromCurrentData Do
+		If ValueIsFilled(CurrentData[TrimAll(ItemOfFilterFromCurrentData)]) Then
+			TransferParameters.Insert(ItemOfFilterFromCurrentData, CurrentData[TrimAll(ItemOfFilterFromCurrentData)]);
+		EndIf;
+	EndDo;
+		
+	FilterStructure = CreateFilterByParameters(TransferParameters, Parameters.TableName);
+	FormParameters = New Structure("CustomFilter", FilterStructure);
+	
+	OpenForm("DocumentJournal." + Parameters.TableName + ".Form.ChoiceForm",
+		FormParameters,
+		Item,
+		Form.UUID,
+		,
+		Form.URL,
+		Parameters.Notify,
+		FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
-Function CreateFilterByParameters(Parameters) Export
+Function CreateFilterByParameters(Parameters, TableName)
 	
 	QueryParameters = New Structure;
 	QueryTextArray = New Array;
-	
-	QueryTextArray.Add("SELECT ALLOWED
+	QueryText = "SELECT ALLOWED
 		|	Obj.Ref,
 		|	Obj.Ref.Company AS Company,
 		|	Obj.Ref.Partner AS Partner,
@@ -23,10 +40,10 @@ Function CreateFilterByParameters(Parameters) Export
 		|	Obj.Ref.Agreement AS Agreement,
 		|	Obj.Ref.DocumentAmount AS DocumentAmount
 		|FROM
-		|	DocumentJournal.DocumentsForCreditDebitNote AS Obj
+		|	DocumentJournal.%1 AS Obj
 		|WHERE
-		|	True");
-	
+		|	True";
+	QueryTextArray.Add(StrTemplate(QueryText,TableName));
 	If Parameters.Property("Type") Then
 		QueryParameters.Insert("Type", Parameters.Type);
 		QueryTextArray.Add("

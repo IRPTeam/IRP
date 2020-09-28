@@ -646,7 +646,7 @@ FROM
 		FROM
 			InformationRegister.SharedReportOptions AS SharedReportOptions
 		WHERE
-			(SharedReportOptions.User = UNDEFINED
+			(SharedReportOptions.User = Value(Catalog.Users.EmptyRef)
 			OR SharedReportOptions.User = &amp;Author)
 			AND SharedReportOptions.ReportOption.ObjectKey = &amp;ObjectKey
 		GROUP BY

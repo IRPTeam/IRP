@@ -38,14 +38,61 @@ EndProcedure
 
 #EndRegion
 
-Procedure TransactionsBasisDocumentOnChange(Object, Form, Item) Export
-	CurrentRow = Form.Items.Transactions.CurrentData;
-	If CurrentRow <> Undefined Then
-		CurrentRow.Partner = ServiceSystemServer.GetCompositeObjectAttribute(CurrentRow.BasisDocument, "Partner");
-		CurrentRow.Agreement = ServiceSystemServer.GetCompositeObjectAttribute(CurrentRow.BasisDocument, "Agreement");
-		CurrentRow.Currency = ServiceSystemServer.GetCompositeObjectAttribute(CurrentRow.BasisDocument, "Currency");
-		CurrentRow.LegalName = ServiceSystemServer.GetCompositeObjectAttribute(CurrentRow.BasisDocument, "LegalName");
-	EndIf;	
+Procedure TransactionsBasisDocumentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	
+	StandardProcessing = False;
+	
+	CurrentData = Form.Items.Transactions.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	TransferParameters = New Structure;
+	TransferParameters.Insert("Unmarked", True);
+	If ValueIsFilled(CurrentData.Partner) Then
+		TransferParameters.Insert("Partner", CurrentData.Partner);
+	EndIf;
+	If ValueIsFilled(CurrentData.LegalName) Then
+		TransferParameters.Insert("LegalName", CurrentData.LegalName);
+	EndIf;
+	If ValueIsFilled(CurrentData.Agreement) Then
+		TransferParameters.Insert("Agreement", CurrentData.Agreement);
+	Else
+		TransferParameters.Insert("Agreement_ApArPostingDetail", 
+		PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
+	EndIf;
+	TransferParameters.Insert("Posted", True);
+	
+	FilterStructure = JorDocumentsForDebitNoteServer.CreateFilterByParameters(TransferParameters);
+	FormParameters = New Structure("CustomFilter", FilterStructure);
+	
+	NotifyChoiceFormCloseParameters = New Structure();
+	NotifyChoiceFormCloseParameters.Insert("Form", Form);
+	
+	NotifyChoiceFormClose = New NotifyDescription("TransactionsBasisDocumentStartChoiceEnd",
+				ThisObject, NotifyChoiceFormCloseParameters);
+	
+	OpenForm("DocumentJournal.DocumentsForDebitNote.Form.ChoiceForm",
+		FormParameters,
+		Item,
+		Form.UUID,
+		,
+		Form.URL,
+		NotifyChoiceFormClose,
+		FormWindowOpeningMode.LockWholeInterface);
+EndProcedure
+
+Procedure TransactionsBasisDocumentStartChoiceEnd(Result, AdditionalParameters) Export
+	If ValueIsFilled(Result) Then
+		CurrentData = AdditionalParameters.Form.Items.Transactions.CurrentData;
+		If CurrentData <> Undefined Then
+			CurrentData.BasisDocument = Result;
+			CurrentData.Partner = ServiceSystemServer.GetCompositeObjectAttribute(Result   , "Partner");
+			CurrentData.Agreement = ServiceSystemServer.GetCompositeObjectAttribute(Result , "Agreement");
+			CurrentData.Currency = ServiceSystemServer.GetCompositeObjectAttribute(Result  , "Currency");
+			CurrentData.LegalName = ServiceSystemServer.GetCompositeObjectAttribute(Result , "LegalName");
+		EndIf;
+	EndIf;
 EndProcedure
 
 #Region ItemTransactionsPartner
@@ -139,7 +186,9 @@ Procedure TransactionsAgreementOnChange(Object, Form, Item = Undefined) Export
 	
 	CurrentData.Currency = AgreementInfo.Currency;
 	
-	If AgreementInfo.ApArPostingDetail <> PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
+	If AgreementInfo.ApArPostingDetail <> PredefinedValue("Enum.ApArPostingDetail.ByDocuments")
+		Or CurrentData.Agreement <> 
+		ServiceSystemServer.GetCompositeObjectAttribute(CurrentData.BasisDocument, "Agreement") Then
 		CurrentData.BasisDocument = Undefined;
 	EndIf;
 EndProcedure
@@ -193,26 +242,6 @@ Procedure TransactionsAgreementTextChange(Object, Form, Item, Text, StandardProc
 EndProcedure
 
 #EndRegion
-	
-Procedure TransactionsOnActivateCell(Object, Form, Item) Export
-	CurrentData = Form.Items.Transactions.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	If Upper(Item.CurrentItem.Name) <> Upper("TransactionsBasisDocument") Then
-		Return;
-	EndIf;
-	If Not ValueIsFilled(CurrentData.Agreement) Then
-		Return;
-	EndIf;
-		
-	AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
-	If AgreementInfo.ApArPostingDetail = PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
-		Form.Items[Item.CurrentItem.Name].ReadOnly = False;
-	Else
-		Form.Items[Item.CurrentItem.Name].ReadOnly = True;
-	EndIf;
-EndProcedure
 
 #Region LegalName
 
@@ -250,6 +279,5 @@ Procedure TransactionsLegalNameEditTextChange(Object, Form, Item, Text, Standard
 	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, 
 				ArrayOfFilters, AdditionalParameters);
 EndProcedure
-#EndRegion
 
-	
+#EndRegion

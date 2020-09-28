@@ -577,62 +577,6 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>TransactionsBasisDocument</name>
-          <id>222</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Transactions.BasisDocument</segments>
-            </paths>
-          </dataPath>
-          <handlers>
-            <event>OnChange</event>
-            <name>TransactionsBasisDocumentOnChange</name>
-          </handlers>
-          <extendedTooltip>
-            <name>TransactionsBasisDocumentExtendedTooltip</name>
-            <id>224</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <contextMenu>
-            <name>TransactionsBasisDocumentContextMenu</name>
-            <id>223</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <autoFill>true</autoFill>
-          </contextMenu>
-          <type>InputField</type>
-          <editMode>Enter</editMode>
-          <showInHeader>true</showInHeader>
-          <headerHorizontalAlign>Left</headerHorizontalAlign>
-          <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:InputFieldExtInfo">
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <wrap>true</wrap>
-            <chooseType>true</chooseType>
-            <typeDomainEnabled>true</typeDomainEnabled>
-            <textEdit>true</textEdit>
-          </extInfo>
-        </items>
-        <items xsi:type="form:FormField">
           <name>TransactionsPartner</name>
           <id>47</id>
           <visible>true</visible>
@@ -822,6 +766,61 @@
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>TransactionsBasisDocument</name>
+          <id>222</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.Transactions.BasisDocument</segments>
+            </paths>
+          </dataPath>
+          <extendedTooltip>
+            <name>TransactionsBasisDocumentExtendedTooltip</name>
+            <id>224</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>TransactionsBasisDocumentContextMenu</name>
+            <id>223</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>TransactionsBasisDocumentStartChoice</name>
+            </handlers>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
@@ -1098,10 +1097,6 @@
         <handlers>
           <event>OnStartEdit</event>
           <name>TransactionsOnStartEdit</name>
-        </handlers>
-        <handlers>
-          <event>OnActivateCell</event>
-          <name>TransactionsOnActivateCell</name>
         </handlers>
         <handlers>
           <event>OnChange</event>
@@ -2253,6 +2248,28 @@
           <value>Is visible</value>
         </title>
         <id>11</id>
+        <valueType>
+          <types>Boolean</types>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
+    </additionalColumns>
+    <additionalColumns>
+      <tablePath xsi:type="form:DataPath">
+        <segments>Object.Transactions</segments>
+      </tablePath>
+      <columns>
+        <name>BasisDocumentReadOnly</name>
+        <title>
+          <key>en</key>
+          <value>Basis document read only</value>
+        </title>
+        <id>12</id>
         <valueType>
           <types>Boolean</types>
         </valueType>

@@ -336,6 +336,7 @@
   <commonModules>CommonModule.UsersEvent</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
+  <commonModules>CommonModule.JorDocumentsForDebitNoteServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -534,6 +535,7 @@
   <documents>Document.CashStatement</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
+  <documentJournals>DocumentJournal.DocumentsForDebitNote</documentJournals>
   <enums>Enum.AgreementKinds</enums>
   <enums>Enum.AgreementTypes</enums>
   <enums>Enum.ApArPostingDetail</enums>

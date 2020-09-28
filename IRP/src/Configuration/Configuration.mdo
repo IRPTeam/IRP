@@ -143,6 +143,7 @@
   <sessionParameters>SessionParameter.isMobile</sessionParameters>
   <sessionParameters>SessionParameter.LocalizationCode</sessionParameters>
   <sessionParameters>SessionParameter.OurCompanies</sessionParameters>
+  <sessionParameters>SessionParameter.Workstation</sessionParameters>
   <roles>Role.BasicRole</roles>
   <roles>Role.FilterForUserSettings</roles>
   <roles>Role.FullAccess</roles>
@@ -333,6 +334,8 @@
   <commonModules>CommonModule.UserSettingsClient</commonModules>
   <commonModules>CommonModule.UserSettingsServer</commonModules>
   <commonModules>CommonModule.UsersEvent</commonModules>
+  <commonModules>CommonModule.WorkstationClient</commonModules>
+  <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -431,6 +434,7 @@
   <commonForms>CommonForm.ReportForm</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.ShareToUsers</commonForms>
+  <commonForms>CommonForm.EditTax</commonForms>
   <catalogs>Catalog.EquipmentDrivers</catalogs>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
@@ -570,6 +574,7 @@
   <dataProcessors>DataProcessor.QuantityCompare</dataProcessors>
   <dataProcessors>DataProcessor.FirstStartSettings</dataProcessors>
   <dataProcessors>DataProcessor.PointOfSale</dataProcessors>
+  <dataProcessors>DataProcessor.DataHistory</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

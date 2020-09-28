@@ -10,7 +10,7 @@ EndProcedure
 
 Procedure LoadProcessing(ObjectKey, SettingsKey, Settings, SettingsDescription, User)
 	ReportOption = Catalogs.ReportOptions.FindByCode(SettingsKey);
-	Settings = ReportOption.Option;
+	Settings = ReportOption.Option.Get();
 	If SettingsDescription <> Undefined Then
 		SettingsDescription.Presentation = ReportOption.Description;
 	EndIf;

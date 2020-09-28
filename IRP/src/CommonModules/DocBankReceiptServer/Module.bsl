@@ -34,8 +34,6 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 EndProcedure
 
-#EndRegion
-
 Function GetPartnerByLegalName(LegalName, Partner) Export
 	If Not LegalName.IsEmpty() Then
 		ArrayOfFilters = New Array();
@@ -60,23 +58,9 @@ Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
 	Documents.BankReceipt.FillAttributesByType(TransactionType, ArrayAll, ArrayByType);
 EndProcedure
 
-#Region GroupTitle
-
-Procedure SetGroupItemsList(Object, Form)
-	AttributesArray = New Array;
-	AttributesArray.Add("Company");
-	AttributesArray.Add("Account");
-	AttributesArray.Add("TransactionType");
-	AttributesArray.Add("Currency");
-	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
-	For Each Atr In AttributesArray Do
-		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title),
-				Form.Items[Atr].Title,
-				Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
-	EndDo;
-EndProcedure
-
 #EndRegion
+
+#Region Public
 
 Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate = Undefined) Export
 	TempTableManager = New TempTablesManager();
@@ -223,6 +207,27 @@ Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments, Obj
 	EndDo;
 	Return ArrayOfResults;
 EndFunction
+
+
+#EndRegion
+
+#Region GroupTitle
+
+Procedure SetGroupItemsList(Object, Form)
+	AttributesArray = New Array;
+	AttributesArray.Add("Company");
+	AttributesArray.Add("Account");
+	AttributesArray.Add("TransactionType");
+	AttributesArray.Add("Currency");
+	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
+	For Each Atr In AttributesArray Do
+		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title),
+				Form.Items[Atr].Title,
+				Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
+	EndDo;
+EndProcedure
+
+#EndRegion
 
 #Region ListFormEvents
 

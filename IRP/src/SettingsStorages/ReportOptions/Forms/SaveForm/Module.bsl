@@ -21,6 +21,7 @@ EndProcedure
 
 &AtClient
 Procedure OptionsListSelection(Item, RowSelected, Field, StandardProcessing)
+	StandardProcessing = False;
 	SaveSettingAtClient();
 EndProcedure
 

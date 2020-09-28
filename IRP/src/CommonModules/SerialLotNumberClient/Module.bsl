@@ -1,5 +1,5 @@
 
-Procedure PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+Procedure PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
 	StandardProcessing = False;
 	CurrentData = Form.Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then
@@ -7,7 +7,7 @@ Procedure PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProces
 	EndIf;
 
 	Notify = New NotifyDescription("OnFinishEditSerialLotNumbers", ThisObject, 
-	New Structure("Object, Form", Object, Form));
+	New Structure("Object, Form, AddInfo", Object, Form, AddInfo));
 	OpeningParameters = New Structure;
 	OpeningParameters.Insert("Item", CurrentData.Item);
 	OpeningParameters.Insert("ItemKey", CurrentData.ItemKey);
@@ -39,11 +39,11 @@ Procedure OnFinishEditSerialLotNumbers(Result, Parameters) Export
 		NewRow.SerialLotNumber = Row.SerialLotNumber;
 		NewRow.Quantity = Row.Quantity;
 	EndDo;
-	UpdateSerialLotNumbersPresentation(Parameters.Object);
+	UpdateSerialLotNumbersPresentation(Parameters.Object, Parameters.AddInfo);
 	UpdateSerialLotNubersTree(Parameters.Object, Parameters.Form);
 EndProcedure
 
-Procedure PresentationClearing(Object, Form, Item, StandardProcessing) Export
+Procedure PresentationClearing(Object, Form, Item, StandardProcessing, AddInfo = Undefined) Export
 	CurrentData = Form.Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
@@ -53,7 +53,8 @@ Procedure PresentationClearing(Object, Form, Item, StandardProcessing) Export
 	UpdateSerialLotNubersTree(Object, Form);
 EndProcedure
 
-Procedure UpdateSerialLotNumbersPresentation(Object) Export
+Procedure UpdateSerialLotNumbersPresentation(Object, AddInfo = Undefined) Export
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
 	For Each RowItemList In Object.ItemList Do
 		ArrayOfSerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", RowItemList.Key));
 		RowItemList.SerialLotNumbersPresentation.Clear();
@@ -62,7 +63,13 @@ Procedure UpdateSerialLotNumbersPresentation(Object) Export
 			RowItemList.SerialLotNumbersPresentation.Add(RowSerialLotNumber.SerialLotNumber);
 			RowItemList.SerialLotNumberIsFilling = True;
 		EndDo;
-		RowItemList.UseSerialLotNumber = SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(RowItemList.ItemKey);
+		If ServerData = Undefined Then
+			RowItemList.UseSerialLotNumber = SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(RowItemList.ItemKey);
+		Else
+			RowItemList.UseSerialLotNumber = 
+			ServerData.ItemKeysWithSerialLotNumbers.Find(RowItemList.ItemKey) <> Undefined;
+		EndIf;
+			
 	EndDo;
 EndProcedure
 
@@ -94,16 +101,22 @@ Procedure UpdateSerialLotNubersTree(Object, Form) Export
 	EndDo;	
 EndProcedure
 
-Procedure UpdateUseSerialLotNumber(Object, Form) Export
+Procedure UpdateUseSerialLotNumber(Object, Form, AddInfo = Undefined) Export
 	CurrentData = Form.Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
-	CurrentData.UseSerialLotNumber = SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(CurrentData.ItemKey);
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+	If ServerData = Undefined Then
+		CurrentData.UseSerialLotNumber = SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(CurrentData.ItemKey);
+	Else
+		CurrentData.UseSerialLotNumber = 
+			ServerData.ItemKeysWithSerialLotNumbers.Find(CurrentData.ItemKey) <> Undefined;
+	EndIf;
+		
 	If Not CurrentData.UseSerialLotNumber Then
 		DeleteUnusedSerialLotNumbers(Object, CurrentData.Key);
-		UpdateSerialLotNumbersPresentation(Object);
+		UpdateSerialLotNumbersPresentation(Object, AddInfo);
 		UpdateSerialLotNubersTree(Object, Form);
 	EndIf;
 EndProcedure

@@ -2,6 +2,7 @@
 
 &AtClient
 Procedure OptionsListSelection(Item, RowSelected, Field, StandardProcessing)
+	StandardProcessing = False;
 	CurrentData = Items.OptionsList.CurrentData;
 	LoadChosenSetting(CurrentData.OptionKey);
 EndProcedure

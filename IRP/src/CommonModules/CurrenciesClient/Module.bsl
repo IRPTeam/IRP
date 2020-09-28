@@ -194,9 +194,7 @@ Procedure FullRefreshTable(Object, Form, AddInfo = Undefined) Export
 	SetVisibleRows(Object, Form, AddInfo);
 EndProcedure	
 
-Procedure SerFaceTable(Object, Form, AddInfo = Undefined) Export
-	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
-	
+Procedure SetSurfaceTable(Object, Form, AddInfo = Undefined) Export
 	SetRatePresentation(Object, Form);
 	SetVisibleRows(Object, Form, AddInfo);	
 EndProcedure	
@@ -270,7 +268,7 @@ Procedure SetVisibleRows(Object, Form, AddInfo = Undefined) Export
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
 	
 	For Each Row In Object.Currencies Do
-		For Each ItemOfArray In ServerData.ArrayOfCurrenciesByMmovementTypes Do
+		For Each ItemOfArray In ServerData.ArrayOfCurrenciesByMovementTypes Do
 			If ItemOfArray.MovementType = Row.MovementType Then
 				Row.IsVisible = Row.CurrencyFrom <> ItemOfArray.Currency;
 				Break;

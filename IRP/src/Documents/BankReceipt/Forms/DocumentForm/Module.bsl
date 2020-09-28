@@ -21,56 +21,16 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocBankReceiptServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	LibraryLoader.RegisterLibrary(Object, ThisObject, Currencies_GetDeclaration(Object, ThisObject));	
-	If Parameters.Key.IsEmpty() Then
-		SetVisibilityAvailability();
-	EndIf;
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocBankReceiptServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	SetVisibilityAvailability();
 EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
 	DocBankReceiptServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-	SetVisibilityAvailability();
-EndProcedure
-
-&AtServer
-Procedure SetVisibilityAvailability() Export
-	ArrayAll = New Array();
-	ArrayByType = New Array();
-	DocBankReceiptServer.FillAttributesByType(Object.TransactionType, ArrayAll, ArrayByType);
-	DocumentsClientServer.SetVisibilityItemsByArray(ThisObject.Items, ArrayAll, ArrayByType);
-	
-	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange")
-		OR Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder") Then
-		BasedOnCashTransferOrder = False;
-		For Each Row In Object.PaymentList Do
-			If TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder")
-				And ValueIsFilled(Row.PlaningTransactionBasis) Then
-				BasedOnCashTransferOrder = True;
-				Break;
-			EndIf;
-		EndDo;
-		ThisObject.Items.CurrencyExchange.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.CurrencyExchange);
-		ThisObject.Items.Account.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Account);
-		ThisObject.Items.Company.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Company);
-		ThisObject.Items.Currency.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
-
-		ArrayTypes = New Array();
-		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
-		ThisObject.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
-	Else
-		ArrayTypes = New Array();
-		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
-		ArrayTypes.Add(Type("DocumentRef.IncomingPaymentOrder"));
-		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
-		ArrayTypes.Add(Type("DocumentRef.ChequeBondTransactionItem"));
-		ThisObject.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
-	EndIf;
 EndProcedure
 
 #EndRegion
@@ -318,7 +278,6 @@ EndProcedure
 
 &AtClient
 Procedure TransactionTypeOnChange(Item)
-	SetVisibilityAvailability();
 	DocBankReceiptClient.TransactionTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 

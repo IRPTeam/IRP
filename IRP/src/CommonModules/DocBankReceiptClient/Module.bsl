@@ -111,7 +111,7 @@ Procedure CleanDataByTransactionTypeContinue(Result, AdditionalParameters) Expor
 	Else
 		Object.TransactionType = Form.CurrentTransactionType;
 		SetTransitAccount(Object, Form);
-		Form.SetVisibilityAvailability();
+		SetAvailability(Object, Form);
 	EndIf;
 	
 	Form.CurrentTransactionType = Object.TransactionType;

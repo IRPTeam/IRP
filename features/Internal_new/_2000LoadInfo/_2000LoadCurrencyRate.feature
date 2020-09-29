@@ -26,7 +26,8 @@ Scenario: _020000 preparation (SerialLotNumbers)
 		When Create catalog Companies objects (partners company)
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog IntegrationSettings objects
-		
+		* Integration settings
+			
 
 Scenario: _020001 check load currency rate
 	And I turn on asynchronous execution mode with interval "1"

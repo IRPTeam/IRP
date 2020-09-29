@@ -19,6 +19,8 @@ Scenario: _092001 preparation (SerialLotNumbers)
 	* Constants
 		When set True value to the constant
 	* Load info
+		When Create catalog PaymentTypes objects
+		When Create catalog BusinessUnits objects
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
 		When Create catalog CashAccounts objects
@@ -82,8 +84,8 @@ Scenario: _092001 checkbox Use serial lot number in the Item type
 	
 Scenario: _092002 check serial lot number in the Retail sales receipt
 	* Preparation
-		// And I delete '$$RetailSalesReceipt092002$$' variable
-		// And I delete '$$NumberRetailSalesReceipt092002$$' variable
+		And I delete '$$RetailSalesReceipt092002$$' variable
+		And I delete '$$NumberRetailSalesReceipt092002$$' variable
 	* Create Retail sales receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I click the button named "FormCreate"

@@ -11,201 +11,57 @@ Background:
 	
 
 Scenario: _2040001 preparation 
-	* Creating a structure of customers and suppliers for the test
-		* Vendor segment + partner term
-			* In USD
-				Given I open hyperlink "e1cib/list/Catalog.Agreements"
-				And I click the button named "FormCreate"
-				And I input "Vendor, USD" text in the field named "Description_en"
-				And I change "Type" radio button value to "Vendor"
-				And I input "12389" text in "Number" field
-				And I input "22.01.2020" text in "Date" field
-				And I click Select button of "Partner segment" field
-				And I click the button named "FormCreate"
-				And I input "Vendor" text in the field named "Description_en"
-				And I click "Save and close" button
-				And I go to line in "List" table
-					| 'Description' |
-					| 'Vendor'      |
-				And I click the button named "FormChoose"
-				And I select from "Company" drop-down list by "main" string
-				And I click Select button of "Multi currency movement type" field
-				And I go to line in "List" table
-					| 'Currency' | 'Deferred calculation' | 'Description' | 'Reference' | 'Source'       | 'Type'      |
-					| 'USD'      | 'No'                   | 'USD'         | 'USD'       | 'Forex Seling' | 'Partner term' |
-				And I select current line in "List" table
-				And I click Select button of "Price type" field
-				And I go to line in "List" table
-					| 'Currency' | 'Description'       |
-					| 'TRY'      | 'Basic Price Types' |
-				And I select current line in "List" table
-				And I input "22.01.2020" text in "Start using" field
-				And I click Select button of "Store" field
-				And I go to line in "List" table
-					| 'Description' |
-					| 'Store 02'    |
-				And I select current line in "List" table
-				And I click "Save and close" button
-				And I wait "Partner term (create) *" window closing in 20 seconds
-			* In TRY
-				Given I open hyperlink "e1cib/list/Catalog.Agreements"
-				And I click the button named "FormCreate"
-				And I input "Vendor, TRY" text in the field named "Description_en"
-				And I change "Type" radio button value to "Vendor"
-				And I input "12389" text in "Number" field
-				And I input "22.01.2020" text in "Date" field
-				And I click Select button of "Partner segment" field
-				And I go to line in "List" table
-					| 'Description' |
-					| 'Vendor'      |
-				And I click the button named "FormChoose"
-				And I select from "Company" drop-down list by "main" string
-				And I click Select button of "Multi currency movement type" field
-				And I go to line in "List" table
-					| 'Currency' | 'Deferred calculation' | 'Description' | 'Reference' | 'Source'       | 'Type'      |
-					| 'TRY'      | 'No'                   | 'TRY'         | 'TRY'       | 'Forex Seling' | 'Partner term' |
-				And I select current line in "List" table
-				And I click Select button of "Price type" field
-				And I go to line in "List" table
-					| 'Currency' | 'Description'       |
-					| 'TRY'      | 'Basic Price Types' |
-				And I select current line in "List" table
-				And I input "22.01.2020" text in "Start using" field
-				And I click Select button of "Store" field
-				And I go to line in "List" table
-					| 'Description' |
-					| 'Store 02'    |
-				And I select current line in "List" table
-				And I click "Save and close" button
-			And I close all client application windows
-		* Main partner and Legal name
-			Given I open hyperlink "e1cib/list/Catalog.Partners"
-			And I click the button named "FormCreate"
-			And I input "Adel" text in the field named "Description_en"
-			And I change checkbox "Vendor"
-			And I change checkbox "Customer"
-			And I change checkbox "Shipment confirmations before sales invoice"
-			And I change checkbox "Goods receipt before purchase invoice"
-			And I click Select button of "Manager segment" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Region 2'    |
-			And I select current line in "List" table
-			And I click "Save" button
-			And In this window I click command interface button "Partner segments content"
-			And I click the button named "FormCreate"
-			And I click Select button of "Segment" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Retail'      |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I click the button named "FormCreate"
-			And I click Select button of "Segment" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Vendor'      |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And In this window I click command interface button "Company"
-			And I click the button named "FormCreate"
-			And I input "Company Adel" text in the field named "Description_en"
-			And I click Select button of "Country" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Turkey'      |
-			And I select current line in "List" table
-			And I select "Company" exact value from the drop-down list named "Type"
-			And I click "Save and close" button
-			And In this window I click command interface button "Main"
-			And I click "Save and close" button
-		* Subordinate partner with own legal name
-			Given I open hyperlink "e1cib/list/Catalog.Partners"
-			And I click the button named "FormCreate"
-			And I input "Astar" text in the field named "Description_en"
-			And I change checkbox "Vendor"
-			And I change checkbox "Customer"
-			And I change checkbox "Shipment confirmations before sales invoice"
-			And I change checkbox "Goods receipt before purchase invoice"
-			And I click Select button of "Main partner" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Adel' |
-			And I select current line in "List" table
-			And I click Select button of "Manager segment" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Region 2'    |
-			And I select current line in "List" table
-			And I click "Save" button
-			And In this window I click command interface button "Partner segments content"
-			And I click the button named "FormCreate"
-			And I click Select button of "Segment" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Retail'      |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I click the button named "FormCreate"
-			And I click Select button of "Segment" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Vendor'      |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And In this window I click command interface button "Company"
-			And I click the button named "FormCreate"
-			And I input "Company Astar" text in the field named "Description_en"
-			And I click Select button of "Country" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Turkey'      |
-			And I select current line in "List" table
-			And I select "Company" exact value from the drop-down list named "Type"
-			And I click "Save and close" button
-			And In this window I click command interface button "Main"
-			And I click "Save and close" button
-		* Subordinate partner without own legal name
-			Given I open hyperlink "e1cib/list/Catalog.Partners"
-			And I click the button named "FormCreate"
-			And I input "Crystal" text in the field named "Description_en"
-			And I change checkbox "Vendor"
-			And I change checkbox "Customer"
-			And I change checkbox "Shipment confirmations before sales invoice"
-			And I change checkbox "Goods receipt before purchase invoice"
-			And I click Select button of "Main partner" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Adel' |
-			And I select current line in "List" table
-			And I click Select button of "Manager segment" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Region 2'    |
-			And I select current line in "List" table
-			And I click "Save" button
-			And In this window I click command interface button "Partner segments content"
-			And I click the button named "FormCreate"
-			And I click Select button of "Segment" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Retail'      |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I click the button named "FormCreate"
-			And I click Select button of "Segment" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Vendor'      |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And In this window I click command interface button "Main"
-			And I click "Save and close" button
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create information register Barcodes records
+		When Create catalog Companies objects (own Second company)
+		When Create catalog CashAccounts objects
+		When Create catalog Agreements objects
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	* Add sales tax
+		When Create catalog Taxes objects (Sales tax)
+		When Create information register TaxSettings (Sales tax)
+		When Create information register Taxes records (Sales tax)
+		When add sales tax settings 
 	* Creation of a Sales order on Crystal, Basic Partner terms, TRY, Sales invoice before Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
 		* Filling the document header
 			And I click Select button of "Partner" field
+			And I click "List" button			
 			And I go to line in "List" table
 				| 'Description' |
 				| 'Crystal'     |
@@ -609,6 +465,11 @@ Scenario: _2040001 preparation
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
 		And I click the button named "Add"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
@@ -647,6 +508,11 @@ Scenario: _2040001 preparation
 		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
 		And I select current line in "List" table
 		And I click the button named "Add"
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -713,6 +579,9 @@ Scenario: _2040001 preparation
 		* Filling in item tab
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -763,6 +632,9 @@ Scenario: _2040001 preparation
 		* Filling in item tab
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -819,6 +691,9 @@ Scenario: _2040001 preparation
 		* Filling in item tab
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -895,6 +770,9 @@ Scenario: _2040001 preparation
 		* Filling in item tab
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -987,6 +865,9 @@ Scenario: _2040001 preparation
 		* Filling in item tab
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -1079,6 +960,9 @@ Scenario: _2040001 preparation
 		* Filling in item tab
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -1181,6 +1065,9 @@ Scenario: _2040001 preparation
 		* Filling in item tab
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -1658,6 +1545,16 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 		And I click the button named "FormCreate"
 	* Filling the document header
 		And I select "Purchase" exact value from "Transaction type" drop-down list
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main company'     |
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'     |
+		And I select current line in "List" table
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -1749,6 +1646,11 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 			And I click the button named "FormCreate"
 		* Filling the document header
 			And I select "Purchase" exact value from "Transaction type" drop-down list
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'MAin company'     |
+			And I select current line in "List" table
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
 				| 'Description' |

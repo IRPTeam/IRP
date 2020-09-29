@@ -18,6 +18,7 @@ Scenario: _090300 preparation (creation mechanism based on for purchase document
 	* Constants
 		When set True value to the constant
 	* Load info
+		When Create catalog Companies objects (second company Ferron BP)
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
 		When Create catalog CashAccounts objects
@@ -251,113 +252,6 @@ Scenario: _090303 create Purchase invoice for several Purchase order with the sa
 	
 Scenario: _090304 create Purchase invoice for several Purchase order with different partners of the same legal name (partner terms are different)
 # should be created 2 Purchase invoice
-	* Add new partner Partner Ferron 1 for Company Ferron BP
-		Given I open hyperlink "e1cib/list/Catalog.Partners"
-		And I click the button named "FormCreate"
-		And I input "Partner Ferron 1" text in the field named "Description_en"
-		And I set checkbox "Customer"
-		And I set checkbox "Vendor"
-		And I click Select button of "Main partner" field
-		And I go to line in "List" table
-			| Description |
-			| Ferron BP   |
-		And I select current line in "List" table
-		And I click Select button of "Manager segment" field
-		And I go to line in "List" table
-			| Description |
-			| Region 2    |
-		And I select current line in "List" table
-		And I click "Save" button
-		And In this window I click command interface button "Partner terms"
-		And I click the button named "FormCreate"
-		And I input "Vendor Ferron 1" text in the field named "Description_en"
-		And I change "Type" radio button value to "Vendor"
-		And I input "125" text in "Number" field
-		And I input current date in the field named "StartUsing"
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| Description      |
-			| Partner Ferron 1 |
-		And I select current line in "List" table
-		And I click Select button of "Multi currency movement type" field
-		And I go to line in "List" table
-			| 'Currency' | 'Type'      |
-			| 'TRY'      | 'Partner term' |
-		And I select current line in "List" table
-		And I click Select button of "Price type" field
-		And I go to line in "List" table
-			| Description       |
-			| Vendor price, TRY |
-		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I click the button named "FormCreate"
-		And I input "Vendor Ferron Discount" text in the field named "Description_en"
-		And I change "Type" radio button value to "Vendor"
-		And I input "126" text in "Number" field
-		And I input current date in the field named "StartUsing"
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| Description      |
-			| Partner Ferron 1 |
-		And I select current line in "List" table
-		And I click Select button of "Multi currency movement type" field
-		And I go to line in "List" table
-			| 'Currency' | 'Type'      |
-			| 'TRY'      | 'Partner term' |
-		And I select current line in "List" table
-		And I click Select button of "Price type" field
-		And I go to line in "List" table
-			| Description       |
-			| Vendor price, TRY |
-		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I close all client application windows
-	* Add new partner Partner Ferron 2 for Company Ferron BP
-		Given I open hyperlink "e1cib/list/Catalog.Partners"
-		And I click the button named "FormCreate"
-		And I input "Partner Ferron 2" text in the field named "Description_en"
-		And I set checkbox "Customer"
-		And I set checkbox "Vendor"
-		And I click Select button of "Main partner" field
-		And I go to line in "List" table
-			| Description |
-			| Ferron BP   |
-		And I select current line in "List" table
-		And I click Select button of "Manager segment" field
-		And I go to line in "List" table
-			| Description |
-			| Region 2    |
-		And I select current line in "List" table
-		And I click "Save" button
-		And In this window I click command interface button "Partner terms"
-		And I click the button named "FormCreate"
-		And I input "Vendor Ferron Partner 2" text in the field named "Description_en"
-		And I change "Type" radio button value to "Vendor"
-		And I input "126" text in "Number" field
-		And I input current date in the field named "StartUsing"
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| Description      |
-			| Partner Ferron 2 |
-		And I select current line in "List" table
-		And I click Select button of "Multi currency movement type" field
-		And I go to line in "List" table
-			| 'Currency' | 'Type'      |
-			| 'TRY'      | 'Partner term' |
-		And I select current line in "List" table
-		And I click Select button of "Price type" field
-		And I go to line in "List" table
-			| Description       |
-			| Vendor price, TRY |
-		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I close all client application windows
 	* Create first test PO 128
 		When create the first test PO for a test on the creation mechanism based on
 		// * Change the document number to 128
@@ -369,6 +263,7 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 		// 	And I input "128" text in "Number" field
 		* Filling in vendor info
 			And I click Select button of "Partner" field
+			And I click "List" button			
 			And I go to line in "List" table
 				| Description |
 				| Partner Ferron 1   |
@@ -613,15 +508,15 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 			// 	And I click "Yes" button
 			// 	And I input "141" text in "Number" field
 			And I click "Post" button
-			And I save the value of "Number" field as "$$NumberPurchaseOrder090302052$$"
-			And I save the window as "$$PurchaseOrder090302052$$"
+			And I save the value of "Number" field as "$$NumberPurchaseInvoice090302052$$"
+			And I save the window as "$$PurchaseInvoice090302052$$"
 		If the field named "Agreement" is equal to "Vendor Ferron Discount" Then
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
-				| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '360,00'     | '2 000,00'   | '2 360,00'     | 'Store 02' | '$$PurchaseOrder090302051$$' |
+				| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '360,00'     | '2 000,00'   | '2 360,00'     | 'Store 02' | '$$PurchaseOrder090302052$$' |
 			And I click "Post" button
-			And I save the value of "Number" field as "$$NumberPurchaseOrder090302051$$"
-			And I save the window as "$$PurchaseOrder090302051$$"
+			And I save the value of "Number" field as "$$NumberPurchaseInvoice090302051$$"
+			And I save the window as "$$PurchaseInvoice090302051$$"
 		And I click "Post and close" button
 		When I click command interface button "Purchase invoice (create)"
 		* Check filling in second PurchaseInvoice
@@ -641,20 +536,20 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 			// 	And I click "Yes" button
 			// 	And I input "141" text in "Number" field
 			And I click "Post" button
-			And I save the value of "Number" field as "$$NumberPurchaseOrder090302052$$"
-			And I save the window as "$$PurchaseOrder090302052$$"
+			And I save the value of "Number" field as "$$NumberPurchaseInvoice090302052$$"
+			And I save the window as "$$PurchaseInvoice090302052$$"
 		If the field named "Agreement" is equal to "Vendor Ferron Discount" Then
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
-				| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '360,00'     | '2 000,00'   | '2 360,00'     | 'Store 02' | '$$PurchaseOrder090302051$$' |
+				| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '360,00'     | '2 000,00'   | '2 360,00'     | 'Store 02' | '$$PurchaseOrder090302052$$' |
 			// * Change the document number to 140
 			// 	And I input "140" text in "Number" field
 			// 	Then "1C:Enterprise" window is opened
 			// 	And I click "Yes" button
 			// 	And I input "140" text in "Number" field
 			And I click "Post" button
-			And I save the value of "Number" field as "$$NumberPurchaseOrder090302051$$"
-			And I save the window as "$$PurchaseOrder090302051$$"
+			And I save the value of "Number" field as "$$NumberPurchaseInvoice090302051$$"
+			And I save the window as "$$PurchaseInvoice090302051$$"
 		And I click "Post and close" button
 	And I close all client application windows
 	* Check creation
@@ -664,11 +559,11 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 		| '20,000'   | 'Store 02' | '$$PurchaseOrder090302051$$' | 'M/White'   |
 		| '20,000'   | 'Store 02' | '$$PurchaseOrder090302051$$' | 'L/Green'   |
 		| '30,000'   | 'Store 02' | '$$PurchaseOrder090302051$$' | '36/Yellow' |
-		| '10,000'   | 'Store 02' | '$$PurchaseOrder090302051$$' | 'M/White'   |
+		| '10,000'   | 'Store 02' | '$$PurchaseOrder090302052$$' | 'M/White'   |
 		| '20,000'   | 'Store 02' | '$$PurchaseOrder090302051$$' | 'M/White'   |
 		| '20,000'   | 'Store 02' | '$$PurchaseOrder090302051$$' | 'L/Green'   |
 		| '30,000'   | 'Store 02' | '$$PurchaseOrder090302051$$' | '36/Yellow' |
-		| '10,000'   | 'Store 02' | '$$PurchaseOrder090302051$$' | 'M/White'   |
+		| '10,000'   | 'Store 02' | '$$PurchaseOrder090302052$$' | 'M/White'   |
 		And Delay 5
 		And I close all client application windows
 
@@ -997,8 +892,8 @@ Scenario: _090308 create Goods reciept for Purchase invoice with different legal
 			And I select current line in "SettingsComposerUserSettingsItem1AvailableFieldsTable" table
 			And I click "Finish editing" button
 		And I go to line in "List" table
-				| Number |
-				| $$PurchaseInvoice09030201$$    |
+				| 'Number' |
+				| '$$NumberPurchaseInvoice09030202$$'    |
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
 	* Check filling in Goods reciept
@@ -1060,8 +955,8 @@ Scenario: _090309 create Goods reciept for several Purchase invoice with differe
 # Should be created 2 GR
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
-				| Number |
-				| 130    |
+				| 'Number' |
+				| '$$NumberPurchaseInvoice090302041$$'    |
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
 	* Check filling in Goods reciept
@@ -1071,7 +966,7 @@ Scenario: _090309 create Goods reciept for several Purchase invoice with differe
 		If the field named "Partner" is equal to "Partner Ferron 2" Then
 			And "ItemList" table contains lines
 				| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
-				| 'Dress'    | '10,000'   | 'M/White'   | 'pcs'  | 'Store 02' | 'Purchase invoice 13*' |
+				| 'Dress'    | '10,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302041$$' |
 			And I input "129" text in "Number" field
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1079,9 +974,9 @@ Scenario: _090309 create Goods reciept for several Purchase invoice with differe
 		If the field named "Partner" is equal to "Partner Ferron 1" Then
 			And "ItemList" table contains lines
 				| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
-				| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | 'Purchase invoice 13*' |
-				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | 'Purchase invoice 13*' |
-				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase invoice 13*' |
+				| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302042$$' |
+				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302042$$' |
+				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302042$$' |
 			And I input "130" text in "Number" field
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1092,7 +987,7 @@ Scenario: _090309 create Goods reciept for several Purchase invoice with differe
 		If the field named "Partner" is equal to "Partner Ferron 2" Then
 			And "ItemList" table contains lines
 				| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
-				| 'Dress'    | '10,000'   | 'M/White'   | 'pcs'  | 'Store 02' | 'Purchase invoice 13*' |
+				| 'Dress'    | '10,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302041$$' |
 			And I input "129" text in "Number" field
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1100,9 +995,9 @@ Scenario: _090309 create Goods reciept for several Purchase invoice with differe
 		If the field named "Partner" is equal to "Partner Ferron 1" Then
 			And "ItemList" table contains lines
 				| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
-				| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | 'Purchase invoice 13*' |
-				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | 'Purchase invoice 13*' |
-				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase invoice 13*' |
+				| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302042$$' |
+				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302042$$' |
+				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302042$$' |
 			And I input "130" text in "Number" field
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1123,7 +1018,7 @@ Scenario: _090310 create Goods reciept for several Purchase invoice with differe
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
 				| Number |
-				| 140    |
+				| $$NumberPurchaseInvoice090302051$$    |
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
 	* Check filling in Goods reciept
@@ -1140,7 +1035,7 @@ Scenario: _090310 create Goods reciept for several Purchase invoice with differe
 			And I input "140" text in "Number" field
 			And "ItemList" table contains lines
 			| 'Item'  | 'Quantity' | 'Item key' | 'Store'    | 'Unit' | 'Receipt basis'         |
-			| 'Dress' | '10,000'   | 'M/White'  | 'Store 02' | 'pcs'  | 'Purchase invoice 140*' |
+			| 'Dress' | '10,000'   | 'M/White'  | 'Store 02' | 'pcs'  | '$$PurchaseInvoice090302051$$' |
 		If "Q" variable is equal to 3 Then
 			And I input "141" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -1148,9 +1043,9 @@ Scenario: _090310 create Goods reciept for several Purchase invoice with differe
 			And I input "141" text in "Number" field
 			And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'         |
-			| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | 'Purchase invoice 141*' |
-			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | 'Purchase invoice 141*' |
-			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase invoice 141*' |
+			| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302052$$' |
+			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302052$$' |
+			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302052$$' |
 	And I click "Post and close" button
 	When I click command interface button "Goods receipt (create)"
 	* Check filling in second Goods reciept
@@ -1162,7 +1057,7 @@ Scenario: _090310 create Goods reciept for several Purchase invoice with differe
 			And I input "140" text in "Number" field
 			And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
-			| 'Dress'    | '10,000'   | 'M/White'   | 'pcs'  | 'Store 02' | 'Purchase invoice 140*' |
+			| 'Dress'    | '10,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302051$$' |
 		If "D" variable is equal to 3 Then
 			And I input "141" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -1170,9 +1065,9 @@ Scenario: _090310 create Goods reciept for several Purchase invoice with differe
 			And I input "141" text in "Number" field
 			And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
-			| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | 'Purchase invoice 141*' |
-			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | 'Purchase invoice 141*' |
-			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase invoice 141*' |
+			| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' |  '$$PurchaseInvoice090302052$$' |
+			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' |  '$$PurchaseInvoice090302052$$' |
+			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' |  '$$PurchaseInvoice090302052$$' |
 	And I click "Post and close" button
 	* Create Goods reciept
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
@@ -1189,7 +1084,7 @@ Scenario: _090311 create Goods reciept for several Purchase invoice with differe
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
 				| Number |
-				| 135    |
+				| $$NumberPurchaseInvoice090302062$$    |
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
 	* Check filling in Goods reciept
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -1197,17 +1092,12 @@ Scenario: _090311 create Goods reciept for several Purchase invoice with differe
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table contains lines
 		| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
-		| 'Dress'    | '10,000'   | 'M/White'   | 'pcs'  | 'Store 02' | 'Purchase invoice 135*' |
+		| 'Dress'    | '10,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302062$$' |
 		And I input "135" text in "Number" field
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I input "135" text in "Number" field
 	And I click "Post and close" button
-	* Check creation
-		And "List" table contains lines
-			| Number |
-			| 135    |
-	And I close all client application windows
 	* Create Goods reciept
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
@@ -1221,8 +1111,8 @@ Scenario: _090312 create Goods reciept for several Purchase order with different
 	* Create Goods reciept for PI 137, 136
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
-			| Number |
-			| 136    |
+			| 'Number' |
+			| '$$NumberPurchaseInvoice09030702$$'    |
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
 	* Check filling in Goods reciept
@@ -1230,9 +1120,9 @@ Scenario: _090312 create Goods reciept for several Purchase order with different
 		If the field named "Company" is equal to "Second Company" Then
 			And "ItemList" table contains lines
 				| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
-				| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | 'Purchase invoice 136*' |
-				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | 'Purchase invoice 136*' |
-				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase invoice 136*' |
+				| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice09030701$$' |
+				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice09030701$$' |
+				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseInvoice09030701$$' |
 			And I input "136" text in "Number" field
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1251,9 +1141,9 @@ Scenario: _090312 create Goods reciept for several Purchase order with different
 		If the field named "Company" is equal to "Second Company" Then
 			And "ItemList" table contains lines
 				| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
-				| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | 'Purchase invoice 136*' |
-				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | 'Purchase invoice 136*' |
-				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase invoice 136*' |
+				| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice09030701$$' |
+				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice09030701$$' |
+				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseInvoice09030701$$' |
 			And I input "136" text in "Number" field
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button

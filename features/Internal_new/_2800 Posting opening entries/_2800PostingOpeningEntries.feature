@@ -1235,7 +1235,7 @@ Scenario: _400009 check the entry of the Ap/Ar balance by documents
 		Then the number of "List" table lines is "меньше или равно" 1
 		And I go to line in "List" table
 			| 'Legal name' | 'Number' |
-			| 'DFC'        | '5 900'  |
+			| 'DFC'        | '$$NumberPurchaseInvoice400000$$'  |
 		And I select current line in "List" table
 		And I activate field named "AccountPayableByDocumentsAmount" in "AccountPayableByDocuments" table
 		And I input "100,00" text in the field named "AccountPayableByDocumentsAmount" of "AccountPayableByDocuments" table
@@ -1269,7 +1269,7 @@ Scenario: _400009 check the entry of the Ap/Ar balance by documents
 		And I select current line in "" table
 		And I go to line in "List" table
 			| 'Number' |
-			| '5 900'  |
+			| '$$NumberPurchaseInvoice400000$$'  |
 		And I select current line in "List" table
 		And I finish line editing in "AccountReceivableByDocuments" table
 		And I activate field named "AccountReceivableByDocumentsAmount" in "AccountReceivableByDocuments" table

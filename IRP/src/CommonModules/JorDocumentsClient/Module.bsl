@@ -74,6 +74,12 @@ Function CreateFilterByParameters(Parameters, TableName)
 			|	AND Obj.Ref.Agreement = &Agreement");
 	EndIf;
 	
+	If Parameters.Property("Company") Then
+		QueryParameters.Insert("Company", Parameters.Company);
+		QueryTextArray.Add("
+			|	AND Obj.Ref.Company = &Company");
+	EndIf;
+	
 	If Parameters.Property("Agreement_ApArPostingDetail") Then
 		QueryParameters.Insert("Agreement_ApArPostingDetail", Parameters.Agreement_ApArPostingDetail);
 		QueryTextArray.Add("

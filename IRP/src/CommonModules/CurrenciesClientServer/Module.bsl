@@ -409,3 +409,14 @@ Function GetCallHandlerParameters(Object, Form, HandlerID, AddInfo)
 	Parameters.AddInfo = AddInfo;
 	Return Parameters;
 EndFunction
+
+#Region CurrencyInRow
+
+Procedure UpdateRatePresentation_CurrencyInRow(Object) Export
+	For Each Row In Object.Currencies Do
+		Row.RatePresentation = ?(Row.ShowReverseRate, Row.ReverseRate, Row.Rate);
+	EndDo;
+EndProcedure
+
+#EndRegion
+

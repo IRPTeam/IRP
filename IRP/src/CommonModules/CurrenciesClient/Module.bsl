@@ -194,6 +194,8 @@ Procedure FullRefreshTable(Object, Form, AddInfo = Undefined) Export
 	SetVisibleRows(Object, Form, AddInfo);
 EndProcedure	
 
+#Region CurrencyInHeader
+
 Procedure SetSurfaceTable(Object, Form, AddInfo = Undefined) Export
 	SetRatePresentation(Object, Form);
 	SetVisibleRows(Object, Form, AddInfo);	
@@ -276,3 +278,169 @@ Procedure SetVisibleRows(Object, Form, AddInfo = Undefined) Export
 		EndDo;
 	EndDo;
 EndProcedure
+
+#EndRegion
+
+#Region CurrencyInRow
+
+Procedure OnOpen(Object, Form, AddInfo = Undefined) Export
+	CurrenciesClientServer.UpdateRatePresentation_CurrencyInRow(Object);
+EndProcedure
+
+Procedure AfterWriteAtClient(Object, Form, TableName, AddInfo = Undefined) Export
+	CurrentData = Form.Items[TableName].CurrentData;
+	If CurrentData <> Undefined Then
+		SetVisibleCurrenciesRow_CurrencyInRow(Object, CurrentData.Key);
+	EndIf;
+EndProcedure
+
+Procedure DateOnChange(Object, Form, TableName, AddInfo = Undefined) Export
+	FullRefreshTable_CurrencyInRow(Object, Form, TableName, AddInfo);
+EndProcedure
+
+Procedure CompanyOnChange(Object, Form, TableName, AddInfo = Undefined) Export
+	FullRefreshTable_CurrencyInRow(Object, Form, TableName, AddInfo);
+EndProcedure
+	
+Procedure FullRefreshTable_CurrencyInRow(Object, Form, TableName, AddInfo = Undefined)
+	ClearCurrenciesTable_CurrencyInRow(Object);
+	FillCurrencyTable_CurrencyInRow(Object);
+	For Each Row In Object[TableName] Do
+		CalculateAmount_CurrencyInRow(Object, Row.Amount, Row.Key);
+	EndDo;
+	CurrenciesClientServer.UpdateRatePresentation_CurrencyInRow(Object);
+	CurrentData = Form.Items[TableName].CurrentData;
+	If CurrentData <> Undefined Then
+		SetVisibleCurrenciesRow_CurrencyInRow(Object, CurrentData.Key);
+	EndIf;
+EndProcedure
+
+Procedure CurrencyOnChange(Object, Form, TableName, AddInfo = Undefined) Export
+	RefreshTableByKey_CurrencyInRow(Object, Form, TableName, AddInfo);
+EndProcedure
+	
+Procedure BasisDocumentStartChoiceEnd(Object, Form, TableName, AddInfo = Undefined) Export
+	RefreshTableByKey_CurrencyInRow(Object, Form, TableName, AddInfo);
+EndProcedure
+
+Procedure AgreementOnChange(Object, Form, TableName, AddInfo = Undefined) Export
+	RefreshTableByKey_CurrencyInRow(Object, Form, TableName, AddInfo);
+EndProcedure
+
+Procedure RefreshTableByKey_CurrencyInRow(Object, Form, TableName, AddInfo = Undefined)
+	CurrentData = Form.Items[TableName].CurrentData;
+	If CurrentData <> Undefined Then
+		ClearCurrenciesTable_CurrencyInRow(Object, CurrentData.Key);
+		FillCurrencyTable_CurrencyInRow(Object, CurrentData);
+		CalculateAmount_CurrencyInRow(Object, CurrentData.Amount, CurrentData.Key);
+	    CurrenciesClientServer.UpdateRatePresentation_CurrencyInRow(Object);
+		SetVisibleCurrenciesRow_CurrencyInRow(Object, CurrentData.Key);
+	EndIf;
+EndProcedure
+	
+Procedure AmountOnChange(Object, Form, TableName, AddInfo = Undefined) Export
+	CurrentData = Form.Items[TableName].CurrentData;
+	If CurrentData <> Undefined Then
+		CalculateAmount_CurrencyInRow(Object, CurrentData.Amount, CurrentData.Key);
+		CurrenciesClientServer.UpdateRatePresentation_CurrencyInRow(Object);
+		SetVisibleCurrenciesRow_CurrencyInRow(Object, CurrentData.Key);
+	EndIf;
+EndProcedure
+
+Procedure BeforeDeleteRow(Object, Form, TableName, AddInfo = Undefined) Export
+	CurrentData = Form.Items[TableName].CurrentData;
+	If CurrentData <> Undefined Then
+		ClearCurrenciesTable_CurrencyInRow(Object, CurrentData.Key);
+	EndIf;
+EndProcedure
+
+Procedure OnActivateRow(Object, Form, TableName, AddInfo = Undefined) Export
+	CurrentData = Form.Items[TableName].CurrentData;
+	If CurrentData <> Undefined Then
+		SetVisibleCurrenciesRow_CurrencyInRow(Object, CurrentData.Key);
+	EndIf;
+EndProcedure
+	
+Procedure ClearCurrenciesTable_CurrencyInRow(Object, RowKey = Undefined)
+	If RowKey = Undefined Then
+		Object.Currencies.Clear();
+	Else
+		ArrayForDelete = New Array();
+		For Each Row In Object.Currencies Do
+			If Row.Key = RowKey Then
+				ArrayForDelete.Add(Row);
+			EndIf;
+		EndDo;
+		For Each ItemForDelete In ArrayForDelete Do
+			Object.Currencies.Delete(ItemForDelete);
+		EndDo;
+	EndIf;
+EndProcedure
+
+Procedure SetVisibleCurrenciesRow_CurrencyInRow(Object, RowKey)
+	For Each Row In Object.Currencies Do
+		Row.IsVisible = Row.Key = RowKey;
+	EndDo;
+EndProcedure
+
+Procedure FillCurrencyTable_CurrencyInRow(Object, CurrentData = Undefined)
+	If CurrentData = Undefined  Then
+		ParametersToServer = New Structure("GetArrayOfCurrenciesRowsForAllTable", New Array());
+		For Each Row In Object.Transactions Do
+			RowParameters = New Structure();
+			RowParameters.Insert("Agreement", Row.Agreement);
+			RowParameters.Insert("Date",Object.Date); 
+			RowParameters.Insert("Company",Object.Company);
+			RowParameters.Insert("Currency",Row.Currency);
+			RowParameters.Insert("UUID",Row.Key);
+			
+			ParametersToServer.GetArrayOfCurrenciesRowsForAllTable.Add(RowParameters);
+		EndDo;
+		
+		ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
+		For Each Row In ServerData.ArrayOfCurrenciesRows Do
+			FillPropertyValues(Object.Currencies.Add(), Row);
+		EndDo;
+	Else
+		ParametersToServer = New Structure("GetArrayOfCurrenciesRows", New Structure());
+		ParametersToServer.GetArrayOfCurrenciesRows.Insert("Agreement", CurrentData.Agreement);
+		ParametersToServer.GetArrayOfCurrenciesRows.Insert("Date",Object.Date); 
+		ParametersToServer.GetArrayOfCurrenciesRows.Insert("Company",Object.Company);
+		ParametersToServer.GetArrayOfCurrenciesRows.Insert("Currency",CurrentData.Currency);
+		ParametersToServer.GetArrayOfCurrenciesRows.Insert("UUID",CurrentData.Key);
+		
+		ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
+		For Each Row In ServerData.ArrayOfCurrenciesRows Do
+			FillPropertyValues(Object.Currencies.Add(), Row);
+		EndDo;
+	EndIf;
+EndProcedure
+
+Procedure CalculateAmount_CurrencyInRow(Object, Amount, RowKey)
+	For Each Row In Object.Currencies Do
+		If Row.Key <> RowKey Then
+			Continue;
+		EndIf;
+		If Row.Multiplicity = 0 Or Row.Rate = 0 Then
+			Row.Amount = 0;
+			Continue;
+		EndIf;
+		If Row.ShowReverseRate Then
+			Row.Amount = (Amount * Row.ReverseRate) / Row.Multiplicity;
+		Else
+			Row.Amount = Amount / (Row.Rate * Row.Multiplicity);
+		EndIf;
+	EndDo;
+EndProcedure
+
+//Procedure UpdateRatePresentation_CurrencyInRow(Object)
+//	For Each Row In Object.Currencies Do
+//		Row.RatePresentation = ?(Row.ShowReverseRate, Row.ReverseRate, Row.Rate);
+//	EndDo;
+//EndProcedure
+
+#EndRegion
+
+
+
+

@@ -377,7 +377,7 @@ Scenario: _029516 checking duplicate specifications when creating the same bundl
 			| 'Chewing gum'    | 'Set'    | 'Chewing gum'    |
 			| 'Dress+Scarf'    | 'Bundle' | 'Dress+Scarf'    |
 			| 'Dress+Trousers' | 'Bundle' | 'Dress+Trousers' |
-		Then the number of "List" table lines is " или равно" 1
+		Then the number of "List" table lines is "меньше или равно" 10
 
 
 Scenario: _029518 creating a bundle of 2 different properties + one repeating of the same item + 1 other item
@@ -581,31 +581,31 @@ Scenario: _029519 create Bundling (Store use Goods receipt, doesn't use Shipment
 		And I click "Post" button
 		And Delay 5
 		And I click "Registrations report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$Bundling0029519$$'                   | ''            | ''          | ''                                    | ''           | ''                    | ''                                    | ''        |
-		| 'Document registrations records'        | ''            | ''          | ''                                    | ''           | ''                    | ''                                    | ''        |
-		| 'Register  "Bundles content"'           | ''            | ''          | ''                                    | ''           | ''                    | ''                                    | ''        |
-		| ''                                      | 'Period'      | 'Resources' | 'Dimensions'                          | ''           | ''                    | ''                                    | ''        |
-		| ''                                      | ''            | 'Quantity'  | 'Item key bundle'                     | 'Item key'   | ''                    | ''                                    | ''        |
-		| ''                                      | '*'           | '2'         | 'Skittles + Chewing gum/Skittles+Chewing gum' | 'Mint/Mango'    | ''                    | ''                                    | ''        |
-		| ''                                      | '*'           | '2'         | 'Skittles + Chewing gum/Skittles+Chewing gum' | 'Fruit'  | ''                    | ''                                    | ''        |
-		| ''                                      | ''            | ''          | ''                                    | ''           | ''                    | ''                                    | ''        |
-		| 'Register  "Goods in transit incoming"' | ''            | ''          | ''                                    | ''           | ''                    | ''                                    | ''        |
-		| ''                                      | 'Record type' | 'Period'    | 'Resources'                           | 'Dimensions' | ''                    | ''                                    | ''        |
-		| ''                                      | ''            | ''          | 'Quantity'                            | 'Store'      | 'Receipt basis'       | 'Item key'                            | 'Row key' |
-		| ''                                      | 'Receipt'     | '*'         | '7'                                   | 'Store 07'   | '$$Bundling0029518$$' | 'Skittles + Chewing gum/Skittles+Chewing gum' | '*'       |
-		| ''                                      | ''            | ''          | ''                                    | ''           | ''                    | ''                                    | ''        |
-		| 'Register  "Stock reservation"'         | ''            | ''          | ''                                    | ''           | ''                    | ''                                    | ''        |
-		| ''                                      | 'Record type' | 'Period'    | 'Resources'                           | 'Dimensions' | ''                    | ''                                    | ''        |
-		| ''                                      | ''            | ''          | 'Quantity'                            | 'Store'      | 'Item key'            | ''                                    | ''        |
-		| ''                                      | 'Expense'     | '*'         | '14'                                  | 'Store 07'   | 'Mint/Mango'             | ''                                    | ''        |
-		| ''                                      | 'Expense'     | '*'         | '14'                                  | 'Store 07'   | 'Fruit'           | ''                                    | ''        |
-		| ''                                      | ''            | ''          | ''                                    | ''           | ''                    | ''                                    | ''        |
-		| 'Register  "Stock balance"'             | ''            | ''          | ''                                    | ''           | ''                    | ''                                    | ''        |
-		| ''                                      | 'Record type' | 'Period'    | 'Resources'                           | 'Dimensions' | ''                    | ''                                    | ''        |
-		| ''                                      | ''            | ''          | 'Quantity'                            | 'Store'      | 'Item key'            | ''                                    | ''        |
-		| ''                                      | 'Expense'     | '*'         | '14'                                  | 'Store 07'   | 'Mint/Mango'             | ''                                    | ''        |
-		| ''                                      | 'Expense'     | '*'         | '14'                                  | 'Store 07'   | 'Fruit'           | ''                                    | ''        |
+		And "ResultTable" spreadsheet document contains lines by template:
+		| '$$Bundling0029519$$'                   | ''            | ''          | ''                                            | ''           | ''                    | ''                                            | ''        |
+		| 'Document registrations records'        | ''            | ''          | ''                                            | ''           | ''                    | ''                                            | ''        |
+		| 'Register  "Bundles content"'           | ''            | ''          | ''                                            | ''           | ''                    | ''                                            | ''        |
+		| ''                                      | 'Period'      | 'Resources' | 'Dimensions'                                  | ''           | ''                    | ''                                            | ''        |
+		| ''                                      | ''            | 'Quantity'  | 'Item key bundle'                             | 'Item key'   | ''                    | ''                                            | ''        |
+		| ''                                      | '*'           | '2'         | 'Skittles + Chewing gum/Skittles+Chewing gum' | 'Mint/Mango' | ''                    | ''                                            | ''        |
+		| ''                                      | '*'           | '2'         | 'Skittles + Chewing gum/Skittles+Chewing gum' | 'Fruit'      | ''                    | ''                                            | ''        |
+		| ''                                      | ''            | ''          | ''                                            | ''           | ''                    | ''                                            | ''        |
+		| 'Register  "Goods in transit incoming"' | ''            | ''          | ''                                            | ''           | ''                    | ''                                            | ''        |
+		| ''                                      | 'Record type' | 'Period'    | 'Resources'                                   | 'Dimensions' | ''                    | ''                                            | ''        |
+		| ''                                      | ''            | ''          | 'Quantity'                                    | 'Store'      | 'Receipt basis'       | 'Item key'                                    | 'Row key' |
+		| ''                                      | 'Receipt'     | '*'         | '7'                                           | 'Store 07'   | '$$Bundling0029519$$' | 'Skittles + Chewing gum/Skittles+Chewing gum' | '*'       |
+		| ''                                      | ''            | ''          | ''                                            | ''           | ''                    | ''                                            | ''        |
+		| 'Register  "Stock reservation"'         | ''            | ''          | ''                                            | ''           | ''                    | ''                                            | ''        |
+		| ''                                      | 'Record type' | 'Period'    | 'Resources'                                   | 'Dimensions' | ''                    | ''                                            | ''        |
+		| ''                                      | ''            | ''          | 'Quantity'                                    | 'Store'      | 'Item key'            | ''                                            | ''        |
+		| ''                                      | 'Expense'     | '*'         | '14'                                          | 'Store 07'   | 'Mint/Mango'          | ''                                            | ''        |
+		| ''                                      | 'Expense'     | '*'         | '14'                                          | 'Store 07'   | 'Fruit'               | ''                                            | ''        |
+		| ''                                      | ''            | ''          | ''                                            | ''           | ''                    | ''                                            | ''        |
+		| 'Register  "Stock balance"'             | ''            | ''          | ''                                            | ''           | ''                    | ''                                            | ''        |
+		| ''                                      | 'Record type' | 'Period'    | 'Resources'                                   | 'Dimensions' | ''                    | ''                                            | ''        |
+		| ''                                      | ''            | ''          | 'Quantity'                                    | 'Store'      | 'Item key'            | ''                                            | ''        |
+		| ''                                      | 'Expense'     | '*'         | '14'                                          | 'Store 07'   | 'Mint/Mango'          | ''                                            | ''        |
+		| ''                                      | 'Expense'     | '*'         | '14'                                          | 'Store 07'   | 'Fruit'               | ''                                            | ''        |
 		And I close all client application windows
 
 Scenario: _029520 create Bundling (Store use Shipment confirmation, doesn't use Goods receipt)
@@ -707,7 +707,7 @@ Scenario: _029520 create Bundling (Store use Shipment confirmation, doesn't use 
 
 
 
-Scenario: _029519 check the output of the document movement report for Bundling
+Scenario: _029521 check the output of the document movement report for Bundling
 	Given I open hyperlink "e1cib/list/Document.Bundling"
 	* Check the report output for the selected document from the list
 		And I go to line in "List" table
@@ -715,28 +715,28 @@ Scenario: _029519 check the output of the document movement report for Bundling
 		| '$$NumberBundling0029501$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$Bundling0029501$$'                    | ''            | ''          | ''                              | ''           | ''                              |
-		| 'Document registrations records' | ''            | ''          | ''                              | ''           | ''                              |
-		| 'Register  "Bundles content"'    | ''            | ''          | ''                              | ''           | ''                              |
-		| ''                               | 'Period'      | 'Resources' | 'Dimensions'                    | ''           | ''                              |
-		| ''                               | ''            | 'Quantity'  | 'Item key bundle'               | 'Item key'   | ''                              |
-		| ''                               | '*'           | '1'         | 'Bound Dress+Shirt/Dress+Shirt' | 'XS/Blue'    | ''                              |
-		| ''                               | '*'           | '1'         | 'Bound Dress+Shirt/Dress+Shirt' | '36/Red'     | ''                              |
-		| ''                               | ''            | ''          | ''                              | ''           | ''                              |
-		| 'Register  "Stock reservation"'  | ''            | ''          | ''                              | ''           | ''                              |
-		| ''                               | 'Record type' | 'Period'    | 'Resources'                     | 'Dimensions' | ''                              |
-		| ''                               | ''            | ''          | 'Quantity'                      | 'Store'      | 'Item key'                      |
-		| ''                               | 'Receipt'     | '*'         | '10'                            | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' |
-		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | 'XS/Blue'                       |
-		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | '36/Red'                        |
-		| ''                               | ''            | ''          | ''                              | ''           | ''                              |
-		| 'Register  "Stock balance"'      | ''            | ''          | ''                              | ''           | ''                              |
-		| ''                               | 'Record type' | 'Period'    | 'Resources'                     | 'Dimensions' | ''                              |
-		| ''                               | ''            | ''          | 'Quantity'                      | 'Store'      | 'Item key'                      |
-		| ''                               | 'Receipt'     | '*'         | '10'                            | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' |
-		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | 'XS/Blue'                       |
-		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | '36/Red'                        |
+		And "ResultTable" spreadsheet document contains lines by template:
+		| '$$Bundling0029501$$'            | ''            | ''          | ''                          | ''           | ''                          |
+		| 'Document registrations records' | ''            | ''          | ''                          | ''           | ''                          |
+		| 'Register  "Bundles content"'    | ''            | ''          | ''                          | ''           | ''                          |
+		| ''                               | 'Period'      | 'Resources' | 'Dimensions'                | ''           | ''                          |
+		| ''                               | ''            | 'Quantity'  | 'Item key bundle'           | 'Item key'   | ''                          |
+		| ''                               | '*'           | '1'         | 'Scarf + Dress/Dress+Scarf' | 'XS/Blue'    | ''                          |
+		| ''                               | '*'           | '1'         | 'Scarf + Dress/Dress+Scarf' | 'XS/Red'     | ''                          |
+		| ''                               | ''            | ''          | ''                          | ''           | ''                          |
+		| 'Register  "Stock reservation"'  | ''            | ''          | ''                          | ''           | ''                          |
+		| ''                               | 'Record type' | 'Period'    | 'Resources'                 | 'Dimensions' | ''                          |
+		| ''                               | ''            | ''          | 'Quantity'                  | 'Store'      | 'Item key'                  |
+		| ''                               | 'Receipt'     | '*'         | '10'                        | 'Store 01'   | 'Scarf + Dress/Dress+Scarf' |
+		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Blue'                   |
+		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Red'                    |
+		| ''                               | ''            | ''          | ''                          | ''           | ''                          |
+		| 'Register  "Stock balance"'      | ''            | ''          | ''                          | ''           | ''                          |
+		| ''                               | 'Record type' | 'Period'    | 'Resources'                 | 'Dimensions' | ''                          |
+		| ''                               | ''            | ''          | 'Quantity'                  | 'Store'      | 'Item key'                  |
+		| ''                               | 'Receipt'     | '*'         | '10'                        | 'Store 01'   | 'Scarf + Dress/Dress+Scarf' |
+		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Blue'                   |
+		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Red'                    |
 
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Bundling"
@@ -748,27 +748,27 @@ Scenario: _029519 check the output of the document movement report for Bundling
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$Bundling0029501$$'                    | ''            | ''          | ''                              | ''           | ''                              |
-		| 'Document registrations records' | ''            | ''          | ''                              | ''           | ''                              |
-		| 'Register  "Bundles content"'    | ''            | ''          | ''                              | ''           | ''                              |
-		| ''                               | 'Period'      | 'Resources' | 'Dimensions'                    | ''           | ''                              |
-		| ''                               | ''            | 'Quantity'  | 'Item key bundle'               | 'Item key'   | ''                              |
-		| ''                               | '*'           | '1'         | 'Bound Dress+Shirt/Dress+Shirt' | 'XS/Blue'    | ''                              |
-		| ''                               | '*'           | '1'         | 'Bound Dress+Shirt/Dress+Shirt' | '36/Red'     | ''                              |
-		| ''                               | ''            | ''          | ''                              | ''           | ''                              |
-		| 'Register  "Stock reservation"'  | ''            | ''          | ''                              | ''           | ''                              |
-		| ''                               | 'Record type' | 'Period'    | 'Resources'                     | 'Dimensions' | ''                              |
-		| ''                               | ''            | ''          | 'Quantity'                      | 'Store'      | 'Item key'                      |
-		| ''                               | 'Receipt'     | '*'         | '10'                            | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' |
-		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | 'XS/Blue'                       |
-		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | '36/Red'                        |
-		| ''                               | ''            | ''          | ''                              | ''           | ''                              |
-		| 'Register  "Stock balance"'      | ''            | ''          | ''                              | ''           | ''                              |
-		| ''                               | 'Record type' | 'Period'    | 'Resources'                     | 'Dimensions' | ''                              |
-		| ''                               | ''            | ''          | 'Quantity'                      | 'Store'      | 'Item key'                      |
-		| ''                               | 'Receipt'     | '*'         | '10'                            | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' |
-		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | 'XS/Blue'                       |
-		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | '36/Red'                        |
+		| '$$Bundling0029501$$'            | ''            | ''          | ''                          | ''           | ''                          |
+		| 'Document registrations records' | ''            | ''          | ''                          | ''           | ''                          |
+		| 'Register  "Bundles content"'    | ''            | ''          | ''                          | ''           | ''                          |
+		| ''                               | 'Period'      | 'Resources' | 'Dimensions'                | ''           | ''                          |
+		| ''                               | ''            | 'Quantity'  | 'Item key bundle'           | 'Item key'   | ''                          |
+		| ''                               | '*'           | '1'         | 'Scarf + Dress/Dress+Scarf' | 'XS/Blue'    | ''                          |
+		| ''                               | '*'           | '1'         | 'Scarf + Dress/Dress+Scarf' | 'XS/Red'     | ''                          |
+		| ''                               | ''            | ''          | ''                          | ''           | ''                          |
+		| 'Register  "Stock reservation"'  | ''            | ''          | ''                          | ''           | ''                          |
+		| ''                               | 'Record type' | 'Period'    | 'Resources'                 | 'Dimensions' | ''                          |
+		| ''                               | ''            | ''          | 'Quantity'                  | 'Store'      | 'Item key'                  |
+		| ''                               | 'Receipt'     | '*'         | '10'                        | 'Store 01'   | 'Scarf + Dress/Dress+Scarf' |
+		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Blue'                   |
+		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Red'                    |
+		| ''                               | ''            | ''          | ''                          | ''           | ''                          |
+		| 'Register  "Stock balance"'      | ''            | ''          | ''                          | ''           | ''                          |
+		| ''                               | 'Record type' | 'Period'    | 'Resources'                 | 'Dimensions' | ''                          |
+		| ''                               | ''            | ''          | 'Quantity'                  | 'Store'      | 'Item key'                  |
+		| ''                               | 'Receipt'     | '*'         | '10'                        | 'Store 01'   | 'Scarf + Dress/Dress+Scarf' |
+		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Blue'                   |
+		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Red'                    |
 
 	And I close all client application windows
 
@@ -796,26 +796,26 @@ Scenario: _02951901 clear movements Bundling and check that there is no movement
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$Bundling0029501$$'                    | ''            | ''          | ''                              | ''           | ''                              |
-		| 'Document registrations records' | ''            | ''          | ''                              | ''           | ''                              |
-		| 'Register  "Bundles content"'    | ''            | ''          | ''                              | ''           | ''                              |
-		| ''                               | 'Period'      | 'Resources' | 'Dimensions'                    | ''           | ''                              |
-		| ''                               | ''            | 'Quantity'  | 'Item key bundle'               | 'Item key'   | ''                              |
-		| ''                               | '*'           | '1'         | 'Bound Dress+Shirt/Dress+Shirt' | 'XS/Blue'    | ''                              |
-		| ''                               | '*'           | '1'         | 'Bound Dress+Shirt/Dress+Shirt' | '36/Red'     | ''                              |
-		| ''                               | ''            | ''          | ''                              | ''           | ''                              |
-		| 'Register  "Stock reservation"'  | ''            | ''          | ''                              | ''           | ''                              |
-		| ''                               | 'Record type' | 'Period'    | 'Resources'                     | 'Dimensions' | ''                              |
-		| ''                               | ''            | ''          | 'Quantity'                      | 'Store'      | 'Item key'                      |
-		| ''                               | 'Receipt'     | '*'         | '10'                            | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' |
-		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | 'XS/Blue'                       |
-		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | '36/Red'                        |
-		| ''                               | ''            | ''          | ''                              | ''           | ''                              |
-		| 'Register  "Stock balance"'      | ''            | ''          | ''                              | ''           | ''                              |
-		| ''                               | 'Record type' | 'Period'    | 'Resources'                     | 'Dimensions' | ''                              |
-		| ''                               | ''            | ''          | 'Quantity'                      | 'Store'      | 'Item key'                      |
-		| ''                               | 'Receipt'     | '*'         | '10'                            | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' |
-		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | 'XS/Blue'                       |
-		| ''                               | 'Expense'     | '*'         | '10'                            | 'Store 01'   | '36/Red'                        |
+		| '$$Bundling0029501$$'            | ''            | ''          | ''                          | ''           | ''                          |
+		| 'Document registrations records' | ''            | ''          | ''                          | ''           | ''                          |
+		| 'Register  "Bundles content"'    | ''            | ''          | ''                          | ''           | ''                          |
+		| ''                               | 'Period'      | 'Resources' | 'Dimensions'                | ''           | ''                          |
+		| ''                               | ''            | 'Quantity'  | 'Item key bundle'           | 'Item key'   | ''                          |
+		| ''                               | '*'           | '1'         | 'Scarf + Dress/Dress+Scarf' | 'XS/Blue'    | ''                          |
+		| ''                               | '*'           | '1'         | 'Scarf + Dress/Dress+Scarf' | 'XS/Red'     | ''                          |
+		| ''                               | ''            | ''          | ''                          | ''           | ''                          |
+		| 'Register  "Stock reservation"'  | ''            | ''          | ''                          | ''           | ''                          |
+		| ''                               | 'Record type' | 'Period'    | 'Resources'                 | 'Dimensions' | ''                          |
+		| ''                               | ''            | ''          | 'Quantity'                  | 'Store'      | 'Item key'                  |
+		| ''                               | 'Receipt'     | '*'         | '10'                        | 'Store 01'   | 'Scarf + Dress/Dress+Scarf' |
+		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Blue'                   |
+		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Red'                    |
+		| ''                               | ''            | ''          | ''                          | ''           | ''                          |
+		| 'Register  "Stock balance"'      | ''            | ''          | ''                          | ''           | ''                          |
+		| ''                               | 'Record type' | 'Period'    | 'Resources'                 | 'Dimensions' | ''                          |
+		| ''                               | ''            | ''          | 'Quantity'                  | 'Store'      | 'Item key'                  |
+		| ''                               | 'Receipt'     | '*'         | '10'                        | 'Store 01'   | 'Scarf + Dress/Dress+Scarf' |
+		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Blue'                   |
+		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Red'                    |
 		And I close all client application windows
 

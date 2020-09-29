@@ -223,9 +223,6 @@ Scenario: _0154134 preparation
 		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
-			| 'Group name' |
-			| 'Catalogs'   |
-		And I go to line in "MetadataTree" table
 			| 'Group name'    | 'Use' |
 			| 'Business unit' | 'No'  |
 		And I activate "Value" field in "MetadataTree" table
@@ -365,7 +362,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		Then the form attribute named "ItemListTotalNetAmount" became equal to "1 500"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "1 500,00"
 		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "270,00"
 	* Check tax recalculation when uncheck/re-check Price include Tax
 		* Unchecking box Price include Tax
@@ -593,8 +590,9 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 			| 'Shop 01'       | ''             | 'Dress'    | 'Basic Price Types' | 'L/Green'   | '3,000' | 'pcs'  | '251,69'     | '550,00' | '18%' | ''              | '1 398,31'   | '1 650,00'     | ''                    | 'Store 01' | ''       |
 			| 'Shop 01'       | ''             | 'Trousers' | 'Basic Price Types' | '38/Yellow' | '1,000' | 'pcs'  | '61,02'      | '400,00' | '18%' | ''              | '338,98'     | '400,00'       | ''                    | 'Store 01' | ''       |
 		And "Payments" table contains lines
-			| 'Amount'   | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Account' | 'Percent' |
-			| '2 050,00' | ''           | 'Cash'         | ''                 | ''          | 'Cash desk №2'        | ''        |
+			| 'Payment type' | 'Payment terminal' | 'Bank term' | 'Amount'   | 'Account'      | 'Commission' | 'Percent' |
+			| 'Cash'         | ''                 | ''          | '2 051,00' | 'Cash desk №2' | ''           | ''        |
+			| 'Cash'         | ''                 | ''          | '-1,00'    | 'Cash desk №2' | ''           | ''        |
 		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "1 737,29"
 		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "312,71"
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "2 050,00"

@@ -202,6 +202,19 @@ Scenario: _2050001 preparation
 		And I save the window as "$$CashPayment2050001$$"
 		And I save the value of "Number" field as "$$NumberCashPayment2050001$$"
 		And I click "Post and close" button
+	* Check or create PurchaseReturn300301
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberPurchaseReturn300301$$" |
+			When create PurchaseReturn300301
+	* Check or create SalesReturn30001
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesReturn30001$$" |
+			When create SalesReturn30001
+	
 
 Scenario: 2050002 check filling in Reconcilation statement
 	* Open a creation form Reconcilation statement
@@ -382,21 +395,21 @@ Scenario: _2050005 check the movements of the Invoice match document with the ve
 	* Check movements
 		And I click "Registrations report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$InvoiceMatch2050005$$'             | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                        | ''                             | ''                             | ''                     |
-		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                        | ''                             | ''                             | ''                     |
-		| 'Register  "Advance to suppliers"'    | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                        | ''                             | ''                             | ''                     |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                           | ''             | ''             | ''                        | ''                             | 'Attributes'                   | ''                     |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Partner'                    | 'Legal name'   | 'Currency'     | 'Payment document'        | 'Multi currency movement type' | 'Deferred calculation'         | ''                     |
-		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Crystal'                    | 'Company Adel' | 'USD'          | '$$BankPayment2050001$$*' | 'Reporting currency'           | 'No'                           | ''                     |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'                    | 'Company Adel' | 'TRY'          | '$$BankPayment2050001$$*' | 'en description is empty'      | 'No'                           | ''                     |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'                    | 'Company Adel' | 'TRY'          | '$$BankPayment2050001$$*' | 'Local currency'               | 'No'                           | ''                     |
-		| ''                                    | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                        | ''                             | ''                             | ''                     |
-		| 'Register  "Partner AP transactions"' | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                        | ''                             | ''                             | ''                     |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                           | ''             | ''             | ''                        | ''                             | ''                             | 'Attributes'           |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'             | 'Partner'      | 'Legal name'   | 'Partner term'            | 'Currency'                     | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | '$$PurchaseInvoice2040005$$' | 'Crystal'      | 'Company Adel' | 'Vendor, TRY'             | 'USD'                          | 'Reporting currency'           | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice2040005$$' | 'Crystal'      | 'Company Adel' | 'Vendor, TRY'             | 'TRY'                          | 'en description is empty'      | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice2040005$$' | 'Crystal'      | 'Company Adel' | 'Vendor, TRY'             | 'TRY'                          | 'Local currency'               | 'No'                   |
+		| '$$InvoiceMatch2050005$$'             | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                       | ''                             | ''                             | ''                     |
+		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                       | ''                             | ''                             | ''                     |
+		| 'Register  "Advance to suppliers"'    | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                       | ''                             | ''                             | ''                     |
+		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                           | ''             | ''             | ''                       | ''                             | 'Attributes'                   | ''                     |
+		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Partner'                    | 'Legal name'   | 'Currency'     | 'Payment document'       | 'Multi currency movement type' | 'Deferred calculation'         | ''                     |
+		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Crystal'                    | 'Company Adel' | 'USD'          | '$$BankPayment2050001$$' | 'Reporting currency'           | 'No'                           | ''                     |
+		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'                    | 'Company Adel' | 'TRY'          | '$$BankPayment2050001$$' | 'en description is empty'      | 'No'                           | ''                     |
+		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'                    | 'Company Adel' | 'TRY'          | '$$BankPayment2050001$$' | 'Local currency'               | 'No'                           | ''                     |
+		| ''                                    | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                       | ''                             | ''                             | ''                     |
+		| 'Register  "Partner AP transactions"' | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                       | ''                             | ''                             | ''                     |
+		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                           | ''             | ''             | ''                       | ''                             | ''                             | 'Attributes'           |
+		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'             | 'Partner'      | 'Legal name'   | 'Partner term'           | 'Currency'                     | 'Multi currency movement type' | 'Deferred calculation' |
+		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | '$$PurchaseInvoice2040005$$' | 'Crystal'      | 'Company Adel' | 'Vendor, TRY'            | 'USD'                          | 'Reporting currency'           | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice2040005$$' | 'Crystal'      | 'Company Adel' | 'Vendor, TRY'            | 'TRY'                          | 'en description is empty'      | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice2040005$$' | 'Crystal'      | 'Company Adel' | 'Vendor, TRY'            | 'TRY'                          | 'Local currency'               | 'No'                   |
 		And I close all client application windows
 
 Scenario: _2050006 check the movements of the Invoice match document with the customer in advance (manual filling)
@@ -479,9 +492,9 @@ Scenario: _2050006 check the movements of the Invoice match document with the cu
 		| 'Register  "Advance from customers"'  | ''            | ''       | ''          | ''             | ''                         | ''             | ''             | ''                         | ''                             | ''                             | ''                     |
 		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''             | ''             | ''                         | ''                             | 'Attributes'                   | ''                     |
 		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Partner'                  | 'Legal name'   | 'Currency'     | 'Receipt document'         | 'Multi currency movement type' | 'Deferred calculation'         | ''                     |
-		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Crystal'                  | 'Company Adel' | 'USD'          | '$$BankReceipt2050001$$*'  | 'Reporting currency'           | 'No'                           | ''                     |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'                  | 'Company Adel' | 'TRY'          | '$$BankReceipt2050001$$*'  | 'en description is empty'      | 'No'                           | ''                     |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'                  | 'Company Adel' | 'TRY'          | '$$BankReceipt2050001$$*'  | 'Local currency'               | 'No'                           | ''                     |
+		| ''                                    | 'Expense'     | '*'      | '171,23'    | 'Main Company' | 'Crystal'                  | 'Company Adel' | 'USD'          | '$$BankReceipt2050001$$'  | 'Reporting currency'           | 'No'                           | ''                     |
+		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'                  | 'Company Adel' | 'TRY'          | '$$BankReceipt2050001$$'  | 'en description is empty'      | 'No'                           | ''                     |
+		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'                  | 'Company Adel' | 'TRY'          | '$$BankReceipt2050001$$'  | 'Local currency'               | 'No'                           | ''                     |
 		And I close all client application windows
 
 
@@ -626,7 +639,7 @@ Scenario: _2050008 check the availability of Purchase return and Sales return ch
 		And I select current line in "" table
 		And I go to line in "List" table
 			| 'Number' | 'Partner' |
-			| '$$NumberPurchaseReturn022301$$'      | 'Ferron BP' |
+			| '$$NumberPurchaseReturn300301$$'      | 'Ferron BP' |
 		And I select current line in "List" table
 		Then the form attribute named "PartnerArTransactionsBasisDocument" became equal to "$$PurchaseReturn022301$$" template
 	* Filling the document header (transaction type - with vendor)
@@ -643,9 +656,9 @@ Scenario: _2050008 check the availability of Purchase return and Sales return ch
 		And I select current line in "" table
 		And I go to line in "List" table
 			| 'Number' | 'Partner' |
-			| '$$NumberSalesReturn028501$$'      | 'Kalipso' |
+			| '$$NumberSalesReturn30001$$'      | 'Kalipso' |
 		And I select current line in "List" table
-		Then the form attribute named "PartnerArTransactionsBasisDocument" became equal to "$$PurchaseReturn022301$$" template
+		Then the form attribute named "PartnerArTransactionsBasisDocument" became equal to "$$SalesReturn30001$$" template
 	And I close all client application windows
 
 

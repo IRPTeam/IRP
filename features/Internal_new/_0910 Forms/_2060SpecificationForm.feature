@@ -151,7 +151,7 @@ Scenario: _206001 check message output when creating a Bundle with empty item
 		And I click choice button of "Color" attribute in "FormTable*" table
 		And I go to line in "List" table
 			| 'Additional attribute' | 'Description' |
-			| 'Color'         | 'Yellow'      |
+			| 'Color'         | 'Green'      |
 		And I select current line in "List" table
 		And I finish line editing in "FormTable*" table
 		And I click "Add" button
@@ -165,7 +165,7 @@ Scenario: _206001 check message output when creating a Bundle with empty item
 		And I click choice button of "Color" attribute in "FormTable*" table
 		And I go to line in "List" table
 			| 'Additional attribute' | 'Description' |
-			| 'Color'         | 'Yellow'      |
+			| 'Color'         | 'Green'      |
 		And I select current line in "List" table
 		And I finish line editing in "FormTable*" table
 		And I activate "Quantity" field in "FormTable*" table

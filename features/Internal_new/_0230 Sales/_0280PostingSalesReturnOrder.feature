@@ -181,7 +181,7 @@ Scenario: _028012 check totals in the document Sales return order
 	* Select Sales return
 		And I go to line in "List" table
 		| 'Number' |
-		| '$$SalesReturnOrder028001$$'      |
+		| '$$NumberSalesReturnOrder028001$$'      |
 		And I select current line in "List" table
 	* Check totals in the document Sales return order
 		Then the form attribute named "ItemListTotalNetAmount" became equal to "466,10"

@@ -56,6 +56,7 @@ Scenario: _022300 preparation
 				| "$$NumberPurchaseOrder017001$$" |
 			When create PurchaseOrder017001
 	* Check or create PurchaseOrder017003
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		If "List" table does not contain lines Then
 				| "Number" |
 				| "$$NumberPurchaseOrder017003$$" |
@@ -73,13 +74,13 @@ Scenario: _022300 preparation
 				| "$$NumberPurchaseInvoice018006$$" |
 			When create PurchaseInvoice018006 based on PurchaseOrder017003
 	* Check or create PurchaseReturnOrder022001
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 		If "List" table does not contain lines Then
 				| "Number" |
 				| "$$NumberPurchaseReturnOrder022001$$" |
 			When create PurchaseReturnOrder022001 based on PurchaseInvoice018006 (PurchaseOrder017003)
 	* Check or create PurchaseReturnOrder022006
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 		If "List" table does not contain lines Then
 				| "Number" |
 				| "$$NumberPurchaseReturnOrder022006$$" |

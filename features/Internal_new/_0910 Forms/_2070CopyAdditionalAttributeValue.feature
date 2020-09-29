@@ -62,28 +62,15 @@ Scenario: _207001 copy additional attribute values when create catalog element
 				| 'Catalog_Partners'      |
 			And I select current line in "List" table
 		* Adding additional attributes
-			And in the table "Attributes" I click the button named "AttributesAdd"
-			And I click choice button of "Attribute" attribute in "Attributes" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Additional attribute 02'  |
-			And I select current line in "List" table
-			And in the table "Attributes" I click the button named "AttributesAdd"
-			And I click choice button of "Attribute" attribute in "Attributes" table
-			And I go to line in "List" table
-				| 'Description'             |
-				| 'Additional attribute 01' |
-			And I select current line in "List" table
-			And I finish line editing in "Attributes" table
-			And I input "Partners" text in the field named "Description_en"
-			And I click "Save and close" button
-		* Opening the form for adding additional attributes for Partners
-			Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
-			And I go to line in "List" table
-				| 'Predefined data item name' |
-				| 'Catalog_Partners'      |
-			And I select current line in "List" table
-		* Adding additional attributes
+			If "Attributes" table contains lines:
+					| 'Attribute' |
+					| 'Additional attribute 02'  |
+					| 'Additional attribute 01'  |
+				And I go to line in "Attributes" table
+					| 'Attribute'               |
+					| 'Additional attribute 01' |
+				And in the table "Attributes" I click the button named "AttributesContextMenuDelete"
+				And in the table "Attributes" I click the button named "AttributesContextMenuDelete"	
 			And in the table "Attributes" I click the button named "AttributesAdd"
 			And I click choice button of "Attribute" attribute in "Attributes" table
 			And I go to line in "List" table
@@ -188,6 +175,15 @@ Scenario: _207002 copy additional attribute values when create document
 				| 'Document_BankReceipt'      |
 			And I select current line in "List" table
 		* Adding additional attributes
+			If "Attributes" table contains lines:
+					| 'Attribute' |
+					| 'Additional attribute 02'  |
+					| 'Additional attribute 01'  |
+				And I go to line in "Attributes" table
+					| 'Attribute'               |
+					| 'Additional attribute 01' |
+				And in the table "Attributes" I click the button named "AttributesContextMenuDelete"
+				And in the table "Attributes" I click the button named "AttributesContextMenuDelete"	
 			And in the table "Attributes" I click the button named "AttributesAdd"
 			And I click choice button of "Attribute" attribute in "Attributes" table
 			And I go to line in "List" table

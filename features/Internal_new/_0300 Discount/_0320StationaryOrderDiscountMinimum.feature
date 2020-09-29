@@ -45,6 +45,7 @@ Scenario: _032001 discount calculation Discount 2 without Vat in the group Sum i
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I click the button named "FormCreate"
 	And I click Select button of "Partner" field
+	And I click "List" button	
 	And I go to line in "List" table
 		| 'Description'             |
 		| 'MIO' |

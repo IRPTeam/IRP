@@ -133,172 +133,120 @@ Scenario: _0154100 preparation ( filling documents)
 	* For the test of choice Planing transaction basis in bank/cash documents
 		* Creating a Cashtransfer order to move money between cash accounts
 			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
-			And I click the button named "FormCreate"
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description  |
-				| Main Company |
-			And I select current line in "List" table
-			* Filling Sender and Send amount
-				And I click Select button of "Sender" field
-				And I go to line in "List" table
-					| Description    |
-					| Cash desk №1 |
-				And I select current line in "List" table
-				And I input "400,00" text in "Send amount" field
-				And I click Select button of "Send currency" field
-				And I go to line in "List" table
-					| Code | Description     |
-					| USD  | American dollar |
-				And I select current line in "List" table
-			* Filling Receiver and Receive amount
-				And I click Select button of "Receiver" field
-				And I go to line in "List" table
-					| Description    |
-					| Cash desk №2 |
-				And I select current line in "List" table
-				And I input "400,00" text in "Receive amount" field
-				And I click Select button of "Receive currency" field
-				And I go to line in "List" table
-					| Code | Description     |
-					| USD  | American dollar |
-				And I activate "Description" field in "List" table
-				And I select current line in "List" table
-			// * Change the document number
-			// 	And I input "10" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "10" text in "Number" field
-			And I click "Post" button
-			And I save the value of "Number" field as "$$NumberCashTransferOrder01541001$$"
-			And I save the window as "$$CashTransferOrder01541001$$"
-			And I click "Post and close" button
-			And Delay 5
-			* Check creation
-				Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
-				And "List" table contains lines
-				| Number | Sender        | Receiver     | Company      |
-				| $$NumberCashTransferOrder01541001$$      | Cash desk №1 | Cash desk №2 | Main Company |
-			And I close all client application windows
-		And Delay 5
-		* Create Cashtransfer order for currency exchange (cash accounts)
-			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
-			And I click the button named "FormCreate"
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description  |
-				| Main Company |
-			And I select current line in "List" table
-			* Filling Sender and Send amount
-				And I click Select button of "Sender" field
-				And I go to line in "List" table
-					| Description    |
-					| Cash desk №2 |
-				And I select current line in "List" table
-				And I input "210,00" text in "Send amount" field
-				And I click Select button of "Send currency" field
-				And I go to line in "List" table
-					| Code | Description     |
-					| USD  | American dollar |
-				And I select current line in "List" table
-			* Filling Receiver and Receive amount
-				And I click Select button of "Receiver" field
-				And I go to line in "List" table
-					| Description    |
-					| Cash desk №1 |
-				And I select current line in "List" table
-				And I input "1200,00" text in "Receive amount" field
-				And I click Select button of "Receive currency" field
-				And I go to line in "List" table
-					| Code | Description  |
-					| TRY  | Turkish lira |
-				And I activate "Description" field in "List" table
-				And I select current line in "List" table
-				And I click Select button of "Cash advance holder" field
-				And I go to line in "List" table
-					| 'Description' |
-					| 'Arina Brown' |
-				And I select current line in "List" table
-			// * Change the document number to 11
-			// 	And I input "11" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "11" text in "Number" field
-			And I click "Post" button
-			And I save the value of "Number" field as "$$NumberCashTransferOrder01541002$$"
-			And I save the window as "$$CashTransferOrder01541002$$"
-			And I click "Post and close" button
-			And Delay 5
-			* Check creation
-				Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
-				And "List" table contains lines
-				| Number | Sender       | Receiver     | Company      |
-				| $$NumberCashTransferOrder01541002$$      | Cash desk №2 | Cash desk №1 | Main Company |
-			And I close all client application windows
-		And Delay 5
-		* Create Cashtransfer order for currency exchange (bank accounts)
-			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
-			And I click the button named "FormCreate"
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description  |
-				| Main Company |
-			And I select current line in "List" table
-			* Filling Sender and Send amount
-				And I click Select button of "Sender" field
-				And I go to line in "List" table
-					| Description    |
-					| Bank account, TRY |
-				And I select current line in "List" table
-				And I input "1150,00" text in "Send amount" field
-			* Filling Receiver and Receive amount
-				And I click Select button of "Receiver" field
-				And I go to line in "List" table
-					| Description    |
-					| Bank account, EUR |
-				And I select current line in "List" table
-				And I input "175,00" text in "Receive amount" field
-			// * Change the document number to 13
-			// 	And I input "13" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "13" text in "Number" field
-			And I click "Post" button
-			And I save the value of "Number" field as "$$NumberCashTransferOrder01541003$$"
-			And I save the window as "$$CashTransferOrder01541003$$"
-			And I click "Post and close" button
-			And Delay 5
-			* Check creation
-				Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
-				And "List" table contains lines
-				| Number  | Sender            | Receiver          | Company      |
-				| $$NumberCashTransferOrder01541003$$      | Bank account, TRY | Bank account, EUR | Main Company |
-			And I close all client application windows
-		And Delay 5
-		* Create Cash transfer order for cash transfer between bank accounts in one currency
-			* Create one more bank account in EUR
-				Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
-				And Delay 2
+			If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberCashTransferOrder01541001$$" |
 				And I click the button named "FormCreate"
-				And I click Open button of the field named "Description_en"
-				And I input "Bank account 2, EUR" text in the field named "Description_en"
-				And I input "Bank account 2, EUR TR" text in the field named "Description_tr"
-				And I click "Ok" button
-				And I change the radio button named "Type" value to "Bank"
-				And I input "1120000000" text in "Number" field
-				And I input "OTP" text in "Bank name" field
 				And I click Select button of "Company" field
 				And I go to line in "List" table
 					| Description  |
 					| Main Company |
 				And I select current line in "List" table
-				And I click Choice button of the field named "Currency"
+				* Filling Sender and Send amount
+					And I click Select button of "Sender" field
+					And I go to line in "List" table
+						| Description    |
+						| Cash desk №1 |
+					And I select current line in "List" table
+					And I input "400,00" text in "Send amount" field
+					And I click Select button of "Send currency" field
+					And I go to line in "List" table
+						| Code | Description     |
+						| USD  | American dollar |
+					And I select current line in "List" table
+				* Filling Receiver and Receive amount
+					And I click Select button of "Receiver" field
+					And I go to line in "List" table
+						| Description    |
+						| Cash desk №2 |
+					And I select current line in "List" table
+					And I input "400,00" text in "Receive amount" field
+					And I click Select button of "Receive currency" field
+					And I go to line in "List" table
+						| Code | Description     |
+						| USD  | American dollar |
+					And I activate "Description" field in "List" table
+					And I select current line in "List" table
+				// * Change the document number
+				// 	And I input "10" text in "Number" field
+				// 	Then "1C:Enterprise" window is opened
+				// 	And I click "Yes" button
+				// 	And I input "10" text in "Number" field
+				And I click "Post" button
+				And I save the value of "Number" field as "$$NumberCashTransferOrder01541001$$"
+				And I save the window as "$$CashTransferOrder01541001$$"
+				And I click "Post and close" button
+				And Delay 5
+				* Check creation
+					Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+					And "List" table contains lines
+					| Number | Sender        | Receiver     | Company      |
+					| $$NumberCashTransferOrder01541001$$      | Cash desk №1 | Cash desk №2 | Main Company |
+				And I close all client application windows
+			And Delay 5
+		* Create Cashtransfer order for currency exchange (cash accounts)
+			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+			If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberCashTransferOrder01541002$$" |
+				And I click the button named "FormCreate"
+				And I click Select button of "Company" field
 				And I go to line in "List" table
-					| Code |
-					| EUR  |
+					| Description  |
+					| Main Company |
 				And I select current line in "List" table
-				And I click the button named "FormWriteAndClose"
-			* Create Cash transfer order for cash transfer between bank accounts in one currency
+				* Filling Sender and Send amount
+					And I click Select button of "Sender" field
+					And I go to line in "List" table
+						| Description    |
+						| Cash desk №2 |
+					And I select current line in "List" table
+					And I input "210,00" text in "Send amount" field
+					And I click Select button of "Send currency" field
+					And I go to line in "List" table
+						| Code | Description     |
+						| USD  | American dollar |
+					And I select current line in "List" table
+				* Filling Receiver and Receive amount
+					And I click Select button of "Receiver" field
+					And I go to line in "List" table
+						| Description    |
+						| Cash desk №1 |
+					And I select current line in "List" table
+					And I input "1200,00" text in "Receive amount" field
+					And I click Select button of "Receive currency" field
+					And I go to line in "List" table
+						| Code | Description  |
+						| TRY  | Turkish lira |
+					And I activate "Description" field in "List" table
+					And I select current line in "List" table
+					And I click Select button of "Cash advance holder" field
+					And I go to line in "List" table
+						| 'Description' |
+						| 'Arina Brown' |
+					And I select current line in "List" table
+				// * Change the document number to 11
+				// 	And I input "11" text in "Number" field
+				// 	Then "1C:Enterprise" window is opened
+				// 	And I click "Yes" button
+				// 	And I input "11" text in "Number" field
+				And I click "Post" button
+				And I save the value of "Number" field as "$$NumberCashTransferOrder01541002$$"
+				And I save the window as "$$CashTransferOrder01541002$$"
+				And I click "Post and close" button
+				And Delay 5
+				* Check creation
+					Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+					And "List" table contains lines
+					| Number | Sender       | Receiver     | Company      |
+					| $$NumberCashTransferOrder01541002$$      | Cash desk №2 | Cash desk №1 | Main Company |
+				And I close all client application windows
+			And Delay 5
+		* Create Cashtransfer order for currency exchange (bank accounts)
+			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+			If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberCashTransferOrder01541003$$" |
 				Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 				And I click the button named "FormCreate"
 				And I click Select button of "Company" field
@@ -310,7 +258,7 @@ Scenario: _0154100 preparation ( filling documents)
 					And I click Select button of "Sender" field
 					And I go to line in "List" table
 						| Description    |
-						| Bank account 2, EUR |
+						| Bank account, TRY |
 					And I select current line in "List" table
 					And I input "1150,00" text in "Send amount" field
 				* Filling Receiver and Receive amount
@@ -319,23 +267,91 @@ Scenario: _0154100 preparation ( filling documents)
 						| Description    |
 						| Bank account, EUR |
 					And I select current line in "List" table
-					And I input "1150,00" text in "Receive amount" field
-				// * Change the document number to 14
-				// 	And I input "14" text in "Number" field
+					And I input "175,00" text in "Receive amount" field
+				// * Change the document number to 13
+				// 	And I input "13" text in "Number" field
 				// 	Then "1C:Enterprise" window is opened
 				// 	And I click "Yes" button
-				// 	And I input "14" text in "Number" field
+				// 	And I input "13" text in "Number" field
 				And I click "Post" button
-				And I save the value of "Number" field as "$$NumberCashTransferOrder01541004$$"
-				And I save the window as "$$CashTransferOrder01541004$$"
+				And I save the value of "Number" field as "$$NumberCashTransferOrder01541003$$"
+				And I save the window as "$$CashTransferOrder01541003$$"
 				And I click "Post and close" button
 				And Delay 5
 				* Check creation
 					Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 					And "List" table contains lines
-					| Number  | Sender              | Receiver          | Company      |
-					| $$NumberCashTransferOrder01541004$$      | Bank account 2, EUR | Bank account, EUR | Main Company |
+					| Number  | Sender            | Receiver          | Company      |
+					| $$NumberCashTransferOrder01541003$$      | Bank account, TRY | Bank account, EUR | Main Company |
 				And I close all client application windows
+			And Delay 5
+		* Create Cash transfer order for cash transfer between bank accounts in one currency
+			* Create Cash transfer order for cash transfer between bank accounts in one currency
+				Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+				If "List" table does not contain lines Then
+					| "Number" |
+					| "$$NumberCashTransferOrder01541004$$" |
+					Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+					And I click the button named "FormCreate"
+					And I click Select button of "Company" field
+					And I go to line in "List" table
+						| Description  |
+						| Main Company |
+					And I select current line in "List" table
+					* Filling Sender and Send amount
+						And I click Select button of "Sender" field
+						And I go to line in "List" table
+							| Description    |
+							| Bank account 2, EUR |
+						And I select current line in "List" table
+						And I input "1150,00" text in "Send amount" field
+					* Filling Receiver and Receive amount
+						And I click Select button of "Receiver" field
+						And I go to line in "List" table
+							| Description    |
+							| Bank account, EUR |
+						And I select current line in "List" table
+						And I input "1150,00" text in "Receive amount" field
+					// * Change the document number to 14
+					// 	And I input "14" text in "Number" field
+					// 	Then "1C:Enterprise" window is opened
+					// 	And I click "Yes" button
+					// 	And I input "14" text in "Number" field
+					And I click "Post" button
+					And I save the value of "Number" field as "$$NumberCashTransferOrder01541004$$"
+					And I save the window as "$$CashTransferOrder01541004$$"
+					And I click "Post and close" button
+					And Delay 5
+					* Check creation
+						Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+						And "List" table contains lines
+						| Number  | Sender              | Receiver          | Company      |
+						| $$NumberCashTransferOrder01541004$$      | Bank account 2, EUR | Bank account, EUR | Main Company |
+					And I close all client application windows
+	* Check or create SalesInvoice024025
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesInvoice024025$$" |
+			When create SalesInvoice024025
+	* Check or create SalesInvoice024016
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesInvoice024016$$" |
+			When create SalesInvoice024016 (Shipment confirmation does not used)
+	* Check or create $$PurchaseInvoice29604$$
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberPurchaseInvoice29604$$" |
+			When create a purchase invoice for the purchase of sets and dimensional grids at the tore 02
+	* Check or create $$PurchaseInvoice30004$$
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberPurchaseInvoice30004$$" |
+			When create purchase invoice without order (Vendor Ferron, USD)
 
 
 Scenario: _0154101 check filling in and re-filling Sales order
@@ -531,10 +547,12 @@ Scenario: _0154101 check filling in and re-filling Sales order
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
 		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "287,53"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "1 482,47"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 770,00"
 	* Check tax recalculation when uncheck/re-check Price include Tax
 		* Unchecking box Price include Tax
 			And I move to "Other" tab
@@ -840,10 +858,12 @@ Scenario: _0154102 check filling in and re-filling Sales invoice
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
 		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "1 482,47"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "287,53"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 770,00"
 	* Check tax recalculation when uncheck/re-check Price include Tax
 		* Unchecking box Price include Tax
 			And I move to "Other" tab
@@ -905,27 +925,6 @@ Scenario: _0154102 check filling in and re-filling Sales invoice
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'         | '5,8400'            | '303,08' | '1'            |
-		* Check tax recalculation when choosing a tax rate manually
-			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '38/Black' |
-			And I activate "VAT" field in "ItemList" table
-			And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
-			And "TaxTree" table contains lines
-				| 'Tax'      | 'Tax rate' | 'Item'  | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
-				| 'VAT'      | ''         | ''      | ''         | ''          | '163,22' | '163,22'        |
-				| 'VAT'      | '18%'      | 'Dress' | 'L/Green'  | ''          | '83,90'  | '83,90'         |
-				| 'VAT'      | '18%'      | 'Dress' | 'XS/Blue'  | ''          | '79,32'  | '79,32'         |
-				| 'VAT'      | '0%'       | 'Shirt' | '38/Black' | ''          | ''       | ''              |
-				| 'SalesTax' | ''         | ''      | ''         | ''          | '17,53'  | '17,53'         |
-				| 'SalesTax' | '1%'       | 'Dress' | 'L/Green'  | ''          | '5,45'   | '5,45'          |
-				| 'SalesTax' | '1%'       | 'Dress' | 'XS/Blue'  | ''          | '5,15'   | '5,15'          |
-				| 'SalesTax' | '1%'       | 'Shirt' | '38/Black' | ''          | '6,93'   | '6,93'          |
-			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '38/Black' |
-			And I activate "VAT" field in "ItemList" table
-			And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price include tax
 				And I move to "Item list" tab
@@ -1307,10 +1306,12 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
 		And "ItemList" table does not contain lines
-			| 'Item'     | 'Item key' |
+			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "1 271,19"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "228,81"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 500,00"
 	* Check tax recalculation when uncheck/re-check Price include Tax
 		* Unchecking box Price include Tax
 			And I move to "Other" tab
@@ -1372,23 +1373,6 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '357,64'  | '1'            |
-		* Check tax recalculation when choosing a tax rate manually
-			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '38/Black' |
-			And I activate "VAT" field in "ItemList" table
-			And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
-			And "TaxTree" table contains lines
-				| 'Tax' | 'Tax rate' | 'Item'  | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
-				| 'VAT' | ''         | ''      | ''         | ''          | '192,60' | '192,60'        |
-				| 'VAT' | '18%'      | 'Dress' | 'L/Green'  | ''          | '99,00'  | '99,00'         |
-				| 'VAT' | '18%'      | 'Dress' | 'XS/Blue'  | ''          | '93,60'  | '93,60'         |
-				| 'VAT' | '0%'       | 'Shirt' | '38/Black' | ''          | ''       | ''              |
-			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '38/Black' |
-			And I activate "VAT" field in "ItemList" table
-			And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price include tax
 				And I move to "Other" tab
@@ -1637,10 +1621,12 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
 		And "ItemList" table does not contain lines
 			| 'Item'     | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "1 271,19"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "228,81"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 500,00"
 	* Check tax recalculation when uncheck/re-check Price include Tax
 		* Unchecking box Price include Tax
 			And I move to "Other" tab
@@ -1835,22 +1821,19 @@ Scenario: _0154107 check filling in and re-filling Cash reciept (transaction typ
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description |
-			| Ferron BP   |
+			| Kalipso   |
 		And I select current line in "List" table
 		And I click choice button of "Payer" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description       |
-			| Company Ferron BP |
+			| Company Kalipso |
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "PaymentList" table
 		And "List" table contains lines
 			| 'Description'                   |
 			| 'Basic Partner terms, TRY'         |
 			| 'Basic Partner terms, without VAT' |
-			| 'Vendor Ferron, TRY'            |
-			| 'Vendor Ferron, USD'            |
-			| 'Vendor Ferron, EUR'            |
-			| 'Ferron, USD'                   |
+			| 'Personal Partner terms, $'   |      
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
@@ -1864,10 +1847,10 @@ Scenario: _0154107 check filling in and re-filling Cash reciept (transaction typ
 		Given form with "Documents for incoming payment" header is opened in the active window
 		And "List" table does not contain lines
 			| 'Reference'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-			| 'Sales invoice 234*' | '200,00'          | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+			| '$$SalesInvoice024016$$' | '554,66'          | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I go to line in "List" table
-			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-			| '4 350,00'        | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+			| 'Reference'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+			| '$$SalesInvoice024025$$' | '11 000,00'        | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
 		And I select current line in "PaymentList" table
@@ -1875,7 +1858,7 @@ Scenario: _0154107 check filling in and re-filling Cash reciept (transaction typ
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term' | 'Amount' | 'Payer'             | 'Basis document' |
-			| 'Ferron BP' | ''          | ''       | 'Company Ferron BP' | ''               |
+			| 'Kalipso' | ''          | ''       | 'Company Kalipso' | ''               |
 	* Check the addition of a base document without selecting a base document
 		When I Check the steps for Exception
 			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
@@ -1907,7 +1890,7 @@ Scenario: _0154107 check filling in and re-filling Cash reciept (transaction typ
 	* Check the currency form connection
 		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
-			| 'Ferron BP' | 'Company Ferron BP' |
+			| 'Kalipso' | 'Company Kalipso' |
 		And I select current line in "PaymentList" table
 		And I input "100,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
@@ -1936,7 +1919,7 @@ Scenario: _0154107 check filling in and re-filling Cash reciept (transaction typ
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
-			| 'Ferron BP' | 'Company Ferron BP' |
+			| 'Kalipso' | 'Company Kalipso' |
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner term" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -2024,7 +2007,7 @@ Scenario: _0154109 check filling in and re-filling Bank reciept (transaction typ
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payer'|
-			| 'NDB'       | 'NDB'  |
+			| 'NDB'       | 'Company NDB'  |
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -2044,37 +2027,36 @@ Scenario: _0154109 check filling in and re-filling Bank reciept (transaction typ
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description |
-			| Ferron BP   |
+			| Kalipso   |
 		And I select current line in "List" table
 		And I click choice button of "Payer" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description       |
-			| Company Ferron BP |
+			| Company Kalipso |
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "PaymentList" table
 		And "List" table contains lines
 			| 'Description'                   |
 			| 'Basic Partner terms, TRY'         |
 			| 'Basic Partner terms, without VAT' |
-			| 'Vendor Ferron, TRY'            |
-			| 'Vendor Ferron, USD'            |
-			| 'Vendor Ferron, EUR'            |
-			| 'Ferron, USD'                   |
+			| 'Personal Partner terms, $'   |      
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
 		And I select current line in "List" table
 	* Filter check on the basis documents depending on Partner term
+		# temporarily
 		And I finish line editing in "PaymentList" table
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
+		# temporarily
 		Given form with "Documents for incoming payment" header is opened in the active window
 		And "List" table does not contain lines
 			| 'Reference'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-			| 'Sales invoice 234*' | '200,00'          | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+			| '$$SalesInvoice024016$$' | '554,66'          | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I go to line in "List" table
-			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-			| '4 350,00'        | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+			| 'Reference'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+			| '$$SalesInvoice024025$$' | '11 000,00'        | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
 		And I select current line in "PaymentList" table
@@ -2082,7 +2064,7 @@ Scenario: _0154109 check filling in and re-filling Bank reciept (transaction typ
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term' | 'Amount' | 'Payer'             | 'Basis document' |
-			| 'Ferron BP' | ''          | ''       | 'Company Ferron BP' | ''               |
+			| 'Kalipso' | ''          | ''       | 'Company Kalipso' | ''               |
 	* Check the addition of a base document without selecting a base document
 		When I Check the steps for Exception
 			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
@@ -2114,11 +2096,11 @@ Scenario: _0154109 check filling in and re-filling Bank reciept (transaction typ
 	* Check the currency form connection
 		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
-			| 'Ferron BP' | 'Company Ferron BP' |
+			| 'Kalipso' | 'Company Kalipso' |
 		And I select current line in "PaymentList" table
 		And I input "100,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-			And I go to line in "PaymentList" table
+		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
 			| 'Nicoletta' | 'Company Nicoletta' |
 		And I select current line in "PaymentList" table
@@ -2140,14 +2122,14 @@ Scenario: _0154109 check filling in and re-filling Bank reciept (transaction typ
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '40,00'  | '1'            |
 		And I go to line in "PaymentList" table
 		| 'Amount' | 'Partner'   | 'Payer'             |
-		| '100,00' | 'Ferron BP' | 'Company Ferron BP' |
+		| '100,00' | 'Kalipso' | 'Company Kalipso' |
 		And "CurrenciesPaymentList" table contains lines
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '20,00'  | '1'            |
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
-			| 'Ferron BP' | 'Company Ferron BP' |
+			| 'Kalipso' | 'Company Kalipso' |
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner term" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -2250,7 +2232,7 @@ Scenario: _0154111 check filling in and re-filling Cash payment (transaction typ
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payee'|
-			| 'NDB'       | 'NDB'  |
+			| 'NDB'       | 'Company NDB'  |
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -2295,11 +2277,11 @@ Scenario: _0154111 check filling in and re-filling Cash payment (transaction typ
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And "List" table does not contain lines
-			| 'Document amount'| 'Company'      | 'Legal name'        | 'Partner'   |
-			| '7 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+			| 'Reference' 	| 'Document amount'| 'Company'      | 'Legal name'        | 'Partner'   |
+			| '$$PurchaseInvoice30004$$'	| '4 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I go to line in "List" table
-			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-			| '137 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+		| 'Reference' 	| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+		| '$$PurchaseInvoice29604$$'	| '13 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
 		And I select current line in "PaymentList" table
@@ -2470,7 +2452,7 @@ Scenario: _0154113 check filling in and re-filling Bank payment (transaction typ
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payee'|
-			| 'NDB'       | 'NDB'  |
+			| 'NDB'       | 'Company NDB'  |
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -2515,11 +2497,11 @@ Scenario: _0154113 check filling in and re-filling Bank payment (transaction typ
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And "List" table does not contain lines
-			| 'Document amount'| 'Company'      | 'Legal name'        | 'Partner'   |
-			| '7 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+			| 'Reference' 	| 'Document amount'| 'Company'      | 'Legal name'        | 'Partner'   |
+			| '$$PurchaseInvoice30004$$'	| '4 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I go to line in "List" table
-			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-			| '137 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+		| 'Reference' 	| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+		| '$$PurchaseInvoice29604$$'	| '13 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
 		And I select current line in "PaymentList" table
@@ -3624,9 +3606,7 @@ Scenario: _0154122 check filling in and re-filling Reconcilation statement
 		And in the table "Transactions" I click "Fill" button
 		And "Transactions" table contains lines
 			| 'Document'            | 'Credit'     | 'Debit'     |
-			| '$$PurchaseInvoice018001$$' | '137 000,00' | ''          |
-			| '$$SalesInvoice024001$$'    | ''           | '4 350,00'  |
-			| '$$SalesInvoice024008$$'    | ''           | '11 099,93' |
+			| '$$PurchaseInvoice29604$$' | '13 000,00' | ''          |
 		And I click "Post" button
 	* Check re-filling when re-selecting a currency
 		And I click Select button of "Currency" field
@@ -3637,9 +3617,7 @@ Scenario: _0154122 check filling in and re-filling Reconcilation statement
 		And in the table "Transactions" I click "Fill" button
 		And "Transactions" table does not contain lines
 			| 'Document'            | 'Credit'     | 'Debit'     |
-			| '$$PurchaseInvoice018001$$' | '137 000,00' | ''          |
-			| '$$SalesInvoice024001$$'    | ''           | '4 350,00'  |
-			| '$$SalesInvoice024008$$'    | ''           | '11 099,93' |
+			| '$$PurchaseInvoice2004$$' | '4 000,00' | ''          |
 	* Check refilling at company re-selection
 		And I click Select button of "Company" field
 		And I go to line in "List" table
@@ -3737,16 +3715,16 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
-		| '13'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
+		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I go to line in "List" table
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
-		| '13'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
+		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the selected document is in BankPayment
 		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
-		| '100,00' | 'Cash transfer order 13*'   |
+		| '100,00' | '$$CashTransferOrder01541003$$'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
@@ -3754,7 +3732,7 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		Then "Q" variable is equal to 1
 		And I go to line in "List" table
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
-		| '13'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
+		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when post Bank Payment
@@ -3765,7 +3743,7 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		Then "Q" variable is equal to 1
 		And I go to line in "List" table
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
-		| '13'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
+		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
@@ -3778,7 +3756,7 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		Then "Q" variable is equal to 1
 		And I go to line in "List" table
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
-		| '13'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
+		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I click "Post" button
@@ -3821,13 +3799,13 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'            | 'Send currency' | 'Company'      |
-		| '13'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the selected document is in BankPayment
 		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
-		| '100,00' | 'Cash transfer order 13*'   |
+		| '100,00' | '$$CashTransferOrder01541003$$'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
@@ -3835,7 +3813,7 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'            | 'Send currency'    | 'Company'      |
-		| '13'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form (Bank Receipt posted)
@@ -3846,7 +3824,7 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'            | 'Send currency' | 'Company'      |
-		| '13'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
@@ -3858,7 +3836,7 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'            | 'Send currency' | 'Company'      |
-		| '13'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I click "Post" button
@@ -3904,13 +3882,13 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
-		| '11'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
+		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the selected document is in Cash Payment
 		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
-		| '100,00' | 'Cash transfer order 11*'   |
+		| '100,00' | '$$CashTransferOrder01541002$$'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
@@ -3918,7 +3896,7 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
-		| '11'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
+		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
 		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Cash Payment posted
 		And I click "Post" button
@@ -3928,7 +3906,7 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
-		| '11'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
+		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
 		And I click the button named "FormChoose"
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		And I select current line in "PaymentList" table
@@ -3939,7 +3917,7 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
-		| '11'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
+		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I click "Post" button
@@ -3985,13 +3963,13 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 			| 'Number' | 'Sender'       | 'Send currency'    | 'Company'      |
-			| '11'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
+			| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the selected document is in CashReceipt
 		And "PaymentList" table contains lines
 			| 'Amount' | 'Planning transaction basis' |
-			| '100,00' | 'Cash transfer order 11*'   |
+			| '100,00' | '$$CashTransferOrder01541002$$'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
@@ -3999,7 +3977,7 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 			| 'Number' | 'Sender'       | 'Send currency'    | 'Company'      |
-			| '11'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
+			| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
 		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Cash Receipt posted 
 		And I click "Post" button
@@ -4009,7 +3987,7 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Send currency'    | 'Company'      |
-		| '11'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
 		And I click the button named "FormChoose"
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		And I select current line in "PaymentList" table
@@ -4020,7 +3998,7 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Send currency'    | 'Company'      |
-		| '11'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I click "Post" button
@@ -4060,13 +4038,13 @@ Scenario:  _0154129 check the selection by Planing transaction basis in BankPaym
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
-		| '14'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
+		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the selected document is in BankPayment
 		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
-		| '100,00' | 'Cash transfer order 14*'   |
+		| '100,00' | '$$CashTransferOrder01541004$$'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
@@ -4074,7 +4052,7 @@ Scenario:  _0154129 check the selection by Planing transaction basis in BankPaym
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
-		| '14'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
+		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Bank Payment posted
 		And I click "Post" button
@@ -4084,7 +4062,7 @@ Scenario:  _0154129 check the selection by Planing transaction basis in BankPaym
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
-		| '14'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
+		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		And I click the button named "FormChoose"
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		And I select current line in "PaymentList" table
@@ -4095,7 +4073,7 @@ Scenario:  _0154129 check the selection by Planing transaction basis in BankPaym
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
-		| '14'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
+		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I click "Post" button
@@ -4135,13 +4113,13 @@ Scenario:  _0154130 check the selection by Planing transaction basis in Bank Rec
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
-		| '14'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the selected document is in BankReceipt
 		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
-		| '100,00' | 'Cash transfer order 14*'   |
+		| '100,00' | '$$CashTransferOrder01541004$$'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
@@ -4149,7 +4127,7 @@ Scenario:  _0154130 check the selection by Planing transaction basis in Bank Rec
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
-		| '14'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
 		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Bank Receipt posted
 		And I click "Post" button
@@ -4159,7 +4137,7 @@ Scenario:  _0154130 check the selection by Planing transaction basis in Bank Rec
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
-		| '14'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
 		And I click the button named "FormChoose"
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		And I select current line in "PaymentList" table
@@ -4170,7 +4148,7 @@ Scenario:  _0154130 check the selection by Planing transaction basis in Bank Rec
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
-		| '14'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I click "Post" button

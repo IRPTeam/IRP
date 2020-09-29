@@ -226,32 +226,6 @@ Scenario: _090402 create Sales invoice for several Sales order with the same par
 	
 Scenario: _090403 create Sales invoice for several Sales order with different partners of the same legal name (partner terms are the same)
 # should be created 2 Sales invoice
-* Add Partner Ferron 1 and Partner Ferron 2 in Retail segment
-	Given I open hyperlink "e1cib/list/InformationRegister.PartnerSegments"
-	And I click the button named "FormCreate"
-	And I click Select button of "Segment" field
-	And I go to line in "List" table
-			| Description |
-			| Retail      |
-	And I select current line in "List" table
-	And I click Select button of "Partner" field
-	And I go to line in "List" table
-			| Description      |
-			| Partner Ferron 2 |
-	And I select current line in "List" table
-	And I click "Save and close" button
-	And I click the button named "FormCreate"
-	And I click Select button of "Segment" field
-	And I go to line in "List" table
-			| Description |
-			| Retail      |
-	And I select current line in "List" table
-	And I click Select button of "Partner" field
-	And I go to line in "List" table
-			| Description      |
-			| Partner Ferron 1 |
-	And I select current line in "List" table
-	And I click "Save and close" button
 * Create first test SO 328
 	When create the first test SO for a test on the creation mechanism based on
 	* Change the document number to 328
@@ -1070,27 +1044,5 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 			| '550,00' | 'Dress'    | 'L/Green'   | 'Basic Price Types' | '7,000'  | 'pcs'  | '1%'       | '3 224,59'   | '3 850,00'     | 'Store 02' |
 			| '400,00' | 'Trousers' | '36/Yellow' | 'Basic Price Types' | '12,000' | 'pcs'  | '1%'       | '4 020,28'   | '4 800,00'     | 'Store 02' |
 			| '400,00' | 'Trousers' | '36/Yellow' | 'Basic Price Types' | '8,000'  | 'pcs'  | '1%'       | '2 680,18'   | '3 200,00'     | 'Store 02' |
-		And "TaxTree" table contains lines
-			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount'   | 'Manual amount' |
-			| 'VAT'      | ''         | ''         | ''          | ''          | '5 094,92' | '5 094,92'      |
-			| 'VAT'      | '18%'      | 'Dress'    | 'M/White'   | ''          | '396,61'   | '396,61'        |
-			| 'VAT'      | '18%'      | 'Dress'    | 'L/Green'   | ''          | '419,49'   | '419,49'        |
-			| 'VAT'      | '18%'      | 'Trousers' | '36/Yellow' | ''          | '610,17'   | '610,17'        |
-			| 'VAT'      | '18%'      | 'Dress'    | 'M/White'   | ''          | '634,58'   | '634,58'        |
-			| 'VAT'      | '18%'      | 'Dress'    | 'M/White'   | ''          | '555,25'   | '555,25'        |
-			| 'VAT'      | '18%'      | 'Dress'    | 'L/Green'   | ''          | '671,19'   | '671,19'        |
-			| 'VAT'      | '18%'      | 'Dress'    | 'L/Green'   | ''          | '587,29'   | '587,29'        |
-			| 'VAT'      | '18%'      | 'Trousers' | '36/Yellow' | ''          | '732,20'   | '732,20'        |
-			| 'VAT'      | '18%'      | 'Trousers' | '36/Yellow' | ''          | '488,14'   | '488,14'        |
-			| 'SalesTax' | ''         | ''         | ''          | ''          | '330,68'   | '330,68'        |
-			| 'SalesTax' | '1%'       | 'Dress'    | 'M/White'   | ''          | '25,74'    | '25,74'         |
-			| 'SalesTax' | '1%'       | 'Dress'    | 'L/Green'   | ''          | '27,23'    | '27,23'         |
-			| 'SalesTax' | '1%'       | 'Trousers' | '36/Yellow' | ''          | '39,60'    | '39,60'         |
-			| 'SalesTax' | '1%'       | 'Dress'    | 'M/White'   | ''          | '41,19'    | '41,19'         |
-			| 'SalesTax' | '1%'       | 'Dress'    | 'M/White'   | ''          | '36,04'    | '36,04'         |
-			| 'SalesTax' | '1%'       | 'Dress'    | 'L/Green'   | ''          | '43,56'    | '43,56'         |
-			| 'SalesTax' | '1%'       | 'Dress'    | 'L/Green'   | ''          | '38,12'    | '38,12'         |
-			| 'SalesTax' | '1%'       | 'Trousers' | '36/Yellow' | ''          | '47,52'    | '47,52'         |
-			| 'SalesTax' | '1%'       | 'Trousers' | '36/Yellow' | ''          | '31,68'    | '31,68'         |
 		And I close all client application windows
 

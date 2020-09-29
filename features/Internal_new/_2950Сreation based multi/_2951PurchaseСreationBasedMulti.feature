@@ -1911,8 +1911,8 @@ Scenario: _090318 create Purchase invoice for several Purchase order with differ
 			And Delay 5
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      | 'Goods receipt'      |
-				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 000,00'     | 'Purchase order 141*' | 'Goods receipt 143*' |
+				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      |
+				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 000,00'     | 'Purchase order 141*' |
 		If the field named "LegalName" is equal to "Company Ferron BP" Then
 			And I move to "Other" tab
 			And I input "143" text in "Number" field
@@ -1920,10 +1920,10 @@ Scenario: _090318 create Purchase invoice for several Purchase order with differ
 			And I click "Yes" button
 			And I input "143" text in "Number" field
 			And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' |'Purchase order'      | 'Goods receipt'      |
-			| 'Trousers' | '210,00' | '36/Yellow' | '30,000' | 'pcs'  | '6 300,00'     | 'Store 02' | '*'             |'Purchase order 140*' | 'Goods receipt 142*' | 
-			| 'Dress'    | '200,00' | 'M/White'   | '20,000' | 'pcs'  | '4 000,00'     | 'Store 02' | '*'             |'Purchase order 140*' | 'Goods receipt 142*' |
-			| 'Dress'    | '210,00' | 'L/Green'   | '20,000' | 'pcs'  | '4 200,00'     | 'Store 02' | '*'             |'Purchase order 140*' | 'Goods receipt 142*' |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' |'Purchase order'      |
+			| 'Trousers' | '210,00' | '36/Yellow' | '30,000' | 'pcs'  | '6 300,00'     | 'Store 02' | '*'             |'Purchase order 140*' |
+			| 'Dress'    | '200,00' | 'M/White'   | '20,000' | 'pcs'  | '4 000,00'     | 'Store 02' | '*'             |'Purchase order 140*' |
+			| 'Dress'    | '210,00' | 'L/Green'   | '20,000' | 'pcs'  | '4 200,00'     | 'Store 02' | '*'             |'Purchase order 140*' |
 	And I click "Post and close" button
 	When I click command interface button "Purchase invoice (create)"
 	* Check filling in second Purchase invoice
@@ -1938,8 +1938,8 @@ Scenario: _090318 create Purchase invoice for several Purchase order with differ
 			And I click "Yes" button
 			And I input "142" text in "Number" field
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      | 'Goods receipt'      |
-				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 000,00'     | 'Purchase order 141*' | 'Goods receipt 143*' |
+				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      |
+				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 000,00'     | 'Purchase order 141*' |
 		If the field named "LegalName" is equal to "Company Ferron BP" Then
 			And I move to "Other" tab
 			And I input "143" text in "Number" field
@@ -1947,10 +1947,10 @@ Scenario: _090318 create Purchase invoice for several Purchase order with differ
 			And I click "Yes" button
 			And I input "143" text in "Number" field
 			And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' |'Purchase order'      | 'Goods receipt'      |
-			| 'Trousers' | '210,00' | '36/Yellow' | '30,000' | 'pcs'  | '6 300,00'     | 'Store 02' | '*'             |'Purchase order 140*' | 'Goods receipt 142*' | 
-			| 'Dress'    | '200,00' | 'M/White'   | '20,000' | 'pcs'  | '4 000,00'     | 'Store 02' | '*'             |'Purchase order 140*' | 'Goods receipt 142*' |
-			| 'Dress'    | '210,00' | 'L/Green'   | '20,000' | 'pcs'  | '4 200,00'     | 'Store 02' | '*'             |'Purchase order 140*' | 'Goods receipt 142*' |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' |'Purchase order'      |
+			| 'Trousers' | '210,00' | '36/Yellow' | '30,000' | 'pcs'  | '6 300,00'     | 'Store 02' | '*'             |'Purchase order 140*' |
+			| 'Dress'    | '200,00' | 'M/White'   | '20,000' | 'pcs'  | '4 000,00'     | 'Store 02' | '*'             |'Purchase order 140*' |
+			| 'Dress'    | '210,00' | 'L/Green'   | '20,000' | 'pcs'  | '4 200,00'     | 'Store 02' | '*'             |'Purchase order 140*' |
 	And I click "Post and close" button
 	And I close all client application windows
 	* Create Purchase invoice
@@ -1981,8 +1981,8 @@ Scenario: _090319 create Purchase invoice for several Purchase order with differ
 		If the field named "Partner" is equal to "Partner Ferron 2" Then
 			Then the form attribute named "Agreement" became equal to "Vendor Ferron Partner 2"
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      | 'Goods receipt'      |
-				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 360,00'     | 'Purchase order 143*' | 'Goods receipt 154*' |	
+				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      |
+				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 360,00'     | 'Purchase order 143*' |	
 			And I move to "Other" tab
 			And I input "154" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -1991,10 +1991,10 @@ Scenario: _090319 create Purchase invoice for several Purchase order with differ
 		If the field named "Partner" is equal to "Partner Ferron 1" Then
 			Then the form attribute named "Agreement" became equal to "Vendor Ferron 1"
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  |  'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      | 'Goods receipt'       |
-				| 'Dress'    | '200,00' | 'M/White'   |  'Store 02' | 'pcs'  | '20,000' | '4 720,00'     | 'Purchase order 142*' | 'Goods receipt 155*'  |
-				| 'Dress'    | '210,00' | 'L/Green'   |  'Store 02' | 'pcs'  | '20,000' | '4 956,00'     | 'Purchase order 142*' | 'Goods receipt 155*'  |
-				| 'Trousers' | '210,00' | '36/Yellow' |  'Store 02' | 'pcs'  | '30,000' | '7 434,00'     | 'Purchase order 142*' | 'Goods receipt 155*'  |
+				| 'Item'     | 'Price'  | 'Item key'  |  'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      |
+				| 'Dress'    | '200,00' | 'M/White'   |  'Store 02' | 'pcs'  | '20,000' | '4 720,00'     | 'Purchase order 142*' |
+				| 'Dress'    | '210,00' | 'L/Green'   |  'Store 02' | 'pcs'  | '20,000' | '4 956,00'     | 'Purchase order 142*' | 
+				| 'Trousers' | '210,00' | '36/Yellow' |  'Store 02' | 'pcs'  | '30,000' | '7 434,00'     | 'Purchase order 142*' |
 			And I move to "Other" tab
 			And I input "155" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -2009,8 +2009,8 @@ Scenario: _090319 create Purchase invoice for several Purchase order with differ
 		If the field named "Partner" is equal to "Partner Ferron 2" Then
 			Then the form attribute named "Agreement" became equal to "Vendor Ferron Partner 2"
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      | 'Goods receipt'      |
-				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 360,00'     | 'Purchase order 143*' | 'Goods receipt 154*' |	
+				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      |
+				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 360,00'     | 'Purchase order 143*' |	
 			And I move to "Other" tab
 			And I input "154" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -2019,10 +2019,10 @@ Scenario: _090319 create Purchase invoice for several Purchase order with differ
 		If the field named "Partner" is equal to "Partner Ferron 1" Then
 			Then the form attribute named "Agreement" became equal to "Vendor Ferron 1"
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  |  'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      | 'Goods receipt'       |
-				| 'Dress'    | '200,00' | 'M/White'   |  'Store 02' | 'pcs'  | '20,000' | '4 720,00'     | 'Purchase order 142*' | 'Goods receipt 155*'  |
-				| 'Dress'    | '210,00' | 'L/Green'   |  'Store 02' | 'pcs'  | '20,000' | '4 956,00'     | 'Purchase order 142*' | 'Goods receipt 155*'  |
-				| 'Trousers' | '210,00' | '36/Yellow' |  'Store 02' | 'pcs'  | '30,000' | '7 434,00'     | 'Purchase order 142*' | 'Goods receipt 155*'  |
+				| 'Item'     | 'Price'  | 'Item key'  |  'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      |
+				| 'Dress'    | '200,00' | 'M/White'   |  'Store 02' | 'pcs'  | '20,000' | '4 720,00'     | 'Purchase order 142*' |
+				| 'Dress'    | '210,00' | 'L/Green'   |  'Store 02' | 'pcs'  | '20,000' | '4 956,00'     | 'Purchase order 142*' |
+				| 'Trousers' | '210,00' | '36/Yellow' |  'Store 02' | 'pcs'  | '30,000' | '7 434,00'     | 'Purchase order 142*' |
 			And I move to "Other" tab
 			And I input "155" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -2058,8 +2058,8 @@ Scenario: _090320 create Purchase invoice for several Purchase order with differ
 		If "N" variable is equal to 1 Then
 			Then the form attribute named "Agreement" became equal to "Vendor Ferron Discount"
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'Item key' | 'Q'      | 'Unit' | 'Total amount' | 'Store'    | 'Purchase order'      | 'Goods receipt'      |
-			| '200,00' | 'Dress' | 'M/White'  | '10,000' | 'pcs'  | '2 360,00'     | 'Store 02' | 'Purchase order 145*' | 'Goods receipt 145*' |
+			| 'Price'  | 'Item'  | 'Item key' | 'Q'      | 'Unit' | 'Total amount' | 'Store'    | 'Purchase order'      |
+			| '200,00' | 'Dress' | 'M/White'  | '10,000' | 'pcs'  | '2 360,00'     | 'Store 02' | 'Purchase order 145*' |
 			And I move to "Other" tab
 			And I input "148" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -2137,8 +2137,8 @@ Scenario: _090322 create Purchase invoice for several Purchase order with differ
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Company" is equal to "Main Company" Then
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      | 'Goods receipt'      |
-				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 360,00'     | 'Purchase order 149*' | 'Goods receipt 149*' |
+				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      |
+				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 360,00'     | 'Purchase order 149*' |
 			And I move to "Other" tab
 			And I input "149" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -2146,10 +2146,10 @@ Scenario: _090322 create Purchase invoice for several Purchase order with differ
 			And I input "149" text in "Number" field
 		If the field named "Company" is equal to "Second Company" Then
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Unit' | 'Q'      |'Offers amount'|'Tax amount'| 'Total amount' | 'Purchase order'      | 'Goods receipt'      |
-				| 'Dress'    | '200,00' | 'M/White'   | 'Store 02' | 'pcs'  | '20,000' | ''            | ''         | '4 000,00'     | 'Purchase order 148*' | 'Goods receipt 148*' |
-				| 'Dress'    | '210,00' | 'L/Green'   | 'Store 02' | 'pcs'  | '20,000' | ''            | ''         | '4 200,00'     | 'Purchase order 148*' | 'Goods receipt 148*' |
-				| 'Trousers' | '210,00' | '36/Yellow' | 'Store 02' | 'pcs'  | '30,000' | ''            | ''         | '6 300,00'     | 'Purchase order 148*' | 'Goods receipt 148*' |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Unit' | 'Q'      |'Offers amount'|'Tax amount'| 'Total amount' | 'Purchase order'      |
+				| 'Dress'    | '200,00' | 'M/White'   | 'Store 02' | 'pcs'  | '20,000' | ''            | ''         | '4 000,00'     | 'Purchase order 148*' |
+				| 'Dress'    | '210,00' | 'L/Green'   | 'Store 02' | 'pcs'  | '20,000' | ''            | ''         | '4 200,00'     | 'Purchase order 148*' |
+				| 'Trousers' | '210,00' | '36/Yellow' | 'Store 02' | 'pcs'  | '30,000' | ''            | ''         | '6 300,00'     | 'Purchase order 148*' |
 			And I move to "Other" tab
 			And I input "150" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -2164,8 +2164,8 @@ Scenario: _090322 create Purchase invoice for several Purchase order with differ
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Company" is equal to "Main Company" Then
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      | 'Goods receipt'      |
-				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 360,00'     | 'Purchase order 149*' | 'Goods receipt 149*' |
+				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      |
+				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 360,00'     | 'Purchase order 149*' |
 			And I move to "Other" tab
 			And I input "149" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -2173,10 +2173,10 @@ Scenario: _090322 create Purchase invoice for several Purchase order with differ
 			And I input "149" text in "Number" field
 		If the field named "Company" is equal to "Second Company" Then
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Unit' | 'Q'      |'Offers amount'|'Tax amount'| 'Total amount' | 'Purchase order'      | 'Goods receipt'      |
-				| 'Dress'    | '200,00' | 'M/White'   | 'Store 02' | 'pcs'  | '20,000' | ''            | ''         | '4 000,00'     | 'Purchase order 148*' | 'Goods receipt 148*' |
-				| 'Dress'    | '210,00' | 'L/Green'   | 'Store 02' | 'pcs'  | '20,000' | ''            | ''         | '4 200,00'     | 'Purchase order 148*' | 'Goods receipt 148*' |
-				| 'Trousers' | '210,00' | '36/Yellow' | 'Store 02' | 'pcs'  | '30,000' | ''            | ''         | '6 300,00'     | 'Purchase order 148*' | 'Goods receipt 148*' |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Unit' | 'Q'      |'Offers amount'|'Tax amount'| 'Total amount' | 'Purchase order'      |
+				| 'Dress'    | '200,00' | 'M/White'   | 'Store 02' | 'pcs'  | '20,000' | ''            | ''         | '4 000,00'     | 'Purchase order 148*' |
+				| 'Dress'    | '210,00' | 'L/Green'   | 'Store 02' | 'pcs'  | '20,000' | ''            | ''         | '4 200,00'     | 'Purchase order 148*' |
+				| 'Trousers' | '210,00' | '36/Yellow' | 'Store 02' | 'pcs'  | '30,000' | ''            | ''         | '6 300,00'     | 'Purchase order 148*' |
 			And I move to "Other" tab
 			And I input "150" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -2278,26 +2278,8 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 		And I click the button named "FormSelectAll"
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '200,00' | 'Dress'    | '18%' | 'M/White'   | '5,000'  | 'pcs'  | '152,54'     | '847,46'     | '1 000,00'     | 'Store 02' |
-			| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000'  | 'pcs'  | '160,17'     | '889,83'     | '1 050,00'     | 'Store 02' |
-			| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '10,000' | 'pcs'  | '320,34'     | '1 779,66'   | '2 100,00'     | 'Store 02' |
-			| '200,00' | 'Dress'    | '18%' | 'M/White'   | '8,000'  | 'pcs'  | '244,07'     | '1 355,93'   | '1 600,00'     | 'Store 02' |
-			| '200,00' | 'Dress'    | '18%' | 'M/White'   | '7,000'  | 'pcs'  | '213,56'     | '1 186,44'   | '1 400,00'     | 'Store 02' |
-			| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '8,000'  | 'pcs'  | '256,27'     | '1 423,73'   | '1 680,00'     | 'Store 02' |
-			| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '7,000'  | 'pcs'  | '224,24'     | '1 245,76'   | '1 470,00'     | 'Store 02' |
-			| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '12,000' | 'pcs'  | '384,41'     | '2 135,59'   | '2 520,00'     | 'Store 02' |
-			| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '8,000'  | 'pcs'  | '256,27'     | '1 423,73'   | '1 680,00'     | 'Store 02' |
-		And "TaxTree" table contains lines
-			| 'Tax' | 'Tax rate' | 'Item'     | 'Item key'  | 'Amount'   | 'Manual amount' |
-			| 'VAT' | ''         | ''         | ''          | '2 211,87' | '2 211,87'      |
-			| 'VAT' | '18%'      | 'Dress'    | 'M/White'   | '152,54'   | '152,54'        |
-			| 'VAT' | '18%'      | 'Dress'    | 'M/White'   | '244,07'   | '244,07'        |
-			| 'VAT' | '18%'      | 'Dress'    | 'M/White'   | '213,56'   | '213,56'        |
-			| 'VAT' | '18%'      | 'Dress'    | 'L/Green'   | '160,17'   | '160,17'        |
-			| 'VAT' | '18%'      | 'Dress'    | 'L/Green'   | '256,27'   | '256,27'        |
-			| 'VAT' | '18%'      | 'Dress'    | 'L/Green'   | '224,24'   | '224,24'        |
-			| 'VAT' | '18%'      | 'Trousers' | '36/Yellow' | '320,34'   | '320,34'        |
-			| 'VAT' | '18%'      | 'Trousers' | '36/Yellow' | '384,41'   | '384,41'        |
-			| 'VAT' | '18%'      | 'Trousers' | '36/Yellow' | '256,27'   | '256,27'        |
+			| 'Price'  | 'Detail' | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Offers amount' | 'Price type'              | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase basis' |
+			| '200,00' | ''       | 'Dress'    | '18%' | 'M/White'   | '20,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '610,17'     | '3 389,83'   | '4 000,00'     | 'Store 02' | '29.09.2020'    | ''             | ''              | ''               |
+			| '210,00' | ''       | 'Dress'    | '18%' | 'L/Green'   | '20,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '640,68'     | '3 559,32'   | '4 200,00'     | 'Store 02' | '29.09.2020'    | ''             | ''              | ''               |
+			| '210,00' | ''       | 'Trousers' | '18%' | '36/Yellow' | '30,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '961,02'     | '5 338,98'   | '6 300,00'     | 'Store 02' | '29.09.2020'    | ''             | ''              | ''               |
 		And I close all client application windows

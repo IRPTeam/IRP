@@ -48,6 +48,12 @@ echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]><
         </parameters>
       </build-trigger>
     </build-triggers>
+    <artifact-dependencies>
+      <dependency id="ARTIFACT_DEPENDENCY_7" sourceBuildTypeId="IRP_BuildCF" cleanDestination="true">
+        <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" branch="+:develop" />
+        <artifact sourcePath="IRP_develop.cf" />
+      </dependency>
+    </artifact-dependencies>
     <cleanup />
   </settings>
 </build-type>

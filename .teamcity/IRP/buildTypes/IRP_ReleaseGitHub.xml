@@ -16,16 +16,6 @@
       <param name="env.GitHubSecurityToken" value="credentialsJSON:dea25710-6762-4b8c-ad3c-c8ea384b82c1" spec="password display='hidden'" />
     </parameters>
     <build-runners>
-      <runner id="RUNNER_18" name="Dump Cfg" type="simpleRunner">
-        <parameters>
-          <param name="script.content"><![CDATA[start /wait "1cv8.exe" %env.PathTo1CPlatform%  Designer %env.ConnectionTo1C% /Out %env.LogFile1C% /DumpCfg %system.teamcity.build.workingDir%\irp.cf
-echo ##teamcity[compilationStarted compiler='Log from 1C: %env.LogFile1C%']
-sh -c "while read line; do if [[ $line == *"Error"* ]]; then echo -e ""\e[31m $line""; else  echo -e ""\e[34m $line""; fi;  done < ""%env.LogFile1C%"";"
-echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']]]></param>
-          <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
       <runner id="RUNNER_17" name="Upload to github" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[%teamcity.tool.windows-amd64-github-release%\bin\windows\amd64\github-release.exe release --security-token %env.GitHubSecurityToken% --user DitriXNew --repo irp --tag Release-v0.7.%build.number% 

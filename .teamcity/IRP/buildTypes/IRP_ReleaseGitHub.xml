@@ -19,8 +19,8 @@
     <build-runners>
       <runner id="RUNNER_17" name="Upload to github" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[%teamcity.tool.windows-amd64-github-release%\bin\windows\amd64\github-release.exe release --security-token %env.GitHubSecurityToken% --user DitriXNew --repo irp --tag Release-v0.7.%build.number% 
-%teamcity.tool.windows-amd64-github-release%\bin\windows\amd64\github-release.exe upload  --security-token %env.GitHubSecurityToken% --user DitriXNew --repo irp --tag Release-v0.7.%build.number%  --name Release-v0.7.%build.number%.cf --file %system.teamcity.build.workingDir%\irp_%teamcity.build.branch%.cf]]></param>
+          <param name="script.content"><![CDATA[%teamcity.tool.windows-amd64-github-release%\bin\windows\amd64\github-release.exe release --security-token %env.GitHubSecurityToken% --user DitriXNew --repo irp --tag Release-v%env.Version%.%build.number% 
+%teamcity.tool.windows-amd64-github-release%\bin\windows\amd64\github-release.exe upload  --security-token %env.GitHubSecurityToken% --user DitriXNew --repo irp --tag Release-v%env.Version%.%build.number%  --name Release-v%env.Version%.%build.number%.cf --file %system.teamcity.build.workingDir%\IRP_develop.cf]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>

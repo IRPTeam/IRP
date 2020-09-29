@@ -334,6 +334,7 @@
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.JorDocumentsServer</commonModules>
   <commonModules>CommonModule.JorDocumentsClient</commonModules>
+  <commonModules>CommonModule.DocCreditDebitNoteClientServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>

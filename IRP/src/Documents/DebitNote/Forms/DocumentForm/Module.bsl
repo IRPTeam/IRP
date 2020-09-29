@@ -3,21 +3,16 @@
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
 	DocCreditDebitNoteServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-	SetBasisDocumentReadOnly(CurrentObject, ThisObject);
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocCreditDebitNoteServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	SetBasisDocumentReadOnly(CurrentObject, ThisObject);
 EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocCreditDebitNoteServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
-	If Parameters.Key.IsEmpty() Then
-		SetBasisDocumentReadOnly(Object, ThisObject);
-	EndIf;
 EndProcedure
 
 &AtClient
@@ -29,31 +24,6 @@ EndProcedure
 Procedure AfterWrite(WriteParameters)
 	DocCreditDebitNoteClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 EndProcedure
-
-&AtClientAtServerNoContext
-Procedure SetBasisDocumentReadOnly(Object, Form, CurrentData = Undefined)
-	If CurrentData <> Undefined Then
-		If ValueIsFilled(CurrentData.Agreement) Then
-			CurrentData.BasisDocumentReadOnly = IsBasisDocumentReadOnly(CurrentData.Agreement);
-		Else
-			CurrentData.BasisDocumentReadOnly = False;
-		EndIf;  
-	Else
-		For Each Row In Form.Object.Transactions Do
-			If ValueIsFilled(Row.Agreement) Then
-				Row.BasisDocumentReadOnly = IsBasisDocumentReadOnly(Row.Agreement);
-			Else
-				Row.BasisDocumentReadOnly = False;
-			EndIf;	
-		EndDo;
-	EndIf;
-EndProcedure
-
-&AtServerNoContext
-Function IsBasisDocumentReadOnly(Agreement)
-	Return ServiceSystemServer.GetCompositeObjectAttribute(Agreement, "ApArPostingDetail") <>
-		PredefinedValue("Enum.ApArPostingDetail.ByDocuments");
-EndFunction
 
 #EndRegion
 
@@ -90,10 +60,6 @@ EndProcedure
 &AtClient
 Procedure TransactionsPartnerOnChange(Item, AddInfo = Undefined) Export
 	DocCreditDebitNoteClient.TransactionsPartnerOnChange(Object, ThisObject, Item);	
-	CurrentData = Items.Transactions.CurrentData;
-	If CurrentData <> Undefined Then
-		SetBasisDocumentReadOnly(Object, ThisObject, CurrentData);
-	EndIf;
 EndProcedure
 
 &AtClient
@@ -113,10 +79,6 @@ EndProcedure
 &AtClient
 Procedure TransactionsAgreementOnChange(Item, AddInfo = Undefined) Export
 	DocCreditDebitNoteClient.TransactionsAgreementOnChange(Object, ThisObject, Item);
-	CurrentData = Items.Transactions.CurrentData;
-	If CurrentData <> Undefined Then
-		SetBasisDocumentReadOnly(Object, ThisObject, CurrentData);
-	EndIf;
 EndProcedure
 
 &AtClient
@@ -136,10 +98,6 @@ EndProcedure
 &AtClient
 Procedure TransactionsLegalNameOnChange(Item, AddInfo = Undefined) Export
 	DocCreditDebitNoteClient.TransactionsLegalNameOnChange(Object, ThisObject, Item);
-	CurrentData = Items.Transactions.CurrentData;
-	If CurrentData <> Undefined Then
-		SetBasisDocumentReadOnly(Object, ThisObject, CurrentData);
-	EndIf;
 EndProcedure
 
 &AtClient

@@ -5,12 +5,14 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	If Form.Parameters.Key.IsEmpty() Then
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+		DocCreditDebitNoteClientServer.SetBasisDocumentReadOnly(Object, Undefined);
 	EndIf;
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	CurrenciesServer.UpdateRatePresentation(Object);
+	DocCreditDebitNoteClientServer.SetBasisDocumentReadOnly(Object, Undefined);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -18,6 +20,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	DocCreditDebitNoteClientServer.SetBasisDocumentReadOnly(Object, Undefined);
 EndProcedure
 
 #EndRegion
@@ -75,4 +78,12 @@ Function GetPartnerByLegalName(LegalName, Partner) Export
 		Return Catalogs.Partners.GetDefaultChoiceRef(Parameters);
 	EndIf;
 	Return Undefined;
+EndFunction
+
+Function IsBasisDocumentReadOnly(ArrayOfAgreements) Export
+	For Each ItemOfAgreements In ArrayOfAgreements Do
+		ItemOfAgreements.ReadOnly = 
+		ItemOfAgreements.Agreement.ApArPostingDetail <> Enums.ApArPostingDetail.ByDocuments;
+	EndDo;
+	Return ArrayOfAgreements;
 EndFunction

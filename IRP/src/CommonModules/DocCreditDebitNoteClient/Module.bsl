@@ -74,6 +74,7 @@ Procedure TransactionsPartnerOnChange(Object, Form, Item, AddInfo = Undefined) E
 			TransactionsAgreementOnChange(Object, Form, Undefined, AddInfo);
 		EndIf;
 	EndIf;
+	DocCreditDebitNoteClientServer.SetBasisDocumentReadOnly(Object, CurrentData);
 EndProcedure
 
 Procedure TransactionsPartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -117,6 +118,7 @@ Procedure TransactionsAgreementOnChange(Object, Form, Item, AddInfo = Undefined)
 		TransactionsCurrencyOnChange(Object, Form, Undefined);
 	EndIf;
 	CurrenciesClient.AgreementOnChange(Object, Form, "Transactions", AddInfo);
+	DocCreditDebitNoteClientServer.SetBasisDocumentReadOnly(Object, CurrentData);
 EndProcedure
 
 Procedure TransactionsAgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -173,6 +175,9 @@ EndProcedure
 
 Procedure TransactionsLegalNameOnChange(Object, Form, Item) Export
 	CurrentData = Form.Items.Transactions.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
 	If ValueIsFilled(CurrentData.LegalName) Then
 		NewPartner = DocCreditDebitNoteServer.GetPartnerByLegalName(CurrentData.LegalName, CurrentData.Partner);
 		If NewPartner <> CurrentData.Partner Then
@@ -180,6 +185,7 @@ Procedure TransactionsLegalNameOnChange(Object, Form, Item) Export
 			TransactionsPartnerOnChange(Object, Form, Undefined);
 		EndIf;
 	EndIf;
+	DocCreditDebitNoteClientServer.SetBasisDocumentReadOnly(Object, CurrentData);
 EndProcedure
 
 Procedure TransactionsLegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export

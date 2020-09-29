@@ -91,9 +91,9 @@ Procedure Enter(Command)
 	EndIf;		
 	If Object.Cashback Then
 		Row = Payments.Add();
-		//TODO: #168 Решить по поводу наличных видов оплат
 		Row.PaymentType = CashPaymentTypes[0].PaymentType;
 		Row.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Cash");
+		Row.Account = CashPaymentTypes[0].Account;
 		Row.Amount = - Object.Cashback;
 	EndIf;
 	ReturnValue = New Structure;

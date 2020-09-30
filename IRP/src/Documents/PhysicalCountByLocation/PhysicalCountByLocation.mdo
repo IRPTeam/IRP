@@ -306,17 +306,20 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
-  <commands uuid="a71b490b-dfb3-4b07-acc2-d59c1fd274ec">
-    <name>GeneratePhysicalCountByLocation</name>
+  <templates uuid="38c4f8d6-b3a2-4c8b-806a-39dd553bc10c">
+    <name>PrintQR</name>
     <synonym>
       <key>en</key>
-      <value>Physical count by location</value>
+      <value>Print QR</value>
     </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
+  </templates>
+  <commands uuid="66a904b5-df3b-4dc7-946d-495c6f10f23d">
+    <name>PrintQR</name>
+    <group>FormCommandBarImportant</group>
     <commandParameterType>
-      <types>DocumentRef.PhysicalInventory</types>
+      <types>DocumentRef.PhysicalCountByLocation</types>
     </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>
-    <shortcut></shortcut>
   </commands>
 </mdclass:Document>

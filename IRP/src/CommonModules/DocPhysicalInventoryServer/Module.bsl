@@ -27,6 +27,63 @@ EndProcedure
 
 #EndRegion
 
+#Region Public 
+&AtServer
+Function GetArrayOfInstance(PhysicalInventoryRef) Export
+	Result = New Array();
+	If PhysicalInventoryRef.UseResponsiblePersonByRow Then
+		Query = New Query;
+		Query.Text =
+		"SELECT
+		|	PhysicalInventoryItemList.Key AS Key,
+		|	PhysicalInventoryItemList.ItemKey AS ItemKey,
+		|	PhysicalInventoryItemList.Unit AS Unit,
+		|	PhysicalInventoryItemList.ExpCount AS ExpCount,
+		|	PhysicalInventoryItemList.PhysCount AS PhysCount,
+		|	PhysicalInventoryItemList.Difference AS Difference,
+		|	PhysicalInventoryItemList.ResponsiblePerson AS ResponsiblePerson
+		|FROM
+		|	Document.PhysicalInventory.ItemList AS PhysicalInventoryItemList
+		|		LEFT JOIN Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList
+		|		ON PhysicalCountByLocationItemList.Ref.PhysicalInventory = PhysicalInventoryItemList.Ref
+		|		AND PhysicalCountByLocationItemList.Key = PhysicalInventoryItemList.Key
+		|		AND PhysicalCountByLocationItemList.ItemKey = PhysicalInventoryItemList.ItemKey
+		|		AND
+		|		NOT PhysicalCountByLocationItemList.Ref.DeletionMark
+		|WHERE
+		|	PhysicalInventoryItemList.Ref = &PhysicalInventoryRef
+		|	AND PhysicalInventoryItemList.ResponsiblePerson <> VALUE(Catalog.Partners.EmptyRef)
+		|	AND PhysicalCountByLocationItemList.Key IS NULL
+		|TOTALS
+		|BY
+		|	ResponsiblePerson";
+		Query.SetParameter("PhysicalInventoryRef", PhysicalInventoryRef);
+		QueryResult = Query.Execute();
+		QuerySelection  = QueryResult.Select(QueryResultIteration.ByGroups);
+
+		While QuerySelection.Next() Do
+			Instance = New Structure("ResponsiblePerson, ItemList", QuerySelection.ResponsiblePerson, New Array);
+			QuerySelectionDetails = QuerySelection.Select();
+			While QuerySelectionDetails.Next() Do
+				ItemListRow = New Structure;
+				ItemListRow.Insert("Key", QuerySelectionDetails.Key);
+				ItemListRow.Insert("ItemKey", QuerySelectionDetails.ItemKey);
+				ItemListRow.Insert("Unit", QuerySelectionDetails.Unit);
+				ItemListRow.Insert("ExpCount", QuerySelectionDetails.ExpCount);
+				ItemListRow.Insert("PhysCount", QuerySelectionDetails.PhysCount);
+				ItemListRow.Insert("Difference", QuerySelectionDetails.Difference);
+				Instance.ItemList.Add(ItemListRow);
+			EndDo;
+			Result.Add(Instance);
+		EndDo;
+	Else
+		Instance = New Structure("ResponsiblePerson, ItemList", Undefined, New Array);
+		Result.Add(Instance);
+	EndIf;
+	
+	Return Result;
+EndFunction
+
 Procedure UpdatePhysicalCountByLocations(Object, Form) Export
 	Form.PhysicalCountByLocationList.Parameters.SetParameterValue("PhysicalInventoryRef", Object.Ref);
 	LinkedPhysicalCountByLocation = Documents.PhysicalCountByLocation.GetLinkedPhysicalCountByLocation(Object.Ref);
@@ -48,6 +105,15 @@ Procedure UpdatePhysicalCountByLocations(Object, Form) Export
 	Form.Items.GroupPhysicalCountByLocation.Visible = LinkedPhysicalCountByLocation.Count() > 0;
 	Form.Items.ItemListPhysicalCountByLocationPresentation.Visible = LinkedPhysicalCountByLocation.Count() > 0;
 EndProcedure
+
+Procedure CreatePhysicalCount(ObjectRef, GenerateParameters) Export
+	GenerateParameters.Insert("PhysicalInventory", ObjectRef);
+	GenerateParameters.Insert("Store", ObjectRef.Store);
+	ArrayOfInstance = DocPhysicalInventoryServer.GetArrayOfInstance(GenerateParameters);
+	GenerateParameters.Insert("ArrayOfInstance", ArrayOfInstance);
+	Documents.PhysicalCountByLocation.GeneratePhysicalCountByLocation(GenerateParameters);
+EndProcedure
+#EndRegion
 
 #Region GroupTitle
 

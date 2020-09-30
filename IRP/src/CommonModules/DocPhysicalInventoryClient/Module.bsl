@@ -100,11 +100,38 @@ EndProcedure
 Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
-
+ 
 Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 
+#EndRegion
+
+
+#Region CreatePhysicalCount
+Procedure CreatePhysicalCount(ObjectRef) Export
+	CountDocsToCreate = 0;
+	AddInfo =  New Structure("ObjectRef", ObjectRef);
+	UseResponsiblePersonByRow = CommonFunctionsServer.GetRefAttribute(ObjectRef, "UseResponsiblePersonByRow");
+	AddInfo.Insert("UseResponsiblePersonByRow", UseResponsiblePersonByRow);
+	
+	If UseResponsiblePersonByRow Then
+		DocPhysicalInventoryServer.CreatePhysicalCount(AddInfo.ObjectRef, AddInfo);
+		Notify("CreatedPhysicalCountByLocations", , ObjectRef);
+	Else
+		NotifyDescription = New NotifyDescription("CreatePhysicalCountEnd", ThisObject, AddInfo);
+		ShowInputNumber(NotifyDescription, CountDocsToCreate, R().QuestionToUser_017, 2, 0);
+	EndIf;
+EndProcedure
+
+Procedure CreatePhysicalCountEnd(CountDocsToCreate, AdditionalParameters) Export
+	
+	If ValueIsFilled(CountDocsToCreate) Then
+		DocPhysicalInventoryServer.CreatePhysicalCount(AdditionalParameters.ObjectRef, AdditionalParameters);
+		Notify("CreatedPhysicalCountByLocations", , AdditionalParameters.ObjectRef);
+	EndIf;
+
+EndProcedure
 #EndRegion
 
 Procedure SearchByBarcode(Barcode, Object, Form) Export

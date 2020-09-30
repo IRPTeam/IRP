@@ -6,15 +6,13 @@ Procedure GeneratePhysicalCountByLocation(Parameters, AddInfo = Undefined) Expor
 	Try
 		
 		For Each Instance In Parameters.ArrayOfInstance Do
-			PhysicalCountByLocationRef = FindPhysicalCountByLocation(Parameters.PhysicalInventory, 
-																	 Instance.ResponsiblePerson);
-
+			
 			PhysicalCountByLocationObject = Documents.PhysicalCountByLocation.CreateDocument();
 
 			// try lock for modify
 			PhysicalCountByLocationObject.Lock();
 			PhysicalCountByLocationObject.Fill(Undefined);
-			PhysicalCountByLocationObject.Date = CurrentDate();
+			PhysicalCountByLocationObject.Date = CurrentSessionDate();
 			PhysicalCountByLocationObject.PhysicalInventory = Parameters.PhysicalInventory;
 			PhysicalCountByLocationObject.Store = Parameters.Store;
 			PhysicalCountByLocationObject.ResponsiblePerson = Instance.ResponsiblePerson;
@@ -45,29 +43,6 @@ Procedure GeneratePhysicalCountByLocation(Parameters, AddInfo = Undefined) Expor
 	EndIf;
 EndProcedure
 
-Function FindPhysicalCountByLocation(PhysicalInventoryRef, ResponsiblePersonRef, AddInfo = Undefined)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	PhysicalCountByLocation.Ref
-	|FROM
-	|	Document.PhysicalCountByLocation AS PhysicalCountByLocation
-	|WHERE
-	|	PhysicalCountByLocation.PhysicalInventory = &PhysicalInventoryRef
-	|	AND PhysicalCountByLocation.ResponsiblePerson = &ResponsiblePersonRef
-	|	AND
-	|	NOT PhysicalCountByLocation.DeletionMark";
-	Query.SetParameter("PhysicalInventoryRef", PhysicalInventoryRef);
-	Query.SetParameter("ResponsiblePersonRef", ResponsiblePersonRef);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	If QuerySelection.Next() Then
-		Return QuerySelection.Ref;
-	Else
-		Return Undefined;
-	EndIf;
-EndFunction
-
 Function GetLinkedPhysicalCountByLocation(PhysicalInventoryRef, AddInfo = Undefined) Export
 	Query = New Query();
 	Query.Text = 
@@ -88,12 +63,42 @@ Function GetLinkedPhysicalCountByLocation(PhysicalInventoryRef, AddInfo = Undefi
 	QuerySelection = QueryResult.Select();
 	Result = New Array();
 	While QuerySelection.Next() Do
-		Result.Add(New Structure("Key, Ref, Number, Date, ResponsiblePerson", 
-		QuerySelection.Key, 
-		QuerySelection.Ref,
-		QuerySelection.Number,
-		QuerySelection.Date,
-		QuerySelection.ResponsiblePerson));
+		Row = New Structure("Key, Ref, Number, Date, ResponsiblePerson");
+		FillPropertyValues(Row, QuerySelection);
+		
+		Result.Add(Row);
 	EndDo;
 	Return Result;
 EndFunction
+
+// The procedure for filling a spreadsheet document for printing.
+//
+// Parameters:
+//	Spreadsheet - SpreadsheetDocument - spreadsheet document to fill out and print.
+//	Ref - Arbitrary - contains a reference to the object for which the print command was executed.
+Procedure PrintQR(Spreadsheet, Ref) Export
+	Template = Documents.PhysicalCountByLocation.GetTemplate("PrintQR");
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	PhysicalCountByLocation.Number
+		|FROM
+		|	Document.PhysicalCountByLocation AS PhysicalCountByLocation
+		|WHERE
+		|	PhysicalCountByLocation.Ref IN (&Ref)";
+	Query.Parameters.Insert("Ref", Ref);
+	Selection = Query.Execute().Select();
+
+	Header = Template.GetArea("Header");
+
+	Spreadsheet.Clear();
+	
+	InsertPageBreak = False;
+	While Selection.Next() Do
+		Header.Drawings.QR = BarcodeServer.GetQRPicture(New Structure("Barcode", Selection.Number));
+		Header.Parameters.Fill(Selection);
+		Spreadsheet.Put(Header, Selection.Level());
+		
+		InsertPageBreak = True;
+	EndDo;
+EndProcedure

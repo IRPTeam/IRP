@@ -1,7 +1,11 @@
-Function Strings(LangCode = "en") Export
+Function Strings(LangCode = "") Export
+	If IsBlankString(LangCode) Then
+		LangCode = Metadata.DefaultLanguage.LanguageCode;
+	EndIf;
 	Strings = Localization.Strings(LangCode);
-	If LangCode <> "en" Then
-		LocalizationStrings_df = Localization.Strings("en");
+	
+	If LangCode <> Metadata.DefaultLanguage.LanguageCode Then
+		LocalizationStrings_df = Localization.Strings(Metadata.DefaultLanguage.LanguageCode);
 		For Each StringsStructureItem In Strings Do
 			If Not ValueIsFilled(StringsStructureItem.Value) Then
 				Strings[StringsStructureItem.Key] = LocalizationStrings_df[StringsStructureItem.Key];

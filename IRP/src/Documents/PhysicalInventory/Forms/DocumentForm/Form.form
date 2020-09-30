@@ -496,6 +496,54 @@
       <items xsi:type="form:FormGroup">
         <name>GroupTitleRight</name>
         <id>216</id>
+        <items xsi:type="form:FormField">
+          <name>UseResponsiblePersonByRow</name>
+          <id>359</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.UseResponsiblePersonByRow</segments>
+          </dataPath>
+          <titleLocation>Right</titleLocation>
+          <handlers>
+            <event>OnChange</event>
+            <name>UseResponsiblePersonByRowOnChange</name>
+          </handlers>
+          <extendedTooltip>
+            <name>UseResponsiblePersonByRowExtendedTooltip</name>
+            <id>361</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>UseResponsiblePersonByRowContextMenu</name>
+            <id>360</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>CheckBoxField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+        </items>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -883,7 +931,7 @@
             </userVisible>
             <title>
               <key>en</key>
-              <value>Fill &amp; Update</value>
+              <value>Fill &amp;&amp; Update</value>
             </title>
             <extendedTooltip>
               <name>GroupFillItemListExtendedTooltip</name>
@@ -908,7 +956,6 @@
           <items xsi:type="form:Button">
             <name>SetResponsiblePerson</name>
             <id>308</id>
-            <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
               <common>true</common>
@@ -1459,7 +1506,6 @@
         <items xsi:type="form:FormField">
           <name>ItemListResponsiblePerson</name>
           <id>305</id>
-          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>

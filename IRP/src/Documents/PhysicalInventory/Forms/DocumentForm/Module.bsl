@@ -13,6 +13,9 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
+	If EventName = "CreatedPhysicalCountByLocations" AND Source = Object.Ref Then
+		UpdatePhysicalCountByLocationsAtServer();
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -28,6 +31,7 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	DocPhysicalInventoryClient.OnOpen(Object, ThisObject, Cancel);
+	UpdateResponsibleView();
 EndProcedure
 
 &AtServer
@@ -42,6 +46,7 @@ EndProcedure
 
 #EndRegion
 
+#Region ItemsFormEvents
 &AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 	DocPhysicalInventoryClient.ItemListOnChange(Object, ThisObject, Item);
@@ -98,35 +103,6 @@ Procedure DescriptionClick(Item, StandardProcessing)
 	DocPhysicalInventoryClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
-#Region GroupTitleDecorations
-
-&AtClient
-Procedure DecorationGroupTitleCollapsedPictureClick(Item)
-	DocPhysicalInventoryClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure DecorationGroupTitleCollapsedLabelClick(Item)
-	DocPhysicalInventoryClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
-	DocPhysicalInventoryClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
-	DocPhysicalInventoryClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-&AtClient
-Procedure SearchByBarcode(Command, Barcode = "")
-	DocPhysicalInventoryClient.SearchByBarcode(Barcode, Object, ThisObject);
-EndProcedure
-
 &AtClient
 Procedure ItemListPhysCountOnChange(Item)
 	CurrentRow = Items.ItemList.CurrentData;
@@ -165,9 +141,9 @@ Procedure UpdatePhysCount(Command)
 	UpdatePhysicalCountsByLocations();
 EndProcedure
 
-&AtServer
-Procedure UpdatePhysicalCountsByLocations()
-	DocPhysicalInventoryServer.UpdatePhysicalCountByLocations(Object, ThisObject);
+&AtClient
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocPhysicalInventoryClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -218,82 +194,6 @@ Procedure OnChoiceResponsiblePerson(Result, AdditionalsParameters) Export
 EndProcedure
 
 &AtClient
-Procedure GeneratePhysicalCountByLocation(Command = Undefined) Export
-	If Not ValueIsFilled(Object.Ref) Or ThisObject.Modified Then
-		Notify = New NotifyDescription("GeneratePhysicalCountByLocationDoWrite", ThisObject);
-		ShowQueryBox(Notify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
-	Else
-		GeneratePhysicalCountByLocationAtServer();
-	EndIf;
-EndProcedure
-
-&AtClient
-Procedure GeneratePhysicalCountByLocationDoWrite(Result, AdditionalsParameters) Export
-	If Result = DialogReturnCode.Yes And Write() Then
-		GeneratePhysicalCountByLocationAtServer();
-	EndIf;
-EndProcedure
-
-&AtServer
-Procedure GeneratePhysicalCountByLocationAtServer() Export
-	GenerateParameters = New Structure();
-	GenerateParameters.Insert("PhysicalInventory", Object.Ref);
-	GenerateParameters.Insert("Store", Object.Store);
-	GenerateParameters.Insert("ArrayOfInstance", GetArrayOfInstance(Object.Ref));
-	Documents.PhysicalCountByLocation.GeneratePhysicalCountByLocation(GenerateParameters);
-	DocPhysicalInventoryServer.UpdatePhysicalCountByLocations(Object, ThisObject);
-EndProcedure
-
-&AtServer
-Function GetArrayOfInstance(PhysicalInventoryRef)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	PhysicalInventoryItemList.Key AS Key,
-	|	PhysicalInventoryItemList.ItemKey AS ItemKey,
-	|	PhysicalInventoryItemList.Unit AS Unit,
-	|	PhysicalInventoryItemList.ExpCount AS ExpCount,
-	|	PhysicalInventoryItemList.PhysCount AS PhysCount,
-	|	PhysicalInventoryItemList.Difference AS Difference,
-	|	PhysicalInventoryItemList.ResponsiblePerson AS ResponsiblePerson
-	|FROM
-	|	Document.PhysicalInventory.ItemList AS PhysicalInventoryItemList
-	|		LEFT JOIN Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList
-	|		ON PhysicalCountByLocationItemList.Ref.PhysicalInventory = PhysicalInventoryItemList.Ref
-	|		AND PhysicalCountByLocationItemList.Key = PhysicalInventoryItemList.Key
-	|		AND PhysicalCountByLocationItemList.ItemKey = PhysicalInventoryItemList.ItemKey
-	|		AND
-	|		NOT PhysicalCountByLocationItemList.Ref.DeletionMark
-	|WHERE
-	|	PhysicalInventoryItemList.Ref = &PhysicalInventoryRef
-	|	AND PhysicalInventoryItemList.ResponsiblePerson <> VALUE(Catalog.Partners.EmptyRef)
-	|	AND PhysicalCountByLocationItemList.Key IS NULL
-	|TOTALS
-	|BY
-	|	ResponsiblePerson";
-	Query.SetParameter("PhysicalInventoryRef", PhysicalInventoryRef);
-	QueryResult = Query.Execute();
-	QuerySelection  = QueryResult.Select(QueryResultIteration.ByGroups);
-	Result = New Array();
-	While QuerySelection.Next() Do
-		Instance = New Structure("ResponsiblePerson, ItemList", QuerySelection.ResponsiblePerson, New Array());
-		QuerySelectionDetails = QuerySelection.Select();
-		While QuerySelectionDetails.Next() Do
-			ItemListRow = New Structure();
-			ItemListRow.Insert("Key", QuerySelectionDetails.Key);
-			ItemListRow.Insert("ItemKey", QuerySelectionDetails.ItemKey);
-			ItemListRow.Insert("Unit", QuerySelectionDetails.Unit);
-			ItemListRow.Insert("ExpCount", QuerySelectionDetails.ExpCount);
-			ItemListRow.Insert("PhysCount", QuerySelectionDetails.PhysCount);
-			ItemListRow.Insert("Difference", QuerySelectionDetails.Difference);
-			Instance.ItemList.Add(ItemListRow);
-		EndDo;
-		Result.Add(Instance);
-	EndDo;
-	Return Result;
-EndFunction
-
-&AtClient
 Procedure PhysicalCountByLocationListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	Cancel = True;
 EndProcedure
@@ -307,6 +207,59 @@ EndProcedure
 Procedure PhysicalCountByLocationListOnChange(Item)
 	UpdatePhysicalCountsByLocations();
 EndProcedure
+
+&AtServer
+Procedure UpdatePhysicalCountByLocationsAtServer()
+	DocPhysicalInventoryServer.UpdatePhysicalCountByLocations(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure UseResponsiblePersonByRowOnChange(Item)
+
+	UpdateResponsibleView();
+
+EndProcedure
+
+#EndRegion
+
+#Region GroupTitleDecorations
+
+&AtClient
+Procedure DecorationGroupTitleCollapsedPictureClick(Item)
+	DocPhysicalInventoryClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleCollapsedLabelClick(Item)
+	DocPhysicalInventoryClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
+	DocPhysicalInventoryClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
+	DocPhysicalInventoryClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region Privat
+
+&AtClient
+Procedure UpdateResponsibleView()
+	Items.SetResponsiblePerson.Visible = Object.UseResponsiblePersonByRow;
+	Items.ItemListResponsiblePerson.Visible = Object.UseResponsiblePersonByRow;
+EndProcedure
+
+&AtServer
+Procedure UpdatePhysicalCountsByLocations()
+	DocPhysicalInventoryServer.UpdatePhysicalCountByLocations(Object, ThisObject);
+EndProcedure
+
+#EndRegion
 
 #Region AddAttributes
 

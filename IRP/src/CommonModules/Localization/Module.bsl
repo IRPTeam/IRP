@@ -310,6 +310,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_014", NStr("en = 'Transaction type is changed. Do you want to update filled data?'", Lang));
 	Strings.Insert("QuestionToUser_015", NStr("en = 'Filled data will be cleared. Continue?'", Lang));
 	Strings.Insert("QuestionToUser_016", NStr("en = 'Do you want to change or clear the icon?'", Lang));
+	Strings.Insert("QuestionToUser_017", NStr("en = 'How many documents to create?'", Lang));
 	#EndRegion
 	
 	#Region SuggestionToUser

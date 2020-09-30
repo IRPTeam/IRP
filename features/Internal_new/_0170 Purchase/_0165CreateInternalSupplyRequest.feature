@@ -1,7 +1,6 @@
 ﻿#language: en
 @tree
 @Positive
-@Group3
 @Purchase
 
 Feature: create document an Internal supply request 
@@ -375,7 +374,16 @@ Scenario: _0170021 clear movements Internal Supply Request and check that there 
 
 
 
-
+Scenario: _300501 check connection to Internal Supply Request report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberInternalSupplyRequest016501$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
 
 

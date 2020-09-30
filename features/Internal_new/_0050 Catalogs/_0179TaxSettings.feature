@@ -1,8 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group01
 @TaxSettings
+@Catalogs
 
 Feature: filling in tax rates
 

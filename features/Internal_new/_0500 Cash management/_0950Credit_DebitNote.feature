@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group9
+@CashManagement
 
 
 Feature: Credit note and Debit note

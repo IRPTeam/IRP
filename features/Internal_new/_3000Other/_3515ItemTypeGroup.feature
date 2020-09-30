@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group18
+@Other
 
 Feature: create a group of item types
 
@@ -16,28 +16,28 @@ Scenario: _351501 create a group of item types
         Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
     * Create Item Type group
         And I click the button named "FormCreateFolder"
-        And I click Open button of "TR" field
-        And I input "Accessories" text in the field named "Description_en"
-        And I input "Accessories TR" text in the field named "Description_tr"
+        And I click Open button of "ENG" field
+        And I input "Cosmetics" text in the field named "Description_en"
+        And I input "Cosmetics TR" text in the field named "Description_tr"
         And I click "Ok" button
         And I click "Save and close" button
-    * Create item type in group Accessories
+    * Create item type in group Cosmetics
         And I click the button named "FormCreate"
-        And I click Open button of "TR" field
-        And I input "Earrings" text in the field named "Description_en"
-        And I input "Earrings TR" text in the field named "Description_tr"
+        And I click Open button of "ENG" field
+        And I input "Lipstick" text in the field named "Description_en"
+        And I input "Lipstick TR" text in the field named "Description_tr"
         And I click "Ok" button
-        And I select from "Parent" drop-down list by "Accessories" string
+        And I select from "Parent" drop-down list by "Cosmetics" string
         And I click "Save and close" button
-    * Create item type Earrings
+    * Create item type Lipstick
         And I go to line in "List" table
             | 'Description' |
-            | 'Accessories TR'            |
+            | 'Cosmetics'            |
         And I move one level down in "List" table
         And "List" table became equal
             | 'Description'    |
-            | 'Accessories TR' |
-            | 'Earrings TR'    |
+            | 'Cosmetics' |
+            | 'Lipstick'    |
         And I close all client application windows
     * Check the items group display in AddAttributeAndPropertySets by item key
         Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
@@ -47,8 +47,8 @@ Scenario: _351501 create a group of item types
         And I select current line in "List" table
         And "AttributesTree" table contains lines
             | 'Presentation'      |
-            | 'Accessories TR'    |
-            | 'Earrings TR'       |
+            | 'Cosmetics'    |
+            | 'Lipstick'       |
         And I close all client application windows
 
 

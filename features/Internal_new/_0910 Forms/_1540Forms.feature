@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group11
+@Forms
+
 Feature: forms check
 
 I want to check the form display and autofill documents

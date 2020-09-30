@@ -1,10 +1,10 @@
 ﻿#language: en
 
+@tree
 @Positive
 @Discount
-@tree
 @SpecialOffersMaxInRow
-@Group8
+
 
 Feature: create order with special offer type - price type (Type joings MaxInRow, Special Offers MaxInRow)
 

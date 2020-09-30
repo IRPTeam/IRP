@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group9
+@CashManagement
+
 Feature: create Bank receipt
 
 As an accountant
@@ -578,3 +579,16 @@ Scenario: _052015 check the display of details on the form Bank receipt with the
 		And "PaymentList" table contains lines
 			| '#' | 'Amount' | 'Planning transaction basis' |
 			| '1' | '100,00' | ''                          |
+
+
+
+Scenario: _300515 check connection to BankReciept report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.BankReceipt"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberBankReceipt0520011$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows

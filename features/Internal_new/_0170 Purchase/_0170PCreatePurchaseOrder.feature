@@ -1,7 +1,6 @@
 ﻿#language: en
 @tree
 @Positive
-@Group3
 @Purchase
 
 Feature: create document Purchase order
@@ -835,3 +834,14 @@ Scenario: _0170020 clear movements Purchase Order and check that there is no mov
 
 
 
+
+Scenario: _300502 check connection to Purchase order report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberPurchaseOrder017001$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows

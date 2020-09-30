@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group7
+@Inventory
+
 Feature: create Purchase order based on a Sales order
 
 As a sales manager

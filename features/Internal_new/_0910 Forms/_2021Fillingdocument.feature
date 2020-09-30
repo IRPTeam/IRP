@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group12
+@FillingDocuments
+
 Feature: check filling in and re-filling in documents forms + currency form connection
 
 

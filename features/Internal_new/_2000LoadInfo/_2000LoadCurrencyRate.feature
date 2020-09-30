@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group14
+@LoadInfo
+
 Feature: check loading currency from external resources
 
 As a developer

@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group17
+@PhysicalInventory
 
 Feature: product inventory
 
@@ -14,12 +14,14 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-Scenario:_2990000 preparation
+
 	
-Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipment confirmation)
+Scenario: _2990000 preparation (product inventory)
 	* Constants
 		When set True value to the constant
 	* Load info
+		When Create catalog ExpenseAndRevenueTypes objects
+		When Create catalog BusinessUnits objects
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
 		When Create catalog CashAccounts objects
@@ -293,6 +295,9 @@ Scenario: _2990002 create Stock adjustment as surplus
 	* Filling in the tabular part
 		And I click "Add" button
 		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'  |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
@@ -410,6 +415,9 @@ Scenario: _2990003 create Stock adjustment as write off
 	* Filling in the tabular part
 		And I click "Add" button
 		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'  |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
@@ -752,7 +760,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '$$NumberStockAdjustmentAsSurplus$$'       |
+			| '$$NumberStockAdjustmentAsSurplus2990006$$'       |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I click "Registrations report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -763,7 +771,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '$$NumberStockAdjustmentAsSurplus$$'       |
+			| '$$NumberStockAdjustmentAsSurplus2990006$$'       |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click "Registrations report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -1098,6 +1106,9 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 			* Add first string
 				And I click "Add" button
 				And I click choice button of "Item" attribute in "ItemList" table
+				And I go to line in "List" table
+					| 'Description' |
+					| 'Dress'  |
 				And I select current line in "List" table
 				And I activate "Item key" field in "ItemList" table
 				And I click choice button of "Item key" attribute in "ItemList" table
@@ -1121,6 +1132,9 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 			* Add second string
 				And I click "Add" button
 				And I click choice button of "Item" attribute in "ItemList" table
+				And I go to line in "List" table
+					| 'Description' |
+					| 'Dress'  |
 				And I select current line in "List" table
 				And I activate "Item key" field in "ItemList" table
 				And I click choice button of "Item key" attribute in "ItemList" table
@@ -1248,7 +1262,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 			| 'Shirt' | '-7,000'     | '36/Red'   | '7,000'      | 'pcs'  | ''                   | ''               |
 			| 'Boots' | '-4,000'     | '36/18SD'  | '4,000'      | 'pcs'  | ''                   | ''               |
 			| 'Dress' | '-125,000'   | 'S/Yellow' | '125,000'    | 'pcs'  | 'Anna Petrova'       | '#1 date*'       |
-			| 'Dress' | '-202,000'   | 'XS/Blue'  | '202,000'    | 'pcs'  | 'Arina Brown'        | '#2 date*'       |
+			| 'Dress' | '-206,000'   | 'XS/Blue'  | '206,000'    | 'pcs'  | 'Arina Brown'        | '#2 date*'       |
 		* Check for line locks on which a Physical count by location has already been created
 			* Inability to delete a line
 				And I go to line in "ItemList" table
@@ -1308,7 +1322,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 			| 'Shirt' | '36/Red'   | '7,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
 			| 'Boots' | '36/18SD'  | '4,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
 			| 'Dress' | 'S/Yellow' | '125,000'    | 'pcs'  | 'Anna Petrova'       | '#1 date:*'      |
-			| 'Dress' | 'XS/Blue'  | '202,000'    | 'pcs'  | 'Arina Brown'        | '#2 date:*'      |
+			| 'Dress' | 'XS/Blue'  | '206,000'    | 'pcs'  | 'Arina Brown'        | '#2 date:*'      |
 		* Check for impossibility to change the status to the one that makes movements with open Physical count by location
 			And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 			And I select "Done" exact value from "Status" drop-down list
@@ -1379,7 +1393,7 @@ Scenario: _2990011 re-filling Physical inventory based on Physical count by loca
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
 			| 'Number' |
-			| '$$NumberPhysicalInventory2990010$$      |
+			| '$$NumberPhysicalInventory2990010$$'      |
 		And I select current line in "List" table
 		And I click "Update phys. count" button
 		And "ItemList" table contains lines
@@ -1388,7 +1402,7 @@ Scenario: _2990011 re-filling Physical inventory based on Physical count by loca
 		| '7,000'       | 'Shirt' | ''           | '36/Red'   | '7,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date*'       |
 		| '4,000'       | 'Boots' | ''           | '36/18SD'  | '4,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date*'       |
 		| '124,000'     | 'Dress' | '-1,000'     | 'S/Yellow' | '125,000'    | 'pcs'  | 'Anna Petrova'       | '#1 date*'       |
-		| ''            | 'Dress' | '-202,000'   | 'XS/Blue'  | '202,000'    | 'pcs'  | 'Arina Brown'        | '#2 date*'       |
+		| ''            | 'Dress' | '-206,000'   | 'XS/Blue'  | '206,000'    | 'pcs'  | 'Arina Brown'        | '#2 date*'       |
 		And I click "Save" button
 	* Check that you cannot close the inventory without closed Physical count by location
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
@@ -1426,7 +1440,7 @@ Scenario: _2990011 re-filling Physical inventory based on Physical count by loca
 		| '7,000'       | 'Shirt' | ''           | '36/Red'   | '7,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
 		| '4,000'       | 'Boots' | ''           | '36/18SD'  | '4,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
 		| '124,000'     | 'Dress' | '-1,000'     | 'S/Yellow' | '125,000'    | 'pcs'  | 'Anna Petrova'       | '#1 date:*'      |
-		| '197,000'     | 'Dress' | '-5,000'     | 'XS/Blue'  | '202,000'    | 'pcs'  | 'Arina Brown'        | '#2 date:*'      |
+		| '197,000'     | 'Dress' | '-9,000'     | 'XS/Blue'  | '206,000'    | 'pcs'  | 'Arina Brown'        | '#2 date:*'      |
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I select "Done" exact value from "Status" drop-down list
 		And I click "Post" button
@@ -1445,20 +1459,20 @@ Scenario: _2990011 re-filling Physical inventory based on Physical count by loca
 		| ''                                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                     | ''         |
 		| ''                                          | 'Receipt'     | '*'      | '2'         | 'Store 05'   | 'M/White'                      | ''         |
 		| ''                                          | 'Expense'     | '*'      | '1'         | 'Store 05'   | 'S/Yellow'                     | ''         |
-		| ''                                          | 'Expense'     | '*'      | '5'         | 'Store 05'   | 'XS/Blue'                      | ''         |
+		| ''                                          | 'Expense'     | '*'      | '9'         | 'Store 05'   | 'XS/Blue'                      | ''         |
 		| ''                                          | ''            | ''       | ''          | ''           | ''                             | ''         |
 		| 'Register  "Stock adjustment as write-off"' | ''            | ''       | ''          | ''           | ''                             | ''         |
 		| ''                                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                             | ''         |
 		| ''                                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Basis document'               | 'Item key' |
 		| ''                                          | 'Receipt'     | '*'      | '1'         | 'Store 05'   | '$$PhysicalInventory2990010$$' | 'S/Yellow' |
-		| ''                                          | 'Receipt'     | '*'      | '5'         | 'Store 05'   | '$$PhysicalInventory2990010$$' | 'XS/Blue'  |
+		| ''                                          | 'Receipt'     | '*'      | '9'         | 'Store 05'   | '$$PhysicalInventory2990010$$' | 'XS/Blue'  |
 		| ''                                          | ''            | ''       | ''          | ''           | ''                             | ''         |
 		| 'Register  "Stock balance"'                 | ''            | ''       | ''          | ''           | ''                             | ''         |
 		| ''                                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                             | ''         |
 		| ''                                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                     | ''         |
 		| ''                                          | 'Receipt'     | '*'      | '2'         | 'Store 05'   | 'M/White'                      | ''         |
 		| ''                                          | 'Expense'     | '*'      | '1'         | 'Store 05'   | 'S/Yellow'                     | ''         |
-		| ''                                          | 'Expense'     | '*'      | '5'         | 'Store 05'   | 'XS/Blue'                      | ''         |
+		| ''                                          | 'Expense'     | '*'      | '9'         | 'Store 05'   | 'XS/Blue'                      | ''         |
 		And I close all client application windows
 
 Scenario: _2990012 check the opening of the status history in Physical inventory and Physical count by location

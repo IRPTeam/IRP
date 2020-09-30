@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group18
+@Other
 
 Feature: image setting
 
@@ -10,6 +10,32 @@ I want to create an image subsystem
 
 Background:
     Given I launch TestClient opening script or connect the existing one
+
+Scenario: _300100 preparation (image setting)
+    * Load info
+        When Create catalog ObjectStatuses objects
+        When Create catalog ItemKeys objects
+        When Create catalog ItemTypes objects
+        When Create catalog Units objects
+        When Create catalog Items objects
+        When Create catalog PriceTypes objects
+        When Create catalog Specifications objects
+        When Create chart of characteristic types AddAttributeAndProperty objects
+        When Create catalog AddAttributeAndPropertySets objects
+        When Create catalog AddAttributeAndPropertyValues objects
+        When Create catalog Currencies objects
+        When Create catalog Companies objects (Main company)
+        When Create catalog Stores objects
+        When Create catalog Partners objects (Ferron BP)
+        When Create catalog Partners objects (Kalipso)
+        When Create catalog Companies objects (partners company)
+        When Create information register PartnerSegments records
+        When Create catalog PartnerSegments objects
+        When Create catalog Agreements objects
+        When Create chart of characteristic types CurrencyMovementType objects
+        When Create information register PricesByItemKeys records
+        When Create catalog IntegrationSettings objects
+        When Create information register CurrencyRates records
 
 
 Scenario: _300101 image setting
@@ -120,14 +146,32 @@ Scenario: _300102 item/item key details display in list form (html field)
             | 'Items'       | 'Catalog_Items'             |
         And I select current line in "List" table
     * Setting display details in the html field
+        If "Attributes" table does not contain lines Then
+                | "Attribute" |
+                | "Brand" |
+            And in the table "Attributes" I click the button named "AttributesAdd"
+            And I click choice button of "Attribute" attribute in "Attributes" table
+            And I go to line in "List" table
+                | 'Description' |
+                | 'Brand'     |
+            And I select current line in "List" table
         And I go to line in "Attributes" table
             | 'Attribute' |
-            | 'Brand TR'     |
+            | 'Brand'     |
         And I set checkbox named "AttributesShowInHTML" in "Attributes" table
         And I finish line editing in "Attributes" table
+        If "Attributes" table does not contain lines Then
+                | "Attribute" |
+                | "Country of consignment" |
+            And in the table "Attributes" I click the button named "AttributesAdd"
+            And I click choice button of "Attribute" attribute in "Attributes" table
+            And I go to line in "List" table
+                | 'Description' |
+                | 'Country of consignment'     |
+            And I select current line in "List" table
         And I go to line in "Attributes" table
             | 'Attribute'              |
-            | 'Country of consignment TR' |
+            | 'Country of consignment' |
         And I set checkbox named "AttributesShowInHTML" in "Attributes" table
         And I finish line editing in "Attributes" table
         And I click "Save and close" button
@@ -135,17 +179,17 @@ Scenario: _300102 item/item key details display in list form (html field)
         Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
         And I go to line in "List" table
             | 'Description'   |
-            | 'Clothes TR'       |
+            | 'Clothes'       |
         And I select current line in "List" table
     * Setting display details in the html field
         And I go to line in "AvailableAttributes" table
             | 'Attribute' |
-            | 'Color TR'     |
+            | 'Color'     |
         And I set "Show in HTML" checkbox in "AvailableAttributes" table
         And I finish line editing in "AvailableAttributes" table
         And I go to line in "AvailableAttributes" table
             | 'Attribute' |
-            | 'Size TR'     |
+            | 'Size'     |
         And I set "Show in HTML" checkbox in "AvailableAttributes" table
         And I finish line editing in "AvailableAttributes" table
         And I click "Save and close" button
@@ -159,7 +203,7 @@ Scenario:_300110 add pictures to additional details and additional properties
     * Add a picture to an additional attribute / additional property
         And I go to line in "List" table
         | 'Description' |
-        | 'Brand TR'     |
+        | 'Brand'     |
         And I select current line in "List" table
         And I select external file "#workingDir#\features\Internal\_3000Other\16466.png"
         And I click "Icon" hyperlink
@@ -173,7 +217,7 @@ Scenario: _300111 cleaning up the added picture to the additional details and ad
     * Add a picture to an additional attribute / additional property
         And I go to line in "List" table
         | 'Description' |
-        | 'Brand TR'     |
+        | 'Brand'     |
         And I select current line in "List" table
         And I click "Icon" hyperlink
         Then "1C:Enterprise" window is opened
@@ -184,7 +228,7 @@ Scenario: _300111 cleaning up the added picture to the additional details and ad
     * Add back a picture to an additional attribute / additional property
         And I go to line in "List" table
         | 'Description' |
-        | 'Brand TR'     |
+        | 'Brand'     |
         And I select current line in "List" table
         And I select external file "#workingDir#\features\Internal\_3000Other\16466.png"
         And I click "Icon" hyperlink
@@ -199,7 +243,7 @@ Scenario: _300103 item pictures upload
         Given I open hyperlink "e1cib/list/Catalog.Items"
         And I go to line in "List" table
             | 'Description'  |
-            | 'Trousers TR'     |
+            | 'Trousers'     |
         And I select current line in "List" table
     * Add picture
         And I select external file "#workingDir#\features\Internal\_3000Other\16466.png"
@@ -209,7 +253,7 @@ Scenario: _300103 item pictures upload
         And In this window I click command interface button "Attached files"
         And "List" table contains lines
             | 'Owner'       | 'File'      |
-            | 'Trousers TR'    | '16466.png' |
+            | 'Trousers'    | '16466.png' |
     * Add one more picture
         And In this window I click command interface button "Main"
         And I select external file "#workingDir#\features\Internal\_3000Other\dressblue.jpg"
@@ -221,8 +265,8 @@ Scenario: _300103 item pictures upload
         And I click "Refresh" button
         And "List" table contains lines
             | 'Owner'          | 'File'          |
-            | 'Trousers TR'    | '16466.png'     |
-            | 'Trousers TR'    | 'dressblue.jpg' |
+            | 'Trousers'    | '16466.png'     |
+            | 'Trousers'    | 'dressblue.jpg' |
         And I close all client application windows
 
 
@@ -259,12 +303,12 @@ Scenario: _300107 item key pictures upload
         Given I open hyperlink "e1cib/list/Catalog.Items"
         And I go to line in "List" table
             | 'Description'  |
-            | 'Trousers TR'     |
+            | 'Trousers'     |
         And I select current line in "List" table
         And In this window I click command interface button "Item keys"
         And I go to line in "List" table
             | 'Item key'     |
-            | '38/Yellow TR' |
+            | '38/Yellow' |
         And I select current line in "List" table
     * Add picture
         And I select external file "#workingDir#\features\Internal\_3000Other\16466.png"
@@ -274,7 +318,7 @@ Scenario: _300107 item key pictures upload
         And In this window I click command interface button "Attached files"
         And "List" table contains lines
             | 'Owner'        | 'File'      |
-            | '38/Yellow TR' | '16466.png' |
+            | '38/Yellow' | '16466.png' |
     * Add one more picture
         And In this window I click command interface button "Main"
         And I select external file "#workingDir#\features\Internal\_3000Other\pinkdress.jpg"
@@ -286,8 +330,8 @@ Scenario: _300107 item key pictures upload
         And I click "Refresh" button
         And "List" table contains lines
             | 'Owner'           | 'File'          |
-            | '38/Yellow TR'    | '16466.png'     |
-            | '38/Yellow TR'    | 'pinkdress.jpg' |
+            | '38/Yellow'    | '16466.png'     |
+            | '38/Yellow'    | 'pinkdress.jpg' |
         And I close all client application windows
 
 
@@ -297,7 +341,7 @@ Scenario: _300108 open picture gallery from Item and item key
             Given I open hyperlink "e1cib/list/Catalog.Items"
             And I go to line in "List" table
                 | 'Description'  |
-                | 'Shirt TR'     |
+                | 'Shirt'     |
             And I select current line in "List" table
         * Open gallery
             Given cursor to "gallery" picture
@@ -314,12 +358,12 @@ Scenario: _300108 open picture gallery from Item and item key
             Given I open hyperlink "e1cib/list/Catalog.Items"
             And I go to line in "List" table
                 | 'Description'  |
-                | 'Shirt TR'     |
+                | 'Shirt'     |
             And I select current line in "List" table
             And In this window I click command interface button "Item keys"
             And I go to line in "List" table
                 | 'Item key'     |
-                | '36/Red TR' |
+                | '36/Red' |
             And I select current line in "List" table
         * Open gallery
             Given cursor to "gallery" picture
@@ -337,7 +381,7 @@ Scenario: _300109 check removal of pictures from Item and item key
         Given I open hyperlink "e1cib/list/Catalog.Items"
         And I go to line in "List" table
             | 'Description'  |
-            | 'Trousers TR'     |
+            | 'Trousers'     |
         And I select current line in "List" table
     * Delete picture from Item
         Given cursor to "deletepic" picture
@@ -348,12 +392,12 @@ Scenario: _300109 check removal of pictures from Item and item key
         Given I open hyperlink "e1cib/list/Catalog.Items"
         And I go to line in "List" table
             | 'Description'     |
-            | 'Trousers TR'     |
+            | 'Trousers'     |
         And I select current line in "List" table
         And In this window I click command interface button "Item keys"
         And I go to line in "List" table
             | 'Item key'     |
-            | '38/Yellow TR' |
+            | '38/Yellow' |
         And I select current line in "List" table
     * Delete picture from Item key
         Given cursor to "deletepic" picture

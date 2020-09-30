@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group11
+@Forms
+
 Feature: check filling in user settings
 
 As a developer

@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group16
+@CreationBasedMulti
 
 Feature: creation mechanism based on for sales documents
 

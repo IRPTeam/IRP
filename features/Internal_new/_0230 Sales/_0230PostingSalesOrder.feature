@@ -1,8 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Discount
-@Group8
+@Sales
 
 Feature: special offers
 
@@ -1271,3 +1270,15 @@ Scenario: _030026 create Document discount
 	And I change checkbox "Manual input value"
 	And I click "Save and close" button
 	And I wait "Special offer (create) *" window closing in 20 seconds
+
+
+Scenario: _300504 check connection to Sales order report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberSalesOrder023001$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows

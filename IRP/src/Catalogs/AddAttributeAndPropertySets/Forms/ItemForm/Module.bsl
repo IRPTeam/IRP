@@ -1,3 +1,6 @@
+
+#Region FormEventHandlers
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
@@ -20,6 +23,154 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref, Items.Pages);
 
 EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		UpdateAttributesTree();
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	If Not (CurrentObject.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_Items")
+			Or CurrentObject.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_Partners")) Then
+		For Each Row In CurrentObject.Attributes Do
+			Row.InterfaceGroup = Undefined;
+		EndDo;
+	EndIf;
+	For Each Row In Object.Attributes Do
+		If Not IsBlankString(Row.ConditionData) Then
+			FilterRow = New Structure("Attribute", Row.Attribute);
+			CurrentObjectRows = CurrentObject.Attributes.FindRows(FilterRow);
+			CurrentObjectRow = CurrentObjectRows[0];
+			ConditionData = CommonFunctionsServer.DeserializeXMLUseXDTO(Row.ConditionData);
+			CurrentObjectRow.Condition = New ValueStorage(ConditionData, New Deflation(9));
+			Row.ConditionData = "";
+		EndIf;
+	EndDo;
+	For Each Row In Object.Properties Do
+		If Not IsBlankString(Row.ConditionData) Then
+			FilterRow = New Structure("Property", Row.Property);
+			CurrentObjectRows = CurrentObject.Properties.FindRows(FilterRow);
+			CurrentObjectRow = CurrentObjectRows[0];
+			ConditionData = CommonFunctionsServer.DeserializeXMLUseXDTO(Row.ConditionData);
+			CurrentObjectRow.Condition = New ValueStorage(ConditionData, New Deflation(9));
+			Row.ConditionData = "";
+		EndIf;
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	Notify("UpdateAddAttributeAndPropertySets", New Structure(), ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region FormTableItemsEventHandlers
+
+&AtClient
+Procedure AttributesTreeOnActivateRow(Item)
+	CurrentData = Items.AttributesTree.CurrentData;
+	Items.EditItemType.Enabled =
+		CurrentData <> Undefined
+		And ValueIsFilled(CurrentData.ItemType)
+		And Not ServiceSystemServer.GetObjectAttribute(CurrentData.ItemType, "IsFolder");
+	
+	Items.DeleteItemType.Enabled =
+		CurrentData <> Undefined
+		And ValueIsFilled(CurrentData.ItemType)
+		And ValueIsFilled(CurrentData.Attribute)
+		And Not ServiceSystemServer.GetObjectAttribute(CurrentData.ItemType, "IsFolder");
+EndProcedure
+
+&AtClient
+Procedure AttributesBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	If Clone Then
+		Cancel = True;
+		CurrentData = Items.Attributes.CurrentData;
+		If Not CopiedAttribute.IsEmpty()
+			Or Not CurrentData.IsConditionSet Then
+			Return;
+		EndIf;		
+		NewRow = Object.Attributes.Add();
+		FillPropertyValues(NewRow, CurrentData);
+		NewRow.Unprocessed = True;
+		CopiedAttribute = Items.Attributes.CurrentData.Attribute;
+		Items.Attributes.CurrentRow = NewRow.GetID();
+		AttachIdleHandler("CopyAttributesRow", 0.1, True);
+		Items.Attributes.ChangeRow();		
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure PropertiesBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	If Clone Then
+		Cancel = True;
+		CurrentData = Items.Properties.CurrentData;
+		If Not CopiedAttribute.IsEmpty()
+			Or Not CurrentData.IsConditionSet Then
+			Return;
+		EndIf;		
+		NewRow = Object.Properties.Add();
+		FillPropertyValues(NewRow, CurrentData);
+		NewRow.Unprocessed = True;
+		CopiedAttribute = Items.Properties.CurrentData.Property;
+		Items.Properties.CurrentRow = NewRow.GetID();
+		AttachIdleHandler("CopyPropertiesRow", 0.1, True);
+		Items.Properties.ChangeRow();
+	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region FormCommandsEventHandlers
+
+&AtClient
+Procedure SetConditionAttribute(Command)
+	SetCondition("Attributes", "Attribute");
+EndProcedure
+
+&AtClient
+Procedure SetConditionProperty(Command)
+	SetCondition("Properties", "Property");
+EndProcedure
+
+&AtClient
+Procedure EditItemType(Command)
+	CurrentData = Items.AttributesTree.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	OpenArgs = New Structure();
+	OpenArgs.Insert("Key", CurrentData.ItemType);
+	If ServiceSystemServer.GetObjectAttribute(OpenArgs.Key, "IsFolder") Then
+		OpenFormName = "Catalog.ItemTypes.Form.GroupForm";
+	Else
+		OpenFormName = "Catalog.ItemTypes.Form.ItemForm";
+	EndIf;
+	OpenForm(OpenFormName, OpenArgs, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure DeleteItemType(Command)
+	CurrentData = Items.AttributesTree.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	If ValueIsFilled(CurrentData.ItemType)
+		And ValueIsFilled(CurrentData.Attribute) Then
+		
+		DeleteItemTypeAtServer(CurrentData.ItemType, CurrentData.Attribute);
+		UpdateAttributesTree();
+	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region Private
 
 &AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export
@@ -66,62 +217,9 @@ Procedure FillAttributesTree(ItemTypesTree, AttributesTree, OnlyAffectPricing)
 	EndDo;
 EndProcedure
 
-&AtClient
-Procedure AttributesTreeOnActivateRow(Item)
-	CurrentData = Items.AttributesTree.CurrentData;
-	Items.EditItemType.Enabled =
-		CurrentData <> Undefined
-		And ValueIsFilled(CurrentData.ItemType)
-		And Not ServiceSystemServer.GetObjectAttribute(CurrentData.ItemType, "IsFolder");
-	
-	Items.DeleteItemType.Enabled =
-		CurrentData <> Undefined
-		And ValueIsFilled(CurrentData.ItemType)
-		And ValueIsFilled(CurrentData.Attribute)
-		And Not ServiceSystemServer.GetObjectAttribute(CurrentData.ItemType, "IsFolder");
-EndProcedure
-
-&AtClient
-Procedure DeleteItemType(Command)
-	CurrentData = Items.AttributesTree.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	
-	If ValueIsFilled(CurrentData.ItemType)
-		And ValueIsFilled(CurrentData.Attribute) Then
-		
-		DeleteItemTypeAtServer(CurrentData.ItemType, CurrentData.Attribute);
-		UpdateAttributesTree();
-	EndIf;
-EndProcedure
-
 &AtServerNoContext
 Procedure DeleteItemTypeAtServer(ItemType, Attribute)
 	Catalogs.ItemTypes.DeleteAvailableAttribute(ItemType, Attribute);
-EndProcedure
-
-&AtClient
-Procedure EditItemType(Command)
-	CurrentData = Items.AttributesTree.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	OpenArgs = New Structure();
-	OpenArgs.Insert("Key", CurrentData.ItemType);
-	If ServiceSystemServer.GetObjectAttribute(OpenArgs.Key, "IsFolder") Then
-		OpenFormName = "Catalog.ItemTypes.Form.GroupForm";
-	Else
-		OpenFormName = "Catalog.ItemTypes.Form.ItemForm";
-	EndIf;
-	OpenForm(OpenFormName, OpenArgs, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
-	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		UpdateAttributesTree();
-	EndIf;
 EndProcedure
 
 &AtClient
@@ -143,26 +241,6 @@ Procedure ExpandTree(Tree, TreeRows)
 		ThisObject.Items.AttributesTree.Expand(ItemTreeRows.GetID());
 		ExpandTree(Tree, ItemTreeRows.GetItems());
 	EndDo;
-EndProcedure
-
-&AtServer
-Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	If Not (Object.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_Items")
-			Or Object.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_Partners")) Then
-		For Each Row In Object.Attributes Do
-			Row.InterfaceGroup = Undefined;
-		EndDo;
-	EndIf;
-EndProcedure
-
-&AtClient
-Procedure SetConditionAttribute(Command)
-	SetCondition("Attributes", "Attribute");
-EndProcedure
-
-&AtClient
-Procedure SetConditionProperty(Command)
-	SetCondition("Properties", "Property");
 EndProcedure
 
 &AtClient
@@ -249,6 +327,53 @@ Procedure SaveSettings(Element, Settings, AddInfo = Undefined)
 EndProcedure
 
 &AtClient
-Procedure AfterWrite(WriteParameters)
-	Notify("UpdateAddAttributeAndPropertySets", New Structure(), ThisObject);
+Procedure CopyAttributesRow()
+	If CopiedAttribute.IsEmpty() Then
+		Return;
+	EndIf;
+	AddInfo = New Structure();
+	AddInfo.Insert("TableName", "Attributes");
+	AddInfo.Insert("ColumnName", "Attribute");
+	CopyAttributesPropertiesRowAtServer(AddInfo);
 EndProcedure
+
+&AtClient
+Procedure CopyPropertiesRow()
+	If CopiedAttribute.IsEmpty() Then
+		Return;
+	EndIf;
+	AddInfo = New Structure();
+	AddInfo.Insert("TableName", "Properties");
+	AddInfo.Insert("ColumnName", "Property");
+	CopyAttributesPropertiesRowAtServer(AddInfo);
+EndProcedure
+
+&AtServer
+Procedure CopyAttributesPropertiesRowAtServer(AddInfo)
+	SourceFilter = New Structure;
+	SourceFilter.Insert(AddInfo.ColumnName, CopiedAttribute);
+	SourceFilter.Insert("Unprocessed", False);	
+	FoundSourceRows = Object[AddInfo.TableName].FindRows(SourceFilter);
+	
+	DestinationFilter = New Structure;
+	DestinationFilter.Insert(AddInfo.ColumnName, CopiedAttribute);
+	DestinationFilter.Insert("Unprocessed", True);	
+	FoundDestinationRows = Object[AddInfo.TableName].FindRows(DestinationFilter);
+	
+	If FoundSourceRows.Count()
+		And FoundDestinationRows.Count() Then
+		DestinationRow = FoundDestinationRows[0];
+		SourceRow = FoundSourceRows[0];
+		If IsBlankString(SourceRow.ConditionData) Then			
+			ConditionData = GetSettings(SourceRow[AddInfo.ColumnName], AddInfo);
+			DestinationRow.ConditionData = CommonFunctionsServer.SerializeXMLUseXDTO(ConditionData);
+		Else
+			DestinationRow.ConditionData = SourceRow.ConditionData;
+		EndIf;
+		DestinationRow.Unprocessed = False;
+	EndIf;
+	
+	CopiedAttribute = ChartsOfCharacteristicTypes.AddAttributeAndProperty.EmptyRef();	
+EndProcedure
+
+#EndRegion

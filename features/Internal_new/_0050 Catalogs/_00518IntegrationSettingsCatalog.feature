@@ -31,7 +31,7 @@ Scenario: _005012 filling in the "Integration settings" catalog
 			| 'AddressPath' |
 		And I activate "Value" field in "ConnectionSetting" table
 		And I select current line in "ConnectionSetting" table
-		And I input "C:\Users\Severnity\Desktop\ExtDataProc\Picture\Source" text in "Value" field of "ConnectionSetting" table
+		And I input "#workingDir#\DataProcessor\Picture\Source" text in "Value" field of "ConnectionSetting" table
 		And I finish line editing in "ConnectionSetting" table
 		And I go to line in "ConnectionSetting" table
 			| 'Key'       | 'Value' |

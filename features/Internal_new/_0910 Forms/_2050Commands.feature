@@ -62,7 +62,7 @@ Scenario: _0205001 preparation
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			And I click the button named "FormCreate"
 		* Filling plugin data and adding it to the database
-			And I select external file "C:\Users\Severnity\Desktop\ExtDataProc\CheckExternalCommands.epf"
+			And I select external file "#workingDir#\DataProcessor\CheckExternalCommands.epf"
 			And I click the button named "FormAddExtDataProc"
 			And I input "" text in "Path to plugin for test" field
 			And I input "PrintFormSalesOrder" text in "Name" field

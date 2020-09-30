@@ -201,6 +201,7 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Payee) Then
 		Parameters.Filter.Insert("LegalName", Form.Items.PaymentList.CurrentData.Payee);
 	EndIf;
+	Parameters.Filter.Insert("Company", Object.Company);
 	
 	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
 	

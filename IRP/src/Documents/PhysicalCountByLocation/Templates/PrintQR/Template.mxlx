@@ -11,14 +11,17 @@
 		<languageInfo>
 			<id>ha</id>
 			<code>HASH</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>tr</id>
 			<code>Turkish</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>ru</id>
 			<code>Russian</code>
+			<description/>
 		</languageInfo>
 	</languageSettings>
 	<columns>
@@ -45,7 +48,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content></v8:content>
+							<v8:content/>
 						</v8:item>
 					</tl>
 				</c>
@@ -66,7 +69,7 @@
 		<endColumnOffset>345</endColumnOffset>
 		<autoSize>false</autoSize>
 		<pictureSize>Stretch</pictureSize>
-		<zOrder>0</zOrder>
+		<zOrder>1</zOrder>
 		<pictureIndex>1</pictureIndex>
 	</drawing>
 	<templateMode>true</templateMode>
@@ -87,7 +90,7 @@
 		<name>QR</name>
 		<drawingID>1</drawingID>
 	</namedItem>
-	<line width="1">
+	<line width="1" gap="false">
 		<v8ui:style xsi:type="v8ui:SpreadsheetDocumentDrawingLineType">None</v8ui:style>
 	</line>
 	<format>
@@ -100,6 +103,7 @@
 		<drawingBorder>0</drawingBorder>
 	</format>
 	<picture>
-		<picture ref="v8ui:EmptyPicture"></picture>
+		<index>0</index>
+		<picture ref="v8ui:EmptyPicture"/>
 	</picture>
 </document>

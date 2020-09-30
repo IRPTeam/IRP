@@ -201,8 +201,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.UseSerialLotNumber</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.UseSerialLotNumber</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>UseSerialLotNumberExtendedTooltip</name>

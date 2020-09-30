@@ -1413,8 +1413,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.DontCalculateRow</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.DontCalculateRow</segments>
+            </paths>
           </dataPath>
           <titleLocation>None</titleLocation>
           <handlers>
@@ -2026,6 +2028,10 @@
           <autoFill>true</autoFill>
         </autoCommandBar>
         <handlers>
+          <event>Selection</event>
+          <name>ItemListSelection</name>
+        </handlers>
+        <handlers>
           <event>OnActivateRow</event>
           <name>ItemListOnActivateRow</name>
         </handlers>
@@ -2040,10 +2046,6 @@
         <handlers>
           <event>OnChange</event>
           <name>ItemListOnChange</name>
-        </handlers>
-        <handlers>
-          <event>Selection</event>
-          <name>ItemListSelection</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>

@@ -29,9 +29,9 @@ EndProcedure
 
 #Region Public 
 &AtServer
-Function GetArrayOfInstance(PhysicalInventoryRef) Export
+Function GetArrayOfInstance(GenerateParameters) Export
 	Result = New Array();
-	If PhysicalInventoryRef.UseResponsiblePersonByRow Then
+	If GenerateParameters.UseResponsiblePersonByRow Then
 		Query = New Query;
 		Query.Text =
 		"SELECT
@@ -57,7 +57,7 @@ Function GetArrayOfInstance(PhysicalInventoryRef) Export
 		|TOTALS
 		|BY
 		|	ResponsiblePerson";
-		Query.SetParameter("PhysicalInventoryRef", PhysicalInventoryRef);
+		Query.SetParameter("PhysicalInventoryRef", GenerateParameters.ObjectRef);
 		QueryResult = Query.Execute();
 		QuerySelection  = QueryResult.Select(QueryResultIteration.ByGroups);
 
@@ -78,7 +78,9 @@ Function GetArrayOfInstance(PhysicalInventoryRef) Export
 		EndDo;
 	Else
 		Instance = New Structure("ResponsiblePerson, ItemList", Undefined, New Array);
-		Result.Add(Instance);
+		For Index = 1 To GenerateParameters.CountDocsToCreate Do
+			Result.Add(Instance);
+		EndDo;
 	EndIf;
 	
 	Return Result;

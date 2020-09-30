@@ -11,17 +11,14 @@
 		<languageInfo>
 			<id>ha</id>
 			<code>HASH</code>
-			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>tr</id>
 			<code>Turkish</code>
-			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>ru</id>
 			<code>Russian</code>
-			<description/>
 		</languageInfo>
 	</languageSettings>
 	<columns>
@@ -48,30 +45,13 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content/>
+							<v8:content></v8:content>
 						</v8:item>
 					</tl>
 				</c>
 			</c>
 		</row>
 	</rowsItem>
-	<drawing>
-		<drawingType>Picture</drawingType>
-		<id>1</id>
-		<formatIndex>3</formatIndex>
-		<beginRow>0</beginRow>
-		<beginRowOffset>-6</beginRowOffset>
-		<endRow>0</endRow>
-		<endRowOffset>312</endRowOffset>
-		<beginColumn>0</beginColumn>
-		<beginColumnOffset>33</beginColumnOffset>
-		<endColumn>0</endColumn>
-		<endColumnOffset>345</endColumnOffset>
-		<autoSize>false</autoSize>
-		<pictureSize>Stretch</pictureSize>
-		<zOrder>1</zOrder>
-		<pictureIndex>1</pictureIndex>
-	</drawing>
 	<templateMode>true</templateMode>
 	<height>3</height>
 	<vgRows>3</vgRows>
@@ -90,20 +70,10 @@
 		<name>QR</name>
 		<drawingID>1</drawingID>
 	</namedItem>
-	<line width="1" gap="false">
-		<v8ui:style xsi:type="v8ui:SpreadsheetDocumentDrawingLineType">None</v8ui:style>
-	</line>
 	<format>
 		<width>155</width>
 	</format>
 	<format>
 		<height>348</height>
 	</format>
-	<format>
-		<drawingBorder>0</drawingBorder>
-	</format>
-	<picture>
-		<index>0</index>
-		<picture ref="v8ui:EmptyPicture"/>
-	</picture>
 </document>

@@ -114,6 +114,7 @@ Procedure CreatePhysicalCount(ObjectRef) Export
 	AddInfo =  New Structure("ObjectRef", ObjectRef);
 	UseResponsiblePersonByRow = CommonFunctionsServer.GetRefAttribute(ObjectRef, "UseResponsiblePersonByRow");
 	AddInfo.Insert("UseResponsiblePersonByRow", UseResponsiblePersonByRow);
+	AddInfo.Insert("CountDocsToCreate", CountDocsToCreate);
 	
 	If UseResponsiblePersonByRow Then
 		DocPhysicalInventoryServer.CreatePhysicalCount(AddInfo.ObjectRef, AddInfo);
@@ -127,6 +128,7 @@ EndProcedure
 Procedure CreatePhysicalCountEnd(CountDocsToCreate, AdditionalParameters) Export
 	
 	If ValueIsFilled(CountDocsToCreate) Then
+		AdditionalParameters.Insert("CountDocsToCreate", CountDocsToCreate);
 		DocPhysicalInventoryServer.CreatePhysicalCount(AdditionalParameters.ObjectRef, AdditionalParameters);
 		Notify("CreatedPhysicalCountByLocations", , AdditionalParameters.ObjectRef);
 	EndIf;

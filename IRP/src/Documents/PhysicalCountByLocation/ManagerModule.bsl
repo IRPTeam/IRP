@@ -93,12 +93,15 @@ Procedure PrintQR(Spreadsheet, Ref) Export
 
 	Spreadsheet.Clear();
 	
-	InsertPageBreak = False;
 	While Selection.Next() Do
-		Header.Drawings.QR = BarcodeServer.GetQRPicture(New Structure("Barcode", Selection.Number));
+		QR = BarcodeServer.GetQRPicture(New Structure("Barcode", String(Selection.Number)));
+		Picture = Header.Drawings.Add(SpreadsheetDocumentDrawingType.Picture);
+		Picture.Height = 60;
+		Picture.Width = 60;
+		Picture.Picture = QR;
+		Picture.PictureSize = PictureSize.RealSize;
 		Header.Parameters.Fill(Selection);
 		Spreadsheet.Put(Header, Selection.Level());
 		
-		InsertPageBreak = True;
 	EndDo;
 EndProcedure

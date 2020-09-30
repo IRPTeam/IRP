@@ -72,6 +72,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	ItemList.Columns.Add("Key"				, New TypeDescription("UUID"));
 	ItemList.Columns.Add("RowKey"			, New TypeDescription("String"));	
 	ItemList.Columns.Add("PurchaseInvoice"	, New TypeDescription("DocumentRef.PurchaseInvoice"));
+	ItemList.Columns.Add("DontCalculateRow" , New TypeDescription("Boolean"));
 	
 	TaxListMetadataColumns = Metadata.Documents.PurchaseInvoice.TabularSections.TaxList.Attributes;
 	TaxList = New ValueTable();
@@ -247,7 +248,8 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	ISNULL(ItemList.OffersAmount, 0) AS OffersAmount,
 		|	ISNULL(ItemList.PriceType, VALUE(Catalog.PriceTypes.EmptyRef)) AS PriceType,
 		|	ISNULL(ItemList.Store, VALUE(Catalog.Stores.EmptyRef)) AS Store,
-		|	ItemList.BusinessUnit
+		|	ItemList.BusinessUnit,
+		|	ISNULL(ItemList.DontCalculateRow, FALSE) AS DontCalculateRow
 		|FROM
 		|	Document.PurchaseInvoice.ItemList AS ItemList
 		|		INNER JOIN tmpQueryTable AS tmpQueryTable

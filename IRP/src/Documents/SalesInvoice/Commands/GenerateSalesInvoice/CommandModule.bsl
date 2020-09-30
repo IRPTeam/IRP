@@ -113,7 +113,8 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	ItemList.Columns.Add("PriceType"		, New TypeDescription("CatalogRef.PriceTypes"));
 	ItemList.Columns.Add("Price"			, New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
 	ItemList.Columns.Add("Key"				, New TypeDescription("UUID"));
-	ItemList.Columns.Add("DeliveryDate"	, New TypeDescription("Date"));
+	ItemList.Columns.Add("DeliveryDate"	    , New TypeDescription("Date"));
+	ItemList.Columns.Add("DontCalculateRow" , New TypeDescription("Boolean"));
 	
 	TaxListMetadataColumns = Metadata.Documents.SalesOrder.TabularSections.TaxList.Attributes;
 	TaxList = New ValueTable();
@@ -302,7 +303,8 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	ISNULL(ItemList.PriceType, VALUE(Catalog.PriceTypes.EmptyRef)) AS PriceType,
 		|	ISNULL(ItemList.DeliveryDate, DATETIME(1, 1, 1)) AS DeliveryDate,
 		|	tmpQueryTable.ShipmentConfirmation AS ShipmentConfirmation,
-		|	ItemList.Ref
+		|	ItemList.Ref,
+		|	ISNULL(ItemList.DontCalculateRow, FALSE) AS DontCalculateRow
 		|FROM
 		|	Document.SalesOrder.ItemList AS ItemList
 		|		INNER JOIN tmpQueryTable AS tmpQueryTable
@@ -333,7 +335,8 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	ISNULL(ItemList.Unit, VALUE(Catalog.Units.EmptyRef)),
 		|	ISNULL(ItemList.PriceType, VALUE(Catalog.PriceTypes.EmptyRef)),
 		|	ISNULL(ItemList.DeliveryDate, DATETIME(1, 1, 1)),
-		|	ItemList.Ref
+		|	ItemList.Ref,
+		|	ISNULL(ItemList.DontCalculateRow, FALSE)
 		|
 		|UNION ALL
 		|
@@ -361,7 +364,8 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	VALUE(Catalog.PriceTypes.EmptyRef),
 		|	DATETIME(1, 1, 1),
 		|	tmpQueryTable.ShipmentConfirmation,
-		|	ItemList.Ref
+		|	ItemList.Ref,
+		|	FALSE
 		|FROM
 		|	Document.ShipmentConfirmation.ItemList AS ItemList
 		|		INNER JOIN tmpQueryTable AS tmpQueryTable

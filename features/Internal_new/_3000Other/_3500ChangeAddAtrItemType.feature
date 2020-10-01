@@ -5,9 +5,6 @@
 
 Feature: checking a bunch of additional details in the item type for the item key composition
 
-As a Developer
-I want to create a link toansfer the extra details from item type to item key
-For appropriation of their items
 
 Background:
     Given I launch TestClient opening script or connect the existing one

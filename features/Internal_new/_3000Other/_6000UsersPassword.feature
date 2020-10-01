@@ -12,9 +12,9 @@ Given I launch TestClient opening script or connect the existing one
 
 
 Scenario: _351000 preparation
-	When Create catalog Users objects
-	When Create catalog AccessProfiles objects
-	When Create catalog AccessGroups objects
+        When Create catalog Users objects
+        When Create catalog AccessProfiles objects
+        When Create catalog AccessGroups objects
 Scenario: _351001 check user password setting from enterprise mode
         And I close all client application windows
         * Select user
@@ -32,8 +32,8 @@ Scenario: _351001 check user password setting from enterprise mode
                 * Check message output if password confirmation does not match
                         And I input "F12346" text in "Confirm password" field
                         And I click "Ok" button
-						Then I wait that in user messages the "Password and password confirmation do not match." substring will appear in "30" seconds
-				* Password eny is correct
+                                                Then I wait that in user messages the "Password and password confirmation do not match." substring will appear in "30" seconds
+                                * Password eny is correct
                         And I input "" text in "Confirm password" field
                         And I input "F12345" text in "Confirm password" field
                         And I click "Ok" button

@@ -958,6 +958,66 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="d5c31c44-2fda-441c-87bc-7a4bf50c14e1">
+    <producedTypes>
+      <objectType typeId="946105ca-c514-4fb6-813e-989cfe36e6b8" valueTypeId="98e68a05-da39-4192-ad8c-14511088ee9e"/>
+      <rowType typeId="9ccfc70a-abf5-4eaa-9962-c738669fc8a0" valueTypeId="b5e5eb42-32d6-4e29-89d6-cb07080bc791"/>
+    </producedTypes>
+    <name>ShipmentConfirmations</name>
+    <synonym>
+      <key>en</key>
+      <value>Shipment confirmations</value>
+    </synonym>
+    <attributes uuid="7cfeeca8-ad6e-4961-b119-978ce3379941">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="8229e2a6-31ba-455c-861c-690ef1db991c">
+      <name>ShipmentConfirmation</name>
+      <synonym>
+        <key>en</key>
+        <value>Shipment confirmation</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.ShipmentConfirmation</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="bebf234f-486d-49ba-b107-8981e3adf066">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="91745724-db0e-424c-ba05-91316ecfc035">
+      <name>QuantityInShipmentConfirmation</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity in shipment confirmation</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <commands uuid="1940e8ac-35c7-4889-9c93-09a9af1eb411">
     <name>GenerateSalesInvoice</name>
     <synonym>

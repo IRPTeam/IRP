@@ -325,7 +325,8 @@ Procedure FillDocumentWithGoodsReceiptArray(Object, Form, ArrayOfBasisDocuments)
 		|		WHEN ItemList.PurchaseBasis REFS Document.SalesOrder
 		|			THEN ItemList.PurchaseBasis
 		|		ELSE UNDEFINED
-		|	END AS SalesOrder
+		|	END AS SalesOrder,
+		|	ItemList.DontCalculateRow AS DontCalculateRow
 		|FROM
 		|	Document.PurchaseOrder.ItemList AS ItemList
 		|		INNER JOIN tmpQueryTable AS tmpQueryTable
@@ -432,6 +433,7 @@ Procedure FillDocumentWithGoodsReceiptArray(Object, Form, ArrayOfBasisDocuments)
 		Row_ItemList.BusinessUnit  = Row.BusinessUnit;
 		Row_ItemList.ExpenseType   = Row.ExpenseType;
 		Row_ItemList.SalesOrder    = Row.SalesOrder;
+		Row_ItemList.DontCalculateRow = Row.DontCalculateRow;
 	EndDo;
 		
 	For Each Row In QueryTable_TaxList Do

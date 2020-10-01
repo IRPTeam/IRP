@@ -496,6 +496,11 @@ Procedure SelectPurchaseOrdersContinueAtServer(Result, AdditionalParameters)
 		TaxInfo);
 EndProcedure
 
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
 #EndRegion
 
 #Region Taxes
@@ -647,6 +652,10 @@ Procedure UpdateGoodsReceiptsTree()
 		
 		ArrayOfGoodsReceipts = Object.GoodsReceipts.FindRows(New Structure("Key", Row.Key));
 		
+		If ArrayOfGoodsReceipts.Count() = 1 Then
+			ArrayOfGoodsReceipts[0].Quantity = Row.Quantity;
+		EndIf;
+		
 		For Each ItemOfArray In ArrayOfGoodsReceipts Do
 			NewRow1 = NewRow0.GetItems().Add();
 			NewRow1.Level                  = 2;
@@ -702,5 +711,5 @@ EndProcedure
 Procedure GoodsReceiptsTreeBeforeDeleteRow(Item, Cancel)
 	Cancel = True;
 EndProcedure
-	
+
 #EndRegion

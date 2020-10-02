@@ -424,15 +424,15 @@ foreach ($elementTag in $a) {
           <param name="jetbrains_powershell_noprofile" value="true" />
           <param name="jetbrains_powershell_script_code"><![CDATA[If ("%env.RunAllTest%" -eq "true"){
     Write-Output "One time start full test"
-	$a = @("BasicFormsCheck", "Catalogs", "CurrencyRate", "Price", "Purchase", "InventoryTransfer", "Sales", "RetailDocuments", "Services", "Inventory", "Discount", "CashManagement", "StandartAgreement", "TaxCalculation", "Barcodes", "Filters", "Forms", "FillingDocuments", "SerialLotNumber", "LinkedTransaction", "LoadInfo", "PrintForm", "OpeningEntries", "CreationBasedMulti", "DocumentVerification", "PhysicalInventory", "Other")
+	$TagArray = @("BasicFormsCheck", "Catalogs", "CurrencyRate", "Price", "Purchase", "InventoryTransfer", "Sales", "RetailDocuments", "Services", "Inventory", "Discount", "CashManagement", "StandartAgreement", "TaxCalculation", "Barcodes", "Filters", "Forms", "FillingDocuments", "SerialLotNumber", "LinkedTransaction", "LoadInfo", "PrintForm", "OpeningEntries", "CreationBasedMulti", "DocumentVerification", "PhysicalInventory", "Other")
   }elseif ("%dep.IRP_GitHubUpdate.env.Database1CName%" -eq "%teamcity.project.id%_develop")
   {
     Write-Output "Start full test"
-	$a = @("BasicFormsCheck", "Catalogs", "CurrencyRate", "Price", "Purchase", "InventoryTransfer", "Sales", "RetailDocuments", "Services", "Inventory", "Discount", "CashManagement", "StandartAgreement", "TaxCalculation", "Barcodes", "Filters", "Forms", "FillingDocuments", "SerialLotNumber", "LinkedTransaction", "LoadInfo", "PrintForm", "OpeningEntries", "CreationBasedMulti", "DocumentVerification", "PhysicalInventory", "Other")
+	$TagArray = @("BasicFormsCheck", "Catalogs", "CurrencyRate", "Price", "Purchase", "InventoryTransfer", "Sales", "RetailDocuments", "Services", "Inventory", "Discount", "CashManagement", "StandartAgreement", "TaxCalculation", "Barcodes", "Filters", "Forms", "FillingDocuments", "SerialLotNumber", "LinkedTransaction", "LoadInfo", "PrintForm", "OpeningEntries", "CreationBasedMulti", "DocumentVerification", "PhysicalInventory", "Other")
   }elseif ("%dep.IRP_GitHubUpdate.env.Database1CName%" -like "%teamcity.project.id%_develop*")
   {
     Write-Output "Start short test"
- 	$a = @("BasicFormsCheck", "Catalogs")	
+ 	$TagArray = @("BasicFormsCheck", "Catalogs")	
   }else{
   	Write-Output "Skip tests"
   }

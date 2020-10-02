@@ -337,7 +337,7 @@ foreach ($elementTag in $a) {
   }"
 
   $a = $text | ConvertFrom-Json
-  $a | Add-Member -Type NoteProperty -Name 'featurepath' -Value '%env.VA.FeaturePath%Internal'
+  $a | Add-Member -Type NoteProperty -Name 'featurepath' -Value '%env.VA.FeaturePath%Internal_New'
   $a | Add-Member -Type NoteProperty -Name 'projectpath' -Value '%system.teamcity.build.workingDir%'
   $a | Add-Member -Type NoteProperty -Name 'outputscreenshot' -Value '%system.teamcity.build.tempDir%'
   $a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value "%system.teamcity.build.tempDir%\errors$elementTag"
@@ -347,7 +347,7 @@ foreach ($elementTag in $a) {
   #$a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepathbase' -Value "$allurePath/base"
   
   $a.librarycatalogs += '%system.teamcity.build.workingDir%\DataProcessor'
-  $a.librarycatalogs += '%env.VA.FeaturePath%External'
+  $a.librarycatalogs += '%env.VA.FeaturePath%External_New'
   $a.filtertags += $elementTag
 
   $b = $a | ConvertTo-Json -depth 32

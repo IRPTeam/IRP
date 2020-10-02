@@ -440,6 +440,9 @@ foreach ($elementTag in $a) {
 $VA_PID_Array = @{}
 New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%/allure/base"
 $port = 48010
+New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps"
+New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps\Template"
+Copy-Item -Path "%system.teamcity.build.workingDir%\TempDB\1Cv8.1CD" -Destination "%system.teamcity.build.workingDir%\AllSteps\Template\1Cv8.1CD"
 foreach ($elementTag in $TagArray) {
   $port += 10
   $portmax = $port + 9
@@ -447,11 +450,9 @@ foreach ($elementTag in $TagArray) {
   #Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"
 
   $allurePath = "%system.teamcity.build.workingDir%/allure" | ForEach-Object { $_ -replace '\\', '/' }
-  $TemplateBD = "'/F%system.teamcity.build.workingDir%\TempDB'" | ForEach-Object { $_ -replace '\\', '/' }
-  
-  $TempDb = "'/F%system.teamcity.build.workingDir%\$elementTag'" | ForEach-Object { $_ -replace '\\', '/' } 
-  New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\$elementTag"
-  Copy-Item -Path "%system.teamcity.build.workingDir%\TempDB\1Cv8.1CD" -Destination "%system.teamcity.build.workingDir%\$elementTag\1Cv8.1CD"
+  $TempDb = "'/F%system.teamcity.build.workingDir%\AllSteps\$elementTag'" | ForEach-Object { $_ -replace '\\', '/' } 
+  New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps\$elementTag"
+  Copy-Item -Path "%system.teamcity.build.workingDir%\TempDB\1Cv8.1CD" -Destination "%system.teamcity.build.workingDir%\AllSteps\$elementTag\1Cv8.1CD"
   
    #$TempDb = "'/Slocalhost/%env.Database1CName%'" | ForEach-Object { $_ -replace '\\', '/' }
   $connection = "' /N %env.LoginTo1C% /P %env.PassTo1C% /Len /UseHwLicenses+ /TComp -SDC  /DisableStartupMessages /DisplayPerformance /DisplayAllFunctions /EnableCheckModal /EnableCheckExtensionsAndAddInsSyncCalls /DEBUG -http -attach /DEBUGGERURL http://localhost:%env.DebugPort%'"
@@ -571,7 +572,7 @@ foreach ($elementTag in $TagArray) {
   $ProcessInfo = New-Object System.Diagnostics.ProcessStartInfo 
   $ProcessInfo.FileName = %env.PathTo1CPlatform% 
   $ProcessInfo.UseShellExecute = $false 
-  $ProcessInfo.Arguments = "/N %env.LoginTo1C% /P %env.PassTo1C%  ""/F%system.teamcity.build.workingDir%\$elementTag"" /Execute ""%env.OScript%/lib/vanessa-automation/vanessa-automation.epf"" /TestManager /C""StartFeaturePlayer; VBParams=%system.teamcity.build.workingDir%\va$elementTag.json""" 
+  $ProcessInfo.Arguments = "/N %env.LoginTo1C% /P %env.PassTo1C%  ""/F%system.teamcity.build.workingDir%\AllSteps\$elementTag"" /Execute ""%env.OScript%/lib/vanessa-automation/vanessa-automation.epf"" /TestManager /C""StartFeaturePlayer; VBParams=%system.teamcity.build.workingDir%\va$elementTag.json""" 
   $Process = New-Object System.Diagnostics.Process 
   $Process.StartInfo = $ProcessInfo 
   $Process.Start() | Out-Null  

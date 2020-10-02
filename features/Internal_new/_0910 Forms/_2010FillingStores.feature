@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group11
+@FillingDocuments
+
 Feature: filling of stores in documents
 
 

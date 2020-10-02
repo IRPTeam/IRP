@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group3
+@Purchase
 
 Feature: create document Purchase invoice
 
@@ -589,3 +589,13 @@ Scenario: _01801901 clear movements Purchase invoice and check that there is no 
 		And I close all client application windows
 
 
+Scenario: _300503 check connection to Purchase invoice report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberPurchaseInvoice018006$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows

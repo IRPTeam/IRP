@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group3
+@Purchase
 
 Feature: create document Purchase return
 
@@ -579,6 +579,17 @@ Scenario: _02233601 clear movements Purchase Return and check that there is no m
 		| ''                                      | 'Expense'     | '*'         | '2'                    | 'Store 02'       | '$$PurchaseReturnOrder022001$$' | 'L/Green'        | '*'                 | ''                   | ''                             | ''                             | ''                     |
 		And I close all client application windows
 
+
+Scenario: _300509 check connection to PurchaseReturn report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberPurchaseReturn022301$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
 
 

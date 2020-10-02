@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group9
+@CashManagement
+
 Feature: expense and income planning
 
 

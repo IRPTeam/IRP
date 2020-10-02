@@ -1,7 +1,6 @@
 ﻿#language: en
 @tree
 @Positive
-@Group01
 @Catalogs
 
 Feature: filling in customer contact information

@@ -2,7 +2,7 @@
 @tree
 @Positive
 @Test
-@OtherForms
+@BasicFormsCheck
 
 Feature: basic check registers, reports, constants
 As an QA

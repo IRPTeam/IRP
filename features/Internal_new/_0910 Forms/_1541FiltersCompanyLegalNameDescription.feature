@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group11
+@Filters
+
 Feature: filter by Company and Legal name on document forms
 
 

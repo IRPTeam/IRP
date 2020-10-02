@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group7
+@Inventory
+
 Feature: create document Goods receipt
 
 As a storekeeper
@@ -236,3 +237,14 @@ Scenario: _02890501 clear movements Goods receipt and check that there is no mov
 		| ''                                      | 'Receipt'     | '*'      | '500'       | 'Store 02'     | 'L/Green'             | ''         | ''         | ''        | ''              |
 		And I close all client application windows
 
+
+Scenario: _300507 check connection to GoodsReceipt report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberGoodsReceipt028901$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows

@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group9
+@CashManagement
+
 Feature: create Cash payment
 
 As a cashier
@@ -580,3 +581,14 @@ Scenario: _051014 check the display of details on the form Cash payment with the
 		| # | 'Amount'    | Planning transaction basis |
 		| 1 | '100,00'    | ''                        |
 
+
+Scenario: _300512 check connection to CashPayment report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberCashPayment0510011$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows

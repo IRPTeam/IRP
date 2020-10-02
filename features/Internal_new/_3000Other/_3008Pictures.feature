@@ -16,17 +16,17 @@ Scenario: _300101 image setting
     * Filling in settings in  File storages info
         Given I open hyperlink "e1cib/list/Catalog.FileStoragesInfo"
         And I click "Create" button
-        And I input "#workingDir#\DataProcessor\Picture\Preview" text in "Path to catalog at server" field
+        And I input "C:\Users\Severnity\Desktop\ExtDataProc\Picture\Preview" text in "Path to catalog at server" field
         And I input "preview" text in "URL alias" field
         And I click "Save and close" button
         Given I open hyperlink "e1cib/list/Catalog.FileStoragesInfo"
         And I click "Create" button
-        And I input "#workingDir#\DataProcessor\Picture\Script" text in "Path to catalog at server" field
+        And I input "C:\Users\Severnity\Desktop\ExtDataProc\Picture\Script" text in "Path to catalog at server" field
         And I input "js" text in "URL alias" field
         And I click "Save and close" button
         Given I open hyperlink "e1cib/list/Catalog.FileStoragesInfo"
         And I click "Create" button
-        And I input "#workingDir#\DataProcessor\Picture\Source" text in "Path to catalog at server" field
+        And I input "C:\Users\Severnity\Desktop\ExtDataProc\Picture\Source" text in "Path to catalog at server" field
         And I input "pic" text in "URL alias" field
         And I click "Save and close" button
 * Filling in settings in Integration Settings for PICTURE STORAGE
@@ -40,7 +40,7 @@ Scenario: _300101 image setting
             | 'AddressPath' |
         And I activate "Value" field in "ConnectionSetting" table
         And I select current line in "ConnectionSetting" table
-        And I input "#workingDir#\DataProcessor\Picture\Source" text in "Value" field of "ConnectionSetting" table
+        And I input "C:\Users\Severnity\Desktop\ExtDataProc\Picture\Source" text in "Value" field of "ConnectionSetting" table
         And I finish line editing in "ConnectionSetting" table
         And I go to line in "ConnectionSetting" table
             | 'Key'       | 'Value' |

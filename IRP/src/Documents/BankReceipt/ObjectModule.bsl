@@ -45,7 +45,7 @@ EndProcedure
 
 Procedure Filling_BasedOn(FillingData)
 	FillPropertyValues(ThisObject, FillingData,
-		"Company,Account, TransitAccount, Currency,TransactionType,CurrencyExchange");
+		"Company,Account, TransitAccount, Currency, TransactionType, CurrencyExchange");
 	For Each Row In FillingData.PaymentList Do
 		NewRow = ThisObject.PaymentList.Add();
 		FillPropertyValues(NewRow, Row);

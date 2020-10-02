@@ -2,6 +2,7 @@
 @tree
 @Positive
 @Group3
+@Purchase
 
 Feature: create document Purchase order
 
@@ -126,6 +127,9 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 	* Filling in items table
 		And I click the button named "Add"
 		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'  |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
@@ -136,6 +140,9 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 		And I finish line editing in "ItemList" table
 		And I click the button named "Add"
 		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'  |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
@@ -439,7 +446,7 @@ Scenario: _017105 filter when selecting item key in the purchase order document
 
 
 Scenario: _019901 check changes in movements on a Purchase Order document when quantity changes
-	When create a Purchase Order document
+		When create a Purchase Order document
 		And I click "Post" button
 		And I save the value of "Number" field as "$$NumberPurchaseOrder019901$$"
 		And I save the window as "$$PurchaseOrder019901$$"
@@ -465,7 +472,7 @@ Scenario: _019901 check changes in movements on a Purchase Order document when q
 		And Delay 2
 		And I go to line in "List" table
 			| 'Number'    |
-			| '103' |
+			| '$$NumberPurchaseOrder019901$$' |
 		And I select current line in "List" table
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
@@ -490,7 +497,7 @@ Scenario: _019902 delete line in Purchase order and chek movements changes
 		And Delay 2
 		And I go to line in "List" table
 			| 'Number'    |
-			| '$$PurchaseOrder019901$$' |
+			| '$$NumberPurchaseOrder019901$$' |
 		And I select current line in "List" table
 		And I move to "Item list" tab
 		And I go to the last line in "ItemList" table

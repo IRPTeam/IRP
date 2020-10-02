@@ -191,12 +191,13 @@ Scenario: _090201 VAT and Sales Tax calculation in Sales order (Price include ta
 		And "ItemList" table contains lines
 		| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Procurement method' | 'Q'     | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 		| '400,00' | 'Trousers' | '18%' | '38/Yellow' | 'Stock'              | '1,000' | '64,98'      | '1%'       | 'pcs'  | '335,02'     | '400,00'       |
-		And "TaxTree" table contains lines
-		| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
-		| 'VAT'      | ''         | ''         | ''          | ''          | '61,02'  | '61,02'         |
-		| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '61,02'  | '61,02'         |
-		| 'SalesTax' | ''         | ''         | ''          | ''          | '3,96'   | '3,96'          |
-		| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '3,96'   | '3,96'          |
+		# And "TaxTree" table contains lines
+		# | 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
+		# | 'VAT'      | ''         | ''         | ''          | ''          | '61,02'  | '61,02'         |
+		# | 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '61,02'  | '61,02'         |
+		# | 'SalesTax' | ''         | ''         | ''          | ''          | '3,96'   | '3,96'          |
+		# | 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '3,96'   | '3,96'          |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "64,98"
 	* Add one more line and check the calculation of VAT and Sales Tax
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -219,14 +220,15 @@ Scenario: _090201 VAT and Sales Tax calculation in Sales order (Price include ta
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '64,98'      | '1%'       | '335,02'     | '400,00'       |
 			| '700,00' | 'Boots'    | '18%' | '37/18SD'   | '2,000' | '227,42'     | '1%'       | '1 172,58'   | '1 400,00'     |
-		And "TaxTree" table contains lines
-			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
-			| 'VAT'      | ''         | ''         | ''          | ''          | '274,58' | '274,58'        |
-			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '61,02'  | '61,02'         |
-			| 'VAT'      | '18%'      | 'Boots'    | '37/18SD'   | ''          | '213,56' | '213,56'        |
-			| 'SalesTax' | ''         | ''         | ''          | ''          | '17,82'  | '17,82'         |
-			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '3,96'   | '3,96'          |
-			| 'SalesTax' | '1%'       | 'Boots'    | '37/18SD'   | ''          | '13,86'  | '13,86'         |
+		# And "TaxTree" table contains lines
+		# 	| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
+		# 	| 'VAT'      | ''         | ''         | ''          | ''          | '274,58' | '274,58'        |
+		# 	| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '61,02'  | '61,02'         |
+		# 	| 'VAT'      | '18%'      | 'Boots'    | '37/18SD'   | ''          | '213,56' | '213,56'        |
+		# 	| 'SalesTax' | ''         | ''         | ''          | ''          | '17,82'  | '17,82'         |
+		# 	| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '3,96'   | '3,96'          |
+		# 	| 'SalesTax' | '1%'       | 'Boots'    | '37/18SD'   | ''          | '13,86'  | '13,86'         |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "292,40"
 	* Deleting the row and checking the VAT and Sales Tax recalculation
 		And I go to line in "ItemList" table
 		| 'Item'     | 'Item key'  |
@@ -236,10 +238,11 @@ Scenario: _090201 VAT and Sales Tax calculation in Sales order (Price include ta
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'SalesTax' | 'Net amount' | 'Total amount' |
 			| '700,00' | 'Boots' | '18%' | '37/18SD'  | '2,000' | '227,42'     | '1%'       | '1 172,58'   | '1 400,00'     |
-		And "TaxTree" table became equal
-			| 'Tax'      | 'Tax rate' | 'Item' | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
-			| 'VAT'      | ''         | ''     | ''         | ''          | '213,56' | '213,56'        |
-			| 'SalesTax' | ''         | ''     | ''         | ''          | '13,86'  | '13,86'         |
+		# And "TaxTree" table became equal
+		# 	| 'Tax'      | 'Tax rate' | 'Item' | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
+		# 	| 'VAT'      | ''         | ''     | ''         | ''          | '213,56' | '213,56'        |
+		# 	| 'SalesTax' | ''         | ''     | ''         | ''          | '13,86'  | '13,86'         |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "227,42"
 		And I close all client application windows
 
 Scenario: _090202 VAT and Sales Tax calculation in Sales order (Price include tax box isn't set)
@@ -286,12 +289,13 @@ Scenario: _090202 VAT and Sales Tax calculation in Sales order (Price include ta
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '76,00'      | '1%'       | 'pcs'  | '400,00'     | '476,00'       |
-		And "TaxTree" table contains lines
-			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
-			| 'VAT'      | ''         | ''         | ''          | ''          | '72,00'  | '72,00'         |
-			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '72,00'  | '72,00'         |
-			| 'SalesTax' | ''         | ''         | ''          | ''          | '4,00'   | '4,00'          |
-			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '4,00'   | '4,00'          |
+		# And "TaxTree" table contains lines
+		# 	| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
+		# 	| 'VAT'      | ''         | ''         | ''          | ''          | '72,00'  | '72,00'         |
+		# 	| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '72,00'  | '72,00'         |
+		# 	| 'SalesTax' | ''         | ''         | ''          | ''          | '4,00'   | '4,00'          |
+		# 	| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '4,00'   | '4,00'          |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "76,00"
 	* Add one more line and check the calculation of VAT and Sales Tax
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -314,14 +318,15 @@ Scenario: _090202 VAT and Sales Tax calculation in Sales order (Price include ta
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Procurement method' | 'Q'     | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | 'Stock'              | '1,000' | '76,00'      | '1%'       | 'pcs'  | '400,00'     | '476,00'       |
 			| '700,00' | 'Boots'    | '18%' | '37/18SD'   | 'Stock'              | '2,000' | '266,00'     | '1%'       | 'pcs'  | '1 400,00'   | '1 666,00'     |
-		And "TaxTree" table contains lines
-			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
-			| 'VAT'      | ''         | ''         | ''          | ''          | '324,00' | '324,00'        |
-			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '72,00'  | '72,00'         |
-			| 'VAT'      | '18%'      | 'Boots'    | '37/18SD'   | ''          | '252,00' | '252,00'        |
-			| 'SalesTax' | ''         | ''         | ''          | ''          | '18,00'  | '18,00'         |
-			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '4,00'   | '4,00'          |
-			| 'SalesTax' | '1%'       | 'Boots'    | '37/18SD'   | ''          | '14,00'  | '14,00'         |
+		# And "TaxTree" table contains lines
+		# 	| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
+		# 	| 'VAT'      | ''         | ''         | ''          | ''          | '324,00' | '324,00'        |
+		# 	| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '72,00'  | '72,00'         |
+		# 	| 'VAT'      | '18%'      | 'Boots'    | '37/18SD'   | ''          | '252,00' | '252,00'        |
+		# 	| 'SalesTax' | ''         | ''         | ''          | ''          | '18,00'  | '18,00'         |
+		# 	| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '4,00'   | '4,00'          |
+		# 	| 'SalesTax' | '1%'       | 'Boots'    | '37/18SD'   | ''          | '14,00'  | '14,00'         |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "342,00"
 	* Deleting the row and checking the VAT and Sales Tax recalculation
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
@@ -331,10 +336,11 @@ Scenario: _090202 VAT and Sales Tax calculation in Sales order (Price include ta
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '700,00' | 'Boots'    | '18%' | '37/18SD'   | '2,000' | ''              | '266,00'     | '1%'       | 'pcs'  | '1 400,00'   | '1 666,00'     |
-		And "TaxTree" table became equal
-			| 'Tax'      | 'Tax rate' | 'Item' | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
-			| 'VAT'      | ''         | ''     | ''         | ''          | '252,00' | '252,00'        |
-			| 'SalesTax' | ''         | ''     | ''         | ''          | '14,00'  | '14,00'         |
+		# And "TaxTree" table became equal
+		# 	| 'Tax'      | 'Tax rate' | 'Item' | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
+		# 	| 'VAT'      | ''         | ''     | ''         | ''          | '252,00' | '252,00'        |
+		# 	| 'SalesTax' | ''         | ''     | ''         | ''          | '14,00'  | '14,00'         |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "266,00"
 		And I close all client application windows
 
 Scenario: _090203 manual tax correction in Sales order
@@ -378,25 +384,25 @@ Scenario: _090203 manual tax correction in Sales order
 		And I input "1,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Manual tax correction and check display
-		And I move to "Tax list" tab
-		And I go to line in "TaxTree" table
-			| 'Amount' | 'Item'     |
-			| '72,00'  | 'Trousers' |
+		And I activate "Tax amount" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then "Edit tax" window is opened
+		And I activate "Manual amount" field in "TaxTree" table
 		And I select current line in "TaxTree" table
 		And I input "71,00" text in "Manual amount" field of "TaxTree" table
-		And Delay 60
-		And I expand current line in "TaxTree" table
-		And I move to "Item list" tab
+		And I finish line editing in "TaxTree" table
+		And I click "Ok" button		
 	* Save verification
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '75,00'      | '1%'       | 'pcs'  | '400,00'     | '475,00'       |
-		And "TaxTree" table became equal
-			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
-			| 'VAT'      | ''         | ''         | ''          | ''          | '72,00'  | '71,00'         |
-			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '72,00'  | '71,00'         |
-			| 'SalesTax' | ''         | ''         | ''          | ''          | '4,00'   | '4,00'          |
-			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '4,00'   | '4,00'          |
+		# And "TaxTree" table became equal
+		# 	| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
+		# 	| 'VAT'      | ''         | ''         | ''          | ''          | '72,00'  | '71,00'         |
+		# 	| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '72,00'  | '71,00'         |
+		# 	| 'SalesTax' | ''         | ''         | ''          | ''          | '4,00'   | '4,00'          |
+		# 	| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '4,00'   | '4,00'          |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "75,00"
 	* Check deleting manual correction when quantity changes
 		And I activate "Q" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -404,23 +410,22 @@ Scenario: _090203 manual tax correction in Sales order
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount'  | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | '152,00'      | '1%'       | 'pcs'   | '800,00'      | '952,00'     |
-		And "TaxTree" table contains lines
-			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
-			| 'VAT'      | ''         | ''         | ''          | ''          | '144,00' | '144,00'        |
-			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '144,00' | '144,00'        |
-			| 'SalesTax' | ''         | ''         | ''          | ''          | '8,00'   | '8,00'          |
-			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '8,00'   | '8,00'          |
+		# And "TaxTree" table contains lines
+		# 	| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
+		# 	| 'VAT'      | ''         | ''         | ''          | ''          | '144,00' | '144,00'        |
+		# 	| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '144,00' | '144,00'        |
+		# 	| 'SalesTax' | ''         | ''         | ''          | ''          | '8,00'   | '8,00'          |
+		# 	| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '8,00'   | '8,00'          |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "152,00"
 	* Check deleting manual correction when price changes
-		And I move to "Tax list" tab
-		And I go to line in "TaxTree" table
-			| 'Item'     | 'Item key'  | 'Tax' | 'Tax rate' |
-			| 'Trousers' | '38/Yellow' | 'VAT' | '18%'      |
-		And I activate field named "TaxTreeAmount" in "TaxTree" table
-		And I select current line in "TaxTree" table
+		And I activate "Tax amount" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then "Edit tax" window is opened
 		And I activate "Manual amount" field in "TaxTree" table
 		And I select current line in "TaxTree" table
 		And I input "142,00" text in "Manual amount" field of "TaxTree" table
 		And I finish line editing in "TaxTree" table
+		And I click "Ok" button	
 		And "ItemList" table contains lines
 			| 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| 'Trousers' | '18%' | '38/Yellow' | '2,000' | '150,00'     | '1%'       | 'pcs'  | '800,00'     | '950,00'     |
@@ -429,24 +434,22 @@ Scenario: _090203 manual tax correction in Sales order
 		And I select current line in "ItemList" table
 		And I input "510,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And "TaxTree" table contains lines
-			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
-			| 'VAT'      | ''         | ''         | ''          | ''          | '183,60' | '183,60'        |
-			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '183,60' | '183,60'        |
-			| 'SalesTax' | ''         | ''         | ''          | ''          | '10,20'  | '10,20'         |
-			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '10,20'  | '10,20'         |
+		# And "TaxTree" table contains lines
+		# 	| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
+		# 	| 'VAT'      | ''         | ''         | ''          | ''          | '183,60' | '183,60'        |
+		# 	| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '183,60' | '183,60'        |
+		# 	| 'SalesTax' | ''         | ''         | ''          | ''          | '10,20'  | '10,20'         |
+		# 	| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '10,20'  | '10,20'         |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "193,80"
 	* Check deleting manual correction when iten key changes
-		And I move to "Tax list" tab
-		And I go to line in "TaxTree" table
-			| 'Item'     | 'Item key'  | 'Tax' | 'Tax rate' |
-			| 'Trousers' | '38/Yellow' | 'VAT' | '18%'      |
-		And I activate field named "TaxTreeAmount" in "TaxTree" table
-		And I select current line in "TaxTree" table
+		And I activate "Tax amount" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then "Edit tax" window is opened
 		And I activate "Manual amount" field in "TaxTree" table
 		And I select current line in "TaxTree" table
 		And I input "182,00" text in "Manual amount" field of "TaxTree" table
 		And I finish line editing in "TaxTree" table
-		And I move to "Item list" tab
+		And I click "Ok" button	
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '510,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | '192,20'     | '1%'       | 'pcs'  | '1 020,00'   | '1 212,20'     |
@@ -457,21 +460,22 @@ Scenario: _090203 manual tax correction in Sales order
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '36/Yellow' |
 		And I select current line in "List" table
-		And "TaxTree" table contains lines
-		| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
-		| 'VAT'      | ''         | ''         | ''          | ''          | '144,00' | '144,00'        |
-		| 'VAT'      | '18%'      | 'Trousers' | '36/Yellow' | ''          | '144,00' | '144,00'        |
-		| 'SalesTax' | ''         | ''         | ''          | ''          | '8,00'   | '8,00'          |
-		| 'SalesTax' | '1%'       | 'Trousers' | '36/Yellow' | ''          | '8,00'   | '8,00'          |
+		# And "TaxTree" table contains lines
+		# | 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
+		# | 'VAT'      | ''         | ''         | ''          | ''          | '144,00' | '144,00'        |
+		# | 'VAT'      | '18%'      | 'Trousers' | '36/Yellow' | ''          | '144,00' | '144,00'        |
+		# | 'SalesTax' | ''         | ''         | ''          | ''          | '8,00'   | '8,00'          |
+		# | 'SalesTax' | '1%'       | 'Trousers' | '36/Yellow' | ''          | '8,00'   | '8,00'          |
 	* Manual selection of tax rate
 		And I activate "VAT" field in "ItemList" table
 		And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
-		And "TaxTree" table became equal
-			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
-			| 'VAT'      | ''         | ''         | ''          | ''          | ''       | ''              |
-			| 'VAT'      | '0%'       | 'Trousers' | '36/Yellow' | ''          | ''       | ''              |
-			| 'SalesTax' | ''         | ''         | ''          | ''          | '8,00'   | '8,00'          |
-			| 'SalesTax' | '1%'       | 'Trousers' | '36/Yellow' | ''          | '8,00'   | '8,00'          |
+		# And "TaxTree" table became equal
+		# 	| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
+		# 	| 'VAT'      | ''         | ''         | ''          | ''          | ''       | ''              |
+		# 	| 'VAT'      | '0%'       | 'Trousers' | '36/Yellow' | ''          | ''       | ''              |
+		# 	| 'SalesTax' | ''         | ''         | ''          | ''          | '8,00'   | '8,00'          |
+		# 	| 'SalesTax' | '1%'       | 'Trousers' | '36/Yellow' | ''          | '8,00'   | '8,00'          |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "10,20"
 	And I close all client application windows
 
 
@@ -531,23 +535,37 @@ Scenario: _090204 check tax transfer in Sales invoice when it is created based o
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Price type'        | 'Q'     | 'Unit' | 'SalesTax' | 'Tax amount' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | 'Basic Price Types' | '1,000' | 'pcs'  | '1%'       | '64,98'      | '335,02'     | '400,00'       |
 			| '700,00' | 'Boots'    | '18%' | '37/18SD'   | 'Basic Price Types' | '2,000' | 'pcs'  | '1%'       | '227,42'     | '1 172,58'   | '1 400,00'     |
-		And "TaxTree" table contains lines
-			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
-			| 'VAT'      | ''         | ''         | ''          | ''          | '274,58' | '274,58'        |
-			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '61,02'  | '61,02'         |
-			| 'VAT'      | '18%'      | 'Boots'    | '37/18SD'   | ''          | '213,56' | '213,56'        |
-			| 'SalesTax' | ''         | ''         | ''          | ''          | '17,82'  | '17,82'         |
-			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '3,96'   | '3,96'          |
-			| 'SalesTax' | '1%'       | 'Boots'    | '37/18SD'   | ''          | '13,86'  | '13,86'         |
-		And I go to line in "TaxTree" table
-			| 'Item'     | 'Item key'  | 'Tax' | 'Tax rate' |
-			| 'Trousers' | '38/Yellow' | 'VAT' | '18%'      |
-		And I activate field named "TaxTreeAmount" in "TaxTree" table
-		And I select current line in "TaxTree" table
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "292,40"
+		# And "TaxTree" table contains lines
+		# 	| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
+		# 	| 'VAT'      | ''         | ''         | ''          | ''          | '274,58' | '274,58'        |
+		# 	| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '61,02'  | '61,02'         |
+		# 	| 'VAT'      | '18%'      | 'Boots'    | '37/18SD'   | ''          | '213,56' | '213,56'        |
+		# 	| 'SalesTax' | ''         | ''         | ''          | ''          | '17,82'  | '17,82'         |
+		# 	| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '3,96'   | '3,96'          |
+		# 	| 'SalesTax' | '1%'       | 'Boots'    | '37/18SD'   | ''          | '13,86'  | '13,86'         |
+		// And I go to line in "TaxTree" table
+		// 	| 'Item'     | 'Item key'  | 'Tax' | 'Tax rate' |
+		// 	| 'Trousers' | '38/Yellow' | 'VAT' | '18%'      |
+		// And I activate field named "TaxTreeAmount" in "TaxTree" table
+		// And I select current line in "TaxTree" table
+		// And I activate "Manual amount" field in "TaxTree" table
+		// And I select current line in "TaxTree" table
+		// And I input "62,00" text in "Manual amount" field of "TaxTree" table
+		// And I finish line editing in "TaxTree" table
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |	
+		And I activate "Tax amount" field in "ItemList" table
+		And I select current line in "ItemList" table
 		And I activate "Manual amount" field in "TaxTree" table
+		And I go to line in "TaxTree" table
+			| 'Amount' | 'Manual amount' | 'Row presentation' |
+			| '61,02'  | '61,02'         | 'VAT - TRY - 18%'  |
 		And I select current line in "TaxTree" table
 		And I input "62,00" text in "Manual amount" field of "TaxTree" table
 		And I finish line editing in "TaxTree" table
+		And I click "Ok" button
 		And I move to "Other" tab
 		And I expand "More" group
 		And I input "0" text in "Number" field
@@ -561,14 +579,15 @@ Scenario: _090204 check tax transfer in Sales invoice when it is created based o
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'SalesTax' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | 'pcs'  | '1%'       | '65,96'      | '334,04'     | '400,00'       | 'Store 01' |
 			| '700,00' | 'Boots'    | '18%' | '37/18SD'   | '2,000' | 'pcs'  | '1%'       | '227,42'     | '1 172,58'   | '1 400,00'     | 'Store 01' |
-		And "TaxTree" table contains lines
-			| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
-			| 'VAT'      | ''         | ''         | ''          | ''          | '274,58' | '275,56'        |
-			| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '61,02'  | '62,00'         |
-			| 'VAT'      | '18%'      | 'Boots'    | '37/18SD'   | ''          | '213,56' | '213,56'        |
-			| 'SalesTax' | ''         | ''         | ''          | ''          | '17,82'  | '17,82'         |
-			| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '3,96'   | '3,96'          |
-			| 'SalesTax' | '1%'       | 'Boots'    | '37/18SD'   | ''          | '13,86'  | '13,86'         |
+		# And "TaxTree" table contains lines
+		# 	| 'Tax'      | 'Tax rate' | 'Item'     | 'Item key'  | 'Analytics' | 'Amount' | 'Manual amount' |
+		# 	| 'VAT'      | ''         | ''         | ''          | ''          | '274,58' | '275,56'        |
+		# 	| 'VAT'      | '18%'      | 'Trousers' | '38/Yellow' | ''          | '61,02'  | '62,00'         |
+		# 	| 'VAT'      | '18%'      | 'Boots'    | '37/18SD'   | ''          | '213,56' | '213,56'        |
+		# 	| 'SalesTax' | ''         | ''         | ''          | ''          | '17,82'  | '17,82'         |
+		# 	| 'SalesTax' | '1%'       | 'Trousers' | '38/Yellow' | ''          | '3,96'   | '3,96'          |
+		# 	| 'SalesTax' | '1%'       | 'Boots'    | '37/18SD'   | ''          | '13,86'  | '13,86'         |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "293,38"
 		And I click "Post and close" button
 		And I close all client application windows
 

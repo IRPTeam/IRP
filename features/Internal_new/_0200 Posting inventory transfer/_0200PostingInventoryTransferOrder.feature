@@ -2,6 +2,8 @@
 @tree
 @Positive
 @Group4
+@InventoryTransfer
+
 Feature: create document Inventory transfer order
 
 As a procurement manager

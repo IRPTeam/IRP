@@ -19,6 +19,7 @@ Scenario: _090000 preparation (Cheque bond transaction)
 		When Create catalog ObjectStatuses objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog Companies objects (own Second company)
 		When Create catalog Partners objects (Kalipso)
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
@@ -968,7 +969,7 @@ Scenario: _2020001 test data creation
 			And I click choice button of "Partner term" attribute in "ChequeBonds" table
 			And I go to line in "List" table
 				| 'Description'           |
-				| 'Basic Partner terms, TRY' |
+				| 'Partner term DFC' |
 			And I select current line in "List" table
 			And I finish line editing in "ChequeBonds" table
 		* Change the document number
@@ -1045,40 +1046,6 @@ Scenario: _2020003 check automatic filling Partner (the partner has only one Leg
 		And I close all client application windows
 
 Scenario: _2020004 check the automatic filling in of Partner term (partner has only one Partner term) in Cheque bond transaction document
-	* Preparation
-		# Removing a DFC partner from all segments and creating an individual partner term
-			Given I open hyperlink "e1cib/list/Catalog.Partners"
-			And I go to line in "List" table
-				| 'Description' |
-				| 'DFC'         |
-			And I select current line in "List" table
-			And In this window I click command interface button "Partner segments content"
-			And I delete a line in "List" table
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And In this window I click command interface button "Partner terms"
-			And I click the button named "FormCreate"
-			And I input "Partner term DFC" text in the field named "Description_en"
-			And I change "Type" radio button value to "Customer"
-			And I change "AP/AR posting detail" radio button value to "By documents"
-			And I input "121" text in "Number" field
-			And I click Select button of "Multi currency movement type" field
-			And I go to line in "List" table
-				| 'Currency' | 'Type'      |
-				| 'TRY'      | 'Partner term' |
-			And I select current line in "List" table
-			And I click Select button of "Price type" field
-			And I go to line in "List" table
-				| 'Currency' | 'Description'             |
-				| 'TRY'      | 'Basic Price without VAT' |
-			And I select current line in "List" table
-			And I input "01.01.2019" text in "Start using" field
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
-			And I select current line in "List" table
-			And I click "Save and close" button
 	* Open document form ChequeBondTransaction
 			Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 			And I click the button named "FormCreate"
@@ -1087,12 +1054,12 @@ Scenario: _2020004 check the automatic filling in of Partner term (partner has o
 			And I click choice button of "Partner" attribute in "ChequeBonds" table
 			And I go to line in "List" table
 				| 'Description' |
-				| 'DFC'         |
+				| 'NDB'         |
 			And I select current line in "List" table
 	* Check filling in Partner term
 			And "ChequeBonds" table contains lines
 				| 'Partner' | 'Partner term'     |
-				| 'DFC'     | 'Partner term DFC' |
+				| 'NDB'     | 'Partner term NDB' |
 			And I close all client application windows
 
 Scenario: _2020005 check the selection of only partner partner terms available in the Cheque bond transaction
@@ -1104,13 +1071,13 @@ Scenario: _2020005 check the selection of only partner partner terms available i
 		And I click choice button of "Partner" attribute in "ChequeBonds" table
 		And I go to line in "List" table
 			| 'Description' |
-			| 'DFC'         |
+			| 'NDB'         |
 		And I select current line in "List" table
 	* Check availability to select only one partner term
 		And I click choice button of "Partner term" attribute in "ChequeBonds" table
 		And "List" table became equal
 			| 'Description'   |
-			| 'Partner term DFC' |
+			| 'Partner term NDB' |
 		And I close all client application windows
 
 Scenario: _2020006 check to clear the agreement field after partner re-selection (new partner does not have the selected agreement)
@@ -1122,13 +1089,13 @@ Scenario: _2020006 check to clear the agreement field after partner re-selection
 		And I click choice button of "Partner" attribute in "ChequeBonds" table
 		And I go to line in "List" table
 			| 'Description' |
-			| 'DFC'         |
+			| 'NDB'         |
 		And I select current line in "List" table
 	* Filling in Partner term
 		And I click choice button of "Partner term" attribute in "ChequeBonds" table
 		And I go to line in "List" table
 			| 'Description'   |
-			| 'Partner term DFC' |
+			| 'Partner term NDB' |
 		And I select current line in "List" table
 	* Re-selection partner
 		And I click choice button of "Partner" attribute in "ChequeBonds" table
@@ -1448,8 +1415,8 @@ Scenario: _2020013 check the selection of documents for distribution of the amou
 		And in the table "PaymentList" I click "Fill" button
 		Then 'Select base documents in the "Cheque bond transaction" document.' window is opened
 		And I go to line in "DocumentsList" table
-			| 'Currency' | 'Document amount' |
-			| 'TRY'      | '137 000'         |
+			| 'Basis document' | 'Currency' | 'Document amount' |
+			| '$$PurchaseInvoice018001$$'| 'TRY'      | '137 000'         |
 		And I select current line in "DocumentsList" table
 		And I input "9 000,00" text in "Amount balance" field of "PickedDocuments" table
 		And I finish line editing in "PickedDocuments" table

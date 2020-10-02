@@ -223,9 +223,6 @@ Scenario: _0154134 preparation
 		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
 		And I go to line in "MetadataTree" table
-			| 'Group name' |
-			| 'Catalogs'   |
-		And I go to line in "MetadataTree" table
 			| 'Group name'    | 'Use' |
 			| 'Business unit' | 'No'  |
 		And I activate "Value" field in "MetadataTree" table
@@ -245,8 +242,19 @@ Scenario: _0154134 preparation
 			| 'Store 01'    |
 		And I select current line in "List" table
 		And I click "Ok" button
-	
-	
+	* Workstation
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"
+		And I click the button named "FormCreate"
+		And I input "Workstation 01" text in "Description" field
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №2' |
+		And I select current line in "List" table
+		And I click "Set current" button
+		And I click "Save and close" button
+		
+				
 
 Scenario: _0154135 create document Retail Sales Receipt
 	And I close all client application windows
@@ -354,10 +362,8 @@ Scenario: _0154135 create document Retail Sales Receipt
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
-		And "ItemList" table does not contain lines
-			| 'Item'  | 'Item key' |
-			| 'Trousers' | '38/Yellow' |
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "1 500,00"
+		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "270,00"
 	* Check tax recalculation when uncheck/re-check Price include Tax
 		* Unchecking box Price include Tax
 			And I move to "Other" tab
@@ -471,19 +477,6 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 			| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | '212,00'        | '74,44'      | 'pcs'  | '413,56'     | '488,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '137,00'        | '63,00'      | 'pcs'  | '350,00'     | '413,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
 			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '131,00'        | '59,34'      | 'pcs'  | '329,66'     | '389,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
-		And "TaxTree" table contains lines
-			| 'Tax' | 'Tax rate' | 'Item'  | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
-			| 'VAT' | ''         | ''      | ''         | ''          | '196,78' | '196,78'        |
-			| 'VAT' | '18%'      | 'Shirt' | '38/Black' | ''          | '74,44'  | '74,44'         |
-			| 'VAT' | '18%'      | 'Dress' | 'L/Green'  | ''          | '63,00'  | '63,00'         |
-			| 'VAT' | '18%'      | 'Dress' | 'XS/Blue'  | ''          | '59,34'  | '59,34'         |
-
-		And "ObjectCurrencies" table contains lines
-			| 'Movement type'      | 'Type'         | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 290'  | '1'            |
-			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1 290'  | '1'            |
-			| 'Reporting currency' | 'Reporting'    | 'TRY'           | 'USD'      | '5,8400'            | '220,89' | '1'            |
-
 		Then the form attribute named "IsOpeningEntry" became equal to "No"
 		Then the form attribute named "Currency" became equal to "TRY"
 	* Check filling in Payments type from Retail sales receipt
@@ -505,7 +498,18 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 		| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Retail sales receipt'          |
 		| '350,00' | 'Shirt' | '18%' | '38/Black' | '1,000' | '106,00'        | '35,69'      | 'pcs'  | '198,31'     | '234,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
 		| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '137,00'        | '63,00'      | 'pcs'  | '350,00'     | '413,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
+		And I move to "Payments" tab
+		And I activate "Amount" field in "Payments" table
+		And I select current line in "Payments" table
+		And I input "657,00" text in "Amount" field of "Payments" table
+		And I finish line editing in "Payments" table
 	* Post Retail return receipt
+		And I move to "Other" tab
+		And I click Select button of "Business unit" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shop 01'     |
+		And I select current line in "List" table
 		And I click "Post" button
 		And I save the value of "Number" field as "$$NumberRetailReturnReceipt0154136$$"
 		And I save the window as "$$RetailReturnReceipt0154136$$"
@@ -517,6 +521,7 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 
 
 Scenario: _0154137 create document Retail Sales Receipt from Point of sale (payment by cash)
+	And I close all client application windows
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
 	* Add product (scan)
@@ -585,13 +590,9 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 			| 'Shop 01'       | ''             | 'Dress'    | 'Basic Price Types' | 'L/Green'   | '3,000' | 'pcs'  | '251,69'     | '550,00' | '18%' | ''              | '1 398,31'   | '1 650,00'     | ''                    | 'Store 01' | ''       |
 			| 'Shop 01'       | ''             | 'Trousers' | 'Basic Price Types' | '38/Yellow' | '1,000' | 'pcs'  | '61,02'      | '400,00' | '18%' | ''              | '338,98'     | '400,00'       | ''                    | 'Store 01' | ''       |
 		And "Payments" table contains lines
-			| 'Amount'   | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Account' | 'Percent' |
-			| '2 050,00' | ''           | 'Cash'         | ''                 | ''          | ''        | ''        |
-		And "TaxTree" table contains lines
-			| 'Tax' | 'Item'     | 'Item key'  | 'Manual amount' | 'Tax rate' | 'Analytics' | 'Amount' |
-			| 'VAT' | ''         | ''          | '312,71'        | ''         | ''          | '312,71' |
-			| 'VAT' | 'Trousers' | '38/Yellow' | '61,02'         | '18%'      | ''          | '61,02'  |
-			| 'VAT' | 'Dress'    | 'L/Green'   | '251,69'        | '18%'      | ''          | '251,69' |
+			| 'Payment type' | 'Payment terminal' | 'Bank term' | 'Amount'   | 'Account'      | 'Commission' | 'Percent' |
+			| 'Cash'         | ''                 | ''          | '2 051,00' | 'Cash desk №2' | ''           | ''        |
+			| 'Cash'         | ''                 | ''          | '-1,00'    | 'Cash desk №2' | ''           | ''        |
 		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "1 737,29"
 		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "312,71"
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "2 050,00"
@@ -674,11 +675,6 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 		And "Payments" table contains lines
 			| 'Amount'   | 'Commission'      | 'Payment type'    | 'Payment terminal' | 'Bank term'             | 'Account'             | 'Percent'     |
 			| '2 050,00' | '20,50'           | 'Card 01'         | ''                 | 'Bank term 01'          | 'Transit Main'        | '1,00'        |
-		And "TaxTree" table contains lines
-			| 'Tax' | 'Item'     | 'Item key'  | 'Manual amount' | 'Tax rate' | 'Analytics' | 'Amount' |
-			| 'VAT' | ''         | ''          | '312,71'        | ''         | ''          | '312,71' |
-			| 'VAT' | 'Trousers' | '38/Yellow' | '61,02'         | '18%'      | ''          | '61,02'  |
-			| 'VAT' | 'Dress'    | 'L/Green'   | '251,69'        | '18%'      | ''          | '251,69' |
 		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "1 737,29"
 		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "312,71"
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "2 050,00"

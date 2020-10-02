@@ -59,7 +59,7 @@ Scenario: _25001 adding print plugin for sales order
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		And I click the button named "FormCreate"
 	* Filling plugin data and adding it to the database
-		And I select external file "#workingDir#\DataProcessor\PrintFormSalesOrder.epf"
+		And I select external file "C:\Users\Severnity\Desktop\ExtDataProc\PrintFormSalesOrder.epf"
 		And I click the button named "FormAddExtDataProc"
 		And I input "" text in "Path to plugin for test" field
 		And I input "PrintFormSalesOrder" text in "Name" field
@@ -75,15 +75,32 @@ Scenario: _25001 adding print plugin for sales order
 Scenario: _25002 create a print command for Sales order
 	* Open Command register
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
-		And I click the button named "FormCreate"
 	* Filling test command data for Sales order
 		* Create metadata for sales order and select it for the command
-			And I click Select button of "Configuration metadata" field
-			And I go to line in "List" table
+			If "List" table does not contain lines Then
 				| 'Description' |
-				| 'Documents'   |
+				| 'SalesOrder'  |
+				And I click the button named "FormCreate"
+				And I click Select button of "Configuration metadata" field
+				And I go to line in "List" table
+					| 'Description' |
+					| 'Documents'   |
+				And I move one level down in "List" table
+				And I click the button named "FormCreate"
+				And I input "SalesOrder" text in "Description" field
+				And I click "Save and close" button
+				And I go to line in "List" table
+					| 'Description' |
+					| 'SalesOrder'  |
+				And I click the button named "FormChoose"
+				And I click Select button of "Plugins" field
+				And I go to line in "List" table
+					| 'Description' |
+					| 'Sales order' |
+				And I select current line in "List" table 
+				And I click "Save and close" button		
 			And I go to line in "List" table
-				| 'Description' |
+				| 'Configuration metadata' |
 				| 'SalesOrder'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
@@ -152,19 +169,14 @@ Scenario: _25003 check Sales order printing
 			| 'Boots' | '37/18SD'  |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-	* Change document number and date
-		And I move to "Other" tab
-		And I input "8 000" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "8 000" text in "Number" field
-		And I input "01.12.2019  0:00:01" text in "Date" field
-		And I move to "Item list" tab
 	* Post document
+		And I click "Post" button
+        And I save the value of "Number" field as "$$NumberSalesInvoice25003$$"
+        And I save the window as "$$SalesInvoice25003$$"
 		And I click "Post and close" button
 		And I go to line in "List" table
 		| 'Number' |
-		| '8 000'  |
+		| '$$NumberSalesInvoice25003$$'  |
 		And I select current line in "List" table
 	* Printing out of a document
 		And I click "Sales Order" button

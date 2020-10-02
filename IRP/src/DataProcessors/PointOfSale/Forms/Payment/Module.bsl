@@ -12,6 +12,7 @@ Var AmountFractionDigitsCount, AmountDotIsActive, AmountFractionDigitsMaxCount, 
 Procedure OnCreateAtServer(Cancel, StandardProcessing)		
 	Object.Amount = Parameters.Parameters.Amount;
 	Object.BusinessUnit = Parameters.Parameters.BusinessUnit;
+	Object.Workstation = Parameters.Parameters.Workstation;
 	FillPaymentTypes();	
 EndProcedure
 
@@ -90,9 +91,9 @@ Procedure Enter(Command)
 	EndIf;		
 	If Object.Cashback Then
 		Row = Payments.Add();
-		//TODO: #168 Решить по поводу наличных видов оплат
 		Row.PaymentType = CashPaymentTypes[0].PaymentType;
 		Row.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Cash");
+		Row.Account = CashPaymentTypes[0].Account;
 		Row.Amount = - Object.Cashback;
 	EndIf;
 	ReturnValue = New Structure;
@@ -322,12 +323,14 @@ Procedure FillPaymentsAtServer()
 	Query = New Query;
 	Query.Text = "SELECT
 	|	PaymentTypes.Ref AS PaymentType,
-	|	PaymentTypes.Description_en AS Description
+	|	PaymentTypes.Description_en AS Description,
+	|	&CashAccount AS Account
 	|FROM
 	|	Catalog.PaymentTypes AS PaymentTypes
 	|WHERE
 	|	PaymentTypes.Type = VALUE(Enum.PaymentTypes.Cash)
 	|	AND NOT PaymentTypes.DeletionMark";
+	Query.SetParameter("CashAccount", Object.Workstation.CashAccount);
 	CashPaymentTypesValue = Query.Execute().Unload();
 	ValueToFormAttribute(CashPaymentTypesValue, "CashPaymentTypes");
 	
@@ -410,6 +413,7 @@ Procedure CashChoiceEnd(Result, AdditionalParameters) Export
 		Row = Payments.Add();
 		Row.PaymentType = PaymentFilter.PaymentType;
 		Row.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Cash");
+		Row.Account = CashPaymentTypes.Get(Result).Account;
 	EndIf;
 	If (Object.Amount - Payments.Total("Amount")) <= 0 Then
 		RemainingAmount = 0;

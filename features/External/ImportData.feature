@@ -20,16 +20,12 @@ Scenario: Create catalog AccessGroups objects
 
 	And I refill object tabular section  "Profiles":
 		| 'Ref'                                                                  | 'Profile'                                                                |
-		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c614' | 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b327098e' |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c615' | 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b327098e' |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c616' | 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270991' |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf116b327098d' | 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270990' |
 
 	And I refill object tabular section  "Users":
 		| 'Ref'                                                                  | 'User'                                                          |
-		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c614' | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b3270992' |
-		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c614' | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b3270993' |
-		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c614' | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b3270994' |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c615' | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b3270995' |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c615' | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b3270996' |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c615' | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b3270997' |
@@ -263,7 +259,11 @@ Scenario: Create catalog ItemTypes objects (Clothes, Shoes)
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47e7' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47e8' | 'Yes'           | 'No'       | 'No'         |
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47e7' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47e9' | 'No'            | 'No'       | 'No'         |
 
-
+Scenario: Create catalog ItemTypes objects (Coat, Jeans)
+	And I check or create catalog "ItemTypes" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Type'                   | 'UseSerialLotNumber' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                         |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78170ed92fbced11eaf115bcc9c5f9' | 'No'           | ''       | 'No'       | 'Enum.ItemTypes.Product' | 'No'                 | 'Coat'           | ''                 | ''               | 'Coat TR'        | '_73585f90e829490c95f07908375e777' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa88170ed92fbced11eaf115bcc9c5f9' | 'No'           | ''       | 'No'       | 'Enum.ItemTypes.Product' | 'No'                 | 'Jeans'          | ''                 | ''               | 'Jeans TR'       | '_73585f90e829490c95f07908375e778' |
 
 Scenario: Create catalog ObjectStatuses objects
 

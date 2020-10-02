@@ -33,4 +33,11 @@
       <value>Cash transfer order</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="4418b908-9fa3-4961-ae83-fcc8dd3d92f9">
+    <name>TransferFromPOS</name>
+    <synonym>
+      <key>en</key>
+      <value>Transfer from POS</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

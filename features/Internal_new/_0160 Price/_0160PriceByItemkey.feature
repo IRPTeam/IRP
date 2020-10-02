@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-
+@Price
 
 
 Feature: item key pricing
@@ -17,6 +17,7 @@ Background:
 
 
 Scenario: _016000 preparation
+		When set True value to the constant
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
@@ -47,6 +48,9 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I move to "Item keys" tab
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
@@ -71,6 +75,9 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I finish line editing in "ItemKeyList" table
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
@@ -83,6 +90,9 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I finish line editing in "ItemKeyList" table
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
@@ -340,9 +350,15 @@ Scenario: _016002 base price fill and special price fill (not incl. VAT)
 	* Filling in prices by item key by price type Basic Price without VAT
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'L/Green'       |
 		And I select current line in "List" table
 		And I input "466,10" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
@@ -362,6 +378,9 @@ Scenario: _016002 base price fill and special price fill (not incl. VAT)
 		And I finish line editing in "ItemKeyList" table
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
@@ -373,12 +392,15 @@ Scenario: _016002 base price fill and special price fill (not incl. VAT)
 		And I finish line editing in "ItemKeyList" table
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemKeyList" table
 		And I click choice button of "Item key" attribute in "ItemKeyList" table
 		And I go to line in "List" table
 			| 'Item key' |
-			| 'L/Green'  |
+			| 'S/Yellow'  |
 		And I select current line in "List" table
 		And I input "466,10" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
@@ -558,23 +580,26 @@ Scenario: _016002 base price fill and special price fill (not incl. VAT)
 Scenario: _016010 check dependent prices calculation
 	* Adding Plugin sessing
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		And I click the button named "FormCreate"
-		And I select external file "#workingDir#\DataProcessor\SalesPriceCalculation.epf"
-		And I click the button named "FormAddExtDataProc"
-		And I input "" text in "Path to plugin for test" field
-		And I input "SalesPriceCalculation" text in "Name" field
-		And I click Open button of the field named "Description_en"
-		And I input "SalesPriceCalculation" text in the field named "Description_en"
-		And I input "SalesPriceCalculation" text in the field named "Description_tr"
-		And I click "Ok" button
-		And I click "Save and close" button
-		And I wait "Plugins (create)" window closing in 10 seconds
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "SalesPriceCalculation" |
+			And I click the button named "FormCreate"
+			And I select external file "C:\Users\Severnity\Desktop\ExtDataProc\SalesPriceCalculation.epf"
+			And I click the button named "FormAddExtDataProc"
+			And I input "" text in "Path to plugin for test" field
+			And I input "SalesPriceCalculation" text in "Name" field
+			And I click Open button of the field named "Description_en"
+			And I input "SalesPriceCalculation" text in the field named "Description_en"
+			And I input "SalesPriceCalculation" text in the field named "Description_tr"
+			And I click "Ok" button
+			And I click "Save and close" button
+			And I wait "Plugins (create)" window closing in 10 seconds
 	* Creating price type that will use external processing
 		Given I open hyperlink "e1cib/list/Catalog.PriceTypes"	
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Dependent Price" text in the field named "Description_en"
-		And I input "Dependent Price TR" text in the field named "Description_tr"
+		And I input "Dependent Price New" text in the field named "Description_en"
+		And I input "Dependent Price New TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click Select button of "Currency" field
 		And I go to line in "List" table
@@ -610,7 +635,7 @@ Scenario: _016010 check dependent prices calculation
 			And I click Select button of "Price type" field
 			And I go to line in "List" table
 					| 'Description' |
-					| 'Dependent Price'  |
+					| 'Dependent Price New'  |
 			And I select current line in "List" table
 		* Filling in price list
 			And I click "Fill by rules" button
@@ -634,7 +659,7 @@ Scenario: _016010 check dependent prices calculation
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And "List" table contains lines
 		| 'Number'                                       | 'Price list type'    | 'Price type'      | 'Description'     |
-		| '$$NumberPriceListBasicPriceByItemKey016010$$' | 'Price by item keys' | 'Dependent Price' | 'Dependent Price' |
+		| '$$NumberPriceListBasicPriceByItemKey016010$$' | 'Price by item keys' | 'Dependent Price New' | 'Dependent Price' |
 		And I close all client application windows
 	
 Scenario: _016011 check price calculation in the documents
@@ -677,17 +702,17 @@ Scenario: _016011 check price calculation in the documents
 			And "ItemList" table contains lines
 			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Q'     |
 			| 'Dress' | '440,68' | 'XS/Blue'  | 'Basic Price without VAT' | '1,000' |
-		* Dependent Price
+		* Dependent Price New
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'Dependent Price' |
+				| 'Dependent Price New' |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
 			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Q'     |
-			| 'Dress' | '572,00' | 'XS/Blue'  | 'Dependent Price' | '1,000' |
+			| 'Dress' | '572,00' | 'XS/Blue'  | 'Dependent Price New' | '1,000' |
 		And I close all client application windows
 	* Price calculation in the Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -733,12 +758,12 @@ Scenario: _016011 check price calculation in the documents
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'Dependent Price' |
+				| 'Dependent Price New' |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
 			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Q'     |
-			| 'Dress' | '572,00' | 'XS/Blue'  | 'Dependent Price' | '1,000' |
+			| 'Dress' | '572,00' | 'XS/Blue'  | 'Dependent Price New' | '1,000' |
 	* Price calculation in the Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -783,12 +808,12 @@ Scenario: _016011 check price calculation in the documents
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'Dependent Price' |
+				| 'Dependent Price New' |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
 			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Q'     |
-			| 'Dress' | '572,00' | 'XS/Blue'  | 'Dependent Price' | '1,000' |
+			| 'Dress' | '572,00' | 'XS/Blue'  | 'Dependent Price New' | '1,000' |
 	* Price calculation in the Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
@@ -833,11 +858,11 @@ Scenario: _016011 check price calculation in the documents
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'Dependent Price' |
+				| 'Dependent Price New' |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
 			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Q'     |
-			| 'Dress' | '572,00' | 'XS/Blue'  | 'Dependent Price' | '1,000' |
+			| 'Dress' | '572,00' | 'XS/Blue'  | 'Dependent Price New' | '1,000' |
 		
 	

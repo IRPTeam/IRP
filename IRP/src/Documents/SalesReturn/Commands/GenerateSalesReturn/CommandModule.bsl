@@ -77,6 +77,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	ItemList.Columns.Add("Price"			, New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
 	ItemList.Columns.Add("Key"				, New TypeDescription("UUID"));
 	ItemList.Columns.Add("RowKey"			, New TypeDescription("String"));
+	ItemList.Columns.Add("DontCalculateRow" , New TypeDescription("Boolean"));
 	
 	TaxListMetadataColumns = Metadata.Documents.SalesInvoice.TabularSections.TaxList.Attributes;
 	TaxList = New ValueTable();
@@ -314,7 +315,8 @@ Function ExtractInfoFromRows_SalesInvoice(QueryTable)
 		|	ISNULL(ItemList.NetAmount, 0) AS NetAmount,
 		|	ISNULL(ItemList.OffersAmount, 0) AS OffersAmount,
 		|	ISNULL(ItemList.PriceType, VALUE(Catalog.PriceTypes.EmptyRef)) AS PriceType,
-		|	ISNULL(ItemList.Store, VALUE(Catalog.Stores.EmptyRef)) AS Store
+		|	ISNULL(ItemList.Store, VALUE(Catalog.Stores.EmptyRef)) AS Store,
+		|	ISNULL(ItemList.DontCalculateRow, FALSE) AS DontCalculateRow
 		|FROM
 		|	tmpQueryTable AS tmpQueryTable
 		|		INNER JOIN Document.SalesInvoice.ItemList AS ItemList
@@ -432,7 +434,8 @@ Function ExtractInfoFromRows_SalesReturnOrder(QueryTable)
 		|	ISNULL(ItemList.NetAmount, 0) AS NetAmount,
 		|	ISNULL(ItemList.OffersAmount, 0) AS OffersAmount,
 		|	ISNULL(ItemList.PriceType, VALUE(Catalog.PriceTypes.EmptyRef)) AS PriceType,
-		|	ISNULL(ItemList.SalesInvoice, VALUE(Document.SalesInvoice.EmptyRef)) AS SalesInvoice
+		|	ISNULL(ItemList.SalesInvoice, VALUE(Document.SalesInvoice.EmptyRef)) AS SalesInvoice,
+		|	ISNULL(ItemList.DontCalculateRow, FALSE) AS DontCalculateRow
 		|FROM
 		|	Document.SalesReturnOrder.ItemList AS ItemList
 		|		INNER JOIN tmpQueryTable AS tmpQueryTable

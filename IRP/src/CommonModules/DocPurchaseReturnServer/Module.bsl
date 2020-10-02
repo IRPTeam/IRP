@@ -3,10 +3,10 @@
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
-		Form.CurrentPartner = Object.Partner;
-		Form.CurrentAgreement = Object.Agreement;
-		Form.CurrentDate = Object.Date;
-		Form.StoreBeforeChange 		= Form.Store;
+		Form.CurrentPartner    = Object.Partner;
+		Form.CurrentAgreement  = Object.Agreement;
+		Form.CurrentDate       = Object.Date;
+		Form.StoreBeforeChange = Form.Store;
 		
 		DocumentsClientServer.FillDefinedData(Object, Form);
 		
@@ -19,13 +19,15 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
+	Form.Taxes_CreateFormControls();
 	DocumentsServer.ShowUserMessageOnCreateAtServer(Form);
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
-	Form.CurrentPartner = CurrentObject.Partner;
+	Form.CurrentPartner   = CurrentObject.Partner;
 	Form.CurrentAgreement = CurrentObject.Agreement;
-	Form.CurrentDate = CurrentObject.Date;
+	Form.CurrentDate      = CurrentObject.Date;
+	
 	DocumentsServer.FillItemList(Object);
 	
 	ObjectData = DocumentsClientServer.GetStructureFillStores();
@@ -33,12 +35,15 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	DocumentsClientServer.FillStores(ObjectData, Form);
 	
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	CurrenciesServer.UpdateRatePresentation(Object);
+	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
+	Form.Taxes_CreateFormControls();
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
-	Form.CurrentPartner = CurrentObject.Partner;
+	Form.CurrentPartner   = CurrentObject.Partner;
 	Form.CurrentAgreement = CurrentObject.Agreement;
-	Form.CurrentDate = CurrentObject.Date;
+	Form.CurrentDate      = CurrentObject.Date;
 		
 	DocumentsServer.FillItemList(Object);
 	
@@ -50,6 +55,9 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	CurrenciesServer.UpdateRatePresentation(Object);
+	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
+	Form.Taxes_CreateFormControls();
 EndProcedure
 
 #EndRegion

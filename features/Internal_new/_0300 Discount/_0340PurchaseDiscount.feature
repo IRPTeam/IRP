@@ -55,6 +55,9 @@ Scenario: check the Document discount in Purchase order
 		* Filling in items table
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -65,6 +68,9 @@ Scenario: check the Document discount in Purchase order
 			And I finish line editing in "ItemList" table
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -167,6 +173,9 @@ Scenario: check the Document discount in Purchase invoice
 		* Filling in items table
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
@@ -177,6 +186,9 @@ Scenario: check the Document discount in Purchase invoice
 			And I finish line editing in "ItemList" table
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'  |
 			And I select current line in "List" table
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table

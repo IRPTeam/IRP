@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-
+@ContactInformation
+@Catalogs
 
 Feature: filling in customer contact information
 
@@ -541,7 +542,7 @@ Scenario: _010011 adding gps to a Contact info type
 
 
 
-Scenario: _010012 adding additional details for partners "Business region"
+Scenario: _010012 adding additional details for partners "Division"
 	* Preparation
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Partners objects (Ferron BP)
@@ -558,13 +559,12 @@ Scenario: _010012 adding additional details for partners "Business region"
 		And I click "Ok" button
 		And in the table "Attributes" I click the button named "AttributesAdd"
 		And I click choice button of "Attribute" attribute in "Attributes" table
-	* Adding additional attribute Business region
+	* Adding additional attribute Division
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Business region" text in the field named "Description_en"
-		And I input "Business region TR" text in the field named "Description_tr"
+		And I input "Division" text in the field named "Description_en"
+		And I input "Division TR" text in the field named "Description_tr"
 		And I click "Ok" button
-		And I input "BusinessRegion" text in "Unique ID" field
 		And I click "Save and close" button
 		And Delay 5
 		And I click the button named "FormChoose"
@@ -590,7 +590,7 @@ Scenario: _010012 adding additional details for partners "Business region"
 			| Description |
 			| Ferron BP   |
 		And I select current line in "List" table
-		And I click Select button of "Business region" field
+		And I click Select button of "Division" field
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
 		And I input "Region Turkey" text in the field named "Description_en"
@@ -615,7 +615,7 @@ Scenario: _010012 adding additional details for partners "Business region"
 			| Description |
 			| Kalipso   |
 		And I select current line in "List" table
-		And I click Select button of "Business region" field
+		And I click Select button of "Division" field
 		And I go to line in "List" table
 			| Description |
 			| Region Turkey     |
@@ -668,7 +668,7 @@ Scenario: _010013 settings for displaying contact information in Stores, Partner
 			| Reference        |
 		And I go to line in "Source" table
 			| Available fields |
-			| Business region  |
+			| Division  |
 		And I select current line in "Source" table
 		And I activate "Value" field in "SettingsFilter" table
 		And I click choice button of "Value" attribute in "SettingsFilter" table
@@ -697,7 +697,7 @@ Scenario: _010013 settings for displaying contact information in Stores, Partner
 			| Reference        |
 		And I go to line in "Source" table
 			| Available fields |
-			| Business region  |
+			| Division  |
 		And I select current line in "Source" table
 		And I activate "Value" field in "SettingsFilter" table
 		And I click choice button of "Value" attribute in "SettingsFilter" table
@@ -914,3 +914,40 @@ Scenario: _010017 gps coordinates on the map for clients from different countrie
 		And the field named "_Adr_10" is filled
 		And I click "Save and close" button
 		And I close all client application windows
+
+
+Scenario: _010018 command opening contact information in the partner list
+	* Open catalog Partners and select partner
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso' |
+		And I click "Contact info" button
+	* Check the display of contact information
+		And "IDInfo" table contains lines
+			| 'Type'                       |
+			| 'Location address (Partner)' |
+			| 'GPS Ukraine'                |
+			| 'Partner phone'              |
+	And I close all client application windows
+
+
+Scenario: _010019 check edit contact information from the Edit contact info form
+	* Open catalog Partners and select partner
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso' |
+		And I click "Contact info" button
+	* Edit contact info
+		And I input "Odessa, Bunina, 2, №33" text in "Value" field of "IDInfo" table
+		And I finish line editing in "IDInfo" table
+		And I click "Save and close" button
+	* Check saving of changed contact information
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso' |
+		And I select current line in "List" table
+		And I move to "Contact information" tab
+		Then the form attribute named "_Adr_1" became equal to "Odessa, Bunina, 2, №33"
+	And I close all client application windows

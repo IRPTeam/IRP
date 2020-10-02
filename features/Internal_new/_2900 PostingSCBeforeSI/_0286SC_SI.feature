@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group15
+@Sales
+
 Feature: sales Shipment confirmation - Sales invoice
 
 As a sales manager
@@ -16,6 +17,7 @@ Scenario: _290000 preparation (Shipment confirmation - Sales invoice)
 	* Constants
 		When set True value to the constant
 	* Load info
+		When Create catalog Companies objects (second company Ferron BP)
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
 		When Create catalog CashAccounts objects
@@ -61,6 +63,7 @@ Scenario: _290000 preparation (Shipment confirmation - Sales invoice)
 		When add sales tax settings 
 
 Scenario: _0290001 create Shipment confirmation document for the shipment of items to the customer without an order and an invoice
+
 	* Create SC for Nicoletta from store Store 02 (Main company)
 		* Open form Shipment confirmation
 			Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
@@ -71,6 +74,11 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 			And I go to line in "List" table
 				| 'Description' |
 				| 'Nicoletta'   |
+			And I select current line in "List" table
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Main company'   |
 			And I select current line in "List" table
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
@@ -167,6 +175,11 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 				| 'Description' |
 				| 'Store 03'    |
 			And I select current line in "List" table
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Main company'   |
+			And I select current line in "List" table
 		* Add items
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -231,6 +244,11 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 03'    |
+			And I select current line in "List" table
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Main company'   |
 			And I select current line in "List" table
 		* Add items
 			And I click the button named "Add"
@@ -312,6 +330,11 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 			And I go to line in "List" table
 				| 'Description' |
 				| 'Store 03'    |
+			And I select current line in "List" table
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Main company'   |
 			And I select current line in "List" table
 		* Add items
 			And I click the button named "Add"

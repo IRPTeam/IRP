@@ -112,7 +112,6 @@ Scenario: _299901 check filling in and re-filling Sales return order
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
 		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
@@ -241,7 +240,6 @@ Scenario: _299902 check filling in and re-filling Sales return
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
 		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
@@ -369,7 +367,6 @@ Scenario: _299903 check filling in and re-filling Purchase return order
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
 		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
@@ -497,7 +494,6 @@ Scenario: _299904 check filling in and re-filling Purchase return
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
 		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6cc17556-54e5-4aab-baca-6e4648c92c73">
+  <name>JorDocumentsClient</name>
+  <synonym>
+    <key>en</key>
+    <value>Jor documents client</value>
+  </synonym>
+  <clientManagedApplication>true</clientManagedApplication>
+</mdclass:CommonModule>

@@ -833,7 +833,7 @@ Function HTMLAddAttributes() Export
 	Return HTMLAddAttributes;
 EndFunction
 
-Function PrepareDataForHTM(ItemRef, Filter = Undefined) Export
+Function PrepareDataForHTML(ItemRef, Filter = Undefined) Export
 	ArrayProperties = AddAttributesAndPropertiesServer.AllPropertiesArrayByFilter(ItemRef, Filter);
 	ArrayAttributes = AddAttributesAndPropertiesServer.AllAttributesArrayByFilter(ItemRef, Filter);
 	

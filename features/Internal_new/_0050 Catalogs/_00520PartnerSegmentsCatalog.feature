@@ -1,8 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Test
-@Group01
+@Catalogs
 
 Feature: filling in Partner segments catalog
 

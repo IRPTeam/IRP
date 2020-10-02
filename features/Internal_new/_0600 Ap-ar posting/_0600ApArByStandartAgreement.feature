@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group10
+@StandartAgreement
+
 Feature: accounting of receivables / payables under Standard type Partner terms
 
 As an accountant
@@ -11,7 +12,7 @@ I want to settle general Partner terms for all partners.
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
-Scenario: _060001 preparation
+
 	
 Scenario: _095001 preparation
 	* Constants

@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group7
+@Inventory
+
 Feature: create Purchase order based on a Sales order
 
 As a sales manager
@@ -919,6 +920,9 @@ Scenario: _029203 check movements if there is an additional line in the Purchase
 		And I select current line in "List" table
 		And I click the button named "Add"
 		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'  |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
@@ -2126,7 +2130,7 @@ Scenario: _029210 create Sales invoice based on Sales orders (purchase has alrea
 		| 'Register  "Accounts statement"'             | ''            | ''          | ''                     | ''               | ''                        | ''               | ''                        | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources'            | ''               | ''                        | ''               | 'Dimensions'              | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 		| ''                                           | ''            | ''          | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers'  | 'Transaction AR' | 'Company'                 | 'Partner'                  | 'Legal name'                   | 'Basis document'               | 'Currency'                     | ''                             | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | ''                     | ''               | ''                        | '9 300'          | 'Main Company'            | 'Lomaniti'                 | 'Company Lomaniti'             | 'Sales invoice 460*'           | 'TRY'                          | ''                             | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | ''                     | ''               | ''                        | '9 300'          | 'Main Company'            | 'Lomaniti'                 | 'Company Lomaniti'             | '$$SalesInvoice0292010$$'      | 'TRY'                          | ''                             | ''                     |
 		| ''                                           | ''            | ''          | ''                     | ''               | ''                        | ''               | ''                        | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 		| 'Register  "Sales turnovers"'                | ''            | ''          | ''                     | ''               | ''                        | ''               | ''                        | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
 		| ''                                           | 'Period'      | 'Resources' | ''                     | ''               | ''                        | 'Dimensions'     | ''                        | ''                         | ''                             | ''                             | ''                             | ''                             | 'Attributes'           |

@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group9
+@CashManagement
+
 Feature: create cash transfer
 
 As an accountant
@@ -1114,3 +1115,28 @@ Scenario: _054022 check message output in case the user tries to create Cash rec
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 		Then I wait that in user messages the 'The total amount of the "Cash transfer order" document(s) is already received on the basis of the "Cash receipt" document(s).' substring will appear in 30 seconds
 		And I close all client application windows
+
+
+Scenario: _300516 check connection to CashTransferOrder report "Related documents" and generating a report for the current item (Cash receipt)
+	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberCashTransferOrder054001$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+		And "DocumentsTree" table contains lines
+		| 'Ref'                    | 'Amount' |
+		| '$$CashTransferOrder054001$$' | '*'      |
+		| '$$CashPayment054003$$'        | '500,00' |
+		| '$$CashReceipt054003$$'        | '400,00' |
+		| '$$CashReceipt0540031$$'        | '100,00' |
+	*  Check the report generation from list
+		And I go to the last line in "DocumentsTree" table
+		And in the table "DocumentsTree" I click the button named "DocumentsTreeGenerateForCurrent"
+		And "DocumentsTree" table contains lines
+		| 'Ref'                    | 'Amount' |
+		| '$$CashTransferOrder054001$$' | ''       |
+		| '$$CashReceipt0540031$$'        | '100,00' |
+	And I close all client application windows

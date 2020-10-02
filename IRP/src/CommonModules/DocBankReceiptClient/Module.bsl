@@ -7,6 +7,7 @@ EndProcedure
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
+	SetAvailability(Object, Form);
 EndProcedure
 
 Procedure SetAvailability(Object, Form) Export
@@ -16,7 +17,8 @@ Procedure SetAvailability(Object, Form) Export
 	DocumentsClientServer.SetVisibilityItemsByArray(Form.Items, ArrayAll, ArrayByType);
 	
 	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange")
-		OR Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder") Then
+		OR Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder")
+		OR Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS") Then
 		BasedOnCashTransferOrder = False;
 		For Each Row In Object.PaymentList Do
 			If TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder")
@@ -31,7 +33,13 @@ Procedure SetAvailability(Object, Form) Export
 		Form.Items.Currency.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
 
 		ArrayTypes = New Array();
-		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
+		If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS") Then
+			ArrayTypes.Add(Type("DocumentRef.CashStatement"));
+			Form.Items.PaymentListPOSAccount.Visible = True;
+		Else
+			ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
+			Form.Items.PaymentListPOSAccount.Visible = False;
+		EndIf;
 		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	Else
 		ArrayTypes = New Array();
@@ -68,6 +76,7 @@ EndFunction
 #Region ItemTransactionType
 
 Procedure TransactionTypeOnChange(Object, Form, Item) Export
+	SetAvailability(Object, Form);
 	CleanDataByTransactionType(Object, Form);
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
@@ -102,7 +111,7 @@ Procedure CleanDataByTransactionTypeContinue(Result, AdditionalParameters) Expor
 	Else
 		Object.TransactionType = Form.CurrentTransactionType;
 		SetTransitAccount(Object, Form);
-		Form.SetVisibilityAvailability();
+		SetAvailability(Object, Form);
 	EndIf;
 	
 	Form.CurrentTransactionType = Object.TransactionType;
@@ -379,39 +388,26 @@ Procedure OnActiveCell(Object, Form, Item, Cancel = Undefined) Export
 EndProcedure
 
 Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	
 	StandardProcessing = False;
 	
-	TransferParameters = New Structure;
-	TransferParameters.Insert("Unmarked", True);
-	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Partner) Then
-		TransferParameters.Insert("Partner", Form.Items.PaymentList.CurrentData.Partner);
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
 	EndIf;
+	
+	Parameters = New Structure();
+	Parameters.Insert("Filter", New Structure());
 	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Payer) Then
-		TransferParameters.Insert("LegalName", Form.Items.PaymentList.CurrentData.Payer);
+		Parameters.Filter.Insert("LegalName", Form.Items.PaymentList.CurrentData.Payer);
 	EndIf;
-	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Agreement) Then
-		TransferParameters.Insert("Agreement", Form.Items.PaymentList.CurrentData.Agreement);
-	EndIf;
-	TransferParameters.Insert("Posted", True);
+	Parameters.Filter.Insert("Company", Object.Company);
 	
-	FilterStructure = JorDocumentsForIncomingPaymentServer.CreateFilterByParameters(TransferParameters);
-	FormParameters = New Structure("CustomFilter", FilterStructure);
+	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
 	
-	NotifyChoiceFormCloseParameters = New Structure();
-	NotifyChoiceFormCloseParameters.Insert("Form", Form);
-	
-	NotifyChoiceFormClose = New NotifyDescription("PaymentListBasisDocumentStartChoiceEnd", 
-			ThisObject, NotifyChoiceFormCloseParameters);
-	
-	OpenForm("DocumentJournal.DocumentsForIncomingPayment.Form.ChoiceForm",
-		FormParameters,
-		Item,
-		Form.UUID,
-		,
-		Form.URL,
-		NotifyChoiceFormClose,
-		FormWindowOpeningMode.LockWholeInterface);
+	Notify = New NotifyDescription("PaymentListBasisDocumentStartChoiceEnd", ThisObject, New Structure("Form", Form));
+	Parameters.Insert("Notify", Notify);
+	Parameters.Insert("TableName", "DocumentsForIncomingPayment");
+	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
 EndProcedure
 
 Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) Export

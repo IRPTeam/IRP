@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group11
+@Forms
+
 Feature: forms check
 
 I want to check the form display and autofill documents
@@ -1776,6 +1777,7 @@ Scenario: _0154032 check autofilling item key in Internal Supply Request only wi
 Scenario: _0154033 check if the Partner form contains an option to include a partner in the segment
 	Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Select partner
+		And I click "List" button		
 		And I go to line in "List" table
 			| Description |
 			| Seven Brand |

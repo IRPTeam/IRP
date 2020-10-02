@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group12
+@FillingDocuments
+
 Feature: check filling in and re-filling in documents forms + currency form connection
 
 
@@ -133,172 +134,120 @@ Scenario: _0154100 preparation ( filling documents)
 	* For the test of choice Planing transaction basis in bank/cash documents
 		* Creating a Cashtransfer order to move money between cash accounts
 			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
-			And I click the button named "FormCreate"
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description  |
-				| Main Company |
-			And I select current line in "List" table
-			* Filling Sender and Send amount
-				And I click Select button of "Sender" field
-				And I go to line in "List" table
-					| Description    |
-					| Cash desk №1 |
-				And I select current line in "List" table
-				And I input "400,00" text in "Send amount" field
-				And I click Select button of "Send currency" field
-				And I go to line in "List" table
-					| Code | Description     |
-					| USD  | American dollar |
-				And I select current line in "List" table
-			* Filling Receiver and Receive amount
-				And I click Select button of "Receiver" field
-				And I go to line in "List" table
-					| Description    |
-					| Cash desk №2 |
-				And I select current line in "List" table
-				And I input "400,00" text in "Receive amount" field
-				And I click Select button of "Receive currency" field
-				And I go to line in "List" table
-					| Code | Description     |
-					| USD  | American dollar |
-				And I activate "Description" field in "List" table
-				And I select current line in "List" table
-			// * Change the document number
-			// 	And I input "10" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "10" text in "Number" field
-			And I click "Post" button
-			And I save the value of "Number" field as "$$NumberCashTransferOrder01541001$$"
-			And I save the window as "$$CashTransferOrder01541001$$"
-			And I click "Post and close" button
-			And Delay 5
-			* Check creation
-				Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
-				And "List" table contains lines
-				| Number | Sender        | Receiver     | Company      |
-				| $$NumberCashTransferOrder01541001$$      | Cash desk №1 | Cash desk №2 | Main Company |
-			And I close all client application windows
-		And Delay 5
-		* Create Cashtransfer order for currency exchange (cash accounts)
-			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
-			And I click the button named "FormCreate"
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description  |
-				| Main Company |
-			And I select current line in "List" table
-			* Filling Sender and Send amount
-				And I click Select button of "Sender" field
-				And I go to line in "List" table
-					| Description    |
-					| Cash desk №2 |
-				And I select current line in "List" table
-				And I input "210,00" text in "Send amount" field
-				And I click Select button of "Send currency" field
-				And I go to line in "List" table
-					| Code | Description     |
-					| USD  | American dollar |
-				And I select current line in "List" table
-			* Filling Receiver and Receive amount
-				And I click Select button of "Receiver" field
-				And I go to line in "List" table
-					| Description    |
-					| Cash desk №1 |
-				And I select current line in "List" table
-				And I input "1200,00" text in "Receive amount" field
-				And I click Select button of "Receive currency" field
-				And I go to line in "List" table
-					| Code | Description  |
-					| TRY  | Turkish lira |
-				And I activate "Description" field in "List" table
-				And I select current line in "List" table
-				And I click Select button of "Cash advance holder" field
-				And I go to line in "List" table
-					| 'Description' |
-					| 'Arina Brown' |
-				And I select current line in "List" table
-			// * Change the document number to 11
-			// 	And I input "11" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "11" text in "Number" field
-			And I click "Post" button
-			And I save the value of "Number" field as "$$NumberCashTransferOrder01541002$$"
-			And I save the window as "$$CashTransferOrder01541002$$"
-			And I click "Post and close" button
-			And Delay 5
-			* Check creation
-				Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
-				And "List" table contains lines
-				| Number | Sender       | Receiver     | Company      |
-				| $$NumberCashTransferOrder01541002$$      | Cash desk №2 | Cash desk №1 | Main Company |
-			And I close all client application windows
-		And Delay 5
-		* Create Cashtransfer order for currency exchange (bank accounts)
-			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
-			And I click the button named "FormCreate"
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description  |
-				| Main Company |
-			And I select current line in "List" table
-			* Filling Sender and Send amount
-				And I click Select button of "Sender" field
-				And I go to line in "List" table
-					| Description    |
-					| Bank account, TRY |
-				And I select current line in "List" table
-				And I input "1150,00" text in "Send amount" field
-			* Filling Receiver and Receive amount
-				And I click Select button of "Receiver" field
-				And I go to line in "List" table
-					| Description    |
-					| Bank account, EUR |
-				And I select current line in "List" table
-				And I input "175,00" text in "Receive amount" field
-			// * Change the document number to 13
-			// 	And I input "13" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "13" text in "Number" field
-			And I click "Post" button
-			And I save the value of "Number" field as "$$NumberCashTransferOrder01541003$$"
-			And I save the window as "$$CashTransferOrder01541003$$"
-			And I click "Post and close" button
-			And Delay 5
-			* Check creation
-				Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
-				And "List" table contains lines
-				| Number  | Sender            | Receiver          | Company      |
-				| $$NumberCashTransferOrder01541003$$      | Bank account, TRY | Bank account, EUR | Main Company |
-			And I close all client application windows
-		And Delay 5
-		* Create Cash transfer order for cash transfer between bank accounts in one currency
-			* Create one more bank account in EUR
-				Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
-				And Delay 2
+			If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberCashTransferOrder01541001$$" |
 				And I click the button named "FormCreate"
-				And I click Open button of the field named "Description_en"
-				And I input "Bank account 2, EUR" text in the field named "Description_en"
-				And I input "Bank account 2, EUR TR" text in the field named "Description_tr"
-				And I click "Ok" button
-				And I change the radio button named "Type" value to "Bank"
-				And I input "1120000000" text in "Number" field
-				And I input "OTP" text in "Bank name" field
 				And I click Select button of "Company" field
 				And I go to line in "List" table
 					| Description  |
 					| Main Company |
 				And I select current line in "List" table
-				And I click Choice button of the field named "Currency"
+				* Filling Sender and Send amount
+					And I click Select button of "Sender" field
+					And I go to line in "List" table
+						| Description    |
+						| Cash desk №1 |
+					And I select current line in "List" table
+					And I input "400,00" text in "Send amount" field
+					And I click Select button of "Send currency" field
+					And I go to line in "List" table
+						| Code | Description     |
+						| USD  | American dollar |
+					And I select current line in "List" table
+				* Filling Receiver and Receive amount
+					And I click Select button of "Receiver" field
+					And I go to line in "List" table
+						| Description    |
+						| Cash desk №2 |
+					And I select current line in "List" table
+					And I input "400,00" text in "Receive amount" field
+					And I click Select button of "Receive currency" field
+					And I go to line in "List" table
+						| Code | Description     |
+						| USD  | American dollar |
+					And I activate "Description" field in "List" table
+					And I select current line in "List" table
+				// * Change the document number
+				// 	And I input "10" text in "Number" field
+				// 	Then "1C:Enterprise" window is opened
+				// 	And I click "Yes" button
+				// 	And I input "10" text in "Number" field
+				And I click "Post" button
+				And I save the value of "Number" field as "$$NumberCashTransferOrder01541001$$"
+				And I save the window as "$$CashTransferOrder01541001$$"
+				And I click "Post and close" button
+				And Delay 5
+				* Check creation
+					Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+					And "List" table contains lines
+					| Number | Sender        | Receiver     | Company      |
+					| $$NumberCashTransferOrder01541001$$      | Cash desk №1 | Cash desk №2 | Main Company |
+				And I close all client application windows
+			And Delay 5
+		* Create Cashtransfer order for currency exchange (cash accounts)
+			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+			If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberCashTransferOrder01541002$$" |
+				And I click the button named "FormCreate"
+				And I click Select button of "Company" field
 				And I go to line in "List" table
-					| Code |
-					| EUR  |
+					| Description  |
+					| Main Company |
 				And I select current line in "List" table
-				And I click the button named "FormWriteAndClose"
-			* Create Cash transfer order for cash transfer between bank accounts in one currency
+				* Filling Sender and Send amount
+					And I click Select button of "Sender" field
+					And I go to line in "List" table
+						| Description    |
+						| Cash desk №2 |
+					And I select current line in "List" table
+					And I input "210,00" text in "Send amount" field
+					And I click Select button of "Send currency" field
+					And I go to line in "List" table
+						| Code | Description     |
+						| USD  | American dollar |
+					And I select current line in "List" table
+				* Filling Receiver and Receive amount
+					And I click Select button of "Receiver" field
+					And I go to line in "List" table
+						| Description    |
+						| Cash desk №1 |
+					And I select current line in "List" table
+					And I input "1200,00" text in "Receive amount" field
+					And I click Select button of "Receive currency" field
+					And I go to line in "List" table
+						| Code | Description  |
+						| TRY  | Turkish lira |
+					And I activate "Description" field in "List" table
+					And I select current line in "List" table
+					And I click Select button of "Cash advance holder" field
+					And I go to line in "List" table
+						| 'Description' |
+						| 'Arina Brown' |
+					And I select current line in "List" table
+				// * Change the document number to 11
+				// 	And I input "11" text in "Number" field
+				// 	Then "1C:Enterprise" window is opened
+				// 	And I click "Yes" button
+				// 	And I input "11" text in "Number" field
+				And I click "Post" button
+				And I save the value of "Number" field as "$$NumberCashTransferOrder01541002$$"
+				And I save the window as "$$CashTransferOrder01541002$$"
+				And I click "Post and close" button
+				And Delay 5
+				* Check creation
+					Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+					And "List" table contains lines
+					| Number | Sender       | Receiver     | Company      |
+					| $$NumberCashTransferOrder01541002$$      | Cash desk №2 | Cash desk №1 | Main Company |
+				And I close all client application windows
+			And Delay 5
+		* Create Cashtransfer order for currency exchange (bank accounts)
+			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+			If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberCashTransferOrder01541003$$" |
 				Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 				And I click the button named "FormCreate"
 				And I click Select button of "Company" field
@@ -310,7 +259,7 @@ Scenario: _0154100 preparation ( filling documents)
 					And I click Select button of "Sender" field
 					And I go to line in "List" table
 						| Description    |
-						| Bank account 2, EUR |
+						| Bank account, TRY |
 					And I select current line in "List" table
 					And I input "1150,00" text in "Send amount" field
 				* Filling Receiver and Receive amount
@@ -319,23 +268,91 @@ Scenario: _0154100 preparation ( filling documents)
 						| Description    |
 						| Bank account, EUR |
 					And I select current line in "List" table
-					And I input "1150,00" text in "Receive amount" field
-				// * Change the document number to 14
-				// 	And I input "14" text in "Number" field
+					And I input "175,00" text in "Receive amount" field
+				// * Change the document number to 13
+				// 	And I input "13" text in "Number" field
 				// 	Then "1C:Enterprise" window is opened
 				// 	And I click "Yes" button
-				// 	And I input "14" text in "Number" field
+				// 	And I input "13" text in "Number" field
 				And I click "Post" button
-				And I save the value of "Number" field as "$$NumberCashTransferOrder01541004$$"
-				And I save the window as "$$CashTransferOrder01541004$$"
+				And I save the value of "Number" field as "$$NumberCashTransferOrder01541003$$"
+				And I save the window as "$$CashTransferOrder01541003$$"
 				And I click "Post and close" button
 				And Delay 5
 				* Check creation
 					Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 					And "List" table contains lines
-					| Number  | Sender              | Receiver          | Company      |
-					| $$NumberCashTransferOrder01541004$$      | Bank account 2, EUR | Bank account, EUR | Main Company |
+					| Number  | Sender            | Receiver          | Company      |
+					| $$NumberCashTransferOrder01541003$$      | Bank account, TRY | Bank account, EUR | Main Company |
 				And I close all client application windows
+			And Delay 5
+		* Create Cash transfer order for cash transfer between bank accounts in one currency
+			* Create Cash transfer order for cash transfer between bank accounts in one currency
+				Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+				If "List" table does not contain lines Then
+					| "Number" |
+					| "$$NumberCashTransferOrder01541004$$" |
+					Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+					And I click the button named "FormCreate"
+					And I click Select button of "Company" field
+					And I go to line in "List" table
+						| Description  |
+						| Main Company |
+					And I select current line in "List" table
+					* Filling Sender and Send amount
+						And I click Select button of "Sender" field
+						And I go to line in "List" table
+							| Description    |
+							| Bank account 2, EUR |
+						And I select current line in "List" table
+						And I input "1150,00" text in "Send amount" field
+					* Filling Receiver and Receive amount
+						And I click Select button of "Receiver" field
+						And I go to line in "List" table
+							| Description    |
+							| Bank account, EUR |
+						And I select current line in "List" table
+						And I input "1150,00" text in "Receive amount" field
+					// * Change the document number to 14
+					// 	And I input "14" text in "Number" field
+					// 	Then "1C:Enterprise" window is opened
+					// 	And I click "Yes" button
+					// 	And I input "14" text in "Number" field
+					And I click "Post" button
+					And I save the value of "Number" field as "$$NumberCashTransferOrder01541004$$"
+					And I save the window as "$$CashTransferOrder01541004$$"
+					And I click "Post and close" button
+					And Delay 5
+					* Check creation
+						Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+						And "List" table contains lines
+						| Number  | Sender              | Receiver          | Company      |
+						| $$NumberCashTransferOrder01541004$$      | Bank account 2, EUR | Bank account, EUR | Main Company |
+					And I close all client application windows
+	* Check or create SalesInvoice024025
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesInvoice024025$$" |
+			When create SalesInvoice024025
+	* Check or create SalesInvoice024016
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberSalesInvoice024016$$" |
+			When create SalesInvoice024016 (Shipment confirmation does not used)
+	* Check or create $$PurchaseInvoice29604$$
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberPurchaseInvoice29604$$" |
+			When create a purchase invoice for the purchase of sets and dimensional grids at the tore 02
+	* Check or create $$PurchaseInvoice30004$$
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberPurchaseInvoice30004$$" |
+			When create purchase invoice without order (Vendor Ferron, USD)
 
 
 Scenario: _0154101 check filling in and re-filling Sales order
@@ -531,10 +548,12 @@ Scenario: _0154101 check filling in and re-filling Sales order
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
 		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "287,53"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "1 482,47"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 770,00"
 	* Check tax recalculation when uncheck/re-check Price include Tax
 		* Unchecking box Price include Tax
 			And I move to "Other" tab
@@ -840,10 +859,12 @@ Scenario: _0154102 check filling in and re-filling Sales invoice
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
 		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "1 482,47"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "287,53"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 770,00"
 	* Check tax recalculation when uncheck/re-check Price include Tax
 		* Unchecking box Price include Tax
 			And I move to "Other" tab
@@ -905,27 +926,6 @@ Scenario: _0154102 check filling in and re-filling Sales invoice
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'         | '5,8400'            | '303,08' | '1'            |
-		* Check tax recalculation when choosing a tax rate manually
-			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '38/Black' |
-			And I activate "VAT" field in "ItemList" table
-			And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
-			And "TaxTree" table contains lines
-				| 'Tax'      | 'Tax rate' | 'Item'  | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
-				| 'VAT'      | ''         | ''      | ''         | ''          | '163,22' | '163,22'        |
-				| 'VAT'      | '18%'      | 'Dress' | 'L/Green'  | ''          | '83,90'  | '83,90'         |
-				| 'VAT'      | '18%'      | 'Dress' | 'XS/Blue'  | ''          | '79,32'  | '79,32'         |
-				| 'VAT'      | '0%'       | 'Shirt' | '38/Black' | ''          | ''       | ''              |
-				| 'SalesTax' | ''         | ''      | ''         | ''          | '17,53'  | '17,53'         |
-				| 'SalesTax' | '1%'       | 'Dress' | 'L/Green'  | ''          | '5,45'   | '5,45'          |
-				| 'SalesTax' | '1%'       | 'Dress' | 'XS/Blue'  | ''          | '5,15'   | '5,15'          |
-				| 'SalesTax' | '1%'       | 'Shirt' | '38/Black' | ''          | '6,93'   | '6,93'          |
-			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '38/Black' |
-			And I activate "VAT" field in "ItemList" table
-			And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price include tax
 				And I move to "Item list" tab
@@ -1307,10 +1307,12 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
 		And "ItemList" table does not contain lines
-			| 'Item'     | 'Item key' |
+			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "1 271,19"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "228,81"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 500,00"
 	* Check tax recalculation when uncheck/re-check Price include Tax
 		* Unchecking box Price include Tax
 			And I move to "Other" tab
@@ -1372,23 +1374,6 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '357,64'  | '1'            |
-		* Check tax recalculation when choosing a tax rate manually
-			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '38/Black' |
-			And I activate "VAT" field in "ItemList" table
-			And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
-			And "TaxTree" table contains lines
-				| 'Tax' | 'Tax rate' | 'Item'  | 'Item key' | 'Analytics' | 'Amount' | 'Manual amount' |
-				| 'VAT' | ''         | ''      | ''         | ''          | '192,60' | '192,60'        |
-				| 'VAT' | '18%'      | 'Dress' | 'L/Green'  | ''          | '99,00'  | '99,00'         |
-				| 'VAT' | '18%'      | 'Dress' | 'XS/Blue'  | ''          | '93,60'  | '93,60'         |
-				| 'VAT' | '0%'       | 'Shirt' | '38/Black' | ''          | ''       | ''              |
-			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '38/Black' |
-			And I activate "VAT" field in "ItemList" table
-			And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price include tax
 				And I move to "Other" tab
@@ -1637,10 +1622,12 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
 		And "ItemList" table does not contain lines
 			| 'Item'     | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "1 271,19"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "228,81"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 500,00"
 	* Check tax recalculation when uncheck/re-check Price include Tax
 		* Unchecking box Price include Tax
 			And I move to "Other" tab
@@ -1835,22 +1822,19 @@ Scenario: _0154107 check filling in and re-filling Cash reciept (transaction typ
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description |
-			| Ferron BP   |
+			| Kalipso   |
 		And I select current line in "List" table
 		And I click choice button of "Payer" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description       |
-			| Company Ferron BP |
+			| Company Kalipso |
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "PaymentList" table
 		And "List" table contains lines
 			| 'Description'                   |
 			| 'Basic Partner terms, TRY'         |
 			| 'Basic Partner terms, without VAT' |
-			| 'Vendor Ferron, TRY'            |
-			| 'Vendor Ferron, USD'            |
-			| 'Vendor Ferron, EUR'            |
-			| 'Ferron, USD'                   |
+			| 'Personal Partner terms, $'   |      
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
@@ -1864,10 +1848,10 @@ Scenario: _0154107 check filling in and re-filling Cash reciept (transaction typ
 		Given form with "Documents for incoming payment" header is opened in the active window
 		And "List" table does not contain lines
 			| 'Reference'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-			| 'Sales invoice 234*' | '200,00'          | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+			| '$$SalesInvoice024016$$' | '554,66'          | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I go to line in "List" table
-			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-			| '4 350,00'        | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+			| 'Reference'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+			| '$$SalesInvoice024025$$' | '11 000,00'        | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
 		And I select current line in "PaymentList" table
@@ -1875,7 +1859,7 @@ Scenario: _0154107 check filling in and re-filling Cash reciept (transaction typ
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term' | 'Amount' | 'Payer'             | 'Basis document' |
-			| 'Ferron BP' | ''          | ''       | 'Company Ferron BP' | ''               |
+			| 'Kalipso' | ''          | ''       | 'Company Kalipso' | ''               |
 	* Check the addition of a base document without selecting a base document
 		When I Check the steps for Exception
 			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
@@ -1907,7 +1891,7 @@ Scenario: _0154107 check filling in and re-filling Cash reciept (transaction typ
 	* Check the currency form connection
 		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
-			| 'Ferron BP' | 'Company Ferron BP' |
+			| 'Kalipso' | 'Company Kalipso' |
 		And I select current line in "PaymentList" table
 		And I input "100,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
@@ -1936,7 +1920,7 @@ Scenario: _0154107 check filling in and re-filling Cash reciept (transaction typ
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
-			| 'Ferron BP' | 'Company Ferron BP' |
+			| 'Kalipso' | 'Company Kalipso' |
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner term" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -2024,7 +2008,7 @@ Scenario: _0154109 check filling in and re-filling Bank reciept (transaction typ
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payer'|
-			| 'NDB'       | 'NDB'  |
+			| 'NDB'       | 'Company NDB'  |
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -2044,37 +2028,36 @@ Scenario: _0154109 check filling in and re-filling Bank reciept (transaction typ
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description |
-			| Ferron BP   |
+			| Kalipso   |
 		And I select current line in "List" table
 		And I click choice button of "Payer" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description       |
-			| Company Ferron BP |
+			| Company Kalipso |
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "PaymentList" table
 		And "List" table contains lines
 			| 'Description'                   |
 			| 'Basic Partner terms, TRY'         |
 			| 'Basic Partner terms, without VAT' |
-			| 'Vendor Ferron, TRY'            |
-			| 'Vendor Ferron, USD'            |
-			| 'Vendor Ferron, EUR'            |
-			| 'Ferron, USD'                   |
+			| 'Personal Partner terms, $'   |      
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
 		And I select current line in "List" table
 	* Filter check on the basis documents depending on Partner term
+		# temporarily
 		And I finish line editing in "PaymentList" table
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
+		# temporarily
 		Given form with "Documents for incoming payment" header is opened in the active window
 		And "List" table does not contain lines
 			| 'Reference'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-			| 'Sales invoice 234*' | '200,00'          | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+			| '$$SalesInvoice024016$$' | '554,66'          | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I go to line in "List" table
-			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-			| '4 350,00'        | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+			| 'Reference'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+			| '$$SalesInvoice024025$$' | '11 000,00'        | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
 		And I select current line in "PaymentList" table
@@ -2082,7 +2065,7 @@ Scenario: _0154109 check filling in and re-filling Bank reciept (transaction typ
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term' | 'Amount' | 'Payer'             | 'Basis document' |
-			| 'Ferron BP' | ''          | ''       | 'Company Ferron BP' | ''               |
+			| 'Kalipso' | ''          | ''       | 'Company Kalipso' | ''               |
 	* Check the addition of a base document without selecting a base document
 		When I Check the steps for Exception
 			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
@@ -2114,11 +2097,11 @@ Scenario: _0154109 check filling in and re-filling Bank reciept (transaction typ
 	* Check the currency form connection
 		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
-			| 'Ferron BP' | 'Company Ferron BP' |
+			| 'Kalipso' | 'Company Kalipso' |
 		And I select current line in "PaymentList" table
 		And I input "100,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-			And I go to line in "PaymentList" table
+		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
 			| 'Nicoletta' | 'Company Nicoletta' |
 		And I select current line in "PaymentList" table
@@ -2140,14 +2123,14 @@ Scenario: _0154109 check filling in and re-filling Bank reciept (transaction typ
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '40,00'  | '1'            |
 		And I go to line in "PaymentList" table
 		| 'Amount' | 'Partner'   | 'Payer'             |
-		| '100,00' | 'Ferron BP' | 'Company Ferron BP' |
+		| '100,00' | 'Kalipso' | 'Company Kalipso' |
 		And "CurrenciesPaymentList" table contains lines
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '20,00'  | '1'            |
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
-			| 'Ferron BP' | 'Company Ferron BP' |
+			| 'Kalipso' | 'Company Kalipso' |
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner term" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -2250,7 +2233,7 @@ Scenario: _0154111 check filling in and re-filling Cash payment (transaction typ
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payee'|
-			| 'NDB'       | 'NDB'  |
+			| 'NDB'       | 'Company NDB'  |
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -2295,11 +2278,11 @@ Scenario: _0154111 check filling in and re-filling Cash payment (transaction typ
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And "List" table does not contain lines
-			| 'Document amount'| 'Company'      | 'Legal name'        | 'Partner'   |
-			| '7 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+			| 'Reference' 	| 'Document amount'| 'Company'      | 'Legal name'        | 'Partner'   |
+			| '$$PurchaseInvoice30004$$'	| '4 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I go to line in "List" table
-			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-			| '137 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+		| 'Reference' 	| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+		| '$$PurchaseInvoice29604$$'	| '13 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
 		And I select current line in "PaymentList" table
@@ -2470,7 +2453,7 @@ Scenario: _0154113 check filling in and re-filling Bank payment (transaction typ
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payee'|
-			| 'NDB'       | 'NDB'  |
+			| 'NDB'       | 'Company NDB'  |
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -2515,11 +2498,11 @@ Scenario: _0154113 check filling in and re-filling Bank payment (transaction typ
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And "List" table does not contain lines
-			| 'Document amount'| 'Company'      | 'Legal name'        | 'Partner'   |
-			| '7 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+			| 'Reference' 	| 'Document amount'| 'Company'      | 'Legal name'        | 'Partner'   |
+			| '$$PurchaseInvoice30004$$'	| '4 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I go to line in "List" table
-			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-			| '137 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+		| 'Reference' 	| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+		| '$$PurchaseInvoice29604$$'	| '13 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
 		And I select current line in "PaymentList" table
@@ -3624,9 +3607,7 @@ Scenario: _0154122 check filling in and re-filling Reconcilation statement
 		And in the table "Transactions" I click "Fill" button
 		And "Transactions" table contains lines
 			| 'Document'            | 'Credit'     | 'Debit'     |
-			| '$$PurchaseInvoice018001$$' | '137 000,00' | ''          |
-			| '$$SalesInvoice024001$$'    | ''           | '4 350,00'  |
-			| '$$SalesInvoice024008$$'    | ''           | '11 099,93' |
+			| '$$PurchaseInvoice29604$$' | '13 000,00' | ''          |
 		And I click "Post" button
 	* Check re-filling when re-selecting a currency
 		And I click Select button of "Currency" field
@@ -3637,9 +3618,7 @@ Scenario: _0154122 check filling in and re-filling Reconcilation statement
 		And in the table "Transactions" I click "Fill" button
 		And "Transactions" table does not contain lines
 			| 'Document'            | 'Credit'     | 'Debit'     |
-			| '$$PurchaseInvoice018001$$' | '137 000,00' | ''          |
-			| '$$SalesInvoice024001$$'    | ''           | '4 350,00'  |
-			| '$$SalesInvoice024008$$'    | ''           | '11 099,93' |
+			| '$$PurchaseInvoice2004$$' | '4 000,00' | ''          |
 	* Check refilling at company re-selection
 		And I click Select button of "Company" field
 		And I go to line in "List" table
@@ -3737,16 +3716,16 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
-		| '13'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
+		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I go to line in "List" table
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
-		| '13'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
+		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the selected document is in BankPayment
 		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
-		| '100,00' | 'Cash transfer order 13*'   |
+		| '100,00' | '$$CashTransferOrder01541003$$'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
@@ -3754,7 +3733,7 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		Then "Q" variable is equal to 1
 		And I go to line in "List" table
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
-		| '13'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
+		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when post Bank Payment
@@ -3765,7 +3744,7 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		Then "Q" variable is equal to 1
 		And I go to line in "List" table
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
-		| '13'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
+		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
@@ -3778,7 +3757,7 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		Then "Q" variable is equal to 1
 		And I go to line in "List" table
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
-		| '13'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
+		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I click "Post" button
@@ -3821,13 +3800,13 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'            | 'Send currency' | 'Company'      |
-		| '13'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the selected document is in BankPayment
 		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
-		| '100,00' | 'Cash transfer order 13*'   |
+		| '100,00' | '$$CashTransferOrder01541003$$'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
@@ -3835,7 +3814,7 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'            | 'Send currency'    | 'Company'      |
-		| '13'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form (Bank Receipt posted)
@@ -3846,7 +3825,7 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'            | 'Send currency' | 'Company'      |
-		| '13'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
@@ -3858,7 +3837,7 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'            | 'Send currency' | 'Company'      |
-		| '13'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I click "Post" button
@@ -3904,13 +3883,13 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
-		| '11'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
+		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the selected document is in Cash Payment
 		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
-		| '100,00' | 'Cash transfer order 11*'   |
+		| '100,00' | '$$CashTransferOrder01541002$$'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
@@ -3918,7 +3897,7 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
-		| '11'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
+		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
 		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Cash Payment posted
 		And I click "Post" button
@@ -3928,7 +3907,7 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
-		| '11'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
+		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
 		And I click the button named "FormChoose"
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		And I select current line in "PaymentList" table
@@ -3939,7 +3918,7 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
-		| '11'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
+		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I click "Post" button
@@ -3985,13 +3964,13 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 			| 'Number' | 'Sender'       | 'Send currency'    | 'Company'      |
-			| '11'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
+			| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the selected document is in CashReceipt
 		And "PaymentList" table contains lines
 			| 'Amount' | 'Planning transaction basis' |
-			| '100,00' | 'Cash transfer order 11*'   |
+			| '100,00' | '$$CashTransferOrder01541002$$'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
@@ -3999,7 +3978,7 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 			| 'Number' | 'Sender'       | 'Send currency'    | 'Company'      |
-			| '11'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
+			| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
 		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Cash Receipt posted 
 		And I click "Post" button
@@ -4009,7 +3988,7 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Send currency'    | 'Company'      |
-		| '11'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
 		And I click the button named "FormChoose"
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		And I select current line in "PaymentList" table
@@ -4020,7 +3999,7 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Send currency'    | 'Company'      |
-		| '11'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I click "Post" button
@@ -4060,13 +4039,13 @@ Scenario:  _0154129 check the selection by Planing transaction basis in BankPaym
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
-		| '14'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
+		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the selected document is in BankPayment
 		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
-		| '100,00' | 'Cash transfer order 14*'   |
+		| '100,00' | '$$CashTransferOrder01541004$$'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
@@ -4074,7 +4053,7 @@ Scenario:  _0154129 check the selection by Planing transaction basis in BankPaym
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
-		| '14'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
+		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Bank Payment posted
 		And I click "Post" button
@@ -4084,7 +4063,7 @@ Scenario:  _0154129 check the selection by Planing transaction basis in BankPaym
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
-		| '14'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
+		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		And I click the button named "FormChoose"
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		And I select current line in "PaymentList" table
@@ -4095,7 +4074,7 @@ Scenario:  _0154129 check the selection by Planing transaction basis in BankPaym
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
-		| '14'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
+		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I click "Post" button
@@ -4135,13 +4114,13 @@ Scenario:  _0154130 check the selection by Planing transaction basis in Bank Rec
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
-		| '14'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that the selected document is in BankReceipt
 		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
-		| '100,00' | 'Cash transfer order 14*'   |
+		| '100,00' | '$$CashTransferOrder01541004$$'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
@@ -4149,7 +4128,7 @@ Scenario:  _0154130 check the selection by Planing transaction basis in Bank Rec
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
-		| '14'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
 		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Bank Receipt posted
 		And I click "Post" button
@@ -4159,7 +4138,7 @@ Scenario:  _0154130 check the selection by Planing transaction basis in Bank Rec
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
-		| '14'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
 		And I click the button named "FormChoose"
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		And I select current line in "PaymentList" table
@@ -4170,7 +4149,7 @@ Scenario:  _0154130 check the selection by Planing transaction basis in Bank Rec
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
-		| '14'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
+		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I click "Post" button
@@ -4605,3 +4584,2192 @@ Scenario: _0154133  check currency form in Outgoing payment order
 				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'Local currency' | 'Legal'     | 'USD'           | 'TRY'      | '5,6497'             | '1 129,94' | '1'            |
 		And I close all client application windows
+
+Scenario: _0154150 check function DontCalculateRow in the Purchase order
+	* Open the Purchase order creation form
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
+	* Check filling in legal name if the partner has only one
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Partner term vendor NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+	* Check filling in prices when adding an Item and selecting an item key
+		* Filling in item and item key
+			And I delete a line in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Trousers'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "List" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key'  |
+				| 'Dress' | 'L/Green' |
+			And I select current line in "List" table
+			And I input "5,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '144,00'     | '800,00'     | '944,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+		* Check function DontCalculateRow 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |	
+			And I activate "Dont calculate row" field in "ItemList" table
+			And I set "Dont calculate row" checkbox in "ItemList" table			
+			And I finish line editing in "ItemList" table
+			And I activate "Tax amount" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I select current line in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |	
+			And I select current line in "ItemList" table
+			And I input "150,00" text in "Tax amount" field of "ItemList" table
+			And I activate field named "ItemListNetAmount" in "ItemList" table
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I activate field named "ItemListNetAmount" in "ItemList" table
+			And I input "801,00" text in the field named "ItemListNetAmount" of "ItemList" table
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I input "951,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And I click "Post" button
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 551,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "645,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"
+		* Change tax amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I input "152,00" text in "Tax amount" field of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'Yes'                | '152,00'     | '801,00'     | '951,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 551,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"			
+		* Change net amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I input "800,00" text in the field named "ItemListNetAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '951,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 550,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"
+		* Change total amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I input "954,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 550,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 199,00"
+		* Add new line and check calculation
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key'  |
+				| 'Dress' | 'M/White' |
+			And I select current line in "List" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table	
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '187,20'     | '1 040,00'   | '1 227,20'     | 'Store 03' |
+		* Check calculation when set "Price include tax" checkbox
+			And I move to "Other" tab
+			And I set checkbox "Price include tax"
+			And I remove checkbox "Goods receipt before purchase invoice"			
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     | 'Store 03' |
+				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '158,64'     | '881,36'     | '1 040,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "4 011,87"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "730,13"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 744,00"
+			And I select "Approved" exact value from "Status" drop-down list
+			And I click "Post" button
+	* Check filling the recalculation check box when creating Purchase invoice bases on Purchase order
+		And I click "Purchase invoice" button
+		And "ItemList" table contains lines
+		| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' |
+		| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     |
+		| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   |
+		And I close all client application windows
+		
+
+		
+					
+
+Scenario: _0154151 check function DontCalculateRow in the Purchase invoice
+	* Open the Purchase invoice creation form
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+	* Check filling in legal name if the partner has only one
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Partner term vendor NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+	* Check filling in prices when adding an Item and selecting an item key
+		* Filling in item and item key
+			And I delete a line in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Trousers'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "List" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key'  |
+				| 'Dress' | 'L/Green' |
+			And I select current line in "List" table
+			And I input "5,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '144,00'     | '800,00'     | '944,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+		* Check function DontCalculateRow 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |	
+			And I activate "Dont calculate row" field in "ItemList" table
+			And I set "Dont calculate row" checkbox in "ItemList" table			
+			And I finish line editing in "ItemList" table
+			And I activate "Tax amount" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I select current line in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |	
+			And I select current line in "ItemList" table
+			And I input "150,00" text in "Tax amount" field of "ItemList" table
+			And I activate field named "ItemListNetAmount" in "ItemList" table
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I activate field named "ItemListNetAmount" in "ItemList" table
+			And I input "801,00" text in the field named "ItemListNetAmount" of "ItemList" table
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I input "951,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And I click "Post" button
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 551,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "645,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"
+		* Change tax amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I input "152,00" text in "Tax amount" field of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'Yes'                | '152,00'     | '801,00'     | '951,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 551,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"			
+		* Change net amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I input "800,00" text in the field named "ItemListNetAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '951,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 550,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"
+		* Change total amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I input "954,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 550,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 199,00"
+		* Add new line and check calculation
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key'  |
+				| 'Dress' | 'M/White' |
+			And I select current line in "List" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table	
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '187,20'     | '1 040,00'   | '1 227,20'     | 'Store 03' |
+		* Check calculation when set "Price include tax" checkbox
+			And I move to "Other" tab
+			And I set checkbox "Price include tax"		
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     | 'Store 03' |
+				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '158,64'     | '881,36'     | '1 040,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "4 011,87"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "730,13"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 744,00"
+			And I click "Post" button
+		* Check filling the recalculation check box when creating Purchase return / Purchase return order bases on Purchase invoice
+			And I click "Purchase return order" button
+			And "ItemList" table contains lines
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' |
+			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     |
+			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   |
+			And I close current window
+			And I click "Purchase return" button
+			And "ItemList" table contains lines
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' |
+			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     |
+			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   |
+			And I close all client application windows
+			
+	
+Scenario: _0154152 check function DontCalculateRow in the Purchase return
+	* Open the Purchase return creation form
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I click the button named "FormCreate"
+	* Check filling in legal name if the partner has only one
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Partner term vendor NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+	* Check filling in prices when adding an Item and selecting an item key
+		* Filling in item and item key
+			And I delete a line in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Trousers'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "List" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key'  |
+				| 'Dress' | 'L/Green' |
+			And I select current line in "List" table
+			And I input "5,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,00'     | '800,00'     | '944,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+		* Check function DontCalculateRow 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |	
+			And I activate "Dont calculate row" field in "ItemList" table
+			And I set "Dont calculate row" checkbox in "ItemList" table			
+			And I finish line editing in "ItemList" table
+			And I activate "Tax amount" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I select current line in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |	
+			And I select current line in "ItemList" table
+			And I input "150,00" text in "Tax amount" field of "ItemList" table
+			And I activate field named "ItemListNetAmount" in "ItemList" table
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I activate field named "ItemListNetAmount" in "ItemList" table
+			And I input "801,00" text in the field named "ItemListNetAmount" of "ItemList" table
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I input "951,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And I click "Post" button
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 551,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "645,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"
+		* Change tax amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I input "152,00" text in "Tax amount" field of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '801,00'     | '951,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 551,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"			
+		* Change net amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I input "800,00" text in the field named "ItemListNetAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '951,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 550,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"
+		* Change total amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I input "954,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 550,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 199,00"
+		* Add new line and check calculation
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key'  |
+				| 'Dress' | 'M/White' |
+			And I select current line in "List" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table	
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'pcs'  | 'No'                 | '187,20'     | '1 040,00'   | '1 227,20'     | 'Store 03' |
+		* Check calculation when set "Price include tax" checkbox
+			And I move to "Other" tab
+			And I set checkbox "Price include tax"		
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     | 'Store 03' |
+				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'pcs'  | 'No'                 | '158,64'     | '881,36'     | '1 040,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "4 011,87"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "730,13"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 744,00"
+			And I click "Post and close" button
+						
+
+Scenario: _0154153 check function DontCalculateRow in the Purchase return order
+	* Open the Purchase return order creation form
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And I click the button named "FormCreate"
+	* Check filling in legal name if the partner has only one
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Partner term vendor NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+	* Check filling in prices when adding an Item and selecting an item key
+		* Filling in item and item key
+			And I delete a line in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Trousers'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "List" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key'  |
+				| 'Dress' | 'L/Green' |
+			And I select current line in "List" table
+			And I input "5,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,00'     | '800,00'     | '944,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+		* Check function DontCalculateRow 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |	
+			And I activate "Dont calculate row" field in "ItemList" table
+			And I set "Dont calculate row" checkbox in "ItemList" table			
+			And I finish line editing in "ItemList" table
+			And I activate "Tax amount" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I select current line in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |	
+			And I select current line in "ItemList" table
+			And I input "150,00" text in "Tax amount" field of "ItemList" table
+			And I activate field named "ItemListNetAmount" in "ItemList" table
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I activate field named "ItemListNetAmount" in "ItemList" table
+			And I input "801,00" text in the field named "ItemListNetAmount" of "ItemList" table
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I input "951,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And I click "Post" button
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 551,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "645,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"
+		* Change tax amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I input "152,00" text in "Tax amount" field of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '801,00'     | '951,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 551,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"			
+		* Change net amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I input "800,00" text in the field named "ItemListNetAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '951,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 550,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"
+		* Change total amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I input "954,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 550,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 199,00"
+		* Add new line and check calculation
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key'  |
+				| 'Dress' | 'M/White' |
+			And I select current line in "List" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table	
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'pcs'  | 'No'                 | '187,20'     | '1 040,00'   | '1 227,20'     | 'Store 03' |
+		* Check calculation when set "Price include tax" checkbox
+			And I move to "Other" tab
+			And I set checkbox "Price include tax"		
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     | 'Store 03' |
+				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'pcs'  | 'No'                 | '158,64'     | '881,36'     | '1 040,00'     | 'Store 03' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "4 011,87"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "730,13"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 744,00"
+			And I select "Approved" exact value from "Status" drop-down list				
+			And I click "Post" button
+	* Check filling the recalculation check box when creating Purchase return bases on Purchase return order
+		And I click "Purchase return" button
+		And "ItemList" table contains lines
+		| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' |
+		| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     |
+		| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   |
+		And I close all client application windows
+	
+Scenario: _0154154 check function DontCalculateRow in the Sales order
+	* Open the Sales order creation form
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+	* Check filling in legal name if the partner has only one
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+	* Check filling in prices when adding an Item and selecting an item key
+		* Filling in item and item key
+			And I delete a line in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"	
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Trousers'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "List" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"	
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key'  |
+				| 'Dress' | 'L/Green' |
+			And I select current line in "List" table
+			And I input "5,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Price type'        | 'SalesTax' | 'Tax amount' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '18%' | 'Trousers' | '400,00' | '38/Yellow' | 'Basic Price Types' | '1%'       | '129,95'     | '2,000' | 'pcs'  | 'No'                 | '670,05'     | '800,00'       | 'Store 01' |
+				| '18%' | 'Dress'    | '550,00' | 'L/Green'   | 'Basic Price Types' | '1%'       | '446,72'     | '5,000' | 'pcs'  | 'No'                 | '2 303,28'   | '2 750,00'     | 'Store 01' |
+		* Check function DontCalculateRow 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |	
+			And I activate "Dont calculate row" field in "ItemList" table
+			And I set "Dont calculate row" checkbox in "ItemList" table			
+			And I finish line editing in "ItemList" table
+			And I activate "Tax amount" field in "ItemList" table
+			And I select current line in "ItemList" table
+			Then "Edit tax" window is opened
+			And I activate "Manual amount" field in "TaxTree" table
+			And I select current line in "TaxTree" table
+			And I input "8,00" text in "Manual amount" field of "TaxTree" table
+			And I finish line editing in "TaxTree" table
+			And I go to line in "TaxTree" table
+				| 'Amount' | 'Row presentation' |
+				| '122,03' | 'VAT - TRY - 18%'  |
+			And I select current line in "TaxTree" table
+			And I input "122,00" text in "Manual amount" field of "TaxTree" table
+			And I finish line editing in "TaxTree" table
+			And I click "Ok" button
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |	
+			And I input "670,00" text in the field named "ItemListNetAmount" of "ItemList" table
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I input "801,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Price type'        | 'SalesTax' | 'Tax amount' | 'Q'     | 'Offers amount' | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '18%' | 'Trousers' | '400,00' | '38/Yellow' | 'Basic Price Types' | '1%'       | '130,00'     | '2,000' | ''              | 'pcs'  | 'Yes'                | '670,00'     | '801,00'       | 'Store 01' |
+				| '18%' | 'Dress'    | '550,00' | 'L/Green'   | 'Basic Price Types' | '1%'       | '446,72'     | '5,000' | ''              | 'pcs'  | 'No'                 | '2 303,28'   | '2 750,00'     | 'Store 01' |
+			And I click "Post" button
+			And "ItemList" table contains lines
+				| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Price type'        | 'SalesTax' | 'Tax amount' | 'Q'     | 'Offers amount' | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '18%' | 'Trousers' | '400,00' | '38/Yellow' | 'Basic Price Types' | '1%'       | '130,00'     | '2,000' | ''              | 'pcs'  | 'Yes'                | '670,00'     | '801,00'       | 'Store 01' |
+				| '18%' | 'Dress'    | '550,00' | 'L/Green'   | 'Basic Price Types' | '1%'       | '446,72'     | '5,000' | ''              | 'pcs'  | 'No'                 | '2 303,28'   | '2 750,00'     | 'Store 01' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 973,28"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "576,72"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "3 551,00"
+		* Change tax amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I activate "Tax amount" field in "ItemList" table
+			And I select current line in "ItemList" table		
+			And I activate "Manual amount" field in "TaxTree" table
+			And I select current line in "TaxTree" table
+			And I input "8,00" text in "Manual amount" field of "TaxTree" table
+			And I finish line editing in "TaxTree" table
+			And I go to line in "TaxTree" table
+				| 'Amount' | 'Row presentation' |
+				| '122,03' | 'VAT - TRY - 18%'  |
+			And I select current line in "TaxTree" table
+			And I input "121,00" text in "Manual amount" field of "TaxTree" table
+			And I finish line editing in "TaxTree" table
+			And I click "Ok" button
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '129,00'     | '670,00'     | '801,00'       | 'Store 01' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '446,72'     | '2 303,28'   | '2 750,00'     | 'Store 01' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 973,28"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "575,72"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "3 551,00"			
+		* Change net amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I input "671,00" text in the field named "ItemListNetAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '129,00'     | '671,00'     | '801,00'       | 'Store 01' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '446,72'     | '2 303,28'   | '2 750,00'     | 'Store 01' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 974,28"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "575,72"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "3 551,00""
+		* Change total amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I input "800,50" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '129,00'     | '671,00'     | '800,50'       | 'Store 01' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '446,72'     | '2 303,28'   | '2 750,00'     | 'Store 01' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 974,28"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "575,72"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "3 550,50""
+		* Add new line and check calculation
+			And in the table "ItemList" I click the button named "ItemListAdd"	
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key'  |
+				| 'Dress' | 'M/White' |
+			And I select current line in "List" table
+			And I input "1,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table	
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '129,00'     | '671,00'     | '800,50'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '446,72'     | '2 303,28'   | '2 750,00'     |
+				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '1,000' | 'pcs'  | 'No'                 | '84,47'      | '435,53'     | '520,00'       |
+		* Check calculation when remove "Price include tax" checkbox
+			And I move to "Other" tab
+			And I remove checkbox "Price include tax"
+			And I remove checkbox "Shipment confirmations before sales invoice"			
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'              	| '129,00'     | '671,00'     | '800,50'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '522,50'     | '2 750,00'   | '3 272,50'     |
+				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '1,000' | 'pcs'  | 'No'                 | '98,80'      | '520,00'     | '618,80'       |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 941,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "750,30"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 691,80"
+			And I click "Post and close" button
+	* Check filling the recalculation check box when creating Sales invoice bases on Sales order
+		And I click "Sales invoice" button
+		And "ItemList" table contains lines
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'              	| '129,00'     | '671,00'     | '800,50'       |
+			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '522,50'     | '2 750,00'   | '3 272,50'     |
+		And I close all client application windows
+
+Scenario: _0154155 check function DontCalculateRow in the Sales invoice
+	And I close all client application windows
+	* Open the Sales invoice creation form
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Check filling in legal name if the partner has only one
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+	* Check filling in prices when adding an Item and selecting an item key
+		* Filling in item and item key
+			And I delete a line in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"	
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Trousers'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "List" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"	
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key'  |
+				| 'Dress' | 'L/Green' |
+			And I select current line in "List" table
+			And I input "5,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Price type'        | 'SalesTax' | 'Tax amount' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '18%' | 'Trousers' | '400,00' | '38/Yellow' | 'Basic Price Types' | '1%'       | '129,95'     | '2,000' | 'pcs'  | 'No'                 | '670,05'     | '800,00'       | 'Store 01' |
+				| '18%' | 'Dress'    | '550,00' | 'L/Green'   | 'Basic Price Types' | '1%'       | '446,72'     | '5,000' | 'pcs'  | 'No'                 | '2 303,28'   | '2 750,00'     | 'Store 01' |
+		* Check function DontCalculateRow 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |	
+			And I activate "Dont calculate row" field in "ItemList" table
+			And I set "Dont calculate row" checkbox in "ItemList" table			
+			And I finish line editing in "ItemList" table
+			And I activate "Tax amount" field in "ItemList" table
+			And I select current line in "ItemList" table
+			Then "Edit tax" window is opened
+			And I activate "Manual amount" field in "TaxTree" table
+			And I select current line in "TaxTree" table
+			And I input "8,00" text in "Manual amount" field of "TaxTree" table
+			And I finish line editing in "TaxTree" table
+			And I go to line in "TaxTree" table
+				| 'Amount' | 'Row presentation' |
+				| '122,03' | 'VAT - TRY - 18%'  |
+			And I select current line in "TaxTree" table
+			And I input "122,00" text in "Manual amount" field of "TaxTree" table
+			And I finish line editing in "TaxTree" table
+			And I click "Ok" button
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |	
+			And I input "670,00" text in the field named "ItemListNetAmount" of "ItemList" table
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I input "801,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Price type'        | 'SalesTax' | 'Tax amount' | 'Q'     | 'Offers amount' | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '18%' | 'Trousers' | '400,00' | '38/Yellow' | 'Basic Price Types' | '1%'       | '130,00'     | '2,000' | ''              | 'pcs'  | 'Yes'                | '670,00'     | '801,00'       | 'Store 01' |
+				| '18%' | 'Dress'    | '550,00' | 'L/Green'   | 'Basic Price Types' | '1%'       | '446,72'     | '5,000' | ''              | 'pcs'  | 'No'                 | '2 303,28'   | '2 750,00'     | 'Store 01' |
+			And I click "Post" button
+			And "ItemList" table contains lines
+				| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Price type'        | 'SalesTax' | 'Tax amount' | 'Q'     | 'Offers amount' | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '18%' | 'Trousers' | '400,00' | '38/Yellow' | 'Basic Price Types' | '1%'       | '130,00'     | '2,000' | ''              | 'pcs'  | 'Yes'                | '670,00'     | '801,00'       | 'Store 01' |
+				| '18%' | 'Dress'    | '550,00' | 'L/Green'   | 'Basic Price Types' | '1%'       | '446,72'     | '5,000' | ''              | 'pcs'  | 'No'                 | '2 303,28'   | '2 750,00'     | 'Store 01' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 973,28"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "576,72"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "3 551,00"
+		* Change tax amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I activate "Tax amount" field in "ItemList" table
+			And I select current line in "ItemList" table		
+			And I activate "Manual amount" field in "TaxTree" table
+			And I select current line in "TaxTree" table
+			And I input "8,00" text in "Manual amount" field of "TaxTree" table
+			And I finish line editing in "TaxTree" table
+			And I go to line in "TaxTree" table
+				| 'Amount' | 'Row presentation' |
+				| '122,03' | 'VAT - TRY - 18%'  |
+			And I select current line in "TaxTree" table
+			And I input "121,00" text in "Manual amount" field of "TaxTree" table
+			And I finish line editing in "TaxTree" table
+			And I click "Ok" button
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '129,00'     | '670,00'     | '801,00'       | 'Store 01' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '446,72'     | '2 303,28'   | '2 750,00'     | 'Store 01' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 973,28"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "575,72"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "3 551,00"			
+		* Change net amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I input "671,00" text in the field named "ItemListNetAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '129,00'     | '671,00'     | '801,00'       | 'Store 01' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '446,72'     | '2 303,28'   | '2 750,00'     | 'Store 01' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 974,28"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "575,72"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "3 551,00""
+		* Change total amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I input "800,50" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '129,00'     | '671,00'     | '800,50'       | 'Store 01' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '446,72'     | '2 303,28'   | '2 750,00'     | 'Store 01' |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 974,28"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "575,72"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "3 550,50""
+		* Add new line and check calculation
+			And in the table "ItemList" I click the button named "ItemListAdd"	
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key'  |
+				| 'Dress' | 'M/White' |
+			And I select current line in "List" table
+			And I input "1,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table	
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '129,00'     | '671,00'     | '800,50'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '446,72'     | '2 303,28'   | '2 750,00'     |
+				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '1,000' | 'pcs'  | 'No'                 | '84,47'      | '435,53'     | '520,00'       |
+		* Check calculation when remove "Price include tax" checkbox
+			And I move to "Other" tab
+			And I remove checkbox "Price include tax"		
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'              	| '129,00'     | '671,00'     | '800,50'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '522,50'     | '2 750,00'   | '3 272,50'     |
+				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '1,000' | 'pcs'  | 'No'                 | '98,80'      | '520,00'     | '618,80'       |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 941,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "750,30"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 691,80"
+			And I click "Post" button
+	* Check filling the recalculation check box when creating Sales return / Sales return order bases on Sales invoice
+		And I click "Sales return" button
+		And "ItemList" table contains lines
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'              	| '129,00'     | '671,00'     | '800,50'       |
+			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '522,50'     | '2 750,00'   | '3 272,50'     |
+		And I close current window
+		And I click "Sales return order" button
+		And "ItemList" table contains lines
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'              	| '129,00'     | '671,00'     | '800,50'       |
+			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '522,50'     | '2 750,00'   | '3 272,50'     |
+		And I close all client application windows
+		
+	
+	
+Scenario: _0154156 check function DontCalculateRow in the Sales return
+	* Open the Sales return creation form
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I click the button named "FormCreate"
+	* Check filling in legal name if the partner has only one
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I remove checkbox "Price include tax"		
+		And I move to "Item list" tab
+	* Check filling in prices when adding an Item and selecting an item key
+		* Filling in item and item key
+			And I delete a line in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Trousers'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "List" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key'  |
+				| 'Dress' | 'L/Green' |
+			And I select current line in "List" table
+			And I input "5,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,00'     | '800,00'     | '944,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Check function DontCalculateRow 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |	
+			And I activate "Dont calculate row" field in "ItemList" table
+			And I set "Dont calculate row" checkbox in "ItemList" table			
+			And I finish line editing in "ItemList" table
+			And I activate "Tax amount" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I select current line in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |	
+			And I select current line in "ItemList" table
+			And I input "150,00" text in "Tax amount" field of "ItemList" table
+			And I activate field named "ItemListNetAmount" in "ItemList" table
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I activate field named "ItemListNetAmount" in "ItemList" table
+			And I input "801,00" text in the field named "ItemListNetAmount" of "ItemList" table
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I input "951,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+			And I click "Post" button
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 551,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "645,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"
+		* Change tax amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I input "152,00" text in "Tax amount" field of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '801,00'     | '951,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 551,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"			
+		* Change net amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I input "800,00" text in the field named "ItemListNetAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '951,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 550,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"
+		* Change total amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I input "954,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 550,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 199,00"
+		* Add new line and check calculation
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key'  |
+				| 'Dress' | 'M/White' |
+			And I select current line in "List" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table	
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'pcs'  | 'No'                 | '187,20'     | '1 040,00'   | '1 227,20'     |
+		* Check calculation when set "Price include tax" checkbox
+			And I move to "Other" tab
+			And I set checkbox "Price include tax"		
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'pcs'  | 'No'                 | '158,64'     | '881,36'     | '1 040,00'     |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "4 011,87"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "730,13"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 744,00"
+			And I click "Post and close" button
+
+
+Scenario: _0154157 check function DontCalculateRow in the Sales return order
+	* Open the Sales return order creation form
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I click the button named "FormCreate"
+	* Check filling in legal name if the partner has only one
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I remove checkbox "Price include tax"		
+		And I move to "Item list" tab
+	* Check filling in prices when adding an Item and selecting an item key
+		* Filling in item and item key
+			And I delete a line in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"	
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Trousers'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "List" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"	
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key'  |
+				| 'Dress' | 'L/Green' |
+			And I select current line in "List" table
+			And I input "5,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,00'     | '800,00'     | '944,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Check function DontCalculateRow 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |	
+			And I activate "Dont calculate row" field in "ItemList" table
+			And I set "Dont calculate row" checkbox in "ItemList" table			
+			And I finish line editing in "ItemList" table
+			And I activate "Tax amount" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I select current line in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |	
+			And I select current line in "ItemList" table
+			And I input "150,00" text in "Tax amount" field of "ItemList" table
+			And I activate field named "ItemListNetAmount" in "ItemList" table
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I activate field named "ItemListNetAmount" in "ItemList" table
+			And I input "801,00" text in the field named "ItemListNetAmount" of "ItemList" table
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I input "951,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+			And I click "Post" button
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 551,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "645,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"
+		* Change tax amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I input "152,00" text in "Tax amount" field of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '801,00'     | '951,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 551,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"			
+		* Change net amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I input "800,00" text in the field named "ItemListNetAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '951,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 550,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"
+		* Change total amount
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '2,000' |
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I input "954,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 550,00"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 199,00"
+		* Add new line and check calculation
+			And in the table "ItemList" I click the button named "ItemListAdd"	
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key'  |
+				| 'Dress' | 'M/White' |
+			And I select current line in "List" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table	
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'pcs'  | 'No'                 | '187,20'     | '1 040,00'   | '1 227,20'     |
+		* Check calculation when set "Price include tax" checkbox
+			And I move to "Other" tab
+			And I set checkbox "Price include tax"		
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'pcs'  | 'No'                 | '158,64'     | '881,36'     | '1 040,00'     |
+			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "4 011,87"
+			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "730,13"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 744,00"
+			And I select "Approved" exact value from "Status" drop-down list
+			And I click "Post" button
+	* Check filling the recalculation check box when creating Sales return on Sales return order
+		And I click "Sales return" button
+		And "ItemList" table contains lines
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       |
+			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+		And I close all client application windows
+		
+
+
+Scenario: _0154160 check tax and net amount calculation when change total amount in the Purchase invoice
+	* Open the Purchase invoice creation form
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+	* Filling in legal name if the partner has only one
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Partner term vendor NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+	* Filling in item and item key
+		And I delete a line in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key'  |
+			| 'Dress' | 'L/Green' |
+		And I select current line in "List" table
+		And I input "5,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '144,00'     | '800,00'     | '944,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+		* Check tax and net amount calculation when change total amount (Price does not include tax)
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "945,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '144,15'     | '800,86'     | '945,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Change quantity and check tax and net amount calculation 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "3,000" text in "Q" field of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '216,23'     | '1 201,29'   | '1 417,52'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Change total amount and check tax and net amount calculation (Price does not include tax)
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "1418,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '216,31'     | '1 201,68'   | '1 418,00'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Set checkbox Price include tax and check tax and net amount calculation when change total amount
+			And I move to "Other" tab
+			And I move to "More" tab
+			And I set checkbox "Price include tax"
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '183,31'     | '1 018,37'   | '1 201,68'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "1200,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '183,05'     | '1 016,95'   | '1 200,00'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |		 			
+		* Change quantity and check tax and net amount calculation 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+			And I close all client application windows
+			
+
+Scenario: _0154161 check tax and net amount calculation when change total amount in the Purchase order
+	* Open the Purchase order creation form
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
+	* Filling in legal name if the partner has only one
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Partner term vendor NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+	* Filling in item and item key
+		And I delete a line in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key'  |
+			| 'Dress' | 'L/Green' |
+		And I select current line in "List" table
+		And I input "5,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '144,00'     | '800,00'     | '944,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+		* Check tax and net amount calculation when change total amount (Price does not include tax)
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "945,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '144,15'     | '800,86'     | '945,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Change quantity and check tax and net amount calculation 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "3,000" text in "Q" field of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '216,23'     | '1 201,29'   | '1 417,52'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Change total amount and check tax and net amount calculation (Price does not include tax)
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "1418,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '216,31'     | '1 201,68'   | '1 418,00'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Set checkbox Price include tax and check tax and net amount calculation when change total amount
+			And I move to "Other" tab
+			And I move to "More" tab
+			And I set checkbox "Price include tax"
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '183,31'     | '1 018,37'   | '1 201,68'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "1200,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '183,05'     | '1 016,95'   | '1 200,00'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |		 			
+		* Change quantity and check tax and net amount calculation 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+			And I close all client application windows
+			
+
+Scenario: _0154162 check tax and net amount calculation when change total amount in the Purchase return order
+	* Open the Purchase return order creation form
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And I click the button named "FormCreate"
+	* Filling in legal name if the partner has only one
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Partner term vendor NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+	* Filling in item and item key
+		And I delete a line in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key'  |
+			| 'Dress' | 'L/Green' |
+		And I select current line in "List" table
+		And I input "5,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,00'     | '800,00'     | '944,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+		* Check tax and net amount calculation when change total amount (Price does not include tax)
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "945,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,15'     | '800,86'     | '945,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Change quantity and check tax and net amount calculation 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "3,000" text in "Q" field of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,23'     | '1 201,29'   | '1 417,52'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Change total amount and check tax and net amount calculation (Price does not include tax)
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "1418,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,68'   | '1 418,00'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Set checkbox Price include tax and check tax and net amount calculation when change total amount
+			And I move to "Other" tab
+			And I set checkbox "Price include tax"
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '183,31'     | '1 018,37'   | '1 201,68'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "1200,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '183,05'     | '1 016,95'   | '1 200,00'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+		* Change quantity and check tax and net amount calculation 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | ''              | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+			And I close all client application windows
+			
+						
+
+Scenario: _0154163 check tax and net amount calculation when change total amount in the Purchase return
+	* Open the Purchase return creation form
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I click the button named "FormCreate"
+	* Filling in legal name if the partner has only one
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Partner term vendor NDB'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+	* Filling in item and item key
+		And I delete a line in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key'  |
+			| 'Dress' | 'L/Green' |
+		And I select current line in "List" table
+		And I input "5,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,00'     | '800,00'     | '944,00'       | 'Store 03' |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
+		* Check tax and net amount calculation when change total amount (Price does not include tax)
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "945,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,15'     | '800,86'     | '945,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Change quantity and check tax and net amount calculation 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "3,000" text in "Q" field of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,23'     | '1 201,29'   | '1 417,52'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Change total amount and check tax and net amount calculation (Price does not include tax)
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "1418,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,68'   | '1 418,00'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Set checkbox Price include tax and check tax and net amount calculation when change total amount
+			And I move to "Other" tab
+			And I set checkbox "Price include tax"
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '183,31'     | '1 018,37'   | '1 201,68'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "1200,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '183,05'     | '1 016,95'   | '1 200,00'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+		* Change quantity and check tax and net amount calculation 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+			And I close all client application windows
+			
+						
+	
+Scenario: _0154164 check tax and net amount calculation when change total amount in the Sales return
+	* Open the Sales return creation form
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I click the button named "FormCreate"
+	* Filling in legal name if the partner has only one
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I remove checkbox "Price include tax"
+		And I move to "Item list" tab			
+	* Filling in item and item key
+		And I delete a line in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key'  |
+			| 'Dress' | 'L/Green' |
+		And I select current line in "List" table
+		And I input "5,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,00'     | '800,00'     | '944,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Check tax and net amount calculation when change total amount (Price does not include tax)
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "945,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,15'     | '800,86'     | '945,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Change quantity and check tax and net amount calculation 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "3,000" text in "Q" field of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,23'     | '1 201,29'   | '1 417,52'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Change total amount and check tax and net amount calculation (Price does not include tax)
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "1418,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,68'   | '1 418,00'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Set checkbox Price include tax and check tax and net amount calculation when change total amount
+			And I move to "Other" tab
+			And I set checkbox "Price include tax"
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '183,31'     | '1 018,37'   | '1 201,68'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "1200,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '183,05'     | '1 016,95'   | '1 200,00'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+		* Change quantity and check tax and net amount calculation 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+			And I close all client application windows
+									
+
+Scenario: _0154165 check tax and net amount calculation when change total amount in the Sales return order
+	* Open the Sales return order creation form
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I click the button named "FormCreate"
+	* Filling in legal name if the partner has only one
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I remove checkbox "Price include tax"
+		And I move to "Item list" tab			
+	* Filling in item and item key
+		And I delete a line in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"	
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key'  |
+			| 'Dress' | 'L/Green' |
+		And I select current line in "List" table
+		And I input "5,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,00'     | '800,00'     | '944,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Check tax and net amount calculation when change total amount (Price does not include tax)
+			And I activate field named "ItemListTotalAmount" in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "945,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,15'     | '800,86'     | '945,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Change quantity and check tax and net amount calculation 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "3,000" text in "Q" field of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,23'     | '1 201,29'   | '1 417,52'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Change total amount and check tax and net amount calculation (Price does not include tax)
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "1418,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,68'   | '1 418,00'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Set checkbox Price include tax and check tax and net amount calculation when change total amount
+			And I move to "Other" tab
+			And I set checkbox "Price include tax"
+			And I move to "Item list" tab
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '183,31'     | '1 018,37'   | '1 201,68'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "1200,00" text in the field named "ItemListTotalAmount" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '183,05'     | '1 016,95'   | '1 200,00'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+		* Change quantity and check tax and net amount calculation 
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+			And I close all client application windows			
+	

@@ -2,7 +2,8 @@
 @tree
 @Positive
 @NotCritical
-@Group12
+@Forms
+
 Feature: check required fields
 
 
@@ -18,6 +19,15 @@ Scenario: check of the sign of required filling at the additional attribute and 
 			| 'Description' |
 			| 'Items'       |
 		And I select current line in "List" table
+		If "Attributes" table does not contain lines Then
+			| "Attribute" |
+			| "Article" |
+			And in the table "Attributes" I click the button named "AttributesAdd"
+			And I click choice button of "Attribute" attribute in "Attributes" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Article'     |
+			And I select current line in "List" table
 		And I go to line in "Attributes" table
 			| 'Attribute'  |
 			| 'Article'    |

@@ -1,7 +1,10 @@
 ﻿#language: en
 @tree
 @Positive
-@Group7
+@Inventory
+
+
+
 Feature: create Shipment confirmation
 
 
@@ -89,10 +92,10 @@ Scenario: preparation (Shipment confirmation)
 				| "Number" |
 				| "$$NumberPurchaseReturn022314$$" |
 			When create PurchaseReturn022314
-		 	And I go to line in "List" table
+			And I go to line in "List" table
 					| 'Number'                          |
 					| "$$NumberPurchaseReturn022314$$"|
-            And I select current line in "List" table
+			And I select current line in "List" table
 			And I activate "Q" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "10,000" text in "Q" field of "ItemList" table
@@ -252,7 +255,7 @@ Scenario: _028811 check the output of the document movement report for Shipment 
 	* Check the report output for the selected document from the list
 		And I go to line in "List" table
 		| 'Number' |
-		| '$$NumberShipmentConfirmation0028801$$'      |
+		| '$$NumberShipmentConfirmation028801$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		And "ResultTable" spreadsheet document contains lines:
@@ -280,7 +283,7 @@ Scenario: _028811 check the output of the document movement report for Shipment 
 	* Check the report output from the selected document
 		And I go to line in "List" table
 		| 'Number' |
-		| '$$NumberShipmentConfirmation0028801$$'      |
+		| '$$NumberShipmentConfirmation028801$$'      |
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
@@ -313,7 +316,7 @@ Scenario: _02881101 clear movements Shipment confirmation and check that there i
 	* Check the report generation
 		And I go to line in "List" table
 			| 'Number' |
-			| '$$NumberShipmentConfirmation0028801$$'      |
+			| '$$NumberShipmentConfirmation028801$$'      |
 	* Clear movements document and check that there is no movement on the registers
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
@@ -326,7 +329,7 @@ Scenario: _02881101 clear movements Shipment confirmation and check that there i
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
 			| 'Number' |
-			| '$$NumberShipmentConfirmation0028801$$'      |
+			| '$$NumberShipmentConfirmation028801$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		And "ResultTable" spreadsheet document contains lines:
@@ -352,3 +355,13 @@ Scenario: _02881101 clear movements Shipment confirmation and check that there i
 		And I close all client application windows
 
 
+Scenario: _300506 check connection to Shipment Confirmation report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberShipmentConfirmation0028801$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows

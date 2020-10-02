@@ -1,8 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Test
-@Group01
+@Catalogs
 
 Feature: filling in Movement Type for Partner term currencies
 As an owner
@@ -23,7 +22,7 @@ Background:
 Scenario: _005017 creation Movement Type for Partner term currencies
 	* Preparation
 		When Create catalog Currencies objects
-		When Create catalog IntegrationSettings objects (currency source)
+		When Create catalog IntegrationSettings objects
 	* Opening charts of characteristic types - Currency movement
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.CurrencyMovementType"
 	* Create currency for Partner terms - TRY

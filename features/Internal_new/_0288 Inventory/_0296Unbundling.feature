@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group7
+@Inventory
 
 Feature: Unbundling
 
@@ -508,11 +508,11 @@ Scenario: _029612 check the output of the document movement report for Unbundlin
 	* Check the report output for the selected document from the list
 		And I go to line in "List" table
 		| 'Number' |
-		| '$$NumberUnBundling0029501$$'      |
+		| '$$NumberUnBundling0029601$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		And "ResultTable" spreadsheet document contains lines:
-		| 'UnBundling0029501$$'                  | ''            | ''       | ''          | ''           | ''          |
+		| '$$UnBundling0029601$$'          | ''            | ''       | ''          | ''           | ''          |
 		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          |
 		| 'Register  "Stock reservation"'  | ''            | ''       | ''          | ''           | ''          |
 		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
@@ -537,12 +537,12 @@ Scenario: _029612 check the output of the document movement report for Unbundlin
 	* Check the report output from the selected document
 		And I go to line in "List" table
 		| 'Number' |
-		| '$$NumberUnBundling0029501$$' |    
+		| '$$NumberUnBundling0029601$$' |    
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		And "ResultTable" spreadsheet document contains lines:
-		| 'Un$$Bundling0029501$$'                  | ''            | ''       | ''          | ''           | ''          |
+		| '$$UnBundling0029601$$'          | ''            | ''       | ''          | ''           | ''          |
 		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          |
 		| 'Register  "Stock reservation"'  | ''            | ''       | ''          | ''           | ''          |
 		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
@@ -570,7 +570,7 @@ Scenario: _02961201 clear movements Unbundling and check that there is no moveme
 	* Check the report generation
 		And I go to line in "List" table
 			| 'Number' |
-			| '$$NumberUnBundling0029501$$$$'  |    
+			| '$$NumberUnBundling0029601$$'  |    
 	* Clear movements document and check that there is no movement on the registers
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
@@ -582,11 +582,11 @@ Scenario: _02961201 clear movements Unbundling and check that there is no moveme
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I go to line in "List" table
 			| 'Number' |
-			| '$$NumberUnBundling0029501$$' |     
+			| '$$NumberUnBundling0029601$$' |     
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$UnBundling0029501$$'                  | ''            | ''       | ''          | ''           | ''          |
+		| '$$UnBundling0029601$$'                  | ''            | ''       | ''          | ''           | ''          |
 		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          |
 		| 'Register  "Stock reservation"'  | ''            | ''       | ''          | ''           | ''          |
 		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
@@ -606,3 +606,15 @@ Scenario: _02961201 clear movements Unbundling and check that there is no moveme
 		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
 		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
 		And I close all client application windows
+
+
+Scenario: _300520 check connection to Unbundling report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.Unbundling"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberUnbundling0029601$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows

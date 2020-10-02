@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group6
+@Services
+
 Feature: incoming services
 
 As a financier

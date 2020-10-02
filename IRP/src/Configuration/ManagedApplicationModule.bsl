@@ -23,6 +23,7 @@ Procedure OnStart()
 	
 	ServiceSystemClient.SetSessionParameter("isMobile", isMobile);
 	ServiceSystemClient.SetSessionParameter("ClientType", ClientType);
+	ServiceSystemClient.SetSessionParameter("Workstation", WorkstationClient.GetCurrentWorkstation());
 	
 	If Not Saas.isAreaActive() 
 	   And (Saas.isAreaActive() And Not Saas.CurrentAreaID() = 0) Then

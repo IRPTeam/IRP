@@ -1,7 +1,7 @@
 ﻿#language: en
-@tree
+@ee
 @Positive
-@Group18
+@Other
 
 Feature: password check
 
@@ -11,13 +11,17 @@ Background:
 Given I launch TestClient opening script or connect the existing one
 
 
+Scenario: _351000 preparation
+        When Create catalog Users objects
+        When Create catalog AccessProfiles objects
+        When Create catalog AccessGroups objects
 Scenario: _351001 check user password setting from enterprise mode
         And I close all client application windows
         * Select user
                 Given I open hyperlink "e1cib/list/Catalog.Users"
                 And I go to line in "List" table
                 | 'Description'                 |
-                | 'Arina Brown (Financier 3)TR' |
+                | 'Arina Brown (Financier 3)' |
                 And I select current line in "List" table
                 * Change localization code
                         And I input "en" text in "Interface localization code" field
@@ -28,8 +32,8 @@ Scenario: _351001 check user password setting from enterprise mode
                 * Check message output if password confirmation does not match
                         And I input "F12346" text in "Confirm password" field
                         And I click "Ok" button
-                        Then I wait that in user messages the "Password and password confirmation do not match." substring will appear in "30" seconds
-                * Password entry is correct
+                                                Then I wait that in user messages the "Password and password confirmation do not match." substring will appear in "30" seconds
+                                * Password eny is correct
                         And I input "" text in "Confirm password" field
                         And I input "F12345" text in "Confirm password" field
                         And I click "Ok" button
@@ -47,7 +51,7 @@ Scenario: _351002 check user password generation from enterprise mode
                 Given I open hyperlink "e1cib/list/Catalog.Users"
                 And I go to line in "List" table
                 | 'Description'                 |
-                | 'Arina Brown (Financier 3)TR' |
+                | 'Arina Brown (Financier 3)' |
                 And I select current line in "List" table
         * Set password
                 And I click "Set password" button

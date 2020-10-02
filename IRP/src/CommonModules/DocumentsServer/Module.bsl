@@ -6,7 +6,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		AddAttributesAndPropertiesServer.OnCreateAtServer(Form, "GroupOther");
 		ExtensionServer.AddAtributesFromExtensions(Form, Object.Ref, Form.Items.GroupOther);
 	EndIf;
-	// TODO: Cut If after fix all documents
+
 	If Form.Items.Find("GroupTitleCollapsed") <> Undefined Then
 		DocumentsClientServer.ChangeTitleCollapse(Object, Form, Not ValueIsFilled(Object.Ref));
 	EndIf;	
@@ -18,11 +18,9 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 EndProcedure
 
 Procedure OnWriteAtServer(Object, Form, Cancel, CurrentObject, WriteParameters) Export
-	
 	If Not Object.Ref.Metadata().TabularSections.Find("ItemList") = Undefined Then
 		WriteSavedItems(Object, CurrentObject);
 	EndIf;
-	
 EndProcedure
 
 #EndRegion
@@ -304,8 +302,8 @@ Procedure FillCheckBankCashDocuments(Object, CheckedAttributes) Export
 		CheckedAttributes.Add("PaymentList.PlaningTransactionBasis");
 		CheckedAttributes.Add("CurrencyExchange");	
 			
-	ElsIf Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder") Or
-		Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder") Then
+	ElsIf Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder") 
+		Or Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder") Then
 			
 		CheckedAttributes.Add("PaymentList.PlaningTransactionBasis");	
 		
@@ -437,11 +435,13 @@ EndProcedure
 
 #EndRegion
 
-Function PrepareServerData_AtServerNoContext(Parameters) Export
+#Region PrepareServerData
+
+Function PrepareServerData(Parameters) Export
 	Result = New Structure();
 	
 	If Parameters.Property("ArrayOfMovementsTypes") Then
-		Result.Insert("ArrayOfCurrenciesByMmovementTypes", GetCurrencyByMovementType_AtServerNoContext(Parameters.ArrayOfMovementsTypes));
+		Result.Insert("ArrayOfCurrenciesByMovementTypes", GetCurrencyByMovementType(Parameters.ArrayOfMovementsTypes));
 	EndIf;
 	
 	If Parameters.Property("TaxesCache") Then
@@ -522,13 +522,21 @@ Function PrepareServerData_AtServerNoContext(Parameters) Export
 		AgreementParameters.Insert("Partner"		, Parameters.GetAgreementByPartner.Partner);
 		AgreementParameters.Insert("Agreement"		, Parameters.GetAgreementByPartner.Agreement);
 		AgreementParameters.Insert("CurrentDate"	, Parameters.GetAgreementByPartner.Date);
-		AgreementParameters.Insert("AgreementType"	, Enums.AgreementTypes.Vendor);
+		AgreementParameters.Insert("AgreementType"	, Enums.AgreementTypes.EmptyRef());
 		
-		Result.Insert("AgreementByPartner" , DocumentsServer.GetAgreementByPartner(AgreementParameters));
+		AgreementParameters.AgreementType = Enums.AgreementTypes.Vendor;
+		Result.Insert("AgreementByPartner_Vendor" , DocumentsServer.GetAgreementByPartner(AgreementParameters));
 		
 		If Parameters.GetAgreementByPartner.Property("WithAgreementInfo") Then
-			Result.Insert("AgreementInfoByPartner", CatAgreementsServer.GetAgreementInfo(Result.AgreementByPartner));
-		EndIf;		
+			Result.Insert("AgreementInfoByPartner_Vendor", CatAgreementsServer.GetAgreementInfo(Result.AgreementByPartner_Vendor));
+		EndIf;	
+			
+		AgreementParameters.AgreementType = Enums.AgreementTypes.Customer;
+		Result.Insert("AgreementByPartner_Customer" , DocumentsServer.GetAgreementByPartner(AgreementParameters));
+		
+		If Parameters.GetAgreementByPartner.Property("WithAgreementInfo") Then
+			Result.Insert("AgreementInfoByPartner_Customer", CatAgreementsServer.GetAgreementInfo(Result.AgreementByPartner_Customer));
+		EndIf;	
 	EndIf;
 	
 	If Parameters.Property("GetAgreementInfo") Then
@@ -538,38 +546,25 @@ Function PrepareServerData_AtServerNoContext(Parameters) Export
 	EndIf;
 	
 	If Parameters.Property("GetArrayOfCurrenciesRows") Then
-		CurrenciesColumns = Metadata.Documents.PurchaseInvoice.TabularSections.Currencies.Attributes;
-		CurrenciesTable = New ValueTable();
-		CurrenciesTable.Columns.Add("Key"             , CurrenciesColumns.Key.Type);
-		CurrenciesTable.Columns.Add("CurrencyFrom"    , CurrenciesColumns.CurrencyFrom.Type);
-		CurrenciesTable.Columns.Add("Rate"            , CurrenciesColumns.Rate.Type);
-		CurrenciesTable.Columns.Add("ReverseRate"     , CurrenciesColumns.ReverseRate.Type);
-		CurrenciesTable.Columns.Add("ShowReverseRate" , CurrenciesColumns.ShowReverseRate.Type);
-		CurrenciesTable.Columns.Add("Multiplicity"    , CurrenciesColumns.Multiplicity.Type);
-		CurrenciesTable.Columns.Add("MovementType"    , CurrenciesColumns.MovementType.Type);
-		CurrenciesTable.Columns.Add("Amount"          , CurrenciesColumns.Amount.Type);
-		
 		If Result.Property("AgreementInfo") Then
 			AgreementInfo = Result.AgreementInfo;
 		Else
 			AgreementInfo = CatAgreementsServer.GetAgreementInfo(Parameters.GetArrayOfCurrenciesRows.Agreement);
 		EndIf;
-		
-		CurrenciesServer.FillCurrencyTable(New Structure("Currencies", CurrenciesTable), 
-	                                   Parameters.GetArrayOfCurrenciesRows.Date, 
-	                                   Parameters.GetArrayOfCurrenciesRows.Company, 
-	                                   Parameters.GetArrayOfCurrenciesRows.Currency, 
-	                                   Parameters.GetArrayOfCurrenciesRows.UUID,
-	                                   AgreementInfo);
-	    
-	    ArrayOfCurrenciesRows = New Array();                               
-	    For Each RowCurrenciesTable In CurrenciesTable Do
-	    	NewRow = New Structure("Key, CurrencyFrom, Rate, ReverseRate, ShowReverseRate, Multiplicity, MovementType, Amount");
-	    	FillPropertyValues(NewRow, RowCurrenciesTable);
-	    	ArrayOfCurrenciesRows.Add(NewRow);
-	    EndDo;
-	    
-	    Result.Insert("ArrayOfCurrenciesRows", ArrayOfCurrenciesRows);		
+		Result.Insert("ArrayOfCurrenciesRows", 
+		GetArrayOfCurrenciesRows(AgreementInfo, Parameters.GetArrayOfCurrenciesRows));		
+	EndIf;
+	
+	If Parameters.Property("GetArrayOfCurrenciesRowsForAllTable") Then
+		ArrayOfCurrenciesRows = New Array();
+		For Each Row In Parameters.GetArrayOfCurrenciesRowsForAllTable Do
+			PartOfArrayOfCurrenciesRows = 
+			GetArrayOfCurrenciesRows(CatAgreementsServer.GetAgreementInfo(Row.Agreement), Row);
+			For Each ItemOfPart In PartOfArrayOfCurrenciesRows Do
+				ArrayOfCurrenciesRows.Add(ItemOfPart);
+			EndDo;
+		EndDo;
+		Result.Insert("ArrayOfCurrenciesRows", ArrayOfCurrenciesRows);
 	EndIf;
 	
 	If Parameters.Property("GetMetaDataStructure") Then
@@ -584,9 +579,25 @@ Function PrepareServerData_AtServerNoContext(Parameters) Export
 		Result.Insert("AgreementTypes_Vendor", PredefinedValue("Enum.AgreementTypes.Vendor"));
 	EndIf;
 
+	If Parameters.Property("GetAgreementTypes_Customer") Then
+		Result.Insert("AgreementTypes_Customer", PredefinedValue("Enum.AgreementTypes.Customer"));
+	EndIf;
+
 	If Parameters.Property("GetPurchaseOrder_EmptyRef") Then
 		Result.Insert("PurchaseOrder_EmptyRef", PredefinedValue("Document.PurchaseOrder.EmptyRef"));
 	EndIf;
+	
+	If Parameters.Property("GetSalesOrder_EmptyRef") Then
+		Result.Insert("SalesOrder_EmptyRef", PredefinedValue("Document.SalesOrder.EmptyRef"));
+	EndIf;
+	
+	If Parameters.Property("GetPurchaseReturnOrder_EmptyRef") Then
+		Result.Insert("PurchaseReturnOrder_EmptyRef", PredefinedValue("Document.PurchaseReturnOrder.EmptyRef"));
+	EndIf;
+
+	If Parameters.Property("GetSalesReturnOrder_EmptyRef") Then
+		Result.Insert("SalesReturnOrder_EmptyRef", PredefinedValue("Document.SalesReturnOrder.EmptyRef"));
+	EndIf;	
 	
 	If Parameters.Property("GetPriceTypes_ManualPriceType") Then
 		Result.Insert("PriceTypes_ManualPriceType", PredefinedValue("Catalog.PriceTypes.ManualPriceType"));
@@ -608,15 +619,60 @@ Function PrepareServerData_AtServerNoContext(Parameters) Export
 		Result.Insert("ItemUnitInfo" , GetItemInfo.ItemUnitInfo(Parameters.GetItemUnitInfo.ItemKey));
 	EndIf;
 	
+	If Parameters.Property("GetItemKeysWithSerialLotNumbers") Then
+		Query = New Query();
+		Query.Text = 
+		"SELECT
+		|	ItemKeys.Ref AS ItemKey
+		|FROM
+		|	Catalog.ItemKeys AS ItemKeys
+		|WHERE
+		|	ItemKeys.Item.ItemType.UseSerialLotNumber
+		|	AND ItemKeys.Ref IN (&Refs)";
+		Query.SetParameter("Refs", Parameters.GetItemKeysWithSerialLotNumbers);
+		QueryResult = Query.Execute();
+		ArrayOfItemKeysWithSerialLotNumbers = QueryResult.Unload().UnloadColumn("ItemKey");
+		Result.Insert("ItemKeysWithSerialLotNumbers", ArrayOfItemKeysWithSerialLotNumbers);
+	EndIf;
+	
 	Return Result;
 EndFunction	
 
-Function GetCurrencyByMovementType_AtServerNoContext(ArrayOfMovementsTypes) Export
-	ArrayOfCurrenciesByMmovementTypes = New Array();
-	For Each MovementType In ArrayOfMovementsTypes Do
-		ArrayOfCurrenciesByMmovementTypes.Add(New Structure("MovementType, Currency", MovementType, MovementType.Currency));
+Function GetArrayOfCurrenciesRows(AgreementInfo, Parameters)
+	CurrenciesColumns = Metadata.Documents.PurchaseInvoice.TabularSections.Currencies.Attributes;
+	CurrenciesTable = New ValueTable();
+	CurrenciesTable.Columns.Add("Key"             , CurrenciesColumns.Key.Type);
+	CurrenciesTable.Columns.Add("CurrencyFrom"    , CurrenciesColumns.CurrencyFrom.Type);
+	CurrenciesTable.Columns.Add("Rate"            , CurrenciesColumns.Rate.Type);
+	CurrenciesTable.Columns.Add("ReverseRate"     , CurrenciesColumns.ReverseRate.Type);
+	CurrenciesTable.Columns.Add("ShowReverseRate" , CurrenciesColumns.ShowReverseRate.Type);
+	CurrenciesTable.Columns.Add("Multiplicity"    , CurrenciesColumns.Multiplicity.Type);
+	CurrenciesTable.Columns.Add("MovementType"    , CurrenciesColumns.MovementType.Type);
+	CurrenciesTable.Columns.Add("Amount"          , CurrenciesColumns.Amount.Type);
+		
+	CurrenciesServer.FillCurrencyTable(New Structure("Currencies", CurrenciesTable), 
+	                                   Parameters.Date, 
+	                                   Parameters.Company, 
+	                                   Parameters.Currency, 
+	                                   Parameters.UUID,
+	                                   AgreementInfo);
+	    
+	ArrayOfCurrenciesRows = New Array();                               
+	For Each RowCurrenciesTable In CurrenciesTable Do
+	   NewRow = New Structure("Key, CurrencyFrom, Rate, ReverseRate, ShowReverseRate, Multiplicity, MovementType, Amount");
+	   FillPropertyValues(NewRow, RowCurrenciesTable);
+	   ArrayOfCurrenciesRows.Add(NewRow);
 	EndDo;
-	Return ArrayOfCurrenciesByMmovementTypes;
+	    
+	Return ArrayOfCurrenciesRows;
+EndFunction	
+
+Function GetCurrencyByMovementType(ArrayOfMovementsTypes)
+	ArrayOfCurrenciesByMovementTypes = New Array();
+	For Each MovementType In ArrayOfMovementsTypes Do
+		ArrayOfCurrenciesByMovementTypes.Add(New Structure("MovementType, Currency", MovementType, MovementType.Currency));
+	EndDo;
+	Return ArrayOfCurrenciesByMovementTypes;
 EndFunction
 
 Function GetStructureOfTaxRates(Tax, Date, Company, Parameters)
@@ -643,3 +699,5 @@ Function GetStructureOfTaxRates(Tax, Date, Company, Parameters)
 	
 	Return Result;
 EndFunction
+
+#EndRegion

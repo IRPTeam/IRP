@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group12
+@Forms
 
 Feature: check the addition of commands to documents and document lists
 
@@ -12,6 +12,51 @@ Background:
 
 	
 Scenario: _0205001 preparation
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create information register Barcodes records
+		When Create catalog Companies objects (own Second company)
+		When Create catalog CashAccounts objects
+		When Create catalog Agreements objects
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	* Add sales tax
+		When Create catalog Taxes objects (Sales tax)
+		When Create information register TaxSettings (Sales tax)
+		When Create information register Taxes records (Sales tax)
+		When add sales tax settings 
 	* Add test plugin
 		* Open form to add plugin
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -3451,41 +3496,8 @@ Scenario: _0205040 add test command to the list of documents Physical Inventory
 
 
 
-Scenario: _010017 command opening contact information in the partner list
-	* Open catalog Partners and select partner
-		Given I open hyperlink "e1cib/list/Catalog.Partners"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso' |
-		And I click "Contact info" button
-	* Check the display of contact information
-		And "IDInfo" table contains lines
-			| 'Type'                       |
-			| 'Location address (Partner)' |
-			| 'GPS Ukraine'                |
-			| 'Partner phone'              |
-	And I close all client application windows
 
 
-Scenario: _010018 check edit contact information from the Edit contact info form
-	* Open catalog Partners and select partner
-		Given I open hyperlink "e1cib/list/Catalog.Partners"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso' |
-		And I click "Contact info" button
-	* Edit contact info
-		And I input "Odessa, Bunina, 2, №33" text in "Value" field of "IDInfo" table
-		And I finish line editing in "IDInfo" table
-		And I click "Save and close" button
-	* Check saving of changed contact information
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso' |
-		And I select current line in "List" table
-		And I move to "Contact information" tab
-		Then the form attribute named "_Adr_1" became equal to "Odessa, Bunina, 2, №33"
-	And I close all client application windows
 
 
 

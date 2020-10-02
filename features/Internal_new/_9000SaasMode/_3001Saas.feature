@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group18
+@Other
 
 Feature: Saas data separation
 
@@ -15,6 +15,6 @@ Background:
 Scenario: _9001001 check the Saas mode constant on and off
     And I set "True" value to the constant "SaasMode"
     And I set "False" value to the constant "SaasMode"
-	And I close all client application windows
+    And I close all client application windows
 
 

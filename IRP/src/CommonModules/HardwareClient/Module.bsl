@@ -129,42 +129,52 @@ Procedure BeginStartAdditionalComand_End(DriverObject, CommandParameters) Export
 	EndIf;	
 EndProcedure
 
-Procedure BeginConnectEquipment(ConnectionNotify) Export	   
-	DriverObject = Undefined;	
-	Device = HardwareServer.GetConnectionSettings(, "BarcodeScanner");
-			
-	ConnectedDevice = GetConnectedDevice(globalEquipments.ConnectionSettings, Device.Hardware);
+Procedure BeginConnectEquipment(HardwareParameters) Export
 	
-	If ConnectedDevice = Undefined Then		
-		ProccessingModule = GetProccessingModule(Device.EquipmentType);		
+	ConnectionNotify = Undefined;
+	HardwareParameters.Property("ConnectionNotify", ConnectionNotify);
+	Workstation = HardwareParameters.Workstation;
+	EquipmentType = HardwareParameters.EquipmentType;
+	Hardwares = HardwareServer.GetWorkstationHardwareByEquipmentType(Workstation, EquipmentType);
+	
+	For Each Hardware In Hardwares Do
+		DriverObject = Undefined;
+		Device = HardwareServer.GetConnectionSettings(Hardware);
 
-		DriverObject = GetDriverObject(Device);
-		OutParameters = Undefined;
-		Result = ProccessingModule.ConnectDevice(DriverObject, Device.ConnectParameters, OutParameters);
-			
-		If OutParameters.Count() >= 2 Then
-			Device.Insert("EventSource", OutParameters[0]);
-			Device.Insert("EventsNames", OutParameters[1]);
+		ConnectedDevice = GetConnectedDevice(globalEquipments.ConnectionSettings, Device.Hardware);
+		If ConnectedDevice = Undefined Then
+			ProccessingModule = GetProccessingModule(Device.EquipmentType);
+
+			DriverObject = GetDriverObject(Device);
+			OutParameters = Undefined;
+			Result = ProccessingModule.ConnectDevice(DriverObject, Device.ConnectParameters, OutParameters);
+
+			If OutParameters.Count() >= 2 Then
+				Device.Insert("EventSource", OutParameters[0]);
+				Device.Insert("EventsNames", OutParameters[1]);
+			Else
+				Device.Insert("EventSource", "");
+				Device.Insert("EventsNames", Undefined);
+			EndIf;
+
+			ConnectParameters = globalEquipments.ConnectionSettings;
+			ConnectParameters.Add(Device);
+
+			If ConnectionNotify <> Undefined Then
+				ErrorDescription = R().Eq_003;
+				ResultData = New Structure("Result, ErrorDescription, ConnectParameters", True, ErrorDescription,
+					Device.ConnectParameters);
+				ExecuteNotifyProcessing(ConnectionNotify, ResultData);
+			EndIf;
 		Else
-			Device.Insert("EventSource", "");
-			Device.Insert("EventsNames", Undefined);
+			If ConnectionNotify <> Undefined Then
+				ErrorDescription = R().Eq_003;
+				ResultData = New Structure("Result, ErrorDescription, ConnectParameters", True, ErrorDescription,
+					ConnectedDevice.ConnectParameters);
+				ExecuteNotifyProcessing(ConnectionNotify, ResultData);
+			EndIf;
 		EndIf;
-
-		ConnectParameters = globalEquipments.ConnectionSettings; 
-		ConnectParameters.Add(Device);
-		
-		If ConnectionNotify <> Undefined Then
-			ErrorDescription = R().Eq_003;
-			ResultData = New Structure("Result, ErrorDescription, ConnectParameters", True, ErrorDescription, Device.ConnectParameters);
-			ExecuteNotifyProcessing(ConnectionNotify, ResultData);
-		EndIf;	
-	Else
-		If ConnectionNotify <> Undefined Then
-			ErrorDescription = R().Eq_003;
-			ResultData = New Structure("Result, ErrorDescription, ConnectParameters", True, ErrorDescription, ConnectedDevice.ConnectParameters);
-			ExecuteNotifyProcessing(ConnectionNotify, ResultData);
-		EndIf;
-	EndIf;
+	EndDo;
 EndProcedure
 
 #EndRegion

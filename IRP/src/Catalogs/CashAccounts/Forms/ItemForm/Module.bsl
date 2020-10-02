@@ -27,6 +27,23 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
 EndProcedure
 
+&AtClient
+Procedure OnOpen(Cancel)
+	CatCashAccountsClient.SetItemsBehavior(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure BeforeWrite(Cancel, WriteParameters)
+	CatCashAccountsClient.BeforeWrite(Object, ThisObject, Cancel, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
+	If ThisObject.CurrencyType = "Fixed" And Not ValueIsFilled(Object.Currency) Then
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_047, "Currency"), "Object.Currency");
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 &AtClient
@@ -51,8 +68,7 @@ Procedure TransitAccountEditTextChange(Item, Text, StandardProcessing)
 	DefaultEditTextParameters = New Structure("Company", Object.Company);
 	EditTextParameters = CatCashAccountsClient.GetDefaultEditTextParameters(DefaultEditTextParameters);
 	Filter = DocumentsClientServer.CreateFilterItem("Type",
-		PredefinedValue("Enum.CashAccountTypes.Transit"),
-		ComparisonType.Equal);
+		PredefinedValue("Enum.CashAccountTypes.Transit"), ComparisonType.Equal);
 	EditTextParameters.Filters.Add(Filter);
 	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
 EndProcedure
@@ -66,23 +82,6 @@ EndProcedure
 Procedure TypeOnChange(Item)
 	CatCashAccountsClient.TypeOnChange(Object, ThisObject, Item);
 	CatCashAccountsClient.SetItemsBehavior(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure OnOpen(Cancel)
-	CatCashAccountsClient.SetItemsBehavior(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure BeforeWrite(Cancel, WriteParameters)
-	CatCashAccountsClient.BeforeWrite(Object, ThisObject, Cancel, WriteParameters);
-EndProcedure
-
-&AtServer
-Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
-	If ThisObject.CurrencyType = "Fixed" And Not ValueIsFilled(Object.Currency) Then
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_047, "Currency"), "Object.Currency");
-	EndIf;
 EndProcedure
 
 #Region AddAttributes

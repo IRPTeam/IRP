@@ -2528,6 +2528,23 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>Account</name>
+      <title>
+        <key>en</key>
+        <value>Account</value>
+      </title>
+      <id>26</id>
+      <valueType>
+        <types>CatalogRef.CashAccounts</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>BankPaymentTypes</name>

@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group5
+@Sales
+
 Feature: create document Sales invoice
 
 As a sales manager
@@ -754,6 +755,16 @@ Scenario: __02404301 clear movements Sales invoice and check that there is no mo
 		And I close all client application windows
 
 
+Scenario: _300505 check connection to Sales invoice report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberSalesInvoice024001$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
 
 

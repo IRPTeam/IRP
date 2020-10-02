@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group3
+@Purchase
 
 Feature: create document an Internal supply request 
 
@@ -15,6 +15,8 @@ Background:
 
 
 Scenario: _016501 preparation
+	* Constants
+			When set True value to the constant
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -37,6 +39,10 @@ Scenario: _016501 preparation
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When Create catalog Taxes objects	
+		When Create catalog TaxRates objects
+		When Create information register CurrencyRates records
+		When Create catalog IntegrationSettings objects
 		* Add plugin for taxes calculation
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			If "List" table does not contain lines Then
@@ -61,17 +67,16 @@ Scenario: _016501 preparation
 					Given I open hyperlink "e1cib/list/Catalog.Taxes"		
 					And I go to line in "List" table
 						| 'Description' |
-						| 'TaxCalculateVAT_TR'         |
+						| 'VAT'         |
 					And I select current line in "List" table
 					And I click Select button of "Plugins" field
 					And I go to line in "List" table
 						| 'Description' |
-						| 'VAT'         |
+						| 'TaxCalculateVAT_TR'         |
 					And I select current line in "List" table
 					And I click "Save and close" button
 				And I close all client application windows
-		* Constants
-			When set True value to the constant
+		
 			
 Scenario: _016501 create document Internal Supply Request
 	* Opening the creation form Internal Supply Request
@@ -369,7 +374,16 @@ Scenario: _0170021 clear movements Internal Supply Request and check that there 
 
 
 
-
+Scenario: _300501 check connection to Internal Supply Request report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberInternalSupplyRequest016501$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
 
 

@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@TestExtDataProc
+@TaxSettings
+@Catalogs
 
 Feature: filling in tax rates
 

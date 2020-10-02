@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group18
+@Other
 
 
 Feature: add items to documents by barcode
@@ -10,6 +10,46 @@ Feature: add items to documents by barcode
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
+Scenario: _300700 preparation (add items to documents by barcode)
+	* Constants
+		When set True value to the constant
+	* Load info
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Partners objects (Kalipso)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+		When Create information register Barcodes records
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
 
 Scenario: _300701 barcode check in Sales order + price and tax filling
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -36,8 +76,8 @@ Scenario: _300706 barcode check in Purchase invoice
 	And I click the button named "FormCreate"
 	And I click Select button of "Partner" field
 	And I go to line in "List" table
-		| Description |
-		| Partner Kalipso     |
+		| 'Description' |
+		| 'Ferron BP'     |
 	And I select current line in "List" table
 	And I click "SearchByBarcode" button
 	And I input "2202283713" text in "InputFld" field
@@ -45,7 +85,7 @@ Scenario: _300706 barcode check in Purchase invoice
 	* Check adding an items and filling in the price in the tabular part
 		And "ItemList" table contains lines
 			| 'Item'  |'Item key' |'Q'     | 'Unit' |
-			| 'Dress TR' |'S/Yellow TR'  |'1,000' | 'adet'  |
+			| 'Dress' |'S/Yellow'  |'1,000' | 'pcs'  |
 	And I close all client application windows
 
 Scenario: _300707 barcode check in Purchase return order

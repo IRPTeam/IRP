@@ -1,8 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Test
-@Group01
+@Catalogs
 
 Feature: filling in catalog Items
 
@@ -269,18 +268,17 @@ Scenario: _005113 filling in the "Item types" catalog
 			And I close all client application windows
 
 
-Scenario: _005114 filling in the settings for creating ItemKeys for Item type Closets and Shoes
+Scenario: _005114 filling in the settings for creating ItemKeys for Item type Coat and Jeans
 # for clothes specify the color, for shoes - season
 # It is indicated through the type of item with duplication in sets
 	* Preparation
-		When Create catalog ItemTypes objects (Clothes, Shoes)
-		When Create chart of characteristic types AddAttributeAndProperty objects (Color, Size, Season)
+		When Create catalog ItemTypes objects (Coat, Jeans)
+		When Create chart of characteristic types AddAttributeAndProperty objects
 	* Opening the form for filling in Item keys settings 
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
-	* Item key creation options for Clothes
 		And I go to line in "List" table
 			| Description      |
-			| Clothes |
+			| Coat |
 		And I select current line in "List" table
 		And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
 		And I click choice button of "Attribute" attribute in "AvailableAttributes" table
@@ -299,16 +297,16 @@ Scenario: _005114 filling in the settings for creating ItemKeys for Item type Cl
 		And I click "Save" button
 		* Check data save
 			Then the form attribute named "Type" became equal to "Product"
-			Then the form attribute named "Description_en" became equal to "Clothes"
+			Then the form attribute named "Description_en" became equal to "Coat"
 			And "AvailableAttributes" table became equal
 				| 'Attribute' | 'Affect pricing' | 'Show in HTML' | 'Required' |
 				| 'Size'      | 'No'             | 'No'           | 'No'       |
 				| 'Color'     | 'No'             | 'No'           | 'No'       |
 		And I click "Save and close" button
-	* Item key creation options for Shoes
+	* Item key creation options for Jeans
 		And I go to line in "List" table
 			| Description      |
-			| Shoes |
+			| Jeans |
 		And I select current line in "List" table
 		And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
 		And I click choice button of "Attribute" attribute in "AvailableAttributes" table
@@ -327,7 +325,7 @@ Scenario: _005114 filling in the settings for creating ItemKeys for Item type Cl
 		And I click "Save" button
 		* Check data save
 			Then the form attribute named "Type" became equal to "Product"
-			Then the form attribute named "Description_en" became equal to "Shoes"
+			Then the form attribute named "Description_en" became equal to "Jeans"
 			And "AvailableAttributes" table became equal
 				| 'Attribute' | 'Affect pricing' | 'Show in HTML' | 'Required' |
 				| 'Size'      | 'No'             | 'No'           | 'No'       |
@@ -336,7 +334,7 @@ Scenario: _005114 filling in the settings for creating ItemKeys for Item type Cl
 		And I close current window
 
 
-Scenario: _005114 adding general additional attributes and properties for catalog Item
+Scenario: _005115 adding general additional attributes and properties for catalog Item
 # AddAttributeAndPropertySets (Catalog_Items)
 	* Preparation
 		When Create catalog InterfaceGroups objects (Purchase and production,  Main information)
@@ -431,11 +429,12 @@ Scenario: _005114 adding general additional attributes and properties for catalo
 
 
 
-Scenario: _005115 filling in the "Items" catalog 
+Scenario: _005116 filling in the "Items" catalog 
 	* Preparation
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Units objects (box (8 pcs))
 		When Create catalog Units objects (pcs)
+		When Create catalog AddAttributeAndPropertyValues objects
 	* Opening the form for creating Items
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I click the button named "FormCreate"
@@ -449,7 +448,7 @@ Scenario: _005115 filling in the "Items" catalog
 		And I click Choice button of the field named "ItemType"
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Clothes'       |
+			| 'Coat'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Unit"
 		And I go to line in "List" table
@@ -475,7 +474,7 @@ Scenario: _005115 filling in the "Items" catalog
 		And I click the button named "FormWrite"
 	* Check data save
 		Then the form attribute named "ItemID" became equal to "AB475590i"
-		Then the form attribute named "ItemType" became equal to "Clothes"
+		Then the form attribute named "ItemType" became equal to "Coat"
 		Then the form attribute named "Unit" became equal to "box (8 pcs)"
 		Then the form attribute named "Vendor" became equal to "Ferron BP"
 		Then the form attribute named "Description_en" became equal to "Bodie"
@@ -483,16 +482,16 @@ Scenario: _005115 filling in the "Items" catalog
 		If "Producer" field is equal to "UNIQ" Then
 		And I click the button named "FormWriteAndClose"
 		And Delay 5
-	* Test item creation Sneakers
+	* Test item creation Jeans
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Sneakers" text in the field named "Description_en"
-		And I input "Sneakers TR" text in the field named "Description_tr"
+		And I input "Jeans" text in the field named "Description_en"
+		And I input "Jeans TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click Choice button of the field named "ItemType"
 		And I go to line in "List" table
 				| 'Description' |
-				| 'Shoes'       |
+				| 'Jeans'       |
 		And I select current line in "List" table
 		And I click Select button of "Unit" field
 		And I go to line in "List" table
@@ -503,16 +502,16 @@ Scenario: _005115 filling in the "Items" catalog
 	* Check Items save
 		And "List" table became equal
 		| 'Description' | 'Item type' |
-		| 'Bodie'       | 'Clothes'   |
-		| 'Sneakers'    | 'Shoes'   |
+		| 'Bodie'       | 'Coat'      |
+		| 'Jeans'       | 'Jeans'     |
 
 
 Scenario: _005117 filling in Item keys
 # Bodie, Shoes
 	Given I open hyperlink "e1cib/list/Catalog.Items"
 	* Preparation
-		When Create catalog AddAttributeAndPropertyValues objects (Color, Size, Season)
-		When Create chart of characteristic types AddAttributeAndProperty objects (Color, Size, Season)
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
 	* Filling in Item keys for Bodie
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
@@ -549,11 +548,11 @@ Scenario: _005117 filling in Item keys
 			| 'XS/Blue'  |
 			| 'M/White'  |
 		And I close current window
-	* Filling in Item keys for Sneakers
+	* Filling in Item keys for Jeans
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Sneakers'       |
+			| 'Jeans'       |
 		And I select current line in "List" table
 		And In this window I click command interface button "Item keys"
 		And I click the button named "FormCreate"
@@ -589,19 +588,19 @@ Scenario: _005117 filling in Item keys
 
 
 
-Scenario: _005119 packaging for Sneakers
+Scenario: _005119 packaging for Jeans
 	* Opening the form for creating Item units
 		Given I open hyperlink "e1cib/list/Catalog.Units"
-	* Create packaging Sneakers box (8 pcs)
+	* Create packaging Jeans box (8 pcs)
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Sneakers box (8 pcs)" text in the field named "Description_en"
-		And I input "Sneakers box (8 adet) TR" text in the field named "Description_tr"
+		And I input "Jeans box (8 pcs)" text in the field named "Description_en"
+		And I input "Jeans box (8 adet) TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click Select button of "Item" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Sneakers'  |
+			| 'Jeans'  |
 		And I select current line in "List" table
 		And I click Select button of "Basis unit" field
 		And I go to line in "List" table
@@ -630,16 +629,16 @@ Scenario: _005119 packaging for Sneakers
 		And I click "Save and close" button
 	And I close current window
 
-Scenario: _005120 set Closets/Shoes specification creation
+Scenario: _005120 set Coat/Jeans specification creation
 # Set is a dimensional grid, set to the type of item
-	* Create a specification for Clothes
+	* Create a specification for Coat
 		Given I open hyperlink "e1cib/list/Catalog.Specifications"
 		And I click the button named "FormCreate"
 		And I change "Type" radio button value to "Set"
 		And I click Select button of "Item type" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Clothes'     |
+			| 'Coat'     |
 		And I select current line in "List" table
 		And in the table "FormTable*" I click "Add" button
 		And I click choice button of "Size" attribute in "FormTable*" table
@@ -706,14 +705,14 @@ Scenario: _005120 set Closets/Shoes specification creation
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10
-	* Create a specification for Shoes
+	* Create a specification for Jeans
 		Given I open hyperlink "e1cib/list/Catalog.Specifications"
 		And I click the button named "FormCreate"
 		And I change "Type" radio button value to "Set"
 		And I click Select button of "Item type" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Shoes'       |
+			| 'Jeans'       |
 		And I select current line in "List" table
 		And in the table "FormTable*" I click "Add" button
 		And I click choice button of "Size" attribute in "FormTable*" table
@@ -790,7 +789,7 @@ Scenario: _005121 filling item key according to specification for set
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
 			| 'Description' | 'Item type' |
-			| 'Bodie'       | 'Clothes'   |
+			| 'Bodie'       | 'Coat'   |
 		And I select current line in "List" table
 	* Creating for Bodie a new item key for the specification
 		And In this window I click command interface button "Item keys"
@@ -810,11 +809,11 @@ Scenario: _005121 filling item key according to specification for set
 			| 'Item key'   |
 			| 'Bodie/A-8'  |
 		And I close current window
-	* Opening the Boots element in the Items catalog
+	* Opening the Jeans element in the Items catalog
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
 			| 'Description'    | 'Item type' |
-			| 'Sneakers'       | 'Shoes'   |
+			| 'Jeans'          | 'Jeans'   |
 		And I select current line in "List" table
 	* Creating for Boots a new item key for the specification
 		And In this window I click command interface button "Item keys"
@@ -832,5 +831,5 @@ Scenario: _005121 filling item key according to specification for set
 		And Delay 5
 		And "List" table contains lines
 			| 'Item key'   |
-			| 'Sneakers/S-8'  |
+			| 'Jeans/S-8'  |
 		And I close current window

@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-
+@Catalogs
 
 Feature: filling in customer contact information
 
@@ -123,6 +123,8 @@ Scenario: _010006 create a structure of partners (partners), 1 main partner and 
 		And I click "Save and close" button
 		And Delay 5
 	* Structure check
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click "Hierarchical list" button
 		And "List" table does not contain lines
 			| 'Description' |

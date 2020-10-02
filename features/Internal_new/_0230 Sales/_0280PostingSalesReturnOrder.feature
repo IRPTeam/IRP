@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group5
+@Sales
+
 Feature: create document Sales return order
 
 As a sales manager
@@ -181,7 +182,7 @@ Scenario: _028012 check totals in the document Sales return order
 	* Select Sales return
 		And I go to line in "List" table
 		| 'Number' |
-		| '$$SalesReturnOrder028001$$'      |
+		| '$$NumberSalesReturnOrder028001$$'      |
 		And I select current line in "List" table
 	* Check totals in the document Sales return order
 		Then the form attribute named "ItemListTotalNetAmount" became equal to "466,10"
@@ -279,3 +280,14 @@ Scenario: _02801301 clear movements Sales Return Order and check that there is n
 		| ''                               | 'Receipt'     | '*'         | '1'         | 'Store 02'   | '$$SalesReturnOrder028001$$' | 'L/Green'      | '*'                | ''         | ''         | ''        | ''                             | ''                  | ''                     |
 		And I close all client application windows
 
+
+Scenario: _300510 check connection to SalesReturnOrder report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberSalesReturnOrder028001$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows

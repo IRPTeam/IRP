@@ -29,6 +29,7 @@ Scenario: _005023 filling in the "Partner segments content" catalog
 		And I input "Дистрибьюция" text in the field named "Description_ru"
 		And I click "Ok" button
 		And I click the button named "FormWriteAndClose"
+		And Delay 5
 	* Check for created Partner segments content
 		Then I check for the "PartnerSegments" catalog element with the "Description_tr" "Distribution TR"
 		Then I check for the "PartnerSegments" catalog element with the "Description_en" "Distribution" 

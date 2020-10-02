@@ -43,5 +43,6 @@ Scenario: _005047 filling in Expense type
 	* Check creation Expense type
 		Then I check for the "ExpenseAndRevenueTypes" catalog element with the "Description_en" "Rent"
 		Then I check for the "ExpenseAndRevenueTypes" catalog element with the "Description_tr" "Rent TR"
+		And Delay 5
 		Then I check for the "ExpenseAndRevenueTypes" catalog element with the "Description_ru" "Аренда"
 		Then I check for the "ExpenseAndRevenueTypes" catalog element with the "Description_en" "Delivery"

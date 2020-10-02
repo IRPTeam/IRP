@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group15
+@OpeningEntries
 
 Feature: check opening entry
 

@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group17
+@DocumentVerification
 
 Feature: test filling-in SO - SI
 
@@ -12,9 +12,9 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-Scenario: _29700101 preparation
+
 	
-Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipment confirmation)
+Scenario: _29700101 preparation (test filling-in SO - SI)
 	* Constants
 		When set True value to the constant
 	* Load info
@@ -155,8 +155,8 @@ Scenario: _29700102 test filling-in SO - SI - SC by quantity
 				// Then "1C:Enterprise" window is opened
 				// And I click "Yes" button
 				// And I input "2970" text in "Number" field
-				And I save the value of "Number" field as "$$NumberSalesOrder29700102$$"
-				And I save the window as "$$SalesOrder29700102$$"
+				And I save the value of "Number" field as "$$NumberSalesInvoice29700102$$"
+				And I save the window as "$$SalesInvoice29700102$$"
 				And I click "Post and close" button
 				And I close all client application windows
 	
@@ -166,7 +166,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
 		| 'Number' | 'Partner' |
-		| '$$NumberSalesOrder29700102$$'  | 'Foxred'  |
+		| '$$NumberSalesOrder29700101$$'  | 'Foxred'  |
 		And I select current line in "List" table
 		And I click "Clear posting" button
 		Then "1C:Enterprise" window is opened
@@ -305,13 +305,13 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 			And I go to line in "List" table
 			| 'Number' | 'Partner' |
-			| '2 970'  | 'Foxred'  |
+			| '$$NumberSalesInvoice29700102$$'  | 'Foxred'  |
 		* Create SC
 			And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
 			And "ItemList" table contains lines
 			| 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Store'    | 'Shipment basis'       |
-			| 'Dress' | '8,000'    | 'M/White'  | 'pcs'  | 'Store 02' | '$$SalesInvoice29700103$$' |
-			| 'Dress' | '20,000'   | 'L/Green'  | 'pcs'  | 'Store 02' | '$$SalesInvoice29700103$$' |
+			| 'Dress' | '8,000'    | 'M/White'  | 'pcs'  | 'Store 02' | '$$SalesInvoice29700102$$' |
+			| 'Dress' | '20,000'   | 'L/Green'  | 'pcs'  | 'Store 02' | '$$SalesInvoice29700102$$' |
 		// * Change of document number
 		// 	And I move to "Other" tab
 		// 	And I input "0" text in "Number" field
@@ -319,8 +319,8 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 		// 	And I click "Yes" button
 		// 	And I input "2 970" text in "Number" field
 			And I click "Post" button
-			And I save the value of "Number" field as "$$NumberSalesInvoice29700103$$"
-			And I save the window as "$$SalesInvoice29700103$$"
+			And I save the value of "Number" field as "$$NumberShipmentConfirmation29700103$$"
+			And I save the window as "$$ShipmentConfirmation29700103$$"
 		* Change the quantity by more than SI
 			And I move to "Items" tab
 			And I go to line in "ItemList" table
@@ -389,12 +389,12 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 			And I go to line in "List" table
 				| 'Number' | 'Partner' |
-				| '$$NumberSalesInvoice29700103$$'  | 'Foxred'  |
+				| '$$NumberSalesInvoice29700102$$'  | 'Foxred'  |
 			And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
 			And "ItemList" table contains lines
 				| 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Store'    | 'Shipment basis'       |
-				| 'Dress' | '8,000'    | 'M/White'  | 'pcs'  | 'Store 02' | '$$SalesInvoice29700103$$' |
-				| 'Dress' | '1,000'    | 'L/Green'  | 'pcs'  | 'Store 02' | '$$SalesInvoice29700103$$' |
+				| 'Dress' | '8,000'    | 'M/White'  | 'pcs'  | 'Store 02' | '$$SalesInvoice29700102$$' |
+				| 'Dress' | '1,000'    | 'L/Green'  | 'pcs'  | 'Store 02' | '$$SalesInvoice29700102$$' |
 			And I click "Post" button
 			Then user message window does not contain messages
 		* Change by more than the SI balance (already created by SC) and try to post
@@ -422,7 +422,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 			And I go to line in "List" table
 				| 'Number' | 'Partner' |
-				| '2 970'  | 'Foxred'  |
+				| '$$NumberSalesInvoice29700102$$'  | 'Foxred'  |
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button

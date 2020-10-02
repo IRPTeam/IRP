@@ -2,7 +2,7 @@
 @Positive
 @Discount
 @SpecialOffersMinimum
-@Group8
+
 
 Feature: calculation of discounts in a group Minimum (type joings Minimum, Special Offers MaxInRow)
 

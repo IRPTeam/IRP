@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group5
+@Sales
+
 Feature: create document Sales return
 
 As a procurement manager
@@ -432,3 +433,14 @@ Scenario: _028534 check totals in the document Sales return
 		Then the form attribute named "ItemListTotalTotalAmount" became equal to "550,00"
 
 
+
+Scenario: _300511 check connection to SalesReturn report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberSalesReturn028508$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows

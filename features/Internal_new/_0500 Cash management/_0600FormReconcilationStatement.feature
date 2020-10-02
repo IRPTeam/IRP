@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group9
+@CashManagement
+
 Feature: form Reconcilation statement
 
 As an accountant

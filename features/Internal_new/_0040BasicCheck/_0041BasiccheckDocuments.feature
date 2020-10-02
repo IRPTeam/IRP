@@ -1,8 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Test
-@DocumentForms
+@BasicFormsCheck
 
 Feature: basic check documents
 As an QA

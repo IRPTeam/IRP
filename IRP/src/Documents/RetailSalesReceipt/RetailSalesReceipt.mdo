@@ -28,11 +28,23 @@
     <valueField>Document.RetailSalesReceipt.TabularSection.Currencies.Attribute.Amount</valueField>
   </characteristics>
   <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_RetailSalesReceipt</value>
+    </typesFilterValue>
+    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  </characteristics>
+  <characteristics>
     <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
     <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
     <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
     <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_SalesInvoice</value>
+      <value>Catalog.AddAttributeAndPropertySets.Document_RetailSalesReceipt</value>
     </typesFilterValue>
     <characteristicValues>Document.RetailSalesReceipt.TabularSection.AddAttributes</characteristicValues>
     <objectField>Document.RetailSalesReceipt.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
@@ -392,6 +404,7 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="cd419ac6-9140-4804-9a73-d33ac6a4411e">
@@ -405,6 +418,7 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="03422b0f-f3b1-421a-b5a4-994ce8384770">

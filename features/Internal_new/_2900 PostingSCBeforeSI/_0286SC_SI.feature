@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group15
+@Sales
+
 Feature: sales Shipment confirmation - Sales invoice
 
 As a sales manager

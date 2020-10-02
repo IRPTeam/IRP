@@ -1,8 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Test
-@CatalogForms
+@BasicFormsCheck
 
 Feature: basic check catalogs
 

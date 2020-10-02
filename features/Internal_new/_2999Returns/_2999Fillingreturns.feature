@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group17
+@FillingDocuments
 
 Feature: check filling in and re-filling returns
 
@@ -160,7 +160,6 @@ Scenario: _299901 check filling in and re-filling Sales return order
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
 		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
@@ -273,11 +272,11 @@ Scenario: _299902 check filling in and re-filling Sales return
 		* Check store overfill in the added string
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
-				| 'Trousers' | '500,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
+				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
 	* Check the re-drawing of the form for taxes at company re-selection.
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '500,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 01' |
+			| '400,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 01' |
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -289,7 +288,6 @@ Scenario: _299902 check filling in and re-filling Sales return
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
 		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
@@ -345,6 +343,7 @@ Scenario: _299903 check filling in and re-filling Purchase return order
 	* Check clearing legal name, Partner term when re-selecting a partner
 		* Re-select partner
 			And I click Select button of "Partner" field
+			And I click "List" button			
 			And I go to line in "List" table
 				| 'Description' |
 				| 'Partner Kalipso'     |
@@ -401,11 +400,11 @@ Scenario: _299903 check filling in and re-filling Purchase return order
 		* Check store overfill in the added string
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
-				| 'Trousers' | '500,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
+				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
 	* Check the re-drawing of the form for taxes at company re-selection.
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '500,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 03' |
+			| '400,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 03' |
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -417,7 +416,6 @@ Scenario: _299903 check filling in and re-filling Purchase return order
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
 		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
@@ -529,11 +527,11 @@ Scenario: _299904 check filling in and re-filling Purchase return
 		* Check store overfill in the added string
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
-				| 'Trousers' | '500,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
+				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
 	* Check the re-drawing of the form for taxes at company re-selection.
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '500,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 03' |
+			| '400,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 03' |
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -545,7 +543,6 @@ Scenario: _299904 check filling in and re-filling Purchase return
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I delete a line in "ItemList" table
-		And I move to "Tax list" tab
 		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |

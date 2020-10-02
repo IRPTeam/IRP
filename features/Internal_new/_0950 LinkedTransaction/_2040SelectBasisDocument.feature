@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group13
+@LinkedTransaction
+
 Feature: buttons for selecting base documents
 
 

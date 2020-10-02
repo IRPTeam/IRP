@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group12
+@Filters
+
 Feature: check the display of lists of catalogs elements for which there are selections
 
 

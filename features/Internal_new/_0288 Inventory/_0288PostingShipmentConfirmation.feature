@@ -1,7 +1,10 @@
 ﻿#language: en
 @tree
 @Positive
-@Group7
+@Inventory
+
+
+
 Feature: create Shipment confirmation
 
 
@@ -352,3 +355,13 @@ Scenario: _02881101 clear movements Shipment confirmation and check that there i
 		And I close all client application windows
 
 
+Scenario: _300506 check connection to Shipment Confirmation report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberShipmentConfirmation0028801$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows

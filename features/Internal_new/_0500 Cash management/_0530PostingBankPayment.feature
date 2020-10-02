@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group9
+@CashManagement
+
 Feature: create Bank payment
 
 
@@ -533,3 +534,15 @@ Scenario: _053015 check the display of details on the form Bank payment with the
 		And "PaymentList" table contains lines
 			| '#' | 'Amount' | 'Planning transaction basis' |
 			| '1' | '100,00' | ''                          |
+
+
+Scenario: _300514 check connection to BankPayment report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.BankPayment"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberBankPayment0530011$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows

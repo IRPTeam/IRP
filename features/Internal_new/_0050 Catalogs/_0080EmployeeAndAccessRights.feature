@@ -1,7 +1,6 @@
 ﻿#language: en
 @tree
 @Positive
-@Group01
 @Catalogs
 
 

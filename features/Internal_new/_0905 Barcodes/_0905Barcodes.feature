@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group10
+@Barcodes
 
 Feature: barcode management
 

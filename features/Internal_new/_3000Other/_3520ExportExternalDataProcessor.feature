@@ -2,6 +2,7 @@
 @tree
 @Positive
 @IgnoreOnCIMainBuild
+@Other
 Feature: check saving of plugin to a folder on the computer
 
 
@@ -15,8 +16,8 @@ Scenario: check saving of plugin to a folder on the computer
         Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
         And I click the button named "FormCreate"
         And I input "ExternalSpecialMessage" text in "Name" field
-        And I input "ExternalTest" text in the field named "Description_tr"
-        And I select external file "C:\Users\Severnity\Desktop\ExtDataProc\TaxCalculateVAT_TR.epf"
+        And I input "ExternalTest" text in the field named "Description_en"
+        And I select external file "#workingDir#\DataProcessor\TaxCalculateVAT_TR.epf"
         And I click the button named "FormAddExtDataProc"
         And I input "" text in "Path to plugin for test" field
         And I click "Save" button

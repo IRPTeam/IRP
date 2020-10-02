@@ -563,8 +563,7 @@ foreach ($elementTag in $TagArray) {
 
   $b = $a | ConvertTo-Json -depth 32
   $b | set-content %system.teamcity.build.workingDir%/va$elementTag.json
-  Write-Output "##teamcity[compilationStarted compiler='VA settings']"
-  Write-Output "$b"
+  #Write-Output "$b"
   Write-Output "##teamcity[compilationFinished compiler='VA settings']"
 
   #####################################################################################

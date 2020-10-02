@@ -61,9 +61,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.OrderReservation = QueryResult[2].Unload();
 	Tables.StockReservation = QueryResult[3].Unload();
 	Tables.InventoryBalance = QueryResult[4].Unload();
-	
-	//Tables.SalesTurnovers = QueryResult[5].Unload();
-	
+		
 	Tables.GoodsInTransitOutgoing = QueryResult[5].Unload();
 	Tables.StockBalance = QueryResult[6].Unload();
 	Tables.ShipmentOrders = QueryResult[7].Unload();
@@ -165,18 +163,37 @@ EndFunction
 Function GetQueryTextSalesInvoiceItemList()
 	Return
 		"SELECT
-		|	SalesInvoiceItemList.Ref.Company AS Company,
-		|	SalesInvoiceItemList.Store AS Store,
-		|	SalesInvoiceItemList.ShipmentConfirmation AS ShipmentConfirmation,
-		|	CASE
-		|		WHEN SalesInvoiceItemList.ShipmentConfirmation.Date IS NULL
+		|	MAX(CASE
+		|		WHEN ShipmentConfirmations.ShipmentConfirmation IS NULL
 		|			THEN FALSE
 		|		ELSE TRUE
-		|	END AS ShipmentConfirmationBeforeSalesInvoice,
+		|	END) AS ShipmentConfirmationBeforeSalesInvoice,
+		|	SalesInvoiceItemList.Ref AS Ref,
+		|	SalesInvoiceItemList.Key AS Key
+		|INTO tmp_ShipmentConfirmations
+		|FROM
+		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
+		|		LEFT JOIN Document.SalesInvoice.ShipmentConfirmations AS ShipmentConfirmations
+		|		ON SalesInvoiceItemList.Ref = ShipmentConfirmations.Ref
+		|		AND SalesInvoiceItemList.Key = ShipmentConfirmations.Key
+		|		AND SalesInvoiceItemList.Ref = &Ref
+		|		AND ShipmentConfirmations.Ref = &Ref
+		|WHERE
+		|	SalesInvoiceItemList.Ref = &Ref
+		|GROUP BY
+		|	SalesInvoiceItemList.Ref,
+		|	SalesInvoiceItemList.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	SalesInvoiceItemList.Ref.Company AS Company,
+		|	SalesInvoiceItemList.Store AS Store,
+		|	ShipmentConfirmations.ShipmentConfirmationBeforeSalesInvoice AS ShipmentConfirmationBeforeSalesInvoice,
 		|	SalesInvoiceItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
 		|	SalesInvoiceItemList.ItemKey AS ItemKey,
-		|	SUM(SalesInvoiceItemList.Quantity) AS Quantity,
-		|	SUM(SalesInvoiceItemList.TotalAmount) AS TotalAmount,
+		|	SalesInvoiceItemList.Quantity AS Quantity,
+		|	SalesInvoiceItemList.TotalAmount AS TotalAmount,
 		|	SalesInvoiceItemList.Ref.Partner AS Partner,
 		|	SalesInvoiceItemList.Ref.LegalName AS LegalName,
 		|	CASE
@@ -216,61 +233,17 @@ Function GetQueryTextSalesInvoiceItemList()
 		|			THEN SalesInvoiceItemList.Ref
 		|		ELSE UNDEFINED
 		|	END AS BasisDocument,
-		|	SUM(SalesInvoiceItemList.NetAmount) AS NetAmount,
-		|	SUM(SalesInvoiceItemList.OffersAmount) AS OffersAmount
+		|	SalesInvoiceItemList.NetAmount AS NetAmount,
+		|	SalesInvoiceItemList.OffersAmount AS OffersAmount
 		|FROM
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
+		|		LEFT JOIN tmp_ShipmentConfirmations AS ShipmentConfirmations
+		|		ON SalesInvoiceItemList.Ref = ShipmentConfirmations.Ref
+		|		AND SalesInvoiceItemList.Key = ShipmentConfirmations.Key
+		|		AND SalesInvoiceItemList.Ref = &Ref
+		|		AND ShipmentConfirmations.Ref = &Ref
 		|WHERE
-		|	SalesInvoiceItemList.Ref = &Ref
-		|GROUP BY
-		|	SalesInvoiceItemList.Ref.Company,
-		|	SalesInvoiceItemList.Store,
-		|	SalesInvoiceItemList.ShipmentConfirmation,
-		|	CASE
-		|		WHEN SalesInvoiceItemList.ShipmentConfirmation.Date IS NULL
-		|			THEN FALSE
-		|		ELSE TRUE
-		|	END,
-		|	SalesInvoiceItemList.Store.UseShipmentConfirmation,
-		|	SalesInvoiceItemList.ItemKey,
-		|	SalesInvoiceItemList.Ref.Partner,
-		|	SalesInvoiceItemList.Ref.LegalName,
-		|	CASE
-		|		WHEN SalesInvoiceItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-		|		AND SalesInvoiceItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-		|			THEN SalesInvoiceItemList.Ref.Agreement.StandardAgreement
-		|		ELSE SalesInvoiceItemList.Ref.Agreement
-		|	END,
-		|	SalesInvoiceItemList.Ref.Currency,
-		|	SalesInvoiceItemList.Unit,
-		|	SalesInvoiceItemList.ItemKey.Item.Unit,
-		|	SalesInvoiceItemList.ItemKey.Unit,
-		|	SalesInvoiceItemList.ItemKey.Item,
-		|	SalesInvoiceItemList.Ref.Date,
-		|	SalesInvoiceItemList.SalesOrder,
-		|	CASE
-		|		WHEN SalesInvoiceItemList.SalesOrder.Date IS NULL
-		|			THEN FALSE
-		|		ELSE TRUE
-		|	END,
-		|	SalesInvoiceItemList.Ref,
-		|	SalesInvoiceItemList.Key,
-		|	SalesInvoiceItemList.Ref.IsOpeningEntry,
-		|	SalesInvoiceItemList.DeliveryDate,
-		|	CASE
-		|		WHEN SalesInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
-		|			THEN TRUE
-		|		ELSE FALSE
-		|	END,
-		|	SalesInvoiceItemList.BusinessUnit,
-		|	SalesInvoiceItemList.RevenueType,
-		|	CASE
-		|		WHEN SalesInvoiceItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			THEN SalesInvoiceItemList.Ref
-		|		ELSE UNDEFINED
-		|	END,
-		|	SalesInvoiceItemList.AdditionalAnalytic";
-
+		|	SalesInvoiceItemList.Ref = &Ref";
 EndFunction
 
 Function GetQueryTextSalesInvoiceTaxList()
@@ -303,7 +276,6 @@ Function GetQueryTextQueryTable()
 		"SELECT
 		|	QueryTable.Company AS Company,
 		|	QueryTable.Store AS Store,
-		|	QueryTable.ShipmentConfirmation AS ShipmentConfirmation,
 		|	QueryTable.ShipmentConfirmationBeforeSalesInvoice AS ShipmentConfirmationBeforeSalesInvoice,
 		|	QueryTable.UseShipmentConfirmation AS UseShipmentConfirmation,
 		|	QueryTable.ItemKey AS ItemKey,
@@ -327,7 +299,8 @@ Function GetQueryTextQueryTable()
 		|	QueryTable.NetAmount AS NetAmount,
 		|	QueryTable.OffersAmount AS OffersAmount,
 		|	QueryTable.IsService AS IsService,
-		|	QueryTable.BasisDocument AS BasisDocument
+		|	QueryTable.BasisDocument AS BasisDocument,
+		|	QueryTable.RowKeyUUID AS RowKeyUUID
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable
@@ -338,7 +311,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Company AS Company,
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Period AS Period,
 		|	tmp.SalesOrder AS Order,
 		|	tmp.RowKey AS RowKey
@@ -348,13 +321,6 @@ Function GetQueryTextQueryTable()
 		|	tmp.SalesOrder <> VALUE(Document.SalesOrder.EmptyRef)
 		|	AND
 		|	NOT tmp.IsOpeningEntry
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Period,
-		|	tmp.SalesOrder,
-		|	tmp.RowKey
 		|;
 		|
 		|//[2]//////////////////////////////////////////////////////////////////////////////
@@ -423,46 +389,27 @@ Function GetQueryTextQueryTable()
 		|	tmp.ItemKey
 		|;
 		|
-//		|//[5]//////////////////////////////////////////////////////////////////////////////
-//		|SELECT
-//		|	tmp.Company AS Company,
-//		|	tmp.Currency AS Currency,
-//		|	tmp.ItemKey AS ItemKey,
-//		|	SUM(tmp.Quantity) AS Quantity,
-//		|	tmp.Period AS Period,
-//		|	tmp.SalesInvoice AS SalesInvoice,
-//		|	SUM(tmp.Amount) AS Amount,
-//		|	SUM(tmp.NetAmount) AS NetAmount,
-//		|	SUM(tmp.OffersAmount) AS OffersAmount,
-//		|	tmp.RowKey AS RowKey
-//		|FROM
-//		|	tmp AS tmp
-//		|GROUP BY
-//		|	tmp.Period,
-//		|	tmp.Company,
-//		|	tmp.Currency,
-//		|	tmp.ItemKey,
-//		|	tmp.SalesInvoice,
-//		|	tmp.RowKey
-//		|;
 		|
 		|//[5]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	ISNULL(ShipmentConfirmations.Quantity,0) AS Quantity,
 		|	tmp.Period AS Period,
 		|	CASE
 		|		WHEN tmp.ShipmentConfirmationBeforeSalesInvoice
 		|		AND
 		|		NOT tmp.UseSalesOrder
-		|			THEN tmp.ShipmentConfirmation
+		|			THEN ISNULL(ShipmentConfirmations.ShipmentConfirmation, VALUE(Document.ShipmentConfirmation.EmptyRef))
 		|		ELSE tmp.ShipmentBasis
 		|	END AS ShipmentBasis,
 		|	tmp.RowKey AS RowKey
 		|FROM
 		|	tmp AS tmp
+		|	LEFT JOIN Document.SalesInvoice.ShipmentConfirmations AS ShipmentConfirmations
+		|	ON tmp.RowKeyUUID = ShipmentConfirmations.Key
+		|	AND tmp.SalesInvoice = ShipmentConfirmations.Ref
 		|WHERE
 		|	tmp.UseShipmentConfirmation
 		|	AND (NOT tmp.ShipmentConfirmationBeforeSalesInvoice
@@ -470,19 +417,6 @@ Function GetQueryTextQueryTable()
 		|	NOT tmp.UseSalesOrder)
 		|	AND
 		|	NOT tmp.IsService
-		|GROUP BY
-		|	tmp.Period,
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	CASE
-		|		WHEN tmp.ShipmentConfirmationBeforeSalesInvoice
-		|		AND
-		|		NOT tmp.UseSalesOrder
-		|			THEN tmp.ShipmentConfirmation
-		|		ELSE tmp.ShipmentBasis
-		|	END,
-		|	tmp.RowKey
 		|;
 		|
 		|//[6]//////////////////////////////////////////////////////////////////////////////
@@ -508,28 +442,24 @@ Function GetQueryTextQueryTable()
 		|	tmp.Store,
 		|	tmp.ItemKey
 		|;
-		|
 		|//[7]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.SalesOrder AS Order,
-		|	tmp.ShipmentConfirmation AS ShipmentConfirmation,
+		|	ISNULL(ShipmentConfirmations.ShipmentConfirmation, VALUE(Document.ShipmentConfirmation.EmptyRef)) AS ShipmentConfirmation,
 		|	tmp.ItemKey AS ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	ISNULL(ShipmentConfirmations.Quantity, 0) AS Quantity,
 		|	tmp.Period AS Period,
 		|	tmp.RowKey AS RowKey
 		|FROM
 		|	tmp AS tmp
+		|	LEFT JOIN Document.SalesInvoice.ShipmentConfirmations AS ShipmentConfirmations
+		|	ON tmp.RowKeyUUID = ShipmentConfirmations.Key
+		|	AND tmp.SalesInvoice = ShipmentConfirmations.Ref
 		|WHERE
 		|	tmp.ShipmentConfirmationBeforeSalesInvoice
 		|	AND
 		|	NOT tmp.IsOpeningEntry
 		|	AND tmp.UseSalesOrder
-		|GROUP BY
-		|	tmp.SalesOrder,
-		|	tmp.Period,
-		|	tmp.ShipmentConfirmation,
-		|	tmp.ItemKey,
-		|	tmp.RowKey
 		|;
 		|
 		|//[8]//////////////////////////////////////////////////////////////////////////////
@@ -587,7 +517,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	tmp.RowKey AS RowKey,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Period AS Period,
 		|	tmp.Period AS DeliveryDate
 		|FROM
@@ -605,14 +535,6 @@ Function GetQueryTextQueryTable()
 		|		AND
 		|		NOT tmp.IsOpeningEntry
 		|		AND ShipmentConfirmationSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.SalesOrder,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.RowKey,
-		|	tmp.Period,
-		|	tmp.Period
 		|
 		|UNION ALL
 		|
@@ -622,7 +544,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	tmp.RowKey,
-		|	SUM(tmp.Quantity),
+		|	tmp.Quantity,
 		|	tmp.Period,
 		|	ShipmentConfirmationSchedule.DeliveryDate
 		|FROM
@@ -639,14 +561,6 @@ Function GetQueryTextQueryTable()
 		|		AND
 		|		NOT tmp.IsOpeningEntry
 		|		AND ShipmentConfirmationSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.SalesOrder,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.RowKey,
-		|	tmp.Period,
-		|	ShipmentConfirmationSchedule.DeliveryDate
 		|
 		|UNION ALL
 		|
@@ -656,7 +570,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	tmp.RowKey,
-		|	SUM(tmp.Quantity),
+		|	tmp.Quantity,
 		|	tmp.Period,
 		|	tmp.Period
 		|FROM
@@ -670,15 +584,6 @@ Function GetQueryTextQueryTable()
 		|	AND
 		|	NOT tmp.UseSalesOrder
 		|	AND tmp.DeliveryDate <> DATETIME(1, 1, 1)
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.SalesInvoice,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.RowKey,
-		|	tmp.Period,
-		|	tmp.DeliveryDate,
-		|	tmp.Period
 		|;
 		|
 		|//[11]//////////////////////////////////////////////////////////////////////////////
@@ -688,7 +593,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	tmp.RowKey AS RowKey,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Period AS Period,
 		|	tmp.DeliveryDate AS DeliveryDate
 		|FROM
@@ -700,14 +605,6 @@ Function GetQueryTextQueryTable()
 		|	AND
 		|	NOT tmp.UseSalesOrder
 		|	AND tmp.DeliveryDate <> DATETIME(1, 1, 1)
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.SalesInvoice,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.RowKey,
-		|	tmp.Period,
-		|	tmp.DeliveryDate
 		|
 		|UNION ALL
 		|
@@ -717,7 +614,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	tmp.RowKey,
-		|	SUM(tmp.Quantity),
+		|	tmp.Quantity,
 		|	tmp.Period,
 		|	tmp.DeliveryDate
 		|FROM
@@ -734,14 +631,6 @@ Function GetQueryTextQueryTable()
 		|		AND
 		|		NOT tmp.IsOpeningEntry
 		|		AND ShipmentConfirmationSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.SalesOrder,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.RowKey,
-		|	tmp.Period,
-		|	tmp.DeliveryDate
 		|;
 		|
 		|//[12]//////////////////////////////////////////////////////////////////////////////

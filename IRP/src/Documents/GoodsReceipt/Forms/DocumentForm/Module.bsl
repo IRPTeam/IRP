@@ -259,6 +259,11 @@ Procedure OpenPickupItems(Command)
 	DocGoodsReceiptClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure
 
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
 #EndRegion
 
 &AtServer
@@ -294,3 +299,4 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
+

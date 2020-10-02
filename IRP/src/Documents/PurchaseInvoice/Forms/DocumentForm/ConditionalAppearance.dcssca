@@ -123,7 +123,7 @@
 			</dcscor:item>
 			<dcscor:item xsi:type="SettingsParameterValue">
 				<dcscor:parameter>Font</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Font" ref="sys:DefaultGUIFont" height="10" bold="true" italic="false" underline="false" strikeout="false" kind="WindowsFont"/>
+				<dcscor:value xsi:type="v8ui:Font" faceName="MS Shell Dlg" height="10" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 			</dcscor:item>
 		</appearance>
 	</item>
@@ -163,7 +163,7 @@
 			</dcscor:item>
 			<dcscor:item xsi:type="SettingsParameterValue">
 				<dcscor:parameter>Font</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Font" ref="sys:DefaultGUIFont" height="10" bold="true" italic="false" underline="false" strikeout="false" kind="WindowsFont"/>
+				<dcscor:value xsi:type="v8ui:Font" faceName="MS Shell Dlg" height="10" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 			</dcscor:item>
 		</appearance>
 	</item>

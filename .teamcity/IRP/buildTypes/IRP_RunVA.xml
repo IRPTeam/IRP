@@ -241,7 +241,7 @@ foreach ($elementTag in $a) {
   $TemplateBD = "'/F%system.teamcity.build.workingDir%\TempDB'" | ForEach-Object { $_ -replace '\\', '/' }
   
   $TempBD = "'/F%system.teamcity.build.workingDir%\$elementTag'" | ForEach-Object { $_ -replace '\\', '/' } 
-  New-Item -ItemType "directory" -Path $TempBD
+  New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\$elementTag"
   Copy-Item -Path "%system.teamcity.build.workingDir%\TempDB\1Cv8.1CD" -Destination "%system.teamcity.build.workingDir%\$elementTag\1Cv8.1CD"
   
   #$TempDb = "'/Slocalhost/%env.Database1CName%'" | ForEach-Object { $_ -replace '\\', '/' }

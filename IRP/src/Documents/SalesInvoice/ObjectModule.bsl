@@ -51,6 +51,10 @@ Procedure Filling_BasedOnShipmentConfirmation(FillingData)
 		NewRow = ThisObject.ItemList.Add();
 		FillPropertyValues(NewRow, Row);
 	EndDo;
+	For Each Row In FillingData.ShipmentConfirmations Do
+		NewRow = ThisObject.ShipmentConfirmations.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
 EndProcedure
 
 Procedure OnCopy(CopiedObject)

@@ -35,7 +35,7 @@ Scenario: _005022 filling in the "Partners" catalog
 		And I set checkbox named "Vendor"
 		And I click the button named "FormWrite"
 		* Check data save
-			Then the form attribute named "Description_en" became equal to "Ferron BP"
+			Then the form attribute named "Description_en" became equal to "Ferron1 BP"
 			Then the form attribute named "Customer" became equal to "Yes"
 			Then the form attribute named "Vendor" became equal to "Yes"
 			Then the form attribute named "Employee" became equal to "No"
@@ -49,7 +49,7 @@ Scenario: _005022 filling in the "Partners" catalog
 		And I set checkbox named "Customer"
 		And I click the button named "FormWrite"
 		* Check data save
-			Then the form attribute named "Description_en" became equal to "Kalipso"
+			Then the form attribute named "Description_en" became equal to "Kalipso1"
 			Then the form attribute named "Customer" became equal to "Yes"
 			Then the form attribute named "Vendor" became equal to "No"
 			Then the form attribute named "Employee" became equal to "No"
@@ -82,8 +82,8 @@ Scenario: _005022 filling in the "Partners" catalog
 			Then the form attribute named "Opponent" became equal to "No"
 		And I click the button named "FormWriteAndClose"
 	* Check for created partners
-		Then I check for the "Partners" catalog element with the "Description_en" "Ferron BP1"  
-		Then I check for the "Partners" catalog element with the "Description_tr" "Ferron BP1 TR"
+		Then I check for the "Partners" catalog element with the "Description_en" "Ferron1 BP"  
+		Then I check for the "Partners" catalog element with the "Description_tr" "Ferron1 BP TR"
 		Then I check for the "Partners" catalog element with the "Description_ru" "Феррон BP"
 		Then I check for the "Partners" catalog element with the "Description_en" "Kalipso1"
 		Then I check for the "Partners" catalog element with the "Description_en" "Manager B"

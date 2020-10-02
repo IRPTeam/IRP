@@ -18,6 +18,7 @@ Scenario: _0154100 preparation ( filling documents)
 	* Constants
 		When set True value to the constant
 	* Load info
+		When Create catalog BusinessUnits objects
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
 		When Create catalog CashAccounts objects
@@ -138,6 +139,18 @@ Scenario: _0154100 preparation ( filling documents)
 		And I input "2,00" text in "Percent" field of "PaymentTypes" table
 		And I finish line editing in "PaymentTypes" table
 		And I click "Save" button
+		And In this window I click command interface button "Business unit bank terms"
+		And I click the button named "FormCreate"
+		Then "Business unit bank terms (create)" window is opened
+		And I click Select button of "Business unit" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shop 01'     |
+		And I select current line in "List" table
+		And I click Select button of "Bank term" field
+		Then "Bank terms" window is opened
+		And I select current line in "List" table
+		And I click "Save and close" button			
 	* Workstation
 		Given I open hyperlink "e1cib/list/Catalog.Workstations"
 		And I click the button named "FormCreate"
@@ -377,7 +390,7 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 		And I finish line editing in "Payments" table	
 		And "Payments" table became equal
 			| 'Payment type' | 'Payment terminal'    | 'Account'      | 'Commission' | 'Amount'   | 'Percent' |
-			| 'Card 01'      | 'Payment terminal 01' | 'Transit Main' | '12,90'      | '900,00' | '1,00'    |
+			| 'Card 01'      | 'Payment terminal 01' | 'Transit Main' | '9,00'      | '900,00' | '1,00'    |
 	* Change quantity and post document
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Price'  | 'Q'     |
@@ -1718,8 +1731,6 @@ Scenario:  _0154149 create Cash statement
 			| 'Number' |
 			| '$$NumberRetailSalesReceipt01541491$$'      |
 		And I click the button named "FormDocumentRetailReturnReceiptGenerateSalesReturn"
-		And I move to "Payments" tab
-		And I click "Post and close" button
 		And I click Select button of "Business unit" field
 		Then "Business units" window is opened
 		And I go to line in "List" table
@@ -2743,6 +2754,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
 			And I close all client application windows	
+
 
 
 

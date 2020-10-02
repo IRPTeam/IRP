@@ -618,7 +618,7 @@ Scenario: _005119 packaging for Jeans
 		And I click Select button of "Item" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Sneakers'  |
+			| 'Jeans'  |
 		And I select current line in "List" table
 		And I click Select button of "Basis unit" field
 		And I go to line in "List" table

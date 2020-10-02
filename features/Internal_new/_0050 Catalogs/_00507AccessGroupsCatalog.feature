@@ -41,8 +41,9 @@ Scenario: _005015 filling in the "AccessGroups" catalog
 		Then I check for the "AccessGroups" catalog element with the "Description_en" "Admin"
 		Then I check for the "AccessGroups" catalog element with the "Description_tr" "Admin TR"
 		Then I check for the "AccessGroups" catalog element with the "Description_ru" "Админ"
+		And Delay 5
 		Then I check for the "AccessGroups" catalog element with the "Description_en" "Manager"
-	* Clean catalog AccessGroups
-		And I delete "AccessGroups" catalog element with the Description_en "Admin"
-		And I delete "AccessGroups" catalog element with the Description_en "Manager"
+	# * Clean catalog AccessGroups
+	# 	And I delete "AccessGroups" catalog element with the Description_en "Admin"
+	# 	And I delete "AccessGroups" catalog element with the Description_en "Manager"
 

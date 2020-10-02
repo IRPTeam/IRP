@@ -673,8 +673,8 @@ Scenario: _010013 settings for displaying contact information in Stores, Partner
 		And I activate "Value" field in "SettingsFilter" table
 		And I click choice button of "Value" attribute in "SettingsFilter" table
 		And I go to line in "List" table
-			| Description |
-			| Region Ukraine     |
+			| 'Additional attribute' | 'Description' |
+			| 'Division' 	| 'Region Ukraine'      |
 		And I select current line in "List" table
 		And I finish line editing in "SettingsFilter" table
 		And I click "Ok" button
@@ -703,8 +703,8 @@ Scenario: _010013 settings for displaying contact information in Stores, Partner
 		And I click choice button of "Value" attribute in "SettingsFilter" table
 		Then "Additional attribute values" window is opened
 		And I go to line in "List" table
-			| Description |
-			| Region Turkey      |
+			| 'Additional attribute' | 'Description' |
+			| 'Division' 	| 'Region Turkey'      |
 		And I select current line in "List" table
 		And I finish line editing in "SettingsFilter" table
 		And I click "Ok" button

@@ -154,8 +154,8 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 		* Check data save
 			Then the form attribute named "TransitAccount" became equal to "Transit Main"
 			And I click the button named "FormWriteAndClose"
-	* Clean catalog CashAccounts
-		And I delete "CashAccounts" catalog element with the Description_en "Cash desk №1"
-		And I delete "CashAccounts" catalog element with the Description_en "Cash desk №2"
-		And I delete "CashAccounts" catalog element with the Description_en "Bank account, TRY"
-		And I delete "CashAccounts" catalog element with the Description_en "Transit Main"
+	# * Clean catalog CashAccounts
+	# 	And I delete "CashAccounts" catalog element with the Description_en "Cash desk №1"
+	# 	And I delete "CashAccounts" catalog element with the Description_en "Cash desk №2"
+	# 	And I delete "CashAccounts" catalog element with the Description_en "Bank account, TRY"
+	# 	And I delete "CashAccounts" catalog element with the Description_en "Transit Main"

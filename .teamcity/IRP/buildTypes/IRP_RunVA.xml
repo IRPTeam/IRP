@@ -432,7 +432,7 @@ foreach ($elementTag in $a) {
   }elseif ("%dep.IRP_GitHubUpdate.env.Database1CName%" -like "%teamcity.project.id%_develop*")
   {
     Write-Output "Start short test"
- 	$a = @("Catalogs")	
+ 	$a = @("BasicFormsCheck", "Catalogs")	
   }else{
   	Write-Output "Skip tests"
   }

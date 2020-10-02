@@ -361,7 +361,7 @@ foreach ($elementTag in $a) {
   $ProcessInfo = New-Object System.Diagnostics.ProcessStartInfo 
   $ProcessInfo.FileName = %env.PathTo1CPlatform% 
   $ProcessInfo.UseShellExecute = $false 
-  $ProcessInfo.Arguments = "/N %env.LoginTo1C% /P %env.PassTo1C%  $TempDb /Execute ""%env.OScript%/lib/vanessa-automation/vanessa-automation.epf"" /TestManager /C""StartFeaturePlayer; VBParams=%system.teamcity.build.workingDir%\va$elementTag.json""" 
+  $ProcessInfo.Arguments = "/N %env.LoginTo1C% /P %env.PassTo1C%  ""/F%system.teamcity.build.workingDir%\$elementTag"" /Execute ""%env.OScript%/lib/vanessa-automation/vanessa-automation.epf"" /TestManager /C""StartFeaturePlayer; VBParams=%system.teamcity.build.workingDir%\va$elementTag.json""" 
   $Process = New-Object System.Diagnostics.Process 
   $Process.StartInfo = $ProcessInfo 
   $Process.Start() | Out-Null  

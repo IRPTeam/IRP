@@ -100,7 +100,7 @@
     <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
     <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
     <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.ChequeBonds</value>
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_ChequeBonds</value>
     </typesFilterValue>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>

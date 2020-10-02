@@ -46,6 +46,6 @@ Scenario: _005014 filling in the "Units" catalog
 		Then I check for the "Units" catalog element with the "Description_tr" "adet"
 		Then I check for the "Units" catalog element with the "Description_ru" "шт"
 		Then I check for the "Units" catalog element with the "Description_en" "box (4 pcs)"
-	* Clean catalog Units
-		And I delete "Units" catalog element with the Description_en "pcs"
-		And I delete "Units" catalog element with the Description_en "box (4 pcs)"
+	# * Clean catalog Units
+	# 	And I delete "Units" catalog element with the Description_en "pcs"
+	# 	And I delete "Units" catalog element with the Description_en "box (4 pcs)"

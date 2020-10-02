@@ -34,5 +34,5 @@ Scenario: _005023 filling in the "Partner segments content" catalog
 		Then I check for the "PartnerSegments" catalog element with the "Description_tr" "Distribution TR"
 		Then I check for the "PartnerSegments" catalog element with the "Description_en" "Distribution" 
 		Then I check for the "PartnerSegments" catalog element with the "Description_ru" "Дистрибьюция"
-	* Clean catalog PartnerSegments
-		And I delete "PartnerSegments" catalog element with the Description_en "Distribution"
+	# * Clean catalog PartnerSegments
+	# 	And I delete "PartnerSegments" catalog element with the Description_en "Distribution"

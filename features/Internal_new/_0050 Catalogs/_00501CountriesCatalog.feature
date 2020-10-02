@@ -48,6 +48,6 @@ Scenario: _005010 filling in the "Countries" catalog
 		Then I check for the "Countries" catalog element with the "Description_en" "Ukraine"
 		Then I check for the "Countries" catalog element with the "Description_tr" "Ukraine TR"
 		Then I check for the "Countries" catalog element with the "Description_ru" "Украина"
-	* Clean catalog Countries
-		And I delete "Countries" catalog element with the Description_en "Turkey"
-		And I delete "Countries" catalog element with the Description_en "Ukraine"
+	# * Clean catalog Countries
+	# 	And I delete "Countries" catalog element with the Description_en "Turkey"
+	# 	And I delete "Countries" catalog element with the Description_en "Ukraine"

@@ -89,8 +89,8 @@ Scenario: _005022 filling in the "Partners" catalog
 		Then I check for the "Partners" catalog element with the "Description_en" "Manager B"
 		And Delay 2
 		Then I check for the "Partners" catalog element with the "Description_en" "Lomaniti"
-	* Clean catalog Partners
-		And I delete "Partners" catalog element with the Description_en "Ferron BP"
-		And I delete "Partners" catalog element with the Description_en "Kalipso"
-		And I delete "Partners" catalog element with the Description_en "Manager B"
-		And I delete "Partners" catalog element with the Description_en "Lomaniti"
+	# * Clean catalog Partners
+	# 	And I delete "Partners" catalog element with the Description_en "Ferron BP"
+	# 	And I delete "Partners" catalog element with the Description_en "Kalipso"
+	# 	And I delete "Partners" catalog element with the Description_en "Manager B"
+	# 	And I delete "Partners" catalog element with the Description_en "Lomaniti"

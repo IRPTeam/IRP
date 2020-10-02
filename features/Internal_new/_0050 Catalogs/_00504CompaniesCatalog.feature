@@ -125,6 +125,6 @@ Scenario: _005013 filling in the "Companies" catalog
 			Then I check for the "Companies" catalog element with the "Description_en" "Main Company" 
 			Then I check for the "Companies" catalog element with the "Description_tr" "Main Company TR"
 			Then I check for the "Companies" catalog element with the "Description_ru" "Главная компания"
-	* Clean catalog Companies
-		And I delete "Companies" catalog element with the Description_en "Main Company"
+	# * Clean catalog Companies
+	# 	And I delete "Companies" catalog element with the Description_en "Main Company"
 

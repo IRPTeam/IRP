@@ -106,7 +106,6 @@
   <content>Catalog.Units.Attribute.Item</content>
   <content>Catalog.ItemTypes.TabularSection.AddAttributes</content>
   <content>Catalog.ItemTypes.TabularSection.AvailableAttributes</content>
-  <content>Subsystem.AutoTest</content>
   <content>Document.SalesReturnOrder</content>
   <content>Document.PurchaseReturnOrder</content>
   <content>Document.StockAdjustmentAsSurplus</content>

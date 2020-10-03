@@ -14,7 +14,7 @@ Background:
 
 
 	
-Scenario: _095001 preparation
+Scenario: _060000 preparation
 	* Constants
 		When set True value to the constant
 	* Load info

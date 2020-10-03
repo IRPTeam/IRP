@@ -362,7 +362,7 @@ Scenario: _022327 check movements of the document Purchase return in the StockRe
 
 Scenario: _022328 check movements of Purchase return in register StockReservation (store doesn't use Shipment confirmation, without Purchase return order)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table contain lines
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                 | 'Line number' | 'Store'    | 'Item key'  |
 		| '12,000'   | '$$PurchaseReturn022322$$' | '1'           | 'Store 01' | '36/Yellow' |
 

@@ -16,7 +16,7 @@ For shipment of products from store
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
-Scenario: preparation (Shipment confirmation)
+Scenario: _028800 preparation (Shipment confirmation)
 	* Constants
 		When set True value to the constant
 	* Load info
@@ -92,6 +92,7 @@ Scenario: preparation (Shipment confirmation)
 				| "Number" |
 				| "$$NumberPurchaseReturn022314$$" |
 			When create PurchaseReturn022314
+			Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 			And I go to line in "List" table
 					| 'Number'                          |
 					| "$$NumberPurchaseReturn022314$$"|
@@ -360,7 +361,7 @@ Scenario: _300506 check connection to Shipment Confirmation report "Related docu
 	* Form report Related documents
 		And I go to line in "List" table
 		| Number |
-		| $$NumberShipmentConfirmation0028801$$      |
+		| $$NumberShipmentConfirmation028801$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened

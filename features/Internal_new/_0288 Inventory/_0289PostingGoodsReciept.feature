@@ -14,7 +14,7 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-Scenario: preparation (Goods receipt)
+Scenario: _028900 preparation (Goods receipt)
 	* Constants
 		When set True value to the constant
 	* Load info

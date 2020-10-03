@@ -579,6 +579,12 @@ Scenario: Create catalog ItemTypes objects
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47e7' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47e8' | 'No'            | 'No'       | 'No'         |
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47e7' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47e9' | 'No'            | 'No'       | 'No'         |
 
+Scenario: Create catalog ItemTypes objects (Furniture)
+
+	And I check or create catalog "ItemTypes" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Parent'                                                            | 'IsFolder' | 'Type'                   | 'UseSerialLotNumber' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78178ed92fbced11eaf15dc8cb47ee' | 'No'           | ''                                                                  | 'No'      | ''                       | ''                   | 'Furniture'    | ''                 | ''                 | 'Furniture TR' | '_6da4444bef3f4f93b6c51881f2c0a6b9' |
+
 Scenario: Create catalog Units objects
 
 	And I check or create catalog "Units" objects:
@@ -617,6 +623,12 @@ Scenario: Create catalog Items objects
 		| 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef032' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf115bcc9c5e9' |
 		| 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef031' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf115bcc9c5ee' |
 		| 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef036' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf115bcc9c5e8' |
+
+Scenario: Create catalog Items objects (Boots)
+
+	And I check or create catalog "Items" objects:
+		| 'Ref'                                                           | 'DeletionMark' | 'ItemType'                                                          | 'Unit'                                                          | 'MainPricture' | 'Vendor' | 'ItemID' | 'Description_en'         | 'Description_hash' | 'Description_ru' | 'Description_tr'            |
+		| 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f6' | 'No'           | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f2' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage' | ''       | ''       | 'Boots'                  | ''                 | ''               | 'Boots TR'                  |
 
 Scenario: Create catalog PartnerSegments objects
 
@@ -1612,3 +1624,20 @@ Scenario: Create information register UserSettings records (Retail document)
 		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.RetailSalesReceipt' | 'ItemList.Store'        | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'        |
 		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.RetailSalesReceipt' | 'LegalName'             | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf12effe70fcc'     |
 		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.RetailSalesReceipt' | 'Partner'               | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf12effe70fcb'      |
+
+
+Scenario: Create catalog ItemKeys objects (Table)
+
+	And I check or create catalog "ItemKeys" objects:
+		| 'Ref'                                                              | 'DeletionMark' | 'Item'                                                          | 'Unit' | 'Specification' | 'AffectPricingMD5' | 'UniqueMD5'                                       | 'ItemKeyID' |
+		| 'e1cib/data/Catalog.ItemKeys?ref=aa7b120ed92fbced11eb055269b1319b' | 'No'           | 'e1cib/data/Catalog.Items?ref=aa7b120ed92fbced11eb055269b1319a' | ''     | ''              | ''                 | 'BE 28 38 C1 EC 7A 31 1B 42 29 CB C5 D8 21 FA D0' | ''          |
+	
+
+
+Scenario: Create catalog Items objects (Table)
+
+	And I check or create catalog "Items" objects:
+		| 'Ref'                                                           | 'DeletionMark' | 'ItemType'                                                          | 'Unit'                                                          | 'MainPricture' | 'Vendor' | 'ItemID' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Items?ref=aa7b120ed92fbced11eb055269b1319a' | 'No'           | 'e1cib/data/Catalog.ItemTypes?ref=aa78178ed92fbced11eaf15dc8cb47ee' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage' | ''       | ''       | 'Table'          | ''                 | ''               | ''               |
+
+

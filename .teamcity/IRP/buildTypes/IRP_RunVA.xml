@@ -578,6 +578,7 @@ foreach ($elementTag in $TagArray) {
   $VA_PID = $Process.Id 
   $global:VA_PID_Array.Add($elementTag, $Process.Id)
   echo "##teamcity[setParameter name='env.VA_PID' value='$VA_PID']"
+  Start-Sleep 10
 }
   ######################################################################################
   $global:JobArray = @()

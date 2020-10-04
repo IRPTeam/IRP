@@ -2,7 +2,8 @@
 @tree
 @Positive
 @NotCritical
-@Group12
+@Forms
+
 Feature: check required fields
 
 

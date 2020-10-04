@@ -1,7 +1,6 @@
 ﻿#language: en
 @tree
 @Positive
-@Group3
 @Purchase
 
 Feature: create document an Internal supply request 
@@ -53,7 +52,7 @@ Scenario: _016501 preparation
 					Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 				* Addition of Plugin sessing for calculating Tax types for Turkey (VAT)
 					And I click the button named "FormCreate"
-					And I select external file "C:\Users\Severnity\Desktop\ExtDataProc\TaxCalculateVAT_TR.epf"
+					And I select external file "#workingDir#\DataProcessor\TaxCalculateVAT_TR.epf"
 					And I click the button named "FormAddExtDataProc"
 					And I input "" text in "Path to plugin for test" field
 					And I input "TaxCalculateVAT_TR" text in "Name" field
@@ -375,7 +374,16 @@ Scenario: _0170021 clear movements Internal Supply Request and check that there 
 
 
 
-
+Scenario: _300501 check connection to Internal Supply Request report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberInternalSupplyRequest016501$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
 
 

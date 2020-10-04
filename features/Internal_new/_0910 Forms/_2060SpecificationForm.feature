@@ -1,8 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group12
-
+@Forms
 Feature: check specification filling 
 
 

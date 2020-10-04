@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group6
+@Services
+
 Feature: incoming services
 
 As a financier
@@ -16,6 +17,9 @@ Scenario: _029100 preparation
 	* Constants
 		When set True value to the constant
 	* Load info
+		When Create catalog ItemTypes objects (Furniture)	
+		When Create catalog Items objects (Table)
+		When Create catalog ItemKeys objects (Table)
 		When Create catalog ObjectStatuses objects
 		When Create catalog Units objects
 		When Create catalog PriceTypes objects
@@ -454,21 +458,22 @@ Scenario: _029107 create a Sales order for service and product (Store doesn't us
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
-			| Description |
-			| Boots       |
+			| 'Description' |
+			| 'Table'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| Item  | Item key |
-			| Boots | 37/18SD  |
+			| 'Item'  | 'Item key' |
+			| 'Table' | 'Table'  |
 		And I select current line in "List" table
 		And I activate "Q" field in "ItemList" table
 		And I input "10,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select current line in "ItemList" table
+		And I input "700,00" text in "Price" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 	// * Filling in document number
@@ -490,12 +495,12 @@ Scenario: _029107 create a Sales order for service and product (Store doesn't us
 		| 'Register  "Order reservation"'              | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Item key'             | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Store 01'     | '37/18SD'              | ''         | ''         | ''        | ''                             | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Store 01'     | 'Table'              | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Stock reservation"'              | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Item key'             | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '10'        | 'Store 01'     | '37/18SD'              | ''         | ''         | ''        | ''                             | ''                     |
+		| ''                                           | 'Expense'     | '*'         | '10'        | 'Store 01'     | 'Table'              | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Sales order turnovers"'          | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Period'      | 'Resources' | ''          | 'Dimensions'   | ''                     | ''         | ''         | ''        | ''                             | 'Attributes'           |
@@ -504,22 +509,22 @@ Scenario: _029107 create a Sales order for service and product (Store doesn't us
 		| ''                                           | '*'           | '1'         | '100'       | 'Main Company' | '$$SalesOrder029107$$' | 'TRY'      | 'Rent'     | '*'       | 'en description is empty'      | 'No'                   |
 		| ''                                           | '*'           | '1'         | '100'       | 'Main Company' | '$$SalesOrder029107$$' | 'TRY'      | 'Rent'     | '*'       | 'Local currency'               | 'No'                   |
 		| ''                                           | '*'           | '1'         | '100'       | 'Main Company' | '$$SalesOrder029107$$' | 'TRY'      | 'Rent'     | '*'       | 'TRY'                          | 'No'                   |
-		| ''                                           | '*'           | '10'        | '1 198,63'  | 'Main Company' | '$$SalesOrder029107$$' | 'USD'      | '37/18SD'  | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company' | '$$SalesOrder029107$$' | 'TRY'      | '37/18SD'  | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company' | '$$SalesOrder029107$$' | 'TRY'      | '37/18SD'  | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company' | '$$SalesOrder029107$$' | 'TRY'      | '37/18SD'  | '*'       | 'TRY'                          | 'No'                   |
+		| ''                                           | '*'           | '10'        | '1 198,63'  | 'Main Company' | '$$SalesOrder029107$$' | 'USD'      | 'Table'  | '*'       | 'Reporting currency'           | 'No'                   |
+		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company' | '$$SalesOrder029107$$' | 'TRY'      | 'Table'  | '*'       | 'en description is empty'      | 'No'                   |
+		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company' | '$$SalesOrder029107$$' | 'TRY'      | 'Table'  | '*'       | 'Local currency'               | 'No'                   |
+		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company' | '$$SalesOrder029107$$' | 'TRY'      | 'Table'  | '*'       | 'TRY'                          | 'No'                   |
 		| ''                                           | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Order balance"'                  | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Order'                | 'Item key' | 'Row key'  | ''        | ''                             | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '1'         | 'Store 01'     | '$$SalesOrder029107$$' | 'Rent'     | '*'        | ''        | ''                             | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Store 01'     | '$$SalesOrder029107$$' | '37/18SD'  | '*'        | ''        | ''                             | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Store 01'     | '$$SalesOrder029107$$' | 'Table'  | '*'        | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Shipment confirmation schedule"' | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                     | ''         | ''         | ''        | 'Attributes'                   | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'      | 'Order'                | 'Store'    | 'Item key' | 'Row key' | 'Delivery date'                | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '1'         | 'Main Company' | '$$SalesOrder029107$$' | 'Store 01' | 'Rent'     | '*'       | '*'                            | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | '$$SalesOrder029107$$' | 'Store 01' | '37/18SD'  | '*'       | '*'                            | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | '$$SalesOrder029107$$' | 'Store 01' | 'Table'  | '*'       | '*'                            | ''                     |
 
 
 
@@ -568,19 +573,20 @@ Scenario: _029108 create a Sales order for service and product (Store use Shipme
 		And I click choice button of "Item" attribute in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| Description |
-			| Boots       |
+			| 'Description' |
+			| 'Table'      |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| Item  | Item key |
-			| Boots | 37/18SD  |
+			| 'Item'  | 'Item key' |
+			| 'Table' | 'Table'  |
 		And I select current line in "List" table
 		And I activate "Q" field in "ItemList" table
 		And I input "10,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
+		And I input "648,15" text in "Price" field of "ItemList" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
@@ -604,12 +610,12 @@ Scenario: _029108 create a Sales order for service and product (Store use Shipme
 		| 'Register  "Order reservation"'              | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Item key'         | ''         | ''         | ''        | ''                         | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Store 02'     | '37/18SD'          | ''         | ''         | ''        | ''                         | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Store 02'     | 'Table'          | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                                           | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Register  "Stock reservation"'              | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Item key'         | ''         | ''         | ''        | ''                         | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '10'        | 'Store 02'     | '37/18SD'          | ''         | ''         | ''        | ''                         | ''                     |
+		| ''                                           | 'Expense'     | '*'         | '10'        | 'Store 02'     | 'Table'          | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                                           | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Register  "Sales order turnovers"'          | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                                           | 'Period'      | 'Resources' | ''          | 'Dimensions'   | ''                 | ''         | ''         | ''        | ''                         | 'Attributes'           |
@@ -618,22 +624,22 @@ Scenario: _029108 create a Sales order for service and product (Store use Shipme
 		| ''                                           | '*'           | '1'         | '118'       | 'Main Company' | '$$SalesOrder029108$$' | 'TRY'      | 'Rent'     | '*'       | 'en description is empty' | 'No'                   |
 		| ''                                           | '*'           | '1'         | '118'       | 'Main Company' | '$$SalesOrder029108$$' | 'TRY'      | 'Rent'     | '*'       | 'Local currency'           | 'No'                   |
 		| ''                                           | '*'           | '1'         | '118'       | 'Main Company' | '$$SalesOrder029108$$' | 'TRY'      | 'Rent'     | '*'       | 'TRY'                      | 'No'                   |
-		| ''                                           | '*'           | '10'        | '1 309,62'  | 'Main Company' | '$$SalesOrder029108$$' | 'USD'      | '37/18SD'  | '*'       | 'Reporting currency'       | 'No'                   |
-		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | '$$SalesOrder029108$$' | 'TRY'      | '37/18SD'  | '*'       | 'en description is empty' | 'No'                   |
-		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | '$$SalesOrder029108$$' | 'TRY'      | '37/18SD'  | '*'       | 'Local currency'           | 'No'                   |
-		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | '$$SalesOrder029108$$' | 'TRY'      | '37/18SD'  | '*'       | 'TRY'                      | 'No'                   |
+		| ''                                           | '*'           | '10'        | '1 309,62'  | 'Main Company' | '$$SalesOrder029108$$' | 'USD'      | 'Table'  | '*'       | 'Reporting currency'       | 'No'                   |
+		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | '$$SalesOrder029108$$' | 'TRY'      | 'Table'  | '*'       | 'en description is empty' | 'No'                   |
+		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | '$$SalesOrder029108$$' | 'TRY'      | 'Table'  | '*'       | 'Local currency'           | 'No'                   |
+		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | '$$SalesOrder029108$$' | 'TRY'      | 'Table'  | '*'       | 'TRY'                      | 'No'                   |
 		| ''                                           | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Register  "Order balance"'                  | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Order'            | 'Item key' | 'Row key'  | ''        | ''                         | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '1'         | 'Store 02'     | '$$SalesOrder029108$$' | 'Rent'     | '*'        | ''        | ''                         | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Store 02'     | '$$SalesOrder029108$$' | '37/18SD'  | '*'        | ''        | ''                         | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Store 02'     | '$$SalesOrder029108$$' | 'Table'  | '*'        | ''        | ''                         | ''                     |
 		| ''                                           | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| 'Register  "Shipment confirmation schedule"' | ''            | ''          | ''          | ''             | ''                 | ''         | ''         | ''        | ''                         | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                 | ''         | ''         | ''        | 'Attributes'               | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'      | 'Order'            | 'Store'    | 'Item key' | 'Row key' | 'Delivery date'            | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '1'         | 'Main Company' | '$$SalesOrder029108$$' | 'Store 02' | 'Rent'     | '*'       | '*'                        | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | '$$SalesOrder029108$$' | 'Store 02' | '37/18SD'  | '*'       | '*'                        | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | '$$SalesOrder029108$$' | 'Store 02' | 'Table'  | '*'       | '*'                        | ''                     |
 
 
 
@@ -683,19 +689,20 @@ Scenario: _029109 create a Sales order for service and product (Store doesn't us
 		And I click choice button of "Item" attribute in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
-			| Description |
-			| Boots       |
+			| 'Description' |
+			| 'Table'       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| Item  | Item key |
-			| Boots | 37/18SD  |
+			| 'Item'  | 'Item key' |
+			| 'Table' | 'Table'  |
 		And I select current line in "List" table
 		And I activate "Q" field in "ItemList" table
 		And I input "10,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
+		And I input "700,00" text in "Price" field of "ItemList" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
@@ -720,22 +727,22 @@ Scenario: _029109 create a Sales order for service and product (Store doesn't us
 		| 'Register  "Inventory balance"'              | ''            | ''          | ''          | ''                     | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'           | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'              | 'Item key'              | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '10'        | 'Main Company'         | '37/18SD'               | ''         | ''         | ''        | ''                             | ''                     |
+		| ''                                           | 'Expense'     | '*'         | '10'        | 'Main Company'         | 'Table'               | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | ''          | ''                     | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Order reservation"'              | ''            | ''          | ''          | ''                     | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'           | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'                | 'Item key'              | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Store 01'             | '37/18SD'               | ''         | ''         | ''        | ''                             | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Store 01'             | 'Table'               | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | ''          | ''                     | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Stock reservation"'              | ''            | ''          | ''          | ''                     | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'           | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'                | 'Item key'              | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '10'        | 'Store 01'             | '37/18SD'               | ''         | ''         | ''        | ''                             | ''                     |
+		| ''                                           | 'Expense'     | '*'         | '10'        | 'Store 01'             | 'Table'               | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | ''          | ''                     | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Shipment orders"'                | ''            | ''          | ''          | ''                     | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'           | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Order'                | 'Shipment confirmation' | 'Item key' | 'Row key'  | ''        | ''                             | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | '$$SalesOrder029109$$' | '$$SalesOrder029109$$'  | '37/18SD'  | '*'        | ''        | ''                             | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '10'        | '$$SalesOrder029109$$' | '$$SalesOrder029109$$'  | 'Table'  | '*'        | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | ''          | ''                     | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Sales order turnovers"'          | ''            | ''          | ''          | ''                     | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Period'      | 'Resources' | ''          | 'Dimensions'           | ''                      | ''         | ''         | ''        | ''                             | 'Attributes'           |
@@ -744,28 +751,28 @@ Scenario: _029109 create a Sales order for service and product (Store doesn't us
 		| ''                                           | '*'           | '1'         | '100'       | 'Main Company'         | '$$SalesOrder029109$$'  | 'TRY'      | 'Rent'     | '*'       | 'en description is empty'      | 'No'                   |
 		| ''                                           | '*'           | '1'         | '100'       | 'Main Company'         | '$$SalesOrder029109$$'  | 'TRY'      | 'Rent'     | '*'       | 'Local currency'               | 'No'                   |
 		| ''                                           | '*'           | '1'         | '100'       | 'Main Company'         | '$$SalesOrder029109$$'  | 'TRY'      | 'Rent'     | '*'       | 'TRY'                          | 'No'                   |
-		| ''                                           | '*'           | '10'        | '1 198,63'  | 'Main Company'         | '$$SalesOrder029109$$'  | 'USD'      | '37/18SD'  | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company'         | '$$SalesOrder029109$$'  | 'TRY'      | '37/18SD'  | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company'         | '$$SalesOrder029109$$'  | 'TRY'      | '37/18SD'  | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company'         | '$$SalesOrder029109$$'  | 'TRY'      | '37/18SD'  | '*'       | 'TRY'                          | 'No'                   |
+		| ''                                           | '*'           | '10'        | '1 198,63'  | 'Main Company'         | '$$SalesOrder029109$$'  | 'USD'      | 'Table'  | '*'       | 'Reporting currency'           | 'No'                   |
+		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company'         | '$$SalesOrder029109$$'  | 'TRY'      | 'Table'  | '*'       | 'en description is empty'      | 'No'                   |
+		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company'         | '$$SalesOrder029109$$'  | 'TRY'      | 'Table'  | '*'       | 'Local currency'               | 'No'                   |
+		| ''                                           | '*'           | '10'        | '7 000'     | 'Main Company'         | '$$SalesOrder029109$$'  | 'TRY'      | 'Table'  | '*'       | 'TRY'                          | 'No'                   |
 		| ''                                           | ''            | ''          | ''          | ''                     | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Order balance"'                  | ''            | ''          | ''          | ''                     | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'           | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'                | 'Order'                 | 'Item key' | 'Row key'  | ''        | ''                             | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '1'         | 'Store 01'             | '$$SalesOrder029109$$'  | 'Rent'     | '*'        | ''        | ''                             | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Store 01'             | '$$SalesOrder029109$$'  | '37/18SD'  | '*'        | ''        | ''                             | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Store 01'             | '$$SalesOrder029109$$'  | 'Table'  | '*'        | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | ''          | ''                     | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Stock balance"'                  | ''            | ''          | ''          | ''                     | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'           | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'                | 'Item key'              | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '10'        | 'Store 01'             | '37/18SD'               | ''         | ''         | ''        | ''                             | ''                     |
+		| ''                                           | 'Expense'     | '*'         | '10'        | 'Store 01'             | 'Table'               | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | ''          | ''                     | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Shipment confirmation schedule"' | ''            | ''          | ''          | ''                     | ''                      | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'           | ''                      | ''         | ''         | ''        | 'Attributes'                   | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'              | 'Order'                 | 'Store'    | 'Item key' | 'Row key' | 'Delivery date'                | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '1'         | 'Main Company'         | '$$SalesOrder029109$$'  | 'Store 01' | 'Rent'     | '*'       | '*'                            | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company'         | '$$SalesOrder029109$$'  | 'Store 01' | '37/18SD'  | '*'       | '*'                            | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '10'        | 'Main Company'         | '$$SalesOrder029109$$'  | 'Store 01' | '37/18SD'  | '*'       | '*'                            | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company'         | '$$SalesOrder029109$$'  | 'Store 01' | 'Table'  | '*'       | '*'                            | ''                     |
+		| ''                                           | 'Expense'     | '*'         | '10'        | 'Main Company'         | '$$SalesOrder029109$$'  | 'Store 01' | 'Table'  | '*'       | '*'                            | ''                     |
 
 
 
@@ -814,17 +821,18 @@ Scenario: _029110 create a Sales order for service and product (Store use Shipme
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| Description |
-			| Boots       |
+			| Table       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
 			| Item  | Item key |
-			| Boots | 37/18SD  |
+			| Table | Table  |
 		And I select current line in "List" table
 		And I activate "Q" field in "ItemList" table
 		And I input "10,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
+		And I input "648,15" text in "Price" field of "ItemList" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
@@ -849,17 +857,17 @@ Scenario: _029110 create a Sales order for service and product (Store use Shipme
 		| 'Register  "Goods in transit outgoing"'      | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Shipment basis'       | 'Item key' | 'Row key'  | ''        | ''                             | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Store 02'     | '$$SalesOrder029110$$' | '37/18SD'  | '*'        | ''        | ''                             | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Store 02'     | '$$SalesOrder029110$$' | 'Table'  | '*'        | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Order reservation"'              | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Item key'             | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Store 02'     | '37/18SD'              | ''         | ''         | ''        | ''                             | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Store 02'     | 'Table'              | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Stock reservation"'              | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Item key'             | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '10'        | 'Store 02'     | '37/18SD'              | ''         | ''         | ''        | ''                             | ''                     |
+		| ''                                           | 'Expense'     | '*'         | '10'        | 'Store 02'     | 'Table'              | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Sales order turnovers"'          | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Period'      | 'Resources' | ''          | 'Dimensions'   | ''                     | ''         | ''         | ''        | ''                             | 'Attributes'           |
@@ -868,19 +876,19 @@ Scenario: _029110 create a Sales order for service and product (Store use Shipme
 		| ''                                           | '*'           | '1'         | '118'       | 'Main Company' | '$$SalesOrder029110$$' | 'TRY'      | 'Rent'     | '*'       | 'en description is empty'      | 'No'                   |
 		| ''                                           | '*'           | '1'         | '118'       | 'Main Company' | '$$SalesOrder029110$$' | 'TRY'      | 'Rent'     | '*'       | 'Local currency'               | 'No'                   |
 		| ''                                           | '*'           | '1'         | '118'       | 'Main Company' | '$$SalesOrder029110$$' | 'TRY'      | 'Rent'     | '*'       | 'TRY'                          | 'No'                   |
-		| ''                                           | '*'           | '10'        | '1 309,62'  | 'Main Company' | '$$SalesOrder029110$$' | 'USD'      | '37/18SD'  | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | '$$SalesOrder029110$$' | 'TRY'      | '37/18SD'  | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | '$$SalesOrder029110$$' | 'TRY'      | '37/18SD'  | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | '$$SalesOrder029110$$' | 'TRY'      | '37/18SD'  | '*'       | 'TRY'                          | 'No'                   |
+		| ''                                           | '*'           | '10'        | '1 309,62'  | 'Main Company' | '$$SalesOrder029110$$' | 'USD'      | 'Table'  | '*'       | 'Reporting currency'           | 'No'                   |
+		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | '$$SalesOrder029110$$' | 'TRY'      | 'Table'  | '*'       | 'en description is empty'      | 'No'                   |
+		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | '$$SalesOrder029110$$' | 'TRY'      | 'Table'  | '*'       | 'Local currency'               | 'No'                   |
+		| ''                                           | '*'           | '10'        | '7 648,17'  | 'Main Company' | '$$SalesOrder029110$$' | 'TRY'      | 'Table'  | '*'       | 'TRY'                          | 'No'                   |
 		| ''                                           | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Order balance"'                  | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Order'                | 'Item key' | 'Row key'  | ''        | ''                             | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '1'         | 'Store 02'     | '$$SalesOrder029110$$' | 'Rent'     | '*'        | ''        | ''                             | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Store 02'     | '$$SalesOrder029110$$' | '37/18SD'  | '*'        | ''        | ''                             | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Store 02'     | '$$SalesOrder029110$$' | 'Table'  | '*'        | ''        | ''                             | ''                     |
 		| ''                                           | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| 'Register  "Shipment confirmation schedule"' | ''            | ''          | ''          | ''             | ''                     | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                     | ''         | ''         | ''        | 'Attributes'                   | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'      | 'Order'                | 'Store'    | 'Item key' | 'Row key' | 'Delivery date'                | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '1'         | 'Main Company' | '$$SalesOrder029110$$' | 'Store 02' | 'Rent'     | '*'       | '*'                            | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | '$$SalesOrder029110$$' | 'Store 02' | '37/18SD'  | '*'       | '*'                            | ''                     |
+		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | '$$SalesOrder029110$$' | 'Store 02' | 'Table'  | '*'       | '*'                            | ''                     |

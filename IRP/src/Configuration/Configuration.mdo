@@ -210,10 +210,8 @@
   <commonModules>CommonModule.DocCashTransferOrderServer</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionClient</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionServer</commonModules>
-  <commonModules>CommonModule.DocCreditNoteClient</commonModules>
-  <commonModules>CommonModule.DocCreditNoteServer</commonModules>
-  <commonModules>CommonModule.DocDebitNoteClient</commonModules>
-  <commonModules>CommonModule.DocDebitNoteServer</commonModules>
+  <commonModules>CommonModule.DocCreditDebitNoteClient</commonModules>
+  <commonModules>CommonModule.DocCreditDebitNoteServer</commonModules>
   <commonModules>CommonModule.DocExpenseClient</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptServer</commonModules>
@@ -294,8 +292,6 @@
   <commonModules>CommonModule.IntegrationClientServer</commonModules>
   <commonModules>CommonModule.IntegrationServer</commonModules>
   <commonModules>CommonModule.IntegrationServerReuse</commonModules>
-  <commonModules>CommonModule.JorDocumentsForIncomingPaymentServer</commonModules>
-  <commonModules>CommonModule.JorDocumentsForOutgoingPaymentServer</commonModules>
   <commonModules>CommonModule.LibraryLoader</commonModules>
   <commonModules>CommonModule.Localization</commonModules>
   <commonModules>CommonModule.LocalizationClient</commonModules>
@@ -334,6 +330,9 @@
   <commonModules>CommonModule.UsersEvent</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
+  <commonModules>CommonModule.JorDocumentsServer</commonModules>
+  <commonModules>CommonModule.JorDocumentsClient</commonModules>
+  <commonModules>CommonModule.DocCreditDebitNoteClientServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -532,6 +531,7 @@
   <documents>Document.CashStatement</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
+  <documentJournals>DocumentJournal.DocumentsForCreditDebitNote</documentJournals>
   <enums>Enum.AgreementKinds</enums>
   <enums>Enum.AgreementTypes</enums>
   <enums>Enum.ApArPostingDetail</enums>

@@ -3,7 +3,6 @@
 @Positive
 @Catalogs
 
-
 Feature: terms of cooperation with partners
 
 As an accountant

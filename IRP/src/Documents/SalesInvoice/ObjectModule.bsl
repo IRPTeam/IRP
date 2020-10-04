@@ -37,6 +37,10 @@ Procedure Filling_BasedOnSalesOrder(FillingData)
 		NewRow = ThisObject.TaxList.Add();
 		FillPropertyValues(NewRow, Row);
 	EndDo;
+	For Each Row In FillingData.ShipmentConfirmations Do
+		NewRow = ThisObject.ShipmentConfirmations.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
 EndProcedure
 
 Procedure Filling_BasedOnShipmentConfirmation(FillingData)
@@ -45,6 +49,10 @@ Procedure Filling_BasedOnShipmentConfirmation(FillingData)
 	
 	For Each Row In FillingData.ItemList Do
 		NewRow = ThisObject.ItemList.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+	For Each Row In FillingData.ShipmentConfirmations Do
+		NewRow = ThisObject.ShipmentConfirmations.Add();
 		FillPropertyValues(NewRow, Row);
 	EndDo;
 EndProcedure
@@ -66,6 +74,49 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
 		Cancel = True;
 	EndIf;	
+	
+	For Each Row In ThisObject.ItemList Do
+		ItemKeyRow = New Structure();
+		ItemKeyRow.Insert("LineNumber"  , Row.LineNumber);
+		ItemKeyRow.Insert("Key"         , Row.Key);
+		ItemKeyRow.Insert("Item"        , Row.ItemKey.Item);
+		ItemKeyRow.Insert("ItemKey"     , Row.ItemKey);
+		ItemKeyRow.Insert("QuantityUnit", Row.Unit);
+		ItemKeyRow.Insert("Unit"        , ?(ValueIsFilled(Row.ItemKey.Unit), Row.ItemKey.Unit, Row.ItemKey.Item.Unit));
+		ItemKeyRow.Insert("Quantity"    , Row.Quantity);
+		
+		DocumentsServer.RecalculateQuantityInRow(ItemKeyRow);
+		
+		ArrayOfRows = ThisObject.ShipmentConfirmations.FindRows(New Structure("Key", ItemKeyRow.Key));
+		If Not ArrayOfRows.Count() Then
+			Continue;
+		EndIf;
+		TotalQuantity_ShipmentConfirmations = 0;
+		For Each ItemOfArray In ArrayOfRows Do
+			If ItemOfArray.Quantity > ItemOfArray.QuantityInShipmentConfirmation Then
+				Cancel = True;
+				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_080, ItemKeyRow.LineNumber,
+					ItemOfArray.ShipmentConfirmation, ItemOfArray.Quantity, ItemOfArray.QuantityInShipmentConfirmation), "ItemList["
+					+ Format((ItemKeyRow.LineNumber - 1), "NZ=0; NG=0;") + "].Quantity", ThisObject);
+			EndIf;
+			TotalQuantity_ShipmentConfirmations = TotalQuantity_ShipmentConfirmations + ItemOfArray.Quantity;
+		EndDo;
+
+		If TotalQuantity_ShipmentConfirmations < ItemKeyRow.Quantity Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_081, ItemKeyRow.LineNumber, ItemKeyRow.Item,
+				ItemKeyRow.ItemKey, ItemKeyRow.Quantity, TotalQuantity_ShipmentConfirmations), "ItemList[" + Format((ItemKeyRow.LineNumber - 1),
+				"NZ=0; NG=0;") + "].Quantity", ThisObject);
+		EndIf;
+
+		If TotalQuantity_ShipmentConfirmations > ItemKeyRow.Quantity Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_082, ItemKeyRow.LineNumber, ItemKeyRow.Item,
+				ItemKeyRow.ItemKey, ItemKeyRow.Quantity, TotalQuantity_ShipmentConfirmations), "ItemList[" + Format((ItemKeyRow.LineNumber - 1),
+				"NZ=0; NG=0;") + "].Quantity", ThisObject);
+
+		EndIf;
+	EndDo;
 EndProcedure
 
 Procedure OnWrite(Cancel)

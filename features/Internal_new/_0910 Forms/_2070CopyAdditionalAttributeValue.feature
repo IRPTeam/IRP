@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group12
+@Forms
 
 Feature: copy additional attribute value
 
@@ -9,7 +9,11 @@ Feature: copy additional attribute value
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	
+
+Scenario: _207000 preparation (copy additional attribute value)
+	* Constants
+		When set True value to the constant
+
 Scenario: _207001 copy additional attribute values when create catalog element
 	* Add additional attribute 
 		* Additional attribute 01
@@ -61,16 +65,12 @@ Scenario: _207001 copy additional attribute values when create catalog element
 				| 'Predefined data item name' |
 				| 'Catalog_Partners'      |
 			And I select current line in "List" table
-		* Adding additional attributes
-			If "Attributes" table contains lines:
+			If "Attributes" table contains lines Then
 					| 'Attribute' |
-					| 'Additional attribute 02'  |
 					| 'Additional attribute 01'  |
-				And I go to line in "Attributes" table
-					| 'Attribute'               |
-					| 'Additional attribute 01' |
-				And in the table "Attributes" I click the button named "AttributesContextMenuDelete"
-				And in the table "Attributes" I click the button named "AttributesContextMenuDelete"	
+					| 'Additional attribute 02'  |
+					And in the table "Attributes" I click the button named "AttributesContextMenuDelete"
+					And in the table "Attributes" I click the button named "AttributesContextMenuDelete"	
 			And in the table "Attributes" I click the button named "AttributesAdd"
 			And I click choice button of "Attribute" attribute in "Attributes" table
 			And I go to line in "List" table
@@ -160,10 +160,6 @@ Scenario: _207001 copy additional attribute values when create catalog element
 		Then "Additional attribute 01" form attribute became equal to "Value01"
 		Then the form attribute named "Description_en" became equal to "Partner 01 (clone2)"
 		And I click "Save and close" button
-	* Delete Partner 01, Partner 01 (clone), Partner 01 (clone2)
-		And I delete "Partners" catalog element with the Description_en "Partner 01"
-		And I delete "Partners" catalog element with the Description_en "Partner 01 (clone)"
-		And I delete "Partners" catalog element with the Description_en "Partner 01 (clone2)"
 	And I close all client application windows
 
 Scenario: _207002 copy additional attribute values when create document
@@ -299,6 +295,88 @@ Scenario: _207002 copy additional attribute values when create document
 		And I click "Yes" button
 	And I close all client application windows
 	
+
+Scenario: _207003 copy additional atribute row in sets (isConditionSet)
+	* Opening the form for adding additional attributes for Partners
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| 'Predefined data item name' |
+			| 'Catalog_Partners'      |
+		And I select current line in "List" table
+	* Delete Additional attribute 01
+		And I go to line in "Attributes" table
+			| 'Attribute'               |
+			| 'Additional attribute 01' |
+		And in the table "Attributes" I click the button named "AttributesContextMenuDelete"
+	* Add Condition for Additional attribute 02
+		And I go to line in "Attributes" table
+			| 'Attribute'               |
+			| 'Additional attribute 02' |
+		And in the table "Attributes" I click the button named "AttributesSetCondition"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
+		And I select "ENG" exact value from "Field" drop-down list in "SettingsFilter" table
+		And I move to the next attribute
+		And I select "Contains" exact value from "Comparison type" drop-down list in "SettingsFilter" table
+		And I move to the next attribute
+		And I input "clone" text in "Value" field of "SettingsFilter" table
+		And I finish line editing in "SettingsFilter" table
+		And in the table "ResultTable" I click "Verify" button
+		And "ResultTable" table became equal
+			| 'Ref'                 |
+			| 'Partner 01 (clone)'  |
+			| 'Partner 01 (clone2)' |
+		And I click "Ok" button
+	* Copy Additional attribute 02 and change attribute on Additional attribute 01
+		And in the table "Attributes" I click the button named "AttributesContextMenuCopy"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		Then "Additional attributes types" window is opened
+		And I go to line in "List" table
+			| 'Description'             | 'Reference'               |
+			| 'Additional attribute 01' | 'Additional attribute 01' |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+	* Check copy isConditionSet
+		And in the table "Attributes" I click the button named "AttributesSetCondition"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then "Edit condition" window is opened
+		And I expand current line in "SettingsFilter" table
+		And in the table "ResultTable" I click "Verify" button
+		And "ResultTable" table became equal
+			| 'Ref'                 |
+			| 'Partner 01 (clone)'  |
+			| 'Partner 01 (clone2)' |
+		And I click "Ok" button
+		And I click "Save and close" button
+	* Check Condition
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I go to line in "List" table
+			| 'Description'               |
+			| 'Partner 01' |
+		And I select current line in "List" table
+		And field "Additional attribute 02" is not present on the form
+		And field "Additional attribute 01" is not present on the form
+		And I close current window
+		And I go to line in "List" table
+			| 'Description'               |
+			| 'Partner 01 (clone)' |
+		And I select current line in "List" table
+		And field "Additional attribute 02" is present on the form
+		And field "Additional attribute 01" is present on the form
+		And I close all client application windows
+		
+		
+
+		
+				
+	
+		
+				
+
+		
+				
 
 
 		

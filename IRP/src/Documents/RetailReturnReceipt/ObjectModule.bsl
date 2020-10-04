@@ -25,6 +25,7 @@ EndProcedure
 Procedure Filling_BasedOnRetailSalesReceipt(FillingData)
 	FillPropertyValues(ThisObject, FillingData,
 		"Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer");
+	ThisObject.BusinessUnit = FillingData.BusinessUnitTitle;
 	
 	For Each Row In FillingData.ItemList Do
 		NewRow = ThisObject.ItemList.Add();

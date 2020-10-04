@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group9
+@CashManagement
+
 Feature: create Cash payment
 
 As a cashier
@@ -174,12 +175,7 @@ Scenario: _051001 create Cash payment (independently)
 					| 'Description'           |
 					| 'Vendor Ferron, TRY' |
 			And I select current line in "List" table
-		# temporarily
 		* Filling in basis documents in a tabular part
-			// # temporarily
-			// When I Check the steps for Exception
-			// |'And I click choice button of "Basis document" attribute in "PaymentList" table'|
-			// # temporarily
 			And I finish line editing in "PaymentList" table
 			And I activate "Basis document" field in "PaymentList" table
 			And I select current line in "PaymentList" table
@@ -187,7 +183,6 @@ Scenario: _051001 create Cash payment (independently)
 			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '137 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			And I click "Select" button
-		# temporarily
 		* Filling in amount in a tabular part
 			And I activate "Amount" field in "PaymentList" table
 			And I input "1000,00" text in "Amount" field of "PaymentList" table
@@ -244,12 +239,7 @@ Scenario: _051001 create Cash payment (independently)
 					| 'Description'           |
 					| 'Vendor Ferron, TRY' |
 			And I select current line in "List" table
-		# temporarily
 		* Filling in basis documents in a tabular part
-			// # temporarily
-			// When I Check the steps for Exception
-			// |'And I click choice button of "Basis document" attribute in "PaymentList" table'|
-			// # temporarily
 			And I finish line editing in "PaymentList" table
 			And I activate "Basis document" field in "PaymentList" table
 			And I select current line in "PaymentList" table
@@ -257,7 +247,6 @@ Scenario: _051001 create Cash payment (independently)
 			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '137 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			And I click "Select" button
-		# temporarily
 		* Filling in amount in a tabular part
 			And I activate "Amount" field in "PaymentList" table
 			And I input "20,00" text in "Amount" field of "PaymentList" table
@@ -580,3 +569,14 @@ Scenario: _051014 check the display of details on the form Cash payment with the
 		| # | 'Amount'    | Planning transaction basis |
 		| 1 | '100,00'    | ''                        |
 
+
+Scenario: _300512 check connection to CashPayment report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberCashPayment0510011$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows

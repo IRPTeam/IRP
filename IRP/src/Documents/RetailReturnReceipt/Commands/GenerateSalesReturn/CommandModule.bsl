@@ -44,7 +44,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOfTables.Add(GetDocumentTable_RetailSalesReceipt(ArrayOf_RetailSalesReceipt));
 	
 	Return JoinDocumentsStructure(ArrayOfTables, 
-	"BasedOn, Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer");
+	"BasedOn, Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer, BusinessUnitTitle");
 EndFunction
 
 &AtServer
@@ -60,6 +60,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	ItemList.Columns.Add("Currency"			, New TypeDescription("CatalogRef.Currencies"));
 	ItemList.Columns.Add("ItemKey"			, New TypeDescription("CatalogRef.ItemKeys"));
 	ItemList.Columns.Add("Store"			, New TypeDescription("CatalogRef.Stores"));
+	ItemList.Columns.Add("BusinessUnitTitle", New TypeDescription("CatalogRef.BusinessUnits"));
 	ItemList.Columns.Add("RetailSalesReceipt", New TypeDescription("DocumentRef.RetailSalesReceipt"));
 	ItemList.Columns.Add("Unit"				, New TypeDescription("CatalogRef.Units"));
 	ItemList.Columns.Add("Quantity"			, New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
@@ -71,7 +72,9 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	ItemList.Columns.Add("Price"			, New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
 	ItemList.Columns.Add("Key"				, New TypeDescription("UUID"));
 	ItemList.Columns.Add("RowKey"			, New TypeDescription("String"));
+	ItemList.Columns.Add("BusinessUnit"		, New TypeDescription("CatalogRef.BusinessUnits"));
 	ItemList.Columns.Add("RetailCustomer"   , New TypeDescription("CatalogRef.RetailCustomers"));
+	ItemList.Columns.Add("DontCalculateRow" , New TypeDescription("Boolean"));
 	
 	TaxListMetadataColumns = Metadata.Documents.RetailReturnReceipt.TabularSections.TaxList.Attributes;
 	TaxList = New ValueTable();
@@ -304,6 +307,7 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	CAST(tmpQueryTable.RetailSalesReceipt AS Document.RetailSalesReceipt).Currency AS Currency,
 		|	CAST(tmpQueryTable.RetailSalesReceipt AS Document.RetailSalesReceipt).Company AS Company,
 		|	CAST(tmpQueryTable.RetailSalesReceipt AS Document.RetailSalesReceipt).RetailCustomer AS RetailCustomer,
+		|	CAST(tmpQueryTable.RetailSalesReceipt AS Document.RetailSalesReceipt).BusinessUnit AS BusinessUnitTitle,
 		|	tmpQueryTable.Key,
 		|	tmpQueryTable.RowKey,
 		|	tmpQueryTable.Unit AS QuantityUnit,
@@ -315,7 +319,9 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	ISNULL(ItemList.NetAmount, 0) AS NetAmount,
 		|	ISNULL(ItemList.OffersAmount, 0) AS OffersAmount,
 		|	ISNULL(ItemList.PriceType, VALUE(Catalog.PriceTypes.EmptyRef)) AS PriceType,
-		|	ISNULL(ItemList.Store, VALUE(Catalog.Stores.EmptyRef)) AS Store
+		|	ISNULL(ItemList.Store, VALUE(Catalog.Stores.EmptyRef)) AS Store,
+		|	ISNULL(ItemList.BusinessUnit, VALUE(Catalog.BusinessUnits.EmptyRef)) AS BusinessUnit,
+		|	ISNULL(ItemList.DontCalculateRow, FALSE) AS DontCalculateRow
 		|FROM
 		|	tmpQueryTable AS tmpQueryTable
 		|		INNER JOIN Document.RetailSalesReceipt.ItemList AS ItemList

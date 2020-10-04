@@ -1,8 +1,6 @@
 ﻿#language: en
 @tree
 @Positive
-@Test
-@Group01
 @Catalogs
 
 Feature: filling in Currencies catalog
@@ -59,6 +57,6 @@ Scenario: _005011 filling in the "Currencies" catalog
 		Then I check for the "Currencies" catalog element with the "Description_en" "Euro"
 		Then I check for the "Currencies" catalog element with the "Description_tr" "Euro TR"
 		Then I check for the "Currencies" catalog element with the "Description_ru" "Евро"
-	* Clean catalog Currencies
-		And I delete "Currencies" catalog element with the Description_en "American dollar"
-		And I delete "Currencies" catalog element with the Description_en "Euro"
+	# * Clean catalog Currencies
+	# 	And I delete "Currencies" catalog element with the Description_en "American dollar"
+	# 	And I delete "Currencies" catalog element with the Description_en "Euro"

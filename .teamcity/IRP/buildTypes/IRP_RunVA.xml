@@ -11,8 +11,8 @@
     <disabled-settings>
       <setting-ref ref="BUILD_EXT_19" />
       <setting-ref ref="RUNNER_10" />
+      <setting-ref ref="RUNNER_12" />
       <setting-ref ref="RUNNER_29" />
-      <setting-ref ref="RUNNER_6" />
       <setting-ref ref="RUNNER_7" />
     </disabled-settings>
     <parameters>
@@ -219,15 +219,15 @@ Write-Output "##teamcity[compilationFinished compiler='VA settings']"]]></param>
           <param name="jetbrains_powershell_noprofile" value="true" />
           <param name="jetbrains_powershell_script_code"><![CDATA[If ("%env.RunAllTest%" -eq "true"){
     Write-Output "One time start full test"
-	$a = @("Group1", "Group2", "Group3", "Group4", "Group5", "Group6", "Group7", "Group8", "Group9", "Group10", "Group11", "Group12", "Group13", "Group14", "Group15", "Group16", "Group17", "Group18")
+	$a = @("BasicFormsCheck", "Catalogs", "CurrencyRate", "Price", "Purchase", "InventoryTransfer", "Sales", "RetailDocuments", "Services", "Inventory", "Discount", "CashManagement", "StandartAgreement", "TaxCalculation", "Barcodes", "Filters", "Forms", "FillingDocuments", "SerialLotNumber", "LinkedTransaction", "LoadInfo", "PrintForm", "OpeningEntries", "CreationBasedMulti", "DocumentVerification", "PhysicalInventory", "Other")
   }elseif ("%dep.IRP_GitHubUpdate.env.Database1CName%" -eq "%teamcity.project.id%_develop")
   {
     Write-Output "Start full test"
-	$a = @("Group1", "Group2", "Group3", "Group4", "Group5", "Group6", "Group7", "Group8", "Group9", "Group10", "Group11", "Group12", "Group13", "Group14", "Group15", "Group16", "Group17", "Group18")
+	$a = @("BasicFormsCheck", "Catalogs", "CurrencyRate", "Price", "Purchase", "InventoryTransfer", "Sales", "RetailDocuments", "Services", "Inventory", "Discount", "CashManagement", "StandartAgreement", "TaxCalculation", "Barcodes", "Filters", "Forms", "FillingDocuments", "SerialLotNumber", "LinkedTransaction", "LoadInfo", "PrintForm", "OpeningEntries", "CreationBasedMulti", "DocumentVerification", "PhysicalInventory", "Other")
   }elseif ("%dep.IRP_GitHubUpdate.env.Database1CName%" -like "%teamcity.project.id%_develop*")
   {
     Write-Output "Start short test"
- 	$a = @("CatalogForms", "DocumentForms", "OtherForms")	
+ 	$a = @("Catalogs")	
   }else{
   	Write-Output "Skip tests"
   }
@@ -238,7 +238,12 @@ foreach ($elementTag in $a) {
   Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"
 
   $allurePath = "%system.teamcity.build.workingDir%/allure" | ForEach-Object { $_ -replace '\\', '/' }
-  $TempDb = "'/F%system.teamcity.build.workingDir%\TempDB'" | ForEach-Object { $_ -replace '\\', '/' }
+  $TemplateBD = "'/F%system.teamcity.build.workingDir%\TempDB'" | ForEach-Object { $_ -replace '\\', '/' }
+  
+  $TempDb = "'/F%system.teamcity.build.workingDir%\$elementTag'" | ForEach-Object { $_ -replace '\\', '/' } 
+  New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\$elementTag"
+  Copy-Item -Path "%system.teamcity.build.workingDir%\TempDB\1Cv8.1CD" -Destination "%system.teamcity.build.workingDir%\$elementTag\1Cv8.1CD"
+  
   #$TempDb = "'/Slocalhost/%env.Database1CName%'" | ForEach-Object { $_ -replace '\\', '/' }
   $connection = "' /N %env.LoginTo1C% /P %env.PassTo1C% /Len /UseHwLicenses+ /TComp -SDC  /DisableStartupMessages /DisplayPerformance /DisplayAllFunctions /EnableCheckModal /EnableCheckExtensionsAndAddInsSyncCalls /DEBUG -http -attach /DEBUGGERURL http://localhost:%env.DebugPort%'"
   $text = "
@@ -330,9 +335,10 @@ foreach ($elementTag in $a) {
     'vanessashutdown': %env.CloseVA%,
     'closetestclient': true
   }"
-
+  Write-Output "##teamcity[compilationStarted compiler='VA settings']"
+  Write-Output $text
   $a = $text | ConvertFrom-Json
-  $a | Add-Member -Type NoteProperty -Name 'featurepath' -Value '%env.VA.FeaturePath%Internal'
+  $a | Add-Member -Type NoteProperty -Name 'featurepath' -Value '%env.VA.FeaturePath%Internal_New'
   $a | Add-Member -Type NoteProperty -Name 'projectpath' -Value '%system.teamcity.build.workingDir%'
   $a | Add-Member -Type NoteProperty -Name 'outputscreenshot' -Value '%system.teamcity.build.tempDir%'
   $a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value "%system.teamcity.build.tempDir%\errors$elementTag"
@@ -342,13 +348,12 @@ foreach ($elementTag in $a) {
   #$a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepathbase' -Value "$allurePath/base"
   
   $a.librarycatalogs += '%system.teamcity.build.workingDir%\DataProcessor'
-  $a.librarycatalogs += '%env.VA.FeaturePath%External'
+  $a.librarycatalogs += '%env.VA.FeaturePath%External_New'
   $a.filtertags += $elementTag
 
   $b = $a | ConvertTo-Json -depth 32
   $b | set-content %system.teamcity.build.workingDir%/va$elementTag.json
-  Write-Output "##teamcity[compilationStarted compiler='VA settings']"
-  Write-Output "$b"
+  Write-Output $b
   Write-Output "##teamcity[compilationFinished compiler='VA settings']"
 
   #####################################################################################
@@ -356,7 +361,7 @@ foreach ($elementTag in $a) {
   $ProcessInfo = New-Object System.Diagnostics.ProcessStartInfo 
   $ProcessInfo.FileName = %env.PathTo1CPlatform% 
   $ProcessInfo.UseShellExecute = $false 
-  $ProcessInfo.Arguments = "%env.ConnectionTo1C% /Execute ""%env.OScript%/lib/vanessa-automation/vanessa-automation.epf"" /TestManager /C""StartFeaturePlayer; VBParams=%system.teamcity.build.workingDir%\va$elementTag.json""" 
+  $ProcessInfo.Arguments = "/N %env.LoginTo1C% /P %env.PassTo1C%  ""/F%system.teamcity.build.workingDir%\$elementTag"" /Execute ""%env.OScript%/lib/vanessa-automation/vanessa-automation.epf"" /TestManager /C""StartFeaturePlayer; VBParams=%system.teamcity.build.workingDir%\va$elementTag.json""" 
   $Process = New-Object System.Diagnostics.Process 
   $Process.StartInfo = $ProcessInfo 
   $Process.Start() | Out-Null  
@@ -419,22 +424,25 @@ foreach ($elementTag in $a) {
           <param name="jetbrains_powershell_noprofile" value="true" />
           <param name="jetbrains_powershell_script_code"><![CDATA[If ("%env.RunAllTest%" -eq "true"){
     Write-Output "One time start full test"
-	$TagArray = @("Group1", "Group2", "Group3", "Group4", "Group5", "Group6", "Group7", "Group8", "Group9", "Group10", "Group11", "Group12", "Group13", "Group14", "Group15", "Group16", "Group17", "Group18")
+	$TagArray = @("BasicFormsCheck", "Catalogs", "CurrencyRate", "Price", "Purchase", "InventoryTransfer", "Sales", "RetailDocuments", "Services", "Inventory", "Discount", "CashManagement", "StandartAgreement", "TaxCalculation", "Barcodes", "Filters", "Forms", "FillingDocuments", "SerialLotNumber", "LinkedTransaction", "LoadInfo", "PrintForm", "OpeningEntries", "CreationBasedMulti", "DocumentVerification", "PhysicalInventory", "Other")
   }elseif ("%dep.IRP_GitHubUpdate.env.Database1CName%" -eq "%teamcity.project.id%_develop")
   {
     Write-Output "Start full test"
-	$TagArray = @("Group1", "Group2", "Group3", "Group4", "Group5", "Group6", "Group7", "Group8", "Group9", "Group10", "Group11", "Group12", "Group13", "Group14", "Group15", "Group16", "Group17", "Group18")
+	$TagArray = @("BasicFormsCheck", "Catalogs", "CurrencyRate", "Price", "Purchase", "InventoryTransfer", "Sales", "RetailDocuments", "Services", "Inventory", "Discount", "CashManagement", "StandartAgreement", "TaxCalculation", "Barcodes", "Filters", "Forms", "FillingDocuments", "SerialLotNumber", "LinkedTransaction", "LoadInfo", "PrintForm", "OpeningEntries", "CreationBasedMulti", "DocumentVerification", "PhysicalInventory", "Other")
   }elseif ("%dep.IRP_GitHubUpdate.env.Database1CName%" -like "%teamcity.project.id%_develop*")
   {
     Write-Output "Start short test"
- 	$TagArray = @("CatalogForms", "DocumentForms", "OtherForms")	
+ 	$TagArray = @("BasicFormsCheck", "Catalogs")	
   }else{
-      Write-Output "Skip tests"
+  	Write-Output "Skip tests"
   }
   
 $VA_PID_Array = @{}
 New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%/allure/base"
 $port = 48010
+New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps"
+New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps\Template"
+Copy-Item -Path "%system.teamcity.build.workingDir%\TempDB\1Cv8.1CD" -Destination "%system.teamcity.build.workingDir%\AllSteps\Template\1Cv8.1CD"
 foreach ($elementTag in $TagArray) {
   $port += 10
   $portmax = $port + 9
@@ -442,8 +450,11 @@ foreach ($elementTag in $TagArray) {
   #Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"
 
   $allurePath = "%system.teamcity.build.workingDir%/allure" | ForEach-Object { $_ -replace '\\', '/' }
-  $TempDb = "'/F%system.teamcity.build.workingDir%\TempDB'" | ForEach-Object { $_ -replace '\\', '/' }
-  #$TempDb = "'/Slocalhost/%env.Database1CName%'" | ForEach-Object { $_ -replace '\\', '/' }
+  $TempDb = "'/F%system.teamcity.build.workingDir%\AllSteps\$elementTag'" | ForEach-Object { $_ -replace '\\', '/' } 
+  New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps\$elementTag"
+  Copy-Item -Path "%system.teamcity.build.workingDir%\TempDB\1Cv8.1CD" -Destination "%system.teamcity.build.workingDir%\AllSteps\$elementTag\1Cv8.1CD"
+  
+   #$TempDb = "'/Slocalhost/%env.Database1CName%'" | ForEach-Object { $_ -replace '\\', '/' }
   $connection = "' /N %env.LoginTo1C% /P %env.PassTo1C% /Len /UseHwLicenses+ /TComp -SDC  /DisableStartupMessages /DisplayPerformance /DisplayAllFunctions /EnableCheckModal /EnableCheckExtensionsAndAddInsSyncCalls /DEBUG -http -attach /DEBUGGERURL http://localhost:%env.DebugPort%'"
   $text = "
   {
@@ -536,7 +547,7 @@ foreach ($elementTag in $TagArray) {
   }"
 
   $a = $text | ConvertFrom-Json
-  $a | Add-Member -Type NoteProperty -Name 'featurepath' -Value '%env.VA.FeaturePath%Internal'
+  $a | Add-Member -Type NoteProperty -Name 'featurepath' -Value '%env.VA.FeaturePath%Internal_New'
   $a | Add-Member -Type NoteProperty -Name 'projectpath' -Value '%system.teamcity.build.workingDir%'
   $a | Add-Member -Type NoteProperty -Name 'outputscreenshot' -Value '%system.teamcity.build.tempDir%'
   $a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value "%system.teamcity.build.tempDir%\errors$elementTag"
@@ -547,13 +558,12 @@ foreach ($elementTag in $TagArray) {
   #$a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepathbase' -Value "$allurePath/base"
   
   $a.librarycatalogs += '%system.teamcity.build.workingDir%\DataProcessor'
-  $a.librarycatalogs += '%env.VA.FeaturePath%External'
+  $a.librarycatalogs += '%env.VA.FeaturePath%External_New'
   $a.filtertags += $elementTag
 
   $b = $a | ConvertTo-Json -depth 32
   $b | set-content %system.teamcity.build.workingDir%/va$elementTag.json
-  Write-Output "##teamcity[compilationStarted compiler='VA settings']"
-  Write-Output "$b"
+  #Write-Output "$b"
   Write-Output "##teamcity[compilationFinished compiler='VA settings']"
 
   #####################################################################################
@@ -561,13 +571,14 @@ foreach ($elementTag in $TagArray) {
   $ProcessInfo = New-Object System.Diagnostics.ProcessStartInfo 
   $ProcessInfo.FileName = %env.PathTo1CPlatform% 
   $ProcessInfo.UseShellExecute = $false 
-  $ProcessInfo.Arguments = "%env.ConnectionTo1C% /Execute ""%env.OScript%/lib/vanessa-automation/vanessa-automation.epf"" /TestManager /C""StartFeaturePlayer; VBParams=%system.teamcity.build.workingDir%\va$elementTag.json""" 
+  $ProcessInfo.Arguments = "/N %env.LoginTo1C% /P %env.PassTo1C%  ""/F%system.teamcity.build.workingDir%\AllSteps\$elementTag"" /Execute ""%env.OScript%/lib/vanessa-automation/vanessa-automation.epf"" /TestManager /C""StartFeaturePlayer; VBParams=%system.teamcity.build.workingDir%\va$elementTag.json""" 
   $Process = New-Object System.Diagnostics.Process 
   $Process.StartInfo = $ProcessInfo 
   $Process.Start() | Out-Null  
   $VA_PID = $Process.Id 
   $global:VA_PID_Array.Add($elementTag, $Process.Id)
   echo "##teamcity[setParameter name='env.VA_PID' value='$VA_PID']"
+  Start-Sleep 30
 }
   ######################################################################################
   $global:JobArray = @()
@@ -965,8 +976,8 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code"><![CDATA[Copy-Item %system.teamcity.build.workingDir%\TempDB\1Cv8.1CD -Destination .
-Compress-Archive -Path 1Cv8.1CD -DestinationPath %env.Database1CName%_%build.number%.zip]]></param>
+          <param name="jetbrains_powershell_script_code"><![CDATA[#Copy-Item %system.teamcity.build.workingDir%\TempDB\1Cv8.1CD -Destination .
+Compress-Archive -Path AllSteps\* -DestinationPath %env.Database1CName%_%build.number%.zip]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>

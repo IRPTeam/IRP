@@ -1,8 +1,6 @@
 ﻿#language: en
 @tree
 @Positive
-@Test
-@Group01
 @Catalogs
 
 Feature: filling in AccessProfiles catalog
@@ -90,6 +88,6 @@ Scenario: _005016 filling in the "AccessProfiles" catalog
 		Then I check for the "AccessProfiles" catalog element with the "Description_en" "Management"  
 		Then I check for the "AccessProfiles" catalog element with the "Description_tr" "Management TR"
 		Then I check for the "AccessProfiles" catalog element with the "Description_ru" "Руководство"
-	* Clean catalog AccessProfiles
-		And I delete "AccessProfiles" catalog element with the Description_en "Management"
-		And I delete "AccessProfiles" catalog element with the Description_en "Logistic team"
+	# * Clean catalog AccessProfiles
+	# 	And I delete "AccessProfiles" catalog element with the Description_en "Management"
+	# 	And I delete "AccessProfiles" catalog element with the Description_en "Logistic team"

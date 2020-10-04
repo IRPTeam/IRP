@@ -2,18 +2,29 @@
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
+	CurrenciesClient.OnOpen(Object, Form, AddInfo);
+EndProcedure
+
+Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
+	CurrenciesClient.AfterWriteAtClient(Object, Form, "Transactions", AddInfo);
+EndProcedure
+	
+#EndRegion
+
+#Region _Date
+
+Procedure DateOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	CurrenciesClient.DateOnChange(Object, Form, "Transactions", AddInfo);
 EndProcedure
 
 #EndRegion
 
-Procedure DateOnChange(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-EndProcedure
+#Region Company
 
-#Region ItemCompany
-
-Procedure CompanyOnChange(Object, Form, Item) Export
+Procedure CompanyOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	CurrenciesClient.CompanyOnChange(Object, Form, "Transactions", AddInfo);	
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -38,19 +49,10 @@ EndProcedure
 
 #EndRegion
 
-Procedure TransactionsBasisDocumentOnChange(Object, Form, Item) Export
-	CurrentRow = Form.Items.Transactions.CurrentData;
-	If CurrentRow <> Undefined Then
-		CurrentRow.Partner = ServiceSystemServer.GetCompositeObjectAttribute(CurrentRow.BasisDocument, "Partner");
-		CurrentRow.Agreement = ServiceSystemServer.GetCompositeObjectAttribute(CurrentRow.BasisDocument, "Agreement");
-		CurrentRow.Currency = ServiceSystemServer.GetCompositeObjectAttribute(CurrentRow.BasisDocument, "Currency");
-		CurrentRow.LegalName = ServiceSystemServer.GetCompositeObjectAttribute(CurrentRow.BasisDocument, "LegalName");
-	EndIf;	
-EndProcedure
 
-#Region ItemTransactionsPartner
+#Region Partner
 
-Procedure TransactionsPartnerOnChange(Object, Form, Item) Export
+Procedure TransactionsPartnerOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	CurrentData = Form.Items.Transactions.CurrentData;
 	
 	If CurrentData = Undefined Then
@@ -69,9 +71,10 @@ Procedure TransactionsPartnerOnChange(Object, Form, Item) Export
 		NewAgreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
 		If Not CurrentData.Agreement = NewAgreement Then
 			CurrentData.Agreement = NewAgreement;
-			TransactionsAgreementOnChange(Object, Form);
+			TransactionsAgreementOnChange(Object, Form, Undefined, AddInfo);
 		EndIf;
 	EndIf;
+	DocCreditDebitNoteClientServer.SetBasisDocumentReadOnly(Object, CurrentData);
 EndProcedure
 
 Procedure TransactionsPartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -95,53 +98,27 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemDescription
-
-Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
-	StandardProcessing = False;
-	CommonFormActions.EditMultilineText(Item.Name, Form);
-EndProcedure
-
-#EndRegion
-
-#Region GroupTitle
-
-#Region GroupTitleDecorationsEvents
-
-Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-#EndRegion
-
-#EndRegion
-
 #Region Agreement
 
-Procedure TransactionsAgreementOnChange(Object, Form, Item = Undefined) Export
+Procedure TransactionsAgreementOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	CurrentData = Form.Items.Transactions.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
 	
-	CurrentData.Currency = AgreementInfo.Currency;
-	
-	If AgreementInfo.ApArPostingDetail <> PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
+	If AgreementInfo.ApArPostingDetail <> PredefinedValue("Enum.ApArPostingDetail.ByDocuments")
+		Or CurrentData.Agreement <> 
+		ServiceSystemServer.GetCompositeObjectAttribute(CurrentData.BasisDocument, "Agreement") Then
 		CurrentData.BasisDocument = Undefined;
 	EndIf;
+	
+	If CurrentData.Currency <> AgreementInfo.Currency Then
+		CurrentData.Currency = AgreementInfo.Currency;
+		TransactionsCurrencyOnChange(Object, Form, Undefined);
+	EndIf;
+	CurrenciesClient.AgreementOnChange(Object, Form, "Transactions", AddInfo);
+	DocCreditDebitNoteClientServer.SetBasisDocumentReadOnly(Object, CurrentData);
 EndProcedure
 
 Procedure TransactionsAgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -193,34 +170,22 @@ Procedure TransactionsAgreementTextChange(Object, Form, Item, Text, StandardProc
 EndProcedure
 
 #EndRegion
-	
-Procedure TransactionsOnActivateCell(Object, Form, Item) Export
-	CurrentData = Form.Items.Transactions.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	If Upper(Item.CurrentItem.Name) <> Upper("TransactionsBasisDocument") Then
-		Return;
-	EndIf;
-	If Not ValueIsFilled(CurrentData.Agreement) Then
-		Return;
-	EndIf;
-		
-	AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
-	If AgreementInfo.ApArPostingDetail = PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
-		Form.Items[Item.CurrentItem.Name].ReadOnly = False;
-	Else
-		Form.Items[Item.CurrentItem.Name].ReadOnly = True;
-	EndIf;
-EndProcedure
 
 #Region LegalName
 
 Procedure TransactionsLegalNameOnChange(Object, Form, Item) Export
 	CurrentData = Form.Items.Transactions.CurrentData;
-	If ValueIsFilled(CurrentData.LegalName) Then
-		CurrentData.Partner = DocDebitNoteServer.GetPartnerByLegalName(CurrentData.LegalName, CurrentData.Partner);
+	If CurrentData = Undefined Then
+		Return;
 	EndIf;
+	If ValueIsFilled(CurrentData.LegalName) Then
+		NewPartner = DocCreditDebitNoteServer.GetPartnerByLegalName(CurrentData.LegalName, CurrentData.Partner);
+		If NewPartner <> CurrentData.Partner Then
+			CurrentData.Partner = DocCreditDebitNoteServer.GetPartnerByLegalName(CurrentData.LegalName, CurrentData.Partner);
+			TransactionsPartnerOnChange(Object, Form, Undefined);
+		EndIf;
+	EndIf;
+	DocCreditDebitNoteClientServer.SetBasisDocumentReadOnly(Object, CurrentData);
 EndProcedure
 
 Procedure TransactionsLegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -250,6 +215,112 @@ Procedure TransactionsLegalNameEditTextChange(Object, Form, Item, Text, Standard
 	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, 
 				ArrayOfFilters, AdditionalParameters);
 EndProcedure
+
 #EndRegion
 
+#Region BasisDocument
+
+Procedure TransactionsBasisDocumentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	StandardProcessing = False;
 	
+	CurrentData = Form.Items.Transactions.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	Parameters = New Structure();
+	Parameters.Insert("Filter", New Structure());
+	If Not ValueIsFilled(CurrentData.Agreement) Then
+		Parameters.Filter.Insert("Agreement_ApArPostingDetail", PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
+	EndIf;
+	Parameters.Filter.Insert("Company", Object.Company);
+	
+	Parameters.Insert("FilterFromCurrentData", "Partner, LegalName, Agreement");
+	
+	Notify = New NotifyDescription("TransactionsBasisDocumentStartChoiceEnd", ThisObject, New Structure("Form", Form));
+	Parameters.Insert("Notify", Notify);
+	Parameters.Insert("TableName", "DocumentsForCreditDebitNote");
+	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
+EndProcedure
+
+Procedure TransactionsBasisDocumentStartChoiceEnd(Result, AdditionalParameters) Export
+	If ValueIsFilled(Result) Then
+		Object = AdditionalParameters.Form.Object;
+		Form = AdditionalParameters.Form;
+		CurrentData = AdditionalParameters.Form.Items.Transactions.CurrentData;
+		If CurrentData <> Undefined Then
+			CurrentData.BasisDocument = Result;
+			CurrentData.Partner = ServiceSystemServer.GetCompositeObjectAttribute(Result   , "Partner");
+			CurrentData.Agreement = ServiceSystemServer.GetCompositeObjectAttribute(Result , "Agreement");
+			CurrentData.Currency = ServiceSystemServer.GetCompositeObjectAttribute(Result  , "Currency");
+			CurrentData.LegalName = ServiceSystemServer.GetCompositeObjectAttribute(Result , "LegalName");
+			CurrenciesClient.AgreementOnChange(Object, Form, "Transactions");
+		EndIf;
+	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region Currency
+
+&AtClient
+Procedure TransactionsCurrencyOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	CurrenciesClient.CurrencyOnChange(Object, Form, "Transactions", AddInfo);
+EndProcedure
+
+#EndRegion
+
+#Region Amount
+
+&AtClient
+Procedure TransactionsAmountOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	CurrenciesClient.AmountOnChange(Object, Form, "Transactions", AddInfo);
+EndProcedure
+
+#EndRegion
+
+#Region Transactions
+
+Procedure TransactionsBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
+	CurrenciesClient.BeforeDeleteRow(Object, Form, "Transactions", AddInfo);
+EndProcedure
+
+Procedure TransactionsOnActivateRow(Object, Form, Item, AddInfo = Undefined) Export
+	CurrenciesClient.OnActivateRow(Object, Form, "Transactions", AddInfo);
+EndProcedure
+	
+#EndRegion
+
+#Region ItemDescription
+
+Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
+	StandardProcessing = False;
+	CommonFormActions.EditMultilineText(Item.Name, Form);
+EndProcedure
+
+#EndRegion
+
+#Region GroupTitle
+
+#Region GroupTitleDecorationsEvents
+
+Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
+EndProcedure
+
+Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
+EndProcedure
+
+Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
+EndProcedure
+
+Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+

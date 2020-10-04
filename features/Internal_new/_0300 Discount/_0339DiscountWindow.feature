@@ -1,9 +1,9 @@
 ﻿#language: en
-
+@tree
 @Positive
 @Discount
 @IgnoreOnCIMainBuild
-@tree
+
 
 
 Feature: check that the discount window is displayed in Sales Order

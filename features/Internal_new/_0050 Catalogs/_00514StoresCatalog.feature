@@ -1,8 +1,6 @@
 ﻿#language: en
 @tree
 @Positive
-@Test
-@Group01
 @Catalogs
 
 Feature: filling in Stores catalog
@@ -93,8 +91,8 @@ Scenario: _005032 filling in the "Stores" catalog
 		Then I check for the "Stores" catalog element with the "Description_en" "Store 02"  
 		Then I check for the "Stores" catalog element with the "Description_en" "Store 03"
 		Then I check for the "Stores" catalog element with the "Description_en" "Store 04"
-	* Clean catalog
-		And I delete "Stores" catalog element with the Description_en "Store 01"
-		And I delete "Stores" catalog element with the Description_en "Store 02"
-		And I delete "Stores" catalog element with the Description_en "Store 03"
-		And I delete "Stores" catalog element with the Description_en "Store 04"
+	# * Clean catalog
+	# 	And I delete "Stores" catalog element with the Description_en "Store 01"
+	# 	And I delete "Stores" catalog element with the Description_en "Store 02"
+	# 	And I delete "Stores" catalog element with the Description_en "Store 03"
+	# 	And I delete "Stores" catalog element with the Description_en "Store 04"

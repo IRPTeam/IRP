@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group7
+@Inventory
 
 Feature: Bundling
 
@@ -819,3 +819,14 @@ Scenario: _02951901 clear movements Bundling and check that there is no movement
 		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Red'                    |
 		And I close all client application windows
 
+
+Scenario: _300519 check connection to Bundling report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.Bundling"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberBundling0029501$$     |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows

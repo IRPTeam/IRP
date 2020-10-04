@@ -546,38 +546,25 @@ Function PrepareServerData(Parameters) Export
 	EndIf;
 	
 	If Parameters.Property("GetArrayOfCurrenciesRows") Then
-		CurrenciesColumns = Metadata.Documents.PurchaseInvoice.TabularSections.Currencies.Attributes;
-		CurrenciesTable = New ValueTable();
-		CurrenciesTable.Columns.Add("Key"             , CurrenciesColumns.Key.Type);
-		CurrenciesTable.Columns.Add("CurrencyFrom"    , CurrenciesColumns.CurrencyFrom.Type);
-		CurrenciesTable.Columns.Add("Rate"            , CurrenciesColumns.Rate.Type);
-		CurrenciesTable.Columns.Add("ReverseRate"     , CurrenciesColumns.ReverseRate.Type);
-		CurrenciesTable.Columns.Add("ShowReverseRate" , CurrenciesColumns.ShowReverseRate.Type);
-		CurrenciesTable.Columns.Add("Multiplicity"    , CurrenciesColumns.Multiplicity.Type);
-		CurrenciesTable.Columns.Add("MovementType"    , CurrenciesColumns.MovementType.Type);
-		CurrenciesTable.Columns.Add("Amount"          , CurrenciesColumns.Amount.Type);
-		
 		If Result.Property("AgreementInfo") Then
 			AgreementInfo = Result.AgreementInfo;
 		Else
 			AgreementInfo = CatAgreementsServer.GetAgreementInfo(Parameters.GetArrayOfCurrenciesRows.Agreement);
 		EndIf;
-		
-		CurrenciesServer.FillCurrencyTable(New Structure("Currencies", CurrenciesTable), 
-	                                   Parameters.GetArrayOfCurrenciesRows.Date, 
-	                                   Parameters.GetArrayOfCurrenciesRows.Company, 
-	                                   Parameters.GetArrayOfCurrenciesRows.Currency, 
-	                                   Parameters.GetArrayOfCurrenciesRows.UUID,
-	                                   AgreementInfo);
-	    
-	    ArrayOfCurrenciesRows = New Array();                               
-	    For Each RowCurrenciesTable In CurrenciesTable Do
-	    	NewRow = New Structure("Key, CurrencyFrom, Rate, ReverseRate, ShowReverseRate, Multiplicity, MovementType, Amount");
-	    	FillPropertyValues(NewRow, RowCurrenciesTable);
-	    	ArrayOfCurrenciesRows.Add(NewRow);
-	    EndDo;
-	    
-	    Result.Insert("ArrayOfCurrenciesRows", ArrayOfCurrenciesRows);		
+		Result.Insert("ArrayOfCurrenciesRows", 
+		GetArrayOfCurrenciesRows(AgreementInfo, Parameters.GetArrayOfCurrenciesRows));		
+	EndIf;
+	
+	If Parameters.Property("GetArrayOfCurrenciesRowsForAllTable") Then
+		ArrayOfCurrenciesRows = New Array();
+		For Each Row In Parameters.GetArrayOfCurrenciesRowsForAllTable Do
+			PartOfArrayOfCurrenciesRows = 
+			GetArrayOfCurrenciesRows(CatAgreementsServer.GetAgreementInfo(Row.Agreement), Row);
+			For Each ItemOfPart In PartOfArrayOfCurrenciesRows Do
+				ArrayOfCurrenciesRows.Add(ItemOfPart);
+			EndDo;
+		EndDo;
+		Result.Insert("ArrayOfCurrenciesRows", ArrayOfCurrenciesRows);
 	EndIf;
 	
 	If Parameters.Property("GetMetaDataStructure") Then
@@ -649,6 +636,35 @@ Function PrepareServerData(Parameters) Export
 	EndIf;
 	
 	Return Result;
+EndFunction	
+
+Function GetArrayOfCurrenciesRows(AgreementInfo, Parameters)
+	CurrenciesColumns = Metadata.Documents.PurchaseInvoice.TabularSections.Currencies.Attributes;
+	CurrenciesTable = New ValueTable();
+	CurrenciesTable.Columns.Add("Key"             , CurrenciesColumns.Key.Type);
+	CurrenciesTable.Columns.Add("CurrencyFrom"    , CurrenciesColumns.CurrencyFrom.Type);
+	CurrenciesTable.Columns.Add("Rate"            , CurrenciesColumns.Rate.Type);
+	CurrenciesTable.Columns.Add("ReverseRate"     , CurrenciesColumns.ReverseRate.Type);
+	CurrenciesTable.Columns.Add("ShowReverseRate" , CurrenciesColumns.ShowReverseRate.Type);
+	CurrenciesTable.Columns.Add("Multiplicity"    , CurrenciesColumns.Multiplicity.Type);
+	CurrenciesTable.Columns.Add("MovementType"    , CurrenciesColumns.MovementType.Type);
+	CurrenciesTable.Columns.Add("Amount"          , CurrenciesColumns.Amount.Type);
+		
+	CurrenciesServer.FillCurrencyTable(New Structure("Currencies", CurrenciesTable), 
+	                                   Parameters.Date, 
+	                                   Parameters.Company, 
+	                                   Parameters.Currency, 
+	                                   Parameters.UUID,
+	                                   AgreementInfo);
+	    
+	ArrayOfCurrenciesRows = New Array();                               
+	For Each RowCurrenciesTable In CurrenciesTable Do
+	   NewRow = New Structure("Key, CurrencyFrom, Rate, ReverseRate, ShowReverseRate, Multiplicity, MovementType, Amount");
+	   FillPropertyValues(NewRow, RowCurrenciesTable);
+	   ArrayOfCurrenciesRows.Add(NewRow);
+	EndDo;
+	    
+	Return ArrayOfCurrenciesRows;
 EndFunction	
 
 Function GetCurrencyByMovementType(ArrayOfMovementsTypes)

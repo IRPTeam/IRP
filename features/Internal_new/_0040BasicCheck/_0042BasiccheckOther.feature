@@ -2,7 +2,7 @@
 @tree
 @Positive
 @Test
-@OtherForms
+@BasicFormsCheck
 
 Feature: basic check registers, reports, constants
 As an QA
@@ -771,3 +771,17 @@ Scenario: Open object form "PointOfSale"
 		Then I raise "Failed to open data processor form PointOfSale" exception
 	And I close current window
 
+Scenario: Open object form "PointOfSale"
+
+	Given I open "DataHistory" data processor default form 
+	If the warning is displayed then
+		Then I raise "Failed to open data processor form Data history" exception
+	And "MetadataTree" table became equal
+		| 'Use' | 'Name'                        |
+		| 'No'  | 'Catalogs'                    |
+		| 'No'  | 'ChartsOfCharacteristicTypes' |
+		| 'No'  | 'Constants'                   |
+		| 'No'  | 'Documents'                   |
+		| 'No'  | 'ExchangePlans'               |
+		| 'No'  | 'InformationRegisters'        |
+	And I close current window

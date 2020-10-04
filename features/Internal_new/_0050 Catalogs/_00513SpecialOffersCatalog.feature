@@ -1,8 +1,6 @@
 ﻿#language: en
 @tree
 @Positive
-@Test
-@Group01
 @Catalogs
 
 Feature: filling in Special offers catalog
@@ -20,6 +18,7 @@ Background:
 
 
 Scenario: _005031 filling in the "Special offers" catalog
+		And I close all client application windows
 	* Opening a form and creating Special offers: Special Price
 		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
 		And Delay 2

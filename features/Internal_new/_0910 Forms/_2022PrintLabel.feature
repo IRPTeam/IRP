@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group12
+@Forms
+
 Feature: label processing
 
 

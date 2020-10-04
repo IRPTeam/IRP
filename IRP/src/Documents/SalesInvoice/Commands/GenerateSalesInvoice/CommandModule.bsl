@@ -113,7 +113,8 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	ItemList.Columns.Add("PriceType"		, New TypeDescription("CatalogRef.PriceTypes"));
 	ItemList.Columns.Add("Price"			, New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
 	ItemList.Columns.Add("Key"				, New TypeDescription("UUID"));
-	ItemList.Columns.Add("DeliveryDate"	, New TypeDescription("Date"));
+	ItemList.Columns.Add("DeliveryDate"	    , New TypeDescription("Date"));
+	ItemList.Columns.Add("DontCalculateRow" , New TypeDescription("Boolean"));
 	
 	TaxListMetadataColumns = Metadata.Documents.SalesOrder.TabularSections.TaxList.Attributes;
 	TaxList = New ValueTable();
@@ -126,6 +127,14 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	TaxList.Columns.Add("ManualAmount", TaxListMetadataColumns.ManualAmount.Type);
 	TaxList.Columns.Add("Ref", New TypeDescription("DocumentRef.SalesOrder"));
 	
+	ShipmentConfirmationsMetadataColumns = Metadata.Documents.SalesInvoice.TabularSections.ShipmentConfirmations.Attributes;
+	ShipmentConfirmations = New ValueTable();
+	ShipmentConfirmations.Columns.Add("Key"                            , ShipmentConfirmationsMetadataColumns.Key.Type);
+	ShipmentConfirmations.Columns.Add("ShipmentConfirmation"           , ShipmentConfirmationsMetadataColumns.ShipmentConfirmation.Type);
+	ShipmentConfirmations.Columns.Add("Quantity"                       , ShipmentConfirmationsMetadataColumns.Quantity.Type);
+	ShipmentConfirmations.Columns.Add("QuantityInShipmentConfirmation" , ShipmentConfirmationsMetadataColumns.QuantityInShipmentConfirmation.Type);
+	ShipmentConfirmations.Columns.Add("Ref"                            , New TypeDescription("DocumentRef.SalesOrder"));
+	
 	For Each TableStructure In ArrayOfTables Do
 		For Each Row In TableStructure.ItemList Do
 			FillPropertyValues(ItemList.Add(), Row);
@@ -133,6 +142,9 @@ Function JoinDocumentsStructure(ArrayOfTables)
 		For Each Row In TableStructure.TaxList Do
 			FillPropertyValues(TaxList.Add(), Row);
 		EndDo;
+		For Each Row In TableStructure.ShipmentConfirmations Do
+			FillPropertyValues(ShipmentConfirmations.Add(), Row);
+		EndDo;		
 	EndDo;
 	
 	KeyFields = "BasedOn, Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, ManagerSegment";
@@ -174,6 +186,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			
 		Result.Insert("ItemList"		, New Array());
 		Result.Insert("TaxList"			, New Array());
+		Result.Insert("ShipmentConfirmations" , New Array());
 		
 		FillPropertyValues(Filter, Row);
 		PriceType = Undefined;
@@ -207,13 +220,13 @@ Function JoinDocumentsStructure(ArrayOfTables)
 		EndIf;
 		
 		ArrayOfTaxListFilters = New Array();
+		ArrayOfShipmentConfirmationsFilters = New Array();
 		
 		For Each RowItemList In ItemList.Copy(Filter) Do
 			NewRow = New Structure();
 			NewRow.Insert("ItemKey"				, RowItemList.ItemKey);
 			NewRow.Insert("Store"				, RowItemList.Store);
 			NewRow.Insert("SalesOrder"			, RowItemList.SalesOrder);
-			NewRow.Insert("ShipmentConfirmation", RowItemList.ShipmentConfirmation);
 			NewRow.Insert("Unit"				, RowItemList.Unit);
 			NewRow.Insert("Quantity"			, RowItemList.Quantity);
 			NewRow.Insert("Price"				, RowItemList.Price);
@@ -223,6 +236,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			NewRow.Insert("OffersAmount"		, RowItemList.OffersAmount);
 			NewRow.Insert("Key"					, RowItemList.Key);
 			NewRow.Insert("DeliveryDate"		, RowItemList.DeliveryDate);
+			NewRow.Insert("DontCalculateRow"	, RowItemList.DontCalculateRow);
 			
 			If ValueIsFilled(PriceType) Then
 				NewRow.Insert("PriceType"		, PriceType);
@@ -231,6 +245,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			EndIf;
 			
 			ArrayOfTaxListFilters.Add(New Structure("Ref, Key", RowItemList.SalesOrder, RowItemList.Key));
+			ArrayOfShipmentConfirmationsFilters.Add(New Structure("Ref, Key", RowItemList.SalesOrder, RowItemList.Key));
 			
 			Result.ItemList.Add(NewRow);
 		EndDo;
@@ -249,13 +264,24 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			EndDo;
 		EndDo;
 		
+		For Each ShipmentConfirmationsFilter In ArrayOfShipmentConfirmationsFilters Do
+			For Each RowShipmentConfirmations In ShipmentConfirmations.Copy(ShipmentConfirmationsFilter) Do
+				NewRow = New Structure();
+				NewRow.Insert("Key"					           , RowShipmentConfirmations.Key);
+				NewRow.Insert("ShipmentConfirmation"           , RowShipmentConfirmations.ShipmentConfirmation);
+				NewRow.Insert("Quantity"                       , RowShipmentConfirmations.Quantity);
+				NewRow.Insert("QuantityInShipmentConfirmation" , RowShipmentConfirmations.QuantityInShipmentConfirmation);
+				Result.ShipmentConfirmations.Add(NewRow);
+			EndDo;
+		EndDo;
+		
 		ArrayOfResults.Add(Result);
 	EndDo;
 	Return ArrayOfResults;
 EndFunction
 
 &AtServer
-Function ExtractInfoFromOrderRows(QueryTable)
+Function ExtractInfoFromOrderRows(QueryTable, ShipmentConfirmationsTable = Undefined)
 	QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
 	For Each Row In QueryTable Do
 		Row.Key = New UUID(Row.RowKey);
@@ -293,6 +319,7 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	tmpQueryTable.Key,
 		|	tmpQueryTable.Unit AS QuantityUnit,
 		|	tmpQueryTable.Quantity AS Quantity,
+		|	ISNULL(ItemList.Quantity, 0) AS OriginalQuantity,
 		|	ISNULL(ItemList.Price, 0) AS Price,
 		|	ISNULL(ItemList.TaxAmount, 0) AS TaxAmount,
 		|	ISNULL(ItemList.TotalAmount, 0) AS TotalAmount,
@@ -301,8 +328,9 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	ISNULL(ItemList.Unit, VALUE(Catalog.Units.EmptyRef)) AS Unit,
 		|	ISNULL(ItemList.PriceType, VALUE(Catalog.PriceTypes.EmptyRef)) AS PriceType,
 		|	ISNULL(ItemList.DeliveryDate, DATETIME(1, 1, 1)) AS DeliveryDate,
-		|	tmpQueryTable.ShipmentConfirmation AS ShipmentConfirmation,
-		|	ItemList.Ref
+		|	Value(Document.ShipmentConfirmation.EmptyRef) AS ShipmentConfirmation,
+		|	ItemList.Ref,
+		|	ISNULL(ItemList.DontCalculateRow, FALSE) AS DontCalculateRow
 		|FROM
 		|	Document.SalesOrder.ItemList AS ItemList
 		|		INNER JOIN tmpQueryTable AS tmpQueryTable
@@ -324,7 +352,8 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	tmpQueryTable.Key,
 		|	tmpQueryTable.Unit,
 		|	tmpQueryTable.Quantity,
-		|	tmpQueryTable.ShipmentConfirmation,
+		|	ISNULL(ItemList.Quantity, 0),
+		|	Value(Document.ShipmentConfirmation.EmptyRef),
 		|	ISNULL(ItemList.Price, 0),
 		|	ISNULL(ItemList.TaxAmount, 0),
 		|	ISNULL(ItemList.TotalAmount, 0),
@@ -333,7 +362,8 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	ISNULL(ItemList.Unit, VALUE(Catalog.Units.EmptyRef)),
 		|	ISNULL(ItemList.PriceType, VALUE(Catalog.PriceTypes.EmptyRef)),
 		|	ISNULL(ItemList.DeliveryDate, DATETIME(1, 1, 1)),
-		|	ItemList.Ref
+		|	ItemList.Ref,
+		|	ISNULL(ItemList.DontCalculateRow, FALSE)
 		|
 		|UNION ALL
 		|
@@ -352,6 +382,7 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	tmpQueryTable.Key,
 		|	tmpQueryTable.Unit,
 		|	tmpQueryTable.Quantity,
+		|	tmpQueryTable.Quantity,
 		|	0,
 		|	0,
 		|	0,
@@ -361,7 +392,8 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	VALUE(Catalog.PriceTypes.EmptyRef),
 		|	DATETIME(1, 1, 1),
 		|	tmpQueryTable.ShipmentConfirmation,
-		|	ItemList.Ref
+		|	ItemList.Ref,
+		|	FALSE
 		|FROM
 		|	Document.ShipmentConfirmation.ItemList AS ItemList
 		|		INNER JOIN tmpQueryTable AS tmpQueryTable
@@ -394,7 +426,34 @@ Function ExtractInfoFromOrderRows(QueryTable)
 	
 	QueryTable_TaxList = QueryResults[2].Unload();
 	
-	Return New Structure("ItemList, TaxList", QueryTable_ItemList, QueryTable_TaxList);
+	For Each Row_ItemList In QueryTable_ItemList Do
+		If Row_ItemList.OriginalQuantity = 0 Then
+			Row_ItemList.TaxAmount = 0;
+			Row_ItemList.NetAmount = 0;
+			Row_ItemList.TotalAmount = 0;
+			Row_ItemList.OffersAmount = 0;
+		Else
+			Row_ItemList.TaxAmount = Row_ItemList.TaxAmount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;
+			Row_ItemList.NetAmount = Row_ItemList.NetAmount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;;
+			Row_ItemList.TotalAmount = Row_ItemList.TotalAmount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;
+			Row_ItemList.OffersAmount = Row_ItemList.OffersAmount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;
+		EndIf;	
+		
+		For Each Row_TaxList In QueryTable_TaxList.FindRows(New Structure("Key", Row_ItemList.Key)) Do
+			If Row_ItemList.OriginalQuantity = 0 Then
+				Row_TaxList.Amount = 0;
+				Row_TaxList.ManualAmount = 0;
+			Else
+				Row_TaxList.Amount = Row_TaxList.Amount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;
+				Row_TaxList.ManualAmount = Row_TaxList.ManualAmount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;;								
+			EndIf;
+		EndDo;
+	EndDo;
+	
+	Return New Structure("ItemList, TaxList, ShipmentConfirmations", 
+	QueryTable_ItemList, 
+	QueryTable_TaxList,
+	?(ShipmentConfirmationsTable = Undefined, CreateTable_ShipmentConfirmations(), ShipmentConfirmationsTable));
 EndFunction
 
 &AtServer
@@ -455,28 +514,49 @@ EndFunction
 Function GetDocumentTable_ShipmentConfirmation(ArrayOfBasisDocuments)
 	ValueTable = New ValueTable();
 	ValueTable.Columns.Add("Order", New TypeDescription("DocumentRef.SalesOrder"));
-	
-	ValueTable.Columns.Add("ShipmentConfirmation"
-		, New TypeDescription(Metadata.AccumulationRegisters.ShipmentOrders.Dimensions.ShipmentConfirmation.Type));
-	
 	ValueTable.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
 	ValueTable.Columns.Add("Quantity", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
 	ValueTable.Columns.Add("RowKey", Metadata.AccumulationRegisters.ShipmentOrders.Dimensions.RowKey.Type);
 	
+	ValueTableWithShipmentConfirmation = New ValueTable();
+	ValueTableWithShipmentConfirmation.Columns.Add("Order", New TypeDescription("DocumentRef.SalesOrder"));
+	ValueTableWithShipmentConfirmation.Columns.Add("ShipmentConfirmation"
+		, New TypeDescription(Metadata.AccumulationRegisters.ShipmentOrders.Dimensions.ShipmentConfirmation.Type));
+	ValueTableWithShipmentConfirmation.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
+	ValueTableWithShipmentConfirmation.Columns.Add("Quantity", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
+	ValueTableWithShipmentConfirmation.Columns.Add("RowKey", Metadata.AccumulationRegisters.ShipmentOrders.Dimensions.RowKey.Type);
+	
+	ShipmentConfirmationsTable = CreateTable_ShipmentConfirmations();
+	
 	For Each Row In ArrayOfBasisDocuments Do
 		NewRow = ValueTable.Add();
+		NewRow.Order = Row.Order;
+		NewRow.ItemKey = Row.ItemKey;
+		NewRow.RowKey = Row.RowKey;
+		NewRow.Quantity = Row.Quantity;
+		
+		NewRow = ValueTableWithShipmentConfirmation.Add();
 		NewRow.Order = Row.Order;
 		NewRow.ShipmentConfirmation = Row.ShipmentConfirmation;
 		NewRow.ItemKey = Row.ItemKey;
 		NewRow.RowKey = Row.RowKey;
 		NewRow.Quantity = Row.Quantity;
+				
+		NewRow = ShipmentConfirmationsTable.Add();
+		NewRow.Ref = Row.Order;
+		NewRow.ShipmentConfirmation = Row.ShipmentConfirmation;
+		NewRow.Key = New UUID(Row.RowKey);
+		NewRow.Quantity = Row.Quantity;
+		NewRow.QuantityInShipmentConfirmation = Row.Quantity;
 	EndDo;
+	
+	ValueTable.GroupBy("Order, ItemKey, RowKey", "Quantity");
+	ShipmentConfirmationsTable.GroupBy("ShipmentConfirmation, Key, Ref", "Quantity, QuantityInShipmentConfirmation");
 	
 	Query = New Query();
 	Query.Text =
 		"SELECT
 		|	ValueTable.Order AS Order,
-		|	ValueTable.ShipmentConfirmation AS ShipmentConfirmation,
 		|	ValueTable.ItemKey AS ItemKey,
 		|	ValueTable.RowKey AS RowKey,
 		|	ValueTable.Quantity AS Quantity
@@ -484,6 +564,18 @@ Function GetDocumentTable_ShipmentConfirmation(ArrayOfBasisDocuments)
 		|FROM
 		|	&ValueTable AS ValueTable
 		|;
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ValueTable.Order AS Order,
+		|	ValueTable.ShipmentConfirmation AS ShipmentConfirmation,
+		|	ValueTable.ItemKey AS ItemKey,
+		|	ValueTable.RowKey AS RowKey,
+		|	ValueTable.Quantity AS Quantity
+		|INTO tmp_WithShipmentConfirmation
+		|FROM
+		|	&ValueTable_WithShipmentConfirmation AS ValueTable
+		|;
+		|
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT ALLOWED
@@ -497,7 +589,7 @@ Function GetDocumentTable_ShipmentConfirmation(ArrayOfBasisDocuments)
 		|	END AS Unit,
 		|	OrderBalanceBalance.Store,
 		|	tmp.Quantity,
-		|	tmp.ShipmentConfirmation,
+		|	Value(Document.ShipmentConfirmation.EmptyRef) AS ShipmentConfirmation,
 		|	OrderBalanceBalance.RowKey
 		|FROM
 		|	AccumulationRegister.OrderBalance.Balance(, (Order, ItemKey, RowKey) IN
@@ -536,16 +628,17 @@ Function GetDocumentTable_ShipmentConfirmation(ArrayOfBasisDocuments)
 		|			tmp.ItemKey,
 		|			tmp.RowKey
 		|		FROM
-		|			tmp AS tmp)) AS GoodsInTransitOutgoingBalance
-		|		INNER JOIN tmp AS tmp
+		|			tmp_WithShipmentConfirmation AS tmp)) AS GoodsInTransitOutgoingBalance
+		|		INNER JOIN tmp_WithShipmentConfirmation AS tmp
 		|		ON tmp.ShipmentConfirmation = GoodsInTransitOutgoingBalance.ShipmentBasis
 		|		AND tmp.ItemKey = GoodsInTransitOutgoingBalance.ItemKey
 		|		AND tmp.RowKey = GoodsInTransitOutgoingBalance.RowKey
 		|		AND GoodsInTransitOutgoingBalance.QuantityBalance < 0";
 	Query.SetParameter("ValueTable", ValueTable);
+	Query.SetParameter("ValueTable_WithShipmentConfirmation", ValueTableWithShipmentConfirmation);
 	
 	QueryTable = Query.Execute().Unload();
-	Return ExtractInfoFromOrderRows(QueryTable);
+	Return ExtractInfoFromOrderRows(QueryTable, ShipmentConfirmationsTable);
 EndFunction
 
 &AtClient
@@ -650,6 +743,17 @@ Function GetInfoShipmentConfirmation(ArrayOfShipmentConfirmation)
 	EndDo;
 	Return InfoShipmentConfirmation;
 	
+EndFunction
+
+Function CreateTable_ShipmentConfirmations()
+	ColumnsMetadata = Metadata.Documents.SalesInvoice.TabularSections.ShipmentConfirmations.Attributes;
+	ShipmentConfirmationsTable = New ValueTable();
+	ShipmentConfirmationsTable.Columns.Add("Key", ColumnsMetadata.Key.Type);
+	ShipmentConfirmationsTable.Columns.Add("ShipmentConfirmation", ColumnsMetadata.ShipmentConfirmation.Type);
+	ShipmentConfirmationsTable.Columns.Add("Quantity", ColumnsMetadata.Quantity.Type);
+	ShipmentConfirmationsTable.Columns.Add("QuantityInShipmentConfirmation", ColumnsMetadata.Quantity.Type);
+	ShipmentConfirmationsTable.Columns.Add("Ref" , New TypeDescription("DocumentRef.SalesOrder"));
+	Return ShipmentConfirmationsTable;
 EndFunction
 
 #Region Errors

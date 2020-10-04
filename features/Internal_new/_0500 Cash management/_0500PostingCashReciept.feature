@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group9
+@CashManagement
+
 Feature: create Cash reciept
 
 As a cashier
@@ -124,11 +125,6 @@ Scenario: _050001 create Cash reciept based on Sales invoice
 			| 'Description'                   |
 			| 'Basic Partner terms, without VAT' |
 		And I select current line in "List" table
-		# temporarily
-		// And Delay 2
-		// When I Check the steps for Exception
-		// |'And I click choice button of "Basis document" attribute in "PaymentList" table'|
-		// # temporarily
 		And I finish line editing in "PaymentList" table
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -199,11 +195,6 @@ Scenario: _050001 create Cash reciept (independently)
 			And I finish line editing in "PaymentList" table
 			And I activate "Basis document" field in "PaymentList" table
 			And I select current line in "PaymentList" table
-//			And I click choice button of "Basis document" attribute in "PaymentList" table
-//			# temporarily
-//			When I Check the steps for Exception
-//			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
-//			# temporarily
 			Given form with "Documents for incoming payment" header is opened in the active window
 			And I go to line in "List" table
 				| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
@@ -269,10 +260,6 @@ Scenario: _050001 create Cash reciept (independently)
 			And I finish line editing in "PaymentList" table
 			And I activate "Basis document" field in "PaymentList" table
 			And I select current line in "PaymentList" table
-			// # temporarily
-			// When I Check the steps for Exception
-			// |'And I click choice button of "Basis document" attribute in "PaymentList" table'|
-			// # temporarily
 			Given form with "Documents for incoming payment" header is opened in the active window
 			And I go to line in "List" table
 				| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
@@ -588,3 +575,14 @@ Scenario: _050015 check the display of details on the form Cash reciept with the
 		| '1' | '100,00' | ''                          |
 
 
+
+Scenario: _300513 check connection to CashReciept report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.CashReceipt"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberCashReceipt0500011$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows

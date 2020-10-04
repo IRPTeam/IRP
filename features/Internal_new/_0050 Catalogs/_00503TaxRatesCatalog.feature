@@ -1,8 +1,6 @@
 ﻿#language: en
 @tree
 @Positive
-@Test
-@Group01
 @Catalogs
 
 Feature: filling in Tax rates catalog
@@ -71,7 +69,7 @@ Scenario: _005033 filling in the "Tax rates" catalog
 		Then I check for the "TaxRates" catalog element with the "Description_ru" "8% RU"
 		Then I check for the "TaxRates" catalog element with the "Description_en" "Without VAT"  
 		Then I check for the "TaxRates" catalog element with the "Description_en" "0%"
-	* Clean catalog
-		And I delete "TaxRates" catalog element with the Description_en "8%"
-		And I delete "TaxRates" catalog element with the Description_en "Without VAT"
-		And I delete "TaxRates" catalog element with the Description_en "0%"
+	# * Clean catalog
+	# 	And I delete "TaxRates" catalog element with the Description_en "8%"
+	# 	And I delete "TaxRates" catalog element with the Description_en "Without VAT"
+	# 	And I delete "TaxRates" catalog element with the Description_en "0%"

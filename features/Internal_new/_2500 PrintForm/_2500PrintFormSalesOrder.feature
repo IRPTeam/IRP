@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group14
+@PrintForm
+
 Feature: check print functionality (Sales order)
 
 
@@ -59,7 +60,7 @@ Scenario: _25001 adding print plugin for sales order
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		And I click the button named "FormCreate"
 	* Filling plugin data and adding it to the database
-		And I select external file "C:\Users\Severnity\Desktop\ExtDataProc\PrintFormSalesOrder.epf"
+		And I select external file "#workingDir#\DataProcessor\PrintFormSalesOrder.epf"
 		And I click the button named "FormAddExtDataProc"
 		And I input "" text in "Path to plugin for test" field
 		And I input "PrintFormSalesOrder" text in "Name" field
@@ -171,8 +172,8 @@ Scenario: _25003 check Sales order printing
 		And I finish line editing in "ItemList" table
 	* Post document
 		And I click "Post" button
-        And I save the value of "Number" field as "$$NumberSalesInvoice25003$$"
-        And I save the window as "$$SalesInvoice25003$$"
+		And I save the value of "Number" field as "$$NumberSalesInvoice25003$$"
+		And I save the window as "$$SalesInvoice25003$$"
 		And I click "Post and close" button
 		And I go to line in "List" table
 		| 'Number' |

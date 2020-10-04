@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group9
+@CashManagement
+
 Feature: create Bank payment
 
 
@@ -89,10 +90,10 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Amount'     | 'Basis document'      |
-			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '137 000,00' | '$$PurchaseInvoice018001$$' |
+			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '136 000,00' | '$$PurchaseInvoice018001$$' |
 		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Amount'    | 'Multiplicity' |
-			| 'Reporting currency' | '23 458,90' | '1'            |
+			| 'Reporting currency' | '23 287,67' | '1'            |
 	* Data overflow check
 		And I click Select button of "Account" field
 		And I go to line in "List" table
@@ -104,12 +105,12 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Amount'     | 'Basis document'      |
-			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '137 000,00' | '$$PurchaseInvoice018001$$' |
+			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '136 000,00' | '$$PurchaseInvoice018001$$' |
 		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'    | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '23 458,90' | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '23 287,67' | '1'            |
 	* Check calculation Document amount
-		Then the form attribute named "DocumentAmount" became equal to "137 000,00"
+		Then the form attribute named "DocumentAmount" became equal to "136 000,00"
 	* Change in basis document
 		And I select current line in "PaymentList" table
 		And I click choice button of "Basis document" attribute in "PaymentList" table
@@ -533,3 +534,15 @@ Scenario: _053015 check the display of details on the form Bank payment with the
 		And "PaymentList" table contains lines
 			| '#' | 'Amount' | 'Planning transaction basis' |
 			| '1' | '100,00' | ''                          |
+
+
+Scenario: _300514 check connection to BankPayment report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.BankPayment"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberBankPayment0530011$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows

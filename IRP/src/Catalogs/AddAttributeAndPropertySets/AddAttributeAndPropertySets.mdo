@@ -455,6 +455,20 @@
         <value></value>
       </code>
     </items>
+    <items id="8cbe4612-d477-4a19-af48-24a98318667d">
+      <name>Document_CreditNote</name>
+      <description>Document credit note</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="819c80cf-0def-402c-900c-7faf4b52fda1">
+      <name>Document_DebitNote</name>
+      <description>Document debit note</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

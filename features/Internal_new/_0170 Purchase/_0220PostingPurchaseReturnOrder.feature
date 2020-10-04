@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group3
+@Purchase
 
 Feature: create document Purchase return order
 
@@ -398,5 +398,17 @@ Scenario: _02201101 clear movements Purchase Return Order and check that there i
 		| ''                               | 'Receipt'     | '*'         | '2'         | 'Store 02'   | '$$PurchaseReturnOrder022001$$' | 'L/Green'             | '*'        | ''         | ''        | ''                         | ''                     |
 		And I close all client application windows
 
+
+
+Scenario: _300508 check connection to PurchaseReturnOrder report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberPurchaseReturnOrder022001$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
 

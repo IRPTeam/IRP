@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group11
+@Forms
+
 Feature: check the display of the header of the collapsible group in documents
 
 

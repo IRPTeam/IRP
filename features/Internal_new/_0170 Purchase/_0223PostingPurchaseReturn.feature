@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Group3
+@Purchase
 
 Feature: create document Purchase return
 
@@ -362,7 +362,7 @@ Scenario: _022327 check movements of the document Purchase return in the StockRe
 
 Scenario: _022328 check movements of Purchase return in register StockReservation (store doesn't use Shipment confirmation, without Purchase return order)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table contain lines
+	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                 | 'Line number' | 'Store'    | 'Item key'  |
 		| '12,000'   | '$$PurchaseReturn022322$$' | '1'           | 'Store 01' | '36/Yellow' |
 
@@ -579,6 +579,17 @@ Scenario: _02233601 clear movements Purchase Return and check that there is no m
 		| ''                                      | 'Expense'     | '*'         | '2'                    | 'Store 02'       | '$$PurchaseReturnOrder022001$$' | 'L/Green'        | '*'                 | ''                   | ''                             | ''                             | ''                     |
 		And I close all client application windows
 
+
+Scenario: _300509 check connection to PurchaseReturn report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	* Form report Related documents
+		And I go to line in "List" table
+		| Number |
+		| $$NumberPurchaseReturn022301$$      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "Related documents" window is opened
+	And I close all client application windows
 
 
 

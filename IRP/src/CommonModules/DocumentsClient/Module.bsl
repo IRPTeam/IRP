@@ -2677,3 +2677,18 @@ EndProcedure
 #EndRegion
 
 #EndRegion
+
+#Region Utility
+
+Procedure ShowRowKey(Form) Export
+	ItemNames = "ItemListKey";
+	ArrayOfItemNames = StrSplit(ItemNames, ",");
+	For Each ItemName In ArrayOfItemNames Do
+		ItemName = TrimAll(ItemName);	
+		If Form.Items.Find(ItemName) <> Undefined Then
+			Form.Items[ItemName].Visible = Not Form.Items[ItemName].Visible;
+		EndIf;
+	EndDo;
+EndProcedure
+
+#EndRegion

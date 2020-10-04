@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Group7
+@Inventory
+
 Feature: posting shipment confirmation before Sales invoice
 
 As a sales manager

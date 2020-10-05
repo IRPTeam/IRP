@@ -1,6 +1,6 @@
 Function GetLockFields(Data) Export
 	Result = New Structure();
-	Result.Insert("RegisterName", "AccumulationRegister.OrderBalance");	
+	Result.Insert("RegisterName", "AccumulationRegister.PurchaseTurnovers");	
 	
 	Fields = New Map();
 	ArrayOfFieldNames = StrSplit(GetLockFieldNames(), ",");
@@ -13,5 +13,5 @@ Function GetLockFields(Data) Export
 EndFunction
 
 Function GetLockFieldNames() Export
-	Return "Company, BusinessUnit, ExpenseType, ItemKey, Currency";
+	Return "Company, PurchaseInvoice, Currency, ItemKey";
 EndFunction

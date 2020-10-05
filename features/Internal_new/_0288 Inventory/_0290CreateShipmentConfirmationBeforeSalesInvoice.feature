@@ -381,10 +381,10 @@ Scenario: _029013 create Sales invoice for several shipments
 	And I delete a line in "ItemList" table
 	* Check the filling of the tabular part
 		And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Shipment confirmation'          | 'Sales order'          | 'Unit' | 'Q'      | 'Offers amount' | 'Tax amount' | 'Net amount' | 'Total amount' |
-		| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02' | '$$ShipmentConfirmation029002$$' | '$$SalesOrder029002$$' | 'pcs'  | '12,000' | ''              | '732,20'     | '4 067,76'   | '4 799,96'     |
-		| 'Shirt'    | '296,61' | '36/Red'    | 'Store 02' | '$$ShipmentConfirmation029002$$' | '$$SalesOrder029002$$' | 'pcs'  | '10,000' | ''              | '533,90'     | '2 966,10'   | '3 500,00'     |
-		| 'Shirt'    | '296,61' | '36/Red'    | 'Store 02' | '$$ShipmentConfirmation029002$$' | '$$SalesOrder029002$$' | 'pcs'  | '10,000' | ''              | '533,90'     | '2 966,10'   | '3 500,00'     |
+		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Sales order'          | 'Unit' | 'Q'      | 'Offers amount' | 'Tax amount' | 'Net amount' | 'Total amount' |
+		| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02' | '$$SalesOrder029002$$' | 'pcs'  | '12,000' | ''              | '732,20'     | '4 067,76'   | '4 799,96'     |
+		| 'Shirt'    | '296,61' | '36/Red'    | 'Store 02' | '$$SalesOrder029002$$' | 'pcs'  | '10,000' | ''              | '533,90'     | '2 966,10'   | '3 500,00'     |
+		| 'Shirt'    | '296,61' | '36/Red'    | 'Store 02' | '$$SalesOrder029002$$' | 'pcs'  | '10,000' | ''              | '533,90'     | '2 966,10'   | '3 500,00'     |
 	And I click "Post" button
 	And I save the value of "Number" field as "$$NumberSalesInvoice029013$$"
 	And I save the window as "$$SalesInvoice029013$$"
@@ -467,8 +467,8 @@ Scenario: _029014 availability check for selection shipment confirmation for whi
 		And I display "Q" variable value
 		Then "Q" variable is equal to 1
 		And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Shipment confirmation'    | 'Sales order'      | 'Unit' | 'Q'     | 'Offers amount' | 'Tax amount' | 'Net amount' | 'Total amount' |
-			| 'Trousers' | '338,98' | '36/Yellow' | 'Store 01' | '$$SalesOrder029012$$'         | '$$SalesOrder029012$$' | 'pcs' | '7,000' | ''              | '427,11'     | '2 372,86'   | '2 799,97'     |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Sales order'      | 'Unit' | 'Q'     | 'Offers amount' | 'Tax amount' | 'Net amount' | 'Total amount' |
+			| 'Trousers' | '338,98' | '36/Yellow' | 'Store 01' | '$$SalesOrder029012$$' | 'pcs' | '7,000' | ''              | '427,11'     | '2 372,86'   | '2 799,97'     |
 	// * Change number
 	// 	And I move to "Other" tab
 	// 	And I expand "More" group

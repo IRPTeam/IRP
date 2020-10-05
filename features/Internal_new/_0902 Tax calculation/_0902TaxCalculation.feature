@@ -125,7 +125,7 @@ Scenario: _0902000 preparation
 	And I close all client application windows
 
 
-Scenario: _090200 activating Sales Tax calculation in the Sales order and Sales invoice documents
+Scenario: _090201 activating Sales Tax calculation in the Sales order and Sales invoice documents
 	* Opening a tax creation form
 		Given I open hyperlink "e1cib/list/Catalog.Taxes"
 		If "List" table does not contain lines Then
@@ -205,7 +205,7 @@ Scenario: _090200 activating Sales Tax calculation in the Sales order and Sales 
 
 
 
-Scenario: _090201 VAT and Sales Tax calculation in Sales order (Price include tax box is set)
+Scenario: _090202 VAT and Sales Tax calculation in Sales order (Price include tax box is set)
 	* Open the Sales order creation form
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -282,7 +282,7 @@ Scenario: _090201 VAT and Sales Tax calculation in Sales order (Price include ta
 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "227,42"
 		And I close all client application windows
 
-Scenario: _090202 VAT and Sales Tax calculation in Sales order (Price include tax box isn't set)
+Scenario: _090203 VAT and Sales Tax calculation in Sales order (Price include tax box isn't set)
 	* Open the Sales order creation form
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -362,7 +362,7 @@ Scenario: _090202 VAT and Sales Tax calculation in Sales order (Price include ta
 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "266,00"
 		And I close all client application windows
 
-Scenario: _090203 manual tax correction in Sales order
+Scenario: _090204 manual tax correction in Sales order
 	* Open the Sales order creation form
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -477,7 +477,7 @@ Scenario: _090203 manual tax correction in Sales order
 
 
 
-Scenario: _090204 check tax transfer in Sales invoice when it is created based on
+Scenario: _090205 check tax transfer in Sales invoice when it is created based on
 	* Create Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -560,7 +560,7 @@ Scenario: _090204 check tax transfer in Sales invoice when it is created based o
 		And I click "Post and close" button
 		And I close all client application windows
 
-Scenario: _090205 priority tax rate check on the example of Sales order
+Scenario: _090206 priority tax rate check on the example of Sales order
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I click the button named "FormCreate"
 	* Filling in the details of the document Sales order

@@ -13,7 +13,7 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-Scenario: __029600 preparation (Unbundling)
+Scenario: _029600 preparation (Unbundling)
 	* Load info
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects

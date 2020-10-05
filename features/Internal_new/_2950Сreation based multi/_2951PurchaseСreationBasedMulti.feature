@@ -2197,6 +2197,7 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 		When create the first test PO for a test on the creation mechanism based on
 		* Save the document number
 			And I save the value of "Number" field as "$$NumberPurchaseOrder090323$$"
+			And I save the window as "$$PurchaseOrder090323$$"
 			And I set checkbox "Goods receipt before purchase invoice"
 			And I click "Post and close" button
 	* Create 3 Goods receipt
@@ -2278,8 +2279,8 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 		And I click the button named "FormSelectAll"
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Price'  | 'Detail' | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Offers amount' | 'Price type'              | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase basis' |
-			| '200,00' | ''       | 'Dress'    | '18%' | 'M/White'   | '20,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '610,17'     | '3 389,83'   | '4 000,00'     | 'Store 02' | '29.09.2020'    | ''             | ''              | ''               |
-			| '210,00' | ''       | 'Dress'    | '18%' | 'L/Green'   | '20,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '640,68'     | '3 559,32'   | '4 200,00'     | 'Store 02' | '29.09.2020'    | ''             | ''              | ''               |
-			| '210,00' | ''       | 'Trousers' | '18%' | '36/Yellow' | '30,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '961,02'     | '5 338,98'   | '6 300,00'     | 'Store 02' | '29.09.2020'    | ''             | ''              | ''               |
+			| 'Price'  | 'Detail' | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Offers amount' | 'Price type'              | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'          |
+			| '200,00' | ''       | 'Dress'    | '18%' | 'M/White'   | '20,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '610,17'     | '3 389,83'   | '4 000,00'     | 'Store 02' | '*'             | ''             | ''              | '$$PurchaseOrder090323$$' |
+			| '210,00' | ''       | 'Dress'    | '18%' | 'L/Green'   | '20,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '640,68'     | '3 559,32'   | '4 200,00'     | 'Store 02' | '*'             | ''             | ''              | '$$PurchaseOrder090323$$' |
+			| '210,00' | ''       | 'Trousers' | '18%' | '36/Yellow' | '30,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '961,02'     | '5 338,98'   | '6 300,00'     | 'Store 02' | '*'             | ''             | ''              | '$$PurchaseOrder090323$$' |
 		And I close all client application windows

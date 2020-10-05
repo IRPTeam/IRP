@@ -656,11 +656,9 @@ foreach ($elementTag in $TagArray) {
         start-job -scriptBlock $LogTail -ArgumentList $elementTag
     }
 
-    If($global:JobArray.count -ge $StreamCountMax) {
-        start-job -scriptBlock $LogTail -ArgumentList $elementTag
-    } else{
+    do {
         Start-Sleep 1
-    }
+    } while ($global:JobArray.count -ge $StreamCountMax)
 }]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />

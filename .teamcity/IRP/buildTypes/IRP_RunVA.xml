@@ -631,20 +631,6 @@ $JobTail = {
     }        
 }
 
-$LogTail = {
-    do {
-        Start-Sleep 1
-
-        foreach ($job in $global:JobArray) {
-            $job | Receive-Job
-            if (!($job.State -eq "Running")) {
-                $global:JobArray = $global:JobArray | Where-Object { $_ –ne $job } 
-            }
-        }
-    } while ($global:JobArray.count)
-}
-
-
 foreach ($elementTag in $TagArray) {
 
     $VanessaRunProc = start-job -scriptBlock $VanessaRun -ArgumentList $elementTag
@@ -652,18 +638,22 @@ foreach ($elementTag in $TagArray) {
     $JobTailProc = start-job -scriptBlock $JobTail -ArgumentList $elementTag, $global:VA_PID_Array
     $global:JobArray += ($JobTailProc)
 
-    If($StartTail) {
-        start-job -scriptBlock $LogTail -ArgumentList $elementTag
-        $StartTail = $false
-        Write-Output "Log tail started"
-    }
-
     do {
-        Start-Sleep 10
         $jobCount = $global:JobArray.count
         Write-Output "Current job count: $jobCount Max count:$StreamCountMax"
     } while ($global:JobArray.count -ge $StreamCountMax)
-}]]></param>
+}
+
+do {
+    Start-Sleep 1
+
+    foreach ($job in $global:JobArray) {
+        $job | Receive-Job
+        if (!($job.State -eq "Running")) {
+            $global:JobArray = $global:JobArray | Where-Object { $_ –ne $job } 
+        }
+    }
+} while ($global:JobArray.count)]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>

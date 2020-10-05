@@ -15,7 +15,7 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-Scenario: _092001 preparation (SerialLotNumbers)
+Scenario: _092000 preparation (SerialLotNumbers)
 	* Constants
 		When set True value to the constant
 	* Load info

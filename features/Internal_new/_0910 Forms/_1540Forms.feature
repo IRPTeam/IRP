@@ -1572,6 +1572,165 @@ Scenario:  _015400683 check that additional attributes are displayed on the form
 		And field "Test" is present on the form
 	And I close all client application windows
 
+Scenario:  _015400684 check that additional attributes are displayed on the form without re-opening (document Retail sales receipt)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Open a form to create Unbundling
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
+	* Adding additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data item name     |
+			| Document_RetailSalesReceipt           |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "RetailSalesReceipt" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Retail sales receipt (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
+
+
+Scenario:  _015400685 check that additional attributes are displayed on the form without re-opening (document Retail return receipt)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Open a form to create Unbundling
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
+	* Adding additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data item name     |
+			| Document_RetailReturnReceipt           |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "RetailReturnReceipt" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Retail return receipt (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
+
+Scenario:  _015400687 check that additional attributes are displayed on the form without re-opening (document Cash statement)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Open a form to create Unbundling
+		Given I open hyperlink "e1cib/list/Document.CashStatement"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
+	* Adding additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data item name     |
+			| Document_RetailReturnReceipt           |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "Cash statement" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Cash statement (create)"
+		And field "Test" is present on the form
+	And I close all client application windows
+
+Scenario: _015400688 check that additional attributes are displayed on the form without re-opening (Catalog_PaymentTerminals)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Open a form to create Payment terminals
+		Given I open hyperlink "e1cib/list/Catalog.PaymentTerminals"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
+	* Adding additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data item name          |
+			| Catalog_PaymentTerminals     |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "PaymentTerminals" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Payment terminals"
+		And field "Test" is present on the form
+	And I close all client application windows
+
+Scenario: _015400689 check that additional attributes are displayed on the form without re-opening (Catalog_RetailCustomers)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Open a form to create Retail customers
+		Given I open hyperlink "e1cib/list/Catalog.RetailCustomers"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
+	* Adding additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data item name          |
+			| Catalog_RetailCustomers     |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "RetailCustomers" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Retail customers"
+		And field "Test" is present on the form
+	And I close all client application windows
+
+Scenario: _015400690 check that additional attributes are displayed on the form without re-opening (Catalog_BankTerms)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Open a form to create BankTerms
+		Given I open hyperlink "e1cib/list/Catalog.BankTerms"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
+	* Adding additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data item name          |
+			| Catalog_BankTerms     |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I input "BankTerms" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Bank terms"
+		And field "Test" is present on the form
+	And I close all client application windows
 
 Scenario:  _0154007 delete Test attribute
 	Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"

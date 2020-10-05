@@ -49,8 +49,8 @@ Scenario: _005013 filling in the "Companies" catalog
 	* Create Own company
 		* Filling in company information
 			And I click Open button of the field named "Description_en"
-			And I input "Main Company" text in the field named "Description_en"
-			And I input "Main Company TR" text in the field named "Description_tr"
+			And I input "Our Company" text in the field named "Description_en"
+			And I input "Our Company TR" text in the field named "Description_tr"
 			And I input "Главная компания" text in the field named "Description_ru"
 			And I click "Ok" button
 			And I input "Turkey" text in the field named "Country"
@@ -122,9 +122,9 @@ Scenario: _005013 filling in the "Companies" catalog
 			And I click "Save and close" button
 			And Delay 5
 		* Check the availability of the created company in the catalog
-			Then I check for the "Companies" catalog element with the "Description_en" "Main Company" 
-			Then I check for the "Companies" catalog element with the "Description_tr" "Main Company TR"
+			Then I check for the "Companies" catalog element with the "Description_en" "Our Company" 
+			Then I check for the "Companies" catalog element with the "Description_tr" "Our Company TR"
 			Then I check for the "Companies" catalog element with the "Description_ru" "Главная компания"
-	* Clean catalog Companies
-		And I delete "Companies" catalog element with the Description_en "Main Company"
+	# * Clean catalog Companies
+	# 	And I delete "Companies" catalog element with the Description_en "Main Company"
 

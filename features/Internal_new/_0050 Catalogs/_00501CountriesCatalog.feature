@@ -26,9 +26,9 @@ Scenario: _005010 filling in the "Countries" catalog
 		And I click the button named "FormCreate"
 	* Data Filling - Turkey
 		And I click Open button of the field named "Description_en"
-		And I input "Turkey" text in the field named "Description_en"
-		And I input "Turkey TR" text in the field named "Description_tr"
-		And I input "Турция" text in "RU" field
+		And I input "Poland" text in the field named "Description_en"
+		And I input "Poland TR" text in the field named "Description_tr"
+		And I input "Польша" text in "RU" field
 		And I click "Ok" button
 		And I click the button named "FormWriteAndClose"
 	* Data Filling - Ukraine
@@ -42,12 +42,12 @@ Scenario: _005010 filling in the "Countries" catalog
 		And I click the button named "FormWriteAndClose"
 		And Delay 5
 	* Check for added countries in the catalog
-		Then I check for the "Countries" catalog element with the "Description_en" "Turkey"
-		Then I check for the "Countries" catalog element with the "Description_tr" "Turkey TR"
-		Then I check for the "Countries" catalog element with the "Description_ru" "Турция"
+		Then I check for the "Countries" catalog element with the "Description_en" "Poland"
+		Then I check for the "Countries" catalog element with the "Description_tr" "Poland TR"
+		Then I check for the "Countries" catalog element with the "Description_ru" "Польша"
 		Then I check for the "Countries" catalog element with the "Description_en" "Ukraine"
 		Then I check for the "Countries" catalog element with the "Description_tr" "Ukraine TR"
 		Then I check for the "Countries" catalog element with the "Description_ru" "Украина"
-	* Clean catalog Countries
-		And I delete "Countries" catalog element with the Description_en "Turkey"
-		And I delete "Countries" catalog element with the Description_en "Ukraine"
+	# * Clean catalog Countries
+	# 	And I delete "Countries" catalog element with the Description_en "Turkey"
+	# 	And I delete "Countries" catalog element with the Description_en "Ukraine"

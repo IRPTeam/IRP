@@ -118,7 +118,6 @@ Scenario: _028501 create document Sales return, store use Goods receipt, without
 	And I activate "Q" field in "ItemList" table
 	And I select current line in "ItemList" table
 	And I input "1,000" text in "Q" field of "ItemList" table
-	And I input "550,00" text in "Price" field of "ItemList" table
 	And I finish line editing in "ItemList" table
 	And I move to "Item list" tab
 	And "ItemList" table contains lines

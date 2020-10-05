@@ -45,5 +45,5 @@ Scenario: _005028 filling in the "Price types" catalog
 		Then I check for the "PriceTypes" catalog element with the "Description_en" "Basic Price Types"
 		Then I check for the "PriceTypes" catalog element with the "Description_tr" "Basic Price Types TR"
 		Then I check for the "PriceTypes" catalog element with the "Description_ru" "Базовая цена"
-	* Clean catalog
-		And I delete "PriceTypes" catalog element with the Description_en "Basic Price Types"
+	# * Clean catalog
+	# 	And I delete "PriceTypes" catalog element with the Description_en "Basic Price Types"

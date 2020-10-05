@@ -232,6 +232,10 @@ Procedure CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo = Undefined
 				CalculateNetAmount_PriceIncludeTax(Object, ItemRow, AddInfo);
 			EndIf;
 		Else
+			If Actions.Property("CalculateNetAmountAsTotalAmountMinusTaxAmount") And IsCalculatedRow Then
+				CalculateNetAmountAsTotalAmountMinusTaxAmount_PriceIncludeTax(Object, ItemRow, AddInfo);
+			EndIf;
+			
 			If Actions.Property("CalculateNetAmount") And IsCalculatedRow Then
 				CalculateNetAmount_PriceNotIncludeTax(Object, ItemRow, AddInfo);
 			EndIf;
@@ -365,6 +369,15 @@ Procedure CalculateNetAmount_PriceIncludeTax(Object, ItemRow, AddInfo = Undefine
 		ItemRow.NetAmount = CalculateAmount(ItemRow) - ItemRow.TaxAmount - ItemRow.OffersAmount;
 	Else
 		ItemRow.NetAmount = CalculateAmount(ItemRow) - ItemRow.TaxAmount;
+	EndIf;
+	
+EndProcedure
+
+Procedure CalculateNetAmountAsTotalAmountMinusTaxAmount_PriceIncludeTax(Object, ItemRow, AddInfo = Undefined)
+	If CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "OffersAmount") Then
+		ItemRow.NetAmount = ItemRow.TotalAmount - ItemRow.TaxAmount - ItemRow.OffersAmount;
+	Else
+		ItemRow.NetAmount = ItemRow.TotalAmount - ItemRow.TaxAmount;
 	EndIf;
 EndProcedure
 

@@ -633,7 +633,7 @@ $JobTail = {
 
 foreach ($elementTag in $TagArray) {
 
-    Invoke-Command start-job -scriptBlock $VanessaRun -ArgumentList $elementTag
+    Invoke-Command -scriptBlock $VanessaRun -ArgumentList $elementTag
     Start-Sleep 10
     $JobTailProc = start-job -scriptBlock $JobTail -ArgumentList $elementTag, $global:VA_PID_Array
     $global:JobArray += ($JobTailProc)

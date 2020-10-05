@@ -15,6 +15,7 @@ Procedure GeneratePhysicalCountByLocation(Parameters, AddInfo = Undefined) Expor
 			PhysicalCountByLocationObject.Date = CurrentSessionDate();
 			PhysicalCountByLocationObject.PhysicalInventory = Parameters.PhysicalInventory;
 			PhysicalCountByLocationObject.Store = Parameters.Store;
+			PhysicalCountByLocationObject.RuleEditQuantity = Parameters.PhysicalInventory.RuleEditQuantity;
 			PhysicalCountByLocationObject.ResponsiblePerson = Instance.ResponsiblePerson;
 			PhysicalCountByLocationObject.ItemList.Clear();
 			For Each ItemListRow In Instance.ItemList Do
@@ -81,27 +82,40 @@ Procedure PrintQR(Spreadsheet, Ref) Export
 	Query = New Query;
 	Query.Text =
 		"SELECT
-		|	PhysicalCountByLocation.Number
+		|	PhysicalCountByLocation.Number AS Number
 		|FROM
 		|	Document.PhysicalCountByLocation AS PhysicalCountByLocation
 		|WHERE
-		|	PhysicalCountByLocation.Ref IN (&Ref)";
+		|	PhysicalCountByLocation.Ref IN (&Ref)
+		|ORDER BY
+		|	Number";
 	Query.Parameters.Insert("Ref", Ref);
-	Selection = Query.Execute().Select();
-
-	Header = Template.GetArea("Header");
+	VT = Query.Execute().Unload();
 
 	Spreadsheet.Clear();
+	SpreadsheetRight = New SpreadsheetDocument();
 	
-	While Selection.Next() Do
-		QR = BarcodeServer.GetQRPicture(New Structure("Barcode", String(Selection.Number)));
-		Picture = Header.Drawings.Add(SpreadsheetDocumentDrawingType.Picture);
-		Picture.Height = 60;
-		Picture.Width = 60;
-		Picture.Picture = QR;
-		Picture.PictureSize = PictureSize.RealSize;
-		Header.Parameters.Fill(Selection);
-		Spreadsheet.Put(Header, Selection.Level());
-		
+	For IndexRow = -1 To VT.Count() - 1 Do
+		For Index = 0 To 4 Do
+			If IndexRow = VT.Count() - 1 Then
+				Break;
+			Else
+				IndexRow = IndexRow + 1;
+			EndIf;
+			Header = Template.GetArea("Row|Column");
+			Selection = VT[IndexRow];
+			QR = BarcodeServer.GetQRPicture(New Structure("Barcode", Format(Selection.Number, "NG=")));
+			Picture = Header.Drawings.Add(SpreadsheetDocumentDrawingType.Picture);
+			Picture.Height = 30;
+			Picture.Width = 30;
+			Picture.Picture = QR;
+			Picture.PictureSize = PictureSize.RealSize;
+			Picture.Left = Picture.Left + 4;
+			Picture.Top = Picture.Top + 4;
+			Header.Parameters.Fill(Selection);
+			SpreadsheetRight.Join(Header);
+		EndDo;
+		Spreadsheet.Put(SpreadsheetRight);
+		SpreadsheetRight = New SpreadsheetDocument();
 	EndDo;
 EndProcedure

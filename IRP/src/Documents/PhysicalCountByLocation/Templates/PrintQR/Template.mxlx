@@ -41,13 +41,8 @@
 			<formatIndex>2</formatIndex>
 			<c>
 				<c>
-					<f>0</f>
-					<tl>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content></v8:content>
-						</v8:item>
-					</tl>
+					<f>3</f>
+					<parameter>Number</parameter>
 				</c>
 			</c>
 		</row>
@@ -55,8 +50,23 @@
 	<templateMode>true</templateMode>
 	<height>3</height>
 	<vgRows>3</vgRows>
+	<namedItem xsi:type="NamedItemDrawing">
+		<name>QR</name>
+		<drawingID>1</drawingID>
+	</namedItem>
 	<namedItem xsi:type="NamedItemCells">
-		<name>Header</name>
+		<name>Column</name>
+		<area>
+			<type>Columns</type>
+			<beginRow>-1</beginRow>
+			<endRow>-1</endRow>
+			<beginColumn>0</beginColumn>
+			<endColumn>0</endColumn>
+			<columnsID>4c4642ef-8883-4694-a69b-b903cda3dbe5</columnsID>
+		</area>
+	</namedItem>
+	<namedItem xsi:type="NamedItemCells">
+		<name>Row</name>
 		<area>
 			<type>Rows</type>
 			<beginRow>0</beginRow>
@@ -66,14 +76,24 @@
 			<columnsID>4c4642ef-8883-4694-a69b-b903cda3dbe5</columnsID>
 		</area>
 	</namedItem>
-	<namedItem xsi:type="NamedItemDrawing">
-		<name>QR</name>
-		<drawingID>1</drawingID>
-	</namedItem>
+	<line width="1" gap="false">
+		<v8ui:style xsi:type="v8ui:SpreadsheetDocumentCellLineType">ThickDashed</v8ui:style>
+	</line>
+	<font faceName="Arial" height="14" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 	<format>
-		<width>155</width>
+		<width>160</width>
+		<widthWeightFactor>1</widthWeightFactor>
 	</format>
 	<format>
+		<height>480</height>
+	</format>
+	<format>
+		<font>0</font>
+		<border>0</border>
+		<borderColor>style:ToolTipTextColor</borderColor>
 		<height>348</height>
+		<width>155</width>
+		<horizontalAlignment>Center</horizontalAlignment>
+		<fillType>Parameter</fillType>
 	</format>
 </document>

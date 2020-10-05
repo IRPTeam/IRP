@@ -261,17 +261,33 @@ Function Strings(Lang) Export
 	// %1 - 1 %2 - 2
 	Strings.Insert("Error_078", NStr("en = 'Quantity [%1] does not match the quantity [%2] by serial/lot numbers'", Lang));
 	
-	//%1 - 100.00 %2 - 120.00
+	// %1 - 100.00 
+	// %2 - 120.00
 	Strings.Insert("Error_079", NStr("en = 'Payment amount [%1] and return amount [%2] not match'", Lang));
 	
-	//%1 - 1 %2 - Goods receipt %3 - 10 %4 - 8
+	// %1 - 1 
+	// %2 - Goods receipt 
+	// %3 - 10 
+	// %4 - 8
 	Strings.Insert("Error_080", NStr("en = 'In line %1 quantity by %2 %3 greater than %4'", Lang));
 	
-	//%1 - 1 %2 - Dress %3 - Red/38 %4 - 8 %5 - 10
+	// %1 - 1 
+	// %2 - Dress 
+	// %3 - Red/38 
+	// %4 - 8 
+	// %5 - 10
 	Strings.Insert("Error_081", NStr("en = 'In line %1 quantity by %2-%3 %4 less than quantity by goods receipt %5'", Lang));
 	
-	//%1 - 1 %2 - Dress %3 - Red/38 %4 - 10 %5 - 8
+	// %1 - 1 
+	// %2 - Dress 
+	// %3 - Red/38 
+	// %4 - 10 
+	// %5 - 8
 	Strings.Insert("Error_082", NStr("en = 'In line %1 quantity by %2-%3 %4 less than quantity by goods receipt %5'", Lang));
+	
+	// %1 - 12 
+	Strings.Insert("Error_083", NStr("en = 'Location with number `%1` not found.'", Lang));
+	
 	
 	#EndRegion
 	
@@ -291,7 +307,21 @@ Function Strings(Lang) Export
 	
 	// %1 - 12
 	// %2 - 20.02.2020
-	Strings.Insert("InfoMessage_007", NStr("en = '#%1 date: %2'", Lang));
+	Strings.Insert("InfoMessage_008", NStr("en = '#%1 date: %2'", Lang));
+	
+	Strings.Insert("InfoMessage_009", NStr("en = 'Total quantity doesnt match. Please count one more time. You have one more try.'", Lang));
+	Strings.Insert("InfoMessage_010", NStr("en = 'Total quantity doesnt match. Location need to be count again (current count is anulated).'", Lang));
+	Strings.Insert("InfoMessage_011", NStr("en = 'Total quantity is ok. Please scan and count next location.'", Lang));
+	
+	// %1 - 12
+	// %2 - Vasiya Pupkin
+	Strings.Insert("InfoMessage_012", NStr("en = 'Current location #%1 was started by another user. User: %2'", Lang));
+	
+	// %1 - 12
+	Strings.Insert("InfoMessage_013", NStr("en = 'Current location #%1 was linked to you. Other users will not be able to scan it.'", Lang));
+	
+	// %1 - 12
+	Strings.Insert("InfoMessage_014", NStr("en = 'Current location #%1 was scaned and closed before. Please scan next location.'", Lang));
 	#EndRegion
 	
 	#Region QuestionToUser
@@ -311,6 +341,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_015", NStr("en = 'Filled data will be cleared. Continue?'", Lang));
 	Strings.Insert("QuestionToUser_016", NStr("en = 'Do you want to change or clear the icon?'", Lang));
 	Strings.Insert("QuestionToUser_017", NStr("en = 'How many documents to create?'", Lang));
+	Strings.Insert("QuestionToUser_018", NStr("en = 'Please enter total quantity'", Lang));
 	#EndRegion
 	
 	#Region SuggestionToUser

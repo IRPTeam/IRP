@@ -114,6 +114,18 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="714f2093-3668-4987-ab2e-5f8948a7f95f">
+    <name>RuleEditQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Rule edit quantity</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="bc5cd7bd-03a1-4451-bbe6-3a4d64b043e7">
     <name>ListForm</name>
     <synonym>

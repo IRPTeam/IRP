@@ -4,6 +4,7 @@ Procedure SearchByBarcode(Command, Barcode = "")
 	DocumentsClient.SearchByBarcode(Barcode, DocumentObject, ThisObject, ThisObject, , AddInfo);
 EndProcedure
 
+
 &AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 

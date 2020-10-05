@@ -734,10 +734,6 @@
     </userVisible>
     <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
-  <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
   <excludedCommands>WriteAndClose</excludedCommands>
   <excludedCommands>Reread</excludedCommands>
   <excludedCommands>ShowInList</excludedCommands>

@@ -424,11 +424,11 @@ foreach ($elementTag in $a) {
           <param name="jetbrains_powershell_noprofile" value="true" />
           <param name="jetbrains_powershell_script_code"><![CDATA[If ("%env.RunAllTest%" -eq "true"){
     Write-Output "One time start full test"
-	$TagArray = @("BasicFormsCheck", "Catalogs", "CurrencyRate", "Price", "Purchase", "InventoryTransfer", "Sales", "RetailDocuments", "Services", "Inventory", "Discount", "CashManagement", "StandartAgreement", "TaxCalculation", "Barcodes", "Filters", "Forms", "FillingDocuments", "SerialLotNumber", "LinkedTransaction", "LoadInfo", "PrintForm", "OpeningEntries", "CreationBasedMulti", "DocumentVerification", "PhysicalInventory", "Other")
+	$TagArray = @("Discount", "Forms", "Inventory", "Catalogs", "FillingDocuments", "Filters", "Other", "Purchase", "RetailDocuments", "Barcodes", "CreationBasedMulti", "CashManagement", "Sales", "Price", "PhysicalInventory", "SerialLotNumber", "OpeningEntries", "InventoryTransfer", "LinkedTransaction", "BasicFormsCheck",  "DocumentVerification", "Services", "StandartAgreement", "TaxCalculation", "PrintForm", "CurrencyRate", "LoadInfo")
   }elseif ("%dep.IRP_GitHubUpdate.env.Database1CName%" -eq "%teamcity.project.id%_develop")
   {
     Write-Output "Start full test"
-	$TagArray = @("BasicFormsCheck", "Catalogs", "CurrencyRate", "Price", "Purchase", "InventoryTransfer", "Sales", "RetailDocuments", "Services", "Inventory", "Discount", "CashManagement", "StandartAgreement", "TaxCalculation", "Barcodes", "Filters", "Forms", "FillingDocuments", "SerialLotNumber", "LinkedTransaction", "LoadInfo", "PrintForm", "OpeningEntries", "CreationBasedMulti", "DocumentVerification", "PhysicalInventory", "Other")
+    $TagArray = @("Discount", "Forms", "Inventory", "Catalogs", "FillingDocuments", "Filters", "Other", "Purchase", "RetailDocuments", "Barcodes", "CreationBasedMulti", "CashManagement", "Sales", "Price", "PhysicalInventory", "SerialLotNumber", "OpeningEntries", "InventoryTransfer", "LinkedTransaction", "BasicFormsCheck",  "DocumentVerification", "Services", "StandartAgreement", "TaxCalculation", "PrintForm", "CurrencyRate", "LoadInfo")
   }elseif ("%dep.IRP_GitHubUpdate.env.Database1CName%" -like "%teamcity.project.id%_develop*")
   {
     Write-Output "Start short test"
@@ -456,8 +456,7 @@ foreach ($elementTag in $TagArray) {
   
    #$TempDb = "'/Slocalhost/%env.Database1CName%'" | ForEach-Object { $_ -replace '\\', '/' }
    
-  $connection = "' /N %env.LoginTo1C% /P %env.PassTo1C% /Len /UseHwLicenses+ /TComp -SDC  /DisableStartupMessages /DisplayPerformance /DisplayAllFunctions /EnableCheckModal /EnableCheckExtensionsAndAddInsSyncCalls'"
-  $connection =  $connection + "'/DEBUG -http -attach /DEBUGGERURL http://localhost:%env.DebugPort%'"
+  $connection = "' /N %env.LoginTo1C% /P %env.PassTo1C% /Len /UseHwLicenses+ /TComp -SDC  /DisableStartupMessages /DisplayPerformance /DisplayAllFunctions /EnableCheckModal /EnableCheckExtensionsAndAddInsSyncCalls /DEBUG -http -attach /DEBUGGERURL http://localhost:%env.DebugPort%'"
   $text = "
   {
     'Version': '1.2.031',
@@ -580,7 +579,7 @@ foreach ($elementTag in $TagArray) {
   $VA_PID = $Process.Id 
   $global:VA_PID_Array.Add($elementTag, $Process.Id)
   echo "##teamcity[setParameter name='env.VA_PID' value='$VA_PID']"
-  Start-Sleep 30
+  Start-Sleep 10
 }
   ######################################################################################
   $global:JobArray = @()

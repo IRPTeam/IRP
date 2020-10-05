@@ -953,6 +953,7 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 		When create the first test SO for a test on the creation mechanism based on
 		* Save the document number
 			And I save the value of "Number" field as "$$NumberSalesOrder090408$$"
+			And I save the window as "$$SalesOrder090408$$"
 			And I set checkbox "Shipment confirmations before sales invoice"
 			And I click "Post and close" button
 	* Create 3 Shipment confirmation
@@ -1034,15 +1035,10 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 		And I click the button named "FormSelectAll"
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'Item key'  | 'Price type'        | 'Q'      | 'Unit' | 'SalesTax' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '520,00' | 'Dress'    | 'M/White'   | 'Basic Price Types' | '5,000'  | 'pcs'  | '1%'       | '2 177,65'   | '2 600,00'     | 'Store 02' |
-			| '550,00' | 'Dress'    | 'L/Green'   | 'Basic Price Types' | '5,000'  | 'pcs'  | '1%'       | '2 303,28'   | '2 750,00'     | 'Store 02' |
-			| '400,00' | 'Trousers' | '36/Yellow' | 'Basic Price Types' | '10,000' | 'pcs'  | '1%'       | '3 350,23'   | '4 000,00'     | 'Store 02' |
-			| '520,00' | 'Dress'    | 'M/White'   | 'Basic Price Types' | '8,000'  | 'pcs'  | '1%'       | '3 484,23'   | '4 160,00'     | 'Store 02' |
-			| '520,00' | 'Dress'    | 'M/White'   | 'Basic Price Types' | '7,000'  | 'pcs'  | '1%'       | '3 048,71'   | '3 640,00'     | 'Store 02' |
-			| '550,00' | 'Dress'    | 'L/Green'   | 'Basic Price Types' | '8,000'  | 'pcs'  | '1%'       | '3 685,25'   | '4 400,00'     | 'Store 02' |
-			| '550,00' | 'Dress'    | 'L/Green'   | 'Basic Price Types' | '7,000'  | 'pcs'  | '1%'       | '3 224,59'   | '3 850,00'     | 'Store 02' |
-			| '400,00' | 'Trousers' | '36/Yellow' | 'Basic Price Types' | '12,000' | 'pcs'  | '1%'       | '4 020,28'   | '4 800,00'     | 'Store 02' |
-			| '400,00' | 'Trousers' | '36/Yellow' | 'Basic Price Types' | '8,000'  | 'pcs'  | '1%'       | '2 680,18'   | '3 200,00'     | 'Store 02' |
+		| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Q'      | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'           |
+		| '18%' | 'Dress'    | '520,00' | 'M/White'   | '1 689,41'   | '1%'       | '20,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '8 710,59'   | '10 400,00'    | 'Store 02' | '$$SalesOrder090408$$'  |
+		| '18%' | 'Dress'    | '550,00' | 'L/Green'   | '1 786,88'   | '1%'       | '20,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '9 213,12'   | '11 000,00'    | 'Store 02' | '$$SalesOrder090408$$'  |
+		| '18%' | 'Trousers' | '400,00' | '36/Yellow' | '1 949,32'   | '1%'       | '30,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '10 050,68'  | '12 000,00'    | 'Store 02' | '$$SalesOrder090408$$'  |
+
 		And I close all client application windows
 

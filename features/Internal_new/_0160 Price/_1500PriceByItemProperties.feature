@@ -745,7 +745,7 @@ Scenario: _150006 check the redrawing of columns in the price list for additiona
 	And I close all client application windows
 
 
-Scenario: check input by line in the price list for additional properties
+Scenario: _150007 check input by line in the price list for additional properties
 	And I close all client application windows
 	* Open a creation form Price List
 		Given I open hyperlink "e1cib/list/Document.PriceList"

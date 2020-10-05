@@ -395,7 +395,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Company AS Company,
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
-		|	ISNULL(ShipmentConfirmations.Quantity,0) AS Quantity,
+		|	ISNULL(ShipmentConfirmations.Quantity, tmp.Quantity) AS Quantity,
 		|	tmp.Period AS Period,
 		|	CASE
 		|		WHEN tmp.ShipmentConfirmationBeforeSalesInvoice

@@ -639,6 +639,7 @@ foreach ($elementTag in $TagArray) {
     $global:JobArray += ($JobTailProc)
 
     do {
+        Start-Sleep 10
         $jobCount = $global:JobArray.count
         Write-Output "Current job count: $jobCount Max count:$StreamCountMax"
     } while ($global:JobArray.count -ge $StreamCountMax)

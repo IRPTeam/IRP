@@ -656,8 +656,10 @@ foreach ($elementTag in $TagArray) {
         start-job -scriptBlock $LogTail -ArgumentList $elementTag
     }
 
-    If($global:JobArray -ge $StreamCountMax) {
+    If($global:JobArray.count -ge $StreamCountMax) {
         start-job -scriptBlock $LogTail -ArgumentList $elementTag
+    } else{
+        Start-Sleep 1
     }
 }]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />

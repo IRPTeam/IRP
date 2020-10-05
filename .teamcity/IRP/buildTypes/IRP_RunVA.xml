@@ -654,6 +654,8 @@ foreach ($elementTag in $TagArray) {
 
     If($FirstTag) {
         start-job -scriptBlock $LogTail -ArgumentList $elementTag
+        $FirstTag = false
+        Write-Output "Log tail started"
     }
 
     do {

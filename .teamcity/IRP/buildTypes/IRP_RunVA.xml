@@ -642,6 +642,12 @@ foreach ($elementTag in $TagArray) {
         Start-Sleep 10
         $jobCount = $global:JobArray.count
         Write-Output "Current job count: $jobCount Max count:$StreamCountMax"
+        foreach ($job in $global:JobArray) {
+            $job | Receive-Job
+            if (!($job.State -eq "Running")) {
+                $global:JobArray = $global:JobArray | Where-Object { $_ –ne $job } 
+            }
+        }
     } while ($global:JobArray.count -ge $StreamCountMax)
 }
 

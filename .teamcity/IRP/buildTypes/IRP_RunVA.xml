@@ -445,7 +445,7 @@ New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllStep
 New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps\Template"
 Copy-Item -Path "%system.teamcity.build.workingDir%\TempDB\1Cv8.1CD" -Destination "%system.teamcity.build.workingDir%\AllSteps\Template\1Cv8.1CD"
 $global:JobArray = @()
-$FirstTag = true
+$StartTail = $true
 $StreamCountMax = 1
 
 $VanessaRun = {
@@ -652,15 +652,16 @@ foreach ($elementTag in $TagArray) {
     $JobTailProc = start-job -scriptBlock $JobTail -ArgumentList $elementTag, $global:VA_PID_Array
     $global:JobArray += ($JobTailProc)
 
-    If($FirstTag) {
+    If($StartTail) {
         start-job -scriptBlock $LogTail -ArgumentList $elementTag
-        $FirstTag = false
+        $StartTail = $false
         Write-Output "Log tail started"
     }
 
     do {
         Start-Sleep 10
-        Write-Output "Current job count: $global:JobArray.count Max count:$StreamCountMax"
+        $jobCount = $global:JobArray.count
+        Write-Output "Current job count: $jobCount Max count:$StreamCountMax"
     } while ($global:JobArray.count -ge $StreamCountMax)
 }]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />

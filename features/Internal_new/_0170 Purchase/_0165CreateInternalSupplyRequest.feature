@@ -265,7 +265,6 @@ Scenario: _016503 check the Company filter in the Internal Supply Request docume
 		And Delay 2
 		And I click Select button of "Store" field
 		And Delay 2
-		Then "Companies" window is opened
 		And "List" table does not contain lines
 			| Description  |
 			| Company Kalipso |

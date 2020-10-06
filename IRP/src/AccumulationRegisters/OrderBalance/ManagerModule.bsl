@@ -16,12 +16,15 @@ EndFunction
 
 Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
 
-// Doc.SalesOrder            - receipt
-// Doc.SalesInvoice          - expense
-// Doc.PurchaseOrder         - receipt, expense
-// Doc.InternalSupplyRequest - receipt
-// Doc.PurchaseInvoice       - expense
+// Doc.SalesInvoice - expense
+// Doc.PurchaseInvoice - expense
+// Doc.SalesOrder - receipt
+// Doc.PurchaseOrder - receipt, expense
 
+	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_OrderBalance") Then
+		Return True;
+	EndIf;
+	
 	Query = New Query();
 	Query.TempTablesManager = 
 	PostingServer.PrepareRecordsTables(GetLockFieldNames(), ItemList_InDocument, Records_InDocument, Records_Exists, Unposting, AddInfo);

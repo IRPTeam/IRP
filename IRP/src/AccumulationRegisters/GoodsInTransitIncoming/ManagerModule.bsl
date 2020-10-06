@@ -16,7 +16,13 @@ EndFunction
 
 Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
 	
+// Doc.PurchaseInvoice - receipt
 // Doc.GoodsReceipt - expense
+// Doc.PurchaseInvoice - receipt
+	
+	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_GoodsInTransitIncoming") Then
+		Return True;
+	EndIf;
 	
 	Query = New Query();
 	Query.TempTablesManager = 
@@ -47,7 +53,7 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	|		AND RegisterBalance.RowKey = ItemList.RowKey
 	|WHERE
 	|	CASE
-	|		WHEN ItemList.ReceiptBasis REFS Document.GoodsReceipt
+	|		WHEN VALUETYPE(ItemList.ReceiptBasis) = TYPE(Document.GoodsReceipt)
 	|			THEN RegisterBalance.QuantityBalance > 0
 	|		ELSE RegisterBalance.QuantityBalance < 0
 	|	END

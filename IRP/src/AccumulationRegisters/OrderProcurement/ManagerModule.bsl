@@ -15,6 +15,15 @@ Function GetExistsRecords(Ref, RecordType = Undefined, AddInfo = Undefined) Expo
 EndFunction
 
 Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
+	
+// Doc.PurchaseInvoice - expense
+// Doc.SalesOrder - receipt
+// Doc.PurchaseInvoice - expense	
+	
+	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_OrderProcurement") Then
+		Return True;
+	EndIf;
+	
 	Query = New Query();
 	Query.TempTablesManager = 
 	PostingServer.PrepareRecordsTables(GetLockFieldNames(), ItemList_InDocument, Records_InDocument, Records_Exists, Unposting, AddInfo);

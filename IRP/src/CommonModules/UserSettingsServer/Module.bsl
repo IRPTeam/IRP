@@ -2,11 +2,6 @@
 Function GetPredefinedUserSettingNames() Export
 	Result = New Structure();
 	Result.Insert("USE_OBJECT_WITH_DELETION_MARK", "Use_object_with_deletion_mark");
-	// Balace conrol
-	Result.Insert("USE_CONTROL_ORDER_BALANCE_ON_POST", "Use_control_order_balance_on_post");
-	Result.Insert("USE_CONTROL_ORDER_BALANCE_ON_UNPOST", "Use_control_order_balance_on_unpost");
-	Result.Insert("USE_CONTROL_GOODS_IN_TRANSIT_OUTGOING_BALANCE_ON_POST", "Use_control_goods_in_transit_outgoing_balance_on_post");
-	Result.Insert("USE_CONTROL_GOODS_IN_TRANSIT_OUTGOING_BALANCE_ON_UNPOST", "Use_control_goods_in_transit_outgoing_balance_on_unpost");
 	
 	Return Result;
 EndFunction

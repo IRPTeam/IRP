@@ -21,11 +21,20 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("OrderProcurement_Exists"       , PostingServer.CreateTable(AccReg.OrderProcurement));
 	Tables.Insert("ReceiptOrders_Exists"          , PostingServer.CreateTable(AccReg.ReceiptOrders));
 	
-	Tables.OrderBalance_Exists_Receipt   = AccReg.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
-	Tables.OrderBalance_Exists_Expense   = AccReg.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
-	Tables.GoodsInTransitIncoming_Exists = AccReg.GoodsInTransitIncoming.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
-	Tables.OrderProcurement_Exists       = AccReg.OrderProcurement.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
-	Tables.ReceiptOrders_Exists          = AccReg.ReceiptOrders.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
+	Tables.OrderBalance_Exists_Receipt =
+	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
+	
+	Tables.OrderBalance_Exists_Expense =
+	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
+	
+	Tables.GoodsInTransitIncoming_Exists =
+	AccumulationRegisters.GoodsInTransitIncoming.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
+	
+	Tables.OrderProcurement_Exists =
+	AccumulationRegisters.OrderProcurement.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
+	
+	Tables.ReceiptOrders_Exists =
+	AccumulationRegisters.ReceiptOrders.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
 	
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status, CurrentUniversalDate());
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
@@ -527,54 +536,39 @@ EndProcedure
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	LineNumberAndRowKeyFromItemList = PostingServer.GetLineNumberAndRowKeyFromItemList(Ref, "Document.PurchaseOrder.ItemList");
-	
-	If Not Cancel And Not AccumulationRegisters.OrderBalance.CheckBalance(Ref, 
-	                                                                 LineNumberAndRowKeyFromItemList,
-	                                                                 Parameters.DocumentDataTables.OrderBalance_Receipt,
-	                                                                 Parameters.DocumentDataTables.OrderBalance_Exists_Receipt,
-	                                                                 AccumulationRecordType.Receipt,
-	                                                                 Unposting,
-	                                                                 AddInfo) Then
+	AccReg = AccumulationRegisters;
+	If Not Cancel And Not AccReg.OrderBalance.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
+	                                                       Parameters.DocumentDataTables.OrderBalance_Receipt,
+	                                                       Parameters.DocumentDataTables.OrderBalance_Exists_Receipt,
+	                                                       AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 	
-	If Not Cancel And Not AccumulationRegisters.OrderBalance.CheckBalance(Ref, 
-	                                                                 LineNumberAndRowKeyFromItemList,
-	                                                                 Parameters.DocumentDataTables.OrderBalance_Expense,
-	                                                                 Parameters.DocumentDataTables.OrderBalance_Exists_Expense,
-	                                                                 AccumulationRecordType.Expense,
-	                                                                 Unposting,
-	                                                                 AddInfo) Then
+	If Not Cancel And Not AccReg.OrderBalance.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
+	                                                       Parameters.DocumentDataTables.OrderBalance_Expense,
+	                                                       Parameters.DocumentDataTables.OrderBalance_Exists_Expense,
+	                                                       AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 	
-	If Not Cancel And Not AccumulationRegisters.GoodsInTransitIncoming.CheckBalance(Ref, 
-	                                                                 LineNumberAndRowKeyFromItemList,
+	If Not Cancel And Not AccReg.GoodsInTransitIncoming.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
 	                                                                 Parameters.DocumentDataTables.GoodsInTransitIncoming,
 	                                                                 Parameters.DocumentDataTables.GoodsInTransitIncoming_Exists,
-	                                                                 AccumulationRecordType.Receipt,
-	                                                                 Unposting,
-	                                                                 AddInfo) Then
+	                                                                 AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 	
-	If Not Cancel And Not AccumulationRegisters.OrderProcurement.CheckBalance(Ref, 
-	                                                                 LineNumberAndRowKeyFromItemList,
-	                                                                 Parameters.DocumentDataTables.OrderProcurement,
-	                                                                 Parameters.DocumentDataTables.OrderProcurement_Exists,
-	                                                                 AccumulationRecordType.Expense,
-	                                                                 Unposting,
-	                                                                 AddInfo) Then
+	If Not Cancel And Not AccReg.OrderProcurement.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
+	                                                           Parameters.DocumentDataTables.OrderProcurement,
+	                                                           Parameters.DocumentDataTables.OrderProcurement_Exists,
+	                                                           AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 
-	If Not Cancel And Not AccumulationRegisters.ReceiptOrders.CheckBalance(Ref, 
-	                                                                 LineNumberAndRowKeyFromItemList,
-	                                                                 Parameters.DocumentDataTables.ReceiptOrders,
-	                                                                 Parameters.DocumentDataTables.ReceiptOrders_Exists,
-	                                                                 AccumulationRecordType.Receipt,
-	                                                                 Unposting,
-	                                                                 AddInfo) Then
+	If Not Cancel And Not AccReg.ReceiptOrders.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
+	                                                        Parameters.DocumentDataTables.ReceiptOrders,
+	                                                        Parameters.DocumentDataTables.ReceiptOrders_Exists,
+	                                                        AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 EndProcedure

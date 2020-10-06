@@ -11,14 +11,14 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("InventoryBalance"             , PostingServer.CreateTable(AccReg.InventoryBalance));
 	Tables.Insert("StockReservation"             , PostingServer.CreateTable(AccReg.StockReservation));
 	
-	Tables.Insert("GoodsInTransitOutgoing_Exists", PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
-	Tables.Insert("ShipmentOrders_Exists", PostingServer.CreateTable(AccReg.ShipmentOrders));
+	Tables.Insert("GoodsInTransitOutgoing_Exists" , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
+	Tables.Insert("ShipmentOrders_Exists"         , PostingServer.CreateTable(AccReg.ShipmentOrders));
 	
 	Tables.GoodsInTransitOutgoing_Exists = 
-	AccumulationRegisters.GoodsInTransitOutgoing.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo); 
-
+	AccumulationRegisters.GoodsInTransitOutgoing.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
+	
 	Tables.ShipmentOrders_Exists = 
-	AccumulationRegisters.ShipmentOrders.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo); 
+	AccumulationRegisters.ShipmentOrders.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
 	
 	Query = New Query();
 	Query.Text =
@@ -99,7 +99,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|   AND tmp.UseShipmentBasis";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_1").GetData().IsEmpty() Then
-		GetTables_NotUseSalesOrder(Tables, TempManager, "tmp_1");
+		GetTables_NotUseSO(Tables, TempManager, "tmp_1");
 	EndIf;
 	
 	Query = New Query();
@@ -112,7 +112,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|   AND NOT tmp.ShipmentBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_2").GetData().IsEmpty() Then
-		GetTables_UseSalesOrder_NotShipmentBeforeInvoice(Tables, TempManager, "tmp_2");
+		GetTables_UseSO_NotSCBeforeInvoice(Tables, TempManager, "tmp_2");
 	EndIf;
 	
 	Query = New Query();
@@ -125,7 +125,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|   AND tmp.ShipmentBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_3").GetData().IsEmpty() Then
-		GetTables_UseSalesOrder_ShipmentBeforeInvoice(Tables, TempManager, "tmp_3");
+		GetTables_UseSO_SCBeforeInvoice(Tables, TempManager, "tmp_3");
 	EndIf;
 	
 	Query = New Query();
@@ -136,7 +136,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|   NOT tmp.UseShipmentBasis";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_4").GetData().IsEmpty() Then
-		GetTables_NotUseShipmentBasis(Tables, TempManager, "tmp_4");
+		GetTables_NotUseSCBasis(Tables, TempManager, "tmp_4");
 	EndIf;
 	
 	Parameters.IsReposting = False;
@@ -146,7 +146,7 @@ EndFunction
 
 #Region Table_tmp_1
 
-Procedure GetTables_NotUseSalesOrder(Tables, TempManager, TableName)
+Procedure GetTables_NotUseSO(Tables, TempManager, TableName)
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	Query.Text = "SELECT * INTO tmp_1 FROM source AS tmp";
@@ -155,11 +155,11 @@ Procedure GetTables_NotUseSalesOrder(Tables, TempManager, TableName)
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_NotUseSalesOrder_IsProduct(Tables, TempManager, NewTableName);
+		GetTables_NotUseSO_IsProduct(Tables, TempManager, NewTableName);
 	EndIf;
 EndProcedure
 
-Procedure GetTables_NotUseSalesOrder_IsProduct(Tables, TempManager, TableName)
+Procedure GetTables_NotUseSO_IsProduct(Tables, TempManager, TableName)
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	
@@ -246,7 +246,7 @@ EndProcedure
 
 #Region Table_tmp_2
 
-Procedure GetTables_UseSalesOrder_NotShipmentBeforeInvoice(Tables, TempManager, TableName)
+Procedure GetTables_UseSO_NotSCBeforeInvoice(Tables, TempManager, TableName)
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	Query.Text = "SELECT * INTO tmp_1 FROM source AS tmp";
@@ -255,11 +255,11 @@ Procedure GetTables_UseSalesOrder_NotShipmentBeforeInvoice(Tables, TempManager, 
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UseSalesOrder_NotShipmentBeforeInvoice_IsProduct(Tables, TempManager, NewTableName);
+		GetTables_UseSO_NotSCBeforeInvoice_IsProduct(Tables, TempManager, NewTableName);
 	EndIf;
 EndProcedure
 
-Procedure GetTables_UseSalesOrder_NotShipmentBeforeInvoice_IsProduct(Tables, TempManager, TableName)
+Procedure GetTables_UseSO_NotSCBeforeInvoice_IsProduct(Tables, TempManager, TableName)
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	
@@ -358,7 +358,7 @@ EndProcedure
 
 #Region Table_tmp_3
 
-Procedure GetTables_UseSalesOrder_ShipmentBeforeInvoice(Tables, TempManager, TableName)
+Procedure GetTables_UseSO_SCBeforeInvoice(Tables, TempManager, TableName)
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	Query.Text = "SELECT * INTO tmp_1 FROM source AS tmp";
@@ -367,11 +367,11 @@ Procedure GetTables_UseSalesOrder_ShipmentBeforeInvoice(Tables, TempManager, Tab
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UseSalesOrder_ShipmentBeforeInvoice_IsProduct(Tables, TempManager, NewTableName);
+		GetTables_UseSO_SCBeforeInvoice_IsProduct(Tables, TempManager, NewTableName);
 	EndIf;
 EndProcedure
 
-Procedure GetTables_UseSalesOrder_ShipmentBeforeInvoice_IsProduct(Tables, TempManager, TableName)
+Procedure GetTables_UseSO_SCBeforeInvoice_IsProduct(Tables, TempManager, TableName)
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	
@@ -485,7 +485,7 @@ EndProcedure
 
 #Region Table_tmp_4
 
-Procedure GetTables_NotUseShipmentBasis(Tables, TempManager, TableName)
+Procedure GetTables_NotUseSCBasis(Tables, TempManager, TableName)
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	Query.Text = "SELECT * INTO tmp_1 FROM source AS tmp";
@@ -494,11 +494,11 @@ Procedure GetTables_NotUseShipmentBasis(Tables, TempManager, TableName)
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_NotUseShipmentBasis_IsProduct(Tables, TempManager, NewTableName);
+		GetTables_NotUseSCBasis_IsProduct(Tables, TempManager, NewTableName);
 	EndIf;
 EndProcedure
 
-Procedure GetTables_NotUseShipmentBasis_IsProduct(Tables, TempManager, TableName)
+Procedure GetTables_NotUseSCBasis_IsProduct(Tables, TempManager, TableName)
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	
@@ -717,24 +717,18 @@ EndProcedure
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	LineNumberAndRowKeyFromItemList = PostingServer.GetLineNumberAndRowKeyFromItemList(Ref, "Document.ShipmentConfirmation.ItemList");
-	
-	If Not Cancel And Not AccumulationRegisters.GoodsInTransitOutgoing.CheckBalance(Ref, 
-	                                                                 LineNumberAndRowKeyFromItemList,
+	AccReg = AccumulationRegisters;
+	If Not Cancel And Not AccReg.GoodsInTransitOutgoing.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
 	                                                                 Parameters.DocumentDataTables.GoodsInTransitOutgoing,
 	                                                                 Parameters.DocumentDataTables.GoodsInTransitOutgoing_Exists,
-	                                                                 AccumulationRecordType.Expense,
-	                                                                 Unposting,
-	                                                                 AddInfo) Then
+	                                                                 AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 	
-	If Not Cancel And Not AccumulationRegisters.ShipmentOrders.CheckBalance(Ref, 
-	                                                                 LineNumberAndRowKeyFromItemList,
-	                                                                 Parameters.DocumentDataTables.ShipmentOrders,
-	                                                                 Parameters.DocumentDataTables.ShipmentOrders_Exists,
-	                                                                 AccumulationRecordType.Receipt,
-	                                                                 Unposting,
-	                                                                 AddInfo) Then
+	If Not Cancel And Not AccReg.ShipmentOrders.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
+	                                                         Parameters.DocumentDataTables.ShipmentOrders,
+	                                                         Parameters.DocumentDataTables.ShipmentOrders_Exists,
+	                                                         AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 EndProcedure

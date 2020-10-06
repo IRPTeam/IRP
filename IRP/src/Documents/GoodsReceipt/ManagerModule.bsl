@@ -15,7 +15,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables.Insert("GoodsInTransitIncoming_Exists", PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
 	Tables.Insert("GoodsInTransitOutgoing_Exists", PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
-	Tables.Insert("ReceiptOrders_Exists", PostingServer.CreateTable(AccReg.ReceiptOrders));
+	Tables.Insert("ReceiptOrders_Exists"         , PostingServer.CreateTable(AccReg.ReceiptOrders));
 	
 	Tables.GoodsInTransitIncoming_Exists = 
 	AccumulationRegisters.GoodsInTransitIncoming.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo); 
@@ -107,7 +107,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|AND NOT tmp.UsePurchaseOrder";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_1").GetData().IsEmpty() Then
-		GetTables_NotUseSalesOrder_NotUsePurchaseOrder(Tables, TempManager, "tmp_1");
+		GetTables_NotUseSO_NotUsePO(Tables, TempManager, "tmp_1");
 	EndIf;
 	
 	Query = New Query();
@@ -119,7 +119,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|AND NOT tmp.UsePurchaseOrder";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_2").GetData().IsEmpty() Then
-		GetTables_UseSalesOrder_NotUsePurchaseOrder(Tables, TempManager, "tmp_2");
+		GetTables_UseSO_NotUsePO(Tables, TempManager, "tmp_2");
 	EndIf;
 	
 	Query = New Query();
@@ -153,7 +153,7 @@ EndFunction
 
 #Region Table_tmp_1
 
-Procedure GetTables_NotUseSalesOrder_NotUsePurchaseOrder(Tables, TempManager, TableName)
+Procedure GetTables_NotUseSO_NotUsePO(Tables, TempManager, TableName)
 	// tmp_1
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
@@ -163,11 +163,11 @@ Procedure GetTables_NotUseSalesOrder_NotUsePurchaseOrder(Tables, TempManager, Ta
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_NotUseSalesOrder_NotUsePurchaseOrder_IsProduct(Tables, TempManager, NewTableName);
+		GetTables_NotUseSO_NotUsePO_IsProduct(Tables, TempManager, NewTableName);
 	EndIf;
 EndProcedure
 
-Procedure GetTables_NotUseSalesOrder_NotUsePurchaseOrder_IsProduct(Tables, TempManager, TableName)
+Procedure GetTables_NotUseSO_NotUsePO_IsProduct(Tables, TempManager, TableName)
 	// tmp_1_1
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
@@ -279,7 +279,7 @@ EndProcedure
 
 #Region Table_tmp_2
 
-Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder(Tables, TempManager, TableName)
+Procedure GetTables_UseSO_NotUsePO(Tables, TempManager, TableName)
 	// tmp_2
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
@@ -1610,34 +1610,25 @@ EndProcedure
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	LineNumberAndRowKeyFromItemList = PostingServer.GetLineNumberAndRowKeyFromItemList(Ref, "Document.GoodsReceipt.ItemList");
-
-	If Not Cancel And Not AccumulationRegisters.GoodsInTransitIncoming.CheckBalance(Ref, 
-	                                                                 LineNumberAndRowKeyFromItemList,
+	AccReg = AccumulationRegisters;
+	If Not Cancel And Not AccReg.GoodsInTransitIncoming.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
 	                                                                 Parameters.DocumentDataTables.GoodsInTransitIncoming,
 	                                                                 Parameters.DocumentDataTables.GoodsInTransitIncoming_Exists,
-	                                                                 AccumulationRecordType.Expense,
-	                                                                 Unposting,
-	                                                                 AddInfo) Then
+	                                                                 AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 	
-	If Not Cancel And Not AccumulationRegisters.GoodsInTransitOutgoing.CheckBalance(Ref, 
-	                                                                 LineNumberAndRowKeyFromItemList,
+	If Not Cancel And Not AccReg.GoodsInTransitOutgoing.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
 	                                                                 Parameters.DocumentDataTables.GoodsInTransitOutgoing,
 	                                                                 Parameters.DocumentDataTables.GoodsInTransitOutgoing_Exists,
-	                                                                 AccumulationRecordType.Receipt,
-	                                                                 Unposting,
-	                                                                 AddInfo) Then
+	                                                                 AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 	
-	If Not Cancel And Not AccumulationRegisters.ReceiptOrders.CheckBalance(Ref, 
-	                                                                 LineNumberAndRowKeyFromItemList,
-	                                                                 Parameters.DocumentDataTables.ReceiptOrders,
-	                                                                 Parameters.DocumentDataTables.ReceiptOrders_Exists,
-	                                                                 AccumulationRecordType.Receipt,
-	                                                                 Unposting,
-	                                                                 AddInfo) Then
+	If Not Cancel And Not AccReg.ReceiptOrders.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
+	                                                        Parameters.DocumentDataTables.ReceiptOrders,
+	                                                        Parameters.DocumentDataTables.ReceiptOrders_Exists,
+	                                                        AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 EndProcedure

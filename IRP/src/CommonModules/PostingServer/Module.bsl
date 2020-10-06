@@ -829,3 +829,15 @@ Function PrepareRecordsTables(Dimensions, ItemList_InDocument, Records_InDocumen
 	
 	Return Query.TempTablesManager;
 EndFunction	
+
+Function CheckingBalanceIsRequired(Ref, SettingUniqueID) Export
+	Filter = New Structure();
+	Filter.Insert("MetadataObject", Ref.Metadata());
+	Filter.Insert("AttributeName", SettingUniqueID);
+	UserSettings = UserSettingsServer.GetUserSettings(Undefined, Filter);
+	If UserSettings.Count() And UserSettings[0].Value = True Then
+		Return True;
+	Else
+		Return False;
+	EndIf;
+EndFunction

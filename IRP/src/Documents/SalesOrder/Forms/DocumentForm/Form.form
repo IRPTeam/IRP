@@ -4071,7 +4071,7 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <width>10</width>
-            <maxWidth>8</maxWidth>
+            <maxWidth>20</maxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
             <choiceButton>false</choiceButton>
@@ -4164,7 +4164,7 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
-            <maxWidth>8</maxWidth>
+            <maxWidth>20</maxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
             <choiceButton>false</choiceButton>
@@ -4255,7 +4255,7 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <width>10</width>
-            <maxWidth>8</maxWidth>
+            <maxWidth>20</maxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
             <choiceButton>false</choiceButton>
@@ -4349,7 +4349,7 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <width>10</width>
-            <maxWidth>8</maxWidth>
+            <maxWidth>20</maxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
             <choiceButton>false</choiceButton>
@@ -4432,7 +4432,7 @@
         </extendedTooltip>
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
-          <group>HorizontalIfPossible</group>
+          <group>AlwaysHorizontal</group>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -4462,7 +4462,7 @@
       </extendedTooltip>
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
-        <group>HorizontalIfPossible</group>
+        <group>AlwaysHorizontal</group>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <backColor xsi:type="core:ColorDef">
@@ -4497,7 +4497,7 @@
     </extendedTooltip>
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
-      <group>HorizontalIfPossible</group>
+      <group>AlwaysHorizontal</group>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>

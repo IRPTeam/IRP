@@ -46,8 +46,7 @@
     <key>en</key>
     <value>Labeling list</value>
   </listPresentation>
-  <numberType>String</numberType>
-  <numberLength>9</numberLength>
+  <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>

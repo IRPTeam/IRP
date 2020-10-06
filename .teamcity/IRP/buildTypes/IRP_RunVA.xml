@@ -543,7 +543,7 @@ $VanessaRun = {
       'useaddinforscreencapture': true,
       'screencaptureaddinmethod': 2,
       'onerrorscreenshot': true,
-      'onerrorscreenshoteverywindow': true,
+      'onerrorscreenshoteverywindow': false,
       'videcreate': false,
       'usesikulixserver': false,
       'searchformelementsbyname': false,

@@ -5,6 +5,8 @@ Procedure Undopost(DocObject, Cancel, AddInfo = Undefined) Export
 	
 	Parameters = New Structure();
 	Parameters.Insert("Object", DocObject);
+	Parameters.Insert("IsReposting", False);
+	Parameters.Insert("PointInTime", DocObject.PointInTime());
 	
 	Module = Documents[DocObject.Ref.Metadata().Name];
 	

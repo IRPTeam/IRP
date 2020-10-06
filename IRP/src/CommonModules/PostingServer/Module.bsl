@@ -275,24 +275,6 @@ Procedure CalculateQuantityByUnit(DataTable) Export
 	EndDo;
 EndProcedure
 
-Function GetCurrentRecords(Recorder, RegisterMetadata) Export
-	ArrayOfDimensions = New Array();
-	For Each Dimension In RegisterMetadata.Dimensions Do
-		ArrayOfDimensions.Add("t." + Dimension.Name);
-	EndDo;
-	StringOfDimensions = StrConcat(ArrayOfDimensions, ",");
-	
-	Query = New Query();
-	Query.Text =
-		StrTemplate("select %1 from %2 as t where t.Recorder = &Recorder group by %1",
-			StringOfDimensions, RegisterMetadata.FullName());
-	
-	Query.SetParameter("Recorder", Recorder);
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	Return QueryTable;
-EndFunction
-
 Function JoinTables(ArrayOfJoiningTables, Fields) Export
 	
 	If Not ArrayOfJoiningTables.Count() Then
@@ -634,72 +616,52 @@ Function GetQueryTextAdvanceFromCustomers()
 EndFunction
 
 Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) Export
-	
 	If QueryTable.Columns.Find("Unposting") = Undefined Then
 		QueryTable.Columns.Add("Unposting");
 		QueryTable.FillValues(False, "Unposting");
 	EndIf;
-	
+
 	QueryTableCopy = QueryTable.Copy();
 	QueryTableCopy.GroupBy(Parameters.GroupColumns + ", Unposting", Parameters.SumColumns);
-		
+
 	For Each Row In QueryTableCopy Do
 		Filter = New Structure(Parameters.FilterColumns);
 		FillPropertyValues(Filter, Row);
 		QueryTableFiltered = QueryTable.Copy(Filter);
-			
+
 		ArrayOfLineNumbers = QueryTableFiltered.UnloadColumn("LineNumber");
 		LineNumbers = StrConcat(ArrayOfLineNumbers, ",");
-		
-		RemainsQuantity = ?(Parameters.Excess, Row.BasisQuantity + Row.LackOfBalance, Row.BasisQuantity - Row.LackOfBalance);
-		If ArrayOfLineNumbers.Count() = 1 Then
-			If ValueIsFilled(ArrayOfLineNumbers[0]) Then
-				LineNumber = ArrayOfLineNumbers[0];
-				
-				If Row.Unposting Then
-					MessageText =
-					StrTemplate(R().Error_068, LineNumber, Row.Item, Row.ItemKey, Parameters.Operation,
-						Row.LackOfBalance,
-						0,
-						Row.LackOfBalance,
-						Row.BasisUnit);
-				Else
-					MessageText =
-					StrTemplate(R().Error_068, LineNumber, Row.Item, Row.ItemKey, Parameters.Operation,
-						RemainsQuantity,
-						Row.BasisQuantity,
-						Row.LackOfBalance,
-						Row.BasisUnit);
-				EndIf;
-				CommonFunctionsClientServer.ShowUsersMessage(MessageText
-					, "Object.ItemList[" + (LineNumber - 1) + "].Quantity"
-					, "Object.ItemList");
-			// Delete row
-			Else
-				MessageText =
-				StrTemplate(R().Error_068, LineNumbers, Row.Item, Row.ItemKey, Parameters.Operation,
-						Row.LackOfBalance,
-						0,
-						Row.LackOfBalance,
-						Row.BasisUnit);
-				CommonFunctionsClientServer.ShowUsersMessage(MessageText);	
-			EndIf;
+
+		BasisUnit = "";
+		If QueryTableCopy.Columns.Find("BasisUnit") <> Undefined Then
+			BasisUnit = Row.BasisUnit;
+		EndIf;
+		LackOfBalance = ?(Row.LackOfBalance < 0, -Row.LackOfBalance, Row.LackOfBalance);
+		If Parameters.RecordType = AccumulationRecordType.Receipt Then
+			RemainsQuantity = Row.Quantity + LackOfBalance;
 		Else
-			If Row.Unposting Then
-				MessageText =
-				StrTemplate(R().Error_068, LineNumber, Row.Item, Row.ItemKey, Parameters.Operation,
-					Row.LackOfBalance,
-					0,
-					Row.LackOfBalance,
-					Row.BasisUnit);
+			If Row.LackOfBalance < 0 Then
+				RemainsQuantity = Row.Quantity + LackOfBalance;
 			Else
-				MessageText =
-				StrTemplate(R().Error_068, LineNumbers, Row.Item, Row.ItemKey, Parameters.Operation,
-						RemainsQuantity,
-						Row.BasisQuantity,
-						Row.LackOfBalance,
-						Row.BasisUnit);
+				RemainsQuantity = Row.Quantity - LackOfBalance;
 			EndIf;
+		EndIf;
+		If ValueIsFilled(ArrayOfLineNumbers[0]) Then
+			LineNumber = ArrayOfLineNumbers[0];
+
+			If Row.Unposting Then
+				MessageText = StrTemplate(R().Error_068, LineNumber, Row.Item, Row.ItemKey, Parameters.Operation,
+					LackOfBalance, 0, LackOfBalance, BasisUnit);
+			Else
+				MessageText = StrTemplate(R().Error_068, LineNumber, Row.Item, Row.ItemKey, Parameters.Operation,
+					RemainsQuantity, Row.Quantity, LackOfBalance, BasisUnit);
+			EndIf;
+			CommonFunctionsClientServer.ShowUsersMessage(
+			MessageText, "Object.ItemList[" + (LineNumber - 1) + "].Quantity", "Object.ItemList");
+			// Delete row
+		Else
+			MessageText = StrTemplate(R().Error_068, LineNumbers, Row.Item, Row.ItemKey, Parameters.Operation,
+				LackOfBalance, 0, LackOfBalance, BasisUnit);
 			CommonFunctionsClientServer.ShowUsersMessage(MessageText);
 		EndIf;
 	EndDo;
@@ -726,3 +688,156 @@ Procedure AddColumnsToAccountsStatementTable(Table) Export
 	EndIf;
 EndProcedure
 
+Procedure UUIDToString(QueryTable, RowKeyUUID = "RowKeyUUID", RowKeyString = "RowKey") Export
+	QueryTable.Columns.Add(RowKeyString, New TypeDescription("String", , New StringQualifiers(50)));
+	For Each Row In QueryTable Do
+		Row[RowKeyString] = String(Row[RowKeyUUID]);
+	EndDo;
+EndProcedure
+
+Function GetLineNumberAndRowKeyFromItemList(Ref, FullTableName) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ItemList.Key AS RowKeyUUID,
+	|	ItemList.LineNumber AS LineNumber
+	|FROM
+	|	%1 AS ItemList
+	|WHERE
+	|	ItemList.Ref = &Ref";
+	Query.Text = StrTemplate(Query.Text, FullTableName);
+	Query.SetParameter("Ref", Ref);
+	QueryResult = Query.Execute();
+	ItemList_InDocument = QueryResult.Unload();
+	UUIDToString(ItemList_Indocument);
+	Return ItemList_InDocument;	
+EndFunction
+
+Function GetLockFieldsMap(LockFieldNames) Export
+	Fields = New Map();
+	ArrayOfFieldNames = StrSplit(LockFieldNames, ",");
+	For Each ItemFieldName In ArrayOfFieldNames Do
+		Fields.Insert(TrimAll(ItemFieldName), TrimAll(ItemFieldName));
+	EndDo;
+	Return Fields;
+EndFunction
+
+Function GetExistsRecordsFromAccRegister(Ref, RegisterFullName, RecordType = Undefined, AddInfo = Undefined) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT *
+	|FROM
+	|	%1 AS Table
+	|WHERE
+	|	Table.Recorder = &Recorder
+	|	AND CASE
+	|		WHEN &Filter_RecordType
+	|			THEN Table.RecordType = &RecordType
+	|		ELSE TRUE
+	|	END";
+	Query.Text = StrTemplate(Query.Text, RegisterFullName);
+	Query.SetParameter("Recorder", Ref);
+	Query.SetParameter("Filter_RecordType", RecordType <> Undefined);
+	Query.SetParameter("RecordType", RecordType);
+	QueryResult = Query.Execute();
+	Return QueryResult.Unload();
+EndFunction
+
+Function PrepareRecordsTables(Dimensions, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting, AddInfo = Undefined) Export
+	ArrayOfDimensions = StrSplit(Dimensions, ",");
+	JoinCondition = "";
+	ArrayOfSelectedFields = New Array();
+	For Each ItemOfDimension In ArrayOfDimensions Do
+		ArrayOfSelectedFields.Add(" " + "Records." + TrimAll(ItemOfDimension));
+		JoinCondition = JoinCondition 
+		+ StrTemplate(" AND Records.%1 =  Records_with_LineNumbers.%1 ", TrimAll(ItemOfDimension));
+	EndDo;
+	StrSelectedFields = StrConcat(ArrayOfSelectedFields, ",");
+	
+	Query = New Query();
+	Query.TempTablesManager = New TempTablesManager();
+	Query.Text =
+	"SELECT %1,
+	|	Records.RowKey,
+	|	Records.Quantity
+	|INTO Records_InDocument
+	|FROM
+	|	&Records_InDocument AS Records
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList_InDocument.LineNumber,
+	|	ItemList_InDocument.RowKey
+	|INTO ItemList_InDocument
+	|FROM
+	|	&ItemList_InDocument AS ItemList_InDocument
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT %1, 
+	|	Records.RowKey,
+	|	Records.Quantity
+	|INTO Records_Exists
+	|FROM
+	|	&Records_Exists AS Records
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT %1,
+	|	Records.RowKey,
+	|	Records.Quantity,
+	|	ItemList_InDocument.LineNumber
+	|INTO Records_with_LineNumbers
+	|FROM
+	|	Records_InDocument AS Records
+	|		LEFT JOIN ItemList_InDocument AS ItemList_InDocument
+	|		ON Records.RowKey = ItemList_InDocument.RowKey
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT %1,
+	|	Records.Quantity,
+	|	Records.LineNumber,
+	|	Records.RowKey
+	|INTO ItemList
+	|FROM
+	|	Records_with_LineNumbers AS Records
+	|
+	|UNION ALL
+	|
+	|SELECT %1,
+	|	Records.Quantity,
+	|	UNDEFINED,
+	|	Records.RowKey AS RowKey
+	|FROM
+	|	Records_Exists AS Records
+	|		LEFT JOIN Records_with_LineNumbers AS Records_with_LineNumbers
+	|		ON  Records.RowKey = Records_with_LineNumbers.RowKey
+	| 		%2
+	|WHERE
+	|	Records_with_LineNumbers.RowKey IS NULL
+	|	AND NOT &Unposting
+	|;";
+	Query.Text = StrTemplate(Query.Text,StrSelectedFields, JoinCondition);
+	
+	Query.SetParameter("Records_InDocument"  , Records_InDocument);
+	Query.SetParameter("ItemList_InDocument" , ItemList_InDocument);
+	Query.SetParameter("Records_Exists"      , Records_Exists);
+	Query.SetParameter("Unposting"           , Unposting);
+	Query.Execute();
+	
+	Return Query.TempTablesManager;
+EndFunction	
+
+Function CheckingBalanceIsRequired(Ref, SettingUniqueID) Export
+	Filter = New Structure();
+	Filter.Insert("MetadataObject", Ref.Metadata());
+	Filter.Insert("AttributeName", SettingUniqueID);
+	UserSettings = UserSettingsServer.GetUserSettings(Undefined, Filter);
+	If UserSettings.Count() And UserSettings[0].Value = True Then
+		Return True;
+	Else
+		Return False;
+	EndIf;
+EndFunction

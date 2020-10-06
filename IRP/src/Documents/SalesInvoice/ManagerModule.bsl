@@ -4,47 +4,50 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("OrderBalance", PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("OrderReservation", PostingServer.CreateTable(AccReg.OrderReservation));
-	Tables.Insert("StockReservation", PostingServer.CreateTable(AccReg.StockReservation));
-	Tables.Insert("InventoryBalance", PostingServer.CreateTable(AccReg.InventoryBalance));
-	Tables.Insert("SalesTurnovers", PostingServer.CreateTable(AccReg.SalesTurnovers));
-	Tables.Insert("GoodsInTransitOutgoing", PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
-	Tables.Insert("GoodsInTransitOutgoing_Exists", PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
-	Tables.Insert("StockBalance", PostingServer.CreateTable(AccReg.StockBalance));
-	Tables.Insert("ShipmentOrders", PostingServer.CreateTable(AccReg.ShipmentOrders));
-	Tables.Insert("PartnerArTransactions", PostingServer.CreateTable(AccReg.PartnerArTransactions));
-	Tables.Insert("AdvanceFromCustomers_Lock", PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
-	Tables.Insert("AdvanceFromCustomers_Registrations", PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
-	Tables.Insert("ShipmentConfirmationSchedule_Expense", PostingServer.CreateTable(AccReg.ShipmentConfirmationSchedule));
-	Tables.Insert("ShipmentConfirmationSchedule_Receipt", PostingServer.CreateTable(AccReg.ShipmentConfirmationSchedule));
-	Tables.Insert("ReconciliationStatement", PostingServer.CreateTable(AccReg.ReconciliationStatement));
-	Tables.Insert("TaxesTurnovers", PostingServer.CreateTable(AccReg.TaxesTurnovers));
-	Tables.Insert("RevenuesTurnovers", PostingServer.CreateTable(AccReg.RevenuesTurnovers));
-
+	Tables.Insert("OrderBalance"                         , PostingServer.CreateTable(AccReg.OrderBalance));
+	Tables.Insert("OrderReservation"                     , PostingServer.CreateTable(AccReg.OrderReservation));
+	Tables.Insert("StockReservation"                     , PostingServer.CreateTable(AccReg.StockReservation));
+	Tables.Insert("InventoryBalance"                     , PostingServer.CreateTable(AccReg.InventoryBalance));
+	Tables.Insert("SalesTurnovers"                       , PostingServer.CreateTable(AccReg.SalesTurnovers));
+	Tables.Insert("GoodsInTransitOutgoing"               , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
+	Tables.Insert("StockBalance"                         , PostingServer.CreateTable(AccReg.StockBalance));
+	Tables.Insert("ShipmentOrders"                       , PostingServer.CreateTable(AccReg.ShipmentOrders));
+	Tables.Insert("PartnerArTransactions"                , PostingServer.CreateTable(AccReg.PartnerArTransactions));
+	Tables.Insert("AdvanceFromCustomers_Lock"            , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
+	Tables.Insert("AdvanceFromCustomers_Registrations"   , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
+	Tables.Insert("ShipmentConfirmationSchedule_Expense" , PostingServer.CreateTable(AccReg.ShipmentConfirmationSchedule));
+	Tables.Insert("ShipmentConfirmationSchedule_Receipt" , PostingServer.CreateTable(AccReg.ShipmentConfirmationSchedule));
+	Tables.Insert("ReconciliationStatement"              , PostingServer.CreateTable(AccReg.ReconciliationStatement));
+	Tables.Insert("TaxesTurnovers"                       , PostingServer.CreateTable(AccReg.TaxesTurnovers));
+	Tables.Insert("RevenuesTurnovers"                    , PostingServer.CreateTable(AccReg.RevenuesTurnovers));
+	
+	Tables.Insert("OrderBalance_Exists"           , PostingServer.CreateTable(AccReg.OrderBalance));
+	Tables.Insert("GoodsInTransitOutgoing_Exists" , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
+	Tables.Insert("ShipmentOrders_Exists"         , PostingServer.CreateTable(AccReg.ShipmentOrders));
+	
+	Tables.OrderBalance_Exists =
+	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
+	
+	Tables.GoodsInTransitOutgoing_Exists =
+	AccumulationRegisters.GoodsInTransitOutgoing.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
+	
+	Tables.ShipmentOrders_Exists =
+	AccumulationRegisters.ShipmentOrders.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo); 
+	
 	QueryItemList = New Query();
 	QueryItemList.Text = GetQueryTextSalesInvoiceItemList();
 	QueryItemList.SetParameter("Ref", Ref);
 	QueryResultItemList = QueryItemList.Execute();
 	QueryTableItemList = QueryResultItemList.Unload();
 	PostingServer.CalculateQuantityByUnit(QueryTableItemList);
-	// UUID to String
-	QueryTableItemList.Columns.Add("RowKey", 
-		Metadata.AccumulationRegisters.ShipmentConfirmationSchedule.Dimensions.RowKey.Type);
-	For Each Row In QueryTableItemList Do
-		Row.RowKey = String(Row.RowKeyUUID);
-	EndDo;
+	PostingServer.UUIDToString(QueryTableItemList);
 	
 	QueryTaxList = New Query();
 	QueryTaxList.Text = GetQueryTextSalesInvoiceTaxList();
 	QueryTaxList.SetParameter("Ref", Ref);
 	QueryResultTaxList = QueryTaxList.Execute();
 	QueryTableTaxList = QueryResultTaxList.Unload();
-	// UUID to String
-	QueryTableTaxList.Columns.Add("RowKey", Metadata.AccumulationRegisters.TaxesTurnovers.Dimensions.RowKey.Type);
-	For Each Row In QueryTableTaxList Do
-		Row.RowKey = String(Row.RowKeyUUID);
-	EndDo;
+	PostingServer.UUIDToString(QueryTableTaxList);
 	
 	QuerySalesTurnovers = New Query();
 	QuerySalesTurnovers.Text = GetQueryTextSalesInvoiceSalesTurnovers();
@@ -57,26 +60,23 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("QueryTable", QueryTableItemList);
 	QueryResult = Query.ExecuteBatch();
 	
-	Tables.OrderBalance = QueryResult[1].Unload();
-	Tables.OrderReservation = QueryResult[2].Unload();
-	Tables.StockReservation = QueryResult[3].Unload();
-	Tables.InventoryBalance = QueryResult[4].Unload();
-		
-	Tables.GoodsInTransitOutgoing = QueryResult[5].Unload();
-	Tables.StockBalance = QueryResult[6].Unload();
-	Tables.ShipmentOrders = QueryResult[7].Unload();
-	Tables.PartnerArTransactions = QueryResult[8].Unload();
-	Tables.AdvanceFromCustomers_Lock = QueryResult[9].Unload();
+	Tables.OrderBalance                         = QueryResult[1].Unload();
+	Tables.OrderReservation                     = QueryResult[2].Unload();
+	Tables.StockReservation                     = QueryResult[3].Unload();
+	Tables.InventoryBalance                     = QueryResult[4].Unload();
+	Tables.GoodsInTransitOutgoing               = QueryResult[5].Unload();
+	Tables.StockBalance                         = QueryResult[6].Unload();
+	Tables.ShipmentOrders                       = QueryResult[7].Unload();
+	Tables.PartnerArTransactions                = QueryResult[8].Unload();
+	Tables.AdvanceFromCustomers_Lock            = QueryResult[9].Unload();
 	Tables.ShipmentConfirmationSchedule_Expense = QueryResult[10].Unload();
 	Tables.ShipmentConfirmationSchedule_Receipt = QueryResult[11].Unload();
-	Tables.ReconciliationStatement = QueryResult[12].Unload();
-	Tables.RevenuesTurnovers = QueryResult[13].Unload();
+	Tables.ReconciliationStatement              = QueryResult[12].Unload();
+	Tables.RevenuesTurnovers                    = QueryResult[13].Unload();
 	
 	Tables.TaxesTurnovers = QueryTableTaxList;
 	Tables.SalesTurnovers = QueryTableSalesTurnovers;
-	
-	Tables.GoodsInTransitOutgoing_Exists = GetExistsGoodsInTransitOutgoing(Ref, AddInfo);
-	
+		
 	Return Tables;
 EndFunction
 
@@ -711,18 +711,15 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	DataMapWithLockFields.Insert(ShipmentOrders.RegisterName, ShipmentOrders.LockInfo);
 	
 	// PartnerArTransactions
-	PartnerArTransactions 
-		= AccumulationRegisters.PartnerArTransactions.GetLockFields(DocumentDataTables.PartnerArTransactions);
+	PartnerArTransactions = AccumulationRegisters.PartnerArTransactions.GetLockFields(DocumentDataTables.PartnerArTransactions);
 	DataMapWithLockFields.Insert(PartnerArTransactions.RegisterName, PartnerArTransactions.LockInfo);
 	
 	// AdvanceFromCustomers (Lock use In PostingCheckBeforeWrite)
-	AdvanceFromCustomers = 
-		AccumulationRegisters.AdvanceFromCustomers.GetLockFields(DocumentDataTables.AdvanceFromCustomers_Lock);
+	AdvanceFromCustomers = AccumulationRegisters.AdvanceFromCustomers.GetLockFields(DocumentDataTables.AdvanceFromCustomers_Lock);
 	DataMapWithLockFields.Insert(AdvanceFromCustomers.RegisterName, AdvanceFromCustomers.LockInfo);
 	
 	// ReconciliationStatement
-	ReconciliationStatement 
-		= AccumulationRegisters.ReconciliationStatement.GetLockFields(DocumentDataTables.ReconciliationStatement);
+	ReconciliationStatement = AccumulationRegisters.ReconciliationStatement.GetLockFields(DocumentDataTables.ReconciliationStatement);
 	DataMapWithLockFields.Insert(ReconciliationStatement.RegisterName, ReconciliationStatement.LockInfo);
 	
 	// TaxesTurnovers
@@ -826,7 +823,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.GoodsInTransitOutgoing,
-			Parameters.DocumentDataTables.GoodsInTransitOutgoing_Exists.Count() > 0));
+			True));
 	
 	// StockBalance
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
@@ -836,9 +833,10 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	
 	// ShipmentOrders
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ShipmentOrders,
-		New Structure("RecordType, RecordSet",
+		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.ShipmentOrders));
+			Parameters.DocumentDataTables.ShipmentOrders,
+			True));
 	
 	// RevenuesTurnovers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.RevenuesTurnovers,
@@ -940,13 +938,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 EndFunction
 
 Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	If Not CheckOrderBalance(Ref, Parameters, AddInfo) Then
-		Cancel = True;
-	EndIf;
-	
-	If Not CheckGoodsInTransitOutgoingBalance(Ref, Parameters, AddInfo) Then
-		Cancel = True;
-	EndIf;
+	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
 EndProcedure
 
 #EndRegion
@@ -954,20 +946,24 @@ EndProcedure
 #Region Undoposting
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Tables = New Structure();
-	AccReg = Metadata.AccumulationRegisters;
-	Tables.Insert("GoodsInTransitOutgoing_Exists", PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
-	Tables.GoodsInTransitOutgoing_Exists = GetExistsGoodsInTransitOutgoing(Ref, AddInfo);	
-	Return Tables;
+	Return PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
 	
+	// OrderBalance
+	OrderBalance = AccumulationRegisters.OrderBalance.GetLockFields(DocumentDataTables.OrderBalance_Exists);
+	DataMapWithLockFields.Insert(OrderBalance.RegisterName, OrderBalance.LockInfo);
+	
 	// GoodsInTransitOutgoing
 	GoodsInTransitOutgoing = AccumulationRegisters.GoodsInTransitOutgoing.GetLockFields(DocumentDataTables.GoodsInTransitOutgoing_Exists);
 	DataMapWithLockFields.Insert(GoodsInTransitOutgoing.RegisterName, GoodsInTransitOutgoing.LockInfo);
+	
+	// ShipmentOrders
+	ShipmentOrders = AccumulationRegisters.ShipmentOrders.GetLockFields(DocumentDataTables.ShipmentOrders_Exists);
+	DataMapWithLockFields.Insert(ShipmentOrders.RegisterName, ShipmentOrders.LockInfo);
 	
 	Return DataMapWithLockFields;
 EndFunction
@@ -978,274 +974,37 @@ EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	Parameters.Insert("Unposting", True);
-	If Not CheckOrderBalance(Ref, Parameters, AddInfo) Then
+	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
+EndProcedure
+
+#EndRegion
+
+#Region CheckAfterWrite
+
+Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
+	LineNumberAndRowKeyFromItemList = PostingServer.GetLineNumberAndRowKeyFromItemList(Ref, "Document.SalesInvoice.ItemList");
+	AccReg = AccumulationRegisters;
+	If Not Cancel And Not AccReg.GoodsInTransitOutgoing.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
+	                                                                 Parameters.DocumentDataTables.GoodsInTransitOutgoing,
+	                                                                 Parameters.DocumentDataTables.GoodsInTransitOutgoing_Exists,
+	                                                                 AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 	
-	If Not CheckGoodsInTransitOutgoingBalance(Ref, Parameters, AddInfo) Then
+	If Not Cancel And Not AccReg.OrderBalance.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
+	                                                       Parameters.DocumentDataTables.OrderBalance,
+	                                                       Parameters.DocumentDataTables.OrderBalance_Exists,
+	                                                       AccumulationRecordType.Expense, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
+	
+	If Not Cancel And Not AccReg.ShipmentOrders.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
+	                                                         Parameters.DocumentDataTables.ShipmentOrders,
+	                                                         Parameters.DocumentDataTables.ShipmentOrders_Exists,
+	                                                         AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 EndProcedure
 
 #EndRegion
-
-Function CheckOrderBalance(Ref, Parameters, AddInfo = Undefined)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	OrderBalanceBalance.ItemKey.Item AS Item,
-	|	OrderBalanceBalance.ItemKey AS ItemKey,
-	|	OrderBalanceBalance.Order,
-	|	SUM(OrderBalanceBalance.QuantityBalance) AS QuantityBalance,
-	|	SUM(SalesInvoiceItemList.Quantity) AS Quantity,
-	|	-SUM(OrderBalanceBalance.QuantityBalance) AS LackOfBalance,
-	|	SalesInvoiceItemList.LineNumber AS LineNumber,
-	|	0 AS BasisQuantity,
-	|	SalesInvoiceItemList.Unit AS Unit,
-	|	OrderBalanceBalance.ItemKey.Item.Unit AS ItemUnit,
-	|	OrderBalanceBalance.ItemKey.Unit AS ItemKeyUnit,
-	|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit
-	|FROM
-	|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
-	|		INNER JOIN AccumulationRegister.OrderBalance.Balance(, (Order, ItemKey, Store) IN
-	|			(SELECT
-	|				SalesInvoiceItemList.SalesOrder AS Order,
-	|				SalesInvoiceItemList.ItemKey AS ItemKey,
-	|				SalesInvoiceItemList.Store AS Store
-	|			FROM
-	|				Document.SalesInvoice.ItemList AS SalesInvoiceItemList
-	|			WHERE
-	|				SalesInvoiceItemList.Ref = &Ref
-	|				AND
-	|				NOT SalesInvoiceItemList.SalesOrder.Date IS NULL)) AS OrderBalanceBalance
-	|		ON OrderBalanceBalance.Order = SalesInvoiceItemList.SalesOrder
-	|		AND OrderBalanceBalance.ItemKey = SalesInvoiceItemList.ItemKey
-	|		AND OrderBalanceBalance.Store = SalesInvoiceItemList.Store
-	|WHERE
-	|	SalesInvoiceItemList.Ref = &Ref
-	|	AND
-	|	NOT SalesInvoiceItemList.SalesOrder.Date IS NULL
-	|GROUP BY
-	|	OrderBalanceBalance.ItemKey.Item,
-	|	OrderBalanceBalance.ItemKey,
-	|	SalesInvoiceItemList.LineNumber,
-	|	OrderBalanceBalance.Order,
-	|	SalesInvoiceItemList.Unit,
-	|	OrderBalanceBalance.ItemKey.Item.Unit,
-	|	OrderBalanceBalance.ItemKey.Unit,
-	|	VALUE(Catalog.Units.EmptyRef)
-	|HAVING
-	|	SUM(OrderBalanceBalance.QuantityBalance) < 0
-	|ORDER BY
-	|	LineNumber";
-	Query.SetParameter("Ref", Ref);
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	PostingServer.CalculateQuantityByUnit(QueryTable);
-	HaveError = False;
-	If QueryTable.Count() Then
-		HaveError = True;
-		
-		ErrorParameters = New Structure();
-		ErrorParameters.Insert("GroupColumns", "Order, ItemKey, Item, BasisUnit, LackOfBalance");
-		ErrorParameters.Insert("SumColumns", "BasisQuantity");
-		ErrorParameters.Insert("FilterColumns", "Order, ItemKey, Item, LackOfBalance");
-		ErrorParameters.Insert("Operation", "Ordered");
-		ErrorParameters.Insert("Excess", False);
-		
-		PostingServer.ShowPostingErrorMessage(QueryTable, ErrorParameters, AddInfo);
-	EndIf;
-	Return Not HaveError;
-EndFunction
-
-Function CheckGoodsInTransitOutgoingBalance(Ref, Parameters, AddInfo = Undefined)
-	Query = New Query();
-	Query.Text =
-	"SELECT
-	|	GoodsInTransitOutgoing_Exists.Store AS Store,
-	|	GoodsInTransitOutgoing_Exists.ShipmentBasis AS ShipmentBasis,
-	|	GoodsInTransitOutgoing_Exists.Item AS Item,
-	|	GoodsInTransitOutgoing_Exists.ItemKey AS ItemKey,
-	|	GoodsInTransitOutgoing_Exists.Quantity AS Quantity
-	|INTO GoodsInTransitOutgoing_Exists
-	|FROM
-	|	&GoodsInTransitOutgoing_Exists AS GoodsInTransitOutgoing_Exists
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	GoodsInTransitOutgoing_Exists.Store AS Store,
-	|	GoodsInTransitOutgoing_Exists.ShipmentBasis AS ShipmentBasis,
-	|	GoodsInTransitOutgoing_Exists.Item AS Item,
-	|	GoodsInTransitOutgoing_Exists.ItemKey AS ItemKey,
-	|	GoodsInTransitOutgoing_Exists.Quantity AS Quantity
-	|INTO GoodsInTransitOutgoing_Deleted
-	|FROM
-	|	GoodsInTransitOutgoing_Exists AS GoodsInTransitOutgoing_Exists
-	|		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
-	|		ON ItemList.Ref = &Ref
-	|		AND GoodsInTransitOutgoing_Exists.Store = ItemList.Store
-	|		AND GoodsInTransitOutgoing_Exists.ShipmentBasis = ItemList.Ref
-	|		AND GoodsInTransitOutgoing_Exists.ItemKey = ItemList.ItemKey
-	|WHERE
-	|	ItemList.Ref IS NULL
-	|	AND
-	|	NOT &Unposting
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	SalesInvoiceItemList.Ref AS ShipmentBasis,
-	|	SalesInvoiceItemList.ItemKey.Item AS Item,
-	|	SalesInvoiceItemList.ItemKey AS ItemKey,
-	|	SalesInvoiceItemList.Store AS Store,
-	|	SalesInvoiceItemList.Quantity AS Quantity,
-	|	0 AS BasisQuantity,
-	|	SalesInvoiceItemList.Unit AS Unit,
-	|	SalesInvoiceItemList.ItemKey.Item.Unit AS ItemUnit,
-	|	SalesInvoiceItemList.ItemKey.Unit AS ItemKeyUnit,
-	|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
-	|	SalesInvoiceItemList.LineNumber AS LineNumber
-	|INTO ItemList_Full
-	|FROM
-	|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
-	|WHERE
-	|	SalesInvoiceItemList.Ref = &Ref
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	GoodsInTransitOutgoing_Deleted.ShipmentBasis,
-	|	GoodsInTransitOutgoing_Deleted.Item,
-	|	GoodsInTransitOutgoing_Deleted.ItemKey,
-	|	GoodsInTransitOutgoing_Deleted.Store,
-	|	GoodsInTransitOutgoing_Deleted.Quantity,
-	|	0,
-	|	CASE
-	|		WHEN GoodsInTransitOutgoing_Deleted.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
-	|			THEN GoodsInTransitOutgoing_Deleted.ItemKey.Unit
-	|		ELSE GoodsInTransitOutgoing_Deleted.ItemKey.Item.Unit
-	|	END,
-	|	GoodsInTransitOutgoing_Deleted.ItemKey.Item.Unit,
-	|	GoodsInTransitOutgoing_Deleted.ItemKey.Unit,
-	|	VALUE(Catalog.Units.EmptyRef),
-	|	UNDEFINED
-	|FROM
-	|	GoodsInTransitOutgoing_Deleted
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	ItemList_Full.ShipmentBasis,
-	|	ItemList_Full.Item,
-	|	ItemList_Full.ItemKey,
-	|	ItemList_Full.Store,
-	|	ItemList_Full.LineNumber,
-	|	ItemList_Full.BasisQuantity AS BasisQuantity,
-	|	ItemList_Full.Unit AS Unit,
-	|	ItemList_Full.ItemUnit AS ItemUnit,
-	|	ItemList_Full.ItemKeyUnit AS ItemKeyUnit,
-	|	ItemList_Full.BasisUnit AS BasisUnit,
-	|	SUM(ItemList_Full.Quantity) AS Quantity
-	|INTO ItemList_Full_Grouped
-	|FROM
-	|	ItemList_Full AS ItemList_Full
-	|GROUP BY
-	|	ItemList_Full.ShipmentBasis,
-	|	ItemList_Full.Item,
-	|	ItemList_Full.ItemKey,
-	|	ItemList_Full.Store,
-	|	ItemList_Full.LineNumber,
-	|	ItemList_Full.Unit,
-	|	ItemList_Full.BasisQuantity,
-	|	ItemList_Full.ItemUnit,
-	|	ItemList_Full.ItemKeyUnit,
-	|	ItemList_Full.BasisUnit
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	GoodsInTransitOutgoingBalance.ItemKey.Item AS Item,
-	|	GoodsInTransitOutgoingBalance.ItemKey AS ItemKey,
-	|	GoodsInTransitOutgoingBalance.ShipmentBasis,
-	|	SUM(GoodsInTransitOutgoingBalance.QuantityBalance) AS QuantityBalance,
-	|	SUM(ItemList_Full_Grouped.Quantity) AS Quantity,
-	|	-SUM(GoodsInTransitOutgoingBalance.QuantityBalance) AS LackOfBalance,
-	|	ItemList_Full_Grouped.LineNumber AS LineNumber,
-	|	ItemList_Full_Grouped.BasisQuantity AS BasisQuantity,
-	|	ItemList_Full_Grouped.Unit AS Unit,
-	|	ItemList_Full_Grouped.ItemUnit AS ItemUnit,
-	|	ItemList_Full_Grouped.ItemKeyUnit AS ItemKeyUnit,
-	|	ItemList_Full_Grouped.BasisUnit AS BasisUnit,
-	|	&Unposting AS Unposting
-	|FROM
-	|	ItemList_Full_Grouped AS ItemList_Full_Grouped
-	|		INNER JOIN AccumulationRegister.GoodsInTransitOutgoing.Balance(, (ShipmentBasis, ItemKey, Store) IN
-	|			(SELECT
-	|				ItemList_Full_Grouped.ShipmentBasis AS ShipmentBasis,
-	|				ItemList_Full_Grouped.ItemKey AS ItemKey,
-	|				ItemList_Full_Grouped.Store AS Store
-	|			FROM
-	|				ItemList_Full_Grouped AS ItemList_Full_Grouped)) AS GoodsInTransitOutgoingBalance
-	|		ON GoodsInTransitOutgoingBalance.ShipmentBasis = ItemList_Full_Grouped.ShipmentBasis
-	|		AND GoodsInTransitOutgoingBalance.ItemKey = ItemList_Full_Grouped.ItemKey
-	|		AND GoodsInTransitOutgoingBalance.Store = ItemList_Full_Grouped.Store
-	|GROUP BY
-	|	GoodsInTransitOutgoingBalance.ItemKey.Item,
-	|	GoodsInTransitOutgoingBalance.ItemKey,
-	|	ItemList_Full_Grouped.LineNumber,
-	|	GoodsInTransitOutgoingBalance.ShipmentBasis,
-	|	ItemList_Full_Grouped.Unit,
-	|	ItemList_Full_Grouped.BasisQuantity,
-	|	ItemList_Full_Grouped.ItemUnit,
-	|	ItemList_Full_Grouped.ItemKeyUnit,
-	|	ItemList_Full_Grouped.BasisUnit
-	|HAVING
-	|	SUM(GoodsInTransitOutgoingBalance.QuantityBalance) < 0
-	|ORDER BY
-	|	LineNumber";
-	Query.SetParameter("Ref", Ref);
-	Query.SetParameter("GoodsInTransitOutgoing_Exists", Parameters.DocumentDataTables.GoodsInTransitOutgoing_Exists);
-	Query.SetParameter("Unposting", ?(Parameters.Property("Unposting"), Parameters.Unposting, False));
-	
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	PostingServer.CalculateQuantityByUnit(QueryTable);
-	
-	HaveError = False;
-	If QueryTable.Count() Then
-		HaveError = True;
-		
-		ErrorParameters = New Structure();
-		ErrorParameters.Insert("GroupColumns", "ShipmentBasis, ItemKey, Item, BasisUnit, LackOfBalance");
-		ErrorParameters.Insert("SumColumns", "BasisQuantity");
-		ErrorParameters.Insert("FilterColumns", "ShipmentBasis, ItemKey, Item, LackOfBalance");
-		ErrorParameters.Insert("Operation", "Shipped");
-		ErrorParameters.Insert("Excess", True);
-		
-		PostingServer.ShowPostingErrorMessage(QueryTable, ErrorParameters, AddInfo);
-	EndIf;
-	Return Not HaveError;
-EndFunction
-
-Function GetExistsGoodsInTransitOutgoing(Ref, AddInfo = Undefined)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	GoodsInTransitOutgoing.Store,
-	|	GoodsInTransitOutgoing.ShipmentBasis,
-	|	GoodsInTransitOutgoing.ItemKey,
-	|	GoodsInTransitOutgoing.ItemKey.Item AS Item,
-	|	GoodsInTransitOutgoing.RowKey,
-	|	GoodsInTransitOutgoing.Quantity
-	|FROM
-	|	AccumulationRegister.GoodsInTransitOutgoing AS GoodsInTransitOutgoing
-	|WHERE
-	|	GoodsInTransitOutgoing.Recorder = &Recorder
-	|	AND GoodsInTransitOutgoing.RecordType = &RecordType";
-	Query.SetParameter("Recorder", Ref);
-	Query.SetParameter("RecordType", AccumulationRecordType.Receipt);
-	QueryResult = Query.Execute();
-	Return QueryResult.Unload();
-EndFunction
-

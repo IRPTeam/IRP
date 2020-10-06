@@ -1,10 +1,14 @@
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	
 	Tables = New Structure();
+	AccReg = Metadata.AccumulationRegisters;
+	Tables.Insert("OrderBalance", PostingServer.CreateTable(AccReg.OrderBalance));
 	
-	Tables.Insert("OrderBalance", New ValueTable());
+	Tables.Insert("OrderBalance_Exists", PostingServer.CreateTable(AccReg.OrderBalance));
+	
+	Tables.OrderBalance_Exists = 
+	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
 	
 	Query = New Query();
 	Query.Text =
@@ -13,7 +17,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	InternalSupplyRequestItemList.Ref.Store AS Store,
 		|	InternalSupplyRequestItemList.ItemKey AS ItemKey,
 		|	InternalSupplyRequestItemList.Ref AS InternalSupplyRequest,
-		|	SUM(InternalSupplyRequestItemList.Quantity) AS Quantity,
+		|	InternalSupplyRequestItemList.Quantity AS Quantity,
 		|	0 AS BasisQuantity,
 		|	InternalSupplyRequestItemList.Unit,
 		|	InternalSupplyRequestItemList.ItemKey.Item.Unit AS ItemUnit,
@@ -21,30 +25,17 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
 		|	InternalSupplyRequestItemList.ItemKey.Item AS Item,
 		|	InternalSupplyRequestItemList.Ref.Date AS Period,
-		|	InternalSupplyRequestItemList.Key AS RowKey
+		|	InternalSupplyRequestItemList.Key AS RowKeyUUID
 		|FROM
 		|	Document.InternalSupplyRequest.ItemList AS InternalSupplyRequestItemList
 		|WHERE
-		|	InternalSupplyRequestItemList.Ref = &Ref
-		|GROUP BY
-		|	InternalSupplyRequestItemList.Ref.Company,
-		|	InternalSupplyRequestItemList.Ref.Store,
-		|	InternalSupplyRequestItemList.ItemKey,
-		|	InternalSupplyRequestItemList.Ref,
-		|	InternalSupplyRequestItemList.Unit,
-		|	InternalSupplyRequestItemList.ItemKey.Item.Unit,
-		|	InternalSupplyRequestItemList.ItemKey.Unit,
-		|	InternalSupplyRequestItemList.ItemKey.Item,
-		|	VALUE(Catalog.Units.EmptyRef),
-		|	InternalSupplyRequestItemList.Ref.Date,
-		|	InternalSupplyRequestItemList.Key";
+		|	InternalSupplyRequestItemList.Ref = &Ref";
 	
-	Query.SetParameter("Ref", Ref);
-	
+	Query.SetParameter("Ref", Ref);	
 	QueryResults = Query.Execute();
-	
 	QueryTable = QueryResults.Unload();
 	
+	PostingServer.UUIDToString(QueryTable);
 	PostingServer.CalculateQuantityByUnit(QueryTable);
 	
 	Query = New Query();
@@ -68,17 +59,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	tmp.Order,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity,
 		|	tmp.Period,
 		|   tmp.RowKey
 		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Order,
-		|	tmp.Period,
-		|   tmp.RowKey";
+		|	tmp AS tmp";
 	
 	Query.SetParameter("QueryTable", QueryTable);
 	QueryResults = Query.ExecuteBatch();
@@ -86,7 +71,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.OrderBalance = QueryResults[1].Unload();
 	
 	Parameters.IsReposting = False;
-	
 	Return Tables;
 EndFunction
 
@@ -95,13 +79,8 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	DataMapWithLockFields = New Map();
 	
 	// OrderBalance
-	Fields = New Map();
-	Fields.Insert("Store", "Store");
-	Fields.Insert("Order", "Order");
-	Fields.Insert("ItemKey", "ItemKey");
-	
-	DataMapWithLockFields.Insert("AccumulationRegister.OrderBalance",
-		New Structure("Fields, Data", Fields, DocumentDataTables.OrderBalance));
+	OrderBalance = AccumulationRegisters.OrderBalance.GetLockFields(DocumentDataTables.OrderBalance);
+	DataMapWithLockFields.Insert(OrderBalance.RegisterName, OrderBalance.LockInfo);
 	
 	Return DataMapWithLockFields;
 EndFunction
@@ -118,13 +97,13 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.OrderBalance,
-			Parameters.IsReposting));
+			True));
 	
 	Return PostingDataTables;
 EndFunction
 
 Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
+	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
 EndProcedure
 
 #EndRegion
@@ -132,11 +111,18 @@ EndProcedure
 #Region Undoposting
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return Undefined;
+	Return PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return Undefined;
+	DocumentDataTables = Parameters.DocumentDataTables;
+	DataMapWithLockFields = New Map();
+	
+	// OrderBalance
+	OrderBalance = AccumulationRegisters.OrderBalance.GetLockFields(DocumentDataTables.OrderBalance_Exists);
+	DataMapWithLockFields.Insert(OrderBalance.RegisterName, OrderBalance.LockInfo);
+	
+	Return DataMapWithLockFields;
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -144,8 +130,27 @@ Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefin
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return;
+	Parameters.Insert("Unposting", True);
+	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
 EndProcedure
 
 #EndRegion
 
+#Region CheckAfterWrite
+
+Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
+	LineNumberAndRowKeyFromItemList = PostingServer.GetLineNumberAndRowKeyFromItemList(Ref, "Document.InternalSupplyRequest.ItemList");
+	
+	If Not Cancel And Not AccumulationRegisters.OrderBalance.CheckBalance(Ref, 
+	                                                                 LineNumberAndRowKeyFromItemList,
+	                                                                 Parameters.DocumentDataTables.OrderBalance,
+	                                                                 Parameters.DocumentDataTables.OrderBalance_Exists,
+	                                                                 AccumulationRecordType.Receipt,
+	                                                                 Unposting,
+	                                                                 AddInfo) Then
+		Cancel = True;
+	EndIf;
+EndProcedure
+
+#EndRegion

@@ -14,6 +14,10 @@ Function GetCommonTemplateByName(Name, GetFromStorage = False) Export
 	EndIf;
 EndFunction
 
+Function GetRefAttribute(Ref, Name) Export
+	Return Ref[Name];
+EndFunction
+
 Function SerializeJSON(Value, AddInfo = Undefined) Export
 	Writer = New JSONWriter();
 	Writer.SetString();

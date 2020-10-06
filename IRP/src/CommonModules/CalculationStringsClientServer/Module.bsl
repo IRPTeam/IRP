@@ -228,10 +228,18 @@ Procedure CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo = Undefined
 				CalculateTax_PriceIncludeTax(Object, ItemRow, ArrayOfTaxInfo, AddInfo);
 			EndIf;
 			
+			If Actions.Property("CalculateNetAmountAsTotalAmountMinusTaxAmount") And IsCalculatedRow Then
+				CalculateNetAmount_PriceIncludeTax(Object, ItemRow, AddInfo);
+			EndIF;
+			
 			If Actions.Property("CalculateNetAmount") And IsCalculatedRow Then
 				CalculateNetAmount_PriceIncludeTax(Object, ItemRow, AddInfo);
 			EndIf;
 		Else
+			If Actions.Property("CalculateNetAmountAsTotalAmountMinusTaxAmount") And IsCalculatedRow Then
+				CalculateNetAmountAsTotalAmountMinusTaxAmount_PriceNotIncludeTax(Object, ItemRow, AddInfo);
+			EndIf;
+			
 			If Actions.Property("CalculateNetAmount") And IsCalculatedRow Then
 				CalculateNetAmount_PriceNotIncludeTax(Object, ItemRow, AddInfo);
 			EndIf;
@@ -259,6 +267,10 @@ Procedure CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo = Undefined
 		
 		If Actions.Property("CalculateTaxByTotalAmount") And IsCalculatedRow Then
 			CalculateTaxManualPriority(Object, ItemRow, True, ArrayOfTaxInfo, False, AddInfo);
+		EndIf;
+		
+		If Actions.Property("CalculateNetAmountAsTotalAmountMinusTaxAmount") And IsCalculatedRow Then
+			CalculateNetAmount_PriceIncludeTax(Object, ItemRow, AddInfo);
 		EndIf;
 		
 		If Actions.Property("CalculateNetAmountByTotalAmount") And IsCalculatedRow Then
@@ -365,6 +377,15 @@ Procedure CalculateNetAmount_PriceIncludeTax(Object, ItemRow, AddInfo = Undefine
 		ItemRow.NetAmount = CalculateAmount(ItemRow) - ItemRow.TaxAmount - ItemRow.OffersAmount;
 	Else
 		ItemRow.NetAmount = CalculateAmount(ItemRow) - ItemRow.TaxAmount;
+	EndIf;
+	
+EndProcedure
+
+Procedure CalculateNetAmountAsTotalAmountMinusTaxAmount_PriceNotIncludeTax(Object, ItemRow, AddInfo = Undefined)
+	If CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "OffersAmount") Then
+		ItemRow.NetAmount = ItemRow.TotalAmount - ItemRow.TaxAmount - ItemRow.OffersAmount;
+	Else
+		ItemRow.NetAmount = ItemRow.TotalAmount - ItemRow.TaxAmount;
 	EndIf;
 EndProcedure
 

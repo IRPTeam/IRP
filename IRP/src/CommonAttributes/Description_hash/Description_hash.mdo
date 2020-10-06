@@ -89,6 +89,10 @@
     <use>DontUse</use>
   </content>
   <content>
+    <metadata>Catalog.CashStatementStatuses</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.ItemSegments</metadata>
     <use>Use</use>
   </content>
@@ -190,10 +194,6 @@
   </content>
   <content>
     <metadata>ChartOfCharacteristicTypes.IDInfoTypes</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.CashStatementStatuses</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

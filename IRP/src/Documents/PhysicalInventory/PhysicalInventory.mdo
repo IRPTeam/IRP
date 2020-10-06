@@ -99,6 +99,33 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="d011b250-f20f-4e7e-9bbc-67cbc95fc56e">
+    <name>UseResponsiblePersonByRow</name>
+    <synonym>
+      <key>en</key>
+      <value>Use responsible person by row</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="714f2093-3668-4987-ab2e-5f8948a7f95f">
+    <name>RuleEditQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Rule edit quantity</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="bc5cd7bd-03a1-4451-bbe6-3a4d64b043e7">
     <name>ListForm</name>
     <synonym>
@@ -273,4 +300,17 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <commands uuid="0bde3178-3d8f-4901-85f4-d1e501e2298b">
+    <name>GeneratePhysicalCountByLocation</name>
+    <synonym>
+      <key>en</key>
+      <value>Physical count by location</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.PhysicalInventory</types>
+    </commandParameterType>
+    <representation>Auto</representation>
+    <shortcut></shortcut>
+  </commands>
 </mdclass:Document>

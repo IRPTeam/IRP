@@ -3,15 +3,28 @@
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure();
 	AccReg = Metadata.AccumulationRegisters;
-	Tables.Insert("GoodsInTransitIncoming", PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
-	Tables.Insert("StockBalance_Receipt", PostingServer.CreateTable(AccReg.StockBalance));
-	Tables.Insert("StockBalance_Expense", PostingServer.CreateTable(AccReg.StockBalance));
-	Tables.Insert("StockReservation_Receipt", PostingServer.CreateTable(AccReg.StockReservation));
-	Tables.Insert("StockReservation_Expense", PostingServer.CreateTable(AccReg.StockReservation));
-	Tables.Insert("ReceiptOrders", PostingServer.CreateTable(AccReg.ReceiptOrders));
-	Tables.Insert("GoodsReceiptSchedule", PostingServer.CreateTable(AccReg.GoodsReceiptSchedule));
-	Tables.Insert("GoodsInTransitOutgoing", PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
-	Tables.Insert("InventoryBalance", PostingServer.CreateTable(AccReg.InventoryBalance));
+	Tables.Insert("GoodsInTransitIncoming"   , PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
+	Tables.Insert("StockBalance_Receipt"     , PostingServer.CreateTable(AccReg.StockBalance));
+	Tables.Insert("StockBalance_Expense"     , PostingServer.CreateTable(AccReg.StockBalance));
+	Tables.Insert("StockReservation_Receipt" , PostingServer.CreateTable(AccReg.StockReservation));
+	Tables.Insert("StockReservation_Expense" , PostingServer.CreateTable(AccReg.StockReservation));
+	Tables.Insert("ReceiptOrders"            , PostingServer.CreateTable(AccReg.ReceiptOrders));
+	Tables.Insert("GoodsReceiptSchedule"     , PostingServer.CreateTable(AccReg.GoodsReceiptSchedule));
+	Tables.Insert("GoodsInTransitOutgoing"   , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
+	Tables.Insert("InventoryBalance"         , PostingServer.CreateTable(AccReg.InventoryBalance));
+	
+	Tables.Insert("GoodsInTransitIncoming_Exists", PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
+	Tables.Insert("GoodsInTransitOutgoing_Exists", PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
+	Tables.Insert("ReceiptOrders_Exists"         , PostingServer.CreateTable(AccReg.ReceiptOrders));
+	
+	Tables.GoodsInTransitIncoming_Exists = 
+	AccumulationRegisters.GoodsInTransitIncoming.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo); 
+	
+	Tables.GoodsInTransitOutgoing_Exists = 
+	AccumulationRegisters.GoodsInTransitOutgoing.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo); 
+	
+	Tables.ReceiptOrders_Exists = 
+	AccumulationRegisters.ReceiptOrders.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
 	
 	Query = New Query();
 	Query.Text =
@@ -26,7 +39,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	END AS ShipmentBeforeInvoice,
 		|	GoodsReceiptItemList.ItemKey AS ItemKey,
 		|	GoodsReceiptItemList.ReceiptBasis AS ReceiptBasis,
-		|	SUM(GoodsReceiptItemList.Quantity) AS Quantity,
+		|	GoodsReceiptItemList.Quantity AS Quantity,
 		|	0 AS BasisQuantity,
 		|	GoodsReceiptItemList.Unit,
 		|	GoodsReceiptItemList.ItemKey.Item.Unit AS ItemUnit,
@@ -50,51 +63,14 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|FROM
 		|	Document.GoodsReceipt.ItemList AS GoodsReceiptItemList
 		|WHERE
-		|	GoodsReceiptItemList.Ref = &Ref
-		|GROUP BY
-		|	GoodsReceiptItemList.Ref.Company,
-		|	GoodsReceiptItemList.Store,
-		|	GoodsReceiptItemList.Store.UseShipmentConfirmation,
-		|	CASE
-		|		WHEN NOT GoodsReceiptItemList.SalesOrder.Date IS NULL
-		|			THEN GoodsReceiptItemList.SalesOrder.ShipmentConfirmationsBeforeSalesInvoice
-		|		ELSE FALSE
-		|	END,
-		|	GoodsReceiptItemList.ItemKey,
-		|	GoodsReceiptItemList.ReceiptBasis,
-		|	GoodsReceiptItemList.Unit,
-		|	GoodsReceiptItemList.ItemKey.Item.Unit,
-		|	GoodsReceiptItemList.ItemKey.Unit,
-		|	GoodsReceiptItemList.ItemKey.Item,
-		|	GoodsReceiptItemList.Ref.Date,
-		|	VALUE(Catalog.Units.EmptyRef),
-		|	GoodsReceiptItemList.Ref,
-		|	GoodsReceiptItemList.Key,
-		|   GoodsReceiptItemList.SalesOrder,
-		|	CASE
-		|		WHEN GoodsReceiptItemList.SalesOrder.Date IS NULL
-		|			THEN FALSE
-		|		ELSE TRUE
-		|	END,
-		|	CASE
-		|		WHEN GoodsReceiptItemList.ReceiptBasis REFS Document.PurchaseOrder
-		|			THEN TRUE
-		|		ELSE FALSE
-		|	END";
-	
+		|	GoodsReceiptItemList.Ref = &Ref";
 	
 	Query.SetParameter("Ref", Ref);
-	QueryResults = Query.Execute();
-	
+	QueryResults = Query.Execute();	
 	QueryTable = QueryResults.Unload();
 	
 	PostingServer.CalculateQuantityByUnit(QueryTable);
-	
-	// UUID to String
-	QueryTable.Columns.Add("RowKey", Metadata.AccumulationRegisters.GoodsReceiptSchedule.Dimensions.RowKey.Type);
-	For Each Row In QueryTable Do
-		Row.RowKey = String(Row.RowKeyUUID);
-	EndDo;
+	PostingServer.UUIDToString(QueryTable);
 	
 	TempManager = New TempTablesManager();
 	
@@ -129,10 +105,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|WHERE
 		|    NOT tmp.UseSalesOrder
 		|AND NOT tmp.UsePurchaseOrder";
-	
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_1").GetData().IsEmpty() Then
-		GetTables_NotUseSalesOrder_NotUsePurchaseOrder(Tables, TempManager, "tmp_1");
+		GetTables_NotUseSO_NotUsePO(Tables, TempManager, "tmp_1");
 	EndIf;
 	
 	Query = New Query();
@@ -142,10 +117,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|WHERE
 		|        tmp.UseSalesOrder
 		|AND NOT tmp.UsePurchaseOrder";
-	
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_2").GetData().IsEmpty() Then
-		GetTables_UseSalesOrder_NotUsePurchaseOrder(Tables, TempManager, "tmp_2");
+		GetTables_UseSO_NotUsePO(Tables, TempManager, "tmp_2");
 	EndIf;
 	
 	Query = New Query();
@@ -155,10 +129,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|WHERE
 		|     tmp.UseSalesOrder
 		|AND  tmp.UsePurchaseOrder";
-	
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_3").GetData().IsEmpty() Then
-		GetTables_UseSalesOrder_UsePurchaseOrder(Tables, TempManager, "tmp_3");
+		GetTables_UseSO_UsePO(Tables, TempManager, "tmp_3");
 	EndIf;
 	
 	Query = New Query();
@@ -168,10 +141,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|WHERE
 		|NOT tmp.UseSalesOrder
 		|AND tmp.UsePurchaseOrder";
-	
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_4").GetData().IsEmpty() Then
-		GetTables_NotUseSalesOrder_UsePurchaseOrder(Tables, TempManager, "tmp_4");
+		GetTables_NotUseSO_UsePO(Tables, TempManager, "tmp_4");
 	EndIf;
 	
 	Parameters.IsReposting = False;
@@ -181,7 +153,7 @@ EndFunction
 
 #Region Table_tmp_1
 
-Procedure GetTables_NotUseSalesOrder_NotUsePurchaseOrder(Tables, TempManager, TableName)
+Procedure GetTables_NotUseSO_NotUsePO(Tables, TempManager, TableName)
 	// tmp_1
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
@@ -191,41 +163,31 @@ Procedure GetTables_NotUseSalesOrder_NotUsePurchaseOrder(Tables, TempManager, Ta
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_NotUseSalesOrder_NotUsePurchaseOrder_IsProduct(Tables, TempManager, NewTableName);
+		GetTables_NotUseSO_NotUsePO_IsProduct(Tables, TempManager, NewTableName);
 	EndIf;
-	
 EndProcedure
 
-Procedure GetTables_NotUseSalesOrder_NotUsePurchaseOrder_IsProduct(Tables, TempManager, TableName)
+Procedure GetTables_NotUseSO_NotUsePO_IsProduct(Tables, TempManager, TableName)
 	// tmp_1_1
-	
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	
 	#Region QueryText
 	Query.Text = 
-	"//[0] - GoodsInTransitIncoming ///////////////////////////////////////////////////////////////////////////////////
+	"//[0] - GoodsInTransitIncoming
 	|SELECT
 	|	tmp.Company,
 	|	tmp.Store,
 	|	tmp.ItemKey,
 	|	tmp.ReceiptBasis,
-	|	SUM(tmp.Quantity) AS Quantity,
+	|	tmp.Quantity AS Quantity,
 	|	tmp.Unit AS Unit,
 	|	tmp.Period,
 	|	tmp.RowKey
 	|FROM
 	|	tmp AS tmp
-	|GROUP BY
-	|	tmp.Company,
-	|	tmp.Store,
-	|	tmp.ItemKey,
-	|	tmp.ReceiptBasis,
-	|	tmp.Unit,
-	|	tmp.Period,
-	|	tmp.RowKey
 	|;
-	|//[1] - StockBalance_Receipt /////////////////////////////////////////////////////////////////////////////////////
+	|//[1] - StockBalance_Receipt
 	|SELECT
 	|	tmp.Company,
 	|	tmp.Store,
@@ -244,7 +206,7 @@ Procedure GetTables_NotUseSalesOrder_NotUsePurchaseOrder_IsProduct(Tables, TempM
 	|	tmp.Unit,
 	|	tmp.Period
 	|;
-	|//[2] - StockReservation_Receipt /////////////////////////////////////////////////////////////////////////////////
+	|//[2] - StockReservation_Receipt
 	|SELECT
 	|	tmp.Company,
 	|	tmp.Store,
@@ -263,14 +225,14 @@ Procedure GetTables_NotUseSalesOrder_NotUsePurchaseOrder_IsProduct(Tables, TempM
 	|	tmp.Unit,
 	|	tmp.Period
 	|;
-	|//[3] - GoodsReceiptSchedule /////////////////////////////////////////////////////////////////////////////////////
+	|//[3] - GoodsReceiptSchedule
 	|SELECT
 	|	tmp.Company AS Company,
 	|	tmp.ReceiptBasis AS Order,
 	|	tmp.Store AS Store,
 	|	tmp.ItemKey AS ItemKey,
 	|	tmp.RowKey AS RowKey,
-	|	SUM(tmp.Quantity) AS Quantity,
+	|	tmp.Quantity AS Quantity,
 	|	tmp.Period,
 	|	tmp.Period AS DeliveryDate
 	|FROM
@@ -282,15 +244,8 @@ Procedure GetTables_NotUseSalesOrder_NotUsePurchaseOrder_IsProduct(Tables, TempM
 	|		AND GoodsReceiptSchedule.Store = tmp.Store
 	|		AND GoodsReceiptSchedule.ItemKey = tmp.ItemKey
 	|		AND GoodsReceiptSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
-	|GROUP BY
-	|	tmp.Company,
-	|	tmp.ReceiptBasis,
-	|	tmp.Store,
-	|	tmp.ItemKey,
-	|	tmp.RowKey,
-	|	tmp.Period
 	|;
-	|//[4] - StockBalance_Expense /////////////////////////////////////////////////////////////////////////////////////
+	|//[4] - StockBalance_Expense
 	|SELECT
 	|	CAST(tmp.ReceiptBasis AS Document.InventoryTransfer).StoreTransit AS Store,
 	|	tmp.ItemKey,
@@ -313,20 +268,19 @@ Procedure GetTables_NotUseSalesOrder_NotUsePurchaseOrder_IsProduct(Tables, TempM
 	
 	QueryResults = Query.ExecuteBatch();
 	
-	PostingServer.MergeTables(Tables.GoodsInTransitIncoming, QueryResults[0].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Receipt, QueryResults[1].Unload());
-	PostingServer.MergeTables(Tables.StockReservation_Receipt, QueryResults[2].Unload());
-	PostingServer.MergeTables(Tables.GoodsReceiptSchedule, QueryResults[3].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Expense, QueryResults[4].Unload());
+	PostingServer.MergeTables(Tables.GoodsInTransitIncoming   , QueryResults[0].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Receipt     , QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.StockReservation_Receipt , QueryResults[2].Unload());
+	PostingServer.MergeTables(Tables.GoodsReceiptSchedule     , QueryResults[3].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Expense     , QueryResults[4].Unload());
 EndProcedure
 
 #EndRegion
 
 #Region Table_tmp_2
 
-Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder(Tables, TempManager, TableName)
+Procedure GetTables_UseSO_NotUsePO(Tables, TempManager, TableName)
 	// tmp_2
-	
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	Query.Text =
@@ -340,7 +294,7 @@ Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder(Tables, TempManager, Table
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UseSalesOrder_NotUsePurchaseOrder_NotUseShipmentConfirmation_NotShipmentBeforeInvoice_IsProduct(Tables, TempManager, NewTableName);
+		GetTables_UseSO_NotUsePO_NotUseSC_NotSCBeforeInvoice_IsProduct(Tables, TempManager, NewTableName);
 	EndIf;
 	
 	Query = New Query();
@@ -356,7 +310,7 @@ Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder(Tables, TempManager, Table
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UseSalesOrder_NotUsePurchaseOrder_UseShipmentConfirmation_ShipmentBeforeInvoice_IsProduct(Tables, TempManager, NewTableName);
+		GetTables_UseSO_NotUsePO_UseSC_SCBeforeInvoice_IsProduct(Tables, TempManager, NewTableName);
 	EndIf;
 	
 	Query = New Query();
@@ -372,16 +326,12 @@ Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder(Tables, TempManager, Table
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UseSalesOrder_NotUsePurchaseOrder_UseShipmentConfirmation_NotShipmentBeforeInvoice_IsProduct(Tables, TempManager, NewTableName);
+		GetTables_UseSO_NotUsePO_UseSC_NotSCBeforeInvoice_IsProduct(Tables, TempManager, NewTableName);
 	EndIf;
-	
 EndProcedure
 
-Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder_NotUseShipmentConfirmation_NotShipmentBeforeInvoice_IsProduct(Tables, 
-                                                                                                                    TempManager, 
-                                                                                                                    TableName)
+Procedure GetTables_UseSO_NotUsePO_NotUseSC_NotSCBeforeInvoice_IsProduct(Tables, TempManager, TableName)
 	// tmp_2_1
-	
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	
@@ -393,21 +343,12 @@ Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder_NotUseShipmentConfirmation
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	tmp.ReceiptBasis,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Unit AS Unit,
 		|	tmp.Period,
 		|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.ReceiptBasis,
-		|	tmp.Unit,
-		|	tmp.Period,
-		|   tmp.RowKey
-		|
 		|;
 		|
 		|//[1] StockBalance
@@ -475,7 +416,7 @@ Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder_NotUseShipmentConfirmation
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	tmp.RowKey AS RowKey,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Period,
 		|	tmp.Period AS DeliveryDate
 		|FROM
@@ -487,15 +428,8 @@ Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder_NotUseShipmentConfirmation
 		|		AND GoodsReceiptSchedule.Store = tmp.Store
 		|		AND GoodsReceiptSchedule.ItemKey = tmp.ItemKey
 		|       AND GoodsReceiptSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.ReceiptBasis,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.RowKey,
-		|	tmp.Period	
 		|;
-		|//[5] - StockBalance_Expense /////////////////////////////////////////////////////////////////////////////////
+		|//[5] - StockBalance_Expense
 		|SELECT
 		|	CAST(tmp.ReceiptBasis AS Document.InventoryTransfer).StoreTransit AS Store,
 		|	tmp.ItemKey,
@@ -519,17 +453,16 @@ Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder_NotUseShipmentConfirmation
 	
 	QueryResults = Query.ExecuteBatch();
 	
-	PostingServer.MergeTables(Tables.GoodsInTransitIncoming, QueryResults[0].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Receipt, QueryResults[1].Unload());
-	PostingServer.MergeTables(Tables.StockReservation_Receipt, QueryResults[2].Unload());
-	PostingServer.MergeTables(Tables.StockReservation_Expense, QueryResults[3].Unload());
-	PostingServer.MergeTables(Tables.GoodsReceiptSchedule, QueryResults[4].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Expense, QueryResults[5].Unload());
+	PostingServer.MergeTables(Tables.GoodsInTransitIncoming   , QueryResults[0].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Receipt     , QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.StockReservation_Receipt , QueryResults[2].Unload());
+	PostingServer.MergeTables(Tables.StockReservation_Expense , QueryResults[3].Unload());
+	PostingServer.MergeTables(Tables.GoodsReceiptSchedule     , QueryResults[4].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Expense     , QueryResults[5].Unload());
 EndProcedure
 
-Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder_UseShipmentConfirmation_ShipmentBeforeInvoice_IsProduct(Tables, TempManager, TableName)
+Procedure GetTables_UseSO_NotUsePO_UseSC_SCBeforeInvoice_IsProduct(Tables, TempManager, TableName)
 	// tmp_2_2
-	
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	
@@ -541,21 +474,12 @@ Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder_UseShipmentConfirmation_Sh
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	tmp.ReceiptBasis,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Unit AS Unit,
 		|	tmp.Period,
 		|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.ReceiptBasis,
-		|	tmp.Unit,
-		|	tmp.Period,
-		|   tmp.RowKey
-		|
 		|;
 		|
 		|//[1] StockBalance
@@ -623,7 +547,7 @@ Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder_UseShipmentConfirmation_Sh
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	tmp.RowKey AS RowKey,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Period,
 		|	tmp.Period AS DeliveryDate
 		|FROM
@@ -635,32 +559,19 @@ Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder_UseShipmentConfirmation_Sh
 		|		AND GoodsReceiptSchedule.Store = tmp.Store
 		|		AND GoodsReceiptSchedule.ItemKey = tmp.ItemKey
 		|       AND GoodsReceiptSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.ReceiptBasis,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.RowKey,
-		|	tmp.Period	
 		|;
 		|//[5] GoodsInTransitOutgoing
 		|SELECT
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	tmp.SalesOrder AS ShipmentBasis,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Period, 
 		|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.SalesOrder,
-		|	tmp.Period,
-		|   tmp.RowKey
 		|;
-		|//[6] - StockBalance_Expense /////////////////////////////////////////////////////////////////////////////////
+		|//[6] - StockBalance_Expense
 		|SELECT
 		|	CAST(tmp.ReceiptBasis AS Document.InventoryTransfer).StoreTransit AS Store,
 		|	tmp.ItemKey,
@@ -684,18 +595,17 @@ Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder_UseShipmentConfirmation_Sh
 	
 	QueryResults = Query.ExecuteBatch();
 	
-	PostingServer.MergeTables(Tables.GoodsInTransitIncoming, QueryResults[0].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Receipt, QueryResults[1].Unload());
-	PostingServer.MergeTables(Tables.StockReservation_Receipt, QueryResults[2].Unload());
-	PostingServer.MergeTables(Tables.StockReservation_Expense, QueryResults[3].Unload());
-	PostingServer.MergeTables(Tables.GoodsReceiptSchedule, QueryResults[4].Unload());
-	PostingServer.MergeTables(Tables.GoodsInTransitOutgoing, QueryResults[5].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Expense, QueryResults[6].Unload());
+	PostingServer.MergeTables(Tables.GoodsInTransitIncoming   , QueryResults[0].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Receipt     , QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.StockReservation_Receipt , QueryResults[2].Unload());
+	PostingServer.MergeTables(Tables.StockReservation_Expense , QueryResults[3].Unload());
+	PostingServer.MergeTables(Tables.GoodsReceiptSchedule     , QueryResults[4].Unload());
+	PostingServer.MergeTables(Tables.GoodsInTransitOutgoing   , QueryResults[5].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Expense     , QueryResults[6].Unload());
 EndProcedure
 
-Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder_UseShipmentConfirmation_NotShipmentBeforeInvoice_IsProduct(Tables, TempManager, TableName)
+Procedure GetTables_UseSO_NotUsePO_UseSC_NotSCBeforeInvoice_IsProduct(Tables, TempManager, TableName)
 	// tmp_2_1
-	
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	
@@ -707,21 +617,12 @@ Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder_UseShipmentConfirmation_No
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	tmp.ReceiptBasis,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Unit AS Unit,
 		|	tmp.Period,
 		|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.ReceiptBasis,
-		|	tmp.Unit,
-		|	tmp.Period,
-		|   tmp.RowKey
-		|
 		|;
 		|
 		|//[1] StockBalance
@@ -789,7 +690,7 @@ Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder_UseShipmentConfirmation_No
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	tmp.RowKey AS RowKey,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Period,
 		|	tmp.Period AS DeliveryDate
 		|FROM
@@ -801,15 +702,8 @@ Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder_UseShipmentConfirmation_No
 		|		AND GoodsReceiptSchedule.Store = tmp.Store
 		|		AND GoodsReceiptSchedule.ItemKey = tmp.ItemKey
 		|       AND GoodsReceiptSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.ReceiptBasis,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.RowKey,
-		|	tmp.Period
 		|;
-		|//[5] - StockBalance_Expense /////////////////////////////////////////////////////////////////////////////////
+		|//[5] - StockBalance_Expense
 		|SELECT
 		|	CAST(tmp.ReceiptBasis AS Document.InventoryTransfer).StoreTransit AS Store,
 		|	tmp.ItemKey,
@@ -833,19 +727,19 @@ Procedure GetTables_UseSalesOrder_NotUsePurchaseOrder_UseShipmentConfirmation_No
 	
 	QueryResults = Query.ExecuteBatch();
 	
-	PostingServer.MergeTables(Tables.GoodsInTransitIncoming, QueryResults[0].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Receipt, QueryResults[1].Unload());
-	PostingServer.MergeTables(Tables.StockReservation_Receipt, QueryResults[2].Unload());
-	PostingServer.MergeTables(Tables.StockReservation_Expense, QueryResults[3].Unload());
-	PostingServer.MergeTables(Tables.GoodsReceiptSchedule, QueryResults[4].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Expense, QueryResults[5].Unload());
+	PostingServer.MergeTables(Tables.GoodsInTransitIncoming   , QueryResults[0].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Receipt     , QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.StockReservation_Receipt , QueryResults[2].Unload());
+	PostingServer.MergeTables(Tables.StockReservation_Expense , QueryResults[3].Unload());
+	PostingServer.MergeTables(Tables.GoodsReceiptSchedule     , QueryResults[4].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Expense     , QueryResults[5].Unload());
 EndProcedure
 
 #EndRegion
 
 #Region Table_tmp_3
 
-Procedure GetTables_UseSalesOrder_UsePurchaseOrder(Tables, TempManager, TableName)
+Procedure GetTables_UseSO_UsePO(Tables, TempManager, TableName)
 	// tmp_3
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
@@ -859,7 +753,7 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder(Tables, TempManager, TableNam
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UseSalesOrder_UsePurchaseOrder_NotUseShipmentConfirmation_NotShipmentBeforeInvoice_IsProduct(Tables, TempManager, NewTableName);
+		GetTables_UseSO_UsePO_NotUseSC_NotSCBeforeInvoice_IsProduct(Tables, TempManager, NewTableName);
 	EndIf;
 	
 	Query = New Query();
@@ -874,7 +768,7 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder(Tables, TempManager, TableNam
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UseSalesOrder_UsePurchaseOrder_UseShipmentConfirmation_ShipmentBeforeInvoice_IsProduct(Tables, TempManager, NewTableName);
+		GetTables_UseSO_UsePO_UseSC_SCBeforeInvoice_IsProduct(Tables, TempManager, NewTableName);
 	EndIf;
 	
 	Query = New Query();
@@ -889,13 +783,12 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder(Tables, TempManager, TableNam
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UseSalesOrder_UsePurchaseOrder_UseShipmentConfirmation_NotShipmentBeforeInvoice_IsProduct(Tables, TempManager, NewTableName);
+		GetTables_UseSO_UsePO_UseSC_NotSCBeforeInvoice_IsProduct(Tables, TempManager, NewTableName);
 	EndIf;
 EndProcedure
 
-Procedure GetTables_UseSalesOrder_UsePurchaseOrder_NotUseShipmentConfirmation_NotShipmentBeforeInvoice_IsProduct(Tables, TempManager, TableName)
+Procedure GetTables_UseSO_UsePO_NotUseSC_NotSCBeforeInvoice_IsProduct(Tables, TempManager, TableName)
 	// tmp_3_1
-	
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	
@@ -907,21 +800,12 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder_NotUseShipmentConfirmation_No
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	tmp.ReceiptBasis,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Unit AS Unit,
 		|	tmp.Period,
 		|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.ReceiptBasis,
-		|	tmp.Unit,
-		|	tmp.Period,
-		|   tmp.RowKey
-		|
 		|;
 		|
 		|//[1] StockBalance
@@ -987,17 +871,11 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder_NotUseShipmentConfirmation_No
 		|	tmp.ItemKey,
 		|	tmp.ReceiptBasis AS Order,
 		|	tmp.GoodsReceipt AS GoodsReceipt,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Period,
 		|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.ItemKey,
-		|	tmp.ReceiptBasis,
-		|	tmp.GoodsReceipt,
-		|	tmp.Period,
-		|   tmp.RowKey
 		|;
 		|//[5] GoodsReceiptSchedule
 		|SELECT
@@ -1006,7 +884,7 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder_NotUseShipmentConfirmation_No
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	tmp.RowKey AS RowKey,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Period,
 		|	tmp.Period AS DeliveryDate
 		|FROM
@@ -1018,13 +896,6 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder_NotUseShipmentConfirmation_No
 		|		AND GoodsReceiptSchedule.Store = tmp.Store
 		|		AND GoodsReceiptSchedule.ItemKey = tmp.ItemKey
 		|       AND GoodsReceiptSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.ReceiptBasis,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.RowKey,
-		|	tmp.Period	
 		|;
 		|//[6] InventoryBalance
 		|SELECT
@@ -1039,7 +910,7 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder_NotUseShipmentConfirmation_No
 		|	tmp.ItemKey,
 		|	tmp.Period
 		|;
-		|//[7] - StockBalance_Expense /////////////////////////////////////////////////////////////////////////////////
+		|//[7] - StockBalance_Expense
 		|SELECT
 		|	CAST(tmp.ReceiptBasis AS Document.InventoryTransfer).StoreTransit AS Store,
 		|	tmp.ItemKey,
@@ -1063,19 +934,18 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder_NotUseShipmentConfirmation_No
 	
 	QueryResults = Query.ExecuteBatch();
 	
-	PostingServer.MergeTables(Tables.GoodsInTransitIncoming, QueryResults[0].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Receipt, QueryResults[1].Unload());
-	PostingServer.MergeTables(Tables.StockReservation_Receipt, QueryResults[2].Unload());
-	PostingServer.MergeTables(Tables.StockReservation_Expense, QueryResults[3].Unload());
-	PostingServer.MergeTables(Tables.ReceiptOrders, QueryResults[4].Unload());
-	PostingServer.MergeTables(Tables.GoodsReceiptSchedule, QueryResults[5].Unload());
-	PostingServer.MergeTables(Tables.InventoryBalance, QueryResults[6].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Expense, QueryResults[7].Unload());
+	PostingServer.MergeTables(Tables.GoodsInTransitIncoming   , QueryResults[0].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Receipt     , QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.StockReservation_Receipt , QueryResults[2].Unload());
+	PostingServer.MergeTables(Tables.StockReservation_Expense , QueryResults[3].Unload());
+	PostingServer.MergeTables(Tables.ReceiptOrders            , QueryResults[4].Unload());
+	PostingServer.MergeTables(Tables.GoodsReceiptSchedule     , QueryResults[5].Unload());
+	PostingServer.MergeTables(Tables.InventoryBalance         , QueryResults[6].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Expense     , QueryResults[7].Unload());
 EndProcedure
 
-Procedure GetTables_UseSalesOrder_UsePurchaseOrder_UseShipmentConfirmation_ShipmentBeforeInvoice_IsProduct(Tables, TempManager, TableName)
+Procedure GetTables_UseSO_UsePO_UseSC_SCBeforeInvoice_IsProduct(Tables, TempManager, TableName)
 	// tmp_3_2
-	
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	
@@ -1087,21 +957,12 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder_UseShipmentConfirmation_Shipm
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	tmp.ReceiptBasis,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Unit AS Unit,
 		|	tmp.Period,
 		|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.ReceiptBasis,
-		|	tmp.Unit,
-		|	tmp.Period,
-		|   tmp.RowKey
-		|
 		|;
 		|
 		|//[1] StockBalance
@@ -1167,17 +1028,11 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder_UseShipmentConfirmation_Shipm
 		|	tmp.ItemKey,
 		|	tmp.ReceiptBasis AS Order,
 		|	tmp.GoodsReceipt AS GoodsReceipt,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Period,
 		|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.ItemKey,
-		|	tmp.ReceiptBasis,
-		|	tmp.GoodsReceipt,
-		|	tmp.Period,
-		|   tmp.RowKey
 		|;
 		|//[5] GoodsReceiptSchedule
 		|SELECT
@@ -1186,7 +1041,7 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder_UseShipmentConfirmation_Shipm
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	tmp.RowKey AS RowKey,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Period,
 		|	tmp.Period AS DeliveryDate
 		|FROM
@@ -1198,30 +1053,17 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder_UseShipmentConfirmation_Shipm
 		|		AND GoodsReceiptSchedule.Store = tmp.Store
 		|		AND GoodsReceiptSchedule.ItemKey = tmp.ItemKey
 		|       AND GoodsReceiptSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.ReceiptBasis,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.RowKey,
-		|	tmp.Period
 		|;
 		|//[6] GoodsInTransitOutgoing
 		|SELECT
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	tmp.SalesOrder AS ShipmentBasis,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Period, 
 		|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.SalesOrder,
-		|	tmp.Period,
-		|   tmp.RowKey	
 		|;
 		|//[7] InventoryBalance
 		|SELECT
@@ -1236,7 +1078,7 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder_UseShipmentConfirmation_Shipm
 		|	tmp.ItemKey,
 		|	tmp.Period
 		|;
-		|//[8] - StockBalance_Expense /////////////////////////////////////////////////////////////////////////////////
+		|//[8] - StockBalance_Expense
 		|SELECT
 		|	CAST(tmp.ReceiptBasis AS Document.InventoryTransfer).StoreTransit AS Store,
 		|	tmp.ItemKey,
@@ -1260,20 +1102,19 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder_UseShipmentConfirmation_Shipm
 	
 	QueryResults = Query.ExecuteBatch();
 	
-	PostingServer.MergeTables(Tables.GoodsInTransitIncoming, QueryResults[0].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Receipt, QueryResults[1].Unload());
-	PostingServer.MergeTables(Tables.StockReservation_Receipt, QueryResults[2].Unload());
-	PostingServer.MergeTables(Tables.StockReservation_Expense, QueryResults[3].Unload());
-	PostingServer.MergeTables(Tables.ReceiptOrders, QueryResults[4].Unload());
-	PostingServer.MergeTables(Tables.GoodsReceiptSchedule, QueryResults[5].Unload());
-	PostingServer.MergeTables(Tables.GoodsInTransitOutgoing, QueryResults[6].Unload());
-	PostingServer.MergeTables(Tables.InventoryBalance, QueryResults[7].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Expense, QueryResults[8].Unload());
+	PostingServer.MergeTables(Tables.GoodsInTransitIncoming   , QueryResults[0].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Receipt     , QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.StockReservation_Receipt , QueryResults[2].Unload());
+	PostingServer.MergeTables(Tables.StockReservation_Expense , QueryResults[3].Unload());
+	PostingServer.MergeTables(Tables.ReceiptOrders            , QueryResults[4].Unload());
+	PostingServer.MergeTables(Tables.GoodsReceiptSchedule     , QueryResults[5].Unload());
+	PostingServer.MergeTables(Tables.GoodsInTransitOutgoing   , QueryResults[6].Unload());
+	PostingServer.MergeTables(Tables.InventoryBalance         , QueryResults[7].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Expense     , QueryResults[8].Unload());
 EndProcedure
 
-Procedure GetTables_UseSalesOrder_UsePurchaseOrder_UseShipmentConfirmation_NotShipmentBeforeInvoice_IsProduct(Tables, TempManager, TableName)
+Procedure GetTables_UseSO_UsePO_UseSC_NotSCBeforeInvoice_IsProduct(Tables, TempManager, TableName)
 	// tmp_3_2
-	
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	
@@ -1285,21 +1126,12 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder_UseShipmentConfirmation_NotSh
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	tmp.ReceiptBasis,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Unit AS Unit,
 		|	tmp.Period,
 		|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.ReceiptBasis,
-		|	tmp.Unit,
-		|	tmp.Period,
-		|   tmp.RowKey
-		|
 		|;
 		|
 		|//[1] StockBalance
@@ -1365,17 +1197,11 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder_UseShipmentConfirmation_NotSh
 		|	tmp.ItemKey,
 		|	tmp.ReceiptBasis AS Order,
 		|	tmp.GoodsReceipt AS GoodsReceipt,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Period,
 		|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.ItemKey,
-		|	tmp.ReceiptBasis,
-		|	tmp.GoodsReceipt,
-		|	tmp.Period,
-		|   tmp.RowKey
 		|;
 		|//[5] GoodsReceiptSchedule
 		|SELECT
@@ -1384,7 +1210,7 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder_UseShipmentConfirmation_NotSh
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	tmp.RowKey AS RowKey,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Period,
 		|	tmp.Period AS DeliveryDate
 		|FROM
@@ -1396,13 +1222,6 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder_UseShipmentConfirmation_NotSh
 		|		AND GoodsReceiptSchedule.Store = tmp.Store
 		|		AND GoodsReceiptSchedule.ItemKey = tmp.ItemKey
 		|       AND GoodsReceiptSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.ReceiptBasis,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.RowKey,
-		|	tmp.Period
 		|;
 		|//[6] InventoryBalance
 		|SELECT
@@ -1441,21 +1260,21 @@ Procedure GetTables_UseSalesOrder_UsePurchaseOrder_UseShipmentConfirmation_NotSh
 	
 	QueryResults = Query.ExecuteBatch();
 	
-	PostingServer.MergeTables(Tables.GoodsInTransitIncoming, QueryResults[0].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Receipt, QueryResults[1].Unload());
-	PostingServer.MergeTables(Tables.StockReservation_Receipt, QueryResults[2].Unload());
-	PostingServer.MergeTables(Tables.StockReservation_Expense, QueryResults[3].Unload());
-	PostingServer.MergeTables(Tables.ReceiptOrders, QueryResults[4].Unload());
-	PostingServer.MergeTables(Tables.GoodsReceiptSchedule, QueryResults[5].Unload());
-	PostingServer.MergeTables(Tables.InventoryBalance, QueryResults[6].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Expense, QueryResults[7].Unload());
+	PostingServer.MergeTables(Tables.GoodsInTransitIncoming   , QueryResults[0].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Receipt     , QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.StockReservation_Receipt , QueryResults[2].Unload());
+	PostingServer.MergeTables(Tables.StockReservation_Expense , QueryResults[3].Unload());
+	PostingServer.MergeTables(Tables.ReceiptOrders            , QueryResults[4].Unload());
+	PostingServer.MergeTables(Tables.GoodsReceiptSchedule     , QueryResults[5].Unload());
+	PostingServer.MergeTables(Tables.InventoryBalance         , QueryResults[6].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Expense     , QueryResults[7].Unload());
 EndProcedure
 	
 #EndRegion
 
 #Region Table_tmp_4
 
-Procedure GetTables_NotUseSalesOrder_UsePurchaseOrder(Tables, TempManager, TableName)
+Procedure GetTables_NotUseSO_UsePO(Tables, TempManager, TableName)
 	// tmp_4
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
@@ -1466,13 +1285,12 @@ Procedure GetTables_NotUseSalesOrder_UsePurchaseOrder(Tables, TempManager, Table
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_NotUseSalesOrder_UsePurchaseOrder_IsProduct(Tables, TempManager, NewTableName);
+		GetTables_NotUseSO_UsePO_IsProduct(Tables, TempManager, NewTableName);
 	EndIf;
 EndProcedure
 
-Procedure GetTables_NotUseSalesOrder_UsePurchaseOrder_IsProduct(Tables, TempManager, TableName)
+Procedure GetTables_NotUseSO_UsePO_IsProduct(Tables, TempManager, TableName)
 	// tmp_4_1
-	
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	
@@ -1484,21 +1302,12 @@ Procedure GetTables_NotUseSalesOrder_UsePurchaseOrder_IsProduct(Tables, TempMana
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	tmp.ReceiptBasis,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Unit AS Unit,
 		|	tmp.Period,
 		|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.ReceiptBasis,
-		|	tmp.Unit,
-		|	tmp.Period,
-		|   tmp.RowKey
-		|
 		|;
 		|
 		|//[1] StockBalance
@@ -1545,17 +1354,11 @@ Procedure GetTables_NotUseSalesOrder_UsePurchaseOrder_IsProduct(Tables, TempMana
 		|	tmp.ItemKey,
 		|	tmp.ReceiptBasis AS Order,
 		|	tmp.GoodsReceipt AS GoodsReceipt,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Period,
 		|   tmp.RowKey
 		|FROM
 		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.ItemKey,
-		|	tmp.ReceiptBasis,
-		|	tmp.GoodsReceipt,
-		|	tmp.Period,
-		|   tmp.RowKey
 		|;
 		|//[4] GoodsReceiptSchedule
 		|SELECT
@@ -1564,7 +1367,7 @@ Procedure GetTables_NotUseSalesOrder_UsePurchaseOrder_IsProduct(Tables, TempMana
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	tmp.RowKey AS RowKey,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Period,
 		|	tmp.Period AS DeliveryDate
 		|FROM
@@ -1576,13 +1379,6 @@ Procedure GetTables_NotUseSalesOrder_UsePurchaseOrder_IsProduct(Tables, TempMana
 		|		AND GoodsReceiptSchedule.Store = tmp.Store
 		|		AND GoodsReceiptSchedule.ItemKey = tmp.ItemKey
 		|       AND GoodsReceiptSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.ReceiptBasis,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.RowKey,
-		|	tmp.Period	
 		|;
 		|//[5] InventoryBalance
 		|SELECT
@@ -1597,7 +1393,7 @@ Procedure GetTables_NotUseSalesOrder_UsePurchaseOrder_IsProduct(Tables, TempMana
 		|	tmp.ItemKey,
 		|	tmp.Period
 		|;
-		|//[6] - StockBalance_Expense /////////////////////////////////////////////////////////////////////////////////
+		|//[6] - StockBalance_Expense
 		|SELECT
 		|	CAST(tmp.ReceiptBasis AS Document.InventoryTransfer).StoreTransit AS Store,
 		|	tmp.ItemKey,
@@ -1621,13 +1417,13 @@ Procedure GetTables_NotUseSalesOrder_UsePurchaseOrder_IsProduct(Tables, TempMana
 	
 	QueryResults = Query.ExecuteBatch();
 	
-	PostingServer.MergeTables(Tables.GoodsInTransitIncoming, QueryResults[0].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Receipt, QueryResults[1].Unload());
-	PostingServer.MergeTables(Tables.StockReservation_Receipt, QueryResults[2].Unload());
-	PostingServer.MergeTables(Tables.ReceiptOrders, QueryResults[3].Unload());
-	PostingServer.MergeTables(Tables.GoodsReceiptSchedule, QueryResults[4].Unload());
-	PostingServer.MergeTables(Tables.InventoryBalance, QueryResults[5].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Expense, QueryResults[6].Unload());
+	PostingServer.MergeTables(Tables.GoodsInTransitIncoming   , QueryResults[0].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Receipt     , QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.StockReservation_Receipt , QueryResults[2].Unload());
+	PostingServer.MergeTables(Tables.ReceiptOrders            , QueryResults[3].Unload());
+	PostingServer.MergeTables(Tables.GoodsReceiptSchedule     , QueryResults[4].Unload());
+	PostingServer.MergeTables(Tables.InventoryBalance         , QueryResults[5].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Expense     , QueryResults[6].Unload());
 EndProcedure
 
 #EndRegion
@@ -1694,7 +1490,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.GoodsInTransitIncoming,
-			Parameters.IsReposting));
+			True));
 	
 	// StockBalance
 	// StockBalance_Receipt [Receipt]  
@@ -1741,7 +1537,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.ReceiptOrders,
-			Parameters.IsReposting));
+			True));
 	
 	// GoodsReceiptSchedule
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsReceiptSchedule,
@@ -1755,7 +1551,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.GoodsInTransitOutgoing,
-			Parameters.IsReposting));
+			True));
 	
 	// InventoryBalance
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.InventoryBalance,
@@ -1768,7 +1564,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 EndFunction
 
 Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
+	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
 EndProcedure
 
 #EndRegion
@@ -1776,11 +1572,26 @@ EndProcedure
 #Region Undoposting
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return Undefined;
+	Return PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return Undefined;
+	DocumentDataTables = Parameters.DocumentDataTables;
+	DataMapWithLockFields = New Map();
+	
+	// GoodsInTransitIncoming
+	GoodsInTransitIncoming = AccumulationRegisters.GoodsInTransitIncoming.GetLockFields(DocumentDataTables.GoodsInTransitIncoming_Exists);
+	DataMapWithLockFields.Insert(GoodsInTransitIncoming.RegisterName, GoodsInTransitIncoming.LockInfo);
+	
+	// GoodsInTransitOutgoing
+	GoodsInTransitOutgoing = AccumulationRegisters.GoodsInTransitOutgoing.GetLockFields(DocumentDataTables.GoodsInTransitOutgoing_Exists);
+	DataMapWithLockFields.Insert(GoodsInTransitOutgoing.RegisterName, GoodsInTransitOutgoing.LockInfo);
+	
+	// ReceiptOrders
+	ReceiptOrders = AccumulationRegisters.ReceiptOrders.GetLockFields(DocumentDataTables.ReceiptOrders_Exists);
+	DataMapWithLockFields.Insert(ReceiptOrders.RegisterName, ReceiptOrders.LockInfo);
+	
+	Return DataMapWithLockFields;
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -1788,7 +1599,38 @@ Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefin
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return;
+	Parameters.Insert("Unposting", True);
+	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
+EndProcedure
+
+#EndRegion
+
+#Region CheckAfterWrite
+
+Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
+	LineNumberAndRowKeyFromItemList = PostingServer.GetLineNumberAndRowKeyFromItemList(Ref, "Document.GoodsReceipt.ItemList");
+	AccReg = AccumulationRegisters;
+	If Not Cancel And Not AccReg.GoodsInTransitIncoming.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
+	                                                                 Parameters.DocumentDataTables.GoodsInTransitIncoming,
+	                                                                 Parameters.DocumentDataTables.GoodsInTransitIncoming_Exists,
+	                                                                 AccumulationRecordType.Expense, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
+	
+	If Not Cancel And Not AccReg.GoodsInTransitOutgoing.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
+	                                                                 Parameters.DocumentDataTables.GoodsInTransitOutgoing,
+	                                                                 Parameters.DocumentDataTables.GoodsInTransitOutgoing_Exists,
+	                                                                 AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
+	
+	If Not Cancel And Not AccReg.ReceiptOrders.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
+	                                                        Parameters.DocumentDataTables.ReceiptOrders,
+	                                                        Parameters.DocumentDataTables.ReceiptOrders_Exists,
+	                                                        AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
 EndProcedure
 
 #EndRegion

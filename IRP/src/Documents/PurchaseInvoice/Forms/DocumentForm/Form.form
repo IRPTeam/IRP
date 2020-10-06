@@ -1201,8 +1201,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.ItemList.LockedRow</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>Object.ItemList.LockedRow</segments>
+              </paths>
             </dataPath>
             <titleLocation>None</titleLocation>
             <extendedTooltip>
@@ -1745,8 +1747,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.DontCalculateRow</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.DontCalculateRow</segments>
+            </paths>
           </dataPath>
           <titleLocation>None</titleLocation>
           <handlers>
@@ -1908,8 +1912,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.TotalAmount</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.TotalAmount</segments>
+            </paths>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -2438,6 +2444,10 @@
           <horizontalAlign>Left</horizontalAlign>
         </autoCommandBar>
         <handlers>
+          <event>Selection</event>
+          <name>ItemListSelection</name>
+        </handlers>
+        <handlers>
           <event>OnActivateRow</event>
           <name>ItemListOnActivateRow</name>
         </handlers>
@@ -2446,16 +2456,12 @@
           <name>ItemListOnStartEdit</name>
         </handlers>
         <handlers>
-          <event>OnChange</event>
-          <name>ItemListOnChange</name>
-        </handlers>
-        <handlers>
           <event>AfterDeleteRow</event>
           <name>ItemListAfterDeleteRow</name>
         </handlers>
         <handlers>
-          <event>Selection</event>
-          <name>ItemListSelection</name>
+          <event>OnChange</event>
+          <name>ItemListOnChange</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -3367,9 +3373,6 @@
             <paths xsi:type="form:DataPath">
               <segments>GoodsReceiptsTree.Item</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>GoodsReceiptsTree.Item</segments>
-            </paths>
           </dataPath>
           <titleLocation>None</titleLocation>
           <extendedTooltip>
@@ -3421,9 +3424,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>GoodsReceiptsTree.ItemKey</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>GoodsReceiptsTree.ItemKey</segments>
             </paths>
@@ -3481,9 +3481,6 @@
             <paths xsi:type="form:DataPath">
               <segments>GoodsReceiptsTree.GoodsReceipt</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>GoodsReceiptsTree.GoodsReceipt</segments>
-            </paths>
           </dataPath>
           <titleLocation>None</titleLocation>
           <extendedTooltip>
@@ -3535,9 +3532,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>GoodsReceiptsTree.QuantityInInvoice</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>GoodsReceiptsTree.QuantityInInvoice</segments>
             </paths>
@@ -3595,9 +3589,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>GoodsReceiptsTree.QuantityInGoodsReceipt</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>GoodsReceiptsTree.QuantityInGoodsReceipt</segments>
             </paths>
@@ -3661,9 +3652,6 @@
               <paths xsi:type="form:DataPath">
                 <segments>GoodsReceiptsTree.Quantity</segments>
               </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>GoodsReceiptsTree.Quantity</segments>
-              </paths>
             </dataPath>
             <handlers>
               <event>OnChange</event>
@@ -3716,8 +3704,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>GoodsReceiptsTree.PictureEdit</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>GoodsReceiptsTree.PictureEdit</segments>
+              </paths>
             </dataPath>
             <titleLocation>None</titleLocation>
             <extendedTooltip>

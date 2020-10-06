@@ -42,6 +42,10 @@
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Location count</value>
+  </objectPresentation>
   <listPresentation>
     <key>en</key>
     <value>Physical count by location list</value>
@@ -155,6 +159,30 @@
       </value>
     </choiceParameters>
     <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="907b4287-36b3-476d-b6bd-46db651096a9">
+    <name>ResponsibleUser</name>
+    <synonym>
+      <key>en</key>
+      <value>Responsible user</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Users</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="3d50db2e-55b6-4f69-b8a9-276c663313d9">
+    <name>RuleEditQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Rule edit quantity</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -318,16 +346,20 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
-  <commands uuid="a71b490b-dfb3-4b07-acc2-d59c1fd274ec">
-    <name>GeneratePhysicalCountByLocation</name>
+  <templates uuid="38c4f8d6-b3a2-4c8b-806a-39dd553bc10c">
+    <name>PrintQR</name>
     <synonym>
       <key>en</key>
-      <value>Physical count by location</value>
+      <value>Print QR</value>
     </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
+  </templates>
+  <commands uuid="66a904b5-df3b-4dc7-946d-495c6f10f23d">
+    <name>PrintQR</name>
+    <group>FormCommandBarImportant</group>
     <commandParameterType>
-      <types>DocumentRef.PhysicalInventory</types>
+      <types>DocumentRef.PhysicalCountByLocation</types>
     </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>
     <shortcut></shortcut>
   </commands>

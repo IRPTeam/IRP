@@ -180,7 +180,28 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.CreditNote.TabularSection.Transactions.Attribute.AdditionalAnalytic</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.DebitNote.TabularSection.Transactions.Attribute.RevenueType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.PurchaseInvoice.TabularSection.ItemList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CreditNote.TabularSection.Transactions.Attribute.ExpenseType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -231,6 +252,13 @@
 	</object>
 	<object>
 		<name>Document.GoodsReceipt.TabularSection.ItemList.Attribute.Store</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CreditNote.TabularSection.Transactions.Attribute.BusinessUnit</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -532,6 +560,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.DebitNote.TabularSection.Transactions</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.IncomingPaymentOrder.Attribute.Currency</name>
 		<right>
 			<name>View</name>
@@ -562,6 +597,13 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.DebitNote.TabularSection.Transactions.Attribute.BusinessUnit</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -634,6 +676,13 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.DebitNote.TabularSection.Transactions.Attribute.AdditionalAnalytic</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -718,6 +767,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.DebitNote</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.InventoryTransferOrder.Attribute.StoreSender</name>
 		<right>
 			<name>View</name>
@@ -758,6 +818,13 @@
 	</object>
 	<object>
 		<name>Document.OutgoingPaymentOrder.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CreditNote.TabularSection.Transactions</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -837,6 +904,17 @@
 	</object>
 	<object>
 		<name>Document.CashExpense.Attribute.Account</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CreditNote</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -927,84 +1005,6 @@
 	</object>
 	<object>
 		<name>Document.IncomingPaymentOrder.Attribute.Account</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.DebitNote</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.DebitNote.TabularSection.Transactions.Attribute.AdditionalAnalytic</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.DebitNote.TabularSection.Transactions.Attribute.BusinessUnit</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.DebitNote.TabularSection.Transactions.Attribute.RevenueType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.DebitNote.TabularSection.Transactions</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CreditNote</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CreditNote.TabularSection.Transactions</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CreditNote.TabularSection.Transactions.Attribute.AdditionalAnalytic</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CreditNote.TabularSection.Transactions.Attribute.BusinessUnit</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CreditNote.TabularSection.Transactions.Attribute.ExpenseType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

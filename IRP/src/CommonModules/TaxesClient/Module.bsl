@@ -197,7 +197,7 @@ Procedure CalculateReverseTaxOnChangeTotalAmount(Object, Form, CurrentData, AddI
 	CalculationStringsClientServer.CalculateItemsRows(Object,
 		Form,
 		ArrayRows,
-		New Structure("CalculateNetAmount"),
+		New Structure("CalculateNetAmountAsTotalAmountMinusTaxAmount"),
 		ArrayOfTaxInfo,
 		AddInfo);
 EndProcedure

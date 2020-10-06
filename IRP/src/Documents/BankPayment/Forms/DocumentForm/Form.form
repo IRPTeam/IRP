@@ -1224,8 +1224,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.PaymentList.Commission</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.PaymentList.Commission</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>PaymentListCommissionExtendedTooltip</name>
@@ -1274,8 +1276,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.PaymentList.BusinessUnit</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.PaymentList.BusinessUnit</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>PaymentListBusinessUnitExtendedTooltip</name>
@@ -1324,8 +1328,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.PaymentList.ExpenseType</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.PaymentList.ExpenseType</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>PaymentListExpenseTypeExtendedTooltip</name>
@@ -1374,8 +1380,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.PaymentList.AdditionalAnalytic</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.PaymentList.AdditionalAnalytic</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>PaymentListAdditionalAnalyticExtendedTooltip</name>

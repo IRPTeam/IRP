@@ -1149,8 +1149,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.SerialLotNumbersPresentation</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.SerialLotNumbersPresentation</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListSerialLotNumbersPresentationExtendedTooltip</name>
@@ -1491,8 +1493,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.DontCalculateRow</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.DontCalculateRow</segments>
+            </paths>
           </dataPath>
           <titleLocation>None</titleLocation>
           <handlers>
@@ -2286,6 +2290,10 @@
           <autoFill>true</autoFill>
         </autoCommandBar>
         <handlers>
+          <event>Selection</event>
+          <name>ItemListSelection</name>
+        </handlers>
+        <handlers>
           <event>OnActivateRow</event>
           <name>ItemListOnActivateRow</name>
         </handlers>
@@ -2300,10 +2308,6 @@
         <handlers>
           <event>OnChange</event>
           <name>ItemListOnChange</name>
-        </handlers>
-        <handlers>
-          <event>Selection</event>
-          <name>ItemListSelection</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -3581,9 +3585,6 @@
             <paths xsi:type="form:DataPath">
               <segments>SerialLotNumbersTree.Item</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>SerialLotNumbersTree.Item</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>SerialLotNumbersTreeItemExtendedTooltip</name>
@@ -3633,9 +3634,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>SerialLotNumbersTree.ItemKey</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>SerialLotNumbersTree.ItemKey</segments>
             </paths>
@@ -3691,9 +3689,6 @@
             <paths xsi:type="form:DataPath">
               <segments>SerialLotNumbersTree.SerialLotNumber</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>SerialLotNumbersTree.SerialLotNumber</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>SerialLotNumbersTreeSerialLotNumberExtendedTooltip</name>
@@ -3742,8 +3737,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>SerialLotNumbersTree.ItemKeyQuantity</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>SerialLotNumbersTree.ItemKeyQuantity</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>SerialLotNumbersTreeItemKeyQuantityExtendedTooltip</name>
@@ -3793,9 +3790,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>SerialLotNumbersTree.Quantity</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>SerialLotNumbersTree.Quantity</segments>
             </paths>

@@ -75,15 +75,12 @@
   </languages>
   <subsystems>Subsystem.AddAttributesAndProperties</subsystems>
   <subsystems>Subsystem.AddDataProc</subsystems>
-  <subsystems>Subsystem.AutoTest</subsystems>
   <subsystems>Subsystem.Finance</subsystems>
   <subsystems>Subsystem.Inventory</subsystems>
   <subsystems>Subsystem.Localization</subsystems>
   <subsystems>Subsystem.Marketing</subsystems>
   <subsystems>Subsystem.MasterData</subsystems>
   <subsystems>Subsystem.Mobile</subsystems>
-  <subsystems>Subsystem.MobileAgent</subsystems>
-  <subsystems>Subsystem.MultiThreading</subsystems>
   <subsystems>Subsystem.PurchaseAP</subsystems>
   <subsystems>Subsystem.Reports</subsystems>
   <subsystems>Subsystem.Saas</subsystems>
@@ -133,6 +130,7 @@
   <commonPictures>CommonPicture.Payment</commonPictures>
   <commonPictures>CommonPicture.CashOk</commonPictures>
   <commonPictures>CommonPicture.OtherGroup</commonPictures>
+  <commonPictures>CommonPicture.Mobile</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.CurrentUser</sessionParameters>
@@ -575,6 +573,8 @@
   <dataProcessors>DataProcessor.FirstStartSettings</dataProcessors>
   <dataProcessors>DataProcessor.PointOfSale</dataProcessors>
   <dataProcessors>DataProcessor.DataHistory</dataProcessors>
+  <dataProcessors>DataProcessor.MobileInvent</dataProcessors>
+  <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>
@@ -597,6 +597,7 @@
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <informationRegisters>InformationRegister.SharedReportOptions</informationRegisters>
   <informationRegisters>InformationRegister.BusinessUnitBankTerms</informationRegisters>
+  <informationRegisters>InformationRegister.BarcodeScanInfoCheck</informationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountsStatement</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AdvanceFromCustomers</accumulationRegisters>

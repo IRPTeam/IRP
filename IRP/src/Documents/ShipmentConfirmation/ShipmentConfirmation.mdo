@@ -124,15 +124,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <forms uuid="f6578bfa-a325-46b9-afca-68594934b925">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="b49983fb-cd20-4b4d-96ed-57b410bd8da1">
     <name>DocumentForm</name>
     <synonym>
@@ -142,11 +133,11 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="6d25ca4c-afc1-481d-bc0e-4569d377f067">
-    <name>SelectShipmentBasisesForm</name>
+  <forms uuid="f6578bfa-a325-46b9-afca-68594934b925">
+    <name>ListForm</name>
     <synonym>
       <key>en</key>
-      <value>Select receipt basises</value>
+      <value>List form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
@@ -156,6 +147,15 @@
     <synonym>
       <key>en</key>
       <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="6d25ca4c-afc1-481d-bc0e-4569d377f067">
+    <name>SelectShipmentBasisesForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Select receipt basises</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

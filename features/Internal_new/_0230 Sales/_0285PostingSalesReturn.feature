@@ -129,10 +129,10 @@ Scenario: _028501 create document Sales return, store use Goods receipt, without
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "1" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberSalesReturn028501$$"
 	And I save the window as "$$SalesReturn028501$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close current window
 
 
@@ -218,10 +218,10 @@ Scenario: _028508 create document Sales return, store doesn't use Goods receipt,
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "2" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberSalesReturn028508$$"
 	And I save the window as "$$SalesReturn028508$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close current window
 
 
@@ -289,10 +289,10 @@ Scenario: _028515 create document Sales return, store use Goods receipt, based o
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "3" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberSalesReturn028515$$"
 	And I save the window as "$$SalesReturn028515$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close current window
 
 Scenario: _028516 check movements of Sales return in register OrderBalance (store use Goods receipt,  based on Sales return order) 
@@ -358,10 +358,10 @@ Scenario: _028522 create document Sales return, store doesn't use Goods receipt,
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "4" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberSalesReturn028522$$"
 	And I save the window as "$$SalesReturn028522$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close current window
 
 

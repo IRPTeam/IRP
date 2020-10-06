@@ -145,7 +145,7 @@ Scenario: _150001 basic price entry by properties (including VAT)
 		Then "Price list (create) *" window is opened
 		And I input "107" text in "Number" field
 		And I input begin of the current month date in "Date" field
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And Delay 5
 	* Check document saving
 		Given I open hyperlink "e1cib/list/Document.PriceList"
@@ -233,7 +233,7 @@ Scenario: _150002 basic price entry by items (including VAT)
 	And I move to the next attribute
 	And I input "400,00" text in "Price" field of "ItemList" table
 	And I finish line editing in "ItemList" table
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And Delay 10
 
 

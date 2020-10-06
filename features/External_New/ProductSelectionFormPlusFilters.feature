@@ -1084,7 +1084,7 @@ Scenario: check the filter by customers in the sales documents
 * Check visual filter
 	And I click Select button of "Partner" field
 	And I save number of "List" table lines as "QS"
-	Then "QS" variable is equal to 24
+	Then "QS" variable is equal to 23
 	And "List" table contains lines
 		| Description  |
 		| Ferron BP    |
@@ -1112,8 +1112,9 @@ And I close all client application windows
 Scenario: check the filter by vendors in the purchase documents
 * Check visual filter
 	And I click Select button of "Partner" field
+	And I click "List" button
 	And I save number of "List" table lines as "QS"
-	Then "QS" variable is equal to 17
+	Then "QS" variable is equal to 16
 	And "List" table contains lines
 		| 'Description'      |
 		| 'Ferron BP'        |

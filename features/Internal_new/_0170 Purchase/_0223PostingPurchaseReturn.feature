@@ -119,10 +119,10 @@ Scenario: _022301 create document Purchase return, store use Shipment confirmati
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "1" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberPurchaseReturn022301$$"
 	And I save the window as "$$PurchaseReturn022301$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 
 Scenario: _022302 check movements of the document Purchase return order in the OrderBalance (store use Shipment confirmation, based on Purchase return order) - minus
 	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
@@ -200,7 +200,7 @@ Scenario: _022309 create document Purchase retur, store use Shipment confirmatio
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I input "2" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberPurchaseReturn022309$$"
 	And I save the window as "$$PurchaseReturn022309$$"
 	And I close current window
@@ -244,7 +244,7 @@ Scenario: _022314 create document Purchase return, store use Shipment confirmati
 		And I select current line in "ItemList" table
 		And I input "10,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 Scenario: _022315 check that there are no movements of Purchase return document by OrderBalance (store use Shipment confirmation, without Purchase return order) - minus
 	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
@@ -323,10 +323,10 @@ Scenario: _022322 create document Purchase return, store doesn't use Shipment co
 		| 'Item'  |
 		| 'Dress' |
 	And I delete a line in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberPurchaseReturn022322$$"
 	And I save the window as "$$PurchaseReturn022322$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	// 4
 	And I close current window
 

@@ -144,7 +144,7 @@ Scenario: create an order for MIO Basic Partner terms, without VAT (High shoes a
 		And I input "4,000" text in "Q" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 
 
 
@@ -312,10 +312,10 @@ Scenario: create PurchaseOrder017001
 			| 'Item'     | 'Q' | 'Item key'  | 'Store' | 'Unit' |
 			| 'Dress'    | '100,000'  | 'M/White'   | 'Store 01'      | 'pcs' |
 	* Post document
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder017001$$"
 		And I save the window as "$$PurchaseOrder017001$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 Scenario: create PurchaseOrder017003
 		* Opening a form to create Purchase Order
@@ -373,10 +373,10 @@ Scenario: create PurchaseOrder017003
 			And I input "40,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Post document
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder017003$$"
 			And I save the window as "$$PurchaseOrder017003$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 
 Scenario: create PurchaseInvoice018001 based on PurchaseOrder017001
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -411,10 +411,10 @@ Scenario: create PurchaseInvoice018001 based on PurchaseOrder017001
 			And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Store'    | 'Unit' | 'Q'       |
 			| 'Dress' | 'M/White'  | 'Store 01' | 'pcs'  | '100,000' |
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice018001$$"
 		And I save the window as "$$PurchaseInvoice018001$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 Scenario: create PurchaseInvoice018006 based on PurchaseOrder017003
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -440,10 +440,10 @@ Scenario: create PurchaseInvoice018006 based on PurchaseOrder017003
 			And "ItemList" table contains lines
 			| 'Price' | 'Item'  | 'Item key' | 'Q'       | 'Price type'               | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' |
 			| '40,00' | 'Dress' | 'L/Green'  | '500,000' | 'en description is empty' | 'pcs'  | '3 050,85'   | '16 949,15'  | '20 000,00'    |
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice018006$$"
 		And I save the window as "$$PurchaseInvoice018006$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 
 
@@ -480,10 +480,10 @@ Scenario: create PurchaseReturnOrder022001 based on PurchaseInvoice018006 (Purch
 		And "ItemList" table contains lines
 		| 'Item'  | 'Item key' | 'Purchase invoice'    | 'Store'    | 'Unit' | 'Q'     |
 		| 'Dress' | 'L/Green'  | '$$PurchaseInvoice018006$$' | 'Store 02' | 'pcs' | '2,000' |
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberPurchaseReturnOrder022001$$"
 	And I save the window as "$$PurchaseReturnOrder022001$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	
 Scenario: create PurchaseReturnOrder022006 based on PurchaseInvoice018001 (PurchaseOrder017001)
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -524,10 +524,10 @@ Scenario: create PurchaseReturnOrder022006 based on PurchaseInvoice018001 (Purch
 		| 'Item'     | 'Item key'  | 'Unit' |
 		| 'Dress'    | 'M/White'   | 'pcs' |
 	And I delete a line in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberPurchaseReturnOrder022006$$"
 	And I save the window as "$$PurchaseReturnOrder022006$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close current window
 
 
@@ -590,10 +590,10 @@ Scenario: create InventoryTransferOrder020001
 			And I move to the next attribute
 			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberInventoryTransferOrder020001$$"
 		And I save the window as "$$InventoryTransferOrder020001$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 Scenario: create InventoryTransferOrder020004
 	* Opening a form to create Inventory transfer order
@@ -636,10 +636,10 @@ Scenario: create InventoryTransferOrder020004
 		And I move to the next attribute
 		And I input "20,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberInventoryTransferOrder020004$$"
 	And I save the window as "$$InventoryTransferOrder020004$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 
 Scenario: create InventoryTransferOrder020007
 	* Opening a form to create Inventory transfer order
@@ -682,10 +682,10 @@ Scenario: create InventoryTransferOrder020007
 		And I move to the next attribute
 		And I input "17,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberInventoryTransferOrder020007$$"
 	And I save the window as "$$InventoryTransferOrder020007$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 
 Scenario: create InventoryTransferOrder020010
 	* Opening a form to create Inventory transfer order
@@ -728,10 +728,10 @@ Scenario: create InventoryTransferOrder020010
 		And I move to the next attribute
 		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberInventoryTransferOrder020010$$"
 	And I save the window as "$$InventoryTransferOrder020010$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 
 Scenario: create SalesOrder023001
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -791,7 +791,7 @@ Scenario: create SalesOrder023001
 		Then the form attribute named "Status" became equal to "Approved"
 	* Filling Delivery date
 		And I input current date in the field named "DeliveryDate"
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the window as "$$SalesOrder023001$$"
 	And I save the value of "Number" field as "$$NumberSalesOrder023001$$"
 	And I close current window
@@ -850,7 +850,7 @@ Scenario: create SalesOrder023005
 	* Check default sales order status
 		And I move to "Other" tab
 		Then the form attribute named "Status" became equal to "Approved"
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the window as "$$SalesOrder023005$$"
 	And I save the value of "Number" field as "$$NumberSalesOrder023005$$"
 	And I close current window
@@ -878,10 +878,10 @@ Scenario: create SalesInvoice024001
 		| 'Price'  | 'Item'     | 'Item key'  | 'Q'     | 'Price type'        |
 		| '550,00' | 'Dress'    | 'L/Green'   | '5,000' | 'Basic Price Types' |
 		| '400,00' | 'Trousers' | '36/Yellow' | '4,000' | 'Basic Price Types' |	
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberSalesInvoice024001$$"
 	And I save the window as "$$SalesInvoice024001$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close current window
 
 Scenario: create SalesInvoice024008
@@ -902,10 +902,10 @@ Scenario: create SalesInvoice024008
 		| 'Price'  | 'Item'     | 'Item key'  | 'Price type'              | 'Q'      |
 		| '466,10' | 'Dress'    | 'L/Green'   | 'Basic Price without VAT' | '10,000' |
 		| '338,98' | 'Trousers' | '36/Yellow' | 'Basic Price without VAT' | '14,000' |
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberSalesInvoice024008$$"
 	And I save the window as "$$SalesInvoice024008$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close current window
 
 
@@ -943,10 +943,10 @@ Scenario: create SalesReturnOrder028004
 		And I select current line in "ItemList" table
 		And I input "400,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesReturnOrder028004$$"
 		And I save the window as "$$SalesReturnOrder028004$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close current window
 
 	
@@ -985,10 +985,10 @@ Scenario: create SalesReturnOrder028001
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  | 'Store'    |
 		| 'Dress'    |  'L/Green'  | 'Store 02' |
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberSalesReturnOrder028001$$"
 	And I save the window as "$$SalesReturnOrder028001$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close all client application windows
 
 
@@ -1031,10 +1031,10 @@ Scenario: create SalesInvoice024025
 		And I activate "Q" field in "ItemList" table
 		And I input "20,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberSalesInvoice024025$$"
 	And I save the window as "$$SalesInvoice024025$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 
 Scenario: create PurchaseReturn022314
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -1053,10 +1053,10 @@ Scenario: create PurchaseReturn022314
 		| 'Description' |
 		| 'Store 02'  |
 	And I select current line in "List" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberPurchaseReturn022314$$"
 	And I save the window as "$$PurchaseReturn022314$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	
 
 
@@ -1097,10 +1097,10 @@ Scenario: create InventoryTransfer021030
 	And I activate "Quantity" field in "ItemList" table
 	And I input "3,000" text in "Quantity" field of "ItemList" table
 	And I finish line editing in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberInventoryTransfer021030$$"
 	And I save the window as "$$InventoryTransfer021030$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 
 Scenario: create SalesInvoice024016 (Shipment confirmation does not used)
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -1148,13 +1148,13 @@ Scenario: create SalesInvoice024016 (Shipment confirmation does not used)
 			And I activate "Q" field in "ItemList" table
 			And I input "1,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And in the table "ItemList" I click "% Offers" button
 			And in the table "Offers" I click the button named "FormOK"
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesInvoice024016$$"
 		And I save the window as "$$SalesInvoice024016$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 Scenario: create SalesReturn30001
 	* Open form  Sales return
@@ -1189,10 +1189,10 @@ Scenario: create SalesReturn30001
 			And I input "1,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input "500,00" text in "Price" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesReturn30001$$"
 		And I save the window as "$$SalesReturn30001$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 
 Scenario: create PurchaseReturn300301
@@ -1228,10 +1228,10 @@ Scenario: create PurchaseReturn300301
 			And I input "1,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input "500,00" text in "Price" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseReturn300301$$"
 		And I save the window as "$$PurchaseReturn300301$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 
 Scenario: set True value to the constant

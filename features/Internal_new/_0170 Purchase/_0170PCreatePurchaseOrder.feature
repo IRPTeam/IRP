@@ -183,10 +183,10 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 		And I input "210,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Post document
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder017005$$"
 		And I save the window as "$$PurchaseOrder017005$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close current window
 	* Check the absence of movements Purchase Order N101 by register Order Balance
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
@@ -202,14 +202,14 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click the hyperlink named "DecorationStatusHistory"
 		And "List" table contains lines
 			| 'Object'                  | 'Status'   |
 			| '$$PurchaseOrder017005$$' | 'Wait'     |
 			| '$$PurchaseOrder017005$$' | 'Approved' |
 		And I close current window
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close current window
 	* Check document movements after the status is set to Approved
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
@@ -225,7 +225,7 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 		And I select current line in "List" table
 		And I click "Decoration group title collapsed picture" hyperlink
 		And I select "Wait" exact value from "Status" drop-down list
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click the hyperlink named "DecorationStatusHistory"
 		And "List" table contains lines
 			| 'Object'                  | 'Status'   |
@@ -233,7 +233,7 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 			| '$$PurchaseOrder017005$$' | 'Approved' |
 			| '$$PurchaseOrder017005$$' | 'Wait'     |
 		And I close current window
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close current window
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
 		And "List" table does not contain lines
@@ -446,7 +446,7 @@ Scenario: _017105 filter when selecting item key in the purchase order document
 
 Scenario: _019901 check changes in movements on a Purchase Order document when quantity changes
 		When create a Purchase Order document
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder019901$$"
 		And I save the window as "$$PurchaseOrder019901$$"
 	* Check registry entries (Order Balance)
@@ -480,7 +480,7 @@ Scenario: _019901 check changes in movements on a Purchase Order document when q
 		And I select current line in "ItemList" table
 		And I input "250,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check registry entries (Order Balance)
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
 		And "List" table contains lines
@@ -501,7 +501,7 @@ Scenario: _019902 delete line in Purchase order and chek movements changes
 		And I move to "Item list" tab
 		And I go to the last line in "ItemList" table
 		And I delete current line in "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check registry entries (Order Balance)
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
 		And "List" table does not contain lines
@@ -559,7 +559,7 @@ Scenario: _019903 add line in Purchase order and chek movements changes
 		And I input "190,00" text in "Price" field of "ItemList" table
 		And I input "Store 03" text in "Store" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check registry entries (Order Balance)
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
 		And Delay 2
@@ -605,7 +605,7 @@ Scenario: _019904 add package in Purchase order and chek movements (conversion t
 		And I input "190,00" text in "Price" field of "ItemList" table
 		And I input "Store 03" text in "Store" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check registry entries (Order Balance)
 	# Packages are converted into pcs.
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
@@ -727,7 +727,7 @@ Scenario: _019908 create Purchase invoice and Goods receipt based on a Purchase 
 		| 'Description' |
 		| 'Store 03'  |
 	And I select current line in "List" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	* Post Goods receipt
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
 		And I click Select button of "Company" field
@@ -737,7 +737,7 @@ Scenario: _019908 create Purchase invoice and Goods receipt based on a Purchase 
 			| 'Description' |
 			| 'Store 03'  |
 		And I select current line in "List" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	And I close current window
 
 

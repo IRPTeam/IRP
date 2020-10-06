@@ -124,7 +124,7 @@ Scenario: check the Document discount in Purchase order
 		| 'Dress'    | '210,00' | 'L/Green'   | '200,000' | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
 		| 'Trousers' | '250,00' | '36/Yellow' | '300,000' | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
 	* Check the transfer of the discount value from Purchase order to Purchase invoice when creating based on
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click "Purchase invoice" button
 		And "ItemList" table contains lines
 		| 'Item'     | 'Price'  | 'Item key'  | 'Q'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |

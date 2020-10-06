@@ -94,12 +94,12 @@ Scenario: _400000 preparation (Opening entries)
 		// Then "1C:Enterprise" window is opened
 		// And I click "Yes" button
 		// And I input "5 900" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesInvoice400000$$"
 		And I save the window as "$$SalesInvoice400000$$"
 		And I set checkbox "Is opening entry"
 		And Delay 1
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create PI for opening entry by documents
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
@@ -134,12 +134,12 @@ Scenario: _400000 preparation (Opening entries)
 		// Then "1C:Enterprise" window is opened
 		// And I click "Yes" button
 		// And I input "5 900" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice400000$$"
 		And I save the window as "$$PurchaseInvoice400000$$"
 		And I set checkbox "Is opening entry"
 		And Delay 1
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 
 Scenario: _400001 opening entry account balance
@@ -310,10 +310,10 @@ Scenario: _400001 opening entry account balance
 			And I input "1" text in the field named "CurrenciesAccountBalanceMultiplicity" of "CurrenciesAccountBalance" table
 			And I finish line editing in "CurrenciesAccountBalance" table
 	* Post document
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberOpeningEntry400001$$"
 		And I save the window as "$$OpeningEntry400001$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And Delay 5
 		* Check movements
 			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
@@ -643,7 +643,7 @@ Scenario: _400002 opening entry inventory balance
 		And I input "100,000" text in "Quantity" field of "Inventory" table
 		And I finish line editing in "Inventory" table
 	* Post document
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberOpeningEntry400002$$"
 		And I save the window as "$$OpeningEntry400002$$"
 	* Check movements
@@ -704,7 +704,7 @@ Scenario: _400003 opening entry advance balance
 			| Main Company |
 		And I select current line in "List" table
 	// * Change the document number
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberOpeningEntry400003$$"
 		And I save the window as "$$OpeningEntry400003$$"
 	* Filling in AdvanceFromCustomers
@@ -750,7 +750,7 @@ Scenario: _400003 opening entry advance balance
 		And I input "100,00" text in the field named "AdvanceToSuppliersAmount" of "AdvanceToSuppliers" table
 		And I finish line editing in "AdvanceToSuppliers" table
 	* Post document
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberOpeningEntry400003$$"
 		And I save the window as "$$OpeningEntry400003$$"
 	* Check movements
@@ -862,10 +862,10 @@ Scenario: _400004 opening entry AP balance by partner terms (vendors)
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate'   | 'Amount' | 'Multiplicity' |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400' | '17,12'  | '1'            |
 	* Post document
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberOpeningEntry400004$$"
 		And I save the window as "$$OpeningEntry400004$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And Delay 5
 		* Check movements
 			And I click "Registrations report" button
@@ -968,10 +968,10 @@ Scenario: _400005 opening entry AR balance by partner terms (customers)
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate'   | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400' | '17,12'  | '1'            |
 	* Post document
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberOpeningEntry400005$$"
 		And I save the window as "$$OpeningEntry400005$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And Delay 5
 	* Check movements
 		And I click "Registrations report" button
@@ -1182,7 +1182,7 @@ Scenario: _400008 check the entry of the account balance, inventory balance, Ap/
 			And I input "5,8400" text in the field named "CurrenciesAccountReceivableByAgreementsRatePresentation" of "CurrenciesAccountReceivableByAgreements" table
 			And I input "1" text in the field named "CurrenciesAccountReceivableByAgreementsMultiplicity" of "CurrenciesAccountReceivableByAgreements" table
 			And I finish line editing in "CurrenciesAccountReceivableByAgreements" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberOpeningEntry400008$$"
 			And I save the window as "$$OpeningEntry400008$$"
 
@@ -1277,7 +1277,7 @@ Scenario: _400009 check the entry of the Ap/Ar balance by documents
 		And I input "200,00" text in the field named "AccountReceivableByDocumentsAmount" of "AccountReceivableByDocuments" table
 		And I finish line editing in "AccountReceivableByDocuments" table
 	* Post and check movements
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberOpeningEntry400009$$"
 		And I save the window as "$$OpeningEntry400009$$"
 	# AccountByDocumentsMainTablePartnerOnChange

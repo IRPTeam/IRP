@@ -546,10 +546,10 @@ Scenario: _090205 check tax transfer in Sales invoice when it is created based o
 		And I input "62,00" text in "Manual amount" field of "TaxTree" table
 		And I finish line editing in "TaxTree" table
 		And I click "Ok" button
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesInvoice090204$$"
 		And I save the window as "$$SalesInvoice090204$$"
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Create Sales invoice based on Sales order and check filling Tax types
 		And I click "Sales invoice" button
 		And "ItemList" table contains lines
@@ -557,7 +557,7 @@ Scenario: _090205 check tax transfer in Sales invoice when it is created based o
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | 'pcs'  | '1%'       | '65,96'      | '334,04'     | '400,00'       | 'Store 01' |
 			| '700,00' | 'Boots'    | '18%' | '37/18SD'   | '2,000' | 'pcs'  | '1%'       | '227,42'     | '1 172,58'   | '1 400,00'     | 'Store 01' |
 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "293,38"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 
 Scenario: _090206 priority tax rate check on the example of Sales order

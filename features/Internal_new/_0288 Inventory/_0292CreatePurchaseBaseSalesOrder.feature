@@ -115,10 +115,10 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 			// And I click "Yes" button
 			// And I input "501" text in "Number" field
 			And I set checkbox "Shipment confirmations before sales invoice"
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberSalesOrder0292001$$"
 			And I save the window as "$$SalesOrder0292001$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create Sales order 502
 		* Open form for create order
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -181,10 +181,10 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "502" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberSalesOrder0292002$$"
 			And I save the window as "$$SalesOrder0292002$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create Sales order 503
 		* Open form for create order
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -248,10 +248,10 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 			// And I click "Yes" button
 			// And I input "503" text in "Number" field
 			And I set checkbox "Shipment confirmations before sales invoice"
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberSalesOrder0292003$$"
 			And I save the window as "$$SalesOrder0292003$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create Sales order 504
 		* Open form for create order
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -315,10 +315,10 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 			// And I click "Yes" button
 			// And I input "504" text in "Number" field
 			And I set checkbox "Shipment confirmations before sales invoice"
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberSalesOrder0292004$$"
 			And I save the window as "$$SalesOrder0292004$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create Sales order 505
 		* Open form for create order
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -381,10 +381,10 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "505" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberSalesOrder0292005$$"
 			And I save the window as "$$SalesOrder0292005$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 
 
 
@@ -444,7 +444,7 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 		And I input "1,000" text in "Q" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	* Change the procurement method by rows and add a new row
 		And I go to line in "ItemList" table
 			| Item  |
@@ -483,10 +483,10 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 		// And I click "Yes" button
 		// And I input "455" text in "Number" field
 	* Post Sales order
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesOrder029201$$"
 		And I save the window as "$$SalesOrder029201$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check movements
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
@@ -614,10 +614,10 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 			// And I click "Yes" button
 			// And I input "456" text in "Number" field
 	* Post Sales order
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberSalesOrder0292012$$"
 			And I save the window as "$$SalesOrder0292012$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Check movements
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
@@ -742,10 +742,10 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 		And I move to "Other" tab
 		And I expand "More" group
 		And I set checkbox "Goods receipt before purchase invoice"
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder0292012$$"
 		And I save the window as "$$PurchaseOrder0292012$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	* Check movements Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
@@ -836,10 +836,10 @@ Scenario: _029202 create Goods reciept based on Purchase order that based on Sal
 		// Then "1C:Enterprise" window is opened
 		// And I click "Yes" button
 		// And I input "456" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberGoodsReceipt0292022$$"
 		And I save the window as "$$GoodsReceipt029202$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check movements
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
@@ -939,7 +939,7 @@ Scenario: _029203 check movements if there is an additional line in the Purchase
 			| Store 02    |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		* Check movements
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 			And I go to line in "List" table
@@ -1031,10 +1031,10 @@ Scenario: _029203 check movements if there is an additional line in the Purchase
 		// Then "1C:Enterprise" window is opened
 		// And I click "Yes" button
 		// And I input "457" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberGoodsReceipt029203$$"
 		And I save the window as "$$GoodsReceipt029203$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check movements
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
@@ -1126,10 +1126,10 @@ Scenario: _029204 create Purchase invoice based on Purchase order that based on 
 		// Then "1C:Enterprise" window is opened
 		// And I click "Yes" button
 		// And I input "457" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice029204$$"
 		And I save the window as "$$PurchaseInvoice029204$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check movements
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
@@ -1244,11 +1244,11 @@ Scenario: _029205 create Shipment confirmation based on Sales order, procurement
 		| 'Trousers' | '5,000'    | '36/Yellow' | 'pcs'  | 'Store 02' | '$$SalesOrder0292012$$' |
 		| 'Trousers' | '10,000'   | '38/Yellow' | 'pcs'  | 'Store 02' | '$$SalesOrder0292012$$' |
 	* Change of document number
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation029205$$"
 		And I save the window as "$$ShipmentConfirmation029205$$"
 		// 456
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check movements
 		And I click "Registrations report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -1312,7 +1312,7 @@ Scenario: _029206 create Sales invoice based on Sales order, procurement method 
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "456" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesInvoice0292012$$"
 		And I save the window as "$$SalesInvoice0292012$$"
 	* Check movements Sales invoice
@@ -1471,7 +1471,7 @@ Scenario: _029207 create Purchase order based on Sales order (Purchase invoice b
 		And I input "1,000" text in "Q" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	* Change the procurement method by rows and add a new row
 		And I go to line in "ItemList" table
 			| Item  |
@@ -1525,10 +1525,10 @@ Scenario: _029207 create Purchase order based on Sales order (Purchase invoice b
 	// 	And I click "Yes" button
 	// 	And I input "460" text in "Number" field
 	* Post Sales order
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesOrder0292071$$"
 		And I save the window as "$$SalesOrder0292071$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check movements
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
@@ -1657,10 +1657,10 @@ Scenario: _029207 create Purchase order based on Sales order (Purchase invoice b
 	// 		And I click "Yes" button
 	// 		And I input "461" text in "Number" field
 	* Post Sales order
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberSalesOrder0292072$$"
 			And I save the window as "$$SalesOrder0292072$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Check movements
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
@@ -1795,10 +1795,10 @@ Scenario: _029207 create Purchase order based on Sales order (Purchase invoice b
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "460" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberPurchaseOrder0292073$$"
 	And I save the window as "$$PurchaseOrder0292073$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	* Check movements Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
@@ -1856,10 +1856,10 @@ Scenario: _029208 create Purchase invoice based on Purchase order (Purchase invo
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "460" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice0292008$$"
 		And I save the window as "$$PurchaseInvoice0292008$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check movements
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
@@ -2006,10 +2006,10 @@ Scenario: _029209 create Goods reciept based on Purchase invoice (Purchase invoi
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "460" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberGoodsReceipt0292009$$"
 		And I save the window as "$$GoodsReceipt0292009$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check movements
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
@@ -2072,10 +2072,10 @@ Scenario: _029210 create Sales invoice based on Sales orders (purchase has alrea
 	// 	And I click "Yes" button
 	// 	And I input "460" text in "Number" field
 	* Post Sales invoice
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesInvoice0292010$$"
 		And I save the window as "$$SalesInvoice0292010$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check movements Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
@@ -2223,10 +2223,10 @@ Scenario: _029211 create Sales invoice based on Sales orders (purchase has alrea
 	// 	And I click "Yes" button
 	// 	And I input "461" text in "Number" field
 	* Post Sales invoice
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesInvoice029211$$"
 		And I save the window as "$$SalesInvoice029211$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check movements Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
@@ -2411,10 +2411,10 @@ Scenario: _029221 Sales order - Purchase order - Purchase invoice - Goods reciep
 			// 	Then "1C:Enterprise" window is opened
 			// 	And I click "Yes" button
 			// 	And I input "501" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder029221$$"
 			And I save the window as "$$PurchaseOrder029221$$"
-			And I click "Post" button
+			And I click the button named "FormPost"
 	* Create Purchase invoice based on Purchase order №501
 		And I click "Purchase invoice" button
 		// * Change number
@@ -2423,10 +2423,10 @@ Scenario: _029221 Sales order - Purchase order - Purchase invoice - Goods reciep
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "501" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice029221$$"
 		And I save the window as "$$PurchaseInvoice029221$$"
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Create Goods reciept based on Purchase invoice №501
 		And I click "Goods receipt" button
 		// * Change number
@@ -2435,10 +2435,10 @@ Scenario: _029221 Sales order - Purchase order - Purchase invoice - Goods reciep
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "501" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberGoodsReceipt029221$$"
 		And I save the window as "$$GoodsReceipt029221$$"
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Create Shipment confirmation based on Sales order №501
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
@@ -2451,10 +2451,10 @@ Scenario: _029221 Sales order - Purchase order - Purchase invoice - Goods reciep
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "501" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation029221$$"
 		And I save the window as "$$ShipmentConfirmation029221$$"
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Create Sales invoice based on Shipment confirmation №501
 		And I click "Sales invoice" button
 		// * Change number
@@ -2463,10 +2463,10 @@ Scenario: _029221 Sales order - Purchase order - Purchase invoice - Goods reciep
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "501" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesInvoice029221$$"
 		And I save the window as "$$SalesInvoice029221$$"
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I close all client application windows
 
 
@@ -2523,10 +2523,10 @@ Scenario: _029222 Sales order - Purchase order - Purchase invoice - Sales invoic
 			// 	Then "1C:Enterprise" window is opened
 			// 	And I click "Yes" button
 			// 	And I input "502" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder029222$$"
 			And I save the window as "$$PurchaseOrder029222$$"
-			And I click "Post" button
+			And I click the button named "FormPost"
 	* Create Purchase invoice based on Purchase order №502
 		And I click "Purchase invoice" button
 		* Change number
@@ -2535,10 +2535,10 @@ Scenario: _029222 Sales order - Purchase order - Purchase invoice - Sales invoic
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "502" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice029222$$"
 		And I save the window as "$$PurchaseInvoice029222$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create Sales invoice based on Sales order №502
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
@@ -2551,10 +2551,10 @@ Scenario: _029222 Sales order - Purchase order - Purchase invoice - Sales invoic
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "502" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesInvoice029222$$"
 		And I save the window as "$$SalesInvoice029222$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	
 
 
@@ -2609,10 +2609,10 @@ Scenario: _029224 Sales order - Purchase invoice - Goods reciept - Shipment conf
 			// 	Then "1C:Enterprise" window is opened
 			// 	And I click "Yes" button
 			// 	And I input "504" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice029224$$"
 			And I save the window as "$$PurchaseInvoice029224$$"
-			And I click "Post" button
+			And I click the button named "FormPost"
 	* Create Goods reciept based on Purchase invoice №504
 		And I click "Goods receipt" button
 		// * Change number
@@ -2621,10 +2621,10 @@ Scenario: _029224 Sales order - Purchase invoice - Goods reciept - Shipment conf
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "504" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberGoodsReciept029224$$"
 		And I save the window as "$$GoodsReciept029224$$"
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Create Shipment confirmation based on Sales order №504
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
@@ -2637,10 +2637,10 @@ Scenario: _029224 Sales order - Purchase invoice - Goods reciept - Shipment conf
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "504" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation029224$$"
 		And I save the window as "$$ShipmentConfirmation029224$$"
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Create Sales invoice based on Shipment confirmation №504
 		And I click "Sales invoice" button
 		// * Change number
@@ -2649,10 +2649,10 @@ Scenario: _029224 Sales order - Purchase invoice - Goods reciept - Shipment conf
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "504" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesInvoice029224$$"
 		And I save the window as "$$SalesInvoice029224$$"
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I close all client application windows
 
 
@@ -2707,10 +2707,10 @@ Scenario: _029225 Sales order - Purchase invoice - Sales invoice
 			// 	Then "1C:Enterprise" window is opened
 			// 	And I click "Yes" button
 			// 	And I input "505" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice029224$$"
 			And I save the window as "$$PurchaseInvoice029224$$"
-			And I click "Post" button
+			And I click the button named "FormPost"
 	* Create Sales invoice based on Sales order №502
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
@@ -2723,10 +2723,10 @@ Scenario: _029225 Sales order - Purchase invoice - Sales invoice
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "505" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesInvoice029224$$"
 		And I save the window as "$$SalesInvoice029224$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 
 // #  Sales order (№503) - Purchase order - Purchase invoice - Shipment confirmation - Sales invoice

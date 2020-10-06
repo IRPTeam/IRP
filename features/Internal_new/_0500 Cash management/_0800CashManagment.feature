@@ -34,6 +34,9 @@ Scenario: _080000 preparation (Incoming payment order and Outgoing payment order
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
+		When Create catalog Companies objects (partners company)
+		When Create catalog Partners objects
+		When Create catalog Companies objects (partners company)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -80,15 +83,15 @@ Scenario: _080001 create Incoming payment order
 		And I activate "Description" field in "List" table
 		And I go to line in "List" table
 			| Description     |
-			| Company Kalipso |
+			| Company Lomaniti |
 		And I select current line in "List" table
 		And I activate "Amount" field in "PaymentList" table
 		And I input "1 000,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberIncomingPaymentOrder080001$$"
 	And I save the window as "$$IncomingPaymentOrder080001$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And "List" table contains lines
 		| 'Number'                               | 'Company'      | 'Account'           | 'Currency' |
 		| '$$NumberIncomingPaymentOrder080001$$' | 'Main Company' | 'Bank account, USD' | 'USD'      |
@@ -99,7 +102,7 @@ Scenario: _080002 check Incoming payment order movements
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
 		And "List" table contains lines
 			| 'Currency' | 'Recorder'                       | 'Basis document'                 | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'  | 'Legal name'      | 'Amount'   |
-			| 'USD'      | '$$IncomingPaymentOrder080001$$' | '$$IncomingPaymentOrder080001$$' | 'Main Company' | 'Bank account, USD' | 'Incoming'            | 'Lomaniti' | 'Company Kalipso' | '1 000,00' |
+			| 'USD'      | '$$IncomingPaymentOrder080001$$' | '$$IncomingPaymentOrder080001$$' | 'Main Company' | 'Bank account, USD' | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | '1 000,00' |
 		And I close all client application windows
 	* Clear movements and check that there is no movement on the registers
 		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
@@ -110,7 +113,7 @@ Scenario: _080002 check Incoming payment order movements
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
 		And "List" table does not contain lines
 			| 'Currency' | 'Recorder'                       | 'Basis document'                 | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'  | 'Legal name'      | 'Amount'   |
-			| 'USD'      | '$$IncomingPaymentOrder080001$$' | '$$IncomingPaymentOrder080001$$' | 'Main Company' | 'Bank account, USD' | 'Incoming'            | 'Lomaniti' | 'Company Kalipso' | '1 000,00' |
+			| 'USD'      | '$$IncomingPaymentOrder080001$$' | '$$IncomingPaymentOrder080001$$' | 'Main Company' | 'Bank account, USD' | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | '1 000,00' |
 		And I close all client application windows
 	* Re-posting the document and checking movements on the registers
 		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
@@ -121,7 +124,7 @@ Scenario: _080002 check Incoming payment order movements
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
 		And "List" table contains lines
 			| 'Currency' | 'Recorder'                  | 'Basis document'             | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Amount'    |
-			| 'USD'      | '$$IncomingPaymentOrder080001$$' | '$$IncomingPaymentOrder080001$$'  | 'Main Company' | 'Bank account, USD' | 'Incoming'            | 'Lomaniti'  | 'Company Kalipso'   | '1 000,00'  |
+			| 'USD'      | '$$IncomingPaymentOrder080001$$' | '$$IncomingPaymentOrder080001$$'  | 'Main Company' | 'Bank account, USD' | 'Incoming'            | 'Lomaniti'  | 'Company Lomaniti'   | '1 000,00'  |
 		And I close all client application windows
 	
 
@@ -139,9 +142,9 @@ Scenario: _080003 check connection to Incoming payment order of the Registration
 		| 'Register  "Planing cash transactions"' | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | ''                     |
 		| ''                                      | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | 'Attributes'           |
 		| ''                                      | ''       | 'Amount'    | 'Company'      | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner'  | 'Legal name'      | 'Multi currency movement type'   | 'Deferred calculation' |
-		| ''                                      | '*'      | '1 000'     | 'Main Company' | '$$IncomingPaymentOrder080001$$' | 'Bank account, USD' | 'USD'      | 'Incoming'            | 'Lomaniti' | 'Company Kalipso' | 'en description is empty' | 'No'                   |
-		| ''                                      | '*'      | '1 000'     | 'Main Company' | '$$IncomingPaymentOrder080001$$' | 'Bank account, USD' | 'USD'      | 'Incoming'            | 'Lomaniti' | 'Company Kalipso' | 'Reporting currency'       | 'No'                   |
-		| ''                                      | '*'      | '5 649,72'  | 'Main Company' | '$$IncomingPaymentOrder080001$$' | 'Bank account, USD' | 'TRY'      | 'Incoming'            | 'Lomaniti' | 'Company Kalipso' | 'Local currency'           | 'No'                   |
+		| ''                                      | '*'      | '1 000'     | 'Main Company' | '$$IncomingPaymentOrder080001$$' | 'Bank account, USD' | 'USD'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'en description is empty' | 'No'                   |
+		| ''                                      | '*'      | '1 000'     | 'Main Company' | '$$IncomingPaymentOrder080001$$' | 'Bank account, USD' | 'USD'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'Reporting currency'       | 'No'                   |
+		| ''                                      | '*'      | '5 649,72'  | 'Main Company' | '$$IncomingPaymentOrder080001$$' | 'Bank account, USD' | 'TRY'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'Local currency'           | 'No'                   |
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
 	* Check the report output from the selected document
@@ -157,9 +160,9 @@ Scenario: _080003 check connection to Incoming payment order of the Registration
 		| 'Register  "Planing cash transactions"' | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''         | ''                | ''                             | ''                     |
 		| ''                                      | 'Period' | 'Resources' | 'Dimensions'   | ''                               | ''                  | ''         | ''                    | ''         | ''                | ''                             | 'Attributes'           |
 		| ''                                      | ''       | 'Amount'    | 'Company'      | 'Basis document'                 | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner'  | 'Legal name'      | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                      | '*'      | '1 000'     | 'Main Company' | '$$IncomingPaymentOrder080001$$' | 'Bank account, USD' | 'USD'      | 'Incoming'            | 'Lomaniti' | 'Company Kalipso' | 'en description is empty'      | 'No'                   |
-		| ''                                      | '*'      | '1 000'     | 'Main Company' | '$$IncomingPaymentOrder080001$$' | 'Bank account, USD' | 'USD'      | 'Incoming'            | 'Lomaniti' | 'Company Kalipso' | 'Reporting currency'           | 'No'                   |
-		| ''                                      | '*'      | '5 649,72'  | 'Main Company' | '$$IncomingPaymentOrder080001$$' | 'Bank account, USD' | 'TRY'      | 'Incoming'            | 'Lomaniti' | 'Company Kalipso' | 'Local currency'               | 'No'                   |
+		| ''                                      | '*'      | '1 000'     | 'Main Company' | '$$IncomingPaymentOrder080001$$' | 'Bank account, USD' | 'USD'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'en description is empty'      | 'No'                   |
+		| ''                                      | '*'      | '1 000'     | 'Main Company' | '$$IncomingPaymentOrder080001$$' | 'Bank account, USD' | 'USD'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'Reporting currency'           | 'No'                   |
+		| ''                                      | '*'      | '5 649,72'  | 'Main Company' | '$$IncomingPaymentOrder080001$$' | 'Bank account, USD' | 'TRY'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'Local currency'               | 'No'                   |
 	And I close all client application windows
 
 Scenario: _080004 check Description in IncomingPaymentOrder
@@ -184,10 +187,10 @@ Scenario: _080005 create Bank reciept based on Incoming payment order
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "20" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankReceipt0800051$$"
 		And I save the window as "$$BankReceipt080005$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create one more Bank receipt from Incoming Payment Order list form
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
@@ -205,10 +208,10 @@ Scenario: _080005 create Bank reciept based on Incoming payment order
 		// 		Then "1C:Enterprise" window is opened
 		// 		And I click "Yes" button
 		// 		And I input "21" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankReceipt0800051$$"
 		And I save the window as "$$BankReceipt080005$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check movements by register Planing cash transactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
 		And "List" table contains lines
@@ -259,10 +262,10 @@ Scenario: _080006 create Outgoing payment order
 		And I activate "Amount" field in "PaymentList" table
 		And I input "3 000,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberOutgoingPaymentOrder080006$$"
 	And I save the window as "$$OutgoingPaymentOrder080006$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And "List" table contains lines
 		| Number | Company       | Account           | Currency |
 		| 1      |  Main Company |  Bank account, TRY | TRY      |
@@ -358,10 +361,10 @@ Scenario: _080010 create Bank payment based on Outgoing payment order
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "20" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankPayment08000101$$"
 		And I save the window as "$$BankPayment08000101$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create Bank payment from Outgoing payment order list
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
@@ -379,10 +382,10 @@ Scenario: _080010 create Bank payment based on Outgoing payment order
 		// 		Then "1C:Enterprise" window is opened
 		// 		And I click "Yes" button
 		// 		And I input "21" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankPayment08000102$$"
 		And I save the window as "$$BankPayment08000102$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check movements by register Planing cash transactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
 		And "List" table contains lines

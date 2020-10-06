@@ -128,7 +128,7 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 			And I activate "Quantity" field in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create second Internal supply request from Store 02
 		* Open a creation form Internal Supply Request
 			Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
@@ -196,7 +196,7 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 			And I activate "Quantity" field in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create third Internal supply request from Store 03
 		* Open a creation form Internal Supply Request
 			Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
@@ -264,7 +264,7 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 			And I activate "Quantity" field in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 
 Scenario: _295401 check filling in Inventory transfer order when creating based on two Internal supply requests with the same warehouse

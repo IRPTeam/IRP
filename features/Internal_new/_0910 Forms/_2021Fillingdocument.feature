@@ -173,10 +173,10 @@ Scenario: _0154100 preparation ( filling documents)
 				// 	Then "1C:Enterprise" window is opened
 				// 	And I click "Yes" button
 				// 	And I input "10" text in "Number" field
-				And I click "Post" button
+				And I click the button named "FormPost"
 				And I save the value of "Number" field as "$$NumberCashTransferOrder01541001$$"
 				And I save the window as "$$CashTransferOrder01541001$$"
-				And I click "Post and close" button
+				And I click the button named "FormPostAndClose"
 				And Delay 5
 				* Check creation
 					Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -231,10 +231,10 @@ Scenario: _0154100 preparation ( filling documents)
 				// 	Then "1C:Enterprise" window is opened
 				// 	And I click "Yes" button
 				// 	And I input "11" text in "Number" field
-				And I click "Post" button
+				And I click the button named "FormPost"
 				And I save the value of "Number" field as "$$NumberCashTransferOrder01541002$$"
 				And I save the window as "$$CashTransferOrder01541002$$"
-				And I click "Post and close" button
+				And I click the button named "FormPostAndClose"
 				And Delay 5
 				* Check creation
 					Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -274,10 +274,10 @@ Scenario: _0154100 preparation ( filling documents)
 				// 	Then "1C:Enterprise" window is opened
 				// 	And I click "Yes" button
 				// 	And I input "13" text in "Number" field
-				And I click "Post" button
+				And I click the button named "FormPost"
 				And I save the value of "Number" field as "$$NumberCashTransferOrder01541003$$"
 				And I save the window as "$$CashTransferOrder01541003$$"
-				And I click "Post and close" button
+				And I click the button named "FormPostAndClose"
 				And Delay 5
 				* Check creation
 					Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -318,10 +318,10 @@ Scenario: _0154100 preparation ( filling documents)
 					// 	Then "1C:Enterprise" window is opened
 					// 	And I click "Yes" button
 					// 	And I input "14" text in "Number" field
-					And I click "Post" button
+					And I click the button named "FormPost"
 					And I save the value of "Number" field as "$$NumberCashTransferOrder01541004$$"
 					And I save the window as "$$CashTransferOrder01541004$$"
-					And I click "Post and close" button
+					And I click the button named "FormPostAndClose"
 					And Delay 5
 					* Check creation
 						Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -1927,7 +1927,7 @@ Scenario: _0154107 check filling in and re-filling Cash reciept (transaction typ
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
 		And I select current line in "List" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		If user messages contain "Specify a base document for line 1." string Then
 
 Scenario: _0154108 total amount calculation in Cash reciept
@@ -2137,7 +2137,7 @@ Scenario: _0154109 check filling in and re-filling Bank reciept (transaction typ
 			| 'Description'           |
 			| 'Basic Partner terms, TRY' |
 		And I select current line in "List" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		If user messages contain "Specify a base document for line 1." string Then
 
 Scenario: _0154110 total amount calculation in Bank reciept
@@ -2370,7 +2370,7 @@ Scenario: _0154111 check filling in and re-filling Cash payment (transaction typ
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		If user messages contain "Specify a base document for line 1." string Then
 
 Scenario: _0154112 total amount calculation in Cash payment
@@ -2590,7 +2590,7 @@ Scenario: _0154113 check filling in and re-filling Bank payment (transaction typ
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
 		And I select current line in "List" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		If user messages contain "Specify a base document for line 1." string Then
 
 Scenario: _0154114 total amount calculation in Bank payment
@@ -2820,7 +2820,7 @@ Scenario: _01541151 check that the amount sent and received in Cash transfer ord
 			And I select current line in "List" table
 			And I input "120,00" text in "Receive amount" field
 		* Check message when post document
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then I wait that in user messages the "Currency transfer is available only when amounts are equal." substring will appear in 10 seconds
 			And I close all client application windows
 	* Check cash transfer from cash account to bank account
@@ -2851,7 +2851,7 @@ Scenario: _01541151 check that the amount sent and received in Cash transfer ord
 			And I select current line in "List" table
 			And I input "120,00" text in "Receive amount" field
 		* Check message when post document
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then I wait that in user messages the "Currency transfer is available only when amounts are equal." substring will appear in 10 seconds
 			And I close all client application windows
 	* Check cash transfer from bank account to cash account
@@ -2882,7 +2882,7 @@ Scenario: _01541151 check that the amount sent and received in Cash transfer ord
 			And I select current line in "List" table
 			And I input "120,00" text in "Receive amount" field
 		* Check message when post document
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then I wait that in user messages the "Currency transfer is available only when amounts are equal." substring will appear in 10 seconds
 			And I close all client application windows
 	* Check cash transfer between two bank account
@@ -2908,7 +2908,7 @@ Scenario: _01541151 check that the amount sent and received in Cash transfer ord
 			And I select current line in "List" table
 			And I input "120,00" text in "Receive amount" field
 		* Check message when post document
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then I wait that in user messages the "Currency transfer is available only when amounts are equal." substring will appear in 10 seconds
 			And I close all client application windows
 
@@ -3587,7 +3587,7 @@ Scenario: _0154122 check filling in and re-filling Reconcilation statement
 		And in the table "Transactions" I click "Fill" button
 	* Check that the transaction table is filled out
 		And While the number of "Transactions" table lines "больше" 0 Then
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And "Transactions" table does not contain lines
 			| 'Document'            | 'Credit'     | 'Debit'     |
 			| '$$PurchaseInvoice018001$$' | '137 000,00' | ''          |
@@ -3608,7 +3608,7 @@ Scenario: _0154122 check filling in and re-filling Reconcilation statement
 		And "Transactions" table contains lines
 			| 'Document'            | 'Credit'     | 'Debit'     |
 			| '$$PurchaseInvoice29604$$' | '13 000,00' | ''          |
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check re-filling when re-selecting a currency
 		And I click Select button of "Currency" field
 		And I go to line in "List" table
@@ -3644,7 +3644,7 @@ Scenario: _0154122 check filling in and re-filling Reconcilation statement
 			| 'Main Company' |
 		And I select current line in "List" table
 		And While the number of "Transactions" table lines "больше" 0 Then
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I close all client application windows
 
 
@@ -3737,7 +3737,7 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when post Bank Payment
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Q"
@@ -3760,7 +3760,7 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "Number"
 	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
@@ -3818,7 +3818,7 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form (Bank Receipt posted)
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Q"
@@ -3840,7 +3840,7 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
@@ -3900,7 +3900,7 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
 		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Cash Payment posted
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Q"
@@ -3921,7 +3921,7 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
@@ -3981,7 +3981,7 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 			| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
 		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Cash Receipt posted 
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Q"
@@ -4002,7 +4002,7 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
@@ -4056,7 +4056,7 @@ Scenario:  _0154129 check the selection by Planing transaction basis in BankPaym
 		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Bank Payment posted
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Q"
@@ -4077,7 +4077,7 @@ Scenario:  _0154129 check the selection by Planing transaction basis in BankPaym
 		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
@@ -4131,7 +4131,7 @@ Scenario:  _0154130 check the selection by Planing transaction basis in Bank Rec
 		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
 		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Bank Receipt posted
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Q"
@@ -4152,7 +4152,7 @@ Scenario:  _0154130 check the selection by Planing transaction basis in Bank Rec
 		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
@@ -4249,7 +4249,7 @@ Scenario: _053014 check the display of details on the form Bank payment with the
 # 		Then "1C:Enterprise" window is opened
 # 		And I click "Yes" button
 # 		And I input "14" text in "Number" field
-# 		And I click "Post" button
+# 		And I click the button named "FormPost"
 # 	* Re-select partner and check of data cleansing in the tabular section
 # 		And I click Select button of "Partner" field
 # 		And I go to line in "List" table
@@ -4672,7 +4672,7 @@ Scenario: _0154150 check function DontCalculateRow in the Purchase order
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       | 'Store 03' |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       | 'Store 03' |
@@ -4751,7 +4751,7 @@ Scenario: _0154150 check function DontCalculateRow in the Purchase order
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "730,13"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 744,00"
 			And I select "Approved" exact value from "Status" drop-down list
-			And I click "Post" button
+			And I click the button named "FormPost"
 	* Check filling the recalculation check box when creating Purchase invoice bases on Purchase order
 		And I click "Purchase invoice" button
 		And "ItemList" table contains lines
@@ -4851,7 +4851,7 @@ Scenario: _0154151 check function DontCalculateRow in the Purchase invoice
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       | 'Store 03' |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       | 'Store 03' |
@@ -4928,7 +4928,7 @@ Scenario: _0154151 check function DontCalculateRow in the Purchase invoice
 			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "4 011,87"
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "730,13"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 744,00"
-			And I click "Post" button
+			And I click the button named "FormPost"
 		* Check filling the recalculation check box when creating Purchase return / Purchase return order bases on Purchase invoice
 			And I click "Purchase return order" button
 			And "ItemList" table contains lines
@@ -5031,7 +5031,7 @@ Scenario: _0154152 check function DontCalculateRow in the Purchase return
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       | 'Store 03' |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       | 'Store 03' |
@@ -5108,7 +5108,7 @@ Scenario: _0154152 check function DontCalculateRow in the Purchase return
 			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "4 011,87"
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "730,13"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 744,00"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 						
 
 Scenario: _0154153 check function DontCalculateRow in the Purchase return order
@@ -5198,7 +5198,7 @@ Scenario: _0154153 check function DontCalculateRow in the Purchase return order
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       | 'Store 03' |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     | 'Store 03' |
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       | 'Store 03' |
@@ -5276,7 +5276,7 @@ Scenario: _0154153 check function DontCalculateRow in the Purchase return order
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "730,13"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 744,00"
 			And I select "Approved" exact value from "Status" drop-down list				
-			And I click "Post" button
+			And I click the button named "FormPost"
 	* Check filling the recalculation check box when creating Purchase return bases on Purchase return order
 		And I click "Purchase return" button
 		And "ItemList" table contains lines
@@ -5378,7 +5378,7 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 				| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Price type'        | 'SalesTax' | 'Tax amount' | 'Q'     | 'Offers amount' | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '18%' | 'Trousers' | '400,00' | '38/Yellow' | 'Basic Price Types' | '1%'       | '130,00'     | '2,000' | ''              | 'pcs'  | 'Yes'                | '670,00'     | '801,00'       | 'Store 01' |
 				| '18%' | 'Dress'    | '550,00' | 'L/Green'   | 'Basic Price Types' | '1%'       | '446,72'     | '5,000' | ''              | 'pcs'  | 'No'                 | '2 303,28'   | '2 750,00'     | 'Store 01' |
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And "ItemList" table contains lines
 				| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Price type'        | 'SalesTax' | 'Tax amount' | 'Q'     | 'Offers amount' | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '18%' | 'Trousers' | '400,00' | '38/Yellow' | 'Basic Price Types' | '1%'       | '130,00'     | '2,000' | ''              | 'pcs'  | 'Yes'                | '670,00'     | '801,00'       | 'Store 01' |
@@ -5468,7 +5468,7 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 941,00"
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "750,30"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 691,80"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Check filling the recalculation check box when creating Sales invoice bases on Sales order
 		And I click "Sales invoice" button
 		And "ItemList" table contains lines
@@ -5571,7 +5571,7 @@ Scenario: _0154155 check function DontCalculateRow in the Sales invoice
 				| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Price type'        | 'SalesTax' | 'Tax amount' | 'Q'     | 'Offers amount' | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '18%' | 'Trousers' | '400,00' | '38/Yellow' | 'Basic Price Types' | '1%'       | '130,00'     | '2,000' | ''              | 'pcs'  | 'Yes'                | '670,00'     | '801,00'       | 'Store 01' |
 				| '18%' | 'Dress'    | '550,00' | 'L/Green'   | 'Basic Price Types' | '1%'       | '446,72'     | '5,000' | ''              | 'pcs'  | 'No'                 | '2 303,28'   | '2 750,00'     | 'Store 01' |
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And "ItemList" table contains lines
 				| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Price type'        | 'SalesTax' | 'Tax amount' | 'Q'     | 'Offers amount' | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '18%' | 'Trousers' | '400,00' | '38/Yellow' | 'Basic Price Types' | '1%'       | '130,00'     | '2,000' | ''              | 'pcs'  | 'Yes'                | '670,00'     | '801,00'       | 'Store 01' |
@@ -5660,7 +5660,7 @@ Scenario: _0154155 check function DontCalculateRow in the Sales invoice
 			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 941,00"
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "750,30"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 691,80"
-			And I click "Post" button
+			And I click the button named "FormPost"
 	* Check filling the recalculation check box when creating Sales return / Sales return order bases on Sales invoice
 		And I click "Sales return" button
 		And "ItemList" table contains lines
@@ -5767,7 +5767,7 @@ Scenario: _0154156 check function DontCalculateRow in the Sales return
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       |
@@ -5844,7 +5844,7 @@ Scenario: _0154156 check function DontCalculateRow in the Sales return
 			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "4 011,87"
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "730,13"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 744,00"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 
 
 Scenario: _0154157 check function DontCalculateRow in the Sales return order
@@ -5937,7 +5937,7 @@ Scenario: _0154157 check function DontCalculateRow in the Sales return order
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       |
@@ -6015,7 +6015,7 @@ Scenario: _0154157 check function DontCalculateRow in the Sales return order
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "730,13"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 744,00"
 			And I select "Approved" exact value from "Status" drop-down list
-			And I click "Post" button
+			And I click the button named "FormPost"
 	* Check filling the recalculation check box when creating Sales return on Sales return order
 		And I click "Sales return" button
 		And "ItemList" table contains lines

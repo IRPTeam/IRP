@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@CashManagement
+@BankCashDocuments
 
 Feature: create Bank payment
 
@@ -194,10 +194,10 @@ Scenario: _053001 create Bank payment (independently)
 			And I activate "Amount" field in "PaymentList" table
 			And I input "1000,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankPayment0530011$$"
 		And I save the window as "$$BankPayment0530011$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		* Check creation
 			And "List" table contains lines
 				| 'Number' |
@@ -263,10 +263,10 @@ Scenario: _053001 create Bank payment (independently)
 			And I activate "Amount" field in "PaymentList" table
 			And I input "20,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankPayment0530012$$"
 		And I save the window as "$$BankPayment0530012$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		* Check creation a Cash receipt
 			And "List" table contains lines
 				| 'Number' |
@@ -320,10 +320,10 @@ Scenario: _053001 create Bank payment (independently)
 			And I activate "Amount" field in "PaymentList" table
 			And I input "150,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankPayment0530013$$"
 		And I save the window as "$$BankPayment0530013$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		* Check creation a Bank payment
 			And "List" table contains lines
 				| 'Number' |

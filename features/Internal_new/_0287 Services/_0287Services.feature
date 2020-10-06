@@ -180,10 +180,10 @@ Scenario: _029103 create a Purchase order for service
 		And I select current line in "ItemList" table
 		And I input "1000,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder029103$$"
 		And I save the window as "$$PurchaseOrder029103$$"
-		And I click "Post" button
+		And I click the button named "FormPost"
 
 
 Scenario: _029104 create a Purchase invoice for service (based on Purchase order)
@@ -203,10 +203,10 @@ Scenario: _029104 create a Purchase invoice for service (based on Purchase order
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "123" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberPurchaseInvoice029104$$"
 	And I save the window as "$$PurchaseInvoice029104$$"
-	And I click "Post" button
+	And I click the button named "FormPost"
 	* Check movements
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PurchaseTurnovers"
 		And "List" table contains lines
@@ -336,10 +336,10 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			And I activate "Price" field in "ItemList" table
 			And I input "200,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice029106$$"
 			And I save the window as "$$PurchaseInvoice029106$$"
-			And I click "Post" button
+			And I click the button named "FormPost"
 		* Check document movements using a report
 			And I click "Registrations report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -483,10 +483,10 @@ Scenario: _029107 create a Sales order for service and product (Store doesn't us
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "700" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesOrder029107$$"
 		And I save the window as "$$SalesOrder029107$$"
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check movements
 		And I click "Registrations report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -598,10 +598,10 @@ Scenario: _029108 create a Sales order for service and product (Store use Shipme
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "701" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesOrder029108$$"
 		And I save the window as "$$SalesOrder029108$$"
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check movements
 		And I click "Registrations report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -715,10 +715,10 @@ Scenario: _029109 create a Sales order for service and product (Store doesn't us
 		// Then "1C:Enterprise" window is opened
 		// And I click "Yes" button
 		// And I input "702" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesOrder029109$$"
 		And I save the window as "$$SalesOrder029109$$"
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check movements
 		And I click "Registrations report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -845,10 +845,10 @@ Scenario: _029110 create a Sales order for service and product (Store use Shipme
 		// Then "1C:Enterprise" window is opened
 		// And I click "Yes" button
 		// And I input "703" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesOrder029110$$"
 		And I save the window as "$$SalesOrder029110$$"
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check movements
 		And I click "Registrations report" button
 		And "ResultTable" spreadsheet document contains lines:

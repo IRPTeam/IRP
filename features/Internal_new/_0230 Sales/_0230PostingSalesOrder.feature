@@ -122,7 +122,7 @@ Scenario: _023014 check movements by status and status history of a Sales Order 
 	* Change status to Wait (doesn't post)
 		And I click "Decoration group title collapsed picture" hyperlink
 		And I select "Wait" exact value from "Status" drop-down list
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	* Check the absence of movements Sales Order
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
 		And "List" table does not contain lines
@@ -151,7 +151,7 @@ Scenario: _023014 check movements by status and status history of a Sales Order 
 	* Change sales order status to Approved
 		And I click "Decoration group title collapsed picture" hyperlink
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check history by status
 		And I click "History" hyperlink
 		And "List" table contains lines
@@ -159,7 +159,7 @@ Scenario: _023014 check movements by status and status history of a Sales Order 
 			| '$$SalesOrder023001$$' | 'Wait'     |
 			| '$$SalesOrder023001$$' | 'Approved' |
 		And I close current window
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check document movements
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
 		And "List" table contains lines
@@ -303,7 +303,7 @@ Scenario: _023106 check the form of selection of items (sales order)
 	When check the product selection form with price information in Sales order
 	And in the table "ItemList" I click "% Offers" button
 	And in the table "Offers" I click the button named "FormOK"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	* Check Sales order Saving
 		And "List" table contains lines
 		| 'Currency'  | 'Partner'     | 'Status'   | 'Σ'         |

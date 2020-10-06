@@ -118,10 +118,10 @@ Scenario: _022001 create document Purchase return order, store use Shipment conf
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "1" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberPurchaseReturnOrder022001$$"
 	And I save the window as "$$PurchaseReturnOrder022001$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close current window
 	And I close current window
 	* Check for no movements in the registers
@@ -153,7 +153,7 @@ Scenario: _022001 create document Purchase return order, store use Shipment conf
 		And I select current line in "List" table
 		And I click "Decoration group title collapsed picture" hyperlink
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check history by status
 		And I click "History" hyperlink
 		And "List" table contains lines
@@ -161,7 +161,7 @@ Scenario: _022001 create document Purchase return order, store use Shipment conf
 			| '$$PurchaseReturnOrder022001$$' | 'Wait'     |
 			| '$$PurchaseReturnOrder022001$$' | 'Approved' |
 		And I close current window
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 
 Scenario: _022002 check movements of the document Purchase return order in the OrderBalance register (store doesn't use Shipment confirmation) 
@@ -234,10 +234,10 @@ Scenario: _022006 create document Purchase return order, store doesn't use Shipm
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "2" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberPurchaseReturnOrder022006$$"
 	And I save the window as "$$PurchaseReturnOrder022006$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close current window
 
 Scenario: _022007 check movements of the document Purchase return order in the OrderBalance (store doesn't use Shipment confirmation)

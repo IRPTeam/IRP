@@ -59,10 +59,10 @@ Scenario: _2050001 preparation
 			And I activate "Amount" field in "PaymentList" table
 			And I input "1000,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$BankPayment2050001$$"
 		And I save the value of "Number" field as "$$NumberBankPayment2050001$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create Bank receipt without reference to the partner term and the document
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
@@ -96,10 +96,10 @@ Scenario: _2050001 preparation
 			And I activate "Amount" field in "PaymentList" table
 			And I input "20000,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$BankReceipt2050001$$"
 		And I save the value of "Number" field as "$$NumberBankReceipt2050001$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create Cash receipt linked by document
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
@@ -157,10 +157,10 @@ Scenario: _2050001 preparation
 			And I activate "Amount" field in "PaymentList" table
 			And I input "5000,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$CashReceipt2050001$$"
 		And I save the value of "Number" field as "$$NumberCashReceipt2050001$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create Cash payment without reference to the partner term and the document
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And I click the button named "FormCreate"
@@ -199,10 +199,10 @@ Scenario: _2050001 preparation
 			And I activate "Amount" field in "PaymentList" table
 			And I input "5000,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$CashPayment2050001$$"
 		And I save the value of "Number" field as "$$NumberCashPayment2050001$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check or create PurchaseReturn300301
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		If "List" table does not contain lines Then
@@ -259,7 +259,7 @@ Scenario: 2050002 check filling in Reconcilation statement
 		| '*'    | '$$PurchaseInvoice2040005$$'  | '13 570,00' | ''          |
 		| '*'    | '$$PurchaseInvoice20400051$$' | '4 212,60'  | ''          |
 	* Check document
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Clear movements
 		And I click "Clear posting" button
 		And I close all client application windows
@@ -390,7 +390,7 @@ Scenario: _2050005 check the movements of the Invoice match document with the ve
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "1" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$InvoiceMatch2050005$$"
 		And I save the value of "Number" field as "$$NumberInvoiceMatch2050005$$"
 	* Check movements
@@ -475,7 +475,7 @@ Scenario: _2050006 check the movements of the Invoice match document with the cu
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "2" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$InvoiceMatch2050006$$"
 		And I save the value of "Number" field as "$$NumberInvoiceMatch2050006$$"
 	* Check movements
@@ -566,8 +566,8 @@ Scenario: _2050007 check the movements of the Invoice match document with the cl
 	// 	And I click "Yes" button
 	// 	And I input "3" text in "Number" field
 	* Check movements
-		And I click "Post" button
-		And I click "Post" button
+		And I click the button named "FormPost"
+		And I click the button named "FormPost"
 		And I save the window as "$$InvoiceMatch2050007$$"
 		And I save the value of "Number" field as "$$NumberInvoiceMatch2050007$$"
 		And I click "Registrations report" button

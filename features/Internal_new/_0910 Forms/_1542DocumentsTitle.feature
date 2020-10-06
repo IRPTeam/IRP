@@ -302,7 +302,7 @@ Scenario: _053012 check the display of the header of the collapsible group in Ba
 Scenario: _056006 check the display of the header of the collapsible group in Invoice Match
 	Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
 	When check the display of the header of the collapsible group in invoice match
-	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Operation type: With customer   Company: Main Company   Partner: Kalipso   Legal name: Company Kalipso   Partner term: Basic Partner terms, TRY   " text
+	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Operation type: With customer   Company: Main Company   Partner: Kalipso   Legal name: Company Kalipso   Partner term: Basic Partner terms, without VAT   " text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
         |'And I click Select button of  "Company" field'|

@@ -210,10 +210,10 @@ Scenario: _018012 Purchase invoice creation on set, store does not use Goods rec
 		And I input "20,000" text in "Q" field of "ItemList" table
 		And I input "250,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice018012$$"
 		And I save the window as "$$PurchaseInvoice018012$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check movements by register
 		Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
 		And "List" table contains lines

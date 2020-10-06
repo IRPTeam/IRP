@@ -66,7 +66,7 @@ Scenario: _033402 range discount calculation by line
 		| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'  | '120,00'        | 'pcs'  | '1 880,00'        |
 		And in the table "ItemList" I click "% Offers" button
 		And I click "OK" button
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And "List" table contains lines
 		| 'Partner'    | 'Σ'     |
 		| 'Ferron BP'  |  '6 820,00'|
@@ -109,7 +109,7 @@ Scenario: _033403 check of the minimum percentage of the range discount by lines
 				| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'  | '100,00'        | 'pcs' | '1 900,00'        |
 			And in the table "ItemList" I click "% Offers" button
 			And I click "OK" button
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 			And "List" table contains lines
 				| 'Partner'    | 'Σ'     |
 				| 'Ferron BP'  |  '6 944,00'|
@@ -152,7 +152,7 @@ Scenario: _033404 check of the maximum percentage of the range discount by lines
 				| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'  | '140,00'        | 'pcs'  | '1 860,00'        |
 			And in the table "ItemList" I click "% Offers" button
 			And I click "OK" button
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 			And "List" table contains lines
 				| 'Partner'    | 'Σ'     |
 				| 'Ferron BP'  |  '6 540,00'|
@@ -190,7 +190,7 @@ Scenario: _033405 Range discount and Special price discount calculation
 			| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'  | '540,00'        | 'pcs'  | '1 460,00'        |
 		And in the table "ItemList" I click "% Offers" button
 		And I click "OK" button
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And "List" table contains lines
 				| 'Partner'    | 'Σ'     |
 				| 'Ferron BP'  |  '6 400,00'|
@@ -234,7 +234,7 @@ Scenario: _033406 check the discount order Range discount and crowding out 2 pri
 			| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'  | '725,00'        | 'pcs'  | '1 275,00'        |
 		And in the table "ItemList" I click "% Offers" button
 		And I click "OK" button
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And "List" table contains lines
 				| 'Partner'    | 'Σ'     |
 				| 'Ferron BP'  |  '5 165,00'|
@@ -278,7 +278,7 @@ Scenario: _033407 range discount recalculation when the quantity of items in the
 		| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '30,000' | '140,00'        | 'pcs'  | '11 860,00'       |
 	And in the table "ItemList" I click "% Offers" button
 	And I click "OK" button
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And "List" table contains lines
 		| 'Partner'    | 'Σ'     |
 		| 'Ferron BP'  |  '17 060,00'|

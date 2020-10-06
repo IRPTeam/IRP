@@ -263,7 +263,7 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I activate "Price" field in "ItemKeyList" table
 		And I input "540,00" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click the button named "ItemKeyListAdd"
 		And I click choice button of "Item" attribute in "ItemKeyList" table
 		And I go to line in "List" table
@@ -295,10 +295,10 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I input "3 000,00" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 	* Posting document
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$PriceListBasicPriceByItemKey016001$$"
 		And I save the value of the field named "Number" as "$$NumberPriceListBasicPriceByItemKey016001$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And Delay 5
 	* Check document saving
 		Given I open hyperlink "e1cib/list/Document.PriceList"
@@ -564,10 +564,10 @@ Scenario: _016002 base price fill and special price fill (not incl. VAT)
 		And I input "648,15" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 	* Posting document
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$PriceListBasicPriceByItemKey016002$$"
 		And I save the value of the field named "Number" as "$$NumberPriceListBasicPriceByItemKey016002$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And Delay 5
 	* Check document saving
 		Given I open hyperlink "e1cib/list/Document.PriceList"
@@ -650,10 +650,10 @@ Scenario: _016010 check dependent prices calculation
 			| 'Dress'      | '605,00'   | 'S/Yellow'  |
 			| 'Dress'      | '572,00'   | 'XS/Blue'   |
 	* Posting document
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$PriceListBasicPriceByItemKey016010$$"
 		And I save the value of the field named "Number" as "$$NumberPriceListBasicPriceByItemKey016010$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And Delay 5
 	* Check document saving
 		Given I open hyperlink "e1cib/list/Document.PriceList"

@@ -168,7 +168,7 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		When I Check the steps for Exception
         |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
 	* Post Retail sales receipt and check movements in the register Sales turnovers
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$RetailSalesReceipt092002$$"
 		And I save the value of the field named "Number" as "$$NumberRetailSalesReceipt092002$$"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
@@ -188,7 +188,7 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 			| 'Item'     | 'Item key'  | 'Q'     |
 			| 'Trousers' | '38/Yellow' | '1,000' |
 		And I input "3,000" text in "Q" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Quantity [3] does not match the quantity [1] by serial/lot numbers" substring will appear in "30" seconds
 		* Add one more serial lot number
 			And I go to line in "ItemList" table
@@ -211,7 +211,7 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 			And I input "3,000" text in "Quantity" field of "SerialLotNumbers" table
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Quantity [3] does not match the quantity [4] by serial/lot numbers" substring will appear in "30" seconds
 		* Change serial/lot numbers quantity to 3
 			And I go to line in "ItemList" table
@@ -228,7 +228,7 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button
 	* Post Retail sales receipt and check movements in the register Sales turnovers
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
 		And "List" table contains lines
 			| 'Currency' | 'Recorder'                     | 'Company'      | 'Multi currency movement type' | 'Sales invoice'                                    | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount' |
@@ -257,7 +257,7 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'L/Green'  |
 		And I select current line in "List" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Serial lot number] is empty." substring will appear in "30" seconds
 	* Change item that uses serial lot number to item that doesn't use serial lot number and check user message
 		And I go to line in "ItemList" table
@@ -286,7 +286,7 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		And I activate field named "PaymentsAmount" in "Payments" table
 		And I input "2 550,00" text in the field named "PaymentsAmount" of "Payments" table
 		And I finish line editing in "Payments" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then user message window does not contain messages
 	* Change item that doesn't use serial lot number to item that uses serial lot number and check user message
 		And I go to line in "ItemList" table
@@ -304,7 +304,7 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 			| 'Dress' | 'M/White'  |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Serial lot number] is empty." substring will appear in "30" seconds
 	And I close all client application windows
 	
@@ -344,7 +344,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			| 'Shop 01'     |
 		And I select current line in "List" table	
 	* Post Retail return receipt and check movements in the register Sales turnovers
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$RetailReturnReceipt092003$$"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
 		And "List" table contains lines
@@ -367,7 +367,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			| 'Item'     | 'Item key'  | 'Q'     |
 			| 'Trousers' | '38/Yellow' | '3,000' |
 		And I input "1,000" text in "Q" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Quantity [1] does not match the quantity [3] by serial/lot numbers" substring will appear in "30" seconds
 		* Delete 1 serial lot number
 			And I go to line in "ItemList" table
@@ -380,7 +380,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 				| '1,000'    | '99098809009999'    |
 			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersContextMenuDelete"
 			And I click "Ok" button
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Quantity [1] does not match the quantity [2] by serial/lot numbers" substring will appear in "30" seconds
 		* Change serial/lot numbers quantity to 3
 			And I go to line in "ItemList" table
@@ -403,7 +403,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			And I finish line editing in "Payments" table
 			And I move to "Item list" tab			
 	* Post Retail sales receipt and check movements in the register Sales turnovers
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
 		And "List" table contains lines
 		| 'Currency' | 'Recorder'                      | 'Company'      | 'Multi currency movement type' | 'Sales invoice'                | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount'  |
@@ -432,7 +432,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'L/Green'  |
 		And I select current line in "List" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Serial lot number] is empty." substring will appear in "30" seconds
 	* Change item that uses serial lot number to item that doesn't use serial lot number and check user message
 		And I go to line in "ItemList" table
@@ -456,7 +456,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I input "2 450,00" text in "Amount" field of "Payments" table
 		And I finish line editing in "Payments" table
 		And I move to "Item list" tab
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then user message window does not contain messages
 	* Change item that doesn't use serial lot number to item that uses serial lot number and check user message
 		And I go to line in "ItemList" table
@@ -474,7 +474,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			| 'Dress' | 'M/White'  |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Serial lot number] is empty." substring will appear in "30" seconds
 	And I close all client application windows
 
@@ -563,7 +563,7 @@ Scenario: _092004 check serial lot number in the Sales invoice
 		When I Check the steps for Exception
         |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
 	* Post Retail sales receipt and check movements in the register Sales turnovers
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$SalesInvoice092004$$"
 		And I save the value of the field named "Number" as "$$NumberSalesInvoice092004$$"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
@@ -583,7 +583,7 @@ Scenario: _092004 check serial lot number in the Sales invoice
 			| 'Item'     | 'Item key'  | 'Q'     |
 			| 'Trousers' | '38/Yellow' | '1,000' |
 		And I input "3,000" text in "Q" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Quantity [3] does not match the quantity [1] by serial/lot numbers" substring will appear in "30" seconds
 		* Add one more serial lot number
 			And I go to line in "ItemList" table
@@ -606,7 +606,7 @@ Scenario: _092004 check serial lot number in the Sales invoice
 			And I input "3,000" text in "Quantity" field of "SerialLotNumbers" table
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Quantity [3] does not match the quantity [4] by serial/lot numbers" substring will appear in "30" seconds
 		* Change serial/lot numbers quantity to 3
 			And I go to line in "ItemList" table
@@ -623,7 +623,7 @@ Scenario: _092004 check serial lot number in the Sales invoice
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button
 	* Post Retail sales receipt and check movements in the register Sales turnovers
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
 		And "List" table contains lines
 			| 'Currency' | 'Recorder'               | 'Company'      | 'Multi currency movement type' | 'Sales invoice'          | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount' |
@@ -652,7 +652,7 @@ Scenario: _092004 check serial lot number in the Sales invoice
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'L/Green'  |
 		And I select current line in "List" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Serial lot number] is empty." substring will appear in "30" seconds
 	* Change item that uses serial lot number to item that doesn't use serial lot number and check user message
 		And I go to line in "ItemList" table
@@ -670,7 +670,7 @@ Scenario: _092004 check serial lot number in the Sales invoice
 			| 'Boots' | '37/18SD'  |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then user message window does not contain messages
 	* Change item that doesn't use serial lot number to item that uses serial lot number and check user message
 		And I go to line in "ItemList" table
@@ -688,7 +688,7 @@ Scenario: _092004 check serial lot number in the Sales invoice
 			| 'Dress' | 'M/White'  |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Serial lot number] is empty." substring will appear in "30" seconds
 	And I close all client application windows
 
@@ -718,7 +718,7 @@ Scenario: _092005 check serial lot number in the Sales return
 		When I Check the steps for Exception
         |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
 	* Post Retail return receipt and check movements in the register Sales turnovers
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$SalesReturn092005$$"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
 		And "List" table contains lines
@@ -741,7 +741,7 @@ Scenario: _092005 check serial lot number in the Sales return
 			| 'Item'     | 'Item key'  | 'Q'     |
 			| 'Trousers' | '38/Yellow' | '3,000' |
 		And I input "1,000" text in "Q" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Quantity [1] does not match the quantity [3] by serial/lot numbers" substring will appear in "30" seconds
 		* Delete 1 serial lot number
 			And I go to line in "ItemList" table
@@ -754,7 +754,7 @@ Scenario: _092005 check serial lot number in the Sales return
 				| '1,000'    | '99098809009910'    |
 			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersContextMenuDelete"
 			And I click "Ok" button
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Quantity [1] does not match the quantity [2] by serial/lot numbers" substring will appear in "30" seconds
 		* Change serial/lot numbers quantity to 3
 			And I go to line in "ItemList" table
@@ -771,7 +771,7 @@ Scenario: _092005 check serial lot number in the Sales return
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button
 	* Post Retail sales receipt and check movements in the register Sales turnovers
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
 		And Delay 3
 		And "List" table contains lines
@@ -801,7 +801,7 @@ Scenario: _092005 check serial lot number in the Sales return
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'L/Green'  |
 		And I select current line in "List" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Serial lot number] is empty." substring will appear in "30" seconds
 	* Change item that uses serial lot number to item that doesn't use serial lot number and check user message
 		And I go to line in "ItemList" table
@@ -819,7 +819,7 @@ Scenario: _092005 check serial lot number in the Sales return
 			| 'Boots' | '37/18SD'  |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then user message window does not contain messages
 	* Change item that doesn't use serial lot number to item that uses serial lot number and check user message
 		And I go to line in "ItemList" table
@@ -837,7 +837,7 @@ Scenario: _092005 check serial lot number in the Sales return
 			| 'Dress' | 'M/White'  |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Serial lot number] is empty." substring will appear in "30" seconds
 	And I close all client application windows
 

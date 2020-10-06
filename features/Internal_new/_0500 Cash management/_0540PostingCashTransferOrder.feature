@@ -89,10 +89,10 @@ Scenario: _054001 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "1" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054001$$"
 	And I save the window as "$$CashTransferOrder054001$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And Delay 5
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -153,10 +153,10 @@ Scenario: _054003 create Cash payment and Cash reciept based on Cash transfer or
 		And "PaymentList" table contains lines
 		| 'Planning transaction basis'    | 'Amount' |
 		| '$$CashTransferOrder054001$$'             | '500,00' |
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberCashPayment054003$$"
 	And I save the window as "$$CashPayment054003$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And Delay 5
 	* Creation of Cash receipt for a partial amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -173,10 +173,10 @@ Scenario: _054003 create Cash payment and Cash reciept based on Cash transfer or
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "4" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashReceipt054003$$"
 		And I save the window as "$$CashReceipt054003$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And Delay 5
 	* Creation of Cash receipt for the remaining amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -194,10 +194,10 @@ Scenario: _054003 create Cash payment and Cash reciept based on Cash transfer or
 		And "PaymentList" table contains lines
 		| 'Planning transaction basis'   | 'Amount' |
 		| '$$CashTransferOrder054001$$'      | '100,00'    |
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberCashReceipt0540031$$"
 	And I save the window as "$$CashReceipt0540031$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close all client application windows
 	* Check movement of Cash payment and Cash reciept by register Planing cash transactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
@@ -256,10 +256,10 @@ Scenario: _054004 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "2" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054004$$"
 	And I save the window as "$$CashTransferOrder054004$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And Delay 5
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -295,10 +295,10 @@ Scenario: _054005 create Cash receipt and Cash payment based on Cash transfer or
 			| 'Description' |
 			| 'Daniel Smith' |
 		And I select current line in "List" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberCashPayment054005$$"
 	And I save the window as "$$CashPayment054005$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And Delay 5
 	* Create Cash receipt for the full amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -317,10 +317,10 @@ Scenario: _054005 create Cash receipt and Cash payment based on Cash transfer or
 		And "PaymentList" table contains lines
 		| 'Planning transaction basis'         | 'Partner'            | 'Amount'      | 'Amount exchange' |
 		| '$$CashTransferOrder054004$$'            | 'Daniel Smith'        | '1 150,00'    | '200,00'          |
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberCashReceipt054005$$"
 	And I save the window as "$$CashReceipt054005$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close all client application windows
 	* Check Cash payment and Cash reciept movements by register PlaningCashTransactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
@@ -374,10 +374,10 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "3" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054006$$"
 	And I save the window as "$$CashTransferOrder054006$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And Delay 5
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -400,10 +400,10 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "6" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashPayment054006$$"
 		And I save the window as "$$CashPayment054006$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 	*Post Bank reciept
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -422,10 +422,10 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 			And "PaymentList" table contains lines
 			| 'Amount' | 'Planning transaction basis'  |
 			| '500,00' | '$$CashTransferOrder054006$$' |
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankReceipt054006$$"
 		And I save the window as "$$BankReceipt054006$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check movements by register Planing cash transactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
 		And "List" table contains lines
@@ -472,10 +472,10 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "4" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054007$$"
 	And I save the window as "$$CashTransferOrder054007$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And Delay 5
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -498,10 +498,10 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 			And "PaymentList" table contains lines
 			| 'Planning transaction basis' | 'Amount' |
 			| '$$CashTransferOrder054007$$'     | '100,00' |
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankPayment054007$$"
 		And I save the window as "$$BankPayment054007$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 		And Delay 5
 	* Post Cash receipt
@@ -519,10 +519,10 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 			And "PaymentList" table contains lines
 			| Planning transaction basis  | Amount   |
 			| $$CashTransferOrder054007$$ | '100,00' |
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashReceipt054007$$"
 		And I save the window as "$$CashReceipt054007$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check movements by register PlaningCashTransactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
 		And "List" table contains lines
@@ -579,10 +579,10 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "5" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054008$$"
 	And I save the window as "$$CashTransferOrder054008$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And Delay 5
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -615,10 +615,10 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "7" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashPayment054008$$"
 		And I save the window as "$$CashPayment054008$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 		And Delay 5
 	* Create Cash reciept based on Cash transfer order in partial amount
@@ -637,10 +637,10 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "9" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashReceipt054008$$"
 		And I save the window as "$$CashReceipt054008$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 	* Post Cash payment on the rest of the amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -662,10 +662,10 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "8" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashPayment0540081$$"
 		And I save the window as "$$CashPayment0540081$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Post Cash reciept on the rest of the amount + 10 lirs
 	# Originally 1,150 lire, but the exchange rate of 175 euros cost 1,160 lire. We have to compensate for 10 lire.
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -684,10 +684,10 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "10" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashReceipt0540081$$"
 		And I save the window as "$$CashReceipt0540081$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 		# issued 1150, spent 1160
 		And I close all client application windows
@@ -739,10 +739,10 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "6" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054009$$"
 	And I save the window as "$$CashTransferOrder054009$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And Delay 5
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -775,10 +775,10 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "11" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$CashPayment054009$$"
 		And I save the window as "$$CashPayment054009$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 	* Create Cash reciept based on Cash transfer order in partial amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -800,10 +800,10 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "11" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$CashReceipt054009$$"
 		And I save the window as "$$CashReceipt054009$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 		# issued 1315, spent 1300 #
 		And I close all client application windows
@@ -853,10 +853,10 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "7" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054012$$"
 	And I save the window as "$$CashTransferOrder054012$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And Delay 5
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -884,10 +884,10 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "5" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankPayment054012$$"
 		And I save the window as "$$BankPayment054012"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 	* Create Bank reciept based on Cash transfer order for the full amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -904,10 +904,10 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "5" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankReceipt054012$$"
 		And I save the window as "$$BankReceipt054012"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 		
 
@@ -964,10 +964,10 @@ Scenario: _054014 check message output in case money is transferred from Cash/Ba
 		// 	And I click "Yes" button
 		// 	And I input "101" text in "Number" field
 		* Check the message output and that the document was not created
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberCashTransferOrder0540141$$"
-			And I click "Post and close" button
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
+			And I click the button named "FormPostAndClose"
 			And Delay 5
 			Then I wait that in user messages the "Currency exchange is available only for the same-type accounts (cash accounts or bank accounts)." substring will appear in 30 seconds
 			And I close all client application windows
@@ -1008,9 +1008,9 @@ Scenario: _054014 check message output in case money is transferred from Cash/Ba
 		// 	And I click "Yes" button
 		// 	And I input "102" text in "Number" field
 		* Check the message output and that the document was not created
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberCashTransferOrder0540142$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 			And Delay 5
 			Then I wait that in user messages the "Currency exchange is available only for the same-type accounts (cash accounts or bank accounts)." substring will appear in 30 seconds
 			And I close all client application windows

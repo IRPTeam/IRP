@@ -133,10 +133,10 @@ Scenario: _2040001 preparation
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "9 000" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the window as "$$SalesOrder20400011$$"
 			And I save the value of "Number" field as "$$NumberSalesOrder20400011$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* * Creation of a Sales order on Crystal, Basic Partner terms, TRY, Shipment confirmation before Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -212,10 +212,10 @@ Scenario: _2040001 preparation
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "9 001" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the window as "$$SalesOrder20400012$$"
 			And I save the value of "Number" field as "$$NumberSalesOrder20400012$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Creation of a Sales order on Crystal, Basic Partner terms, TRY, Sales invoice before Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -291,10 +291,10 @@ Scenario: _2040001 preparation
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "9 002" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the window as "$$SalesOrder20400013$$"
 			And I save the value of "Number" field as "$$NumberSalesOrder20400013$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Creation of a Sales order on Crystal, Basic Partner terms, without VAT, TRY, Sales invoice before Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -370,10 +370,10 @@ Scenario: _2040001 preparation
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "9 004" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the window as "$$SalesOrder20400014$$"
 			And I save the value of "Number" field as "$$NumberSalesOrder20400014$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 		* Creation of a Sales order on Crystal, Basic Partner terms, without VAT, TRY, Shipment confirmation before Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -448,10 +448,10 @@ Scenario: _2040001 preparation
 			// And I input "9 005" text in "Number" field
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the window as "$$SalesOrder20400015$$"
 			And I save the value of "Number" field as "$$NumberSalesOrder20400015$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create Shipment confirmation on Crystal without Sales order
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click the button named "FormCreate"
@@ -491,10 +491,10 @@ Scenario: _2040001 preparation
 		// Then "1C:Enterprise" window is opened
 		// And I click "Yes" button
 		// And I input "8 999" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$ShipmentConfirmation0400016$$"
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation20400016$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 	* Create one more Shipment confirmation on Crystal without Sales order
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
@@ -535,10 +535,10 @@ Scenario: _2040001 preparation
 		// Then "1C:Enterprise" window is opened
 		// And I click "Yes" button
 		// And I input "9 000" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$ShipmentConfirmation0400017$$"
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation20400017$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 	* Create Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -548,10 +548,10 @@ Scenario: _2040001 preparation
 			| '$$NumberSalesOrder20400012$$' | 'Crystal' |
 		And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
 		And I move to "Other" tab
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$ShipmentConfirmation20400018$$"
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation20400018$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 	* Creating Purchase order to Crystal by agreement Vendor, TRY, Goods receipt before Purchase invoice №9000
 		* Open form to create Purchase Order
@@ -609,10 +609,10 @@ Scenario: _2040001 preparation
 			And I input "210" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Post document
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the window as "$$PurchaseOrder20400019$$"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder20400019$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create Purchase order to Crystal, Vendor, TRY, Goods receipt before Purchase invoice № 9001
 		* Open form to create Purchase Order
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -668,10 +668,10 @@ Scenario: _2040001 preparation
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "9 001" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the window as "$$PurchaseOrder204000110$$"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder204000110$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create Purchase order to Crystal, Vendor, USD, Goods receipt before Purchase invoice № 9003
 		* Open form to create Purchase Order
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -747,10 +747,10 @@ Scenario: _2040001 preparation
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "9 003" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the window as "$$PurchaseOrder204000111$$"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder204000111$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create Purchase order to Crystal, Vendor, TRY, Purchase invoice before Goods receipt № 9004
 		* Open form to create Purchase Order
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -842,10 +842,10 @@ Scenario: _2040001 preparation
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "9 004" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the window as "$$PurchaseOrder204000112$$"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder204000112$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create Purchase order to Astar, partner term Vendor, TRY, Purchase invoice before Goods receipt № 9005
 		* Open form to create Purchase Order
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -937,10 +937,10 @@ Scenario: _2040001 preparation
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "9 005" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the window as "$$PurchaseOrder204000113$$"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder204000113$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create Purchase order to Astar partner term Vendor, TRY, Purchase invoice before Goods receipt, one Store use Goods receipt the other does not № 9002
 		* Open form to create Purchase Order
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -1042,10 +1042,10 @@ Scenario: _2040001 preparation
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "9 002" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the window as "$$PurchaseOrder204000114$$"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder204000114$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create Purchase order to Astar partner term Vendor, TRY, Goods receipt before Purchase invoice, one Store use Goods receipt the other does not № 9002
 		* Open form to create Purchase Order
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -1106,10 +1106,10 @@ Scenario: _2040001 preparation
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "9 006" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the window as "$$PurchaseOrder204000115$$"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder204000115$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 
 
 
@@ -1176,10 +1176,10 @@ Scenario: _2040002 Sales order selection button in the Sales invoice document
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "9 000" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$SalesInvoice20400022$$"
 		And I save the value of "Number" field as "$$NumberSalesInvoice20400022$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create one more Sales invoice for the remainder
 		* Open a creation form SI 
 			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -1210,10 +1210,10 @@ Scenario: _2040002 Sales order selection button in the Sales invoice document
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "9 002" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the window as "$$SalesInvoice2040002$$"
 			And I save the value of "Number" field as "$$NumberSalesInvoice2040002$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create Sales invoice by partner term Basic Partner terms, without VAT
 		* Open a creation form SI 
 			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -1249,10 +1249,10 @@ Scenario: _2040002 Sales order selection button in the Sales invoice document
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "9 003" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the window as "$$SalesInvoice20400021$$"
 			And I save the value of "Number" field as "$$NumberSalesInvoice20400021$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 
 
 Scenario: _2040003 selection button Shipment confirmation in Sales invoice document
@@ -1456,10 +1456,10 @@ Scenario: _2040005 purchase order selection button in Purchase invoice document
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "9 000" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$PurchaseInvoice2040005$$"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice2040005$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create one more Purchase invoice for the remainder
 		* Open a creation form SI 
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -1490,10 +1490,10 @@ Scenario: _2040005 purchase order selection button in Purchase invoice document
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "9 001" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the window as "$$PurchaseInvoice20400051$$"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice20400051$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create Purchase invoice to Astar by partner term 'Vendor, TRY'
 		* Open a creation form PI 
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -1534,10 +1534,10 @@ Scenario: _2040005 purchase order selection button in Purchase invoice document
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "9 003" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the window as "$$PurchaseInvoice20400052$$"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice20400052$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 
 Scenario: _2040006 button for filling items from the base documents in Goods receipt
 	# No verification by partner term. A currency check is triggered when posted. There is no check at the store.
@@ -1598,7 +1598,7 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 	// 	And I click "Yes" button
 	// 	And I input "9 000" text in "Number" field
 	* Check the display of an error that GR documents with different currencies are selected in GR
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$GoodsReceipt2040006$$"
 		And I save the value of "Number" field as "$$NumberGoodsReceipt2040006$$"
 		Then I wait that in user messages the "Currencies in the base documents must match." substring will appear in 30 seconds
@@ -1616,7 +1616,7 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 			| 'Currency' | 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
 			| 'USD'      | 'Boots' | '36/18SD'  | '60,000'   | 'Store 02' |
 		And I delete a line in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then user message window does not contain messages
 	* Check that the quantity already added by lines is not available for the choice of goods from the bases documents
 		And I go to line in "ItemList" table
@@ -1640,7 +1640,7 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 		| 'Boots, 36/18SD, Boots (12 pcs), 36,000, Store 02' | 'No'  |
 		Then the number of "DocumentsTree" table lines is "меньше или равно" 11
 		And I click "Cancel" button
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create one more Goods receipt for the remainder
 		* Open a creation form GR
 			Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
@@ -1708,10 +1708,10 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "9 001" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the window as "$$GoodsReceipt20400061$$"
 			And I save the value of "Number" field as "$$NumberGoodsReceipt20400061$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	
 Scenario: _2040007 button for filling in base documents in Goods receipt
 	* Open a creation form GR

@@ -169,10 +169,10 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 			And I move to the next attribute
 			And I input "20,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberInventoryTransferOrder020013$$"
 		And I save the window as "$$InventoryTransferOrder020013$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close current window
 		* Check that there is no movement in Wait status
 			Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
@@ -188,7 +188,7 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 			And I select current line in "List" table
 			And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 			And I select "Approved" exact value from "Status" drop-down list
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 			And I close all client application windows
 			Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
 			And "List" table contains lines
@@ -203,7 +203,7 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 			And I select current line in "List" table
 			And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 			And I select "Send" exact value from "Status" drop-down list
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 			And I close current window
 			Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
 			And "List" table contains lines
@@ -218,7 +218,7 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 			And I select current line in "List" table
 			And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 			And I select "Receive" exact value from "Status" drop-down list
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I click "History" hyperlink
 			And "List" table contains lines
 				| 'Object'                         | 'Status'   |
@@ -226,7 +226,7 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 				| '$$InventoryTransferOrder020013$$' | 'Send'     |
 				| '$$InventoryTransferOrder020013$$' | 'Receive'  |
 			And I close current window
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 			Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
 			And "List" table contains lines
 			| 'Recorder'                    |

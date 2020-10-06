@@ -98,9 +98,9 @@ Scenario: _028001 create document Sales return order, store use Goods receipt, b
 		And I select current line in "List" table
 		And I click "Decoration group title collapsed picture" hyperlink
 		And I select "Wait" exact value from "Status" drop-down list
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check history by status
 		And I click "History" hyperlink
 		And "List" table contains lines
@@ -108,7 +108,7 @@ Scenario: _028001 create document Sales return order, store use Goods receipt, b
 			| '$$SalesReturnOrder028001$$' | 'Wait'     |
 			| '$$SalesReturnOrder028001$$' | 'Approved' |
 		And I close current window
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 
 Scenario: _028002 check  Sales  return order movements the OrderBalance register (store use Goods receipt, based on Sales invoice)  (+)
@@ -147,7 +147,7 @@ Scenario: _028004 create document Sales return order, store doesn't use Goods re
 		And I select current line in "List" table
 		And I click "Decoration group title collapsed picture" hyperlink
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check history by status
 		And I click "History" hyperlink
 		And "List" table contains lines
@@ -155,7 +155,7 @@ Scenario: _028004 create document Sales return order, store doesn't use Goods re
 			| '$$SalesReturnOrder028001$$' | 'Wait'     |
 			| '$$SalesReturnOrder028001$$' | 'Approved' |
 		And I close current window
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 
 

@@ -61,7 +61,7 @@ Scenario: creating an order for Lomaniti Basic Agreements (Dress and Boots)
 			And I activate "Q" field in "ItemList" table
 			And I input "5,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 
 
 	
@@ -121,7 +121,7 @@ Scenario: create an order for Ferron BP Basic Agreements, TRY (Dress -10 and Tro
 		And I input "5,000" text in "Q" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 
 
 Scenario: creating a Purchase Order document
@@ -399,7 +399,7 @@ Scenario: creating a Purchase Order document
 		And I input "200,000" text in "Q" field of "ItemList" table
 		And I input "180,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 
 Scenario: change purchase order number to 103
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -412,7 +412,7 @@ Scenario: change purchase order number to 103
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "103" text in "Number" field
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 
 
@@ -434,7 +434,7 @@ Scenario: change purchase order number to 103
 			| Description |
 			| pcs      |
 		And I select current line in "List" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And Delay 5
 
 
@@ -471,7 +471,7 @@ Scenario: change purchase order number to 103
 		And I activate "Q" field in "ItemList" table
 		And I input "100,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 
 
 	Scenario: create purchase invoice without order (Vendor Ferron, USD)
@@ -519,10 +519,10 @@ Scenario: change purchase order number to 103
 		And I activate "Price" field in "ItemList" table
 		And I input "40,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice30004$$"
 		And I save the window as "$$PurchaseInvoice30004$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 	Scenario: create a purchase invoice for the purchase of sets and dimensional grids at the tore 02
 		* Create Purchase Invoice without order
@@ -591,7 +591,7 @@ Scenario: change purchase order number to 103
 			And I activate "Price" field in "ItemList" table
 			And I input "45,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice29604$$"
 			And I save the window as "$$PurchaseInvoice29604$$"
 		* Create Goods receipt
@@ -601,7 +601,7 @@ Scenario: change purchase order number to 103
 					| 'Description'  |
 					| 'Main Company' |
 			And I select current line in "List" table
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 			And I wait "Goods receipt (create)" window closing in 20 seconds
 			And I close all client application windows
 	
@@ -688,7 +688,7 @@ Scenario: change purchase order number to 103
 				And I input "234" text in "Number" field
 			And in the table "ItemList" I click "% Offers" button
 			And in the table "Offers" I click the button named "FormOK"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 			And Delay 2
 
 
@@ -818,7 +818,7 @@ Scenario: create the first test PO for a test on the creation mechanism based on
 			And I input "30,000" text in "Q" field of "ItemList" table
 			And I input "210,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 
 
 Scenario: create the second test PO for a test on the creation mechanism based on
@@ -875,7 +875,7 @@ Scenario: create the second test PO for a test on the creation mechanism based o
 			And I input "10,000" text in "Q" field of "ItemList" table
 			And I input "200,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 
 
 Scenario: create the first test SO for a test on the creation mechanism based on
@@ -970,7 +970,7 @@ Scenario: create the first test SO for a test on the creation mechanism based on
 			And I input "30,000" text in "Q" field of "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 
 
 Scenario: create the second test SO for a test on the creation mechanism based on
@@ -1027,7 +1027,7 @@ Scenario: create the second test SO for a test on the creation mechanism based o
 			And I input "10,000" text in "Q" field of "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 
 Scenario: create an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -1084,7 +1084,7 @@ Scenario: create an order for Ferron BP Basic Partner term, TRY (Dress -10 and T
 		And I input "5,000" text in "Q" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 
 Scenario: create a Purchase Order document
 	* Open a form to create Purchase Order
@@ -1361,7 +1361,7 @@ Scenario: create a Purchase Order document
 		And I input "200,000" text in "Q" field of "ItemList" table
 		And I input "180,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 
 
 

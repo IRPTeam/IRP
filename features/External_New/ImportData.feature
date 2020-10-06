@@ -61,6 +61,7 @@ Scenario: Create catalog AccessProfiles objects
 		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270991' | 'RunThinClient'   | 'IRP'           |
 		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270991' | 'RunWebClient'    | 'IRP'           |
 		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270990' | 'FullAccess'      | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270990' | 'BasicRole'       | 'IRP'           |
 
 
 Scenario: Create catalog Agreements objects

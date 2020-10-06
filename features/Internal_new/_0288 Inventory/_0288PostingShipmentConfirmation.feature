@@ -101,7 +101,7 @@ Scenario: _028800 preparation (Shipment confirmation)
 			And I select current line in "ItemList" table
 			And I input "10,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Check or create InventoryTransfer021030
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		If "List" table does not contain lines Then
@@ -132,10 +132,10 @@ Scenario: _028801 create document Shipment confirmation based on Sales Invoice (
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  | 'Store'    |
 		| 'Dress'    |  'L/Green'  | 'Store 02' |
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberShipmentConfirmation028801$$"
 	And I save the window as "$$ShipmentConfirmation0028801$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close current window
 	
 
@@ -173,10 +173,10 @@ Scenario: _028804 create document Shipment confirmation  based on Sales Invoice 
 		And "ItemList" table contains lines
 		| '#' | 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Shipment basis'   |
 		| '1' | 'Dress' | '20,000'   | 'L/Green'  | 'pcs'  | '$$SalesInvoice024025$$' |
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberShipmentConfirmation028804$$"
 	And I save the window as "$$ShipmentConfirmation0028804$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close current window
 
 Scenario: _028805 check Shipment confirmation posting (based on Sales invoice without Sales order) by register GoodsInTransitOutgoing (-)
@@ -210,10 +210,10 @@ Scenario: _028807 create document Shipment confirmation based on Purchase return
 	And "ItemList" table contains lines
 		| 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Shipment basis'                              |
 		| 'Dress' | '10,000'    | 'L/Green'  | 'pcs'  | '$$PurchaseReturn022314$$' |
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberShipmentConfirmation028807$$"
 	And I save the window as "$$ShipmentConfirmation0028807$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close current window
 
 Scenario: _028808 check Shipment confirmation posting (based on Purchase return) by register StockBalance
@@ -243,10 +243,10 @@ Scenario: _028810 create document Shipment confirmation  based on Inventory tran
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "103" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberShipmentConfirmation028810$$"
 	And I save the window as "$$ShipmentConfirmation0028810$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	
 
 

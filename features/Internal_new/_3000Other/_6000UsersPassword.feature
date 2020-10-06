@@ -18,33 +18,33 @@ Scenario: _351000 preparation
 Scenario: _351001 check user password setting from enterprise mode
         And I close all client application windows
         * Select user
-                Given I open hyperlink "e1cib/list/Catalog.Users"
-                And I go to line in "List" table
-                | 'Description'                 |
-                | 'Arina Brown (Financier 3)' |
-                And I select current line in "List" table
+                        Given I open hyperlink "e1cib/list/Catalog.Users"
+                        And I go to line in "List" table
+                                | 'Description'                 |
+                                | 'Arina Brown (Financier 3)' |
+                        And I select current line in "List" table
                 * Change localization code
-                        And I input "en" text in "Interface localization code" field
+                        And I input "en" text in "Interface localization code" field	
                         And I click "Save" button
         * Set password
-                And I click "Set password" button
-                And I input "F12345" text in "Password" field
-                * Check message output if password confirmation does not match
-                        And I input "F12346" text in "Confirm password" field
-                        And I click "Ok" button
-                                                Then I wait that in user messages the "Password and password confirmation do not match." substring will appear in "30" seconds
-                                * Password eny is correct
-                        And I input "" text in "Confirm password" field
-                        And I input "F12345" text in "Confirm password" field
-                        And I click "Ok" button
-                        And I click "Save and close" button
-                        And Delay 10
+                        And I click "Set password" button
+                        And I input "F12345" text in "Password" field
+                        * Check message output if password confirmation does not match
+                                And I input "F12346" text in "Confirm password" field
+                                And I click "Ok" button
+                                Then I wait that in user messages the "Password and password confirmation do not match." substring will appear in "30" seconds
+                        * Password enty is correct
+                                And I input "" text in "Confirm password" field
+                                And I input "F12345" text in "Confirm password" field
+                                And I click "Ok" button
+                                And I click "Save and close" button
+                                And Delay 10
         * Verify password set
-                And I connect "Test" TestClient using "ABrown" login and "F12345" password
-                And Delay 3
-                When in sections panel I select "Sales - A/R"
-                And I close TestClient session
-                Then I connect launched Test client "Этот клиент"
+                        And I connect "Test" TestClient using "ABrown" login and "F12345" password
+                        And Delay 3
+                        When in sections panel I select "Sales - A/R"
+                        And I close TestClient session
+                        Then I connect launched Test client "Этот клиент"
 
 Scenario: _351002 check user password generation from enterprise mode
         * Select user

@@ -97,7 +97,7 @@ Scenario: _29700102 test filling-in SO - SI - SC by quantity
 				And I input "12,000" text in "Q" field of "ItemList" table
 				And I finish line editing in "ItemList" table
 			* Check for a ban
-				And I click "Post" button
+				And I click the button named "FormPost"
 				Then "1C:Enterprise" window is opened
 				And I click "OK" button
 				Then I wait that in user messages the "Line No. [1] [Dress M/White] Ordered remaining: 8 pcs. Required: 12 pcs. Lacking: 4 pcs." substring will appear in 20 seconds
@@ -115,7 +115,7 @@ Scenario: _29700102 test filling-in SO - SI - SC by quantity
 				| 'Dress' | 'M/White'  | '8,000' |
 				And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
 			* Check for a ban
-				And I click "Post" button
+				And I click the button named "FormPost"
 				Then "1C:Enterprise" window is opened
 				And I click "OK" button
 				Then I wait that in user messages the "Line No. [1,3] [Dress M/White] Ordered remaining: 8 pcs. Required: 16 pcs. Lacking: 8 pcs." substring will appear in 20 seconds
@@ -139,7 +139,7 @@ Scenario: _29700102 test filling-in SO - SI - SC by quantity
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then user message window does not contain messages
 		* Create SI for closing quantity on order
 			* Delete added line
@@ -148,7 +148,7 @@ Scenario: _29700102 test filling-in SO - SI - SC by quantity
 					| 'Trousers' | '38/Yellow' |
 				And I activate field named "ItemListItemKey" in "ItemList" table
 				And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
-				And I click "Post" button
+				And I click the button named "FormPost"
 			// * Change the SO number to 2970
 				// And I move to "Other" tab
 				// And I input "2970" text in "Number" field
@@ -157,7 +157,7 @@ Scenario: _29700102 test filling-in SO - SI - SC by quantity
 				// And I input "2970" text in "Number" field
 				And I save the value of "Number" field as "$$NumberSalesInvoice29700102$$"
 				And I save the window as "$$SalesInvoice29700102$$"
-				And I click "Post and close" button
+				And I click the button named "FormPostAndClose"
 				And I close all client application windows
 	
 
@@ -182,7 +182,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			And I select current line in "ItemList" table
 			And I input "19,000" text in "Q" field of "ItemList" table
 		* Check for a ban
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress L/Green] Invoiced remaining: 20 pcs. Required: 19 pcs. Lacking: 1 pcs." substring will appear in 20 seconds
@@ -194,7 +194,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			And I activate "Q" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "21,000" text in "Q" field of "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 	* Check post SO with deleted a string when SI is created (SI has this string)
 		* Remove the second line
 			And I go to line in "ItemList" table
@@ -202,7 +202,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			| 'Dress' | 'L/Green'  | '21,000' |
 			And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		* Check for a ban 
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [] [Dress L/Green] Invoiced remaining: 20 pcs. Required: 0 pcs. Lacking: 20 pcs." substring will appear in 20 seconds
@@ -222,7 +222,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 		And I activate "Q" field in "ItemList" table
 		And I input "20,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then user message window does not contain messages
 	* Create one more SI
 		* Add line in SO
@@ -239,7 +239,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then user message window does not contain messages
 		* Create SI on the added line
 			And I click "Sales invoice" button
@@ -252,7 +252,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			And "ItemList" table contains lines
 			| 'Item'     | 'Item key'   |
 			| 'Trousers' | '38/Yellow'  |
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then user message window does not contain messages
 	* Check for a ban SI if you add a line to it (by copying) from an order for which SI has already been created (order by line is specified)
 		And I activate "Item key" field in "ItemList" table
@@ -276,7 +276,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 		And I activate "Q" field in "ItemList" table
 		And I input "20,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Then I wait that in user messages the "Line No. [2] [Dress L/Green] Ordered remaining: 0 pcs. Required: 20 pcs. Lacking: 20 pcs." substring will appear in 20 seconds
@@ -297,7 +297,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'L/Green'  |
 		And I select current line in "List" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then user message window does not contain messages
 		And I close all client application windows
 	* Create Shipment confirmation by more than the quantity specified on the invoice
@@ -318,7 +318,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "2 970" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation29700103$$"
 			And I save the window as "$$ShipmentConfirmation29700103$$"
 		* Change the quantity by more than SI
@@ -329,7 +329,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			And I select current line in "ItemList" table
 			And I input "22,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Given Recent TestClient message contains "* [Dress L/Green] Invoiced remaining: 20 pcs. Required: 22 pcs. Lacking: 2 pcs." string by template
@@ -341,7 +341,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			And I select current line in "ItemList" table
 			And I input "19,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then user message window does not contain messages
 		* Add line which isn't in SI and try to post
 			And I click "Add" button
@@ -359,7 +359,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			And I activate "Quantity" field in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then user message window does not contain messages
 		* Copy the string that is in the order and try to post
 			And I go to line in "ItemList" table
@@ -367,7 +367,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 				| 'Dress' | 'L/Green'  |
 			And I click the button named "ItemListContextMenuCopy"
 			And I finish line editing in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Given Recent TestClient message contains "* [Dress L/Green] Invoiced remaining: 20 pcs. Required: 38 pcs. Lacking: 18 pcs." string by template
@@ -376,14 +376,14 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			And I select current line in "ItemList" table
 			And I click Clear button of "Shipment basis" attribute in "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then user message window does not contain messages
 		* Deleting a string that has SI and try to post
 			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |
 				| 'Dress' | 'M/White'  |
 			And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then user message window does not contain messages
 		* Create one more SC for the rest of SI
 			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -395,7 +395,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 				| 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Store'    | 'Shipment basis'       |
 				| 'Dress' | '8,000'    | 'M/White'  | 'pcs'  | 'Store 02' | '$$SalesInvoice29700102$$' |
 				| 'Dress' | '1,000'    | 'L/Green'  | 'pcs'  | 'Store 02' | '$$SalesInvoice29700102$$' |
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then user message window does not contain messages
 		* Change by more than the SI balance (already created by SC) and try to post
 			And I go to line in "ItemList" table
@@ -404,7 +404,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			And I select current line in "ItemList" table
 			And I input "9,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Given Recent TestClient message contains "* [Dress M/White] Invoiced remaining: 8 pcs. Required: 9 pcs. Lacking: 1 pcs." string by template
@@ -415,7 +415,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			And I select current line in "ItemList" table
 			And I input "7,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then user message window does not contain messages
 			And I close all client application windows
 		* Check that the SI cannot be unpost when SC is created
@@ -441,7 +441,7 @@ Scenario: _29700104 test filling-in SO - SI - SC in different units
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "2971" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesOrder29700104$$"
 		And I save the window as "$$SalesOrder29700104$$"
 		And I close all client application windows
@@ -459,7 +459,7 @@ Scenario: _29700104 test filling-in SO - SI - SC in different units
 			| 'Dress' | 'M/White'   | '15,000' | 'pcs'            |
 			| 'Boots' | 'Boots/S-8' | '50,000' | 'pcs'            |
 			| 'Boots' | 'Boots/S-8' | '2,000'  | 'Boots (12 pcs)' |
-			And I click "Post" button
+			And I click the button named "FormPost"
 	* Change in SI quantity between packages and pieces and check for post
 		And I go to line in "ItemList" table
 		| 'Item'  | 'Item key'  | 'Q'      | 'Unit' |
@@ -472,7 +472,7 @@ Scenario: _29700104 test filling-in SO - SI - SC in different units
 		| 'Boots' | 'Boots/S-8' | '2,000' | 'Boots (12 pcs)' |
 		And I select current line in "ItemList" table
 		And I input "3,000" text in "Q" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then user message window does not contain messages
 	* Change in SI quantity by shoes upside down in pieces and try to post
 		And I go to line in "ItemList" table
@@ -481,7 +481,7 @@ Scenario: _29700104 test filling-in SO - SI - SC in different units
 		And I activate "Q" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "51,000" text in "Q" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Then I wait that in user messages the "Line No. [2,3] [Boots Boots/S-8] Ordered remaining: 74 pcs. Required: 87 pcs. Lacking: 13 pcs." substring will appear in 20 seconds
@@ -492,7 +492,7 @@ Scenario: _29700104 test filling-in SO - SI - SC in different units
 		And I activate "Q" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "1,000" text in "Q" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then user message window does not contain messages
 	* Change in SI quantity by shoes upside down in packs and try to post
 		And I go to line in "ItemList" table
@@ -507,7 +507,7 @@ Scenario: _29700104 test filling-in SO - SI - SC in different units
 		And I activate "Q" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "46,000" text in "Q" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Then I wait that in user messages the "Line No. [2,3] [Boots Boots/S-8] Ordered remaining: 74 pcs. Required: 94 pcs. Lacking: 20 pcs." substring will appear in 20 seconds
@@ -524,11 +524,11 @@ Scenario: _29700104 test filling-in SO - SI - SC in different units
 		And I activate "Q" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "50,000" text in "Q" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then user message window does not contain messages
 	* Creating SC for the quantity that in SI and checking post
 		And I click "Shipment confirmation" button
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then user message window does not contain messages
 	* Change the quantity within SI and check post
 		And I go to line in "ItemList" table
@@ -543,7 +543,7 @@ Scenario: _29700104 test filling-in SO - SI - SC in different units
 		And I select current line in "ItemList" table
 		And I input "52,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then user message window does not contain messages
 	* Specification of packages and post
 		And I go to line in "ItemList" table
@@ -564,7 +564,7 @@ Scenario: _29700104 test filling-in SO - SI - SC in different units
 		And I select current line in "ItemList" table
 		And I input "50,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then user message window does not contain messages
 	* Specify more packages than in SI and check post
 		And I go to line in "ItemList" table
@@ -572,7 +572,7 @@ Scenario: _29700104 test filling-in SO - SI - SC in different units
 		| 'Boots' | 'Boots/S-8' | '2,000'   |
 		And I select current line in "ItemList" table
 		And I input "3,000" text in "Quantity" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Given Recent TestClient message contains "*[Boots Boots/S-8] Invoiced remaining: 74 pcs. Required: 86 pcs. Lacking: 12 pcs." string by template

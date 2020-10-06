@@ -1354,9 +1354,11 @@ EndProcedure
 
 #Region Commands
 
-Procedure SearchByBarcode(Barcode, Object, Form, DocumentClientModule = Undefined, PriceType = Undefined) Export
+Procedure SearchByBarcode(Barcode, Object, Form, DocumentClientModule = Undefined, PriceType = Undefined, AddInfo = Undefined) Export
   Form.CurrentItem = Form.Items.ItemList;
-  TransferParameters = New Structure;
+  If AddInfo = Undefined Then
+  	AddInfo = New Structure;
+  EndIf;
   If DocumentClientModule = Undefined Then
     ClientModule = ThisObject;
   Else
@@ -1364,14 +1366,14 @@ Procedure SearchByBarcode(Barcode, Object, Form, DocumentClientModule = Undefine
   EndIf;
   
   If PriceType <> Undefined Then
-    TransferParameters.Insert("PriceType", PriceType);
+    AddInfo.Insert("PriceType", PriceType);
     If Object.Ref = Undefined Then
-      TransferParameters.Insert("PricePeriod", CurrentDate());
+      AddInfo.Insert("PricePeriod", CurrentDate());
     Else
-      TransferParameters.Insert("PricePeriod", Object.Date);
+      AddInfo.Insert("PricePeriod", Object.Date);
     EndIf;
   EndIf;
-  BarcodeClient.SearchByBarcode(Barcode, Object, Form, ClientModule, TransferParameters);
+  BarcodeClient.SearchByBarcode(Barcode, Object, Form, ClientModule, AddInfo);
 EndProcedure
 
 Procedure SearchByBarcodeEnd(Result, Parameters) Export

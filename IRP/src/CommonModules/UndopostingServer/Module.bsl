@@ -1,6 +1,6 @@
-Function Undopost(DocObject, Cancel, AddInfo = Undefined) Export
+Procedure Undopost(DocObject, Cancel, AddInfo = Undefined) Export
 	If Cancel Then
-		Return Undefined;
+		Return;
 	EndIf;
 	
 	Parameters = New Structure();
@@ -11,13 +11,13 @@ Function Undopost(DocObject, Cancel, AddInfo = Undefined) Export
 	DocumentDataTables = Module.UndopostingGetDocumentDataTables(DocObject.Ref, Cancel, Parameters, AddInfo);
 	Parameters.Insert("DocumentDataTables", DocumentDataTables);
 	If Cancel Then
-		Return Undefined;
+		Return;
 	EndIf;
 	
 	LockDataSources = Module.UndopostingGetLockDataSource(DocObject.Ref, Cancel, Parameters, AddInfo);
 	Parameters.Insert("LockDataSources", LockDataSources);
 	If Cancel Then
-		Return Undefined;
+		Return;
 	EndIf;
 	
 	// Save pointers to locks			
@@ -31,7 +31,7 @@ Function Undopost(DocObject, Cancel, AddInfo = Undefined) Export
 	
 	Module.UndopostingCheckBeforeWrite(DocObject.Ref, Cancel, Parameters, AddInfo);
 	If Cancel Then
-		Return Undefined;
+		Return;
 	EndIf;
 	
 	For Each RecordSet In DocObject.RegisterRecords Do
@@ -40,7 +40,7 @@ Function Undopost(DocObject, Cancel, AddInfo = Undefined) Export
 	EndDo;
 	
 	Module.UndopostingCheckAfterWrite(DocObject.Ref, Cancel, Parameters, AddInfo);
-EndFunction
+EndProcedure
 
 Function SetLock(LockDataSources)
 	DataLock = New DataLock();

@@ -24,9 +24,6 @@
         <paths xsi:type="form:DataPath">
           <segments>MetadataTree.Use</segments>
         </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>MetadataTree.Use</segments>
-        </paths>
       </dataPath>
       <extendedTooltip>
         <name>MetadataTreeUseExtendedTooltip</name>
@@ -69,9 +66,6 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>MetadataTree.Name</segments>
-        </paths>
         <paths xsi:type="form:DataPath">
           <segments>MetadataTree.Name</segments>
         </paths>

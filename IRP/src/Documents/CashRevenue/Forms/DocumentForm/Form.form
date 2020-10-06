@@ -780,8 +780,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.PaymentList.Currency</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.PaymentList.Currency</segments>
+            </paths>
           </dataPath>
           <handlers>
             <event>OnChange</event>

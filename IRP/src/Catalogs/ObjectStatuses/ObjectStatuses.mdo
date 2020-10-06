@@ -197,6 +197,13 @@
         <value></value>
       </code>
       <isFolder>true</isFolder>
+      <content id="94db2442-3d9d-4627-ae9e-5d83003e1aec">
+        <name>Complete</name>
+        <description>Complete</description>
+        <code xsi:type="core:StringValue">
+          <value></value>
+        </code>
+      </content>
     </items>
     <items id="83a9eeaa-a8f6-4fa4-9496-74fd8b74d65a">
       <name>PhysicalInventory</name>

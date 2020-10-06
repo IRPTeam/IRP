@@ -6,17 +6,16 @@ Procedure GeneratePhysicalCountByLocation(Parameters, AddInfo = Undefined) Expor
 	Try
 		
 		For Each Instance In Parameters.ArrayOfInstance Do
-			PhysicalCountByLocationRef = FindPhysicalCountByLocation(Parameters.PhysicalInventory, 
-																	 Instance.ResponsiblePerson);
-
+			
 			PhysicalCountByLocationObject = Documents.PhysicalCountByLocation.CreateDocument();
 
 			// try lock for modify
 			PhysicalCountByLocationObject.Lock();
 			PhysicalCountByLocationObject.Fill(Undefined);
-			PhysicalCountByLocationObject.Date = CurrentDate();
+			PhysicalCountByLocationObject.Date = CurrentSessionDate();
 			PhysicalCountByLocationObject.PhysicalInventory = Parameters.PhysicalInventory;
 			PhysicalCountByLocationObject.Store = Parameters.Store;
+			PhysicalCountByLocationObject.RuleEditQuantity = Parameters.PhysicalInventory.RuleEditQuantity;
 			PhysicalCountByLocationObject.ResponsiblePerson = Instance.ResponsiblePerson;
 			PhysicalCountByLocationObject.ItemList.Clear();
 			For Each ItemListRow In Instance.ItemList Do
@@ -38,35 +37,14 @@ Procedure GeneratePhysicalCountByLocation(Parameters, AddInfo = Undefined) Expor
 	
 	If TransactionActive() Then
 		If HaveError Then
+			// BSLLS:WrongUseOfRollbackTransactionMethod-off
 			RollbackTransaction();
+			// BSLLS:WrongUseOfRollbackTransactionMethod-on
 		Else
 			CommitTransaction();
 		EndIf;
 	EndIf;
 EndProcedure
-
-Function FindPhysicalCountByLocation(PhysicalInventoryRef, ResponsiblePersonRef, AddInfo = Undefined)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	PhysicalCountByLocation.Ref
-	|FROM
-	|	Document.PhysicalCountByLocation AS PhysicalCountByLocation
-	|WHERE
-	|	PhysicalCountByLocation.PhysicalInventory = &PhysicalInventoryRef
-	|	AND PhysicalCountByLocation.ResponsiblePerson = &ResponsiblePersonRef
-	|	AND
-	|	NOT PhysicalCountByLocation.DeletionMark";
-	Query.SetParameter("PhysicalInventoryRef", PhysicalInventoryRef);
-	Query.SetParameter("ResponsiblePersonRef", ResponsiblePersonRef);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	If QuerySelection.Next() Then
-		Return QuerySelection.Ref;
-	Else
-		Return Undefined;
-	EndIf;
-EndFunction
 
 Function GetLinkedPhysicalCountByLocation(PhysicalInventoryRef, AddInfo = Undefined) Export
 	Query = New Query();
@@ -88,12 +66,58 @@ Function GetLinkedPhysicalCountByLocation(PhysicalInventoryRef, AddInfo = Undefi
 	QuerySelection = QueryResult.Select();
 	Result = New Array();
 	While QuerySelection.Next() Do
-		Result.Add(New Structure("Key, Ref, Number, Date, ResponsiblePerson", 
-		QuerySelection.Key, 
-		QuerySelection.Ref,
-		QuerySelection.Number,
-		QuerySelection.Date,
-		QuerySelection.ResponsiblePerson));
+		Row = New Structure("Key, Ref, Number, Date, ResponsiblePerson");
+		FillPropertyValues(Row, QuerySelection);
+		
+		Result.Add(Row);
 	EndDo;
 	Return Result;
 EndFunction
+
+// The procedure for filling a spreadsheet document for printing.
+//
+// Parameters:
+//	Spreadsheet - SpreadsheetDocument - spreadsheet document to fill out and print.
+//	Ref - Arbitrary - contains a reference to the object for which the print command was executed.
+Procedure PrintQR(Spreadsheet, Ref) Export
+	Template = Documents.PhysicalCountByLocation.GetTemplate("PrintQR");
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	PhysicalCountByLocation.Number AS Number
+		|FROM
+		|	Document.PhysicalCountByLocation AS PhysicalCountByLocation
+		|WHERE
+		|	PhysicalCountByLocation.Ref IN (&Ref)
+		|ORDER BY
+		|	Number";
+	Query.Parameters.Insert("Ref", Ref);
+	VT = Query.Execute().Unload();
+
+	Spreadsheet.Clear();
+	SpreadsheetRight = New SpreadsheetDocument();
+	
+	For IndexRow = -1 To VT.Count() - 1 Do
+		For Index = 0 To 4 Do
+			If IndexRow = VT.Count() - 1 Then
+				Break;
+			Else
+				IndexRow = IndexRow + 1;
+			EndIf;
+			Header = Template.GetArea("Row|Column");
+			Selection = VT[IndexRow];
+			QR = BarcodeServer.GetQRPicture(New Structure("Barcode", Format(Selection.Number, "NG=")));
+			Picture = Header.Drawings.Add(SpreadsheetDocumentDrawingType.Picture);
+			Picture.Height = 30;
+			Picture.Width = 30;
+			Picture.Picture = QR;
+			Picture.PictureSize = PictureSize.RealSize;
+			Picture.Left = Picture.Left + 4;
+			Picture.Top = Picture.Top + 4;
+			Header.Parameters.Fill(Selection);
+			SpreadsheetRight.Join(Header);
+		EndDo;
+		Spreadsheet.Put(SpreadsheetRight);
+		SpreadsheetRight = New SpreadsheetDocument();
+	EndDo;
+EndProcedure

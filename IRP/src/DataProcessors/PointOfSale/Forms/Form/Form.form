@@ -1206,6 +1206,10 @@
                 <name>ItemListOnActivateRow</name>
               </handlers>
               <handlers>
+                <event>Drag</event>
+                <name>ItemListDrag</name>
+              </handlers>
+              <handlers>
                 <event>OnStartEdit</event>
                 <name>ItemListOnStartEdit</name>
               </handlers>
@@ -1216,10 +1220,6 @@
               <handlers>
                 <event>OnChange</event>
                 <name>ItemListOnChange</name>
-              </handlers>
-              <handlers>
-                <event>Drag</event>
-                <name>ItemListDrag</name>
               </handlers>
               <searchStringAddition>
                 <visible>true</visible>
@@ -3532,6 +3532,45 @@ WHERE
     <main>true</main>
     <additionalColumns>
       <tablePath xsi:type="form:DataPath">
+        <segments>Object.Currencies</segments>
+      </tablePath>
+      <columns>
+        <name>RatePresentation</name>
+        <title>
+          <key>en</key>
+          <value>Rate presentation</value>
+        </title>
+        <id>166</id>
+        <valueType>
+          <types>DefinedType.typeCurrencyRate</types>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
+      <columns>
+        <name>IsVisible</name>
+        <title>
+          <key>en</key>
+          <value>Is visible</value>
+        </title>
+        <id>167</id>
+        <valueType>
+          <types>Boolean</types>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
+    </additionalColumns>
+    <additionalColumns>
+      <tablePath xsi:type="form:DataPath">
         <segments>Object.ItemList</segments>
       </tablePath>
       <columns>
@@ -3624,45 +3663,6 @@ WHERE
           <value>Serial lot number is filling</value>
         </title>
         <id>42</id>
-        <valueType>
-          <types>Boolean</types>
-        </valueType>
-        <view>
-          <common>true</common>
-        </view>
-        <edit>
-          <common>true</common>
-        </edit>
-      </columns>
-    </additionalColumns>
-    <additionalColumns>
-      <tablePath xsi:type="form:DataPath">
-        <segments>Object.Currencies</segments>
-      </tablePath>
-      <columns>
-        <name>RatePresentation</name>
-        <title>
-          <key>en</key>
-          <value>Rate presentation</value>
-        </title>
-        <id>166</id>
-        <valueType>
-          <types>DefinedType.typeCurrencyRate</types>
-        </valueType>
-        <view>
-          <common>true</common>
-        </view>
-        <edit>
-          <common>true</common>
-        </edit>
-      </columns>
-      <columns>
-        <name>IsVisible</name>
-        <title>
-          <key>en</key>
-          <value>Is visible</value>
-        </title>
-        <id>167</id>
         <valueType>
           <types>Boolean</types>
         </valueType>

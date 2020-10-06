@@ -111,8 +111,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.SerialLotNumberOwner</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.SerialLotNumberOwner</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>OwnerExtendedTooltip</name>

@@ -17,6 +17,7 @@
   <content>Document.StockAdjustmentAsWriteOff</content>
   <content>Document.StockAdjustmentAsSurplus</content>
   <content>Document.PhysicalInventory</content>
+  <content>DataProcessor.MobileInvent</content>
   <subsystems>ComposedItems</subsystems>
   <subsystems>Items</subsystems>
   <subsystems>Transfers</subsystems>

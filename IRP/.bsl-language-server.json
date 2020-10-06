@@ -1,17 +1,19 @@
 {
   "$schema": "https://1c-syntax.github.io/bsl-language-server/configuration/schema.json",
-  "diagnosticLanguage": "en",
+  "language": "en",
   "diagnostics": {
+    "parameters": {
       "NestedStatements": false,
       "CognitiveComplexity": false,
       "MethodSize": false,
       "CodeOutOfRegion": false,
-      "CyclomaticComplexity":false,
+      "CyclomaticComplexity": false,
       "NonStandardRegion": false,
       "DeletingCollectionItem": false,
       "CommitTransactionOutsideTryCatch": false,
       "BeginTransactionBeforeTryCatch": false,
       "NestedFunctionInParameters": false,
+      "DeprecatedCurrentDate": false,
       "MultilingualStringHasAllDeclaredLanguages": {
         "declaredLanguages": "en"
       },
@@ -23,6 +25,5 @@
         "minWordLength": 3
       }
     }
+  }
 }
-
-

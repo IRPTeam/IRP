@@ -2,7 +2,9 @@ Procedure OpenFormPickupSpecialOffers_ForDocument(Object, Form, NotifyEditFinish
 	OpenFormArgs = GetOpenFormArgsPickupSpecialOffers_ForDocument(Object, isAutoProcess);
 	
 	If isAutoProcess Then
+		// BSLLS:GetFormMethod-off
 		OffersForm = GetForm("CommonForm.PickupSpecialOffers", New Structure("Info", OpenFormArgs), Form);
+		// BSLLS:GetFormMethod-on
 		ResultAutoProcess = OffersForm.PutOffersTreeToTempStorageOnClient();
 		SpecialOffersEditFinish_ForDocument(ResultAutoProcess, Object, Form, AddInfo);
 	Else

@@ -13,8 +13,13 @@ Procedure ItemOnChangeAtServer()
 	
 	Query.SetParameter("Item", Item);
 	
-	QueryResult = Query.Execute().Unload();
-	ItemKey = QueryResult[0].Ref;
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		ItemKey = QuerySelection.Ref;
+	Else
+		ItemKey = Catalogs.ItemKeys.EmptyRef();
+	EndIf;
 	
 EndProcedure
 
@@ -50,7 +55,6 @@ Procedure ItemKeyOnChange(Item)
 	ShowStatus();
 EndProcedure
 
-
 &AtClient
 Procedure SearchByBarcode(Command)
 	DocumentsClient.SearchByBarcode(Command, Object, ThisObject, ThisObject);
@@ -62,7 +66,7 @@ Procedure SearchByBarcodeEnd(BarcodeItems, Parameters) Export
 		Item =  Row.Item;
 		ItemKey =  Row.ItemKey;
 		If Not ValueIsFilled(ItemKey) Then
-			ItemOnChangeAtServer()
+			ItemOnChangeAtServer();
 		EndIf;
 		SetPictureView();
 		

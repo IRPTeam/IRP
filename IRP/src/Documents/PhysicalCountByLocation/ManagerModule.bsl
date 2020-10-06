@@ -37,7 +37,9 @@ Procedure GeneratePhysicalCountByLocation(Parameters, AddInfo = Undefined) Expor
 	
 	If TransactionActive() Then
 		If HaveError Then
+			// BSLLS:WrongUseOfRollbackTransactionMethod-off
 			RollbackTransaction();
+			// BSLLS:WrongUseOfRollbackTransactionMethod-on
 		Else
 			CommitTransaction();
 		EndIf;

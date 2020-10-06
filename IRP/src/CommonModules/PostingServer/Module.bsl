@@ -1,7 +1,7 @@
-Function Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
+Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	
 	If Cancel Then
-		Return Undefined;
+		Return;
 	EndIf;
 	
 	Parameters = New Structure();
@@ -14,13 +14,13 @@ Function Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	DocumentDataTables = Module.PostingGetDocumentDataTables(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
 	Parameters.Insert("DocumentDataTables", DocumentDataTables);
 	If Cancel Then
-		Return Undefined;
+		Return;
 	EndIf;
 	
 	LockDataSources = Module.PostingGetLockDataSource(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
 	Parameters.Insert("LockDataSources", LockDataSources);
 	If Cancel Then
-		Return Undefined;
+		Return;
 	EndIf;
 	
 	// Save pointers to locks
@@ -34,7 +34,7 @@ Function Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	
 	Module.PostingCheckBeforeWrite(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
 	If Cancel Then
-		Return Undefined;
+		Return;
 	EndIf;
 	
 	PostingDataTables = Module.PostingGetPostingDataTables(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
@@ -44,7 +44,7 @@ Function Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 		Parameters.Insert("PostingDataTables", PostingDataTables);
 	EndIf;
 	If Cancel Then
-		Return Undefined;
+		Return;
 	EndIf;
 	
 	For Each KeyValue In PostingDataTables Do
@@ -87,7 +87,7 @@ Function Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	
 	Module.PostingCheckAfterWrite(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
 	
-EndFunction
+EndProcedure
 
 Function SetLock(LockDataSources)
 	DataLock = New DataLock();

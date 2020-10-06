@@ -98,16 +98,16 @@ Scenario: _090501 creation of Sales invoice based on Shipment confirmation (one 
 		And I select current line in "List" table
 		Then "Update item list info" window is opened
 		And I click "OK" button
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click "Shipment confirmation" button
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Create Sales invoice based on Shipment confirmation
 		And I click "Sales invoice" button
 	* Check filling in Sales invoice
 		And "ItemList" table contains lines
 		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount'  | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Sales order'                   | 'Shipment confirmation'      |
 		| '*'          | 'Trousers' | '*'      | '38/Yellow' | '5,000' | ''               | '*'          | 'pcs'  | '*'            | 'Store 02' | '*'             | '*'                             | '*'                          |
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 
 Scenario: _090502 create a purchase invoice based on Goods reciept (one to one)
@@ -150,22 +150,22 @@ Scenario: _090502 create a purchase invoice based on Goods reciept (one to one)
 		And I input "2,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "500,00" text in "Price" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I move to "Other" tab
 		And I expand "More" group
 		And I set checkbox "Goods receipt before purchase invoice"
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click "Goods receipt" button
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Create Purchase invoice based on Goods receipt
 		And I click "Purchase invoice" button
 	* Check filling in Purchase invoice
 		And "ItemList" table contains lines
 		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      | 'Goods receipt'      |
 		| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | '*'                  |
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 Scenario: _090503 create Sales invoice based on several Shipment confirmation
 	* Create test first order and Shipment confirmation
@@ -206,14 +206,14 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		And I select current line in "List" table
 		Then "Update item list info" window is opened
 		And I click "OK" button
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click "Shipment confirmation" button
 		* Change the document number to 458
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "458" text in "Number" field
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create test second order and Shipment confirmation for the same customer and for the same commercial conditions
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -252,14 +252,14 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		And I select current line in "List" table
 		Then "Update item list info" window is opened
 		And I click "OK" button
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click "Shipment confirmation" button
 		* Change the document number to 459
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "459" text in "Number" field
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create test third order and Shipment confirmation for another customer
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -303,14 +303,14 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		And I select current line in "List" table
 		Then "Update item list info" window is opened
 		And I click "OK" button
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click "Shipment confirmation" button
 		* Change the document number to 460
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "460" text in "Number" field
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create Sales invoice based on created Shipment confirmation (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
@@ -331,7 +331,7 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'     | 'Q'      |
 			| 'Trousers' | '36/Yellow' | ''                           | '10,000'  | '10,000' | '10,000' |
 			| ''         | ''          | 'Shipment confirmation 460*' | ''        | '10,000' | '10,000' |
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		When I click command interface button "Sales invoice (create)"
 		And Delay 2
 		Then the form attribute named "Partner" became equal to "Kalipso"
@@ -350,7 +350,7 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 			| ''         | ''          | 'Shipment confirmation 458*' | ''        | '5,000' | '5,000' |
 			| 'Trousers' | '36/Yellow' | ''                           | '5,000'   | '5,000' | '5,000' |
 			| ''         | ''          | 'Shipment confirmation 459*' | ''        | '5,000' | '5,000' |
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	And I close all client application windows
 
 
@@ -394,9 +394,9 @@ Scenario: _090504 create Purchase invoice based on several Goods reciept
 		And I input "2,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "500,00" text in "Price" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I move to "Other" tab
 		And I expand "More" group
 		And I set checkbox "Goods receipt before purchase invoice"
@@ -405,14 +405,14 @@ Scenario: _090504 create Purchase invoice based on several Goods reciept
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "2023" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click "Goods receipt" button
 		* Change the document number to 471
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "471" text in "Number" field
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create test Purchase order and Goods reciept on the same vendor
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -452,9 +452,9 @@ Scenario: _090504 create Purchase invoice based on several Goods reciept
 		And I input "2,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "400,00" text in "Price" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I move to "Other" tab
 		And I expand "More" group
 		And I set checkbox "Goods receipt before purchase invoice"
@@ -463,14 +463,14 @@ Scenario: _090504 create Purchase invoice based on several Goods reciept
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "2024" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click "Goods receipt" button
 		* Change the document number to 472
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "472" text in "Number" field
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create test Purchase order and Goods reciept on the another vendor
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -510,9 +510,9 @@ Scenario: _090504 create Purchase invoice based on several Goods reciept
 		And I input "10,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "350,00" text in "Price" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I move to "Other" tab
 		And I expand "More" group
 		And I set checkbox "Goods receipt before purchase invoice"
@@ -521,14 +521,14 @@ Scenario: _090504 create Purchase invoice based on several Goods reciept
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "2025" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click "Goods receipt" button
 		* Change the document number to 473
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "473" text in "Number" field
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create Purchase invoice based on created Goods receipt (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
@@ -550,7 +550,7 @@ Scenario: _090504 create Purchase invoice based on several Goods reciept
 			And "ItemList" table contains lines
 			| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      | 'Sales order' |
 			| '2 966,10'   | 'Trousers' | '350,00' | '38/Yellow' | '10,000' | ''              | '533,90'     | 'pcs'  | '3 500,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                  | ''            |
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		When I click command interface button "Purchase invoice (create)"
 		And Delay 2
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -566,7 +566,7 @@ Scenario: _090504 create Purchase invoice based on several Goods reciept
 			And "ItemList" table contains lines
 			| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      | 'Sales order' |
 			| '2 966,10'   | 'Trousers' | '350,00' | '38/Yellow' | '10,000' | ''              | '533,90'     | 'pcs'  | '3 500,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | ''            |
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 
 Scenario: _090505 creation of Sales invoice based on several Shipment confirmation (different currency)
@@ -602,14 +602,14 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 		And I move to "Other" tab
 		And I expand "More" group
 		And I set checkbox "Shipment confirmations before sales invoice"
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click "Shipment confirmation" button
 		* Change the document number to 465
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "465" text in "Number" field
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create test second order and Shipment confirmation for the same customer and for the same commercial conditions
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -648,14 +648,14 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 		And I select current line in "List" table
 		Then "Update item list info" window is opened
 		And I click "OK" button
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click "Shipment confirmation" button
 		* Change the document number to 466
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "466" text in "Number" field
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create Sales invoice - should be created 2
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
@@ -679,7 +679,7 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'    | 'Q'     |
 			| 'Trousers' | '36/Yellow' | ''                           | '5,000'   | '5,000' | '5,000' |
 			| ''         | ''          | 'Shipment confirmation 466*' | ''        | '5,000' | '5,000' |
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		When I click command interface button "Sales invoice (create)"
 		And Delay 2
 		Then the form attribute named "Partner" became equal to "Kalipso"
@@ -702,7 +702,7 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'    | 'Q'     |
 			| 'Trousers' | '36/Yellow' | ''                           | '5,000'   | '5,000' | '5,000' |
 			| ''         | ''          | 'Shipment confirmation 466*' | ''        | '5,000' | '5,000' |
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 
 
@@ -746,20 +746,20 @@ Scenario: _090506 create Purchase invoice based on several Goods reciept
 		And I input "2,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "500,00" text in "Price" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I move to "Other" tab
 		And I expand "More" group
 		And I set checkbox "Goods receipt before purchase invoice"
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click "Goods receipt" button
 		* Change the document number to 465
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "465" text in "Number" field
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create test Purchase order and Goods reciept on the same customer
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -799,20 +799,20 @@ Scenario: _090506 create Purchase invoice based on several Goods reciept
 		And I input "2,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "400,00" text in "Price" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I move to "Other" tab
 		And I expand "More" group
 		And I set checkbox "Goods receipt before purchase invoice"
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click "Goods receipt" button
 		* Change the document number to 466
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "466" text in "Number" field
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create Purchase invoice based on created Goods receipt (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
@@ -832,7 +832,7 @@ Scenario: _090506 create Purchase invoice based on several Goods reciept
 			And "ItemList" table contains lines
 				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      | 'Sales order' |
 				| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | ''              | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | ''            |
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		When I click command interface button "Purchase invoice (create)"
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -846,7 +846,7 @@ Scenario: _090506 create Purchase invoice based on several Goods reciept
 			And "ItemList" table contains lines
 				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      | 'Sales order' |
 				| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | ''              | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | ''            |
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 
 

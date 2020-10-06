@@ -74,10 +74,10 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "124" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder09030201$$"
 		And I save the window as "$$PurchaseOrder09030201$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create Purchase order 125
 		When create the second test PO for a test on the creation mechanism based on
 		// * Change the document number to 125
@@ -87,10 +87,10 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "125" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder09030202$$"
 		And I save the window as "$$PurchaseOrder09030202$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create based on Purchase order 124 and 125 Purchase invoice (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
@@ -112,7 +112,7 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 			// 	Then "1C:Enterprise" window is opened
 			// 	And I click "Yes" button
 			// 	And I input "126" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030202$$"
 			And I save the window as "$$PurchaseInvoice09030202$$"
 		If the field named "LegalName" is equal to "Company Ferron BP" Then
@@ -126,10 +126,10 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 			// 	Then "1C:Enterprise" window is opened
 			// 	And I click "Yes" button
 			// 	And I input "125" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030201$$"
 			And I save the window as "$$PurchaseInvoice09030201$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		When I click command interface button "Purchase invoice (create)"
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
@@ -145,7 +145,7 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 			// 	Then "1C:Enterprise" window is opened
 			// 	And I click "Yes" button
 			// 	And I input "126" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030202$$"
 			And I save the window as "$$PurchaseInvoice09030202$$"
 		If the field named "LegalName" is equal to "Company Ferron BP" Then
@@ -159,10 +159,10 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 			// 	Then "1C:Enterprise" window is opened
 			// 	And I click "Yes" button
 			// 	And I input "125" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030201$$"
 			And I save the window as "$$PurchaseInvoice09030201$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 	* Create Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -193,10 +193,10 @@ Scenario: _090303 create Purchase invoice for several Purchase order with the sa
 			| Description       |
 			| Company Ferron BP |
 		And I select current line in "List" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder09030203$$"
 		And I save the window as "$$PurchaseOrder09030203$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create Purchase order 127
 		When create the second test PO for a test on the creation mechanism based on
 		// * Change the document number to 127
@@ -211,10 +211,10 @@ Scenario: _090303 create Purchase invoice for several Purchase order with the sa
 			| Description       |
 			| Company Ferron BP |
 		And I select current line in "List" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder090302031$$"
 		And I save the window as "$$PurchaseOrder090302031$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create based on Purchase order 126 and 127 Purchase invoice (should be created 1)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
@@ -238,10 +238,10 @@ Scenario: _090303 create Purchase invoice for several Purchase order with the sa
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "127" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice090302031$$"
 		And I save the window as "$$PurchaseInvoice090302031$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 	* Create Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -298,10 +298,10 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 			| 'Item'  |'Item key' |
 			| 'Trousers' |'36/Yellow'  |
 			And I input "210" text in "Price" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder090302041$$"
 		And I save the window as "$$PurchaseOrder090302041$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create first test PO 129
 		When create the second test PO for a test on the creation mechanism based on
 		// * Change the document number to 129
@@ -342,10 +342,10 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 			| 'Item'  |'Item key' |
 			| 'Dress' |'M/White'  |
 			And I input "200" text in "Price" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder090302042$$"
 		And I save the window as "$$PurchaseOrder090302042$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create based on Purchase order 128 and 129 Purchase invoice (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
@@ -359,10 +359,10 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "130" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice090302041$$"
 		And I save the window as "$$PurchaseInvoice090302041$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		When I click command interface button "Purchase invoice (create)"
 		And Delay 2
 		Then the number of "ItemList" table lines is "меньше или равно" 3
@@ -371,10 +371,10 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "131" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice090302042$$"
 		And I save the window as "$$PurchaseInvoice090302042$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	And I close all client application windows
 	* Check creation
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
@@ -440,10 +440,10 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 			| 'Item'  |'Item key' |
 			| 'Trousers' |'36/Yellow'  |
 			And I input "210" text in "Price" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder090302051$$"
 		And I save the window as "$$PurchaseOrder090302051$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create second test PO 131 Partner Ferron 1 with partner term Vendor Ferron Discount
 		When create the second test PO for a test on the creation mechanism based on
 		// * Change the document number to 131
@@ -481,10 +481,10 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 			| 'Item'  |'Item key' |
 			| 'Dress' |'M/White'  |
 			And I input "200" text in "Price" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder090302052$$"
 		And I save the window as "$$PurchaseOrder090302052$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create based on Purchase order 130 and 131 Purchase invoice (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
@@ -507,17 +507,17 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 			// 	Then "1C:Enterprise" window is opened
 			// 	And I click "Yes" button
 			// 	And I input "141" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice090302052$$"
 			And I save the window as "$$PurchaseInvoice090302052$$"
 		If the field named "Agreement" is equal to "Vendor Ferron Discount" Then
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '360,00'     | '2 000,00'   | '2 360,00'     | 'Store 02' | '$$PurchaseOrder090302052$$' |
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice090302051$$"
 			And I save the window as "$$PurchaseInvoice090302051$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		When I click command interface button "Purchase invoice (create)"
 		* Check filling in second PurchaseInvoice
 		Then the form attribute named "Partner" became equal to "Partner Ferron 1"
@@ -535,7 +535,7 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 			// 	Then "1C:Enterprise" window is opened
 			// 	And I click "Yes" button
 			// 	And I input "141" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice090302052$$"
 			And I save the window as "$$PurchaseInvoice090302052$$"
 		If the field named "Agreement" is equal to "Vendor Ferron Discount" Then
@@ -547,10 +547,10 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 			// 	Then "1C:Enterprise" window is opened
 			// 	And I click "Yes" button
 			// 	And I input "140" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice090302051$$"
 			And I save the window as "$$PurchaseInvoice090302051$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	And I close all client application windows
 	* Check creation
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
@@ -617,10 +617,10 @@ Scenario: _090306 create Purchase invoice for several Purchase order with differ
 			| 'Item'  |'Item key' |
 			| 'Trousers' |'36/Yellow'  |
 			And I input "210" text in "Price" field of "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder090302061$$"
 			And I save the window as "$$PurchaseOrder090302061$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create second test PO 135
 		When create the second test PO for a test on the creation mechanism based on
 		// * Change the document number to 135
@@ -658,10 +658,10 @@ Scenario: _090306 create Purchase invoice for several Purchase order with differ
 			| 'Item'  |'Item key' |
 			| 'Dress' |'M/White'  |
 			And I input "200" text in "Price" field of "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder090302062$$"
 			And I save the window as "$$PurchaseOrder090302062$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create based on Purchase order 135 and 134 Purchase invoice (should be created 1)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
@@ -684,10 +684,10 @@ Scenario: _090306 create Purchase invoice for several Purchase order with differ
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "135" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice090302062$$"
 		And I save the window as "$$PurchaseInvoice090302062$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 	* Create Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -749,10 +749,10 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 			| 'Item'  |'Item key' |
 			| 'Trousers' |'36/Yellow'  |
 			And I input "210" text in "Price" field of "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder09030701$$"
 			And I save the window as "$$PurchaseOrder09030701$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create second test PO 137
 		When create the second test PO for a test on the creation mechanism based on
 		// * Change the document number to 137
@@ -790,10 +790,10 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 			| 'Item'  |'Item key' |
 			| 'Dress' |'M/White'  |
 			And I input "200" text in "Price" field of "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder09030702$$"
 			And I save the window as "$$PurchaseOrder09030702$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create based on Purchase order 136 and 137 Purchase invoice (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
@@ -815,7 +815,7 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 			// 	Then "1C:Enterprise" window is opened
 			// 	And I click "Yes" button
 			// 	And I input "137" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030702$$"
 			And I save the window as "$$PurchaseInvoice09030702$$"
 		If the field named "Company" is equal to "Second Company" Then
@@ -829,10 +829,10 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 			// 	Then "1C:Enterprise" window is opened
 			// 	And I click "Yes" button
 			// 	And I input "136" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030701$$"
 			And I save the window as "$$PurchaseInvoice09030701$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		When I click command interface button "Purchase invoice (create)"
 		Then the form attribute named "Partner" became equal to "Partner Ferron 1"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -848,7 +848,7 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 			// 	Then "1C:Enterprise" window is opened
 			// 	And I click "Yes" button
 			// 	And I input "137" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030702$$"
 			And I save the window as "$$PurchaseInvoice09030702$$"
 		If the field named "Company" is equal to "Second Company" Then
@@ -862,10 +862,10 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 			// 	Then "1C:Enterprise" window is opened
 			// 	And I click "Yes" button
 			// 	And I input "136" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030701$$"
 			And I save the window as "$$PurchaseInvoice09030701$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	And I close all client application windows
 	* Create Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -917,7 +917,7 @@ Scenario: _090308 create Goods reciept for Purchase invoice with different legal
 			And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
 			| 'Dress'    | '10,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice09030202$$' |
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	When I click command interface button "Goods receipt (create)"
 	* Check filling in second Goods reciept
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -940,7 +940,7 @@ Scenario: _090308 create Goods reciept for Purchase invoice with different legal
 			And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
 			| 'Dress'    | '10,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice09030202$$' |
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create Goods reciept
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
@@ -981,7 +981,7 @@ Scenario: _090309 create Goods reciept for several Purchase invoice with differe
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "130" text in "Number" field
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	When I click command interface button "Goods receipt (create)"
 	* Check filling in second Goods reciept
 		If the field named "Partner" is equal to "Partner Ferron 2" Then
@@ -1002,7 +1002,7 @@ Scenario: _090309 create Goods reciept for several Purchase invoice with differe
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "130" text in "Number" field
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	* Create Goods reciept
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
@@ -1046,7 +1046,7 @@ Scenario: _090310 create Goods reciept for several Purchase invoice with differe
 			| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302052$$' |
 			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302052$$' |
 			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302052$$' |
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	When I click command interface button "Goods receipt (create)"
 	* Check filling in second Goods reciept
 		And I save number of "ItemList" table lines as "D"
@@ -1068,7 +1068,7 @@ Scenario: _090310 create Goods reciept for several Purchase invoice with differe
 			| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' |  '$$PurchaseInvoice090302052$$' |
 			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' |  '$$PurchaseInvoice090302052$$' |
 			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' |  '$$PurchaseInvoice090302052$$' |
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	* Create Goods reciept
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
@@ -1097,7 +1097,7 @@ Scenario: _090311 create Goods reciept for several Purchase invoice with differe
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I input "135" text in "Number" field
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	* Create Goods reciept
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
@@ -1135,7 +1135,7 @@ Scenario: _090312 create Goods reciept for several Purchase order with different
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "137" text in "Number" field
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	When I click command interface button "Goods receipt (create)"
 	* Check filling in Goods reciept
 		If the field named "Company" is equal to "Second Company" Then
@@ -1156,7 +1156,7 @@ Scenario: _090312 create Goods reciept for several Purchase order with different
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "137" text in "Number" field
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	* Create Goods reciept
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
@@ -1181,7 +1181,7 @@ Scenario: _090313 create Goods reciept for Purchase order with different legal n
 			And I click "Yes" button
 			And I input "140" text in "Number" field
 		And I set checkbox named "GoodsReceiptBeforePurchaseInvoice"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create Purchase order 141
 		When create the second test PO for a test on the creation mechanism based on
 		* Change the document number to 141
@@ -1192,7 +1192,7 @@ Scenario: _090313 create Goods reciept for Purchase order with different legal n
 			And I click "Yes" button
 			And I input "141" text in "Number" field
 		And I set checkbox named "GoodsReceiptBeforePurchaseInvoice"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create based on Purchase order 140 and 141 Goods reciept (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
@@ -1221,7 +1221,7 @@ Scenario: _090313 create Goods reciept for Purchase order with different legal n
 				| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | 'Purchase order 140*' |
 				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | 'Purchase order 140*' |
 				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase order 140*' |
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	When I click command interface button "Goods receipt (create)"
 	* Check filling in Goods reciept
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -1244,7 +1244,7 @@ Scenario: _090313 create Goods reciept for Purchase order with different legal n
 				| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | 'Purchase order 140*' |
 				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | 'Purchase order 140*' |
 				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase order 140*' |
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	* Create Goods reciept
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
@@ -1305,7 +1305,7 @@ Scenario: _090314 create Goods reciept for several Purchase order with different
 			| 'Item'  |'Item key' |
 			| 'Trousers' |'36/Yellow'  |
 			And I input "210" text in "Price" field of "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create second test PO 143
 		When create the second test PO for a test on the creation mechanism based on
 		* Change the document number to 143
@@ -1349,7 +1349,7 @@ Scenario: _090314 create Goods reciept for several Purchase order with different
 			| 'Item'  |'Item key' |
 			| 'Dress' |'M/White'  |
 			And I input "200" text in "Price" field of "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create based on Purchase order 142 and 143 Goods reciept (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
@@ -1379,7 +1379,7 @@ Scenario: _090314 create Goods reciept for several Purchase order with different
 				| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | 'Purchase order 142*' |
 				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | 'Purchase order 142*' |
 				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase order 142*' |
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	When I click command interface button "Goods receipt (create)"
 	* Check filling in Goods reciept
 		If the field named "Partner" is equal to "Partner Ferron 2" Then
@@ -1400,7 +1400,7 @@ Scenario: _090314 create Goods reciept for several Purchase order with different
 				| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | 'Purchase order 142*' |
 				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | 'Purchase order 142*' |
 				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase order 142*' |
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	* Create Goods reciept
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
@@ -1459,7 +1459,7 @@ Scenario: _090315 create Goods reciept for several Purchase order with different
 			| 'Item'  |'Item key' |
 			| 'Trousers' |'36/Yellow'  |
 			And I input "210" text in "Price" field of "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create second test PO 145 Partner Ferron 1 with partner term Vendor Ferron Discount
 		When create the second test PO for a test on the creation mechanism based on
 		* Change the document number to 144
@@ -1500,7 +1500,7 @@ Scenario: _090315 create Goods reciept for several Purchase order with different
 			| 'Item'  |'Item key' |
 			| 'Dress' |'M/White'  |
 			And I input "200" text in "Price" field of "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create based on Purchase order 144 and 145 Goods reciept (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
@@ -1530,7 +1530,7 @@ Scenario: _090315 create Goods reciept for several Purchase order with different
 			| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | 'Purchase order 144*' |
 			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | 'Purchase order 144*' |
 			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase order 144*' |
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	When I click command interface button "Goods receipt (create)"
 	* Check filling in second Goods reciept
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -1554,7 +1554,7 @@ Scenario: _090315 create Goods reciept for several Purchase order with different
 			| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | 'Purchase order 144*' |
 			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | 'Purchase order 144*' |
 			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | 'Purchase order 144*' |
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	* Create Goods reciept
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
@@ -1616,7 +1616,7 @@ Scenario: _090316 create Goods reciept for several Purchase order with different
 			| 'Item'  |'Item key' |
 			| 'Trousers' |'36/Yellow'  |
 			And I input "210" text in "Price" field of "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create second test PO 147
 		When create the second test PO for a test on the creation mechanism based on
 		* Change the document number to 147
@@ -1657,7 +1657,7 @@ Scenario: _090316 create Goods reciept for several Purchase order with different
 			| 'Item'  |'Item key' |
 			| 'Dress' |'M/White'  |
 			And I input "200" text in "Price" field of "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create based on Purchase order 146 and 147 Goods reciept (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
@@ -1685,7 +1685,7 @@ Scenario: _090316 create Goods reciept for several Purchase order with different
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "146" text in "Number" field
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	When I click command interface button "Goods receipt (create)"
 	* Check filling in Goods reciept
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -1707,7 +1707,7 @@ Scenario: _090316 create Goods reciept for several Purchase order with different
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "146" text in "Number" field
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	* Check creation
 		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
 		And "List" table contains lines
@@ -1778,7 +1778,7 @@ Scenario: _090317 create Goods reciept for several Purchase order with different
 			| 'Item'  |'Item key' |
 			| 'Trousers' |'36/Yellow'  |
 			And I input "210" text in "Price" field of "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create second test PO 149
 		When create the second test PO for a test on the creation mechanism based on
 		* Change the document number to 149
@@ -1819,7 +1819,7 @@ Scenario: _090317 create Goods reciept for several Purchase order with different
 			| 'Item'  |'Item key' |
 			| 'Dress' |'M/White'  |
 			And I input "200" text in "Price" field of "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create Goods reciept
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
@@ -1847,7 +1847,7 @@ Scenario: _090317 create Goods reciept for several Purchase order with different
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "148" text in "Number" field
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	When I click command interface button "Goods receipt (create)"
 	* Check filling in second Goods reciept
 		Then the form attribute named "Store" became equal to "Store 02"
@@ -1869,7 +1869,7 @@ Scenario: _090317 create Goods reciept for several Purchase order with different
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "148" text in "Number" field
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	* Check creation
 		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
 		And "List" table contains lines
@@ -1924,7 +1924,7 @@ Scenario: _090318 create Purchase invoice for several Purchase order with differ
 			| 'Trousers' | '210,00' | '36/Yellow' | '30,000' | 'pcs'  | '6 300,00'     | 'Store 02' | '*'             |'Purchase order 140*' |
 			| 'Dress'    | '200,00' | 'M/White'   | '20,000' | 'pcs'  | '4 000,00'     | 'Store 02' | '*'             |'Purchase order 140*' |
 			| 'Dress'    | '210,00' | 'L/Green'   | '20,000' | 'pcs'  | '4 200,00'     | 'Store 02' | '*'             |'Purchase order 140*' |
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	When I click command interface button "Purchase invoice (create)"
 	* Check filling in second Purchase invoice
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -1951,7 +1951,7 @@ Scenario: _090318 create Purchase invoice for several Purchase order with differ
 			| 'Trousers' | '210,00' | '36/Yellow' | '30,000' | 'pcs'  | '6 300,00'     | 'Store 02' | '*'             |'Purchase order 140*' |
 			| 'Dress'    | '200,00' | 'M/White'   | '20,000' | 'pcs'  | '4 000,00'     | 'Store 02' | '*'             |'Purchase order 140*' |
 			| 'Dress'    | '210,00' | 'L/Green'   | '20,000' | 'pcs'  | '4 200,00'     | 'Store 02' | '*'             |'Purchase order 140*' |
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close all client application windows
 	* Create Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -2000,7 +2000,7 @@ Scenario: _090319 create Purchase invoice for several Purchase order with differ
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "155" text in "Number" field
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	When I click command interface button "Purchase invoice (create)"
 	* Check filling in Purchase invoice 146
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -2028,7 +2028,7 @@ Scenario: _090319 create Purchase invoice for several Purchase order with differ
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "155" text in "Number" field
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close all client application windows
 	* Create Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -2077,7 +2077,7 @@ Scenario: _090320 create Purchase invoice for several Purchase order with differ
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "147" text in "Number" field
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	When I click command interface button "Purchase invoice (create)"
 	* Check filling in Purchase invoice 144
 		Then the form attribute named "Partner" became equal to "Partner Ferron 1"
@@ -2107,7 +2107,7 @@ Scenario: _090320 create Purchase invoice for several Purchase order with differ
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "147" text in "Number" field
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click "Refresh" button
@@ -2155,7 +2155,7 @@ Scenario: _090322 create Purchase invoice for several Purchase order with differ
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "150" text in "Number" field
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	When I click command interface button "Purchase invoice (create)"
 	* Check filling in second Purchase invoice 149
 		Then the form attribute named "Partner" became equal to "Partner Ferron 1"
@@ -2182,7 +2182,7 @@ Scenario: _090322 create Purchase invoice for several Purchase order with differ
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "150" text in "Number" field
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	* Create Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click "Refresh" button
@@ -2199,7 +2199,7 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 			And I save the value of "Number" field as "$$NumberPurchaseOrder090323$$"
 			And I save the window as "$$PurchaseOrder090323$$"
 			And I set checkbox "Goods receipt before purchase invoice"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create 3 Goods receipt
 		* First GR
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -2223,7 +2223,7 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 			And I select current line in "ItemList" table
 			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 		* Second GR
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 			And I go to line in "List" table
@@ -2246,7 +2246,7 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 			And I select current line in "ItemList" table
 			And I input "12,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 		* Third GR
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 			And I go to line in "List" table
@@ -2269,7 +2269,7 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 			And I select current line in "ItemList" table
 			And I input "8,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create Purchase invoice for 3 Goods receipt
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table

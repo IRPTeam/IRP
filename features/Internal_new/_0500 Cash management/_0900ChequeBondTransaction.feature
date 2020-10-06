@@ -52,6 +52,7 @@ Scenario: _090000 preparation (Cheque bond transaction)
 				| "TaxCalculateVAT_TR" |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
+		When Create catalog Items objects
 	* Tax settings
 		When filling in Tax settings for company
 	* Create Sales invoice for DFC
@@ -91,10 +92,10 @@ Scenario: _090000 preparation (Cheque bond transaction)
 		// Then "1C:Enterprise" window is opened
 		// And I click "Yes" button
 		// And I input "3 000" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesInvoice090004$$"
 		And I save the window as "$$SalesInvoice090004$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check or create PurchaseOrder017001
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		If "List" table does not contain lines Then
@@ -422,7 +423,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 	// 	And I click "Yes" button
 	// 	And I input "1" text in "Number" field
 	* Post document
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberChequeBondTransaction090005$$"
 		And I save the window as "$$ChequeBondTransaction090005$$"
 	* Check movements
@@ -523,7 +524,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 			And I select current line in "List" table
 			And I activate "Partner ar basis document" field in "PaymentList" table
 			And I delete a line in "PaymentList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 		* Check for movement changes
 			And I click "Registrations report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -727,7 +728,7 @@ Scenario: _090006 motion check when removing a cheque from document Cheque bond 
 		| '5 000,00' | 'Bank account, TRY'  | 'Own cheque 1' | 'TRY'      | 'Big foot'   | '01. GivenToPartner' | 'Big foot' |
 		And I activate "Status" field in "ChequeBonds" table
 		And in the table "ChequeBonds" I click "Delete" button
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check movements
 		And I click "Registrations report" button
 		Then "Document registrations report" window is opened
@@ -800,7 +801,7 @@ Scenario: _090006 motion check when removing a cheque from document Cheque bond 
 			| 'TRY'      | 'Bank account, TRY' |
 		And I select current line in "List" table
 		And I finish line editing in "ChequeBonds" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click "Registrations report" button
 		Then "Document registrations report" window is opened
 		And "ResultTable" spreadsheet document contains lines:
@@ -979,10 +980,10 @@ Scenario: _2020001 test data creation
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "11" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberChequeBondTransaction2020001$$"
 			And I save the window as "$$ChequeBondTransaction2020001$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 			And "List" table contains lines
 			| 'Number' |
 			| '$$NumberChequeBondTransaction2020001$$'      |
@@ -1315,6 +1316,7 @@ Scenario: _2020011 check filter under valid agreements depending on the date of 
 		And I close all client application windows
 
 Scenario: _2020012 check input of cheque statuses by line
+	And I close all client application windows
 	* Open document form ChequeBondTransaction
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I click the button named "FormCreate"
@@ -1429,7 +1431,7 @@ Scenario: _2020013 check the selection of documents for distribution of the amou
 			| 'TRY'      | 'Bank account, TRY' |
 		And I select current line in "List" table
 	* Post a ChequeBondTransaction and checking movements
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberChequeBondTransaction2020013$$"
 		And I save the window as "$$ChequeBondTransaction2020013$$"
 		And I click "Registrations report" button

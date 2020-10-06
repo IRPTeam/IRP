@@ -81,7 +81,7 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "9 092" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberSalesOrder300521$$"
 			And I save the window as "$$SalesOrder300521$$"
 		* Create Shipment confirmation based on SO
@@ -91,10 +91,10 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "9 092" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation300521$$"
 			And I save the window as "$$ShipmentConfirmation300521$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 			And Delay 5
 		* Create Sales invoice based on created SC
 			And I click "Sales invoice" button
@@ -105,10 +105,10 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "9 012" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberSalesInvoice300521$$"
 			And I save the window as "$$SalesInvoice300521$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 			And Delay 5
 		* Open Related documents
 			When in opened panel I select "$$SalesOrder300521$$"

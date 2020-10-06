@@ -845,7 +845,7 @@ Scenario: create an order for Lomaniti Basic Partner terms, TRY (Dress and Boots
 		And I input "1,000" text in "Q" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 
 
 

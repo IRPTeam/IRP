@@ -171,10 +171,10 @@ Scenario: _25003 check Sales order printing
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 	* Post document
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesInvoice25003$$"
 		And I save the window as "$$SalesInvoice25003$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I go to line in "List" table
 		| 'Number' |
 		| '$$NumberSalesInvoice25003$$'  |

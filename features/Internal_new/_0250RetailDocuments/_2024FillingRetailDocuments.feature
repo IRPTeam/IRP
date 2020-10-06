@@ -342,9 +342,9 @@ Scenario: _0154135 create document Retail Sales Receipt
 			And I finish line editing in "Payments" table
 		* Post Retail sales receipt
 			And I save the value of "Number" field as "$$NumberRetailSalesReceipt0154135$$"
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the window as "$$RetailSalesReceipt015413$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 			And "List" table contains lines
 			| 'Number' |
 			| '$$NumberRetailSalesReceipt0154135$$'      |
@@ -413,10 +413,10 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 			| 'Shop 01' |
 		And I select current line in "List" table
 	* Post Retail return receipt
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberRetailReturnReceipt0154136$$"
 		And I save the window as "$$RetailReturnReceipt0154136$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And "List" table contains lines
 		| 'Number' |
 		| '$$NumberRetailReturnReceipt0154136$$'      |
@@ -1259,13 +1259,13 @@ Scenario:  _0154148 check that the Retail return receipt amount and the amount o
 		And I activate field named "PaymentsAmount" in "Payments" table
 		And I input "600,00" text in the field named "PaymentsAmount" of "Payments" table
 		And I finish line editing in "Payments" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Payment amount [600,00] and return amount [500,00] not match" substring will appear in 10 seconds
 		And I move to "Item list" tab
 		And I select current line in "ItemList" table
 		And I input "700,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check that the Retail return receipt amount and the amount of payment match
 		Then I wait that in user messages the "Payment amount [600,00] and return amount [700,00] not match" substring will appear in 10 seconds
 		And I move to "Payments" tab
@@ -1280,7 +1280,7 @@ Scenario:  _0154148 check that the Retail return receipt amount and the amount o
 		And I select current line in "Payments" table
 		And I input "120,00" text in the field named "PaymentsAmount" of "Payments" table
 		And I finish line editing in "Payments" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Payment amount [720,00] and return amount [700,00] not match" substring will appear in 10 seconds
 		And I move to "Item list" tab
 		And I click the button named "Add"
@@ -1298,10 +1298,10 @@ Scenario:  _0154148 check that the Retail return receipt amount and the amount o
 		And I activate "Price" field in "ItemList" table
 		And I input "200,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Payment amount [720,00] and return amount [900,00] not match" substring will appear in 10 seconds
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Payment amount [720,00] and return amount [700,00] not match" substring will appear in 10 seconds
 		And I close all client application windows
 		
@@ -1404,10 +1404,10 @@ Scenario:  _0154149 create Cash statement
 			And I finish line editing in "Payments" table
 		* Post Retail sales receipt
 			And I input "01.09.2020 00:00:00" text in "Date" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberRetailSalesReceipt01541491$$"
 			And I save the window as "$$RetailSalesReceipt01541491$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 			And "List" table contains lines
 			| 'Number' |
 			| '$$NumberRetailSalesReceipt01541491$$'      |
@@ -1469,10 +1469,10 @@ Scenario:  _0154149 create Cash statement
 			And I finish line editing in "Payments" table
 		* Post Retail sales receipt
 			And I input "01.09.2020 12:50:00" text in "Date" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberRetailSalesReceipt01541492$$"
 			And I save the window as "$$RetailSalesReceipt01541492$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 			And "List" table contains lines
 			| 'Number' |
 			| '$$NumberRetailSalesReceipt01541492$$'      |
@@ -1565,10 +1565,10 @@ Scenario:  _0154149 create Cash statement
 			And I finish line editing in "Payments" table
 		* Post Retail sales receipt
 			And I input "01.09.2020 16:40:04" text in "Date" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberRetailSalesReceipt01541493$$"
 			And I save the window as "$$RetailSalesReceipt01541493$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 			And "List" table contains lines
 			| 'Number' |
 			| '$$NumberRetailSalesReceipt01541493$$'      |
@@ -1661,10 +1661,10 @@ Scenario:  _0154149 create Cash statement
 			And I finish line editing in "Payments" table
 		* Post Retail sales receipt
 			And I input "31.08.2020 12:40:04" text in "Date" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberRetailSalesReceipt01541494$$"
 			And I save the window as "$$RetailSalesReceipt01541494$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 			And "List" table contains lines
 			| 'Number' |
 			| '$$NumberRetailSalesReceipt01541494$$'      |
@@ -1694,10 +1694,10 @@ Scenario:  _0154149 create Cash statement
 			| 'Shop 01'     |
 		And I select current line in "List" table
 		And I input "01.09.2020 13:40:04" text in "Date" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberRetailReturnReceipt01541494$$"
 		And I save the window as "$$RetailReturnReceipt01541494$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create Retail return receipt based on RetailSalesReceipt01541493
 		And I go to line in "List" table
 			| 'Number' |
@@ -1722,10 +1722,10 @@ Scenario:  _0154149 create Cash statement
 			| 'Shop 01'     |
 		And I select current line in "List" table
 		And I input "01.09.2020 15:31:04" text in "Date" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberRetailReturnReceipt01541493$$"
 		And I save the window as "$$RetailReturnReceipt01541493$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create Retail return receipt based on RetailSalesReceipt01541491
 		And I go to line in "List" table
 			| 'Number' |
@@ -1738,10 +1738,10 @@ Scenario:  _0154149 create Cash statement
 			| 'Shop 01'     |
 		And I select current line in "List" table
 		And I input "01.09.2020 16:55:04" text in "Date" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberRetailReturnReceipt01541491$$"
 		And I save the window as "$$RetailReturnReceipt01541491$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create Cash Statement
 		Given I open hyperlink "e1cib/list/Document.CashStatement"
 		And I click the button named "FormCreate"
@@ -1781,10 +1781,10 @@ Scenario:  _0154149 create Cash statement
 				| 'Cash'         | 'Cash desk №4' | ''           | '1 450,00' |
 				| 'Card 01'      | 'Transit Main' | '51,60'      | ''         |
 			Then the number of "Payments" table lines is "меньше или равно" 2
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashStatement01541491$$"
 		And I save the window as "$$CashStatement01541491$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And "List" table contains lines
 				| 'Number'                        |
 				| '$$NumberCashStatement01541491$$'  |
@@ -2251,7 +2251,7 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       |
@@ -2328,7 +2328,7 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "4 011,87"
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "730,13"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 744,00"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 
 
 
@@ -2422,7 +2422,7 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       |
@@ -2576,7 +2576,7 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,15'     | '800,86'     | '945,00'       |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,15'     | '800,85'     | '945,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Change quantity and check tax and net amount calculation 
 			And I go to line in "ItemList" table
@@ -2596,7 +2596,7 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 			And I input "1418,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,68'   | '1 418,00'     |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,69'   | '1 418,00'     |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Set checkbox Price include tax and check tax and net amount calculation when change total amount
 			And I move to "Other" tab
@@ -2703,7 +2703,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,15'     | '800,86'     | '945,00'       |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,15'     | '800,85'     | '945,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Change quantity and check tax and net amount calculation 
 			And I go to line in "ItemList" table
@@ -2723,7 +2723,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 			And I input "1418,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,68'   | '1 418,00'     |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,69'   | '1 418,00'     |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Set checkbox Price include tax and check tax and net amount calculation when change total amount
 			And I move to "Other" tab

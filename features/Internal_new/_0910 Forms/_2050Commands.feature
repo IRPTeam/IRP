@@ -158,11 +158,11 @@ Scenario: _0205001 preparation
 			// 	Then "1C:Enterprise" window is opened
 			// 	And I click "Yes" button
 			// 	And I input "3 900" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice0205001$$"
 			And I save the window as "$$PurchaseInvoice0205001$$"
 			* Post and check saving
-				And I click "Post and close" button
+				And I click the button named "FormPostAndClose"
 				And "List" table contains lines
 					| 'Number' |
 					| '$$NumberPurchaseInvoice0205001$$'       |

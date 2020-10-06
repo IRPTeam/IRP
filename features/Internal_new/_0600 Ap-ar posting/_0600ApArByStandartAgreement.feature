@@ -91,14 +91,14 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 			And I activate "Q" field in "ItemList" table
 			And I input "20,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberSalesInvoice060002$$"
 			And I save the window as "$$SalesInvoice060002$$"
 		* Check filling in sales invoice
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '20,000' | 'Basic Price Types' | 'pcs'  | '*'          | '*'          | '11 000,00'    | 'Store 01' |
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Check movements Sales Invoice by register PartnerArTransactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerArTransactions"
 		And "List" table contains lines
@@ -151,10 +151,10 @@ Scenario: _060003 create Cash reciept with the type of settlements under standar
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "601" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashReceipt060003$$"
 		And I save the window as "$$CashReceipt060003$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check movements by register PartnerArTransactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerArTransactions"
 		And "List" table contains lines
@@ -200,10 +200,10 @@ Scenario: _060004 check the offset of the advance for Sales invoice with the typ
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "602" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankReceipt060004$$"
 		And I save the window as "$$BankReceipt060004$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check movements Bank Receipt by register AdvanceFromCustomers
 		Given I open hyperlink "e1cib/list/AccumulationRegister.AdvanceFromCustomers"
 		And "List" table contains lines
@@ -242,10 +242,10 @@ Scenario: _060004 check the offset of the advance for Sales invoice with the typ
 			And I activate "Q" field in "ItemList" table
 			And I input "20,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberSalesInvoice060004$$"
 			And I save the window as "$$SalesInvoice060004$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Check movements SalesInvoice by register PartnerArTransactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerArTransactions"
 		And "List" table contains lines
@@ -304,7 +304,7 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Price type'               | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '20,000' | 'en description is empty' | 'pcs'  | '1 677,97'   | '9 322,03'   | '11 000,00'    | 'Store 01' |
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice060005$$"
 			And I save the window as "$$PurchaseInvoice060005$$"
 	* Check movements Purchase Invoice by register PartnerApTransactions
@@ -359,10 +359,10 @@ Scenario: _060006 create Cash payment with the type of settlements under standar
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "601" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberCashPayment060006$$"
 			And I save the window as "$$CashPayment060006$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check movements by register PartnerArTransactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerApTransactions"
 		And "List" table contains lines
@@ -402,10 +402,10 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "602" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankPayment060007$$"
 		And I save the window as "$$BankPayment060007$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check movements Bank Payment by register AdvanceToSuppliers
 		Given I open hyperlink "e1cib/list/AccumulationRegister.AdvanceToSuppliers"
 		And "List" table contains lines
@@ -447,7 +447,7 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 			And I input "20,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input "550,00" text in "Price" field of "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice060007$$"
 			And I save the window as "$$PurchaseInvoice060007$$"
 	* Check movements PurchaseInvoice by register PartnerApTransactions

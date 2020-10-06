@@ -108,10 +108,10 @@ Scenario: _021001 create document Inventory Transfer - Store sender doesn't use 
 		| 'Inventory transfer order'         | 'Item'  | 'Quantity' | 'Item key' | 'Unit' |
 		| '$$InventoryTransferOrder020001$$' | 'Dress' | '50,000'   | 'M/White'  | 'pcs'  |
 		| '$$InventoryTransferOrder020001$$' | 'Dress' | '10,000'   | 'S/Yellow' | 'pcs'  |
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberInventoryTransfer021001$$"
 		And I save the window as "$$InventoryTransfer021001$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close current window
 
 Scenario: _021002 check Inventory transfer (based on order) posting by register TransferOrderBalance (-) (Store sender doesn't use Goods receipt, Store receiver use Shipment confirmaton)
@@ -184,10 +184,10 @@ Scenario: _021006 create document Inventory Transfer - Store sender use Shipment
 		And "ItemList" table contains lines
 		| '#' | 'Inventory transfer order'         | 'Item'  | 'Quantity' | 'Item key' | 'Unit' |
 		| '1' | '$$InventoryTransferOrder020004$$' | 'Dress' | '20,000'   | 'L/Green'  | 'pcs'  |
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberInventoryTransfer021006$$"
 		And I save the window as "$$InventoryTransfer021006$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close current window
 
 Scenario: _021007 check Inventory transfer (based on order) posting by register TransferOrderBalance (-) (Store sender use Goods receipt, Store receiver use Shipment confirmaton)
@@ -256,10 +256,10 @@ Scenario: _021012 create document Inventory Transfer - Store sender use Shipment
 		And "ItemList" table contains lines
 		| '#' | 'Inventory transfer order'         | 'Item'  | 'Quantity' | 'Item key' | 'Unit' |
 		| '1' | '$$InventoryTransferOrder020007$$' | 'Dress' | '17,000'   | 'L/Green'  | 'pcs'  |
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberInventoryTransfer021012$$"
 		And I save the window as "$$InventoryTransfer021012$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close current window
 	
 Scenario: _021013 check Inventory transfer (based on order) posting by register TransferOrderBalance (-) (Store sender use Goods receipt, Store receiver doesn't use Shipment confirmaton)
@@ -328,10 +328,10 @@ Scenario: _021018 create document Inventory Transfer - Store sender doesn't use 
 		And "ItemList" table contains lines
 		| '#' | 'Inventory transfer order'         | 'Item'     | 'Quantity' | 'Item key'  | 'Unit' |
 		| '1' | '$$InventoryTransferOrder020010$$' | 'Trousers' | '10,000'   | '36/Yellow' | 'pcs'  |
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberInventoryTransfer021018$$"
 		And I save the window as "$$InventoryTransfer021018$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close current window
 
 Scenario: _021019  check Inventory transfer (without order) posting by register TransferOrderBalance (-) (Store sender doesn't use Goods receipt, Store receiver doesn't use Shipment confirmaton)	
@@ -421,10 +421,10 @@ Scenario: _021024 create document Inventory Transfer - Store sender doesn't use 
 	And I activate "Quantity" field in "ItemList" table
 	And I input "7,000" text in "Quantity" field of "ItemList" table
 	And I finish line editing in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberInventoryTransfer021024$$"
 	And I save the window as "$$InventoryTransfer021024$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 
 Scenario: _021025 check the absence posting of Inventory transfer (without order) posting by register TransferOrderBalance Store sender doesn't use Shipment confirmation, Store receiver use Goods receipt
 	
@@ -554,10 +554,10 @@ Scenario: _021036 create document Inventory Transfer - Store sender use Shipment
 	And I activate "Quantity" field in "ItemList" table
 	And I input "4,000" text in "Quantity" field of "ItemList" table
 	And I finish line editing in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberInventoryTransfer021036$$"
 	And I save the window as "$$InventoryTransfer021036$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 
 Scenario: _021037 check the absence posting of Inventory transfer (without order) posting by register TransferOrderBalance Store sender use Shipment confirmation, Store receiver doesn't use Goods receipt
 	
@@ -643,10 +643,10 @@ Scenario: _021042 create document Inventory Transfer - Store sender doesn't use 
 	And I activate "Quantity" field in "ItemList" table
 	And I input "4,000" text in "Quantity" field of "ItemList" table
 	And I finish line editing in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberInventoryTransfer021042$$"
 	And I save the window as "$$InventoryTransfer021042$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 
 Scenario: _021043 check the absence posting of Inventory transfer (without order) posting by register TransferOrderBalance (Store sender doesn't use Goods receipt, Store receiver doesn't use Shipment confirmaton)
 	

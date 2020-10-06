@@ -71,7 +71,6 @@ Scenario: _300301 preparation (creation item key when create Unbundling)
 		* Create Specification Chewing gum
 			And I click the button named "FormCreate"
 			And I change "Type" radio button value to "Set"
-			And I input "Chewing gum2" text in "TR" field
 			And I click Select button of "Item type" field
 			And I go to line in "List" table
 				| 'Description' |
@@ -105,8 +104,8 @@ Scenario: _300301 preparation (creation item key when create Unbundling)
 			And I input "5,000" text in "Quantity" field of "FormTable*" table
 			And I finish line editing in "FormTable*" table
 			And I click Open button of the field named "Description_tr"
-			And I input "Chewing gum" text in the field named "Description_en"
-			And I input "Chewing gum" text in the field named "Description_tr"
+			And I input "Chewing gum2" text in the field named "Description_en"
+			And I input "Chewing gum2" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I click "Save" button
 			And I close all client application windows
@@ -164,7 +163,7 @@ Scenario: _300302 create Unbundling and check creation item key
 			| 'Item'           | 'Quantity' | 'Item key'    | 'Unit' |
 			| 'Chewing gum TR' | '5,000'   | 'Mentol/Pineapple'  | 'adet' |
 			| 'Chewing gum TR' | '5,000'   | 'Mint/Watermelon' | 'adet' |
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create item key
 		Given I open hyperlink "e1cib/list/Catalog.ItemKeys"
 		And "List" table contains lines
@@ -208,7 +207,7 @@ Scenario: _300302 create Unbundling and check creation item key
 				| 'Item'           | 'Quantity' | 'Item key'    | 'Unit' |
 				| 'Chewing gum TR' | '5,000'   | 'Mentol/Pineapple'  | 'adet' |
 				| 'Chewing gum TR' | '5,000'   | 'Mint/Watermelon' | 'adet' |
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 		* Check that item key was not duplicated
 			Given I open hyperlink "e1cib/list/Catalog.Items"
 			And I go to line in "List" table

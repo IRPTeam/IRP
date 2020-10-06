@@ -167,10 +167,10 @@ Scenario: _2990000 preparation (product inventory)
 			And I select current line in "Inventory" table
 			And I input "400,000" text in "Quantity" field of "Inventory" table
 			And I finish line editing in "Inventory" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberOpeningEntry2990000$$"
 			And I save the window as "$$OpeningEntry2990000$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 
 
 Scenario: _2990001 filling in the status guide for PhysicalInventory and PhysicalCountByLocation
@@ -329,7 +329,7 @@ Scenario: _2990002 create Stock adjustment as surplus
 	// 	And I click "Yes" button
 	// 	And I input "1" text in "Number" field
 	* Post document
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberStockAdjustmentAsSurplus2990002$$"
 		And I save the window as "$$StockAdjustmentAsSurplus2990002$$"
 	* Check movements
@@ -371,7 +371,7 @@ Scenario: _2990002 create Stock adjustment as surplus
 			| 'Description'    |
 			| 'Store 01' |
 		And I select current line in "List" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click "Registrations report" button
 		And "ResultTable" spreadsheet document contains lines:
 		| '$$StockAdjustmentAsSurplus2990002$$' | ''            | ''          | ''               | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
@@ -449,7 +449,7 @@ Scenario: _2990003 create Stock adjustment as write off
 	// 	And I click "Yes" button
 	// 	And I input "1" text in "Number" field
 	* Post document
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberStockAdjustmentAsWriteOff2990003$$"
 		And I save the window as "$$StockAdjustmentAsWriteOff2990003$$"
 	* Check movements
@@ -491,7 +491,7 @@ Scenario: _2990003 create Stock adjustment as write off
 			| 'Description'    |
 			| 'Store 01' |
 		And I select current line in "List" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I click "Registrations report" button
 		And "ResultTable" spreadsheet document contains lines:
 		| '$$StockAdjustmentAsWriteOff2990003$$' | ''            | ''          | ''               | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                     |
@@ -555,7 +555,7 @@ Scenario: _2990004 create Physical inventory (store use GR and SC)
 	// 	And I click "Yes" button
 	// 	And I input "1" text in "Number" field
 	* Posting the document Physical inventory
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPhysicalInventory2990004$$"
 		And I save the window as "$$PhysicalInventory2990004$$"
 		And I click "Registrations report" button
@@ -667,7 +667,7 @@ Scenario: _2990005 create Physical inventory (store doesn't use GR and SC)
 	// 	And I click "Yes" button
 	// 	And I input "2" text in "Number" field
 	* Posting the document Physical inventory
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPhysicalInventory2990005$$"
 		And I save the window as "$$PhysicalInventory2990005$$"
 		And I click "Registrations report" button
@@ -734,7 +734,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 	// 	Then "Stock adjustment as surplus (create) *" window is opened
 	// 	And I input "2" text in "Number" field
 	* Posting the document and check movements
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberStockAdjustmentAsSurplus2990006$$"
 		And I save the window as "$$StockAdjustmentAsSurplus$$"
 		And I click "Registrations report" button
@@ -830,7 +830,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 	// 	And I click "Yes" button
 	// 	And I input "2" text in "Number" field
 	* Posting the document and check movements
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberStockAdjustmentAsWriteOff2990007$$"
 		And I save the window as "$$StockAdjustmentAsWriteOff2990007$$"
 		And I click "Registrations report" button
@@ -918,7 +918,7 @@ Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as wr
 		And I select current line in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create a document StockAdjustmentAsWriteOff for the remaining quantity and check filling in
 		And I click the button named "FormDocumentStockAdjustmentAsWriteOffGenerateStockAdjustmentAsWriteOff"
 		And I click Select button of "Company" field
@@ -941,7 +941,7 @@ Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as wr
 			| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'        | 'Unit' | 'Expense type' | 'Basis document'        |
 			| 'Dress' | '1,000'    | 'XS/Blue'  | 'Logistics department' | 'pcs'  | 'Delivery'     | '$$PhysicalInventory2990005$$' |
 		Then the number of "ItemList" table lines is "меньше или равно" 1
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create a document StockAdjustmentAsSurplus on a partial quantity
 		And I click the button named "FormDocumentStockAdjustmentAsSurplusGenerateStockAdjustmentAsSurplus"
 		And I click Select button of "Company" field
@@ -965,7 +965,7 @@ Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as wr
 		And I select current line in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Create a document StockAdjustmentAsSurplus for the remaining quantity and check filling in
 		And I click the button named "FormDocumentStockAdjustmentAsSurplusGenerateStockAdjustmentAsSurplus"
 		And I click Select button of "Company" field
@@ -988,7 +988,7 @@ Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as wr
 			| 'Item'     | 'Quantity' | 'Item key'   | 'Business unit'        | 'Unit' | 'Revenue type' | 'Basis document'        |
 			| 'Trousers' | '4,000'    | '36/Yellow'  | 'Logistics department' | 'pcs'  | 'Delivery'     | '$$PhysicalInventory2990005$$' |
 		Then the number of "ItemList" table lines is "меньше или равно" 1
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 Scenario: _2990009 check for updates Update Exp Count
 	* Open document form
@@ -1071,7 +1071,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 			| 'Description'  |
 			| 'Anna Petrova' |
 		And I select current line in "List" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPhysicalInventory2990010$$"
 		And I save the window as "$$PhysicalInventory2990010$$"
 	* Create Physical count by locatio
@@ -1209,7 +1209,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 				And I finish line editing in "ItemList" table
 			* Change date and post
 				And I input begin of the current month date in "Date" field
-				And I click "Post and close" button
+				And I click the button named "FormPostAndClose"
 	* Post Shipment confirmation retroactively
 		* Open Shipment confirmation
 			Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
@@ -1247,7 +1247,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 		* Change date and post
 			And I move to "Other" tab
 			And I input begin of the current month date in "Date" field
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 		And I close all client application windows
 	* Updating the quantity in the inventory document with Physical count by location created
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
@@ -1313,7 +1313,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 				| 'Description'  |
 				| 'Anna Petrova' |
 			And I select current line in "List" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I click "Physical count by location" button
 		* Create new Physical count by location
 			And "ItemList" table contains lines
@@ -1326,11 +1326,11 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 		* Check for impossibility to change the status to the one that makes movements with open Physical count by location
 			And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 			And I select "Done" exact value from "Status" drop-down list
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then I wait that in user messages the 'There are "Physical count by location" documents that are not closed.' substring will appear in 30 seconds
 		* Change the status to "In processing" and post the document
 			And I select "In processing" exact value from "Status" drop-down list
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 
 Scenario: _2990011 re-filling Physical inventory based on Physical count by location list
 	* Open Physical count by location list
@@ -1407,7 +1407,7 @@ Scenario: _2990011 re-filling Physical inventory based on Physical count by loca
 	* Check that you cannot close the inventory without closed Physical count by location
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I select "Done" exact value from "Status" drop-down list
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the 'There are "Physical count by location" documents that are not closed.' substring will appear in 30 seconds
 	* Check that Physical count by location are not created and their statuses do not change
 		And I select "In processing" exact value from "Status" drop-down list
@@ -1443,7 +1443,7 @@ Scenario: _2990011 re-filling Physical inventory based on Physical count by loca
 		| '197,000'     | 'Dress' | '-9,000'     | 'XS/Blue'  | '206,000'    | 'pcs'  | 'Arina Brown'        | '#2 date:*'      |
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I select "Done" exact value from "Status" drop-down list
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check movements Physical inventory
 		And I click "Registrations report" button
 		And "ResultTable" spreadsheet document contains lines:

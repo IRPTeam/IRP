@@ -155,10 +155,10 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "5 600" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation0290001$$"
 			And I save the window as "$$ShipmentConfirmation0290001$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create SC for Nicoletta from Store 03 (Main company)
 		* Open Shipment confirmation
 			Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
@@ -220,10 +220,10 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "5 601" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation02900011$$"
 			And I save the window as "$$ShipmentConfirmation02900011$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create SC for Ferron BP from Store 03 (Company Ferron BP, Main company)
 		* OPen Shipment confirmation
 			Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
@@ -306,10 +306,10 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "5 602" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation02900012$$"
 			And I save the window as "$$ShipmentConfirmation02900012$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create SC for Ferron BP from Store 03 for Second Company Ferron BP (Main company) 
 		* Open Shipment confirmation
 			Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
@@ -360,10 +360,10 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 			// Then "1C:Enterprise" window is opened
 			// And I click "Yes" button
 			// And I input "5 603" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation02900013$$"
 			And I save the window as "$$ShipmentConfirmation02900013$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create SC for Ferron BP from Store 03 for Company Ferron BP (Second company)
 		* Open Shipment confirmation
 			Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
@@ -430,10 +430,10 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 		// 	Then "1C:Enterprise" window is opened
 		// 	And I click "Yes" button
 		// 	And I input "5 604" text in "Number" field
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation02900014$$"
 			And I save the window as "$$ShipmentConfirmation02900014$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And "List" table contains lines
@@ -564,7 +564,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				And I input "5 602" text in "Number" field
 				And I click "Yes" button
 				And I input "5 602" text in "Number" field
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 		* Create second SI
 			And I save number of "ItemList" table lines as "M"
 			If the field named "Company" is equal to "Second Company" Then
@@ -669,7 +669,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				And I input "5 602" text in "Number" field
 				And I click "Yes" button
 				And I input "5 602" text in "Number" field
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 		* Create third SI
 			And I save number of "ItemList" table lines as "M"
 			If the field named "Company" is equal to "Second Company" Then
@@ -778,7 +778,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				And I input "5 602" text in "Number" field
 				And I click "Yes" button
 				And I input "5 602" text in "Number" field
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 		* Create fourth SI
 			And I save number of "ItemList" table lines as "M"
 			If the field named "Company" is equal to "Second Company" Then
@@ -879,4 +879,4 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 				And I input "5 602" text in "Number" field
 				And I click "Yes" button
 				And I input "5 602" text in "Number" field
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"

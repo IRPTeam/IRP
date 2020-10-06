@@ -78,7 +78,7 @@ Scenario: _090401 create Sales invoice for several Sales order with different le
 	And in the table "ItemList" I click "% Offers" button
 	And in the table "Offers" I click the button named "FormOK"
 		# temporarily
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 * Create Sales order 325
 	When create the second test SO for a test on the creation mechanism based on
 	* Change the document number to 325
@@ -93,7 +93,7 @@ Scenario: _090401 create Sales invoice for several Sales order with different le
 	And in the table "ItemList" I click "% Offers" button
 	And in the table "Offers" I click the button named "FormOK"
 		# temporarily
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 * Create Sales invoice based on Sales order 324 and 325 (should be created 2)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I go to line in "List" table
@@ -121,7 +121,7 @@ Scenario: _090401 create Sales invoice for several Sales order with different le
 	And in the table "ItemList" I click "% Offers" button
 	And in the table "Offers" I click the button named "FormOK"
 		# temporarily
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	When I click command interface button "Sales invoice (create)"
 	And Delay 2
 	Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -147,7 +147,7 @@ Scenario: _090401 create Sales invoice for several Sales order with different le
 	And in the table "ItemList" I click "% Offers" button
 	And in the table "Offers" I click the button named "FormOK"
 		# temporarily
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 And I close all client application windows
 
 Scenario: _090402 create Sales invoice for several Sales order with the same partner, legal name, partner term, currency and store
@@ -171,7 +171,7 @@ Scenario: _090402 create Sales invoice for several Sales order with the same par
 	And in the table "ItemList" I click "% Offers" button
 	And in the table "Offers" I click the button named "FormOK"
 		# temporarily
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 * Create test Sales order 327
 	When create the second test SO for a test on the creation mechanism based on
 	* Change the document number to 327
@@ -191,7 +191,7 @@ Scenario: _090402 create Sales invoice for several Sales order with the same par
 	And in the table "ItemList" I click "% Offers" button
 	And in the table "Offers" I click the button named "FormOK"
 		# temporarily
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 * Create based on Sales order 326 and 327 Sales invoice (should be created 1)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I go to line in "List" table
@@ -221,7 +221,7 @@ Scenario: _090402 create Sales invoice for several Sales order with the same par
 	And in the table "ItemList" I click "% Offers" button
 	And in the table "Offers" I click the button named "FormOK"
 		# temporarily
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close all client application windows
 	
 Scenario: _090403 create Sales invoice for several Sales order with different partners of the same legal name (partner terms are the same)
@@ -263,7 +263,7 @@ Scenario: _090403 create Sales invoice for several Sales order with different pa
 	And in the table "ItemList" I click "% Offers" button
 	And in the table "Offers" I click the button named "FormOK"
 		# temporarily
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 * Create second test SO 329
 	When create the second test SO for a test on the creation mechanism based on
 	* Change the document number to 329
@@ -301,7 +301,7 @@ Scenario: _090403 create Sales invoice for several Sales order with different pa
 	And in the table "ItemList" I click "% Offers" button
 	And in the table "Offers" I click the button named "FormOK"
 		# temporarily
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 * Create based on Sales order 328 and 329 Sales invoice (should be created 2)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I go to line in "List" table
@@ -329,7 +329,7 @@ Scenario: _090403 create Sales invoice for several Sales order with different pa
 	And in the table "ItemList" I click "% Offers" button
 	And in the table "Offers" I click the button named "FormOK"
 		# temporarily
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	When I click command interface button "Sales invoice (create)"
 	And Delay 2
 	Then the form attribute named "Partner" became equal to "Partner Ferron 1"
@@ -355,7 +355,7 @@ Scenario: _090403 create Sales invoice for several Sales order with different pa
 	And in the table "ItemList" I click "% Offers" button
 	And in the table "Offers" I click the button named "FormOK"
 		# temporarily
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 And I close all client application windows
 
 
@@ -398,7 +398,7 @@ Scenario: _090404 create Sales invoice for several Sales order with different pa
 	And in the table "ItemList" I click "% Offers" button
 	And in the table "Offers" I click the button named "FormOK"
 		# temporarily
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 * Create second test SO 331 Partner Ferron 1 and select partner term Vendor Ferron Discount
 	When create the second test SO for a test on the creation mechanism based on
 	* Change the document number to 331
@@ -435,7 +435,7 @@ Scenario: _090404 create Sales invoice for several Sales order with different pa
 	And in the table "ItemList" I click "% Offers" button
 	And in the table "Offers" I click the button named "FormOK"
 		# temporarily
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 * Create based on Sales order 330 and 331 Sales invoice (should be created 2)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I go to line in "List" table
@@ -458,7 +458,7 @@ Scenario: _090404 create Sales invoice for several Sales order with different pa
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I input "331" text in "Number" field
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	When I click command interface button "Sales invoice (create)"
 	And Delay 2
 	Then the form attribute named "Partner" became equal to "Partner Ferron 1"
@@ -479,7 +479,7 @@ Scenario: _090404 create Sales invoice for several Sales order with different pa
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I input "330" text in "Number" field
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 And I close all client application windows
 
 
@@ -522,7 +522,7 @@ Scenario: _090405 create Sales invoice for several Sales order with different st
 	And in the table "ItemList" I click "% Offers" button
 	And in the table "Offers" I click the button named "FormOK"
 		# temporarily
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 * Create second test SO 335
 	When create the second test SO for a test on the creation mechanism based on
 	* Change the document number to 335
@@ -560,7 +560,7 @@ Scenario: _090405 create Sales invoice for several Sales order with different st
 	And in the table "ItemList" I click "% Offers" button
 	And in the table "Offers" I click the button named "FormOK"
 		# temporarily
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 * Create based on Sales order 335 and 334 Sales invoice (should be created 1)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I go to line in "List" table
@@ -584,7 +584,7 @@ Scenario: _090405 create Sales invoice for several Sales order with different st
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I input "335" text in "Number" field
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close all client application windows
 
 	
@@ -627,7 +627,7 @@ Scenario: _090406 create Sales invoice for several Sales order with different ow
 				| Description    |
 				| Second Company |
 		And I select current line in "List" table
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 * Create second test SO 337
 	When create the second test SO for a test on the creation mechanism based on
 	* Change the document number to 337
@@ -660,7 +660,7 @@ Scenario: _090406 create Sales invoice for several Sales order with different ow
 				| Store 02  |
 		And I select current line in "List" table
 		And I click "OK" button
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 * Create based on Sales order 336 and 337 Sales invoice (should be created 2)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I go to line in "List" table
@@ -683,7 +683,7 @@ Scenario: _090406 create Sales invoice for several Sales order with different ow
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I input "337" text in "Number" field
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	When I click command interface button "Sales invoice (create)"
 	And Delay 2
 	Then the form attribute named "Partner" became equal to "Partner Ferron 1"
@@ -705,7 +705,7 @@ Scenario: _090406 create Sales invoice for several Sales order with different ow
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I input "336" text in "Number" field
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 And I close all client application windows
 
 Scenario: _090407 create Shipment confirmation for several Sales order with different procurement method (goods and services)
@@ -818,7 +818,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 				Then "1C:Enterprise" window is opened
 				And I click "Yes" button
 				And I input "800" text in "Number" field
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 * Create second test SO №801
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I click the button named "FormCreate"
@@ -893,7 +893,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 				Then "1C:Enterprise" window is opened
 				And I click "Yes" button
 				And I input "801" text in "Number" field
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 * Create Sales invoice based on SO №800 and SO №801 (should only get the service)
 	And I go to line in "List" table
 			| Number |
@@ -955,7 +955,7 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 			And I save the value of "Number" field as "$$NumberSalesOrder090408$$"
 			And I save the window as "$$SalesOrder090408$$"
 			And I set checkbox "Shipment confirmations before sales invoice"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create 3 Shipment confirmation
 		* First SC
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -979,7 +979,7 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 			And I select current line in "ItemList" table
 			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 		* Second SC
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
 			And I go to line in "List" table
@@ -1002,7 +1002,7 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 			And I select current line in "ItemList" table
 			And I input "12,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 		* Third SC
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
 			And I go to line in "List" table
@@ -1025,7 +1025,7 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 			And I select current line in "ItemList" table
 			And I input "8,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create Sales invoice for 3 Shipment Confirmation
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table

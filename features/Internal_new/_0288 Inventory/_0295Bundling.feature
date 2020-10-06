@@ -79,10 +79,10 @@ Scenario: _029501 create Bundling (Store doesn't use Shipment confirmation and G
 	And I activate field named "ItemListQuantity" in "ItemList" table
 	And I input "1,000" text in "Quantity" field of "ItemList" table
 	And I finish line editing in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberBundling0029501$$"
 	And I save the window as "$$Bundling0029501$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And Delay 5
 
 Scenario: _029502 check the automatic creation of the Bundle specification
@@ -190,10 +190,10 @@ Scenario: _029507 create Bundling ( Store use Shipment confirmation and Goods re
 	And I activate field named "ItemListQuantity" in "ItemList" table
 	And I input "2,000" text in "Quantity" field of "ItemList" table
 	And I finish line editing in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberBundling0029507$$"
 	And I save the window as "$$Bundling0029507$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And Delay 5
 
 Scenario: _029508 check the automatic creation of an additional specification for the created Bundle
@@ -256,10 +256,10 @@ Scenario: _029513 create Shipment confirmation and Goods receipt based on Bundli
 	And I select current line in "List" table
 	And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
 	Then the form attribute named "Company" became equal to "Main Company"
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberGoodsReceipt0029513$$"
 	And I save the window as "$$GoodsReceipt0029513$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And Delay 5
 	And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
 	Then the form attribute named "Company" became equal to "Main Company"
@@ -267,10 +267,10 @@ Scenario: _029513 create Shipment confirmation and Goods receipt based on Bundli
 	// Then "1C:Enterprise" window is opened
 	// And I click "Yes" button
 	// And I input "151" text in "Number" field
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberShipmentConfirmation0029513$$"
 	And I save the window as "$$ShipmentConfirmation0029513$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And Delay 5
 	And I close current window
 
@@ -361,7 +361,7 @@ Scenario: _029516 checking duplicate specifications when creating the same bundl
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And Delay 5
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Catalog.Specifications"
@@ -471,10 +471,10 @@ Scenario: _029518 creating a bundle of 2 different properties + one repeating of
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBundling0029518$$"
 		And I save the window as "$$Bundling0029518$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And Delay 10
 	* Check creation of an Item key on a bundle by Dress + Scarf
 		Given I open hyperlink "e1cib/list/Catalog.Items"
@@ -575,10 +575,10 @@ Scenario: _029519 create Bundling (Store use Goods receipt, doesn't use Shipment
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Post document and check movements
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBundling0029519$$"
 		And I save the window as "$$Bundling0029519$$"
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And Delay 5
 		And I click "Registrations report" button
 		And "ResultTable" spreadsheet document contains lines by template:
@@ -670,10 +670,10 @@ Scenario: _029520 create Bundling (Store use Shipment confirmation, doesn't use 
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Post document and check movements
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBundling0029520$$"
 		And I save the window as "$$Bundling0029520$$"
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And Delay 5
 		And I click "Registrations report" button
 		And "ResultTable" spreadsheet document contains lines:

@@ -138,10 +138,10 @@ Scenario: _016501 create document Internal Supply Request
 		And I input "20,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Post document
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberInternalSupplyRequest016501$$"
 		And I save the window as "$$InternalSupplyRequest016501$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check document creation
 		And "List" table contains lines
 			| 'Number'                                     | 'Company'      | 'Store'    |
@@ -174,10 +174,10 @@ Scenario: _016501 create document Internal Supply Request
 			| 'Trousers' | '36/Yellow' | '10,000'   | 'pcs' |
 		And I activate "Item" field in "ItemList" table
 		And I delete a line in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberInventoryTransferOrder016501$$"
 		And I save the window as "$$InventoryTransferOrder016501$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 	* Check posting of an Inventory transfer order document created based on InternalSupplyRequest
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
@@ -234,10 +234,10 @@ Scenario: _016501 create document Internal Supply Request
 		And I save number of "ItemList" table lines as "Q1"
 		And I display "Q1" variable value
 		Then "Q1" variable is equal to 1
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder016501$$"
 		And I save the window as "$$PurchaseOrder016501$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	* Check posting of a Purchase order document created based on InternalSupplyRequest
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
 		And "List" table contains lines

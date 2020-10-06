@@ -364,10 +364,10 @@ Scenario: _024034 Sales invoice creation on set, store use Goods receipt
 	// 	And I click "Yes" button
 	// 	And I input "5" text in "Number" field
 	And I move to "Item list" tab
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberSalesInvoice024034$$"
 	And I save the window as "$$SalesInvoice024034$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
 			| 'Partner'       | 'Σ'        |
@@ -419,7 +419,7 @@ Scenario: _024035 check the form of selection of items (sales invoice)
 			| 'Store 01'  |
 		And I select current line in "List" table
 	When check the product selection form with price information in Sales invoice
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	* Save check
 		And "List" table contains lines
 			| 'Partner'     |'Σ'          |

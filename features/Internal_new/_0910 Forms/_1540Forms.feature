@@ -1638,7 +1638,7 @@ Scenario:  _015400687 check that additional attributes are displayed on the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
 			| Predefined data item name     |
-			| Document_RetailReturnReceipt           |
+			| Document_CashStatement           |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
 		And I click choice button of "Attribute" attribute in "Attributes" table
@@ -2640,6 +2640,7 @@ Scenario:  _0154049 check impossibility deleting of the store field by line with
 		
 		
 Scenario:  _0154050 check item and item key input by search in line in a document Sales order (in english)
+	And I close all client application windows
 	* Open a creation form Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -2656,6 +2657,7 @@ Scenario:  _0154050 check item and item key input by search in line in a documen
 	
 
 Scenario:  _0154051 check item and item key input by search in line in a document Sales invoice (in english)
+	And I close all client application windows
 	* Open a creation form Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
@@ -2671,6 +2673,7 @@ Scenario:  _0154051 check item and item key input by search in line in a documen
 		And I close all client application windows
 
 Scenario: _0154052 check item and item key input by search in line in a document Sales return order (in english)
+	And I close all client application windows
 	* Open a creation form Sales return order
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		And I click the button named "FormCreate"
@@ -2686,6 +2689,7 @@ Scenario: _0154052 check item and item key input by search in line in a document
 		And I close all client application windows
 
 Scenario: _0154053 check item and item key input by search in line in a document Sales return (in english)
+	And I close all client application windows
 	* Open a creation form Sales return 
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I click the button named "FormCreate"
@@ -2701,6 +2705,7 @@ Scenario: _0154053 check item and item key input by search in line in a document
 		And I close all client application windows
 
 Scenario: _0154054 check item and item key input by search in line in a document Purchase invoice (in english)
+	And I close all client application windows
 	* Open a creation form Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.Purchaseinvoice"
 		And I click the button named "FormCreate"
@@ -2716,6 +2721,7 @@ Scenario: _0154054 check item and item key input by search in line in a document
 		And I close all client application windows
 
 Scenario: _0154055 check item and item key input by search in line in a document Purchase order (in english)
+	And I close all client application windows
 	* Open a creation form Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -2731,6 +2737,7 @@ Scenario: _0154055 check item and item key input by search in line in a document
 		And I close all client application windows
 
 Scenario: _0154056 check item and item key input by search in line in a document Goods Receipt (in english)
+	And I close all client application windows
 	* Open a creation form Goods Receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I click the button named "FormCreate"
@@ -2746,6 +2753,7 @@ Scenario: _0154056 check item and item key input by search in line in a document
 		And I close all client application windows
 
 Scenario: _0154057 check item and item key input by search in line in a document Shipment confirmation (in english)
+	And I close all client application windows
 	* Open a creation form Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click the button named "FormCreate"
@@ -2761,6 +2769,7 @@ Scenario: _0154057 check item and item key input by search in line in a document
 		And I close all client application windows
 
 Scenario: _0154058 check item and item key input by search in line in a document InternalSupplyRequest (in english)
+	And I close all client application windows
 	* Open a creation form Internal Supply Request
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I click the button named "FormCreate"
@@ -2776,6 +2785,7 @@ Scenario: _0154058 check item and item key input by search in line in a document
 		And I close all client application windows
 
 Scenario: _0154059 check item and item key input by search in line in a document InventoryTransferOrder (in english)
+	And I close all client application windows
 	* Open a creation form Inventory Transfer Order
 		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
 		And I click the button named "FormCreate"
@@ -2791,6 +2801,7 @@ Scenario: _0154059 check item and item key input by search in line in a document
 		And I close all client application windows
 
 Scenario: _0154060 check item and item key input by search in line in a document InventoryTransfer (in english)
+	And I close all client application windows
 	* Open a creation form Inventory Transfer
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I click the button named "FormCreate"
@@ -2806,6 +2817,7 @@ Scenario: _0154060 check item and item key input by search in line in a document
 		And I close all client application windows
 
 Scenario: _0154061 check item and item key input by search in line in a document Bundling (in english)
+	And I close all client application windows
 	* Open a creation form Bundling
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I click the button named "FormCreate"
@@ -2821,6 +2833,7 @@ Scenario: _0154061 check item and item key input by search in line in a document
 		And I close all client application windows
 
 Scenario: _0154062 check item and item key input by search in line in a document UnBundling (in english)
+	And I close all client application windows
 	* Open a creation form UnBundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"
@@ -2837,6 +2850,7 @@ Scenario: _0154062 check item and item key input by search in line in a document
 
 
 Scenario: _015406401 check item and item key input by search in line in a document StockAdjustmentAsSurplus (in english)
+	And I close all client application windows
 	* Open a creation form StockAdjustmentAsSurplus
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I click the button named "FormCreate"
@@ -2852,6 +2866,7 @@ Scenario: _015406401 check item and item key input by search in line in a docume
 		And I close all client application windows
 
 Scenario: _015406402 check item and item key input by search in line in a document StockAdjustmentAsWriteOff (in english)
+	And I close all client application windows
 	* Open a creation form StockAdjustmentAsWriteOff
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I click the button named "FormCreate"
@@ -2867,6 +2882,7 @@ Scenario: _015406402 check item and item key input by search in line in a docume
 		And I close all client application windows
 
 Scenario: _015406403 check item and item key input by search in line in a document PhysicalInventory (in english)
+	And I close all client application windows
 	* Open a creation form PhysicalInventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I click the button named "FormCreate"
@@ -2882,6 +2898,7 @@ Scenario: _015406403 check item and item key input by search in line in a docume
 		And I close all client application windows
 
 Scenario: _015406404 check item and item key input by search in line in a document PhysicalCountByLocation (in english)
+	And I close all client application windows
 	* Open a creation form PhysicalCountByLocation
 		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 		And I click the button named "FormCreate"
@@ -2915,6 +2932,7 @@ Scenario: _0154065 check item, item key and properties input by search in line i
 	
 
 Scenario: _0154066 check partner, legal name, Partner term, company and store input by search in line in a document Sales order (in english)
+	And I close all client application windows
 	* Open a creation form Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -2937,6 +2955,7 @@ Scenario: _0154066 check partner, legal name, Partner term, company and store in
 	And I close all client application windows
 
 Scenario: _0154066 check partner, legal name, company, currency input by search in line in a document Reconcilation statement (in english)
+	And I close all client application windows
 	* Open a creation form Reconciliation Statement
 		Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 		And I click the button named "FormCreate"
@@ -2956,6 +2975,7 @@ Scenario: _0154066 check partner, legal name, company, currency input by search 
 	And I close all client application windows
 
 Scenario: _0154067 check partner, legal name, Partner term, company and store input by search in line in a document Sales invoice (in english)
+	And I close all client application windows
 	* Open a creation form Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
@@ -2978,6 +2998,7 @@ Scenario: _0154067 check partner, legal name, Partner term, company and store in
 	And I close all client application windows
 
 Scenario: _0154068 check partner, legal name, Partner term, company and store input by search in line in a document Sales return (in english)
+	And I close all client application windows
 	* Open a creation form Sales return
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I click the button named "FormCreate"
@@ -3000,6 +3021,7 @@ Scenario: _0154068 check partner, legal name, Partner term, company and store in
 	And I close all client application windows
 
 Scenario: _0154069 check partner, legal name, Partner term, company and store input by search in line in a document Sales return order (in english)
+	And I close all client application windows
 	* Open a creation form Sales return order
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		And I click the button named "FormCreate"
@@ -3022,6 +3044,7 @@ Scenario: _0154069 check partner, legal name, Partner term, company and store in
 	And I close all client application windows
 
 Scenario: _0154070 check partner, legal name, Partner term, company and store input by search in line in a document Purchase order (in english)
+	And I close all client application windows
 	* Open a creation form Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -3044,6 +3067,7 @@ Scenario: _0154070 check partner, legal name, Partner term, company and store in
 	And I close all client application windows
 
 Scenario: _0154071 check partner, legal name, Partner term, company and store input by search in line in a document Purchase invoice (in english)
+	And I close all client application windows
 	* Open a creation form Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
@@ -3066,6 +3090,7 @@ Scenario: _0154071 check partner, legal name, Partner term, company and store in
 	And I close all client application windows
 
 Scenario: _0154072 check partner, legal name, Partner term, company and store input by search in line in a document Purchase return (in english)
+	And I close all client application windows
 	* Open a creation form Purchase return
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I click the button named "FormCreate"
@@ -3088,6 +3113,7 @@ Scenario: _0154072 check partner, legal name, Partner term, company and store in
 	And I close all client application windows
 
 Scenario: _0154073 check partner, legal name, Partner term, company and store input by search in line in a document Purchase return order (in english)
+	And I close all client application windows
 	* Open a creation form Purchase return order
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 		And I click the button named "FormCreate"
@@ -3110,6 +3136,7 @@ Scenario: _0154073 check partner, legal name, Partner term, company and store in
 	And I close all client application windows
 
 Scenario: _0154074 check partner, legal name, company, store input by search in line in a document Goods Receipt (in english)
+	And I close all client application windows
 	* Open a creation form Goods Receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I click the button named "FormCreate"
@@ -3130,6 +3157,7 @@ Scenario: _0154074 check partner, legal name, company, store input by search in 
 	And I close all client application windows
 
 Scenario: _0154075 check partner, legal name, company, store input by search in line in a document Shipment confirmation (in english)
+	And I close all client application windows
 	* Open a creation form Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click the button named "FormCreate"
@@ -3150,6 +3178,7 @@ Scenario: _0154075 check partner, legal name, company, store input by search in 
 	And I close all client application windows
 
 Scenario: _0154076 check company, store input by search in line in a document InternalSupplyRequest (in english)
+	And I close all client application windows
 	* Open a creation form InternalSupplyRequest
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I click the button named "FormCreate"
@@ -3165,6 +3194,7 @@ Scenario: _0154076 check company, store input by search in line in a document In
 
 
 Scenario: _0154077 check partner, legal name, company, store input by search in line in a document InventoryTransferOrder (in english)
+	And I close all client application windows
 	* Open a creation form InventoryTransferOrder
 		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
 		And I click the button named "FormCreate"
@@ -3181,6 +3211,7 @@ Scenario: _0154077 check partner, legal name, company, store input by search in 
 
 
 Scenario: _0154078 check company, store input by search in line in a InventoryTransfer (in english)
+	And I close all client application windows
 	* Open a creation form InventoryTransfer
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I click the button named "FormCreate"
@@ -3198,6 +3229,7 @@ Scenario: _0154078 check company, store input by search in line in a InventoryTr
 
 
 Scenario: _0154081 check company, store, item bundle input by search in line in a Bundling (in english)
+	And I close all client application windows
 	* Open a creation form Bundling
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I click the button named "FormCreate"
@@ -3214,6 +3246,7 @@ Scenario: _0154081 check company, store, item bundle input by search in line in 
 	And I close all client application windows
 
 Scenario:  _0154082 check company, store, item box input by search in line in a UnBundling (in english)
+	And I close all client application windows
 	* Open a creation form Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"
@@ -3230,6 +3263,7 @@ Scenario:  _0154082 check company, store, item box input by search in line in a 
 	And I close all client application windows
 
 Scenario: _0154083 check company, Cash accounts, transaction type, currency, partner, payee, Partner term input by search in line in a Cash payment (in english)
+	And I close all client application windows
 	* Open a creation form Cash payment
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And I click the button named "FormCreate"
@@ -3263,6 +3297,7 @@ Scenario: _0154083 check company, Cash accounts, transaction type, currency, par
 
 
 Scenario: _0154084 check company, Cash/Bank accounts, transaction type, currency, partner, payee, Partner term input by search in line in a Bank payment (in english)
+	And I close all client application windows
 	* Open a creation form Bank payment
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I click the button named "FormCreate"
@@ -3295,6 +3330,7 @@ Scenario: _0154084 check company, Cash/Bank accounts, transaction type, currency
 	And I close all client application windows
 
 Scenario: _0154085 check company, Cash/Bank accounts, transaction type, currency, partner, payee, input by search in line in a Bank receipt (in english)
+	And I close all client application windows
 	* Open a creation form Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
@@ -3327,6 +3363,7 @@ Scenario: _0154085 check company, Cash/Bank accounts, transaction type, currency
 	And I close all client application windows
 
 Scenario: _0154086 check company, Cash accounts, transaction type, currency, partner, payee, input by search in line in a Cash receipt (in english)
+	And I close all client application windows
 	* Open a creation form Cash receipt
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
@@ -3362,6 +3399,7 @@ Scenario: _0154086 check company, Cash accounts, transaction type, currency, par
 
 
 Scenario: _0154087 check company, sender, receiver, send currency, receive currency, cash advance holder input by search in line in a Cash Transfer Order (in english)
+	And I close all client application windows
 	* Open a creation form Cash Transfer Order
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I click the button named "FormCreate"
@@ -3386,6 +3424,7 @@ Scenario: _0154087 check company, sender, receiver, send currency, receive curre
 		And I close all client application windows
 
 Scenario: _0154088 check company, operation type, partner, legal name, Partner term, business unit, expence type input by search in line in a CreditNote (in english)
+	And I close all client application windows
 	* Open a creation form CreditNote
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I click the button named "FormCreate"
@@ -3414,6 +3453,7 @@ Scenario: _0154088 check company, operation type, partner, legal name, Partner t
 
 
 Scenario: _0154100 check company, operation type, partner, legal name, Partner term, business unit, expence type input by search in line in a DebitNote (in english)
+	And I close all client application windows
 	* Open a creation form DebitNote
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I click the button named "FormCreate"
@@ -3443,6 +3483,7 @@ Scenario: _0154100 check company, operation type, partner, legal name, Partner t
 
 
 Scenario: _0154089 check company, account, currency input by search in line in Incoming payment order (in english)
+	And I close all client application windows
 	* Open a creation form IncomingPaymentOrder
 		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
 		And I click the button named "FormCreate"
@@ -3467,6 +3508,7 @@ Scenario: _0154089 check company, account, currency input by search in line in I
 		And I close all client application windows
 
 Scenario: _0154090 check company, account, currency input by search in line in Outgoing payment order (in english)
+	And I close all client application windows
 	* Open a creation form OutgoingPaymentOrder
 		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 		And I click the button named "FormCreate"
@@ -3492,6 +3534,7 @@ Scenario: _0154090 check company, account, currency input by search in line in O
 
 
 Scenario: _0154091 check company, account, currency input by search in line in ChequeBondTransaction (in english)
+	And I close all client application windows
 	* Open a creation form ChequeBondTransaction
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I click the button named "FormCreate"
@@ -3514,6 +3557,7 @@ Scenario: _0154091 check company, account, currency input by search in line in C
 
 
 Scenario: _0154092 check store, responsible person input by search in line in PhysicalCountByLocation (in english)
+	And I close all client application windows
 	* Open a creation form PhysicalCountByLocation
 		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 		And I click the button named "FormCreate"
@@ -3528,6 +3572,7 @@ Scenario: _0154092 check store, responsible person input by search in line in Ph
 
 
 Scenario: _0154093 check store input by search in line in PhysicalInventory (in english)
+	And I close all client application windows
 	* Open a creation form PhysicalInventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I click the button named "FormCreate"
@@ -3539,6 +3584,7 @@ Scenario: _0154093 check store input by search in line in PhysicalInventory (in 
 
 
 Scenario: _0154094 check store, company, tabular part input by search in line in StockAdjustmentAsWriteOff (in english)
+	And I close all client application windows
 	* Open a creation form StockAdjustmentAsWriteOff
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I click the button named "FormCreate"
@@ -3564,6 +3610,7 @@ Scenario: _0154094 check store, company, tabular part input by search in line in
 
 
 Scenario: _0154095 check store, company, tabular part input by search in line in StockAdjustmentAsSurplus (in english)
+	And I close all client application windows
 	* Open a creation form StockAdjustmentAsSurplus
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I click the button named "FormCreate"
@@ -3589,6 +3636,7 @@ Scenario: _0154095 check store, company, tabular part input by search in line in
 
 
 Scenario: _0154096 check company, account, currency input by search in line in Opening Entry (in english)
+	And I close all client application windows
 	* Open a creation form OpeningEntry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
@@ -3688,6 +3736,7 @@ Scenario: _0154096 check company, account, currency input by search in line in O
 	And I close all client application windows
 
 Scenario: _0154097 check company and account (in english) input by search in line in Cash revenue
+	And I close all client application windows
 	* Open a creation form Cash revenue
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I click the button named "FormCreate"
@@ -3702,6 +3751,7 @@ Scenario: _0154097 check company and account (in english) input by search in lin
 
 
 Scenario: _0154098 check company and account (in english) input by search in line in CashExpense
+	And I close all client application windows
 	* Open a creation form CashExpense
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And I click the button named "FormCreate"
@@ -3733,6 +3783,7 @@ Scenario: _0154099 check partner and legal name (in english) input by search in 
 
 
 Scenario: _010018 check the display on the Partners Description ENG form after changes (without re-open)
+	And I close all client application windows
 	* Open catalog Partners
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Select Anna Petrova
@@ -3751,6 +3802,7 @@ Scenario: _010018 check the display on the Partners Description ENG form after c
 		And I click "Save and close" button
 
 Scenario: _010019 check the display on the Company Description ENG form after changes (without re-open)
+	And I close all client application windows
 	* Open catalog Companies
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 	* Select Company Lomaniti
@@ -3770,6 +3822,7 @@ Scenario: _010019 check the display on the Company Description ENG form after ch
 
 
 Scenario: _010017 check the move to the Company tab from the Partner (shows the partner's Legal name)
+	And I close all client application windows
 	* Open catalog Partners
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 	* Select Ferron BP
@@ -3793,6 +3846,7 @@ Scenario: _010017 check the move to the Company tab from the Partner (shows the 
 		And I close current window
 
 Scenario: _005034 check filling in the required fields in the Items catalog
+	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.Items"
 	When create a catalog element with the name Test
 	If current window contains user messages Then
@@ -3802,6 +3856,7 @@ Scenario: _005034 check filling in the required fields in the Items catalog
 
 
 Scenario: _005035 check filling in the required fields in the AddAttributeAndPropertyValues catalog 
+	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertyValues"
 	When create a catalog element with the name Test
 	If current window contains user messages Then
@@ -3812,6 +3867,7 @@ Scenario: _005035 check filling in the required fields in the AddAttributeAndPro
 
 
 Scenario: _005037 check filling in the required fields in the Users catalog 
+	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.Users"
 	When create a catalog element with the name Test
 	And I close current window
@@ -3820,6 +3876,7 @@ Scenario: _005037 check filling in the required fields in the Users catalog
 
 
 Scenario: _005118 check the display on the Items Description ENG form after changes (without re-open)
+	And I close all client application windows
 	* Open Item Box
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
@@ -3837,6 +3894,7 @@ Scenario: _005118 check the display on the Items Description ENG form after chan
 		And I click "Save and close" button
 
 Scenario: _012008 check the display on the Partner term Description ENG form after changes (without re-open)
+	And I close all client application windows
 	* Open Personal Partner terms, $ (catalog Partner terms)  
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 		And I go to line in "List" table
@@ -3854,6 +3912,7 @@ Scenario: _012008 check the display on the Partner term Description ENG form aft
 		And I click "Save and close" button
 
 Scenario: _012009 check the move to Partner terms from the Partner card (shows available partner Partner terms)
+	And I close all client application windows
 	* Open Ferron BP (catalog Partners)
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I go to line in "List" table
@@ -3880,6 +3939,7 @@ Scenario: _012009 check the move to Partner terms from the Partner card (shows a
 	
 
 Scenario: check the filter by Company and Legal name field when creating an Partner term
+	And I close all client application windows
 	* Open a creation form Partner term
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 		And I click the button named "FormCreate"
@@ -3916,6 +3976,7 @@ Scenario: check the filter by Company and Legal name field when creating an Part
 		And I close all client application windows
 
 Scenario: filter check by Partner segment when creating an Partner term
+	And I close all client application windows
 	* Open a creation form Partner term
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 		And I click the button named "FormCreate"
@@ -3934,6 +3995,7 @@ Scenario: filter check by Partner segment when creating an Partner term
 	
 
 Scenario: inability to create your own company for Partner
+	And I close all client application windows
 	* Open Partner
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I go to line in "List" table
@@ -3946,6 +4008,7 @@ Scenario: inability to create your own company for Partner
 		If "Our" attribute is not editable Then
 
 Scenario: check the selection of the segment manager in the sales order
+	And I close all client application windows
 	* Open the Sales order creation form
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -3969,6 +4032,7 @@ Scenario: check the selection of the segment manager in the sales order
 
 
 Scenario: check row key when cloning a string in Sales order
+	And I close all client application windows
 	* Filling in the details of the documentsales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -3999,7 +4063,7 @@ Scenario: check row key when cloning a string in Sales order
 		And I activate field named "ItemListItem" in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check that the row keys do not match
 		And I click "Registrations report" button
 		And I save spreadsheet document cell value "ResultTable" "R34C8" to "Rov1" variable
@@ -4015,6 +4079,7 @@ Scenario: check row key when cloning a string in Sales order
 		Then the number of "List" table lines is "меньше или равно" 1
 
 Scenario: check row key when cloning a string in Sales invoice
+	And I close all client application windows
 	* Filling in the details of the document Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
@@ -4045,7 +4110,7 @@ Scenario: check row key when cloning a string in Sales invoice
 		And I activate field named "ItemListItem" in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check that the row keys do not match
 		And I click "Registrations report" button
 		And I save spreadsheet document cell value "ResultTable" "R19C8" to "Rov1" variable
@@ -4061,6 +4126,7 @@ Scenario: check row key when cloning a string in Sales invoice
 		Then the number of "List" table lines is "меньше или равно" 1
 
 Scenario: check row key when cloning a string in Purchase order
+	And I close all client application windows
 	* Filling in the details of the document Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -4104,7 +4170,7 @@ Scenario: check row key when cloning a string in Purchase order
 		And I activate field named "ItemListItem" in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check that the row keys do not match
 		And I click "Registrations report" button
 		And I save spreadsheet document cell value "ResultTable" "R6C9" to "Rov1" variable
@@ -4120,6 +4186,7 @@ Scenario: check row key when cloning a string in Purchase order
 		Then the number of "List" table lines is "меньше или равно" 1
 
 Scenario: check row key when cloning a string in Shipment confirmation
+	And I close all client application windows
 	* Filling in the details of the document Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click the button named "FormCreate"
@@ -4163,7 +4230,7 @@ Scenario: check row key when cloning a string in Shipment confirmation
 		And I activate field named "ItemListItem" in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check that the row keys do not match
 		And I click "Registrations report" button
 		And I save spreadsheet document cell value "ResultTable" "R6C8" to "Rov1" variable
@@ -4184,6 +4251,7 @@ Scenario: check row key when cloning a string in Shipment confirmation
 
 
 Scenario: check filling in procurement method using the button Fill in SO
+	And I close all client application windows
 	* Open a creation form Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -4334,7 +4402,7 @@ Scenario: check filling in procurement method using the button Fill in SO
 			| 'High shoes' | '37/19SD'   | 'Repeal'             |
 			| 'Trousers'   | '38/Yellow' | 'Purchase'           |
 			| 'Service'    | 'Rent'      | ''                   |
-		And I click "Post" button
+		And I click the button named "FormPost"
 	* Check the cleaning method on the line with the product
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  | 'Procurement method' |
@@ -4344,12 +4412,13 @@ Scenario: check filling in procurement method using the button Fill in SO
 		And I go to line in "ItemList" table
 			| 'Item'       | 'Item key' | 'Procurement method' |
 			| 'High shoes' | '37/19SD'  | 'Repeal'             |
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Procurement method] is empty." substring will appear in 30 seconds
 		And I close all client application windows
 
 
 Scenario: check filling in partner and customer/vendor sign when creating Partner term from partner card
+	And I close all client application windows
 	* Opening a customer partner card
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I go to line in "List" table

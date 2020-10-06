@@ -25,7 +25,7 @@ Scenario: _090500 preparation (label processing)
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog PriceTypes objects
 		When Create information register PricesByItemKeys records
-	
+		When Create information register Barcodes records
 
 Scenario: create print layout
 	* Opening the constructor

@@ -55,7 +55,7 @@ Scenario: _01202501 preparation
 		And I activate field named "ItemKeyListPrice" in "ItemKeyList" table
 		And I input "40,00" text in the field named "ItemKeyListPrice" of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 
 Scenario: _01202502 check current price in the Sales order
 	* Open Sales order

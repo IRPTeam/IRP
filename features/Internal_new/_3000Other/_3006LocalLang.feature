@@ -168,6 +168,7 @@ Scenario: _300603 search by Description_en and Description_tr in the Items catal
 
 
 Scenario: _300604 Turkish description search in Sales order
+	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	* Check list display
 		And "List" table contains lines
@@ -178,6 +179,7 @@ Scenario: _300604 Turkish description search in Sales order
 		And I input "Kalipso TR" text in "Partner" field
 		And I select from "Partner" drop-down list by "kali" string
 		And I input "Kalip" text in "Legal name" field
+		And Delay 1
 		And I select from "Legal name" drop-down list by "kali" string
 		And I click Select button of "Partner term" field
 		Then "Partner terms" window is opened

@@ -196,4 +196,4 @@ Scenario: _300203 create Labeling based on Purchase order
 			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
 			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
 			| 'Trousers TR' | '36/Yellow TR' | '*'                      | '*'       |
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"

@@ -145,17 +145,17 @@ Scenario: _3001000 preparation
 					And I activate "Price" field in "ItemList" table
 					And I input "100,000" text in "Price" field of "ItemList" table
 					And I finish line editing in "ItemList" table
-					And I click "Post" button
+					And I click the button named "FormPost"
 					And I save the value of "Number" field as "$$NumberPurchaseInvoice30010001$$"
 					And I save the window as "$$PurchaseInvoice30010001$$"
-					And I click "Post and close" button
+					And I click the button named "FormPostAndClose"
 					Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 					And I go to line in "List" table
 						| 'Number' |
 						| '$$NumberPurchaseInvoice30010001$$'      |
 					And I activate "Date" field in "List" table
 					And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-					And I click "Post and close" button
+					And I click the button named "FormPostAndClose"
 					And I wait "Goods receipt (create)" window closing in 20 seconds						
 		* Check or create Purchase invoice 3001002
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -231,10 +231,10 @@ Scenario: _3001000 preparation
 					And I activate "Price" field in "ItemList" table
 					And I input "100,000" text in "Price" field of "ItemList" table
 					And I finish line editing in "ItemList" table
-					And I click "Post" button
+					And I click the button named "FormPost"
 					And I save the value of "Number" field as "$$NumberPurchaseInvoice30010002$$"
 					And I save the window as "$$PurchaseInvoice30010002$$"
-					And I click "Post and close" button
+					And I click the button named "FormPostAndClose"
 
 
 

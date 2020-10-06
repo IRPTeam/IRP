@@ -126,7 +126,7 @@ Scenario: _085002 check movements of the document Cash revenue
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "1" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashRevenue1$$"
 		And I save the window as "$$CashRevenue1$$"
 	* Check movements
@@ -336,7 +336,7 @@ Scenario: _085006 check movements of the document Cash expense
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "1" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashExpense1$$"
 		And I save the window as "$$CashExpense1$$"
 	* Check movements

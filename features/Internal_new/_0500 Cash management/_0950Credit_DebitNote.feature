@@ -94,10 +94,10 @@ Scenario: _095001 preparation
 			And I input "01.01.2020  10:00:00" text in "Date" field
 			And Delay 1
 			And I move to "Item list" tab
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberSalesInvoice095001$$"
 			And I save the window as "$$SalesInvoice095001$$"
-			And I click "Post and close" button
+			And I click the button named "FormPostAndClose"
 	* Create Purchase invoice for creating vendor
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		If "List" table does not contain lines Then
@@ -149,10 +149,10 @@ Scenario: _095001 preparation
 				And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
 				And I change checkbox "Do you want to update filled prices?"
 				And I click "OK" button
-				And I click "Post" button
+				And I click the button named "FormPost"
 				And I save the value of "Number" field as "$$NumberPurchaseInvoice095001$$"
 				And I save the window as "$$PurchaseInvoice095001$$"
-				And I click "Post and close" button
+				And I click the button named "FormPostAndClose"
 	* Create one more Purchase invoice
 		If "List" table does not contain lines Then
 				| "Number" |
@@ -204,10 +204,10 @@ Scenario: _095001 preparation
 				And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
 				And I change checkbox "Do you want to update filled prices?"
 				And I click "OK" button
-				And I click "Post" button
+				And I click the button named "FormPost"
 				And I save the value of "Number" field as "$$NumberPurchaseInvoice0950011$$"
 				And I save the window as "$$PurchaseInvoice0950011$$"
-				And I click "Post and close" button
+				And I click the button named "FormPostAndClose"
 	
 
 Scenario: _095002 check movements of the document Dedit Note (write off debts to the vendor)
@@ -281,7 +281,7 @@ Scenario: _095002 check movements of the document Dedit Note (write off debts to
 		And I select current line in "List" table
 		And I finish line editing in "Transactions" table
 	* Check movements
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$DeditNote095002$$"
 		And I save the value of "Date" field as "$$DeditNoteDate095002$$"
 		And I click "Registrations report" button
@@ -386,7 +386,7 @@ Scenario: _095003 check movements of the document Credit Note (increase in debt 
 		And I select current line in "List" table
 		And I finish line editing in "Transactions" table
 	* Check movements
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$CreditNote095003$$"
 		And I save the value of "Date" field as "$$CreditNoteDate095003$$"
 		And I click "Registrations report" button
@@ -490,7 +490,7 @@ Scenario: _095004 check movements of the document Credit Note (write off custome
 		And I select current line in "List" table
 		And I finish line editing in "Transactions" table
 	* Check movements
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$CreditNote095004$$"
 		And I save the value of "Date" field as "$$CreditNoteDate095004$$"
 		And I click "Registrations report" button
@@ -595,7 +595,7 @@ Scenario: _095005 check movements of the document Debit Note (increase in custom
 		And I select current line in "List" table
 		And I finish line editing in "Transactions" table
 	* Check movements
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the window as "$$DeditNote095005$$"
 		And I save the value of "Date" field as "$$DeditNoteDate095005$$"
 		And I click "Registrations report" button

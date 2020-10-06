@@ -113,7 +113,7 @@ Scenario: _029002 create document Sales order and Shipment confirmation (partner
 		And I input "12,000" text in "Q" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
-	And I click "Post" button
+	And I click the button named "FormPost"
 	// * Change of document number 
 	// 	And I move to "Other" tab
 	// 	And I expand "More" group
@@ -121,8 +121,8 @@ Scenario: _029002 create document Sales order and Shipment confirmation (partner
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "180" text in "Number" field
-	// 	And I click "Post" button
-	And I click "Post" button
+	// 	And I click the button named "FormPost"
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberSalesOrder029002$$"
 	And I save the window as "$$SalesOrder029002$$"
 	* Create Shipment confirmation
@@ -137,10 +137,10 @@ Scenario: _029002 create document Sales order and Shipment confirmation (partner
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Store'    | 'Unit' | 'Shipment basis'   |
 			| 'Trousers' | '12,000'   | '36/Yellow' | 'Store 02' | 'pcs' | '$$SalesOrder029002$$' |
 			| 'Shirt'    | '10,000'   | '36/Red'    | 'Store 02' | 'pcs' | '$$SalesOrder029002$$' |
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberShipmentConfirmation029002$$"
 	And I save the window as "$$ShipmentConfirmation029002$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And I close all client application windows
 
 Scenario: _029003 check Sales order posting (store use Shipment confirmation, Shipment confirmation before Sales invoice) by register OrderBalance
@@ -287,7 +287,7 @@ Scenario: _029012 create document Sales order and Shipment confirmation (partner
 	// 	And I input "181" text in "Number" field
 	// 	And in the table "ItemList" I click "% Offers" button
 	// 	And in the table "Offers" I click the button named "FormOK"
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesOrder029012$$"
 		And I save the window as "$$SalesOrder029012$$"
 	* Create Shipment confirmation
@@ -296,10 +296,10 @@ Scenario: _029012 create document Sales order and Shipment confirmation (partner
 		And "ItemList" table contains lines
 			| 'Item'  | 'Quantity' | 'Item key' | 'Store'    | 'Unit' | 'Shipment basis'       |
 			| 'Shirt' | '10,000'   | '36/Red'   | 'Store 02' | 'pcs'  | '$$SalesOrder029012$$' |
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation029012$$"
 		And I save the window as "$$ShipmentConfirmation029012$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	And I close all client application windows
 	* Check movements by register OrderBalance
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
@@ -385,10 +385,10 @@ Scenario: _029013 create Sales invoice for several shipments
 		| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02' | '$$SalesOrder029002$$' | 'pcs'  | '12,000' | ''              | '732,20'     | '4 067,76'   | '4 799,96'     |
 		| 'Shirt'    | '296,61' | '36/Red'    | 'Store 02' | '$$SalesOrder029002$$' | 'pcs'  | '10,000' | ''              | '533,90'     | '2 966,10'   | '3 500,00'     |
 		| 'Shirt'    | '296,61' | '36/Red'    | 'Store 02' | '$$SalesOrder029002$$' | 'pcs'  | '10,000' | ''              | '533,90'     | '2 966,10'   | '3 500,00'     |
-	And I click "Post" button
+	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberSalesInvoice029013$$"
 	And I save the window as "$$SalesInvoice029013$$"
-	And I click "Post and close" button
+	And I click the button named "FormPostAndClose"
 	And Delay 5
 	* Check movements
 		* Check the absence posting by register Stock Balance
@@ -476,10 +476,10 @@ Scenario: _029014 availability check for selection shipment confirmation for whi
 	// 	Then "1C:Enterprise" window is opened
 	// 	And I click "Yes" button
 	// 	And I input "181" text in "Number" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesInvoice029014$$"
 		And I save the window as "$$SalesInvoice029014$$"
-		And I click "Post and close" button
+		And I click the button named "FormPostAndClose"
 	And I close all client application windows
 	* Check movements
 		* Check the absence posting by register Stock Balance

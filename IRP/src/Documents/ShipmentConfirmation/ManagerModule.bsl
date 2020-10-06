@@ -12,9 +12,13 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("StockReservation"             , PostingServer.CreateTable(AccReg.StockReservation));
 	
 	Tables.Insert("GoodsInTransitOutgoing_Exists", PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
+	Tables.Insert("ShipmentOrders_Exists", PostingServer.CreateTable(AccReg.ShipmentOrders));
 	
 	Tables.GoodsInTransitOutgoing_Exists = 
 	AccumulationRegisters.GoodsInTransitOutgoing.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo); 
+
+	Tables.ShipmentOrders_Exists = 
+	AccumulationRegisters.ShipmentOrders.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo); 
 	
 	Query = New Query();
 	Query.Text =
@@ -620,7 +624,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.GoodsInTransitOutgoing,
-			Parameters.DocumentDataTables.GoodsInTransitOutgoing_Exists.Count() > 0));
+			True));
 	
 	// StockBalance
 	ArrayOfTables = New Array();
@@ -644,7 +648,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.ShipmentOrders,
-			Parameters.IsReposting));
+			True));
 	
 	// ShipmentConfirmationSchedule
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ShipmentConfirmationSchedule,
@@ -690,6 +694,10 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 	GoodsInTransitOutgoing = AccumulationRegisters.GoodsInTransitOutgoing.GetLockFields(DocumentDataTables.GoodsInTransitOutgoing_Exists);
 	DataMapWithLockFields.Insert(GoodsInTransitOutgoing.RegisterName, GoodsInTransitOutgoing.LockInfo);
 	
+	// ShipmentOrders
+	ShipmentOrders = AccumulationRegisters.ShipmentOrders.GetLockFields(DocumentDataTables.ShipmentOrders_Exists);
+	DataMapWithLockFields.Insert(ShipmentOrders.RegisterName, ShipmentOrders.LockInfo);
+	
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -718,7 +726,17 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	                                                                 Unposting,
 	                                                                 AddInfo) Then
 		Cancel = True;
-	EndIf;	
+	EndIf;
+	
+	If Not Cancel And Not AccumulationRegisters.ShipmentOrders.CheckBalance(Ref, 
+	                                                                 LineNumberAndRowKeyFromItemList,
+	                                                                 Parameters.DocumentDataTables.ShipmentOrders,
+	                                                                 Parameters.DocumentDataTables.ShipmentOrders_Exists,
+	                                                                 AccumulationRecordType.Receipt,
+	                                                                 Unposting,
+	                                                                 AddInfo) Then
+		Cancel = True;
+	EndIf;
 EndProcedure
 
 #EndRegion

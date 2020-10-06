@@ -712,3 +712,120 @@ Function GetLineNumberAndRowKeyFromItemList(Ref, FullTableName) Export
 	UUIDToString(ItemList_Indocument);
 	Return ItemList_InDocument;	
 EndFunction
+
+Function GetLockFieldsMap(LockFieldNames) Export
+	Fields = New Map();
+	ArrayOfFieldNames = StrSplit(LockFieldNames, ",");
+	For Each ItemFieldName In ArrayOfFieldNames Do
+		Fields.Insert(TrimAll(ItemFieldName), TrimAll(ItemFieldName));
+	EndDo;
+	Return Fields;
+EndFunction
+
+Function GetExistsRecordsFromAccRegister(Ref, RegisterFullName, RecordType = Undefined, AddInfo = Undefined) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT *
+	|FROM
+	|	%1 AS Table
+	|WHERE
+	|	Table.Recorder = &Recorder
+	|	AND CASE
+	|		WHEN &Filter_RecordType
+	|			THEN Table.RecordType = &RecordType
+	|		ELSE TRUE
+	|	END";
+	Query.Text = StrTemplate(Query.Text, RegisterFullName);
+	Query.SetParameter("Recorder", Ref);
+	Query.SetParameter("Filter_RecordType", RecordType <> Undefined);
+	Query.SetParameter("RecordType", RecordType);
+	QueryResult = Query.Execute();
+	Return QueryResult.Unload();
+EndFunction
+
+Function PrepareRecordsTables(Dimensions, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting, AddInfo = Undefined) Export
+	ArrayOfDimensions = StrSplit(Dimensions, ",");
+	JoinCondition = "";
+	ArrayOfSelectedFields = New Array();
+	For Each ItemOfDimension In ArrayOfDimensions Do
+		ArrayOfSelectedFields.Add(" " + "Records." + TrimAll(ItemOfDimension));
+		JoinCondition = JoinCondition 
+		+ StrTemplate(" AND Records.%1 =  Records_with_LineNumbers.%1 ", TrimAll(ItemOfDimension));
+	EndDo;
+	StrSelectedFields = StrConcat(ArrayOfSelectedFields, ",");
+	
+	Query = New Query();
+	Query.TempTablesManager = New TempTablesManager();
+	Query.Text =
+	"SELECT %1,
+	|	Records.RowKey,
+	|	Records.Quantity
+	|INTO Records_InDocument
+	|FROM
+	|	&Records_InDocument AS Records
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList_InDocument.LineNumber,
+	|	ItemList_InDocument.RowKey
+	|INTO ItemList_InDocument
+	|FROM
+	|	&ItemList_InDocument AS ItemList_InDocument
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT %1, 
+	|	Records.RowKey,
+	|	Records.Quantity
+	|INTO Records_Exists
+	|FROM
+	|	&Records_Exists AS Records
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT %1,
+	|	Records.RowKey,
+	|	Records.Quantity,
+	|	ItemList_InDocument.LineNumber
+	|INTO Records_with_LineNumbers
+	|FROM
+	|	Records_InDocument AS Records
+	|		LEFT JOIN ItemList_InDocument AS ItemList_InDocument
+	|		ON Records.RowKey = ItemList_InDocument.RowKey
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT %1,
+	|	Records.Quantity,
+	|	Records.LineNumber,
+	|	Records.RowKey
+	|INTO ItemList
+	|FROM
+	|	Records_with_LineNumbers AS Records
+	|
+	|UNION ALL
+	|
+	|SELECT %1,
+	|	Records.Quantity,
+	|	UNDEFINED,
+	|	Records.RowKey AS RowKey
+	|FROM
+	|	Records_Exists AS Records
+	|		LEFT JOIN Records_with_LineNumbers AS Records_with_LineNumbers
+	|		ON  Records.RowKey = Records_with_LineNumbers.RowKey
+	| 		%2
+	|WHERE
+	|	Records_with_LineNumbers.RowKey IS NULL
+	|	AND NOT &Unposting
+	|;";
+	Query.Text = StrTemplate(Query.Text,StrSelectedFields, JoinCondition);
+	
+	Query.SetParameter("Records_InDocument"  , Records_InDocument);
+	Query.SetParameter("ItemList_InDocument" , ItemList_InDocument);
+	Query.SetParameter("Records_Exists"      , Records_Exists);
+	Query.SetParameter("Unposting"           , Unposting);
+	Query.Execute();
+	
+	Return Query.TempTablesManager;
+EndFunction	

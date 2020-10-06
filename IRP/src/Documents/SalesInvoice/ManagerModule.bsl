@@ -23,12 +23,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables.Insert("OrderBalance_Exists"           , PostingServer.CreateTable(AccReg.OrderBalance));
 	Tables.Insert("GoodsInTransitOutgoing_Exists" , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
+	Tables.Insert("ShipmentOrders_Exists"         , PostingServer.CreateTable(AccReg.ShipmentOrders));
 	
-	Tables.OrderBalance_Exists = 
-	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
-	
-	Tables.GoodsInTransitOutgoing_Exists = 
-	AccumulationRegisters.GoodsInTransitOutgoing.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo); 
+	Tables.OrderBalance_Exists           = AccReg.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
+	Tables.GoodsInTransitOutgoing_Exists = AccReg.GoodsInTransitOutgoing.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
+	Tables.ShipmentOrders_Exists         = AccReg.ShipmentOrders.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo); 
 	
 	QueryItemList = New Query();
 	QueryItemList.Text = GetQueryTextSalesInvoiceItemList();
@@ -819,7 +818,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.GoodsInTransitOutgoing,
-			Parameters.DocumentDataTables.GoodsInTransitOutgoing_Exists.Count() > 0));
+			True));
 	
 	// StockBalance
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
@@ -829,9 +828,10 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	
 	// ShipmentOrders
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ShipmentOrders,
-		New Structure("RecordType, RecordSet",
+		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.ShipmentOrders));
+			Parameters.DocumentDataTables.ShipmentOrders,
+			True));
 	
 	// RevenuesTurnovers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.RevenuesTurnovers,
@@ -956,6 +956,10 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 	GoodsInTransitOutgoing = AccumulationRegisters.GoodsInTransitOutgoing.GetLockFields(DocumentDataTables.GoodsInTransitOutgoing_Exists);
 	DataMapWithLockFields.Insert(GoodsInTransitOutgoing.RegisterName, GoodsInTransitOutgoing.LockInfo);
 	
+	// ShipmentOrders
+	ShipmentOrders = AccumulationRegisters.ShipmentOrders.GetLockFields(DocumentDataTables.ShipmentOrders_Exists);
+	DataMapWithLockFields.Insert(ShipmentOrders.RegisterName, ShipmentOrders.LockInfo);
+	
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -990,6 +994,16 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	                                                                 LineNumberAndRowKeyFromItemList,
 	                                                                 Parameters.DocumentDataTables.OrderBalance,
 	                                                                 Parameters.DocumentDataTables.OrderBalance_Exists,
+	                                                                 AccumulationRecordType.Expense,
+	                                                                 Unposting,
+	                                                                 AddInfo) Then
+		Cancel = True;
+	EndIf;
+	
+	If Not Cancel And Not AccumulationRegisters.ShipmentOrders.CheckBalance(Ref, 
+	                                                                 LineNumberAndRowKeyFromItemList,
+	                                                                 Parameters.DocumentDataTables.ShipmentOrders,
+	                                                                 Parameters.DocumentDataTables.ShipmentOrders_Exists,
 	                                                                 AccumulationRecordType.Expense,
 	                                                                 Unposting,
 	                                                                 AddInfo) Then

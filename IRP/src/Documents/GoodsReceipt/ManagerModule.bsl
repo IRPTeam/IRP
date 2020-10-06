@@ -15,12 +15,16 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables.Insert("GoodsInTransitIncoming_Exists", PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
 	Tables.Insert("GoodsInTransitOutgoing_Exists", PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
-
+	Tables.Insert("ReceiptOrders_Exists", PostingServer.CreateTable(AccReg.ReceiptOrders));
+	
 	Tables.GoodsInTransitIncoming_Exists = 
 	AccumulationRegisters.GoodsInTransitIncoming.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo); 
 	
 	Tables.GoodsInTransitOutgoing_Exists = 
 	AccumulationRegisters.GoodsInTransitOutgoing.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo); 
+	
+	Tables.ReceiptOrders_Exists = 
+	AccumulationRegisters.ReceiptOrders.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
 	
 	Query = New Query();
 	Query.Text =
@@ -1486,7 +1490,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.GoodsInTransitIncoming,
-			Parameters.IsReposting));
+			True));
 	
 	// StockBalance
 	// StockBalance_Receipt [Receipt]  
@@ -1533,7 +1537,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.ReceiptOrders,
-			Parameters.IsReposting));
+			True));
 	
 	// GoodsReceiptSchedule
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsReceiptSchedule,
@@ -1547,7 +1551,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.GoodsInTransitOutgoing,
-			Parameters.IsReposting));
+			True));
 	
 	// InventoryBalance
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.InventoryBalance,
@@ -1583,8 +1587,11 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 	GoodsInTransitOutgoing = AccumulationRegisters.GoodsInTransitOutgoing.GetLockFields(DocumentDataTables.GoodsInTransitOutgoing_Exists);
 	DataMapWithLockFields.Insert(GoodsInTransitOutgoing.RegisterName, GoodsInTransitOutgoing.LockInfo);
 	
-	Return DataMapWithLockFields;
+	// ReceiptOrders
+	ReceiptOrders = AccumulationRegisters.ReceiptOrders.GetLockFields(DocumentDataTables.ReceiptOrders_Exists);
+	DataMapWithLockFields.Insert(ReceiptOrders.RegisterName, ReceiptOrders.LockInfo);
 	
+	Return DataMapWithLockFields;
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -1624,6 +1631,15 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 		Cancel = True;
 	EndIf;
 	
+	If Not Cancel And Not AccumulationRegisters.ReceiptOrders.CheckBalance(Ref, 
+	                                                                 LineNumberAndRowKeyFromItemList,
+	                                                                 Parameters.DocumentDataTables.ReceiptOrders,
+	                                                                 Parameters.DocumentDataTables.ReceiptOrders_Exists,
+	                                                                 AccumulationRecordType.Receipt,
+	                                                                 Unposting,
+	                                                                 AddInfo) Then
+		Cancel = True;
+	EndIf;
 EndProcedure
 
 #EndRegion

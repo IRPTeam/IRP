@@ -15,14 +15,22 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("OrderProcurement"                     , PostingServer.CreateTable(AccReg.OrderProcurement));
 	Tables.Insert("SalesOrderTurnovers"                  , PostingServer.CreateTable(AccReg.SalesOrderTurnovers));
 
-	Tables.Insert("OrderBalance_Exists", PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("GoodsInTransitOutgoing_Exists", PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
+	Tables.Insert("OrderBalance_Exists"           , PostingServer.CreateTable(AccReg.OrderBalance));
+	Tables.Insert("GoodsInTransitOutgoing_Exists" , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
+	Tables.Insert("OrderProcurement_Exists"       , PostingServer.CreateTable(AccReg.OrderProcurement));
+	Tables.Insert("ShipmentOrders_Exists"         , PostingServer.CreateTable(AccReg.ShipmentOrders));
 	
 	Tables.OrderBalance_Exists = 
 	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
 	
 	Tables.GoodsInTransitOutgoing_Exists = 
-	AccumulationRegisters.GoodsInTransitOutgoing.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo); 
+	AccumulationRegisters.GoodsInTransitOutgoing.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
+	
+	Tables.OrderProcurement_Exists = 
+	AccumulationRegisters.OrderProcurement.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
+	
+	Tables.ShipmentOrders_Exists = 
+	AccumulationRegisters.ShipmentOrders.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
 	
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status, CurrentUniversalDate());
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
@@ -1205,7 +1213,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.OrderBalance,
-			Parameters.DocumentDataTables.OrderBalance_Exists.Count() > 0));
+			True));
 	
 	// OrderReservation
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.OrderReservation,
@@ -1227,7 +1235,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.GoodsInTransitOutgoing,
-			Parameters.DocumentDataTables.GoodsInTransitOutgoing_Exists.Count()>0));
+			True));
 	
 	// StockBalance
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
@@ -1241,7 +1249,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.ShipmentOrders,
-			Parameters.IsReposting));
+			True));
 	
 	// ShipmentConfirmationSchedule
 	// ShipmentConfirmationSchedule_Receipt [Receipt]  
@@ -1268,7 +1276,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.OrderProcurement,
-			Parameters.IsReposting));
+			True));
 	
 	// SalesOrderTurnovers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.SalesOrderTurnovers,
@@ -1302,6 +1310,14 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 	// GoodsInTransitOutgoing
 	GoodsInTransitOutgoing = AccumulationRegisters.GoodsInTransitOutgoing.GetLockFields(DocumentDataTables.GoodsInTransitOutgoing_Exists);
 	DataMapWithLockFields.Insert(GoodsInTransitOutgoing.RegisterName, GoodsInTransitOutgoing.LockInfo);
+	
+	// OrderProcurement
+	OrderProcurement = AccumulationRegisters.OrderProcurement.GetLockFields(DocumentDataTables.OrderProcurement_Exists);
+	DataMapWithLockFields.Insert(OrderProcurement.RegisterName, OrderProcurement.LockInfo);
+	
+	// ShipmentOrders
+	ShipmentOrders = AccumulationRegisters.ShipmentOrders.GetLockFields(DocumentDataTables.ShipmentOrders_Exists);
+	DataMapWithLockFields.Insert(ShipmentOrders.RegisterName, ShipmentOrders.LockInfo);
 	
 	Return DataMapWithLockFields;
 EndFunction
@@ -1337,6 +1353,26 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	                                                                 LineNumberAndRowKeyFromItemList,
 	                                                                 Parameters.DocumentDataTables.OrderBalance,
 	                                                                 Parameters.DocumentDataTables.OrderBalance_Exists,
+	                                                                 AccumulationRecordType.Receipt,
+	                                                                 Unposting,
+	                                                                 AddInfo) Then
+		Cancel = True;
+	EndIf;
+
+	If Not Cancel And Not AccumulationRegisters.OrderProcurement.CheckBalance(Ref, 
+	                                                                 LineNumberAndRowKeyFromItemList,
+	                                                                 Parameters.DocumentDataTables.OrderProcurement,
+	                                                                 Parameters.DocumentDataTables.OrderProcurement_Exists,
+	                                                                 AccumulationRecordType.Receipt,
+	                                                                 Unposting,
+	                                                                 AddInfo) Then
+		Cancel = True;
+	EndIf;
+
+	If Not Cancel And Not AccumulationRegisters.ShipmentOrders.CheckBalance(Ref, 
+	                                                                 LineNumberAndRowKeyFromItemList,
+	                                                                 Parameters.DocumentDataTables.ShipmentOrders,
+	                                                                 Parameters.DocumentDataTables.ShipmentOrders_Exists,
 	                                                                 AccumulationRecordType.Receipt,
 	                                                                 Unposting,
 	                                                                 AddInfo) Then

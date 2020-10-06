@@ -156,6 +156,7 @@
   <roles>Role.UseExternalReports</roles>
   <roles>Role.UseMultiThreading</roles>
   <roles>Role.UseOutput</roles>
+  <roles>Role.FullAccessOnlyRead</roles>
   <commonTemplates>CommonTemplate.DriverIKSoftWarePOSHP</commonTemplates>
   <commonTemplates>CommonTemplate.Fiscal1C</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>

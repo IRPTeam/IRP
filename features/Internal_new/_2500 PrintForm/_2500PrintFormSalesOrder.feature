@@ -130,6 +130,9 @@ Scenario: _25002 create a print command for Sales order
 		| 'SalesOrder'             | 'Sales Order'        | 'Print'           |
 
 Scenario: _25003 check Sales order printing
+	And I delete "$$NumberSalesOrder5003$$" variable
+	And I delete "$$DateSalesOrder5003$$" variable
+	And I delete "$$SalesOrder25003$$" variable
 	* Create Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -172,12 +175,13 @@ Scenario: _25003 check Sales order printing
 		And I finish line editing in "ItemList" table
 	* Post document
 		And I click the button named "FormPost"
-		And I save the value of "Number" field as "$$NumberSalesInvoice25003$$"
-		And I save the window as "$$SalesInvoice25003$$"
+		And I save the value of "Number" field as "$$NumberSalesOrder5003$$"
+		And I save the value of "Number" field as "$$DateSalesOrder5003$$"
+		And I save the window as "$$SalesOrder25003$$"
 		And I click the button named "FormPostAndClose"
 		And I go to line in "List" table
 		| 'Number' |
-		| '$$NumberSalesInvoice25003$$'  |
+		| '$$NumberSalesOrder5003$$'  |
 		And I select current line in "List" table
 	* Printing out of a document
 		And I click "Sales Order" button

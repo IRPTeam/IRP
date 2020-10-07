@@ -43,6 +43,9 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When Create catalog BusinessUnits objects
+		When Create catalog ExpenseAndRevenueTypes objects
+		When Create catalog Companies objects (second company Ferron BP)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -6096,7 +6099,7 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '144,15'     | '800,86'     | '945,00'       |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '144,15'     | '800,85'     | '945,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Change quantity and check tax and net amount calculation 
 			And I go to line in "ItemList" table
@@ -6116,7 +6119,7 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 			And I input "1418,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '216,31'     | '1 201,68'   | '1 418,00'     |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '216,31'     | '1 201,69'   | '1 418,00'     |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Set checkbox Price include tax and check tax and net amount calculation when change total amount
 			And I move to "Other" tab
@@ -6220,7 +6223,7 @@ Scenario: _0154161 check tax and net amount calculation when change total amount
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '144,15'     | '800,86'     | '945,00'       |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '144,15'     | '800,85'     | '945,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Change quantity and check tax and net amount calculation 
 			And I go to line in "ItemList" table
@@ -6240,7 +6243,7 @@ Scenario: _0154161 check tax and net amount calculation when change total amount
 			And I input "1418,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '216,31'     | '1 201,68'   | '1 418,00'     |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '216,31'     | '1 201,69'   | '1 418,00'     |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Set checkbox Price include tax and check tax and net amount calculation when change total amount
 			And I move to "Other" tab
@@ -6344,7 +6347,7 @@ Scenario: _0154162 check tax and net amount calculation when change total amount
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,15'     | '800,86'     | '945,00'       |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,15'     | '800,85'     | '945,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Change quantity and check tax and net amount calculation 
 			And I go to line in "ItemList" table
@@ -6364,7 +6367,7 @@ Scenario: _0154162 check tax and net amount calculation when change total amount
 			And I input "1418,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,68'   | '1 418,00'     |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,69'   | '1 418,00'     |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Set checkbox Price include tax and check tax and net amount calculation when change total amount
 			And I move to "Other" tab
@@ -6468,7 +6471,7 @@ Scenario: _0154163 check tax and net amount calculation when change total amount
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,15'     | '800,86'     | '945,00'       |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,15'     | '800,85'     | '945,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Change quantity and check tax and net amount calculation 
 			And I go to line in "ItemList" table
@@ -6488,7 +6491,7 @@ Scenario: _0154163 check tax and net amount calculation when change total amount
 			And I input "1418,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,68'   | '1 418,00'     |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,69'   | '1 418,00'     |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Set checkbox Price include tax and check tax and net amount calculation when change total amount
 			And I move to "Other" tab
@@ -6595,7 +6598,7 @@ Scenario: _0154164 check tax and net amount calculation when change total amount
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,15'     | '800,86'     | '945,00'       |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,15'     | '800,85'     | '945,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Change quantity and check tax and net amount calculation 
 			And I go to line in "ItemList" table
@@ -6615,7 +6618,7 @@ Scenario: _0154164 check tax and net amount calculation when change total amount
 			And I input "1418,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,68'   | '1 418,00'     |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,69'   | '1 418,00'     |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Set checkbox Price include tax and check tax and net amount calculation when change total amount
 			And I move to "Other" tab
@@ -6721,7 +6724,7 @@ Scenario: _0154165 check tax and net amount calculation when change total amount
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,15'     | '800,86'     | '945,00'       |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,15'     | '800,85'     | '945,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Change quantity and check tax and net amount calculation 
 			And I go to line in "ItemList" table
@@ -6741,7 +6744,7 @@ Scenario: _0154165 check tax and net amount calculation when change total amount
 			And I input "1418,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,68'   | '1 418,00'     |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,69'   | '1 418,00'     |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Set checkbox Price include tax and check tax and net amount calculation when change total amount
 			And I move to "Other" tab

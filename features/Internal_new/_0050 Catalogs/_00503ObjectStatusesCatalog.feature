@@ -24,7 +24,7 @@ Scenario: _005039 filling in the status catalog for Inventory transfer order
 	* Filling the name for the predefined element InventoryTransferOrder
 		And I expand a line in "List" table
 			| 'Description'    |
-			| 'Objects status history' |
+			| 'Objects statuses' |
 		And I go to line in "List" table
 			| Predefined data item name |
 			| InventoryTransferOrder                |
@@ -66,7 +66,7 @@ Scenario: _005040 filling in the status catalog for Outgoing Payment Order
 	* Filling the name for the predefined element OutgoingPaymentOrder
 		And I expand a line in "List" table
 			| 'Description'    |
-			| 'Objects status history' |
+			| 'Objects statuses' |
 		And I go to line in "List" table
 			| Predefined data item name |
 			| OutgoingPaymentOrder                |
@@ -106,7 +106,7 @@ Scenario: _005041 filling in the status catalog for Purchase return order
 	* Filling the name for the predefined element  PurchaseReturnOrder
 		And I expand a line in "List" table
 			| 'Description'    |
-			| 'Objects status history' |
+			| 'Objects statuses' |
 		And I go to line in "List" table
 			| Predefined data item name |
 			| PurchaseReturnOrder                |
@@ -146,7 +146,7 @@ Scenario: _005042 filling in the status catalog for Purchase order
 	* Filling the name for the predefined element PurchaseOrder
 		And I expand a line in "List" table
 			| 'Description'    |
-			| 'Objects status history' |
+			| 'Objects statuses' |
 		And I go to line in "List" table
 			| Predefined data item name |
 			| PurchaseOrder                |
@@ -185,7 +185,7 @@ Scenario: _005043 filling in the status catalog for Sales return order
 	* Filling the name for the predefined element  SalesReturnOrder
 		And I expand a line in "List" table
 			| 'Description'    |
-			| 'Objects status history' |
+			| 'Objects statuses' |
 		And I go to line in "List" table
 			| Predefined data item name |
 			| SalesReturnOrder                |
@@ -224,7 +224,7 @@ Scenario: _005044 filling in the status catalog for Sales order
 	* Filling the name for the predefined element  SalesOrder
 		And I expand a line in "List" table
 			| 'Description'    |
-			| 'Objects status history' |
+			| 'Objects statuses' |
 		And I go to line in "List" table
 			| Predefined data item name |
 			| SalesOrder                |
@@ -263,7 +263,7 @@ Scenario: _005045 check for clearing the UniqueID field when copying the status
 		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 		And I expand a line in "List" table
 			| 'Description'    |
-			| 'Objects status history' |
+			| 'Objects statuses' |
 	* Copy status
 		And I expand a line in "List" table
 			| 'Description' | 'Predefined data item name' |

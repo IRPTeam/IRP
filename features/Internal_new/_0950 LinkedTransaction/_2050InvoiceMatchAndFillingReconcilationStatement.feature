@@ -659,7 +659,7 @@ Scenario: _2050008 check the availability of Purchase return and Sales return ch
 			| 'Number' | 'Partner' |
 			| '$$NumberSalesReturn30001$$'      | 'Kalipso' |
 		And I select current line in "List" table
-		Then the form attribute named "PartnerArTransactionsBasisDocument" became equal to "$$SalesReturn30001$$" template
+		Then the form attribute named "PartnerApTransactionsBasisDocument" became equal to "$$SalesReturn30001$$" template
 	And I close all client application windows
 
 

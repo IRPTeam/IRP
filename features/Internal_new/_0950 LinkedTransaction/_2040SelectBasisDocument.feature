@@ -1599,8 +1599,6 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 	// 	And I input "9 000" text in "Number" field
 	* Check the display of an error that GR documents with different currencies are selected in GR
 		And I click the button named "FormPost"
-		And I save the window as "$$GoodsReceipt2040006$$"
-		And I save the value of "Number" field as "$$NumberGoodsReceipt2040006$$"
 		Then I wait that in user messages the "Currencies in the base documents must match." substring will appear in 30 seconds
 	* Post with the same currency
 		And I move to "Items" tab
@@ -1640,6 +1638,9 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 		| 'Boots, 36/18SD, Boots (12 pcs), 36,000, Store 02' | 'No'  |
 		Then the number of "DocumentsTree" table lines is "меньше или равно" 11
 		And I click "Cancel" button
+		And I click the button named "FormPost"
+		And I save the window as "$$GoodsReceipt2040006$$"
+		And I save the value of "Number" field as "$$NumberGoodsReceipt2040006$$"
 		And I click the button named "FormPostAndClose"
 	* Create one more Goods receipt for the remainder
 		* Open a creation form GR

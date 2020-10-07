@@ -14,7 +14,7 @@ Background:
 
 
 
-Scenario: _020000 preparation (SerialLotNumbers)
+Scenario: _020000 preparation (Loadinfo)
 	* Constants
 		When set True value to the constant
 	* Load info

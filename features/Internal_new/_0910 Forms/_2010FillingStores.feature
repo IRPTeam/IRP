@@ -42,6 +42,7 @@ Scenario: _201000 preparation ( filling stores)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When Create information register UserSettings records
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -84,6 +85,11 @@ Scenario: _201001 check filling in Store field in the document Sales order
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		And I click Choice button of the field named "Agreement"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'    |
+		And I select current line in "List" table
 		Then the form attribute named "Status" became equal to "Approved"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table contains lines

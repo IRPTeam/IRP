@@ -19,7 +19,7 @@ Scenario: _060004 check that the Reconcilation statement document is connected t
 		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 		And I expand a line in "List" table
 			| 'Description'    |
-			| 'Objects status history' |
+			| 'Objects statuses' |
 		And I go to line in "List" table
 			| Predefined data item name |
 			| ReconciliationStatement                |

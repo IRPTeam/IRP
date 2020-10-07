@@ -1211,6 +1211,11 @@ Scenario: create PurchaseReturn300301
 			| 'Description' |
 			| 'Vendor Ferron, TRY'         |
 		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'         |
+		And I select current line in "List" table
 		* Filling in item and item key
 			And I delete a line in "ItemList" table
 			And I click "Add" button

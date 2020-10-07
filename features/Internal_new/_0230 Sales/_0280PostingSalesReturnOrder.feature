@@ -97,8 +97,11 @@ Scenario: _028001 create document Sales return order, store use Goods receipt, b
 			| '$$NumberSalesReturnOrder028001$$'      |
 		And I select current line in "List" table
 		And I click "Decoration group title collapsed picture" hyperlink
+		And Delay 2
 		And I select "Wait" exact value from "Status" drop-down list
+		And Delay 2
 		And I click the button named "FormPost"
+		And Delay 2
 		And I select "Approved" exact value from "Status" drop-down list
 		And I click the button named "FormPost"
 	* Check history by status
@@ -147,14 +150,6 @@ Scenario: _028004 create document Sales return order, store doesn't use Goods re
 		And I select current line in "List" table
 		And I click "Decoration group title collapsed picture" hyperlink
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click the button named "FormPost"
-	* Check history by status
-		And I click "History" hyperlink
-		And "List" table contains lines
-			| 'Object'                 | 'Status'   |
-			| '$$SalesReturnOrder028001$$' | 'Wait'     |
-			| '$$SalesReturnOrder028001$$' | 'Approved' |
-		And I close current window
 		And I click the button named "FormPostAndClose"
 
 

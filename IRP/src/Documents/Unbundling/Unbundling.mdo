@@ -140,20 +140,20 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <forms uuid="c5e88bdf-668f-4122-84a2-0b5bc2d68122">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="91259c78-536b-47a5-bce9-d1487e9a53a8">
     <name>DocumentForm</name>
     <synonym>
       <key>en</key>
       <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="c5e88bdf-668f-4122-84a2-0b5bc2d68122">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

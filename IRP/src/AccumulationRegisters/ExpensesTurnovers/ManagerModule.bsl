@@ -1,6 +1,6 @@
 Function GetLockFields(Data) Export
 	Result = New Structure();
-	Result.Insert("RegisterName", "AccumulationRegister.OrderBalance");	
+	Result.Insert("RegisterName", "AccumulationRegister.ExpensesTurnovers");	
 	
 	Fields = New Map();
 	ArrayOfFieldNames = StrSplit(GetLockFieldNames(), ",");

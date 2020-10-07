@@ -2816,7 +2816,7 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
-            <maxWidth>10</maxWidth>
+            <maxWidth>20</maxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
             <choiceButton>false</choiceButton>

@@ -5213,7 +5213,7 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
-            <maxWidth>8</maxWidth>
+            <maxWidth>20</maxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
             <choiceButton>false</choiceButton>
@@ -5303,7 +5303,7 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
-            <maxWidth>8</maxWidth>
+            <maxWidth>20</maxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
             <choiceButton>false</choiceButton>
@@ -5393,7 +5393,7 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
-            <maxWidth>8</maxWidth>
+            <maxWidth>20</maxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
             <choiceButton>false</choiceButton>
@@ -5483,7 +5483,7 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
-            <maxWidth>8</maxWidth>
+            <maxWidth>20</maxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
             <choiceButton>false</choiceButton>
@@ -5563,7 +5563,7 @@
         </extendedTooltip>
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
-          <group>HorizontalIfPossible</group>
+          <group>AlwaysHorizontal</group>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>

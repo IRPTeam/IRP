@@ -289,20 +289,20 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <forms uuid="c0ff3010-3b26-4a93-9ef1-f4371a3eceec">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="ade3ff64-36f9-4345-b026-7e6083d5c4c0">
     <name>DocumentForm</name>
     <synonym>
       <key>en</key>
       <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="c0ff3010-3b26-4a93-9ef1-f4371a3eceec">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

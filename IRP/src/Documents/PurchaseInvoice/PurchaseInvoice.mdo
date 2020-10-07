@@ -231,6 +231,15 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <forms uuid="37d56a81-36f9-4777-a269-e65e67e60ad1">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <forms uuid="bf110aff-0c17-47e6-8c0b-d2bfe8c71a01">
     <name>ListForm</name>
     <synonym>
@@ -240,11 +249,11 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="37d56a81-36f9-4777-a269-e65e67e60ad1">
-    <name>DocumentForm</name>
+  <forms uuid="782d5d05-48c6-4127-9e0b-4263e528150d">
+    <name>ChoiceForm</name>
     <synonym>
       <key>en</key>
-      <value>Document form</value>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
@@ -272,15 +281,6 @@
     <synonym>
       <key>en</key>
       <value>Select purchase orders</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="782d5d05-48c6-4127-9e0b-4263e528150d">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

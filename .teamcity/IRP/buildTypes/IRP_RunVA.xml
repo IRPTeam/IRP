@@ -445,8 +445,7 @@ New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllStep
 New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps\Template"
 Copy-Item -Path "%system.teamcity.build.workingDir%\TempDB\1Cv8.1CD" -Destination "%system.teamcity.build.workingDir%\AllSteps\Template\1Cv8.1CD"
 $global:JobArray = @()
-$StartTail = $true
-$StreamCountMax = 2
+$StreamCountMax = 1
 
 $VanessaRun = {
     Param($elementTag)
@@ -573,7 +572,7 @@ $VanessaRun = {
     #Write-Output "$b"
     Write-Output "##teamcity[compilationFinished compiler='VA settings']"
   
-    #####################################################################################
+    ### Run VA ########################################################################
   
     $ProcessInfo = New-Object System.Diagnostics.ProcessStartInfo 
     $ProcessInfo.FileName = %env.PathTo1CPlatform% 
@@ -582,16 +581,14 @@ $VanessaRun = {
     $Process = New-Object System.Diagnostics.Process 
     $Process.StartInfo = $ProcessInfo 
     $Process.Start() | Out-Null  
-    $VA_PID = $Process.Id 
-    $global:VA_PID_Array.Add($elementTag, $Process.Id)
-    echo "##teamcity[setParameter name='env.VA_PID' value='$VA_PID']"
-}
+    $processID = $Process.Id 
+    Write-Output "##teamcity[setParameter name='env.VA_PID' value='$processID']"
 
-$JobTail = {
-    Param($elementTag, $VA_PID_Array)
+    ### Start tail #####################################################################
+    Start-Sleep 5
     $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
     #Write-Output "##teamcity[compilationStarted compiler='$ScriptLogFilePath']"
-    $processID = $VA_PID_Array[$elementTag]
+
     Write-Host "VA PID $processID"
     while (!(Test-Path $ScriptLogFilePath)) { 
         If (Get-Process -id $processID -ErrorAction SilentlyContinue ) {
@@ -633,15 +630,13 @@ $JobTail = {
 
 foreach ($elementTag in $TagArray) {
 
-    Invoke-Command -scriptBlock $VanessaRun -ArgumentList $elementTag
-    Start-Sleep 10
-    $JobTailProc = start-job -scriptBlock $JobTail -ArgumentList $elementTag, $global:VA_PID_Array
+    $JobTailProc = start-job -scriptBlock $VanessaRun -ArgumentList $elementTag
     $global:JobArray += ($JobTailProc)
 
     do {
         Start-Sleep 10
         $jobCount = $global:JobArray.count
-        Write-Output "Current job count: $jobCount Max count:$StreamCountMax"
+        Write-Output "Current job count: $jobCount Max count: $StreamCountMax"
         foreach ($job in $global:JobArray) {
             $job | Receive-Job
             if (!($job.State -eq "Running")) {

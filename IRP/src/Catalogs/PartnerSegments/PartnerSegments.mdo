@@ -14,6 +14,30 @@
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_PartnerSegments</value>
+    </typesFilterValue>
+    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_PartnerSegments</value>
+    </typesFilterValue>
+    <characteristicValues>Catalog.PartnerSegments.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Catalog.PartnerSegments.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Catalog.PartnerSegments.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Catalog.PartnerSegments.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectPresentation>
@@ -62,6 +86,45 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <tabularSections uuid="d142654d-5d50-4c65-ac84-64086a44f99b">
+    <producedTypes>
+      <objectType typeId="30ef5b2f-66d7-42d0-88a5-11389ba99654" valueTypeId="316050e8-f664-4f54-90d6-7e19b2dea756"/>
+      <rowType typeId="f0b55426-1a67-440e-9de4-958329dc8d42" valueTypeId="d0d0ebf9-6d99-4eeb-bfb8-720a01188f22"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="285a16a0-e2aa-4872-beda-210015ec39c2">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="3ba92f03-1f3c-496b-bf30-d8916c12e019">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="623fd972-0516-4c07-95f1-52f15ae054e6">
     <name>ItemForm</name>
     <synonym>

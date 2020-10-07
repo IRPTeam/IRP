@@ -22,6 +22,10 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 EndProcedure
 
+Procedure BeforeWriteAtServer(Object, Form, Cancel, CurrentObject, WriteParameters) Export
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
 #EndRegion
 
 #Region GroupTitle

@@ -2680,10 +2680,32 @@ EndProcedure
 
 #EndRegion
 
+#Region SpecialOffersInReturns
+
+Procedure RecalculateSpecialOffersOnChangeQuantity(Object, Form, CurrentData, AddInfo = Undefined) Export
+	ArrayOfSpecialOffersInCache = Form.SpecialOffersCache.FindRows(New Structure("Key", CurrentData.Key));
+	For Each ItemOfSpecialOffersInCache In ArrayOfSpecialOffersInCache Do
+		SpecialOfferAmount = 0;
+		If CurrentData.Quantity = ItemOfSpecialOffersInCache.Quantity Then
+			SpecialOfferAmount = ItemOfSpecialOffersInCache.Amount;
+		Else
+			SpecialOfferAmount = 
+			(ItemOfSpecialOffersInCache.Amount / ItemOfSpecialOffersInCache.Quantity) * CurrentData.Quantity;
+		EndIf;
+		ArrayOfSpecialOffers = 
+		Object.SpecialOffers.FindRows(New Structure("Key, Offer", CurrentData.Key, ItemOfSpecialOffersInCache.Offer));
+		For Each ItemOfSpecialOffers In ArrayOfSpecialOffers Do
+			ItemOfSpecialOffers.Amount = SpecialOfferAmount;
+		EndDo;
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 #Region Utility
 
 Procedure ShowRowKey(Form) Export
-	ItemNames = "ItemListKey";
+	ItemNames = "ItemListKey, SpecialOffersKey";
 	ArrayOfItemNames = StrSplit(ItemNames, ",");
 	For Each ItemName In ArrayOfItemNames Do
 		ItemName = TrimAll(ItemName);	

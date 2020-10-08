@@ -237,7 +237,8 @@ Procedure ItemListQuantityOnChange(Object, Form, Item, AddInfo = Undefined) Expo
 	CurrentData = Form.Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
-	EndIf;	
+	EndIf;
+	DocumentsClient.RecalculateSpecialOffersOnChangeQuantity(Object, Form, CurrentData, AddInfo);
 	DocumentsClient.ItemListCalculateRowAmounts_QuantityChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
 	SerialLotNumberClient.UpdateSerialLotNubersTree(Object, Form);	
 EndProcedure

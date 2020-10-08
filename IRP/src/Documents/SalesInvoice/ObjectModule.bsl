@@ -37,6 +37,10 @@ Procedure Filling_BasedOnSalesOrder(FillingData)
 		NewRow = ThisObject.TaxList.Add();
 		FillPropertyValues(NewRow, Row);
 	EndDo;
+	For Each Row In FillingData.SpecialOffers Do
+		NewRow = ThisObject.SpecialOffers.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
 	For Each Row In FillingData.ShipmentConfirmations Do
 		NewRow = ThisObject.ShipmentConfirmations.Add();
 		FillPropertyValues(NewRow, Row);

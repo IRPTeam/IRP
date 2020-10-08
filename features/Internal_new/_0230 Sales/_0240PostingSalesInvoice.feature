@@ -356,13 +356,6 @@ Scenario: _024034 Sales invoice creation on set, store use Goods receipt
 		And I activate "Q" field in "ItemList" table
 		And I input "1,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-	// * Change of document number - 5
-	// 	And I move to "Other" tab
-	// 	And I expand "More" group
-	// 	And I input "5" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "5" text in "Number" field
 	And I move to "Item list" tab
 	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberSalesInvoice024034$$"

@@ -152,11 +152,6 @@ Scenario: _400001 opening entry account balance
 			| Description  |
 			| Main Company |
 		And I select current line in "List" table
-	// * Change the document number
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "1" text in "Number" field
 	* Filling in the tabular part account balance
 		And in the table "AccountBalance" I click the button named "AccountBalanceAdd"
 		And I click choice button of "Account" attribute in "AccountBalance" table
@@ -412,12 +407,6 @@ Scenario: _400002 opening entry inventory balance
 			| Description  |
 			| Main Company |
 		And I select current line in "List" table
-	// * Change the document number
-	// 	And I move to "Other" tab
-	// 	And I input "2" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "2" text in "Number" field
 	* Filling in the tabular part Inventory
 		And I move to "Inventory" tab
 		And in the table "Inventory" I click the button named "InventoryAdd"
@@ -703,7 +692,6 @@ Scenario: _400003 opening entry advance balance
 			| Description  |
 			| Main Company |
 		And I select current line in "List" table
-	// * Change the document number
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberOpeningEntry400003$$"
 		And I save the window as "$$OpeningEntry400003$$"
@@ -796,11 +784,6 @@ Scenario: _400004 opening entry AP balance by partner terms (vendors)
 			| Description  |
 			| Main Company |
 		And I select current line in "List" table
-	// * Change the document number
-	// 	And I input "4" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "4" text in "Number" field
 	* Filling in Account payable
 		* Filling in partner and Legal name
 			And I move to "Account payable" tab
@@ -902,11 +885,6 @@ Scenario: _400005 opening entry AR balance by partner terms (customers)
 			| Description  |
 			| Main Company |
 		And I select current line in "List" table
-	// * Change the document number
-	// 	And I input "5" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "5" text in "Number" field
 	* Filling in Account receivable
 		* Filling in partner and Legal name
 			And I move to "Account receivable" tab
@@ -1008,11 +986,6 @@ Scenario: _400008 check the entry of the account balance, inventory balance, Ap/
 			| Description  |
 			| Main Company |
 		And I select current line in "List" table
-	// * Change the document number
-	// 	And I input "8" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "8" text in "Number" field
 	* Filling in the tabular part Account Balance
 		And in the table "AccountBalance" I click the button named "AccountBalanceAdd"
 		And I click choice button of "Account" attribute in "AccountBalance" table
@@ -1197,11 +1170,6 @@ Scenario: _400009 check the entry of the Ap/Ar balance by documents
 			| Description  |
 			| Main Company |
 		And I select current line in "List" table
-	// * Change the document number
-	// 	And I input "9" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "9" text in "Number" field
 	* Filling in AP by documents
 		And I move to "Account payable" tab
 		And I move to the tab named "GroupAccountPayableByDocuments"

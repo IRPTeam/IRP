@@ -112,12 +112,6 @@ Scenario: _022001 create document Purchase return order, store use Shipment conf
 		And "ItemList" table contains lines
 		| 'Item'  | 'Item key' | 'Purchase invoice'    | 'Store'    | 'Unit' | 'Q'     |
 		| 'Dress' | 'L/Green'  | '$$PurchaseInvoice018006$$' | 'Store 02' | 'pcs' | '2,000' |
-	// * Filling in the document number 1
-	// 	And I move to "Other" tab
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "1" text in "Number" field
 	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberPurchaseReturnOrder022001$$"
 	And I save the window as "$$PurchaseReturnOrder022001$$"
@@ -228,12 +222,6 @@ Scenario: _022006 create document Purchase return order, store doesn't use Shipm
 		| 'Item'     | 'Item key'  | 'Unit' |
 		| 'Dress'    | 'M/White'   | 'pcs' |
 	And I delete a line in "ItemList" table
-	// * Filling in the document number 2
-	// 	And I move to "Other" tab
-	// 	And I input "2" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "2" text in "Number" field
 	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberPurchaseReturnOrder022006$$"
 	And I save the window as "$$PurchaseReturnOrder022006$$"

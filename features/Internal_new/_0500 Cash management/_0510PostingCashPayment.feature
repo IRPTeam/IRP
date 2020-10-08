@@ -151,11 +151,6 @@ Scenario: _051001 create Cash payment (independently)
 				| Code | Description  |
 				| TRY  | Turkish lira |
 			And I click "Select" button
-		// * Change the document number to 1
-		// 	And I input "0" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "1" text in "Number" field
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		* Filling in a partner in a tabular part
 			And I activate "Partner" field in "PaymentList" table
@@ -215,11 +210,6 @@ Scenario: _051001 create Cash payment (independently)
 				| Code | Description     |
 				| USD  | American dollar |
 			And I click "Select" button
-		// * Change the document number to 2
-		// 	And I input "0" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "2" text in "Number" field
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		* Filling in a partner in a tabular part
 			And I activate "Partner" field in "PaymentList" table
@@ -279,11 +269,6 @@ Scenario: _051001 create Cash payment (independently)
 				| Code | Description |
 				| EUR  | Euro        |
 			And I click "Select" button
-		// * Change the document number to 3
-		// 	And I input "0" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "3" text in "Number" field
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		* Filling in a partner in a tabular part
 			And I activate "Partner" field in "PaymentList" table

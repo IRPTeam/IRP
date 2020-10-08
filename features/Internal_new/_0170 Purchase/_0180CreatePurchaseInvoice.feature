@@ -148,11 +148,6 @@ Scenario: _018012 Purchase invoice creation on set, store does not use Goods rec
 			| Description  |
 			| Main Company |
 		And I select current line in "List" table
-	// * Filling in the document number
-	// 	And I input "5" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "5" text in "Number" field
 	* Filling in vendor information
 		And I click Select button of "Partner" field
 		And I go to line in "List" table

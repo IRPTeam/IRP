@@ -123,12 +123,6 @@ Scenario: _028501 create document Sales return, store use Goods receipt, without
 	And "ItemList" table contains lines
 	| 'Item'     | 'Item key'  | 'Store'    |
 	| 'Dress'    |  'L/Green'  | 'Store 02' |
-	// * Filling in the document number 1
-	// 	And I move to "Other" tab
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "1" text in "Number" field
 	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberSalesReturn028501$$"
 	And I save the window as "$$SalesReturn028501$$"
@@ -212,12 +206,6 @@ Scenario: _028508 create document Sales return, store doesn't use Goods receipt,
 	And I input "1,000" text in "Q" field of "ItemList" table
 	And I input "466,10" text in "Price" field of "ItemList" table
 	And I finish line editing in "ItemList" table
-	// * Filling in the document number 2
-	// 	And I move to "Other" tab
-	// 	And I input "2" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "2" text in "Number" field
 	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberSalesReturn028508$$"
 	And I save the window as "$$SalesReturn028508$$"
@@ -283,12 +271,6 @@ Scenario: _028515 create document Sales return, store use Goods receipt, based o
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 	And I input "466,10" text in "Price" field of "ItemList" table
-	// * Filling in the document number 3
-	// 	And I move to "Other" tab
-	// 	And I input "3" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "3" text in "Number" field
 	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberSalesReturn028515$$"
 	And I save the window as "$$SalesReturn028515$$"
@@ -352,12 +334,6 @@ Scenario: _028522 create document Sales return, store doesn't use Goods receipt,
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
-	// * Filling in the document number 4
-	// 	And I move to "Other" tab
-	// 	And I input "4" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "4" text in "Number" field
 	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberSalesReturn028522$$"
 	And I save the window as "$$SalesReturn028522$$"

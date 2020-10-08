@@ -67,11 +67,6 @@ Scenario: _080001 create Incoming payment order
 		| USD  | American dollar |
 	And I select current line in "List" table
 	And I input begin of the next month date in "Planning date" field
-	// * Change the document number
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "1" text in "Number" field
 	* Filling in tabular part
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -181,12 +176,6 @@ Scenario: _080005 create Bank reciept based on Incoming payment order
 		And I select current line in "PaymentList" table
 		And I input "250,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		// * Change the document number to 20
-		// 	And I move to "Other" tab
-		// 	And I input "20" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "20" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankReceipt0800051$$"
 		And I save the window as "$$BankReceipt080005$$"
@@ -202,12 +191,6 @@ Scenario: _080005 create Bank reciept based on Incoming payment order
 		And I select current line in "PaymentList" table
 		And I input "250,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		// * Change the document number to 21
-		// 		And I move to "Other" tab
-		// 		And I input "21" text in "Number" field
-		// 		Then "1C:Enterprise" window is opened
-		// 		And I click "Yes" button
-		// 		And I input "21" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankReceipt0800051$$"
 		And I save the window as "$$BankReceipt080005$$"
@@ -239,11 +222,6 @@ Scenario: _080006 create Outgoing payment order
 		| TRY  |
 	And I select current line in "List" table
 	And I input begin of the next month date in "Planning date" field
-	// * Change the document number
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "1" text in "Number" field
 	* Change status
 		And I select "Approved" exact value from "Status" drop-down list
 	* Filling in tabular part
@@ -355,12 +333,6 @@ Scenario: _080010 create Bank payment based on Outgoing payment order
 		And I select current line in "PaymentList" table
 		And I input "250,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		// * Change the document number to 20
-		// 	And I move to "Other" tab
-		// 	And I input "20" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "20" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankPayment08000101$$"
 		And I save the window as "$$BankPayment08000101$$"
@@ -376,12 +348,6 @@ Scenario: _080010 create Bank payment based on Outgoing payment order
 		And I select current line in "PaymentList" table
 		And I input "250,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		// * Change the document number to 21
-		// 		And I move to "Other" tab
-		// 		And I input "21" text in "Number" field
-		// 		Then "1C:Enterprise" window is opened
-		// 		And I click "Yes" button
-		// 		And I input "21" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankPayment08000102$$"
 		And I save the window as "$$BankPayment08000102$$"

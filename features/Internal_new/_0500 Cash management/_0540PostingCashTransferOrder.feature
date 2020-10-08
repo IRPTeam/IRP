@@ -84,11 +84,6 @@ Scenario: _054001 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 	* Filling Send date and Receive date
 		And I input "01.07.2019  0:00:00" text in "Send date" field
 		And I input "01.07.2019  0:00:00" text in "Receive date" field
-	// * Change the document number
-	// 	And I input "0" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "1" text in "Number" field
 	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054001$$"
 	And I save the window as "$$CashTransferOrder054001$$"
@@ -144,11 +139,6 @@ Scenario: _054003 create Cash payment and Cash reciept based on Cash transfer or
 		| 'Number'                            | 'Sender'       | 'Receiver'     | 'Company'      |
 		| '$$NumberCashTransferOrder054001$$' | 'Cash desk №1' | 'Cash desk №2' | 'Main Company' |
 	And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
-	// * Change the document number to 4
-	// 	And I input "4" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "4" text in "Number" field
 	* Check the filling of the tabular part
 		And "PaymentList" table contains lines
 		| 'Planning transaction basis'    | 'Amount' |
@@ -168,11 +158,6 @@ Scenario: _054003 create Cash payment and Cash reciept based on Cash transfer or
 		And I select current line in "PaymentList" table
 		And I input "400,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		// * Change the document number to 4
-		// 	And I input "4" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "4" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashReceipt054003$$"
 		And I save the window as "$$CashReceipt054003$$"
@@ -184,11 +169,6 @@ Scenario: _054003 create Cash payment and Cash reciept based on Cash transfer or
 			| Number                            | Sender       | Receiver     | Company      |
 			| $$NumberCashTransferOrder054001$$ | Cash desk №1 | Cash desk №2 | Main Company |
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
-	// * Change the document number to 5
-	// 	And I input "5" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "5" text in "Number" field
 	* Check that the tabular part shows the rest of the amount
 		And I move to "Payments" tab
 		And "PaymentList" table contains lines
@@ -251,11 +231,6 @@ Scenario: _054004 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 	* Filling Send date and Receive date
 		And I input "02.07.2019  0:00:00" text in "Send date" field
 		And I input "03.07.2019  0:00:00" text in "Receive date" field
-	// * Change the document number to 2
-	// 	And I input "2" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "2" text in "Number" field
 	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054004$$"
 	And I save the window as "$$CashTransferOrder054004$$"
@@ -280,11 +255,6 @@ Scenario: _054005 create Cash receipt and Cash payment based on Cash transfer or
 		| Number | Sender       | Receiver     | Company      |
 		| $$NumberCashTransferOrder054004$$      | Cash desk №2 | Cash desk №1 | Main Company |
 	And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
-	// * Change the document number to 5
-	// 	And I input "5" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "5" text in "Number" field
 	* Check the filling of the tabular part
 		And "PaymentList" table contains lines
 		| 'Planning transaction basis'    | 'Amount' |
@@ -306,11 +276,6 @@ Scenario: _054005 create Cash receipt and Cash payment based on Cash transfer or
 			| Number | Sender       | Receiver     | Company      |
 			| $$NumberCashTransferOrder054004$$      | Cash desk №2 | Cash desk №1 | Main Company |
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
-	// * Change the document number to 7
-	// 		And I input "7" text in "Number" field
-	// 		Then "1C:Enterprise" window is opened
-	// 		And I click "Yes" button
-	// 		And I input "7" text in "Number" field
 	* Check that the correct receipt amount is indicated in the tabular part
 		And I move to "Payments" tab
 		And Delay 5
@@ -369,11 +334,6 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 	* Filling Send date and Receive date
 		And I input "01.07.2019  0:00:00" text in "Send date" field
 		And I input "02.07.2019  0:00:00" text in "Receive date" field
-	// * Change the document number
-	// 	And I input "0" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "3" text in "Number" field
 	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054006$$"
 	And I save the window as "$$CashTransferOrder054006$$"
@@ -395,11 +355,6 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 			And "PaymentList" table contains lines
 			| 'Planning transaction basis'  | 'Amount' |
 			| '$$CashTransferOrder054006$$' | '500,00' |
-		// * Change the document number to 6
-		// 	And I input "6" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "6" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashPayment054006$$"
 		And I save the window as "$$CashPayment054006$$"
@@ -412,11 +367,6 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 			| $$NumberCashTransferOrder054006$$      | Cash desk №1 | Bank account, USD | Main Company |
 		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
 		And Delay 5
-		// * Change the document number to 4
-		// 	And I input "4" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "4" text in "Number" field
 		* Check the filling of the tabular part
 			And I move to "Payments" tab
 			And "PaymentList" table contains lines
@@ -467,11 +417,6 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 	* Filling Send date and Receive date
 		And I input "03.07.2019  0:00:00" text in "Send date" field
 		And I input "04.07.2019  0:00:00" text in "Receive date" field
-	// * Change the document number
-	// 	And I input "0" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "4" text in "Number" field
 	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054007$$"
 	And I save the window as "$$CashTransferOrder054007$$"
@@ -489,11 +434,6 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 			| Number                            | Sender            | Receiver     | Company      |
 			| $$NumberCashTransferOrder054007$$ | Bank account, USD | Cash desk №1 | Main Company |
 		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
-		// * Change the document number to 4
-		// 	And I input "4" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "4" text in "Number" field
 		* Check the filling of the tabular part
 			And "PaymentList" table contains lines
 			| 'Planning transaction basis' | 'Amount' |
@@ -510,11 +450,6 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 			| Number                            | Sender            | Receiver     | Company      |
 			| $$NumberCashTransferOrder054007$$ | Bank account, USD | Cash desk №1 | Main Company |
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
-		// * Change the document number to 7
-		// 	And I input "7" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "7" text in "Number" field
 		* Check the filling of the tabular part
 			And "PaymentList" table contains lines
 			| Planning transaction basis  | Amount   |
@@ -574,11 +509,6 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 	* Filling Send date and Receive date
 		And I input "04.07.2019  0:00:00" text in "Send date" field
 		And I input "05.07.2019  0:00:00" text in "Receive date" field
-	// * Change the document number to 5
-	// 	And I input "5" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "5" text in "Number" field
 	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054008$$"
 	And I save the window as "$$CashTransferOrder054008$$"
@@ -609,12 +539,6 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 		And I select current line in "List" table
 		And I input "650,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		// * Change the document number to 7
-		// 	And I move to "Other" tab
-		// 	And I input "7" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "7" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashPayment054008$$"
 		And I save the window as "$$CashPayment054008$$"
@@ -656,12 +580,6 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 		And "PaymentList" table contains lines
 			| 'Partner'     | 'Amount'  | 'Planning transaction basis'    |
 			| 'Daniel Smith' | '500,00'  | '$$CashTransferOrder054008$$'             |
-		// * Change the document number to 8
-		// 	And I move to "Other" tab
-		// 	And I input "8" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "8" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashPayment0540081$$"
 		And I save the window as "$$CashPayment0540081$$"
@@ -678,12 +596,6 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 		And "PaymentList" table contains lines
 			|'Partner'      | 'Amount' | 'Planning transaction basis'    | 'Amount exchange' |
 			| 'Daniel Smith' | '75,00'     |  '$$CashTransferOrder054008$$'            | '560,00'          |
-		// * Change the document number to 10
-		// 	And I move to "Other" tab
-		// 	And I input "10" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "10" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashReceipt0540081$$"
 		And I save the window as "$$CashReceipt0540081$$"
@@ -734,11 +646,6 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 	* Filling Send date and Receive date
 		And I input "04.07.2019  0:00:00" text in "Send date" field
 		And I input "05.07.2019  0:00:00" text in "Receive date" field
-	// * Change the document number to 6
-	// 	And I input "6" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "6" text in "Number" field
 	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054009$$"
 	And I save the window as "$$CashTransferOrder054009$$"
@@ -769,12 +676,6 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 		And I select current line in "List" table
 		And I input "1315,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		// * Change the document number to 11
-		// 	And I move to "Other" tab
-		// 	And I input "11" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "11" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$CashPayment054009$$"
 		And I save the window as "$$CashPayment054009$$"
@@ -794,12 +695,6 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 		And I activate "Amount exchange" field in "PaymentList" table
 		And I input "1300,00" text in "Amount exchange" field of "PaymentList" table
 		And I input "200,00" text in "Amount" field of "PaymentList" table
-		// * Change the document number to 11
-		// 	And I move to "Other" tab
-		// 	And I input "11" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "11" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$CashReceipt054009$$"
 		And I save the window as "$$CashReceipt054009$$"
@@ -848,11 +743,6 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 	* Filling Send date and Receive date
 		And I input "04.07.2019  0:00:00" text in "Send date" field
 		And I input "05.07.2019  0:00:00" text in "Receive date" field
-	// * Change the document number to 7
-	// 	And I input "7" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "7" text in "Number" field
 	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054012$$"
 	And I save the window as "$$CashTransferOrder054012$$"
@@ -878,12 +768,6 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
 		And I input "1150,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		// * Change the document number to 7
-		// 	And I move to "Other" tab
-		// 	And I input "5" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "5" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankPayment054012$$"
 		And I save the window as "$$BankPayment054012"
@@ -898,12 +782,6 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 		And I activate "Amount exchange" field in "PaymentList" table
 		And I input "1150,00" text in "Amount exchange" field of "PaymentList" table
 		And I input "175,00" text in "Amount" field of "PaymentList" table
-		// * Change the document number to 9
-		// 	And I move to "Other" tab
-		// 	And I input "5" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "5" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankReceipt054012$$"
 		And I save the window as "$$BankReceipt054012"
@@ -958,11 +836,6 @@ Scenario: _054014 check message output in case money is transferred from Cash/Ba
 				| 'USD'  | 'American dollar' |
 			And I select current line in "List" table
 			And I input "200,00" text in "Receive amount" field
-		// * Change the document number to 101
-		// 	And I input "101" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "101" text in "Number" field
 		* Check the message output and that the document was not created
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberCashTransferOrder0540141$$"
@@ -1002,11 +875,6 @@ Scenario: _054014 check message output in case money is transferred from Cash/Ba
 				| Bank account, TRY |
 			And I select current line in "List" table
 			And I input "1150,00" text in "Receive amount" field
-		// * Change the document number to 102
-		// 	And I input "102" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "102" text in "Number" field
 		* Check the message output and that the document was not created
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberCashTransferOrder0540142$$"

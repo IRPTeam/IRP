@@ -98,11 +98,6 @@ Scenario: _021001 create document Inventory Transfer - Store sender doesn't use 
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-		// * Filling in the document number
-		// 	And I input "1" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "1" text in "Number" field
 		And I move to "Items" tab
 		And "ItemList" table contains lines
 		| 'Inventory transfer order'         | 'Item'  | 'Quantity' | 'Item key' | 'Unit' |
@@ -175,11 +170,6 @@ Scenario: _021006 create document Inventory Transfer - Store sender use Shipment
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-		// * Filling in the document number
-		// 	And I input "2" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "2" text in "Number" field
 		And I move to "Items" tab
 		And "ItemList" table contains lines
 		| '#' | 'Inventory transfer order'         | 'Item'  | 'Quantity' | 'Item key' | 'Unit' |
@@ -247,11 +237,6 @@ Scenario: _021012 create document Inventory Transfer - Store sender use Shipment
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-		// * Filling in the document number
-		// 	And I input "3" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "3" text in "Number" field
 		And I move to "Items" tab
 		And "ItemList" table contains lines
 		| '#' | 'Inventory transfer order'         | 'Item'  | 'Quantity' | 'Item key' | 'Unit' |
@@ -319,11 +304,6 @@ Scenario: _021018 create document Inventory Transfer - Store sender doesn't use 
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-		// * Filling in the document number
-		// 	And I input "4" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "4" text in "Number" field
 		And I move to "Items" tab
 		And "ItemList" table contains lines
 		| '#' | 'Inventory transfer order'         | 'Item'     | 'Quantity' | 'Item key'  | 'Unit' |
@@ -397,11 +377,6 @@ Scenario: _021024 create document Inventory Transfer - Store sender doesn't use 
 		| 'Description'  |
 		| 'Main Company' |
 	And I select current line in "List" table
-	// * Filling in the document number
-	// 		And I input "5" text in "Number" field
-	// 		Then "1C:Enterprise" window is opened
-	// 		And I click "Yes" button
-	// 		And I input "5" text in "Number" field
 	And I move to "Items" tab
 	And I click the button named "Add"
 	And I click choice button of "Item" attribute in "ItemList" table
@@ -530,11 +505,6 @@ Scenario: _021036 create document Inventory Transfer - Store sender use Shipment
 		| 'Description'  |
 		| 'Main Company' |
 	And I select current line in "List" table
-	// * Filling in the document number
-	// 		And I input "7" text in "Number" field
-	// 		Then "1C:Enterprise" window is opened
-	// 		And I click "Yes" button
-	// 		And I input "7" text in "Number" field
 	And I move to "Items" tab
 	And I click the button named "Add"
 	And I click choice button of "Item" attribute in "ItemList" table
@@ -619,11 +589,6 @@ Scenario: _021042 create document Inventory Transfer - Store sender doesn't use 
 		| 'Description'  |
 		| 'Main Company' |
 	And I select current line in "List" table
-	// * Filling in the document number
-	// 	And I input "8" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "8" text in "Number" field
 	And I move to "Items" tab
 	And I click the button named "Add"
 	And I click choice button of "Item" attribute in "ItemList" table

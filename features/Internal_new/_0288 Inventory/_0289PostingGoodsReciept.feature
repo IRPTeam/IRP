@@ -78,11 +78,6 @@ Scenario: _028901 create document Goods Reciept based on Purchase invoice
 	* Check that information is filled in when creating based on
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
-	// * Change of document number - 106
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "106" text in "Number" field
 	* Check the filling in the tabular part of the  items
 		And "ItemList" table contains lines
 		| '#' | 'Item'     | 'Receipt basis'     | 'Item key' | 'Unit' | 'Quantity'       |

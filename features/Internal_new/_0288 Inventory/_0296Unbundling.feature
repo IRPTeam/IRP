@@ -52,11 +52,6 @@ Scenario: _029601 create Unbundling on a product with a specification (specifica
 	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	* Create Unbundling for Dress/A-8, all item keys were created in advance
 		And I click the button named "FormCreate"
-		// * Change number
-		// 	And I input "1" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "1" text in "Number" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| Description  |
@@ -122,11 +117,6 @@ Scenario: _029604 create Unbundling on a product with a specification (specifica
 	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	* Create Unbundling for Boots/S-8, all item keys were created in advance
 		And I click the button named "FormCreate"
-		// * Change number
-		// 	And I input "2" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "2" text in "Number" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| Description  |
@@ -204,11 +194,6 @@ Scenario: _029609 create Goods receipt and Shipment confirmation based on Unbund
 			| Main Company | Boots/S-8       | 2      |
 		And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
 		Then the form attribute named "Company" became equal to "Main Company"
-		// * Change number Shipment confirmation to 152
-		// 	And I input "152" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "152" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation0029609$$"
 		And I save the window as "$$ShipmentConfirmation0029609$$"
@@ -216,11 +201,6 @@ Scenario: _029609 create Goods receipt and Shipment confirmation based on Unbund
 		And Delay 5
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
 		Then the form attribute named "Company" became equal to "Main Company"
-		// * Change number Goods receipt to 153
-		// 	And I input "153" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "153" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberGoodsReceipt0029609$$"
 		And I save the window as "$$GoodsReceipt0029609$$"
@@ -265,11 +245,6 @@ Scenario: _029610 create Unbundling (+check movements) for bundl which was creat
 	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	* Create Unbundling for Bundle Dress+Shirt
 		And I click the button named "FormCreate"
-		// * Change number
-		// 	And I input "3" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "3" text in "Number" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| Description  |
@@ -324,11 +299,6 @@ Scenario: _029611 create Unbundling (+check movements) for bundl (there is a Bun
 	* Create Unbundling for item Dress+Trousers
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"
-		// * Change number
-		// 	And I input "4" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "4" text in "Number" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| Description  |
@@ -375,11 +345,6 @@ Scenario: _029612 create Unbundling (Store use Goods receipt and doesn't use Shi
 	* Opening the creation form Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"
-	// * Change number
-	// 		And I input "8" text in "Number" field
-	// 		Then "1C:Enterprise" window is opened
-	// 		And I click "Yes" button
-	// 		And I input "8" text in "Number" field
 	* Filling in details
 		And I click Select button of "Company" field
 		And I go to line in "List" table
@@ -439,11 +404,6 @@ Scenario: _029613 create Unbundling (Store use Shipment confirmation and does no
 	* Opening the creation form
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"
-	// * Change number
-	// 		And I input "9" text in "Number" field
-	// 		Then "1C:Enterprise" window is opened
-	// 		And I click "Yes" button
-	// 		And I input "9" text in "Number" field
 	* Filling in details
 		And I click Select button of "Company" field
 		And I go to line in "List" table

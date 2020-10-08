@@ -144,11 +144,6 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 			And I select current line in "List" table
 		* Check the default status "Wait"
 			Then the form attribute named "Status" became equal to "Wait"
-		// * Filling in the document number 101
-		// 	And I input "0" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "205" text in "Number" field
 		* Filling in items table
 			And I move to "Item list" tab
 			And I click the button named "Add"

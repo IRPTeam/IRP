@@ -76,12 +76,6 @@ Scenario: _2990000 preparation (product inventory)
 				| Description  |
 				| Main Company |
 			And I select current line in "List" table
-		// * Change the document number
-		// 	And I move to "Other" tab
-		// 	And I input "8" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "8" text in "Number" field
 		* Filling in the tabular part Inventory
 			And I move to "Inventory" tab
 			And in the table "Inventory" I click the button named "InventoryAdd"
@@ -322,12 +316,6 @@ Scenario: _2990002 create Stock adjustment as surplus
 		And "ItemList" table contains lines
 		| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'           | 'Unit' | 'Revenue type' | 'Basis document' |
 		| 'Dress' | '8,000'    | 'M/White'  | 'Distribution department' | 'pcs'  | 'Delivery'     | ''               |
-	// * Change the document number
-	// 	And I move to "Other" tab
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "1" text in "Number" field
 	* Post document
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberStockAdjustmentAsSurplus2990002$$"
@@ -442,12 +430,6 @@ Scenario: _2990003 create Stock adjustment as write off
 		And "ItemList" table contains lines
 		| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'           | 'Unit' | 'Expense type' | 'Basis document' |
 		| 'Dress' | '8,000'    | 'M/White'  | 'Distribution department' | 'pcs'  | 'Delivery'     | ''               |
-	// * Change the document number
-	// 	And I move to "Other" tab
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "1" text in "Number" field
 	* Post document
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberStockAdjustmentAsWriteOff2990003$$"
@@ -548,12 +530,6 @@ Scenario: _2990004 create Physical inventory (store use GR and SC)
 		And I select current line in "ItemList" table
 		And I input "125,000" text in "Phys. count" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-	// * Change the document number
-	// 	And I move to "Other" tab
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "1" text in "Number" field
 	* Posting the document Physical inventory
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPhysicalInventory2990004$$"
@@ -660,12 +636,6 @@ Scenario: _2990005 create Physical inventory (store doesn't use GR and SC)
 		And I select current line in "ItemList" table
 		And I input "405,000" text in "Phys. count" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-	// * Change the document number
-	// 	And I move to "Other" tab
-	// 	And I input "2" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "2" text in "Number" field
 	* Posting the document Physical inventory
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPhysicalInventory2990005$$"
@@ -726,13 +696,6 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 		| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'        | 'Unit' | 'Revenue type' | 'Basis document'        |
 		| 'Dress' | '5,000'    | 'S/Yellow' | 'Logistics department' | 'pcs'  | 'Delivery'     | '$$PhysicalInventory2990004$$' |
 		Then the number of "ItemList" table lines is "меньше или равно" 1
-	// * Change the document number
-	// 	And I move to "Other" tab
-	// 	And I input "0" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	Then "Stock adjustment as surplus (create) *" window is opened
-	// 	And I input "2" text in "Number" field
 	* Posting the document and check movements
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberStockAdjustmentAsSurplus2990006$$"
@@ -823,12 +786,6 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 		| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'        | 'Unit' | 'Expense type' | 'Basis document'        |
 		| 'Dress' | '2,000'    | 'XS/Blue'  | 'Logistics department' | 'pcs'  | 'Delivery'     | '$$PhysicalInventory2990004$$' |
 		Then the number of "ItemList" table lines is "меньше или равно" 1
-	// * Change the document number
-	// 	And I move to "Other" tab
-	// 	And I input "0" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "2" text in "Number" field
 	* Posting the document and check movements
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberStockAdjustmentAsWriteOff2990007$$"

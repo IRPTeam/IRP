@@ -117,12 +117,6 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 		And I select current line in "List" table
 	* Check the default status "Wait"
 		Then the form attribute named "Status" became equal to "Wait"
-	// * Filling in the document number №101
-	// 	And I move to "Other" tab
-	// 	And I input "101" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "101" text in "Number" field
 	* Filling in items table
 		And I click the button named "Add"
 		And I click choice button of "Item" attribute in "ItemList" table

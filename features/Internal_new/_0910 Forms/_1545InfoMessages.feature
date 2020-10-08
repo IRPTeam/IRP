@@ -171,13 +171,6 @@ Scenario: _154505 message when trying to create Sales returm order based on Sale
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I select current line in "List" table
-		// * Change the document number to 2000
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "2000" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "2000" text in "Number" field
 		* Filling in items tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -305,23 +298,11 @@ Scenario: _154509 message when trying to re-create Sales invoice based on Shipme
 		And I move to "Other" tab
 		And I expand "More" group
 		And I set checkbox "Shipment confirmations before sales invoice"
-		// * Change number sales order to 2001
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "2001" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "2001" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesOrder154503$$"
 		And I save the window as "$$SalesOrder154503$$"
 	* Create Shipment confirmation based on Sales order
 		And I click "Shipment confirmation" button
-		// * Change number
-		// 	And I input "2001" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "2001" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation154503$$"
 		And I save the window as "$$ShipmentConfirmation154503$$"
@@ -362,13 +343,6 @@ Scenario: _154509 message when trying to re-create Sales invoice based on Shipme
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I select current line in "List" table
-		// * Change the document number to 2000
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "2000" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "2000" text in "Number" field
 		* Filling in items tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -444,34 +418,20 @@ Scenario: _154510 message when trying to re-create Purchase invoice based on Goo
 			And I input "1,000" text in "Q" field of "ItemList" table
 			And I input "40,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		// * Change the document number
 			And I move to "Other" tab
 			And I expand "More" group
-			// And I input "2001" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "2001" text in "Number" field
 			And I set checkbox "Goods receipt before purchase invoice"
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder154505$$"
 		And I save the window as "$$PurchaseOrder154505$$"
 	* Create Goods receipt based on urchase order
 		And I click "Goods receipt" button
-		// * Change number
-		// 	And I input "2001" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "2001" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberGoodsReceipt154505$$"
 		And I save the window as "$$GoodsReceipt154505$$"
 	* Create Purchase invoice based on Goods reciept
 		And I click "Purchase invoice" button
 		And I move to "Other" tab
-		// And I input "0" text in "Number" field
-		// Then "1C:Enterprise" window is opened
-		// And I click "Yes" button
-		// And I input "2 001" text in "Number" field
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice154505$$"
 		And I save the window as "$$PurchaseInvoice154505$$"
 		And I click the button named "FormPostAndClose"
@@ -599,24 +559,14 @@ Scenario: _154514 message when trying to re-create Goods reciept based on Purcha
 			And I input "1,000" text in "Q" field of "ItemList" table
 			And I input "40,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		// * Change the document number
 			And I move to "Other" tab
 			And I expand "More" group
-			// And I input "2007" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "2007" text in "Number" field
 			And I set checkbox "Goods receipt before purchase invoice"
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder154506$$"
 		And I save the window as "$$PurchaseOrder154506$$"
 	* Create Goods receipt based on Purchase order
 		And I click "Goods receipt" button
-		// * Change number
-		// 	And I input "2007" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "2007" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberGoodsReceipt154506$$"
 		And I save the window as "$$GoodsReceipt154506$$"
@@ -648,26 +598,11 @@ Scenario: _154516 message when trying to re-create Sales invoice based on Sales 
 			And I select current line in "List" table
 		When adding the items to the sales order (Dress and Trousers)
 		And I click "Save" button
-	// * Change the document number
-	// 	And I move to "Other" tab
-	// 	And I expand "More" group
-	// 	And I input "2004" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "2004" text in "Number" field
-	// 	And I click the button named "FormPost"
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesOrder154507$$"
 		And I save the window as "$$SalesOrder154507$$"
 	* Create Sales invoice
 		And I click "Sales invoice" button
-		// * Change number Sales invoice
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "2004" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "2004" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesInvoice154507$$"
 		And I save the window as "$$SalesInvoice154507$$"
@@ -747,13 +682,6 @@ Scenario: _154520 message when trying to re-create Shipment confirmation based o
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I select current line in "List" table
-		// * Change the document number to2000
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "2008" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "2008" text in "Number" field
 		* Filling in items tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -809,13 +737,6 @@ Scenario: _154522 message when trying to create Shipment confirmation based on S
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I select current line in "List" table
-		// * Change the document number to 2009
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "2009" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "2009" text in "Number" field
 		* Filling in items tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -860,13 +781,6 @@ Scenario: _154524 message when trying to create Shipment confirmation based on S
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I select current line in "List" table
-		// * Change the document number to 2009
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "2010" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "2010" text in "Number" field
 		* Filling in items tab
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -912,12 +826,6 @@ Scenario: _154526 message when trying to create Goods reciept based on Purchase 
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
 			And I select current line in "List" table
-		// * Change the document number to 2015
-		// 	And I move to "Other" tab
-		// 	And I input "2015" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "2015" text in "Number" field
 		* Filling in items tab
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -1005,13 +913,6 @@ Scenario: _154528 message when trying to create Purchase order based on Sales or
 			And I select "Repeal" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I click the button named "FormPost"
-	// * Change the document number
-	// 	And I move to "Other" tab
-	// 	And I expand "More" group
-	// 	And I input "2015" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "2015" text in "Number" field
 		And I save the value of "Number" field as "$$NumberSalesOrder154512$$"
 		And I save the window as "$$SalesOrder154512$$"
 	* Check the message that there are no items to order with the vendor
@@ -1027,11 +928,6 @@ Scenario: _154530 message when trying to re-create Purchase order/Inventory tran
 	* Create Internal supply request
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I click the button named "FormCreate"
-		// * Change number
-		// 	And I input "100" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "100" text in "Number" field
 		* Filling in the details of the document
 			And I click Select button of "Company" field
 			And I activate "Description" field in "List" table
@@ -1133,13 +1029,6 @@ Scenario: _154532 user notification when create a second partial sales invoice b
 			And I select current line in "List" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I input "2,000" text in "Q" field of "ItemList" table
-	// * Change the document number
-	// 	And I move to "Other" tab
-	// 	And I expand "More" group
-	// 	And I input "2020" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "2020" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesOrder154514$$"
 		And I save the window as "$$SalesOrder154514$$"
@@ -1195,13 +1084,6 @@ Scenario: _154534 user notification when create a second partial purchase invoic
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I input "10,00" text in "Price" field of "ItemList" table
 			And I select "Approved" exact value from "Status" drop-down list
-	// * Change the document number
-	// 	And I move to "Other" tab
-	// 	And I expand "More" group
-	// 	And I input "2020" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "2020" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder154515$$"
 		And I save the window as "$$PurchaseOrder154515$$"

@@ -31,11 +31,6 @@ Scenario: _029501 create Bundling (Store doesn't use Shipment confirmation and G
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Bundling"
 	And I click the button named "FormCreate"
-	// * Change number
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "1" text in "Number" field
 	And I click Select button of "Company" field
 	And I go to line in "List" table
 			| 'Description'  |
@@ -136,11 +131,6 @@ Scenario: _029507 create Bundling ( Store use Shipment confirmation and Goods re
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Bundling"
 	And I click the button named "FormCreate"
-	// * Change number
-	// 		And I input "2" text in "Number" field
-	// 		Then "1C:Enterprise" window is opened
-	// 		And I click "Yes" button
-	// 		And I input "2" text in "Number" field
 	And I click Select button of "Company" field
 	And I go to line in "List" table
 			| 'Description'  |
@@ -384,11 +374,6 @@ Scenario: _029518 creating a bundle of 2 different properties + one repeating of
 	* Create bundle
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I click the button named "FormCreate"
-		// * Change number
-		// 	And I input "5" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "5" text in "Number" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 				| 'Description'  |
@@ -524,11 +509,6 @@ Scenario: _029519 create Bundling (Store use Goods receipt, doesn't use Shipment
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I click the button named "FormCreate"
-	// * Change number
-	// 		And I input "7" text in "Number" field
-	// 		Then "1C:Enterprise" window is opened
-	// 		And I click "Yes" button
-	// 		And I input "7" text in "Number" field
 	* Filling in details
 		And I click Select button of "Company" field
 		And I go to line in "List" table
@@ -613,11 +593,6 @@ Scenario: _029520 create Bundling (Store use Shipment confirmation, doesn't use 
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I click the button named "FormCreate"
-	// * Change number
-	// 	And I input "8" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "8" text in "Number" field
 	* Filling in details
 		And I click Select button of "Company" field
 		And I go to line in "List" table

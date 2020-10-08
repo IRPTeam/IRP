@@ -570,13 +570,8 @@ Scenario: _2040001 preparation
 				| Description        |
 				| Vendor, TRY |
 			And I select current line in "List" table
-		// * Change document number to №9000
 			And I move to "Other" tab
 			And I remove checkbox "Goods receipt before purchase invoice"
-			// And I input "9 000" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "9 000" text in "Number" field
 		* Filling in item tab
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -1170,12 +1165,6 @@ Scenario: _2040002 Sales order selection button in the Sales invoice document
 		| 'Dress, M/White, pcs, 2,000' | 'No'  |
 		| 'Boots, 37/18SD, pcs, 1,000' | 'No'  |
 		And I click "Cancel" button
-	// * Change the document number
-	// 	And I move to "Other" tab
-	// 	And I input "0" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "9 000" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the window as "$$SalesInvoice20400022$$"
 		And I save the value of "Number" field as "$$NumberSalesInvoice20400022$$"
@@ -1204,12 +1193,6 @@ Scenario: _2040002 Sales order selection button in the Sales invoice document
 			| 'Boots, 37/18SD, pcs, 1,000' | 'No'  |
 			And I click the button named "FormSelectAll"
 			And I click "Ok" button
-		// * Change the document number
-		// 	And I move to "Other" tab
-		// 	And I input "0" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "9 002" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the window as "$$SalesInvoice2040002$$"
 			And I save the value of "Number" field as "$$NumberSalesInvoice2040002$$"
@@ -1243,12 +1226,6 @@ Scenario: _2040002 Sales order selection button in the Sales invoice document
 			| 'Boots, 37/18SD, pcs, 1,000'            | 'No'  |
 			And I click the button named "FormSelectAll"
 			And I click "Ok" button
-		// * Change the document number
-		// 	And I move to "Other" tab
-		// 	And I input "0" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "9 003" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the window as "$$SalesInvoice20400021$$"
 			And I save the value of "Number" field as "$$NumberSalesInvoice20400021$$"
@@ -1450,12 +1427,6 @@ Scenario: _2040005 purchase order selection button in Purchase invoice document
 		| 'Dress, M/White, pcs, 3,000'            |
 		| 'Boots, 36/18SD, Boots (12 pcs), 3,000' |
 		And I click "Cancel" button
-	// * Change the document number
-	// 	And I move to "Other" tab
-	// 	And I input "0" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "9 000" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the window as "$$PurchaseInvoice2040005$$"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice2040005$$"
@@ -1484,12 +1455,6 @@ Scenario: _2040005 purchase order selection button in Purchase invoice document
 			| 'Boots, 36/18SD, Boots (12 pcs), 3,000' |
 			And I click the button named "FormSelectAll"
 			And I click "Ok" button
-		// * Change the document number
-		// 	And I move to "Other" tab
-		// 	And I input "0" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "9 001" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the window as "$$PurchaseInvoice20400051$$"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice20400051$$"
@@ -1528,12 +1493,6 @@ Scenario: _2040005 purchase order selection button in Purchase invoice document
 			Then the number of "ItemList" table lines is "меньше или равно" 8
 			And I go to the last line in "ItemList" table
 			And I delete a line in "ItemList" table
-		// * Change the document number
-		// 	And I move to "Other" tab
-		// 	And I input "0" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "9 003" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the window as "$$PurchaseInvoice20400052$$"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice20400052$$"
@@ -1591,12 +1550,6 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 		And I click the button named "FormSelectAll"
 		And I click "Ok" button
 		Then the number of "ItemList" table lines is "меньше или равно" 11
-	// * Change the document number
-	// 	And I move to "Other" tab
-	// 	And I input "0" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "9 000" text in "Number" field
 	* Check the display of an error that GR documents with different currencies are selected in GR
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Currencies in the base documents must match." substring will appear in 30 seconds
@@ -1703,12 +1656,6 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 				| 'pcs'         |
 			And I select current line in "List" table
 		# temporarily
-		// * Change the document number
-		// 	And I move to "Other" tab
-		// 	And I input "0" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "9 001" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the window as "$$GoodsReceipt20400061$$"
 			And I save the value of "Number" field as "$$NumberGoodsReceipt20400061$$"

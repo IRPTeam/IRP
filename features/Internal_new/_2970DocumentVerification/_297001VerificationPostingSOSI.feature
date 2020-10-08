@@ -64,12 +64,6 @@ Scenario: _29700101 preparation (test filling-in SO - SI)
 		When add sales tax settings 
 	* Create SO
 		When create a test SO for VerificationPosting
-	// * Change number SO to 2970
-		// And I move to "Other" tab
-		// And I input "2970" text in "Number" field
-		// Then "1C:Enterprise" window is opened
-		// And I click "Yes" button
-		// And I input "2970" text in "Number" field
 		And I save the value of "Number" field as "$$NumberSalesOrder29700101$$"
 		And I save the window as "$$SalesOrder29700101$$"
 		And I close all client application windows
@@ -149,12 +143,6 @@ Scenario: _29700102 test filling-in SO - SI - SC by quantity
 				And I activate field named "ItemListItemKey" in "ItemList" table
 				And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 				And I click the button named "FormPost"
-			// * Change the SO number to 2970
-				// And I move to "Other" tab
-				// And I input "2970" text in "Number" field
-				// Then "1C:Enterprise" window is opened
-				// And I click "Yes" button
-				// And I input "2970" text in "Number" field
 				And I save the value of "Number" field as "$$NumberSalesInvoice29700102$$"
 				And I save the window as "$$SalesInvoice29700102$$"
 				And I click the button named "FormPostAndClose"
@@ -312,12 +300,6 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			| 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Store'    | 'Shipment basis'       |
 			| 'Dress' | '8,000'    | 'M/White'  | 'pcs'  | 'Store 02' | '$$SalesInvoice29700102$$' |
 			| 'Dress' | '20,000'   | 'L/Green'  | 'pcs'  | 'Store 02' | '$$SalesInvoice29700102$$' |
-		// * Change of document number
-		// 	And I move to "Other" tab
-		// 	And I input "0" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "2 970" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation29700103$$"
 			And I save the window as "$$ShipmentConfirmation29700103$$"
@@ -435,12 +417,6 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 Scenario: _29700104 test filling-in SO - SI - SC in different units
 	* Create SO
 		When create a test SO for VerificationPosting by package
-	// * Change the document number to 2971
-	// 	And I move to "Other" tab
-	// 	And I input "2971" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "2971" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesOrder29700104$$"
 		And I save the window as "$$SalesOrder29700104$$"

@@ -420,6 +420,7 @@ foreach ($elementTag in $a) {
       </runner>
       <runner id="RUNNER_6" name="Start VA async" type="jetbrains_powershell">
         <parameters>
+          <param name="jetbrains_powershell_errorToError" value="true" />
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
           <param name="jetbrains_powershell_script_code"><![CDATA[$TagArray = @("Discount", "Forms", "Inventory", "Catalogs", "FillingDocuments", "Filters", "Other", "Purchase", "RetailDocuments", "Barcodes", "CreationBasedMulti", "Sales", "Price", "CashManagement", "PhysicalInventory", "SerialLotNumber", "OpeningEntries", "InventoryTransfer", "LinkedTransaction", "BasicFormsCheck",  "DocumentVerification", "Services", "StandartAgreement", "TaxCalculation", "BankCashDocuments", "PrintForm", "CurrencyRate", "LoadInfo")
@@ -437,23 +438,21 @@ else {
     Write-Output "Skip tests"
     $TagArray = @()
 }
-  
-$VA_PID_Array = @{}
+
 New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%/allure/base"
-$global:port = 48010
+$startPort = 48010
 New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps"
 New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps\Template"
 Copy-Item -Path "%system.teamcity.build.workingDir%\TempDB\1Cv8.1CD" -Destination "%system.teamcity.build.workingDir%\AllSteps\Template\1Cv8.1CD"
 $global:JobArray = @()
-$StreamCountMax = 2
+$StreamCountMax = 5
 
 $VanessaRun = {
-    Param($elementTag)
-    $global:port += 10
-    $portmax = $global:port + 9
+    Param($elementTag, $startPort)
+    $portmax = $startPort + 9
     $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
     #Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"
-  
+    Write-Output "$startPort - $portmax"
     $allurePath = "%system.teamcity.build.workingDir%/allure" | ForEach-Object { $_ -replace '\\', '/' }
     $TempDb = "'/F%system.teamcity.build.workingDir%\AllSteps\$elementTag'" | ForEach-Object { $_ -replace '\\', '/' } 
     New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps\$elementTag"
@@ -494,7 +493,7 @@ $VanessaRun = {
           {
           'Name': 'This client',
           'PathToInfobase': $TempDb,
-          'PortTestClient': $port,
+          'PortTestClient': $startPort,
           'AddItionalParameters': $connection,
           'ClientType': 'Thin',
           'ComputerName': 'localhost'
@@ -551,15 +550,23 @@ $VanessaRun = {
       'vanessashutdown': %env.CloseVA%,
       'closetestclient': true
     }"
-  
+    Write-Output "$text"
     $a = $text | ConvertFrom-Json
+    Write-Output "featurepath - %env.VA.FeaturePath%Internal_New"
     $a | Add-Member -Type NoteProperty -Name 'featurepath' -Value '%env.VA.FeaturePath%Internal_New'
+    Write-Output "projectpath - %system.teamcity.build.workingDir%"
     $a | Add-Member -Type NoteProperty -Name 'projectpath' -Value '%system.teamcity.build.workingDir%'
+    Write-Output "outputscreenshot - %system.teamcity.build.tempDir%"
     $a | Add-Member -Type NoteProperty -Name 'outputscreenshot' -Value '%system.teamcity.build.tempDir%'
+    Write-Output "texterrorslogname - %system.teamcity.build.tempDir%\errors$elementTag"
     $a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value "%system.teamcity.build.tempDir%\errors$elementTag"
+    Write-Output "textlogname - $ScriptLogFilePath"
     $a | Add-Member -Type NoteProperty -Name 'textlogname' -Value $ScriptLogFilePath
-    $a | Add-Member -Type NoteProperty -Name 'testclientports' -Value " $global:port - $portmax"
+    Write-Output "testclientports - $startPort - $portmax"
+    $a | Add-Member -Type NoteProperty -Name 'testclientports' -Value "$startPort - $portmax"
+    Write-Output "directorytobuildhierarchy - %env.VA.FeaturePath%"
     $a.AllureReport | Add-Member -Type NoteProperty -Name 'directorytobuildhierarchy' -Value '%env.VA.FeaturePath%'
+    Write-Output "allurepath - $allurePath/$elementTag"
     $a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepath' -Value "$allurePath/$elementTag"
     #$a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepathbase' -Value "$allurePath/base"
     
@@ -569,7 +576,7 @@ $VanessaRun = {
   
     $b = $a | ConvertTo-Json -depth 32
     $b | set-content %system.teamcity.build.workingDir%/va$elementTag.json
-    #Write-Output "$b"
+    Write-Output "$b"
     Write-Output "##teamcity[compilationFinished compiler='VA settings']"
   
     ### Run VA ########################################################################
@@ -629,8 +636,8 @@ $VanessaRun = {
 }
 
 foreach ($elementTag in $TagArray) {
-
-    $JobTailProc = start-job -scriptBlock $VanessaRun -ArgumentList $elementTag
+    $startPort += 10
+    $JobTailProc = start-job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort
     $global:JobArray += ($JobTailProc)
 
     do {

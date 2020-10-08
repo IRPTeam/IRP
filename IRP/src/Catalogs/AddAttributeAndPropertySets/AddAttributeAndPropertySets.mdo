@@ -469,6 +469,83 @@
         <value></value>
       </code>
     </items>
+    <items id="af639881-4729-4a33-a46e-0d7a22ef12dd">
+      <name>Catalog_Workstations</name>
+      <description>Catalog Workstations</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="6e0be277-489c-449e-8b22-a6f1147a926a">
+      <name>Catalog_Hardware</name>
+      <description>Catalog Hardware</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="cf8ce39f-f480-435f-beb8-b7f92e53cc96">
+      <name>Catalog_ItemSegments</name>
+      <description>Catalog Item segments</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="23ded746-24f8-457e-9aaa-a0760fd13eb3">
+      <name>Catalog_PartnerSegments</name>
+      <description>Catalog Partner segments</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="b0fd5802-3afd-4ff6-a0bc-9402657ac361">
+      <name>Catalog_PaymentTypes</name>
+      <description>Catalog Payment types</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="e1104706-a199-4d45-aba5-303060f6f9e5">
+      <name>Catalog_SpecialOfferRules</name>
+      <description>Catalog Special offer rules</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="4ce4a7f7-4bb4-4690-8793-b3176318d913">
+      <name>Catalog_SpecialOffers</name>
+      <description>Catalog Special offers</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="2b524deb-877c-4ef3-8d71-7272830f18f5">
+      <name>Catalog_SpecialOfferTypes</name>
+      <description>Catalog Special offer types</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="78e6b1f2-9dd6-460a-aa72-2fd5aab023d5">
+      <name>Catalog_TaxRates</name>
+      <description>Catalog Tax rates</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="4ef678cb-b68c-4d35-a918-2b0873128a94">
+      <name>Catalog_UserGroups</name>
+      <description>Catalog User groups</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+    <items id="3a38d2cb-1b63-48aa-a4e1-8cfd219f69c6">
+      <name>Document_InternalSupplyRequest</name>
+      <description>Document Internal supply request</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

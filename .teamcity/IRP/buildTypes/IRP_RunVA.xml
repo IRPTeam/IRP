@@ -628,7 +628,7 @@ $VanessaRun = {
 
 foreach ($elementTag in $TagArray) {
     $startPort += 10
-    $JobTailProc = start-job -scriptBlock $VanessaRun -ArgumentList $elementTag, $startPort
+    $JobTailProc = start-job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort
     $global:JobArray += ($JobTailProc)
 
     do {

@@ -333,6 +333,11 @@ Procedure SearchByBarcode(Command, Barcode = "")
 	DocPurchaseReturnClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
 #EndRegion
 
 #Region Currencies

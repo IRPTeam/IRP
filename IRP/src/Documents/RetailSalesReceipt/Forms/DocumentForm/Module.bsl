@@ -378,6 +378,11 @@ Procedure SearchByBarcode(Command, Barcode = "")
 	DocRetailSalesReceiptClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
 #EndRegion
 
 #Region Taxes

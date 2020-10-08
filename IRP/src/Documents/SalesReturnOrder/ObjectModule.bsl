@@ -34,6 +34,10 @@ Procedure Filling_BasedOnSalesInvoice(FillingData)
 		NewRow = ThisObject.TaxList.Add();
 		FillPropertyValues(NewRow, Row);
 	EndDo;
+	For Each Row In FillingData.SpecialOffers Do
+		NewRow = ThisObject.SpecialOffers.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
 EndProcedure
 
 Procedure OnCopy(CopiedObject)

@@ -355,6 +355,11 @@ Procedure DecorationStatusHistoryClick(Item)
 	ObjectStatusesClient.OpenHistoryByStatus(Object.Ref, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
 #EndRegion
 
 #Region Currencies

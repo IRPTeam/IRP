@@ -550,7 +550,7 @@ $VanessaRun = {
       'vanessashutdown': %env.CloseVA%,
       'closetestclient': true
     }"
-  
+    Write-Output "$text"
     $a = $text | ConvertFrom-Json
     $a | Add-Member -Type NoteProperty -Name 'featurepath' -Value '%env.VA.FeaturePath%Internal_New'
     $a | Add-Member -Type NoteProperty -Name 'projectpath' -Value '%system.teamcity.build.workingDir%'
@@ -568,7 +568,7 @@ $VanessaRun = {
   
     $b = $a | ConvertTo-Json -depth 32
     $b | set-content %system.teamcity.build.workingDir%/va$elementTag.json
-    #Write-Output "$b"
+    Write-Output "$b"
     Write-Output "##teamcity[compilationFinished compiler='VA settings']"
   
     ### Run VA ########################################################################

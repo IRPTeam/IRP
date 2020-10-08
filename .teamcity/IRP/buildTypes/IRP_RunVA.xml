@@ -493,7 +493,7 @@ $VanessaRun = {
           {
           'Name': 'This client',
           'PathToInfobase': $TempDb,
-          'PortTestClient': $port,
+          'PortTestClient': $startPort,
           'AddItionalParameters': $connection,
           'ClientType': 'Thin',
           'ComputerName': 'localhost'

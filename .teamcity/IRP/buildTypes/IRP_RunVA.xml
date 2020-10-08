@@ -552,13 +552,21 @@ $VanessaRun = {
     }"
     Write-Output "$text"
     $a = $text | ConvertFrom-Json
+    Write-Output "featurepath - %env.VA.FeaturePath%Internal_New"
     $a | Add-Member -Type NoteProperty -Name 'featurepath' -Value '%env.VA.FeaturePath%Internal_New'
+    Write-Output "projectpath - %system.teamcity.build.workingDir%"
     $a | Add-Member -Type NoteProperty -Name 'projectpath' -Value '%system.teamcity.build.workingDir%'
+    Write-Output "outputscreenshot - %system.teamcity.build.tempDir%"
     $a | Add-Member -Type NoteProperty -Name 'outputscreenshot' -Value '%system.teamcity.build.tempDir%'
+    Write-Output "texterrorslogname - %system.teamcity.build.tempDir%\errors$elementTag"
     $a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value "%system.teamcity.build.tempDir%\errors$elementTag"
+    Write-Output "textlogname - $ScriptLogFilePath"
     $a | Add-Member -Type NoteProperty -Name 'textlogname' -Value $ScriptLogFilePath
+    Write-Output "testclientports - $startPort - $portmax"
     $a | Add-Member -Type NoteProperty -Name 'testclientports' -Value "$startPort - $portmax"
+    Write-Output "directorytobuildhierarchy - %env.VA.FeaturePath%"
     $a.AllureReport | Add-Member -Type NoteProperty -Name 'directorytobuildhierarchy' -Value '%env.VA.FeaturePath%'
+    Write-Output "allurepath - $allurePath/$elementTag"
     $a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepath' -Value "$allurePath/$elementTag"
     #$a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepathbase' -Value "$allurePath/base"
     

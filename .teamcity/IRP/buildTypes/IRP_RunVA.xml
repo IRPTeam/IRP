@@ -445,7 +445,7 @@ New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllStep
 New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps\Template"
 Copy-Item -Path "%system.teamcity.build.workingDir%\TempDB\1Cv8.1CD" -Destination "%system.teamcity.build.workingDir%\AllSteps\Template\1Cv8.1CD"
 $global:JobArray = @()
-$StreamCountMax = 2
+$StreamCountMax = 5
 
 $VanessaRun = {
     Param($elementTag, $startPort)

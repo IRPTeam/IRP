@@ -452,7 +452,7 @@ $VanessaRun = {
     $portmax = $startPort + 9
     $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
     #Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"
-    #Write-Output "$b"
+    Write-Output "$startPort - $portmax"
     $allurePath = "%system.teamcity.build.workingDir%/allure" | ForEach-Object { $_ -replace '\\', '/' }
     $TempDb = "'/F%system.teamcity.build.workingDir%\AllSteps\$elementTag'" | ForEach-Object { $_ -replace '\\', '/' } 
     New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps\$elementTag"

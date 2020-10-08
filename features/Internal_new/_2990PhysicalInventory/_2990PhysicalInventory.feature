@@ -171,9 +171,10 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 	* Open a creation form Object Statuses
 		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 	* Assigning a name to a predefined element of PhysicalInventory
-		And I expand a line in "List" table
-			| 'Description'     |
-			| 'Objects status history' |
+		And I go to line in "List" table
+			| 'Code'    |
+			| 'Objects statuses'|
+		And I expand current line in "List" table
 		And I go to line in "List" table
 			| Predefined data item name |
 			| PhysicalInventory         |

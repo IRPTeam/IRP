@@ -437,10 +437,9 @@ else {
     Write-Output "Skip tests"
     $TagArray = @()
 }
-  
-$VA_PID_Array = @{}
+
 New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%/allure/base"
-$global:port = 48010
+$startPort = 48010
 New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps"
 New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps\Template"
 Copy-Item -Path "%system.teamcity.build.workingDir%\TempDB\1Cv8.1CD" -Destination "%system.teamcity.build.workingDir%\AllSteps\Template\1Cv8.1CD"
@@ -448,12 +447,11 @@ $global:JobArray = @()
 $StreamCountMax = 2
 
 $VanessaRun = {
-    Param($elementTag)
-    $global:port += 10
-    $portmax = $global:port + 9
+    Param($elementTag, $startPort)
+    $portmax = $startPort + 9
     $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
     #Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"
-  
+    #Write-Output "$b"
     $allurePath = "%system.teamcity.build.workingDir%/allure" | ForEach-Object { $_ -replace '\\', '/' }
     $TempDb = "'/F%system.teamcity.build.workingDir%\AllSteps\$elementTag'" | ForEach-Object { $_ -replace '\\', '/' } 
     New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps\$elementTag"
@@ -558,7 +556,7 @@ $VanessaRun = {
     $a | Add-Member -Type NoteProperty -Name 'outputscreenshot' -Value '%system.teamcity.build.tempDir%'
     $a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value "%system.teamcity.build.tempDir%\errors$elementTag"
     $a | Add-Member -Type NoteProperty -Name 'textlogname' -Value $ScriptLogFilePath
-    $a | Add-Member -Type NoteProperty -Name 'testclientports' -Value " $global:port - $portmax"
+    $a | Add-Member -Type NoteProperty -Name 'testclientports' -Value "$startPort-$portmax"
     $a.AllureReport | Add-Member -Type NoteProperty -Name 'directorytobuildhierarchy' -Value '%env.VA.FeaturePath%'
     $a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepath' -Value "$allurePath/$elementTag"
     #$a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepathbase' -Value "$allurePath/base"
@@ -629,8 +627,8 @@ $VanessaRun = {
 }
 
 foreach ($elementTag in $TagArray) {
-
-    $JobTailProc = start-job -scriptBlock $VanessaRun -ArgumentList $elementTag
+    $startPort += 10
+    $JobTailProc = start-job -scriptBlock $VanessaRun -ArgumentList $elementTag, $startPort
     $global:JobArray += ($JobTailProc)
 
     do {

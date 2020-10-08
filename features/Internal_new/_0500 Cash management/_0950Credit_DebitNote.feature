@@ -115,12 +115,6 @@ Scenario: _095001 preparation
 					| 'Description'   |
 					| 'Company Maxim' |
 				And I select current line in "List" table
-			// * Change the document number to 601
-			// 	And I move to "Other" tab
-			// 	And I input "2 900" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "2 900" text in "Number" field
 			* Adding items to Purchase Invoice
 				And I move to "Item list" tab
 				And I click the button named "Add"
@@ -170,12 +164,6 @@ Scenario: _095001 preparation
 					| 'Description'   |
 					| 'Company Maxim' |
 				And I select current line in "List" table
-			// * Change the document number to 2901
-			// 	And I move to "Other" tab
-			// 	And I input "2 901" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "2 901" text in "Number" field
 			* Adding items to Purchase Invoice
 				And I move to "Item list" tab
 				And I click the button named "Add"

@@ -17,9 +17,10 @@ Background:
 Scenario: _060004 check that the Reconcilation statement document is connected to the status system
 	* Creating statuses for the document Reconciliation Statement
 		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
-		And I expand a line in "List" table
-			| 'Description'    |
-			| 'Objects statuses' |
+		And I go to line in "List" table
+			| 'Code'    |
+			| 'Objects statuses'|
+		And I expand current line in "List" table
 		And I go to line in "List" table
 			| Predefined data item name |
 			| ReconciliationStatement                |

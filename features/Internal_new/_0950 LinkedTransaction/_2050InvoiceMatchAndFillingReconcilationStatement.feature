@@ -41,11 +41,6 @@ Scenario: _2050001 preparation
 				| Description    |
 				| Bank account, TRY |
 			And I select current line in "List" table
-		// * Change the document number to 700
-		// 	And I input "0" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "700" text in "Number" field
 			And I input begin of the current month date in "Date" field
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
@@ -78,11 +73,6 @@ Scenario: _2050001 preparation
 				| Description    |
 				| Bank account, TRY |
 			And I select current line in "List" table
-		// * Change the document number to 700
-		// 	And I input "0" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "700" text in "Number" field
 			And I input begin of the current month date in "Date" field
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
@@ -120,11 +110,6 @@ Scenario: _2050001 preparation
 				| Description    |
 				| Cash desk №3 |
 			And I select current line in "List" table
-		// * Change the document number to 700
-		// 	And I input "0" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "700" text in "Number" field
 			And I input begin of the current month date in "Date" field
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
@@ -181,11 +166,6 @@ Scenario: _2050001 preparation
 				| Description    |
 				| Cash desk №3 |
 			And I select current line in "List" table
-		// * Change the document number to 700
-		// 	And I input "0" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "700" text in "Number" field
 			And I input begin of the current month date in "Date" field
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
@@ -384,12 +364,6 @@ Scenario: _2050005 check the movements of the Invoice match document with the ve
 		And I activate "Closing amount" field in "Advances" table
 		And I input "1 000,00" text in "Closing amount" field of "Advances" table
 		And I finish line editing in "Advances" table
-	// * Change the document number
-	// 	And I move to "Other" tab
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "1" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the window as "$$InvoiceMatch2050005$$"
 		And I save the value of "Number" field as "$$NumberInvoiceMatch2050005$$"
@@ -469,12 +443,6 @@ Scenario: _2050006 check the movements of the Invoice match document with the cu
 		And I activate "Closing amount" field in "Advances" table
 		And I input "1 000,00" text in "Closing amount" field of "Advances" table
 		And I finish line editing in "Advances" table
-	// * Change the document number
-	// 	And I move to "Other" tab
-	// 	And I input "2" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "2" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the window as "$$InvoiceMatch2050006$$"
 		And I save the value of "Number" field as "$$NumberInvoiceMatch2050006$$"
@@ -559,12 +527,6 @@ Scenario: _2050007 check the movements of the Invoice match document with the cl
 		And I select current line in "Transactions" table
 		And I input "2 000,00" text in the field named "TransactionsClosingAmount" of "Transactions" table
 		And I finish line editing in "Transactions" table
-	// * Change the document number
-	// 	And I move to "Other" tab
-	// 	And I input "12" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "3" text in "Number" field
 	* Check movements
 		And I click the button named "FormPost"
 		And I click the button named "FormPost"

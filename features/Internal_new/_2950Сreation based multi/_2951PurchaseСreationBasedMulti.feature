@@ -67,26 +67,12 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 	# should be created 2 Purchase invoice
 	* Create Purchase order 124
 		When create the first test PO for a test on the creation mechanism based on
-		// * Change the document number to 124
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "124" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "124" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder09030201$$"
 		And I save the window as "$$PurchaseOrder09030201$$"
 		And I click the button named "FormPostAndClose"
 	* Create Purchase order 125
 		When create the second test PO for a test on the creation mechanism based on
-		// * Change the document number to 125
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "125" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "125" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder09030202$$"
 		And I save the window as "$$PurchaseOrder09030202$$"
@@ -107,11 +93,6 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'             | 'Goods receipt' | 'Sales order' |
 			| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '305,08'     | '1 694,92'   | '2 000,00'     | 'Store 02' | '$$PurchaseOrder09030202$$ ' | ''              | ''            |
-			// * Change the document number to 126
-			// 	And I input "126" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "126" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030202$$"
 			And I save the window as "$$PurchaseInvoice09030202$$"
@@ -121,11 +102,6 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 			| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '610,17'     | '3 389,83'   | '4 000,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''              | ''            | ''                    |
 			| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '640,68'     | '3 559,32'   | '4 200,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''              | ''            | ''                    |
 			| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '961,02'     | '5 338,98'   | '6 300,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''              | ''            | ''                    |
-			// * Change the document number to 125
-			// 	And I input "125" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "125" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030201$$"
 			And I save the window as "$$PurchaseInvoice09030201$$"
@@ -140,11 +116,6 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      | 'Goods receipt' | 'Sales order' |
 			| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '305,08'     | '1 694,92'   | '2 000,00'     | 'Store 02' | '$$PurchaseOrder09030202$$ ' | ''              | ''            |
-			// * Change the document number to 126
-			// 	And I input "126" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "126" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030202$$"
 			And I save the window as "$$PurchaseInvoice09030202$$"
@@ -154,11 +125,6 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 			| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '610,17'     | '3 389,83'   | '4 000,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''              | ''            | ''                    |
 			| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '640,68'     | '3 559,32'   | '4 200,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''              | ''            | ''                    |
 			| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '961,02'     | '5 338,98'   | '6 300,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''              | ''            | ''                    |
-			// * Change the document number to 125
-			// 	And I input "125" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "125" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030201$$"
 			And I save the window as "$$PurchaseInvoice09030201$$"
@@ -181,13 +147,6 @@ Scenario: _090303 create Purchase invoice for several Purchase order with the sa
 # Should be created 1 Purchase invoice
 	* Create Purchase order 126
 		When create the first test PO for a test on the creation mechanism based on
-		// * Change the document number to 126
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "126" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "126" text in "Number" field
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
 			| Description       |
@@ -199,13 +158,6 @@ Scenario: _090303 create Purchase invoice for several Purchase order with the sa
 		And I click the button named "FormPostAndClose"
 	* Create Purchase order 127
 		When create the second test PO for a test on the creation mechanism based on
-		// * Change the document number to 127
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "127" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "127" text in "Number" field
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
 			| Description       |
@@ -233,11 +185,6 @@ Scenario: _090303 create Purchase invoice for several Purchase order with the sa
 			| '3 559,32'   | 'Dress'    | '210,00' | 'L/Green'   | '20,000' | 'pcs'  | '4 200,00'     | 'Store 02' | '$$PurchaseOrder09030203$$' |
 			| '5 338,98'   | 'Trousers' | '210,00' | '36/Yellow' | '30,000' | 'pcs'  | '6 300,00'     | 'Store 02' | '$$PurchaseOrder09030203$$' |
 			| '1 694,92'   | 'Dress'    | '200,00' | 'M/White'   | '10,000' | 'pcs'  | '2 000,00'     | 'Store 02' | '$$PurchaseOrder090302031$$' |
-		// * Change the document number to 127
-		// 	And I input "127" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "127" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice090302031$$"
 		And I save the window as "$$PurchaseInvoice090302031$$"
@@ -254,13 +201,6 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 # should be created 2 Purchase invoice
 	* Create first test PO 128
 		When create the first test PO for a test on the creation mechanism based on
-		// * Change the document number to 128
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "128" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "128" text in "Number" field
 		* Filling in vendor info
 			And I click Select button of "Partner" field
 			And I click "List" button			
@@ -304,13 +244,6 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 		And I click the button named "FormPostAndClose"
 	* Create first test PO 129
 		When create the second test PO for a test on the creation mechanism based on
-		// * Change the document number to 129
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "129" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "129" text in "Number" field
 		* Filling in vendor info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
@@ -354,11 +287,6 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
 		Then the number of "ItemList" table lines is "меньше или равно" 3
-		// * Change the document number to 130
-		// 	And I input "130" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "130" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice090302041$$"
 		And I save the window as "$$PurchaseInvoice090302041$$"
@@ -366,11 +294,6 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 		When I click command interface button "Purchase invoice (create)"
 		And Delay 2
 		Then the number of "ItemList" table lines is "меньше или равно" 3
-		// * Change the document number to 131
-		// 	And I input "131" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "131" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice090302042$$"
 		And I save the window as "$$PurchaseInvoice090302042$$"
@@ -397,13 +320,6 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 # should be created 2 Purchase invoice
 	* Create first test PO 130
 		When create the first test PO for a test on the creation mechanism based on
-		// * Change the document number to 130
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "130" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "130" text in "Number" field
 		* Filling in vendor info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
@@ -446,13 +362,6 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 		And I click the button named "FormPostAndClose"
 	* Create second test PO 131 Partner Ferron 1 with partner term Vendor Ferron Discount
 		When create the second test PO for a test on the creation mechanism based on
-		// * Change the document number to 131
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "131" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "131" text in "Number" field
 		* Filling in vendor info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
@@ -502,11 +411,6 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 				| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '720,00'     | '4 000,00'   | '4 720,00'     | 'Store 02' | '$$PurchaseOrder090302051$$' |
 				| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '756,00'     | '4 200,00'   | '4 956,00'     | 'Store 02' | '$$PurchaseOrder090302051$$' |
 				| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '1 134,00'   | '6 300,00'   | '7 434,00'     | 'Store 02' | '$$PurchaseOrder090302051$$' |
-			// * Change the document number to 141
-			// 	And I input "141" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "141" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice090302052$$"
 			And I save the window as "$$PurchaseInvoice090302052$$"
@@ -530,11 +434,6 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 				| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '720,00'     | '4 000,00'   | '4 720,00'     | 'Store 02' | '$$PurchaseOrder090302051$$' |
 				| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '756,00'     | '4 200,00'   | '4 956,00'     | 'Store 02' | '$$PurchaseOrder090302051$$' |
 				| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '1 134,00'   | '6 300,00'   | '7 434,00'     | 'Store 02' | '$$PurchaseOrder090302051$$' |
-			// * Change the document number to 141
-			// 	And I input "141" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "141" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice090302052$$"
 			And I save the window as "$$PurchaseInvoice090302052$$"
@@ -542,11 +441,6 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '360,00'     | '2 000,00'   | '2 360,00'     | 'Store 02' | '$$PurchaseOrder090302052$$' |
-			// * Change the document number to 140
-			// 	And I input "140" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "140" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice090302051$$"
 			And I save the window as "$$PurchaseInvoice090302051$$"
@@ -573,13 +467,6 @@ Scenario: _090306 create Purchase invoice for several Purchase order with differ
 # Create one PI
 	* Create first test PO 134
 		When create the first test PO for a test on the creation mechanism based on
-		// * Change the document number to 134
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "134" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "134" text in "Number" field
 		* Filling in vendor info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
@@ -623,13 +510,6 @@ Scenario: _090306 create Purchase invoice for several Purchase order with differ
 		And I click the button named "FormPostAndClose"
 	* Create second test PO 135
 		When create the second test PO for a test on the creation mechanism based on
-		// * Change the document number to 135
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "135" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "135" text in "Number" field
 		* Filling in vendor info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
@@ -679,11 +559,6 @@ Scenario: _090306 create Purchase invoice for several Purchase order with differ
 			| 'Dress'    | '210,00' | 'L/Green'   |  'Store 01' | 'pcs'  | '20,000' | ''              | '4 200,00'   | '4 956,00'     | '$$PurchaseOrder090302061$$' |
 			| 'Trousers' | '210,00' | '36/Yellow' |  'Store 01' | 'pcs'  | '30,000' | ''              | '6 300,00'   | '7 434,00'     | '$$PurchaseOrder090302061$$' |
 			| 'Dress'    | '200,00' | 'M/White'   |  'Store 02' | 'pcs'  | '10,000' | ''              | '2 000,00'   | '2 360,00'     | '$$PurchaseOrder090302062$$' |
-		// * Change the document number to 135
-		// 	And I input "135" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "135" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice090302062$$"
 		And I save the window as "$$PurchaseInvoice090302062$$"
@@ -701,13 +576,6 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 	# Create one PI
 	* Create first test PO 136
 		When create the first test PO for a test on the creation mechanism based on
-		// * Change the document number to 136
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "136" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "136" text in "Number" field
 		* Filling in vendor info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
@@ -755,13 +623,6 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 		And I click the button named "FormPostAndClose"
 	* Create second test PO 137
 		When create the second test PO for a test on the creation mechanism based on
-		// * Change the document number to 137
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "137" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "137" text in "Number" field
 		* Filling in vendor info
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
@@ -810,11 +671,6 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Net amount' | 'Total amount' | 'Purchase order'      |
 				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 000,00'   | '2 360,00'     | '$$PurchaseOrder09030702$$' |
 			Then the form attribute named "PriceIncludeTax" became equal to "No"
-			// * Change the document number to 137
-			// 	And I input "137" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "137" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030702$$"
 			And I save the window as "$$PurchaseInvoice09030702$$"
@@ -824,11 +680,6 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 			| 'Dress'    | '200,00' | 'M/White'   |  'Store 02'  | 'pcs'  | '20,000' | '4 000,00'   | '4 000,00'     | '$$PurchaseOrder09030701$$' |
 			| 'Dress'    | '210,00' | 'L/Green'   |  'Store 02'  | 'pcs'  | '20,000' | '4 200,00'   | '4 200,00'     | '$$PurchaseOrder09030701$$' |
 			| 'Trousers' | '210,00' | '36/Yellow' |  'Store 02'  | 'pcs'  | '30,000' | '6 300,00'   | '6 300,00'     | '$$PurchaseOrder09030701$$' |
-			// * Change the document number to 136
-			// 	And I input "136" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "136" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030701$$"
 			And I save the window as "$$PurchaseInvoice09030701$$"
@@ -843,11 +694,6 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Net amount' | 'Total amount' | 'Purchase order'      |
 				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 000,00'   | '2 360,00'     | '$$PurchaseOrder09030702$$' |
 			Then the form attribute named "PriceIncludeTax" became equal to "No"
-			// * Change the document number to 137
-			// 	And I input "137" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "137" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030702$$"
 			And I save the window as "$$PurchaseInvoice09030702$$"
@@ -857,11 +703,6 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 			| 'Dress'    | '200,00' | 'M/White'   |  'Store 02'  | 'pcs'  | '20,000' | '4 000,00'   | '4 000,00'     | '$$PurchaseOrder09030701$$' |
 			| 'Dress'    | '210,00' | 'L/Green'   |  'Store 02'  | 'pcs'  | '20,000' | '4 200,00'   | '4 200,00'     | '$$PurchaseOrder09030701$$' |
 			| 'Trousers' | '210,00' | '36/Yellow' |  'Store 02'  | 'pcs'  | '30,000' | '6 300,00'   | '6 300,00'     | '$$PurchaseOrder09030701$$' |
-			// * Change the document number to 136
-			// 	And I input "136" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "136" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030701$$"
 			And I save the window as "$$PurchaseInvoice09030701$$"

@@ -68,13 +68,6 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 				| 'Description' |
 				| 'Nicoletta'     |
 			And I select current line in "List" table
-		// * Change the sales invoice number to 601
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "601" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "601" text in "Number" field
 		* Adding items to Sales Invoice
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -146,11 +139,6 @@ Scenario: _060003 create Cash reciept with the type of settlements under standar
 			And I activate field named "PaymentListAmount" in "PaymentList" table
 			And I input "11 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
-		// * Change the document number to 601
-		// 	And I input "0" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "601" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashReceipt060003$$"
 		And I save the window as "$$CashReceipt060003$$"
@@ -195,11 +183,6 @@ Scenario: _060004 check the offset of the advance for Sales invoice with the typ
 			And I select current line in "PaymentList" table
 			And I click Clear button of "Partner term" field
 			And I finish line editing in "PaymentList" table
-		// * Change the document number to 602
-		// 	And I input "0" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "602" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankReceipt060004$$"
 		And I save the window as "$$BankReceipt060004$$"
@@ -219,13 +202,6 @@ Scenario: _060004 check the offset of the advance for Sales invoice with the typ
 				| 'Description' |
 				| 'Nicoletta'     |
 			And I select current line in "List" table
-		// * Change the sales invoice number to 602
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "602" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "602" text in "Number" field
 		* Adding items to Sales Invoice
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -276,12 +252,6 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 				| 'Description' |
 				| 'Veritas'     |
 			And I select current line in "List" table
-		// * Change the document number to 601
-		// 	And I move to "Other" tab
-		// 	And I input "601" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "601" text in "Number" field
 		* Adding items to Purchase Invoice
 			And I move to "Item list" tab
 			And I click the button named "Add"
@@ -354,11 +324,6 @@ Scenario: _060006 create Cash payment with the type of settlements under standar
 			And I activate field named "PaymentListAmount" in "PaymentList" table
 			And I input "11 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
-		// * Change the document number to 601
-			// And I input "0" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "601" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberCashPayment060006$$"
 			And I save the window as "$$CashPayment060006$$"
@@ -397,11 +362,6 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 			And I activate field named "PaymentListAmount" in "PaymentList" table
 			And I input "12 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
-		// * Change the document number to 602
-		// 	And I input "0" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "602" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberBankPayment060007$$"
 		And I save the window as "$$BankPayment060007$$"
@@ -423,12 +383,6 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 				| 'Description' |
 				| 'Veritas'     |
 			And I select current line in "List" table
-		// * Change the document number to 602
-		// 	And I move to "Other" tab
-		// 	And I input "602" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "602" text in "Number" field
 		* Adding items to Purchase Invoice
 			And I move to "Item list" tab
 			And I click the button named "Add"

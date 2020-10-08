@@ -117,12 +117,6 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 		And I select current line in "List" table
 	* Check the default status "Wait"
 		Then the form attribute named "Status" became equal to "Wait"
-	// * Filling in the document number №101
-	// 	And I move to "Other" tab
-	// 	And I input "101" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "101" text in "Number" field
 	* Filling in items table
 		And I click the button named "Add"
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -320,7 +314,7 @@ Scenario: _017101 check input item key by line in the Purchase order
 			| Dress       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
-		And I select "s" from "Item key" drop-down list by string in "ItemList" table
+		And I select "S/Yellow" from "Item key" drop-down list by string in "ItemList" table
 		And I activate "Q" field in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
@@ -424,7 +418,7 @@ Scenario: _017105 filter when selecting item key in the purchase order document
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
-		Then "Item keys" window is opened
+		And Delay 2
 		And I select from "Size" drop-down list by "l" string
 		And "List" table became equal
 		| Item key |
@@ -445,6 +439,7 @@ Scenario: _017105 filter when selecting item key in the purchase order document
 
 
 Scenario: _019901 check changes in movements on a Purchase Order document when quantity changes
+		And I close all client application windows
 		When create a Purchase Order document
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberPurchaseOrder019901$$"

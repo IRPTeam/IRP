@@ -114,14 +114,6 @@ Scenario: _029002 create document Sales order and Shipment confirmation (partner
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
-	// * Change of document number 
-	// 	And I move to "Other" tab
-	// 	And I expand "More" group
-	// 	And I input "180" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "180" text in "Number" field
-	// 	And I click the button named "FormPost"
 	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberSalesOrder029002$$"
 	And I save the window as "$$SalesOrder029002$$"
@@ -278,15 +270,6 @@ Scenario: _029012 create document Sales order and Shipment confirmation (partner
 			| Store 01  |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-	// * Change number
-	// 	And I move to "Other" tab
-	// 	And I expand "More" group
-	// 	And I input "181" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "181" text in "Number" field
-	// 	And in the table "ItemList" I click "% Offers" button
-	// 	And in the table "Offers" I click the button named "FormOK"
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesOrder029012$$"
 		And I save the window as "$$SalesOrder029012$$"
@@ -469,13 +452,6 @@ Scenario: _029014 availability check for selection shipment confirmation for whi
 		And "ItemList" table contains lines
 			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Sales order'      | 'Unit' | 'Q'     | 'Offers amount' | 'Tax amount' | 'Net amount' | 'Total amount' |
 			| 'Trousers' | '338,98' | '36/Yellow' | 'Store 01' | '$$SalesOrder029012$$' | 'pcs' | '7,000' | ''              | '427,11'     | '2 372,86'   | '2 799,97'     |
-	// * Change number
-	// 	And I move to "Other" tab
-	// 	And I expand "More" group
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "181" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesInvoice029014$$"
 		And I save the window as "$$SalesInvoice029014$$"

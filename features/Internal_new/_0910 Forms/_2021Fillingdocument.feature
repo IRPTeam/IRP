@@ -171,11 +171,6 @@ Scenario: _0154100 preparation ( filling documents)
 						| USD  | American dollar |
 					And I activate "Description" field in "List" table
 					And I select current line in "List" table
-				// * Change the document number
-				// 	And I input "10" text in "Number" field
-				// 	Then "1C:Enterprise" window is opened
-				// 	And I click "Yes" button
-				// 	And I input "10" text in "Number" field
 				And I click the button named "FormPost"
 				And I save the value of "Number" field as "$$NumberCashTransferOrder01541001$$"
 				And I save the window as "$$CashTransferOrder01541001$$"
@@ -229,11 +224,6 @@ Scenario: _0154100 preparation ( filling documents)
 						| 'Description' |
 						| 'Arina Brown' |
 					And I select current line in "List" table
-				// * Change the document number to 11
-				// 	And I input "11" text in "Number" field
-				// 	Then "1C:Enterprise" window is opened
-				// 	And I click "Yes" button
-				// 	And I input "11" text in "Number" field
 				And I click the button named "FormPost"
 				And I save the value of "Number" field as "$$NumberCashTransferOrder01541002$$"
 				And I save the window as "$$CashTransferOrder01541002$$"
@@ -272,11 +262,6 @@ Scenario: _0154100 preparation ( filling documents)
 						| Bank account, EUR |
 					And I select current line in "List" table
 					And I input "175,00" text in "Receive amount" field
-				// * Change the document number to 13
-				// 	And I input "13" text in "Number" field
-				// 	Then "1C:Enterprise" window is opened
-				// 	And I click "Yes" button
-				// 	And I input "13" text in "Number" field
 				And I click the button named "FormPost"
 				And I save the value of "Number" field as "$$NumberCashTransferOrder01541003$$"
 				And I save the window as "$$CashTransferOrder01541003$$"
@@ -316,11 +301,6 @@ Scenario: _0154100 preparation ( filling documents)
 							| Bank account, EUR |
 						And I select current line in "List" table
 						And I input "1150,00" text in "Receive amount" field
-					// * Change the document number to 14
-					// 	And I input "14" text in "Number" field
-					// 	Then "1C:Enterprise" window is opened
-					// 	And I click "Yes" button
-					// 	And I input "14" text in "Number" field
 					And I click the button named "FormPost"
 					And I save the value of "Number" field as "$$NumberCashTransferOrder01541004$$"
 					And I save the window as "$$CashTransferOrder01541004$$"

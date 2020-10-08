@@ -149,12 +149,6 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 			And I activate "Quantity" field in "ItemList" table
 			And I input "4,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		// * Change the document number
-		// 	And I move to "Other" tab
-		// 	And I input "2 013" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "5 600" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation0290001$$"
 			And I save the window as "$$ShipmentConfirmation0290001$$"
@@ -214,12 +208,6 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 			And I activate "Quantity" field in "ItemList" table
 			And I input "8,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		// * Change the document number
-		// 	And I move to "Other" tab
-		// 	And I input "5 601" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "5 601" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation02900011$$"
 			And I save the window as "$$ShipmentConfirmation02900011$$"
@@ -300,12 +288,6 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 			And I activate "Quantity" field in "ItemList" table
 			And I input "4,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		// * Change the document number
-		// 	And I move to "Other" tab
-		// 	And I input "5 602" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "5 602" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation02900012$$"
 			And I save the window as "$$ShipmentConfirmation02900012$$"
@@ -424,12 +406,6 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 			And I activate "Quantity" field in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		// * Change the document number
-		// 	And I move to "Other" tab
-		// 	And I input "5 604" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "5 604" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation02900014$$"
 			And I save the window as "$$ShipmentConfirmation02900014$$"

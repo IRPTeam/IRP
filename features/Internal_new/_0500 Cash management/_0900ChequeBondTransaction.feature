@@ -416,12 +416,6 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 		And I input "1 800,00" text in "Amount balance" field of "PickedDocuments" table
 		And I finish line editing in "PickedDocuments" table
 		And in the table "DocumentsList" I click "Transfer to document" button
-	// * Change the document number
-	// 	And I move to "Other" tab
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "1" text in "Number" field
 	* Post document
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberChequeBondTransaction090005$$"

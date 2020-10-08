@@ -1702,3 +1702,63 @@ Scenario: Create information register UserSettings records
 		| 'e1cib/data/Catalog.UserGroups?ref=aa7c120ed92fbced11eb080cfa094a6b' | 'Catalog.Items'                         | 'Use_object_with_deletion_mark' | 'Enum.KindsOfAttributes.Custom'     | 'No'                                                                                    |
 		| 'e1cib/data/Catalog.UserGroups?ref=aa7c120ed92fbced11eb080cfa094a6b' | 'Catalog.Partners'                      | 'Use_object_with_deletion_mark' | 'Enum.KindsOfAttributes.Custom'     | 'No'                                                                                    |
 
+
+Scenario: Create catalog SerialLotNumbers objects
+
+	And I check or create catalog "SerialLotNumbers" objects:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Description' | 'SerialLotNumberOwner'                                              | 'Inactive' |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=aa7d120ed92fbced11eb095a22e1d875' | 'No'           | '1'    | '12345456'    | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf1277d18ed8a' | 'No'       |
+
+Scenario: Create catalog PaymentTerminals objects
+
+	And I check or create catalog "PaymentTerminals" objects:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Account' | 'Percent' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.PaymentTerminals?ref=aa7d120ed92fbced11eb095a22e1d876' | 'No'           | '1'    | ''        | '0'       | 'Test01'         | ''                 | ''               | ''               |
+
+Scenario: Create catalog RetailCustomers objects
+
+	And I check or create catalog "RetailCustomers" objects:
+		| 'Ref'                                                                     | 'DeletionMark' | 'Code'   | 'Description'   | 'Name'   | 'Surname' |
+		| 'e1cib/data/Catalog.RetailCustomers?ref=aa7d120ed92fbced11eb095a22e1d877' | 'No'           | 'Test01' | 'Test01 Test01' | 'Test01' | 'Test01'  |
+
+Scenario: Create catalog BankTerms objects
+
+	And I check or create catalog "BankTerms" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.BankTerms?ref=aa7d120ed92fbced11eb096728fa8ee7' | 'No'           | '1'    | 'Test01'         | ''                 | ''               | ''               |
+
+Scenario: Create catalog SpecialOfferRules objects (Test)
+
+	And I check or create catalog "SpecialOfferRules" objects:
+		| 'Ref'                                                                       | 'DeletionMark' | 'Code' | 'Settings'     | 'ExternalDataProc' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.SpecialOfferRules?ref=aa7d120ed92fbced11eb096728fa8eea' | 'No'           | '1'    | 'ValueStorage' | ''                 | 'Test special offer rule' | ''                 | ''               | ''               |
+
+Scenario: Create catalog SpecialOfferTypes objects (Test)
+
+	And I check or create catalog "SpecialOfferTypes" objects:
+		| 'Ref'                                                                       | 'DeletionMark' | 'Code' | 'Settings'     | 'ExternalDataProc' | 'TermsOfDiscountCalculation' | 'GroupTypes' | 'Description_en'       | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.SpecialOfferTypes?ref=aa7d120ed92fbced11eb096728fa8ee8' | 'No'           | '1'    | 'ValueStorage' | ''                 | 'No'                         | 'No'         | 'Test special offer01' | ''                 | ''               | ''               |
+
+Scenario: Create catalog SpecialOffers objects (Test)
+
+	And I check or create catalog "SpecialOffers" objects:
+		| 'Ref'                                                                   | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Code' | 'Settings'     | 'SpecialOfferType'                                                          | 'Priority' | 'Manually' | 'StartOf'             | 'EndOf'               | 'Launch' | 'ManualInputValue' | 'Type'                               | 'DocumentType'                   | 'Description_en'       | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.SpecialOffers?ref=aa7d120ed92fbced11eb096728fa8ee9' | 'No'           | ''       | 'No'       | '1'    | 'ValueStorage' | 'e1cib/data/Catalog.SpecialOfferTypes?ref=aa7d120ed92fbced11eb096728fa8ee8' | '2'        | 'No'       | '01.01.0001 00:00:00' | '01.01.0001 00:00:00' | 'No'     | 'No'               | 'Enum.SpecialOfferTypes.ForDocument' | 'Enum.OffersDocumentTypes.Sales' | 'Test special offer01' | ''                 | ''               | ''               |
+
+Scenario: Create catalog CashStatementStatuses objects (Test)
+
+	And I check or create catalog "CashStatementStatuses" objects:
+		| 'Ref'                                                                           | 'DeletionMark' | 'ForbidCorrections' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.CashStatementStatuses?ref=aa7d120ed92fbced11eb096728fa8eef' | 'No'           | 'No'                | 'Test'           | ''                 | ''               | ''               |
+
+Scenario: Create catalog Hardware objects  (Test)
+
+	And I check or create catalog "Hardware" objects:
+		| 'Ref'                                                              | 'DeletionMark' | 'Description' | 'Workstation' | 'EquipmentType' | 'Driver' | 'Enabled' |
+		| 'e1cib/data/Catalog.Hardware?ref=aa7d120ed92fbced11eb096728fa8eed' | 'No'           | 'Test'        | ''            | ''              | ''       | 'No'      |
+
+Scenario: Create catalog Workstations objects  (Test)
+
+	And I check or create catalog "Workstations" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Description' | 'CashAccount' | 'UniqueID' |
+		| 'e1cib/data/Catalog.Workstations?ref=aa7d120ed92fbced11eb096728fa8eee' | 'No'           | 'Test'        | ''            | ''         |

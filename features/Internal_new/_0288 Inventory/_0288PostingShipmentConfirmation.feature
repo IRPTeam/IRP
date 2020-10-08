@@ -119,11 +119,6 @@ Scenario: _028801 create document Shipment confirmation based on Sales Invoice (
 	* Check that information is filled in when creating based on
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
-	// * Change of document number
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "95" text in "Number" field
 	* Check if the product is filled in
 		And "ItemList" table contains lines
 		| 'Item'     | 'Quantity' | 'Item key' | 'Unit' | 'Shipment basis'   |
@@ -164,11 +159,6 @@ Scenario: _028804 create document Shipment confirmation  based on Sales Invoice 
 	* Check that information is filled in when creating based on
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
-	// * Change of document number
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "98" text in "Number" field
 	* Check if the product is filled in
 		And "ItemList" table contains lines
 		| '#' | 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Shipment basis'   |
@@ -202,11 +192,6 @@ Scenario: _028807 create document Shipment confirmation based on Purchase return
 	And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "Store" became equal to "Store 02"
-	// * Change of document number
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "101" text in "Number" field
 	And "ItemList" table contains lines
 		| 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Shipment basis'                              |
 		| 'Dress' | '10,000'    | 'L/Green'  | 'pcs'  | '$$PurchaseReturn022314$$' |
@@ -238,11 +223,6 @@ Scenario: _028810 create document Shipment confirmation  based on Inventory tran
 	And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
 	And Delay 1
 	Then the form attribute named "Company" became equal to "Main Company"
-	// * Change of document number
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "103" text in "Number" field
 	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberShipmentConfirmation028810$$"
 	And I save the window as "$$ShipmentConfirmation0028810$$"

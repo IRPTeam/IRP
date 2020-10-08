@@ -146,13 +146,6 @@ Scenario: _029103 create a Purchase order for service
 			| Description        |
 			| Vendor Ferron, TRY |
 		And I select current line in "List" table
-	// * Filling in the document number 123
-	// 	And I move to "Other" tab
-	// 	And I expand "More" group
-	// 	And I input "123" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "123" text in "Number" field
 	* Filling in items table
 		And I click the button named "Add"
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -197,12 +190,6 @@ Scenario: _029104 create a Purchase invoice for service (based on Purchase order
 		And "ItemList" table contains lines
 		| 'Price'    | 'Item'    | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Expense type'             | 'Business unit' | 'Purchase order'      |
 		| '1 000,00' | 'Service' | '18%' | 'Interner' | '1,000' | '152,54'     | 'pcs'  | '847,46'     | '1 000,00'     | 'Telephone communications' | 'Front office'  | '$$PurchaseOrder029103$$' |
-	// * Filling in the document number 123
-	// 	And I move to "Other" tab
-	// 	And I input "123" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "123" text in "Number" field
 	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberPurchaseInvoice029104$$"
 	And I save the window as "$$PurchaseInvoice029104$$"
@@ -271,12 +258,6 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 				| Description        |
 				| Vendor Ferron, TRY |
 			And I select current line in "List" table
-		// * Filling in the document number 124
-		// 	And I move to "Other" tab
-		// 	And I input "124" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "124" text in "Number" field
 		* Filling in items table ((add product and service))
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -476,13 +457,6 @@ Scenario: _029107 create a Sales order for service and product (Store doesn't us
 		And I input "700,00" text in "Price" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
-	// * Filling in document number
-	// 	And I move to "Other" tab
-	// 	And I expand "More" group
-	// 	And I input "0" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "700" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesOrder029107$$"
 		And I save the window as "$$SalesOrder029107$$"
@@ -591,13 +565,6 @@ Scenario: _029108 create a Sales order for service and product (Store use Shipme
 		And I select current line in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
-	// * Filling in document number
-	// 	And I move to "Other" tab
-	// 	And I expand "More" group
-	// 	And I input "0" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "701" text in "Number" field
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberSalesOrder029108$$"
 		And I save the window as "$$SalesOrder029108$$"

@@ -152,12 +152,6 @@ Scenario: _0205001 preparation
 				And I input "1,000" text in "Q" field of "ItemList" table
 				And I input "100,000" text in "Price" field of "ItemList" table
 				And I finish line editing in "ItemList" table
-			// * Change the document number
-			// 	And I move to "Other" tab
-			// 	And I input "3 900" text in "Number" field
-			// 	Then "1C:Enterprise" window is opened
-			// 	And I click "Yes" button
-			// 	And I input "3 900" text in "Number" field
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice0205001$$"
 			And I save the window as "$$PurchaseInvoice0205001$$"

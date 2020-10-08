@@ -113,12 +113,6 @@ Scenario: _022301 create document Purchase return, store use Shipment confirmati
 		And "ItemList" table contains lines
 		| 'Item'  | 'Item key' | 'Purchase invoice'    | 'Store'    | 'Unit' | 'Q'     |
 		| 'Dress' | 'L/Green'  | '$$PurchaseInvoice018006$$' | 'Store 02' | 'pcs' | '2,000' |
-	// * Filling in the document number 1
-	// 	And I move to "Other" tab
-	// 	And I input "1" text in "Number" field
-	// 	Then "1C:Enterprise" window is opened
-	// 	And I click "Yes" button
-	// 	And I input "1" text in "Number" field
 	And I click the button named "FormPost"
 	And I save the value of "Number" field as "$$NumberPurchaseReturn022301$$"
 	And I save the window as "$$PurchaseReturn022301$$"

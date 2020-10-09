@@ -504,6 +504,7 @@ Scenario: _2990004 create Physical inventory (store use GR and SC)
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I click the button named "FormCreate"
+		And I set checkbox "Use responsible person by row"
 		And I select "Done" exact value from "Status" drop-down list
 	* Check filling in document with stock balances
 		And I click Select button of "Store" field
@@ -610,6 +611,7 @@ Scenario: _2990005 create Physical inventory (store doesn't use GR and SC)
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I click the button named "FormCreate"
+		And I set checkbox "Use responsible person by row"
 		And I select "Done" exact value from "Status" drop-down list
 	* Check filling in document with stock balances
 		And I click Select button of "Store" field
@@ -952,6 +954,7 @@ Scenario: _2990009 check for updates Update Exp Count
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I click the button named "FormCreate"
+		And I set checkbox "Use responsible person by row"
 	* Check filling in document with stock balances
 		And I click Select button of "Store" field
 		And I go to line in "List" table
@@ -1003,6 +1006,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I click the button named "FormCreate"
+		And I set checkbox "Use responsible person by row"
 	* Filling out a document with stock balances
 		And I click Select button of "Store" field
 		And I go to line in "List" table
@@ -1373,9 +1377,9 @@ Scenario: _2990011 re-filling Physical inventory based on Physical count by loca
 		And I move to "Physical count by location" tab
 		And "PhysicalCountByLocationList" table contains lines
 		| 'Reference'                     | 'Status'        |
-		| 'Physical count by location 1*' | 'Done'          |
-		| 'Physical count by location 2*' | 'In processing' |
-		| 'Physical count by location 3*' | 'Done'          |
+		| 'Location count 1*' | 'Done'          |
+		| 'Location count 2*' | 'In processing' |
+		| 'Location count 3*' | 'Done'          |
 		And I close all client application windows
 	* Closing the second Physical count by location and refilling Physical inventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"

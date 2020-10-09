@@ -444,7 +444,7 @@ $startPort = 48010
 New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps"
 New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps\Template"
 Copy-Item -Path "%system.teamcity.build.workingDir%\TempDB\1Cv8.1CD" -Destination "%system.teamcity.build.workingDir%\AllSteps\Template\1Cv8.1CD"
-$global:JobArray = @()
+
 $StreamCountMax = 2
 
 $VanessaRun = {
@@ -632,37 +632,39 @@ $VanessaRun = {
     }
     else {
         Write-Host "File $ScriptLogFilePath not found. Skip read tail log"
-    }        
+    }
 }
-
+$JobArray = @()
 foreach ($elementTag in $TagArray) {
     $startPort += 10
     $JobTailProc = start-job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort
-    $global:JobArray += ($JobTailProc)
+    $JobArray += $JobTailProc
 
     do {
         Start-Sleep 10
-        $jobCount = $global:JobArray.count
+        $jobCount = $JobArray.count
         Write-Output "Current job count: $jobCount Max count: $StreamCountMax"
-        foreach ($job in $global:JobArray) {
+        $JobArrayTmp = $JobArray;
+        foreach ($job in $JobArray) {
             $job | Receive-Job
             if (!($job.State -eq "Running")) {
-                $global:JobArray = $global:JobArray | Where-Object { $_ –ne $job } 
+                $JobArrayTmp = $JobArray | Where-Object { $_ –ne $job } 
             }
         }
-    } while ($global:JobArray.count -ge $StreamCountMax)
+        $JobArray = $JobArrayTmp
+    } while ($JobArray.count -ge $StreamCountMax)
 }
 
 do {
     Start-Sleep 1
 
-    foreach ($job in $global:JobArray) {
+    foreach ($job in $JobArray) {
         $job | Receive-Job
         if (!($job.State -eq "Running")) {
-            $global:JobArray = $global:JobArray | Where-Object { $_ –ne $job } 
+            $JobArray = $JobArray | Where-Object { $_ –ne $job } 
         }
     }
-} while ($global:JobArray.count)]]></param>
+} while ($JobArray.count)]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>

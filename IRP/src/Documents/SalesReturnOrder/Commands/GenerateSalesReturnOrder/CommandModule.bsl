@@ -9,9 +9,9 @@ Procedure GenerateDocument(ArrayOfBasisDocuments)
 	
 	If DocumentStructure.Count() = 0 Then
 		For Each BasisDocument In ArrayOfBasisDocuments Do
-			ErrorMessageKey = GetErrorMessageKey(BasisDocument);
-			If ValueIsFilled(ErrorMessageKey) Then
-				ShowMessageBox( , R()[ErrorMessageKey]);
+			ErrorMessage = GetErrorMessage(BasisDocument);
+			If ValueIsFilled(ErrorMessage) Then
+				ShowMessageBox( , ErrorMessage);
 				Return;
 			EndIf;
 		EndDo;
@@ -305,15 +305,15 @@ EndFunction
 
 #Region Errors
 
-&AtClient
-Function GetErrorMessageKey(BasisDocument)
-	ErrorMessageKey = Undefined;
+&AtServer
+Function GetErrorMessage(BasisDocument)
+	ErrorMessage = Undefined;
 	
 	If TypeOf(BasisDocument) = Type("DocumentRef.SalesInvoice") Then
-		ErrorMessageKey = "Error_021";
+		ErrorMessage = StrTemplate(R().Error_021, Metadata.Documents.SalesInvoice.Synonym);
 	EndIf;
 	
-	Return ErrorMessageKey;
+	Return ErrorMessage;
 EndFunction
 
 &AtServer

@@ -839,14 +839,12 @@ Scenario: Create chart of characteristic types AddAttributeAndProperty objects
 
 	And I check or create chart of characteristic types "AddAttributeAndProperty" objects:
 		| 'Ref'                                                                                                | 'DeletionMark' | 'Icon'         | 'isIconSet' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr'            | 'UniqueID'                          |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf1336a037abf' | 'No'           | 'ValueStorage' | 'No'        | 'Additional attribute 02' | ''                 | ''               | 'Additional attribute 02'   | '_37fa41f475e04e2e8bf46f506c526eb8' |
 		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47e9' | 'No'           | 'ValueStorage' | 'No'        | 'Brand Socks'             | ''                 | ''               | 'Brand Socks TR'            | '_4a1c7551a8d2430e9bbd08a786fc9c31' |
 		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47e8' | 'No'           | 'ValueStorage' | 'No'        | 'Color Socks'             | ''                 | ''               | 'Color Socks TR'            | '_51d5bf741df34c5c81b30e019f7cbb68' |
 		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47cf' | 'No'           | 'ValueStorage' | 'No'        | ''                        | ''                 | ''               | 'Chewing gum brand'         | '_5a867325afff46cfa55f52f52582b7d3' |
 		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47de' | 'No'           | 'ValueStorage' | 'No'        | ''                        | ''                 | ''               | 'Taste TR'                  | '_8e339cb0838943819916f6e63d8fc363' |
 		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47ce' | 'No'           | 'ValueStorage' | 'No'        | ''                        | ''                 | ''               | 'Chewing gum taste'         | '_95cd1e91718f43fb8eee217080a11752' |
 		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf128cde918b7' | 'No'           | 'ValueStorage' | 'No'        | 'Test'                    | ''                 | ''               | 'Test TR'                   | '_a154'                             |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf1336a037abc' | 'No'           | 'ValueStorage' | 'No'        | 'Additional attribute 01' | ''                 | ''               | 'Additional attribute 01'   | '_c63b5540b5a543ee97ed9f43eab5dccd' |
 		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf11c17ff4363' | 'No'           | 'ValueStorage' | 'No'        | 'Service type'            | ''                 | ''               | 'Service type TR'           | '_f4e24b6966a54052a692d3846b81e8e7' |
 		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf116b32709a8' | 'No'           | 'ValueStorage' | 'No'        | 'Business region'         | ''                 | ''               | 'Business region TR'        | 'BusinessRegion'                    |
 		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef034' | 'No'           | 'ValueStorage' | 'No'        | 'Color'                   | ''                 | ''               | 'Color TR'                  | 'Color1'                            |
@@ -1762,3 +1760,28 @@ Scenario: Create catalog Workstations objects  (Test)
 	And I check or create catalog "Workstations" objects:
 		| 'Ref'                                                                  | 'DeletionMark' | 'Description' | 'CashAccount' | 'UniqueID' |
 		| 'e1cib/data/Catalog.Workstations?ref=aa7d120ed92fbced11eb096728fa8eee' | 'No'           | 'Test'        | ''            | ''         |
+
+Scenario: Create information register UserSettings records (check registers balance)
+
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup'                                                   | 'MetadataObject'                | 'AttributeName'                       | 'KindOfAttribute'               | 'Value' |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.GoodsReceipt'         | 'CheckBalance_GoodsInTransitIncoming' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.GoodsReceipt'         | 'CheckBalance_GoodsInTransitOutgoing' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.GoodsReceipt'         | 'CheckBalance_ReceiptOrders'          | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.PurchaseInvoice'      | 'CheckBalance_GoodsInTransitIncoming' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.PurchaseInvoice'      | 'CheckBalance_OrderBalance'           | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.PurchaseInvoice'      | 'CheckBalance_OrderProcurement'       | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.PurchaseInvoice'      | 'CheckBalance_ReceiptOrders'          | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.PurchaseInvoice'      | 'CheckBalance_ShipmentOrders'         | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.PurchaseOrder'        | 'CheckBalance_GoodsInTransitIncoming' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.PurchaseOrder'        | 'CheckBalance_OrderBalance'           | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.PurchaseOrder'        | 'CheckBalance_OrderProcurement'       | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.PurchaseOrder'        | 'CheckBalance_ReceiptOrders'          | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.SalesInvoice'         | 'CheckBalance_GoodsInTransitOutgoing' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.SalesInvoice'         | 'CheckBalance_OrderBalance'           | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.SalesOrder'           | 'CheckBalance_GoodsInTransitOutgoing' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.SalesOrder'           | 'CheckBalance_OrderBalance'           | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.SalesOrder'           | 'CheckBalance_OrderProcurement'       | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.SalesOrder'           | 'CheckBalance_ShipmentOrders'         | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.ShipmentConfirmation' | 'CheckBalance_GoodsInTransitOutgoing' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.ShipmentConfirmation' | 'CheckBalance_ShipmentOrders'         | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |

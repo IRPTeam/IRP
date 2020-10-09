@@ -469,7 +469,7 @@ Function GetErrorMessage(BasisDocument)
 	EndIf;
 	
 	If TypeOf(BasisDocument) = Type("DocumentRef.PurchaseInvoice") Then
-		ErrorMessage = R().Error_021;
+		ErrorMessage = StrTemplate(R().Error_021, Metadata.Documents.PurchaseInvoice.Synonym);
 	EndIf;
 	
 	Return ErrorMessage;

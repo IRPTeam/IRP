@@ -418,7 +418,7 @@ Function GetErrorMessage(BasisDocument)
 	ErrorMessage = Undefined;
 	
 	If TypeOf(BasisDocument) = Type("DocumentRef.RetailSalesReceipt") Then
-		ErrorMessage = R().Error_076;
+		ErrorMessage = StrTemplate(R().Error_021, Metadata.Documents.RetailSalesReceipt.Synonym);
 	EndIf;
 	
 	Return ErrorMessage;

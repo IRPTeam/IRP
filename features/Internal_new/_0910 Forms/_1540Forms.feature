@@ -55,6 +55,18 @@ Scenario: _0154000 preparation
 		When Create catalog SerialLotNumbers objects
 		When Create catalog PaymentTerminals objects
 		When Create catalog RetailCustomers objects
+		When Create catalog SerialLotNumbers objects
+		When Create catalog PaymentTerminals objects
+		When Create catalog RetailCustomers objects
+		When Create catalog BankTerms objects
+		When Create catalog SpecialOfferRules objects (Test)
+		When Create catalog SpecialOfferTypes objects (Test)
+		When Create catalog SpecialOffers objects (Test)
+		When Create catalog CashStatementStatuses objects (Test)
+		When Create catalog Hardware objects  (Test)
+		When Create catalog Workstations objects  (Test)
+		When Create catalog ItemSegments objects
+		When Create catalog PaymentTypes objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -305,10 +317,7 @@ Scenario:  _01540050 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "User groups"
 		And field "Test" is present on the form
-		And I click "Add properties" button
-		And "Properties" table became equal
-			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+		And I close current window
 	And I close all client application windows
 
 
@@ -506,7 +515,7 @@ Scenario:  _01540055 check that additional attributes and properties are display
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "Hardware"
-		And field "Test" is present on the form
+		Then the form attribute named "__a154" became equal to ""
 		And I close current window
 		And I go to line in "List" table
 			| 'Description'              |
@@ -3126,40 +3135,6 @@ Scenario: _015400698 check that additional attributes and properties are display
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-
-Scenario: _015400699 check that additional attributes are displayed on the form without re-opening (Catalog_Workstations)
-	And I close all client application windows
-	* Open a form to create Workstations
-		Given I open hyperlink "e1cib/list/Catalog.Workstations"
-		And I click the button named "FormCreate"
-		And field "Test" is not present on the form
-	* Adding additional Test attribute without closing the form
-		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
-		And I go to line in "List" table
-			| Predefined data item name          |
-			| Catalog_Workstations     |
-		And I select current line in "List" table
-		And in the table "Attributes" I click the button named "AttributesAdd"
-		And I click choice button of "Attribute" attribute in "Attributes" table
-		And I go to line in "List" table
-			| Description |
-			| Test        |
-		And I select current line in "List" table
-		And I finish line editing in "Attributes" table
-		And I move to "Properties" tab
-		And in the table "Properties" I click the button named "PropertiesAdd"
-		And I click choice button of "Property" attribute in "Properties" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Test'        |
-		And I select current line in "List" table
-		And I finish line editing in "Properties" table
-		And I input "Workstations" text in the field named "Description_en"
-		And I click "Save and close" button
-	* Check that the additional Test attribute has been displayed on the form
-		When in opened panel I select "Workstations"
-		And field "Test" is present on the form
-	And I close all client application windows
 
 // Scenario:  _0154007 delete Test attribute
 // 	Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"

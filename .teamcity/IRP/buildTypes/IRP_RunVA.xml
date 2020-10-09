@@ -432,7 +432,7 @@ elseif ("%dep.IRP_GitHubUpdate.env.Database1CName%" -eq "%teamcity.project.id%_d
 }
 elseif ("%dep.IRP_GitHubUpdate.env.Database1CName%" -like "%teamcity.project.id%_develop*") {
     Write-Output "Start short test"
-    $TagArray = @("BasicFormsCheck", "Catalogs")	
+    #$TagArray = @("BasicFormsCheck", "Catalogs")	
 }
 else {
     Write-Output "Skip tests"

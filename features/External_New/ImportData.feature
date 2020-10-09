@@ -1760,3 +1760,28 @@ Scenario: Create catalog Workstations objects  (Test)
 	And I check or create catalog "Workstations" objects:
 		| 'Ref'                                                                  | 'DeletionMark' | 'Description' | 'CashAccount' | 'UniqueID' |
 		| 'e1cib/data/Catalog.Workstations?ref=aa7d120ed92fbced11eb096728fa8eee' | 'No'           | 'Test'        | ''            | ''         |
+
+Scenario: Create information register UserSettings records (check registers balance)
+
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup'                                                   | 'MetadataObject'                | 'AttributeName'                       | 'KindOfAttribute'               | 'Value' |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.GoodsReceipt'         | 'CheckBalance_GoodsInTransitIncoming' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.GoodsReceipt'         | 'CheckBalance_GoodsInTransitOutgoing' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.GoodsReceipt'         | 'CheckBalance_ReceiptOrders'          | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.PurchaseInvoice'      | 'CheckBalance_GoodsInTransitIncoming' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.PurchaseInvoice'      | 'CheckBalance_OrderBalance'           | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.PurchaseInvoice'      | 'CheckBalance_OrderProcurement'       | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.PurchaseInvoice'      | 'CheckBalance_ReceiptOrders'          | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.PurchaseInvoice'      | 'CheckBalance_ShipmentOrders'         | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.PurchaseOrder'        | 'CheckBalance_GoodsInTransitIncoming' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.PurchaseOrder'        | 'CheckBalance_OrderBalance'           | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.PurchaseOrder'        | 'CheckBalance_OrderProcurement'       | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.PurchaseOrder'        | 'CheckBalance_ReceiptOrders'          | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.SalesInvoice'         | 'CheckBalance_GoodsInTransitOutgoing' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.SalesInvoice'         | 'CheckBalance_OrderBalance'           | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.SalesOrder'           | 'CheckBalance_GoodsInTransitOutgoing' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.SalesOrder'           | 'CheckBalance_OrderBalance'           | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.SalesOrder'           | 'CheckBalance_OrderProcurement'       | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.SalesOrder'           | 'CheckBalance_ShipmentOrders'         | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.ShipmentConfirmation' | 'CheckBalance_GoodsInTransitOutgoing' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.ShipmentConfirmation' | 'CheckBalance_ShipmentOrders'         | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |

@@ -401,18 +401,6 @@ Scenario: creating a Purchase Order document
 		And I finish line editing in "ItemList" table
 	And I click the button named "FormPostAndClose"
 
-Scenario: change purchase order number to 103
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I go to the last line in "List" table
-		And I select current line in "List" table
-		* Change the document number to 3
-			And I move to "Other" tab
-			And I expand "More" group
-			And I input "103" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "103" text in "Number" field
-		And I click the button named "FormPostAndClose"
 
 
 

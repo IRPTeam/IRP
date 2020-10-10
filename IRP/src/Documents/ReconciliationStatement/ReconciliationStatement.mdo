@@ -57,14 +57,17 @@
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="08a8bf85-eeb6-4db8-a905-d173e7ddc262">
-    <name>Company</name>
+  <attributes uuid="66391b91-70a8-42a0-be75-feb1b225f9b0">
+    <name>BeginPeriod</name>
     <synonym>
       <key>en</key>
-      <value>Company</value>
+      <value>Begin period</value>
     </synonym>
     <type>
-      <types>CatalogRef.Companies</types>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -73,11 +76,41 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="533466ff-c94b-4be7-b0a4-9179dbaa05b8">
-    <name>LegalName</name>
+  <attributes uuid="164384f8-13d7-43a9-89e6-3faeacb95a4d">
+    <name>ClosingBalanceCredit</name>
     <synonym>
       <key>en</key>
-      <value>Legal name</value>
+      <value>Closing balance credit</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="148b677a-d787-42d7-aac6-4097c00b3c47">
+    <name>ClosingBalanceDebit</name>
+    <synonym>
+      <key>en</key>
+      <value>Closing balance debit</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="08a8bf85-eeb6-4db8-a905-d173e7ddc262">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
     </synonym>
     <type>
       <types>CatalogRef.Companies</types>
@@ -105,17 +138,37 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="f19138da-731f-4fbf-a141-52ae00ea8e71">
-    <name>OpeningBalanceDebit</name>
+  <attributes uuid="33123e72-9f21-4220-ad64-2a450278936f">
+    <name>EndPeriod</name>
     <synonym>
       <key>en</key>
-      <value>Opening balance debit</value>
+      <value>End period</value>
     </synonym>
     <type>
-      <types>DefinedType.typeAmount</types>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="533466ff-c94b-4be7-b0a4-9179dbaa05b8">
+    <name>LegalName</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal name</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -135,11 +188,11 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="148b677a-d787-42d7-aac6-4097c00b3c47">
-    <name>ClosingBalanceDebit</name>
+  <attributes uuid="f19138da-731f-4fbf-a141-52ae00ea8e71">
+    <name>OpeningBalanceDebit</name>
     <synonym>
       <key>en</key>
-      <value>Closing balance debit</value>
+      <value>Opening balance debit</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>
@@ -150,55 +203,17 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="164384f8-13d7-43a9-89e6-3faeacb95a4d">
-    <name>ClosingBalanceCredit</name>
+  <attributes uuid="7082c515-dbb8-496f-ac9c-bde5c1ccdb26">
+    <name>Partner</name>
     <synonym>
       <key>en</key>
-      <value>Closing balance credit</value>
+      <value>Partner</value>
     </synonym>
     <type>
-      <types>DefinedType.typeAmount</types>
+      <types>CatalogRef.Partners</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="66391b91-70a8-42a0-be75-feb1b225f9b0">
-    <name>BeginPeriod</name>
-    <synonym>
-      <key>en</key>
-      <value>Begin period</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="33123e72-9f21-4220-ad64-2a450278936f">
-    <name>EndPeriod</name>
-    <synonym>
-      <key>en</key>
-      <value>End period</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -220,21 +235,6 @@
         <value>Catalog.ObjectStatuses.ReconciliationStatement</value>
       </value>
     </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="7082c515-dbb8-496f-ac9c-bde5c1ccdb26">
-    <name>Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>

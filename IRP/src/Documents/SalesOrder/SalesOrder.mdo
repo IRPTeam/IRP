@@ -80,27 +80,20 @@
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="148b83b9-acd3-49d2-8b61-05ef9845bc5c">
-    <name>Partner</name>
+  <attributes uuid="c99e7c17-9633-4824-bd3f-282af5f4ab9d">
+    <name>Agreement</name>
     <synonym>
       <key>en</key>
-      <value>Partner</value>
+      <value>Partner term</value>
     </synonym>
     <type>
-      <types>CatalogRef.Partners</types>
+      <types>CatalogRef.Agreements</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
-    <choiceParameters>
-      <name>Filter.Customer</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
+    <createOnInput>DontUse</createOnInput>
     <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="046b5cbf-c2ab-43d9-818e-1fccd22581ba">
     <name>Company</name>
@@ -155,6 +148,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="b7f54cd5-538e-4e69-94eb-6ce834c292db">
+    <name>LegalName</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal name</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="528c42e2-b884-429c-b83a-bc0cf3754260">
     <name>ManagerSegment</name>
     <synonym>
@@ -177,42 +185,27 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="bcee4e71-df56-4409-8e13-597fea5999fc">
-    <name>Status</name>
+  <attributes uuid="148b83b9-acd3-49d2-8b61-05ef9845bc5c">
+    <name>Partner</name>
     <synonym>
       <key>en</key>
-      <value>Status</value>
+      <value>Partner</value>
     </synonym>
     <type>
-      <types>CatalogRef.ObjectStatuses</types>
+      <types>CatalogRef.Partners</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <choiceParameters>
-      <name>Filter.Parent</name>
-      <value xsi:type="core:ReferenceValue">
-        <value>Catalog.ObjectStatuses.SalesOrder</value>
+      <name>Filter.Customer</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
       </value>
     </choiceParameters>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="c99e7c17-9633-4824-bd3f-282af5f4ab9d">
-    <name>Agreement</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner term</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Agreements</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <createOnInput>DontUse</createOnInput>
-    <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
   <attributes uuid="fc65986f-91da-4644-9ca4-5ba4e02ca1cb">
     <name>PriceIncludeTax</name>
@@ -244,17 +237,24 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="b7f54cd5-538e-4e69-94eb-6ce834c292db">
-    <name>LegalName</name>
+  <attributes uuid="bcee4e71-df56-4409-8e13-597fea5999fc">
+    <name>Status</name>
     <synonym>
       <key>en</key>
-      <value>Legal name</value>
+      <value>Status</value>
     </synonym>
     <type>
-      <types>CatalogRef.Companies</types>
+      <types>CatalogRef.ObjectStatuses</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <choiceParameters>
+      <name>Filter.Parent</name>
+      <value xsi:type="core:ReferenceValue">
+        <value>Catalog.ObjectStatuses.SalesOrder</value>
+      </value>
+    </choiceParameters>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>

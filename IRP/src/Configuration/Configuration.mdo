@@ -343,6 +343,7 @@
   <commonAttributes>CommonAttribute.DocumentAmount</commonAttributes>
   <commonAttributes>CommonAttribute.ID</commonAttributes>
   <commonAttributes>CommonAttribute.UniqueID</commonAttributes>
+  <commonAttributes>CommonAttribute.BusinessUnit</commonAttributes>
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <httpServices>HTTPService.FileTransferService</httpServices>
   <httpServices>HTTPService.SaasService</httpServices>

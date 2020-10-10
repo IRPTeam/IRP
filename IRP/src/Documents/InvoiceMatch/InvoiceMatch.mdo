@@ -74,6 +74,21 @@
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="660ae818-e1ac-466c-9e2f-bc11dd56cf75">
+    <name>Agreement</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner term</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Agreements</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="01d40b68-5b37-41d7-b8e0-38c6756e907e">
     <name>Company</name>
     <synonym>
@@ -87,49 +102,6 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="f014385b-0731-41a0-8929-a0e509cbccba">
-    <name>OperationType</name>
-    <synonym>
-      <key>en</key>
-      <value>Operation type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.InvoiceMatchOperationsTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="d2f11715-6ce1-4dc8-96f3-3ff4b6345461">
-    <name>PartnerApTransactionsBasisDocument</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner ap transactions basis document</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeApTransactionBasises</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="d0e90541-eafd-4e1e-8466-4ac1663ee5bf">
-    <name>PartnerArTransactionsBasisDocument</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner AR transactions basis document</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeArTransactionBasises</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -163,6 +135,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="f014385b-0731-41a0-8929-a0e509cbccba">
+    <name>OperationType</name>
+    <synonym>
+      <key>en</key>
+      <value>Operation type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.InvoiceMatchOperationsTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="cdd11974-9afc-4ac6-ae61-a9f4d5e486dd">
     <name>Partner</name>
     <synonym>
@@ -178,18 +165,31 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="660ae818-e1ac-466c-9e2f-bc11dd56cf75">
-    <name>Agreement</name>
+  <attributes uuid="d2f11715-6ce1-4dc8-96f3-3ff4b6345461">
+    <name>PartnerApTransactionsBasisDocument</name>
     <synonym>
       <key>en</key>
-      <value>Partner term</value>
+      <value>Partner ap transactions basis document</value>
     </synonym>
     <type>
-      <types>CatalogRef.Agreements</types>
+      <types>DefinedType.typeApTransactionBasises</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d0e90541-eafd-4e1e-8466-4ac1663ee5bf">
+    <name>PartnerArTransactionsBasisDocument</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner AR transactions basis document</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeArTransactionBasises</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>

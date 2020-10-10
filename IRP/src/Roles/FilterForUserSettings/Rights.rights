@@ -760,13 +760,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.RetailSalesReceipt.Attribute.BusinessUnit</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.DebitNote</name>
 		<right>
 			<name>Read</name>

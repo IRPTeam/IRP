@@ -92,3 +92,6 @@ Scenario: _351002 check user password generation from enterprise mode
                 When in sections panel I select "Sales - A/R"
                 And I close TestClient session
                 Then I connect launched Test client "Этот клиент"
+                
+Scenario: _999999 close TestClient session
+	And I close TestClient session

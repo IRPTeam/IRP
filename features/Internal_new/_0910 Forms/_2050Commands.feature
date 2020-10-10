@@ -3723,3 +3723,6 @@ Scenario: _010020 check the operation of Quantity Compare plugin (comparison of 
 			| 'Boots' | '3,000'    | '37/18SD'  | 'Store 02' | 'pcs'  | '$$PurchaseInvoice0205001$$'          |
 			| 'Boots' | '1,000'    | '38/18SD'  | 'Store 02' | 'pcs'  | ''                                 |
 		And I close all client application windows
+
+Scenario: _999999 close TestClient session
+	And I close TestClient session

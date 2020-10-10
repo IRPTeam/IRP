@@ -71,8 +71,9 @@ Scenario: _020001 check load currency rate
 		And I finish line editing in "Currencies" table
 		And in the table "Currencies" I click "Download" button
 		And Delay 40
-		And I close current window
+		And I close all client application windows
 	* Upload currency rate Forex Selling (from tcmb.gov.tr)
+		Given I open hyperlink "e1cib/list/Catalog.Currencies"
 		And I click "Integrations" button
 		And I go to line in "IntegrationTable" table
 			| Integration settings |
@@ -90,8 +91,9 @@ Scenario: _020001 check load currency rate
 		And I finish line editing in "Currencies" table
 		And in the table "Currencies" I click "Download" button
 		And Delay 40
-		And I close current window
+		And I close all client application windows
 	* Upload currency rate Bank UA (from bank.gov.ua)
+		Given I open hyperlink "e1cib/list/Catalog.Currencies"
 		And I click "Integrations" button
 		And I go to line in "IntegrationTable" table
 			| Integration settings |
@@ -119,7 +121,7 @@ Scenario: _020001 check load currency rate
 		And I finish line editing in "Currencies" table
 		And in the table "Currencies" I click "Download" button
 		And Delay 40
-		And I close current window
+		And I close all client application windows
 	* Check currency downloads
 		Given I open hyperlink "e1cib/list/InformationRegister.CurrencyRates"
 		And "List" table contains lines

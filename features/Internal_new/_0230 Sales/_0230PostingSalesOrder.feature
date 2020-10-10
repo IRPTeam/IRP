@@ -298,6 +298,10 @@ Scenario: _023106 check the form of selection of items (sales order)
 				| 'Basic Partner terms, TRY' |
 		And I select current line in "List" table
 		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Ferron BP'  |
+		And I select current line in "List" table
 	When check the product selection form with price information in Sales order
 	And in the table "ItemList" I click "% Offers" button
 	And in the table "Offers" I click the button named "FormOK"

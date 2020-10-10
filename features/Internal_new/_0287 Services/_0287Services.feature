@@ -859,3 +859,6 @@ Scenario: _029110 create a Sales order for service and product (Store use Shipme
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'      | 'Order'                | 'Store'    | 'Item key' | 'Row key' | 'Delivery date'                | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '1'         | 'Main Company' | '$$SalesOrder029110$$' | 'Store 02' | 'Rent'     | '*'       | '*'                            | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | '$$SalesOrder029110$$' | 'Store 02' | 'Table'  | '*'       | '*'                            | ''                     |
+
+Scenario: _999999 close TestClient session
+	And I close TestClient session

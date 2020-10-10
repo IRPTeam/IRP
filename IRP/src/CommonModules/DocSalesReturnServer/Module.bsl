@@ -18,6 +18,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		DocumentsClientServer.FillStores(ObjectData, Form);
 		
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+		DocumentsServer.FillSpeciallOffersCache(Object, Form, "SalesInvoice");
 	EndIf;
 	Form.Taxes_CreateFormControls();
 	DocumentsServer.ShowUserMessageOnCreateAtServer(Form);
@@ -38,6 +39,7 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	CurrenciesServer.UpdateRatePresentation(Object);
 	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
 	Form.Taxes_CreateFormControls();
+	DocumentsServer.FillSpeciallOffersCache(Object, Form, "SalesInvoice");
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -58,6 +60,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	CurrenciesServer.UpdateRatePresentation(Object);
 	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
 	Form.Taxes_CreateFormControls();
+	DocumentsServer.FillSpeciallOffersCache(Object, Form, "SalesInvoice");
 EndProcedure
 
 #EndRegion

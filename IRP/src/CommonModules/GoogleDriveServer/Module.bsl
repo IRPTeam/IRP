@@ -8,7 +8,10 @@ Function AskGoogle(RequestBody)
 	Answer = IntegrationClientServer.SendRequest(HTTPSettings, , , RequestBody);
 	
 	If NOT Answer.StatusCode = 200 Then
-		Raise Answer.ResponseBody;
+		WriteLogEvent("Get picture from Google drive", EventLogLevel.Error, , , 
+					  "Status: " + Answer.StatusCode + Chars.LF + Answer.ResponseBody);
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_084);	
+		Return Undefined;
 	EndIf;
 	
 	AnswerStructure = CommonFunctionsServer.DeserializeJSON(Answer.ResponseBody);

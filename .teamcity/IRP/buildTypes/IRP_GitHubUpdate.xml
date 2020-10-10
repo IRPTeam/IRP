@@ -65,8 +65,8 @@ echo "##teamcity[setParameter name='env.VA_Tags' value='$VA_Tags']"]]></param>
     <build-triggers>
       <build-trigger id="vcsTrigger" type="vcsTrigger">
         <parameters>
-          <param name="branchFilter"><![CDATA[+:*
--:issue-*]]></param>
+          <param name="branchFilter"><![CDATA[-:*
++:develop]]></param>
           <param name="enableQueueOptimization" value="true" />
           <param name="quietPeriodMode" value="DO_NOT_USE" />
           <param name="triggerRules" value="-:.teamcity/**" />

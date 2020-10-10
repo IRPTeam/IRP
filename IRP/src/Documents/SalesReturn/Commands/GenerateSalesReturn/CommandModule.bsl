@@ -534,7 +534,7 @@ Function GetErrorMessage(BasisDocument)
 	EndIf;
 	
 	If TypeOf(BasisDocument) = Type("DocumentRef.SalesInvoice") Then
-		ErrorMessage = R().Error_021;
+		ErrorMessage = StrTemplate(R().Error_021, Metadata.Documents.SalesInvoice.Synonym);
 	EndIf;
 	
 	Return ErrorMessage;

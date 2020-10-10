@@ -337,12 +337,12 @@ EndFunction
 
 #EndRegion
 
+#Region Commands
+
 &AtClient
 Procedure DecorationStatusHistoryClick(Item)
 	ObjectStatusesClient.OpenHistoryByStatus(Object.Ref, ThisObject);
 EndProcedure
-
-#Region Commands
 
 &AtClient
 Procedure OpenPickupItems(Command)
@@ -352,6 +352,11 @@ EndProcedure
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
 	DocPurchaseReturnOrderClient.SearchByBarcode(Barcode, Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
 
 #EndRegion

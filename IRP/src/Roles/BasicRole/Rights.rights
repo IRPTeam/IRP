@@ -394,4 +394,29 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Catalog.Workstations</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.Hardware</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>SessionParameter.Workstation</name>
+		<right>
+			<name>Set</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Get</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

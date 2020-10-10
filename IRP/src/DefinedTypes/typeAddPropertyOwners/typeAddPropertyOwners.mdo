@@ -71,5 +71,17 @@
     <types>DocumentRef.StockAdjustmentAsWriteOff</types>
     <types>DocumentRef.StockAdjustmentAsSurplus</types>
     <types>DocumentRef.Unbundling</types>
+    <types>CatalogRef.Hardware</types>
+    <types>CatalogRef.SpecialOfferRules</types>
+    <types>CatalogRef.SpecialOfferTypes</types>
+    <types>CatalogRef.SpecialOffers</types>
+    <types>CatalogRef.UserGroups</types>
+    <types>CatalogRef.TaxRates</types>
+    <types>CatalogRef.Workstations</types>
+    <types>CatalogRef.PaymentTypes</types>
+    <types>CatalogRef.PartnerSegments</types>
+    <types>CatalogRef.ItemSegments</types>
+    <types>CatalogRef.Companies</types>
+    <types>DocumentRef.InternalSupplyRequest</types>
   </type>
 </mdclass:DefinedType>

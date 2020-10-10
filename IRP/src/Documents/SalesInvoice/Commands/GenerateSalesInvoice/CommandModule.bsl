@@ -118,14 +118,22 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	
 	TaxListMetadataColumns = Metadata.Documents.SalesOrder.TabularSections.TaxList.Attributes;
 	TaxList = New ValueTable();
-	TaxList.Columns.Add("Key", TaxListMetadataColumns.Key.Type);
-	TaxList.Columns.Add("Tax", TaxListMetadataColumns.Tax.Type);
-	TaxList.Columns.Add("Analytics", TaxListMetadataColumns.Analytics.Type);
-	TaxList.Columns.Add("TaxRate", TaxListMetadataColumns.TaxRate.Type);
-	TaxList.Columns.Add("Amount", TaxListMetadataColumns.Amount.Type);
-	TaxList.Columns.Add("IncludeToTotalAmount", TaxListMetadataColumns.IncludeToTotalAmount.Type);
-	TaxList.Columns.Add("ManualAmount", TaxListMetadataColumns.ManualAmount.Type);
-	TaxList.Columns.Add("Ref", New TypeDescription("DocumentRef.SalesOrder"));
+	TaxList.Columns.Add("Key"                  , TaxListMetadataColumns.Key.Type);
+	TaxList.Columns.Add("Tax"                  , TaxListMetadataColumns.Tax.Type);
+	TaxList.Columns.Add("Analytics"            , TaxListMetadataColumns.Analytics.Type);
+	TaxList.Columns.Add("TaxRate"              , TaxListMetadataColumns.TaxRate.Type);
+	TaxList.Columns.Add("Amount"               , TaxListMetadataColumns.Amount.Type);
+	TaxList.Columns.Add("IncludeToTotalAmount" , TaxListMetadataColumns.IncludeToTotalAmount.Type);
+	TaxList.Columns.Add("ManualAmount"         , TaxListMetadataColumns.ManualAmount.Type);
+	TaxList.Columns.Add("Ref"                  , New TypeDescription("DocumentRef.SalesOrder"));
+	
+	SpecialOffersMetadataColumns = Metadata.Documents.SalesInvoice.TabularSections.SpecialOffers.Attributes;
+	SpecialOffers = New ValueTable();
+	SpecialOffers.Columns.Add("Key"     , SpecialOffersMetadataColumns.Key.Type);
+	SpecialOffers.Columns.Add("Offer"   , SpecialOffersMetadataColumns.Offer.Type);
+	SpecialOffers.Columns.Add("Amount"  , SpecialOffersMetadataColumns.Amount.Type);
+	SpecialOffers.Columns.Add("Percent" , SpecialOffersMetadataColumns.Percent.Type);
+	SpecialOffers.Columns.Add("Ref"     , New TypeDescription("DocumentRef.SalesOrder"));
 	
 	ShipmentConfirmationsMetadataColumns = Metadata.Documents.SalesInvoice.TabularSections.ShipmentConfirmations.Attributes;
 	ShipmentConfirmations = New ValueTable();
@@ -141,6 +149,9 @@ Function JoinDocumentsStructure(ArrayOfTables)
 		EndDo;
 		For Each Row In TableStructure.TaxList Do
 			FillPropertyValues(TaxList.Add(), Row);
+		EndDo;
+		For Each Row In TableStructure.SpecialOffers Do
+			FillPropertyValues(SpecialOffers.Add(), Row);
 		EndDo;
 		For Each Row In TableStructure.ShipmentConfirmations Do
 			FillPropertyValues(ShipmentConfirmations.Add(), Row);
@@ -184,8 +195,9 @@ Function JoinDocumentsStructure(ArrayOfTables)
 		Result = New Structure(KeyFields);
 		FillPropertyValues(Result, Row);
 			
-		Result.Insert("ItemList"		, New Array());
-		Result.Insert("TaxList"			, New Array());
+		Result.Insert("ItemList"              , New Array());
+		Result.Insert("TaxList"               , New Array());
+		Result.Insert("SpecialOffers"         , New Array());
 		Result.Insert("ShipmentConfirmations" , New Array());
 		
 		FillPropertyValues(Filter, Row);
@@ -220,6 +232,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 		EndIf;
 		
 		ArrayOfTaxListFilters = New Array();
+		ArrayOfSpecialOffersFilters = New Array();
 		ArrayOfShipmentConfirmationsFilters = New Array();
 		
 		For Each RowItemList In ItemList.Copy(Filter) Do
@@ -245,6 +258,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			EndIf;
 			
 			ArrayOfTaxListFilters.Add(New Structure("Ref, Key", RowItemList.SalesOrder, RowItemList.Key));
+			ArrayOfSpecialOffersFilters.Add(New Structure("Ref, Key", RowItemList.SalesOrder, RowItemList.Key));			
 			ArrayOfShipmentConfirmationsFilters.Add(New Structure("Ref, Key", RowItemList.SalesOrder, RowItemList.Key));
 			
 			Result.ItemList.Add(NewRow);
@@ -261,6 +275,17 @@ Function JoinDocumentsStructure(ArrayOfTables)
 				NewRow.Insert("IncludeToTotalAmount", RowTaxList.IncludeToTotalAmount);
 				NewRow.Insert("ManualAmount"		, RowTaxList.ManualAmount);
 				Result.TaxList.Add(NewRow);
+			EndDo;
+		EndDo;
+		
+		For Each SpecialOffersFilter In ArrayOfSpecialOffersFilters Do
+			For Each RowSpecialOffer In SpecialOffers.Copy(SpecialOffersFilter) Do
+				NewRow = New Structure();
+				NewRow.Insert("Key"     , RowSpecialOffer.Key);
+				NewRow.Insert("Offer"   , RowSpecialOffer.Offer);
+				NewRow.Insert("Amount"  , RowSpecialOffer.Amount);
+				NewRow.Insert("Percent" , RowSpecialOffer.Percent);
+				Result.SpecialOffers.Add(NewRow);
 			EndDo;
 		EndDo;
 		
@@ -416,7 +441,21 @@ Function ExtractInfoFromOrderRows(QueryTable, ShipmentConfirmationsTable = Undef
 		|	Document.SalesOrder.TaxList AS TaxList
 		|		INNER JOIN tmpQueryTable AS tmpQueryTable
 		|		ON tmpQueryTable.Key = TaxList.Key
-		|		AND tmpQueryTable.SalesOrder = TaxList.Ref";
+		|		AND tmpQueryTable.SalesOrder = TaxList.Ref
+		|;
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	SpecialOffers.Ref,
+		|	SpecialOffers.Key,
+		|	SpecialOffers.Offer,
+		|	SpecialOffers.Amount,
+		|	SpecialOffers.Percent
+		|FROM
+		|	Document.SalesOrder.SpecialOffers AS SpecialOffers
+		|		INNER JOIN tmpQueryTable AS tmpQueryTable
+		|		ON tmpQueryTable.SalesOrder = SpecialOffers.Ref
+		|		AND tmpQueryTable.Key = SpecialOffers.Key";
+
 	
 	Query.SetParameter("QueryTable", QueryTable);
 	QueryResults = Query.ExecuteBatch();
@@ -425,6 +464,7 @@ Function ExtractInfoFromOrderRows(QueryTable, ShipmentConfirmationsTable = Undef
 	DocumentsServer.RecalculateQuantityInTable(QueryTable_ItemList);
 	
 	QueryTable_TaxList = QueryResults[2].Unload();
+	QueryTable_SpecialOffers = QueryResults[3].Unload();
 	
 	For Each Row_ItemList In QueryTable_ItemList Do
 		If Row_ItemList.OriginalQuantity = 0 Then
@@ -448,11 +488,21 @@ Function ExtractInfoFromOrderRows(QueryTable, ShipmentConfirmationsTable = Undef
 				Row_TaxList.ManualAmount = Row_TaxList.ManualAmount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;;								
 			EndIf;
 		EndDo;
+		
+		For Each Row_SpecialOffers In QueryTable_SpecialOffers.FindRows(New Structure("Key", Row_ItemList.Key)) Do
+			If Row_ItemList.OriginalQuantity = 0 Then
+				Row_SpecialOffers.Amount = 0;
+			Else
+				Row_SpecialOffers.Amount = Row_SpecialOffers.Amount / Row_ItemList.OriginalQuantity * Row_ItemList.Quantity;
+			EndIf;
+		EndDo;		
+		
 	EndDo;
 	
-	Return New Structure("ItemList, TaxList, ShipmentConfirmations", 
+	Return New Structure("ItemList, TaxList, SpecialOffers, ShipmentConfirmations", 
 	QueryTable_ItemList, 
 	QueryTable_TaxList,
+	QueryTable_SpecialOffers,
 	?(ShipmentConfirmationsTable = Undefined, CreateTable_ShipmentConfirmations(), ShipmentConfirmationsTable));
 EndFunction
 

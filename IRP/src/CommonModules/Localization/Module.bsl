@@ -148,7 +148,7 @@ Function Strings(Lang) Export
 
 	// %1 - Purchase invoice
 	Strings.Insert("Error_021", NStr("en = 'There are no products to return in the ""%1"" document. All products are already returned.'", Lang));
-	
+
 	// %1 - Internal supply request
 	Strings.Insert("Error_023", NStr("en = 'There are no more items that you need to order from suppliers in the ""%1"" document.'", Lang));
 	
@@ -252,9 +252,6 @@ Function Strings(Lang) Export
 	// %1 - Physical count by location
 	Strings.Insert("Error_075", NStr("en = 'There are ""%1"" documents that are not closed.'", Lang));
 	
-	// %1 - Retail sales receipt
-	Strings.Insert("Error_076", NStr("en = 'There are no products to return in the ""%1"" document. All products are already returned.'", Lang));
-	
 	// %1 - 12
 	Strings.Insert("Error_077", NStr("en = 'Basis document is empty in line %1.'", Lang));
 	
@@ -288,6 +285,7 @@ Function Strings(Lang) Export
 	// %1 - 12 
 	Strings.Insert("Error_083", NStr("en = 'Location with number `%1` not found.'", Lang));
 	
+	Strings.Insert("Error_084", NStr("en = 'Error to get picture from Google drive'", Lang));
 	
 	#EndRegion
 	

@@ -132,3 +132,5 @@ Scenario: _006101 filling in exchange rates in registers
 		And I input "21.06.2019 17:40:13" text in "Period" field
 		And I click "Save and close" button
 		
+Scenario: _999999 close TestClient session
+	And I close TestClient session

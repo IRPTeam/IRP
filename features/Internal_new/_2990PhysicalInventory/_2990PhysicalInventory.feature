@@ -221,9 +221,10 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 		And I click "Save and close" button
 		And Delay 2
 	* Assigning a name to a predefined element of PhysicalCountByLocation
-		And I expand a line in "List" table
-			| 'Description'     |
-			| 'Objects status history' |
+		And I go to line in "List" table
+			| 'Code'    |
+			| 'Objects statuses'|
+		And I expand current line in "List" table
 		And I go to line in "List" table
 			| Predefined data item name |
 			| PhysicalCountByLocation         |
@@ -1295,6 +1296,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 			And I click the button named "FormPostAndClose"
 
 Scenario: _2990011 re-filling Physical inventory based on Physical count by location list
+	And I close all client application windows
 	* Open Physical count by location list
 		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 	* Filling in Phys. count  in the first Physical count by location and select status that make movements
@@ -1438,6 +1440,7 @@ Scenario: _2990011 re-filling Physical inventory based on Physical count by loca
 		And I close all client application windows
 
 Scenario: _2990012 check the opening of the status history in Physical inventory and Physical count by location
+	And I close all client application windows
 	* Check the opening of the status history in Physical inventory
 		* Open test document
 			Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
@@ -1471,6 +1474,7 @@ Scenario: _2990012 check the opening of the status history in Physical inventory
 			And I close all client application windows
 	
 Scenario: _2990013 check the question of saving Physical inventory before creating Physical count by location
+	And I close all client application windows
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I click the button named "FormCreate"

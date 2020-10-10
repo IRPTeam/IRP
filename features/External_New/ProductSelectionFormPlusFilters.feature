@@ -43,7 +43,7 @@ Scenario: check the product selection form with price information in Sales order
 			| High shoes | '*'   | '*'      |'*'     | '*'         |
 	* Check the rejection
 		And I click Clear button of "Item type" field
-		And "ItemList" table became equal
+		And "ItemList" table contains lines
 			| 'Title'                | 'In stock' | 'Unit' | 'Price' | 'Picked out' |
 			| 'Dress'                | '*'       | 'pcs'  | ''      | ''           |
 			| 'Trousers'             | '*'       | 'pcs'  | ''      | ''           |
@@ -63,7 +63,7 @@ Scenario: check the product selection form with price information in Sales order
 			| Title |
 			| Dress |
 		And I select current line in "ItemList" table
-		And "ItemKeyList" table became equal
+		And "ItemKeyList" table contains lines
 			| Title     | Unit  | In stock | Price  | Picked out  |
 			| S/Yellow  | '*'   | '*'      |'*'     | '*'         |
 			| XS/Blue   | '*'   | '*'      |'*'     | '*'         |
@@ -177,7 +177,7 @@ Scenario: check the product selection form with price information in Sales invoi
 			| Description |
 			| Clothes     |
 		And I select current line in "List" table
-		And "ItemList" table became equal
+		And "ItemList" table contains lines
 			| 'Title'               | 'In stock' | 'Unit' | 'Price' | 'Picked out' |
 			| 'Dress'                | '*'       | 'pcs'  | ''      | ''           |
 			| 'Trousers'             | '*'       | 'pcs'  | ''      | ''           |
@@ -191,13 +191,13 @@ Scenario: check the product selection form with price information in Sales invoi
 			| Description |
 			| Shoes       |
 		And I select current line in "List" table
-		And "ItemList" table became equal
+		And "ItemList" table contains lines
 			| Title      | Unit  | In stock | Price  | Picked out |
 			| Boots      | '*'   | '*'      |'*'     | '*'         |
 			| High shoes | '*'   | '*'      |'*'     | '*'         |
 	* Check the rejection
 		And I click Clear button of "Item type" field
-		And "ItemList" table became equal
+		And "ItemList" table contains lines
 			| 'Title'                | 'In stock' | 'Unit' | 'Price' | 'Picked out' |
 			| 'Dress'                | '*'        | 'pcs'  | ''      | ''           |
 			| 'Trousers'             | '*'        | 'pcs'  | ''      | ''           |
@@ -217,7 +217,7 @@ Scenario: check the product selection form with price information in Sales invoi
 			| Title |
 			| Dress |
 		And I select current line in "ItemList" table
-		And "ItemKeyList" table became equal
+		And "ItemKeyList" table contains lines
 			| Title     | Unit  | In stock | Price  | Picked out  |
 			| S/Yellow  | '*'   | '*'      |'*'     | '*'         |
 			| XS/Blue   | '*'   | '*'      |'*'     | '*'         |

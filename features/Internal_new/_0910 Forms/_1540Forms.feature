@@ -5849,3 +5849,5 @@ Scenario: check filling in partner and customer/vendor sign when creating Partne
 		Then the form attribute named "Type" became equal to "Vendor"
 	And I close all client application windows
 
+Scenario: _999999 close TestClient session
+	And I close TestClient session

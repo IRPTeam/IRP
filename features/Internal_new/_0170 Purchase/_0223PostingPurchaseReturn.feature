@@ -586,4 +586,5 @@ Scenario: _300509 check connection to PurchaseReturn report "Related documents"
 	And I close all client application windows
 
 
-
+Scenario: _999999 close TestClient session
+	And I close TestClient session

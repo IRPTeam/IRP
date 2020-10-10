@@ -35,3 +35,6 @@ Scenario: _005048 filling in the "Retail customers" catalog
 		| 'Description'                                  | 'Code' | 'Name'                 | 'Surname'                 |
 		| 'Name Retail customer Surname Retail customer' | '002'  | 'Name Retail customer' | 'Surname Retail customer' |
 		And I close all client application windows
+
+Scenario: _999999 close TestClient session
+	And I close TestClient session

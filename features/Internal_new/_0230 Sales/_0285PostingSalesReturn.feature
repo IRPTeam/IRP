@@ -419,3 +419,6 @@ Scenario: _300511 check connection to SalesReturn report "Related documents"
 		And Delay 1
 	Then "Related documents" window is opened
 	And I close all client application windows
+
+Scenario: _999999 close TestClient session
+	And I close TestClient session

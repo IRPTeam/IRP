@@ -2757,4 +2757,5 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 
 
 
-
+Scenario: _999999 close TestClient session
+	And I close TestClient session

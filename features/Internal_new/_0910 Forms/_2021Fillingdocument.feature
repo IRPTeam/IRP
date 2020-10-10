@@ -4370,15 +4370,15 @@ Scenario: _0154131  check currency form in  Bank Receipt
 			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'TRY'            | 'Partner term' | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
-		* Reverse rate display check
-			Given double click at "reverse" picture
-			And I go to line in "PaymentList" table
-				| 'Partner term'                               | 'Amount' | 'Partner' | 'Payer'            |
-				| 'Posting by Standard Partner term (Veritas)' | '200,00' | 'Veritas' | 'Company Veritas ' |
-			And I activate "Partner term" field in "PaymentList" table
-			And "CurrenciesPaymentList" table contains lines
-				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-				| 'Local currency' | 'Legal'     | 'USD'           | 'TRY'      | '5,6497'             | '1 129,94' | '1'            |
+		# * Reverse rate display check
+		# 	Given double click at "reverse" picture
+		# 	And I go to line in "PaymentList" table
+		# 		| 'Partner term'                               | 'Amount' | 'Partner' | 'Payer'            |
+		# 		| 'Posting by Standard Partner term (Veritas)' | '200,00' | 'Veritas' | 'Company Veritas ' |
+		# 	And I activate "Partner term" field in "PaymentList" table
+		# 	And "CurrenciesPaymentList" table contains lines
+		# 		| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
+		# 		| 'Local currency' | 'Legal'     | 'USD'           | 'TRY'      | '5,6497'             | '1 129,94' | '1'            |
 		And I close all client application windows
 
 Scenario: _0154132  check currency form in Incoming payment order
@@ -4464,14 +4464,14 @@ Scenario: _0154132  check currency form in Incoming payment order
 			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'             | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
-		* Reverse rate display check 
-			Given double click at "reverse" picture
-			And I go to line in "PaymentList" table
-				| 'Amount' | 'Partner' | 'Payer'            |
-				| '200,00' | 'Veritas' | 'Company Veritas ' |
-			And "PaymentListCurrencies" table contains lines
-				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-				| 'Local currency' | 'Legal'     | 'USD'           | 'TRY'      | '5,6497'             | '1 129,94' | '1'            |
+		# * Reverse rate display check 
+		# 	Given double click at "reverse" picture
+		# 	And I go to line in "PaymentList" table
+		# 		| 'Amount' | 'Partner' | 'Payer'            |
+		# 		| '200,00' | 'Veritas' | 'Company Veritas ' |
+		# 	And "PaymentListCurrencies" table contains lines
+		# 		| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
+		# 		| 'Local currency' | 'Legal'     | 'USD'           | 'TRY'      | '5,6497'             | '1 129,94' | '1'            |
 		And I close all client application windows
 
 
@@ -4558,14 +4558,14 @@ Scenario: _0154133  check currency form in Outgoing payment order
 			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'             | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
-		* Reverse rate display check 
-			Given double click at "reverse" picture
-			And I go to line in "PaymentList" table
-				| 'Amount' | 'Partner' | 'Payee'            |
-				| '200,00' | 'Veritas' | 'Company Veritas ' |
-			And "PaymentListCurrencies" table contains lines
-				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-				| 'Local currency' | 'Legal'     | 'USD'           | 'TRY'      | '5,6497'             | '1 129,94' | '1'            |
+		# * Reverse rate display check 
+		# 	Given double click at "reverse" picture
+		# 	And I go to line in "PaymentList" table
+		# 		| 'Amount' | 'Partner' | 'Payee'            |
+		# 		| '200,00' | 'Veritas' | 'Company Veritas ' |
+		# 	And "PaymentListCurrencies" table contains lines
+		# 		| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
+		# 		| 'Local currency' | 'Legal'     | 'USD'           | 'TRY'      | '5,6497'             | '1 129,94' | '1'            |
 		And I close all client application windows
 
 Scenario: _0154150 check function DontCalculateRow in the Purchase order

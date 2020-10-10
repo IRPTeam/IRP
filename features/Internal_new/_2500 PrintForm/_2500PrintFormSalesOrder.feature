@@ -192,12 +192,5 @@ Scenario: _25003 check Sales order printing
 	And I close all client application windows
 
 
-
-
-
-
-
-
-
-
-
+Scenario: _999999 close TestClient session
+	And I close TestClient session

@@ -1196,6 +1196,7 @@ Scenario: _29700121 test filling-in PO - PI - GR by quantity (second part)
 
 
 Scenario: _29700123 test filling-in PO - GR - PI by quantity
+	And I close all client application windows
 	And I delete "$$GoodsReceipt29700102$$" variable
 	And I delete "$$NumberGoodsReceipt29700102$$" variable
 	* Select PO
@@ -1473,24 +1474,10 @@ Scenario: _29700123 test filling-in PO - GR - PI by quantity (second part)
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Given Recent TestClient message contains "* [Dress L/Green] Receipt order remaining: 1 . Required: 0 . Lacking: 1 ." string by template
+			Given Recent TestClient message contains "* [Trousers 36/Yellow] Receipt order remaining: 30 . Required: 0 . Lacking: 30 ." string by template
 			And I close all client application windows
 
 
 			
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Scenario: _999999 close TestClient session
+	And I close TestClient session

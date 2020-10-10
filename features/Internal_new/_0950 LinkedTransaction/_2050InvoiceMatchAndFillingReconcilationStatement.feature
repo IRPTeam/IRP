@@ -604,7 +604,7 @@ Scenario: _2050008 check the availability of Purchase return and Sales return ch
 			| 'Number' | 'Partner' |
 			| '$$NumberPurchaseReturn300301$$'      | 'Ferron BP' |
 		And I select current line in "List" table
-		Then the form attribute named "PartnerArTransactionsBasisDocument" became equal to "$$PurchaseReturn022301$$" template
+		Then the form attribute named "PartnerArTransactionsBasisDocument" became equal to "$$PurchaseReturn300301$$" template
 	* Filling the document header (transaction type - with vendor)
 		And I select "With vendor" exact value from "Operation type" drop-down list
 		And I click Select button of "Company" field

@@ -639,6 +639,7 @@ $JobArray = @()
 foreach ($elementTag in $TagArray) {
     $startPort += 10
     $JobTailProc = start-job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort
+     Start-Sleep 5
     $JobArray += $JobTailProc
 
     do {

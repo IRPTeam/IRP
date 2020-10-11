@@ -121,6 +121,8 @@ Scenario: _085002 check movements of the document Cash revenue
 		And I input "100,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberCashRevenue1$$" variable
+		And I delete "$$CashRevenue1$$" variable
 		And I save the value of "Number" field as "$$NumberCashRevenue1$$"
 		And I save the window as "$$CashRevenue1$$"
 	* Check movements
@@ -325,6 +327,8 @@ Scenario: _085006 check movements of the document Cash expense
 		And I input "100,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberCashExpense1$$" variable
+		And I delete "$$CashExpense1$$" variable
 		And I save the value of "Number" field as "$$NumberCashExpense1$$"
 		And I save the window as "$$CashExpense1$$"
 	* Check movements

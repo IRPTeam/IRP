@@ -172,6 +172,8 @@ Scenario: _0154100 preparation ( filling documents)
 					And I activate "Description" field in "List" table
 					And I select current line in "List" table
 				And I click the button named "FormPost"
+				And I delete "$$NumberCashTransferOrder01541001$$" variable
+				And I delete "$$CashTransferOrder01541001$$" variable
 				And I save the value of "Number" field as "$$NumberCashTransferOrder01541001$$"
 				And I save the window as "$$CashTransferOrder01541001$$"
 				And I click the button named "FormPostAndClose"
@@ -225,6 +227,8 @@ Scenario: _0154100 preparation ( filling documents)
 						| 'Arina Brown' |
 					And I select current line in "List" table
 				And I click the button named "FormPost"
+				And I delete "$$NumberCashTransferOrder01541002$$" variable
+				And I delete "$$CashTransferOrder01541002$$" variable
 				And I save the value of "Number" field as "$$NumberCashTransferOrder01541002$$"
 				And I save the window as "$$CashTransferOrder01541002$$"
 				And I click the button named "FormPostAndClose"
@@ -263,6 +267,8 @@ Scenario: _0154100 preparation ( filling documents)
 					And I select current line in "List" table
 					And I input "175,00" text in "Receive amount" field
 				And I click the button named "FormPost"
+				And I delete "$$NumberCashTransferOrder01541003$$" variable
+				And I delete "$$CashTransferOrder01541003$$" variable
 				And I save the value of "Number" field as "$$NumberCashTransferOrder01541003$$"
 				And I save the window as "$$CashTransferOrder01541003$$"
 				And I click the button named "FormPostAndClose"
@@ -302,6 +308,8 @@ Scenario: _0154100 preparation ( filling documents)
 						And I select current line in "List" table
 						And I input "1150,00" text in "Receive amount" field
 					And I click the button named "FormPost"
+					And I delete "$$NumberCashTransferOrder01541004$$" variable
+					And I delete "$$CashTransferOrder01541004$$" variable
 					And I save the value of "Number" field as "$$NumberCashTransferOrder01541004$$"
 					And I save the window as "$$CashTransferOrder01541004$$"
 					And I click the button named "FormPostAndClose"

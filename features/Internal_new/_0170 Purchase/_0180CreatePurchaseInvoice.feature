@@ -206,6 +206,8 @@ Scenario: _018012 Purchase invoice creation on set, store does not use Goods rec
 		And I input "250,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseInvoice018012$$" variable
+		And I delete "$$PurchaseInvoice018012$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice018012$$"
 		And I save the window as "$$PurchaseInvoice018012$$"
 		And I click the button named "FormPostAndClose"

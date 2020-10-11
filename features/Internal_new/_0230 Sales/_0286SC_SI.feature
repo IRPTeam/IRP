@@ -150,6 +150,8 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 			And I input "4,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberShipmentConfirmation0290001$$" variable
+			And I delete "$$ShipmentConfirmation0290001$$" variable
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation0290001$$"
 			And I save the window as "$$ShipmentConfirmation0290001$$"
 			And I click the button named "FormPostAndClose"
@@ -209,6 +211,8 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 			And I input "8,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberShipmentConfirmation02900011$$" variable
+			And I delete "$$ShipmentConfirmation02900011$$" variable
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation02900011$$"
 			And I save the window as "$$ShipmentConfirmation02900011$$"
 			And I click the button named "FormPostAndClose"
@@ -289,6 +293,8 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 			And I input "4,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberShipmentConfirmation02900012$$" variable
+			And I delete "$$ShipmentConfirmation02900012$$" variable
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation02900012$$"
 			And I save the window as "$$ShipmentConfirmation02900012$$"
 			And I click the button named "FormPostAndClose"
@@ -336,13 +342,9 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 			And I activate "Quantity" field in "ItemList" table
 			And I input "18,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-		* Change the document number
-			// And I move to "Other" tab
-			// And I input "5 603" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "5 603" text in "Number" field
 			And I click the button named "FormPost"
+			And I delete "$$NumberShipmentConfirmation02900013$$" variable
+			And I delete "$$ShipmentConfirmation02900013$$" variable
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation02900013$$"
 			And I save the window as "$$ShipmentConfirmation02900013$$"
 			And I click the button named "FormPostAndClose"
@@ -407,6 +409,8 @@ Scenario: _0290001 create Shipment confirmation document for the shipment of ite
 			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberShipmentConfirmation02900014$$" variable
+			And I delete "$$ShipmentConfirmation02900014$$" variable
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation02900014$$"
 			And I save the window as "$$ShipmentConfirmation02900014$$"
 			And I click the button named "FormPostAndClose"

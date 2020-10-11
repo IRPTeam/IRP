@@ -68,12 +68,16 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 	* Create Purchase order 124
 		When create the first test PO for a test on the creation mechanism based on
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder09030201$$" variable
+		And I delete "$$PurchaseOrder09030201$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder09030201$$"
 		And I save the window as "$$PurchaseOrder09030201$$"
 		And I click the button named "FormPostAndClose"
 	* Create Purchase order 125
 		When create the second test PO for a test on the creation mechanism based on
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder09030202$$" variable
+		And I delete "$$PurchaseOrder09030202$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder09030202$$"
 		And I save the window as "$$PurchaseOrder09030202$$"
 		And I click the button named "FormPostAndClose"
@@ -94,6 +98,8 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'             | 'Goods receipt' | 'Sales order' |
 			| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '305,08'     | '1 694,92'   | '2 000,00'     | 'Store 02' | '$$PurchaseOrder09030202$$ ' | ''              | ''            |
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice09030202$$" variable
+			And I delete "$$PurchaseInvoice09030202$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030202$$"
 			And I save the window as "$$PurchaseInvoice09030202$$"
 		If the field named "LegalName" is equal to "Company Ferron BP" Then
@@ -103,6 +109,8 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 			| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '640,68'     | '3 559,32'   | '4 200,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''              | ''            | ''                    |
 			| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '961,02'     | '5 338,98'   | '6 300,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''              | ''            | ''                    |
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice09030201$$" variable
+			And I delete "$$PurchaseInvoice09030201$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030201$$"
 			And I save the window as "$$PurchaseInvoice09030201$$"
 		And I click the button named "FormPostAndClose"
@@ -117,6 +125,8 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      | 'Goods receipt' | 'Sales order' |
 			| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '305,08'     | '1 694,92'   | '2 000,00'     | 'Store 02' | '$$PurchaseOrder09030202$$ ' | ''              | ''            |
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice09030202$$" variable
+			And I delete "$$PurchaseInvoice09030202$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030202$$"
 			And I save the window as "$$PurchaseInvoice09030202$$"
 		If the field named "LegalName" is equal to "Company Ferron BP" Then
@@ -126,6 +136,8 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 			| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '640,68'     | '3 559,32'   | '4 200,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''              | ''            | ''                    |
 			| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '961,02'     | '5 338,98'   | '6 300,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''              | ''            | ''                    |
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice09030201$$" variable
+			And I delete "$$PurchaseInvoice09030201$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030201$$"
 			And I save the window as "$$PurchaseInvoice09030201$$"
 		And I click the button named "FormPostAndClose"
@@ -153,6 +165,8 @@ Scenario: _090303 create Purchase invoice for several Purchase order with the sa
 			| Company Ferron BP |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder09030203$$" variable
+		And I delete "$$PurchaseOrder09030203$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder09030203$$"
 		And I save the window as "$$PurchaseOrder09030203$$"
 		And I click the button named "FormPostAndClose"
@@ -164,6 +178,8 @@ Scenario: _090303 create Purchase invoice for several Purchase order with the sa
 			| Company Ferron BP |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder090302031$$" variable
+		And I delete "$$PurchaseOrder090302031$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder090302031$$"
 		And I save the window as "$$PurchaseOrder090302031$$"
 		And I click the button named "FormPostAndClose"
@@ -186,6 +202,8 @@ Scenario: _090303 create Purchase invoice for several Purchase order with the sa
 			| '5 338,98'   | 'Trousers' | '210,00' | '36/Yellow' | '30,000' | 'pcs'  | '6 300,00'     | 'Store 02' | '$$PurchaseOrder09030203$$' |
 			| '1 694,92'   | 'Dress'    | '200,00' | 'M/White'   | '10,000' | 'pcs'  | '2 000,00'     | 'Store 02' | '$$PurchaseOrder090302031$$' |
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseInvoice090302031$$" variable
+		And I delete "$$PurchaseInvoice090302031$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice090302031$$"
 		And I save the window as "$$PurchaseInvoice090302031$$"
 		And I click the button named "FormPostAndClose"
@@ -239,6 +257,8 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 			| 'Trousers' |'36/Yellow'  |
 			And I input "210" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder090302041$$" variable
+		And I delete "$$PurchaseOrder090302041$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder090302041$$"
 		And I save the window as "$$PurchaseOrder090302041$$"
 		And I click the button named "FormPostAndClose"
@@ -276,6 +296,8 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 			| 'Dress' |'M/White'  |
 			And I input "200" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder090302042$$" variable
+		And I delete "$$PurchaseOrder090302042$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder090302042$$"
 		And I save the window as "$$PurchaseOrder090302042$$"
 		And I click the button named "FormPostAndClose"
@@ -288,6 +310,8 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 		And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
 		Then the number of "ItemList" table lines is "меньше или равно" 3
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseInvoice090302041$$" variable
+		And I delete "$$PurchaseInvoice090302041$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice090302041$$"
 		And I save the window as "$$PurchaseInvoice090302041$$"
 		And I click the button named "FormPostAndClose"
@@ -295,6 +319,8 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 		And Delay 2
 		Then the number of "ItemList" table lines is "меньше или равно" 3
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseInvoice090302042$$" variable
+		And I delete "$$PurchaseInvoice090302042$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice090302042$$"
 		And I save the window as "$$PurchaseInvoice090302042$$"
 		And I click the button named "FormPostAndClose"
@@ -357,6 +383,8 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 			| 'Trousers' |'36/Yellow'  |
 			And I input "210" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder090302051$$" variable
+		And I delete "$$PurchaseOrder090302051$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder090302051$$"
 		And I save the window as "$$PurchaseOrder090302051$$"
 		And I click the button named "FormPostAndClose"
@@ -391,6 +419,8 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 			| 'Dress' |'M/White'  |
 			And I input "200" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder090302052$$" variable
+		And I delete "$$PurchaseOrder090302052$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder090302052$$"
 		And I save the window as "$$PurchaseOrder090302052$$"
 		And I click the button named "FormPostAndClose"
@@ -412,6 +442,8 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 				| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '756,00'     | '4 200,00'   | '4 956,00'     | 'Store 02' | '$$PurchaseOrder090302051$$' |
 				| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '1 134,00'   | '6 300,00'   | '7 434,00'     | 'Store 02' | '$$PurchaseOrder090302051$$' |
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseOrder090302052$$" variable
+			And I delete "$$PurchaseOrder090302052$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice090302052$$"
 			And I save the window as "$$PurchaseInvoice090302052$$"
 		If the field named "Agreement" is equal to "Vendor Ferron Discount" Then
@@ -419,6 +451,8 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '360,00'     | '2 000,00'   | '2 360,00'     | 'Store 02' | '$$PurchaseOrder090302052$$' |
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice090302051$$" variable
+			And I delete "$$PurchaseInvoice090302051$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice090302051$$"
 			And I save the window as "$$PurchaseInvoice090302051$$"
 		And I click the button named "FormPostAndClose"
@@ -435,6 +469,8 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 				| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '756,00'     | '4 200,00'   | '4 956,00'     | 'Store 02' | '$$PurchaseOrder090302051$$' |
 				| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '1 134,00'   | '6 300,00'   | '7 434,00'     | 'Store 02' | '$$PurchaseOrder090302051$$' |
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice090302052$$" variable
+			And I delete "$$PurchaseInvoice090302052$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice090302052$$"
 			And I save the window as "$$PurchaseInvoice090302052$$"
 		If the field named "Agreement" is equal to "Vendor Ferron Discount" Then
@@ -442,6 +478,8 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '360,00'     | '2 000,00'   | '2 360,00'     | 'Store 02' | '$$PurchaseOrder090302052$$' |
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice090302051$$" variable
+			And I delete "$$PurchaseInvoice090302051$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice090302051$$"
 			And I save the window as "$$PurchaseInvoice090302051$$"
 		And I click the button named "FormPostAndClose"
@@ -505,6 +543,8 @@ Scenario: _090306 create Purchase invoice for several Purchase order with differ
 			| 'Trousers' |'36/Yellow'  |
 			And I input "210" text in "Price" field of "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseOrder090302061$$" variable
+			And I delete "$$PurchaseOrder090302061$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseOrder090302061$$"
 			And I save the window as "$$PurchaseOrder090302061$$"
 		And I click the button named "FormPostAndClose"
@@ -539,6 +579,8 @@ Scenario: _090306 create Purchase invoice for several Purchase order with differ
 			| 'Dress' |'M/White'  |
 			And I input "200" text in "Price" field of "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseOrder090302062$$" variable
+			And I delete "$$PurchaseOrder090302062$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseOrder090302062$$"
 			And I save the window as "$$PurchaseOrder090302062$$"
 		And I click the button named "FormPostAndClose"
@@ -560,6 +602,8 @@ Scenario: _090306 create Purchase invoice for several Purchase order with differ
 			| 'Trousers' | '210,00' | '36/Yellow' |  'Store 01' | 'pcs'  | '30,000' | ''              | '6 300,00'   | '7 434,00'     | '$$PurchaseOrder090302061$$' |
 			| 'Dress'    | '200,00' | 'M/White'   |  'Store 02' | 'pcs'  | '10,000' | ''              | '2 000,00'   | '2 360,00'     | '$$PurchaseOrder090302062$$' |
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseInvoice090302062$$" variable
+		And I delete "$$PurchaseInvoice090302062$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice090302062$$"
 		And I save the window as "$$PurchaseInvoice090302062$$"
 		And I click the button named "FormPostAndClose"
@@ -618,6 +662,8 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 			| 'Trousers' |'36/Yellow'  |
 			And I input "210" text in "Price" field of "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseOrder09030701$$" variable
+			And I delete "$$PurchaseOrder09030701$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseOrder09030701$$"
 			And I save the window as "$$PurchaseOrder09030701$$"
 		And I click the button named "FormPostAndClose"
@@ -652,6 +698,8 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 			| 'Dress' |'M/White'  |
 			And I input "200" text in "Price" field of "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseOrder09030702$$" variable
+			And I delete "$$PurchaseOrder09030702$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseOrder09030702$$"
 			And I save the window as "$$PurchaseOrder09030702$$"
 		And I click the button named "FormPostAndClose"
@@ -672,6 +720,8 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 000,00'   | '2 360,00'     | '$$PurchaseOrder09030702$$' |
 			Then the form attribute named "PriceIncludeTax" became equal to "No"
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice09030702$$" variable
+			And I delete "$$PurchaseInvoice09030702$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030702$$"
 			And I save the window as "$$PurchaseInvoice09030702$$"
 		If the field named "Company" is equal to "Second Company" Then
@@ -681,6 +731,8 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 			| 'Dress'    | '210,00' | 'L/Green'   |  'Store 02'  | 'pcs'  | '20,000' | '4 200,00'   | '4 200,00'     | '$$PurchaseOrder09030701$$' |
 			| 'Trousers' | '210,00' | '36/Yellow' |  'Store 02'  | 'pcs'  | '30,000' | '6 300,00'   | '6 300,00'     | '$$PurchaseOrder09030701$$' |
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice09030701$$" variable
+			And I delete "$$PurchaseInvoice09030701$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030701$$"
 			And I save the window as "$$PurchaseInvoice09030701$$"
 		And I click the button named "FormPostAndClose"
@@ -695,6 +747,8 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 000,00'   | '2 360,00'     | '$$PurchaseOrder09030702$$' |
 			Then the form attribute named "PriceIncludeTax" became equal to "No"
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice09030702$$" variable
+			And I delete "$$PurchaseInvoice09030702$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030702$$"
 			And I save the window as "$$PurchaseInvoice09030702$$"
 		If the field named "Company" is equal to "Second Company" Then
@@ -704,6 +758,8 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 			| 'Dress'    | '210,00' | 'L/Green'   |  'Store 02'  | 'pcs'  | '20,000' | '4 200,00'   | '4 200,00'     | '$$PurchaseOrder09030701$$' |
 			| 'Trousers' | '210,00' | '36/Yellow' |  'Store 02'  | 'pcs'  | '30,000' | '6 300,00'   | '6 300,00'     | '$$PurchaseOrder09030701$$' |
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice09030701$$" variable
+			And I delete "$$PurchaseInvoice09030701$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice09030701$$"
 			And I save the window as "$$PurchaseInvoice09030701$$"
 		And I click the button named "FormPostAndClose"
@@ -2037,6 +2093,8 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 	* Create Purchase order
 		When create the first test PO for a test on the creation mechanism based on
 		* Save the document number
+			And I delete "$$NumberPurchaseOrder090323$$" variable
+			And I delete "$$PurchaseOrder090323$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseOrder090323$$"
 			And I save the window as "$$PurchaseOrder090323$$"
 			And I set checkbox "Goods receipt before purchase invoice"

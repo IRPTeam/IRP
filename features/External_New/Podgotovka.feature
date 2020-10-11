@@ -313,6 +313,8 @@ Scenario: create PurchaseOrder017001
 			| 'Dress'    | '100,000'  | 'M/White'   | 'Store 01'      | 'pcs' |
 	* Post document
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder017001$$" variable
+		And I delete "$$PurchaseOrder017001$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder017001$$"
 		And I save the window as "$$PurchaseOrder017001$$"
 		And I click the button named "FormPostAndClose"
@@ -374,6 +376,8 @@ Scenario: create PurchaseOrder017003
 			And I finish line editing in "ItemList" table
 		* Post document
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseOrder017003$$" variable
+			And I delete "$$PurchaseOrder017003$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseOrder017003$$"
 			And I save the window as "$$PurchaseOrder017003$$"
 			And I click the button named "FormPostAndClose"
@@ -412,6 +416,8 @@ Scenario: create PurchaseInvoice018001 based on PurchaseOrder017001
 			| 'Item'  | 'Item key' | 'Store'    | 'Unit' | 'Q'       |
 			| 'Dress' | 'M/White'  | 'Store 01' | 'pcs'  | '100,000' |
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseInvoice018001$$" variable
+		And I delete "$$PurchaseInvoice018001$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice018001$$"
 		And I save the window as "$$PurchaseInvoice018001$$"
 		And I click the button named "FormPostAndClose"
@@ -441,6 +447,8 @@ Scenario: create PurchaseInvoice018006 based on PurchaseOrder017003
 			| 'Price' | 'Item'  | 'Item key' | 'Q'       | 'Price type'               | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' |
 			| '40,00' | 'Dress' | 'L/Green'  | '500,000' | 'en description is empty' | 'pcs'  | '3 050,85'   | '16 949,15'  | '20 000,00'    |
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseInvoice018006$$" variable
+		And I delete "$$PurchaseInvoice018006$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice018006$$"
 		And I save the window as "$$PurchaseInvoice018006$$"
 		And I click the button named "FormPostAndClose"
@@ -481,6 +489,8 @@ Scenario: create PurchaseReturnOrder022001 based on PurchaseInvoice018006 (Purch
 		| 'Item'  | 'Item key' | 'Purchase invoice'    | 'Store'    | 'Unit' | 'Q'     |
 		| 'Dress' | 'L/Green'  | '$$PurchaseInvoice018006$$' | 'Store 02' | 'pcs' | '2,000' |
 	And I click the button named "FormPost"
+	And I delete "$$NumberPurchaseReturnOrder022001$$" variable
+	And I delete "$$PurchaseReturnOrder022001$$" variable
 	And I save the value of "Number" field as "$$NumberPurchaseReturnOrder022001$$"
 	And I save the window as "$$PurchaseReturnOrder022001$$"
 	And I click the button named "FormPostAndClose"
@@ -525,6 +535,8 @@ Scenario: create PurchaseReturnOrder022006 based on PurchaseInvoice018001 (Purch
 		| 'Dress'    | 'M/White'   | 'pcs' |
 	And I delete a line in "ItemList" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberPurchaseReturnOrder022006$$" variable
+	And I delete "$$PurchaseReturnOrder022006$$" variable
 	And I save the value of "Number" field as "$$NumberPurchaseReturnOrder022006$$"
 	And I save the window as "$$PurchaseReturnOrder022006$$"
 	And I click the button named "FormPostAndClose"
@@ -591,6 +603,8 @@ Scenario: create InventoryTransferOrder020001
 			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberInventoryTransferOrder020001$$" variable
+		And I delete "$$InventoryTransferOrder020001$$" variable
 		And I save the value of "Number" field as "$$NumberInventoryTransferOrder020001$$"
 		And I save the window as "$$InventoryTransferOrder020001$$"
 		And I click the button named "FormPostAndClose"
@@ -637,6 +651,8 @@ Scenario: create InventoryTransferOrder020004
 		And I input "20,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberInventoryTransferOrder020004$$" variable
+	And I delete "$$InventoryTransferOrder020004$$" variable
 	And I save the value of "Number" field as "$$NumberInventoryTransferOrder020004$$"
 	And I save the window as "$$InventoryTransferOrder020004$$"
 	And I click the button named "FormPostAndClose"
@@ -683,6 +699,8 @@ Scenario: create InventoryTransferOrder020007
 		And I input "17,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberInventoryTransferOrder020007$$" variable
+	And I delete "$$InventoryTransferOrder020007$$" variable
 	And I save the value of "Number" field as "$$NumberInventoryTransferOrder020007$$"
 	And I save the window as "$$InventoryTransferOrder020007$$"
 	And I click the button named "FormPostAndClose"
@@ -729,6 +747,8 @@ Scenario: create InventoryTransferOrder020010
 		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberInventoryTransferOrder020010$$" variable
+	And I delete "$$InventoryTransferOrder020010$$" variable
 	And I save the value of "Number" field as "$$NumberInventoryTransferOrder020010$$"
 	And I save the window as "$$InventoryTransferOrder020010$$"
 	And I click the button named "FormPostAndClose"
@@ -792,6 +812,8 @@ Scenario: create SalesOrder023001
 	* Filling Delivery date
 		And I input current date in the field named "DeliveryDate"
 	And I click the button named "FormPost"
+	And I delete "$$SalesOrder023001$$" variable
+	And I delete "$$NumberSalesOrder023001$$" variable
 	And I save the window as "$$SalesOrder023001$$"
 	And I save the value of "Number" field as "$$NumberSalesOrder023001$$"
 	And I close current window
@@ -851,6 +873,8 @@ Scenario: create SalesOrder023005
 		And I move to "Other" tab
 		Then the form attribute named "Status" became equal to "Approved"
 	And I click the button named "FormPost"
+	And I delete "$$SalesOrder023005$$" variable
+	And I delete "$$NumberSalesOrder023005$$" variable
 	And I save the window as "$$SalesOrder023005$$"
 	And I save the value of "Number" field as "$$NumberSalesOrder023005$$"
 	And I close current window
@@ -879,6 +903,8 @@ Scenario: create SalesInvoice024001
 		| '550,00' | 'Dress'    | 'L/Green'   | '5,000' | 'Basic Price Types' |
 		| '400,00' | 'Trousers' | '36/Yellow' | '4,000' | 'Basic Price Types' |	
 	And I click the button named "FormPost"
+	And I delete "$$NumberSalesInvoice024001$$" variable
+	And I delete "$$SalesInvoice024001$$" variable
 	And I save the value of "Number" field as "$$NumberSalesInvoice024001$$"
 	And I save the window as "$$SalesInvoice024001$$"
 	And I click the button named "FormPostAndClose"
@@ -903,6 +929,8 @@ Scenario: create SalesInvoice024008
 		| '466,10' | 'Dress'    | 'L/Green'   | 'Basic Price without VAT' | '10,000' |
 		| '338,98' | 'Trousers' | '36/Yellow' | 'Basic Price without VAT' | '14,000' |
 	And I click the button named "FormPost"
+	And I delete "$$NumberSalesInvoice024008$$" variable
+	And I delete "$$SalesInvoice024008$$" variable
 	And I save the value of "Number" field as "$$NumberSalesInvoice024008$$"
 	And I save the window as "$$SalesInvoice024008$$"
 	And I click the button named "FormPostAndClose"
@@ -944,6 +972,8 @@ Scenario: create SalesReturnOrder028004
 		And I input "400,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesReturnOrder028004$$" variable
+		And I delete "$$SalesReturnOrder028004$$" variable
 		And I save the value of "Number" field as "$$NumberSalesReturnOrder028004$$"
 		And I save the window as "$$SalesReturnOrder028004$$"
 		And I click the button named "FormPostAndClose"
@@ -986,6 +1016,8 @@ Scenario: create SalesReturnOrder028001
 		| 'Item'     | 'Item key'  | 'Store'    |
 		| 'Dress'    |  'L/Green'  | 'Store 02' |
 	And I click the button named "FormPost"
+	And I delete "$$NumberSalesReturnOrder028001$$" variable
+	And I delete "$$SalesReturnOrder028001$$" variable
 	And I save the value of "Number" field as "$$NumberSalesReturnOrder028001$$"
 	And I save the window as "$$SalesReturnOrder028001$$"
 	And I click the button named "FormPostAndClose"
@@ -1032,6 +1064,8 @@ Scenario: create SalesInvoice024025
 		And I input "20,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberSalesInvoice024025$$" variable
+	And I delete "$$SalesInvoice024025$$" variable
 	And I save the value of "Number" field as "$$NumberSalesInvoice024025$$"
 	And I save the window as "$$SalesInvoice024025$$"
 	And I click the button named "FormPostAndClose"
@@ -1054,6 +1088,8 @@ Scenario: create PurchaseReturn022314
 		| 'Store 02'  |
 	And I select current line in "List" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberPurchaseReturn022314$$" variable
+	And I delete "$$PurchaseReturn022314$$" variable
 	And I save the value of "Number" field as "$$NumberPurchaseReturn022314$$"
 	And I save the window as "$$PurchaseReturn022314$$"
 	And I click the button named "FormPostAndClose"
@@ -1098,6 +1134,8 @@ Scenario: create InventoryTransfer021030
 	And I input "3,000" text in "Quantity" field of "ItemList" table
 	And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberInventoryTransfer021030$$" variable
+	And I delete "$$InventoryTransfer021030$$" variable
 	And I save the value of "Number" field as "$$NumberInventoryTransfer021030$$"
 	And I save the window as "$$InventoryTransfer021030$$"
 	And I click the button named "FormPostAndClose"
@@ -1125,13 +1163,6 @@ Scenario: create SalesInvoice024016 (Shipment confirmation does not used)
 			And I click Select button of "Legal name" field
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
-		// * Change of document number - 3
-		// 	And I move to "Other" tab
-		// 	And I expand "More" group
-		// 	And I input "3" text in "Number" field
-		// 	Then "1C:Enterprise" window is opened
-		// 	And I click "Yes" button
-		// 	And I input "3" text in "Number" field
 		* Filling in items table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -1152,6 +1183,8 @@ Scenario: create SalesInvoice024016 (Shipment confirmation does not used)
 			And in the table "ItemList" I click "% Offers" button
 			And in the table "Offers" I click the button named "FormOK"
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesInvoice024016$$" variable
+		And I delete "$$SalesInvoice024016$$" variable
 		And I save the value of "Number" field as "$$NumberSalesInvoice024016$$"
 		And I save the window as "$$SalesInvoice024016$$"
 		And I click the button named "FormPostAndClose"
@@ -1190,6 +1223,8 @@ Scenario: create SalesReturn30001
 			And I finish line editing in "ItemList" table
 			And I input "500,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesReturn30001$$" variable
+		And I delete "$$SalesReturn30001$$" variable
 		And I save the value of "Number" field as "$$NumberSalesReturn30001$$"
 		And I save the window as "$$SalesReturn30001$$"
 		And I click the button named "FormPostAndClose"
@@ -1234,6 +1269,8 @@ Scenario: create PurchaseReturn300301
 			And I finish line editing in "ItemList" table
 			And I input "500,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseReturn300301$$" variable
+		And I delete "$$PurchaseReturn300301$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseReturn300301$$"
 		And I save the window as "$$PurchaseReturn300301$$"
 		And I click the button named "FormPostAndClose"

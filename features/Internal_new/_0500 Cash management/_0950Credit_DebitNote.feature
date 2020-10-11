@@ -87,14 +87,12 @@ Scenario: _095001 preparation
 			And I expand "Currency" group
 			And I move to the tab named "GroupCurrency"
 			And I expand "More" group
-			// And I input "2 900" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "2 900" text in "Number" field
 			And I input "01.01.2020  10:00:00" text in "Date" field
 			And Delay 1
 			And I move to "Item list" tab
 			And I click the button named "FormPost"
+			And I delete "$$NumberSalesInvoice095001$$" variable
+			And I delete "$$SalesInvoice095001$$" variable
 			And I save the value of "Number" field as "$$NumberSalesInvoice095001$$"
 			And I save the window as "$$SalesInvoice095001$$"
 			And I click the button named "FormPostAndClose"
@@ -144,6 +142,8 @@ Scenario: _095001 preparation
 				And I change checkbox "Do you want to update filled prices?"
 				And I click "OK" button
 				And I click the button named "FormPost"
+				And I delete "$$NumberPurchaseInvoice095001$$" variable
+				And I delete "$$PurchaseInvoice095001$$" variable
 				And I save the value of "Number" field as "$$NumberPurchaseInvoice095001$$"
 				And I save the window as "$$PurchaseInvoice095001$$"
 				And I click the button named "FormPostAndClose"
@@ -193,6 +193,8 @@ Scenario: _095001 preparation
 				And I change checkbox "Do you want to update filled prices?"
 				And I click "OK" button
 				And I click the button named "FormPost"
+				And I delete "$$NumberPurchaseInvoice0950011$$" variable
+				And I delete "$$PurchaseInvoice0950011$$" variable
 				And I save the value of "Number" field as "$$NumberPurchaseInvoice0950011$$"
 				And I save the window as "$$PurchaseInvoice0950011$$"
 				And I click the button named "FormPostAndClose"
@@ -270,6 +272,8 @@ Scenario: _095002 check movements of the document Dedit Note (write off debts to
 		And I finish line editing in "Transactions" table
 	* Check movements
 		And I click the button named "FormPost"
+		And I delete "$$DeditNote095002$$" variable
+		And I delete "$$DeditNoteDate095002$$" variable
 		And I save the window as "$$DeditNote095002$$"
 		And I save the value of "Date" field as "$$DeditNoteDate095002$$"
 		And I click "Registrations report" button
@@ -375,6 +379,8 @@ Scenario: _095003 check movements of the document Credit Note (increase in debt 
 		And I finish line editing in "Transactions" table
 	* Check movements
 		And I click the button named "FormPost"
+		And I delete "$$CreditNote095003$$" variable
+		And I delete "$$CreditNoteDate095003$$" variable
 		And I save the window as "$$CreditNote095003$$"
 		And I save the value of "Date" field as "$$CreditNoteDate095003$$"
 		And I click "Registrations report" button
@@ -479,6 +485,8 @@ Scenario: _095004 check movements of the document Credit Note (write off custome
 		And I finish line editing in "Transactions" table
 	* Check movements
 		And I click the button named "FormPost"
+		And I delete "$$CreditNote095004$$" variable
+		And I delete "$$CreditNoteDate095004$$" variable
 		And I save the window as "$$CreditNote095004$$"
 		And I save the value of "Date" field as "$$CreditNoteDate095004$$"
 		And I click "Registrations report" button
@@ -584,6 +592,8 @@ Scenario: _095005 check movements of the document Debit Note (increase in custom
 		And I finish line editing in "Transactions" table
 	* Check movements
 		And I click the button named "FormPost"
+		And I delete "$$DeditNote095005$$" variable
+		And I delete "$$DeditNoteDate095005$$" variable
 		And I save the window as "$$DeditNote095005$$"
 		And I save the value of "Date" field as "$$DeditNoteDate095005$$"
 		And I click "Registrations report" button

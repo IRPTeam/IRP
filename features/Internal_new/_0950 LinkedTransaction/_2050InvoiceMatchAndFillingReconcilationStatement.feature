@@ -55,6 +55,8 @@ Scenario: _2050001 preparation
 			And I input "1000,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$BankPayment2050001$$" variable
+		And I delete "$$NumberBankPayment2050001$$" variable
 		And I save the window as "$$BankPayment2050001$$"
 		And I save the value of "Number" field as "$$NumberBankPayment2050001$$"
 		And I click the button named "FormPostAndClose"
@@ -87,6 +89,8 @@ Scenario: _2050001 preparation
 			And I input "20000,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$BankReceipt2050001$$" variable
+		And I delete "$$NumberBankReceipt2050001$$" variable
 		And I save the window as "$$BankReceipt2050001$$"
 		And I save the value of "Number" field as "$$NumberBankReceipt2050001$$"
 		And I click the button named "FormPostAndClose"
@@ -143,6 +147,8 @@ Scenario: _2050001 preparation
 			And I input "5000,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$CashReceipt2050001$$" variable
+		And I delete "$$NumberCashReceipt2050001$$" variable
 		And I save the window as "$$CashReceipt2050001$$"
 		And I save the value of "Number" field as "$$NumberCashReceipt2050001$$"
 		And I click the button named "FormPostAndClose"
@@ -180,6 +186,8 @@ Scenario: _2050001 preparation
 			And I input "5000,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$CashPayment2050001$$" variable
+		And I delete "$$NumberCashPayment2050001$$" variable
 		And I save the window as "$$CashPayment2050001$$"
 		And I save the value of "Number" field as "$$NumberCashPayment2050001$$"
 		And I click the button named "FormPostAndClose"
@@ -365,6 +373,8 @@ Scenario: _2050005 check the movements of the Invoice match document with the ve
 		And I input "1 000,00" text in "Closing amount" field of "Advances" table
 		And I finish line editing in "Advances" table
 		And I click the button named "FormPost"
+		And I delete "$$InvoiceMatch2050005$$" variable
+		And I delete "$$NumberInvoiceMatch2050005$$" variable
 		And I save the window as "$$InvoiceMatch2050005$$"
 		And I save the value of "Number" field as "$$NumberInvoiceMatch2050005$$"
 	* Check movements
@@ -444,6 +454,8 @@ Scenario: _2050006 check the movements of the Invoice match document with the cu
 		And I input "1 000,00" text in "Closing amount" field of "Advances" table
 		And I finish line editing in "Advances" table
 		And I click the button named "FormPost"
+		And I delete "$$InvoiceMatch2050006$$" variable
+		And I delete "$$NumberInvoiceMatch2050006$$" variable
 		And I save the window as "$$InvoiceMatch2050006$$"
 		And I save the value of "Number" field as "$$NumberInvoiceMatch2050006$$"
 	* Check movements
@@ -529,7 +541,8 @@ Scenario: _2050007 check the movements of the Invoice match document with the cl
 		And I finish line editing in "Transactions" table
 	* Check movements
 		And I click the button named "FormPost"
-		And I click the button named "FormPost"
+		And I delete "$$InvoiceMatch2050007$$" variable
+		And I delete "$$NumberInvoiceMatch2050007$$" variable
 		And I save the window as "$$InvoiceMatch2050007$$"
 		And I save the value of "Number" field as "$$NumberInvoiceMatch2050007$$"
 		And I click "Registrations report" button

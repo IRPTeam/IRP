@@ -165,6 +165,8 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 			And I input "20,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberInventoryTransferOrder020013$$" variable
+		And I delete "$$InventoryTransferOrder020013$$" variable
 		And I save the value of "Number" field as "$$NumberInventoryTransferOrder020013$$"
 		And I save the window as "$$InventoryTransferOrder020013$$"
 		And I click the button named "FormPostAndClose"

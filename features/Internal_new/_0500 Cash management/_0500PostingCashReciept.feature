@@ -199,6 +199,8 @@ Scenario: _050001 create Cash reciept (independently)
 			And I input "100,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberCashReceipt0500011$$" variable
+		And I delete "$$CashReceipt0500011$$" variable
 		And I save the value of "Number" field as "$$NumberCashReceipt0500011$$"
 		And I save the window as "$$CashReceipt0500011$$"
 		And I click the button named "FormPostAndClose"
@@ -259,6 +261,8 @@ Scenario: _050001 create Cash reciept (independently)
 			And I input "100,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberCashReceipt0500012$$" variable
+		And I delete "$$CashReceipt0500012$$" variable
 		And I save the value of "Number" field as "$$NumberCashReceipt0500012$$"
 		And I save the window as "$$CashReceipt0500012$$"
 		And I click the button named "FormPostAndClose"
@@ -323,6 +327,8 @@ Scenario: _050001 create Cash reciept (independently)
 			And I input "50,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberCashReceipt0500013$$" variable
+		And I delete "$$CashReceipt0500013$$" variable
 		And I save the value of "Number" field as "$$NumberCashReceipt0500013$$"
 		And I save the window as "$$CashReceipt0500013$$"
 		And I click the button named "FormPostAndClose"

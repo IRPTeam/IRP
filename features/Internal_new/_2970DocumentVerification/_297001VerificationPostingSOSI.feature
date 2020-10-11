@@ -81,13 +81,17 @@ Scenario: _29700101 preparation (test filling-in SO - SI)
 		And I create user settings for check registers balance
 		When Create information register UserSettings records (check registers balance)
 		When create the first test PO for a test on the creation mechanism based on	
+		And I delete "$$NumberPurchaseOrder29700101$$" variable
+		And I delete "$$PurchaseOrder29700101$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder29700101$$"
 		And I save the window as "$$PurchaseOrder29700101$$"
 		And I click the button named "FormPostAndClose"
 		When create the first test PO for a test on the creation mechanism based on	
 		And I move to "Other" tab
 		And I set checkbox "Goods receipt before purchase invoice"
-		And I click the button named "FormPost"			
+		And I click the button named "FormPost"	
+		And I delete "$$NumberPurchaseOrder29700102$$" variable
+		And I delete "$$PurchaseOrder29700102$$" variable		
 		And I save the value of "Number" field as "$$NumberPurchaseOrder29700102$$"
 		And I save the window as "$$PurchaseOrder29700102$$"
 		And I click the button named "FormPostAndClose"
@@ -766,6 +770,8 @@ Scenario: _29700111 test filling-in SO - SC - SI by quantity (second part)
 			| 'Dress' | '8,000'  | 'M/White'  | 'pcs'  | 'Store 02' | '$$SalesOrder29700102$$' |
 			| 'Dress' | '20,000' | 'L/Green'  | 'pcs'  | 'Store 02' | '$$SalesOrder29700102$$' |
 			And I click the button named "FormPost"
+			And I delete "$$NumberSalesInvoice29700104$$" variable
+			And I delete "$$SalesInvoice29700104$$" variable	
 			And I save the value of "Number" field as "$$NumberSalesInvoice29700104$$"
 			And I save the window as "$$SalesInvoice29700104$$"
 		* Change the quantity by more than SC

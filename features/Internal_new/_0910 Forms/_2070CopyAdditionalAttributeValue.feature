@@ -225,6 +225,7 @@ Scenario: _207002 copy additional attribute values when create document
 			| 'Additional attribute 02' | 'Value01'     |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberBankReceipt2070022$$" variable
 		And I save the value of "Number" field as "$$NumberBankReceipt2070022$$"
 		And I click the button named "FormPostAndClose"
 	* Copy Bank receipt and check filling in additional attributes
@@ -237,6 +238,7 @@ Scenario: _207002 copy additional attribute values when create document
 		Then "Additional attribute 01" form attribute became equal to ""
 		And I click the button named "FormPost"
 		Then "Additional attribute 02" form attribute became equal to "Value01"
+		And I delete "$$NumberBankReceipt2070023$$" variable
 		And I save the value of "Number" field as "$$NumberBankReceipt2070023$$"
 		And I click the button named "FormPostAndClose"
 	* Filling in Additional attribute 01 in User settings for Bank receipt
@@ -295,6 +297,7 @@ Scenario: _207002 copy additional attribute values when create document
 		And I click "Save" button
 		Then "Additional attribute 02" form attribute became equal to "Value01"
 		Then "Additional attribute 01" form attribute became equal to "Value02"
+		And I delete "$$NumberBankReceipt2070024$$" variable
 		And I save the value of "Number" field as "$$NumberBankReceipt2070024$$"
 		And I click the button named "FormPostAndClose"
 	* Mark created Bank receipt for deletion 

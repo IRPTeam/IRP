@@ -113,6 +113,8 @@ Scenario: _022001 create document Purchase return order, store use Shipment conf
 		| 'Item'  | 'Item key' | 'Purchase invoice'    | 'Store'    | 'Unit' | 'Q'     |
 		| 'Dress' | 'L/Green'  | '$$PurchaseInvoice018006$$' | 'Store 02' | 'pcs' | '2,000' |
 	And I click the button named "FormPost"
+	And I delete "$$NumberPurchaseReturnOrder022001$$" variable
+	And I delete "$$PurchaseReturnOrder022001$$" variable
 	And I save the value of "Number" field as "$$NumberPurchaseReturnOrder022001$$"
 	And I save the window as "$$PurchaseReturnOrder022001$$"
 	And I click the button named "FormPostAndClose"
@@ -223,6 +225,8 @@ Scenario: _022006 create document Purchase return order, store doesn't use Shipm
 		| 'Dress'    | 'M/White'   | 'pcs' |
 	And I delete a line in "ItemList" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberPurchaseReturnOrder022006$$" variable
+	And I delete "$$PurchaseReturnOrder022006$$" variable
 	And I save the value of "Number" field as "$$NumberPurchaseReturnOrder022006$$"
 	And I save the window as "$$PurchaseReturnOrder022006$$"
 	And I click the button named "FormPostAndClose"

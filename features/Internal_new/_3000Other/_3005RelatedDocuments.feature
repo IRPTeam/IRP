@@ -77,21 +77,16 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			And I select current line in "List" table
 			And I move to "Other" tab
 			And I set checkbox "Shipment confirmations before sales invoice"
-			// And I input "9 092" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "9 092" text in "Number" field
 			And I click the button named "FormPost"
+			And I delete "$$NumberSalesOrder300521$$" variable
+			And I delete "$$SalesOrder300521$$" variable
 			And I save the value of "Number" field as "$$NumberSalesOrder300521$$"
 			And I save the window as "$$SalesOrder300521$$"
 		* Create Shipment confirmation based on SO
 			And I click "Shipment confirmation" button
-			// And I move to "Other" tab
-			// And I input "9 092" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "9 092" text in "Number" field
 			And I click the button named "FormPost"
+			And I delete "$$NumberShipmentConfirmation300521$$" variable
+			And I delete "$$ShipmentConfirmation300521$$" variable
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation300521$$"
 			And I save the window as "$$ShipmentConfirmation300521$$"
 			And I click the button named "FormPostAndClose"
@@ -101,11 +96,9 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			And I click the button named "FormSelectAll"
 			And I click "Ok" button
 			And I move to "Other" tab
-			// And I input "9 012" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "9 012" text in "Number" field
 			And I click the button named "FormPost"
+			And I delete "$$NumberSalesInvoice300521$$" variable
+			And I delete "$$SalesInvoice300521$$" variable
 			And I save the value of "Number" field as "$$NumberSalesInvoice300521$$"
 			And I save the window as "$$SalesInvoice300521$$"
 			And I click the button named "FormPostAndClose"

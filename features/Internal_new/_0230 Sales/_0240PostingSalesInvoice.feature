@@ -358,6 +358,8 @@ Scenario: _024034 Sales invoice creation on set, store use Goods receipt
 		And I finish line editing in "ItemList" table
 	And I move to "Item list" tab
 	And I click the button named "FormPost"
+	And I delete "$$NumberSalesInvoice024034$$" variable
+	And I delete "$$SalesInvoice024034$$" variable
 	And I save the value of "Number" field as "$$NumberSalesInvoice024034$$"
 	And I save the window as "$$SalesInvoice024034$$"
 	And I click the button named "FormPostAndClose"

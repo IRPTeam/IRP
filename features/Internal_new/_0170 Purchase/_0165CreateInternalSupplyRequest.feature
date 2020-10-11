@@ -139,6 +139,8 @@ Scenario: _016501 create document Internal Supply Request
 		And I finish line editing in "ItemList" table
 	* Post document
 		And I click the button named "FormPost"
+		And I delete "$$NumberInternalSupplyRequest016501$$" variable
+		And I delete "$$InternalSupplyRequest016501$$" variable
 		And I save the value of "Number" field as "$$NumberInternalSupplyRequest016501$$"
 		And I save the window as "$$InternalSupplyRequest016501$$"
 		And I click the button named "FormPostAndClose"
@@ -175,6 +177,8 @@ Scenario: _016501 create document Internal Supply Request
 		And I activate "Item" field in "ItemList" table
 		And I delete a line in "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberInventoryTransferOrder016501$$" variable
+		And I delete "$$InventoryTransferOrder016501$$" variable
 		And I save the value of "Number" field as "$$NumberInventoryTransferOrder016501$$"
 		And I save the window as "$$InventoryTransferOrder016501$$"
 		And I click the button named "FormPostAndClose"
@@ -235,6 +239,8 @@ Scenario: _016501 create document Internal Supply Request
 		And I display "Q1" variable value
 		Then "Q1" variable is equal to 1
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder016501$$" variable
+		And I delete "$$PurchaseOrder016501$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder016501$$"
 		And I save the window as "$$PurchaseOrder016501$$"
 		And I click the button named "FormPostAndClose"

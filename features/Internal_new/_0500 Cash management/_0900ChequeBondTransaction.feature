@@ -84,15 +84,9 @@ Scenario: _090000 preparation (Cheque bond transaction)
 		And I activate "Q" field in "ItemList" table
 		And I input "15,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		// And I move to "Other" tab
-		// And I expand "Currency" group
-		// And I move to the tab named "GroupCurrency"
-		// And I expand "More" group
-		// And I input "3 000" text in "Number" field
-		// Then "1C:Enterprise" window is opened
-		// And I click "Yes" button
-		// And I input "3 000" text in "Number" field
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesInvoice090004$$" variable
+		And I delete "$$SalesInvoice090004$$" variable
 		And I save the value of "Number" field as "$$NumberSalesInvoice090004$$"
 		And I save the window as "$$SalesInvoice090004$$"
 		And I click the button named "FormPostAndClose"
@@ -418,6 +412,8 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 		And in the table "DocumentsList" I click "Transfer to document" button
 	* Post document
 		And I click the button named "FormPost"
+		And I delete "$$NumberChequeBondTransaction090005$$" variable
+		And I delete "$$ChequeBondTransaction090005$$" variable
 		And I save the value of "Number" field as "$$NumberChequeBondTransaction090005$$"
 		And I save the window as "$$ChequeBondTransaction090005$$"
 	* Check movements
@@ -969,12 +965,9 @@ Scenario: _2020001 test data creation
 			And I select current line in "List" table
 			And I finish line editing in "ChequeBonds" table
 		* Change the document number
-			// And I move to "Other" tab
-			// And I input "2" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "11" text in "Number" field
 			And I click the button named "FormPost"
+			And I delete "$$NumberChequeBondTransaction2020001$$" variable
+			And I delete "$$ChequeBondTransaction2020001$$" variable
 			And I save the value of "Number" field as "$$NumberChequeBondTransaction2020001$$"
 			And I save the window as "$$ChequeBondTransaction2020001$$"
 			And I click the button named "FormPostAndClose"
@@ -1426,6 +1419,8 @@ Scenario: _2020013 check the selection of documents for distribution of the amou
 		And I select current line in "List" table
 	* Post a ChequeBondTransaction and checking movements
 		And I click the button named "FormPost"
+		And I delete "$$NumberChequeBondTransaction2020013$$" variable
+		And I delete "$$ChequeBondTransaction2020013$$" variable
 		And I save the value of "Number" field as "$$NumberChequeBondTransaction2020013$$"
 		And I save the window as "$$ChequeBondTransaction2020013$$"
 		And I click "Registrations report" button

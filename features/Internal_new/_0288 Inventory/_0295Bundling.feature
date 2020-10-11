@@ -75,6 +75,8 @@ Scenario: _029501 create Bundling (Store doesn't use Shipment confirmation and G
 	And I input "1,000" text in "Quantity" field of "ItemList" table
 	And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberBundling0029501$$" variable
+	And I delete "$$Bundling0029501$$" variable
 	And I save the value of "Number" field as "$$NumberBundling0029501$$"
 	And I save the window as "$$Bundling0029501$$"
 	And I click the button named "FormPostAndClose"
@@ -181,6 +183,8 @@ Scenario: _029507 create Bundling ( Store use Shipment confirmation and Goods re
 	And I input "2,000" text in "Quantity" field of "ItemList" table
 	And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberBundling0029507$$" variable
+	And I delete "$$Bundling0029507$$" variable
 	And I save the value of "Number" field as "$$NumberBundling0029507$$"
 	And I save the window as "$$Bundling0029507$$"
 	And I click the button named "FormPostAndClose"
@@ -247,17 +251,17 @@ Scenario: _029513 create Shipment confirmation and Goods receipt based on Bundli
 	And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
 	Then the form attribute named "Company" became equal to "Main Company"
 	And I click the button named "FormPost"
+	And I delete "$$NumberGoodsReceipt0029513$$" variable
+	And I delete "$$GoodsReceipt0029513$$" variable
 	And I save the value of "Number" field as "$$NumberGoodsReceipt0029513$$"
 	And I save the window as "$$GoodsReceipt0029513$$"
 	And I click the button named "FormPostAndClose"
 	And Delay 5
 	And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
 	Then the form attribute named "Company" became equal to "Main Company"
-	// And I input "151" text in "Number" field
-	// Then "1C:Enterprise" window is opened
-	// And I click "Yes" button
-	// And I input "151" text in "Number" field
 	And I click the button named "FormPost"
+	And I delete "$$NumberShipmentConfirmation0029513$$" variable
+	And I delete "$$ShipmentConfirmation0029513$$" variable
 	And I save the value of "Number" field as "$$NumberShipmentConfirmation0029513$$"
 	And I save the window as "$$ShipmentConfirmation0029513$$"
 	And I click the button named "FormPostAndClose"
@@ -457,6 +461,8 @@ Scenario: _029518 creating a bundle of 2 different properties + one repeating of
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberBundling0029518$$" variable
+		And I delete "$$Bundling0029518$$" variable
 		And I save the value of "Number" field as "$$NumberBundling0029518$$"
 		And I save the window as "$$Bundling0029518$$"
 		And I click the button named "FormPostAndClose"
@@ -556,6 +562,8 @@ Scenario: _029519 create Bundling (Store use Goods receipt, doesn't use Shipment
 		And I finish line editing in "ItemList" table
 	* Post document and check movements
 		And I click the button named "FormPost"
+		And I delete "$$NumberBundling0029519$$" variable
+		And I delete "$$Bundling0029519$$" variable
 		And I save the value of "Number" field as "$$NumberBundling0029519$$"
 		And I save the window as "$$Bundling0029519$$"
 		And I click the button named "FormPost"
@@ -646,6 +654,8 @@ Scenario: _029520 create Bundling (Store use Shipment confirmation, doesn't use 
 		And I finish line editing in "ItemList" table
 	* Post document and check movements
 		And I click the button named "FormPost"
+		And I delete "$$NumberBundling0029520$$" variable
+		And I delete "$$Bundling0029520$$" variable
 		And I save the value of "Number" field as "$$NumberBundling0029520$$"
 		And I save the window as "$$Bundling0029520$$"
 		And I click the button named "FormPost"

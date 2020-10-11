@@ -178,6 +178,8 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 		And I finish line editing in "ItemList" table
 	* Post document
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder017005$$" variable
+		And I delete "$$PurchaseOrder017005$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder017005$$"
 		And I save the window as "$$PurchaseOrder017005$$"
 		And I click the button named "FormPostAndClose"
@@ -442,6 +444,8 @@ Scenario: _019901 check changes in movements on a Purchase Order document when q
 		And I close all client application windows
 		When create a Purchase Order document
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder019901$$" variable
+		And I delete "$$PurchaseOrder019901$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder019901$$"
 		And I save the window as "$$PurchaseOrder019901$$"
 	* Check registry entries (Order Balance)

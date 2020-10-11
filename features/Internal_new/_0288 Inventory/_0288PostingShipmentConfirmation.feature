@@ -128,6 +128,8 @@ Scenario: _028801 create document Shipment confirmation based on Sales Invoice (
 		| 'Item'     | 'Item key'  | 'Store'    |
 		| 'Dress'    |  'L/Green'  | 'Store 02' |
 	And I click the button named "FormPost"
+	And I delete "$$NumberShipmentConfirmation028801$$" variable
+	And I delete "$$ShipmentConfirmation0028801$$" variable
 	And I save the value of "Number" field as "$$NumberShipmentConfirmation028801$$"
 	And I save the window as "$$ShipmentConfirmation0028801$$"
 	And I click the button named "FormPostAndClose"
@@ -164,6 +166,8 @@ Scenario: _028804 create document Shipment confirmation  based on Sales Invoice 
 		| '#' | 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Shipment basis'   |
 		| '1' | 'Dress' | '20,000'   | 'L/Green'  | 'pcs'  | '$$SalesInvoice024025$$' |
 	And I click the button named "FormPost"
+	And I delete "$$NumberShipmentConfirmation028804$$" variable
+	And I delete "$$ShipmentConfirmation0028804$$" variable
 	And I save the value of "Number" field as "$$NumberShipmentConfirmation028804$$"
 	And I save the window as "$$ShipmentConfirmation0028804$$"
 	And I click the button named "FormPostAndClose"
@@ -196,6 +200,8 @@ Scenario: _028807 create document Shipment confirmation based on Purchase return
 		| 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Shipment basis'                              |
 		| 'Dress' | '10,000'    | 'L/Green'  | 'pcs'  | '$$PurchaseReturn022314$$' |
 	And I click the button named "FormPost"
+	And I delete "$$NumberShipmentConfirmation028807$$" variable
+	And I delete "$$ShipmentConfirmation0028807$$" variable
 	And I save the value of "Number" field as "$$NumberShipmentConfirmation028807$$"
 	And I save the window as "$$ShipmentConfirmation0028807$$"
 	And I click the button named "FormPostAndClose"
@@ -224,6 +230,8 @@ Scenario: _028810 create document Shipment confirmation  based on Inventory tran
 	And Delay 1
 	Then the form attribute named "Company" became equal to "Main Company"
 	And I click the button named "FormPost"
+	And I delete "$$NumberShipmentConfirmation028810$$" variable
+	And I delete "$$ShipmentConfirmation0028810$$" variable
 	And I save the value of "Number" field as "$$NumberShipmentConfirmation028810$$"
 	And I save the window as "$$ShipmentConfirmation0028810$$"
 	And I click the button named "FormPostAndClose"

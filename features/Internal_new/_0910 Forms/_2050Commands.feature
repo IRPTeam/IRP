@@ -153,6 +153,8 @@ Scenario: _0205001 preparation (commands)
 				And I input "100,000" text in "Price" field of "ItemList" table
 				And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice0205001$$" variable
+			And I delete "$$PurchaseInvoice0205001$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice0205001$$"
 			And I save the window as "$$PurchaseInvoice0205001$$"
 			* Post and check saving

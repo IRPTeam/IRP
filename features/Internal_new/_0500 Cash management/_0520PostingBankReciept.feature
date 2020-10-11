@@ -203,6 +203,8 @@ Scenario: _052001 create Bank receipt (independently)
 			And I input "100,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberBankReceipt0520011$$" variable
+		And I delete "$$BankReceipt0520011$$" variable
 		And I save the value of "Number" field as "$$NumberBankReceipt0520011$$"
 		And I save the window as "$$BankReceipt0520011$$"
 		And I click the button named "FormPostAndClose"
@@ -268,6 +270,8 @@ Scenario: _052001 create Bank receipt (independently)
 			And I input "100,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberBankReceipt0520012$$" variable
+		And I delete "$$BankReceipt0520012$$" variable
 		And I save the value of "Number" field as "$$NumberBankReceipt0520012$$"
 		And I save the window as "$$BankReceipt0520012$$"
 		And I click the button named "FormPostAndClose"
@@ -334,6 +338,8 @@ Scenario: _052001 create Bank receipt (independently)
 			And I input "50,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberBankReceipt0520013$$" variable
+		And I delete "$$BankReceipt0520013$$" variable
 		And I save the value of "Number" field as "$$NumberBankReceipt0520013$$"
 		And I save the window as "$$BankReceipt0520013$$"
 		And I click the button named "FormPostAndClose"

@@ -89,12 +89,9 @@ Scenario: _400000 preparation (Opening entries)
 		And I activate "Q" field in "ItemList" table
 		And I input "15,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		// And I move to "Other" tab
-		// And I input "5 900" text in "Number" field
-		// Then "1C:Enterprise" window is opened
-		// And I click "Yes" button
-		// And I input "5 900" text in "Number" field
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesInvoice400000$$" variable
+		And I delete "$$SalesInvoice400000$$" variable
 		And I save the value of "Number" field as "$$NumberSalesInvoice400000$$"
 		And I save the window as "$$SalesInvoice400000$$"
 		And I set checkbox "Is opening entry"
@@ -129,12 +126,9 @@ Scenario: _400000 preparation (Opening entries)
 		And I activate "Q" field in "ItemList" table
 		And I input "15,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		// And I move to "Other" tab
-		// And I input "5 900" text in "Number" field
-		// Then "1C:Enterprise" window is opened
-		// And I click "Yes" button
-		// And I input "5 900" text in "Number" field
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseInvoice400000$$" variable
+		And I delete "$$PurchaseInvoice400000$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice400000$$"
 		And I save the window as "$$PurchaseInvoice400000$$"
 		And I set checkbox "Is opening entry"
@@ -306,6 +300,8 @@ Scenario: _400001 opening entry account balance
 			And I finish line editing in "CurrenciesAccountBalance" table
 	* Post document
 		And I click the button named "FormPost"
+		And I delete "$$NumberOpeningEntry400001$$" variable
+		And I delete "$$OpeningEntry400001$$" variable
 		And I save the value of "Number" field as "$$NumberOpeningEntry400001$$"
 		And I save the window as "$$OpeningEntry400001$$"
 		And I click the button named "FormPostAndClose"
@@ -633,6 +629,8 @@ Scenario: _400002 opening entry inventory balance
 		And I finish line editing in "Inventory" table
 	* Post document
 		And I click the button named "FormPost"
+		And I delete "$$NumberOpeningEntry400002$$" variable
+		And I delete "$$OpeningEntry400002$$" variable
 		And I save the value of "Number" field as "$$NumberOpeningEntry400002$$"
 		And I save the window as "$$OpeningEntry400002$$"
 	* Check movements
@@ -693,6 +691,8 @@ Scenario: _400003 opening entry advance balance
 			| Main Company |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberOpeningEntry400003$$" variable
+		And I delete "$$OpeningEntry400003$$" variable
 		And I save the value of "Number" field as "$$NumberOpeningEntry400003$$"
 		And I save the window as "$$OpeningEntry400003$$"
 	* Filling in AdvanceFromCustomers
@@ -739,6 +739,8 @@ Scenario: _400003 opening entry advance balance
 		And I finish line editing in "AdvanceToSuppliers" table
 	* Post document
 		And I click the button named "FormPost"
+		And I delete "$$NumberOpeningEntry400003$$" variable
+		And I delete "$$OpeningEntry400003$$" variable
 		And I save the value of "Number" field as "$$NumberOpeningEntry400003$$"
 		And I save the window as "$$OpeningEntry400003$$"
 	* Check movements
@@ -846,6 +848,8 @@ Scenario: _400004 opening entry AP balance by partner terms (vendors)
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400' | '17,12'  | '1'            |
 	* Post document
 		And I click the button named "FormPost"
+		And I delete "$$NumberOpeningEntry400004$$" variable
+		And I delete "$$OpeningEntry400004$$" variable
 		And I save the value of "Number" field as "$$NumberOpeningEntry400004$$"
 		And I save the window as "$$OpeningEntry400004$$"
 		And I click the button named "FormPostAndClose"
@@ -947,6 +951,8 @@ Scenario: _400005 opening entry AR balance by partner terms (customers)
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400' | '17,12'  | '1'            |
 	* Post document
 		And I click the button named "FormPost"
+		And I delete "$$NumberOpeningEntry400005$$" variable
+		And I delete "$$OpeningEntry400005$$" variable
 		And I save the value of "Number" field as "$$NumberOpeningEntry400005$$"
 		And I save the window as "$$OpeningEntry400005$$"
 		And I click the button named "FormPostAndClose"
@@ -1156,6 +1162,8 @@ Scenario: _400008 check the entry of the account balance, inventory balance, Ap/
 			And I input "1" text in the field named "CurrenciesAccountReceivableByAgreementsMultiplicity" of "CurrenciesAccountReceivableByAgreements" table
 			And I finish line editing in "CurrenciesAccountReceivableByAgreements" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberOpeningEntry400008$$" variable
+			And I delete "$$OpeningEntry400008$$" variable
 			And I save the value of "Number" field as "$$NumberOpeningEntry400008$$"
 			And I save the window as "$$OpeningEntry400008$$"
 
@@ -1246,6 +1254,8 @@ Scenario: _400009 check the entry of the Ap/Ar balance by documents
 		And I finish line editing in "AccountReceivableByDocuments" table
 	* Post and check movements
 		And I click the button named "FormPost"
+		And I delete "$$NumberOpeningEntry400009$$" variable
+		And I delete "$$OpeningEntry400009$$" variable
 		And I save the value of "Number" field as "$$NumberOpeningEntry400009$$"
 		And I save the window as "$$OpeningEntry400009$$"
 	# AccountByDocumentsMainTablePartnerOnChange

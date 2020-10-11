@@ -547,6 +547,8 @@ Scenario: _090205 check tax transfer in Sales invoice when it is created based o
 		And I finish line editing in "TaxTree" table
 		And I click "Ok" button
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesInvoice090204$$" variable
+		And I delete "$$SalesInvoice090204$$" variable
 		And I save the value of "Number" field as "$$NumberSalesInvoice090204$$"
 		And I save the window as "$$SalesInvoice090204$$"
 		And I click the button named "FormPost"

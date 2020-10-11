@@ -86,6 +86,8 @@ Scenario: _028901 create document Goods Reciept based on Purchase invoice
 		| 'Item'  | 'Quantity' | 'Item key' | 'Store'    | 'Unit' |
 		| 'Dress' | '500,000'  | 'L/Green'  | 'Store 02' | 'pcs' |
 	And I click the button named "FormPost"
+	And I delete "$$NumberGoodsReceipt028901$$" variable
+	And I delete "$$GoodsReceipt028901$$" variable
 	And I save the value of "Number" field as "$$NumberGoodsReceipt028901$$"
 	And I save the window as "$$GoodsReceipt028901$$"
 	And I click the button named "FormPostAndClose"

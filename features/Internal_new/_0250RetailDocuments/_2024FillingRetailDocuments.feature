@@ -341,6 +341,8 @@ Scenario: _0154135 create document Retail Sales Receipt
 			And I input "12,90" text in "Commission" field of "Payments" table
 			And I finish line editing in "Payments" table
 		* Post Retail sales receipt
+			And I delete "$$NumberRetailSalesReceipt0154135$$" variable
+			And I delete "$$RetailSalesReceipt015413$$" variable
 			And I save the value of "Number" field as "$$NumberRetailSalesReceipt0154135$$"
 			And I click the button named "FormPost"
 			And I save the window as "$$RetailSalesReceipt015413$$"
@@ -414,6 +416,8 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 		And I select current line in "List" table
 	* Post Retail return receipt
 		And I click the button named "FormPost"
+		And I delete "$$NumberRetailReturnReceipt0154136$$" variable
+		And I delete "$$RetailReturnReceipt0154136$$" variable
 		And I save the value of "Number" field as "$$NumberRetailReturnReceipt0154136$$"
 		And I save the window as "$$RetailReturnReceipt0154136$$"
 		And I click the button named "FormPostAndClose"
@@ -1405,6 +1409,8 @@ Scenario:  _0154149 create Cash statement
 		* Post Retail sales receipt
 			And I input "01.09.2020 00:00:00" text in "Date" field
 			And I click the button named "FormPost"
+			And I delete "$$NumberRetailSalesReceipt01541491$$" variable
+			And I delete "$$RetailSalesReceipt01541491$$" variable
 			And I save the value of "Number" field as "$$NumberRetailSalesReceipt01541491$$"
 			And I save the window as "$$RetailSalesReceipt01541491$$"
 			And I click the button named "FormPostAndClose"
@@ -1470,6 +1476,8 @@ Scenario:  _0154149 create Cash statement
 		* Post Retail sales receipt
 			And I input "01.09.2020 12:50:00" text in "Date" field
 			And I click the button named "FormPost"
+			And I delete "$$NumberRetailSalesReceipt01541492$$" variable
+			And I delete "$$RetailSalesReceipt01541492$$" variable
 			And I save the value of "Number" field as "$$NumberRetailSalesReceipt01541492$$"
 			And I save the window as "$$RetailSalesReceipt01541492$$"
 			And I click the button named "FormPostAndClose"
@@ -1566,6 +1574,8 @@ Scenario:  _0154149 create Cash statement
 		* Post Retail sales receipt
 			And I input "01.09.2020 16:40:04" text in "Date" field
 			And I click the button named "FormPost"
+			And I delete "$$NumberRetailSalesReceipt01541493$$" variable
+			And I delete "$$RetailSalesReceipt01541493$$" variable
 			And I save the value of "Number" field as "$$NumberRetailSalesReceipt01541493$$"
 			And I save the window as "$$RetailSalesReceipt01541493$$"
 			And I click the button named "FormPostAndClose"
@@ -1662,6 +1672,8 @@ Scenario:  _0154149 create Cash statement
 		* Post Retail sales receipt
 			And I input "31.08.2020 12:40:04" text in "Date" field
 			And I click the button named "FormPost"
+			And I delete "$$NumberRetailSalesReceipt01541494$$" variable
+			And I delete "$$RetailSalesReceipt01541494$$" variable
 			And I save the value of "Number" field as "$$NumberRetailSalesReceipt01541494$$"
 			And I save the window as "$$RetailSalesReceipt01541494$$"
 			And I click the button named "FormPostAndClose"
@@ -1695,6 +1707,8 @@ Scenario:  _0154149 create Cash statement
 		And I select current line in "List" table
 		And I input "01.09.2020 13:40:04" text in "Date" field
 		And I click the button named "FormPost"
+		And I delete "$$NumberRetailReturnReceipt01541494$$" variable
+		And I delete "$$RetailReturnReceipt01541494$$" variable
 		And I save the value of "Number" field as "$$NumberRetailReturnReceipt01541494$$"
 		And I save the window as "$$RetailReturnReceipt01541494$$"
 		And I click the button named "FormPostAndClose"
@@ -1723,6 +1737,8 @@ Scenario:  _0154149 create Cash statement
 		And I select current line in "List" table
 		And I input "01.09.2020 15:31:04" text in "Date" field
 		And I click the button named "FormPost"
+		And I delete "$$NumberRetailReturnReceipt01541493$$" variable
+		And I delete "$$RetailReturnReceipt01541493$$" variable
 		And I save the value of "Number" field as "$$NumberRetailReturnReceipt01541493$$"
 		And I save the window as "$$RetailReturnReceipt01541493$$"
 		And I click the button named "FormPostAndClose"
@@ -1739,6 +1755,8 @@ Scenario:  _0154149 create Cash statement
 		And I select current line in "List" table
 		And I input "01.09.2020 16:55:04" text in "Date" field
 		And I click the button named "FormPost"
+		And I delete "$$NumberRetailReturnReceipt01541491$$" variable
+		And I delete "$$RetailReturnReceipt01541491$$" variable
 		And I save the value of "Number" field as "$$NumberRetailReturnReceipt01541491$$"
 		And I save the window as "$$RetailReturnReceipt01541491$$"
 		And I click the button named "FormPostAndClose"
@@ -1782,6 +1800,8 @@ Scenario:  _0154149 create Cash statement
 				| 'Card 01'      | 'Transit Main' | '51,60'      | ''         |
 			Then the number of "Payments" table lines is "меньше или равно" 2
 		And I click the button named "FormPost"
+		And I delete "$$NumberCashStatement01541491$$" variable
+		And I delete "$$CashStatement01541491$$" variable
 		And I save the value of "Number" field as "$$NumberCashStatement01541491$$"
 		And I save the window as "$$CashStatement01541491$$"
 		And I click the button named "FormPostAndClose"

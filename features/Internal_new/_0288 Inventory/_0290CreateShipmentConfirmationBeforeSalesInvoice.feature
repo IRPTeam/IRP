@@ -114,22 +114,21 @@ Scenario: _029002 create document Sales order and Shipment confirmation (partner
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
-	And I click the button named "FormPost"
+	And I delete "$$NumberSalesOrder029002$$" variable
+	And I delete "$$SalesOrder029002$$" variable
 	And I save the value of "Number" field as "$$NumberSalesOrder029002$$"
 	And I save the window as "$$SalesOrder029002$$"
 	* Create Shipment confirmation
 		And I click "Shipment confirmation" button
 		Then the form attribute named "Company" became equal to "Main Company"
-		// And I input "180" text in "Number" field
-		// Then "1C:Enterprise" window is opened
-		// And I click "Yes" button
-		// And I input "180" text in "Number" field
 	* Check that the tabular part is filled in
 		And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Store'    | 'Unit' | 'Shipment basis'   |
 			| 'Trousers' | '12,000'   | '36/Yellow' | 'Store 02' | 'pcs' | '$$SalesOrder029002$$' |
 			| 'Shirt'    | '10,000'   | '36/Red'    | 'Store 02' | 'pcs' | '$$SalesOrder029002$$' |
 	And I click the button named "FormPost"
+	And I delete "$$NumberShipmentConfirmation029002$$" variable
+	And I delete "$$ShipmentConfirmation029002$$" variable
 	And I save the value of "Number" field as "$$NumberShipmentConfirmation029002$$"
 	And I save the window as "$$ShipmentConfirmation029002$$"
 	And I click the button named "FormPostAndClose"
@@ -271,6 +270,8 @@ Scenario: _029012 create document Sales order and Shipment confirmation (partner
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesOrder029012$$" variable
+		And I delete "$$SalesOrder029012$$" variable
 		And I save the value of "Number" field as "$$NumberSalesOrder029012$$"
 		And I save the window as "$$SalesOrder029012$$"
 	* Create Shipment confirmation
@@ -280,6 +281,8 @@ Scenario: _029012 create document Sales order and Shipment confirmation (partner
 			| 'Item'  | 'Quantity' | 'Item key' | 'Store'    | 'Unit' | 'Shipment basis'       |
 			| 'Shirt' | '10,000'   | '36/Red'   | 'Store 02' | 'pcs'  | '$$SalesOrder029012$$' |
 		And I click the button named "FormPost"
+		And I delete "$$NumberShipmentConfirmation029012$$" variable
+		And I delete "$$ShipmentConfirmation029012$$" variable
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation029012$$"
 		And I save the window as "$$ShipmentConfirmation029012$$"
 		And I click the button named "FormPostAndClose"
@@ -369,6 +372,8 @@ Scenario: _029013 create Sales invoice for several shipments
 		| 'Shirt'    | '296,61' | '36/Red'    | 'Store 02' | '$$SalesOrder029002$$' | 'pcs'  | '10,000' | ''              | '533,90'     | '2 966,10'   | '3 500,00'     |
 		| 'Shirt'    | '296,61' | '36/Red'    | 'Store 02' | '$$SalesOrder029002$$' | 'pcs'  | '10,000' | ''              | '533,90'     | '2 966,10'   | '3 500,00'     |
 	And I click the button named "FormPost"
+	And I delete "$$NumberSalesInvoice029013$$" variable
+	And I delete "$$SalesInvoice029013$$" variable
 	And I save the value of "Number" field as "$$NumberSalesInvoice029013$$"
 	And I save the window as "$$SalesInvoice029013$$"
 	And I click the button named "FormPostAndClose"
@@ -453,6 +458,8 @@ Scenario: _029014 availability check for selection shipment confirmation for whi
 			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Sales order'      | 'Unit' | 'Q'     | 'Offers amount' | 'Tax amount' | 'Net amount' | 'Total amount' |
 			| 'Trousers' | '338,98' | '36/Yellow' | 'Store 01' | '$$SalesOrder029012$$' | 'pcs' | '7,000' | ''              | '427,11'     | '2 372,86'   | '2 799,97'     |
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesInvoice029014$$" variable
+		And I delete "$$SalesInvoice029014$$" variable
 		And I save the value of "Number" field as "$$NumberSalesInvoice029014$$"
 		And I save the window as "$$SalesInvoice029014$$"
 		And I click the button named "FormPostAndClose"

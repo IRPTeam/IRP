@@ -951,7 +951,8 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 Scenario: _090408 create one Sales order - several Shipment confirmation - one Sales invoice
 	* Create Sales order
 		When create the first test SO for a test on the creation mechanism based on
-		* Save the document number
+			And I delete "$$NumberSalesOrder090408$$" variable
+			And I delete "$$SalesOrder090408$$" variable
 			And I save the value of "Number" field as "$$NumberSalesOrder090408$$"
 			And I save the window as "$$SalesOrder090408$$"
 			And I set checkbox "Shipment confirmations before sales invoice"

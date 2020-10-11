@@ -424,7 +424,9 @@ foreach ($elementTag in $a) {
           <param name="jetbrains_powershell_errorToError" value="true" />
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code"><![CDATA[$TagArray = @("Discount", "Forms", "Inventory", "Catalogs", "FillingDocuments", "Filters", "Other", "Purchase", "RetailDocuments", "Barcodes", "CreationBasedMulti", "Sales", "Price", "CashManagement", "PhysicalInventory", "SerialLotNumber", "OpeningEntries", "InventoryTransfer", "LinkedTransaction", "BasicFormsCheck",  "DocumentVerification", "Services", "StandartAgreement", "TaxCalculation", "BankCashDocuments", "PrintForm", "CurrencyRate", "LoadInfo")
+          <param name="jetbrains_powershell_script_code"><![CDATA[#$TagArray = @("Discount", "Forms", "Inventory", "Catalogs", "FillingDocuments", "Filters", "Other", "Purchase", "RetailDocuments", "Barcodes", "CreationBasedMulti", "Sales", "Price", "CashManagement", "PhysicalInventory", "SerialLotNumber", "OpeningEntries", "InventoryTransfer", "LinkedTransaction", "BasicFormsCheck",  "DocumentVerification", "Services", "StandartAgreement", "TaxCalculation", "BankCashDocuments", "PrintForm", "CurrencyRate", "LoadInfo")
+$TagArray = @("Discount1", "Forms1", "Inventory1", "Catalogs1", "Forms1", "Inventory1", "Catalogs1", "Forms1", "Inventory1", "Catalogs1")
+
 If ("%env.RunAllTest%" -eq "true") {
     Write-Output "One time start full test"
 }

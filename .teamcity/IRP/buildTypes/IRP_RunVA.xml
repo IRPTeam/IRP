@@ -425,6 +425,7 @@ foreach ($elementTag in $a) {
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
           <param name="jetbrains_powershell_script_code"><![CDATA[$TagArray = @("Discount", "Forms", "Inventory", "Catalogs", "FillingDocuments", "Filters", "Other", "Purchase", "RetailDocuments", "Barcodes", "CreationBasedMulti", "Sales", "Price", "CashManagement", "PhysicalInventory", "SerialLotNumber", "OpeningEntries", "InventoryTransfer", "LinkedTransaction", "BasicFormsCheck",  "DocumentVerification", "Services", "StandartAgreement", "TaxCalculation", "BankCashDocuments", "PrintForm", "CurrencyRate", "LoadInfo")
+
 If ("%env.RunAllTest%" -eq "true") {
     Write-Output "One time start full test"
 }
@@ -635,34 +636,45 @@ $VanessaRun = {
         Write-Host "File $ScriptLogFilePath not found. Skip read tail log"
     }
 }
-$JobArray = @()
+[System.Collections.ArrayList]$JobArray = @()
 foreach ($elementTag in $TagArray) {
     $startPort += 10
     $JobTailProc = start-job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort
+     Start-Sleep 5
     $JobArray += $JobTailProc
 
     do {
         Start-Sleep 10
         $jobCount = $JobArray.count
         Write-Output "Current job count: $jobCount Max count: $StreamCountMax"
-        $JobArrayTmp = $JobArray;
-        foreach ($job in $JobArray) {
-            $job | Receive-Job
-            if (!($job.State -eq "Running")) {
-                $JobArrayTmp = $JobArray | Where-Object { $_ –ne $job } 
+        # $FirstArray = $JobArray
+        # foreach ($job in $FirstArray) {
+        #     $job | Receive-Job
+        #     if (!($job.State -eq "Running")) {
+        #         $JobArray.Remove($job) 
+        #     }
+        # }
+        for ($i = 0; $i -lt $JobArray.count; $i++)
+        {
+            $JobArray[$i] | Receive-Job
+            if (!($JobArray[$i].State -eq "Running")) {
+                $JobArray.RemoveAt($i)
+                $i--
             }
         }
-        $JobArray = $JobArrayTmp
+
     } while ($JobArray.count -ge $StreamCountMax)
 }
 
 do {
     Start-Sleep 1
 
-    foreach ($job in $JobArray) {
-        $job | Receive-Job
+    for ($i = 0; $i -lt $JobArray.count; $i++)
+    {
+        $JobArray[$i] | Receive-Job
         if (!($job.State -eq "Running")) {
-            $JobArray = $JobArray | Where-Object { $_ –ne $job } 
+            $JobArray.RemoveAt($i)
+            $i--
         }
     }
 } while ($JobArray.count)]]></param>

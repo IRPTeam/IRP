@@ -637,7 +637,7 @@ $VanessaRun = {
         Write-Host "File $ScriptLogFilePath not found. Skip read tail log"
     }
 }
-$JobArray = @()
+[System.Collections.ArrayList]$JobArray = @()
 foreach ($elementTag in $TagArray) {
     $startPort += 10
     $JobTailProc = start-job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort
@@ -648,24 +648,34 @@ foreach ($elementTag in $TagArray) {
         Start-Sleep 10
         $jobCount = $JobArray.count
         Write-Output "Current job count: $jobCount Max count: $StreamCountMax"
-        $JobArrayTmp = $JobArray;
-        foreach ($job in $JobArray) {
-            $job | Receive-Job
+        # $FirstArray = $JobArray
+        # foreach ($job in $FirstArray) {
+        #     $job | Receive-Job
+        #     if (!($job.State -eq "Running")) {
+        #         $JobArray.Remove($job) 
+        #     }
+        # }
+        for ($i = 0; $i -lt $JobArray.count; $i++)
+        {
+            $JobArray[$i] | Receive-Job
             if (!($job.State -eq "Running")) {
-                $JobArrayTmp = $JobArray | Where-Object { $_ –ne $job } 
+                $JobArray.RemoveAt($i)
+                $i--
             }
         }
-        $JobArray = $JobArrayTmp
+
     } while ($JobArray.count -ge $StreamCountMax)
 }
 
 do {
     Start-Sleep 1
 
-    foreach ($job in $JobArray) {
-        $job | Receive-Job
+    for ($i = 0; $i -lt $JobArray.count; $i++)
+    {
+        $JobArray[$i] | Receive-Job
         if (!($job.State -eq "Running")) {
-            $JobArray = $JobArray | Where-Object { $_ –ne $job } 
+            $JobArray.RemoveAt($i)
+            $i--
         }
     }
 } while ($JobArray.count)]]></param>

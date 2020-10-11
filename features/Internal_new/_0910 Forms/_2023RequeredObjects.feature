@@ -11,7 +11,7 @@ Feature: check required fields
 Background:
 	Given I launch TestClient opening script or connect the existing one
 	
-Scenario: check of the sign of required filling at the additional attribute and check for filling
+Scenario: _0202301 check of the sign of required filling at the additional attribute and check for filling
 	* Opening of additional details settings
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 	* Check of the sign of required filling at the additional attribute for Item
@@ -99,7 +99,8 @@ Scenario: check of the sign of required filling at the additional attribute and 
 
 
 
-
+Scenario: _999999 close TestClient session
+	And I close TestClient session
 
 
 

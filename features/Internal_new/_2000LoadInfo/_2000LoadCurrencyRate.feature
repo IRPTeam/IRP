@@ -133,3 +133,5 @@ Scenario: _020001 check load currency rate
 
 
 
+Scenario: _999999 close TestClient session
+	And I close TestClient session

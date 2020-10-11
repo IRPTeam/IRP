@@ -768,3 +768,6 @@ Scenario: _150007 check input by line in the price list for additional propertie
 		| 'Item'  | 'Size' | 'Color' |
 		| 'Dress' | '36'   | 'Black' |
 	And I close all client application windows
+
+Scenario: _999999 close TestClient session
+	And I close TestClient session

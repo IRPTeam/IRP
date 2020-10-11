@@ -1550,3 +1550,6 @@ Scenario: _015456 notification when trying to post a Sales order without filling
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Procurement method] is empty." substring will appear in 10 seconds
 		And I close all client application windows
+
+Scenario: _999999 close TestClient session
+	And I close TestClient session

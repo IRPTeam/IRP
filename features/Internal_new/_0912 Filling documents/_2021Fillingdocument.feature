@@ -6755,4 +6755,7 @@ Scenario: _0154165 check tax and net amount calculation when change total amount
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
 			And I close all client application windows			
-	
+
+
+Scenario: _999999 close TestClient session
+	And I close TestClient session

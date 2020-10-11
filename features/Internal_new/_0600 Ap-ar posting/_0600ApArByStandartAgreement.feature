@@ -422,3 +422,5 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 		| 'TRY'      | '$$PurchaseInvoice060007$$' | 'Company Veritas ' | 'Main Company' | 'Veritas' | '$$BankPayment060007$$' | 'en description is empty'      | '11 000,00' | 'No'                   |
 
 
+Scenario: _999999 close TestClient session
+	And I close TestClient session

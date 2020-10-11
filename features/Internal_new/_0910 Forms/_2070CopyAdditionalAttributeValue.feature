@@ -393,7 +393,8 @@ Scenario: _207003 copy additional atribute row in sets (isConditionSet)
 		
 		
 
-		
+Scenario: _999999 close TestClient session
+	And I close TestClient session
 				
 	
 		

@@ -624,5 +624,6 @@ Scenario: _2050008 check the availability of Purchase return and Sales return ch
 		Then the form attribute named "PartnerApTransactionsBasisDocument" became equal to "$$SalesReturn30001$$" template
 	And I close all client application windows
 
-
+Scenario: _999999 close TestClient session
+	And I close TestClient session
 

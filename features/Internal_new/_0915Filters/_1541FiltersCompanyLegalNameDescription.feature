@@ -405,7 +405,7 @@ Scenario: _028012 check Description in the document Labeling
 	When check Description
 
 
-Scenario: check the filter by Company when selecting cash/bank in Cash expense document
+Scenario: _028050 check the filter by Company when selecting cash/bank in Cash expense document
 	* Temporary filling in Cash desk 3 Second Company
 		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
 		And I go to line in "List" table
@@ -446,79 +446,80 @@ Scenario: check the filter by Company when selecting cash/bank in Cash expense d
 		And I click "Save and close" button
 
 
-Scenario: check filter by own companies in the document Cash expense
+Scenario: _028051 check filter by own companies in the document Cash expense
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 	* Check the filter for Own Company
 		When check the filter by my own company in Cash expence/Cash revenue
 
-Scenario: check filter by own companies in the document Cash revenue
+Scenario: _028052 check filter by own companies in the document Cash revenue
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 	* Check the filter for Own Company
 		When check the filter by my own company in Cash expence/Cash revenue
 
-Scenario: check the filter for Company in the document Reconcilation statement 
+Scenario: _028053 check the filter for Company in the document Reconcilation statement 
 	Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 	When check the filter by my own company in Reconcilation statement
 
-Scenario: check if the Legal name field in the Reconcilation statement is present 
+Scenario: _028054 check if the Legal name field in the Reconcilation statement is present 
 	Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 	And I click the button named "FormCreate"
 	And I click Select button of "Legal name" field
 	Then "Companies" window is opened
 	And I close all client application windows
 
-Scenario: check Description in the document Reconcilation statement 
+Scenario: _028055 check Description in the document Reconcilation statement 
 	Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 	When check Description
 
 
 
-Scenario: check Description in the document CreditNote
+Scenario: _028056 check Description in the document CreditNote
 	Given I open hyperlink "e1cib/list/Document.CreditNote"
 	When check Description
 
-Scenario: check Description in the document DebitNote
+Scenario: _028057 check Description in the document DebitNote
 	Given I open hyperlink "e1cib/list/Document.DebitNote"
 	When check Description
 
-Scenario: check the filter for Legal name in the document Goods receipt
+Scenario: _028058 check the filter for Legal name in the document Goods receipt
 	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 	And I click the button named "FormCreate"
 	And I select "Purchase" exact value from "Transaction type" drop-down list
 	When check the filter by Legal name (Ferron) in Goods receipt and Shipment confirmation
 
-Scenario: check the filter for Legal name in the document Shipment confirmation
+Scenario: _028059 check the filter for Legal name in the document Shipment confirmation
 	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 	And I click the button named "FormCreate"
 	And I select "Sales" exact value from "Transaction type" drop-down list
 	When check the filter by Legal name (Ferron) in Goods receipt and Shipment confirmation
 
-Scenario: check Description in the document Opening entry 
+Scenario: _028060 check Description in the document Opening entry 
 	Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 	When check Description
 
 
-Scenario: check filter by own companies in the document  Opening entry
+Scenario: _028061 check filter by own companies in the document  Opening entry
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 	* Check the filter for Own Company
 		When check the filter by my own company in Opening entry
 
-Scenario: check Description in the document Inventory transfer
+Scenario: _028062 check Description in the document Inventory transfer
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	When check Description
 	And I close all client application windows
 
-Scenario: check Description in the document Invoice match
+Scenario: _028063 check Description in the document Invoice match
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
 	When check Description
 	And I close all client application windows
 
-	
+Scenario: _999999 close TestClient session
+	And I close TestClient session
 
 
 

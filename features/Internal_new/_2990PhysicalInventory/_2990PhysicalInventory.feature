@@ -1494,6 +1494,7 @@ Scenario: _2990013 check the question of saving Physical inventory before creati
 
 
 
-
+Scenario: _999999 close TestClient session
+	And I close TestClient session
 
 

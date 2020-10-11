@@ -715,3 +715,6 @@ Scenario: _095007 check the legal name filling if the partner has only one
 			| 'Partner' | 'Legal name'    |
 			| 'DFC'     | 'DFC' |
 		And I close all client application windows
+
+Scenario: _999999 close TestClient session
+	And I close TestClient session

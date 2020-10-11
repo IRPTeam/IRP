@@ -633,7 +633,7 @@ Scenario: _024043 check the output of the document movement report for Sales Inv
 	And I close all client application windows
 
 
-Scenario: __02404301 clear movements Sales invoice and check that there is no movements on the registers 
+Scenario: _02404301 clear movements Sales invoice and check that there is no movements on the registers 
 	* Open list form Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	* Check the report generation

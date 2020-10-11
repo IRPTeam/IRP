@@ -761,3 +761,5 @@ Scenario: _02104801 clear movements Inventory transfer and check that there is n
 		| ''                                      | 'Expense'     | '*'      | '50'        | 'Store 01'     | 'M/White'               | ''                              | ''         | ''        |
 		And I close all client application windows
 
+Scenario: _999999 close TestClient session
+	And I close TestClient session

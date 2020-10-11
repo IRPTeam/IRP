@@ -1257,3 +1257,6 @@ Scenario: _400009 check the entry of the Ap/Ar balance by documents
 	# AccountReceivableByAgreementsPartner termEditTextChange
 	# AccountReceivableByDocumentsPartner termEditTextChange
 	# Partner termEditTextChange
+
+Scenario: _999999 close TestClient session
+	And I close TestClient session

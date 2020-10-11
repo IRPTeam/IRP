@@ -224,3 +224,4 @@ Scenario: _090220 check that the items marked for deletion is not displayed in t
 		| Description       |
 		| Box               |
 	And I close all client application windows
+

@@ -11,7 +11,7 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-Scenario: _090500 preparation (label processing)
+Scenario: _0202200 preparation (label processing)
 	* Constants
 		When set True value to the constant
 	* Load info
@@ -27,7 +27,7 @@ Scenario: _090500 preparation (label processing)
 		When Create information register PricesByItemKeys records
 		When Create information register Barcodes records
 
-Scenario: create print layout
+Scenario: _0202201 create print layout
 	* Opening the constructor
 		Given I open hyperlink "e1cib/list/Catalog.PrintTemplates"
 	* Create Label 1
@@ -88,7 +88,7 @@ Scenario: create print layout
 
 
 
-Scenario: adding items to label printing processing
+Scenario: _0202202 adding items to label printing processing
 	* Open the processing form
 		Given I open hyperlink "e1cib/app/DataProcessor.PrintLabels"
 	* Add items and selecting labels by lines
@@ -186,3 +186,5 @@ Scenario: adding items to label printing processing
 			| ''           | '' | '' | '' | '' | '' | ''           |
 			| '550'        | '' | '' | '' | '' | '' | ''           |
 
+Scenario: _999999 close TestClient session
+	And I close TestClient session

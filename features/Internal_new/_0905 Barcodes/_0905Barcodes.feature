@@ -146,6 +146,7 @@ Scenario: _090502 check barcode display by Item and item key
 	And I close all client application windows
 
 
-
+Scenario: _999999 close TestClient session
+	And I close TestClient session
 
 

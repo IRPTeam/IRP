@@ -563,5 +563,7 @@ Scenario: _299904 check filling in and re-filling Purchase return
 		And I finish line editing in "ItemList" table
 		And I close all client application windows
 
-	
+
+Scenario: _999999 close TestClient session
+	And I close TestClient session
 	

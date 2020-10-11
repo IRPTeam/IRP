@@ -614,11 +614,5 @@ Scenario: _090206 priority tax rate check on the example of Sales order
 	And I close all client application windows
 		
 
-
-
-
-	
-
-
-
-
+Scenario: _999999 close TestClient session
+	And I close TestClient session

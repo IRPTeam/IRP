@@ -989,3 +989,6 @@ Scenario: _155015 saving information about an Item without a completed item key 
 			| 'Object ref'               | 'Item'  |
 			| 'InventoryTransferOrder*'  | 'Dress' |
 		And I close all client application windows
+
+Scenario: _999999 close TestClient session
+	And I close TestClient session

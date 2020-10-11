@@ -85,6 +85,8 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 			And I input "20,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberSalesInvoice060002$$" variable
+			And I delete "$$SalesInvoice060002$$" variable
 			And I save the value of "Number" field as "$$NumberSalesInvoice060002$$"
 			And I save the window as "$$SalesInvoice060002$$"
 		* Check filling in sales invoice
@@ -140,6 +142,8 @@ Scenario: _060003 create Cash reciept with the type of settlements under standar
 			And I input "11 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberCashReceipt060003$$" variable
+		And I delete "$$CashReceipt060003$$" variable
 		And I save the value of "Number" field as "$$NumberCashReceipt060003$$"
 		And I save the window as "$$CashReceipt060003$$"
 		And I click the button named "FormPostAndClose"
@@ -184,6 +188,8 @@ Scenario: _060004 check the offset of the advance for Sales invoice with the typ
 			And I click Clear button of "Partner term" field
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberBankReceipt060004$$" variable
+		And I delete "$$BankReceipt060004$$" variable
 		And I save the value of "Number" field as "$$NumberBankReceipt060004$$"
 		And I save the window as "$$BankReceipt060004$$"
 		And I click the button named "FormPostAndClose"
@@ -219,6 +225,8 @@ Scenario: _060004 check the offset of the advance for Sales invoice with the typ
 			And I input "20,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberSalesInvoice060004$$" variable
+			And I delete "$$SalesInvoice060004$$" variable
 			And I save the value of "Number" field as "$$NumberSalesInvoice060004$$"
 			And I save the window as "$$SalesInvoice060004$$"
 			And I click the button named "FormPostAndClose"
@@ -275,6 +283,8 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Price type'               | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '20,000' | 'en description is empty' | 'pcs'  | '1 677,97'   | '9 322,03'   | '11 000,00'    | 'Store 01' |
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice060005$$" variable
+			And I delete "$$PurchaseInvoice060005$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice060005$$"
 			And I save the window as "$$PurchaseInvoice060005$$"
 	* Check movements Purchase Invoice by register PartnerApTransactions
@@ -325,6 +335,8 @@ Scenario: _060006 create Cash payment with the type of settlements under standar
 			And I input "11 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberCashPayment060006$$" variable
+			And I delete "$$CashPayment060006$$" variable
 			And I save the value of "Number" field as "$$NumberCashPayment060006$$"
 			And I save the window as "$$CashPayment060006$$"
 		And I click the button named "FormPostAndClose"
@@ -363,6 +375,8 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 			And I input "12 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberBankPayment060007$$" variable
+		And I delete "$$BankPayment060007$$" variable
 		And I save the value of "Number" field as "$$NumberBankPayment060007$$"
 		And I save the window as "$$BankPayment060007$$"
 		And I click the button named "FormPostAndClose"
@@ -402,6 +416,8 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 			And I finish line editing in "ItemList" table
 			And I input "550,00" text in "Price" field of "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice060007$$" variable
+			And I delete "$$PurchaseInvoice060007$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice060007$$"
 			And I save the window as "$$PurchaseInvoice060007$$"
 	* Check movements PurchaseInvoice by register PartnerApTransactions
@@ -422,3 +438,5 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 		| 'TRY'      | '$$PurchaseInvoice060007$$' | 'Company Veritas ' | 'Main Company' | 'Veritas' | '$$BankPayment060007$$' | 'en description is empty'      | '11 000,00' | 'No'                   |
 
 
+Scenario: _999999 close TestClient session
+	And I close TestClient session

@@ -162,6 +162,8 @@ Scenario: _2990000 preparation (product inventory)
 			And I input "400,000" text in "Quantity" field of "Inventory" table
 			And I finish line editing in "Inventory" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberOpeningEntry2990000$$" variable
+			And I delete "$$OpeningEntry2990000$$" variable
 			And I save the value of "Number" field as "$$NumberOpeningEntry2990000$$"
 			And I save the window as "$$OpeningEntry2990000$$"
 			And I click the button named "FormPostAndClose"
@@ -320,6 +322,8 @@ Scenario: _2990002 create Stock adjustment as surplus
 		| 'Dress' | '8,000'    | 'M/White'  | 'Distribution department' | 'pcs'  | 'Delivery'     | ''               |
 	* Post document
 		And I click the button named "FormPost"
+		And I delete "$$NumberStockAdjustmentAsSurplus2990002$$" variable
+		And I delete "$$StockAdjustmentAsSurplus2990002$$" variable
 		And I save the value of "Number" field as "$$NumberStockAdjustmentAsSurplus2990002$$"
 		And I save the window as "$$StockAdjustmentAsSurplus2990002$$"
 	* Check movements
@@ -434,6 +438,8 @@ Scenario: _2990003 create Stock adjustment as write off
 		| 'Dress' | '8,000'    | 'M/White'  | 'Distribution department' | 'pcs'  | 'Delivery'     | ''               |
 	* Post document
 		And I click the button named "FormPost"
+		And I delete "$$NumberStockAdjustmentAsWriteOff2990003$$" variable
+		And I delete "$$StockAdjustmentAsWriteOff2990003$$" variable
 		And I save the value of "Number" field as "$$NumberStockAdjustmentAsWriteOff2990003$$"
 		And I save the window as "$$StockAdjustmentAsWriteOff2990003$$"
 	* Check movements
@@ -535,6 +541,8 @@ Scenario: _2990004 create Physical inventory (store use GR and SC)
 		And I finish line editing in "ItemList" table
 	* Posting the document Physical inventory
 		And I click the button named "FormPost"
+		And I delete "$$NumberPhysicalInventory2990004$$" variable
+		And I delete "$$PhysicalInventory2990004$$" variable
 		And I save the value of "Number" field as "$$NumberPhysicalInventory2990004$$"
 		And I save the window as "$$PhysicalInventory2990004$$"
 		And I click "Registrations report" button
@@ -642,6 +650,8 @@ Scenario: _2990005 create Physical inventory (store doesn't use GR and SC)
 		And I finish line editing in "ItemList" table
 	* Posting the document Physical inventory
 		And I click the button named "FormPost"
+		And I delete "$$NumberPhysicalInventory2990005$$" variable
+		And I delete "$$PhysicalInventory2990005$$" variable
 		And I save the value of "Number" field as "$$NumberPhysicalInventory2990005$$"
 		And I save the window as "$$PhysicalInventory2990005$$"
 		And I click "Registrations report" button
@@ -702,6 +712,8 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 		Then the number of "ItemList" table lines is "меньше или равно" 1
 	* Posting the document and check movements
 		And I click the button named "FormPost"
+		And I delete "$$NumberStockAdjustmentAsSurplus2990006$$" variable
+		And I delete "$$StockAdjustmentAsSurplus$$" variable
 		And I save the value of "Number" field as "$$NumberStockAdjustmentAsSurplus2990006$$"
 		And I save the window as "$$StockAdjustmentAsSurplus$$"
 		And I click "Registrations report" button
@@ -792,6 +804,8 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 		Then the number of "ItemList" table lines is "меньше или равно" 1
 	* Posting the document and check movements
 		And I click the button named "FormPost"
+		And I delete "$$NumberStockAdjustmentAsWriteOff2990007$$" variable
+		And I delete "$$StockAdjustmentAsWriteOff2990007$$" variable
 		And I save the value of "Number" field as "$$NumberStockAdjustmentAsWriteOff2990007$$"
 		And I save the window as "$$StockAdjustmentAsWriteOff2990007$$"
 		And I click "Registrations report" button
@@ -1035,6 +1049,8 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 			| 'Anna Petrova' |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberPhysicalInventory2990010$$" variable
+		And I delete "$$PhysicalInventory2990010$$" variable
 		And I save the value of "Number" field as "$$NumberPhysicalInventory2990010$$"
 		And I save the window as "$$PhysicalInventory2990010$$"
 	* Create Physical count by locatio
@@ -1494,6 +1510,7 @@ Scenario: _2990013 check the question of saving Physical inventory before creati
 
 
 
-
+Scenario: _999999 close TestClient session
+	And I close TestClient session
 
 

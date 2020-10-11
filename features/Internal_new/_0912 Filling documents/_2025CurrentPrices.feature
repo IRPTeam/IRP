@@ -178,3 +178,7 @@ Scenario: _01202504 check current price in the Purchase invoice
 		| 'Item'       | 'Price' | 'Item key' | 'Price type'    | 'Q'     |
 		| 'High shoes' | '50,00' | '37/19SD'  | 'Current Price' | '1,000' |
 		And I close all client application windows
+
+
+Scenario: _999999 close TestClient session
+	And I close TestClient session

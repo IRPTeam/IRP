@@ -124,6 +124,8 @@ Scenario: _028501 create document Sales return, store use Goods receipt, without
 	| 'Item'     | 'Item key'  | 'Store'    |
 	| 'Dress'    |  'L/Green'  | 'Store 02' |
 	And I click the button named "FormPost"
+	And I delete "$$NumberSalesReturn028501$$" variable
+	And I delete "$$SalesReturn028501$$" variable
 	And I save the value of "Number" field as "$$NumberSalesReturn028501$$"
 	And I save the window as "$$SalesReturn028501$$"
 	And I click the button named "FormPostAndClose"
@@ -207,6 +209,8 @@ Scenario: _028508 create document Sales return, store doesn't use Goods receipt,
 	And I input "466,10" text in "Price" field of "ItemList" table
 	And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberSalesReturn028508$$" variable
+	And I delete "$$SalesReturn028508$$" variable
 	And I save the value of "Number" field as "$$NumberSalesReturn028508$$"
 	And I save the window as "$$SalesReturn028508$$"
 	And I click the button named "FormPostAndClose"
@@ -272,6 +276,8 @@ Scenario: _028515 create document Sales return, store use Goods receipt, based o
 		Then the form attribute named "Store" became equal to "Store 02"
 	And I input "466,10" text in "Price" field of "ItemList" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberSalesReturn028515$$" variable
+	And I delete "$$SalesReturn028515$$" variable
 	And I save the value of "Number" field as "$$NumberSalesReturn028515$$"
 	And I save the window as "$$SalesReturn028515$$"
 	And I click the button named "FormPostAndClose"
@@ -335,6 +341,8 @@ Scenario: _028522 create document Sales return, store doesn't use Goods receipt,
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 	And I click the button named "FormPost"
+	And I delete "$$NumberSalesReturn028522$$" variable
+	And I delete "$$SalesReturn028522$$" variable
 	And I save the value of "Number" field as "$$NumberSalesReturn028522$$"
 	And I save the window as "$$SalesReturn028522$$"
 	And I click the button named "FormPostAndClose"

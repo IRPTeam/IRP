@@ -537,3 +537,6 @@ Scenario: _201006 check filling in Store field in the Goods receipt
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |
 			And I close all client application windows
+
+Scenario: _999999 close TestClient session
+	And I close TestClient session

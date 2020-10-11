@@ -94,4 +94,4 @@ Scenario: _351002 check user password generation from enterprise mode
                 Then I connect launched Test client "Этот клиент"
                 
 Scenario: _999999 close TestClient session
-	And I close TestClient session
+        And I close TestClient session

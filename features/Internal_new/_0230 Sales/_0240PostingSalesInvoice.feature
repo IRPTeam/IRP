@@ -358,6 +358,8 @@ Scenario: _024034 Sales invoice creation on set, store use Goods receipt
 		And I finish line editing in "ItemList" table
 	And I move to "Item list" tab
 	And I click the button named "FormPost"
+	And I delete "$$NumberSalesInvoice024034$$" variable
+	And I delete "$$SalesInvoice024034$$" variable
 	And I save the value of "Number" field as "$$NumberSalesInvoice024034$$"
 	And I save the window as "$$SalesInvoice024034$$"
 	And I click the button named "FormPostAndClose"
@@ -633,7 +635,7 @@ Scenario: _024043 check the output of the document movement report for Sales Inv
 	And I close all client application windows
 
 
-Scenario: __02404301 clear movements Sales invoice and check that there is no movements on the registers 
+Scenario: _02404301 clear movements Sales invoice and check that there is no movements on the registers 
 	* Open list form Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	* Check the report generation

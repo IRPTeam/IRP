@@ -296,6 +296,8 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I finish line editing in "ItemKeyList" table
 	* Posting document
 		And I click the button named "FormPost"
+		And I delete "$$PriceListBasicPriceByItemKey016001$$" variable
+		And I delete "$$NumberPriceListBasicPriceByItemKey016001$$" variable
 		And I save the window as "$$PriceListBasicPriceByItemKey016001$$"
 		And I save the value of the field named "Number" as "$$NumberPriceListBasicPriceByItemKey016001$$"
 		And I click the button named "FormPostAndClose"
@@ -565,6 +567,8 @@ Scenario: _016002 base price fill and special price fill (not incl. VAT)
 		And I finish line editing in "ItemKeyList" table
 	* Posting document
 		And I click the button named "FormPost"
+		And I delete "$$PriceListBasicPriceByItemKey016002$$" variable
+		And I delete "$$NumberPriceListBasicPriceByItemKey016002$$" variable
 		And I save the window as "$$PriceListBasicPriceByItemKey016002$$"
 		And I save the value of the field named "Number" as "$$NumberPriceListBasicPriceByItemKey016002$$"
 		And I click the button named "FormPostAndClose"
@@ -651,6 +655,8 @@ Scenario: _016010 check dependent prices calculation
 			| 'Dress'      | '572,00'   | 'XS/Blue'   |
 	* Posting document
 		And I click the button named "FormPost"
+		And I delete "$$PriceListBasicPriceByItemKey016010$$" variable
+		And I delete "$$NumberPriceListBasicPriceByItemKey016010$$" variable
 		And I save the window as "$$PriceListBasicPriceByItemKey016010$$"
 		And I save the value of the field named "Number" as "$$NumberPriceListBasicPriceByItemKey016010$$"
 		And I click the button named "FormPostAndClose"

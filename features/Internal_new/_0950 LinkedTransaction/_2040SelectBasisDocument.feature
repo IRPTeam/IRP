@@ -129,11 +129,9 @@ Scenario: _2040001 preparation
 		* Specify shipping scheme
 			And I move to "Other" tab
 			And I remove checkbox "Shipment confirmations before sales invoice"
-			// And I input "8 007" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "9 000" text in "Number" field
 			And I click the button named "FormPost"
+			And I delete "$$SalesOrder20400011$$" variable
+			And I delete "$$NumberSalesOrder20400011$$" variable
 			And I save the window as "$$SalesOrder20400011$$"
 			And I save the value of "Number" field as "$$NumberSalesOrder20400011$$"
 			And I click the button named "FormPostAndClose"
@@ -208,11 +206,9 @@ Scenario: _2040001 preparation
 		* Specify shipping scheme and document number
 			And I move to "Other" tab
 			And I set checkbox "Shipment confirmations before sales invoice"
-			// And I input "9 001" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "9 001" text in "Number" field
 			And I click the button named "FormPost"
+			And I delete "$$SalesOrder20400012$$" variable
+			And I delete "$$NumberSalesOrder20400012$$" variable
 			And I save the window as "$$SalesOrder20400012$$"
 			And I save the value of "Number" field as "$$NumberSalesOrder20400012$$"
 			And I click the button named "FormPostAndClose"
@@ -287,11 +283,9 @@ Scenario: _2040001 preparation
 		* Specify shipping scheme and document number
 			And I move to "Other" tab
 			And I remove checkbox "Shipment confirmations before sales invoice"
-			// And I input "9 002" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "9 002" text in "Number" field
 			And I click the button named "FormPost"
+			And I delete "$$SalesOrder20400013$$" variable
+			And I delete "$$NumberSalesOrder20400013$$" variable
 			And I save the window as "$$SalesOrder20400013$$"
 			And I save the value of "Number" field as "$$NumberSalesOrder20400013$$"
 			And I click the button named "FormPostAndClose"
@@ -366,11 +360,9 @@ Scenario: _2040001 preparation
 		* Specify shipping scheme
 			And I move to "Other" tab
 			And I remove checkbox "Shipment confirmations before sales invoice"
-			// And I input "9 004" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "9 004" text in "Number" field
 			And I click the button named "FormPost"
+			And I delete "$$SalesOrder20400014$$" variable
+			And I delete "$$NumberSalesOrder20400014$$" variable
 			And I save the window as "$$SalesOrder20400014$$"
 			And I save the value of "Number" field as "$$NumberSalesOrder20400014$$"
 			And I click the button named "FormPostAndClose"
@@ -445,10 +437,9 @@ Scenario: _2040001 preparation
 		* Specify shipping scheme and document number
 			And I move to "Other" tab
 			And I remove checkbox "Shipment confirmations before sales invoice"
-			// And I input "9 005" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
 			And I click the button named "FormPost"
+			And I delete "$$SalesOrder20400015$$" variable
+			And I delete "$$NumberSalesOrder20400015$$" variable
 			And I save the window as "$$SalesOrder20400015$$"
 			And I save the value of "Number" field as "$$NumberSalesOrder20400015$$"
 			And I click the button named "FormPostAndClose"
@@ -487,11 +478,9 @@ Scenario: _2040001 preparation
 		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
-		// And I input "5 607" text in "Number" field
-		// Then "1C:Enterprise" window is opened
-		// And I click "Yes" button
-		// And I input "8 999" text in "Number" field
 		And I click the button named "FormPost"
+		And I delete "$$ShipmentConfirmation0400016$$" variable
+		And I delete "$$NumberShipmentConfirmation20400016$$" variable
 		And I save the window as "$$ShipmentConfirmation0400016$$"
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation20400016$$"
 		And I click the button named "FormPostAndClose"
@@ -531,11 +520,9 @@ Scenario: _2040001 preparation
 		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
-		// And I input "5 607" text in "Number" field
-		// Then "1C:Enterprise" window is opened
-		// And I click "Yes" button
-		// And I input "9 000" text in "Number" field
 		And I click the button named "FormPost"
+		And I delete "$$ShipmentConfirmation0400017$$" variable
+		And I delete "$$NumberShipmentConfirmation20400017$$" variable
 		And I save the window as "$$ShipmentConfirmation0400017$$"
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation20400017$$"
 		And I click the button named "FormPostAndClose"
@@ -549,6 +536,8 @@ Scenario: _2040001 preparation
 		And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
 		And I move to "Other" tab
 		And I click the button named "FormPost"
+		And I delete "$$ShipmentConfirmation20400018$$" variable
+		And I delete "$$NumberShipmentConfirmation20400018$$" variable
 		And I save the window as "$$ShipmentConfirmation20400018$$"
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation20400018$$"
 		And I click the button named "FormPostAndClose"
@@ -605,6 +594,8 @@ Scenario: _2040001 preparation
 			And I finish line editing in "ItemList" table
 		* Post document
 			And I click the button named "FormPost"
+			And I delete "$$PurchaseOrder20400019$$" variable
+			And I delete "$$NumberPurchaseOrder20400019$$" variable
 			And I save the window as "$$PurchaseOrder20400019$$"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder20400019$$"
 			And I click the button named "FormPostAndClose"
@@ -659,11 +650,9 @@ Scenario: _2040001 preparation
 		* Specify shipping scheme and document number
 			And I move to "Other" tab
 			And I set checkbox "Goods receipt before purchase invoice"
-			// And I input "9 001" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "9 001" text in "Number" field
 			And I click the button named "FormPost"
+			And I delete "$$PurchaseOrder204000110$$" variable
+			And I delete "$$NumberPurchaseOrder204000110$$" variable
 			And I save the window as "$$PurchaseOrder204000110$$"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder204000110$$"
 			And I click the button named "FormPostAndClose"
@@ -738,11 +727,9 @@ Scenario: _2040001 preparation
 			And I finish line editing in "ItemList" table
 		* Specify shipping scheme and document number
 			And I move to "Other" tab
-			// And I input "9 003" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "9 003" text in "Number" field
 			And I click the button named "FormPost"
+			And I delete "$$PurchaseOrder204000111$$" variable
+			And I delete "$$NumberPurchaseOrder204000111$$" variable
 			And I save the window as "$$PurchaseOrder204000111$$"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder204000111$$"
 			And I click the button named "FormPostAndClose"
@@ -833,11 +820,9 @@ Scenario: _2040001 preparation
 		* Change document number
 			And I move to "Other" tab
 			And I remove checkbox "Goods receipt before purchase invoice"
-			// And I input "9 004" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "9 004" text in "Number" field
 			And I click the button named "FormPost"
+			And I delete "$$PurchaseOrder204000112$$" variable
+			And I delete "$$NumberPurchaseOrder204000112$$" variable
 			And I save the window as "$$PurchaseOrder204000112$$"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder204000112$$"
 			And I click the button named "FormPostAndClose"
@@ -928,11 +913,9 @@ Scenario: _2040001 preparation
 		* Change document number
 			And I move to "Other" tab
 			And I remove checkbox "Goods receipt before purchase invoice"
-			// And I input "9 005" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "9 005" text in "Number" field
 			And I click the button named "FormPost"
+			And I delete "$$PurchaseOrder204000113$$" variable
+			And I delete "$$NumberPurchaseOrder204000113$$" variable
 			And I save the window as "$$PurchaseOrder204000113$$"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder204000113$$"
 			And I click the button named "FormPostAndClose"
@@ -1033,11 +1016,9 @@ Scenario: _2040001 preparation
 		* Change document number
 			And I move to "Other" tab
 			And I remove checkbox "Goods receipt before purchase invoice"
-			// And I input "9 002" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "9 002" text in "Number" field
 			And I click the button named "FormPost"
+			And I delete "$$PurchaseOrder204000114$$" variable
+			And I delete "$$NumberPurchaseOrder204000114$$" variable
 			And I save the window as "$$PurchaseOrder204000114$$"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder204000114$$"
 			And I click the button named "FormPostAndClose"
@@ -1097,11 +1078,9 @@ Scenario: _2040001 preparation
 		* Specify shipping scheme and document number
 			And I move to "Other" tab
 			And I set checkbox "Goods receipt before purchase invoice"
-			// And I input "9 006" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "9 006" text in "Number" field
 			And I click the button named "FormPost"
+			And I delete "$$PurchaseOrder204000115$$" variable
+			And I delete "$$NumberPurchaseOrder204000115$$" variable
 			And I save the window as "$$PurchaseOrder204000115$$"
 			And I save the value of "Number" field as "$$NumberPurchaseOrder204000115$$"
 			And I click the button named "FormPostAndClose"
@@ -1166,6 +1145,8 @@ Scenario: _2040002 Sales order selection button in the Sales invoice document
 		| 'Boots, 37/18SD, pcs, 1,000' | 'No'  |
 		And I click "Cancel" button
 		And I click the button named "FormPost"
+		And I delete "$$SalesInvoice20400022$$" variable
+		And I delete "$$NumberSalesInvoice20400022$$" variable
 		And I save the window as "$$SalesInvoice20400022$$"
 		And I save the value of "Number" field as "$$NumberSalesInvoice20400022$$"
 		And I click the button named "FormPostAndClose"
@@ -1194,6 +1175,8 @@ Scenario: _2040002 Sales order selection button in the Sales invoice document
 			And I click the button named "FormSelectAll"
 			And I click "Ok" button
 			And I click the button named "FormPost"
+			And I delete "$$SalesInvoice2040002$$" variable
+			And I delete "$$NumberSalesInvoice2040002$$" variable
 			And I save the window as "$$SalesInvoice2040002$$"
 			And I save the value of "Number" field as "$$NumberSalesInvoice2040002$$"
 			And I click the button named "FormPostAndClose"
@@ -1227,6 +1210,8 @@ Scenario: _2040002 Sales order selection button in the Sales invoice document
 			And I click the button named "FormSelectAll"
 			And I click "Ok" button
 			And I click the button named "FormPost"
+			And I delete "$$SalesInvoice20400021$$" variable
+			And I delete "$$NumberSalesInvoice20400021$$" variable
 			And I save the window as "$$SalesInvoice20400021$$"
 			And I save the value of "Number" field as "$$NumberSalesInvoice20400021$$"
 			And I click the button named "FormPostAndClose"
@@ -1428,6 +1413,8 @@ Scenario: _2040005 purchase order selection button in Purchase invoice document
 		| 'Boots, 36/18SD, Boots (12 pcs), 3,000' |
 		And I click "Cancel" button
 		And I click the button named "FormPost"
+		And I delete "$$PurchaseInvoice2040005$$" variable
+		And I delete "$$NumberPurchaseInvoice2040005$$" variable
 		And I save the window as "$$PurchaseInvoice2040005$$"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice2040005$$"
 		And I click the button named "FormPostAndClose"
@@ -1456,6 +1443,8 @@ Scenario: _2040005 purchase order selection button in Purchase invoice document
 			And I click the button named "FormSelectAll"
 			And I click "Ok" button
 			And I click the button named "FormPost"
+			And I delete "$$PurchaseInvoice20400051$$" variable
+			And I delete "$$NumberPurchaseInvoice20400051$$" variable
 			And I save the window as "$$PurchaseInvoice20400051$$"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice20400051$$"
 			And I click the button named "FormPostAndClose"
@@ -1494,6 +1483,8 @@ Scenario: _2040005 purchase order selection button in Purchase invoice document
 			And I go to the last line in "ItemList" table
 			And I delete a line in "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$PurchaseInvoice20400052$$" variable
+			And I delete "$$NumberPurchaseInvoice20400052$$" variable
 			And I save the window as "$$PurchaseInvoice20400052$$"
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice20400052$$"
 			And I click the button named "FormPostAndClose"
@@ -1592,6 +1583,8 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 		Then the number of "DocumentsTree" table lines is "меньше или равно" 11
 		And I click "Cancel" button
 		And I click the button named "FormPost"
+		And I delete "$$GoodsReceipt2040006$$" variable
+		And I delete "$$NumberGoodsReceipt2040006$$" variable
 		And I save the window as "$$GoodsReceipt2040006$$"
 		And I save the value of "Number" field as "$$NumberGoodsReceipt2040006$$"
 		And I click the button named "FormPostAndClose"
@@ -1657,6 +1650,8 @@ Scenario: _2040006 button for filling items from the base documents in Goods rec
 			And I select current line in "List" table
 		# temporarily
 			And I click the button named "FormPost"
+			And I delete "$$GoodsReceipt20400061$$" variable
+			And I delete "$$NumberGoodsReceipt20400061$$" variable
 			And I save the window as "$$GoodsReceipt20400061$$"
 			And I save the value of "Number" field as "$$NumberGoodsReceipt20400061$$"
 			And I click the button named "FormPostAndClose"

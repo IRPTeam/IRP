@@ -81,6 +81,8 @@ Scenario: _029601 create Unbundling on a product with a specification (specifica
 		And I move to "Item list" tab
 		And in the table "ItemList" I click "By specification" button
 		And I click the button named "FormPost"
+		And I delete "$$NumberUnbundling0029601$$" variable
+		And I delete "$$Unbundling0029601$$" variable
 		And I save the value of "Number" field as "$$NumberUnbundling0029601$$"
 		And I save the window as "$$Unbundling0029601$$"
 		And I click the button named "FormPostAndClose"
@@ -146,6 +148,8 @@ Scenario: _029604 create Unbundling on a product with a specification (specifica
 		And I move to "Item list" tab
 		And in the table "ItemList" I click "By specification" button
 		And I click the button named "FormPost"
+		And I delete "$$NumberUnbundling0029604$$" variable
+		And I delete "$$Unbundling0029604$$" variable
 		And I save the value of "Number" field as "$$NumberUnbundling0029604$$"
 		And I save the window as "$$Unbundling0029604$$"
 		And I click the button named "FormPostAndClose"
@@ -195,6 +199,8 @@ Scenario: _029609 create Goods receipt and Shipment confirmation based on Unbund
 		And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
 		Then the form attribute named "Company" became equal to "Main Company"
 		And I click the button named "FormPost"
+		And I delete "$$NumberShipmentConfirmation0029609$$" variable
+		And I delete "$$ShipmentConfirmation0029609$$" variable
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation0029609$$"
 		And I save the window as "$$ShipmentConfirmation0029609$$"
 		And I click the button named "FormPostAndClose"
@@ -202,6 +208,8 @@ Scenario: _029609 create Goods receipt and Shipment confirmation based on Unbund
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
 		Then the form attribute named "Company" became equal to "Main Company"
 		And I click the button named "FormPost"
+		And I delete "$$NumberGoodsReceipt0029609$$" variable
+		And I delete "$$GoodsReceipt0029609$$" variable
 		And I save the value of "Number" field as "$$NumberGoodsReceipt0029609$$"
 		And I save the window as "$$GoodsReceipt0029609$$"
 		And I click the button named "FormPostAndClose"
@@ -274,6 +282,8 @@ Scenario: _029610 create Unbundling (+check movements) for bundl which was creat
 		And I move to "Item list" tab
 		And in the table "ItemList" I click "By specification" button
 		And I click the button named "FormPost"
+		And I delete "$$NumberUnbundling0029610$$" variable
+		And I delete "$$Unbundling0029610$$" variable
 		And I save the value of "Number" field as "$$NumberUnbundling0029610$$"
 		And I save the window as "$$Unbundling0029610$$"
 		And I click the button named "FormPostAndClose"
@@ -332,6 +342,8 @@ Scenario: _029611 create Unbundling (+check movements) for bundl (there is a Bun
 			| 'Chewing gum' | '2,000'    | 'Mint/Mango' | 'pcs'  |
 			| 'Skittles'    | '2,000'    | 'Fruit'      | 'pcs'  |
 		And I click the button named "FormPost"
+		And I delete "$$NumberUnbundling0029611$$" variable
+		And I delete "$$Unbundling0029611$$" variable
 		And I save the value of "Number" field as "$$NumberUnbundling0029611$$"
 		And I save the window as "$$Unbundling0029611$$"
 		And I click the button named "FormPostAndClose"
@@ -376,6 +388,8 @@ Scenario: _029612 create Unbundling (Store use Goods receipt and doesn't use Shi
 		And in the table "ItemList" I click "By specification" button
 	* Check movements
 		And I click the button named "FormPost"
+		And I delete "$$NumberUnbundling0029612$$" variable
+		And I delete "$$Unbundling0029612$$" variable
 		And I save the value of "Number" field as "$$NumberUnbundling0029612$$"
 		And I save the window as "$$Unbundling0029612$$"
 		And Delay 5
@@ -435,6 +449,8 @@ Scenario: _029613 create Unbundling (Store use Shipment confirmation and does no
 		And in the table "ItemList" I click "By specification" button
 	* Check movements
 		And I click the button named "FormPost"
+		And I delete "$$NumberUnbundling0029613$$" variable
+		And I delete "$$Unbundling0029613$$" variable
 		And I save the value of "Number" field as "$$NumberUnbundling0029613$$"
 		And I save the window as "$$Unbundling0029613$$"
 		And Delay 5
@@ -578,3 +594,6 @@ Scenario: _300520 check connection to Unbundling report "Related documents"
 		And Delay 1
 	Then "Related documents" window is opened
 	And I close all client application windows
+
+Scenario: _999999 close TestClient session
+	And I close TestClient session

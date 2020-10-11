@@ -1238,3 +1238,5 @@ Scenario: _200032 check the availability of editing custom settings from the use
 	
 
 
+Scenario: _999999 close TestClient session
+	And I close TestClient session

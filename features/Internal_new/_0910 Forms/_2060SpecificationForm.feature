@@ -9,7 +9,7 @@ Feature: check specification filling
 Background:
 	Given I launch TestClient opening script or connect the existing one
 	
-Scenario: preparation (specification)
+Scenario: _206000 preparation (specification)
 	* Constants
 		When set True value to the constant
 	* Load info
@@ -190,7 +190,7 @@ Scenario: _206001 check message output when creating a Bundle with empty item
 	And I close all client application windows
 
 
-Scenario: create a specification double
+Scenario: _206000 create a specification double
 	# the double is created for the A-8 specification
 	* Open specification catalog
 		Given I open hyperlink "e1cib/list/Catalog.Specifications"
@@ -274,4 +274,5 @@ Scenario: create a specification double
 		And I close all client application windows
 
 
-
+Scenario: _999999 close TestClient session
+	And I close TestClient session

@@ -183,6 +183,8 @@ Scenario: _051001 create Cash payment (independently)
 			And I input "1000,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberCashPayment0510011$$" variable
+		And I delete "$$CashPayment0510011$$" variable
 		And I save the value of "Number" field as "$$NumberCashPayment0510011$$"
 		And I save the window as "$$CashPayment0510011$$"
 		And I click the button named "FormPostAndClose"
@@ -242,6 +244,8 @@ Scenario: _051001 create Cash payment (independently)
 			And I input "20,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberCashPayment0510012$$" variable
+		And I delete "$$CashPayment0510012$$" variable
 		And I save the value of "Number" field as "$$NumberCashPayment0510012$$"
 		And I save the window as "$$CashPayment0510012$$"
 		And I click the button named "FormPostAndClose"
@@ -293,6 +297,8 @@ Scenario: _051001 create Cash payment (independently)
 			And I input "150,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberCashPayment0510013$$" variable
+		And I delete "$$CashPayment0510013$$" variable
 		And I save the value of "Number" field as "$$NumberCashPayment0510013$$"
 		And I save the window as "$$CashPayment0510013$$"
 		And I click the button named "FormPostAndClose"

@@ -169,6 +169,8 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
         |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
 	* Post Retail sales receipt and check movements in the register Sales turnovers
 		And I click the button named "FormPost"
+		And I delete "$$RetailSalesReceipt092002$$" variable
+		And I delete "$$NumberRetailSalesReceipt092002$$" variable
 		And I save the window as "$$RetailSalesReceipt092002$$"
 		And I save the value of the field named "Number" as "$$NumberRetailSalesReceipt092002$$"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
@@ -345,6 +347,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I select current line in "List" table	
 	* Post Retail return receipt and check movements in the register Sales turnovers
 		And I click the button named "FormPost"
+		And I delete "$$RetailReturnReceipt092003$$" variable
 		And I save the window as "$$RetailReturnReceipt092003$$"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
 		And "List" table contains lines
@@ -564,6 +567,8 @@ Scenario: _092004 check serial lot number in the Sales invoice
         |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
 	* Post Retail sales receipt and check movements in the register Sales turnovers
 		And I click the button named "FormPost"
+		And I delete "$$SalesInvoice092004$$" variable
+		And I delete "$$NumberSalesInvoice092004$$" variable
 		And I save the window as "$$SalesInvoice092004$$"
 		And I save the value of the field named "Number" as "$$NumberSalesInvoice092004$$"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
@@ -719,6 +724,7 @@ Scenario: _092005 check serial lot number in the Sales return
         |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
 	* Post Retail return receipt and check movements in the register Sales turnovers
 		And I click the button named "FormPost"
+		And I delete "$$SalesReturn092005$$" variable
 		And I save the window as "$$SalesReturn092005$$"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
 		And "List" table contains lines

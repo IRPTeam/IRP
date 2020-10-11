@@ -84,6 +84,8 @@ Scenario: _080001 create Incoming payment order
 		And I input "1 000,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberIncomingPaymentOrder080001$$" variable
+	And I delete "$$IncomingPaymentOrder080001$$" variable
 	And I save the value of "Number" field as "$$NumberIncomingPaymentOrder080001$$"
 	And I save the window as "$$IncomingPaymentOrder080001$$"
 	And I click the button named "FormPostAndClose"
@@ -177,6 +179,8 @@ Scenario: _080005 create Bank reciept based on Incoming payment order
 		And I input "250,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberBankReceipt0800051$$" variable
+		And I delete "$$BankReceipt080005$$" variable
 		And I save the value of "Number" field as "$$NumberBankReceipt0800051$$"
 		And I save the window as "$$BankReceipt080005$$"
 		And I click the button named "FormPostAndClose"
@@ -192,15 +196,17 @@ Scenario: _080005 create Bank reciept based on Incoming payment order
 		And I input "250,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberBankReceipt0800051$$" variable
+		And I delete "$$BankReceipt0800051$$" variable
 		And I save the value of "Number" field as "$$NumberBankReceipt0800051$$"
-		And I save the window as "$$BankReceipt080005$$"
+		And I save the window as "$$BankReceipt0800051$$"
 		And I click the button named "FormPostAndClose"
 	* Check movements by register Planing cash transactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
 		And "List" table contains lines
 		| 'Currency' | 'Recorder'              | 'Basis document'                 | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'  | 'Legal name' | 'Amount'  |
 		| 'USD'      | '$$BankReceipt080005$$' | '$$IncomingPaymentOrder080001$$' | 'Main Company' | 'Bank account, USD' | 'Incoming'            | 'Lomaniti' | '*'          | '-250,00' |
-		| 'USD'      | '$$BankReceipt080005$$' | '$$IncomingPaymentOrder080001$$' | 'Main Company' | 'Bank account, USD' | 'Incoming'            | 'Lomaniti' | '*'          | '-250,00' |
+		| 'USD'      | '$$BankReceipt0800051$$' | '$$IncomingPaymentOrder080001$$' | 'Main Company' | 'Bank account, USD' | 'Incoming'            | 'Lomaniti' | '*'          | '-250,00' |
 	
 
 Scenario: _080006 create Outgoing payment order
@@ -241,6 +247,8 @@ Scenario: _080006 create Outgoing payment order
 		And I input "3 000,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberOutgoingPaymentOrder080006$$" variable
+	And I delete "$$OutgoingPaymentOrder080006$$" variable
 	And I save the value of "Number" field as "$$NumberOutgoingPaymentOrder080006$$"
 	And I save the window as "$$OutgoingPaymentOrder080006$$"
 	And I click the button named "FormPostAndClose"
@@ -334,6 +342,8 @@ Scenario: _080010 create Bank payment based on Outgoing payment order
 		And I input "250,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberBankPayment08000101$$" variable
+		And I delete "$$BankPayment08000101$$" variable
 		And I save the value of "Number" field as "$$NumberBankPayment08000101$$"
 		And I save the window as "$$BankPayment08000101$$"
 		And I click the button named "FormPostAndClose"
@@ -349,6 +359,8 @@ Scenario: _080010 create Bank payment based on Outgoing payment order
 		And I input "250,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberBankPayment08000102$$" variable
+		And I delete "$$BankPayment08000102$$" variable
 		And I save the value of "Number" field as "$$NumberBankPayment08000102$$"
 		And I save the window as "$$BankPayment08000102$$"
 		And I click the button named "FormPostAndClose"

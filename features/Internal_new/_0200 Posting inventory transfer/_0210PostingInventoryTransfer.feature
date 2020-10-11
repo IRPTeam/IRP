@@ -104,6 +104,8 @@ Scenario: _021001 create document Inventory Transfer - Store sender doesn't use 
 		| '$$InventoryTransferOrder020001$$' | 'Dress' | '50,000'   | 'M/White'  | 'pcs'  |
 		| '$$InventoryTransferOrder020001$$' | 'Dress' | '10,000'   | 'S/Yellow' | 'pcs'  |
 		And I click the button named "FormPost"
+		And I delete "$$NumberInventoryTransfer021001$$" variable
+		And I delete "$$InventoryTransfer021001$$" variable
 		And I save the value of "Number" field as "$$NumberInventoryTransfer021001$$"
 		And I save the window as "$$InventoryTransfer021001$$"
 		And I click the button named "FormPostAndClose"
@@ -175,6 +177,8 @@ Scenario: _021006 create document Inventory Transfer - Store sender use Shipment
 		| '#' | 'Inventory transfer order'         | 'Item'  | 'Quantity' | 'Item key' | 'Unit' |
 		| '1' | '$$InventoryTransferOrder020004$$' | 'Dress' | '20,000'   | 'L/Green'  | 'pcs'  |
 		And I click the button named "FormPost"
+		And I delete "$$NumberInventoryTransfer021006$$" variable
+		And I delete "$$InventoryTransfer021006$$" variable
 		And I save the value of "Number" field as "$$NumberInventoryTransfer021006$$"
 		And I save the window as "$$InventoryTransfer021006$$"
 		And I click the button named "FormPostAndClose"
@@ -242,6 +246,8 @@ Scenario: _021012 create document Inventory Transfer - Store sender use Shipment
 		| '#' | 'Inventory transfer order'         | 'Item'  | 'Quantity' | 'Item key' | 'Unit' |
 		| '1' | '$$InventoryTransferOrder020007$$' | 'Dress' | '17,000'   | 'L/Green'  | 'pcs'  |
 		And I click the button named "FormPost"
+		And I delete "$$NumberInventoryTransfer021012$$" variable
+		And I delete "$$InventoryTransfer021012$$" variable
 		And I save the value of "Number" field as "$$NumberInventoryTransfer021012$$"
 		And I save the window as "$$InventoryTransfer021012$$"
 		And I click the button named "FormPostAndClose"
@@ -309,6 +315,8 @@ Scenario: _021018 create document Inventory Transfer - Store sender doesn't use 
 		| '#' | 'Inventory transfer order'         | 'Item'     | 'Quantity' | 'Item key'  | 'Unit' |
 		| '1' | '$$InventoryTransferOrder020010$$' | 'Trousers' | '10,000'   | '36/Yellow' | 'pcs'  |
 		And I click the button named "FormPost"
+		And I delete "$$NumberInventoryTransfer021018$$" variable
+		And I delete "$$InventoryTransfer021018$$" variable
 		And I save the value of "Number" field as "$$NumberInventoryTransfer021018$$"
 		And I save the window as "$$InventoryTransfer021018$$"
 		And I click the button named "FormPostAndClose"
@@ -397,6 +405,8 @@ Scenario: _021024 create document Inventory Transfer - Store sender doesn't use 
 	And I input "7,000" text in "Quantity" field of "ItemList" table
 	And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberInventoryTransfer021024$$" variable
+	And I delete "$$InventoryTransfer021024$$" variable
 	And I save the value of "Number" field as "$$NumberInventoryTransfer021024$$"
 	And I save the window as "$$InventoryTransfer021024$$"
 	And I click the button named "FormPostAndClose"
@@ -525,6 +535,8 @@ Scenario: _021036 create document Inventory Transfer - Store sender use Shipment
 	And I input "4,000" text in "Quantity" field of "ItemList" table
 	And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberInventoryTransfer021036$$" variable
+	And I delete "$$InventoryTransfer021036$$" variable
 	And I save the value of "Number" field as "$$NumberInventoryTransfer021036$$"
 	And I save the window as "$$InventoryTransfer021036$$"
 	And I click the button named "FormPostAndClose"
@@ -609,6 +621,8 @@ Scenario: _021042 create document Inventory Transfer - Store sender doesn't use 
 	And I input "4,000" text in "Quantity" field of "ItemList" table
 	And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberInventoryTransfer021042$$" variable
+	And I delete "$$InventoryTransfer021042$$" variable
 	And I save the value of "Number" field as "$$NumberInventoryTransfer021042$$"
 	And I save the window as "$$InventoryTransfer021042$$"
 	And I click the button named "FormPostAndClose"
@@ -761,3 +775,5 @@ Scenario: _02104801 clear movements Inventory transfer and check that there is n
 		| ''                                      | 'Expense'     | '*'      | '50'        | 'Store 01'     | 'M/White'               | ''                              | ''         | ''        |
 		And I close all client application windows
 
+Scenario: _999999 close TestClient session
+	And I close TestClient session

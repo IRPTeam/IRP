@@ -85,6 +85,8 @@ Scenario: _054001 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 		And I input "01.07.2019  0:00:00" text in "Send date" field
 		And I input "01.07.2019  0:00:00" text in "Receive date" field
 	And I click the button named "FormPost"
+	And I delete "$$NumberCashTransferOrder054001$$" variable
+	And I delete "$$CashTransferOrder054001$$" variable
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054001$$"
 	And I save the window as "$$CashTransferOrder054001$$"
 	And I click the button named "FormPostAndClose"
@@ -144,6 +146,8 @@ Scenario: _054003 create Cash payment and Cash reciept based on Cash transfer or
 		| 'Planning transaction basis'    | 'Amount' |
 		| '$$CashTransferOrder054001$$'             | '500,00' |
 	And I click the button named "FormPost"
+	And I delete "$$NumberCashPayment054003$$" variable
+	And I delete "$$CashPayment054003$$" variable
 	And I save the value of "Number" field as "$$NumberCashPayment054003$$"
 	And I save the window as "$$CashPayment054003$$"
 	And I click the button named "FormPostAndClose"
@@ -159,6 +163,8 @@ Scenario: _054003 create Cash payment and Cash reciept based on Cash transfer or
 		And I input "400,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberCashReceipt054003$$" variable
+		And I delete "$$CashReceipt054003$$" variable
 		And I save the value of "Number" field as "$$NumberCashReceipt054003$$"
 		And I save the window as "$$CashReceipt054003$$"
 		And I click the button named "FormPostAndClose"
@@ -175,6 +181,8 @@ Scenario: _054003 create Cash payment and Cash reciept based on Cash transfer or
 		| 'Planning transaction basis'   | 'Amount' |
 		| '$$CashTransferOrder054001$$'      | '100,00'    |
 	And I click the button named "FormPost"
+	And I delete "$$NumberCashReceipt0540031$$" variable
+	And I delete "$$CashReceipt0540031$$" variable
 	And I save the value of "Number" field as "$$NumberCashReceipt0540031$$"
 	And I save the window as "$$CashReceipt0540031$$"
 	And I click the button named "FormPostAndClose"
@@ -232,6 +240,8 @@ Scenario: _054004 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 		And I input "02.07.2019  0:00:00" text in "Send date" field
 		And I input "03.07.2019  0:00:00" text in "Receive date" field
 	And I click the button named "FormPost"
+	And I delete "$$NumberCashTransferOrder054004$$" variable
+	And I delete "$$CashTransferOrder054004$$" variable
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054004$$"
 	And I save the window as "$$CashTransferOrder054004$$"
 	And I click the button named "FormPostAndClose"
@@ -266,6 +276,8 @@ Scenario: _054005 create Cash receipt and Cash payment based on Cash transfer or
 			| 'Daniel Smith' |
 		And I select current line in "List" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberCashPayment054005$$" variable
+	And I delete "$$CashPayment054005$$" variable
 	And I save the value of "Number" field as "$$NumberCashPayment054005$$"
 	And I save the window as "$$CashPayment054005$$"
 	And I click the button named "FormPostAndClose"
@@ -283,6 +295,8 @@ Scenario: _054005 create Cash receipt and Cash payment based on Cash transfer or
 		| 'Planning transaction basis'         | 'Partner'            | 'Amount'      | 'Amount exchange' |
 		| '$$CashTransferOrder054004$$'            | 'Daniel Smith'        | '1 150,00'    | '200,00'          |
 	And I click the button named "FormPost"
+	And I delete "$$NumberCashReceipt054005$$" variable
+	And I delete "$$CashReceipt054005$$" variable
 	And I save the value of "Number" field as "$$NumberCashReceipt054005$$"
 	And I save the window as "$$CashReceipt054005$$"
 	And I click the button named "FormPostAndClose"
@@ -335,6 +349,8 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 		And I input "01.07.2019  0:00:00" text in "Send date" field
 		And I input "02.07.2019  0:00:00" text in "Receive date" field
 	And I click the button named "FormPost"
+	And I delete "$$NumberCashTransferOrder054006$$" variable
+	And I delete "$$CashTransferOrder054006$$" variable
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054006$$"
 	And I save the window as "$$CashTransferOrder054006$$"
 	And I click the button named "FormPostAndClose"
@@ -356,6 +372,8 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 			| 'Planning transaction basis'  | 'Amount' |
 			| '$$CashTransferOrder054006$$' | '500,00' |
 		And I click the button named "FormPost"
+		And I delete "$$NumberCashPayment054006$$" variable
+		And I delete "$$CashPayment054006$$" variable
 		And I save the value of "Number" field as "$$NumberCashPayment054006$$"
 		And I save the window as "$$CashPayment054006$$"
 		And I click the button named "FormPostAndClose"
@@ -373,6 +391,8 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 			| 'Amount' | 'Planning transaction basis'  |
 			| '500,00' | '$$CashTransferOrder054006$$' |
 		And I click the button named "FormPost"
+		And I delete "$$NumberBankReceipt054006$$" variable
+		And I delete "$$BankReceipt054006$$" variable
 		And I save the value of "Number" field as "$$NumberBankReceipt054006$$"
 		And I save the window as "$$BankReceipt054006$$"
 		And I click the button named "FormPostAndClose"
@@ -418,6 +438,8 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 		And I input "03.07.2019  0:00:00" text in "Send date" field
 		And I input "04.07.2019  0:00:00" text in "Receive date" field
 	And I click the button named "FormPost"
+	And I delete "$$NumberCashTransferOrder054007$$" variable
+	And I delete "$$CashTransferOrder054007$$" variable
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054007$$"
 	And I save the window as "$$CashTransferOrder054007$$"
 	And I click the button named "FormPostAndClose"
@@ -439,6 +461,8 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 			| 'Planning transaction basis' | 'Amount' |
 			| '$$CashTransferOrder054007$$'     | '100,00' |
 		And I click the button named "FormPost"
+		And I delete "$$NumberBankPayment054007$$" variable
+		And I delete "$$BankPayment054007$$" variable
 		And I save the value of "Number" field as "$$NumberBankPayment054007$$"
 		And I save the window as "$$BankPayment054007$$"
 		And I click the button named "FormPostAndClose"
@@ -455,6 +479,8 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 			| Planning transaction basis  | Amount   |
 			| $$CashTransferOrder054007$$ | '100,00' |
 		And I click the button named "FormPost"
+		And I delete "$$NumberCashReceipt054007$$" variable
+		And I delete "$$CashReceipt054007$$" variable
 		And I save the value of "Number" field as "$$NumberCashReceipt054007$$"
 		And I save the window as "$$CashReceipt054007$$"
 		And I click the button named "FormPostAndClose"
@@ -510,6 +536,8 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 		And I input "04.07.2019  0:00:00" text in "Send date" field
 		And I input "05.07.2019  0:00:00" text in "Receive date" field
 	And I click the button named "FormPost"
+	And I delete "$$NumberCashTransferOrder054008$$" variable
+	And I delete "$$CashTransferOrder054008$$" variable
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054008$$"
 	And I save the window as "$$CashTransferOrder054008$$"
 	And I click the button named "FormPostAndClose"
@@ -540,6 +568,8 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 		And I input "650,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberCashPayment054008$$" variable
+		And I delete "$$CashPayment054008$$" variable
 		And I save the value of "Number" field as "$$NumberCashPayment054008$$"
 		And I save the window as "$$CashPayment054008$$"
 		And I click the button named "FormPostAndClose"
@@ -555,13 +585,9 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 		And I activate "Amount exchange" field in "PaymentList" table
 		And I input "600,00" text in "Amount exchange" field of "PaymentList" table
 		And I input "100,00" text in "Amount" field of "PaymentList" table
-		* Change the document number to 9
-			// And I move to "Other" tab
-			// And I input "9" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "9" text in "Number" field
 		And I click the button named "FormPost"
+		And I delete "$$NumberCashReceipt054008$$" variable
+		And I delete "$$CashReceipt054008$$" variable
 		And I save the value of "Number" field as "$$NumberCashReceipt054008$$"
 		And I save the window as "$$CashReceipt054008$$"
 		And I click the button named "FormPostAndClose"
@@ -581,6 +607,8 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 			| 'Partner'     | 'Amount'  | 'Planning transaction basis'    |
 			| 'Daniel Smith' | '500,00'  | '$$CashTransferOrder054008$$'             |
 		And I click the button named "FormPost"
+		And I delete "$$NumberCashPayment0540081$$" variable
+		And I delete "$$CashPayment0540081$$" variable
 		And I save the value of "Number" field as "$$NumberCashPayment0540081$$"
 		And I save the window as "$$CashPayment0540081$$"
 		And I click the button named "FormPostAndClose"
@@ -597,6 +625,8 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 			|'Partner'      | 'Amount' | 'Planning transaction basis'    | 'Amount exchange' |
 			| 'Daniel Smith' | '75,00'     |  '$$CashTransferOrder054008$$'            | '560,00'          |
 		And I click the button named "FormPost"
+		And I delete "$$NumberCashReceipt0540081$$" variable
+		And I delete "$$CashReceipt0540081$$" variable
 		And I save the value of "Number" field as "$$NumberCashReceipt0540081$$"
 		And I save the window as "$$CashReceipt0540081$$"
 		And I click the button named "FormPostAndClose"
@@ -647,6 +677,8 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 		And I input "04.07.2019  0:00:00" text in "Send date" field
 		And I input "05.07.2019  0:00:00" text in "Receive date" field
 	And I click the button named "FormPost"
+	And I delete "$$NumberCashTransferOrder054009$$" variable
+	And I delete "$$CashTransferOrder054009$$" variable
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054009$$"
 	And I save the window as "$$CashTransferOrder054009$$"
 	And I click the button named "FormPostAndClose"
@@ -677,7 +709,9 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 		And I input "1315,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
-		And I save the value of "Number" field as "$$CashPayment054009$$"
+		And I delete "$$NumberCashPayment054009$$" variable
+		And I delete "$$CashPayment054009$$" variable
+		And I save the value of "Number" field as "$$NumberCashPayment054009$$"
 		And I save the window as "$$CashPayment054009$$"
 		And I click the button named "FormPostAndClose"
 		And I close all client application windows
@@ -696,7 +730,9 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 		And I input "1300,00" text in "Amount exchange" field of "PaymentList" table
 		And I input "200,00" text in "Amount" field of "PaymentList" table
 		And I click the button named "FormPost"
-		And I save the value of "Number" field as "$$CashReceipt054009$$"
+		And I delete "$$NumberCashReceipt054009$$" variable
+		And I delete "$$CashReceipt054009$$" variable
+		And I save the value of "Number" field as "$$NumberCashReceipt054009$$"
 		And I save the window as "$$CashReceipt054009$$"
 		And I click the button named "FormPostAndClose"
 		And I close all client application windows
@@ -744,6 +780,8 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 		And I input "04.07.2019  0:00:00" text in "Send date" field
 		And I input "05.07.2019  0:00:00" text in "Receive date" field
 	And I click the button named "FormPost"
+	And I delete "$$NumberCashTransferOrder054012$$" variable
+	And I delete "$$CashTransferOrder054012$$" variable
 	And I save the value of "Number" field as "$$NumberCashTransferOrder054012$$"
 	And I save the window as "$$CashTransferOrder054012$$"
 	And I click the button named "FormPostAndClose"
@@ -769,6 +807,8 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 		And I input "1150,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberBankPayment054012$$" variable
+		And I delete "$$BankPayment054012" variable
 		And I save the value of "Number" field as "$$NumberBankPayment054012$$"
 		And I save the window as "$$BankPayment054012"
 		And I click the button named "FormPostAndClose"
@@ -783,8 +823,10 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 		And I input "1150,00" text in "Amount exchange" field of "PaymentList" table
 		And I input "175,00" text in "Amount" field of "PaymentList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberBankReceipt054012$$" variable
+		And I delete "$$BankReceipt054012$$" variable
 		And I save the value of "Number" field as "$$NumberBankReceipt054012$$"
-		And I save the window as "$$BankReceipt054012"
+		And I save the window as "$$BankReceipt054012$$"
 		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 		
@@ -838,6 +880,7 @@ Scenario: _054014 check message output in case money is transferred from Cash/Ba
 			And I input "200,00" text in "Receive amount" field
 		* Check the message output and that the document was not created
 			And I click the button named "FormPost"
+			And I delete "$$NumberCashTransferOrder0540141$$" variable
 			And I save the value of "Number" field as "$$NumberCashTransferOrder0540141$$"
 			And I click the button named "FormPostAndClose"
 			And I click the button named "FormPostAndClose"
@@ -877,6 +920,7 @@ Scenario: _054014 check message output in case money is transferred from Cash/Ba
 			And I input "1150,00" text in "Receive amount" field
 		* Check the message output and that the document was not created
 			And I click the button named "FormPost"
+			And I delete "$$NumberCashTransferOrder0540142$$" variable
 			And I save the value of "Number" field as "$$NumberCashTransferOrder0540142$$"
 			And I click the button named "FormPostAndClose"
 			And Delay 5

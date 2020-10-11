@@ -12,7 +12,7 @@ Background:
 
 
 
-Scenario: _0154200 preparation
+Scenario: _020200 preparation
 	* Constants
 		When set True value to the constant
 	* Load info
@@ -67,7 +67,7 @@ Scenario: _0154200 preparation
 			| "$$NumberSalesInvoice024016$$" |
 			When create SalesInvoice024016 (Shipment confirmation does not used)
 
-Scenario: check the display of the header of the collapsible group in Purchase Order
+Scenario: _018025 check the display of the header of the collapsible group in Purchase Order
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 	When check the display of the header of the collapsible group in sales, purchase and return documents
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP   Status: Wait" text
@@ -426,3 +426,6 @@ Scenario: _02020 check the display of the header of the collapsible group in Inc
         |'And I click Select button of  "Company" field'|
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
+
+Scenario: _999999 close TestClient session
+	And I close TestClient session

@@ -10,8 +10,6 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-
-Scenario: _295400 preparation 
 	
 Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipment confirmation)
 	* Constants
@@ -307,3 +305,6 @@ Scenario: _295402 check filling in Inventory transfer order when creating based 
 		| 'Boots'      | '2,000'    | 'Internal supply request 297*' | '37/18SD'  | 'pcs'  |
 		| 'High shoes' | '2,000'    | 'Internal supply request 297*' | '37/19SD'  | 'pcs'  |
 	And I close all client application windows
+
+Scenario: _999999 close TestClient session
+	And I close TestClient session

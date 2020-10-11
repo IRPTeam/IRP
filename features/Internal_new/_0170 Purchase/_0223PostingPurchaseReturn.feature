@@ -114,6 +114,8 @@ Scenario: _022301 create document Purchase return, store use Shipment confirmati
 		| 'Item'  | 'Item key' | 'Purchase invoice'    | 'Store'    | 'Unit' | 'Q'     |
 		| 'Dress' | 'L/Green'  | '$$PurchaseInvoice018006$$' | 'Store 02' | 'pcs' | '2,000' |
 	And I click the button named "FormPost"
+	And I delete "$$NumberPurchaseReturn022301$$" variable
+	And I delete "$$PurchaseReturn022301$$" variable
 	And I save the value of "Number" field as "$$NumberPurchaseReturn022301$$"
 	And I save the window as "$$PurchaseReturn022301$$"
 	And I click the button named "FormPostAndClose"
@@ -195,6 +197,8 @@ Scenario: _022309 create document Purchase retur, store use Shipment confirmatio
 		And I click "Yes" button
 		And I input "2" text in "Number" field
 	And I click the button named "FormPost"
+	And I delete "$$NumberPurchaseReturn022309$$" variable
+	And I delete "$$PurchaseReturn022309$$" variable
 	And I save the value of "Number" field as "$$NumberPurchaseReturn022309$$"
 	And I save the window as "$$PurchaseReturn022309$$"
 	And I close current window
@@ -318,6 +322,8 @@ Scenario: _022322 create document Purchase return, store doesn't use Shipment co
 		| 'Dress' |
 	And I delete a line in "ItemList" table
 	And I click the button named "FormPost"
+	And I delete "$$NumberPurchaseReturn022322$$" variable
+	And I delete "$$PurchaseReturn022322$$" variable
 	And I save the value of "Number" field as "$$NumberPurchaseReturn022322$$"
 	And I save the window as "$$PurchaseReturn022322$$"
 	And I click the button named "FormPostAndClose"

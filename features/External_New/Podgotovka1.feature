@@ -508,6 +508,8 @@ Scenario: creating a Purchase Order document
 		And I input "40,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseInvoice30004$$" variable
+		And I delete "$$PurchaseInvoice30004$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice30004$$"
 		And I save the window as "$$PurchaseInvoice30004$$"
 		And I click the button named "FormPostAndClose"
@@ -580,6 +582,8 @@ Scenario: creating a Purchase Order document
 			And I input "45,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice29604$$" variable
+			And I delete "$$PurchaseInvoice29604$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice29604$$"
 			And I save the window as "$$PurchaseInvoice29604$$"
 		* Create Goods receipt

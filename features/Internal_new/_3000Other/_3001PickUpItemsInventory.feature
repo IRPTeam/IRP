@@ -146,6 +146,8 @@ Scenario: _3001000 preparation
 					And I input "100,000" text in "Price" field of "ItemList" table
 					And I finish line editing in "ItemList" table
 					And I click the button named "FormPost"
+					And I delete "$$NumberPurchaseInvoice30010001$$" variable
+					And I delete "$$PurchaseInvoice30010001$$" variable
 					And I save the value of "Number" field as "$$NumberPurchaseInvoice30010001$$"
 					And I save the window as "$$PurchaseInvoice30010001$$"
 					And I click the button named "FormPostAndClose"
@@ -232,6 +234,8 @@ Scenario: _3001000 preparation
 					And I input "100,000" text in "Price" field of "ItemList" table
 					And I finish line editing in "ItemList" table
 					And I click the button named "FormPost"
+					And I delete "$$NumberPurchaseInvoice30010002$$" variable
+					And I delete "$$PurchaseInvoice30010002$$" variable
 					And I save the value of "Number" field as "$$NumberPurchaseInvoice30010002$$"
 					And I save the window as "$$PurchaseInvoice30010002$$"
 					And I click the button named "FormPostAndClose"

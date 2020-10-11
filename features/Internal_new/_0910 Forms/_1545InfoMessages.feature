@@ -188,6 +188,8 @@ Scenario: _154505 message when trying to create Sales returm order based on Sale
 			And I input "1,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberSalesInvoice154501$$" variable
+			And I delete "$$SalesInvoice154501$$" variable
 			And I save the value of "Number" field as "$$NumberSalesInvoice154501$$"
 			And I save the window as "$$SalesInvoice154501$$"
 	* Create Sales return order based on Sales invoice
@@ -259,6 +261,8 @@ Scenario: _154507 message when trying to create Purchase return order and Purcha
 			And I input "40,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice154502$$" variable
+			And I delete "$$PurchaseInvoice154502$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice154502$$"
 			And I save the window as "$$PurchaseInvoice154502$$"
 	* Create Purchase return based on Purchase invoice
@@ -299,6 +303,8 @@ Scenario: _154509 message when trying to re-create Sales invoice based on Shipme
 		And I expand "More" group
 		And I set checkbox "Shipment confirmations before sales invoice"
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesOrder154503$$" variable
+		And I delete "$$SalesOrder154503$$" variable
 		And I save the value of "Number" field as "$$NumberSalesOrder154503$$"
 		And I save the window as "$$SalesOrder154503$$"
 	* Create Shipment confirmation based on Sales order
@@ -309,13 +315,9 @@ Scenario: _154509 message when trying to re-create Sales invoice based on Shipme
 	* Create Sales invoice based on Shipment confirmation
 		And I click "Sales invoice" button
 		Then "Sales invoice (create)" window is opened
-		// And I move to "Other" tab
-		// And I expand "More" group
-		// And I input "0" text in "Number" field
-		// Then "1C:Enterprise" window is opened
-		// And I click "Yes" button
-		// And I input "2 001" text in "Number" field
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesInvoice154503$$" variable
+		And I delete "$$SalesInvoice154503$$" variable
 		And I save the value of "Number" field as "$$NumberSalesInvoice154503$$"
 		And I save the window as "$$SalesInvoice154503$$"
 		And I click the button named "FormPostAndClose"
@@ -360,6 +362,8 @@ Scenario: _154509 message when trying to re-create Sales invoice based on Shipme
 			And I input "1,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberSalesInvoice154504$$" variable
+			And I delete "$$SalesInvoice154504$$" variable
 			And I save the value of "Number" field as "$$NumberSalesInvoice154504$$"
 			And I save the window as "$$SalesInvoice154504$$"
 
@@ -422,16 +426,22 @@ Scenario: _154510 message when trying to re-create Purchase invoice based on Goo
 			And I expand "More" group
 			And I set checkbox "Goods receipt before purchase invoice"
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder154505$$" variable
+		And I delete "$$PurchaseOrder154505$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder154505$$"
 		And I save the window as "$$PurchaseOrder154505$$"
 	* Create Goods receipt based on urchase order
 		And I click "Goods receipt" button
 		And I click the button named "FormPost"
+		And I delete "$$NumberGoodsReceipt154505$$" variable
+		And I delete "$$GoodsReceipt154505$$" variable
 		And I save the value of "Number" field as "$$NumberGoodsReceipt154505$$"
 		And I save the window as "$$GoodsReceipt154505$$"
 	* Create Purchase invoice based on Goods reciept
 		And I click "Purchase invoice" button
 		And I move to "Other" tab
+		And I delete "$$NumberPurchaseInvoice154505$$" variable
+		And I delete "$$PurchaseInvoice154505$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice154505$$"
 		And I save the window as "$$PurchaseInvoice154505$$"
 		And I click the button named "FormPostAndClose"
@@ -563,13 +573,17 @@ Scenario: _154514 message when trying to re-create Goods reciept based on Purcha
 			And I expand "More" group
 			And I set checkbox "Goods receipt before purchase invoice"
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder154506$$" variable
+		And I delete "$$PurchaseOrder154506$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder154506$$"
 		And I save the window as "$$PurchaseOrder154506$$"
 	* Create Goods receipt based on Purchase order
 		And I click "Goods receipt" button
 		And I click the button named "FormPost"
-		And I save the value of "Number" field as "$$NumberGoodsReceipt154506$$"
-		And I save the window as "$$GoodsReceipt154506$$"
+		And I delete "$$NumberPurchaseOrder1545061$$" variable
+		And I delete "$$PurchaseOrder1545061$$" variable
+		And I save the value of "Number" field as "$$NumberGoodsReceipt1545061$$"
+		And I save the window as "$$GoodsReceipt1545061$$"
 		And I click the button named "FormPostAndClose"
 	* Check message display when you try to re-create Goods receipt
 		And I click "Goods receipt" button
@@ -599,11 +613,15 @@ Scenario: _154516 message when trying to re-create Sales invoice based on Sales 
 		When adding the items to the sales order (Dress and Trousers)
 		And I click "Save" button
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder1545061$$" variable
+		And I delete "$$PurchaseOrder1545061$$" variable
 		And I save the value of "Number" field as "$$NumberSalesOrder154507$$"
 		And I save the window as "$$SalesOrder154507$$"
 	* Create Sales invoice
 		And I click "Sales invoice" button
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesInvoice154507$$" variable
+		And I delete "$$SalesInvoice154507$$" variable
 		And I save the value of "Number" field as "$$NumberSalesInvoice154507$$"
 		And I save the window as "$$SalesInvoice154507$$"
 		And I click the button named "FormPostAndClose"
@@ -638,22 +656,18 @@ Scenario: _154518 message when trying to re-create Shipment confirmation based o
 		And I move to "Other" tab
 		And I expand "More" group
 		And I set checkbox "Shipment confirmations before sales invoice"
-		// And I input "2005" text in "Number" field
-		// Then "1C:Enterprise" window is opened
-		// And I click "Yes" button
-		// And I input "2005" text in "Number" field
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesOrder154507$$" variable
+		And I delete "$$SalesOrder154507$$" variable
 		And I save the value of "Number" field as "$$NumberSalesOrder154507$$"
 		And I save the window as "$$SalesOrder154507$$"
 	* Create Shipment confirmation
 		And I click "Shipment confirmation" button
 		* Change number Shipment confirmation
 			And I move to "Other" tab
-			// And I input "2005" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "2005" text in "Number" field
 			And I click the button named "FormPost"
+			And I delete "$$NumberShipmentConfirmation154507$$" variable
+			And I delete "$$ShipmentConfirmation154507$$" variable
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation154507$$"
 			And I save the window as "$$ShipmentConfirmation154507$$"
 			And I click the button named "FormPostAndClose"
@@ -699,16 +713,15 @@ Scenario: _154520 message when trying to re-create Shipment confirmation based o
 			And I input "1,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberSalesInvoice154508$$" variable
+			And I delete "$$SalesInvoice154508$$" variable
 			And I save the value of "Number" field as "$$NumberSalesInvoice154508$$"
 			And I save the window as "$$SalesInvoice154508$$"
 	* Create Shipment confirmation based on Sales invoice
 		And I click "Shipment confirmation" button
-		* Change number
-			// And I input "2008" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "2008" text in "Number" field
 		And I click the button named "FormPost"
+		And I delete "$$NumberShipmentConfirmation154508$$" variable
+		And I delete "$$ShipmentConfirmation154508$$" variable
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation154508$$"
 		And I save the window as "$$ShipmentConfirmation154508$$"
 		And I click the button named "FormPostAndClose"
@@ -754,6 +767,8 @@ Scenario: _154522 message when trying to create Shipment confirmation based on S
 			And I input "1,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberSalesInvoice154509$$" variable
+			And I delete "$$SalesInvoice154509$$" variable
 			And I save the value of "Number" field as "$$NumberSalesInvoice154509$$"
 			And I save the window as "$$SalesInvoice154509$$"
 	* Check message display when you try to create Shipment confirmation based on Sales invoice (Stor doesn't use Shipment confirmation)
@@ -799,6 +814,8 @@ Scenario: _154524 message when trying to create Shipment confirmation based on S
 			And I input "100,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberSalesInvoice154510$$" variable
+			And I delete "$$SalesInvoice154510$$" variable
 			And I save the value of "Number" field as "$$NumberSalesInvoice154510$$"
 			And I save the window as "$$SalesInvoice154510$$"
 	* Check message display when you try to create Shipment confirmation based on Sales invoice with Service
@@ -844,6 +861,8 @@ Scenario: _154526 message when trying to create Goods reciept based on Purchase 
 			And I input "100,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice154511$$" variable
+			And I delete "$$PurchaseInvoice154511$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice154511$$"
 			And I save the window as "$$PurchaseInvoice154511$$"
 	* Check message display when you try to create Goods receipt based on Purchase invoice with Service
@@ -913,6 +932,8 @@ Scenario: _154528 message when trying to create Purchase order based on Sales or
 			And I select "Repeal" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I click the button named "FormPost"
+		And I delete "$$NumberSalesOrder154512$$" variable
+		And I delete "$$SalesOrder154512$$" variable
 		And I save the value of "Number" field as "$$NumberSalesOrder154512$$"
 		And I save the window as "$$SalesOrder154512$$"
 	* Check the message that there are no items to order with the vendor
@@ -957,6 +978,8 @@ Scenario: _154530 message when trying to re-create Purchase order/Inventory tran
 			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberInternalSupplyRequest154513$$" variable
+		And I delete "$$InternalSupplyRequest154513$$" variable
 		And I save the value of "Number" field as "$$NumberInternalSupplyRequest154513$$"
 		And I save the window as "$$InternalSupplyRequest154513$$"
 	* Create Purchase order based on Internal supply request
@@ -1030,6 +1053,8 @@ Scenario: _154532 user notification when create a second partial sales invoice b
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I input "2,000" text in "Q" field of "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesOrder154514$$" variable
+		And I delete "$$SalesOrder154514$$" variable
 		And I save the value of "Number" field as "$$NumberSalesOrder154514$$"
 		And I save the window as "$$SalesOrder154514$$"
 	* Create first Sales invoice
@@ -1085,6 +1110,8 @@ Scenario: _154534 user notification when create a second partial purchase invoic
 			And I input "10,00" text in "Price" field of "ItemList" table
 			And I select "Approved" exact value from "Status" drop-down list
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder154515$$" variable
+		And I delete "$$PurchaseOrder154515$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder154515$$"
 		And I save the window as "$$PurchaseOrder154515$$"
 	* Create first Purchase invoice based on Purchase order
@@ -1176,12 +1203,9 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 				| 'Description' |
 				| 'Region 2'    |
 			And I select current line in "List" table
-			// And I move to "Other" tab
-			// And I input "3 024" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "3 024" text in "Number" field
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesOrder0154513$$" variable
+		And I delete "$$SalesOrder0154513$$" variable
 		And I save the value of "Number" field as "$$NumberSalesOrder0154513$$"
 		And I save the window as "$$SalesOrder0154513$$"
 	* Check the message output if the order is unposted
@@ -1246,6 +1270,8 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			And I move to "Other" tab
 			And I set checkbox "Goods receipt before purchase invoice"
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseOrder0154513$$" variable
+			And I delete "$$PurchaseOrder0154513$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseOrder0154513$$"
 			And I save the window as "$$PurchaseOrder0154513$$"
 			And I click the button named "FormPostAndClose"
@@ -1400,11 +1426,9 @@ Scenario: _015452 check message output when trying to create a subsequent order 
 				| 'Region 2'    |
 			And I select current line in "List" table
 			And I move to "Other" tab
-			// And I input "3 027" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "3 027" text in "Number" field
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesOrder0154514$$" variable
+		And I delete "$$SalesOrder0154514$$" variable
 		And I save the value of "Number" field as "$$NumberSalesOrder0154514$$"
 		And I save the window as "$$SalesOrder0154514$$"
 		* Check message output when trying to create SalesInvoice
@@ -1455,12 +1479,10 @@ Scenario: _015452 check message output when trying to create a subsequent order 
 				| 'Trousers' | '38/Yellow' |
 			And I move to "Other" tab
 			And I set checkbox "Goods receipt before purchase invoice"
-			// And I input "3 027" text in "Number" field
-			// Then "1C:Enterprise" window is opened
-			// And I click "Yes" button
-			// And I input "3 027" text in "Number" field
 			And I select "Wait" exact value from "Status" drop-down list
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseOrder0154514$$" variable
+			And I delete "$$PurchaseOrder0154514$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseOrder0154514$$"
 			And I save the window as "$$PurchaseOrder0154514$$"
 		* Check the message output when trying to create PurchaseInvoice
@@ -1550,3 +1572,6 @@ Scenario: _015456 notification when trying to post a Sales order without filling
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Procurement method] is empty." substring will appear in 10 seconds
 		And I close all client application windows
+
+Scenario: _999999 close TestClient session
+	And I close TestClient session

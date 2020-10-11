@@ -174,6 +174,8 @@ Scenario: _029103 create a Purchase order for service
 		And I input "1000,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder029103$$" variable
+		And I delete "$$PurchaseOrder029103$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder029103$$"
 		And I save the window as "$$PurchaseOrder029103$$"
 		And I click the button named "FormPost"
@@ -191,6 +193,8 @@ Scenario: _029104 create a Purchase invoice for service (based on Purchase order
 		| 'Price'    | 'Item'    | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Expense type'             | 'Business unit' | 'Purchase order'      |
 		| '1 000,00' | 'Service' | '18%' | 'Interner' | '1,000' | '152,54'     | 'pcs'  | '847,46'     | '1 000,00'     | 'Telephone communications' | 'Front office'  | '$$PurchaseOrder029103$$' |
 	And I click the button named "FormPost"
+	And I delete "$$NumberPurchaseInvoice029104$$" variable
+	And I delete "$$PurchaseInvoice029104$$" variable
 	And I save the value of "Number" field as "$$NumberPurchaseInvoice029104$$"
 	And I save the window as "$$PurchaseInvoice029104$$"
 	And I click the button named "FormPost"
@@ -318,6 +322,8 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			And I input "200,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice029106$$" variable
+			And I delete "$$PurchaseInvoice029106$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice029106$$"
 			And I save the window as "$$PurchaseInvoice029106$$"
 			And I click the button named "FormPost"
@@ -458,6 +464,8 @@ Scenario: _029107 create a Sales order for service and product (Store doesn't us
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesOrder029107$$" variable
+		And I delete "$$SalesOrder029107$$" variable
 		And I save the value of "Number" field as "$$NumberSalesOrder029107$$"
 		And I save the window as "$$SalesOrder029107$$"
 		And I click the button named "FormPost"
@@ -566,6 +574,8 @@ Scenario: _029108 create a Sales order for service and product (Store use Shipme
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesOrder029108$$" variable
+		And I delete "$$SalesOrder029108$$" variable
 		And I save the value of "Number" field as "$$NumberSalesOrder029108$$"
 		And I save the window as "$$SalesOrder029108$$"
 		And I click the button named "FormPost"
@@ -678,11 +688,9 @@ Scenario: _029109 create a Sales order for service and product (Store doesn't us
 		And I move to "Other" tab
 		And I expand "More" group
 		And I set checkbox "Shipment confirmations before sales invoice"
-		// And I input "0" text in "Number" field
-		// Then "1C:Enterprise" window is opened
-		// And I click "Yes" button
-		// And I input "702" text in "Number" field
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesOrder029109$$" variable
+		And I delete "$$SalesOrder029109$$" variable
 		And I save the value of "Number" field as "$$NumberSalesOrder029109$$"
 		And I save the window as "$$SalesOrder029109$$"
 		And I click the button named "FormPost"
@@ -808,11 +816,9 @@ Scenario: _029110 create a Sales order for service and product (Store use Shipme
 		And I move to "Other" tab
 		And I expand "More" group
 		And I set checkbox "Shipment confirmations before sales invoice"
-		// And I input "0" text in "Number" field
-		// Then "1C:Enterprise" window is opened
-		// And I click "Yes" button
-		// And I input "703" text in "Number" field
 		And I click the button named "FormPost"
+		And I delete "$$NumberSalesOrder029110$$" variable
+		And I delete "$$SalesOrder029110$$" variable
 		And I save the value of "Number" field as "$$NumberSalesOrder029110$$"
 		And I save the window as "$$SalesOrder029110$$"
 		And I click the button named "FormPost"

@@ -785,3 +785,5 @@ Scenario: Open object form "PointOfSale"
 		| 'No'  | 'ExchangePlans'               |
 		| 'No'  | 'InformationRegisters'        |
 	And I close current window
+
+

@@ -302,4 +302,5 @@ Scenario: check that discounts with the Purchase document type are not displayed
 
 
 
-
+Scenario: _999999 close TestClient session
+	And I close TestClient session

@@ -92,14 +92,14 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="29d1cf3a-4d32-49c7-8907-4cf0be70d5a0">
-    <name>Unit</name>
+  <attributes uuid="2bf43524-0188-40d5-a4cf-af4d98f42021">
+    <name>Quantity</name>
     <synonym>
       <key>en</key>
-      <value>Unit</value>
+      <value>Quantity</value>
     </synonym>
     <type>
-      <types>CatalogRef.Units</types>
+      <types>DefinedType.typeQuantity</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -124,14 +124,14 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="2bf43524-0188-40d5-a4cf-af4d98f42021">
-    <name>Quantity</name>
+  <attributes uuid="29d1cf3a-4d32-49c7-8907-4cf0be70d5a0">
+    <name>Unit</name>
     <synonym>
       <key>en</key>
-      <value>Quantity</value>
+      <value>Unit</value>
     </synonym>
     <type>
-      <types>DefinedType.typeQuantity</types>
+      <types>CatalogRef.Units</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

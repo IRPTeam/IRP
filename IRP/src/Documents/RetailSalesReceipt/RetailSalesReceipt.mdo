@@ -77,18 +77,33 @@
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="ba0a7fde-e845-46bc-be92-c854f3eb9ac4">
-    <name>Partner</name>
+  <attributes uuid="eaf4900c-0f63-4a4d-bb1c-39a803603961">
+    <name>Agreement</name>
     <synonym>
       <key>en</key>
-      <value>Partner</value>
+      <value>Partner term</value>
     </synonym>
     <type>
-      <types>CatalogRef.Partners</types>
+      <types>CatalogRef.Agreements</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5817f6b7-dc32-4790-a494-b4ae8c1ccb20">
+    <name>BasisDocument</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis document</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeBasisDocumentSalesInvoice</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -146,14 +161,14 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="b1061edf-dcfe-409d-8bcf-3f347937a7a9">
-    <name>Manager</name>
+  <attributes uuid="a95ce331-3df9-4ce9-8a88-be0d2330d9c2">
+    <name>IsOpeningEntry</name>
     <synonym>
       <key>en</key>
-      <value>Manager</value>
+      <value>Is opening entry</value>
     </synonym>
     <type>
-      <types>CatalogRef.Users</types>
+      <types>Boolean</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -161,29 +176,14 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="5817f6b7-dc32-4790-a494-b4ae8c1ccb20">
-    <name>BasisDocument</name>
+  <attributes uuid="e6f1083e-ccba-40ff-b25c-84532cd15248">
+    <name>LegalName</name>
     <synonym>
       <key>en</key>
-      <value>Basis document</value>
+      <value>Legal name</value>
     </synonym>
     <type>
-      <types>DefinedType.typeBasisDocumentSalesInvoice</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="eaf4900c-0f63-4a4d-bb1c-39a803603961">
-    <name>Agreement</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner term</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Agreements</types>
+      <types>CatalogRef.Companies</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -192,14 +192,14 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="68633014-481b-4221-b503-792f2d48e5e1">
-    <name>PriceIncludeTax</name>
+  <attributes uuid="b1061edf-dcfe-409d-8bcf-3f347937a7a9">
+    <name>Manager</name>
     <synonym>
       <key>en</key>
-      <value>Price include tax</value>
+      <value>Manager</value>
     </synonym>
     <type>
-      <types>Boolean</types>
+      <types>CatalogRef.Users</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -228,14 +228,14 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="e6f1083e-ccba-40ff-b25c-84532cd15248">
-    <name>LegalName</name>
+  <attributes uuid="ba0a7fde-e845-46bc-be92-c854f3eb9ac4">
+    <name>Partner</name>
     <synonym>
       <key>en</key>
-      <value>Legal name</value>
+      <value>Partner</value>
     </synonym>
     <type>
-      <types>CatalogRef.Companies</types>
+      <types>CatalogRef.Partners</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -244,29 +244,14 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="a95ce331-3df9-4ce9-8a88-be0d2330d9c2">
-    <name>IsOpeningEntry</name>
+  <attributes uuid="68633014-481b-4221-b503-792f2d48e5e1">
+    <name>PriceIncludeTax</name>
     <synonym>
       <key>en</key>
-      <value>Is opening entry</value>
+      <value>Price include tax</value>
     </synonym>
     <type>
       <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="d6a89115-aa8d-42c1-b51f-d05d35813dea">
-    <name>BusinessUnit</name>
-    <synonym>
-      <key>en</key>
-      <value>Business unit</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

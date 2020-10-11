@@ -303,6 +303,7 @@ Function Strings(Lang) Export
 	// %1 - Physical count by location
 	Strings.Insert("InfoMessage_006", NStr("en = 'The ""%1"" document is already created. You can update the quantity.'", Lang));
 	
+	Strings.Insert("InfoMessage_007", NStr("en = '#%1 date: %2'", Lang));
 	// %1 - 12
 	// %2 - 20.02.2020
 	Strings.Insert("InfoMessage_008", NStr("en = '#%1 date: %2'", Lang));

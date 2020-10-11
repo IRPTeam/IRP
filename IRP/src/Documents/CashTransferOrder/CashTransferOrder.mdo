@@ -70,6 +70,21 @@
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="cdc313f6-c60d-4d22-9bb9-f8ad47f71ffb">
+    <name>CashAdvanceHolder</name>
+    <synonym>
+      <key>en</key>
+      <value>Cash advance holder</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="da80268b-5291-4216-aa84-c98e1a4d389b">
     <name>Company</name>
     <synonym>
@@ -87,19 +102,53 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="81fc2e0f-d14a-42ad-b5d7-71b654703954">
-    <name>Sender</name>
+  <attributes uuid="bb904d05-0a1d-4e37-8767-dab025a62a91">
+    <name>ReceiveAmount</name>
     <synonym>
       <key>en</key>
-      <value>Sender</value>
+      <value>Receive amount</value>
     </synonym>
     <type>
-      <types>CatalogRef.CashAccounts</types>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="6b191e6e-e340-4fa1-898f-6d21b4947b88">
+    <name>ReceiveCurrency</name>
+    <synonym>
+      <key>en</key>
+      <value>Receive currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="ea969443-4557-463c-a165-a9b4408f2f5a">
+    <name>ReceiveDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Receive date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -121,6 +170,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="58b1701d-c973-45cb-b1e8-48382f8aafcc">
+    <name>ReceiveUUID</name>
+    <synonym>
+      <key>en</key>
+      <value>Receive UUID</value>
+    </synonym>
+    <type>
+      <types>UUID</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="fae326d1-042a-44b5-bd15-145bddad3571">
     <name>SendAmount</name>
     <synonym>
@@ -137,44 +201,11 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="bb904d05-0a1d-4e37-8767-dab025a62a91">
-    <name>ReceiveAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Receive amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="99a8d2b0-c4d2-481e-94f6-1ee2d8b01a8d">
     <name>SendCurrency</name>
     <synonym>
       <key>en</key>
       <value>Send currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="6b191e6e-e340-4fa1-898f-6d21b4947b88">
-    <name>ReceiveCurrency</name>
-    <synonym>
-      <key>en</key>
-      <value>Receive currency</value>
     </synonym>
     <type>
       <types>CatalogRef.Currencies</types>
@@ -205,20 +236,19 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="ea969443-4557-463c-a165-a9b4408f2f5a">
-    <name>ReceiveDate</name>
+  <attributes uuid="81fc2e0f-d14a-42ad-b5d7-71b654703954">
+    <name>Sender</name>
     <synonym>
       <key>en</key>
-      <value>Receive date</value>
+      <value>Sender</value>
     </synonym>
     <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
+      <types>CatalogRef.CashAccounts</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -231,36 +261,6 @@
     </synonym>
     <type>
       <types>UUID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="58b1701d-c973-45cb-b1e8-48382f8aafcc">
-    <name>ReceiveUUID</name>
-    <synonym>
-      <key>en</key>
-      <value>Receive UUID</value>
-    </synonym>
-    <type>
-      <types>UUID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="cdc313f6-c60d-4d22-9bb9-f8ad47f71ffb">
-    <name>CashAdvanceHolder</name>
-    <synonym>
-      <key>en</key>
-      <value>Cash advance holder</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

@@ -59,23 +59,6 @@
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="cc4c0112-3b28-4a1d-8789-a1fe061345c5">
-    <name>PriceType</name>
-    <synonym>
-      <key>en</key>
-      <value>Price type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.PriceTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="1f2cf539-07c4-437d-afd5-c1ae22de9ba0">
     <name>ItemType</name>
     <synonym>
@@ -104,6 +87,23 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="cc4c0112-3b28-4a1d-8789-a1fe061345c5">
+    <name>PriceType</name>
+    <synonym>
+      <key>en</key>
+      <value>Price type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.PriceTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>

@@ -657,7 +657,7 @@ foreach ($elementTag in $TagArray) {
         for ($i = 0; $i -lt $JobArray.count; $i++)
         {
             $JobArray[$i] | Receive-Job
-            if (!($job.State -eq "Running")) {
+            if (!($JobArray[$i].State -eq "Running")) {
                 $JobArray.RemoveAt($i)
                 $i--
             }

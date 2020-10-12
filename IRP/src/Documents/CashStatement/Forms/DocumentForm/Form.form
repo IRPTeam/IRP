@@ -601,10 +601,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BusinessUnit</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BusinessUnit</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -935,6 +933,7 @@
             <segments>Object.BasisDocument</segments>
           </paths>
         </dataPath>
+        <shortcut>Ctrl+S</shortcut>
         <handlers>
           <event>OnChange</event>
           <name>BasisDocumentOnChange</name>
@@ -976,6 +975,24 @@
           <chooseType>true</chooseType>
           <typeDomainEnabled>true</typeDomainEnabled>
           <textEdit>true</textEdit>
+          <choiceParameterLinks>
+            <name>Filter.BusinessUnit</name>
+            <datapath xsi:type="form:DataPath">
+              <segments>Object.BusinessUnit</segments>
+            </datapath>
+          </choiceParameterLinks>
+          <choiceParameterLinks>
+            <name>Filter.Company</name>
+            <datapath xsi:type="form:DataPath">
+              <segments>Object.Company</segments>
+            </datapath>
+          </choiceParameterLinks>
+          <choiceParameterLinks>
+            <name>Filter.CashAccount</name>
+            <datapath xsi:type="form:DataPath">
+              <segments>Object.CashAccount</segments>
+            </datapath>
+          </choiceParameterLinks>
         </extInfo>
       </items>
       <items xsi:type="form:FormGroup">

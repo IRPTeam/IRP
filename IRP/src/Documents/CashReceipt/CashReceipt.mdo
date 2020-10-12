@@ -126,6 +126,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="5415ff39-e715-4017-9a57-89fe8aa19d0c">
+    <name>CurrencyExchange</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency exchange</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="9210af7a-8f08-4baf-8fc1-a33e9f9a95d2">
     <name>TransactionType</name>
     <synonym>
@@ -140,21 +155,6 @@
     <fillValue xsi:type="core:ReferenceValue">
       <value>Enum.IncomingPaymentTransactionType.EnumValue.PaymentFromCustomer</value>
     </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="5415ff39-e715-4017-9a57-89fe8aa19d0c">
-    <name>CurrencyExchange</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency exchange</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>

@@ -951,12 +951,12 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 Scenario: _090408 create one Sales order - several Shipment confirmation - one Sales invoice
 	* Create Sales order
 		When create the first test SO for a test on the creation mechanism based on
-			And I delete "$$NumberSalesOrder090408$$" variable
-			And I delete "$$SalesOrder090408$$" variable
-			And I save the value of "Number" field as "$$NumberSalesOrder090408$$"
-			And I save the window as "$$SalesOrder090408$$"
-			And I set checkbox "Shipment confirmations before sales invoice"
-			And I click the button named "FormPostAndClose"
+		And I delete "$$NumberSalesOrder090408$$" variable
+		And I delete "$$SalesOrder090408$$" variable
+		And I save the value of "Number" field as "$$NumberSalesOrder090408$$"
+		And I save the window as "$$SalesOrder090408$$"
+		And I set checkbox "Shipment confirmations before sales invoice"
+		And I click the button named "FormPostAndClose"
 	* Create 3 Shipment confirmation
 		* First SC
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"

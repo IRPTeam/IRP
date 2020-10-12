@@ -1484,9 +1484,9 @@ Scenario: _2990012 check the opening of the status history in Physical inventory
 			And I move to "Other" tab
 			And I click "History" hyperlink
 			And "List" table contains lines
-			| 'Period' | 'Object'                        | 'Status'        |
-			| '*'      | 'Physical count by location 3*' | 'Prepared'      |
-			| '*'      | 'Physical count by location 3*' | 'Done'          |
+			| 'Period' | 'Object'            | 'Status'        |
+			| '*'      | 'Location count 3*' | 'Prepared'      |
+			| '*'      | 'Location count 3*' | 'Done'          |
 			And I close all client application windows
 	
 Scenario: _2990013 check the question of saving Physical inventory before creating Physical count by location

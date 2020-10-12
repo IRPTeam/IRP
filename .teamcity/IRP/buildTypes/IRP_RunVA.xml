@@ -649,7 +649,7 @@ foreach ($elementTag in $TagArray) {
     $JobTimes = $JobTimes + @{$elementTag=@($CurrentDate, "")}
 
     do {
-        Start-Sleep 1
+        Start-Sleep 10
         $jobCount = $JobArray.count
         Write-Output "Current job count: $jobCount Max count: $StreamCountMax"
 
@@ -678,7 +678,7 @@ foreach ($elementTag in $TagArray) {
 
 
 do {
-    Start-Sleep 1
+    Start-Sleep 10
 
    $jobCount = $JobArray.count
         Write-Output "Current job count: $jobCount Max count: $StreamCountMax"

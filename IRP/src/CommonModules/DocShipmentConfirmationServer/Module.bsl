@@ -36,6 +36,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	Form.ReadOnly = SalesInvoiceIsExists(Object.Ref);
 EndProcedure
 
 #EndRegion
@@ -109,3 +110,35 @@ Procedure FillTransactionTypeChoiceList(Form)
 		Form.Items.TransactionType.ChoiceList.Add(Enums.ShipmentConfirmationTransactionTypes.Bundling, Metadata.Enums.ShipmentConfirmationTransactionTypes.EnumValues.Bundling.Synonym);
 	EndIf;
 EndProcedure
+
+Function SalesInvoiceIsExists(ShipmentConfirmationRef)
+	If Not ValueIsFilled(ShipmentConfirmationRef) Then
+		Return False;
+	EndIf;
+	
+	Filter = New Structure();
+	Filter.Insert("MetadataObject", ShipmentConfirmationRef.Metadata());
+	Filter.Insert("AttributeName", "ReadOnlyIfSalesInvoiceExists");
+	UserSettings = UserSettingsServer.GetUserSettings(Undefined, Filter);
+	If Not (UserSettings.Count() And UserSettings[0].Value = True) Then
+		Return False;
+	EndIf;
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT ALLOWED TOP 1
+	|	SalesInvoiceShipmentConfirmations.ShipmentConfirmation
+	|FROM
+	|	Document.SalesInvoice.ShipmentConfirmations AS SalesInvoiceShipmentConfirmations
+	|WHERE
+	|	SalesInvoiceShipmentConfirmations.ShipmentConfirmation = &ShipmentConfirmation
+	|	AND SalesInvoiceShipmentConfirmations.Ref.Posted
+	|	AND NOT SalesInvoiceShipmentConfirmations.Ref.DeletionMark";
+	Query.SetParameter("ShipmentConfirmation", ShipmentConfirmationRef);
+	QuerySelection = Query.Execute().Select();
+	If QuerySelection.Next() Then
+		Return True;
+	Else
+		Return False;
+	EndIf;
+EndFunction

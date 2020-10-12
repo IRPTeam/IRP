@@ -121,7 +121,7 @@ EndProcedure
 &AtServer
 Function SaveChosenSettingAtServer(Val OptionDescription, Val ReportOption)
 	If ReportOption = Undefined Then
-		OptionKey = New UUID();
+		OptionKey = String(New UUID());
 		ReportOptionObj = Catalogs.ReportOptions.CreateItem();
 		ReportOptionObj.Code = OptionKey;
 		ReportOptionObj.Description = OptionDescription;

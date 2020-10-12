@@ -636,48 +636,74 @@ $VanessaRun = {
         Write-Host "File $ScriptLogFilePath not found. Skip read tail log"
     }
 }
-[System.Collections.ArrayList]$JobArray = @()
+$JobArray = @{}
+$JobTimes = @{}
+
 foreach ($elementTag in $TagArray) {
     $startPort += 10
     $JobTailProc = start-job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort
-     Start-Sleep 5
-    $JobArray += $JobTailProc
+    Start-Sleep 1
+    $CurrentDate = Get-Date
+    Write-Host "Start $elementTag at $CurrentDate"
+    $JobArray.Add($elementTag,$JobTailProc)
+    $JobTimes = $JobTimes + @{$elementTag=@($CurrentDate, "")}
 
     do {
-        Start-Sleep 10
+        Start-Sleep 1
         $jobCount = $JobArray.count
         Write-Output "Current job count: $jobCount Max count: $StreamCountMax"
-        # $FirstArray = $JobArray
-        # foreach ($job in $FirstArray) {
-        #     $job | Receive-Job
-        #     if (!($job.State -eq "Running")) {
-        #         $JobArray.Remove($job) 
-        #     }
-        # }
-        for ($i = 0; $i -lt $JobArray.count; $i++)
-        {
-            $JobArray[$i] | Receive-Job
-            if (!($JobArray[$i].State -eq "Running")) {
-                $JobArray.RemoveAt($i)
-                $i--
+
+
+        $listsToDelete = @()
+
+        $JobArray.GetEnumerator() | ForEach-Object {
+            $key = $($_.key)
+            $JobArray[$key] | Receive-Job
+            if (!($JobArray[$key].State -eq "Running")) {
+                
+                $CurrentDate = Get-Date
+                $JobTimes[$key][1] = $CurrentDate 
+                
+                $listsToDelete += $key
+                Write-Host "End $key at $CurrentDate"
             }
+        }
+        foreach($listToDelete in $listsToDelete) {
+            $JobArray.Remove($listToDelete)
         }
 
     } while ($JobArray.count -ge $StreamCountMax)
 }
 
+
+
 do {
     Start-Sleep 1
 
-    for ($i = 0; $i -lt $JobArray.count; $i++)
-    {
-        $JobArray[$i] | Receive-Job
-        if (!($job.State -eq "Running")) {
-            $JobArray.RemoveAt($i)
-            $i--
+   $jobCount = $JobArray.count
+        Write-Output "Current job count: $jobCount Max count: $StreamCountMax"
+
+
+        $listsToDelete = @()
+
+        $JobArray.GetEnumerator() | ForEach-Object {
+            $key = $($_.key)
+            $JobArray[$key] | Receive-Job
+            if (!($JobArray[$key].State -eq "Running")) {
+                
+                $CurrentDate = Get-Date
+                $JobTimes[$key][1] = $CurrentDate 
+                
+                $listsToDelete += $key
+                Write-Host "End $key at $CurrentDate"
+            }
         }
-    }
-} while ($JobArray.count)]]></param>
+        foreach($listToDelete in $listsToDelete) {
+            $JobArray.Remove($listToDelete)
+        }
+} while ($JobArray.count)
+
+$JobTimes]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>

@@ -434,7 +434,7 @@ elseif ("%dep.IRP_GitHubUpdate.env.Database1CName%" -eq "%teamcity.project.id%_d
 }
 elseif ("%dep.IRP_GitHubUpdate.env.Database1CName%" -like "%teamcity.project.id%_develop*") {
     Write-Output "Start short test"
-    #$TagArray = @("BasicFormsCheck", "Catalogs")	
+    $TagArray = @("BasicFormsCheck", "Catalogs")	
 }
 else {
     Write-Output "Skip tests"
@@ -552,23 +552,23 @@ $VanessaRun = {
       'vanessashutdown': %env.CloseVA%,
       'closetestclient': true
     }"
-    Write-Output "$text"
+    #Write-Output "$text"
     $a = $text | ConvertFrom-Json
-    Write-Output "featurepath - %env.VA.FeaturePath%Internal_New"
+    #Write-Output "featurepath - %env.VA.FeaturePath%Internal_New"
     $a | Add-Member -Type NoteProperty -Name 'featurepath' -Value '%env.VA.FeaturePath%Internal_New'
-    Write-Output "projectpath - %system.teamcity.build.workingDir%"
+    #Write-Output "projectpath - %system.teamcity.build.workingDir%"
     $a | Add-Member -Type NoteProperty -Name 'projectpath' -Value '%system.teamcity.build.workingDir%'
-    Write-Output "outputscreenshot - %system.teamcity.build.tempDir%"
+    #Write-Output "outputscreenshot - %system.teamcity.build.tempDir%"
     $a | Add-Member -Type NoteProperty -Name 'outputscreenshot' -Value '%system.teamcity.build.tempDir%'
-    Write-Output "texterrorslogname - %system.teamcity.build.tempDir%\errors$elementTag"
+    #Write-Output "texterrorslogname - %system.teamcity.build.tempDir%\errors$elementTag"
     $a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value "%system.teamcity.build.tempDir%\errors$elementTag"
-    Write-Output "textlogname - $ScriptLogFilePath"
+    #Write-Output "textlogname - $ScriptLogFilePath"
     $a | Add-Member -Type NoteProperty -Name 'textlogname' -Value $ScriptLogFilePath
-    Write-Output "testclientports - $startPort - $portmax"
+    #Write-Output "testclientports - $startPort - $portmax"
     $a | Add-Member -Type NoteProperty -Name 'testclientports' -Value "$startPort - $portmax"
-    Write-Output "directorytobuildhierarchy - %env.VA.FeaturePath%"
+    #Write-Output "directorytobuildhierarchy - %env.VA.FeaturePath%"
     $a.AllureReport | Add-Member -Type NoteProperty -Name 'directorytobuildhierarchy' -Value '%env.VA.FeaturePath%'
-    Write-Output "allurepath - $allurePath/$elementTag"
+    #Write-Output "allurepath - $allurePath/$elementTag"
     $a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepath' -Value "$allurePath/$elementTag"
     #$a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepathbase' -Value "$allurePath/base"
     
@@ -578,8 +578,8 @@ $VanessaRun = {
   
     $b = $a | ConvertTo-Json -depth 32
     $b | set-content %system.teamcity.build.workingDir%/va$elementTag.json
-    Write-Output "$b"
-    Write-Output "##teamcity[compilationFinished compiler='VA settings']"
+    #Write-Output "$b"
+    #Write-Output "##teamcity[compilationFinished compiler='VA settings']"
   
     ### Run VA ########################################################################
   
@@ -598,7 +598,7 @@ $VanessaRun = {
     $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
     #Write-Output "##teamcity[compilationStarted compiler='$ScriptLogFilePath']"
 
-    Write-Host "VA PID $processID"
+    #Write-Host "VA PID $processID"
     while (!(Test-Path $ScriptLogFilePath)) { 
         If (Get-Process -id $processID -ErrorAction SilentlyContinue ) {
             Start-Sleep 5
@@ -612,7 +612,8 @@ $VanessaRun = {
  
     If (Test-Path $ScriptLogFilePath) {
         $loopBlock = {
-            Param($ScriptLogFilePath) Get-Content $ScriptLogFilePath -Wait -Tail 0 -Encoding UTF8
+            Param($ScriptLogFilePath) 
+            #Get-Content $ScriptLogFilePath -Wait -Tail 0 -Encoding UTF8
         }
         $TailLoopJob = start-job -scriptBlock $loopBlock -ArgumentList $ScriptLogFilePath
         try {
@@ -636,48 +637,76 @@ $VanessaRun = {
         Write-Host "File $ScriptLogFilePath not found. Skip read tail log"
     }
 }
-[System.Collections.ArrayList]$JobArray = @()
+$JobArray = @{}
+$JobTimes = @{}
+$TotalTags = $TagArray.count
 foreach ($elementTag in $TagArray) {
     $startPort += 10
     $JobTailProc = start-job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort
-     Start-Sleep 5
-    $JobArray += $JobTailProc
+    Start-Sleep 1
+    $CurrentDate = Get-Date
+    $JobArray.Add($elementTag,$JobTailProc)
+    $JobTimes = $JobTimes + @{$elementTag=@($CurrentDate, "")}
+    $NumberJob = $JobTimes.count
+    Write-Host "Start $elementTag at $CurrentDate #$NumberJob/$TotalTags"
+   
 
     do {
         Start-Sleep 10
         $jobCount = $JobArray.count
-        Write-Output "Current job count: $jobCount Max count: $StreamCountMax"
-        # $FirstArray = $JobArray
-        # foreach ($job in $FirstArray) {
-        #     $job | Receive-Job
-        #     if (!($job.State -eq "Running")) {
-        #         $JobArray.Remove($job) 
-        #     }
-        # }
-        for ($i = 0; $i -lt $JobArray.count; $i++)
-        {
-            $JobArray[$i] | Receive-Job
-            if (!($JobArray[$i].State -eq "Running")) {
-                $JobArray.RemoveAt($i)
-                $i--
+        #Write-Output "Current job count: $jobCount Max count: $StreamCountMax"
+
+
+        $listsToDelete = @()
+
+        $JobArray.GetEnumerator() | ForEach-Object {
+            $key = $($_.key)
+            $JobArray[$key] | Receive-Job
+            if (!($JobArray[$key].State -eq "Running")) {
+                
+                $CurrentDate = Get-Date
+                $JobTimes[$key][1] = $CurrentDate 
+                
+                $listsToDelete += $key
+                Write-Host "End $key at $CurrentDate"
             }
+        }
+        foreach($listToDelete in $listsToDelete) {
+            $JobArray.Remove($listToDelete)
         }
 
     } while ($JobArray.count -ge $StreamCountMax)
 }
 
-do {
-    Start-Sleep 1
 
-    for ($i = 0; $i -lt $JobArray.count; $i++)
-    {
-        $JobArray[$i] | Receive-Job
-        if (!($job.State -eq "Running")) {
-            $JobArray.RemoveAt($i)
-            $i--
+
+do {
+    Start-Sleep 10
+
+   $jobCount = $JobArray.count
+        Write-Output "Current job count: $jobCount Max count: $StreamCountMax"
+
+
+        $listsToDelete = @()
+
+        $JobArray.GetEnumerator() | ForEach-Object {
+            $key = $($_.key)
+            $JobArray[$key] | Receive-Job
+            if (!($JobArray[$key].State -eq "Running")) {
+                
+                $CurrentDate = Get-Date
+                $JobTimes[$key][1] = $CurrentDate 
+                
+                $listsToDelete += $key
+                Write-Host "End $key at $CurrentDate"
+            }
         }
-    }
-} while ($JobArray.count)]]></param>
+        foreach($listToDelete in $listsToDelete) {
+            $JobArray.Remove($listToDelete)
+        }
+} while ($JobArray.count)
+
+$JobTimes]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>

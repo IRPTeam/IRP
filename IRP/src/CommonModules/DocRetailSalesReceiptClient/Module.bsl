@@ -33,10 +33,13 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	EndIf;
 	
 	If Not ValueIsFilled(Object.Ref) Then
-		ItemListOnChange(Object, Form, Undefined);
+		If ValueIsFilled(Object.Partner) Then
+			DocumentsClient.PartnerOnChange(Object, Form, ThisObject, Undefined);
+		EndIf;
 		If ValueIsFilled(Object.Company) Then
 			DocumentsClient.CompanyOnChange(Object, Form, ThisObject, Undefined);
 		EndIf;
+		ItemListOnChange(Object, Form, Undefined);
 	EndIf;
 		
 	If Not ValueIsFilled(Form.CurrentStore) Then

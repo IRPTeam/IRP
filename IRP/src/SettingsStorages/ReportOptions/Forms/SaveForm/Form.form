@@ -10,7 +10,6 @@
     <items xsi:type="form:Button">
       <name>FormSaveSetting</name>
       <id>23</id>
-      <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
@@ -33,7 +32,6 @@
       <type>UsualButton</type>
       <commandName>Form.Command.SaveSetting</commandName>
       <representation>Auto</representation>
-      <defaultButton>true</defaultButton>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
@@ -65,6 +63,7 @@
       <type>UsualButton</type>
       <commandName>Form.Command.SaveAs</commandName>
       <representation>Auto</representation>
+      <defaultButton>true</defaultButton>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>

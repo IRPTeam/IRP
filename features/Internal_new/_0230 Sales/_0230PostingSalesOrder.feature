@@ -318,8 +318,9 @@ Scenario: _023113 check totals in the document Sales order
 	* Open list form Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	* Select Sales order
-		| 'Number' |
-		| '$$NumberSalesOrder023001$$'      |
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberSalesOrder023001$$'      |
 		And I select current line in "List" table
 	* Check for document results
 		Then the form attribute named "ItemListTotalOffersAmount" became equal to "0,00"

@@ -190,7 +190,7 @@ Scenario: _25003 check Sales order printing
 		And I click "Sales Order" button
 	* Check printing form
 		And I wait "Table" window opening in 20 seconds
-		Given "" spreadsheet document is equal to "SalesOrderPrintForm" by template
+		Given "" spreadsheet document is equal to "SalesOrderPrint" by template
 		And Delay 30
 	And I close all client application windows
 

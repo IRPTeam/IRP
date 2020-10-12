@@ -1083,6 +1083,7 @@ Scenario: check the filter by Partner term (by segments + expiration date)
 Scenario: check the filter by customers in the sales documents
 * Check visual filter
 	And I click Select button of "Partner" field
+	And I click "List" button
 	And I save number of "List" table lines as "QS"
 	Then "QS" variable is equal to 23
 	And "List" table contains lines

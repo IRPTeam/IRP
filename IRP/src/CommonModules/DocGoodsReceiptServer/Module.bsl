@@ -427,17 +427,16 @@ Function PurchaseInvoiceIsExists(GoodsReceiptRef)
 	If Not ValueIsFilled(GoodsReceiptRef) Then
 		Return False;
 	EndIf;
-	
-	Filter = New Structure();
+
+	Filter = New Structure;
 	Filter.Insert("MetadataObject", GoodsReceiptRef.Metadata());
-	Filter.Insert("AttributeName", "ReadOnlyIfPurchaseInvoiceExists");
+	Filter.Insert("AttributeName", "EditIfPurchaseInvoiceExists");
 	UserSettings = UserSettingsServer.GetUserSettings(Undefined, Filter);
-	If Not (UserSettings.Count() And UserSettings[0].Value = True) Then
+	If UserSettings.Count() And UserSettings[0].Value = True Then
 		Return False;
 	EndIf;
-	
-	Query = New Query();
-	Query.Text = 
+	Query = New Query;
+	Query.Text =
 	"SELECT ALLOWED TOP 1
 	|	PurchaseInvoiceGoodsReceipts.GoodsReceipt
 	|FROM

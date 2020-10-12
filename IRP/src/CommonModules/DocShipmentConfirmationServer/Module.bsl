@@ -115,17 +115,16 @@ Function SalesInvoiceIsExists(ShipmentConfirmationRef)
 	If Not ValueIsFilled(ShipmentConfirmationRef) Then
 		Return False;
 	EndIf;
-	
-	Filter = New Structure();
+
+	Filter = New Structure;
 	Filter.Insert("MetadataObject", ShipmentConfirmationRef.Metadata());
-	Filter.Insert("AttributeName", "ReadOnlyIfSalesInvoiceExists");
+	Filter.Insert("AttributeName", "EditIfSalesInvoiceExists");
 	UserSettings = UserSettingsServer.GetUserSettings(Undefined, Filter);
-	If Not (UserSettings.Count() And UserSettings[0].Value = True) Then
+	If UserSettings.Count() And UserSettings[0].Value = True Then
 		Return False;
 	EndIf;
-	
-	Query = New Query();
-	Query.Text = 
+	Query = New Query;
+	Query.Text =
 	"SELECT ALLOWED TOP 1
 	|	SalesInvoiceShipmentConfirmations.ShipmentConfirmation
 	|FROM

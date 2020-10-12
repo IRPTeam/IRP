@@ -20,7 +20,10 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 // Doc.PurchaseInvoice - expense
 // Doc.GoodsReceipt - receipt
 // Doc.PurchaseOrder - receipt
-
+	If TypeOf(Ref) = Type("DocumentRef.GoodsReceipt") Then
+		Return True;
+	EndIf;
+	
 	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_ReceiptOrders") Then
 		Return True;
 	EndIf;

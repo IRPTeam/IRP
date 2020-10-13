@@ -405,11 +405,16 @@ Start-Sleep -s 5]]></param>
 If ($Proc) {
     Stop-Process -ID %env.dbgs_PID% -Force
 }
-
+Start-Sleep 1
 $Proc = Get-Process -ID %env.PID_ID% -ErrorAction SilentlyContinue
 If ($Proc) {
     Stop-Process -ID %env.PID_ID% -Force
-}]]></param>
+}
+Start-Sleep 1
+Stop-Process -Name "1cv8"
+Start-Sleep 10
+Stop-Process -Name "1cv8c"
+Start-Sleep 10]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="execute_always" />
         </parameters>

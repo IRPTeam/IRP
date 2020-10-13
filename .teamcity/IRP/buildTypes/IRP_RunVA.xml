@@ -11,7 +11,6 @@
     <disabled-settings>
       <setting-ref ref="BUILD_EXT_19" />
       <setting-ref ref="RUNNER_10" />
-      <setting-ref ref="RUNNER_29" />
     </disabled-settings>
     <parameters>
       <param name="env.CloseVA" value="true" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
@@ -500,38 +499,6 @@ do {
 } while ($JobArray.count)
 
 $JobTimes]]></param>
-          <param name="jetbrains_powershell_script_mode" value="CODE" />
-          <param name="teamcity.step.mode" value="default" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_29" name="VA Read log" type="jetbrains_powershell">
-        <parameters>
-          <param name="jetbrains_powershell_execution" value="PS1" />
-          <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code"><![CDATA[Write-Host "##teamcity[progressStart 'Read VA steps']"
-$processID = %env.VA_PID%
-$filePath = "%system.teamcity.build.tempDir%/test.txt"
-while (!(Test-Path $filePath)) { Start-Sleep 1 }
-
-    $loopBlock = {
-        Param($filePath) Get-Content $filePath -Wait -Tail 0 -Encoding UTF8
-    }
-    $TailLoopJob = start-job -scriptBlock $loopBlock -ArgumentList $filePath
-    try {
-        do {
-            $TailLoopJob | Receive-Job
-            If(Get-Process -id $processID -ErrorAction SilentlyContinue ){
-                Start-Sleep 1                                
-                $waitMore = $true
-            } else {
-                $waitMore = $false
-            }
-        } while($waitMore)
-    } finally {
-        Stop-Job $TailLoopJob
-        Remove-Job $TailLoopJob
-    }
-Write-Host "##teamcity[progressStart 'Read VA steps']"]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>

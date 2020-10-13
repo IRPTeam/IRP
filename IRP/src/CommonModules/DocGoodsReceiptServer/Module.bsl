@@ -13,7 +13,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
 	
-	FillTransactionTypeChoiceList(Form);	
+	FillTransactionTypeChoiceList(Form);
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
@@ -27,7 +27,6 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
-	
 	ObjectData = DocumentsClientServer.GetStructureFillStores();
 	FillPropertyValues(ObjectData, CurrentObject);
 	DocumentsClientServer.FillStores(ObjectData, Form);
@@ -36,7 +35,9 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
 	EndIf;
+	
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	Form.ReadOnly = PurchaseInvoiceIsExists(Object.Ref);
 EndProcedure
 
 #EndRegion
@@ -421,3 +422,34 @@ Procedure FillTransactionTypeChoiceList(Form)
 		Form.Items.TransactionType.ChoiceList.Add(Enums.GoodsReceiptTransactionTypes.Bundling, Metadata.Enums.GoodsReceiptTransactionTypes.EnumValues.Bundling.Synonym);
 	EndIf;
 EndProcedure
+
+Function PurchaseInvoiceIsExists(GoodsReceiptRef)
+	If Not ValueIsFilled(GoodsReceiptRef) Then
+		Return False;
+	EndIf;
+
+	Filter = New Structure;
+	Filter.Insert("MetadataObject", GoodsReceiptRef.Metadata());
+	Filter.Insert("AttributeName", "EditIfPurchaseInvoiceExists");
+	UserSettings = UserSettingsServer.GetUserSettings(Undefined, Filter);
+	If UserSettings.Count() And UserSettings[0].Value = True Then
+		Return False;
+	EndIf;
+	Query = New Query;
+	Query.Text =
+	"SELECT ALLOWED TOP 1
+	|	PurchaseInvoiceGoodsReceipts.GoodsReceipt
+	|FROM
+	|	Document.PurchaseInvoice.GoodsReceipts AS PurchaseInvoiceGoodsReceipts
+	|WHERE
+	|	PurchaseInvoiceGoodsReceipts.GoodsReceipt = &GoodsReceipt
+	|	AND PurchaseInvoiceGoodsReceipts.Ref.Posted
+	|	AND NOT PurchaseInvoiceGoodsReceipts.Ref.DeletionMark";
+	Query.SetParameter("GoodsReceipt", GoodsReceiptRef);
+	QuerySelection = Query.Execute().Select();
+	If QuerySelection.Next() Then
+		Return True;
+	Else
+		Return False;
+	EndIf;
+EndFunction

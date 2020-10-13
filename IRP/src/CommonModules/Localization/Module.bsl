@@ -287,6 +287,13 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("Error_084", NStr("en = 'Error to get picture from Google drive'", Lang));
 	
+	//%1 - 1000
+	//%2 - 300
+	//%3 - 350
+	//%4 - 50
+	//%5 - USD
+	Strings.Insert("Error_085", NStr("en = 'Credit limit exceeded. Limit: %1, limit balance: %2, transaction: %3, lack: %4 %5'", Lang));
+	
 	#EndRegion
 	
 	#Region InfoMessages

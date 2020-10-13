@@ -23,11 +23,12 @@ Scenario: Create catalog AccessGroups objects
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c615' | 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b327098e' |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c616' | 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270991' |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf116b327098d' | 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270990' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c614' | 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b327098f' |
 
 	And I refill object tabular section  "Users":
 		| 'Ref'                                                                  | 'User'                                                          |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c615' | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b3270995' |
-		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c615' | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b3270996' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c614' | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b3270996' |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c615' | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b3270997' |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c616' | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b327099a' |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf116b327098d' | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b3270998' |

@@ -442,6 +442,12 @@ Scenario: _029107 create a Sales order for service and product (Store doesn't us
 		And I select current line in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Price'  | 'Item'    | 'VAT' | 'Item key' | 'Procurement method' | 'Price type'              | 'Q'     | 'Offers amount' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| '100,00' | 'Service' | '18%' | 'Rent'     | ''                   | 'en description is empty' | '1,000' | ''              | 'pcs'  | 'No'                 | '15,25'      | '84,75'      | '100,00'       | 'Store 01' |
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "84,75"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "15,25"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "100,00"
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
@@ -463,6 +469,13 @@ Scenario: _029107 create a Sales order for service and product (Store doesn't us
 		And I input "700,00" text in "Price" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "6 016,95"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "1 083,05"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "7 100,00"
+		And "ItemList" table contains lines
+			| 'Price'  | 'Item'    | 'VAT' | 'Item key' | 'Procurement method' | 'Price type'              | 'Q'      | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| '100,00' | 'Service' | '18%' | 'Rent'     | ''                   | 'en description is empty' | '1,000'  | 'pcs'  | 'No'                 | '15,25'      | '84,75'      | '100,00'       | 'Store 01' |
+			| '700,00' | 'Table'   | '18%' | 'Table'    | 'Stock'              | 'en description is empty' | '10,000' | 'pcs'  | 'No'                 | '1 067,80'   | '5 932,20'   | '7 000,00'     | 'Store 01' |
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder029107$$" variable
 		And I delete "$$SalesOrder029107$$" variable

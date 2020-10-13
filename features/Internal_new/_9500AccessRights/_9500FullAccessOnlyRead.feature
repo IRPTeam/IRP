@@ -9,6 +9,10 @@ Feature: role Full access only read
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+	And I set "True" value to the constant "ShowBetaTesting"
+	And I set "True" value to the constant "ShowAlphaTestingSaas"
+	And I set "True" value to the constant "UseItemKey"
+	And I set "True" value to the constant "UseCompanies"
 
 Scenario: 950000 preparation (role Full access only read)
 	When Create catalog AccessGroups objects
@@ -1124,3 +1128,7 @@ Scenario: 950081 check role Full access only read (Special offers)
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
 		And I close all client application windows	
+
+Scenario: _999999 close TestClient session
+        And I close TestClient session
+		Then I connect launched Test client "Этот клиент"

@@ -739,7 +739,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 					| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    |
 					| 'Trousers' | '38/Yellow' | '12,000' | 'pcs'  | 'Store 03' |
 					| 'Shirt'    | '38/Black'  | '2,000'  | 'pcs'  | 'Store 03' |
-				And "ShipmentConfirmationsTree" table became equal
+				And "ShipmentConfirmationsTree" table contains lines
 					| 'Item'     | 'Item key'  | 'Shipment confirmation'            | 'Invoice' | 'SC'     | 'Q'      |
 					| 'Trousers' | '38/Yellow' | ''                                 | '12,000'  | '12,000' | '12,000' |
 					| ''         | ''          | '$$ShipmentConfirmation02900012$$' | ''        | '12,000' | '12,000' |

@@ -1500,12 +1500,13 @@ Scenario: _2990013 check the question of saving Physical inventory before creati
 			| 'Description' |
 			| 'Store 05'    |
 		And I select current line in "List" table
+		And I set checkbox "Use responsible person by row"
 		And I click "Fill exp. count" button
 	* Check message output
 		And I click "Physical count by location" button
-	// 	Then the form attribute named "Message" became equal to
-	// 	|'To run the "Physical count by location" command, you must save your work. Click OK to save and continue, or click Cancel to return.'|
-	// And I close all client application windows
+		Then the form attribute named "Message" became equal to
+		|'To run the "Physical count by location" command, you must save your work. Click OK to save and continue, or click Cancel to return.'|
+	And I close all client application windows
 
 
 

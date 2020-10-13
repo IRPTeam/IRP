@@ -898,7 +898,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			PostingServer.JoinTables(ArrayOfTables,
 				"RecordType, Period, Company, BasisDocument, Partner, 
 				|LegalName, Agreement, Currency, Amount"),
-				Parameters.IsReposting));
+				True));
 	
 	// AdvanceFromCustomers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AdvanceFromCustomers,
@@ -939,6 +939,10 @@ EndFunction
 
 Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
+	
+	If Not Cancel And Ref.Agreement.UseCreditLimit Then
+		CheckCreditLimits(Ref, Cancel, Parameters, AddInfo);
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -1005,6 +1009,91 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	                                                         AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
+EndProcedure
+
+Procedure CheckCreditLimits(Ref, Cancel, Parameters, AddInfo)
+	Query = New Query();
+	Query.TempTablesManager = New TempTablesManager();
+	Query.Text = 
+	"SELECT
+	|	PartnerArTransactions.Company,
+	|	PartnerArTransactions.Partner,
+	|	PartnerArTransactions.Agreement,
+	|	&CurrencyMovementType AS CurrencyMovementType
+	|INTO PartnerArTransactions
+	|FROM
+	|	&PartnerArTransactions AS PartnerArTransactions
+	|;
+	|
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	AccRegPartnerArTransactions.Company,
+	|	AccRegPartnerArTransactions.Partner,
+	|	AccRegPartnerArTransactions.Agreement,
+	|	AccRegPartnerArTransactions.CurrencyMovementType,
+	|	AccRegPartnerArTransactions.Amount
+	|INTO AccRegAccRegPartnerArTransactions
+	|FROM
+	|	AccumulationRegister.PartnerArTransactions AS AccRegPartnerArTransactions
+	|		INNER JOIN PartnerArTransactions AS PartnerArTransactions
+	|		ON AccRegPartnerArTransactions.Company = PartnerArTransactions.Company
+	|		AND AccRegPartnerArTransactions.Partner = PartnerArTransactions.Partner
+	|		AND AccRegPartnerArTransactions.Agreement = PartnerArTransactions.Agreement
+	|		AND AccRegPartnerArTransactions.CurrencyMovementType = PartnerArTransactions.CurrencyMovementType
+	|		AND AccRegPartnerArTransactions.Recorder = &Ref
+	|		AND AccRegPartnerArTransactions.RecordType = VALUE(AccumulationRecordType.Receipt)
+	|;
+	|
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	PartnerArTransactionsBalance.Company AS Company,
+	|	PartnerArTransactionsBalance.Partner AS Partner,
+	|	PartnerArTransactionsBalance.Agreement AS Agreement,
+	|	PartnerArTransactionsBalance.CurrencyMovementType AS CurrencyMovementType,
+	|	PartnerArTransactionsBalance.Currency AS Currency,
+	|	PartnerArTransactionsBalance.AmountBalance AS AmountBalance,
+	|	PartnerArTransactionsBalance.Agreement.CreditLimitAmount AS CreditLimitAmount,
+	|	AccRegAccRegPartnerArTransactions.Amount AS TransactionAmount
+	|FROM
+	|	AccumulationRegister.PartnerArTransactions.Balance(&BoundaryIncluding, (Company, Partner, Agreement,
+	|		CurrencyMovementType) IN
+	|		(SELECT
+	|			PartnerArTransactions.Company,
+	|			PartnerArTransactions.Partner,
+	|			PartnerArTransactions.Agreement,
+	|			&CurrencyMovementType
+	|		FROM
+	|			PartnerArTransactions AS PartnerArTransactions)) AS PartnerArTransactionsBalance
+	|		LEFT JOIN PartnerArTransactions AS PartnerArTransactions
+	|		ON PartnerArTransactionsBalance.Company = PartnerArTransactions.Company
+	|		AND PartnerArTransactionsBalance.Partner = PartnerArTransactions.Partner
+	|		AND PartnerArTransactionsBalance.Agreement = PartnerArTransactions.Agreement
+	|		AND PartnerArTransactionsBalance.CurrencyMovementType = PartnerArTransactions.CurrencyMovementType
+	|		LEFT JOIN AccRegAccRegPartnerArTransactions AS AccRegAccRegPartnerArTransactions
+	|		ON PartnerArTransactionsBalance.Company = AccRegAccRegPartnerArTransactions.Company
+	|		AND PartnerArTransactionsBalance.Partner = AccRegAccRegPartnerArTransactions.Partner
+	|		AND PartnerArTransactionsBalance.Agreement = AccRegAccRegPartnerArTransactions.Agreement
+	|		AND PartnerArTransactionsBalance.CurrencyMovementType = AccRegAccRegPartnerArTransactions.CurrencyMovementType
+	|WHERE
+	|	PartnerArTransactionsBalance.AmountBalance > PartnerArTransactionsBalance.Agreement.CreditLimitAmount";
+	Query.SetParameter("BoundaryIncluding"     , New Boundary(Parameters.PointInTime, BoundaryType.Including));
+	Query.SetParameter("CurrencyMovementType"  , Ref.Agreement.CurrencyMovementType);
+	Query.SetParameter("PartnerArTransactions" , Parameters.DocumentDataTables.PartnerArTransactions);
+	Query.SetParameter("Ref"                   , Ref);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	While QuerySelection.Next() Do
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(
+		StrTemplate(R().Error_085, 
+		Format(QuerySelection.CreditLimitAmount, "NFD=2;"), 
+		Format(QuerySelection.CreditLimitAmount - QuerySelection.AmountBalance + QuerySelection.TransactionAmount, "NFD=2;"), 
+		Format(QuerySelection.TransactionAmount, "NFD=2;"), 
+		Format(QuerySelection.AmountBalance - QuerySelection.CreditLimitAmount, "NFD=2;"),
+		QuerySelection.Currency));
+	EndDo;
 EndProcedure
 
 #EndRegion

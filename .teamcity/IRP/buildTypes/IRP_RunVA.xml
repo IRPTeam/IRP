@@ -27,7 +27,7 @@
       <param name="env.PID_ID" value="0" />
       <param name="env.RunAllTest" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.StopOnError" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
-      <param name="env.StreamCount" value="1" />
+      <param name="env.StreamCount" value="3" />
       <param name="env.VA.FeaturePath" value="%teamcity.build.workingDir%/features/" />
       <param name="env.VA_PID" value="" />
       <param name="env.dbgs_PID" value="" />

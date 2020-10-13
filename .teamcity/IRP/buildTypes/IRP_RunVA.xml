@@ -411,9 +411,9 @@ If ($Proc) {
     Stop-Process -ID %env.PID_ID% -Force
 }
 Start-Sleep 1
-Stop-Process -Name "1cv8"
+Stop-Process -Name "1cv8" -Force
 Start-Sleep 10
-Stop-Process -Name "1cv8c"
+Stop-Process -Name "1cv8c" -Force
 Start-Sleep 10]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="execute_always" />

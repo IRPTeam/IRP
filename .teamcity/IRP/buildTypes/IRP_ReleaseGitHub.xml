@@ -51,7 +51,7 @@
       </dependency>
       <dependency id="ARTIFACT_DEPENDENCY_9" sourceBuildTypeId="IRP_ReleaseGitHub" cleanDestination="false">
         <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" branch="+:master" />
-        <artifact sourcePath="release/*" />
+        <artifact sourcePath="NewRelease/*" />
       </dependency>
     </artifact-dependencies>
     <dependencies>

@@ -56,7 +56,7 @@ find /c "No errors found" %env.LogFile1C% && ( echo Success ) || ( echo "##teamc
       </build-trigger>
     </build-triggers>
     <artifact-dependencies>
-      <dependency id="ARTIFACT_DEPENDENCY_7" sourceBuildTypeId="IRP_BuildCF" cleanDestination="true">
+      <dependency id="ARTIFACT_DEPENDENCY_7" sourceBuildTypeId="IRP_BuildCF" cleanDestination="false">
         <revisionRule name="sameChainOrLastFinished" revision="latest.sameChainOrLastFinished" />
         <artifact sourcePath="IRP_master.cf" />
       </dependency>

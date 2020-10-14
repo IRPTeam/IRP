@@ -82,7 +82,7 @@ find /c "Distribution files successfully created" %env.LogFile1C% && ( echo Succ
       </dependency>
       <dependency id="ARTIFACT_DEPENDENCY_9" sourceBuildTypeId="IRP_ReleaseGitHub" cleanDestination="false">
         <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" branch="+:master" />
-        <artifact sourcePath="NewRelease/*" />
+        <artifact sourcePath="NewRelease =&gt; LastRelease" />
       </dependency>
     </artifact-dependencies>
     <dependencies>

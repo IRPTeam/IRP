@@ -183,25 +183,3 @@ Procedure SetQueryBuilderFilters(QueryBuilder, QueryFilters)
 EndProcedure
 
 #EndRegion
-
-#Region MetadataObjects
-
-Function MetadataObjectContainAttribute(MetadataObject, AttributeName) Export
-	ReturnValue = False;
-	If MetadataObject.Attributes.Find(AttributeName) = Undefined Then
-		FoundCommonAttribute = Metadata.CommonAttributes.Find(AttributeName);
-		If FoundCommonAttribute <> Undefined
-			And FoundCommonAttribute.Content.Contains(MetadataObject) Then
-			FindedCommonAttributeContentItem = FoundCommonAttribute.Content.Find(MetadataObject);
-			If FindedCommonAttributeContentItem <> Undefined
-				And FindedCommonAttributeContentItem.Use = Metadata.ObjectProperties.CommonAttributeUse.Use Then
-				ReturnValue = True;
-			EndIf;
-		EndIf;
-	Else
-		ReturnValue = True;
-	EndIf;
-	Return ReturnValue;
-EndFunction
-
-#EndRegion

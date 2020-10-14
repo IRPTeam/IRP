@@ -63,8 +63,8 @@
     </build-triggers>
     <artifact-dependencies>
       <dependency id="ARTIFACT_DEPENDENCY_7" sourceBuildTypeId="IRP_BuildCF" cleanDestination="true">
-        <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" branch="+:develop" />
-        <artifact sourcePath="IRP_develop.cf" />
+        <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" branch="+:master" />
+        <artifact sourcePath="IRP_master.cf" />
       </dependency>
     </artifact-dependencies>
     <cleanup />

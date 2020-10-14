@@ -1,9 +1,5 @@
 #Region FormEvents
 
-Procedure OnOpen(Object, Form, Cancel) Export
-	SetVisible(Object, Form);
-EndProcedure
-
 Procedure ListBeforeAddRow(Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
 	CommonFormActions.DynamicListBeforeAddRow(
 				Form, Item, Cancel, Clone, Parent, IsFolder, Parameter, "Catalog.Agreements.ObjectForm");
@@ -99,14 +95,14 @@ EndProcedure
 #Region ItemTumblers
 
 Procedure TypeOnChange(Object, Form, Item) Export
-	SetVisible(Object, Form);
+	CatAgreementsClientServer.SetVisible(Object, Form);
 EndProcedure
 
 Procedure ApArPostingDetailOnChange(Object, Form, Item) Export
 	If Object.ApArPostingDetail <> PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement") Then
 		Object.StandardAgreement = Undefined;
 	EndIf;
-	SetVisible(Object, Form);
+	CatAgreementsClientServer.SetVisible(Object, Form);
 EndProcedure
 
 Procedure KindOnChange(Object, Form, Item) Export
@@ -115,25 +111,15 @@ Procedure KindOnChange(Object, Form, Item) Export
 		Object.StandardAgreement = Undefined;
 		Object.PriceType = Undefined;
 	EndIf;
-	SetVisible(Object, Form);
+	CatAgreementsClientServer.SetVisible(Object, Form);
+EndProcedure
+
+Procedure UseCreditLimitOnChange(Object, Form, Item) Export
+	If Not Object.UseCreditLimit Then
+		Object.CreditLimitAmount = 0;
+	EndIf;
+	CatAgreementsClientServer.SetVisible(Object, Form);
 EndProcedure
 
 #EndRegion
 
-Procedure SetVisible(Object, Form)
-	IsStandard = Object.Kind = PredefinedValue("Enum.AgreementKinds.Standard");
-	IsRegular = Object.Kind = PredefinedValue("Enum.AgreementKinds.Regular");
-	ApArByStandardAgreements = Object.ApArPostingDetail = PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement");
-	IsCustomer = Object.Type = PredefinedValue("Enum.AgreementTypes.Customer");
-	
-	Form.Items.ItemSegment.Visible = IsCustomer;	
-	
-	Form.Items.StandardAgreement.Visible = ApArByStandardAgreements;
-	
-	Form.Items.ApArPostingDetail.ReadOnly = IsStandard;
-	Form.Items.PriceType.Visible = IsRegular;
-	Form.Items.PriceIncludeTax.Visible = IsRegular;
-	Form.Items.NumberDaysBeforeShipment.Visible = IsRegular;
-	Form.Items.Store.Visible = IsRegular;
-	Form.Items.Type.Visible = IsRegular;
-EndProcedure

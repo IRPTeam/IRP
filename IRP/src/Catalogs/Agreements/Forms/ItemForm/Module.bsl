@@ -17,11 +17,19 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
+	If Parameters.Key.IsEmpty() Then
+		CatAgreementsClientServer.SetVisible(Object, ThisObject);
+	EndIf;
 EndProcedure
 
-&AtClient
-Procedure OnOpen(Cancel)
-	CatAgreementsClient.OnOpen(Object, ThisObject, Cancel);
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	CatAgreementsClientServer.SetVisible(Object, ThisObject);
+EndProcedure
+
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	CatAgreementsClientServer.SetVisible(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -30,7 +38,9 @@ EndProcedure
 Procedure DescriptionOpening(Item, StandardProcessing) Export
 	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
+
 #Region ItemCompany
+
 &AtClient
 Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
 	CatAgreementsClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
@@ -97,6 +107,11 @@ EndProcedure
 &AtClient
 Procedure KindOnChange(Item)
 	CatAgreementsClient.KindOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure UseCreditLimitOnChange(Item)
+	CatAgreementsClient.UseCreditLimitOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #Region AddAttributes

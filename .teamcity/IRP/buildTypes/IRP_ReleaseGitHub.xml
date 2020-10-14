@@ -8,6 +8,7 @@
       <option name="artifactRules" value="NewRelease =&gt; LastRelease" />
       <option name="branchFilter" value="+:master" />
       <option name="buildConfigurationType" value="DEPLOYMENT" />
+      <option name="cleanBuild" value="true" />
       <option name="maximumNumberOfBuilds" value="1" />
       <option name="publishArtifactCondition" value="SUCCESSFUL" />
     </options>

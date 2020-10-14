@@ -1003,4 +1003,11 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>CommonAttribute.BusinessUnit</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

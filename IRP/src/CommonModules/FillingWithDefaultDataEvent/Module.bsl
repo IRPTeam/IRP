@@ -9,14 +9,16 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 	Data = New Structure();
 	Data.Insert("ManagerSegment", SessionParameters.CurrentUserPartner);
 	For Each Row In UserSettings Do
-		If Row.KindOfAttribute = Enums.KindsOfAttributes.Regular Then
+		If Row.KindOfAttribute = Enums.KindsOfAttributes.Regular
+			Or Row.KindOfAttribute = Enums.KindsOfAttributes.Common Then
 			Data.Insert(Row.AttributeName, Row.Value);
 		EndIf;
 	EndDo;
 	
 	SourceMetadata = Source.Metadata();
 	For Each KeyValue In Data Do
-		If SourceMetadata.Attributes.Find(KeyValue.Key) <> Undefined Then
+		FillAtribute = CommonFunctionsServer.MetadataObjectContainAttribute(SourceMetadata, KeyValue.Key);
+		If FillAtribute Then		
 			If TypeOf(Source[KeyValue.Key]) = Type("Boolean")
 				And Not Source[KeyValue.Key] Then
 				Source[KeyValue.Key] = KeyValue.Value;
@@ -26,7 +28,7 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 				EndIf;
 			EndIf;
 		EndIf;
-	EndDo;
+	EndDo;	
 	
 	Attributes = Source.Metadata().Attributes;
 	

@@ -5,7 +5,7 @@
   <settings>
     <options>
       <option name="allowPersonalBuildTriggering" value="false" />
-      <option name="artifactRules" value="NewRelease" />
+      <option name="artifactRules" value="NewRelease/*" />
       <option name="branchFilter" value="+:master" />
       <option name="buildConfigurationType" value="DEPLOYMENT" />
       <option name="cleanBuild" value="true" />

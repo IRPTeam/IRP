@@ -113,8 +113,7 @@ $StreamCountMax = %env.StreamCount%
 
 $VanessaRun = {
     Param($elementTag, $startPort)
-    $NewD = New-Desktop
-    Set-DesktopName -Desktop $NewD -Name $elementTag
+
     $portmax = $startPort + 9
     $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
     #Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"
@@ -246,7 +245,9 @@ $VanessaRun = {
     #Write-Output "##teamcity[compilationFinished compiler='VA settings']"
   
     ### Run VA ########################################################################
-  
+    $NewD = New-Desktop
+    Set-DesktopName -Desktop $NewD -Name $elementTag
+    Switch-Desktop -Desktop $NewD
     $ProcessInfo = New-Object System.Diagnostics.ProcessStartInfo 
     $ProcessInfo.FileName = %env.PathTo1CPlatform% 
     $ProcessInfo.UseShellExecute = $false 
@@ -300,7 +301,7 @@ $VanessaRun = {
     else {
         Write-Host "File $ScriptLogFilePath not found. Skip read tail log"
     }
-    Remove-Desktop -Desktop $NewD
+    Remove-Desktop -Desktop $NewD -Verbose
 }
 $JobArray = @{}
 $JobTimes = @{}
@@ -308,7 +309,7 @@ $TotalTags = $TagArray.count
 foreach ($elementTag in $TagArray) {
     $startPort += 10
     $JobTailProc = start-job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort
-    Start-Sleep 1
+    Start-Sleep 10
     $CurrentDate = Get-Date
     $JobArray.Add($elementTag,$JobTailProc)
     $JobTimes = $JobTimes + @{$elementTag=@($CurrentDate, "")}

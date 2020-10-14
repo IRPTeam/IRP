@@ -113,6 +113,7 @@ $StreamCountMax = %env.StreamCount%
 
 $VanessaRun = {
     Param($elementTag, $startPort)
+    $NewD = New-Desktop
     $portmax = $startPort + 9
     $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
     #Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"
@@ -298,6 +299,7 @@ $VanessaRun = {
     else {
         Write-Host "File $ScriptLogFilePath not found. Skip read tail log"
     }
+    Remove-Desktop -Desktop $NewD
 }
 $JobArray = @{}
 $JobTimes = @{}

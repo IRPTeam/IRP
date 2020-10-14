@@ -1771,7 +1771,12 @@ Scenario: Create information register UserSettings records (check registers bala
 		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.ShipmentConfirmation' | 'CheckBalance_GoodsInTransitOutgoing' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
 		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.ShipmentConfirmation' | 'CheckBalance_ShipmentOrders'         | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
 
+Scenario: Create information register UserSettings records (edit GR and SC)
 
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup'                                                   | 'MetadataObject'                | 'AttributeName'                       | 'KindOfAttribute'               | 'Value' |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.ShipmentConfirmation' | 'EditIfSalesInvoiceExists'            | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| 'e1cib/data/Catalog.Users?ref=852cc6447117530211e8ee3138740eaa' | 'Document.GoodsReceipt'         | 'EditIfPurchaseInvoiceExists'         | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
 
 Scenario: Create catalog SpecialOfferRules objects
 

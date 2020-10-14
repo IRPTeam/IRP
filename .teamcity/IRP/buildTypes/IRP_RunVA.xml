@@ -114,6 +114,7 @@ $StreamCountMax = %env.StreamCount%
 $VanessaRun = {
     Param($elementTag, $startPort)
     $NewD = New-Desktop
+    Set-DesktopName -Desktop $NewD -Name $elementTag
     $portmax = $startPort + 9
     $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
     #Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"

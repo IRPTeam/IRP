@@ -5,7 +5,7 @@
   <settings>
     <options>
       <option name="allowPersonalBuildTriggering" value="false" />
-      <option name="branchFilter" value="+:develop" />
+      <option name="branchFilter" value="+:master" />
       <option name="buildConfigurationType" value="DEPLOYMENT" />
       <option name="cleanBuild" value="true" />
       <option name="maximumNumberOfBuilds" value="1" />

@@ -19,14 +19,6 @@
       <param name="env.Version" value="0.7.2" />
     </parameters>
     <build-runners>
-      <runner id="RUNNER_17" name="Upload to github" type="simpleRunner">
-        <parameters>
-          <param name="script.content"><![CDATA[%teamcity.tool.windows-amd64-github-release%\bin\windows\amd64\github-release.exe release --security-token %env.GitHubSecurityToken% --user DitriXNew --repo irp --tag Release-v%env.Version%.%build.number% 
-%teamcity.tool.windows-amd64-github-release%\bin\windows\amd64\github-release.exe upload  --security-token %env.GitHubSecurityToken% --user DitriXNew --repo irp --tag Release-v%env.Version%.%build.number%  --name Release-v%env.Version%.%build.number%.cf --file %system.teamcity.build.workingDir%\IRP_develop.cf]]></param>
-          <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
       <runner id="RUNNER_18" name="" type="BuildCfAndUpdateDb">
         <parameters>
           <param name="env.CheckConfigSettings" value="-IncorrectReferences -ThinClient -WebClient -Server -UnreferenceProcedures -HandlersExistence -EmptyHandlers -ExtendedModulesCheck -CheckUseModality -CheckUseSynchronousCalls" />
@@ -45,6 +37,14 @@
           <param name="teamcity.activeVcsBranch.age.days" value="1" />
           <param name="teamcity.runner.commandline.stdstreams.encoding" value="CP866" />
           <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_17" name="Upload to github" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[%teamcity.tool.windows-amd64-github-release%\bin\windows\amd64\github-release.exe release --security-token %env.GitHubSecurityToken% --user DitriXNew --repo irp --tag Release-v%env.Version%.%build.number% 
+%teamcity.tool.windows-amd64-github-release%\bin\windows\amd64\github-release.exe upload  --security-token %env.GitHubSecurityToken% --user DitriXNew --repo irp --tag Release-v%env.Version%.%build.number%  --name Release-v%env.Version%.%build.number%.cf --file %system.teamcity.build.workingDir%\IRP_develop.cf]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
     </build-runners>

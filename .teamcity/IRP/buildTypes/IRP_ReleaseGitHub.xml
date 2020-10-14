@@ -12,6 +12,7 @@
       <option name="publishArtifactCondition" value="SUCCESSFUL" />
     </options>
     <disabled-settings>
+      <setting-ref ref="ARTIFACT_DEPENDENCY_9" />
       <setting-ref ref="RUNNER_17" />
       <setting-ref ref="TRIGGER_6" />
     </disabled-settings>

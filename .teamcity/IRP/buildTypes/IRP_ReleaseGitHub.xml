@@ -5,10 +5,12 @@
   <settings>
     <options>
       <option name="allowPersonalBuildTriggering" value="false" />
+      <option name="artifactRules" value="IRP_master.cf" />
       <option name="branchFilter" value="+:master" />
       <option name="buildConfigurationType" value="DEPLOYMENT" />
       <option name="cleanBuild" value="true" />
       <option name="maximumNumberOfBuilds" value="1" />
+      <option name="publishArtifactCondition" value="SUCCESSFUL" />
     </options>
     <disabled-settings>
       <setting-ref ref="RUNNER_17" />

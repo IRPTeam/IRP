@@ -248,6 +248,7 @@ $VanessaRun = {
     $NewD = New-Desktop
     Set-DesktopName -Desktop $NewD -Name $elementTag
     Switch-Desktop -Desktop $NewD
+    Start-Sleep 2
     $ProcessInfo = New-Object System.Diagnostics.ProcessStartInfo 
     $ProcessInfo.FileName = %env.PathTo1CPlatform% 
     $ProcessInfo.UseShellExecute = $false 

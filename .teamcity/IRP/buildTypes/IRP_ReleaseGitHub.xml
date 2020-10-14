@@ -19,26 +19,6 @@
       <param name="env.Version" value="0.7.2" />
     </parameters>
     <build-runners>
-      <runner id="RUNNER_18" name="" type="BuildCfAndUpdateDb">
-        <parameters>
-          <param name="env.CheckConfigSettings" value="-IncorrectReferences -ThinClient -WebClient -Server -UnreferenceProcedures -HandlersExistence -EmptyHandlers -ExtendedModulesCheck -CheckUseModality -CheckUseSynchronousCalls" />
-          <param name="env.ConnectionTo1C" value="/F%system.teamcity.build.workingDir%\TempDB /N %env.LoginTo1C% /P %env.PassTo1C%" />
-          <param name="env.DBLocale" value="en" />
-          <param name="env.Database1CName" value="IRP" />
-          <param name="env.LogFile1C" value="%system.teamcity.build.tempDir%\Log1C.log" />
-          <param name="env.LoginTo1C" value="CI" />
-          <param name="env.PassTo1C" value="8HRUYXL2UC" />
-          <param name="env.PathTo1CBin" value="%env.PathTo1CBin%" />
-          <param name="env.PathTo1CPlatform" value="&quot;%env.PathTo1CBin%\1cv8.exe&quot;" />
-          <param name="env.PathToRACTools" value="%env.PathTo1CBin%\rac.exe" />
-          <param name="env.SQLUser" value="postgres" />
-          <param name="env.SkipRunVA" value="False" />
-          <param name="teamcity.activeBuildBranch.age.hours" value="0" />
-          <param name="teamcity.activeVcsBranch.age.days" value="1" />
-          <param name="teamcity.runner.commandline.stdstreams.encoding" value="CP866" />
-          <param name="teamcity.step.mode" value="default" />
-        </parameters>
-      </runner>
       <runner id="RUNNER_17" name="Upload to github" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[%teamcity.tool.windows-amd64-github-release%\bin\windows\amd64\github-release.exe release --security-token %env.GitHubSecurityToken% --user DitriXNew --repo irp --tag Release-v%env.Version%.%build.number% 

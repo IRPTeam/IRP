@@ -49,6 +49,10 @@
         <revisionRule name="sameChainOrLastFinished" revision="latest.sameChainOrLastFinished" />
         <artifact sourcePath="IRP_master.cf" />
       </dependency>
+      <dependency id="ARTIFACT_DEPENDENCY_9" sourceBuildTypeId="IRP_ReleaseGitHub" cleanDestination="false">
+        <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" branch="+:master" />
+        <artifact sourcePath="release/*" />
+      </dependency>
     </artifact-dependencies>
     <dependencies>
       <depend-on sourceBuildTypeId="IRP_BuildCF">

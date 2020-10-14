@@ -157,5 +157,5 @@ Scenario: 950000 preparation (role Basic role)
 	And I close all client application windows
 
 Scenario: _999999 close TestClient session
-        And I close TestClient session
+		And I close TestClient session
 		Then I connect launched Test client "Этот клиент"

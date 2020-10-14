@@ -95,6 +95,31 @@ Scenario: _29700101 preparation (test filling-in SO - SI)
 		And I save the value of "Number" field as "$$NumberPurchaseOrder29700102$$"
 		And I save the window as "$$PurchaseOrder29700102$$"
 		And I click the button named "FormPostAndClose"
+	* Check user settings
+		Given I open hyperlink "e1cib/list/InformationRegister.UserSettings"
+		If "List" table contains lines Then
+				| "Attribute name" |
+				| "EditIfSalesInvoiceExists" |
+			And I go to line in "List" table
+				| 'Attribute name'           |
+				| 'EditIfSalesInvoiceExists' |
+			And in the table "List" I click the button named "ListContextMenuDelete"
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+		If "List" table contains lines Then
+				| "Attribute name" |
+				| "EditIfPurchaseInvoiceExists" |
+			And I go to line in "List" table
+				| 'Attribute name'           |
+				| 'EditIfPurchaseInvoiceExists' |
+			And in the table "List" I click the button named "ListContextMenuDelete"
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+		
+					
+		
+
+
 
 Scenario: _29700102 test filling-in SO - SI - SC by quantity
 	And I delete "$$SalesInvoice29700102$$" variable
@@ -865,6 +890,16 @@ Scenario: _29700111 test filling-in SO - SC - SI by quantity (second part)
 			And I click the button named "FormPost"
 			Then user message window does not contain messages
 			And I close all client application windows
+		* Check forbid changes of SC when SI were already created
+			Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+			And I go to line in "List" table
+				| 'Number' |
+				| '$$NumberShipmentConfirmation29700104$$'  |
+			And I select current line in "List" table
+			And I click the hyperlink named "DecorationGroupTitleCollapsedLabel"
+			If "TransactionType" attribute is not editable Then
+			If "Store" attribute is not editable Then
+			And I close all client application windows
 		* Check that the SC cannot be unpost when SI is created
 			Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 			And I go to line in "List" table
@@ -1024,7 +1059,7 @@ Scenario: _29700121 test filling-in PO - PI - GR by quantity (second part)
 			| 'Trousers' | '38/Yellow'  |
 			And I click the button named "FormPost"
 			Then user message window does not contain messages
-	* Check for a ban PI if you add a line to it (by copying) from an order for which PI has already been created (order by line is specified)
+	* Check PI post if you add a line to it (by copying) from an order for which PI has already been created (order by line is specified)
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
@@ -1074,13 +1109,13 @@ Scenario: _29700121 test filling-in PO - PI - GR by quantity (second part)
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
 		And I close all client application windows
-	* Create Shipment confirmation by more than the quantity specified on the invoice
+	* Create GR by more than the quantity specified on the invoice
 		* Select created PI
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 			And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberPurchaseInvoice29700102$$'  |
-		* Create SC
+		* Create GR
 			And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
 			And "ItemList" table contains lines
 			| 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Store'    | 'Receipt basis'       |
@@ -1100,9 +1135,7 @@ Scenario: _29700121 test filling-in PO - PI - GR by quantity (second part)
 			And I input "22,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
-			Then "1C:Enterprise" window is opened
-			And I click "OK" button
-			Given Recent TestClient message contains "Line No. [2] [Dress L/Green] Receipt remaining: 20 . Required: 22 . Lacking: 2 ." string by template
+			Then user message window does not contain messages
 		* Change the quantity by less than specified in PI and post
 			And I move to "Items" tab
 			And I go to line in "ItemList" table
@@ -1138,9 +1171,7 @@ Scenario: _29700121 test filling-in PO - PI - GR by quantity (second part)
 			And I click the button named "ItemListContextMenuCopy"
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
-			Then "1C:Enterprise" window is opened
-			And I click "OK" button
-			Given Recent TestClient message contains "* [Dress L/Green] Receipt remaining: 0 . Required: 19 . Lacking: 19 ." string by template
+			Then user message window does not contain messages
 			And I go to the last line in "ItemList" table
 			And I select current line in "ItemList" table
 			And I click Clear button of "Receipt basis" attribute in "ItemList" table
@@ -1162,7 +1193,7 @@ Scenario: _29700121 test filling-in PO - PI - GR by quantity (second part)
 			And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
 			And "ItemList" table contains lines
 				| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'               |
-				| 'Trousers' | '1,000'    | '38/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseInvoice29700102$$' |
+				| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice29700102$$' |
 				| 'Dress'    | '1,000'    | 'L/Green'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice29700102$$' |
 			And I click the button named "FormPost"
 			Then user message window does not contain messages
@@ -1174,9 +1205,7 @@ Scenario: _29700121 test filling-in PO - PI - GR by quantity (second part)
 			And I input "9,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
-			Then "1C:Enterprise" window is opened
-			And I click "OK" button
-			Given Recent TestClient message contains "* [Dress L/Green] Receipt remaining: 1 . Required: 9 . Lacking: 8 ." string by template
+			Then user message window does not contain messages
 		* Change by less than the PI balance (already created by GR) and try to post
 			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' | 'Quantity' |
@@ -1195,7 +1224,7 @@ Scenario: _29700121 test filling-in PO - PI - GR by quantity (second part)
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Given Recent TestClient message contains "* [Dress L/Green] Receipt remaining: 0,5 . Required: 0 . Lacking: 0,5 ." string by template
+			Given Recent TestClient message contains "* [Trousers 36/Yellow] Receipt remaining: 30 . Required: 0 . Lacking: 30 ." string by template
 			And I close all client application windows
 
 
@@ -1218,7 +1247,7 @@ Scenario: _29700123 test filling-in PO - GR - PI by quantity
 			| 'Dress'    | 'L/Green'   | '20,000' | 'pcs'  | 'Store 02' | '$$PurchaseOrder29700102$$' |
 			| 'Dress'    | 'M/White'   | '20,000' | 'pcs'  | 'Store 02' | '$$PurchaseOrder29700102$$' |
 			| 'Trousers' | '36/Yellow' | '30,000' | 'pcs'  | 'Store 02' | '$$PurchaseOrder29700102$$' |
-		* Check the prohibition of holding GR for an amount greater than specified in the order
+		* Check quantity in GR (greater than specified in the order)
 			* Change in the second row to 22
 				And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |
@@ -1226,11 +1255,8 @@ Scenario: _29700123 test filling-in PO - GR - PI by quantity
 				And I select current line in "ItemList" table
 				And I input "22,000" text in "Quantity" field of "ItemList" table
 				And I finish line editing in "ItemList" table
-			* Check for a ban
 				And I click the button named "FormPost"
-				Then "1C:Enterprise" window is opened
-				And I click "OK" button
-				Then I wait that in user messages the "Line No. [1] [Dress M/White] Receipt remaining: 20 . Required: 22 . Lacking: 2 ." substring will appear in 20 seconds
+				Then user message window does not contain messages
 			* Change in quantity to original value
 				And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |
@@ -1238,17 +1264,14 @@ Scenario: _29700123 test filling-in PO - GR - PI by quantity
 				And I select current line in "ItemList" table
 				And I input "20,000" text in "Quantity" field of "ItemList" table
 				And I finish line editing in "ItemList" table
-		* Check the prohibition of holding GR for an amount greater than specified in the order (copy line)	
+		* Check GR post when quantity greater than specified in the order (copy line)	
 			* Copy second line
 				And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' | 'Quantity'     |
 				| 'Dress' | 'M/White'  | '20,000' |
 				And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
-			* Check for a ban
 				And I click the button named "FormPost"
-				Then "1C:Enterprise" window is opened
-				And I click "OK" button
-				Then I wait that in user messages the "Line No. [4] [Dress M/White] Receipt remaining: 0 . Required: 20 . Lacking: 20 ." substring will appear in 20 seconds
+				Then user message window does not contain messages
 			* Delete added line
 				And I go to line in "ItemList" table
 					| 'Item'  | 'Item key' | 'Quantity'     |
@@ -1271,7 +1294,7 @@ Scenario: _29700123 test filling-in PO - GR - PI by quantity
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
 			Then user message window does not contain messages
-		* Create GR for closing quantity on order
+		* Post GR for closing quantity on order
 			* Delete added line
 				And I go to line in "ItemList" table
 					| 'Item'     | 'Item key'  |
@@ -1348,7 +1371,7 @@ Scenario: _29700123 test filling-in PO - GR - PI by quantity (second part)
 			| 'Trousers' | '38/Yellow'  |
 			And I click the button named "FormPost"
 			Then user message window does not contain messages
-	* Check for a ban GR if you add a line to it (by copying) from an order for which PI has already been created (order by line is specified)
+	* Check GR post if you add a line to it (by copying) from an order for which PI has already been created (order by line is specified)
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
@@ -1374,9 +1397,7 @@ Scenario: _29700123 test filling-in PO - GR - PI by quantity (second part)
 		And I input "20,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
-		Given Recent TestClient message contains "* [Dress L/Green] Receipt remaining: 0 . Required: 20 . Lacking: 20 ." string by template
+		Then user message window does not contain messages
 	* Check post GR if a line is not added to it by order
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
@@ -1472,6 +1493,16 @@ Scenario: _29700123 test filling-in PO - GR - PI by quantity (second part)
 			And I click the button named "FormPost"
 			Then user message window does not contain messages
 			And I close all client application windows
+		* Check forbid changes of GR when PI were already created
+			Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+			And I go to line in "List" table
+				| 'Number' |
+				| '$$NumberGoodsReceipt29700102$$'  |
+			And I select current line in "List" table
+			And I click the hyperlink named "DecorationGroupTitleCollapsedLabel"
+			If "TransactionType" attribute is not editable Then
+			If "Store" attribute is not editable Then
+			And I close all client application windows
 		* Check that the GR cannot be unpost when PI is created
 			Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 			And I go to line in "List" table
@@ -1483,6 +1514,59 @@ Scenario: _29700123 test filling-in PO - GR - PI by quantity (second part)
 			Given Recent TestClient message contains "* [Trousers 36/Yellow] Receipt order remaining: 30 . Required: 0 . Lacking: 30 ." string by template
 			And I close all client application windows
 
+Scenario: _29700140 check custom user setting Edit GR if PI exists
+	When Create information register UserSettings records (edit GR and SC)
+	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+	And I go to line in "List" table
+		| 'Number' |
+		| '$$NumberGoodsReceipt29700102$$'  |
+	And in the table "List" I click the button named "ListContextMenuPost"	
+	And I select current line in "List" table
+	And I click "Add" button
+	And I click choice button of "Item" attribute in "ItemList" table
+	And I go to line in "List" table
+		| 'Description' |
+		| 'Dress'       |
+	And I select current line in "List" table
+	And I activate "Item key" field in "ItemList" table
+	And I click choice button of "Item key" attribute in "ItemList" table
+	And I go to line in "List" table
+		| 'Item'  | 'Item key' |
+		| 'Dress' | 'M/White'  |
+	And I activate "Item key" field in "List" table
+	And I select current line in "List" table
+	And "ItemList" table contains lines
+		| 'Item'     | 'Item key'  |
+		| 'Dress'    | 'M/White'   |
+	And I close all client application windows
+
+Scenario: _29700141 check custom user setting Edit SC if SI exists
+	When Create information register UserSettings records (edit GR and SC)
+	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+	And I go to line in "List" table
+		| 'Number' |
+		| '$$NumberShipmentConfirmation29700104$$'  |
+	And in the table "List" I click the button named "ListContextMenuPost"	
+	And I select current line in "List" table
+	And I click "Add" button
+	And I click choice button of "Item" attribute in "ItemList" table
+	And I go to line in "List" table
+		| 'Description' |
+		| 'Dress'       |
+	And I select current line in "List" table
+	And I activate "Item key" field in "ItemList" table
+	And I click choice button of "Item key" attribute in "ItemList" table
+	And I go to line in "List" table
+		| 'Item'  | 'Item key' |
+		| 'Dress' | 'M/White'  |
+	And I activate "Item key" field in "List" table
+	And I select current line in "List" table
+	And "ItemList" table contains lines
+		| 'Item'     | 'Item key'  |
+		| 'Dress'    | 'M/White'   |
+	And I close all client application windows
+		
+	
 
 			
 Scenario: _999999 close TestClient session

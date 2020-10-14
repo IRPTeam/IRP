@@ -1130,5 +1130,5 @@ Scenario: 950081 check role Full access only read (Special offers)
 		And I close all client application windows	
 
 Scenario: _999999 close TestClient session
-        And I close TestClient session
+		And I close TestClient session
 		Then I connect launched Test client "Этот клиент"

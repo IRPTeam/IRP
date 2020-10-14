@@ -2775,7 +2775,60 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
 			And I close all client application windows	
 
-
+Scenario: _0154175 check change amount in POS
+	And I close all client application windows
+	* Open Point of sale
+		And In the command interface I select "Retail" "Point of sale"
+	* Add product (scan)
+		And I click "Search by barcode (F7)" button
+		And I input "2202283739" text in "InputFld" field
+		And I click "OK" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Quantity'  | 'Price'  | 'Offers amount' | 'Total amount' |
+			| 'Dress' | 'L/Green'  | '1,000'     | '550,00' | ''              | '550,00'       |
+		And I click "Search by barcode (F7)" button
+		And I input "2202283713" text in "InputFld" field
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
+			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''              | '550,00'       |
+			| 'Dress' | 'S/Yellow' | '1,000'    | '550,00' | ''              | '550,00'       |
+	* Change AMOUNT and check amount recalculate
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Price'  | 'Quantity'  | 'Total amount' |
+			| 'Dress' | 'L/Green'  | '550,00' | '1,000'     | '550,00'       |
+		And I select current line in "ItemList" table
+		And I input "500,00" text in "Total amount" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		Then the form attribute named "ItemListTotalTotalAmount" became equal to "1 050"
+		And Delay 2
+	* Payment (Cash)
+		And I click "Payment (+)" button
+		And I click "1" button
+		And I click "0" button
+		And I click "5" button
+		And I click "0" button
+		And I click "Enter" button
+		And I close current window
+		And Delay 2
+	* Check Retail Sales Receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table contains lines
+			| 'Business unit' | 'Item'  | 'Price type'        | 'Item key' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    |
+			| 'Shop 01'       | 'Dress' | 'Basic Price Types' | 'L/Green'  | '1,000' | 'pcs'  | '76,27'      | '500,00' | '18%' | ''              | '423,73'     | '500,00'       | ''                    | 'Store 01' |
+			| 'Shop 01'       | 'Dress' | 'Basic Price Types' | 'S/Yellow' | '1,000' | 'pcs'  | '83,90'      | '550,00' | '18%' | ''              | '466,10'     | '550,00'       | ''                    | 'Store 01' |
+		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "889,83"
+		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "160,17"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 050,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		And I close all client application windows
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

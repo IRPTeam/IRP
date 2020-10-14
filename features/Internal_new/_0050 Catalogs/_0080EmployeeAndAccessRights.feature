@@ -221,8 +221,9 @@ Scenario: _008005 assignment of access rights to users
 			Then the form attribute named "Description_en" became equal to "Commercial Agent"
 			And "Profiles" table became equal
 				| 'Profile'          |
+				| 'Manager' |
 				| 'Commercial Agent' |
-			And "Users" table became equal
+			And "Users" table contains lines
 				| 'User'                                 |
 				| 'Daniel Smith (Commercial Agent 1)'    |
 				| 'Alexander Orlov (Commercial Agent 2)' |

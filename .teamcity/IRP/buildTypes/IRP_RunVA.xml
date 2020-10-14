@@ -264,7 +264,7 @@ $VanessaRun = {
     while (!(Test-Path $ScriptLogFilePath)) { 
         If (Get-Process -id $processID -ErrorAction SilentlyContinue ) {
             Start-Sleep 5
-            Write-Host "Wait for file $ScriptLogFilePath"
+            #Write-Host "Wait for file $ScriptLogFilePath"
         }
         else {
             Write-Host "File $ScriptLogFilePath not found"

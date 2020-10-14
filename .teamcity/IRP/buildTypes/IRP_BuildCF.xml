@@ -136,7 +136,7 @@ find /c "No errors found" %env.LogFile1C% && ( echo Success ) || ( echo "##teamc
           <param name="teamcity.file.content.replacer.file.encoding.custom" value="autodetect" />
           <param name="teamcity.file.content.replacer.pattern" value="#BuildNumber#" />
           <param name="teamcity.file.content.replacer.pattern.case.sensitive" value="true" />
-          <param name="teamcity.file.content.replacer.regexMode" value="REGEX" />
+          <param name="teamcity.file.content.replacer.regexMode" value="FIXED_STRINGS" />
           <param name="teamcity.file.content.replacer.replacement" value="%env.BUILD_NUMBER%" />
           <param name="teamcity.file.content.replacer.wildcards" value="+:IRP\src\Configuration\Configuration.mdo" />
         </parameters>

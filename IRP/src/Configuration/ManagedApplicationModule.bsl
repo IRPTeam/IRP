@@ -20,7 +20,6 @@ Procedure OnStart()
 	ClientType = PredefinedValue("Enum.SystemClientType.WebClient");
 	#EndIf
 	
-	
 	ServiceSystemClient.SetSessionParameter("isMobile", isMobile);
 	ServiceSystemClient.SetSessionParameter("ClientType", ClientType);
 	ServiceSystemClient.SetSessionParameter("Workstation", WorkstationClient.GetCurrentWorkstation());
@@ -35,7 +34,8 @@ Procedure OnStart()
 		EndIf;
 
 	EndIf;
-
+	
+	ClientApplication.SetCaption(ServiceSystemClient.GetProgramTitle());
 EndProcedure
 
 Procedure BeforeStart(Cancel)

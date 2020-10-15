@@ -15,6 +15,7 @@
   <content>Constant.DefaultPictureStorageVolume</content>
   <content>CommonForm.MainSettings</content>
   <content>DataProcessor.DataHistory</content>
+  <content>Catalog.DataBaseStatus</content>
   <subsystems>AttributeAndProperty</subsystems>
   <subsystems>Contacts</subsystems>
   <subsystems>Equipment</subsystems>

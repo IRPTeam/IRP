@@ -130,4 +130,11 @@ Function GetManagerByType(TypeOfValue) Export
 	Return GetManagerByMetadata(CurrentMetadata);
 EndFunction
 
+Function GetProgramTitle() Export
 	
+	If SessionParameters.ConnectionSettings.isProduction Then
+		Return "" + SessionParameters.ConnectionSettings;
+	Else
+		Return "" + SessionParameters.ConnectionSettings + " (Test app)";
+	EndIf;
+EndFunction

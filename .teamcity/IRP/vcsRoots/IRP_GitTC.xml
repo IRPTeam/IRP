@@ -9,7 +9,7 @@
   <param name="secure:password" value="credentialsJSON:670abf51-3690-414c-b712-ed60e503a0bf" />
   <param name="submoduleCheckout" value="CHECKOUT" />
   <param name="teamcity:branchSpec"><![CDATA[+:refs/heads/*
-+:refs/pull/*]]></param>
++:refs/*/heads]]></param>
   <param name="url" value="https://github.com/IRPTeam/IRP" />
   <param name="useAlternates" value="true" />
   <param name="username" value="DitriXNew" />

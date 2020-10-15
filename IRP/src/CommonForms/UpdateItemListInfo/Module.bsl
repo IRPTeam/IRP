@@ -4,6 +4,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Items.Stores.Enabled = False;
 	Items.PriceTypes.Enabled = False;
 	Items.Prices.Enabled = False;
+	Items.PaymentTerm.Enabled = False;
 	
 	For Each Question In Parameters.QuestionsParameters Do
 		ThisObject[Question.Action] = True;
@@ -31,6 +32,9 @@ Procedure OK(Command)
 	EndIf;
 	If Prices Then
 		Actions.Insert("UpdatePrices"		, "UpdatePrices");
+	EndIf;
+	If PaymentTerm Then
+		Actions.Insert("UpdatePaymentTerm"  , "UpdatePaymentTerm");
 	EndIf;
 	Close(Actions);
 EndProcedure

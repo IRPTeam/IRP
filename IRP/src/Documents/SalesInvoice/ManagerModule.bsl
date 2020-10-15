@@ -360,6 +360,8 @@ Function GetQueryTextQueryTable()
 		|	NOT tmp.IsOpeningEntry
 		|	AND
 		|	NOT tmp.ShipmentConfirmationBeforeSalesInvoice
+		|	AND 
+		|	NOT tmp.IsService
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,

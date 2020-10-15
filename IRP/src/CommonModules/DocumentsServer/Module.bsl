@@ -635,6 +635,21 @@ Function PrepareServerData(Parameters) Export
 		Result.Insert("ItemKeysWithSerialLotNumbers", ArrayOfItemKeysWithSerialLotNumbers);
 	EndIf;
 	
+	If Parameters.Property("GetPaymentTerms") Then
+		Agreement = Parameters.GetPaymentTerms.Agreement;
+		ArrayOfPaymentTerms = New Array();
+		If ValueIsFilled(Agreement) And ValueIsFilled(Agreement.PaymentTerm) Then
+			For Each Stage In Agreement.PaymentTerm.StagesOfPayment Do
+				NewRow = New Structure();
+				NewRow.Insert("CalculationType"     , Stage.CalculationType);
+				NewRow.Insert("ProportionOfPayment" , Stage.ProportionOfPayment);
+				NewRow.Insert("DuePeriod"           , Stage.DuePeriod);
+				ArrayOfPaymentTerms.Add(NewRow);
+			EndDo;
+		EndIf;
+		Result.Insert("PaymentTerms", ArrayOfPaymentTerms);
+	EndIf;
+	
 	Return Result;
 EndFunction	
 

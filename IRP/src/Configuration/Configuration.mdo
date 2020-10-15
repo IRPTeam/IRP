@@ -337,6 +337,7 @@
   <commonModules>CommonModule.JorDocumentsClient</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteClientServer</commonModules>
   <commonModules>CommonModule.CatAgreementsClientServer</commonModules>
+  <commonModules>CommonModule.IntegrationServerPriveleged</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>

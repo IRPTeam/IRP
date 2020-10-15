@@ -67,7 +67,7 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 EndProcedure
 
 Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source, AddInfo = Undefined) Export
-	Return;
+	DocumentsClient.CalculatePaymentTermDateAndAmount(Object, Form, AddInfo);
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
@@ -374,9 +374,13 @@ EndProcedure
 
 #EndRegion
 
+#Region Store
+
 Procedure ItemListStoreOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	DocumentsClient.ItemListStoreOnChange(Object, Form, ThisObject, Item);
 EndProcedure
+
+#EndRegion
 
 #Region SerialLotNumbers
 
@@ -390,6 +394,26 @@ Procedure ItemListSerialLotNumbersPresentationClearing(Object, Form, Item, Stand
 EndProcedure
 
 #EndRegion
+
+#EndRegion
+
+#Region PaymentTermsItemsEvents
+
+Procedure PaymentTermsDateOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	CurrentData = Form.Items.PaymentTerms.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	If ValueIsFilled(Object.Date) And ValueIsFilled(CurrentData.Date) Then
+		CurrentData.DuePeriod = (CurrentData.Date - Object.Date) / 60 / 60 / 24;
+	Else
+		CurrentData.DuePeriod = 0;
+	EndIf;
+EndProcedure
+
+Procedure PaymentTermsOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	DocumentsClient.CalculatePaymentTermDateAndAmount(Object, Form, AddInfo);
+EndProcedure
 
 #EndRegion
 
@@ -470,6 +494,7 @@ Function AgreementSettings(Object, Form, AddInfo = Undefined) Export
 	Actions.Insert("ChangePriceIncludeTax"	, "ChangePriceIncludeTax");
 	Actions.Insert("ChangeStore"			, "ChangeStore");
 	Actions.Insert("ChangeDeliveryDate"		, "ChangeDeliveryDate");
+	Actions.Insert("ChangePaymentTerm"		, "ChangePaymentTerm");
 	
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax, ManagerSegment";
@@ -695,8 +720,9 @@ Function DateSettings(Object, Form, AddInfo = Undefined) Export
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AgreementType, AfterActionsCalculateSettings");
 	
 	Actions = New Structure();
-	Actions.Insert("ChangeAgreement"	, "ChangeAgreement");
-	Actions.Insert("ChangeDeliveryDate"	, "ChangeDeliveryDate");
+	Actions.Insert("ChangeAgreement"    , "ChangeAgreement");
+	Actions.Insert("ChangeDeliveryDate" , "ChangeDeliveryDate");
+	Actions.Insert("UpdatePaymentTerm"  , "UpdatePaymentTerm");
 	
 	AfterActionsCalculateSettings = New Structure;
 	PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);

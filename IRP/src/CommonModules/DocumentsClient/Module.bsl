@@ -1065,6 +1065,28 @@ Procedure ShowUserQueryBoxContinue(Result, AdditionalParameters) Export
 		CalculateTable(Object, Form, Settings, AdditionalParameters.AddInfo);
 	EndIf;
 	
+	If Result.Property("UpdatePaymentTerm") Then
+		ServerData = CommonFunctionsClientServer.GetFromAddInfo(AdditionalParameters.AddInfo, "ServerData");
+		ProcedureName = Undefined;
+		For Each Question In Settings.Questions Do
+			If Question.Action = "PaymentTerm" Then
+				ProcedureName = Question.ProcedureName;
+				Break;
+			EndIf;
+		EndDo;
+		If ProcedureName = "FillPaymentTerms" Then
+			Object.PaymentTerms.Clear();
+			For Each Row In ServerData.PaymentTerms Do
+				NewRow = Object.PaymentTerms.Add();
+				FillPropertyValues(NewRow, Row);
+			EndDo;
+			CalculatePaymentTermDateAndAmount(Object, Form, AdditionalParameters.AddInfo);
+		EndIf;
+		If ProcedureName = "UpdatePaymentTerms" Then
+			CalculatePaymentTermDateAndAmount(Object, Form, AdditionalParameters.AddInfo);
+		EndIf;
+	EndIf;
+	
 	Settings.CalculateSettings = New Structure();
 	Settings.Insert("Rows", Object.ItemList);
 	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
@@ -1078,7 +1100,6 @@ EndProcedure
 
 #Region PickUpItems
 
-//TODO: #309
 Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 	If NOT ValueIsFilled(Result)
 		OR Not AdditionalParameters.Property("Object")
@@ -1776,8 +1797,7 @@ Procedure ChangeManagerSegment(Object, Form, Settings) Export
 	Object.ManagerSegment = Settings.PartnerInfo.ManagerSegment;
 EndProcedure
 
-Procedure ChangeStore(Object, Form, Settings) Export	
-	// It Call Only If Table has attribute store
+Procedure ChangeStore(Object, Form, Settings) Export
 	Form.StoreBeforeChange = Form.Store;
 	If ValueIsFilled(Settings.AgreementInfo.Store) Then
 		Form.Store = Settings.AgreementInfo.Store;
@@ -1833,6 +1853,62 @@ Procedure ChangeItemListStore(ItemList, Store) Export
 			Row.Store = Store;
 		EndIf;
 	EndDo;
+EndProcedure
+
+Procedure ChangePaymentTerm(Object, Form, Settings, AddInfo = Undefined) Export
+	If Not ValueIsFilled(Object.Agreement) Then
+		Return;
+	EndIf;
+	
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+	
+	If Not Object.PaymentTerms.Count() Then
+		For Each Row In ServerData.PaymentTerms Do
+			NewRow = Object.PaymentTerms.Add();
+			FillPropertyValues(NewRow, Row);
+		EndDo;
+		CalculatePaymentTermDateAndAmount(Object, Form);
+	Else
+		QuestionStructure = New Structure;
+		QuestionStructure.Insert("ProcedureName" , "FillPaymentTerms");
+		QuestionStructure.Insert("QuestionText"  , R().QuestionToUser_019);
+		QuestionStructure.Insert("Action"        , "PaymentTerm");
+		Settings.Questions.Add(QuestionStructure);
+	EndIf;
+EndProcedure
+
+Procedure UpdatePaymentTerm(Object, Form, Settings, AddInfo = Undefined) Export
+	If Object.PaymentTerms.Count() Then
+		QuestionStructure = New Structure;
+		QuestionStructure.Insert("ProcedureName" , "UpdatePaymentTerms");
+		QuestionStructure.Insert("QuestionText"  , R().QuestionToUser_019);
+		QuestionStructure.Insert("Action"        , "PaymentTerm");
+		Settings.Questions.Add(QuestionStructure);
+	EndIf;
+EndProcedure
+
+Procedure CalculatePaymentTermDateAndAmount(Object, Form, AddInfo = Undefined) Export
+	If Not Object.PaymentTerms.Count() Then
+		Return;
+	EndIf;
+	TotalAmount = Object.ItemList.Total("TotalAmount");
+	TotalPercent = Object.PaymentTerms.Total("ProportionOfPayment");
+	RowWithMaxAmount = Undefined;
+	For Each Row In Object.PaymentTerms Do
+		Row.Date = Object.Date + ((60 * 60 * 24) * Row.DuePeriod);
+		Row.Amount = (TotalAmount / TotalPercent) * Row.ProportionOfPayment;
+		If RowWithMaxAmount = Undefined Then
+			RowWithMaxAmount = Row;
+		Else
+			If Row.Amount > RowWithMaxAmount.Amount Then
+				RowWithMaxAmount = Row;
+			EndIf;
+		EndIf;
+	EndDo;
+	If RowWithMaxAmount <> Undefined Then
+		Difference = TotalAmount - Object.PaymentTerms.Total("Amount");
+		RowWithMaxAmount.Amount = RowWithMaxAmount.Amount + Difference;
+	EndIf;
 EndProcedure
 
 Procedure DoTitleActions(Object, Form, Settings, Actions, AddInfo = Undefined) Export
@@ -1909,6 +1985,16 @@ Procedure DoTitleActions(Object, Form, Settings, Actions, AddInfo = Undefined) E
 		
 		If Action.Key = "ChangeDeliveryDate" Then
 			ChangeDeliveryDate(Object, Form, Settings);
+			Continue;
+		EndIf;
+		
+		If Action.Key = "ChangePaymentTerm" Then
+			ChangePaymentTerm(Object, Form, Settings, AddInfo);
+			Continue;
+		EndIf;
+		
+		If Action.Key = "UpdatePaymentTerm" Then
+			UpdatePaymentTerm(Object, Form, Settings, AddInfo);
 			Continue;
 		EndIf;
 	EndDo;
@@ -2534,7 +2620,11 @@ Procedure AgreementOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefi
 	AgreementInfoParameters = New Structure();
 	AgreementInfoParameters.Insert("Agreement", Object.Agreement);
 	ParametersToServer.Insert("GetAgreementInfo", AgreementInfoParameters);	
-			
+	
+	PaymentTermsParameters = New Structure();
+	PaymentTermsParameters.Insert("Agreement", Object.Agreement);
+	ParametersToServer.Insert("GetPaymentTerms", PaymentTermsParameters);
+	
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
@@ -2561,6 +2651,10 @@ Procedure CurrencyOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefin
 	AgreementInfoParameters = New Structure();
 	AgreementInfoParameters.Insert("Agreement", Object.Agreement);
 	ParametersToServer.Insert("GetAgreementInfo", AgreementInfoParameters);	
+	
+	PaymentTermsParameters = New Structure();
+	PaymentTermsParameters.Insert("Agreement", Object.Agreement);
+	ParametersToServer.Insert("GetPaymentTerms", PaymentTermsParameters);
 	
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
@@ -2669,7 +2763,11 @@ Procedure DateOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) 
 	AgreementByPartnerParameters.Insert("Date"              , Object.Date);
 	AgreementByPartnerParameters.Insert("WithAgreementInfo" , True);
 	ParametersToServer.Insert("GetAgreementByPartner", AgreementByPartnerParameters);
-		
+	
+	PaymentTermsParameters = New Structure();
+	PaymentTermsParameters.Insert("Agreement", Object.Agreement);
+	ParametersToServer.Insert("GetPaymentTerms", PaymentTermsParameters);
+	
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);

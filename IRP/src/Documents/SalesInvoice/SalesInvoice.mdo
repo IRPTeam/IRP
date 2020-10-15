@@ -1038,6 +1038,93 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="a08281a0-3534-41ae-868b-aeaabd379135">
+    <producedTypes>
+      <objectType typeId="b9d05c69-9560-467f-9f0e-d000ee8347df" valueTypeId="9cd6bbfa-8836-406c-8c1b-a0b0b5db450a"/>
+      <rowType typeId="3b56bd74-71ad-4cc7-a577-7e31854e4aa5" valueTypeId="9234b67a-fe6b-4396-aad2-41ccecf6e39f"/>
+    </producedTypes>
+    <name>PaymentTerms</name>
+    <synonym>
+      <key>en</key>
+      <value>Payment terms</value>
+    </synonym>
+    <attributes uuid="a4564a5f-dad0-424a-bd21-7f292acb2af7">
+      <name>Date</name>
+      <synonym>
+        <key>en</key>
+        <value>Date</value>
+      </synonym>
+      <type>
+        <types>Date</types>
+        <dateQualifiers>
+          <dateFractions>Date</dateFractions>
+        </dateQualifiers>
+      </type>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9a824c08-c778-4004-a9cd-ef3e10d5b62d">
+      <name>ProportionOfPayment</name>
+      <synonym>
+        <key>en</key>
+        <value>Proportion of payment</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>5</precision>
+          <scale>2</scale>
+          <nonNegative>true</nonNegative>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="4f916705-946d-417b-a640-58c62ea6de2e">
+      <name>DuePeriod</name>
+      <synonym>
+        <key>en</key>
+        <value>Due period, days</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>3</precision>
+          <nonNegative>true</nonNegative>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="ce8c28c0-1752-4fc2-8d1b-fca62faaa7df">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5f989f5b-cc2c-40fc-b214-5c252a1ff17d">
+      <name>CalculationType</name>
+      <synonym>
+        <key>en</key>
+        <value>Calculation type</value>
+      </synonym>
+      <type>
+        <types>EnumRef.CalculationTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+  </tabularSections>
   <commands uuid="1940e8ac-35c7-4889-9c93-09a9af1eb411">
     <name>GenerateSalesInvoice</name>
     <synonym>

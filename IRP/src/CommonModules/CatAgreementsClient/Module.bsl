@@ -95,12 +95,20 @@ EndProcedure
 #Region ItemTumblers
 
 Procedure TypeOnChange(Object, Form, Item) Export
+	If Object.Type <> PredefinedValue("Enum.AgreementTypes.Customer") Then
+		Object.UseCreditLimit = False;
+		Object.CreditLimitAmount = 0;
+		Object.PaymentTerm = Undefined;
+	EndIf;
 	CatAgreementsClientServer.SetVisible(Object, Form);
 EndProcedure
 
 Procedure ApArPostingDetailOnChange(Object, Form, Item) Export
 	If Object.ApArPostingDetail <> PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement") Then
 		Object.StandardAgreement = Undefined;
+	EndIf;
+	If Object.ApArPostingDetail <> PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
+		Object.PaymentTerm = Undefined;
 	EndIf;
 	CatAgreementsClientServer.SetVisible(Object, Form);
 EndProcedure
@@ -110,6 +118,7 @@ Procedure KindOnChange(Object, Form, Item) Export
 		Object.ApArPostingDetail = PredefinedValue("Enum.ApArPostingDetail.ByAgreements");
 		Object.StandardAgreement = Undefined;
 		Object.PriceType = Undefined;
+		Object.PaymentTerm = Undefined;
 	EndIf;
 	CatAgreementsClientServer.SetVisible(Object, Form);
 EndProcedure

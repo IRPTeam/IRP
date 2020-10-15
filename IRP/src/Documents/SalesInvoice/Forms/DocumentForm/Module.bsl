@@ -252,6 +252,20 @@ EndProcedure
 
 #EndRegion
 
+#Region PaymentTermsItemsEvents
+
+&AtClient
+Procedure PaymentTermsDateOnChange(Item)
+	DocSalesInvoiceClient.PaymentTermsDateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentTermsOnChange(Item)
+	DocSalesInvoiceClient.PaymentTermsOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
 #Region ItemPartner
 
 &AtClient
@@ -695,7 +709,7 @@ Procedure RecalculateInvoiceQuantity(ArrayOfRows)
 		Row.ItemKey.Unit, Row.ItemKey.Item.Unit);
 		DocumentsServer.RecalculateQuantityInRow(Row);
 	EndDo;
-EndProcedure	
+EndProcedure
 
 &AtClient
 Procedure ShipmentConfirmationsTreeQuantityOnChange(Item)

@@ -309,6 +309,36 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Serial lot number] is empty." substring will appear in "30" seconds
 	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	And I go to line in "List" table
+			| 'Description'     |
+			| '$$NumberRetailSalesReceipt092002$$' |
+	And I click "Registrations report" button
+	And "ResultTable" spreadsheet document contains lines:
+		| '$$RetailSalesReceipt092002$$'   | ''            | ''          | ''          | ''           | ''              | ''              | ''                             | ''              | ''          | ''                     | ''                             | ''                  | ''                     |
+		| 'Document registrations records' | ''            | ''          | ''          | ''           | ''              | ''              | ''                             | ''              | ''          | ''                     | ''                             | ''                  | ''                     |
+		| 'Register  "Retail sales"'       | ''            | ''          | ''          | ''           | ''              | ''              | ''                             | ''              | ''          | ''                     | ''                             | ''                  | ''                     |
+		| ''                               | 'Record type' | 'Period'    | 'Resources' | ''           | ''              | ''              | 'Dimensions'                   | ''              | ''          | ''                     | ''                             | ''                  | ''                     |
+		| ''                               | ''            | ''          | 'Quantity'  | 'Amount'     | 'Net amount'    | 'Offers amount' | 'Company'                      | 'Business unit' | 'Store'     | 'Retail sales invoice' | 'Item key'                     | 'Serial lot number' | 'Row key'              |
+		| ''                               | 'Receipt'     | '*'         | '1'         | '400'        | '338,98'        | ''              | 'Main Company'                 | 'Shop 01'       | 'Store 01'  | ''                     | '38/Yellow'                    | '99098809009999'    | '*'                    |
+		| ''                               | 'Receipt'     | '*'         | '1'         | '650'        | '550,85'        | ''              | 'Main Company'                 | 'Shop 01'       | 'Store 01'  | ''                     | '38/18SD'                      | ''                  | '*'                    |
+		| ''                               | 'Receipt'     | '*'         | '1'         | '700'        | '593,22'        | ''              | 'Main Company'                 | 'Shop 01'       | 'Store 01'  | ''                     | '37/18SD'                      | ''                  | '*'                    |
+		| ''                               | 'Receipt'     | '*'         | '2'         | '800'        | '677,97'        | ''              | 'Main Company'                 | 'Shop 01'       | 'Store 01'  | ''                     | '38/Yellow'                    | '99098809009998'    | '*'                    |
+		| ''                               | ''            | ''          | ''          | ''           | ''              | ''              | ''                             | ''              | ''          | ''                     | ''                             | ''                  | ''                     |
+		| 'Register  "Sales turnovers"'    | ''            | ''          | ''          | ''           | ''              | ''              | ''                             | ''              | ''          | ''                     | ''                             | ''                  | ''                     |
+		| ''                               | 'Period'      | 'Resources' | ''          | ''           | ''              | 'Dimensions'    | ''                             | ''              | ''          | ''                     | ''                             | ''                  | 'Attributes'           |
+		| ''                               | ''            | 'Quantity'  | 'Amount'    | 'Net amount' | 'Offers amount' | 'Company'       | 'Sales invoice'                | 'Currency'      | 'Item key'  | 'Row key'              | 'Multi currency movement type' | 'Serial lot number' | 'Deferred calculation' |
+		| ''                               | '*'           | '1'         | '68,49'     | '58,05'      | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'USD'           | '38/Yellow' | '*'                    | 'Reporting currency'           | '99098809009999'    | 'No'                   |
+		| ''                               | '*'           | '1'         | '400'       | '338,98'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'TRY'           | '38/Yellow' | '*'                    | 'Local currency'               | '99098809009999'    | 'No'                   |
+		| ''                               | '*'           | '1'         | '400'       | '338,98'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'TRY'           | '38/Yellow' | '*'                    | 'TRY'                          | '99098809009999'    | 'No'                   |
+		| ''                               | '*'           | '1'         | '400'       | '338,98'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'TRY'           | '38/Yellow' | '*'                    | 'en description is empty'      | '99098809009999'    | 'No'                   |
+		| ''                               | '*'           | '2'         | '136,99'    | '116,09'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'USD'           | '38/Yellow' | '*'                    | 'Reporting currency'           | '99098809009998'    | 'No'                   |
+		| ''                               | '*'           | '2'         | '800'       | '677,97'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'TRY'           | '38/Yellow' | '*'                    | 'Local currency'               | '99098809009998'    | 'No'                   |
+		| ''                               | '*'           | '2'         | '800'       | '677,97'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'TRY'           | '38/Yellow' | '*'                    | 'TRY'                          | '99098809009998'    | 'No'                   |
+		| ''                               | '*'           | '2'         | '800'       | '677,97'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'TRY'           | '38/Yellow' | '*'                    | 'en description is empty'      | '99098809009998'    | 'No'                   |
+	And I close all client application windows
+	
+		
 	
 	
 Scenario: _092003 check serial lot number in the Retail return receipt

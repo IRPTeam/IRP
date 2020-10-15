@@ -59,7 +59,8 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 		|		Account.BusinessUnit = &BusinessUnit
 		|	AND Company = &Company) AS AccountBalanceTurnovers
 		|WHERE
-		|	AccountBalanceTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)";
+		|	AccountBalanceTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
+		|	AND AccountBalanceTurnovers.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)";
 	
 	Query.SetParameter("BegOfPeriod", Object.BegOfPeriod);
 	Query.SetParameter("EndOfPeriod", Object.EndOfPeriod);

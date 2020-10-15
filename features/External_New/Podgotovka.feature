@@ -1180,8 +1180,6 @@ Scenario: create SalesInvoice024016 (Shipment confirmation does not used)
 			And I input "1,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
-			And in the table "ItemList" I click "% Offers" button
-			And in the table "Offers" I click the button named "FormOK"
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice024016$$" variable
 		And I delete "$$SalesInvoice024016$$" variable

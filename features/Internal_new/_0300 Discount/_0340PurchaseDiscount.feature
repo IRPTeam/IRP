@@ -312,7 +312,48 @@ Scenario: _034004 check that discounts with the Purchase document type are not d
 		And I select "Purchases and sales" exact value from "Document type" drop-down list
 		And I click "Save and close" button
 
-Scenario: _034030 check discount recalculation when change quantity in the Purchase return
+Scenario: _034030 check discount recalculation when change quantity in the Purchase return order
+	* Document discount
+		* Create Purchase return based on $$PurchaseInvoice034001$$
+			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+			And I go to line in "List" table
+				| 'Number' |
+				| '$$NumberPurchaseInvoice034001$$'  |
+			And I click the button named "FormDocumentPurchaseReturnOrderGeneratePurchaseReturnOrder"
+			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "13 700,00"
+			Then the form attribute named "ItemListTotalNetAmount" became equal to "104 491,53"
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "18 808,47"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "123 300,00"
+			And "ItemList" table contains lines
+				| 'Item'     | 'Price'  | 'Item key'  | 'Q'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
+				| 'Dress'    | '200,00' | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |
+				| 'Dress'    | '210,00' | 'L/Green'   | '200,000' | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
+				| 'Trousers' | '250,00' | '36/Yellow' | '300,000' | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
+		* Change quantity and check discount recalculation
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' | 'Q'       |
+				| 'Dress' | 'L/Green'  | '200,000' |
+			And I select current line in "ItemList" table
+			And I input "1,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Trousers' | '36/Yellow'  |
+			And I select current line in "ItemList" table
+			And I input "5,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "2 146,00"
+			Then the form attribute named "ItemListTotalNetAmount" became equal to "16 367,80"
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "2 946,20"
+			Then the form attribute named "ItemListTotalTotalAmount" became equal to "19 314,00"
+			And "ItemList" table contains lines
+				| 'Price'  | 'Item'     | 'VAT' | 'Dont calculate row' | 'Item key'  | 'Q'       | 'Offers amount' | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '200,00' | 'Dress'    | '18%' | 'No'                 | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '2 745,76'   | '15 254,24'  | '18 000,00'    | 'Store 01' |
+				| '210,00' | 'Dress'    | '18%' | 'No'                 | 'L/Green'   | '1,000'   | '21,00'         | 'pcs'  | '28,83'      | '160,17'     | '189,00'       | 'Store 01' |
+				| '250,00' | 'Trousers' | '18%' | 'No'                 | '36/Yellow' | '5,000'   | '125,00'        | 'pcs'  | '171,61'     | '953,39'     | '1 125,00'     | 'Store 01' |
+			And I click the button named "FormPostAndClose"	
+
+Scenario: _034031 check discount recalculation when change quantity in the Purchase return
 	* Document discount
 		* Create Purchase return based on $$PurchaseInvoice034001$$
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -354,87 +395,7 @@ Scenario: _034030 check discount recalculation when change quantity in the Purch
 			And I click the button named "FormPostAndClose"		
 
 
-Scenario: _034030 check discount recalculation when change quantity in the Purchase return order
-	* Document discount
-		* Create Purchase return based on $$PurchaseInvoice034001$$
-			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberPurchaseInvoice034001$$'  |
-			And I click the button named "FormDocumentPurchaseReturnOrderGeneratePurchaseReturnOrder"
-			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "13 700,00"
-			Then the form attribute named "ItemListTotalNetAmount" became equal to "104 491,53"
-			Then the form attribute named "ItemListTotalTaxAmount" became equal to "18 808,47"
-			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "123 300,00"
-			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
-				| 'Dress'    | '200,00' | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |
-				| 'Dress'    | '210,00' | 'L/Green'   | '200,000' | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
-				| 'Trousers' | '250,00' | '36/Yellow' | '300,000' | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
-		* Change quantity and check discount recalculation
-			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Q'       |
-				| 'Dress' | 'L/Green'  | '200,000' |
-			And I select current line in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Trousers' | '36/Yellow'  |
-			And I select current line in "ItemList" table
-			And I input "5,000" text in "Q" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "2 146,00"
-			Then the form attribute named "ItemListTotalNetAmount" became equal to "16 367,80"
-			Then the form attribute named "ItemListTotalTaxAmount" became equal to "2 946,20"
-			Then the form attribute named "ItemListTotalTotalAmount" became equal to "19 314,00"
-			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Dont calculate row' | 'Item key'  | 'Q'       | 'Offers amount' | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '200,00' | 'Dress'    | '18%' | 'No'                 | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '2 745,76'   | '15 254,24'  | '18 000,00'    | 'Store 01' |
-				| '210,00' | 'Dress'    | '18%' | 'No'                 | 'L/Green'   | '1,000'   | '21,00'         | 'pcs'  | '28,83'      | '160,17'     | '189,00'       | 'Store 01' |
-				| '250,00' | 'Trousers' | '18%' | 'No'                 | '36/Yellow' | '5,000'   | '125,00'        | 'pcs'  | '171,61'     | '953,39'     | '1 125,00'     | 'Store 01' |
-			And I click the button named "FormPostAndClose"	
 			
-Scenario: _034030 check discount recalculation when change quantity in the Purchase return
-	* Document discount
-		* Create Purchase return based on $$PurchaseInvoice034001$$
-			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberPurchaseInvoice034001$$'  |
-			And I click the button named "FormDocumentPurchaseReturnGeneratePurchaseReturn"
-			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "13 700,00"
-			Then the form attribute named "ItemListTotalNetAmount" became equal to "104 491,53"
-			Then the form attribute named "ItemListTotalTaxAmount" became equal to "18 808,47"
-			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "123 300,00"
-			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
-				| 'Dress'    | '200,00' | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |
-				| 'Dress'    | '210,00' | 'L/Green'   | '200,000' | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
-				| 'Trousers' | '250,00' | '36/Yellow' | '300,000' | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
-		* Change quantity and check discount recalculation
-			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Q'       |
-				| 'Dress' | 'L/Green'  | '200,000' |
-			And I select current line in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Trousers' | '36/Yellow'  |
-			And I select current line in "ItemList" table
-			And I input "5,000" text in "Q" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "2 146,00"
-			Then the form attribute named "ItemListTotalNetAmount" became equal to "16 367,80"
-			Then the form attribute named "ItemListTotalTaxAmount" became equal to "2 946,20"
-			Then the form attribute named "ItemListTotalTotalAmount" became equal to "19 314,00"
-			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Dont calculate row' | 'Item key'  | 'Q'       | 'Offers amount' | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '200,00' | 'Dress'    | '18%' | 'No'                 | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '2 745,76'   | '15 254,24'  | '18 000,00'    | 'Store 01' |
-				| '210,00' | 'Dress'    | '18%' | 'No'                 | 'L/Green'   | '1,000'   | '21,00'         | 'pcs'  | '28,83'      | '160,17'     | '189,00'       | 'Store 01' |
-				| '250,00' | 'Trousers' | '18%' | 'No'                 | '36/Yellow' | '5,000'   | '125,00'        | 'pcs'  | '171,61'     | '953,39'     | '1 125,00'     | 'Store 01' |
-			And I click the button named "FormPostAndClose"
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

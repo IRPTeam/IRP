@@ -16,7 +16,6 @@ Function Strings(Lang) Export
 
 	#EndRegion
 	
-	
 	#Region POS
 	
 	Strings.Insert("POS_s1", NStr("en = 'Amount paid is less than amount of the document'", Lang));
@@ -68,7 +67,7 @@ Function Strings(Lang) Export
 	Strings.Insert("S_027", NStr("en = '[Not filled]'", Lang));
 	// operation is Success
 	Strings.Insert("S_028", NStr("en = 'Success'", Lang));
-	Strings.Insert("S_029", NStr("en = 'Not supoorting web client'", Lang));
+	Strings.Insert("S_029", NStr("en = 'Not supporting web client'", Lang));
 	Strings.Insert("S_030", NStr("en = 'Cashback'", Lang));
 	#EndRegion
 	
@@ -287,11 +286,11 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("Error_084", NStr("en = 'Error to get picture from Google drive'", Lang));
 	
-	//%1 - 1000
-	//%2 - 300
-	//%3 - 350
-	//%4 - 50
-	//%5 - USD
+	// %1 - 1000
+	// %2 - 300
+	// %3 - 350
+	// %4 - 50
+	// %5 - USD
 	Strings.Insert("Error_085", NStr("en = 'Credit limit exceeded. Limit: %1, limit balance: %2, transaction: %3, lack: %4 %5'", Lang));
 	
 	#EndRegion
@@ -316,7 +315,7 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_008", NStr("en = '#%1 date: %2'", Lang));
 	
 	Strings.Insert("InfoMessage_009", NStr("en = 'Total quantity doesnt match. Please count one more time. You have one more try.'", Lang));
-	Strings.Insert("InfoMessage_010", NStr("en = 'Total quantity doesnt match. Location need to be count again (current count is anulated).'", Lang));
+	Strings.Insert("InfoMessage_010", NStr("en = 'Total quantity doesnt match. Location need to be count again (current count is annulated).'", Lang));
 	Strings.Insert("InfoMessage_011", NStr("en = 'Total quantity is ok. Please scan and count next location.'", Lang));
 	
 	// %1 - 12
@@ -327,7 +326,7 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_013", NStr("en = 'Current location #%1 was linked to you. Other users will not be able to scan it.'", Lang));
 	
 	// %1 - 12
-	Strings.Insert("InfoMessage_014", NStr("en = 'Current location #%1 was scaned and closed before. Please scan next location.'", Lang));
+	Strings.Insert("InfoMessage_014", NStr("en = 'Current location #%1 was scanned and closed before. Please scan next location.'", Lang));
 	#EndRegion
 	
 	#Region QuestionToUser

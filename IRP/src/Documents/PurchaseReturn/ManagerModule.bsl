@@ -34,7 +34,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|		ELSE UNDEFINED
 		|	END AS BasisDocument,
 		|	PurchaseReturnItemList.Key AS RowKey,
-		|	PurchaseReturnItemList.Ref.IsOpeningEntry AS IsOpeningEntry
+		|	PurchaseReturnItemList.Ref.IsOpeningEntry AS IsOpeningEntry,
+		|	SUM(PurchaseReturnItemList.NetAmount) AS NetAmount
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
 		|WHERE
@@ -95,7 +96,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	QueryTable.PurchaseInvoice,
 		|	QueryTable.ShipmentBasis,
 		|	QueryTable.BasisDocument,
-		|
+		|	QueryTable.NetAmount,
 		|	QueryTable.RowKey,
 		|	QueryTable.IsOpeningEntry AS IsOpeningEntry
 		|INTO tmp
@@ -155,6 +156,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.ItemKey,
 		|	-SUM(tmp.Quantity) AS Quantity,
 		|	-SUM(tmp.Amount) AS Amount,
+		|	-SUM(tmp.NetAmount) AS NetAmount,
 		|	tmp.Period,
 		|	tmp.RowKey
 		|FROM

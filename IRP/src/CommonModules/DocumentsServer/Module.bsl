@@ -224,8 +224,8 @@ Function CheckItemListStores(Object) Export
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	ItemList.LineNumber,
-		|ItemList.Store,
-		|ItemList.ItemKey
+		|	ItemList.Store,
+		|	ItemList.ItemKey
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
@@ -268,9 +268,9 @@ Procedure CheckPaymentList(Object, Cancel, CheckedAttributes) Export
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	PaymentList.LineNumber,
-		|PaymentList.Agreement.ApArPostingDetail,
-		|PaymentList.BasisDocument.Ref,
-		|PaymentList.BasisDocument
+		|	PaymentList.Agreement.ApArPostingDetail,
+		|	PaymentList.BasisDocument.Ref,
+		|	PaymentList.BasisDocument
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE

@@ -255,7 +255,9 @@ Procedure SetVisibilityAvailability(Object, Form) Export
 		Form.Items.CashAdvanceHolder.Visible = True;
 	Else
 		Form.Items.CashAdvanceHolder.Visible = False;
-		Object.CashAdvanceHolder = PredefinedValue("Catalog.Partners.EmptyRef");
+		If Object.Ref.isEmpty() Then
+			Object.CashAdvanceHolder = PredefinedValue("Catalog.Partners.EmptyRef");
+		EndIf;
 	EndIf;
 EndProcedure
 

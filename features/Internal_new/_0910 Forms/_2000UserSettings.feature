@@ -961,6 +961,33 @@ Scenario:  _200015 check filling in field from custom user settings in Internal 
 
 
 Scenario:  _200016 check filling in field from custom user settings in Inventory transfer
+	Given I open hyperlink "e1cib/list/InformationRegister.UserSettings"
+	If "List" table does not contain lines Then
+			| "Metadata object"            | "Attribute name" |
+			| "Document.InventoryTransfer" |"Company"         |
+		And I click the button named "FormCreate"
+		And I click Select button of "User or group" field
+		And I go to line in "" table
+			| ''     |
+			| 'User' |
+		And I select current line in "" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'CI'          |
+		And I select current line in "List" table
+		And I input "Document.InventoryTransfer" text in "Metadata object" field
+		And I input "Company" text in "Attribute name" field
+		And I select "Regular" exact value from "Kind of attribute" drop-down list
+		And I click Select button of "Value" field
+		And I go to line in "" table
+			| ''        |
+			| 'Company' |
+		And I select current line in "" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
@@ -983,7 +1010,7 @@ Scenario:  _200018 check filling in field from custom user settings in Outgoing 
 	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		Then the form attribute named "Account" became equal to "Cash desk №3"
+		Then the form attribute named "Account" became equal to "Cash desk №2"
 		Then the form attribute named "Currency" became equal to "USD"
 		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
@@ -1020,6 +1047,33 @@ Scenario:  _200022 check filling in field from custom user settings in Purchase 
 
 Scenario:  _200023 check filling in field from custom user settings in Sales invoice
 	# the store is filled out of the agreement, if the agreement doesn't specify, then from user settings. So is the company.
+	Given I open hyperlink "e1cib/list/InformationRegister.UserSettings"
+	If "List" table does not contain lines Then
+			| "Metadata object"            | "Attribute name" |
+			| "Document.SalesInvoice" |"Agreement"         |
+		And I click the button named "FormCreate"
+		And I click Select button of "User or group" field
+		And I go to line in "" table
+			| ''     |
+			| 'User' |
+		And I select current line in "" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'CI'          |
+		And I select current line in "List" table
+		And I input "Document.SalesInvoice" text in "Metadata object" field
+		And I input "Agreement" text in "Attribute name" field
+		And I select "Regular" exact value from "Kind of attribute" drop-down list
+		And I click Select button of "Value" field
+		And I go to line in "" table
+			| ''        |
+			| 'Partner term' |
+		And I select current line in "" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings

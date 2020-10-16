@@ -186,16 +186,6 @@ Scenario: _022309 create document Purchase retur, store use Shipment confirmatio
 			| 'Description' |
 			| 'Store 01'  |
 		And I select current line in "List" table
-//	Temporarily prices
-		And I select current line in "ItemList" table
-		And I input "200,00" text in "Price" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Filling in the document number 2
-		And I move to "Other" tab
-		And I input "2" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I input "2" text in "Number" field
 	And I click the button named "FormPost"
 	And I delete "$$NumberPurchaseReturn022309$$" variable
 	And I delete "$$PurchaseReturn022309$$" variable
@@ -333,8 +323,8 @@ Scenario: _022322 create document Purchase return, store doesn't use Shipment co
 Scenario: _022323 check movements of the document Purchase return order in the PurchaseTurnovers (store doesn't use Shipment confirmation, without Purchase return order) - minus
 	Given I open hyperlink "e1cib/list/AccumulationRegister.PurchaseTurnovers"
 	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                 |
-		| '-12,000'  | '$$PurchaseReturn022322$$' |
+		| 'Quantity' | 'Recorder'                 | 'Amount'    |'Net amount'   |
+		| '-12,000'  | '$$PurchaseReturn022322$$' |	'-3 000,00' | '-2 542,37'	|
 
 Scenario: _022324 check movements of the document Purchase return order in the InventoryBalance (store doesn't use Shipment confirmation, without Purchase return order) - minus
 	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"

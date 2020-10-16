@@ -1286,7 +1286,7 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 				Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 				And I go to line in "List" table
 				| 'Number' | 'Partner'   |
-				| '$$NumberSalesOrder0154513$$'  | 'Ferron BP' |
+				| '$$NumberPurchaseOrder0154513$$'  | 'Ferron BP' |
 				And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
 				And I click the button named "FormPostAndClose"
 			* Create SC
@@ -1336,7 +1336,7 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			| 'Number' | 'Partner'   |
 			| '$$NumberSalesOrder0154513$$'  | 'Kalipso'       |
 			And I click the button named "FormDocumentPurchaseOrderGeneratePurchaseOrder"
-			Then the form attribute named "Message" became equal to "All items in the sales order document are already ordered using the purchase order document(s)."
+			Then the form attribute named "Message" became equal to 'All items in the "Sales order" document are already ordered using the "Purchase order" document(s).'
 			And I close all client application windows
 	* Check the message when there are no lines in the sales  order with procurement method "purchase"
 		* Create SO with procurement method Stock

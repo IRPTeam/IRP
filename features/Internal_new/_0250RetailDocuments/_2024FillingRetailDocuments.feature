@@ -1480,17 +1480,58 @@ Scenario:  _0154149 create Cash statement
 		And I delete '$$RetailReturnReceipt01541493$$' variable
 		And I delete '$$NumberRetailReturnReceipt01541494$$' variable
 		And I delete '$$RetailReturnReceipt01541494$$' variable
+	* Filling in POS account
+		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №4' |
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
+		And I click Select button of "Business unit" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shop 01'     |
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Transit Main' |
+		And I select current line in "List" table
+		And I click Select button of "Business unit" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shop 01'     |
+		And I select current line in "List" table
+		And I change "Type" radio button value to "POS"
+		And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Transit Main' |
+		And I select current line in "List" table
+		And I change "Currency" radio button value to "Fixed"
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Turkish lira' |
+		And I select current line in "List" table
+		And I click "Save and close" button		
 	* Create Cash statement statuses
 		* Done
 			Given I open hyperlink "e1cib/list/Catalog.CashStatementStatuses"
-			And I click the button named "FormCreate"
-			And I input "Done" text in "ENG" field
-			And I change checkbox "Forbid corrections"
-			And I click "Save and close" button
+			If "List" table does not contain lines Then
+				| "Description" |
+				| "Done" |
+				And I click the button named "FormCreate"
+				And I input "Done" text in "ENG" field
+				And I change checkbox "Forbid corrections"
+				And I click "Save and close" button
 		* Create
-			And I click the button named "FormCreate"
-			And I input "Create" text in "ENG" field
-			And I click "Save and close" button
+			If "List" table does not contain lines Then
+				| "Description" |
+				| "Create" |
+				And I click the button named "FormCreate"
+				And I input "Create" text in "ENG" field
+				And I click "Save and close" button
 	* Create RetailSalesReceipt01541491
 			And I close all client application windows
 		* Open the Retail Sales Receipt creation form
@@ -1836,6 +1877,88 @@ Scenario:  _0154149 create Cash statement
 			| 'Number' |
 			| '$$NumberRetailSalesReceipt01541494$$'      |
 			And I close all client application windows
+	* Create RetailSalesReceipt01541495
+			And I close all client application windows
+		* Open the Retail Sales Receipt creation form
+			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+			And I click the button named "FormCreate"
+		* Check filling in legal name if the partner has only one
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Retail customer'         |
+			And I select current line in "List" table
+			Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		* Check filling in Partner term if the partner has only one
+			Then the form attribute named "Agreement" became equal to "Retail partner term"
+		* Check filling in Store from Partner term
+			Then the form attribute named "Store" became equal to "Store 01"
+		* Filling in item and item key
+			And I delete a line in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Trousers'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "List" table
+			And I input "1,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
+				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  |
+		* Filling in payment tab
+			And I move to "Payments" tab
+			And in the table "Payments" I click "Add" button
+			And I click choice button of "Payment type" attribute in "Payments" table
+			Then "Payment types" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Card 01'        |
+			And I select current line in "List" table
+			And I activate "Payment terminal" field in "Payments" table
+			And I click choice button of "Payment terminal" attribute in "Payments" table
+			Then "Payment terminals" window is opened
+			And I go to line in "List" table
+				| 'Description'         |
+				| 'Payment terminal 01' |
+			And I select current line in "List" table
+			And I activate "Account" field in "Payments" table
+			And I click choice button of "Account" attribute in "Payments" table
+			Then "Cash/Bank accounts" window is opened
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Transit Main' |
+			And I select current line in "List" table
+			And I activate "Amount" field in "Payments" table
+			And I input "400,00" text in "Amount" field of "Payments" table
+			And I finish line editing in "Payments" table
+			And I activate "Percent" field in "Payments" table
+			And I select current line in "Payments" table
+			And I input "1,00" text in "Percent" field of "Payments" table
+			And I finish line editing in "Payments" table
+			And I activate "Commission" field in "Payments" table
+			And I select current line in "Payments" table
+			And I input "12,90" text in "Commission" field of "Payments" table
+			And I finish line editing in "Payments" table
+		* Post Retail sales receipt
+			And I input "01.09.2020 00:00:00" text in "Date" field
+			And I click the button named "FormPost"
+			And I delete "$$NumberRetailSalesReceipt01541495$$" variable
+			And I delete "$$RetailSalesReceipt01541495$$" variable
+			And I save the value of "Number" field as "$$NumberRetailSalesReceipt01541495$$"
+			And I save the window as "$$RetailSalesReceipt01541495$$"
+			And I click the button named "FormPostAndClose"
+			And "List" table contains lines
+			| 'Number' |
+			| '$$NumberRetailSalesReceipt01541495$$'      |
+			And I close all client application windows
 	* Create Retail return receipt based on RetailSalesReceipt01541494
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
@@ -1933,6 +2056,11 @@ Scenario:  _0154149 create Cash statement
 			| 'Description' |
 			| 'Shop 01'     |
 		And I select current line in "List" table
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Bank account, TRY' |
+		And I select current line in "List" table
 		And I click Select button of "Transaction period" field
 		Then "Select period" window is opened
 		And I input "01.09.2020" text in "DateBegin" field
@@ -1944,26 +2072,58 @@ Scenario:  _0154149 create Cash statement
 			And "CashTransactionList" table contains lines
 				| 'Document'                        | 'Receipt'  | 'Expense' |
 				| '$$RetailSalesReceipt01541492$$'  | '1 100,00' | ''        |
-				| '$$RetailReturnReceipt01541494$$' | ''         | '700,00'  |
+				| '$$RetailReturnReceipt01541494$$' | ''         | '500,00'  |
 				| '$$RetailReturnReceipt01541493$$' | ''         | '350,00'  |
-				| '$$RetailSalesReceipt01541493$$'  | '1 400,00' | ''        |
-				| '$$RetailSalesReceipt01541491$$'  | '400,00'   | ''        |
-				| '$$RetailReturnReceipt01541491$$' | ''         | '400,00'  |
-			And "Payments" table contains lines
-				| 'Payment type' | 'Account'      | 'Commission' | 'Amount'   |
-				| 'Cash'         | 'Cash desk №4' | ''           | '1 450,00' |
-				| 'Card 01'      | 'Transit Main' | '51,60'      | ''         |
-			Then the number of "Payments" table lines is "меньше или равно" 2
+				| '$$RetailSalesReceipt01541493$$'  | '1 200,00' | ''        |
+			Then the number of "CashTransactionList" table lines is "меньше или равно" 4
+			And "PaymentList" table contains lines
+				| 'Payment type' | 'Account'      | 'Commission' | 'Amount'   |'Currency'   |
+				| 'Cash'         | 'Cash desk №4' | ''           | '1 450,00' |'TRY'        |
+				| 'Card 01'      | 'Transit Main' | '64,50'      | '400,00'   |'TRY'        |
+			Then the number of "PaymentList" table lines is "меньше или равно" 2 
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashStatement01541491$$" variable
 		And I delete "$$CashStatement01541491$$" variable
+		And I delete "$$DateCashStatement01541491$$" variable
 		And I save the value of "Number" field as "$$NumberCashStatement01541491$$"
 		And I save the window as "$$CashStatement01541491$$"
+		And I save the value of "Date" field as "$$DateCashStatement01541491$$"
 		And I click the button named "FormPostAndClose"
 		And "List" table contains lines
 				| 'Number'                        |
 				| '$$NumberCashStatement01541491$$'  |
-			
+	* Check movements
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberCashStatement01541491$$'  |
+		And I click "Registrations report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| '$$CashStatement01541491$$'            | ''                              | ''                              | ''             | ''                          | ''                          | ''             | ''                             | ''                     | ''                             | ''                             | ''                     |
+			| 'Document registrations records'        | ''                              | ''                              | ''             | ''                          | ''                          | ''             | ''                             | ''                     | ''                             | ''                             | ''                     |
+			| 'Register  "Planing cash transactions"' | ''                              | ''                              | ''             | ''                          | ''                          | ''             | ''                             | ''                     | ''                             | ''                             | ''                     |
+			| ''                                      | 'Period'                        | 'Resources'                     | 'Dimensions'   | ''                          | ''                          | ''             | ''                             | ''                     | ''                             | ''                             | 'Attributes'           |
+			| ''                                      | ''                              | 'Amount'                        | 'Company'      | 'Basis document'            | 'Account'                   | 'Currency'     | 'Cash flow direction'          | 'Partner'              | 'Legal name'                   | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                      | '$$DateCashStatement01541491$$' | '68,49'                         | 'Main Company' | '$$CashStatement01541491$$' | 'Bank account, TRY'         | 'USD'          | 'Incoming'                     | ''                     | ''                             | 'Reporting currency'           | 'No'                   |
+			| ''                                      | '$$DateCashStatement01541491$$' | '400'                           | 'Main Company' | '$$CashStatement01541491$$' | 'Bank account, TRY'         | 'TRY'          | 'Incoming'                     | ''                     | ''                             | 'Local currency'               | 'No'                   |
+			| ''                                      | '$$DateCashStatement01541491$$' | '400'                           | 'Main Company' | '$$CashStatement01541491$$' | 'Bank account, TRY'         | 'TRY'          | 'Incoming'                     | ''                     | ''                             | 'en description is empty'      | 'No'                   |
+			| ''                                      | ''                              | ''                              | ''             | ''                          | ''                          | ''             | ''                             | ''                     | ''                             | ''                             | ''                     |
+			| 'Register  "Cash in transit"'           | ''                              | ''                              | ''             | ''                          | ''                          | ''             | ''                             | ''                     | ''                             | ''                             | ''                     |
+			| ''                                      | 'Record type'                   | 'Period'                        | 'Resources'    | 'Dimensions'                | ''                          | ''             | ''                             | ''                     | ''                             | 'Attributes'                   | ''                     |
+			| ''                                      | ''                              | ''                              | 'Amount'       | 'Company'                   | 'Basis document'            | 'From account' | 'To account'                   | 'Currency'             | 'Multi currency movement type' | 'Deferred calculation'         | ''                     |
+			| ''                                      | 'Receipt'                       | '$$DateCashStatement01541491$$' | '68,49'        | 'Main Company'              | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY'            | 'USD'                  | 'Reporting currency'           | 'No'                           | ''                     |
+			| ''                                      | 'Receipt'                       | '$$DateCashStatement01541491$$' | '400'          | 'Main Company'              | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY'            | 'TRY'                  | 'Local currency'               | 'No'                           | ''                     |
+			| ''                                      | 'Receipt'                       | '$$DateCashStatement01541491$$' | '400'          | 'Main Company'              | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY'            | 'TRY'                  | 'en description is empty'      | 'No'                           | ''                     |
+			| ''                                      | ''                              | ''                              | ''             | ''                          | ''                          | ''             | ''                             | ''                     | ''                             | ''                             | ''                     |
+			| 'Register  "Account balance"'           | ''                              | ''                              | ''             | ''                          | ''                          | ''             | ''                             | ''                     | ''                             | ''                             | ''                     |
+			| ''                                      | 'Record type'                   | 'Period'                        | 'Resources'    | 'Dimensions'                | ''                          | ''             | ''                             | 'Attributes'           | ''                             | ''                             | ''                     |
+			| ''                                      | ''                              | ''                              | 'Amount'       | 'Company'                   | 'Account'                   | 'Currency'     | 'Multi currency movement type' | 'Deferred calculation' | ''                             | ''                             | ''                     |
+			| ''                                      | 'Expense'                       | '$$DateCashStatement01541491$$' | '68,49'        | 'Main Company'              | 'Transit Main'              | 'USD'          | 'Reporting currency'           | 'No'                   | ''                             | ''                             | ''                     |
+			| ''                                      | 'Expense'                       | '$$DateCashStatement01541491$$' | '400'          | 'Main Company'              | 'Transit Main'              | 'TRY'          | 'Local currency'               | 'No'                   | ''                             | ''                             | ''                     |
+			| ''                                      | 'Expense'                       | '$$DateCashStatement01541491$$' | '400'          | 'Main Company'              | 'Transit Main'              | 'TRY'          | 'en description is empty'      | 'No'                   | ''                             | ''                             | ''                     |
+		And I close all client application windows
+		
+		
+				
 
 
 

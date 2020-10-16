@@ -90,7 +90,12 @@ Function GetQueryTextSalesReturnItemList()
 		|		ELSE SalesReturnItemList.SalesInvoice
 		|	END AS SalesInvoice,
 		|	SalesReturnItemList.Key AS RowKey,
-		|	SalesReturnItemList.Ref.IsOpeningEntry AS IsOpeningEntry
+		|	SalesReturnItemList.Ref.IsOpeningEntry AS IsOpeningEntry,
+		|	CASE
+		|		WHEN SalesReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
+		|			THEN TRUE
+		|		ELSE FALSE
+		|	END AS IsService
 		|FROM
 		|	Document.SalesReturn.ItemList AS SalesReturnItemList
 		|WHERE
@@ -191,13 +196,14 @@ Function GetQueryTextQueryTable()
 	|	QueryTable.Period AS Period,
 	|	QueryTable.SalesInvoice AS SalesInvoice,
 	|	QueryTable.RowKey AS RowKey,
-	|	QueryTable.IsOpeningEntry AS IsOpeningEntry
+	|	QueryTable.IsOpeningEntry AS IsOpeningEntry,
+	|	QueryTable.IsService AS IsService
 	|INTO tmp
 	|FROM
 	|	&QueryTable AS QueryTable
 	|;
 	|
-	|//[1]//////////////////////////////////////////////////////////////////////////////
+	|// 1. OrderBalance //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company,
 	|	tmp.Store,
@@ -222,7 +228,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.RowKey
 	|;
 	|
-	|//[2]//////////////////////////////////////////////////////////////////////////////
+	|// 2. InventoryBalance //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company,
 	|	tmp.Store,
@@ -234,6 +240,7 @@ Function GetQueryTextQueryTable()
 	|	tmp AS tmp
 	|WHERE
 	|	NOT tmp.IsOpeningEntry
+	|	AND Not tmp.IsService
 	|GROUP BY
 	|	tmp.Company,
 	|	tmp.Store,
@@ -242,7 +249,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.Period
 	|;
 	|
-	|//[3]//////////////////////////////////////////////////////////////////////////////
+	|// 3. GoodsInTransitIncoming //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company,
 	|	tmp.Store,
@@ -256,6 +263,7 @@ Function GetQueryTextQueryTable()
 	|	tmp AS tmp
 	|WHERE
 	|	tmp.UseGoodsReceipt
+	|	AND Not tmp.IsService
 	|GROUP BY
 	|	tmp.Company,
 	|	tmp.Store,
@@ -266,7 +274,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.RowKey
 	|;
 	|
-	|//[4]//////////////////////////////////////////////////////////////////////////////
+	|// 4. StockBalance //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company,
 	|	tmp.Store,
@@ -279,6 +287,7 @@ Function GetQueryTextQueryTable()
 	|WHERE
 	|	NOT tmp.UseGoodsReceipt
 	|	AND NOT tmp.IsOpeningEntry
+	|	AND Not tmp.IsService
 	|GROUP BY
 	|	tmp.Company,
 	|	tmp.Store,
@@ -287,7 +296,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.Period
 	|;
 	|
-	|//[5]//////////////////////////////////////////////////////////////////////////////
+	|// 5. StockReservation //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company,
 	|	tmp.Store,
@@ -300,6 +309,7 @@ Function GetQueryTextQueryTable()
 	|WHERE
 	|	NOT tmp.UseGoodsReceipt
 	|	AND NOT tmp.IsOpeningEntry
+	|	AND Not tmp.IsService
 	|GROUP BY
 	|	tmp.Company,
 	|	tmp.Store,
@@ -308,7 +318,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.Period
 	|;
 	|
-	|//[6]//////////////////////////////////////////////////////////////////////////////
+	|// 6. PartnerApTransactions //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company AS Company,
 	|	tmp.BasisDocument AS BasisDocument,
@@ -332,7 +342,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.Period
 	|;
 	|
-	|//[7]//////////////////////////////////////////////////////////////////////////////
+	|// 7. AdvanceToSuppliers_Lock //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company AS Company,
 	|	tmp.BasisDocument AS BasisDocument,
@@ -356,7 +366,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.Period
 	|;
 	|
-	|//[8]//////////////////////////////////////////////////////////////////////////////
+	|// 8. ReconciliationStatement //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company AS Company,
 	|	tmp.LegalName AS LegalName,
@@ -372,7 +382,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.Period
 	|;
 	|
-	|//[9]//////////////////////////////////////////////////////////////////////////////
+	|// 9. SalesReturnTurnovers //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company,
 	|	tmp.Currency,

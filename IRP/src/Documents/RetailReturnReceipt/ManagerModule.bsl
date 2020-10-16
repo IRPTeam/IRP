@@ -76,13 +76,14 @@ Function GetQueryText_AllTables()
 		|	QueryTable.Period AS Period,
 		|	QueryTable.RetailSalesReceipt AS RetailSalesReceipt,
 		|	QueryTable.RowKey AS RowKey,
-		|	QueryTable.IsOpeningEntry AS IsOpeningEntry
+		|	QueryTable.IsOpeningEntry AS IsOpeningEntry,
+		|	QueryTable.IsService AS IsService
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable
 		|;
 		|
-		|// 1//////////////////////////////////////////////////////////////////////////////
+		|// 1. StockBalance //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Store,
@@ -94,6 +95,7 @@ Function GetQueryText_AllTables()
 		|	tmp AS tmp
 		|WHERE
 		|	NOT tmp.IsOpeningEntry
+		|	AND NOT tmp.IsService
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -102,7 +104,7 @@ Function GetQueryText_AllTables()
 		|	tmp.Period
 		|;
 		|
-		|// 2//////////////////////////////////////////////////////////////////////////////
+		|// 2. StockReservation //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Store,
@@ -114,6 +116,7 @@ Function GetQueryText_AllTables()
 		|	tmp AS tmp
 		|WHERE
 		|	NOT tmp.IsOpeningEntry
+		|	AND NOT tmp.IsService
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -122,7 +125,7 @@ Function GetQueryText_AllTables()
 		|	tmp.Period
 		|;
 		|
-		|// 3//////////////////////////////////////////////////////////////////////////////
+		|// 3. SalesReturnTurnovers //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Currency,
@@ -176,7 +179,12 @@ Function QuantityByUnit(Ref)
 		|		ELSE RetailReturnReceiptItemList.RetailSalesReceipt
 		|	END AS RetailSalesReceipt,
 		|	RetailReturnReceiptItemList.Key AS RowKey,
-		|	RetailReturnReceiptItemList.Ref.IsOpeningEntry AS IsOpeningEntry
+		|	RetailReturnReceiptItemList.Ref.IsOpeningEntry AS IsOpeningEntry,
+		|	CASE
+		|		WHEN RetailReturnReceiptItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
+		|			THEN TRUE
+		|		ELSE FALSE
+		|	END AS IsService
 		|FROM
 		|	Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
 		|WHERE
@@ -207,7 +215,12 @@ Function QuantityByUnit(Ref)
 		|		ELSE RetailReturnReceiptItemList.RetailSalesReceipt
 		|	END,
 		|	RetailReturnReceiptItemList.Key,
-		|	RetailReturnReceiptItemList.Ref.IsOpeningEntry";
+		|	RetailReturnReceiptItemList.Ref.IsOpeningEntry,
+		|	CASE
+		|		WHEN RetailReturnReceiptItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
+		|			THEN TRUE
+		|		ELSE FALSE
+		|	END";
 	
 	Query.SetParameter("Ref", Ref);
 	QueryResults = Query.Execute();

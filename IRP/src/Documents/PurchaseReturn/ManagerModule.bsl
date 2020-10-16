@@ -35,7 +35,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	END AS BasisDocument,
 		|	PurchaseReturnItemList.Key AS RowKey,
 		|	PurchaseReturnItemList.Ref.IsOpeningEntry AS IsOpeningEntry,
-		|	SUM(PurchaseReturnItemList.NetAmount) AS NetAmount
+		|	SUM(PurchaseReturnItemList.NetAmount) AS NetAmount,
+		|	CASE
+		|		WHEN PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
+		|			THEN TRUE
+		|		ELSE FALSE
+		|	END AS IsService
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
 		|WHERE
@@ -69,7 +74,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|		ELSE UNDEFINED
 		|	END,
 		|	PurchaseReturnItemList.Key,
-		|	PurchaseReturnItemList.Ref.IsOpeningEntry";
+		|	PurchaseReturnItemList.Ref.IsOpeningEntry,
+		|	CASE
+		|		WHEN PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
+		|			THEN TRUE
+		|		ELSE FALSE
+		|	END";
 	
 	Query.SetParameter("Ref", Ref);
 	QueryResults = Query.Execute();
@@ -97,6 +107,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	QueryTable.ShipmentBasis,
 		|	QueryTable.BasisDocument,
 		|	QueryTable.NetAmount,
+		|	QueryTable.IsService,
 		|	QueryTable.RowKey,
 		|	QueryTable.IsOpeningEntry AS IsOpeningEntry
 		|INTO tmp
@@ -104,7 +115,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	&QueryTable AS QueryTable
 		|;
 		|
-		|// 1//////////////////////////////////////////////////////////////////////////////
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|
+		|
+		|// 1. ItemList_OrderBalance //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Store,
@@ -117,8 +132,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp AS tmp
 		|WHERE
 		|	tmp.PurchaseReturnOrder <> VALUE(Document.PurchaseReturnOrder.EmptyRef)
-		|	AND
-		|	NOT tmp.IsOpeningEntry
+		|	AND NOT tmp.IsOpeningEntry
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -128,7 +142,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.RowKey
 		|;
 		|
-		|// 2//////////////////////////////////////////////////////////////////////////////
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|
+		|
+		|// 2. ItemList_OrderReservation //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Store,
@@ -139,8 +157,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp AS tmp
 		|WHERE
 		|	tmp.PurchaseReturnOrder <> VALUE(Document.PurchaseReturnOrder.EmptyRef)
-		|	AND
-		|	NOT tmp.IsOpeningEntry
+		|	AND NOT tmp.IsOpeningEntry
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -148,7 +165,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Period
 		|;
 		|
-		|// 3//////////////////////////////////////////////////////////////////////////////
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|
+		|
+		|// 3. ItemList_PurchaseTurnovers //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.PurchaseInvoice AS PurchaseInvoice,
@@ -172,7 +193,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.RowKey
 		|;
 		|
-		|// 4//////////////////////////////////////////////////////////////////////////////
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|
+		|
+		|// 4. ItemList_StockReservation //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Store,
@@ -184,8 +209,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp AS tmp
 		|WHERE
 		|	tmp.PurchaseReturnOrder = VALUE(Document.PurchaseReturnOrder.EmptyRef)
-		|	AND
-		|	NOT tmp.IsOpeningEntry
+		|	AND NOT tmp.IsOpeningEntry
+		|	AND Not tmp.IsService
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -194,7 +219,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.PurchaseInvoice
 		|;
 		|
-		|// 5//////////////////////////////////////////////////////////////////////////////
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|
+		|
+		|// 5. ItemList_InventoryBalance //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Store,
@@ -205,6 +234,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp AS tmp
 		|WHERE
 		|	NOT tmp.IsOpeningEntry
+		|	AND Not tmp.IsService
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -212,7 +242,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Period
 		|;
 		|
-		|// 6//////////////////////////////////////////////////////////////////////////////
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|
+		|
+		|// 6. ItemList_GoodsInTransitOutgoing //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Store,
@@ -220,21 +254,26 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	SUM(tmp.Quantity) AS Quantity,
 		|	tmp.Period,
 		|	tmp.ShipmentBasis,
-		|   tmp.RowKey
+		|	tmp.RowKey
 		|FROM
 		|	tmp AS tmp
 		|WHERE
 		|	tmp.UseShipmentConfirmation
+		|	AND Not tmp.IsService
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	tmp.Period,
 		|	tmp.ShipmentBasis,
-		|   tmp.RowKey
+		|	tmp.RowKey
 		|;
 		|
-		|// 7//////////////////////////////////////////////////////////////////////////////
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|
+		|
+		|// 7. ItemList_StockBalance //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Store,
@@ -245,8 +284,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp AS tmp
 		|WHERE
 		|	NOT tmp.UseShipmentConfirmation
-		|	AND
-		|	NOT tmp.IsOpeningEntry
+		|	AND NOT tmp.IsOpeningEntry
+		|	AND Not tmp.IsService
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -254,11 +293,14 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Period
 		|;
 		|
-		|// 8//////////////////////////////////////////////////////////////////////////////
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|
+		|
+		|// 8. ItemList_PartnerArTransactions //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
-		|
 		|	tmp.Partner AS Partner,
 		|	tmp.LegalName AS LegalName,
 		|	tmp.Agreement AS Agreement,
@@ -279,11 +321,14 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Period
 		|;
 		|
-		|// 9//////////////////////////////////////////////////////////////////////////////
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|
+		|
+		|// 9. ItemList_AdvanceFromCustomers_Lock //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
-		|
 		|	tmp.Partner AS Partner,
 		|	tmp.LegalName AS LegalName,
 		|	tmp.Agreement AS Agreement,
@@ -297,14 +342,17 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.BasisDocument,
-		|
 		|	tmp.Partner,
 		|	tmp.LegalName,
 		|	tmp.Agreement,
 		|	tmp.Currency,
 		|	tmp.Period
 		|;
-		|// 10//////////////////////////////////////////////////////////////////////////////
+		|
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|
+		|// 10. ReconciliationStatement //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.LegalName AS LegalName,
@@ -319,7 +367,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Currency,
 		|	tmp.Period
 		|;
-		|// 11//////////////////////////////////////////////////////////////////////////////
+		|
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|
+		|// 11. PurchaseReturnTurnovers //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.PurchaseInvoice AS PurchaseInvoice,

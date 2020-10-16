@@ -1296,8 +1296,6 @@ Procedure ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, Op
 		OpenSettings.ArrayOfFilters = New Array();
 		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
 																		True, DataCompositionComparisonType.NotEqual));
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type", 
-								PredefinedValue("Enum.ItemTypes.Service"), DataCompositionComparisonType.NotEqual));
 	EndIf;
 	
 	OpenSettings.FormParameters = New Structure();
@@ -1315,8 +1313,6 @@ Procedure ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, Array
 	If ArrayOfFilters = Undefined Then
 		ArrayOfFilters = New Array();
 		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type",
-												PredefinedValue("Enum.ItemTypes.Service"), ComparisonType.NotEqual));
 	EndIf;
 	
 	ArrayOfChoiceParameters = New Array();

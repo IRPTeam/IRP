@@ -73,22 +73,29 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	NotifyParameters.Insert("Form", ThisObject);
 	NotifyParameters.Insert("Object", Object);
 	
-	For Each Row In AdditionalParameters.FoundedItems Do
-		Item =  Row.Item;
-		ItemKey =  Row.ItemKey;
-		If Not ValueIsFilled(ItemKey) Then
-			ItemOnChangeAtServer();
-		EndIf;
-		SetPictureView();
-		
+	If AdditionalParameters.FoundedItems.Count() Then
 		#If MobileClient Then
 		MultimediaTools.CloseBarcodeScanning();
 		#EndIf
-		ShowStatus();
-		Barcode = Row.Barcode;
+	EndIf;
+	
+	For Each Row In AdditionalParameters.FoundedItems Do
+		FillData(Row);
 	EndDo;
 
-	
+EndProcedure
+
+&AtClient
+Procedure FillData(Row)
+	Item =  Row.Item;
+	ItemKey =  Row.ItemKey;
+	If Not ValueIsFilled(ItemKey) Then
+		ItemOnChangeAtServer();
+	EndIf;
+
+	SetPictureView();
+	ShowStatus();
+	Barcode = Row.Barcode;
 EndProcedure
 
 &AtClient

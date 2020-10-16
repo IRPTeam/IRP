@@ -49,14 +49,6 @@
     </synonym>
     <languageCode>en</languageCode>
   </languages>
-  <languages uuid="b37d11ba-9391-4abb-b99b-01f060a79638">
-    <name>HASH</name>
-    <synonym>
-      <key>en</key>
-      <value>HASH</value>
-    </synonym>
-    <languageCode>ha</languageCode>
-  </languages>
   <languages uuid="415e5f90-29b0-4f1b-a0a7-42cb96b2b637">
     <name>Turkish</name>
     <synonym>
@@ -72,6 +64,14 @@
       <value>Russian</value>
     </synonym>
     <languageCode>ru</languageCode>
+  </languages>
+  <languages uuid="b37d11ba-9391-4abb-b99b-01f060a79638">
+    <name>HASH</name>
+    <synonym>
+      <key>en</key>
+      <value>HASH</value>
+    </synonym>
+    <languageCode>ha</languageCode>
   </languages>
   <subsystems>Subsystem.AddAttributesAndProperties</subsystems>
   <subsystems>Subsystem.AddDataProc</subsystems>

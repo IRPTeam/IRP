@@ -1,5 +1,10 @@
 
 &AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref, Items.PageAddInfo);
+EndProcedure
+
+&AtServer
 Procedure ItemOnChangeAtServer()
 	Query = New Query;
 	Query.Text = 

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="91bebfc6-3750-45c4-817b-9ac9cdb9ab8a">
+  <producedTypes>
+    <objectType typeId="9a5f1a4f-5812-45b8-b2f1-1bf7eab637b0" valueTypeId="be4b58af-160b-419d-9972-ec15c6d29a83"/>
+    <refType typeId="fdf5d304-c0ac-4d29-98e0-c44890578228" valueTypeId="21198fea-edca-4652-872a-9fd7f73aba58"/>
+    <selectionType typeId="c0fe2be5-ecce-4db0-a65a-f3cc9c303f3e" valueTypeId="e1433d1a-a3b1-4c5c-8f41-2bb6993a0938"/>
+    <listType typeId="2dbf5380-d9c1-4c5e-8f37-d0825f0f13b7" valueTypeId="087c1c24-6813-450e-90fb-590cec214b16"/>
+    <managerType typeId="3718763c-289f-4f5a-b23d-deae9c4a0a3c" valueTypeId="d1ed685a-24d5-4942-8fca-395d584f5675"/>
+  </producedTypes>
+  <name>CorrespondenceDataItems</name>
+  <synonym>
+    <key>en</key>
+    <value>Correspondence data items</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.CorrespondenceDataItems.StandardAttribute.Code</inputByString>
+  <inputByString>Catalog.CorrespondenceDataItems.StandardAttribute.Description</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <objectPresentation>
+    <key>en</key>
+    <value>Correspondence data item</value>
+  </objectPresentation>
+  <hierarchical>true</hierarchical>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>12</codeLength>
+  <descriptionLength>150</descriptionLength>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <codeSeries>WithinSubordination</codeSeries>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.CorrespondenceDataItems.Form.ItemForm</defaultObjectForm>
+  <attributes uuid="8949d29b-c57b-4157-b6bd-5f0a518b4799">
+    <name>RefValue</name>
+    <synonym>
+      <key>en</key>
+      <value>Ref value</value>
+    </synonym>
+    <type>
+      <types>AnyRef</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="af545167-1c64-4b93-811d-52b83f6dbcf2">
+    <name>SimpleValue</name>
+    <synonym>
+      <key>en</key>
+      <value>Simple value</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <types>Number</types>
+      <types>Date</types>
+      <types>Boolean</types>
+      <numberQualifiers>
+        <precision>10</precision>
+      </numberQualifiers>
+      <stringQualifiers>
+        <length>10</length>
+      </stringQualifiers>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="35be9e35-57d6-43a0-877e-0a1122c9198a">
+    <name>StorageValue</name>
+    <synonym>
+      <key>en</key>
+      <value>Storage value</value>
+    </synonym>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <tabularSections uuid="59e58566-32a6-446e-a7b2-d757dc24c8ff">
+    <producedTypes>
+      <objectType typeId="a11dfc9d-379d-4ccb-9312-c075cd794783" valueTypeId="03b04768-3944-416a-ba10-5f20fd9fcb3e"/>
+      <rowType typeId="0f217f6d-1607-4535-b60b-28695c33d5c8" valueTypeId="45582c6e-e4aa-4128-9374-9999ab8a41dc"/>
+    </producedTypes>
+    <name>ParametersTable</name>
+    <synonym>
+      <key>en</key>
+      <value>Parameters table</value>
+    </synonym>
+    <attributes uuid="178ab33d-c246-40db-a5f2-766843e01f04">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>250</length>
+        </stringQualifiers>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <indexing>Index</indexing>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="557f69b0-5daf-492d-a7ac-b287c3a2f874">
+      <name>RefValue</name>
+      <synonym>
+        <key>en</key>
+        <value>Ref value</value>
+      </synonym>
+      <type>
+        <types>AnyRef</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4dc712e9-13a5-459a-ae5b-99b10bc4bedd">
+      <name>SimpleValue</name>
+      <synonym>
+        <key>en</key>
+        <value>Simple value</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <types>Number</types>
+        <types>Date</types>
+        <types>Boolean</types>
+        <numberQualifiers>
+          <precision>10</precision>
+        </numberQualifiers>
+        <stringQualifiers>
+          <length>10</length>
+        </stringQualifiers>
+        <dateQualifiers>
+          <dateFractions>Date</dateFractions>
+        </dateQualifiers>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4ed88475-8e03-40e2-b285-35b3682a1d18">
+      <name>StorageValue</name>
+      <synonym>
+        <key>en</key>
+        <value>Storage value</value>
+      </synonym>
+      <type>
+        <types>ValueStorage</types>
+      </type>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <forms uuid="340ea7c1-9439-461f-b255-f373d9207868">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

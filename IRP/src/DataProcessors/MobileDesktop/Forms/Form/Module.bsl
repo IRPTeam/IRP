@@ -61,13 +61,19 @@ Procedure ItemKeyOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure SearchByBarcode(Command)
-	DocumentsClient.SearchByBarcode(Command, Object, ThisObject, ThisObject);
+Procedure SearchByBarcode(Command, Barcode = "")
+	AddInfo = New Structure("MobileModule", ThisObject);
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject, , AddInfo);
 EndProcedure
 
 &AtClient
-Procedure SearchByBarcodeEnd(BarcodeItems, Parameters) Export
-	For Each Row In BarcodeItems Do
+Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
+
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Form", ThisObject);
+	NotifyParameters.Insert("Object", Object);
+	
+	For Each Row In AdditionalParameters.FoundedItems Do
 		Item =  Row.Item;
 		ItemKey =  Row.ItemKey;
 		If Not ValueIsFilled(ItemKey) Then
@@ -80,8 +86,20 @@ Procedure SearchByBarcodeEnd(BarcodeItems, Parameters) Export
 		#EndIf
 		ShowStatus();
 		Barcode = Row.Barcode;
-		Return;
 	EndDo;
+
+	
+EndProcedure
+
+&AtClient
+Procedure ScanBarcodeEndMobile(Barcode, Result, Message, Parameters) Export
+	ProcessBarcodeResult = Barcodeclient.ProcessBarcode(Barcode, Parameters);
+	If ProcessBarcodeResult Then
+		Message = R().S_018;
+	Else
+		Result = False;
+		Message = StrTemplate(R().S_019, Barcode);
+	EndIf;
 EndProcedure
 
 &AtServer

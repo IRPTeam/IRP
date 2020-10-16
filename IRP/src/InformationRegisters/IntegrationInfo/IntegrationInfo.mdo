@@ -63,6 +63,20 @@
       <value></value>
     </fillValue>
   </resources>
+  <dimensions uuid="978efd38-0f6c-476e-97d4-4e6b0d21b7c3">
+    <name>isProduct</name>
+    <synonym>
+      <key>en</key>
+      <value>Is product</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <mainFilter>true</mainFilter>
+  </dimensions>
   <dimensions uuid="0fc7edc6-8ac0-4c81-95cc-3e616e62304f">
     <name>IntegrationSettings</name>
     <synonym>

@@ -128,6 +128,54 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="350a3939-a316-4034-a9f0-715663067e98">
+    <producedTypes>
+      <objectType typeId="f5b89d64-56c6-4051-99d1-95285c31826b" valueTypeId="05b986f5-a016-483b-acca-e3ca699ed9c0"/>
+      <rowType typeId="a17ed796-9d67-4838-a1e2-86aea1ef033c" valueTypeId="96f28872-7568-49ed-89fd-95ee19327fa9"/>
+    </producedTypes>
+    <name>ConnectionSettingTest</name>
+    <synonym>
+      <key>en</key>
+      <value>Connection setting test</value>
+    </synonym>
+    <attributes uuid="71f413d5-dd65-43f3-ab91-b3e51c267641">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="2a0867a4-48f0-425e-86f9-3e45d48bb2cb">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+        <types>String</types>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+        </numberQualifiers>
+        <stringQualifiers>
+          <length>512</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
   <forms uuid="e749d2bf-5157-4d93-a33e-4f0203e35727">
     <name>ItemForm</name>
     <synonym>

@@ -53,6 +53,10 @@
     <metadata>ChartOfCharacteristicTypes.IDInfoTypes</metadata>
     <use>Use</use>
   </content>
+  <content>
+    <metadata>Catalog.DataMappingItems</metadata>
+    <use>Use</use>
+  </content>
   <autoUse>DontUse</autoUse>
   <dataSeparation>DontUse</dataSeparation>
   <usersSeparation>DontUse</usersSeparation>

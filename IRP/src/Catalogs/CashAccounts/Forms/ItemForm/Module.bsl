@@ -49,6 +49,9 @@ EndProcedure
 &AtClient
 Procedure CurrencyTypeOnChange(Item)
 	CatCashAccountsClient.SetItemsBehavior(Object, ThisObject);
+	If Not ThisObject.CurrencyType = "Fixed" Then
+		Object.Currency = Undefined;
+	EndIf;
 EndProcedure
 
 &AtClient

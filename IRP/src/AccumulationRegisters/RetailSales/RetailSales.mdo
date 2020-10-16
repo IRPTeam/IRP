@@ -111,13 +111,14 @@
     <useInTotals>true</useInTotals>
   </dimensions>
   <dimensions uuid="955df867-20b9-4eb7-a510-be4e2533a072">
-    <name>RetailSalesInvoice</name>
+    <name>RetailSalesReceipt</name>
     <synonym>
       <key>en</key>
-      <value>Retail sales invoice</value>
+      <value>Retail sales receipt</value>
     </synonym>
     <type>
       <types>DocumentRef.RetailSalesReceipt</types>
+      <types>DocumentRef.RetailReturnReceipt</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

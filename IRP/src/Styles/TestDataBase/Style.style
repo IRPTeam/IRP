@@ -3,7 +3,7 @@
   <items xsi:type="style:ColorStyleItem">
     <name>NavigationColor</name>
     <color xsi:type="core:ColorRef">
-      <color>Web.Orange</color>
+      <color>Web.AliceBlue</color>
     </color>
   </items>
 </style:Style>

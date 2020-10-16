@@ -44,7 +44,6 @@ Procedure SetItemsBehavior(Object, Form) Export
 	Else
 		Form.Items.Currency.Visible = False;
 		Form.Items.Currency.AutoMarkIncomplete = False;
-		Object.Currency = Undefined;
 	EndIf;
 EndProcedure
 

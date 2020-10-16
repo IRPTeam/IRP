@@ -11,7 +11,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("RetailSales", PostingServer.CreateTable(AccReg.RetailSales));
 	Tables.Insert("RetailCash", PostingServer.CreateTable(AccReg.RetailCash));
 	
-
 	QuantityByUnit = QuantityByUnit(Ref);
 	
 	PostingServer.CalculateQuantityByUnit(QuantityByUnit);
@@ -265,7 +264,11 @@ Function GetQueryText_RetailReturnReceipt_RetailSales()
 	|	SUM(RetailReturnReceiptItemList.Quantity) AS Quantity,
 	|	SUM(ISNULL(RetailReturnReceiptSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
 	|	RetailReturnReceiptItemList.Ref.Date AS Period,
-	|	RetailReturnReceiptItemList.Ref AS RetailSalesReceipt,
+	|	CASE
+	|		WHEN RetailReturnReceiptItemList.RetailSalesReceipt = VALUE(Document.RetailSalesReceipt.EmptyRef)
+	|			THEN RetailReturnReceiptItemList.Ref
+	|		ELSE RetailReturnReceiptItemList.RetailSalesReceipt
+	|	END AS RetailSalesReceipt,
 	|	SUM(RetailReturnReceiptItemList.TotalAmount) AS Amount,
 	|	SUM(RetailReturnReceiptItemList.NetAmount) AS NetAmount,
 	|	SUM(RetailReturnReceiptItemList.OffersAmount) AS OffersAmount,
@@ -287,11 +290,16 @@ Function GetQueryText_RetailReturnReceipt_RetailSales()
 	|	RetailReturnReceiptItemList.Ref.Company,
 	|	RetailReturnReceiptItemList.ItemKey,
 	|	RetailReturnReceiptItemList.Ref.Date,
-	|	RetailReturnReceiptItemList.Ref,
+	|	CASE
+	|		WHEN RetailReturnReceiptItemList.RetailSalesReceipt = VALUE(Document.RetailSalesReceipt.EmptyRef)
+	|			THEN RetailReturnReceiptItemList.Ref
+	|		ELSE RetailReturnReceiptItemList.RetailSalesReceipt
+	|	END,
 	|	RetailReturnReceiptItemList.Key,
 	|	RetailReturnReceiptSerialLotNumbers.SerialLotNumber,
 	|	RetailReturnReceiptItemList.Store
 	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company AS Company,

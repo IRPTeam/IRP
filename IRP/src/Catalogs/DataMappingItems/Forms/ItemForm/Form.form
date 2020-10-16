@@ -706,7 +706,7 @@
     <name>Object</name>
     <id>1</id>
     <valueType>
-      <types>CatalogObject.CorrespondenceDataItems</types>
+      <types>CatalogObject.DataMappingItems</types>
     </valueType>
     <view>
       <common>true</common>

@@ -10,8 +10,8 @@
   <content>Catalog.IntegrationSettings</content>
   <content>Catalog.ExternalDataProc</content>
   <content>InformationRegister.ExternalCommands</content>
-  <content>Catalog.CorrespondenceDataItems</content>
-  <content>InformationRegister.CorrespondenceTable</content>
+  <content>Catalog.DataMappingItems</content>
+  <content>InformationRegister.DataMappingTable</content>
   <subsystems>GoogleDrive</subsystems>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

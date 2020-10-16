@@ -9,10 +9,10 @@
     <recordType typeId="1d46b57c-78eb-4b9b-97fb-2cbbc9b43e32" valueTypeId="05638f34-ece3-4606-9cc1-15b0e90a683c"/>
     <recordManagerType typeId="ed025777-f21d-4988-8b05-e47c0d461243" valueTypeId="d8eccd5a-abf1-4581-8ffc-e4141269785e"/>
   </producedTypes>
-  <name>CorrespondenceTable</name>
+  <name>DataMappingTable</name>
   <synonym>
     <key>en</key>
-    <value>Correspondence table</value>
+    <value>Data mapping table</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
@@ -88,7 +88,7 @@
       <value>Source</value>
     </synonym>
     <type>
-      <types>CatalogRef.CorrespondenceDataItems</types>
+      <types>CatalogRef.DataMappingItems</types>
     </type>
     <fillChecking>ShowError</fillChecking>
     <choiceFoldersAndItems>FoldersAndItems</choiceFoldersAndItems>

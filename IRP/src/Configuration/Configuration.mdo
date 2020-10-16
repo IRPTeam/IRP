@@ -496,7 +496,7 @@
   <catalogs>Catalog.Hardware</catalogs>
   <catalogs>Catalog.CashStatementStatuses</catalogs>
   <catalogs>Catalog.DataBaseStatus</catalogs>
-  <catalogs>Catalog.CorrespondenceDataItems</catalogs>
+  <catalogs>Catalog.DataMappingItems</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>
@@ -606,7 +606,7 @@
   <informationRegisters>InformationRegister.SharedReportOptions</informationRegisters>
   <informationRegisters>InformationRegister.BusinessUnitBankTerms</informationRegisters>
   <informationRegisters>InformationRegister.BarcodeScanInfoCheck</informationRegisters>
-  <informationRegisters>InformationRegister.CorrespondenceTable</informationRegisters>
+  <informationRegisters>InformationRegister.DataMappingTable</informationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountsStatement</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AdvanceFromCustomers</accumulationRegisters>

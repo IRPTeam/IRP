@@ -4883,7 +4883,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.CorrespondenceDataItems</name>
+		<name>Catalog.DataMappingItems</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -4894,7 +4894,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.CorrespondenceTable</name>
+		<name>InformationRegister.DataMappingTable</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

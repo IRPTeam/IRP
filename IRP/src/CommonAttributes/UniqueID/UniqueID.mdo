@@ -54,7 +54,7 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.CorrespondenceDataItems</metadata>
+    <metadata>Catalog.DataMappingItems</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

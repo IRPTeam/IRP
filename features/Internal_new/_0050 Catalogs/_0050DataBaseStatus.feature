@@ -26,6 +26,8 @@ Scenario: _0050 Data base title
 		And I click "Save and close" button
 	* Check Data base title
 		And I close all client application windows
+		And I close TestClient session
+		Then I connect launched Test client "Этот клиент"
 		And I delete "$$DataBaseTitle0050$$" variable
 		And I save the window as "$$DataBaseTitle0050$$"
 		And I display "$$DataBaseTitle0050$$" variable value

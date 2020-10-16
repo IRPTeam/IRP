@@ -1372,7 +1372,10 @@ EndProcedure
 #Region Commands
 
 Procedure SearchByBarcode(Barcode, Object, Form, DocumentClientModule = Undefined, PriceType = Undefined, AddInfo = Undefined) Export
-  Form.CurrentItem = Form.Items.ItemList;
+  If Not Form.Items.Find("ItemList") = Undefined Then
+  	Form.CurrentItem = Form.Items.ItemList;
+  EndIf;
+
   If AddInfo = Undefined Then
   	AddInfo = New Structure;
   EndIf;

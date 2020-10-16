@@ -1,5 +1,10 @@
 
 &AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	ExtensionServer.AddAtributesFromExtensions(ThisObject, DataProcessors.MobileDesktop, Items.PageAddInfo);
+EndProcedure
+
+&AtServer
 Procedure ItemOnChangeAtServer()
 	Query = New Query;
 	Query.Text = 
@@ -56,27 +61,52 @@ Procedure ItemKeyOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure SearchByBarcode(Command)
-	DocumentsClient.SearchByBarcode(Command, Object, ThisObject, ThisObject);
+Procedure SearchByBarcode(Command, Barcode = "")
+	AddInfo = New Structure("MobileModule", ThisObject);
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject, , AddInfo);
 EndProcedure
 
 &AtClient
-Procedure SearchByBarcodeEnd(BarcodeItems, Parameters) Export
-	For Each Row In BarcodeItems Do
-		Item =  Row.Item;
-		ItemKey =  Row.ItemKey;
-		If Not ValueIsFilled(ItemKey) Then
-			ItemOnChangeAtServer();
-		EndIf;
-		SetPictureView();
-		
+Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
+
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Form", ThisObject);
+	NotifyParameters.Insert("Object", Object);
+	
+	If AdditionalParameters.FoundedItems.Count() Then
 		#If MobileClient Then
 		MultimediaTools.CloseBarcodeScanning();
 		#EndIf
-		ShowStatus();
-		Barcode = Row.Barcode;
-		Return;
+	EndIf;
+	
+	For Each Row In AdditionalParameters.FoundedItems Do
+		FillData(Row);
 	EndDo;
+
+EndProcedure
+
+&AtClient
+Procedure FillData(Row)
+	Item =  Row.Item;
+	ItemKey =  Row.ItemKey;
+	If Not ValueIsFilled(ItemKey) Then
+		ItemOnChangeAtServer();
+	EndIf;
+
+	SetPictureView();
+	ShowStatus();
+	Barcode = Row.Barcode;
+EndProcedure
+
+&AtClient
+Procedure ScanBarcodeEndMobile(Barcode, Result, Message, Parameters) Export
+	ProcessBarcodeResult = Barcodeclient.ProcessBarcode(Barcode, Parameters);
+	If ProcessBarcodeResult Then
+		Message = R().S_018;
+	Else
+		Result = False;
+		Message = StrTemplate(R().S_019, Barcode);
+	EndIf;
 EndProcedure
 
 &AtServer

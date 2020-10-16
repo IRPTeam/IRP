@@ -15,6 +15,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Items.OptionsList.CurrentRow = Catalogs.ReportOptions.FindByCode(ThisObject.CurrentSettingsKey);	
 EndProcedure
 
+&AtClient
+Procedure OnOpen(Cancel)
+	ShowMarkedForDeleteReportOptions();
+EndProcedure
+
 #EndRegion
 
 #Region ItemsEvents
@@ -42,23 +47,35 @@ Procedure SaveAs(Command)
 	ShowInputString(Notify, "", R().SuggestionToUser_4 , 128);
 EndProcedure
 
+&AtClient
+Procedure ShowMarkedForDeletion(Command)
+	Items.OptionsListShowMarkedForDeletion.Check = Not Items.OptionsListShowMarkedForDeletion.Check;
+	ShowMarkedForDeleteReportOptions();
+EndProcedure
+
 #EndRegion
 
 #Region Private
 
 &AtClient
-Procedure SaveSettingAtClient()
-	Notify = New NotifyDescription("SaveAsEnd", ThisObject);
+Procedure SaveSettingAtClient()	
 	CurrentData = Items.OptionsList.CurrentData;
 	If CurrentData = Undefined Then
+		Notify = New NotifyDescription("SaveAsEnd", ThisObject);
 		ShowInputString(Notify, "", R().SuggestionToUser_3, 150);
 	Else
-		OptionDescription = ServiceSystemServer.GetObjectAttribute(CurrentData.ReportOption, "Description");
-		If CurrentData.Author <> SessionParametersClientServer.GetSessionParameter("CurrentUser") Then 
-			ShowInputString(Notify, OptionDescription, R().SuggestionToUser_3, 150);
+		If CurrentData.Author = SessionParametersClientServer.GetSessionParameter("CurrentUser") Then
+			OptionDescriptionParameters = New Structure;
+			OptionDescriptionParameters.Insert("ReportOption", CurrentData.ReportOption);
+			OptionDescription = New NotifyDescription("OverwriteQuestionEnd", ThisObject, OptionDescriptionParameters);
+			QueryText = R().QuestionToUser_020;
+			QueryButtons = QuestionDialogMode.YesNo;
+			ShowQueryBox(OptionDescription, QueryText, QueryButtons);
 		Else
-			SaveChosenSetting(OptionDescription, CurrentData.ReportOption);
-		EndIf;
+			Notify = New NotifyDescription("SaveAsEnd", ThisObject);
+			OptionDescription = ServiceSystemServer.GetObjectAttribute(CurrentData.ReportOption, "Description"); 
+			ShowInputString(Notify, OptionDescription, R().SuggestionToUser_3, 150);
+		EndIf;		
 	EndIf;
 EndProcedure
 
@@ -114,8 +131,11 @@ Procedure ShareEndAtServer(Val OptionKey, Val Parameters)
 EndProcedure
 
 &AtClient
-Procedure CloseForm(OptionKey)
-	Close(New SettingsChoice(OptionKey));
+Procedure OverwriteQuestionEnd(Result, AdditionalParameters) Export
+	If Result = DialogReturnCode.Yes Then
+		OptionDescription = ServiceSystemServer.GetObjectAttribute(AdditionalParameters.ReportOption, "Description");
+		SaveChosenSetting(OptionDescription, AdditionalParameters.ReportOption);
+	EndIf
 EndProcedure
 
 &AtServer
@@ -133,5 +153,36 @@ Function SaveChosenSettingAtServer(Val OptionDescription, Val ReportOption)
 	EndIf;	
 	Return OptionKey;
 EndFunction
+
+&AtClient
+Procedure CloseForm(OptionKey)
+	Close(New SettingsChoice(OptionKey));
+EndProcedure
+
+&AtClient
+Procedure ShowMarkedForDeleteReportOptions()
+	UseDeletiomMarkFilter = Items.OptionsListShowMarkedForDeletion.Check;
+	LeftValue = New DataCompositionField("DeletionMark");
+	EditedFilterItem = Undefined;
+	For Each FilterItem In OptionsList.Filter.Items Do
+		If FilterItem.LeftValue = LeftValue Then
+			EditedFilterItem = FilterItem;
+			Break;
+		EndIf;
+	EndDo;
+	If UseDeletiomMarkFilter Then
+		If EditedFilterItem <> Undefined Then
+			OptionsList.Filter.Items.Delete(FilterItem);
+		EndIf;
+	Else
+		If EditedFilterItem = Undefined Then
+			EditedFilterItem = OptionsList.Filter.Items.Add(Type("DataCompositionFilterItem"));
+		EndIf;
+		EditedFilterItem.LeftValue = LeftValue;
+		EditedFilterItem.ComparisonType = DataCompositionComparisonType.Equal; 
+		EditedFilterItem.ViewMode = DataCompositionSettingsItemViewMode.Inaccessible;
+    	EditedFilterItem.RightValue = False;
+	EndIf;	
+EndProcedure
 
 #EndRegion

@@ -2585,7 +2585,11 @@ Procedure PartnerOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefine
 	MetaDataStructureParameters = New Structure();
 	MetaDataStructureParameters.Insert("Ref", Object.Ref);	
 	ParametersToServer.Insert("GetMetaDataStructure", MetaDataStructureParameters);
-			
+	
+	PaymentTermsParameters = New Structure();
+	PaymentTermsParameters.Insert("Agreement", Object.Agreement);
+	ParametersToServer.Insert("GetPaymentTerms", PaymentTermsParameters);
+	
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
@@ -2682,6 +2686,10 @@ Procedure CompanyOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefine
 	AgreementInfoParameters = New Structure();
 	AgreementInfoParameters.Insert("Agreement", Object.Agreement);
 	ParametersToServer.Insert("GetAgreementInfo", AgreementInfoParameters);	
+	
+	PaymentTermsParameters = New Structure();
+	PaymentTermsParameters.Insert("Agreement", Object.Agreement);
+	ParametersToServer.Insert("GetPaymentTerms", PaymentTermsParameters);
 	
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);

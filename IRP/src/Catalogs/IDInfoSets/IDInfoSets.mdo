@@ -24,28 +24,30 @@
   <hierarchyType>HierarchyOfItems</hierarchyType>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
-  <codeType>String</codeType>
+  <codeLength>12</codeLength>
   <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
   <defaultPresentation>AsDescription</defaultPresentation>
   <predefined>
     <items id="cc292e14-9ccb-4fdb-83ea-ae02177089a1">
       <name>Catalog_Stores</name>
-      <code xsi:type="core:StringValue">
-        <value></value>
+      <code xsi:type="core:NumberValue">
+        <value>0</value>
       </code>
     </items>
     <items id="a8d65579-1f88-4b9b-9c47-aefd32253e30">
       <name>Catalog_Companies</name>
       <description>Catalog companies</description>
-      <code xsi:type="core:StringValue">
-        <value></value>
+      <code xsi:type="core:NumberValue">
+        <value>0</value>
       </code>
     </items>
     <items id="3da031ae-3c4a-4e8a-b3af-4d732b45af27">
       <name>Catalog_Partners</name>
       <description>Catalog partners</description>
-      <code xsi:type="core:StringValue">
-        <value></value>
+      <code xsi:type="core:NumberValue">
+        <value>0</value>
       </code>
     </items>
   </predefined>

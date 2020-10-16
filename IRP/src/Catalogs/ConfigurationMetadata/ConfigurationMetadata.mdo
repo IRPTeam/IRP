@@ -27,37 +27,39 @@
   <limitLevelCount>true</limitLevelCount>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
+  <codeLength>12</codeLength>
   <descriptionLength>50</descriptionLength>
-  <codeType>String</codeType>
   <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
   <defaultPresentation>AsDescription</defaultPresentation>
   <predefined>
     <items id="e913d420-ffbd-4366-9f1b-2c2b42de0fb7">
       <name>Catalogs</name>
       <description>Catalogs</description>
-      <code xsi:type="core:StringValue">
-        <value></value>
+      <code xsi:type="core:NumberValue">
+        <value>0</value>
       </code>
     </items>
     <items id="79e6dfcb-53cf-49be-b1ef-032948cacd0c">
       <name>Documents</name>
       <description>Documents</description>
-      <code xsi:type="core:StringValue">
-        <value></value>
+      <code xsi:type="core:NumberValue">
+        <value>0</value>
       </code>
     </items>
     <items id="35c8b407-96be-4355-87d0-9be6a1c66c9c">
       <name>Reports</name>
       <description>Reports</description>
-      <code xsi:type="core:StringValue">
-        <value></value>
+      <code xsi:type="core:NumberValue">
+        <value>0</value>
       </code>
     </items>
     <items id="98da3047-c361-4bad-9e87-e34a4cfaefa9">
       <name>DataProcessors</name>
       <description>Data processors</description>
-      <code xsi:type="core:StringValue">
-        <value></value>
+      <code xsi:type="core:NumberValue">
+        <value>0</value>
       </code>
     </items>
   </predefined>

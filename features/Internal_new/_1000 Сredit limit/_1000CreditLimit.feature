@@ -336,7 +336,7 @@ Scenario: _1000001 filling in credit limit in the Partner term
 			| 'Description'              |
 			| 'Basic Partner terms, TRY' |
 		And I select current line in "List" table
-		And I move to "Credit limit" tab
+		And I move to "Credit limit & Aging" tab
 		And I set checkbox "Use credit limit"
 		And I input "10000,00" text in "Amount" field
 		And I click "Save and close" button
@@ -353,7 +353,7 @@ Scenario: _1000001 filling in credit limit in the Partner term
 			| 'Description' |
 			| 'Retail'      |
 		And I select current line in "List" table
-		And I move to "Credit limit" tab
+		And I move to "Credit limit & Aging" tab
 		And I set checkbox "Use credit limit"
 		And I input "4000,00" text in "Amount" field
 		And I click "Save and close" button

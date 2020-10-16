@@ -93,6 +93,7 @@
   <subsystems>Subsystem.Treasury</subsystems>
   <subsystems>Subsystem.UniqueID</subsystems>
   <subsystems>Subsystem.Retail</subsystems>
+  <styles>Style.TestDataBase</styles>
   <commonPictures>CommonPicture.AddDataProc</commonPictures>
   <commonPictures>CommonPicture.AddProperties</commonPictures>
   <commonPictures>CommonPicture.AutoTest</commonPictures>
@@ -142,6 +143,7 @@
   <sessionParameters>SessionParameter.LocalizationCode</sessionParameters>
   <sessionParameters>SessionParameter.OurCompanies</sessionParameters>
   <sessionParameters>SessionParameter.Workstation</sessionParameters>
+  <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
   <roles>Role.BasicRole</roles>
   <roles>Role.FilterForUserSettings</roles>
   <roles>Role.FullAccess</roles>
@@ -335,6 +337,7 @@
   <commonModules>CommonModule.JorDocumentsClient</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteClientServer</commonModules>
   <commonModules>CommonModule.CatAgreementsClientServer</commonModules>
+  <commonModules>CommonModule.IntegrationServerPriveleged</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -492,6 +495,7 @@
   <catalogs>Catalog.RetailCustomers</catalogs>
   <catalogs>Catalog.Hardware</catalogs>
   <catalogs>Catalog.CashStatementStatuses</catalogs>
+  <catalogs>Catalog.DataBaseStatus</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>

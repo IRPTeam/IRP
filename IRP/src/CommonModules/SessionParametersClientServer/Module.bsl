@@ -1,7 +1,13 @@
-
+&AtServer
 Procedure SessionParametersSetting(RequiredParameters) Export
 	
 	If RequiredParameters = Undefined Then
+		SessionParameters.ConnectionSettings = Catalogs.DataBaseStatus.GetOrCreateDataBaseStatusInfo();
+		StyleName = SessionParameters.ConnectionSettings.SelectedStyle;
+		If Not Metadata.Styles.Find(StyleName) = Undefined Then
+			MainStyle = StyleLib[StyleName];
+		EndIf;
+		
 		Return;	
 	EndIf;
 	

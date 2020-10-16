@@ -224,8 +224,8 @@ Function CheckItemListStores(Object) Export
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	ItemList.LineNumber,
-		|ItemList.Store,
-		|ItemList.ItemKey
+		|	ItemList.Store,
+		|	ItemList.ItemKey
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
@@ -268,9 +268,9 @@ Procedure CheckPaymentList(Object, Cancel, CheckedAttributes) Export
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	PaymentList.LineNumber,
-		|PaymentList.Agreement.ApArPostingDetail,
-		|PaymentList.BasisDocument.Ref,
-		|PaymentList.BasisDocument
+		|	PaymentList.Agreement.ApArPostingDetail,
+		|	PaymentList.BasisDocument.Ref,
+		|	PaymentList.BasisDocument
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
@@ -633,6 +633,21 @@ Function PrepareServerData(Parameters) Export
 		QueryResult = Query.Execute();
 		ArrayOfItemKeysWithSerialLotNumbers = QueryResult.Unload().UnloadColumn("ItemKey");
 		Result.Insert("ItemKeysWithSerialLotNumbers", ArrayOfItemKeysWithSerialLotNumbers);
+	EndIf;
+	
+	If Parameters.Property("GetPaymentTerms") Then
+		Agreement = Parameters.GetPaymentTerms.Agreement;
+		ArrayOfPaymentTerms = New Array();
+		If ValueIsFilled(Agreement) And ValueIsFilled(Agreement.PaymentTerm) Then
+			For Each Stage In Agreement.PaymentTerm.StagesOfPayment Do
+				NewRow = New Structure();
+				NewRow.Insert("CalculationType"     , Stage.CalculationType);
+				NewRow.Insert("ProportionOfPayment" , Stage.ProportionOfPayment);
+				NewRow.Insert("DuePeriod"           , Stage.DuePeriod);
+				ArrayOfPaymentTerms.Add(NewRow);
+			EndDo;
+		EndIf;
+		Result.Insert("PaymentTerms", ArrayOfPaymentTerms);
 	EndIf;
 	
 	Return Result;

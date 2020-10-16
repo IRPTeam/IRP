@@ -1190,4 +1190,19 @@
 			<value>false</value>
 		</right>
 	</object>
+	<object>
+		<name>Catalog.DataBaseStatus</name>
+		<right>
+			<name>InteractiveDeletePredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeleteMarkedPredefinedData</name>
+			<value>false</value>
+		</right>
+	</object>
 </Rights>

@@ -396,6 +396,18 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="40ef6a50-8ba6-4552-9253-697cbd68cc71">
+    <name>PaymentTerm</name>
+    <synonym>
+      <key>en</key>
+      <value>Payment term</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.PaymentSchedules</types>
+    </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="69eb3895-7a1b-4bca-bb86-0c2b645bcef0">
     <producedTypes>
       <objectType typeId="74b01d8e-f8c5-4099-8431-c6019c94d81b" valueTypeId="8a953f0b-b885-45c1-a31a-f84bdaa24b85"/>

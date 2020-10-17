@@ -170,7 +170,7 @@ Scenario: _005013 filling in the "Companies" catalog
 		And I input "Main Company TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I input "Turkey" text in the field named "Country"
-		And I set checkbox "Our"
+		And I set checkbox "OurCompany"
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I click "Save" button
 	* Filling in currency information (Local currency and Reporting currency)

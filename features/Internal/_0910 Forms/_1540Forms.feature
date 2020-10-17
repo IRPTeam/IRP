@@ -40,7 +40,7 @@ Scenario: _0154000 preparation
 			| Description |
 			| Ukraine      |
 		And I select current line in "List" table
-		And I set checkbox "Our"
+		And I set checkbox "OurCompany"
 		And I select "Company" exact value from the drop-down list named "Type"
 		* Filling in Currency info (Local currency and Reporting currency)
 			And I move to "Currencies" tab
@@ -3809,8 +3809,8 @@ Scenario: inability to create your own company for Partner
 		And I select current line in "List" table
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
-	* Check that Our checkbox is not available
-		If "Our" attribute is not editable Then
+	* Check that OurCompany checkbox is not available
+		If "OurCompany" attribute is not editable Then
 
 Scenario: check the selection of the segment manager in the sales order
 	* Open the Sales order creation form

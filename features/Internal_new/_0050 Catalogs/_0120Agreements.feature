@@ -182,7 +182,7 @@ Scenario: _012004 create common Partner term
 		And I input "01.11.2018" text in "Start using" field
 		And Delay 3
 		And I change checkbox "Price include tax"
-		And I input "4" text in "Number days before delivery" field
+		And I input "4" text in "Days before delivery" field
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 				| 'Description' |
@@ -223,7 +223,7 @@ Scenario: _012004 create common Partner term
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
 		And Delay 3
-		And I input "5" text in "Number days before delivery" field
+		And I input "5" text in "Days before delivery" field
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 				| 'Description' |
@@ -266,7 +266,7 @@ Scenario: _012004 create common Partner term
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
 		And Delay 3
-		And I input "4" text in "Number days before delivery" field
+		And I input "4" text in "Days before delivery" field
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 				| 'Description' |
@@ -312,7 +312,7 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
 		And I change checkbox "Price include tax"
-		And I input "2" text in "Number days before delivery" field
+		And I input "2" text in "Days before delivery" field
 		And I click Select button of "Store" field
 		Then "Stores" window is opened
 		And I go to line in "List" table

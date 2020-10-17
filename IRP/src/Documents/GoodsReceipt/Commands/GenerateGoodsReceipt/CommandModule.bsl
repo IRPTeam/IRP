@@ -63,7 +63,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 EndFunction
 
 &AtServer
-Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
+Function JoinDocumentsStructure(ArrayOfTables, UnjoinFields)
 	
 	ValueTable = New ValueTable();
 	ValueTable.Columns.Add("BasedOn", New TypeDescription("String"));
@@ -88,16 +88,16 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	EndDo;
 	
 	ValueTableCopy = ValueTable.Copy();
-	ValueTableCopy.GroupBy(UnjoinFileds);
+	ValueTableCopy.GroupBy(UnjoinFields);
 	
 	ArrayOfResults = New Array();
 	
 	For Each Row In ValueTableCopy Do
-		Result = New Structure(UnjoinFileds);
+		Result = New Structure(UnjoinFields);
 		FillPropertyValues(Result, Row);
 		Result.Insert("ItemList", New Array());
 		
-		Filter = New Structure(UnjoinFileds);
+		Filter = New Structure(UnjoinFields);
 		FillPropertyValues(Filter, Row);
 		
 		ItemList = ValueTable.Copy(Filter);

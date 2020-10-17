@@ -48,16 +48,30 @@ Procedure SetPictureView()
 EndProcedure
 
 &AtClient
-Procedure ItemOnChange(Item)
+Procedure ItemOnChange(ItemData)
 	ItemOnChangeAtServer();
-	SetPictureView();
-	ShowStatus();
+	Row = New Structure;
+	Row.Insert("Item", Item);
+	Row.Insert("ItemKey", ItemKey);
+	Row.Insert("Barcode", "");
+	Barcodes = BarcodeClient.GetBarcodesByItemKey(ItemKey);
+	If Barcodes.Count() Then
+		Row.Insert("Barcode", Barcodes[0]);
+	EndIf;
+	FillData(Row);
 EndProcedure
 
 &AtClient
-Procedure ItemKeyOnChange(Item)
-	SetPictureView();
-	ShowStatus();
+Procedure ItemKeyOnChange(ItemData)
+	Row = New Structure;
+	Row.Insert("Item", Item);
+	Row.Insert("ItemKey", ItemKey);
+	Row.Insert("Barcode", "");
+	Barcodes = BarcodeClient.GetBarcodesByItemKey(ItemKey);
+	If Barcodes.Count() Then
+		Row.Insert("Barcode", Barcodes[0]);
+	EndIf;
+	FillData(Row);
 EndProcedure
 
 &AtClient

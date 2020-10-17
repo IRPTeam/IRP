@@ -7,7 +7,7 @@ EndProcedure
 &AtClient
 Procedure OurCompanyFilterOnChange(Item)
 	CommonFunctionsClientServer.SetFilterItem(List.Filter.Items,
-		"Our",
+		"OurCompany",
 		?(OurCompanyFilter = 1, True, False),
 			DataCompositionComparisonType.Equal,
 			ValueIsFilled(OurCompanyFilter));

@@ -146,13 +146,13 @@ Scenario: _3510002 check clearing values ​​when changing the Ap-ar posting /
         And I close all client application windows
 
 
-Scenario: _3510003 check clearing the values ​​of Tax types and Multi currency movement type when changing the Our checkmark in Company
+Scenario: _3510003 check clearing the values ​​of Tax types and Multi currency movement type when changing the OurCompany checkmark in Company
 * Open Compant form
         Given I open hyperlink "e1cib/list/Catalog.Companies"
         And I click the button named "FormCreate"
-* Tick the box Our and fill in Tax types and Multi currency movement types
+* Tick the box OurCompany and fill in Tax types and Multi currency movement types
         And I input "Test" text in the field named "Description_en"
-        And I set checkbox "Our"
+        And I set checkbox "OurCompany"
         * Filling in Multi currency movement type
                 And in the table "Currencies" I click the button named "CurrenciesAdd"
                 And I click choice button of "Movement type" attribute in "Currencies" table
@@ -181,12 +181,12 @@ Scenario: _3510003 check clearing the values ​​of Tax types and Multi curren
                 And "CompanyTaxes" table contains lines
                         | 'Use' | 'Tax' | 'Priority' |
                         | 'Yes' | 'VAT' | '2'        |
-        * Check to clear completed data when uncheck Our
+        * Check to clear completed data when uncheck OurCompany
                 And I move to "Info" tab
-                And I remove checkbox "Our"
+                And I remove checkbox "OurCompany"
                         And I select "Company" exact value from the drop-down list named "Type"
                 And I click "Save" button
-                And I set checkbox "Our"
+                And I set checkbox "OurCompany"
                 And "Currencies" table does not contain lines
                         | 'Movement type'      | 'Type'      | 'Currency' | 'Source'       |
                         | 'Reporting currency' | 'Reporting' | 'USD'      | 'Forex Seling' |

@@ -651,7 +651,7 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 			| Vendor Ferron, TRY |
 		And I select current line in "List" table
 		# message on price changes
-		And I remove checkbox "Do you want to update filled price types on Vendor price, TRY?"
+		And I remove checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 		And I remove checkbox "Do you want to update filled prices?"
 		And I click "OK" button
 		# message on price changes
@@ -1696,7 +1696,7 @@ Scenario: _029207 create Purchase order based on Sales order (Purchase invoice b
 			| Vendor Ferron, TRY |
 		And I select current line in "List" table
 		# message about prices
-		And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+		And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 		And I change checkbox "Do you want to update filled prices?"
 		And I click "OK" button
 		# message about prices
@@ -2323,7 +2323,7 @@ Scenario: _029221 Sales order - Purchase order - Purchase invoice - Goods reciep
 				| Vendor Ferron, TRY |
 			And I select current line in "List" table
 			# message about prices
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			# message about prices
@@ -2420,7 +2420,7 @@ Scenario: _029222 Sales order - Purchase order - Purchase invoice - Sales invoic
 				| Vendor Ferron, TRY |
 			And I select current line in "List" table
 			# message about prices
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			# message about prices
@@ -2498,7 +2498,7 @@ Scenario: _029224 Sales order - Purchase invoice - Goods reciept - Shipment conf
 				| Vendor Ferron, TRY |
 			And I select current line in "List" table
 			# message about prices
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			# message about prices
@@ -2584,7 +2584,7 @@ Scenario: _029225 Sales order - Purchase invoice - Sales invoice
 				| Vendor Ferron, TRY |
 			And I select current line in "List" table
 			# message about prices
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			# message about prices

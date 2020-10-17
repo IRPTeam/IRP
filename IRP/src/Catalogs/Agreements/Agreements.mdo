@@ -246,10 +246,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="4dd11c6c-a33b-434f-96f7-a5992f3e1e5e">
-    <name>NumberDaysBeforeDelivery</name>
+    <name>DaysBeforeDelivery</name>
     <synonym>
       <key>en</key>
-      <value>Number days before delivery</value>
+      <value>Days before delivery</value>
     </synonym>
     <type>
       <types>Number</types>

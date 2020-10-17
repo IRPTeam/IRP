@@ -85,7 +85,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 EndFunction
 
 &AtServer
-Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
+Function JoinDocumentsStructure(ArrayOfTables, UnjoinFields)
 	ItemList = New ValueTable();
 	ItemList.Columns.Add("BasedOn"			, New TypeDescription("String"));
 	ItemList.Columns.Add("Company"			, New TypeDescription("CatalogRef.Companies"));
@@ -160,12 +160,12 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 	EndDo;
 	
 	ItemListCopy = ItemList.Copy();
-	ItemListCopy.GroupBy(UnjoinFileds);
+	ItemListCopy.GroupBy(UnjoinFields);
 	
 	ArrayOfResults = New Array();
 	
 	For Each Row In ItemListCopy Do
-		Result = New Structure(UnjoinFileds);
+		Result = New Structure(UnjoinFields);
 		FillPropertyValues(Result, Row);
 		
 		Result.Insert("ItemList"		, New Array());
@@ -173,7 +173,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFileds)
 		Result.Insert("SpecialOffers"	, New Array());
 		Result.Insert("GoodsReceipts"	, New Array());
 		
-		Filter = New Structure(UnjoinFileds);
+		Filter = New Structure(UnjoinFields);
 		FillPropertyValues(Filter, Row);
 		
 		ArrayOfTaxListFilters = New Array();

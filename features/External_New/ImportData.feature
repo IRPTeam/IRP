@@ -137,7 +137,7 @@ Scenario: Create catalog ChequeBonds objects
 Scenario: Create catalog Companies objects (Main company)
 
 	And I check or create catalog "Companies" objects:
-		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'Our' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |
+		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'OurCompany' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | ''            | ''                                                                 | 'Enum.CompanyLegalType.Company' | 'Yes' | 'Main Company'             | ''                 | ''               | 'Main Company TR'             |
 
 	And I refill object tabular section  "Currencies":
@@ -151,7 +151,7 @@ Scenario: Create catalog Companies objects (Main company)
 
 Scenario: Create catalog Companies objects (own Second company)
 	And I check or create catalog "Companies" objects:
-		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'Our' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |
+		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'OurCompany' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1853' | ''            | ''                                                                 | 'Enum.CompanyLegalType.Company' | 'Yes' | 'Second Company'           | ''                 | ''               | 'Second Company TR'           |
 
 
@@ -159,7 +159,7 @@ Scenario: Create catalog Companies objects (partners company)
 
 	
 	And I check or create catalog "Companies" objects:
-		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'Our' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |
+		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'OurCompany' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | ''            | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | 'Enum.CompanyLegalType.Company' | 'No'  | 'Company Ferron BP'        | ''                 | ''               | 'Company Ferron BP TR'        |
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a3' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1853' | ''            | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1871' | 'Enum.CompanyLegalType.Company' | 'No'  | 'Company Kalipso'          | ''                 | ''               | 'Company Kalipso TR'          |
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a4' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1853' | ''            | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1873' | 'Enum.CompanyLegalType.Company' | 'No'  | 'Company Lomaniti'         | ''                 | ''               | 'Company Lomaniti TR'         |
@@ -179,12 +179,12 @@ Scenario: Create catalog Companies objects (partners company)
 
 Scenario: Create catalog Companies objects (second company Ferron BP)
 	And I check or create catalog "Companies" objects:
-		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'Our' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |
+		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'OurCompany' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b1' | 'No'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | ''            | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | 'Enum.CompanyLegalType.Company' | 'No'  | 'Second Company Ferron BP' | ''                 | ''               | 'Second Company Ferron BP TR' |
 Scenario: Create catalog Companies objects (partners company Almo, Sovelie)
 
 	And I check or create catalog "Companies" objects:
-		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner' | 'Type'                          | 'Our' | 'Description_en'  | 'Description_hash' | 'Description_ru' | 'Description_tr'     |
+		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner' | 'Type'                          | 'OurCompany' | 'Description_en'  | 'Description_hash' | 'Description_ru' | 'Description_tr'     |
 		| 'e1cib/data/Catalog.Companies?ref=aa6b120ed92fbced11eacd8f1ea75951' | 'No'           | 'e1cib/data/Catalog.Countries?ref=86ffd69b4676df1211ea9f634beb7fe7' | ''            | ''        | 'Enum.CompanyLegalType.Company' | 'No'  | 'Company Almo'    | ''                 | ''               | 'Company Almo TR'     |
 		| 'e1cib/data/Catalog.Companies?ref=aa6b120ed92fbced11eacd8f1ea75952' | 'No'           | 'e1cib/data/Catalog.Countries?ref=86ffd69b4676df1211ea9f6341455c84' | ''            | ''        | 'Enum.CompanyLegalType.Company' | 'No'  | 'Company Sovelie' | ''                 | ''               | 'Company Sovelie TR' |
 

@@ -508,7 +508,7 @@ Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing,
 		OpenSettings.ArrayOfFilters = New Array;
 		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
 																		True, DataCompositionComparisonType.NotEqual));
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Our", 
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", 
 																		True, DataCompositionComparisonType.Equal));
 	EndIf;
 	
@@ -531,7 +531,7 @@ Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing,
 	If ArrayOfFilters = Undefined Then
 		ArrayOfFilters = New Array();
 		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Our", True, ComparisonType.Equal));
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True, ComparisonType.Equal));
 	EndIf;
 	
 	If AdditionalParameters = Undefined Then
@@ -611,7 +611,7 @@ Procedure StatusEditTextChange(Object, Form, Item, Text, StandardProcessing, Edi
 		EditSettings.ArrayOfFilters = New Array();
 		EditSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
 																						True, ComparisonType.NotEqual));
-		EditSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Our", 
+		EditSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", 
 																						True, ComparisonType.Equal));
 	EndIf;
 	

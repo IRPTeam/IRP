@@ -551,7 +551,7 @@
       <common>true</common>
     </edit>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>List.Our</segments>
+      <segments>List.OurCompany</segments>
     </notDefaultUseAlwaysAttributes>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
       <segments>List.Ref</segments>
@@ -561,7 +561,7 @@
       <queryText>SELECT
 	Table.Ref,
 	Table.DeletionMark,
-	Table.Our,
+	Table.OurCompany,
 	Table.Partner,
 	Table.Description_en AS Description,
 	Table.Code
@@ -603,7 +603,7 @@ WHERE
     <name>OurCompanyFilter</name>
     <title>
       <key>en</key>
-      <value>Our company filter</value>
+      <value>OurCompany company filter</value>
     </title>
     <id>3</id>
     <valueType>

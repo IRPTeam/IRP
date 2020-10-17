@@ -460,7 +460,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 						| 'Description'                   |
 						| 'Basic Partner terms, without VAT' |
 					And I select current line in "List" table
-					And I change checkbox "Do you want to update filled stores on Store 02?"
+					And I change checkbox "Do you want to replace filled stores with store Store 02?"
 					And I click "OK" button
 				* Check tabular part
 					And "ItemList" table contains lines
@@ -483,7 +483,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 					| 'Description'                   |
 					| 'Basic Partner terms, without VAT' |
 				And I select current line in "List" table
-				And I change checkbox "Do you want to update filled stores on Store 02?"
+				And I change checkbox "Do you want to replace filled stores with store Store 02?"
 				And I click "OK" button
 				And I move to "Other" tab
 				And I input "5 600" text in "Number" field
@@ -519,7 +519,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 					| 'Description'                   |
 					| 'Posting by Standard Partner term Customer' |
 				And I select current line in "List" table
-				And I change checkbox "Do you want to update filled stores on Store 01?"
+				And I change checkbox "Do you want to replace filled stores with store Store 01?"
 				And I click "OK" button
 				And I move to "Other" tab
 				And I input "5 603" text in "Number" field
@@ -538,7 +538,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 					| 'Description'                   |
 					| 'Basic Partner terms, without VAT' |
 				And I select current line in "List" table
-				And I change checkbox "Do you want to update filled stores on Store 02?"
+				And I change checkbox "Do you want to replace filled stores with store Store 02?"
 				And I click "OK" button
 				And I move to "Other" tab
 				And I input "5 602" text in "Number" field
@@ -561,7 +561,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 						| 'Description'                   |
 						| 'Basic Partner terms, without VAT' |
 					And I select current line in "List" table
-					And I change checkbox "Do you want to update filled stores on Store 02?"
+					And I change checkbox "Do you want to replace filled stores with store Store 02?"
 					And I click "OK" button
 				* Check tabular part
 					And "ItemList" table contains lines
@@ -588,7 +588,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 					| 'Description'                   |
 					| 'Basic Partner terms, without VAT' |
 				And I select current line in "List" table
-				And I change checkbox "Do you want to update filled stores on Store 02?"
+				And I change checkbox "Do you want to replace filled stores with store Store 02?"
 				And I click "OK" button
 				And I move to "Other" tab
 				And I input "5 600" text in "Number" field
@@ -624,7 +624,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 					| 'Description'                   |
 					| 'Posting by Standard Partner term Customer' |
 				And I select current line in "List" table
-				And I change checkbox "Do you want to update filled stores on Store 01?"
+				And I change checkbox "Do you want to replace filled stores with store Store 01?"
 				And I click "OK" button
 				And I move to "Other" tab
 				And I input "5 603" text in "Number" field
@@ -643,7 +643,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 					| 'Description'                   |
 					| 'Basic Partner terms, without VAT' |
 				And I select current line in "List" table
-				And I change checkbox "Do you want to update filled stores on Store 02?"
+				And I change checkbox "Do you want to replace filled stores with store Store 02?"
 				And I click "OK" button
 				And I move to "Other" tab
 				And I input "5 602" text in "Number" field
@@ -666,7 +666,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 						| 'Description'                   |
 						| 'Basic Partner terms, without VAT' |
 					And I select current line in "List" table
-					And I change checkbox "Do you want to update filled stores on Store 02?"
+					And I change checkbox "Do you want to replace filled stores with store Store 02?"
 					And I click "OK" button
 				* Check tabular part
 					And "ItemList" table contains lines
@@ -689,7 +689,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 					| 'Description'                   |
 					| 'Basic Partner terms, without VAT' |
 				And I select current line in "List" table
-				And I change checkbox "Do you want to update filled stores on Store 02?"
+				And I change checkbox "Do you want to replace filled stores with store Store 02?"
 				And I click "OK" button
 				And I move to "Other" tab
 				And I input "5 600" text in "Number" field
@@ -725,7 +725,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 					| 'Description'                   |
 					| 'Posting by Standard Partner term Customer' |
 				And I select current line in "List" table
-				And I change checkbox "Do you want to update filled stores on Store 01?"
+				And I change checkbox "Do you want to replace filled stores with store Store 01?"
 				And I click "OK" button
 				And I move to "Other" tab
 				And I input "5 603" text in "Number" field
@@ -752,7 +752,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 					| 'Description'                   |
 					| 'Basic Partner terms, without VAT' |
 				And I select current line in "List" table
-				And I change checkbox "Do you want to update filled stores on Store 02?"
+				And I change checkbox "Do you want to replace filled stores with store Store 02?"
 				And I click "OK" button
 				And I move to "Other" tab
 				And I input "5 602" text in "Number" field
@@ -775,7 +775,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 						| 'Description'                   |
 						| 'Basic Partner terms, without VAT' |
 					And I select current line in "List" table
-					And I change checkbox "Do you want to update filled stores on Store 02?"
+					And I change checkbox "Do you want to replace filled stores with store Store 02?"
 					And I click "OK" button
 				* Check tabular part
 					And "ItemList" table contains lines
@@ -798,7 +798,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 					| 'Description'                   |
 					| 'Basic Partner terms, without VAT' |
 				And I select current line in "List" table
-				And I change checkbox "Do you want to update filled stores on Store 02?"
+				And I change checkbox "Do you want to replace filled stores with store Store 02?"
 				And I click "OK" button
 				And I move to "Other" tab
 				And I input "5 600" text in "Number" field
@@ -834,7 +834,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 					| 'Description'                   |
 					| 'Posting by Standard Partner term Customer' |
 				And I select current line in "List" table
-				And I change checkbox "Do you want to update filled stores on Store 01?"
+				And I change checkbox "Do you want to replace filled stores with store Store 01?"
 				And I click "OK" button
 				And I move to "Other" tab
 				And I input "5 603" text in "Number" field
@@ -853,7 +853,7 @@ Scenario: _0290002 create Sales invoice based on Shipment confirmation
 					| 'Description'                   |
 					| 'Basic Partner terms, without VAT' |
 				And I select current line in "List" table
-				And I change checkbox "Do you want to update filled stores on Store 02?"
+				And I change checkbox "Do you want to replace filled stores with store Store 02?"
 				And I click "OK" button
 				And I move to "Other" tab
 				And I input "5 602" text in "Number" field

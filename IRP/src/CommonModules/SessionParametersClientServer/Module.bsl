@@ -74,7 +74,7 @@ Function OurCompanies()
 	|FROM
 	|	Catalog.Companies AS Companies
 	|WHERE
-	|	Companies.Our";
+	|	Companies.OurCompany";
 	QueryUnload = Query.Execute().Unload();
 	OurCompanies = QueryUnload.UnloadColumn("Ref");		
 	Return New FixedArray(OurCompanies);

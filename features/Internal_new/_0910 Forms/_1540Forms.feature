@@ -2276,8 +2276,8 @@ Scenario: inability to create your own company for Partner
 		And I select current line in "List" table
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
-	* Check that Our checkbox is not available
-		If "Our" attribute is not editable Then
+	* Check that OurCompany checkbox is not available
+		If "OurCompany" attribute is not editable Then
 
 Scenario: check the selection of the segment manager in the sales order
 	And I close all client application windows

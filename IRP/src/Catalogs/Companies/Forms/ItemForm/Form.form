@@ -297,11 +297,11 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>Our</name>
+        <name>OurCompany</name>
         <id>15</id>
         <title>
           <key>en</key>
-          <value>Our company</value>
+          <value>OurCompany company</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>

@@ -3,7 +3,7 @@
   <name>OurCompanies</name>
   <synonym>
     <key>en</key>
-    <value>Our companies</value>
+    <value>OurCompany companies</value>
   </synonym>
   <type>
     <types>FixedArray</types>

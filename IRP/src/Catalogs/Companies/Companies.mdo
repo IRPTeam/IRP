@@ -135,7 +135,7 @@
     <name>OurCompany</name>
     <synonym>
       <key>en</key>
-      <value>Our company</value>
+      <value>OurCompany company</value>
     </synonym>
     <type>
       <types>Boolean</types>

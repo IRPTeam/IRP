@@ -132,10 +132,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="ab77ee1c-edf0-43e5-aa67-4b3687a0bb57">
-    <name>Our</name>
+    <name>OurCompany</name>
     <synonym>
       <key>en</key>
-      <value>Our</value>
+      <value>Our company</value>
     </synonym>
     <type>
       <types>Boolean</types>

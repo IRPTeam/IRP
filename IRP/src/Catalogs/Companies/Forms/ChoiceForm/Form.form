@@ -561,7 +561,7 @@
       <queryText>SELECT
 	Table.Ref,
 	Table.DeletionMark,
-	Table.Our,
+	Table.OurCompany,
 	Table.Partner,
 	Table.Description_en AS Description,
 	Table.Code

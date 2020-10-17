@@ -8,7 +8,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 	EndIf;
 	
 	For Each FilterItem In Parameters.Filter Do
-		If FilterItem.Key = "Our" Then
+		If FilterItem.Key = "OurCompany" Then
 			OurCompanyFilter = ?(FilterItem.Value = True, 1, 2);
 			Form.Items.OurCompanyFilter.Enabled = False;
 		EndIf;
@@ -19,7 +19,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 	EndDo;
 	
 	CommonFunctionsClientServer.SetFilterItem(Form.List.Filter.Items,
-		"Our",
+		"OurCompany",
 		?(OurCompanyFilter = 1, True, False),
 			DataCompositionComparisonType.Equal,
 			ValueIsFilled(OurCompanyFilter));

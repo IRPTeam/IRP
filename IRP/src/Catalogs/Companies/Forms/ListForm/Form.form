@@ -556,7 +556,7 @@
 	Table.Description_en AS Description,
 	Table.Predefined,
 	Table.PredefinedDataName,
-	Table.Our,
+	Table.OurCompany,
 	Table.Code
 FROM
 	Catalog.Companies AS Table</queryText>

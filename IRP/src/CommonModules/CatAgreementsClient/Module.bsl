@@ -15,16 +15,16 @@ Procedure CompanyStartChoice(Object, Form, Item, ChoiceData,  StandardProcessing
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
 																		True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Our", 
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", 
 																		True, DataCompositionComparisonType.Equal));
-	OpenSettings.FillingData = New Structure("Our", True);
+	OpenSettings.FillingData = New Structure("OurCompany", True);
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Our", True, ComparisonType.Equal));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True, ComparisonType.Equal));
 	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
@@ -37,14 +37,14 @@ Procedure LegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
 																		True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Our", 
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", 
 																		False, DataCompositionComparisonType.Equal));
 	OpenSettings.FormParameters = New Structure();
 	If ValueIsFilled(Object.Partner) Then
 		OpenSettings.FormParameters.Insert("Partner", Object.Partner);
 		OpenSettings.FormParameters.Insert("FilterByPartnerHierarchy", True);
 	EndIf;
-	OpenSettings.FillingData = New Structure("Our", False);
+	OpenSettings.FillingData = New Structure("OurCompany", False);
 	If ValueIsFilled(Object.Partner) Then
 		OpenSettings.FillingData.Insert("Partner", Object.Partner);
 	EndIf;
@@ -55,7 +55,7 @@ EndProcedure
 Procedure LegalNameTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Our", False, ComparisonType.Equal));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", False, ComparisonType.Equal));
 	AdditionalParameters = New Structure();
 	If ValueIsFilled(Object.Partner) Then
 		AdditionalParameters.Insert("Partner", Object.Partner);

@@ -68,7 +68,7 @@ Procedure BeforeWrite(Cancel)
 		ThisObject.Type = Enums.AgreementTypes.EmptyRef();
 		ThisObject.PriceType = Catalogs.PriceTypes.EmptyRef();
 		ThisObject.PriceIncludeTax = False;
-		ThisObject.NumberDaysBeforeDelivery = 0;
+		ThisObject.DaysBeforeDelivery = 0;
 		ThisObject.Store = Catalogs.Stores.EmptyRef();
 	EndIf;
 	

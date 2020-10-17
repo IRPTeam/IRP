@@ -172,8 +172,8 @@ Function GetAgreementInfo(Agreement) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT ALLOWED TOP 1
-	|	DATEADD(&CurrentDate, DAY, Table.NumberDaysBeforeDelivery) AS DateOfShipment,
-	|	DATEADD(&CurrentDate, DAY, Table.NumberDaysBeforeDelivery) AS DeliveryDate,
+	|	DATEADD(&CurrentDate, DAY, Table.DaysBeforeDelivery) AS DateOfShipment,
+	|	DATEADD(&CurrentDate, DAY, Table.DaysBeforeDelivery) AS DeliveryDate,
 	|	Table.Ref AS Ref,
 	|	Table.Store AS Store,
 	|	Table.PriceIncludeTax AS PriceIncludeTax,

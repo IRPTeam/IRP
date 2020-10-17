@@ -1149,7 +1149,7 @@
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
           <paths xsi:type="form:DataPath">
-            <segments>Object.NumberDaysBeforeDelivery</segments>
+            <segments>Object.DaysBeforeDelivery</segments>
           </paths>
         </dataPath>
         <extendedTooltip>

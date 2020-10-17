@@ -236,7 +236,7 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 				| Description        |
 				| Vendor Ferron 1 |
 			And I select current line in "List" table
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click Select button of "Store" field
@@ -270,7 +270,7 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 				| Description |
 				| Partner Ferron 2   |
 			And I select current line in "List" table
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click Select button of "Legal name" field
@@ -283,7 +283,7 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 				| Description        |
 				| Vendor Ferron Partner 2 |
 			And I select current line in "List" table
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click Select button of "Store" field
@@ -362,7 +362,7 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 				| Description        |
 				| Vendor Ferron 1 |
 			And I select current line in "List" table
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click Select button of "Store" field
@@ -406,7 +406,7 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 				| Description        |
 				| Vendor Ferron Discount |
 			And I select current line in "List" table
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click Select button of "Store" field
@@ -521,7 +521,7 @@ Scenario: _090306 create Purchase invoice for several Purchase order with differ
 				| Description        |
 				| Vendor Ferron Discount |
 			And I select current line in "List" table
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click Select button of "Store" field
@@ -566,7 +566,7 @@ Scenario: _090306 create Purchase invoice for several Purchase order with differ
 				| Description        |
 				| Vendor Ferron Discount |
 			And I select current line in "List" table
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click Select button of "Store" field
@@ -636,7 +636,7 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 				| Description        |
 				| Vendor Ferron Discount |
 			And I select current line in "List" table
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click Select button of "Store" field
@@ -685,7 +685,7 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 				| Description        |
 				| Vendor Ferron Discount |
 			And I select current line in "List" table
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click Select button of "Store" field
@@ -1179,7 +1179,7 @@ Scenario: _090314 create Goods reciept for several Purchase order with different
 				| Description        |
 				| Vendor Ferron 1 |
 			And I select current line in "List" table
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click Select button of "Store" field
@@ -1218,7 +1218,7 @@ Scenario: _090314 create Goods reciept for several Purchase order with different
 				| Description |
 				| Partner Ferron 2   |
 			And I select current line in "List" table
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click Select button of "Legal name" field
@@ -1231,7 +1231,7 @@ Scenario: _090314 create Goods reciept for several Purchase order with different
 				| Description        |
 				| Vendor Ferron Partner 2 |
 			And I select current line in "List" table
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click Select button of "Store" field
@@ -1333,7 +1333,7 @@ Scenario: _090315 create Goods reciept for several Purchase order with different
 				| Description        |
 				| Vendor Ferron 1 |
 			And I select current line in "List" table
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click Select button of "Store" field
@@ -1382,7 +1382,7 @@ Scenario: _090315 create Goods reciept for several Purchase order with different
 				| Description        |
 				| Vendor Ferron Discount |
 			And I select current line in "List" table
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click Select button of "Store" field
@@ -1489,7 +1489,7 @@ Scenario: _090316 create Goods reciept for several Purchase order with different
 				| Description        |
 				| Vendor Ferron Discount |
 			And I select current line in "List" table
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click Select button of "Store" field
@@ -1539,7 +1539,7 @@ Scenario: _090316 create Goods reciept for several Purchase order with different
 				| Description        |
 				| Vendor Ferron Discount |
 			And I select current line in "List" table
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click Select button of "Store" field
@@ -1647,7 +1647,7 @@ Scenario: _090317 create Goods reciept for several Purchase order with different
 				| Description        |
 				| Vendor Ferron Discount |
 			And I select current line in "List" table
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click Select button of "Store" field
@@ -1701,7 +1701,7 @@ Scenario: _090317 create Goods reciept for several Purchase order with different
 				| Description        |
 				| Vendor Ferron Discount |
 			And I select current line in "List" table
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click Select button of "Store" field

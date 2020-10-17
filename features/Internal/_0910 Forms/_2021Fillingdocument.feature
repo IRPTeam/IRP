@@ -1274,7 +1274,7 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 				| 'Partner Kalipso Vendor' |
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
-			And I change checkbox "Do you want to update filled stores on Store 02?"
+			And I change checkbox "Do you want to replace filled stores with store Store 02?"
 			And I click "OK" button
 		* Tax calculation check
 			And "ItemList" table contains lines
@@ -1600,7 +1600,7 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 				| 'Partner Kalipso Vendor' |
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
-			And I change checkbox "Do you want to update filled stores on Store 02?"
+			And I change checkbox "Do you want to replace filled stores with store Store 02?"
 			And I click "OK" button
 		* Tax calculation check
 			And "ItemList" table contains lines

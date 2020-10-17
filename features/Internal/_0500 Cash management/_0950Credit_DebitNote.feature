@@ -192,7 +192,7 @@ Scenario: _095001 preparation
 			And I move to "Item list" tab
 			And Delay 5
 			Then "Update item list info" window is opened
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click "Post and close" button
@@ -238,7 +238,7 @@ Scenario: _095001 preparation
 			And I move to "Item list" tab
 			And Delay 5
 			Then "Update item list info" window is opened
-			And I change checkbox "Do you want to update filled price types on Vendor price, TRY?"
+			And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I change checkbox "Do you want to update filled prices?"
 			And I click "OK" button
 			And I click "Post and close" button

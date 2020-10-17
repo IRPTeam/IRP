@@ -338,8 +338,8 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_006", NStr("en = 'Do you want to update filled currency?'", Lang));
 	Strings.Insert("QuestionToUser_007", NStr("en = 'Transaction table will be cleared. Continue?'", Lang));
 	Strings.Insert("QuestionToUser_008", NStr("en = 'Changing the currency will clear the rows with cash transfer documents. Continue?'", Lang));
-	Strings.Insert("QuestionToUser_009", NStr("en = 'Do you want to update filled stores on %1?'", Lang));
-	Strings.Insert("QuestionToUser_011", NStr("en = 'Do you want to update filled price types on %1?'", Lang));
+	Strings.Insert("QuestionToUser_009", NStr("en = 'Do you want to replace filled stores with store %1?'", Lang));
+	Strings.Insert("QuestionToUser_011", NStr("en = 'Do you want to replace filled price types with price type %1?'", Lang));
 	Strings.Insert("QuestionToUser_012", NStr("en = 'Do you want to exit?'", Lang));
 	Strings.Insert("QuestionToUser_013", NStr("en = 'Do you want to update filled prices?'", Lang));
 	Strings.Insert("QuestionToUser_014", NStr("en = 'Transaction type is changed. Do you want to update filled data?'", Lang));

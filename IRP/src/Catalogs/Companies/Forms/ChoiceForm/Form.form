@@ -603,7 +603,7 @@ WHERE
     <name>OurCompanyFilter</name>
     <title>
       <key>en</key>
-      <value>OurCompany company filter</value>
+      <value>Our Company filter</value>
     </title>
     <id>3</id>
     <valueType>

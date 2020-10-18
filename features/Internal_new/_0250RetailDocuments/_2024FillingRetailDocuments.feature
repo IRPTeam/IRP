@@ -362,10 +362,10 @@ Scenario: _0154135 create document Retail Sales Receipt
 				| 'Document registrations records' | ''            | ''          | ''              | ''              | ''                              | ''              | ''                              | ''                     | ''                             | ''                     | ''                             | ''                             | ''                     |
 				| 'Register  "Retail sales"'       | ''            | ''          | ''              | ''              | ''                              | ''              | ''                              | ''                     | ''                             | ''                     | ''                             | ''                             | ''                     |
 				| ''                               | 'Record type' | 'Period'    | 'Resources'     | ''              | ''                              | ''              | 'Dimensions'                    | ''                     | ''                             | ''                     | ''                             | ''                             | ''                     |
-				| ''                               | ''            | ''          | 'Quantity'      | 'Amount'        | 'Net amount'                    | 'Offers amount' | 'Company'                       | 'Business unit'        | 'Store'                        | 'Retail sales invoice' | 'Item key'                     | 'Serial lot number'            | 'Row key'              |
-				| ''                               | 'Receipt'     | '*'         | '1'             | '520'           | '440,68'                        | ''              | 'Main Company'                  | 'Shop 01'              | 'Store 01'                     | ''                     | 'XS/Blue'                      | ''                             | '*'                    |
-				| ''                               | 'Receipt'     | '*'         | '1'             | '550'           | '466,1'                         | ''              | 'Main Company'                  | 'Shop 01'              | 'Store 01'                     | ''                     | 'L/Green'                      | ''                             | '*'                    |
-				| ''                               | 'Receipt'     | '*'         | '2'             | '700'           | '593,22'                        | ''              | 'Main Company'                  | 'Shop 01'              | 'Store 01'                     | ''                     | '38/Black'                     | ''                             | '*'                    |
+				| ''                               | ''            | ''          | 'Quantity'      | 'Amount'        | 'Net amount'                    | 'Offers amount' | 'Company'                       | 'Business unit'        | 'Store'                        | 'Retail sales receipt' | 'Item key'                     | 'Serial lot number'            | 'Row key'              |
+				| ''                               | 'Receipt'     | '*'         | '1'             | '520'           | '440,68'                        | ''              | 'Main Company'                  | 'Shop 01'              | 'Store 01'                     | '$$RetailSalesReceipt015413$$'                     | 'XS/Blue'                      | ''                             | '*'                    |
+				| ''                               | 'Receipt'     | '*'         | '1'             | '550'           | '466,1'                         | ''              | 'Main Company'                  | 'Shop 01'              | 'Store 01'                     | '$$RetailSalesReceipt015413$$'                     | 'L/Green'                      | ''                             | '*'                    |
+				| ''                               | 'Receipt'     | '*'         | '2'             | '700'           | '593,22'                        | ''              | 'Main Company'                  | 'Shop 01'              | 'Store 01'                     | '$$RetailSalesReceipt015413$$'                     | '38/Black'                     | ''                             | '*'                    |
 				| ''                               | ''            | ''          | ''              | ''              | ''                              | ''              | ''                              | ''                     | ''                             | ''                     | ''                             | ''                             | ''                     |
 				| 'Register  "Retail cash"'        | ''            | ''          | ''              | ''              | ''                              | ''              | ''                              | ''                     | ''                             | ''                     | ''                             | ''                             | ''                     |
 				| ''                               | 'Record type' | 'Period'    | 'Resources'     | ''              | 'Dimensions'                    | ''              | ''                              | ''                     | ''                             | ''                     | ''                             | ''                             | ''                     |
@@ -541,7 +541,7 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 			| ''                                   | ''            | ''          | ''          | ''             | ''                             | ''              | ''                             | ''                     | ''                             | ''                             | ''                             | ''                  | ''                     |
 			| 'Register  "Retail sales"'           | ''            | ''          | ''          | ''             | ''                             | ''              | ''                             | ''                     | ''                             | ''                             | ''                             | ''                  | ''                     |
 			| ''                                   | 'Record type' | 'Period'    | 'Resources' | ''             | ''                             | ''              | 'Dimensions'                   | ''                     | ''                             | ''                             | ''                             | ''                  | ''                     |
-			| ''                                   | ''            | ''          | 'Quantity'  | 'Amount'       | 'Net amount'                   | 'Offers amount' | 'Company'                      | 'Business unit'        | 'Store'                        | 'Retail sales invoice'         | 'Item key'                     | 'Serial lot number' | 'Row key'              |
+			| ''                                   | ''            | ''          | 'Quantity'  | 'Amount'       | 'Net amount'                   | 'Offers amount' | 'Company'                      | 'Business unit'        | 'Store'                        | 'Retail sales receipt'         | 'Item key'                     | 'Serial lot number' | 'Row key'              |
 			| ''                                   | 'Receipt'     | '*'         | '-1'        | '350'          | '296,61'                       | ''              | 'Main Company'                 | 'Shop 01'              | 'Store 01'                     | '$$RetailSalesReceipt015413$$' | '38/Black'                     | ''                  | '*'                    |
 			| ''                                   | 'Receipt'     | '*'         | '-1'        | '550'          | '466,1'                        | ''              | 'Main Company'                 | 'Shop 01'              | 'Store 01'                     | '$$RetailSalesReceipt015413$$' | 'L/Green'                      | ''                  | '*'                    |
 			| ''                                   | ''            | ''          | ''          | ''             | ''                             | ''              | ''                             | ''                     | ''                             | ''                             | ''                             | ''                  | ''                     |
@@ -1537,19 +1537,15 @@ Scenario:  _0154149 create Cash statement
 		* Open the Retail Sales Receipt creation form
 			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 			And I click the button named "FormCreate"
-		* Check filling in legal name if the partner has only one
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
 				| 'Description' |
 				| 'Retail customer'         |
 			And I select current line in "List" table
 			Then the form attribute named "LegalName" became equal to "Company Retail customer"
-		* Check filling in Partner term if the partner has only one
 			Then the form attribute named "Agreement" became equal to "Retail partner term"
-		* Check filling in Store from Partner term
 			Then the form attribute named "Store" became equal to "Store 01"
 		* Filling in item and item key
-			And I delete a line in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
@@ -1631,7 +1627,6 @@ Scenario:  _0154149 create Cash statement
 		* Check filling in Store from Partner term
 			Then the form attribute named "Store" became equal to "Store 01"
 		* Filling in item and item key
-			And I delete a line in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
@@ -1698,7 +1693,6 @@ Scenario:  _0154149 create Cash statement
 		* Check filling in Store from Partner term
 			Then the form attribute named "Store" became equal to "Store 01"
 		* Filling in item and item key
-			And I delete a line in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
@@ -1796,7 +1790,6 @@ Scenario:  _0154149 create Cash statement
 		* Check filling in Store from Partner term
 			Then the form attribute named "Store" became equal to "Store 01"
 		* Filling in item and item key
-			And I delete a line in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
@@ -1894,7 +1887,6 @@ Scenario:  _0154149 create Cash statement
 		* Check filling in Store from Partner term
 			Then the form attribute named "Store" became equal to "Store 01"
 		* Filling in item and item key
-			And I delete a line in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
@@ -2081,14 +2073,14 @@ Scenario:  _0154149 create Cash statement
 				| 'Cash'         | 'Cash desk №4' | ''           | '1 450,00' |'TRY'        |
 				| 'Card 01'      | 'Transit Main' | '64,50'      | '400,00'   |'TRY'        |
 			Then the number of "PaymentList" table lines is "меньше или равно" 2 
-		And I click the button named "FormPost"
 		And I delete "$$NumberCashStatement01541491$$" variable
 		And I delete "$$CashStatement01541491$$" variable
 		And I delete "$$DateCashStatement01541491$$" variable
+		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashStatement01541491$$"
 		And I save the window as "$$CashStatement01541491$$"
 		And I save the value of "Date" field as "$$DateCashStatement01541491$$"
-		And I click the button named "FormPostAndClose"
+		And I close current window
 		And "List" table contains lines
 				| 'Number'                        |
 				| '$$NumberCashStatement01541491$$'  |
@@ -2098,7 +2090,6 @@ Scenario:  _0154149 create Cash statement
 			| '$$NumberCashStatement01541491$$'  |
 		And I click "Registrations report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$CashStatement01541491$$'            | ''                              | ''                              | ''             | ''                          | ''                          | ''             | ''                             | ''                     | ''                             | ''                             | ''                     |
 			| 'Document registrations records'        | ''                              | ''                              | ''             | ''                          | ''                          | ''             | ''                             | ''                     | ''                             | ''                             | ''                     |
 			| 'Register  "Planing cash transactions"' | ''                              | ''                              | ''             | ''                          | ''                          | ''             | ''                             | ''                     | ''                             | ''                             | ''                     |
 			| ''                                      | 'Period'                        | 'Resources'                     | 'Dimensions'   | ''                          | ''                          | ''             | ''                             | ''                     | ''                             | ''                             | 'Attributes'           |

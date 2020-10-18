@@ -19,6 +19,7 @@ Background:
 
 
 Scenario: _0050 Data base title
+	And I close all client application windows
 	* Filling in title
 		Given I open hyperlink "e1cib/list/Catalog.DataBaseStatus"
 		And I click the button named "FormCreate"

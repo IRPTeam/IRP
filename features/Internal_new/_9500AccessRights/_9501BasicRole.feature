@@ -14,7 +14,7 @@ Background:
 	And I set "True" value to the constant "UseItemKey"
 	And I set "True" value to the constant "UseCompanies"
 
-Scenario: 950000 preparation (role Basic role)
+Scenario: 950100 Basic role
 	When Create catalog AccessGroups objects
 	When Create catalog AccessProfiles objects
 	When Create catalog Agreements objects

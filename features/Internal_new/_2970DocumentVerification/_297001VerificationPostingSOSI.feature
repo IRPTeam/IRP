@@ -1135,7 +1135,9 @@ Scenario: _29700121 test filling-in PO - PI - GR by quantity (second part)
 			And I input "22,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
-			Then user message window does not contain messages
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button
+			Given Recent TestClient message contains "* [Dress L/Green] Receipt remaining: 20 . Required: 22 . Lacking: 2 ." string by template
 		* Change the quantity by less than specified in PI and post
 			And I move to "Items" tab
 			And I go to line in "ItemList" table
@@ -1163,7 +1165,9 @@ Scenario: _29700121 test filling-in PO - PI - GR by quantity (second part)
 			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
-			Then user message window does not contain messages
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button
+			Given Recent TestClient message contains "* [Boots Boots/S-8] Receipt remaining: 0 . Required: 2 . Lacking: 2 ." string by template
 		* Copy the string that is in the order clearing the basis document from the copied line and try to post and try to post
 			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |
@@ -1171,17 +1175,29 @@ Scenario: _29700121 test filling-in PO - PI - GR by quantity (second part)
 			And I click the button named "ItemListContextMenuCopy"
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
-			Then user message window does not contain messages
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button
+			Given Recent TestClient message contains "* [Dress L/Green] Receipt remaining: 0 . Required: 19 . Lacking: 19 ." string by template
 			And I go to the last line in "ItemList" table
 			And I select current line in "ItemList" table
 			And I click Clear button of "Receipt basis" attribute in "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
-			Then user message window does not contain messages
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button
+			Given Recent TestClient message contains "* [Dress L/Green] Receipt remaining: 0 . Required: 19 . Lacking: 19 ." string by template
 		* Deleting a string that has PI and try to post
 			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |
 				| 'Dress' | 'M/White'  |
+			And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Boots' | 'Boots/S-8'  |
+			And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'L/Green'  |
 			And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 			And I click the button named "FormPost"
 			Then user message window does not contain messages
@@ -1205,7 +1221,9 @@ Scenario: _29700121 test filling-in PO - PI - GR by quantity (second part)
 			And I input "9,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
-			Then user message window does not contain messages
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button
+			Given Recent TestClient message contains "* [Dress L/Green] Receipt remaining: 1 . Required: 9 . Lacking: 8 ." string by template
 		* Change by less than the PI balance (already created by GR) and try to post
 			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' | 'Quantity' |
@@ -1256,7 +1274,9 @@ Scenario: _29700123 test filling-in PO - GR - PI by quantity
 				And I input "22,000" text in "Quantity" field of "ItemList" table
 				And I finish line editing in "ItemList" table
 				And I click the button named "FormPost"
-				Then user message window does not contain messages
+				Then "1C:Enterprise" window is opened
+				And I click "OK" button
+				Given Recent TestClient message contains "* [Dress M/White] Receipt remaining: 20 . Required: 22 . Lacking: 2 ." string by template
 			* Change in quantity to original value
 				And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |
@@ -1271,7 +1291,9 @@ Scenario: _29700123 test filling-in PO - GR - PI by quantity
 				| 'Dress' | 'M/White'  | '20,000' |
 				And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
 				And I click the button named "FormPost"
-				Then user message window does not contain messages
+				Then "1C:Enterprise" window is opened
+				And I click "OK" button
+				Given Recent TestClient message contains "* [Dress M/White] Receipt remaining: 0 . Required: 20 . Lacking: 20 ." string by template
 			* Delete added line
 				And I go to line in "ItemList" table
 					| 'Item'  | 'Item key' | 'Quantity'     |
@@ -1397,7 +1419,9 @@ Scenario: _29700123 test filling-in PO - GR - PI by quantity (second part)
 		And I input "20,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
-		Then user message window does not contain messages
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Given Recent TestClient message contains "* [Dress L/Green] Receipt remaining: 0 . Required: 20 . Lacking: 20 ." string by template
 	* Check post GR if a line is not added to it by order
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |

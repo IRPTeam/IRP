@@ -423,23 +423,6 @@ Scenario: 950013 check role Full access only read (Items and item key)
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception			
 		And I close all client application windows	
-	* Inventory	
-		And In the command interface I select "Purchase" "Items"		
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'     |
-		And I select current line in "List" table
-		If the warning is displayed then 
-			Then I raise "Failed to open" exception
-		And In this window I click command interface button "Item keys"
-		And I activate "Item key" field in "List" table
-		And I go to line in "List" table
-			| 'Item key' |
-			| 'S/Yellow'     |
-		And I select current line in "List" table
-		If the warning is displayed then 
-			Then I raise "Failed to open" exception			
-		And I close all client application windows	
 	* Sales
 		And In the command interface I select "Sales - A/R" "Items"		
 		And I go to line in "List" table
@@ -458,7 +441,7 @@ Scenario: 950013 check role Full access only read (Items and item key)
 			Then I raise "Failed to open" exception			
 		And I close all client application windows	
 	* Purchase
-		And In the command interface I select "Purchase - A/P" "Items"		
+		And In the command interface I select "Purchase  - A/P" "Items"
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Dress'     |

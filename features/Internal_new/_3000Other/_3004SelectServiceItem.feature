@@ -122,9 +122,11 @@ Scenario: _300407 check filter on the choice of services in the document Interna
 	And I click the button named "FormCreate"
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
-	And "List" table does not contain lines
+	And "List" table contains lines
 		| Description          |
+		| Dress TR             |
 		| Service TR           |
+		| Router               |
 	And I close all client application windows
 
 Scenario: _300408 check filter on the choice of services in the document Purchase return order
@@ -132,9 +134,11 @@ Scenario: _300408 check filter on the choice of services in the document Purchas
 	And I click the button named "FormCreate"
 	And I click the button named "Add"
 	And I click choice button of "Item" attribute in "ItemList" table
-	And "List" table does not contain lines
+	And "List" table contains lines
 		| Description          |
+		| Dress TR             |
 		| Service TR           |
+		| Router               |
 	And I close all client application windows
 
 Scenario: _300409 check filter on the choice of services in the document Purchase return
@@ -142,9 +146,11 @@ Scenario: _300409 check filter on the choice of services in the document Purchas
 	And I click the button named "FormCreate"
 	And I click the button named "Add"
 	And I click choice button of "Item" attribute in "ItemList" table
-	And "List" table does not contain lines
+	And "List" table contains lines
 		| Description          |
+		| Dress TR             |
 		| Service TR           |
+		| Router               |
 	And I close all client application windows
 
 Scenario: _300410 check filter on the choice of services in the document Sales Return
@@ -152,9 +158,11 @@ Scenario: _300410 check filter on the choice of services in the document Sales R
 	And I click the button named "FormCreate"
 	And I click the button named "Add"
 	And I click choice button of "Item" attribute in "ItemList" table
-	And "List" table does not contain lines
+	And "List" table contains lines
 		| Description          |
+		| Dress TR             |
 		| Service TR           |
+		| Router               |
 	And I close all client application windows
 
 Scenario: _300411 check filter on the choice of services in the document Sales return order
@@ -162,9 +170,11 @@ Scenario: _300411 check filter on the choice of services in the document Sales r
 	And I click the button named "FormCreate"
 	And I click "Add" button
 	And I click choice button of "Item" attribute in "ItemList" table
-	And "List" table does not contain lines
+	And "List" table contains lines
 		| Description          |
+		| Dress TR             |
 		| Service TR           |
+		| Router               |
 	And I close all client application windows
 
 Scenario: _300412 check filter on the choice of services in the document GoodsReceipt

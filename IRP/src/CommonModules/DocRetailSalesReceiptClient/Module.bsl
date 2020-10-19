@@ -36,7 +36,21 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 		ItemListOnChange(Object, Form, Undefined);
 		If ValueIsFilled(Object.Company) Then
 			DocumentsClient.CompanyOnChange(Object, Form, ThisObject, Undefined);
-		EndIf;		
+		EndIf;
+		If ValueIsFilled(Object.Partner) Then
+			If Not ValueIsFilled(Object.LegalName) Then
+				Object.LegalName = DocumentsServer.GetLegalNameByPartner(Object.Partner, Object.LegalName);
+			EndIf;
+			If Not ValueIsFilled(Object.Agreement) Then
+				PartnerSettings = PartnerSettings(Object, Form, AddInfo);
+				AgreementParameters = New Structure();
+				AgreementParameters.Insert("Partner"		, Object.Partner);
+				AgreementParameters.Insert("Agreement"		, Object.Agreement);
+				AgreementParameters.Insert("CurrentDate"	, Object.Date);
+				AgreementParameters.Insert("AgreementType"	, PartnerSettings.AgreementType);
+				Object.Agreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
+			EndIf;
+		EndIf;
 	EndIf;
 		
 	If Not ValueIsFilled(Form.CurrentStore) Then

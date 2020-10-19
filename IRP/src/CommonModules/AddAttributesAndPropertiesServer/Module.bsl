@@ -15,6 +15,7 @@ Procedure BeforeWriteAtServer(Form, Cancel, CurrentObject, WriteParameters, AddI
 	If Not FormInfo.Property("Form") Then
 		FormInfo.Insert("Form", Form);
 	EndIf;
+	
 	AddAttributeAndPropertySetName = AddAttributeAndPropertySetName(FormInfo, AddInfo);
 	ObjectAttributes = ObjectAttributes(FormInfo, AddAttributeAndPropertySetName, AddInfo);
 	RequiredFiler = New Structure("Required", True);
@@ -265,6 +266,42 @@ Function GetFormInfo(Form)
 		FormInfo.Insert("Item", Form.Object.Item);
 		FormInfo.Insert("ItemType", ?(Form.Object.Item = Undefined, Undefined, Form.Object.Item.ItemType));
 	EndIf;
+	
+	ExternalDataSet = New ValueTable();
+	If TypeOf(Form.Object.Ref) = Type("CatalogRef.Items") Then		
+		ExternalDataSet.Columns.Add("ItemType", New TypeDescription("CatalogRef.ItemTypes"));
+		ExternalDataSet.Columns.Add("Ref", New TypeDescription("CatalogRef.Items"));		
+		NewRow = ExternalDataSet.Add();
+		NewRow.ItemType = Form.Object.ItemType;
+		NewRow.Ref = Form.Object.Ref;
+	EndIf;
+	FormInfo.Insert("ExternalDataSet", ExternalDataSet);
+	
+	Return FormInfo;
+EndFunction
+
+Function GetObjectInfo(Object)
+	FormInfo = New Structure();
+	FormInfo.Insert("Ref", Object.Ref);
+	
+	FormInfo.Insert("AddAttributes", Object.AddAttributes);
+	
+	If TypeOf(Object.Ref) = Type("CatalogRef.ItemKeys")
+		Or TypeOf(Object.Ref) = Type("CatalogRef.PriceKeys") Then
+		FormInfo.Insert("Item", Object.Item);
+		FormInfo.Insert("ItemType", ?(Object.Item = Undefined, Undefined, Object.Item.ItemType));
+	EndIf;
+	
+	ExternalDataSet = New ValueTable();
+	If TypeOf(Object.Ref) = Type("CatalogRef.Items") Then		
+		ExternalDataSet.Columns.Add("ItemType", New TypeDescription("CatalogRef.ItemTypes"));
+		ExternalDataSet.Columns.Add("Ref", New TypeDescription("CatalogRef.Items"));		
+		NewRow = ExternalDataSet.Add();
+		NewRow.ItemType = Object.ItemType;
+		NewRow.Ref = Object.Ref;
+	EndIf;
+	FormInfo.Insert("ExternalDataSet", ExternalDataSet);
+	
 	Return FormInfo;
 EndFunction
 
@@ -371,6 +408,7 @@ Procedure FillTableOfAvailableAttributesBy_AllItems(TableOfAvailableAttributes
 		, AllItems
 		, AddInfo = Undefined)
 	Template = GetDCSTemplate(AddAttributeAndPropertySetName, AddInfo);
+	ExternalDataSet = FormInfo.ExternalDataSet;
 	For Each Row In AllItems Do
 		If Row.IsConditionSet Then
 			Settings = Row.Condition.Get();
@@ -379,18 +417,7 @@ Procedure FillTableOfAvailableAttributesBy_AllItems(TableOfAvailableAttributes
 			NewFilter.LeftValue = LeftValue;
 			NewFilter.Use = True;
 			NewFilter.ComparisonType = DataCompositionComparisonType.Equal;
-			NewFilter.RightValue = FormInfo.Ref;
-			
-			ExternalDataSet = New ValueTable();
-			If TypeOf(FormInfo.Form.Object.Ref) = Type("CatalogRef.Items") Then
-				
-				ExternalDataSet.Columns.Add("ItemType", New TypeDescription("CatalogRef.ItemTypes"));
-				ExternalDataSet.Columns.Add("Ref", New TypeDescription("CatalogRef.Items"));
-				
-				NewRow = ExternalDataSet.Add();
-				NewRow.ItemType = FormInfo.Form.Object.ItemType;
-				NewRow.Ref = FormInfo.Form.Object.Ref;
-			EndIf;	
+			NewFilter.RightValue = FormInfo.Ref;				
 
 			RefsByConditions = GetRefsByCondition(Template, Settings, ExternalDataSet, AddInfo);
 			
@@ -640,17 +667,30 @@ EndFunction
 
 Function AllAttributesArrayByFilter(CurrentObject, Filter = Undefined)	Export
 	ReturnValue = New Array;
+	
+	FormInfo = GetObjectInfo(CurrentObject);
+	Form = New Structure("Object", CurrentObject);
+	FormInfo.Insert("Form", Form);
+	
 	ObjectPredefinedName = StrReplace(CurrentObject.Metadata().FullName(), ".", "_");
 	If ObjectPredefinedName = "Catalog_ItemKeys" Then
 		If ValueIsFilled(CurrentObject.Item) Then
-			AddAttributeAndPropertySetsAttributes = CurrentObject.Item.ItemType.AvailableAttributes;
-			AddAttributeAndPropertySetsAttributesByFilter = AddAttributeAndPropertySetsAttributes.Unload(Filter, "Attribute");
-			ReturnValue = AddAttributeAndPropertySetsAttributesByFilter.UnloadColumn("Attribute");
+			AddAttributeAndPropertySetsAttributes = CurrentObject.Item.ItemType.AvailableAttributes;			
+			AddAttributeAndPropertySetsAttributesByFilter = AddAttributeAndPropertySetsAttributes.Unload(Filter);
+			ReducedObjectAttributes = ReduceObjectAttributes(FormInfo, AddAttributeAndPropertySetsAttributesByFilter, ObjectPredefinedName);
+			ReturnValue = New Array;
+			For Each ReducedObjectAttribute In ReducedObjectAttributes Do
+				ReturnValue.Add(ReducedObjectAttribute.Attribute);
+			EndDo;
 		EndIf;
 	Else 	
 		AddAttributeAndPropertySetsAttributes = Catalogs.AddAttributeAndPropertySets[ObjectPredefinedName].Attributes;
-		AddAttributeAndPropertySetsAttributesByFilter = AddAttributeAndPropertySetsAttributes.Unload(Filter, "Attribute");
-		ReturnValue = AddAttributeAndPropertySetsAttributesByFilter.UnloadColumn("Attribute");
+		AddAttributeAndPropertySetsAttributesByFilter = AddAttributeAndPropertySetsAttributes.Unload(Filter);
+		ReducedObjectAttributes = ReduceObjectAttributes(FormInfo, AddAttributeAndPropertySetsAttributesByFilter, ObjectPredefinedName);
+		ReturnValue = New Array;
+		For Each ReducedObjectAttribute In ReducedObjectAttributes Do
+			ReturnValue.Add(ReducedObjectAttribute.Attribute);
+		EndDo;
 	EndIf;
 		
 	Return ReturnValue;

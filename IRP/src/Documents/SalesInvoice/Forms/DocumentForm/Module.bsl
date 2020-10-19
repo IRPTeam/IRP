@@ -679,7 +679,8 @@ Procedure UpdateShipmentConfirmationsTree()
 		
 		ArrayOfShipmentConfirmations = Object.ShipmentConfirmations.FindRows(New Structure("Key", Row.Key));
 		
-		If ArrayOfShipmentConfirmations.Count() = 1 Then
+		If ArrayOfShipmentConfirmations.Count() = 1 
+			And ArrayOfShipmentConfirmations[0].Quantity <> Row.Quantity Then
 			ArrayOfShipmentConfirmations[0].Quantity = Row.Quantity;
 		EndIf;
 		

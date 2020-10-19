@@ -1893,9 +1893,14 @@ Procedure CalculatePaymentTermDateAndAmount(Object, Form, AddInfo = Undefined) E
 	TotalAmount = Object.ItemList.Total("TotalAmount");
 	TotalPercent = Object.PaymentTerms.Total("ProportionOfPayment");
 	RowWithMaxAmount = Undefined;
+	SecondsInOneDay = 86400;
 	For Each Row In Object.PaymentTerms Do
-		Row.Date = Object.Date + ((60 * 60 * 24) * Row.DuePeriod);
-		Row.Amount = (TotalAmount / TotalPercent) * Row.ProportionOfPayment;
+		Row.Date = Object.Date + (SecondsInOneDay * Row.DuePeriod);
+		If TotalPercent = 0 Then
+			Row.Amount = 0;
+		Else
+			Row.Amount = (TotalAmount / TotalPercent) * Row.ProportionOfPayment;
+		EndIf;
 		If RowWithMaxAmount = Undefined Then
 			RowWithMaxAmount = Row;
 		Else

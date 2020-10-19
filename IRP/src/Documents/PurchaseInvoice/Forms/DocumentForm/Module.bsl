@@ -652,7 +652,8 @@ Procedure UpdateGoodsReceiptsTree()
 		
 		ArrayOfGoodsReceipts = Object.GoodsReceipts.FindRows(New Structure("Key", Row.Key));
 		
-		If ArrayOfGoodsReceipts.Count() = 1 Then
+		If ArrayOfGoodsReceipts.Count() = 1 
+		And ArrayOfGoodsReceipts[0].Quantity <> Row.Quantity Then
 			ArrayOfGoodsReceipts[0].Quantity = Row.Quantity;
 		EndIf;
 		

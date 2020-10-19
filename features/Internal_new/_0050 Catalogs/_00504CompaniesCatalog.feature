@@ -54,7 +54,7 @@ Scenario: _005013 filling in the "Companies" catalog
 			And I input "Главная компания" text in the field named "Description_ru"
 			And I click "Ok" button
 			And I input "Turkey" text in the field named "Country"
-			And I set checkbox "OurCompany"
+			And I set checkbox "Our Company"
 			And I select "Company" exact value from the drop-down list named "Type"
 			And I click "Save" button
 		* Filling in currency information (Local currency, Reporting currency, Budgeting currency)

@@ -771,7 +771,7 @@ Scenario: Open object form "PointOfSale"
 		Then I raise "Failed to open data processor form PointOfSale" exception
 	And I close current window
 
-Scenario: Open object form "PointOfSale"
+Scenario: Open object form "DataHistory"
 
 	Given I open "DataHistory" data processor default form 
 	If the warning is displayed then
@@ -786,4 +786,37 @@ Scenario: Open object form "PointOfSale"
 		| 'No'  | 'InformationRegisters'        |
 	And I close current window
 
+Scenario: Open object form "Desktop"
 
+	Given I open "Desktop" data processor default form 
+	If the warning is displayed then
+		Then I raise "Failed to open data processor form Desktop" exception
+	And I close current window
+
+Scenario: Open object form "Mobile invent"
+
+	Given I open "MobileInvent" data processor default form 
+	If the warning is displayed then
+		Then I raise "Failed to open data processor form MobileInvent" exception
+	And I close current window
+
+Scenario: Open information register form "BarcodeScanInfoCheck" 
+
+	Given I open "BarcodeScanInfoCheck" information register default form
+	If the warning is displayed then
+		Then I raise "Failed to open information register form  BarcodeScanInfoCheck" exception
+	And I close current window
+
+Scenario: Open information register form "BarcodeScanInfoCheck" 
+
+	Given I open "BarcodeScanInfoCheck" information register default form
+	If the warning is displayed then
+		Then I raise "Failed to open information register form  BarcodeScanInfoCheck" exception
+	And I close current window
+
+Scenario: Open information register form "DataMappingTable" 
+
+	Given I open "DataMappingTable" information register default form
+	If the warning is displayed then
+		Then I raise "Failed to open information register form  DataMappingTable" exception
+	And I close current window

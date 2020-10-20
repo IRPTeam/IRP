@@ -404,9 +404,9 @@ Procedure PaymentTermsDateOnChange(Object, Form, Item, AddInfo = Undefined) Expo
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	SecondInOneDay = 86400;
+	SecondsInOneDay = 86400;
 	If ValueIsFilled(Object.Date) And ValueIsFilled(CurrentData.Date) Then
-		CurrentData.DuePeriod = (CurrentData.Date - Object.Date) / SecondInOneDay;
+		CurrentData.DuePeriod = (CurrentData.Date - Object.Date) / SecondsInOneDay;
 	Else
 		CurrentData.DuePeriod = 0;
 	EndIf;

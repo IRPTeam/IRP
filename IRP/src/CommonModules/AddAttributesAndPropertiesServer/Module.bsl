@@ -676,12 +676,8 @@ Function AllAttributesArrayByFilter(CurrentObject, Filter = Undefined)	Export
 	If ObjectPredefinedName = "Catalog_ItemKeys" Then
 		If ValueIsFilled(CurrentObject.Item) Then
 			AddAttributeAndPropertySetsAttributes = CurrentObject.Item.ItemType.AvailableAttributes;			
-			AddAttributeAndPropertySetsAttributesByFilter = AddAttributeAndPropertySetsAttributes.Unload(Filter);
-			ReducedObjectAttributes = ReduceObjectAttributes(FormInfo, AddAttributeAndPropertySetsAttributesByFilter, ObjectPredefinedName);
-			ReturnValue = New Array;
-			For Each ReducedObjectAttribute In ReducedObjectAttributes Do
-				ReturnValue.Add(ReducedObjectAttribute.Attribute);
-			EndDo;
+			AddAttributeAndPropertySetsAttributesByFilter = AddAttributeAndPropertySetsAttributes.Unload(Filter, "Attribute");
+			ReturnValue = AddAttributeAndPropertySetsAttributesByFilter.UnloadColumn("Attribute");
 		EndIf;
 	Else 	
 		AddAttributeAndPropertySetsAttributes = Catalogs.AddAttributeAndPropertySets[ObjectPredefinedName].Attributes;

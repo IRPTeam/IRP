@@ -126,95 +126,88 @@ $VanessaRun = {
     #$TempDb = "'/Slocalhost/%env.Database1CName%'" | ForEach-Object { $_ -replace '\\', '/' }
      
     $connection = "' /N %env.LoginTo1C% /P %env.PassTo1C% /Len /UseHwLicenses+ /TComp -SDC  /DisableStartupMessages /DisplayPerformance /DisplayAllFunctions /EnableCheckModal /EnableCheckExtensionsAndAddInsSyncCalls /DEBUG -http -attach /DEBUGGERURL http://localhost:%env.DebugPort%'"
-    $text = "
-    {
-      'Version': '1.2.031',
-      'Lang': 'en',
-      'DebugLog': false,
-      'VersionVA': 'ver 1.2.031',
-      'vanessarun': true,
-      'addtofeaturefilter': true,
-      'DownloadFeaturesOpen': 1,
-      'platformversiongenerateepf': 'C:\\Program Files\\1cv8\\8.3.15.1869\\bin\\',
-      'usersettingsprovider': 'FILE',
-      'RunningScripts': {
-        'makestepsasync': false,
-        'SpacingStepSpecifiedUser': 0.1,
-        'updatestatistics': false,
-        'updatetreewhenscenariostarts': false,
-        'stoponerror': %env.StopOnError%,
-        'showrownumberonerror': false,
-        'pendingequalfailed': false,
-        'timeoutforasynchronoussteps': 0,
-        'timetofindwindow': 5,
-        'numberofattemptstoperformanaction': 3,
-        'safeexecutionofsteps': false,
-        'pauseonwindowopening': 0
-      },
-      'TestClient': {
-        'runtestclientwithmaximizedwindow': false,
-        'testclienttimeout': 25,
-        'datatestclients': [
-          {
-          'Name': 'This client',
-          'PathToInfobase': $TempDb,
-          'PortTestClient': $startPort,
-          'AddItionalParameters': $connection,
-          'ClientType': 'Thin',
-          'ComputerName': 'localhost'
-          }
-        ]
-      },
-      'allurecreatereport': true,
-      'AllureReport': {
+    $text = "{
+    'AllureReport': {
+        'DataAllureMarks': [],
+        'attachactiveformdatatotheallurereport': true,
+        'attachallformsdatatotheallurereport': false,
+        'attachdataoftheoperatingsystemprocessestotheallurereport': true,
+        'attacheventlogtotheallurereport': true,
+        'attachnetworkconnectiondatatotheallurereport': true,
+        'attachvariablestotheallurereport': true,
         'reportlevel1': '#report.epic=;catalog1',
         'reportlevel2': '#report.feature=;catalog2',
         'reportlevel3': '#report.story=;scenarioname',
-        'testsuites': '',
-        'attacheventlogtotheallurereport': true,
-        'attachactiveformdatatotheallurereport': true,
-        'attachallformsdatatotheallurereport': false,
-        'attachnetworkconnectiondatatotheallurereport': false,
-        'attachdataoftheoperatingsystemprocessestotheallurereport': false,
-        'DataAllureMarks': []
-      },
-      'junitcreatereport': false,
-      'cucumbercreatereport': false,
-      'ModelingCreateReport': false,
-      'htmlcreate': false,
-      'markdowncreate': false,
-      'simplereport': false,
-      'librarycatalogs': [
-        'C:\\OneScript\\lib\\vanessa-automation\\features\\Libraries'
-      ],
-      'ignoretags': [
-        'IgnoreOnCIMainBuild',
-        'Negative'
-      ],
-      'filtertags': [
-  
-      ],
-      'logtogr': true,
-      'logtotext': true,
-      'logstepstotext': false,
-      'logerrorstotext': true,
-      'getactiveformdataonerror': false,
-      'getallformsdataonerror': false,
-      'collectnetworkconnectiondata': false,
-      'collectdataoftheoperatingsystemprocesses': false,
-      'useaddin': true,
-      'useaddinforscreencapture': true,
-      'screencaptureaddinmethod': 2,
-      'onerrorscreenshot': true,
-      'onerrorscreenshoteverywindow': false,
-      'videcreate': false,
-      'usesikulixserver': false,
-      'searchformelementsbyname': false,
-      'addmetainformationclicking': false,
-      'thetreetagisenabledbydefault': true,
-      'vanessashutdown': %env.CloseVA%,
-      'closetestclient': true
-    }"
+        'testsuites': ''
+    },
+    'DebugLog': false,
+    'DownloadFeaturesOpen': 1,
+    'Lang': 'en',
+    'ModelingCreateReport': false,
+    'RunningScripts': {
+        'SpacingStepSpecifiedUser': 0.1,
+        'dosleepusingping': false,
+        'makestepsasync': false,
+        'numberofattemptstoperformanaction': 3,
+        'pauseonwindowopening': 0,
+        'pendingequalfailed': true,
+        'safeexecutionofsteps': false,
+        'showrownumberonerror': false,
+        'stoponerror': %env.StopOnError%,
+        'timeoutforasynchronoussteps': 0,
+        'timetofindwindow': 5,
+        'updatestatistics': false,
+        'updatetreewhenscenariostarts': false
+    },
+    'TestClient': {
+        'datatestclients': [{
+                'AddItionalParameters': $connection,
+                'ClientType': 'Thin',
+                'ComputerName': 'localhost',
+                'Name': 'This client',
+                'PathToInfobase': $TempDb,
+                'PortTestClient': $startPort
+            }
+        ],
+        'runtestclientwithmaximizedwindow': false,
+        'testclienttimeout': 25
+    },
+    'Version': '1.2.034',
+    'VersionVA': 'ver 1.2.034',
+    'addmetainformationclicking': false,
+    'addtofeaturefilter': true,
+    'allurecreatereport': true,
+    'closetestclient': true,
+    'collectdataoftheoperatingsystemprocesses': false,
+    'collectnetworkconnectiondata': false,
+    'cucumbercreatereport': false,
+    'filtertags': [],
+    'getactiveformdataonerror': true,
+    'getallformsdataonerror': true,
+    'htmlcreate': false,
+    'ignoretags': ['IgnoreOnCIMainBuild', 'Negative'],
+    'junitcreatereport': false,
+    'librarycatalogs': ['C:\\OneScript\\lib\\vanessa-automation\\features\\Libraries'],
+    'logerrorstotext': true,
+    'logstepstotext': false,
+    'logtogr': true,
+    'logtotext': true,
+    'markdowncreate': false,
+    'onerrorscreenshot': true,
+    'onerrorscreenshoteverywindow': false,
+    'platformversiongenerateepf': 'C:\\Program Files\\1cv8\\8.3.15.1869\\bin\\',
+    'screencaptureaddinmethod': 2,
+    'searchformelementsbyname': false,
+    'simplereport': false,
+    'thetreetagisenabledbydefault': true,
+    'useaddin': true,
+    'useaddinforscreencapture': true,
+    'usersettingsprovider': 'FILE',
+    'usesikulixserver': false,
+    'vanessarun': true,
+    'vanessashutdown': %env.CloseVA%,
+    'videcreate': false
+}"
     #Write-Output "$text"
     $a = $text | ConvertFrom-Json
     #Write-Output "featurepath - %env.VA.FeaturePath%Internal_New"
@@ -234,7 +227,9 @@ $VanessaRun = {
     #Write-Output "allurepath - $allurePath/$elementTag"
     $a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepath' -Value "$allurePath/$elementTag"
     #$a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepathbase' -Value "$allurePath/base"
-    
+    #Write-Output "logpath - %system.teamcity.build.tempDir%\logpath$elementTag"
+    $a | Add-Member -Type NoteProperty -Name 'logpath' -Value "%system.teamcity.build.tempDir%\logpath$elementTag"    
+   
     $a.librarycatalogs += '%system.teamcity.build.workingDir%\DataProcessor'
     $a.librarycatalogs += '%env.VA.FeaturePath%External_New'
     $a.filtertags += $elementTag

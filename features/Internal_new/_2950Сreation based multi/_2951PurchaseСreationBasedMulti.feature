@@ -65,7 +65,7 @@ Scenario: _090300 preparation (creation mechanism based on for purchase document
 
 Scenario: _090302 create purchase invoice for several purchase orders with different legal name
 	# should be created 2 Purchase invoice
-	* Create Purchase order 124
+	* Create Purchase order
 		When create the first test PO for a test on the creation mechanism based on
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseOrder09030201$$" variable
@@ -73,7 +73,7 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 		And I save the value of "Number" field as "$$NumberPurchaseOrder09030201$$"
 		And I save the window as "$$PurchaseOrder09030201$$"
 		And I click the button named "FormPostAndClose"
-	* Create Purchase order 125
+	* Create Purchase order
 		When create the second test PO for a test on the creation mechanism based on
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseOrder09030202$$" variable
@@ -81,7 +81,7 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 		And I save the value of "Number" field as "$$NumberPurchaseOrder09030202$$"
 		And I save the window as "$$PurchaseOrder09030202$$"
 		And I click the button named "FormPostAndClose"
-	* Create based on Purchase order 124 and 125 Purchase invoice (should be created 2)
+	* Create Purchase invoice based on Purchase orders (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| Number |
@@ -157,7 +157,7 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 
 Scenario: _090303 create Purchase invoice for several Purchase order with the same partner, legal name, partner term, currency and store
 # Should be created 1 Purchase invoice
-	* Create Purchase order 126
+	* Create Purchase order
 		When create the first test PO for a test on the creation mechanism based on
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
@@ -170,7 +170,7 @@ Scenario: _090303 create Purchase invoice for several Purchase order with the sa
 		And I save the value of "Number" field as "$$NumberPurchaseOrder09030203$$"
 		And I save the window as "$$PurchaseOrder09030203$$"
 		And I click the button named "FormPostAndClose"
-	* Create Purchase order 127
+	* Create Purchase order
 		When create the second test PO for a test on the creation mechanism based on
 		And I click Select button of "Legal name" field
 		And I go to line in "List" table
@@ -183,7 +183,7 @@ Scenario: _090303 create Purchase invoice for several Purchase order with the sa
 		And I save the value of "Number" field as "$$NumberPurchaseOrder090302031$$"
 		And I save the window as "$$PurchaseOrder090302031$$"
 		And I click the button named "FormPostAndClose"
-	* Create based on Purchase order 126 and 127 Purchase invoice (should be created 1)
+	* Create Purchase invoice based on Purchase orders (should be created 1)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| Number |
@@ -217,7 +217,7 @@ Scenario: _090303 create Purchase invoice for several Purchase order with the sa
 	
 Scenario: _090304 create Purchase invoice for several Purchase order with different partners of the same legal name (partner terms are different)
 # should be created 2 Purchase invoice
-	* Create first test PO 128
+	* Create first test PO
 		When create the first test PO for a test on the creation mechanism based on
 		* Filling in vendor info
 			And I click Select button of "Partner" field
@@ -262,7 +262,7 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 		And I save the value of "Number" field as "$$NumberPurchaseOrder090302041$$"
 		And I save the window as "$$PurchaseOrder090302041$$"
 		And I click the button named "FormPostAndClose"
-	* Create first test PO 129
+	* Create second test PO
 		When create the second test PO for a test on the creation mechanism based on
 		* Filling in vendor info
 			And I click Select button of "Partner" field
@@ -301,7 +301,7 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 		And I save the value of "Number" field as "$$NumberPurchaseOrder090302042$$"
 		And I save the window as "$$PurchaseOrder090302042$$"
 		And I click the button named "FormPostAndClose"
-	* Create based on Purchase order 128 and 129 Purchase invoice (should be created 2)
+	* Create  Purchase invoice based on Purchase orders (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| Number |
@@ -344,7 +344,7 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 
 Scenario: _090305 create purchase invoice for several purchase order with different partner terms
 # should be created 2 Purchase invoice
-	* Create first test PO 130
+	* Create first test PO
 		When create the first test PO for a test on the creation mechanism based on
 		* Filling in vendor info
 			And I click Select button of "Partner" field
@@ -388,7 +388,7 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 		And I save the value of "Number" field as "$$NumberPurchaseOrder090302051$$"
 		And I save the window as "$$PurchaseOrder090302051$$"
 		And I click the button named "FormPostAndClose"
-	* Create second test PO 131 Partner Ferron 1 with partner term Vendor Ferron Discount
+	* Create second test PO Partner Ferron 1 with partner term Vendor Ferron Discount
 		When create the second test PO for a test on the creation mechanism based on
 		* Filling in vendor info
 			And I click Select button of "Partner" field
@@ -424,7 +424,7 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 		And I save the value of "Number" field as "$$NumberPurchaseOrder090302052$$"
 		And I save the window as "$$PurchaseOrder090302052$$"
 		And I click the button named "FormPostAndClose"
-	* Create based on Purchase order 130 and 131 Purchase invoice (should be created 2)
+	* Create Purchase invoice based on Purchase orders (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| Number |
@@ -503,7 +503,7 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 
 Scenario: _090306 create Purchase invoice for several Purchase order with different stores (created one)
 # Create one PI
-	* Create first test PO 134
+	* Create first test PO
 		When create the first test PO for a test on the creation mechanism based on
 		* Filling in vendor info
 			And I click Select button of "Partner" field
@@ -548,7 +548,7 @@ Scenario: _090306 create Purchase invoice for several Purchase order with differ
 			And I save the value of "Number" field as "$$NumberPurchaseOrder090302061$$"
 			And I save the window as "$$PurchaseOrder090302061$$"
 		And I click the button named "FormPostAndClose"
-	* Create second test PO 135
+	* Create second test PO
 		When create the second test PO for a test on the creation mechanism based on
 		* Filling in vendor info
 			And I click Select button of "Partner" field
@@ -584,7 +584,7 @@ Scenario: _090306 create Purchase invoice for several Purchase order with differ
 			And I save the value of "Number" field as "$$NumberPurchaseOrder090302062$$"
 			And I save the window as "$$PurchaseOrder090302062$$"
 		And I click the button named "FormPostAndClose"
-	* Create based on Purchase order 135 and 134 Purchase invoice (should be created 1)
+	* Create Purchase invoice based on Purchase orders (should be created 1)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| Number |
@@ -618,7 +618,7 @@ Scenario: _090306 create Purchase invoice for several Purchase order with differ
 	
 Scenario: _090307 create purchase invoice for several purchase order with different own companies
 	# Create one PI
-	* Create first test PO 136
+	* Create first test PO
 		When create the first test PO for a test on the creation mechanism based on
 		* Filling in vendor info
 			And I click Select button of "Partner" field
@@ -667,7 +667,7 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 			And I save the value of "Number" field as "$$NumberPurchaseOrder09030701$$"
 			And I save the window as "$$PurchaseOrder09030701$$"
 		And I click the button named "FormPostAndClose"
-	* Create second test PO 137
+	* Create second test PO
 		When create the second test PO for a test on the creation mechanism based on
 		* Filling in vendor info
 			And I click Select button of "Partner" field
@@ -703,7 +703,7 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 			And I save the value of "Number" field as "$$NumberPurchaseOrder09030702$$"
 			And I save the window as "$$PurchaseOrder09030702$$"
 		And I click the button named "FormPostAndClose"
-	* Create based on Purchase order 136 and 137 Purchase invoice (should be created 2)
+	* Create Purchase invoice based on Purchase orders (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| Number |
@@ -797,20 +797,22 @@ Scenario: _090308 create Goods reciept for Purchase invoice with different legal
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "LegalName" is equal to "Company Ferron BP" Then
-			And I input "126" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "126" text in "Number" field
+			And I click the button named "FormPost"
+			And I delete "$$NumberGoodsReceipt0903081$$" variable
+			And I delete "$$GoodsReceipt0903081$$" variable
+			And I save the value of "Number" field as "$$NumberGoodsReceipt0903081$$"
+			And I save the window as "$$GoodsReceipt0903081$$"
 			And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
 			| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice09030201$$' |
 			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice09030201$$' |
 			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseInvoice09030201$$' |
 		If the field named "LegalName" is equal to "Second Company Ferron BP" Then
-			And I input "125" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "125" text in "Number" field
+			And I click the button named "FormPost"
+			And I delete "$$NumberGoodsReceipt0903082$$" variable
+			And I delete "$$GoodsReceipt0903082$$" variable
+			And I save the value of "Number" field as "$$NumberGoodsReceipt0903082$$"
+			And I save the window as "$$GoodsReceipt0903082$$"
 			And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
 			| 'Dress'    | '10,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice09030202$$' |
@@ -820,20 +822,22 @@ Scenario: _090308 create Goods reciept for Purchase invoice with different legal
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "LegalName" is equal to "Company Ferron BP" Then
-			And I input "126" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "126" text in "Number" field
+			And I click the button named "FormPost"
+			And I delete "$$NumberGoodsReceipt0903081$$" variable
+			And I delete "$$GoodsReceipt0903081$$" variable
+			And I save the value of "Number" field as "$$NumberGoodsReceipt0903081$$"
+			And I save the window as "$$GoodsReceipt0903081$$"
 			And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
 			| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice09030201$$' |
 			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice09030201$$' |
 			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseInvoice09030201$$' |
 		If the field named "LegalName" is equal to "Second Company Ferron BP" Then
-			And I input "125" text in "Number" field
-			Then "1C:Enterprise" window is opened
-			And I click "Yes" button
-			And I input "125" text in "Number" field
+			And I click the button named "FormPost"
+			And I delete "$$NumberGoodsReceipt0903082$$" variable
+			And I delete "$$GoodsReceipt0903082$$" variable
+			And I save the value of "Number" field as "$$NumberGoodsReceipt0903082$$"
+			And I save the window as "$$GoodsReceipt0903082$$"
 			And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
 			| 'Dress'    | '10,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice09030202$$' |
@@ -842,8 +846,8 @@ Scenario: _090308 create Goods reciept for Purchase invoice with different legal
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
 			| 'Number'  |
-			| '125'       |
-			| '126'       |
+			| '$$NumberGoodsReceipt0903081$$'       |
+			| '$$NumberGoodsReceipt0903082$$'       |
 		And I close all client application windows
 
 
@@ -2122,6 +2126,11 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 			And I select current line in "ItemList" table
 			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
+			And I click the button named "FormPost"
+			And I delete "$$NumberGoodsReceipte0903231$$" variable
+			And I delete "$$GoodsReceipte0903231$$" variable
+			And I save the value of "Number" field as "$$NumberGoodsReceipte0903231$$"
+			And I save the window as "$$GoodsReceipte0903231$$"
 			And I click the button named "FormPostAndClose"
 		* Second GR
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -2145,6 +2154,11 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 			And I select current line in "ItemList" table
 			And I input "12,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
+			And I click the button named "FormPost"
+			And I delete "$$NumberGoodsReceipte0903232$$" variable
+			And I delete "$$GoodsReceipte0903232$$" variable
+			And I save the value of "Number" field as "$$NumberGoodsReceipte0903232$$"
+			And I save the window as "$$GoodsReceipte0903232$$"
 			And I click the button named "FormPostAndClose"
 		* Third GR
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -2168,6 +2182,11 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 			And I select current line in "ItemList" table
 			And I input "8,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
+			And I click the button named "FormPost"
+			And I delete "$$NumberGoodsReceipte0903233$$" variable
+			And I delete "$$GoodsReceipte0903233$$" variable
+			And I save the value of "Number" field as "$$NumberGoodsReceipte0903233$$"
+			And I save the window as "$$GoodsReceipte0903233$$"
 			And I click the button named "FormPostAndClose"
 	* Create Purchase invoice for 3 Goods receipt
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -2182,4 +2201,83 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 			| '200,00' | ''       | 'Dress'    | '18%' | 'M/White'   | '20,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '610,17'     | '3 389,83'   | '4 000,00'     | 'Store 02' | '*'             | ''             | ''              | '$$PurchaseOrder090323$$' |
 			| '210,00' | ''       | 'Dress'    | '18%' | 'L/Green'   | '20,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '640,68'     | '3 559,32'   | '4 200,00'     | 'Store 02' | '*'             | ''             | ''              | '$$PurchaseOrder090323$$' |
 			| '210,00' | ''       | 'Trousers' | '18%' | '36/Yellow' | '30,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '961,02'     | '5 338,98'   | '6 300,00'     | 'Store 02' | '*'             | ''             | ''              | '$$PurchaseOrder090323$$' |
+		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseInvoice090323$$" variable
+		And I delete "$$PurchaseInvoice090323$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice090323$$"
+		And I save the window as "$$PurchaseInvoice090323$$"
+	* Check movements
+		And I click "Registrations report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$PurchaseInvoice090323$$'            | ''            | ''          | ''                     | ''                        | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| 'Document registrations records'       | ''            | ''          | ''                     | ''                        | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| 'Register  "Purchase turnovers"'       | ''            | ''          | ''                     | ''                        | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Period'      | 'Resources' | ''                     | ''                        | 'Dimensions'                | ''                          | ''                  | ''                   | ''                        | ''                             | 'Attributes'           | ''                             | ''                     |
+		| ''                                     | ''            | 'Quantity'  | 'Amount'               | 'Net amount'              | 'Company'                   | 'Purchase invoice'          | 'Currency'          | 'Item key'           | 'Row key'                 | 'Multi currency movement type' | 'Deferred calculation' | ''                             | ''                     |
+		| ''                                     | '*'           | '20'        | '684,93'               | '580,45'                  | 'Main Company'              | '$$PurchaseInvoice090323$$' | 'USD'               | 'M/White'            | '*'                       | 'Reporting currency'           | 'No'                   | ''                             | ''                     |
+		| ''                                     | '*'           | '20'        | '719,18'               | '609,47'                  | 'Main Company'              | '$$PurchaseInvoice090323$$' | 'USD'               | 'L/Green'            | '*'                       | 'Reporting currency'           | 'No'                   | ''                             | ''                     |
+		| ''                                     | '*'           | '20'        | '4 000'                | '3 389,83'                | 'Main Company'              | '$$PurchaseInvoice090323$$' | 'TRY'               | 'M/White'            | '*'                       | 'Local currency'               | 'No'                   | ''                             | ''                     |
+		| ''                                     | '*'           | '20'        | '4 000'                | '3 389,83'                | 'Main Company'              | '$$PurchaseInvoice090323$$' | 'TRY'               | 'M/White'            | '*'                       | 'TRY'                          | 'No'                   | ''                             | ''                     |
+		| ''                                     | '*'           | '20'        | '4 000'                | '3 389,83'                | 'Main Company'              | '$$PurchaseInvoice090323$$' | 'TRY'               | 'M/White'            | '*'                       | 'en description is empty'      | 'No'                   | ''                             | ''                     |
+		| ''                                     | '*'           | '20'        | '4 200'                | '3 559,32'                | 'Main Company'              | '$$PurchaseInvoice090323$$' | 'TRY'               | 'L/Green'            | '*'                       | 'Local currency'               | 'No'                   | ''                             | ''                     |
+		| ''                                     | '*'           | '20'        | '4 200'                | '3 559,32'                | 'Main Company'              | '$$PurchaseInvoice090323$$' | 'TRY'               | 'L/Green'            | '*'                       | 'TRY'                          | 'No'                   | ''                             | ''                     |
+		| ''                                     | '*'           | '20'        | '4 200'                | '3 559,32'                | 'Main Company'              | '$$PurchaseInvoice090323$$' | 'TRY'               | 'L/Green'            | '*'                       | 'en description is empty'      | 'No'                   | ''                             | ''                     |
+		| ''                                     | '*'           | '30'        | '1 078,77'             | '914,21'                  | 'Main Company'              | '$$PurchaseInvoice090323$$' | 'USD'               | '36/Yellow'          | '*'                       | 'Reporting currency'           | 'No'                   | ''                             | ''                     |
+		| ''                                     | '*'           | '30'        | '6 300'                | '5 338,98'                | 'Main Company'              | '$$PurchaseInvoice090323$$' | 'TRY'               | '36/Yellow'          | '*'                       | 'Local currency'               | 'No'                   | ''                             | ''                     |
+		| ''                                     | '*'           | '30'        | '6 300'                | '5 338,98'                | 'Main Company'              | '$$PurchaseInvoice090323$$' | 'TRY'               | '36/Yellow'          | '*'                       | 'TRY'                          | 'No'                   | ''                             | ''                     |
+		| ''                                     | '*'           | '30'        | '6 300'                | '5 338,98'                | 'Main Company'              | '$$PurchaseInvoice090323$$' | 'TRY'               | '36/Yellow'          | '*'                       | 'en description is empty'      | 'No'                   | ''                             | ''                     |
+		| ''                                     | ''            | ''          | ''                     | ''                        | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| 'Register  "Taxes turnovers"'          | ''            | ''          | ''                     | ''                        | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Period'      | 'Resources' | ''                     | ''                        | 'Dimensions'                | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | 'Attributes'           |
+		| ''                                     | ''            | 'Amount'    | 'Manual amount'        | 'Net amount'              | 'Document'                  | 'Tax'                       | 'Analytics'         | 'Tax rate'           | 'Include to total amount' | 'Row key'                      | 'Currency'             | 'Multi currency movement type' | 'Deferred calculation' |
+		| ''                                     | '*'           | '104,48'    | '104,48'               | '580,45'                  | '$$PurchaseInvoice090323$$' | 'VAT'                       | ''                  | '18%'                | 'Yes'                     | '*'                            | 'USD'                  | 'Reporting currency'           | 'No'                   |
+		| ''                                     | '*'           | '109,71'    | '109,71'               | '609,47'                  | '$$PurchaseInvoice090323$$' | 'VAT'                       | ''                  | '18%'                | 'Yes'                     | '*'                            | 'USD'                  | 'Reporting currency'           | 'No'                   |
+		| ''                                     | '*'           | '164,56'    | '164,56'               | '914,21'                  | '$$PurchaseInvoice090323$$' | 'VAT'                       | ''                  | '18%'                | 'Yes'                     | '*'                            | 'USD'                  | 'Reporting currency'           | 'No'                   |
+		| ''                                     | '*'           | '610,17'    | '610,17'               | '3 389,83'                | '$$PurchaseInvoice090323$$' | 'VAT'                       | ''                  | '18%'                | 'Yes'                     | '*'                            | 'TRY'                  | 'Local currency'               | 'No'                   |
+		| ''                                     | '*'           | '610,17'    | '610,17'               | '3 389,83'                | '$$PurchaseInvoice090323$$' | 'VAT'                       | ''                  | '18%'                | 'Yes'                     | '*'                            | 'TRY'                  | 'TRY'                          | 'No'                   |
+		| ''                                     | '*'           | '610,17'    | '610,17'               | '3 389,83'                | '$$PurchaseInvoice090323$$' | 'VAT'                       | ''                  | '18%'                | 'Yes'                     | '*'                            | 'TRY'                  | 'en description is empty'      | 'No'                   |
+		| ''                                     | '*'           | '640,68'    | '640,68'               | '3 559,32'                | '$$PurchaseInvoice090323$$' | 'VAT'                       | ''                  | '18%'                | 'Yes'                     | '*'                            | 'TRY'                  | 'Local currency'               | 'No'                   |
+		| ''                                     | '*'           | '640,68'    | '640,68'               | '3 559,32'                | '$$PurchaseInvoice090323$$' | 'VAT'                       | ''                  | '18%'                | 'Yes'                     | '*'                            | 'TRY'                  | 'TRY'                          | 'No'                   |
+		| ''                                     | '*'           | '640,68'    | '640,68'               | '3 559,32'                | '$$PurchaseInvoice090323$$' | 'VAT'                       | ''                  | '18%'                | 'Yes'                     | '*'                            | 'TRY'                  | 'en description is empty'      | 'No'                   |
+		| ''                                     | '*'           | '961,02'    | '961,02'               | '5 338,98'                | '$$PurchaseInvoice090323$$' | 'VAT'                       | ''                  | '18%'                | 'Yes'                     | '*'                            | 'TRY'                  | 'Local currency'               | 'No'                   |
+		| ''                                     | '*'           | '961,02'    | '961,02'               | '5 338,98'                | '$$PurchaseInvoice090323$$' | 'VAT'                       | ''                  | '18%'                | 'Yes'                     | '*'                            | 'TRY'                  | 'TRY'                          | 'No'                   |
+		| ''                                     | '*'           | '961,02'    | '961,02'               | '5 338,98'                | '$$PurchaseInvoice090323$$' | 'VAT'                       | ''                  | '18%'                | 'Yes'                     | '*'                            | 'TRY'                  | 'en description is empty'      | 'No'                   |
+		| ''                                     | ''            | ''          | ''                     | ''                        | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| 'Register  "Accounts statement"'       | ''            | ''          | ''                     | ''                        | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Record type' | 'Period'    | 'Resources'            | ''                        | ''                          | ''                          | 'Dimensions'        | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | ''            | ''          | 'Advance to suppliers' | 'Transaction AP'          | 'Advance from customers'    | 'Transaction AR'            | 'Company'           | 'Partner'            | 'Legal name'              | 'Basis document'               | 'Currency'             | ''                             | ''                     |
+		| ''                                     | 'Receipt'     | '*'         | ''                     | '14 500'                  | ''                          | ''                          | 'Main Company'      | 'Ferron BP'          | 'Company Ferron BP'       | '$$PurchaseInvoice090323$$'    | 'TRY'                  | ''                             | ''                     |
+		| ''                                     | ''            | ''          | ''                     | ''                        | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| 'Register  "Reconciliation statement"' | ''            | ''          | ''                     | ''                        | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'              | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | ''            | ''          | 'Amount'               | 'Company'                 | 'Legal name'                | 'Currency'                  | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Expense'     | '*'         | '14 500'               | 'Main Company'            | 'Company Ferron BP'         | 'TRY'                       | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | ''            | ''          | ''                     | ''                        | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| 'Register  "Receipt orders"'           | ''            | ''          | ''                     | ''                        | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'              | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | ''            | ''          | 'Quantity'             | 'Order'                   | 'Goods receipt'             | 'Item key'                  | 'Row key'           | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Expense'     | '*'         | '5'                    | '$$PurchaseOrder090323$$' | '$$GoodsReceipte0903231$$'  | 'M/White'                   | '*'                 | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Expense'     | '*'         | '5'                    | '$$PurchaseOrder090323$$' | '$$GoodsReceipte0903231$$'  | 'L/Green'                   | '*'                 | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Expense'     | '*'         | '7'                    | '$$PurchaseOrder090323$$' | '$$GoodsReceipte0903233$$'  | 'M/White'                   | '*'                 | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Expense'     | '*'         | '7'                    | '$$PurchaseOrder090323$$' | '$$GoodsReceipte0903233$$'  | 'L/Green'                   | '*'                 | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Expense'     | '*'         | '8'                    | '$$PurchaseOrder090323$$' | '$$GoodsReceipte0903232$$'  | 'M/White'                   | '*'                 | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Expense'     | '*'         | '8'                    | '$$PurchaseOrder090323$$' | '$$GoodsReceipte0903232$$'  | 'L/Green'                   | '*'                 | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Expense'     | '*'         | '8'                    | '$$PurchaseOrder090323$$' | '$$GoodsReceipte0903233$$'  | '36/Yellow'                 | '*'                 | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Expense'     | '*'         | '10'                   | '$$PurchaseOrder090323$$' | '$$GoodsReceipte0903231$$'  | '36/Yellow'                 | '*'                 | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Expense'     | '*'         | '12'                   | '$$PurchaseOrder090323$$' | '$$GoodsReceipte0903232$$'  | '36/Yellow'                 | '*'                 | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | ''            | ''          | ''                     | ''                        | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| 'Register  "Partner AP transactions"'  | ''            | ''          | ''                     | ''                        | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'              | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | 'Attributes'           | ''                             | ''                     |
+		| ''                                     | ''            | ''          | 'Amount'               | 'Company'                 | 'Basis document'            | 'Partner'                   | 'Legal name'        | 'Partner term'       | 'Currency'                | 'Multi currency movement type' | 'Deferred calculation' | ''                             | ''                     |
+		| ''                                     | 'Receipt'     | '*'         | '2 482,88'             | 'Main Company'            | '$$PurchaseInvoice090323$$' | 'Ferron BP'                 | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'USD'                     | 'Reporting currency'           | 'No'                   | ''                             | ''                     |
+		| ''                                     | 'Receipt'     | '*'         | '14 500'               | 'Main Company'            | '$$PurchaseInvoice090323$$' | 'Ferron BP'                 | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'                     | 'Local currency'               | 'No'                   | ''                             | ''                     |
+		| ''                                     | 'Receipt'     | '*'         | '14 500'               | 'Main Company'            | '$$PurchaseInvoice090323$$' | 'Ferron BP'                 | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'                     | 'TRY'                          | 'No'                   | ''                             | ''                     |
+		| ''                                     | 'Receipt'     | '*'         | '14 500'               | 'Main Company'            | '$$PurchaseInvoice090323$$' | 'Ferron BP'                 | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'                     | 'en description is empty'      | 'No'                   | ''                             | ''                     |
+		| ''                                     | ''            | ''          | ''                     | ''                        | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| 'Register  "Order balance"'            | ''            | ''          | ''                     | ''                        | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'              | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | ''            | ''          | 'Quantity'             | 'Store'                   | 'Order'                     | 'Item key'                  | 'Row key'           | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Expense'     | '*'         | '20'                   | 'Store 02'                | '$$PurchaseOrder090323$$'   | 'M/White'                   | '*'                 | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Expense'     | '*'         | '20'                   | 'Store 02'                | '$$PurchaseOrder090323$$'   | 'L/Green'                   | '*'                 | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
+		| ''                                     | 'Expense'     | '*'         | '30'                   | 'Store 02'                | '$$PurchaseOrder090323$$'   | '36/Yellow'                 | '*'                 | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |	
 		And I close all client application windows

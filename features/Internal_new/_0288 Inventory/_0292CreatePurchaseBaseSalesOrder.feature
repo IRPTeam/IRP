@@ -824,59 +824,59 @@ Scenario: _029202 create Goods reciept based on Purchase order that based on Sal
 			| '$$NumberGoodsReceipt0292022$$'    |
 		And I click "Registrations report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$GoodsReceipt029202$$'                    | ''            | ''       | ''          | ''                    | ''                    | ''          | ''          | ''        | ''              |
-		| 'Document registrations records'        | ''            | ''       | ''          | ''                    | ''                    | ''          | ''          | ''        | ''              |
-		| 'Register  "Inventory balance"'         | ''            | ''       | ''          | ''                    | ''                    | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'          | ''                    | ''          | ''          | ''        | ''              |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Company'             | 'Item key'            | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Receipt'     | '*'      | '5'         | 'Main Company'        | '36/Yellow'           | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Main Company'        | 'XS/Blue'             | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Main Company'        | '38/Yellow'           | ''          | ''          | ''        | ''              |
-		| ''                                      | ''            | ''       | ''          | ''                    | ''                    | ''          | ''          | ''        | ''              |
-		| 'Register  "Goods in transit outgoing"' | ''            | ''       | ''          | ''                    | ''                    | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'          | ''                    | ''          | ''          | ''        | ''              |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'               | 'Shipment basis'      | 'Item key'  | 'Row key'   | ''        | ''              |
-		| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 02'            | '$$SalesOrder0292012$$'    | '36/Yellow' | '*'         | ''        | ''              |
-		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'            | '$$SalesOrder0292012$$'    | 'XS/Blue'   | '*'         | ''        | ''              |
-		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'            | '$$SalesOrder0292012$$'    | '38/Yellow' | '*'         | ''        | ''              |
-		| ''                                      | ''            | ''       | ''          | ''                    | ''                    | ''          | ''          | ''        | ''              |
-		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''                    | ''                    | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'          | ''                    | ''          | ''          | ''        | ''              |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'               | 'Receipt basis'       | 'Item key'  | 'Row key'   | ''        | ''              |
-		| ''                                      | 'Expense'     | '*'      | '5'         | 'Store 02'            | '$$PurchaseOrder0292012$$' | '36/Yellow' | '*'         | ''        | ''              |
-		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 02'            | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'         | ''        | ''              |
-		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 02'            | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'         | ''        | ''              |
-		| ''                                      | ''            | ''       | ''          | ''                    | ''                    | ''          | ''          | ''        | ''              |
-		| 'Register  "Stock reservation"'         | ''            | ''       | ''          | ''                    | ''                    | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'          | ''                    | ''          | ''          | ''        | ''              |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'               | 'Item key'            | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 02'            | '36/Yellow'           | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'            | 'XS/Blue'             | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'            | '38/Yellow'           | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Expense'     | '*'      | '5'         | 'Store 02'            | '36/Yellow'           | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 02'            | 'XS/Blue'             | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 02'            | '38/Yellow'           | ''          | ''          | ''        | ''              |
-		| ''                                      | ''            | ''       | ''          | ''                    | ''                    | ''          | ''          | ''        | ''              |
-		| 'Register  "Receipt orders"'            | ''            | ''       | ''          | ''                    | ''                    | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'          | ''                    | ''          | ''          | ''        | ''              |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Order'               | 'Goods receipt'       | 'Item key'  | 'Row key'   | ''        | ''              |
-		| ''                                      | 'Receipt'     | '*'      | '5'         | '$$PurchaseOrder0292012$$' | '$$GoodsReceipt029202$$'  | '36/Yellow' | '*'         | ''        | ''              |
-		| ''                                      | 'Receipt'     | '*'      | '10'        | '$$PurchaseOrder0292012$$' | '$$GoodsReceipt029202$$'  | 'XS/Blue'   | '*'         | ''        | ''              |
-		| ''                                      | 'Receipt'     | '*'      | '10'        | '$$PurchaseOrder0292012$$' | '$$GoodsReceipt029202$$'  | '38/Yellow' | '*'         | ''        | ''              |
-		| ''                                      | ''            | ''       | ''          | ''                    | ''                    | ''          | ''          | ''        | ''              |
-		| 'Register  "Goods receipt schedule"'    | ''            | ''       | ''          | ''                    | ''                    | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'          | ''                    | ''          | ''          | ''        | 'Attributes'    |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Company'             | 'Order'               | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
-		| ''                                      | 'Expense'     | '*'      | '5'         | 'Main Company'        | '$$PurchaseOrder0292012$$' | 'Store 02'  | '36/Yellow' | '*'       | '*'             |
-		| ''                                      | 'Expense'     | '*'      | '10'        | 'Main Company'        | '$$PurchaseOrder0292012$$' | 'Store 02'  | 'XS/Blue'   | '*'       | '*'             |
-		| ''                                      | 'Expense'     | '*'      | '10'        | 'Main Company'        | '$$PurchaseOrder0292012$$' | 'Store 02'  | '38/Yellow' | '*'       | '*'             |
-		| ''                                      | ''            | ''       | ''          | ''                    | ''                    | ''          | ''          | ''        | ''              |
-		| 'Register  "Stock balance"'             | ''            | ''       | ''          | ''                    | ''                    | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'          | ''                    | ''          | ''          | ''        | ''              |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'               | 'Item key'            | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 02'            | '36/Yellow'           | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'            | 'XS/Blue'             | ''          | ''          | ''        | ''              |
-		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'            | '38/Yellow'           | ''          | ''          | ''        | ''              |
+		| '$$GoodsReceipt029202$$'                | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+		| 'Document registrations records'        | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+		| 'Register  "Inventory balance"'         | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''          | ''        | ''              |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Company'                  | 'Item key'                 | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Receipt'     | '*'      | '5'         | 'Main Company'             | '36/Yellow'                | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Main Company'             | 'XS/Blue'                  | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Main Company'             | '38/Yellow'                | ''          | ''          | ''        | ''              |
+		| ''                                      | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+		| 'Register  "Goods in transit outgoing"' | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''          | ''        | ''              |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'                    | 'Shipment basis'           | 'Item key'  | 'Row key'   | ''        | ''              |
+		| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 02'                 | '$$SalesOrder0292012$$'    | '36/Yellow' | '*'         | ''        | ''              |
+		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'                 | '$$SalesOrder0292012$$'    | 'XS/Blue'   | '*'         | ''        | ''              |
+		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'                 | '$$SalesOrder0292012$$'    | '38/Yellow' | '*'         | ''        | ''              |
+		| ''                                      | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''          | ''        | ''              |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'                    | 'Receipt basis'            | 'Item key'  | 'Row key'   | ''        | ''              |
+		| ''                                      | 'Expense'     | '*'      | '5'         | 'Store 02'                 | '$$PurchaseOrder0292012$$' | '36/Yellow' | '*'         | ''        | ''              |
+		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 02'                 | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'         | ''        | ''              |
+		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 02'                 | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'         | ''        | ''              |
+		| ''                                      | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+		| 'Register  "Stock reservation"'         | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''          | ''        | ''              |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'                    | 'Item key'                 | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 02'                 | '36/Yellow'                | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'                 | 'XS/Blue'                  | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'                 | '38/Yellow'                | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Expense'     | '*'      | '5'         | 'Store 02'                 | '36/Yellow'                | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 02'                 | 'XS/Blue'                  | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 02'                 | '38/Yellow'                | ''          | ''          | ''        | ''              |
+		| ''                                      | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+		| 'Register  "Receipt orders"'            | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''          | ''        | ''              |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Order'                    | 'Goods receipt'            | 'Item key'  | 'Row key'   | ''        | ''              |
+		| ''                                      | 'Receipt'     | '*'      | '5'         | '$$PurchaseOrder0292012$$' | '$$GoodsReceipt029202$$'   | '36/Yellow' | '*'         | ''        | ''              |
+		| ''                                      | 'Receipt'     | '*'      | '10'        | '$$PurchaseOrder0292012$$' | '$$GoodsReceipt029202$$'   | 'XS/Blue'   | '*'         | ''        | ''              |
+		| ''                                      | 'Receipt'     | '*'      | '10'        | '$$PurchaseOrder0292012$$' | '$$GoodsReceipt029202$$'   | '38/Yellow' | '*'         | ''        | ''              |
+		| ''                                      | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+		| 'Register  "Goods receipt schedule"'    | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''          | ''        | 'Attributes'    |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Company'                  | 'Order'                    | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
+		| ''                                      | 'Expense'     | '*'      | '5'         | 'Main Company'             | '$$PurchaseOrder0292012$$' | 'Store 02'  | '36/Yellow' | '*'       | '*'             |
+		| ''                                      | 'Expense'     | '*'      | '10'        | 'Main Company'             | '$$PurchaseOrder0292012$$' | 'Store 02'  | 'XS/Blue'   | '*'       | '*'             |
+		| ''                                      | 'Expense'     | '*'      | '10'        | 'Main Company'             | '$$PurchaseOrder0292012$$' | 'Store 02'  | '38/Yellow' | '*'       | '*'             |
+		| ''                                      | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+		| 'Register  "Stock balance"'             | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''          | ''        | ''              |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'                    | 'Item key'                 | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 02'                 | '36/Yellow'                | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'                 | 'XS/Blue'                  | ''          | ''          | ''        | ''              |
+		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'                 | '38/Yellow'                | ''          | ''          | ''        | ''              |
 	And I close all client application windows
 
 Scenario: _029203 check movements if there is an additional line in the Purchase order that is not in the Sales order (Goods receipt before Purchase invoice)
@@ -924,72 +924,72 @@ Scenario: _029203 check movements if there is an additional line in the Purchase
 			| '$$NumberPurchaseOrder0292012$$'    |
 			And I click "Registrations report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| '$$PurchaseOrder0292012$$'                   | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
-			| 'Document registrations records'        | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
-			| 'Register  "Inventory balance"'         | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'                                   | ''                    | ''          | ''          | ''        | ''              |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Company'                                      | 'Item key'            | ''          | ''          | ''        | ''              |
-			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Main Company'                                 | 'XS/Blue'             | ''          | ''          | ''        | ''              |
-			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Main Company'                                 | '38/Yellow'           | ''          | ''          | ''        | ''              |
-			| ''                                      | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
-			| 'Register  "Order procurement"'         | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'                                   | ''                    | ''          | ''          | ''        | ''              |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Company'                                      | 'Order'               | 'Store'     | 'Item key'  | 'Row key' | ''              |
-			| ''                                      | 'Expense'     | '*'      | '5'         | 'Main Company'                                 | '$$SalesOrder029201$$'    | 'Store 01'  | 'XS/Blue'   | '*'       | ''              |
-			| ''                                      | 'Expense'     | '*'      | '5'         | 'Main Company'                                 | '$$SalesOrder0292012$$'    | 'Store 02'  | '36/Yellow' | '*'       | ''              |
-			| ''                                      | 'Expense'     | '*'      | '10'        | 'Main Company'                                 | '$$SalesOrder029201$$'    | 'Store 01'  | '38/Yellow' | '*'       | ''              |
-			| ''                                      | 'Expense'     | '*'      | '10'        | 'Main Company'                                 | '$$SalesOrder0292012$$'    | 'Store 02'  | 'XS/Blue'   | '*'       | ''              |
-			| ''                                      | 'Expense'     | '*'      | '10'        | 'Main Company'                                 | '$$SalesOrder0292012$$'    | 'Store 02'  | '38/Yellow' | '*'       | ''              |
-			| ''                                      | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
-			| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'                                   | ''                    | ''          | ''          | ''        | ''              |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'                                        | 'Receipt basis'       | 'Item key'  | 'Row key'   | ''        | ''              |
-			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 02'                                     | '$$PurchaseOrder0292012$$' | '36/Yellow' | '*'         | ''        | ''              |
-			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'                                     | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'         | ''        | ''              |
-			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'                                     | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'         | ''        | ''              |
-			| ''                                      | 'Receipt'     | '*'      | '50'        | 'Store 02'                                     | '$$PurchaseOrder0292012$$' | 'M/White'   | '*'         | ''        | ''              |
-			| ''                                      | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
-			| 'Register  "Stock reservation"'         | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'                                   | ''                    | ''          | ''          | ''        | ''              |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'                                        | 'Item key'            | ''          | ''          | ''        | ''              |
-			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 01'                                     | 'XS/Blue'             | ''          | ''          | ''        | ''              |
-			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 01'                                     | '38/Yellow'           | ''          | ''          | ''        | ''              |
-			| ''                                      | 'Expense'     | '*'      | '5'         | 'Store 01'                                     | 'XS/Blue'             | ''          | ''          | ''        | ''              |
-			| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 01'                                     | '38/Yellow'           | ''          | ''          | ''        | ''              |
-			| ''                                      | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
-			| 'Register  "Receipt orders"'            | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'                                   | ''                    | ''          | ''          | ''        | ''              |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Order'                                        | 'Goods receipt'       | 'Item key'  | 'Row key'   | ''        | ''              |
-			| ''                                      | 'Receipt'     | '*'      | '5'         | '$$PurchaseOrder0292012$$'                          | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'         | ''        | ''              |
-			| ''                                      | 'Receipt'     | '*'      | '10'        | '$$PurchaseOrder0292012$$'                          | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'         | ''        | ''              |
-			| ''                                      | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
-			| 'Register  "Goods receipt schedule"'    | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'                                   | ''                    | ''          | ''          | ''        | 'Attributes'    |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Company'                                      | 'Order'               | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
-			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Main Company'                                 | '$$PurchaseOrder0292012$$' | 'Store 01'  | 'XS/Blue'   | '*'       | '*'             |
-			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Main Company'                                 | '$$PurchaseOrder0292012$$' | 'Store 02'  | '36/Yellow' | '*'       | '*'             |
-			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Main Company'                                 | '$$PurchaseOrder0292012$$' | 'Store 01'  | '38/Yellow' | '*'       | '*'             |
-			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Main Company'                                 | '$$PurchaseOrder0292012$$' | 'Store 02'  | 'XS/Blue'   | '*'       | '*'             |
-			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Main Company'                                 | '$$PurchaseOrder0292012$$' | 'Store 02'  | '38/Yellow' | '*'       | '*'             |
-			| ''                                      | 'Receipt'     | '*'      | '50'        | 'Main Company'                                 | '$$PurchaseOrder0292012$$' | 'Store 02'  | 'M/White'   | '*'       | '*'             |
-			| ''                                      | 'Expense'     | '*'      | '5'         | 'Main Company'                                 | '$$PurchaseOrder0292012$$' | 'Store 01'  | 'XS/Blue'   | '*'       | '*'             |
-			| ''                                      | 'Expense'     | '*'      | '10'        | 'Main Company'                                 | '$$PurchaseOrder0292012$$' | 'Store 01'  | '38/Yellow' | '*'       | '*'             |
-			| ''                                      | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
-			| 'Register  "Order balance"'             | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'                                   | ''                    | ''          | ''          | ''        | ''              |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'                                        | 'Order'               | 'Item key'  | 'Row key'   | ''        | ''              |
-			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 01'                                     | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'         | ''        | ''              |
-			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 02'                                     | '$$PurchaseOrder0292012$$' | '36/Yellow' | '*'         | ''        | ''              |
-			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 01'                                     | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'         | ''        | ''              |
-			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'                                     | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'         | ''        | ''              |
-			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'                                     | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'         | ''        | ''              |
-			| ''                                      | 'Receipt'     | '*'      | '50'        | 'Store 02'                                     | '$$PurchaseOrder0292012$$' | 'M/White'   | '*'         | ''        | ''              |
-			| ''                                      | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
-			| 'Register  "Stock balance"'             | ''            | ''       | ''          | ''                                             | ''                    | ''          | ''          | ''        | ''              |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'                                   | ''                    | ''          | ''          | ''        | ''              |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'                                        | 'Item key'            | ''          | ''          | ''        | ''              |
-			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 01'                                     | 'XS/Blue'             | ''          | ''          | ''        | ''              |
-			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 01'                                     | '38/Yellow'           | ''          | ''          | ''        | ''              |
+			| '$$PurchaseOrder0292012$$'              | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+			| 'Document registrations records'        | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+			| 'Register  "Inventory balance"'         | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''          | ''        | ''              |
+			| ''                                      | ''            | ''       | 'Quantity'  | 'Company'                  | 'Item key'                 | ''          | ''          | ''        | ''              |
+			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Main Company'             | 'XS/Blue'                  | ''          | ''          | ''        | ''              |
+			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Main Company'             | '38/Yellow'                | ''          | ''          | ''        | ''              |
+			| ''                                      | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+			| 'Register  "Order procurement"'         | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''          | ''        | ''              |
+			| ''                                      | ''            | ''       | 'Quantity'  | 'Company'                  | 'Order'                    | 'Store'     | 'Item key'  | 'Row key' | ''              |
+			| ''                                      | 'Expense'     | '*'      | '5'         | 'Main Company'             | '$$SalesOrder029201$$'     | 'Store 01'  | 'XS/Blue'   | '*'       | ''              |
+			| ''                                      | 'Expense'     | '*'      | '5'         | 'Main Company'             | '$$SalesOrder0292012$$'    | 'Store 02'  | '36/Yellow' | '*'       | ''              |
+			| ''                                      | 'Expense'     | '*'      | '10'        | 'Main Company'             | '$$SalesOrder029201$$'     | 'Store 01'  | '38/Yellow' | '*'       | ''              |
+			| ''                                      | 'Expense'     | '*'      | '10'        | 'Main Company'             | '$$SalesOrder0292012$$'    | 'Store 02'  | 'XS/Blue'   | '*'       | ''              |
+			| ''                                      | 'Expense'     | '*'      | '10'        | 'Main Company'             | '$$SalesOrder0292012$$'    | 'Store 02'  | '38/Yellow' | '*'       | ''              |
+			| ''                                      | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+			| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''          | ''        | ''              |
+			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'                    | 'Receipt basis'            | 'Item key'  | 'Row key'   | ''        | ''              |
+			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 02'                 | '$$PurchaseOrder0292012$$' | '36/Yellow' | '*'         | ''        | ''              |
+			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'                 | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'         | ''        | ''              |
+			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'                 | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'         | ''        | ''              |
+			| ''                                      | 'Receipt'     | '*'      | '50'        | 'Store 02'                 | '$$PurchaseOrder0292012$$' | 'M/White'   | '*'         | ''        | ''              |
+			| ''                                      | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+			| 'Register  "Stock reservation"'         | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''          | ''        | ''              |
+			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'                    | 'Item key'                 | ''          | ''          | ''        | ''              |
+			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 01'                 | 'XS/Blue'                  | ''          | ''          | ''        | ''              |
+			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 01'                 | '38/Yellow'                | ''          | ''          | ''        | ''              |
+			| ''                                      | 'Expense'     | '*'      | '5'         | 'Store 01'                 | 'XS/Blue'                  | ''          | ''          | ''        | ''              |
+			| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 01'                 | '38/Yellow'                | ''          | ''          | ''        | ''              |
+			| ''                                      | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+			| 'Register  "Receipt orders"'            | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''          | ''        | ''              |
+			| ''                                      | ''            | ''       | 'Quantity'  | 'Order'                    | 'Goods receipt'            | 'Item key'  | 'Row key'   | ''        | ''              |
+			| ''                                      | 'Receipt'     | '*'      | '5'         | '$$PurchaseOrder0292012$$' | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'         | ''        | ''              |
+			| ''                                      | 'Receipt'     | '*'      | '10'        | '$$PurchaseOrder0292012$$' | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'         | ''        | ''              |
+			| ''                                      | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+			| 'Register  "Goods receipt schedule"'    | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''          | ''        | 'Attributes'    |
+			| ''                                      | ''            | ''       | 'Quantity'  | 'Company'                  | 'Order'                    | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
+			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Main Company'             | '$$PurchaseOrder0292012$$' | 'Store 01'  | 'XS/Blue'   | '*'       | '*'             |
+			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Main Company'             | '$$PurchaseOrder0292012$$' | 'Store 02'  | '36/Yellow' | '*'       | '*'             |
+			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Main Company'             | '$$PurchaseOrder0292012$$' | 'Store 01'  | '38/Yellow' | '*'       | '*'             |
+			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Main Company'             | '$$PurchaseOrder0292012$$' | 'Store 02'  | 'XS/Blue'   | '*'       | '*'             |
+			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Main Company'             | '$$PurchaseOrder0292012$$' | 'Store 02'  | '38/Yellow' | '*'       | '*'             |
+			| ''                                      | 'Receipt'     | '*'      | '50'        | 'Main Company'             | '$$PurchaseOrder0292012$$' | 'Store 02'  | 'M/White'   | '*'       | '*'             |
+			| ''                                      | 'Expense'     | '*'      | '5'         | 'Main Company'             | '$$PurchaseOrder0292012$$' | 'Store 01'  | 'XS/Blue'   | '*'       | '*'             |
+			| ''                                      | 'Expense'     | '*'      | '10'        | 'Main Company'             | '$$PurchaseOrder0292012$$' | 'Store 01'  | '38/Yellow' | '*'       | '*'             |
+			| ''                                      | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+			| 'Register  "Order balance"'             | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''          | ''        | ''              |
+			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'                    | 'Order'                    | 'Item key'  | 'Row key'   | ''        | ''              |
+			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 01'                 | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'         | ''        | ''              |
+			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 02'                 | '$$PurchaseOrder0292012$$' | '36/Yellow' | '*'         | ''        | ''              |
+			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 01'                 | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'         | ''        | ''              |
+			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'                 | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'         | ''        | ''              |
+			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'                 | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'         | ''        | ''              |
+			| ''                                      | 'Receipt'     | '*'      | '50'        | 'Store 02'                 | '$$PurchaseOrder0292012$$' | 'M/White'   | '*'         | ''        | ''              |
+			| ''                                      | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+			| 'Register  "Stock balance"'             | ''            | ''       | ''          | ''                         | ''                         | ''          | ''          | ''        | ''              |
+			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''          | ''        | ''              |
+			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'                    | 'Item key'                 | ''          | ''          | ''        | ''              |
+			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 01'                 | 'XS/Blue'                  | ''          | ''          | ''        | ''              |
+			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 01'                 | '38/Yellow'                | ''          | ''          | ''        | ''              |
 	* Create GoodsReceipt 457
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table

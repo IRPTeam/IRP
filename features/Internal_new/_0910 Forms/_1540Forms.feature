@@ -2210,7 +2210,7 @@ Scenario: _012009 check the move to Partner terms from the Partner card (shows a
 		And I close current window
 	
 
-Scenario: check the filter by Company and Legal name field when creating an Partner term
+Scenario: _012010 check the filter by Company and Legal name field when creating an Partner term
 	And I close all client application windows
 	* Open a creation form Partner term
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
@@ -2247,7 +2247,7 @@ Scenario: check the filter by Company and Legal name field when creating an Part
 		| 'Second Company Ferron BP' |
 		And I close all client application windows
 
-Scenario: filter check by Partner segment when creating an Partner term
+Scenario: _012011 filter check by Partner segment when creating an Partner term
 	And I close all client application windows
 	* Open a creation form Partner term
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
@@ -2266,7 +2266,7 @@ Scenario: filter check by Partner segment when creating an Partner term
 		And I close all client application windows
 	
 
-Scenario: inability to create your own company for Partner
+Scenario: _012012 inability to create your own company for Partner
 	And I close all client application windows
 	* Open Partner
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
@@ -2277,9 +2277,9 @@ Scenario: inability to create your own company for Partner
 		And In this window I click command interface button "Company"
 		And I click the button named "FormCreate"
 	* Check that OurCompany checkbox is not available
-		If "Our Company" attribute is not editable Then
+		And field "Our Company" is not present on the form
 
-Scenario: check the selection of the segment manager in the sales order
+Scenario: _012013 check the selection of the segment manager in the sales order
 	And I close all client application windows
 	* Open the Sales order creation form
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -2303,7 +2303,7 @@ Scenario: check the selection of the segment manager in the sales order
 
 
 
-Scenario: check row key when cloning a string in Sales order
+Scenario: _012014 check row key when cloning a string in Sales order
 	And I close all client application windows
 	* Filling in the details of the documentsales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -2350,7 +2350,7 @@ Scenario: check row key when cloning a string in Sales order
 		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
 		Then the number of "List" table lines is "меньше или равно" 1
 
-Scenario: check row key when cloning a string in Sales invoice
+Scenario: _012015 check row key when cloning a string in Sales invoice
 	And I close all client application windows
 	* Filling in the details of the document Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -2397,7 +2397,7 @@ Scenario: check row key when cloning a string in Sales invoice
 		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
 		Then the number of "List" table lines is "меньше или равно" 1
 
-Scenario: check row key when cloning a string in Purchase order
+Scenario: _012016 check row key when cloning a string in Purchase order
 	And I close all client application windows
 	* Filling in the details of the document Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -2457,7 +2457,7 @@ Scenario: check row key when cloning a string in Purchase order
 		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
 		Then the number of "List" table lines is "меньше или равно" 1
 
-Scenario: check row key when cloning a string in Shipment confirmation
+Scenario: _012017 check row key when cloning a string in Shipment confirmation
 	And I close all client application windows
 	* Filling in the details of the document Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
@@ -2522,7 +2522,7 @@ Scenario: check row key when cloning a string in Shipment confirmation
 
 
 
-Scenario: check filling in procurement method using the button Fill in SO
+Scenario: _012018 check filling in procurement method using the button Fill in SO
 	And I close all client application windows
 	* Open a creation form Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -2689,7 +2689,7 @@ Scenario: check filling in procurement method using the button Fill in SO
 		And I close all client application windows
 
 
-Scenario: check filling in partner and customer/vendor sign when creating Partner term from partner card
+Scenario: _012019 check filling in partner and customer/vendor sign when creating Partner term from partner card
 	And I close all client application windows
 	* Opening a customer partner card
 		Given I open hyperlink "e1cib/list/Catalog.Partners"

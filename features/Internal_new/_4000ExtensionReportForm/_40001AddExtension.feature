@@ -29,7 +29,7 @@ Scenario: _4000100 preparation
 		When Create information register Barcodes records
 
 
-Scenario: _4000100 add extension
+Scenario: _4000101 add extension
 	Given I open hyperlink "e1cib/list/Catalog.Extensions"
 	And I click the button named "FormCreate"
 	And I select external file "#workingDir#\DataProcessor\TestExtension.cfe"

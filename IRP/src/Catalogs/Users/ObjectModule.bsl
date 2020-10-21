@@ -44,6 +44,15 @@ Procedure BeforeWrite(Cancel)
 			
 	User.Write();
 	
+	If IsBlankString(LocalizationCode) Then
+		LocalizationCode = Metadata.DefaultLanguage.LanguageCode;
+	EndIf;
+	
+	If IsBlankString(InterfaceLocalizationCode) Then
+		InterfaceLocalizationCode = Metadata.DefaultLanguage.LanguageCode;
+	EndIf;
+	
+	
 	InfobaseUserID = User.UUID;
 EndProcedure
 

@@ -139,19 +139,18 @@ Scenario: _150001 basic price entry by properties (including VAT)
 		And I select current line in "List" table
 		And I input "415,00" text in "Price" field of "PriceKeyList" table
 		And I finish line editing in "PriceKeyList" table
-		And I input "0" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		Then "Price list (create) *" window is opened
-		And I input "107" text in "Number" field
-		And I input begin of the current month date in "Date" field
+		And I click the button named "FormPost"
+		And I delete "$$PriceListBasicPriceByProperties150001$$" variable
+		And I delete "$$NumberPriceListBasicPriceByProperties150001$$" variable
+		And I save the window as "$$PriceListBasicPriceByProperties150001$$"
+		And I save the value of the field named "Number" as "$$NumberPriceListBasicPriceByProperties150001$$"
 		And I click the button named "FormPostAndClose"
 		And Delay 5
 	* Check document saving
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And "List" table contains lines
-		| 'Number'                                       | 'Price list type'    | 'Price type'        | 'Description' |
-		| '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Price by item keys' | 'Basic Price Types' | 'Basic price' |
+		| 'Number'                                          | 'Price list type'     | 'Price type'        | 'Description' |
+		| '$$NumberPriceListBasicPriceByProperties150001$$' | 'Price by properties' | 'Basic Price Types' | 'Basic price' |
 		And I close all client application windows
 	* Create Price key for Dress
 		Given I open hyperlink "e1cib/list/Catalog.PriceKeys"
@@ -181,11 +180,6 @@ Scenario: _150002 basic price entry by items (including VAT)
 			| 'Description' |
 			| 'Basic Price Types'  |
 		And I select current line in "List" table
-		And I input "0" text in "Number" field
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		Then "Price list (create) *" window is opened
-		And I input "110" text in "Number" field
 		And I input begin of the current month date in "Date" field
 	And I move to "Item keys" tab
 	And I click the button named "ItemListAdd"
@@ -233,6 +227,11 @@ Scenario: _150002 basic price entry by items (including VAT)
 	And I move to the next attribute
 	And I input "400,00" text in "Price" field of "ItemList" table
 	And I finish line editing in "ItemList" table
+	And I click the button named "FormPost"
+	And I delete "$$PriceListBasicPriceByItems150002$$" variable
+	And I delete "$$NumberPriceListBasicPriceByItems150002$$" variable
+	And I save the window as "$$PriceListBasicPriceByItems150002$$"
+	And I save the value of the field named "Number" as "$$NumberPriceListBasicPriceByItems150002$$"
 	And I click the button named "FormPostAndClose"
 	And Delay 10
 

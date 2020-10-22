@@ -117,8 +117,8 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 		And I go to line in "List" table
 				| 'Number' |
 				| '$$NumberSalesInvoice024016$$'|
-    	And I select current line in "List" table
-    	And I move to "Aging" tab
+		And I select current line in "List" table
+		And I move to "Aging" tab
 		And "PaymentTerms" table contains lines
 			| 'Calculation type'     | 'Date'       | 'Due period, days' | 'Proportion of payment' | 'Amount' |
 			| 'Post-shipment credit' | '*'          | '14'               | '100,00'                | '554,66' |
@@ -154,6 +154,6 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 		
 			
 
-    	
-    			
+		
+				
 	

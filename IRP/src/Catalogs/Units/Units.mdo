@@ -80,7 +80,8 @@
     <type>
       <types>Number</types>
       <numberQualifiers>
-        <precision>5</precision>
+        <precision>15</precision>
+        <scale>5</scale>
         <nonNegative>true</nonNegative>
       </numberQualifiers>
     </type>
@@ -88,9 +89,6 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:NumberValue">
-      <value>1</value>
-    </fillValue>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -204,6 +202,11 @@
       <key>en</key>
       <value>Choice form</value>
     </synonym>
+    <help>
+      <pages>
+        <lang>en</lang>
+      </pages>
+    </help>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>

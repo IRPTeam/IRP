@@ -1,7 +1,7 @@
 
 Function GetLockFields(Data) Export
 	Result = New Structure();
-	Result.Insert("RegisterName", "AccumulationRegister.Aging");
+	Result.Insert("RegisterName", "AccumulationRegister.PurchaseReturnTurnovers");
 	Result.Insert("LockInfo", New Structure("Data, Fields", 
 	Data, PostingServer.GetLockFieldsMap(GetLockFieldNames())));
 	Return Result;

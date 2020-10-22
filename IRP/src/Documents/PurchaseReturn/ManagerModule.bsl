@@ -483,9 +483,10 @@ EndFunction
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	// Advance from customers
 	Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance =
-		AccumulationRegisters.AdvanceFromCustomers.GetTableAdvanceFromCustomers_OffsetOfAdvance(Parameters.Object.RegisterRecords
-			, Parameters.PointInTime
-			, Parameters.DocumentDataTables.ItemList_AdvanceFromCustomers_Lock);
+		AccumulationRegisters.AdvanceFromCustomers.GetTableAdvanceFromCustomers_OffsetOfAdvance(
+		Parameters.Object.RegisterRecords,
+		Parameters.PointInTime,
+		Parameters.DocumentDataTables.AdvanceFromCustomers_Lock);
 			
 	If Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance.Count() Then
     	Query = New Query();

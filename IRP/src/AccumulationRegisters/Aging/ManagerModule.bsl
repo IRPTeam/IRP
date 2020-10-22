@@ -100,7 +100,13 @@ Function GetTableAging_Expense_OnSalesInvoice(PartnerArTransactions_OffsetOfAdva
 	Return QueryTable;
 EndFunction
 
-Function GetTableAging_Expense_OnMoneyReceipt(PointInTime, PartnerArTransactions, PartnerArTransactions_OffsetOfAdvance) Export
+Function GetTableAging_Expense_OnMoneyReceipt(PointInTime, PartnerArTransactions, PartnerArTransactions_OffsetOfAdvance = Undefined) Export
+	
+	If PartnerArTransactions_OffsetOfAdvance = Undefined Then
+		AccReg = Metadata.AccumulationRegisters;
+		PartnerArTransactions_OffsetOfAdvance = PostingServer.CreateTable(AccReg.PartnerArTransactions);
+	EndIf;
+	
 	Query = New Query();
 	Query.Text = 
 	"SELECT

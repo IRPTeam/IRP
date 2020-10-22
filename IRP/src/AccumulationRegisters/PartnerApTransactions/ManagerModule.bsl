@@ -1,12 +1,18 @@
+
 Function GetLockFields(Data) Export
 	Result = New Structure();
 	Result.Insert("RegisterName", "AccumulationRegister.PartnerApTransactions");
-	Fields = New Map();
-	Fields.Insert("Company", "Company");
-	Fields.Insert("Partner", "Partner");
-	Fields.Insert("LegalName", "LegalName");
-	Fields.Insert("Agreement", "Agreement");
-	Fields.Insert("Currency", "Currency");
-	Result.Insert("LockInfo", New Structure("Data, Fields", Data, Fields));
+	Result.Insert("LockInfo", New Structure("Data, Fields", 
+	Data, PostingServer.GetLockFieldsMap(GetLockFieldNames())));
 	Return Result;
+EndFunction
+
+Function GetLockFieldNames() Export
+	Return "Company, Partner, LegalName, Agreement, Currency";
+EndFunction
+
+Function GetTablePartnerApTransactions_OffsetOfAdvance(RegisterRecords, PointInTime, AdvanceToSuppliers, PartnerApTransactions) Export
+	RegisterRecords.PartnerApTransactions.Clear();
+	RegisterRecords.PartnerApTransactions.Write();
+	Return PostingServer.GetTable_OffsetOfAdvance_OnAdvance(PointInTime, AdvanceToSuppliers, PartnerApTransactions, "PaymentDocument");
 EndFunction

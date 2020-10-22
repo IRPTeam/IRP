@@ -4,15 +4,16 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("PartnerApTransactions", PostingServer.CreateTable(AccReg.PartnerApTransactions));
-	Tables.Insert("AccountBalance_Expense", PostingServer.CreateTable(AccReg.AccountBalance));
-	Tables.Insert("PlaningCashTransactions", PostingServer.CreateTable(AccReg.PlaningCashTransactions));
-	Tables.Insert("CashInTransit", PostingServer.CreateTable(AccReg.CashInTransit));
-	Tables.Insert("AdvanceToSuppliers", PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
-	Tables.Insert("ReconciliationStatement", PostingServer.CreateTable(AccReg.ReconciliationStatement));
-	Tables.Insert("AccountBalance_Receipt", PostingServer.CreateTable(AccReg.AccountBalance));
-	Tables.Insert("ExpensesTurnovers", PostingServer.CreateTable(AccReg.ExpensesTurnovers));
-	Tables.Insert("AccountBalance_Commission", PostingServer.CreateTable(AccReg.AccountBalance));
+	Tables.Insert("PartnerApTransactions"                 , PostingServer.CreateTable(AccReg.PartnerApTransactions));
+	Tables.Insert("AccountBalance_Expense"                , PostingServer.CreateTable(AccReg.AccountBalance));
+	Tables.Insert("PlaningCashTransactions"               , PostingServer.CreateTable(AccReg.PlaningCashTransactions));
+	Tables.Insert("CashInTransit"                         , PostingServer.CreateTable(AccReg.CashInTransit));
+	Tables.Insert("AdvanceToSuppliers"                    , PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
+	Tables.Insert("ReconciliationStatement"               , PostingServer.CreateTable(AccReg.ReconciliationStatement));
+	Tables.Insert("AccountBalance_Receipt"                , PostingServer.CreateTable(AccReg.AccountBalance));
+	Tables.Insert("ExpensesTurnovers"                     , PostingServer.CreateTable(AccReg.ExpensesTurnovers));
+	Tables.Insert("AccountBalance_Commission"             , PostingServer.CreateTable(AccReg.AccountBalance));
+	Tables.Insert("PartnerApTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.PartnerApTransactions));
 	
 	QueryPaymentList = New Query();
 	QueryPaymentList.Text = GetQueryTextBankPaymentPaymentList();
@@ -337,17 +338,35 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;	
+	// Advance to suppliers
+	Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance =
+	AccumulationRegisters.PartnerApTransactions.GetTablePartnerApTransactions_OffsetOfAdvance(
+		Parameters.Object.RegisterRecords,
+		Parameters.PointInTime,
+		Parameters.DocumentDataTables.AdvanceToSuppliers,
+		Parameters.DocumentDataTables.PartnerApTransactions);
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
 	
 	// PartnerApTransactions
+	ArrayOfTables = New Array();
+	Table1 = Parameters.DocumentDataTables.PartnerApTransactions.Copy();
+	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
+	ArrayOfTables.Add(Table1);
+	
+	Table2 = Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance.Copy();
+	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
+	ArrayOfTables.Add(Table2);
+	
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PartnerApTransactions,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.PartnerApTransactions));
+		New Structure("RecordSet, WriteInTransaction",
+			PostingServer.JoinTables(ArrayOfTables,
+			"RecordType, Period, Company, BasisDocument, Partner, LegalName, Agreement, Currency, Amount"),
+			Parameters.IsReposting));
 	
 	// AccountsStatement
 	ArrayOfTables = New Array();
@@ -355,7 +374,8 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table1.Columns.Amount.Name = "TransactionAP";
 	PostingServer.AddColumnsToAccountsStatementTable(Table1);
 	For Each Row In Parameters.DocumentDataTables.PartnerApTransactions Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Vendor Then
+		If Row.Agreement.Type = Enums.AgreementTypes.Vendor 
+			Or (Row.Agreement.Kind = Enums.AgreementKinds.Standard And Row.Partner.Vendor) Then
 			NewRow = Table1.Add();
 			FillPropertyValues(NewRow, Row);
 			NewRow.TransactionAP = Row.Amount;
@@ -381,7 +401,8 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table3.Columns.Amount.Name = "TransactionAR";
 	PostingServer.AddColumnsToAccountsStatementTable(Table3);
 	For Each Row In Parameters.DocumentDataTables.PartnerApTransactions Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
+		If Row.Agreement.Type = Enums.AgreementTypes.Customer 
+			Or (Row.Agreement.Kind = Enums.AgreementKinds.Standard And Row.Partner.Customer) Then
 			NewRow = Table3.Add();
 			FillPropertyValues(NewRow, Row);
 			NewRow.TransactionAR = - Row.Amount;
@@ -402,6 +423,33 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	EndDo;
 	Table4.FillValues(AccumulationRecordType.Receipt, "RecordType");
 	ArrayOfTables.Add(Table4);
+	
+	Table5 = Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance.CopyColumns();
+	Table5.Columns.Amount.Name = "AdvanceToSuppliers";
+	PostingServer.AddColumnsToAccountsStatementTable(Table5);
+	For Each Row In Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance Do
+		If Row.Partner.Vendor Then
+			NewRow = Table5.Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.AdvanceToSuppliers = Row.Amount;
+		EndIf;
+	EndDo;
+	Table5.FillValues(AccumulationRecordType.Expense, "RecordType");
+	ArrayOfTables.Add(Table5);
+	
+	Table6 = Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance.CopyColumns();
+	Table6.Columns.Amount.Name = "TransactionAP";
+	PostingServer.AddColumnsToAccountsStatementTable(Table6);
+	For Each Row In Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance Do
+		If Row.Agreement.Type = Enums.AgreementTypes.Vendor 
+			Or (Row.Agreement.Kind = Enums.AgreementKinds.Standard And Row.Partner.Vendor) Then
+			NewRow = Table6.Add(); 
+			FillPropertyValues(NewRow, Row);
+			NewRow.TransactionAP = Row.Amount;
+		EndIf;
+	EndDo;
+	Table6.FillValues(AccumulationRecordType.Expense, "RecordType");
+	ArrayOfTables.Add(Table6);
 	
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountsStatement,
 		New Structure("RecordSet, WriteInTransaction",
@@ -445,10 +493,22 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			Parameters.DocumentDataTables.CashInTransit));
 	
 	// AdvanceToSuppliers
+	ArrayOfTables = New Array();
+	Table1 = Parameters.DocumentDataTables.AdvanceToSuppliers.Copy();
+	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table1.FillValues(AccumulationRecordType.Receipt, "RecordType");
+	ArrayOfTables.Add(Table1);
+	
+	Table2 = Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance.Copy();
+	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
+	ArrayOfTables.Add(Table2);
+	
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AdvanceToSuppliers,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.AdvanceToSuppliers));
+		New Structure("RecordSet, WriteInTransaction",
+			PostingServer.JoinTables(ArrayOfTables,
+			"RecordType, Period, Company, Partner, LegalName, Currency, PaymentDocument, Amount"),
+			Parameters.IsReposting));
 	
 	// ReconciliationStatement
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ReconciliationStatement,

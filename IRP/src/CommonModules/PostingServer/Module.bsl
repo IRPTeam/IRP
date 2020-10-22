@@ -369,9 +369,9 @@ EndFunction
 Function GetTable_OffsetOfAdvance_OnTransaction(PointInTime, QueryTableParameter, DocumentName) Export
 	Query = New Query();
 	If DocumentName = "PaymentDocument" Then
-		Query.Text = GetQueryTextAdvanceToSuppliers();
+		Query.Text = GetQueryText_OffsetOfAdvanceToSuppliers_OnTransaction();
 	ElsIf DocumentName = "ReceiptDocument" Then
-		Query.Text = GetQueryText_OffsetOffAdvanceFromCustomers_OnTransaction();
+		Query.Text = GetQueryText_OffsetOfAdvanceFromCustomers_OnTransaction();
 	Else
 		Return New ValueTable();
 	EndIf;
@@ -422,20 +422,20 @@ Function GetTable_OffsetOfAdvance_OnTransaction(PointInTime, QueryTableParameter
 	Return QueryTable_OffsetOfAdvance;
 EndFunction
 
-Function GetTable_OffsetOfAdvance_OnAdvance(PointInTime, AdvanceFromCustomers, PartnerArTransactions, DocumentName) Export
+Function GetTable_OffsetOfAdvance_OnAdvance(PointInTime, TableOfAdvances, TableOfTransactions, DocumentName) Export
 	Query = New Query();
 	If DocumentName = "PaymentDocument" Then
-		Query.Text = GetQueryTextAdvanceToSuppliers();
+		Query.Text = GetQueryText_OffsetOfAdvanceToSuppliers_OnAdvance();
 	ElsIf DocumentName = "ReceiptDocument" Then
-		Query.Text = GetQueryText_OffsetOffAdvanceFromCustomers_OnAdvance();
+		Query.Text = GetQueryText_OffsetOfAdvanceFromCustomers_OnAdvance();
 	Else
 		Return New ValueTable();
 	EndIf;
 	
-	AdvanceFromCustomers.GroupBy("Period, Company, Partner, LegalName, Currency, ReceiptDocument", "Amount"); 
+	TableOfAdvances.GroupBy("Period, Company, Partner, LegalName, Currency, " + DocumentName, "Amount"); 
 	
 	Query.SetParameter("Period"      , PointInTime);
-	Query.SetParameter("QueryTable"  , AdvanceFromCustomers);
+	Query.SetParameter("QueryTable"  , TableOfAdvances);
 	
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
@@ -446,7 +446,7 @@ Function GetTable_OffsetOfAdvance_OnAdvance(PointInTime, AdvanceFromCustomers, P
 		|LegalName,
 		|Currency,
 		|Basisdocument";
-	For Each Row In PartnerArTransactions Do
+	For Each Row In TableOfTransactions Do
 		Filter = New Structure(FilterByColumns);
 		FillPropertyValues(Filter, Row);
 		ArrayOfRows = QueryTable.FindRows(Filter);
@@ -467,7 +467,7 @@ Function GetTable_OffsetOfAdvance_OnAdvance(PointInTime, AdvanceFromCustomers, P
 	|	QueryTable.Partner,
 	|	QueryTable.LegalName,
 	|	QueryTable.Currency,
-	|	QueryTable.ReceiptDocument,
+	|	QueryTable." + DocumentName + ",
 	|	QueryTable.DocumentAmount,
 	|	QueryTable.BasisDocument,
 	|	QueryTable.Agreement,
@@ -485,7 +485,7 @@ Function GetTable_OffsetOfAdvance_OnAdvance(PointInTime, AdvanceFromCustomers, P
 	|	tmp.Partner,
 	|	tmp.LegalName,
 	|	tmp.Currency,
-	|	tmp.ReceiptDocument,
+	|	tmp." + DocumentName + ",
 	|	tmp.DocumentAmount,
 	|	tmp.BasisDocument,
 	|	tmp.Agreement,
@@ -526,7 +526,7 @@ Function GetTable_OffsetOfAdvance_OnAdvance(PointInTime, AdvanceFromCustomers, P
 		|Partner,
 		|LegalName,
 		|Currency,
-		|ReceiptDocument,
+		|" + DocumentName + ",
 		|DocumentAmount,
 		|BasisDocument,
 		|Agreement,
@@ -564,7 +564,7 @@ Function GetTable_OffsetOfAdvance_OnAdvance(PointInTime, AdvanceFromCustomers, P
 		|LegalName, 
 		|Currency, 
 		|DocumentAmount, 
-		|ReceiptDocument, 
+		|" + DocumentName + ", 
 		|Amount"; 
 	QueryTable_Grupped.GroupBy(FilterByColumns);
 	For Each Row In QueryTable_Grupped Do
@@ -599,103 +599,66 @@ Function GetTable_OffsetOfAdvance_OnAdvance(PointInTime, AdvanceFromCustomers, P
 	Return QueryTable_OffsetOfAdvance;
 EndFunction
 
-Function GetQueryTextAdvanceToSuppliers()
+Function GetQueryText_OffsetOfAdvanceToSuppliers_OnAdvance()
 	Return
 	"SELECT
-	|	QueryTable.Period,
-	|	QueryTable.Company,
-	|	QueryTable.Partner,
-	|	QueryTable.LegalName,
-	|	QueryTable.Currency,
-	|	QueryTable.DocumentAmount,
-	|	QueryTable.BasisDocument,
-	|	QueryTable.Agreement
-	|INTO tmp
+	|	AdvanceToSuppliers.Period,
+	|	AdvanceToSuppliers.Company,
+	|	AdvanceToSuppliers.Partner,
+	|	AdvanceToSuppliers.LegalName,
+	|	AdvanceToSuppliers.Currency,
+	|	AdvanceToSuppliers.Amount AS DocumentAmount,
+	|	AdvanceToSuppliers.PaymentDocument
+	|INTO AdvanceToSuppliers
 	|FROM
-	|	&QueryTable AS QueryTable
+	|	&QueryTable AS AdvanceToSuppliers
 	|;
+	|
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	tmp2.Period,
-	|	tmp2.Company,
-	|	tmp2.Partner,
-	|	tmp2.LegalName,
-	|	tmp2.Currency,
-	|	ISNULL(PartnerApTransactions.AmountBalance, 0) + tmp2.DocumentAmount AS DocumentAmount,
-	|	tmp2.BasisDocument,
-	|	tmp2.Agreement,
-	|	PartnerApTransactions.AmountBalance AS AP_Balance
-	|INTO tmp2
-	|FROM
-	|	tmp AS tmp2
-	|		LEFT JOIN AccumulationRegister.PartnerApTransactions.Balance(&Period, (Company, BasisDocument, Partner, LegalName,
-	|			Agreement, Currency, CurrencyMovementType) IN
-	|			(SELECT
-	|				tmp.Company,
-	|				tmp.BasisDocument,
-	|				tmp.Partner,
-	|				tmp.LegalName,
-	|				tmp.Agreement,
-	|				tmp.Currency,
-	|				VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|			FROM
-	|				tmp AS tmp)) AS PartnerApTransactions
-	|		ON PartnerApTransactions.Company = tmp2.Company
-	|		AND PartnerApTransactions.BasisDocument = tmp2.BasisDocument
-	|		AND PartnerApTransactions.Partner = tmp2.Partner
-	|		AND PartnerApTransactions.LegalName = tmp2.LegalName
-	|		AND PartnerApTransactions.Agreement = tmp2.Agreement
-	|		AND PartnerApTransactions.Currency = tmp2.Currency
-	|		AND
-	|			PartnerApTransactions.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmp2.Period AS Period,
-	|	tmp2.Company AS Company,
-	|	tmp2.Partner AS Partner,
-	|	tmp2.LegalName AS LegalName,
-	|	tmp2.Currency AS Currency,
-	|	AdvanceToSuppliersBalance.PaymentDocument AS PaymentDocument,
-	|	SUM(tmp2.DocumentAmount) AS DocumentAmount,
-	|	tmp2.BasisDocument AS BasisDocument,
-	|	tmp2.Agreement AS Agreement,
-	|	SUM(AdvanceToSuppliersBalance.AmountBalance) AS AmountBalance,
+	|	AdvanceToSuppliers.Period,
+	|	AdvanceToSuppliers.Company,
+	|	AdvanceToSuppliers.Partner,
+	|	AdvanceToSuppliers.LegalName,
+	|	AdvanceToSuppliers.Currency,
+	|	AdvanceToSuppliers.PaymentDocument,
+	|	SUM(AdvanceToSuppliers.DocumentAmount) AS DocumentAmount,
+	|	PartnerApTransactionsBalance.BasisDocument,
+	|	PartnerApTransactionsBalance.Agreement,
+	|	SUM(PartnerApTransactionsBalance.AmountBalance) AS AmountBalance,
 	|	0 AS Amount
 	|FROM
-	|	AccumulationRegister.AdvanceToSuppliers.Balance(&Period, (Company, Partner, LegalName, Currency,
+	|	AccumulationRegister.PartnerApTransactions.Balance(&Period, (Company, Partner, LegalName, Currency,
 	|		CurrencyMovementType) IN
 	|		(SELECT
-	|			tmp.Company,
-	|			tmp.Partner,
-	|			tmp.LegalName,
-	|			tmp.Currency,
+	|			AdvanceToSuppliers.Company,
+	|			AdvanceToSuppliers.Partner,
+	|			AdvanceToSuppliers.LegalName,
+	|			AdvanceToSuppliers.Currency,
 	|			VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|		FROM
-	|			tmp AS tmp)) AS AdvanceToSuppliersBalance
-	|		LEFT JOIN tmp2 AS tmp2
-	|		ON AdvanceToSuppliersBalance.Company = tmp2.Company
-	|		AND AdvanceToSuppliersBalance.Partner = tmp2.Partner
-	|		AND AdvanceToSuppliersBalance.LegalName = tmp2.LegalName
-	|		AND AdvanceToSuppliersBalance.Currency = tmp2.Currency
-	|		AND
-	|			AdvanceToSuppliersBalance.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|			AdvanceToSuppliers AS AdvanceToSuppliers)) AS PartnerApTransactionsBalance
+	|		INNER JOIN AdvanceToSuppliers AS AdvanceToSuppliers
+	|		ON AdvanceToSuppliers.Company = PartnerApTransactionsBalance.Company
+	|		AND AdvanceToSuppliers.Partner = PartnerApTransactionsBalance.Partner
+	|		AND AdvanceToSuppliers.LegalName = PartnerApTransactionsBalance.LegalName
+	|		AND AdvanceToSuppliers.Currency = PartnerApTransactionsBalance.Currency
 	|GROUP BY
-	|	tmp2.Period,
-	|	tmp2.Company,
-	|	tmp2.Partner,
-	|	tmp2.LegalName,
-	|	tmp2.Currency,
-	|	tmp2.BasisDocument,
-	|	tmp2.Agreement,
-	|	AdvanceToSuppliersBalance.PaymentDocument
+	|	AdvanceToSuppliers.Period,
+	|	AdvanceToSuppliers.Company,
+	|	AdvanceToSuppliers.Partner,
+	|	AdvanceToSuppliers.LegalName,
+	|	AdvanceToSuppliers.Currency,
+	|	AdvanceToSuppliers.PaymentDocument,
+	|	PartnerApTransactionsBalance.BasisDocument,
+	|	PartnerApTransactionsBalance.Agreement
 	|ORDER BY
-	|	AdvanceToSuppliersBalance.PaymentDocument.Date";
+	|	AdvanceToSuppliers.Period,
+	|	PartnerApTransactionsBalance.BasisDocument.Date";
 EndFunction
 
-Function GetQueryText_OffsetOffAdvanceFromCustomers_OnAdvance()
+Function GetQueryText_OffsetOfAdvanceFromCustomers_OnAdvance()
 	Return
 	"SELECT
 	|	AdvanceFromCustomers.Period,
@@ -754,7 +717,68 @@ Function GetQueryText_OffsetOffAdvanceFromCustomers_OnAdvance()
 	|	PartnerArTransactionsBalance.BasisDocument.Date";
 EndFunction
 
-Function GetQueryText_OffsetOffAdvanceFromCustomers_OnTransaction()
+Function GetQueryText_OffsetOfAdvanceToSuppliers_OnTransaction()
+	Return
+	"SELECT
+	|	TransactionsAP.Period,
+	|	TransactionsAP.Company,
+	|	TransactionsAP.Partner,
+	|	TransactionsAP.LegalName,
+	|	TransactionsAP.Currency,
+	|	TransactionsAP.DocumentAmount,
+	|	TransactionsAP.BasisDocument,
+	|	TransactionsAP.Agreement
+	|INTO TransactionsAP
+	|FROM
+	|	&QueryTable AS TransactionsAP
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TransactionsAP.Period,
+	|	TransactionsAP.Company,
+	|	TransactionsAP.Partner,
+	|	TransactionsAP.LegalName,
+	|	TransactionsAP.Currency,
+	|	AdvanceToSuppliersBalance.PaymentDocument,
+	|	SUM(TransactionsAP.DocumentAmount) AS DocumentAmount,
+	|	TransactionsAP.BasisDocument,
+	|	TransactionsAP.Agreement,
+	|	SUM(AdvanceToSuppliersBalance.AmountBalance) AS AmountBalance,
+	|	0 AS Amount
+	|FROM
+	|	AccumulationRegister.AdvanceToSuppliers.Balance(&Period, (Company, Partner, LegalName, Currency,
+	|		CurrencyMovementType) IN
+	|		(SELECT
+	|			TransactionsAP.Company,
+	|			TransactionsAP.Partner,
+	|			TransactionsAP.LegalName,
+	|			TransactionsAP.Currency,
+	|			VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|		FROM
+	|			TransactionsAP AS TransactionsAP)) AS AdvanceToSuppliersBalance
+	|		LEFT JOIN TransactionsAP AS TransactionsAP
+	|		ON AdvanceToSuppliersBalance.Company = TransactionsAP.Company
+	|		AND AdvanceToSuppliersBalance.Partner = TransactionsAP.Partner
+	|		AND AdvanceToSuppliersBalance.LegalName = TransactionsAP.LegalName
+	|		AND AdvanceToSuppliersBalance.Currency = TransactionsAP.Currency
+	|		AND
+	|			AdvanceToSuppliersBalance.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|GROUP BY
+	|	TransactionsAP.Period,
+	|	TransactionsAP.Company,
+	|	TransactionsAP.Partner,
+	|	TransactionsAP.LegalName,
+	|	TransactionsAP.Currency,
+	|	TransactionsAP.BasisDocument,
+	|	TransactionsAP.Agreement,
+	|	AdvanceToSuppliersBalance.PaymentDocument
+	|ORDER BY
+	|	AdvanceToSuppliersBalance.PaymentDocument.Date,
+	|	TransactionsAP.Period";
+EndFunction
+
+Function GetQueryText_OffsetOfAdvanceFromCustomers_OnTransaction()
 	Return
 	"SELECT
 	|	TransactionsAR.Period,

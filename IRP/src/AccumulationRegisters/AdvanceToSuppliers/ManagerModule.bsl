@@ -10,7 +10,7 @@ Function GetLockFields(Data) Export
 	Return Result;
 EndFunction
 
-Function GetTableExpenceAdvance(RegisterRecords, PointInTime, QueryTable) Export
+Function GetTableAdvanceToSuppliers_OffsetOfAdvance(RegisterRecords, PointInTime, QueryTable) Export
 	RegisterRecords.AdvanceToSuppliers.Clear();
 	RegisterRecords.AdvanceToSuppliers.Write();
 	Return PostingServer.GetTable_OffsetOfAdvance_OnTransaction(PointInTime, QueryTable, "PaymentDocument");

@@ -520,7 +520,7 @@ Compress-Archive -Path AllSteps\* -DestinationPath %env.Database1CName%_%build.n
       </dependency>
       <dependency id="ARTIFACT_DEPENDENCY_10" sourceBuildTypeId="Reports_Build" cleanDestination="false">
         <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" />
-        <artifact sourcePath="Reports.cfe" />
+        <artifact sourcePath="Reports.cfe=&gt;DataProcessor/Reports.cfe" />
       </dependency>
     </artifact-dependencies>
     <dependencies>

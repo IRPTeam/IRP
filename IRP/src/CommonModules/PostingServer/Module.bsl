@@ -366,24 +366,23 @@ Function CreateTable(RegisterMetadata) Export
 	Return Table;
 EndFunction
 
-Function GetTableExpenceAdvance(PointInTime, QueryTableParameter, DocumentName) Export
-	
+Function GetTable_OffsetOfAdvance_OnTransaction(PointInTime, QueryTableParameter, DocumentName) Export
 	Query = New Query();
 	If DocumentName = "PaymentDocument" Then
 		Query.Text = GetQueryTextAdvanceToSuppliers();
 	ElsIf DocumentName = "ReceiptDocument" Then
-		Query.Text = GetQueryTextAdvanceFromCustomers();
+		Query.Text = GetQueryText_OffsetOffAdvanceFromCustomers_OnTransaction();
 	Else
 		Return New ValueTable();
 	EndIf;
 		
-	Query.SetParameter("Period", PointInTime);
-	Query.SetParameter("QueryTable", QueryTableParameter);
+	Query.SetParameter("Period"              , PointInTime);
+	Query.SetParameter("QueryTable"          , QueryTableParameter);
 	
 	QueryResult = Query.Execute();	
 	QueryTable = QueryResult.Unload();
 	
-	QueryTable_Registrations = QueryTable.CopyColumns();
+	QueryTable_OffsetOfAdvance = QueryTable.CopyColumns();
 	
 	QueryTable_Grupped = QueryTable.Copy();
 	
@@ -410,7 +409,7 @@ Function GetTableExpenceAdvance(PointInTime, QueryTableParameter, DocumentName) 
 			NeedWriteOff = NeedWriteOff - CanWriteOff;
 			ItemOfArray.AmountBalance = ItemOfArray.AmountBalance - CanWriteOff;
 			
-			NewRow = QueryTable_Registrations.Add();
+			NewRow = QueryTable_OffsetOfAdvance.Add();
 			FillPropertyValues(NewRow, Row);
 			
 			NewRow[DocumentName] = ItemOfArray[DocumentName];
@@ -420,7 +419,184 @@ Function GetTableExpenceAdvance(PointInTime, QueryTableParameter, DocumentName) 
 			EndIf;
 		EndDo;
 	EndDo;
-	Return QueryTable_Registrations;
+	Return QueryTable_OffsetOfAdvance;
+EndFunction
+
+Function GetTable_OffsetOfAdvance_OnAdvance(PointInTime, AdvanceFromCustomers, PartnerArTransactions, DocumentName) Export
+	Query = New Query();
+	If DocumentName = "PaymentDocument" Then
+		Query.Text = GetQueryTextAdvanceToSuppliers();
+	ElsIf DocumentName = "ReceiptDocument" Then
+		Query.Text = GetQueryText_OffsetOffAdvanceFromCustomers_OnAdvance();
+	Else
+		Return New ValueTable();
+	EndIf;
+	
+	AdvanceFromCustomers.GroupBy("Period, Company, Partner, LegalName, Currency, ReceiptDocument", "Amount"); 
+	
+	Query.SetParameter("Period"      , PointInTime);
+	Query.SetParameter("QueryTable"  , AdvanceFromCustomers);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	FilterByColumns = "Company,
+		|Partner,
+		|Agreement,
+		|LegalName,
+		|Currency,
+		|Basisdocument";
+	For Each Row In PartnerArTransactions Do
+		Filter = New Structure(FilterByColumns);
+		FillPropertyValues(Filter, Row);
+		ArrayOfRows = QueryTable.FindRows(Filter);
+		For Each ItemOfArray In ArrayOfRows Do
+			If ItemOfArray.AmountBalance < Row.Amount Then
+				ItemOfArray.AmountBalance = 0;
+			Else
+				ItemOfArray.AmountBalance = ItemOfArray.AmountBalance - Row.Amount;
+			EndIf;
+		EndDo;
+	EndDo;
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	QueryTable.Period,
+	|	QueryTable.Company,
+	|	QueryTable.Partner,
+	|	QueryTable.LegalName,
+	|	QueryTable.Currency,
+	|	QueryTable.ReceiptDocument,
+	|	QueryTable.DocumentAmount,
+	|	QueryTable.BasisDocument,
+	|	QueryTable.Agreement,
+	|	QueryTable.AmountBalance,
+	|	QueryTable.Amount
+	|INTO tmp
+	|FROM
+	|	&QueryTable AS QueryTable
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp.Period,
+	|	tmp.Company,
+	|	tmp.Partner,
+	|	tmp.LegalName,
+	|	tmp.Currency,
+	|	tmp.ReceiptDocument,
+	|	tmp.DocumentAmount,
+	|	tmp.BasisDocument,
+	|	tmp.Agreement,
+	|	tmp.AmountBalance AS AmountBalance,
+	|	ISNULL(AgingBalance.AmountBalance,0) AS AgingAmountBalance,
+	|	CASE
+	|		WHEN tmp.BasisDocument.Date IS NULL
+	|			THEN DATETIME(1, 1, 1)
+	|		ELSE ISNULL(AgingBalance.PaymentDate, tmp.BasisDocument.Date)
+	|	END AS PriorityDate,
+	|	tmp.Amount
+	|FROM
+	|	tmp AS tmp
+	|		LEFT JOIN AccumulationRegister.Aging.Balance(&Period, (Company, Partner, Agreement, Invoice, Currency) IN
+	|			(SELECT
+	|				tmp.Company,
+	|				tmp.Partner,
+	|				tmp.Agreement,
+	|				tmp.BasisDocument,
+	|				tmp.Currency
+	|			FROM
+	|				tmp AS tmp)) AS AgingBalance
+	|		ON tmp.Company = AgingBalance.Company
+	|		AND tmp.Partner = AgingBalance.Partner
+	|		AND tmp.Agreement = AgingBalance.Agreement
+	|		AND tmp.BasisDocument = AgingBalance.Invoice
+	|		AND tmp.Currency = tmp.Currency
+	|ORDER BY
+	|	PriorityDate";
+	Query.SetParameter("Period"      , PointInTime);
+	Query.SetParameter("QueryTable"  , QueryTable);
+	
+	QueryResult = Query.Execute();
+	QueryTable_Aging = QueryResult.Unload();
+	
+	FilterByColumns = "Period,
+		|Company,
+		|Partner,
+		|LegalName,
+		|Currency,
+		|ReceiptDocument,
+		|DocumentAmount,
+		|BasisDocument,
+		|Agreement,
+		|AmountBalance,
+		|Amount";
+	
+	For Each Row In QueryTable Do
+		NeedWriteOff = Row.AmountBalance;
+		If NeedWriteOff = 0 Then
+			Continue;
+		EndIf;
+		Filter = New Structure(FilterByColumns);
+		FillPropertyValues(Filter, Row);
+		ArrayOfRows = QueryTable_Aging.FindRows(Filter);
+		For Each ItemOfArray In ArrayOfRows Do
+			If Not ItemOfArray.AgingAmountBalance > 0 Then
+				Continue;
+			EndIf;
+			CanWriteOff = Min(ItemOfArray.AgingAmountBalance, NeedWriteOff);
+			NeedWriteOff = NeedWriteOff - CanWriteOff;
+			ItemOfArray.AgingAmountBalance = ItemOfArray.AgingAmountBalance - CanWriteOff;
+			ItemOfArray.AmountBalance = CanWriteOff;
+			If NeedWriteOff = 0 Then
+				Break;
+			EndIf;
+		EndDo;
+	EndDo;
+	
+	QueryTable_OffsetOfAdvance = QueryTable_Aging.CopyColumns();
+	QueryTable_Grupped = QueryTable_Aging.Copy();
+	
+	FilterByColumns = "Period, 
+		|Company,
+		|Partner, 
+		|LegalName, 
+		|Currency, 
+		|DocumentAmount, 
+		|ReceiptDocument, 
+		|Amount"; 
+	QueryTable_Grupped.GroupBy(FilterByColumns);
+	For Each Row In QueryTable_Grupped Do
+		NeedWriteOff = Row.DocumentAmount;
+		If NeedWriteOff = 0 Then
+			Continue;
+		EndIf;
+		Filter = New Structure(FilterByColumns);
+		FillPropertyValues(Filter, Row);
+		ArrayOfRows = QueryTable_Aging.FindRows(Filter);
+		
+		For Each ItemOfArray In ArrayOfRows Do
+			If Not ItemOfArray.AmountBalance > 0 Then
+				Continue;
+			EndIf;
+			CanWriteOff = Min(ItemOfArray.AmountBalance, NeedWriteOff);
+			NeedWriteOff = NeedWriteOff - CanWriteOff;
+			ItemOfArray.AmountBalance = ItemOfArray.AmountBalance - CanWriteOff;
+			
+			NewRow = QueryTable_OffsetOfAdvance.Add();
+			FillPropertyValues(NewRow, Row);
+			
+			NewRow[DocumentName] = ItemOfArray[DocumentName];
+			NewRow.Amount        = CanWriteOff;
+			NewRow.Agreement     = ItemOfArray.Agreement;
+			NewRow.BasisDocument = ItemOfArray.BasisDocument;
+			If NeedWriteOff = 0 Then
+				Break;
+			EndIf;
+		EndDo;
+	EndDo;
+	Return QueryTable_OffsetOfAdvance;
 EndFunction
 
 Function GetQueryTextAdvanceToSuppliers()
@@ -519,100 +695,124 @@ Function GetQueryTextAdvanceToSuppliers()
 	|	AdvanceToSuppliersBalance.PaymentDocument.Date";
 EndFunction
 
-Function GetQueryTextAdvanceFromCustomers()
+Function GetQueryText_OffsetOffAdvanceFromCustomers_OnAdvance()
 	Return
 	"SELECT
-	|	QueryTable.Period,
-	|	QueryTable.Company,
-	|	QueryTable.Partner,
-	|	QueryTable.LegalName,
-	|	QueryTable.Currency,
-	|	QueryTable.DocumentAmount,
-	|	QueryTable.BasisDocument,
-	|	QueryTable.Agreement
-	|INTO tmp
+	|	AdvanceFromCustomers.Period,
+	|	AdvanceFromCustomers.Company,
+	|	AdvanceFromCustomers.Partner,
+	|	AdvanceFromCustomers.LegalName,
+	|	AdvanceFromCustomers.Currency,
+	|	AdvanceFromCustomers.Amount AS DocumentAmount,
+	|	AdvanceFromCustomers.ReceiptDocument
+	|INTO AdvanceFromCustomers
 	|FROM
-	|	&QueryTable AS QueryTable
+	|	&QueryTable AS AdvanceFromCustomers
+	|;
+	|
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	AdvanceFromCustomers.Period,
+	|	AdvanceFromCustomers.Company,
+	|	AdvanceFromCustomers.Partner,
+	|	AdvanceFromCustomers.LegalName,
+	|	AdvanceFromCustomers.Currency,
+	|	AdvanceFromCustomers.ReceiptDocument,
+	|	SUM(AdvanceFromCustomers.DocumentAmount) AS DocumentAmount,
+	|	PartnerArTransactionsBalance.BasisDocument,
+	|	PartnerArTransactionsBalance.Agreement,
+	|	SUM(PartnerArTransactionsBalance.AmountBalance) AS AmountBalance,
+	|	0 AS Amount
+	|FROM
+	|	AccumulationRegister.PartnerArTransactions.Balance(&Period, (Company, Partner, LegalName, Currency,
+	|		CurrencyMovementType) IN
+	|		(SELECT
+	|			AdvanceFromCustomers.Company,
+	|			AdvanceFromCustomers.Partner,
+	|			AdvanceFromCustomers.LegalName,
+	|			AdvanceFromCustomers.Currency,
+	|			VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|		FROM
+	|			AdvanceFromCustomers AS AdvanceFromCustomers)) AS PartnerArTransactionsBalance
+	|		INNER JOIN AdvanceFromCustomers AS AdvanceFromCustomers
+	|		ON AdvanceFromCustomers.Company = PartnerArTransactionsBalance.Company
+	|		AND AdvanceFromCustomers.Partner = PartnerArTransactionsBalance.Partner
+	|		AND AdvanceFromCustomers.LegalName = PartnerArTransactionsBalance.LegalName
+	|		AND AdvanceFromCustomers.Currency = PartnerArTransactionsBalance.Currency
+	|GROUP BY
+	|	AdvanceFromCustomers.Period,
+	|	AdvanceFromCustomers.Company,
+	|	AdvanceFromCustomers.Partner,
+	|	AdvanceFromCustomers.LegalName,
+	|	AdvanceFromCustomers.Currency,
+	|	AdvanceFromCustomers.ReceiptDocument,
+	|	PartnerArTransactionsBalance.BasisDocument,
+	|	PartnerArTransactionsBalance.Agreement
+	|ORDER BY
+	|	AdvanceFromCustomers.Period,
+	|	PartnerArTransactionsBalance.BasisDocument.Date";
+EndFunction
+
+Function GetQueryText_OffsetOffAdvanceFromCustomers_OnTransaction()
+	Return
+	"SELECT
+	|	TransactionsAR.Period,
+	|	TransactionsAR.Company,
+	|	TransactionsAR.Partner,
+	|	TransactionsAR.LegalName,
+	|	TransactionsAR.Currency,
+	|	TransactionsAR.DocumentAmount,
+	|	TransactionsAR.BasisDocument,
+	|	TransactionsAR.Agreement
+	|INTO TransactionsAR
+	|FROM
+	|	&QueryTable AS TransactionsAR
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	tmp2.Period,
-	|	tmp2.Company,
-	|	tmp2.Partner,
-	|	tmp2.LegalName,
-	|	tmp2.Currency,
-	|	ISNULL(PartnerArTransactions.AmountBalance, 0) + tmp2.DocumentAmount AS DocumentAmount,
-	|	tmp2.BasisDocument,
-	|	tmp2.Agreement,
-	|	PartnerArTransactions.AmountBalance AS AR_Balance
-	|INTO tmp2
-	|FROM
-	|	tmp AS tmp2
-	|		LEFT JOIN AccumulationRegister.PartnerArTransactions.Balance(&Period, (Company, BasisDocument, Partner, LegalName,
-	|			Agreement, Currency, CurrencyMovementType) IN
-	|			(SELECT
-	|				tmp.Company,
-	|				tmp.BasisDocument,
-	|				tmp.Partner,
-	|				tmp.LegalName,
-	|				tmp.Agreement,
-	|				tmp.Currency,
-	|				VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|			FROM
-	|				tmp AS tmp)) AS PartnerArTransactions
-	|		ON PartnerArTransactions.Company = tmp2.Company
-	|		AND PartnerArTransactions.BasisDocument = tmp2.BasisDocument
-	|		AND PartnerArTransactions.Partner = tmp2.Partner
-	|		AND PartnerArTransactions.LegalName = tmp2.LegalName
-	|		AND PartnerArTransactions.Agreement = tmp2.Agreement
-	|		AND PartnerArTransactions.Currency = tmp2.Currency
-	|		AND
-	|			PartnerArTransactions.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmp2.Period AS Period,
-	|	tmp2.Company AS Company,
-	|	tmp2.Partner AS Partner,
-	|	tmp2.LegalName AS LegalName,
-	|	tmp2.Currency AS Currency,
-	|	AdvanceFromCustomersBalance.ReceiptDocument AS ReceiptDocument,
-	|	SUM(tmp2.DocumentAmount) AS DocumentAmount,
-	|	tmp2.BasisDocument AS BasisDocument,
-	|	tmp2.Agreement AS Agreement,
+	|	TransactionsAR.Period,
+	|	TransactionsAR.Company,
+	|	TransactionsAR.Partner,
+	|	TransactionsAR.LegalName,
+	|	TransactionsAR.Currency,
+	|	AdvanceFromCustomersBalance.ReceiptDocument,
+	|	SUM(TransactionsAR.DocumentAmount) AS DocumentAmount,
+	|	TransactionsAR.BasisDocument,
+	|	TransactionsAR.Agreement,
 	|	SUM(AdvanceFromCustomersBalance.AmountBalance) AS AmountBalance,
 	|	0 AS Amount
 	|FROM
 	|	AccumulationRegister.AdvanceFromCustomers.Balance(&Period, (Company, Partner, LegalName, Currency,
 	|		CurrencyMovementType) IN
 	|		(SELECT
-	|			tmp.Company,
-	|			tmp.Partner,
-	|			tmp.LegalName,
-	|			tmp.Currency,
+	|			TransactionsAR.Company,
+	|			TransactionsAR.Partner,
+	|			TransactionsAR.LegalName,
+	|			TransactionsAR.Currency,
 	|			VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|		FROM
-	|			tmp AS tmp)) AS AdvanceFromCustomersBalance
-	|		LEFT JOIN tmp2 AS tmp2
-	|		ON AdvanceFromCustomersBalance.Company = tmp2.Company
-	|		AND AdvanceFromCustomersBalance.Partner = tmp2.Partner
-	|		AND AdvanceFromCustomersBalance.LegalName = tmp2.LegalName
-	|		AND AdvanceFromCustomersBalance.Currency = tmp2.Currency
+	|			TransactionsAR AS TransactionsAR)) AS AdvanceFromCustomersBalance
+	|		LEFT JOIN TransactionsAR AS TransactionsAR
+	|		ON AdvanceFromCustomersBalance.Company = TransactionsAR.Company
+	|		AND AdvanceFromCustomersBalance.Partner = TransactionsAR.Partner
+	|		AND AdvanceFromCustomersBalance.LegalName = TransactionsAR.LegalName
+	|		AND AdvanceFromCustomersBalance.Currency = TransactionsAR.Currency
 	|		AND
 	|			AdvanceFromCustomersBalance.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|GROUP BY
-	|	tmp2.Period,
-	|	tmp2.Company,
-	|	tmp2.Partner,
-	|	tmp2.LegalName,
-	|	tmp2.Currency,
-	|	tmp2.BasisDocument,
-	|	tmp2.Agreement,
+	|	TransactionsAR.Period,
+	|	TransactionsAR.Company,
+	|	TransactionsAR.Partner,
+	|	TransactionsAR.LegalName,
+	|	TransactionsAR.Currency,
+	|	TransactionsAR.BasisDocument,
+	|	TransactionsAR.Agreement,
 	|	AdvanceFromCustomersBalance.ReceiptDocument
 	|ORDER BY
-	|	AdvanceFromCustomersBalance.ReceiptDocument.Date";
+	|	AdvanceFromCustomersBalance.ReceiptDocument.Date,
+	|	TransactionsAR.Period";
 EndFunction
 
 Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) Export

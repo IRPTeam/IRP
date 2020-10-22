@@ -512,7 +512,7 @@ EndFunction
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	// Advance from customers
 	Parameters.DocumentDataTables.ItemList_AdvanceFromCustomers_Registrations =
-		AccumulationRegisters.AdvanceFromCustomers.GetTableExpenceAdvance(Parameters.Object.RegisterRecords
+		AccumulationRegisters.AdvanceFromCustomers.GetTableAdvanceFromCustomers_OffsetOfAdvance(Parameters.Object.RegisterRecords
 			, Parameters.PointInTime
 			, Parameters.DocumentDataTables.ItemList_AdvanceFromCustomers_Lock);
 			

@@ -443,7 +443,8 @@ WHERE
 			THEN Table.Item = &amp;Item
 			OR Table.Ref = &amp;Unit
 		ELSE Table.Item.Ref IS NULL
-	END</queryText>
+	END OR
+	Table.Item = Value(Catalog.Items.EmptyRef)</queryText>
       <mainTable>Catalog.Units</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

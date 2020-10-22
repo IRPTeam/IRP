@@ -887,3 +887,31 @@ Scenario: Open object form "Hardware"
 	If the warning is displayed then
 		Then I raise "Failed to open catalog form Hardware" exception
 	And I close current window
+
+Scenario: Open list form "Data base status" 
+	And I close all client application windows
+	Given I open "DataBaseStatus" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form DataBaseStatus" exception
+	And I close current window
+
+Scenario: Open object form "DataBaseStatus"
+	And I close all client application windows
+	Given I open "DataBaseStatus" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form DataBaseStatus" exception
+	And I close current window
+
+Scenario: Open list form "Data mapping items" 
+	And I close all client application windows
+	Given I open "DataMappingItems" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form DataMappingItems" exception
+	And I close current window
+
+Scenario: Open object form "DataMappingItems"
+	And I close all client application windows
+	Given I open "DataMappingItems" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form DataMappingItems" exception
+	And I close current window

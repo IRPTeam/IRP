@@ -15,10 +15,11 @@ For shipment of products from store
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 
 Scenario: _028800 preparation (Shipment confirmation)
-	* Constants
-		When set True value to the constant
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects

@@ -8,10 +8,11 @@ Feature: check specification filling
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	
 Scenario: _206000 preparation (specification)
-	* Constants
-		When set True value to the constant
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)

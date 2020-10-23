@@ -8,12 +8,13 @@ Feature: create Inventory transfer order based on several Internal supply reques
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 
 
 	
 Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipment confirmation)
-	* Constants
-		When set True value to the constant
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)

@@ -7,7 +7,10 @@ Feature: checking a bunch of additional details in the item type for the item ke
 
 
 Background:
-    Given I launch TestClient opening script or connect the existing one
+	Given I launch TestClient opening script or connect the existing one
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 
 
 Scenario: _350000 preparation for check a bunch of additional details in item type and their display in the set for item key / price key

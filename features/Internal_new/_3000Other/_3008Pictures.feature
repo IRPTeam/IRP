@@ -9,7 +9,10 @@ As a Developer
 I want to create an image subsystem
 
 Background:
-    Given I launch TestClient opening script or connect the existing one
+	Given I launch TestClient opening script or connect the existing one
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 
 Scenario: _300100 preparation (image setting)
     * Load info

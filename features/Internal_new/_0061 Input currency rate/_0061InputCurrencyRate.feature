@@ -18,12 +18,6 @@ Background:
 
 
 Scenario: _006100 preparation (filling in currency rates)
-	When Create catalog Currencies objects
-	Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
-	If "List" table does not contain line Then
-		| "Description" |
-		| "Forex Seling" |
-		When create setting to download the course (Forex Seling)
 	* Add Pluginsessor ExternalBankUa
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		And I click the button named "FormCreate"
@@ -54,6 +48,12 @@ Scenario: _006100 preparation (filling in currency rates)
 		And I click "Save and close" button
 		And I wait "Plugins (create)" window closing in 10 seconds
 		Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalTCMBGovTr"
+	When Create catalog Currencies objects
+	Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
+	If "List" table does not contain line Then
+		| "Description" |
+		| "Forex Seling" |
+		When create setting to download the course (Forex Seling)
 
 
 Scenario: _006101 filling in exchange rates in registers

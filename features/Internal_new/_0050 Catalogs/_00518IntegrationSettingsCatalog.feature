@@ -19,6 +19,21 @@ Background:
 
 
 Scenario: _005012 filling in the "Integration settings" catalog
+	* Preparation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		And I click the button named "FormCreate"
+		And I select external file "#workingDir#\DataProcessor\bank_gov_ua.epf"
+		And I click the button named "FormAddExtDataProc"
+		And I input "" text in "Path to plugin for test" field
+		And I input "ExternalBankUa" text in "Name" field
+		And I click Open button of the field named "Description_en"
+		And I input "ExternalBankUa" text in the field named "Description_en"
+		And I input "ExternalBankUa" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I set checkbox "Unsafe mode"
+		And I click "Save and close" button
+		And I wait "Plugins (create)" window closing in 10 seconds
+		Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalBankUa"
 	* Create setting with integration type local file storage
 		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
 		And I click the button named "FormCreate"

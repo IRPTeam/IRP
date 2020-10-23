@@ -10,6 +10,9 @@ Feature: check required fields
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	
 Scenario: _0202301 check of the sign of required filling at the additional attribute and check for filling
 	* Opening of additional details settings

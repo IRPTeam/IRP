@@ -9,14 +9,15 @@ Feature: creation mechanism based on for purchase documents
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 
 # Internal supply request - Purchase order - Purchase invoice - Goods reciept - Bank payment/Cash payment
 # A direct delivery scheme first an invoice, then an order
 
 
 Scenario: _090300 preparation (creation mechanism based on for purchase documents)
-	* Constants
-		When set True value to the constant
 	* Load info
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create information register Barcodes records

@@ -425,17 +425,25 @@
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
-	Table.Ref,
-	Table.DeletionMark,
-	Table.Item,
-	Table.Quantity,
-	Table.BasisUnit,
+	Table.Ref AS Ref,
+	Table.DeletionMark AS DeletionMark,
+	Table.Item AS Item,
+	Table.Quantity AS Quantity,
+	Table.BasisUnit AS BasisUnit,
+	Table.Predefined AS Predefined,
+	Table.PredefinedDataName AS PredefinedDataName,
 	Table.Description_en AS Description,
-	Table.Predefined,
-	Table.PredefinedDataName,
 	Table.Code
 FROM
-	Catalog.Units AS Table</queryText>
+	Catalog.Units AS Table
+WHERE
+	CASE
+		WHEN &amp;Filter
+			THEN Table.Item = &amp;Item
+			OR Table.Ref = &amp;Unit
+		ELSE Table.Item.Ref IS NULL
+	END OR
+	Table.Item = Value(Catalog.Items.EmptyRef)</queryText>
       <mainTable>Catalog.Units</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

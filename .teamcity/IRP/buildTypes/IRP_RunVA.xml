@@ -86,8 +86,7 @@ rem coverage-cli start --infobase %env.Database1CName%  --debugger http://localh
           <param name="jetbrains_powershell_errorToError" value="true" />
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code"><![CDATA[$TagArray = @("Discount", "Forms", "Inventory", "Catalogs", "FillingDocuments", "Filters", "Other", "Purchase", "RetailDocuments", "Barcodes", "CreationBasedMulti", "Sales", "Price", "CashManagement", "PhysicalInventory", "SerialLotNumber", "OpeningEntries", "InventoryTransfer", "LinkedTransaction", "BasicFormsCheck",  "DocumentVerification", "Services", "StandartAgreement", "TaxCalculation", "BankCashDocuments", "PrintForm", "CurrencyRate", "LoadInfo")
-
+          <param name="jetbrains_powershell_script_code"><![CDATA[$TagArray = @("Discount", "Forms", "Inventory", "Catalogs", "FillingDocuments", "Filters", "Other", "Purchase", "RetailDocuments", "Barcodes", "CreationBasedMulti", "Sales", "Price", "CashManagement", "PhysicalInventory", "SerialLotNumber", "OpeningEntries", "InventoryTransfer", "LinkedTransaction", "BasicFormsCheck",  "DocumentVerification", "Services", "StandartAgreement", "AccessRights", "TaxCalculation", "BankCashDocuments", "ExtensionReportForm", "PrintForm", "CurrencyRate", "LoadInfo")
 If ("%env.RunAllTest%" -eq "true") {
     Write-Output "One time start full test"
 }
@@ -274,7 +273,7 @@ $VanessaRun = {
     If (Test-Path $ScriptLogFilePath) {
         $loopBlock = {
             Param($ScriptLogFilePath) 
-            #Get-Content $ScriptLogFilePath -Wait -Tail 0 -Encoding UTF8
+            Get-Content $ScriptLogFilePath -Wait -Tail 0 -Encoding UTF8
         }
         $TailLoopJob = start-job -scriptBlock $loopBlock -ArgumentList $ScriptLogFilePath
         try {
@@ -518,6 +517,10 @@ Compress-Archive -Path AllSteps\* -DestinationPath %env.Database1CName%_%build.n
       <dependency id="ARTIFACT_DEPENDENCY_6" sourceBuildTypeId="IRP_RunVA" cleanDestination="false">
         <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" branch="+:develop" />
         <artifact sourcePath="allure-report.zip!/history=&gt;allure-history" />
+      </dependency>
+      <dependency id="ARTIFACT_DEPENDENCY_10" sourceBuildTypeId="Reports_Build" cleanDestination="false">
+        <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" />
+        <artifact sourcePath="Reports.cfe=&gt;DataProcessor/Reports.cfe" />
       </dependency>
     </artifact-dependencies>
     <dependencies>

@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:FormGroup">
+    <name>Group1</name>
+    <id>106</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+      <common>true</common>
+    </userVisible>
+    <extendedTooltip>
+      <name>Group1ExtendedTooltip</name>
+      <id>107</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <type>CommandBar</type>
+    <extInfo xsi:type="form:CommandBarExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+      <commandSource>Item.Result</commandSource>
+    </extInfo>
+  </items>
+  <items xsi:type="form:FormGroup">
     <name>GroupTitle</name>
     <id>30</id>
     <items xsi:type="form:FormGroup">

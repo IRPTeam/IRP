@@ -1,14 +1,9 @@
+
 Function GetLockFields(Data) Export
 	Result = New Structure();
-	Result.Insert("RegisterName", "AccumulationRegister.ExpensesTurnovers");	
-	
-	Fields = New Map();
-	ArrayOfFieldNames = StrSplit(GetLockFieldNames(), ",");
-	For Each ItemFieldName In ArrayOfFieldNames Do
-		Fields.Insert(TrimAll(ItemFieldName), TrimAll(ItemFieldName));
-	EndDo;
-	
-	Result.Insert("LockInfo", New Structure("Data, Fields", Data, Fields));
+	Result.Insert("RegisterName", "AccumulationRegister.ExpensesTurnovers");
+	Result.Insert("LockInfo", New Structure("Data, Fields", 
+	Data, PostingServer.GetLockFieldsMap(GetLockFieldNames())));
 	Return Result;
 EndFunction
 

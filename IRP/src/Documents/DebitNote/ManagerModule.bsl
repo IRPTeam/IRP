@@ -1,44 +1,43 @@
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("PartnerApTransactions", New ValueTable());
-	Tables.Insert("PartnerArTransactions", New ValueTable());
-	Tables.Insert("RevenuesTurnovers", New ValueTable());
-	Tables.Insert("ReconciliationStatement_Receipt", New ValueTable());
+	Tables.Insert("PartnerApTransactions"   , PostingServer.CreateTable(AccReg.PartnerApTransactions));
+	Tables.Insert("PartnerArTransactions"   , PostingServer.CreateTable(AccReg.PartnerArTransactions));
+	Tables.Insert("RevenuesTurnovers"       , PostingServer.CreateTable(AccReg.RevenuesTurnovers));
+	Tables.Insert("ReconciliationStatement" , PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	
 	Query = New Query();
 	Query.Text =
 		"SELECT
-		|	Doc.Company AS Company,
-		|	Doc.Date AS Period,
-		|	QueryTable.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
-		|	QueryTable.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
-		|	QueryTable.AdditionalAnalytic AS AdditionalAnalytic,
-		|	QueryTable.Currency AS Currency,
-		|	QueryTable.BasisDocument AS BasisDocument,
-		|	QueryTable.BusinessUnit AS BusinessUnit,
-		|	QueryTable.RevenueType AS RevenueType,
+		|	Transactions.Ref.Company AS Company,
+		|	Transactions.Ref.Date AS Period,
+		|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
+		|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
+		|	Transactions.AdditionalAnalytic AS AdditionalAnalytic,
+		|	Transactions.Currency AS Currency,
+		|	Transactions.BasisDocument AS BasisDocument,
+		|	Transactions.BusinessUnit AS BusinessUnit,
+		|	Transactions.RevenueType AS RevenueType,
 		|	CASE
-		|		WHEN QueryTable.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-		|		AND QueryTable.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-		|			THEN QueryTable.Agreement.StandardAgreement
-		|		ELSE QueryTable.Agreement
+		|		WHEN Transactions.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+		|		AND Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+		|			THEN Transactions.Agreement.StandardAgreement
+		|		ELSE Transactions.Agreement
 		|	END AS Agreement,
-		|	QueryTable.Partner AS Partner,
-		|	QueryTable.LegalName AS LegalName,
-		|	QueryTable.Amount AS Amount,
-		|	QueryTable.Key AS Key
+		|	Transactions.Partner AS Partner,
+		|	Transactions.LegalName AS LegalName,
+		|	Transactions.Amount AS Amount,
+		|	Transactions.Key AS Key
 		|INTO tmp
 		|FROM
-		|	Document.DebitNote.Transactions AS QueryTable
-		|		LEFT JOIN Document.DebitNote AS Doc
-		|		ON Doc.Ref = &Ref
+		|	Document.DebitNote.Transactions AS Transactions
 		|WHERE
-		|	QueryTable.Ref = &Ref
+		|	Transactions.Ref = &Ref
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[1]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -46,7 +45,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.LegalName AS LegalName,
 		|	tmp.Agreement AS Agreement,
 		|	tmp.Currency AS Currency,
-		|	-SUM(tmp.Amount) AS Amount,
+		|	-tmp.Amount AS Amount,
 		|	tmp.Period AS Period,
 		|	tmp.Key AS Key,
 		|	tmp.IsVendor,
@@ -55,20 +54,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp AS tmp
 		|WHERE
 		|	tmp.IsVendor
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Partner,
-		|	tmp.LegalName,
-		|	tmp.Agreement,
-		|	tmp.Currency,
-		|	tmp.Period,
-		|	tmp.BasisDocument,
-		|	tmp.Key,
-		|	tmp.IsVendor,
-		|	tmp.IsCustomer
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[2]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -76,7 +64,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.LegalName AS LegalName,
 		|	tmp.Agreement AS Agreement,
 		|	tmp.Currency AS Currency,
-		|	SUM(tmp.Amount) AS Amount,
+		|	tmp.Amount AS Amount,
 		|	tmp.Period AS Period,
 		|	tmp.Key AS Key,
 		|	tmp.IsVendor,
@@ -85,20 +73,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp AS tmp
 		|WHERE
 		|	tmp.IsCustomer
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Partner,
-		|	tmp.LegalName,
-		|	tmp.Agreement,
-		|	tmp.Currency,
-		|	tmp.Period,
-		|	tmp.BasisDocument,
-		|	tmp.Key,
-		|	tmp.IsVendor,
-		|	tmp.IsCustomer
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[3]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BusinessUnit AS BusinessUnit,
@@ -106,23 +83,14 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	VALUE(Catalog.ItemKeys.EmptyRef) AS ItemKey,
 		|	tmp.Currency AS Currency,
 		|	tmp.AdditionalAnalytic AS AdditionalAnalytic,
-		|	SUM(tmp.Amount) AS Amount,
+		|	tmp.Amount AS Amount,
 		|	tmp.Period AS Period,
 		|	tmp.Key AS Key
 		|FROM
 		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.BusinessUnit,
-		|	tmp.RevenueType,
-		|	tmp.Currency,
-		|	tmp.AdditionalAnalytic,
-		|	tmp.Period,
-		|	tmp.Key,
-		|	VALUE(Catalog.ItemKeys.EmptyRef)
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[4]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.LegalName AS LegalName,
@@ -140,10 +108,10 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("Ref", Ref);
 	QueryResults = Query.ExecuteBatch();
 	
-	Tables.PartnerApTransactions = QueryResults[1].Unload();
-	Tables.PartnerArTransactions = QueryResults[2].Unload();
-	Tables.RevenuesTurnovers = QueryResults[3].Unload();
-	Tables.ReconciliationStatement_Receipt = QueryResults[4].Unload();
+	Tables.PartnerApTransactions   = QueryResults[1].Unload();
+	Tables.PartnerArTransactions   = QueryResults[2].Unload();
+	Tables.RevenuesTurnovers       = QueryResults[3].Unload();
+	Tables.ReconciliationStatement = QueryResults[4].Unload();
 	
 	Return Tables;
 EndFunction
@@ -153,36 +121,21 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	DataMapWithLockFields = New Map();
 	
 	// PartnerApTransactions
-	Fields = New Map();
-	Fields.Insert("Company", "Company");
-	Fields.Insert("BasisDocument", "BasisDocument");
-	Fields.Insert("Partner", "Partner");
-	Fields.Insert("Agreement", "Agreement");
-	Fields.Insert("Currency", "Currency");
-	DataMapWithLockFields.Insert("AccumulationRegister.PartnerApTransactions",
-		New Structure("Fields, Data", Fields, DocumentDataTables.PartnerApTransactions));
-		
+	PartnerApTransactions = AccumulationRegisters.PartnerApTransactions.GetLockFields(DocumentDataTables.PartnerApTransactions);
+	DataMapWithLockFields.Insert(PartnerApTransactions.RegisterName, PartnerApTransactions.LockInfo);
+	
 	// PartnerArTransactions
-	Fields = New Map();
-	Fields.Insert("Company", "Company");
-	Fields.Insert("BasisDocument", "BasisDocument");
-	Fields.Insert("Partner", "Partner");
-	Fields.Insert("Agreement", "Agreement");
-	Fields.Insert("Currency", "Currency");
-	DataMapWithLockFields.Insert("AccumulationRegister.PartnerArTransactions",
-		New Structure("Fields, Data", Fields, DocumentDataTables.PartnerArTransactions));
+	PartnerArTransactions = AccumulationRegisters.PartnerArTransactions.GetLockFields(DocumentDataTables.PartnerArTransactions);
+	DataMapWithLockFields.Insert(PartnerArTransactions.RegisterName, PartnerArTransactions.LockInfo);
 	
 	// RevenuesTurnovers
-	Fields = New Map();
-	Fields.Insert("Company", "Company");
-	Fields.Insert("BusinessUnit", "BusinessUnit");
-	Fields.Insert("RevenueType", "RevenueType");
-	Fields.Insert("ItemKey", "ItemKey");
-	Fields.Insert("Currency", "Currency");
-	Fields.Insert("AdditionalAnalytic", "AdditionalAnalytic");
-	DataMapWithLockFields.Insert("AccumulationRegister.RevenuesTurnovers",
-		New Structure("Fields, Data", Fields, DocumentDataTables.RevenuesTurnovers));
-		
+	RevenuesTurnovers = AccumulationRegisters.RevenuesTurnovers.GetLockFields(DocumentDataTables.RevenuesTurnovers);
+	DataMapWithLockFields.Insert(RevenuesTurnovers.RegisterName, RevenuesTurnovers.LockInfo);
+	
+	// ReconciliationStatement
+	ReconciliationStatement = AccumulationRegisters.ReconciliationStatement.GetLockFields(DocumentDataTables.ReconciliationStatement);
+	DataMapWithLockFields.Insert(ReconciliationStatement.RegisterName, ReconciliationStatement.LockInfo);
+	
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -249,7 +202,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ReconciliationStatement,
 	New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.ReconciliationStatement_Receipt));
+			Parameters.DocumentDataTables.ReconciliationStatement));
 		
 	Return PostingDataTables;
 EndFunction

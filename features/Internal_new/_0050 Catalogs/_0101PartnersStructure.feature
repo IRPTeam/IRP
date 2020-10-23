@@ -12,14 +12,15 @@ To specify: address, phone, e-mail, gps coordinate on the map
 
 Background:
 	Given I open new TestClient session or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
    
 
 
 Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Preparation
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)

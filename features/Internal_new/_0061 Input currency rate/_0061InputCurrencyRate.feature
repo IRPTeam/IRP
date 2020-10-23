@@ -12,12 +12,13 @@ To use multi-currency accounting
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 
 Scenario: _006100 preparation (filling in currency rates)
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Add Pluginsessor ExternalBankUa
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		And I click the button named "FormCreate"

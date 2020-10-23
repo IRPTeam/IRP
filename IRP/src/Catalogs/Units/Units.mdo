@@ -70,6 +70,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <createOnInput>Use</createOnInput>
     <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
   </attributes>
   <attributes uuid="840178c5-4b1d-441a-a05b-cec5fc49ad11">
     <name>Quantity</name>

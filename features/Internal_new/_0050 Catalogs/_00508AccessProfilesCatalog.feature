@@ -11,14 +11,14 @@ To further use it when reflecting in the program of business processes
 
 Background:
 	Given I open new TestClient session or connect the existing one
-	And I set "True" value to the constant "ShowBetaTesting"
-	And I set "True" value to the constant "ShowAlphaTestingSaas"
-	And I set "True" value to the constant "UseItemKey"
-	And I set "True" value to the constant "UseCompanies"
+
 
 
 
 Scenario: _005016 filling in the "AccessProfiles" catalog
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Opening the form for filling in AccessProfiles
 		Given I open hyperlink "e1cib/list/Catalog.AccessProfiles"
 		And Delay 2

@@ -11,13 +11,15 @@ As a cashier
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+
 # The currency of reports is lira
 # CashBankDocFilters export scenarios
 
 	
 Scenario: _051001 preparation (Cash payment)
-	* Constants
-		When set True value to the constant
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects

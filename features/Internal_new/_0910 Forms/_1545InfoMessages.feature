@@ -10,9 +10,11 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
+
 Scenario: _154500 preparation (information messages)
-	* Constants
-		When set True value to the constant
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects

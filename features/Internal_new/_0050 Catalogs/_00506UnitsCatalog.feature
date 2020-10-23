@@ -11,14 +11,14 @@ To further use it when reflecting in the program of business processes
 
 Background:
 	Given I open new TestClient session or connect the existing one
-	And I set "True" value to the constant "ShowBetaTesting"
-	And I set "True" value to the constant "ShowAlphaTestingSaas"
-	And I set "True" value to the constant "UseItemKey"
-	And I set "True" value to the constant "UseCompanies"
+
 
 
 
 Scenario: _005014 filling in the "Units" catalog
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Opening the form for filling in "Units"
 		Given I open hyperlink "e1cib/list/Catalog.Units"
 		And I click the button named "FormCreate"
@@ -28,6 +28,7 @@ Scenario: _005014 filling in the "Units" catalog
 		And I input "adet" text in the field named "Description_tr"
 		And I input "шт" text in the field named "Description_ru"
 		And I click "Ok" button
+		And I input "1" text in the field named "Quantity"
 		And I click the button named "FormWriteAndClose"
 		And Delay 5
 	* Create a unit of measurement for 4 pcs packaging

@@ -10,6 +10,7 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
+
 Scenario: _034501 check discount in Retail sales receipt
 	* Create Retail sales receipt
 		* Open a form to create Retail sales receipt

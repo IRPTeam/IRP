@@ -13,9 +13,11 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
+
 Scenario: _290000 preparation (Shipment confirmation - Sales invoice)
-	* Constants
-		When set True value to the constant
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create information register Barcodes records

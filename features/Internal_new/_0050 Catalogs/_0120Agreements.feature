@@ -13,7 +13,11 @@ To specify the commercial terms of cooperation
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
+
 Scenario: _012000 preparation (partners term)
+		When set True value to the constant
+		And I close TestClient session
+		Given I open new TestClient session or connect the existing one
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog PartnerSegments objects

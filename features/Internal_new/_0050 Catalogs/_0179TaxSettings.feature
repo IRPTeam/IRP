@@ -14,7 +14,11 @@ For tax accounting
 Background:
 	Given I open new TestClient session or connect the existing one
 
+
 Scenario: _017901 connection of tax calculation Plugin sessing TaxCalculateVAT_TR
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Opening a form to add Plugin sessing
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 	* Addition of Plugin sessing for calculating Tax types for Turkey (VAT)

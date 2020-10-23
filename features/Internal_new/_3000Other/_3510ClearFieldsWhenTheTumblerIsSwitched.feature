@@ -8,12 +8,14 @@ Feature: check the cleaning of fields in forms of directories with switches (the
 
 
 Background:
-Given I launch TestClient opening script or connect the existing one
+	Given I launch TestClient opening script or connect the existing one
+	
 
 
 Scenario: _3510000 preparation (check the cleaning of fields in forms)
-        * Constants
-                When set True value to the constant
+        When set True value to the constant
+        And I close TestClient session
+        Given I open new TestClient session or connect the existing one
         * Load info
                 When Create catalog ObjectStatuses objects
                 When Create catalog ItemKeys objects

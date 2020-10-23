@@ -9,10 +9,13 @@ Feature: add extension
 
 
 Background:
-	When set True value to the constant
 	Given I launch TestClient opening script or connect the existing one
 
+
 Scenario: _4000100 preparation
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Constants
 		When set True value to the constant
 	* Load info
@@ -41,5 +44,14 @@ Scenario: _4000101 add extension
 	Given I open new TestClient session or connect the existing one
 
 
+Scenario: _4000105 check add atributes from extensions
+	Given I open hyperlink "e1cib/list/Catalog.Currencies"
+	And I click the button named "FormCreate"
+	And the field named "REP_Attribute1" exists on the form
+	And I close all client application windows
+	
+
+
+	
 	
 		

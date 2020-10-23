@@ -9,6 +9,7 @@ Feature: check discounts in the Sales return and Sales return order
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
+
 	
 Scenario: _034801 preparation
 	* Activating discount Document discount

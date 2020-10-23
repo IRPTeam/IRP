@@ -12,14 +12,14 @@ To restrict user access rights
 
 Background:
 	Given I open new TestClient session or connect the existing one
-	And I set "True" value to the constant "ShowBetaTesting"
-	And I set "True" value to the constant "ShowAlphaTestingSaas"
-	And I set "True" value to the constant "UseItemKey"
-	And I set "True" value to the constant "UseCompanies"
+
 
 
 
 Scenario: _008004 filling in the "Users" catalog 
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Preparation
 		And I close all client application windows
 		When Create catalog Partners objects (Employee)

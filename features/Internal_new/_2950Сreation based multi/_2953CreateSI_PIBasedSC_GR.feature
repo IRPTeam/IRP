@@ -9,9 +9,11 @@ Feature: create Purchase invoices and Sales invoices based on Goods receipt and 
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
+
 Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipment confirmation)
-	* Constants
-		When set True value to the constant
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)

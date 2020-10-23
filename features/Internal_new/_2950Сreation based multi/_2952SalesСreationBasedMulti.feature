@@ -10,13 +10,15 @@ Feature: creation mechanism based on for sales documents
 
 
 Background:
-Given I launch TestClient opening script or connect the existing one
+	Given I launch TestClient opening script or connect the existing one
+
 
 # First Sales invoice then Shipment confirmation
 
 Scenario: _0295200 preparation (creation mechanism based on for sales documents)
-	* Constants
-		When set True value to the constant
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)

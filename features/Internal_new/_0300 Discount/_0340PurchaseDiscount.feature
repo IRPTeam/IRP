@@ -11,6 +11,7 @@ So you can display the amount of the vendor's discount
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+
 # discount for document
 
 Scenario: _034001 check the Document discount in Purchase order

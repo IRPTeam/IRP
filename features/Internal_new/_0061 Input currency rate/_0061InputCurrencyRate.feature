@@ -12,19 +12,50 @@ To use multi-currency accounting
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	And I set "True" value to the constant "ShowBetaTesting"
-	And I set "True" value to the constant "ShowAlphaTestingSaas"
-	And I set "True" value to the constant "UseItemKey"
-	And I set "True" value to the constant "UseCompanies"
+
 
 
 Scenario: _006100 preparation (filling in currency rates)
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
+	* Add Pluginsessor ExternalBankUa
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		And I click the button named "FormCreate"
+		And I select external file "#workingDir#\DataProcessor\bank_gov_ua.epf"
+		And I click the button named "FormAddExtDataProc"
+		And I input "" text in "Path to plugin for test" field
+		And I input "ExternalBankUa" text in "Name" field
+		And I click Open button of the field named "Description_en"
+		And I input "ExternalBankUa" text in the field named "Description_en"
+		And I input "ExternalBankUa" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I set checkbox "Unsafe mode"
+		And I click "Save and close" button
+		And I wait "Plugins (create)" window closing in 10 seconds
+		Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalBankUa"
+	* Add Pluginsessor ExternalTCMBGovTr
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		And I click the button named "FormCreate"
+		And I select external file "#workingDir#\DataProcessor\tcmb_gov_tr.epf"
+		And I click the button named "FormAddExtDataProc"
+		And I input "" text in "Path to plugin for test" field
+		And I input "ExternalTCMBGovTr" text in "Name" field
+		And I click Open button of the field named "Description_en"
+		And I input "ExternalTCMBGovTr" text in the field named "Description_en"
+		And I input "ExternalTCMBGovTr" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I set checkbox "Unsafe mode"
+		And I click "Save and close" button
+		And I wait "Plugins (create)" window closing in 10 seconds
+		Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalTCMBGovTr"
 	When Create catalog Currencies objects
 	Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
 	If "List" table does not contain line Then
 		| "Description" |
 		| "Forex Seling" |
 		When create setting to download the course (Forex Seling)
+
 
 Scenario: _006101 filling in exchange rates in registers
 	* Opening of register CurrencyRates

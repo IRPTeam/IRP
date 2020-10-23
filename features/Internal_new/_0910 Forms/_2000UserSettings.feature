@@ -14,9 +14,11 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
+
 Scenario: _200000 preparation (user settings)
-	* Constants
-		When set True value to the constant
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog Users objects
 		When Create catalog ObjectStatuses objects
@@ -972,7 +974,7 @@ Scenario:  _200016 check filling in field from custom user settings in Inventory
 			| 'User' |
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Login' |
 			| 'CI'          |
 		And I select current line in "List" table
 		And I input "Document.InventoryTransfer" text in "Metadata object" field
@@ -1058,7 +1060,7 @@ Scenario:  _200023 check filling in field from custom user settings in Sales inv
 			| 'User' |
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Login' |
 			| 'CI'          |
 		And I select current line in "List" table
 		And I input "Document.SalesInvoice" text in "Metadata object" field
@@ -1215,7 +1217,7 @@ Scenario: _200030  adding a group of user settings for the user
 		Given I open hyperlink "e1cib/list/Catalog.Users"
 	* Select user
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Login' |
 			| 'CI'          |
 		And I select current line in "List" table
 	* Specify custom settings group

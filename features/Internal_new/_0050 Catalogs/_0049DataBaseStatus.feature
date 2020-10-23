@@ -11,15 +11,13 @@ To further use it when reflecting in the program of business processes
 
 Background:
 	Given I open new TestClient session or connect the existing one
-	And I set "True" value to the constant "ShowBetaTesting"
-	And I set "True" value to the constant "ShowAlphaTestingSaas"
-	And I set "True" value to the constant "UseItemKey"
-	And I set "True" value to the constant "UseCompanies"
 
 
 
 Scenario: _0050 Data base title
-	And I close all client application windows
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Filling in title
 		Given I open hyperlink "e1cib/list/Catalog.DataBaseStatus"
 		And I go to line in "List" table

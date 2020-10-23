@@ -2126,7 +2126,8 @@ Procedure ItemListUnitOnChange(Object, Form, Module, Item = Undefined, Settings 
 	EndIf;
 	
 	Settings.CalculateSettings.Insert("UpdatePrice");
-	Settings.CalculateSettings.UpdatePrice = New Structure("Period, PriceType", Object.Date, Form.CurrentPriceType);
+	PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
+	Settings.CalculateSettings.UpdatePrice = New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType);
 	
 	ItemListCalculateRowsAmounts(Object, Form, Settings, Undefined, AddInfo);
 EndProcedure

@@ -424,7 +424,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table1.Columns.Amount.Name = "TransactionAP";
 	PostingServer.AddColumnsToAccountsStatementTable(Table1);
 	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Vendor
+		If Row.Agreement.Type = Enums.AgreementTypes.Vendor 
 			Or (Row.Agreement.Kind = Enums.AgreementKinds.Standard And Row.Partner.Vendor) Then
 			NewRow = Table1.Add(); 
 			FillPropertyValues(NewRow, Row);

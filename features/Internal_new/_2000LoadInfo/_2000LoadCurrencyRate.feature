@@ -11,13 +11,14 @@ To upload currency rates to the base
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 
 
 Scenario: _020000 preparation (Loadinfo)
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog CashAccounts objects
 		When Create catalog PriceTypes objects

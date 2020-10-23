@@ -9,11 +9,12 @@ Feature: Basic role
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+
+
+Scenario: 950100 Basic role
 	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
-
-Scenario: 950100 Basic role
 	When Create catalog AccessGroups objects
 	When Create catalog AccessProfiles objects
 	When Create catalog Agreements objects

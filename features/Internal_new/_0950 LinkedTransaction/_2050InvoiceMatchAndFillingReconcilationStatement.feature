@@ -9,13 +9,14 @@ Feature: buttons for selecting base documents
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 # Crystal partners
 
 Scenario: _2050001 preparation
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Check for Purchase invoice by Crystal
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And "List" table contains lines

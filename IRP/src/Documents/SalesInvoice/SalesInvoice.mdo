@@ -170,21 +170,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="192f71ce-b3aa-430b-bb7e-b3498192e72c">
-    <name>DELETE_IsOpeningEntry</name>
-    <synonym>
-      <key>en</key>
-      <value>DELETE is opening entry</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="ab388899-1088-44c7-a4b7-edf907c046c3">
     <name>LegalName</name>
     <synonym>
@@ -490,21 +475,6 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="c3d6c08a-6e12-4718-b629-efdca3159c48">
-      <name>DELETE_ShipmentConfirmation</name>
-      <synonym>
-        <key>en</key>
-        <value>DELETE shipment confirmation</value>
-      </synonym>
-      <type>
-        <types>DocumentRef.ShipmentConfirmation</types>
-        <types>DocumentRef.SalesOrder</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="cc7c7b88-e297-47a2-a836-5688c163f118">
       <name>DeliveryDate</name>

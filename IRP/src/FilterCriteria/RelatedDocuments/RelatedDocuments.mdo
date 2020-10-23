@@ -35,10 +35,7 @@
   <content>Document.InvoiceMatch.TabularSection.Transactions.Attribute.PartnerApTransactionsBasisDocument</content>
   <content>Document.InvoiceMatch.TabularSection.Transactions.Attribute.PartnerArTransactionsBasisDocument</content>
   <content>Document.Labeling.TabularSection.ItemList.Attribute.PurchaseOrder</content>
-  <content>Document.OpeningEntry.TabularSection.AccountPayableByDocuments.Attribute.DELETE_BasisDocument</content>
-  <content>Document.OpeningEntry.TabularSection.AccountReceivableByDocuments.Attribute.DELETE_BasisDocument</content>
   <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.PurchaseOrder</content>
-  <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.DELETE_GoodsReceipt</content>
   <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.SalesOrder</content>
   <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.PurchaseBasis</content>
   <content>Document.PurchaseReturn.Attribute.BaseDocument</content>
@@ -47,7 +44,6 @@
   <content>Document.PurchaseReturnOrder.TabularSection.ItemList.Attribute.PurchaseInvoice</content>
   <content>Document.SalesInvoice.Attribute.BasisDocument</content>
   <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.SalesOrder</content>
-  <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.DELETE_ShipmentConfirmation</content>
   <content>Document.SalesReturn.Attribute.BaseDocument</content>
   <content>Document.SalesReturn.TabularSection.ItemList.Attribute.SalesReturnOrder</content>
   <content>Document.SalesReturn.TabularSection.ItemList.Attribute.SalesInvoice</content>

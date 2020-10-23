@@ -205,21 +205,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="c10fa221-e9f1-43d3-b1f5-f31d8ce02de0">
-    <name>DELETE_IsOpeningEntry</name>
-    <synonym>
-      <key>en</key>
-      <value>DELETE is opening entry</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="b79af004-d625-4a24-ac6d-e5fbec38dbfe">
     <name>LegalName</name>
     <synonym>

@@ -474,20 +474,6 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="b59c542d-fc5c-497a-82be-a0fe5d52d841">
-      <name>DELETE_BasisDocument</name>
-      <synonym>
-        <key>en</key>
-        <value>DELETE basis document</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeApTransactionBasises</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
     <attributes uuid="8cf98518-f495-4745-b784-f6ffd37eb60b">
       <name>Partner</name>
       <synonym>
@@ -582,20 +568,6 @@
       </synonym>
       <type>
         <types>UUID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="f78608e8-dd0d-47fa-a62e-3ff03bbe8991">
-      <name>DELETE_BasisDocument</name>
-      <synonym>
-        <key>en</key>
-        <value>DELETE basis document</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeArTransactionBasises</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

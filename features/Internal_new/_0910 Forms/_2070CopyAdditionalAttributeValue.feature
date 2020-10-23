@@ -9,13 +9,14 @@ Feature: copy additional attribute value
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 
 
 Scenario: _207001 copy additional attribute values when create catalog element
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Add additional attribute 
 		* Additional attribute 01
 			Given I open hyperlink 'e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty'
@@ -122,7 +123,7 @@ Scenario: _207001 copy additional attribute values when create catalog element
 		And I click Select button of "User or group" field
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Login' |
 			| 'CI'          |
 		And I select current line in "List" table
 		And I input "Catalog.Partners" text in "Metadata object" field
@@ -143,7 +144,7 @@ Scenario: _207001 copy additional attribute values when create catalog element
 		And I click Select button of "User or group" field
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Login' |
 			| 'CI'          |
 		And I select current line in "List" table
 		And I input "Catalog.Partners" text in "Metadata object" field
@@ -248,7 +249,7 @@ Scenario: _207002 copy additional attribute values when create document
 		And I click Select button of "User or group" field
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Login' |
 			| 'CI'          |
 		And I select current line in "List" table
 		And I input "Document.BankReceipt" text in "Metadata object" field
@@ -269,7 +270,7 @@ Scenario: _207002 copy additional attribute values when create document
 		And I click Select button of "User or group" field
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Login' |
 			| 'CI'          |
 		And I select current line in "List" table
 		And I input "Document.BankReceipt" text in "Metadata object" field

@@ -12,14 +12,15 @@ To work with the products
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 
 
 	
 Scenario: _2990000 preparation (product inventory)
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog BusinessUnits objects

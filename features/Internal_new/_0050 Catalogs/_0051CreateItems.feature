@@ -11,9 +11,7 @@ To further use it when reflecting in the program of business processes
 
 Background:
 	Given I open new TestClient session or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 
 
@@ -25,6 +23,9 @@ Background:
 
 Scenario: _005110 filling in the "UI groups" catalog 
 # Catalog "UI group" is designed to create groups of additional attributes for the items. Also provides for the location of the group on the item's form (right or left)
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Opening the UI groups creation form 
 		Given I open hyperlink "e1cib/list/Catalog.InterfaceGroups"
 		And I click the button named "FormCreate"

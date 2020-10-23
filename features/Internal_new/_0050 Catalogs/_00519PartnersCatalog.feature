@@ -11,14 +11,15 @@ To further use it when reflecting in the program of business processes
 
 Background:
 	Given I open new TestClient session or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 
 
 
 Scenario: _005022 filling in the "Partners" catalog
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Opening the form for filling in Partners
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And Delay 2

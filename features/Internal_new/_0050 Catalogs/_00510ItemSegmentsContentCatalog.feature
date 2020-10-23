@@ -11,13 +11,14 @@ To further use it when reflecting in the program of business processes
 
 Background:
 	Given I open new TestClient session or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 
 
 Scenario: _005026 filling in the "Item segments content" catalog 
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Opening a form and creating Item segments content
 		Given I open hyperlink "e1cib/list/Catalog.ItemSegments"
 		And I click the button named "FormCreate"

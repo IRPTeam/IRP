@@ -11,14 +11,15 @@ For write off expenses and record income directly to/from the account
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 # Cash revenue
 
 	
 Scenario: _085000 preparation (Cash expence and Cash revenue)
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog Currencies objects

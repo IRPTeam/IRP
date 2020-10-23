@@ -12,12 +12,13 @@ To work with the products
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 
 Scenario: _090500 preparation (Barcodes)
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects

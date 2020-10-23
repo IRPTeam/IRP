@@ -11,13 +11,14 @@ To further use it when reflecting in the program of business processes
 
 Background:
 	Given I open new TestClient session or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 
 
 Scenario: _005027 filling in the "Payment types" catalog  
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Opening a form and creating Payment types
 		Given I open hyperlink "e1cib/list/Catalog.PaymentTypes"
 		When create a catalog element with the name Test

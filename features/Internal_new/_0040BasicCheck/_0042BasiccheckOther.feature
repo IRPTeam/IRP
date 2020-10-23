@@ -786,12 +786,6 @@ Scenario: Open object form "DataHistory"
 		| 'No'  | 'InformationRegisters'        |
 	And I close current window
 
-Scenario: Open object form "Desktop"
-
-	Given I open "Desktop" data processor default form 
-	If the warning is displayed then
-		Then I raise "Failed to open data processor form Desktop" exception
-	And I close current window
 
 Scenario: Open object form "Mobile invent"
 

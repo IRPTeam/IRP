@@ -273,7 +273,7 @@ $VanessaRun = {
     If (Test-Path $ScriptLogFilePath) {
         $loopBlock = {
             Param($ScriptLogFilePath) 
-            #Get-Content $ScriptLogFilePath -Wait -Tail 0 -Encoding UTF8
+            Get-Content $ScriptLogFilePath -Wait -Tail 0 -Encoding UTF8
         }
         $TailLoopJob = start-job -scriptBlock $loopBlock -ArgumentList $ScriptLogFilePath
         try {

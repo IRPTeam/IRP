@@ -12,7 +12,10 @@ To use multi-currency accounting
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-
+	And I set "True" value to the constant "ShowBetaTesting"
+	And I set "True" value to the constant "ShowAlphaTestingSaas"
+	And I set "True" value to the constant "UseItemKey"
+	And I set "True" value to the constant "UseCompanies"
 
 
 Scenario: _006100 preparation (filling in currency rates)

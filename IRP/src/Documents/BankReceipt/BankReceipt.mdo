@@ -331,7 +331,7 @@
       <name>POSAccount</name>
       <synonym>
         <key>en</key>
-        <value>POSAccount</value>
+        <value>POS account</value>
       </synonym>
       <type>
         <types>CatalogRef.CashAccounts</types>

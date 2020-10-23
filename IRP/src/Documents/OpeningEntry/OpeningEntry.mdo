@@ -64,6 +64,7 @@
   <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
   <registerRecords>AccumulationRegister.AccountBalance</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
+  <registerRecords>AccumulationRegister.Aging</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -474,23 +475,16 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="b59c542d-fc5c-497a-82be-a0fe5d52d841">
-      <name>BasisDocument</name>
+      <name>DELETE_BasisDocument</name>
       <synonym>
         <key>en</key>
-        <value>Basis document</value>
+        <value>DELETE basis document</value>
       </synonym>
       <type>
         <types>DefinedType.typeApTransactionBasises</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <choiceParameters>
-        <name>Filter.IsOpeningEntry</name>
-        <value xsi:type="core:BooleanValue">
-          <value>true</value>
-        </value>
-      </choiceParameters>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -595,23 +589,16 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="f78608e8-dd0d-47fa-a62e-3ff03bbe8991">
-      <name>BasisDocument</name>
+      <name>DELETE_BasisDocument</name>
       <synonym>
         <key>en</key>
-        <value>Basis document</value>
+        <value>DELETE basis document</value>
       </synonym>
       <type>
         <types>DefinedType.typeArTransactionBasises</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <choiceParameters>
-        <name>Filter.IsOpeningEntry</name>
-        <value xsi:type="core:BooleanValue">
-          <value>true</value>
-        </value>
-      </choiceParameters>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -1022,6 +1009,73 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="8d5c4074-3ffa-48ab-915f-99d8935277fb">
+    <producedTypes>
+      <objectType typeId="8e456be1-fedd-4f59-8b79-b6580d10af97" valueTypeId="5d455555-122b-492a-9abb-50631ecb62cb"/>
+      <rowType typeId="6ec26f23-a138-4f99-bcb4-08e7852201a8" valueTypeId="f90252cf-f5bb-41dd-9c33-65774d2e772b"/>
+    </producedTypes>
+    <name>PaymentTerms</name>
+    <synonym>
+      <key>en</key>
+      <value>Payment terms</value>
+    </synonym>
+    <attributes uuid="2e7cb06a-1337-4cd5-86e3-291d7fc3607c">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f8b8b9b8-9b2f-47cb-aa81-bf3572901aa5">
+      <name>CalculationType</name>
+      <synonym>
+        <key>en</key>
+        <value>Calculation type</value>
+      </synonym>
+      <type>
+        <types>EnumRef.CalculationTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+    </attributes>
+    <attributes uuid="ba734212-f9ab-442c-8867-550e691e5ff3">
+      <name>Date</name>
+      <synonym>
+        <key>en</key>
+        <value>Date</value>
+      </synonym>
+      <type>
+        <types>Date</types>
+        <dateQualifiers>
+          <dateFractions>Date</dateFractions>
+        </dateQualifiers>
+      </type>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="53c8fc62-f58d-40a3-8c32-3be2d85c2490">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
 </mdclass:Document>

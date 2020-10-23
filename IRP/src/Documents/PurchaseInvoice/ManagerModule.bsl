@@ -108,7 +108,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	PurchaseInvoiceItemList.Ref.Date AS Period,
 		|	PurchaseInvoiceItemList.Key AS RowKeyUUID,
 		|	PurchaseInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	PurchaseInvoiceItemList.Ref.IsOpeningEntry AS IsOpeningEntry,
 		|	PurchaseInvoiceItemList.BusinessUnit AS BusinessUnit,
 		|	PurchaseInvoiceItemList.ExpenseType AS ExpenseType,
 		|	CASE
@@ -205,7 +204,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	QueryTable.Period AS Period,
 		|	QueryTable.RowKey AS RowKey,
 		|	QueryTable.RowKeyUUID AS RowKeyUUID,
-		|	QueryTable.IsOpeningEntry AS IsOpeningEntry,
 		|	QueryTable.BusinessUnit AS BusinessUnit,
 		|	QueryTable.ExpenseType,
 		|	QueryTable.IsService AS IsService,
@@ -229,8 +227,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|WHERE
 		|    NOT tmp.UsePurchaseOrder
 		|AND NOT tmp.UseSalesOrder
-		|AND NOT tmp.UseGoodsReceiptBeforeInvoice
-		|AND NOT tmp.IsOpeningEntry";
+		|AND NOT tmp.UseGoodsReceiptBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_1").GetData().IsEmpty() Then
 		GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice(Tables, TempManager, "tmp_1");
@@ -243,8 +240,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|WHERE
 		|        tmp.UsePurchaseOrder
 		|AND NOT tmp.UseSalesOrder
-		|AND NOT tmp.UseGoodsReceiptBeforeInvoice
-		|AND NOT tmp.IsOpeningEntry";
+		|AND NOT tmp.UseGoodsReceiptBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_2").GetData().IsEmpty() Then
 		GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice(Tables, TempManager, "tmp_2");
@@ -257,8 +253,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|WHERE
 		|        tmp.UsePurchaseOrder
 		|AND NOT tmp.UseSalesOrder
-		|AND     tmp.UseGoodsReceiptBeforeInvoice
-		|AND NOT tmp.IsOpeningEntry";
+		|AND     tmp.UseGoodsReceiptBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_3").GetData().IsEmpty() Then
 		GetTables_UsePO_NotUseSO_UseGRBeforeInvoice(Tables, TempManager, "tmp_3");
@@ -272,8 +267,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|        tmp.UsePurchaseOrder
 		|AND     tmp.UseSalesOrder
 		|AND NOT tmp.UseGoodsReceiptBeforeInvoice
-		|AND NOT tmp.UseShipmentBeforeInvoice
-		|AND NOT tmp.IsOpeningEntry";
+		|AND NOT tmp.UseShipmentBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_4").GetData().IsEmpty() Then
 		GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice(Tables, TempManager, "tmp_4");
@@ -287,8 +281,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|    NOT tmp.UsePurchaseOrder
 		|AND     tmp.UseSalesOrder
 		|AND NOT tmp.UseGoodsReceiptBeforeInvoice
-		|AND NOT tmp.UseShipmentBeforeInvoice
-		|AND NOT tmp.IsOpeningEntry";
+		|AND NOT tmp.UseShipmentBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_5").GetData().IsEmpty() Then
 		GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice(Tables, TempManager, "tmp_5");
@@ -302,8 +295,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|        tmp.UsePurchaseOrder
 		|AND     tmp.UseSalesOrder
 		|AND     tmp.UseGoodsReceiptBeforeInvoice
-		|AND NOT tmp.UseShipmentBeforeInvoice
-		|AND NOT tmp.IsOpeningEntry";
+		|AND NOT tmp.UseShipmentBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_6").GetData().IsEmpty() Then
 		GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice(Tables, TempManager, "tmp_6");
@@ -317,8 +309,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|        tmp.UsePurchaseOrder
 		|AND     tmp.UseSalesOrder
 		|AND NOT tmp.UseGoodsReceiptBeforeInvoice
-		|AND     tmp.UseShipmentBeforeInvoice
-		|AND NOT tmp.IsOpeningEntry";
+		|AND     tmp.UseShipmentBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_7").GetData().IsEmpty() Then
 		GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice(Tables, TempManager, "tmp_7");
@@ -332,8 +323,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|    NOT tmp.UsePurchaseOrder
 		|AND     tmp.UseSalesOrder
 		|AND NOT tmp.UseGoodsReceiptBeforeInvoice
-		|AND     tmp.UseShipmentBeforeInvoice
-		|AND NOT tmp.IsOpeningEntry";
+		|AND     tmp.UseShipmentBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_8").GetData().IsEmpty() Then
 		GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice(Tables, TempManager, "tmp_8");
@@ -347,8 +337,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|        tmp.UsePurchaseOrder
 		|AND     tmp.UseSalesOrder
 		|AND     tmp.UseGoodsReceiptBeforeInvoice
-		|AND     tmp.UseShipmentBeforeInvoice
-		|AND NOT tmp.IsOpeningEntry";
+		|AND     tmp.UseShipmentBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_9").GetData().IsEmpty() Then
 		GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice(Tables, TempManager, "tmp_9");

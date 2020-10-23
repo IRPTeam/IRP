@@ -636,10 +636,10 @@ Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
 	ArrayAll.Add("PaymentList.PlaningTransactionBasis");
 	ArrayAll.Add("PaymentList.Amount");
 	ArrayAll.Add("PaymentList.AmountExchange");
+	ArrayAll.Add("PaymentList.POSAccount");
 	
 	ArrayByType = New Array();
-	If TransactionType = Enums.IncomingPaymentTransactionType.CashTransferOrder
-		OR TransactionType = Enums.IncomingPaymentTransactionType.TransferFromPOS Then
+	If TransactionType = Enums.IncomingPaymentTransactionType.CashTransferOrder Then
 		ArrayByType.Add("Account");
 		ArrayByType.Add("Company");
 		ArrayByType.Add("Currency");
@@ -648,6 +648,16 @@ Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
 		
 		ArrayByType.Add("PaymentList.PlaningTransactionBasis");
 		ArrayByType.Add("PaymentList.Amount");
+	ElsIf TransactionType = Enums.IncomingPaymentTransactionType.TransferFromPOS Then
+		ArrayByType.Add("Account");
+		ArrayByType.Add("Company");
+		ArrayByType.Add("Currency");
+		ArrayByType.Add("TransactionType");
+		ArrayByType.Add("Description");
+		
+		ArrayByType.Add("PaymentList.PlaningTransactionBasis");
+		ArrayByType.Add("PaymentList.Amount");
+		ArrayByType.Add("PaymentList.POSAccount");
 	ElsIf TransactionType = Enums.IncomingPaymentTransactionType.CurrencyExchange Then
 		ArrayByType.Add("Account");
 		ArrayByType.Add("Company");

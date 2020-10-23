@@ -171,10 +171,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="192f71ce-b3aa-430b-bb7e-b3498192e72c">
-    <name>IsOpeningEntry</name>
+    <name>DELETE_IsOpeningEntry</name>
     <synonym>
       <key>en</key>
-      <value>Is opening entry</value>
+      <value>DELETE is opening entry</value>
     </synonym>
     <type>
       <types>Boolean</types>
@@ -492,10 +492,10 @@
       <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="c3d6c08a-6e12-4718-b629-efdca3159c48">
-      <name>ShipmentConfirmation</name>
+      <name>DELETE_ShipmentConfirmation</name>
       <synonym>
         <key>en</key>
-        <value>Shipment confirmation</value>
+        <value>DELETE shipment confirmation</value>
       </synonym>
       <type>
         <types>DocumentRef.ShipmentConfirmation</types>
@@ -1124,6 +1124,7 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
     </attributes>
   </tabularSections>
   <commands uuid="1940e8ac-35c7-4889-9c93-09a9af1eb411">

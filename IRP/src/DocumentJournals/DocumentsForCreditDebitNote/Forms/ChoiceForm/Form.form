@@ -156,58 +156,6 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>LegalName</name>
-      <id>43</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.LegalName</segments>
-        </paths>
-      </dataPath>
-      <extendedTooltip>
-        <name>LegalNameExtendedTooltip</name>
-        <id>45</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>LegalNameContextMenu</name>
-        <id>44</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <wrap>true</wrap>
-        <chooseType>true</chooseType>
-        <typeDomainEnabled>true</typeDomainEnabled>
-        <textEdit>true</textEdit>
-      </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
       <name>Partner</name>
       <id>34</id>
       <visible>true</visible>
@@ -238,6 +186,58 @@
       <contextMenu>
         <name>PartnerContextMenu</name>
         <id>35</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>LegalName</name>
+      <id>43</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.LegalName</segments>
+        </paths>
+      </dataPath>
+      <extendedTooltip>
+        <name>LegalNameExtendedTooltip</name>
+        <id>45</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>LegalNameContextMenu</name>
+        <id>44</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -292,6 +292,56 @@
       <contextMenu>
         <name>AgreementContextMenu</name>
         <id>47</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>Currency</name>
+      <id>49</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Currency</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>CurrencyExtendedTooltip</name>
+        <id>51</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>CurrencyContextMenu</name>
+        <id>50</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -627,10 +677,10 @@
 	DebitNoteDocuments.Ref.Partner AS Partner,
 	DebitNoteDocuments.Ref.LegalName AS LegalName,
 	DebitNoteDocuments.Ref.DocumentAmount AS DocumentAmount,
-	DebitNoteDocuments.Ref.Agreement AS Agreement
+	DebitNoteDocuments.Ref.Agreement AS Agreement,
+	DebitNoteDocuments.Ref.Currency AS Currency
 FROM
 	DocumentJournal.DocumentsForCreditDebitNote AS DebitNoteDocuments</queryText>
-      <mainTable>DocumentJournal.DocumentsForCreditDebitNote</mainTable>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>

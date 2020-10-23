@@ -71,6 +71,7 @@
     </synonym>
     <type>
       <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.OpeningEntry</types>
     </type>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>

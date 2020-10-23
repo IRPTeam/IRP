@@ -206,10 +206,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="c10fa221-e9f1-43d3-b1f5-f31d8ce02de0">
-    <name>IsOpeningEntry</name>
+    <name>DELETE_IsOpeningEntry</name>
     <synonym>
       <key>en</key>
-      <value>Is opening entry</value>
+      <value>DELETE is opening entry</value>
     </synonym>
     <type>
       <types>Boolean</types>
@@ -528,6 +528,7 @@
       </synonym>
       <type>
         <types>DocumentRef.SalesInvoice</types>
+        <types>DocumentRef.OpeningEntry</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

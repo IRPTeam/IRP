@@ -227,7 +227,6 @@ Function GetQueryTextSalesInvoiceItemList()
 		|	SalesInvoiceItemList.Ref AS ShipmentBasis,
 		|	SalesInvoiceItemList.Ref AS SalesInvoice,
 		|	SalesInvoiceItemList.Key AS RowKeyUUID,
-		|	SalesInvoiceItemList.Ref.IsOpeningEntry AS IsOpeningEntry,
 		|	SalesInvoiceItemList.DeliveryDate AS DeliveryDate,
 		|	CASE
 		|		WHEN SalesInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
@@ -325,7 +324,6 @@ Function GetQueryTextQueryTable()
 		|	QueryTable.ShipmentBasis AS ShipmentBasis,
 		|	QueryTable.SalesInvoice AS SalesInvoice,
 		|	QueryTable.RowKey AS RowKey,
-		|	QueryTable.IsOpeningEntry AS IsOpeningEntry,
 		|	QueryTable.DeliveryDate AS DeliveryDate,
 		|	QueryTable.BusinessUnit AS BusinessUnit,
 		|	QueryTable.RevenueType AS RevenueType,
@@ -353,8 +351,6 @@ Function GetQueryTextQueryTable()
 		|	tmp AS tmp
 		|WHERE
 		|	tmp.SalesOrder <> VALUE(Document.SalesOrder.EmptyRef)
-		|	AND
-		|	NOT tmp.IsOpeningEntry
 		|;
 		|
 		|//[2]//////////////////////////////////////////////////////////////////////////////
@@ -368,8 +364,6 @@ Function GetQueryTextQueryTable()
 		|	tmp AS tmp
 		|WHERE
 		|	tmp.SalesOrder <> VALUE(Document.SalesOrder.EmptyRef)
-		|	AND
-		|	NOT tmp.IsOpeningEntry
 		|	AND
 		|	NOT tmp.IsService
 		|GROUP BY
@@ -390,8 +384,6 @@ Function GetQueryTextQueryTable()
 		|	tmp AS tmp
 		|WHERE
 		|	NOT tmp.UseSalesOrder
-		|	AND
-		|	NOT tmp.IsOpeningEntry
 		|	AND
 		|	NOT tmp.ShipmentConfirmationBeforeSalesInvoice
 		|	AND 
@@ -414,8 +406,6 @@ Function GetQueryTextQueryTable()
 		|	tmp AS tmp
 		|WHERE
 		|	(NOT tmp.ShipmentConfirmationBeforeSalesInvoice OR NOT tmp.UseSalesOrder)
-		|	AND
-		|	NOT tmp.IsOpeningEntry
 		|	AND
 		|	NOT tmp.IsService
 		|GROUP BY
@@ -469,8 +459,6 @@ Function GetQueryTextQueryTable()
 		|	AND
 		|	NOT tmp.ShipmentConfirmationBeforeSalesInvoice
 		|	AND
-		|	NOT tmp.IsOpeningEntry
-		|	AND
 		|	NOT tmp.IsService
 		|GROUP BY
 		|	tmp.Period,
@@ -493,8 +481,6 @@ Function GetQueryTextQueryTable()
 		|	AND tmp.SalesInvoice = ShipmentConfirmations.Ref
 		|WHERE
 		|	tmp.ShipmentConfirmationBeforeSalesInvoice
-		|	AND
-		|	NOT tmp.IsOpeningEntry
 		|	AND tmp.UseSalesOrder
 		|;
 		|
@@ -510,8 +496,6 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period AS Period
 		|FROM
 		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.IsOpeningEntry
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.BasisDocument,
@@ -534,8 +518,6 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period AS Period
 		|FROM
 		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.IsOpeningEntry
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.BasisDocument,
@@ -568,8 +550,6 @@ Function GetQueryTextQueryTable()
 		|		NOT tmp.UseShipmentConfirmation
 		|		AND
 		|		NOT tmp.ShipmentConfirmationBeforeSalesInvoice
-		|		AND
-		|		NOT tmp.IsOpeningEntry
 		|		AND ShipmentConfirmationSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
 		|
 		|UNION ALL
@@ -594,8 +574,6 @@ Function GetQueryTextQueryTable()
 		|		AND tmp.UseShipmentConfirmation
 		|		AND
 		|		NOT tmp.ShipmentConfirmationBeforeSalesInvoice
-		|		AND
-		|		NOT tmp.IsOpeningEntry
 		|		AND ShipmentConfirmationSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
 		|
 		|UNION ALL
@@ -616,8 +594,6 @@ Function GetQueryTextQueryTable()
 		|	AND
 		|	NOT tmp.ShipmentConfirmationBeforeSalesInvoice
 		|	AND
-		|	NOT tmp.IsOpeningEntry
-		|	AND
 		|	NOT tmp.UseSalesOrder
 		|	AND tmp.DeliveryDate <> DATETIME(1, 1, 1)
 		|;
@@ -636,8 +612,6 @@ Function GetQueryTextQueryTable()
 		|	tmp AS tmp
 		|WHERE
 		|	NOT tmp.ShipmentConfirmationBeforeSalesInvoice
-		|	AND
-		|	NOT tmp.IsOpeningEntry
 		|	AND
 		|	NOT tmp.UseSalesOrder
 		|	AND tmp.DeliveryDate <> DATETIME(1, 1, 1)
@@ -664,8 +638,6 @@ Function GetQueryTextQueryTable()
 		|		AND tmp.UseShipmentConfirmation
 		|		AND
 		|		NOT tmp.ShipmentConfirmationBeforeSalesInvoice
-		|		AND
-		|		NOT tmp.IsOpeningEntry
 		|		AND ShipmentConfirmationSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
 		|;
 		|
@@ -678,8 +650,6 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period AS Period
 		|FROM
 		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.IsOpeningEntry
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.LegalName,

@@ -57,51 +57,52 @@ EndFunction
 
 Function GetQueryTextSalesReturnItemList()
 	Return	"SELECT
-		|	SalesReturnItemList.Ref.Company AS Company,
-		|	SalesReturnItemList.Store AS Store,
-		|	SalesReturnItemList.Store.UseGoodsReceipt AS UseGoodsReceipt,
-		|	SalesReturnItemList.ItemKey AS ItemKey,
-		|	SalesReturnItemList.SalesReturnOrder AS SalesReturnOrder,
-		|	SalesReturnItemList.Ref AS SalesReturn,
-		|	CASE
-		|		WHEN SalesReturnItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			THEN SalesReturnItemList.Ref
-		|		ELSE UNDEFINED
-		|	END AS BasisDocument,
-		|	SalesReturnItemList.Quantity AS Quantity,
-		|	SalesReturnItemList.TotalAmount AS TotalAmount,
-		|	SalesReturnItemList.Ref.Partner AS Partner,
-		|	SalesReturnItemList.Ref.LegalName AS LegalName,
-		|	CASE
-		|		WHEN SalesReturnItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-		|		AND SalesReturnItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-		|			THEN SalesReturnItemList.Ref.Agreement.StandardAgreement
-		|		ELSE SalesReturnItemList.Ref.Agreement
-		|	END AS Agreement,
-		|	ISNULL(SalesReturnItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
-		|	0 AS BasisQuantity,
-		|	SalesReturnItemList.Unit,
-		|	SalesReturnItemList.ItemKey.Item.Unit AS ItemUnit,
-		|	SalesReturnItemList.ItemKey.Unit AS ItemKeyUnit,
-		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
-		|	SalesReturnItemList.ItemKey.Item AS Item,
-		|	SalesReturnItemList.Ref.Date AS Period,
-		|	CASE
-		|		WHEN SalesReturnItemList.SalesInvoice = VALUE(Document.SalesInvoice.EmptyRef)
-		|			THEN SalesReturnItemList.Ref
-		|		ELSE SalesReturnItemList.SalesInvoice
-		|	END AS SalesInvoice,
-		|	SalesReturnItemList.Key AS RowKey,
-		|	SalesReturnItemList.Ref.IsOpeningEntry AS IsOpeningEntry,
-		|	CASE
-		|		WHEN SalesReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
-		|			THEN TRUE
-		|		ELSE FALSE
-		|	END AS IsService
-		|FROM
-		|	Document.SalesReturn.ItemList AS SalesReturnItemList
-		|WHERE
-		|	SalesReturnItemList.Ref = &Ref";
+	|	SalesReturnItemList.Ref.Company AS Company,
+	|	SalesReturnItemList.Store AS Store,
+	|	SalesReturnItemList.Store.UseGoodsReceipt AS UseGoodsReceipt,
+	|	SalesReturnItemList.ItemKey AS ItemKey,
+	|	SalesReturnItemList.SalesReturnOrder AS SalesReturnOrder,
+	|	SalesReturnItemList.Ref AS SalesReturn,
+	|	CASE
+	|		WHEN SalesReturnItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			THEN SalesReturnItemList.Ref
+	|		ELSE UNDEFINED
+	|	END AS BasisDocument,
+	|	SalesReturnItemList.Quantity AS Quantity,
+	|	SalesReturnItemList.TotalAmount AS TotalAmount,
+	|	SalesReturnItemList.Ref.Partner AS Partner,
+	|	SalesReturnItemList.Ref.LegalName AS LegalName,
+	|	CASE
+	|		WHEN SalesReturnItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+	|		AND SalesReturnItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+	|			THEN SalesReturnItemList.Ref.Agreement.StandardAgreement
+	|		ELSE SalesReturnItemList.Ref.Agreement
+	|	END AS Agreement,
+	|	ISNULL(SalesReturnItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
+	|	0 AS BasisQuantity,
+	|	SalesReturnItemList.Unit,
+	|	SalesReturnItemList.ItemKey.Item.Unit AS ItemUnit,
+	|	SalesReturnItemList.ItemKey.Unit AS ItemKeyUnit,
+	|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
+	|	SalesReturnItemList.ItemKey.Item AS Item,
+	|	SalesReturnItemList.Ref.Date AS Period,
+	|	CASE
+	|		WHEN SalesReturnItemList.SalesInvoice.Date IS NULL
+	|		OR VALUETYPE(SalesReturnItemList.SalesInvoice) <> TYPE(Document.SalesInvoice)
+	|			THEN SalesReturnItemList.Ref
+	|		ELSE SalesReturnItemList.SalesInvoice
+	|	END AS SalesInvoice,
+	|	SalesReturnItemList.SalesInvoice AS AgingSalesInvoice,
+	|	SalesReturnItemList.Key AS RowKey,
+	|	CASE
+	|		WHEN SalesReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END AS IsService
+	|FROM
+	|	Document.SalesReturn.ItemList AS SalesReturnItemList
+	|WHERE
+	|	SalesReturnItemList.Ref = &Ref";
 EndFunction
 
 Function GetQueryTextSalesReturnSalesTurnovers()
@@ -113,7 +114,8 @@ Function GetQueryTextSalesReturnSalesTurnovers()
 	|	ISNULL(SalesReturnSerialLotNumbers.Quantity, 0) AS QuantityBySerialLtNumbers,
 	|	SalesReturnItemList.Ref.Date AS Period,
 	|	CASE
-	|		WHEN SalesReturnItemList.SalesInvoice = VALUE(Document.SalesInvoice.EmptyRef)
+	|		WHEN SalesReturnItemList.SalesInvoice.Date IS NULL
+	|		OR VALUETYPE(SalesReturnItemList.SalesInvoice) <> TYPE(Document.SalesInvoice)
 	|			THEN SalesReturnItemList.Ref
 	|		ELSE SalesReturnItemList.SalesInvoice
 	|	END AS SalesInvoice,
@@ -197,8 +199,8 @@ Function GetQueryTextQueryTable()
 	|	QueryTable.BasisUnit AS Unit,
 	|	QueryTable.Period AS Period,
 	|	QueryTable.SalesInvoice AS SalesInvoice,
+	|	QueryTable.AgingSalesInvoice AS AgingSalesInvoice,
 	|	QueryTable.RowKey AS RowKey,
-	|	QueryTable.IsOpeningEntry AS IsOpeningEntry,
 	|	QueryTable.IsService AS IsService
 	|INTO tmp
 	|FROM
@@ -211,7 +213,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.Store,
 	|	tmp.ItemKey,
 	|	tmp.Order AS Order,
-	|	SUM(tmp.Quantity) AS Quantity,
+	|	tmp.Quantity AS Quantity,
 	|	tmp.Unit AS Unit,
 	|	tmp.Period,
 	|	tmp.RowKey
@@ -219,15 +221,6 @@ Function GetQueryTextQueryTable()
 	|	tmp AS tmp
 	|WHERE
 	|	tmp.Order <> VALUE(Document.SalesReturnOrder.EmptyRef)
-	|	AND NOT tmp.IsOpeningEntry
-	|GROUP BY
-	|	tmp.Company,
-	|	tmp.Store,
-	|	tmp.ItemKey,
-	|	tmp.Order,
-	|	tmp.Unit,
-	|	tmp.Period,
-	|	tmp.RowKey
 	|;
 	|
 	|// 2. InventoryBalance //////////////////////////////////////////////////////////////////////////////
@@ -241,8 +234,7 @@ Function GetQueryTextQueryTable()
 	|FROM
 	|	tmp AS tmp
 	|WHERE
-	|	NOT tmp.IsOpeningEntry
-	|	AND Not tmp.IsService
+	|	Not tmp.IsService
 	|GROUP BY
 	|	tmp.Company,
 	|	tmp.Store,
@@ -266,14 +258,6 @@ Function GetQueryTextQueryTable()
 	|WHERE
 	|	tmp.UseGoodsReceipt
 	|	AND Not tmp.IsService
-	|GROUP BY
-	|	tmp.Company,
-	|	tmp.Store,
-	|	tmp.ItemKey,
-	|	tmp.ReceiptBasis,
-	|	tmp.Unit,
-	|	tmp.Period,
-	|	tmp.RowKey
 	|;
 	|
 	|// 4. StockBalance //////////////////////////////////////////////////////////////////////////////
@@ -288,7 +272,6 @@ Function GetQueryTextQueryTable()
 	|	tmp AS tmp
 	|WHERE
 	|	NOT tmp.UseGoodsReceipt
-	|	AND NOT tmp.IsOpeningEntry
 	|	AND Not tmp.IsService
 	|GROUP BY
 	|	tmp.Company,
@@ -310,7 +293,6 @@ Function GetQueryTextQueryTable()
 	|	tmp AS tmp
 	|WHERE
 	|	NOT tmp.UseGoodsReceipt
-	|	AND NOT tmp.IsOpeningEntry
 	|	AND Not tmp.IsService
 	|GROUP BY
 	|	tmp.Company,
@@ -332,8 +314,6 @@ Function GetQueryTextQueryTable()
 	|	tmp.Period
 	|FROM
 	|	tmp AS tmp
-	|WHERE
-	|	NOT tmp.IsOpeningEntry
 	|GROUP BY
 	|	tmp.Company,
 	|	tmp.BasisDocument,
@@ -356,8 +336,6 @@ Function GetQueryTextQueryTable()
 	|	tmp.Period
 	|FROM
 	|	tmp AS tmp
-	|WHERE
-	|	NOT tmp.IsOpeningEntry
 	|GROUP BY
 	|	tmp.Company,
 	|	tmp.BasisDocument,
@@ -407,7 +385,7 @@ Function GetQueryTextQueryTable()
 	|// 10. PartnerArTransactions //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company AS Company,
-	|	tmp.SalesInvoice AS BasisDocument,
+	|	tmp.AgingSalesInvoice AS BasisDocument,
 	|	tmp.Partner AS Partner,
 	|	tmp.LegalName AS LegalName,
 	|	tmp.Agreement AS Agreement,
@@ -417,11 +395,10 @@ Function GetQueryTextQueryTable()
 	|FROM
 	|	tmp AS tmp
 	|WHERE
-	|	NOT tmp.IsOpeningEntry
-	|	AND NOT tmp.SalesInvoice.Date IS NULL
+	|	NOT tmp.SalesInvoice.Date IS NULL
 	|GROUP BY
 	|	tmp.Company,
-	|	tmp.SalesInvoice,
+	|	tmp.AgingSalesInvoice,
 	|	tmp.Partner,
 	|	tmp.LegalName,
 	|	tmp.Agreement,

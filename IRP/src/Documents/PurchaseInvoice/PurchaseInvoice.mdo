@@ -170,10 +170,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="ed7f4c20-922b-4b54-82d2-42d5d1203bfd">
-    <name>IsOpeningEntry</name>
+    <name>DELETE_IsOpeningEntry</name>
     <synonym>
       <key>en</key>
-      <value>Is opening entry</value>
+      <value>DELETE is opening entry</value>
     </synonym>
     <type>
       <types>Boolean</types>
@@ -460,10 +460,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="ab19fb9b-33dc-4630-8eca-e67f5b7318e0">
-      <name>GoodsReceipt</name>
+      <name>DELETE_GoodsReceipt</name>
       <synonym>
         <key>en</key>
-        <value>Goods receipt</value>
+        <value>DELETE goods receipt</value>
       </synonym>
       <type>
         <types>DocumentRef.GoodsReceipt</types>

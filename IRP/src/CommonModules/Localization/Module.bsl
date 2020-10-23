@@ -293,6 +293,10 @@ Function Strings(Lang) Export
 	// %5 - USD
 	Strings.Insert("Error_085", NStr("en = 'Credit limit exceeded. Limit: %1, limit balance: %2, transaction: %3, lack: %4 %5'", Lang));
 	
+	// %1 - 10
+	// %2 - 20	
+	Strings.Insert("Error_086", NStr("en = 'Amount : %1 not match Payment term amount: %2'", Lang));
+	
 	#EndRegion
 	
 	#Region InfoMessages

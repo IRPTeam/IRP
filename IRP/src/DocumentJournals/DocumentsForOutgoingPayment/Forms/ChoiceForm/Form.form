@@ -156,6 +156,58 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>Partner</name>
+      <id>34</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Partner</segments>
+        </paths>
+      </dataPath>
+      <extendedTooltip>
+        <name>PartnerExtendedTooltip</name>
+        <id>36</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>PartnerContextMenu</name>
+        <id>35</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>LegalName</name>
       <id>43</id>
       <visible>true</visible>
@@ -208,21 +260,19 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>Partner</name>
-      <id>34</id>
+      <name>Agreement</name>
+      <id>46</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Partner</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Agreement</segments>
       </dataPath>
       <extendedTooltip>
-        <name>PartnerExtendedTooltip</name>
-        <id>36</id>
+        <name>AgreementExtendedTooltip</name>
+        <id>48</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -236,8 +286,58 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>PartnerContextMenu</name>
-        <id>35</id>
+        <name>AgreementContextMenu</name>
+        <id>47</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>Currency</name>
+      <id>49</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Currency</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>CurrencyExtendedTooltip</name>
+        <id>51</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>CurrencyContextMenu</name>
+        <id>50</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -568,17 +668,16 @@
     </edit>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
-      <queryText>SELECT 
-       PaymentDocuments.Ref,
-       PaymentDocuments.Ref.Company AS Company,
-       PaymentDocuments.Ref.Partner AS Partner,
-       PaymentDocuments.Ref.LegalName AS LegalName,
-       PaymentDocuments.Ref.DocumentAmount AS DocumentAmount
- FROM 
-       DocumentJournal.DocumentsForOutgoingPayment
- AS 
-       PaymentDocuments</queryText>
-      <mainTable>DocumentJournal.DocumentsForOutgoingPayment</mainTable>
+      <queryText>SELECT
+	PaymentDocuments.Ref,
+	PaymentDocuments.Ref.Company AS Company,
+	PaymentDocuments.Ref.Partner AS Partner,
+	PaymentDocuments.Ref.LegalName AS LegalName,
+	PaymentDocuments.Ref.DocumentAmount AS DocumentAmount,
+	PaymentDocuments.Ref.Agreement AS Agreement,
+	PaymentDocuments.Ref.Currency AS Currency
+FROM
+	DocumentJournal.DocumentsForOutgoingPayment AS PaymentDocuments</queryText>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>

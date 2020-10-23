@@ -52,8 +52,8 @@ Function GetQueryTextPurchaseReturnItemList()
 		|	PurchaseReturnItemList.Store AS Store,
 		|	PurchaseReturnItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
 		|	PurchaseReturnItemList.ItemKey AS ItemKey,
-		|	SUM(PurchaseReturnItemList.Quantity) AS Quantity,
-		|	SUM(PurchaseReturnItemList.TotalAmount) AS TotalAmount,
+		|	PurchaseReturnItemList.Quantity AS Quantity,
+		|	PurchaseReturnItemList.TotalAmount AS TotalAmount,
 		|	PurchaseReturnItemList.Ref.Partner AS Partner,
 		|	PurchaseReturnItemList.Ref.LegalName AS LegalName,
 		|	CASE
@@ -78,8 +78,7 @@ Function GetQueryTextPurchaseReturnItemList()
 		|		ELSE UNDEFINED
 		|	END AS BasisDocument,
 		|	PurchaseReturnItemList.Key AS RowKey,
-		|	PurchaseReturnItemList.Ref.IsOpeningEntry AS IsOpeningEntry,
-		|	SUM(PurchaseReturnItemList.NetAmount) AS NetAmount,
+		|	PurchaseReturnItemList.NetAmount AS NetAmount,
 		|	CASE
 		|		WHEN PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
 		|			THEN TRUE
@@ -88,42 +87,7 @@ Function GetQueryTextPurchaseReturnItemList()
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
 		|WHERE
-		|	PurchaseReturnItemList.Ref = &Ref
-		|GROUP BY
-		|	PurchaseReturnItemList.Ref.Company,
-		|	PurchaseReturnItemList.Ref.Partner,
-		|	PurchaseReturnItemList.Ref.LegalName,
-		|	CASE
-		|		WHEN PurchaseReturnItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-		|		AND PurchaseReturnItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-		|			THEN PurchaseReturnItemList.Ref.Agreement.StandardAgreement
-		|		ELSE PurchaseReturnItemList.Ref.Agreement
-		|	END,
-		|	ISNULL(PurchaseReturnItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)),
-		|	PurchaseReturnItemList.Store,
-		|	PurchaseReturnItemList.Store.UseShipmentConfirmation,
-		|	PurchaseReturnItemList.ItemKey,
-		|	PurchaseReturnItemList.Unit,
-		|	PurchaseReturnItemList.ItemKey.Item.Unit,
-		|	PurchaseReturnItemList.ItemKey.Unit,
-		|	VALUE(Catalog.Units.EmptyRef),
-		|	PurchaseReturnItemList.ItemKey.Item,
-		|	PurchaseReturnItemList.Ref.Date,
-		|	PurchaseReturnItemList.PurchaseReturnOrder,
-		|	PurchaseReturnItemList.PurchaseInvoice,
-		|	PurchaseReturnItemList.Ref,
-		|	CASE
-		|		WHEN PurchaseReturnItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			THEN PurchaseReturnItemList.Ref
-		|		ELSE UNDEFINED
-		|	END,
-		|	PurchaseReturnItemList.Key,
-		|	PurchaseReturnItemList.Ref.IsOpeningEntry,
-		|	CASE
-		|		WHEN PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
-		|			THEN TRUE
-		|		ELSE FALSE
-		|	END";
+		|	PurchaseReturnItemList.Ref = &Ref";
 EndFunction
 
 Function GetQueryTextQueryTable()
@@ -146,8 +110,7 @@ Function GetQueryTextQueryTable()
 		|	QueryTable.BasisDocument,
 		|	QueryTable.NetAmount,
 		|	QueryTable.IsService,
-		|	QueryTable.RowKey,
-		|	QueryTable.IsOpeningEntry AS IsOpeningEntry
+		|	QueryTable.RowKey
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable
@@ -170,7 +133,6 @@ Function GetQueryTextQueryTable()
 		|	tmp AS tmp
 		|WHERE
 		|	tmp.PurchaseReturnOrder <> VALUE(Document.PurchaseReturnOrder.EmptyRef)
-		|	AND NOT tmp.IsOpeningEntry
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -195,7 +157,6 @@ Function GetQueryTextQueryTable()
 		|	tmp AS tmp
 		|WHERE
 		|	tmp.PurchaseReturnOrder <> VALUE(Document.PurchaseReturnOrder.EmptyRef)
-		|	AND NOT tmp.IsOpeningEntry
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -247,7 +208,6 @@ Function GetQueryTextQueryTable()
 		|	tmp AS tmp
 		|WHERE
 		|	tmp.PurchaseReturnOrder = VALUE(Document.PurchaseReturnOrder.EmptyRef)
-		|	AND NOT tmp.IsOpeningEntry
 		|	AND Not tmp.IsService
 		|GROUP BY
 		|	tmp.Company,
@@ -271,8 +231,7 @@ Function GetQueryTextQueryTable()
 		|FROM
 		|	tmp AS tmp
 		|WHERE
-		|	NOT tmp.IsOpeningEntry
-		|	AND Not tmp.IsService
+		|	Not tmp.IsService
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -322,7 +281,6 @@ Function GetQueryTextQueryTable()
 		|	tmp AS tmp
 		|WHERE
 		|	NOT tmp.UseShipmentConfirmation
-		|	AND NOT tmp.IsOpeningEntry
 		|	AND Not tmp.IsService
 		|GROUP BY
 		|	tmp.Company,
@@ -347,8 +305,6 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|FROM
 		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.IsOpeningEntry
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.BasisDocument,
@@ -375,8 +331,6 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|FROM
 		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.IsOpeningEntry
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.BasisDocument,

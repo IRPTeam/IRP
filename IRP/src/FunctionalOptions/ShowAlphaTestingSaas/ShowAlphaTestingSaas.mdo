@@ -40,7 +40,7 @@
   <content>Document.PurchaseReturn.TabularSection.SpecialOffers</content>
   <content>Document.InvoiceMatch</content>
   <content>Document.PhysicalCountByLocation</content>
-  <content>Document.SalesInvoice.Attribute.IsOpeningEntry</content>
+  <content>Document.SalesInvoice.Attribute.DELETE_IsOpeningEntry</content>
   <content>Document.PriceList.TabularSection.DataSet</content>
   <content>Document.SalesInvoice.TabularSection.SpecialOffers</content>
   <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.OffersAmount</content>
@@ -120,8 +120,8 @@
   <content>Document.OpeningEntry.TabularSection.AccountPayableByDocuments</content>
   <content>Document.OpeningEntry.TabularSection.AccountReceivableByAgreements.Attribute.Agreement</content>
   <content>Document.OpeningEntry.TabularSection.AccountPayableByAgreements.Attribute.Agreement</content>
-  <content>Document.PurchaseInvoice.Attribute.IsOpeningEntry</content>
-  <content>Document.PurchaseReturn.Attribute.IsOpeningEntry</content>
+  <content>Document.PurchaseInvoice.Attribute.DELETE_IsOpeningEntry</content>
+  <content>Document.PurchaseReturn.Attribute.DELETE_IsOpeningEntry</content>
   <content>InformationRegister.TaxSettings.Dimension.Agreement</content>
   <content>InformationRegister.TaxSettings.Dimension.ItemKey</content>
   <content>Document.CreditNote</content>

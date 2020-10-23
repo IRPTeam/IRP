@@ -206,15 +206,23 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
 	
 	Notify = New NotifyDescription("PaymentListBasisDocumentStartChoiceEnd", ThisObject, New Structure("Form", Form));
-	Parameters.Insert("Notify", Notify);
-	Parameters.Insert("TableName", "DocumentsForOutgoingPayment");
+	Parameters.Insert("Notify"                  , Notify);
+	Parameters.Insert("TableName"               , "DocumentsForOutgoingPayment");
+	Parameters.Insert("OpeningEntryTableName1" , "AccountPayableByDocuments");
+	Parameters.Insert("OpeningEntryTableName2" , "AccountReceivableByDocuments");
+	Parameters.Insert("Ref"                    , Object.Ref);
 	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);	
 EndProcedure
 
 Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) Export
-	If ValueIsFilled(Result) Then
-		Form = AdditionalParameters.Form;
-		Form.Items.PaymentList.CurrentData.BasisDocument = Result;
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	Form = AdditionalParameters.Form;
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	If CurrentData <> Undefined Then
+		CurrentData.BasisDocument = Result.BasisDocument;
+		CurrentData.Amount        = Result.Amount;
 	EndIf;
 EndProcedure
 

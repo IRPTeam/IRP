@@ -13,6 +13,7 @@
   <useStandardCommands>true</useStandardCommands>
   <registeredDocuments>Document.PurchaseReturn</registeredDocuments>
   <registeredDocuments>Document.SalesInvoice</registeredDocuments>
+  <registeredDocuments>Document.OpeningEntry</registeredDocuments>
   <forms uuid="bb5bbbb8-cba8-495f-a296-a359e7159285">
     <name>ChoiceForm</name>
     <synonym>

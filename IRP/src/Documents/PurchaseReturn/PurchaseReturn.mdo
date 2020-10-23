@@ -207,10 +207,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="e297ee9b-c073-443d-bd9a-007acbc2f6e0">
-    <name>IsOpeningEntry</name>
+    <name>DELETE_IsOpeningEntry</name>
     <synonym>
       <key>en</key>
-      <value>Is opening entry</value>
+      <value>DELETE is opening entry</value>
     </synonym>
     <type>
       <types>Boolean</types>

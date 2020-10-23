@@ -123,7 +123,7 @@ Scenario: _207001 copy additional attribute values when create catalog element
 		And I click Select button of "User or group" field
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Login' |
 			| 'CI'          |
 		And I select current line in "List" table
 		And I input "Catalog.Partners" text in "Metadata object" field
@@ -144,7 +144,7 @@ Scenario: _207001 copy additional attribute values when create catalog element
 		And I click Select button of "User or group" field
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Login' |
 			| 'CI'          |
 		And I select current line in "List" table
 		And I input "Catalog.Partners" text in "Metadata object" field
@@ -249,7 +249,7 @@ Scenario: _207002 copy additional attribute values when create document
 		And I click Select button of "User or group" field
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Login' |
 			| 'CI'          |
 		And I select current line in "List" table
 		And I input "Document.BankReceipt" text in "Metadata object" field
@@ -270,7 +270,7 @@ Scenario: _207002 copy additional attribute values when create document
 		And I click Select button of "User or group" field
 		And I select current line in "" table
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Login' |
 			| 'CI'          |
 		And I select current line in "List" table
 		And I input "Document.BankReceipt" text in "Metadata object" field

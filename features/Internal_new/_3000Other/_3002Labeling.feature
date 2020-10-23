@@ -56,7 +56,7 @@ Scenario: _300000 user check for Turkish data
 		Given I open hyperlink "e1cib/list/Catalog.Users"
 	* Change localization code for CI
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Login' |
 			| 'CI'          |
 		And I select current line in "List" table
 		And I input "tr" text in "Localization code" field

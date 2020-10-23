@@ -14,7 +14,7 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-Scenario: _016501 preparation
+Scenario: _016500 preparation
 	* Constants
 			When set True value to the constant
 	* Load info

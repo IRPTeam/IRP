@@ -331,7 +331,12 @@ foreach ($elementTag in $TagArray) {
                 $JobTimes[$key][1] = $CurrentDate 
                 
                 $listsToDelete += $key
-                Write-Host "End $key at $CurrentDate"
+                #Write-Host "End $key at $CurrentDate"
+                
+                Write-Host  "##teamcity[testStarted name='case.$key' captureStandardOutput='true']"
+                $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$key.log"
+                Get-Content -Path $ScriptLogFilePath -Encoding utf8            
+                Write-Host  "##teamcity[testFinished name='case.$key']"
             }
         }
         foreach($listToDelete in $listsToDelete) {
@@ -347,9 +352,7 @@ do {
     Start-Sleep 10
 
    $jobCount = $JobArray.count
-        Write-Output "Current job count: $jobCount Max count: $StreamCountMax"
-
-
+       #Write-Output "Current job count: $jobCount Max count: $StreamCountMax"
         $listsToDelete = @()
 
         $JobArray.GetEnumerator() | ForEach-Object {
@@ -361,7 +364,12 @@ do {
                 $JobTimes[$key][1] = $CurrentDate 
                 
                 $listsToDelete += $key
-                Write-Host "End $key at $CurrentDate"
+                #Write-Host "End $key at $CurrentDate"
+                
+                Write-Host  "##teamcity[testStarted name='case.$key' captureStandardOutput='true']"
+                $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$key.log"
+                Get-Content -Path $ScriptLogFilePath -Encoding utf8            
+                Write-Host  "##teamcity[testFinished name='case.$key']"
             }
         }
         foreach($listToDelete in $listsToDelete) {

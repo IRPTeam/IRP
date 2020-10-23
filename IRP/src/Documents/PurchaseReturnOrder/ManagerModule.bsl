@@ -32,7 +32,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	PurchaseReturnOrderItemList.PurchaseInvoice AS PurchaseInvoice,
 		|	ISNULL(PurchaseReturnOrderItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
 		|	SUM(PurchaseReturnOrderItemList.TotalAmount) AS TotalAmount,
-		|	PurchaseReturnOrderItemList.Key AS RowKey
+		|	PurchaseReturnOrderItemList.Key AS RowKey,
+		|	SUM(PurchaseReturnOrderItemList.NetAmount) AS NetAmount
 		|FROM
 		|	Document.PurchaseReturnOrder.ItemList AS PurchaseReturnOrderItemList
 		|WHERE
@@ -75,12 +76,14 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	QueryTable.PurchaseInvoice,
 		|	QueryTable.Currency AS Currency,
 		|	QueryTable.TotalAmount AS Amount,
-		|	QueryTable.RowKey AS RowKey
+		|	QueryTable.RowKey AS RowKey,
+		|	QueryTable.NetAmount AS NetAmount
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable
 		|;
 		|
+		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
@@ -103,25 +106,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.RowKey
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.Order,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Unit AS Unit,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.Order,
-		|	tmp.ItemKey,
-		|	tmp.Unit,
-		|	tmp.Period
-		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
@@ -142,6 +126,28 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Unit,
 		|	tmp.Period
 		|;
+		|
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmp.Company,
+		|	tmp.Store,
+		|	tmp.Order,
+		|	tmp.ItemKey,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Unit AS Unit,
+		|	tmp.Period
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		|	tmp.Company,
+		|	tmp.Store,
+		|	tmp.Order,
+		|	tmp.ItemKey,
+		|	tmp.Unit,
+		|	tmp.Period
+		|;
+		|
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
@@ -151,6 +157,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.ItemKey,
 		|	-SUM(tmp.Quantity) AS Quantity,
 		|	-SUM(Amount) AS Amount,
+		|	-SUM(NetAmount) AS NetAmount,
 		|	tmp.Period,
 		|	tmp.RowKey
 		|FROM
@@ -249,7 +256,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.ItemList_StockReservation,
 			Parameters.IsReposting));
-	
 	
 	Return PostingDataTables;
 EndFunction

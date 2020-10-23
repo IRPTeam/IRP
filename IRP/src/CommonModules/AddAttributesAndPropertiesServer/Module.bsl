@@ -773,7 +773,7 @@ Function AdditionAttributeValueByRef(Ref, ArrayAttributes) Export
 		|	ItemsAddAttributes.Property
 		|INTO ObjAttributes
 		|FROM
-		|	Catalog.%1.AddAttributes AS ItemsAddAttributes
+		|	%1.AddAttributes AS ItemsAddAttributes
 		|WHERE
 		|	ItemsAddAttributes.Ref = &Ref
 		|;
@@ -789,8 +789,8 @@ Function AdditionAttributeValueByRef(Ref, ArrayAttributes) Export
 		|		LEFT JOIN ObjAttributes AS ObjAttributes
 		|		ON VT_Attributes.Attribute = ObjAttributes.Property";
 	
-	CatalogName = Ref.Metadata().Name;
-	Query.Text = StrTemplate(Query.Text, CatalogName);
+	MetadataName = Ref.Metadata().FullName();
+	Query.Text = StrTemplate(Query.Text, MetadataName);
 	Query.SetParameter("Ref", Ref);
 	Query.SetParameter("VT_Attributes", VT_Attribute);
 	Query.SetParameter("ValueIsEmpty", R().S_027);

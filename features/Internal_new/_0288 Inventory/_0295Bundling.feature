@@ -12,11 +12,12 @@ For joint sale of products
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+
+
+Scenario: _029500 preparation (Bundling)
 	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
-
-Scenario: _029500 preparation (Bundling)
 	* Load info
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects

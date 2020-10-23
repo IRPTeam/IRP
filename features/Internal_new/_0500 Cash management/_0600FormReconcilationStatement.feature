@@ -11,13 +11,14 @@ For reconciliation of settlements
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 
 
 Scenario: _060004 check that the Reconcilation statement document is connected to the status system
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Creating statuses for the document Reconciliation Statement
 		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 		And I go to line in "List" table

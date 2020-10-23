@@ -11,11 +11,12 @@ I want to check the filling and refilling of returns
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+
+
+Scenario: _0299900 preparation (check filling in and re-filling returns)
 	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
-
-Scenario: _0299900 preparation (check filling in and re-filling returns)
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)

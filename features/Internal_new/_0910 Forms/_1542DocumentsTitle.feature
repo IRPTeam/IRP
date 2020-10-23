@@ -9,13 +9,14 @@ Feature: check the display of the header of the collapsible group in documents
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 
 
 Scenario: _020200 preparation
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog Countries objects
 		When Create catalog Companies objects (second company Ferron BP)

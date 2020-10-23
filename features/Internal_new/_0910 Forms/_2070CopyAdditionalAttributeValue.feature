@@ -9,13 +9,14 @@ Feature: copy additional attribute value
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 
 
 Scenario: _207001 copy additional attribute values when create catalog element
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Add additional attribute 
 		* Additional attribute 01
 			Given I open hyperlink 'e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty'

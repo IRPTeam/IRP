@@ -9,13 +9,14 @@ Feature: check calculation current prices in the documents
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 
 
 Scenario: _01202501 preparation
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Create Price List (current date)
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I click the button named "FormCreate"

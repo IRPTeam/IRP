@@ -334,7 +334,13 @@ Function FormItems_Unclassified_CallChainHandler(Object, Form, ActionHandler, Ad
 		Return True;
 	ElsIf Upper(ActionHandler) = Upper("TransactionsPartnerOnChange") Then
 		Form.TransactionsPartnerOnChange(P1, AddInfo);
-		Return True;	
+		Return True;
+	ElsIf Upper(ActionHandler) = Upper("AccountReceivableByDocumentsOnActivateRow") Then
+		Form.AccountReceivableByDocumentsOnActivateRow(P1, AddInfo);
+		Return True;
+	ElsIf Upper(ActionHandler) = Upper("AccountReceivableByDocumentsAfterDeleteRow") Then
+		Form.AccountReceivableByDocumentsAfterDeleteRow(P1, AddInfo);
+		Return True;
 	Else
 		Return False;
 	EndIf;

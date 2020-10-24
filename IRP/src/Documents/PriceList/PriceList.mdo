@@ -53,6 +53,7 @@
   <defaultObjectForm>Document.PriceList.Form.DocumentForm</defaultObjectForm>
   <defaultListForm>Document.PriceList.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.PriceList.Form.ChoiceForm</defaultChoiceForm>
+  <realTimePosting>Deny</realTimePosting>
   <registerRecords>InformationRegister.PricesByItems</registerRecords>
   <registerRecords>InformationRegister.PricesByItemKeys</registerRecords>
   <registerRecords>InformationRegister.PricesByProperties</registerRecords>

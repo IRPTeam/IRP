@@ -13,8 +13,6 @@
     <value>Data mapping items</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.DataMappingItems.StandardAttribute.Code</inputByString>
-  <inputByString>Catalog.DataMappingItems.StandardAttribute.Description</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
@@ -25,13 +23,9 @@
   <hierarchical>true</hierarchical>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <descriptionLength>150</descriptionLength>
   <codeType>String</codeType>
   <codeAllowedLength>Variable</codeAllowedLength>
   <codeSeries>WithinSubordination</codeSeries>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
@@ -56,19 +50,15 @@
     </synonym>
     <type>
       <types>String</types>
-      <types>Number</types>
-      <types>Date</types>
-      <types>Boolean</types>
-      <numberQualifiers>
-        <precision>10</precision>
-      </numberQualifiers>
       <stringQualifiers>
-        <length>10</length>
+        <length>256</length>
       </stringQualifiers>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
     </type>
+    <toolTip>
+      <key>en</key>
+      <value>Dont index</value>
+    </toolTip>
+    <indexing>Index</indexing>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -81,6 +71,41 @@
     <type>
       <types>ValueStorage</types>
     </type>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="13066a6e-dd9f-4970-8f2d-7cfeb21762dd">
+    <name>IndexValue</name>
+    <synonym>
+      <key>en</key>
+      <value>Index value</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>256</precision>
+      </numberQualifiers>
+    </type>
+    <toolTip>
+      <key>en</key>
+      <value>Dont index</value>
+    </toolTip>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="8810d0bf-2a07-45b8-bb5c-6f7bba6d6c06">
+    <name>TypeValue</name>
+    <synonym>
+      <key>en</key>
+      <value>Type value</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>256</length>
+      </stringQualifiers>
+    </type>
+    <indexing>Index</indexing>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -103,7 +128,7 @@
       <type>
         <types>String</types>
         <stringQualifiers>
-          <length>250</length>
+          <length>256</length>
         </stringQualifiers>
       </type>
       <dataHistory>Use</dataHistory>

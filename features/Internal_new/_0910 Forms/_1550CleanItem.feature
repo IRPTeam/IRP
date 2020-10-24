@@ -11,11 +11,12 @@ I want to check that Item (without item key) is not cleared when saving a docume
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 
 
 Scenario: _155000 preparation (check that the item is not cleared)
-	* Constants
-		When set True value to the constant
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects

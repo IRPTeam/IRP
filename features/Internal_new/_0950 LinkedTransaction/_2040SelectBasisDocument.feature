@@ -9,11 +9,12 @@ Feature: buttons for selecting base documents
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	
 
 Scenario: _2040001 preparation 
-	* Constants
-		When set True value to the constant
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)

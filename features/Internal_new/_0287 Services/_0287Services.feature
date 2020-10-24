@@ -11,11 +11,12 @@ For cost analysis
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 
 
 Scenario: _029100 preparation
-	* Constants
-		When set True value to the constant
 	* Load info
 		When Create catalog ItemTypes objects (Furniture)	
 		When Create catalog Items objects (Table)

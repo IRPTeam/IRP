@@ -8,6 +8,9 @@ Feature: check discounts in the Sales return and Sales return order
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 
 	
 Scenario: _034801 preparation

@@ -12,11 +12,12 @@ To transfer items from one store to another
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 
 
 Scenario: _0201000 preparation
-	* Constants
-		When set True value to the constant
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects

@@ -14,10 +14,6 @@
     <key>en</key>
     <value>Info check</value>
   </synonym>
-  <synonym>
-    <key>tr</key>
-    <value>Bilgi kontrol</value>
-  </synonym>
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <dataLockControlMode>Managed</dataLockControlMode>
@@ -26,10 +22,6 @@
     <synonym>
       <key>en</key>
       <value>Status</value>
-    </synonym>
-    <synonym>
-      <key>tr</key>
-      <value>Statü</value>
     </synonym>
     <type>
       <types>Boolean</types>
@@ -46,10 +38,6 @@
       <key>en</key>
       <value>User</value>
     </synonym>
-    <synonym>
-      <key>tr</key>
-      <value>Kullanıcı</value>
-    </synonym>
     <type>
       <types>CatalogRef.Users</types>
     </type>
@@ -64,10 +52,6 @@
     <synonym>
       <key>en</key>
       <value>Item</value>
-    </synonym>
-    <synonym>
-      <key>tr</key>
-      <value>Malzeme</value>
     </synonym>
     <type>
       <types>CatalogRef.Items</types>
@@ -86,10 +70,6 @@
     <synonym>
       <key>en</key>
       <value>Item key</value>
-    </synonym>
-    <synonym>
-      <key>tr</key>
-      <value>Varyant</value>
     </synonym>
     <type>
       <types>CatalogRef.ItemKeys</types>

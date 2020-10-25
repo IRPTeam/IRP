@@ -815,10 +815,6 @@
               <name>__7</name>
               <id>61</id>
               <title>
-                <key>ru</key>
-                <value>7</value>
-              </title>
-              <title>
                 <key>en</key>
                 <value>7</value>
               </title>
@@ -864,10 +860,6 @@
             <items xsi:type="form:Button">
               <name>__4</name>
               <id>63</id>
-              <title>
-                <key>ru</key>
-                <value>4</value>
-              </title>
               <title>
                 <key>en</key>
                 <value>4</value>
@@ -915,10 +907,6 @@
               <name>__1</name>
               <id>65</id>
               <title>
-                <key>ru</key>
-                <value>1</value>
-              </title>
-              <title>
                 <key>en</key>
                 <value>1</value>
               </title>
@@ -964,10 +952,6 @@
             <items xsi:type="form:Button">
               <name>__0</name>
               <id>67</id>
-              <title>
-                <key>ru</key>
-                <value>0</value>
-              </title>
               <title>
                 <key>en</key>
                 <value>0</value>
@@ -1134,10 +1118,6 @@
               <name>__8</name>
               <id>73</id>
               <title>
-                <key>ru</key>
-                <value>8</value>
-              </title>
-              <title>
                 <key>en</key>
                 <value>8</value>
               </title>
@@ -1183,10 +1163,6 @@
             <items xsi:type="form:Button">
               <name>__5</name>
               <id>75</id>
-              <title>
-                <key>ru</key>
-                <value>5</value>
-              </title>
               <title>
                 <key>en</key>
                 <value>5</value>
@@ -1234,10 +1210,6 @@
               <name>__2</name>
               <id>77</id>
               <title>
-                <key>ru</key>
-                <value>2</value>
-              </title>
-              <title>
                 <key>en</key>
                 <value>2</value>
               </title>
@@ -1283,10 +1255,6 @@
             <items xsi:type="form:Button">
               <name>__Dot</name>
               <id>91</id>
-              <title>
-                <key>ru</key>
-                <value>.</value>
-              </title>
               <title>
                 <key>en</key>
                 <value>.</value>
@@ -1456,10 +1424,6 @@
               <name>__9</name>
               <id>85</id>
               <title>
-                <key>ru</key>
-                <value>9</value>
-              </title>
-              <title>
                 <key>en</key>
                 <value>9</value>
               </title>
@@ -1505,10 +1469,6 @@
             <items xsi:type="form:Button">
               <name>__6</name>
               <id>87</id>
-              <title>
-                <key>ru</key>
-                <value>6</value>
-              </title>
               <title>
                 <key>en</key>
                 <value>6</value>
@@ -1556,10 +1516,6 @@
               <name>__3</name>
               <id>89</id>
               <title>
-                <key>ru</key>
-                <value>3</value>
-              </title>
-              <title>
                 <key>en</key>
                 <value>3</value>
               </title>
@@ -1605,10 +1561,6 @@
             <items xsi:type="form:Button">
               <name>__C</name>
               <id>79</id>
-              <title>
-                <key>ru</key>
-                <value>00</value>
-              </title>
               <title>
                 <key>en</key>
                 <value>C</value>
@@ -1823,10 +1775,6 @@
                 <key>en</key>
                 <value>Enter</value>
               </title>
-              <title>
-                <key>ru</key>
-                <value>00</value>
-              </title>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -1904,10 +1852,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <toolTip>
-            <key>ru</key>
-            <value>Цифровая клавиатура</value>
-          </toolTip>
           <toolTip>
             <key>en</key>
             <value>Digital keyboard</value>

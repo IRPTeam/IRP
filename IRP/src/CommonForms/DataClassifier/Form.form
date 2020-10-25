@@ -229,10 +229,6 @@
         <name>Decoration1</name>
         <id>20</id>
         <title>
-          <key>tr</key>
-          <value>Empty classifier</value>
-        </title>
-        <title>
           <key>en</key>
           <value>Empty classifier</value>
         </title>
@@ -451,10 +447,6 @@
   </attributes>
   <formCommands>
     <name>CreateItem</name>
-    <title>
-      <key>tr</key>
-      <value>Create item</value>
-    </title>
     <title>
       <key>en</key>
       <value>Create item</value>

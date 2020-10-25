@@ -86,10 +86,6 @@
   <forms uuid="6e29de76-f7b4-42c8-a2b7-9df2359eb2f3">
     <name>Form</name>
     <synonym>
-      <key>ru</key>
-      <value>Form</value>
-    </synonym>
-    <synonym>
       <key>en</key>
       <value>Form</value>
     </synonym>

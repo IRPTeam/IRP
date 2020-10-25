@@ -16,9 +16,7 @@ So that discounts in the Maximum group are calculated by choosing the highest di
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 # When Type joins MaxInRow in Maximum, the orders in this group with discounts will work out the discounts that are most beneficial to the client. 
 # Checking the most advantageous discounts by lines.

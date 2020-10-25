@@ -11,11 +11,12 @@ To track a product that has been received from a vendor
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+
+
+Scenario: _018000 preparation
 	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
-
-Scenario: _018000 preparation
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects

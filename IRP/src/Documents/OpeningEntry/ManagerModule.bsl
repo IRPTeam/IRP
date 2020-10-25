@@ -3,16 +3,17 @@
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure();
 	AccReg = Metadata.AccumulationRegisters;
-	Tables.Insert("AccountBalance", PostingServer.CreateTable(AccReg.AccountBalance));
-	Tables.Insert("InventoryBalance", PostingServer.CreateTable(AccReg.InventoryBalance));
-	Tables.Insert("StockBalance", PostingServer.CreateTable(AccReg.StockBalance));
-	Tables.Insert("StockReservation", PostingServer.CreateTable(AccReg.StockReservation));
-	Tables.Insert("AdvanceFromCustomers", PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
-	Tables.Insert("AdvanceToSuppliers", PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
-	Tables.Insert("PartnerArTransactions", PostingServer.CreateTable(AccReg.PartnerArTransactions));
-	Tables.Insert("PartnerApTransactions", PostingServer.CreateTable(AccReg.PartnerApTransactions));
-	Tables.Insert("ReconciliationStatement_Expense", PostingServer.CreateTable(AccReg.ReconciliationStatement));
-	Tables.Insert("ReconciliationStatement_Receipt", PostingServer.CreateTable(AccReg.ReconciliationStatement));
+	Tables.Insert("AccountBalance"                  , PostingServer.CreateTable(AccReg.AccountBalance));
+	Tables.Insert("InventoryBalance"                , PostingServer.CreateTable(AccReg.InventoryBalance));
+	Tables.Insert("StockBalance"                    , PostingServer.CreateTable(AccReg.StockBalance));
+	Tables.Insert("StockReservation"                , PostingServer.CreateTable(AccReg.StockReservation));
+	Tables.Insert("AdvanceFromCustomers"            , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
+	Tables.Insert("AdvanceToSuppliers"              , PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
+	Tables.Insert("PartnerArTransactions"           , PostingServer.CreateTable(AccReg.PartnerArTransactions));
+	Tables.Insert("PartnerApTransactions"           , PostingServer.CreateTable(AccReg.PartnerApTransactions));
+	Tables.Insert("ReconciliationStatement_Expense" , PostingServer.CreateTable(AccReg.ReconciliationStatement));
+	Tables.Insert("ReconciliationStatement_Receipt" , PostingServer.CreateTable(AccReg.ReconciliationStatement));
+	Tables.Insert("Aging"                           , PostingServer.CreateTable(AccReg.Aging));
 	
 	Query = New Query();
 	Query.Text =
@@ -79,7 +80,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	OpeningEntryAccountReceivableByDocuments.Key,
 		|	OpeningEntryAccountReceivableByDocuments.Ref.Date AS Period,
 		|	OpeningEntryAccountReceivableByDocuments.Ref.Company,
-		|	OpeningEntryAccountReceivableByDocuments.BasisDocument,
+		|	OpeningEntryAccountReceivableByDocuments.Ref AS BasisDocument,
 		|	OpeningEntryAccountReceivableByDocuments.Partner,
 		|	OpeningEntryAccountReceivableByDocuments.LegalName,
 		|	CASE
@@ -125,7 +126,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	OpeningEntryAccountPayableByDocuments.Ref.Date AS Period,
 		|	OpeningEntryAccountPayableByDocuments.Key,
 		|	OpeningEntryAccountPayableByDocuments.Ref.Company,
-		|	OpeningEntryAccountPayableByDocuments.BasisDocument,
+		|	OpeningEntryAccountPayableByDocuments.Ref AS BasisDocument,
 		|	OpeningEntryAccountPayableByDocuments.Partner,
 		|	OpeningEntryAccountPayableByDocuments.LegalName,
 		|	CASE
@@ -271,21 +272,41 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	OpeningEntryAccountReceivableByDocuments.Ref.Date,
 		|	OpeningEntryAccountReceivableByDocuments.Ref.Company,
 		|	OpeningEntryAccountReceivableByDocuments.LegalName,
-		|	OpeningEntryAccountReceivableByDocuments.Currency";
+		|	OpeningEntryAccountReceivableByDocuments.Currency
+		|;
+		|//[8]//////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	OpeningEntryPaymentTerms.Ref.Date AS Period,
+		|	OpeningEntryAccountReceivableByDocuments.Ref.Company AS Company,
+		|	OpeningEntryAccountReceivableByDocuments.Partner AS Partner,
+		|	OpeningEntryAccountReceivableByDocuments.Agreement AS Agreement,
+		|	OpeningEntryAccountReceivableByDocuments.Ref AS Invoice,
+		|	OpeningEntryPaymentTerms.Date AS PaymentDate,
+		|	OpeningEntryAccountReceivableByDocuments.Currency AS Currency,
+		|	OpeningEntryPaymentTerms.Amount AS Amount
+		|FROM
+		|	Document.OpeningEntry.PaymentTerms AS OpeningEntryPaymentTerms
+		|	LEFT JOIN Document.OpeningEntry.AccountReceivableByDocuments AS OpeningEntryAccountReceivableByDocuments
+		|	ON OpeningEntryPaymentTerms.Key = OpeningEntryAccountReceivableByDocuments.Key
+		|	AND OpeningEntryPaymentTerms.Ref = OpeningEntryAccountReceivableByDocuments.Ref
+		|	AND OpeningEntryAccountReceivableByDocuments.Ref = &Ref
+		|WHERE
+		|OpeningEntryPaymentTerms.Ref = &Ref";
 	
 	Query.SetParameter("Ref", Ref);
 	QueryResults = Query.ExecuteBatch();
 
-	Tables.InventoryBalance = QueryResults[0].Unload();
-	Tables.StockBalance = QueryResults[0].Unload();
-	Tables.StockReservation = QueryResults[0].Unload();
-	Tables.AccountBalance = QueryResults[1].Unload();	
-	Tables.AdvanceFromCustomers = QueryResults[2].Unload();
-	Tables.AdvanceToSuppliers = QueryResults[3].Unload();
-	Tables.PartnerArTransactions = QueryResults[4].Unload();
-	Tables.PartnerApTransactions = QueryResults[5].Unload();
-	Tables.ReconciliationStatement_Receipt = QueryResults[7].Unload();
+	Tables.InventoryBalance                = QueryResults[0].Unload();
+	Tables.StockBalance                    = QueryResults[0].Unload();
+	Tables.StockReservation                = QueryResults[0].Unload();
+	Tables.AccountBalance                  = QueryResults[1].Unload();
+	Tables.AdvanceFromCustomers            = QueryResults[2].Unload();
+	Tables.AdvanceToSuppliers              = QueryResults[3].Unload();
+	Tables.PartnerArTransactions           = QueryResults[4].Unload();
+	Tables.PartnerApTransactions           = QueryResults[5].Unload();
 	Tables.ReconciliationStatement_Expense = QueryResults[6].Unload();
+	Tables.ReconciliationStatement_Receipt = QueryResults[7].Unload();
+	Tables.Aging                           = QueryResults[8].Unload();
 	
 	Return Tables;
 EndFunction
@@ -502,6 +523,12 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			PostingServer.JoinTables(ArrayOfTables,
 				"RecordType, Period, Company, LegalName, Currency, Amount"),
 			Parameters.IsReposting));
+
+	// Aging
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.Aging,
+		New Structure("RecordType, RecordSet",
+			AccumulationRecordType.Receipt,
+			Parameters.DocumentDataTables.Aging));
 
 	Return PostingDataTables;
 EndFunction

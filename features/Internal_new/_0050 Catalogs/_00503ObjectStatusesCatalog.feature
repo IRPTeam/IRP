@@ -11,13 +11,13 @@ To further use it when reflecting in the program of business processes
 
 Background:
 	Given I open new TestClient session or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 
 
 
 Scenario: _005039 filling in the status catalog for Inventory transfer order
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Opening a form for creating Objects status historyes
 		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 	* Filling the name for the predefined element InventoryTransferOrder

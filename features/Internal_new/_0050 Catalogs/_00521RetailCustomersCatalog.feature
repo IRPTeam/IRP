@@ -12,14 +12,15 @@ To further use it when reflecting in the program of business processes
 
 Background:
 	Given I open new TestClient session or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 
 	
 
 Scenario: _005048 filling in the "Retail customers" catalog
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Open and filling in Retail customer
 		Given I open hyperlink "e1cib/list/Catalog.RetailCustomers"
 		And I click the button named "FormCreate"

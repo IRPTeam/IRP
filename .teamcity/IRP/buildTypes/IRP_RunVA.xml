@@ -302,20 +302,19 @@ $VanessaRun = {
 }
 $JobArray = @{}
 $JobTimes = @{}
-$TotalTags = $TagArray.count
 foreach ($elementTag in $TagArray) {
     $startPort += 10
     $JobTailProc = start-job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort
-    Start-Sleep 10
+    Start-Sleep 1
     $CurrentDate = Get-Date
     $JobArray.Add($elementTag,$JobTailProc)
     $JobTimes = $JobTimes + @{$elementTag=@($CurrentDate, "")}
     $NumberJob = $JobTimes.count
-    Write-Host "Start $elementTag at $CurrentDate #$NumberJob/$TotalTags"
+    #Write-Host "Start $elementTag at $CurrentDate #$NumberJob/$TotalTags"
    
 
     do {
-        Start-Sleep 10
+        Start-Sleep 1
         $jobCount = $JobArray.count
         #Write-Output "Current job count: $jobCount Max count: $StreamCountMax"
 
@@ -331,7 +330,19 @@ foreach ($elementTag in $TagArray) {
                 $JobTimes[$key][1] = $CurrentDate 
                 
                 $listsToDelete += $key
-                Write-Host "End $key at $CurrentDate"
+                #Write-Host "End $key at $CurrentDate"
+                Write-Host  "##teamcity[testStarted name='$key' captureStandardOutput='true']"
+                $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$key.log"
+                if (Test-Path $ScriptLogFilePath) {                
+                  Get-Content -Path $ScriptLogFilePath -Encoding utf8            
+                } else {
+                  Write-Host "##teamcity[testFailed name='$key' message='Log file not found $ScriptLogFilePath']"
+                }
+                $Diff =  (New-TimeSpan -Start $JobTimes[$key][0] -End $CurrentDate).Seconds
+                $Diff = $Diff -as [int]
+                $Diff = $Diff * 1000
+                $Diff
+                Write-Host  "##teamcity[testFinished name='$key' duration='$Diff']"
             }
         }
         foreach($listToDelete in $listsToDelete) {
@@ -344,12 +355,9 @@ foreach ($elementTag in $TagArray) {
 
 
 do {
-    Start-Sleep 10
+    Start-Sleep 1
 
    $jobCount = $JobArray.count
-        Write-Output "Current job count: $jobCount Max count: $StreamCountMax"
-
-
         $listsToDelete = @()
 
         $JobArray.GetEnumerator() | ForEach-Object {
@@ -361,7 +369,19 @@ do {
                 $JobTimes[$key][1] = $CurrentDate 
                 
                 $listsToDelete += $key
-                Write-Host "End $key at $CurrentDate"
+                #Write-Host "End $key at $CurrentDate"
+                Write-Host  "##teamcity[testStarted name='$key' captureStandardOutput='true']"
+                $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$key.log"
+                if (Test-Path $ScriptLogFilePath) {                
+                  Get-Content -Path $ScriptLogFilePath -Encoding utf8            
+                } else {
+                  Write-Host "##teamcity[testFailed name='$key' message='Log file not found $ScriptLogFilePath']"
+                }
+                $Diff =  (New-TimeSpan -Start $JobTimes[$key][0] -End $CurrentDate).Seconds
+                $Diff = $Diff -as [int]
+                $Diff = $Diff * 1000
+                $Diff
+                Write-Host  "##teamcity[testFinished name='$key' duration='$Diff']"
             }
         }
         foreach($listToDelete in $listsToDelete) {

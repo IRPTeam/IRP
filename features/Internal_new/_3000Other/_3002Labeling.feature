@@ -12,13 +12,14 @@ To assign a unique barcode (series) to products
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 
 
 Scenario: _3001002 preparation
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -55,7 +56,7 @@ Scenario: _300000 user check for Turkish data
 		Given I open hyperlink "e1cib/list/Catalog.Users"
 	* Change localization code for CI
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Login' |
 			| 'CI'          |
 		And I select current line in "List" table
 		And I input "tr" text in "Localization code" field

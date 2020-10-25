@@ -11,13 +11,14 @@ To input the client's balance when you start working with the base
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 
 # it's necessary to add tests to start the remainder of the documents
 Scenario: _400000 preparation (Opening entries)
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)

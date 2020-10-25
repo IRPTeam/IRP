@@ -75,6 +75,7 @@
   <registerRecords>AccumulationRegister.AdvanceFromCustomers</registerRecords>
   <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
   <registerRecords>AccumulationRegister.AccountBalance</registerRecords>
+  <registerRecords>AccumulationRegister.Aging</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -330,7 +331,7 @@
       <name>POSAccount</name>
       <synonym>
         <key>en</key>
-        <value>POSAccount</value>
+        <value>POS account</value>
       </synonym>
       <type>
         <types>CatalogRef.CashAccounts</types>

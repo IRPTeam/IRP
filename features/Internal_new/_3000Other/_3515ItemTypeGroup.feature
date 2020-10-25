@@ -9,12 +9,13 @@ Feature: create a group of item types
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 
 Scenario: _351501 create a group of item types
+    When set True value to the constant
+    And I close TestClient session
+    Given I open new TestClient session or connect the existing one
     * Open catalog Item Type
         Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
     * Create Item Type group

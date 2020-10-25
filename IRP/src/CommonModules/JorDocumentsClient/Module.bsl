@@ -14,8 +14,21 @@ Procedure BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters) 
 			TransferParameters.Insert(ItemOfFilterFromCurrentData, CurrentData[TrimAll(ItemOfFilterFromCurrentData)]);
 		EndIf;
 	EndDo;
-		
-	FilterStructure = CreateFilterByParameters(TransferParameters, Parameters.TableName);
+	OpeningEntryTableName1 = Undefined;
+	If Parameters.Property("OpeningEntryTableName1") Then
+		OpeningEntryTableName1 = Parameters.OpeningEntryTableName1;
+	EndIf;
+	
+	OpeningEntryTableName2 = Undefined;
+	If Parameters.Property("OpeningEntryTableName2") Then
+		OpeningEntryTableName2 = Parameters.OpeningEntryTableName2;
+	EndIf;
+	 
+	FilterStructure = CreateFilterByParameters(Parameters.Ref,
+		TransferParameters, 
+		Parameters.TableName, 
+		OpeningEntryTableName1, 
+		OpeningEntryTableName2);
 	FormParameters = New Structure("CustomFilter", FilterStructure);
 	
 	OpenForm("DocumentJournal." + Parameters.TableName + ".Form.ChoiceForm",
@@ -25,77 +38,186 @@ Procedure BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters) 
 		,
 		Form.URL,
 		Parameters.Notify,
-		FormWindowOpeningMode.LockWholeInterface);
+		FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
-Function CreateFilterByParameters(Parameters, TableName)
-	
-	QueryParameters = New Structure;
-	QueryTextArray = New Array;
-	QueryText = "SELECT ALLOWED
+Function CreateFilterByParameters(Ref, Parameters, TableName, 
+                                  OpeningEntryTableName1 = Undefined, 
+                                  OpeningEntryTableName2 = Undefined)
+	QueryText_TableName = "SELECT ALLOWED
 		|	Obj.Ref,
 		|	Obj.Ref.Company AS Company,
 		|	Obj.Ref.Partner AS Partner,
 		|	Obj.Ref.LegalName AS LegalName,
 		|	Obj.Ref.Agreement AS Agreement,
-		|	Obj.Ref.DocumentAmount AS DocumentAmount
+		|	Obj.Ref.DocumentAmount AS DocumentAmount,
+		|	Obj.Ref.Currency AS Currency
+		|INTO Doc
 		|FROM
 		|	DocumentJournal.%1 AS Obj
 		|WHERE
-		|	True";
-	QueryTextArray.Add(StrTemplate(QueryText,TableName));
+		|	True
+		|	%2";
+	
+	QueryText_OpeningEntryTableName1 = "";
+	If OpeningEntryTableName1 <> Undefined Then
+		QueryText_OpeningEntryTableName1 = "
+			|UNION ALL
+			|SELECT
+			|	OpeningEntry.Ref,
+			|	MAX(OpeningEntry.Ref.Company),
+			|	MAX(OpeningEntry.Partner),
+			|	MAX(OpeningEntry.LegalName),
+			|	MAX(OpeningEntry.Agreement),
+			|	SUM(OpeningEntry.Amount),
+			|	MAX(OpeningEntry.Currency)
+			|FROM
+			|Document.OpeningEntry.%1 AS OpeningEntry
+			|	WHERE
+			|	TRUE
+			|	%2
+			|GROUP BY
+			|	OpeningEntry.Ref";
+	EndIf;
+	
+	QueryText_OpeningEntryTableName2 = "";
+	If OpeningEntryTableName2 <> Undefined Then
+		QueryText_OpeningEntryTableName2 = "
+			|UNION ALL
+			|SELECT
+			|	OpeningEntry.Ref,
+			|	MAX(OpeningEntry.Ref.Company),
+			|	MAX(OpeningEntry.Partner),
+			|	MAX(OpeningEntry.LegalName),
+			|	MAX(OpeningEntry.Agreement),
+			|	SUM(OpeningEntry.Amount),
+			|	MAX(OpeningEntry.Currency)
+			|FROM
+			|Document.OpeningEntry.%1 AS OpeningEntry
+			|	WHERE
+			|	TRUE
+			|	%2
+			|GROUP BY
+			|	OpeningEntry.Ref";
+	EndIf;
+		
+	QueryParameters = New Structure();
+	QueryParameters.Insert("Ref", Ref);
+	
+	ArrayOfConditions = New Array();
+	ArrayOfConditionsOpeningEntry = New Array();
+	
 	If Parameters.Property("Type") Then
 		QueryParameters.Insert("Type", Parameters.Type);
-		QueryTextArray.Add("
-			|	AND Obj.Type = &Type");
+		ArrayOfConditions.Add(" AND Obj.Type = &Type");
 	EndIf;
 	
 	If Parameters.Property("Unmarked") Then
 		QueryParameters.Insert("Unmarked", Parameters.Unmarked);
-		QueryTextArray.Add("
-			|	AND NOT Obj.DeletionMark = &Unmarked");
+		ArrayOfConditions.Add(" AND NOT Obj.DeletionMark = &Unmarked");
+		ArrayOfConditionsOpeningEntry.Add(" AND NOT OpeningEntry.Ref.DeletionMark = &Unmarked");
 	EndIf;
 	
 	If Parameters.Property("Partner") Then
 		QueryParameters.Insert("Partner", Parameters.Partner);
-		QueryTextArray.Add("
-			|	AND Obj.Ref.Partner = &Partner");
+		ArrayOfConditions.Add(" AND Obj.Ref.Partner = &Partner");
+		ArrayOfConditionsOpeningEntry.Add(" AND OpeningEntry.Partner = &Partner");
 	EndIf;
 	
 	If Parameters.Property("LegalName") Then
 		QueryParameters.Insert("LegalName", Parameters.LegalName);
-		QueryTextArray.Add("
-			|	AND Obj.Ref.LegalName = &LegalName");
+		ArrayOfConditions.Add(" AND Obj.Ref.LegalName = &LegalName");
+		ArrayOfConditionsOpeningEntry.Add(" AND OpeningEntry.LegalName = &LegalName");
 	EndIf;
 	
 	If Parameters.Property("Agreement") Then
 		QueryParameters.Insert("Agreement", Parameters.Agreement);
-		QueryTextArray.Add("
-			|	AND Obj.Ref.Agreement = &Agreement");
+		ArrayOfConditions.Add(" AND Obj.Ref.Agreement = &Agreement");
+		ArrayOfConditionsOpeningEntry.Add(" AND OpeningEntry.Agreement = &Agreement");
 	EndIf;
 	
 	If Parameters.Property("Company") Then
 		QueryParameters.Insert("Company", Parameters.Company);
-		QueryTextArray.Add("
-			|	AND Obj.Ref.Company = &Company");
+		ArrayOfConditions.Add(" AND Obj.Ref.Company = &Company");
+		ArrayOfConditionsOpeningEntry.Add(" AND OpeningEntry.Ref.Company = &Company");
 	EndIf;
 	
 	If Parameters.Property("Agreement_ApArPostingDetail") Then
 		QueryParameters.Insert("Agreement_ApArPostingDetail", Parameters.Agreement_ApArPostingDetail);
-		QueryTextArray.Add("
-			|	AND Obj.Ref.Agreement.ApArPostingDetail = &Agreement_ApArPostingDetail");
+		ArrayOfConditions.Add(" AND Obj.Ref.Agreement.ApArPostingDetail = &Agreement_ApArPostingDetail");
+		ArrayOfConditionsOpeningEntry.Add(" AND OpeningEntry.Agreement.ApArPostingDetail = &Agreement_ApArPostingDetail");
 	EndIf;
 	
 	If Parameters.Property("Posted") Then
 		QueryParameters.Insert("Posted", Parameters.Posted);
-		QueryTextArray.Add("
-			|	AND Obj.Ref.Posted = &Posted");
+		ArrayOfConditions.Add(" AND Obj.Ref.Posted = &Posted");
+		ArrayOfConditionsOpeningEntry.Add(" AND OpeningEntry.Ref.Posted = &Posted");
 	EndIf;
 	
-	ListQueryText = StrConcat(QueryTextArray);
+	ConditionsText             = StrConcat(ArrayOfConditions);
+	ConditionsOpeningEntryText = StrConcat(ArrayOfConditionsOpeningEntry);
+	QueryText_TableName = StrTemplate(QueryText_TableName, TableName, ConditionsText);
 	
-	FilterStructure = New Structure;
-	FilterStructure.Insert("QueryText", ListQueryText);
+	If OpeningEntryTableName1 <> Undefined Then
+		QueryText_OpeningEntryTableName1 = StrTemplate(QueryText_OpeningEntryTableName1, OpeningEntryTableName1, ConditionsOpeningEntryText);
+	EndIf;
+
+	If OpeningEntryTableName2 <> Undefined Then
+		QueryText_OpeningEntryTableName2 = StrTemplate(QueryText_OpeningEntryTableName2, OpeningEntryTableName2, ConditionsOpeningEntryText);
+	EndIf;
+	
+	QueryText = QueryText_TableName 
+	+ QueryText_OpeningEntryTableName1 
+	+ QueryText_OpeningEntryTableName2
+	+ " ;
+	|SELECT ALLOWED
+	|	AP.BasisDocument AS Ref,
+	|	AP.Company AS Company,
+	|	AP.Partner AS Partner,
+	|	AP.LegalName AS LegalName,
+	|	AP.Agreement AS Agreement,
+	|	AP.Currency AS Currency,
+	|	AP.AmountBalance AS DocumentAmount
+	|FROM
+	|	AccumulationRegister.PartnerApTransactions.Balance(&Period,
+	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	AND (BasisDocument, Company, Partner, LegalName, Agreement, Currency) IN
+	|		(SELECT
+	|			Doc.Ref,
+	|			Doc.Company,
+	|			Doc.Partner,
+	|			Doc.LegalName,
+	|			Doc.Agreement,
+	|			Doc.Currency
+	|		FROM
+	|			Doc AS Doc)) AS AP
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	AR.BasisDocument,
+	|	AR.Company,
+	|	AR.Partner,
+	|	AR.LegalName,
+	|	AR.Agreement,
+	|	AR.Currency,
+	|	AR.AmountBalance
+	|FROM
+	|	AccumulationRegister.PartnerArTransactions.Balance(&Period,
+	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	AND (BasisDocument, Company, Partner, LegalName, Agreement, Currency) IN
+	|		(SELECT
+	|			Doc.Ref,
+	|			Doc.Company,
+	|			Doc.Partner,
+	|			Doc.LegalName,
+	|			Doc.Agreement,
+	|			Doc.Currency
+	|		FROM
+	|			Doc AS Doc)) AS AR";
+	
+	FilterStructure = New Structure();
+	FilterStructure.Insert("QueryText", QueryText);
 	FilterStructure.Insert("QueryParameters", QueryParameters);
 	
 	Return FilterStructure;

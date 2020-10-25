@@ -13,9 +13,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 # Checking the discount calculation in the group Minimum created inside the group Minimum, which is in the group Maximum
 # With Type joins Minimum, discounts in this group will work out the discounts that are least beneficial to the client. 

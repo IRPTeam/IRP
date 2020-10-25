@@ -84,8 +84,8 @@ Function GetQueryTextRetailSalesReceiptItemList()
 		|	RetailSalesReceiptItemList.Ref.Company AS Company,
 		|	RetailSalesReceiptItemList.Store AS Store,
 		|	RetailSalesReceiptItemList.ItemKey AS ItemKey,
-		|	SUM(RetailSalesReceiptItemList.Quantity) AS Quantity,
-		|	SUM(RetailSalesReceiptItemList.TotalAmount) AS TotalAmount,
+		|	RetailSalesReceiptItemList.Quantity AS Quantity,
+		|	RetailSalesReceiptItemList.TotalAmount AS TotalAmount,
 		|	RetailSalesReceiptItemList.Ref.Partner AS Partner,
 		|	RetailSalesReceiptItemList.Ref.LegalName AS LegalName,
 		|	CASE
@@ -103,7 +103,6 @@ Function GetQueryTextRetailSalesReceiptItemList()
 		|	RetailSalesReceiptItemList.Ref.Date AS Period,
 		|	RetailSalesReceiptItemList.Ref AS RetailSalesReceipt,
 		|	RetailSalesReceiptItemList.Key AS RowKeyUUID,
-		|	RetailSalesReceiptItemList.Ref.IsOpeningEntry AS IsOpeningEntry,
 		|	CASE
 		|		WHEN RetailSalesReceiptItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
 		|			THEN TRUE
@@ -117,47 +116,12 @@ Function GetQueryTextRetailSalesReceiptItemList()
 		|			THEN RetailSalesReceiptItemList.Ref
 		|		ELSE UNDEFINED
 		|	END AS BasisDocument,
-		|	SUM(RetailSalesReceiptItemList.NetAmount) AS NetAmount,
-		|	SUM(RetailSalesReceiptItemList.OffersAmount) AS OffersAmount
+		|	RetailSalesReceiptItemList.NetAmount AS NetAmount,
+		|	RetailSalesReceiptItemList.OffersAmount AS OffersAmount
 		|FROM
 		|	Document.RetailSalesReceipt.ItemList AS RetailSalesReceiptItemList
 		|WHERE
-		|	RetailSalesReceiptItemList.Ref = &Ref
-		|GROUP BY
-		|	RetailSalesReceiptItemList.Ref.Company,
-		|	RetailSalesReceiptItemList.Store,
-		|	RetailSalesReceiptItemList.ItemKey,
-		|	RetailSalesReceiptItemList.Ref.Partner,
-		|	RetailSalesReceiptItemList.Ref.LegalName,
-		|	CASE
-		|		WHEN RetailSalesReceiptItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-		|		AND RetailSalesReceiptItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-		|			THEN RetailSalesReceiptItemList.Ref.Agreement.StandardAgreement
-		|		ELSE RetailSalesReceiptItemList.Ref.Agreement
-		|	END,
-		|	RetailSalesReceiptItemList.Ref.Currency,
-		|	RetailSalesReceiptItemList.Unit,
-		|	RetailSalesReceiptItemList.ItemKey.Item.Unit,
-		|	RetailSalesReceiptItemList.ItemKey.Unit,
-		|	RetailSalesReceiptItemList.ItemKey.Item,
-		|	RetailSalesReceiptItemList.Ref.Date,
-		|	RetailSalesReceiptItemList.Ref,
-		|	RetailSalesReceiptItemList.Key,
-		|	RetailSalesReceiptItemList.Ref.IsOpeningEntry,
-		|	CASE
-		|		WHEN RetailSalesReceiptItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
-		|			THEN TRUE
-		|		ELSE FALSE
-		|	END,
-		|	RetailSalesReceiptItemList.BusinessUnit,
-		|	RetailSalesReceiptItemList.RevenueType,
-		|	CASE
-		|		WHEN RetailSalesReceiptItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			THEN RetailSalesReceiptItemList.Ref
-		|		ELSE UNDEFINED
-		|	END,
-		|	RetailSalesReceiptItemList.AdditionalAnalytic";
-
+		|	RetailSalesReceiptItemList.Ref = &Ref";
 EndFunction
 
 Function GetQueryTextRetailSalesReceiptTaxList()
@@ -412,7 +376,6 @@ Function GetQueryTextQueryTable()
 		|	QueryTable.Period AS Period,
 		|	QueryTable.RetailSalesReceipt AS RetailSalesReceipt,
 		|	QueryTable.RowKey AS RowKey,
-		|	QueryTable.IsOpeningEntry AS IsOpeningEntry,
 		|	QueryTable.BusinessUnit AS BusinessUnit,
 		|	QueryTable.RevenueType AS RevenueType,
 		|	QueryTable.AdditionalAnalytic AS AdditionalAnalytic,
@@ -433,8 +396,6 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period AS Period
 		|FROM
 		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.IsOpeningEntry
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -452,8 +413,6 @@ Function GetQueryTextQueryTable()
 		|FROM
 		|	tmp AS tmp
 		|WHERE
-		|	NOT tmp.IsOpeningEntry
-		|	AND
 		|	NOT tmp.IsService
 		|GROUP BY
 		|	tmp.Period,

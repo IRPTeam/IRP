@@ -11,6 +11,7 @@
   <registeredDocuments>Document.SalesReturn</registeredDocuments>
   <registeredDocuments>Document.PurchaseReturn</registeredDocuments>
   <registeredDocuments>Document.SalesInvoice</registeredDocuments>
+  <registeredDocuments>Document.OpeningEntry</registeredDocuments>
   <forms uuid="660fcb41-19b0-4b15-9986-d0964ef549f3">
     <name>ChoiceForm</name>
     <synonym>

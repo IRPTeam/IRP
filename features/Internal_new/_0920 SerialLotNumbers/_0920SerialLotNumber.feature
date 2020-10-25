@@ -13,12 +13,13 @@ So the user can't select it in the sales and purchase documents
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
+
 
 
 Scenario: _092000 preparation (SerialLotNumbers)
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog PaymentTypes objects
 		When Create catalog BusinessUnits objects

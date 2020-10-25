@@ -65,6 +65,22 @@
     </synonym>
     <languageCode>ru</languageCode>
   </languages>
+  <languages uuid="eaf5ce2f-f41e-4912-9067-c51b8c98c69c">
+    <name>French</name>
+    <synonym>
+      <key>en</key>
+      <value>French</value>
+    </synonym>
+    <languageCode>fr</languageCode>
+  </languages>
+  <languages uuid="6c7093f5-ffe3-4d21-b9a4-2eab98a4864b">
+    <name>German</name>
+    <synonym>
+      <key>en</key>
+      <value>German</value>
+    </synonym>
+    <languageCode>de</languageCode>
+  </languages>
   <languages uuid="b37d11ba-9391-4abb-b99b-01f060a79638">
     <name>HASH</name>
     <synonym>

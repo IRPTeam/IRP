@@ -67,10 +67,6 @@
           <key>en</key>
           <value>Item</value>
         </inputHint>
-        <inputHint>
-          <key>tr</key>
-          <value>Malzeme</value>
-        </inputHint>
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
@@ -143,10 +139,6 @@
           <key>en</key>
           <value>Property</value>
         </inputHint>
-        <inputHint>
-          <key>tr</key>
-          <value>Özellik</value>
-        </inputHint>
       </extInfo>
     </items>
     <visible>true</visible>
@@ -154,14 +146,6 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <title>
-      <key></key>
-      <value>Group filter</value>
-    </title>
-    <toolTip>
-      <key></key>
-      <value>Group filter</value>
-    </toolTip>
     <extendedTooltip>
       <name>GroupFilterExtendedTooltip</name>
       <id>60</id>
@@ -283,10 +267,6 @@
                 <key>en</key>
                 <value>Picture not found</value>
               </nonselectedPictureText>
-              <nonselectedPictureText>
-                <key>tr</key>
-                <value>Resim bulunamadı</value>
-              </nonselectedPictureText>
               <border xsi:type="core:BorderDef">
                 <width>1</width>
               </border>
@@ -393,10 +373,6 @@
           <key>en</key>
           <value>Type</value>
         </title>
-        <title>
-          <key>tr</key>
-          <value>Tip</value>
-        </title>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -447,10 +423,6 @@
         <id>86</id>
         <title>
           <key>en</key>
-          <value>ID</value>
-        </title>
-        <title>
-          <key>tr</key>
           <value>ID</value>
         </title>
         <visible>true</visible>
@@ -504,10 +476,6 @@
         <title>
           <key>en</key>
           <value>Key ID</value>
-        </title>
-        <title>
-          <key>tr</key>
-          <value>SKU</value>
         </title>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -614,19 +582,11 @@
         <common>true</common>
       </userVisible>
       <title>
-        <key></key>
-        <value>Group picture</value>
-      </title>
-      <title>
         <key>en</key>
         <value>Picture</value>
       </title>
-      <title>
-        <key>tr</key>
-        <value>Resim</value>
-      </title>
       <toolTip>
-        <key></key>
+        <key>en</key>
         <value>Group picture</value>
       </toolTip>
       <extendedTooltip>
@@ -978,17 +938,9 @@
         <key>en</key>
         <value>Items property</value>
       </title>
-      <title>
-        <key>tr</key>
-        <value>Malzeme özellikleri</value>
-      </title>
       <toolTip>
         <key>en</key>
         <value>Group items property</value>
-      </toolTip>
-      <toolTip>
-        <key>tr</key>
-        <value>Grup malzeme özellikleri</value>
       </toolTip>
       <extendedTooltip>
         <name>GroupItemsPropertyExtendedTooltip</name>
@@ -1332,17 +1284,9 @@
         <key>en</key>
         <value>Key property</value>
       </title>
-      <title>
-        <key>tr</key>
-        <value>Varyant özellikleri</value>
-      </title>
       <toolTip>
         <key>en</key>
         <value>Group key property</value>
-      </toolTip>
-      <toolTip>
-        <key>tr</key>
-        <value>Grup varyant özellikleri</value>
       </toolTip>
       <extendedTooltip>
         <name>GroupKeyPropertyExtendedTooltip</name>
@@ -1371,11 +1315,11 @@
       <common>true</common>
     </userVisible>
     <title>
-      <key></key>
+      <key>en</key>
       <value>Group pages</value>
     </title>
     <toolTip>
-      <key></key>
+      <key>en</key>
       <value>Group pages</value>
     </toolTip>
     <extendedTooltip>
@@ -1582,10 +1526,6 @@
       <key>en</key>
       <value>Barcode</value>
     </title>
-    <title>
-      <key>tr</key>
-      <value>Barkod</value>
-    </title>
     <id>2</id>
     <valueType>
       <types>String</types>
@@ -1604,10 +1544,6 @@
       <key>en</key>
       <value>Item</value>
     </title>
-    <title>
-      <key>tr</key>
-      <value>Malzeme</value>
-    </title>
     <id>3</id>
     <valueType>
       <types>CatalogRef.Items</types>
@@ -1625,10 +1561,6 @@
       <key>en</key>
       <value>Item key</value>
     </title>
-    <title>
-      <key>tr</key>
-      <value>Varyant</value>
-    </title>
     <id>4</id>
     <valueType>
       <types>CatalogRef.ItemKeys</types>
@@ -1643,7 +1575,7 @@
   <attributes>
     <name>Photo</name>
     <title>
-      <key></key>
+      <key>en</key>
       <value>Photo</value>
     </title>
     <id>5</id>
@@ -1662,10 +1594,6 @@
     <title>
       <key>en</key>
       <value>Picture decoration</value>
-    </title>
-    <title>
-      <key>tr</key>
-      <value>Resim alanı</value>
     </title>
     <id>6</id>
     <valueType>
@@ -1703,17 +1631,9 @@
       <key>en</key>
       <value>OK</value>
     </title>
-    <title>
-      <key>tr</key>
-      <value>OK</value>
-    </title>
     <id>2</id>
     <toolTip>
       <key>en</key>
-      <value>OK</value>
-    </toolTip>
-    <toolTip>
-      <key>tr</key>
       <value>OK</value>
     </toolTip>
     <use>
@@ -1732,18 +1652,10 @@
       <key>en</key>
       <value>Not OK</value>
     </title>
-    <title>
-      <key>tr</key>
-      <value>OK DEĞİL</value>
-    </title>
     <id>3</id>
     <toolTip>
       <key>en</key>
       <value>Not OK</value>
-    </toolTip>
-    <toolTip>
-      <key>tr</key>
-      <value>OK DEĞİL</value>
     </toolTip>
     <use>
       <common>true</common>

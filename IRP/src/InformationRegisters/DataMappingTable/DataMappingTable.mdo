@@ -17,10 +17,10 @@
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
   <resources uuid="6167ec7a-3b1f-4320-a1d4-19e7c0c3b158">
-    <name>Traget</name>
+    <name>Target</name>
     <synonym>
       <key>en</key>
-      <value>Traget</value>
+      <value>Target</value>
     </synonym>
     <type>
       <types>AnyRef</types>
@@ -65,22 +65,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <dimensions uuid="4e6b690b-de35-4a0f-9405-7d9fecf697b8">
-    <name>Settings</name>
-    <synonym>
-      <key>en</key>
-      <value>Settings</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.IntegrationSettings</types>
-    </type>
-    <fillChecking>ShowError</fillChecking>
-    <denyIncompleteValues>true</denyIncompleteValues>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
   <dimensions uuid="55e4a4be-84ef-4772-84d9-30395a61d0b9">
     <name>Source</name>
     <synonym>

@@ -454,6 +454,7 @@
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.ShareToUsers</commonForms>
   <commonForms>CommonForm.EditTax</commonForms>
+  <commonForms>CommonForm.DataMappingForm</commonForms>
   <catalogs>Catalog.EquipmentDrivers</catalogs>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>

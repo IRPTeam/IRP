@@ -118,6 +118,7 @@
   <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
+  <registerRecords>AccumulationRegister.Aging</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -198,21 +199,6 @@
       <key>en</key>
       <value>Date </value>
     </toolTip>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="c10fa221-e9f1-43d3-b1f5-f31d8ce02de0">
-    <name>IsOpeningEntry</name>
-    <synonym>
-      <key>en</key>
-      <value>Is opening entry</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -527,6 +513,7 @@
       </synonym>
       <type>
         <types>DocumentRef.SalesInvoice</types>
+        <types>DocumentRef.OpeningEntry</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

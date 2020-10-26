@@ -1,7 +1,7 @@
 Function GetPictureURL(FileRef) Export
 	URLStructure = PictureViewerServer.GetPictureURL(FileRef);
-	ProccessingCommonModule = Eval(URLStructure.ProccessingModule);
-	Return ProccessingCommonModule.PreparePictureURL(URLStructure.IntegrationSettings, URLStructure.PictureURL);
+	ProcessingCommonModule = Eval(URLStructure.ProccessingModule);
+	Return ProcessingCommonModule.PreparePictureURL(URLStructure.IntegrationSettings, URLStructure.PictureURL);
 EndFunction
 
 Function GetPictureURLByFileID(FileID) Export
@@ -116,8 +116,6 @@ Function UploadPicture(File, Volume) Export
 		Raise ConnectionSettings.Message;
 	EndIf;
 	
-	
-	
 	If ConnectionSettings.Value.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
 		IntegrationServer.SaveFileToFileStorage(ConnectionSettings.Value.AddressPath, FileID + "." + FileInfo.Extension, RequestBody);
 		FileInfo.Success = True;
@@ -175,20 +173,24 @@ Function GetPictureAndPutToTempStorage(UUID, URI, GETIntegrationSettings) Export
 	EndIf;
 EndFunction
 
-Function PicturesInfoForSlider(ItemRef, UUID, FileRef = Undefined) Export
+Function PicturesInfoForSlider(ItemRef, UUID, FileRef = Undefined, UseFullSizePhoto = False) Export
 	
 	Pictures = PictureViewerServer.PicturesInfoForSlider(ItemRef, FileRef);
 	
 	PicArray = New Array;
 	For Each Picture In Pictures Do
 		Map = New Structure("Src, Preview, ID");
-		ProccessingCommonModule = Eval(Picture.PictureURLStructure.ProccessingModule);
-		Picture.Src = ProccessingCommonModule.PreparePictureURL(
-							Picture.PictureURLStructure.IntegrationSettings, Picture.Src, UUID);
-		If Picture.SrcBD = Undefined Then
-			Map.Src = Picture.Src;
+		If UseFullSizePhoto Then
+			ProcessingCommonModule = Eval(Picture.PictureURLStructure.ProccessingModule);
+			Picture.Src = ProcessingCommonModule.PreparePictureURL(
+								Picture.PictureURLStructure.IntegrationSettings, Picture.Src, UUID);
+			If Picture.SrcBD = Undefined Then
+				Map.Src = Picture.Src;
+			Else
+				Map.Src = PutToTempStorage(Picture.SrcBD, UUID);
+			EndIf;
 		Else
-			Map.Src = PutToTempStorage(Picture.SrcBD, UUID);
+			Map.Src = PutToTempStorage(Picture.PreviewBD, UUID);
 		EndIf;
 		If Picture.PreviewBD = Undefined Then
 			If NOT ValueIsFilled(Picture.Preview) Then

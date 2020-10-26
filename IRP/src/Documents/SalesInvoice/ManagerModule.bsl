@@ -4,22 +4,24 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("OrderBalance"                         , PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("OrderReservation"                     , PostingServer.CreateTable(AccReg.OrderReservation));
-	Tables.Insert("StockReservation"                     , PostingServer.CreateTable(AccReg.StockReservation));
-	Tables.Insert("InventoryBalance"                     , PostingServer.CreateTable(AccReg.InventoryBalance));
-	Tables.Insert("SalesTurnovers"                       , PostingServer.CreateTable(AccReg.SalesTurnovers));
-	Tables.Insert("GoodsInTransitOutgoing"               , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
-	Tables.Insert("StockBalance"                         , PostingServer.CreateTable(AccReg.StockBalance));
-	Tables.Insert("ShipmentOrders"                       , PostingServer.CreateTable(AccReg.ShipmentOrders));
-	Tables.Insert("PartnerArTransactions"                , PostingServer.CreateTable(AccReg.PartnerArTransactions));
-	Tables.Insert("AdvanceFromCustomers_Lock"            , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
-	Tables.Insert("AdvanceFromCustomers_Registrations"   , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
-	Tables.Insert("ShipmentConfirmationSchedule_Expense" , PostingServer.CreateTable(AccReg.ShipmentConfirmationSchedule));
-	Tables.Insert("ShipmentConfirmationSchedule_Receipt" , PostingServer.CreateTable(AccReg.ShipmentConfirmationSchedule));
-	Tables.Insert("ReconciliationStatement"              , PostingServer.CreateTable(AccReg.ReconciliationStatement));
-	Tables.Insert("TaxesTurnovers"                       , PostingServer.CreateTable(AccReg.TaxesTurnovers));
-	Tables.Insert("RevenuesTurnovers"                    , PostingServer.CreateTable(AccReg.RevenuesTurnovers));
+	Tables.Insert("OrderBalance"                          , PostingServer.CreateTable(AccReg.OrderBalance));
+	Tables.Insert("OrderReservation"                      , PostingServer.CreateTable(AccReg.OrderReservation));
+	Tables.Insert("StockReservation"                      , PostingServer.CreateTable(AccReg.StockReservation));
+	Tables.Insert("InventoryBalance"                      , PostingServer.CreateTable(AccReg.InventoryBalance));
+	Tables.Insert("SalesTurnovers"                        , PostingServer.CreateTable(AccReg.SalesTurnovers));
+	Tables.Insert("GoodsInTransitOutgoing"                , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
+	Tables.Insert("StockBalance"                          , PostingServer.CreateTable(AccReg.StockBalance));
+	Tables.Insert("ShipmentOrders"                        , PostingServer.CreateTable(AccReg.ShipmentOrders));
+	Tables.Insert("PartnerArTransactions"                 , PostingServer.CreateTable(AccReg.PartnerArTransactions));
+	Tables.Insert("AdvanceFromCustomers_Lock"             , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
+	Tables.Insert("PartnerArTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
+	Tables.Insert("ShipmentConfirmationSchedule_Expense"  , PostingServer.CreateTable(AccReg.ShipmentConfirmationSchedule));
+	Tables.Insert("ShipmentConfirmationSchedule_Receipt"  , PostingServer.CreateTable(AccReg.ShipmentConfirmationSchedule));
+	Tables.Insert("ReconciliationStatement"               , PostingServer.CreateTable(AccReg.ReconciliationStatement));
+	Tables.Insert("TaxesTurnovers"                        , PostingServer.CreateTable(AccReg.TaxesTurnovers));
+	Tables.Insert("RevenuesTurnovers"                     , PostingServer.CreateTable(AccReg.RevenuesTurnovers));
+	Tables.Insert("Aging_Receipt"                         , PostingServer.CreateTable(AccReg.Aging));
+	Tables.Insert("Aging_Expense"                         , PostingServer.CreateTable(AccReg.Aging));
 	
 	Tables.Insert("OrderBalance_Exists"           , PostingServer.CreateTable(AccReg.OrderBalance));
 	Tables.Insert("GoodsInTransitOutgoing_Exists" , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
@@ -55,6 +57,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResultSalesTurnovers = QuerySalesTurnovers.Execute();
 	QueryTableSalesTurnovers = QueryResultSalesTurnovers.Unload();
 	
+	QueryAging = New Query();
+	QueryAging.Text = GetQueryTextSalesInvoiceAging();
+	QueryAging.SetParameter("Ref", Ref);
+	QueryResultAging = QueryAging.Execute();
+	QueryTableAging = QueryResultAging.Unload();
+	
 	Query = New Query();
 	Query.Text = GetQueryTextQueryTable();
 	Query.SetParameter("QueryTable", QueryTableItemList);
@@ -76,6 +84,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables.TaxesTurnovers = QueryTableTaxList;
 	Tables.SalesTurnovers = QueryTableSalesTurnovers;
+	Tables.Aging_Receipt  = QueryTableAging;
 		
 	Return Tables;
 EndFunction
@@ -218,7 +227,6 @@ Function GetQueryTextSalesInvoiceItemList()
 		|	SalesInvoiceItemList.Ref AS ShipmentBasis,
 		|	SalesInvoiceItemList.Ref AS SalesInvoice,
 		|	SalesInvoiceItemList.Key AS RowKeyUUID,
-		|	SalesInvoiceItemList.Ref.IsOpeningEntry AS IsOpeningEntry,
 		|	SalesInvoiceItemList.DeliveryDate AS DeliveryDate,
 		|	CASE
 		|		WHEN SalesInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
@@ -271,6 +279,31 @@ Function GetQueryTextSalesInvoiceTaxList()
 		|	SalesInvoiceTaxList.Ref = &Ref";
 EndFunction
 
+Function GetQueryTextSalesInvoiceAging()
+	Return 
+	"SELECT
+	|	SalesInvoicePaymentTerms.Date AS PaymentDate,
+	|	SalesInvoicePaymentTerms.Ref.Date AS Period,
+	|	SUM(SalesInvoicePaymentTerms.Amount) AS Amount,
+	|	SalesInvoicePaymentTerms.Ref.Company AS Company,
+	|	SalesInvoicePaymentTerms.Ref.Partner AS Partner,
+	|	SalesInvoicePaymentTerms.Ref.Agreement AS Agreement,
+	|	SalesInvoicePaymentTerms.Ref.Currency AS Currency,
+	|	SalesInvoicePaymentTerms.Ref AS Invoice
+	|FROM
+	|	Document.SalesInvoice.PaymentTerms AS SalesInvoicePaymentTerms
+	|WHERE
+	|	SalesInvoicePaymentTerms.Ref = &Ref
+	|GROUP BY
+	|	SalesInvoicePaymentTerms.Date,
+	|	SalesInvoicePaymentTerms.Ref.Company,
+	|	SalesInvoicePaymentTerms.Ref.Partner,
+	|	SalesInvoicePaymentTerms.Ref.Agreement,
+	|	SalesInvoicePaymentTerms.Ref.Currency,
+	|	SalesInvoicePaymentTerms.Ref.Date,
+	|	SalesInvoicePaymentTerms.Ref";
+EndFunction
+
 Function GetQueryTextQueryTable()
 	Return
 		"SELECT
@@ -291,7 +324,6 @@ Function GetQueryTextQueryTable()
 		|	QueryTable.ShipmentBasis AS ShipmentBasis,
 		|	QueryTable.SalesInvoice AS SalesInvoice,
 		|	QueryTable.RowKey AS RowKey,
-		|	QueryTable.IsOpeningEntry AS IsOpeningEntry,
 		|	QueryTable.DeliveryDate AS DeliveryDate,
 		|	QueryTable.BusinessUnit AS BusinessUnit,
 		|	QueryTable.RevenueType AS RevenueType,
@@ -319,8 +351,6 @@ Function GetQueryTextQueryTable()
 		|	tmp AS tmp
 		|WHERE
 		|	tmp.SalesOrder <> VALUE(Document.SalesOrder.EmptyRef)
-		|	AND
-		|	NOT tmp.IsOpeningEntry
 		|;
 		|
 		|//[2]//////////////////////////////////////////////////////////////////////////////
@@ -334,8 +364,6 @@ Function GetQueryTextQueryTable()
 		|	tmp AS tmp
 		|WHERE
 		|	tmp.SalesOrder <> VALUE(Document.SalesOrder.EmptyRef)
-		|	AND
-		|	NOT tmp.IsOpeningEntry
 		|	AND
 		|	NOT tmp.IsService
 		|GROUP BY
@@ -356,8 +384,6 @@ Function GetQueryTextQueryTable()
 		|	tmp AS tmp
 		|WHERE
 		|	NOT tmp.UseSalesOrder
-		|	AND
-		|	NOT tmp.IsOpeningEntry
 		|	AND
 		|	NOT tmp.ShipmentConfirmationBeforeSalesInvoice
 		|	AND 
@@ -380,8 +406,6 @@ Function GetQueryTextQueryTable()
 		|	tmp AS tmp
 		|WHERE
 		|	(NOT tmp.ShipmentConfirmationBeforeSalesInvoice OR NOT tmp.UseSalesOrder)
-		|	AND
-		|	NOT tmp.IsOpeningEntry
 		|	AND
 		|	NOT tmp.IsService
 		|GROUP BY
@@ -435,8 +459,6 @@ Function GetQueryTextQueryTable()
 		|	AND
 		|	NOT tmp.ShipmentConfirmationBeforeSalesInvoice
 		|	AND
-		|	NOT tmp.IsOpeningEntry
-		|	AND
 		|	NOT tmp.IsService
 		|GROUP BY
 		|	tmp.Period,
@@ -459,8 +481,6 @@ Function GetQueryTextQueryTable()
 		|	AND tmp.SalesInvoice = ShipmentConfirmations.Ref
 		|WHERE
 		|	tmp.ShipmentConfirmationBeforeSalesInvoice
-		|	AND
-		|	NOT tmp.IsOpeningEntry
 		|	AND tmp.UseSalesOrder
 		|;
 		|
@@ -476,8 +496,6 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period AS Period
 		|FROM
 		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.IsOpeningEntry
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.BasisDocument,
@@ -500,8 +518,6 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period AS Period
 		|FROM
 		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.IsOpeningEntry
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.BasisDocument,
@@ -534,8 +550,6 @@ Function GetQueryTextQueryTable()
 		|		NOT tmp.UseShipmentConfirmation
 		|		AND
 		|		NOT tmp.ShipmentConfirmationBeforeSalesInvoice
-		|		AND
-		|		NOT tmp.IsOpeningEntry
 		|		AND ShipmentConfirmationSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
 		|
 		|UNION ALL
@@ -560,8 +574,6 @@ Function GetQueryTextQueryTable()
 		|		AND tmp.UseShipmentConfirmation
 		|		AND
 		|		NOT tmp.ShipmentConfirmationBeforeSalesInvoice
-		|		AND
-		|		NOT tmp.IsOpeningEntry
 		|		AND ShipmentConfirmationSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
 		|
 		|UNION ALL
@@ -582,8 +594,6 @@ Function GetQueryTextQueryTable()
 		|	AND
 		|	NOT tmp.ShipmentConfirmationBeforeSalesInvoice
 		|	AND
-		|	NOT tmp.IsOpeningEntry
-		|	AND
 		|	NOT tmp.UseSalesOrder
 		|	AND tmp.DeliveryDate <> DATETIME(1, 1, 1)
 		|;
@@ -602,8 +612,6 @@ Function GetQueryTextQueryTable()
 		|	tmp AS tmp
 		|WHERE
 		|	NOT tmp.ShipmentConfirmationBeforeSalesInvoice
-		|	AND
-		|	NOT tmp.IsOpeningEntry
 		|	AND
 		|	NOT tmp.UseSalesOrder
 		|	AND tmp.DeliveryDate <> DATETIME(1, 1, 1)
@@ -630,8 +638,6 @@ Function GetQueryTextQueryTable()
 		|		AND tmp.UseShipmentConfirmation
 		|		AND
 		|		NOT tmp.ShipmentConfirmationBeforeSalesInvoice
-		|		AND
-		|		NOT tmp.IsOpeningEntry
 		|		AND ShipmentConfirmationSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
 		|;
 		|
@@ -644,8 +650,6 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period AS Period
 		|FROM
 		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.IsOpeningEntry
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.LegalName,
@@ -732,17 +736,27 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	RevenuesTurnovers = AccumulationRegisters.RevenuesTurnovers.GetLockFields(DocumentDataTables.RevenuesTurnovers);
 	DataMapWithLockFields.Insert(RevenuesTurnovers.RegisterName, RevenuesTurnovers.LockInfo);
 	
+	// Aging
+	Aging = AccumulationRegisters.Aging.GetLockFields(DocumentDataTables.Aging_Receipt);
+	DataMapWithLockFields.Insert(Aging.RegisterName, Aging.LockInfo);
+	
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	// Advance from customers
-	Parameters.DocumentDataTables.AdvanceFromCustomers_Registrations =
-		AccumulationRegisters.AdvanceFromCustomers.GetTableExpenceAdvance(Parameters.Object.RegisterRecords
+	Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance =
+		AccumulationRegisters.AdvanceFromCustomers.GetTableAdvanceFromCustomers_OffsetOfAdvance(Parameters.Object.RegisterRecords
 			, Parameters.PointInTime
 			, Parameters.DocumentDataTables.AdvanceFromCustomers_Lock);
-			
-    If Parameters.DocumentDataTables.AdvanceFromCustomers_Registrations.Count() Then
+	
+	// Aging expense
+	Parameters.DocumentDataTables.Aging_Expense = 
+		AccumulationRegisters.Aging.GetTableAging_Expense_OnSalesInvoice(
+		Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance,
+		Parameters.DocumentDataTables.Aging_Receipt);
+	
+    If Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance.Count() Then
     	Query = New Query();
     	Query.Text = 
     	"SELECT
@@ -779,10 +793,10 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
     	|		AND AccountsStatementBalance.Partner = tmp.Partner
     	|		AND AccountsStatementBalance.LegalName = tmp.LegalName
     	|		AND AccountsStatementBalance.Currency = tmp.Currency";
-    	Query.SetParameter("QueryTable", Parameters.DocumentDataTables.AdvanceFromCustomers_Registrations);
+    	Query.SetParameter("QueryTable", Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance);
     	Query.SetParameter("PointInTime", Parameters.PointInTime);
     	Query.SetParameter("Period", Parameters.Object.Date);
-    	Parameters.DocumentDataTables.Insert("AdvanceFromCustomers_Registrations_AccountStatement",
+    	Parameters.DocumentDataTables.Insert("PartnerArTransactions_OffsetOfAdvance_AccountStatement",
     	Query.Execute().Unload());
     EndIf;
 EndProcedure
@@ -854,20 +868,20 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table1.FillValues(AccumulationRecordType.Receipt, "RecordType");
 	ArrayOfTables.Add(Table1);
 	
-	Table2 = Parameters.DocumentDataTables.AdvanceFromCustomers_Registrations.Copy();
+	Table2 = Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance.Copy();
 	Table2.Columns.Amount.Name = "TransactionAR";
 	PostingServer.AddColumnsToAccountsStatementTable(Table2);
 	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
 	ArrayOfTables.Add(Table2);
 	
-	Table3 = Parameters.DocumentDataTables.AdvanceFromCustomers_Registrations.Copy();
+	Table3 = Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance.Copy();
 	Table3.Columns.Amount.Name = "AdvanceFromCustomers";
 	PostingServer.AddColumnsToAccountsStatementTable(Table3);
 	Table3.FillValues(AccumulationRecordType.Expense, "RecordType");
 	ArrayOfTables.Add(Table3);
 		
-	If Parameters.DocumentDataTables.Property("AdvanceFromCustomers_Registrations_AccountStatement") Then
-		Table4 = Parameters.DocumentDataTables.AdvanceFromCustomers_Registrations_AccountStatement.Copy();
+	If Parameters.DocumentDataTables.Property("PartnerArTransactions_OffsetOfAdvance_AccountStatement") Then
+		Table4 = Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance_AccountStatement.Copy();
 		PostingServer.AddColumnsToAccountsStatementTable(Table4);
 		Table4.FillValues(AccumulationRecordType.Expense, "RecordType");
 		ArrayOfTables.Add(Table4);
@@ -883,14 +897,14 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		
 	// PartnerArTransactions
 	// PartnerArTransactions [Receipt]  
-	// AdvanceFromCustomers_Registrations [Expense]
+	// PartnerArTransactions_OffsetOfAdvance [Expense]
 	ArrayOfTables = New Array();
 	Table1 = Parameters.DocumentDataTables.PartnerArTransactions.Copy();
 	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
 	Table1.FillValues(AccumulationRecordType.Receipt, "RecordType");
 	ArrayOfTables.Add(Table1);
 	
-	Table2 = Parameters.DocumentDataTables.AdvanceFromCustomers_Registrations.Copy();
+	Table2 = Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance.Copy();
 	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
 	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
 	ArrayOfTables.Add(Table2);
@@ -906,7 +920,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AdvanceFromCustomers,
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.AdvanceFromCustomers_Registrations));
+			Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance));
 	
 	// ShipmentConfirmationSchedule
 	ArrayOfTables = New Array();
@@ -935,6 +949,24 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	// TaxesTurnovers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.TaxesTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.TaxesTurnovers));
+	
+	// Aging
+	ArrayOfTables = New Array();
+	Table1 = Parameters.DocumentDataTables.Aging_Receipt.Copy();
+	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table1.FillValues(AccumulationRecordType.Receipt, "RecordType");
+	ArrayOfTables.Add(Table1);
+	
+	Table2 = Parameters.DocumentDataTables.Aging_Expense.Copy();
+	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
+	ArrayOfTables.Add(Table2);
+	
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.Aging,
+		New Structure("RecordSet, WriteInTransaction",
+			PostingServer.JoinTables(ArrayOfTables,
+				"RecordType, Period, Company, Partner, Agreement, Invoice, PaymentDate, Currency, Amount"),
+			Parameters.IsReposting));
 	
 	Return PostingDataTables;
 EndFunction

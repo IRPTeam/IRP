@@ -9,10 +9,6 @@
     <key>en</key>
     <value>Desktop</value>
   </synonym>
-  <synonym>
-    <key>tr</key>
-    <value>Masaüstü</value>
-  </synonym>
   <useStandardCommands>true</useStandardCommands>
   <defaultForm>DataProcessor.MobileDesktop.Form.Form</defaultForm>
   <forms uuid="87f1cb68-1da7-47f3-8d01-dbe6f1abff8a">
@@ -20,10 +16,6 @@
     <synonym>
       <key>en</key>
       <value>Form</value>
-    </synonym>
-    <synonym>
-      <key>tr</key>
-      <value>Forma</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

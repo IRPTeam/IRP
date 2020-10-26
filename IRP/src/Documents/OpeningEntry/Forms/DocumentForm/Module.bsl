@@ -6,6 +6,16 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined
 	FillItemList();
 EndProcedure
 
+&AtClient
+Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
+	CurrentData =  Items.AccountReceivableByDocuments.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	SetVisible(Object, ThisObject, CurrentData);
+EndProcedure
+
+
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
@@ -22,6 +32,9 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LibraryLoader.RegisterLibrary(Object, ThisObject, Currencies_GetDeclaration(Object, ThisObject));	
 	DocOpeningEntryServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	If Parameters.Key.IsEmpty() Then
+		SetVisible(Object, ThisObject);
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -100,6 +113,7 @@ EndProcedure
 Procedure OnReadAtServer(CurrentObject) Export
 	DocOpeningEntryServer.OnReadAtServer(Object, ThisObject, CurrentObject);
 	FillItemList();
+	SetVisible(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -347,8 +361,6 @@ Procedure AccountByDocumentsMainTableOnActivateCell(TableName, Item)
 	EndIf;	
 	Items[TableName + "LegalName"].ReadOnly = Not ValueIsFilled(CurrentData.Partner);
 	Items[TableName + "Agreement"].ReadOnly = Not ValueIsFilled(CurrentData.Partner);
-	Items[TableName + "BasisDocument"].ReadOnly = 
-	Not ValueIsFilled(CurrentData.Partner) Or Not ValueIsFilled(CurrentData.Agreement);
 EndProcedure
 
 &AtClient
@@ -881,3 +893,49 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure PaymentTermsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	Cancel = True;
+	CurrentData = Items.AccountReceivableByDocuments.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	NewRow = Object.PaymentTerms.Add();
+	NewRow.Key = CurrentData.Key;
+	NewRow.IsVisible = True;
+EndProcedure
+
+&AtClient
+Procedure AccountReceivableByDocumentsAfterDeleteRow(Item, AddInfo = Undefined) Export
+	ArrayForDelete = New Array();
+	For Each Row In Object.PaymentTerms Do
+		If Not Object.AccountReceivableByDocuments.FindRows(New Structure("Key", Row.Key)).Count() Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each ItemForDelete In ArrayForDelete Do
+		Object.PaymentTerms.Delete(ItemForDelete);
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure AccountReceivableByDocumentsOnActivateRow(Item, AddInfo = Undefined) Export
+	CurrentData =  Items.AccountReceivableByDocuments.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	SetVisible(Object, ThisObject, CurrentData);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisible(Object, Form, CurrentData = Undefined)
+	For Each Row In Object.PaymentTerms Do
+		If CurrentData = Undefined Then
+			Row.IsVisible = False;
+		Else
+			Row.IsVisible = Row.Key = CurrentData.Key;
+		EndIf;
+	EndDo;
+EndProcedure
+	

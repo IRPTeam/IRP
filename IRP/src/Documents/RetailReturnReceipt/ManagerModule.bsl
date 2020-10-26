@@ -75,7 +75,6 @@ Function GetQueryText_AllTables()
 		|	QueryTable.Period AS Period,
 		|	QueryTable.RetailSalesReceipt AS RetailSalesReceipt,
 		|	QueryTable.RowKey AS RowKey,
-		|	QueryTable.IsOpeningEntry AS IsOpeningEntry,
 		|	QueryTable.IsService AS IsService
 		|INTO tmp
 		|FROM
@@ -93,8 +92,7 @@ Function GetQueryText_AllTables()
 		|FROM
 		|	tmp AS tmp
 		|WHERE
-		|	NOT tmp.IsOpeningEntry
-		|	AND NOT tmp.IsService
+		|	NOT tmp.IsService
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -114,8 +112,7 @@ Function GetQueryText_AllTables()
 		|FROM
 		|	tmp AS tmp
 		|WHERE
-		|	NOT tmp.IsOpeningEntry
-		|	AND NOT tmp.IsService
+		|	NOT tmp.IsService
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -154,8 +151,8 @@ Function QuantityByUnit(Ref)
 		|	RetailReturnReceiptItemList.Store AS Store,
 		|	RetailReturnReceiptItemList.ItemKey AS ItemKey,
 		|	RetailReturnReceiptItemList.Ref AS SalesReturn,
-		|	SUM(RetailReturnReceiptItemList.Quantity) AS Quantity,
-		|	SUM(RetailReturnReceiptItemList.TotalAmount) AS TotalAmount,
+		|	RetailReturnReceiptItemList.Quantity AS Quantity,
+		|	RetailReturnReceiptItemList.TotalAmount AS TotalAmount,
 		|	RetailReturnReceiptItemList.Ref.Partner AS Partner,
 		|	RetailReturnReceiptItemList.Ref.LegalName AS LegalName,
 		|	CASE
@@ -178,7 +175,6 @@ Function QuantityByUnit(Ref)
 		|		ELSE RetailReturnReceiptItemList.RetailSalesReceipt
 		|	END AS RetailSalesReceipt,
 		|	RetailReturnReceiptItemList.Key AS RowKey,
-		|	RetailReturnReceiptItemList.Ref.IsOpeningEntry AS IsOpeningEntry,
 		|	CASE
 		|		WHEN RetailReturnReceiptItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
 		|			THEN TRUE
@@ -187,39 +183,7 @@ Function QuantityByUnit(Ref)
 		|FROM
 		|	Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
 		|WHERE
-		|	RetailReturnReceiptItemList.Ref = &Ref
-		|GROUP BY
-		|	RetailReturnReceiptItemList.Ref.Company,
-		|	RetailReturnReceiptItemList.Ref.Partner,
-		|	RetailReturnReceiptItemList.Ref.LegalName,
-		|	CASE
-		|		WHEN RetailReturnReceiptItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-		|		AND RetailReturnReceiptItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-		|			THEN RetailReturnReceiptItemList.Ref.Agreement.StandardAgreement
-		|		ELSE RetailReturnReceiptItemList.Ref.Agreement
-		|	END,
-		|	ISNULL(RetailReturnReceiptItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)),
-		|	RetailReturnReceiptItemList.Store,
-		|	RetailReturnReceiptItemList.ItemKey,
-		|	RetailReturnReceiptItemList.Ref,
-		|	RetailReturnReceiptItemList.Unit,
-		|	RetailReturnReceiptItemList.ItemKey.Item.Unit,
-		|	RetailReturnReceiptItemList.ItemKey.Unit,
-		|	RetailReturnReceiptItemList.ItemKey.Item,
-		|	RetailReturnReceiptItemList.Ref.Date,
-		|	VALUE(Catalog.Units.EmptyRef),
-		|	CASE
-		|		WHEN RetailReturnReceiptItemList.RetailSalesReceipt = VALUE(Document.RetailSalesReceipt.EmptyRef)
-		|			THEN RetailReturnReceiptItemList.Ref
-		|		ELSE RetailReturnReceiptItemList.RetailSalesReceipt
-		|	END,
-		|	RetailReturnReceiptItemList.Key,
-		|	RetailReturnReceiptItemList.Ref.IsOpeningEntry,
-		|	CASE
-		|		WHEN RetailReturnReceiptItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
-		|			THEN TRUE
-		|		ELSE FALSE
-		|	END";
+		|	RetailReturnReceiptItemList.Ref = &Ref";
 	
 	Query.SetParameter("Ref", Ref);
 	QueryResults = Query.Execute();

@@ -206,21 +206,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="e297ee9b-c073-443d-bd9a-007acbc2f6e0">
-    <name>IsOpeningEntry</name>
-    <synonym>
-      <key>en</key>
-      <value>Is opening entry</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="62b3a5c6-dacd-47f5-a27d-95ed57ddf85b">
     <name>LegalName</name>
     <synonym>

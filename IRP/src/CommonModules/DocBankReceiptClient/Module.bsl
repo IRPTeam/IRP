@@ -35,10 +35,8 @@ Procedure SetAvailability(Object, Form) Export
 		ArrayTypes = New Array();
 		If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS") Then
 			ArrayTypes.Add(Type("DocumentRef.CashStatement"));
-			Form.Items.PaymentListPOSAccount.Visible = True;
 		Else
 			ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
-			Form.Items.PaymentListPOSAccount.Visible = False;
 		EndIf;
 		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	Else
@@ -405,15 +403,23 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
 	
 	Notify = New NotifyDescription("PaymentListBasisDocumentStartChoiceEnd", ThisObject, New Structure("Form", Form));
-	Parameters.Insert("Notify", Notify);
-	Parameters.Insert("TableName", "DocumentsForIncomingPayment");
+	Parameters.Insert("Notify"                 , Notify);
+	Parameters.Insert("TableName"              , "DocumentsForIncomingPayment");
+	Parameters.Insert("OpeningEntryTableName1" , "AccountPayableByDocuments");
+	Parameters.Insert("OpeningEntryTableName2" , "AccountReceivableByDocuments");
+	Parameters.Insert("Ref"                    , Object.Ref);
 	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
 EndProcedure
 
 Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) Export
-	If ValueIsFilled(Result) Then
-		Form = AdditionalParameters.Form;
-		Form.Items.PaymentList.CurrentData.BasisDocument = Result;
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	Form = AdditionalParameters.Form;
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	If CurrentData <> Undefined Then
+		CurrentData.BasisDocument = Result.BasisDocument;
+		CurrentData.Amount        = Result.Amount;
 	EndIf;
 EndProcedure
 

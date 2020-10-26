@@ -2,10 +2,11 @@
 Function GetLockFields(Data) Export
 	Result = New Structure();
 	Result.Insert("RegisterName", "AccumulationRegister.ReconciliationStatement");
-	Fields = New Map();
-	Fields.Insert("Company", "Company");
-	Fields.Insert("LegalName", "LegalName");
-	Fields.Insert("Currency", "Currency");
-	Result.Insert("LockInfo", New Structure("Data, Fields", Data, Fields));
+	Result.Insert("LockInfo", New Structure("Data, Fields", 
+	Data, PostingServer.GetLockFieldsMap(GetLockFieldNames())));
 	Return Result;
+EndFunction
+
+Function GetLockFieldNames() Export
+	Return "Company, LegalName, Currency";
 EndFunction

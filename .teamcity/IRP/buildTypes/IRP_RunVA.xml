@@ -24,6 +24,8 @@
       <param name="env.RunAllTest" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.StopOnError" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.StreamCount" value="3" />
+      <param name="env.TagsFullList" value="&quot;Discount&quot;, &quot;Forms&quot;, &quot;Inventory&quot;, &quot;Catalogs&quot;, &quot;FillingDocuments&quot;, &quot;Filters&quot;, &quot;Other&quot;, &quot;Purchase&quot;, &quot;RetailDocuments&quot;, &quot;Barcodes&quot;, &quot;CreationBasedMulti&quot;, &quot;Sales&quot;, &quot;Price&quot;, &quot;CashManagement&quot;, &quot;PhysicalInventory&quot;, &quot;SerialLotNumber&quot;, &quot;OpeningEntries&quot;, &quot;InventoryTransfer&quot;, &quot;LinkedTransaction&quot;, &quot;BasicFormsCheck&quot;,  &quot;DocumentVerification&quot;, &quot;Services&quot;, &quot;StandartAgreement&quot;, &quot;AccessRights&quot;, &quot;TaxCalculation&quot;, &quot;BankCashDocuments&quot;, &quot;ExtensionReportForm&quot;, &quot;PrintForm&quot;, &quot;CurrencyRate&quot;, &quot;LoadInfo&quot;" />
+      <param name="env.TagsShortList" value="&quot;BasicFormsCheck&quot;, &quot;Catalogs&quot;" />
       <param name="env.VA.FeaturePath" value="%teamcity.build.workingDir%/features/" />
       <param name="env.VA_PID" value="" />
       <param name="env.dbgs_PID" value="" />
@@ -86,7 +88,7 @@ rem coverage-cli start --infobase %env.Database1CName%  --debugger http://localh
           <param name="jetbrains_powershell_errorToError" value="true" />
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code"><![CDATA[$TagArray = @("Discount", "Forms", "Inventory", "Catalogs", "FillingDocuments", "Filters", "Other", "Purchase", "RetailDocuments", "Barcodes", "CreationBasedMulti", "Sales", "Price", "CashManagement", "PhysicalInventory", "SerialLotNumber", "OpeningEntries", "InventoryTransfer", "LinkedTransaction", "BasicFormsCheck",  "DocumentVerification", "Services", "StandartAgreement", "AccessRights", "TaxCalculation", "BankCashDocuments", "ExtensionReportForm", "PrintForm", "CurrencyRate", "LoadInfo")
+          <param name="jetbrains_powershell_script_code"><![CDATA[$TagArray = @(%env.TagsFullList%)
 If ("%env.RunAllTest%" -eq "true") {
     Write-Output "One time start full test"
 }
@@ -95,7 +97,7 @@ elseif ("%dep.IRP_GitHubUpdate.env.Database1CName%" -eq "%teamcity.project.id%_d
 }
 elseif ("%dep.IRP_GitHubUpdate.env.Database1CName%" -like "%teamcity.project.id%_develop*") {
     Write-Output "Start short test"
-    $TagArray = @("BasicFormsCheck", "Catalogs")	
+    $TagArray = @(%env.TagsShortList%)	
 }
 else {
     Write-Output "Skip tests"
@@ -300,7 +302,6 @@ $VanessaRun = {
 }
 $JobArray = @{}
 $JobTimes = @{}
-$TotalTags = $TagArray.count
 foreach ($elementTag in $TagArray) {
     $startPort += 10
     $JobTailProc = start-job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort
@@ -329,7 +330,19 @@ foreach ($elementTag in $TagArray) {
                 $JobTimes[$key][1] = $CurrentDate 
                 
                 $listsToDelete += $key
-                Write-Host "End $key at $CurrentDate"
+                #Write-Host "End $key at $CurrentDate"
+                Write-Host  "##teamcity[testStarted name='$key' captureStandardOutput='true']"
+                $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$key.log"
+                if (Test-Path $ScriptLogFilePath) {                
+                  Get-Content -Path $ScriptLogFilePath -Encoding utf8            
+                } else {
+                  Write-Host "##teamcity[testFailed name='$key' message='Log file not found $ScriptLogFilePath']"
+                }
+                $Diff =  (New-TimeSpan -Start $JobTimes[$key][0] -End $CurrentDate).Seconds
+                $Diff = $Diff -as [int]
+                $Diff = $Diff * 1000
+                $Diff
+                Write-Host  "##teamcity[testFinished name='$key' duration='$Diff']"
             }
         }
         foreach($listToDelete in $listsToDelete) {
@@ -345,9 +358,6 @@ do {
     Start-Sleep 10
 
    $jobCount = $JobArray.count
-        Write-Output "Current job count: $jobCount Max count: $StreamCountMax"
-
-
         $listsToDelete = @()
 
         $JobArray.GetEnumerator() | ForEach-Object {
@@ -359,7 +369,19 @@ do {
                 $JobTimes[$key][1] = $CurrentDate 
                 
                 $listsToDelete += $key
-                Write-Host "End $key at $CurrentDate"
+                #Write-Host "End $key at $CurrentDate"
+                Write-Host  "##teamcity[testStarted name='$key' captureStandardOutput='true']"
+                $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$key.log"
+                if (Test-Path $ScriptLogFilePath) {                
+                  Get-Content -Path $ScriptLogFilePath -Encoding utf8            
+                } else {
+                  Write-Host "##teamcity[testFailed name='$key' message='Log file not found $ScriptLogFilePath']"
+                }
+                $Diff =  (New-TimeSpan -Start $JobTimes[$key][0] -End $CurrentDate).Seconds
+                $Diff = $Diff -as [int]
+                $Diff = $Diff * 1000
+                $Diff
+                Write-Host  "##teamcity[testFinished name='$key' duration='$Diff']"
             }
         }
         foreach($listToDelete in $listsToDelete) {

@@ -249,7 +249,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.Store,
 	|	tmp.ItemKey,
 	|	tmp.ReceiptBasis,
-	|	SUM(tmp.Quantity) AS Quantity,
+	|	tmp.Quantity AS Quantity,
 	|	tmp.Unit AS Unit,
 	|	tmp.Period,
 	|	tmp.RowKey

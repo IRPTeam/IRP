@@ -56,7 +56,8 @@ Procedure CalculateTableAtServer(Form, Object) Export
 			CalculateRows = New Array();
 			
 			For Each Row In Object.ItemList Do
-				If ValueIsFilled(Row.ShipmentConfirmation) And Not ValueIsFilled(Row.SalesOrder) Then
+				ArrayOfShipmentConfirmations = Object.ShipmentConfirmations.FindRows(New Structure("Key", Row.Key));
+				If ArrayOfShipmentConfirmations.Count() And Not ValueIsFilled(Row.SalesOrder) Then
 					CalculateRows.Add(Row);
 				EndIf;
 			EndDo;

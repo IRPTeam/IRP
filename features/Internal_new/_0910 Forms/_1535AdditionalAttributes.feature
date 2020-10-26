@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Forms
@@ -1361,8 +1361,8 @@ Scenario: _015400651 check that additional attributes and properties are display
 		And field "Test" is present on the form
 		And I close current window
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'Admin' |
+			| 'Login'              |
+			| 'CI' |
 		And I select current line in "List" table
 		And I click "Add properties" button
 		And "Properties" table became equal

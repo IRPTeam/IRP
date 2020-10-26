@@ -1838,12 +1838,11 @@ Scenario: _0154107 check filling in and re-filling Cash reciept (transaction typ
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		# temporarily
-		Given form with "Documents for incoming payment" header is opened in the active window
 		And "List" table does not contain lines
-			| 'Reference'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$SalesInvoice024016$$' | '554,66'          | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I go to line in "List" table
-			| 'Reference'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$SalesInvoice024025$$' | '11 000,00'        | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
@@ -1851,8 +1850,8 @@ Scenario: _0154107 check filling in and re-filling Cash reciept (transaction typ
 		And I click Clear button of "Partner term" field
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Partner term' | 'Amount' | 'Payer'             | 'Basis document' |
-			| 'Kalipso' | ''          | ''       | 'Company Kalipso' | ''               |
+			| 'Partner' | 'Partner term' | 'Amount' | 'Payer'           | 'Basis document' |
+			| 'Kalipso' | ''             | '11 000,00'       | 'Company Kalipso' | ''               |
 	* Check the addition of a base document without selecting a base document
 		When I Check the steps for Exception
 			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
@@ -2044,12 +2043,11 @@ Scenario: _0154109 check filling in and re-filling Bank reciept (transaction typ
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		# temporarily
-		Given form with "Documents for incoming payment" header is opened in the active window
 		And "List" table does not contain lines
-			| 'Reference'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$SalesInvoice024016$$' | '554,66'          | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I go to line in "List" table
-			| 'Reference'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$SalesInvoice024025$$' | '11 000,00'        | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
@@ -2058,7 +2056,7 @@ Scenario: _0154109 check filling in and re-filling Bank reciept (transaction typ
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term' | 'Amount' | 'Payer'             | 'Basis document' |
-			| 'Kalipso' | ''          | ''       | 'Company Kalipso' | ''               |
+			| 'Kalipso' | ''          | '11 000,00'       | 'Company Kalipso' | ''               |
 	* Check the addition of a base document without selecting a base document
 		When I Check the steps for Exception
 			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
@@ -2283,7 +2281,7 @@ Scenario: _0154111 check filling in and re-filling Cash payment (transaction typ
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term' | 'Amount' | 'Payee'             | 'Basis document' |
-			| 'Ferron BP' | ''          | ''       | 'Company Ferron BP' | ''               |
+			| 'Ferron BP' | ''          | '13 000,00'       | 'Company Ferron BP' | ''               |
 	* Check the addition of a base document without selecting a base document
 		When I Check the steps for Exception
 			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
@@ -2503,7 +2501,7 @@ Scenario: _0154113 check filling in and re-filling Bank payment (transaction typ
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term' | 'Amount' | 'Payee'             | 'Basis document' |
-			| 'Ferron BP' | ''          | ''       | 'Company Ferron BP' | ''               |
+			| 'Ferron BP' | ''          | '13 000,00'       | 'Company Ferron BP' | ''               |
 	* Check the addition of a base document without selecting a base document
 		When I Check the steps for Exception
 			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
@@ -3648,6 +3646,11 @@ Scenario: _0154123 filling in Transit account from Account when exchanging curre
 		And I click the button named "FormCreate"
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 	* Check filling in Transit account 
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Main Company' |
+		And I select current line in "List" table
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Description'       |
@@ -3670,6 +3673,11 @@ Scenario: _0154124 filling in Transit account from Account when exchanging curre
 		And I click the button named "FormCreate"
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 	* Check filling in Transit account 
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Main Company' |
+		And I select current line in "List" table
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
@@ -4172,6 +4180,11 @@ Scenario: _053014 check the display of details on the form Bank payment with the
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available
 		And form attribute named "TransitAccount" is available
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Currency' | 'Description'       |
@@ -4605,7 +4618,6 @@ Scenario: _0154150 check function DontCalculateRow in the Purchase order
 		And I select current line in "List" table
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I delete a line in "ItemList" table
 			And I click the button named "Add"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
@@ -4784,7 +4796,6 @@ Scenario: _0154151 check function DontCalculateRow in the Purchase invoice
 		And I select current line in "List" table
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I delete a line in "ItemList" table
 			And I click the button named "Add"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
@@ -4964,7 +4975,6 @@ Scenario: _0154152 check function DontCalculateRow in the Purchase return
 		And I select current line in "List" table
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I delete a line in "ItemList" table
 			And I click the button named "Add"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
@@ -5131,7 +5141,6 @@ Scenario: _0154153 check function DontCalculateRow in the Purchase return order
 		And I select current line in "List" table
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I delete a line in "ItemList" table
 			And I click the button named "Add"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
@@ -5305,7 +5314,6 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 		And I select current line in "List" table
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I delete a line in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"	
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
@@ -5498,7 +5506,6 @@ Scenario: _0154155 check function DontCalculateRow in the Sales invoice
 		And I select current line in "List" table
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I delete a line in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"	
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
@@ -5700,7 +5707,6 @@ Scenario: _0154156 check function DontCalculateRow in the Sales return
 		And I move to "Item list" tab
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I delete a line in "ItemList" table
 			And I click the button named "Add"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
@@ -5870,7 +5876,6 @@ Scenario: _0154157 check function DontCalculateRow in the Sales return order
 		And I move to "Item list" tab
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I delete a line in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"	
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
@@ -6045,7 +6050,6 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 			| 'Main Company'         |
 		And I select current line in "List" table
 	* Filling in item and item key
-		And I delete a line in "ItemList" table
 		And I click the button named "Add"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
@@ -6169,7 +6173,6 @@ Scenario: _0154161 check tax and net amount calculation when change total amount
 			| 'Main Company'         |
 		And I select current line in "List" table
 	* Filling in item and item key
-		And I delete a line in "ItemList" table
 		And I click the button named "Add"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
@@ -6293,7 +6296,6 @@ Scenario: _0154162 check tax and net amount calculation when change total amount
 			| 'Main Company'         |
 		And I select current line in "List" table
 	* Filling in item and item key
-		And I delete a line in "ItemList" table
 		And I click the button named "Add"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
@@ -6417,7 +6419,6 @@ Scenario: _0154163 check tax and net amount calculation when change total amount
 			| 'Main Company'         |
 		And I select current line in "List" table
 	* Filling in item and item key
-		And I delete a line in "ItemList" table
 		And I click the button named "Add"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
@@ -6544,7 +6545,6 @@ Scenario: _0154164 check tax and net amount calculation when change total amount
 		And I remove checkbox "Price include tax"
 		And I move to "Item list" tab			
 	* Filling in item and item key
-		And I delete a line in "ItemList" table
 		And I click the button named "Add"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
@@ -6670,7 +6670,6 @@ Scenario: _0154165 check tax and net amount calculation when change total amount
 		And I remove checkbox "Price include tax"
 		And I move to "Item list" tab			
 	* Filling in item and item key
-		And I delete a line in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"	
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table

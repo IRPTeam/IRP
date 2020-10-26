@@ -8,7 +8,7 @@ Feature: create a group of item types
 
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+    Given I launch TestClient opening script or connect the existing one
 
 
 

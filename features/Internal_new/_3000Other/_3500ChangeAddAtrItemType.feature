@@ -7,7 +7,7 @@ Feature: checking a bunch of additional details in the item type for the item ke
 
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+    Given I launch TestClient opening script or connect the existing one
 
 
 

@@ -29,25 +29,103 @@ Scenario: _020000 preparation (Loadinfo)
 		When Create catalog Companies objects (partners company)
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog IntegrationSettings objects
-		* Integration settings
+		* Add Plugin ExternalBankUa
+			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+			And I click the button named "FormCreate"
+			And I select external file "#workingDir#\DataProcessor\bank_gov_ua.epf"
+			And I click the button named "FormAddExtDataProc"
+			And I input "" text in "Path to plugin for test" field
+			And I input "ExternalBankUa" text in "Name" field
+			And I click Open button of the field named "Description_en"
+			And I input "ExternalBankUa" text in the field named "Description_en"
+			And I input "ExternalBankUa" text in the field named "Description_tr"
+			And I click "Ok" button
+			And I set checkbox "Unsafe mode"
+			And I click "Save and close" button
+			And I wait "Plugins (create)" window closing in 10 seconds
+			Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalBankUa"
+		* Add Plugin ExternalTCMBGovTr
+			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+			And I click the button named "FormCreate"
+			And I select external file "#workingDir#\DataProcessor\tcmb_gov_tr.epf"
+			And I click the button named "FormAddExtDataProc"
+			And I input "" text in "Path to plugin for test" field
+			And I input "ExternalTCMBGovTr" text in "Name" field
+			And I click Open button of the field named "Description_en"
+			And I input "ExternalTCMBGovTr" text in the field named "Description_en"
+			And I input "ExternalTCMBGovTr" text in the field named "Description_tr"
+			And I click "Ok" button
+			And I set checkbox "Unsafe mode"
+			And I click "Save and close" button
+			And I wait "Plugins (create)" window closing in 10 seconds
+			Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalTCMBGovTr"
+		* Filling in the setting for currency rate loading from Bank UA
+			Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Bank UA'     |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'    |
+				| 'ExternalBankUa' |
+			And I select current line in "List" table
+			And I click "Settings" button
+			Then "Settings" window is opened
+			And I click Select button of "Currency from" field
+			And I go to line in "List" table
+				| 'Description'     |
+				| 'Ukraine Hryvnia' |
+			And I activate "Description" field in "List" table
+			And I select current line in "List" table
+			And I click "Ok" button
+			And I click "Save and close" button
+		* Filling in the setting for currency rate loading from tcmb.gov.tr
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Forex Buying' |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'ExternalTCMBGovTr' |
+			And I activate "Description" field in "List" table
+			And I select current line in "List" table
+			And I click "Settings" button
+			And I click Select button of "Currency from" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Turkish lira' |
+			And I select current line in "List" table
+			And I select "Banknote Buying" exact value from "Download rate type" drop-down list
+			And I input "#KeyTcmbGovTr#" variable value in "Key" field
+			And I click "Ok" button
+			And I click "Save and close" button
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Forex Seling' |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'ExternalTCMBGovTr' |
+			And I activate "Description" field in "List" table
+			And I select current line in "List" table
+			And I click "Settings" button
+			And I click Select button of "Currency from" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Turkish lira' |
+			And I select current line in "List" table
+			And I select "Banknote Selling" exact value from "Download rate type" drop-down list
+			And I input "#KeyTcmbGovTr#" variable value in "Key" field
+			And I click "Ok" button
+			And I click "Save and close" button
+		And I close all client application windows
+		
 			
-
 Scenario: _020001 check load currency rate
 	And I turn on asynchronous execution mode with interval "1"
-	* Filling in the setting for currency rate loading from Bank UA
-		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
-		And I go to line in "List" table
-			| Description |
-			| Bank UA     |
-		And I select current line in "List" table
-		And I click "Settings" button
-		And I click Select button of "Currency from" field
-		And I go to line in "List" table
-			| Code | Description     |
-			| UAH  | Ukraine Hryvnia |
-		And I select current line in "List" table
-		And I click "Ok" button
-		And I click "Save and close" button
 	* Open catalog currency
 		Given I open hyperlink "e1cib/list/Catalog.Currencies"
 	* Upload currency rate Forex Buying (from tcmb.gov.tr)
@@ -131,9 +209,30 @@ Scenario: _020001 check load currency rate
 			| 'UAH'            | 'USD'           | 'Bank UA'       | '1'            | '*'     |
 			| 'UAH'            | 'EUR'           | 'Bank UA'       | '1'            | '*'     |
 			| 'UAH'            | 'TRY'           | 'Bank UA'       | '1'            | '*'     |
+			| 'TRY'            | 'USD'           | 'Forex Seling'  | '1'            | '*'     |
+			| 'TRY'            | 'USD'           | 'Forex Seling'  | '1'            | '*'     |
+			| 'TRY'            | 'USD'           | 'Forex Buying'  | '1'            | '*'     |
+			| 'TRY'            | 'EUR'           | 'Forex Buying'  | '1'            | '*'     |
 		And I close all client application windows
 
 
 
 Scenario: _999999 close TestClient session
+	Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
+	And I go to line in "List" table
+		| 'Description' |
+		| 'Forex Seling'     |
+	And I select current line in "List" table
+	And I click "Settings" button
+	And I input "" text in "Key" field
+	And I click "Ok" button
+	And I click "Save and close" button
+	And I go to line in "List" table
+		| 'Description' |
+		| 'Forex Buying'     |
+	And I select current line in "List" table
+	And I click "Settings" button
+	And I input "" text in "Key" field
+	And I click "Ok" button
+	And I click "Save and close" button
 	And I close TestClient session

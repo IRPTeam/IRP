@@ -203,17 +203,17 @@ Scenario: _300102 item/item key details display in list form (html field)
 Scenario:_300110 add pictures to additional details and additional properties
     * Open add attribute and property
         Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty"
-	* Add a picture to an additional attribute / additional property
-		And I go to line in "List" table
-		| 'Description' |
-		| 'Brand'     |
-		And I select current line in "List" table
-		And I select external file "#workingDir#\features\Internal_new\_3000Other\16466.png"
-		And I click "Icon" hyperlink
-	* Check adding a picture to an additional attribute
-		Then If dialog box is visible I click "Change" button		
-		Then the field named "Icon" value contains "e1cib/tempstorage/" text
-		And I click "Save and close" button
+    * Add a picture to an additional attribute / additional property
+        And I go to line in "List" table
+        | 'Description' |
+        | 'Brand'     |
+        And I select current line in "List" table
+        And I select external file "#workingDir#\features\Internal_new\_3000Other\16466.png"
+        And I click "Icon" hyperlink
+    * Check adding a picture to an additional attribute
+        Then If dialog box is visible I click "Change" button		
+        Then the field named "Icon" value contains "e1cib/tempstorage/" text
+        And I click "Save and close" button
 
 Scenario: _300111 cleaning up the added picture to the additional details and additional properties
     * Open add attribute and property

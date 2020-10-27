@@ -194,10 +194,9 @@ Scenario: _052001 create Bank receipt (independently)
 			And I activate "Basis document" field in "PaymentList" table
 			And I select current line in "PaymentList" table
 			# temporarily
-			Given form with "Documents for incoming payment" header is opened in the active window
 			And I go to line in "List" table
 				| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-				| '4 350,00'        | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+				| '4 250,00'        | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			And I click "Select" button
 		# temporarily
 		* Filling in amount in a tabular part
@@ -261,10 +260,9 @@ Scenario: _052001 create Bank receipt (independently)
 			And I activate "Basis document" field in "PaymentList" table
 			And I select current line in "PaymentList" table
 			# temporarily
-			Given form with "Documents for incoming payment" header is opened in the active window
 			And I go to line in "List" table
 				| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-				| '4 350,00'        | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+				| '4 150,00'        | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			And I click "Select" button
 		# temporarily
 		* Filling in amount in a tabular part
@@ -329,7 +327,6 @@ Scenario: _052001 create Bank receipt (independently)
 			And I activate "Basis document" field in "PaymentList" table
 			And I select current line in "PaymentList" table
 			# temporarily
-			Given form with "Documents for incoming payment" header is opened in the active window
 			And I go to line in "List" table
 				| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 				| '200,00'          | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |

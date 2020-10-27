@@ -1048,6 +1048,9 @@ Scenario: _300516 check connection to CashTransferOrder report "Related document
 		| '$$CashReceipt0540031$$'        | '100,00' |
 	*  Check the report generation from list
 		And I go to the last line in "DocumentsTree" table
+		And I go to line in "DocumentsTree" table
+		| 'Ref'      |
+		| '$$CashReceipt0540031$$' |
 		And in the table "DocumentsTree" I click the button named "DocumentsTreeGenerateForCurrent"
 		And "DocumentsTree" table contains lines
 		| 'Ref'                    | 'Amount' |

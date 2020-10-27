@@ -239,7 +239,7 @@ Scenario: _051001 create Cash payment (independently)
 			And I select current line in "PaymentList" table
 			And I go to line in "List" table
 			| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-			| '137 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+			| '136 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			And I click "Select" button
 		* Filling in amount in a tabular part
 			And I activate "Amount" field in "PaymentList" table

@@ -184,7 +184,7 @@ Scenario: _053001 create Bank payment (independently)
 			# temporarily
 			And I go to line in "List" table
 				| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-				| '137 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+				| '136 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			And I click "Select" button
 		# temporarily
 		* Filling in amount in a tabular part
@@ -250,7 +250,7 @@ Scenario: _053001 create Bank payment (independently)
 			# temporarily
 			And I go to line in "List" table
 				| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-				| '137 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+				| '135 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			And I click "Select" button
 		# temporarily
 		* Filling in amount in a tabular part

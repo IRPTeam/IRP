@@ -1799,12 +1799,12 @@ Scenario: _029208 create Purchase invoice based on Purchase order (Purchase invo
 		And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
 	* Check filling of the tabular part
 		And "ItemList" table contains lines
-			| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      |'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date'| 'Purchase order'        | 'Goods receipt' | 'Sales order'      |
-			| '847,46'     | 'Dress'    | '200,00' | 'XS/Blue'   | '5,000'  |'152,54'     | 'pcs'  | '1 000,00'     | 'Store 01' | '*'            | '$$PurchaseOrder0292073$$' | ''            | '$$SalesOrder0292071$$' |
-			| '1 694,92'   | 'Dress'    | '200,00' | 'XS/Blue'   | '10,000' |'305,08'     | 'pcs'  | '2 000,00'     | 'Store 02' | '*'            | '$$PurchaseOrder0292073$$' | ''            | '$$SalesOrder0292072$$' |
-			| '762,71'     | 'Trousers' | '180,00' | '36/Yellow' | '5,000'  |'137,29'     | 'pcs'  | '900,00'       | 'Store 02' | '*'            | '$$PurchaseOrder0292073$$' | ''            | '$$SalesOrder0292072$$' |
-			| '1 525,42'   | 'Trousers' | '180,00' | '38/Yellow' | '10,000' |'274,58'     | 'pcs'  | '1 800,00'     | 'Store 01' | '*'            | '$$PurchaseOrder0292073$$' | ''            | '$$SalesOrder0292071$$' |
-			| '1 525,42'   | 'Trousers' | '180,00' | '38/Yellow' | '10,000' |'274,58'     | 'pcs'  | '1 800,00'     | 'Store 02' | '*'            | '$$PurchaseOrder0292073$$' | ''            | '$$SalesOrder0292072$$' |
+			| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      |'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date'| 'Purchase order'           | 'Sales order'           |
+			| '847,46'     | 'Dress'    | '200,00' | 'XS/Blue'   | '5,000'  |'152,54'     | 'pcs'  | '1 000,00'     | 'Store 01' | '*'            | '$$PurchaseOrder0292073$$' | '$$SalesOrder0292071$$' |
+			| '1 694,92'   | 'Dress'    | '200,00' | 'XS/Blue'   | '10,000' |'305,08'     | 'pcs'  | '2 000,00'     | 'Store 02' | '*'            | '$$PurchaseOrder0292073$$' | '$$SalesOrder0292072$$' |
+			| '762,71'     | 'Trousers' | '180,00' | '36/Yellow' | '5,000'  |'137,29'     | 'pcs'  | '900,00'       | 'Store 02' | '*'            | '$$PurchaseOrder0292073$$' | '$$SalesOrder0292072$$' |
+			| '1 525,42'   | 'Trousers' | '180,00' | '38/Yellow' | '10,000' |'274,58'     | 'pcs'  | '1 800,00'     | 'Store 01' | '*'            | '$$PurchaseOrder0292073$$' | '$$SalesOrder0292071$$' |
+			| '1 525,42'   | 'Trousers' | '180,00' | '38/Yellow' | '10,000' |'274,58'     | 'pcs'  | '1 800,00'     | 'Store 02' | '*'            | '$$PurchaseOrder0292073$$' | '$$SalesOrder0292072$$' |
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseInvoice0292008$$" variable
 		And I delete "$$PurchaseInvoice0292008$$" variable

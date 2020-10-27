@@ -19,7 +19,7 @@ Scenario: _006100 preparation (filling in currency rates)
 	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
-	* Add Pluginsessor ExternalBankUa
+	* Add Plugin ExternalBankUa
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		And I click the button named "FormCreate"
 		And I select external file "#workingDir#\DataProcessor\bank_gov_ua.epf"
@@ -34,7 +34,7 @@ Scenario: _006100 preparation (filling in currency rates)
 		And I click "Save and close" button
 		And I wait "Plugins (create)" window closing in 10 seconds
 		Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalBankUa"
-	* Add Pluginsessor ExternalTCMBGovTr
+	* Add Plugin ExternalTCMBGovTr
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		And I click the button named "FormCreate"
 		And I select external file "#workingDir#\DataProcessor\tcmb_gov_tr.epf"

@@ -211,8 +211,7 @@ Scenario:_300110 add pictures to additional details and additional properties
         And I select external file "#workingDir#\features\Internal_new\_3000Other\16466.png"
         And I click "Icon" hyperlink
     * Check adding a picture to an additional attribute
-        If window with "WindowName" header has appeared Then
-        And I click "Change" button		
+        Then If dialog box is visible I click "Change" button		
         Then the field named "Icon" value contains "e1cib/tempstorage/" text
         And I click "Save and close" button
 

@@ -894,9 +894,9 @@ Scenario: create SalesInvoice024001
 	* Check adding Store
 		And I move to "Item list" tab
 		And "ItemList" table contains lines
-			| 'Item'     | Price | 'Item key'  | 'Store'    | 'Shipment confirmation' | 'Sales order'          | 'Unit' | 'Q'     | 'Offers amount' | 'Tax amount' | 'Net amount' | 'Total amount' |
-			| 'Dress'    | '*'   | 'L/Green'   | 'Store 01' | ''                      | '$$SalesOrder023001$$' | 'pcs'  | '5,000' | '*'             | '*'          | '*'          | '*'            |
-			| 'Trousers' | '*'   | '36/Yellow' | 'Store 01' | ''                      | '$$SalesOrder023001$$' | 'pcs'  | '4,000' | '*'             | '*'          | '*'          | '*'            |
+			| 'Item'     | Price | 'Item key'  | 'Store'    | 'Sales order'          | 'Unit' | 'Q'     | 'Offers amount' | 'Tax amount' | 'Net amount' | 'Total amount' |
+			| 'Dress'    | '*'   | 'L/Green'   | 'Store 01' | '$$SalesOrder023001$$' | 'pcs'  | '5,000' | '*'             | '*'          | '*'          | '*'            |
+			| 'Trousers' | '*'   | '36/Yellow' | 'Store 01' | '$$SalesOrder023001$$' | 'pcs'  | '4,000' | '*'             | '*'          | '*'          | '*'            |
 	* Check prices and type of prices
 		And "ItemList" table contains lines
 		| 'Price'  | 'Item'     | 'Item key'  | 'Q'     | 'Price type'        |

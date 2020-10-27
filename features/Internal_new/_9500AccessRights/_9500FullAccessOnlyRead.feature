@@ -1,7 +1,6 @@
 ﻿#language: en
 @tree
 @Positive
-@Other
 @AccessRights
 
 Feature: role Full access only read

@@ -141,7 +141,6 @@ Scenario: _2050001 preparation
 			And I select current line in "PaymentList" table
 			# temporarily
 			And Delay 2
-			Given form with "Documents for incoming payment" header is opened in the active window
 			And I go to line in "List" table
 				| 'Document amount' | 'Legal name'   | 'Partner' |
 				| '1 740,00'        | 'Company Adel' | 'Crystal' |

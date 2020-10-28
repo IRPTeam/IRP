@@ -297,6 +297,8 @@ Function Strings(Lang) Export
 	// %2 - 20	
 	Strings.Insert("Error_086", NStr("en = 'Amount : %1 not match Payment term amount: %2'", Lang));
 	
+	Strings.Insert("Error_087", NStr("en = 'Parent can not be empty'", Lang));
+	
 	#EndRegion
 	
 	#Region InfoMessages

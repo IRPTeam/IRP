@@ -364,6 +364,11 @@
   <commonAttributes>CommonAttribute.ID</commonAttributes>
   <commonAttributes>CommonAttribute.UniqueID</commonAttributes>
   <commonAttributes>CommonAttribute.BusinessUnit</commonAttributes>
+  <commonAttributes>CommonAttribute.Length</commonAttributes>
+  <commonAttributes>CommonAttribute.Width</commonAttributes>
+  <commonAttributes>CommonAttribute.Height</commonAttributes>
+  <commonAttributes>CommonAttribute.Volume</commonAttributes>
+  <commonAttributes>CommonAttribute.Weight</commonAttributes>
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <httpServices>HTTPService.FileTransferService</httpServices>
   <httpServices>HTTPService.SaasService</httpServices>

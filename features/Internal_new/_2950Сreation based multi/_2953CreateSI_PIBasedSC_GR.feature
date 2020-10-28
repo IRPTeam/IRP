@@ -107,8 +107,8 @@ Scenario: _090501 creation of Sales invoice based on Shipment confirmation (one 
 		And I click "Sales invoice" button
 	* Check filling in Sales invoice
 		And "ItemList" table contains lines
-		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount'  | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Sales order'                   | 'Shipment confirmation'      |
-		| '*'          | 'Trousers' | '*'      | '38/Yellow' | '5,000' | ''               | '*'          | 'pcs'  | '*'            | 'Store 02' | '*'             | '*'                             | '*'                          |
+		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount'  | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Sales order'                   |
+		| '*'          | 'Trousers' | '*'      | '38/Yellow' | '5,000' | ''               | '*'          | 'pcs'  | '*'            | 'Store 02' | '*'             | '*'                             |
 		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 
@@ -165,8 +165,8 @@ Scenario: _090502 create a purchase invoice based on Goods reciept (one to one)
 		And I click "Purchase invoice" button
 	* Check filling in Purchase invoice
 		And "ItemList" table contains lines
-		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      | 'Goods receipt'      |
-		| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | '*'                  |
+		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      |
+		| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   |
 		And I click the button named "FormPostAndClose"
 
 Scenario: _090503 create Sales invoice based on several Shipment confirmation

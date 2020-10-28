@@ -8,7 +8,7 @@ Feature: password check
 
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+        Given I launch TestClient opening script or connect the existing one
 
 
 Scenario: _351000 preparation

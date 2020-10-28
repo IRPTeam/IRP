@@ -305,16 +305,16 @@ $JobTimes = @{}
 foreach ($elementTag in $TagArray) {
     $startPort += 10
     $JobTailProc = start-job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort
-    Start-Sleep 1
+    Start-Sleep 10
     $CurrentDate = Get-Date
     $JobArray.Add($elementTag,$JobTailProc)
     $JobTimes = $JobTimes + @{$elementTag=@($CurrentDate, "")}
     $NumberJob = $JobTimes.count
-    #Write-Host "Start $elementTag at $CurrentDate #$NumberJob/$TotalTags"
+    Write-Host "Start $elementTag at $CurrentDate #$NumberJob/$TotalTags"
    
 
     do {
-        Start-Sleep 1
+        Start-Sleep 10
         $jobCount = $JobArray.count
         #Write-Output "Current job count: $jobCount Max count: $StreamCountMax"
 
@@ -355,7 +355,7 @@ foreach ($elementTag in $TagArray) {
 
 
 do {
-    Start-Sleep 1
+    Start-Sleep 10
 
    $jobCount = $JobArray.count
         $listsToDelete = @()

@@ -60,6 +60,7 @@ Scenario: _300000 user check for Turkish data
 			| 'CI'          |
 		And I select current line in "List" table
 		And I input "tr" text in "Localization code" field
+		And I input "CI" text in the field named "Description_en"
 		And I click "Save and close" button
 	And I close TestClient session
 

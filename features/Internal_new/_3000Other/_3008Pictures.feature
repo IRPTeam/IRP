@@ -9,7 +9,7 @@ As a Developer
 I want to create an image subsystem
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+    Given I launch TestClient opening script or connect the existing one
 
 Scenario: _300100 preparation (image setting)
     When set True value to the constant
@@ -212,7 +212,7 @@ Scenario:_300110 add pictures to additional details and additional properties
         And I click "Icon" hyperlink
     * Check adding a picture to an additional attribute
         If window with "WindowName" header has appeared Then
-            And I click "Change" button		
+        And I click "Change" button		
         Then the field named "Icon" value contains "e1cib/tempstorage/" text
         And I click "Save and close" button
 

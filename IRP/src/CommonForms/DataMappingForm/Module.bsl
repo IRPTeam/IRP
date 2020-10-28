@@ -1,5 +1,3 @@
-
-
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.DataMap = Undefined Then
@@ -51,4 +49,3 @@ Procedure SaveMappingAtServer()
 		EndDo;
 	EndDo;
 EndProcedure
-

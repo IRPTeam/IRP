@@ -79,16 +79,16 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 		If Not ValueIsFilled(Row.SerialLotNumber) Then
 			Cancel = True; 
 			CommonFunctionsClientServer.ShowUsersMessage(
-			StrTemplate(R().Error_010, "Serial lot number"), 
-			"SerialLotNumbers[" + Format(RowIndex, "NZ=0; NG=0;") + "].SerialLotNumber", 
-			ThisObject);
+				StrTemplate(R().Error_010, "Serial lot number"), 
+				"SerialLotNumbers[" + Format(RowIndex, "NZ=0; NG=0;") + "].SerialLotNumber", 
+				ThisObject);
 		EndIf;
 		If Not ValueIsFilled(Row.Quantity) Then
 			Cancel = True; 
 			CommonFunctionsClientServer.ShowUsersMessage(
-			StrTemplate(R().Error_010, "Quantity"), 
-			"SerialLotNumbers[" + Format(RowIndex, "NZ=0; NG=0;") + "].Quantity", 
-			ThisObject);
+				StrTemplate(R().Error_010, "Quantity"), 
+				"SerialLotNumbers[" + Format(RowIndex, "NZ=0; NG=0;") + "].Quantity", 
+				ThisObject);
 		EndIf;		
 		RowIndex = RowIndex + 1;
 	EndDo;	

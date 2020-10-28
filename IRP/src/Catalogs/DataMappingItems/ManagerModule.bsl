@@ -27,6 +27,35 @@ EndFunction
 
 Function GetOrCreateMappingItem(CreationStructure, AddInfo = Undefined) Export
 	
+	MapItem = GetMappingItem(CreationStructure, AddInfo); 
+	
+	If Not ValueIsFilled(CreationStructure.Ref) Then
+		Return Undefined;
+	EndIf;
+	
+	If Not MapItem.IsEmpty() Then
+		If MapItem.Ref.RefValue = CreationStructure.Ref Then
+			Return MapItem.Ref;
+		EndIf;
+		 
+		NewItem = MapItem.Ref.GetObject();
+		
+	Else
+		NewItem = Catalogs.DataMappingItems.CreateItem();
+		NewItem.Description = CreationStructure.Value;
+		NewItem.SimpleValue = CreationStructure.Value;
+		NewItem.TypeValue = CreationStructure.Type;
+		NewItem.Parent = CreationStructure.TopLevel;
+	EndIf;
+
+	NewItem.RefValue = CreationStructure.Ref;
+	NewItem.Write();
+	
+	Return NewItem.Ref;
+EndFunction
+
+Function GetMappingItem(CreationStructure, AddInfo = Undefined) Export
+	
 	Query = New Query;
 	Query.Text =
 		"SELECT
@@ -45,24 +74,10 @@ Function GetOrCreateMappingItem(CreationStructure, AddInfo = Undefined) Export
 	QueryResult = Query.Execute().Select();
 	
 	If QueryResult.Next() Then
-		If QueryResult.Ref.RefValue = CreationStructure.Ref Then
-			Return QueryResult.Ref;
-		EndIf;
-		 
-		NewItem = QueryResult.Ref.GetObject();
-		
-	Else
-		NewItem = Catalogs.DataMappingItems.CreateItem();
-		NewItem.Description = CreationStructure.Value;
-		NewItem.SimpleValue = CreationStructure.Value;
-		NewItem.TypeValue = CreationStructure.Type;
-		NewItem.Parent = CreationStructure.TopLevel;
+		Return QueryResult.Ref;
 	EndIf;
 
-	NewItem.RefValue = CreationStructure.Ref;
-	NewItem.Write();
-	
-	Return NewItem.Ref;
+	Return Catalogs.DataMappingItems.EmptyRef();
 EndFunction
 
 Function GetCreationStructure(AddInfo = Undefined) Export

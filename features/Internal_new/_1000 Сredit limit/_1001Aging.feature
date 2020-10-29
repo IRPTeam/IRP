@@ -141,7 +141,7 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 		And "PaymentTerms" table contains lines
 			| 'Calculation type'     | 'Date'         | 'Due period, days' | 'Proportion of payment' | 'Amount' |
 			| 'Post-shipment credit' | '04.11.2020'   | '15'               | '100,00'                | '554,66' |
-	* Manualy change 'Due period, days
+	* Manualy change 'Due period, days'
 		And I select current line in "PaymentTerms" table
 		And I input "16" text in "Due period, days" field of "PaymentTerms" table
 		And I finish line editing in "PaymentTerms" table

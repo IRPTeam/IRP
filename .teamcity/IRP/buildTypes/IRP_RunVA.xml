@@ -527,6 +527,18 @@ Compress-Archive -Path AllSteps\* -DestinationPath %env.Database1CName%_%build.n
           <param name="teamcity.file.content.replacer.wildcards" value="**/*.feature" />
         </parameters>
       </extension>
+      <extension id="BUILD_EXT_27" type="JetBrains.FileContentReplacer">
+        <parameters>
+          <param name="teamcity.file.content.replacer.failBuild" value="true" />
+          <param name="teamcity.file.content.replacer.file.encoding" value="autodetect" />
+          <param name="teamcity.file.content.replacer.file.encoding.custom" value="autodetect" />
+          <param name="teamcity.file.content.replacer.pattern" value="#KeyTcmbGovTr#" />
+          <param name="teamcity.file.content.replacer.pattern.case.sensitive" value="false" />
+          <param name="teamcity.file.content.replacer.regexMode" value="FIXED_STRINGS" />
+          <param name="teamcity.file.content.replacer.replacement" value="%env.TR_Bank_Key%" />
+          <param name="teamcity.file.content.replacer.wildcards" value="/features/**/*.feature" />
+        </parameters>
+      </extension>
     </build-extensions>
     <artifact-dependencies>
       <dependency id="ARTIFACT_DEPENDENCY_2" sourceBuildTypeId="ExternalDataProcessor_ExtConvertToCfe" cleanDestination="false">

@@ -108,14 +108,14 @@ Procedure BeginStartAdditionalComand_End(DriverObject, CommandParameters) Export
 		ExecuteNotifyProcessing(CommandParameters.NotifyOnClose, ResultData);
 	Else		
 		DeviceData = CommandParameters.DeviceData; 
-		ProccessingModule = GetProccessingModule(DeviceData.EquipmentType);
+		ProcessingModule = GetProcessingModule(DeviceData.EquipmentType);
 		
 		preConnectionParameters = New Structure;
 		preConnectionParameters.Insert("EquipmentType", "СканерШтрихкода");
 		
 		ErrorText = "";
 		OutParameters = Undefined;
-		Result = ProccessingModule.RunCommand(CommandParameters.Command, CommandParameters.IncomingParams,
+		Result = ProcessingModule.RunCommand(CommandParameters.Command, CommandParameters.IncomingParams,
 			OutParameters, DriverObject, CommandParameters.Parameters, preConnectionParameters);
 		If Not Result Then
 			If OutParameters.Количество() >= 2 Then
@@ -143,11 +143,11 @@ Procedure BeginConnectEquipment(HardwareParameters) Export
 
 		ConnectedDevice = GetConnectedDevice(globalEquipments.ConnectionSettings, Device.Hardware);
 		If ConnectedDevice = Undefined Then
-			ProccessingModule = GetProccessingModule(Device.EquipmentType);
+			ProcessingModule = GetProcessingModule(Device.EquipmentType);
 
 			DriverObject = GetDriverObject(Device);
 			OutParameters = Undefined;
-			Result = ProccessingModule.ConnectDevice(DriverObject, Device.ConnectParameters, OutParameters);
+			Result = ProcessingModule.ConnectDevice(DriverObject, Device.ConnectParameters, OutParameters);
 
 			If OutParameters.Count() >= 2 Then
 				Device.Insert("EventSource", OutParameters[0]);
@@ -211,7 +211,7 @@ Function GetDriverObject(DriverInfo, ErrorText = Undefined)
 	Return DriverObject;	
 EndFunction
 
-Function GetProccessingModule(EquipmentType)
+Function GetProcessingModule(EquipmentType)
 	Return Undefined;
 EndFunction
 

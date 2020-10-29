@@ -1,6 +1,6 @@
 Function GetPictureURL(FileRef) Export
 	URLStructure = PictureViewerServer.GetPictureURL(FileRef);
-	ProcessingCommonModule = Eval(URLStructure.ProccessingModule);
+	ProcessingCommonModule = Eval(URLStructure.ProcessingModule);
 	Return ProcessingCommonModule.PreparePictureURL(URLStructure.IntegrationSettings, URLStructure.PictureURL);
 EndFunction
 
@@ -181,7 +181,7 @@ Function PicturesInfoForSlider(ItemRef, UUID, FileRef = Undefined, UseFullSizePh
 	For Each Picture In Pictures Do
 		Map = New Structure("Src, Preview, ID");
 		If UseFullSizePhoto Then
-			ProcessingCommonModule = Eval(Picture.PictureURLStructure.ProccessingModule);
+			ProcessingCommonModule = Eval(Picture.PictureURLStructure.ProcessingModule);
 			Picture.Src = ProcessingCommonModule.PreparePictureURL(
 								Picture.PictureURLStructure.IntegrationSettings, Picture.Src, UUID);
 			If Picture.SrcBD = Undefined Then

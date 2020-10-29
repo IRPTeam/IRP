@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@CreditLimit
+@AgingAndCreditLimit
 
 Feature: credit limit
 
@@ -644,3 +644,20 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 			And I save the value of "Number" field as "$$NumberSalesInvoice10000033$$"
 			And I save the window as "$$SalesInvoice10000033$$"
 			And I click the button named "FormPostAndClose"
+
+Scenario: _999999 close TestClient session
+	* Clear postings
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		If "List" table contains lines Then
+			| "Partner" |
+			| "Kalipso" |
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		If "List" table contains lines Then
+			| 'Number' |
+			| '1' |
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"
+	* Close TestClient session				
+		And I close TestClient session

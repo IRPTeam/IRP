@@ -1183,8 +1183,10 @@ Scenario: create SalesInvoice024016 (Shipment confirmation does not used)
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice024016$$" variable
 		And I delete "$$SalesInvoice024016$$" variable
+		And I delete "$$DateSalesInvoice024016$$" variable
 		And I save the value of "Number" field as "$$NumberSalesInvoice024016$$"
 		And I save the window as "$$SalesInvoice024016$$"
+		And I save the value of the field named "Date" as "$$DateSalesInvoice024016$$"
 		And I click the button named "FormPostAndClose"
 
 Scenario: create SalesReturn30001

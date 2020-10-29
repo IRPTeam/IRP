@@ -7,10 +7,11 @@ EndFunction
 
 Function PictureURLStructure()
 	Structure = New Structure;
-	Structure.PictureRef = "";
-	Structure.PictureURL = "";
-	Structure.isLocalPictureURL = False;
-	Structure.ProcessingModule = "PictureViewerClientServer";
+	Structure.Insert("PictureRef", "");
+	Structure.Insert("PictureURL", "");
+	Structure.Insert("IntegrationSettings", "");
+	Structure.Insert("isLocalPictureURL", False);
+	Structure.Insert("ProcessingModule", "PictureViewerClientServer");
 	Return Structure;
 EndFunction
 

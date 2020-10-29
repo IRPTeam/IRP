@@ -536,7 +536,7 @@ Compress-Archive -Path AllSteps\* -DestinationPath %env.Database1CName%_%build.n
           <param name="teamcity.file.content.replacer.pattern.case.sensitive" value="false" />
           <param name="teamcity.file.content.replacer.regexMode" value="FIXED_STRINGS" />
           <param name="teamcity.file.content.replacer.replacement" value="%env.TR_Bank_Key%" />
-          <param name="teamcity.file.content.replacer.wildcards" value="/features/**/*.feature" />
+          <param name="teamcity.file.content.replacer.wildcards" value="+:features/**.feature" />
         </parameters>
       </extension>
     </build-extensions>

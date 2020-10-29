@@ -388,8 +388,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table1.Columns.Amount.Name = "TransactionAP";
 	PostingServer.AddColumnsToAccountsStatementTable(Table1);
 	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Vendor 
-			Or (Row.Agreement.Kind = Enums.AgreementKinds.Standard And Row.Partner.Vendor) Then
+		If Row.Agreement.Type = Enums.AgreementTypes.Vendor  Then
 			NewRow = Table1.Add(); 
 			FillPropertyValues(NewRow, Row);
 			NewRow.TransactionAP = - Row.Amount;
@@ -428,8 +427,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table4.Columns.Amount.Name = "TransactionAR";
 	PostingServer.AddColumnsToAccountsStatementTable(Table4);
 	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Customer 
-			Or (Row.Agreement.Kind = Enums.AgreementKinds.Standard And Row.Partner.Customer) Then
+		If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
 			NewRow = Table4.Add(); 
 			FillPropertyValues(NewRow, Row);
 			NewRow.TransactionAR = Row.Amount;
@@ -455,8 +453,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table6.Columns.Amount.Name = "TransactionAR";
 	PostingServer.AddColumnsToAccountsStatementTable(Table6);
 	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Customer 
-			Or (Row.Agreement.Kind = Enums.AgreementKinds.Standard And Row.Partner.Customer) Then
+		If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
 			NewRow = Table6.Add(); 
 			FillPropertyValues(NewRow, Row);
 			NewRow.TransactionAR = Row.Amount;

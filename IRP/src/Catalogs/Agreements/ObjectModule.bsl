@@ -65,7 +65,6 @@ Procedure BeforeWrite(Cancel)
 	EndIf;
 	
 	If ThisObject.Kind <> Enums.AgreementKinds.Regular Then
-		ThisObject.Type = Enums.AgreementTypes.EmptyRef();
 		ThisObject.PriceType = Catalogs.PriceTypes.EmptyRef();
 		ThisObject.PriceIncludeTax = False;
 		ThisObject.DaysBeforeDelivery = 0;

@@ -15,6 +15,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("AccountBalance_Commission"             , PostingServer.CreateTable(AccReg.AccountBalance));
 	Tables.Insert("PartnerApTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.PartnerApTransactions));
 	
+	Tables.AdvanceToSuppliers.Columns.Add("Key", New TypeDescription("UUID"));
+	Tables.PartnerApTransactions.Columns.Add("Key", New TypeDescription("UUID"));
+	
 	QueryPaymentList = New Query();
 	QueryPaymentList.Text = GetQueryTextBankPaymentPaymentList();
 	QueryPaymentList.SetParameter("Ref", Ref);
@@ -413,7 +416,9 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table4.Columns.Amount.Name = "AdvanceFromCustomers";
 	PostingServer.AddColumnsToAccountsStatementTable(Table4);
 	For Each Row In Parameters.DocumentDataTables.AdvanceToSuppliers Do
-		If Row.Partner.Customer Then
+		If Row.Partner.Customer 
+			And PostingServer.OffsetOfAdvanceByCustomerAgreement(
+				Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance) Then
 			NewRow = Table4.Add();
 			FillPropertyValues(NewRow, Row);
 			NewRow.AdvanceFromCustomers = - Row.Amount;
@@ -504,7 +509,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AdvanceToSuppliers,
 		New Structure("RecordSet, WriteInTransaction",
 			PostingServer.JoinTables(ArrayOfTables,
-			"RecordType, Period, Company, Partner, LegalName, Currency, PaymentDocument, Amount"),
+			"RecordType, Period, Company, Partner, LegalName, Currency, PaymentDocument, Amount, Key"),
 			Parameters.IsReposting));
 	
 	// ReconciliationStatement

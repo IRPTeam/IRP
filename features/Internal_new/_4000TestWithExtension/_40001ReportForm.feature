@@ -53,7 +53,7 @@ Scenario: _4000100 preparation
 		If "List" table does not contain lines Then
 				| "Description" |
 				| "TestExtension" |
-		When add test extension
+			When add test extension
 	
 						
 

@@ -98,7 +98,7 @@ Scenario: _020000 preparation (Loadinfo)
 				| 'Turkish lira' |
 			And I select current line in "List" table
 			And I select "Banknote Buying" exact value from "Download rate type" drop-down list
-			And I input "#KeyTcmbGovTr#" variable value in "Key" field
+			And I input "#KeyTcmbGovTr#" text in "Key" field
 			And I click "Ok" button
 			And I click "Save and close" button
 			And I go to line in "List" table
@@ -118,7 +118,7 @@ Scenario: _020000 preparation (Loadinfo)
 				| 'Turkish lira' |
 			And I select current line in "List" table
 			And I select "Banknote Selling" exact value from "Download rate type" drop-down list
-			And I input "#KeyTcmbGovTr#" variable value in "Key" field
+			And I input "#KeyTcmbGovTr#" text in "Key" field
 			And I click "Ok" button
 			And I click "Save and close" button
 		And I close all client application windows

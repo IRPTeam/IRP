@@ -1300,7 +1300,7 @@ Scenario: add sales tax settings
 Scenario: add test extension
 	Given I open hyperlink "e1cib/list/Catalog.Extensions"
 	And I click the button named "FormCreate"
-	And I select external file "#workingDir#\DataProcessor\TestExtension.cfe"
+	And I select external file "#workingDir#\DataProcessor\IRP_TestExtension.cfe"
 	And I click "Add file" button
 	And I input "TestExtension" text in "Description" field
 	And I click the button named "FormWriteAndClose"

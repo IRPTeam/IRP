@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Other
+@ExtensionReportForm
 
 Feature: image setting
 
@@ -39,12 +39,12 @@ Scenario: _300100 preparation (image setting)
         When Create information register PricesByItemKeys records
         When Create catalog IntegrationSettings objects
         When Create information register CurrencyRates records
-	* Add test extension
-		Given I open hyperlink "e1cib/list/Catalog.Extensions"
-		If "List" table does not contain lines Then
-				| "Description" |
-				| "TestExtension" |
-		When add test extension
+    * Add test extension
+        Given I open hyperlink "e1cib/list/Catalog.Extensions"
+        If "List" table does not contain lines Then
+                | "Description" |
+                | "TestExtension" |
+            When add test extension
 
 Scenario: _300101 image setting
     * Filling in settings in  File storages info
@@ -326,58 +326,63 @@ Scenario: _300108 open picture gallery from Item and item key
             And I close all client application windows
 
 
-// Scenario: _300110 opening Files catalog element
-//     * Open catalog Files
-//         Given I open hyperlink "e1cib/list/Catalog.Files"
-//     * Open element
-//         And I go to line in "List" table
-//             | 'Extension' | 'File name' |
-//             | 'JPG'       | 'dresswhite.jpg' |
-//         And I select current line in "List" table
-//         Then system warning window does not appear
+Scenario: _300110 opening Files catalog element
+    * Open catalog Files
+        Given I open hyperlink "e1cib/list/Catalog.Files"
+    * Open element
+        And I go to line in "List" table
+            | 'Extension' | 'File name' |
+            | 'JPG'       | 'dresswhite.jpg' |
+        And I select current line in "List" table
+        Then "Files" window is opened
+        Then system warning window does not appear
+        And I close all client application windows
+        
 
-# Scenario: _300115 check removal of pictures from Item and item key
-#     * Open Item list form
-#         Given I open hyperlink "e1cib/list/Catalog.Items"
-#         And I go to line in "List" table
-#             | 'Description'  |
-#             | 'Trousers'     |
-#         And I select current line in "List" table
-#     * Delete picture from Item
-#         Given cursor to "deletepic" picture
-#         Then click "deletepic" picture
-#         Then system warning window does not appear
-#     And I close all client application windows
-#     * Open Item list form
-#         Given I open hyperlink "e1cib/list/Catalog.Items"
-#         And I go to line in "List" table
-#             | 'Description'     |
-#             | 'Trousers'     |
-#         And I select current line in "List" table
-#         And In this window I click command interface button "Item keys"
-#         And I go to line in "List" table
-#             | 'Item key'     |
-#             | '38/Yellow' |
-#         And I select current line in "List" table
-#     * Delete picture from Item key
-#         Given cursor to "deletepic" picture
-#         Then click "deletepic" picture
-#         Then system warning window does not appear
-#     And I close all client application windows
+Scenario: _300115 check removal of pictures from Item
+    Given I open hyperlink "e1cib/list/Catalog.Files"
+    And I go to line in "List" table
+        | 'File name'     |
+        | 'dressblue.jpg' |
+    And I select current line in "List" table
+    And I save the value of "File ID" field as "$$FileIDDressBlue$$"
+    And I display "$$FileIDDressBlue$$" variable value
+    And I close current window
+    * Open Item list form
+        Given I open hyperlink "e1cib/list/Catalog.Items"
+        And I go to line in "List" table
+            | 'Description'  |
+            | 'Dress'     |
+        And I select current line in "List" table
+    * Delete picture from Item
+        And I input "$$FileIDDressBlue$$" variable value in "getCurrentSlideId" field
+        And I click "remove_picture" button
+        And I close all client application windows
+        Given I open hyperlink "e1cib/list/InformationRegister.AttachedFiles"
+        And "List" table does not contain lines
+            | 'Owner'    | 'File'          |
+            | 'Dress'    | 'dressblue.jpg' |
+    And I close all client application windows
+        
 
 
+Scenario: _300150 removal of unused elements of the Files catalog
+    * Open catalog Files
+        Given I open hyperlink "e1cib/list/Catalog.Files"
+    * Calling the delete unused items command
+        And "List" table contains lines
+        | 'File name'     |
+        | 'dressblue.jpg' |
+        And I click "Delete unused files" button
+    * Search unused files
+        And in the table "Files" I click "Find unused files" button
+        And Delay 3
+    * Select all unused files
+        And in the table "Files" I click "Check all" button
+    * Delete unused files
+        And in the table "Files" I click "Delete unused files" button
+        And "List" table does not contain lines
+        | 'File name'     |
+        | 'dressblue.jpg' |
+    And I close all client application windows
 
-# // to do after bug fix
-# Scenario: _300106 removal of unused elements of the Files catalog
-#     * Open catalog Files
-#         Given I open hyperlink "e1cib/list/Catalog.Files"
-#     * Calling the delete unused items command
-#         And I click "Delete unused files" button
-#     * Search unused files
-#         And in the table "Files" I click "Find unused files" button
-#         And Delay 3
-#     * Select all unused files
-#         And in the table "Files" I click "Check all" button
-#     * Delete unused files
-#         And in the table "Files" I click "Delete unused files" button
-#     And I close all client application windows

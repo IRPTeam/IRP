@@ -239,7 +239,7 @@ Scenario: _300111 cleaning up the added picture to the additional details and ad
         | 'Description' |
         | 'Brand'     |
         And I select current line in "List" table
-        And I select external file "#workingDir#\features\Internal_new\_3000Other\16466.png"
+        And I select external file "#workingDir#\features\Internal_new\_4000TestWithExtension\16466.png"
         And I click "Icon" hyperlink
     * Check adding a picture to an additional attribute
         Then the field named "Icon" value contains "e1cib/tempstorage/" text
@@ -255,7 +255,7 @@ Scenario: _300103 item pictures upload
             | 'Dress'     |
         And I select current line in "List" table
     * Add picture
-        And I select external file "#workingDir#\features\Internal_new\_3000Other\16466.png"
+        And I select external file "#workingDir#\features\Internal_new\_4000TestWithExtension\reddress.png"
         And I click "add_picture" button
     * Check adding picture 
         And In this window I click command interface button "Attached files"
@@ -264,7 +264,7 @@ Scenario: _300103 item pictures upload
             | 'Dress'    | 'reddress.png' |
     * Add one more picture
         And In this window I click command interface button "Main"
-        And I select external file "#workingDir#\features\Internal_new\_3000Other\dressblue.jpg"
+        And I select external file "#workingDir#\features\Internal_new\_4000TestWithExtension\dressblue.jpg"
         And I click "add_picture" button
         And I click "update_slider" button
         Then system warning window does not appear	
@@ -293,7 +293,7 @@ Scenario: _300107 item key pictures upload
             | 'M/White' |
         And I select current line in "List" table
     * Add picture
-        And I select external file "#workingDir#\features\Internal_new\_3000Other\dresswhite.jpg"
+        And I select external file "#workingDir#\features\Internal_new\_4000TestWithExtension\dresswhite.jpg"
         And I click "add_picture" button
     * Check adding picture
         And In this window I click command interface button "Attached files"

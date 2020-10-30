@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Catalogs
+@PartnerCatalogs
 
 Feature: filling in customer contact information
 
@@ -50,7 +50,7 @@ Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 		And I input "Company Kalipso" text in the field named "Description_en"
 		And I input "Company Kalipso TR" text in the field named "Description_tr"
 		And I click "Ok" button
-		And I input "Poland" text in "Country" field
+		And I input "Ukraine" text in "Country" field
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description' |

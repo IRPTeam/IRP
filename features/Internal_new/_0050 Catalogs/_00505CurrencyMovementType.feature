@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Catalogs
+@CompanyCatalogs
 
 Feature: filling in Movement Type for Partner term currencies
 As an owner

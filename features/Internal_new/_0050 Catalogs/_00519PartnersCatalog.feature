@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Catalogs
+@PartnerCatalogs
 
 Feature: filling in Partners catalog
 

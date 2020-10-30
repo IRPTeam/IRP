@@ -1,8 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Catalogs
-
+@MainInfoCatalogs
 
 Feature: filling in Expense type catalog
 

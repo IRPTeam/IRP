@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Catalogs
+@UserCatalogs
 
 Feature: filling in AccessGroups catalog
 

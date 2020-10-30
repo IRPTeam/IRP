@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Catalogs
+@PartnerCatalogs
 
 Feature: terms of cooperation with partners
 

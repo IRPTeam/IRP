@@ -6,6 +6,8 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		AddAttributesAndPropertiesServer.OnCreateAtServer(Form, "GroupOther");
 		ExtensionServer.AddAtributesFromExtensions(Form, Object.Ref, Form.Items.GroupOther);
 	EndIf;
+	
+	AddCommonAttributesToForm(Object, Form);
 
 	If Form.Items.Find("GroupTitleCollapsed") <> Undefined Then
 		DocumentsClientServer.ChangeTitleCollapse(Object, Form, Not ValueIsFilled(Object.Ref));
@@ -750,6 +752,69 @@ Procedure FillSpeciallOffersCache(Object, Form, BasisDocumentName, AddInfo = Und
 	Query.SetParameter("ItemList", Object.ItemList.Unload());
 	QueryResult = Query.Execute();
 	Form.SpecialOffersCache.Load(QueryResult.Unload());
+EndProcedure
+
+#EndRegion
+
+#Region CommonAttributes
+
+Procedure AddCommonAttributesToForm(Object, Form)
+	GroupOther = Form.Items.Find("GroupOther");
+	If GroupOther <> Undefined Then
+		AddCommonAtributesDimensions(Object, Form, GroupOther);
+		AddCommonAtributesWeight(Object, Form, GroupOther);
+	EndIf;
+EndProcedure
+
+Procedure AddCommonAtributesDimensions(Object, Form, ParentGroup)	
+	AddedAttributes = New Array;
+	If ServiceSystemServer.ObjectHasAttribute(Metadata.CommonAttributes.Length.Name, Object) Then
+		AddedAttributes.Add(Metadata.CommonAttributes.Length);
+	EndIf;
+	If ServiceSystemServer.ObjectHasAttribute(Metadata.CommonAttributes.Width.Name, Object) Then
+		AddedAttributes.Add(Metadata.CommonAttributes.Width);
+	EndIf;
+	If ServiceSystemServer.ObjectHasAttribute(Metadata.CommonAttributes.Height.Name, Object) Then
+		AddedAttributes.Add(Metadata.CommonAttributes.Height);
+	EndIf;
+	If ServiceSystemServer.ObjectHasAttribute(Metadata.CommonAttributes.Volume.Name, Object) Then
+		AddedAttributes.Add(Metadata.CommonAttributes.Volume);
+	EndIf;	
+	If Not AddedAttributes.Count() Then
+		Return;
+	EndIf;
+	
+	ItemsParent = Form.Items.Add("GroupDimensions", Type("FormGroup"), ParentGroup);
+	ItemsParent.Type = FormGroupType.UsualGroup;
+	ItemsParent.Group = ChildFormItemsGroup.Vertical;
+	ItemsParent.Behavior = UsualGroupBehavior.Collapsible;
+	ItemsParent.Title = R().Form_030;	
+	For Each Attribute In AddedAttributes Do		
+		NewAttribute = Form.Items.Add(Attribute.Name, Type("FormField"), ItemsParent);
+		NewAttribute.Type = FormFieldType.InputField;
+		NewAttribute.DataPath = "Object." + Attribute.Name;
+	EndDo;	
+EndProcedure
+
+Procedure AddCommonAtributesWeight(Object, Form, ParentGroup)	
+	AddedAttributes = New Array;
+	If ServiceSystemServer.ObjectHasAttribute(Metadata.CommonAttributes.Weight.Name, Object) Then
+		AddedAttributes.Add(Metadata.CommonAttributes.Weight);
+	EndIf;	
+	If Not AddedAttributes.Count() Then
+		Return;
+	EndIf;
+	
+	ItemsParent = Form.Items.Add("GroupWeights", Type("FormGroup"), ParentGroup);
+	ItemsParent.Type = FormGroupType.UsualGroup;
+	ItemsParent.Group = ChildFormItemsGroup.Vertical;
+	ItemsParent.Behavior = UsualGroupBehavior.Collapsible;
+	ItemsParent.Title = R().Form_031;	
+	For Each Attribute In AddedAttributes Do		
+		NewAttribute = Form.Items.Add(Attribute.Name, Type("FormField"), ItemsParent);
+		NewAttribute.Type = FormFieldType.InputField;
+		NewAttribute.DataPath = "Object." + Attribute.Name;
+	EndDo;	
 EndProcedure
 
 #EndRegion

@@ -27,7 +27,6 @@ Scenario: _4000100 preparation
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
-		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create information register Barcodes records
 		When Create catalog Users objects
@@ -54,7 +53,6 @@ Scenario: _4000100 preparation
 				| "Description" |
 				| "TestExtension" |
 			When add test extension
-	
 						
 
 

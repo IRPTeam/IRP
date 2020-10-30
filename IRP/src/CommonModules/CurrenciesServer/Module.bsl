@@ -28,7 +28,91 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 		|FROM
 		|	&CurrencyTable AS CurrencyTable";
 		If CurrencyTable = Undefined Then
-			Query.SetParameter("CurrencyTable", Parameters.Object.Currencies.Unload());
+			CurrencyTable = Parameters.Object.Currencies.Unload();
+			DocumentCondition = False;
+			
+			If TypeOf(Parameters.Object.Ref) = Type("DocumentRef.CashReceipt")
+				Or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.BankReceipt") Then
+				DocumentCondition = True;
+				Name_LegalName = "Payer";
+				RegisterType = Type("AccumulationRegisterRecordSet.PartnerArTransactions");
+			EndIf;
+			If TypeOf(Parameters.Object.Ref) = Type("DocumentRef.CashPayment")
+				Or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.BankPayment") Then
+				DocumentCondition = True;
+				Name_LegalName = "Payee";
+				RegisterType = Type("AccumulationRegisterRecordSet.PartnerApTransactions");
+			EndIf;
+			If DocumentCondition Then
+				TableOfAgreementMovementTypes = New ValueTable();
+				TableOfAgreementMovementTypes.Columns.Add("MovementType");
+				TableOfAgreementMovementTypes.Columns.Add("Partner");
+				TableOfAgreementMovementTypes.Columns.Add("LegalName");
+				TableOfAgreementMovementTypes.Columns.Add("Amount");
+				TableOfAgreementMovementTypes.Columns.Add("Key");
+				For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
+					If TypeOf(ItemOfPostingInfo.Key) = RegisterType Then
+						ItemOfPostingInfo.Value.Recordset.Columns.Add("Key", New TypeDescription("UUID"));
+						For Each RowRecordset In ItemOfPostingInfo.Value.Recordset Do
+							NewRow = TableOfAgreementMovementTypes.Add();
+							NewRow.MovementType = RowRecordset.Agreement.CurrencyMovementType;
+							NewRow.Partner      = RowRecordset.Partner;
+							NewRow.LegalName    = RowRecordset.LegalName;
+							NewRow.Amount       = RowRecordset.Amount;
+							For Each RowPaymentList In Parameters.Object.PaymentList Do
+								PartnerAndLegalNameCondidtion = False;
+								AgreementCondition = False;
+								BasisDocumentCondition = False;
+								If RowPaymentList.Partner = RowRecordset.Partner
+									And RowPaymentList[Name_LegalName] = RowRecordset.LegalName Then
+									PartnerAndLegalNameCondidtion = True;
+								EndIf;
+								If Not ValueIsFilled(RowPaymentList.Agreement) Then
+									AgreementCondition = True;
+								Else
+									If RowPaymentList.Agreement.ApArPostingDetail = Enums.ApArPostingDetail.ByStandardAgreement
+										And RowPaymentList.Agreement.StandardAgreement = RowRecordset.Agreement Then
+										AgreementCondition = True;
+									Else
+										If RowPaymentList.Agreement = RowRecordset.Agreement Then
+											AgreementCondition = True;
+										EndIf;
+									EndIf;
+								EndIf;
+								If Not ValueIsFilled(RowPaymentList.BasisDocument) 
+									Or RowPaymentList.BasisDocument = RowRecordset.BasisDocument Then
+									BasisDocumentCondition = True;
+								EndIf;
+								If PartnerAndLegalNameCondidtion And AgreementCondition And BasisDocumentCondition Then
+									RowRecordset.Key = RowPaymentList.Key;
+								EndIf;
+							EndDo;
+						EndDo;
+					EndIf;
+				EndDo;
+				
+				TableOfAgreementMovementTypes.GroupBy("MovementType, Partner, LegalName, Amount, Key");
+				
+				For Each RowPaymentList In Parameters.Object.PaymentList Do
+					If ValueIsFilled(RowPaymentList.Agreement) Then
+						Continue;
+					EndIf;
+					For Each RowMovementTypes In TableOfAgreementMovementTypes Do
+						If RowPaymentList.Partner = RowMovementTypes.Partner
+							And RowPaymentList[Name_LegalName] = RowMovementTypes.LegalName Then
+							ArrayOfCurrencies = CurrencyTable.FindRows(
+							New Structure("Key, MovementType", RowPaymentList.Key, RowMovementTypes.MovementType));
+							If Not ArrayOfCurrencies.Count() Then
+								NewRow = AddRowToCurrencyTable(Parameters.Object.Date, CurrencyTable, RowPaymentList.Key, 
+								                      Parameters.Object.Currency, RowMovementTypes.MovementType);
+								CalculateAmountByRow(NewRow, RowMovementTypes.Amount);
+							EndIf;
+						EndIf;
+					EndDo;
+				EndDo;
+				
+			EndIf;
+			Query.SetParameter("CurrencyTable", CurrencyTable);
 		Else
 			Query.SetParameter("CurrencyTable", CurrencyTable);
 		EndIf;
@@ -231,7 +315,7 @@ Procedure FillCurrencyTable(Object, Date, Company, Currency, RowKey, AgreementIn
 	EndDo;
 EndProcedure
 
-Procedure AddRowToCurrencyTable(Date, CurrenciesTable, RowKey, CurrencyFrom, CurrencyMovementType) Export
+Function AddRowToCurrencyTable(Date, CurrenciesTable, RowKey, CurrencyFrom, CurrencyMovementType) Export
 	NewRow = CurrenciesTable.Add();
 	NewRow.Key = RowKey;
 	NewRow.CurrencyFrom = CurrencyFrom;
@@ -252,7 +336,8 @@ Procedure AddRowToCurrencyTable(Date, CurrenciesTable, RowKey, CurrencyFrom, Cur
 			NewRow.Multiplicity = CurrencyInfo.Multiplicity;
 		EndIf;
 	EndIf;
-EndProcedure
+	Return NewRow;
+EndFunction
 
 Procedure ClearCurrenciesTable(Object, RowKey) Export
 	If RowKey = Undefined Then

@@ -569,7 +569,7 @@ Scenario: 950020 check role Full access only read (Additional attribute sets)
 
 Scenario: 950021 check role Full access only read (Additional attribute types)
 		And I close all client application windows
-		And In the command interface I select "Settings" "Additional attributes types"		
+		And In the command interface I select "Settings" "Additional attribute types"		
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Brand'     |

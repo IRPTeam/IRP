@@ -48,21 +48,14 @@ Scenario: _4000100 preparation
 			And I select current line in "List" table
 			And I click "Save and close" button
 		And I close all client application windows
-		
-			
+	* Add test extension
+		Given I open hyperlink "e1cib/list/Catalog.Extensions"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TestExtension" |
+			When add test extension
+	
 						
-
-
-Scenario: _4000101 add extension
-	Given I open hyperlink "e1cib/list/Catalog.Extensions"
-	And I click the button named "FormCreate"
-	And I select external file "#workingDir#\DataProcessor\TestExtension.cfe"
-	And I click "Add file" button
-	And I input "TestExtension" text in "Description" field
-	And I click the button named "FormWriteAndClose"
-	And I close TestClient session
-	And I install the "TestExtension" extension
-	Given I open new TestClient session or connect the existing one
 
 
 Scenario: _4000105 check add atributes from extensions

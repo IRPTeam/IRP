@@ -94,7 +94,6 @@ Scenario: _3510001 check the clearing of values ​​when changing the type of 
         Then the form attribute named "BankName" became equal to ""
         Then the form attribute named "TransitAccount" became equal to ""
         Then the form attribute named "CurrencyType" became equal to "Fixed"
-        Then the form attribute named "Currency" became equal to ""
 * Filling in the details for Cash account
         And I change "Type" radio button value to "Cash"
         And I change the radio button named "CurrencyType" value to "Fixed"
@@ -104,7 +103,7 @@ Scenario: _3510001 check the clearing of values ​​when changing the type of 
         | 'EUR'  | 'Euro'        |
         And I activate "Description" field in "List" table
         And I select current line in "List" table
-* Check reset when switching toansit and back to Cash
+* Check reset when switching transit and back to Cash
         And I change "Type" radio button value to "Transit"
         And I change "Type" radio button value to "Cash"
         Then the form attribute named "CurrencyType" became equal to "Multi"

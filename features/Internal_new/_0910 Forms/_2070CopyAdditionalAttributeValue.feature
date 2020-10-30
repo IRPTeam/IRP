@@ -360,7 +360,7 @@ Scenario: _207003 copy additional atribute row in sets (isConditionSet)
 	* Copy Additional attribute 02 and change attribute on Additional attribute 01
 		And in the table "Attributes" I click the button named "AttributesContextMenuCopy"
 		And I click choice button of "Attribute" attribute in "Attributes" table
-		Then "Additional attributes types" window is opened
+		Then "Additional attribute types" window is opened
 		And I go to line in "List" table
 			| 'Description'             | 'Reference'               |
 			| 'Additional attribute 01' | 'Additional attribute 01' |

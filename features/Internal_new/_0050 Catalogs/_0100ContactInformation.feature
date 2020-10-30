@@ -2,7 +2,7 @@
 @tree
 @Positive
 @ContactInformation
-@Catalogs
+
 
 Feature: filling in customer contact information
 
@@ -662,7 +662,7 @@ Scenario: _010013 settings for displaying contact information in Stores, Partner
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
-		And I click choice button of "Field" attribute in "SettingsFilter" table
+		And I click choice button of the attribute named "SettingsFilterLeftValue" in "SettingsFilter" table
 		And I expand a line in "Source" table
 			| Available fields |
 			| Reference        |
@@ -670,8 +670,7 @@ Scenario: _010013 settings for displaying contact information in Stores, Partner
 			| Available fields |
 			| Division  |
 		And I select current line in "Source" table
-		And I activate "Value" field in "SettingsFilter" table
-		And I click choice button of "Value" attribute in "SettingsFilter" table
+		And I click choice button of the attribute named "SettingsFilterRightValue" in "SettingsFilter" table	
 		And I go to line in "List" table
 			| 'Additional attribute' | 'Description' |
 			| 'Division' 	| 'Region Ukraine'      |
@@ -690,7 +689,7 @@ Scenario: _010013 settings for displaying contact information in Stores, Partner
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
-		And I click choice button of "Field" attribute in "SettingsFilter" table
+		And I click choice button of the attribute named "SettingsFilterLeftValue" in "SettingsFilter" table
 		Then "Select field" window is opened
 		And I expand a line in "Source" table
 			| Available fields |
@@ -699,9 +698,7 @@ Scenario: _010013 settings for displaying contact information in Stores, Partner
 			| Available fields |
 			| Division  |
 		And I select current line in "Source" table
-		And I activate "Value" field in "SettingsFilter" table
-		And I click choice button of "Value" attribute in "SettingsFilter" table
-		Then "Additional attribute values" window is opened
+		And I click choice button of the attribute named "SettingsFilterRightValue" in "SettingsFilter" table	
 		And I go to line in "List" table
 			| 'Additional attribute' | 'Description' |
 			| 'Division' 	| 'Region Turkey'      |

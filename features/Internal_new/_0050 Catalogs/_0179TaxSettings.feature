@@ -2,7 +2,7 @@
 @tree
 @Positive
 @TaxSettings
-@Catalogs
+@CompanyCatalogs
 
 Feature: filling in tax rates
 

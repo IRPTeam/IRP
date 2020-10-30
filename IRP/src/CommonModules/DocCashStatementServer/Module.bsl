@@ -52,16 +52,25 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 	Query.Text =
 		"SELECT
 		|	AccountBalanceTurnovers.Recorder AS Document,
-		|	AccountBalanceTurnovers.AmountExpense AS Expense,
-		|	AccountBalanceTurnovers.AmountReceipt AS Receipt
+		|	SUM(AccountBalanceTurnovers.AmountExpense) AS Expense,
+		|	SUM(AccountBalanceTurnovers.AmountReceipt) AS Receipt
 		|FROM
-		|	AccumulationRegister.AccountBalance.Turnovers(&BegOfPeriod, &EndOfPeriod, Record,
-		|		Account.BusinessUnit = &BusinessUnit
-		|	AND Company = &Company) AS AccountBalanceTurnovers
+		|	AccumulationRegister.AccountBalance.Turnovers(
+		|			&BegOfPeriod,
+		|			&EndOfPeriod,
+		|			Record,
+		|			Account.BusinessUnit = &BusinessUnit
+		|				AND Company = &Company) AS AccountBalanceTurnovers
 		|WHERE
 		|	AccountBalanceTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
-		|	AND AccountBalanceTurnovers.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)";
-	
+		|	AND AccountBalanceTurnovers.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+		|
+		|GROUP BY
+		|	AccountBalanceTurnovers.Recorder
+		|
+		|ORDER BY
+		|	AccountBalanceTurnovers.Recorder.Date";	
+		
 	Query.SetParameter("BegOfPeriod", Object.BegOfPeriod);
 	Query.SetParameter("EndOfPeriod", Object.EndOfPeriod);
 	Query.SetParameter("BusinessUnit", Object.BusinessUnit);

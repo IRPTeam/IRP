@@ -6,7 +6,13 @@ Function MD5ByBinaryData(TmpAddress) Export
 EndFunction
 
 Function PictureURLStructure()
-	Return New Structure("PictureRef, PictureURL, isLocalPictureURL, ProccessingModule, IntegrationSettings", "", False, "PictureViewerClientServer", "");
+	Structure = New Structure;
+	Structure.Insert("PictureRef", "");
+	Structure.Insert("PictureURL", "");
+	Structure.Insert("IntegrationSettings", "");
+	Structure.Insert("isLocalPictureURL", False);
+	Structure.Insert("ProcessingModule", "PictureViewerClientServer");
+	Return Structure;
 EndFunction
 
 Function GetPictureURL(RefStructure) Export
@@ -20,7 +26,7 @@ Function GetPictureURL(RefStructure) Export
 	Result.isLocalPictureURL = RefStructure.isLocalPictureURL;
 	Result.IntegrationSettings = RefStructure.GETIntegrationSettings;
 	If RefStructure.GETIntegrationSettings.IntegrationType = Enums.IntegrationType.GoogleDrive Then
-		Result.ProccessingModule = "GoogleDriveClientServer";
+		Result.ProcessingModule = "GoogleDriveClientServer";
 	EndIf;
 
 	Return Result;

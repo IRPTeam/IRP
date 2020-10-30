@@ -396,6 +396,8 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period AS Period
 		|FROM
 		|	tmp AS tmp
+		|WHERE
+		|	NOT tmp.IsService
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,

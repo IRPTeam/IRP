@@ -27,7 +27,8 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
 EndProcedure
 
 Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
+	OpenSettings = DocumentsClient.GetOpenSettingsForSelectItemWithNotServiceFilter();
+	DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
@@ -41,7 +42,8 @@ Procedure ItemBundleOnChange(Object, Form, Item) Export
 EndProcedure
 
 Procedure ItemBundleStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
+	OpenSettings = DocumentsClient.GetOpenSettingsForSelectItemWithNotServiceFilter();
+	DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 Procedure ItemBundleEditTextChange(Object, Form, Item, Text, StandardProcessing) Export

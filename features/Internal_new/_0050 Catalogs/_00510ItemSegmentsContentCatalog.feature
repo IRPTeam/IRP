@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Catalogs
+@ItemCatalogs
 
 Feature: filling in Item segments content catalog
 

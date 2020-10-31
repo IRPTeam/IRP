@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Catalogs
+@SettingsCatalogs
 
 Feature: filling in data base title
 

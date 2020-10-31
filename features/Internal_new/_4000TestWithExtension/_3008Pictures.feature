@@ -334,7 +334,7 @@ Scenario: _300110 opening Files catalog element
             | 'Extension' | 'File name' |
             | 'JPG'       | 'dresswhite.jpg' |
         And I select current line in "List" table
-        Then "Files" window is opened
+        Then "dresswhite.jpg (File)" window is opened
         Then system warning window does not appear
 		And I close all client application windows
 		

@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Catalogs
+@CompanyCatalogs
 
 Feature: filling in Companies catalog
 

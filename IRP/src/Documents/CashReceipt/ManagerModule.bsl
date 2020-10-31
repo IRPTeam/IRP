@@ -13,6 +13,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("PartnerArTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.PartnerArTransactions));
 	Tables.Insert("Aging_Expense"                         , PostingServer.CreateTable(AccReg.Aging));
 	
+	Tables.AdvanceFromCustomers.Columns.Add("Key", New TypeDescription("UUID"));
+	Tables.PartnerArTransactions.Columns.Add("Key", New TypeDescription("UUID"));
+	
 	QueryPaymentList = New Query();
 	QueryPaymentList.Text = GetQueryTextCashReceiptPaymentList();
 	QueryPaymentList.SetParameter("Ref", Ref);
@@ -388,8 +391,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table1.Columns.Amount.Name = "TransactionAP";
 	PostingServer.AddColumnsToAccountsStatementTable(Table1);
 	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Vendor 
-			Or (Row.Agreement.Kind = Enums.AgreementKinds.Standard And Row.Partner.Vendor) Then
+		If Row.Agreement.Type = Enums.AgreementTypes.Vendor  Then
 			NewRow = Table1.Add(); 
 			FillPropertyValues(NewRow, Row);
 			NewRow.TransactionAP = - Row.Amount;
@@ -402,7 +404,9 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table2.Columns.Amount.Name = "AdvanceToSuppliers";
 	PostingServer.AddColumnsToAccountsStatementTable(Table2);
 	For Each Row In Parameters.DocumentDataTables.AdvanceFromCustomers Do
-		If Row.Partner.Vendor Then
+		If Row.Partner.Vendor 
+			And PostingServer.OffsetOfAdvanceByVendorAgreement(
+				Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance) Then
 			NewRow = Table2.Add();
 			FillPropertyValues(NewRow, Row);
 			NewRow.AdvanceToSuppliers = - Row.Amount;
@@ -428,8 +432,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table4.Columns.Amount.Name = "TransactionAR";
 	PostingServer.AddColumnsToAccountsStatementTable(Table4);
 	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Customer 
-			Or (Row.Agreement.Kind = Enums.AgreementKinds.Standard And Row.Partner.Customer) Then
+		If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
 			NewRow = Table4.Add(); 
 			FillPropertyValues(NewRow, Row);
 			NewRow.TransactionAR = Row.Amount;
@@ -455,8 +458,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table6.Columns.Amount.Name = "TransactionAR";
 	PostingServer.AddColumnsToAccountsStatementTable(Table6);
 	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Customer 
-			Or (Row.Agreement.Kind = Enums.AgreementKinds.Standard And Row.Partner.Customer) Then
+		If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
 			NewRow = Table6.Add(); 
 			FillPropertyValues(NewRow, Row);
 			NewRow.TransactionAR = Row.Amount;
@@ -522,7 +524,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AdvanceFromCustomers,
 		New Structure("RecordSet, WriteInTransaction",
 			PostingServer.JoinTables(ArrayOfTables,
-			"RecordType, Period, Company, Partner, LegalName, Currency, ReceiptDocument, Amount"),
+			"RecordType, Period, Company, Partner, LegalName, Currency, ReceiptDocument, Amount, Key"),
 			Parameters.IsReposting));
 	
 	// ReconciliationStatement

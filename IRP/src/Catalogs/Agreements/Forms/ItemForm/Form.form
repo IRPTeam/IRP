@@ -792,6 +792,12 @@
               <segments>Object.CurrencyMovementType</segments>
             </datapath>
           </choiceParameterLinks>
+          <choiceParameterLinks>
+            <name>Filter.Type</name>
+            <datapath xsi:type="form:DataPath">
+              <segments>Object.Type</segments>
+            </datapath>
+          </choiceParameterLinks>
           <choiceParameters>
             <name>Filter.Kind</name>
             <value xsi:type="form:FormChoiceListDesTimeValue">

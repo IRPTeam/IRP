@@ -48,21 +48,14 @@ Scenario: _4000100 preparation
 			And I select current line in "List" table
 			And I click "Save and close" button
 		And I close all client application windows
-		
-			
+	* Add test extension
+		Given I open hyperlink "e1cib/list/Catalog.Extensions"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TestExtension" |
+			When add test extension
+	
 						
-
-
-Scenario: _4000101 add extension
-	Given I open hyperlink "e1cib/list/Catalog.Extensions"
-	And I click the button named "FormCreate"
-	And I select external file "#workingDir#\DataProcessor\TestExtension.cfe"
-	And I click "Add file" button
-	And I input "TestExtension" text in "Description" field
-	And I click the button named "FormWriteAndClose"
-	And I close TestClient session
-	And I install the "TestExtension" extension
-	Given I open new TestClient session or connect the existing one
 
 
 Scenario: _4000105 check add atributes from extensions
@@ -88,7 +81,7 @@ Scenario: _4000120 check reports option save
 		And I select current line in "SettingsComposerSettingsSelectionSelectionAvailableFields" table
 		And I click "Finish editing" button
 		And I click "Run report" button
-		Then "Result" spreadsheet document is equal
+		And "Result" spreadsheet document contains lines:
 			| 'Item, Item type'               | 'Barcode'       |
 			| 'Dress, Clothes'                | '2202283705'    |
 			| 'Dress, Clothes'                | '2202283713'    |
@@ -125,7 +118,7 @@ Scenario: _4000120 check reports option save
 		And I select current line in "SettingsComposerSettingsSelectionSelectionAvailableFields" table
 		And I click "Finish editing" button
 		And I click "Run report" button
-		Then "Result" spreadsheet document is equal
+		And "Result" spreadsheet document contains lines:
 			| 'Item, Item type, Unit'              | 'Barcode'       |
 			| 'Dress, Clothes, pcs'                | '2202283705'    |
 			| 'Dress, Clothes, pcs'                | '2202283713'    |
@@ -169,7 +162,7 @@ Scenario: _4000125 check switching between options and default settings
 		And I activate field named "OptionsListReportOption" in "OptionsList" table
 		And I select current line in "OptionsList" table
 		And I click "Run report" button
-		Then "Result" spreadsheet document is equal
+		And "Result" spreadsheet document contains lines:
 			| 'Item, Item type'               | 'Barcode'       |
 			| 'Dress, Clothes'                | '2202283705'    |
 			| 'Dress, Clothes'                | '2202283713'    |
@@ -196,7 +189,7 @@ Scenario: _4000125 check switching between options and default settings
 		And I activate field named "OptionsListReportOption" in "OptionsList" table
 		And I select current line in "OptionsList" table
 		And I click "Run report" button
-		Then "Result" spreadsheet document is equal
+		And "Result" spreadsheet document contains lines:
 			| 'Item, Item type, Unit'              | 'Barcode'       |
 			| 'Dress, Clothes, pcs'                | '2202283705'    |
 			| 'Dress, Clothes, pcs'                | '2202283713'    |
@@ -223,7 +216,7 @@ Scenario: _4000125 check switching between options and default settings
 			| 'Default'       |
 		And I select current line in "StandardOptions" table
 		And I click "Run report" button
-		Then "Result" spreadsheet document is equal
+		And "Result" spreadsheet document contains lines:
 			| 'Item'                 | 'Barcode'       |
 			| 'Dress'                | '2202283705'    |
 			| 'Dress'                | '2202283713'    |
@@ -325,7 +318,7 @@ Scenario: _4000128 check reports option share
 		And I select current line in "OptionsList" table
 		Then "Barcodes (test2)" window is opened
 		And I click "Run report" button
-		Then "Result" spreadsheet document is equal
+		And "Result" spreadsheet document contains lines:
 			| 'Item, Item type, Unit'              | 'Barcode'       |
 			| 'Dress, Clothes, pcs'                | '2202283705'    |
 			| 'Dress, Clothes, pcs'                | '2202283713'    |

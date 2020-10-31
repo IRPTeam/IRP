@@ -432,7 +432,7 @@ Function GetTable_OffsetOfAdvance_OnAdvance(PointInTime, TableOfAdvances, TableO
 		Return New ValueTable();
 	EndIf;
 	
-	TableOfAdvances.GroupBy("Period, Company, Partner, LegalName, Currency, " + DocumentName, "Amount"); 
+	TableOfAdvances.GroupBy("Period, Company, Partner, LegalName, Currency, Key," + DocumentName, "Amount"); 
 	
 	Query.SetParameter("Period"      , PointInTime);
 	Query.SetParameter("QueryTable"  , TableOfAdvances);
@@ -468,6 +468,7 @@ Function GetTable_OffsetOfAdvance_OnAdvance(PointInTime, TableOfAdvances, TableO
 	|	QueryTable.LegalName,
 	|	QueryTable.Currency,
 	|	QueryTable." + DocumentName + ",
+	|	QueryTable.Key,
 	|	QueryTable.DocumentAmount,
 	|	QueryTable.BasisDocument,
 	|	QueryTable.Agreement,
@@ -486,6 +487,7 @@ Function GetTable_OffsetOfAdvance_OnAdvance(PointInTime, TableOfAdvances, TableO
 	|	tmp.LegalName,
 	|	tmp.Currency,
 	|	tmp." + DocumentName + ",
+	|	tmp.Key,
 	|	tmp.DocumentAmount,
 	|	tmp.BasisDocument,
 	|	tmp.Agreement,
@@ -565,6 +567,7 @@ Function GetTable_OffsetOfAdvance_OnAdvance(PointInTime, TableOfAdvances, TableO
 		|Currency, 
 		|DocumentAmount, 
 		|" + DocumentName + ", 
+		|Key,
 		|Amount"; 
 	QueryTable_Grupped.GroupBy(FilterByColumns);
 	For Each Row In QueryTable_Grupped Do
@@ -608,7 +611,8 @@ Function GetQueryText_OffsetOfAdvanceToSuppliers_OnAdvance()
 	|	AdvanceToSuppliers.LegalName,
 	|	AdvanceToSuppliers.Currency,
 	|	AdvanceToSuppliers.Amount AS DocumentAmount,
-	|	AdvanceToSuppliers.PaymentDocument
+	|	AdvanceToSuppliers.PaymentDocument,
+	|	AdvanceToSuppliers.Key
 	|INTO AdvanceToSuppliers
 	|FROM
 	|	&QueryTable AS AdvanceToSuppliers
@@ -623,6 +627,7 @@ Function GetQueryText_OffsetOfAdvanceToSuppliers_OnAdvance()
 	|	AdvanceToSuppliers.LegalName,
 	|	AdvanceToSuppliers.Currency,
 	|	AdvanceToSuppliers.PaymentDocument,
+	|	AdvanceToSuppliers.Key,
 	|	SUM(AdvanceToSuppliers.DocumentAmount) AS DocumentAmount,
 	|	PartnerApTransactionsBalance.BasisDocument,
 	|	PartnerApTransactionsBalance.Agreement,
@@ -651,6 +656,7 @@ Function GetQueryText_OffsetOfAdvanceToSuppliers_OnAdvance()
 	|	AdvanceToSuppliers.LegalName,
 	|	AdvanceToSuppliers.Currency,
 	|	AdvanceToSuppliers.PaymentDocument,
+	|	AdvanceToSuppliers.Key,
 	|	PartnerApTransactionsBalance.BasisDocument,
 	|	PartnerApTransactionsBalance.Agreement
 	|ORDER BY
@@ -667,7 +673,8 @@ Function GetQueryText_OffsetOfAdvanceFromCustomers_OnAdvance()
 	|	AdvanceFromCustomers.LegalName,
 	|	AdvanceFromCustomers.Currency,
 	|	AdvanceFromCustomers.Amount AS DocumentAmount,
-	|	AdvanceFromCustomers.ReceiptDocument
+	|	AdvanceFromCustomers.ReceiptDocument,
+	|	AdvanceFromCustomers.Key
 	|INTO AdvanceFromCustomers
 	|FROM
 	|	&QueryTable AS AdvanceFromCustomers
@@ -682,6 +689,7 @@ Function GetQueryText_OffsetOfAdvanceFromCustomers_OnAdvance()
 	|	AdvanceFromCustomers.LegalName,
 	|	AdvanceFromCustomers.Currency,
 	|	AdvanceFromCustomers.ReceiptDocument,
+	|	AdvanceFromCustomers.Key,
 	|	SUM(AdvanceFromCustomers.DocumentAmount) AS DocumentAmount,
 	|	PartnerArTransactionsBalance.BasisDocument,
 	|	PartnerArTransactionsBalance.Agreement,
@@ -710,6 +718,7 @@ Function GetQueryText_OffsetOfAdvanceFromCustomers_OnAdvance()
 	|	AdvanceFromCustomers.LegalName,
 	|	AdvanceFromCustomers.Currency,
 	|	AdvanceFromCustomers.ReceiptDocument,
+	|	AdvanceFromCustomers.Key,
 	|	PartnerArTransactionsBalance.BasisDocument,
 	|	PartnerArTransactionsBalance.Agreement
 	|ORDER BY
@@ -837,6 +846,24 @@ Function GetQueryText_OffsetOfAdvanceFromCustomers_OnTransaction()
 	|ORDER BY
 	|	AdvanceFromCustomersBalance.ReceiptDocument.Date,
 	|	TransactionsAR.Period";
+EndFunction
+
+Function OffsetOfAdvanceByVendorAgreement(PartnerArTransactions_OffsetOfAdvance) Export
+	For Each Row In PartnerArTransactions_OffsetOfAdvance Do
+		If Row.Agreement.Type = Enums.AgreementTypes.Vendor Then
+			Return True;
+		EndIf;
+	EndDo;
+	Return False;
+EndFunction
+
+Function OffsetOfAdvanceByCustomerAgreement(PartnerApTransactions_OffsetOfAdvance) Export
+	For Each Row In PartnerApTransactions_OffsetOfAdvance Do
+		If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
+			Return True;
+		EndIf;
+	EndDo;
+	Return False;
 EndFunction
 
 Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) Export

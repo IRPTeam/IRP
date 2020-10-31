@@ -61,26 +61,6 @@ Function SplitBasisDocuments(Refs) Export
 EndFunction
 #EndRegion
 
-Function SerializeArrayOfFilters(ArrayOfFilters) Export
-	Return CommonFunctionsServer.SerializeXMLUseXDTO(ArrayOfFilters);
-EndFunction
-
-Procedure RecalculateQuantityInTable(Table,
-		UnitQuantityName = "QuantityUnit") Export
-	For Each Row In Table Do
-		RecalculateQuantityInRow(Row, UnitQuantityName);
-	EndDo;
-EndProcedure
-
-Procedure RecalculateQuantityInRow(Row,
-		UnitQuantityName = "QuantityUnit") Export
-	ItemKeyUnit = CatItemsServer.GetItemKeyUnit(Row.ItemKey);
-	UnitFactorFrom = Catalogs.Units.GetUnitFactor(Row[UnitQuantityName], ItemKeyUnit);
-	UnitFactorTo = Catalogs.Units.GetUnitFactor(Row.Unit, ItemKeyUnit);
-	Row.Quantity = ?(UnitFactorTo = 0, 0, Row.Quantity * UnitFactorFrom
-			/ UnitFactorTo);
-EndProcedure
-
 #Region Stores
 
 Function GetCurrentStore(ObjectData) Export
@@ -387,12 +367,6 @@ Function GetLegalNameByPartner(Partner, LegalName) Export
 EndFunction
 
 #EndRegion
-
-Procedure ShowUserMessageOnCreateAtServer(Form) Export
-    If Form.Parameters.Property("InfoMessage") Then
-        CommonFunctionsClientServer.ShowUsersMessage(Form.Parameters.InfoMessage);    
-    EndIf;
-EndProcedure
 
 #Region ListFormEvents
 
@@ -819,3 +793,45 @@ EndProcedure
 
 #EndRegion
 
+#Region Service
+
+Procedure ShowUserMessageOnCreateAtServer(Form) Export
+    If Form.Parameters.Property("InfoMessage") Then
+        CommonFunctionsClientServer.ShowUsersMessage(Form.Parameters.InfoMessage);    
+    EndIf;
+EndProcedure
+
+Function SerializeArrayOfFilters(ArrayOfFilters) Export
+	Return CommonFunctionsServer.SerializeXMLUseXDTO(ArrayOfFilters);
+EndFunction
+
+Procedure RecalculateQuantityInTable(Table,
+		UnitQuantityName = "QuantityUnit") Export
+	For Each Row In Table Do
+		RecalculateQuantityInRow(Row, UnitQuantityName);
+	EndDo;
+EndProcedure
+
+Procedure RecalculateQuantityInRow(Row,
+		UnitQuantityName = "QuantityUnit") Export
+	ItemKeyUnit = CatItemsServer.GetItemKeyUnit(Row.ItemKey);
+	UnitFactorFrom = Catalogs.Units.GetUnitFactor(Row[UnitQuantityName], ItemKeyUnit);
+	UnitFactorTo = Catalogs.Units.GetUnitFactor(Row.Unit, ItemKeyUnit);
+	Row.Quantity = ?(UnitFactorTo = 0, 0, Row.Quantity * UnitFactorFrom
+			/ UnitFactorTo);
+EndProcedure
+
+#EndRegion
+
+#Region Subscriptions
+
+Procedure OnCopyDocumentProcessingOnCopy(Source, CopiedObject, AddInfo = Undefined) Export
+	If Metadata.CommonAttributes.Author.Content.Contains(Source.Metadata()) Then
+		FillingStructure = New Structure;
+		FillingStructure.Insert("Author", SessionParameters.CurrentUser);
+
+		FillPropertyValues(Source, FillingStructure);
+	EndIf;
+EndProcedure
+
+#EndRegion

@@ -23,7 +23,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.AddressResult = PutToTempStorage(ProcSettings, ThisObject.UUID);
 	SetVisible();
 	
-	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
+	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
 EndProcedure
 
 #EndRegion

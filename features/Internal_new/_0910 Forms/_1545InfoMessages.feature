@@ -369,7 +369,7 @@ Scenario: _154509 message when trying to re-create Sales invoice based on Shipme
 			And I save the value of "Number" field as "$$NumberSalesInvoice154504$$"
 			And I save the window as "$$SalesInvoice154504$$"
 
-Scenario: _154510 message when trying to re-create Purchase invoice based on Goods reciept
+Scenario: _154510 message when trying to re-create Purchase invoice based on Goods receipt
 	* Create Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -439,7 +439,7 @@ Scenario: _154510 message when trying to re-create Purchase invoice based on Goo
 		And I delete "$$GoodsReceipt154505$$" variable
 		And I save the value of "Number" field as "$$NumberGoodsReceipt154505$$"
 		And I save the window as "$$GoodsReceipt154505$$"
-	* Create Purchase invoice based on Goods reciept
+	* Create Purchase invoice based on Goods receipt
 		And I click "Purchase invoice" button
 		And I move to "Other" tab
 		And I delete "$$NumberPurchaseInvoice154505$$" variable
@@ -516,7 +516,7 @@ Scenario: _154512 message when trying to re-create Purchase invoice based on Pur
 		Then warning message containing text 'There are no lines for which you need to create a "Purchase invoice" document in the "Purchase order" document.' appears
 		And I close all client application windows
 
-Scenario: _154514 message when trying to re-create Goods reciept based on Purchase order
+Scenario: _154514 message when trying to re-create Goods receipt based on Purchase order
 	* Create Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -825,7 +825,7 @@ Scenario: _154524 message when trying to create Shipment confirmation based on S
 		Then warning message containing text 'There are no lines for which you need to create a "Shipment confirmation" document in the "Sales invoice" document.' appears
 		And I close all client application windows
 
-Scenario: _154526 message when trying to create Goods reciept based on Purchase invoice with Service
+Scenario: _154526 message when trying to create Goods receipt based on Purchase invoice with Service
 	* Create Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"

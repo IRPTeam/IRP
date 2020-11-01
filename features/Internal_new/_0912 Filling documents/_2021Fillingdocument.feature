@@ -1734,9 +1734,9 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 				Then the form attribute named "ItemListTotalTaxAmount" became equal to "192,60"
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 962,60"
 
-Scenario: _0154107 check filling in and re-filling Cash reciept (transaction type Payment from customer)
+Scenario: _0154107 check filling in and re-filling Cash receipt (transaction type Payment from customer)
 	And I close all client application windows
-	* Open the Cash reciept creation form
+	* Open the Cash receipt creation form
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
 	* Check the default transaction type 'Payment from customer'
@@ -1922,8 +1922,8 @@ Scenario: _0154107 check filling in and re-filling Cash reciept (transaction typ
 		And I click the button named "FormPost"
 		If user messages contain "Specify a base document for line 1." string Then
 
-Scenario: _0154108 total amount calculation in Cash reciept
-	* Open form Cash reciept
+Scenario: _0154108 total amount calculation in Cash receipt
+	* Open form Cash receipt
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
 	* Check the Total amount calculation when adding rows
@@ -1953,8 +1953,8 @@ Scenario: _0154108 total amount calculation in Cash reciept
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "460,00"
 		
-Scenario: _0154109 check filling in and re-filling Bank reciept (transaction type Payment from customer)
-	* Open form Bank reciept
+Scenario: _0154109 check filling in and re-filling Bank receipt (transaction type Payment from customer)
+	* Open form Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
 	* Check the default transaction type 'Payment from customer'
@@ -2131,8 +2131,8 @@ Scenario: _0154109 check filling in and re-filling Bank reciept (transaction typ
 		And I click the button named "FormPost"
 		If user messages contain "Specify a base document for line 1." string Then
 
-Scenario: _0154110 total amount calculation in Bank reciept
-	* Open form Bank reciept
+Scenario: _0154110 total amount calculation in Bank receipt
+	* Open form Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
 	* Check the Total amount calculation when adding rows
@@ -3314,7 +3314,7 @@ Scenario: _0154117 check filling in and re-filling Cash revenue
 			| 'VAT'    | '8%'    | 'TRY'         | '16,00'  | '16,00'         |
 		And I close all client application windows
 
-Scenario: _0154118 check the details cleaning on the form Cash reciept 
+Scenario: _0154118 check the details cleaning on the form Cash receipt 
 	* Open form CashReceipt
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
@@ -3427,7 +3427,7 @@ Scenario: _0154119 check the details cleaning on the form Cash payment when re-s
 		| '1' | ''        | ''          | ''       | ''      | ''               | ''                          |
 		And I close all client application windows
 
-Scenario: _0154120 check the details cleaning on the form Bank reciept when re-selecting the type of operation
+Scenario: _0154120 check the details cleaning on the form Bank receipt when re-selecting the type of operation
 	* Open form BankReceipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"

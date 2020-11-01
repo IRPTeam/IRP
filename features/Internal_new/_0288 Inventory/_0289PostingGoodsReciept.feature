@@ -70,7 +70,7 @@ Scenario: _028900 preparation (Goods receipt)
 			When create PurchaseInvoice018006 based on PurchaseOrder017003
 	
 
-Scenario: _028901 create document Goods Reciept based on Purchase invoice
+Scenario: _028901 create document Goods Receipt based on Purchase invoice
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
 		| 'Number' |
@@ -96,21 +96,21 @@ Scenario: _028901 create document Goods Reciept based on Purchase invoice
 	And I close current window
 	
 
-Scenario: _028902 check  Goods Reciept posting by register GoodsInTransitIncoming (-)
+Scenario: _028902 check  Goods Receipt posting by register GoodsInTransitIncoming (-)
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
 	And "List" table contains lines
 		| 'Quantity' | 'Recorder'          | 'Receipt basis'         | 'Line number' | 'Store'    | 'Item key'  |
 		| '500,000'  | '$$GoodsReceipt028901$$'  | '$$PurchaseInvoice018006$$'   | '1'           | 'Store 02' | 'L/Green'   |
 
-Scenario: _028903 check  Goods Reciept posting by register StockBalance (+)
+Scenario: _028903 check  Goods Receipt posting by register StockBalance (+)
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
 	And "List" table contains lines
 		| 'Quantity' | 'Recorder'             | 'Line number'  | 'Store'    | 'Item key' |
 		| '500,000'  | '$$GoodsReceipt028901$$'   | '1'            | 'Store 02' | 'L/Green'  |
 
-Scenario: _028904 check  Goods Reciept posting by register StockReservation (+)
+Scenario: _028904 check  Goods Receipt posting by register StockReservation (+)
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
 	And "List" table contains lines

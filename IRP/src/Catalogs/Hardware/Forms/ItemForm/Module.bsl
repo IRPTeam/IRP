@@ -62,7 +62,7 @@ Procedure Test(Command)
 	EndDo;
 	
 	Notify = New NotifyDescription("EndTestDevice", ThisObject);
-	HardwareClient.BeginStartAdditionalComand(Notify, "CheckHealth", InParameters, Object.Ref, DeviceParameters);
+	HardwareClient.BeginStartAdditionalCommand(Notify, "CheckHealth", InParameters, Object.Ref, DeviceParameters);
 EndProcedure
 
 #EndRegion

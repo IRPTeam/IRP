@@ -27,7 +27,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
-	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref, Items.GroupPages);
+	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupPages);
 EndProcedure
 
 #EndRegion

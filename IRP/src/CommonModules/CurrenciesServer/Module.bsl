@@ -60,12 +60,12 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 							NewRow.LegalName    = RowRecordset.LegalName;
 							NewRow.Amount       = RowRecordset.Amount;
 							For Each RowPaymentList In Parameters.Object.PaymentList Do
-								PartnerAndLegalNameCondidtion = False;
+								PartnerAndLegalNameCondition = False;
 								AgreementCondition = False;
 								BasisDocumentCondition = False;
 								If RowPaymentList.Partner = RowRecordset.Partner
 									And RowPaymentList[Name_LegalName] = RowRecordset.LegalName Then
-									PartnerAndLegalNameCondidtion = True;
+									PartnerAndLegalNameCondition = True;
 								EndIf;
 								If Not ValueIsFilled(RowPaymentList.Agreement) Then
 									AgreementCondition = True;
@@ -83,7 +83,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 									Or RowPaymentList.BasisDocument = RowRecordset.BasisDocument Then
 									BasisDocumentCondition = True;
 								EndIf;
-								If PartnerAndLegalNameCondidtion And AgreementCondition And BasisDocumentCondition Then
+								If PartnerAndLegalNameCondition And AgreementCondition And BasisDocumentCondition Then
 									RowRecordset.Key = RowPaymentList.Key;
 								EndIf;
 							EndDo;

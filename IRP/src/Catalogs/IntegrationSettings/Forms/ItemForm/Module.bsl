@@ -5,7 +5,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndIf;
 	PutSettingsToTempStorage();
 	SetVisible();
-	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
+	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 EndProcedure
 
 &AtClient

@@ -195,7 +195,7 @@ Scenario: _029615 check the display of the header of the collapsible group in Un
 
 
 
-Scenario: _050012 check the display of the header of the collapsible group in Cash reciept
+Scenario: _050012 check the display of the header of the collapsible group in Cash receipt
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	When check the display of the header of the collapsible group in cash receipt document
 	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Cash account: Cash desk №2   Currency: USD   Transaction type: Payment from customer   " text

@@ -372,7 +372,7 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 
 
 
-#  Sales order - Purchase order - Goods reciept - Purchase invoice - Shipment confirmation - Sales invoice
+#  Sales order - Purchase order - Goods receipt - Purchase invoice - Shipment confirmation - Sales invoice
 Scenario: _029201 create Purchase order based on Sales order (Shipment confirmation before Sales invoice)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I click the button named "FormCreate"
@@ -800,8 +800,8 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 01'                 | '38/Yellow'                | ''          | ''          | ''        | ''              |
 		And I close all client application windows
 
-Scenario: _029202 create Goods reciept based on Purchase order that based on Sales order (Goods receipt before Purchase invoice)
-	* Create Goods reciept
+Scenario: _029202 create Goods receipt based on Purchase order that based on Sales order (Goods receipt before Purchase invoice)
+	* Create Goods receipt
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| 'Number' |
@@ -882,7 +882,7 @@ Scenario: _029202 create Goods reciept based on Purchase order that based on Sal
 	And I close all client application windows
 
 Scenario: _029203 check movements if there is an additional line in the Purchase order that is not in the Sales order (Goods receipt before Purchase invoice)
-	* Mark for deletion Goods reciept 456
+	* Mark for deletion Goods receipt 456
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
 			| 'Number' |
@@ -1383,7 +1383,7 @@ Scenario: _029206 create Sales invoice based on Sales order, procurement method 
 
 
 
-# Sales order - Purchase order - Purchase invoice- Goods reciept - Sales invoice - Shipment confirmation 
+# Sales order - Purchase order - Purchase invoice- Goods receipt - Sales invoice - Shipment confirmation 
 
 Scenario: _029207 create Purchase order based on Sales order (Purchase invoice before Goods receipt, Sales order contains services and products)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -1939,7 +1939,7 @@ Scenario: _029208 create Purchase invoice based on Purchase order (Purchase invo
 
 	And I close all client application windows
 
-Scenario: _029209 create Goods reciept based on Purchase invoice (Purchase invoice before Goods receipt, products)
+Scenario: _029209 create Goods receipt based on Purchase invoice (Purchase invoice before Goods receipt, products)
 	* Create Goods receipt based on Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
@@ -2298,9 +2298,9 @@ Scenario: _029211 create Sales invoice based on Sales orders (purchase has alrea
 
 # To Do align movements and add tests below
 
-# Sales order (№501) - Purchase order- Purchase invoice - Goods reciept - Shipment confirmation - Sales invoice
+# Sales order (№501) - Purchase order- Purchase invoice - Goods receipt - Shipment confirmation - Sales invoice
 
-Scenario: _029221 Sales order - Purchase order - Purchase invoice - Goods reciept - Shipment confirmation - Sales invoice
+Scenario: _029221 Sales order - Purchase order - Purchase invoice - Goods receipt - Shipment confirmation - Sales invoice
 	* Create Purchase order based on Sales order №501
 		* Select Sales order
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -2356,7 +2356,7 @@ Scenario: _029221 Sales order - Purchase order - Purchase invoice - Goods reciep
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice029221$$"
 		And I save the window as "$$PurchaseInvoice029221$$"
 		And I click the button named "FormPost"
-	* Create Goods reciept based on Purchase invoice №501
+	* Create Goods receipt based on Purchase invoice №501
 		And I click "Goods receipt" button
 		And I click the button named "FormPost"
 		And I delete "$$NumberGoodsReceipt029221$$" variable
@@ -2463,8 +2463,8 @@ Scenario: _029222 Sales order - Purchase order - Purchase invoice - Sales invoic
 
 
 
-# Sales order (№504)- Purchase invoice - Goods reciept - Shipment confirmation - Sales invoice
-Scenario: _029224 Sales order - Purchase invoice - Goods reciept - Shipment confirmation - Sales invoice
+# Sales order (№504)- Purchase invoice - Goods receipt - Shipment confirmation - Sales invoice
+Scenario: _029224 Sales order - Purchase invoice - Goods receipt - Shipment confirmation - Sales invoice
 	And I close all client application windows
 	* Create Purchase invoice based on Sales order №504
 		* Select Sales order
@@ -2512,13 +2512,13 @@ Scenario: _029224 Sales order - Purchase invoice - Goods reciept - Shipment conf
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice029224$$"
 			And I save the window as "$$PurchaseInvoice029224$$"
 			And I click the button named "FormPost"
-	* Create Goods reciept based on Purchase invoice №504
+	* Create Goods receipt based on Purchase invoice №504
 		And I click "Goods receipt" button
 		And I click the button named "FormPost"
-		And I delete "$$NumberGoodsReciept029224$$" variable
-		And I delete "$$GoodsReciept029224$$" variable
-		And I save the value of "Number" field as "$$NumberGoodsReciept029224$$"
-		And I save the window as "$$GoodsReciept029224$$"
+		And I delete "$$NumberGoodsReceipt029224$$" variable
+		And I delete "$$GoodsReceipt029224$$" variable
+		And I save the value of "Number" field as "$$NumberGoodsReceipt029224$$"
+		And I save the window as "$$GoodsReceipt029224$$"
 		And I click the button named "FormPost"
 	* Create Shipment confirmation based on Sales order №504
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -2609,7 +2609,7 @@ Scenario: _029225 Sales order - Purchase invoice - Sales invoice
 
 // #  Sales order (№503) - Purchase order - Purchase invoice - Shipment confirmation - Sales invoice
 
-// #  Sales order - Purchase order - Purchase invoice - Goods reciept - Sales invoice
+// #  Sales order - Purchase order - Purchase invoice - Goods receipt - Sales invoice
 
 // #  Sales order - Purchase order - Purchase invoice - Sales invoice - Shipment confirmation
 

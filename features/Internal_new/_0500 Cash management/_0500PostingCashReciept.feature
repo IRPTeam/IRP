@@ -2,7 +2,7 @@
 @tree
 @Positive
 @BankCashDocuments
-Feature: create Cash reciept
+Feature: create Cash receipt
 
 As a cashier
 I want to accept the cash in hand.
@@ -17,7 +17,7 @@ Background:
 # CashBankDocFilters export scenarios
 
 		
-Scenario: _050000 preparation (Cash reciept)
+Scenario: _050000 preparation (Cash receipt)
 	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
@@ -84,14 +84,14 @@ Scenario: _050000 preparation (Cash reciept)
 			When create SalesInvoice024008	
 	
 
-Scenario: _050001 create Cash reciept based on Sales invoice
+Scenario: _050001 create Cash receipt based on Sales invoice
 	* Open list form Sales invoice and select SI №1
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberSalesInvoice024001$$'      |
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
-	* Create and filling in Cash reciept
+	* Create and filling in Cash receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		Then the form attribute named "Currency" became equal to "TRY"
@@ -146,7 +146,7 @@ Scenario: _050001 create Cash reciept based on Sales invoice
 
 
 
-Scenario: _050001 create Cash reciept (independently)
+Scenario: _050001 create Cash receipt (independently)
 	* Create Cash receipt in lire for Ferron BP (Sales invoice in lire)
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
@@ -444,7 +444,7 @@ Scenario: _050002 check Cash receipt movements with transaction type Payment fro
 
 # Filters
 
-Scenario: _050003 filter check by own companies in the document Cash reciept
+Scenario: _050003 filter check by own companies in the document Cash receipt
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	When check the filter by own company
@@ -455,23 +455,23 @@ Scenario: _050004 cash filter check (bank selection not available)
 	When check the filter by cash account (bank account selection is not available)
 
 
-Scenario: _050005 check input Description in the documentCash reciept
+Scenario: _050005 check input Description in the documentCash receipt
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	When check filling in Description
 
-Scenario: _050006 check the choice of transaction type in the documentCash reciept
+Scenario: _050006 check the choice of transaction type in the documentCash receipt
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	When check the choice of the type of operation in the documents of receipt of payment
 
 
-Scenario: _050007 check legal name filter in tabular part in document Cash reciept
+Scenario: _050007 check legal name filter in tabular part in document Cash receipt
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	When check the legal name filter in the tabular part of the payment receipt documents
 
-Scenario: _050008 check partner filter in tabular part in document Cash reciept
+Scenario: _050008 check partner filter in tabular part in document Cash receipt
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	When check the partner filter in the tabular part of the payment receipt documents
@@ -481,7 +481,7 @@ Scenario: _050008 check partner filter in tabular part in document Cash reciept
 # EndFilters
 
 
-Scenario: _050011 check currency selection in Cash reciept document in case the currency is specified in the account
+Scenario: _050011 check currency selection in Cash receipt document in case the currency is specified in the account
 # the choice is not available
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	And I click the button named "FormCreate"
@@ -491,7 +491,7 @@ Scenario: _050011 check currency selection in Cash reciept document in case the 
 
 
 
-Scenario: _050013 check the display of details on the form Cash reciept with the type of operation Payment from customer
+Scenario: _050013 check the display of details on the form Cash receipt with the type of operation Payment from customer
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	And I click the button named "FormCreate"
 	And I select "Payment from customer" exact value from "Transaction type" drop-down list
@@ -516,7 +516,7 @@ Scenario: _050013 check the display of details on the form Cash reciept with the
 
 
 
-Scenario: _050014 check the display of details on the form Cash reciept with the type of operation Currency exchange
+Scenario: _050014 check the display of details on the form Cash receipt with the type of operation Currency exchange
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	And I click the button named "FormCreate"
@@ -540,7 +540,7 @@ Scenario: _050014 check the display of details on the form Cash reciept with the
 
 
 
-Scenario: _050015 check the display of details on the form Cash reciept with the type of operation Cash transfer
+Scenario: _050015 check the display of details on the form Cash receipt with the type of operation Cash transfer
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	And I click the button named "FormCreate"
@@ -565,7 +565,7 @@ Scenario: _050015 check the display of details on the form Cash reciept with the
 
 
 
-Scenario: _300513 check connection to CashReciept report "Related documents"
+Scenario: _300513 check connection to CashReceipt report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	* Form report Related documents
 		And I go to line in "List" table

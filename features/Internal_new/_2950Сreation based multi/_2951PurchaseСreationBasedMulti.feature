@@ -11,7 +11,7 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-# Internal supply request - Purchase order - Purchase invoice - Goods reciept - Bank payment/Cash payment
+# Internal supply request - Purchase order - Purchase invoice - Goods receipt - Bank payment/Cash payment
 # A direct delivery scheme first an invoice, then an order
 
 
@@ -777,9 +777,9 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 
 
 
-Scenario: _090308 create Goods reciept for Purchase invoice with different legal names (Purchase invoice before Goods receipt)
+Scenario: _090308 create Goods receipt for Purchase invoice with different legal names (Purchase invoice before Goods receipt)
 # Should be created 2 GR
-	* Create Goods reciept for PI 125, 126
+	* Create Goods receipt for PI 125, 126
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		* Sort the list by document number 
 			And I click "Configure list..." button
@@ -795,7 +795,7 @@ Scenario: _090308 create Goods reciept for Purchase invoice with different legal
 				| '$$NumberPurchaseInvoice09030202$$'    |
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-	* Check filling in Goods reciept
+	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "LegalName" is equal to "Company Ferron BP" Then
@@ -820,7 +820,7 @@ Scenario: _090308 create Goods reciept for Purchase invoice with different legal
 			| 'Dress'    | '10,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice09030202$$' |
 		And I click the button named "FormPostAndClose"
 	When I click command interface button "Goods receipt (create)"
-	* Check filling in second Goods reciept
+	* Check filling in second Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "LegalName" is equal to "Company Ferron BP" Then
@@ -844,7 +844,7 @@ Scenario: _090308 create Goods reciept for Purchase invoice with different legal
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
 			| 'Dress'    | '10,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice09030202$$' |
 		And I click the button named "FormPostAndClose"
-	* Create Goods reciept
+	* Create Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
 			| 'Number'  |
@@ -854,7 +854,7 @@ Scenario: _090308 create Goods reciept for Purchase invoice with different legal
 
 
 
-Scenario: _090309 create Goods reciept for several Purchase invoice with different partners of the same legal name (Purchase invoice before Goods receipt)
+Scenario: _090309 create Goods receipt for several Purchase invoice with different partners of the same legal name (Purchase invoice before Goods receipt)
 # Should be created 2 GR
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
@@ -862,7 +862,7 @@ Scenario: _090309 create Goods reciept for several Purchase invoice with differe
 				| '$$NumberPurchaseInvoice090302041$$'    |
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-	* Check filling in Goods reciept
+	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Store" became equal to "Store 02"
@@ -888,7 +888,7 @@ Scenario: _090309 create Goods reciept for several Purchase invoice with differe
 			And I save the window as "$$GoodsReceipt090309N130$$"
 	And I click the button named "FormPostAndClose"
 	When I click command interface button "Goods receipt (create)"
-	* Check filling in second Goods reciept
+	* Check filling in second Goods receipt
 		If the field named "Partner" is equal to "Partner Ferron 2" Then
 			And "ItemList" table contains lines
 				| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
@@ -910,7 +910,7 @@ Scenario: _090309 create Goods reciept for several Purchase invoice with differe
 			And I save the value of "Number" field as "$$NumberGoodsReceipt090309N130$$"
 			And I save the window as "$$GoodsReceipt090309N130$$"
 	And I click the button named "FormPostAndClose"
-	* Create Goods reciept
+	* Create Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
 			| 'Number'  |
@@ -919,16 +919,16 @@ Scenario: _090309 create Goods reciept for several Purchase invoice with differe
 		And I close all client application windows
 
 
-Scenario: _090310 create Goods reciept for several Purchase invoice with different partner terms, Purchase invoice before Goods receipt
+Scenario: _090310 create Goods receipt for several Purchase invoice with different partner terms, Purchase invoice before Goods receipt
 # Should be created 2 GR becouse partner terms different
-	* Create Goods reciept for PI PurchaseInvoice090302051, PurchaseInvoice090302052
+	* Create Goods receipt for PI PurchaseInvoice090302051, PurchaseInvoice090302052
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
 				| Number |
 				| $$NumberPurchaseInvoice090302051$$    |
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-	* Check filling in Goods reciept
+	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Description" became equal to "Click to enter description"
@@ -957,7 +957,7 @@ Scenario: _090310 create Goods reciept for several Purchase invoice with differe
 			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302052$$' |
 	And I click the button named "FormPostAndClose"
 	When I click command interface button "Goods receipt (create)"
-	* Check filling in second Goods reciept
+	* Check filling in second Goods receipt
 		And I save number of "ItemList" table lines as "D"
 		If "D" variable is equal to 1 Then
 			And I click the button named "FormPost"
@@ -980,7 +980,7 @@ Scenario: _090310 create Goods reciept for several Purchase invoice with differe
 			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' |  '$$PurchaseInvoice090302052$$' |
 			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' |  '$$PurchaseInvoice090302052$$' |
 	And I click the button named "FormPostAndClose"
-	* Create Goods reciept
+	* Create Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
 			| 'Number'  |
@@ -989,15 +989,15 @@ Scenario: _090310 create Goods reciept for several Purchase invoice with differe
 		And I close all client application windows
 
 
-Scenario: _090311 create Goods reciept for several Purchase invoice with different stores, Purchase invoice before Goods receipt (only one store use Goods receipt)
+Scenario: _090311 create Goods receipt for several Purchase invoice with different stores, Purchase invoice before Goods receipt (only one store use Goods receipt)
 # Create one GR
-	* Create Goods reciept for PurchaseInvoice090302062
+	* Create Goods receipt for PurchaseInvoice090302062
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
 				| Number |
 				| $$NumberPurchaseInvoice090302062$$    |
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-	* Check filling in Goods reciept
+	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Description" became equal to "Click to enter description"
 		Then the form attribute named "Store" became equal to "Store 02"
@@ -1010,7 +1010,7 @@ Scenario: _090311 create Goods reciept for several Purchase invoice with differe
 		And I save the value of "Number" field as "$$NumberGoodsReceipt0903N135$$"
 		And I save the window as "$$GoodsReceipt0903N135$$"
 	And I click the button named "FormPostAndClose"
-	* Create Goods reciept
+	* Create Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
 			| 'Number'  |
@@ -1018,16 +1018,16 @@ Scenario: _090311 create Goods reciept for several Purchase invoice with differe
 		And I close all client application windows
 
 
-Scenario: _090312 create Goods reciept for several Purchase order with different own companies, Purchase invoice before Goods receipt
+Scenario: _090312 create Goods receipt for several Purchase order with different own companies, Purchase invoice before Goods receipt
 # Should be created GR
-	* Create Goods reciept for PI PurchaseInvoice09030701, PurchaseInvoice09030702
+	* Create Goods receipt for PI PurchaseInvoice09030701, PurchaseInvoice09030702
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberPurchaseInvoice09030702$$'    |
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-	* Check filling in Goods reciept
+	* Check filling in Goods receipt
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Company" is equal to "Second Company" Then
 			And "ItemList" table contains lines
@@ -1051,7 +1051,7 @@ Scenario: _090312 create Goods reciept for several Purchase order with different
 			And I save the window as "$$GoodsReceipt0903N137$$"
 	And I click the button named "FormPostAndClose"
 	When I click command interface button "Goods receipt (create)"
-	* Check filling in Goods reciept
+	* Check filling in Goods receipt
 		If the field named "Company" is equal to "Second Company" Then
 			And "ItemList" table contains lines
 				| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
@@ -1073,7 +1073,7 @@ Scenario: _090312 create Goods reciept for several Purchase order with different
 			And I save the value of "Number" field as "$$NumberGoodsReceipt0903N137$$"
 			And I save the window as "$$GoodsReceipt0903N137$$"
 	And I click the button named "FormPostAndClose"
-	* Create Goods reciept
+	* Create Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
 			| 'Number'  |
@@ -1085,8 +1085,8 @@ Scenario: _090312 create Goods reciept for several Purchase order with different
 
 # First Goods receipt then Purchase invoice
 
-Scenario: _090313 create Goods reciept for Purchase order with different legal names, Purchase invoice after Goods receipt
-# should be created 2 Goods reciept
+Scenario: _090313 create Goods receipt for Purchase order with different legal names, Purchase invoice after Goods receipt
+# should be created 2 Goods receipt
 	* Create Purchase order 140
 		When create the first test PO for a test on the creation mechanism based on
 		And I set checkbox named "GoodsReceiptBeforePurchaseInvoice"
@@ -1106,14 +1106,14 @@ Scenario: _090313 create Goods reciept for Purchase order with different legal n
 		And I save the value of "Number" field as "$$NumberPurchaseOrder0903N141$$"
 		And I save the window as "$$PurchaseOrder0903N141$$"
 		And I click the button named "FormPostAndClose"
-	* Create based on Purchase order 140 and 141 Goods reciept (should be created 2)
+	* Create based on Purchase order 140 and 141 Goods receipt (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberPurchaseOrder0903N140$$'    |
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-	* Check filling in Goods reciept
+	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "LegalName" is equal to "Second Company Ferron BP" Then
@@ -1138,7 +1138,7 @@ Scenario: _090313 create Goods reciept for Purchase order with different legal n
 				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N140$$' |
 	And I click the button named "FormPostAndClose"
 	When I click command interface button "Goods receipt (create)"
-	* Check filling in Goods reciept
+	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "LegalName" is equal to "Second Company Ferron BP" Then
@@ -1162,7 +1162,7 @@ Scenario: _090313 create Goods reciept for Purchase order with different legal n
 				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N140$$' |
 				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N140$$' |
 	And I click the button named "FormPostAndClose"
-	* Create Goods reciept
+	* Create Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
 			| 'Number'  |
@@ -1172,8 +1172,8 @@ Scenario: _090313 create Goods reciept for Purchase order with different legal n
 
 
 
-Scenario: _090314 create Goods reciept for several Purchase order with different partners of the same legal name, Purchase invoice after Goods receipt
-# should be created 2 Goods reciept
+Scenario: _090314 create Goods receipt for several Purchase order with different partners of the same legal name, Purchase invoice after Goods receipt
+# should be created 2 Goods receipt
 	* Create first test PO 142
 		When create the first test PO for a test on the creation mechanism based on
 		* Filling in vendor info
@@ -1263,14 +1263,14 @@ Scenario: _090314 create Goods reciept for several Purchase order with different
 		And I save the value of "Number" field as "$$NumberPurchaseOrder0903N143$$"
 		And I save the window as "$$PurchaseOrder0903N143$$"
 		And I click the button named "FormPostAndClose"
-	* Create based on Purchase order 142 and 143 Goods reciept (should be created 2)
+	* Create based on Purchase order 142 and 143 Goods receipt (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberPurchaseOrder0903N142$$'  |
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-	* Check filling in Goods reciept
+	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -1296,7 +1296,7 @@ Scenario: _090314 create Goods reciept for several Purchase order with different
 				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N142$$' |
 	And I click the button named "FormPostAndClose"
 	When I click command interface button "Goods receipt (create)"
-	* Check filling in Goods reciept
+	* Check filling in Goods receipt
 		If the field named "Partner" is equal to "Partner Ferron 2" Then
 			And I click the button named "FormPost"
 			And I delete "$$NumberGoodsReceipt0903N154$$" variable
@@ -1318,7 +1318,7 @@ Scenario: _090314 create Goods reciept for several Purchase order with different
 				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N142$$' |
 				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N142$$' |
 	And I click the button named "FormPostAndClose"
-	* Create Goods reciept
+	* Create Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
 			| 'Number'  |
@@ -1326,8 +1326,8 @@ Scenario: _090314 create Goods reciept for several Purchase order with different
 			| '$$NumberGoodsReceipt0903N155$$'       |
 		And I close all client application windows
 
-Scenario: _090315 create Goods reciept for several Purchase order with different partner terms, Purchase invoice after Goods receipt
-# should be created 2 Goods reciept
+Scenario: _090315 create Goods receipt for several Purchase order with different partner terms, Purchase invoice after Goods receipt
+# should be created 2 Goods receipt
 	* Create first test PO 144
 		When create the first test PO for a test on the creation mechanism based on
 		* Filling in vendor info
@@ -1414,14 +1414,14 @@ Scenario: _090315 create Goods reciept for several Purchase order with different
 		And I save the value of "Number" field as "$$NumberPurchaseOrder0903N145$$"
 		And I save the window as "$$PurchaseOrder0903N145$$"
 		And I click the button named "FormPostAndClose"
-	* Create based on Purchase order 144 and 145 Goods reciept (should be created 2)
+	* Create based on Purchase order 144 and 145 Goods receipt (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberPurchaseOrder0903N144$$'    |
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-	* Check filling in Goods reciept
+	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And I save number of "ItemList" table lines as "N"
@@ -1447,7 +1447,7 @@ Scenario: _090315 create Goods reciept for several Purchase order with different
 			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N144$$' |
 	And I click the button named "FormPostAndClose"
 	When I click command interface button "Goods receipt (create)"
-	* Check filling in second Goods reciept
+	* Check filling in second Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And I save number of "ItemList" table lines as "A"
@@ -1472,7 +1472,7 @@ Scenario: _090315 create Goods reciept for several Purchase order with different
 			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N144$$' |
 			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N144$$' |
 	And I click the button named "FormPostAndClose"
-	* Create Goods reciept
+	* Create Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
 			| 'Number'  |
@@ -1482,8 +1482,8 @@ Scenario: _090315 create Goods reciept for several Purchase order with different
 
 
 
-Scenario: _090316 create Goods reciept for several Purchase order with different stores, Purchase invoice after Goods receipt
-# should be created 2 Goods reciept
+Scenario: _090316 create Goods receipt for several Purchase order with different stores, Purchase invoice after Goods receipt
+# should be created 2 Goods receipt
 	* Create first test PO 146
 		When create the first test PO for a test on the creation mechanism based on
 		* Filling in vendor info
@@ -1571,14 +1571,14 @@ Scenario: _090316 create Goods reciept for several Purchase order with different
 		And I save the value of "Number" field as "$$NumberPurchaseOrder0903N147$$"
 		And I save the window as "$$PurchaseOrder0903N147$$"
 		And I click the button named "FormPostAndClose"
-	* Create based on Purchase order 146 and 147 Goods reciept (should be created 2)
+	* Create based on Purchase order 146 and 147 Goods receipt (should be created 2)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberPurchaseOrder0903N146$$'    |
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-	* Check filling in Goods reciept
+	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		If the field named "Store" is equal to "Store 02" Then
 			And "ItemList" table contains lines
@@ -1602,7 +1602,7 @@ Scenario: _090316 create Goods reciept for several Purchase order with different
 			And I save the window as "$$GoodsReceipt0903N146$$"
 	And I click the button named "FormPostAndClose"
 	When I click command interface button "Goods receipt (create)"
-	* Check filling in Goods reciept
+	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		If the field named "Store" is equal to "Store 02" Then
 			And "ItemList" table contains lines
@@ -1640,8 +1640,8 @@ Scenario: _090316 create Goods reciept for several Purchase order with different
 		And Delay 5
 	And I close all client application windows
 
-Scenario: _090317 create Goods reciept for several Purchase order with different own companies using an indirect shipping scheme
-# should be created 2 Goods reciept
+Scenario: _090317 create Goods receipt for several Purchase order with different own companies using an indirect shipping scheme
+# should be created 2 Goods receipt
 	* Create first test PO 148
 		When create the first test PO for a test on the creation mechanism based on
 		* Filling in vendor info
@@ -1733,14 +1733,14 @@ Scenario: _090317 create Goods reciept for several Purchase order with different
 		And I save the value of "Number" field as "$$NumberPurchaseOrder0903N149$$"
 		And I save the window as "$$PurchaseOrder0903N149$$"
 		And I click the button named "FormPostAndClose"
-	* Create Goods reciept
+	* Create Goods receipt
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberPurchaseOrder0903N149$$'    |
 		And I move one line up in "List" table and select line
 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-	* Check filling in Goods reciept
+	* Check filling in Goods receipt
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Company" is equal to "Main Company" Then
 			And "ItemList" table contains lines
@@ -1764,7 +1764,7 @@ Scenario: _090317 create Goods reciept for several Purchase order with different
 			And I save the window as "$$GoodsReceipt0903N148$$"
 	And I click the button named "FormPostAndClose"
 	When I click command interface button "Goods receipt (create)"
-	* Check filling in second Goods reciept
+	* Check filling in second Goods receipt
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Company" is equal to "Main Company" Then
 			And "ItemList" table contains lines

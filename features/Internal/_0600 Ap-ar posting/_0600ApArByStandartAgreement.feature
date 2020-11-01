@@ -210,8 +210,8 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 		| 'TRY'      | 'Sales invoice 601*' | 'Company Nicoletta' | ''               | 'Main Company' | '11 000,00' | 'Standard'  | 'Nicoletta' | 'en description is empty' |
 	And I close all client application windows
 
-Scenario: _060003 create Cash reciept with the type of settlements under standard Partner terms and check its movements
-	* Create Cash reciept №601
+Scenario: _060003 create Cash receipt with the type of settlements under standard Partner terms and check its movements
+	* Create Cash receipt №601
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
 		* Select company
@@ -261,7 +261,7 @@ Scenario: _060003 create Cash reciept with the type of settlements under standar
 		And I close all client application windows
 
 Scenario: _060004 check the offset of the advance for Sales invoice with the type of settlement under standard Partner terms and check its movements
-	* Create Bank reciept №602
+	* Create Bank receipt №602
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
 		* Select company

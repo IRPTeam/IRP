@@ -24,7 +24,7 @@ EndProcedure
 
 #Region AddExtensionsAttributes
 
-Procedure AddAtributesFromExtensions(Form, Ref, ItemElement = Undefined) Export
+Procedure AddAttributesFromExtensions(Form, Ref, ItemElement = Undefined) Export
 	ElementParent = Undefined;
 	
 	If Not ItemElement = Undefined Then

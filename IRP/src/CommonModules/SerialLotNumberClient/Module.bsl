@@ -40,7 +40,7 @@ Procedure OnFinishEditSerialLotNumbers(Result, Parameters) Export
 		NewRow.Quantity = Row.Quantity;
 	EndDo;
 	UpdateSerialLotNumbersPresentation(Parameters.Object, Parameters.AddInfo);
-	UpdateSerialLotNubersTree(Parameters.Object, Parameters.Form);
+	UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 EndProcedure
 
 Procedure PresentationClearing(Object, Form, Item, StandardProcessing, AddInfo = Undefined) Export
@@ -50,7 +50,7 @@ Procedure PresentationClearing(Object, Form, Item, StandardProcessing, AddInfo =
 	EndIf;
 	CurrentData.SerialLotNumberIsFilling = False;
 	DeleteUnusedSerialLotNumbers(Object, CurrentData.Key);
-	UpdateSerialLotNubersTree(Object, Form);
+	UpdateSerialLotNumbersTree(Object, Form);
 EndProcedure
 
 Procedure UpdateSerialLotNumbersPresentation(Object, AddInfo = Undefined) Export
@@ -73,7 +73,7 @@ Procedure UpdateSerialLotNumbersPresentation(Object, AddInfo = Undefined) Export
 	EndDo;
 EndProcedure
 
-Procedure UpdateSerialLotNubersTree(Object, Form) Export
+Procedure UpdateSerialLotNumbersTree(Object, Form) Export
 	Form.SerialLotNumbersTree.GetItems().Clear();
 	For Each RowItemList In Object.ItemList Do
 		ArrayOfSerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", RowItemList.Key));
@@ -117,7 +117,7 @@ Procedure UpdateUseSerialLotNumber(Object, Form, AddInfo = Undefined) Export
 	If Not CurrentData.UseSerialLotNumber Then
 		DeleteUnusedSerialLotNumbers(Object, CurrentData.Key);
 		UpdateSerialLotNumbersPresentation(Object, AddInfo);
-		UpdateSerialLotNubersTree(Object, Form);
+		UpdateSerialLotNumbersTree(Object, Form);
 	EndIf;
 EndProcedure
 

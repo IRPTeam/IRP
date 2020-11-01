@@ -168,8 +168,8 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 			| ''                                           | 'Expense'     | '*'         | '20'                   | 'Main Company'   | '$$SalesInvoice060002$$' | 'Store 01'       | 'L/Green'                | '*'                   | '*'                            | ''                             | ''                             | ''                             | ''                     |
 	And I close all client application windows
 
-Scenario: _060003 create Cash reciept with the type of settlements under standard Partner terms and check its movements
-	* Create Cash reciept
+Scenario: _060003 create Cash receipt with the type of settlements under standard Partner terms and check its movements
+	* Create Cash receipt
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
 		* Select company
@@ -244,8 +244,8 @@ Scenario: _060003 create Cash reciept with the type of settlements under standar
 			| ''                                     | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '11 000'         | 'Main Company'                 | 'Nicoletta'            | 'Company Nicoletta' | ''                             | 'TRY'                  |
 		And I close all client application windows
 
-Scenario: _0600031 create Bank reciept with the type of settlements under standard Partner terms and check its movements
-	* Create Bank reciept
+Scenario: _0600031 create Bank receipt with the type of settlements under standard Partner terms and check its movements
+	* Create Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
 		* Select company
@@ -320,7 +320,7 @@ Scenario: _060004 check the offset of the advance for Sales invoice with the typ
 	And I delete "$$SalesInvoice060004$$" variable
 	And I delete "$$NumberBankReceipt060004$$" variable
 	And I delete "$$BankReceipt060004$$" variable
-	* Create Bank reciept №602
+	* Create Bank receipt №602
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
 		* Select company

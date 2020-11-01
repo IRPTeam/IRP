@@ -134,7 +134,7 @@ Scenario: _080004 check Description in IncomingPaymentOrder
 	When check Description
 	And I close all client application windows
 
-Scenario: _080005 create Bank reciept based on Incoming payment order
+Scenario: _080005 create Bank receipt based on Incoming payment order
 	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
 	And I go to line in "List" table
 		| 'Number' |

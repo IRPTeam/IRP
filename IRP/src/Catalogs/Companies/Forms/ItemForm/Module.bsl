@@ -14,7 +14,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		EndIf;
 		SetVisible();
 	EndIf;
-	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref, Items.GroupPages);
+	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupPages);
 EndProcedure
 
 &AtServer

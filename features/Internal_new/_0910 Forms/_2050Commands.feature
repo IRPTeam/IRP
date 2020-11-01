@@ -3519,8 +3519,8 @@ Scenario: _010019 check the operation of the command to open an item list from I
 
 
 
-Scenario: _010020 check the operation of Quantity Compare plugin (comparison of the plan / fact in Goods reciept)
-	* Create Goods reciept based on PI
+Scenario: _010020 check the operation of Quantity Compare plugin (comparison of the plan / fact in Goods receipt)
+	* Create Goods receipt based on PI
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
 			| 'Number' |
@@ -3715,7 +3715,7 @@ Scenario: _010020 check the operation of Quantity Compare plugin (comparison of 
 			| 'Item'  | 'Item key' | 'Base on'                 | 'Unit' | 'Q'      |
 			| 'Dress' | 'L/Green'  | '$$PurchaseInvoice0205001$$' | 'pcs'  | '8,000'  |
 			| 'Boots' | '37/18SD'  | '$$PurchaseInvoice0205001$$' | 'pcs'  | '15,000' |
-	* Check the transfer of filled items to Goods reciept
+	* Check the transfer of filled items to Goods receipt
 		And in the table "PhysItemList" I click the button named "PhysItemListSwitchItemLists"
 		And "CompareItemList" table contains lines
 			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |

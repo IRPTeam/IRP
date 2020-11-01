@@ -1,7 +1,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
-	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
+	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
 EndProcedure
 
 &AtClient

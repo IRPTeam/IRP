@@ -2,7 +2,7 @@
 @tree
 @Positive
 @Group9
-Feature: create Bank reciept
+Feature: create Bank receipt
 
 As an accountant
 I want to display the incoming bank payments
@@ -13,14 +13,14 @@ Background:
 # The currency of reports is lira
 # CashBankDocFilters export scenarios
 
-Scenario: _052001 create Bank reciept based on Sales invoice
+Scenario: _052001 create Bank receipt based on Sales invoice
 	* Open list form Sales invoice and select SI №1
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
 		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
-	* Create and filling in Bank reciept
+	* Create and filling in Bank receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		Then the form attribute named "Currency" became equal to "TRY"
@@ -280,7 +280,7 @@ Scenario: _052001 create Bank receipt (independently)
 			|   3    |	
 	
 
-Scenario: _052002 check Bank reciept movements by register PartnerArTransactions
+Scenario: _052002 check Bank receipt movements by register PartnerArTransactions
 	Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerArTransactions"
 	And "List" table contains lines
 		| 'Currency'   | 'Recorder'           | 'Legal name'        |  'Basis document'     | 'Company'      | 'Amount'    | 'Partner term'                     | 'Partner'   |

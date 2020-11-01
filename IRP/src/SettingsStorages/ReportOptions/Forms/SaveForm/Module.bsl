@@ -161,7 +161,7 @@ EndProcedure
 
 &AtClient
 Procedure ShowMarkedForDeleteReportOptions()
-	UseDeletiomMarkFilter = Items.OptionsListShowMarkedForDeletion.Check;
+	UseDeletionMarkFilter = Items.OptionsListShowMarkedForDeletion.Check;
 	LeftValue = New DataCompositionField("DeletionMark");
 	EditedFilterItem = Undefined;
 	For Each FilterItem In OptionsList.Filter.Items Do
@@ -170,7 +170,7 @@ Procedure ShowMarkedForDeleteReportOptions()
 			Break;
 		EndIf;
 	EndDo;
-	If UseDeletiomMarkFilter Then
+	If UseDeletionMarkFilter Then
 		If EditedFilterItem <> Undefined Then
 			OptionsList.Filter.Items.Delete(FilterItem);
 		EndIf;

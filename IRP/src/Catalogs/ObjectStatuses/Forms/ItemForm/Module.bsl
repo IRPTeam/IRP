@@ -2,7 +2,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	SetVisible();
-	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref, Items.GroupPagesCheque);
+	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupPagesCheque);
 EndProcedure
 
 &AtClient

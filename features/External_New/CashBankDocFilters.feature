@@ -369,7 +369,7 @@ Scenario: check the choice of the type of document-basis in the documents of rec
 
 	
 Scenario: check the choice of currency in the bank payment document if the currency is indicated in the account
-# in this case you cannot change the currency (documents: Bank payment, Bank reciept)
+# in this case you cannot change the currency (documents: Bank payment, Bank receipt)
 	And I click Select button of "Company" field
 	And I select current line in "List" table
 	And I click Select button of "Account" field
@@ -390,7 +390,7 @@ Scenario: check the choice of currency in the bank payment document if the curre
 	And I close all client application windows
 
 Scenario: check the choice of currency in the cash payment document if the currency is indicated in the account
-# in this case you cannot change the currency (documents: Cash payment, Cash reciept)
+# in this case you cannot change the currency (documents: Cash payment, Cash receipt)
 	And I click Select button of "Company" field
 	And I select current line in "List" table
 	And I click Select button of "Cash account" field

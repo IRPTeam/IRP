@@ -16,7 +16,7 @@ Procedure BeforePayment(Object, Cancel, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
-Procedure PrintLastReciept(Object, Cancel, AddInfo = Undefined) Export
+Procedure PrintLastReceipt(Object, Cancel, AddInfo = Undefined) Export
 	LastRetailSalesReceipt = DPPointOfSaleServer.GetLastRetailSalesReceiptDoc();
 	If LastRetailSalesReceipt.isEmpty() Then
 		Return;

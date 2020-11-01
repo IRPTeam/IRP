@@ -4,7 +4,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	If Not Object.Ref.Metadata().TabularSections.Find("AddAttributes") = Undefined
 		And Not Form.Items.Find("GroupOther") = Undefined Then
 		AddAttributesAndPropertiesServer.OnCreateAtServer(Form, "GroupOther");
-		ExtensionServer.AddAtributesFromExtensions(Form, Object.Ref, Form.Items.GroupOther);
+		ExtensionServer.AddAttributesFromExtensions(Form, Object.Ref, Form.Items.GroupOther);
 	EndIf;
 	
 	AddCommonAttributesToForm(Object, Form);
@@ -458,23 +458,23 @@ Function PrepareServerData(Parameters) Export
 				EndIf;
 			EndDo;
 			
-			AllTaxexInCache = True;
+			AllTaxesInCache = True;
 			For Each ItemOfTaxes In ArrayOfTaxes Do
 				If ArrayOfTaxesInCache.Find(ItemOfTaxes) = Undefined Then
-					AllTaxexInCache = False;
+					AllTaxesInCache = False;
 					Break;
 				EndIf;
 			EndDo;
-			If AllTaxexInCache Then
+			If AllTaxesInCache Then
 				For Each ItemOfTaxesInCache In ArrayOfTaxesInCache Do
 					If ArrayOfTaxes.Find(ItemOfTaxesInCache) = Undefined Then
-						AllTaxexInCache = False;
+						AllTaxesInCache = False;
 						Break;
 					EndIf;
 				EndDo;
 			EndIf;
 			
-			If AllTaxexInCache Then
+			If AllTaxesInCache Then
 				RequireCallCreateTaxesFormControls = False;
 			EndIf;
 			
@@ -695,7 +695,7 @@ EndFunction
 
 #Region SpecialOffersInReturns
 
-Procedure FillSpeciallOffersCache(Object, Form, BasisDocumentName, AddInfo = Undefined) Export
+Procedure FillSpecialOffersCache(Object, Form, BasisDocumentName, AddInfo = Undefined) Export
 	Form.SpecialOffersCache.Clear();
 	Query = New Query();
 	Query.Text = 
@@ -735,12 +735,12 @@ EndProcedure
 Procedure AddCommonAttributesToForm(Object, Form)
 	GroupOther = Form.Items.Find("GroupOther");
 	If GroupOther <> Undefined Then
-		AddCommonAtributesDimensions(Object, Form, GroupOther);
-		AddCommonAtributesWeight(Object, Form, GroupOther);
+		AddCommonAttributesDimensions(Object, Form, GroupOther);
+		AddCommonAttributesWeight(Object, Form, GroupOther);
 	EndIf;
 EndProcedure
 
-Procedure AddCommonAtributesDimensions(Object, Form, ParentGroup)	
+Procedure AddCommonAttributesDimensions(Object, Form, ParentGroup)	
 	AddedAttributes = New Array;
 	If ServiceSystemServer.ObjectHasAttribute(Metadata.CommonAttributes.Length.Name, Object) Then
 		AddedAttributes.Add(Metadata.CommonAttributes.Length);
@@ -770,7 +770,7 @@ Procedure AddCommonAtributesDimensions(Object, Form, ParentGroup)
 	EndDo;	
 EndProcedure
 
-Procedure AddCommonAtributesWeight(Object, Form, ParentGroup)	
+Procedure AddCommonAttributesWeight(Object, Form, ParentGroup)	
 	AddedAttributes = New Array;
 	If ServiceSystemServer.ObjectHasAttribute(Metadata.CommonAttributes.Weight.Name, Object) Then
 		AddedAttributes.Add(Metadata.CommonAttributes.Weight);

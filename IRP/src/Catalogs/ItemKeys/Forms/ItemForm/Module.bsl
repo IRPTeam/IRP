@@ -18,7 +18,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.UnitMode = ?(ValueIsFilled(Object.Unit), "Own", "Inherit");
 	ThisObject.SpecificationMode = ValueIsFilled(Object.Specification);
 	SetVisible();
-	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref);
+	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 EndProcedure
 
 &AtClient

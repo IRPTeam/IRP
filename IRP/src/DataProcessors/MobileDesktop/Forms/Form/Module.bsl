@@ -1,7 +1,7 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	ExtensionServer.AddAtributesFromExtensions(ThisObject, DataProcessors.MobileDesktop, Items.PageAddInfo);
+	ExtensionServer.AddAttributesFromExtensions(ThisObject, DataProcessors.MobileDesktop, Items.PageAddInfo);
 EndProcedure
 
 &AtServer

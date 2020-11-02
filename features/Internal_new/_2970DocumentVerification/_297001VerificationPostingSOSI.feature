@@ -443,7 +443,7 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 
 
 
-Scenario: _29700104 test filling-in SO - SI - SC in different units
+Scenario: _29700104 test filling-in SO - SI in different units (ban)
 		And I delete "$$SalesOrder29700104$$" variable
 		And I delete "$$NumberSalesOrder29700104$$" variable
 	* Create SO
@@ -480,109 +480,7 @@ Scenario: _29700104 test filling-in SO - SI - SC in different units
 		And I select current line in "ItemList" table
 		And I input "3,000" text in "Q" field of "ItemList" table
 		And I click the button named "FormPost"
-		Then user message window does not contain messages
-	* Change in SI quantity by shoes upside down in pieces and try to post
-		And I go to line in "ItemList" table
-		| 'Item'  | 'Item key'  | 'Q'      | 'Unit' |
-		| 'Boots' | 'Boots/S-8' | '38,000' | 'pcs'  |
-		And I activate "Q" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "51,000" text in "Q" field of "ItemList" table
-		And I click the button named "FormPost"
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
-		Then I wait that in user messages the "Line No. [2,3] [Boots Boots/S-8] Ordered remaining: 74 pcs. Required: 87 pcs. Lacking: 13 pcs." substring will appear in 20 seconds
-	* Change the SI quantity of shoes to a lesser side in packages and try to post
-		And I go to line in "ItemList" table
-		| 'Item'  | 'Item key'  | 'Q'      |
-		| 'Boots' | 'Boots/S-8' | '3,000' |
-		And I activate "Q" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
-		And I click the button named "FormPost"
-		Then user message window does not contain messages
-	* Change in SI quantity by shoes upside down in packs and try to post
-		And I go to line in "ItemList" table
-		| 'Item'  | 'Item key'  | 'Q'      |
-		| 'Boots' | 'Boots/S-8' | '1,000' |
-		And I activate "Q" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "4,000" text in "Q" field of "ItemList" table
-		And I go to line in "ItemList" table
-		| 'Item'  | 'Item key'  | 'Q'      |
-		| 'Boots' | 'Boots/S-8' | '51,000' |
-		And I activate "Q" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "46,000" text in "Q" field of "ItemList" table
-		And I click the button named "FormPost"
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
-		Then I wait that in user messages the "Line No. [2,3] [Boots Boots/S-8] Ordered remaining: 74 pcs. Required: 94 pcs. Lacking: 20 pcs." substring will appear in 20 seconds
-	* Change in SI shoe quantity by which in SO
-		And I go to line in "ItemList" table
-		| 'Item'  | 'Item key'  | 'Q'      |
-		| 'Boots' | 'Boots/S-8' | '4,000' |
-		And I activate "Q" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
-		And I go to line in "ItemList" table
-		| 'Item'  | 'Item key'  | 'Q'      |
-		| 'Boots' | 'Boots/S-8' | '46,000' |
-		And I activate "Q" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "50,000" text in "Q" field of "ItemList" table
-		And I click the button named "FormPost"
-		Then user message window does not contain messages
-	* Creating SC for the quantity that in SI and checking post
-		And I click "Shipment confirmation" button
-		And I click the button named "FormPost"
-		Then user message window does not contain messages
-	* Change the quantity within SI and check post
-		And I go to line in "ItemList" table
-		| 'Item'  | 'Item key'  | 'Quantity' |
-		| 'Boots' | 'Boots/S-8' | '24,000'   |
-		And I select current line in "ItemList" table
-		And I input "22,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key'  | 'Quantity' | 'Unit' |
-			| 'Boots' | 'Boots/S-8' | '50,000'   | 'pcs'  |
-		And I select current line in "ItemList" table
-		And I input "52,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click the button named "FormPost"
-		Then user message window does not contain messages
-	* Specification of packages and post
-		And I go to line in "ItemList" table
-		| 'Item'  | 'Item key'  | 'Quantity' |
-		| 'Boots' | 'Boots/S-8' | '22,000'   |
-		And I select current line in "ItemList" table
-		And I input "2,000" text in "Quantity" field of "ItemList" table
-		And I activate "Unit" field in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Boots (12 pcs)' |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key'  | 'Quantity' | 'Unit' |
-			| 'Boots' | 'Boots/S-8' | '52,000'   | 'pcs'  |
-		And I select current line in "ItemList" table
-		And I input "50,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click the button named "FormPost"
-		Then user message window does not contain messages
-	* Specify more packages than in SI and check post
-		And I go to line in "ItemList" table
-		| 'Item'  | 'Item key'  | 'Quantity' |
-		| 'Boots' | 'Boots/S-8' | '2,000'   |
-		And I select current line in "ItemList" table
-		And I input "3,000" text in "Quantity" field of "ItemList" table
-		And I click the button named "FormPost"
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
-		Given Recent TestClient message contains "*[Boots Boots/S-8] Invoiced remaining: 74 pcs. Required: 86 pcs. Lacking: 12 pcs." string by template
+		Then I wait that in user messages the "Line No. [2] [Boots Boots/S-8] Ordering remaining: 24 . Required: 36 . Lacking: 12 ." substring will appear in 20 seconds
 		And I close all client application windows
 
 

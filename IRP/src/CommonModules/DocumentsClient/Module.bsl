@@ -1100,15 +1100,15 @@ EndProcedure
 
 #Region PickUpItems
 
-Procedure PickupItemsEnd(Result, AdditionalParameters) Export
+Procedure PickupItemsEnd(Result, AddInfo) Export
 	If NOT ValueIsFilled(Result)
-		OR Not AdditionalParameters.Property("Object")
-		OR Not AdditionalParameters.Property("Form") Then
+		OR Not AddInfo.Property("Object")
+		OR Not AddInfo.Property("Form") Then
 		Return;
 	EndIf;
 	
-	Object 	= AdditionalParameters.Object;
-	Form 	= AdditionalParameters.Form;	
+	Object 	= AddInfo.Object;
+	Form 	= AddInfo.Form;	
 	
 	Settings = New Structure();
 	Settings.Insert("Rows", New Array);
@@ -1126,6 +1126,8 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
 	
 	FilterStructure = New Structure(FilterString);
+	
+	UseSerialLotNumbers = Object.Property("SerialLotNumbers");
 	
 	For Each ResultElement In Result Do
 		FillPropertyValues(FilterStructure, ResultElement);
@@ -1168,8 +1170,24 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 		
 		Form.Items.ItemList.CurrentRow = Row.GetID();
 		DocumentsClient.TableOnStartEdit(Object, Form, "Object.ItemList", Form.Items.ItemList, NewRow, False);
+		
+		If UseSerialLotNumbers Then
+			
+			
+			If ValueIsFilled(ResultElement.SerialLotNumber) Then
+				SerialLotNumbersArray = New Array;
+				SerialLotNumbers = New Structure("SerialLotNumber, Quantity");
+				SerialLotNumbers.SerialLotNumber = ResultElement.SerialLotNumber;
+				SerialLotNumbers.Quantity = 1;
+				SerialLotNumbersArray.Add(SerialLotNumbers);
+				SerialLotNumbersStructure = New Structure("RowKey, SerialLotNumbers", Row.Key, SerialLotNumbersArray);
+				
+				SerialLotNumberClient.AddNewSerialLotNumbers(SerialLotNumbersStructure, AddInfo, True, AddInfo);
+			EndIf;
+			SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
+		EndIf;
 	EndDo;
-	
+
 	Form.ItemListOnChange(Form.Items.ItemList);
 
 EndProcedure

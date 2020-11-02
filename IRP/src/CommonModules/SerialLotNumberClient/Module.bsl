@@ -7,7 +7,7 @@ Procedure PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProces
 	EndIf;
 
 	Notify = New NotifyDescription("OnFinishEditSerialLotNumbers", ThisObject, 
-	New Structure("Object, Form, AddInfo", Object, Form, AddInfo));
+							New Structure("Object, Form, AddInfo", Object, Form, AddInfo));
 	OpeningParameters = New Structure;
 	OpeningParameters.Insert("Item", CurrentData.Item);
 	OpeningParameters.Insert("ItemKey", CurrentData.ItemKey);
@@ -24,23 +24,28 @@ Procedure PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProces
 		Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
-Procedure OnFinishEditSerialLotNumbers(Result, Parameters) Export
+Procedure AddNewSerialLotNumbers(Result, Parameters, AddNewLot = False, AddInfo = Undefined) Export
 	If TypeOf(Result) <> Type("Structure") Then
 		Return;
 	EndIf;
-	ArrayOfSerialLotNumbers = Parameters.Object.SerialLotNumbers.FindRows(New Structure("Key", Result.RowKey));
-	For Each Row In ArrayOfSerialLotNumbers Do
-		Parameters.Object.SerialLotNumbers.Delete(Row);
-	EndDo;
-
+	If Not AddNewLot Then
+		ArrayOfSerialLotNumbers = Parameters.Object.SerialLotNumbers.FindRows(New Structure("Key", Result.RowKey));
+		For Each Row In ArrayOfSerialLotNumbers Do
+			Parameters.Object.SerialLotNumbers.Delete(Row);
+		EndDo;
+	EndIf;
 	For Each Row In Result.SerialLotNumbers Do
 		NewRow = Parameters.Object.SerialLotNumbers.Add();
 		NewRow.Key = Result.RowKey;
 		NewRow.SerialLotNumber = Row.SerialLotNumber;
 		NewRow.Quantity = Row.Quantity;
 	EndDo;
-	UpdateSerialLotNumbersPresentation(Parameters.Object, Parameters.AddInfo);
+	UpdateSerialLotNumbersPresentation(Parameters.Object, AddInfo);
 	UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
+EndProcedure
+
+Procedure OnFinishEditSerialLotNumbers(Result, Parameters) Export
+	AddNewSerialLotNumbers(Result, Parameters, False, Parameters.AddInfo);
 EndProcedure
 
 Procedure PresentationClearing(Object, Form, Item, AddInfo = Undefined) Export

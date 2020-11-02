@@ -345,11 +345,15 @@ Scenario: _207003 copy additional atribute row in sets (isConditionSet)
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
-		And I select "ENG" exact value from "Field" drop-down list in "SettingsFilter" table
+		And I click choice button of the attribute named "SettingsFilterLeftValue" in "SettingsFilter" table
+		And I go to line in "Source" table
+			| 'Available fields' |
+			| 'ENG'              |
+		And I select current line in "Source" table	
 		And I move to the next attribute
 		And I select "Contains" exact value from "Comparison type" drop-down list in "SettingsFilter" table
 		And I move to the next attribute
-		And I input "clone" text in "Value" field of "SettingsFilter" table
+		And I input "clone" text in the field named "SettingsFilterRightValue" of "SettingsFilter" table
 		And I finish line editing in "SettingsFilter" table
 		And in the table "ResultTable" I click "Verify" button
 		And "ResultTable" table became equal

@@ -1122,10 +1122,10 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 	Else
 		FilterString = "Item, ItemKey, Unit";
 	EndIf;
-	FilterStructure = New Structure(FilterString);
 	Settings.Insert("CalculateSettings", CalculationSettings);
-	
 	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
+	
+	FilterStructure = New Structure(FilterString);
 	
 	For Each ResultElement In Result Do
 		FillPropertyValues(FilterStructure, ResultElement);
@@ -2283,6 +2283,10 @@ Procedure TableOnStartEdit(Object, Form, DataPath, Item, NewRow, Clone, AddInfo 
 	
 	If CurrentData = Undefined Then
 		Return;
+	EndIf;
+	
+	If Clone Then
+		SerialLotNumberClient.PresentationClearingOnCopy(Object, Form, Item);
 	EndIf;
 	
 	If Not NewRow Then

@@ -500,20 +500,6 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="f380f4c2-dd49-4dc2-ae23-cf7e61ddb973">
-      <name>SerialLotNumber</name>
-      <synonym>
-        <key>en</key>
-        <value>Item serial/lot number</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.SerialLotNumbers</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <createOnInput>Use</createOnInput>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
     <attributes uuid="5f154da9-c440-4260-a0a0-aeac7a3706ef">
       <name>DontCalculateRow</name>
       <synonym>

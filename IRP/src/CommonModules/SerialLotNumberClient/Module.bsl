@@ -43,14 +43,23 @@ Procedure OnFinishEditSerialLotNumbers(Result, Parameters) Export
 	UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 EndProcedure
 
-Procedure PresentationClearing(Object, Form, Item, StandardProcessing, AddInfo = Undefined) Export
+Procedure PresentationClearing(Object, Form, Item, AddInfo = Undefined) Export
 	CurrentData = Form.Items.ItemList.CurrentData;
-	If CurrentData = Undefined Then
+	If CurrentData = Undefined Or Not CurrentData.Property("SerialLotNumberIsFilling") Then
 		Return;
 	EndIf;
 	CurrentData.SerialLotNumberIsFilling = False;
 	DeleteUnusedSerialLotNumbers(Object, CurrentData.Key);
 	UpdateSerialLotNumbersTree(Object, Form);
+EndProcedure
+
+Procedure PresentationClearingOnCopy(Object, Form, Item, AddInfo = Undefined) Export
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Or Not CurrentData.Property("SerialLotNumberIsFilling") Then
+		Return;
+	EndIf;
+	CurrentData.SerialLotNumberIsFilling = False;
+	CurrentData.SerialLotNumbersPresentation.Clear();
 EndProcedure
 
 Procedure UpdateSerialLotNumbersPresentation(Object, AddInfo = Undefined) Export

@@ -380,8 +380,12 @@ Procedure ItemListSerialLotNumbersPresentationStartChoice(Object, Form, Item, Ch
 	SerialLotNumberClient.PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, AddInfo);
 EndProcedure	
 
-Procedure ItemListSerialLotNumbersPresentationClearing(Object, Form, Item, StandardProcessing, AddInfo = Undefined) Export
-	SerialLotNumberClient.PresentationClearing(Object, Form, Item, StandardProcessing, AddInfo);
+Procedure ItemListSerialLotNumbersPresentationClearing(Object, Form, Item, AddInfo = Undefined) Export
+	SerialLotNumberClient.PresentationClearing(Object, Form, Item, AddInfo);
+EndProcedure
+
+Procedure ItemListSerialLotNumbersPresentationClearingOnCopy(Object, Form, Item, AddInfo = Undefined) Export
+	SerialLotNumberClient.PresentationClearingOnCopy(Object, Form, Item, AddInfo);
 EndProcedure
 
 #EndRegion

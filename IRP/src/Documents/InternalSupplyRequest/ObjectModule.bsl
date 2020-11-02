@@ -27,3 +27,8 @@ Procedure BeforeDelete(Cancel)
 		Return;
 	EndIf;
 EndProcedure
+
+Procedure Filling(FillingData, FillingText, StandardProcessing)
+	Return;
+EndProcedure
+

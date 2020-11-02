@@ -78,7 +78,7 @@ Procedure SetFilterByStatus()
 EndProcedure
 #EndRegion
 
-#Region ComandsEvents
+#Region CommandsEvents
 &AtClient
 Procedure CommandSaveAndClose(Command)
 	Close(ThisObject.PickedCheckBonds);

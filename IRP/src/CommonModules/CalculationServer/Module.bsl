@@ -28,11 +28,11 @@ Procedure CalculateItemsRows(Object, ItemRows, Actions, ArrayOfTaxInfo = Undefin
 	
 	ColumnNames_ItemList      = CalculationStringsClientServer.GetColumnNames_ItemList(ArrayOfTaxInfo);
 	ColumnNames_TaxList       = CalculationStringsClientServer.GetColumnNames_TaxList();
-	ColumnNames_SpecilaOffers = CalculationStringsClientServer.GetColumnNames_SpecialOffers();
+	ColumnNames_SpecialOffers = CalculationStringsClientServer.GetColumnNames_SpecialOffers();
 	
 	Object.ItemList      = ArrayOfStructuresToValueTable(Object.ItemList      , ColumnNames_ItemList);
 	Object.TaxList       = ArrayOfStructuresToValueTable(Object.TaxList       , ColumnNames_TaxList);	
-	Object.SpecialOffers = ArrayOfStructuresToValueTable(Object.SpecialOffers , ColumnNames_SpecilaOffers);
+	Object.SpecialOffers = ArrayOfStructuresToValueTable(Object.SpecialOffers , ColumnNames_SpecialOffers);
 	
 	For Each ItemRow In Object.ItemList Do
 		CalculationStringsClientServer.CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo, AddInfo);
@@ -40,7 +40,7 @@ Procedure CalculateItemsRows(Object, ItemRows, Actions, ArrayOfTaxInfo = Undefin
 	
 	Object.ItemList      = ValueTableToArrayOfStructures(Object.ItemList      , ColumnNames_ItemList);
 	Object.TaxList       = ValueTableToArrayOfStructures(Object.TaxList       , ColumnNames_TaxList);	
-	Object.SpecialOffers = ValueTableToArrayOfStructures(Object.SpecialOffers , ColumnNames_SpecilaOffers);
+	Object.SpecialOffers = ValueTableToArrayOfStructures(Object.SpecialOffers , ColumnNames_SpecialOffers);
 	
 EndProcedure
 	

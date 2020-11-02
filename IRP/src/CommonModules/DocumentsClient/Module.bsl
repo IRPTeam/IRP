@@ -1280,6 +1280,21 @@ EndProcedure
 
 #Region Item
 
+Function GetOpenSettingsForSelectItemWithNotServiceFilter(OpenSettings = Undefined, AddInfo = Undefined) Export
+	If  OpenSettings = Undefined Then
+		OpenSettings = GetOpenSettingsStructure();
+	EndIf;
+
+	If OpenSettings.ArrayOfFilters = Undefined Then
+		OpenSettings.ArrayOfFilters = New Array();
+	EndIf;
+
+	NotService = DocumentsClientServer.CreateFilterItem("ItemType.Type", 
+							PredefinedValue("Enum.ItemTypes.Service"), DataCompositionComparisonType.NotEqual);
+	OpenSettings.ArrayOfFilters.Add(NotService);
+	Return OpenSettings;
+EndFunction
+
 Procedure ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
 	
 	If  OpenSettings = Undefined Then
@@ -1294,9 +1309,10 @@ Procedure ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, Op
 	
 	If OpenSettings.ArrayOfFilters = Undefined Then
 		OpenSettings.ArrayOfFilters = New Array();
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																		True, DataCompositionComparisonType.NotEqual));
 	EndIf;
+
+	DeletionMarkItem = DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual);
+	OpenSettings.ArrayOfFilters.Add(DeletionMarkItem);
 	
 	OpenSettings.FormParameters = New Structure();
 	If OpenSettings.FillingData = Undefined Then
@@ -1312,12 +1328,14 @@ Procedure ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, Array
 	
 	If ArrayOfFilters = Undefined Then
 		ArrayOfFilters = New Array();
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+		DeletionMarkItem = DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual);
+		ArrayOfFilters.Add(DeletionMarkItem);
 	EndIf;
 	
 	ArrayOfChoiceParameters = New Array();
-	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.CustomSearchFilter", 
-															DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters)));
+	SerializedArrayOfFilters = DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters);
+	CustomSearchFilter = New ChoiceParameter("Filter.CustomSearchFilter", SerializedArrayOfFilters);
+	ArrayOfChoiceParameters.Add(CustomSearchFilter);
 	Item.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
 EndProcedure
 #EndRegion

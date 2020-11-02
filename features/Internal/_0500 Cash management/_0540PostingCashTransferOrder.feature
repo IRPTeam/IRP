@@ -100,7 +100,7 @@ Scenario: _054002 check Cash transfer order movements by register Planing cash t
 
 
 
-Scenario: _054003 create Cash payment and Cash reciept based on Cash transfer order + check movements
+Scenario: _054003 create Cash payment and Cash receipt based on Cash transfer order + check movements
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	And I go to line in "List" table
 		| Number | Sender       | Receiver     | Company      |
@@ -152,7 +152,7 @@ Scenario: _054003 create Cash payment and Cash reciept based on Cash transfer or
 		| 'Cash transfer order 1*'      | '100,00'    |
 	And I click "Post and close" button
 	And I close all client application windows
-	* Check movement of Cash payment and Cash reciept by register Planing cash transactions
+	* Check movement of Cash payment and Cash receipt by register Planing cash transactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
 		And "List" table contains lines
 		| 'Currency' | 'Recorder'          |  'Basis document'  | 'Company'      | 'Account'           | 'Cash flow direction' | 'Amount'    |
@@ -266,7 +266,7 @@ Scenario: _054005 create Cash receipt and Cash payment based on Cash transfer or
 		| 'Cash transfer order 2*'            | 'Arina Brown'        | '1 150,00'    | '200,00'          |
 	And I click "Post and close" button
 	And I close all client application windows
-	* Check Cash payment and Cash reciept movements by register PlaningCashTransactions
+	* Check Cash payment and Cash receipt movements by register PlaningCashTransactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
 		And "List" table contains lines
 		| 'Currency' | 'Recorder'               | 'Basis document'         | 'Company'      | 'Account'      | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Amount'    |
@@ -274,7 +274,7 @@ Scenario: _054005 create Cash receipt and Cash payment based on Cash transfer or
 		| 'TRY'      | 'Cash transfer order 2*' | 'Cash transfer order 2*' | 'Main Company' | 'Cash desk №1' | 'Incoming'            | ''        | ''           | '1 150,00'  |
 		| 'USD'      | 'Cash payment 5*'        | 'Cash transfer order 2*' | 'Main Company' | 'Cash desk №2' | 'Outgoing'            | ''        | ''           | '-200,00'   |
 		| 'TRY'      | 'Cash receipt 7*'        | 'Cash transfer order 2*' | 'Main Company' | 'Cash desk №1' | 'Incoming'            | ''        | ''           | '-1 150,00' |
-	* Check Cash payment and Cash reciept movements by register AccountBalance
+	* Check Cash payment and Cash receipt movements by register AccountBalance
 		Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
 		And "List" table contains lines
 		| 'Currency' | 'Recorder'        | 'Company'      | 'Account'      | 'Amount'   |
@@ -343,7 +343,7 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 			And I input "6" text in "Number" field
 		And I click "Post and close" button
 		And I close all client application windows
-	*Post Bank reciept
+	*Post Bank receipt
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
 			| Number | Sender       | Receiver          | Company      |
@@ -541,7 +541,7 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 		And I click "Post and close" button
 		And I close all client application windows
 		And Delay 5
-	* Create Cash reciept based on Cash transfer order in partial amount
+	* Create Cash receipt based on Cash transfer order in partial amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And Delay 2
 		And I go to line in "List" table
@@ -580,7 +580,7 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 			And I click "Yes" button
 			And I input "8" text in "Number" field
 		And I click "Post and close" button
-	* Post Cash reciept on the rest of the amount + 10 lirs
+	* Post Cash receipt on the rest of the amount + 10 lirs
 	# Originally 1,150 lire, but the exchange rate of 175 euros cost 1,160 lire. We have to compensate for 10 lire.
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
@@ -685,7 +685,7 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 			And I input "11" text in "Number" field
 		And I click "Post and close" button
 		And I close all client application windows
-	* Create Cash reciept based on Cash transfer order in partial amount
+	* Create Cash receipt based on Cash transfer order in partial amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
 			| 'Number' | 'Receive amount' |
@@ -785,7 +785,7 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 			And I input "5" text in "Number" field
 		And I click "Post and close" button
 		And I close all client application windows
-	* Create Bank reciept based on Cash transfer order for the full amount
+	* Create Bank receipt based on Cash transfer order for the full amount
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
 			| 'Number' | 'Receive amount' |

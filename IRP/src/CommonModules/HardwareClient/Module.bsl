@@ -52,7 +52,7 @@ Procedure InstallDriver(ID, NotifyOnCloseArchive = Undefined) Export
 	BeginInstallAddIn(NotifyOnCloseArchive, DriverRef);
 EndProcedure
 
-Procedure BeginStartAdditionalComand(NotifyOnClose, Command, IncomingParams, ID, Parameters) Export	
+Procedure BeginStartAdditionalCommand(NotifyOnClose, Command, IncomingParams, ID, Parameters) Export	
 	ConnectedDevice = GetConnectedDevice(globalEquipments.ConnectionSettings, ID);
 	                                                       
 	If ConnectedDevice = Undefined Then
@@ -63,7 +63,7 @@ Procedure BeginStartAdditionalComand(NotifyOnClose, Command, IncomingParams, ID,
 		CommandParameters.Insert("Parameters"		, Parameters);
 		CommandParameters.Insert("DeviceData"		, DeviceData);
 		CommandParameters.Insert("NotifyOnClose"	, NotifyOnClose);
-		Notify = New NotifyDescription("BeginStartAdditionalComand_End", ThisObject, CommandParameters);
+		Notify = New NotifyDescription("BeginStartAdditionalCommand_End", ThisObject, CommandParameters);
 		BeginGetDriver(Notify, DeviceData);
 	Else
 		OutParameters = New Array;
@@ -96,7 +96,7 @@ Function GetConnectedDevice(ConnectionsList, ID) Export
 	Return ConnectedDevice;	
 EndFunction
 
-Procedure BeginStartAdditionalComand_End(DriverObject, CommandParameters) Export	
+Procedure BeginStartAdditionalCommand_End(DriverObject, CommandParameters) Export	
 	If DriverObject = Undefined Then
 		ErrorText = R().EqError_002;
 		OutParameters = New Array;
@@ -135,9 +135,9 @@ Procedure BeginConnectEquipment(HardwareParameters) Export
 	HardwareParameters.Property("ConnectionNotify", ConnectionNotify);
 	Workstation = HardwareParameters.Workstation;
 	EquipmentType = HardwareParameters.EquipmentType;
-	Hardwares = HardwareServer.GetWorkstationHardwareByEquipmentType(Workstation, EquipmentType);
+	HardwareList = HardwareServer.GetWorkstationHardwareByEquipmentType(Workstation, EquipmentType);
 	
-	For Each Hardware In Hardwares Do
+	For Each Hardware In HardwareList Do
 		DriverObject = Undefined;
 		Device = HardwareServer.GetConnectionSettings(Hardware);
 

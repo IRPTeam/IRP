@@ -98,7 +98,7 @@ Scenario: _300708 barcode check in Purchase return
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	When check the barcode search in the purchase/purchase returns
 
-Scenario: _300709 barcode check in Goods reciept
+Scenario: _300709 barcode check in Goods receipt
 	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 	When check the barcode search in storage operations documents
 

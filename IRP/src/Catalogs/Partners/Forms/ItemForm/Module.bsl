@@ -29,7 +29,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	SalesOrdersList.Parameters.SetParameterValue("Partner", Object.Ref);
 	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
 	Items.Parent.Visible = GetFunctionalOption("ShowAlphaTestingSaas");
-	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
+	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
 EndProcedure
 
 #EndRegion

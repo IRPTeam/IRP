@@ -122,11 +122,11 @@ Function CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Un
 		
 		ColumnNames_ItemList      = GetColumnNames_ItemList(ArrayOfTaxInfo);
 		ColumnNames_TaxList       = GetColumnNames_TaxList();
-		ColumnNames_SpecilaOffers = GetColumnNames_SpecialOffers();
+		ColumnNames_SpecialOffers = GetColumnNames_SpecialOffers();
 	
 		ArrayOfRows_ItemList      = DataCollectionToArrayOfStructures(ItemRows             , ColumnNames_ItemList);
 		ArrayOfRows_TaxList       = DataCollectionToArrayOfStructures(Object.TaxList       , ColumnNames_TaxList);
-		ArrayOfRows_SpecialOffers = DataCollectionToArrayOfStructures(Object.SpecialOffers , ColumnNames_SpecilaOffers);
+		ArrayOfRows_SpecialOffers = DataCollectionToArrayOfStructures(Object.SpecialOffers , ColumnNames_SpecialOffers);
 		
 		ObjectAsStructure = New Structure("Date, Company, Partner, Agreement, PriceIncludeTax");
 		FillPropertyValues(ObjectAsStructure, Object);
@@ -148,7 +148,7 @@ Function CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Un
 		If UpdateRowsAfterCalculate Then
 			UpdateDataCollectionByArrayOfStructures(Object.ItemList      , ObjectAsStructure.ItemList      , ColumnNames_ItemList);
 			FillDataCollectionByArrayOfStructures(Object.TaxList         , ObjectAsStructure.TaxList       , ColumnNames_TaxList);		                                        
-			FillDataCollectionByArrayOfStructures(Object.SpecialOffers   , ObjectAsStructure.SpecialOffers , ColumnNames_SpecilaOffers);									 
+			FillDataCollectionByArrayOfStructures(Object.SpecialOffers   , ObjectAsStructure.SpecialOffers , ColumnNames_SpecialOffers);									 
 		EndIf;
 	Else
 		For Each ItemRow In ItemRows Do

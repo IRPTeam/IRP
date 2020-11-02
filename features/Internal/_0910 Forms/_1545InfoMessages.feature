@@ -329,7 +329,7 @@ Scenario: message when trying to re-create Sales invoice based on Shipment confi
 			And I finish line editing in "ItemList" table
 			And I click "Post" button
 
-Scenario: message when trying to re-create Purchase invoice based on Goods reciept
+Scenario: message when trying to re-create Purchase invoice based on Goods receipt
 	* Create Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -399,7 +399,7 @@ Scenario: message when trying to re-create Purchase invoice based on Goods recie
 			And I click "Yes" button
 			And I input "2001" text in "Number" field
 		And I click "Post" button
-	* Create Purchase invoice based on Goods reciept
+	* Create Purchase invoice based on Goods receipt
 		And I click "Purchase invoice" button
 		And I move to "Other" tab
 		And I input "0" text in "Number" field
@@ -473,7 +473,7 @@ Scenario: message when trying to re-create Purchase invoice based on Purchase or
 		Then warning message containing text 'There are no lines for which you need to create a "Purchase invoice" document in the "Purchase order" document.' appears
 		And I close all client application windows
 
-Scenario: message when trying to re-create Goods reciept based on Purchase order
+Scenario: message when trying to re-create Goods receipt based on Purchase order
 	* Create Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -788,7 +788,7 @@ Scenario: message when trying to create Shipment confirmation based on Sales inv
 		Then warning message containing text 'There are no lines for which you need to create a "Shipment confirmation" document in the "Sales invoice" document.' appears
 		And I close all client application windows
 
-Scenario: message when trying to create Goods reciept based on Purchase invoice with Service
+Scenario: message when trying to create Goods receipt based on Purchase invoice with Service
 	* Create Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"

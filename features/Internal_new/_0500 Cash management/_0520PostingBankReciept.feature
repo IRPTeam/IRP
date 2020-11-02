@@ -572,7 +572,7 @@ Scenario: _052015 check the display of details on the form Bank receipt with the
 
 
 
-Scenario: _300515 check connection to BankReciept report "Related documents"
+Scenario: _300515 check connection to BankReceipt report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
 	* Form report Related documents
 		And I go to line in "List" table

@@ -202,7 +202,7 @@ EndProcedure
 
 #EndRegion
 
-#Region Comands
+#Region Commands
 &AtClient
 Procedure CommandSaveAndClose(Command)
 	Close(ThisObject.PickedDocuments);

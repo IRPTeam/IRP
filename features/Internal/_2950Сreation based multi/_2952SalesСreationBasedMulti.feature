@@ -5,7 +5,7 @@
 
 Feature: creation mechanism based on for sales documents
 
-# Sales order - Sales invoice - Shipment confirmation - Bank reciept/Cash reciept
+# Sales order - Sales invoice - Shipment confirmation - Bank receipt/Cash receipt
 
 
 

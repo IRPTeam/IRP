@@ -169,8 +169,8 @@ Scenario: _060202 create Sales invoice with Ar details by Partner terms and chec
 
 	And I close all client application windows
 
-Scenario: _060203 create Cash reciept (partner term with Ar details by partner term) and check its movements
-	* Create Cash reciept
+Scenario: _060203 create Cash receipt (partner term with Ar details by partner term) and check its movements
+	* Create Cash receipt
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
 		* Select company
@@ -245,8 +245,8 @@ Scenario: _060203 create Cash reciept (partner term with Ar details by partner t
 			| ''                                     | 'Expense'     | '*'      | ''                     | ''               | ''                       | '11 000'         | 'Main Company'                 | 'Partner Kalipso'      | 'Company Kalipso' | ''                             | 'TRY'                  |
 		And I close all client application windows
 
-Scenario: _0602031 create Bank reciept (partner term with Ar details by partner term) and check its movements
-	* Create Bank reciept
+Scenario: _0602031 create Bank receipt (partner term with Ar details by partner term) and check its movements
+	* Create Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
 		* Select company
@@ -321,7 +321,7 @@ Scenario: _060204 check the offset of the advance for Sales invoice with the typ
 	And I delete "$$SalesInvoice060204$$" variable
 	And I delete "$$NumberBankReceipt060204$$" variable
 	And I delete "$$BankReceipt060204$$" variable
-	* Create Bank reciept
+	* Create Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
 		* Select company

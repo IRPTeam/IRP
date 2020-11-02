@@ -20,7 +20,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		OnlyAffectPricing = Object.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_PriceKeys");
 		FillAttributesTree(GetItemTypesTree(), ThisObject.AttributesTree, OnlyAffectPricing);
 	EndIf;
-	ExtensionServer.AddAtributesFromExtensions(ThisObject, Object.Ref, Items.Pages);
+	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.Pages);
 
 EndProcedure
 

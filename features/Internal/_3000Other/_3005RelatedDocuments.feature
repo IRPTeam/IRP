@@ -144,7 +144,7 @@ Scenario: _300512 check connection to CashPayment report "Related documents"
 	Then "Related documents" window is opened
 	And I close all client application windows
 
-Scenario: _300513 check connection to CashReciept report "Related documents"
+Scenario: _300513 check connection to CashReceipt report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	* Form report Related documents
 		And I go to line in "List" table
@@ -166,7 +166,7 @@ Scenario: _300514 check connection to BankPayment report "Related documents"
 	Then "Related documents" window is opened
 	And I close all client application windows
 
-Scenario: _300515 check connection to BankReciept report "Related documents"
+Scenario: _300515 check connection to BankReceipt report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
 	* Form report Related documents
 		And I go to line in "List" table

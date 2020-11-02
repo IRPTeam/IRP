@@ -272,7 +272,7 @@ EndProcedure
 &AtClient
 Procedure PrintReceipt(Command)
 	Cancel = False;
-	DPPointOfSaleClient.PrintLastReciept(ThisObject, Cancel);
+	DPPointOfSaleClient.PrintLastReceipt(ThisObject, Cancel);
 EndProcedure
 
 &AtClient
@@ -342,7 +342,7 @@ EndProcedure
 
 #Region Private
 
-#Region Hardwares
+#Region Hardware
 
 &AtClient
 Procedure ConnectBarcodeScanners()

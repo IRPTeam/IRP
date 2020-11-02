@@ -60,7 +60,7 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 		When Create information register Taxes records (Sales tax)
 		When add sales tax settings 
 
-# Sales order - Purchase order - Goods reciept - Purchase invoice - Shipment confirmation - Sales invoice
+# Sales order - Purchase order - Goods receipt - Purchase invoice - Shipment confirmation - Sales invoice
 Scenario: _090501 creation of Sales invoice based on Shipment confirmation (one to one)
 	* Create test Sales order and Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -112,8 +112,8 @@ Scenario: _090501 creation of Sales invoice based on Shipment confirmation (one 
 		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 
-Scenario: _090502 create a purchase invoice based on Goods reciept (one to one)
-	* Create test Purchase order and Goods reciept
+Scenario: _090502 create a purchase invoice based on Goods receipt (one to one)
+	* Create test Purchase order and Goods receipt
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 		And I click Select button of "Partner" field
@@ -356,8 +356,8 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 	And I close all client application windows
 
 
-Scenario: _090504 create Purchase invoice based on several Goods reciept
-	* Create test Purchase order and Goods reciept
+Scenario: _090504 create Purchase invoice based on several Goods receipt
+	* Create test Purchase order and Goods receipt
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 		And I click Select button of "Partner" field
@@ -415,7 +415,7 @@ Scenario: _090504 create Purchase invoice based on several Goods reciept
 			And I click "Yes" button
 			And I input "471" text in "Number" field
 		And I click the button named "FormPostAndClose"
-	* Create test Purchase order and Goods reciept on the same vendor
+	* Create test Purchase order and Goods receipt on the same vendor
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 		And I click Select button of "Partner" field
@@ -473,7 +473,7 @@ Scenario: _090504 create Purchase invoice based on several Goods reciept
 			And I click "Yes" button
 			And I input "472" text in "Number" field
 		And I click the button named "FormPostAndClose"
-	* Create test Purchase order and Goods reciept on the another vendor
+	* Create test Purchase order and Goods receipt on the another vendor
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 		And I click Select button of "Partner" field
@@ -708,8 +708,8 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 		And I close all client application windows
 
 
-Scenario: _090506 create Purchase invoice based on several Goods reciept
-	* Create test Purchase order and Goods reciept
+Scenario: _090506 create Purchase invoice based on several Goods receipt
+	* Create test Purchase order and Goods receipt
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 		And I click Select button of "Partner" field
@@ -762,7 +762,7 @@ Scenario: _090506 create Purchase invoice based on several Goods reciept
 			And I click "Yes" button
 			And I input "465" text in "Number" field
 		And I click the button named "FormPostAndClose"
-	* Create test Purchase order and Goods reciept on the same customer
+	* Create test Purchase order and Goods receipt on the same customer
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 		And I click Select button of "Partner" field

@@ -1206,7 +1206,6 @@ Scenario: create SalesReturn30001
 			| 'Basic Partner terms, TRY'         |
 		And I select current line in "List" table
 		* Filling in item and item key
-			And I delete a line in "ItemList" table
 			And I click "Add" button
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
@@ -1252,7 +1251,6 @@ Scenario: create PurchaseReturn300301
 			| 'Store 01'         |
 		And I select current line in "List" table
 		* Filling in item and item key
-			And I delete a line in "ItemList" table
 			And I click "Add" button
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table

@@ -414,19 +414,17 @@ Scenario: _350006 check error when doubling additional attribute on item
         And "Attributes" table contains lines
         | 'Attribute'                 |
         | 'Article'                |
-        | 'Brand'                  |
-        | 'Country of consignment' |
         | 'Article Stockings'          |
-    * Add additional attribute Brand
+    * Add additional attribute Article
         And in the table "Attributes" I click the button named "AttributesAdd"
         And I click choice button of "Attribute" attribute in "Attributes" table
         And I go to line in "List" table
             | 'Description'      |
-            | 'Brand' |
+            | 'Article' |
         And I select current line in "List" table
     * Check save error message
         And I click "Save" button
-        Then I wait that in user messages the "Duplicate attribute.: Brand" substring will appear in 10 seconds
+        Then I wait that in user messages the "Duplicate attribute.: Article" substring will appear in 10 seconds
     And I close all client application windows
 
 Scenario: _350007 check error when duplicating an additional attribute of an item key

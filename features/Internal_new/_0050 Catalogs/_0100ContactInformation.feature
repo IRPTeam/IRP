@@ -387,7 +387,9 @@ Scenario: _010011 adding gps to a Contact info type
 			And I select current line in "List" table
 		And in the table "Levels" I click "Get all levels" button
 		And I input "46,477400" text in "Lat" field
+		And Delay 2
 		And I input "30,732872" text in "Lng" field
+		And Delay 2
 		And I go to line in "AllLevels" table
 			| Level     |
 			| political |
@@ -484,7 +486,9 @@ Scenario: _010011 adding gps to a Contact info type
 			And I select current line in "List" table
 		And in the table "Levels" I click "Get all levels" button
 		And I input "40,983577" text in "Lat" field
+		And Delay 2
 		And I input "29,078498" text in "Lng" field
+		And Delay 2
 		And I go to line in "AllLevels" table
 		| Level   | Value  |
 		| country | Turkey |

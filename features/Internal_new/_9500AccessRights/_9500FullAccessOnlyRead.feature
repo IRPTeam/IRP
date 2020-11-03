@@ -325,7 +325,7 @@ Scenario: 950009 check role Full access only read (Partner terms)
 		And I close current window
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Standard'     |
+			| 'Standard (Customer)'     |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception

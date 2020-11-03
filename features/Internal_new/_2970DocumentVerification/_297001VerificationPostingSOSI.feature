@@ -480,7 +480,9 @@ Scenario: _29700104 test filling-in SO - SI in different units (ban)
 		And I select current line in "ItemList" table
 		And I input "3,000" text in "Q" field of "ItemList" table
 		And I click the button named "FormPost"
-		Then I wait that in user messages the "Line No. [2] [Boots Boots/S-8] Ordering remaining: 24 . Required: 36 . Lacking: 12 ." substring will appear in 20 seconds
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Given Recent TestClient message contains "* [Boots Boots/S-8] Ordering remaining: 24 . Required: 36 . Lacking: 12 ." string by template
 		And I close all client application windows
 
 

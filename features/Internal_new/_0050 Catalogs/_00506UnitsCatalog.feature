@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@MainInfoCatalogs
+@ItemCatalogs
 
 Feature: filling in Units catalog
 
@@ -15,7 +15,7 @@ Background:
 
 
 
-Scenario: _005014 filling in the "Units" catalog
+Scenario: _00506 filling in the "Units" catalog
 	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one

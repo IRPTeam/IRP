@@ -224,7 +224,6 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 		And I input "Draft" text in the field named "Description_en"
 		And I input "Draft TR" text in the field named "Description_tr"
 		And I click "Ok" button
-		And I set checkbox "Set by default"
 		And I click "Save and close" button
 		And Delay 2
 

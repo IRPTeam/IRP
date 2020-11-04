@@ -1296,15 +1296,6 @@
         <index>5</index>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
-        <command>Catalog.Units.StandardCommand.OpenList</command>
-        <type>Added</type>
-        <group>FormNavigationPanelGoTo</group>
-        <index>6</index>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-      </cmiFragmentRecord>
-      <cmiFragmentRecord>
         <command>InformationRegister.BarcodeScanInfoCheck.StandardCommand.OpenByValue.Item</command>
         <commandParameter xsi:type="form:DataPath">
           <segments>Object.Ref</segments>

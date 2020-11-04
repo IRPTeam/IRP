@@ -357,6 +357,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_018", NStr("en = 'Please enter total quantity'", Lang));
 	Strings.Insert("QuestionToUser_019", NStr("en = 'Do you want to update payment term?'", Lang));
 	Strings.Insert("QuestionToUser_020", NStr("en = 'Do you want to overwrite saved option?'", Lang));
+	Strings.Insert("QuestionToUser_021", NStr("en = 'Do you want to close this form? All changes will be lost.'", Lang));
 	#EndRegion
 	
 	#Region SuggestionToUser

@@ -150,7 +150,7 @@ Scenario: _090200 activating Sales Tax calculation in Sales order and Sales invo
 	And I finish line editing in "UseDocuments" table
 	And I click "Save and close" button
 
-Scenario: _090201 VAT and Sales Tax calculation in Sales order (Price include tax box is set)
+Scenario: _090201 VAT and Sales Tax calculation in Sales order (Price includes tax box is set)
 	* Open the Sales order creation form
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -245,7 +245,7 @@ Scenario: _090201 VAT and Sales Tax calculation in Sales order (Price include ta
 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "227,42"
 		And I close all client application windows
 
-Scenario: _090202 VAT and Sales Tax calculation in Sales order (Price include tax box isn't set)
+Scenario: _090202 VAT and Sales Tax calculation in Sales order (Price includes tax box isn't set)
 	* Open the Sales order creation form
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -267,7 +267,7 @@ Scenario: _090202 VAT and Sales Tax calculation in Sales order (Price include ta
 		And I select current line in "List" table
 		And I move to "Other" tab
 		And I expand "More" group
-		And I remove checkbox "Price include tax"
+		And I remove checkbox "Price includes tax"
 	* Adding items to Sales order
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -365,7 +365,7 @@ Scenario: _090203 manual tax correction in Sales order
 		And I select current line in "List" table
 		And I move to "Other" tab
 		And I expand "More" group
-		And I remove checkbox "Price include tax"
+		And I remove checkbox "Price includes tax"
 	* Adding items to Sales order
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table

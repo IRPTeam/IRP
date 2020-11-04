@@ -1446,7 +1446,7 @@ Scenario: create a test partner with one vendor partner term and one customer pa
 			| Basic Price Types |
 		And I select current line in "List" table
 		And I input "28.08.2019" text in "Start using" field
-		And I set checkbox "Price include tax"
+		And I set checkbox "Price includes tax"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| Description |
@@ -1477,7 +1477,7 @@ Scenario: create a test partner with one vendor partner term and one customer pa
 			| Vendor price, TRY |
 		And I select current line in "List" table
 		And I input "28.08.2019" text in "Start using" field
-		And I set checkbox "Price include tax"
+		And I set checkbox "Price includes tax"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| Description |

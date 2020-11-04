@@ -539,7 +539,7 @@ Scenario: _060205 create Purchase invoice with Ap details by Partner terms and c
 			And I input "550,00" text in "Price" field of "ItemList" table
 			And I move to "Other" tab
 			And I move to "More" tab
-			And I set checkbox "Price include tax"
+			And I set checkbox "Price includes tax"
 			And I move to "Item list" tab
 		* Check filling in purchase invoice
 			And "ItemList" table contains lines
@@ -792,7 +792,7 @@ Scenario: _060207 check the offset of the advance for Purchase invoice with the 
 			And I input "550,00" text in "Price" field of "ItemList" table
 			And I move to "Other" tab
 			And I move to "More" tab
-			And I set checkbox "Price include tax"
+			And I set checkbox "Price includes tax"
 			And I move to "Item list" tab
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice060207$$" variable

@@ -103,7 +103,7 @@ Scenario: _095001 preparation
 			| 'Currency' | 'Description'       |
 			| 'TRY'      | 'Vendor price, TRY' |
 		And I select current line in "List" table
-		And I change checkbox "Price include tax"
+		And I change checkbox "Price includes tax"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
 			| 'Description' |

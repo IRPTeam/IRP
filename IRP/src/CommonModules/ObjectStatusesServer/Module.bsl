@@ -213,7 +213,6 @@ Function StatusHasPostingType(Status, PostingType) Export
 	Return Not QueryResult.IsEmpty();
 	
 EndFunction
-							
 								
 Function CreatePostingStructure()
 	Result = New Structure();
@@ -304,4 +303,3 @@ Function GetObjectStatusesChoiceDataTable(SearchString, ArrayOfFilters,
 	TableOfResult = Catalogs.ObjectStatuses.GetChoiceDataTable(Parameters);
 	Return TableOfResult.UnloadColumn("Ref");
 EndFunction
-

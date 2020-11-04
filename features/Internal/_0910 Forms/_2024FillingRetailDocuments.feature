@@ -55,7 +55,7 @@ Scenario: _0154134 preparation
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-		And I set checkbox "Price include tax"
+		And I set checkbox "Price includes tax"
 		And I click "Save and close" button
 		And In this window I click command interface button "Main"
 		And I click "Save and close" button
@@ -364,11 +364,11 @@ Scenario: _0154135 create document Retail Sales Receipt
 		And I delete a line in "ItemList" table
 		Then the form attribute named "ItemListTotalNetAmount" became equal to "1 500,00"
 		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "270,00"
-	* Check tax recalculation when uncheck/re-check Price include Tax
-		* Unchecking box Price include Tax
+	* Check tax recalculation when uncheck/re-check Price includes tax
+		* Unchecking box Price includes tax
 			And I move to "Other" tab
 			And I expand "More" group
-			And I remove checkbox "Price include tax"
+			And I remove checkbox "Price includes tax"
 		* Tax recalculation check
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
@@ -376,10 +376,10 @@ Scenario: _0154135 create document Retail Sales Receipt
 				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '126,00'     | '2,000' | 'pcs'  | '700,00'     | '826,00'       | 'Store 01' |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '99,00'      | '1,000' | 'pcs'  | '550,00'     | '649,00'       | 'Store 01' |
 				| '520,00' | 'Dress'    | '18%' | 'XS/Blue'   | '93,60'      | '1,000' | 'pcs'  | '520,00'     | '613,60'       | 'Store 01' |
-		* Tick Price include Tax and check the calculation
+		* Tick Price includes tax and check the calculation
 			And I move to "Other" tab
 			And I expand "More" group
-			And I set checkbox "Price include tax"
+			And I set checkbox "Price includes tax"
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |

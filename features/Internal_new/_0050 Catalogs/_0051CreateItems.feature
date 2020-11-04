@@ -500,7 +500,7 @@ Scenario: _005116 filling in the "Items" catalog
 		And I select current line in "List" table
 		And I click the button named "FormWriteAndClose"
 	* Check Items save
-		And "List" table became equal
+		And "List" table contains lines
 		| 'Description' | 'Item type' |
 		| 'Bodie'       | 'Coat'      |
 		| 'Jeans'       | 'Jeans'     |

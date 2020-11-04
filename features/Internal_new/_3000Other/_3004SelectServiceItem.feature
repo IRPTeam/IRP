@@ -127,7 +127,6 @@ Scenario: _300407 check filter on the choice of services in the document Interna
 	And "List" table contains lines
 		| Description          |
 		| Dress TR             |
-		| Service TR           |
 		| Router               |
 	And I close all client application windows
 

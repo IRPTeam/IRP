@@ -26,7 +26,6 @@ Scenario: _300100 preparation (image setting)
         When Create chart of characteristic types AddAttributeAndProperty objects
         When Create catalog AddAttributeAndPropertySets objects
         When Create catalog AddAttributeAndPropertyValues objects
-        When Create catalog Currencies objects
         When Create catalog Companies objects (Main company)
         When Create catalog Stores objects
         When Create catalog Partners objects (Ferron BP)
@@ -336,34 +335,34 @@ Scenario: _300110 opening Files catalog element
         And I select current line in "List" table
         Then "dresswhite.jpg (File)" window is opened
         Then system warning window does not appear
-		And I close all client application windows
-		
+        And I close all client application windows
+        
 
 Scenario: _300115 check removal of pictures from Item
-	Given I open hyperlink "e1cib/list/Catalog.Files"
-	And I go to line in "List" table
-		| 'File name'     |
-		| 'dressblue.jpg' |
-	And I select current line in "List" table
-	And I save the value of "File ID" field as "$$FileIDDressBlue$$"
-	And I display "$$FileIDDressBlue$$" variable value
-	And I close current window
-	* Open Item list form
-		Given I open hyperlink "e1cib/list/Catalog.Items"
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Dress'     |
-		And I select current line in "List" table
-	* Delete picture from Item
-		And I input "$$FileIDDressBlue$$" variable value in "getCurrentSlideId" field
-		And I click "remove_picture" button
-		And I close all client application windows
-		Given I open hyperlink "e1cib/list/InformationRegister.AttachedFiles"
-		And "List" table does not contain lines
+    Given I open hyperlink "e1cib/list/Catalog.Files"
+    And I go to line in "List" table
+        | 'File name'     |
+        | 'dressblue.jpg' |
+    And I select current line in "List" table
+    And I save the value of "File ID" field as "$$FileIDDressBlue$$"
+    And I display "$$FileIDDressBlue$$" variable value
+    And I close current window
+    * Open Item list form
+        Given I open hyperlink "e1cib/list/Catalog.Items"
+        And I go to line in "List" table
+            | 'Description'  |
+            | 'Dress'     |
+        And I select current line in "List" table
+    * Delete picture from Item
+        And I input "$$FileIDDressBlue$$" variable value in "getCurrentSlideId" field
+        And I click "remove_picture" button
+        And I close all client application windows
+        Given I open hyperlink "e1cib/list/InformationRegister.AttachedFiles"
+        And "List" table does not contain lines
             | 'Owner'    | 'File'          |
             | 'Dress'    | 'dressblue.jpg' |
-	And I close all client application windows
-		
+    And I close all client application windows
+        
 
 
 // Scenario: _300150 removal of unused elements of the Files catalog

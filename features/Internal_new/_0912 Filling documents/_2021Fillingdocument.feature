@@ -328,6 +328,7 @@ Scenario: _0154100 preparation ( filling documents)
 				| "Number" |
 				| "$$NumberSalesInvoice024025$$" |
 			When create SalesInvoice024025
+		When Create catalog Users objects
 	* Check or create SalesInvoice024016
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		If "List" table does not contain lines Then
@@ -6765,6 +6766,26 @@ Scenario: _0154165 check tax and net amount calculation when change total amount
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
 			And I close all client application windows			
 
-
+Scenario: _0154180 check that author does not copy when copying a document
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"	
+	And I go to line in "List" table
+		| "Number" |
+		| "$$NumberSalesInvoice024025$$" |
+	And I select current line in "List" table
+	* Change author
+		And I move to "Other" tab
+		And I click Select button of "Author" field
+		And I go to line in "List" table
+			| 'Description'               |
+			| 'Arina Brown (Financier 3)' |
+		And I select current line in "List" table
+		And I click the button named "FormPost"	
+		Then the form attribute named "Author" became equal to "Arina Brown (Financier 3)"
+		And I click the button named "FormPostAndClose"
+	And in the table "List" I click the button named "ListContextMenuCopy"
+	Then the form attribute named "Author" became equal to "CI"
+	And I close all client application windows	
+	
+		
 Scenario: _999999 close TestClient session
 	And I close TestClient session

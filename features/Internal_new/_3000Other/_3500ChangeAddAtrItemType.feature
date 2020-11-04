@@ -355,11 +355,14 @@ Scenario: _350005 check the selection conditions when adding additional details 
         Then "1C:Enterprise" window is opened
         And I click "Yes" button
         And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
-        And I select "Item type" exact value from "Field" drop-down list in "SettingsFilter" table
+        And I click choice button of the attribute named "SettingsFilterLeftValue" in "SettingsFilter" table
+        And I go to line in "Source" table
+            | 'Available fields' |
+            | 'Item type'  |
+        And I select current line in "Source" table
         And I move to the next attribute
         And I click choice button of "Comparison type" attribute in "SettingsFilter" table
-        And I activate "Value" field in "SettingsFilter" table
-        And I click choice button of "Value" attribute in "SettingsFilter" table
+        And I click choice button of the attribute named "SettingsFilterRightValue" in "SettingsFilter" table
         And I go to line in "List" table
             | 'Description'   |
             | 'Warm Stockings' |
@@ -411,19 +414,17 @@ Scenario: _350006 check error when doubling additional attribute on item
         And "Attributes" table contains lines
         | 'Attribute'                 |
         | 'Article'                |
-        | 'Brand'                  |
-        | 'Country of consignment' |
         | 'Article Stockings'          |
-    * Add additional attribute Brand
+    * Add additional attribute Article
         And in the table "Attributes" I click the button named "AttributesAdd"
         And I click choice button of "Attribute" attribute in "Attributes" table
         And I go to line in "List" table
             | 'Description'      |
-            | 'Brand' |
+            | 'Article' |
         And I select current line in "List" table
     * Check save error message
         And I click "Save" button
-        Then I wait that in user messages the "Duplicate attribute.: Brand" substring will appear in 10 seconds
+        Then I wait that in user messages the "Duplicate attribute.: Article" substring will appear in 10 seconds
     And I close all client application windows
 
 Scenario: _350007 check error when duplicating an additional attribute of an item key

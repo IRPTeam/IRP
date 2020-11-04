@@ -638,7 +638,7 @@ Scenario: creating a Purchase Order document
 				| Price USD |
 			And I select current line in "List" table
 			And I input "01.01.2019" text in "Start using" field
-			And I change checkbox "Price include tax"
+			And I change checkbox "Price includes tax"
 			And I click "Save and close" button
 		And I click the button named "FormChoose"
 		And I click Select button of "Partner term" field

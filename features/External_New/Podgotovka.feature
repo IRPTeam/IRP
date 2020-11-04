@@ -1307,3 +1307,14 @@ Scenario: add test extension
 	And I close TestClient session
 	And I install the "TestExtension" extension
 	Given I open new TestClient session or connect the existing one
+
+Scenario: add Additional Functionality extension
+	Given I open hyperlink "e1cib/list/Catalog.Extensions"
+	And I click the button named "FormCreate"
+	And I select external file "#workingDir#\DataProcessor\IRP_AdditionalFunctionality.cfe"
+	And I click "Add file" button
+	And I input "AdditionalFunctionality" text in "Description" field
+	And I click the button named "FormWriteAndClose"
+	And I close TestClient session
+	And I install the "AdditionalFunctionality" extension
+	Given I open new TestClient session or connect the existing one	

@@ -35,33 +35,22 @@ Scenario: _060004 check that the Reconcilation statement document is connected t
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10
-		* Adding status "Send"
+		* Adding status "Draft"
 			And I go to line in "List" table
 			| 'Description'              |
 			| 'Reconciliation statement' |
 			And I click the button named "FormCreate"
 			And I set checkbox "Set by default"
 			And I click Open button of the field named "Description_en"
-			And I input "Send" text in the field named "Description_en"
-			And I input "Send TR" text in the field named "Description_tr"
-			And I click "Ok" button
-			And I click "Save and close" button
-			And Delay 2
-		* Adding status "Approved"
-			And I go to line in "List" table
-			| 'Description'              |
-			| 'Reconciliation statement' |
-			And I click the button named "FormCreate"
-			And I click Open button of the field named "Description_en"
-			And I input "Approved" text in the field named "Description_en"
-			And I input "Approved TR" text in the field named "Description_tr"
+			And I input "Draft" text in the field named "Description_en"
+			And I input "Draft TR" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I click "Save and close" button
 			And Delay 2
 	* Check if they are filled out in the document Reconciliation Statement
 		Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 		And I click the button named "FormCreate"
-		Then the form attribute named "Status" became equal to "Send"
+		Then the form attribute named "Status" became equal to "Draft"
 		And I select "Approved" exact value from "Status" drop-down list
 		And I close all client application windows
 

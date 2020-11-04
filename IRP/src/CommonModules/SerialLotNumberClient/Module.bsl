@@ -13,7 +13,7 @@ Procedure PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProces
 	OpeningParameters.Insert("ItemKey", CurrentData.ItemKey);
 	OpeningParameters.Insert("RowKey", CurrentData.Key);
 	OpeningParameters.Insert("SerialLotNumbers", New Array());
-	
+	OpeningParameters.Insert("Quantity", CurrentData.Quantity);
 	ArrayOfSelectedSerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", CurrentData.Key));
 	For Each Row In ArrayOfSelectedSerialLotNumbers Do
 		OpeningParameters.SerialLotNumbers.Add(

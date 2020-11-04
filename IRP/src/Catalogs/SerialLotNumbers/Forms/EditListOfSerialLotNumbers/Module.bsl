@@ -5,12 +5,23 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.Item = Parameters.Item;
 	ThisObject.ItemKey = Parameters.ItemKey;
 	ThisObject.ItemType = Parameters.Item.ItemType;
-	
+	ThisObject.ItemQuantity = Parameters.Quantity;
 	For Each Row In Parameters.SerialLotNumbers Do
 		NewRow = ThisObject.SerialLotNumbers.Add();
 		NewRow.SerialLotNumber = Row.SerialLotNumber;
 		NewRow.Quantity = Row.Quantity;
 	EndDo;	
+EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	UpdateFooter();
+EndProcedure
+
+&AtClient
+Procedure SerialLotNumbersOnChange(Item)
+	UpdateFooter();
+	Modified = True;
 EndProcedure
 
 &AtClient
@@ -33,6 +44,14 @@ Procedure SerialLotNumbersSerialLotNumberStartChoice(Item, ChoiceData, StandardP
 	
 	DocumentsClient.SerialLotNumberStartChoice(Undefined, ThisObject, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
+
+&AtClient
+Procedure BeforeClose(Cancel, Exit, WarningText, StandardProcessing)
+	If Modified And Not Exit Then
+		WarningText = R().QuestionToUser_021;
+	EndIf;
+EndProcedure
+
 
 &AtClient
 Procedure SerialLotNumbersSerialLotNumberEditTextChange(Item, Text, StandardProcessing)
@@ -92,4 +111,9 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 		EndIf;		
 		RowIndex = RowIndex + 1;
 	EndDo;	
+EndProcedure
+
+&AtClient
+Procedure UpdateFooter()
+	SelectedCount = SerialLotNumbers.Total("Quantity");
 EndProcedure

@@ -1173,7 +1173,6 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 		
 		If UseSerialLotNumbers Then
 			
-			
 			If ValueIsFilled(ResultElement.SerialLotNumber) Then
 				SerialLotNumbersArray = New Array;
 				SerialLotNumbers = New Structure("SerialLotNumber, Quantity");
@@ -1183,6 +1182,8 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 				SerialLotNumbersStructure = New Structure("RowKey, SerialLotNumbers", Row.Key, SerialLotNumbersArray);
 				
 				SerialLotNumberClient.AddNewSerialLotNumbers(SerialLotNumbersStructure, AddInfo, True, AddInfo);
+			ElsIf ResultElement.UseSerialLotNumber Then
+				Form.ItemListSerialLotNumbersPresentationStartChoice(Object.ItemList, Undefined, True);
 			EndIf;
 			SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
 		EndIf;

@@ -46,14 +46,6 @@ Procedure SerialLotNumbersSerialLotNumberStartChoice(Item, ChoiceData, StandardP
 EndProcedure
 
 &AtClient
-Procedure BeforeClose(Cancel, Exit, WarningText, StandardProcessing)
-	If Modified And Not Exit Then
-		WarningText = R().QuestionToUser_021;
-	EndIf;
-EndProcedure
-
-
-&AtClient
 Procedure SerialLotNumbersSerialLotNumberEditTextChange(Item, Text, StandardProcessing)
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(

@@ -791,10 +791,6 @@
     <event>OnOpen</event>
     <name>OnOpen</name>
   </handlers>
-  <handlers>
-    <event>BeforeClose</event>
-    <name>BeforeClose</name>
-  </handlers>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
   <autoFillCheck>true</autoFillCheck>
@@ -937,7 +933,6 @@
     <edit>
       <common>true</common>
     </edit>
-    <main>true</main>
   </attributes>
   <attributes>
     <name>SelectedCount</name>

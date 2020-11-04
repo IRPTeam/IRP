@@ -24,7 +24,7 @@ EndProcedure
 
 #Region AddExtensionsAttributes
 
-Procedure AddAttributesFromExtensions(Form, Ref, ItemElement = Undefined) Export
+Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefined) Export
 	ElementParent = Undefined;
 	
 	If Not ItemElement = Undefined Then
@@ -40,14 +40,14 @@ Procedure AddAttributesFromExtensions(Form, Ref, ItemElement = Undefined) Export
 		EndIf;
 	EndIf;
 	
-	ObjectMetadata = Ref.Metadata();
+	ObjectMetadata = Metadata.FindByType(TypeOf(MetaTypeOrRef));
 	
 	For Each Attribute In ObjectMetadata.Attributes Do
 		If Not StrFind(Attribute.Name, "_") Then 
 			Continue;
 		EndIf;
 		
-		OverrideInfo = OverrideElementParentInExtension(Ref, Attribute.Name);
+		OverrideInfo = OverrideElementParentInExtension(MetaTypeOrRef, Attribute.Name);
 		Parent = Undefined;
 		
 		If OverrideInfo <> Undefined And ValueIsFilled(OverrideInfo.ParentName) Then

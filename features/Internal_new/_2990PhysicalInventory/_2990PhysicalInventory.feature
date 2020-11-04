@@ -189,39 +189,16 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10
-	* Add status "Prepared"
+	* Add status "Draft"
 		And I go to line in "List" table
 		| 'Description'              |
 		| 'Physical inventory' |
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Prepared" text in the field named "Description_en"
-		And I input "Prepared TR" text in the field named "Description_tr"
+		And I input "Draft" text in the field named "Description_en"
+		And I input "Draft TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I set checkbox "Set by default"
-		And I click "Save and close" button
-		And Delay 2
-	* Add status "In processing"
-		And I go to line in "List" table
-		| 'Description'              |
-		| 'Physical inventory' |
-		And I click the button named "FormCreate"
-		And I click Open button of the field named "Description_en"
-		And I input "In processing" text in the field named "Description_en"
-		And I input "In processing TR" text in the field named "Description_tr"
-		And I click "Ok" button
-		And I click "Save and close" button
-		And Delay 2
-	* Add status "Done"
-		And I go to line in "List" table
-		| 'Description'              |
-		| 'Physical inventory' |
-		And I click the button named "FormCreate"
-		And I set checkbox "Posting"
-		And I click Open button of the field named "Description_en"
-		And I input "Done" text in the field named "Description_en"
-		And I input "Done TR" text in the field named "Description_tr"
-		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 2
 	* Assigning a name to a predefined element of PhysicalCountByLocation
@@ -239,42 +216,18 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10
-	* Add status "Prepared"
+	* Add status "Draft"
 		And I go to line in "List" table
 		| 'Description'              |
 		| 'Physical count by location' |
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
-		And I input "Prepared" text in the field named "Description_en"
-		And I input "Prepared TR" text in the field named "Description_tr"
+		And I input "Draft" text in the field named "Description_en"
+		And I input "Draft TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I set checkbox "Set by default"
 		And I click "Save and close" button
 		And Delay 2
-	* Add status "In processing"
-		And I go to line in "List" table
-		| 'Description'              |
-		| 'Physical count by location' |
-		And I click the button named "FormCreate"
-		And I click Open button of the field named "Description_en"
-		And I input "In processing" text in the field named "Description_en"
-		And I input "In processing TR" text in the field named "Description_tr"
-		And I click "Ok" button
-		And I click "Save and close" button
-		And Delay 2
-	* Add status "Done"
-		And I go to line in "List" table
-		| 'Description'              |
-		| 'Physical count by location' |
-		And I click the button named "FormCreate"
-		And I set checkbox "Posting"
-		And I click Open button of the field named "Description_en"
-		And I input "Done" text in the field named "Description_en"
-		And I input "Done TR" text in the field named "Description_tr"
-		And I click "Ok" button
-		And I click "Save and close" button
-		And Delay 2
-
 
 
 Scenario: _2990002 create Stock adjustment as surplus

@@ -3,16 +3,17 @@ Function SearchByBarcodes(Val Barcodes, AddInfo) Export
 	ReturnValue = New Array;
 	Query = New Query;
 	Query.Text = "SELECT
-		|	Barcodes.ItemKey AS ItemKey,
-		|	Barcodes.ItemKey.Item AS Item,
-		|	ISNULL(Barcodes.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
-		|	Barcodes.Unit AS Unit,
-		|	1 AS Quantity,
-		|	Barcodes.Barcode AS Barcode
-		|FROM
-		|	InformationRegister.Barcodes AS Barcodes
-		|WHERE
-		|	Barcodes.Barcode In(&Barcodes)";
+	|	Barcodes.ItemKey AS ItemKey,
+	|	Barcodes.ItemKey.Item AS Item,
+	|	ISNULL(Barcodes.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
+	|	Barcodes.Unit AS Unit,
+	|	1 AS Quantity,
+	|	Barcodes.Barcode AS Barcode,
+	|	Barcodes.ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber
+	|FROM
+	|	InformationRegister.Barcodes AS Barcodes
+	|WHERE
+	|	Barcodes.Barcode In (&Barcodes)";
 	Query.SetParameter("Barcodes", Barcodes);
 	QueryExecution = Query.Execute();
 	If QueryExecution.IsEmpty() Then

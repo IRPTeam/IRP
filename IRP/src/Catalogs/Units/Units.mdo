@@ -211,4 +211,16 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <commands uuid="d856385f-cf73-474b-bf8b-e578af0b76fa">
+    <name>OpenUnits</name>
+    <synonym>
+      <key>en</key>
+      <value>Item units</value>
+    </synonym>
+    <group>FormNavigationPanelGoTo</group>
+    <commandParameterType>
+      <types>CatalogRef.Items</types>
+    </commandParameterType>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Catalog>

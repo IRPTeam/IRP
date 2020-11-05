@@ -278,11 +278,11 @@ Scenario: _0154135 create document Retail Sales Receipt
 		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
-	* Check tax recalculation when uncheck/re-check Price include Tax
-		* Unchecking box Price include Tax
+	* Check tax recalculation when uncheck/re-check Price includes tax
+		* Unchecking box Price includes tax
 			And I move to "Other" tab
 			And I expand "More" group
-			And I remove checkbox "Price include tax"
+			And I remove checkbox "Price includes tax"
 		* Tax recalculation check
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
@@ -290,10 +290,10 @@ Scenario: _0154135 create document Retail Sales Receipt
 				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '126,00'     | '2,000' | 'pcs'  | '700,00'     | '826,00'       | 'Store 01' |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '99,00'      | '1,000' | 'pcs'  | '550,00'     | '649,00'       | 'Store 01' |
 				| '520,00' | 'Dress'    | '18%' | 'XS/Blue'   | '93,60'      | '1,000' | 'pcs'  | '520,00'     | '613,60'       | 'Store 01' |
-		* Tick Price include Tax and check the calculation
+		* Tick Price includes tax and check the calculation
 			And I move to "Other" tab
 			And I expand "More" group
-			And I set checkbox "Price include tax"
+			And I set checkbox "Price includes tax"
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -2312,11 +2312,11 @@ Scenario: _0154155 check filling in and re-filling Retail sales receipt
 		And "ItemList" table does not contain lines
 			| 'Item'  | 'Item key' |
 			| 'Trousers' | '38/Yellow' |
-	* Check tax recalculation when uncheck/re-check Price include Tax
-		* Unchecking box Price include Tax
+	* Check tax recalculation when uncheck/re-check Price includes tax
+		* Unchecking box Price includes tax
 			And I move to "Other" tab
 			And I expand "More" group
-			And I remove checkbox "Price include tax"
+			And I remove checkbox "Price includes tax"
 		* Tax recalculation check
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
@@ -2324,10 +2324,10 @@ Scenario: _0154155 check filling in and re-filling Retail sales receipt
 			| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '126,00'     | '700,00'     | '826,00'       | 'Store 01' | 'Shop 01'       |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '99,00'      | '550,00'     | '649,00'       | 'Store 01' | 'Shop 01'       |
 			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '93,60'      | '520,00'     | '613,60'       | 'Store 01' | 'Shop 01'       |
-		* Tick Price include Tax and check the calculation
+		* Tick Price includes tax and check the calculation
 			And I move to "Other" tab
 			And I expand "More" group
-			And I set checkbox "Price include tax"
+			And I set checkbox "Price includes tax"
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Business unit' |
@@ -2335,8 +2335,8 @@ Scenario: _0154155 check filling in and re-filling Retail sales receipt
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '83,90'      | '466,10'     | '550,00'       | 'Store 01' | 'Shop 01'       |
 			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Store 01' | 'Shop 01'       |
 
-	* Check filling in the Price include Tax check boxes when re-selecting an agreement and check tax recalculation
-		* Re-select partner term for which Price include Tax is not ticked 
+	* Check filling in the Price includes tax check boxes when re-selecting an agreement and check tax recalculation
+		* Re-select partner term for which Price includes tax is not ticked 
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
 				| 'Description'                   |
@@ -2344,7 +2344,7 @@ Scenario: _0154155 check filling in and re-filling Retail sales receipt
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
 			And I click "OK" button
-		* Check that the Price include Tax checkbox value has been filled out from the partner term
+		* Check that the Price includes tax checkbox value has been filled out from the partner term
 			Then the form attribute named "PriceIncludeTax" became equal to "No"
 		* Check tax recalculation 
 			And "ItemList" table contains lines
@@ -2376,7 +2376,7 @@ Scenario: _0154155 check filling in and re-filling Retail sales receipt
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '303,08' | '1'            |
 		* Check recalculate Total amount and Net amount when change Tax rate
-			* Price include tax
+			* Price includes tax
 				And I move to "Item list" tab
 				And I go to line in "ItemList" table
 					| 'Item'  | 'Item key' | 'Price'  |
@@ -2402,7 +2402,7 @@ Scenario: _0154155 check filling in and re-filling Retail sales receipt
 				And I activate "VAT" field in "ItemList" table
 				And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
 				And I move to "Other" tab
-				And I remove checkbox "Price include tax"
+				And I remove checkbox "Price includes tax"
 				And I move to "Item list" tab
 				And I go to line in "ItemList" table
 					| 'Item'  | 'Item key' | 'Price'  | 'Q'     |
@@ -2514,7 +2514,7 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 			| 'Main Company'         |
 		And I select current line in "List" table
 		And I move to "Other" tab
-		And I remove checkbox "Price include tax"		
+		And I remove checkbox "Price includes tax"		
 		And I move to "Item list" tab
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
@@ -2642,9 +2642,9 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'pcs'  | 'No'                 | '187,20'     | '1 040,00'   | '1 227,20'     |
-		* Check calculation when set "Price include tax" checkbox
+		* Check calculation when set "Price includes tax" checkbox
 			And I move to "Other" tab
-			And I set checkbox "Price include tax"		
+			And I set checkbox "Price includes tax"		
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
@@ -2684,7 +2684,7 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 			| 'Main Company'         |
 		And I select current line in "List" table
 		And I move to "Other" tab
-		And I remove checkbox "Price include tax"		
+		And I remove checkbox "Price includes tax"		
 		And I move to "Item list" tab
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
@@ -2812,9 +2812,9 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'pcs'  | 'No'                 | '187,20'     | '1 040,00'   | '1 227,20'     |
-		* Check calculation when set "Price include tax" checkbox
+		* Check calculation when set "Price includes tax" checkbox
 			And I move to "Other" tab
-			And I set checkbox "Price include tax"		
+			And I set checkbox "Price includes tax"		
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
@@ -2854,7 +2854,7 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 			| 'Main Company'         |
 		And I select current line in "List" table
 		And I move to "Other" tab
-		And I remove checkbox "Price include tax"
+		And I remove checkbox "Price includes tax"
 		And I move to "Item list" tab			
 	* Filling in item and item key
 		And in the table "ItemList" I click the button named "ItemListAdd"	
@@ -2922,9 +2922,9 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,69'   | '1 418,00'     |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
-		* Set checkbox Price include tax and check tax and net amount calculation when change total amount
+		* Set checkbox Price includes tax and check tax and net amount calculation when change total amount
 			And I move to "Other" tab
-			And I set checkbox "Price include tax"
+			And I set checkbox "Price includes tax"
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
@@ -2980,7 +2980,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 			| 'Main Company'         |
 		And I select current line in "List" table
 		And I move to "Other" tab
-		And I remove checkbox "Price include tax"
+		And I remove checkbox "Price includes tax"
 		And I move to "Item list" tab			
 	* Filling in item and item key
 		And I click the button named "Add"	
@@ -3048,9 +3048,9 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,69'   | '1 418,00'     |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
-		* Set checkbox Price include tax and check tax and net amount calculation when change total amount
+		* Set checkbox Price includes tax and check tax and net amount calculation when change total amount
 			And I move to "Other" tab
-			And I set checkbox "Price include tax"
+			And I set checkbox "Price includes tax"
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |

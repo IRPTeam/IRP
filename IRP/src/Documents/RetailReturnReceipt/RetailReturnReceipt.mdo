@@ -241,7 +241,7 @@
     <name>PriceIncludeTax</name>
     <synonym>
       <key>en</key>
-      <value>Price include tax</value>
+      <value>Price includes tax</value>
     </synonym>
     <type>
       <types>Boolean</types>

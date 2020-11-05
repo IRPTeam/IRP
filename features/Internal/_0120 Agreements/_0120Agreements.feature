@@ -259,7 +259,7 @@ Scenario: _012004 create common Partner term
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
 		And Delay 3
-		And I change checkbox "Price include tax"
+		And I change checkbox "Price includes tax"
 		And I input "4" text in "Days before delivery" field
 		And I click Select button of "Store" field
 		And I go to line in "List" table
@@ -389,7 +389,7 @@ Scenario: _012005 creation of an individual Partner term in USD
 				| 'Kalipso'       |
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
-		And I change checkbox "Price include tax"
+		And I change checkbox "Price includes tax"
 		And I input "2" text in "Days before delivery" field
 		And I click Select button of "Store" field
 		Then "Stores" window is opened
@@ -432,7 +432,7 @@ Scenario: _012005 creation of an individual Partner term in USD
 				| Ferron BP   |
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
-		And I change checkbox "Price include tax"
+		And I change checkbox "Price includes tax"
 		And I click Open button of the field named "Description_en"
 		And I input "Vendor Ferron, TRY" text in the field named "Description_en"
 		And I input "Vendor Ferron, TRY TR" text in the field named "Description_tr"
@@ -467,7 +467,7 @@ Scenario: _012005 creation of an individual Partner term in USD
 			| Ferron BP   |
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
-		And I change checkbox "Price include tax"
+		And I change checkbox "Price includes tax"
 		And I click Open button of the field named "Description_en"
 		And I input "Vendor Ferron, USD" text in the field named "Description_en"
 		And I input "Vendor Ferron, USD TR" text in the field named "Description_tr"
@@ -502,7 +502,7 @@ Scenario: _012005 creation of an individual Partner term in USD
 			| Ferron BP   |
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
-		And I change checkbox "Price include tax"
+		And I change checkbox "Price includes tax"
 		And I click Open button of the field named "Description_en"
 		And I input "Vendor Ferron, EUR" text in the field named "Description_en"
 		And I input "Vendor Ferron, EUR TR" text in the field named "Description_tr"

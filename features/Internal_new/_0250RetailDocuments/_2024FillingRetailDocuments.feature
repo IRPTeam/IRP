@@ -154,18 +154,7 @@ Scenario: _0154100 preparation ( filling documents)
 		And I select current line in "List" table
 		And I click "Save and close" button			
 	* Workstation
-		Given I open hyperlink "e1cib/list/Catalog.Workstations"
-		And I click the button named "FormCreate"
-		And I input "Workstation 01" text in "Description" field
-		And I click Select button of "Cash account" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Cash desk №2' |
-		And I select current line in "List" table
-		And I click "Set current" button
-		And I click "Save and close" button
-		And I close TestClient session
-		Given I open new TestClient session or connect the existing one
+		When create Workstation
 	
 	
 

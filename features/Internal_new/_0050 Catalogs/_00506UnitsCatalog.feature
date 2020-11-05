@@ -81,7 +81,7 @@ Scenario: _00506 filling in the "Units" catalog
 		And I click Select button of "Basis unit" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'pcs'    |
+			| 'test individual unit 1'    |
 		And I select current line in "List" table	
 		And I input "2,00000" text in "Quantity" field
 		And I click "Save and close" button
@@ -103,7 +103,7 @@ Scenario: _00506 filling in the "Units" catalog
 		And I click Select button of "Basis unit" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'pcs'    |
+			| 'test individual unit 1'    |
 		And I select current line in "List" table	
 		And I input "3,00000" text in "Quantity" field
 		And I click "Save and close" button

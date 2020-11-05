@@ -1316,5 +1316,5 @@ Scenario: add Additional Functionality extension
 	And I input "AdditionalFunctionality" text in "Description" field
 	And I click the button named "FormWriteAndClose"
 	And I close TestClient session
-	And I install the "AdditionalFunctionality" extension
+	And I install the "IRP_AdditionalFunctionality" extension
 	Given I open new TestClient session or connect the existing one	

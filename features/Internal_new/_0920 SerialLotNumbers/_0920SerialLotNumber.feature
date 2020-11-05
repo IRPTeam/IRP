@@ -444,7 +444,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			And I input "1 750,00" text in "Amount" field of "Payments" table
 			And I finish line editing in "Payments" table
 			And I move to "Item list" tab			
-	* Post Retail sales receipt and check movements in the register Sales turnovers
+	* Post Retail return receipt and check movements in the register Sales turnovers
 		And I click the button named "FormPost"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
 		And "List" table contains lines
@@ -649,6 +649,8 @@ Scenario: _092004 check serial lot number in the Sales invoice
 			And I activate "Quantity" field in "SerialLotNumbers" table
 			And I input "3,000" text in "Quantity" field of "SerialLotNumbers" table
 			And I finish line editing in "SerialLotNumbers" table
+			And the editing text of form attribute named "ItemQuantity" became equal to "3,000"
+			And the editing text of form attribute named "SelectedCount" became equal to "4,000"
 			And I click "Ok" button
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Quantity [3] does not match the quantity [4] by serial/lot numbers" substring will appear in "30" seconds
@@ -665,8 +667,10 @@ Scenario: _092004 check serial lot number in the Sales invoice
 			And I select current line in "SerialLotNumbers" table
 			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
 			And I finish line editing in "SerialLotNumbers" table
+			And the editing text of form attribute named "ItemQuantity" became equal to "3,000"
+			And the editing text of form attribute named "SelectedCount" became equal to "3,000"
 			And I click "Ok" button
-	* Post Retail sales receipt and check movements in the register Sales turnovers
+	* Post Sales invoice and check movements in the register Sales turnovers
 		And I click the button named "FormPost"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
 		And "List" table contains lines
@@ -734,6 +738,18 @@ Scenario: _092004 check serial lot number in the Sales invoice
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Serial lot number] is empty." substring will appear in "30" seconds
+	* Copy line with serial lot number (serial lot number not copied)
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Q'     | 'Serial lot numbers'             |
+			| 'Trousers' | '38/Yellow' | '3,000' | '99098809009910; 99098809009911' |
+		And I activate "Item key" field in "ItemList" table
+		And in the table "ItemList" I click "Copy" button
+		And "ItemList" table contains lines
+		| 'Item'     | 'Item key'  | 'Serial lot numbers'             | 'Q'     |
+		| 'Trousers' | '38/Yellow' | '99098809009910; 99098809009911' | '3,000' |
+		| 'Boots'    | '38/18SD'   | ''                               | '1,000' |
+		| 'Dress'    | 'M/White'   | ''                               | '1,000' |
+		| 'Trousers' | '38/Yellow' | ''                               | '3,000' |	
 	And I close all client application windows
 
 Scenario: _092005 check serial lot number in the Sales return
@@ -815,7 +831,7 @@ Scenario: _092005 check serial lot number in the Sales return
 			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button
-	* Post Retail sales receipt and check movements in the register Sales turnovers
+	* Post Sales return and check movements in the register Sales turnovers
 		And I click the button named "FormPost"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
 		And Delay 3
@@ -1076,8 +1092,8 @@ Scenario: _092009 check choice form Serial Lot number
 			| 'Serial number'  | 'Owner'     |
 			| '07'             | 'Clothes'   |
 			| '10'             | ''          |
-			And I close "Item serial/lot numbers" window
-			And I close "Edit list of serial lot numbers" window
+			And I close current window
+			And I close "Select serial lot numbers *" window
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'|
 				| 'Boots'    | '38/18SD' |
@@ -1098,7 +1114,7 @@ Scenario: _092009 check choice form Serial Lot number
 			| '08'             | 'Shoes'     |
 			| '06'             | 'Boots'     |
 			And I close "Item serial/lot numbers" window
-			And I close "Edit list of serial lot numbers" window
+			And I close "Select serial lot numbers *" window
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'|
 				| 'Dress'    | 'M/White' |
@@ -1121,7 +1137,7 @@ Scenario: _092009 check choice form Serial Lot number
 			| '07'             | 'Clothes'   |
 			| '05'             | 'Dress'     |
 			And I close "Item serial/lot numbers" window
-			And I close "Edit list of serial lot numbers" window
+			And I close "Select serial lot numbers *" window
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'|
 				| 'Dress'    | 'M/Brown' |
@@ -1144,7 +1160,7 @@ Scenario: _092009 check choice form Serial Lot number
 			| '05'             | 'Dress'     |
 			| '10'             | ''          |
 			And I close "Item serial/lot numbers" window
-			And I close "Edit list of serial lot numbers" window
+			And I close "Select serial lot numbers *" window
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'|
 				| 'Dress'    | 'L/Green' |
@@ -1168,7 +1184,7 @@ Scenario: _092009 check choice form Serial Lot number
 			| '05'             | 'Dress'     |
 			| '10'             | ''          |
 			And I close "Item serial/lot numbers" window
-			And I close "Edit list of serial lot numbers" window
+			And I close "Select serial lot numbers *" window
 		And I close all client application windows
 
 Scenario: _092010 uncheck checkbox Use serial lot number in the Item type

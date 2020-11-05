@@ -32,7 +32,6 @@ Procedure AddFile(Command)
     BeginPutFileToServer(EndCall, ProgressCall, BeforeStartCall, , PutFilesDialogParameters, ThisObject.UUID);
 EndProcedure
 
-
 &AtClient
 Procedure SaveFile(Command)
 	If Parameters.Key.IsEmpty() Then
@@ -84,97 +83,101 @@ EndProcedure
 &AtClient
 Procedure UpdateDriverStatus()
 	
-	ДанныеДрайвера = Новый Структура();
-	ДанныеДрайвера.Вставить("Driver"       , Object.Ref);
-	ДанныеДрайвера.Вставить("AddInID"      , Object.AddInID);
+	DriverData = New Structure();
+	DriverData.Insert("Driver"       , Object.Ref);
+	DriverData.Insert("AddInID"      , Object.AddInID);
 	
-	Оповещение = Новый ОписаниеОповещения("BeginGetDriverEnd", ЭтотОбъект);
-	HardwareClient.BeginGetDriver(Оповещение, ДанныеДрайвера);
+	Notify = New NotifyDescription("BeginGetDriverEnd", ThisObject);
+	HardwareClient.BeginGetDriver(Notify, DriverData);
 	
 EndProcedure
 
 &AtClient
 Procedure BeginGetDriverEnd(DriverObject, Params) Export
-	Если ПустаяСтрока(DriverObject) Тогда
-		CurrentStatus =R().Eq_002 + ": " + Символы.НПП + Object.AddInID;
+	If IsBlankString(DriverObject) Then
+		CurrentStatus = R().Eq_002 + ": " + Chars.NBSp + Object.AddInID;
 	Else
 	
-		ОповещениеМетода = Новый ОписаниеОповещения("GetVersionEnd", ЭтотОбъект);
-		DriverObject.НачатьВызовПолучитьНомерВерсии(ОповещениеМетода);
+		Notify = New NotifyDescription("GetVersionEnd", ThisObject);
+		DriverObject.НачатьВызовПолучитьНомерВерсии(Notify);
 	
 		CurrentVersion = "";
-		НаименованиеДрайвера      = "";
-		ОписаниеДрайвера          = "";
-		ТипОборудования           = "";
-		ИнтеграционныйКомпонент   = Ложь;
-		ОсновнойДрайверУстановлен = Ложь;
-		РевизияИнтерфейса         = 3003;
-		URLЗагрузкиДрайвера       = "";
-		ОповещениеМетода = Новый ОписаниеОповещения("BeginGetDriverEndAfter", ЭтотОбъект);
-		DriverObject.НачатьВызовПолучитьОписание(ОповещениеМетода, НаименованиеДрайвера, ОписаниеДрайвера, ТипОборудования, РевизияИнтерфейса, 
-										ИнтеграционныйКомпонент, ОсновнойДрайверУстановлен, URLЗагрузкиДрайвера);
+		DriverName      = "";
+		DriverNotify          = "";
+		EqType           = "";
+		IntegrationAddin   = Ложь;
+		MainDriverInstalled = Ложь;
+		InterfaceRevision         = 3003;
+		DriverURLLoad       = "";
+		Notify = New NotifyDescription("BeginGetDriverEndAfter", ЭтотОбъект);
+		DriverObject.НачатьВызовПолучитьОписание(Notify, DriverName, DriverNotify, EqType, InterfaceRevision, 
+										IntegrationAddin, MainDriverInstalled, DriverURLLoad);
 	EndIf;							
 EndProcedure
 
 &AtClient
-Procedure BeginGetDriverEndAfter(Result, Params, AddInfo) Export;
+Procedure BeginGetDriverEndAfter(Result, Params, AddInfo) Export
 	Return;
 EndProcedure
 
 &AtClient
 Procedure UpdateCurrentStatusDriver()
 	
-	CurrentStatus = НСтр("en='Installed on current PC.'");
+	CurrentStatus = R().Eq_006;
 	
-	Если Не ПустаяСтрока(CurrentVersion) Тогда
-		Элементы.CurrentStatus.Видимость = Истина;
+	If Not IsBlankString(CurrentVersion) Then
+		Items.CurrentStatus.Visible = True;
 	Else
-		Элементы.CurrentStatus.Видимость = Ложь;
-	КонецЕсли;
+		Items.CurrentStatus.Visible = False;
+	EndIf;
 	
 EndProcedure
 
 &AtClient
-Procedure GetVersionEnd(Result, Params, AddInfo) Export;
+Procedure GetVersionEnd(Result, Params, AddInfo) Export
 	
-	Если Не ПустаяСтрока(Result) Тогда
+	If Not IsBlankString(Result) Then
 		CurrentVersion = Result;
 		UpdateCurrentStatusDriver();
-	КонецЕсли;
+	EndIf;
 	
 EndProcedure
 
 &AtClient
 Procedure Install(Command)
-	Если Модифицированность Тогда
-		Оповещение = Новый ОписаниеОповещения("InstallDriver_End", ЭтотОбъект);
-		ПоказатьВопрос(Оповещение, R().QuestionToUser_001, РежимДиалогаВопрос.ДаНет);
+	If Modified Then
+		NotifyDescription = New NotifyDescription("InstallDriver_End", ThisObject);
+		ShowQueryBox(NotifyDescription, R().QuestionToUser_001, QuestionDialogMode.YesNo);
 	Else
 		InstallDriver();
-	КонецЕсли
+	EndIf;
 
 EndProcedure
 
 &AtClient
 Procedure InstallDriver_End(Result, Params) Export 
 	
-	Если Result = КодВозвратаДиалога.Да Тогда
-		Если Модифицированность И НЕ Записать() Тогда
-			Возврат;
-		КонецЕсли;
+	Если Result = DialogReturnCode.Yes Then
+		If Modified And Not Write() Then
+			Return;
+		EndIf;
 		InstallDriver();
-	КонецЕсли;  
+	EndIf;  
 	
 EndProcedure
 
 &AtClient
 Procedure InstallDriver()
 	
-	ОчиститьСообщения(); 
+	ClearMessages(); 
 	
-	ОповещенияДрайверИзАрхиваПриЗавершении = Новый ОписаниеОповещения("InstallDriverFromZIPEnd", ЭтотОбъект);
+	If Not CheckFillingDriver() Then
+		Return;
+	EndIf;
 	
-	HardwareClient.InstallDriver(Object.AddInID, ОповещенияДрайверИзАрхиваПриЗавершении);
+	Notify = New NotifyDescription("InstallDriverFromZIPEnd", ThisObject);
+	
+	HardwareClient.InstallDriver(Object.AddInID, Notify);
 	
 EndProcedure
 
@@ -185,5 +188,18 @@ Procedure InstallDriverFromZIPEnd(Result) Export
 	
 EndProcedure
 
-#EndRegion 
+&AtClient
+Function CheckFillingDriver()
+	If Not StrOccurrenceCount(Object.AddInID, ".") Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().EqError_003, "Object.AddInID");
+		Return False;
+	EndIf;
+	If Not Object.DriverLoaded Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().EqError_004);
+		Return False;
+	EndIf;
+	Return True;
+EndFunction
 
+
+#EndRegion 

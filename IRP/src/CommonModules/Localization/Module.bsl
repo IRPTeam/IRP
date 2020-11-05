@@ -8,12 +8,16 @@ Function Strings(Lang) Export
 	Strings.Insert("Eq_003", NStr("en = 'There are no errors.'", Lang));
 	Strings.Insert("Eq_004", NStr("en = 'Scanner is connected.'", Lang));
 	Strings.Insert("Eq_005", NStr("en = 'Error. Scanner not connected.'", Lang));
+	Strings.Insert("Eq_006", NStr("en = 'Installed on current PC.'", Lang));
+	
 	
 	Strings.Insert("EqError_001", NStr("en = 'The device is connected. The device must be disabled before the operation.'", Lang));
 
 	Strings.Insert("EqError_002", NStr("en = 'The device driver could not be downloaded.
 											  |Check that the driver is correctly installed and registered in the system.'", Lang));
-
+	
+	Strings.Insert("EqError_003", NStr("en = 'It has to be minimum one dot at Add ID.'", Lang));
+	Strings.Insert("EqError_004", NStr("en = 'Before install driver - it has to be loaded.'", Lang));
 	#EndRegion
 	
 	#Region POS

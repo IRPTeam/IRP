@@ -2081,6 +2081,40 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>SerialLotNumber</name>
+      <title>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </title>
+      <id>33</id>
+      <valueType>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>UseSerialLotNumber</name>
+      <title>
+        <key>en</key>
+        <value>Use serial lot number</value>
+      </title>
+      <id>34</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>ItemList</name>
@@ -2247,6 +2281,40 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>UseSerialLotNumber</name>
+      <title>
+        <key>en</key>
+        <value>Use serial lot number</value>
+      </title>
+      <id>35</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>SerialLotNumber</name>
+      <title>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </title>
+      <id>36</id>
+      <valueType>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>ItemTableValue</name>
@@ -2359,6 +2427,40 @@
       <id>26</id>
       <valueType>
         <types>CatalogRef.Units</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>SerialLotNumber</name>
+      <title>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </title>
+      <id>31</id>
+      <valueType>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>UseSerialLotNumber</name>
+      <title>
+        <key>en</key>
+        <value>Use serial lot number</value>
+      </title>
+      <id>32</id>
+      <valueType>
+        <types>Boolean</types>
       </valueType>
       <view>
         <common>true</common>

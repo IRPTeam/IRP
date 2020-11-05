@@ -269,7 +269,7 @@ Function ItemListSelectionAfter(ParametersStructure)
 	PricesResult = GetItemInfo.ItemPriceInfoByTable(TableOfItemKeysInfo, ThisObject.EndPeriod);
 	
 	Query = New Query;
-	Query.Text = "////////////////////////////////////////////////////////////////////////////////
+	Query.Text = "
 		|SELECT
 		|	ItemValueTable.ItemKey,
 		|	ItemValueTable.Quantity
@@ -286,7 +286,8 @@ Function ItemListSelectionAfter(ParametersStructure)
 		|		ELSE ItemKeys.Unit
 		|	END AS Unit,
 		|	ItemKeys.Item,
-		|	ItemKeys.Item.ItemType.Type,
+		|	ItemKeys.Item.ItemType.Type AS TypeItemType,
+		|	ItemKeys.Item.ItemType AS ItemType,
 		|	ItemKeys.AffectPricingMD5
 		|INTO ItemKeyTempTable
 		|FROM
@@ -313,16 +314,18 @@ Function ItemListSelectionAfter(ParametersStructure)
 		|	ItemKeyTempTable.ItemKey AS ItemKey,
 		|	ItemKeyTempTable.Unit AS Unit,
 		|	CASE
-		|		WHEN ItemKeyTempTable.ItemItemTypeType = Value(Enum.ItemTypes.Product)
+		|		WHEN ItemKeyTempTable.TypeItemType = Value(Enum.ItemTypes.Product)
 		|			Then IsNull(StockReservationBalance.QuantityBalance, """")
 		|		ELSE """"
 		|	END As QuantityBalance,
 		|	CASE
-		|		WHEN ItemKeyTempTable.ItemItemTypeType = Value(Enum.ItemTypes.Product)
+		|		WHEN ItemKeyTempTable.TypeItemType = Value(Enum.ItemTypes.Product)
 		|			Then IsNull(StockReservationBalanceReceiver.QuantityBalance, """")
 		|		ELSE """"
 		|	END As QuantityBalanceReceiver,
 		|	ItemPickedOut.Quantity AS QuantityPickedOut,
+		|	ItemKeyTempTable.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
+		|	Null AS SerialLotNumber,
 		|	PricesResult.Price
 		|FROM
 		|	ItemKeyTempTable AS ItemKeyTempTable
@@ -356,6 +359,8 @@ Function ItemListSelectionAfter(ParametersStructure)
 			TransferParameters.Insert("ItemKey", QuerySelection.ItemKey);
 			TransferParameters.Insert("Unit", QuerySelection.Unit);
 			TransferParameters.Insert("Price", QuerySelection.Price);
+			TransferParameters.Insert("UseSerialLotNumber", QuerySelection.UseSerialLotNumber);
+			TransferParameters.Insert("SerialLotNumber", QuerySelection.SerialLotNumber);
 			ItemKeyListSelectionAfter(TransferParameters);
 		Else
 			While QuerySelection.Next() Do
@@ -367,6 +372,8 @@ Function ItemListSelectionAfter(ParametersStructure)
 				NewRow.PickedOut = QuerySelection.QuantityPickedOut;
 				NewRow.Price = QuerySelection.Price;
 				NewRow.Unit = QuerySelection.Unit;
+				NewRow.UseSerialLotNumber = QuerySelection.UseSerialLotNumber;
+				NewRow.SerialLotNumber = QuerySelection.SerialLotNumber;
 			EndDo;
 		EndIf;
 	EndIf;
@@ -400,6 +407,8 @@ Procedure ItemKeyListSelection(Item, RowSelected, Field, StandardProcessing)
 	TransferParameters.Insert("ItemKey", ItemKeyCurrentData.ItemKey);
 	TransferParameters.Insert("Price", ItemKeyCurrentData.Price);
 	TransferParameters.Insert("Unit", ItemKeyCurrentData.Unit);
+	TransferParameters.Insert("UseSerialLotNumber", ItemKeyCurrentData.UseSerialLotNumber);
+	TransferParameters.Insert("SerialLotNumber", ItemKeyCurrentData.SerialLotNumber);
 	ItemKeyListSelectionAfter(TransferParameters);
 EndProcedure
 
@@ -424,6 +433,8 @@ Procedure ItemKeyListSelectionAfter(ParametersStructure)
 		ItemRow.Quantity = 1;
 		ItemRow.Price = ParametersStructure.Price;
 		ItemRow.Unit = ParametersStructure.Unit;
+		ItemRow.SerialLotNumber = ParametersStructure.SerialLotNumber;
+		ItemRow.UseSerialLotNumber = ParametersStructure.UseSerialLotNumber;
 	EndIf;
 	ItemRow.Amount = ItemRow.Quantity * ItemRow.Price;
 	RefillItemKeyListPickedOut();

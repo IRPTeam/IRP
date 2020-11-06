@@ -565,8 +565,8 @@ WHERE
 	AND CASE
 		WHEN &amp;IncludeFilterByEndOfUseDate
 			THEN Table.StartUsing &lt;= &amp;EndOfUseDate
-			AND Table.EndOfUse >= &amp;EndOfUseDate
-			OR Table.EndOfUse = DATETIME(1, 1, 1)
+			AND (Table.EndOfUse >= &amp;EndOfUseDate
+			OR Table.EndOfUse = DATETIME(1, 1, 1))
 		ELSE TRUE
 	END)</queryText>
       <mainTable>Catalog.Agreements</mainTable>

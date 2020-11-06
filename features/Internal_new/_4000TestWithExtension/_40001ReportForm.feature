@@ -16,8 +16,6 @@ Scenario: _4000100 preparation
 	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
-	* Constants
-		When set True value to the constant
 	* Load info
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
@@ -57,6 +55,7 @@ Scenario: _4000100 preparation
 
 
 Scenario: _4000105 check add attributes from extensions
+	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.Currencies"
 	And I click the button named "FormCreate"
 	And the field named "REP_Attribute1" exists on the form

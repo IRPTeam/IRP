@@ -338,13 +338,15 @@ Scenario: _300110 opening Files catalog element
         And I close all client application windows
         
 
+
+
 Scenario: _300115 check removal of pictures from Item
     Given I open hyperlink "e1cib/list/Catalog.Files"
     And I go to line in "List" table
         | 'File name'     |
         | 'dressblue.jpg' |
     And I select current line in "List" table
-    And I save the value of "File ID" field as "$$FileIDDressBlue$$"
+    And I save the value of the field named "FileID" as "$$FileIDDressBlue$$"
     And I display "$$FileIDDressBlue$$" variable value
     And I close current window
     * Open Item list form
@@ -354,7 +356,7 @@ Scenario: _300115 check removal of pictures from Item
             | 'Dress'     |
         And I select current line in "List" table
     * Delete picture from Item
-        And I input "$$FileIDDressBlue$$" variable value in "getCurrentSlideId" field
+        And I input "$$FileIDDressBlue$$" variable value in "getCurrentSlideId" field   	
         And I click "remove_picture" button
         And I close all client application windows
         Given I open hyperlink "e1cib/list/InformationRegister.AttachedFiles"
@@ -363,7 +365,6 @@ Scenario: _300115 check removal of pictures from Item
             | 'Dress'    | 'dressblue.jpg' |
     And I close all client application windows
         
-
 
 // Scenario: _300150 removal of unused elements of the Files catalog
 // 	* Open catalog Files
@@ -384,4 +385,5 @@ Scenario: _300115 check removal of pictures from Item
 // 		| 'File name'     |
 // 		| 'dressblue.jpg' |
 // 	And I close all client application windows
+
 

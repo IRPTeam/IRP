@@ -183,10 +183,10 @@ Scenario: _3510003 check clearing the values ​​of Tax types and Multi curren
                         | 'Use' | 'Tax' | 'Priority' |
                         | 'Yes' | 'VAT' | '2'        |
         * Check to clear completed data when uncheck OurCompany
-                And I move to "Info" tab
-                And I remove checkbox "Our Company"
-                        And I select "Company" exact value from the drop-down list named "Type"
-                And I click "Save" button
+				And I move to "Info" tab
+				And I remove checkbox "Our Company"
+				And I select "Company" exact value from the drop-down list named "Type"
+				And I click "Save" button
                 And I set checkbox "Our Company"
                 And "Currencies" table does not contain lines
                         | 'Movement type'      | 'Type'      | 'Currency' | 'Source'       |

@@ -60,7 +60,6 @@ Function QuerySearchInputByString(Settings) Export
 		|	Sort,
 		|	Presentation";
 
-
 	If Not Settings.MetadataObject.DescriptionLength Then
 		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter , "_" + "en");
 		QueryField = "CASE WHEN %1.Description%2 = """" THEN %1.Description_en ELSE %1.Description%2 END ";

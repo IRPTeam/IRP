@@ -208,7 +208,6 @@ Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments, Obj
 	Return ArrayOfResults;
 EndFunction
 
-
 #EndRegion
 
 #Region GroupTitle

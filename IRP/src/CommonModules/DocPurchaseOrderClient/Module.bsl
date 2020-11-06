@@ -720,7 +720,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region PickUpItems
 
 Procedure OpenPickupItems(Object, Form, Command) Export

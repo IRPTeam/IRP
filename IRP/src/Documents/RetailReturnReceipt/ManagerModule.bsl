@@ -57,7 +57,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Return Tables;
 EndFunction
 
-
 Function GetQueryText_AllTables()
 	Return 
 		"SELECT

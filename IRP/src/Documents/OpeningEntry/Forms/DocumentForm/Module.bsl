@@ -15,7 +15,6 @@ Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
 	SetVisible(Object, ThisObject, CurrentData);
 EndProcedure
 
-
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);

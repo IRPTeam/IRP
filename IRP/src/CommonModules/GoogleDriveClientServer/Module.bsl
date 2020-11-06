@@ -72,7 +72,6 @@ Function SendDataToGoogle(Headers, DataTXT)
 	Return Answer
 EndFunction
 
-
 Function GetFileLink(IntegrationSettings, URI, UUID) Export
 	access_token = GoogleDriveServer.CurrentActiveToken(IntegrationSettings);
 	Headers = New Map();
@@ -91,7 +90,6 @@ Function GetFileLink(IntegrationSettings, URI, UUID) Export
 	Return PutToTempStorage(PictureBD, UUID);
 
 EndFunction
-
 
 Function GetFileFromGoogleDrive(URI, Headers) 
 	#If Webclient Then

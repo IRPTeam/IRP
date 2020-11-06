@@ -6,7 +6,6 @@ Procedure OnCopyRemoveUniqueIDOnCopy(Source, CopiedObject) Export
 	Source.UniqueID = Undefined;
 EndProcedure
 
-
 Procedure CheckUniqueIDBeforeWrite(Source, Cancel) Export
 	If Not ValueIsFilled(Source.UniqueID) Then
 		Source.UniqueID = "_" + StrReplace(String(New UUID()), "-", "");

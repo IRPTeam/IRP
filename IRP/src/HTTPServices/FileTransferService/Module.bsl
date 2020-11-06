@@ -39,7 +39,6 @@ Function GetFileFromFileStorage(PathForSave, FileName)
 EndFunction
 
 
-
 Function CreateErrorResponse(HttpResponse, Message)
 	ErrorResponse = ErrorResponse();
 	ErrorResponse.Success = False;

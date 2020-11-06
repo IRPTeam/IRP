@@ -34,7 +34,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region GroupTitleDecorationsEvents
 
 &AtClient
@@ -58,7 +57,6 @@ Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
 EndProcedure
 
 #EndRegion
-
 
 #Region ItemDescription
 

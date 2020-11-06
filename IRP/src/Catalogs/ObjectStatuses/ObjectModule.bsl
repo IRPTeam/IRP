@@ -76,7 +76,6 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	EndIf;
 EndProcedure
 
-
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If ThisObject.IsFolder Then
 		Return;

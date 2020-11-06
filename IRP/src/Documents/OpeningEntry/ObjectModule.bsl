@@ -26,7 +26,6 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 
-
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	For Each Row In ThisObject.AccountReceivableByDocuments Do
 		ArrayOfPaymentTerms = ThisObject.PaymentTerms.FindRows(New Structure("Key", Row.Key));
@@ -42,5 +41,4 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 	EndDo;
 EndProcedure
-
 

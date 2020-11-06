@@ -4,7 +4,6 @@ Procedure SearchByBarcode(Command, Barcode = "")
 	DocumentsClient.SearchByBarcode(Barcode, DocumentObject, ThisObject, ThisObject, , AddInfo);
 EndProcedure
 
-
 &AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 
@@ -52,7 +51,6 @@ Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
 	StartEditQuantity(RowSelected);
 EndProcedure
 
-
 &AtClient
 Procedure StartEditQuantity(Val RowSelected, AutoMode = False)
 	Structure = New Structure;
@@ -65,7 +63,6 @@ Procedure StartEditQuantity(Val RowSelected, AutoMode = False)
 	NotifyOnClosing = New NotifyDescription("OnEditQuantityEnd", ThisObject);
 	OpenForm("DataProcessor.MobileInvent.Form.RowForm", Structure, ThisObject, , , , NotifyOnClosing);
 EndProcedure
-
 
 &AtClient
 Procedure OnEditQuantityEnd(Result, AddInfo) Export
@@ -113,7 +110,6 @@ Procedure SaveAndUpdateDocument()
 	Write();
 	FillDocumentObject(Documents.PhysicalCountByLocation.EmptyRef());
 EndProcedure
-
 
 &AtServer
 Function FindAndSetDocument(Number, Result, AddInfo = Undefined) 

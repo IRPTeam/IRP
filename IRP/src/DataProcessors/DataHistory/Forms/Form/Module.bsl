@@ -14,7 +14,6 @@ Procedure UpdateDataHistory(Command)
 	UpdateDataHistoryAtServer();
 EndProcedure
 
-
 #Region Privat
 
 &AtServer

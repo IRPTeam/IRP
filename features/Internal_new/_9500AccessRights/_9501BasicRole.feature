@@ -14,6 +14,7 @@ Scenario: 950100 Basic role
 	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
+	Then I connect launched Test client "Этот клиент"
 	When Create catalog AccessGroups objects
 	When Create catalog AccessProfiles objects
 	When Create catalog Agreements objects

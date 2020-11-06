@@ -65,6 +65,11 @@ Scenario: _00506 filling in the "Units" catalog
 			| 'Boots'      |
 		And I select current line in "List" table
 		And I input "1,00000" text in "Quantity" field
+		And I click Select button of "Basis unit" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'pcs'    |
+		And I select current line in "List" table
 		And I click "Save and close" button
 		And "List" table contains lines
 			| 'Description' |
@@ -90,9 +95,16 @@ Scenario: _00506 filling in the "Units" catalog
 			| 'pcs'         |
 			| 'test individual unit 1' |
 			| 'test individual unit 2' |
-	* Create individual unit from Item -choice form Item unit
+	* Сheck that only a common storage unit can be selected (field Unit)
 		And In this window I click command interface button "Main"
 		And I click Select button of "Unit" field
+		And "List" table does not contain lines
+			| 'Description' |
+			| 'test individual unit 1' |
+			| 'test individual unit 2' |
+		And I close current window
+	* Сheck that when creating an individual unit you need to select a basis unit
+		And In this window I click command interface button "Item units"
 		And I click the button named "FormCreate"
 		And I input "test individual unit 3" text in "ENG" field
 		And I click Select button of "Item" field
@@ -100,20 +112,9 @@ Scenario: _00506 filling in the "Units" catalog
 			| 'Description' |
 			| 'Boots'      |
 		And I select current line in "List" table
-		And I click Select button of "Basis unit" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'test individual unit 1'    |
-		And I select current line in "List" table	
-		And I input "3,00000" text in "Quantity" field
+		And I input "1,00000" text in "Quantity" field
 		And I click "Save and close" button
-		And "List" table contains lines
-			| 'Description' |
-			| 'pcs'         |
-			| 'test individual unit 1' |
-			| 'test individual unit 2' |
-			| 'test individual unit 3' |	
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Given Recent TestClient message contains "Basis unit has to be filled, if item filter used." string by template
 		And I close all client application windows	
-	# * Clean catalog Units
-	# 	And I delete "Units" catalog element with the Description_en "pcs"
-	#   And I delete "Units" catalog element with the Description_en "box (4 pcs)"

@@ -1,25 +1,3 @@
-Procedure Posting(Cancel, PostingMode)
-	
-	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
-	Synchronize("Post", Cancel);
-	
-EndProcedure
-
-Procedure UndoPosting(Cancel)
-	
-	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
-	Synchronize("Unpost", Cancel);
-	
-EndProcedure
-
-Procedure BeforeDelete(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;	
-	
-	Synchronize("Delete", Cancel);
-	
-EndProcedure
 
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
@@ -48,6 +26,29 @@ Procedure OnWrite(Cancel)
 			Synchronize(ItemOfDelayedSynchronization, Cancel);
 		EndDo;
 	EndIf;
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+	
+	Synchronize("Delete", Cancel);
+	
+EndProcedure
+
+Procedure Posting(Cancel, PostingMode)
+	
+	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
+	Synchronize("Post", Cancel);
+	
+EndProcedure
+
+Procedure UndoPosting(Cancel)
+	
+	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
+	Synchronize("Unpost", Cancel);
+	
 EndProcedure
 
 Procedure Synchronize(Event, Cancel)

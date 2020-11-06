@@ -1,4 +1,22 @@
 
+Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+EndProcedure
+
+Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+EndProcedure
+
 Procedure Posting(Cancel, PostingMode)
 	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
 EndProcedure
@@ -8,9 +26,9 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	
-	If ValueIsFilled(SendCurrency) And ValueIsFilled(ReceiveCurrency)
-		And ValueIsFilled(Sender) And ValueIsFilled(Receiver) Then
+	DataFilled = ValueIsFilled(SendCurrency) And ValueIsFilled(ReceiveCurrency)
+					And ValueIsFilled(Sender) And ValueIsFilled(Receiver);
+	If DataFilled Then
 		
 		If SendCurrency = ReceiveCurrency Then
 			
@@ -31,23 +49,5 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 
 	If DocCashTransferOrderServer.UseCashAdvanceHolder(ThisObject) Then
 		CheckedAttributes.Add("CashAdvanceHolder");
-	EndIf;
-EndProcedure
-
-Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
-	If DataExchange.Load Then
-		Return;
-	EndIf;	
-EndProcedure
-
-Procedure OnWrite(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;	
-EndProcedure
-
-Procedure BeforeDelete(Cancel)
-	If DataExchange.Load Then
-		Return;
 	EndIf;
 EndProcedure

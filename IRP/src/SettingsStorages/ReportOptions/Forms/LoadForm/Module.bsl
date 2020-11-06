@@ -49,7 +49,6 @@ Procedure StandardOptionsSelection(Item, RowSelected, Field, StandardProcessing)
 	LoadChosenSetting(CurrentData.OptionKey);
 EndProcedure
 
-
 &AtClient
 Procedure LoadSetting(Command)
 	If Items.GroupOptionTypes.CurrentPage = Items.GroupPageCustom Then

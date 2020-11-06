@@ -92,8 +92,3 @@ EndFunction
 Procedure AfterWrite(WriteParameters)
 	Close(RetailCustomer.Ref);
 EndProcedure
-
-
-
-
-

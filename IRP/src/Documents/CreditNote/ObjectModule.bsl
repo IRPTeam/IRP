@@ -4,14 +4,6 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;	
 EndProcedure
 
-Procedure Posting(Cancel, PostingMode)
-	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
-EndProcedure
-
-Procedure UndoPosting(Cancel)
-	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
-EndProcedure
-
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
@@ -24,6 +16,14 @@ Procedure BeforeDelete(Cancel)
 	EndIf;
 EndProcedure
 
+Procedure Posting(Cancel, PostingMode)
+	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
+EndProcedure
+
+Procedure UndoPosting(Cancel)
+	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
+EndProcedure
+
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	For Each Row In ThisObject.Transactions Do
 		If Not ValueIsFilled(Row.Agreement) Or (Row.Agreement.ApArPostingDetail = Enums.ApArPostingDetail.ByDocuments 
@@ -34,5 +34,4 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 	EndDo;
 EndProcedure
-
 

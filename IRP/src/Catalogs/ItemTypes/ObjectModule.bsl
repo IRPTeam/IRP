@@ -1,3 +1,15 @@
+Procedure BeforeWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+EndProcedure
+
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
@@ -36,16 +48,4 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			Cancel = True;
 		EndIf;
 	EndDo;
-EndProcedure
-
-Procedure BeforeWrite(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;
-EndProcedure
-
-Procedure BeforeDelete(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;
 EndProcedure

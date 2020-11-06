@@ -201,10 +201,11 @@ Procedure OrderOrderAvailableFieldsSelection(Item, RowSelected, Field, StandardP
 
 	If TypeOf(SelectedAreas[0]) = Type("SpreadsheetDocumentDrawing")
 		And ThisObject.PasteFieldAs = "free" Then
-		If RowSelectedString = "BarcodePicture" Or RowSelectedString = "QRPicture"
+		isPicture = RowSelectedString = "BarcodePicture" Or RowSelectedString = "QRPicture"
 			Or RowSelectedString = "ItemPicture"
 			Or RowSelectedString = "ItemKeyPicture"
-			Or RowSelectedString = "Picture" Then
+			Or RowSelectedString = "Picture";
+		If isPicture Then
 			Return;
 		Else
 			RowSelectedValue = StrReplace(RowSelectedString, "[", "{");

@@ -249,7 +249,7 @@ Function InfoDocumentComplete(Item) Export
 	Return BrWindow;
 EndFunction
 
-Function HTMLEvent(Form, Object, Val Data, AddInfo = Undefined) Export
+Procedure HTMLEvent(Form, Object, Val Data, AddInfo = Undefined) Export
 	Data = CommonFunctionsServer.DeserializeJSON(Data);
 	If Data.value = "add_picture" Then
 		Upload(Form, Object, PictureViewerServer.GetIntegrationSettingsPicture().DefaultPictureStorageVolume);
@@ -263,7 +263,7 @@ Function HTMLEvent(Form, Object, Val Data, AddInfo = Undefined) Export
 		PictureViewerServer.UnlinkFileFromObject(FileRef.Ref, Object.Ref);
 		Notify("UpdateObjectPictures_Delete", Data.ID, Form.UUID);
 	EndIf;
-EndFunction
+EndProcedure
 
 Procedure HTMLEventAction(Val EventName, Val Parameter, Val Source, Form) Export
 	If EventName = "UpdateObjectPictures" AND Source = Form.UUID Then

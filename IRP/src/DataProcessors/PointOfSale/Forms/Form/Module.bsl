@@ -137,7 +137,6 @@ Procedure ItemsPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 	AddItemToItemList();
 EndProcedure
 
-
 &AtClient
 Procedure AddItemToItemList()
 	CurrentData = Items.ItemsPickup.CurrentData;
@@ -154,7 +153,6 @@ Procedure AddItemToItemList()
 
 	BuildDetailedInformation(?(CurrentDataItemList = Undefined, Undefined, CurrentDataItemList.ItemKey));
 EndProcedure
-
 
 &AtClient
 Procedure ItemsPickupOnActivateRow(Item)
@@ -175,7 +173,6 @@ Procedure ItemKeysPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 	AddItemKeyToItemList();
 EndProcedure
 
-
 &AtClient
 Procedure AddItemKeyToItemList()
 	Var CurrentData;
@@ -190,7 +187,6 @@ Procedure AddItemKeyToItemList()
 	
 	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.Ref));
 EndProcedure
-
 
 #EndRegion
 
@@ -302,7 +298,6 @@ Procedure SetRetailCustomer(Value, AddInfo = Undefined) Export
 		Object.RetailCustomer = Value;
 	EndIf;
 EndProcedure
-
 
 &AtClient
 Procedure ItemListDrag(Item, DragParameters, StandardProcessing, Row, Field)
@@ -503,7 +498,6 @@ Procedure ShowItems()
 	SetShowItems();
 EndProcedure
 
-
 &AtClient
 Procedure SetShowItems()
 	Items.GroupPickupItems.Visible = Items.ItemListShowItems.Check;
@@ -514,7 +508,6 @@ Procedure SetShowItems()
 		AfterItemChoice(PredefinedValue("Catalog.Items.EmptyRef"));
 	EndIf;
 EndProcedure
-
 
 &AtServer
 Function AfterItemChoice(Val ChoicedItem, AddToItemList = False)

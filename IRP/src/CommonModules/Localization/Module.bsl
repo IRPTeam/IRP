@@ -10,7 +10,6 @@ Function Strings(Lang) Export
 	Strings.Insert("Eq_005", NStr("en = 'Error. Scanner not connected.'", Lang));
 	Strings.Insert("Eq_006", NStr("en = 'Installed on current PC.'", Lang));
 	
-	
 	Strings.Insert("EqError_001", NStr("en = 'The device is connected. The device must be disabled before the operation.'", Lang));
 
 	Strings.Insert("EqError_002", NStr("en = 'The device driver could not be downloaded.
@@ -385,7 +384,8 @@ Function Strings(Lang) Export
 	Strings.Insert("I_2", NStr("en = 'Click to enter description'", Lang));
 	
 	Strings.Insert("I_3", NStr("en = 'Fill out the document'", Lang));
-	
+	Strings.Insert("I_4", NStr("en = 'Find %1 rows in table by key %2'", Lang));
+	Strings.Insert("I_5", NStr("en = 'Not supported table'", Lang));
 	#EndRegion
 	
 	#Region Exceptions

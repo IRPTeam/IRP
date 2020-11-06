@@ -1,3 +1,20 @@
+Procedure BeforeWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+EndProcedure
+
+Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+EndProcedure
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	TableOfAttributes = ThisObject.Attributes.Unload();
 	TableOfAttributes.Columns.Add("Counter");
@@ -19,22 +36,4 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			Cancel = True;
 		EndIf;
 	EndDo;
-EndProcedure
-
-Procedure BeforeWrite(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;
-EndProcedure
-
-Procedure OnWrite(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;	
-EndProcedure
-
-Procedure BeforeDelete(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;
 EndProcedure

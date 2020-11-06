@@ -1,3 +1,4 @@
+
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
@@ -10,6 +11,18 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 			OR TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.InventoryTransfer") Then
 		Partner = Undefined;
 		LegalName = Undefined;
+	EndIf;
+EndProcedure
+
+Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
 	EndIf;
 EndProcedure
 
@@ -101,17 +114,5 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If QuerySelection.Count() > 1 Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().S_022);
 		Cancel = True;
-	EndIf;
-EndProcedure
-
-Procedure OnWrite(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;	
-EndProcedure
-
-Procedure BeforeDelete(Cancel)
-	If DataExchange.Load Then
-		Return;
 	EndIf;
 EndProcedure

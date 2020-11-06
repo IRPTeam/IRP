@@ -1,3 +1,10 @@
+
+Procedure BeforeWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+EndProcedure
+
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
@@ -10,13 +17,6 @@ Procedure OnWrite(Cancel)
 		EndIf;
 	EndDo;
 	SessionParameters.ConnectedAddDataProc = New FixedStructure(ExternalDataProcNames);
-EndProcedure
-
-
-Procedure BeforeWrite(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)

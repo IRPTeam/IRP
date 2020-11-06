@@ -105,14 +105,6 @@ Procedure BeforeWrite(Cancel)
 	EndIf;
 EndProcedure
 
-Procedure SetAffectPricingMD5(AffectPricingMD5)
-	ThisObject.AffectPricingMD5 = AffectPricingMD5;
-EndProcedure
-
-Procedure SetSpecificationAffectPricingMD5(TableOfAffectPricingMD5)
-	ThisObject.SpecificationAffectPricingMD5.Load(TableOfAffectPricingMD5);
-EndProcedure
-
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
@@ -125,4 +117,12 @@ Procedure BeforeDelete(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
+EndProcedure
+
+Procedure SetAffectPricingMD5(AffectPricingMD5)
+	ThisObject.AffectPricingMD5 = AffectPricingMD5;
+EndProcedure
+
+Procedure SetSpecificationAffectPricingMD5(TableOfAffectPricingMD5)
+	ThisObject.SpecificationAffectPricingMD5.Load(TableOfAffectPricingMD5);
 EndProcedure

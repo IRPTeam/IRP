@@ -389,10 +389,10 @@ Procedure FillCurrencyTable_CurrencyInRow(Object, CurrentData = Undefined)
 		For Each Row In Object.Transactions Do
 			RowParameters = New Structure();
 			RowParameters.Insert("Agreement", Row.Agreement);
-			RowParameters.Insert("Date",Object.Date); 
-			RowParameters.Insert("Company",Object.Company);
-			RowParameters.Insert("Currency",Row.Currency);
-			RowParameters.Insert("UUID",Row.Key);
+			RowParameters.Insert("Date", Object.Date); 
+			RowParameters.Insert("Company", Object.Company);
+			RowParameters.Insert("Currency", Row.Currency);
+			RowParameters.Insert("UUID", Row.Key);
 			
 			ParametersToServer.GetArrayOfCurrenciesRowsForAllTable.Add(RowParameters);
 		EndDo;
@@ -404,10 +404,10 @@ Procedure FillCurrencyTable_CurrencyInRow(Object, CurrentData = Undefined)
 	Else
 		ParametersToServer = New Structure("GetArrayOfCurrenciesRows", New Structure());
 		ParametersToServer.GetArrayOfCurrenciesRows.Insert("Agreement", CurrentData.Agreement);
-		ParametersToServer.GetArrayOfCurrenciesRows.Insert("Date",Object.Date); 
-		ParametersToServer.GetArrayOfCurrenciesRows.Insert("Company",Object.Company);
-		ParametersToServer.GetArrayOfCurrenciesRows.Insert("Currency",CurrentData.Currency);
-		ParametersToServer.GetArrayOfCurrenciesRows.Insert("UUID",CurrentData.Key);
+		ParametersToServer.GetArrayOfCurrenciesRows.Insert("Date", Object.Date); 
+		ParametersToServer.GetArrayOfCurrenciesRows.Insert("Company", Object.Company);
+		ParametersToServer.GetArrayOfCurrenciesRows.Insert("Currency", CurrentData.Currency);
+		ParametersToServer.GetArrayOfCurrenciesRows.Insert("UUID", CurrentData.Key);
 		
 		ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 		For Each Row In ServerData.ArrayOfCurrenciesRows Do
@@ -433,13 +433,4 @@ Procedure CalculateAmount_CurrencyInRow(Object, Amount, RowKey)
 	EndDo;
 EndProcedure
 
-//Procedure UpdateRatePresentation_CurrencyInRow(Object)
-//	For Each Row In Object.Currencies Do
-//		Row.RatePresentation = ?(Row.ShowReverseRate, Row.ReverseRate, Row.Rate);
-//	EndDo;
-//EndProcedure
-
 #EndRegion
-
-
-

@@ -109,3 +109,19 @@ EndProcedure
 Procedure UpdateFooter()
 	SelectedCount = SerialLotNumbers.Total("Quantity");
 EndProcedure
+
+&AtClient
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocumentsClient.SearchByBarcode(Barcode, ThisObject, ThisObject, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
+	If AdditionalParameters.FoundedItems.Count() Then
+
+
+	Else
+		DetailedInformation = "<span style=""color:red;"">" + StrTemplate(R().S_019, StrConcat(AdditionalParameters.Barcodes, ",")) + "</span>";
+		Items.DetailedInformation.document.getElementById("text").innerHTML = DetailedInformation;
+	EndIf;
+EndProcedure

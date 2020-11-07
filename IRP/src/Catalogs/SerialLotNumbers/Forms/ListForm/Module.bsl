@@ -5,9 +5,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	List.Parameters.SetParameterValue("isItemKey", False);
 	List.Parameters.SetParameterValue("isItem", False);
 	List.Parameters.SetParameterValue("isItemType", False);
-	List.Parameters.SetParameterValue("ItemKeyRef", Undefined);
-	List.Parameters.SetParameterValue("ItemRef", Undefined);
-	List.Parameters.SetParameterValue("ItemType", Undefined);
+	List.Parameters.SetParameterValue("ItemKeyRef", Catalogs.ItemKeys.EmptyRef());
+	List.Parameters.SetParameterValue("ItemRef", Catalogs.Items.EmptyRef());
+	List.Parameters.SetParameterValue("ItemType", Catalogs.ItemTypes.EmptyRef());
 
 	
 	If Parameters.Property("SerialLotNumberOwner") Then

@@ -342,9 +342,14 @@ Function Strings(Lang) Export
 	
 	// %1 - 123456
 	Strings.Insert("InfoMessage_015", NStr("en = 'Barcode %1 was not found. Create new new serial with this barcode?'", Lang));
+
 	// %1 - 123456
 	// %2 - Some item
-	Strings.Insert("InfoMessage_016", NStr("en = 'Scanned barcode %1 used for another item %2'", Lang));
+	Strings.Insert("InfoMessage_016", NStr("en = 'Scanned barcode %1 is using for another items %2'", Lang));
+	
+	// %1 - 123456
+	Strings.Insert("InfoMessage_017", NStr("en = 'Scanned barcode %1 is not using set for serial numbers'", Lang));
+	
 	#EndRegion
 	
 	#Region QuestionToUser

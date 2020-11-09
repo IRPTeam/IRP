@@ -44,7 +44,8 @@ Scenario: _4000201 driver install
 	Given I open hyperlink "e1cib/list/Catalog.EquipmentDrivers"
 	And I click the button named "FormCreate"
 	* Check info message if driver was not loaded before
-		And I input "Test.driver" text in "AddIn ID" field
+		And I input "Inputdevice" text in "Description" field
+		And I input "AddIn.InputDevice" text in "AddIn ID" field
 		And I click "Install" button
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -54,6 +55,9 @@ Scenario: _4000201 driver install
 		And I click "Add file" button	
 		And I click the button named "FormWrite"	
 		And I click "Install" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I click the button named "FormWriteAndClose"		
 		And I close all client application windows
 		
 		
@@ -97,6 +101,12 @@ Scenario: _4000202 hardware
 		| 'Suffix'              | '13'    |
 		| 'Timeout'             | '75'    |
 		| 'TimeoutCOM'          | '5'     |
+	And I click Select button of "Driver" field
+	And I go to line in "List" table
+		| 'Description' |
+		| '1Native'     |
+	And I select current line in "List" table
+	And I click "Save" button
 	And I click the button named "FormWriteAndClose"
 
 	

@@ -1,5 +1,7 @@
-Procedure Filling(FillingData, FillingText, StandardProcessing)
-	ThisObject.Type = Enums.TaxType.Rate;
+Procedure BeforeWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)
@@ -16,14 +18,12 @@ Procedure OnWrite(Cancel)
 	EndIf;
 EndProcedure
 
-Procedure BeforeWrite(Cancel)
+Procedure BeforeDelete(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
 EndProcedure
 
-Procedure BeforeDelete(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;
+Procedure Filling(FillingData, FillingText, StandardProcessing)
+	ThisObject.Type = Enums.TaxType.Rate;
 EndProcedure

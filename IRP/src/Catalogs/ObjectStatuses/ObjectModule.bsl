@@ -1,11 +1,3 @@
-Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	If ThisObject.IsFolder Then
-		Index = CheckedAttributes.Find("Parent");
-		If Index <> Undefined Then
-			CheckedAttributes.Delete(Index);
-		EndIf;
-	EndIf;
-EndProcedure
 
 Procedure BeforeWrite(Cancel)
 	If DataExchange.Load Then
@@ -63,6 +55,27 @@ Procedure BeforeWrite(Cancel)
 	EndIf;
 EndProcedure
 
+Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+EndProcedure
+
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	If ThisObject.IsFolder Then
+		Index = CheckedAttributes.Find("Parent");
+		If Index <> Undefined Then
+			CheckedAttributes.Delete(Index);
+		EndIf;
+	EndIf;
+EndProcedure
+
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If ThisObject.IsFolder Then
 		Return;
@@ -77,16 +90,4 @@ EndProcedure
 
 Procedure OnCopy(CopiedObject)
 	UniqueID = "";
-EndProcedure
-
-Procedure OnWrite(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;	
-EndProcedure
-
-Procedure BeforeDelete(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;
 EndProcedure

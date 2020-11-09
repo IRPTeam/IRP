@@ -260,4 +260,3 @@ Function GetTableAging_Expense_OnMoneyReceipt(PointInTime, PartnerArTransactions
 	
 	Return QueryTable;
 EndFunction
-

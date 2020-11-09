@@ -117,12 +117,10 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 	
 EndProcedure
 
-
 Procedure RecalculateClosingBalance(Object)
 	Object.ClosingBalance = Object.OpeningBalance +
 			Object.CashTransactionList.Total("Receipt") - Object.CashTransactionList.Total("Expense");
 EndProcedure
-
 
 Procedure FillOnBasisDocument(Object, AddInfo = Undefined) Export
 

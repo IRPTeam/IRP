@@ -49,7 +49,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region Partner
 
 Procedure TransactionsPartnerOnChange(Object, Form, Item, AddInfo = Undefined) Export

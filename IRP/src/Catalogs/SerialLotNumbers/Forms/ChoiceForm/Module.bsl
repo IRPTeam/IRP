@@ -17,7 +17,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		ThisObject.List.Parameters.SetParameterValue("ItemType", Undefined);
 		ThisObject.List.Parameters.SetParameterValue("Item", Undefined);
 		ThisObject.List.Parameters.SetParameterValue("ItemKey", Undefined);		
-	EndIf
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -25,4 +25,3 @@ Procedure ListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	CommonFormActions.DynamicListBeforeAddRow(ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter, 
 	"Catalog.SerialLotNumbers.ObjectForm");
 EndProcedure
-

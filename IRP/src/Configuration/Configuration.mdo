@@ -461,14 +461,15 @@
   <commonForms>CommonForm.ShareToUsers</commonForms>
   <commonForms>CommonForm.EditTax</commonForms>
   <commonForms>CommonForm.DataMappingForm</commonForms>
-  <catalogs>Catalog.EquipmentDrivers</catalogs>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertyValues</catalogs>
   <catalogs>Catalog.Agreements</catalogs>
+  <catalogs>Catalog.BankTerms</catalogs>
   <catalogs>Catalog.BusinessUnits</catalogs>
   <catalogs>Catalog.CashAccounts</catalogs>
+  <catalogs>Catalog.CashStatementStatuses</catalogs>
   <catalogs>Catalog.ChequeBonds</catalogs>
   <catalogs>Catalog.Companies</catalogs>
   <catalogs>Catalog.ConfigurationMetadata</catalogs>
@@ -476,12 +477,16 @@
   <catalogs>Catalog.Currencies</catalogs>
   <catalogs>Catalog.CurrencyMovementSets</catalogs>
   <catalogs>Catalog.DataAreas</catalogs>
+  <catalogs>Catalog.DataBaseStatus</catalogs>
+  <catalogs>Catalog.DataMappingItems</catalogs>
+  <catalogs>Catalog.EquipmentDrivers</catalogs>
   <catalogs>Catalog.ExpenseAndRevenueTypes</catalogs>
   <catalogs>Catalog.Extensions</catalogs>
   <catalogs>Catalog.ExternalDataProc</catalogs>
   <catalogs>Catalog.Files</catalogs>
   <catalogs>Catalog.FileStoragesInfo</catalogs>
   <catalogs>Catalog.FileStorageVolumes</catalogs>
+  <catalogs>Catalog.Hardware</catalogs>
   <catalogs>Catalog.IDInfoAddresses</catalogs>
   <catalogs>Catalog.IDInfoSets</catalogs>
   <catalogs>Catalog.IntegrationSettings</catalogs>
@@ -494,10 +499,13 @@
   <catalogs>Catalog.Partners</catalogs>
   <catalogs>Catalog.PartnerSegments</catalogs>
   <catalogs>Catalog.PaymentSchedules</catalogs>
+  <catalogs>Catalog.PaymentTerminals</catalogs>
   <catalogs>Catalog.PaymentTypes</catalogs>
   <catalogs>Catalog.PriceKeys</catalogs>
   <catalogs>Catalog.PriceTypes</catalogs>
   <catalogs>Catalog.PrintTemplates</catalogs>
+  <catalogs>Catalog.ReportOptions</catalogs>
+  <catalogs>Catalog.RetailCustomers</catalogs>
   <catalogs>Catalog.SerialLotNumbers</catalogs>
   <catalogs>Catalog.SpecialOfferRules</catalogs>
   <catalogs>Catalog.SpecialOffers</catalogs>
@@ -508,18 +516,10 @@
   <catalogs>Catalog.Taxes</catalogs>
   <catalogs>Catalog.TaxRates</catalogs>
   <catalogs>Catalog.Units</catalogs>
+  <catalogs>Catalog.UnitsOfMeasurement</catalogs>
   <catalogs>Catalog.UserGroups</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
-  <catalogs>Catalog.ReportOptions</catalogs>
-  <catalogs>Catalog.UnitsOfMeasurement</catalogs>
-  <catalogs>Catalog.PaymentTerminals</catalogs>
-  <catalogs>Catalog.BankTerms</catalogs>
-  <catalogs>Catalog.RetailCustomers</catalogs>
-  <catalogs>Catalog.Hardware</catalogs>
-  <catalogs>Catalog.CashStatementStatuses</catalogs>
-  <catalogs>Catalog.DataBaseStatus</catalogs>
-  <catalogs>Catalog.DataMappingItems</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>

@@ -52,7 +52,7 @@ Procedure CurrencyOnChange(Object, Form, Module, Item = Undefined, Settings = Un
 		QuestionStructure.Insert("CurrentCurrency", Form.Currency);
 		QuestionStructure.Insert("AccountInfo", Settings.AccountInfo);
 		QuestionStructure.Insert("ProcedureName", "CurrencyOnChangeContinue");
-		QuestionStructure.Insert("QuestionText", StrTemplate(R()/R().QuestionToUser_006));
+		QuestionStructure.Insert("QuestionText", R().QuestionToUser_006);
 		QuestionStructure.Insert("Action", "Currency");
 		
 		Settings.Questions.Add(QuestionStructure);
@@ -432,7 +432,6 @@ Procedure CompanyOnChange(Object, Form, Module, Item = Undefined, Settings = Und
 	CurrentValuesStructure = CreateCurrentValuesStructure(Object, Settings.ObjectAttributes, Settings.FormAttributes);
     FillPropertyValues(CurrentValuesStructure, Form, Settings.FormAttributes);
 	Settings.Insert("CurrentValuesStructure"	, CurrentValuesStructure);
-    
     
     If CurrentValuesStructure.Property("Account") Or CurrentValuesStructure.Property("CashAccount") Then
 	    DefaultCustomParameters = New Structure("Company", Object.Company);
@@ -1685,7 +1684,7 @@ Procedure ItemListCalculateRowAmounts(Object, Form, CurrentData, Module = Undefi
 	Settings.CalculateSettings = 
 	CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
 	
-	ItemListCalculateRowsAmounts(Object, Form, Settings, ,AddInfo);
+	ItemListCalculateRowsAmounts(Object, Form, Settings, , AddInfo);
 EndProcedure
 
 Procedure ItemListCalculateRowsAmounts(Object, Form, Settings, Item = Undefined, AddInfo = Undefined) Export

@@ -108,7 +108,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region CreatePhysicalCount
 Procedure CreatePhysicalCount(ObjectRef) Export
 	CountDocsToCreate = 0;

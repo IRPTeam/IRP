@@ -1,3 +1,32 @@
+Procedure BeforeWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+	
+	If ThisObject.Kind <> Enums.AgreementKinds.Regular Then
+		ThisObject.PriceType = Catalogs.PriceTypes.EmptyRef();
+		ThisObject.PriceIncludeTax = False;
+		ThisObject.DaysBeforeDelivery = 0;
+		ThisObject.Store = Catalogs.Stores.EmptyRef();
+	EndIf;
+	
+	If ThisObject.ApArPostingDetail <> Enums.ApArPostingDetail.ByStandardAgreement Then
+		ThisObject.StandardAgreement = Catalogs.Agreements.EmptyRef();
+	EndIf;
+EndProcedure
+
+Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+EndProcedure
+
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") Then
 		FillPropertyValues(ThisObject, FillingData);
@@ -56,34 +85,5 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		If Index <> Undefined Then
 			CheckedAttributes.Delete(Index);
 		EndIf;
-	EndIf;
-EndProcedure
-
-Procedure BeforeWrite(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;
-	
-	If ThisObject.Kind <> Enums.AgreementKinds.Regular Then
-		ThisObject.PriceType = Catalogs.PriceTypes.EmptyRef();
-		ThisObject.PriceIncludeTax = False;
-		ThisObject.DaysBeforeDelivery = 0;
-		ThisObject.Store = Catalogs.Stores.EmptyRef();
-	EndIf;
-	
-	If ThisObject.ApArPostingDetail <> Enums.ApArPostingDetail.ByStandardAgreement Then
-		ThisObject.StandardAgreement = Catalogs.Agreements.EmptyRef();
-	EndIf;
-EndProcedure
-
-Procedure OnWrite(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;	
-EndProcedure
-
-Procedure BeforeDelete(Cancel)
-	If DataExchange.Load Then
-		Return;
 	EndIf;
 EndProcedure

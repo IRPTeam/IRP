@@ -142,7 +142,6 @@ Procedure ShowStatus()
 	EndIf;
 EndProcedure
 
-
 &AtServer
 Procedure WriteReg(Status)
 	If Not ValueIsFilled(Item) OR

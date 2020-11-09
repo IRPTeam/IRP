@@ -109,3 +109,38 @@ EndProcedure
 Procedure UpdateFooter()
 	SelectedCount = SerialLotNumbers.Total("Quantity");
 EndProcedure
+
+&AtClient
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocumentsClient.SearchByBarcode(Barcode, ThisObject, ThisObject, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
+	If AdditionalParameters.FoundedItems.Count() Then
+		ScannedInfo = AdditionalParameters.FoundedItems[0];
+		Barcode = AdditionalParameters.Barcodes[0];
+		If Not ValueIsFilled(ScannedInfo.SerialLotNumber) Then
+			CalculateStatus(StrTemplate(R().InfoMessage_017, AdditionalParameters.Barcodes[0]));
+		ElsIf Not ScannedInfo.ItemKey.EmptyRef() And Not ScannedInfo.ItemKey = ItemKey Then
+			CalculateStatus(StrTemplate(R().InfoMessage_016, Barcode, ScannedInfo.ItemKey));
+		ElsIf Not ScannedInfo.Item.EmptyRef() And Not ScannedInfo.Item = Item Then
+			CalculateStatus(StrTemplate(R().InfoMessage_016, Barcode, ScannedInfo.Item));	
+		ElsIf Not ScannedInfo.ItemType.EmptyRef() And Not ScannedInfo.ItemType = ItemType Then
+			CalculateStatus(StrTemplate(R().InfoMessage_016, Barcode, ScannedInfo.ItemType));	
+		EndIf;
+	Else
+		CalculateStatus(StrTemplate(R().InfoMessage_015, AdditionalParameters.Barcodes[0]));
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure CalculateStatus(SetStatus = Undefined)
+	
+	If IsBlankString(SetStatus) Then
+		
+	Else
+		SerialLotNumberStatus = SetStatus;
+	EndIf;
+	
+EndProcedure

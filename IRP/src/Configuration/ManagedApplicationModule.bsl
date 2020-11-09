@@ -50,4 +50,3 @@ Procedure BeforeStart(Cancel)
 	globalEquipments.Insert("ConnectionSettings" , New Array);
 	
 EndProcedure
-

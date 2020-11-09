@@ -6,7 +6,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	CurrenciesServer.UpdateRatePresentation(Object);
 EndProcedure
 
-
 #Region ExternalCommands
 
 &AtClient

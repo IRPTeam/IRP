@@ -1,10 +1,4 @@
 
-Procedure Filling(FillingData, FillingText, StandardProcessing)
-	If TypeOf(FillingData) = Type("Structure") Then
-		FillPropertyValues(ThisObject, FillingData);
-	EndIf;
-EndProcedure
-
 Procedure BeforeWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
@@ -20,5 +14,11 @@ EndProcedure
 Procedure BeforeDelete(Cancel)
 	If DataExchange.Load Then
 		Return;
+	EndIf;
+EndProcedure
+
+Procedure Filling(FillingData, FillingText, StandardProcessing)
+	If TypeOf(FillingData) = Type("Structure") Then
+		FillPropertyValues(ThisObject, FillingData);
 	EndIf;
 EndProcedure

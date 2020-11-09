@@ -6,6 +6,18 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("Amount");
 EndProcedure
 
+Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+EndProcedure
+
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	DocumentsServer.CheckPaymentList(ThisObject, Cancel, CheckedAttributes);
 	DocumentsServer.FillCheckBankCashDocuments(ThisObject, CheckedAttributes);
@@ -50,16 +62,4 @@ Procedure Filling_BasedOn(FillingData)
 		FillPropertyValues(NewRow, Row);
 	EndDo;
 	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("Amount");
-EndProcedure
-
-Procedure OnWrite(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;	
-EndProcedure
-
-Procedure BeforeDelete(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;
 EndProcedure

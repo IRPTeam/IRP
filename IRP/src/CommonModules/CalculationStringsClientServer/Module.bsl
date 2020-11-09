@@ -230,7 +230,7 @@ Procedure CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo = Undefined
 			
 			If Actions.Property("CalculateNetAmountAsTotalAmountMinusTaxAmount") And IsCalculatedRow Then
 				CalculateNetAmount_PriceIncludeTax(Object, ItemRow, AddInfo);
-			EndIF;
+			EndIf;
 			
 			If Actions.Property("CalculateNetAmount") And IsCalculatedRow Then
 				CalculateNetAmount_PriceIncludeTax(Object, ItemRow, AddInfo);
@@ -450,18 +450,18 @@ Function GetTaxCalculationParameters(Object, ItemRow, ItemOfTaxInfo, PriceInclud
 	ElsIf Object.Property("PaymentList") Then
 		Table = Object.PaymentList;
 	Else
-		Raise "Not supported table";
+		Raise R().I_5;
 	EndIf;
 	
 	ArrayOfItemRows = Table.FindRows(New Structure("Key", ItemRow.Key));
 	If ArrayOfItemRows.Count() <> 1 Then
-		Raise StrTemplate("Find %1 rows in table by key %2", ArrayOfItemRows.Count(), ItemRow.Key);
+		Raise StrTemplate(R().I_4, ArrayOfItemRows.Count(), ItemRow.Key);
 	EndIf;
 	
 	ItemRow = ArrayOfItemRows[0];
 	TaxParameters.Insert("TotalAmount", ItemRow.TotalAmount);
-	TaxParameters.Insert("NetAmount" ,ItemRow.NetAmount);
-	TaxParameters.Insert("Ref" ,Object.Ref);
+	TaxParameters.Insert("NetAmount", ItemRow.NetAmount);
+	TaxParameters.Insert("Ref", Object.Ref);
 		
 	TaxParameters.Insert("Reverse", Reverse);
 	Return TaxParameters;
@@ -679,10 +679,11 @@ EndProcedure
 
 Procedure RecalculateAppliedOffers_ForRow(Object, AddInfo = Undefined) Export
 	For Each Row In Object.SpecialOffers Do
-		If ValueIsFilled(Row.Offer)
+		isOfferRow = ValueIsFilled(Row.Offer)
 			And OffersServer.IsOfferForRow(Row.Offer)
 			And ValueIsFilled(Row.Percent)
-			And ValueIsFilled(Row.Key) Then
+			And ValueIsFilled(Row.Key);
+		If isOfferRow Then
 			
 			ArrayOfOffers = New Array();
 			ArrayOfOffers.Add(Row.Offer);
@@ -791,7 +792,7 @@ Function GetPriceDateByRefAndDate(Ref, Date) Export
 	Else
 		Return Date;
 	EndIf;
-Endfunction
+EndFunction
 
 Function UpdateBarcode(Object, ItemRow, AddInfo = Undefined)
 	ReturnValue = "";

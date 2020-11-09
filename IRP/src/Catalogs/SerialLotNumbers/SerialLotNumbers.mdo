@@ -118,7 +118,7 @@
     <typeField>Catalog.SerialLotNumbers.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.SerialLotNumbers.TabularSection.AddAttributes.Attribute.Value</valueField>
   </characteristics>
-  <createOnInput>DontUse</createOnInput>
+  <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
@@ -264,4 +264,18 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <commands uuid="d7c89c29-d0e2-449b-b39d-318bb40d4dc1">
+    <name>OpenSerialLotNumbers</name>
+    <synonym>
+      <key>en</key>
+      <value>Serial lot numbers</value>
+    </synonym>
+    <group>FormNavigationPanelGoTo</group>
+    <commandParameterType>
+      <types>CatalogRef.Items</types>
+      <types>CatalogRef.ItemTypes</types>
+      <types>CatalogRef.ItemKeys</types>
+    </commandParameterType>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Catalog>

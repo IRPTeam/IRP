@@ -73,6 +73,7 @@ Procedure SetQueryComplexFilters(Query, QueryParameters) Export
 		EndIf;
 	EndDo;
 	Query.Text = Query.Text + ?(ParametersArray.Count(), Chars.LF + "	AND ", "") + StrConcat(ParametersArray, Chars.LF + "	AND ");
+	Query.Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text);
 EndProcedure
 
 Procedure SetListComplexFilters(List, QueryParameters) Export

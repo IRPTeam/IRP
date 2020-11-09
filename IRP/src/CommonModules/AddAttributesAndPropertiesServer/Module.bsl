@@ -911,5 +911,4 @@ Procedure EventSubscriptionOnCopy(Source, CopiedObject) Export
 	EndIf;
 EndProcedure
 
-
 #EndRegion

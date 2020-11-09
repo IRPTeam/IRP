@@ -16,6 +16,18 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
+	OwnerSelect = "Manual";	
+EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	OwnerSelectChange();
+EndProcedure
+
+
+&AtClient
+Procedure OwnerSelectOnChange(Item)
+	OwnerSelectChange();
 EndProcedure
 
 #EndRegion
@@ -30,6 +42,15 @@ EndProcedure
 &AtServer
 Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region Private
+
+&AtClient
+Procedure OwnerSelectChange()
+	Items.Owner.Visible = OwnerSelect = "Manual";
 EndProcedure
 
 #EndRegion

@@ -8,12 +8,15 @@ Function Strings(Lang) Export
 	Strings.Insert("Eq_003", NStr("en = 'There are no errors.'", Lang));
 	Strings.Insert("Eq_004", NStr("en = 'Scanner is connected.'", Lang));
 	Strings.Insert("Eq_005", NStr("en = 'Error. Scanner not connected.'", Lang));
+	Strings.Insert("Eq_006", NStr("en = 'Installed on current PC.'", Lang));
 	
 	Strings.Insert("EqError_001", NStr("en = 'The device is connected. The device must be disabled before the operation.'", Lang));
 
 	Strings.Insert("EqError_002", NStr("en = 'The device driver could not be downloaded.
 											  |Check that the driver is correctly installed and registered in the system.'", Lang));
-
+	
+	Strings.Insert("EqError_003", NStr("en = 'It has to be minimum one dot at Add ID.'", Lang));
+	Strings.Insert("EqError_004", NStr("en = 'Before install driver - it has to be loaded.'", Lang));
 	#EndRegion
 	
 	#Region POS
@@ -300,6 +303,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_086", NStr("en = 'Amount : %1 not match Payment term amount: %2'", Lang));
 	
 	Strings.Insert("Error_087", NStr("en = 'Parent can not be empty'", Lang));
+	Strings.Insert("Error_088", NStr("en = 'Basis unit has to be filled, if item filter used.'", Lang));
 	
 	#EndRegion
 	
@@ -335,6 +339,17 @@ Function Strings(Lang) Export
 	
 	// %1 - 12
 	Strings.Insert("InfoMessage_014", NStr("en = 'Current location #%1 was scanned and closed before. Please scan next location.'", Lang));
+	
+	// %1 - 123456
+	Strings.Insert("InfoMessage_015", NStr("en = 'Barcode %1 was not found. Create new new serial with this barcode?'", Lang));
+
+	// %1 - 123456
+	// %2 - Some item
+	Strings.Insert("InfoMessage_016", NStr("en = 'Scanned barcode %1 is using for another items %2'", Lang));
+	
+	// %1 - 123456
+	Strings.Insert("InfoMessage_017", NStr("en = 'Scanned barcode %1 is not using set for serial numbers'", Lang));
+	
 	#EndRegion
 	
 	#Region QuestionToUser
@@ -380,7 +395,8 @@ Function Strings(Lang) Export
 	Strings.Insert("I_2", NStr("en = 'Click to enter description'", Lang));
 	
 	Strings.Insert("I_3", NStr("en = 'Fill out the document'", Lang));
-	
+	Strings.Insert("I_4", NStr("en = 'Find %1 rows in table by key %2'", Lang));
+	Strings.Insert("I_5", NStr("en = 'Not supported table'", Lang));
 	#EndRegion
 	
 	#Region Exceptions

@@ -39,7 +39,27 @@ Scenario: _4000200 preparation
 			When add Additional Functionality extension
 	When create Workstation				
 
-Scenario: _4000201 hardware
+
+Scenario: _4000201 driver install
+	Given I open hyperlink "e1cib/list/Catalog.EquipmentDrivers"
+	And I click the button named "FormCreate"
+	* Check info message if driver was not loaded before
+		And I input "Test.driver" text in "AddIn ID" field
+		And I click "Install" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Given Recent TestClient message contains "Before install driver - it has to be loaded." string by template
+	* Instal driver
+		And I select external file "C:\AddComponents\1Native"
+		And I click "Add file" button	
+		And I click the button named "FormWrite"	
+		And I click "Install" button
+		And I close all client application windows
+		
+		
+
+				
+Scenario: _4000202 hardware
 	Given I open hyperlink "e1cib/list/Catalog.Hardware"
 	And I click the button named "FormCreate"
 	And I input "Test input device" text in "Description" field
@@ -52,31 +72,31 @@ Scenario: _4000201 hardware
 	And I click the button named "FormWrite"
 	And in the table "ConnectParameters" I click "Load settings" button
 	And "ConnectParameters" table contains lines
-		| '#'  | 'Name'                | 'Value' |
-		| '1'  | 'COMEncoding'         | 'UTF-8' |
-		| '2'  | 'DataBits'            | '8'     |
-		| '3'  | 'GSSymbolKey'         | '-1'    |
-		| '4'  | 'IgnoreKeyboardState' | 'Yes'   |
-		| '5'  | 'OutputDataType'      | ''      |
-		| '6'  | 'Port'                | '3'     |
-		| '7'  | 'Prefix'              | '-1'    |
-		| '8'  | 'Speed'               | '9 600' |
-		| '9'  | 'StopBit'             | ''      |
-		| '10' | 'Suffix'              | '13'    |
-		| '11' | 'Timeout'             | '75'    |
-		| '12' | 'TimeoutCOM'          | '5'     |
-		| '13' | 'COMEncoding'         | 'UTF-8' |
-		| '14' | 'DataBits'            | '8'     |
-		| '15' | 'GSSymbolKey'         | '-1'    |
-		| '16' | 'IgnoreKeyboardState' | 'Yes'   |
-		| '17' | 'OutputDataType'      | ''      |
-		| '18' | 'Port'                | '3'     |
-		| '19' | 'Prefix'              | '-1'    |
-		| '20' | 'Speed'               | '9 600' |
-		| '21' | 'StopBit'             | ''      |
-		| '22' | 'Suffix'              | '13'    |
-		| '23' | 'Timeout'             | '75'    |
-		| '24' | 'TimeoutCOM'          | '5'     |
+		| 'Name'                | 'Value' |
+		| 'COMEncoding'         | 'UTF-8' |
+		| 'DataBits'            | '8'     |
+		| 'GSSymbolKey'         | '-1'    |
+		| 'IgnoreKeyboardState' | 'Yes'   |
+		| 'OutputDataType'      | ''      |
+		| 'Port'                | '3'     |
+		| 'Prefix'              | '-1'    |
+		| 'Speed'               | '9 600' |
+		| 'StopBit'             | ''      |
+		| 'Suffix'              | '13'    |
+		| 'Timeout'             | '75'    |
+		| 'TimeoutCOM'          | '5'     |
+		| 'COMEncoding'         | 'UTF-8' |
+		| 'DataBits'            | '8'     |
+		| 'GSSymbolKey'         | '-1'    |
+		| 'IgnoreKeyboardState' | 'Yes'   |
+		| 'OutputDataType'      | ''      |
+		| 'Port'                | '3'     |
+		| 'Prefix'              | '-1'    |
+		| 'Speed'               | '9 600' |
+		| 'StopBit'             | ''      |
+		| 'Suffix'              | '13'    |
+		| 'Timeout'             | '75'    |
+		| 'TimeoutCOM'          | '5'     |
 	And I click the button named "FormWriteAndClose"
 
 	

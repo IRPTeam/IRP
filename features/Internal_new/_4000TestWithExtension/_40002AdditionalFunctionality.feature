@@ -104,7 +104,7 @@ Scenario: _4000202 hardware
 	And I click Select button of "Driver" field
 	And I go to line in "List" table
 		| 'Description' |
-		| '1Native'     |
+		| 'Inputdevice'     |
 	And I select current line in "List" table
 	And I click "Save" button
 	And I click the button named "FormWriteAndClose"

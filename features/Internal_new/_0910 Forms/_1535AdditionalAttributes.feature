@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Forms
+
+@AdditionalAttributes
 
 Feature: additional attributes check
 

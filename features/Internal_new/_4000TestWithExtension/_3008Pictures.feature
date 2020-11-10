@@ -347,15 +347,17 @@ Scenario: _300115 check removal of pictures from Item
         | 'dressblue.jpg' |
     And I select current line in "List" table
     And I save the value of the field named "FileID" as "$$FileIDDressBlue$$"
+    And Delay "5"
     And I display "$$FileIDDressBlue$$" variable value
     And I close current window
     * Open Item list form
         Given I open hyperlink "e1cib/list/Catalog.Items"
         And I go to line in "List" table
             | 'Description'  |
-            | 'Dress'     |
+            | 'Dress'        |
         And I select current line in "List" table
     * Delete picture from Item
+        And Delay "5"
         And I input "$$FileIDDressBlue$$" variable value in "getCurrentSlideId" field   	
         And I click "remove_picture" button
         And I close all client application windows

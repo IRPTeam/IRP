@@ -55,6 +55,7 @@ Scenario: _4000100 preparation
 
 
 Scenario: _4000105 check add attributes from extensions
+	Then I connect launched Test client "Этот клиент"
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.Currencies"
 	And I click the button named "FormCreate"

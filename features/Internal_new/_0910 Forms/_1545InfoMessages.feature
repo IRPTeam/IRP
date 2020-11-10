@@ -1,7 +1,8 @@
 ﻿#language: en
 @tree
 @Positive
-@Forms
+
+@InfoMessages
 
 Feature: information messages
 

@@ -1187,7 +1187,221 @@ Scenario: _092009 check choice form Serial Lot number
 			And I close "Select serial lot numbers *" window
 		And I close all client application windows
 
-Scenario: _092010 uncheck checkbox Use serial lot number in the Item type
+
+Scenario: _092011 check Serial lot number tab in the Item/item key
+	* Select Item
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'     |
+		And I select current line in "List" table
+	* Check Serial lot number tab
+		And In this window I click command interface button "Serial lot numbers"
+		And "List" table contains lines
+			| 'Serial number'  | 'Owner'     |
+			| '10'             | ''          |
+			| '07'             | 'Clothes'   |
+			| '05'             | 'Dress'     |
+			| '11'             | 'Clothes'   |
+		And "List" table does not contain lines
+			| 'Serial number'  | 'Owner'     |
+			| '08'             | 'Shoes'     |
+			| '06'             | 'Boots'     |
+			| '89999'          | 'M/White'   |
+			| '99098809009910' | '38/Yellow' |
+	* Select item key without own Serial lot number
+		And In this window I click command interface button "Item keys"
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'XS/Blue'  |
+		And I select current line in "List" table
+		And In this window I click command interface button "Serial lot numbers"
+		And "List" table contains lines
+			| 'Serial number'  | 'Owner'     |
+			| '10'             | ''          |
+			| '07'             | 'Clothes'   |
+			| '05'             | 'Dress'     |
+			| '11'             | 'Clothes'   |
+		And "List" table does not contain lines
+			| 'Serial number'  | 'Owner'     |
+			| '08'             | 'Shoes'     |
+			| '06'             | 'Boots'     |
+			| '89999'          | 'M/White'   |
+			| '99098809009910' | '38/Yellow' |
+		And I close current window
+	* Select item key with own Serial lot number
+		And In this window I click command interface button "Item keys"
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'M/White'  |
+		And I select current line in "List" table
+		And In this window I click command interface button "Serial lot numbers"
+		And "List" table contains lines
+			| 'Serial number'  | 'Owner'     |
+			| '10'             | ''          |
+			| '07'             | 'Clothes'   |
+			| '05'             | 'Dress'     |
+			| '11'             | 'Clothes'   |
+			| '89999'		   | 'M/White'   |
+		And "List" table does not contain lines
+			| 'Serial number'  | 'Owner'     |
+			| '08'             | 'Shoes'     |
+			| '06'             | 'Boots'     |
+			| '99098809009910' | '38/Yellow' |
+		And I close all client application windows
+		
+Scenario: _092012 check Serial lot number tab in the Item type
+	* Select Item type with own Serial lot number
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Clothes'     |
+		And I select current line in "List" table
+	* Check Serial lot number tab 
+		And In this window I click command interface button "Serial lot numbers"
+		And "List" table contains lines
+			| 'Serial number'  | 'Owner'     |
+			| '10'             | ''          |
+			| '07'             | 'Clothes'   |
+			| '11'             | 'Clothes'   |
+		And "List" table does not contain lines
+			| 'Serial number'  | 'Owner'     |
+			| '08'             | 'Shoes'     |
+			| '06'             | 'Boots'     |
+			| '89999'          | 'M/White'   |
+			| '99098809009910' | '38/Yellow' |
+			| '05'             | 'Dress'     |
+	* Select Item type without own Serial lot number
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Bags'     |
+		And I select current line in "List" table
+	* Check Serial lot number tab 
+		And In this window I click command interface button "Serial lot numbers"
+		And "List" table contains lines
+			| 'Serial number'  | 'Owner'     |
+			| '10'             | ''          |
+		And "List" table does not contain lines
+			| 'Serial number'  | 'Owner'     |
+			| '08'             | 'Shoes'     |
+			| '06'             | 'Boots'     |
+			| '89999'          | 'M/White'   |
+			| '99098809009910' | '38/Yellow' |
+			| '05'             | 'Dress'     |
+			| '07'             | 'Clothes'   |
+			| '11'             | 'Clothes'   |
+	And I close all client application windows
+	
+		
+Scenario: _092015 product scanning with and without serial lot number
+	* Create barcodes with serial lot number
+		Given I open hyperlink "e1cib/list/InformationRegister.Barcodes"
+		If "List" table does not contain lines Then
+				| 'Barcode'       | 'Item key' | 'Item serial/lot number' | 'Unit' |
+				| '590876909358'  | 'M/White'  | '89999'                  | 'pcs'  |
+				| '590876909359'  | '38/Yellow'| '99098809009910'         | 'pcs'  |
+			And I click the button named "FormCreate"
+			And I click Select button of "Item key" field
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'M/White'  |
+			And I select current line in "List" table
+			And I input "590876909358" text in "Barcode" field
+			And I input "590876909358" text in "Presentation" field
+			And I click Select button of "Item serial/lot number" field
+			And I go to line in "List" table
+				| 'Owner'   | 'Serial number' |
+				| 'M/White' | '89999'         |
+			And I select current line in "List" table
+			And I click "Save and close" button
+			And I click the button named "FormCreate"
+			And I click Select button of "Item key" field
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Trousers' | '38/Yellow'  |
+			And I select current line in "List" table
+			And I input "590876909359" text in "Barcode" field
+			And I input "590876909359" text in "Presentation" field
+			And I click Select button of "Item serial/lot number" field
+			And I go to line in "List" table
+				| 'Owner'   | 'Serial number' |
+				| '38/Yellow' | '99098809009910'         |
+			And I select current line in "List" table
+			And I click "Save and close" button
+			And I close current window
+	* Check product scanning with serial lot number
+		And In the command interface I select "Retail" "Point of sale"
+		And I click "Search by barcode (F7)" button
+		And I input "590876909358" text in "InputFld" field
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' |
+			| 'Dress' | 'M/White'  | '89999'         | '1,000'    |
+		And "SerialLotNumbersTree" table became equal
+			| 'Item'  | 'Item key' | 'Serial lot number' | 'Quantity' | 'Item key quantity' |
+			| 'Dress' | 'M/White'  | ''                  | '1,000'    | '1,000'             |
+			| ''      | ''         | '89999'             | '1,000'    | ''                  |
+		And I click "Search by barcode (F7)" button
+		And I input "590876909358" text in "InputFld" field
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' |
+			| 'Dress' | 'M/White'  | '89999; 89999'  | '2,000'    |
+		And "SerialLotNumbersTree" table became equal
+			| 'Item'  | 'Item key' | 'Serial lot number' | 'Quantity' | 'Item key quantity' |
+			| 'Dress' | 'M/White'  | ''                  | '2,000'    | '2,000'             |
+			| ''      | ''         | '89999'             | '1,000'    | ''                  |		
+			| ''      | ''         | '89999'             | '1,000'    | ''                  |	
+	* Check product scanning without own serial lot number
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in "InputFld" field
+		And I click "OK" button
+		Then "Select serial lot numbers" window is opened
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+		And I activate "Owner" field in "List" table
+		And I activate "Serial number" field in "List" table
+		And I go to line in "List" table
+				| 'Serial number' |
+				| '10'         |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price' | 'Offers amount' | 'Total amount' |
+			| 'Dress' | 'M/White'  | '89999; 89999'  | '2,000'    | ''      | ''              | ''             |
+			| 'Dress' | 'XS/Blue'  | '10'            | '1,000'    | ''      | ''              | ''             |
+		And "SerialLotNumbersTree" table became equal
+			| 'Item'  | 'Item key' | 'Serial lot number' | 'Quantity' | 'Item key quantity' |
+			| 'Dress' | 'M/White'  | ''                  | '2,000'    | '2,000'             |
+			| ''      | ''         | '89999'             | '1,000'    | ''                  |
+			| ''      | ''         | '89999'             | '1,000'    | ''                  |
+			| 'Dress' | 'XS/Blue'  | ''                  | '1,000'    | '1,000'             |
+			| ''      | ''         | '10'                | '1,000'    | ''                  |
+		And I close all client application windows
+		
+		
+				
+Scenario: _092025 product scanning with serial lot number in the document without serial column
+	* Open Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And in the table "ItemList" I click "SearchByBarcode" button
+	* Product scanning with serial lot number
+		Then "Enter a barcode" window is opened
+		And I input "590876909359" text in "InputFld" field
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I close all client application windows
+		
+		
+			
+Scenario: _092090 uncheck checkbox Use serial lot number in the Item type
 	Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 	* Check box Use serial lot number
 		And I go to line in "List" table

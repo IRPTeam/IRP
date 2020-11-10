@@ -38,6 +38,7 @@ Scenario: _200000 preparation (user settings)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Companies objects (partners company)
+		When Create catalog Companies objects (own Second company)
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects

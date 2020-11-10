@@ -27,6 +27,7 @@ Scenario: _200000 preparation (user settings)
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
 		When Create catalog Items objects
+		When Create catalog CashAccounts objects
 		When Create catalog PriceTypes objects
 		When Create catalog Specifications objects
 		When Create chart of characteristic types AddAttributeAndProperty objects
@@ -49,6 +50,7 @@ Scenario: _200000 preparation (user settings)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When Create catalog Partners objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then

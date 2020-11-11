@@ -13,9 +13,6 @@ Background:
 
 
 Scenario: _4000100 preparation
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
@@ -45,12 +42,12 @@ Scenario: _4000100 preparation
 			And I select current line in "List" table
 			And I click "Save and close" button
 		And I close all client application windows
-	* Add test extension
-		Given I open hyperlink "e1cib/list/Catalog.Extensions"
-		If "List" table does not contain lines Then
-				| "Description" |
-				| "TestExtension" |
-			When add test extension
+	# * Add test extension
+	# 	Given I open hyperlink "e1cib/list/Catalog.Extensions"
+	# 	If "List" table does not contain lines Then
+	# 			| "Description" |
+	# 			| "TestExtension" |
+	# 		When add test extension
 						
 
 	

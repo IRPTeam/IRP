@@ -1317,6 +1317,11 @@ Scenario: _0154140 check filling in retail customer from the POS
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		Then the form attribute named "RetailCustomer" became equal to "Olga Olhovska"
+		And I delete "$$NumberRetailSalesReceipt0154140$$" variable
+		And I delete "$$RetailSalesReceipt0154140$$" variable
+		And I save the value of "Number" field as "$$NumberRetailSalesReceipt0154140$$"
+		And I click the button named "FormPost"
+		And I save the window as "$$RetailSalesReceipt0154140$$"
 	And I close all client application windows	
 
 Scenario:  _0154141 manual price adjustment in the POS
@@ -2292,7 +2297,6 @@ Scenario: _0154155 check filling in and re-filling Retail sales receipt
 			| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | 'Basic Price Types' | 'pcs'  | '106,78'     | '593,22'     | '700,00'       | 'Store 01' | 'Shop 01'       |
 			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | 'Basic Price Types' | 'pcs'  | '83,90'      | '466,10'     | '550,00'       | 'Store 01' | 'Shop 01'       |
 			| '520,00' | 'Dress'    | '18%' | 'XS/Blue'   | '1,000' | 'Basic Price Types' | 'pcs'  | '79,32'      | '440,68'     | '520,00'       | 'Store 01' | 'Shop 01'       |
-
 	* Check the line clearing in the tax tree when deleting a line from an order
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
@@ -2323,7 +2327,6 @@ Scenario: _0154155 check filling in and re-filling Retail sales receipt
 			| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '106,78'     | '593,22'     | '700,00'       | 'Store 01' | 'Shop 01'       |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '83,90'      | '466,10'     | '550,00'       | 'Store 01' | 'Shop 01'       |
 			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Store 01' | 'Shop 01'       |
-
 	* Check filling in the Price includes tax check boxes when re-selecting an agreement and check tax recalculation
 		* Re-select partner term for which Price includes tax is not ticked 
 			And I click Select button of "Partner term" field
@@ -2408,6 +2411,41 @@ Scenario: _0154155 check filling in and re-filling Retail sales receipt
 				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 770,00"
 				Then the form attribute named "ItemListTotalTaxAmount" became equal to "192,60"
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 962,60"
+		* Change price type
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' | 'Net amount' | 'Price'  | 'Price type'              | 'Q'     |
+				| 'Dress' | 'XS/Blue'  | '440,68'     | '440,68' | 'Basic Price without VAT' | '1,000' |
+			And I select current line in "ItemList" table
+			And I click choice button of "Price type" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'             |
+				| 'Basic Price without VAT' |
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Business unit' | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Shop 01'       | 'Basic Price Types'       | 'Shirt' | '38/Black' | 'No'                 | '2,000' | 'pcs'  | ''           | '350,00' | '0%'  | '700,00'     | '700,00'       | 'Store 01' |
+				| 'Shop 01'       | 'Basic Price Types'       | 'Dress' | 'L/Green'  | 'No'                 | '1,000' | 'pcs'  | '99,00'      | '550,00' | '18%' | '550,00'     | '649,00'       | 'Store 01' |
+				| 'Shop 01'       | 'Basic Price without VAT' | 'Dress' | 'XS/Blue'  | 'No'                 | '1,000' | 'pcs'  | '79,32'      | '440,68' | '18%' | '440,68'     | '520,00'       | 'Store 01' |
+		* Change unit and check price re-calculation
+			And I go to line in "ItemList" table
+				| 'Business unit' | 'Dont calculate row' | 'Item'  | 'Item key' | 'Net amount' | 'Price'  | 'Price type'        | 'Q'     | 'Store'    | 'Tax amount' | 'Total amount' | 'Unit' | 'VAT' |
+				| 'Shop 01'       | 'No'                 | 'Dress' | 'L/Green'  | '550,00'     | '550,00' | 'Basic Price Types' | '1,000' | 'Store 01' | '99,00'      | '649,00'       | 'pcs'  | '18%' |
+			And I select current line in "ItemList" table
+			And I click choice button of "Unit" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'box (8 pcs)' |
+			And I select current line in "List" table
+			And "ItemList" table contains lines
+				| 'Business unit' | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'     | 'Unit'        | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Shop 01'       | 'Basic Price Types'       | 'Shirt' | '38/Black' | 'No'                 | '2,000' | 'pcs'         | ''           | '350,00'   | '0%'  | '700,00'     | '700,00'       | 'Store 01' |
+				| 'Shop 01'       | 'Basic Price Types'       | 'Dress' | 'L/Green'  | 'No'                 | '1,000' | 'box (8 pcs)' | '792,00'     | '4 400,00' | '18%' | '4 400,00'   | '5 192,00'     | 'Store 01' |
+				| 'Shop 01'       | 'Basic Price without VAT' | 'Dress' | 'XS/Blue'  | 'No'                 | '1,000' | 'pcs'         | '79,32'      | '440,68'   | '18%' | '440,68'     | '520,00'       | 'Store 01' |
+			And I close all client application windows
+			
+						
+							
 
 Scenario: _0154156 check Retail sales receipt when changing date
 	* Open the Retail sales receipt creation form
@@ -3121,6 +3159,45 @@ Scenario: _0154175 check change amount in POS
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 050,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		And I close all client application windows
+
+Scenario: _0154190 check filling in Retail sales receipt when copying
+	* Select Retail sales receipt
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberRetailSalesReceipt0154140$$'      |
+	* Copy Retail sales receipt and check filling in
+		And in the table "List" I click the button named "ListContextMenuCopy"
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "RetailCustomer" became equal to "Olga Olhovska"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table became equal
+			| 'Business unit' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' |
+			| 'Shop 01'       | 'Basic Price Types' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '1,000' | 'pcs'  | '79,32'      | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''             | ''       |
+		And "Payments" table became equal
+			| 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Account'      | 'Percent' |
+			| '520,00' | ''           | 'Cash'         | ''                 | ''          | 'Cash desk №2' | ''        |
+		And "ObjectCurrencies" table became equal
+			| 'Movement type'      | 'Type'         | 'Currency from' | 'Currency' | 'Rate presentation' | 'Multiplicity' | 'Amount' |
+			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1'            | '520'    |
+			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '520'    |
+			| 'Reporting currency' | 'Reporting'    | 'TRY'           | 'USD'      | '5,8400'            | '1'            | '89,04'  |
+		Then the form attribute named "BusinessUnit" became equal to "Shop 01"
+		Then the form attribute named "Author" became equal to "en description is empty"
+		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+		Then the form attribute named "Manager" became equal to ""
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "440,68"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "79,32"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "520,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		And I close all client application windows
+		
+					
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

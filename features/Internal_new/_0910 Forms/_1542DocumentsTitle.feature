@@ -429,5 +429,30 @@ Scenario: _02020 check the display of the header of the collapsible group in Inc
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
+
+Scenario: _023121 check the display of the header of the collapsible group in Retail sales receipt
+	* Open list form Sales order
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	* Check the display of the header of the collapsible group
+		When check the display of the header of the collapsible group in sales, purchase and return documents
+		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP" text
+	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
+	When I Check the steps for Exception
+        |'And I click Select button of  "Partner" field'|
+	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+	And I close all client application windows
+
+Scenario: _023122 check the display of the header of the collapsible group in Retail return receipt
+	* Open list form Sales order
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	* Check the display of the header of the collapsible group
+		When check the display of the header of the collapsible group in sales, purchase and return documents
+		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP" text
+	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
+	When I Check the steps for Exception
+        |'And I click Select button of  "Partner" field'|
+	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+	And I close all client application windows
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session

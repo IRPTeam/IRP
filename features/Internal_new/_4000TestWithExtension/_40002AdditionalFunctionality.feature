@@ -107,7 +107,8 @@ Scenario: _4000202 hardware
 		| 'Description' |
 		| '1Native'     |
 	And I select current line in "List" table
-	And I click "Save" button	
+	And I click "Save" button
+	And I set checkbox "Enabled"		
 	And I click the button named "FormWriteAndClose"
 
 	

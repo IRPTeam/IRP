@@ -369,6 +369,7 @@ Scenario: _0154065 check item, item key and properties input by search in line i
 		| 'Item'        | 'Item key'  |
 		| 'Trousers'    | '36/Yellow' |
 
+
 	
 
 Scenario: _0154066 check partner, legal name, Partner term, company and store input by search in line in a document Sales order (in english)
@@ -665,6 +666,44 @@ Scenario: _0154078 check company, store input by search in line in a InventoryTr
 		Then the form attribute named "StoreSender" became equal to "Store 01"
 		Then the form attribute named "StoreReceiver" became equal to "Store 02"
 	And I close all client application windows
+
+Scenario: _0154079 check item and item key input by search in line in a document Retail sales receipt (in english)
+	And I close all client application windows
+	* Open a creation form Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+	* Item and item key input by search in line
+		And in the table "ItemList" I click "Add" button
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
+		| 'Item'     | 'Item key'  |
+		| 'Boots'    | '36/18SD' |
+		And I close all client application windows
+
+Scenario: _0154080 check partner, legal name, Partner term, company and store input by search in line in a document Retail sales receipt (in english)
+	And I close all client application windows
+	* Open a creation form Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+	* Partner input by search in line
+		And I select from "Partner" drop-down list by "fer" string
+	* Legal name input by search in line
+		And I select from "Legal name" drop-down list by "com" string
+	* Partner term input by search in line
+		And I select from "Partner term" drop-down list by "TRY" string
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Store input by search in line
+		And I select from the drop-down list named "Store" by "01" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
 
 
 
@@ -1218,6 +1257,46 @@ Scenario: _0154099 check partner and legal name (in english) input by search in 
 		| 'Description' |
 		| 'Company Kalipso'         |
 		And I close all client application windows
+
+Scenario: _01540105 check item and item key input by search in line in a document Retail return receipt (in english)
+	And I close all client application windows
+	* Open a creation form Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I click the button named "FormCreate"
+	* Item and item key input by search in line
+		And I click "Add" button
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
+		| 'Item'     | 'Item key'  |
+		| 'Boots'    | '36/18SD' |
+		And I close all client application windows
+
+Scenario: _01540106 check partner, legal name, Partner term, company and store input by search in line in a document Retail return receipt (in english)
+	And I close all client application windows
+	* Open a creation form Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I click the button named "FormCreate"
+	* Partner input by search in line
+		And I select from "Partner" drop-down list by "fer" string
+	* Legal name input by search in line
+		And I select from "Legal name" drop-down list by "com" string
+	* Partner term input by search in line
+		And I select from "Partner term" drop-down list by "TRY" string
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Store input by search in line
+		And I select from the drop-down list named "Store" by "01" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+
+
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

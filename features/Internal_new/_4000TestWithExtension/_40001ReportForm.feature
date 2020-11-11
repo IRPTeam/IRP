@@ -53,14 +53,6 @@ Scenario: _4000100 preparation
 			When add test extension
 						
 
-
-Scenario: _4000105 check add attributes from extensions
-	Then I connect launched Test client "Этот клиент"
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Catalog.Currencies"
-	And I click the button named "FormCreate"
-	And the field named "REP_Attribute1" exists on the form
-	And I close all client application windows
 	
 Scenario: _4000120 check reports option save
 	* Open test report	

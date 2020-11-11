@@ -2722,8 +2722,8 @@ Scenario: _0154155 check filling in and re-filling Retail sales receipt
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 962,60"
 		* Change price type
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Net amount' | 'Price'  | 'Price type'              | 'Q'     |
-				| 'Dress' | 'XS/Blue'  | '440,68'     | '440,68' | 'Basic Price without VAT' | '1,000' |
+				| 'Item'  | 'Item key' | 'Price'  | 'Price type'        | 'Q'     |
+				| 'Dress' | 'XS/Blue'  | '520,00' | 'Basic Price Types' | '1,000' |
 			And I select current line in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table

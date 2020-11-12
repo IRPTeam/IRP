@@ -2897,17 +2897,6 @@
 		</right>
 	</object>
 	<object>
-		<name>DataProcessor.QuantityCompare</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Report.DocumentRegistrationsReport</name>
 		<right>
 			<name>Use</name>

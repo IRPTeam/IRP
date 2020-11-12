@@ -5,9 +5,6 @@
 			<item>
 				<field>DocumentsTreeRef</field>
 			</item>
-			<item>
-				<field>DocumentsTreePresentation</field>
-			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">

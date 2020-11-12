@@ -273,9 +273,10 @@
     <group>FormNavigationPanelGoTo</group>
     <commandParameterType>
       <types>CatalogRef.Items</types>
-      <types>CatalogRef.ItemTypes</types>
       <types>CatalogRef.ItemKeys</types>
+      <types>CatalogRef.ItemTypes</types>
     </commandParameterType>
     <representation>Auto</representation>
+    <shortcut></shortcut>
   </commands>
 </mdclass:Catalog>

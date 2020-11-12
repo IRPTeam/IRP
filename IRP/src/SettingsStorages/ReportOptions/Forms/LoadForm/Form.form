@@ -30,8 +30,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>OptionsList.DefaultPicture</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>OptionsList.DefaultPicture</segments>
+            </paths>
           </dataPath>
           <titleLocation>None</titleLocation>
           <extendedTooltip>
@@ -575,20 +577,18 @@
           <segments>StandardOptions</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
-        <excludedCommands>ShowMultipleSelection</excludedCommands>
-        <excludedCommands>SelectAll</excludedCommands>
-        <excludedCommands>CopyToClipboard</excludedCommands>
-        <excludedCommands>Pickup</excludedCommands>
-        <excludedCommands>ShowRowRearrangement</excludedCommands>
-        <excludedCommands>UncheckAll</excludedCommands>
-        <excludedCommands>CheckAll</excludedCommands>
-        <excludedCommands>EndEdit</excludedCommands>
-        <excludedCommands>Delete</excludedCommands>
-        <excludedCommands>MoveUp</excludedCommands>
-        <excludedCommands>MoveDown</excludedCommands>
         <excludedCommands>Add</excludedCommands>
-        <excludedCommands>Copy</excludedCommands>
         <excludedCommands>Change</excludedCommands>
+        <excludedCommands>Copy</excludedCommands>
+        <excludedCommands>CopyToClipboard</excludedCommands>
+        <excludedCommands>Delete</excludedCommands>
+        <excludedCommands>EndEdit</excludedCommands>
+        <excludedCommands>MoveDown</excludedCommands>
+        <excludedCommands>MoveUp</excludedCommands>
+        <excludedCommands>SearchHistory</excludedCommands>
+        <excludedCommands>SelectAll</excludedCommands>
+        <excludedCommands>ShowMultipleSelection</excludedCommands>
+        <excludedCommands>ShowRowRearrangement</excludedCommands>
         <items xsi:type="form:FormField">
           <name>StandardOptionsisCurrentOption</name>
           <id>173</id>
@@ -596,8 +596,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>StandardOptions.isCurrentOption</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>StandardOptions.isCurrentOption</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>StandardOptionsisCurrentOptionExtendedTooltip</name>
@@ -643,8 +645,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>StandardOptions.Presentation</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>StandardOptions.Presentation</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>StandardOptionsPresentationExtendedTooltip</name>
@@ -692,8 +696,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>StandardOptions.OptionKey</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>StandardOptions.OptionKey</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>StandardOptionsOptionKeyExtendedTooltip</name>
@@ -905,6 +911,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1004,12 +1011,12 @@
     <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>

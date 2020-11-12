@@ -14,8 +14,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>DocumentRef</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>DocumentRef</segments>
+          </paths>
         </dataPath>
         <titleLocation>None</titleLocation>
         <handlers>
@@ -119,8 +121,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>DocumentObject.ItemList.ItemKey.Item</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>DocumentObject.ItemList.ItemKey.Item</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>DocumentObjectItemListItemKeyItemExtendedTooltip</name>
@@ -174,9 +178,6 @@
             <paths xsi:type="form:DataPath">
               <segments>DocumentObject.ItemList.ItemKey</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>DocumentObject.ItemList.ItemKey</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>DocumentObjectItemListItemKeyExtendedTooltip</name>
@@ -226,8 +227,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>DocumentObject.ItemList.PhysCount</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>DocumentObject.ItemList.PhysCount</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListPhysCountExtendedTooltip</name>
@@ -277,9 +280,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>DocumentObject.ItemList.Unit</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>DocumentObject.ItemList.Unit</segments>
             </paths>
@@ -494,6 +494,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <items xsi:type="form:Button">
         <name>SearchByBarcode</name>
@@ -569,8 +570,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>RuleEditQuantity</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>RuleEditQuantity</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>RuleEditQuantityExtendedTooltip</name>
@@ -734,29 +737,27 @@
     </userVisible>
     <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
-  <excludedCommands>WriteAndClose</excludedCommands>
-  <excludedCommands>Reread</excludedCommands>
-  <excludedCommands>ShowInList</excludedCommands>
-  <excludedCommands>Copy</excludedCommands>
-  <excludedCommands>SetDeletionMark</excludedCommands>
-  <excludedCommands>Delete</excludedCommands>
-  <excludedCommands>Post</excludedCommands>
-  <excludedCommands>UndoPosting</excludedCommands>
+  <excludedCommands>Abort</excludedCommands>
+  <excludedCommands>Cancel</excludedCommands>
   <excludedCommands>ChangeHistory</excludedCommands>
-  <excludedCommands>Help</excludedCommands>
-  <excludedCommands>CustomizeForm</excludedCommands>
   <excludedCommands>Close</excludedCommands>
-  <excludedCommands>Yes</excludedCommands>
+  <excludedCommands>Copy</excludedCommands>
+  <excludedCommands>CustomizeForm</excludedCommands>
+  <excludedCommands>Delete</excludedCommands>
+  <excludedCommands>Help</excludedCommands>
+  <excludedCommands>Ignore</excludedCommands>
   <excludedCommands>No</excludedCommands>
   <excludedCommands>OK</excludedCommands>
-  <excludedCommands>Cancel</excludedCommands>
-  <excludedCommands>Abort</excludedCommands>
-  <excludedCommands>Ignore</excludedCommands>
-  <excludedCommands>Retry</excludedCommands>
-  <excludedCommands>SaveValues</excludedCommands>
-  <excludedCommands>RestoreValues</excludedCommands>
   <excludedCommands>OpenFromMainServer</excludedCommands>
   <excludedCommands>OpenFromStandaloneServer</excludedCommands>
+  <excludedCommands>Reread</excludedCommands>
+  <excludedCommands>RestoreValues</excludedCommands>
+  <excludedCommands>Retry</excludedCommands>
+  <excludedCommands>SaveValues</excludedCommands>
+  <excludedCommands>SetDeletionMark</excludedCommands>
+  <excludedCommands>ShowInList</excludedCommands>
+  <excludedCommands>WriteAndClose</excludedCommands>
+  <excludedCommands>Yes</excludedCommands>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
   <autoFillCheck>true</autoFillCheck>

@@ -271,8 +271,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Agreement</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Agreement</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>AgreementExtendedTooltip</name>
@@ -321,8 +323,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Currency</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Currency</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>CurrencyExtendedTooltip</name>

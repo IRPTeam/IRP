@@ -896,6 +896,13 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonAttribute.BusinessUnit</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.CashExpense.Attribute.Account</name>
 		<right>
 			<name>View</name>
@@ -998,13 +1005,6 @@
 	</object>
 	<object>
 		<name>Document.IncomingPaymentOrder.Attribute.Account</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonAttribute.BusinessUnit</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

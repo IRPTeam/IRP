@@ -31,22 +31,12 @@ Procedure UpdateCommandAvailability()
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	If CurrentData.Ref = Undefined Then
-		Items.DocumentsTreePost.Enabled = False;
-		Items.DocumentsTreeUnpost.Enabled = False;
-		Items.DocumentsTreeEdit.Enabled = False;
-		Items.DocumentsTreeDelete.Enabled = False;
-		Items.DocumentsTreeContextMenuPost.Enabled = False;
-		Items.DocumentsTreeContextMenuUnpost.Enabled = False;
-		Items.DocumentsTreeContextMenuEdit.Enabled = False;
-		Items.DocumentsTreeContextMenuDelete.Enabled = False;
-	Else
-		CanPosting = CurrentData.Ref.Metadata().Posting = Metadata.ObjectProperties.Posting.Allow;
-		Items.DocumentsTreePost.Enabled = CanPosting And Not CurrentData.DeletionMark;
-		Items.DocumentsTreeUnpost.Enabled = CanPosting And Not CurrentData.DeletionMark;
-		Items.DocumentsTreeContextMenuPost.Enabled = CanPosting And Not CurrentData.DeletionMark;
-		Items.DocumentsTreeContextMenuUnpost.Enabled = CanPosting And Not CurrentData.DeletionMark;
-	EndIf;
+	
+	CanPosting = CurrentData.Ref.Metadata().Posting = Metadata.ObjectProperties.Posting.Allow;
+	Items.DocumentsTreePost.Enabled = CanPosting And Not CurrentData.DeletionMark;
+	Items.DocumentsTreeUnpost.Enabled = CanPosting And Not CurrentData.DeletionMark;
+	Items.DocumentsTreeContextMenuPost.Enabled = CanPosting And Not CurrentData.DeletionMark;
+	Items.DocumentsTreeContextMenuUnpost.Enabled = CanPosting And Not CurrentData.DeletionMark;
 EndProcedure
 
 &AtClient
@@ -63,9 +53,7 @@ Procedure OpenDocument()
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	If CurrentData.Ref = Undefined Then
-		Return;
-	EndIf;
+	
 	OpenForm(StrTemplate("Document.%1.ObjectForm", GetDocumentNameByRef(CurrentData.Ref))
 		, New Structure("Key", CurrentData.Ref), ThisObject);
 EndProcedure

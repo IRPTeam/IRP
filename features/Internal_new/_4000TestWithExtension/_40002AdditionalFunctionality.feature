@@ -44,7 +44,7 @@ Scenario: _4000201 driver install
 	Given I open hyperlink "e1cib/list/Catalog.EquipmentDrivers"
 	And I click the button named "FormCreate"
 	* Check info message if driver was not loaded before
-		And I input "Inputdevice" text in "Description" field
+		And I input "1Native" text in "Description" field
 		And I input "AddIn.InputDevice" text in "AddIn ID" field
 		And I click "Install" button
 		Then "1C:Enterprise" window is opened
@@ -53,6 +53,7 @@ Scenario: _4000201 driver install
 	* Instal driver
 		And I select external file "C:\AddComponents\1Native"
 		And I click "Add file" button	
+		And Delay 10
 		And I click the button named "FormWrite"	
 		And I click "Install" button
 		Then "1C:Enterprise" window is opened
@@ -104,9 +105,10 @@ Scenario: _4000202 hardware
 	And I click Select button of "Driver" field
 	And I go to line in "List" table
 		| 'Description' |
-		| 'Inputdevice'     |
+		| '1Native'     |
 	And I select current line in "List" table
 	And I click "Save" button
+	And I set checkbox "Enabled"		
 	And I click the button named "FormWriteAndClose"
 
 	

@@ -341,7 +341,7 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_014", NStr("en = 'Current location #%1 was scanned and closed before. Please scan next location.'", Lang));
 	
 	// %1 - 123456
-	Strings.Insert("InfoMessage_015", NStr("en = 'Barcode %1 was not found. Create new new serial with this barcode?'", Lang));
+	Strings.Insert("InfoMessage_015", NStr("en = 'Serial lot %1 was not found. Create new?'", Lang));
 
 	// %1 - 123456
 	// %2 - Some item

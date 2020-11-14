@@ -346,9 +346,9 @@ Scenario: _300115 check removal of pictures from Item
         | 'File name'     |
         | 'dressblue.jpg' |
     And I select current line in "List" table
-    And I save the value of the field named "FileID" as "$$FileIDDressBlue$$"
+    And I save the value of the field named "FileID" as "$$$$FileIDDressBlue$$$$"
     And Delay "5"
-    And I display "$$FileIDDressBlue$$" variable value
+    And I display "$$$$FileIDDressBlue$$$$" variable value
     And I close current window
     * Open Item list form
         Given I open hyperlink "e1cib/list/Catalog.Items"
@@ -357,8 +357,8 @@ Scenario: _300115 check removal of pictures from Item
             | 'Dress'        |
         And I select current line in "List" table
     * Delete picture from Item
-        And Delay "5"
-        And I input "$$FileIDDressBlue$$" variable value in "getCurrentSlideId" field   	
+        And Delay "5"   		
+        And I input "$$$$FileIDDressBlue$$$$" variable value in "getCurrentSlideId" field   	
         And I click "remove_picture" button
         And I close all client application windows
         Given I open hyperlink "e1cib/list/InformationRegister.AttachedFiles"
@@ -389,3 +389,12 @@ Scenario: _300115 check removal of pictures from Item
 // 	And I close all client application windows
 
 
+
+
+Scenario: _4000105 check add attributes from extensions
+	Then I connect launched Test client "Этот клиент"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.Currencies"
+	And I click the button named "FormCreate"
+	And the field named "REP_Attribute1" exists on the form
+	And I close all client application windows

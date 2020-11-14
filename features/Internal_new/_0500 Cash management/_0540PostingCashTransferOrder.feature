@@ -1041,7 +1041,7 @@ Scenario: _300516 check connection to CashTransferOrder report "Related document
 		And Delay 1
 	Then "Related documents" window is opened
 		And "DocumentsTree" table contains lines
-		| 'Ref'                    | 'Amount' |
+		| 'Presentation'                    | 'Amount' |
 		| '$$CashTransferOrder054001$$' | '*'      |
 		| '$$CashPayment054003$$'        | '500,00' |
 		| '$$CashReceipt054003$$'        | '400,00' |
@@ -1049,11 +1049,11 @@ Scenario: _300516 check connection to CashTransferOrder report "Related document
 	*  Check the report generation from list
 		And I go to the last line in "DocumentsTree" table
 		And I go to line in "DocumentsTree" table
-		| 'Ref'      |
+		| 'Presentation'      |
 		| '$$CashReceipt0540031$$' |
 		And in the table "DocumentsTree" I click the button named "DocumentsTreeGenerateForCurrent"
 		And "DocumentsTree" table contains lines
-		| 'Ref'                    | 'Amount' |
+		| 'Presentation'                    | 'Amount' |
 		| '$$CashTransferOrder054001$$' | ''       |
 		| '$$CashReceipt0540031$$'        | '100,00' |
 	And I close all client application windows

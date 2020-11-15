@@ -531,7 +531,6 @@
 	SerialLotNumbers.Description,
 	SerialLotNumbers.SerialLotNumberOwner,
 	SerialLotNumbers.Inactive,
-	SerialLotNumbers.AddAttributes.*,
 	SerialLotNumbers.Predefined,
 	SerialLotNumbers.PredefinedDataName
 FROM
@@ -542,16 +541,14 @@ WHERE
 			THEN SerialLotNumbers.SerialLotNumberOwner = &amp;ItemKeyRef
 			OR SerialLotNumbers.SerialLotNumberOwner = &amp;ItemRef
 			OR SerialLotNumbers.SerialLotNumberOwner = &amp;ItemType
-			OR SerialLotNumbers.SerialLotNumberOwner IS NULL
 		WHEN &amp;isItem
 			THEN SerialLotNumbers.SerialLotNumberOwner = &amp;ItemRef
 			OR SerialLotNumbers.SerialLotNumberOwner = &amp;ItemType
-			OR SerialLotNumbers.SerialLotNumberOwner IS NULL
 		WHEN &amp;isItemType
 			THEN SerialLotNumbers.SerialLotNumberOwner = &amp;ItemType
-			OR SerialLotNumbers.SerialLotNumberOwner IS NULL
+			
 		ELSE TRUE
-	END</queryText>
+	END OR SerialLotNumbers.SerialLotNumberOwner = Undefined</queryText>
       <mainTable>Catalog.SerialLotNumbers</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

@@ -126,8 +126,8 @@ Scenario: 950000 preparation (role Full access only read)
 					| 'Sofia Borisova (Manager 3)' |
 			And I select current line in "List" table
 	* Change localization code
-			And I input "en" text in "Localization code" field	
-			And I input "en" text in "Interface localization code" field
+			And I select "English" exact value from "Data localization" drop-down list	
+			And I select "English" exact value from "Interface localization" drop-down list
 			And I click "Save" button
 	* Set password
 		And I click "Set password" button

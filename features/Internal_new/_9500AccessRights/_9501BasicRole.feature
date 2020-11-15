@@ -127,8 +127,8 @@ Scenario: 950100 Basic role
 					| 'Emily Jones (Manager 2)' |
 			And I select current line in "List" table
 	* Change localization code
-			And I input "tr" text in "Localization code" field	
-			And I input "en" text in "Interface localization code" field
+			And I select "Turkish" exact value from "Data localization" drop-down list	
+			And I select "English" exact value from "Interface localization" drop-down list
 			And I click "Save" button
 	* Set password
 		And I click "Set password" button

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b4a42279-681b-48da-910f-cb1d995b63f5">
-  <name>FindDataForInputString</name>
+  <name>ChoiceDataGetProcessing_FindDataForInputString</name>
   <synonym>
     <key>en</key>
-    <value>Find data for input string</value>
+    <value>Choice data get processing find data for input string</value>
   </synonym>
   <source>
     <types>CatalogManager</types>

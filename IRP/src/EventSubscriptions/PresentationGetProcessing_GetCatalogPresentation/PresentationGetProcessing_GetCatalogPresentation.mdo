@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9eb0e814-fdfb-4b5f-a72c-0792cb6dd256">
-  <name>GetCatalogPresentation</name>
+  <name>PresentationGetProcessing_GetCatalogPresentation</name>
   <synonym>
     <key>en</key>
-    <value>Get catalog presentation</value>
+    <value>Presentation get processing get catalog presentation</value>
   </synonym>
   <source>
     <types>ChartOfCharacteristicTypesManager</types>

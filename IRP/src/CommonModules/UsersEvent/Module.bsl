@@ -3,6 +3,10 @@ Procedure UpdateUsersRoleOnWrite(Source, Cancel) Export
 		Return;
 	EndIf;
 	
+	If Source.DataExchange.Load Then
+		Return;
+	EndIf;
+	
 	If TypeOf(Source) = Type("CatalogObject.AccessGroups") Then
 		Result = UpdateUsersRolesByGroup(Source.Ref);
 	ElsIf TypeOf(Source) = Type("CatalogObject.AccessProfiles") Then

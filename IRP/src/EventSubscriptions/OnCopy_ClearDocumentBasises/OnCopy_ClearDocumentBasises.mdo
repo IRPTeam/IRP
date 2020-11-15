@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d688f223-7102-41a5-88f9-6b37ab01f7fa">
-  <name>ClearDocumentBasisesOnCopy</name>
+  <name>OnCopy_ClearDocumentBasises</name>
   <synonym>
     <key>en</key>
-    <value>Clear document basises on copy</value>
+    <value>On copy clear document basises</value>
   </synonym>
   <source>
     <types>DocumentObject</types>

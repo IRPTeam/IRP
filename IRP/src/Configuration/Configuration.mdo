@@ -371,19 +371,19 @@
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <httpServices>HTTPService.FileTransferService</httpServices>
   <httpServices>HTTPService.SaasService</httpServices>
-  <eventSubscriptions>EventSubscription.CheckDescriptionsFillCheck</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.CheckUniqueID</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.ClearDocumentBasisesOnCopy</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.FillingWithDefaultData</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.FindDataForInputString</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.GetCatalogPresentation</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.GetCatalogPresentationFields</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.OpenMobileForm</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.RefreshReusableValues</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.UpdateUsersRole</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.EventSubscription</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.OnCopyRemoveUniqueID</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.OnCopyDocumentProcessing</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_CheckUniqueID</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_RefreshReusableValues</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.ChoiceDataGetProcessing_FindDataForInputString</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.FillCheckProcessing_CatalogsDescriptions</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.Filling_DocumentsWithDefaultData</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.FormGetProcessing_OpenMobileForm</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnCopy_AddAttributes</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnCopy_ClearDocumentBasises</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnCopy_DocumentProcessing</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnCopy_RemoveUniqueID</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnWrite_UpdateUsersRoleOnWrite</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.PresentationFieldsGetProcessing_GetCatalogPresentationFields</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetCatalogPresentation</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
   <settingsStorages>SettingsStorage.ReportOptions</settingsStorages>

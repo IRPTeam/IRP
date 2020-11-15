@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="93032c63-697f-4ec4-94c3-3a90264a0eb3">
-  <name>CheckDescriptionsFillCheck</name>
+  <name>FillCheckProcessing_CatalogsDescriptions</name>
   <synonym>
     <key>en</key>
-    <value>Check descriptions fill check</value>
+    <value>Fill check processing catalogs descriptions</value>
   </synonym>
   <source>
     <types>CatalogObject</types>

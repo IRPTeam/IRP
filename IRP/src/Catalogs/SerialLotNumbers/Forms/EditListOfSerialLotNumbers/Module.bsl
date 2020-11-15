@@ -11,6 +11,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		NewRow.SerialLotNumber = Row.SerialLotNumber;
 		NewRow.Quantity = Row.Quantity;
 	EndDo;	
+	SerialLotNumberStatus = R().InfoMessage_018;
 EndProcedure
 
 &AtClient
@@ -81,6 +82,13 @@ EndProcedure
 &AtClient
 Procedure Cancel(Command)
 	Close(Undefined);
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
 EndProcedure
 
 &AtServer

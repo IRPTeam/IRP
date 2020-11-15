@@ -193,6 +193,7 @@
   <commonModules>CommonModule.CalculationServer</commonModules>
   <commonModules>CommonModule.CalculationStringsClientServer</commonModules>
   <commonModules>CommonModule.CatAgreementsClient</commonModules>
+  <commonModules>CommonModule.CatAgreementsClientServer</commonModules>
   <commonModules>CommonModule.CatAgreementsServer</commonModules>
   <commonModules>CommonModule.CatCashAccountsClient</commonModules>
   <commonModules>CommonModule.CatCashAccountsServer</commonModules>
@@ -229,6 +230,7 @@
   <commonModules>CommonModule.DocChequeBondTransactionClient</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionServer</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteClient</commonModules>
+  <commonModules>CommonModule.DocCreditDebitNoteClientServer</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteServer</commonModules>
   <commonModules>CommonModule.DocExpenseClient</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
@@ -309,7 +311,10 @@
   <commonModules>CommonModule.IDInfoServer</commonModules>
   <commonModules>CommonModule.IntegrationClientServer</commonModules>
   <commonModules>CommonModule.IntegrationServer</commonModules>
+  <commonModules>CommonModule.IntegrationServerPriveleged</commonModules>
   <commonModules>CommonModule.IntegrationServerReuse</commonModules>
+  <commonModules>CommonModule.JorDocumentsClient</commonModules>
+  <commonModules>CommonModule.JorDocumentsServer</commonModules>
   <commonModules>CommonModule.LibraryLoader</commonModules>
   <commonModules>CommonModule.Localization</commonModules>
   <commonModules>CommonModule.LocalizationClient</commonModules>
@@ -348,11 +353,6 @@
   <commonModules>CommonModule.UsersEvent</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.JorDocumentsServer</commonModules>
-  <commonModules>CommonModule.JorDocumentsClient</commonModules>
-  <commonModules>CommonModule.DocCreditDebitNoteClientServer</commonModules>
-  <commonModules>CommonModule.CatAgreementsClientServer</commonModules>
-  <commonModules>CommonModule.IntegrationServerPriveleged</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>

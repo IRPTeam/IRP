@@ -40,9 +40,11 @@ Procedure UpdateRolesInfo(CurrentObject)
 	ElsIf ValueIsFilled(CurrentObject.Description) Then
 		User = InfoBaseUsers.FindByName(CurrentObject.Description);
 	EndIf;
-	For Each Role In User.Roles Do
-		RoleList.Add(Role.Name, Role.Synonym);
-	EndDo;
+	If Not User = Undefined Then
+		For Each Role In User.Roles Do
+			RoleList.Add(Role.Name, Role.Synonym);
+		EndDo;
+	EndIf;
 EndProcedure
 
 &AtServer

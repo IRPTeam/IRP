@@ -19,9 +19,41 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
+	
+	FillExistsLangs();
+EndProcedure
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	UpdateRolesInfo(CurrentObject);
 EndProcedure
 
 #EndRegion
+
+#Region Privat
+
+&AtServer
+Procedure UpdateRolesInfo(CurrentObject)
+	User = Undefined;
+	If ValueIsFilled(CurrentObject.InfobaseUserID) Then
+		User = InfoBaseUsers.FindByUUID(CurrentObject.InfobaseUserID);
+	ElsIf ValueIsFilled(CurrentObject.Description) Then
+		User = InfoBaseUsers.FindByName(CurrentObject.Description);
+	EndIf;
+	For Each Role In User.Roles Do
+		RoleList.Add(Role.Name, Role.Synonym);
+	EndDo;
+EndProcedure
+
+&AtServer
+Procedure FillExistsLangs()
+	
+	For Each Lang In Metadata.Languages Do
+		Items.LocalizationCode.ChoiceList.Add(Lower(Lang.LanguageCode), Lang.Synonym);
+		Items.InterfaceLocalizationCode.ChoiceList.Add(Lower(Lang.LanguageCode), Lang.Synonym);
+	EndDo;
+	
+EndProcedure
 
 &AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export
@@ -61,6 +93,7 @@ Procedure EditUserSettingsProceed(Result, AddInfo = Undefined) Export
 		OpenForm("CommonForm.EditUserSettings", New Structure("UserOrGroup", Object.Ref), ThisObject);
 	EndIf;
 EndProcedure
+#EndRegion
 
 #Region AddAttributes
 

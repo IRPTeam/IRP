@@ -10,7 +10,10 @@ Procedure UpdateUsersRoleOnWrite(Source, Cancel) Export
 	If TypeOf(Source) = Type("CatalogObject.AccessGroups") Then
 		Result = UpdateUsersRolesByGroup(Source);
 	ElsIf TypeOf(Source) = Type("CatalogObject.AccessProfiles") Then
-		Result = UpdateUsersRole(Source);
+		If Source.IsNew() Then
+			Return;
+		EndIf;
+		Result = UpdateUsersRole(Source.Ref);
 	EndIf;
 	If Source.AdditionalProperties.Property("UsersEventOnWriteResult") Then
 		Source.AdditionalProperties["UsersEventOnWriteResult"] = Result;

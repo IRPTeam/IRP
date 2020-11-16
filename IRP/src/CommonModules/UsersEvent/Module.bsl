@@ -82,7 +82,7 @@ Function UpdateUsersRole(AccessProfile)
 					AddRoles(Profile.Roles, User);
 				EndDo;
 			Else
-				AddRoles(Profile.Roles, User);
+				AddRoles(AccessProfile.Roles, User);
 			EndIf;
 			User.Write();
 		EndIf;

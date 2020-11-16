@@ -110,6 +110,10 @@
     <items xsi:type="form:FormField">
       <name>Company</name>
       <id>37</id>
+      <title>
+        <key>en</key>
+        <value>Company</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -162,6 +166,10 @@
     <items xsi:type="form:FormField">
       <name>Partner</name>
       <id>34</id>
+      <title>
+        <key>en</key>
+        <value>Partner</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -214,6 +222,10 @@
     <items xsi:type="form:FormField">
       <name>LegalName</name>
       <id>43</id>
+      <title>
+        <key>en</key>
+        <value>Legal name</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -266,6 +278,10 @@
     <items xsi:type="form:FormField">
       <name>Agreement</name>
       <id>49</id>
+      <title>
+        <key>en</key>
+        <value>Agreement</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -318,6 +334,10 @@
     <items xsi:type="form:FormField">
       <name>Currency</name>
       <id>52</id>
+      <title>
+        <key>en</key>
+        <value>Currency</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -370,6 +390,10 @@
     <items xsi:type="form:FormField">
       <name>DocumentAmount</name>
       <id>40</id>
+      <title>
+        <key>en</key>
+        <value>Amount</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

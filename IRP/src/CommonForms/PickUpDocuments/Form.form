@@ -51,6 +51,10 @@
       <items xsi:type="form:FormField">
         <name>BasisDocument</name>
         <id>114</id>
+        <title>
+          <key>en</key>
+          <value>Basis document</value>
+        </title>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -103,6 +107,10 @@
       <items xsi:type="form:FormField">
         <name>DocumentAmount</name>
         <id>163</id>
+        <title>
+          <key>en</key>
+          <value>Amount</value>
+        </title>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -155,6 +163,10 @@
       <items xsi:type="form:FormField">
         <name>Currency</name>
         <id>119</id>
+        <title>
+          <key>en</key>
+          <value>Currency</value>
+        </title>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -207,6 +219,10 @@
       <items xsi:type="form:FormField">
         <name>AmountBalance</name>
         <id>122</id>
+        <title>
+          <key>en</key>
+          <value>Amount balance</value>
+        </title>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>

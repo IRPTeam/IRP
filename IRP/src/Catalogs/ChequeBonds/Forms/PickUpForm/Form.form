@@ -269,6 +269,10 @@
     <items xsi:type="form:FormField">
       <name>Description</name>
       <id>16</id>
+      <title>
+        <key>en</key>
+        <value>Description</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -318,6 +322,10 @@
     <items xsi:type="form:FormField">
       <name>ChequeSerialNo</name>
       <id>31</id>
+      <title>
+        <key>en</key>
+        <value>Cheque serial No</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -366,6 +374,10 @@
     <items xsi:type="form:FormField">
       <name>Type</name>
       <id>19</id>
+      <title>
+        <key>en</key>
+        <value>Type</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -414,6 +426,10 @@
     <items xsi:type="form:FormField">
       <name>DueDate</name>
       <id>22</id>
+      <title>
+        <key>en</key>
+        <value>Due date</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -462,6 +478,10 @@
     <items xsi:type="form:FormField">
       <name>Currency</name>
       <id>25</id>
+      <title>
+        <key>en</key>
+        <value>Currency</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -510,6 +530,10 @@
     <items xsi:type="form:FormField">
       <name>Amount</name>
       <id>28</id>
+      <title>
+        <key>en</key>
+        <value>Amount</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

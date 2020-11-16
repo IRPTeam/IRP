@@ -33,6 +33,10 @@
     <metadata>Constant.SaasMode</metadata>
     <use>DontUse</use>
   </content>
+  <content>
+    <metadata>InformationRegister.LockDataModificationRules</metadata>
+    <use>DontUse</use>
+  </content>
   <dataSeparationValue>SessionParameter.IDValue</dataSeparationValue>
   <dataSeparationUse>SessionParameter.IDUse</dataSeparationUse>
   <conditionalSeparation>Constant.SaasMode</conditionalSeparation>

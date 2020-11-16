@@ -354,6 +354,7 @@
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.CatExpenseAndRevenueTypesServer</commonModules>
+  <commonModules>CommonModule.LockDataModificationServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -385,6 +386,10 @@
   <eventSubscriptions>EventSubscription.OnWrite_UpdateUsersRoleOnWrite</eventSubscriptions>
   <eventSubscriptions>EventSubscription.PresentationFieldsGetProcessing_GetCatalogPresentationFields</eventSubscriptions>
   <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetCatalogPresentation</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_DocumentsLockDataModification</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_CatalogsLockDataModification</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_AccumulationRegistersLockDataModification</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_InformationRegistersLockDataModification</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
   <settingsStorages>SettingsStorage.ReportOptions</settingsStorages>
@@ -393,6 +398,7 @@
   <functionalOptions>FunctionalOption.ShowAlphaTestingSaas</functionalOptions>
   <functionalOptions>FunctionalOption.UseCompanies</functionalOptions>
   <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
+  <functionalOptions>FunctionalOption.UseLockDataModification</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -442,6 +448,7 @@
   <constants>Constant.ShowBetaTesting</constants>
   <constants>Constant.UseCompanies</constants>
   <constants>Constant.UseItemKey</constants>
+  <constants>Constant.UseLockDataModification</constants>
   <commonForms>CommonForm.DataClassifier</commonForms>
   <commonForms>CommonForm.EditAddProperties</commonForms>
   <commonForms>CommonForm.EditDescriptions</commonForms>
@@ -632,6 +639,7 @@
   <informationRegisters>InformationRegister.BusinessUnitBankTerms</informationRegisters>
   <informationRegisters>InformationRegister.BarcodeScanInfoCheck</informationRegisters>
   <informationRegisters>InformationRegister.DataMappingTable</informationRegisters>
+  <informationRegisters>InformationRegister.LockDataModificationRules</informationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountsStatement</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AdvanceFromCustomers</accumulationRegisters>

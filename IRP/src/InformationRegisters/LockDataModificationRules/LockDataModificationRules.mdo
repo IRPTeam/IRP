@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="848f9cfe-7c50-4e0a-aabb-3589273f0204">
+  <producedTypes>
+    <selectionType typeId="149e4060-646b-47e5-8ba6-c5be80222a09" valueTypeId="279ca5d7-3760-42c7-bfcd-243c403a3cfb"/>
+    <listType typeId="edfc3ca8-77d0-4567-9bd8-34729bdcf0a7" valueTypeId="7a862186-aab9-4327-bfe2-103b37889c7c"/>
+    <managerType typeId="4fbb13a7-1cca-472f-a2c4-73df90b57a94" valueTypeId="0c8b61a3-4dea-42cc-b6cc-bcb65d15411c"/>
+    <recordSetType typeId="d839802a-4efe-49a0-8588-257d5de06803" valueTypeId="6b5e498d-35fd-4ba1-84a7-d1295f1b8349"/>
+    <recordKeyType typeId="9f8ac506-41a2-4d51-a475-8a34f4cf7c76" valueTypeId="d94d7733-f8e3-4e80-a3cf-96f5223e950d"/>
+    <recordType typeId="f4b8d40a-2a11-4923-9568-b72cadc3866a" valueTypeId="ce467ceb-0863-4e0e-9e93-87302602c2c5"/>
+    <recordManagerType typeId="b59d105c-8099-4eb0-a19c-8c0dafa9c10f" valueTypeId="716b3303-3161-4da3-870a-f94135c23e46"/>
+  </producedTypes>
+  <name>LockDataModificationRules</name>
+  <synonym>
+    <key>en</key>
+    <value>Lock data modification rules</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:InformationRegister>

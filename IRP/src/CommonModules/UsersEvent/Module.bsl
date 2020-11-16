@@ -131,3 +131,25 @@ Function SessionParametersSetCurrentUser() Export
 	Return FoundUser;
 
 EndFunction
+
+Procedure UpdateAllUsersRolesViaAccessGroups() Export
+	
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	AccessGroups.Ref
+		|FROM
+		|	Catalog.AccessGroups AS AccessGroups
+		|WHERE
+		|	NOT AccessGroups.DeletionMark";
+	
+	QueryResult = Query.Execute();
+	
+	SelectionDetailRecords = QueryResult.Select();
+	
+	While SelectionDetailRecords.Next() Do
+		 Result = UpdateUsersRole(SelectionDetailRecords.Ref);
+	EndDo;
+	
+	//}}QUERY_BUILDER_WITH_RESULT_PROCESSING
+EndProcedure

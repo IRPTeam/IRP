@@ -431,6 +431,7 @@
   <commonCommands>CommonCommand.OpenPartnersCustomer</commonCommands>
   <commonCommands>CommonCommand.OpenPartnersVendor</commonCommands>
   <commonCommands>CommonCommand.OpenVendorAgreements</commonCommands>
+  <commonCommands>CommonCommand.UpdateAllUserRoles</commonCommands>
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
   <constants>Constant.ConnectionStatus</constants>

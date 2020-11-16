@@ -58,6 +58,10 @@
     <items xsi:type="form:FormField">
       <name>Selected</name>
       <id>67</id>
+      <title>
+        <key>en</key>
+        <value>Selected</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -103,6 +107,10 @@
     <items xsi:type="form:FormField">
       <name>Number</name>
       <id>49</id>
+      <title>
+        <key>en</key>
+        <value>Number</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -155,6 +163,10 @@
     <items xsi:type="form:FormField">
       <name>Date</name>
       <id>52</id>
+      <title>
+        <key>en</key>
+        <value>Date</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -207,6 +219,10 @@
     <items xsi:type="form:FormField">
       <name>Company</name>
       <id>61</id>
+      <title>
+        <key>en</key>
+        <value>Company</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -259,6 +275,10 @@
     <items xsi:type="form:FormField">
       <name>Sender</name>
       <id>55</id>
+      <title>
+        <key>en</key>
+        <value>Sender</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -311,6 +331,10 @@
     <items xsi:type="form:FormField">
       <name>SendCurrency</name>
       <id>58</id>
+      <title>
+        <key>en</key>
+        <value>Send currency</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -363,6 +387,10 @@
     <items xsi:type="form:FormField">
       <name>IsCurrencyExchange</name>
       <id>64</id>
+      <title>
+        <key>en</key>
+        <value>Is currency exchange</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

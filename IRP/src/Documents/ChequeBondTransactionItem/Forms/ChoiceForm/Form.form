@@ -54,6 +54,10 @@
     <items xsi:type="form:FormField">
       <name>Number</name>
       <id>16</id>
+      <title>
+        <key>en</key>
+        <value>Number</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -103,6 +107,10 @@
     <items xsi:type="form:FormField">
       <name>Date</name>
       <id>19</id>
+      <title>
+        <key>en</key>
+        <value>Date</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -151,6 +159,10 @@
     <items xsi:type="form:FormField">
       <name>Status</name>
       <id>22</id>
+      <title>
+        <key>en</key>
+        <value>Status</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -199,6 +211,10 @@
     <items xsi:type="form:FormField">
       <name>Company</name>
       <id>25</id>
+      <title>
+        <key>en</key>
+        <value>Company</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -247,6 +263,10 @@
     <items xsi:type="form:FormField">
       <name>Cheque</name>
       <id>28</id>
+      <title>
+        <key>en</key>
+        <value>Cheque</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -295,6 +315,10 @@
     <items xsi:type="form:FormField">
       <name>ChequeBondTransaction</name>
       <id>31</id>
+      <title>
+        <key>en</key>
+        <value>Cheque bond transaction</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

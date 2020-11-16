@@ -263,6 +263,10 @@
     <items xsi:type="form:FormField">
       <name>Code</name>
       <id>40</id>
+      <title>
+        <key>en</key>
+        <value>Code</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -315,6 +319,10 @@
     <items xsi:type="form:FormField">
       <name>Ref</name>
       <id>16</id>
+      <title>
+        <key>en</key>
+        <value>Reference</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -363,6 +371,10 @@
     <items xsi:type="form:FormField">
       <name>Item</name>
       <id>23</id>
+      <title>
+        <key>en</key>
+        <value>Item</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

@@ -498,7 +498,7 @@ Scenario: 950016 check role Full access only read (Users)
 		And In the command interface I select "Settings" "Users"		
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Admin'     |
+			| 'Sofia Borisova (Manager 3)'     |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception

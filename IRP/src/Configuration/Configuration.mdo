@@ -355,6 +355,7 @@
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.CatExpenseAndRevenueTypesServer</commonModules>
   <commonModules>CommonModule.LockDataModificationServer</commonModules>
+  <commonModules>CommonModule.MetadataInfo</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -606,6 +607,9 @@
   <enums>Enum.SerialNumbersOwner</enums>
   <enums>Enum.EquipmentTypes</enums>
   <enums>Enum.ExpenseAndRevenueTypes</enums>
+  <enums>Enum.MetadataTypes</enums>
+  <enums>Enum.MetadataSubtype</enums>
+  <enums>Enum.Rights</enums>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>

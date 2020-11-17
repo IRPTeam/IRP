@@ -148,8 +148,7 @@ Procedure UpdateAllUsersRolesViaAccessGroups() Export
 	SelectionDetailRecords = QueryResult.Select();
 	
 	While SelectionDetailRecords.Next() Do
-		 Result = UpdateUsersRole(SelectionDetailRecords.Ref);
+		 Result = UpdateUsersRolesByGroup(SelectionDetailRecords.Ref);
 	EndDo;
-	
-	//}}QUERY_BUILDER_WITH_RESULT_PROCESSING
+
 EndProcedure

@@ -136,19 +136,12 @@ Scenario: 950000 preparation (role Full access only read)
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10
-	* When Create user with access role Full access only read
-		Given I open hyperlink "e1cib/list/Catalog.AccessProfiles"
+	* Update user roles
+		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Commercial Agent'   |
-		And I select current line in "List" table
-		And in the table "Roles" I click "Update roles" button
-		And I go to line in "Roles" table
-				| 'Presentation'    |
-				| 'Full access only read' |
-		And I set "Use" checkbox in "Roles" table
-		And I finish line editing in "Roles" table
-		And I click "Save and close" button
+			| 'Description'                 |
+			| 'Manager' |
+		And I click "Update all user roles" button		
 	And I connect "TestAdmin" TestClient using "SBorisova" login and "F12345" password
 	And Delay 3
 
@@ -505,7 +498,7 @@ Scenario: 950016 check role Full access only read (Users)
 		And In the command interface I select "Settings" "Users"		
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Admin'     |
+			| 'Sofia Borisova (Manager 3)'     |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception

@@ -17,6 +17,9 @@ Scenario: Create catalog AccessGroups objects
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c615' | 'No'           | 'Manager'          | ''                 | ''               | 'Manager TR'          |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c616' | 'No'           | 'Administrators'   | ''                 | ''               | 'Administrators TR'   |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf116b327098d' | 'No'           | 'Financier'        | ''                 | ''               | 'Financier TR'        |
+		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf116b327099d' | 'No'           | 'Basic role'       | ''                 | ''               | 'Basic role TR'        |
+		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf116b327097d' | 'No'           | 'Run client'       | ''                 | ''               | 'Run client TR'        |
+		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf116b327095d' | 'No'           | 'Run client+Basic role'       | ''                 | ''               | 'Run client+Basic role TR'        |
 
 	And I refill object tabular section  "Profiles":
 		| 'Ref'                                                                  | 'Profile'                                                                |
@@ -24,7 +27,10 @@ Scenario: Create catalog AccessGroups objects
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c616' | 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270991' |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf116b327098d' | 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270990' |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c614' | 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b327098f' |
-
+		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf116b327099d' | 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270993' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf116b327097d' | 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270992' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf116b327095d' | 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270993' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf116b327095d' | 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270992' |
 	And I refill object tabular section  "Users":
 		| 'Ref'                                                                  | 'User'                                                          |
 		| 'e1cib/data/Catalog.AccessGroups?ref=aa78120ed92fbced11eaf115bcc9c615' | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b3270995' |
@@ -44,6 +50,8 @@ Scenario: Create catalog AccessProfiles objects
 		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b327098f' | 'No'           | 'Manager'          | ''                 | ''               | 'Manager TR'          |
 		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270990' | 'No'           | 'Financier'        | ''                 | ''               | 'Financier TR'        |
 		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270991' | 'No'           | 'Administrators'   | ''                 | ''               | 'Administrators TR'   |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270992' | 'No'           | 'Run client'       | ''                 | ''               | 'Run client TR'   |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270993' | 'No'           | 'Basic role'       | ''                 | ''               | 'Basic role TR'   |
 
 	And I refill object tabular section  "Roles":
 		| 'Ref'                                                                    | 'Role'            | 'Configuration' |
@@ -64,7 +72,11 @@ Scenario: Create catalog AccessProfiles objects
 		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270990' | 'FullAccess'      | 'IRP'           |
 		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270990' | 'BasicRole'       | 'IRP'           |
 		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b327098e' | 'FullAccessOnlyRead'   | 'IRP'           |
-
+		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270992' | 'RunMobileClient' | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270992' | 'RunThickClient'  | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270992' | 'RunThinClient'   | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270992' | 'RunWebClient'    | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=aa78120ed92fbced11eaf116b3270993' | 'BasicRole'      | 'IRP'           |
 
 Scenario: Create catalog Agreements objects
 

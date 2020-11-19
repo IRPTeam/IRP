@@ -92,7 +92,7 @@ Scenario: _300602 check that the English name of the catalog element is saved an
 	* Prepare
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Predefined data item name' |
+			| 'Predefined data name' |
 			| 'Catalog_Items'             |
 		And I select current line in "List" table
 		If "Attributes" table does not contain lines Then

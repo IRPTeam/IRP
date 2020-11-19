@@ -1840,10 +1840,10 @@ Scenario: _0154107 check filling in and re-filling Cash receipt (transaction typ
 		And I select current line in "PaymentList" table
 		# temporarily
 		And "List" table does not contain lines
-			| 'Document'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document'          | 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$SalesInvoice024016$$' | '554,66'          | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I go to line in "List" table
-			| 'Document'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document'          | 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$SalesInvoice024025$$' | '11 000,00'        | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
@@ -2045,10 +2045,10 @@ Scenario: _0154109 check filling in and re-filling Bank receipt (transaction typ
 		And I select current line in "PaymentList" table
 		# temporarily
 		And "List" table does not contain lines
-			| 'Document'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document'          | 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$SalesInvoice024016$$' | '554,66'          | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I go to line in "List" table
-			| 'Document'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document'          | 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$SalesInvoice024025$$' | '11 000,00'        | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term

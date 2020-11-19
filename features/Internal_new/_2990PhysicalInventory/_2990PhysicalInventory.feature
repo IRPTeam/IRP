@@ -180,7 +180,7 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 			| 'Objects statuses'|
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data item name |
+			| Predefined data name |
 			| PhysicalInventory         |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
@@ -206,7 +206,7 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 			| 'Objects statuses'|
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data item name |
+			| Predefined data name |
 			| PhysicalCountByLocation         |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"

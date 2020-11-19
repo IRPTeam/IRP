@@ -157,7 +157,7 @@ Scenario: _0154002 check that additional attributes and properties and propertie
 	* Adding by selected Item additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name |
+			| Predefined data name |
 			| Catalog_Items             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -204,7 +204,7 @@ Scenario: _0154003 check that additional attributes and properties are displayed
 	* Adding by selected Item type additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Catalog_ItemTypes             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -252,7 +252,7 @@ Scenario: _0154004 check that additional attributes and properties are displayed
 	* Adding by selected Partners additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Catalog_Partners              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -296,7 +296,7 @@ Scenario: _01540050 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_UserGroups     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -333,7 +333,7 @@ Scenario: _01540051 check that additional attributes and properties are displaye
 	* Adding by selected Sales invoice additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_InternalSupplyRequest              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -373,7 +373,7 @@ Scenario: _01540052 check that additional attributes and properties are displaye
 	* Adding by selected Sales invoice additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Predefined data item name'     |
+			| 'Predefined data name'     |
 			| 'Document_DebitNote'              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -413,7 +413,7 @@ Scenario: _01540053 check that additional attributes and properties are displaye
 	* Adding by selected Sales invoice additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Predefined data item name'     |
+			| 'Predefined data name'     |
 			| 'Document_CreditNote'              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -452,7 +452,7 @@ Scenario: _01540054 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Workstations     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -495,7 +495,7 @@ Scenario: _01540055 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Hardware     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -539,7 +539,7 @@ Scenario: _01540056 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_CashStatementStatuses     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -583,7 +583,7 @@ Scenario: _0154006 check that additional attributes and properties are displayed
 	* Adding by selected Sales invoice additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_SalesInvoice              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -623,7 +623,7 @@ Scenario: _01540060 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_PurchaseInvoice              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -663,7 +663,7 @@ Scenario: _01540061 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_SalesOrder              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -703,7 +703,7 @@ Scenario: _01540062 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_PurchaseOrder              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -743,7 +743,7 @@ Scenario: _01540057 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_ExpenseAndRevenueTypes     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -786,7 +786,7 @@ Scenario: _01540063 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_BusinessUnits     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -825,7 +825,7 @@ Scenario: _01540058 check adding additional properties for Specifications (Catal
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Specifications     |
 		And I select current line in "List" table
 		And I move to "Properties" tab
@@ -856,7 +856,7 @@ Scenario: _01540064 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_ChequeBonds     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -899,7 +899,7 @@ Scenario: _015400640 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Agreements     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -944,7 +944,7 @@ Then I check for the "AddAttributeAndPropertyValues" charts of characteristic ty
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_CashAccounts     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -987,7 +987,7 @@ Scenario: _015400642 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Companies     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1031,7 +1031,7 @@ Scenario: _015400644 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Countries     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1075,7 +1075,7 @@ Scenario: _015400645 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Currencies     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1118,7 +1118,7 @@ Scenario: _015400646 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_PriceTypes     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1162,7 +1162,7 @@ Scenario: _015400647 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_SerialLotNumbers     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1205,7 +1205,7 @@ Scenario: _015400648 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Stores     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1249,7 +1249,7 @@ Scenario: _015400649 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Taxes     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1292,7 +1292,7 @@ Scenario: _015400650 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Units     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1337,7 +1337,7 @@ Scenario: _015400651 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Users     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1381,7 +1381,7 @@ Scenario: _015400652 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_BankPayment              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1422,7 +1422,7 @@ Scenario: _015400653 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_BankReceipt              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1463,7 +1463,7 @@ Scenario: _015400655 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_Bundling              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1504,7 +1504,7 @@ Scenario: _015400656 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_CashExpense              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1545,7 +1545,7 @@ Scenario: _015400657 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_CashPayment              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1587,7 +1587,7 @@ Scenario: _015400658 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_CashReceipt              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1630,7 +1630,7 @@ Scenario: _015400659 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_CashRevenue              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1671,7 +1671,7 @@ Scenario: _015400660 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_CashTransferOrder              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1711,7 +1711,7 @@ Scenario: _015400661 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_ChequeBondTransaction              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1752,7 +1752,7 @@ Scenario: _015400662 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_GoodsReceipt              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1794,7 +1794,7 @@ Scenario: _015400663 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_IncomingPaymentOrder              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1835,7 +1835,7 @@ Scenario: _015400664 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_InventoryTransfer              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1876,7 +1876,7 @@ Scenario: _015400665 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_InventoryTransferOrder              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1917,7 +1917,7 @@ Scenario: _015400667 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_InvoiceMatch              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1958,7 +1958,7 @@ Scenario: _015400668 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_Labeling              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1999,7 +1999,7 @@ Scenario: _015400669 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_OpeningEntry              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2039,7 +2039,7 @@ Scenario: _015400670 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_OutgoingPaymentOrder              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2080,7 +2080,7 @@ Scenario: _015400671 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_PhysicalCountByLocation             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2123,7 +2123,7 @@ Scenario: _015400672 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_PhysicalInventory             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2163,7 +2163,7 @@ Scenario: _015400673 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_PriceList             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2205,7 +2205,7 @@ Scenario: _015400674 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_PurchaseReturn             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2247,7 +2247,7 @@ Scenario: _015400675 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_PurchaseReturnOrder             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2290,7 +2290,7 @@ Scenario: _015400676 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_ReconciliationStatement             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2332,7 +2332,7 @@ Scenario: _015400677 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_SalesReturn             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2373,7 +2373,7 @@ Scenario: _015400678 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_SalesReturnOrder             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2415,7 +2415,7 @@ Scenario: _015400679 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_ShipmentConfirmation             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2456,7 +2456,7 @@ Scenario: _015400680 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_StockAdjustmentAsSurplus             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2496,7 +2496,7 @@ Scenario: _015400681 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_StockAdjustmentAsWriteOff             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2537,7 +2537,7 @@ Scenario: _015400683 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_Unbundling           |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2577,7 +2577,7 @@ Scenario: _015400684 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_RetailSalesReceipt           |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2618,7 +2618,7 @@ Scenario: _015400685 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_RetailReturnReceipt           |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2658,7 +2658,7 @@ Scenario: _015400687 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_CashStatement           |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2697,7 +2697,7 @@ Scenario: _015400688 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_PaymentTerminals     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2740,7 +2740,7 @@ Scenario: _015400689 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_RetailCustomers     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2783,7 +2783,7 @@ Scenario: _015400690 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_BankTerms     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2826,7 +2826,7 @@ Scenario: _015400691 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_SpecialOffers     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2870,7 +2870,7 @@ Scenario: _015400692 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_SpecialOfferRules     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2913,7 +2913,7 @@ Scenario: _015400693 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Predefined data item name'          |
+			| 'Predefined data name'          |
 			| 'Catalog_SpecialOfferTypes'     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2957,7 +2957,7 @@ Scenario: _015400694 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_ItemSegments     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -3001,7 +3001,7 @@ Scenario: _015400695 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_TaxRates     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -3045,7 +3045,7 @@ Scenario: _015400696 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_PaymentTypes     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -3089,7 +3089,7 @@ Scenario: _015400698 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_PartnerSegments     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"

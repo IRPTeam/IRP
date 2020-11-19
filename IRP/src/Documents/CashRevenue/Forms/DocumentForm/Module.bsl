@@ -124,6 +124,16 @@ Procedure PaymentListTotalAmountOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
+Procedure PaymentListRevenueTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashExpenseRevenueClient.PaymentListRevenueTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListRevenueTypeEditTextChange(Item, Text, StandardProcessing)
+	DocCashExpenseRevenueClient.PaymentListRevenueTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+&AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
 	DocumentsClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
 EndProcedure

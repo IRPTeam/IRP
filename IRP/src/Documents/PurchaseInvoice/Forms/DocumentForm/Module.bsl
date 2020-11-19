@@ -236,6 +236,16 @@ Procedure ItemListStoreOnChange(Item)
 	DocPurchaseInvoiceClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure ItemListExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocPurchaseInvoiceClient.ItemListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListExpenseTypeEditTextChange(Item, Text, StandardProcessing)
+	DocPurchaseInvoiceClient.ItemListExpenseTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
 #EndRegion
 
 #Region ItemPartner
@@ -712,5 +722,6 @@ EndProcedure
 Procedure GoodsReceiptsTreeBeforeDeleteRow(Item, Cancel)
 	Cancel = True;
 EndProcedure
+
 
 #EndRegion

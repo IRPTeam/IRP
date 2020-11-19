@@ -390,10 +390,6 @@
     <items xsi:type="form:FormField">
       <name>DocumentAmount</name>
       <id>40</id>
-      <title>
-        <key>en</key>
-        <value>Amount</value>
-      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

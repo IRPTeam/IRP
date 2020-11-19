@@ -723,5 +723,4 @@ Procedure GoodsReceiptsTreeBeforeDeleteRow(Item, Cancel)
 	Cancel = True;
 EndProcedure
 
-
 #EndRegion

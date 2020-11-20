@@ -3,7 +3,7 @@
   <name>DocumentAmount</name>
   <synonym>
     <key>en</key>
-    <value>Document amount</value>
+    <value>Amount</value>
   </synonym>
   <type>
     <types>DefinedType.typeAmount</types>

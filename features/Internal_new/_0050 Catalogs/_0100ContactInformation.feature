@@ -553,7 +553,7 @@ Scenario: _010012 adding additional details for partners "Division"
 	* Opening a form for adding additional attributes for partners
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name |
+			| Predefined data name |
 			| Catalog_Partners          |
 		And I select current line in "List" table
 	* Filling in the name of the settings for adding additional details for partners
@@ -633,7 +633,7 @@ Scenario: _010013 settings for displaying contact information in Stores, Partner
 	* Complete settings to display contact information for Partners
 		Given I open hyperlink "e1cib/list/Catalog.IDInfoSets"
 		And I go to line in "List" table
-		| 'Predefined data item name' |
+		| 'Predefined data name' |
 		| 'Catalog_Partners'          |
 		And I select current line in "List" table
 		Then the form attribute named "PredefinedDataName" became equal to "Catalog_Partners"
@@ -720,7 +720,7 @@ Scenario: _010013 settings for displaying contact information in Stores, Partner
 		And I wait "Partners (Contact info sets) *" window closing in 20 seconds
 	* Fill in the settings for displaying Company contact information
 		And I go to line in "List" table
-			| 'Predefined data item name' |
+			| 'Predefined data name' |
 			| 'Catalog_Companies'          |
 		And I select current line in "List" table
 		Then the form attribute named "PredefinedDataName" became equal to "Catalog_Companies"
@@ -753,7 +753,7 @@ Scenario: _010013 settings for displaying contact information in Stores, Partner
 		And Delay 5
 	* Fill in the settings for displaying Store contact information
 		And I go to line in "List" table
-			| 'Predefined data item name' |
+			| 'Predefined data name' |
 			| 'Catalog_Stores'          |
 		And I select current line in "List" table
 		Then the form attribute named "PredefinedDataName" became equal to "Catalog_Stores"

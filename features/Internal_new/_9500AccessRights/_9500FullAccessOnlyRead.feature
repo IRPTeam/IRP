@@ -586,7 +586,7 @@ Scenario: 950023 check role Full access only read (Contact info sets)
 		And I close all client application windows
 		And In the command interface I select "Settings" "Contact info sets"		
 		And I go to line in "List" table
-			| 'Predefined data item name' |
+			| 'Predefined data name' |
 			| 'Catalog_Companies'     |
 		And I select current line in "List" table
 		If the warning is displayed then 
@@ -672,7 +672,7 @@ Scenario: 950032 check role Full access only read (Object statuses)
 			| 'Objects statuses'|
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data item name |
+			| Predefined data name |
 			| InventoryTransferOrder                |
 		And I select current line in "List" table
 		If the warning is displayed then 

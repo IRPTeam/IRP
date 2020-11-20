@@ -258,7 +258,7 @@ Scenario: _005113 filling in the "Item types" catalog
 	* Check the items group display in AddAttributeAndPropertySets by item key
 			Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 			And I go to line in "List" table
-			| 'Predefined data item name' |
+			| 'Predefined data name' |
 			| 'Catalog_ItemKeys'          |
 			And I select current line in "List" table
 			And "AttributesTree" table contains lines
@@ -354,7 +354,7 @@ Scenario: _005115 adding general additional attributes and properties for catalo
 	* Opening the form for adding additional attributes for Items
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Predefined data item name' |
+			| 'Predefined data name' |
 			| 'Catalog_Items'      |
 		And I select current line in "List" table
 	* Adding additional attributes

@@ -1407,7 +1407,7 @@ Scenario: _2020013 check the selection of documents for distribution of the amou
 		And in the table "PaymentList" I click "Fill" button
 		Then 'Select base documents in the "Cheque bond transaction" document.' window is opened
 		And I go to line in "DocumentsList" table
-			| 'Basis document' | 'Currency' | 'Document amount' |
+			| 'Basis document' | 'Currency' | 'Amount' |
 			| '$$PurchaseInvoice018001$$'| 'TRY'      | '137 000'         |
 		And I select current line in "DocumentsList" table
 		And I input "9 000,00" text in "Amount balance" field of "PickedDocuments" table

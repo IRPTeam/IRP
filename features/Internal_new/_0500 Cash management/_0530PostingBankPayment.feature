@@ -117,7 +117,7 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		And I select current line in "PaymentList" table
 		And I click choice button of "Basis document" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Reference'        |
+			| 'Document'        |
 			| '$$PurchaseInvoice29604$$'      |
 		And I click "Select" button
 		And in "PaymentList" table I move to the next cell

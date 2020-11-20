@@ -216,12 +216,12 @@ Scenario: Create catalog Countries objects
 Scenario: Create catalog ExpenseAndRevenueTypes objects
 
 	And I check or create catalog "ExpenseAndRevenueTypes" objects:
-		| 'Ref'                                                                            | 'DeletionMark' | 'Parent' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef027' | 'No'           | ''       | 'Rent'                     | ''                 | ''               | 'Rent TR'                     |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef028' | 'No'           | ''       | 'Telephone communications' | ''                 | ''               | 'Telephone communications TR' |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef029' | 'No'           | ''       | 'Fuel'                     | ''                 | ''               | 'Fuel TR'                     |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02a' | 'No'           | ''       | 'Software'                 | ''                 | ''               | 'Software TR'                 |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02b' | 'No'           | ''       | 'Delivery'                 | ''                 | ''               | 'Delivery TR'                 |
+		| 'Ref'                                                                            | 'DeletionMark' | 'Parent' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |'Type'                             |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef027' | 'No'           | ''       | 'Rent'                     | ''                 | ''               | 'Rent TR'                     |'Enum.ExpenseAndRevenueTypes.Both' |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef028' | 'No'           | ''       | 'Telephone communications' | ''                 | ''               | 'Telephone communications TR' |'Enum.ExpenseAndRevenueTypes.Both' |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef029' | 'No'           | ''       | 'Fuel'                     | ''                 | ''               | 'Fuel TR'                     |'Enum.ExpenseAndRevenueTypes.Both' |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02a' | 'No'           | ''       | 'Software'                 | ''                 | ''               | 'Software TR'                 |'Enum.ExpenseAndRevenueTypes.Both' |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02b' | 'No'           | ''       | 'Delivery'                 | ''                 | ''               | 'Delivery TR'                 |'Enum.ExpenseAndRevenueTypes.Both' |
 
 
 

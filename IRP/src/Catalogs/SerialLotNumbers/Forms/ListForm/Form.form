@@ -108,7 +108,7 @@
       <id>19</id>
       <title>
         <key>en</key>
-        <value>Description</value>
+        <value>Serial number</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>

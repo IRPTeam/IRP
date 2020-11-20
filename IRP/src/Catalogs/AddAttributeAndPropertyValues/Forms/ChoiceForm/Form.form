@@ -106,10 +106,6 @@
     <items xsi:type="form:FormField">
       <name>Owner</name>
       <id>19</id>
-      <title>
-        <key>en</key>
-        <value>Owner</value>
-      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

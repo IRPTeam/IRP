@@ -120,6 +120,9 @@ Scenario: 950100 Basic role
 	When Create document StockAdjustmentAsSurplus objects
 	When Create document StockAdjustmentAsWriteOff objects
 	When Create document Unbundling objects
+	* Update user roles
+		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
+		And I click "Update all user roles" button	
 	* Set password for Sofia Borisova (Manager 3)
 			Given I open hyperlink "e1cib/list/Catalog.Users"
 			And I go to line in "List" table

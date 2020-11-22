@@ -46,7 +46,7 @@ Scenario: _351501 create a group of item types
     * Check the items group display in AddAttributeAndPropertySets by item key
         Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
         And I go to line in "List" table
-        | 'Predefined data item name' |
+        | 'Predefined data name' |
         | 'Catalog_ItemKeys'          |
         And I select current line in "List" table
         And "AttributesTree" table contains lines

@@ -67,7 +67,7 @@ Scenario: _207001 copy additional attribute values when create catalog element
 		* Opening the form for adding additional attributes for Partners
 			Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 			And I go to line in "List" table
-				| 'Predefined data item name' |
+				| 'Predefined data name' |
 				| 'Catalog_Partners'      |
 			And I select current line in "List" table
 			If "Attributes" table contains lines Then
@@ -185,7 +185,7 @@ Scenario: _207002 copy additional attribute values when create document
 		* Opening the form for adding additional attributes for BankReceipt
 			Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 			And I go to line in "List" table
-				| 'Predefined data item name' |
+				| 'Predefined data name' |
 				| 'Document_BankReceipt'      |
 			And I select current line in "List" table
 			If "Attributes" table contains lines Then
@@ -330,7 +330,7 @@ Scenario: _207003 copy additional atribute row in sets (isConditionSet)
 	* Opening the form for adding additional attributes for Partners
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Predefined data item name' |
+			| 'Predefined data name' |
 			| 'Catalog_Partners'      |
 		And I select current line in "List" table
 	* Delete Additional attribute 01

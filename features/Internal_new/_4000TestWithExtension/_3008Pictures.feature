@@ -149,7 +149,7 @@ Scenario: _300102 item/item key details display in list form (html field)
     * Opening the form for setting additional details for Item
         Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
         And I go to line in "List" table
-            | 'Description' | 'Predefined data item name' |
+            | 'Description' | 'Predefined data name' |
             | 'Items'       | 'Catalog_Items'             |
         And I select current line in "List" table
     * Setting display details in the html field

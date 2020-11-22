@@ -26,7 +26,7 @@ Scenario: _005039 filling in the status catalog for Inventory transfer order
 			| 'Objects statuses'|
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data item name |
+			| Predefined data name |
 			| InventoryTransferOrder                |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
@@ -69,7 +69,7 @@ Scenario: _005040 filling in the status catalog for Outgoing Payment Order
 			| 'Objects statuses'|
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data item name |
+			| Predefined data name |
 			| OutgoingPaymentOrder                |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
@@ -110,7 +110,7 @@ Scenario: _005041 filling in the status catalog for Purchase return order
 			| 'Objects statuses'|
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data item name |
+			| Predefined data name |
 			| PurchaseReturnOrder                |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
@@ -151,7 +151,7 @@ Scenario: _005042 filling in the status catalog for Purchase order
 			| 'Objects statuses'|
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data item name |
+			| Predefined data name |
 			| PurchaseOrder                |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
@@ -191,7 +191,7 @@ Scenario: _005043 filling in the status catalog for Sales return order
 			| 'Objects statuses'|
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data item name |
+			| Predefined data name |
 			| SalesReturnOrder                |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
@@ -231,7 +231,7 @@ Scenario: _005044 filling in the status catalog for Sales order
 			| 'Objects statuses'|
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data item name |
+			| Predefined data name |
 			| SalesOrder                |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
@@ -272,7 +272,7 @@ Scenario: _005045 check for clearing the UniqueID field when copying the status
 		And I expand current line in "List" table
 	* Copy status
 		And I expand a line in "List" table
-			| 'Description' | 'Predefined data item name' |
+			| 'Description' | 'Predefined data name' |
 			| 'Sales order' | 'SalesOrder'                |
 		And I go to line in "List" table
 			| 'Description' |

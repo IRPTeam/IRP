@@ -26,7 +26,7 @@ Scenario: _060004 check that the Reconcilation statement document is connected t
 			| 'Objects statuses'|
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data item name |
+			| Predefined data name |
 			| ReconciliationStatement                |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"

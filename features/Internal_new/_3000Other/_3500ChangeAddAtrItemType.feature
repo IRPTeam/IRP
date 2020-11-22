@@ -19,7 +19,7 @@ Scenario: _350000 preparation for check a bunch of additional details in item ty
     * Open Add attribute and property sets for item key
         Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
         And I go to line in "List" table
-            | 'Predefined data item name' |
+            | 'Predefined data name' |
             | 'Catalog_ItemKeys'          |
         And I select current line in "List" table
         And I click Open button of "ENG" field
@@ -71,7 +71,7 @@ Scenario: _350000 preparation for check a bunch of additional details in item ty
     * Filling in sescription AddAttributeAndProperty sets for Price key
         Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
         And I go to line in "List" table
-        | 'Predefined data item name' |
+        | 'Predefined data name' |
         | 'Catalog_PriceKeys'          |
         And I select current line in "List" table
         And I click Open button of "ENG" field
@@ -92,7 +92,7 @@ Scenario: _350001 check the connection between adding additional details to item
     * Open Additional attribute sets for item key
         Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
         And I go to line in "List" table
-            | 'Predefined data item name' |
+            | 'Predefined data name' |
             | 'Catalog_ItemKeys'          |
         And I select current line in "List" table
     * Check the ligament
@@ -150,7 +150,7 @@ Scenario: _350001 check the connection between adding additional details to item
             * Delete additional attribute AddAttributeAndPropertySets from item key
                 Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
                 And I go to line in "List" table
-                    | 'Predefined data item name' |
+                    | 'Predefined data name' |
                     | 'Catalog_ItemKeys'          |
                 And I select current line in "List" table
                 And I go to line in "AttributesTree" table
@@ -180,7 +180,7 @@ Scenario: _350002 check the connection between the installation according to the
         * Open Additional attribute sets for price key
             Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
             And I go to line in "List" table
-            | 'Predefined data item name' |
+            | 'Predefined data name' |
             | 'Catalog_PriceKeys'          |
             And I select current line in "List" table
         * Open item type Stockings
@@ -254,7 +254,7 @@ Scenario: _350003 mark on removal of Item type and non-display in Add atribute a
     * Check that Item type marked for deletion is not displayed in Add atribute and property sets by Price key
         Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
         And I go to line in "List" table
-            | 'Predefined data item name' |
+            | 'Predefined data name' |
             | 'Catalog_PriceKeys'          |
         And I select current line in "List" table
         And "AttributesTree" table does not contain lines
@@ -265,7 +265,7 @@ Scenario: _350003 mark on removal of Item type and non-display in Add atribute a
     * Check that the Item type marked for deletion is not displayed in Add atribute and property sets by item key
         Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
         And I go to line in "List" table
-            | 'Predefined data item name' |
+            | 'Predefined data name' |
             | 'Catalog_ItemKeys'          |
         And I select current line in "List" table
         And "AttributesTree" table does not contain lines
@@ -285,7 +285,7 @@ Scenario: _350003 mark on removal of Item type and non-display in Add atribute a
     * Check that when removing the mark for deleting Item type is displayed in Add atribute and property sets by Price key
         Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
         And I go to line in "List" table
-            | 'Predefined data item name' |
+            | 'Predefined data name' |
             | 'Catalog_PriceKeys'          |
         And I select current line in "List" table
         And "AttributesTree" table contains lines
@@ -296,7 +296,7 @@ Scenario: _350003 mark on removal of Item type and non-display in Add atribute a
     * Check that when you uncheck Item type for deletion, it is displayed in Add atribute and property sets by item key
         Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
         And I go to line in "List" table
-            | 'Predefined data item name' |
+            | 'Predefined data name' |
             | 'Catalog_ItemKeys'          |
         And I select current line in "List" table
         And "AttributesTree" table contains lines
@@ -310,7 +310,7 @@ Scenario: _350004 edit Item type and check changes in Add atribute and property 
     * Open Additional attribute sets for item key
         Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
         And I go to line in "List" table
-            | 'Predefined data item name' |
+            | 'Predefined data name' |
             | 'Catalog_ItemKeys'          |
         And I select current line in "List" table
     * Edit item type Stockings
@@ -335,7 +335,7 @@ Scenario: _350005 check the selection conditions when adding additional details 
     * Open Additional attribute sets for item
         Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
         And I go to line in "List" table
-            | 'Predefined data item name' |
+            | 'Predefined data name' |
             | 'Catalog_Items'          |
         And I select current line in "List" table
     * Add additional details only for item type Warm Stockings
@@ -407,7 +407,7 @@ Scenario: _350006 check error when doubling additional attribute on item
     * Open Additional attribute sets for Items
         Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
         And I go to line in "List" table
-            | 'Predefined data item name' |
+            | 'Predefined data name' |
             | 'Catalog_Items'          |
         And I select current line in "List" table
     * Check additional attribute

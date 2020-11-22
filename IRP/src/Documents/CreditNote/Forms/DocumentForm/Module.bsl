@@ -177,6 +177,16 @@ Procedure TransactionsOnActivateRow(Item)
 	DocCreditDebitNoteClient.TransactionsOnActivateRow(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure TransactionsExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCreditDebitNoteClient.TransactionsExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure TransactionsExpenseTypeEditTextChange(Item, Text, StandardProcessing)
+	DocCreditDebitNoteClient.TransactionsExpenseTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
 #EndRegion
 
 #Region ItemDescription

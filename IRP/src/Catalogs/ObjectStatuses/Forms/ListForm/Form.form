@@ -55,10 +55,6 @@
     <items xsi:type="form:FormField">
       <name>Code</name>
       <id>34</id>
-      <title>
-        <key>en</key>
-        <value>Code</value>
-      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -167,10 +163,6 @@
     <items xsi:type="form:FormField">
       <name>SetByDefault</name>
       <id>22</id>
-      <title>
-        <key>en</key>
-        <value>Set by default</value>
-      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -216,10 +208,6 @@
     <items xsi:type="form:FormField">
       <name>Posted</name>
       <id>25</id>
-      <title>
-        <key>en</key>
-        <value>Posted</value>
-      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -321,10 +309,6 @@
     <items xsi:type="form:FormField">
       <name>Ref</name>
       <id>31</id>
-      <title>
-        <key>en</key>
-        <value>Reference</value>
-      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

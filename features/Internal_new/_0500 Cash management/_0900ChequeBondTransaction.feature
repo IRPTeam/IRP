@@ -116,19 +116,19 @@ Scenario: _090002 create statuses for Cheque bond
 		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 		And I expand current line in "List" table
 		And I expand a line in "List" table
-			| 'Predefined data item name' |
+			| 'Predefined data name' |
 			| 'ChequeBondTransaction'     |
 		And I go to line in "List" table
-			| 'Predefined data item name' |
+			| 'Predefined data name' |
 			| 'ChequeBondIncoming'     |
-		And I activate "Predefined data item name" field in "List" table
+		And I activate "Predefined data name" field in "List" table
 		And in the table "List" I click the button named "ListContextMenuChange"
 		And I input "ChequeBondIncoming" text in the field named "Description_en"
 		And I click "Save and close" button
 		And I go to line in "List" table
-			| 'Predefined data item name' |
+			| 'Predefined data name' |
 			| 'ChequeBondOutgoing'     |
-		And I activate "Predefined data item name" field in "List" table
+		And I activate "Predefined data name" field in "List" table
 		And in the table "List" I click the button named "ListContextMenuChange"
 		And I input "ChequeBondOutgoing" text in the field named "Description_en"
 		And I click "Save and close" button
@@ -1407,7 +1407,7 @@ Scenario: _2020013 check the selection of documents for distribution of the amou
 		And in the table "PaymentList" I click "Fill" button
 		Then 'Select base documents in the "Cheque bond transaction" document.' window is opened
 		And I go to line in "DocumentsList" table
-			| 'Basis document' | 'Currency' | 'Document amount' |
+			| 'Basis document' | 'Currency' | 'Amount' |
 			| '$$PurchaseInvoice018001$$'| 'TRY'      | '137 000'         |
 		And I select current line in "DocumentsList" table
 		And I input "9 000,00" text in "Amount balance" field of "PickedDocuments" table

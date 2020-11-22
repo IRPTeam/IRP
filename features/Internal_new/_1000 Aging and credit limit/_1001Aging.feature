@@ -431,7 +431,7 @@ Scenario: _1000020 create Credit note and check Aging register moovements
 		* Check the selection of basis documents for the specified partner
 			And delay 2
 			And I go to line in "List" table
-				| 'Reference' |
+				| 'Document' |
 				| '$$SalesInvoice024016$$'  |
 			And I select current line in "List" table
 			And I click the button named "FormCommandSelect" 
@@ -512,7 +512,7 @@ Scenario: _1000030 create Debit note and check Aging register moovements
 		* Check the selection of basis documents for the specified partner
 			And delay 2
 			And I go to line in "List" table
-				| 'Reference' |
+				| 'Document' |
 				| '$$SalesInvoice024016$$'  |
 			And I select current line in "List" table
 			And I click the button named "FormCommandSelect" 

@@ -14,7 +14,6 @@
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <inputByString>Catalog.LockDataModificationReasons.StandardAttribute.Code</inputByString>
-  <inputByString>Catalog.LockDataModificationReasons.StandardAttribute.Description</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
@@ -29,4 +28,14 @@
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.LockDataModificationReasons.Form.ItemForm</defaultObjectForm>
+  <forms uuid="13f935b3-bff3-4144-a391-f5baf8875768">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:Catalog>

@@ -82,6 +82,54 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="10dab2c5-444d-45c0-8653-604e7ce5b9eb">
+    <name>DisableRule</name>
+    <synonym>
+      <key>en</key>
+      <value>Disable rule</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="8594213c-ff8f-4c9f-bc1f-35ba3ade5e89">
+    <name>TableName</name>
+    <synonym>
+      <key>en</key>
+      <value>Table name</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="a1c1e5e3-5334-4c57-a84c-53b4cfbc5b41">
+    <name>LockDataModificationReasons</name>
+    <synonym>
+      <key>en</key>
+      <value>Lock data modification reasons</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.LockDataModificationReasons</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <dimensions uuid="cb658524-33b9-4877-9676-a60c1664d0dd">
     <name>Type</name>
     <synonym>

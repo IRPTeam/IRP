@@ -6,4 +6,5 @@
     <value>Lock data modification server</value>
   </synonym>
   <server>true</server>
+  <privileged>true</privileged>
 </mdclass:CommonModule>

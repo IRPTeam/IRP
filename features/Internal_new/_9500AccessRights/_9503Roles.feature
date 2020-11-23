@@ -11,6 +11,7 @@ Background:
 
 
 Scenario: 950300 preparation
+	Then I connect launched Test client "Этот клиент"
 	* Check test user roles
 		Given I open hyperlink 'e1cib/list/Catalog.Users'
 		And I go to line in "List" table

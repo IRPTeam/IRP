@@ -132,7 +132,7 @@ Scenario: _052001 create Bank receipt based on Sales invoice
 		And I select current line in "PaymentList" table
 		# temporarily
 		And I go to line in "List" table
-			| 'Company'      | 'Document amount' | 'Legal name'        | 'Partner'   |
+			| 'Company'      | 'Amount' | 'Legal name'        | 'Partner'   |
 			| 'Main Company' | '11 099,93'       | 'Company Ferron BP' | 'Ferron BP' |
 		And I click "Select" button
 		And in "PaymentList" table I move to the next cell
@@ -195,7 +195,7 @@ Scenario: _052001 create Bank receipt (independently)
 			And I select current line in "PaymentList" table
 			# temporarily
 			And I go to line in "List" table
-				| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+				| 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 				| '4 250,00'        | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			And I click "Select" button
 		# temporarily
@@ -261,7 +261,7 @@ Scenario: _052001 create Bank receipt (independently)
 			And I select current line in "PaymentList" table
 			# temporarily
 			And I go to line in "List" table
-				| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+				| 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 				| '4 150,00'        | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			And I click "Select" button
 		# temporarily
@@ -328,8 +328,8 @@ Scenario: _052001 create Bank receipt (independently)
 			And I select current line in "PaymentList" table
 			# temporarily
 			And I go to line in "List" table
-				| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-				| '200,00'          | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+				| 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+				| '200,00'           | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			And I click "Select" button
 		# temporarily
 		* Filling in amount in a tabular part

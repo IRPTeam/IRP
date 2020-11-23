@@ -1272,6 +1272,7 @@ Scenario: _092012 check Serial lot number tab in the Item type
 			| '89999'          | 'M/White'   |
 			| '99098809009910' | '38/Yellow' |
 			| '05'             | 'Dress'     |
+	And I close all client application windows 
 	* Select Item type without own Serial lot number
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 		And I go to line in "List" table

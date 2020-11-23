@@ -351,6 +351,8 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_017", NStr("en = 'Scanned barcode %1 is not using set for serial numbers'", Lang));
 	Strings.Insert("InfoMessage_018", NStr("en = 'Add or scan serial lot number'", Lang));
 	
+	Strings.Insert("InfoMessage_019", NStr("en = 'Data lock reasons:'", Lang));
+	
 	#EndRegion
 	
 	#Region QuestionToUser

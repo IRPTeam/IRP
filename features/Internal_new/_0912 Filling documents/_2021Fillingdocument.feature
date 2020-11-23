@@ -2270,10 +2270,10 @@ Scenario: _0154111 check filling in and re-filling Cash payment (transaction typ
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And "List" table does not contain lines
-			| 'Reference' 	| 'Amount'| 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document' 	| 'Amount'| 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$PurchaseInvoice30004$$'	| '4 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I go to line in "List" table
-		| 'Reference' 	| 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+		| 'Document' 	| 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 		| '$$PurchaseInvoice29604$$'	| '13 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
@@ -2490,10 +2490,10 @@ Scenario: _0154113 check filling in and re-filling Bank payment (transaction typ
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And "List" table does not contain lines
-			| 'Reference' 	| 'Amount'| 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document' 	| 'Amount'| 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$PurchaseInvoice30004$$'	| '4 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I go to line in "List" table
-		| 'Reference' 	| 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+		| 'Document' 	| 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 		| '$$PurchaseInvoice29604$$'	| '13 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term

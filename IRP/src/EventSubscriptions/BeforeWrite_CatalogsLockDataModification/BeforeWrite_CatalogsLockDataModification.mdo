@@ -9,5 +9,5 @@
     <types>CatalogObject</types>
   </source>
   <event>BeforeWrite</event>
-  <handler>CommonModule.LockDataModificationServer.BeforeWrite_CatalogsLockDataModification</handler>
+  <handler>CommonModule.LockDataModificationPriveleged.BeforeWrite_CatalogsLockDataModification</handler>
 </mdclass:EventSubscription>

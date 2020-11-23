@@ -10,7 +10,7 @@
   <content>FunctionalOption.UseLockDataModification</content>
   <content>Constant.UseLockDataModification</content>
   <content>EventSubscription.BeforeWrite_DocumentsLockDataModification</content>
-  <content>CommonModule.LockDataModificationServer</content>
+  <content>CommonModule.LockDataModificationPriveleged</content>
   <content>EventSubscription.BeforeWrite_AccumulationRegistersLockDataModification</content>
   <content>InformationRegister.LockDataModificationRules</content>
   <content>Catalog.LockDataModificationReasons</content>

@@ -9,5 +9,5 @@
     <types>AccumulationRegisterRecordSet</types>
   </source>
   <event>BeforeWrite</event>
-  <handler>CommonModule.LockDataModificationServer.BeforeWrite_AccumulationRegistersLockDataModification</handler>
+  <handler>CommonModule.LockDataModificationPriveleged.BeforeWrite_AccumulationRegistersLockDataModification</handler>
 </mdclass:EventSubscription>

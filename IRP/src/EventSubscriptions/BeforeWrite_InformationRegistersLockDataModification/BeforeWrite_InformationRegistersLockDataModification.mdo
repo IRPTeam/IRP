@@ -9,5 +9,5 @@
     <types>InformationRegisterRecordSet</types>
   </source>
   <event>BeforeWrite</event>
-  <handler>CommonModule.LockDataModificationServer.BeforeWrite_InformationRegistersLockDataModification</handler>
+  <handler>CommonModule.LockDataModificationPriveleged.BeforeWrite_InformationRegistersLockDataModification</handler>
 </mdclass:EventSubscription>

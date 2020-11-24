@@ -31,11 +31,12 @@ Scenario: 950403 check function option UseLockDataModification
 	And functions panel contains menu items
 		| "Lock data modification reasons" |
 		| "Lock data modification rules" |
+
+
 	
 
 Scenario: 950403 create reasons
-	And I close all client application windows
-	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+	And In the command interface I select "Settings" "Lock data modification reasons"
 	And I click the button named "FormCreate"
 	And I input "Doc lock" text in "ENG" field
 	And I click Open button of "ENG" field

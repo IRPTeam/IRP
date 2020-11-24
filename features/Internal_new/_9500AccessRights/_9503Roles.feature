@@ -13,7 +13,7 @@ Background:
 Scenario: 950300 preparation
 	Then I connect launched Test client "Этот клиент"
 	* Check test user roles
-		Given I open hyperlink 'e1cib/list/Catalog.Users'
+		And In the command interface I select "Settings" "Users"		
 		And I go to line in "List" table
 			| 'Description'       |
 			| 'Alexander Orlov (Commercial Agent 2)' |

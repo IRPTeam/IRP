@@ -14,7 +14,7 @@ Scenario: 950400 preparation
 	Given I open hyperlink 'e1cib/list/Document.PriceList'
 	And I go to line in "List" table
 		| 'Number'         |
-		| '1' |
+		| '100' |
 	And in the table "List" I click the button named "ListContextMenuPost"
 
 

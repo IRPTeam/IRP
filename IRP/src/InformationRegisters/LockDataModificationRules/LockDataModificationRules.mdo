@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="848f9cfe-7c50-4e0a-aabb-3589273f0204">
+  <producedTypes>
+    <selectionType typeId="149e4060-646b-47e5-8ba6-c5be80222a09" valueTypeId="279ca5d7-3760-42c7-bfcd-243c403a3cfb"/>
+    <listType typeId="edfc3ca8-77d0-4567-9bd8-34729bdcf0a7" valueTypeId="7a862186-aab9-4327-bfe2-103b37889c7c"/>
+    <managerType typeId="4fbb13a7-1cca-472f-a2c4-73df90b57a94" valueTypeId="0c8b61a3-4dea-42cc-b6cc-bcb65d15411c"/>
+    <recordSetType typeId="d839802a-4efe-49a0-8588-257d5de06803" valueTypeId="6b5e498d-35fd-4ba1-84a7-d1295f1b8349"/>
+    <recordKeyType typeId="9f8ac506-41a2-4d51-a475-8a34f4cf7c76" valueTypeId="d94d7733-f8e3-4e80-a3cf-96f5223e950d"/>
+    <recordType typeId="f4b8d40a-2a11-4923-9568-b72cadc3866a" valueTypeId="ce467ceb-0863-4e0e-9e93-87302602c2c5"/>
+    <recordManagerType typeId="b59d105c-8099-4eb0-a19c-8c0dafa9c10f" valueTypeId="716b3303-3161-4da3-870a-f94135c23e46"/>
+  </producedTypes>
+  <name>LockDataModificationRules</name>
+  <synonym>
+    <key>en</key>
+    <value>Lock data modification rules</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <defaultRecordForm>InformationRegister.LockDataModificationRules.Form.RecordForm</defaultRecordForm>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="bb15699f-b1d9-4f67-a1e7-fa780d9c4a3d">
+    <name>Attribute</name>
+    <synonym>
+      <key>en</key>
+      <value>Attribute</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>64</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="76e7d986-a575-4c83-b2a7-0708e8aaa8b7">
+    <name>ComparisonType</name>
+    <synonym>
+      <key>en</key>
+      <value>Comparison type</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="083d58ec-b168-4091-bf9c-595306587c8c">
+    <name>Value</name>
+    <synonym>
+      <key>en</key>
+      <value>Value</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <types>String</types>
+      <types>Date</types>
+      <types>Boolean</types>
+      <types>AnyRef</types>
+      <numberQualifiers>
+        <precision>10</precision>
+      </numberQualifiers>
+      <stringQualifiers>
+        <length>10</length>
+      </stringQualifiers>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="10dab2c5-444d-45c0-8653-604e7ce5b9eb">
+    <name>DisableRule</name>
+    <synonym>
+      <key>en</key>
+      <value>Disable rule</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="8594213c-ff8f-4c9f-bc1f-35ba3ade5e89">
+    <name>TableName</name>
+    <synonym>
+      <key>en</key>
+      <value>Table name</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="a1c1e5e3-5334-4c57-a84c-53b4cfbc5b41">
+    <name>LockDataModificationReasons</name>
+    <synonym>
+      <key>en</key>
+      <value>Lock data modification reasons</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.LockDataModificationReasons</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <dimensions uuid="cb658524-33b9-4877-9676-a60c1664d0dd">
+    <name>Type</name>
+    <synonym>
+      <key>en</key>
+      <value>Type</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>256</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <denyIncompleteValues>true</denyIncompleteValues>
+    <indexing>IndexWithAdditionalOrder</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <forms uuid="ab616530-682b-4442-9ec3-2e901d198407">
+    <name>RecordForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Record form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:InformationRegister>

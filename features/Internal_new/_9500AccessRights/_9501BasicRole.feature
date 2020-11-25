@@ -158,4 +158,5 @@ Scenario: 950100 Basic role
 	If the warning is displayed then 
 		Then I raise "Failed to open" exception
 	And I close all client application windows
+	And I close TestClient session
 

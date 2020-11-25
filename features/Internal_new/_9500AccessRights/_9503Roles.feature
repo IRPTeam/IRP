@@ -217,6 +217,7 @@ Scenario: 950310 check adding user in several Access group (role combination)
 			| 'Basic role'        |
 		Then the number of "RoleList" table lines is "равно" 5
 		And I close current window
+	And I close TestClient session
 		
 				
 				

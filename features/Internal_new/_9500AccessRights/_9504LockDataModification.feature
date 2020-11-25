@@ -10,7 +10,7 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 Scenario: 950400 preparation
-	Then I connect launched Test client "Этот клиент"
+	And I connect "Этот клиент" profile of TestClient
 	Given I open hyperlink 'e1cib/list/Document.PriceList'
 	And I go to line in "List" table
 		| 'Number'         |
@@ -89,12 +89,12 @@ Scenario: 950403 create reasons
 
 Scenario: 950405 create rules for documents
 	Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
-	* Create rule for SO (=)
+	* Create rule for SO (<=)
 		And I click the button named "FormCreate"
 		And I select "Sales order" exact value from "Type" drop-down list
 		And I select "Date" exact value from "Attribute" drop-down list
-		And I select "=" exact value from "Comparison type" drop-down list
-		And I input "07.10.2020" text in "Value" field
+		And I select "<=" exact value from "Comparison type" drop-down list
+		And I input "08.10.2020" text in "Value" field
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
 			| 'Code'         |
@@ -118,8 +118,8 @@ Scenario: 950405 create rules for documents
 		Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
 		And "List" table contains lines
 		| 'Type'                  | 'Attribute'               | 'Comparison type' | 'Table name' | 'Value'                            | 'Disable rule' | 'Lock data modification reasons' |
-		| 'Document.SalesInvoice' | 'Attributes.Agreement'    | 'IN'              | ''           | 'Basic Partner terms, without VAT' | 'Yes'          | 'Doc lock'                       |
-		| 'Document.SalesOrder'   | 'StandardAttributes.Date' | '<='              | ''           | '*'                       | 'No'           | 'Doc lock'                       |
+		| 'Document.SalesInvoice' | 'Attributes.Agreement'    | 'IN'              | ''           | 'Basic Partner terms, without VAT' | 'No'          | 'Doc lock'                       |
+		| 'Document.SalesOrder'   | 'StandardAttributes.Date' | '<='              | ''           | '08.10.2020'                       | 'No'           | 'Doc lock'                       |
 		And I close all client application windows
 	* Check rules (=)
 		* Modification
@@ -244,22 +244,22 @@ Scenario: 950407 create rules for accumulation register
 	* Preparation
 		Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 		If "List" table does not contain lines Then
-			| "Number" |
-			| "2" |
-			And I go to line in "List" table
-				| 'Number'         |
-				| '1' |
-			And in the table "List" I click the button named "ListContextMenuCopy"
-			And I click "Post and close" button
+				| "Number" |
+				| "2" |
+				And I go to line in "List" table
+					| 'Number'         |
+					| '1' |
+				And in the table "List" I click the button named "ListContextMenuCopy"
+				And I click "Post and close" button
 		Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 		If "List" table does not contain lines Then
-			| "Number" |
-			| "2" |
-			And I go to line in "List" table
-				| 'Number'         |
-				| '1' |
-			And in the table "List" I click the button named "ListContextMenuCopy"
-			And I click "Post and close" button
+				| "Number" |
+				| "2" |
+				And I go to line in "List" table
+					| 'Number'         |
+					| '1' |
+				And in the table "List" I click the button named "ListContextMenuCopy"
+				And I click "Post and close" button
 	Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
 	* Create rule for Order balance (=)
 		And I click the button named "FormCreate"
@@ -402,20 +402,20 @@ Scenario: 950409 create rules for information register (with recorder)
 		If "List" table does not contain lines Then
 			| "Number" |
 			| "2" |
-			And I go to line in "List" table
-				| 'Number'         |
-				| '1' |
-			And in the table "List" I click the button named "ListContextMenuCopy"
-			And I click "Post and close" button
+				And I go to line in "List" table
+					| 'Number'         |
+					| '1' |
+				And in the table "List" I click the button named "ListContextMenuCopy"
+				And I click "Post and close" button
 		Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 		If "List" table does not contain lines Then
-			| "Number" |
-			| "2" |
-			And I go to line in "List" table
-				| 'Number'         |
-				| '1' |
-			And in the table "List" I click the button named "ListContextMenuCopy"
-			And I click "Post and close" button
+				| "Number" |
+				| "2" |
+				And I go to line in "List" table
+					| 'Number'         |
+					| '1' |
+				And in the table "List" I click the button named "ListContextMenuCopy"
+				And I click "Post and close" button
 	Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
 	* Create rule for Order balance (=)
 		And I click the button named "FormCreate"
@@ -1464,6 +1464,10 @@ Scenario: 950425 check that Disable rule does not work
 	
 		
 
+		
+			
+		
+
 Scenario: 950480 check access to the Lock data modification for user with role Full access only read 
 	And I connect "TestAdmin" TestClient using "SBorisova" login and "F12345" password
 	Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
@@ -1471,9 +1475,7 @@ Scenario: 950480 check access to the Lock data modification for user with role F
 		| 'Type'                      |
 		| 'InformationRegister.Taxes' |
 	And I select current line in "List" table
-	Then the form attribute named "Type" became equal to "InformationRegister.Taxes"
 	And the editing text of form attribute named "Type" became equal to "Company taxes"
-	Then the form attribute named "Attribute" became equal to "Dimensions.Tax"
 	And the editing text of form attribute named "Attribute" became equal to "Tax"
 	Then the form attribute named "ComparisonType" became equal to "IN"
 	Then the form attribute named "Value" became equal to "VAT"
@@ -1489,9 +1491,7 @@ Scenario: 950480 check access to the Lock data modification for user with role F
 		
 
 
-
-
-	Scenario: 950490 switch off function option and check that rules does not work
+Scenario: 950490 switch off function option and check that rules does not work
 		And I connect "Этот клиент" profile of TestClient
 		* Preparation
 			Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'

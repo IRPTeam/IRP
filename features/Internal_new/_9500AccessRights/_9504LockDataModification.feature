@@ -84,7 +84,7 @@ Scenario: 950405 create rules for documents
 		And "List" table contains lines
 		| 'Type'                  | 'Attribute'               | 'Comparison type' | 'Table name' | 'Value'                            | 'Disable rule' | 'Lock data modification reasons' |
 		| 'Document.SalesInvoice' | 'Attributes.Agreement'    | 'IN'              | ''           | 'Basic Partner terms, without VAT' | 'Yes'          | 'Doc lock'                       |
-		| 'Document.SalesOrder'   | 'StandardAttributes.Date' | '<='              | ''           | '08.10.2020'                       | 'No'           | 'Doc lock'                       |
+		| 'Document.SalesOrder'   | 'StandardAttributes.Date' | '<='              | ''           | '07.10.2020'                       | 'No'           | 'Doc lock'                       |
 		And I close all client application windows
 	* Check rules (=)
 		* Modification
@@ -217,7 +217,11 @@ Scenario: 950407 create rules for accumulation register
 			| 'Description' |
 			| 'Store 02'    |
 		And I select current line in "List" table
-		And I select "Register Lock" exact value from "Lock data modification reasons" drop-down list
+		And I click Select button of "Lock data modification reasons" field
+		And I go to line in "List" table
+			| 'Code'         |
+			| '000000000002' |
+		And I click the button named "FormChoose"
 		And I click "Save and close" button
 	* Create rule for Partner AR transactions (in)
 		And I click the button named "FormCreate"
@@ -229,7 +233,11 @@ Scenario: 950407 create rules for accumulation register
 			| 'Description' |
 			| 'Kalipso'    |
 		And I select current line in "List" table
-		And I select "Register Lock" exact value from "Lock data modification reasons" drop-down list
+		And I click Select button of "Lock data modification reasons" field
+		And I go to line in "List" table
+			| 'Code'         |
+			| '000000000002' |
+		And I click the button named "FormChoose"
 		And I click "Save and close" button
 	* Check rules (=)
 		* Modification (UndoPosting)
@@ -346,7 +354,11 @@ Scenario: 950409 create rules for information register (with recorder)
 			| 'Item key' | 'Item' |
 			| '38/Yellow'| 'Trousers' |
 		And I select current line in "List" table
-		And I select "Register Lock" exact value from "Lock data modification reasons" drop-down list
+		And I click Select button of "Lock data modification reasons" field
+		And I go to line in "List" table
+			| 'Code'         |
+			| '000000000002' |
+		And I click the button named "FormChoose"
 		And I click "Save and close" button
 	* Create rule for Prices by item keys (in)
 		And I click the button named "FormCreate"
@@ -358,7 +370,11 @@ Scenario: 950409 create rules for information register (with recorder)
 			| 'Description' |
 			| 'Basic Price Types'|
 		And I select current line in "List" table
-		And I select "Register Lock" exact value from "Lock data modification reasons" drop-down list
+		And I click Select button of "Lock data modification reasons" field
+		And I go to line in "List" table
+			| 'Code'         |
+			| '000000000002' |
+		And I click the button named "FormChoose"
 		And I click "Save and close" button
 	* Check rules (=)
 		* Modification (UndoPosting)
@@ -479,7 +495,11 @@ Scenario: 950411 create rules for information register (without recorder)
 			| 'Description' |
 			| 'Bank UA'|
 		And I select current line in "List" table	
-		And I select "Register Lock" exact value from "Lock data modification reasons" drop-down list
+		And I click Select button of "Lock data modification reasons" field
+		And I go to line in "List" table
+			| 'Code'         |
+			| '000000000002' |
+		And I click the button named "FormChoose"
 		And I click "Save and close" button
 	* Create rule for Company taxes (in)
 		And I click the button named "FormCreate"
@@ -491,7 +511,11 @@ Scenario: 950411 create rules for information register (without recorder)
 			| 'Description' |
 			| 'VAT'|
 		And I select current line in "List" table		
-		And I select "Register Lock" exact value from "Lock data modification reasons" drop-down list
+		And I click Select button of "Lock data modification reasons" field
+		And I go to line in "List" table
+			| 'Code'         |
+			| '000000000002' |
+		And I click the button named "FormChoose"
 		And I click "Save and close" button
 	* Check rules (=)
 		* Modification

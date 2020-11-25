@@ -84,7 +84,7 @@ Scenario: 950405 create rules for documents
 		And "List" table contains lines
 		| 'Type'                  | 'Attribute'               | 'Comparison type' | 'Table name' | 'Value'                            | 'Disable rule' | 'Lock data modification reasons' |
 		| 'Document.SalesInvoice' | 'Attributes.Agreement'    | 'IN'              | ''           | 'Basic Partner terms, without VAT' | 'Yes'          | 'Doc lock'                       |
-		| 'Document.SalesOrder'   | 'StandardAttributes.Date' | '<='              | ''           | '07.10.2020'                       | 'No'           | 'Doc lock'                       |
+		| 'Document.SalesOrder'   | 'StandardAttributes.Date' | '<='              | ''           | '*'                       | 'No'           | 'Doc lock'                       |
 		And I close all client application windows
 	* Check rules (=)
 		* Modification

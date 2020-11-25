@@ -41,7 +41,6 @@ Scenario: 950100 Basic role
 	When Create catalog Units objects (box (8 pcs))
 	When Create catalog Units objects (pcs)
 	When Create chart of characteristic types CurrencyMovementType objects
-	When Create catalog Currencies objects
 	When Create catalog ItemKeys objects
 	When Create catalog ItemTypes objects
 	When Create catalog ItemTypes objects (Furniture)

@@ -570,3 +570,32 @@ Function GetCustomCommonSettings(RowOwner, TableOfSettings)
 	EndDo;
 	Return RowOwner.Rows.Count() > 0;
 EndFunction
+
+#Region FormCommandsEventHandlers
+
+&AtClient
+Procedure MetadataTreeCollapseAll(Command)
+	CollapseTreeRows(MetadataTree);
+EndProcedure
+
+&AtClient
+Procedure MetadataTreeExpandAll(Command)
+	For Each Row In MetadataTree.GetItems() Do 
+		Items.MetadataTree.Expand(Row.GetID(), True);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region Private
+
+&AtClient
+Procedure CollapseTreeRows(Row)
+	ChildRows = Row.GetItems();
+	For Each ChildRow In ChildRows Do
+		CollapseTreeRows(ChildRow); 
+		Items.MetadataTree.Collapse(ChildRow.GetID());
+	EndDo;
+EndProcedure
+
+#EndRegion

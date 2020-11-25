@@ -112,7 +112,7 @@
       <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
     </items>
     <items xsi:type="form:FormGroup">
-      <name>MetadataTreeGroup1</name>
+      <name>MetadataTreeGroupNameColumns</name>
       <id>57</id>
       <items xsi:type="form:FormField">
         <name>MetadataTreePictureIndex</name>
@@ -282,8 +282,12 @@
       <userVisible>
         <common>true</common>
       </userVisible>
+      <title>
+        <key>en</key>
+        <value>Metadata tree group name columns</value>
+      </title>
       <extendedTooltip>
-        <name>MetadataTreeGroup1ExtendedTooltip</name>
+        <name>MetadataTreeGroupNameColumnsExtendedTooltip</name>
         <id>58</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -477,6 +481,95 @@
         <autoMaxHeight>true</autoMaxHeight>
         <placementArea>UserCmds</placementArea>
         <representationInContextMenu>Auto</representationInContextMenu>
+      </items>
+      <items xsi:type="form:FormGroup">
+        <name>MetadataTreeGroupManage</name>
+        <id>65</id>
+        <items xsi:type="form:Button">
+          <name>MetadataTreeMetadataTreeCollapseAll</name>
+          <id>67</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <extendedTooltip>
+            <name>MetadataTreeMetadataTreeCollapseAllExtendedTooltip</name>
+            <id>68</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <commandName>Form.Command.MetadataTreeCollapseAll</commandName>
+          <representation>Auto</representation>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <placementArea>UserCmds</placementArea>
+          <representationInContextMenu>Auto</representationInContextMenu>
+        </items>
+        <items xsi:type="form:Button">
+          <name>MetadataTreeMetadataTreeExpandAll</name>
+          <id>69</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <extendedTooltip>
+            <name>MetadataTreeMetadataTreeExpandAllExtendedTooltip</name>
+            <id>70</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <commandName>Form.Command.MetadataTreeExpandAll</commandName>
+          <representation>Auto</representation>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <placementArea>UserCmds</placementArea>
+          <representationInContextMenu>Auto</representationInContextMenu>
+        </items>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <title>
+          <key>en</key>
+          <value>Metadata tree group manage</value>
+        </title>
+        <extendedTooltip>
+          <name>MetadataTreeGroupManageExtendedTooltip</name>
+          <id>66</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <extInfo xsi:type="form:ButtonGroupExtInfo"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1089,6 +1182,46 @@
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>OnlyUsedRows</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>MetadataTreeCollapseAll</name>
+    <title>
+      <key>en</key>
+      <value>Collapse all</value>
+    </title>
+    <id>5</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.CollapseAll</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>MetadataTreeCollapseAll</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>MetadataTreeExpandAll</name>
+    <title>
+      <key>en</key>
+      <value>Expande all</value>
+    </title>
+    <id>6</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.ExpandAll</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>MetadataTreeExpandAll</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

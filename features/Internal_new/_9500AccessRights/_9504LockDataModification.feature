@@ -1468,26 +1468,26 @@ Scenario: 950425 check that Disable rule does not work
 			
 		
 
-Scenario: 950480 check access to the Lock data modification for user with role Full access only read 
-	And I connect "TestAdmin" TestClient using "SBorisova" login and "F12345" password
-	Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
-	And I go to line in "List" table
-		| 'Type'                      |
-		| 'InformationRegister.Taxes' |
-	And I select current line in "List" table
-	And the editing text of form attribute named "Type" became equal to "Company taxes"
-	And the editing text of form attribute named "Attribute" became equal to "Tax"
-	Then the form attribute named "ComparisonType" became equal to "IN"
-	Then the form attribute named "Value" became equal to "VAT"
-	Then the form attribute named "LockDataModificationReasons" became equal to "Register lock"
-	And I close current window
-	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
-	And "List" table contains lines
-		| 'ENG'           |
-		| 'Doc lock'      |
-		| 'Register lock' |
-	And I close TestClient session
-	And I connect "Этот клиент" profile of TestClient
+// Scenario: 950480 check access to the Lock data modification for user with role Full access only read 
+// 	And I connect "TestAdmin" TestClient using "SBorisova" login and "F12345" password
+// 	Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
+// 	And I go to line in "List" table
+// 		| 'Type'                      |
+// 		| 'InformationRegister.Taxes' |
+// 	And I select current line in "List" table
+// 	And the editing text of form attribute named "Type" became equal to "Company taxes"
+// 	And the editing text of form attribute named "Attribute" became equal to "Tax"
+// 	Then the form attribute named "ComparisonType" became equal to "IN"
+// 	Then the form attribute named "Value" became equal to "VAT"
+// 	Then the form attribute named "LockDataModificationReasons" became equal to "Register lock"
+// 	And I close current window
+// 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+// 	And "List" table contains lines
+// 		| 'ENG'           |
+// 		| 'Doc lock'      |
+// 		| 'Register lock' |
+// 	And I close TestClient session
+// 	And I connect "Этот клиент" profile of TestClient
 		
 
 

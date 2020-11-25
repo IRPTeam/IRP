@@ -109,6 +109,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_029", NStr("en = 'External attributes'", Lang));
 	Strings.Insert("Form_030", NStr("en = 'Dimensions'", Lang));
 	Strings.Insert("Form_031", NStr("en = 'Weight information'", Lang));
+	Strings.Insert("Form_032", NStr("en = 'Period'", Lang));
 	#EndRegion
 	
 	#Region ErrorMessages

@@ -18,7 +18,8 @@ Function CheckFilling(Object) Export
 		If Not ArrayOfSerialLotNumbers.Count() Then
 			IsOk = False;
 			CommonFunctionsClientServer.ShowUsersMessage(
-				StrTemplate(R().Error_010, "Serial lot number"), "ItemList[" + Format((Row.LineNumber - 1),
+				StrTemplate(R().Error_010, Metadata.Catalogs.SerialLotNumbers.Presentation()), 
+				"ItemList[" + Format((Row.LineNumber - 1),
 				"NZ=0; NG=0;") + "].SerialLotNumbersPresentation", Object);
 		Else
 			QuantityBySerialLotNumber = 0;

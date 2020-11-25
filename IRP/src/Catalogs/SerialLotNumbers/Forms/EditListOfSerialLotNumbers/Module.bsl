@@ -98,14 +98,14 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 		If Not ValueIsFilled(Row.SerialLotNumber) Then
 			Cancel = True; 
 			CommonFunctionsClientServer.ShowUsersMessage(
-				StrTemplate(R().Error_010, "Serial lot number"), 
+				StrTemplate(R().Error_010, Metadata.Catalogs.SerialLotNumbers.Presentation()), 
 				"SerialLotNumbers[" + Format(RowIndex, "NZ=0; NG=0;") + "].SerialLotNumber", 
 				ThisObject);
 		EndIf;
 		If Not ValueIsFilled(Row.Quantity) Then
 			Cancel = True; 
 			CommonFunctionsClientServer.ShowUsersMessage(
-				StrTemplate(R().Error_010, "Quantity"), 
+				StrTemplate(R().Error_010, R().Form_003), 
 				"SerialLotNumbers[" + Format(RowIndex, "NZ=0; NG=0;") + "].Quantity", 
 				ThisObject);
 		EndIf;		
@@ -174,9 +174,7 @@ EndProcedure
 &AtClient
 Procedure CalculateStatus(SetStatus = Undefined)
 	
-	If IsBlankString(SetStatus) Then
-		
-	Else
+	If Not IsBlankString(SetStatus) Then
 		SerialLotNumberStatus = SetStatus;
 	EndIf;
 	

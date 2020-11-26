@@ -291,7 +291,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 				| '520,00' | 'Dress'    | '18%' | 'XS/Blue'   | '79,32'      | '1,000' | 'pcs'  | '440,68'     | '520,00'       | 'Store 01' |
 		* Check filling in currency tab
 			And I click "Save" button
-			And I move to the tab named "GroupCurrency"
+			And I move to the tab named "GroupCurrencies"
 			And "ObjectCurrencies" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
@@ -2355,7 +2355,7 @@ Scenario: _0154154 check filling in and re-filling Retail return receipt
 			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'pcs'  | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Store 01' |
 		* Check filling in currency tab
 			And I click "Save" button
-			And I move to the tab named "GroupCurrency"
+			And I move to the tab named "GroupCurrencies"
 			And "ObjectCurrencies" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
@@ -2670,7 +2670,7 @@ Scenario: _0154155 check filling in and re-filling Retail sales receipt
 			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Store 01' | 'Shop 01'       |
 		* Check filling in currency tab
 			And I click "Save" button
-			And I move to the tab named "GroupCurrency"
+			And I move to the tab named "GroupCurrencies"
 			And "ObjectCurrencies" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
@@ -2815,7 +2815,7 @@ Scenario: _0154156 check Retail sales receipt when changing date
 		| 'Sale autum, TRY'               |
 		And I close "Partner terms" window
 	* Check the recount of the currency table when the date is changed
-		And I move to the tab named "GroupCurrency"
+		And I move to the tab named "GroupCurrencies"
 		And "ObjectCurrencies" table became equal
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |

@@ -3487,7 +3487,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormGroup">
-      <name>GroupCurrency</name>
+      <name>GroupCurrencies</name>
       <id>656</id>
       <items xsi:type="form:Table">
         <name>ObjectCurrencies</name>
@@ -4122,10 +4122,10 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Currency</value>
+        <value>Currencies</value>
       </title>
       <extendedTooltip>
-        <name>GroupCurrencyExtendedTooltip</name>
+        <name>GroupCurrenciesExtendedTooltip</name>
         <id>657</id>
         <visible>true</visible>
         <enabled>true</enabled>

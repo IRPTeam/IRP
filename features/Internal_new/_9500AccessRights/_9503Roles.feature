@@ -13,7 +13,7 @@ Background:
 Scenario: 950300 preparation
 	Then I connect launched Test client "Этот клиент"
 	* Check test user roles
-		Given I open hyperlink 'e1cib/list/Catalog.Users'
+		And In the command interface I select "Settings" "Users"		
 		And I go to line in "List" table
 			| 'Description'       |
 			| 'Alexander Orlov (Commercial Agent 2)' |
@@ -217,6 +217,7 @@ Scenario: 950310 check adding user in several Access group (role combination)
 			| 'Basic role'        |
 		Then the number of "RoleList" table lines is "равно" 5
 		And I close current window
+	And I close TestClient session
 		
 				
 				

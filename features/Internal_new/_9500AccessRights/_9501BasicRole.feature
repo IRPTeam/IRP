@@ -41,7 +41,6 @@ Scenario: 950100 Basic role
 	When Create catalog Units objects (box (8 pcs))
 	When Create catalog Units objects (pcs)
 	When Create chart of characteristic types CurrencyMovementType objects
-	When Create catalog Currencies objects
 	When Create catalog ItemKeys objects
 	When Create catalog ItemTypes objects
 	When Create catalog ItemTypes objects (Furniture)
@@ -54,7 +53,6 @@ Scenario: 950100 Basic role
 	When Create catalog PriceTypes objects
 	When Create catalog Specifications objects
 	When Create catalog UserGroups objects
-	When Create catalog Users objects
 	When Create catalog RetailCustomers objects
 	When Create chart of characteristic types AddAttributeAndProperty objects
 	When Create catalog AddAttributeAndPropertyValues objects
@@ -158,4 +156,5 @@ Scenario: 950100 Basic role
 	If the warning is displayed then 
 		Then I raise "Failed to open" exception
 	And I close all client application windows
+	And I close TestClient session
 

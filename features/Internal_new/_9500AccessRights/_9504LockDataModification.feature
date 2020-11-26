@@ -1463,31 +1463,110 @@ Scenario: 950425 check that Disable rule does not work
 		And I close all client application windows
 	
 		
-
-		
+Scenario: 950430 create rules for attribute from extension
+	Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
+	* Create rule for Currency catalog (=)
+		And I click the button named "FormCreate"
+		And I select "Currencies" exact value from "Type" drop-down list
+		And I select "REP_Attribute1" exact value from "Attribute" drop-down list
+		And I select "=" exact value from "Comparison type" drop-down list
+		And I input "4" text in "Value" field
+		And I click Select button of "Lock data modification reasons" field
+		And I go to line in "List" table
+			| 'Code'         |
+			| '000000000003' |
+		And I click the button named "FormChoose"
+		And I click "Save and close" button
+	* Check rules
+		* Modification
+			Given I open hyperlink 'e1cib/list/Catalog.Currencies'
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Euro' |
+			And I select current line in "List" table
+			And I input "978" text in "Numeric code" field	
+			And I click "Save and close" button
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button
+			Given Recent TestClient message contains "Data lock reasons:*" string by template
+			Given Recent TestClient message contains "*Catalog Lock" string by template
+			And I close all client application windows
+		* Create new
+			Given I open hyperlink 'e1cib/list/Catalog.Currencies'
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Euro' |
+			And in the table "List" I click the button named "ListContextMenuCopy"
+			And I click Open button of "ENG" field
+			And I input "Euro1" text in "ENG" field
+			And I input "Euro1" text in "TR" field
+			And I click "Ok" button
+			And I click "Save and close" button
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button
+			Given Recent TestClient message contains "Data lock reasons:*" string by template
+			Given Recent TestClient message contains "*Catalog Lock" string by template
+			And I close all client application windows
+		* Deletion
+			Given I open hyperlink 'e1cib/list/Catalog.Currencies'
+			And "List" table does not contain lines
+				| 'Description' |
+				| 'Euro1' |
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Euro' |
+			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"					
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button
+			Given Recent TestClient message contains "Data lock reasons:*" string by template
+			Given Recent TestClient message contains "*Catalog Lock" string by template
+			And I close all client application windows
+		* Re-Save
+			Given I open hyperlink 'e1cib/list/Catalog.Currencies'
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Euro' |
+			And I select current line in "List" table
+			And I click "Save and close" button
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button
+			Given Recent TestClient message contains "Data lock reasons:*" string by template
+			Given Recent TestClient message contains "*Catalog Lock" string by template
+			And I close all client application windows
+	* Does not fall under the conditions
+			Given I open hyperlink 'e1cib/list/Catalog.Currencies'
+			And I go to line in "List" table
+				| 'Description' |
+				| 'American dollar' |
+			And I select current line in "List" table
+			And I click "Save and close" button
+			Then user message window does not contain messages
+			
 			
 		
 
-// Scenario: 950480 check access to the Lock data modification for user with role Full access only read 
-// 	And I connect "TestAdmin" TestClient using "SBorisova" login and "F12345" password
-// 	Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
-// 	And I go to line in "List" table
-// 		| 'Type'                      |
-// 		| 'InformationRegister.Taxes' |
-// 	And I select current line in "List" table
-// 	And the editing text of form attribute named "Type" became equal to "Company taxes"
-// 	And the editing text of form attribute named "Attribute" became equal to "Tax"
-// 	Then the form attribute named "ComparisonType" became equal to "IN"
-// 	Then the form attribute named "Value" became equal to "VAT"
-// 	Then the form attribute named "LockDataModificationReasons" became equal to "Register lock"
-// 	And I close current window
-// 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
-// 	And "List" table contains lines
-// 		| 'ENG'           |
-// 		| 'Doc lock'      |
-// 		| 'Register lock' |
-// 	And I close TestClient session
-// 	And I connect "Этот клиент" profile of TestClient
+Scenario: 950480 check access to the Lock data modification for user with role Full access only read 
+	And I connect "SBorisova" TestClient using "SBorisova" login and "F12345" password
+	Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
+	And I go to line in "List" table
+		| 'Type'                      |
+		| 'InformationRegister.Taxes' |
+	And I select current line in "List" table
+	And the editing text of form attribute named "Type" became equal to "InformationRegister.Taxes"
+	And the editing text of form attribute named "Attribute" became equal to "Tax"
+	Then the form attribute named "ComparisonType" became equal to "IN"
+	Then the form attribute named "Value" became equal to "VAT"
+	Then the form attribute named "LockDataModificationReasons" became equal to "Register lock TR"
+	And I close current window
+	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+	And "List" table contains lines
+		| 'Description_en'           |
+		| 'Doc lock'      |
+		| 'Register lock' |
+	And I close TestClient session
+	And I connect "Этот клиент" profile of TestClient
 		
 
 
@@ -1521,6 +1600,8 @@ Scenario: 950490 switch off function option and check that rules does not work
 		And I set "True" value to the constant "UseLockDataModification"
 		And I close TestClient session
 		And I connect "Этот клиент" profile of TestClient
+
+
 
 							
 

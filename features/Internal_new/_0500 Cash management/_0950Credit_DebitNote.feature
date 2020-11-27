@@ -86,7 +86,7 @@ Scenario: _095001 preparation
 			And I input "15,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I move to "Other" tab
-			And I expand "Currency" group
+			And I expand "Currencies" group
 			And I move to the tab named "GroupCurrencies"
 			And I expand "More" group
 			And I input "01.01.2020  10:00:00" text in "Date" field

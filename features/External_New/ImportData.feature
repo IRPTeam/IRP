@@ -222,8 +222,9 @@ Scenario: Create catalog ExpenseAndRevenueTypes objects
 		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef029' | 'No'           | ''       | 'Fuel'                     | ''                 | ''               | 'Fuel TR'                     |'Enum.ExpenseAndRevenueTypes.Both' |
 		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02a' | 'No'           | ''       | 'Software'                 | ''                 | ''               | 'Software TR'                 |'Enum.ExpenseAndRevenueTypes.Both' |
 		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02b' | 'No'           | ''       | 'Delivery'                 | ''                 | ''               | 'Delivery TR'                 |'Enum.ExpenseAndRevenueTypes.Both' |
-
-
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed93fbced11eaf114c59ef02b' | 'No'           | ''       | 'Revenue'                  | ''                 | ''               | 'Revenue TR'                  |'Enum.ExpenseAndRevenueTypes.Revenue' |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed95fbced11eaf114c59ef02b' | 'No'           | ''       | 'Expense'                  | ''                 | ''               | 'Expense TR'                  |'Enum.ExpenseAndRevenueTypes.Expense' |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed98fbced11eaf114c59ef02b' | 'Yes'          | ''       | 'Deletion'                 | ''                 | ''               | 'Deletion TR'                 |'Enum.ExpenseAndRevenueTypes.Both' |
 
 Scenario: Create catalog FileStorageVolumes objects
 

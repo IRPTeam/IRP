@@ -754,12 +754,7 @@ Scenario: Open object form "PrintLabels"
 	And I close current window
 
 
-Scenario: Open object form "QuantityCompare"
 
-	Given I open "QuantityCompare" data processor default form 
-	If the warning is displayed then
-		Then I raise "Failed to open data processor form QuantityCompare" exception
-	And I close current window
 
 
 

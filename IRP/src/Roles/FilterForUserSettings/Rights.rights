@@ -1081,4 +1081,11 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.RetailReturnReceipt.TabularSection.ItemList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

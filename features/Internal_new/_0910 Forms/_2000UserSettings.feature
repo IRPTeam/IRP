@@ -51,6 +51,7 @@ Scenario: _200000 preparation (user settings)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog Partners objects
+		When Create information register UserSettings records (Retail document)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -1294,8 +1295,26 @@ Scenario: _200032 check the availability of editing custom settings from the use
 		Then "Edit user settings" window is opened
 	And I close all client application windows
 
+Scenario:  _200033 check filling in field from custom user settings in Retail return receipt
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "BusinessUnit" became equal to "Shop 01"
+	And I close all client application windows
 
-	
+Scenario:  _200034 check filling in field from custom user settings in Cash statement
+	Given I open hyperlink "e1cib/list/Document.CashStatement"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "BusinessUnit" became equal to "Shop 01"
+		Then the form attribute named "CashAccount" became equal to "Cash desk №4"
+	And I close all client application windows	
 
 
 Scenario: _999999 close TestClient session

@@ -1618,15 +1618,24 @@ Scenario: Create accumulation register StockBalance records
 Scenario: Create information register UserSettings records (Retail document)
 
 	And I check or create information register "UserSettings" records:
-		| 'UserOrGroup'                                                   | 'MetadataObject'              | 'AttributeName'         | 'KindOfAttribute'                | 'Value'                                                                 |
-		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailSalesReceipt' | 'Agreement'             | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf12effe70fcd'    |
-		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailSalesReceipt' | 'BusinessUnit'          | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' |
-		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailSalesReceipt' | 'Company'               | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'     |
-		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailSalesReceipt' | 'ItemList.BusinessUnit' | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' |
-		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailSalesReceipt' | 'ItemList.Store'        | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'        |
-		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailSalesReceipt' | 'LegalName'             | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf12effe70fcc'     |
-		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailSalesReceipt' | 'Partner'               | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf12effe70fcb'      |
-
+		| 'UserOrGroup'                                                   | 'MetadataObject'               | 'AttributeName'         | 'KindOfAttribute'                | 'Value'                                                                 |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailSalesReceipt'  | 'Agreement'             | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf12effe70fcd'    |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailSalesReceipt'  | 'BusinessUnit'          | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailSalesReceipt'  | 'Company'               | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'     |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailSalesReceipt'  | 'ItemList.BusinessUnit' | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailSalesReceipt'  | 'ItemList.Store'        | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'        |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailSalesReceipt'  | 'LegalName'             | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf12effe70fcc'     |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailSalesReceipt'  | 'Partner'               | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf12effe70fcb'      |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailReturnReceipt' | 'Agreement'             | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf12effe70fcd'    |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailReturnReceipt' | 'BusinessUnit'          | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailReturnReceipt' | 'Company'               | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'     |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailReturnReceipt' | 'ItemList.BusinessUnit' | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailReturnReceipt' | 'ItemList.Store'        | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'        |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailReturnReceipt' | 'LegalName'             | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf12effe70fcc'     |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.RetailReturnReceipt' | 'Partner'               | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf12effe70fcb'      |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.CashStatement'       | 'BusinessUnit'          | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.CashStatement'       | 'Company'               | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'     |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.CashStatement'       | 'CashAccount'           | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf124a9ba0839'  |
 
 Scenario: Create catalog ItemKeys objects (Table)
 

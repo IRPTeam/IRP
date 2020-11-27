@@ -53,6 +53,7 @@ Scenario: 950100 Basic role
 	When Create catalog PriceTypes objects
 	When Create catalog Specifications objects
 	When Create catalog UserGroups objects
+	When Create catalog Users objects
 	When Create catalog RetailCustomers objects
 	When Create chart of characteristic types AddAttributeAndProperty objects
 	When Create catalog AddAttributeAndPropertyValues objects

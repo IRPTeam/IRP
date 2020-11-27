@@ -51,6 +51,7 @@ Scenario: _200000 preparation (user settings)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog Partners objects
+		When When Create catalog BusinessUnits objects
 		When Create information register UserSettings records (Retail document)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"

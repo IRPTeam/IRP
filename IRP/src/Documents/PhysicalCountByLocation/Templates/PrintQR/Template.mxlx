@@ -11,14 +11,17 @@
 		<languageInfo>
 			<id>ha</id>
 			<code>HASH</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>tr</id>
 			<code>Turkish</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>ru</id>
 			<code>Russian</code>
+			<description/>
 		</languageInfo>
 	</languageSettings>
 	<columns>
@@ -50,10 +53,6 @@
 	<templateMode>true</templateMode>
 	<height>3</height>
 	<vgRows>3</vgRows>
-	<namedItem xsi:type="NamedItemDrawing">
-		<name>QR</name>
-		<drawingID>1</drawingID>
-	</namedItem>
 	<namedItem xsi:type="NamedItemCells">
 		<name>Column</name>
 		<area>
@@ -64,6 +63,10 @@
 			<endColumn>0</endColumn>
 			<columnsID>4c4642ef-8883-4694-a69b-b903cda3dbe5</columnsID>
 		</area>
+	</namedItem>
+	<namedItem xsi:type="NamedItemDrawing">
+		<name>QR</name>
+		<drawingID>1</drawingID>
 	</namedItem>
 	<namedItem xsi:type="NamedItemCells">
 		<name>Row</name>
@@ -90,8 +93,8 @@
 	<format>
 		<font>0</font>
 		<border>0</border>
-		<borderColor>style:ToolTipTextColor</borderColor>
 		<height>348</height>
+		<borderColor>style:ToolTipTextColor</borderColor>
 		<width>155</width>
 		<horizontalAlignment>Center</horizontalAlignment>
 		<fillType>Parameter</fillType>

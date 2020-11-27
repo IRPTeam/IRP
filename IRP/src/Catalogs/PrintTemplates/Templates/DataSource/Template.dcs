@@ -116,10 +116,12 @@ FROM
 	<dataSet xsi:type="DataSetObject">
 		<name>DataSet2</name>
 		<dataSource>DataSource1</dataSource>
+		<objectName/>
 	</dataSet>
 	<dataSet xsi:type="DataSetObject">
 		<name>DataSet2</name>
 		<dataSource>DataSource1</dataSource>
+		<objectName/>
 	</dataSet>
 	<parameter>
 		<name>Period</name>

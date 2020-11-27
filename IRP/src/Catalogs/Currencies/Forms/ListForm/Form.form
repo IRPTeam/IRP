@@ -54,6 +54,10 @@
     <items xsi:type="form:FormField">
       <name>NumericCode</name>
       <id>27</id>
+      <title>
+        <key>en</key>
+        <value>Numeric code</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -158,6 +162,10 @@
     <items xsi:type="form:FormField">
       <name>Description</name>
       <id>21</id>
+      <title>
+        <key>en</key>
+        <value>Description</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

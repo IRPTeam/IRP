@@ -3,9 +3,16 @@ Procedure UpdateUsersRoleOnWrite(Source, Cancel) Export
 		Return;
 	EndIf;
 	
+	If Source.DataExchange.Load Then
+		Return;
+	EndIf;
+	
 	If TypeOf(Source) = Type("CatalogObject.AccessGroups") Then
-		Result = UpdateUsersRolesByGroup(Source.Ref);
+		Result = UpdateUsersRolesByGroup(Source);
 	ElsIf TypeOf(Source) = Type("CatalogObject.AccessProfiles") Then
+		If Source.IsNew() Then
+			Return;
+		EndIf;
 		Result = UpdateUsersRole(Source.Ref);
 	EndIf;
 	If Source.AdditionalProperties.Property("UsersEventOnWriteResult") Then
@@ -17,9 +24,7 @@ EndProcedure
 
 Function UpdateUsersRolesByGroup(AccessGroup)
 	
-	For Each Row In AccessGroup.Profiles Do
-		UpdateUsersRole(Row.Profile);
-	EndDo;
+	UpdateUsersRole(AccessGroup.Profiles.UnloadColumn("Profile"));
 	
 	Return Undefined;
 	
@@ -38,7 +43,7 @@ Function UpdateUsersRole(AccessProfile)
 		|FROM
 		|	Catalog.AccessGroups.Profiles AS AccessGroupsProfiles
 		|WHERE
-		|	AccessGroupsProfiles.Profile = &Profile
+		|	AccessGroupsProfiles.Profile In (&Profile)
 		|GROUP BY
 		|	AccessGroupsProfiles.Ref
 		|;
@@ -72,7 +77,13 @@ Function UpdateUsersRole(AccessProfile)
 			Result.ArrayOfResults.Add(New Structure("Success, Message", True,
 					StrTemplate(R().UsersEvent_002, QuerySelection.User.InfobaseUserID, QuerySelection.User.Description)));
 			User.Roles.Clear();
-			AddRoles(AccessProfile.Roles, User);
+			If TypeOf(AccessProfile) = Type("Array") Then 
+				For Each Profile In AccessProfile Do
+					AddRoles(Profile.Roles, User);
+				EndDo;
+			Else
+				AddRoles(AccessProfile.Roles, User);
+			EndIf;
 			User.Write();
 		EndIf;
 	EndDo;
@@ -120,3 +131,24 @@ Function SessionParametersSetCurrentUser() Export
 	Return FoundUser;
 
 EndFunction
+
+Procedure UpdateAllUsersRolesViaAccessGroups() Export
+	
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	AccessGroups.Ref
+		|FROM
+		|	Catalog.AccessGroups AS AccessGroups
+		|WHERE
+		|	NOT AccessGroups.DeletionMark";
+	
+	QueryResult = Query.Execute();
+	
+	SelectionDetailRecords = QueryResult.Select();
+	
+	While SelectionDetailRecords.Next() Do
+		 Result = UpdateUsersRolesByGroup(SelectionDetailRecords.Ref);
+	EndDo;
+
+EndProcedure

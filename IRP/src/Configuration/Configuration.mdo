@@ -12,7 +12,8 @@
   <containedObjects classId="9de14907-ec23-4a07-96f0-85521cb6b53b" objectId="c9e4b5e2-23ba-4dac-b9c5-f47d3a1a7ace"/>
   <containedObjects classId="51f2d5d8-ea4d-4064-8892-82951750031e" objectId="a6cea7c6-a6a3-47f6-9424-59d2f6347dae"/>
   <containedObjects classId="e68182ea-4237-4383-967f-90c1e3370bc7" objectId="9b7d6465-4ba2-48d9-be1b-7d5bffceab4a"/>
-  <configurationExtensionCompatibilityMode>8.3.16</configurationExtensionCompatibilityMode>
+  <containedObjects classId="fb282519-d103-4dd3-bc12-cb271d631dfc" objectId="087e34df-3957-4ed1-a442-5f02f2e51da0"/>
+  <configurationExtensionCompatibilityMode>8.3.17</configurationExtensionCompatibilityMode>
   <defaultRunMode>ManagedApplication</defaultRunMode>
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
@@ -38,8 +39,6 @@
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectAutonumerationMode>NotAutoFree</objectAutonumerationMode>
   <modalityUseMode>DontUse</modalityUseMode>
-  <synchronousExtensionAndAddInCallUseMode>DontUse</synchronousExtensionAndAddInCallUseMode>
-  <synchronousPlatformExtensionAndAddInCallUseMode>DontUse</synchronousPlatformExtensionAndAddInCallUseMode>
   <compatibilityMode>8.3.16</compatibilityMode>
   <languages uuid="f1c59d1c-aafe-420b-96cd-c5f1608cf9c1">
     <name>English</name>
@@ -194,6 +193,7 @@
   <commonModules>CommonModule.CalculationServer</commonModules>
   <commonModules>CommonModule.CalculationStringsClientServer</commonModules>
   <commonModules>CommonModule.CatAgreementsClient</commonModules>
+  <commonModules>CommonModule.CatAgreementsClientServer</commonModules>
   <commonModules>CommonModule.CatAgreementsServer</commonModules>
   <commonModules>CommonModule.CatCashAccountsClient</commonModules>
   <commonModules>CommonModule.CatCashAccountsServer</commonModules>
@@ -230,6 +230,7 @@
   <commonModules>CommonModule.DocChequeBondTransactionClient</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionServer</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteClient</commonModules>
+  <commonModules>CommonModule.DocCreditDebitNoteClientServer</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteServer</commonModules>
   <commonModules>CommonModule.DocExpenseClient</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
@@ -310,7 +311,10 @@
   <commonModules>CommonModule.IDInfoServer</commonModules>
   <commonModules>CommonModule.IntegrationClientServer</commonModules>
   <commonModules>CommonModule.IntegrationServer</commonModules>
+  <commonModules>CommonModule.IntegrationServerPriveleged</commonModules>
   <commonModules>CommonModule.IntegrationServerReuse</commonModules>
+  <commonModules>CommonModule.JorDocumentsClient</commonModules>
+  <commonModules>CommonModule.JorDocumentsServer</commonModules>
   <commonModules>CommonModule.LibraryLoader</commonModules>
   <commonModules>CommonModule.Localization</commonModules>
   <commonModules>CommonModule.LocalizationClient</commonModules>
@@ -349,11 +353,9 @@
   <commonModules>CommonModule.UsersEvent</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.JorDocumentsServer</commonModules>
-  <commonModules>CommonModule.JorDocumentsClient</commonModules>
-  <commonModules>CommonModule.DocCreditDebitNoteClientServer</commonModules>
-  <commonModules>CommonModule.CatAgreementsClientServer</commonModules>
-  <commonModules>CommonModule.IntegrationServerPriveleged</commonModules>
+  <commonModules>CommonModule.CatExpenseAndRevenueTypesServer</commonModules>
+  <commonModules>CommonModule.LockDataModificationPriveleged</commonModules>
+  <commonModules>CommonModule.MetadataInfo</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -372,19 +374,23 @@
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <httpServices>HTTPService.FileTransferService</httpServices>
   <httpServices>HTTPService.SaasService</httpServices>
-  <eventSubscriptions>EventSubscription.CheckDescriptionsFillCheck</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.CheckUniqueID</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.ClearDocumentBasisesOnCopy</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.FillingWithDefaultData</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.FindDataForInputString</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.GetCatalogPresentation</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.GetCatalogPresentationFields</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.OpenMobileForm</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.RefreshReusableValues</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.UpdateUsersRole</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.EventSubscription</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.OnCopyRemoveUniqueID</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.OnCopyDocumentProcessing</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_CheckUniqueID</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_RefreshReusableValues</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.ChoiceDataGetProcessing_FindDataForInputString</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.FillCheckProcessing_CatalogsDescriptions</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.Filling_DocumentsWithDefaultData</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.FormGetProcessing_OpenMobileForm</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnCopy_AddAttributes</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnCopy_ClearDocumentBasises</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnCopy_DocumentProcessing</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnCopy_RemoveUniqueID</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnWrite_UpdateUsersRoleOnWrite</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.PresentationFieldsGetProcessing_GetCatalogPresentationFields</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetCatalogPresentation</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_DocumentsLockDataModification</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_CatalogsLockDataModification</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_AccumulationRegistersLockDataModification</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_InformationRegistersLockDataModification</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
   <settingsStorages>SettingsStorage.ReportOptions</settingsStorages>
@@ -393,6 +399,7 @@
   <functionalOptions>FunctionalOption.ShowAlphaTestingSaas</functionalOptions>
   <functionalOptions>FunctionalOption.UseCompanies</functionalOptions>
   <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
+  <functionalOptions>FunctionalOption.UseLockDataModification</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -431,6 +438,7 @@
   <commonCommands>CommonCommand.OpenPartnersCustomer</commonCommands>
   <commonCommands>CommonCommand.OpenPartnersVendor</commonCommands>
   <commonCommands>CommonCommand.OpenVendorAgreements</commonCommands>
+  <commonCommands>CommonCommand.UpdateAllUserRoles</commonCommands>
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
   <constants>Constant.ConnectionStatus</constants>
@@ -441,6 +449,7 @@
   <constants>Constant.ShowBetaTesting</constants>
   <constants>Constant.UseCompanies</constants>
   <constants>Constant.UseItemKey</constants>
+  <constants>Constant.UseLockDataModification</constants>
   <commonForms>CommonForm.DataClassifier</commonForms>
   <commonForms>CommonForm.EditAddProperties</commonForms>
   <commonForms>CommonForm.EditDescriptions</commonForms>
@@ -520,6 +529,7 @@
   <catalogs>Catalog.UserGroups</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
+  <catalogs>Catalog.LockDataModificationReasons</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>
@@ -597,6 +607,10 @@
   <enums>Enum.SerialNumberTypes</enums>
   <enums>Enum.SerialNumbersOwner</enums>
   <enums>Enum.EquipmentTypes</enums>
+  <enums>Enum.ExpenseAndRevenueTypes</enums>
+  <enums>Enum.MetadataTypes</enums>
+  <enums>Enum.MetadataSubtype</enums>
+  <enums>Enum.Rights</enums>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
@@ -608,13 +622,17 @@
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>
+  <informationRegisters>InformationRegister.BarcodeScanInfoCheck</informationRegisters>
   <informationRegisters>InformationRegister.BundleContents</informationRegisters>
+  <informationRegisters>InformationRegister.BusinessUnitBankTerms</informationRegisters>
   <informationRegisters>InformationRegister.ChequeBondStatuses</informationRegisters>
   <informationRegisters>InformationRegister.CurrencyRates</informationRegisters>
+  <informationRegisters>InformationRegister.DataMappingTable</informationRegisters>
   <informationRegisters>InformationRegister.ExternalCommands</informationRegisters>
   <informationRegisters>InformationRegister.IDInfo</informationRegisters>
   <informationRegisters>InformationRegister.IntegrationInfo</informationRegisters>
   <informationRegisters>InformationRegister.ItemSegments</informationRegisters>
+  <informationRegisters>InformationRegister.LockDataModificationRules</informationRegisters>
   <informationRegisters>InformationRegister.ObjectStatuses</informationRegisters>
   <informationRegisters>InformationRegister.PartnerSegments</informationRegisters>
   <informationRegisters>InformationRegister.PricesByItemKeys</informationRegisters>
@@ -622,13 +640,10 @@
   <informationRegisters>InformationRegister.PricesByProperties</informationRegisters>
   <informationRegisters>InformationRegister.RemainingItemsInfo</informationRegisters>
   <informationRegisters>InformationRegister.SavedItems</informationRegisters>
+  <informationRegisters>InformationRegister.SharedReportOptions</informationRegisters>
   <informationRegisters>InformationRegister.Taxes</informationRegisters>
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
-  <informationRegisters>InformationRegister.SharedReportOptions</informationRegisters>
-  <informationRegisters>InformationRegister.BusinessUnitBankTerms</informationRegisters>
-  <informationRegisters>InformationRegister.BarcodeScanInfoCheck</informationRegisters>
-  <informationRegisters>InformationRegister.DataMappingTable</informationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountsStatement</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AdvanceFromCustomers</accumulationRegisters>

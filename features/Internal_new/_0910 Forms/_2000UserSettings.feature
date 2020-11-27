@@ -70,7 +70,7 @@ Scenario: _200001 customize the CI user settings
 		| 'CI'          |
 	And I select current line in "List" table
 	And I input "CI" text in the field named "Description_en"
-	And I input "en" text in "Interface localization code" field
+	And I select "English" exact value from "Interface localization" drop-down list
 	And I click "Save" button
 	And I click "Settings" button
 	* Fill in custom settings for Sales order

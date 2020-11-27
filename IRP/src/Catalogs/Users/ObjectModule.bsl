@@ -3,7 +3,11 @@ Procedure BeforeWrite(Cancel)
 		Return;
 	EndIf;
 	
-	User = InfoBaseUsers.FindByName(Description);
+	If ValueIsFilled(InfobaseUserID) Then
+		User = InfoBaseUsers.FindByUUID(InfobaseUserID);
+	ElsIf ValueIsFilled(Description) Then
+		User = InfoBaseUsers.FindByName(Description);
+	EndIf;
 	If User = Undefined Then
 		User = InfoBaseUsers.CreateUser();
 	EndIf;

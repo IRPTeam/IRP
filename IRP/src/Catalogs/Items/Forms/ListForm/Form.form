@@ -57,13 +57,19 @@
       <items xsi:type="form:FormField">
         <name>Code</name>
         <id>38</id>
+        <title>
+          <key>en</key>
+          <value>Code</value>
+        </title>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>List.Code</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>List.Code</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>CodeExtendedTooltip</name>
@@ -107,6 +113,10 @@
       <items xsi:type="form:FormField">
         <name>Description</name>
         <id>22</id>
+        <title>
+          <key>en</key>
+          <value>Description</value>
+        </title>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -159,6 +169,10 @@
       <items xsi:type="form:FormField">
         <name>ItemType</name>
         <id>16</id>
+        <title>
+          <key>en</key>
+          <value>Item type</value>
+        </title>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -208,6 +222,10 @@
       <items xsi:type="form:FormField">
         <name>Ref</name>
         <id>25</id>
+        <title>
+          <key>en</key>
+          <value>Reference</value>
+        </title>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>

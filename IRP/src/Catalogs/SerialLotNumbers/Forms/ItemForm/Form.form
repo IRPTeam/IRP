@@ -12,8 +12,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>OwnerSelect</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>OwnerSelect</segments>
+      </paths>
     </dataPath>
     <handlers>
       <event>OnChange</event>
@@ -227,12 +229,12 @@
     <name>NotificationProcessing</name>
   </handlers>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
   <autoTitle>true</autoTitle>
@@ -276,6 +278,75 @@
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>ItemType</name>
+    <title>
+      <key>en</key>
+      <value>Item type</value>
+    </title>
+    <id>3</id>
+    <valueType>
+      <types>CatalogRef.ItemTypes</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>Item</name>
+    <title>
+      <key>en</key>
+      <value>Item</value>
+    </title>
+    <id>4</id>
+    <valueType>
+      <types>CatalogRef.Items</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>ItemKey</name>
+    <title>
+      <key>en</key>
+      <value>Item key</value>
+    </title>
+    <id>5</id>
+    <valueType>
+      <types>CatalogRef.ItemKeys</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>Barcode</name>
+    <title>
+      <key>en</key>
+      <value>Barcode</value>
+    </title>
+    <id>6</id>
+    <valueType>
+      <types>String</types>
+      <stringQualifiers/>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>
@@ -284,6 +355,10 @@
     <handlers>
       <event>BeforeWriteAtServer</event>
       <name>BeforeWriteAtServer</name>
+    </handlers>
+    <handlers>
+      <event>AfterWriteAtServer</event>
+      <name>AfterWriteAtServer</name>
     </handlers>
   </extInfo>
 </form:Form>

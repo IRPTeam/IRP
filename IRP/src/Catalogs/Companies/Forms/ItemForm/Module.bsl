@@ -72,7 +72,7 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 			Row = CompanyTaxes[Index];
 			If Not ValueIsFilled(Row.Period) Then
 				Cancel = True;
-				MessageText = StrTemplate(R().Error_010, "Period");
+				MessageText = StrTemplate(R().Error_010, R().Form_032);
 				CommonFunctionsClientServer.ShowUsersMessage(MessageText,
 						"CompanyTaxes[" + Format(Index, "NG=0;") + "].Period");
 			EndIf;

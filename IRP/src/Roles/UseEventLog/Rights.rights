@@ -29,5 +29,9 @@
 			<name>MainWindowModeKiosk</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>AnalyticsSystemClient</name>
+			<value>true</value>
+		</right>
 	</object>
 </Rights>

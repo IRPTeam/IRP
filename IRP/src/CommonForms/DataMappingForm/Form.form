@@ -24,9 +24,6 @@
         <paths xsi:type="form:DataPath">
           <segments>DataMapping.Info</segments>
         </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>DataMapping.Info</segments>
-        </paths>
       </dataPath>
       <extendedTooltip>
         <name>DataMappingInfoExtendedTooltip</name>
@@ -80,9 +77,6 @@
         <paths xsi:type="form:DataPath">
           <segments>DataMapping.Value</segments>
         </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>DataMapping.Value</segments>
-        </paths>
       </dataPath>
       <extendedTooltip>
         <name>DataMappingValueExtendedTooltip</name>
@@ -133,9 +127,6 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>DataMapping.Ref</segments>
-        </paths>
         <paths xsi:type="form:DataPath">
           <segments>DataMapping.Ref</segments>
         </paths>
@@ -527,9 +518,7 @@
   </formCommands>
   <parameters>
     <name>DataMap</name>
-    <valueType>
-      <types>Arbitrary</types>
-    </valueType>
+    <valueType/>
     <keyParameter>true</keyParameter>
   </parameters>
   <commandInterface>

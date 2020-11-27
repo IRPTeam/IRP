@@ -54,6 +54,10 @@
     <items xsi:type="form:FormField">
       <name>Number</name>
       <id>16</id>
+      <title>
+        <key>en</key>
+        <value>Number</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -103,6 +107,10 @@
     <items xsi:type="form:FormField">
       <name>Date</name>
       <id>19</id>
+      <title>
+        <key>en</key>
+        <value>Date</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -151,6 +159,10 @@
     <items xsi:type="form:FormField">
       <name>Partner</name>
       <id>22</id>
+      <title>
+        <key>en</key>
+        <value>Partner</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -199,6 +211,10 @@
     <items xsi:type="form:FormField">
       <name>Status</name>
       <id>34</id>
+      <title>
+        <key>en</key>
+        <value>Status</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -308,6 +324,10 @@
     <items xsi:type="form:FormField">
       <name>Currency</name>
       <id>31</id>
+      <title>
+        <key>en</key>
+        <value>Currency</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -360,6 +380,10 @@
     <items xsi:type="form:FormField">
       <name>Company</name>
       <id>37</id>
+      <title>
+        <key>en</key>
+        <value>Company</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -412,6 +436,10 @@
     <items xsi:type="form:FormField">
       <name>Author</name>
       <id>40</id>
+      <title>
+        <key>en</key>
+        <value>Author</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

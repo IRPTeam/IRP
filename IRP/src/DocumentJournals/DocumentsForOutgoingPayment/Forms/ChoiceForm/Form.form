@@ -54,6 +54,10 @@
     <items xsi:type="form:FormField">
       <name>Ref</name>
       <id>31</id>
+      <title>
+        <key>en</key>
+        <value>Document</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -262,13 +266,19 @@
     <items xsi:type="form:FormField">
       <name>Agreement</name>
       <id>46</id>
+      <title>
+        <key>en</key>
+        <value>Partner term</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Agreement</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Agreement</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>AgreementExtendedTooltip</name>
@@ -317,8 +327,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Currency</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Currency</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>CurrencyExtendedTooltip</name>
@@ -362,6 +374,10 @@
     <items xsi:type="form:FormField">
       <name>DocumentAmount</name>
       <id>40</id>
+      <title>
+        <key>en</key>
+        <value>Amount</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

@@ -173,25 +173,25 @@ Procedure CreateSubFormItemDescription(Form, Values, GroupName, AddInfo = Undefi
 	ArrayOfNewFormAttributes = New Array();
 	
 	For Each AttributeName In AttributeNames Do
-		MetadataInfo = Metadata.CommonAttributes[AttributeName];
+		MetadataValue = Metadata.CommonAttributes[AttributeName];
 		
-		ArrayOfNewFormAttributes.Add(New FormAttribute(MetadataInfo.Name
-				, MetadataInfo.Type
+		ArrayOfNewFormAttributes.Add(New FormAttribute(MetadataValue.Name
+				, MetadataValue.Type
 				,
-				, String(MetadataInfo)
+				, String(MetadataValue)
 				, True));
 	EndDo;
 	
 	Form.ChangeAttributes(ArrayOfNewFormAttributes);
 	
 	For Each AttributeName In AttributeNames Do
-		MetadataInfo = Metadata.CommonAttributes[AttributeName];
+		MetadataValue = Metadata.CommonAttributes[AttributeName];
 		If Form.Items.Find(AttributeName) = Undefined Then
-			NewAttribute = Form.Items.Add(MetadataInfo.Name, Type("FormField"), ParentGroup);
+			NewAttribute = Form.Items.Add(MetadataValue.Name, Type("FormField"), ParentGroup);
 			NewAttribute.Type = FormFieldType.InputField;
-			NewAttribute.DataPath = MetadataInfo.Name;
+			NewAttribute.DataPath = MetadataValue.Name;
 			
-			Form[MetadataInfo.Name] = Values[MetadataInfo.Name];
+			Form[MetadataValue.Name] = Values[MetadataValue.Name];
 		EndIf;
 	EndDo;
 EndProcedure

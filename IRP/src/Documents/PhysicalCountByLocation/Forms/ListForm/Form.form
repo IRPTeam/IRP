@@ -308,8 +308,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.PhysicalInventory</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.PhysicalInventory</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>PhysicalInventoryExtendedTooltip</name>

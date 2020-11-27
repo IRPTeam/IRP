@@ -21,6 +21,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.DataBaseStatus</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.Items</metadata>
     <use>Use</use>
   </content>
@@ -201,7 +205,7 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.DataBaseStatus</metadata>
+    <metadata>Catalog.LockDataModificationReasons</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

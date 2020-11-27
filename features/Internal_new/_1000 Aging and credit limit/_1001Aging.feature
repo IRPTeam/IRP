@@ -220,7 +220,7 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 		| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '05.11.2020'                              |
 		And I close all client application windows
 		
-Scenario: _1000009 create Cash receipt and check Aging register moovements
+Scenario: _1000009 create Cash receipt and check Aging register movements
 	* Create Cash receipt
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
@@ -259,7 +259,7 @@ Scenario: _1000009 create Cash receipt and check Aging register moovements
 			And I activate "Basis document" field in "PaymentList" table
 			And I select current line in "PaymentList" table
 			And I go to line in "List" table
-				| 'Document amount' | 'Company'      | 'Legal name'      | 'Partner' | 'Document'               |
+				| 'Amount' | 'Company'      | 'Legal name'      | 'Partner' | 'Document'               |
 				| '550,00'          | 'Main Company' | 'Company Kalipso' | 'Kalipso' | '$$SalesInvoice0240162$$' |
 			And I click "Select" button
 			And I activate field named "PaymentListAmount" in "PaymentList" table
@@ -312,7 +312,7 @@ Scenario: _1000009 create Cash receipt and check Aging register moovements
 		| ''                                     | 'Receipt'     | '$$DateCashReceipt1000009$$' | '550'                  | 'Main Company'   | 'Cash desk №2'           | 'TRY'                              | 'en description is empty'      | 'No'                               | ''                | ''                             | ''                     |
 		And I close all client application windows
 
-Scenario: _1000015 create Bank receipt and check Aging register moovements
+Scenario: _1000015 create Bank receipt and check Aging register movements
 	* Create Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
@@ -346,7 +346,7 @@ Scenario: _1000015 create Bank receipt and check Aging register moovements
 			And I activate "Basis document" field in "PaymentList" table
 			And I select current line in "PaymentList" table
 			And I go to line in "List" table
-				| 'Document amount' | 'Company'      | 'Legal name'      | 'Partner' | 'Document'               |
+				| 'Amount' | 'Company'      | 'Legal name'      | 'Partner' | 'Document'               |
 				| '550,00'          | 'Main Company' | 'Company Kalipso' | 'Kalipso' | '$$SalesInvoice024016$$' |
 			And I click "Select" button
 			And I activate field named "PaymentListAmount" in "PaymentList" table
@@ -400,7 +400,7 @@ Scenario: _1000015 create Bank receipt and check Aging register moovements
 		And I close all client application windows
 
 
-Scenario: _1000020 create Credit note and check Aging register moovements
+Scenario: _1000020 create Credit note and check Aging register movements
 	* Create document
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I click the button named "FormCreate"
@@ -431,7 +431,7 @@ Scenario: _1000020 create Credit note and check Aging register moovements
 		* Check the selection of basis documents for the specified partner
 			And delay 2
 			And I go to line in "List" table
-				| 'Reference' |
+				| 'Document' |
 				| '$$SalesInvoice024016$$'  |
 			And I select current line in "List" table
 			And I click the button named "FormCommandSelect" 
@@ -481,7 +481,7 @@ Scenario: _1000020 create Credit note and check Aging register moovements
 	And I close all client application windows
 			
 
-Scenario: _1000030 create Debit note and check Aging register moovements
+Scenario: _1000030 create Debit note and check Aging register movements
 	* Create document
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I click the button named "FormCreate"
@@ -512,7 +512,7 @@ Scenario: _1000030 create Debit note and check Aging register moovements
 		* Check the selection of basis documents for the specified partner
 			And delay 2
 			And I go to line in "List" table
-				| 'Reference' |
+				| 'Document' |
 				| '$$SalesInvoice024016$$'  |
 			And I select current line in "List" table
 			And I click the button named "FormCommandSelect" 

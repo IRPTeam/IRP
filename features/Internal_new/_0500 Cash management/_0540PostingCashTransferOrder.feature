@@ -1039,7 +1039,7 @@ Scenario: _300516 check connection to CashTransferOrder report "Related document
 		| $$NumberCashTransferOrder054001$$      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
-	Then "Related documents" window is opened
+		Then "Related documents" window is opened
 		And "DocumentsTree" table contains lines
 		| 'Ref'                    | 'Amount' |
 		| '$$CashTransferOrder054001$$' | '*'      |

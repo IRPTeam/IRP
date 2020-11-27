@@ -604,7 +604,7 @@ Scenario: _0154101 check filling in and re-filling Sales order
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
 		* Check filling in currency tab
 			And I click "Save" button
-			And I move to the tab named "GroupCurrency"
+			And I move to the tab named "GroupCurrencies"
 			And "ObjectCurrencies" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
@@ -914,7 +914,7 @@ Scenario: _0154102 check filling in and re-filling Sales invoice
 				| '550,00' | 'Dress' | 'L/Green'  | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
 		* Check filling in currency tab
-			And I move to the tab named "GroupCurrency"
+			And I move to the tab named "GroupCurrencies"
 			And "ObjectCurrencies" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
@@ -1028,7 +1028,7 @@ Scenario: _0154103 check Sales order when changing date
 			| 'Sale autum, TRY'               |
 		And I close "Partner terms" window
 	* Check the recount of the currency table when the date is changed
-		And I move to the tab named "GroupCurrency"
+		And I move to the tab named "GroupCurrencies"
 		And "ObjectCurrencies" table became equal
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
@@ -1094,7 +1094,7 @@ Scenario: _0154104 check Sales invoice when changing date
 		| 'Sale autum, TRY'               |
 		And I close "Partner terms" window
 	* Check the recount of the currency table when the date is changed
-		And I move to the tab named "GroupCurrency"
+		And I move to the tab named "GroupCurrencies"
 		And "ObjectCurrencies" table became equal
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
@@ -1362,7 +1362,7 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '99,00'      | 'pcs'  | '550,00'     | '649,00'       | 'Store 03' |
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '93,60'      | 'pcs'  | '520,00'     | '613,60'       | 'Store 03' |
 		* Check filling in currency tab
-			And I move to the tab named "GroupCurrency"
+			And I move to the tab named "GroupCurrencies"
 			And "ObjectCurrencies" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'  | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
@@ -1675,7 +1675,7 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '99,00'      | 'pcs'  | '550,00'     | '649,00'       | 'Store 03' |
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '93,60'      | 'pcs'  | '520,00'     | '613,60'       | 'Store 03' |
 		* Check filling in currency tab
-			And I move to the tab named "GroupCurrency"
+			And I move to the tab named "GroupCurrencies"
 			And "ObjectCurrencies" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'  | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
@@ -1840,10 +1840,10 @@ Scenario: _0154107 check filling in and re-filling Cash receipt (transaction typ
 		And I select current line in "PaymentList" table
 		# temporarily
 		And "List" table does not contain lines
-			| 'Document'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document'          | 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$SalesInvoice024016$$' | '554,66'          | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I go to line in "List" table
-			| 'Document'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document'          | 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$SalesInvoice024025$$' | '11 000,00'        | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
@@ -2045,10 +2045,10 @@ Scenario: _0154109 check filling in and re-filling Bank receipt (transaction typ
 		And I select current line in "PaymentList" table
 		# temporarily
 		And "List" table does not contain lines
-			| 'Document'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document'          | 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$SalesInvoice024016$$' | '554,66'          | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I go to line in "List" table
-			| 'Document'          | 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document'          | 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$SalesInvoice024025$$' | '11 000,00'        | 'Main Company' | 'Company Kalipso' | 'Kalipso' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
@@ -2270,10 +2270,10 @@ Scenario: _0154111 check filling in and re-filling Cash payment (transaction typ
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And "List" table does not contain lines
-			| 'Reference' 	| 'Document amount'| 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document' 	| 'Amount'| 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$PurchaseInvoice30004$$'	| '4 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I go to line in "List" table
-		| 'Reference' 	| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+		| 'Document' 	| 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 		| '$$PurchaseInvoice29604$$'	| '13 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
@@ -2490,10 +2490,10 @@ Scenario: _0154113 check filling in and re-filling Bank payment (transaction typ
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And "List" table does not contain lines
-			| 'Reference' 	| 'Document amount'| 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document' 	| 'Amount'| 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$PurchaseInvoice30004$$'	| '4 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I go to line in "List" table
-		| 'Reference' 	| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+		| 'Document' 	| 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 		| '$$PurchaseInvoice29604$$'	| '13 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
@@ -4200,113 +4200,6 @@ Scenario: _053014 check the display of details on the form Bank payment with the
 
 
 
-# Scenario: check filling in and re-filling Credit debit note
-# 	* Create a document
-# 		Given I open hyperlink "e1cib/list/Document.CreditDebitNote"
-# 		And I click the button named "FormCreate"
-# 	* Filling in the details of the document
-# 		And I select "Receivable" exact value from "Operation type" drop-down list
-# 		And I click Select button of "Company" field
-# 		And I go to line in "List" table
-# 			| 'Description'  |
-# 			| 'Main Company' |
-# 		And I select current line in "List" table
-# 		And I click Choice button of the field named "Partner"
-# 		And I go to line in "List" table
-# 			| 'Description' |
-# 			| 'Lunch'       |
-# 		And I select current line in "List" table
-# 		And I click Select button of "Legal name" field
-# 		And I go to line in "List" table
-# 			| 'Description'   |
-# 			| 'Company Lunch' |
-# 		And I select current line in "List" table
-# 	* Filling in the basis document for debt write-offs
-# 		And in the table "Transactions" I click the button named "TransactionsAdd"
-# 		And I click choice button of "Partner ar transactions basis document" attribute in "Transactions" table
-# 		Then "Select data type" window is opened
-# 		And I go to line in "" table
-# 			| ''                 |
-# 			| 'Sales invoice' |
-# 		And I select current line in "" table
-# 		And I go to line in "List" table
-# 			| 'Number' |
-# 			| '2 900'  |
-# 		And I select current line in "List" table
-# 		And I activate field named "TransactionsAmount" in "Transactions" table
-# 		And I input "1 000,00" text in the field named "TransactionsAmount" of "Transactions" table
-# 		And I finish line editing in "Transactions" table
-# 		And I activate "Business unit" field in "Transactions" table
-# 		And I select current line in "Transactions" table
-# 		And I click choice button of "Business unit" attribute in "Transactions" table
-# 		And I go to line in "List" table
-# 			| 'Description'             |
-# 			| 'Distribution department' |
-# 		And I select current line in "List" table
-# 		And I activate "Expense type" field in "Transactions" table
-# 		And I click choice button of "Expense type" attribute in "Transactions" table
-# 		And I go to line in "List" table
-# 			| 'Description' |
-# 			| 'Software'    |
-# 		And I select current line in "List" table
-# 		And I finish line editing in "Transactions" table
-# 	* Change the document number
-# 		And I move to "Other" tab
-# 		And I input "14" text in "Number" field
-# 		Then "1C:Enterprise" window is opened
-# 		And I click "Yes" button
-# 		And I input "14" text in "Number" field
-# 		And I click the button named "FormPost"
-# 	* Re-select partner and check of data cleansing in the tabular section
-# 		And I click Select button of "Partner" field
-# 		And I go to line in "List" table
-# 			| 'Description' |
-# 			| 'Maxim'       |
-# 		And I select current line in "List" table
-# 		And I click Select button of "Legal name" field
-# 		And I go to line in "List" table
-# 		| 'Description'   |
-# 		| 'Company Maxim' |
-# 		And I select current line in "List" table
-# 		Then "1C:Enterprise" window is opened
-# 		And I click "Yes" button
-# 		Then the number of "Transactions" table lines is "равно" 0
-# 	* Filter check basis documents (depend of company)
-# 		And I select "Payable" exact value from "Operation type" drop-down list
-# 	* Re-select company
-# 		And I click Select button of "Company" field
-# 		And I go to line in "List" table
-# 			| 'Description'    |
-# 			| 'Second Company' |
-# 		And I select current line in "List" table
-# 		And in the table "Transactions" I click "Add" button
-# 		And I click choice button of "Partner ap transactions basis document" attribute in "Transactions" table
-# 		And I go to line in "" table
-# 			| ''                 |
-# 			| 'Purchase invoice' |
-# 		And I select current line in "" table
-# 		Then the number of "List" table lines is "равно" 0
-# 		And I close "Purchase invoices" window
-# 		And I finish line editing in "Transactions" table
-# 		And I click Select button of "Company" field
-# 		And I go to line in "List" table
-# 			| 'Description'  |
-# 			| 'Main Company' |
-# 		And I select current line in "List" table
-# 		Then "1C:Enterprise" window is opened
-# 		And I click "Yes" button
-# 		And in the table "Transactions" I click "Add" button
-# 		And I click choice button of "Partner ap transactions basis document" attribute in "Transactions" table
-# 		Then "Select data type" window is opened
-# 		And I go to line in "" table
-# 			| ''                 |
-# 			| 'Purchase invoice' |
-# 		And I select current line in "" table
-# 		And "List" table contains lines
-# 			| 'Number' | 'Legal name'    | 'Partner' | 'Document amount'    | 'Currency' |
-# 			| '2 900'  | 'Company Maxim' | 'Maxim'   | '11 000,00' | 'TRY'      |
-# 			| '2 901'  | 'Company Maxim' | 'Maxim'   | '10 000,00' | 'TRY'      |
-# 		And I close all client application windows
 
 Scenario: _0154131  check currency form in  Bank Receipt
 	* Filling in Bank Receipt

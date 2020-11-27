@@ -59,8 +59,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Code</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Code</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>CodeExtendedTooltip</name>
@@ -104,6 +106,10 @@
     <items xsi:type="form:FormField">
       <name>Description</name>
       <id>19</id>
+      <title>
+        <key>en</key>
+        <value>Description</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -156,6 +162,10 @@
     <items xsi:type="form:FormField">
       <name>Kind</name>
       <id>28</id>
+      <title>
+        <key>en</key>
+        <value>Kind</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -208,6 +218,10 @@
     <items xsi:type="form:FormField">
       <name>ApArPostingDetail</name>
       <id>31</id>
+      <title>
+        <key>en</key>
+        <value>AP/AR posting detail</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

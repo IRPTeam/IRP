@@ -1495,9 +1495,6 @@
                       <paths xsi:type="form:DataPath">
                         <segments>SerialLotNumbersTree.Item</segments>
                       </paths>
-                      <paths xsi:type="form:DataPath">
-                        <segments>SerialLotNumbersTree.Item</segments>
-                      </paths>
                     </dataPath>
                     <extendedTooltip>
                       <name>SerialLotNumbersTreeItemExtendedTooltip</name>
@@ -1547,9 +1544,6 @@
                       <common>true</common>
                     </userVisible>
                     <dataPath xsi:type="form:MultiLanguageDataPath">
-                      <paths xsi:type="form:DataPath">
-                        <segments>SerialLotNumbersTree.ItemKey</segments>
-                      </paths>
                       <paths xsi:type="form:DataPath">
                         <segments>SerialLotNumbersTree.ItemKey</segments>
                       </paths>
@@ -1605,9 +1599,6 @@
                       <paths xsi:type="form:DataPath">
                         <segments>SerialLotNumbersTree.SerialLotNumber</segments>
                       </paths>
-                      <paths xsi:type="form:DataPath">
-                        <segments>SerialLotNumbersTree.SerialLotNumber</segments>
-                      </paths>
                     </dataPath>
                     <extendedTooltip>
                       <name>SerialLotNumbersTreeSerialLotNumberExtendedTooltip</name>
@@ -1660,9 +1651,6 @@
                       <paths xsi:type="form:DataPath">
                         <segments>SerialLotNumbersTree.Quantity</segments>
                       </paths>
-                      <paths xsi:type="form:DataPath">
-                        <segments>SerialLotNumbersTree.Quantity</segments>
-                      </paths>
                     </dataPath>
                     <extendedTooltip>
                       <name>SerialLotNumbersTreeQuantityExtendedTooltip</name>
@@ -1712,9 +1700,6 @@
                       <common>true</common>
                     </userVisible>
                     <dataPath xsi:type="form:MultiLanguageDataPath">
-                      <paths xsi:type="form:DataPath">
-                        <segments>SerialLotNumbersTree.ItemKeyQuantity</segments>
-                      </paths>
                       <paths xsi:type="form:DataPath">
                         <segments>SerialLotNumbersTree.ItemKeyQuantity</segments>
                       </paths>

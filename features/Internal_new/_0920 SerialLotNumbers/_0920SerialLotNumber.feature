@@ -1251,6 +1251,7 @@ Scenario: _092011 check Serial lot number tab in the Item/item key
 		And I close all client application windows
 		
 Scenario: _092012 check Serial lot number tab in the Item type
+	And I close all client application windows
 	* Select Item type with own Serial lot number
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 		And I go to line in "List" table
@@ -1271,6 +1272,7 @@ Scenario: _092012 check Serial lot number tab in the Item type
 			| '89999'          | 'M/White'   |
 			| '99098809009910' | '38/Yellow' |
 			| '05'             | 'Dress'     |
+	And I close all client application windows 
 	* Select Item type without own Serial lot number
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 		And I go to line in "List" table
@@ -1407,7 +1409,7 @@ Scenario: _092015 product scanning with and without serial lot number
 		And I click "Search by barcode (F7)" button
 		And I input "5908769093878" text in "InputFld" field
 		And I click "OK" button
-		Then the form attribute named "SerialLotNumberStatus" became equal to "Barcode 5908769093878 was not found. Create new new serial with this barcode?"
+		Then the form attribute named "SerialLotNumberStatus" became equal to "Serial lot 5908769093878 was not found. Create new?"
 		And I close all client application windows
 		
 		

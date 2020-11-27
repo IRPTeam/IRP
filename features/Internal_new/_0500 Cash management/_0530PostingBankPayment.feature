@@ -117,7 +117,7 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		And I select current line in "PaymentList" table
 		And I click choice button of "Basis document" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Reference'        |
+			| 'Document'        |
 			| '$$PurchaseInvoice29604$$'      |
 		And I click "Select" button
 		And in "PaymentList" table I move to the next cell
@@ -183,7 +183,7 @@ Scenario: _053001 create Bank payment (independently)
 			And I select current line in "PaymentList" table
 			# temporarily
 			And I go to line in "List" table
-				| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+				| 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 				| '136 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			And I click "Select" button
 		# temporarily
@@ -249,7 +249,7 @@ Scenario: _053001 create Bank payment (independently)
 			And I select current line in "PaymentList" table
 			# temporarily
 			And I go to line in "List" table
-				| 'Document amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+				| 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
 				| '135 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			And I click "Select" button
 		# temporarily

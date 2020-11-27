@@ -54,7 +54,7 @@ Scenario: _300600 preparation (data multi-language)
 						| 'Login' |
 						| 'CI'          |
 					And I select current line in "List" table
-					And I input "en" text in "Localization code" field
+					And I select "English" exact value from "Data localization" drop-down list
 					And I click "Save and close" button
 				And I close TestClient session
 				Given I open new TestClient session or connect the existing one
@@ -66,7 +66,7 @@ Scenario: _300600 preparation (data multi-language)
 						| 'Login' |
 						| 'CI'          |
 					And I select current line in "List" table
-					And I input "tr" text in "Localization code" field
+					And I select "Turkish" exact value from "Data localization" drop-down list
 					And I click "Save and close" button
 				And I close TestClient session
 
@@ -92,7 +92,7 @@ Scenario: _300602 check that the English name of the catalog element is saved an
 	* Prepare
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Predefined data item name' |
+			| 'Predefined data name' |
 			| 'Catalog_Items'             |
 		And I select current line in "List" table
 		If "Attributes" table does not contain lines Then
@@ -254,7 +254,7 @@ Scenario: _300607 Change localization code for CI on en
 			| 'Login' |
 			| 'CI'          |
 		And I select current line in "List" table
-		And I input "en" text in "Localization code" field
+		And I select "English" exact value from "Data localization" drop-down list
 		And I click "Save and close" button
 		And I close TestClient session
 		Given I open new TestClient session or connect the existing one

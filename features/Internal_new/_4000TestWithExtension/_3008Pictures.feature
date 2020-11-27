@@ -392,9 +392,9 @@ Scenario: _300115 check removal of pictures from Item
 
 
 Scenario: _4000105 check add attributes from extensions
-	Then I connect launched Test client "Этот клиент"
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Catalog.Currencies"
-	And I click the button named "FormCreate"
-	And the field named "REP_Attribute1" exists on the form
-	And I close all client application windows
+    Then I connect launched Test client "Этот клиент"
+    And I close all client application windows
+    Given I open hyperlink "e1cib/list/Catalog.Currencies"
+    And I click the button named "FormCreate"
+    And the field named "REP_Attribute1" exists on the form
+    And I close all client application windows

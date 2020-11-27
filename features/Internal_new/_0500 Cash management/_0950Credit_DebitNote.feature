@@ -87,7 +87,7 @@ Scenario: _095001 preparation
 			And I finish line editing in "ItemList" table
 			And I move to "Other" tab
 			And I expand "Currency" group
-			And I move to the tab named "GroupCurrency"
+			And I move to the tab named "GroupCurrencies"
 			And I expand "More" group
 			And I input "01.01.2020  10:00:00" text in "Date" field
 			And Delay 1

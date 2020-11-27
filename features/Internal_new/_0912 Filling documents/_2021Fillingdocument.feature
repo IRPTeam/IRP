@@ -604,7 +604,7 @@ Scenario: _0154101 check filling in and re-filling Sales order
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
 		* Check filling in currency tab
 			And I click "Save" button
-			And I move to the tab named "GroupCurrency"
+			And I move to the tab named "GroupCurrencies"
 			And "ObjectCurrencies" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
@@ -914,7 +914,7 @@ Scenario: _0154102 check filling in and re-filling Sales invoice
 				| '550,00' | 'Dress' | 'L/Green'  | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
 		* Check filling in currency tab
-			And I move to the tab named "GroupCurrency"
+			And I move to the tab named "GroupCurrencies"
 			And "ObjectCurrencies" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
@@ -1028,7 +1028,7 @@ Scenario: _0154103 check Sales order when changing date
 			| 'Sale autum, TRY'               |
 		And I close "Partner terms" window
 	* Check the recount of the currency table when the date is changed
-		And I move to the tab named "GroupCurrency"
+		And I move to the tab named "GroupCurrencies"
 		And "ObjectCurrencies" table became equal
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
@@ -1094,7 +1094,7 @@ Scenario: _0154104 check Sales invoice when changing date
 		| 'Sale autum, TRY'               |
 		And I close "Partner terms" window
 	* Check the recount of the currency table when the date is changed
-		And I move to the tab named "GroupCurrency"
+		And I move to the tab named "GroupCurrencies"
 		And "ObjectCurrencies" table became equal
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
@@ -1362,7 +1362,7 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '99,00'      | 'pcs'  | '550,00'     | '649,00'       | 'Store 03' |
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '93,60'      | 'pcs'  | '520,00'     | '613,60'       | 'Store 03' |
 		* Check filling in currency tab
-			And I move to the tab named "GroupCurrency"
+			And I move to the tab named "GroupCurrencies"
 			And "ObjectCurrencies" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'  | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
@@ -1675,7 +1675,7 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '99,00'      | 'pcs'  | '550,00'     | '649,00'       | 'Store 03' |
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '93,60'      | 'pcs'  | '520,00'     | '613,60'       | 'Store 03' |
 		* Check filling in currency tab
-			And I move to the tab named "GroupCurrency"
+			And I move to the tab named "GroupCurrencies"
 			And "ObjectCurrencies" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'  | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |

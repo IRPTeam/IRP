@@ -64,7 +64,7 @@ Scenario: 950403 check function option UseLockDataModification
 
 	
 
-Scenario: 950403 create reasons
+Scenario: 950404 create reasons
 	And In the command interface I select "Settings" "Lock data modification reasons"
 	And I click the button named "FormCreate"
 	And I input "Doc lock" text in "ENG" field

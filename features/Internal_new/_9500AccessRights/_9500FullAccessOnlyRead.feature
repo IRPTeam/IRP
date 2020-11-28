@@ -358,7 +358,7 @@ Scenario: 950011 check role Full access only read (Partner segment)
 			Then I raise "Failed to open" exception
 		And I close all client application windows	
 
-Scenario: 950011 check role Full access only read (Countries)
+Scenario: 9500110 check role Full access only read (Countries)
 		And I close all client application windows
 		And In the command interface I select "Master data" "Countries"		
 		And I go to line in "List" table
@@ -539,16 +539,6 @@ Scenario: 950019 check role Full access only read (User groups)
 		And I close all client application windows	
 
 
-Scenario: 950020 check role Full access only read (Additional attribute sets)
-		And I close all client application windows
-		And In the command interface I select "Settings" "Additional attribute sets"		
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Item key'     |
-		And I select current line in "List" table
-		If the warning is displayed then 
-			Then I raise "Failed to open" exception
-		And I close all client application windows
 
 Scenario: 950020 check role Full access only read (Additional attribute sets)
 		And I close all client application windows
@@ -838,14 +828,6 @@ Scenario: 950050 check role Full access only read (Bank payment)
 		And I close all client application windows
 
 Scenario: 950051 check role Full access only read (Bank receipt)
-		And I close all client application windows
-		And In the command interface I select "Treasury" "Bank receipts"	
-		And I select current line in "List" table
-		If the warning is displayed then 
-			Then I raise "Failed to open" exception
-		And I close all client application windows
-	
-Scenario: 950052 check role Full access only read (Bank receipt)
 		And I close all client application windows
 		And In the command interface I select "Treasury" "Bank receipts"	
 		And I select current line in "List" table

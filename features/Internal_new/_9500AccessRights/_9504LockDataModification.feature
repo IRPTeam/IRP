@@ -1562,7 +1562,7 @@ Scenario: 950480 check access to the Lock data modification for user with role F
 	And I close current window
 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 	And "List" table contains lines
-		| 'Description_en'           |
+		| 'ENG'           |
 		| 'Doc lock'      |
 		| 'Register lock' |
 	And I close TestClient session

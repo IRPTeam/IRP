@@ -1558,11 +1558,11 @@ Scenario: 950480 check access to the Lock data modification for user with role F
 	And the editing text of form attribute named "Attribute" became equal to "Tax"
 	Then the form attribute named "ComparisonType" became equal to "IN"
 	Then the form attribute named "Value" became equal to "VAT"
-	Then the form attribute named "LockDataModificationReasons" became equal to "Register lock"
+	Then the form attribute named "LockDataModificationReasons" became equal to "Register lock TR"
 	And I close current window
 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 	And "List" table contains lines
-		| 'ENG'           |
+		| 'Description_en'           |
 		| 'Doc lock'      |
 		| 'Register lock' |
 	And I close TestClient session

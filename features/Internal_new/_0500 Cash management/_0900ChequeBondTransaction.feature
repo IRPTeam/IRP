@@ -1100,7 +1100,7 @@ Scenario: _2020006 check to clear the agreement field after partner re-selection
 			| 'Big foot' | ''          |
 		And I close all client application windows
 		
-Scenario: _2020007 check filter by cheque in the form of 'Cheque bonds' selection depending on the selected currency (re-selection) and separation of cheques by Partners/Own
+Scenario: _2020007 check filter by cheque in the form of Cheque bonds selection depending on the selected currency (re-selection) and separation of cheques by Partners/Own
 	* Open document form ChequeBondTransaction
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I click the button named "FormCreate"
@@ -1149,7 +1149,7 @@ Scenario: _2020007 check filter by cheque in the form of 'Cheque bonds' selectio
 			And I close "Cheque bonds" window
 	And I close all client application windows
 
-Scenario: _2020008 not displaying checks marked for deletion in the selection form 'Cheque bonds'
+Scenario: _2020008 not displaying checks marked for deletion in the selection form Cheque bonds
 	* Open document form ChequeBondTransaction
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I click the button named "FormCreate"
@@ -1172,7 +1172,7 @@ Scenario: _2020008 not displaying checks marked for deletion in the selection fo
 			| 'Partner cheque 101' | 'TRY'      |
 	And I close all client application windows
 
-Scenario: _2020009 check the selection of status checks in the 'Cheque bonds' selection form
+Scenario: _2020009 check the selection of status checks in the Cheque bonds selection form
 	* Open document form ChequeBondTransaction
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I click the button named "FormCreate"
@@ -1216,7 +1216,7 @@ Scenario: _2020009 check the selection of status checks in the 'Cheque bonds' se
 		| 'Partner cheque 102' | ''                          |
 	And I close all client application windows
 		
-Scenario: _2020010 check to delete selected cheques in the 'Cheque bonds' selection form
+Scenario: _2020010 check to delete selected cheques in the Cheque bonds selection form
 	* Open document form ChequeBondTransaction
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I click the button named "FormCreate"

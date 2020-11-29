@@ -263,7 +263,7 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		And I select current line in "List" table
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
-	* Change item that uses serial lot number to item that doesn't use serial lot number and check user message
+	* Change item that uses serial lot number to item that does not use serial lot number and check user message
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'L/Green'  |
@@ -292,7 +292,7 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		And I finish line editing in "Payments" table
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
-	* Change item that doesn't use serial lot number to item that uses serial lot number and check user message
+	* Change item that does not use serial lot number to item that uses serial lot number and check user message
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
@@ -476,7 +476,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I select current line in "List" table
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
-	* Change item that uses serial lot number to item that doesn't use serial lot number and check user message
+	* Change item that uses serial lot number to item that does not use serial lot number and check user message
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'L/Green'  |
@@ -500,7 +500,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I move to "Item list" tab
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
-	* Change item that doesn't use serial lot number to item that uses serial lot number and check user message
+	* Change item that does not use serial lot number to item that uses serial lot number and check user message
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
@@ -702,7 +702,7 @@ Scenario: _092004 check serial lot number in the Sales invoice
 		And I select current line in "List" table
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
-	* Change item that uses serial lot number to item that doesn't use serial lot number and check user message
+	* Change item that uses serial lot number to item that does not use serial lot number and check user message
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'L/Green'  |
@@ -720,7 +720,7 @@ Scenario: _092004 check serial lot number in the Sales invoice
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
-	* Change item that doesn't use serial lot number to item that uses serial lot number and check user message
+	* Change item that does not use serial lot number to item that uses serial lot number and check user message
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
@@ -864,7 +864,7 @@ Scenario: _092005 check serial lot number in the Sales return
 		And I select current line in "List" table
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
-	* Change item that uses serial lot number to item that doesn't use serial lot number and check user message
+	* Change item that uses serial lot number to item that does not use serial lot number and check user message
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'L/Green'  |
@@ -882,7 +882,7 @@ Scenario: _092005 check serial lot number in the Sales return
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
-	* Change item that doesn't use serial lot number to item that uses serial lot number and check user message
+	* Change item that does not use serial lot number to item that uses serial lot number and check user message
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |

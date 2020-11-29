@@ -2109,7 +2109,7 @@ Scenario:  _0154149 create Cash statement
 		And I close all client application windows
 		
 		
-Scenario: _0154154 check filling in and re-filling Retail return receipt
+Scenario: _0154154 check filling in and refilling Retail return receipt
 	And I close all client application windows
 	* Open the Retail sales receipt creation form
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
@@ -2203,7 +2203,7 @@ Scenario: _0154154 check filling in and re-filling Retail return receipt
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
 				| 'Trousers' | '338,98' | '38/Yellow' | '1,000' | 'pcs'  |
-	* Check re-filling  price when reselection partner term
+	* Check refilling  price when reselection partner term
 		* Re-select partner term
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
@@ -2212,7 +2212,7 @@ Scenario: _0154154 check filling in and re-filling Retail return receipt
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
 			And I click "OK" button
-		* Check store and price re-filling in the added line
+		* Check store and price refilling in the added line
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
@@ -2380,7 +2380,7 @@ Scenario: _0154154 check filling in and re-filling Retail return receipt
 				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 583,90"
 				Then the form attribute named "ItemListTotalTaxAmount" became equal to "186,10"
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 770,00"
-			* Price doesn't include tax
+			* Price does not include tax
 				And I go to line in "ItemList" table
 					| 'Item'  | 'Item key' | 'Price'  |
 					| 'Dress' | 'L/Green'  | '550,00' |
@@ -2422,7 +2422,7 @@ Scenario: _0154154 check filling in and re-filling Retail return receipt
 
 
 
-Scenario: _0154155 check filling in and re-filling Retail sales receipt
+Scenario: _0154155 check filling in and refilling Retail sales receipt
 	And I close all client application windows
 	* Open the Retail sales receipt creation form
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -2516,7 +2516,7 @@ Scenario: _0154155 check filling in and re-filling Retail sales receipt
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
 				| 'Trousers' | '338,98' | '38/Yellow' | '1,000' | 'pcs'  |
-	* Check re-filling  price when reselection partner term
+	* Check refilling  price when reselection partner term
 		* Re-select partner term
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
@@ -2525,7 +2525,7 @@ Scenario: _0154155 check filling in and re-filling Retail sales receipt
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
 			And I click "OK" button
-		* Check store and price re-filling in the added line
+		* Check store and price refilling in the added line
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
@@ -2695,7 +2695,7 @@ Scenario: _0154155 check filling in and re-filling Retail sales receipt
 				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 583,90"
 				Then the form attribute named "ItemListTotalTaxAmount" became equal to "186,10"
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 770,00"
-			* Price doesn't include tax
+			* Price does not include tax
 				And I go to line in "ItemList" table
 					| 'Item'  | 'Item key' | 'Price'  |
 					| 'Dress' | 'L/Green'  | '550,00' |

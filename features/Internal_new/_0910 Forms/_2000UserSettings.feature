@@ -1054,7 +1054,7 @@ Scenario:  _200022 check filling in field from custom user settings in Purchase 
 	And I close all client application windows
 
 Scenario:  _200023 check filling in field from custom user settings in Sales invoice
-	# the store is filled out of the agreement, if the agreement doesn't specify, then from user settings. So is the company.
+	# the store is filled out of the agreement, if the agreement does not specify, then from user settings. So is the company.
 	Given I open hyperlink "e1cib/list/InformationRegister.UserSettings"
 	If "List" table does not contain lines Then
 			| "Metadata object"            | "Attribute name" |

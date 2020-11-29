@@ -131,7 +131,7 @@ Scenario: _028003 check  Sales  return order movements the SalesTurnovers regist
 		| '-1,000'   | '$$SalesReturnOrder028001$$' | '$$SalesInvoice024008$$' | 'L/Green'  |
 
 
-Scenario: _028004 create document Sales return order, store doesn't use Goods receipt, based on Sales invoice
+Scenario: _028004 create document Sales return order, store does not use Goods receipt, based on Sales invoice
 	When create SalesReturnOrder028004
 	* Check for no movements in the registers
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
@@ -156,7 +156,7 @@ Scenario: _028004 create document Sales return order, store doesn't use Goods re
 
 
 
-Scenario: _028005 check Sales return order movements the OrderBalance register (store doesn't use Goods receipt, based on Sales invoice)
+Scenario: _028005 check Sales return order movements the OrderBalance register (store does not use Goods receipt, based on Sales invoice)
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
 	And "List" table contains lines
@@ -164,7 +164,7 @@ Scenario: _028005 check Sales return order movements the OrderBalance register (
 		| '2,000'    | '$$SalesReturnOrder028004$$' | 'Store 01' | '$$SalesReturnOrder028004$$' | 'L/Green'   |
 		| '4,000'    | '$$SalesReturnOrder028004$$' | 'Store 01' | '$$SalesReturnOrder028004$$' | '36/Yellow' |
 
-Scenario: _028006 check Sales return order movements the SalesTurnovers register (store doesn't use Goods receipt, based on Sales invoice) (-)
+Scenario: _028006 check Sales return order movements the SalesTurnovers register (store does not use Goods receipt, based on Sales invoice) (-)
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
 	And "List" table contains lines

@@ -124,7 +124,7 @@ Scenario: _023014 check movements by status and status history of a Sales Order 
 		| 'Number'                     | 'Partner'   |
 		| '$$NumberSalesOrder023001$$' | 'Ferron BP' |
 	And I select current line in "List" table
-	* Change status to Wait (doesn't post)
+	* Change status to Wait (does not post)
 		And I click "Decoration group title collapsed picture" hyperlink
 		And I select "Wait" exact value from "Status" drop-down list
 	And I click the button named "FormPostAndClose"

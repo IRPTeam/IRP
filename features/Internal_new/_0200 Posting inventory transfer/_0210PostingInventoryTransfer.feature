@@ -76,7 +76,7 @@ Scenario: _0201000 preparation
 
 
 # 1
-Scenario: _021001 create document Inventory Transfer - Store sender doesn't use Shipment confirmation, Store receiver use Goods receipt
+Scenario: _021001 create document Inventory Transfer - Store sender does not use Shipment confirmation, Store receiver use Goods receipt
 	
 	* Opening Inventory transfer order to create Inventory transfer
 		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
@@ -113,28 +113,28 @@ Scenario: _021001 create document Inventory Transfer - Store sender doesn't use 
 		And I click the button named "FormPostAndClose"
 		And I close current window
 
-Scenario: _021002 check Inventory transfer (based on order) posting by register TransferOrderBalance (-) (Store sender doesn't use Goods receipt, Store receiver use Shipment confirmaton)
+Scenario: _021002 check Inventory transfer (based on order) posting by register TransferOrderBalance (-) (Store sender does not use Goods receipt, Store receiver use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
 	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                    | 'Store sender' | 'Store receiver' | 'Order'                            | 'Item key' |
 		| '10,000'   | '$$InventoryTransfer021001$$' | 'Store 01'     | 'Store 02'       | '$$InventoryTransferOrder020001$$' | 'S/Yellow' |
 		| '50,000'   | '$$InventoryTransfer021001$$' | 'Store 01'     | 'Store 02'       | '$$InventoryTransferOrder020001$$' | 'M/White'  |
 
-Scenario: _021002 check Inventory transfer (based on order) posting by register StockReservation (Store sender doesn't use Goods receipt, Store receiver use Shipment confirmaton)
+Scenario: _021002 check Inventory transfer (based on order) posting by register StockReservation (Store sender does not use Goods receipt, Store receiver use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
 	And "List" table does not contain lines
 		| 'Quantity' | 'Recorder'                    | 'Item key' |
 		| '10,000'   | '$$InventoryTransfer021001$$' | 'S/Yellow' |
 		| '50,000'   | '$$InventoryTransfer021001$$' | 'M/White'  |
 
-Scenario: _021003 check Inventory transfer (based on order) posting by register GoodsInTransitOutgoing (Store sender doesn't use Goods receipt, Store receiver use Shipment confirmaton)
+Scenario: _021003 check Inventory transfer (based on order) posting by register GoodsInTransitOutgoing (Store sender does not use Goods receipt, Store receiver use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
 	And "List" table does not contain lines
 	| 'Recorder'              |
 	| '$$InventoryTransfer021001$$' |
 
 
-Scenario: _021004 check Inventory transfer (based on order) posting by register GoodsInTransitIncoming (+)  (Store sender doesn't use Goods receipt, Store receiver use Shipment confirmaton)
+Scenario: _021004 check Inventory transfer (based on order) posting by register GoodsInTransitIncoming (+)  (Store sender does not use Goods receipt, Store receiver use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
 	And "List" table contains lines
 	| 'Quantity' | 'Recorder'                    | 'Receipt basis'               | 'Store'    | 'Item key' |
@@ -142,7 +142,7 @@ Scenario: _021004 check Inventory transfer (based on order) posting by register 
 	| '50,000'   | '$$InventoryTransfer021001$$' | '$$InventoryTransfer021001$$' | 'Store 02' | 'M/White'  |
 
 
-Scenario: _021005 check Inventory transfer (based on order) posting by register StockBalance (-) (Store sender doesn't use Goods receipt, Store receiver use Shipment confirmaton)
+Scenario: _021005 check Inventory transfer (based on order) posting by register StockBalance (-) (Store sender does not use Goods receipt, Store receiver use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
 	And "List" table contains lines
 	| 'Quantity' | 'Recorder'                    | 'Store'    | 'Item key' |
@@ -220,7 +220,7 @@ Scenario: _021011 check Inventory transfer (based on order) posting by register 
 
 
 	# 3
-Scenario: _021012 create document Inventory Transfer - Store sender use Shipment confirmation, Store receiver doesn't use Goods receipt
+Scenario: _021012 create document Inventory Transfer - Store sender use Shipment confirmation, Store receiver does not use Goods receipt
 	* Opening Inventory transfer order to create Inventory transfer
 		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
 		And I go to line in "List" table
@@ -255,32 +255,32 @@ Scenario: _021012 create document Inventory Transfer - Store sender use Shipment
 		And I click the button named "FormPostAndClose"
 		And I close current window
 	
-Scenario: _021013 check Inventory transfer (based on order) posting by register TransferOrderBalance (-) (Store sender use Goods receipt, Store receiver doesn't use Shipment confirmaton)
+Scenario: _021013 check Inventory transfer (based on order) posting by register TransferOrderBalance (-) (Store sender use Goods receipt, Store receiver does not use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
 	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                    | 'Line number' | 'Store sender' | 'Store receiver' | 'Order'                            | 'Item key' |
 		| '17,000'   | '$$InventoryTransfer021012$$' | '1'           | 'Store 02'     | 'Store 01'       | '$$InventoryTransferOrder020007$$' | 'L/Green'  |
 
-Scenario: _021014 check Inventory transfer (based on order) posting by register StockReservation (+) (Store sender use Goods receipt, Store receiver doesn't use Shipment confirmaton)
+Scenario: _021014 check Inventory transfer (based on order) posting by register StockReservation (+) (Store sender use Goods receipt, Store receiver does not use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
 	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                    | 'Line number' | 'Store'    | 'Item key' |
 		| '17,000'   | '$$InventoryTransfer021012$$' | '1'           | 'Store 01' | 'L/Green'  |
 
-Scenario: _021015 check Inventory transfer (based on order) posting by register GoodsInTransitOutgoing (Store sender use Goods receipt, Store receiver doesn't use Shipment confirmaton)
+Scenario: _021015 check Inventory transfer (based on order) posting by register GoodsInTransitOutgoing (Store sender use Goods receipt, Store receiver does not use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
 	And "List" table contains lines
 	| 'Quantity' | 'Recorder'                    | 'Shipment basis'              | 'Line number' | 'Store'    | 'Item key' |
 	| '17,000'   | '$$InventoryTransfer021012$$' | '$$InventoryTransfer021012$$' | '1'           | 'Store 02' | 'L/Green'  |
 
-Scenario: _021016 check the absence posting of Inventory transfer (based on order) by register GoodsInTransitIncoming (Store sender use Goods receipt, Store receiver doesn't use Shipment confirmaton)
+Scenario: _021016 check the absence posting of Inventory transfer (based on order) by register GoodsInTransitIncoming (Store sender use Goods receipt, Store receiver does not use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
 	And "List" table does not contain lines
 	| 'Quantity' | 'Recorder'                    | 'Receipt basis'               | 'Line number' | 'Store'    | 'Item key' |
 	| '20,000'   | '$$InventoryTransfer021012$$' | '$$InventoryTransfer021012$$' | '1'           | 'Store 03' | 'L/Green'  |
 
 
-Scenario: _021017 check posting of Inventory transfer (based on order) by register StockBalance (Store sender use Goods receipt, Store receiver doesn't use Shipment confirmaton)
+Scenario: _021017 check posting of Inventory transfer (based on order) by register StockBalance (Store sender use Goods receipt, Store receiver does not use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
 	And "List" table contains lines
 	| 'Recorder'              |
@@ -289,7 +289,7 @@ Scenario: _021017 check posting of Inventory transfer (based on order) by regist
 
 
 	# 4
-Scenario: _021018 create document Inventory Transfer - Store sender doesn't use Shipment confirmation, Store receiver doesn't use Goods receipt
+Scenario: _021018 create document Inventory Transfer - Store sender does not use Shipment confirmation, Store receiver does not use Goods receipt
 	* Opening Inventory transfer order to create Inventory transfer
 		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
 		And I go to line in "List" table
@@ -324,14 +324,14 @@ Scenario: _021018 create document Inventory Transfer - Store sender doesn't use 
 		And I click the button named "FormPostAndClose"
 		And I close current window
 
-Scenario: _021019  check Inventory transfer (without order) posting by register TransferOrderBalance (-) (Store sender doesn't use Goods receipt, Store receiver doesn't use Shipment confirmaton)	
+Scenario: _021019  check Inventory transfer (without order) posting by register TransferOrderBalance (-) (Store sender does not use Goods receipt, Store receiver does not use Shipment confirmaton)	
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
 	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                    | 'Line number' | 'Store sender' | 'Store receiver' | 'Order'                            | 'Item key'  |
 		| '10,000'   | '$$InventoryTransfer021018$$' | '1'           | 'Store 01'     | 'Store 04'       | '$$InventoryTransferOrder020010$$' | '36/Yellow' |
 
-Scenario: _021020  check Inventory transfer (without order) posting by register StockReservation (+) Store sender use Shipment confirmation, Store receiver doesn't use Goods receipt
+Scenario: _021020  check Inventory transfer (without order) posting by register StockReservation (+) Store sender use Shipment confirmation, Store receiver does not use Goods receipt
 
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
@@ -341,7 +341,7 @@ Scenario: _021020  check Inventory transfer (without order) posting by register 
 
 
 
-Scenario: _021021 check the absence posting of Inventory transfer (without order) posting by register GoodsInTransitOutgoing (+) (Store sender doesn't use Goods receipt, Store receiver doesn't use Shipment confirmaton)
+Scenario: _021021 check the absence posting of Inventory transfer (without order) posting by register GoodsInTransitOutgoing (+) (Store sender does not use Goods receipt, Store receiver does not use Shipment confirmaton)
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
 	And "List" table does not contain lines
@@ -349,14 +349,14 @@ Scenario: _021021 check the absence posting of Inventory transfer (without order
 	| '$$InventoryTransfer021018$$' |
 
 
-Scenario: _021022 check the absence posting of Inventory transfer (without order) posting by register GoodsInTransitIncoming (+) (Store sender doesn't use Goods receipt, Store receiver doesn't use Shipment confirmaton)
+Scenario: _021022 check the absence posting of Inventory transfer (without order) posting by register GoodsInTransitIncoming (+) (Store sender does not use Goods receipt, Store receiver does not use Shipment confirmaton)
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
 	And "List" table does not contain lines
 	| 'Recorder'                    |
 	| '$$InventoryTransfer021018$$' |
 
-Scenario: _021023 check Inventory transfer (without order) posting by register StockBalance (+/-) (Store sender doesn't use Goods receipt, Store receiver doesn't use Shipment confirmaton)
+Scenario: _021023 check Inventory transfer (without order) posting by register StockBalance (+/-) (Store sender does not use Goods receipt, Store receiver does not use Shipment confirmaton)
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
 	And "List" table contains lines
@@ -368,7 +368,7 @@ Scenario: _021023 check Inventory transfer (without order) posting by register S
 
 
 	# 5
-Scenario: _021024 create document Inventory Transfer - Store sender doesn't use Shipment confirmation, Store receiver use Goods receipt (without Purchase order)
+Scenario: _021024 create document Inventory Transfer - Store sender does not use Shipment confirmation, Store receiver use Goods receipt (without Purchase order)
 	
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And I click the button named "FormCreate"
@@ -413,14 +413,14 @@ Scenario: _021024 create document Inventory Transfer - Store sender doesn't use 
 	And I save the window as "$$InventoryTransfer021024$$"
 	And I click the button named "FormPostAndClose"
 
-Scenario: _021025 check the absence posting of Inventory transfer (without order) posting by register TransferOrderBalance Store sender doesn't use Shipment confirmation, Store receiver use Goods receipt
+Scenario: _021025 check the absence posting of Inventory transfer (without order) posting by register TransferOrderBalance Store sender does not use Shipment confirmation, Store receiver use Goods receipt
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
 	And "List" table does not contain lines
 		| 'Quantity' | 'Recorder'                    | 'Line number' | 'Store sender' | 'Store receiver' | 'Item key' |
 		| '7,000'    | '$$InventoryTransfer021024$$' | '1'           | 'Store 01'     | 'Store 02'       | 'S/Yellow' |
 
-Scenario: _021026  check Inventory transfer (without order) posting by register StockReservation (-) Store sender doesn't use Shipment confirmation, Store receiver use Goods receipt
+Scenario: _021026  check Inventory transfer (without order) posting by register StockReservation (-) Store sender does not use Shipment confirmation, Store receiver use Goods receipt
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
 	And "List" table contains lines
@@ -428,7 +428,7 @@ Scenario: _021026  check Inventory transfer (without order) posting by register 
 		| '7,000'    | '$$InventoryTransfer021024$$' | '1'           | 'Store 01' | 'S/Yellow'  |
 
 
-Scenario: _021027 check the absence posting of Inventory transfer (without order) posting by register GoodsInTransitOutgoing Store sender doesn't use Shipment confirmation, Store receiver use Goods receipt
+Scenario: _021027 check the absence posting of Inventory transfer (without order) posting by register GoodsInTransitOutgoing Store sender does not use Shipment confirmation, Store receiver use Goods receipt
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
 	And "List" table does not contain lines
@@ -436,14 +436,14 @@ Scenario: _021027 check the absence posting of Inventory transfer (without order
 	| '$$InventoryTransfer021024$$' |
 
 
-Scenario: _021028 check Inventory transfer (without order) posting by register GoodsInTransitIncoming (+) Store sender doesn't use Shipment confirmation, Store receiver use Goods receipt
+Scenario: _021028 check Inventory transfer (without order) posting by register GoodsInTransitIncoming (+) Store sender does not use Shipment confirmation, Store receiver use Goods receipt
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
 	And "List" table contains lines
 	| 'Quantity' | 'Recorder'                    | 'Receipt basis'               | 'Line number' | 'Store'    | 'Item key' |
 	| '7,000'    | '$$InventoryTransfer021024$$' | '$$InventoryTransfer021024$$' | '1'           | 'Store 02' | 'S/Yellow' |
 
-Scenario: _021029 check Inventory transfer (without order) posting by register StockBalance (-) Store sender doesn't use Shipment confirmation, Store receiver use Goods receipt
+Scenario: _021029 check Inventory transfer (without order) posting by register StockBalance (-) Store sender does not use Shipment confirmation, Store receiver use Goods receipt
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
 	And "List" table contains lines
@@ -472,7 +472,7 @@ Scenario: _021032 check Inventory transfer (without order) posting by register S
 		| '3,000'    | '$$InventoryTransfer021030$$' | '1'           | 'Store 02' | 'L/Green'  |
 
 
-Scenario: _021033 check Inventory transfer (without order) posting by register GoodsInTransitOutgoing Store sender doesn't use Shipment confirmation, Store receiver use Goods receipt
+Scenario: _021033 check Inventory transfer (without order) posting by register GoodsInTransitOutgoing Store sender does not use Shipment confirmation, Store receiver use Goods receipt
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
 	And "List" table contains lines
@@ -480,14 +480,14 @@ Scenario: _021033 check Inventory transfer (without order) posting by register G
 	| '3,000'    | '$$InventoryTransfer021030$$' | '$$InventoryTransfer021030$$' | '1'           | 'Store 02' | 'L/Green'  |
 
 
-Scenario: _021034 check Inventory transfer (without order) posting by register GoodsInTransitIncoming (+) Store sender doesn't use Shipment confirmation, Store receiver use Goods receipt
+Scenario: _021034 check Inventory transfer (without order) posting by register GoodsInTransitIncoming (+) Store sender does not use Shipment confirmation, Store receiver use Goods receipt
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
 	And "List" table contains lines
 	| 'Quantity' | 'Recorder'                    | 'Receipt basis'               | 'Line number' | 'Store'    | 'Item key' |
 	| '3,000'    | '$$InventoryTransfer021030$$' | '$$InventoryTransfer021030$$' | '1'           | 'Store 03' | 'L/Green'  |
 
-Scenario: _021035 check the absence posting of Inventory transfer (without order) posting by register StockBalance (-) Store sender doesn't use Shipment confirmation, Store receiver use Goods receipt
+Scenario: _021035 check the absence posting of Inventory transfer (without order) posting by register StockBalance (-) Store sender does not use Shipment confirmation, Store receiver use Goods receipt
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
 	And "List" table does not contain lines
@@ -498,7 +498,7 @@ Scenario: _021035 check the absence posting of Inventory transfer (without order
 
 	# 7
 
-Scenario: _021036 create document Inventory Transfer - Store sender use Shipment confirmation, Store receiver doesn't use Goods receipt (without Purchase order)
+Scenario: _021036 create document Inventory Transfer - Store sender use Shipment confirmation, Store receiver does not use Goods receipt (without Purchase order)
 	
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And I click the button named "FormCreate"
@@ -543,14 +543,14 @@ Scenario: _021036 create document Inventory Transfer - Store sender use Shipment
 	And I save the window as "$$InventoryTransfer021036$$"
 	And I click the button named "FormPostAndClose"
 
-Scenario: _021037 check the absence posting of Inventory transfer (without order) posting by register TransferOrderBalance Store sender use Shipment confirmation, Store receiver doesn't use Goods receipt
+Scenario: _021037 check the absence posting of Inventory transfer (without order) posting by register TransferOrderBalance Store sender use Shipment confirmation, Store receiver does not use Goods receipt
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
 	And "List" table does not contain lines
 		| 'Quantity' | 'Recorder'                    | 'Line number' | 'Store sender' | 'Store receiver' | 'Item key' |
 		| '4,000'    | '$$InventoryTransfer021036$$' | '1'           | 'Store 02'     | 'Store 01'       | 'L/Green'  |
 
-Scenario: _021038  check Inventory transfer (without order) posting by register StockReservation Store sender use Shipment confirmation, Store receiver doesn't use Goods receipt
+Scenario: _021038  check Inventory transfer (without order) posting by register StockReservation Store sender use Shipment confirmation, Store receiver does not use Goods receipt
 
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
@@ -560,14 +560,14 @@ Scenario: _021038  check Inventory transfer (without order) posting by register 
 		| '4,000'    | '$$InventoryTransfer021036$$' | 'Store 02' | 'L/Green'  |
 
 
-Scenario: _021039 check Inventory transfer (without order) posting by register GoodsInTransitOutgoing Store sender use Shipment confirmation, Store receiver doesn't use Goods receipt
+Scenario: _021039 check Inventory transfer (without order) posting by register GoodsInTransitOutgoing Store sender use Shipment confirmation, Store receiver does not use Goods receipt
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
 	And "List" table contains lines
 	| 'Quantity' | 'Recorder'                    | 'Shipment basis'              | 'Line number' | 'Store'    | 'Item key' |
 	| '4,000'    | '$$InventoryTransfer021036$$' | '$$InventoryTransfer021036$$' | '1'           | 'Store 02' | 'L/Green'  |
 
-Scenario: _021040 check the absence posting of Inventory transfer (without order) posting by register GoodsInTransitIncoming (+) Store sender use Shipment confirmation, Store receiver doesn't use Goods receipt
+Scenario: _021040 check the absence posting of Inventory transfer (without order) posting by register GoodsInTransitIncoming (+) Store sender use Shipment confirmation, Store receiver does not use Goods receipt
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
 	And "List" table does not contain lines
@@ -575,7 +575,7 @@ Scenario: _021040 check the absence posting of Inventory transfer (without order
 	| '$$InventoryTransfer021036$$' |
 
 
-Scenario: _021041 check the absence posting of Inventory transfer (without order) posting by register StockBalance (+) Store sender use Shipment confirmation, Store receiver doesn't use Goods receipt
+Scenario: _021041 check the absence posting of Inventory transfer (without order) posting by register StockBalance (+) Store sender use Shipment confirmation, Store receiver does not use Goods receipt
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
 	And "List" table contains lines
@@ -584,7 +584,7 @@ Scenario: _021041 check the absence posting of Inventory transfer (without order
 
 	# 8
 
-Scenario: _021042 create document Inventory Transfer - Store sender doesn't use Shipment confirmation, Store receiver doesn't use Goods receipt (without Purchase order)
+Scenario: _021042 create document Inventory Transfer - Store sender does not use Shipment confirmation, Store receiver does not use Goods receipt (without Purchase order)
 	
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And I click the button named "FormCreate"
@@ -629,14 +629,14 @@ Scenario: _021042 create document Inventory Transfer - Store sender doesn't use 
 	And I save the window as "$$InventoryTransfer021042$$"
 	And I click the button named "FormPostAndClose"
 
-Scenario: _021043 check the absence posting of Inventory transfer (without order) posting by register TransferOrderBalance (Store sender doesn't use Goods receipt, Store receiver doesn't use Shipment confirmaton)
+Scenario: _021043 check the absence posting of Inventory transfer (without order) posting by register TransferOrderBalance (Store sender does not use Goods receipt, Store receiver does not use Shipment confirmaton)
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
 	And "List" table does not contain lines
 		| 'Quantity' | 'Recorder'                    | 'Line number' | 'Store sender' | 'Store receiver' | 'Item key'  |
 		| '4,000'    | '$$InventoryTransfer021042$$' | '1'           | 'Store 01'     | 'Store 04'       | '36/Yellow' |
 
-Scenario: _021044  check Inventory transfer (without order) posting by register StockReservation (Store sender doesn't use Goods receipt, Store receiver doesn't use Shipment confirmaton)
+Scenario: _021044  check Inventory transfer (without order) posting by register StockReservation (Store sender does not use Goods receipt, Store receiver does not use Shipment confirmaton)
 
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
@@ -645,21 +645,21 @@ Scenario: _021044  check Inventory transfer (without order) posting by register 
 		| '4,000'    | '$$InventoryTransfer021042$$' | 'Store 04' | '36/Yellow' |
 		| '4,000'    | '$$InventoryTransfer021042$$' | 'Store 01' | '36/Yellow' |
 
-Scenario: _021045 check the absence posting of Inventory transfer (without order) posting by register GoodsInTransitOutgoing (+) (Store sender doesn't use Goods receipt, Store receiver doesn't use Shipment confirmaton)
+Scenario: _021045 check the absence posting of Inventory transfer (without order) posting by register GoodsInTransitOutgoing (+) (Store sender does not use Goods receipt, Store receiver does not use Shipment confirmaton)
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
 	And "List" table does not contain lines
 	| 'Recorder'                    |
 	| '$$InventoryTransfer021042$$' |
 
-Scenario: _021046 check the absence posting of Inventory transfer (without order) posting by register GoodsInTransitIncoming (+) (Store sender doesn't use Goods receipt, Store receiver doesn't use Shipment confirmaton)
+Scenario: _021046 check the absence posting of Inventory transfer (without order) posting by register GoodsInTransitIncoming (+) (Store sender does not use Goods receipt, Store receiver does not use Shipment confirmaton)
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
 	And "List" table does not contain lines
 	| 'Recorder'                    |
 	| '$$InventoryTransfer021042$$' |
 
-Scenario: _021047 check Inventory transfer (without order) posting by register StockBalance (+/-) (Store sender doesn't use Goods receipt, Store receiver doesn't use Shipment confirmaton)
+Scenario: _021047 check Inventory transfer (without order) posting by register StockBalance (+/-) (Store sender does not use Goods receipt, Store receiver does not use Shipment confirmaton)
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
 	And "List" table contains lines

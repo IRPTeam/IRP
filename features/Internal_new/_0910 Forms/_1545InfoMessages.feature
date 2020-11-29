@@ -733,7 +733,7 @@ Scenario: _154520 message when trying to re-create Shipment confirmation based o
 		Then warning message containing text 'There are no lines for which you need to create a "Shipment confirmation" document in the "Sales invoice" document.' appears
 		And I close all client application windows
 
-Scenario: _154522 message when trying to create Shipment confirmation based on Sales invoice (Stor doesn't use Shipment confirmation)
+Scenario: _154522 message when trying to create Shipment confirmation based on Sales invoice (Stor does not use Shipment confirmation)
 	* Create Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
@@ -774,7 +774,7 @@ Scenario: _154522 message when trying to create Shipment confirmation based on S
 			And I delete "$$SalesInvoice154509$$" variable
 			And I save the value of "Number" field as "$$NumberSalesInvoice154509$$"
 			And I save the window as "$$SalesInvoice154509$$"
-	* Check message display when you try to create Shipment confirmation based on Sales invoice (Stor doesn't use Shipment confirmation)
+	* Check message display when you try to create Shipment confirmation based on Sales invoice (Stor does not use Shipment confirmation)
 		And I click "Shipment confirmation" button
 		Then warning message containing text 'There are no lines for which you need to create a "Shipment confirmation" document in the "Sales invoice" document.' appears
 		And I close all client application windows

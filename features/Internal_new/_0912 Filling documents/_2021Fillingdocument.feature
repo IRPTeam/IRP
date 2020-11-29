@@ -3,7 +3,7 @@
 @Positive
 @FillingDocuments
 
-Feature: check filling in and re-filling in documents forms + currency form connection
+Feature: check filling in and refilling in documents forms + currency form connection
 
 
 
@@ -349,7 +349,7 @@ Scenario: _0154100 preparation ( filling documents)
 			When create purchase invoice without order (Vendor Ferron, USD)
 
 
-Scenario: _0154101 check filling in and re-filling Sales order
+Scenario: _0154101 check filling in and refilling Sales order
 	And I close all client application windows
 	* Open the Sales order creation form
 		Given I open hyper link "e1cib/list/Document.SalesOrder"
@@ -445,7 +445,7 @@ Scenario: _0154101 check filling in and re-filling Sales order
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
 				| 'Trousers' | '338,98' | '38/Yellow' | '1,000' | 'pcs'  |
-	* Check re-filling  price when reselection partner term
+	* Check refilling  price when reselection partner term
 		* Re-select partner term
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
@@ -454,7 +454,7 @@ Scenario: _0154101 check filling in and re-filling Sales order
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
 			And I click "OK" button
-		* Check store and price re-filling in the added line
+		* Check store and price refilling in the added line
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
@@ -629,7 +629,7 @@ Scenario: _0154101 check filling in and re-filling Sales order
 				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 566,37"
 				Then the form attribute named "ItemListTotalTaxAmount" became equal to "203,63"
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 770,00"
-			* Price doesn't include tax
+			* Price does not include tax
 				And I go to line in "ItemList" table
 					| 'Item'  | 'Item key' | 'Price'  |
 					| 'Dress' | 'L/Green'  | '550,00' |
@@ -664,7 +664,7 @@ Scenario: _0154101 check filling in and re-filling Sales order
 
 
 
-Scenario: _0154102 check filling in and re-filling Sales invoice
+Scenario: _0154102 check filling in and refilling Sales invoice
 	And I close all client application windows
 	* Open the Sales invoice creation form
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -758,7 +758,7 @@ Scenario: _0154102 check filling in and re-filling Sales invoice
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
 				| 'Trousers' | '338,98' | '38/Yellow' | '1,000' | 'pcs'  |
-	* Check re-filling  price when reselection partner term
+	* Check refilling  price when reselection partner term
 		* Re-select partner term
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
@@ -767,7 +767,7 @@ Scenario: _0154102 check filling in and re-filling Sales invoice
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
 			And I click "OK" button
-		* Check store and price re-filling in the added line
+		* Check store and price refilling in the added line
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
@@ -939,7 +939,7 @@ Scenario: _0154102 check filling in and re-filling Sales invoice
 				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 566,37"
 				Then the form attribute named "ItemListTotalTaxAmount" became equal to "203,63"
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 770,00"
-			* Price doesn't include tax
+			* Price does not include tax
 				And I go to line in "ItemList" table
 					| 'Item'  | 'Item key' | 'Price'  |
 					| 'Dress' | 'L/Green'  | '550,00' |
@@ -1101,7 +1101,7 @@ Scenario: _0154104 check Sales invoice when changing date
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,0000'            | '200,00' | '1'            |
 
-Scenario: _0154105 check filling in and re-filling Purchase order
+Scenario: _0154105 check filling in and refilling Purchase order
 	* Open the Purchase order creation form
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -1204,7 +1204,7 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     |
 				| 'Trousers' | '*'      | '38/Yellow' | '1,000' |
 			And Delay 2
-	* Check re-filling  price when reselection partner term
+	* Check refilling  price when reselection partner term
 		* Re-select partner term
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
@@ -1213,7 +1213,7 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
 			And I click "OK" button
-		* Check store and price re-filling in the added line
+		* Check store and price refilling in the added line
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
@@ -1389,7 +1389,7 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 583,90"
 				Then the form attribute named "ItemListTotalTaxAmount" became equal to "186,10"
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 770,00"
-			* Price doesn't include tax
+			* Price does not include tax
 				And I go to line in "ItemList" table
 					| 'Item'  | 'Item key' | 'Price'  |
 					| 'Dress' | 'L/Green'  | '550,00' |
@@ -1418,7 +1418,7 @@ Scenario: _0154105 check filling in and re-filling Purchase order
 
 
 
-Scenario: _0154106 check filling in and re-filling Purchase invoice
+Scenario: _0154106 check filling in and refilling Purchase invoice
 	And I close all client application windows
 	* Open the Purchase invoice creation form
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -1519,7 +1519,7 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
 				| 'Trousers' | '338,98' | '38/Yellow' | '1,000' | 'pcs'  |
-	* Check re-filling  price when reselection partner term
+	* Check refilling  price when reselection partner term
 		* Re-select partner term
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
@@ -1528,7 +1528,7 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
 			And I click "OK" button
-		* Check store and price re-filling in the added line
+		* Check store and price refilling in the added line
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
@@ -1709,7 +1709,7 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 583,90"
 				Then the form attribute named "ItemListTotalTaxAmount" became equal to "186,10"
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 770,00"
-			* Price doesn't include tax
+			* Price does not include tax
 				And I go to line in "ItemList" table
 					| 'Item'  | 'Item key' | 'Price'  |
 					| 'Dress' | 'L/Green'  | '550,00' |
@@ -1735,7 +1735,7 @@ Scenario: _0154106 check filling in and re-filling Purchase invoice
 				Then the form attribute named "ItemListTotalTaxAmount" became equal to "192,60"
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 962,60"
 
-Scenario: _0154107 check filling in and re-filling Cash receipt (transaction type Payment from customer)
+Scenario: _0154107 check filling in and refilling Cash receipt (transaction type Payment from customer)
 	And I close all client application windows
 	* Open the Cash receipt creation form
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
@@ -1954,7 +1954,7 @@ Scenario: _0154108 total amount calculation in Cash receipt
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "460,00"
 		
-Scenario: _0154109 check filling in and re-filling Bank receipt (transaction type Payment from customer)
+Scenario: _0154109 check filling in and refilling Bank receipt (transaction type Payment from customer)
 	* Open form Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
@@ -2165,7 +2165,7 @@ Scenario: _0154110 total amount calculation in Bank receipt
 
 
 
-Scenario: _0154111 check filling in and re-filling Cash payment (transaction type Payment to the vendor)
+Scenario: _0154111 check filling in and refilling Cash payment (transaction type Payment to the vendor)
 	* Open form Cash payment
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And I click the button named "FormCreate"
@@ -2397,7 +2397,7 @@ Scenario: _0154112 total amount calculation in Cash payment
 		And the editing text of form attribute named "DocumentAmount" became equal to "460,00"
 
 
-Scenario: _0154113 check filling in and re-filling Bank payment (transaction type Payment to the vendor)
+Scenario: _0154113 check filling in and refilling Bank payment (transaction type Payment to the vendor)
 	* Open form Bank payment
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I click the button named "FormCreate"
@@ -2678,7 +2678,7 @@ Scenario: _01541141 total amount calculation in Outgoing payment order
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "460,00"
 
-Scenario: _0154115 check filling in and re-filling Cash transfer order
+Scenario: _0154115 check filling in and refilling Cash transfer order
 	* Open form Cash transfer order
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I click the button named "FormCreate"
@@ -2906,7 +2906,7 @@ Scenario: _01541151 check that the amount sent and received in Cash transfer ord
 
 
 
-Scenario: _0154116 check filling in and re-filling Cash expence
+Scenario: _0154116 check filling in and refilling Cash expence
 	* Open form Cash expence
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And I click the button named "FormCreate"
@@ -3143,7 +3143,7 @@ Scenario: _0154116 check filling in and re-filling Cash expence
 
 
 
-Scenario: _0154117 check filling in and re-filling Cash revenue
+Scenario: _0154117 check filling in and refilling Cash revenue
 	* Open form Cash revenue
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I click the button named "FormCreate"
@@ -3548,7 +3548,7 @@ Scenario: _0154121 check the details cleaning on the form Bank payment when re-s
 		And I close all client application windows
 
 
-Scenario: _0154122 check filling in and re-filling Reconcilation statement
+Scenario: _0154122 check filling in and refilling Reconcilation statement
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 		And I click the button named "FormCreate"
@@ -3585,7 +3585,7 @@ Scenario: _0154122 check filling in and re-filling Reconcilation statement
 			| '$$PurchaseInvoice018001$$' | '137 000,00' | ''          |
 			| '$$SalesInvoice024001$$'    | ''           | '4 350,00'  |
 			| '$$SalesInvoice024008$$'    | ''           | '11 099,93' |
-	* Check re-filling when re-selecting a partner
+	* Check refilling when re-selecting a partner
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -3601,7 +3601,7 @@ Scenario: _0154122 check filling in and re-filling Reconcilation statement
 			| 'Document'            | 'Credit'     | 'Debit'     |
 			| '$$PurchaseInvoice29604$$' | '13 000,00' | ''          |
 		And I click the button named "FormPost"
-	* Check re-filling when re-selecting a currency
+	* Check refilling when re-selecting a currency
 		And I click Select button of "Currency" field
 		And I go to line in "List" table
 			| 'Code' |
@@ -3619,7 +3619,7 @@ Scenario: _0154122 check filling in and re-filling Reconcilation statement
 		And I select current line in "List" table
 		And in the table "Transactions" I click "Fill" button
 		Then the number of "Transactions" table lines is "равно" 0
-	* Check re-filling when re-selecting a legal name (partner previous)
+	* Check refilling when re-selecting a legal name (partner previous)
 		And I click Select button of "Currency" field
 		And I go to line in "List" table
 			| 'Code' | 'Description'  |

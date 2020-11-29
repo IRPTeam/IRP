@@ -23,7 +23,7 @@
           <param name="additionalParameters" value="%dep.IRP_GitHubUpdate.env.SonarParamCover%" />
           <param name="sonarProjectKey" value="%teamcity.project.id%" />
           <param name="sonarProjectName" value="%system.teamcity.projectName%" />
-          <param name="sonarProjectSources" value="IRP" />
+          <param name="sonarProjectSources" value="%teamcity.project.id%" />
           <param name="sonarProjectVersion" value="%build.number%" />
           <param name="sonarServer" value="de463f20-4162-4f4d-9587-b93e888850bc" />
           <param name="teamcity.step.mode" value="default" />
@@ -46,7 +46,6 @@
     <build-triggers>
       <build-trigger id="TRIGGER_7" type="buildDependencyTrigger">
         <parameters>
-          <param name="afterSuccessfulBuildOnly" value="true" />
           <param name="branchFilter" value="+:*" />
           <param name="dependsOn" value="IRP_RunVA" />
         </parameters>
@@ -77,16 +76,16 @@
     <artifact-dependencies>
       <dependency id="ARTIFACT_DEPENDENCY_1" sourceBuildTypeId="IRP_RunVA" cleanDestination="false">
         <revisionRule name="sameChainOrLastFinished" revision="latest.sameChainOrLastFinished" />
-        <artifact sourcePath="+:Cover.xml" />
+        <artifact sourcePath="Cover.zip!/Cover.xml" />
       </dependency>
     </artifact-dependencies>
     <dependencies>
       <depend-on sourceBuildTypeId="IRP_RunVA">
         <options>
-          <option name="run-build-if-dependency-failed" value="CANCEL" />
+          <option name="run-build-if-dependency-failed" value="RUN" />
+          <option name="run-build-if-dependency-failed-to-start" value="RUN_ADD_PROBLEM" />
           <option name="run-build-on-the-same-agent" value="true" />
           <option name="take-started-build-with-same-revisions" value="true" />
-          <option name="take-successful-builds-only" value="true" />
         </options>
       </depend-on>
     </dependencies>

@@ -10,7 +10,15 @@ Procedure UpdateUsersRoleOnWrite(Source, Cancel) Export
 	Users = New Array;
 	
 	If TypeOf(Source) = Type("CatalogObject.AccessGroups") Then
-		Users = Source.Users.UnloadColumn("User");
+		Users = Source.Users.Unload();
+		If Not Source.IsNew() Then
+			For Each User In Source.Ref.Users Do
+				NewRow = Users.Add();
+				NewRow.User = User.User;
+			EndDo;
+			Users.GroupBy("User");
+		EndIf;
+		Users = Users.UnloadColumn("User");
 	ElsIf TypeOf(Source) = Type("CatalogObject.AccessProfiles") Then
 		If Source.IsNew() Then
 			Return;

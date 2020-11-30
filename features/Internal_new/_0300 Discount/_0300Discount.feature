@@ -58,7 +58,7 @@ Scenario: _03000 preparation (Discount)
 		When filling in Tax settings for company
 	
 
-Scenario: _030001 add Pluginsessor SpecialMessage
+Scenario: _030001 add Plugin SpecialMessage
 	Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 	And I click the button named "FormCreate"
 	And I select external file "#workingDir#\DataProcessor\SpecialOffer_Message.epf"
@@ -73,7 +73,7 @@ Scenario: _030001 add Pluginsessor SpecialMessage
 	And I wait "Plugins (create)" window closing in 10 seconds
 	Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalSpecialMessage"
 
-Scenario: _030002 add Pluginsessor DocumentDiscount
+Scenario: _030002 add Plugin DocumentDiscount
 	Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 	And I click the button named "FormCreate"
 	And I select external file "#workingDir#\DataProcessor\DocumentDiscount.epf"
@@ -88,7 +88,7 @@ Scenario: _030002 add Pluginsessor DocumentDiscount
 	And I wait "Plugins (create)" window closing in 10 seconds
 	Then I check for the "ExternalDataProc" catalog element with the "Description_en" "DocumentDiscount"
 
-Scenario: _030003 add Pluginsessor SpecialRules
+Scenario: _030003 add Plugin SpecialRules
 	Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 	And I click the button named "FormCreate"
 	And I select external file "#workingDir#\DataProcessor\SpecialOfferRules.epf"
@@ -103,7 +103,7 @@ Scenario: _030003 add Pluginsessor SpecialRules
 	And I wait "Plugins (create)" window closing in 10 seconds
 	Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalSpecialOfferRules"
 
-Scenario: _030004 add Pluginsessor RangeDiscount
+Scenario: _030004 add Plugin RangeDiscount
 	Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 	And I click the button named "FormCreate"
 	And I select external file "#workingDir#\DataProcessor\RangeDiscount.epf"
@@ -119,11 +119,11 @@ Scenario: _030004 add Pluginsessor RangeDiscount
 	Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalRangeDiscount"
 
 
-Scenario: _030005 add Pluginsessor FivePlusOne
-	* Opening a form to add Pluginsessor
+Scenario: _030005 add Plugin FivePlusOne
+	* Opening a form to add Plugin
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		And I click the button named "FormCreate"
-	* Add Pluginsessor FivePlusOneType
+	* Add Plugin FivePlusOneType
 		And I select external file "#workingDir#\DataProcessor\FivePlusOne.epf"
 		And I click the button named "FormAddExtDataProc"
 		And I input "" text in "Path to plugin for test" field
@@ -336,7 +336,7 @@ Scenario: _030009 create Special Offer Rule Present Discount
 		And Delay 10
 	Then I check for the "SpecialOfferRules" catalog element with the "Description_en" "All items 5+1, Discount on Basic Partner terms"
 	* Create rule Basic Partner terms TRY, Dress and Trousers 4+1, multiple
-		* Select Pluginsessor for special offer rule 4+1
+		* Select Plugin for special offer rule 4+1
 			Given I open hyperlink "e1cib/list/Catalog.SpecialOfferRules"
 			And I click the button named "FormCreate"
 			And I click Select button of "Plugins" field
@@ -386,7 +386,7 @@ Scenario: _030009 create Special Offer Rule Present Discount
 			And Delay 10
 	Then I check for the "SpecialOfferRules" catalog element with the "Description_en" "Dress and Trousers 4+1, Discount on Basic Partner terms"
 	* Create rule Basic Partner terms TRY, Dress and Trousers 3+1, not multiple
-		* Select Pluginsessor for special offer rule 3+1
+		* Select Plugin for special offer rule 3+1
 			Given I open hyperlink "e1cib/list/Catalog.SpecialOfferRules"
 			And I click the button named "FormCreate"
 			And I click Select button of "Plugins" field

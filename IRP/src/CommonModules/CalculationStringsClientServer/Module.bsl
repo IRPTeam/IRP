@@ -768,9 +768,6 @@ Function IsPricesChanged(Object, Form, Settings, AddInfo = Undefined) Export
 	CalculatedTables = CalculateItemsRows(Object, Form, ListCache, CalculationSettings, Undefined, AddInfo);
 
 	For Each RowCalculatedTables In CalculatedTables.ItemList Do
-		If RowCalculatedTables.Price = 0 Then
-			Continue;
-		EndIf;
 		FoundRows = Object.ItemList.FindRows(New Structure("Key", RowCalculatedTables.Key));
 		For Each FoundRow In FoundRows Do
 			If Not FoundRow.Price = RowCalculatedTables.Price Then

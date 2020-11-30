@@ -68,10 +68,10 @@ Scenario: _024000 preparation (Sales invoice)
 				| "$$NumberSalesOrder023005$$" |
 			When create SalesOrder023005
 
-Scenario: _024001 create document Sales Invoice based on order - Shipment confirmation doesn't used
+Scenario: _024001 create document Sales Invoice based on order - Shipment confirmation does not used
 	When create SalesInvoice024001
 
-Scenario: _024002 check Sales invoice posting (based on order, store doesn't use Shipment confirmation) by register OrderBalance (-)
+Scenario: _024002 check Sales invoice posting (based on order, store does not use Shipment confirmation) by register OrderBalance (-)
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
 	And "List" table contains lines
@@ -79,7 +79,7 @@ Scenario: _024002 check Sales invoice posting (based on order, store doesn't use
 	| '5,000'    | '$$SalesInvoice024001$$' | 'Store 01' | '$$SalesOrder023001$$' | 'L/Green'   |
 	| '4,000'    | '$$SalesInvoice024001$$' | 'Store 01' | '$$SalesOrder023001$$' | '36/Yellow' |
 
-Scenario: _024003 check Sales invoice posting (based on order, store doesn't use Shipment confirmation) by register OrderReservation (-)
+Scenario: _024003 check Sales invoice posting (based on order, store does not use Shipment confirmation) by register OrderReservation (-)
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
 	And "List" table contains lines
@@ -88,7 +88,7 @@ Scenario: _024003 check Sales invoice posting (based on order, store doesn't use
 		| '4,000'    | '$$SalesInvoice024001$$' | 'Store 01' | '36/Yellow' |
 
 
-Scenario: _024004 check Sales invoice posting (based on order, store doesn't use Shipment confirmation) by register InventoryBalance (-)
+Scenario: _024004 check Sales invoice posting (based on order, store does not use Shipment confirmation) by register InventoryBalance (-)
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
 	And "List" table contains lines
@@ -96,7 +96,7 @@ Scenario: _024004 check Sales invoice posting (based on order, store doesn't use
 		| '5,000'    | '$$SalesInvoice024001$$' | 'Main Company' | 'L/Green'   |
 		| '4,000'    | '$$SalesInvoice024001$$' | 'Main Company' | '36/Yellow' |
 
-Scenario: _024005 check Sales invoice posting (based on order, store doesn't use Shipment confirmation) by register StockBalance (-)
+Scenario: _024005 check Sales invoice posting (based on order, store does not use Shipment confirmation) by register StockBalance (-)
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
 	And "List" table contains lines
@@ -105,7 +105,7 @@ Scenario: _024005 check Sales invoice posting (based on order, store doesn't use
 		| '4,000'    | '$$SalesInvoice024001$$' | 'Store 01' | '36/Yellow' |
 
 
-Scenario: _024006 check the absence posting of Sales invoice (based on order, store doesn't use Shipment confirmation) by register StockReservation
+Scenario: _024006 check the absence posting of Sales invoice (based on order, store does not use Shipment confirmation) by register StockReservation
 # All lines in the sales invoice by order
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
 	And "List" table does not contain lines
@@ -113,7 +113,7 @@ Scenario: _024006 check the absence posting of Sales invoice (based on order, st
 		| '5,000'    | '$$SalesInvoice024001$$' | 'Store 01' | 'L/Green'   |
 		| '4,000'    | '$$SalesInvoice024001$$' | 'Store 01' | '36/Yellow' |
 
-Scenario: _024007 check Sales invoice posting (based on order, store doesn't use Shipment confirmation) by register SalesTurnovers
+Scenario: _024007 check Sales invoice posting (based on order, store does not use Shipment confirmation) by register SalesTurnovers
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
 	And "List" table contains lines
@@ -182,59 +182,59 @@ Scenario: _024015 check the absence posting of Sales invoice (based on order, st
 		| '4,000'    | '$$SalesInvoice024008$$'      | 'Store 02' | '36/Yellow'   |
 
 
-Scenario: _024016 create document Sales Invoice order - Shipment confirmation doesn't used
+Scenario: _024016 create document Sales Invoice order - Shipment confirmation does not used
 	When create SalesInvoice024016 (Shipment confirmation does not used)
 
-Scenario: _024017 check Sales invoice posting (without order, store doesn't use Shipment confirmation) by register StockReservation
+Scenario: _024017 check Sales invoice posting (without order, store does not use Shipment confirmation) by register StockReservation
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
 	And "List" table contains lines
 		| 'Quantity' | 'Recorder'              | 'Store'    | 'Item key' |
 		| '1,000'    | '$$SalesInvoice024016$$'      | 'Store 01' | 'L/Green'  |
 
-Scenario: _024018 check the absence posting of Sales invoice (without order, store  doesn't use Shipment confirmation) by register OrderBalance
+Scenario: _024018 check the absence posting of Sales invoice (without order, store  does not use Shipment confirmation) by register OrderBalance
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
 	And "List" table does not contain lines
 	| 'Quantity' | 'Recorder'             | 'Store'    | 'Order'              | 'Item key' |
 	| '1,000'    | '$$SalesInvoice024016$$'    | 'Store 01' | ''     | 'L/Green'  |
 
-Scenario: _024019 check the absence posting of Sales invoice (without order, store  doesn't use Shipment confirmation) by register OrderReservation
+Scenario: _024019 check the absence posting of Sales invoice (without order, store  does not use Shipment confirmation) by register OrderReservation
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
 	And "List" table does not contain lines
 	| 'Quantity' | 'Recorder'             | 'Store'    | 'Item key' |
 	| '1,000'    | '$$SalesInvoice024016$$'    | 'Store 01' |  'L/Green'  |
 
-Scenario: _024020 check Sales invoice posting (without order, store doesn't use Shipment confirmation) by register InventoryBalance
+Scenario: _024020 check Sales invoice posting (without order, store does not use Shipment confirmation) by register InventoryBalance
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
 	And "List" table contains lines
 		| 'Quantity' | 'Recorder'            | 'Company'      | 'Item key' |
 		| '1,000'    | '$$SalesInvoice024016$$'    | 'Main Company' | 'L/Green'  |
 
-Scenario: _024021 check Sales invoice posting (without order, store doesn't use Shipment confirmation) by register StockBalance
+Scenario: _024021 check Sales invoice posting (without order, store does not use Shipment confirmation) by register StockBalance
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
 	And "List" table contains lines
 		| 'Quantity' | 'Recorder'           | 'Store'    | 'Item key' |
 		| '1,000'    | '$$SalesInvoice024016$$'   | 'Store 01' | 'L/Green'  |
 
-Scenario: _024022 check the absence posting of Sales invoice (without order, store  doesn't use Shipment confirmation) by register GoodsInTransitOutgoing
+Scenario: _024022 check the absence posting of Sales invoice (without order, store  does not use Shipment confirmation) by register GoodsInTransitOutgoing
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
 	And "List" table does not contain lines
 		| 'Quantity' | 'Recorder'         | 'Shipment basis'   | 'Store'    | 'Item key' |
 		| '1,000'   | '$$SalesInvoice024016$$'  | '$$SalesInvoice024016$$' | 'Store 01' | 'L/Green'  |
 
-Scenario: _024023 check Sales invoice posting (without order, store doesn't use Shipment confirmation) by register SalesTurnovers
+Scenario: _024023 check Sales invoice posting (without order, store does not use Shipment confirmation) by register SalesTurnovers
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
 	And "List" table contains lines
 		| 'Quantity' | 'Recorder'         | 'Sales invoice'    | 'Item key' |
 		| '1,000'    | '$$SalesInvoice024016$$' | '$$SalesInvoice024016$$' | 'L/Green'  |
 
-Scenario: _024024 check the absence posting of Sales invoice (without order, store  doesn't use Shipment confirmation) by register OrderReservation (-)
+Scenario: _024024 check the absence posting of Sales invoice (without order, store  does not use Shipment confirmation) by register OrderReservation (-)
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
 	And "List" table does not contain lines

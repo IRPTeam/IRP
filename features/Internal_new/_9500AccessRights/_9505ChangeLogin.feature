@@ -10,7 +10,7 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-Scenario: 950300 preparation
+Scenario: 950500 preparation
 	Then I connect launched Test client "Этот клиент"
 	* Check test user roles
 		Given I open hyperlink 'e1cib/list/Catalog.Users'

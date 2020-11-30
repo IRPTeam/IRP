@@ -3,7 +3,7 @@
 @Positive
 @FillingDocuments
 
-Feature: check filling in and re-filling returns
+Feature: check filling in and refilling returns
 
 As a QA
 I want to check the filling and refilling of returns
@@ -13,7 +13,7 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 
-Scenario: _0299900 preparation (check filling in and re-filling returns)
+Scenario: _0299900 preparation (check filling in and refilling returns)
 	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
@@ -63,7 +63,7 @@ Scenario: _0299900 preparation (check filling in and re-filling returns)
 		When Create information register Taxes records (Sales tax)
 		When add sales tax settings 
 
-Scenario: _299901 check filling in and re-filling Sales return order
+Scenario: _299901 check filling in and refilling Sales return order
 	* Open form  Sales return order
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		And I click the button named "FormCreate"
@@ -143,7 +143,7 @@ Scenario: _299901 check filling in and re-filling Sales return order
 			And I input "1,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input "500,00" text in "Price" field of "ItemList" table
-		* Check store and price re-filling in the added line
+		* Check store and price refilling in the added line
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '500,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 02' |
@@ -183,7 +183,7 @@ Scenario: _299901 check filling in and re-filling Sales return order
 		And I close all client application windows
 
 
-Scenario: _299902 check filling in and re-filling Sales return
+Scenario: _299902 check filling in and refilling Sales return
 	* Open form  Sales return
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I click the button named "FormCreate"
@@ -262,7 +262,7 @@ Scenario: _299902 check filling in and re-filling Sales return
 			And I input "1,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input "500,00" text in "Price" field of "ItemList" table
-	* Check re-filling store when re-select partner term
+	* Check refilling store when re-select partner term
 		* Re-select partner term
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
@@ -310,7 +310,7 @@ Scenario: _299902 check filling in and re-filling Sales return
 		And I finish line editing in "ItemList" table
 		And I close all client application windows
 
-Scenario: _299903 check filling in and re-filling Purchase return order
+Scenario: _299903 check filling in and refilling Purchase return order
 	* Open form  Purchase return order
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 		And I click the button named "FormCreate"
@@ -390,7 +390,7 @@ Scenario: _299903 check filling in and re-filling Purchase return order
 			And I input "1,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		And I input "500,00" text in "Price" field of "ItemList" table
-	* Check re-filling store when re-select partner term
+	* Check refilling store when re-select partner term
 		* Re-select partner term
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
@@ -438,7 +438,7 @@ Scenario: _299903 check filling in and re-filling Purchase return order
 		And I finish line editing in "ItemList" table
 		And I close all client application windows
 
-Scenario: _299904 check filling in and re-filling Purchase return
+Scenario: _299904 check filling in and refilling Purchase return
 	* Open form  Purchase return
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I click the button named "FormCreate"
@@ -517,7 +517,7 @@ Scenario: _299904 check filling in and re-filling Purchase return
 			And I input "1,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input "500,00" text in "Price" field of "ItemList" table
-	* Check re-filling store when re-select partner term
+	* Check refilling store when re-select partner term
 		* Re-select partner term
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table

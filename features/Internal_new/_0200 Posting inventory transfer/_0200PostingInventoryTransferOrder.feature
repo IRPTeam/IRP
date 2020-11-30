@@ -47,10 +47,10 @@ Scenario: _020000 preparation
 
 
 # 1
-Scenario: _020001 create document Inventory Transfer Order - Store sender doesn't use Shipment confirmation, Store receiver use Goods receipt
+Scenario: _020001 create document Inventory Transfer Order - Store sender does not use Shipment confirmation, Store receiver use Goods receipt
 	When create InventoryTransferOrder020001
 
-Scenario: _020002 check Inventory transfer order posting by register TransferOrderBalance (Store sender doesn't use Goods receipt, Store receiver use Shipment confirmaton)
+Scenario: _020002 check Inventory transfer order posting by register TransferOrderBalance (Store sender does not use Goods receipt, Store receiver use Shipment confirmaton)
 checking Purchase Order N2 posting by register Order Balance (plus) - Goods receipt is not used
 	Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
 	And "List" table contains lines
@@ -58,7 +58,7 @@ checking Purchase Order N2 posting by register Order Balance (plus) - Goods rece
 		| '10,000'   | '$$InventoryTransferOrder020001$$' | 'Store 01'     | 'Store 02'       | '$$InventoryTransferOrder020001$$' | 'S/Yellow' |
 		| '50,000'   | '$$InventoryTransferOrder020001$$' | 'Store 01'     | 'Store 02'       | '$$InventoryTransferOrder020001$$' | 'M/White'  |
 
-Scenario: _020003 check Inventory transfer order posting by register StockReservation (Store sender doesn't use Goods receipt, Store receiver use Shipment confirmaton)
+Scenario: _020003 check Inventory transfer order posting by register StockReservation (Store sender does not use Goods receipt, Store receiver use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
 	And "List" table contains lines
 	| 'Quantity' | 'Recorder'                      |'Store'    | 'Item key' |
@@ -85,17 +85,17 @@ Scenario: _020006 check Inventory transfer order posting by register StockReserv
 	| '20,000'   | '$$InventoryTransferOrder020004$$' | '1'           | 'Store 02' | 'L/Green'  |
 
 # 3
-Scenario: _020007 create document Inventory Transfer Order- Store sender use Shipment confirmation, Store receiver doesn't use Goods receipt 
+Scenario: _020007 create document Inventory Transfer Order- Store sender use Shipment confirmation, Store receiver does not use Goods receipt 
 	When create InventoryTransferOrder020007
 
 
-Scenario: _020008 check Inventory transfer order posting by register TransferOrderBalance (Store sender use Goods receipt, Store receiver doesn't use Shipment confirmaton)
+Scenario: _020008 check Inventory transfer order posting by register TransferOrderBalance (Store sender use Goods receipt, Store receiver does not use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
 	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                    | 'Line number' | 'Store sender' | 'Store receiver' | 'Order'                       | 'Item key' |
 		| '17,000'   | '$$InventoryTransferOrder020007$$' | '1'           | 'Store 02'     | 'Store 01'       | '$$InventoryTransferOrder020007$$' | 'L/Green'  |
 
-Scenario: _020009 check Inventory transfer order posting by register StockReservation (Store sender use Goods receipt, Store receiver doesn't use Shipment confirmaton)
+Scenario: _020009 check Inventory transfer order posting by register StockReservation (Store sender use Goods receipt, Store receiver does not use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
 	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                    | 'Line number' | 'Store'    | 'Item key' |
@@ -105,17 +105,17 @@ Scenario: _020009 check Inventory transfer order posting by register StockReserv
 
 
 # 4
-Scenario: _020010 create document Inventory Transfer Order- Store sender doesn't use Shipment confirmation, Store receiver doesn't use Goods receipt 
+Scenario: _020010 create document Inventory Transfer Order- Store sender does not use Shipment confirmation, Store receiver does not use Goods receipt 
 	When create InventoryTransferOrder020010
 
-Scenario: _020011 check Inventory transfer order posting by register TransferOrderBalance (Store sender doesn't use Goods receipt, Store receiver doesn't use Shipment confirmaton)
+Scenario: _020011 check Inventory transfer order posting by register TransferOrderBalance (Store sender does not use Goods receipt, Store receiver does not use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
 	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                         | 'Line number' | 'Store sender' | 'Store receiver' | 'Order'                            | 'Item key'  |
 		| '10,000'   | '$$InventoryTransferOrder020010$$' | '1'           | 'Store 01'     | 'Store 04'       | '$$InventoryTransferOrder020010$$' | '36/Yellow' |
 
 
-Scenario: _020012 check Inventory transfer order posting by register StockReservation (Store sender doesn't use Goods receipt, Store receiver doesn't use Shipment confirmaton)
+Scenario: _020012 check Inventory transfer order posting by register StockReservation (Store sender does not use Goods receipt, Store receiver does not use Shipment confirmaton)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
 	And "List" table contains lines
 	| 'Quantity' | 'Recorder'                         | 'Line number' | 'Store'    | 'Item key'  |

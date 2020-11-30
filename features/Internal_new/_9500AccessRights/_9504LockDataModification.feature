@@ -64,7 +64,7 @@ Scenario: 950403 check function option UseLockDataModification
 
 	
 
-Scenario: 950403 create reasons
+Scenario: 950404 create reasons
 	And In the command interface I select "Settings" "Lock data modification reasons"
 	And I click the button named "FormCreate"
 	And I input "Doc lock" text in "ENG" field
@@ -1558,7 +1558,7 @@ Scenario: 950480 check access to the Lock data modification for user with role F
 	And the editing text of form attribute named "Attribute" became equal to "Tax"
 	Then the form attribute named "ComparisonType" became equal to "IN"
 	Then the form attribute named "Value" became equal to "VAT"
-	Then the form attribute named "LockDataModificationReasons" became equal to "Register lock"
+	Then the form attribute named "LockDataModificationReasons" became equal to "Register lock TR"
 	And I close current window
 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 	And "List" table contains lines

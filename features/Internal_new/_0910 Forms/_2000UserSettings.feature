@@ -51,7 +51,7 @@ Scenario: _200000 preparation (user settings)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog Partners objects
-		When When Create catalog BusinessUnits objects
+		When Create catalog BusinessUnits objects
 		When Create information register UserSettings records (Retail document)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -1054,7 +1054,7 @@ Scenario:  _200022 check filling in field from custom user settings in Purchase 
 	And I close all client application windows
 
 Scenario:  _200023 check filling in field from custom user settings in Sales invoice
-	# the store is filled out of the agreement, if the agreement doesn't specify, then from user settings. So is the company.
+	# the store is filled out of the agreement, if the agreement does not specify, then from user settings. So is the company.
 	Given I open hyperlink "e1cib/list/InformationRegister.UserSettings"
 	If "List" table does not contain lines Then
 			| "Metadata object"            | "Attribute name" |

@@ -411,7 +411,7 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 
 
 
-Scenario: _029107 create a Sales order for service and product (Store doesn't use Shipment confirmation, Sales invoice before Shipment confirmation)
+Scenario: _029107 create a Sales order for service and product (Store does not use Shipment confirmation, Sales invoice before Shipment confirmation)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I click the button named "FormCreate"
 	And I click Select button of "Partner" field
@@ -659,7 +659,7 @@ Scenario: _029108 create a Sales order for service and product (Store use Shipme
 
 
 
-Scenario: _029109 create a Sales order for service and product (Store doesn't use Shipment confirmation, Shipment confirmation before Sales invoice)
+Scenario: _029109 create a Sales order for service and product (Store does not use Shipment confirmation, Shipment confirmation before Sales invoice)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I click the button named "FormCreate"
 	And I click Select button of "Partner" field
@@ -928,7 +928,7 @@ Scenario: _029110 create a Sales order for service and product (Store use Shipme
 
 
 
-Scenario: _029115 create a Sales invoice for service and product (Store doesn't use Shipment confirmation, based on $$SalesOrder029107$$)
+Scenario: _029115 create a Sales invoice for service and product (Store does not use Shipment confirmation, based on $$SalesOrder029107$$)
 	* Create Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
@@ -1147,7 +1147,7 @@ Scenario: _029117 create a Sales invoice for service and product (Store use Ship
 		And I close all client application windows
 	
 
-Scenario: _029119 create a Sales invoice for service and product (Store doesn't use Shipment confirmation, based on $$NumberSalesOrder029109$$)
+Scenario: _029119 create a Sales invoice for service and product (Store does not use Shipment confirmation, based on $$NumberSalesOrder029109$$)
 	* Create Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
@@ -1607,7 +1607,7 @@ Scenario: _029140 create PurchaseReturn for service and product (based on $$Purc
 	
 	
 				
-Scenario: _029141 create Purchase return order/Purchase return for service and product (based on $$PurchaseInvoice029106$$)
+Scenario: _029141 create Purchase return order and Purchase return for service and product (based on $$PurchaseInvoice029106$$)
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	If "List" table contains lines Then
 		| "Number" |
@@ -2127,7 +2127,7 @@ Scenario: _029160 create Sales return for service and product (Store use Shipmen
 
 
 
-Scenario: _029161 create Sales return for service and product (Store doesn't use Shipment confirmation, based on $$NumberSalesInvoice029109$$)
+Scenario: _029161 create Sales return for service and product (Store does not use Shipment confirmation, based on $$NumberSalesInvoice029109$$)
 	* Create Sales return based on Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table

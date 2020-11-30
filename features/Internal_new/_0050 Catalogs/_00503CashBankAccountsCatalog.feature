@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@MainInfoCatalogs
+@SettingsCatalogs
 
 Feature: filling in Cash/Bank accounts catalog
 

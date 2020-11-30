@@ -699,7 +699,7 @@ Scenario: _095007 check the legal name filling if the partner has only one
 		And "Transactions" table contains lines
 			| 'Partner' | 'Legal name'    |
 			| 'Lunch'   | 'Company Lunch' |
-	* Check legal name re-filling at partner re-selection.
+	* Check legal name refilling at partner re-selection.
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -721,7 +721,7 @@ Scenario: _095007 check the legal name filling if the partner has only one
 		And "Transactions" table contains lines
 			| 'Partner' | 'Legal name'    |
 			| 'Lunch'   | 'Company Lunch' |
-	* Check legal name re-filling at partner re-selection.
+	* Check legal name refilling at partner re-selection.
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description' |

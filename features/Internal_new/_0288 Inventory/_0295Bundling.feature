@@ -31,7 +31,7 @@ Scenario: _029500 preparation (Bundling)
 	
 
 
-Scenario: _029501 create Bundling (Store doesn't use Shipment confirmation and Goods receipt)
+Scenario: _029501 create Bundling (Store does not use Shipment confirmation and Goods receipt)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Bundling"
 	And I click the button named "FormCreate"
@@ -100,7 +100,7 @@ Scenario: _029502 check the automatic creation of the Bundle specification
 		| 'XS'   | 'Blue'  | '1,000'    |
 	And I close current window
 
-Scenario: _029503 check Bundling posting (store doesn't use Shipment confirmation and Goods receipt) by register StockBalance
+Scenario: _029503 check Bundling posting (store does not use Shipment confirmation and Goods receipt) by register StockBalance
 # In this case a Bandle is received by register and the goods from the Bandle are written off
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
 	And "List" table contains lines
@@ -110,7 +110,7 @@ Scenario: _029503 check Bundling posting (store doesn't use Shipment confirmatio
 	| '10,000'   | '$$Bundling0029501$$' | 'Store 01' | 'XS/Red'                        |
 	And I close all client application windows
 
-Scenario: _029504 check Bundling posting (store doesn't use Shipment confirmation and Goods receipt) by register StockReservation
+Scenario: _029504 check Bundling posting (store does not use Shipment confirmation and Goods receipt) by register StockReservation
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
 	And "List" table contains lines
 	| 'Quantity' | 'Recorder'            | 'Store'    | 'Item key'                      |
@@ -119,14 +119,14 @@ Scenario: _029504 check Bundling posting (store doesn't use Shipment confirmatio
 	| '10,000'   | '$$Bundling0029501$$' | 'Store 01' | 'XS/Red'                        |
 	And I close all client application windows
 
-Scenario: _029505 check the absence posting of Bundling (store doesn't use Shipment confirmation and Goods receipt) by register GoodsInTransitIncoming
+Scenario: _029505 check the absence posting of Bundling (store does not use Shipment confirmation and Goods receipt) by register GoodsInTransitIncoming
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
 	And "List" table does not contain lines
 		| 'Recorder'                 |
 		| '$$Bundling0029501$$'              |
 	And I close all client application windows
 
-Scenario: _029506 check the absence posting of Bundling (store doesn't use Shipment confirmation and Goods receipt) by register GoodsInTransitOutgoing
+Scenario: _029506 check the absence posting of Bundling (store does not use Shipment confirmation and Goods receipt) by register GoodsInTransitOutgoing
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
 	And "List" table does not contain lines
 		| 'Recorder'                 |
@@ -514,7 +514,7 @@ Scenario: _029518 creating a bundle of 2 different properties + one repeating of
 			| '4,000'    | '$$Bundling0029518$$' | 'Store 01' | 'XS/Red'                        |
 		And I close all client application windows
 
-Scenario: _029519 create Bundling (Store use Goods receipt, doesn't use Shipment confirmation)
+Scenario: _029519 create Bundling (Store use Goods receipt, does not use Shipment confirmation)
 	* Opening form for creating Bundle
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.Bundling"
@@ -600,7 +600,7 @@ Scenario: _029519 create Bundling (Store use Goods receipt, doesn't use Shipment
 		| ''                                      | 'Expense'     | '*'         | '14'                                          | 'Store 07'   | 'Fruit'               | ''                                            | ''        |
 		And I close all client application windows
 
-Scenario: _029520 create Bundling (Store use Shipment confirmation, doesn't use Goods receipt)
+Scenario: _029520 create Bundling (Store use Shipment confirmation, does not use Goods receipt)
 	* Opening form for creating Bundle
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.Bundling"

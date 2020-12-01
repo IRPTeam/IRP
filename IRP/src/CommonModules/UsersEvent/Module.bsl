@@ -11,10 +11,10 @@ Procedure UpdateUsersRoleOnWrite(Source, Cancel) Export
 	
 	If TypeOf(Source) = Type("CatalogObject.AccessGroups") Then
 		Users = Source.Users.Unload();
-		If Not Source.IsNew() Then
-			For Each User In Source.Ref.Users Do
+		If Not Source.IsNew() And Source.AdditionalProperties.Property("OldUsersList") Then
+			For Each User In Source.AdditionalProperties.OldUsersList Do
 				NewRow = Users.Add();
-				NewRow.User = User.User;
+				NewRow.User = User;
 			EndDo;
 			Users.GroupBy("User");
 		EndIf;

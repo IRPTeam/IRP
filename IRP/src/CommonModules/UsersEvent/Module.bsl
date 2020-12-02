@@ -7,14 +7,49 @@ Procedure UpdateUsersRoleOnWrite(Source, Cancel) Export
 		Return;
 	EndIf;
 	
+	Users = New Array;
+	
 	If TypeOf(Source) = Type("CatalogObject.AccessGroups") Then
-		Result = UpdateUsersRolesByGroup(Source);
+		Users = Source.Users.Unload();
+		If Not Source.IsNew() And Source.AdditionalProperties.Property("OldUsersList") Then
+			For Each User In Source.AdditionalProperties.OldUsersList Do
+				NewRow = Users.Add();
+				NewRow.User = User;
+			EndDo;
+			Users.GroupBy("User");
+		EndIf;
+		Users = Users.UnloadColumn("User");
 	ElsIf TypeOf(Source) = Type("CatalogObject.AccessProfiles") Then
 		If Source.IsNew() Then
 			Return;
 		EndIf;
-		Result = UpdateUsersRole(Source.Ref);
+		Query = New Query();
+		Query.Text =
+			"SELECT
+			|	AccessGroupsProfiles.Ref
+			|INTO vt_AccessGroups
+			|FROM
+			|	Catalog.AccessGroups.Profiles AS AccessGroupsProfiles
+			|WHERE
+			|	AccessGroupsProfiles.Profile In (&Profile)
+			|GROUP BY
+			|	AccessGroupsProfiles.Ref
+			|;
+			|
+			|////////////////////////////////////////////////////////////////////////////////
+			|SELECT
+			|	AccessGroupsUsers.User
+			|FROM
+			|	Catalog.AccessGroups.Users AS AccessGroupsUsers
+			|		INNER JOIN vt_AccessGroups AS vt_AccessGroups
+			|		ON AccessGroupsUsers.Ref = vt_AccessGroups.Ref
+			|GROUP BY
+			|	AccessGroupsUsers.User";
+		Query.SetParameter("Profile", Source.Ref);
+		
+		Users = Query.Execute().Unload().UnloadColumn("User");
 	EndIf;
+	Result = UpdateUsersRole(Users);
 	If Source.AdditionalProperties.Property("UsersEventOnWriteResult") Then
 		Source.AdditionalProperties["UsersEventOnWriteResult"] = Result;
 	Else
@@ -22,77 +57,75 @@ Procedure UpdateUsersRoleOnWrite(Source, Cancel) Export
 	EndIf;
 EndProcedure
 
-Function UpdateUsersRolesByGroup(AccessGroup)
-	
-	UpdateUsersRole(AccessGroup.Profiles.UnloadColumn("Profile"));
-	
-	Return Undefined;
-	
-EndFunction
-
-Function UpdateUsersRole(AccessProfile)
+Function UpdateUsersRole(Users)
 	Result = New Structure();
 	Result.Insert("Success", True);
 	Result.Insert("ArrayOfResults", New Array());
-	
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	AccessGroupsProfiles.Ref
-		|INTO vt_AccessGroups
-		|FROM
-		|	Catalog.AccessGroups.Profiles AS AccessGroupsProfiles
-		|WHERE
-		|	AccessGroupsProfiles.Profile In (&Profile)
-		|GROUP BY
-		|	AccessGroupsProfiles.Ref
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	AccessGroupsUsers.User
-		|FROM
-		|	Catalog.AccessGroups.Users AS AccessGroupsUsers
-		|		INNER JOIN vt_AccessGroups AS vt_AccessGroups
-		|		ON AccessGroupsUsers.Ref = vt_AccessGroups.Ref
-		|GROUP BY
-		|	AccessGroupsUsers.User";
-	Query.SetParameter("Profile", AccessProfile);
-	
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	
-	While QuerySelection.Next() Do
-		User = Undefined;
-		If ValueIsFilled(QuerySelection.User.InfobaseUserID) Then
-			User = InfoBaseUsers.FindByUUID(QuerySelection.User.InfobaseUserID);
-		ElsIf ValueIsFilled(QuerySelection.User.Description) Then
-			User = InfoBaseUsers.FindByName(QuerySelection.User.Description);
-		EndIf;
-		If User = Undefined Then
-			Result.Success = False;
-			Result.ArrayOfResults.Add(New Structure("Success, Message", False,
-					StrTemplate(R().UsersEvent_001, QuerySelection.User.InfobaseUserID, QuerySelection.User.Description)));
-		Else
-			Result.ArrayOfResults.Add(New Structure("Success, Message", True,
-					StrTemplate(R().UsersEvent_002, QuerySelection.User.InfobaseUserID, QuerySelection.User.Description)));
-			User.Roles.Clear();
-			If TypeOf(AccessProfile) = Type("Array") Then 
-				For Each Profile In AccessProfile Do
-					AddRoles(Profile.Roles, User);
-				EndDo;
-			Else
-				AddRoles(AccessProfile.Roles, User);
-			EndIf;
-			User.Write();
-		EndIf;
+	For Each User In Users Do
+		UpdateUserRole(User, Result);
 	EndDo;
 	Return Result;
 EndFunction
 
+Function UpdateUserRole(User, Result)
+	UserIB = Undefined;
+	If ValueIsFilled(User.InfobaseUserID) Then
+		UserIB = InfoBaseUsers.FindByUUID(User.InfobaseUserID);
+	ElsIf ValueIsFilled(User.Description) Then
+		UserIB = InfoBaseUsers.FindByName(User.Description);
+	EndIf;
+	If UserIB = Undefined Then
+		Result.Success = False;
+		Result.ArrayOfResults.Add(New Structure("Success, Message", False,
+				StrTemplate(R().UsersEvent_001, User.InfobaseUserID, User.Description)));
+	Else
+		Result.ArrayOfResults.Add(New Structure("Success, Message", True,
+				StrTemplate(R().UsersEvent_002, User.InfobaseUserID, User.Description)));
+		UserIB.Roles.Clear();
+		Roles = GetUserRoles(User);
+		AddRoles(Roles, UserIB);
+		UserIB.Write();
+	EndIf;
+
+	Return Result;
+EndFunction
+
+Function GetUserRoles(User)
+	
+	Query = New Query;
+	Query.Text =
+		"SELECT DISTINCT
+		|	AccessGroupsProfiles.Profile
+		|INTO Profiles
+		|FROM
+		|	Catalog.AccessGroups.Profiles AS AccessGroupsProfiles
+		|WHERE
+		|	AccessGroupsProfiles.Ref IN
+		|		(SELECT DISTINCT
+		|			AccessGroupsUsers.Ref AS AccessGroup
+		|		FROM
+		|			Catalog.AccessGroups.Users AS AccessGroupsUsers
+		|		WHERE
+		|			AccessGroupsUsers.User = &User)
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	AccessProfilesRoles.Role
+		|FROM
+		|	Catalog.AccessProfiles.Roles AS AccessProfilesRoles
+		|		INNER JOIN Profiles AS Profiles
+		|		ON Profiles.Profile = AccessProfilesRoles.Ref";
+	
+	Query.SetParameter("User", User);
+	
+	Roles = Query.Execute().Unload().UnloadColumn("Role");
+	Return Roles;
+EndFunction
+
 Procedure AddRoles(Roles, User)
-	For Each Row In Roles Do
-		MetadataRole = Metadata.Roles.Find(Row.Role);
+	For Each Role In Roles Do
+		MetadataRole = Metadata.Roles.Find(Role);
 		If MetadataRole <> Undefined Then
 			User.Roles.Add(MetadataRole);
 		EndIf;
@@ -136,19 +169,13 @@ Procedure UpdateAllUsersRolesViaAccessGroups() Export
 	
 	Query = New Query;
 	Query.Text =
-		"SELECT
-		|	AccessGroups.Ref
+		"SELECT DISTINCT
+		|	AccessGroupsUsers.User
 		|FROM
-		|	Catalog.AccessGroups AS AccessGroups
-		|WHERE
-		|	NOT AccessGroups.DeletionMark";
+		|	Catalog.AccessGroups.Users AS AccessGroupsUsers";
 	
-	QueryResult = Query.Execute();
+	Users = Query.Execute().Unload().UnloadColumn("User");
 	
-	SelectionDetailRecords = QueryResult.Select();
-	
-	While SelectionDetailRecords.Next() Do
-		 Result = UpdateUsersRolesByGroup(SelectionDetailRecords.Ref);
-	EndDo;
+	UpdateUsersRole(Users);
 
 EndProcedure

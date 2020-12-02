@@ -183,8 +183,16 @@ Function DataIsLocked_ByRef(SourceParams, Rules, CheckCurrent, AddInfo = Undefin
 				 "WHERE " + StrConcat(Filter, " AND" + Chars.LF);
 	
 	For Index = 0 To Rules.Count() - 1 Do
-		SourceValue = ?(CheckCurrent, SourceParams.Source.Ref, SourceParams.Source);
-		Query.SetParameter("SourceParam" + Index , SourceValue[Rules[Index].Attribute]);
+		If CheckCurrent Then
+			SourceValue = SourceParams.Source.Ref[Rules[Index].Attribute];
+		Else
+			If Rules[Index].ComparisonType = "IN HIERARCHY" And Rules[Index].Attribute = "Ref" Then
+				SourceValue = SourceParams.Source.Parent;
+			Else
+				SourceValue = SourceParams.Source[Rules[Index].Attribute];
+			EndIf;
+		EndIf;
+		Query.SetParameter("SourceParam" + Index , SourceValue);
 	EndDo;
 	QueryResult = Query.Execute();
 	

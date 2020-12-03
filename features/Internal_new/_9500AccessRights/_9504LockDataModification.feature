@@ -1262,6 +1262,117 @@ Scenario: 950417 create rules for catalog (IN HIERARCHY)
 		And I close all client application windows
 	
 
+Scenario: 950418 create rules for catalog (IN)
+	* Preparation
+		Given I open hyperlink 'e1cib/list/Catalog.ItemTypes'
+		And I click "List" button		
+		And I go to line in "List" table
+				| 'Description' |
+				| 'Furniture'       |
+		And I select current line in "List" table
+		And I click Select button of "Parent" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Accessories' |
+		And I click the button named "FormChoose"
+		And I click "Save and close" button	
+	* Create rule
+		Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
+		If "List" table contains lines Then
+				| 'Type'               |
+				| 'Catalog.Items' |
+			And in the table "List" I click the button named "ListContextMenuDelete"
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+		And I click the button named "FormCreate"
+		And I select "Items" exact value from "Type" drop-down list
+		And I select "Item type" exact value from "Attribute" drop-down list
+		And I select "IN" exact value from "Comparison type" drop-down list
+		And I click Select button of "Value" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Accessories' |
+		And I click the button named "FormChoose"
+		And I click Select button of "Lock data modification reasons" field
+		And I go to line in "List" table
+			| 'Code'         |
+			| '000000000003' |
+		And I click the button named "FormChoose"
+		And I click "Save and close" button	
+	* Check rule
+		* Modification
+			Given I open hyperlink 'e1cib/list/Catalog.Items'
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Table'       |
+			And I select current line in "List" table
+			And I click "Save" button
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button
+			Given Recent TestClient message contains "Data lock reasons:*" string by template
+			Given Recent TestClient message contains "*Catalog lock" string by template	
+			And I close current window
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I click the button named "FormWriteAndClose"		
+			Then user message window does not contain messages
+		* Create new
+			Given I open hyperlink 'e1cib/list/Catalog.Items'
+			And I click the button named "FormCreate"
+			And I input "Test 15" text in "ENG" field
+			And I click Select button of "Item type" field
+			And I click "List" button	
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Earrings'     |
+			And I select current line in "List" table
+			And I click Select button of "Unit" field
+			And I activate "Description" field in "List" table
+			And I select current line in "List" table
+			And I click "Save" button
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button
+			Given Recent TestClient message contains "Data lock reasons:*" string by template
+			Given Recent TestClient message contains "*Catalog lock" string by template	
+			And I click Select button of "Item type" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Clothes'     |
+			And I select current line in "List" table
+			And I click "Save and close" button	
+			Then user message window does not contain messages
+		* Deletion
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Table'       |
+			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button
+			Given Recent TestClient message contains "Data lock reasons:*" string by template
+			Given Recent TestClient message contains "*Catalog lock" string by template	
+			And I close current window
+			Given I open hyperlink 'e1cib/list/Catalog.Items'
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Test 15'       |
+			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button	
+			Then user message window does not contain messages
+			And I close all client application windows
+	* Delete rule
+		Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
+		And I go to line in "List" table
+			| 'Type'               |
+			| 'Catalog.Items' |
+		And in the table "List" I click the button named "ListContextMenuDelete"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I close all client application windows
 
 
 Scenario: 950420 create rules for information register (without recorder)

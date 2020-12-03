@@ -164,6 +164,23 @@ Scenario: _0205001 preparation (commands)
 				And "List" table contains lines
 					| 'Number' |
 					| '$$NumberPurchaseInvoice0205001$$'       |
+	* Add plugin QuantityCompare
+		* Open form to add plugin
+			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+			And I click the button named "FormCreate"
+		* Filling plugin data and adding it to the database
+			And I select external file "#workingDir#\DataProcessor\QuantityCompare.epf"
+			And I click the button named "FormAddExtDataProc"
+			And I input "" text in "Path to plugin for test" field
+			And I input "CompareQuantity" text in "Name" field
+			And I click Open button of the field named "Description_en"
+			And I input "Compare quantity" text in the field named "Description_en"
+			And I input "Compare quantity tr" text in the field named "Description_tr"
+			And I click "Ok" button
+			And I click "Save and close" button
+			And Delay 5
+		* Check the addition of plugin
+			Then I check for the "ExternalDataProc" catalog element with the "Description_en" "Compare quantity"
 
 Scenario: _0205002 add test command to the list of documents Sales return
 	* Open Command register
@@ -3520,6 +3537,38 @@ Scenario: _010019 check the operation of the command to open an item list from I
 
 
 Scenario: _010020 check the operation of Quantity Compare plugin (comparison of the plan / fact in Goods receipt)
+	* Add Command
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And I click the button named "FormCreate"
+		And I click Select button of "Configuration metadata" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Documents'   |
+		And I click the button named "FormCreate"
+		And I input "GoodsReceipt" text in "Description" field
+		And I click Select button of "Parent" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Documents'   |
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'GoodsReceipt'  |
+		And I select current line in "List" table
+		And I click Select button of "Plugins" field
+		Then "Plugins" window is opened
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Compare quantity' |
+		And I select current line in "List" table
+		And I select "Object form" exact value from "Form type" drop-down list
+		And I click "Save and close" button
+	* Check command save
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And "List" table contains lines
+		| 'Configuration metadata'      | 'Plugins' |
+		| 'GoodsReceipt'                | 'Compare quantity'       |
 	* Create Goods receipt based on PI
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table

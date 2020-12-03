@@ -997,36 +997,6 @@
               <representation>Auto</representation>
             </extInfo>
           </items>
-          <items xsi:type="form:Button">
-            <name>CompareQuantity</name>
-            <id>273</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <extendedTooltip>
-              <name>CompareQuantityExtendedTooltip</name>
-              <id>274</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <type>Label</type>
-              <autoMaxWidth>true</autoMaxWidth>
-              <autoMaxHeight>true</autoMaxHeight>
-              <extInfo xsi:type="form:LabelDecorationExtInfo">
-                <horizontalAlign>Left</horizontalAlign>
-              </extInfo>
-            </extendedTooltip>
-            <commandName>Form.Command.CompareQuantity</commandName>
-            <representation>Auto</representation>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <placementArea>UserCmds</placementArea>
-            <representationInContextMenu>Auto</representationInContextMenu>
-          </items>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -2529,25 +2499,6 @@
         <name>FillReceiptBasis</name>
       </handler>
     </action>
-    <modifiesStoredData>true</modifiesStoredData>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>CompareQuantity</name>
-    <title>
-      <key>en</key>
-      <value>Compare quantity</value>
-    </title>
-    <id>6</id>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>CompareQuantity</name>
-      </handler>
-    </action>
-    <functionalOptions>FunctionalOption.ShowAlphaTestingSaas</functionalOptions>
     <modifiesStoredData>true</modifiesStoredData>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>

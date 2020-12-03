@@ -249,6 +249,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <wrap>true</wrap>
+      <choiceFoldersAndItems>FoldersAndItems</choiceFoldersAndItems>
       <chooseType>true</chooseType>
       <typeDomainEnabled>true</typeDomainEnabled>
       <textEdit>true</textEdit>

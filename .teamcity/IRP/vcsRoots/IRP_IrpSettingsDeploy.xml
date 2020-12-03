@@ -3,12 +3,11 @@
   <name>IRP_SettingsDeploy</name>
   <param name="agentCleanFilesPolicy" value="ALL_UNTRACKED" />
   <param name="agentCleanPolicy" value="ON_BRANCH_CHANGE" />
-  <param name="authMethod" value="PRIVATE_KEY_FILE" />
+  <param name="authMethod" value="TEAMCITY_SSH_KEY" />
   <param name="branch" value="refs/heads/develop" />
   <param name="ignoreKnownHosts" value="true" />
-  <param name="privateKeyPath" value="C:\Windows\ssh\kke" />
-  <param name="secure:passphrase" value="credentialsJSON:8027833b-2fd3-4f4c-826e-2bd9d571ad92" />
   <param name="submoduleCheckout" value="CHECKOUT" />
+  <param name="teamcitySshKey" value="tc_d" />
   <param name="url" value="git@github.com:IRPTeam/IRP.git" />
   <param name="useAlternates" value="true" />
   <param name="usernameStyle" value="USERID" />

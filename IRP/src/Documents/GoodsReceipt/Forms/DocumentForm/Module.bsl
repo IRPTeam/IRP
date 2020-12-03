@@ -53,13 +53,9 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "ChoiceReceiptBasis" Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
-	If EventName = "TransferDataFromQuantityCompare" Then
-		LoadDataFromQuantityCompareAtServer(Parameter);		
-	EndIf;
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
-	EndIf;
-	
+	EndIf;	
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
@@ -250,11 +246,6 @@ Procedure FillReceiptBasis(Command)
 EndProcedure
 
 &AtClient
-Procedure CompareQuantity(Command)
-	DocGoodsReceiptClient.CompareQuantity(Object, ThisObject, Command);
-EndProcedure
-
-&AtClient
 Procedure OpenPickupItems(Command)
 	DocGoodsReceiptClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure
@@ -265,11 +256,6 @@ Procedure ShowRowKey(Command)
 EndProcedure
 
 #EndRegion
-
-&AtServer
-Procedure LoadDataFromQuantityCompareAtServer(Parameter)
-	DocGoodsReceiptServer.LoadDataFromQuantityCompare(Object, ThisObject, Parameter);
-EndProcedure
 
 #Region AddAttributes
 

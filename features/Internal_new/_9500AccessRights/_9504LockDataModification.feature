@@ -1224,6 +1224,7 @@ Scenario: 950417 create rules for catalog (IN HIERARCHY)
 			Given Recent TestClient message contains "Data lock reasons:*" string by template
 			Given Recent TestClient message contains "*Catalog lock" string by template	
 			And I click Select button of "Main partner" field
+			And I click "List" button
 			And I go to line in "List" table
 				| 'Description' |
 				| 'Alians'     |

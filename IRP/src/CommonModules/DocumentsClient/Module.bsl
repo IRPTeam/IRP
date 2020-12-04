@@ -795,7 +795,8 @@ Procedure ChangePriceType(Object, Form, Settings, AddInfo = Undefined) Export
 	EndIf;
 	
 	Filter = New Structure("PriceType", Form.CurrentPriceType);
-	If Not Form.CurrentPriceType = PredefinedValue("Catalog.PriceTypes.ManualPriceType") 
+	FilterPriceTypeManual = New Structure("PriceType", PredefinedValue("Catalog.PriceTypes.ManualPriceType"));
+	If Not Object.ItemList.FindRows(FilterPriceTypeManual).Count() = Object.ItemList.Count()
 		And (Not Form.CurrentPriceType = Settings.AgreementInfo.PriceType
 			Or Not Object.ItemList.FindRows(Filter).Count() = Object.ItemList.Count()) Then
 		PriceTypeOnChange(Object, Form, Settings.Module, , Settings, AddInfo);

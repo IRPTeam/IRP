@@ -221,7 +221,7 @@ EndProcedure
 &AtClient
 Procedure qPayment(Command)
 	
-	Object.Date = CurrentDate();
+	Object.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	
 	If Not CheckFilling() Then
 		Cancel = True;
@@ -467,7 +467,7 @@ Function WriteTransaction(Result)
 	EndDo;
 	
 	ObjectValue = FormAttributeToValue("Object");
-	ObjectValue.Date = CurrentSessionDate();
+	ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	ObjectValue.Payments.Load(Payments);
 	DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
 	ObjectValue.Write(DocumentWriteMode.Posting);

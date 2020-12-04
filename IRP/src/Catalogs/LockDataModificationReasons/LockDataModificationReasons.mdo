@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9dcc3f3f-4096-45c0-abdf-e99cd6f9cf59">
+  <producedTypes>
+    <objectType typeId="a6d51ca9-9ce4-4f09-b821-3e3b8bcce5b7" valueTypeId="00c2a343-f644-4fbd-974c-8b8b7fc87d86"/>
+    <refType typeId="01614283-3d6a-4a7f-9b42-17b3ec4f4d8f" valueTypeId="1bac07d4-9a7e-4948-90b0-c654839dea03"/>
+    <selectionType typeId="afb36574-dcf5-470c-8209-1c2843aa6d89" valueTypeId="93e15bc7-2eab-41b2-ac98-245a0901ce50"/>
+    <listType typeId="20a7d1b6-0582-4dfd-98fe-f74f22d23389" valueTypeId="324144de-f3a7-4f69-a243-f15c0a64e2e2"/>
+    <managerType typeId="f9d3f9bf-bc10-4ef0-a025-fecc9186c3c1" valueTypeId="997eed6d-b01b-4d3b-8094-ca92df6279a9"/>
+  </producedTypes>
+  <name>LockDataModificationReasons</name>
+  <synonym>
+    <key>en</key>
+    <value>Lock data modification reasons</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.LockDataModificationReasons.StandardAttribute.Code</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>12</codeLength>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.LockDataModificationReasons.Form.ItemForm</defaultObjectForm>
+  <forms uuid="13f935b3-bff3-4144-a391-f5baf8875768">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

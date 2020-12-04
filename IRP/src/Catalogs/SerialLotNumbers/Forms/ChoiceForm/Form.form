@@ -106,6 +106,10 @@
     <items xsi:type="form:FormField">
       <name>Description</name>
       <id>19</id>
+      <title>
+        <key>en</key>
+        <value>Serial number</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

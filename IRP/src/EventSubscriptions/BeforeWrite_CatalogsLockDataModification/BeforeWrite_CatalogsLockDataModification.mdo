@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1a9dd236-4345-4198-a010-fdc87ffac093">
+  <name>BeforeWrite_CatalogsLockDataModification</name>
+  <synonym>
+    <key>en</key>
+    <value>Before write catalogs lock data modification</value>
+  </synonym>
+  <source>
+    <types>CatalogObject</types>
+  </source>
+  <event>BeforeWrite</event>
+  <handler>CommonModule.LockDataModificationPriveleged.BeforeWrite_CatalogsLockDataModification</handler>
+</mdclass:EventSubscription>

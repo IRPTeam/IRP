@@ -119,6 +119,7 @@ Scenario: 950000 preparation (role Full access only read)
 	When Create document StockAdjustmentAsSurplus objects
 	When Create document StockAdjustmentAsWriteOff objects
 	When Create document Unbundling objects
+	When add test extension
 	* Set password for Sofia Borisova (Manager 3)
 			Given I open hyperlink "e1cib/list/Catalog.Users"
 			And I go to line in "List" table
@@ -126,8 +127,8 @@ Scenario: 950000 preparation (role Full access only read)
 					| 'Sofia Borisova (Manager 3)' |
 			And I select current line in "List" table
 	* Change localization code
-			And I input "en" text in "Localization code" field	
-			And I input "en" text in "Interface localization code" field
+			And I select "English" exact value from "Data localization" drop-down list	
+			And I select "English" exact value from "Interface localization" drop-down list
 			And I click "Save" button
 	* Set password
 		And I click "Set password" button
@@ -136,19 +137,12 @@ Scenario: 950000 preparation (role Full access only read)
 		And I click "Ok" button
 		And I click "Save and close" button
 		And Delay 10
-	* When Create user with access role Full access only read
-		Given I open hyperlink "e1cib/list/Catalog.AccessProfiles"
+	* Update user roles
+		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
 		And I go to line in "List" table
-				| 'Description' |
-				| 'Commercial Agent'   |
-		And I select current line in "List" table
-		And in the table "Roles" I click "Update roles" button
-		And I go to line in "Roles" table
-				| 'Presentation'    |
-				| 'Full access only read' |
-		And I set "Use" checkbox in "Roles" table
-		And I finish line editing in "Roles" table
-		And I click "Save and close" button
+			| 'Description'                 |
+			| 'Manager' |
+		And I click "Update all user roles" button		
 	And I connect "TestAdmin" TestClient using "SBorisova" login and "F12345" password
 	And Delay 3
 
@@ -364,7 +358,7 @@ Scenario: 950011 check role Full access only read (Partner segment)
 			Then I raise "Failed to open" exception
 		And I close all client application windows	
 
-Scenario: 950011 check role Full access only read (Countries)
+Scenario: 9500110 check role Full access only read (Countries)
 		And I close all client application windows
 		And In the command interface I select "Master data" "Countries"		
 		And I go to line in "List" table
@@ -505,7 +499,7 @@ Scenario: 950016 check role Full access only read (Users)
 		And In the command interface I select "Settings" "Users"		
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Admin'     |
+			| 'Sofia Borisova (Manager 3)'     |
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -545,16 +539,6 @@ Scenario: 950019 check role Full access only read (User groups)
 		And I close all client application windows	
 
 
-Scenario: 950020 check role Full access only read (Additional attribute sets)
-		And I close all client application windows
-		And In the command interface I select "Settings" "Additional attribute sets"		
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Item key'     |
-		And I select current line in "List" table
-		If the warning is displayed then 
-			Then I raise "Failed to open" exception
-		And I close all client application windows
 
 Scenario: 950020 check role Full access only read (Additional attribute sets)
 		And I close all client application windows
@@ -593,7 +577,7 @@ Scenario: 950023 check role Full access only read (Contact info sets)
 		And I close all client application windows
 		And In the command interface I select "Settings" "Contact info sets"		
 		And I go to line in "List" table
-			| 'Predefined data item name' |
+			| 'Predefined data name' |
 			| 'Catalog_Companies'     |
 		And I select current line in "List" table
 		If the warning is displayed then 
@@ -679,7 +663,7 @@ Scenario: 950032 check role Full access only read (Object statuses)
 			| 'Objects statuses'|
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data item name |
+			| Predefined data name |
 			| InventoryTransferOrder                |
 		And I select current line in "List" table
 		If the warning is displayed then 
@@ -844,14 +828,6 @@ Scenario: 950050 check role Full access only read (Bank payment)
 		And I close all client application windows
 
 Scenario: 950051 check role Full access only read (Bank receipt)
-		And I close all client application windows
-		And In the command interface I select "Treasury" "Bank receipts"	
-		And I select current line in "List" table
-		If the warning is displayed then 
-			Then I raise "Failed to open" exception
-		And I close all client application windows
-	
-Scenario: 950052 check role Full access only read (Bank receipt)
 		And I close all client application windows
 		And In the command interface I select "Treasury" "Bank receipts"	
 		And I select current line in "List" table

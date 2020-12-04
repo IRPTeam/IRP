@@ -142,8 +142,8 @@ Scenario: _2050001 preparation
 			# temporarily
 			And Delay 2
 			And I go to line in "List" table
-				| 'Document amount' | 'Legal name'   | 'Partner' |
-				| '1 740,00'        | 'Company Adel' | 'Crystal' |
+				| 'Amount' | 'Legal name'   | 'Partner' |
+				| '1 740,00'         | 'Company Adel' | 'Crystal' |
 			And I click "Select" button
 		* Filling in amount in a tabular part
 			And I activate "Amount" field in "PaymentList" table

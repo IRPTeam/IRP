@@ -7,6 +7,6 @@
   </synonym>
   <content>CommonModule.UniqueID</content>
   <content>CommonAttribute.UniqueID</content>
-  <content>EventSubscription.CheckUniqueID</content>
+  <content>EventSubscription.BeforeWrite_CheckUniqueID</content>
   <content>DefinedType.UseUniqueID</content>
 </mdclass:Subsystem>

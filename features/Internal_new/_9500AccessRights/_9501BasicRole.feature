@@ -41,7 +41,6 @@ Scenario: 950100 Basic role
 	When Create catalog Units objects (box (8 pcs))
 	When Create catalog Units objects (pcs)
 	When Create chart of characteristic types CurrencyMovementType objects
-	When Create catalog Currencies objects
 	When Create catalog ItemKeys objects
 	When Create catalog ItemTypes objects
 	When Create catalog ItemTypes objects (Furniture)
@@ -120,6 +119,9 @@ Scenario: 950100 Basic role
 	When Create document StockAdjustmentAsSurplus objects
 	When Create document StockAdjustmentAsWriteOff objects
 	When Create document Unbundling objects
+	* Update user roles
+		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
+		And I click "Update all user roles" button	
 	* Set password for Sofia Borisova (Manager 3)
 			Given I open hyperlink "e1cib/list/Catalog.Users"
 			And I go to line in "List" table
@@ -127,8 +129,8 @@ Scenario: 950100 Basic role
 					| 'Emily Jones (Manager 2)' |
 			And I select current line in "List" table
 	* Change localization code
-			And I input "tr" text in "Localization code" field	
-			And I input "en" text in "Interface localization code" field
+			And I select "Turkish" exact value from "Data localization" drop-down list	
+			And I select "English" exact value from "Interface localization" drop-down list
 			And I click "Save" button
 	* Set password
 		And I click "Set password" button
@@ -155,4 +157,5 @@ Scenario: 950100 Basic role
 	If the warning is displayed then 
 		Then I raise "Failed to open" exception
 	And I close all client application windows
+	And I close TestClient session
 

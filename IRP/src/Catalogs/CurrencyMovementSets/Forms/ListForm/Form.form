@@ -105,6 +105,10 @@
     <items xsi:type="form:FormField">
       <name>Description</name>
       <id>53</id>
+      <title>
+        <key>en</key>
+        <value>Description</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -157,6 +161,10 @@
     <items xsi:type="form:FormField">
       <name>PredefinedDataName</name>
       <id>65</id>
+      <title>
+        <key>en</key>
+        <value>Predefined data name</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

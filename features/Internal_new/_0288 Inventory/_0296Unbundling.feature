@@ -51,7 +51,7 @@ Scenario: _029600 preparation (Unbundling)
 	* Tax settings
 		When filling in Tax settings for company
 
-Scenario: _029601 create Unbundling on a product with a specification (specification created in advance, Store doesn't use Shipment confirmation and Goods receipt)
+Scenario: _029601 create Unbundling on a product with a specification (specification created in advance, Store does not use Shipment confirmation and Goods receipt)
 # the fill button on the specification. The specification specifies all additional properties
 	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	* Create Unbundling for Dress/A-8, all item keys were created in advance
@@ -96,7 +96,7 @@ Scenario: _029601 create Unbundling on a product with a specification (specifica
 			| Dress/A-8       | Main Company |
 	And I close all client application windows
 	
-Scenario: _029602 check Bundling posting (store doesn't use Shipment confirmation and Goods receipt) by register Stock Balance
+Scenario: _029602 check Bundling posting (store does not use Shipment confirmation and Goods receipt) by register Stock Balance
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
 	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                   | 'Store'    | 'Item key'                            |
@@ -107,7 +107,7 @@ Scenario: _029602 check Bundling posting (store doesn't use Shipment confirmatio
 		| '2,000'    | '$$Unbundling0029601$$'              | 'Store 01' | 'Dress/A-8'                           |
 	And I close all client application windows
 
-Scenario: _029603 check Bundling posting (store doesn't use Shipment confirmation and Goods receipt) by register Stock Reservation
+Scenario: _029603 check Bundling posting (store does not use Shipment confirmation and Goods receipt) by register Stock Reservation
 	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
 	And "List" table contains lines
 		| 'Quantity' | 'Recorder'                    | 'Store'     | 'Item key'                                                            |
@@ -357,7 +357,7 @@ Scenario: _029611 create Unbundling (+check movements) for bundl (there is a Bun
 				| 'Skittles + Chewing gum/Skittles+Chewing gum'       | 'Main Company' |
 		And I close all client application windows
 
-Scenario: _029612 create Unbundling (Store use Goods receipt and doesn't use Shipment confirmation)
+Scenario: _029612 create Unbundling (Store use Goods receipt and does not use Shipment confirmation)
 	* Opening the creation form Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"

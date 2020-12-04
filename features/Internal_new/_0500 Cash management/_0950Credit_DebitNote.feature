@@ -86,8 +86,8 @@ Scenario: _095001 preparation
 			And I input "15,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I move to "Other" tab
-			And I expand "Currency" group
-			And I move to the tab named "GroupCurrency"
+			And I expand "Currencies" group
+			And I move to the tab named "GroupCurrencies"
 			And I expand "More" group
 			And I input "01.01.2020  10:00:00" text in "Date" field
 			And Delay 1
@@ -233,11 +233,11 @@ Scenario: _095002 check movements of the document Dedit Note (write off debts to
 		And in "Transactions" table I move to the next cell
 		* Check the selection of basis documents for the specified partner
 		And "List" table contains lines
-			| 'Reference'                        | 'Legal name'    | 'Partner' | 'Document amount' |
+			| 'Document'                        | 'Legal name'    | 'Partner' | 'Amount' |
 			| '$$PurchaseInvoice095001$$'  | 'Company Maxim' | 'Maxim'   | '11 000,00'       |
 			| '$$PurchaseInvoice0950011$$' | 'Company Maxim' | 'Maxim'   | '10 000,00'       |
 		And I go to line in "List" table
-			| 'Reference' |
+			| 'Document' |
 			| '$$PurchaseInvoice095001$$'  |
 		And I select current line in "List" table
 		And I click the button named "FormCommandSelect" 
@@ -341,11 +341,11 @@ Scenario: _095003 check movements of the document Credit Note (increase in debt 
 		And in "Transactions" table I move to the next cell
 	* Check the selection of basis documents for the specified partner
 		And "List" table contains lines
-			| 'Reference'                  | 'Legal name'    | 'Partner' | 'Document amount' |
+			| 'Document'                  | 'Legal name'    | 'Partner' | 'Amount' |
 			| '$$PurchaseInvoice095001$$'  | 'Company Maxim' | 'Maxim'   | '10 000,00'       |
 			| '$$PurchaseInvoice0950011$$' | 'Company Maxim' | 'Maxim'   | '10 000,00'       |
 		And I go to line in "List" table
-			| 'Reference' |
+			| 'Document' |
 			| '$$PurchaseInvoice095001$$'  |
 		And I select current line in "List" table
 		And I click the button named "FormCommandSelect" 
@@ -452,7 +452,7 @@ Scenario: _095004 check movements of the document Credit Note (write off custome
 		* Check the selection of basis documents for the specified partner
 		And delay 2
 		And I go to line in "List" table
-			| 'Reference' |
+			| 'Document' |
 			| '$$SalesInvoice095001$$'  |
 		And I select current line in "List" table
 		And I click the button named "FormCommandSelect" 
@@ -557,10 +557,10 @@ Scenario: _095005 check movements of the document Debit Note (increase in custom
 		* Check the selection of basis documents for the specified partner
 		And delay 2
 		And "List" table contains lines
-			| 'Reference' |
+			| 'Document' |
 			| '$$SalesInvoice095001$$'  |
 		And I go to line in "List" table
-			| 'Reference' |
+			| 'Document' |
 			| '$$SalesInvoice095001$$'  |
 		And I select current line in "List" table
 		And I click the button named "FormCommandSelect" 
@@ -699,7 +699,7 @@ Scenario: _095007 check the legal name filling if the partner has only one
 		And "Transactions" table contains lines
 			| 'Partner' | 'Legal name'    |
 			| 'Lunch'   | 'Company Lunch' |
-	* Check legal name re-filling at partner re-selection.
+	* Check legal name refilling at partner re-selection.
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -721,7 +721,7 @@ Scenario: _095007 check the legal name filling if the partner has only one
 		And "Transactions" table contains lines
 			| 'Partner' | 'Legal name'    |
 			| 'Lunch'   | 'Company Lunch' |
-	* Check legal name re-filling at partner re-selection.
+	* Check legal name refilling at partner re-selection.
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description' |

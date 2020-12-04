@@ -262,8 +262,8 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 			| 'Dress' | 'L/Green'  |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
-		Then I wait that in user messages the "Field [Serial lot number] is empty." substring will appear in "30" seconds
-	* Change item that uses serial lot number to item that doesn't use serial lot number and check user message
+		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
+	* Change item that uses serial lot number to item that does not use serial lot number and check user message
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'L/Green'  |
@@ -292,7 +292,7 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		And I finish line editing in "Payments" table
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
-	* Change item that doesn't use serial lot number to item that uses serial lot number and check user message
+	* Change item that does not use serial lot number to item that uses serial lot number and check user message
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
@@ -309,7 +309,7 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
-		Then I wait that in user messages the "Field [Serial lot number] is empty." substring will appear in "30" seconds
+		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 	And I go to line in "List" table
@@ -475,8 +475,8 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			| 'Dress' | 'L/Green'  |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
-		Then I wait that in user messages the "Field [Serial lot number] is empty." substring will appear in "30" seconds
-	* Change item that uses serial lot number to item that doesn't use serial lot number and check user message
+		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
+	* Change item that uses serial lot number to item that does not use serial lot number and check user message
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'L/Green'  |
@@ -500,7 +500,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I move to "Item list" tab
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
-	* Change item that doesn't use serial lot number to item that uses serial lot number and check user message
+	* Change item that does not use serial lot number to item that uses serial lot number and check user message
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
@@ -517,7 +517,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
-		Then I wait that in user messages the "Field [Serial lot number] is empty." substring will appear in "30" seconds
+		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
 	And I close all client application windows
 
 
@@ -701,8 +701,8 @@ Scenario: _092004 check serial lot number in the Sales invoice
 			| 'Dress' | 'L/Green'  |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
-		Then I wait that in user messages the "Field [Serial lot number] is empty." substring will appear in "30" seconds
-	* Change item that uses serial lot number to item that doesn't use serial lot number and check user message
+		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
+	* Change item that uses serial lot number to item that does not use serial lot number and check user message
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'L/Green'  |
@@ -720,7 +720,7 @@ Scenario: _092004 check serial lot number in the Sales invoice
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
-	* Change item that doesn't use serial lot number to item that uses serial lot number and check user message
+	* Change item that does not use serial lot number to item that uses serial lot number and check user message
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
@@ -737,7 +737,7 @@ Scenario: _092004 check serial lot number in the Sales invoice
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
-		Then I wait that in user messages the "Field [Serial lot number] is empty." substring will appear in "30" seconds
+		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
 	* Copy line with serial lot number (serial lot number not copied)
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  | 'Q'     | 'Serial lot numbers'             |
@@ -863,8 +863,8 @@ Scenario: _092005 check serial lot number in the Sales return
 			| 'Dress' | 'L/Green'  |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
-		Then I wait that in user messages the "Field [Serial lot number] is empty." substring will appear in "30" seconds
-	* Change item that uses serial lot number to item that doesn't use serial lot number and check user message
+		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
+	* Change item that uses serial lot number to item that does not use serial lot number and check user message
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'L/Green'  |
@@ -882,7 +882,7 @@ Scenario: _092005 check serial lot number in the Sales return
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
-	* Change item that doesn't use serial lot number to item that uses serial lot number and check user message
+	* Change item that does not use serial lot number to item that uses serial lot number and check user message
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
@@ -899,7 +899,7 @@ Scenario: _092005 check serial lot number in the Sales return
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
-		Then I wait that in user messages the "Field [Serial lot number] is empty." substring will appear in "30" seconds
+		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
 	And I close all client application windows
 
 
@@ -1251,6 +1251,7 @@ Scenario: _092011 check Serial lot number tab in the Item/item key
 		And I close all client application windows
 		
 Scenario: _092012 check Serial lot number tab in the Item type
+	And I close all client application windows
 	* Select Item type with own Serial lot number
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 		And I go to line in "List" table
@@ -1271,6 +1272,7 @@ Scenario: _092012 check Serial lot number tab in the Item type
 			| '89999'          | 'M/White'   |
 			| '99098809009910' | '38/Yellow' |
 			| '05'             | 'Dress'     |
+	And I close all client application windows 
 	* Select Item type without own Serial lot number
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 		And I go to line in "List" table
@@ -1407,7 +1409,7 @@ Scenario: _092015 product scanning with and without serial lot number
 		And I click "Search by barcode (F7)" button
 		And I input "5908769093878" text in "InputFld" field
 		And I click "OK" button
-		Then the form attribute named "SerialLotNumberStatus" became equal to "Barcode 5908769093878 was not found. Create new new serial with this barcode?"
+		Then the form attribute named "SerialLotNumberStatus" became equal to "Serial lot 5908769093878 was not found. Create new?"
 		And I close all client application windows
 		
 		

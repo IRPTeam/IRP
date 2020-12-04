@@ -82,7 +82,7 @@ Scenario: _0153500 preparation
 
 
 
-Scenario: _0154001 check that additional attributes and properties are displayed on the form without re-opening (catalog Item key)
+Scenario: _0154001 check that additional attributes and properties are displayed on the form without reopening (catalog Item key)
 	* Create item type
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 		And I click the button named "FormCreate"
@@ -144,7 +144,7 @@ Scenario: _0154001 check that additional attributes and properties are displayed
 	And I close all client application windows
 
 
-Scenario: _0154002 check that additional attributes and properties and properties are displayed on the form without re-opening (catalog Item)
+Scenario: _0154002 check that additional attributes and properties and properties are displayed on the form without reopening (catalog Item)
 	Then I check for the "Items" catalog element with the "Description_en" "Test"
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open Item form
@@ -157,7 +157,7 @@ Scenario: _0154002 check that additional attributes and properties and propertie
 	* Adding by selected Item additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name |
+			| Predefined data name |
 			| Catalog_Items             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -191,7 +191,7 @@ Scenario: _0154002 check that additional attributes and properties and propertie
 			| 'Test'     | ''      |			
 	And I close all client application windows
 
-Scenario: _0154003 check that additional attributes and properties are displayed on the form without re-opening (catalog Item type)
+Scenario: _0154003 check that additional attributes and properties are displayed on the form without reopening (catalog Item type)
 	Then I check for the "ItemTypes" catalog element with the "Description_en" "Test"
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open Item form type
@@ -204,7 +204,7 @@ Scenario: _0154003 check that additional attributes and properties are displayed
 	* Adding by selected Item type additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Catalog_ItemTypes             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -234,7 +234,7 @@ Scenario: _0154003 check that additional attributes and properties are displayed
 	And I close all client application windows
 		
 
-Scenario: _0154004 check that additional attributes and properties are displayed on the form without re-opening (catalog Partners)
+Scenario: _0154004 check that additional attributes and properties are displayed on the form without reopening (catalog Partners)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Create Partners
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
@@ -252,7 +252,7 @@ Scenario: _0154004 check that additional attributes and properties are displayed
 	* Adding by selected Partners additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Catalog_Partners              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -287,7 +287,7 @@ Scenario: _0154004 check that additional attributes and properties are displayed
 	And I close all client application windows
 
 
-Scenario: _01540050 check that additional attributes and properties are displayed on the form without re-opening (catalog User groups)
+Scenario: _01540050 check that additional attributes and properties are displayed on the form without reopening (catalog User groups)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Catalog_UserGroups
 		Given I open hyperlink "e1cib/list/Catalog.UserGroups"
@@ -296,7 +296,7 @@ Scenario: _01540050 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_UserGroups     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -323,7 +323,7 @@ Scenario: _01540050 check that additional attributes and properties are displaye
 	And I close all client application windows
 
 
-Scenario: _01540051 check that additional attributes and properties are displayed on the form without re-opening (document InternalSupplyRequest)
+Scenario: _01540051 check that additional attributes and properties are displayed on the form without reopening (document InternalSupplyRequest)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create InternalSupplyRequest
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
@@ -333,7 +333,7 @@ Scenario: _01540051 check that additional attributes and properties are displaye
 	* Adding by selected Sales invoice additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_InternalSupplyRequest              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -363,7 +363,7 @@ Scenario: _01540051 check that additional attributes and properties are displaye
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _01540052 check that additional attributes and properties are displayed on the form without re-opening (document DebitNote)
+Scenario: _01540052 check that additional attributes and properties are displayed on the form without reopening (document DebitNote)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create DebitNote
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
@@ -373,7 +373,7 @@ Scenario: _01540052 check that additional attributes and properties are displaye
 	* Adding by selected Sales invoice additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Predefined data item name'     |
+			| 'Predefined data name'     |
 			| 'Document_DebitNote'              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -403,7 +403,7 @@ Scenario: _01540052 check that additional attributes and properties are displaye
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _01540053 check that additional attributes and properties are displayed on the form without re-opening (document CreditNote)
+Scenario: _01540053 check that additional attributes and properties are displayed on the form without reopening (document CreditNote)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create CreditNote
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
@@ -413,7 +413,7 @@ Scenario: _01540053 check that additional attributes and properties are displaye
 	* Adding by selected Sales invoice additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Predefined data item name'     |
+			| 'Predefined data name'     |
 			| 'Document_CreditNote'              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -443,7 +443,7 @@ Scenario: _01540053 check that additional attributes and properties are displaye
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _01540054 check that additional attributes and properties are displayed on the form without re-opening (Catalog_Workstations)
+Scenario: _01540054 check that additional attributes and properties are displayed on the form without reopening (Catalog_Workstations)
 	And I close all client application windows
 	* Open a form to create Catalog_Workstations
 		Given I open hyperlink "e1cib/list/Catalog.Workstations"
@@ -452,7 +452,7 @@ Scenario: _01540054 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Workstations     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -487,7 +487,7 @@ Scenario: _01540054 check that additional attributes and properties are displaye
 	And I close all client application windows
 
 
-Scenario: _01540055 check that additional attributes and properties are displayed on the form without re-opening (Catalog_Hardware)
+Scenario: _01540055 check that additional attributes and properties are displayed on the form without reopening (Catalog_Hardware)
 	And I close all client application windows
 	* Open a form to create Catalog_Hardware
 		Given I open hyperlink "e1cib/list/Catalog.Hardware"
@@ -495,7 +495,7 @@ Scenario: _01540055 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Hardware     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -530,7 +530,7 @@ Scenario: _01540055 check that additional attributes and properties are displaye
 	And I close all client application windows
 
 
-Scenario: _01540056 check that additional attributes and properties are displayed on the form without re-opening (Catalog_CashStatementStatuses)
+Scenario: _01540056 check that additional attributes and properties are displayed on the form without reopening (Catalog_CashStatementStatuses)
 	And I close all client application windows
 	* Open a form to create Catalog_CashStatementStatuses
 		Given I open hyperlink "e1cib/list/Catalog.CashStatementStatuses"
@@ -539,7 +539,7 @@ Scenario: _01540056 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_CashStatementStatuses     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -573,7 +573,7 @@ Scenario: _01540056 check that additional attributes and properties are displaye
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _0154006 check that additional attributes and properties are displayed on the form without re-opening (document Sales invoice)
+Scenario: _0154006 check that additional attributes and properties are displayed on the form without reopening (document Sales invoice)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Sales Invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -583,7 +583,7 @@ Scenario: _0154006 check that additional attributes and properties are displayed
 	* Adding by selected Sales invoice additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_SalesInvoice              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -613,7 +613,7 @@ Scenario: _0154006 check that additional attributes and properties are displayed
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _01540060 check that additional attributes and properties are displayed on the form without re-opening (document PurchaseInvoice)
+Scenario: _01540060 check that additional attributes and properties are displayed on the form without reopening (document PurchaseInvoice)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create PurchaseInvoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -623,7 +623,7 @@ Scenario: _01540060 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_PurchaseInvoice              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -653,7 +653,7 @@ Scenario: _01540060 check that additional attributes and properties are displaye
 			| 'Test'     | ''      |
 	And I close all client application windows
 
-Scenario: _01540061 check that additional attributes and properties are displayed on the form without re-opening (document SalesOrder)
+Scenario: _01540061 check that additional attributes and properties are displayed on the form without reopening (document SalesOrder)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create SalesOrder
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -663,7 +663,7 @@ Scenario: _01540061 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_SalesOrder              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -693,7 +693,7 @@ Scenario: _01540061 check that additional attributes and properties are displaye
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _01540062 check that additional attributes and properties are displayed on the form without re-opening (document Purchase Order)
+Scenario: _01540062 check that additional attributes and properties are displayed on the form without reopening (document Purchase Order)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create PurchaseOrder
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -703,7 +703,7 @@ Scenario: _01540062 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_PurchaseOrder              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -734,7 +734,7 @@ Scenario: _01540062 check that additional attributes and properties are displaye
 	And I close all client application windows
 
 
-Scenario: _01540057 check that additional attributes and properties are displayed on the form without re-opening (Catalog_ExpenseAndRevenueTypes)
+Scenario: _01540057 check that additional attributes and properties are displayed on the form without reopening (Catalog_ExpenseAndRevenueTypes)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Catalog_ExpenseAndRevenueTypes
 		Given I open hyperlink "e1cib/list/Catalog.ExpenseAndRevenueTypes"
@@ -743,7 +743,7 @@ Scenario: _01540057 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_ExpenseAndRevenueTypes     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -777,7 +777,7 @@ Scenario: _01540057 check that additional attributes and properties are displaye
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _01540063 check that additional attributes and properties are displayed on the form without re-opening (Catalog_BusinessUnits)
+Scenario: _01540063 check that additional attributes and properties are displayed on the form without reopening (Catalog_BusinessUnits)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Catalog_BusinessUnits
 		Given I open hyperlink "e1cib/list/Catalog.BusinessUnits"
@@ -786,7 +786,7 @@ Scenario: _01540063 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_BusinessUnits     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -825,7 +825,7 @@ Scenario: _01540058 check adding additional properties for Specifications (Catal
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Specifications     |
 		And I select current line in "List" table
 		And I move to "Properties" tab
@@ -847,7 +847,7 @@ Scenario: _01540058 check adding additional properties for Specifications (Catal
 		| 'Test'     | ''      |
 	And I close all client application windows
 
-Scenario: _01540064 check that additional attributes and properties are displayed on the form without re-opening (Catalog_ChequeBonds)
+Scenario: _01540064 check that additional attributes and properties are displayed on the form without reopening (Catalog_ChequeBonds)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Catalog_ChequeBonds
 		Given I open hyperlink "e1cib/list/Catalog.ChequeBonds"
@@ -856,7 +856,7 @@ Scenario: _01540064 check that additional attributes and properties are displaye
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_ChequeBonds     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -890,7 +890,7 @@ Scenario: _01540064 check that additional attributes and properties are displaye
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _015400640 check that additional attributes and properties are displayed on the form without re-opening (Catalog_Agreements)
+Scenario: _015400640 check that additional attributes and properties are displayed on the form without reopening (Catalog_Agreements)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Partner terms
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
@@ -899,7 +899,7 @@ Scenario: _015400640 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Agreements     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -935,7 +935,7 @@ Scenario: _015400640 check that additional attributes and properties are display
 
 
 
-Scenario: _015400641 check that additional attributes and properties are displayed on the form without re-opening (Catalog_Cash/Bank accounts)
+Scenario: _015400641 check that additional attributes and properties are displayed on the form without reopening (Catalog_Cash/Bank accounts)
 Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create CashAccounts
 		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
@@ -944,7 +944,7 @@ Then I check for the "AddAttributeAndPropertyValues" charts of characteristic ty
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_CashAccounts     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -978,7 +978,7 @@ Then I check for the "AddAttributeAndPropertyValues" charts of characteristic ty
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _015400642 check that additional attributes and properties are displayed on the form without re-opening (Catalog_Companies)
+Scenario: _015400642 check that additional attributes and properties are displayed on the form without reopening (Catalog_Companies)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Companies
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
@@ -987,7 +987,7 @@ Scenario: _015400642 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Companies     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1022,7 +1022,7 @@ Scenario: _015400642 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400644 check that additional attributes and properties are displayed on the form without re-opening (Catalog_Countries)
+Scenario: _015400644 check that additional attributes and properties are displayed on the form without reopening (Catalog_Countries)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Countries
 		Given I open hyperlink "e1cib/list/Catalog.Countries"
@@ -1031,7 +1031,7 @@ Scenario: _015400644 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Countries     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1066,7 +1066,7 @@ Scenario: _015400644 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400645 check that additional attributes and properties are displayed on the form without re-opening (Catalog_Currencies)
+Scenario: _015400645 check that additional attributes and properties are displayed on the form without reopening (Catalog_Currencies)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Currencies
 		Given I open hyperlink "e1cib/list/Catalog.Currencies"
@@ -1075,7 +1075,7 @@ Scenario: _015400645 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Currencies     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1109,7 +1109,7 @@ Scenario: _015400645 check that additional attributes and properties are display
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _015400646 check that additional attributes and properties are displayed on the form without re-opening (Catalog_Price types)
+Scenario: _015400646 check that additional attributes and properties are displayed on the form without reopening (Catalog_Price types)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create PriceTypes
 		Given I open hyperlink "e1cib/list/Catalog.PriceTypes"
@@ -1118,7 +1118,7 @@ Scenario: _015400646 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_PriceTypes     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1153,7 +1153,7 @@ Scenario: _015400646 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400647 check that additional attributes and properties are displayed on the form without re-opening (Catalog_Item serial/lot number)
+Scenario: _015400647 check that additional attributes and properties are displayed on the form without reopening (Catalog_Item serial/lot number)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create SerialLotNumbers
 		Given I open hyperlink "e1cib/list/Catalog.SerialLotNumbers"
@@ -1162,7 +1162,7 @@ Scenario: _015400647 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_SerialLotNumbers     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1196,7 +1196,7 @@ Scenario: _015400647 check that additional attributes and properties are display
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _015400648 check that additional attributes and properties are displayed on the form without re-opening (Catalog_Stores)
+Scenario: _015400648 check that additional attributes and properties are displayed on the form without reopening (Catalog_Stores)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Stores
 		Given I open hyperlink "e1cib/list/Catalog.Stores"
@@ -1205,7 +1205,7 @@ Scenario: _015400648 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Stores     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1240,7 +1240,7 @@ Scenario: _015400648 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400649 check that additional attributes and properties are displayed on the form without re-opening (Catalog_Taxes)
+Scenario: _015400649 check that additional attributes and properties are displayed on the form without reopening (Catalog_Taxes)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Tax types
 		Given I open hyperlink "e1cib/list/Catalog.Taxes"
@@ -1249,7 +1249,7 @@ Scenario: _015400649 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Taxes     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1283,7 +1283,7 @@ Scenario: _015400649 check that additional attributes and properties are display
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _015400650 check that additional attributes and properties are displayed on the form without re-opening (Catalog_Units)
+Scenario: _015400650 check that additional attributes and properties are displayed on the form without reopening (Catalog_Units)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to createItem units
 		Given I open hyperlink "e1cib/list/Catalog.Units"
@@ -1292,7 +1292,7 @@ Scenario: _015400650 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Units     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1328,7 +1328,7 @@ Scenario: _015400650 check that additional attributes and properties are display
 
 
 
-Scenario: _015400651 check that additional attributes and properties are displayed on the form without re-opening (Catalog_Users)
+Scenario: _015400651 check that additional attributes and properties are displayed on the form without reopening (Catalog_Users)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Users
 		Given I open hyperlink "e1cib/list/Catalog.Users"
@@ -1337,7 +1337,7 @@ Scenario: _015400651 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_Users     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1371,7 +1371,7 @@ Scenario: _015400651 check that additional attributes and properties are display
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _015400652 check that additional attributes and properties are displayed on the form without re-opening (document Bank payment)
+Scenario: _015400652 check that additional attributes and properties are displayed on the form without reopening (document Bank payment)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create BankPayment
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
@@ -1381,7 +1381,7 @@ Scenario: _015400652 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_BankPayment              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1412,7 +1412,7 @@ Scenario: _015400652 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400653 check that additional attributes and properties are displayed on the form without re-opening (document Bank receipt)
+Scenario: _015400653 check that additional attributes and properties are displayed on the form without reopening (document Bank receipt)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create BankReceipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
@@ -1422,7 +1422,7 @@ Scenario: _015400653 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_BankReceipt              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1453,7 +1453,7 @@ Scenario: _015400653 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400655 check that additional attributes and properties are displayed on the form without re-opening (document Bundling)
+Scenario: _015400655 check that additional attributes and properties are displayed on the form without reopening (document Bundling)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Bundling
 		Given I open hyperlink "e1cib/list/Document.Bundling"
@@ -1463,7 +1463,7 @@ Scenario: _015400655 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_Bundling              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1494,7 +1494,7 @@ Scenario: _015400655 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400656 check that additional attributes and properties are displayed on the form without re-opening (document Cash expense)
+Scenario: _015400656 check that additional attributes and properties are displayed on the form without reopening (document Cash expense)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create CashExpense
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
@@ -1504,7 +1504,7 @@ Scenario: _015400656 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_CashExpense              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1535,7 +1535,7 @@ Scenario: _015400656 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400657 check that additional attributes and properties are displayed on the form without re-opening (document Cash payment)
+Scenario: _015400657 check that additional attributes and properties are displayed on the form without reopening (document Cash payment)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create CashPayment
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
@@ -1545,7 +1545,7 @@ Scenario: _015400657 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_CashPayment              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1577,7 +1577,7 @@ Scenario: _015400657 check that additional attributes and properties are display
 
 
 
-Scenario: _015400658 check that additional attributes and properties are displayed on the form without re-opening (document Cash receipt)
+Scenario: _015400658 check that additional attributes and properties are displayed on the form without reopening (document Cash receipt)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create CashReceipt
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
@@ -1587,7 +1587,7 @@ Scenario: _015400658 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_CashReceipt              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1620,7 +1620,7 @@ Scenario: _015400658 check that additional attributes and properties are display
 
 
 
-Scenario: _015400659 check that additional attributes and properties are displayed on the form without re-opening (document Cash revenue)
+Scenario: _015400659 check that additional attributes and properties are displayed on the form without reopening (document Cash revenue)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create CashRevenue
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
@@ -1630,7 +1630,7 @@ Scenario: _015400659 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_CashRevenue              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1661,7 +1661,7 @@ Scenario: _015400659 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400660 check that additional attributes and properties are displayed on the form without re-opening (document Cash transfer order)
+Scenario: _015400660 check that additional attributes and properties are displayed on the form without reopening (document Cash transfer order)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create CashTransferOrder
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -1671,7 +1671,7 @@ Scenario: _015400660 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_CashTransferOrder              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1701,7 +1701,7 @@ Scenario: _015400660 check that additional attributes and properties are display
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _015400661 check that additional attributes and properties are displayed on the form without re-opening (document Cheque bond transaction)
+Scenario: _015400661 check that additional attributes and properties are displayed on the form without reopening (document Cheque bond transaction)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create ChequeBondTransaction
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
@@ -1711,7 +1711,7 @@ Scenario: _015400661 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_ChequeBondTransaction              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1742,7 +1742,7 @@ Scenario: _015400661 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400662 check that additional attributes and properties are displayed on the form without re-opening (document Goods receipt)
+Scenario: _015400662 check that additional attributes and properties are displayed on the form without reopening (document Goods receipt)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
@@ -1752,7 +1752,7 @@ Scenario: _015400662 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_GoodsReceipt              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1784,7 +1784,7 @@ Scenario: _015400662 check that additional attributes and properties are display
 
 
 
-Scenario: _015400663 check that additional attributes and properties are displayed on the form without re-opening (document Incoming payment order)
+Scenario: _015400663 check that additional attributes and properties are displayed on the form without reopening (document Incoming payment order)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create IncomingPaymentOrder
 		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
@@ -1794,7 +1794,7 @@ Scenario: _015400663 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_IncomingPaymentOrder              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1825,7 +1825,7 @@ Scenario: _015400663 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400664 check that additional attributes and properties are displayed on the form without re-opening (document Inventory transfer)
+Scenario: _015400664 check that additional attributes and properties are displayed on the form without reopening (document Inventory transfer)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Inventory transfer
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
@@ -1835,7 +1835,7 @@ Scenario: _015400664 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_InventoryTransfer              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1866,7 +1866,7 @@ Scenario: _015400664 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400665 check that additional attributes and properties are displayed on the form without re-opening (document Inventory transfer order)
+Scenario: _015400665 check that additional attributes and properties are displayed on the form without reopening (document Inventory transfer order)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Inventory transfer order
 		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
@@ -1876,7 +1876,7 @@ Scenario: _015400665 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_InventoryTransferOrder              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1907,7 +1907,7 @@ Scenario: _015400665 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400667 check that additional attributes and properties are displayed on the form without re-opening (document Invoice match)
+Scenario: _015400667 check that additional attributes and properties are displayed on the form without reopening (document Invoice match)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create InvoiceMatch
 		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
@@ -1917,7 +1917,7 @@ Scenario: _015400667 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_InvoiceMatch              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1949,7 +1949,7 @@ Scenario: _015400667 check that additional attributes and properties are display
 
 
 
-Scenario: _015400668 check that additional attributes and properties are displayed on the form without re-opening (document Labeling)
+Scenario: _015400668 check that additional attributes and properties are displayed on the form without reopening (document Labeling)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Labeling
 		Given I open hyperlink "e1cib/list/Document.Labeling"
@@ -1958,7 +1958,7 @@ Scenario: _015400668 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_Labeling              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -1989,7 +1989,7 @@ Scenario: _015400668 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400669 check that additional attributes and properties are displayed on the form without re-opening (document Opening entry)
+Scenario: _015400669 check that additional attributes and properties are displayed on the form without reopening (document Opening entry)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create OpeningEntry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
@@ -1999,7 +1999,7 @@ Scenario: _015400669 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_OpeningEntry              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2029,7 +2029,7 @@ Scenario: _015400669 check that additional attributes and properties are display
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _015400670 check that additional attributes and properties are displayed on the form without re-opening (document Outgoing payment order)
+Scenario: _015400670 check that additional attributes and properties are displayed on the form without reopening (document Outgoing payment order)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create OutgoingPaymentOrder
 		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
@@ -2039,7 +2039,7 @@ Scenario: _015400670 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_OutgoingPaymentOrder              |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2070,7 +2070,7 @@ Scenario: _015400670 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400671 check that additional attributes and properties are displayed on the form without re-opening (document Physical count by location)
+Scenario: _015400671 check that additional attributes and properties are displayed on the form without reopening (document Physical count by location)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create PhysicalCountByLocation
 		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
@@ -2080,7 +2080,7 @@ Scenario: _015400671 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_PhysicalCountByLocation             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2113,7 +2113,7 @@ Scenario: _015400671 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400672 check that additional attributes and properties are displayed on the form without re-opening (document Physical inventory)
+Scenario: _015400672 check that additional attributes and properties are displayed on the form without reopening (document Physical inventory)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create PhysicalInventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
@@ -2123,7 +2123,7 @@ Scenario: _015400672 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_PhysicalInventory             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2153,7 +2153,7 @@ Scenario: _015400672 check that additional attributes and properties are display
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _015400673 check that additional attributes and properties are displayed on the form without re-opening (document Price list)
+Scenario: _015400673 check that additional attributes and properties are displayed on the form without reopening (document Price list)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create PriceList
 		Given I open hyperlink "e1cib/list/Document.PriceList"
@@ -2163,7 +2163,7 @@ Scenario: _015400673 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_PriceList             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2195,7 +2195,7 @@ Scenario: _015400673 check that additional attributes and properties are display
 
 
 
-Scenario: _015400674 check that additional attributes and properties are displayed on the form without re-opening (document Purchase return)
+Scenario: _015400674 check that additional attributes and properties are displayed on the form without reopening (document Purchase return)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create PurchaseReturn
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
@@ -2205,7 +2205,7 @@ Scenario: _015400674 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_PurchaseReturn             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2237,7 +2237,7 @@ Scenario: _015400674 check that additional attributes and properties are display
 
 
 
-Scenario: _015400675 check that additional attributes and properties are displayed on the form without re-opening (document Purchase return order)
+Scenario: _015400675 check that additional attributes and properties are displayed on the form without reopening (document Purchase return order)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create PurchaseReturnOrder
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
@@ -2247,7 +2247,7 @@ Scenario: _015400675 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_PurchaseReturnOrder             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2280,7 +2280,7 @@ Scenario: _015400675 check that additional attributes and properties are display
 
 
 
-Scenario: _015400676 check that additional attributes and properties are displayed on the form without re-opening (document Reconciliation statement)
+Scenario: _015400676 check that additional attributes and properties are displayed on the form without reopening (document Reconciliation statement)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create ReconciliationStatement
 		Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
@@ -2290,7 +2290,7 @@ Scenario: _015400676 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_ReconciliationStatement             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2322,7 +2322,7 @@ Scenario: _015400676 check that additional attributes and properties are display
 
 
 
-Scenario: _015400677 check that additional attributes and properties are displayed on the form without re-opening (document Sales return)
+Scenario: _015400677 check that additional attributes and properties are displayed on the form without reopening (document Sales return)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Sales return
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
@@ -2332,7 +2332,7 @@ Scenario: _015400677 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_SalesReturn             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2363,7 +2363,7 @@ Scenario: _015400677 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400678 check that additional attributes and properties are displayed on the form without re-opening (document Sales return order)
+Scenario: _015400678 check that additional attributes and properties are displayed on the form without reopening (document Sales return order)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Sales return order
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
@@ -2373,7 +2373,7 @@ Scenario: _015400678 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_SalesReturnOrder             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2405,7 +2405,7 @@ Scenario: _015400678 check that additional attributes and properties are display
 
 
 
-Scenario: _015400679 check that additional attributes and properties are displayed on the form without re-opening (document Shipment confirmation)
+Scenario: _015400679 check that additional attributes and properties are displayed on the form without reopening (document Shipment confirmation)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create ShipmentConfirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
@@ -2415,7 +2415,7 @@ Scenario: _015400679 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_ShipmentConfirmation             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2446,7 +2446,7 @@ Scenario: _015400679 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400680 check that additional attributes and properties are displayed on the form without re-opening (document Stock adjustment as surplus)
+Scenario: _015400680 check that additional attributes and properties are displayed on the form without reopening (document Stock adjustment as surplus)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create StockAdjustmentAsSurplus
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
@@ -2456,7 +2456,7 @@ Scenario: _015400680 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_StockAdjustmentAsSurplus             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2486,7 +2486,7 @@ Scenario: _015400680 check that additional attributes and properties are display
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _015400681 check that additional attributes and properties are displayed on the form without re-opening (document Stock adjustment as write-off)
+Scenario: _015400681 check that additional attributes and properties are displayed on the form without reopening (document Stock adjustment as write-off)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create StockAdjustmentAsWriteOff
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
@@ -2496,7 +2496,7 @@ Scenario: _015400681 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_StockAdjustmentAsWriteOff             |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2527,7 +2527,7 @@ Scenario: _015400681 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400683 check that additional attributes and properties are displayed on the form without re-opening (document Unbundling)
+Scenario: _015400683 check that additional attributes and properties are displayed on the form without reopening (document Unbundling)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
@@ -2537,7 +2537,7 @@ Scenario: _015400683 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_Unbundling           |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2567,7 +2567,7 @@ Scenario: _015400683 check that additional attributes and properties are display
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _015400684 check that additional attributes and properties are displayed on the form without re-opening (document Retail sales receipt)
+Scenario: _015400684 check that additional attributes and properties are displayed on the form without reopening (document Retail sales receipt)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Unbundling
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -2577,7 +2577,7 @@ Scenario: _015400684 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_RetailSalesReceipt           |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2608,7 +2608,7 @@ Scenario: _015400684 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400685 check that additional attributes and properties are displayed on the form without re-opening (document Retail return receipt)
+Scenario: _015400685 check that additional attributes and properties are displayed on the form without reopening (document Retail return receipt)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Unbundling
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
@@ -2618,7 +2618,7 @@ Scenario: _015400685 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_RetailReturnReceipt           |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2648,7 +2648,7 @@ Scenario: _015400685 check that additional attributes and properties are display
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _015400687 check that additional attributes and properties are displayed on the form without re-opening (document Cash statement)
+Scenario: _015400687 check that additional attributes and properties are displayed on the form without reopening (document Cash statement)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Unbundling
 		Given I open hyperlink "e1cib/list/Document.CashStatement"
@@ -2658,7 +2658,7 @@ Scenario: _015400687 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name     |
+			| Predefined data name     |
 			| Document_CashStatement           |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2688,7 +2688,7 @@ Scenario: _015400687 check that additional attributes and properties are display
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _015400688 check that additional attributes and properties are displayed on the form without re-opening (Catalog_PaymentTerminals)
+Scenario: _015400688 check that additional attributes and properties are displayed on the form without reopening (Catalog_PaymentTerminals)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Payment terminals
 		Given I open hyperlink "e1cib/list/Catalog.PaymentTerminals"
@@ -2697,7 +2697,7 @@ Scenario: _015400688 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_PaymentTerminals     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2731,7 +2731,7 @@ Scenario: _015400688 check that additional attributes and properties are display
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _015400689 check that additional attributes and properties are displayed on the form without re-opening (Catalog_RetailCustomers)
+Scenario: _015400689 check that additional attributes and properties are displayed on the form without reopening (Catalog_RetailCustomers)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Retail customers
 		Given I open hyperlink "e1cib/list/Catalog.RetailCustomers"
@@ -2740,7 +2740,7 @@ Scenario: _015400689 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_RetailCustomers     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2774,7 +2774,7 @@ Scenario: _015400689 check that additional attributes and properties are display
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _015400690 check that additional attributes and properties are displayed on the form without re-opening (Catalog_BankTerms)
+Scenario: _015400690 check that additional attributes and properties are displayed on the form without reopening (Catalog_BankTerms)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create BankTerms
 		Given I open hyperlink "e1cib/list/Catalog.BankTerms"
@@ -2783,7 +2783,7 @@ Scenario: _015400690 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_BankTerms     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2817,7 +2817,7 @@ Scenario: _015400690 check that additional attributes and properties are display
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _015400691 check that additional attributes and properties are displayed on the form without re-opening (Catalog_SpecialOffers)
+Scenario: _015400691 check that additional attributes and properties are displayed on the form without reopening (Catalog_SpecialOffers)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create SpecialOffers
 		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
@@ -2826,7 +2826,7 @@ Scenario: _015400691 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_SpecialOffers     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2860,7 +2860,7 @@ Scenario: _015400691 check that additional attributes and properties are display
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _015400692 check that additional attributes and properties are displayed on the form without re-opening (Catalog_SpecialOfferRules)
+Scenario: _015400692 check that additional attributes and properties are displayed on the form without reopening (Catalog_SpecialOfferRules)
 	And I close all client application windows
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create SpecialOfferRules
@@ -2870,7 +2870,7 @@ Scenario: _015400692 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_SpecialOfferRules     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2904,7 +2904,7 @@ Scenario: _015400692 check that additional attributes and properties are display
 			| 'Test'     | ''      |	
 	And I close all client application windows
 
-Scenario: _015400693 check that additional attributes and properties are displayed on the form without re-opening (Catalog_SpecialOfferType)
+Scenario: _015400693 check that additional attributes and properties are displayed on the form without reopening (Catalog_SpecialOfferType)
 	And I close all client application windows
 	* Open a form to create SpecialOfferType
 		Given I open hyperlink "e1cib/list/Catalog.SpecialOfferTypes"
@@ -2913,7 +2913,7 @@ Scenario: _015400693 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| 'Predefined data item name'          |
+			| 'Predefined data name'          |
 			| 'Catalog_SpecialOfferTypes'     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2948,7 +2948,7 @@ Scenario: _015400693 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400694 check that additional attributes and properties are displayed on the form without re-opening (Catalog_ItemSegments)
+Scenario: _015400694 check that additional attributes and properties are displayed on the form without reopening (Catalog_ItemSegments)
 	And I close all client application windows
 	* Open a form to create ItemSegments
 		Given I open hyperlink "e1cib/list/Catalog.ItemSegments"
@@ -2957,7 +2957,7 @@ Scenario: _015400694 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_ItemSegments     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -2992,7 +2992,7 @@ Scenario: _015400694 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400695 check that additional attributes and properties are displayed on the form without re-opening (Catalog_TaxRates)
+Scenario: _015400695 check that additional attributes and properties are displayed on the form without reopening (Catalog_TaxRates)
 	And I close all client application windows
 	* Open a form to create TaxRates
 		Given I open hyperlink "e1cib/list/Catalog.TaxRates"
@@ -3001,7 +3001,7 @@ Scenario: _015400695 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_TaxRates     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -3036,7 +3036,7 @@ Scenario: _015400695 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400696 check that additional attributes and properties are displayed on the form without re-opening (Catalog_PaymentTypes)
+Scenario: _015400696 check that additional attributes and properties are displayed on the form without reopening (Catalog_PaymentTypes)
 	And I close all client application windows
 	* Open a form to create PaymentTypes
 		Given I open hyperlink "e1cib/list/Catalog.PaymentTypes"
@@ -3045,7 +3045,7 @@ Scenario: _015400696 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_PaymentTypes     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"
@@ -3080,7 +3080,7 @@ Scenario: _015400696 check that additional attributes and properties are display
 	And I close all client application windows
 
 
-Scenario: _015400698 check that additional attributes and properties are displayed on the form without re-opening (Catalog_PartnerSegments)
+Scenario: _015400698 check that additional attributes and properties are displayed on the form without reopening (Catalog_PartnerSegments)
 	And I close all client application windows
 	* Open a form to create PartnerSegments
 		Given I open hyperlink "e1cib/list/Catalog.PartnerSegments"
@@ -3089,7 +3089,7 @@ Scenario: _015400698 check that additional attributes and properties are display
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
-			| Predefined data item name          |
+			| Predefined data name          |
 			| Catalog_PartnerSegments     |
 		And I select current line in "List" table
 		And in the table "Attributes" I click the button named "AttributesAdd"

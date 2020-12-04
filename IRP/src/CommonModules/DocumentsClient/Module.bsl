@@ -795,8 +795,9 @@ Procedure ChangePriceType(Object, Form, Settings, AddInfo = Undefined) Export
 	EndIf;
 	
 	Filter = New Structure("PriceType", Form.CurrentPriceType);
-	If Not Form.CurrentPriceType = Settings.AgreementInfo.PriceType Or 
-								Not Object.ItemList.FindRows(Filter).Count() = Object.ItemList.Count() Then
+	If Not Form.CurrentPriceType = PredefinedValue("Catalog.PriceTypes.ManualPriceType") 
+		And (Not Form.CurrentPriceType = Settings.AgreementInfo.PriceType
+			Or Not Object.ItemList.FindRows(Filter).Count() = Object.ItemList.Count()) Then
 		PriceTypeOnChange(Object, Form, Settings.Module, , Settings, AddInfo);
 	EndIf;
 EndProcedure
@@ -2584,6 +2585,60 @@ Procedure ItemListTaxValuePutServerDataToAddInfo(Object, Form, CurrentData, AddI
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 EndProcedure	
+
+#EndRegion
+
+#Region ExpenseAndRevenue
+
+Procedure ExpenseAndRevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
+	If  OpenSettings = Undefined Then
+		OpenSettings = GetOpenSettingsStructure();
+	EndIf;
+	
+	StandardProcessing = False;
+	
+	If OpenSettings.FormName = Undefined Then
+		OpenSettings.FormName = "Catalog.ExpenseAndRevenueTypes.ChoiceForm";
+	EndIf;
+	
+	If OpenSettings.ArrayOfFilters = Undefined Then
+		OpenSettings.ArrayOfFilters = New Array;
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
+																	True, DataCompositionComparisonType.NotEqual));															
+		
+	EndIf;
+	
+	If OpenSettings.FormParameters = Undefined Then
+		OpenSettings.FormParameters = New Structure();
+	EndIf;
+	
+	If OpenSettings.FillingData = Undefined Then
+		OpenSettings.FormParameters.Insert("FillingData", New Structure());
+	Else
+		OpenSettings.FormParameters.Insert("FillingData", OpenSettings.FillingData);
+	EndIf;
+	
+	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure ExpenseAndRevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters = Undefined,	AdditionalParameters = Undefined) Export
+	
+	If ArrayOfFilters = Undefined Then
+		ArrayOfFilters = New Array();
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	EndIf;
+	
+	If AdditionalParameters = Undefined Then
+		AdditionalParameters = New Structure();
+	EndIf;
+	
+	ArrayOfChoiceParameters = New Array();
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.CustomSearchFilter", 
+															DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters)));
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.AdditionalParameters", 
+														DocumentsServer.SerializeArrayOfFilters(AdditionalParameters)));
+	Item.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
+EndProcedure
 
 #EndRegion
 

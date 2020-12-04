@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@MainInfoCatalogs
+@SettingsCatalogs
 
 Feature: filling in Expense type catalog
 
@@ -28,6 +28,7 @@ Scenario: _005047 filling in Expense type
 		And I input "Rent TR" text in the field named "Description_tr"
 		And I input "Аренда" text in "RU" field
 		And I click "Ok" button
+		And I select "Expense" exact value from "Type" drop-down list
 		And I click the button named "FormWrite"
 		* Check data save
 			Then the form attribute named "Description_en" became equal to "Rent"
@@ -38,6 +39,7 @@ Scenario: _005047 filling in Expense type
 		And I input "Delivery" text in the field named "Description_en"
 		And I input "Delivery TR" text in the field named "Description_tr"
 		And I click "Ok" button
+		And I select "Both" exact value from "Type" drop-down list
 		And I click the button named "FormWriteAndClose"
 	* Check creation Expense type
 		Then I check for the "ExpenseAndRevenueTypes" catalog element with the "Description_en" "Rent"

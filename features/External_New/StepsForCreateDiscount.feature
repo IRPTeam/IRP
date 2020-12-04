@@ -69,7 +69,7 @@ Scenario: open a special offer window
 
 Scenario: enter the discount period this month
 	And I input begin of the current month date in "Start of" field
-	And I input end of the current month date in "End of" field
+	And I input begin of the next month date in "End of" field
 
 Scenario: add a special offer rule
 	And in the table "Rules" I click the button named "RulesAdd"

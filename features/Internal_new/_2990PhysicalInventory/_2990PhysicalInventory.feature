@@ -180,7 +180,7 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 			| 'Objects statuses'|
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data item name |
+			| Predefined data name |
 			| PhysicalInventory         |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
@@ -206,7 +206,7 @@ Scenario: _2990001 filling in the status guide for PhysicalInventory and Physica
 			| 'Objects statuses'|
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| Predefined data item name |
+			| Predefined data name |
 			| PhysicalCountByLocation         |
 		And I select current line in "List" table
 		And I click Open button of the field named "Description_en"
@@ -569,7 +569,7 @@ Scenario: _2990004 create Physical inventory (store use GR and SC)
 		And I close all client application windows
 
 
-Scenario: _2990005 create Physical inventory (store doesn't use GR and SC)
+Scenario: _2990005 create Physical inventory (store does not use GR and SC)
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I click the button named "FormCreate"
@@ -1264,7 +1264,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 			And I select "In processing" exact value from "Status" drop-down list
 			And I click the button named "FormPostAndClose"
 
-Scenario: _2990011 re-filling Physical inventory based on Physical count by location list
+Scenario: _2990011 refilling Physical inventory based on Physical count by location list
 	And I close all client application windows
 	* Open Physical count by location list
 		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"

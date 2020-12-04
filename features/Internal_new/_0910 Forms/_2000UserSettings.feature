@@ -51,6 +51,8 @@ Scenario: _200000 preparation (user settings)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog Partners objects
+		When Create catalog BusinessUnits objects
+		When Create information register UserSettings records (Retail document)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -70,7 +72,7 @@ Scenario: _200001 customize the CI user settings
 		| 'CI'          |
 	And I select current line in "List" table
 	And I input "CI" text in the field named "Description_en"
-	And I input "en" text in "Interface localization code" field
+	And I select "English" exact value from "Interface localization" drop-down list
 	And I click "Save" button
 	And I click "Settings" button
 	* Fill in custom settings for Sales order
@@ -1052,7 +1054,7 @@ Scenario:  _200022 check filling in field from custom user settings in Purchase 
 	And I close all client application windows
 
 Scenario:  _200023 check filling in field from custom user settings in Sales invoice
-	# the store is filled out of the agreement, if the agreement doesn't specify, then from user settings. So is the company.
+	# the store is filled out of the agreement, if the agreement does not specify, then from user settings. So is the company.
 	Given I open hyperlink "e1cib/list/InformationRegister.UserSettings"
 	If "List" table does not contain lines Then
 			| "Metadata object"            | "Attribute name" |
@@ -1294,8 +1296,26 @@ Scenario: _200032 check the availability of editing custom settings from the use
 		Then "Edit user settings" window is opened
 	And I close all client application windows
 
+Scenario:  _200033 check filling in field from custom user settings in Retail return receipt
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "BusinessUnit" became equal to "Shop 01"
+	And I close all client application windows
 
-	
+Scenario:  _200034 check filling in field from custom user settings in Cash statement
+	Given I open hyperlink "e1cib/list/Document.CashStatement"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "BusinessUnit" became equal to "Shop 01"
+		Then the form attribute named "CashAccount" became equal to "Cash desk №4"
+	And I close all client application windows	
 
 
 Scenario: _999999 close TestClient session

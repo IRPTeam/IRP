@@ -54,6 +54,10 @@
     <items xsi:type="form:FormField">
       <name>Ref</name>
       <id>31</id>
+      <title>
+        <key>en</key>
+        <value>Document</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -262,6 +266,10 @@
     <items xsi:type="form:FormField">
       <name>Agreement</name>
       <id>46</id>
+      <title>
+        <key>en</key>
+        <value>Partner term</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -366,6 +374,10 @@
     <items xsi:type="form:FormField">
       <name>DocumentAmount</name>
       <id>40</id>
+      <title>
+        <key>en</key>
+        <value>Amount</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

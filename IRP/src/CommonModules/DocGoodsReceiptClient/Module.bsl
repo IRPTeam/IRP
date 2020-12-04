@@ -462,11 +462,6 @@ Procedure FillReceiptBasises(Object, Form, Command) Export
 	DocGoodsReceiptClient.ItemListOnChange(Object, Form, Form.Items.ItemList);
 EndProcedure
 
-Procedure CompareQuantity(Object, Form, Command) Export
-	QuantityCompareParameters = DocGoodsReceiptServer.ParametersForQuantityCompare(Object, Form.UUID);
-	OpenForm("DataProcessor.QuantityCompare.Form.Form", QuantityCompareParameters, Form, Form.UUID, , , , FormWindowOpeningMode.LockOwnerWindow);
-EndProcedure
-
 #Region PickUpItems
 
 Procedure OpenPickupItems(Object, Form, Command) Export

@@ -109,6 +109,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_029", NStr("en = 'External attributes'", Lang));
 	Strings.Insert("Form_030", NStr("en = 'Dimensions'", Lang));
 	Strings.Insert("Form_031", NStr("en = 'Weight information'", Lang));
+	Strings.Insert("Form_032", NStr("en = 'Period'", Lang));
 	#EndRegion
 	
 	#Region ErrorMessages
@@ -341,7 +342,7 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_014", NStr("en = 'Current location #%1 was scanned and closed before. Please scan next location.'", Lang));
 	
 	// %1 - 123456
-	Strings.Insert("InfoMessage_015", NStr("en = 'Barcode %1 was not found. Create new new serial with this barcode?'", Lang));
+	Strings.Insert("InfoMessage_015", NStr("en = 'Serial lot %1 was not found. Create new?'", Lang));
 
 	// %1 - 123456
 	// %2 - Some item
@@ -349,6 +350,9 @@ Function Strings(Lang) Export
 	
 	// %1 - 123456
 	Strings.Insert("InfoMessage_017", NStr("en = 'Scanned barcode %1 is not using set for serial numbers'", Lang));
+	Strings.Insert("InfoMessage_018", NStr("en = 'Add or scan serial lot number'", Lang));
+	
+	Strings.Insert("InfoMessage_019", NStr("en = 'Data lock reasons:'", Lang));
 	
 	#EndRegion
 	

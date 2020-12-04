@@ -1032,6 +1032,14 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>TransactionsExpenseTypeStartChoice</name>
+            </handlers>
+            <handlers>
+              <event>EditTextChange</event>
+              <name>TransactionsExpenseTypeEditTextChange</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
@@ -1282,7 +1290,7 @@
         <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <items xsi:type="form:FormGroup">
-        <name>GroupCurrency</name>
+        <name>GroupCurrencies</name>
         <id>277</id>
         <items xsi:type="form:Table">
           <name>TransactionsCurrencies</name>
@@ -1918,10 +1926,10 @@
         </userVisible>
         <title>
           <key>en</key>
-          <value>Currency</value>
+          <value>Currencies</value>
         </title>
         <extendedTooltip>
-          <name>GroupCurrencyExtendedTooltip</name>
+          <name>GroupCurrenciesExtendedTooltip</name>
           <id>278</id>
           <visible>true</visible>
           <enabled>true</enabled>

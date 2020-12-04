@@ -9,6 +9,7 @@ Function SearchByBarcodes(Val Barcodes, AddInfo) Export
 	|	Barcodes.Unit AS Unit,
 	|	1 AS Quantity,
 	|	Barcodes.Barcode AS Barcode,
+	|	Barcodes.ItemKey.Item.ItemType AS ItemType,
 	|	Barcodes.ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber
 	|FROM
 	|	InformationRegister.Barcodes AS Barcodes
@@ -86,3 +87,23 @@ Function GetQRPicture(BarcodeParameters) Export
 	Return New Picture;
 	
 EndFunction
+
+Procedure UpdateBarcode(Barcode, Params = Undefined, AddInfo = Undefined) Export
+	
+	If IsBlankString(Barcode) Then
+		Return;
+	EndIf;
+	
+	NewBarcode = InformationRegisters.Barcodes.CreateRecordSet();
+	NewBarcode.Filter.Barcode.Set(TrimAll(Barcode));
+	If Not Params = Undefined Then
+		Row = NewBarcode.Add();
+		FillPropertyValues(Row, Params);
+		Row.Barcode = TrimAll(Barcode);
+		
+		If Row.Unit.IsEmpty() Then
+			Row.Unit = GetItemInfo.ItemUnitInfo(Row.ItemKey).Unit;
+		EndIf;
+	EndIf;
+	NewBarcode.Write();
+EndProcedure

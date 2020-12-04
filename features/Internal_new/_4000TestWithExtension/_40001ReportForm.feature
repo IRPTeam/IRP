@@ -1,7 +1,6 @@
 ﻿#language: en
 @tree
 @Positive
-@Other
 @ExtensionReportForm
 
 Feature: add extension
@@ -33,7 +32,7 @@ Scenario: _4000100 preparation
 					| 'Description'                 |
 					| 'Arina Brown (Financier 3)' |
 			And I select current line in "List" table
-			And I input "en" text in "Localization code" field	
+			And I select "English" exact value from "Data localization" drop-down list	
 			And I click "Save" button
 			Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
 			And I go to line in "List" table

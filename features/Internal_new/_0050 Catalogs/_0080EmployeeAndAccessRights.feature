@@ -36,8 +36,8 @@ Scenario: _008004 filling in the "Users" catalog
 		And I input "Даниэль Смит (Торговый агент 1)" text in the field named "Description_ru"
 		And I click "Ok" button
 		And I input "DSmith" text in "Login" field
-		And I input "en" text in "Localization code" field
-		And I input "en" text in "Interface localization code" field
+		And I select "English" exact value from "Data localization" drop-down list
+		And I select "English" exact value from "Interface localization" drop-down list
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -57,8 +57,8 @@ Scenario: _008004 filling in the "Users" catalog
 			Then the form attribute named "Partner" became equal to "Daniel Smith"
 			Then the form attribute named "UserGroup" became equal to "Admin"
 			Then the form attribute named "FormScaleVariant" became equal to "Compact"
-			Then the form attribute named "LocalizationCode" became equal to "en"
-			Then the form attribute named "InterfaceLocalizationCode" became equal to "en"
+			And the editing text of form attribute named "LocalizationCode" became equal to "English"
+			And the editing text of form attribute named "InterfaceLocalizationCode" became equal to "English"
 			Then the form attribute named "Description" became equal to "DSmith"
 			Then the form attribute named "Description_en" became equal to "Daniel Smith (Commercial Agent 1)"
 		And I click the button named "FormWriteAndClose"
@@ -77,8 +77,8 @@ Scenario: _008004 filling in the "Users" catalog
 			| 'Olivia Williams'       |
 		And I select current line in "List" table
 		And I select "Auto" exact value from "Form scale variant" drop-down list
-		And I input "en" text in "Localization code" field
-		And I input "tr" text in "Interface localization code" field
+		And I select "English" exact value from "Data localization" drop-down list
+		And I select "Turkish" exact value from "Interface localization" drop-down list
 		And I set checkbox named "ShowInList"
 		And I click Select button of "User group" field
 		And I go to line in "List" table
@@ -92,8 +92,8 @@ Scenario: _008004 filling in the "Users" catalog
 			Then the form attribute named "Partner" became equal to "Olivia Williams"
 			Then the form attribute named "UserGroup" became equal to "Admin"
 			Then the form attribute named "FormScaleVariant" became equal to "Auto"
-			Then the form attribute named "LocalizationCode" became equal to "en"
-			Then the form attribute named "InterfaceLocalizationCode" became equal to "tr"
+			And the editing text of form attribute named "LocalizationCode" became equal to "English"
+			And the editing text of form attribute named "InterfaceLocalizationCode" became equal to "Turkish"
 			Then the form attribute named "Description" became equal to "OWilliams"
 			Then the form attribute named "Description_en" became equal to "Olivia Williams (Manager 1)"
 		And I click the button named "FormWriteAndClose"
@@ -112,8 +112,8 @@ Scenario: _008004 filling in the "Users" catalog
 			| 'Emily Jones'       |
 		And I select current line in "List" table
 		And I select "Normal" exact value from "Form scale variant" drop-down list
-		And I input "tr" text in "Localization code" field
-		And I input "en" text in "Interface localization code" field
+		And I select "Turkish" exact value from "Data localization" drop-down list
+		And I select "English" exact value from "Interface localization" drop-down list
 		And I set checkbox named "ShowInList"
 		And I click Select button of "User group" field
 		And I go to line in "List" table
@@ -127,8 +127,8 @@ Scenario: _008004 filling in the "Users" catalog
 			Then the form attribute named "Partner" became equal to "Emily Jones"
 			Then the form attribute named "UserGroup" became equal to "Admin"
 			Then the form attribute named "FormScaleVariant" became equal to "Normal"
-			Then the form attribute named "LocalizationCode" became equal to "tr"
-			Then the form attribute named "InterfaceLocalizationCode" became equal to "en"
+			And the editing text of form attribute named "LocalizationCode" became equal to "Turkish"
+			And the editing text of form attribute named "InterfaceLocalizationCode" became equal to "English"
 			Then the form attribute named "Description" became equal to "EJones"
 			Then the form attribute named "Description_en" became equal to "Emily Jones (Manager 2)"
 		And I click the button named "FormWriteAndClose"
@@ -146,8 +146,8 @@ Scenario: _008004 filling in the "Users" catalog
 			| 'Sofia Borisova'       |
 		And I select current line in "List" table
 		And I select "Compact" exact value from "Form scale variant" drop-down list
-		And I input "tr" text in "Localization code" field
-		And I input "tr" text in "Interface localization code" field
+		And I select "Turkish" exact value from "Data localization" drop-down list
+		And I select "Turkish" exact value from "Interface localization" drop-down list
 		And I set checkbox named "ShowInList"
 		And I click Select button of "User group" field
 		And I go to line in "List" table
@@ -161,8 +161,8 @@ Scenario: _008004 filling in the "Users" catalog
 			Then the form attribute named "Partner" became equal to "Sofia Borisova"
 			Then the form attribute named "UserGroup" became equal to "Admin"
 			Then the form attribute named "FormScaleVariant" became equal to "Compact"
-			Then the form attribute named "LocalizationCode" became equal to "tr"
-			Then the form attribute named "InterfaceLocalizationCode" became equal to "tr"
+			And the editing text of form attribute named "LocalizationCode" became equal to "Turkish"
+			And the editing text of form attribute named "InterfaceLocalizationCode" became equal to "Turkish"
 			Then the form attribute named "Description" became equal to "SBorisova"
 			Then the form attribute named "Description_en" became equal to "Sofia Borisova (Manager 3)"
 		And I click the button named "FormWriteAndClose"

@@ -106,6 +106,10 @@
     <items xsi:type="form:FormField">
       <name>Description</name>
       <id>19</id>
+      <title>
+        <key>en</key>
+        <value>Serial number</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -158,6 +162,10 @@
     <items xsi:type="form:FormField">
       <name>Inactive</name>
       <id>27</id>
+      <title>
+        <key>en</key>
+        <value>Inactive</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -203,6 +211,10 @@
     <items xsi:type="form:FormField">
       <name>Owner</name>
       <id>22</id>
+      <title>
+        <key>en</key>
+        <value>Owner</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -531,7 +543,6 @@
 	SerialLotNumbers.Description,
 	SerialLotNumbers.SerialLotNumberOwner,
 	SerialLotNumbers.Inactive,
-	SerialLotNumbers.AddAttributes.*,
 	SerialLotNumbers.Predefined,
 	SerialLotNumbers.PredefinedDataName
 FROM
@@ -542,16 +553,14 @@ WHERE
 			THEN SerialLotNumbers.SerialLotNumberOwner = &amp;ItemKeyRef
 			OR SerialLotNumbers.SerialLotNumberOwner = &amp;ItemRef
 			OR SerialLotNumbers.SerialLotNumberOwner = &amp;ItemType
-			OR SerialLotNumbers.SerialLotNumberOwner IS NULL
 		WHEN &amp;isItem
 			THEN SerialLotNumbers.SerialLotNumberOwner = &amp;ItemRef
 			OR SerialLotNumbers.SerialLotNumberOwner = &amp;ItemType
-			OR SerialLotNumbers.SerialLotNumberOwner IS NULL
 		WHEN &amp;isItemType
 			THEN SerialLotNumbers.SerialLotNumberOwner = &amp;ItemType
-			OR SerialLotNumbers.SerialLotNumberOwner IS NULL
+			
 		ELSE TRUE
-	END</queryText>
+	END OR SerialLotNumbers.SerialLotNumberOwner = Undefined</queryText>
       <mainTable>Catalog.SerialLotNumbers</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@MainInfoCatalogs
+@CompanyCatalogs
 
 Feature: filling in Countries catalogs
 

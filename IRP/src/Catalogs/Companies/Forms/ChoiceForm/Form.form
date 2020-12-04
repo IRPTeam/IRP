@@ -223,6 +223,10 @@
     <items xsi:type="form:FormField">
       <name>Description</name>
       <id>25</id>
+      <title>
+        <key>en</key>
+        <value>Description</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

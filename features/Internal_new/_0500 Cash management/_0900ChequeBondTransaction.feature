@@ -116,19 +116,19 @@ Scenario: _090002 create statuses for Cheque bond
 		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
 		And I expand current line in "List" table
 		And I expand a line in "List" table
-			| 'Predefined data item name' |
+			| 'Predefined data name' |
 			| 'ChequeBondTransaction'     |
 		And I go to line in "List" table
-			| 'Predefined data item name' |
+			| 'Predefined data name' |
 			| 'ChequeBondIncoming'     |
-		And I activate "Predefined data item name" field in "List" table
+		And I activate "Predefined data name" field in "List" table
 		And in the table "List" I click the button named "ListContextMenuChange"
 		And I input "ChequeBondIncoming" text in the field named "Description_en"
 		And I click "Save and close" button
 		And I go to line in "List" table
-			| 'Predefined data item name' |
+			| 'Predefined data name' |
 			| 'ChequeBondOutgoing'     |
-		And I activate "Predefined data item name" field in "List" table
+		And I activate "Predefined data name" field in "List" table
 		And in the table "List" I click the button named "ListContextMenuChange"
 		And I input "ChequeBondOutgoing" text in the field named "Description_en"
 		And I click "Save and close" button
@@ -1100,7 +1100,7 @@ Scenario: _2020006 check to clear the agreement field after partner re-selection
 			| 'Big foot' | ''          |
 		And I close all client application windows
 		
-Scenario: _2020007 check filter by cheque in the form of 'Cheque bonds' selection depending on the selected currency (re-selection) and separation of cheques by Partners/Own
+Scenario: _2020007 check filter by cheque in the form of Cheque bonds selection depending on the selected currency (re-selection) and separation of cheques by Partners/Own
 	* Open document form ChequeBondTransaction
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I click the button named "FormCreate"
@@ -1149,7 +1149,7 @@ Scenario: _2020007 check filter by cheque in the form of 'Cheque bonds' selectio
 			And I close "Cheque bonds" window
 	And I close all client application windows
 
-Scenario: _2020008 not displaying checks marked for deletion in the selection form 'Cheque bonds'
+Scenario: _2020008 not displaying checks marked for deletion in the selection form Cheque bonds
 	* Open document form ChequeBondTransaction
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I click the button named "FormCreate"
@@ -1172,7 +1172,7 @@ Scenario: _2020008 not displaying checks marked for deletion in the selection fo
 			| 'Partner cheque 101' | 'TRY'      |
 	And I close all client application windows
 
-Scenario: _2020009 check the selection of status checks in the 'Cheque bonds' selection form
+Scenario: _2020009 check the selection of status checks in the Cheque bonds selection form
 	* Open document form ChequeBondTransaction
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I click the button named "FormCreate"
@@ -1216,7 +1216,7 @@ Scenario: _2020009 check the selection of status checks in the 'Cheque bonds' se
 		| 'Partner cheque 102' | ''                          |
 	And I close all client application windows
 		
-Scenario: _2020010 check to delete selected cheques in the 'Cheque bonds' selection form
+Scenario: _2020010 check to delete selected cheques in the Cheque bonds selection form
 	* Open document form ChequeBondTransaction
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I click the button named "FormCreate"
@@ -1407,7 +1407,7 @@ Scenario: _2020013 check the selection of documents for distribution of the amou
 		And in the table "PaymentList" I click "Fill" button
 		Then 'Select base documents in the "Cheque bond transaction" document.' window is opened
 		And I go to line in "DocumentsList" table
-			| 'Basis document' | 'Currency' | 'Document amount' |
+			| 'Basis document' | 'Currency' | 'Amount' |
 			| '$$PurchaseInvoice018001$$'| 'TRY'      | '137 000'         |
 		And I select current line in "DocumentsList" table
 		And I input "9 000,00" text in "Amount balance" field of "PickedDocuments" table

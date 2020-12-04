@@ -1998,7 +1998,7 @@ Scenario: _029209 create Goods receipt based on Purchase invoice (Purchase invoi
 		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'     | 'XS/Blue'                    | ''          | ''          | ''        | ''              |
 		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'     | '38/Yellow'                  | ''          | ''          | ''        | ''              |
 
-Scenario: _029210 create Sales invoice based on Sales orders (purchase has already been made) - Store doesn't use Shipment confirmation
+Scenario: _029210 create Sales invoice based on Sales orders (purchase has already been made) - Store does not use Shipment confirmation
 	* Create Sales invoice based on Sales order 460
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table

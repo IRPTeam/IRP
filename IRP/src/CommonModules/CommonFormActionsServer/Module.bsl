@@ -70,3 +70,4 @@ Function QuerySearchInputByString(Settings) Export
 	EndIf;
 	Return 	QueryText;
 EndFunction
+

@@ -142,7 +142,7 @@ Procedure AnalyzeOrders(Command)
 	
 	Notify = New NotifyDescription("SelectInternalSupplyRequestEnd", ThisObject, AdditionalParameters);
 	OpenForm("DataProcessor.Procurement.Form.FormSelectInternalSupplyRequest",
-	OpenParameters, ThisObject, , , , Notify,FormWindowOpeningMode.LockOwnerWindow);
+	OpenParameters, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtClient 
@@ -159,7 +159,7 @@ Procedure SelectInternalSupplyRequestEnd(Result, AdditionalParameters) Export
 	
 	Notify = New NotifyDescription("CreateOrdersEnd", ThisObject);
 	OpenForm("DataProcessor.Procurement.Form.FormCreateOrders",
-	OpenParameters, ThisObject, , , , Notify,FormWindowOpeningMode.LockOwnerWindow);	
+	OpenParameters, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);	
 EndProcedure
 
 &AtClient 

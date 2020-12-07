@@ -444,13 +444,12 @@
 FROM
 	Catalog.Units AS Table
 WHERE
-	(CASE
+	CASE
 		WHEN &amp;Filter
 			THEN Table.Item = &amp;Item
 			OR Table.Ref = &amp;Unit
 		ELSE Table.Item.Ref IS NULL
-	END OR
-	Table.Item = Value(Catalog.Items.EmptyRef))
+	END
 	AND 
 	CASE
 		WHEN &amp;FilterForItemsAndKeys

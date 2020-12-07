@@ -1,20 +1,6 @@
 Procedure DescriptionsFillCheckProcessing(Source, Cancel, CheckedAttributes) Export
-	If Cancel Or TypeOf(Source) = Type("Structure")
-		Or Not LocalizationReuse.UseMultiLanguage(Source.Metadata().FullName()) Then
-		Return;
-	EndIf;
-	
-	IsFilledDescription = False;
-	For Each Attribute In LocalizationReuse.AllDescription() Do
-		If ValueIsFilled(Source[Attribute]) Then
-			IsFilledDescription = True;
-			Break;
-		EndIf;
-	EndDo;
-	If NOT IsFilledDescription Then
-		Cancel = True;
-		CommonFunctionsClientServer.ShowUsersMessage(R().Error_003);
-	EndIf;
+	CheckDescriptionFilling(Source, Cancel);
+	CheckDescriptionDuplicate(Source, Cancel);
 EndProcedure
 
 Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Parameters, StandardProcessing) Export
@@ -201,7 +187,89 @@ Procedure GetCatalogPresentationFieldsPresentationFieldsGetProcessing(Source, Fi
 		Return;
 	EndIf;
 	StandardProcessing = False;
-	Fields = LocalizationServer.FieldsListForDescriptions(Source);
-	
+	Fields = LocalizationServer.FieldsListForDescriptions(Source);	
 EndProcedure
 
+#Region Private
+
+Procedure CheckDescriptionFilling(Source, Cancel)
+	If Cancel Or TypeOf(Source) = Type("Structure")
+		Or Not LocalizationReuse.UseMultiLanguage(Source.Metadata().FullName()) Then
+		Return;
+	EndIf;
+	
+	IsFilledDescription = False;
+	For Each Attribute In LocalizationReuse.AllDescription() Do
+		If ValueIsFilled(Source[Attribute]) Then
+			IsFilledDescription = True;
+			Break;
+		EndIf;
+	EndDo;
+	If NOT IsFilledDescription Then
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_003);
+	EndIf;
+EndProcedure
+
+Procedure CheckDescriptionDuplicate(Source, Cancel)
+	If Cancel Or TypeOf(Source) = Type("Structure") Then
+		Return;
+	EndIf;
+	
+	SourceMetadata = Source.Metadata();	
+	UseMultiLanguage = LocalizationReuse.UseMultiLanguage(SourceMetadata.FullName());
+	If UseMultiLanguage Then
+		AllDescription = LocalizationReuse.AllDescription();
+	Else
+		AllDescription = New Array;
+		If ValueIsFilled(Source.Description_en) Then
+			AllDescription.Add(Source.Description_en);
+		EndIf;
+	EndIf;
+	QueryFieldsSection = New Array;
+	QueryConditionsSection = New Array;
+	LanguageCodes = New Array;
+	
+	Query = New Query;
+	Query.Text = "SELECT
+		|	""%1"",
+		|	%2
+		|FROM
+		|	Catalog.%1 AS Cat
+		|WHERE
+		|	(%3)
+		|	AND Cat.Ref <> &Ref
+		|GROUP BY
+		|	""%1""";
+	For Each Attribute In LocalizationReuse.AllDescription() Do
+		If ValueIsFilled(Source[Attribute]) Then
+			FieldLeftString = "Cat." + Attribute + " = &" + Attribute;
+			FieldString = "ISNUll(MAX(" + FieldLeftString + "), FALSE) AS " + StrReplace(Attribute, "Description_", "");
+			QueryFieldsSection.Add(FieldString);
+			QueryConditionsSection.Add(FieldLeftString);
+			Query.SetParameter(Attribute, Source[Attribute]);
+			LanguageCodes.Add(StrReplace(Attribute, "Description_", ""));
+		EndIf;
+	EndDo;
+	If LanguageCodes = True Then
+		Return;
+	EndIf;
+	QueryFields = StrConcat(QueryFieldsSection, "," + Chars.LF + "	");
+	QueryConditions = StrConcat(QueryConditionsSection, Chars.LF + "	OR ");
+	Query.Text = StrTemplate(Query.Text, SourceMetadata.Name, QueryFields, QueryConditions);
+	Query.SetParameter("Ref", Source.Ref);
+	
+	QueryExecution = Query.Execute();
+	QuerySelection = QueryExecution.Select();
+	QuerySelection.Next();
+	For Each LanguageCode In LanguageCodes Do
+		If QuerySelection[LanguageCode] Then
+			If Not Cancel Then
+				Cancel = True;
+			EndIf;
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_089, LanguageCode, Source["Description_" + LanguageCode]));
+		EndIf;
+	EndDo;
+EndProcedure
+
+#EndRegion

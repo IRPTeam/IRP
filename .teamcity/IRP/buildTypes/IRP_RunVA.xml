@@ -256,7 +256,7 @@ $VanessaRun = {
     $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
         do {
         Start-Sleep 1        
-        if (Get-Process -id $processID -ErrorAction SilentlyContinue){
+        if (!(Get-Process -id $processID -ErrorAction SilentlyContinue)){
         Write-Host "##teamcity[testFailed name='Wait for log file: $elementTag' message='Log file not found: $ScriptLogFilePath' flowId='$elementTag']"
         }
         

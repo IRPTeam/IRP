@@ -55,6 +55,3 @@ Procedure UncheckAll(Command)
 		Row.Use = False;
 	EndDo;
 EndProcedure
-
-
-

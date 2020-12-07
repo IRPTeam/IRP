@@ -39,7 +39,7 @@ Procedure TableOfInternalSupplyRequestSelection(Item, RowSelected, Field, Standa
 		EndIf;
 		OpenParameters = New Structure();
 		OpenParameters.Insert("Key", CurrentData.InternalSupplyRequest);
-		OpenForm(GetMatadataFullName(CurrentData.InternalSupplyRequest)+".ObjectForm", OpenParameters);
+		OpenForm(GetMetadataFullName(CurrentData.InternalSupplyRequest) + ".ObjectForm", OpenParameters);
 	EndIf;
 EndProcedure
 
@@ -56,7 +56,7 @@ Procedure TableOfBalanceSelection(Item, RowSelected, Field, StandardProcessing)
 		EndIf;
 		OpenParameters = New Structure();
 		OpenParameters.Insert("Key", CurrentData.Store);
-		OpenForm(GetMatadataFullName(CurrentData.Store)+".ObjectForm", OpenParameters);
+		OpenForm(GetMetadataFullName(CurrentData.Store) + ".ObjectForm", OpenParameters);
 	EndIf;
 EndProcedure
 
@@ -73,7 +73,7 @@ Procedure TableOfPurchaseSelection(Item, RowSelected, Field, StandardProcessing)
 		EndIf;
 		OpenParameters = New Structure();
 		OpenParameters.Insert("Key", CurrentData.Partner);
-		OpenForm(GetMatadataFullName(CurrentData.Partner)+".ObjectForm", OpenParameters);
+		OpenForm(GetMetadataFullName(CurrentData.Partner) + ".ObjectForm", OpenParameters);
 	EndIf;
 	
 	If Upper(Field.Name) = Upper("TableOfPurchaseAgreement") Then
@@ -83,7 +83,7 @@ Procedure TableOfPurchaseSelection(Item, RowSelected, Field, StandardProcessing)
 		EndIf;
 		OpenParameters = New Structure();
 		OpenParameters.Insert("Key", CurrentData.Agreement);
-		OpenForm(GetMatadataFullName(CurrentData.Agreement)+".ObjectForm", OpenParameters);
+		OpenForm(GetMetadataFullName(CurrentData.Agreement) + ".ObjectForm", OpenParameters);
 	EndIf;
 	
 	If Upper(Field.Name) = Upper("TableOfPurchasePriceType") Then
@@ -93,12 +93,12 @@ Procedure TableOfPurchaseSelection(Item, RowSelected, Field, StandardProcessing)
 		EndIf;
 		OpenParameters = New Structure();
 		OpenParameters.Insert("Key", CurrentData.PriceType);
-		OpenForm(GetMatadataFullName(CurrentData.PriceType)+".ObjectForm", OpenParameters);
+		OpenForm(GetMetadataFullName(CurrentData.PriceType) + ".ObjectForm", OpenParameters);
 	EndIf;
 EndProcedure
 
 &AtServerNoContext
-Function GetMatadataFullName(Ref)
+Function GetMetadataFullName(Ref)
 	Return Ref.Metadata().FullName();
 EndFunction
 
@@ -190,7 +190,6 @@ EndProcedure
 Procedure Cancel(Command)
 	Close(Undefined);
 EndProcedure
-
 
 &AtServer
 Function CreateDocumentsAtServer()
@@ -654,4 +653,3 @@ Procedure Update_TableOfPurchase()
 	QueryTable = QueryResult.Unload();
 	ThisObject.TableOfPurchase.Load(QueryTable);
 EndProcedure
-

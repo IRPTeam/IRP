@@ -29,14 +29,15 @@ EndProcedure
 &AtServer
 Procedure RefreshAtServer()
 	
-	DeleteColumns_Analisys();
+	DeleteColumns_Analysis();
 	DeleteColumns_Details();
 	
 	ThisObject.TableOfColumns.Clear();
-	ThisObject.Analisys.Clear();
+	ThisObject.Analysis.Clear();
 	ThisObject.Details.GetItems().Clear();
 	
-	SecondInPeriod = 60 * 60 * 24 * Number(ThisObject.Periodicity);
+	SecondsInOneDay = 86400;
+	SecondInPeriod = SecondsInOneDay * Number(ThisObject.Periodicity);
 	tmpDate = BegOfDay(ThisObject.Period.StartDate);
 	While BegOfDay(tmpDate) <= BegOfDay(ThisObject.Period.EndDate) Do
 		NewRow = ThisObject.TableOfColumns.Add();
@@ -46,30 +47,30 @@ Procedure RefreshAtServer()
 		?(BegOfDay(tmpDate) > BegOfDay(ThisObject.Period.EndDate), 
 		EndOfDay(ThisObject.Period.EndDate), tmpDate - 1);
 		
-		NewRow.Name ="_" + StrReplace(String(New UUID()), "-" , "_");
-		NewRow.Title = Format(NewRow.StartDate,"DF=d.M.yy;") 
+		NewRow.Name = "_" + StrReplace(String(New UUID()), "-" , "_");
+		NewRow.Title = Format(NewRow.StartDate, "DF=d.M.yy;") 
 		+ " - "
-		+ Format(NewRow.EndDate,"DF=d.M.yy;");
+		+ Format(NewRow.EndDate, "DF=d.M.yy;");
 	EndDo;
 	
-	CreateColumns_Analisys();
+	CreateColumns_Analysis();
 	CreateColumns_Details();
 		
 	TableOfSupplyRequests = 
 	GetTableOfSupplyRequests(ThisObject.Store, ThisObject.Period.StartDate, ThisObject.Period.EndDate);
 		
 	For Each Row In TableOfSupplyRequests Do
-		NewRowAnalisys = ThisObject.Analisys.Add();
-		NewRowAnalisys.Picture = 3;
-		NewRowAnalisys.Item = Row.Item;
-		NewRowAnalisys.ItemKey = Row.ItemKey;
-		NewRowAnalisys.TotalProcurement = Row.QuantityProcurement;
-		NewRowAnalisys.Ordered  = Row.QuantityOrdered;
-		NewRowAnalisys.Shortage = Row.QuantityShortage;
-		NewRowAnalisys.Expired  = Row.QuantityExpired;
+		NewRowAnalysis = ThisObject.Analysis.Add();
+		NewRowAnalysis.Picture = 3;
+		NewRowAnalysis.Item = Row.Item;
+		NewRowAnalysis.ItemKey = Row.ItemKey;
+		NewRowAnalysis.TotalProcurement = Row.QuantityProcurement;
+		NewRowAnalysis.Ordered  = Row.QuantityOrdered;
+		NewRowAnalysis.Shortage = Row.QuantityShortage;
+		NewRowAnalysis.Expired  = Row.QuantityExpired;
 		
 		For Each RowColumnInfo In TableOfColumns Do
-			NewRowAnalisys[RowColumnInfo.Name] = 
+			NewRowAnalysis[RowColumnInfo.Name] = 
 			GetProcurementByItemKey(ThisObject.Store, Row.ItemKey, RowColumnInfo.StartDate, RowColumnInfo.EndDate);			
 		EndDo;
 	EndDo;
@@ -88,44 +89,44 @@ Procedure DetailsSelection(Item, RowSelected, Field, StandardProcessing)
 		EndIf;
 		OpenParameters = New Structure();
 		OpenParameters.Insert("Key", CurrentData.Document);
-		OpenForm(GetMatadataFullName(CurrentData.Document)+".ObjectForm", OpenParameters);
+		OpenForm(GetMetadataFullName(CurrentData.Document) + ".ObjectForm", OpenParameters);
 	EndIf;
 EndProcedure
 
 &AtClient
-Procedure AnalisysSelection(Item, RowSelected, Field, StandardProcessing)
+Procedure AnalysisSelection(Item, RowSelected, Field, StandardProcessing)
 	StandardProcessing = False;
-	CurrentData = Items.Analisys.CurrentData;
+	CurrentData = Items.Analysis.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	If Upper(Field.Name) = Upper("AnalisysItem") Then
+	If Upper(Field.Name) = Upper("AnalysisItem") Then
 		If Not ValueIsFilled(CurrentData.Item) Then
 			Return;
 		EndIf;
 		OpenParameters = New Structure();
 		OpenParameters.Insert("Key", CurrentData.Item);
-		OpenForm(GetMatadataFullName(CurrentData.Item)+".ObjectForm", OpenParameters);
+		OpenForm(GetMetadataFullName(CurrentData.Item) + ".ObjectForm", OpenParameters);
 	EndIf;
 	
-	If Upper(Field.Name) = Upper("AnalisysItemKey") Then
+	If Upper(Field.Name) = Upper("AnalysisItemKey") Then
 		If Not ValueIsFilled(CurrentData.ItemKey) Then
 			Return;
 		EndIf;
 		OpenParameters = New Structure();
 		OpenParameters.Insert("Key", CurrentData.ItemKey);
-		OpenForm(GetMatadataFullName(CurrentData.ItemKey)+".ObjectForm", OpenParameters);
+		OpenForm(GetMetadataFullName(CurrentData.ItemKey) + ".ObjectForm", OpenParameters);
 	EndIf;
 EndProcedure
 
 &AtServerNoContext
-Function GetMatadataFullName(Ref)
+Function GetMetadataFullName(Ref)
 	Return Ref.Metadata().FullName();
 EndFunction
 
 &AtClient
 Procedure AnalyzeOrders(Command)
-	CurrentData = Items.Analisys.CurrentData;
+	CurrentData = Items.Analysis.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -141,7 +142,7 @@ Procedure AnalyzeOrders(Command)
 	
 	Notify = New NotifyDescription("SelectInternalSupplyRequestEnd", ThisObject, AdditionalParameters);
 	OpenForm("DataProcessor.Procurement.Form.FormSelectInternalSupplyRequest",
-	OpenParameters, ThisObject,,,,Notify,FormWindowOpeningMode.LockOwnerWindow);
+	OpenParameters, ThisObject, , , , Notify,FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtClient 
@@ -158,7 +159,7 @@ Procedure SelectInternalSupplyRequestEnd(Result, AdditionalParameters) Export
 	
 	Notify = New NotifyDescription("CreateOrdersEnd", ThisObject);
 	OpenForm("DataProcessor.Procurement.Form.FormCreateOrders",
-	OpenParameters, ThisObject,,,,Notify,FormWindowOpeningMode.LockOwnerWindow);	
+	OpenParameters, ThisObject, , , , Notify,FormWindowOpeningMode.LockOwnerWindow);	
 EndProcedure
 
 &AtClient 
@@ -186,16 +187,16 @@ Function GetArrayOfSupplyRequest()
 		NewRow.Insert("InternalSupplyRequest", Row.Document);
 		NewRow.Insert("RowKey", Row.RowKey);
 		NewRow.Insert("Quantity", Row.TotalQuantity);
-		NewRow.Insert("ProcurementDate", ?(ValueIsFilled(Row.Document.ProcurementDate)
-		,Row.Document.ProcurementDate, Row.Document.Date));
+		NewRow.Insert("ProcurementDate", ?(ValueIsFilled(Row.Document.ProcurementDate), 
+		Row.Document.ProcurementDate, Row.Document.Date));
 		ArrayOfSupplyRequest.Add(NewRow);
 	EndDo;
 	Return ArrayOfSupplyRequest;
 EndFunction
 
 &AtClient
-Procedure AnalisysOnActivateRow(Item)
-	CurrentData = Items.Analisys.CurrentData;
+Procedure AnalysisOnActivateRow(Item)
+	CurrentData = Items.Analysis.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -203,34 +204,34 @@ Procedure AnalisysOnActivateRow(Item)
 EndProcedure
 	
 &AtServer
-Procedure DeleteColumns_Analisys()
+Procedure DeleteColumns_Analysis()
 	ArrayOfColumns = New Array();
 	
 	For Each Row In ThisObject.TableOfColumns Do
-		ArrayOfColumns.Add("Analisys." + Row.Name);
-		Items.Delete(Items["Analisys"+Row.Name]);
+		ArrayOfColumns.Add("Analysis." + Row.Name);
+		Items.Delete(Items["Analysis" + Row.Name]);
 	EndDo;
 	
 	If ArrayOfColumns.Count() Then
-		ChangeAttributes(,ArrayOfColumns);
+		ChangeAttributes(, ArrayOfColumns);
 	EndIf;
 EndProcedure
 
 &AtServer
-Procedure CreateColumns_Analisys()
+Procedure CreateColumns_Analysis()
 	TypeQuantity = Metadata.DefinedTypes.typeQuantity.Type;
 	ArrayOfColumns = New Array();
 	For Each Row In ThisObject.TableOfColumns Do		
-		ArrayOfColumns.Add(New FormAttribute(Row.Name, TypeQuantity ,"Analisys" ,Row.Title));
+		ArrayOfColumns.Add(New FormAttribute(Row.Name, TypeQuantity, "Analysis", Row.Title));
 	EndDo;
 	
 	ChangeAttributes(ArrayOfColumns);
 	
 	For Each Row In ThisObject.TableOfColumns Do
-		NewItem_Analisys = Items.Add("Analisys"+Row.Name, Type("FormField"), Items.Analisys);       
-		NewItem_Analisys.Type = FormFieldType.InputField;
-		NewItem_Analisys.DataPath = "Analisys." + Row.Name;
-		NewItem_Analisys.ReadOnly = True;
+		NewItem_Analysis = Items.Add("Analysis" + Row.Name, Type("FormField"), Items.Analysis);       
+		NewItem_Analysis.Type = FormFieldType.InputField;
+		NewItem_Analysis.DataPath = "Analysis." + Row.Name;
+		NewItem_Analysis.ReadOnly = True;
 	EndDo;
 EndProcedure
 
@@ -239,13 +240,13 @@ Procedure CreateColumns_Details()
 	TypeQuantity = Metadata.DefinedTypes.typeQuantity.Type;
 	ArrayOfColumns = New Array();
 	For Each Row In ThisObject.TableOfColumns Do		
-		ArrayOfColumns.Add(New FormAttribute(Row.Name, TypeQuantity ,"Details" ,Row.Title));
+		ArrayOfColumns.Add(New FormAttribute(Row.Name, TypeQuantity, "Details", Row.Title));
 	EndDo;
 	
 	ChangeAttributes(ArrayOfColumns);
 	
 	For Each Row In ThisObject.TableOfColumns Do
-		NewItem_Details = Items.Add("Details"+Row.Name, Type("FormField"), Items.Details);       
+		NewItem_Details = Items.Add("Details" + Row.Name, Type("FormField"), Items.Details);       
 		NewItem_Details.Type = FormFieldType.InputField;
 		NewItem_Details.DataPath = "Details." + Row.Name;
 		NewItem_Details.ReadOnly = True;		
@@ -258,11 +259,11 @@ Procedure DeleteColumns_Details()
 	
 	For Each Row In ThisObject.TableOfColumns Do
 		ArrayOfColumns.Add("Details." + Row.Name);
-		Items.Delete(Items["Details"+Row.Name]);
+		Items.Delete(Items["Details" + Row.Name]);
 	EndDo;
 	
 	If ArrayOfColumns.Count() Then
-		ChangeAttributes(,ArrayOfColumns);
+		ChangeAttributes(, ArrayOfColumns);
 	EndIf;
 EndProcedure
 
@@ -380,7 +381,7 @@ Function  GetTableOfSupplyRequests(Store, StartDate, EndDate)
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	Return QueryTable;
-Endfunction
+EndFunction
 
 &AtServer
 Function GetProcurementByItemKey(Store, ItemKey, StartDate, EndDate)
@@ -566,7 +567,3 @@ Function GetExpenseQueryText_PurchaseOrder()
 	|	ISNULL(GoodsReceiptSchedule.DeliveryDate, tmpPurchaseOrders.Recorder.Date) BETWEEN BEGINOFPERIOD(&StartDate,
 	|		DAY) AND ENDOFPERIOD(&EndDate, DAY)";
 EndFunction
-
-
-
-

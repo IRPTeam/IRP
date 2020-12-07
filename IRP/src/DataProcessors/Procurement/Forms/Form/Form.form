@@ -236,7 +236,7 @@
     </extInfo>
   </items>
   <items xsi:type="form:Table">
-    <name>Analisys</name>
+    <name>Analysis</name>
     <id>9</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -244,14 +244,14 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Analisys</segments>
+      <segments>Analysis</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
     <items xsi:type="form:FormGroup">
-      <name>AnalisysGroupItem</name>
+      <name>AnalysisGroupItem</name>
       <id>134</id>
       <items xsi:type="form:FormField">
-        <name>AnalisysPicture</name>
+        <name>AnalysisPicture</name>
         <id>131</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -259,11 +259,11 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Analisys.Picture</segments>
+          <segments>Analysis.Picture</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
-          <name>AnalisysPictureExtendedTooltip</name>
+          <name>AnalysisPictureExtendedTooltip</name>
           <id>133</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -278,7 +278,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>AnalisysPictureContextMenu</name>
+          <name>AnalysisPictureContextMenu</name>
           <id>132</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -304,7 +304,7 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>AnalisysItem</name>
+        <name>AnalysisItem</name>
         <id>22</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -313,14 +313,14 @@
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
           <paths xsi:type="form:DataPath">
-            <segments>Analisys.Item</segments>
+            <segments>Analysis.Item</segments>
           </paths>
           <paths xsi:type="form:DataPath">
-            <segments>Analisys.Item</segments>
+            <segments>Analysis.Item</segments>
           </paths>
         </dataPath>
         <extendedTooltip>
-          <name>AnalisysItemExtendedTooltip</name>
+          <name>AnalysisItemExtendedTooltip</name>
           <id>24</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -335,7 +335,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>AnalisysItemContextMenu</name>
+          <name>AnalysisItemContextMenu</name>
           <id>23</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -366,10 +366,10 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Analisys group item</value>
+        <value>Analysis group item</value>
       </title>
       <extendedTooltip>
-        <name>AnalisysGroupItemExtendedTooltip</name>
+        <name>AnalysisGroupItemExtendedTooltip</name>
         <id>135</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -390,7 +390,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>AnalisysItemKey</name>
+      <name>AnalysisItemKey</name>
       <id>25</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -399,14 +399,14 @@
       </userVisible>
       <dataPath xsi:type="form:MultiLanguageDataPath">
         <paths xsi:type="form:DataPath">
-          <segments>Analisys.ItemKey</segments>
+          <segments>Analysis.ItemKey</segments>
         </paths>
         <paths xsi:type="form:DataPath">
-          <segments>Analisys.ItemKey</segments>
+          <segments>Analysis.ItemKey</segments>
         </paths>
       </dataPath>
       <extendedTooltip>
-        <name>AnalisysItemKeyExtendedTooltip</name>
+        <name>AnalysisItemKeyExtendedTooltip</name>
         <id>27</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -421,7 +421,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>AnalisysItemKeyContextMenu</name>
+        <name>AnalysisItemKeyContextMenu</name>
         <id>26</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -446,7 +446,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>AnalisysTotalProcurement</name>
+      <name>AnalysisTotalProcurement</name>
       <id>67</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -454,10 +454,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>Analisys.TotalProcurement</segments>
+        <segments>Analysis.TotalProcurement</segments>
       </dataPath>
       <extendedTooltip>
-        <name>AnalisysTotalProcurementExtendedTooltip</name>
+        <name>AnalysisTotalProcurementExtendedTooltip</name>
         <id>69</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -472,7 +472,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>AnalisysTotalProcurementContextMenu</name>
+        <name>AnalysisTotalProcurementContextMenu</name>
         <id>68</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -497,7 +497,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>AnalisysOrdered</name>
+      <name>AnalysisOrdered</name>
       <id>89</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -505,10 +505,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>Analisys.Ordered</segments>
+        <segments>Analysis.Ordered</segments>
       </dataPath>
       <extendedTooltip>
-        <name>AnalisysOrderedExtendedTooltip</name>
+        <name>AnalysisOrderedExtendedTooltip</name>
         <id>91</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -523,7 +523,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>AnalisysOrderedContextMenu</name>
+        <name>AnalysisOrderedContextMenu</name>
         <id>90</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -548,7 +548,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>AnalisysShortage</name>
+      <name>AnalysisShortage</name>
       <id>92</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -556,10 +556,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>Analisys.Shortage</segments>
+        <segments>Analysis.Shortage</segments>
       </dataPath>
       <extendedTooltip>
-        <name>AnalisysShortageExtendedTooltip</name>
+        <name>AnalysisShortageExtendedTooltip</name>
         <id>94</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -574,7 +574,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>AnalisysShortageContextMenu</name>
+        <name>AnalysisShortageContextMenu</name>
         <id>93</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -599,7 +599,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>AnalisysExpired</name>
+      <name>AnalysisExpired</name>
       <id>95</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -607,10 +607,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>Analisys.Expired</segments>
+        <segments>Analysis.Expired</segments>
       </dataPath>
       <extendedTooltip>
-        <name>AnalisysExpiredExtendedTooltip</name>
+        <name>AnalysisExpiredExtendedTooltip</name>
         <id>97</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -625,7 +625,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>AnalisysExpiredContextMenu</name>
+        <name>AnalysisExpiredContextMenu</name>
         <id>96</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -650,10 +650,10 @@
       </extInfo>
     </items>
     <autoCommandBar>
-      <name>AnalisysCommandBar</name>
+      <name>AnalysisCommandBar</name>
       <id>10</id>
       <items xsi:type="form:Button">
-        <name>AnalisysRefresh</name>
+        <name>AnalysisRefresh</name>
         <id>28</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -661,7 +661,7 @@
           <common>true</common>
         </userVisible>
         <extendedTooltip>
-          <name>AnalisysRefreshExtendedTooltip</name>
+          <name>AnalysisRefreshExtendedTooltip</name>
           <id>29</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -721,11 +721,11 @@
     </autoCommandBar>
     <handlers>
       <event>OnActivateRow</event>
-      <name>AnalisysOnActivateRow</name>
+      <name>AnalysisOnActivateRow</name>
     </handlers>
     <handlers>
       <event>Selection</event>
-      <name>AnalisysSelection</name>
+      <name>AnalysisSelection</name>
     </handlers>
     <searchStringAddition>
       <visible>true</visible>
@@ -733,10 +733,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>AnalisysSearchString</name>
+      <name>AnalysisSearchString</name>
       <id>13</id>
       <extendedTooltip>
-        <name>AnalisysSearchStringExtendedTooltip</name>
+        <name>AnalysisSearchStringExtendedTooltip</name>
         <id>15</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -751,7 +751,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>AnalisysSearchStringContextMenu</name>
+        <name>AnalysisSearchStringContextMenu</name>
         <id>14</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -770,10 +770,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>AnalisysViewStatus</name>
+      <name>AnalysisViewStatus</name>
       <id>19</id>
       <extendedTooltip>
-        <name>AnalisysViewStatusExtendedTooltip</name>
+        <name>AnalysisViewStatusExtendedTooltip</name>
         <id>21</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -788,7 +788,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>AnalisysViewStatusContextMenu</name>
+        <name>AnalysisViewStatusContextMenu</name>
         <id>20</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -808,10 +808,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>AnalisysSearchControl</name>
+      <name>AnalysisSearchControl</name>
       <id>16</id>
       <extendedTooltip>
-        <name>AnalisysSearchControlExtendedTooltip</name>
+        <name>AnalysisSearchControlExtendedTooltip</name>
         <id>18</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -826,7 +826,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>AnalisysSearchControlContextMenu</name>
+        <name>AnalysisSearchControlContextMenu</name>
         <id>17</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -841,7 +841,7 @@
       </extInfo>
     </searchControlAddition>
     <extendedTooltip>
-      <name>AnalisysExtendedTooltip</name>
+      <name>AnalysisExtendedTooltip</name>
       <id>12</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -856,7 +856,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>AnalisysContextMenu</name>
+      <name>AnalysisContextMenu</name>
       <id>11</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1344,10 +1344,10 @@
     <main>true</main>
   </attributes>
   <attributes>
-    <name>Analisys</name>
+    <name>Analysis</name>
     <title>
       <key>en</key>
-      <value>Analisys</value>
+      <value>Analysis</value>
     </title>
     <id>5</id>
     <valueType>

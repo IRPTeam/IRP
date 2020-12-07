@@ -774,7 +774,7 @@ Copy-Item -Path "allure-history\*" -Destination "allure\base\history" -Force
 %teamcity.tool.allure-commandline%\bin\allure.bat generate allure/* --clean -o "allure-report"
 Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
-          <param name="teamcity.step.mode" value="default" />
+          <param name="teamcity.step.mode" value="execute_always" />
         </parameters>
       </runner>
       <runner id="RUNNER_53" name="ZIP DB after test done" type="jetbrains_powershell">

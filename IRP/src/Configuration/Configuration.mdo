@@ -356,6 +356,7 @@
   <commonModules>CommonModule.CatExpenseAndRevenueTypesServer</commonModules>
   <commonModules>CommonModule.LockDataModificationPriveleged</commonModules>
   <commonModules>CommonModule.MetadataInfo</commonModules>
+  <commonModules>CommonModule.CatConfigurationMetadataServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -377,7 +378,6 @@
   <eventSubscriptions>EventSubscription.BeforeWrite_CheckUniqueID</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_RefreshReusableValues</eventSubscriptions>
   <eventSubscriptions>EventSubscription.ChoiceDataGetProcessing_FindDataForInputString</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.FillCheckProcessing_CatalogsDescriptions</eventSubscriptions>
   <eventSubscriptions>EventSubscription.Filling_DocumentsWithDefaultData</eventSubscriptions>
   <eventSubscriptions>EventSubscription.FormGetProcessing_OpenMobileForm</eventSubscriptions>
   <eventSubscriptions>EventSubscription.OnCopy_AddAttributes</eventSubscriptions>
@@ -391,6 +391,8 @@
   <eventSubscriptions>EventSubscription.BeforeWrite_CatalogsLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_AccumulationRegistersLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_InformationRegistersLockDataModification</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_DescriptionsCheckFilling</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.FillCheckProcessing_DescriptionCheckFilling</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
   <settingsStorages>SettingsStorage.ReportOptions</settingsStorages>

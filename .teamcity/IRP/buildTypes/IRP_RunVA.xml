@@ -785,7 +785,7 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
 Compress-Archive -Path AllSteps\* -DestinationPath %env.Database1CName%_%build.number%.zip
 Compress-Archive -Path Cover.xml -DestinationPath Cover.zip]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
-          <param name="teamcity.step.mode" value="default" />
+          <param name="teamcity.step.mode" value="execute_always" />
         </parameters>
       </runner>
     </build-runners>

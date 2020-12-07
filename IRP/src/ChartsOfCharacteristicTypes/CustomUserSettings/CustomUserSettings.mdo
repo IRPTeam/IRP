@@ -23,6 +23,8 @@
     <types>String</types>
     <types>Date</types>
     <types>Number</types>
+    <types>CatalogRef.Companies</types>
+    <types>CatalogRef.Stores</types>
     <numberQualifiers>
       <precision>12</precision>
       <scale>3</scale>

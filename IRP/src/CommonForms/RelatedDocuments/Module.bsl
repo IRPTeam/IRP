@@ -32,11 +32,23 @@ Procedure UpdateCommandAvailability()
 		Return;
 	EndIf;
 	
-	CanPosting = CurrentData.Ref.Metadata().Posting = Metadata.ObjectProperties.Posting.Allow;
-	Items.DocumentsTreePost.Enabled = CanPosting And Not CurrentData.DeletionMark;
-	Items.DocumentsTreeUnpost.Enabled = CanPosting And Not CurrentData.DeletionMark;
-	Items.DocumentsTreeContextMenuPost.Enabled = CanPosting And Not CurrentData.DeletionMark;
-	Items.DocumentsTreeContextMenuUnpost.Enabled = CanPosting And Not CurrentData.DeletionMark;
+	If CurrentData.Ref = Undefined Then
+		Items.DocumentsTreePost.Enabled = False;
+		Items.DocumentsTreeUnpost.Enabled = False;
+		Items.DocumentsTreeEdit.Enabled = False;
+		Items.DocumentsTreeDelete.Enabled = False;
+		Items.DocumentsTreeContextMenuPost.Enabled = False;
+		Items.DocumentsTreeContextMenuUnpost.Enabled = False;
+		Items.DocumentsTreeContextMenuEdit.Enabled = False;
+		Items.DocumentsTreeContextMenuDelete.Enabled = False;
+	Else
+		CanPosting = CurrentData.Ref.Metadata().Posting = Metadata.ObjectProperties.Posting.Allow;
+		Items.DocumentsTreePost.Enabled = CanPosting And Not CurrentData.DeletionMark;
+		Items.DocumentsTreeUnpost.Enabled = CanPosting And Not CurrentData.DeletionMark;
+		Items.DocumentsTreeContextMenuPost.Enabled = CanPosting And Not CurrentData.DeletionMark;
+		Items.DocumentsTreeContextMenuUnpost.Enabled = CanPosting And Not CurrentData.DeletionMark;
+	EndIf;
+	
 EndProcedure
 
 &AtClient

@@ -1,7 +1,5 @@
-Procedure DescriptionsFillCheckProcessing(Source, Cancel, CheckedAttributes) Export
-	CheckDescriptionFilling(Source, Cancel);
-	CheckDescriptionDuplicate(Source, Cancel);
-EndProcedure
+
+#Region Public
 
 Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Parameters, StandardProcessing) Export
 	
@@ -190,6 +188,18 @@ Procedure GetCatalogPresentationFieldsPresentationFieldsGetProcessing(Source, Fi
 	Fields = LocalizationServer.FieldsListForDescriptions(Source);	
 EndProcedure
 
+Procedure BeforeWrite_DescriptionsCheckFilling(Source, Cancel) Export
+	CheckDescriptionFilling(Source, Cancel);
+	CheckDescriptionDuplicate(Source, Cancel);
+EndProcedure
+
+Procedure FillCheckProcessing_DescriptionCheckFilling(Source, Cancel, CheckedAttributes) Export
+	CheckDescriptionFilling(Source, Cancel);
+	CheckDescriptionDuplicate(Source, Cancel);
+EndProcedure
+
+#EndRegion
+
 #Region Private
 
 Procedure CheckDescriptionFilling(Source, Cancel)
@@ -212,7 +222,9 @@ Procedure CheckDescriptionFilling(Source, Cancel)
 EndProcedure
 
 Procedure CheckDescriptionDuplicate(Source, Cancel)
-	If Cancel Or TypeOf(Source) = Type("Structure") Then
+	If Cancel
+		Or TypeOf(Source) = Type("Structure")
+		Or Not CatConfigurationMetadataServer.CheckDescriptionDuplicateEnabled(Source) Then
 		Return;
 	EndIf;
 	

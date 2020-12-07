@@ -251,12 +251,18 @@ $VanessaRun = {
     Write-Host "##teamcity[testSuiteStarted name='$elementTag' flowId='$elementTag']"
 
 
-    Write-Output "Start tail: $elementTag"
+    Write-Output "Wait for log file: $elementTag"
+    Write-Host "##teamcity[testStarted  name='Wait for log file: $elementTag' flowId='$elementTag']"
     $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
         do {
         Start-Sleep 1        
+        if (Get-Process -id $processID -ErrorAction SilentlyContinue){
+        Write-Host "##teamcity[testFailed name='Wait for log file: $elementTag' message='Log file not found: $ScriptLogFilePath' flowId='$elementTag']"
+        }
+        
     } while (!(Test-Path $ScriptLogFilePath))
-
+    Write-Host "##teamcity[testFinished name='Wait for log file: $elementTag' duration='$TotalMilliseconds' flowId='$elementTag']"
+ 	Write-Output "Start tail: $elementTag"
 
     $CurrentFeatureFile = ""
     $CurrentTest = ""

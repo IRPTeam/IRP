@@ -726,7 +726,7 @@ echo "##teamcity[setParameter name='env.PID_ID' value='$PID_ID']"
 
 Start-Sleep -s 5]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
-          <param name="teamcity.step.mode" value="default" />
+          <param name="teamcity.step.mode" value="execute_always" />
         </parameters>
       </runner>
       <runner id="RUNNER_4" name="Cover stop" type="simpleRunner">

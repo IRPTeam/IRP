@@ -144,6 +144,11 @@ Procedure SearchByBarcode(Command, Barcode = "")
 	DocInternalSupplyRequestClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
 #Region ExternalCommands
 
 &AtClient

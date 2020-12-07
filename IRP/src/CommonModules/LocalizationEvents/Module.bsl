@@ -222,13 +222,14 @@ Procedure CheckDescriptionDuplicate(Source, Cancel)
 		AllDescription = LocalizationReuse.AllDescription();
 	Else
 		AllDescription = New Array;
-		If ValueIsFilled(Source.Description_en) Then
-			AllDescription.Add(Source.Description_en);
+		If	ServiceSystemClientServer.ObjectHasAttribute("Description", Source)
+			And ValueIsFilled(Source.Description) Then
+			AllDescription.Add("Description");
 		EndIf;
 	EndIf;
 	QueryFieldsSection = New Array;
 	QueryConditionsSection = New Array;
-	LanguageCodes = New Array;
+	DescriptionAttributes = New Array;
 	
 	Query = New Query;
 	Query.Text = "SELECT
@@ -241,17 +242,17 @@ Procedure CheckDescriptionDuplicate(Source, Cancel)
 		|	AND Cat.Ref <> &Ref
 		|GROUP BY
 		|	""%1""";
-	For Each Attribute In LocalizationReuse.AllDescription() Do
+	For Each Attribute In AllDescription Do
 		If ValueIsFilled(Source[Attribute]) Then
 			FieldLeftString = "Cat." + Attribute + " = &" + Attribute;
-			FieldString = "ISNUll(MAX(" + FieldLeftString + "), FALSE) AS " + StrReplace(Attribute, "Description_", "");
+			FieldString = "ISNUll(MAX(" + FieldLeftString + "), FALSE) AS " + Attribute;
 			QueryFieldsSection.Add(FieldString);
 			QueryConditionsSection.Add(FieldLeftString);
 			Query.SetParameter(Attribute, Source[Attribute]);
-			LanguageCodes.Add(StrReplace(Attribute, "Description_", ""));
+			DescriptionAttributes.Add(Attribute);
 		EndIf;
 	EndDo;
-	If LanguageCodes = True Then
+	If Not DescriptionAttributes.Count() Then
 		Return;
 	EndIf;
 	QueryFields = StrConcat(QueryFieldsSection, "," + Chars.LF + "	");
@@ -262,12 +263,14 @@ Procedure CheckDescriptionDuplicate(Source, Cancel)
 	QueryExecution = Query.Execute();
 	QuerySelection = QueryExecution.Select();
 	QuerySelection.Next();
-	For Each LanguageCode In LanguageCodes Do
-		If QuerySelection[LanguageCode] Then
+	For Each DescriptionAttribute In DescriptionAttributes Do
+		If QuerySelection[DescriptionAttribute] Then
 			If Not Cancel Then
 				Cancel = True;
 			EndIf;
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_089, LanguageCode, Source["Description_" + LanguageCode]));
+			LangCode = StrReplace(DescriptionAttribute, "Description", "");
+			DescriptionLanguage = ?(IsBlankString(LangCode), "", " (" + StrReplace(LangCode, "_", "") + ")");
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_089, DescriptionLanguage, Source[DescriptionAttribute]));
 		EndIf;
 	EndDo;
 EndProcedure

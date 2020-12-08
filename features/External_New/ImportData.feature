@@ -619,6 +619,7 @@ Scenario: Create catalog Units objects
 		| 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1865' | 'No'           | ''                                                              | '16'       | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''    | 'box (16 pcs)'           | ''                 | ''               | 'box (16 adet)'              |
 		| 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf115bcc9c60a' | 'No'           | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f7' | '8'        | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''    | 'High shoes box (8 pcs)' | ''                 | ''               | 'High shoes box (8 adet) TR' |
 		| 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf115bcc9c60b' | 'No'           | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f6' | '12'       | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''    | 'Boots (12 pcs)'         | ''                 | ''               | 'Boots (12 adet) TR'         |
+		| 'e1cib/data/Catalog.Units?ref=b75dad46e66c4c2c11eb393335f89c15' | 'No'           | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | '8'        | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''    | 'box Dress (8 pcs)'      | ''                 | ''               | 'box Dress (8 pcs) TR'       |
 
 Scenario: Create catalog Items objects
 

@@ -451,9 +451,12 @@ Scenario: _005116 filling in the "Items" catalog
 			| 'Coat'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Unit"
-		And I go to line in "List" table
+		And "List" table does not contain lines
 			| 'Description' |
 			| 'box (8 pcs)' |
+		And I go to line in "List" table
+			| 'Description' |
+			| 'pcs' |
 		And I select current line in "List" table
 		And I click Select button of "Producer" field
 		And I go to line in "List" table
@@ -475,7 +478,7 @@ Scenario: _005116 filling in the "Items" catalog
 	* Check data save
 		Then the form attribute named "ItemID" became equal to "AB475590i"
 		Then the form attribute named "ItemType" became equal to "Coat"
-		Then the form attribute named "Unit" became equal to "box (8 pcs)"
+		Then the form attribute named "Unit" became equal to "pcs"
 		Then the form attribute named "Vendor" became equal to "Ferron BP"
 		Then the form attribute named "Description_en" became equal to "Bodie"
 		If "Brand" field is equal to "Gir" Then
@@ -496,7 +499,7 @@ Scenario: _005116 filling in the "Items" catalog
 		And I click Select button of "Unit" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'box (8 pcs)' |
+			| 'pcs' |
 		And I select current line in "List" table
 		And I click the button named "FormWriteAndClose"
 	* Check Items save

@@ -57,6 +57,7 @@ EndProcedure
 &AtClient
 Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
 	DocPurchaseOrderClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+	Notify("WriteProcurementOrder", , ThisObject);
 EndProcedure
 
 &AtServer

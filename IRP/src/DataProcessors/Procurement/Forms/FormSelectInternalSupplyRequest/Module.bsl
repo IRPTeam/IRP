@@ -7,6 +7,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		NewRow.RowKey = Row.RowKey;
 		NewRow.Quantity = Row.Quantity; 
 		NewRow.ProcurementDate = Row.ProcurementDate;
+		NewRow.Use = True;
 	EndDo;
 EndProcedure
 

@@ -389,7 +389,11 @@ Procedure CreateDocuments(Command)
 	
 	For Each Doc In CreatedDocuments.TransferOrders Do
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_020, Doc));
-	EndDo;	
+	EndDo;
+	
+	If CreatedDocuments.PurchaseOrders.Count() Or CreatedDocuments.TransferOrders.Count() Then
+		Items.GroupMainPages.CurrentPage = Items.GroupDocuments;
+	EndIf;
 EndProcedure
 
 &AtServer

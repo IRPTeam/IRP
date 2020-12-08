@@ -119,7 +119,7 @@ Scenario: _00506 filling in the "Units" catalog
 		Given Recent TestClient message contains "Basis unit has to be filled, if item filter used." string by template
 		And I close all client application windows	
 
-Scenario: _0050601 check Dimensions and weight information
+Scenario: _0050601 check Dimensions and weight information (item unit)
 	*  Select unit
 		Given I open hyperlink "e1cib/list/Catalog.Units"
 		And I go to line in "List" table

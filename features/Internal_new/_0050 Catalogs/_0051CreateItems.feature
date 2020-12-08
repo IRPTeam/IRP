@@ -534,6 +534,25 @@ Scenario: _005117 filling in Item keys
 			| 'Additional attribute' | 'Additional attribute values' |
 			| 'Color'                | 'Blue'                        |
 		And I select current line in "List" table
+		And I change "UnitMode" radio button value to "Own"
+		And I click Select button of "Unit" field
+		And "List" table does not contain lines
+			| 'Description' |
+			| 'box (8 pcs)' |
+		Then the number of "List" table lines is "равно" "1"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'pcs' |
+		And I select current line in "List" table
+		Then the form attribute named "OwnUnit" became equal to "pcs"
+		Then the form attribute named "UnitMode" became equal to "Own"
+		And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'XS/Blue' |
+		And I select current line in "List" table
+		Then the form attribute named "OwnUnit" became equal to "pcs"
+		Then the form attribute named "UnitMode" became equal to "Own"
 		And I click "Save and close" button
 		And I click the button named "FormCreate"
 		And I click Select button of "Size" field

@@ -24,7 +24,7 @@
       <param name="env.StopOnError" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.StreamCount" value="3" />
       <param name="env.TR_Bank_Key" value="credentialsJSON:8036a633-0c14-4d64-991c-b98b36c82dd1" spec="password display='normal' readOnly='true'" />
-      <param name="env.TagsFullList" value="&quot;Discount&quot;, &quot;Forms&quot;, &quot;FillingDocuments&quot;, &quot;CreationBasedMulti&quot;, &quot;Other&quot;, &quot;CashManagement&quot;, &quot;Inventory&quot;, &quot;BankCashDocuments&quot;, &quot;Filters&quot;, &quot;Purchase&quot;, &quot;AdditionalAttributes&quot;, &quot;UserSettings&quot;, &quot;Sales&quot;, &quot;LinkedTransaction&quot;, &quot;AgingAndCreditLimit&quot;, &quot;RetailDocuments&quot;, &quot;PartnerCatalogs&quot;, &quot;InfoMessages&quot;, &quot;ExtensionReportForm&quot;, &quot;ContactInformation&quot;, &quot;DocumentVerification&quot;, &quot;StandartAgreement&quot;, &quot;AccessRights&quot;, &quot;ItemCatalogs&quot;, &quot;PhysicalInventory&quot;, &quot;Price&quot;, &quot;SerialLotNumber&quot;, &quot;InputBySearchInLine&quot;, &quot;LoadInfo&quot;, &quot;Services&quot;, &quot;SettingsCatalogs&quot;, &quot;BasicFormsCheck&quot;, &quot;OpeningEntries&quot;, &quot;InventoryTransfer&quot;, &quot;UserCatalogs&quot;, &quot;CompanyCatalogs&quot;, &quot;TaxCalculation&quot;, &quot;PrintForm&quot;, &quot;CurrencyRate&quot;, &quot;Barcodes&quot;" />
+      <param name="env.TagsFullList" value="&quot;Discount&quot;, &quot;Forms&quot;, &quot;FillingDocuments&quot;, &quot;CreationBasedMulti&quot;, &quot;Other&quot;, &quot;CashManagement&quot;, &quot;Inventory&quot;, &quot;BankCashDocuments&quot;, &quot;Filters&quot;, &quot;Purchase&quot;, &quot;AdditionalAttributes&quot;, &quot;UserSettings&quot;, &quot;Sales&quot;, &quot;LinkedTransaction&quot;, &quot;AgingAndCreditLimit&quot;, &quot;RetailDocuments&quot;, &quot;PartnerCatalogs&quot;, &quot;InfoMessages&quot;, &quot;ExtensionReportForm&quot;, &quot;ContactInformation&quot;, &quot;DocumentVerification&quot;, &quot;StandartAgreement&quot;, &quot;AccessRights&quot;, &quot;ItemCatalogs&quot;, &quot;PhysicalInventory&quot;, &quot;Price&quot;, &quot;SerialLotNumber&quot;, &quot;InputBySearchInLine&quot;, &quot;LoadInfo&quot;, &quot;Services&quot;, &quot;SettingsCatalogs&quot;, &quot;BasicFormsCheck&quot;, &quot;OpeningEntries&quot;, &quot;ProcurementDataProc&quot;, &quot;InventoryTransfer&quot;, &quot;UserCatalogs&quot;, &quot;CompanyCatalogs&quot;, &quot;TaxCalculation&quot;, &quot;PrintForm&quot;, &quot;CurrencyRate&quot;, &quot;Barcodes&quot;" />
       <param name="env.VA.FeaturePath" value="%teamcity.build.workingDir%/features/" />
       <param name="env.VA_PID" value="" />
       <param name="env.dbgs_PID" value="" />
@@ -251,12 +251,18 @@ $VanessaRun = {
     Write-Host "##teamcity[testSuiteStarted name='$elementTag' flowId='$elementTag']"
 
 
-    Write-Output "Start tail: $elementTag"
+    Write-Output "Wait for log file: $elementTag"
+    Write-Host "##teamcity[testStarted  name='Wait for log file: $elementTag' flowId='$elementTag']"
     $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
         do {
         Start-Sleep 1        
+        if (!(Get-Process -id $processID -ErrorAction SilentlyContinue)){
+        Write-Host "##teamcity[testFailed name='Wait for log file: $elementTag' message='Log file not found: $ScriptLogFilePath' flowId='$elementTag']"
+        }
+        
     } while (!(Test-Path $ScriptLogFilePath))
-
+    Write-Host "##teamcity[testFinished name='Wait for log file: $elementTag' duration='$TotalMilliseconds' flowId='$elementTag']"
+ 	Write-Output "Start tail: $elementTag"
 
     $CurrentFeatureFile = ""
     $CurrentTest = ""
@@ -726,7 +732,7 @@ echo "##teamcity[setParameter name='env.PID_ID' value='$PID_ID']"
 
 Start-Sleep -s 5]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
-          <param name="teamcity.step.mode" value="default" />
+          <param name="teamcity.step.mode" value="execute_always" />
         </parameters>
       </runner>
       <runner id="RUNNER_4" name="Cover stop" type="simpleRunner">
@@ -761,7 +767,7 @@ Start-Sleep 10]]></param>
       <runner id="RUNNER_16" name="Cover convert" type="simpleRunner">
         <parameters>
           <param name="script.content" value="coverage-cli convert --input %system.teamcity.build.workingDir%/Cover.csv --output  %system.teamcity.build.workingDir%/Cover.xml --sources IRP\src --format EDT &amp; powershell -command &quot;(Get-Content %system.teamcity.build.workingDir%/Cover.xml) | ForEach-Object { $_ -replace '\\', '/' } | Set-Content %system.teamcity.build.workingDir%/Cover.xml&quot;" />
-          <param name="teamcity.step.mode" value="default" />
+          <param name="teamcity.step.mode" value="execute_always" />
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
@@ -774,7 +780,7 @@ Copy-Item -Path "allure-history\*" -Destination "allure\base\history" -Force
 %teamcity.tool.allure-commandline%\bin\allure.bat generate allure/* --clean -o "allure-report"
 Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
-          <param name="teamcity.step.mode" value="default" />
+          <param name="teamcity.step.mode" value="execute_always" />
         </parameters>
       </runner>
       <runner id="RUNNER_53" name="ZIP DB after test done" type="jetbrains_powershell">
@@ -785,7 +791,7 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
 Compress-Archive -Path AllSteps\* -DestinationPath %env.Database1CName%_%build.number%.zip
 Compress-Archive -Path Cover.xml -DestinationPath Cover.zip]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
-          <param name="teamcity.step.mode" value="default" />
+          <param name="teamcity.step.mode" value="execute_always" />
         </parameters>
       </runner>
     </build-runners>

@@ -3543,21 +3543,9 @@ Scenario: _010020 check the operation of Quantity Compare plugin (comparison of 
 		And I click Select button of "Configuration metadata" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Documents'   |
-		And I click the button named "FormCreate"
-		And I input "GoodsReceipt" text in "Description" field
-		And I click Select button of "Parent" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Documents'   |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I go to line in "List" table
-			| 'Description' |
 			| 'GoodsReceipt'  |
 		And I select current line in "List" table
 		And I click Select button of "Plugins" field
-		Then "Plugins" window is opened
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Compare quantity' |

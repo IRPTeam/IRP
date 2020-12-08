@@ -1264,19 +1264,6 @@ Scenario: 950417 create rules for catalog (IN HIERARCHY)
 	
 
 Scenario: 950418 create rules for catalog (IN)
-	* Preparation
-		Given I open hyperlink 'e1cib/list/Catalog.ItemTypes'
-		And I click "List" button		
-		And I go to line in "List" table
-				| 'Description' |
-				| 'Furniture'       |
-		And I select current line in "List" table
-		And I click Select button of "Parent" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Accessories' |
-		And I click the button named "FormChoose"
-		And I click "Save and close" button	
 	* Create rule
 		Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
 		If "List" table contains lines Then
@@ -1289,10 +1276,10 @@ Scenario: 950418 create rules for catalog (IN)
 		And I select "Items" exact value from "Type" drop-down list
 		And I select "Item type" exact value from "Attribute" drop-down list
 		And I select "IN" exact value from "Comparison type" drop-down list
-		And I click Select button of "Value" field
+		And I click Select button of "Value" field	
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Accessories' |
+			| 'Furniture' |
 		And I click the button named "FormChoose"
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
@@ -1327,7 +1314,7 @@ Scenario: 950418 create rules for catalog (IN)
 			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Earrings'     |
+				| 'Furniture'     |
 			And I select current line in "List" table
 			And I click Select button of "Unit" field
 			And I activate "Description" field in "List" table

@@ -131,7 +131,7 @@ Scenario: _0050601 check Dimensions and weight information (item unit)
 		And I input "10,000" text in "Length" field
 		And I input "10,000" text in "Width" field
 		And I input "10,000" text in "Height" field
-		Then the form attribute named "Volume" became equal to "1 000,000"
+		And the editing text of form attribute named "Volume" became equal to "1 000,000"
 		And I input "0,020" text in "Length" field
 		And the editing text of form attribute named "Volume" became equal to "2,000"
 		And I click "Save" button

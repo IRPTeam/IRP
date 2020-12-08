@@ -88,6 +88,24 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="219604e2-92a5-4de8-a968-3f2e08132f4e">
+    <name>ProcurementDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Procurement date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="c327bbec-e519-4860-9b93-b8b8cc31f668">
     <name>DocumentForm</name>
     <synonym>

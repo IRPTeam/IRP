@@ -189,6 +189,9 @@ Procedure GetCatalogPresentationFieldsPresentationFieldsGetProcessing(Source, Fi
 EndProcedure
 
 Procedure BeforeWrite_DescriptionsCheckFilling(Source, Cancel) Export
+	If Source.DataExchange.Load Then
+		Return;
+	EndIf;
 	CheckDescriptionFilling(Source, Cancel);
 	CheckDescriptionDuplicate(Source, Cancel);
 EndProcedure

@@ -116,7 +116,7 @@ Procedure ProcessRefill(MetadataObjectNames, Parent)
 			ItemObject.Description = Item.ObjectFullSynonym;
 			ItemObject.Parent = Parent;
 		Else
-			ItemObject = Item.GetObject();
+			ItemObject = Item.Ref.GetObject();
 			ItemObject.Unused = False;
 		EndIf;
 		ItemObject.Write();

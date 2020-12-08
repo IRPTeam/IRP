@@ -454,6 +454,7 @@ Scenario: _005116 filling in the "Items" catalog
 		And "List" table does not contain lines
 			| 'Description' |
 			| 'box (8 pcs)' |
+		Then the number of "List" table lines is "равно" "1"
 		And I go to line in "List" table
 			| 'Description' |
 			| 'pcs' |

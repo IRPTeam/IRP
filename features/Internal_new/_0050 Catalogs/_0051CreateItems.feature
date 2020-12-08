@@ -833,3 +833,85 @@ Scenario: _005121 filling item key according to specification for set
 			| 'Item key'   |
 			| 'Jeans/S-8'  |
 		And I close current window
+
+
+Scenario: _005125 check Dimensions and weight information (item)
+	*  Select item
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Bodie'         |
+		And I select current line in "List" table
+	* Change dimensions and check volume calculation
+		And I expand "Dimensions" group
+		And I input "10,000" text in "Length" field
+		And I input "10,000" text in "Width" field
+		And I input "10,000" text in "Height" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "1 000,000"
+		And I input "0,020" text in "Length" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "2,000"
+		And I click "Save" button
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "2,000"
+		And I input "2,005" text in "Volume" field
+		And I click "Save" button
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "2,005"
+		And I input "20,000" text in "Width" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "4,000"
+		And I input "20,000" text in "Height" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "8,000"
+	* Change weight information and check saving
+		And I expand "Weight information" group
+		And I input "10,000" text in "Weight" field
+		And I click "Save" button
+		And the editing text of form attribute named "Weight" became equal to "10,000"
+		And I close all client application windows
+
+
+Scenario: _005126 check Dimensions and weight information (item key)
+	*  Select item
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Bodie'         |
+		And I select current line in "List" table
+		And In this window I click command interface button "Item keys"
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'M/White'  |
+		And I activate "Item key" field in "List" table
+		And I select current line in "List" table		
+	* Change dimensions and check volume calculation
+		And I expand "Dimensions" group
+		And I input "10,000" text in "Length" field
+		And I input "10,000" text in "Width" field
+		And I input "10,000" text in "Height" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "1 000,000"
+		And I input "0,020" text in "Length" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "2,000"
+		And I click "Save" button
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "2,000"
+		And I input "2,005" text in "Volume" field
+		And I click "Save" button
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "2,005"
+		And I input "20,000" text in "Width" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "4,000"
+		And I input "20,000" text in "Height" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "8,000"
+	* Change weight information and check saving
+		And I expand "Weight information" group
+		And I input "10,000" text in "Weight" field
+		And I click "Save" button
+		And the editing text of form attribute named "Weight" became equal to "10,000"
+		And I close all client application windows

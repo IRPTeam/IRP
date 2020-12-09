@@ -205,25 +205,25 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
-	|		ELSE RecordSet.Amount / (CurrencyTable.Rate * CurrencyTable.Multiplicity)
+	|		ELSE (RecordSet.Amount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
 	|	END AS Amount,
 	|	CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
-	|		ELSE RecordSet.ManualAmount / (CurrencyTable.Rate * CurrencyTable.Multiplicity)
+	|		ELSE (RecordSet.ManualAmount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
 	|	END AS ManualAmount,
 	|	CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
-	|		ELSE RecordSet.NetAmount / (CurrencyTable.Rate * CurrencyTable.Multiplicity)
+	|		ELSE (RecordSet.NetAmount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
 	|	END AS NetAmount,
 	|	CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
-	|		ELSE RecordSet.OffersAmount / (CurrencyTable.Rate * CurrencyTable.Multiplicity)
+	|		ELSE (RecordSet.OffersAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
 	|	END AS OffersAmount,
 	|	CurrencyTable.MovementType.DeferredCalculation AS DeferredCalculation,
 	|	CurrencyTable.MovementType.Currency AS Currency
@@ -374,9 +374,9 @@ EndProcedure
 
 Procedure CalculateAmountByRow(Row, DocumentAmount) Export
 	If Row.ShowReverseRate Then
-		Row.Amount = (DocumentAmount * Row.ReverseRate) / Row.Multiplicity;
+		Row.Amount = (DocumentAmount / Row.ReverseRate) / Row.Multiplicity;
 	Else
-		Row.Amount = DocumentAmount / (Row.Rate * Row.Multiplicity);
+		Row.Amount = (DocumentAmount * Row.Rate) / Row.Multiplicity;
 	EndIf;
 EndProcedure
 

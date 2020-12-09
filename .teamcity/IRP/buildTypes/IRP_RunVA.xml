@@ -253,82 +253,86 @@ $VanessaRun = {
 
     Write-Output "Wait for log file: $elementTag"
     Write-Host "##teamcity[testStarted  name='Wait for log file: $elementTag' flowId='$elementTag']"
+    $Skip = $false
     $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
         do {
         Start-Sleep 1        
         if (!(Get-Process -id $processID -ErrorAction SilentlyContinue)){
         Write-Host "##teamcity[testFailed name='Wait for log file: $elementTag' message='Log file not found: $ScriptLogFilePath' flowId='$elementTag']"
-        Goto :FileNotFound
+        $Skip = $true
+        break
         }
         
     } while (!(Test-Path $ScriptLogFilePath))
     Write-Host "##teamcity[testFinished name='Wait for log file: $elementTag' duration='$TotalMilliseconds' flowId='$elementTag']"
- 	Write-Output "Start tail: $elementTag"
+    
+    if (!$Skip) {
+      Write-Output "Start tail: $elementTag"
 
-    $CurrentFeatureFile = ""
-    $CurrentTest = ""
-    $LastIndex = 0
-    do{
-        $TextInLog = Get-Content $ScriptLogFilePath -Encoding UTF8 -Force -ErrorAction SilentlyContinue
+      $CurrentFeatureFile = ""
+      $CurrentTest = ""
+      $LastIndex = 0
+      do{
+          $TextInLog = Get-Content $ScriptLogFilePath -Encoding UTF8 -Force -ErrorAction SilentlyContinue
 
-        For ($index = $LastIndex; $index -le $TextInLog.count - 1; $index++) {
-            $line = $TextInLog[$index]
-            if($line -match "Feature:"){
-                $FeatureFile = $line -split "\\"
-                if($CurrentFeatureFile -eq ""){
-                    $CurrentFeatureFile =  $FeatureFile[$FeatureFile.count - 1]
-                    Write-Host "##teamcity[testSuiteStarted name='$CurrentFeatureFile' flowId='$elementTag']"
-                }else{
+          For ($index = $LastIndex; $index -le $TextInLog.count - 1; $index++) {
+              $line = $TextInLog[$index]
+              if($line -match "Feature:"){
+                  $FeatureFile = $line -split "\\"
+                  if($CurrentFeatureFile -eq ""){
+                      $CurrentFeatureFile =  $FeatureFile[$FeatureFile.count - 1]
+                      Write-Host "##teamcity[testSuiteStarted name='$CurrentFeatureFile' flowId='$elementTag']"
+                  }else{
 
-                    if($CurrentTest -ne ""){
-                    	$EndDate = Get-Date
-                        $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
-                        $TotalMilliseconds = [math]::Round($Diff.TotalMilliseconds)
-                        Write-Host "##teamcity[testFinished name='$CurrentTest' duration='$TotalMilliseconds' flowId='$elementTag']"
-                        $CurrentTest = ""
-                    }
+                      if($CurrentTest -ne ""){
+                          $EndDate = Get-Date
+                          $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
+                          $TotalMilliseconds = [math]::Round($Diff.TotalMilliseconds)
+                          Write-Host "##teamcity[testFinished name='$CurrentTest' duration='$TotalMilliseconds' flowId='$elementTag']"
+                          $CurrentTest = ""
+                      }
 
-                    Write-Host "##teamcity[testSuiteFinished name='$CurrentFeatureFile' flowId='$elementTag']"
-                    $CurrentFeatureFile =  $FeatureFile[$FeatureFile.count - 1]
-                    Write-Host "##teamcity[testSuiteStarted name='$CurrentFeatureFile' flowId='$elementTag']"
-                }
-            
-            }elseif($line -match "Script:"){
-                $Test = $line -split ":"
-                if($CurrentTest -eq ""){
-                    $CurrentTest =  $Test[$Test.count - 1]
-                    Write-Host "##teamcity[testStarted name='$CurrentTest' flowId='$elementTag']"
-                    $CurrentDate = Get-Date
-                }else{
-                    $EndDate = Get-Date
-                    $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
-                        
-                    $TotalMilliseconds = [math]::Round($Diff.TotalMilliseconds)
-                    Write-Host "##teamcity[testFinished name='$CurrentTest' duration='$TotalMilliseconds' flowId='$elementTag']"
-                    $CurrentTest =  $Test[$Test.count - 1]
-                    $CurrentTest = $CurrentTest.replace("|", "||").replace("'", "|'").replace("[", "|[").replace("]", "|]").replace("`n", "|n").replace("`r", "|r")
-                    Write-Host "##teamcity[testStarted  name='$CurrentTest' flowId='$elementTag']"
-                    $CurrentDate = Get-Date
-                }
-            }elseif($line -match "Failed:"){
-                $ErrorDescription = $line -split ":"
-                if($CurrentTest -eq ""){
-                    
-                }else{
-                    $ErrorDescription = $ErrorDescription.replace("|", "||").replace("'", "|'").replace("[", "|[").replace("]", "|]").replace("`n", "|n").replace("`r", "|r")
-                    Write-Host "##teamcity[testFailed name='$CurrentTest' message='$ErrorDescription' flowId='$elementTag']"
-                }    
-            }else{
-                if($CurrentTest -ne ""){
-                    Write-Host "##teamcity[testStdOut name='$CurrentTest' out='$line' flowId='$elementTag']"
-                }            
-            }
-            $LastIndex = $TextInLog.count
-        }
-        Start-Sleep 1
-    } while(Get-Process -id $processID -ErrorAction SilentlyContinue)
+                      Write-Host "##teamcity[testSuiteFinished name='$CurrentFeatureFile' flowId='$elementTag']"
+                      $CurrentFeatureFile =  $FeatureFile[$FeatureFile.count - 1]
+                      Write-Host "##teamcity[testSuiteStarted name='$CurrentFeatureFile' flowId='$elementTag']"
+                  }
 
-:FileNotFound
+              }elseif($line -match "Script:"){
+                  $Test = $line -split ":"
+                  if($CurrentTest -eq ""){
+                      $CurrentTest =  $Test[$Test.count - 1]
+                      Write-Host "##teamcity[testStarted name='$CurrentTest' flowId='$elementTag']"
+                      $CurrentDate = Get-Date
+                  }else{
+                      $EndDate = Get-Date
+                      $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
+
+                      $TotalMilliseconds = [math]::Round($Diff.TotalMilliseconds)
+                      Write-Host "##teamcity[testFinished name='$CurrentTest' duration='$TotalMilliseconds' flowId='$elementTag']"
+                      $CurrentTest =  $Test[$Test.count - 1]
+                      $CurrentTest = $CurrentTest.replace("|", "||").replace("'", "|'").replace("[", "|[").replace("]", "|]").replace("`n", "|n").replace("`r", "|r")
+                      Write-Host "##teamcity[testStarted  name='$CurrentTest' flowId='$elementTag']"
+                      $CurrentDate = Get-Date
+                  }
+              }elseif($line -match "Failed:"){
+                  $ErrorDescription = $line -split ":"
+                  if($CurrentTest -eq ""){
+
+                  }else{
+                      $ErrorDescription = $ErrorDescription.replace("|", "||").replace("'", "|'").replace("[", "|[").replace("]", "|]").replace("`n", "|n").replace("`r", "|r")
+                      Write-Host "##teamcity[testFailed name='$CurrentTest' message='$ErrorDescription' flowId='$elementTag']"
+                  }    
+              }else{
+                  if($CurrentTest -ne ""){
+                      Write-Host "##teamcity[testStdOut name='$CurrentTest' out='$line' flowId='$elementTag']"
+                  }            
+              }
+              $LastIndex = $TextInLog.count
+          }
+          Start-Sleep 1
+      } while(Get-Process -id $processID -ErrorAction SilentlyContinue)
+
+	}
     $EndDate = Get-Date
     $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
                         

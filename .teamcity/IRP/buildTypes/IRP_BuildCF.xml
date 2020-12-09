@@ -3,6 +3,9 @@
   <name>2. Build CF and Update DB</name>
   <description />
   <settings ref="IRP_BuildCF_FromEDT">
+    <options>
+      <option name="artifactRules" value="%teamcity.project.id%.cf&#xA;IRP.zip" />
+    </options>
     <disabled-settings>
       <setting-ref ref="RUNNER_22" />
     </disabled-settings>

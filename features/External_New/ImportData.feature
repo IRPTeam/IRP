@@ -1882,3 +1882,37 @@ Scenario: Create catalog SpecialOffers objects
 		| 'e1cib/data/Catalog.SpecialOffers?ref=aa78120ed92fbced11eaf11e6faafb3e' | 'e1cib/data/Catalog.SpecialOfferRules?ref=aa78120ed92fbced11eaf11e6faafb34' |
 		| 'e1cib/data/Catalog.SpecialOffers?ref=aa78120ed92fbced11eaf11e6faafb42' | 'e1cib/data/Catalog.SpecialOfferRules?ref=aa78120ed92fbced11eaf11e6faafb35' |
 		| 'e1cib/data/Catalog.SpecialOffers?ref=aa78120ed92fbced11eaf11e6faafb43' | 'e1cib/data/Catalog.SpecialOfferRules?ref=aa78120ed92fbced11eaf11e6faafb35' |
+
+
+Scenario: Create document InternalSupplyRequest objects (for procurement)
+
+	And I check or create document "InternalSupplyRequest" objects:
+		| 'Ref'                                                                            | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'Store'                                                          | 'ProcurementDate'     | 'Author'                                                        | 'Description' | 'BusinessUnit'                                                          |
+		| 'e1cib/data/Document.InternalSupplyRequest?ref=b75dad46e66c4c2c11eb38940abc212b' | 'No'           | '1'      | '01.12.2020 16:06:22' | 'Yes'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''            | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' |
+		| 'e1cib/data/Document.InternalSupplyRequest?ref=b75dad46e66c4c2c11eb38940abc212c' | 'No'           | '2'      | '01.12.2020 16:07:11' | 'Yes'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''            | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' |
+		| 'e1cib/data/Document.InternalSupplyRequest?ref=b75dad46e66c4c2c11eb38940abc212d' | 'No'           | '3'      | '07.12.2020 16:07:30' | 'Yes'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''            | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' |
+		| 'e1cib/data/Document.InternalSupplyRequest?ref=b75dad46e66c4c2c11eb38940abc212e' | 'No'           | '4'      | '07.12.2020 16:07:53' | 'Yes'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''            | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' |
+
+	And I refill object tabular section "ItemList":
+		| 'Ref'                                                                            | 'Key'                                  | 'ItemKey'                                                          | 'Unit'                                                          | 'Quantity' |
+		| 'e1cib/data/Document.InternalSupplyRequest?ref=b75dad46e66c4c2c11eb38940abc212b' | '0e8a95bb-2685-4b78-8690-97cf4bb93056' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c604' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '5'        |
+		| 'e1cib/data/Document.InternalSupplyRequest?ref=b75dad46e66c4c2c11eb38940abc212b' | '5cd2d8e5-7888-468a-a168-4b8c94cb6609' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c605' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '10'       |
+		| 'e1cib/data/Document.InternalSupplyRequest?ref=b75dad46e66c4c2c11eb38940abc212b' | 'ef99c6dc-04d1-4284-b7d9-d3b84e502568' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '20'       |
+		| 'e1cib/data/Document.InternalSupplyRequest?ref=b75dad46e66c4c2c11eb38940abc212c' | '0e8a95bb-2685-4b78-8690-97cf4bb93056' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c604' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '43'       |
+		| 'e1cib/data/Document.InternalSupplyRequest?ref=b75dad46e66c4c2c11eb38940abc212c' | '5cd2d8e5-7888-468a-a168-4b8c94cb6609' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c605' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '20'       |
+		| 'e1cib/data/Document.InternalSupplyRequest?ref=b75dad46e66c4c2c11eb38940abc212c' | 'ef99c6dc-04d1-4284-b7d9-d3b84e502568' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '50'       |
+		| 'e1cib/data/Document.InternalSupplyRequest?ref=b75dad46e66c4c2c11eb38940abc212c' | 'c6e43f64-8b7b-4b70-ab74-f0ac5fb3be1b' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c608' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '15'       |
+		| 'e1cib/data/Document.InternalSupplyRequest?ref=b75dad46e66c4c2c11eb38940abc212d' | '0e8a95bb-2685-4b78-8690-97cf4bb93056' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c604' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '43'       |
+		| 'e1cib/data/Document.InternalSupplyRequest?ref=b75dad46e66c4c2c11eb38940abc212e' | '0e8a95bb-2685-4b78-8690-97cf4bb93056' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c60f' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '20'       |
+		| 'e1cib/data/Document.InternalSupplyRequest?ref=b75dad46e66c4c2c11eb38940abc212e' | 'd3c1ca05-5b4a-4692-8293-d4d9c7ab550d' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '7'        |
+
+Scenario: Create document PriceList objects (for procurement)
+
+	And I check or create document "PriceList" objects:
+		| 'Ref'                                                                | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'ItemType' | 'PriceListType'                    | 'PriceType'                                                          | 'Author'                                                        | 'Description' | 'BusinessUnit'                                                          |
+		| 'e1cib/data/Document.PriceList?ref=b75dad46e66c4c2c11eb38940abc2134' | 'No'           | '58'      | '07.12.2020 17:02:19' | 'Yes'    | ''         | 'Enum.PriceListTypes.PriceByItems' | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef005' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''            | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' |
+
+	And I refill object tabular section "ItemList":
+		| 'Ref'                                                                | 'Item'                                                          | 'Price' |
+		| 'e1cib/data/Document.PriceList?ref=b75dad46e66c4c2c11eb38940abc2134' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | '100'   |
+		| 'e1cib/data/Document.PriceList?ref=b75dad46e66c4c2c11eb38940abc2134' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f6' | '80'    |

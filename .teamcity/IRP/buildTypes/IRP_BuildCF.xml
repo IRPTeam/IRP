@@ -13,6 +13,19 @@
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
+      <runner id="RUNNER_5" name="Create new Template DB" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[start /wait "1cv8.exe" %env.PathTo1CPlatform%  CREATEINFOBASE File=%system.teamcity.build.workingDir%\TempDB /UseTemplate %teamcity.tool.TemplateIRP%\TemplateIRP.dt /Out %env.LogFile1C%
+
+echo ##teamcity[compilationStarted compiler='Log from 1C: %env.LogFile1C%']
+sh -c "while read line; do if [[ $line == *"Error"* ]]; then echo -e ""\e[31m $line""; else  echo -e ""\e[34m $line""; fi;  done < ""%env.LogFile1C%"";"
+echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']
+
+find /c "completed successfully" %env.LogFile1C% && ( echo Success ) || ( echo "##teamcity[message text='Error while Create template DB' status='FAILURE']" && exit 1)]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
     </build-runners>
     <vcs-settings />
     <requirements />

@@ -72,6 +72,7 @@ Function Strings(Lang) Export
 	Strings.Insert("S_028", NStr("en = 'Success'", Lang));
 	Strings.Insert("S_029", NStr("en = 'Not supporting web client'", Lang));
 	Strings.Insert("S_030", NStr("en = 'Cashback'", Lang));
+	Strings.Insert("S_031", NStr("en = 'or'", Lang));
 	#EndRegion
 	
 	#Region Service

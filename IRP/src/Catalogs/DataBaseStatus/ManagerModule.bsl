@@ -3,8 +3,8 @@ Function GetOrCreateDataBaseStatusInfo() Export
 	ComputerName = ComputerName();
 	ConnectionString = InfoBaseConnectionString();
 	
-	ConnectionStringArray = StrSplit(ConnectionString, "\|/;=:");
-	ConnectionString = StrConcat(ConnectionStringArray, "");
+	ConnectionStringArray = StrSplit(ConnectionString, "\|/;=: ");
+	ConnectionString = StrConcat(ConnectionStringArray, "_");
 	Query = New Query;
 	Query.Text =
 		"SELECT

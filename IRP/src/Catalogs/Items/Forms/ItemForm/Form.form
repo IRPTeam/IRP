@@ -436,6 +436,10 @@
                 <segments>Object.Length</segments>
               </paths>
             </dataPath>
+            <handlers>
+              <event>OnChange</event>
+              <name>SizeOnChange</name>
+            </handlers>
             <extendedTooltip>
               <name>LengthExtendedTooltip</name>
               <id>152</id>
@@ -488,6 +492,10 @@
                 <segments>Object.Width</segments>
               </paths>
             </dataPath>
+            <handlers>
+              <event>OnChange</event>
+              <name>SizeOnChange</name>
+            </handlers>
             <extendedTooltip>
               <name>WidthExtendedTooltip</name>
               <id>155</id>
@@ -540,6 +548,10 @@
                 <segments>Object.Height</segments>
               </paths>
             </dataPath>
+            <handlers>
+              <event>OnChange</event>
+              <name>SizeOnChange</name>
+            </handlers>
             <extendedTooltip>
               <name>HeightExtendedTooltip</name>
               <id>158</id>
@@ -659,6 +671,11 @@
           <extInfo xsi:type="form:UsualGroupExtInfo">
             <group>Vertical</group>
             <behavior>Collapsible</behavior>
+            <collapsedRepresentationTitle>
+              <key>en</key>
+              <value>Dimensions</value>
+            </collapsedRepresentationTitle>
+            <collapsed>true</collapsed>
             <representation>WeakSeparation</representation>
             <showLeftMargin>true</showLeftMargin>
             <united>true</united>
@@ -750,6 +767,11 @@
           <extInfo xsi:type="form:UsualGroupExtInfo">
             <group>HorizontalIfPossible</group>
             <behavior>Collapsible</behavior>
+            <collapsedRepresentationTitle>
+              <key>en</key>
+              <value>Weight information</value>
+            </collapsedRepresentationTitle>
+            <collapsed>true</collapsed>
             <representation>WeakSeparation</representation>
             <showLeftMargin>true</showLeftMargin>
             <united>true</united>

@@ -281,6 +281,11 @@ Function GetErrorMessage(BasisDocument)
 			If WithoutBalance(BasisDocument) And HasShipmentConfirmation(BasisDocument) Then
 				ErrorMessage = R().Error_019;
 				ErrorMessage = StrTemplate(ErrorMessage, Metadata.Documents.ShipmentConfirmation.Synonym, BasisDocument.Metadata().Synonym);
+				
+				If BasisDocument.ItemList.FindRows(New Structure("ProcurementMethod", Enums.ProcurementMethods.Purchase)).Count() Then
+					ErrorMessage = ErrorMessage + Chars.LF + R().S_031 + Chars.LF + R().Error_031;
+				EndIf;
+				
 			Else
 				ErrorMessage = R().Error_031;
 			EndIf;

@@ -20,11 +20,15 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 EndProcedure
 
+&AtClient
+Procedure SizeOnChange(Item)
+	CommonFunctionsClientServer.CalculateVolume(Object);
+EndProcedure
+
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	LockFormAttribute(True);
 EndProcedure
-
 #EndRegion
 
 #Region FormItemsEvent

@@ -18,7 +18,6 @@
       <param name="env.Database1CName" value="" />
       <param name="env.DebugPort" value="" />
       <param name="env.DebugVA" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
-      <param name="env.FilterTagsForVA" value="'%dep.IRP_GitHubUpdate.env.VA_Tags%'" />
       <param name="env.LogFile1C" value="%system.teamcity.build.workingDir%\Log1C.log" />
       <param name="env.OScript" value="C:/OneScript" />
       <param name="env.PID_ID" value="0" />

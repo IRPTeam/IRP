@@ -355,6 +355,7 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_018", NStr("en = 'Add or scan serial lot number'", Lang));
 	
 	Strings.Insert("InfoMessage_019", NStr("en = 'Data lock reasons:'", Lang));
+	Strings.Insert("InfoMessage_020", NStr("en = 'Created document: %1'", Lang));
 	
 	#EndRegion
 	

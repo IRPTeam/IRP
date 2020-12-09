@@ -15,6 +15,7 @@
       <param name="env.BranchToStartVA" value="develop" />
       <param name="env.CloseVA" value="true" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.ConfigurationFileName" value="%env.Database1CName%" />
+      <param name="env.Database1CName" value="" />
       <param name="env.DebugPort" value="" />
       <param name="env.DebugVA" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.FilterTagsForVA" value="'%dep.IRP_GitHubUpdate.env.VA_Tags%'" />

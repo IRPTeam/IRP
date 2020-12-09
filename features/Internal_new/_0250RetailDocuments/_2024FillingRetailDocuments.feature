@@ -2411,13 +2411,21 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 				| 'No'                 | 'Dress' | 'L/Green'  | '550,00'     | '550,00' | '1,000' | 'Store 01' | '99,00'      | '649,00'       | 'pcs'  | '18%' |
 			And I select current line in "ItemList" table
 			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
+			And "List" table does not contain lines
 				| 'Description' |
 				| 'box (8 pcs)' |
+			And "List" table contains lines
+				| 'Description' |
+				| 'pcs' |
+				| 'box Dress (8 pcs)' |
+			Then the number of "List" table lines is "равно" "2"
+			And I go to line in "List" table
+				| 'Description' |
+				| 'box Dress (8 pcs)' |
 			And I select current line in "List" table
 			And "ItemList" table contains lines
 				| 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'     | 'Unit'        | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
-				| 'Dress' | 'L/Green'  | 'No'                 | '1,000' | 'box (8 pcs)' | '792,00'     | '4 400,00' | '18%' | '4 400,00'   | '5 192,00'     | 'Store 01' |
+				| 'Dress' | 'L/Green'  | 'No'                 | '1,000' | 'box Dress (8 pcs)' | '792,00'     | '4 400,00' | '18%' | '4 400,00'   | '5 192,00'     | 'Store 01' |
 			And I close all client application windows			
 
 
@@ -2742,14 +2750,22 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 				| 'Shop 01'       | 'No'                 | 'Dress' | 'L/Green'  | '550,00'     | '550,00' | 'Basic Price Types' | '1,000' | 'Store 01' | '99,00'      | '649,00'       | 'pcs'  | '18%' |
 			And I select current line in "ItemList" table
 			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
+			And "List" table does not contain lines
 				| 'Description' |
 				| 'box (8 pcs)' |
+			And "List" table contains lines
+				| 'Description' |
+				| 'pcs' |
+				| 'box Dress (8 pcs)' |
+			Then the number of "List" table lines is "равно" "2"
+			And I go to line in "List" table
+				| 'Description' |
+				| 'box Dress (8 pcs)' |
 			And I select current line in "List" table
 			And "ItemList" table contains lines
 				| 'Business unit' | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'     | 'Unit'        | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
 				| 'Shop 01'       | 'Basic Price Types'       | 'Shirt' | '38/Black' | 'No'                 | '2,000' | 'pcs'         | ''           | '350,00'   | '0%'  | '700,00'     | '700,00'       | 'Store 01' |
-				| 'Shop 01'       | 'Basic Price Types'       | 'Dress' | 'L/Green'  | 'No'                 | '1,000' | 'box (8 pcs)' | '792,00'     | '4 400,00' | '18%' | '4 400,00'   | '5 192,00'     | 'Store 01' |
+				| 'Shop 01'       | 'Basic Price Types'       | 'Dress' | 'L/Green'  | 'No'                 | '1,000' | 'box Dress (8 pcs)' | '792,00'     | '4 400,00' | '18%' | '4 400,00'   | '5 192,00'     | 'Store 01' |
 				| 'Shop 01'       | 'Basic Price without VAT' | 'Dress' | 'XS/Blue'  | 'No'                 | '1,000' | 'pcs'         | '79,32'      | '440,68'   | '18%' | '440,68'     | '520,00'       | 'Store 01' |
 			And I close all client application windows
 			

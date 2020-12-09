@@ -916,7 +916,7 @@ Compress-Archive -Path Cover.xml -DestinationPath Cover.zip]]></param>
       </dependency>
       <dependency id="ARTIFACT_DEPENDENCY_5" sourceBuildTypeId="IRP_BuildCF" cleanDestination="false">
         <revisionRule name="sameChainOrLastFinished" revision="latest.sameChainOrLastFinished" />
-        <artifact sourcePath="%env.Database1CName%.cf" />
+        <artifact sourcePath="%teamcity.project.id%.cf" />
       </dependency>
       <dependency id="ARTIFACT_DEPENDENCY_6" sourceBuildTypeId="IRP_RunVA" cleanDestination="false">
         <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" branch="+:develop" />

@@ -56,3 +56,22 @@ Procedure GetUnitFactorRecursion(FromUnit, ToUnit, Result)
 		GetUnitFactorRecursion(FromUnit.BasisUnit, ToUnit, Result);
 	EndIf;
 EndProcedure
+
+#Region LockAttributes
+Function GetListLockedAttributes_IncludeObjects() Export
+	Array = New Array;
+	Return Array;
+EndFunction
+
+Function GetListLockedAttributes_ExcludeObjects() Export
+	Array = New Array;
+	Array.Add(Metadata.Catalogs.Items);
+	Array.Add(Metadata.Catalogs.ItemKeys);
+	Array.Add(Metadata.Catalogs.Units);
+	Return Array;
+EndFunction
+
+Function GetListLockedAttributes_LockForOtherReason(Ref) Export
+	Return False;
+EndFunction
+#EndRegion

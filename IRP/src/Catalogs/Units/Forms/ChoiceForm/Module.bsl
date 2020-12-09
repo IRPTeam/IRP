@@ -5,11 +5,15 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		List.Parameters.SetParameterValue("Item", Parameters.Filter.Item);
 		List.Parameters.SetParameterValue("Unit", Parameters.Filter.Item.Unit);
 		List.Parameters.SetParameterValue("Filter", True);
-		Parameters.Filter.Delete("Item");
-		
 	Else
 		List.Parameters.SetParameterValue("Filter", False);
 		List.Parameters.SetParameterValue("Item", Catalogs.Items.EmptyRef());
 		List.Parameters.SetParameterValue("Unit", Catalogs.Units.EmptyRef());
 	EndIf;
+	If Parameters.Filter.Property("Quantity") Then
+		List.Parameters.SetParameterValue("FilterForItemsAndKeys", True);
+	Else
+		List.Parameters.SetParameterValue("FilterForItemsAndKeys", False);
+	EndIf;
+	Parameters.Filter.Delete("Item");
 EndProcedure

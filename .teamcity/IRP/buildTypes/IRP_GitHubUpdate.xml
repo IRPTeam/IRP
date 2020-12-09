@@ -6,6 +6,9 @@
     <options>
       <option name="cleanBuild" value="true" />
     </options>
+    <disabled-settings>
+      <setting-ref ref="RUNNER_19" />
+    </disabled-settings>
     <parameters>
       <param name="env.BranchToStartVA" value="develop" />
       <param name="env.Database1CName" value="%teamcity.project.id%" />

@@ -26,6 +26,13 @@ find /c "completed successfully" %env.LogFile1C% && ( echo Success ) || ( echo "
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
+      <runner id="RUNNER_11" name="Create and attach cf" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="start /wait &quot;1cv8.exe&quot; %env.PathTo1CPlatform%  Designer %env.ConnectionTo1C% /Out %env.LogFile1C% /DumpCfg %system.teamcity.build.workingDir%\%teamcity.project.id%.cf" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
     </build-runners>
     <vcs-settings />
     <requirements />

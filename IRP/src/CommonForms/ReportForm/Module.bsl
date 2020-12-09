@@ -2,8 +2,8 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocumentsClientServer.ChangeTitleCollapse(, ThisObject);
-	ReportName = ReportName();
-	ExternalCommandsServer.CreateCommands(ThisObject, ReportName, Catalogs.ConfigurationMetadata.Reports, Enums.FormTypes.ObjectForm);	
+	ReportFullName = ReportName();
+	ExternalCommandsServer.CreateCommands(ThisObject, ReportFullName, Enums.FormTypes.ObjectForm);	
 EndProcedure
 
 #Region GroupTitleDecorations
@@ -50,7 +50,7 @@ EndProcedure
 Function ReportName()
 	SplittedFormName = StrSplit(ThisObject.FormName, ".");
 	SplittedFormName.Delete(SplittedFormName.UBound());
-	Return SplittedFormName.Get(SplittedFormName.UBound());
+	Return StrConcat(SplittedFormName, ".");
 EndFunction
 
 #EndRegion

@@ -26,6 +26,31 @@ Procedure RefillMetadata() Export
 	RefillDocuments();
 EndProcedure
 
+Function GetConfigurationMetadataItemByObject(Object) Export
+	Return GetConfigurationMetadataItemByFullName(Object.Metadata().FullName);
+EndFunction
+
+Function GetConfigurationMetadataItemByFullName(ObjectFullName) Export
+	ReturnValue = Undefined;
+	Query = New Query;
+	Query.Text = "SELECT
+	|	ConfigurationMetadata.Ref
+	|FROM
+	|	Catalog.ConfigurationMetadata AS ConfigurationMetadata
+	|WHERE
+	|	ConfigurationMetadata.ObjectFullName = &ObjectFullName
+	|	AND NOT ConfigurationMetadata.DeletionMark
+	|	AND NOT ConfigurationMetadata.Unused";
+	Query.SetParameter("ObjectFullName", ObjectFullName);
+	QueryExecution = Query.Execute();
+	If Not QueryExecution.IsEmpty() Then
+		QuerySelection = QueryExecution.Select();
+		QuerySelection.Next();
+		ReturnValue = QuerySelection.Ref;
+	EndIf;
+	Return ReturnValue;
+EndFunction
+
 #EndRegion
 
 #Region Private

@@ -801,7 +801,7 @@ Compress-Archive -Path Cover.xml -DestinationPath Cover.zip]]></param>
           <param name="teamcity.step.mode" value="execute_always" />
         </parameters>
       </runner>
-      <runner id="RUNNER_69" name="" type="jetbrains_powershell">
+      <runner id="RUNNER_69" name="Set env" type="jetbrains_powershell">
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />

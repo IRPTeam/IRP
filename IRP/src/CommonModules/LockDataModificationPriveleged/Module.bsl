@@ -55,6 +55,37 @@ EndProcedure
 
 #EndRegion
 
+#Region Public
+Function IsLockFormAttribute(Ref) Export
+	
+	LockForOtherReason = Catalogs.Units.GetListLockedAttributes_LockForOtherReason(Ref);
+	
+	If LockForOtherReason Then
+		Return True;
+	EndIf;
+	
+	Array = New Array;
+	Array.Add(Ref);
+	IncludeObjects = Catalogs.Units.GetListLockedAttributes_IncludeObjects();
+	ExcludeObjects = Catalogs.Units.GetListLockedAttributes_ExcludeObjects();
+	
+	VT = FindByRef(Array, , IncludeObjects, ExcludeObjects);
+	
+	VT_Count = VT.Count(); 
+	If VT_Count = 0 Then
+		Return False;
+	EndIf; 
+
+	CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_021, VT_Count));
+	ShowTop = 5;
+	VT.GroupBy("Metadata");
+	For Index = 0 To ?(VT.Count() - 1 > ShowTop, ShowTop, VT.Count() - 1) Do
+		CommonFunctionsClientServer.ShowUsersMessage(VT[Index].Metadata);
+	EndDo;
+	Return True;
+EndFunction
+#EndRegion
+
 #Region Privat
 
 Function FillLockDataSettings()

@@ -5,7 +5,7 @@
   <settings>
     <options>
       <option name="allowExternalStatus" value="true" />
-      <option name="artifactRules" value="+:allure-report.zip&#xA;+:Cover.zip&#xA;+:%env.Database1CName%_%build.number%.zip" />
+      <option name="artifactRules" value="+:allure-report.zip&#xA;+:Cover.zip&#xA;+:%teamcity.project.id%.zip" />
       <option name="cleanBuild" value="true" />
     </options>
     <disabled-settings>

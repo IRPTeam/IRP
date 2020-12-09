@@ -258,6 +258,7 @@ $VanessaRun = {
         Start-Sleep 1        
         if (!(Get-Process -id $processID -ErrorAction SilentlyContinue)){
         Write-Host "##teamcity[testFailed name='Wait for log file: $elementTag' message='Log file not found: $ScriptLogFilePath' flowId='$elementTag']"
+        Goto :FileNotFound
         }
         
     } while (!(Test-Path $ScriptLogFilePath))
@@ -326,6 +327,8 @@ $VanessaRun = {
         }
         Start-Sleep 1
     } while(Get-Process -id $processID -ErrorAction SilentlyContinue)
+
+:FileNotFound
     $EndDate = Get-Date
     $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
                         

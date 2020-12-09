@@ -6,9 +6,7 @@
     <options>
       <option name="cleanBuild" value="true" />
     </options>
-    <parameters>
-      <param name="env.Database1CName" value="%teamcity.project.id%" />
-    </parameters>
+    <parameters />
     <build-runners />
     <vcs-settings>
       <vcs-entry-ref root-id="IRP_GitTC" />

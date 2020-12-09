@@ -7,7 +7,6 @@
       <option name="cleanBuild" value="true" />
     </options>
     <parameters>
-      <param name="env.BranchToStartVA" value="develop" />
       <param name="env.Database1CName" value="%teamcity.project.id%" />
     </parameters>
     <build-runners />

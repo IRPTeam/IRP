@@ -54,7 +54,7 @@ elseif('%teamcity.build.branch%' -eq '%env.BranchToStartVA%')
 }
 else
 {
-	$SonarParamCover = ""
+	$SonarParamCover = "-Dsonar.coverageReportPaths=%system.teamcity.build.workingDir%/Cover.xml"
 	$InfobaseName = "%env.Database1CName%_%teamcity.build.branch%"
 }
 

@@ -1,11 +1,11 @@
 
 #Region Public
 
-Function CheckDescriptionDuplicateEnabled(Object) Export
+Function CheckDescriptionFillingEnabled(Object) Export
 	MetadataFullName = Object.Metadata().FullName();
 	Query = New Query;
 	Query.Text = "SELECT ALLOWED TOP 1
-	|	ConfigurationMetadata.CheckDescriptionDuplicate
+	|	ConfigurationMetadata.CheckDescriptionFilling AS ReturnValue
 	|FROM
 	|	Catalog.ConfigurationMetadata AS ConfigurationMetadata
 	|WHERE
@@ -17,7 +17,27 @@ Function CheckDescriptionDuplicateEnabled(Object) Export
 	Else
 		QuerySelect = QueryExecution.Select();
 		QuerySelect.Next();
-		Return QuerySelect.CheckDescriptionDuplicate;
+		Return QuerySelect.ReturnValue;
+	EndIf;
+EndFunction
+
+Function CheckDescriptionDuplicateEnabled(Object) Export
+	MetadataFullName = Object.Metadata().FullName();
+	Query = New Query;
+	Query.Text = "SELECT ALLOWED TOP 1
+	|	ConfigurationMetadata.CheckDescriptionDuplicate AS ReturnValue
+	|FROM
+	|	Catalog.ConfigurationMetadata AS ConfigurationMetadata
+	|WHERE
+	|	ConfigurationMetadata.ObjectFullName = &ObjectFullName";
+	Query.SetParameter("ObjectFullName", MetadataFullName);
+	QueryExecution = Query.Execute();
+	If QueryExecution.IsEmpty() Then
+		Return False;
+	Else
+		QuerySelect = QueryExecution.Select();
+		QuerySelect.Next();
+		Return QuerySelect.ReturnValue;
 	EndIf;
 EndFunction
 

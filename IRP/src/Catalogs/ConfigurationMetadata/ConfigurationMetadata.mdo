@@ -77,6 +77,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="2c0d25ee-1c6e-430a-aa07-781d1f00639c">
+    <name>CheckDescriptionFilling</name>
+    <synonym>
+      <key>en</key>
+      <value>Check description filling</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="c1323631-5529-43f7-94d3-70abc4f80fdc">
     <name>Extension</name>
     <synonym>

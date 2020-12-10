@@ -1402,7 +1402,7 @@ Scenario: 950420 create rules for information register (without recorder)
 			Given I open hyperlink 'e1cib/list/InformationRegister.CurrencyRates'
 			And I go to line in "List" table
 				| 'Currency from' | 'Currency to' | 'Multiplicity' | 'Period'              | 'Rate'    | 'Source'  |
-				| 'UAH'           | 'USD'         | '1'            | '07.09.2020 00:00:00' | '27,7325' | 'Bank UA' |
+				| 'UAH'           | 'USD'         | '1'            | '07.09.2020 00:00:00' | '0,0361' | 'Bank UA' |
 			And I select current line in "List" table
 			And I input "27,7425" text in "Rate" field
 			And I click "Save and close" button
@@ -1415,7 +1415,7 @@ Scenario: 950420 create rules for information register (without recorder)
 			Given I open hyperlink 'e1cib/list/InformationRegister.CurrencyRates'
 			And I go to line in "List" table
 				| 'Currency from' | 'Currency to' | 'Multiplicity' | 'Period'              | 'Rate'    | 'Source'  |
-				| 'UAH'           | 'USD'         | '1'            | '07.09.2020 00:00:00' | '27,7325' | 'Bank UA' |
+				| 'UAH'           | 'USD'         | '1'            | '07.09.2020 00:00:00' | '0,0361' | 'Bank UA' |
 			And in the table "List" I click the button named "ListContextMenuCopy"
 			And I input "12.09.2020 00:00:00" text in "Period" field
 			And I click "Save and close" button
@@ -1428,7 +1428,7 @@ Scenario: 950420 create rules for information register (without recorder)
 			Given I open hyperlink 'e1cib/list/InformationRegister.CurrencyRates'
 			And I go to line in "List" table
 				| 'Currency from' | 'Currency to' | 'Multiplicity' | 'Period'              | 'Rate'    | 'Source'  |
-				| 'UAH'           | 'USD'         | '1'            | '07.09.2020 00:00:00' | '27,7325' | 'Bank UA' |
+				| 'UAH'           | 'USD'         | '1'            | '07.09.2020 00:00:00' | '0,0361' | 'Bank UA' |
 			And in the table "List" I click the button named "ListContextMenuDelete"				
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -1441,7 +1441,7 @@ Scenario: 950420 create rules for information register (without recorder)
 			Given I open hyperlink 'e1cib/list/InformationRegister.CurrencyRates'
 			And I go to line in "List" table
 				| 'Currency from' | 'Currency to' | 'Multiplicity' | 'Period'              | 'Rate'    | 'Source'  |
-				| 'UAH'           | 'USD'         | '1'            | '07.09.2020 00:00:00' | '27,7325' | 'Bank UA' |
+				| 'UAH'           | 'USD'         | '1'            | '07.09.2020 00:00:00' | '0,0361' | 'Bank UA' |
 			And I select current line in "List" table
 			And I click "Save and close" button
 			Then "1C:Enterprise" window is opened
@@ -1512,7 +1512,7 @@ Scenario: 950420 create rules for information register (without recorder)
 			Given I open hyperlink 'e1cib/list/InformationRegister.CurrencyRates'
 			And I go to line in "List" table
 				| 'Currency from' | 'Currency to' | 'Multiplicity' | 'Period'              | 'Rate'   | 'Source'       |
-				| 'USD'           | 'EUR'         | '1'            | '21.06.2019 17:40:13' | '0,8900' | 'Forex Seling' |
+				| 'USD'           | 'EUR'         | '1'            | '21.06.2019 17:40:13' | '1,1235' | 'Forex Seling' |
 			And I select current line in "List" table
 			And I click "Save and close" button
 			Then user message window does not contain messages	

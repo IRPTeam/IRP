@@ -1904,7 +1904,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 		And I move to "Payments" tab
 		And "CurrenciesPaymentList" table contains lines
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'                | '20*'    | '1'            |
+		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '*'                | '20,00'    | '1'            |
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '100'    | '1'            |
 		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '200'    | '1'            |
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '200'    | '1'            |
@@ -3074,7 +3074,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			And I input "50,00" text in the field named "PaymentListCurrenciesAmount" of "PaymentListCurrencies" table
 			And I go to line in "PaymentListCurrencies" table
 			| 'Amount' | 'Currency' | 'Currency from' | 'Movement type'      | 'Multiplicity' | 'Rate presentation' | 'Type'      |
-			| '50,00'  | 'USD'      | 'TRY'           | 'Reporting currency' | '1'            | '4,7200'            | 'Reporting' |
+			| '50,00'  | 'USD'      | 'TRY'           | 'Reporting currency' | '1'            | '0,2119'            | 'Reporting' |
 	* Add one more line with different cureency
 		And I click Select button of "Account" field
 		And I go to line in "List" table
@@ -4245,7 +4245,7 @@ Scenario: _0154131  check currency form in  Bank Receipt
 			And I finish line editing in "CurrenciesPaymentList" table
 			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1750'            | '571,43'  | '2'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1750'            | '17,50'  | '2'            |
 		* Recount Amount when changing Multiplicity
 			And I input "6,0000" text in "Rate presentation" field of "CurrenciesPaymentList" table
 			And I finish line editing in "CurrenciesPaymentList" table

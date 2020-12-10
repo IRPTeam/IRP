@@ -307,6 +307,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_087", NStr("en = 'Parent can not be empty'", Lang));
 	Strings.Insert("Error_088", NStr("en = 'Basis unit has to be filled, if item filter used.'", Lang));
 	
+	Strings.Insert("Error_089", NStr("en = 'Description%1 ""%2"" is already in use.'", Lang));
+	
 	#EndRegion
 	
 	#Region InfoMessages

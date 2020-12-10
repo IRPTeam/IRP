@@ -32,7 +32,9 @@ Function GetOrCreateDataBaseStatusInfo() Export
 	EndIf;
 	
 	NewConnection.SelectedStyle = "Auto";
-	
+	For Each Lang In LocalizationReuse.AllDescription() Do
+		NewConnection[Lang] = ConnectionString;
+	EndDo;
 	Row = NewConnection.ConnectionSettings.Add();
 	Row.Computer = ComputerName;
 	Row.ConnectionString = ConnectionString;

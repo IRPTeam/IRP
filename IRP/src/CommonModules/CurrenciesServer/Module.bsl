@@ -396,8 +396,8 @@ Procedure CalculateRate(Object, DocumentAmount, MovementType, RowKeyFilter, Curr
 			Row.Rate = 0;
 			Continue;
 		EndIf;
-		Row.ReverseRate = Row.Amount * Row.Multiplicity / DocumentAmount;		
-		Row.Rate = DocumentAmount / (Row.Amount * Row.Multiplicity);
+		Row.Rate = Row.Amount * Row.Multiplicity / DocumentAmount;		
+		Row.ReverseRate = DocumentAmount / (Row.Amount * Row.Multiplicity);
 	EndDo;
 EndProcedure
 

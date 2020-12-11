@@ -9,6 +9,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		NewRow.ProcurementDate = Row.ProcurementDate;
 		NewRow.Use = True;
 	EndDo;
+	Items.TableOfInternalSupplyRequestQuantity.Format = ?(Parameters.ShowPrecision, "", "NFD=0");
 EndProcedure
 
 &AtClient

@@ -402,6 +402,7 @@ Function Strings(Lang) Export
 	Strings.Insert("I_3", NStr("en = 'Fill out the document'", Lang));
 	Strings.Insert("I_4", NStr("en = 'Find %1 rows in table by key %2'", Lang));
 	Strings.Insert("I_5", NStr("en = 'Not supported table'", Lang));
+	Strings.Insert("I_6", NStr("en = 'Ordered without ISR'", Lang));
 	#EndRegion
 	
 	#Region Exceptions

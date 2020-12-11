@@ -1529,7 +1529,7 @@ Scenario: 950425 check that Disable rule does not work
 		Given I open hyperlink 'e1cib/list/InformationRegister.CurrencyRates'
 		And I go to line in "List" table
 			| 'Currency from' | 'Currency to' | 'Multiplicity' | 'Period'              | 'Rate'    | 'Source'  |
-			| 'UAH'           | 'USD'         | '1'            | '07.09.2020 00:00:00' | '27,7325' | 'Bank UA' |
+			| 'UAH'           | 'USD'         | '1'            | '07.09.2020 00:00:00' | '0,0361' | 'Bank UA' |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		Then user message window does not contain messages	

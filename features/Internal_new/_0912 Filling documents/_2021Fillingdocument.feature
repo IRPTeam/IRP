@@ -1904,7 +1904,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 		And I move to "Payments" tab
 		And "CurrenciesPaymentList" table contains lines
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '*'                | '20,00'    | '1'            |
+		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '*'                | '20*'    | '1'            |
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '100'    | '1'            |
 		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '200'    | '1'            |
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '200'    | '1'            |
@@ -4247,17 +4247,17 @@ Scenario: _0154131  check currency form in  Bank Receipt
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1750'            | '17,50'  | '2'            |
 		* Recount Amount when changing Multiplicity
-			And I input "6,0000" text in "Rate presentation" field of "CurrenciesPaymentList" table
+			And I input "0,1667" text in "Rate presentation" field of "CurrenciesPaymentList" table
 			And I finish line editing in "CurrenciesPaymentList" table
 			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '16,67'  | '2'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1667'            | '16,67'  | '2'            |
 		* Recount Amount when changing payment amount
 			And I input "250,00" text in the field named "PaymentListAmount" of "PaymentList" table
 			And I finish line editing in "CurrenciesPaymentList" table
 			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '20,83'  | '2'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1667'            | '20,84'  | '2'            |
 		* Check the standard currency rate when adding the next line
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"

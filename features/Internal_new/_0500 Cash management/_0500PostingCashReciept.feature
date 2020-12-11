@@ -100,7 +100,7 @@ Scenario: _050001 create Cash receipt based on Sales invoice
 			| 'Ferron BP' | 'Basic Partner terms, TRY' | '4 350,00' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | ''                          |
 		And "CurrenciesPaymentList" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '744,86' | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '744,72' | '1'            |
 	* Check account selection and saving 
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
@@ -116,7 +116,7 @@ Scenario: _050001 create Cash receipt based on Sales invoice
 			| 'Ferron BP' | 'Basic Partner terms, TRY' | '4 350,00' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | ''                          |
 		And "CurrenciesPaymentList" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '744,86' | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '744,72' | '1'            |
 		Then the form attribute named "DocumentAmount" became equal to "4 350,00"
 	* Change of Partner term and basis document
 		And I select current line in "PaymentList" table

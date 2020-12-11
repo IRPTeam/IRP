@@ -232,9 +232,9 @@ Procedure CalculateAmount(Object, Form, AddInfo = Undefined) Export
 		DocumentAmount = Object.ItemList.Total("TotalAmount");
 		
 		If Row.ShowReverseRate Then
-			Row.Amount = (DocumentAmount * Row.ReverseRate) / Row.Multiplicity;
+			Row.Amount = (DocumentAmount / Row.ReverseRate) / Row.Multiplicity;
 		Else
-			Row.Amount = DocumentAmount / (Row.Rate * Row.Multiplicity);
+			Row.Amount = (DocumentAmount * Row.Rate) / Row.Multiplicity;
 		EndIf;
 	EndDo;
 EndProcedure
@@ -255,8 +255,8 @@ Procedure CalculateRate(Object, Form, DocumentAmount, MovementType, RowKeyFilter
 			Row.Rate = 0;
 			Continue;
 		EndIf;
-		Row.ReverseRate = Row.Amount * Row.Multiplicity / DocumentAmount;		
-		Row.Rate = DocumentAmount / (Row.Amount * Row.Multiplicity);
+		Row.Rate = Row.Amount * Row.Multiplicity / DocumentAmount;		
+		Row.ReverseRate = DocumentAmount / (Row.Amount * Row.Multiplicity);
 	EndDo;
 EndProcedure
 

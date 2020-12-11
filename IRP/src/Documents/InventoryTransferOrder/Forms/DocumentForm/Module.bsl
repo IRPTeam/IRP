@@ -201,4 +201,9 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	Notify("WriteProcurementOrder", , ThisObject);
+EndProcedure
+
 #EndRegion

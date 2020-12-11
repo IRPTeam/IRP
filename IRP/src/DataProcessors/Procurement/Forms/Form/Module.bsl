@@ -3,6 +3,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.Company = GetUserSetting("Procurement_Company");
 	ThisObject.Store = GetUserSetting("Procurement_Store");
+	UpdateCreatedDocuments();
 EndProcedure
 
 &AtServer
@@ -26,6 +27,15 @@ Procedure Refresh(Command)
 	RefreshAtServer();
 EndProcedure
 
+&AtClient
+Function CheckFillingSilent()
+	Return
+	ValueIsFilled(ThisObject.Company) And
+	ValueIsFilled(ThisObject.Store) And
+	ValueIsFilled(ThisObject.Period) And
+	ValueIsFilled(ThisObject.Periodicity);
+EndFunction
+
 &AtServer
 Procedure RefreshAtServer()
 	
@@ -48,9 +58,13 @@ Procedure RefreshAtServer()
 		EndOfDay(ThisObject.Period.EndDate), tmpDate - 1);
 		
 		NewRow.Name = "_" + StrReplace(String(New UUID()), "-" , "_");
-		NewRow.Title = Format(NewRow.StartDate, "DF=d.M.yy;") 
-		+ " - "
-		+ Format(NewRow.EndDate, "DF=d.M.yy;");
+		If BegOfDay(NewRow.StartDate) = BegOfDay(NewRow.EndDate) Then
+			NewRow.Title = Format(NewRow.StartDate, "DF=d.M.yy;") 
+		Else
+			NewRow.Title = Format(NewRow.StartDate, "DF=d.M.yy;") 
+			+ " - "
+			+ Format(NewRow.EndDate, "DF=d.M.yy;");
+		EndIf;
 	EndDo;
 	
 	CreateColumns_Analysis();
@@ -64,6 +78,7 @@ Procedure RefreshAtServer()
 		NewRowAnalysis.Picture = 3;
 		NewRowAnalysis.Item = Row.Item;
 		NewRowAnalysis.ItemKey = Row.ItemKey;
+		NewRowAnalysis.Unit = Row.Unit;
 		NewRowAnalysis.TotalProcurement = Row.QuantityProcurement;
 		NewRowAnalysis.Ordered  = Row.QuantityOrdered;
 		NewRowAnalysis.Shortage = Row.QuantityShortage;
@@ -78,45 +93,97 @@ EndProcedure
 
 &AtClient
 Procedure DetailsSelection(Item, RowSelected, Field, StandardProcessing)
-	StandardProcessing = False;
 	CurrentData = Items.Details.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	If Upper(Field.Name) = Upper("DetailsDocument") Then
-		If Not ValueIsFilled(CurrentData.Document) Then
-			Return;
-		EndIf;
-		OpenParameters = New Structure();
-		OpenParameters.Insert("Key", CurrentData.Document);
-		OpenForm(GetMetadataFullName(CurrentData.Document) + ".ObjectForm", OpenParameters);
-	EndIf;
+	OpenObjectForm(Field, "DetailsDocument", CurrentData.Document, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure AnalysisSelection(Item, RowSelected, Field, StandardProcessing)
-	StandardProcessing = False;
 	CurrentData = Items.Analysis.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	If Upper(Field.Name) = Upper("AnalysisItem") Then
-		If Not ValueIsFilled(CurrentData.Item) Then
+	OpenObjectForm(Field, "AnalysisItem", CurrentData.Item, StandardProcessing);
+	OpenObjectForm(Field, "AnalysisItemKey", CurrentData.ItemKey, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure OpenObjectForm(Field, FieldName, Ref, StandardProcessing)
+	If Upper(Field.Name) = Upper(FieldName) Then
+		StandardProcessing = False;
+		If Not ValueIsFilled(Ref) Then
 			Return;
 		EndIf;
 		OpenParameters = New Structure();
-		OpenParameters.Insert("Key", CurrentData.Item);
-		OpenForm(GetMetadataFullName(CurrentData.Item) + ".ObjectForm", OpenParameters);
+		OpenParameters.Insert("Key", Ref);
+		OpenForm(GetMetadataFullName(Ref) + ".ObjectForm", OpenParameters);
+	EndIf;	
+EndProcedure
+
+&AtClient
+Procedure ResultsItemListSelection(Item, RowSelected, Field, StandardProcessing)
+	CurrentData = Items.ResultsItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
 	EndIf;
-	
-	If Upper(Field.Name) = Upper("AnalysisItemKey") Then
-		If Not ValueIsFilled(CurrentData.ItemKey) Then
-			Return;
-		EndIf;
-		OpenParameters = New Structure();
-		OpenParameters.Insert("Key", CurrentData.ItemKey);
-		OpenForm(GetMetadataFullName(CurrentData.ItemKey) + ".ObjectForm", OpenParameters);
+	OpenObjectForm(Field, "ResultsItemListItem", CurrentData.Item, StandardProcessing);
+	OpenObjectForm(Field, "ResultsItemListItemKey", CurrentData.ItemKey, StandardProcessing);	
+EndProcedure
+
+&AtClient
+Procedure ResultsTableOfBalanceSelection(Item, RowSelected, Field, StandardProcessing)
+	CurrentData = Items.ResultsTableOfBalance.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
 	EndIf;
+	OpenObjectForm(Field, "ResultsTableOfBalanceStore", CurrentData.Store, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ResultsTableOfPurchaseSelection(Item, RowSelected, Field, StandardProcessing)
+	CurrentData = Items.ResultsTableOfPurchase.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	OpenObjectForm(Field, "ResultsTableOfPurchasePartner", CurrentData.Partner, StandardProcessing);
+	OpenObjectForm(Field, "ResultsTableOfPurchaseAgreement", CurrentData.Agreement, StandardProcessing);
+	OpenObjectForm(Field, "ResultsTableOfPurchasePriceType", CurrentData.PriceType, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ResultsTableOfInternalSupplyRequestSelection(Item, RowSelected, Field, StandardProcessing)
+	CurrentData = Items.ResultsTableOfInternalSupplyRequest.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	OpenObjectForm(Field, "ResultsTableOfInternalSupplyRequestInternalSupplyRequest", CurrentData.InternalSupplyRequest, 
+		StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure CreatedInventoryTransferOrdersSelection(Item, RowSelected, Field, StandardProcessing)
+	CurrentData = Items.CreatedInventoryTransferOrders.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	OpenObjectForm(Field, "CreatedInventoryTransferOrdersDocument", CurrentData.Document, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure RefreshCreatedDocuments(Command)
+	UpdateCreatedDocuments();	
+EndProcedure
+
+&AtClient
+Procedure CreatedPurchaseOrdersSelection(Item, RowSelected, Field, StandardProcessing)
+	CurrentData = Items.CreatedPurchaseOrders.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	OpenObjectForm(Field, "CreatedPurchaseOrdersDocument", CurrentData.Document, StandardProcessing);
 EndProcedure
 
 &AtServerNoContext
@@ -130,54 +197,542 @@ Procedure AnalyzeOrders(Command)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
-	AdditionalParameters = New Structure();
-	AdditionalParameters.Insert("Item", CurrentData.Item);
-	AdditionalParameters.Insert("ItemKey", CurrentData.ItemKey);
-	AdditionalParameters.Insert("Store", ThisObject.Store);
-	AdditionalParameters.Insert("Company", ThisObject.Company);
+
+	AdditionalParameters = CollectParametersForCreateOrdersForm(CurrentData.Item, CurrentData.ItemKey, CurrentData.Unit);
 	
 	OpenParameters = New Structure();
-	OpenParameters.Insert("ArrayOfSupplyRequest", GetArrayOfSupplyRequest());
-	
+	OpenParameters.Insert("ArrayOfSupplyRequest", GetArrayOfSupplyRequestFromDetails());
+		
 	Notify = New NotifyDescription("SelectInternalSupplyRequestEnd", ThisObject, AdditionalParameters);
 	OpenForm("DataProcessor.Procurement.Form.FormSelectInternalSupplyRequest",
 	OpenParameters, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
+
+&AtClient
+Procedure ChangeResults(Command)
+	CurrentData = Items.ResultsItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+
+	OpenParameters = CollectParametersForCreateOrdersForm(CurrentData.Item, CurrentData.ItemKey, CurrentData.Unit);
+	ArrayOfSupplyRequest = GetArrayOfSupplyRequestFromResultsTable(CurrentData.ItemKey);
+	OpenCreateOrdersForm(OpenParameters, ArrayOfSupplyRequest);	
+EndProcedure
+
+&AtClient
+Procedure DeleteResults(Command)
+	CurrentData = Items.ResultsItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	ClearResultsTable(CurrentData.ItemKey);
+	SetVisibleInResultTables();
+EndProcedure
+
+&AtClient
+Function CollectParametersForCreateOrdersForm(Item, ItemKey, Unit)
+	FormParameters = New Structure();
+	FormParameters.Insert("Item", Item);
+	FormParameters.Insert("ItemKey", ItemKey);
+	FormParameters.Insert("Unit", Unit);
+	FormParameters.Insert("Store", ThisObject.Store);
+	FormParameters.Insert("Company", ThisObject.Company);
+		
+	FormParameters.Insert("TableOfBalance", New Array());
+	FormParameters.Insert("TableOfPurchase", New Array());
+	FormParameters.Insert("TableOfInternalSupplyRequest", New Array());
+	
+	Filter = New Structure();
+	Filter.Insert("ItemKey", ItemKey);
+	For Each Row In ThisObject.ResultsTableOfBalance.FindRows(Filter) Do
+		NewRow = New Structure();
+		NewRow.Insert("Store", Row.Store);
+		NewRow.Insert("Quantity", Row.Quantity);
+		FormParameters.TableOfBalance.Add(NewRow);
+	EndDo;
+	
+	For Each Row In ThisObject.ResultsTableOfPurchase.FindRows(Filter) Do
+		NewRow = New Structure();
+		NewRow.Insert("Partner", Row.Partner);
+		NewRow.Insert("PriceType", Row.PriceType);
+		NewRow.Insert("Price", Row.Price);
+		NewRow.Insert("Quantity", Row.Quantity);
+		NewRow.Insert("DateOfRelevance", Row.DateOfRelevance);
+		NewRow.Insert("Agreement", Row.Agreement);
+		NewRow.Insert("DeliveryDate", Row.DeliveryDate);
+		FormParameters.TableOfPurchase.Add(NewRow);
+	EndDo;
+	
+	For Each Row In ThisObject.ResultsTableOfInternalSupplyRequest.FindRows(Filter) Do
+		NewRow = New Structure();
+		NewRow.Insert("InternalSupplyRequest", Row.InternalSupplyRequest);
+		NewRow.Insert("Quantity", Row.Quantity);
+		NewRow.Insert("Transfer", Row.Transfer);
+		NewRow.Insert("Purchase", Row.Purchase);
+		NewRow.Insert("ProcurementDate", Row.ProcurementDate);
+		NewRow.Insert("RowKey", Row.RowKey);
+		FormParameters.TableOfInternalSupplyRequest.Add(NewRow);
+	EndDo;	
+	Return FormParameters;
+EndFunction
+
+&AtClient
+Procedure OpenCreateOrdersForm(OpenParameters, ArrayOfSupplyRequest)
+	OpenParameters.Insert("ArrayOfSupplyRequest", ArrayOfSupplyRequest);
+	
+	Notify = New NotifyDescription("CreateOrdersEnd", ThisObject);
+	OpenForm("DataProcessor.Procurement.Form.FormCreateOrders",
+	OpenParameters, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);	
+EndProcedure	
 
 &AtClient 
 Procedure SelectInternalSupplyRequestEnd(Result, AdditionalParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
-	OpenParameters = New Structure();
-	OpenParameters.Insert("Store", AdditionalParameters.Store);
-	OpenParameters.Insert("Company", AdditionalParameters.Company);
-	OpenParameters.Insert("Item", AdditionalParameters.Item);
-	OpenParameters.Insert("ItemKey", AdditionalParameters.ItemKey);
-	OpenParameters.Insert("ArrayOfSupplyRequest", Result);
 	
-	Notify = New NotifyDescription("CreateOrdersEnd", ThisObject);
-	OpenForm("DataProcessor.Procurement.Form.FormCreateOrders",
-	OpenParameters, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);	
+	OpenCreateOrdersForm(AdditionalParameters, Result);	
+EndProcedure
+
+&AtClient
+Procedure ClearResultsTable(ItemKey)
+	Filter = New Structure();
+	Filter.Insert("ItemKey", ItemKey);
+	
+	ArrayOfResultsItemList = ThisObject.ResultsItemList.FindRows(Filter);
+	For Each ItemOfArray In ArrayOfResultsItemList Do
+		ThisObject.ResultsItemList.Delete(ItemOfArray);
+	EndDo;	
+	
+	ArrayOfResultsTableOfBalance = ThisObject.ResultsTableOfBalance.FindRows(Filter);
+	For Each ItemOfArray In ArrayOfResultsTableOfBalance Do
+		ThisObject.ResultsTableOfBalance.Delete(ItemOfArray);
+	EndDo;	
+	
+	ArrayOfResultsTableOfPurchase = ThisObject.ResultsTableOfPurchase.FindRows(Filter);
+	For Each ItemOfArray In ArrayOfResultsTableOfPurchase Do
+		ThisObject.ResultsTableOfPurchase.Delete(ItemOfArray);
+	EndDo;	
+	
+	ArrayOfResultsTableOfInternalSupplyRequest = ThisObject.ResultsTableOfInternalSupplyRequest.FindRows(Filter);
+	For Each ItemOfArray In ArrayOfResultsTableOfInternalSupplyRequest Do
+		ThisObject.ResultsTableOfInternalSupplyRequest.Delete(ItemOfArray);
+	EndDo;
 EndProcedure
 
 &AtClient 
 Procedure CreateOrdersEnd(Result, AdditionalParameters) Export
 	If Result = Undefined Then
 		Return;
-	EndIf;
-	For Each Doc In Result.PurchaseOrders Do
+	EndIf;		
+	
+	ClearResultsTable(Result.ItemKey);
+	
+	NewRow = ThisObject.ResultsItemList.Add();
+	NewRow.Picture = 3;
+	NewRow.Item = Result.Item;
+	NewRow.ItemKey = Result.ItemKey;
+	NewRow.Unit = Result.Unit;
+	
+	For Each Row In Result.TableOfBalance Do
+		FillPropertyValues(ThisObject.ResultsTableOfBalance.Add(), Row);
+	EndDo;
+	
+	For Each Row In Result.TableOfPurchase Do
+		FillPropertyValues(ThisObject.ResultsTableOfPurchase.Add(), Row);
+	EndDo;
+		
+	For Each Row In Result.TableOfInternalSupplyRequest Do
+		FillPropertyValues(ThisObject.ResultsTableOfInternalSupplyRequest.Add(), Row);
+	EndDo;
+	SetVisibleInResultTables();	
+EndProcedure
+
+&AtClient
+Procedure SetVisibleInResultTables()
+	CurrentData = Items.ResultsItemList.CurrentData;
+	For Each Row In ThisObject.ResultsTableOfBalance Do
+		Row.Visible = CurrentData <> Undefined And CurrentData.ItemKey = Row.ItemKey;
+	EndDo;
+	Items.ResultsTableOfBalance.RowFilter = New FixedStructure("Visible", True);
+	
+	For Each Row In ThisObject.ResultsTableOfPurchase Do
+		Row.Visible = CurrentData <> Undefined And CurrentData.ItemKey = Row.ItemKey;
+	EndDo;
+	Items.ResultsTableOfPurchase.RowFilter = New FixedStructure("Visible", True);
+	
+	For Each Row In ThisObject.ResultsTableOfInternalSupplyRequest Do
+		Row.Visible = CurrentData <> Undefined And CurrentData.ItemKey = Row.ItemKey;
+	EndDo;
+	Items.ResultsTableOfInternalSupplyRequest.RowFilter = New FixedStructure("Visible", True);
+EndProcedure
+
+&AtClient
+Procedure CreateDocuments(Command)
+	CreatedDocuments = CreateDocumentsAtServer();
+	For Each Doc In CreatedDocuments.PurchaseOrders Do
+		DocForm = GetForm("Document.PurchaseOrder.ObjectForm", New Structure("Key", Doc));
+		DocPurchaseOrderClient.CompanyOnChange(DocForm.Object, DocForm, DocForm.Items.Company);
+		DocForm.Write();	
+	EndDo;
+	
+	For Each Doc In CreatedDocuments.TransferOrders Do
+		DocForm = GetForm("Document.InventoryTransferOrder.ObjectForm", New Structure("Key", Doc));
+		DocInventoryTransferOrderClient.CompanyOnChange(DocForm.Object, DocForm, DocForm.Items.Company);
+		DocForm.Write();	
+	EndDo;
+	
+	For Each Doc In CreatedDocuments.PurchaseOrders Do
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_020, Doc));
 	EndDo;
 	
-	For Each Doc In Result.TransferOrders Do
+	For Each Doc In CreatedDocuments.TransferOrders Do
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_020, Doc));
 	EndDo;
+	
+	If CreatedDocuments.PurchaseOrders.Count() Or CreatedDocuments.TransferOrders.Count() Then
+		Items.GroupMainPages.CurrentPage = Items.GroupDocuments;
+	EndIf;
 EndProcedure
 
 &AtServer
-Function GetArrayOfSupplyRequest()
+Function CreateDocumentsAtServer()
+	CreatedDocuments = New Structure();
+	CreatedDocuments.Insert("TransferOrders", New Array());
+	CreatedDocuments.Insert("PurchaseOrders", New Array());
+	
+	TransferDataTable = New ValueTable();
+	TransferDataTable.Columns.Add("StoreSender");
+	TransferDataTable.Columns.Add("InternalSupplyRequest");
+	TransferDataTable.Columns.Add("RowKey");
+	TransferDataTable.Columns.Add("ItemKey");
+	TransferDataTable.Columns.Add("Quantity");
+
+	For Each Row In ThisObject.ResultsItemList Do
+		DataTable = CollectDataFor_InventoryTransferOrder(Row.ItemKey);
+		For Each RowData In DataTable Do
+			FillPropertyValues(TransferDataTable.Add(), RowData);
+		EndDo;
+	EndDo;
+	
+	If TransferDataTable.Count() Then
+		CreatedDocuments.TransferOrders = Create_InventoryTransferOrder(TransferDataTable);
+	EndIf;
+	
+	PurchaseDataTable = New ValueTable();
+	PurchaseDataTable.Columns.Add("Partner");
+	PurchaseDataTable.Columns.Add("Agreement");
+	PurchaseDataTable.Columns.Add("PriceType");
+	PurchaseDataTable.Columns.Add("Price");
+	PurchaseDataTable.Columns.Add("DeliveryDate");
+	PurchaseDataTable.Columns.Add("InternalSupplyRequest");
+	PurchaseDataTable.Columns.Add("RowKey");
+	PurchaseDataTable.Columns.Add("ItemKey");
+	PurchaseDataTable.Columns.Add("Quantity");
+	
+	For Each Row In ThisObject.ResultsItemList Do	
+		DataTable = CollectDataFor_PurchaseOrder(Row.ItemKey);
+		For Each RowData In DataTable Do
+			FillPropertyValues(PurchaseDataTable.Add(), RowData);
+		EndDo;
+	EndDo;
+	
+	If PurchaseDataTable.Count() Then
+		CreatedDocuments.PurchaseOrders = Create_PurchaseOrder(PurchaseDataTable);
+	EndIf;
+	
+	For Each Doc In CreatedDocuments.PurchaseOrders Do
+		RecordManager = InformationRegisters.CreatedProcurementOrders.CreateRecordManager();
+		RecordManager.Order = Doc;
+		RecordManager.Write();
+	EndDo;
+	
+	For Each Doc In CreatedDocuments.TransferOrders Do
+		RecordManager = InformationRegisters.CreatedProcurementOrders.CreateRecordManager();
+		RecordManager.Order = Doc;
+		RecordManager.Write();
+	EndDo;
+		
+	ThisObject.ResultsItemList.Clear();
+	ThisObject.ResultsTableOfBalance.Clear();
+	ThisObject.ResultsTableOfPurchase.Clear();
+	ThisObject.ResultsTableOfInternalSupplyRequest.Clear();
+	
+	UpdateCreatedDocuments();
+	
+	Return CreatedDocuments;
+EndFunction
+	
+&AtServer
+Procedure UpdateCreatedDocuments()	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	CreatedProcurementOrders.Order AS Document,
+	|	CASE
+	|		WHEN CAST(CreatedProcurementOrders.Order AS Document.InventoryTransferOrder).DeletionMark
+	|			THEN 1
+	|		WHEN CAST(CreatedProcurementOrders.Order AS Document.InventoryTransferOrder).Posted
+	|			THEN 0
+	|		ELSE 2
+	|	END AS Picture,
+	|	CAST(CreatedProcurementOrders.Order AS Document.InventoryTransferOrder).Status AS Status,
+	|	CAST(CreatedProcurementOrders.Order AS Document.InventoryTransferOrder).StoreSender AS StoreSender
+	|FROM
+	|	InformationRegister.CreatedProcurementOrders AS CreatedProcurementOrders
+	|WHERE
+	|	CreatedProcurementOrders.Order REFS Document.InventoryTransferOrder
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	CreatedProcurementOrders.Order AS Document,
+	|	CASE
+	|		WHEN CAST(CreatedProcurementOrders.Order AS Document.PurchaseOrder).DeletionMark
+	|			THEN 1
+	|		WHEN CAST(CreatedProcurementOrders.Order AS Document.PurchaseOrder).Posted
+	|			THEN 0
+	|		ELSE 2
+	|	END AS Picture,
+	|	CAST(CreatedProcurementOrders.Order AS Document.PurchaseOrder).Status AS Status,
+	|	CAST(CreatedProcurementOrders.Order AS Document.PurchaseOrder).Partner AS Partner
+	|FROM
+	|	InformationRegister.CreatedProcurementOrders AS CreatedProcurementOrders
+	|WHERE
+	|	CreatedProcurementOrders.Order REFS Document.PurchaseOrder";
+	QueryResults = Query.ExecuteBatch();
+	ThisObject.CreatedInventoryTransferOrders.Load(QueryResults[0].Unload());
+	ThisObject.CreatedPurchaseOrders.Load(QueryResults[1].Unload());
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If Upper(EventName) = Upper("WriteProcurementOrder") Then
+		UpdateCreatedDocuments();
+		If CheckFillingSilent() Then
+			RefreshAtServer();
+		EndIf;
+	EndIf;
+EndProcedure
+
+&AtServer
+Function CollectDataFor_InventoryTransferOrder(ItemKey)
+	DataTable = New ValueTable();
+	DataTable.Columns.Add("StoreSender");
+	DataTable.Columns.Add("InternalSupplyRequest");
+	DataTable.Columns.Add("RowKey");
+	DataTable.Columns.Add("ItemKey");
+	DataTable.Columns.Add("Quantity");
+	
+	Filter = New Structure("ItemKey", ItemKey);
+	
+	SupplyRequests = ThisObject.ResultsTableOfInternalSupplyRequest.Unload(Filter);
+	TableOfBalance = ThisObject.ResultsTableOfBalance.Unload(Filter); 
+	
+	For Each Row In TableOfBalance Do
+		NeededQuantity = Row.Quantity;
+		For Each RowSupplyRequest In SupplyRequests Do
+			If Not ValueIsFilled(NeededQuantity) Or Not ValueIsFilled(RowSupplyRequest.Transfer) Then
+				Continue;
+			EndIf;
+			NewRow = DataTable.Add();
+			NewRow.StoreSender = Row.Store;
+			NewRow.InternalSupplyRequest = RowSupplyRequest.InternalSupplyRequest;
+			NewRow.RowKey = RowSupplyRequest.RowKey;
+			NewRow.Quantity = Min(NeededQuantity, RowSupplyRequest.Transfer);
+			NewRow.ItemKey = ItemKey;
+			RowSupplyRequest.Transfer = RowSupplyRequest.Transfer - NewRow.Quantity;
+			NeededQuantity =  NeededQuantity - NewRow.Quantity;
+		EndDo;
+	EndDo;
+	
+	DataTable.GroupBy("StoreSender, InternalSupplyRequest, RowKey, ItemKey", "Quantity");
+	
+	For Each Row In TableOfBalance Do
+		If Not ValueIsFilled(Row.Quantity) Then
+			Continue;
+		EndIf;
+		
+		ArrayOfRows = DataTable.FindRows(New Structure("StoreSender", Row.Store));
+		TotalByStore = 0;
+		For Each ItemOfRow In ArrayOfRows Do
+			TotalByStore = TotalByStore + ItemOfRow.Quantity;
+		EndDo;
+		If TotalByStore < Row.Quantity Then
+			NewRow = DataTable.Add();
+			NewRow.StoreSender = Row.Store;
+			NewRow.RowKey = New UUID();
+			NewRow.ItemKey = ItemKey;
+			NewRow.Quantity = Row.Quantity - TotalByStore;
+		EndIf;
+	EndDo;
+	
+	Return DataTable;
+EndFunction
+
+&AtServer
+Function Create_InventoryTransferOrder(DataTable)
+	ArrayOfTransferOrders = New Array();
+	
+	DataTableFilter = DataTable.Copy();
+	DataTableFilter.GroupBy("StoreSender");
+	For Each RowFilter In DataTableFilter Do
+		
+		NewTransferOrder = Documents.InventoryTransferOrder.CreateDocument();
+		NewTransferOrder.Date = CurrentSessionDate();
+		NewTransferOrder.Company = ThisObject.Company;
+		NewTransferOrder.StoreReceiver = ThisObject.Store;
+		NewTransferOrder.StoreSender = RowFilter.StoreSender;
+		
+		Filter = New Structure();
+		Filter.Insert("StoreSender", RowFilter.StoreSender);
+		ArrayOfRows = DataTable.FindRows(Filter);
+		For Each ItemOfRow In ArrayOfRows Do
+			NewRow = NewTransferOrder.ItemList.Add();
+			NewRow.Key = ItemOfRow.RowKey;
+			NewRow.ItemKey = ItemOfRow.ItemKey;
+			
+			UnitInfo = GetItemInfo.ItemUnitInfo(NewRow.ItemKey);
+			NewRow.Unit = UnitInfo.Unit;
+			
+			NewRow.Quantity = ItemOfRow.Quantity;
+			NewRow.InternalSupplyRequest = ItemOfRow.InternalSupplyRequest;
+		EndDo;
+		
+		NewTransferOrder.Fill(Undefined);
+		NewTransferOrder.Write(DocumentWriteMode.Write);	
+		ArrayOfTransferOrders.Add(NewTransferOrder.Ref);
+	EndDo;
+	Return ArrayOfTransferOrders;
+EndFunction
+
+&AtServer
+Function CollectDataFor_PurchaseOrder(ItemKey)
+	DataTable = New ValueTable();
+	DataTable.Columns.Add("Partner");
+	DataTable.Columns.Add("Agreement");
+	DataTable.Columns.Add("PriceType");
+	DataTable.Columns.Add("Price");
+	DataTable.Columns.Add("DeliveryDate");
+	DataTable.Columns.Add("InternalSupplyRequest");
+	DataTable.Columns.Add("RowKey");
+	DataTable.Columns.Add("ItemKey");
+	DataTable.Columns.Add("Quantity");
+	
+	Filter = New Structure("ItemKey", ItemKey);
+	
+	SupplyRequests = ThisObject.ResultsTableOfInternalSupplyRequest.Unload(Filter);
+	TableOfPurchase = ThisObject.ResultsTableOfPurchase.Unload(Filter);
+	
+	For Each Row In TableOfPurchase Do
+		NeededQuantity = Row.Quantity;
+		For Each RowSupplyRequest In SupplyRequests Do
+			If Not ValueIsFilled(NeededQuantity) Or Not ValueIsFilled(RowSupplyRequest.Purchase) Then
+				Continue;
+			EndIf;
+			NewRow = DataTable.Add();
+			NewRow.Partner = Row.Partner;
+			NewRow.Agreement = Row.Agreement;
+			NewRow.PriceType = Row.PriceType;
+			NewRow.Price = Row.Price;
+			NewRow.DeliveryDate = Row.DeliveryDate;
+			NewRow.InternalSupplyRequest = RowSupplyRequest.InternalSupplyRequest;
+			NewRow.RowKey = RowSupplyRequest.RowKey;
+			NewRow.ItemKey = ItemKey;
+			NewRow.Quantity = Min(NeededQuantity, RowSupplyRequest.Purchase);
+			RowSupplyRequest.Purchase = RowSupplyRequest.Purchase - NewRow.Quantity;
+			NeededQuantity =  NeededQuantity - NewRow.Quantity;
+		EndDo;
+	EndDo;
+	
+	DataTable.GroupBy("Partner, Agreement, PriceType, Price, DeliveryDate, InternalSupplyRequest, RowKey, ItemKey", 
+			"Quantity");
+	
+	For Each Row In TableOfPurchase Do
+		If Not ValueIsFilled(Row.Quantity) Then
+			Continue;
+		EndIf;
+		Filter = New Structure();
+		FIlter.Insert("Partner", Row.Partner);
+		FIlter.Insert("Agreement", Row.Agreement);
+		FIlter.Insert("PriceType", Row.PriceType);
+		FIlter.Insert("Price", Row.Price);
+		FIlter.Insert("DeliveryDate", Row.DeliveryDate);
+		
+		ArrayOfRows = DataTable.FindRows(Filter);
+		TotalQ = 0;
+		For Each ItemOfRow In ArrayOfRows Do
+			TotalQ = TotalQ + ItemOfRow.Quantity;
+		EndDo;
+		If TotalQ < Row.Quantity Then
+			NewRow = DataTable.Add();
+			NewRow.Partner = Row.Partner;
+			NewRow.Agreement = Row.Agreement;
+			NewRow.PriceType = Row.PriceType;
+			NewRow.Price = Row.Price;
+			NewRow.DeliveryDate = Row.DeliveryDate;
+			NewRow.RowKey = New UUID();
+			NewRow.ItemKey = ItemKey;
+			NewRow.Quantity = Row.Quantity - TotalQ;
+		EndIf;
+	EndDo;
+	Return DataTable;
+EndFunction
+
+&AtServer
+Function Create_PurchaseOrder(DataTable)	
+	ArrayOfPurchaseOrders = New Array();
+	
+	DataTableFilter = DataTable.Copy();
+	DataTableFilter.GroupBy("Partner, Agreement");
+	For Each RowFilter In DataTableFilter Do
+		AgreementInfo = CatAgreementsServer.GetAgreementInfo(RowFilter.Agreement);
+		
+		NewPurchaseOrder = Documents.PurchaseOrder.CreateDocument();
+		NewPurchaseOrder.Date = CurrentSessionDate();
+		NewPurchaseOrder.Company = ThisObject.Company;
+		NewPurchaseOrder.Agreement = RowFilter.Agreement;		
+		NewPurchaseOrder.Currency = AgreementInfo.Currency;
+		NewPurchaseOrder.Partner = RowFilter.Partner;
+		NewPurchaseOrder.PriceIncludeTax = AgreementInfo.PriceIncludeTax;
+		NewPurchaseOrder.LegalName = DocumentsServer.GetLegalNameByPartner(NewPurchaseOrder.Partner, 
+		                                                                   NewPurchaseOrder.LegalName);
+		
+		Filter = New Structure();
+		Filter.Insert("Partner", RowFilter.Partner);
+		Filter.Insert("Agreement", RowFilter.Agreement);
+		ArrayOfRows = DataTable.FindRows(Filter);
+		For Each ItemOfRow In ArrayOfRows Do
+			NewRow = NewPurchaseOrder.ItemList.Add();
+			NewRow.Key = ItemOfRow.RowKey;
+			NewRow.ItemKey = ItemOfRow.ItemKey;
+			NewRow.Store = ThisObject.Store;
+			
+			UnitInfo = GetItemInfo.ItemUnitInfo(NewRow.ItemKey);
+			NewRow.Unit = UnitInfo.Unit;
+			
+			NewRow.Quantity = ItemOfRow.Quantity;
+			NewRow.PurchaseBasis = ItemOfRow.InternalSupplyRequest;
+			NewRow.Price = ItemOfRow.Price;
+			NewRow.PriceType = ItemOfRow.PriceType;
+			NewRow.DeliveryDate = ItemOfRow.DeliveryDate;
+		EndDo;
+		
+		NewPurchaseOrder.Fill(Undefined);
+		NewPurchaseOrder.Write(DocumentWriteMode.Write);	
+		ArrayOfPurchaseOrders.Add(NewPurchaseOrder.Ref);
+	EndDo;
+	Return ArrayOfPurchaseOrders;
+EndFunction
+
+&AtClient
+Procedure ResultsItemListOnActivateRow(Item)
+	SetVisibleInResultTables();
+EndProcedure
+
+&AtServer
+Function GetArrayOfSupplyRequestFromDetails()
 	ArrayOfSupplyRequest = New Array();
 	For Each Row In ThisObject.Details.GetItems() Do
 		If Not ValueIsFilled(Row.TotalQuantity) Then
@@ -189,6 +744,25 @@ Function GetArrayOfSupplyRequest()
 		NewRow.Insert("Quantity", Row.TotalQuantity);
 		NewRow.Insert("ProcurementDate", ?(ValueIsFilled(Row.Document.ProcurementDate), 
 		Row.Document.ProcurementDate, Row.Document.Date));
+		ArrayOfSupplyRequest.Add(NewRow);
+	EndDo;
+	Return ArrayOfSupplyRequest;
+EndFunction
+
+&AtServer
+Function GetArrayOfSupplyRequestFromResultsTable(ItemKey)
+	ArrayOfSupplyRequest = New Array();
+	Filter = New Structure("ItemKey", ItemKey);
+	For Each Row In ThisObject.ResultsTableOfInternalSupplyRequest.FindRows(Filter) Do
+		If Not ValueIsFilled(Row.Quantity) Then
+			Continue;
+		EndIf;
+		NewRow = New Structure();
+		NewRow.Insert("InternalSupplyRequest", Row.InternalSupplyRequest);
+		NewRow.Insert("RowKey", Row.RowKey);
+		NewRow.Insert("Quantity", Row.Quantity);
+		NewRow.Insert("ProcurementDate", ?(ValueIsFilled(Row.InternalSupplyRequest.ProcurementDate), 
+		Row.InternalSupplyRequest.ProcurementDate, Row.InternalSupplyRequest.Date));
 		ArrayOfSupplyRequest.Add(NewRow);
 	EndDo;
 	Return ArrayOfSupplyRequest;
@@ -346,6 +920,11 @@ Function  GetTableOfSupplyRequests(Store, StartDate, EndDate)
 	|	tmpOrderBalance.Store AS Store,
 	|	tmpOrderBalance.ItemKey AS ItemKey,
 	|	tmpOrderBalance.Item AS Item,
+	|	CASE
+	|		WHEN tmpOrderBalance.ItemKey.Unit = VALUE(Catalog.Units.EmptyRef)
+	|			THEN tmpOrderBalance.Item.Unit
+	|		ELSE tmpOrderBalance.ItemKey.Unit
+	|	END AS Unit,
 	|	tmpOrderBalance.QuantityProcurement AS QuantityProcurement,
 	|	tmpOrderBalance.QuantityOrdered AS QuantityOrdered,
 	|	tmpOrderBalance.QuantityProcurement - tmpOrderBalance.QuantityOrdered -

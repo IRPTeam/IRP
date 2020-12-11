@@ -609,7 +609,7 @@ Scenario: _0154101 check filling in and refilling Sales order
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '303,08' | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '303,02' | '1'            |
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price includes tax
 				And I move to "Item list" tab
@@ -919,7 +919,7 @@ Scenario: _0154102 check filling in and refilling Sales invoice
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'         | '5,8400'            | '303,08' | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'         | '0,1712'            | '303,02' | '1'            |
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price includes tax
 				And I move to "Item list" tab
@@ -1033,7 +1033,7 @@ Scenario: _0154103 check Sales order when changing date
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
-		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,0000'            | '200,00' | '1'            |
+		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'            | '200,00' | '1'            |
 
 Scenario: _0154104 check Sales invoice when changing date
 	* Open the Sales invoice creation form
@@ -1099,7 +1099,7 @@ Scenario: _0154104 check Sales invoice when changing date
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
-		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,0000'            | '200,00' | '1'            |
+		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'            | '200,00' | '1'            |
 
 Scenario: _0154105 check filling in and refilling Purchase order
 	* Open the Purchase order creation form
@@ -1367,7 +1367,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'  | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '357,64'  | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '357,57'  | '1'            |
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price includes tax
 				And I move to "Other" tab
@@ -1680,7 +1680,7 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'  | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '357,64'  | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '357,57'  | '1'            |
 		* Check tax recalculation when choosing a tax rate manually
 			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |
@@ -1896,15 +1896,15 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 		And I finish line editing in "PaymentList" table
 		And "CurrenciesPaymentList" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'            | '17,12'  | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'            | '34,25'  | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '17,12'  | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
 	* Check the recalculation at the rate in case of date change
 		And I move to "Other" tab
 		And I input "01.11.2018  0:00:00" text in "Date" field
 		And I move to "Payments" tab
 		And "CurrenciesPaymentList" table contains lines
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '20*'    | '1'            |
+		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '*'                | '20*'    | '1'            |
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '100'    | '1'            |
 		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '200'    | '1'            |
 		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '200'    | '1'            |
@@ -2101,8 +2101,8 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 		And I finish line editing in "PaymentList" table
 		And "CurrenciesPaymentList" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'            | '17,12'  | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'            | '34,25'  | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '17,12'  | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
 	* Check the recalculation at the rate in case of date change
 		And I move to "Other" tab
 		And I input "01.11.2018  0:00:00" text in "Date" field
@@ -2112,13 +2112,13 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 		| '200,00' | 'Nicoletta' | 'Company Nicoletta' |
 		And "CurrenciesPaymentList" table contains lines
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '40,00'  | '1'            |
+		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'                | '40,00'  | '1'            |
 		And I go to line in "PaymentList" table
 		| 'Amount' | 'Partner'   | 'Payer'             |
 		| '100,00' | 'Kalipso' | 'Company Kalipso' |
 		And "CurrenciesPaymentList" table contains lines
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '20,00'  | '1'            |
+		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'                | '20,00'  | '1'            |
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
@@ -2329,13 +2329,13 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 			| 'Ferron BP' |
 		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'             | '17,12'  | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'             | '17,12'  | '1'            |
 		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Veritas' |
 		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'            | '34,25'  | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
 	* Check the recalculation at the rate in case of date change
 		And I move to "Other" tab
 		And I input "01.11.2018  0:00:00" text in "Date" field
@@ -2345,13 +2345,13 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 			| 'Ferron BP' |
 		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '20,00'  | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'                | '20,00'  | '1'            |
 		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Veritas' |
 		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '40*'     | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'                | '40*'     | '1'            |
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payee'             |
@@ -2549,13 +2549,13 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 			| 'Ferron BP' |
 		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'             | '17,12'  | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'             | '17,12'  | '1'            |
 		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Veritas' |
 		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,84*'            | '34,25'  | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
 	* Check the recalculation at the rate in case of date change
 		And I move to "Other" tab
 		And I input "01.11.2018  0:00:00" text in "Date" field
@@ -2565,13 +2565,13 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 			| 'Ferron BP' |
 		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '20,00'  | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'                | '20,00'  | '1'            |
 		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Veritas' |
 		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5*'                | '40*'     | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'                | '40*'     | '1'            |
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payee'             |
@@ -2773,10 +2773,10 @@ Scenario: _0154115 check filling in and refilling Cash transfer order
 			And I move to the next attribute
 			And "ObjectCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'            | '564,97' | '1'            |
+			| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '5,6275'            | '562,75' | '1'            |
 			| 'Reporting currency' | 'Reporting' | 'USD'           | 'USD'      | '1'                 | '100'    | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '584'    | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '100,00' | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '99,98' | '1'            |
 
 Scenario: _01541151 check that the amount sent and received in Cash transfer order is the same
 	* Check cash transfer between two cash account
@@ -2985,7 +2985,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 	* Check the currency form connection
 		And "PaymentListCurrencies" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '37,77'  | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '37,76'  | '1'            |
 	* Add one more line
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
@@ -3068,13 +3068,13 @@ Scenario: _0154116 check filling in and refilling Cash expence
 		* Exchange rate change in the form by currency
 			And I go to line in "PaymentListCurrencies" table
 			| 'Amount' | 'Currency' | 'Currency from' | 'Movement type'      | 'Multiplicity' | 'Rate presentation' | 'Type'      |
-			| '40,41'  | 'USD'      | 'TRY'           | 'Reporting currency' | '1'            | '5,8400'            | 'Reporting' |
+			| '40,40'  | 'USD'      | 'TRY'           | 'Reporting currency' | '1'            | '0,1712'            | 'Reporting' |
 			And I activate field named "PaymentListCurrenciesAmount" in "PaymentListCurrencies" table
 			And I select current line in "PaymentListCurrencies" table
 			And I input "50,00" text in the field named "PaymentListCurrenciesAmount" of "PaymentListCurrencies" table
 			And I go to line in "PaymentListCurrencies" table
 			| 'Amount' | 'Currency' | 'Currency from' | 'Movement type'      | 'Multiplicity' | 'Rate presentation' | 'Type'      |
-			| '50,00'  | 'USD'      | 'TRY'           | 'Reporting currency' | '1'            | '4,7200'            | 'Reporting' |
+			| '50,00'  | 'USD'      | 'TRY'           | 'Reporting currency' | '1'            | '0,2119'            | 'Reporting' |
 	* Add one more line with different cureency
 		And I click Select button of "Account" field
 		And I go to line in "List" table
@@ -3110,7 +3110,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 	* Check the addition of a line to the form by currency
 		And I go to line in "PaymentListCurrencies" table
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'             | '564,97' | '1'            |
+		| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '5,6275'             | '562,75' | '1'            |
 	* Change of currency on the first line and check of form on currencies
 		And I go to line in "PaymentList" table
 			| 'Net amount' | 'Business unit'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
@@ -3125,7 +3125,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			| '200,00'     | 'Front office'       | 'Software'     | 'USD'      | '18%' | '36,00'      | '236,00'       |
 		And I go to line in "PaymentListCurrencies" table
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-			| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'            | '1 333,33' | '1'            |
+			| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '5,6275'            | '1 328,09' | '1'            |
 	* Manual correction of tax rate and check of tax calculations
 		And I go to line in "PaymentList" table
 			| 'Business unit' | 'Currency' | 'Expense type' | 'Net amount' | 'Tax amount' | 'Total amount' | 'VAT' |
@@ -3222,7 +3222,7 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 	* Check the currency form connection
 		And "PaymentListCurrencies" table contains lines
 		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '37,77'  | '1'            |
+		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '37,76'  | '1'            |
 	* Add one more line
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
@@ -4233,31 +4233,31 @@ Scenario: _0154131  check currency form in  Bank Receipt
 		* Basic recalculation at the rate
 			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '34,25'  | '1'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
 		* Recalculation of Rate presentation when changing Amount
 			And I input "35,00" text in the field named "CurrenciesPaymentListAmount" of "CurrenciesPaymentList" table
 			And I finish line editing in "CurrenciesPaymentList" table
 			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,7143'            | '35,00'  | '1'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1750'            | '35,00'  | '1'            |
 		* Recount Amount when changing Multiplicity
 			And I input "2" text in "Multiplicity" field of "CurrenciesPaymentList" table
 			And I finish line editing in "CurrenciesPaymentList" table
 			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,7143'            | '17,50'  | '2'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1750'            | '17,50'  | '2'            |
 		* Recount Amount when changing Multiplicity
-			And I input "6,0000" text in "Rate presentation" field of "CurrenciesPaymentList" table
+			And I input "0,1667" text in "Rate presentation" field of "CurrenciesPaymentList" table
 			And I finish line editing in "CurrenciesPaymentList" table
 			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '16,67'  | '2'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1667'            | '16,67'  | '2'            |
 		* Recount Amount when changing payment amount
 			And I input "250,00" text in the field named "PaymentListAmount" of "PaymentList" table
 			And I finish line editing in "CurrenciesPaymentList" table
 			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '20,83'  | '2'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1667'            | '20,84'  | '2'            |
 		* Check the standard currency rate when adding the next line
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
@@ -4274,7 +4274,7 @@ Scenario: _0154131  check currency form in  Bank Receipt
 			And I input "200,00" text in "Amount" field of "PaymentList" table
 			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '34,25'  | '1'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
 		* Recount when currency changes
 			And I click Select button of "Account" field
 			And I go to line in "List" table
@@ -4283,10 +4283,10 @@ Scenario: _0154131  check currency form in  Bank Receipt
 			And I select current line in "List" table
 			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-				| 'TRY'            | 'Partner term' | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
+				| 'TRY'            | 'Partner term' | 'USD'           | 'TRY'      | '5,6275'             | '1 125,50' | '1'            |
 			And I go to line in "CurrenciesPaymentList" table
 				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-				| 'TRY'            | 'Partner term' | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
+				| 'TRY'            | 'Partner term' | 'USD'           | 'TRY'      | '5,6275'             | '1 125,50' | '1'            |
 		# * Reverse rate display check
 		# 	Given double click at "reverse" picture
 		# 	And I go to line in "PaymentList" table
@@ -4328,31 +4328,31 @@ Scenario: _0154132  check currency form in Incoming payment order
 		* Basic recalculation at the rate
 			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '34,25'  | '1'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
 		* Recalculation of Rate presentation when changing Amount
 			And I input "35,00" text in the field named "PaymentListCurrenciesAmount" of "PaymentListCurrencies" table
 			And I finish line editing in "PaymentListCurrencies" table
 			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,7143'            | '35,00'  | '1'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1750'            | '35,00'  | '1'            |
 		* Recount Amount when changing Multiplicity
 			And I input "2" text in "Multiplicity" field of "PaymentListCurrencies" table
 			And I finish line editing in "PaymentListCurrencies" table
 			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,7143'            | '17,50'  | '2'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1750'            | '17,50'  | '2'            |
 		* Recount Amount when changing Multiplicity Rate presentation
-			And I input "6,0000" text in "Rate presentation" field of "PaymentListCurrencies" table
+			And I input "0,2000" text in "Rate presentation" field of "PaymentListCurrencies" table
 			And I finish line editing in "PaymentListCurrencies" table
 			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '16,67'  | '2'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'            | '20,00'  | '2'            |
 		* Recount Amount when changing payment amount
 			And I input "250,00" text in the field named "PaymentListAmount" of "PaymentList" table
 			And I finish line editing in "PaymentListCurrencies" table
 			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '20,83'  | '2'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'            | '25,00'  | '2'            |
 		* Check the standard currency rate when adding the next line
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
@@ -4368,7 +4368,7 @@ Scenario: _0154132  check currency form in Incoming payment order
 			And I input "200,00" text in "Amount" field of "PaymentList" table
 			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '34,25'  | '1'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
 		* Recount when currency changes
 			And I click Select button of "Account" field
 			And I go to line in "List" table
@@ -4377,10 +4377,10 @@ Scenario: _0154132  check currency form in Incoming payment order
 			And I select current line in "List" table
 			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'             | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
+				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '5,6275'             | '1 125,50' | '1'            |
 			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'             | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
+				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '5,6275'             | '1 125,50' | '1'            |
 		# * Reverse rate display check 
 		# 	Given double click at "reverse" picture
 		# 	And I go to line in "PaymentList" table
@@ -4422,31 +4422,31 @@ Scenario: _0154133  check currency form in Outgoing payment order
 		* Basic recalculation at the rate
 			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '34,25'  | '1'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
 		* Recalculation of Rate presentation when changing Amount
 			And I input "35,00" text in the field named "PaymentListCurrenciesAmount" of "PaymentListCurrencies" table
 			And I finish line editing in "PaymentListCurrencies" table
 			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,7143'            | '35,00'  | '1'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1750'            | '35,00'  | '1'            |
 		* Recount Amount when changing Multiplicity
 			And I input "2" text in "Multiplicity" field of "PaymentListCurrencies" table
 			And I finish line editing in "PaymentListCurrencies" table
 			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,7143'            | '17,50'  | '2'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1750'            | '17,50'  | '2'            |
 		* Recount Amount when changing Multiplicity Rate presentation
-			And I input "6,0000" text in "Rate presentation" field of "PaymentListCurrencies" table
+			And I input "0,2000" text in "Rate presentation" field of "PaymentListCurrencies" table
 			And I finish line editing in "PaymentListCurrencies" table
 			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '16,67'  | '2'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'            | '20,00'  | '2'            |
 		* Recount Amount when changing payment amount
 			And I input "250,00" text in the field named "PaymentListAmount" of "PaymentList" table
 			And I finish line editing in "PaymentListCurrencies" table
 			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '6,0000'            | '20,83'  | '2'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'            | '25,00'  | '2'            |
 		* Check the standard currency rate when adding the next line
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
@@ -4462,7 +4462,7 @@ Scenario: _0154133  check currency form in Outgoing payment order
 			And I input "200,00" text in "Amount" field of "PaymentList" table
 			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '34,25'  | '1'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
 		* Recount when currency changes
 			And I click Select button of "Account" field
 			And I go to line in "List" table
@@ -4471,14 +4471,14 @@ Scenario: _0154133  check currency form in Outgoing payment order
 			And I select current line in "List" table
 			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'             | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
+				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '5,6275'             | '1 125,50' | '1'            |
 			And I go to line in "PaymentListCurrencies" table
 				| 'Movement type'             | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'             | '1 129,94' | '1'            |
+				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '5,6275'             | '1 125,50' | '1'            |
 		# * Reverse rate display check 
 		# 	Given double click at "reverse" picture
 		# 	And I go to line in "PaymentList" table
-		# 		| 'Amount' | 'Partner' | 'Payee'            |
+		# 		| 'Amount' | 'Partner' | 'Payer'            |
 		# 		| '200,00' | 'Veritas' | 'Company Veritas ' |
 		# 	And "PaymentListCurrencies" table contains lines
 		# 		| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |

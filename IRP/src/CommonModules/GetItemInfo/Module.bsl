@@ -7,9 +7,7 @@ Function ItemsInfo(Parameters, AddInfo = Undefined) Export
 EndFunction
 
 Function ItemInfo_Query(Parameters, AddInfo)
-	// TODO: Добавить отборы как плавающие и добавить отборы по виду товара
-	
-	// TODO: IRP-72 Исправить запрос, убрать максимум цен
+
 	Var Query;
 	Query = New Query;
 	Query.Text =
@@ -82,7 +80,6 @@ Function ItemInfo_Query(Parameters, AddInfo)
 		|ORDER BY
 		|	ItemPresentation
 		|AUTOORDER";
-	
 	
 	QueryScheme = New QuerySchema();
 	QueryScheme.SetQueryText(Query.Text);

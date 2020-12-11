@@ -95,3 +95,8 @@ EndProcedure
 Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
+
+&AtClient
+Procedure SizeOnChange(Item)
+	CommonFunctionsClientServer.CalculateVolume(Object);
+EndProcedure

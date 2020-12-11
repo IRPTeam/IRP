@@ -100,7 +100,7 @@ Scenario: _052001 create Bank receipt based on Sales invoice
 			| 'Ferron BP' | 'Basic Partner terms, TRY' | '4 250,00' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | ''                          |
 		And "CurrenciesPaymentList" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400'            | '727,74' | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '727,60' | '1'            |
 	* Check account selection and saving 
 		And I click Select button of "Account" field
 		And I go to line in "List" table
@@ -115,8 +115,8 @@ Scenario: _052001 create Bank receipt based on Sales invoice
 			| 'Ferron BP' | 'Basic Partner terms, TRY' | '4 250,00' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | ''                          |
 		And "CurrenciesPaymentList" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'    | 'Multiplicity' |
-			| 'TRY'                | 'Partner term' | 'USD'           | 'TRY'      | '0,1770'            | '24 011,30' | '1'            |
-			| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '0,1770'            | '24 011,30' | '1'            |
+			| 'TRY'                | 'Partner term' | 'USD'           | 'TRY'      | '5,6275'            | '23 916,88' | '1'            |
+			| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '5,6275'            | '23 916,88' | '1'            |
 		Then the form attribute named "DocumentAmount" became equal to "4 250,00"
 	* Change of Partner term and basis document
 		And I select current line in "PaymentList" table

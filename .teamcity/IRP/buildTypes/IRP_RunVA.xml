@@ -5,22 +5,23 @@
   <settings>
     <options>
       <option name="allowExternalStatus" value="true" />
-      <option name="artifactRules" value="+:allure-report.zip&#xA;+:Cover.zip&#xA;+:%env.Database1CName%_%build.number%.zip" />
+      <option name="artifactRules" value="+:allure-report.zip&#xA;+:Cover.zip&#xA;+:%teamcity.project.id%.zip" />
       <option name="cleanBuild" value="true" />
     </options>
     <disabled-settings>
       <setting-ref ref="RUNNER_6" />
     </disabled-settings>
     <parameters>
+      <param name="env.BranchToStartVA" value="develop" />
       <param name="env.CloseVA" value="true" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.ConfigurationFileName" value="%env.Database1CName%" />
-      <param name="env.Database1CName" value="%dep.IRP_GitHubUpdate.env.Database1CName%" />
+      <param name="env.Database1CName" value="" />
       <param name="env.DebugPort" value="" />
       <param name="env.DebugVA" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
-      <param name="env.FilterTagsForVA" value="'%dep.IRP_GitHubUpdate.env.VA_Tags%'" />
       <param name="env.LogFile1C" value="%system.teamcity.build.workingDir%\Log1C.log" />
       <param name="env.OScript" value="C:/OneScript" />
       <param name="env.PID_ID" value="0" />
+      <param name="env.SonarParamCover" value="" />
       <param name="env.StopOnError" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.StreamCount" value="3" />
       <param name="env.TR_Bank_Key" value="credentialsJSON:8036a633-0c14-4d64-991c-b98b36c82dd1" spec="password display='normal' readOnly='true'" />
@@ -30,6 +31,43 @@
       <param name="env.dbgs_PID" value="" />
     </parameters>
     <build-runners>
+      <runner id="RUNNER_69" name="Set env" type="jetbrains_powershell">
+        <parameters>
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[echo "BranchToStartVA %env.BranchToStartVA%"
+echo "teamcity.pullRequest.target.branch %teamcity.pullRequest.target.branch%"
+echo "teamcity.build.branch %teamcity.build.branch%"
+$VA_Tags = ""
+
+if('%teamcity.pullRequest.target.branch%' -eq '%env.BranchToStartVA%')
+{
+	$SonarParamCover = "-Dsonar.coverageReportPaths=%system.teamcity.build.workingDir%/Cover.xml"
+ 	$InfobaseName = "%env.Database1CName%_%teamcity.pullRequest.target.branch%_pull%teamcity.pullRequest.number%"
+    
+}
+elseif('%teamcity.build.branch%' -eq '%env.BranchToStartVA%')
+{
+	$SonarParamCover = "-Dsonar.coverageReportPaths=%system.teamcity.build.workingDir%/Cover.xml"
+	$InfobaseName = "%env.Database1CName%_%teamcity.build.branch%"
+    
+}
+else
+{
+	$SonarParamCover = "-Dsonar.coverageReportPaths=%system.teamcity.build.workingDir%/Cover.xml"
+	$InfobaseName = "%env.Database1CName%_%teamcity.build.branch%"
+}
+
+$InfobaseName = $InfobaseName -replace "\\", "_" 
+$InfobaseName = $InfobaseName -replace "\/", "_" 
+$InfobaseName = $InfobaseName -replace "\-", "_"
+
+echo "##teamcity[setParameter name='env.Database1CName' value='$InfobaseName']"
+echo "##teamcity[setParameter name='env.SonarParamCover' value='$SonarParamCover']"]]></param>
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
       <runner id="RUNNER_31" name="Copy add data  proc from tools" type="jetbrains_powershell">
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
@@ -47,7 +85,7 @@ echo ##teamcity[compilationStarted compiler='Log from 1C: %env.LogFile1C%']
 sh -c "while read line; do if [[ $line == *"Error"* ]]; then echo -e ""\e[31m $line""; else  echo -e ""\e[34m $line""; fi;  done < ""%env.LogFile1C%"";"
 echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']
 
-start /wait "1cv8.exe" %env.PathTo1CPlatform%  DESIGNER %env.ConnectionTo1C% /Out %env.LogFile1C%  /LoadCfg %system.teamcity.build.workingDir%\%env.ConfigurationFileName%.cf /UpdateDBCfg
+start /wait "1cv8.exe" %env.PathTo1CPlatform%  DESIGNER %env.ConnectionTo1C% /Out %env.LogFile1C%  /LoadCfg %system.teamcity.build.workingDir%\%teamcity.project.id%.cf /UpdateDBCfg
 echo ##teamcity[compilationStarted compiler='Log from 1C Update CF: %env.LogFile1C%']
 sh -c "while read line; do if [[ $line == *"Error"* ]]; then echo -e ""\e[31m $line""; else  echo -e ""\e[34m $line""; fi;  done < ""%env.LogFile1C%"";"
 echo ##teamcity[compilationFinished compiler='Log from 1C Update CF: %env.LogFile1C%']
@@ -253,79 +291,86 @@ $VanessaRun = {
 
     Write-Output "Wait for log file: $elementTag"
     Write-Host "##teamcity[testStarted  name='Wait for log file: $elementTag' flowId='$elementTag']"
+    $Skip = $false
     $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
         do {
         Start-Sleep 1        
         if (!(Get-Process -id $processID -ErrorAction SilentlyContinue)){
         Write-Host "##teamcity[testFailed name='Wait for log file: $elementTag' message='Log file not found: $ScriptLogFilePath' flowId='$elementTag']"
+        $Skip = $true
+        break
         }
         
     } while (!(Test-Path $ScriptLogFilePath))
     Write-Host "##teamcity[testFinished name='Wait for log file: $elementTag' duration='$TotalMilliseconds' flowId='$elementTag']"
- 	Write-Output "Start tail: $elementTag"
+    
+    if (!$Skip) {
+      Write-Output "Start tail: $elementTag"
 
-    $CurrentFeatureFile = ""
-    $CurrentTest = ""
-    $LastIndex = 0
-    do{
-        $TextInLog = Get-Content $ScriptLogFilePath -Encoding UTF8 -Force -ErrorAction SilentlyContinue
+      $CurrentFeatureFile = ""
+      $CurrentTest = ""
+      $LastIndex = 0
+      do{
+          $TextInLog = Get-Content $ScriptLogFilePath -Encoding UTF8 -Force -ErrorAction SilentlyContinue
 
-        For ($index = $LastIndex; $index -le $TextInLog.count - 1; $index++) {
-            $line = $TextInLog[$index]
-            if($line -match "Feature:"){
-                $FeatureFile = $line -split "\\"
-                if($CurrentFeatureFile -eq ""){
-                    $CurrentFeatureFile =  $FeatureFile[$FeatureFile.count - 1]
-                    Write-Host "##teamcity[testSuiteStarted name='$CurrentFeatureFile' flowId='$elementTag']"
-                }else{
+          For ($index = $LastIndex; $index -le $TextInLog.count - 1; $index++) {
+              $line = $TextInLog[$index]
+              if($line -match "Feature:"){
+                  $FeatureFile = $line -split "\\"
+                  if($CurrentFeatureFile -eq ""){
+                      $CurrentFeatureFile =  $FeatureFile[$FeatureFile.count - 1]
+                      Write-Host "##teamcity[testSuiteStarted name='$CurrentFeatureFile' flowId='$elementTag']"
+                  }else{
 
-                    if($CurrentTest -ne ""){
-                    	$EndDate = Get-Date
-                        $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
-                        $TotalMilliseconds = [math]::Round($Diff.TotalMilliseconds)
-                        Write-Host "##teamcity[testFinished name='$CurrentTest' duration='$TotalMilliseconds' flowId='$elementTag']"
-                        $CurrentTest = ""
-                    }
+                      if($CurrentTest -ne ""){
+                          $EndDate = Get-Date
+                          $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
+                          $TotalMilliseconds = [math]::Round($Diff.TotalMilliseconds)
+                          Write-Host "##teamcity[testFinished name='$CurrentTest' duration='$TotalMilliseconds' flowId='$elementTag']"
+                          $CurrentTest = ""
+                      }
 
-                    Write-Host "##teamcity[testSuiteFinished name='$CurrentFeatureFile' flowId='$elementTag']"
-                    $CurrentFeatureFile =  $FeatureFile[$FeatureFile.count - 1]
-                    Write-Host "##teamcity[testSuiteStarted name='$CurrentFeatureFile' flowId='$elementTag']"
-                }
-            
-            }elseif($line -match "Script:"){
-                $Test = $line -split ":"
-                if($CurrentTest -eq ""){
-                    $CurrentTest =  $Test[$Test.count - 1]
-                    Write-Host "##teamcity[testStarted name='$CurrentTest' flowId='$elementTag']"
-                    $CurrentDate = Get-Date
-                }else{
-                    $EndDate = Get-Date
-                    $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
-                        
-                    $TotalMilliseconds = [math]::Round($Diff.TotalMilliseconds)
-                    Write-Host "##teamcity[testFinished name='$CurrentTest' duration='$TotalMilliseconds' flowId='$elementTag']"
-                    $CurrentTest =  $Test[$Test.count - 1]
-                    $CurrentTest = $CurrentTest.replace("|", "||").replace("'", "|'").replace("[", "|[").replace("]", "|]").replace("`n", "|n").replace("`r", "|r")
-                    Write-Host "##teamcity[testStarted  name='$CurrentTest' flowId='$elementTag']"
-                    $CurrentDate = Get-Date
-                }
-            }elseif($line -match "Failed:"){
-                $ErrorDescription = $line -split ":"
-                if($CurrentTest -eq ""){
-                    
-                }else{
-                    $ErrorDescription = $ErrorDescription.replace("|", "||").replace("'", "|'").replace("[", "|[").replace("]", "|]").replace("`n", "|n").replace("`r", "|r")
-                    Write-Host "##teamcity[testFailed name='$CurrentTest' message='$ErrorDescription' flowId='$elementTag']"
-                }    
-            }else{
-                if($CurrentTest -ne ""){
-                    Write-Host "##teamcity[testStdOut name='$CurrentTest' out='$line' flowId='$elementTag']"
-                }            
-            }
-            $LastIndex = $TextInLog.count
-        }
-        Start-Sleep 1
-    } while(Get-Process -id $processID -ErrorAction SilentlyContinue)
+                      Write-Host "##teamcity[testSuiteFinished name='$CurrentFeatureFile' flowId='$elementTag']"
+                      $CurrentFeatureFile =  $FeatureFile[$FeatureFile.count - 1]
+                      Write-Host "##teamcity[testSuiteStarted name='$CurrentFeatureFile' flowId='$elementTag']"
+                  }
+
+              }elseif($line -match "Script:"){
+                  $Test = $line -split ":"
+                  if($CurrentTest -eq ""){
+                      $CurrentTest =  $Test[$Test.count - 1]
+                      Write-Host "##teamcity[testStarted name='$CurrentTest' flowId='$elementTag']"
+                      $CurrentDate = Get-Date
+                  }else{
+                      $EndDate = Get-Date
+                      $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
+
+                      $TotalMilliseconds = [math]::Round($Diff.TotalMilliseconds)
+                      Write-Host "##teamcity[testFinished name='$CurrentTest' duration='$TotalMilliseconds' flowId='$elementTag']"
+                      $CurrentTest =  $Test[$Test.count - 1]
+                      $CurrentTest = $CurrentTest.replace("|", "||").replace("'", "|'").replace("[", "|[").replace("]", "|]").replace("`n", "|n").replace("`r", "|r")
+                      Write-Host "##teamcity[testStarted  name='$CurrentTest' flowId='$elementTag']"
+                      $CurrentDate = Get-Date
+                  }
+              }elseif($line -match "Failed:"){
+                  $ErrorDescription = $line -split ":"
+                  if($CurrentTest -eq ""){
+
+                  }else{
+                      $ErrorDescription = $ErrorDescription.replace("|", "||").replace("'", "|'").replace("[", "|[").replace("]", "|]").replace("`n", "|n").replace("`r", "|r")
+                      Write-Host "##teamcity[testFailed name='$CurrentTest' message='$ErrorDescription' flowId='$elementTag']"
+                  }    
+              }else{
+                  if($CurrentTest -ne ""){
+                      Write-Host "##teamcity[testStdOut name='$CurrentTest' out='$line' flowId='$elementTag']"
+                  }            
+              }
+              $LastIndex = $TextInLog.count
+          }
+          Start-Sleep 1
+      } while(Get-Process -id $processID -ErrorAction SilentlyContinue)
+
+	}
     $EndDate = Get-Date
     $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
                         
@@ -871,7 +916,7 @@ Compress-Archive -Path Cover.xml -DestinationPath Cover.zip]]></param>
       </dependency>
       <dependency id="ARTIFACT_DEPENDENCY_5" sourceBuildTypeId="IRP_BuildCF" cleanDestination="false">
         <revisionRule name="sameChainOrLastFinished" revision="latest.sameChainOrLastFinished" />
-        <artifact sourcePath="%env.Database1CName%.cf" />
+        <artifact sourcePath="%teamcity.project.id%.cf" />
       </dependency>
       <dependency id="ARTIFACT_DEPENDENCY_6" sourceBuildTypeId="IRP_RunVA" cleanDestination="false">
         <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" branch="+:develop" />

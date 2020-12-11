@@ -180,10 +180,10 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 			| 'Currency' | 'Recorder'                     | 'Company'      | 'Multi currency movement type' | 'Sales invoice'                                    | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount' |
 			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009999'    | '1,000'    | '400,00' |
 			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009999'    | '1,000'    | '400,00' |
-			| 'USD'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009999'    | '1,000'    | '68,49'  |
+			| 'USD'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009999'    | '1,000'    | '68,48'  |
 			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$'                     | '38/18SD'   | ''                  | '1,000'    | '650,00' |
 			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$'                     | '38/18SD'   | ''                  | '1,000'    | '650,00' |
-			| 'USD'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$'                     | '38/18SD'   | ''                  | '1,000'    | '111,30' |
+			| 'USD'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$'                     | '38/18SD'   | ''                  | '1,000'    | '111,28' |
 			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009999'    | '1,000'    | '400,00' |
 			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$'                     | '38/18SD'   | ''                  | '1,000'    | '650,00' |
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
@@ -238,15 +238,15 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 			| 'Currency' | 'Recorder'                     | 'Company'      | 'Multi currency movement type' | 'Sales invoice'                                    | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount' |
 			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009999'    | '1,000'    | '400,00' |
 			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009999'    | '1,000'    | '400,00' |
-			| 'USD'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009999'    | '1,000'    | '68,49'  |
+			| 'USD'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009999'    | '1,000'    | '68,48'  |
 			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$'                     | '38/18SD'   | ''                  | '1,000'    | '650,00' |
 			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$'                     | '38/18SD'   | ''                  | '1,000'    | '650,00' |
-			| 'USD'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$'                     | '38/18SD'   | ''                  | '1,000'    | '111,30' |
+			| 'USD'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$'                     | '38/18SD'   | ''                  | '1,000'    | '111,28' |
 			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009999'    | '1,000'    | '400,00' |
 			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$'                     | '38/18SD'   | ''                  | '1,000'    | '650,00' |
 			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009998'    | '2,000'    | '800,00' |
 			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009998'    | '2,000'    | '800,00' |
-			| 'USD'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009998'    | '2,000'    | '136,99' |
+			| 'USD'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009998'    | '2,000'    | '136,96' |
 			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009998'    | '2,000'    | '800,00' |
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$RetailSalesReceipt092002$$" window
@@ -330,9 +330,9 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		| 'Register  "Sales turnovers"'    | ''            | ''          | ''          | ''           | ''              | ''              | ''                             | ''              | ''          | ''                             | ''                             | ''                  | ''                     |
 		| ''                               | 'Period'      | 'Resources' | ''          | ''           | ''              | 'Dimensions'    | ''                             | ''              | ''          | ''                             | ''                             | ''                  | 'Attributes'           |
 		| ''                               | ''            | 'Quantity'  | 'Amount'    | 'Net amount' | 'Offers amount' | 'Company'       | 'Sales invoice'                | 'Currency'      | 'Item key'  | 'Row key'                      | 'Multi currency movement type' | 'Serial lot number' | 'Deferred calculation' |
-		| ''                               | '*'           | '1'         | '68,49'     | '58,05'      | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'USD'           | '38/Yellow' | '*'                            | 'Reporting currency'           | '99098809009999'    | 'No'                   |
-		| ''                               | '*'           | '1'         | '111,3'     | '94,32'      | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'USD'           | '38/18SD'   | '*'                            | 'Reporting currency'           | ''                  | 'No'                   |
-		| ''                               | '*'           | '1'         | '119,86'    | '101,58'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'USD'           | '37/18SD'   | '*'                            | 'Reporting currency'           | ''                  | 'No'                   |
+		| ''                               | '*'           | '1'         | '68,48'     | '58,03'      | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'USD'           | '38/Yellow' | '*'                            | 'Reporting currency'           | '99098809009999'    | 'No'                   |
+		| ''                               | '*'           | '1'         | '111,28'    | '94,31'      | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'USD'           | '38/18SD'   | '*'                            | 'Reporting currency'           | ''                  | 'No'                   |
+		| ''                               | '*'           | '1'         | '119,84'    | '101,56'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'USD'           | '37/18SD'   | '*'                            | 'Reporting currency'           | ''                  | 'No'                   |
 		| ''                               | '*'           | '1'         | '400'       | '338,98'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'TRY'           | '38/Yellow' | '*'                            | 'Local currency'               | '99098809009999'    | 'No'                   |
 		| ''                               | '*'           | '1'         | '400'       | '338,98'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'TRY'           | '38/Yellow' | '*'                            | 'TRY'                          | '99098809009999'    | 'No'                   |
 		| ''                               | '*'           | '1'         | '400'       | '338,98'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'TRY'           | '38/Yellow' | '*'                            | 'en description is empty'      | '99098809009999'    | 'No'                   |
@@ -342,7 +342,7 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		| ''                               | '*'           | '1'         | '700'       | '593,22'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'TRY'           | '37/18SD'   | '*'                            | 'Local currency'               | ''                  | 'No'                   |
 		| ''                               | '*'           | '1'         | '700'       | '593,22'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'TRY'           | '37/18SD'   | '*'                            | 'TRY'                          | ''                  | 'No'                   |
 		| ''                               | '*'           | '1'         | '700'       | '593,22'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'TRY'           | '37/18SD'   | '*'                            | 'en description is empty'      | ''                  | 'No'                   |
-		| ''                               | '*'           | '2'         | '136,99'    | '116,09'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'USD'           | '38/Yellow' | '*'                            | 'Reporting currency'           | '99098809009998'    | 'No'                   |
+		| ''                               | '*'           | '2'         | '136,96'    | '116,07'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'USD'           | '38/Yellow' | '*'                            | 'Reporting currency'           | '99098809009998'    | 'No'                   |
 		| ''                               | '*'           | '2'         | '800'       | '677,97'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'TRY'           | '38/Yellow' | '*'                            | 'Local currency'               | '99098809009998'    | 'No'                   |
 		| ''                               | '*'           | '2'         | '800'       | '677,97'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'TRY'           | '38/Yellow' | '*'                            | 'TRY'                          | '99098809009998'    | 'No'                   |
 		| ''                               | '*'           | '2'         | '800'       | '677,97'     | ''              | 'Main Company'  | '$$RetailSalesReceipt092002$$' | 'TRY'           | '38/Yellow' | '*'                            | 'en description is empty'      | '99098809009998'    | 'No'                   |
@@ -393,15 +393,15 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			| 'Currency' | 'Recorder'                      | 'Company'      | 'Multi currency movement type' | 'Sales invoice'                | 'Item key'  | 'Serial lot number' | 'Quantity'  | 'Amount' |
 			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '-1,000'    | '-400,00' |
 			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '-1,000'    | '-400,00' |
-			| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '-1,000'    | '-68,49'  |
+			| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '-1,000'    | '-68,48'  |
 			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'    | '-650,00' |
 			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'    | '-650,00' |
-			| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'    | '-111,30' |
+			| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'    | '-111,28' |
 			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '-1,000'    | '-400,00' |
 			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'    | '-650,00' |
 			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-2,000'    | '-800,00' |
 			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-2,000'    | '-800,00' |
-			| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-2,000'    | '-136,99' |
+			| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-2,000'    | '-136,96' |
 			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-2,000'    | '-800,00' |
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$RetailReturnReceipt092003$$" window
@@ -451,13 +451,13 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		| 'Currency' | 'Recorder'                      | 'Company'      | 'Multi currency movement type' | 'Sales invoice'                | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount'  |
 		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-400,00' |
 		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-400,00' |
-		| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-68,49'  |
+		| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-68,48'  |
 		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' |
 		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' |
-		| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'   | '-111,30' |
+		| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'   | '-111,28' |
 		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '-1,000'   | '-700,00' |
 		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '-1,000'   | '-700,00' |
-		| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '-1,000'   | '-119,86' |
+		| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '-1,000'   | '-119,84' |
 		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-400,00' |
 		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' |
 		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '-1,000'   | '-700,00' |
@@ -615,10 +615,10 @@ Scenario: _092004 check serial lot number in the Sales invoice
 			| 'Currency' | 'Recorder'               | 'Company'      | 'Multi currency movement type' | 'Sales invoice'          | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount' |
 			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '400,00' |
 			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '400,00' |
-			| 'USD'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '68,49'  |
+			| 'USD'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '68,48'  |
 			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '650,00' |
 			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '650,00' |
-			| 'USD'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '111,30' |
+			| 'USD'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '111,28' |
 			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '400,00' |
 			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '650,00' |
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
@@ -677,15 +677,15 @@ Scenario: _092004 check serial lot number in the Sales invoice
 			| 'Currency' | 'Recorder'               | 'Company'      | 'Multi currency movement type' | 'Sales invoice'          | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount' |
 			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '400,00' |
 			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '400,00' |
-			| 'USD'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '68,49'  |
+			| 'USD'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '68,48'  |
 			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '650,00' |
 			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '650,00' |
-			| 'USD'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '111,30' |
+			| 'USD'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '111,28' |
 			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '400,00' |
 			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '650,00' |
 			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '2,000'    | '800,00' |
 			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '2,000'    | '800,00' |
-			| 'USD'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '2,000'    | '136,99' |
+			| 'USD'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '2,000'    | '136,96' |
 			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '2,000'    | '800,00' |
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$SalesInvoice092004$$" window
@@ -786,15 +786,15 @@ Scenario: _092005 check serial lot number in the Sales return
 			| 'Currency' | 'Recorder'              | 'Company'      | 'Multi currency movement type' | 'Sales invoice'          | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount'  |
 			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '-1,000'   | '-400,00' |
 			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '-1,000'   | '-400,00' |
-			| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '-1,000'   | '-68,49'  |
+			| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '-1,000'   | '-68,48'  |
 			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' |
 			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' |
-			| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   | '-111,30' |
+			| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   | '-111,28' |
 			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '-1,000'   | '-400,00' |
 			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' |
 			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-2,000'   | '-800,00' |
 			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-2,000'   | '-800,00' |
-			| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-2,000'   | '-136,99' |
+			| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-2,000'   | '-136,96' |
 			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-2,000'   | '-800,00' |
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$SalesReturn092005$$" window

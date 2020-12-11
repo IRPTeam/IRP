@@ -21,6 +21,26 @@ Function CheckDescriptionDuplicateEnabled(Object) Export
 	EndIf;
 EndFunction
 
+Function CheckDescriptionFillingEnabled(Object) Export
+	MetadataFullName = Object.Metadata().FullName();
+	Query = New Query;
+	Query.Text = "SELECT ALLOWED TOP 1
+	|	ConfigurationMetadata.CheckDescriptionFilling
+	|FROM
+	|	Catalog.ConfigurationMetadata AS ConfigurationMetadata
+	|WHERE
+	|	ConfigurationMetadata.ObjectFullName = &ObjectFullName";
+	Query.SetParameter("ObjectFullName", MetadataFullName);
+	QueryExecution = Query.Execute();
+	If QueryExecution.IsEmpty() Then
+		Return False;
+	Else
+		QuerySelect = QueryExecution.Select();
+		QuerySelect.Next();
+		Return QuerySelect.CheckDescription;
+	EndIf;
+EndFunction
+
 Procedure RefillMetadata() Export
 	RefillCatalogs();
 	RefillDocuments();

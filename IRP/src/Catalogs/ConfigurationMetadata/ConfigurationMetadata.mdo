@@ -62,21 +62,6 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultListForm>Catalog.ConfigurationMetadata.Form.ListForm</defaultListForm>
-  <attributes uuid="4c5116b9-b786-40fc-bf62-ca9f303ca025">
-    <name>CheckDescriptionDuplicate</name>
-    <synonym>
-      <key>en</key>
-      <value>Check description duplicate</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="c1323631-5529-43f7-94d3-70abc4f80fdc">
     <name>Extension</name>
     <synonym>
@@ -85,6 +70,21 @@
     </synonym>
     <type>
       <types>CatalogRef.Extensions</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="4c5116b9-b786-40fc-bf62-ca9f303ca025">
+    <name>CheckDescriptionDuplicate</name>
+    <synonym>
+      <key>en</key>
+      <value>Check description duplicate</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -135,6 +135,21 @@
     <synonym>
       <key>en</key>
       <value>Unused</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="e487cc9a-c41a-4fc0-955b-32afd191113e">
+    <name>CheckDescriptionFilling</name>
+    <synonym>
+      <key>en</key>
+      <value>Check description filling</value>
     </synonym>
     <type>
       <types>Boolean</types>

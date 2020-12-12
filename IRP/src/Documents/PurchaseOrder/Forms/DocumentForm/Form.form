@@ -5222,7 +5222,7 @@
         <name>SearchByBarcode</name>
       </handler>
     </action>
-    <functionalOptions></functionalOptions>
+    
     <representation>Picture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
@@ -5241,7 +5241,7 @@
         <name>SetSpecialOffersAtRow</name>
       </handler>
     </action>
-    <functionalOptions></functionalOptions>
+    
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -5259,7 +5259,7 @@
         <name>SetSpecialOffers</name>
       </handler>
     </action>
-    <functionalOptions></functionalOptions>
+    
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>

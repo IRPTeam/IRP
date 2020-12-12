@@ -2461,7 +2461,7 @@
         <name>SearchByBarcode</name>
       </handler>
     </action>
-    <functionalOptions></functionalOptions>
+    
     <representation>Picture</representation>
     <modifiesStoredData>true</modifiesStoredData>
     <currentRowUse>Auto</currentRowUse>

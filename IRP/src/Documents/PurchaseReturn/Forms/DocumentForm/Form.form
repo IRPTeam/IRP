@@ -4502,7 +4502,7 @@
         <name>SearchByBarcode</name>
       </handler>
     </action>
-    <functionalOptions></functionalOptions>
+    
     <representation>Picture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>

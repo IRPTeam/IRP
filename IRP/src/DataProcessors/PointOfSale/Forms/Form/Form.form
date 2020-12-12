@@ -4792,7 +4792,6 @@ barcode (F7)</value>
         <name>SearchByBarcode</name>
       </handler>
     </action>
-    <functionalOptions></functionalOptions>
     <representation>Text</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
@@ -4960,7 +4959,7 @@ current row</value>
         <name>SetSpecialOffersAtRow</name>
       </handler>
     </action>
-    <functionalOptions></functionalOptions>
+    
     <representation>Text</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
@@ -4983,7 +4982,7 @@ document</value>
         <name>SetSpecialOffers</name>
       </handler>
     </action>
-    <functionalOptions></functionalOptions>
+    
     <representation>Text</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>

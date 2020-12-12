@@ -1275,8 +1275,6 @@ Scenario: create PurchaseReturn300301
 
 
 Scenario: set True value to the constant
-		And I set "True" value to the constant "ShowBetaTesting"
-		And I set "True" value to the constant "ShowAlphaTestingSaas"
 		And I set "True" value to the constant "UseItemKey"
 		And I set "True" value to the constant "UseCompanies"
 

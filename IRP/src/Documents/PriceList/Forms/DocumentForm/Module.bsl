@@ -112,12 +112,10 @@ EndProcedure
 
 &AtServer
 Procedure SetVisible()
-	ShowAlphaTestingSaas = GetFunctionalOption("ShowAlphaTestingSaas");
-	Items.GroupPriceKeyList.Visible = Object.PriceListType = Enums.PriceListTypes.PriceByProperties And ShowAlphaTestingSaas;
-	Items.GroupItemKeyList.Visible = Object.PriceListType = Enums.PriceListTypes.PriceByItemKeys And ShowAlphaTestingSaas;
+	Items.GroupPriceKeyList.Visible = Object.PriceListType = Enums.PriceListTypes.PriceByProperties;
+	Items.GroupItemKeyList.Visible = Object.PriceListType = Enums.PriceListTypes.PriceByItemKeys;
 	Items.GroupItemList.Visible = Object.PriceListType = Enums.PriceListTypes.PriceByItems;
 	Items.FillByRules.Visible = ValueIsFilled(Object.PriceType.ExternalDataProc);
-	Items.PriceListType.Visible = ShowAlphaTestingSaas;
 EndProcedure
 
 &AtServer

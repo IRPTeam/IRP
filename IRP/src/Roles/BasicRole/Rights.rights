@@ -177,13 +177,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.ShowBetaTesting</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Constant.DefaultPictureStorageVolume</name>
 		<right>
 			<name>Read</name>
@@ -413,13 +406,6 @@
 		</right>
 		<right>
 			<name>Set</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Constant.ShowAlphaTestingSaas</name>
-		<right>
-			<name>Read</name>
 			<value>true</value>
 		</right>
 	</object>

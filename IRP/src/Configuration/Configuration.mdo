@@ -396,9 +396,7 @@
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
   <settingsStorages>SettingsStorage.ReportOptions</settingsStorages>
-  <functionalOptions>FunctionalOption.BetaTesting</functionalOptions>
   <functionalOptions>FunctionalOption.SaasMode</functionalOptions>
-  <functionalOptions>FunctionalOption.ShowAlphaTestingSaas</functionalOptions>
   <functionalOptions>FunctionalOption.UseCompanies</functionalOptions>
   <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
   <functionalOptions>FunctionalOption.UseLockDataModification</functionalOptions>
@@ -447,8 +445,6 @@
   <constants>Constant.DefaultPictureStorageVolume</constants>
   <constants>Constant.NotFirstStart</constants>
   <constants>Constant.SaasMode</constants>
-  <constants>Constant.ShowAlphaTestingSaas</constants>
-  <constants>Constant.ShowBetaTesting</constants>
   <constants>Constant.UseCompanies</constants>
   <constants>Constant.UseItemKey</constants>
   <constants>Constant.UseLockDataModification</constants>

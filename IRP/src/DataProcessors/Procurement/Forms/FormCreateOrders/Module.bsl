@@ -7,6 +7,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.ItemKey = Parameters.ItemKey;
 	ThisObject.Unit = Parameters.Unit;
 	ThisObject.DateOfRelevance = CurrentSessionDate();
+	ThisObject.VisibleSelectionTables = Parameters.VisibleSelectionTables; 
+	ThisObject.ShowPrecision = Parameters.ShowPrecision;
+	
+	ShowPrecision();
 	
 	ResultsTableOfBalance = ThisObject.TableOfBalance.Unload().CopyColumns();
 	For Each Row In Parameters.TableOfBalance Do
@@ -120,6 +124,27 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.TableOfPurchase.Load(QueryResults[5].Unload());
 EndProcedure
 
+&AtClient
+Procedure ShowPrecisionOnChange(Item)
+	ShowPrecision();
+EndProcedure
+
+&AtServer
+Procedure ShowPrecision()
+	FieldFormat = ?(ThisObject.ShowPrecision, "", "NFD=0");
+	Items.TableOfBalanceBalance.Format = FieldFormat;
+	
+	Items.TableOfBalanceQuantity.Format = FieldFormat;
+	Items.TableOfBalanceQuantity.EditFormat = FieldFormat;
+	
+	Items.TableOfPurchaseQuantity.Format = FieldFormat;
+	Items.TableOfPurchaseQuantity.EditFormat = FieldFormat;
+	
+	Items.TableOfInternalSupplyRequestQuantity.Format = FieldFormat;
+	Items.TableOfInternalSupplyRequestTransfer.Format = FieldFormat;
+	Items.TableOfInternalSupplyRequestPurchase.Format = FieldFormat;
+EndProcedure
+
 &AtServer
 Procedure Update_AllTables()
 	Update_TableOfBalance();
@@ -210,6 +235,7 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	Update_TotalQuantity();
+	SetVisible();
 EndProcedure
 
 &AtClient
@@ -525,6 +551,7 @@ Procedure Ok(Command)
 	Result.Insert("Item", ThisObject.Item);
 	Result.Insert("ItemKey", ThisObject.ItemKey);
 	Result.Insert("Unit", ThisObject.Unit);
+	Result.Insert("VisibleSelectionTables", ThisObject.VisibleSelectionTables);
 	
 	Result.Insert("TableOfBalance", New Array());
 	Result.Insert("TableOfPurchase", New Array());
@@ -573,4 +600,23 @@ Procedure Ok(Command)
 	EndDo;
 	
 	Close(Result);
+EndProcedure
+
+&AtClient
+Procedure VisibleSelectionTablesOnChange(Item)
+	SetVisible();
+EndProcedure
+
+&AtClient
+Procedure SetVisible()
+	If Upper(ThisObject.VisibleSelectionTables) = Upper("All") Then
+		Items.TableOfBalance.Visible = True;
+		Items.TableOfPurchase.Visible = True;
+	ElsIf Upper(ThisObject.VisibleSelectionTables) = Upper("Transfer") Then
+		Items.TableOfBalance.Visible = True;
+		Items.TableOfPurchase.Visible = False;
+	ElsIf Upper(ThisObject.VisibleSelectionTables) = Upper("Purchase") Then
+		Items.TableOfBalance.Visible = False;
+		Items.TableOfPurchase.Visible = True;
+	EndIf;	
 EndProcedure

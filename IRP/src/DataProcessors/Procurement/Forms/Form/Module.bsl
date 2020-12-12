@@ -1,23 +1,48 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	ThisObject.Company = GetUserSetting("Procurement_Company");
-	ThisObject.Store = GetUserSetting("Procurement_Store");
+	RestoreSettings();
 	UpdateCreatedDocuments();
+	SetVisible();
+	ShowPrecision();
 EndProcedure
 
 &AtServer
-Function GetUserSetting(SettingName)
-	UserSettingFilterParameters = New Structure();
-	UserSettingFilterParameters.Insert("AttributeName", SettingName);
-	UserSettings = UserSettingsServer.GetUserSettings(Undefined, UserSettingFilterParameters);
-
-	UserSettingsValue = Undefined;
-	If UserSettings.Count() Then
-		UserSettingsValue = UserSettings[0].Value;
+Procedure RestoreSettings()
+	Settings = FormDataSettingsStorage.Load("DataProcessor.Procurement", "FormSettings");
+	If TypeOf(Settings) = Type("Structure") Then
+		RestoreSettingIfPresent(Settings, "Company", Undefined);
+		RestoreSettingIfPresent(Settings, "Store", Undefined);
+		RestoreSettingIfPresent(Settings, "VisibleResultTables", "All");
+		RestoreSettingIfPresent(Settings, "VisibleAnalyisRows", "All");
+		RestoreSettingIfPresent(Settings, "VisibleCreatedDocumentTables", "All");
+		RestoreSettingIfPresent(Settings, "VisibleSelectionTables", "All");
+		RestoreSettingIfPresent(Settings, "ShowPrecision", True);
 	EndIf;
-	Return UserSettingsValue;
-EndFunction
+EndProcedure
+
+&AtServer
+Procedure RestoreSettingIfPresent(Settings, SettingName, DefaultValue)
+	If Settings.Property(SettingName) Then
+		ThisObject[SettingName] = Settings[SettingName];
+	Else
+		ThisObject[SettingName] = DefaultValue;
+	EndIf;
+EndProcedure	
+
+&AtServer
+Procedure SaveSettings()
+	Settings = New Structure();
+	Settings.Insert("Company", ThisObject.Company);
+	Settings.Insert("Store", ThisObject.Store);
+	Settings.Insert("VisibleResultTables", ThisObject.VisibleResultTables);
+	Settings.Insert("VisibleAnalyisRows", ThisObject.VisibleAnalyisRows);
+	Settings.Insert("VisibleCreatedDocumentTables", ThisObject.VisibleCreatedDocumentTables);
+	Settings.Insert("VisibleSelectionTables", ThisObject.VisibleSelectionTables);
+	Settings.Insert("ShowPrecision", ThisObject.ShowPrecision);
+	
+	FormDataSettingsStorage.Save("DataProcessor.Procurement", "FormSettings", Settings);
+EndProcedure
 
 &AtClient
 Procedure Refresh(Command)
@@ -25,6 +50,18 @@ Procedure Refresh(Command)
 		Return;
 	EndIf;
 	RefreshAtServer();
+	SetVisible();
+	ShowPrecision();
+EndProcedure
+
+&AtClient
+Procedure CompanyOnChange(Item)
+	SaveSettings();
+EndProcedure
+
+&AtClient
+Procedure StoreOnChange(Item)
+	SaveSettings();
 EndProcedure
 
 &AtClient
@@ -72,6 +109,9 @@ Procedure RefreshAtServer()
 		
 	TableOfSupplyRequests = 
 	GetTableOfSupplyRequests(ThisObject.Store, ThisObject.Period.StartDate, ThisObject.Period.EndDate);
+	
+	TableOfWithoutSupplyRequest = TableOfOrdersWithoutSupplyRequest(ThisObject.Store, Undefined);
+	TableOfWithoutSupplyRequest.GroupBy("ItemKey, DeliveryDate", "Quantity");
 		
 	For Each Row In TableOfSupplyRequests Do
 		NewRowAnalysis = ThisObject.Analysis.Add();
@@ -79,16 +119,36 @@ Procedure RefreshAtServer()
 		NewRowAnalysis.Item = Row.Item;
 		NewRowAnalysis.ItemKey = Row.ItemKey;
 		NewRowAnalysis.Unit = Row.Unit;
+		NewRowAnalysis.OpenBalance = Row.OpenBalance;
 		NewRowAnalysis.TotalProcurement = Row.QuantityProcurement;
 		NewRowAnalysis.Ordered  = Row.QuantityOrdered;
-		NewRowAnalysis.Shortage = Row.QuantityShortage;
 		NewRowAnalysis.Expired  = Row.QuantityExpired;
-		
+					
 		For Each RowColumnInfo In TableOfColumns Do
 			NewRowAnalysis[RowColumnInfo.Name] = 
 			GetProcurementByItemKey(ThisObject.Store, Row.ItemKey, RowColumnInfo.StartDate, RowColumnInfo.EndDate);			
 		EndDo;
-	EndDo;
+		
+		Filter = New Structure();
+		Filter.Insert("ItemKey", Row.ItemKey);
+		OrderedWithoutSupplyRequest = 0;
+		For Each RowOfWithoutSupplyRequest In TableOfWithoutSupplyRequest.FindRows(Filter) Do
+			For Each RowColumnInfo In TableOfColumns Do
+				If RowOfWithoutSupplyRequest.DeliveryDate >= RowColumnInfo.StartDate 
+					And RowOfWithoutSupplyRequest.DeliveryDate <= RowColumnInfo.EndDate Then
+					NewRowAnalysis[RowColumnInfo.Name] = NewRowAnalysis[RowColumnInfo.Name] 
+					+ RowOfWithoutSupplyRequest.Quantity;
+					OrderedWithoutSupplyRequest = OrderedWithoutSupplyRequest + RowOfWithoutSupplyRequest.Quantity;
+				EndIf;
+			EndDo;
+		EndDo;
+		NewRowAnalysis.Ordered = NewRowAnalysis.Ordered + OrderedWithoutSupplyRequest;
+		
+		NewRowAnalysis.Shortage = 
+		NewRowAnalysis.TotalProcurement - NewRowAnalysis.Ordered - NewRowAnalysis.OpenBalance;
+		
+		NewRowAnalysis.Visible  = NewRowAnalysis.Shortage > 0;
+	EndDo;	
 EndProcedure
 
 &AtClient
@@ -202,6 +262,7 @@ Procedure AnalyzeOrders(Command)
 	
 	OpenParameters = New Structure();
 	OpenParameters.Insert("ArrayOfSupplyRequest", GetArrayOfSupplyRequestFromDetails());
+	OpenParameters.Insert("ShowPrecision", ThisObject.ShowPrecision);
 		
 	Notify = New NotifyDescription("SelectInternalSupplyRequestEnd", ThisObject, AdditionalParameters);
 	OpenForm("DataProcessor.Procurement.Form.FormSelectInternalSupplyRequest",
@@ -238,6 +299,8 @@ Function CollectParametersForCreateOrdersForm(Item, ItemKey, Unit)
 	FormParameters.Insert("Unit", Unit);
 	FormParameters.Insert("Store", ThisObject.Store);
 	FormParameters.Insert("Company", ThisObject.Company);
+	FormParameters.Insert("VisibleSelectionTables", ThisObject.VisibleSelectionTables);	
+	FormParameters.Insert("ShowPrecision", ThisObject.ShowPrecision);	
 		
 	FormParameters.Insert("TableOfBalance", New Array());
 	FormParameters.Insert("TableOfPurchase", New Array());
@@ -327,6 +390,8 @@ Procedure CreateOrdersEnd(Result, AdditionalParameters) Export
 		Return;
 	EndIf;		
 	
+	ThisObject.VisibleSelectionTables = Result.VisibleSelectionTables; 
+	
 	ClearResultsTable(Result.ItemKey);
 	
 	NewRow = ThisObject.ResultsItemList.Add();
@@ -347,6 +412,7 @@ Procedure CreateOrdersEnd(Result, AdditionalParameters) Export
 		FillPropertyValues(ThisObject.ResultsTableOfInternalSupplyRequest.Add(), Row);
 	EndDo;
 	SetVisibleInResultTables();	
+	SaveSettings();
 EndProcedure
 
 &AtClient
@@ -735,7 +801,8 @@ EndProcedure
 Function GetArrayOfSupplyRequestFromDetails()
 	ArrayOfSupplyRequest = New Array();
 	For Each Row In ThisObject.Details.GetItems() Do
-		If Not ValueIsFilled(Row.TotalQuantity) Then
+		If Not ValueIsFilled(Row.TotalQuantity)
+			Or TypeOf(Row.Document) <> Type("DocumentRef.InternalSupplyRequest") Then
 			Continue;
 		EndIf;
 		NewRow = New Structure();
@@ -844,50 +911,170 @@ EndProcedure
 &AtServer
 Procedure Fill_Details(ItemKey)
 	ThisObject.Details.GetItems().Clear();
+	
 	ProcurementDocumentsSelection = 
 	GetTreeOfProcurementDocuments(ThisObject.Store, 
 	                              ItemKey, 
 	                              ThisObject.Period.StartDate, 
 	                              ThisObject.Period.EndDate);
 		
-		While ProcurementDocumentsSelection.Next() Do
-			If Not ValueIsFilled(ProcurementDocumentsSelection.Order) Then
-				Continue;
-			EndIf;
-			NewRowDetails = ThisObject.Details.GetItems().Add();
-			NewRowDetails.Document = ProcurementDocumentsSelection.Order;
+	While ProcurementDocumentsSelection.Next() Do
+		If Not ValueIsFilled(ProcurementDocumentsSelection.Order) Then
+			Continue;
+		EndIf;
+		NewRowDetails = ThisObject.Details.GetItems().Add();
+		NewRowDetails.Document = ProcurementDocumentsSelection.Order;
 			
-			NewRowDetails.TotalQuantity = 0;
-			For Each RowColumnInfo In TableOfColumns Do
-				NewRowDetails[RowColumnInfo.Name] = 
-				GetProcurementReceiptByItemKeyAndOrder(ThisObject.Store, 
+		NewRowDetails.TotalQuantity = 0;
+		For Each RowColumnInfo In TableOfColumns Do
+			NewRowDetails[RowColumnInfo.Name] = 
+			GetProcurementReceiptByItemKeyAndOrder(ThisObject.Store, 
 				                                ItemKey, 
 				                                ProcurementDocumentsSelection.Order, 
 				                                RowColumnInfo.StartDate, 
 				                                RowColumnInfo.EndDate);
-				NewRowDetails.TotalQuantity = NewRowDetails.TotalQuantity + NewRowDetails[RowColumnInfo.Name];			
-			EndDo;
+			NewRowDetails.TotalQuantity = NewRowDetails.TotalQuantity + NewRowDetails[RowColumnInfo.Name];			
+		EndDo;
 			
-			ProcurementRecorderSelection = ProcurementDocumentsSelection.Select();
-			While ProcurementRecorderSelection.Next() Do
-				NewRowDetails.RowKey = New UUID(ProcurementRecorderSelection.RowKey);
+		ProcurementRecorderSelection = ProcurementDocumentsSelection.Select();
+		While ProcurementRecorderSelection.Next() Do
+			NewRowDetails.RowKey = New UUID(ProcurementRecorderSelection.RowKey);
 				
-				If ValueIsFilled(ProcurementRecorderSelection.Recorder) Then
-					NewRowDetailsRecorder = NewRowDetails.GetItems().Add();
-					NewRowDetailsRecorder.Document = ProcurementRecorderSelection.Recorder;
-					For Each RowColumnInfo In TableOfColumns Do
-						NewRowDetailsRecorder[RowColumnInfo.Name] =
+			If ValueIsFilled(ProcurementRecorderSelection.Recorder) Then
+				NewRowDetailsRecorder = NewRowDetails.GetItems().Add();
+				NewRowDetailsRecorder.Document = ProcurementRecorderSelection.Recorder;
+				For Each RowColumnInfo In TableOfColumns Do
+					NewRowDetailsRecorder[RowColumnInfo.Name] =
 						- GetProcurementExpenseByItemKeyAndOrder(ThisObject.Store,
 					                                       ItemKey, 
 					                                       ProcurementDocumentsSelection.Order, 
 					                                       ProcurementRecorderSelection.Recorder, 
 					                                       RowColumnInfo.StartDate, 
 					                                       RowColumnInfo.EndDate);
-					   NewRowDetails.TotalQuantity = NewRowDetails.TotalQuantity + NewRowDetailsRecorder[RowColumnInfo.Name];
-					EndDo;
+					NewRowDetails.TotalQuantity = NewRowDetails.TotalQuantity + NewRowDetailsRecorder[RowColumnInfo.Name];
+				EndDo;
+			EndIf;
+		EndDo;
+	EndDo;
+	
+	TableOfOrdersWithoutSupplyRequest = TableOfOrdersWithoutSupplyRequest(ThisObject.Store, ItemKey);
+	TableOfOrdersWithoutSupplyRequestByPeriods = New ValueTable();
+	TableOfOrdersWithoutSupplyRequestByPeriods.Columns.Add("Document");
+	TableOfOrdersWithoutSupplyRequestByPeriods.Columns.Add("TableByDates");
+	
+	For Each Row In TableOfOrdersWithoutSupplyRequest Do
+		TableByDates = New ValueTable();
+		TableByDates.Columns.Add("Name");
+		TableByDates.Columns.Add("Quantity");
+		For Each RowColumnInfo In TableOfColumns Do
+			If Row.DeliveryDate >= RowColumnInfo.StartDate And Row.DeliveryDate <= RowColumnInfo.EndDate Then
+				Filter = New Structure();
+				Filter.Insert("Name", RowColumnInfo.Name);
+				FindRows = TableByDates.FindRows(Filter);
+				If Not FindRows.Count() Then
+					NewRowByDate = TableByDates.Add();
+					NewRowByDate.Name = RowColumnInfo.Name;
+					NewRowByDate.Quantity = Row.Quantity;
+				Else
+					NewRowByDate[0].Name = RowColumnInfo.Name;
+					NewRowByDate[0].Quantity = NewRowByDate[0].Quantity + Row.Quantity;
 				EndIf;
+			EndIf;
+		EndDo;
+		If TableByDates.Count() Then
+			NewRowOrdersWithoutSupplyRequestByPeriod = TableOfOrdersWithoutSupplyRequestByPeriods.Add();
+			NewRowOrdersWithoutSupplyRequestByPeriod.Document = Row.Order;
+			NewRowOrdersWithoutSupplyRequestByPeriod.TableByDates = TableByDates;
+		EndIf;
+	EndDo;
+	
+	If TableOfOrdersWithoutSupplyRequestByPeriods.Count() Then
+		NewRowDetails = ThisObject.Details.GetItems().Add();
+		NewRowDetails.Document = R().I_6;
+		NewRowDetails.Picture = 4;
+		For Each Row In TableOfOrdersWithoutSupplyRequestByPeriods Do
+			NewRowDetailsRecorder = NewRowDetails.GetItems().Add();
+			NewRowDetailsRecorder.Document = Row.Document;
+			For Each RowByDate In Row.TableByDates Do
+				NewRowDetailsRecorder[RowByDate.Name] = RowByDate.Quantity;
 			EndDo;
 		EndDo;
+	EndIf;
+	
+EndProcedure
+
+&AtClient
+Procedure VisibleResultTablesOnChange(Item)
+	SetVisible();
+	SaveSettings();
+EndProcedure
+
+&AtClient
+Procedure VisibleAnalyisRowsOnChange(Item)
+	SetVisible();
+	SaveSettings();
+EndProcedure
+
+&AtClient
+Procedure VisibleCreatedDocumentTablesOnChange(Item)
+	SetVisible();	
+	SaveSettings();
+EndProcedure
+
+&AtServer
+Procedure SetVisible()
+	If Upper(ThisObject.VisibleResultTables) = Upper("All") Then
+		Items.ResultsTableOfBalance.Visible = True;
+		Items.ResultsTableOfPurchase.Visible = True;
+	ElsIf Upper(ThisObject.VisibleResultTables) = Upper("Transfer") Then
+		Items.ResultsTableOfBalance.Visible = True;
+		Items.ResultsTableOfPurchase.Visible = False;
+	ElsIf Upper(ThisObject.VisibleResultTables) = Upper("Purchase") Then
+		Items.ResultsTableOfBalance.Visible = False;
+		Items.ResultsTableOfPurchase.Visible = True;
+	EndIf;	
+
+	If Upper(ThisObject.VisibleCreatedDocumentTables) = Upper("All") Then
+		Items.CreatedInventoryTransferOrders.Visible = True;
+		Items.CreatedPurchaseOrders.Visible = True;
+	ElsIf Upper(ThisObject.VisibleCreatedDocumentTables) = Upper("Transfer") Then
+		Items.CreatedInventoryTransferOrders.Visible = True;
+		Items.CreatedPurchaseOrders.Visible = False;
+	ElsIf Upper(ThisObject.VisibleCreatedDocumentTables) = Upper("Purchase") Then
+		Items.CreatedInventoryTransferOrders.Visible = False;
+		Items.CreatedPurchaseOrders.Visible = True;
+	EndIf;	
+	 
+	If Upper(ThisObject.VisibleAnalyisRows) = Upper("All") Then
+		Items.Analysis.RowFilter = Undefined;
+	ElsIf Upper(ThisObject.VisibleAnalyisRows) = Upper("OnlyWithShortage") Then
+		Items.Analysis.RowFilter = New FixedStructure("Visible", True);
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure ShowPrecisionOnChange(Item)
+	ShowPrecision();
+	SaveSettings();
+EndProcedure
+
+Procedure ShowPrecision()
+	FieldFormat = ?(ThisObject.ShowPrecision, "", "NFD=0");
+	For Each Row In ThisObject.TableOfColumns Do
+		Items["Analysis" + Row.Name].Format = FieldFormat;
+		Items["Details" + Row.Name].Format = FieldFormat;
+	EndDo;
+	Items.DetailsTotalQuantity.Format = FieldFormat;
+	Items.AnalysisOpenBalance.Format = FieldFormat;
+	Items.AnalysisTotalProcurement.Format = FieldFormat;
+	Items.AnalysisOrdered.Format = FieldFormat;
+	Items.AnalysisShortage.Format = FieldFormat;
+	Items.AnalysisExpired.Format = FieldFormat;
+	Items.ResultsTableOfBalanceQuantity.Format = FieldFormat;
+	Items.ResultsTableOfPurchaseQuantity.Format = FieldFormat;
+	Items.ResultsTableOfInternalSupplyRequestQuantity.Format = FieldFormat;
+	Items.ResultsTableOfInternalSupplyRequestTransfer.Format = FieldFormat;
+	Items.ResultsTableOfInternalSupplyRequestPurchase.Format = FieldFormat;
 EndProcedure
 
 &AtServer
@@ -915,6 +1102,7 @@ Function  GetTableOfSupplyRequests(Store, StartDate, EndDate)
 	|	OrderBalanceTurnovers.ItemKey.Item
 	|;
 	|
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmpOrderBalance.Store AS Store,
@@ -927,9 +1115,10 @@ Function  GetTableOfSupplyRequests(Store, StartDate, EndDate)
 	|	END AS Unit,
 	|	tmpOrderBalance.QuantityProcurement AS QuantityProcurement,
 	|	tmpOrderBalance.QuantityOrdered AS QuantityOrdered,
-	|	tmpOrderBalance.QuantityProcurement - tmpOrderBalance.QuantityOrdered -
-	|		ISNULL(StockReservationBalance.QuantityBalance, 0) AS QuantityShortage,
-	|	OrderBalanceBalance.QuantityBalance AS QuantityExpired
+//	|	tmpOrderBalance.QuantityProcurement - tmpOrderBalance.QuantityOrdered -
+//	|		ISNULL(StockReservationBalance.QuantityBalance, 0) AS QuantityShortage,
+	|	OrderBalanceBalance.QuantityBalance AS QuantityExpired,
+	|	ISNULL(StockReservationBalance.QuantityBalance, 0) AS OpenBalance
 	|FROM
 	|	tmpOrderBalance AS tmpOrderBalance
 	|		LEFT JOIN AccumulationRegister.StockReservation.Balance(BEGINOFPERIOD(&StartDate, DAY), (Store, ItemKey) IN
@@ -953,7 +1142,9 @@ Function  GetTableOfSupplyRequests(Store, StartDate, EndDate)
 	|			ELSE CAST(Order AS Document.InternalSupplyRequest).ProcurementDate
 	|		END < BEGINOFPERIOD(&StartDate, DAY)) AS OrderBalanceBalance
 	|		ON tmpOrderBalance.Store = OrderBalanceBalance.Store
-	|		AND tmpOrderBalance.ItemKey = OrderBalanceBalance.ItemKey";
+	|		AND tmpOrderBalance.ItemKey = OrderBalanceBalance.ItemKey
+	|ORDER BY
+	|	tmpOrderBalance.Item.Code";
 	Query.SetParameter("Store", Store);
 	Query.SetParameter("StartDate", StartDate);
 	Query.SetParameter("EndDate", EndDate);	
@@ -961,6 +1152,7 @@ Function  GetTableOfSupplyRequests(Store, StartDate, EndDate)
 	QueryTable = QueryResult.Unload();
 	Return QueryTable;
 EndFunction
+
 
 &AtServer
 Function GetProcurementByItemKey(Store, ItemKey, StartDate, EndDate)
@@ -1146,3 +1338,115 @@ Function GetExpenseQueryText_PurchaseOrder()
 	|	ISNULL(GoodsReceiptSchedule.DeliveryDate, tmpPurchaseOrders.Recorder.Date) BETWEEN BEGINOFPERIOD(&StartDate,
 	|		DAY) AND ENDOFPERIOD(&EndDate, DAY)";
 EndFunction
+
+&AtServer
+Function TableOfOrdersWithoutSupplyRequest(Store, ItemKey = Undefined)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	OrderBalanceTurnovers.Store AS Store,
+	|	OrderBalanceTurnovers.ItemKey AS ItemKey,
+	|	OrderBalanceTurnovers.RowKey AS RowKey
+	|INTO tmp
+	|FROM
+	|	AccumulationRegister.OrderBalance.Turnovers(,,, CASE
+	|		WHEN &Filter_ItemKey
+	|			THEN ItemKey = &ItemKey
+	|		ELSE TRUE
+	|	END
+	|	AND Store = &Store
+	|	AND Order REFS Document.InternalSupplyRequest) AS OrderBalanceTurnovers
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	OrderBalanceTurnovers.Store AS Store,
+	|	OrderBalanceTurnovers.Order AS Order,
+	|	OrderBalanceTurnovers.ItemKey AS ItemKey,
+	|	OrderBalanceTurnovers.RowKey AS RowKey,
+	|	OrderBalanceTurnovers.QuantityReceipt AS QuantityReceipt,
+	|	MAX(BEGINOFPERIOD(GoodsReceiptSchedule.DeliveryDate, DAY)) AS DeliveryDate
+	|INTO tmpPurchaseOrders
+	|FROM
+	|	AccumulationRegister.OrderBalance.Turnovers(,,, Store = &Store
+	|	AND CASE
+	|		WHEN &Filter_ItemKey
+	|			THEN ItemKey = &ItemKey
+	|		ELSE TRUE
+	|	END
+	|	AND Order REFS Document.PurchaseOrder) AS OrderBalanceTurnovers
+	|		LEFT JOIN tmp AS tmp
+	|		ON tmp.Store = OrderBalanceTurnovers.Store
+	|		AND tmp.ItemKey = OrderBalanceTurnovers.ItemKey
+	|		AND tmp.RowKey = OrderBalanceTurnovers.RowKey
+	|		LEFT JOIN AccumulationRegister.GoodsReceiptSchedule AS GoodsReceiptSchedule
+	|		ON CAST(OrderBalanceTurnovers.Order AS Document.PurchaseOrder) = CAST(GoodsReceiptSchedule.Order AS
+	|			Document.PurchaseOrder)
+	|		AND OrderBalanceTurnovers.Store = GoodsReceiptSchedule.Store
+	|		AND OrderBalanceTurnovers.ItemKey = GoodsReceiptSchedule.ItemKey
+	|		AND OrderBalanceTurnovers.RowKey = GoodsReceiptSchedule.RowKey
+	|WHERE
+	|	tmp.ItemKey IS NULL
+	|GROUP BY
+	|	OrderBalanceTurnovers.Store,
+	|	OrderBalanceTurnovers.Order,
+	|	OrderBalanceTurnovers.ItemKey,
+	|	OrderBalanceTurnovers.RowKey,
+	|	OrderBalanceTurnovers.QuantityReceipt
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TransferOrderBalanceTurnovers.StoreReceiver AS Store,
+	|	TransferOrderBalanceTurnovers.Order AS Order,
+	|	TransferOrderBalanceTurnovers.ItemKey AS ItemKey,
+	|	TransferOrderBalanceTurnovers.RowKey AS RowKey,
+	|	TransferOrderBalanceTurnovers.QuantityReceipt AS QuantityReceipt,
+	|	BEGINOFPERIOD(CAST(TransferOrderBalanceTurnovers.Order AS Document.InventoryTransferOrder).Date, DAY) AS DeliveryDate
+	|INTO tmpInventoryTransferOrders
+	|FROM
+	|	AccumulationRegister.TransferOrderBalance.Turnovers(,,, StoreReceiver = &Store
+	|	AND CASE
+	|		WHEN &Filter_ItemKey
+	|			THEN ItemKey = &ItemKey
+	|		ELSE TRUE
+	|	END
+	|	AND Order REFS Document.InventoryTransferOrder) AS TransferOrderBalanceTurnovers
+	|		LEFT JOIN tmp AS tmp
+	|		ON TransferOrderBalanceTurnovers.StoreReceiver = tmp.Store
+	|		AND TransferOrderBalanceTurnovers.ItemKey = tmp.ItemKey
+	|		AND TransferOrderBalanceTurnovers.RowKey = tmp.RowKey
+	|WHERE
+	|	tmp.ItemKey IS NULL
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpPurchaseOrders.Store AS Store,
+	|	tmpPurchaseOrders.Order AS Order,
+	|	tmpPurchaseOrders.ItemKey AS ItemKey,
+	|	tmpPurchaseOrders.RowKey AS RowKey,
+	|	tmpPurchaseOrders.QuantityReceipt AS Quantity,
+	|	tmpPurchaseOrders.DeliveryDate AS DeliveryDate
+	|FROM
+	|	tmpPurchaseOrders AS tmpPurchaseOrders
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	tmpInventoryTransferOrders.Store,
+	|	tmpInventoryTransferOrders.Order,
+	|	tmpInventoryTransferOrders.ItemKey,
+	|	tmpInventoryTransferOrders.RowKey,
+	|	tmpInventoryTransferOrders.QuantityReceipt,
+	|	tmpInventoryTransferOrders.DeliveryDate
+	|FROM
+	|	tmpInventoryTransferOrders AS tmpInventoryTransferOrders";
+	Query.SetParameter("ItemKey", ItemKey);
+	Query.SetParameter("Store", Store);
+	Query.SetParameter("Filter_ItemKey", ValueIsFilled(ItemKey));
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable; 
+EndFunction
+

@@ -1825,25 +1825,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.ShowBetaTesting</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>ReadDataHistory</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>ViewDataHistory</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>InformationRegister.IDInfo</name>
 		<right>
 			<name>Read</name>
@@ -4713,25 +4694,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.ShowAlphaTestingSaas</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>ReadDataHistory</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>ViewDataHistory</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>CommonForm.EditDescriptions</name>
 		<right>
 			<name>View</name>
@@ -4987,6 +4949,21 @@
 		</right>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>ExchangePlan.FullExchange</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
 			<value>true</value>
 		</right>
 	</object>

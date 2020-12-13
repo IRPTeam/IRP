@@ -28,7 +28,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	SalesOrdersList.Parameters.SetParameterValue("Partner", Object.Ref);
 	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
-	Items.Parent.Visible = GetFunctionalOption("ShowAlphaTestingSaas");
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
 EndProcedure
 

@@ -5,6 +5,28 @@ Procedure SearchByBarcode(Command, Barcode = "")
 EndProcedure
 
 &AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure InputBarcode(Command)
+	Barcode = 0;
+	ShowInputNumber(New NotifyDescription("AddBarcodeAfterEnd", ThisForm), Barcode, "Barcode:");
+EndProcedure
+
+&AtClient
+Procedure AddBarcodeAfterEnd(Number, AdditionalParameters) Export
+	If Not ValueIsFilled(Number) Then
+		Return;
+	EndIf;
+	SearchByBarcode(Undefined, Format(Number, "NG="));
+EndProcedure
+
+
+&AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 
 	NotifyParameters = New Structure();

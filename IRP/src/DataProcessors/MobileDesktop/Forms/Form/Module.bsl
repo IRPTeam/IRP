@@ -4,6 +4,13 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, DataProcessors.MobileDesktop, Items.PageAddInfo);
 EndProcedure
 
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
+EndProcedure
+
 &AtServer
 Procedure ItemOnChangeAtServer()
 	Query = New Query;
@@ -171,4 +178,3 @@ EndProcedure
 Procedure NotOK(Command)
 	WriteReg(False);
 EndProcedure
-

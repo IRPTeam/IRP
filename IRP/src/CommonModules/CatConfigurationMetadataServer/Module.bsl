@@ -37,7 +37,7 @@ Function CheckDescriptionFillingEnabled(Object) Export
 	Else
 		QuerySelect = QueryExecution.Select();
 		QuerySelect.Next();
-		Return QuerySelect.CheckDescription;
+		Return QuerySelect.CheckDescriptionFilling;
 	EndIf;
 EndFunction
 

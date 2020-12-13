@@ -3,10 +3,12 @@
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("PartnerApTransactions"   , PostingServer.CreateTable(AccReg.PartnerApTransactions));
-	Tables.Insert("PartnerArTransactions"   , PostingServer.CreateTable(AccReg.PartnerArTransactions));
-	Tables.Insert("RevenuesTurnovers"       , PostingServer.CreateTable(AccReg.RevenuesTurnovers));
-	Tables.Insert("ReconciliationStatement" , PostingServer.CreateTable(AccReg.ReconciliationStatement));
+	Tables.Insert("PartnerApTransactions"                 , PostingServer.CreateTable(AccReg.PartnerApTransactions));
+	Tables.Insert("PartnerArTransactions"                 , PostingServer.CreateTable(AccReg.PartnerArTransactions));
+	Tables.Insert("RevenuesTurnovers"                     , PostingServer.CreateTable(AccReg.RevenuesTurnovers));
+	Tables.Insert("ReconciliationStatement"               , PostingServer.CreateTable(AccReg.ReconciliationStatement));
+	Tables.Insert("PartnerArTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
+	Tables.Insert("AdvanceFromCustomers_Lock"             , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
 	
 	Query = New Query();
 	Query.Text =
@@ -103,15 +105,34 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Company,
 		|	tmp.LegalName,
 		|	tmp.Currency,
-		|	tmp.Period";
+		|	tmp.Period
+		|;
+		|//[5]////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmp.Company AS Company,
+		|	tmp.BasisDocument AS BasisDocument,
+		|	tmp.Partner AS Partner,
+		|	tmp.LegalName AS LegalName,
+		|	tmp.Agreement AS Agreement,
+		|	tmp.Currency AS Currency,
+		|	tmp.Amount AS DocumentAmount,
+		|	tmp.Period AS Period,
+		|	tmp.Key AS Key,
+		|	tmp.IsVendor,
+		|	tmp.IsCustomer
+		|FROM
+		|	tmp AS tmp
+		|WHERE
+		|	tmp.IsCustomer";
 	
 	Query.SetParameter("Ref", Ref);
 	QueryResults = Query.ExecuteBatch();
 	
-	Tables.PartnerApTransactions   = QueryResults[1].Unload();
-	Tables.PartnerArTransactions   = QueryResults[2].Unload();
-	Tables.RevenuesTurnovers       = QueryResults[3].Unload();
-	Tables.ReconciliationStatement = QueryResults[4].Unload();
+	Tables.PartnerApTransactions     = QueryResults[1].Unload();
+	Tables.PartnerArTransactions     = QueryResults[2].Unload();
+	Tables.RevenuesTurnovers         = QueryResults[3].Unload();
+	Tables.ReconciliationStatement   = QueryResults[4].Unload();
+	Tables.AdvanceFromCustomers_Lock = QueryResults[5].Unload();
 	
 	Return Tables;
 EndFunction
@@ -140,7 +161,55 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;	
+	// Advance from customers
+	Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance =
+		AccumulationRegisters.AdvanceFromCustomers.GetTableAdvanceFromCustomers_OffsetOfAdvance(Parameters.Object.RegisterRecords
+			, Parameters.PointInTime
+			, Parameters.DocumentDataTables.AdvanceFromCustomers_Lock);
+			
+	If Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance.Count() Then
+    	Query = New Query();
+    	Query.Text = 
+    	"SELECT
+    	|	tmp.Company,
+    	|	tmp.Partner,
+    	|	tmp.LegalName,
+    	|	tmp.BasisDocument,
+    	|	tmp.Currency,
+    	|	tmp.Amount
+    	|INTO tmp
+    	|FROM
+    	|	&QueryTable AS tmp
+    	|;
+    	|////////////////////////////////////////////////////////////////////////////////
+    	|SELECT
+    	|	AccountsStatementBalance.Company,
+    	|	AccountsStatementBalance.Partner,
+    	|	AccountsStatementBalance.LegalName,
+    	|	AccountsStatementBalance.Currency,
+    	|	&Period AS Period,
+    	|	AccountsStatementBalance.AdvanceToSuppliersBalance AS AdvanceToSuppliersBalance,
+    	|	-tmp.Amount AS AdvanceToSuppliers
+    	|FROM
+    	|	AccumulationRegister.AccountsStatement.Balance(&PointInTime, (Company, Partner, LegalName, Currency) IN
+    	|		(SELECT
+    	|			tmp.Company,
+    	|			tmp.Partner,
+    	|			tmp.LegalName,
+    	|			tmp.Currency
+    	|		FROM
+    	|			tmp AS tmp)) AS AccountsStatementBalance
+    	|		INNER JOIN tmp AS tmp
+    	|		ON AccountsStatementBalance.Company = tmp.Company
+    	|		AND AccountsStatementBalance.Partner = tmp.Partner
+    	|		AND AccountsStatementBalance.LegalName = tmp.LegalName
+    	|		AND AccountsStatementBalance.Currency = tmp.Currency";
+    	Query.SetParameter("QueryTable", Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance);
+    	Query.SetParameter("PointInTime", Parameters.PointInTime);
+    	Query.SetParameter("Period", Parameters.Object.Date);
+    	Parameters.DocumentDataTables.Insert("PartnerArTransactions_OffsetOfAdvance_AccountStatement",
+    	Query.Execute().Unload());
+    EndIf;	
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -174,6 +243,18 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");
 	ArrayOfTables.Add(Table2);
 	
+	Table3 = Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance.Copy();
+	Table3.Columns.Amount.Name = "TransactionAR";
+	PostingServer.AddColumnsToAccountsStatementTable(Table3);
+	Table3.FillValues(AccumulationRecordType.Expense, "RecordType");
+	ArrayOfTables.Add(Table3);
+	
+	Table4 = Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance.Copy();
+	Table4.Columns.Amount.Name = "AdvanceFromCustomers";
+	PostingServer.AddColumnsToAccountsStatementTable(Table4);
+	Table4.FillValues(AccumulationRecordType.Expense, "RecordType");
+	ArrayOfTables.Add(Table4);
+	
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountsStatement,
 		New Structure("RecordSet, WriteInTransaction",
 			PostingServer.JoinTables(ArrayOfTables,
@@ -187,13 +268,28 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.PartnerApTransactions));
-		
+
 	// PartnerArTransactions
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PartnerArTransactions,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.PartnerArTransactions));
+	// PartnerArTransactions [Receipt]  
+	// PartnerArTransactions_OffsetOfAdvance [Expense]
+	ArrayOfTables = New Array();
+	Table1 = Parameters.DocumentDataTables.PartnerArTransactions.Copy();
+	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table1.FillValues(AccumulationRecordType.Receipt, "RecordType");
+	ArrayOfTables.Add(Table1);
 	
+	Table2 = Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance.Copy();
+	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
+	ArrayOfTables.Add(Table2);
+	
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PartnerArTransactions,
+		New Structure("RecordSet, WriteInTransaction",
+			PostingServer.JoinTables(ArrayOfTables,
+				"RecordType, Period, Company, BasisDocument, Partner, 
+				|LegalName, Agreement, Currency, Amount"),
+				True));
+		
 	// RevenuesTurnovers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.RevenuesTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.RevenuesTurnovers));
@@ -203,7 +299,13 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.ReconciliationStatement));
-		
+	
+	// AdvanceFromCustomers
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AdvanceFromCustomers,
+		New Structure("RecordType, RecordSet",
+			AccumulationRecordType.Expense,
+			Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance));
+	
 	Return PostingDataTables;
 EndFunction
 

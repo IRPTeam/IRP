@@ -164,23 +164,23 @@ Scenario: _0205001 preparation (commands)
 				And "List" table contains lines
 					| 'Number' |
 					| '$$NumberPurchaseInvoice0205001$$'       |
-	* Add plugin QuantityCompare
-		* Open form to add plugin
-			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-			And I click the button named "FormCreate"
-		* Filling plugin data and adding it to the database
-			And I select external file "#workingDir#\DataProcessor\QuantityCompare.epf"
-			And I click the button named "FormAddExtDataProc"
-			And I input "" text in "Path to plugin for test" field
-			And I input "CompareQuantity" text in "Name" field
-			And I click Open button of the field named "Description_en"
-			And I input "Compare quantity" text in the field named "Description_en"
-			And I input "Compare quantity tr" text in the field named "Description_tr"
-			And I click "Ok" button
-			And I click "Save and close" button
-			And Delay 5
-		* Check the addition of plugin
-			Then I check for the "ExternalDataProc" catalog element with the "Description_en" "Compare quantity"
+	// * Add plugin QuantityCompare
+	// 	* Open form to add plugin
+	// 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+	// 		And I click the button named "FormCreate"
+	// 	* Filling plugin data and adding it to the database
+	// 		And I select external file "#workingDir#\DataProcessor\QuantityCompare.epf"
+	// 		And I click the button named "FormAddExtDataProc"
+	// 		And I input "" text in "Path to plugin for test" field
+	// 		And I input "CompareQuantity" text in "Name" field
+	// 		And I click Open button of the field named "Description_en"
+	// 		And I input "Compare quantity" text in the field named "Description_en"
+	// 		And I input "Compare quantity tr" text in the field named "Description_tr"
+	// 		And I click "Ok" button
+	// 		And I click "Save and close" button
+	// 		And Delay 5
+	// 	* Check the addition of plugin
+	// 		Then I check for the "ExternalDataProc" catalog element with the "Description_en" "Compare quantity"
 		* Create test configuration metadata
 			Given I open hyperlink "e1cib/list/Catalog.ConfigurationMetadata"
 			And I click "List" button			

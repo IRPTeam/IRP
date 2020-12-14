@@ -56,6 +56,7 @@ Scenario: _092001 preparation (PrintFormSalesOrder)
 		When Create information register TaxSettings (Sales tax)
 		When Create information register Taxes records (Sales tax)
 		When add sales tax settings 
+		When auto filling Configuration metadata catalog
 
 Scenario: _25001 adding print plugin for sales order
 	* Open form to add plugin
@@ -82,19 +83,13 @@ Scenario: _25002 create a print command for Sales order
 		* Create metadata for sales order and select it for the command
 			If "List" table does not contain lines Then
 				| 'Description' |
-				| 'SalesOrder'  |
+				| 'Sales order'  |
 				And I click the button named "FormCreate"
 				And I click Select button of "Configuration metadata" field
+				And I click "List" button
 				And I go to line in "List" table
 					| 'Description' |
-					| 'Documents'   |
-				And I move one level down in "List" table
-				And I click the button named "FormCreate"
-				And I input "SalesOrder" text in "Description" field
-				And I click "Save and close" button
-				And I go to line in "List" table
-					| 'Description' |
-					| 'SalesOrder'  |
+					| 'Sales order'  |
 				And I click the button named "FormChoose"
 				And I click Select button of "Plugins" field
 				And I go to line in "List" table
@@ -104,7 +99,7 @@ Scenario: _25002 create a print command for Sales order
 				And I click "Save and close" button		
 			And I go to line in "List" table
 				| 'Configuration metadata' |
-				| 'SalesOrder'  |
+				| 'Sales order'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened

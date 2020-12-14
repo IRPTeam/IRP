@@ -630,7 +630,7 @@ Scenario: _0205007 add test command to the list of documents Cash transfer order
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'  | 'Plugins' |
-		| 'CashTransferOrder'             | 'Test command'       |
+		| 'Cash transfer order'             | 'Test command'       |
 	* Check the command from the document list CashTransferOrder
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to the last line in "List" table
@@ -1723,7 +1723,7 @@ Scenario: _0205022 add test command to the list of documents Cheque bond transac
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'ChequeBondTransaction' |
+				| 'Cheque bond transaction' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2921,7 +2921,7 @@ Scenario: _0205038 add test command to the list of documents Stock Adjustment As
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And I click the button named "FormCreate"
 	* Filling test command data for StockAdjustmentAsWriteOff
-		* CrAnd I click Select button of "Configuration metadata" field
+			And I click Select button of "Configuration metadata" field
 			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |

@@ -50,6 +50,7 @@ Scenario: _3001002 preparation
 					| "Number" |
 					| "$$NumberPurchaseOrder017001$$" |
 				When create PurchaseOrder017001
+		When auto filling Configuration metadata catalog
 
 Scenario: _300000 user check for Turkish data
 	* Open users list
@@ -81,18 +82,6 @@ Scenario: _300201 add-on plugin to generate unique barcodes
 	Then I check for the "ExternalDataProc" catalog element with the "Description_en" "GenerateBarcode"
 
 Scenario: _300202 setting up barcode generation button display in Purchase order document
-	* Add settings to the catalog ConfigurationMetadata
-		Given I open hyperlink "e1cib/list/Catalog.ConfigurationMetadata"
-		And I move one level down in "List" table
-		And I click the button named "FormCreate"
-		And I input "Labeling" text in "Description" field
-		And I click Select button of "Parent" field
-		And I go to line in "List" table
-			| Description |
-			| Documents   |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And Delay 5
 	* Add settings to the register ExternalCommands
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And I click the button named "FormCreate"

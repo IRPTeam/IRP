@@ -3536,246 +3536,234 @@ Scenario: _010019 check the operation of the command to open an item list from I
 
 
 
-Scenario: _010020 check the operation of Quantity Compare plugin (comparison of the plan / fact in Goods receipt)
-	* Add Command
-		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
-		And I click the button named "FormCreate"
-		And I click Select button of "Configuration metadata" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Documents'   |
-		And I click the button named "FormCreate"
-		And I input "GoodsReceipt" text in "Description" field
-		And I click Select button of "Parent" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Documents'   |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		And I go to line in "List" table
-			| 'Description' |
-			| 'GoodsReceipt'  |
-		And I select current line in "List" table
-		And I click Select button of "Plugins" field
-		Then "Plugins" window is opened
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Compare quantity' |
-		And I select current line in "List" table
-		And I select "Object form" exact value from "Form type" drop-down list
-		And I click "Save and close" button
-	* Check command save
-		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
-		And "List" table contains lines
-		| 'Configuration metadata'      | 'Plugins' |
-		| 'GoodsReceipt'                | 'Compare quantity'       |
-	* Create Goods receipt based on PI
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPurchaseInvoice0205001$$' |
-		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-	* Check filling in Goods Receipt
-		Then the form attribute named "Store" became equal to "Store 02"
-		And "ItemList" table contains lines
-			| 'Item'  | 'Quantity' | 'Currency' | 'Item key' | 'Store'    | 'Unit' | 'Receipt basis'           |
-			| 'Dress' | '8,000'    | 'TRY'      | 'L/Green'  | 'Store 02' | 'pcs'  | '$$PurchaseInvoice0205001$$' |
-			| 'Boots' | '15,000'   | 'TRY'      | '37/18SD'  | 'Store 02' | 'pcs'  | '$$PurchaseInvoice0205001$$' |
-	* Open Quantity Compare
-		And I click "Compare quantity" button
-	* Check of adding goods by barcode search
-		And in the table "PhysItemList" I click the button named "PhysItemListSearchByBarcode"
-		And I input "978020137962" text in "InputFld" field
-		And I click "OK" button
-		And in the table "PhysItemList" I click the button named "PhysItemListSearchByBarcode"
-		And I input "978020137962" text in "InputFld" field
-		And I click "OK" button
-		And in the table "PhysItemList" I click the button named "PhysItemListSearchByBarcode"
-		And I input "2202283739" text in "InputFld" field
-		And I click "OK" button
-		And in the table "PhysItemList" I click the button named "PhysItemListSearchByBarcode"
-		And I input "2202283739" text in "InputFld" field
-		And I click "OK" button
-		And in the table "PhysItemList" I click the button named "PhysItemListSearchByBarcode"
-		And I input "2202283739" text in "InputFld" field
-		And I click "OK" button
-		And "PhysItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Unit' | 'Q'     |
-			| 'Boots' | '37/18SD'  | 'pcs'  | '2,000' |
-			| 'Dress' | 'L/Green'  | 'pcs'  | '3,000' |
-	* Add items manually via the Add button
-		And in the table "PhysItemList" I click the button named "PhysItemListAdd"
-		And I click choice button of the attribute named "PhysItemListItem" in "PhysItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'       |
-		And I select current line in "List" table
-		And I click choice button of the attribute named "PhysItemListItemKey" in "PhysItemList" table
-		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | '38/18SD'  |
-		And I select current line in "List" table
-		# temporarily
-		And I click choice button of the attribute named "PhysItemListUnit" in "PhysItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'pcs'         |
-		And I select current line in "List" table
-		# temporarily
-		And I activate field named "PhysItemListCount" in "PhysItemList" table
-		And I input "1,000" text in the field named "PhysItemListCount" of "PhysItemList" table
-		And "PhysItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Unit' | 'Q'     |
-			| 'Boots' | '37/18SD'  | 'pcs'  | '2,000' |
-			| 'Dress' | 'L/Green'  | 'pcs'  | '3,000' |
-			| 'Boots' | '38/18SD'  | 'pcs'  | '1,000' |
-	* Add items via the Pick up button
-		And in the table "PhysItemList" I click the button named "PhysItemListOpenPickupItems"
-		And I go to line in "ItemList" table
-			| Title |
-			| Dress |
-		And I select current line in "ItemList" table
-		And I go to line in "ItemKeyList" table
-			| Title   |
-			| L/Green |
-		And I select current line in "ItemKeyList" table
-		And I go to line in "ItemTableValue" table
-			| 'Item'  | 'Item key' |
-			| 'Dress' | 'L/Green' |
-		And I select current line in "ItemTableValue" table
-		And I finish line editing in "ItemTableValue" table
-		And I click the button named "FormCommandSaveAndClose"
-		And "PhysItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Unit' | 'Q'     |
-			| 'Boots' | '37/18SD'  | 'pcs'  | '2,000' |
-			| 'Dress' | 'L/Green'  | 'pcs'  | '4,000' |
-			| 'Boots' | '38/18SD'  | 'pcs'  | '1,000' |
-	* Difference reconciliation
-		And in the table "PhysItemList" I click the button named "PhysItemListSwitchItemLists"
-		Then the number of "CompareItemList" table lines is "меньше или равно" 3
-		And "CompareItemList" table became equal
-			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
-			| 'Dress' | '8,000'    | '-4,000'     | 'L/Green'  | 'pcs'  | '4,000' |
-			| 'Boots' | '15,000'   | '-13,000'    | '37/18SD'  | 'pcs'  | '2,000' |
-			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
-	* Check quantity changes manually on the scan tab
-		And in the table "CompareItemList" I click the button named "CompareItemListSwitchItemLists"
-		And I activate field named "PhysItemListCount" in "PhysItemList" table
-		And I go to line in "PhysItemList" table
-			| 'Item'  | 'Item key' | 'Q'     | 'Unit' |
-			| 'Dress' | 'L/Green'  | '4,000' | 'pcs'  |
-		And I select current line in "PhysItemList" table
-		And I input "5,000" text in the field named "PhysItemListCount" of "PhysItemList" table
-		And I finish line editing in "PhysItemList" table
-		And "PhysItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Unit' | 'Q'     |
-			| 'Boots' | '37/18SD'  | 'pcs'  | '2,000' |
-			| 'Dress' | 'L/Green'  | 'pcs'  | '5,000' |
-	* Check quantity changes manually on the comparison tab
-		And in the table "PhysItemList" I click the button named "PhysItemListSwitchItemLists"
-		And "CompareItemList" table contains lines
-			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
-			| 'Dress' | '8,000'    | '-3,000'     | 'L/Green'  | 'pcs'  | '5,000' |
-			| 'Boots' | '15,000'   | '-13,000'    | '37/18SD'  | 'pcs'  | '2,000' |
-			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
-		And I go to line in "CompareItemList" table
-			| 'Count' | 'Difference' | 'Item'  | 'Item key' | 'Quantity' | 'Unit' |
-			| '2,000' | '-13,000'    | 'Boots' | '37/18SD'  | '15,000'   | 'pcs'  |
-		And I select current line in "CompareItemList" table
-		And I input "3,000" text in "Count" field of "CompareItemList" table
-		And I finish line editing in "CompareItemList" table
-		And "CompareItemList" table contains lines
-			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
-			| 'Dress' | '8,000'    | '-3,000'     | 'L/Green'  | 'pcs'  | '5,000' |
-			| 'Boots' | '15,000'   | '-12,000'    | '37/18SD'  | 'pcs'  | '3,000' |
-			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
-	* Delete lines in scan tab
-		And in the table "CompareItemList" I click the button named "CompareItemListSwitchItemLists"
-		And I go to line in "PhysItemList" table
-			| 'Item'  | 'Item key' | 'Q'     | 'Unit' |
-			| 'Dress' | 'L/Green'  | '5,000' | 'pcs'  |
-		And in the table "PhysItemList" I click the button named "PhysItemListDelete"
-		Then the number of "PhysItemList" table lines is "меньше или равно" 2
-	* Add items by scanning on the tab "CompareItemList"
-		And in the table "PhysItemList" I click the button named "PhysItemListSwitchItemLists"
-		And in the table "CompareItemList" I click the button named "CompareItemListSearchByBarcode"
-		And I input "978020137962" text in "InputFld" field
-		And I click "OK" button
-		And "CompareItemList" table contains lines
-			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
-			| 'Boots' | '15,000'   | '-11,000'    | '37/18SD'  | 'pcs'  | '4,000' |
-			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
-		Then the number of "CompareItemList" table lines is "меньше или равно" 2
-	* Add items to the tab "CompareItemList" through the Add button
-		And in the table "CompareItemList" I click the button named "CompareItemListAdd"
-		And I click choice button of the attribute named "CompareItemListItem" in "CompareItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Shirt'       |
-		And I select current line in "List" table
-		And I activate field named "CompareItemListItemKey" in "CompareItemList" table
-		And I click choice button of the attribute named "CompareItemListItemKey" in "CompareItemList" table
-		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '38/Black' |
-		And I select current line in "List" table
-		And I activate field named "CompareItemListUnit" in "CompareItemList" table
-		And I click choice button of the attribute named "CompareItemListUnit" in "CompareItemList" table
-		And I select current line in "List" table
-		And I activate "Count" field in "CompareItemList" table
-		And I input "1,000" text in "Count" field of "CompareItemList" table
-		And I finish line editing in "CompareItemList" table
-		And "CompareItemList" table contains lines
-			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
-			| 'Boots' | '15,000'   | '-11,000'    | '37/18SD'  | 'pcs'  | '4,000' |
-			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
-			| 'Shirt' | ''         | '1,000'      | '38/Black' | 'pcs'  | '1,000' |
-		Then the number of "CompareItemList" table lines is "меньше или равно" 3
-	* Add items to the tab "CompareItemList" through the Pick up button
-		And in the table "CompareItemList" I click the button named "CompareItemListOpenPickupItems"
-		And I go to line in "ItemList" table
-			| 'Title' |
-			| 'Shirt' |
-		And I select current line in "ItemList" table
-		And I go to line in "ItemKeyList" table
-			| 'Title'  | 'Unit' |
-			| '36/Red' | 'pcs'  |
-		And I select current line in "ItemKeyList" table
-		And I click "Transfer to document" button
-		And "CompareItemList" table contains lines
-			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
-			| 'Boots' | '15,000'   | '-11,000'    | '37/18SD'  | 'pcs'  | '4,000' |
-			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
-			| 'Shirt' | ''         | '1,000'      | '38/Black' | 'pcs'  | '1,000' |
-			| 'Shirt' | ''         | '1,000'      | '36/Red'   | 'pcs'  | '1,000' |
-		Then the number of "CompareItemList" table lines is "меньше или равно" 4
-	* Collapse of the tabular part with data on documents-bases
-		And "ExpItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Base on'                 | 'Unit' | 'Q'      |
-			| 'Dress' | 'L/Green'  | '$$PurchaseInvoice0205001$$' | 'pcs'  | '8,000'  |
-			| 'Boots' | '37/18SD'  | '$$PurchaseInvoice0205001$$' | 'pcs'  | '15,000' |
-		* Check the ExpItemList table collapse 
-			And I click "Show hide exp. item list" button
-			When I Check the steps for Exception
-			|'Then I select all lines of "ExpItemList" table'|
-		* Check the ExpItemList table uncolapse
-			And I click "Show hide exp. item list" button
-			And "ExpItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Base on'                 | 'Unit' | 'Q'      |
-			| 'Dress' | 'L/Green'  | '$$PurchaseInvoice0205001$$' | 'pcs'  | '8,000'  |
-			| 'Boots' | '37/18SD'  | '$$PurchaseInvoice0205001$$' | 'pcs'  | '15,000' |
-	* Check the transfer of filled items to Goods receipt
-		And in the table "PhysItemList" I click the button named "PhysItemListSwitchItemLists"
-		And "CompareItemList" table contains lines
-			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
-			| 'Boots' | '15,000'   | '-12,000'    | '37/18SD'  | 'pcs'  | '3,000' |
-			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
-		And I click "Transfer to document" button
-		And "ItemList" table contains lines
-			| 'Item'  | 'Quantity' | 'Item key' | 'Store'    | 'Unit' | 'Receipt basis'                    |
-			| 'Boots' | '3,000'    | '37/18SD'  | 'Store 02' | 'pcs'  | '$$PurchaseInvoice0205001$$'          |
-			| 'Boots' | '1,000'    | '38/18SD'  | 'Store 02' | 'pcs'  | ''                                 |
-		And I close all client application windows
+# Scenario: _010020 check the operation of Quantity Compare plugin (comparison of the plan / fact in Goods receipt)
+# 	* Add Command
+# 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+# 		And I click the button named "FormCreate"
+# 		And I click Select button of "Configuration metadata" field
+# 		And I go to line in "List" table
+# 			| 'Description' |
+# 			| 'GoodsReceipt'  |
+# 		And I select current line in "List" table
+# 		And I click Select button of "Plugins" field
+# 		And I go to line in "List" table
+# 			| 'Description' |
+# 			| 'Compare quantity' |
+# 		And I select current line in "List" table
+# 		And I select "Object form" exact value from "Form type" drop-down list
+# 		And I click "Save and close" button
+# 	* Check command save
+# 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+# 		And "List" table contains lines
+# 		| 'Configuration metadata'      | 'Plugins' |
+# 		| 'GoodsReceipt'                | 'Compare quantity'       |
+# 	* Create Goods receipt based on PI
+# 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+# 		And I go to line in "List" table
+# 			| 'Number' |
+# 			| '$$NumberPurchaseInvoice0205001$$' |
+# 		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+# 	* Check filling in Goods Receipt
+# 		Then the form attribute named "Store" became equal to "Store 02"
+# 		And "ItemList" table contains lines
+# 			| 'Item'  | 'Quantity' | 'Currency' | 'Item key' | 'Store'    | 'Unit' | 'Receipt basis'           |
+# 			| 'Dress' | '8,000'    | 'TRY'      | 'L/Green'  | 'Store 02' | 'pcs'  | '$$PurchaseInvoice0205001$$' |
+# 			| 'Boots' | '15,000'   | 'TRY'      | '37/18SD'  | 'Store 02' | 'pcs'  | '$$PurchaseInvoice0205001$$' |
+# 	* Open Quantity Compare
+# 		And I click "Compare quantity" button
+# 	* Check of adding goods by barcode search
+# 		And in the table "PhysItemList" I click the button named "PhysItemListSearchByBarcode"
+# 		And I input "978020137962" text in "InputFld" field
+# 		And I click "OK" button
+# 		And in the table "PhysItemList" I click the button named "PhysItemListSearchByBarcode"
+# 		And I input "978020137962" text in "InputFld" field
+# 		And I click "OK" button
+# 		And in the table "PhysItemList" I click the button named "PhysItemListSearchByBarcode"
+# 		And I input "2202283739" text in "InputFld" field
+# 		And I click "OK" button
+# 		And in the table "PhysItemList" I click the button named "PhysItemListSearchByBarcode"
+# 		And I input "2202283739" text in "InputFld" field
+# 		And I click "OK" button
+# 		And in the table "PhysItemList" I click the button named "PhysItemListSearchByBarcode"
+# 		And I input "2202283739" text in "InputFld" field
+# 		And I click "OK" button
+# 		And "PhysItemList" table contains lines
+# 			| 'Item'  | 'Item key' | 'Unit' | 'Q'     |
+# 			| 'Boots' | '37/18SD'  | 'pcs'  | '2,000' |
+# 			| 'Dress' | 'L/Green'  | 'pcs'  | '3,000' |
+# 	* Add items manually via the Add button
+# 		And in the table "PhysItemList" I click the button named "PhysItemListAdd"
+# 		And I click choice button of the attribute named "PhysItemListItem" in "PhysItemList" table
+# 		And I go to line in "List" table
+# 			| 'Description' |
+# 			| 'Boots'       |
+# 		And I select current line in "List" table
+# 		And I click choice button of the attribute named "PhysItemListItemKey" in "PhysItemList" table
+# 		And I go to line in "List" table
+# 			| 'Item'  | 'Item key' |
+# 			| 'Boots' | '38/18SD'  |
+# 		And I select current line in "List" table
+# 		# temporarily
+# 		And I click choice button of the attribute named "PhysItemListUnit" in "PhysItemList" table
+# 		And I go to line in "List" table
+# 			| 'Description' |
+# 			| 'pcs'         |
+# 		And I select current line in "List" table
+# 		# temporarily
+# 		And I activate field named "PhysItemListCount" in "PhysItemList" table
+# 		And I input "1,000" text in the field named "PhysItemListCount" of "PhysItemList" table
+# 		And "PhysItemList" table contains lines
+# 			| 'Item'  | 'Item key' | 'Unit' | 'Q'     |
+# 			| 'Boots' | '37/18SD'  | 'pcs'  | '2,000' |
+# 			| 'Dress' | 'L/Green'  | 'pcs'  | '3,000' |
+# 			| 'Boots' | '38/18SD'  | 'pcs'  | '1,000' |
+# 	* Add items via the Pick up button
+# 		And in the table "PhysItemList" I click the button named "PhysItemListOpenPickupItems"
+# 		And I go to line in "ItemList" table
+# 			| Title |
+# 			| Dress |
+# 		And I select current line in "ItemList" table
+# 		And I go to line in "ItemKeyList" table
+# 			| Title   |
+# 			| L/Green |
+# 		And I select current line in "ItemKeyList" table
+# 		And I go to line in "ItemTableValue" table
+# 			| 'Item'  | 'Item key' |
+# 			| 'Dress' | 'L/Green' |
+# 		And I select current line in "ItemTableValue" table
+# 		And I finish line editing in "ItemTableValue" table
+# 		And I click the button named "FormCommandSaveAndClose"
+# 		And "PhysItemList" table contains lines
+# 			| 'Item'  | 'Item key' | 'Unit' | 'Q'     |
+# 			| 'Boots' | '37/18SD'  | 'pcs'  | '2,000' |
+# 			| 'Dress' | 'L/Green'  | 'pcs'  | '4,000' |
+# 			| 'Boots' | '38/18SD'  | 'pcs'  | '1,000' |
+# 	* Difference reconciliation
+# 		And in the table "PhysItemList" I click the button named "PhysItemListSwitchItemLists"
+# 		Then the number of "CompareItemList" table lines is "меньше или равно" 3
+# 		And "CompareItemList" table became equal
+# 			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
+# 			| 'Dress' | '8,000'    | '-4,000'     | 'L/Green'  | 'pcs'  | '4,000' |
+# 			| 'Boots' | '15,000'   | '-13,000'    | '37/18SD'  | 'pcs'  | '2,000' |
+# 			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
+# 	* Check quantity changes manually on the scan tab
+# 		And in the table "CompareItemList" I click the button named "CompareItemListSwitchItemLists"
+# 		And I activate field named "PhysItemListCount" in "PhysItemList" table
+# 		And I go to line in "PhysItemList" table
+# 			| 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+# 			| 'Dress' | 'L/Green'  | '4,000' | 'pcs'  |
+# 		And I select current line in "PhysItemList" table
+# 		And I input "5,000" text in the field named "PhysItemListCount" of "PhysItemList" table
+# 		And I finish line editing in "PhysItemList" table
+# 		And "PhysItemList" table contains lines
+# 			| 'Item'  | 'Item key' | 'Unit' | 'Q'     |
+# 			| 'Boots' | '37/18SD'  | 'pcs'  | '2,000' |
+# 			| 'Dress' | 'L/Green'  | 'pcs'  | '5,000' |
+# 	* Check quantity changes manually on the comparison tab
+# 		And in the table "PhysItemList" I click the button named "PhysItemListSwitchItemLists"
+# 		And "CompareItemList" table contains lines
+# 			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
+# 			| 'Dress' | '8,000'    | '-3,000'     | 'L/Green'  | 'pcs'  | '5,000' |
+# 			| 'Boots' | '15,000'   | '-13,000'    | '37/18SD'  | 'pcs'  | '2,000' |
+# 			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
+# 		And I go to line in "CompareItemList" table
+# 			| 'Count' | 'Difference' | 'Item'  | 'Item key' | 'Quantity' | 'Unit' |
+# 			| '2,000' | '-13,000'    | 'Boots' | '37/18SD'  | '15,000'   | 'pcs'  |
+# 		And I select current line in "CompareItemList" table
+# 		And I input "3,000" text in "Count" field of "CompareItemList" table
+# 		And I finish line editing in "CompareItemList" table
+# 		And "CompareItemList" table contains lines
+# 			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
+# 			| 'Dress' | '8,000'    | '-3,000'     | 'L/Green'  | 'pcs'  | '5,000' |
+# 			| 'Boots' | '15,000'   | '-12,000'    | '37/18SD'  | 'pcs'  | '3,000' |
+# 			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
+# 	* Delete lines in scan tab
+# 		And in the table "CompareItemList" I click the button named "CompareItemListSwitchItemLists"
+# 		And I go to line in "PhysItemList" table
+# 			| 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+# 			| 'Dress' | 'L/Green'  | '5,000' | 'pcs'  |
+# 		And in the table "PhysItemList" I click the button named "PhysItemListDelete"
+# 		Then the number of "PhysItemList" table lines is "меньше или равно" 2
+# 	* Add items by scanning on the tab "CompareItemList"
+# 		And in the table "PhysItemList" I click the button named "PhysItemListSwitchItemLists"
+# 		And in the table "CompareItemList" I click the button named "CompareItemListSearchByBarcode"
+# 		And I input "978020137962" text in "InputFld" field
+# 		And I click "OK" button
+# 		And "CompareItemList" table contains lines
+# 			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
+# 			| 'Boots' | '15,000'   | '-11,000'    | '37/18SD'  | 'pcs'  | '4,000' |
+# 			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
+# 		Then the number of "CompareItemList" table lines is "меньше или равно" 2
+# 	* Add items to the tab "CompareItemList" through the Add button
+# 		And in the table "CompareItemList" I click the button named "CompareItemListAdd"
+# 		And I click choice button of the attribute named "CompareItemListItem" in "CompareItemList" table
+# 		And I go to line in "List" table
+# 			| 'Description' |
+# 			| 'Shirt'       |
+# 		And I select current line in "List" table
+# 		And I activate field named "CompareItemListItemKey" in "CompareItemList" table
+# 		And I click choice button of the attribute named "CompareItemListItemKey" in "CompareItemList" table
+# 		And I go to line in "List" table
+# 			| 'Item'  | 'Item key' |
+# 			| 'Shirt' | '38/Black' |
+# 		And I select current line in "List" table
+# 		And I activate field named "CompareItemListUnit" in "CompareItemList" table
+# 		And I click choice button of the attribute named "CompareItemListUnit" in "CompareItemList" table
+# 		And I select current line in "List" table
+# 		And I activate "Count" field in "CompareItemList" table
+# 		And I input "1,000" text in "Count" field of "CompareItemList" table
+# 		And I finish line editing in "CompareItemList" table
+# 		And "CompareItemList" table contains lines
+# 			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
+# 			| 'Boots' | '15,000'   | '-11,000'    | '37/18SD'  | 'pcs'  | '4,000' |
+# 			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
+# 			| 'Shirt' | ''         | '1,000'      | '38/Black' | 'pcs'  | '1,000' |
+# 		Then the number of "CompareItemList" table lines is "меньше или равно" 3
+# 	* Add items to the tab "CompareItemList" through the Pick up button
+# 		And in the table "CompareItemList" I click the button named "CompareItemListOpenPickupItems"
+# 		And I go to line in "ItemList" table
+# 			| 'Title' |
+# 			| 'Shirt' |
+# 		And I select current line in "ItemList" table
+# 		And I go to line in "ItemKeyList" table
+# 			| 'Title'  | 'Unit' |
+# 			| '36/Red' | 'pcs'  |
+# 		And I select current line in "ItemKeyList" table
+# 		And I click "Transfer to document" button
+# 		And "CompareItemList" table contains lines
+# 			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
+# 			| 'Boots' | '15,000'   | '-11,000'    | '37/18SD'  | 'pcs'  | '4,000' |
+# 			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
+# 			| 'Shirt' | ''         | '1,000'      | '38/Black' | 'pcs'  | '1,000' |
+# 			| 'Shirt' | ''         | '1,000'      | '36/Red'   | 'pcs'  | '1,000' |
+# 		Then the number of "CompareItemList" table lines is "меньше или равно" 4
+# 	* Collapse of the tabular part with data on documents-bases
+# 		And "ExpItemList" table contains lines
+# 			| 'Item'  | 'Item key' | 'Base on'                 | 'Unit' | 'Q'      |
+# 			| 'Dress' | 'L/Green'  | '$$PurchaseInvoice0205001$$' | 'pcs'  | '8,000'  |
+# 			| 'Boots' | '37/18SD'  | '$$PurchaseInvoice0205001$$' | 'pcs'  | '15,000' |
+# 		* Check the ExpItemList table collapse 
+# 			And I click "Show hide exp. item list" button
+# 			When I Check the steps for Exception
+# 			|'Then I select all lines of "ExpItemList" table'|
+# 		* Check the ExpItemList table uncolapse
+# 			And I click "Show hide exp. item list" button
+# 			And "ExpItemList" table contains lines
+# 			| 'Item'  | 'Item key' | 'Base on'                 | 'Unit' | 'Q'      |
+# 			| 'Dress' | 'L/Green'  | '$$PurchaseInvoice0205001$$' | 'pcs'  | '8,000'  |
+# 			| 'Boots' | '37/18SD'  | '$$PurchaseInvoice0205001$$' | 'pcs'  | '15,000' |
+# 	* Check the transfer of filled items to Goods receipt
+# 		And in the table "PhysItemList" I click the button named "PhysItemListSwitchItemLists"
+# 		And "CompareItemList" table contains lines
+# 			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |
+# 			| 'Boots' | '15,000'   | '-12,000'    | '37/18SD'  | 'pcs'  | '3,000' |
+# 			| 'Boots' | ''         | '1,000'      | '38/18SD'  | 'pcs'  | '1,000' |
+# 		And I click "Transfer to document" button
+# 		And "ItemList" table contains lines
+# 			| 'Item'  | 'Quantity' | 'Item key' | 'Store'    | 'Unit' | 'Receipt basis'                    |
+# 			| 'Boots' | '3,000'    | '37/18SD'  | 'Store 02' | 'pcs'  | '$$PurchaseInvoice0205001$$'          |
+# 			| 'Boots' | '1,000'    | '38/18SD'  | 'Store 02' | 'pcs'  | ''                                 |
+# 		And I close all client application windows
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

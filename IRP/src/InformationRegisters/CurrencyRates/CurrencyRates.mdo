@@ -95,6 +95,12 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameters>
+      <name>Filter.IntegrationType</name>
+      <value xsi:type="core:ReferenceValue">
+        <value>Enum.IntegrationType.EnumValue.CurrencyRates</value>
+      </value>
+    </choiceParameters>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>

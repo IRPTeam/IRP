@@ -3,8 +3,8 @@ Function GetOrCreateDataBaseStatusInfo() Export
 	ComputerName = ComputerName();
 	ConnectionString = InfoBaseConnectionString();
 	
-	ConnectionStringArray = StrSplit(ConnectionString, "\|/;=:");
-	ConnectionString = StrConcat(ConnectionStringArray, "");
+	ConnectionStringArray = StrSplit(ConnectionString, "\|/;=: ");
+	ConnectionString = StrConcat(ConnectionStringArray, "_");
 	Query = New Query;
 	Query.Text =
 		"SELECT
@@ -32,7 +32,9 @@ Function GetOrCreateDataBaseStatusInfo() Export
 	EndIf;
 	
 	NewConnection.SelectedStyle = "Auto";
-	
+	For Each Lang In LocalizationReuse.AllDescription() Do
+		NewConnection[Lang] = ConnectionString;
+	EndDo;
 	Row = NewConnection.ConnectionSettings.Add();
 	Row.Computer = ComputerName;
 	Row.ConnectionString = ConnectionString;

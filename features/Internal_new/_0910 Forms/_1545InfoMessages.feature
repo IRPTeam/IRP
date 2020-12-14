@@ -1239,7 +1239,7 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			And Delay 2
 		* Check message output when trying to generate SC
 			And I click "Shipment confirmation" button
-			Then the form attribute named "Message" became equal to "Items were not received from the supplier according to the procurement method."
+			Then the form attribute named "Message" became equal to "There are no lines for which you need to create a \"Shipment confirmation\" document in the \"Sales order\" document. or Items were not received from the supplier according to the procurement method."
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 	* Check when trying to create SC when only a PO has been created but the goods have not been delivered
@@ -1280,7 +1280,7 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			And I click the button named "FormPostAndClose"
 		* Check message output when trying to create SC
 			And I click "Shipment confirmation" button
-			Then the form attribute named "Message" became equal to "Items were not received from the supplier according to the procurement method."
+			Then the form attribute named "Message" became equal to "There are no lines for which you need to create a \"Shipment confirmation\" document in the \"Sales order\" document. or Items were not received from the supplier according to the procurement method."
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			And I close all client application windows

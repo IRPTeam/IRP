@@ -146,6 +146,10 @@ Procedure FillStructureInObject(Structure, Object) Export
 	EndDo;
 EndProcedure
 
+Procedure CalculateVolume(Object) Export
+	Object.Volume = Object.Length * Object.Width * Object.Height;
+EndProcedure
+
 #Region FormItemsModifiedByUser
 
 Procedure SetFormItemModifiedByUser(Form, ItemName) Export

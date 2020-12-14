@@ -1,31 +1,33 @@
 
+#Region FormEventHandlers
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocumentsClientServer.ChangeTitleCollapse(, ThisObject);
 	ReportFullName = ReportName();
-	ExternalCommandsServer.CreateCommands(ThisObject, ReportFullName, Enums.FormTypes.ObjectForm);	
-EndProcedure
-
-#Region GroupTitleDecorations
-
-&AtClient
-Procedure DecorationGroupTitleCollapsedPictureClick(Item)
-	DocumentsClient.DecorationGroupTitleCollapsedPictureClick(, ThisObject, Item);
+	ExternalCommandsServer.CreateCommands(ThisObject, ReportFullName, Enums.FormTypes.ObjectForm);
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleCollapsedLabelClick(Item)
-	DocumentsClient.DecorationGroupTitleCollapsedLabelClick(, ThisObject, Item);
+Procedure OnOpen(Cancel)
+	CustomParametersSwitch();
+	EditReportSwitch();
+EndProcedure
+
+#EndRegion
+
+#Region FormCommandsEventHandlers
+
+&AtClient
+Procedure CustomParameters(Command)
+	Items.FormCustomParameters.Check = Not Items.FormCustomParameters.Check;
+	CustomParametersSwitch();
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
-	DocumentsClient.DecorationGroupTitleUncollapsedPictureClick(, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
-	DocumentsClient.DecorationGroupTitleUncollapsedLabelClick(, ThisObject, Item);
+Procedure EditReport(Command)
+	Items.FormEditReport.Check = Not Items.FormEditReport.Check;
+	EditReportSwitch();
 EndProcedure
 
 #EndRegion
@@ -44,6 +46,7 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
+
 #Region Private
 
 &AtServer
@@ -52,5 +55,16 @@ Function ReportName()
 	SplittedFormName.Delete(SplittedFormName.UBound());
 	Return StrConcat(SplittedFormName, ".");
 EndFunction
+
+&AtClient
+Procedure CustomParametersSwitch()
+	Items.GroupCustomParameters.Visible = Items.FormCustomParameters.Check;
+EndProcedure
+
+&AtClient
+Procedure EditReportSwitch()
+	Items.GroupResultCommandBar.Visible = Items.FormEditReport.Check;
+	Items.Result.Edit = Items.FormEditReport.Check;
+EndProcedure
 
 #EndRegion

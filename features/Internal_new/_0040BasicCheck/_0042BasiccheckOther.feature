@@ -10,8 +10,6 @@ I want to check opening registers, reports and data processor forms
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	And I set "True" value to the constant "ShowBetaTesting"
-	And I set "True" value to the constant "ShowAlphaTestingSaas"
 	And I set "True" value to the constant "UseItemKey"
 	And I set "True" value to the constant "UseCompanies"
 	And I set "True" value to the constant "NotFirstStart"
@@ -808,4 +806,11 @@ Scenario: Open information register form "DataMappingTable"
 	Given I open "DataMappingTable" information register default form
 	If the warning is displayed then
 		Then I raise "Failed to open information register form  DataMappingTable" exception
+	And I close current window
+
+Scenario: Open object form "Procurement"
+
+	Given I open "Procurement" data processor default form
+	If the warning is displayed then
+		Then I raise "Failed to open data processor form Procurement" exception
 	And I close current window

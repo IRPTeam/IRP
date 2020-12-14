@@ -33,15 +33,17 @@ Procedure OnComposeResult(ResultDocument, DetailsData, StandardProcessing)
 	|FROM
 	|	Catalog.ItemKeys AS Table
 	|		INNER JOIN Catalog.PriceTypes AS PriceTypes
-	|			ON Not PriceTypes.DeletionMark
-	|			AND CASE
-	|					WHEN &PriceOwnerIsItem
-	|						THEN Table.Item = &PriceOwner
-	|					ELSE Table.Ref = &PriceOwner
-	|				END
+	|		ON Not PriceTypes.DeletionMark
+	|		AND CASE
+	|			WHEN &PriceOwnerIsItem
+	|				THEN Table.Item = &PriceOwner
+	|			ELSE Table.Ref = &PriceOwner
+	|		END
 	|;
-	|/////////////////////////////////////
-	|SELECT
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|
+	|SELECT ALLOWED
 	|	1 AS Priority,
 	|	&ByItemKeys AS PriceDefinitionType
 	|into tmpPriceDefinitionTypes
@@ -62,9 +64,7 @@ Procedure OnComposeResult(ResultDocument, DetailsData, StandardProcessing)
 	|
 	|SELECT
 	|	0 AS Priority,
-	|	"""" AS PriceTypeDefinition
-	|
-	|");
+	|	"""" AS PriceTypeDefinition");
 	Query.TempTablesManager = New TempTablesManager();
 	Query.SetParameter("PricePeriod", ?(ValueIsFilled(PricePeriod), EndOfDay(PricePeriod), EndOfDay(CurrentDate())));
 	
@@ -84,7 +84,7 @@ Procedure OnComposeResult(ResultDocument, DetailsData, StandardProcessing)
 	Query.Execute();
 	
 	Query.Text =
-	"SELECT
+	"SELECT ALLOWED
 	|	tmpPriceDefinitionTypes.Priority AS Priority,
 	|	tmpPriceDefinitionTypes.PriceDefinitionType AS PriceDefinitionType,
 	|	Table.PriceDefinitionReason AS PriceDefinitionReason,
@@ -119,8 +119,9 @@ Procedure OnComposeResult(ResultDocument, DetailsData, StandardProcessing)
 	|		ON Table.PriceDefinitionType = tmpPriceDefinitionTypes.PriceDefinitionType
 	|;
 	|
+	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	MIN(Table.Priority) AS Priority,
 	|	Table.Item AS Item,
 	|	Table.ItemKey AS ItemKey,
@@ -136,19 +137,20 @@ Procedure OnComposeResult(ResultDocument, DetailsData, StandardProcessing)
 	|	Table.PriceType
 	|;
 	|
+	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	(NOT tmpPriorityPrices.Priority IS NULL) AS IsPriority,
 	|	Table.PriceDefinitionType AS PriceDefinitionType,
 	|	Table.PriceDefinitionReason AS PriceDefinitionReason,
 	|	CASE
-	|		WHEN Table.PriceDefinitionType = &ByItemKeys 
+	|		WHEN Table.PriceDefinitionType = &ByItemKeys
 	|			THEN ""Item key = ""
-	|		WHEN Table.PriceDefinitionType = &ByProperties 
+	|		WHEN Table.PriceDefinitionType = &ByProperties
 	|			THEN ""Property = ""
-	|		WHEN Table.PriceDefinitionType = &ByItems 
+	|		WHEN Table.PriceDefinitionType = &ByItems
 	|			THEN ""Item = ""
-	|		WHEN Table.PriceDefinitionType = """" 
+	|		WHEN Table.PriceDefinitionType = """"
 	|			THEN ""Specification""
 	|		ELSE """"
 	|	END AS PriceDefinitionReasonString,
@@ -162,8 +164,7 @@ Procedure OnComposeResult(ResultDocument, DetailsData, StandardProcessing)
 	|		ON Table.Priority = tmpPriorityPrices.Priority
 	|		AND Table.Item = tmpPriorityPrices.Item
 	|		AND Table.ItemKey = tmpPriorityPrices.ItemKey
-	|		AND Table.PriceType = tmpPriorityPrices.PriceType
-	|";
+	|		AND Table.PriceType = tmpPriorityPrices.PriceType";
 	PriceInfoTable = Query.Execute().Unload();	
 		
 	///////////////////////////
@@ -184,7 +185,7 @@ EndProcedure
 
 Function GetQueryTextForSpecifications()
 	Return
-	"SELECT
+	"SELECT ALLOWED
 	|	Table.ItemKey AS ItemKey,
 	|	Table.Item AS Item,
 	|	Table.Specification AS Specification,
@@ -197,12 +198,12 @@ Function GetQueryTextForSpecifications()
 	|		INNER JOIN Catalog.ItemKeys.SpecificationAffectPricingMD5 AS ItemKeysSpecificationAffectPricingMD5
 	|		ON Table.ItemKey = ItemKeysSpecificationAffectPricingMD5.Ref
 	|		AND Table.IsSpecification
-	|
 	|		LEFT JOIN Catalog.PriceTypes AS PriceTypes
 	|		ON TRUE
 	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	Table.ItemKey AS ItemKey,
 	|	MAX(CASE
 	|		WHEN Table.Specification.Type = VALUE(Enum.SpecificationType.Bundle)
@@ -232,8 +233,9 @@ Function GetQueryTextForSpecifications()
 	|	Table.PriceType,
 	|	Table.AffectPricingMD5
 	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	SpecificationRows.ItemKey AS ItemKey,
 	|	SpecificationRows.Specification AS Specification,
 	|	SpecificationRows.Item AS Item,
@@ -241,7 +243,7 @@ Function GetQueryTextForSpecifications()
 	|	SpecificationRows.AffectPricingMD5 AS AffectPricingMD5,
 	|	SpecificationRows.Key AS Key,
 	|	SpecificationRows.Quantity AS Quantity,
-	|	ISNULL(PricesByItemKeysSliceLast.Price,0) AS Price
+	|	ISNULL(PricesByItemKeysSliceLast.Price, 0) AS Price
 	|INTO t_PricesByItemKeys
 	|FROM
 	|	t_SpecificationRows AS SpecificationRows
@@ -253,8 +255,9 @@ Function GetQueryTextForSpecifications()
 	|		ON SpecificationRows.ItemKey = PricesByItemKeysSliceLast.ItemKey
 	|		AND SpecificationRows.PriceType = PricesByItemKeysSliceLast.PriceType
 	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	tmp2.ItemKey AS ItemKey,
 	|	tmp2.Specification AS Specification,
 	|	tmp2.Item AS Item,
@@ -269,8 +272,9 @@ Function GetQueryTextForSpecifications()
 	|	tmp2.Price = 0
 	|;
 	|
+	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	PriceKeys.Ref AS PriceKey,
 	|	Table.ItemKey AS ItemKey,
 	|	Table.Specification AS Specification,
@@ -285,8 +289,9 @@ Function GetQueryTextForSpecifications()
 	|		LEFT JOIN Catalog.PriceKeys AS PriceKeys
 	|		ON Table.AffectPricingMD5 = PriceKeys.AffectPricingMD5
 	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	Table.PriceKey AS PriceKey,
 	|	Table.ItemKey AS ItemKey,
 	|	Table.Specification AS Specification,
@@ -295,7 +300,7 @@ Function GetQueryTextForSpecifications()
 	|	Table.Key AS Key,
 	|	Table.Item AS Item,
 	|	Table.PriceType,
-	|	ISNULL(PricesByPropertiesSliceLast.Price,0) * Table.Quantity AS Price
+	|	ISNULL(PricesByPropertiesSliceLast.Price, 0) * Table.Quantity AS Price
 	|INTO t_PricesByProperties
 	|FROM
 	|	t_PriceKeys AS Table
@@ -307,8 +312,9 @@ Function GetQueryTextForSpecifications()
 	|		ON Table.PriceKey = PricesByPropertiesSliceLast.PriceKey
 	|		AND Table.PriceType = PricesByPropertiesSliceLast.PriceType
 	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	tmp3.PriceKey AS PriceKey,
 	|	tmp3.ItemKey AS ItemKey,
 	|	tmp3.Specification AS Specification,
@@ -324,8 +330,9 @@ Function GetQueryTextForSpecifications()
 	|	tmp3.Price = 0
 	|;
 	|
+	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	Table.ItemKey AS ItemKey,
 	|	Table.Specification AS Specification,
 	|	Table.Quantity AS Quantity,
@@ -346,8 +353,9 @@ Function GetQueryTextForSpecifications()
 	|		AND Table.PriceType = PricesByItemsSliceLast.PriceType
 	|;
 	|
+	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	SpecificationRows.ItemKey AS ItemKey,
 	|	SpecificationRows.Item AS Item,
 	|	SpecificationRows.PriceType AS PriceType,
@@ -376,8 +384,9 @@ Function GetQueryTextForSpecifications()
 	|		AND t_PricesByItems.Price <> 0
 	|		AND SpecificationRows.Key = t_PricesByItems.Key
 	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	"""" AS PriceDefinitionType,
 	|	t_PriceDetails.ItemKey AS PriceDefinitionReason,
 	|	t_PriceDetails.Item AS Item,
@@ -393,8 +402,7 @@ Function GetQueryTextForSpecifications()
 	|	t_PriceDetails.ItemKey,
 	|	t_PriceDetails.PriceType
 	|HAVING
-	|	MAX(t_PriceDetails.PriceByItemKeys) + SUM(t_PriceDetails.PriceByProperties) + SUM(t_PriceDetails.PriceByItems)
-	|		<> 0 ";
+	|	MAX(t_PriceDetails.PriceByItemKeys) + SUM(t_PriceDetails.PriceByProperties) + SUM(t_PriceDetails.PriceByItems) <> 0";
 EndFunction
 
 Function GetQueryTextForNotSpecifications()
@@ -406,7 +414,7 @@ Function GetQueryTextForNotSpecifications()
 	|DROP t_PricesByProperties;
 	|DROP t_PricesByItems;
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	Table.ItemKey AS ItemKey,
 	|	Table.Item AS Item,
 	|	Table.Specification AS Specification,
@@ -419,7 +427,7 @@ Function GetQueryTextForNotSpecifications()
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	Table.ItemKey AS ItemKey,
 	|	Table.Specification AS Specification,
 	|	Table.AffectPricingMD5 AS AffectPricingMD5,
@@ -437,7 +445,7 @@ Function GetQueryTextForNotSpecifications()
 	|		ON Table.ItemKey = PricesByItemKeysSliceLast.ItemKey
 	|;
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	PriceKeys.Ref AS PriceKey,
 	|	Table.ItemKey AS ItemKey,
 	|	Table.AffectPricingMD5 AS AffectPricingMD5,
@@ -449,7 +457,7 @@ Function GetQueryTextForNotSpecifications()
 	|		ON Table.AffectPricingMD5 = PriceKeys.AffectPricingMD5
 	|;
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	Table.ItemKey AS ItemKey,
 	|	Table.PriceKey AS PriceKey,
 	|	Table.Item AS Item,
@@ -466,7 +474,7 @@ Function GetQueryTextForNotSpecifications()
 	|		ON Table.PriceKey = PricesByPropertiesSliceLast.PriceKey
 	|;
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	Table.ItemKey AS ItemKey,
 	|	Table.Item AS Item,
 	|	PricesByItemsSliceLast.PriceType AS PriceType,
@@ -483,7 +491,7 @@ Function GetQueryTextForNotSpecifications()
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	&ByItemKeys AS PriceDefinitionType,
 	|	Table.ItemKey AS PriceDefinitionReason,
 	|	Table.Item AS Item,

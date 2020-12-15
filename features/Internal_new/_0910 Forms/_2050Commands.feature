@@ -2925,7 +2925,7 @@ Scenario: _0205038 add test command to the list of documents Stock Adjustment As
 			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Stock adjustment as write off'  |
+				| 'Stock adjustment as write-off'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -2940,7 +2940,7 @@ Scenario: _0205038 add test command to the list of documents Stock Adjustment As
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'Stock adjustment as write off'                | 'Test command'       |
+		| 'Stock adjustment as write-off'                | 'Test command'       |
 	* Check the command from the document list StockAdjustmentAsWriteOff
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I go to the last line in "List" table
@@ -2961,7 +2961,7 @@ Scenario: _0205038 add test command to the list of documents Stock Adjustment As
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'Stock adjustment as write off' |
+				| 'Stock adjustment as write-off' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2986,7 +2986,7 @@ Scenario: _0205038 add test command to the list of documents Stock Adjustment As
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'Stock adjustment as write off' |
+				| 'Stock adjustment as write-off' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table

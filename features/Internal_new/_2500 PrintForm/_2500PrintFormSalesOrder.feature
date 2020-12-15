@@ -123,8 +123,8 @@ Scenario: _25002 create a print command for Sales order
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata' | 'Plugins' | 'UI group' |
-		| 'SalesOrder'             | 'Sales Order'        | 'Print'           |
+		| 'Configuration metadata' | 'Plugins'            | 'UI group' |
+		| 'Sales order'            | 'Sales Order'        | 'Print'    |
 
 Scenario: _25003 check Sales order printing
 	And I delete "$$NumberSalesOrder5003$$" variable

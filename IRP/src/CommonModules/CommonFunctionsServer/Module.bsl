@@ -1,3 +1,4 @@
+
 Function IsPrimitiveValue(Value) Export
 	Return Metadata.FindByType(TypeOf(Value)) = Undefined;
 EndFunction

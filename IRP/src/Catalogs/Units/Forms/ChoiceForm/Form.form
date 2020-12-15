@@ -449,8 +449,14 @@ WHERE
 			THEN Table.Item = &amp;Item
 			OR Table.Ref = &amp;Unit
 		ELSE Table.Item.Ref IS NULL
-	END OR
-	Table.Item = Value(Catalog.Items.EmptyRef)</queryText>
+	END
+	AND 
+	CASE
+		WHEN &amp;FilterForItemsAndKeys
+			THEN Table.BasisUnit = VALUE(Catalog.Units.EmptyRef)
+				AND Table.Quantity = 1
+		ELSE True
+	END</queryText>
       <mainTable>Catalog.Units</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

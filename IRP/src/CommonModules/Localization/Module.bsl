@@ -72,6 +72,7 @@ Function Strings(Lang) Export
 	Strings.Insert("S_028", NStr("en = 'Success'", Lang));
 	Strings.Insert("S_029", NStr("en = 'Not supporting web client'", Lang));
 	Strings.Insert("S_030", NStr("en = 'Cashback'", Lang));
+	Strings.Insert("S_031", NStr("en = 'or'", Lang));
 	#EndRegion
 	
 	#Region Service
@@ -306,6 +307,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_087", NStr("en = 'Parent can not be empty'", Lang));
 	Strings.Insert("Error_088", NStr("en = 'Basis unit has to be filled, if item filter used.'", Lang));
 	
+	Strings.Insert("Error_089", NStr("en = 'Description%1 ""%2"" is already in use.'", Lang));
+	
 	#EndRegion
 	
 	#Region InfoMessages
@@ -353,8 +356,12 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_018", NStr("en = 'Add or scan serial lot number'", Lang));
 	
 	Strings.Insert("InfoMessage_019", NStr("en = 'Data lock reasons:'", Lang));
-	Strings.Insert("InfoMessage_020", NStr("en = 'Created document: %1'", Lang));
 	
+  Strings.Insert("InfoMessage_020", NStr("en = 'Created document: %1'", Lang));
+  
+  //%1 - 42
+  Strings.Insert("InfoMessage_021", NStr("en = 'Can not unlock attributes, this is element used %1 times, ex.:'", Lang));
+
 	#EndRegion
 	
 	#Region QuestionToUser
@@ -402,6 +409,7 @@ Function Strings(Lang) Export
 	Strings.Insert("I_3", NStr("en = 'Fill out the document'", Lang));
 	Strings.Insert("I_4", NStr("en = 'Find %1 rows in table by key %2'", Lang));
 	Strings.Insert("I_5", NStr("en = 'Not supported table'", Lang));
+	Strings.Insert("I_6", NStr("en = 'Ordered without ISR'", Lang));
 	#EndRegion
 	
 	#Region Exceptions

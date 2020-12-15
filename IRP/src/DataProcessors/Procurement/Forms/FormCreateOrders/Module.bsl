@@ -5,7 +5,27 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.Company = Parameters.Company;
 	ThisObject.Item = Parameters.Item;
 	ThisObject.ItemKey = Parameters.ItemKey;
+	ThisObject.Unit = Parameters.Unit;
 	ThisObject.DateOfRelevance = CurrentSessionDate();
+	ThisObject.VisibleSelectionTables = Parameters.VisibleSelectionTables; 
+	ThisObject.ShowPrecision = Parameters.ShowPrecision;
+	
+	ShowPrecision();
+	
+	ResultsTableOfBalance = ThisObject.TableOfBalance.Unload().CopyColumns();
+	For Each Row In Parameters.TableOfBalance Do
+		FillPropertyValues(ResultsTableOfBalance.Add(), Row);
+	EndDo;
+	
+	ResultsTableOfPurchase = ThisObject.TableOfPurchase.Unload().CopyColumns();
+	For Each Row In Parameters.TableOfPurchase Do
+		FillPropertyValues(ResultsTableOfPurchase.Add(), Row);
+	EndDo;
+	
+	ResultsTableOfInternalSupplyRequest = ThisObject.TableOfInternalSupplyRequest.Unload().CopyColumns();
+	For Each Row In Parameters.TableOfInternalSupplyRequest Do
+		FillPropertyValues(ResultsTableOfInternalSupplyRequest.Add(), Row);
+	EndDo;
 	
 	For Each Row In Parameters.ArrayOfSupplyRequest Do
 		NewRow = ThisObject.TableOfInternalSupplyRequest.Add();
@@ -18,6 +38,111 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	Update_TableOfBalance();
 	Update_TableOfPurchase();
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	tmp.Store,
+	|	tmp.Balance
+	|INTO TableOfBalance
+	|FROM
+	|	&TableOfBalance AS tmp
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp.Store,
+	|	tmp.Quantity
+	|INTO ResultsTableOfBalance
+	|FROM
+	|	&ResultsTableOfBalance AS tmp
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp.Partner,
+	|	tmp.PriceType,
+	|	tmp.Price,
+	|	tmp.DateOfRelevance,
+	|	tmp.Agreement,
+	|	tmp.DeliveryDate
+	|INTO TableOfPurchase
+	|FROM
+	|	&TableOfPurchase AS tmp
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp.Partner,
+	|	tmp.PriceType,
+	|	tmp.Price,
+	|	tmp.Quantity,
+	|	tmp.DateOfRelevance,
+	|	tmp.Agreement,
+	|	tmp.DeliveryDate
+	|INTO ResultsTableOfPurchase
+	|FROM
+	|	&ResultsTableOfPurchase AS tmp
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TableOfBalance.Store,
+	|	TableOfBalance.Balance,
+	|	ISNULL(ResultsTableOfBalance.Quantity, 0) AS Quantity
+	|FROM
+	|	TableOfBalance AS TableOfBalance
+	|		LEFT JOIN ResultsTableOfBalance AS ResultsTableOfBalance
+	|		ON TableOfBalance.Store = ResultsTableOfBalance.Store
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TableOfPurchase.Partner,
+	|	TableOfPurchase.PriceType,
+	|	TableOfPurchase.Price,
+	|	TableOfPurchase.DateOfRelevance,
+	|	TableOfPurchase.Agreement,
+	|	TableOfPurchase.DeliveryDate,
+	|	ISNULL(ResultsTableOfPurchase.Quantity, 0) AS Quantity
+	|FROM
+	|	TableOfPurchase AS TableOfPurchase
+	|		LEFT JOIN ResultsTableOfPurchase AS ResultsTableOfPurchase
+	|		ON TableOfPurchase.Partner = ResultsTableOfPurchase.Partner
+	|		AND TableOfPurchase.PriceType = ResultsTableOfPurchase.PriceType
+	|		AND TableOfPurchase.Price = ResultsTableOfPurchase.Price
+	|		AND TableOfPurchase.DateOfRelevance = ResultsTableOfPurchase.DateOfRelevance
+	|		AND TableOfPurchase.Agreement = ResultsTableOfPurchase.Agreement
+	|		AND TableOfPurchase.DeliveryDate = ResultsTableOfPurchase.DeliveryDate";
+	Query.SetParameter("TableOfBalance", ThisObject.TableOfBalance.Unload());
+	Query.SetParameter("ResultsTableOfBalance", ResultsTableOfBalance);
+	Query.SetParameter("TableOfPurchase", ThisObject.TableOfPurchase.Unload());
+	Query.SetParameter("ResultsTableOfPurchase", ResultsTableOfPurchase);
+	
+	QueryResults = Query.ExecuteBatch();
+	ThisObject.TableOfBalance.Load(QueryResults[4].Unload());
+	ThisObject.TableOfPurchase.Load(QueryResults[5].Unload());
+EndProcedure
+
+&AtClient
+Procedure ShowPrecisionOnChange(Item)
+	ShowPrecision();
+EndProcedure
+
+&AtServer
+Procedure ShowPrecision()
+	FieldFormat = ?(ThisObject.ShowPrecision, "", "NFD=0");
+	Items.TableOfBalanceBalance.Format = FieldFormat;
+	
+	Items.TableOfBalanceQuantity.Format = FieldFormat;
+	Items.TableOfBalanceQuantity.EditFormat = FieldFormat;
+	
+	Items.TableOfPurchaseQuantity.Format = FieldFormat;
+	Items.TableOfPurchaseQuantity.EditFormat = FieldFormat;
+	
+	Items.TableOfInternalSupplyRequestQuantity.Format = FieldFormat;
+	Items.TableOfInternalSupplyRequestTransfer.Format = FieldFormat;
+	Items.TableOfInternalSupplyRequestPurchase.Format = FieldFormat;
 EndProcedure
 
 &AtServer
@@ -108,6 +233,12 @@ Procedure TableOfBalanceQuantityOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure OnOpen(Cancel)
+	Update_TotalQuantity();
+	SetVisible();
+EndProcedure
+
+&AtClient
 Procedure TableOfPurchaseQuantityOnChange(Item)
 	Update_TotalQuantity();
 EndProcedure
@@ -170,49 +301,9 @@ Procedure TableOfPurchaseBeforeDeleteRow(Item, Cancel)
 EndProcedure
 
 &AtClient
-Procedure CreateDocuments(Command)
-	CreatedDocuments = CreateDocumentsAtServer();
-	For Each Doc In CreatedDocuments.PurchaseOrders Do
-		DocForm = GetForm("Document.PurchaseOrder.ObjectForm", New Structure("Key", Doc));
-		DocPurchaseOrderClient.CompanyOnChange(DocForm.Object, DocForm, DocForm.Items.Company);
-		DocForm.Write();	
-	EndDo;
-	
-	For Each Doc In CreatedDocuments.TransferOrders Do
-		DocForm = GetForm("Document.InventoryTransferOrder.ObjectForm", New Structure("Key", Doc));
-		DocInventoryTransferOrderClient.CompanyOnChange(DocForm.Object, DocForm, DocForm.Items.Company);
-		DocForm.Write();	
-	EndDo;
-	Close(CreatedDocuments);
-EndProcedure
-
-&AtClient
 Procedure Cancel(Command)
 	Close(Undefined);
 EndProcedure
-
-&AtServer
-Function CreateDocumentsAtServer()
-	CreatedDocuments = New Structure();
-	
-	DataTable = CollectDataFor_InventoryTransferOrder();
-	If DataTable.Count() Then
-		ArrayOfTransferOrders = Create_InventoryTransferOrder(DataTable);
-		CreatedDocuments.Insert("TransferOrders", ArrayOfTransferOrders);
-	Else
-		CreatedDocuments.Insert("TransferOrders", New Array());
-	EndIf;
-	
-	DataTable = CollectDataFor_PurchaseOrder();
-	If DataTable.Count() Then
-		ArrayOfPurchaseOrders = Create_PurchaseOrder(DataTable);
-		CreatedDocuments.Insert("PurchaseOrders", ArrayOfPurchaseOrders);
-	Else
-		CreatedDocuments.Insert("PurchaseOrders", New Array());
-	EndIf;
-	
-	Return CreatedDocuments;
-EndFunction
 
 &AtClient
 Procedure DateOfRelevanceOnChange(Item)
@@ -223,206 +314,6 @@ EndProcedure
 Procedure Refresh(Command)
 	Update_AllTables();
 EndProcedure
-
-&AtServer
-Function CollectDataFor_InventoryTransferOrder()
-	DataTable = New ValueTable();
-	DataTable.Columns.Add("StoreSender");
-	DataTable.Columns.Add("InternalSupplyRequest");
-	DataTable.Columns.Add("RowKey");
-	DataTable.Columns.Add("Quantity");
-	
-	SupplyRequests = ThisObject.TableOfInternalSupplyRequest.Unload();
-	
-	For Each Row In ThisObject.TableOfBalance Do
-		NeededQuantity = Row.Quantity;
-		For Each RowSupplyRequest In SupplyRequests Do
-			If Not ValueIsFilled(NeededQuantity) Or Not ValueIsFilled(RowSupplyRequest.Transfer) Then
-				Continue;
-			EndIf;
-			NewRow = DataTable.Add();
-			NewRow.StoreSender = Row.Store;
-			NewRow.InternalSupplyRequest = RowSupplyRequest.InternalSupplyRequest;
-			NewRow.RowKey = RowSupplyRequest.RowKey;
-			NewRow.Quantity = Min(NeededQuantity, RowSupplyRequest.Transfer);
-			RowSupplyRequest.Transfer = RowSupplyRequest.Transfer - NewRow.Quantity;
-			NeededQuantity =  NeededQuantity - NewRow.Quantity;
-		EndDo;
-	EndDo;
-	
-	DataTable.GroupBy("StoreSender, InternalSupplyRequest, RowKey", "Quantity");
-	
-	For Each Row In ThisObject.TableOfBalance Do
-		If Not ValueIsFilled(Row.Quantity) Then
-			Continue;
-		EndIf;
-		
-		ArrayOfRows = DataTable.FindRows(New Structure("StoreSender", Row.Store));
-		TotalQ = 0;
-		For Each ItemOfRow In ArrayOfRows Do
-			TotalQ = TotalQ + ItemOfRow.Quantity;
-		EndDo;
-		If TotalQ < Row.Quantity Then
-			NewRow = DataTable.Add();
-			NewRow.StoreSender = Row.Store;
-			NewRow.RowKey = New UUID();
-			NewRow.Quantity = Row.Quantity - TotalQ;
-		EndIf;
-	EndDo;
-	
-	Return DataTable;
-EndFunction
-
-&AtServer
-Function CollectDataFor_PurchaseOrder()
-	DataTable = New ValueTable();
-	DataTable.Columns.Add("Partner");
-	DataTable.Columns.Add("Agreement");
-	DataTable.Columns.Add("PriceType");
-	DataTable.Columns.Add("Price");
-	DataTable.Columns.Add("DeliveryDate");
-	DataTable.Columns.Add("InternalSupplyRequest");
-	DataTable.Columns.Add("RowKey");
-	DataTable.Columns.Add("Quantity");
-	
-	SupplyRequests = ThisObject.TableOfInternalSupplyRequest.Unload();
-	
-	For Each Row In ThisObject.TableOfPurchase Do
-		NeededQuantity = Row.Quantity;
-		For Each RowSupplyRequest In SupplyRequests Do
-			If Not ValueIsFilled(NeededQuantity) Or Not ValueIsFilled(RowSupplyRequest.Purchase) Then
-				Continue;
-			EndIf;
-			NewRow = DataTable.Add();
-			NewRow.Partner = Row.Partner;
-			NewRow.Agreement = Row.Agreement;
-			NewRow.PriceType = Row.PriceType;
-			NewRow.Price = Row.Price;
-			NewRow.DeliveryDate = Row.DeliveryDate;
-			NewRow.InternalSupplyRequest = RowSupplyRequest.InternalSupplyRequest;
-			NewRow.RowKey = RowSupplyRequest.RowKey;
-			NewRow.Quantity = Min(NeededQuantity, RowSupplyRequest.Purchase);
-			RowSupplyRequest.Purchase = RowSupplyRequest.Purchase - NewRow.Quantity;
-			NeededQuantity =  NeededQuantity - NewRow.Quantity;
-		EndDo;
-	EndDo;
-	
-	DataTable.GroupBy("Partner, Agreement, PriceType, Price, DeliveryDate, InternalSupplyRequest, RowKey", "Quantity");
-	
-	For Each Row In ThisObject.TableOfPurchase Do
-		If Not ValueIsFilled(Row.Quantity) Then
-			Continue;
-		EndIf;
-		Filter = New Structure();
-		FIlter.Insert("Partner", Row.Partner);
-		FIlter.Insert("Agreement", Row.Agreement);
-		FIlter.Insert("PriceType", Row.PriceType);
-		FIlter.Insert("Price", Row.Price);
-		FIlter.Insert("DeliveryDate", Row.DeliveryDate);
-		
-		ArrayOfRows = DataTable.FindRows(Filter);
-		TotalQ = 0;
-		For Each ItemOfRow In ArrayOfRows Do
-			TotalQ = TotalQ + ItemOfRow.Quantity;
-		EndDo;
-		If TotalQ < Row.Quantity Then
-			NewRow = DataTable.Add();
-			NewRow.Partner = Row.Partner;
-			NewRow.Agreement = Row.Agreement;
-			NewRow.PriceType = Row.PriceType;
-			NewRow.Price = Row.Price;
-			NewRow.DeliveryDate = Row.DeliveryDate;
-			NewRow.RowKey = New UUID();
-			NewRow.Quantity = Row.Quantity - TotalQ;
-		EndIf;
-	EndDo;
-	
-	Return DataTable;
-EndFunction
-
-&AtServer
-Function Create_PurchaseOrder(DataTable)
-	
-	ArrayOfPurchaseOrders = New Array();
-	
-	DataTableFilter = DataTable.Copy();
-	DataTableFilter.GroupBy("Partner, Agreement");
-	For Each RowFilter In DataTableFilter Do
-		AgreementInfo = CatAgreementsServer.GetAgreementInfo(RowFilter.Agreement);
-		
-		NewPurchaseOrder = Documents.PurchaseOrder.CreateDocument();
-		NewPurchaseOrder.Date = CurrentSessionDate();
-		NewPurchaseOrder.Company = ThisObject.Company;
-		NewPurchaseOrder.Agreement = RowFilter.Agreement;		
-		NewPurchaseOrder.Currency = AgreementInfo.Currency;
-		NewPurchaseOrder.Partner = RowFilter.Partner;
-		NewPurchaseOrder.PriceIncludeTax = AgreementInfo.PriceIncludeTax;
-		NewPurchaseOrder.LegalName = DocumentsServer.GetLegalNameByPartner(NewPurchaseOrder.Partner, 
-		                                                                   NewPurchaseOrder.LegalName);
-		
-		Filter = New Structure();
-		Filter.Insert("Partner", RowFilter.Partner);
-		Filter.Insert("Agreement", RowFilter.Agreement);
-		ArrayOfRows = DataTable.FindRows(Filter);
-		For Each ItemOfRow In ArrayOfRows Do
-			NewRow = NewPurchaseOrder.ItemList.Add();
-			NewRow.Key = ItemOfRow.RowKey;
-			NewRow.ItemKey = ThisObject.ItemKey;
-			NewRow.Store = ThisObject.Store;
-			
-			UnitInfo = GetItemInfo.ItemUnitInfo(NewRow.ItemKey);
-			NewRow.Unit = UnitInfo.Unit;
-			
-			NewRow.Quantity = ItemOfRow.Quantity;
-			NewRow.PurchaseBasis = ItemOfRow.InternalSupplyRequest;
-			NewRow.Price = ItemOfRow.Price;
-			NewRow.PriceType = ItemOfRow.PriceType;
-			NewRow.DeliveryDate = ItemOfRow.DeliveryDate;
-		EndDo;
-		
-		NewPurchaseOrder.Fill(Undefined);
-		NewPurchaseOrder.Write(DocumentWriteMode.Write);	
-		ArrayOfPurchaseOrders.Add(NewPurchaseOrder.Ref);
-	EndDo;
-	Return ArrayOfPurchaseOrders;
-EndFunction
-
-&AtServer
-Function Create_InventoryTransferOrder(DataTable)
-	
-	ArrayOfTransferOrders = New Array();
-	
-	DataTableFilter = DataTable.Copy();
-	DataTableFilter.GroupBy("StoreSender");
-	For Each RowFilter In DataTableFilter Do
-		
-		NewTransferOrder = Documents.InventoryTransferOrder.CreateDocument();
-		NewTransferOrder.Date = CurrentSessionDate();
-		NewTransferOrder.Company = ThisObject.Company;
-		NewTransferOrder.StoreReceiver = ThisObject.Store;
-		NewTransferOrder.StoreSender = RowFilter.StoreSender;
-		
-		Filter = New Structure();
-		Filter.Insert("StoreSender", RowFilter.StoreSender);
-		ArrayOfRows = DataTable.FindRows(Filter);
-		For Each ItemOfRow In ArrayOfRows Do
-			NewRow = NewTransferOrder.ItemList.Add();
-			NewRow.Key = ItemOfRow.RowKey;
-			NewRow.ItemKey = ThisObject.ItemKey;
-			
-			UnitInfo = GetItemInfo.ItemUnitInfo(NewRow.ItemKey);
-			NewRow.Unit = UnitInfo.Unit;
-			
-			NewRow.Quantity = ItemOfRow.Quantity;
-			NewRow.InternalSupplyRequest = ItemOfRow.InternalSupplyRequest;
-		EndDo;
-		
-		NewTransferOrder.Fill(Undefined);
-		NewTransferOrder.Write(DocumentWriteMode.Write);	
-		ArrayOfTransferOrders.Add(NewTransferOrder.Ref);
-	EndDo;
-	Return ArrayOfTransferOrders;
-EndFunction
 
 &AtServer
 Procedure Update_TableOfBalance()
@@ -652,4 +543,80 @@ Procedure Update_TableOfPurchase()
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	ThisObject.TableOfPurchase.Load(QueryTable);
+EndProcedure
+
+&AtClient
+Procedure Ok(Command)
+	Result = New Structure();
+	Result.Insert("Item", ThisObject.Item);
+	Result.Insert("ItemKey", ThisObject.ItemKey);
+	Result.Insert("Unit", ThisObject.Unit);
+	Result.Insert("VisibleSelectionTables", ThisObject.VisibleSelectionTables);
+	
+	Result.Insert("TableOfBalance", New Array());
+	Result.Insert("TableOfPurchase", New Array());
+	Result.Insert("TableOfInternalSupplyRequest", New Array());
+	
+	For Each Row In ThisObject.TableOfBalance Do
+		If Not ValueIsFilled(Row.Quantity) Then
+			Continue;
+		EndIf;
+		NewRow = New Structure();
+		NewRow.Insert("ItemKey", ThisObject.ItemKey);
+		NewRow.Insert("Store", Row.Store);
+		NewRow.Insert("Quantity", Row.Quantity);
+		Result.TableOfBalance.Add(NewRow);
+	EndDo;
+	
+	For Each Row In ThisObject.TableOfPurchase Do
+		If Not ValueIsFilled(Row.Quantity) Then
+			Continue;
+		EndIf;
+		NewRow = New Structure();
+		NewRow.Insert("ItemKey", ThisObject.ItemKey);
+		NewRow.Insert("Partner", Row.Partner);
+		NewRow.Insert("PriceType", Row.PriceType);
+		NewRow.Insert("Price", Row.Price);
+		NewRow.Insert("Quantity", Row.Quantity);
+		NewRow.Insert("DateOfRelevance", Row.DateOfRelevance);
+		NewRow.Insert("Agreement", Row.Agreement);
+		NewRow.Insert("DeliveryDate", Row.DeliveryDate);
+		Result.TableOfPurchase.Add(NewRow);
+	EndDo;
+	
+	For Each Row In ThisObject.TableOfInternalSupplyRequest Do
+		If Not ValueIsFilled(Row.Quantity) Then
+			Continue;
+		EndIf;
+		NewRow = New Structure();
+		NewRow.Insert("ItemKey", ThisObject.ItemKey);
+		NewRow.Insert("InternalSupplyRequest", Row.InternalSupplyRequest);
+		NewRow.Insert("Quantity", Row.Quantity);
+		NewRow.Insert("Transfer", Row.Transfer);
+		NewRow.Insert("Purchase", Row.Purchase);
+		NewRow.Insert("ProcurementDate", Row.ProcurementDate);
+		NewRow.Insert("RowKey", Row.RowKey);
+		Result.TableOfInternalSupplyRequest.Add(NewRow);
+	EndDo;
+	
+	Close(Result);
+EndProcedure
+
+&AtClient
+Procedure VisibleSelectionTablesOnChange(Item)
+	SetVisible();
+EndProcedure
+
+&AtClient
+Procedure SetVisible()
+	If Upper(ThisObject.VisibleSelectionTables) = Upper("All") Then
+		Items.TableOfBalance.Visible = True;
+		Items.TableOfPurchase.Visible = True;
+	ElsIf Upper(ThisObject.VisibleSelectionTables) = Upper("Transfer") Then
+		Items.TableOfBalance.Visible = True;
+		Items.TableOfPurchase.Visible = False;
+	ElsIf Upper(ThisObject.VisibleSelectionTables) = Upper("Purchase") Then
+		Items.TableOfBalance.Visible = False;
+		Items.TableOfPurchase.Visible = True;
+	EndIf;	
 EndProcedure

@@ -2075,6 +2075,10 @@
       <event>OnWriteAtServer</event>
       <name>OnWriteAtServer</name>
     </handlers>
+    <handlers>
+      <event>AfterWrite</event>
+      <name>AfterWrite</name>
+    </handlers>
     <repostOnWrite>true</repostOnWrite>
   </extInfo>
 </form:Form>

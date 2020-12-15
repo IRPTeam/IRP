@@ -22,19 +22,11 @@
     <use>DontUse</use>
   </content>
   <content>
-    <metadata>Catalog.Extensions</metadata>
-    <use>DontUse</use>
-  </content>
-  <content>
     <metadata>Catalog.DataAreas</metadata>
     <use>DontUse</use>
   </content>
   <content>
     <metadata>Constant.SaasMode</metadata>
-    <use>DontUse</use>
-  </content>
-  <content>
-    <metadata>InformationRegister.LockDataModificationRules</metadata>
     <use>DontUse</use>
   </content>
   <dataSeparationValue>SessionParameter.IDValue</dataSeparationValue>

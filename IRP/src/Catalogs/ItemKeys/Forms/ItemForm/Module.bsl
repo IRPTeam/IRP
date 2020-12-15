@@ -145,3 +145,8 @@ Procedure SetVisible()
 	ThisObject.InheritUnit = ?(ValueIsFilled(Object.Item), Object.Item.Unit, Undefined);
 	ThisObject.ItemType = ?(ValueIsFilled(Object.Item), Object.Item.ItemType, Undefined);
 EndProcedure
+
+&AtClient
+Procedure SizeOnChange(Item)
+	CommonFunctionsClientServer.CalculateVolume(Object);
+EndProcedure

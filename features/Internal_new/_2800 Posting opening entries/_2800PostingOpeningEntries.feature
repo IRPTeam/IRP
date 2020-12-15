@@ -154,7 +154,7 @@ Scenario: _400001 opening entry account balance
 			And I go to line in "CurrenciesAccountBalance" table
 				| 'From' | 'Movement type'  | 'To'  | 'Type'  |
 				| 'USD'  | 'Local currency' | 'TRY' | 'Legal' |
-			And I input "0,1756" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
+			And I input "5,6275" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
 			And I input "1" text in the field named "CurrenciesAccountBalanceMultiplicity" of "CurrenciesAccountBalance" table
 			And I activate "Amount" field in "CurrenciesAccountBalance" table
 			And I finish line editing in "CurrenciesAccountBalance" table
@@ -167,7 +167,7 @@ Scenario: _400001 opening entry account balance
 				| 'From' | 'Movement type'  | 'To'  | 'Type'  |
 				| 'EUR'  | 'Local currency' | 'TRY' | 'Legal' |
 			And I select current line in "CurrenciesAccountBalance" table
-			And I input "0,1758" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
+			And I input "5,6883" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
 			And I finish line editing in "CurrenciesAccountBalance" table
 			And I go to line in "CurrenciesAccountBalance" table
 				| 'From' | 'Movement type'      | 'To'  | 'Type'      |
@@ -195,7 +195,7 @@ Scenario: _400001 opening entry account balance
 			And I go to line in "CurrenciesAccountBalance" table
 				| 'From' | 'Movement type'  | 'To'  | 'Type'  |
 				| 'USD'  | 'Local currency' | 'TRY' | 'Legal' |
-			And I input "0,1758" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
+			And I input "5,6883" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
 			And I input "1" text in the field named "CurrenciesAccountBalanceMultiplicity" of "CurrenciesAccountBalance" table
 			And I activate "Amount" field in "CurrenciesAccountBalance" table
 			And I finish line editing in "CurrenciesAccountBalance" table
@@ -207,7 +207,7 @@ Scenario: _400001 opening entry account balance
 				| 'From' | 'Movement type'  | 'To'  | 'Type'  |
 				| 'EUR'  | 'Local currency' | 'TRY' | 'Legal' |
 			And I select current line in "CurrenciesAccountBalance" table
-			And I input "0,1758" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
+			And I input "5,6883" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
 			And I finish line editing in "CurrenciesAccountBalance" table
 			And I go to line in "CurrenciesAccountBalance" table
 				| 'From' | 'Movement type'      | 'To'  | 'Type'      |
@@ -240,17 +240,17 @@ Scenario: _400001 opening entry account balance
 			And "List" table contains lines
 			| 'Currency' | 'Recorder'               | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
 			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Local currency'               | '1 000,00'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Reporting currency'           | '171,23'    |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | 'Local currency'               | '5 694,76'  |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Reporting currency'           | '171,20'    |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | 'Local currency'               | '5 627,50'  |
 			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | 'Reporting currency'           | '1 000,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | 'Local currency'               | '5 688,28'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | 'Reporting currency'           | '909,09'    |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | 'Local currency'               | '5 688,30'  |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | 'Reporting currency'           | '1 100,00'  |
 			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | 'Local currency'               | '10 000,00' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | 'Reporting currency'           | '1 712,33'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | 'Local currency'               | '28 441,41' |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | 'Reporting currency'           | '1 712,00'  |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | 'Local currency'               | '28 441,50' |
 			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | 'Reporting currency'           | '5 000,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | 'Local currency'               | '45 506,26' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | 'Reporting currency'           | '7 272,73'  |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | 'Local currency'               | '45 506,40' |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | 'Reporting currency'           | '8 800,00'  |
 			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | '*'                            | '1 000,00'  |
 			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | '*'                            | '1 000,00'  |
 			| 'EUR'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | '*'                            | '1 000,00'  |
@@ -268,25 +268,25 @@ Scenario: _400001 opening entry account balance
 		* Check clearing movements
 			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
 			And "List" table does not contain lines
-			| 'Currency' | 'Recorder'         | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Local currency'         | '1 000,00'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Reporting currency'     | '171,23'    |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | 'Local currency'         | '5 694,76'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | 'Reporting currency'     | '1 000,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | 'Local currency'         | '5 688,28'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | 'Reporting currency'     | '909,09'    |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | 'Local currency'         | '10 000,00' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | 'Reporting currency'     | '1 712,33'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | 'Local currency'         | '28 441,41' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | 'Reporting currency'     | '5 000,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | 'Local currency'         | '45 506,26' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | 'Reporting currency'     | '7 272,73'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | '*'                      | '1 000,00'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | '*'                      | '1 000,00'  |
-			| 'EUR'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | '*'                      | '1 000,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | '*'                      | '10 000,00' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | '*'                      | '5 000,00'  |
-			| 'EUR'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | '*'                      | '8 000,00'  |
+			| 'Currency' | 'Recorder'               | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Local currency'               | '1 000,00'  |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Reporting currency'           | '171,20'    |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | 'Local currency'               | '5 627,50'  |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | 'Reporting currency'           | '1 000,00'  |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | 'Local currency'               | '5 688,30'  |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | 'Reporting currency'           | '1 100,00'  |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | 'Local currency'               | '10 000,00' |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | 'Reporting currency'           | '1 712,00'  |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | 'Local currency'               | '28 441,50' |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | 'Reporting currency'           | '5 000,00'  |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | 'Local currency'               | '45 506,40' |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | 'Reporting currency'           | '8 800,00'  |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | '*'                            | '1 000,00'  |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | '*'                            | '1 000,00'  |
+			| 'EUR'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | '*'                            | '1 000,00'  |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | '*'                            | '10 000,00' |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | '*'                            | '5 000,00'  |
+			| 'EUR'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | '*'                            | '8 000,00'  |
 			And I close all client application windows
 	* Posting the document back and check movements
 		* Post document
@@ -298,25 +298,25 @@ Scenario: _400001 opening entry account balance
 		* Check movements
 			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
 			And "List" table contains lines
-			| 'Currency' | 'Recorder'         | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Local currency'         | '1 000,00'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Reporting currency'     | '171,23'    |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | 'Local currency'         | '5 694,76'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | 'Reporting currency'     | '1 000,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | 'Local currency'         | '5 688,28'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | 'Reporting currency'     | '909,09'    |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | 'Local currency'         | '10 000,00' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | 'Reporting currency'     | '1 712,33'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | 'Local currency'         | '28 441,41' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | 'Reporting currency'     | '5 000,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | 'Local currency'         | '45 506,26' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | 'Reporting currency'     | '7 272,73'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | '*'                      | '1 000,00'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | '*'                      | '1 000,00'  |
-			| 'EUR'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | '*'                      | '1 000,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | '*'                      | '10 000,00' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | '*'                      | '5 000,00'  |
-			| 'EUR'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | '*'                      | '8 000,00'  |
+			| 'Currency' | 'Recorder'               | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Local currency'               | '1 000,00'  |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Reporting currency'           | '171,20'    |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | 'Local currency'               | '5 627,50'  |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | 'Reporting currency'           | '1 000,00'  |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | 'Local currency'               | '5 688,30'  |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | 'Reporting currency'           | '1 100,00'  |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | 'Local currency'               | '10 000,00' |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | 'Reporting currency'           | '1 712,00'  |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | 'Local currency'               | '28 441,50' |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | 'Reporting currency'           | '5 000,00'  |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | 'Local currency'               | '45 506,40' |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | 'Reporting currency'           | '8 800,00'  |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | '*'                            | '1 000,00'  |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | '*'                            | '1 000,00'  |
+			| 'EUR'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | '*'                            | '1 000,00'  |
+			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | '*'                            | '10 000,00' |
+			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | '*'                            | '5 000,00'  |
+			| 'EUR'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | '*'                            | '8 000,00'  |
 			And I close all client application windows
 
 
@@ -769,12 +769,12 @@ Scenario: _400004 opening entry AP balance by partner terms (vendors)
 			| 'Movement type'      | 'Type'      |
 			| 'Reporting currency' | 'Reporting' |
 			And I select current line in "CurrenciesAccountPayableByAgreements" table
-			And I input "5,8400" text in the field named "CurrenciesAccountPayableByAgreementsRatePresentation" of "CurrenciesAccountPayableByAgreements" table
+			And I input "0,1712" text in the field named "CurrenciesAccountPayableByAgreementsRatePresentation" of "CurrenciesAccountPayableByAgreements" table
 			And I input "1" text in the field named "CurrenciesAccountPayableByAgreementsMultiplicity" of "CurrenciesAccountPayableByAgreements" table
 			And I finish line editing in "CurrenciesAccountPayableByAgreements" table
 			And "CurrenciesAccountPayableByDocuments" table contains lines
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate'   | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400' | '17,12'  | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712' | '17,12'  | '1'            |
 	* Post document
 		And I click the button named "FormPost"
 		And I delete "$$NumberOpeningEntry400004$$" variable
@@ -872,12 +872,12 @@ Scenario: _400005 opening entry AR balance by partner terms (customers)
 				| 'Movement type'      | 'Type'      |
 				| 'Reporting currency' | 'Reporting' |
 			And I select current line in "CurrenciesAccountReceivableByAgreements" table
-			And I input "5,8400" text in the field named "CurrenciesAccountReceivableByAgreementsRatePresentation" of "CurrenciesAccountReceivableByAgreements" table
+			And I input "0,1712" text in the field named "CurrenciesAccountReceivableByAgreementsRatePresentation" of "CurrenciesAccountReceivableByAgreements" table
 			And I input "1" text in the field named "CurrenciesAccountReceivableByAgreementsMultiplicity" of "CurrenciesAccountReceivableByAgreements" table
 			And I finish line editing in "CurrenciesAccountReceivableByAgreements" table
 			And "CurrenciesAccountReceivableByDocuments" table contains lines
 				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate'   | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '5,8400' | '17,12'  | '1'            |
+				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712' | '17,12'  | '1'            |
 	* Post document
 		And I click the button named "FormPost"
 		And I delete "$$NumberOpeningEntry400005$$" variable
@@ -1172,7 +1172,7 @@ Scenario: _400009 check the entry of the Ap/Ar balance by documents
 			| 'Register  "Partner AR transactions"'       | ''            | ''                    | ''                     | ''               | ''                                          | ''               | ''             | ''                        | ''           | ''                                          | ''                     |
 			| ''                                          | 'Record type' | 'Period'              | 'Resources'            | 'Dimensions'     | ''                                          | ''               | ''             | ''                        | ''           | ''                                          | 'Attributes'           |
 			| ''                                          | ''            | ''                    | 'Amount'               | 'Company'        | 'Basis document'                            | 'Partner'        | 'Legal name'   | 'Partner term'            | 'Currency'   | 'Multi currency movement type'              | 'Deferred calculation' |
-			| ''                                          | 'Receipt'     | '$$DateOpeningEntry400009$$' | '34,25'                | 'Main Company'   | '$$OpeningEntry400009$$' | 'DFC'            | 'DFC'          | 'Partner term DFC'        | 'USD'        | 'Reporting currency'                        | 'No'                   |
+			| ''                                          | 'Receipt'     | '$$DateOpeningEntry400009$$' | '34,24'                | 'Main Company'   | '$$OpeningEntry400009$$' | 'DFC'            | 'DFC'          | 'Partner term DFC'        | 'USD'        | 'Reporting currency'                        | 'No'                   |
 			| ''                                          | 'Receipt'     | '$$DateOpeningEntry400009$$' | '200'                  | 'Main Company'   | '$$OpeningEntry400009$$' | 'DFC'            | 'DFC'          | 'Partner term DFC'        | 'TRY'        | 'Local currency'                            | 'No'                   |
 			| ''                                          | 'Receipt'     | '$$DateOpeningEntry400009$$' | '200'                  | 'Main Company'   | '$$OpeningEntry400009$$' | 'DFC'            | 'DFC'          | 'Partner term DFC'        | 'TRY'        | 'TRY'                                       | 'No'                   |
 			| ''                                          | 'Receipt'     | '$$DateOpeningEntry400009$$' | '200'                  | 'Main Company'   | '$$OpeningEntry400009$$' | 'DFC'            | 'DFC'          | 'Partner term DFC'        | 'TRY'        | 'en description is empty'                   | 'No'                   |

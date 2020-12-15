@@ -177,13 +177,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.ShowBetaTesting</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Constant.DefaultPictureStorageVolume</name>
 		<right>
 			<name>Read</name>
@@ -417,13 +410,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.ShowAlphaTestingSaas</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>CommonForm.EditDescriptions</name>
 		<right>
 			<name>View</name>
@@ -457,6 +443,13 @@
 	</object>
 	<object>
 		<name>InformationRegister.LockDataModificationRules</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>ExchangePlan.FullExchange</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

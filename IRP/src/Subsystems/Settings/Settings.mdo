@@ -24,4 +24,5 @@
   <subsystems>OrdersSettings</subsystems>
   <subsystems>Users</subsystems>
   <subsystems>LockDataModification</subsystems>
+  <subsystems>BaseSettings</subsystems>
 </mdclass:Subsystem>

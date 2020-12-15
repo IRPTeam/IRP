@@ -451,9 +451,13 @@ Scenario: _005116 filling in the "Items" catalog
 			| 'Coat'       |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Unit"
-		And I go to line in "List" table
+		And "List" table does not contain lines
 			| 'Description' |
 			| 'box (8 pcs)' |
+		Then the number of "List" table lines is "меньше или равно" "2"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'pcs' |
 		And I select current line in "List" table
 		And I click Select button of "Producer" field
 		And I go to line in "List" table
@@ -475,7 +479,7 @@ Scenario: _005116 filling in the "Items" catalog
 	* Check data save
 		Then the form attribute named "ItemID" became equal to "AB475590i"
 		Then the form attribute named "ItemType" became equal to "Coat"
-		Then the form attribute named "Unit" became equal to "box (8 pcs)"
+		Then the form attribute named "Unit" became equal to "pcs"
 		Then the form attribute named "Vendor" became equal to "Ferron BP"
 		Then the form attribute named "Description_en" became equal to "Bodie"
 		If "Brand" field is equal to "Gir" Then
@@ -496,7 +500,7 @@ Scenario: _005116 filling in the "Items" catalog
 		And I click Select button of "Unit" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'box (8 pcs)' |
+			| 'pcs' |
 		And I select current line in "List" table
 		And I click the button named "FormWriteAndClose"
 	* Check Items save
@@ -530,6 +534,25 @@ Scenario: _005117 filling in Item keys
 			| 'Additional attribute' | 'Additional attribute values' |
 			| 'Color'                | 'Blue'                        |
 		And I select current line in "List" table
+		And I change "UnitMode" radio button value to "Own"
+		And I click Select button of "Unit" field
+		And "List" table does not contain lines
+			| 'Description' |
+			| 'box (8 pcs)' |
+		Then the number of "List" table lines is "меньше или равно" "2"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'pcs' |
+		And I select current line in "List" table
+		Then the form attribute named "OwnUnit" became equal to "pcs"
+		Then the form attribute named "UnitMode" became equal to "Own"
+		And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'XS/Blue' |
+		And I select current line in "List" table
+		Then the form attribute named "OwnUnit" became equal to "pcs"
+		Then the form attribute named "UnitMode" became equal to "Own"
 		And I click "Save and close" button
 		And I click the button named "FormCreate"
 		And I click Select button of "Size" field
@@ -833,3 +856,85 @@ Scenario: _005121 filling item key according to specification for set
 			| 'Item key'   |
 			| 'Jeans/S-8'  |
 		And I close current window
+
+
+Scenario: _005125 check Dimensions and weight information (item)
+	*  Select item
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Bodie'         |
+		And I select current line in "List" table
+	* Change dimensions and check volume calculation
+		And I expand "Dimensions" group
+		And I input "10,000" text in "Length" field
+		And I input "10,000" text in "Width" field
+		And I input "10,000" text in "Height" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "1 000,000"
+		And I input "0,020" text in "Length" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "2,000"
+		And I click "Save" button
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "2,000"
+		And I input "2,005" text in "Volume" field
+		And I click "Save" button
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "2,005"
+		And I input "20,000" text in "Width" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "4,000"
+		And I input "20,000" text in "Height" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "8,000"
+	* Change weight information and check saving
+		And I expand "Weight information" group
+		And I input "10,000" text in "Weight" field
+		And I click "Save" button
+		And the editing text of form attribute named "Weight" became equal to "10,000"
+		And I close all client application windows
+
+
+Scenario: _005126 check Dimensions and weight information (item key)
+	*  Select item
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Bodie'         |
+		And I select current line in "List" table
+		And In this window I click command interface button "Item keys"
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'M/White'  |
+		And I activate "Item key" field in "List" table
+		And I select current line in "List" table		
+	* Change dimensions and check volume calculation
+		And I expand "Dimensions" group
+		And I input "10,000" text in "Length" field
+		And I input "10,000" text in "Width" field
+		And I input "10,000" text in "Height" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "1 000,000"
+		And I input "0,020" text in "Length" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "2,000"
+		And I click "Save" button
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "2,000"
+		And I input "2,005" text in "Volume" field
+		And I click "Save" button
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "2,005"
+		And I input "20,000" text in "Width" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "4,000"
+		And I input "20,000" text in "Height" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "8,000"
+	* Change weight information and check saving
+		And I expand "Weight information" group
+		And I input "10,000" text in "Weight" field
+		And I click "Save" button
+		And the editing text of form attribute named "Weight" became equal to "10,000"
+		And I close all client application windows

@@ -356,6 +356,7 @@
   <commonModules>CommonModule.CatExpenseAndRevenueTypesServer</commonModules>
   <commonModules>CommonModule.LockDataModificationPriveleged</commonModules>
   <commonModules>CommonModule.MetadataInfo</commonModules>
+  <commonModules>CommonModule.CatConfigurationMetadataServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -372,12 +373,12 @@
   <commonAttributes>CommonAttribute.Volume</commonAttributes>
   <commonAttributes>CommonAttribute.Weight</commonAttributes>
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
+  <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.FileTransferService</httpServices>
   <httpServices>HTTPService.SaasService</httpServices>
   <eventSubscriptions>EventSubscription.BeforeWrite_CheckUniqueID</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_RefreshReusableValues</eventSubscriptions>
   <eventSubscriptions>EventSubscription.ChoiceDataGetProcessing_FindDataForInputString</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.FillCheckProcessing_CatalogsDescriptions</eventSubscriptions>
   <eventSubscriptions>EventSubscription.Filling_DocumentsWithDefaultData</eventSubscriptions>
   <eventSubscriptions>EventSubscription.FormGetProcessing_OpenMobileForm</eventSubscriptions>
   <eventSubscriptions>EventSubscription.OnCopy_AddAttributes</eventSubscriptions>
@@ -391,12 +392,12 @@
   <eventSubscriptions>EventSubscription.BeforeWrite_CatalogsLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_AccumulationRegistersLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_InformationRegistersLockDataModification</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_DescriptionsCheckFilling</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.FillCheckProcessing_DescriptionCheckFilling</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
   <settingsStorages>SettingsStorage.ReportOptions</settingsStorages>
-  <functionalOptions>FunctionalOption.BetaTesting</functionalOptions>
   <functionalOptions>FunctionalOption.SaasMode</functionalOptions>
-  <functionalOptions>FunctionalOption.ShowAlphaTestingSaas</functionalOptions>
   <functionalOptions>FunctionalOption.UseCompanies</functionalOptions>
   <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
   <functionalOptions>FunctionalOption.UseLockDataModification</functionalOptions>
@@ -445,8 +446,6 @@
   <constants>Constant.DefaultPictureStorageVolume</constants>
   <constants>Constant.NotFirstStart</constants>
   <constants>Constant.SaasMode</constants>
-  <constants>Constant.ShowAlphaTestingSaas</constants>
-  <constants>Constant.ShowBetaTesting</constants>
   <constants>Constant.UseCompanies</constants>
   <constants>Constant.UseItemKey</constants>
   <constants>Constant.UseLockDataModification</constants>
@@ -645,6 +644,7 @@
   <informationRegisters>InformationRegister.Taxes</informationRegisters>
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
+  <informationRegisters>InformationRegister.CreatedProcurementOrders</informationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountsStatement</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AdvanceFromCustomers</accumulationRegisters>

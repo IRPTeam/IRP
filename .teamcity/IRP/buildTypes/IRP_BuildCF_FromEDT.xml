@@ -10,7 +10,7 @@
     <parameters>
       <param name="env.CheckConfigSettings" value="-IncorrectReferences -ThinClient -WebClient -Server -UnreferenceProcedures -HandlersExistence -EmptyHandlers -ExtendedModulesCheck -CheckUseModality -CheckUseSynchronousCalls" />
       <param name="env.DBLocale" value="en" />
-      <param name="env.Database1CName" value="%dep.IRP_GitHubUpdate.env.Database1CName%" />
+      <param name="env.Database1CName" value="%teamcity.project.id%" />
       <param name="env.PathToRACTools" value="%env.PathTo1CBin%\rac.exe" />
       <param name="env.SQLPassword" value="credentialsJSON:a93b11ea-65d2-45f0-8587-9ec1d0127f45" spec="password display='hidden'" />
       <param name="env.SQLUser" value="postgres" />

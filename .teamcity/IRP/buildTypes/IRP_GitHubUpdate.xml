@@ -6,58 +6,8 @@
     <options>
       <option name="cleanBuild" value="true" />
     </options>
-    <parameters>
-      <param name="env.BranchToStartVA" value="develop" />
-      <param name="env.Database1CName" value="%teamcity.project.id%" />
-      <param name="env.SonarParamCover" value="" />
-      <param name="env.StartVA" value="false" />
-      <param name="env.VA_Tags" value="" />
-    </parameters>
-    <build-runners>
-      <runner id="RUNNER_19" name="Set infobase name" type="jetbrains_powershell">
-        <parameters>
-          <param name="jetbrains_powershell_execution" value="PS1" />
-          <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code"><![CDATA[echo "BranchToStartVA %env.BranchToStartVA%"
-echo "teamcity.pullRequest.target.branch %teamcity.pullRequest.target.branch%"
-echo "teamcity.build.branch %teamcity.build.branch%"
-$VA_Tags = ""
-
-if('%teamcity.pullRequest.target.branch%' -eq '%env.BranchToStartVA%')
-{
-	$StartVA = 'true'
-	$SonarParamCover = "-Dsonar.coverageReportPaths=%system.teamcity.build.workingDir%/Cover.xml"
- 	$InfobaseName = "%env.Database1CName%_%teamcity.pullRequest.target.branch%_pull%teamcity.pullRequest.number%"
-    $VA_Tags = "Test"
-}
-elseif('%teamcity.build.branch%' -eq '%env.BranchToStartVA%')
-{
-	$StartVA = 'true'
-	$SonarParamCover = "-Dsonar.coverageReportPaths=%system.teamcity.build.workingDir%/Cover.xml"
-	$InfobaseName = "%env.Database1CName%_%teamcity.build.branch%"
-    
-}
-else
-{
-	$VA_Tags = "Test"
-	$StartVA = 'false'
-	$SonarParamCover = ""
-	$InfobaseName = "%env.Database1CName%_%teamcity.build.branch%"
-}
-
-$InfobaseName = $InfobaseName -replace "\\", "_" 
-$InfobaseName = $InfobaseName -replace "\/", "_" 
-$InfobaseName = $InfobaseName -replace "\-", "_"
-
-echo "##teamcity[setParameter name='env.Database1CName' value='$InfobaseName']"
-echo "##teamcity[setParameter name='env.SonarParamCover' value='$SonarParamCover']"
-echo "##teamcity[setParameter name='env.StartVA' value='$StartVA']"
-echo "##teamcity[setParameter name='env.VA_Tags' value='$VA_Tags']"]]></param>
-          <param name="jetbrains_powershell_script_mode" value="CODE" />
-          <param name="teamcity.step.mode" value="default" />
-        </parameters>
-      </runner>
-    </build-runners>
+    <parameters />
+    <build-runners />
     <vcs-settings>
       <vcs-entry-ref root-id="IRP_GitTC" />
     </vcs-settings>

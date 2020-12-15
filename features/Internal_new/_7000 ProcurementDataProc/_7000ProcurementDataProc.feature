@@ -57,6 +57,7 @@ Scenario:_700000 preparation (procurement data proccessor)
 	* Tax settings
 		When filling in Tax settings for company
 	When Create document InternalSupplyRequest objects (for procurement)
+	When create an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)
 	* Change procurement date
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I go to line in "List" table
@@ -96,6 +97,57 @@ Scenario:_700000 preparation (procurement data proccessor)
 		And I move to the next attribute
 		And I click "Post and close" button
 	When Create document PriceList objects (for procurement)
+	When Create document PurchaseInvoice objects (for procurement)
+	* Change PI date
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I input current date and time in "Date" field
+		And I move to the next attribute
+		If window with "Update item list info" header has appeared Then
+			And I remove checkbox "Do you want to update filled prices?"		
+			And I click "OK" button		
+		And I click "Post and close" button
+		And I go to line in "List" table
+			| 'Number' |
+			| '2'      |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I input current date and time in "Date" field
+		And I move to the next attribute
+		If window with "Update item list info" header has appeared Then
+			And I remove checkbox "Do you want to update filled prices?"		
+			And I click "OK" button	
+		And I click "Post and close" button
+		And I go to line in "List" table
+			| 'Number' |
+			| '3'      |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I input current date and time in "Date" field
+		And I move to the next attribute
+		If window with "Update item list info" header has appeared Then
+			And I remove checkbox "Do you want to update filled prices?"		
+			And I click "OK" button	
+		And I click "Post and close" button
+	When Create document PurchaseOrder objects (for procurement)
+	* Change PO date
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I input current date and time in "Date" field
+		And I move to the next attribute
+		If window with "Update item list info" header has appeared Then
+			And I remove checkbox "Do you want to update filled prices?"		
+			And I click "OK" button	
+		And I input "$$$$Date$$$$" text in "Delivery date" field
+		And I click "Post and close" button
 	* Post document
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I go to line in "List" table
@@ -138,28 +190,29 @@ Scenario:_700001 procurement data proccessor form
 			| 'Store 06'    |
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Store 02'   |
+			| 'Store 01'   |
 		And I select current line in "List" table
 	* Check filling in Period
 		And I click Select button of "Period" field
 		And I input current date in "DateBegin" field
+		And I save the value of "DateBegin" field as "$$$$CurrentDate$$$$"
 		And I input "$$$$Date4$$$$" text in "DateEnd" field
 		And I click "Select" button
 	* Check filling in periodicity
 		And I select "Month" exact value from "Periodicity" drop-down list
 		And I select "Day" exact value from "Periodicity" drop-down list
-		And I select "Week" exact value from "Periodicity" drop-down list
-		And in the table "Analysis" I click "Refresh" button
+		And I select "Week" exact value from "Periodicity" drop-down list	
+		And I click "Refresh" button
 		And "Analysis" table contains lines
 			| 'Item'       | 'Item key' | 'Total procurement' | 'Ordered'  | 'Shortage' |
-			| 'Boots'      | '36/18SD'  | '48,000'            | ''         | '48,000'   |
-			| 'Boots'      | '37/18SD'  | '30,000'            | ''         | '30,000'   |
-			| 'Dress'      | 'XS/Blue'  | '70,000'            | ''         | '70,000'   |
-			| 'High shoes' | '39/19SD'  | '15,000'            | ''         | '15,000'   |
+			| 'Boots'      | '36/18SD'  | '48'            | ''         | '48'   |
+			| 'Boots'      | '37/18SD'  | '30'            | ''         | '30'   |
+			| 'Dress'      | 'XS/Blue'  | '70'            | '9'         | '61'   |
+			| 'High shoes' | '39/19SD'  | '15'            | ''         | '15'   |
 		And "Details" table contains lines
 			| 'Document'                   | 'Total quantity' |
-			| 'Internal supply request 1*' | '5,000'          |
-			| 'Internal supply request 2*' | '43,000'         |
+			| 'Internal supply request 1*' | '5'          |
+			| 'Internal supply request 2*' | '43'         |
 		And I close all client application windows
 		
 
@@ -446,6 +499,36 @@ Scenario:_700005 analyze procurement
 
 		
 				
+
+		
+				
+
+		
+				
+		
+				
+				
+		
+				
+		
+				
+
+
+		
+				
+				
+			
+						
+						
+
+
+						
+			
+						
+				
+		
+				 
+
 		
 
 		

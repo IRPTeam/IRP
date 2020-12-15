@@ -118,3 +118,58 @@ Scenario: _00506 filling in the "Units" catalog
 		And I click "OK" button
 		Given Recent TestClient message contains "Basis unit has to be filled, if item filter used." string by template
 		And I close all client application windows	
+
+Scenario: _0050601 check Dimensions and weight information (item unit)
+	*  Select unit
+		Given I open hyperlink "e1cib/list/Catalog.Units"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'pcs'         |
+		And I select current line in "List" table
+	* Change dimensions and check volume calculation
+		And I expand "Dimensions" group
+		And I input "10,000" text in "Length" field
+		And I input "10,000" text in "Width" field
+		And I input "10,000" text in "Height" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "1 000,000"
+		And I input "0,020" text in "Length" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "2,000"
+		And I click "Save" button
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "2,000"
+		And I input "2,005" text in "Volume" field
+		And I click "Save" button
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "2,005"
+		And I input "20,000" text in "Width" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "4,000"
+		And I input "20,000" text in "Height" field
+		And I move to the next attribute
+		And the editing text of form attribute named "Volume" became equal to "8,000"
+	* Change weight information and check saving
+		And I expand "Weight information" group
+		And I input "10,000" text in "Weight" field
+		And I click "Save" button
+		And the editing text of form attribute named "Weight" became equal to "10,000"
+		And I close all client application windows
+		
+				
+
+				
+		
+				
+				
+
+
+				
+
+		
+				
+
+		
+				
+
+		

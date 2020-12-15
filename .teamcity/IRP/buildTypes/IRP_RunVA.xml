@@ -442,6 +442,9 @@ $JobTimes]]></param>
         </parameters>
       </runner>
       <runner id="RUNNER_70" name="Run VA in SaaS" type="jetbrains_powershell">
+        <conditions>
+          <equals name="env.RunSaasMode" value="true" />
+        </conditions>
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />

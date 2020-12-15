@@ -126,6 +126,9 @@ rem coverage-cli start --infobase %env.Database1CName%  --debugger http://localh
         </parameters>
       </runner>
       <runner id="RUNNER_68" name="VA with test" type="jetbrains_powershell">
+        <conditions>
+          <equals name="env.RunSaasMode" value="false" />
+        </conditions>
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />

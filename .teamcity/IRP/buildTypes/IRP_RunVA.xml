@@ -22,6 +22,7 @@
       <param name="env.OScript" value="C:/OneScript" />
       <param name="env.PID_ID" value="0" />
       <param name="env.RunSaasMode" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
+      <param name="env.SaasTag" value="SaasPrepare" />
       <param name="env.SonarParamCover" value="" />
       <param name="env.StopOnError" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.StreamCount" value="3" />

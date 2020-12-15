@@ -46,13 +46,13 @@ Procedure AreaUpdate() Export
 	|	DataAreas.AdminPassword AS AdminPassword,
 	|	DataAreas.AdminLocalization AS AdminLocalization,
 	|	DataAreas.CompanyName AS CompanyName,
-	|	DataAreas.CompanyLocalization AS CompanyLocalization,
-	|	DataAreas.Extensions.(
-	|		Extension) AS Extensions
+	|	DataAreas.InterfaceLocalizationCode
 	|FROM
 	|	Catalog.DataAreas AS DataAreas
 	|WHERE
-	|	DataAreas.DataAreaStatus = VALUE(Enum.DataAreaStatus.AreaPreparation)";
+	|	DataAreas.DataAreaStatus = VALUE(Enum.DataAreaStatus.AreaPreparation)
+	|	AND NOT DataAreas.DeletionMark
+	|	AND DataAreas.Code > 0";
 	
 	QueryResult = Query.Execute();
 	
@@ -77,18 +77,11 @@ Procedure AreaUpdate() Export
 		Else
 			User.LocalizationCode = Metadata.DefaultLanguage.LanguageCode;
 		EndIf;
-		User.InterfaceLocalizationCode = User.LocalizationCode;
+		User.InterfaceLocalizationCode = CurrentArea.InterfaceLocalizationCode;
 		User.ShowInList = True;
 		User.UserGroup = UserGroup.Ref;
 		User.AdditionalProperties.Insert("Password", CurrentArea.AdminPassword);
 		User.Write();
-		
-		// install localization default extension
-		For Each DefaultExtension In CurrentArea.Extensions.Unload() Do
-			If ValueIsFilled(DefaultExtension.Extension) Then
-				Catalogs.Extensions.SetupExtentionInCurrentArea(DefaultExtension.Extension, False);
-			EndIf;
-		EndDo;
 				
 		// logout area
 		AreaSettings = New Structure("ID", 0);
@@ -97,6 +90,7 @@ Procedure AreaUpdate() Export
 		CurrentAreaObject = CurrentArea.Ref.GetObject();
 		CurrentAreaObject.DataAreaStatus = Enums.DataAreaStatus.Working;
 		CurrentAreaObject.Write();
+		
 	EndDo;
 	
 EndProcedure

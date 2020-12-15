@@ -2,6 +2,10 @@
 #Region Public
 
 Function CheckDescriptionDuplicateEnabled(Object) Export
+	If Not Saas.isAreaActive() Then
+		Return False;
+	EndIf;
+	
 	MetadataFullName = Object.Metadata().FullName();
 	Query = New Query;
 	Query.Text = "SELECT ALLOWED TOP 1

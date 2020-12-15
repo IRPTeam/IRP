@@ -2,7 +2,7 @@
 #Region EventSubscriptions
 
 Procedure BeforeWrite_DocumentsLockDataModification(Source, Cancel, WriteMode, PostingMode) Export
-	If Cancel Or Not Constants.UseLockDataModification.Get() Then
+	If Cancel Or Source.DataExchange.Load Or Not Constants.UseLockDataModification.Get() Then
 		Return;
 	EndIf;
 		SourceParams = FillLockDataSettings();
@@ -15,7 +15,7 @@ Procedure BeforeWrite_DocumentsLockDataModification(Source, Cancel, WriteMode, P
 EndProcedure
 
 Procedure BeforeWrite_CatalogsLockDataModification(Source, Cancel, WriteMode, PostingMode) Export
-	If Cancel Or Not Constants.UseLockDataModification.Get() Then
+	If Cancel Or Source.DataExchange.Load Or Not Constants.UseLockDataModification.Get() Then
 		Return;
 	EndIf;
 	SourceParams = FillLockDataSettings();
@@ -28,7 +28,7 @@ Procedure BeforeWrite_CatalogsLockDataModification(Source, Cancel, WriteMode, Po
 EndProcedure
 
 Procedure BeforeWrite_InformationRegistersLockDataModification(Source, Cancel, Replacing) Export
-	If Cancel Or Not Constants.UseLockDataModification.Get() Then
+	If Cancel Or Source.DataExchange.Load  Or Not Constants.UseLockDataModification.Get() Then
 		Return;
 	EndIf;
 	SourceParams = FillLockDataSettings();
@@ -41,7 +41,7 @@ Procedure BeforeWrite_InformationRegistersLockDataModification(Source, Cancel, R
 EndProcedure
 
 Procedure BeforeWrite_AccumulationRegistersLockDataModification(Source, Cancel, Replacing) Export
-	If Cancel Or Not Constants.UseLockDataModification.Get() Then
+	If Cancel Or Source.DataExchange.Load Or Not Constants.UseLockDataModification.Get() Then
 		Return;
 	EndIf;
 	SourceParams = FillLockDataSettings();

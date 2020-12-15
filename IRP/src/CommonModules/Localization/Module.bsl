@@ -433,6 +433,8 @@ Function Strings(Lang) Export
 	
 	// %1 - en
 	Strings.Insert("Saas_003", NStr("en = 'Localization %1 of the company is not available.'", Lang));
+	
+	Strings.Insert("Saas_004", NStr("en = 'Area preparation completed'", Lang));
 	#EndRegion
 	
 	#Region FillingFromClassifiers

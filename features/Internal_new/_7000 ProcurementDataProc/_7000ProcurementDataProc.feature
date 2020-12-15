@@ -162,6 +162,288 @@ Scenario:_700001 procurement data proccessor form
 			| 'Internal supply request 2*' | '43,000'         |
 		And I close all client application windows
 		
+
+
+
+Scenario:_700005 analyze procurement
+	Given I open hyperlink "e1cib/app/DataProcessor.Procurement"
+	* Filling main attributes
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'    |
+		And I select current line in "List" table
+		And I click Select button of "Period" field
+		And I save "CurrentDate() + 86400" in "$$$$Date7$$$$" variable
+		And I input "$$$$Date7$$$$" text in "DateBegin" field
+		And I input "$$$$Date2$$$$" text in "DateEnd" field
+		And I click "Select" button
+		And I select "Day" exact value from "Periodicity" drop-down list
+		And I click "Refresh" button
+	* Check filling in info tab
+		And "Analysis" table contains lines
+			| 'Item'       | 'Item key' | 'Unit' | 'Total procurement' | 'Ordered' | 'Shortage' | 'Expired' | 'Open balance' |
+			| 'Boots'      | '36/18SD'  | 'pcs'  | '48'                | ''        | '48'       | ''        | ''             |
+			| 'Boots'      | '37/18SD'  | 'pcs'  | '30'                | ''        | '30'       | ''        | ''             |
+			| 'Dress'      | 'XS/Blue'  | 'pcs'  | '70'                | '9'       | '51'       | ''        | '10'           |
+			| 'High shoes' | '39/19SD'  | 'pcs'  | '15'                | ''        | '15'       | ''        | ''             |
+		And I go to line in "Analysis" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And Delay 5
+		And "Details" table contains lines
+			| 'Document'                                            | 'Total quantity' |
+			| 'Internal supply request 1 dated 01.12.2020 16:06:22' | '20'          |
+			| 'Internal supply request 2 dated 01.12.2020 16:07:11' | '50'         |
+	* Change date and check refilling info tab
+		And I click Select button of "Period" field
+		And I input current date in "DateBegin" field
+		And I click "Select" button
+		And I click "Refresh" button
+		And "Analysis" table contains lines
+			| 'Item'       | 'Item key' | 'Unit' | 'Total procurement' | 'Ordered' | 'Shortage' | 'Expired' |
+			| 'Boots'      | '36/18SD'  | 'pcs'  | '48'                | ''        | '48'       | ''        |
+			| 'Boots'      | '37/18SD'  | 'pcs'  | '30'                | ''        | '30'       | ''        |
+			| 'Dress'      | 'XS/Blue'  | 'pcs'  | '70'                | '9'       | '61'       | ''        |
+			| 'High shoes' | '39/19SD'  | 'pcs'  | '15'                | ''        | '15'       | ''        |
+		And I click Select button of "Period" field
+		And I input "$$$$Date7$$$$" text in "DateBegin" field
+		And I click "Select" button
+		And I click "Refresh" button
+		And "Analysis" table contains lines
+			| 'Item'       | 'Item key' | 'Unit' | 'Total procurement' | 'Ordered' | 'Shortage' | 'Expired' | 'Open balance' |
+			| 'Boots'      | '36/18SD'  | 'pcs'  | '48'                | ''        | '48'       | ''        | ''             |
+			| 'Boots'      | '37/18SD'  | 'pcs'  | '30'                | ''        | '30'       | ''        | ''             |
+			| 'Dress'      | 'XS/Blue'  | 'pcs'  | '70'                | '9'       | '51'       | ''        | '10'           |
+			| 'High shoes' | '39/19SD'  | 'pcs'  | '15'                | ''        | '15'       | ''        | ''             |
+	* Analyze procurement
+		And I go to line in "Analysis" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I click "Analyze procurement" button		
+		And "TableOfInternalSupplyRequest" table contains lines
+			| 'Use' | 'Internal supply request'                             | 'Quantity' |
+			| 'Yes' | 'Internal supply request 1 dated 01.12.2020 16:06:22' | '20'   |
+			| 'Yes' | 'Internal supply request 2 dated 01.12.2020 16:07:11' | '50'   |
+		Then the number of "TableOfInternalSupplyRequest" table lines is "равно" "2"
+		* Select 1 ISR
+			And I go to line in "TableOfInternalSupplyRequest" table
+				| 'Internal supply request'                             |
+				| 'Internal supply request 2 dated 01.12.2020 16:07:11' |
+			And I change "Use" checkbox in "TableOfInternalSupplyRequest" table
+			And I finish line editing in "TableOfInternalSupplyRequest" table
+			And I click "Ok" button
+			And "TableOfInternalSupplyRequest" table contains lines
+				| 'Internal supply request'                             | 'Procurement date' | 'Quantity' | 'Transfer' | 'Purchase' |
+				| 'Internal supply request 1 dated 01.12.2020 16:06:22' | '*'     | '20'   | ''         | ''         |
+			Then the number of "TableOfInternalSupplyRequest" table lines is "равно" "1"
+			And "TableOfBalance" table contains lines
+				| 'Store'    | 'Balance' | 'Quantity' |
+				| 'Store 08' | '10'  | ''         |
+			Then the number of "TableOfInternalSupplyRequest" table lines is "равно" "1"
+			And "TableOfPurchase" table contains lines
+				| 'Partner'          | 'Agreement'                                  | 'Price type'              | 'Price'  | 'Date of relevance' | 'Delivery date'       | 'Quantity' |
+				| 'Ferron BP'        | 'Vendor Ferron, TRY'                         | 'Vendor price, TRY'       | '100,00' | '07.12.2020'        | '$$$$CurrentDate$$$$' | ''         |
+				| 'Maxim'            | 'Partner term Maxim'                         | 'Vendor price, TRY'       | '100,00' | '07.12.2020'        | '$$$$CurrentDate$$$$' | ''         |
+				| 'Veritas'          | 'Posting by Standard Partner term (Veritas)' | 'Vendor price, TRY'       | '100,00' | '07.12.2020'        | '$$$$CurrentDate$$$$' | ''         |
+				| 'Partner Kalipso'  | 'Partner Kalipso Vendor'                     | 'Basic Price without VAT' | '440,68' | '01.11.2018'        | '$$$$CurrentDate$$$$' | ''         |
+				| 'DFC'              | 'Partner term vendor DFC'                    | 'Basic Price Types'       | '520,00' | '01.11.2018'        | '$$$$CurrentDate$$$$' | ''         |
+				| 'Partner Kalipso'  | 'Partner term vendor Partner Kalipso'        | 'Basic Price Types'       | '520,00' | '01.11.2018'        | '$$$$CurrentDate$$$$' | ''         |
+				| 'DFC'              | 'DFC Vendor by Partner terms'                | 'Vendor price, TRY'       | '100,00' | '07.12.2020'        | '$$$$CurrentDate$$$$' | ''         |
+				| 'Partner Ferron 1' | 'Vendor Ferron 1'                            | 'Vendor price, TRY'       | '100,00' | '07.12.2020'        | '$$$$CurrentDate$$$$' | ''         |
+				| 'Partner Ferron 1' | 'Vendor Ferron Discount'                     | 'Vendor price, TRY'       | '100,00' | '07.12.2020'        | '$$$$CurrentDate$$$$' | ''         |
+				| 'Partner Ferron 2' | 'Vendor Ferron Partner 2'                    | 'Vendor price, TRY'       | '100,00' | '07.12.2020'        | '$$$$CurrentDate$$$$' | ''         |
+			And I close current window
+		* Select 2 ISR
+			And I go to line in "Analysis" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XS/Blue'  |
+			And I click "Analyze procurement" button
+			And I click "Ok" button
+			And "TableOfInternalSupplyRequest" table contains lines
+				| 'Internal supply request'                             | 'Procurement date' | 'Quantity' | 'Transfer' | 'Purchase' |
+				| 'Internal supply request 1 dated 01.12.2020 16:06:22' | '*'     | '20'   | ''         | ''         |
+				| 'Internal supply request 2 dated 01.12.2020 16:07:11' | '*'      | '50'   | ''         | ''         |
+			And "TableOfBalance" table became equal
+				| 'Store'    | 'Balance' | 'Quantity' |
+				| 'Store 08' | '10'  | ''         |
+			And "TableOfPurchase" table contains lines
+				| 'Partner'          | 'Agreement'                                  | 'Price type'              | 'Price'  | 'Date of relevance' | 'Delivery date'       | 'Quantity' |
+				| 'Ferron BP'        | 'Vendor Ferron, TRY'                         | 'Vendor price, TRY'       | '100,00' | '07.12.2020'        | '$$$$CurrentDate$$$$' | ''         |
+				| 'Maxim'            | 'Partner term Maxim'                         | 'Vendor price, TRY'       | '100,00' | '07.12.2020'        | '$$$$CurrentDate$$$$' | ''         |
+				| 'Veritas'          | 'Posting by Standard Partner term (Veritas)' | 'Vendor price, TRY'       | '100,00' | '07.12.2020'        | '$$$$CurrentDate$$$$' | ''         |
+				| 'Partner Kalipso'  | 'Partner Kalipso Vendor'                     | 'Basic Price without VAT' | '440,68' | '01.11.2018'        | '$$$$CurrentDate$$$$' | ''         |
+				| 'DFC'              | 'Partner term vendor DFC'                    | 'Basic Price Types'       | '520,00' | '01.11.2018'        | '$$$$CurrentDate$$$$' | ''         |
+				| 'Partner Kalipso'  | 'Partner term vendor Partner Kalipso'        | 'Basic Price Types'       | '520,00' | '01.11.2018'        | '$$$$CurrentDate$$$$' | ''         |
+				| 'DFC'              | 'DFC Vendor by Partner terms'                | 'Vendor price, TRY'       | '100,00' | '07.12.2020'        | '$$$$CurrentDate$$$$' | ''         |
+				| 'Partner Ferron 1' | 'Vendor Ferron 1'                            | 'Vendor price, TRY'       | '100,00' | '07.12.2020'        | '$$$$CurrentDate$$$$' | ''         |
+				| 'Partner Ferron 1' | 'Vendor Ferron Discount'                     | 'Vendor price, TRY'       | '100,00' | '07.12.2020'        | '$$$$CurrentDate$$$$' | ''         |
+				| 'Partner Ferron 2' | 'Vendor Ferron Partner 2'                    | 'Vendor price, TRY'       | '100,00' | '07.12.2020'        | '$$$$CurrentDate$$$$' | ''         |
+		* Select procurement method
+			And I activate field named "TableOfBalanceQuantity" in "TableOfBalance" table
+			And I select current line in "TableOfBalance" table
+			And I input "5" text in the field named "TableOfBalanceQuantity" of "TableOfBalance" table
+			And I finish line editing in "TableOfBalance" table
+			And "TableOfInternalSupplyRequest" table contains lines
+				| 'Internal supply request'                             | 'Procurement date' | 'Quantity' | 'Transfer' | 'Purchase' |
+				| 'Internal supply request 1 dated 01.12.2020 16:06:22' | '*'     | '20'   | '5'    | ''         |
+				| 'Internal supply request 2 dated 01.12.2020 16:07:11' | '*'    | '50'   | ''         | ''         |
+			And I activate field named "TableOfBalanceQuantity" in "TableOfBalance" table
+			And I select current line in "TableOfBalance" table
+			And I input "0" text in the field named "TableOfBalanceQuantity" of "TableOfBalance" table
+			And I finish line editing in "TableOfBalance" table
+			And "TableOfInternalSupplyRequest" table contains lines
+				| 'Internal supply request'                             | 'Procurement date' | 'Quantity' | 'Transfer' | 'Purchase' |
+				| 'Internal supply request 1 dated 01.12.2020 16:06:22' | '*'     | '20'   | ''    | ''         |
+				| 'Internal supply request 2 dated 01.12.2020 16:07:11' | '*'    | '50'   | ''         | ''         |			
+			And I activate field named "TableOfBalanceQuantity" in "TableOfBalance" table
+			And I select current line in "TableOfBalance" table
+			And I input "7" text in the field named "TableOfBalanceQuantity" of "TableOfBalance" table
+			And I finish line editing in "TableOfBalance" table
+			And I go to line in "TableOfPurchase" table
+				| 'Agreement'              | 'Partner'         | 'Price'  | 'Price type'              |
+				| 'Partner Kalipso Vendor' | 'Partner Kalipso' | '440,68' | 'Basic Price without VAT' |
+			And I go to line in "TableOfPurchase" table
+				| 'Agreement'                   | 'Partner' | 'Price'  | 'Price type'        |
+				| 'DFC Vendor by Partner terms' | 'DFC'     | '100,00' | 'Vendor price, TRY' |
+			And I input "12" text in the field named "TableOfPurchaseQuantity" of "TableOfPurchase" table
+			And I finish line editing in "TableOfPurchase" table
+			And I go to line in "TableOfPurchase" table
+				| 'Agreement'       | 'Partner'          | 'Price'  | 'Price type'        |
+				| 'Vendor Ferron 1' | 'Partner Ferron 1' | '100,00' | 'Vendor price, TRY' |
+			And I go to line in "TableOfPurchase" table
+				| 'Agreement'          | 'Partner' | 'Price'  | 'Price type'        |
+				| 'Partner term Maxim' | 'Maxim'   | '100,00' | 'Vendor price, TRY' |
+			And I input "40" text in the field named "TableOfPurchaseQuantity" of "TableOfPurchase" table
+			And I finish line editing in "TableOfPurchase" table
+			And I go to line in "TableOfPurchase" table
+				| 'Agreement'              | 'Partner'         | 'Price'  | 'Price type'              |
+				| 'Partner Kalipso Vendor' | 'Partner Kalipso' | '440,68' | 'Basic Price without VAT' |
+			And "TableOfInternalSupplyRequest" table contains lines
+				| 'Internal supply request'                             | 'Quantity' | 'Transfer' | 'Purchase' |
+				| 'Internal supply request 1 dated 01.12.2020 16:06:22' | '20'   | '7'    | '13'   |
+				| 'Internal supply request 2 dated 01.12.2020 16:07:11' | '50'   | ''         | '39'   |
+			And I go to line in "TableOfPurchase" table
+				| 'Agreement'                                  | 'Partner' |
+				| 'Posting by Standard Partner term (Veritas)' | 'Veritas' |
+			And I input "12" text in the field named "TableOfPurchaseQuantity" of "TableOfPurchase" table
+			And I finish line editing in "TableOfPurchase" table
+			And "TableOfInternalSupplyRequest" table contains lines
+				| 'Internal supply request'                             | 'Quantity' | 'Transfer' | 'Purchase' |
+				| 'Internal supply request 1 dated 01.12.2020 16:06:22' | '20'   | '7'    | '13'   |
+				| 'Internal supply request 2 dated 01.12.2020 16:07:11' | '50'   | ''         | '50'   |
+			And I click "Ok" button
+	* Check data save
+		And I go to line in "Analysis" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I click "Analyze procurement" button
+		And I click "Ok" button
+		And "TableOfInternalSupplyRequest" table contains lines
+			| 'Internal supply request'                             | 'Quantity' | 'Transfer' | 'Purchase' |
+			| 'Internal supply request 1 dated 01.12.2020 16:06:22' | '20'   | '7'    | '13'   |
+			| 'Internal supply request 2 dated 01.12.2020 16:07:11' | '50'   | ''         | '50'   |
+		And I click "Ok" button
+	* Analyze one more item
+		And I go to line in "Analysis" table
+			| 'Item'       | 'Item key' |
+			| 'High shoes' | '39/19SD'  |
+		And I activate field named "AnalysisUnit" in "Analysis" table
+		And I click "Analyze procurement" button
+		And "TableOfInternalSupplyRequest" table contains lines
+			| 'Use' | 'Internal supply request'                             | 'Quantity' |
+			| 'Yes' | 'Internal supply request 2 dated 01.12.2020 16:07:11' | '15'   |
+		And I click "Ok" button
+		Then the number of "TableOfBalance" table lines is "равно" 0
+		And "TableOfPurchase" table contains lines
+			| 'Partner'         | 'Agreement'                           | 'Price type'              | 'Price'  | 'Date of relevance' | 'Delivery date' | 'Quantity' |
+			| 'Partner Kalipso' | 'Partner Kalipso Vendor'              | 'Basic Price without VAT' | '462,96' | '01.11.2018'        | '*'             | ''         |
+			| 'DFC'             | 'Partner term vendor DFC'             | 'Basic Price Types'       | '500,00' | '01.11.2018'        | '*'             | ''         |
+			| 'Partner Kalipso' | 'Partner term vendor Partner Kalipso' | 'Basic Price Types'       | '500,00' | '01.11.2018'        | '*'             | ''         |
+		And I go to line in "TableOfPurchase" table
+			| 'Agreement'              | 'Partner'         |
+			| 'Partner Kalipso Vendor' | 'Partner Kalipso' |
+		And I input "15" text in the field named "TableOfPurchaseQuantity" of "TableOfPurchase" table
+		And I finish line editing in "TableOfPurchase" table
+		And I click "Ok" button
+		And I go to line in "Analysis" table
+			| 'Item'       | 'Item key' |
+			| 'Boots' | '37/18SD'  |
+		And I activate field named "AnalysisUnit" in "Analysis" table
+		And I click "Analyze procurement" button
+		And I click "Ok" button
+		And I go to line in "TableOfPurchase" table
+			| 'Agreement'              | 'Partner'         |
+			| 'Partner Kalipso Vendor' | 'Partner Kalipso' |
+		And I input "15" text in the field named "TableOfPurchaseQuantity" of "TableOfPurchase" table
+		And I finish line editing in "TableOfPurchase" table
+		And I click "Ok" button
+	* Check results
+		And I move to "Results" tab
+		Then "Procurement" window is opened
+		And I go to line in "ResultsItemList" table
+			| 'Item'  | 'Item key' | 'Unit' |
+			| 'Dress' | 'XS/Blue'  | 'pcs'  |	
+		And "ResultsTableOfBalance" table contains lines
+			| 'Store'    | 'Quantity' |
+			| 'Store 08' | '7'    |
+		And "ResultsTableOfPurchase" table contains lines
+			| 'Partner' | 'Agreement'                                  | 'Price type'        | 'Price'  | 'Date of relevance' | 'Quantity' |
+			| 'Maxim'   | 'Partner term Maxim'                         | 'Vendor price, TRY' | '100,00' | '07.12.2020'        | '40'   |
+			| 'Veritas' | 'Posting by Standard Partner term (Veritas)' | 'Vendor price, TRY' | '100,00' | '07.12.2020'        | '12'   |
+			| 'DFC'     | 'DFC Vendor by Partner terms'                | 'Vendor price, TRY' | '100,00' | '07.12.2020'        | '12'   |
+		And I go to line in "ResultsItemList" table
+			| 'Item'       | 'Item key' | 'Unit' |
+			| 'High shoes' | '39/19SD'  | 'pcs'  |
+		And "ResultsTableOfInternalSupplyRequest" table became equal
+			| 'Internal supply request'                             | 'Procurement date' | 'Quantity' | 'Transfer' | 'Purchase' |
+			| 'Internal supply request 2 dated 01.12.2020 16:07:11' | '*'                | '15'   | ''         | '15'   |
+	* Delete results
+		And I go to line in "ResultsItemList" table
+			| 'Item'       | 'Item key' |
+			| 'Boots' | '37/18SD'  |
+		And I click "ResultsItemListDeleteResults" button		
+		And "ResultsItemList" table does not contain lines
+			| 'Item'       | 'Item key' |
+			| 'Boots' | '37/18SD'  |
+	* Edit results
+		And I go to line in "ResultsItemList" table
+			| 'Item'       | 'Item key' |
+			| 'High shoes' | '39/19SD'  |
+		And I click "ResultsItemListChangeResults" button
+		And I go to line in "TableOfPurchase" table
+			| 'Agreement'               | 'Date of relevance' | 'Partner' | 'Price'  | 'Price type'        |
+			| 'Partner term vendor DFC' | '01.11.2018'        | 'DFC'     | '500,00' | 'Basic Price Types' |
+		And I activate field named "TableOfPurchaseQuantity" in "TableOfPurchase" table
+		And I select current line in "TableOfPurchase" table
+		And I input "10" text in the field named "TableOfPurchaseQuantity" of "TableOfPurchase" table
+		And I finish line editing in "TableOfPurchase" table
+		And I go to line in "TableOfPurchase" table
+			| 'Agreement'                           | 'Partner'         | 'Price'  | 'Price type'        |
+			| 'Partner term vendor Partner Kalipso' | 'Partner Kalipso' | '500,00' | 'Basic Price Types' |
+		And I click "Ok" button
+	* Create documents
+		And I click "Create documents" button
+		And Delay 20
+		And "CreatedInventoryTransferOrders" table contains lines
+			| 'Document'                  | 'Status' | 'Store sender' |
+			| 'Inventory transfer order*' | 'Wait'   | 'Store 08'     |
+		And "CreatedPurchaseOrders" table contains lines
+			| 'Document'         | 'Partner'         | 'Status' |
+			| 'Purchase order *' | 'Maxim'           | 'Wait'   |
+			| 'Purchase order *' | 'Veritas'         | 'Wait'   |
+			| 'Purchase order *' | 'DFC'             | 'Wait'   |
+			| 'Purchase order *' | 'Partner Kalipso' | 'Wait'   |
+			| 'Purchase order *' | 'DFC'             | 'Wait'   |
+		And I close all client application windows
+		
+	
+
 		
 				
 		

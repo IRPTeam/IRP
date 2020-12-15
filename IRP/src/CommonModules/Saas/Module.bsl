@@ -39,7 +39,7 @@ Procedure AreaUpdate() Export
 	
 	Query = New Query;
 	Query.Text =
-	"SELECT TOP 1
+	"SELECT
 	|	DataAreas.Ref AS Ref,
 	|	DataAreas.Code AS Code,
 	|	DataAreas.AdminLogin AS AdminLogin,

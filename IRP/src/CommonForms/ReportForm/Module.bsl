@@ -3,7 +3,6 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	DocumentsClientServer.ChangeTitleCollapse(, ThisObject);
 	ReportFullName = ReportName();
 	ExternalCommandsServer.CreateCommands(ThisObject, ReportFullName, Enums.FormTypes.ObjectForm);
 EndProcedure

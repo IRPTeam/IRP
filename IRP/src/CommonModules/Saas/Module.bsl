@@ -99,13 +99,6 @@ Function CurrentAreaID() Export
 	Return SessionParameters.IDValue;
 EndFunction
 
-Function AvailableCompanyLocalizations() Export
-	Array = New Array;
-	Array.Add("tr");
-	Array.Add("ua");
-	Return Array;
-EndFunction
-
 Function GetCurrencyMovementType_Legal() Export
 	Query = New Query();
 	Query.Text = 

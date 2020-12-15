@@ -375,7 +375,6 @@
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.FileTransferService</httpServices>
-  <httpServices>HTTPService.SaasService</httpServices>
   <eventSubscriptions>EventSubscription.BeforeWrite_CheckUniqueID</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_RefreshReusableValues</eventSubscriptions>
   <eventSubscriptions>EventSubscription.ChoiceDataGetProcessing_FindDataForInputString</eventSubscriptions>

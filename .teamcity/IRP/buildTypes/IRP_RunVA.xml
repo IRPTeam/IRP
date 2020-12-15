@@ -720,11 +720,11 @@ $VanessaRun = {
 
 $JobArray = @{}
 $JobTimes = @{}
-
+$CurrentID = 0
 if ($RunSaasMode) {
     $elementTag = "%env.SaasTag%"
     $startPort += 10
-    $JobTailProc = Start-Job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort
+    $JobTailProc = Start-Job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort,$CurrentID
     $CurrentDate = Get-Date
     $JobArray.Add($elementTag,$JobTailProc)
     $JobTimes = $JobTimes + @{$elementTag=@($CurrentDate, "")}
@@ -755,7 +755,8 @@ if ($RunSaasMode) {
 
 foreach ($elementTag in $TagArray) {
     $startPort += 10
-    $JobTailProc = Start-Job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort
+    $CurrentID += 1
+    $JobTailProc = Start-Job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort,$CurrentID
     $CurrentDate = Get-Date
     $JobArray.Add($elementTag,$JobTailProc)
     $JobTimes = $JobTimes + @{$elementTag=@($CurrentDate, "")}

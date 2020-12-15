@@ -832,8 +832,7 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code"><![CDATA[#Copy-Item %system.teamcity.build.workingDir%\TempDB\1Cv8.1CD -Destination .
-Compress-Archive -Path AllSteps\* -DestinationPath %env.Database1CName%_%build.number%.zip
+          <param name="jetbrains_powershell_script_code"><![CDATA[Compress-Archive -Path AllSteps\* -DestinationPath %teamcity.project.id%.zip
 Compress-Archive -Path Cover.xml -DestinationPath Cover.zip]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="execute_always" />

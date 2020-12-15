@@ -838,6 +838,366 @@ Compress-Archive -Path Cover.xml -DestinationPath Cover.zip]]></param>
           <param name="teamcity.step.mode" value="execute_always" />
         </parameters>
       </runner>
+      <runner id="RUNNER_70" name="Run VA in SaaS" type="jetbrains_powershell">
+        <parameters>
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[$TagArray = @(%env.TagsFullList%)
+Write-Output "Start full test"
+
+New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%/allure/base"
+$startPort = 48010
+New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\logpath"
+New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps"
+New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps\Template"
+Copy-Item -Path "%system.teamcity.build.workingDir%\TempDB\1Cv8.1CD" -Destination "%system.teamcity.build.workingDir%\AllSteps\Template\1Cv8.1CD"
+
+$StreamCountMax = %env.StreamCount%
+$RunSaasMode = $%env.RunSaasMode%
+
+$VanessaRun = {
+    Param($elementTag, $startPort, $CurrentID)
+
+    $AreaID = ""
+    $portmax = $startPort + 9
+    $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
+    #Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"
+    Write-Output "$startPort - $portmax"
+    $allurePath = "%system.teamcity.build.workingDir%/allure" | ForEach-Object { $_ -replace '\\', '/' }
+    if ($RunSaasMode -and $elementTag -eq "%env.SaasTag%") {
+        $TempDb = "'/F%system.teamcity.build.workingDir%\AllSteps\TempDB'" | ForEach-Object { $_ -replace '\\', '/' } 
+    } else {
+        if($RunSaasMode){
+            $TempDb = "'/F%system.teamcity.build.workingDir%\AllSteps\TempDB'" | ForEach-Object { $_ -replace '\\', '/' } 
+            $AreaID = "/Z $CurrentID"
+        } else {
+            $TempDb = "'/F%system.teamcity.build.workingDir%\AllSteps\$elementTag'" | ForEach-Object { $_ -replace '\\', '/' } 
+            New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps\$elementTag"
+            Copy-Item -Path "%system.teamcity.build.workingDir%\TempDB\1Cv8.1CD" -Destination "%system.teamcity.build.workingDir%\AllSteps\$elementTag\1Cv8.1CD"
+        }
+    }
+    #$TempDb = "'/Slocalhost/%env.Database1CName%'" | ForEach-Object { $_ -replace '\\', '/' }
+     
+    $connection = "' $AreaID /N %env.LoginTo1C% /P %env.PassTo1C% /Len /UseHwLicenses+ /TComp -SDC  /DisableStartupMessages /DisplayPerformance /DisplayAllFunctions /EnableCheckModal /EnableCheckExtensionsAndAddInsSyncCalls /DEBUG -http -attach /DEBUGGERURL http://localhost:%env.DebugPort%'"
+    $text = "{
+    'AllureReport': {
+        'DataAllureMarks': [],
+        'attachactiveformdatatotheallurereport': true,
+        'attachallformsdatatotheallurereport': false,
+        'attachdataoftheoperatingsystemprocessestotheallurereport': true,
+        'attacheventlogtotheallurereport': true,
+        'attachnetworkconnectiondatatotheallurereport': true,
+        'attachvariablestotheallurereport': true,
+        'reportlevel1': '#report.epic=;catalog1',
+        'reportlevel2': '#report.feature=;catalog2',
+        'reportlevel3': '#report.story=;scenarioname',
+        'testsuites': ''
+    },
+    'DebugLog': false,
+    'DownloadFeaturesOpen': 1,
+    'Lang': 'en',
+    'ModelingCreateReport': false,
+    'RunningScripts': {
+        'SpacingStepSpecifiedUser': 0.1,
+        'dosleepusingping': false,
+        'makestepsasync': false,
+        'numberofattemptstoperformanaction': 3,
+        'pauseonwindowopening': 0,
+        'pendingequalfailed': true,
+        'safeexecutionofsteps': false,
+        'showrownumberonerror': false,
+        'stoponerror': %env.StopOnError%,
+        'timeoutforasynchronoussteps': 0,
+        'timetofindwindow': 5,
+        'updatestatistics': false,
+        'updatetreewhenscenariostarts': false
+    },
+    'TestClient': {
+        'datatestclients': [{
+                'AddItionalParameters': $connection,
+                'ClientType': 'Thin',
+                'ComputerName': 'localhost',
+                'Name': 'This client',
+                'PathToInfobase': $TempDb,
+                'PortTestClient': $startPort
+            }
+        ],
+        'runtestclientwithmaximizedwindow': false,
+        'testclienttimeout': 25
+    },
+    'Version': '1.2.034',
+    'VersionVA': 'ver 1.2.034',
+    'addmetainformationclicking': false,
+    'addtofeaturefilter': true,
+    'allurecreatereport': true,
+    'closetestclient': %env.CloseVA%,
+    'collectdataoftheoperatingsystemprocesses': false,
+    'collectnetworkconnectiondata': false,
+    'cucumbercreatereport': false,
+    'filtertags': [],
+    'getactiveformdataonerror': true,
+    'getallformsdataonerror': true,
+    'htmlcreate': false,
+    'ignoretags': ['IgnoreOnCIMainBuild', 'Negative'],
+    'junitcreatereport': false,
+    'librarycatalogs': [],
+    'logerrorstotext': true,
+    'logstepstotext': false,
+    'logtogr': true,
+    'logtotext': true,
+    'markdowncreate': false,
+    'onerrorscreenshot': true,
+    'onerrorscreenshoteverywindow': false,
+    'platformversiongenerateepf': 'C:\\Program Files\\1cv8\\8.3.15.1869\\bin\\',
+    'screencaptureaddinmethod': 2,
+    'searchformelementsbyname': false,
+    'simplereport': false,
+    'thetreetagisenabledbydefault': true,
+    'useaddin': true,
+    'useaddinforscreencapture': true,
+    'usersettingsprovider': 'FILE',
+    'usesikulixserver': false,
+    'vanessarun': true,
+    'vanessashutdown': %env.CloseVA%,
+    'videcreate': false,
+    'createlogs': true
+}"
+    #Write-Output "$text"
+    $a = $text | ConvertFrom-Json
+    #Write-Output "featurepath - %env.VA.FeaturePath%Internal_New"
+    $a | Add-Member -Type NoteProperty -Name 'featurepath' -Value '%env.VA.FeaturePath%Internal_New'
+    #Write-Output "projectpath - %system.teamcity.build.workingDir%"
+    $a | Add-Member -Type NoteProperty -Name 'projectpath' -Value '%system.teamcity.build.workingDir%'
+    #Write-Output "outputscreenshot - %system.teamcity.build.tempDir%"
+    $a | Add-Member -Type NoteProperty -Name 'outputscreenshot' -Value '%system.teamcity.build.workingDir%\screenShots'
+    #Write-Output "texterrorslogname - %system.teamcity.build.tempDir%\errors$elementTag"
+    $a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value "%system.teamcity.build.tempDir%\errors\$elementTag"
+    #Write-Output "textlogname - $ScriptLogFilePath"
+    $a | Add-Member -Type NoteProperty -Name 'textlogname' -Value $ScriptLogFilePath
+    #Write-Output "testclientports - $startPort - $portmax"
+    $a | Add-Member -Type NoteProperty -Name 'testclientports' -Value "$startPort - $portmax"
+    #Write-Output "directorytobuildhierarchy - %env.VA.FeaturePath%"
+    $a.AllureReport | Add-Member -Type NoteProperty -Name 'directorytobuildhierarchy' -Value '%env.VA.FeaturePath%'
+    #Write-Output "allurepath - $allurePath/$elementTag"
+    $a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepath' -Value "$allurePath/$elementTag"
+    #$a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepathbase' -Value "$allurePath/base"
+    #Write-Output "logpath - %system.teamcity.build.tempDir%\logpath$elementTag"
+    $a | Add-Member -Type NoteProperty -Name 'logpath' -Value "%system.teamcity.build.workingDir%\logpath\$elementTag.log"    
+   
+    $a.librarycatalogs += '%system.teamcity.build.workingDir%\DataProcessor'
+    $a.librarycatalogs += '%env.VA.FeaturePath%External_New'
+    $a.librarycatalogs += '%env.OScript%/lib/vanessa-automation/features/Libraries'
+    $a.filtertags += $elementTag
+  
+    $b = $a | ConvertTo-Json -depth 32
+    $b | set-content %system.teamcity.build.workingDir%/va$elementTag.json
+    #Write-Output "$b"
+    #Write-Output "##teamcity[compilationFinished compiler='VA settings']"
+  
+    ### Run VA ########################################################################
+    $NewD = New-Desktop
+    Set-DesktopName -Desktop $NewD -Name $elementTag
+    Switch-Desktop -Desktop $NewD
+    Start-Sleep 2
+    $ProcessInfo = New-Object System.Diagnostics.ProcessStartInfo 
+    $ProcessInfo.FileName = %env.PathTo1CPlatform% 
+    $ProcessInfo.UseShellExecute = $false 
+    $ProcessInfo.Arguments = " $AreaID /N %env.LoginTo1C% /P %env.PassTo1C%  ""$TempDb"" /Execute ""%env.OScript%/lib/vanessa-automation/vanessa-automation.epf"" /TestManager /C""StartFeaturePlayer; VBParams=%system.teamcity.build.workingDir%\va$elementTag.json""" 
+    $Process = New-Object System.Diagnostics.Process 
+    $Process.StartInfo = $ProcessInfo 
+    $Process.Start() | Out-Null  
+    $processID = $Process.Id 
+    Write-Output "##teamcity[setParameter name='env.VA_PID' value='$processID']"
+
+    ### Start tail #####################################################################
+    Write-Host "##teamcity[flowStarted flowId='$elementTag']"
+    Write-Host "##teamcity[testSuiteStarted name='$elementTag' flowId='$elementTag']"
+
+
+    Write-Output "Wait for log file: $elementTag"
+    Write-Host "##teamcity[testStarted  name='Wait for log file: $elementTag' flowId='$elementTag']"
+    $Skip = $false
+    $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"
+        do {
+        Start-Sleep 1        
+        if (!(Get-Process -id $processID -ErrorAction SilentlyContinue)){
+        Write-Host "##teamcity[testFailed name='Wait for log file: $elementTag' message='Log file not found: $ScriptLogFilePath' flowId='$elementTag']"
+        $Skip = $true
+        break
+        }
+        
+    } while (!(Test-Path $ScriptLogFilePath))
+    Write-Host "##teamcity[testFinished name='Wait for log file: $elementTag' duration='$TotalMilliseconds' flowId='$elementTag']"
+    
+    if (!$Skip) {
+      Write-Output "Start tail: $elementTag"
+
+      $CurrentFeatureFile = ""
+      $CurrentTest = ""
+      $LastIndex = 0
+      do{
+          $TextInLog = Get-Content $ScriptLogFilePath -Encoding UTF8 -Force -ErrorAction SilentlyContinue
+
+          For ($index = $LastIndex; $index -le $TextInLog.count - 1; $index++) {
+              $line = $TextInLog[$index]
+              if($line -match "Feature:"){
+                  $FeatureFile = $line -split "\\"
+                  if($CurrentFeatureFile -eq ""){
+                      $CurrentFeatureFile =  $FeatureFile[$FeatureFile.count - 1]
+                      Write-Host "##teamcity[testSuiteStarted name='$CurrentFeatureFile' flowId='$elementTag']"
+                  }else{
+
+                      if($CurrentTest -ne ""){
+                          $EndDate = Get-Date
+                          $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
+                          $TotalMilliseconds = [math]::Round($Diff.TotalMilliseconds)
+                          Write-Host "##teamcity[testFinished name='$CurrentTest' duration='$TotalMilliseconds' flowId='$elementTag']"
+                          $CurrentTest = ""
+                      }
+
+                      Write-Host "##teamcity[testSuiteFinished name='$CurrentFeatureFile' flowId='$elementTag']"
+                      $CurrentFeatureFile =  $FeatureFile[$FeatureFile.count - 1]
+                      Write-Host "##teamcity[testSuiteStarted name='$CurrentFeatureFile' flowId='$elementTag']"
+                  }
+
+              }elseif($line -match "Script:"){
+                  $Test = $line -split ":"
+                  if($CurrentTest -eq ""){
+                      $CurrentTest =  $Test[$Test.count - 1]
+                      Write-Host "##teamcity[testStarted name='$CurrentTest' flowId='$elementTag']"
+                      $CurrentDate = Get-Date
+                  }else{
+                      $EndDate = Get-Date
+                      $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
+
+                      $TotalMilliseconds = [math]::Round($Diff.TotalMilliseconds)
+                      Write-Host "##teamcity[testFinished name='$CurrentTest' duration='$TotalMilliseconds' flowId='$elementTag']"
+                      $CurrentTest =  $Test[$Test.count - 1]
+                      $CurrentTest = $CurrentTest.replace("|", "||").replace("'", "|'").replace("[", "|[").replace("]", "|]").replace("`n", "|n").replace("`r", "|r")
+                      Write-Host "##teamcity[testStarted  name='$CurrentTest' flowId='$elementTag']"
+                      $CurrentDate = Get-Date
+                  }
+              }elseif($line -match "Failed:"){
+                  $ErrorDescription = $line -split ":"
+                  if($CurrentTest -eq ""){
+
+                  }else{
+                      $ErrorDescription = $ErrorDescription.replace("|", "||").replace("'", "|'").replace("[", "|[").replace("]", "|]").replace("`n", "|n").replace("`r", "|r")
+                      Write-Host "##teamcity[testFailed name='$CurrentTest' message='$ErrorDescription' flowId='$elementTag']"
+                  }    
+              }else{
+                  if($CurrentTest -ne ""){
+                      Write-Host "##teamcity[testStdOut name='$CurrentTest' out='$line' flowId='$elementTag']"
+                  }            
+              }
+              $LastIndex = $TextInLog.count
+          }
+          Start-Sleep 1
+      } while(Get-Process -id $processID -ErrorAction SilentlyContinue)
+
+	}
+    $EndDate = Get-Date
+    $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
+                        
+    $TotalMilliseconds = [math]::Round($Diff.TotalMilliseconds)
+    Write-Host "##teamcity[testFinished name='$CurrentTest' duration='$TotalMilliseconds' flowId='$elementTag']"
+    Write-Host "##teamcity[testSuiteFinished name='$CurrentFeatureFile' flowId='$elementTag']"
+
+
+    Write-Host "##teamcity[testSuiteFinished name='$elementTag' flowId='$elementTag']"
+    Write-Host "##teamcity[flowFinished flowId='$elementTag']"
+    Remove-Desktop -Desktop $NewD -Verbose
+}
+
+$JobArray = @{}
+$JobTimes = @{}
+
+if ($RunSaasMode) {
+    $elementTag = "%env.SaasTag%"
+    $startPort += 10
+    $JobTailProc = Start-Job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort
+    $CurrentDate = Get-Date
+    $JobArray.Add($elementTag,$JobTailProc)
+    $JobTimes = $JobTimes + @{$elementTag=@($CurrentDate, "")}
+    $NumberJob = $JobTimes.count
+    Write-Host "Start SaaS prepare"
+
+    do {
+        Start-Sleep 1
+            $listsToDelete = @()
+
+            $JobArray.GetEnumerator() | ForEach-Object {
+                $key = $($_.key)
+                $JobArray[$key] | Receive-Job
+                if ($JobArray[$key].State -eq "Running") {
+
+                }elseif ($JobArray[$key].State -eq "Completed") {
+                    $listsToDelete += $key
+                }else{
+                    
+                }
+            }
+            foreach($listToDelete in $listsToDelete) {
+                $JobArray.Remove($listToDelete)
+            }
+    } while ($JobArray.count)
+
+}
+
+foreach ($elementTag in $TagArray) {
+    $startPort += 10
+    $JobTailProc = Start-Job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort
+    $CurrentDate = Get-Date
+    $JobArray.Add($elementTag,$JobTailProc)
+    $JobTimes = $JobTimes + @{$elementTag=@($CurrentDate, "")}
+    $NumberJob = $JobTimes.count
+    Write-Host "Start $elementTag at $CurrentDate #$NumberJob/$TotalTags"
+
+    do {
+        Start-Sleep 1
+            $listsToDelete = @()
+
+            $JobArray.GetEnumerator() | ForEach-Object {
+                $key = $($_.key)
+                $JobArray[$key] | Receive-Job
+                if ($JobArray[$key].State -eq "Running") {
+
+                }elseif ($JobArray[$key].State -eq "Completed") {
+                    $listsToDelete += $key
+                }else{
+                    
+                }
+            }
+            foreach($listToDelete in $listsToDelete) {
+                $JobArray.Remove($listToDelete)
+            }
+    } while ($JobArray.count -ge $StreamCountMax)
+}
+
+do {
+    Start-Sleep 1
+        $listsToDelete = @()
+
+        $JobArray.GetEnumerator() | ForEach-Object {
+            $key = $($_.key)
+            $JobArray[$key] | Receive-Job
+            if ($JobArray[$key].State -eq "Running") {
+
+            }elseif ($JobArray[$key].State -eq "Completed") {
+                $listsToDelete += $key
+            }else{
+                
+            }
+        }
+        foreach($listToDelete in $listsToDelete) {
+            $JobArray.Remove($listToDelete)
+        }
+} while ($JobArray.count)
+$JobTimes]]></param>
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
     </build-runners>
     <vcs-settings>
       <vcs-entry-ref root-id="IRP_GitTC" />

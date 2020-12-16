@@ -474,16 +474,16 @@ $VanessaRun = {
     Write-Output "$startPort - $portmax"
     $allurePath = "%system.teamcity.build.workingDir%/allure" | ForEach-Object { $_ -replace '\\', '/' }
     if ($RunSaasMode -and $elementTag -eq "%env.SaasTag%") {
-        $TempDb = "'/F%system.teamcity.build.workingDir%\AllSteps\TempDB'" | ForEach-Object { $_ -replace '\\', '/' } 
+        $TempDb = "/F%system.teamcity.build.workingDir%\TempDB" | ForEach-Object { $_ -replace '\\', '/' } 
         Write-Output "Run first setup in $TempDb"
     } else {
         if($RunSaasMode){
-            $TempDb = "'/F%system.teamcity.build.workingDir%\AllSteps\TempDB'" | ForEach-Object { $_ -replace '\\', '/' } 
+            $TempDb = "/F%system.teamcity.build.workingDir%\TempDB" | ForEach-Object { $_ -replace '\\', '/' } 
             $AreaID = "/Z $CurrentID"
             Write-Output "Run DB in $TempDb /Z $CurrentID in SaaS mode"
 
         } else {
-            $TempDb = "'/F%system.teamcity.build.workingDir%\AllSteps\$elementTag'" | ForEach-Object { $_ -replace '\\', '/' } 
+            $TempDb = "/F%system.teamcity.build.workingDir%\AllSteps\$elementTag" | ForEach-Object { $_ -replace '\\', '/' } 
             New-Item -ItemType "directory" -Path "%system.teamcity.build.workingDir%\AllSteps\$elementTag"
             Copy-Item -Path "%system.teamcity.build.workingDir%\TempDB\1Cv8.1CD" -Destination "%system.teamcity.build.workingDir%\AllSteps\$elementTag\1Cv8.1CD"
             Write-Output "Run DB in $TempDb common mode"
@@ -531,7 +531,7 @@ $VanessaRun = {
                 'ClientType': 'Thin',
                 'ComputerName': 'localhost',
                 'Name': 'This client',
-                'PathToInfobase': $TempDb,
+                'PathToInfobase': "'$TempDb'",
                 'PortTestClient': $startPort
             }
         ],

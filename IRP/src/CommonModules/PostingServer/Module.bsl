@@ -871,7 +871,12 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 		QueryTable.Columns.Add("Unposting");
 		QueryTable.FillValues(False, "Unposting");
 	EndIf;
-
+	
+	TableDataPath = "Object.ItemList";
+	If Parameters.Property("TableDataPath") Then
+		TableDataPath = Parameters.TableDataPath;
+	EndIf;
+	
 	QueryTableCopy = QueryTable.Copy();
 	QueryTableCopy.GroupBy(Parameters.GroupColumns + ", Unposting", Parameters.SumColumns);
 
@@ -908,7 +913,7 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 					RemainsQuantity, Row.Quantity, LackOfBalance, BasisUnit);
 			EndIf;
 			CommonFunctionsClientServer.ShowUsersMessage(
-			MessageText, "Object.ItemList[" + (LineNumber - 1) + "].Quantity", "Object.ItemList");
+			MessageText, TableDataPath + "[" + (LineNumber - 1) + "].Quantity", "Object.ItemList");
 			// Delete row
 		Else
 			MessageText = StrTemplate(R().Error_068, LineNumbers, Row.Item, Row.ItemKey, Parameters.Operation,
@@ -961,6 +966,23 @@ Function GetLineNumberAndRowKeyFromItemList(Ref, FullTableName) Export
 	QueryResult = Query.Execute();
 	ItemList_InDocument = QueryResult.Unload();
 	UUIDToString(ItemList_Indocument);
+	Return ItemList_InDocument;	
+EndFunction
+
+Function GetLineNumberAndItemKeyFromItemList(Ref, FullTableName) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.LineNumber AS LineNumber
+	|FROM
+	|	%1 AS ItemList
+	|WHERE
+	|	ItemList.Ref = &Ref";
+	Query.Text = StrTemplate(Query.Text, FullTableName);
+	Query.SetParameter("Ref", Ref);
+	QueryResult = Query.Execute();
+	ItemList_InDocument = QueryResult.Unload();
 	Return ItemList_InDocument;	
 EndFunction
 
@@ -1091,4 +1113,158 @@ Function CheckingBalanceIsRequired(Ref, SettingUniqueID) Export
 	Else
 		Return False;
 	EndIf;
+EndFunction
+
+Function CheckBalance_StockReservation(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
+	Parameters = New Structure();
+	Parameters.Insert("RegisterName" , "StockReservation");
+	Parameters.Insert("Operation"    , "Reservation");
+	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+EndFunction	
+
+Function CheckBalance_StockBalance(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
+	Parameters = New Structure();
+	Parameters.Insert("RegisterName" , "StockBalance");
+	Parameters.Insert("Operation"    , "Write off");
+	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+EndFunction	
+
+Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	ItemList.ItemKey,
+	|	ItemList.LineNumber
+	|INTO ItemList
+	|FROM
+	|	&ItemList_InDocument AS ItemList
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Records.Store,
+	|	Records.ItemKey,
+	|	Records.Quantity
+	|INTO Records_Exists
+	|FROM
+	|	&Records_Exists AS Records
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Records.Store,
+	|	Records.ItemKey,
+	|	Records.Quantity
+	|INTO Records_InDocument
+	|FROM
+	|	&Records_InDocument AS Records
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Records_Exists.Store,
+	|	Records_Exists.ItemKey,
+	|	Records_Exists.Quantity
+	|INTO Records_All
+	|FROM
+	|	Records_Exists AS Records_Exists
+	|		LEFT JOIN Records_InDocument AS Records_InDocument
+	|		ON Records_Exists.Store = Records_InDocument.Store
+	|		AND Records_Exists.ItemKey = Records_InDocument.ItemKey
+	|WHERE
+	|	Records_InDocument.ItemKey IS NULL
+	|	AND NOT &Unposting
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Records_InDocument.Store,
+	|	Records_InDocument.ItemKey,
+	|	Records_InDocument.Quantity
+	|FROM
+	|	Records_InDocument AS Records_InDocument
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Records_All.Store,
+	|	Records_All.ItemKey,
+	|	SUM(Records_All.Quantity) AS Quantity
+	|INTO Records_All_Grouped
+	|FROM
+	|	Records_All AS Records_All
+	|GROUP BY
+	|	Records_All.Store,
+	|	Records_All.ItemKey
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Records_All_Grouped.ItemKey.Item AS Item,
+	|	Records_All_Grouped.ItemKey,
+	|	ISNULL(BalanceRegister.QuantityBalance, 0) AS QuantityBalance,
+	|	Records_All_Grouped.Quantity AS Quantity,
+	|	-ISNULL(BalanceRegister.QuantityBalance, 0) AS LackOfBalance,
+	|	&Unposting AS Unposting
+	|INTO Lack
+	|FROM
+	|	Records_All_Grouped AS Records_All_Grouped
+	|		LEFT JOIN AccumulationRegister.%1.Balance(, (Store, ItemKey) IN
+	|			(SELECT
+	|				Records_All_Grouped.Store,
+	|				Records_All_Grouped.ItemKey
+	|			FROM
+	|				Records_All_Grouped AS Records_All_Grouped)) AS BalanceRegister
+	|		ON Records_All_Grouped.Store = BalanceRegister.Store
+	|		AND Records_All_Grouped.ItemKey = BalanceRegister.ItemKey
+	|WHERE
+	|	ISNULL(BalanceRegister.QuantityBalance, 0) < 0
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Lack.Item,
+	|	Lack.ItemKey,
+	|	Lack.QuantityBalance,
+	|	Lack.Quantity,
+	|	Lack.LackOfBalance,
+	|	Lack.Unposting,
+	|	MIN(ItemList.LineNumber) AS LineNumber
+	|FROM
+	|	Lack AS Lack
+	|		LEFT JOIN ItemList AS ItemList
+	|		ON Lack.ItemKey = ItemList.ItemKey
+	|GROUP BY
+	|	Lack.Item,
+	|	Lack.ItemKey,
+	|	Lack.QuantityBalance,
+	|	Lack.Quantity,
+	|	Lack.LackOfBalance,
+	|	Lack.Unposting";
+	
+	Query.Text = StrTemplate(Query.Text, Parameters.RegisterName);
+	
+	Query.SetParameter("ItemList_InDocument", Tables.ItemList_InDocument);
+	Query.SetParameter("Records_Exists"     , Tables.Records_Exists);
+	Query.SetParameter("Records_InDocument" , Tables.Records_InDocument);
+	Query.SetParameter("Unposting"          , Unposting);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();	
+	
+	Error = False;
+	If QueryTable.Count() Then
+		Error = True;
+		ErrorParameters = New Structure();
+		ErrorParameters.Insert("GroupColumns"  , "ItemKey, Item, LackOfBalance");
+		ErrorParameters.Insert("SumColumns"    , "Quantity");
+		ErrorParameters.Insert("FilterColumns" , "ItemKey, Item, LackOfBalance");
+		ErrorParameters.Insert("Operation"     , Parameters.Operation);
+		ErrorParameters.Insert("RecordType"    , RecordType);
+		TableDataPath = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "TableDataPath");
+		If ValueIsFilled(TableDataPath) Then
+			ErrorParameters.Insert("TableDataPath" , TableDataPath);
+		EndIf;
+		PostingServer.ShowPostingErrorMessage(QueryTable, ErrorParameters, AddInfo);
+	EndIf;
+	Return Not Error;
 EndFunction

@@ -100,6 +100,9 @@ rd /q /s "%%userprofile%%\AppData\Roaming\1C\1Cv8\"]]></param>
         </parameters>
       </runner>
       <runner id="RUNNER_55" name="Start debug" type="jetbrains_powershell">
+        <conditions>
+          <equals name="env.StartDebug" value="true" />
+        </conditions>
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />

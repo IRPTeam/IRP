@@ -1115,6 +1115,30 @@ Function CheckingBalanceIsRequired(Ref, SettingUniqueID) Export
 	EndIf;
 EndFunction
 
+Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys, AddInfo = Undefined)Export
+	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
+	AccReg = AccumulationRegisters;
+
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, TableNameWithItemKeys);
+	If Parameters.DocumentDataTables.Property("StockReservation_Exists") Then
+		If Not Cancel And Not AccReg.StockReservation.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
+			Parameters.PostingDataTables[Parameters.Object.RegisterRecords.StockReservation].RecordSet, 
+			Parameters.DocumentDataTables.StockReservation_Exists, 
+			AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+			Cancel = True;
+		EndIf;
+	EndIf;
+	
+	If Parameters.DocumentDataTables.Property("StockBalance_Exists") Then
+		If Not Cancel And Not AccReg.StockBalance.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
+			Parameters.PostingDataTables[Parameters.Object.RegisterRecords.StockBalance].RecordSet, 
+			Parameters.DocumentDataTables.StockBalance_Exists, 
+			AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+			Cancel = True;
+		EndIf;
+	EndIf;
+EndProcedure
+
 Function CheckBalance_StockReservation(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
 	Parameters = New Structure();
 	Parameters.Insert("RegisterName" , "StockReservation");

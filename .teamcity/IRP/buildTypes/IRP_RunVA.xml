@@ -490,8 +490,15 @@ $VanessaRun = {
         }
     }
     #$TempDb = "'/Slocalhost/%env.Database1CName%'" | ForEach-Object { $_ -replace '\\', '/' }
-     
-    $connection = "' $AreaID /N %env.LoginTo1C% /P %env.PassTo1C% /Len /UseHwLicenses+ /TComp -SDC  /DisableStartupMessages /DisplayPerformance /DisplayAllFunctions /EnableCheckModal /EnableCheckExtensionsAndAddInsSyncCalls /DEBUG -http -attach /DEBUGGERURL http://localhost:%env.DebugPort%'"
+    
+    $UseDebug = $%env.StartDebug% 
+    $DebugString = ""
+    If ($UseDebug){
+    	$DebugString = "/DEBUG -http -attach /DEBUGGERURL http://localhost:%env.DebugPort%"
+    }
+    
+    $connection = "' $AreaID /N %env.LoginTo1C% /P %env.PassTo1C% /Len /UseHwLicenses+ /TComp -SDC  /DisableStartupMessages /DisplayPerformance /DisplayAllFunctions /EnableCheckModal /EnableCheckExtensionsAndAddInsSyncCalls $DebugString'"
+    
     $TempDbJson = "'$TempDb'"
     $text = "{
     'AllureReport': {

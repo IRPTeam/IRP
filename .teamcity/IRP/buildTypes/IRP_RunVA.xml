@@ -466,7 +466,7 @@ $RunSaasMode = $%env.RunSaasMode%
 
 $VanessaRun = {
     Param($elementTag, $startPort, $CurrentID)
-
+    $RunSaasMode = $%env.RunSaasMode%
     $AreaID = ""
     $portmax = $startPort + 9
     $ScriptLogFilePath = "%system.teamcity.build.workingDir%\$elementTag.log"

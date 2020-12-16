@@ -45,7 +45,7 @@ $VA_Tags = ""
 
 if('%teamcity.pullRequest.target.branch%' -eq '%env.BranchToStartVA%')
 {
-	$SonarParamCover = "-Dsonar.coverageReportPaths=%system.teamcity.build.workingDir%/Cover.xml"
+	$SonarParamCover = ""
  	$InfobaseName = "%env.Database1CName%_%teamcity.pullRequest.target.branch%_pull%teamcity.pullRequest.number%"
     
 }

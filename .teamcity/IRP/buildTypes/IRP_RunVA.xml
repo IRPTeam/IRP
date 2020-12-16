@@ -1170,6 +1170,9 @@ Start-Sleep -s 5]]></param>
         </parameters>
       </runner>
       <runner id="RUNNER_4" name="Cover stop" type="simpleRunner">
+        <conditions>
+          <equals name="env.StartDebug" value="true" />
+        </conditions>
         <parameters>
           <param name="script.content" value="coverage-cli stop -p %env.PID_ID%" />
           <param name="teamcity.step.mode" value="execute_always" />

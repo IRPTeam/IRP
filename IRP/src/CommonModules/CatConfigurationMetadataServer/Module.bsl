@@ -25,10 +25,55 @@ Function CheckDescriptionDuplicateEnabled(Object) Export
 	EndIf;
 EndFunction
 
+Function CheckDescriptionFillingEnabled(Object) Export
+	MetadataFullName = Object.Metadata().FullName();
+	Query = New Query;
+	Query.Text = "SELECT ALLOWED TOP 1
+	|	ConfigurationMetadata.CheckDescriptionFilling
+	|FROM
+	|	Catalog.ConfigurationMetadata AS ConfigurationMetadata
+	|WHERE
+	|	ConfigurationMetadata.ObjectFullName = &ObjectFullName";
+	Query.SetParameter("ObjectFullName", MetadataFullName);
+	QueryExecution = Query.Execute();
+	If QueryExecution.IsEmpty() Then
+		Return False;
+	Else
+		QuerySelect = QueryExecution.Select();
+		QuerySelect.Next();
+		Return QuerySelect.CheckDescriptionFilling;
+	EndIf;
+EndFunction
+
 Procedure RefillMetadata() Export
 	RefillCatalogs();
 	RefillDocuments();
 EndProcedure
+
+Function GetConfigurationMetadataItemByObject(Object) Export
+	Return GetConfigurationMetadataItemByFullName(Object.Metadata().FullName);
+EndFunction
+
+Function GetConfigurationMetadataItemByFullName(ObjectFullName) Export
+	ReturnValue = Undefined;
+	Query = New Query;
+	Query.Text = "SELECT
+	|	ConfigurationMetadata.Ref
+	|FROM
+	|	Catalog.ConfigurationMetadata AS ConfigurationMetadata
+	|WHERE
+	|	ConfigurationMetadata.ObjectFullName = &ObjectFullName
+	|	AND NOT ConfigurationMetadata.DeletionMark
+	|	AND NOT ConfigurationMetadata.Unused";
+	Query.SetParameter("ObjectFullName", ObjectFullName);
+	QueryExecution = Query.Execute();
+	If Not QueryExecution.IsEmpty() Then
+		QuerySelection = QueryExecution.Select();
+		QuerySelection.Next();
+		ReturnValue = QuerySelection.Ref;
+	EndIf;
+	Return ReturnValue;
+EndFunction
 
 #EndRegion
 

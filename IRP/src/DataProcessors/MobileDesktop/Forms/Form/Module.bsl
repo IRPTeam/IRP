@@ -4,6 +4,13 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, DataProcessors.MobileDesktop, Items.PageAddInfo);
 EndProcedure
 
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
+EndProcedure
+
 &AtServer
 Procedure ItemOnChangeAtServer()
 	Query = New Query;
@@ -76,7 +83,10 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	AddInfo = New Structure("MobileModule", ThisObject);
+	AddInfo = New Structure();
+	#If MobileClient Then
+		AddInfo.Insert("MobileModule", ThisObject);
+	#EndIf
 	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject, , AddInfo);
 EndProcedure
 
@@ -90,6 +100,12 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	If AdditionalParameters.FoundedItems.Count() Then
 		#If MobileClient Then
 		MultimediaTools.CloseBarcodeScanning();
+		#EndIf
+	Else
+		#If NOT MobileClient Then
+		For Each Row In AdditionalParameters.Barcodes Do
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, Row));
+		EndDo;
 		#EndIf
 	EndIf;
 	
@@ -171,4 +187,3 @@ EndProcedure
 Procedure NotOK(Command)
 	WriteReg(False);
 EndProcedure
-

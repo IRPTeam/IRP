@@ -1275,8 +1275,6 @@ Scenario: create PurchaseReturn300301
 
 
 Scenario: set True value to the constant
-		And I set "True" value to the constant "ShowBetaTesting"
-		And I set "True" value to the constant "ShowAlphaTestingSaas"
 		And I set "True" value to the constant "UseItemKey"
 		And I set "True" value to the constant "UseCompanies"
 
@@ -1333,3 +1331,117 @@ Scenario: create Workstation
 		And I click "Save and close" button
 		And I close TestClient session
 		Given I open new TestClient session or connect the existing one
+
+
+Scenario: auto filling Configuration metadata catalog
+		Given I open hyperlink "e1cib/list/Catalog.ConfigurationMetadata"
+		And I click "Refill metadata" button
+		And Delay 20
+		And I click "List" button
+		And "List" table contains lines
+		| 'Description'                    |
+		| 'Additional attribute sets'      |
+		| 'Additional attribute values'    |
+		| 'Addresses hierarchy'            |
+		| 'Bank payment'                   |
+		| 'Bank receipt'                   |
+		| 'Bank terms'                     |
+		| 'Bundling'                       |
+		| 'Business units'                 |
+		| 'Cash expense'                   |
+		| 'Cash payment'                   |
+		| 'Cash receipt'                   |
+		| 'Cash revenue'                   |
+		| 'Cash statement'                 |
+		| 'Cash statement statuses'        |
+		| 'Cash transfer order'            |
+		| 'Cash/Bank accounts'             |
+		| 'Catalogs'                       |
+		| 'Cheque bond transaction'        |
+		| 'Cheque bond transaction item'   |
+		| 'Cheque bonds'                   |
+		| 'Companies'                      |
+		| 'Configuration metadata'         |
+		| 'Contact info sets'              |
+		| 'Countries'                      |
+		| 'Credit note'                    |
+		| 'Currencies'                     |
+		| 'Data areas'                     |
+		| 'Data base status'               |
+		| 'Data mapping items'             |
+		| 'Data processors'                |
+		| 'Debit note'                     |
+		| 'Documents'                      |
+		| 'Equipment drivers'              |
+		| 'Expense and revenue types'      |
+		| 'Extensions'                     |
+		| 'File storage volumes'           |
+		| 'File storages info'             |
+		| 'Files'                          |
+		| 'Goods receipt'                  |
+		| 'Hardware'                       |
+		| 'Incoming payment order'         |
+		| 'Integration settings'           |
+		| 'Internal supply request'        |
+		| 'Inventory transfer'             |
+		| 'Inventory transfer order'       |
+		| 'Invoice match'                  |
+		| 'Item keys'                      |
+		| 'Item segments'                  |
+		| 'Item serial/lot numbers'        |
+		| 'Item types'                     |
+		| 'Item units'                     |
+		| 'Items'                          |
+		| 'Labeling'                       |
+		| 'Lock data modification reasons' |
+		| 'Multi currency movement sets'   |
+		| 'Objects statuses'               |
+		| 'Opening entry'                  |
+		| 'Outgoing payment order'         |
+		| 'Partner segments'               |
+		| 'Partner terms'                  |
+		| 'Partners'                       |
+		| 'Payment terminals'              |
+		| 'Payment terms'                  |
+		| 'Payment types'                  |
+		| 'Physical count by location'     |
+		| 'Physical inventory'             |
+		| 'Plugins'                        |
+		| 'Price keys'                     |
+		| 'Price list'                     |
+		| 'Price types'                    |
+		| 'Print templates'                |
+		| 'Purchase invoice'               |
+		| 'Purchase order'                 |
+		| 'Purchase return'                |
+		| 'Purchase return order'          |
+		| 'Reconciliation statement'       |
+		| 'Report options'                 |
+		| 'Reports'                        |
+		| 'Retail customers'               |
+		| 'Retail return receipt'          |
+		| 'Retail sales receipt'           |
+		| 'Sales invoice'                  |
+		| 'Sales order'                    |
+		| 'Sales return'                   |
+		| 'Sales return order'             |
+		| 'Shipment confirmation'          |
+		| 'Special offer rules'            |
+		| 'Special offer types'            |
+		| 'Special offers'                 |
+		| 'Specifications'                 |
+		| 'Stock adjustment as surplus'    |
+		| 'Stock adjustment as write-off'  |
+		| 'Stores'                         |
+		| 'Tax additional analytics'       |
+		| 'Tax rates'                      |
+		| 'Tax types'                      |
+		| 'UI groups'                      |
+		| 'Unbundling'                     |
+		| 'Units of measurement'           |
+		| 'User access groups'             |
+		| 'User access profiles'           |
+		| 'User groups'                    |
+		| 'Users'                          |
+		| 'Workstations'                   |
+	And I close all client application windows

@@ -21,6 +21,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	
 	FillExistsLangs();
+	
+	If Object.Ref.IsEmpty() Then 	
+		Object.InfobaseUserID = Undefined;
+		Object.Description = "";
+	EndIf;
 EndProcedure
 
 &AtServer

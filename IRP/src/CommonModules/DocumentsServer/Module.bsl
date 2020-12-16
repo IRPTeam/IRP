@@ -12,7 +12,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	If Form.Items.Find("GroupTitleCollapsed") <> Undefined Then
 		DocumentsClientServer.ChangeTitleCollapse(Object, Form, Not ValueIsFilled(Object.Ref));
 	EndIf;	
-	ExternalCommandsServer.CreateCommands(Form, Object.Ref.Metadata().Name, Catalogs.ConfigurationMetadata.Documents, Enums.FormTypes.ObjectForm);	
+	ExternalCommandsServer.CreateCommands(Form, Object.Ref.Metadata().FullName(), Enums.FormTypes.ObjectForm);	
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -372,8 +372,8 @@ EndFunction
 
 Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export	
 	FormNamesArray = StrSplit(Form.FormName, ".");
-	DocumentName = FormNamesArray[1];
-	ExternalCommandsServer.CreateCommands(Form, DocumentName, Catalogs.ConfigurationMetadata.Documents, Enums.FormTypes.ListForm);	
+	DocumentFullName = FormNamesArray[0] + "." + FormNamesArray[1];
+	ExternalCommandsServer.CreateCommands(Form, DocumentFullName, Enums.FormTypes.ListForm);	
 EndProcedure
 
 #EndRegion
@@ -382,8 +382,8 @@ EndProcedure
 
 Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export	
 	FormNamesArray = StrSplit(Form.FormName, ".");
-	DocumentName = FormNamesArray[1];
-	ExternalCommandsServer.CreateCommands(Form, DocumentName, Catalogs.ConfigurationMetadata.Documents, Enums.FormTypes.ChoiceForm);	
+	DocumentFullName = FormNamesArray[0] + "." + FormNamesArray[1];
+	ExternalCommandsServer.CreateCommands(Form, DocumentFullName, Enums.FormTypes.ChoiceForm);	
 EndProcedure
 
 #EndRegion
@@ -392,14 +392,8 @@ EndProcedure
 
 Procedure DeleteUnavailableTitleItemNames(ItemNames) Export
 	UnavailableNames = New Array;
-	ShowAlphaTestingSaas = GetFunctionalOption("ShowAlphaTestingSaas");
 	If Not CatCompaniesServer.isUseCompanies() Then
 		UnavailableNames.Add("Company");
-	EndIf;
-	If Not ShowAlphaTestingSaas Then		
-		UnavailableNames.Add("Store");
-		UnavailableNames.Add("LegalName");
-		UnavailableNames.Add("Agreement");
 	EndIf;
 	For Each Name In UnavailableNames Do
 		FoundedName = ItemNames.Find(Name);

@@ -20,7 +20,7 @@
       </runner>
       <runner id="RUNNER_2" name="Sonar Start scan" type="sonar-plugin">
         <parameters>
-          <param name="additionalParameters" value="%dep.IRP_RunVA.env.SonarParamCover%" />
+          <param name="additionalParameters" value="-Dsonar.coverageReportPaths=%system.teamcity.build.workingDir%/Cover.xml" />
           <param name="sonarProjectKey" value="%teamcity.project.id%" />
           <param name="sonarProjectName" value="%system.teamcity.projectName%" />
           <param name="sonarProjectSources" value="%teamcity.project.id%" />

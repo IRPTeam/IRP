@@ -192,6 +192,7 @@ Procedure BeforeWrite_DescriptionsCheckFilling(Source, Cancel) Export
 	If Source.DataExchange.Load Then
 		Return;
 	EndIf;
+	CheckDescriptionFilling(Source, Cancel);
 	CheckDescriptionDuplicate(Source, Cancel);
 EndProcedure
 
@@ -206,6 +207,7 @@ EndProcedure
 
 Procedure CheckDescriptionFilling(Source, Cancel)
 	If Cancel Or TypeOf(Source) = Type("Structure")
+		Or Not CatConfigurationMetadataServer.CheckDescriptionFillingEnabled(Source)
 		Or Not LocalizationReuse.UseMultiLanguage(Source.Metadata().FullName()) Then
 		Return;
 	EndIf;

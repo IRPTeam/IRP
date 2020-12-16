@@ -1121,8 +1121,13 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, TableNameWithItemKeys);
 	If Parameters.DocumentDataTables.Property("StockReservation_Exists") Then
+		If Unposting Then
+			Records_InDocument = Parameters.Object.RegisterRecords.StockReservation.Unload();
+		Else
+			Records_InDocument = Parameters.PostingDataTables[Parameters.Object.RegisterRecords.StockReservation].RecordSet;
+		EndIf;	
 		If Not Cancel And Not AccReg.StockReservation.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
-			Parameters.PostingDataTables[Parameters.Object.RegisterRecords.StockReservation].RecordSet, 
+			Records_InDocument, 
 			Parameters.DocumentDataTables.StockReservation_Exists, 
 			AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 			Cancel = True;
@@ -1130,8 +1135,13 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 	EndIf;
 	
 	If Parameters.DocumentDataTables.Property("StockBalance_Exists") Then
+		If Unposting Then
+			Records_InDocument = Parameters.Object.RegisterRecords.StockBalance.Unload();
+		Else
+			Records_InDocument = Parameters.PostingDataTables[Parameters.Object.RegisterRecords.StockBalance].RecordSet;
+		EndIf;
 		If Not Cancel And Not AccReg.StockBalance.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
-			Parameters.PostingDataTables[Parameters.Object.RegisterRecords.StockBalance].RecordSet, 
+			Records_InDocument, 
 			Parameters.DocumentDataTables.StockBalance_Exists, 
 			AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 			Cancel = True;

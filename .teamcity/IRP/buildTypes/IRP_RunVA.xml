@@ -1293,6 +1293,18 @@ Compress-Archive -Path Cover.xml -DestinationPath Cover.zip]]></param>
           <param name="teamcity.file.content.replacer.wildcards" value="**/*.feature" />
         </parameters>
       </extension>
+      <extension id="BUILD_EXT_34" type="JetBrains.FileContentReplacer">
+        <parameters>
+          <param name="teamcity.file.content.replacer.failBuild" value="true" />
+          <param name="teamcity.file.content.replacer.file.encoding" value="autodetect" />
+          <param name="teamcity.file.content.replacer.file.encoding.custom" value="autodetect" />
+          <param name="teamcity.file.content.replacer.pattern" value="##Password##" />
+          <param name="teamcity.file.content.replacer.pattern.case.sensitive" value="true" />
+          <param name="teamcity.file.content.replacer.regexMode" value="FIXED_STRINGS" />
+          <param name="teamcity.file.content.replacer.replacement" value="%env.PassTo1C%" />
+          <param name="teamcity.file.content.replacer.wildcards" value="**/*.feature" />
+        </parameters>
+      </extension>
     </build-extensions>
     <artifact-dependencies>
       <dependency id="ARTIFACT_DEPENDENCY_2" sourceBuildTypeId="ExternalDataProcessor_ExtConvertToCfe" cleanDestination="false">

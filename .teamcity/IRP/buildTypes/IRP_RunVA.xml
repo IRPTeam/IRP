@@ -474,11 +474,11 @@ $VanessaRun = {
     Write-Output "$startPort - $portmax"
     $allurePath = "%system.teamcity.build.workingDir%/allure" | ForEach-Object { $_ -replace '\\', '/' }
     if ($RunSaasMode -and $elementTag -eq "%env.SaasTag%") {
-        $TempDb = "/F%system.teamcity.build.workingDir%\TempDB" | ForEach-Object { $_ -replace '\\', '/' } 
+        $TempDb = "/F%system.teamcity.build.workingDir%\AllSteps\Template" | ForEach-Object { $_ -replace '\\', '/' } 
         Write-Output "Run first setup in $TempDb"
     } else {
         if($RunSaasMode){
-            $TempDb = "/F%system.teamcity.build.workingDir%\TempDB" | ForEach-Object { $_ -replace '\\', '/' } 
+            $TempDb = "/F%system.teamcity.build.workingDir%\AllSteps\Template" | ForEach-Object { $_ -replace '\\', '/' } 
             $AreaID = "/Z $CurrentID"
             Write-Output "Run DB in $TempDb /Z $CurrentID in SaaS mode"
 

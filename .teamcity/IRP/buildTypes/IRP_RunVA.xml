@@ -701,6 +701,7 @@ $VanessaRun = {
                   }    
               }else{
                   if($CurrentTest -ne ""){
+                      $line = $line.replace("|", "||").replace("'", "|'").replace("[", "|[").replace("]", "|]").replace("`n", "|n").replace("`r", "|r")
                       Write-Host "##teamcity[testStdOut name='$CurrentTest' out='$line' flowId='$elementTag']"
                   }            
               }

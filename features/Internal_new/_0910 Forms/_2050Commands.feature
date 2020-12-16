@@ -164,23 +164,37 @@ Scenario: _0205001 preparation (commands)
 				And "List" table contains lines
 					| 'Number' |
 					| '$$NumberPurchaseInvoice0205001$$'       |
-	* Add plugin QuantityCompare
-		* Open form to add plugin
-			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+	// * Add plugin QuantityCompare
+	// 	* Open form to add plugin
+	// 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+	// 		And I click the button named "FormCreate"
+	// 	* Filling plugin data and adding it to the database
+	// 		And I select external file "#workingDir#\DataProcessor\QuantityCompare.epf"
+	// 		And I click the button named "FormAddExtDataProc"
+	// 		And I input "" text in "Path to plugin for test" field
+	// 		And I input "CompareQuantity" text in "Name" field
+	// 		And I click Open button of the field named "Description_en"
+	// 		And I input "Compare quantity" text in the field named "Description_en"
+	// 		And I input "Compare quantity tr" text in the field named "Description_tr"
+	// 		And I click "Ok" button
+	// 		And I click "Save and close" button
+	// 		And Delay 5
+	// 	* Check the addition of plugin
+	// 		Then I check for the "ExternalDataProc" catalog element with the "Description_en" "Compare quantity"
+		* Create test configuration metadata
+			Given I open hyperlink "e1cib/list/Catalog.ConfigurationMetadata"
+			And I click "List" button			
 			And I click the button named "FormCreate"
-		* Filling plugin data and adding it to the database
-			And I select external file "#workingDir#\DataProcessor\QuantityCompare.epf"
-			And I click the button named "FormAddExtDataProc"
-			And I input "" text in "Path to plugin for test" field
-			And I input "CompareQuantity" text in "Name" field
-			And I click Open button of the field named "Description_en"
-			And I input "Compare quantity" text in the field named "Description_en"
-			And I input "Compare quantity tr" text in the field named "Description_tr"
-			And I click "Ok" button
+			And I input "GoodReceip1" text in "Description" field
+			And I click Select button of "Parent" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Documents'   |
+			And I select current line in "List" table
+			And I input "GoodReceip1" text in "Object name" field
+			And I input "Document.GoodReceipt1" text in "Object full name" field	
 			And I click "Save and close" button
-			And Delay 5
-		* Check the addition of plugin
-			Then I check for the "ExternalDataProc" catalog element with the "Description_en" "Compare quantity"
+	When auto filling Configuration metadata catalog
 
 Scenario: _0205002 add test command to the list of documents Sales return
 	* Open Command register
@@ -189,21 +203,10 @@ Scenario: _0205002 add test command to the list of documents Sales return
 	* Filling test command data for Sales return
 		* Create metadata for Sales return and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button			
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I move one level down in "List" table
-			And I click the button named "FormCreate"
-			And I input "SalesReturn" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'SalesReturn'  |
+				| 'Sales return'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -218,7 +221,7 @@ Scenario: _0205002 add test command to the list of documents Sales return
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'  | 'Plugins' |
-		| 'SalesReturn'             | 'Test command'       |
+		| 'Sales return'             | 'Test command'       |
 	* Check the command from the document list Sales Return
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to the last line in "List" table
@@ -239,7 +242,7 @@ Scenario: _0205002 add test command to the list of documents Sales return
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'SalesReturn' |
+				| 'Sales return' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -264,7 +267,7 @@ Scenario: _0205002 add test command to the list of documents Sales return
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'SalesReturn' |
+				| 'Sales return' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -282,20 +285,10 @@ Scenario: _0205003 add test command to the list of documents Sales invoice
 	* Filling test command data for Sales invoice
 		* Create metadata for Sales invoice and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "SalesInvoice" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'SalesInvoice'  |
+				| 'Sales invoice'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -310,7 +303,7 @@ Scenario: _0205003 add test command to the list of documents Sales invoice
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'  | 'Plugins' |
-		| 'SalesInvoice'             | 'Test command'       |
+		| 'Sales invoice'             | 'Test command'       |
 	* Check the command from the document list Sales Invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to the last line in "List" table
@@ -331,7 +324,7 @@ Scenario: _0205003 add test command to the list of documents Sales invoice
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'SalesInvoice' |
+				| 'Sales invoice' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -355,7 +348,7 @@ Scenario: _0205003 add test command to the list of documents Sales invoice
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'SalesInvoice' |
+				| 'Sales invoice' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -373,20 +366,10 @@ Scenario: _0205004 add test command to the list of documents Purchase order
 	* Filling test command data for Purchase order
 		* Create metadata for Purchase order and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "PurchaseOrder" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'PurchaseOrder'  |
+				| 'Purchase order'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -401,7 +384,7 @@ Scenario: _0205004 add test command to the list of documents Purchase order
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'  | 'Plugins' |
-		| 'PurchaseOrder'             | 'Test command'       |
+		| 'Purchase order'             | 'Test command'       |
 	* Check the command from the document list Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to the last line in "List" table
@@ -422,7 +405,7 @@ Scenario: _0205004 add test command to the list of documents Purchase order
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'PurchaseOrder' |
+				| 'Purchase order' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -446,7 +429,7 @@ Scenario: _0205004 add test command to the list of documents Purchase order
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'PurchaseOrder' |
+				| 'Purchase order' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -464,20 +447,10 @@ Scenario: _0205005 add test command to the list of documents Sales order
 	* Filling test command data for Sales order
 		* Create metadata for sales order and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "SalesOrder" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'SalesOrder'  |
+				| 'Sales order'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -492,7 +465,7 @@ Scenario: _0205005 add test command to the list of documents Sales order
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'  | 'Plugins' |
-		| 'SalesOrder'             | 'Test command'       |
+		| 'Sales order'             | 'Test command'       |
 	* Check the command from the document list SalesOrder
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to the last line in "List" table
@@ -513,7 +486,7 @@ Scenario: _0205005 add test command to the list of documents Sales order
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'SalesOrder' |
+				| 'Sales order' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -538,7 +511,7 @@ Scenario: _0205005 add test command to the list of documents Sales order
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'SalesOrder' |
+				| 'Sales order' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -556,20 +529,10 @@ Scenario: _0205006 add test command to the list of documents Purchase invoice
 	* Filling test command data for Purchase invoice
 		* Create metadata for Purchase invoice and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "PurchaseInvoice" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'PurchaseInvoice'  |
+				| 'Purchase invoice'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -584,7 +547,7 @@ Scenario: _0205006 add test command to the list of documents Purchase invoice
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'  | 'Plugins' |
-		| 'PurchaseInvoice'             | 'Test command'       |
+		| 'Purchase invoice'             | 'Test command'       |
 	* Check the command from the document list PurchaseInvoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to the last line in "List" table
@@ -605,7 +568,7 @@ Scenario: _0205006 add test command to the list of documents Purchase invoice
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'PurchaseInvoice' |
+				| 'Purchase invoice' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -630,7 +593,7 @@ Scenario: _0205006 add test command to the list of documents Purchase invoice
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'PurchaseInvoice' |
+				| 'Purchase invoice' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -649,20 +612,10 @@ Scenario: _0205007 add test command to the list of documents Cash transfer order
 	* Filling test command data for Cash transfer order
 		* Create metadata for Cash transfer order and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "CashTransferOrder" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'CashTransferOrder'  |
+				| 'Cash transfer order'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -677,7 +630,7 @@ Scenario: _0205007 add test command to the list of documents Cash transfer order
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'  | 'Plugins' |
-		| 'CashTransferOrder'             | 'Test command'       |
+		| 'Cash transfer order'             | 'Test command'       |
 	* Check the command from the document list CashTransferOrder
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to the last line in "List" table
@@ -698,7 +651,7 @@ Scenario: _0205007 add test command to the list of documents Cash transfer order
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'CashTransferOrder' |
+				| 'Cash transfer order' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -723,7 +676,7 @@ Scenario: _0205007 add test command to the list of documents Cash transfer order
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'CashTransferOrder' |
+				| 'Cash transfer order' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -742,20 +695,10 @@ Scenario: _0205008 add test command to the list of documents Shipment confirmati
 	* Filling test command data for Shipment confirmation
 		* Create metadata for Shipment confirmation and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "ShipmentConfirmation" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'ShipmentConfirmation'  |
+				| 'Shipment confirmation'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -770,7 +713,7 @@ Scenario: _0205008 add test command to the list of documents Shipment confirmati
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'           | 'Plugins' |
-		| 'ShipmentConfirmation'             | 'Test command'       |
+		| 'Shipment confirmation'             | 'Test command'       |
 	* Check the command from the document list CashTransferOrder
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to the last line in "List" table
@@ -791,7 +734,7 @@ Scenario: _0205008 add test command to the list of documents Shipment confirmati
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'ShipmentConfirmation' |
+				| 'Shipment confirmation' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -816,7 +759,7 @@ Scenario: _0205008 add test command to the list of documents Shipment confirmati
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'ShipmentConfirmation' |
+				| 'Shipment confirmation' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -835,20 +778,10 @@ Scenario: _0205009 add test command to the list of documents Goods receipt
 	* Filling test command data for Goods receipt
 		* Create metadata for Goods receipt and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "GoodsReceipt" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'GoodsReceipt'  |
+				| 'Goods receipt'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -863,7 +796,7 @@ Scenario: _0205009 add test command to the list of documents Goods receipt
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'           | 'Plugins' |
-		| 'GoodsReceipt'             | 'Test command'       |
+		| 'Goods receipt'             | 'Test command'       |
 	* Check the command from the document list GoodsReceipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to the last line in "List" table
@@ -884,7 +817,7 @@ Scenario: _0205009 add test command to the list of documents Goods receipt
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'GoodsReceipt' |
+				| 'Goods receipt' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -908,7 +841,7 @@ Scenario: _0205009 add test command to the list of documents Goods receipt
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'GoodsReceipt' |
+				| 'Goods receipt' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -926,20 +859,10 @@ Scenario: _0205010 add test command to the list of documents Sales return order
 	* Filling test command data for Sales return order
 		* Create metadata for Sales return order and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "SalesReturnOrder" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'SalesReturnOrder'  |
+				| 'Sales return order'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -954,7 +877,7 @@ Scenario: _0205010 add test command to the list of documents Sales return order
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'SalesReturnOrder'             | 'Test command'       |
+		| 'Sales return order'             | 'Test command'       |
 	* Check the command from the document list SalesReturnOrder
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		And I go to the last line in "List" table
@@ -975,7 +898,7 @@ Scenario: _0205010 add test command to the list of documents Sales return order
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'SalesReturnOrder' |
+				| 'Sales return order' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1000,7 +923,7 @@ Scenario: _0205010 add test command to the list of documents Sales return order
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'SalesReturnOrder' |
+				| 'Sales return order' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1019,20 +942,10 @@ Scenario: _0205011 add test command to the list of documents Purchase return ord
 	* Filling test command data for Purchase return order
 		* Create metadata for Purchase return order and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "PurchaseReturnOrder" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'PurchaseReturnOrder'  |
+				| 'Purchase return order'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -1047,7 +960,7 @@ Scenario: _0205011 add test command to the list of documents Purchase return ord
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'PurchaseReturnOrder'             | 'Test command'       |
+		| 'Purchase return order'             | 'Test command'       |
 	* Check the command from the document list PurchaseReturnOrder
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 		And I go to the last line in "List" table
@@ -1068,7 +981,7 @@ Scenario: _0205011 add test command to the list of documents Purchase return ord
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'PurchaseReturnOrder' |
+				| 'Purchase return order' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1093,7 +1006,7 @@ Scenario: _0205011 add test command to the list of documents Purchase return ord
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'PurchaseReturnOrder' |
+				| 'Purchase return order' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1111,20 +1024,10 @@ Scenario: _0205012 add test command to the list of documents ReconciliationState
 	* Filling test command data for Reconciliation statement
 		* Create metadata for ReconciliationStatement and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "ReconciliationStatement" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'ReconciliationStatement'  |
+				| 'Reconciliation statement'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -1139,7 +1042,7 @@ Scenario: _0205012 add test command to the list of documents ReconciliationState
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'ReconciliationStatement'                | 'Test command'       |
+		| 'Reconciliation statement'                | 'Test command'       |
 	* Check the command from the document list ReconciliationStatement
 		Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 		And I go to the last line in "List" table
@@ -1160,7 +1063,7 @@ Scenario: _0205012 add test command to the list of documents ReconciliationState
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'ReconciliationStatement' |
+				| 'Reconciliation statement' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1185,7 +1088,7 @@ Scenario: _0205012 add test command to the list of documents ReconciliationState
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'ReconciliationStatement' |
+				| 'Reconciliation statement' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1204,20 +1107,10 @@ Scenario: _0205013 add test command to the list of documents BankPayment
 	* Filling test command data for Bank payment
 		* Create metadata for BankPayment and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "BankPayment" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'BankPayment'  |
+				| 'Bank payment'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -1232,7 +1125,7 @@ Scenario: _0205013 add test command to the list of documents BankPayment
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'BankPayment'                | 'Test command'       |
+		| 'Bank payment'                | 'Test command'       |
 	* Check the command from the document list Bank payment
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to the last line in "List" table
@@ -1253,7 +1146,7 @@ Scenario: _0205013 add test command to the list of documents BankPayment
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'BankPayment' |
+				| 'Bank payment' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1278,7 +1171,7 @@ Scenario: _0205013 add test command to the list of documents BankPayment
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'BankPayment' |
+				| 'Bank payment' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1296,20 +1189,10 @@ Scenario: _0205014 add test command to the list of documents BankReceipt
 	* Filling test command data for Bank receipt
 		* Create metadata for BankReceipt and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "BankReceipt" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'BankReceipt'  |
+				| 'Bank receipt'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -1324,7 +1207,7 @@ Scenario: _0205014 add test command to the list of documents BankReceipt
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'BankReceipt'                | 'Test command'       |
+		| 'Bank receipt'                | 'Test command'       |
 	* Check the command from the document list BankReceipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I go to the last line in "List" table
@@ -1345,7 +1228,7 @@ Scenario: _0205014 add test command to the list of documents BankReceipt
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'BankReceipt' |
+				| 'Bank receipt' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1370,7 +1253,7 @@ Scenario: _0205014 add test command to the list of documents BankReceipt
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'BankReceipt' |
+				| 'Bank receipt' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1389,17 +1272,7 @@ Scenario: _0205016 add test command to the list of documents Bundling
 	* Filling test command data for Bundling
 		* Create metadata for Bundling and select it for the command
 			And I click Select button of "Configuration metadata" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "Bundling" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
 				| 'Bundling'  |
@@ -1481,20 +1354,10 @@ Scenario: _0205017 add test command to the list of documents CashExpense
 	* Filling test command data for CashExpense
 		* Create metadata for CashExpense and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "CashExpense" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'CashExpense'  |
+				| 'Cash expense'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -1509,7 +1372,7 @@ Scenario: _0205017 add test command to the list of documents CashExpense
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'CashExpense'                | 'Test command'       |
+		| 'Cash expense'                | 'Test command'       |
 	* Check the command from the document list CashExpense
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And I go to the last line in "List" table
@@ -1530,7 +1393,7 @@ Scenario: _0205017 add test command to the list of documents CashExpense
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'CashExpense' |
+				| 'Cash expense' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1555,7 +1418,7 @@ Scenario: _0205017 add test command to the list of documents CashExpense
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'CashExpense' |
+				| 'Cash expense' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1574,20 +1437,10 @@ Scenario: _0205018 add test command to the list of documents CashPayment
 	* Filling test command data for Cash payment
 		* Create metadata for CashPayment and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "CashPayment" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'CashPayment'  |
+				| 'Cash payment'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -1602,7 +1455,7 @@ Scenario: _0205018 add test command to the list of documents CashPayment
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'CashPayment'                | 'Test command'       |
+		| 'Cash payment'                | 'Test command'       |
 	* Check the command from the document list CashPayment
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And I go to the last line in "List" table
@@ -1623,7 +1476,7 @@ Scenario: _0205018 add test command to the list of documents CashPayment
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'CashPayment' |
+				| 'Cash payment' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1648,7 +1501,7 @@ Scenario: _0205018 add test command to the list of documents CashPayment
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'CashPayment' |
+				| 'Cash payment' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1666,20 +1519,10 @@ Scenario: _0205019 add test command to the list of documents Cash Receipt
 	* Filling test command data for Cash Receipt
 		* Create metadata for CashReceipt and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "CashReceipt" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'CashReceipt'  |
+				| 'Cash receipt'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -1694,7 +1537,7 @@ Scenario: _0205019 add test command to the list of documents Cash Receipt
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'CashReceipt'                | 'Test command'       |
+		| 'Cash receipt'                | 'Test command'       |
 	* Check the command from the document list CashReceipt
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I go to the last line in "List" table
@@ -1715,7 +1558,7 @@ Scenario: _0205019 add test command to the list of documents Cash Receipt
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'CashReceipt' |
+				| 'Cash receipt' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1740,7 +1583,7 @@ Scenario: _0205019 add test command to the list of documents Cash Receipt
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'CashReceipt' |
+				| 'Cash receipt' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1758,20 +1601,10 @@ Scenario: _0205020 add test command to the list of documents Cash Revenue
 	* Filling test command data for CashRevenue
 		* Create metadata for CashRevenue and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "CashRevenue" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'CashRevenue'  |
+				| 'Cash revenue'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -1786,7 +1619,7 @@ Scenario: _0205020 add test command to the list of documents Cash Revenue
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'CashRevenue'                | 'Test command'       |
+		| 'Cash revenue'                | 'Test command'       |
 	* Check the command from the document list CashRevenue
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I go to the last line in "List" table
@@ -1807,7 +1640,7 @@ Scenario: _0205020 add test command to the list of documents Cash Revenue
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'CashRevenue' |
+				| 'Cash revenue' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1832,7 +1665,7 @@ Scenario: _0205020 add test command to the list of documents Cash Revenue
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'CashRevenue' |
+				| 'Cash revenue' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1851,20 +1684,10 @@ Scenario: _0205022 add test command to the list of documents Cheque bond transac
 	* Filling test command data for Cheque bond transaction
 		* Create metadata for Cheque bond transaction and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "ChequeBondTransaction" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'ChequeBondTransaction'  |
+				| 'Cheque bond transaction'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -1879,7 +1702,7 @@ Scenario: _0205022 add test command to the list of documents Cheque bond transac
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'ChequeBondTransaction'                | 'Test command'       |
+		| 'Cheque bond transaction'                | 'Test command'       |
 	* Check the command from the document list ChequeBondTransaction
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I go to the last line in "List" table
@@ -1900,7 +1723,7 @@ Scenario: _0205022 add test command to the list of documents Cheque bond transac
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'ChequeBondTransaction' |
+				| 'Cheque bond transaction' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1925,7 +1748,7 @@ Scenario: _0205022 add test command to the list of documents Cheque bond transac
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'ChequeBondTransaction' |
+				| 'Cheque bond transaction' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -1945,20 +1768,10 @@ Scenario: _0205023 add test command to the list of documents Credit Note
 	* Filling test command data for Credit Note
 		* Create metadata for CreditNote and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "CreditNote" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'CreditNote'  |
+				| 'Credit note'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -1973,7 +1786,7 @@ Scenario: _0205023 add test command to the list of documents Credit Note
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'CreditNote'                | 'Test command'       |
+		| 'Credit note'                | 'Test command'       |
 	* Check the command from the document list CreditNote
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I go to the last line in "List" table
@@ -1994,7 +1807,7 @@ Scenario: _0205023 add test command to the list of documents Credit Note
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'CreditNote' |
+				| 'Credit note' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2019,7 +1832,7 @@ Scenario: _0205023 add test command to the list of documents Credit Note
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'CreditNote' |
+				| 'Credit note' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2039,20 +1852,10 @@ Scenario: _0205041 add test command to the list of documents Dedit Note
 	* Filling test command data for Dedit Note
 		* Create metadata for DeditNote and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "DebitNote" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'DebitNote'  |
+				| 'Debit note'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -2067,7 +1870,7 @@ Scenario: _0205041 add test command to the list of documents Dedit Note
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'DebitNote'                | 'Test command'       |
+		| 'Debit note'                | 'Test command'       |
 	* Check the command from the document list DebitNote
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I go to the last line in "List" table
@@ -2088,7 +1891,7 @@ Scenario: _0205041 add test command to the list of documents Dedit Note
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'DebitNote' |
+				| 'Debit note' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2113,7 +1916,7 @@ Scenario: _0205041 add test command to the list of documents Dedit Note
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'DebitNote' |
+				| 'Debit note' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2131,20 +1934,10 @@ Scenario: _0205024 add test command to the list of documents Incoming Payment Or
 	* Filling test command data for IncomingPaymentOrder
 		* Create metadata for IncomingPaymentOrder and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "IncomingPaymentOrder" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'IncomingPaymentOrder'  |
+				| 'Incoming payment order'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -2159,7 +1952,7 @@ Scenario: _0205024 add test command to the list of documents Incoming Payment Or
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'IncomingPaymentOrder'                | 'Test command'       |
+		| 'Incoming payment order'                | 'Test command'       |
 	* Check the command from the document list IncomingPaymentOrder
 		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
 		And I go to the last line in "List" table
@@ -2180,7 +1973,7 @@ Scenario: _0205024 add test command to the list of documents Incoming Payment Or
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'IncomingPaymentOrder' |
+				| 'Incoming payment order' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2205,7 +1998,7 @@ Scenario: _0205024 add test command to the list of documents Incoming Payment Or
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'IncomingPaymentOrder' |
+				| 'Incoming payment order' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2223,20 +2016,10 @@ Scenario: _0205025 add test command to the list of documents Internal Supply Req
 	* Filling test command data for InternalSupplyRequest
 		* Create metadata for InternalSupplyRequest and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "InternalSupplyRequest" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'InternalSupplyRequest'  |
+				| 'Internal supply request'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -2251,7 +2034,7 @@ Scenario: _0205025 add test command to the list of documents Internal Supply Req
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'InternalSupplyRequest'                | 'Test command'       |
+		| 'Internal supply request'                | 'Test command'       |
 	* Check the command from the document list InternalSupplyRequest
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I go to the last line in "List" table
@@ -2272,7 +2055,7 @@ Scenario: _0205025 add test command to the list of documents Internal Supply Req
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'InternalSupplyRequest' |
+				| 'Internal supply request' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2297,7 +2080,7 @@ Scenario: _0205025 add test command to the list of documents Internal Supply Req
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'InternalSupplyRequest' |
+				| 'Internal supply request' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2315,20 +2098,10 @@ Scenario: _0205026 add test command to the list of documents Inventory Transfer
 	* Filling test command data for Inventory Transfer
 		* Create metadata for Inventory Transfer and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "InventoryTransfer" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'InventoryTransfer'  |
+				| 'Inventory transfer'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -2343,7 +2116,7 @@ Scenario: _0205026 add test command to the list of documents Inventory Transfer
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'InventoryTransfer'                | 'Test command'       |
+		| 'Inventory transfer'                | 'Test command'       |
 	* Check the command from the document list InventoryTransfer
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to the last line in "List" table
@@ -2364,7 +2137,7 @@ Scenario: _0205026 add test command to the list of documents Inventory Transfer
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'InventoryTransfer' |
+				| 'Inventory transfer' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2389,7 +2162,7 @@ Scenario: _0205026 add test command to the list of documents Inventory Transfer
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'InventoryTransfer' |
+				| 'Inventory transfer' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2407,20 +2180,10 @@ Scenario: _0205027 add test command to the list of documents Inventory Transfer 
 	* Filling test command data for InventoryTransferOrder
 		* Create metadata for InventoryTransferOrder and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "InventoryTransferOrder" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'InventoryTransferOrder'  |
+				| 'Inventory transfer order'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -2435,7 +2198,7 @@ Scenario: _0205027 add test command to the list of documents Inventory Transfer 
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'InventoryTransferOrder'                | 'Test command'       |
+		| 'Inventory transfer order'                | 'Test command'       |
 	* Check the command from the document list InventoryTransferOrder
 		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
 		And I go to the last line in "List" table
@@ -2456,7 +2219,7 @@ Scenario: _0205027 add test command to the list of documents Inventory Transfer 
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'InventoryTransferOrder' |
+				| 'Inventory transfer order' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2481,7 +2244,7 @@ Scenario: _0205027 add test command to the list of documents Inventory Transfer 
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'InventoryTransferOrder' |
+				| 'Inventory transfer order' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2499,20 +2262,10 @@ Scenario: _0205028 add test command to the list of documents Invoice Match
 	* Filling test command data for Invoice Match
 		* Create metadata for InvoiceMatch and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "InvoiceMatch" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'InvoiceMatch'  |
+				| 'Invoice match'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -2527,7 +2280,7 @@ Scenario: _0205028 add test command to the list of documents Invoice Match
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'InvoiceMatch'                | 'Test command'       |
+		| 'Invoice match'                | 'Test command'       |
 	* Check the command from the document list InvoiceMatch
 		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
 		And I go to the last line in "List" table
@@ -2548,7 +2301,7 @@ Scenario: _0205028 add test command to the list of documents Invoice Match
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'InvoiceMatch' |
+				| 'Invoice match' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2573,7 +2326,7 @@ Scenario: _0205028 add test command to the list of documents Invoice Match
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'InvoiceMatch' |
+				| 'Invoice match' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2591,17 +2344,7 @@ Scenario: _0205029 add test command to the list of documents Labeling
 	* Filling test command data for Labeling
 		* Create metadata for Labeling and select it for the command
 			And I click Select button of "Configuration metadata" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "Labeling" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
 				| 'Labeling'  |
@@ -2683,20 +2426,10 @@ Scenario: _0205030 add test command to the list of documents Opening Entry
 	* Filling test command data for OpeningEntry
 		* Create metadata for OpeningEntry and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "OpeningEntry" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'OpeningEntry'  |
+				| 'Opening entry'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -2711,7 +2444,7 @@ Scenario: _0205030 add test command to the list of documents Opening Entry
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'OpeningEntry'                | 'Test command'       |
+		| 'Opening entry'                | 'Test command'       |
 	* Check the command from the document list OpeningEntry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I go to the last line in "List" table
@@ -2732,7 +2465,7 @@ Scenario: _0205030 add test command to the list of documents Opening Entry
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'OpeningEntry' |
+				| 'Opening entry' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2757,7 +2490,7 @@ Scenario: _0205030 add test command to the list of documents Opening Entry
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'OpeningEntry' |
+				| 'Opening entry' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2776,20 +2509,10 @@ Scenario: _0205031 add test command to the list of documents Outgoing Payment Or
 	* Filling test command data for OutgoingPaymentOrder
 		* Create metadata for OutgoingPaymentOrder and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "OutgoingPaymentOrder" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'OutgoingPaymentOrder'  |
+				| 'Outgoing payment order'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -2804,7 +2527,7 @@ Scenario: _0205031 add test command to the list of documents Outgoing Payment Or
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'OutgoingPaymentOrder'                | 'Test command'       |
+		| 'Outgoing payment order'                | 'Test command'       |
 	* Check the command from the document list OutgoingPaymentOrder
 		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 		And I go to the last line in "List" table
@@ -2825,7 +2548,7 @@ Scenario: _0205031 add test command to the list of documents Outgoing Payment Or
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'OutgoingPaymentOrder' |
+				| 'Outgoing payment order' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2850,7 +2573,7 @@ Scenario: _0205031 add test command to the list of documents Outgoing Payment Or
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'OutgoingPaymentOrder' |
+				| 'Outgoing payment order' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2868,20 +2591,10 @@ Scenario: _0205032 add test command to the list of documents Physical Count By L
 	* Filling test command data for Physical Count By Location
 		* Create metadata for Physical Count By Location and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "PhysicalCountByLocation" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'PhysicalCountByLocation'  |
+				| 'Physical count by location'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -2896,7 +2609,7 @@ Scenario: _0205032 add test command to the list of documents Physical Count By L
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'PhysicalCountByLocation'                | 'Test command'       |
+		| 'Physical count by location'               | 'Test command'       |
 	* Check the command from the document list PhysicalCountByLocation
 		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 		And I go to the last line in "List" table
@@ -2917,7 +2630,7 @@ Scenario: _0205032 add test command to the list of documents Physical Count By L
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'PhysicalCountByLocation' |
+				| 'Physical count by location' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2942,7 +2655,7 @@ Scenario: _0205032 add test command to the list of documents Physical Count By L
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'PhysicalCountByLocation' |
+				| 'Physical count by location' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -2960,20 +2673,10 @@ Scenario: _0205033 add test command to the list of documents Price List
 	* Filling test command data for Price List
 		* Create metadata for PriceList and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "PriceList" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'PriceList'  |
+				| 'Price list'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -2988,7 +2691,7 @@ Scenario: _0205033 add test command to the list of documents Price List
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'PriceList'                | 'Test command'       |
+		| 'Price list'                | 'Test command'       |
 	* Check the command from the document list PriceList
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I go to the last line in "List" table
@@ -3009,7 +2712,7 @@ Scenario: _0205033 add test command to the list of documents Price List
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'PriceList' |
+				| 'Price list' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -3034,7 +2737,7 @@ Scenario: _0205033 add test command to the list of documents Price List
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'PriceList' |
+				| 'Price list' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -3054,20 +2757,10 @@ Scenario: _0205035 add test command to the list of documents PurchaseReturn
 	* Filling test command data for PurchaseReturn
 		* Create metadata for PurchaseReturn and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "PurchaseReturn" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'PurchaseReturn'  |
+				| 'Purchase return'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -3082,7 +2775,7 @@ Scenario: _0205035 add test command to the list of documents PurchaseReturn
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'PurchaseReturn'                | 'Test command'       |
+		| 'Purchase return'                | 'Test command'       |
 	* Check the command from the document list PurchaseReturn
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I go to the last line in "List" table
@@ -3103,7 +2796,7 @@ Scenario: _0205035 add test command to the list of documents PurchaseReturn
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'PurchaseReturn' |
+				| 'Purchase return' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -3128,7 +2821,7 @@ Scenario: _0205035 add test command to the list of documents PurchaseReturn
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'PurchaseReturn' |
+				| 'Purchase return' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -3148,17 +2841,7 @@ Scenario: _0205037 add test command to the list of documents Unbundling
 	* Filling test command data for Unbundling
 		* Create metadata for Unbundling and select it for the command
 			And I click Select button of "Configuration metadata" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "Unbundling" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
 				| 'Unbundling'  |
@@ -3238,22 +2921,11 @@ Scenario: _0205038 add test command to the list of documents Stock Adjustment As
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And I click the button named "FormCreate"
 	* Filling test command data for StockAdjustmentAsWriteOff
-		* Create metadata for StockAdjustmentAsWriteOff and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "StockAdjustmentAsWriteOff" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'StockAdjustmentAsWriteOff'  |
+				| 'Stock adjustment as write-off'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -3268,7 +2940,7 @@ Scenario: _0205038 add test command to the list of documents Stock Adjustment As
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'StockAdjustmentAsWriteOff'                | 'Test command'       |
+		| 'Stock adjustment as write-off'                | 'Test command'       |
 	* Check the command from the document list StockAdjustmentAsWriteOff
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I go to the last line in "List" table
@@ -3289,7 +2961,7 @@ Scenario: _0205038 add test command to the list of documents Stock Adjustment As
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'StockAdjustmentAsWriteOff' |
+				| 'Stock adjustment as write-off' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -3314,7 +2986,7 @@ Scenario: _0205038 add test command to the list of documents Stock Adjustment As
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'StockAdjustmentAsWriteOff' |
+				| 'Stock adjustment as write-off' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -3332,20 +3004,10 @@ Scenario: _0205039 add test command to the list of documents Stock Adjustment As
 	* Filling test command data for Stock Adjustment As Surplus
 		* Create metadata for Stock Adjustment As Surplus and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "StockAdjustmentAsSurplus" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'StockAdjustmentAsSurplus'  |
+				| 'Stock adjustment as surplus'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -3360,7 +3022,7 @@ Scenario: _0205039 add test command to the list of documents Stock Adjustment As
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'StockAdjustmentAsSurplus'                | 'Test command'       |
+		| 'Stock adjustment as surplus'                | 'Test command'       |
 	* Check the command from the document list StockAdjustmentAsSurplus
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I go to the last line in "List" table
@@ -3381,7 +3043,7 @@ Scenario: _0205039 add test command to the list of documents Stock Adjustment As
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'StockAdjustmentAsSurplus' |
+				| 'Stock adjustment as surplus' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -3406,7 +3068,7 @@ Scenario: _0205039 add test command to the list of documents Stock Adjustment As
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'StockAdjustmentAsSurplus' |
+				| 'Stock adjustment as surplus' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -3424,20 +3086,10 @@ Scenario: _0205040 add test command to the list of documents Physical Inventory
 	* Filling test command data for Physical Inventory
 		* Create metadata for Physical Inventory and select it for the command
 			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
 			And I go to line in "List" table
 				| 'Description' |
-				| 'Documents'   |
-			And I click the button named "FormCreate"
-			And I input "PhysicalInventory" text in "Description" field
-			And I click Select button of "Parent" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Documents'   |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description' |
-				| 'PhysicalInventory'  |
+				| 'Physical inventory'  |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			Then "Plugins" window is opened
@@ -3452,7 +3104,7 @@ Scenario: _0205040 add test command to the list of documents Physical Inventory
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
 		| 'Configuration metadata'       | 'Plugins' |
-		| 'PhysicalInventory'                | 'Test command'       |
+		| 'Physical inventory'                | 'Test command'       |
 	* Check the command from the document list PhysicalInventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to the last line in "List" table
@@ -3473,7 +3125,7 @@ Scenario: _0205040 add test command to the list of documents Physical Inventory
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'PhysicalInventory' |
+				| 'Physical inventory' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -3498,7 +3150,7 @@ Scenario: _0205040 add test command to the list of documents Physical Inventory
 			And I click "List" button
 			And I go to line in "List" table
 				| 'Description'       |
-				| 'PhysicalInventory' |
+				| 'Physical inventory' |
 			And I select current line in "List" table
 			And I click Select button of "Plugins" field
 			And I go to line in "List" table
@@ -3535,6 +3187,19 @@ Scenario: _010019 check the operation of the command to open an item list from I
 	And I close all client application windows
 
 
+
+Scenario: _010025 auto set Unused checkbox for wrong element in the catalog Configuration metadata
+	* Open catalog Item type
+		Given I open hyperlink "e1cib/list/Catalog.ConfigurationMetadata"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'GoodReceip1' |
+		And I select current line in "List" table
+		Then the form attribute named "Unused" became equal to "Yes"
+		And I close all client application windows
+		
+		
+				
 
 # Scenario: _010020 check the operation of Quantity Compare plugin (comparison of the plan / fact in Goods receipt)
 # 	* Add Command

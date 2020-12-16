@@ -61,7 +61,23 @@
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.ConfigurationMetadata.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.ConfigurationMetadata.Form.ListForm</defaultListForm>
+  <attributes uuid="c1323631-5529-43f7-94d3-70abc4f80fdc">
+    <name>Extension</name>
+    <synonym>
+      <key>en</key>
+      <value>Extension</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Extensions</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="4c5116b9-b786-40fc-bf62-ca9f303ca025">
     <name>CheckDescriptionDuplicate</name>
     <synonym>
@@ -77,14 +93,14 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="c1323631-5529-43f7-94d3-70abc4f80fdc">
-    <name>Extension</name>
+  <attributes uuid="e487cc9a-c41a-4fc0-955b-32afd191113e">
+    <name>CheckDescriptionFilling</name>
     <synonym>
       <key>en</key>
-      <value>Extension</value>
+      <value>Check description filling</value>
     </synonym>
     <type>
-      <types>CatalogRef.Extensions</types>
+      <types>Boolean</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -150,6 +166,15 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="360b8f17-2d37-4d3a-9a8f-384daa8e706f">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

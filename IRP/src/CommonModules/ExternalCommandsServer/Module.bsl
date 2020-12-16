@@ -1,5 +1,9 @@
 
-Procedure CreateCommands(Form, ObjectName, ObjectType, FormType, AddInfo = Undefined) Export	
+Procedure CreateCommands(Form, ObjectFullName, FormType, AddInfo = Undefined) Export	
+	ConfigurationMetadata = CatConfigurationMetadataServer.GetConfigurationMetadataItemByFullName(ObjectFullName);
+	If ConfigurationMetadata = Undefined Then
+		Return;
+	EndIf;
 	
 	Query = New Query;
 	Query.Text = "SELECT
@@ -10,21 +14,17 @@ Procedure CreateCommands(Form, ObjectName, ObjectType, FormType, AddInfo = Undef
 	|WHERE
 	|	ExternalCommands.ConfigurationMetadata = &ConfigurationMetadata
 	|	AND (ExternalCommands.FormType = &FormType
-	|	OR ExternalCommands.FormType = VALUE(Enum.FormTypes.EmptyRef))";
-	ConfigurationMetadata = Catalogs.ConfigurationMetadata.FindByDescription(ObjectName, True, ObjectType);
+	|	OR ExternalCommands.FormType = VALUE(Enum.FormTypes.EmptyRef))";	
 	Query.SetParameter("ConfigurationMetadata", ConfigurationMetadata);
 	Query.SetParameter("FormType", FormType);
-	QueryExecution = Query.Execute();
-	
+	QueryExecution = Query.Execute();	
 	If QueryExecution.IsEmpty() Then
 		Return;
 	EndIf;
 	
-	CommandGroupParent = Form.CommandBar;
-	
+	CommandGroupParent = Form.CommandBar;	
 	QuerySelection = QueryExecution.Select();
-	While QuerySelection.Next() Do
-		
+	While QuerySelection.Next() Do		
 		ExternalDataProc = QuerySelection.ExternalDataProc;
 		
 		CommandInfo = FormItemInfo(ExternalDataProc);
@@ -46,10 +46,8 @@ Procedure CreateCommands(Form, ObjectName, ObjectType, FormType, AddInfo = Undef
 		EndIf;
 		
 		CommandButton = Form.Items.Add(CommandForm.Name, Type("FormButton"), CommandParent);
-		CommandButton.CommandName = CommandForm.Name;
-		
-	EndDo;
-	
+		CommandButton.CommandName = CommandForm.Name;		
+	EndDo;	
 EndProcedure
 
 Function FormItemInfo(ItemRef)

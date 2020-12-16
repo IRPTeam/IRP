@@ -216,6 +216,8 @@ Scenario:_700001 procurement data proccessor form
 		And I close all client application windows
 		
 
+
+
 Scenario:_700005 analyze procurement
 	Given I open hyperlink "e1cib/app/DataProcessor.Procurement"
 	* Filling main attributes
@@ -478,9 +480,23 @@ Scenario:_700005 analyze procurement
 			| 'Agreement'                           | 'Partner'         | 'Price'  | 'Price type'        |
 			| 'Partner term vendor Partner Kalipso' | 'Partner Kalipso' | '500,00' | 'Basic Price Types' |
 		And I click "Ok" button
+	* Create documents
+		And I click "Create documents" button
+		And Delay 20
+		And "CreatedInventoryTransferOrders" table contains lines
+			| 'Document'                  | 'Status' | 'Store sender' |
+			| 'Inventory transfer order*' | 'Wait'   | 'Store 08'     |
+		And "CreatedPurchaseOrders" table contains lines
+			| 'Document'         | 'Partner'         | 'Status' |
+			| 'Purchase order *' | 'Maxim'           | 'Wait'   |
+			| 'Purchase order *' | 'Veritas'         | 'Wait'   |
+			| 'Purchase order *' | 'DFC'             | 'Wait'   |
+			| 'Purchase order *' | 'Partner Kalipso' | 'Wait'   |
+			| 'Purchase order *' | 'DFC'             | 'Wait'   |
 		And I close all client application windows
 		
 	
+
 		
 				
 

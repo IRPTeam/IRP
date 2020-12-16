@@ -122,6 +122,9 @@ echo "##teamcity[setParameter name='env.dbgs_PID' value='$dbgs_PID']"]]></param>
         </parameters>
       </runner>
       <runner id="RUNNER_14" name="Start Coverage" type="simpleRunner">
+        <conditions>
+          <equals name="env.StartDebug" value="true" />
+        </conditions>
         <parameters>
           <param name="script.content"><![CDATA[coverage-cli start --infobase DefAlias  --debugger http://localhost:%env.DebugPort% --output %system.teamcity.build.workingDir%/Cover.csv > "%system.teamcity.build.tempDir%\Cover.Log"
 rem coverage-cli start --infobase %env.Database1CName%  --debugger http://localhost:%env.DebugPort% --output %system.teamcity.build.workingDir%/Cover.csv > "%system.teamcity.build.tempDir%\Cover.Log"]]></param>

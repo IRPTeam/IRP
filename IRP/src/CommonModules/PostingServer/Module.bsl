@@ -1115,7 +1115,7 @@ Function CheckingBalanceIsRequired(Ref, SettingUniqueID) Export
 	EndIf;
 EndFunction
 
-Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys, AddInfo = Undefined)Export
+Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys, AddInfo = Undefined) Export
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
 	
@@ -1124,7 +1124,7 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 		RecordType = Parameters.RecordType;
 	EndIf;
 	
-	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, TableNameWithItemKeys);
+	LineNumberAndItemKeyFromItemList = GetLineNumberAndItemKeyFromItemList(Ref, TableNameWithItemKeys);
 	If Parameters.DocumentDataTables.Property("StockReservation_Exists") Then
 		Records_InDocument = Undefined;
 		If Unposting Then
@@ -1168,7 +1168,7 @@ Function CheckBalance_StockReservation(Ref, Tables, RecordType, Unposting, AddIn
 	Parameters = New Structure();
 	Parameters.Insert("RegisterName" , "StockReservation");
 	Parameters.Insert("Operation"    , "Reservation");
-	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);	
 EndFunction	
 
 Function CheckBalance_StockBalance(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
@@ -1179,6 +1179,15 @@ Function CheckBalance_StockBalance(Ref, Tables, RecordType, Unposting, AddInfo =
 EndFunction	
 
 Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
+	Parameters.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Including));
+	If CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo) Then
+		Parameters.BalancePeriod = Undefined;
+		Return CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+	EndIf;
+	Return False;
+EndFunction
+
+Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -1272,7 +1281,7 @@ Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = 
 	|INTO Lack
 	|FROM
 	|	Records_All_Grouped AS Records_All_Grouped
-	|		LEFT JOIN AccumulationRegister.%1.Balance(, (Store, ItemKey) IN
+	|		LEFT JOIN AccumulationRegister.%1.Balance(&Period, (Store, ItemKey) IN
 	|			(SELECT
 	|				Records_All_Grouped.Store,
 	|				Records_All_Grouped.ItemKey
@@ -1307,6 +1316,7 @@ Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = 
 	
 	Query.Text = StrTemplate(Query.Text, Parameters.RegisterName);
 	
+	Query.SetParameter("Period"             , Parameters.BalancePeriod);
 	Query.SetParameter("ItemList_InDocument", Tables.ItemList_InDocument);
 	Query.SetParameter("Records_Exists"     , Tables.Records_Exists);
 	Query.SetParameter("Records_InDocument" , Tables.Records_InDocument);
@@ -1327,7 +1337,7 @@ Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = 
 		If ValueIsFilled(TableDataPath) Then
 			ErrorParameters.Insert("TableDataPath" , TableDataPath);
 		EndIf;
-		PostingServer.ShowPostingErrorMessage(QueryTable, ErrorParameters, AddInfo);
+		ShowPostingErrorMessage(QueryTable, ErrorParameters, AddInfo);
 	EndIf;
 	Return Not Error;
 EndFunction

@@ -1118,7 +1118,12 @@ EndFunction
 Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys, AddInfo = Undefined)Export
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
-
+	
+	RecordType = AccumulationRecordType.Receipt;
+	If Parameters.Property("RecordType") Then
+		RecordType = Parameters.RecordType;
+	EndIf;
+	
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, TableNameWithItemKeys);
 	If Parameters.DocumentDataTables.Property("StockReservation_Exists") Then
 		Records_InDocument = Undefined;
@@ -1134,7 +1139,7 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 			And Not AccReg.StockReservation.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
 			Records_InDocument, 
 			Parameters.DocumentDataTables.StockReservation_Exists, 
-			AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+			RecordType, Unposting, AddInfo) Then
 			Cancel = True;
 		EndIf;
 	EndIf;
@@ -1153,7 +1158,7 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 			And Not AccReg.StockBalance.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
 			Records_InDocument, 
 			Parameters.DocumentDataTables.StockBalance_Exists, 
-			AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+			RecordType, Unposting, AddInfo) Then
 			Cancel = True;
 		EndIf;
 	EndIf;
@@ -1227,6 +1232,20 @@ Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = 
 	|	Records_InDocument.Quantity
 	|FROM
 	|	Records_InDocument AS Records_InDocument
+	|WHERE
+	|	NOT &Unposting
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Records_Exists.Store,
+	|	Records_Exists.ItemKey,
+	|	Records_Exists.Quantity
+	|FROM
+	|	Records_Exists AS Records_Exists
+	|WHERE
+	|	&Unposting
+	|
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////

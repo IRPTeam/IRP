@@ -1121,12 +1121,17 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, TableNameWithItemKeys);
 	If Parameters.DocumentDataTables.Property("StockReservation_Exists") Then
+		Records_InDocument = Undefined;
 		If Unposting Then
 			Records_InDocument = Parameters.Object.RegisterRecords.StockReservation.Unload();
 		Else
-			Records_InDocument = Parameters.PostingDataTables[Parameters.Object.RegisterRecords.StockReservation].RecordSet;
+			PostingDataTable = Parameters.PostingDataTables[Parameters.Object.RegisterRecords.StockReservation];
+			If PostingDataTable <> Undefined Then
+				Records_InDocument = PostingDataTable.RecordSet;
+			EndIf;
 		EndIf;	
-		If Not Cancel And Not AccReg.StockReservation.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
+		If Not Cancel And Records_InDocument <> Undefined 
+			And Not AccReg.StockReservation.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
 			Records_InDocument, 
 			Parameters.DocumentDataTables.StockReservation_Exists, 
 			AccumulationRecordType.Receipt, Unposting, AddInfo) Then
@@ -1135,12 +1140,17 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 	EndIf;
 	
 	If Parameters.DocumentDataTables.Property("StockBalance_Exists") Then
+		Records_InDocument = Undefined;
 		If Unposting Then
 			Records_InDocument = Parameters.Object.RegisterRecords.StockBalance.Unload();
 		Else
-			Records_InDocument = Parameters.PostingDataTables[Parameters.Object.RegisterRecords.StockBalance].RecordSet;
+			PostingDataTable = Parameters.PostingDataTables[Parameters.Object.RegisterRecords.StockBalance];
+			If PostingDataTable <> Undefined Then
+				Records_InDocument = PostingDataTable.RecordSet;
+			EndIf;
 		EndIf;
-		If Not Cancel And Not AccReg.StockBalance.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
+		If Not Cancel And Records_InDocument <> Undefined
+			And Not AccReg.StockBalance.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
 			Records_InDocument, 
 			Parameters.DocumentDataTables.StockBalance_Exists, 
 			AccumulationRecordType.Receipt, Unposting, AddInfo) Then

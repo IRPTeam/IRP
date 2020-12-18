@@ -502,8 +502,10 @@
   <catalogs>Catalog.Items</catalogs>
   <catalogs>Catalog.ItemSegments</catalogs>
   <catalogs>Catalog.ItemTypes</catalogs>
+  <catalogs>Catalog.LockDataModificationReasons</catalogs>
   <catalogs>Catalog.ObjectStatuses</catalogs>
   <catalogs>Catalog.Partners</catalogs>
+  <catalogs>Catalog.PartnersBankAccounts</catalogs>
   <catalogs>Catalog.PartnerSegments</catalogs>
   <catalogs>Catalog.PaymentSchedules</catalogs>
   <catalogs>Catalog.PaymentTerminals</catalogs>
@@ -527,8 +529,6 @@
   <catalogs>Catalog.UserGroups</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
-  <catalogs>Catalog.LockDataModificationReasons</catalogs>
-  <catalogs>Catalog.PartnersBankAccounts</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>

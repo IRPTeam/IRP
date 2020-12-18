@@ -39,4 +39,27 @@ Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
+&AtClient
+Procedure PartnerOnChange(Item)
+	Object.LegalEntity = DocumentsServer.GetLegalNameByPartner(Object.Partner, Object.LegalEntity);
+EndProcedure
+
+&AtClient
+Procedure LegalEntityStartChoice(Item, ChoiceData, StandardProcessing)
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+	
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
+																	True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.FormParameters = New Structure();
+	If ValueIsFilled(Object.Partner) Then
+		OpenSettings.FormParameters.Insert("Partner", Object.Partner);
+		OpenSettings.FormParameters.Insert("FilterByPartnerHierarchy", True);
+	EndIf;
+	OpenSettings.FillingData = New Structure("Partner", Object.Partner);
+	
+	DocumentsClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, OpenSettings);
+
+EndProcedure
+
 #EndRegion

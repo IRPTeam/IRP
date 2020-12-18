@@ -30,522 +30,541 @@
   <predefined>
     <items id="759d2809-0696-4f6c-befd-bd93aaf90e60">
       <name>Catalog_ItemKeys</name>
+      <description>Catalog Item keys</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>15</value>
       </code>
     </items>
     <items id="18357eb8-bf37-45d4-b02d-349d9b6347dc">
       <name>Catalog_Items</name>
+      <description>Catalog Items</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>16</value>
       </code>
     </items>
     <items id="a3975cab-9db4-4c45-9ad2-6682721cbdc5">
       <name>Catalog_ItemTypes</name>
+      <description>Catalog Item types</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>18</value>
       </code>
     </items>
     <items id="c02f2c5d-9c88-4433-b318-bcc39d844c69">
       <name>Document_SalesInvoice</name>
+      <description>Document Sales invoice</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>69</value>
       </code>
     </items>
     <items id="8846cea1-3716-4606-bdc5-f47a7aa533ce">
       <name>Catalog_Partners</name>
-      <description>Catalog partners</description>
+      <description>Catalog Partners</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>19</value>
       </code>
     </items>
     <items id="28287f24-dca3-4f41-ae30-4cb503cc38ca">
       <name>Catalog_ExpenseAndRevenueTypes</name>
-      <description>Catalog expense and revenue types</description>
+      <description>Catalog Expense and revenue types</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>12</value>
       </code>
     </items>
     <items id="5a7a7a54-2c7a-46cf-ac83-c55cca798a08">
       <name>Catalog_BusinessUnits</name>
-      <description>Catalog business units</description>
+      <description>Catalog Business units</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>4</value>
       </code>
     </items>
     <items id="eab4813e-9ad8-48e4-aa2e-e95eb15725c7">
       <name>Catalog_PriceKeys</name>
-      <description>Catalog price keys</description>
+      <description>Catalog Price keys</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>23</value>
       </code>
     </items>
     <items id="69ba322c-2a19-4125-b7e0-a3123897bd99">
       <name>Document_SalesOrder</name>
-      <description>Document sales order</description>
+      <description>Document Sales order</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>70</value>
       </code>
     </items>
     <items id="dd8f4747-410a-4bf3-8599-40a05cb32058">
       <name>Catalog_ChequeBonds</name>
-      <description>Cheque bonds</description>
+      <description>Catalog Cheque bonds</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>7</value>
       </code>
     </items>
     <items id="9cd4810f-e450-4719-9620-8a6d3960b834">
       <name>Catalog_Specifications</name>
-      <description>Catalog specifications</description>
+      <description>Catalog Specifications</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>30</value>
       </code>
     </items>
     <items id="41f02ae3-551e-41ee-a0f7-cbb4825a290e">
       <name>Document_PurchaseInvoice</name>
-      <description>Document purchase invoice</description>
+      <description>Document Purchase invoice</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>62</value>
       </code>
     </items>
     <items id="888eb86f-c74e-45fa-bee5-bf3e7baa99d1">
       <name>Document_PurchaseOrder</name>
-      <description>Document purchase order</description>
+      <description>Document Purchase order</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>63</value>
       </code>
     </items>
     <items id="8bbe12f5-44d2-4a75-85e2-32bcb48692a7">
       <name>Catalog_Agreements</name>
       <description>Catalog Agreements</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>2</value>
       </code>
     </items>
     <items id="328f6f83-a86a-4b9d-bd6b-ffead46c0953">
       <name>Catalog_CashAccounts</name>
       <description>Catalog Cash accounts</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>5</value>
       </code>
     </items>
     <items id="9ed15691-1df1-4020-a825-4989f860a90e">
       <name>Catalog_Companies</name>
       <description>Catalog Companies</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>8</value>
       </code>
     </items>
     <items id="49d5fa3f-515b-4d80-8b1c-307112a4158a">
       <name>Catalog_CompanyTypes</name>
       <description>Catalog Company types</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>9</value>
       </code>
     </items>
     <items id="60670f4a-f08a-4ca4-a6d3-05236f383207">
       <name>Catalog_Countries</name>
-      <description>Catalog countries</description>
+      <description>Catalog Countries</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>10</value>
       </code>
     </items>
     <items id="7908e42a-a00e-4866-8ea2-7221edb32a1b">
       <name>Catalog_Currencies</name>
-      <description>Catalog currencies</description>
+      <description>Catalog Currencies</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>11</value>
       </code>
     </items>
     <items id="7fffca8e-8a3f-4fbf-af29-37de18151417">
       <name>Catalog_PriceTypes</name>
-      <description>Catalog price types</description>
+      <description>Catalog Price types</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>24</value>
       </code>
     </items>
     <items id="632e8c44-ec2d-403c-af75-10ea3a0b99a3">
       <name>Catalog_SerialLotNumbers</name>
-      <description>Catalog serial lot numbers</description>
+      <description>Catalog Serial lot numbers</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>26</value>
       </code>
     </items>
     <items id="95c158df-fb51-4bbf-9f83-44f6f333861f">
       <name>Catalog_Stores</name>
-      <description>Catalog stores</description>
+      <description>Catalog Stores</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>31</value>
       </code>
     </items>
     <items id="1bfd69ac-1570-431e-80e6-5b393b1688d3">
       <name>Catalog_Taxes</name>
-      <description>Catalog taxes</description>
+      <description>Catalog Taxes</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>32</value>
       </code>
     </items>
     <items id="612953b5-4272-4603-9467-f51deca79a3a">
       <name>Catalog_Units</name>
-      <description>Catalog units</description>
+      <description>Catalog Units</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>34</value>
       </code>
     </items>
     <items id="e602c645-ae74-4566-8b79-b902ab223c46">
       <name>Catalog_Users</name>
-      <description>Catalog users</description>
+      <description>Catalog Users</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>36</value>
       </code>
     </items>
     <items id="b51b4fc3-9af0-49be-bc0f-1f50629c4951">
       <name>Document_BankPayment</name>
       <description>Document Bank payment</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>38</value>
       </code>
     </items>
     <items id="5e98ef39-7a7f-4e2e-ac27-ef61c75418a4">
       <name>Document_BankReceipt</name>
       <description>Document Bank receipt</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>39</value>
       </code>
     </items>
     <items id="dbc9ff5e-39a5-4968-a585-dad9f87c15a4">
       <name>Document_Bundling</name>
       <description>Document Bundling</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>40</value>
       </code>
     </items>
     <items id="1ea8bd75-b87f-48b4-af96-1b7d6dfdd4b0">
       <name>Document_CashExpense</name>
       <description>Document Cash expense</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>41</value>
       </code>
     </items>
     <items id="4a3c08bd-dd13-4e82-92f9-a0002041d98c">
       <name>Document_CashPayment</name>
       <description>Document Cash payment</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>42</value>
       </code>
     </items>
     <items id="59e6837a-c968-415c-81c5-454ed7728831">
       <name>Document_CashReceipt</name>
       <description>Document Cash receipt</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>43</value>
       </code>
     </items>
     <items id="0b05d183-3aef-4b78-9897-0beebfb766ae">
       <name>Document_CashRevenue</name>
       <description>Document Cash revenue</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>44</value>
       </code>
     </items>
     <items id="a1216e62-2d10-48b2-9c15-7c7632e37c9f">
       <name>Document_CashTransferOrder</name>
       <description>Document Cash transfer order</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>46</value>
       </code>
     </items>
     <items id="81ea25f6-8b13-4e90-8dfa-b2ba20b26a83">
       <name>Document_ChequeBondTransaction</name>
       <description>Document Cheque bond transaction</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>47</value>
       </code>
     </items>
     <items id="d165f449-9d6e-49bb-aac3-2d86efda2eae">
       <name>Document_GoodsReceipt</name>
       <description>Document Goods receipt</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>50</value>
       </code>
     </items>
     <items id="ef6ee0a7-b975-4ed0-9efc-4737f1890c54">
       <name>Document_IncomingPaymentOrder</name>
       <description>Document Incoming payment order</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>51</value>
       </code>
     </items>
     <items id="70839530-948e-4961-bdd6-17632148e6a9">
       <name>Document_InventoryTransfer</name>
       <description>Document Inventory transfer</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>53</value>
       </code>
     </items>
     <items id="74d7ecaa-6ac0-45ca-93ba-6be5806c5f7a">
       <name>Document_InventoryTransferOrder</name>
       <description>Document Inventory transfer order</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>54</value>
       </code>
     </items>
     <items id="c092fb1e-3000-41ed-babb-7a9dff84d16c">
       <name>Document_InvoiceMatch</name>
       <description>Document Invoice match</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>55</value>
       </code>
     </items>
     <items id="027d2fc5-5f0b-4955-9d72-599fca2c241d">
       <name>Document_Labeling</name>
       <description>Document Labeling</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>56</value>
       </code>
     </items>
     <items id="250546bc-ecf2-4173-933a-dcd17d2c8fd7">
       <name>Document_OpeningEntry</name>
       <description>Document Opening entry</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>57</value>
       </code>
     </items>
     <items id="ae211661-bece-46b7-8946-c29d131b45fc">
       <name>Document_OutgoingPaymentOrder</name>
       <description>Document Outgoing payment order</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>58</value>
       </code>
     </items>
     <items id="b07e942f-58ef-4049-b954-37ab8f4d6820">
       <name>Document_PhysicalCountByLocation</name>
       <description>Document Physical count by location</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>59</value>
       </code>
     </items>
     <items id="b90b3451-a811-4a27-b15d-1a8fd6827de8">
       <name>Document_PhysicalInventory</name>
       <description>Document Physical inventory</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>60</value>
       </code>
     </items>
     <items id="edde0b2e-e4c3-435d-8f04-61a431134d32">
       <name>Document_PriceList</name>
       <description>Document Price list</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>61</value>
       </code>
     </items>
     <items id="9bad61d7-11f0-483c-9ab0-da72bb315745">
       <name>Document_PurchaseReturn</name>
       <description>Document Purchase return</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>64</value>
       </code>
     </items>
     <items id="6c9873c1-9449-40b1-bd65-02a7648dc9f4">
       <name>Document_PurchaseReturnOrder</name>
       <description>Document Purchase return order</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>65</value>
       </code>
     </items>
     <items id="50d761b3-30ae-4bb0-afd5-3e011e8083c0">
       <name>Document_ReconciliationStatement</name>
       <description>Document Reconciliation statement</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>66</value>
       </code>
     </items>
     <items id="906608c9-2fa7-421e-9b37-b1dea20ae04e">
       <name>Document_SalesReturn</name>
       <description>Document Sales return</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>71</value>
       </code>
     </items>
     <items id="c7ba1218-4713-4028-b9e7-35514690620c">
       <name>Document_SalesReturnOrder</name>
       <description>Document Sales return order</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>72</value>
       </code>
     </items>
     <items id="de357601-3033-45a8-b7c3-2e46ac141890">
       <name>Document_ShipmentConfirmation</name>
       <description>Document Shipment confirmation</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>73</value>
       </code>
     </items>
     <items id="07e4eae5-710d-4c5b-9ad8-28013e48abe9">
       <name>Document_StockAdjustmentAsSurplus</name>
       <description>Document Stock adjustment as surplus</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>74</value>
       </code>
     </items>
     <items id="eae67cef-3488-4f12-afb0-d130932ad37c">
       <name>Document_StockAdjustmentAsWriteOff</name>
       <description>Document Stock adjustment as write off</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>75</value>
       </code>
     </items>
     <items id="b8ae16fc-14a3-4f14-a1f2-11d01097bcec">
       <name>Document_Unbundling</name>
       <description>Document Unbundling</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>76</value>
       </code>
     </items>
     <items id="cce02b56-5a53-4cee-af83-062f1d468981">
       <name>Catalog_Files</name>
-      <description>Catalog files</description>
+      <description>Catalog Files</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>13</value>
       </code>
     </items>
     <items id="36ae80a0-5960-4a6d-9f2b-ae2ade0e6cb1">
       <name>Document_RetailSalesReceipt</name>
-      <description>Document retail sales receipt</description>
+      <description>Document Retail sales receipt</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>68</value>
       </code>
     </items>
     <items id="0acebd7b-ff65-452a-b032-85a1295e1d94">
       <name>Catalog_PaymentTerminals</name>
-      <description>Catalog payment terminals</description>
+      <description>Catalog Payment terminals</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>21</value>
       </code>
     </items>
     <items id="5fb73bc8-57cf-4f02-87f4-fc35e6c5657c">
       <name>Document_RetailReturnReceipt</name>
-      <description>Document retail return receipt</description>
+      <description>Document Retail return receipt</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>67</value>
       </code>
     </items>
     <items id="6a361b94-41b0-4947-9777-628809f62438">
       <name>Catalog_BankTerms</name>
-      <description>Catalog bank terms</description>
+      <description>Catalog Bank terms</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>3</value>
       </code>
     </items>
     <items id="41535f14-894a-4704-be4d-e8a4534502a4">
       <name>Catalog_RetailCustomers</name>
+      <description>Catalog Retail customers</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>25</value>
       </code>
     </items>
     <items id="d68eb658-0bb7-4e59-904e-0e0d161f977a">
       <name>Document_CashStatement</name>
-      <description>Document cash statement</description>
+      <description>Document Cash statement</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>45</value>
       </code>
     </items>
     <items id="9fc76d05-8a26-4010-993e-b9d2e703710e">
       <name>Catalog_CashStatementStatuses</name>
-      <description>Catalog cash statement statuses</description>
+      <description>Catalog Cash statement statuses</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>6</value>
       </code>
     </items>
     <items id="8cbe4612-d477-4a19-af48-24a98318667d">
       <name>Document_CreditNote</name>
-      <description>Document credit note</description>
+      <description>Document Credit note</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>48</value>
       </code>
     </items>
     <items id="819c80cf-0def-402c-900c-7faf4b52fda1">
       <name>Document_DebitNote</name>
-      <description>Document debit note</description>
+      <description>Document Debit note</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>49</value>
       </code>
     </items>
     <items id="af639881-4729-4a33-a46e-0d7a22ef12dd">
       <name>Catalog_Workstations</name>
       <description>Catalog Workstations</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>37</value>
       </code>
     </items>
     <items id="6e0be277-489c-449e-8b22-a6f1147a926a">
       <name>Catalog_Hardware</name>
       <description>Catalog Hardware</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>14</value>
       </code>
     </items>
     <items id="cf8ce39f-f480-435f-beb8-b7f92e53cc96">
       <name>Catalog_ItemSegments</name>
       <description>Catalog Item segments</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>17</value>
       </code>
     </items>
     <items id="23ded746-24f8-457e-9aaa-a0760fd13eb3">
       <name>Catalog_PartnerSegments</name>
       <description>Catalog Partner segments</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>20</value>
       </code>
     </items>
     <items id="b0fd5802-3afd-4ff6-a0bc-9402657ac361">
       <name>Catalog_PaymentTypes</name>
       <description>Catalog Payment types</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>22</value>
       </code>
     </items>
     <items id="e1104706-a199-4d45-aba5-303060f6f9e5">
       <name>Catalog_SpecialOfferRules</name>
       <description>Catalog Special offer rules</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>27</value>
       </code>
     </items>
     <items id="4ce4a7f7-4bb4-4690-8793-b3176318d913">
       <name>Catalog_SpecialOffers</name>
       <description>Catalog Special offers</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>28</value>
       </code>
     </items>
     <items id="2b524deb-877c-4ef3-8d71-7272830f18f5">
       <name>Catalog_SpecialOfferTypes</name>
       <description>Catalog Special offer types</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>29</value>
       </code>
     </items>
     <items id="78e6b1f2-9dd6-460a-aa72-2fd5aab023d5">
       <name>Catalog_TaxRates</name>
       <description>Catalog Tax rates</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>33</value>
       </code>
     </items>
     <items id="4ef678cb-b68c-4d35-a918-2b0873128a94">
       <name>Catalog_UserGroups</name>
       <description>Catalog User groups</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>35</value>
       </code>
     </items>
     <items id="3a38d2cb-1b63-48aa-a4e1-8cfd219f69c6">
       <name>Document_InternalSupplyRequest</name>
       <description>Document Internal supply request</description>
       <code xsi:type="core:NumberValue">
-        <value>0</value>
+        <value>52</value>
+      </code>
+    </items>
+    <items id="2c781412-a4ea-4fb2-b9fc-fb021c5c2bdb">
+      <name>Catalog_PartnersBankAccounts</name>
+      <description>Catalog Partners bank accounts</description>
+      <code xsi:type="core:NumberValue">
+        <value>1</value>
+      </code>
+    </items>
+    <items id="1c954b8b-b64e-4b82-a964-f78318a74e17">
+      <name>Catalog_LockDataModificationReasons</name>
+      <description>Catalog Lock data modification reasons</description>
+      <code xsi:type="core:NumberValue">
+        <value>77</value>
       </code>
     </items>
   </predefined>

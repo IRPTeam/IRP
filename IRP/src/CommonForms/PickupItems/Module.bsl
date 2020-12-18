@@ -102,7 +102,8 @@ Procedure ItemTypeAfterSelection()
 		|	ItemPickedOut.Quantity AS QuantityPickedOut,
 		|	Items.ItemKeyCount,
 		|	&PriceType AS PriceType,
-		|	0 AS Price
+		|	0 AS Price,
+		|	PRESENTATION(Items.Item) AS ItemPresentation
 		|FROM
 		|	Items AS Items
 		|		LEFT JOIN ItemBalance AS ItemBalance

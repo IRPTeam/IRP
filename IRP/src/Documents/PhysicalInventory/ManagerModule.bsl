@@ -320,6 +320,11 @@ EndProcedure
 #Region CheckAfterWrite
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
+	If StatusInfo.Posting Then
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "BalancePeriod", 
+			New Boundary(New PointInTime(StatusInfo.Period, Ref), BoundaryType.Including));
+	EndIf;
 	If Not (Parameters.Property("Unposting") And Parameters.Unposting) Then
 		Parameters.Insert("RecordType", AccumulationRecordType.Expense);
 	EndIf;

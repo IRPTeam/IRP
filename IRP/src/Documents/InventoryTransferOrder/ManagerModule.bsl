@@ -241,6 +241,11 @@ EndProcedure
 #Region CheckAfterWrite
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
+	If StatusInfo.Posting Then
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "BalancePeriod", 
+			New Boundary(New PointInTime(StatusInfo.Period, Ref), BoundaryType.Including));
+	EndIf;
 	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.InventoryTransferOrder.ItemList", AddInfo);
 EndProcedure

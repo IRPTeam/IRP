@@ -1210,7 +1210,11 @@ Function CheckBalance_StockBalance(Ref, Tables, RecordType, Unposting, AddInfo =
 EndFunction	
 
 Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
-	Parameters.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Including));
+	BalancePeriod = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod");
+	If Not ValueIsFilled(BalancePeriod) Then
+		BalancePeriod = New Boundary(Ref.PointInTime(), BoundaryType.Including);
+	EndIf;
+	Parameters.Insert("BalancePeriod", BalancePeriod);
 	If CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo) Then
 		Parameters.BalancePeriod = Undefined;
 		Return CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);

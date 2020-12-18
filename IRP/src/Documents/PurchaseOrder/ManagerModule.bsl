@@ -554,6 +554,11 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
 	
+	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
+	If StatusInfo.Posting Then
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "BalancePeriod", 
+			New Boundary(New PointInTime(StatusInfo.Period, Ref), BoundaryType.Including));
+	EndIf;
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.PurchaseOrder.ItemList", AddInfo);
 		
 	LineNumberAndRowKeyFromItemList = PostingServer.GetLineNumberAndRowKeyFromItemList(Ref, "Document.PurchaseOrder.ItemList");

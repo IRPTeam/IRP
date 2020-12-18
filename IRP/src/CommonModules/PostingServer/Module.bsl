@@ -1135,6 +1135,13 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 				Records_InDocument = PostingDataTable.RecordSet;
 			EndIf;
 		EndIf;	
+			
+		If Records_InDocument <> Undefined 
+			And TypeOf(Records_InDocument) = Type("ValueTable") 
+			And Not Records_InDocument.Columns.Count() Then
+				Records_InDocument = PostingServer.CreateTable(Metadata.AccumulationRegisters.StockReservation);
+		EndIf;
+		
 		If Not Cancel And Records_InDocument <> Undefined 
 			And Not AccReg.StockReservation.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
 			Records_InDocument, 
@@ -1154,6 +1161,13 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 				Records_InDocument = PostingDataTable.RecordSet;
 			EndIf;
 		EndIf;
+		
+		If Records_InDocument <> Undefined 
+			And TypeOf(Records_InDocument) = Type("ValueTable") 
+			And Not Records_InDocument.Columns.Count() Then
+				Records_InDocument = PostingServer.CreateTable(Metadata.AccumulationRegisters.StockBalance);
+		EndIf;
+		
 		If Not Cancel And Records_InDocument <> Undefined
 			And Not AccReg.StockBalance.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
 			Records_InDocument, 

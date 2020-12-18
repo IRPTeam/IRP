@@ -477,6 +477,9 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 EndFunction
 
 Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	If Not (Parameters.Property("Unposting") And Parameters.Unposting) Then
+		Parameters.Insert("RecordType", AccumulationRecordType.Expense);
+	EndIf;
 	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
 EndProcedure
 

@@ -483,6 +483,10 @@ EndProcedure
 #Region CheckAfterWrite
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+	If Not (Parameters.Property("Unposting") And Parameters.Unposting) Then
+		Parameters.Insert("RecordType", AccumulationRecordType.Expense);
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ErrorQuantityField", "Object.Quantity");
+	EndIf;
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.Unbundling.ItemList", AddInfo);
 EndProcedure
 

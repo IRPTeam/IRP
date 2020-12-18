@@ -877,6 +877,11 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 		TableDataPath = Parameters.TableDataPath;
 	EndIf;
 	
+	ErrorQuantityField = Undefined;
+	If Parameters.Property("ErrorQuantityField") Then
+		ErrorQuantityField = Parameters.ErrorQuantityField;
+	EndIf;
+	
 	QueryTableCopy = QueryTable.Copy();
 	QueryTableCopy.GroupBy(Parameters.GroupColumns + ", Unposting", Parameters.SumColumns);
 
@@ -916,9 +921,21 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 			MessageText, TableDataPath + "[" + (LineNumber - 1) + "].Quantity", "Object.ItemList");
 			// Delete row
 		Else
-			MessageText = StrTemplate(R().Error_068, LineNumbers, Row.Item, Row.ItemKey, Parameters.Operation,
-				LackOfBalance, 0, LackOfBalance, BasisUnit);
-			CommonFunctionsClientServer.ShowUsersMessage(MessageText);
+			If ValueIsFilled(ErrorQuantityField) Then
+				If Row.Unposting Then
+					MessageText = StrTemplate(R().Error_090, Row.Item, Row.ItemKey, Parameters.Operation,
+						LackOfBalance, 0, LackOfBalance, BasisUnit);
+				Else
+					MessageText = StrTemplate(R().Error_090, Row.Item, Row.ItemKey, Parameters.Operation,
+						RemainsQuantity, Row.Quantity, LackOfBalance, BasisUnit);
+				EndIf;
+				CommonFunctionsClientServer.ShowUsersMessage(
+				MessageText, ErrorQuantityField);
+			Else	
+				MessageText = StrTemplate(R().Error_068, LineNumbers, Row.Item, Row.ItemKey, Parameters.Operation,
+					LackOfBalance, 0, LackOfBalance, BasisUnit);
+				CommonFunctionsClientServer.ShowUsersMessage(MessageText);
+			EndIf;			
 		EndIf;
 	EndDo;
 EndProcedure
@@ -1347,10 +1364,17 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 		ErrorParameters.Insert("FilterColumns" , "ItemKey, Item, LackOfBalance");
 		ErrorParameters.Insert("Operation"     , Parameters.Operation);
 		ErrorParameters.Insert("RecordType"    , RecordType);
+		
 		TableDataPath = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "TableDataPath");
 		If ValueIsFilled(TableDataPath) Then
 			ErrorParameters.Insert("TableDataPath" , TableDataPath);
 		EndIf;
+		
+		ErrorQuantityField = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ErrorQuantityField");
+		If ValueIsFilled(ErrorQuantityField) Then
+			ErrorParameters.Insert("ErrorQuantityField" , ErrorQuantityField);
+		EndIf;
+	
 		ShowPostingErrorMessage(QueryTable, ErrorParameters, AddInfo);
 	EndIf;
 	Return Not Error;

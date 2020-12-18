@@ -1966,3 +1966,40 @@ Scenario: Create document PurchaseOrder objects (for procurement)
 		| 'e1cib/data/Document.PurchaseOrder?ref=b75dad46e66c4c2c11eb3b8b5ffd2f16' | 'af9afac3-e718-4680-8a5f-4f750f58b455' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '1'      | '1'           | 'No'              | '1'            | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | '900'    |
 		| 'e1cib/data/Document.PurchaseOrder?ref=b75dad46e66c4c2c11eb3b8b5ffd2f16' | 'af9afac3-e718-4680-8a5f-4f750f58b455' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '1'      | '1'           | 'No'              | '1'            | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d' | '900'    |
 		| 'e1cib/data/Document.PurchaseOrder?ref=b75dad46e66c4c2c11eb3b8b5ffd2f16' | 'af9afac3-e718-4680-8a5f-4f750f58b455' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '0,1712' | '5,8411'      | 'No'              | '1'            | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e' | '154,08' |
+
+
+Scenario: Create information register UserSettings records (remaining stock control)
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject'                     | 'AttributeName'                 | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$' | 'Document.Bundling'                  | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.Bundling'                  | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.GoodsReceipt'              | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.GoodsReceipt'              | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.OpeningEntry'              | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.OpeningEntry'              | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.PhysicalInventory'         | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.PhysicalInventory'         | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.PurchaseInvoice'           | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.PurchaseInvoice'           | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.PurchaseOrder'             | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.PurchaseOrder'             | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.PurchaseReturn'            | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.PurchaseReturn'            | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.PurchaseReturnOrder'       | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.RetailReturnReceipt'       | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.RetailReturnReceipt'       | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.RetailSalesReceipt'        | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.RetailSalesReceipt'        | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.SalesInvoice'              | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.SalesInvoice'              | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.SalesOrder'                | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.SalesOrder'                | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.ShipmentConfirmation'      | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.ShipmentConfirmation'      | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.StockAdjustmentAsSurplus'  | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.StockAdjustmentAsSurplus'  | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.StockAdjustmentAsWriteOff' | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.StockAdjustmentAsWriteOff' | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.Unbundling'                | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.Unbundling'                | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |

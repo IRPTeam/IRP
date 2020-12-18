@@ -426,29 +426,39 @@ Scenario: creating a Purchase Order document
 		And Delay 5
 
 
-	Scenario: purchase an item for a set
+Scenario: create purchase invoice without order (Vendor Ferron, USD, store 01)
 	* Create Purchase Invoice without order	
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
-	* Filling in details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company |
-		And I select current line in "List" table
-		And I click Select button of "Store" field
-		Then "Stores" window is opened
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'  |
-		And I select current line in "List" table
+	* Filling in vendor's info
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| Description |
+				| Ferron BP   |
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I activate "Description" field in "List" table
+			And I go to line in "List" table
+				| Description       |
+				| Company Ferron BP |
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| Description        |
+				| Vendor Ferron, USD |
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 01'  |
+			And I select current line in "List" table
 	* Filling in items table
 		And I move to "Item list" tab
-		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click the button named "Add"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Hat + kerchief'    |
+			| 'Dress'    |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
@@ -458,8 +468,32 @@ Scenario: creating a Purchase Order document
 		And I select current line in "List" table
 		And I activate "Q" field in "ItemList" table
 		And I input "100,000" text in "Q" field of "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I input "80,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'XS/Blue'  |
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "50,000" text in "Q" field of "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I input "15,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseInvoice31004$$" variable
+		And I delete "$$PurchaseInvoice31004$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice31004$$"
+		And I save the window as "$$PurchaseInvoice31004$$"
+		And I click the button named "FormPostAndClose"
 
 
 	Scenario: create purchase invoice without order (Vendor Ferron, USD)

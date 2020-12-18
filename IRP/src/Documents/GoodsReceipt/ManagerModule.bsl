@@ -1628,9 +1628,6 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
 	
-	If Not (Parameters.Property("Unposting") And Parameters.Unposting) Then
-		Parameters.Insert("RecordType", AccumulationRecordType.Expense);
-	EndIf;	
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.GoodsReceipt.ItemList", AddInfo);
 		
 	LineNumberAndRowKeyFromItemList = PostingServer.GetLineNumberAndRowKeyFromItemList(Ref, "Document.GoodsReceipt.ItemList");

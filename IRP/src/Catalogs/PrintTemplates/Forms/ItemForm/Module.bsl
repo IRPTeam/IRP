@@ -21,8 +21,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndIf;
 	
 	DataSourceScheme = GenerateDataSourceScheme();
-	
-	GetDefaultAtServer();
+	SetAvailableFields(DataSourceScheme);
+	//GetDefaultAtServer();
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 EndProcedure
 

@@ -1,5 +1,10 @@
 
 Function GetOrCreateDataBaseStatusInfo() Export
+	
+	If Not Saas.isAreaActive() Then
+		Return Catalogs.DataBaseStatus.EmptyRef();
+	EndIf;
+	
 	ComputerName = ComputerName();
 	ConnectionString = InfoBaseConnectionString();
 	

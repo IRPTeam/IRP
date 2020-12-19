@@ -8,6 +8,9 @@ Function SearchByBarcodes(Val Barcodes, AddInfo) Export
 	|	ISNULL(Barcodes.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
 	|	Barcodes.Unit AS Unit,
 	|	1 AS Quantity,
+	|	Barcodes.ItemKey.Unit AS ItemKeyUnit,
+	|	Barcodes.ItemKey.Item.Unit AS ItemUnit,
+	|	NOT Barcodes.ItemKey.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
 	|	Barcodes.Barcode AS Barcode,
 	|	Barcodes.ItemKey.Item.ItemType AS ItemType,
 	|	Barcodes.ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber
@@ -28,7 +31,7 @@ Function SearchByBarcodes(Val Barcodes, AddInfo) Export
 	If AddInfo.Property("PriceType", PriceType) Then
 		AddInfo.Property("PricePeriod", PricePeriod);
 		QueryUnload.Columns.Add("Price", Metadata.DefinedTypes.typePrice.Type);		
-		PreviousPriceTable = QueryUnload.Copy( , "ItemKey, Unit");
+		PreviousPriceTable = QueryUnload.Copy( , "ItemKey, Unit, ItemKeyUnit, ItemUnit, hasSpecification");
 		PreviousPriceTable.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
 		PreviousPriceTable.FillValues(PriceType, "PriceType");
 		ItemsInfo = GetItemInfo.ItemPriceInfoByTable(PreviousPriceTable, PricePeriod);

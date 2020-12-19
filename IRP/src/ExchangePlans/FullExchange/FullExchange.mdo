@@ -706,6 +706,10 @@
     <mdObject>AccumulationRegister.Aging</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
+  <content>
+    <mdObject>Catalog.PartnersBankAccounts</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

@@ -102,7 +102,8 @@ Procedure ItemTypeAfterSelection()
 		|	ItemPickedOut.Quantity AS QuantityPickedOut,
 		|	Items.ItemKeyCount,
 		|	&PriceType AS PriceType,
-		|	0 AS Price
+		|	0 AS Price,
+		|	PRESENTATION(Items.Item) AS ItemPresentation
 		|FROM
 		|	Items AS Items
 		|		LEFT JOIN ItemBalance AS ItemBalance
@@ -181,37 +182,42 @@ Procedure ItemTypeAfterSelection()
 			QueryPriceUnload = QueryPriceExecution.Unload();
 			LastQuery = New Query;
 			LastQuery.Text = "SELECT
-				|	Items.Item,
-				|	Items.Unit,
-				|	Items.QuantityBalance,
-				|	Items.QuantityBalanceReceiver,
-				|	Items.QuantityPickedOut,
-				|	Items.ItemKeyCount
-				|INTO Items
-				|FROM
-				|	&Items AS Items
-				|;
-				|////////////////////////////////////////////////////////////////////////////////
-				|SELECT
-				|	Prices.Item,
-				|	Prices.Price AS Price
-				|INTO Prices
-				|FROM
-				|	&Prices AS Prices
-				|;
-				|////////////////////////////////////////////////////////////////////////////////
-				|SELECT
-				|	Items.Item,
-				|	Items.Unit,
-				|	Items.QuantityBalance,
-				|	Items.QuantityBalanceReceiver,
-				|	Items.QuantityPickedOut,
-				|	Items.ItemKeyCount,
-				|	ISNULL(Prices.Price, 0) AS Price
-				|FROM
-				|	Items AS Items
-				|		LEFT JOIN Prices AS Prices
-				|		ON Items.Item = Prices.Item";
+			|	Items.Item,
+			|	Items.Unit,
+			|	Items.QuantityBalance,
+			|	Items.QuantityBalanceReceiver,
+			|	Items.QuantityPickedOut,
+			|	Items.ItemKeyCount
+			|INTO Items
+			|FROM
+			|	&Items AS Items
+			|;
+			|
+			|
+			|////////////////////////////////////////////////////////////////////////////////
+			|SELECT
+			|	Prices.Item,
+			|	Prices.Price AS Price
+			|INTO Prices
+			|FROM
+			|	&Prices AS Prices
+			|;
+			|
+			|
+			|////////////////////////////////////////////////////////////////////////////////
+			|SELECT
+			|	Items.Item,
+			|	Items.Unit,
+			|	Items.QuantityBalance,
+			|	Items.QuantityBalanceReceiver,
+			|	Items.QuantityPickedOut,
+			|	Items.ItemKeyCount,
+			|	ISNULL(Prices.Price, 0) AS Price,
+			|	PRESENTATION(Items.Item) AS ItemPresentation
+			|FROM
+			|	Items AS Items
+			|		LEFT JOIN Prices AS Prices
+			|		ON Items.Item = Prices.Item";
 			LastQuery.SetParameter("Items", QueryUnload);
 			LastQuery.SetParameter("Prices", QueryPriceUnload);
 			LastQueryExecution = LastQuery.Execute();
@@ -223,7 +229,7 @@ Procedure ItemTypeAfterSelection()
 		For Each Row In QueryUnload Do
 			NewRow = ItemList.Add();
 			NewRow.Item = Row.Item;
-			NewRow.Title = Row.Item;
+			NewRow.Title = Row.ItemPresentation;
 			NewRow.InStock = Row.QuantityBalance;
 			NewRow.InStockReceiver = Row.QuantityBalanceReceiver;
 			NewRow.PickedOut = Row.QuantityPickedOut;

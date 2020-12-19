@@ -722,6 +722,7 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 		And I go to line in "List" table
 			| 'Number' | 'Receive amount' |
 			| '$$NumberCashTransferOrder054009$$'      | '200,00'         |
+		And I select current line in "List" table
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -738,8 +739,7 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 		And I save the window as "$$CashReceipt054009$$"
 		And I click the button named "FormPostAndClose"
 		And I close all client application windows
-		# issued 1315, spent 1300 #
-		And I close all client application windows
+
 
 # Filters
 

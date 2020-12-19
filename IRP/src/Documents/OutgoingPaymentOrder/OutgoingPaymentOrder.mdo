@@ -224,6 +224,26 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="7b42bf91-ce9f-427a-9440-fb728a601d87">
+      <name>PartnerBankAccount</name>
+      <synonym>
+        <key>en</key>
+        <value>Partner bank account</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.PartnersBankAccounts</types>
+      </type>
+      <choiceParameterLinks>
+        <name>Filter.Partner</name>
+        <field>Document.OutgoingPaymentOrder.TabularSection.PaymentList.Attribute.Partner</field>
+      </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.LegalEntity</name>
+        <field>Document.OutgoingPaymentOrder.TabularSection.PaymentList.Attribute.Payee</field>
+      </choiceParameterLinks>
+      <createOnInput>Use</createOnInput>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="6a667dd2-72f0-4213-8913-8134ed024078">
       <name>Payee</name>
       <synonym>

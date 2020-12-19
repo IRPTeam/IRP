@@ -375,7 +375,6 @@
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.FileTransferService</httpServices>
-  <httpServices>HTTPService.SaasService</httpServices>
   <eventSubscriptions>EventSubscription.BeforeWrite_CheckUniqueID</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_RefreshReusableValues</eventSubscriptions>
   <eventSubscriptions>EventSubscription.ChoiceDataGetProcessing_FindDataForInputString</eventSubscriptions>
@@ -504,8 +503,10 @@
   <catalogs>Catalog.Items</catalogs>
   <catalogs>Catalog.ItemSegments</catalogs>
   <catalogs>Catalog.ItemTypes</catalogs>
+  <catalogs>Catalog.LockDataModificationReasons</catalogs>
   <catalogs>Catalog.ObjectStatuses</catalogs>
   <catalogs>Catalog.Partners</catalogs>
+  <catalogs>Catalog.PartnersBankAccounts</catalogs>
   <catalogs>Catalog.PartnerSegments</catalogs>
   <catalogs>Catalog.PaymentSchedules</catalogs>
   <catalogs>Catalog.PaymentTerminals</catalogs>
@@ -529,7 +530,6 @@
   <catalogs>Catalog.UserGroups</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
-  <catalogs>Catalog.LockDataModificationReasons</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>

@@ -18,6 +18,7 @@
   <content>Catalog.Items</content>
   <content>Catalog.Agreements</content>
   <content>CommonCommand.OpenVendorAgreements</content>
+  <content>Catalog.PartnersBankAccounts</content>
   <subsystems>Purchase</subsystems>
   <subsystems>PurchaseReturn</subsystems>
 </mdclass:Subsystem>

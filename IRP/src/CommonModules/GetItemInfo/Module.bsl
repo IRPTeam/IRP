@@ -169,14 +169,16 @@ Function ItemPriceInfoByTable(TableItemKeys, Period, AddInfo = Undefined) Export
 	TableOfResults.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
 	TableOfResults.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
 	TableOfResults.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
+	TableOfResults.Columns.Add("ItemKeyUnit", New TypeDescription("CatalogRef.Units"));
+	TableOfResults.Columns.Add("ItemUnit", New TypeDescription("CatalogRef.Units"));
 	TableOfResults.Columns.Add("Price", Metadata.DefinedTypes.typePrice.Type);
-	
+	TableOfResults.Columns.Add("hasSpecification", New TypeDescription("Boolean"));
 	TableWithSpecification = TableOfResults.CopyColumns();
 	
 	TableWithOutSpecification = TableOfResults.CopyColumns();
 	
 	For Each Row In TableItemKeys Do
-		If ValueIsFilled(Row.ItemKey.Specification) Then
+		If Row.hasSpecification Then
 			NewRow = TableWithSpecification.Add();
 		Else
 			NewRow = TableWithOutSpecification.Add();
@@ -185,9 +187,11 @@ Function ItemPriceInfoByTable(TableItemKeys, Period, AddInfo = Undefined) Export
 		NewRow.ItemKey = Row.ItemKey;
 		NewRow.PriceType = Row.PriceType;
 		NewRow.Unit = Row.Unit;
+		NewRow.ItemUnit = Row.ItemUnit;
+		NewRow.ItemKeyUnit = Row.ItemKeyUnit;
 	EndDo;
 	
-	TableWithSpecification.GroupBy("ItemKey, PriceType, Unit");
+	TableWithSpecification.GroupBy("ItemKey, PriceType, Unit, ItemUnit, ItemKeyUnit");
 	
 	TableWithSpecificationCopy = TableWithSpecification.Copy();
 	TableWithSpecificationCopy.GroupBy("ItemKey, PriceType");
@@ -196,7 +200,7 @@ Function ItemPriceInfoByTable(TableItemKeys, Period, AddInfo = Undefined) Export
 	
 	FillTableOfResults(QuerySelection, TableWithSpecification, TableOfResults);
 	
-	TableWithOutSpecification.GroupBy("ItemKey, PriceType, Unit");
+	TableWithOutSpecification.GroupBy("ItemKey, PriceType, Unit, ItemUnit, ItemKeyUnit");
 	
 	TableWithOutSpecificationCopy = TableWithOutSpecification.Copy();
 	TableWithOutSpecificationCopy.GroupBy("ItemKey, PriceType");
@@ -210,6 +214,7 @@ EndFunction
 
 Procedure FillTableOfResults(QuerySelection, Table, TableOfResults)
 	QuerySelection.Reset();
+	TempMap = New Map;
 	For Each Row In Table Do
 		If Not QuerySelection.FindNext(New Structure("ItemKey, PriceType", Row.ItemKey, Row.PriceType)) Then
 			Continue;
@@ -219,11 +224,19 @@ Procedure FillTableOfResults(QuerySelection, Table, TableOfResults)
 		FillPropertyValues(NewRow, Row);
 		Price = ?(ValueIsFilled(QuerySelection.Price), QuerySelection.Price, 0);
 		If ValueIsFilled(Row.Unit) Then
-			ItemKeyUnit = Row.ItemKey.Unit;
-			ItemUnit = Row.ItemKey.Item.Unit;
-			ToUnit = ?(ValueIsFilled(ItemKeyUnit), ItemKeyUnit, ItemUnit);
+			ToUnit = ?(ValueIsFilled(Row.ItemKeyUnit), Row.ItemKeyUnit, Row.ItemUnit);
 			If ValueIsFilled(ToUnit) Then
-				UnitFactor = Catalogs.Units.GetUnitFactor(Row.Unit, ToUnit);
+				If TempMap.Get(Row.Unit) = Undefined Then
+					UnitFactor = Catalogs.Units.GetUnitFactor(Row.Unit, ToUnit);
+					Tmp = New Map;
+					Tmp.Insert(ToUnit, UnitFactor);
+					TempMap.Insert(Row.Unit, Tmp);
+				ElsIf TempMap.Get(Row.Unit).Get(ToUnit) = Undefined Then
+					UnitFactor = Catalogs.Units.GetUnitFactor(Row.Unit, ToUnit);
+					TempMap.Get(Row.Unit).Insert(ToUnit, UnitFactor);
+				Else
+					UnitFactor = TempMap.Get(Row.Unit).Get(ToUnit);
+				EndIf;
 			Else
 				UnitFactor = 1;
 			EndIf;

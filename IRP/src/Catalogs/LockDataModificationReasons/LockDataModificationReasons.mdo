@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9dcc3f3f-4096-45c0-abdf-e99cd6f9cf59">
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9dcc3f3f-4096-45c0-abdf-e99cd6f9cf59">
   <producedTypes>
     <objectType typeId="a6d51ca9-9ce4-4f09-b821-3e3b8bcce5b7" valueTypeId="00c2a343-f644-4fbd-974c-8b8b7fc87d86"/>
     <refType typeId="01614283-3d6a-4a7f-9b42-17b3ec4f4d8f" valueTypeId="1bac07d4-9a7e-4948-90b0-c654839dea03"/>
@@ -15,6 +15,30 @@
   <useStandardCommands>true</useStandardCommands>
   <inputByString>Catalog.LockDataModificationReasons.StandardAttribute.Code</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_LockDataModificationReasons</value>
+    </typesFilterValue>
+    <characteristicValues>Catalog.LockDataModificationReasons.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Catalog.LockDataModificationReasons.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Catalog.LockDataModificationReasons.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Catalog.LockDataModificationReasons.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_LockDataModificationReasons</value>
+    </typesFilterValue>
+    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  </characteristics>
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
@@ -29,6 +53,45 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.LockDataModificationReasons.Form.ItemForm</defaultObjectForm>
+  <tabularSections uuid="bdfb54d6-07fc-48d4-ac55-cb4f3cfaa8ae">
+    <producedTypes>
+      <objectType typeId="85b44ead-7878-4913-86f5-02ccbd3c51c2" valueTypeId="257e0d4e-1a4e-419a-b6db-fa8f614db850"/>
+      <rowType typeId="5468b7cc-6029-467f-8eab-d87f36a4a9e1" valueTypeId="dcb84a82-572a-4f75-af0c-4062cf4c3f35"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="9eb6198b-018e-4a8b-9fcf-8d0f29967c3c">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7726a691-743a-42fa-bf2d-ffa3e65927da">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="13f935b3-bff3-4144-a391-f5baf8875768">
     <name>ItemForm</name>
     <synonym>

@@ -6,7 +6,6 @@
     <value>Export data</value>
   </synonym>
   <methodName>CommonModule.ScheduledJobsForExtentions.ScheduledJobExportData</methodName>
-  <predefined>true</predefined>
   <restartCountOnFailure>3</restartCountOnFailure>
   <restartIntervalOnFailure>25</restartIntervalOnFailure>
 </mdclass:ScheduledJob>

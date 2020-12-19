@@ -13,7 +13,7 @@ Procedure BeforeWrite(Cancel)
 	EndIf;
 	User.Name = Description;
 	User.FullName = String(ThisObject);
-	
+	User.UnsafeOperationProtection.UnsafeOperationWarnings = False;
 	For Each Lang In Metadata.Languages Do
 		If TrimAll(Upper(Lang.LanguageCode)) = TrimAll(Upper(InterfaceLocalizationCode)) Then
 			User.Language = Lang;

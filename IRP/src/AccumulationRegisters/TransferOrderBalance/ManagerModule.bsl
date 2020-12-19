@@ -1,11 +1,11 @@
 Function GetLockFields(Data) Export
 	Result = New Structure();
 	Result.Insert("RegisterName", "AccumulationRegister.TransferOrderBalance");
-	Fields = New Map();
-	Fields.Insert("StoreSender", "StoreSender");
-	Fields.Insert("StoreReceiver", "StoreReceiver");
-	Fields.Insert("Order", "Order");
-	Fields.Insert("ItemKey", "ItemKey");
-	Result.Insert("LockInfo", New Structure("Data, Fields", Data, Fields));
+	Result.Insert("LockInfo", New Structure("Data, Fields", 
+	Data, PostingServer.GetLockFieldsMap(GetLockFieldNames())));	
 	Return Result;
+EndFunction
+
+Function GetLockFieldNames() Export
+	Return "StoreSender, StoreReceiver, Order, ItemKey";
 EndFunction

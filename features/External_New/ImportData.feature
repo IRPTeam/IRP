@@ -1971,7 +1971,7 @@ Scenario: Create document PurchaseOrder objects (for procurement)
 Scenario: Create information register UserSettings records (remaining stock control)
 	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
 	And I check or create information register "UserSettings" records:
-		| 'UserOrGroup'                                                   | 'MetadataObject'                     | 'AttributeName'                 | 'KindOfAttribute'               | 'Value' |
+		| 'UserOrGroup' | 'MetadataObject'                  | 'AttributeName'                 | 'KindOfAttribute'               | 'Value' |
 		| '$$IdCI$$' | 'Document.Bundling'                  | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
 		| '$$IdCI$$' | 'Document.Bundling'                  | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
 		| '$$IdCI$$' | 'Document.GoodsReceipt'              | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |

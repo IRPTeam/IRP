@@ -47,6 +47,10 @@ Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefin
 			Continue;
 		EndIf;
 		
+		If Not IsOutputAttribute(Attribute.Name, Form, MetaTypeOrRef, ItemElement) Then
+			Continue;
+		EndIf;
+		
 		OverrideInfo = OverrideElementParentInExtension(MetaTypeOrRef, Attribute.Name);
 		Parent = Undefined;
 		
@@ -83,6 +87,10 @@ EndProcedure
 
 Function OverrideElementParentInExtension(Ref, AttributeName)
 	Return New Structure("ParentName");
+EndFunction
+
+Function IsOutputAttribute(AttributeName, Form, MetaTypeOrRef, ItemElement = Undefined)
+	Return True;
 EndFunction
 
 #EndRegion

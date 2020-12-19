@@ -309,6 +309,15 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("Error_089", NStr("en = 'Description%1 ""%2"" is already in use.'", Lang));
 	
+	// %1 - Boots
+	// %2 - Red XL
+	// %3 - ordered
+	// %4 - 11
+	// %5 - 15
+	// %6 - 4
+	// %7 - pcs
+	Strings.Insert("Error_090", NStr("en = '[%1 %2] %3 remaining: %4 %7. Required: %5 %7. Lacking: %6 %7.'", Lang));
+	
 	#EndRegion
 	
 	#Region InfoMessages

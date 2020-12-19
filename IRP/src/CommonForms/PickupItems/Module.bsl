@@ -102,7 +102,8 @@ Procedure ItemTypeAfterSelection()
 		|	ItemPickedOut.Quantity AS QuantityPickedOut,
 		|	Items.ItemKeyCount,
 		|	&PriceType AS PriceType,
-		|	0 AS Price
+		|	0 AS Price,
+		|	PRESENTATION(Items.Item) AS ItemPresentation
 		|FROM
 		|	Items AS Items
 		|		LEFT JOIN ItemBalance AS ItemBalance
@@ -211,7 +212,8 @@ Procedure ItemTypeAfterSelection()
 			|	Items.QuantityBalanceReceiver,
 			|	Items.QuantityPickedOut,
 			|	Items.ItemKeyCount,
-			|	ISNULL(Prices.Price, 0) AS Price
+			|	ISNULL(Prices.Price, 0) AS Price,
+			|	PRESENTATION(Items.Item) AS ItemPresentation
 			|FROM
 			|	Items AS Items
 			|		LEFT JOIN Prices AS Prices
@@ -227,7 +229,7 @@ Procedure ItemTypeAfterSelection()
 		For Each Row In QueryUnload Do
 			NewRow = ItemList.Add();
 			NewRow.Item = Row.Item;
-			NewRow.Title = Row.Item;
+			NewRow.Title = Row.ItemPresentation;
 			NewRow.InStock = Row.QuantityBalance;
 			NewRow.InStockReceiver = Row.QuantityBalanceReceiver;
 			NewRow.PickedOut = Row.QuantityPickedOut;

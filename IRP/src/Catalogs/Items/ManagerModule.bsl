@@ -19,6 +19,9 @@ Function GetTableOfItemKeysInfoByItems(Items) Export
 		|			THEN ItemKeys.Item.Unit
 		|		ELSE ItemKeys.Unit
 		|	END AS Unit,
+		|	ItemKeys.Unit AS ItemKeyUnit,
+		|	ItemKeys.Item.Unit AS ItemUnit,
+		|	NOT ItemKeys.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
 		|	ItemKeys.Item,
 		|	ItemKeys.AffectPricingMD5
 		|FROM

@@ -1888,13 +1888,6 @@
 		</right>
 	</object>
 	<object>
-		<name>HTTPService.SaasService.URLTemplate.Saas.Method.CreateArea</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Catalog.Taxes</name>
 		<right>
 			<name>Read</name>
@@ -4007,13 +4000,6 @@
 		</right>
 		<right>
 			<name>ViewDataHistory</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>HTTPService.SaasService.URLTemplate.Saas.Method.CompanyLocalizations</name>
-		<right>
-			<name>Use</name>
 			<value>true</value>
 		</right>
 	</object>

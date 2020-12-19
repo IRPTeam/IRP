@@ -8,10 +8,6 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
 	
-	isSaasMode = Saas.isSaasMode();	
-	Form.Items.GroupAccountPayableByDocuments.Visible = Not isSaasMode;
-	Form.Items.GroupAccountReceivableByDocuments.Visible = Not isSaasMode;
-	 
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export

@@ -3,6 +3,10 @@
 
 //
 Function GetWorkstationByUniqueID(UniqueIDValue) Export
+	If Not Saas.isAreaActive() Then
+		Return Catalogs.Workstations.EmptyRef();
+	EndIf;
+	
 	Query = New Query;
 	Query.Text = "SELECT
 	|	Workstations.Ref

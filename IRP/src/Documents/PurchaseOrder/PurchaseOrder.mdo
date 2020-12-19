@@ -207,6 +207,26 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="6e598eee-5ae2-4738-95f1-f22edbcf9894">
+    <name>PartnerBankAccount</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner bank account</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.PartnersBankAccounts</types>
+    </type>
+    <choiceParameterLinks>
+      <name>Filter.LegalEntity</name>
+      <field>Document.PurchaseOrder.Attribute.LegalName</field>
+    </choiceParameterLinks>
+    <choiceParameterLinks>
+      <name>Filter.Partner</name>
+      <field>Document.PurchaseOrder.Attribute.Partner</field>
+    </choiceParameterLinks>
+    <createOnInput>Use</createOnInput>
+    <fullTextSearch>Use</fullTextSearch>
+  </attributes>
   <forms uuid="8f595946-9ad8-46e0-bc8c-85fe1da258a5">
     <name>DocumentForm</name>
     <synonym>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3aa3904f-dd76-4cc4-86e9-dbdf8fc915b0">
+  <producedTypes>
+    <objectType typeId="6ccb13b4-e51f-4831-8c3a-6a4d8f183d38" valueTypeId="f71237e5-e4eb-446f-a1f3-77de531192da"/>
+    <managerType typeId="c1d914b4-a0ff-40f3-8ad8-f12463585164" valueTypeId="682f977f-7462-4235-8c30-e6c8c5c76b67"/>
+  </producedTypes>
+  <name>SalesOrderStatusReport</name>
+  <synonym>
+    <key>en</key>
+    <value>Sales order status report</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.SalesOrderStatusReport.Form.Form</defaultForm>
+  <forms uuid="44269ef2-9cf1-4d5e-b471-d3751e526333">
+    <name>Form</name>
+    <synonym>
+      <key>en</key>
+      <value>Form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <templates uuid="b4726677-7a0c-4440-8c86-25219b5ec653">
+    <name>ReportTemplate</name>
+    <synonym>
+      <key>en</key>
+      <value>Report template</value>
+    </synonym>
+  </templates>
+</mdclass:DataProcessor>

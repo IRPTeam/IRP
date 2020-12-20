@@ -1,4 +1,6 @@
 
+#Region FormEvents
+
 &AtClient
 Procedure ExternalEvent(Object, Form, Source, Event, Data) Export
 	If Data <> Undefined Then
@@ -9,6 +11,10 @@ Procedure ExternalEvent(Object, Form, Source, Event, Data) Export
 		BarcodeClient.InputBarcodeEnd(Data, NotifyParameters);
 	EndIf;
 EndProcedure
+
+#EndRegion
+
+#Region Public
 
 &AtClient
 Procedure BeforePayment(Object, Cancel, AddInfo = Undefined) Export
@@ -33,3 +39,5 @@ Procedure PrintLastReceipt(Object, Cancel, AddInfo = Undefined) Export
 	PrintForm.Open();
 	
 EndProcedure
+
+#EndRegion

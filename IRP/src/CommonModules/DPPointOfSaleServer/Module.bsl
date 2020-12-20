@@ -1,4 +1,6 @@
 
+#Region EventHandlers
+
 Procedure AfterPostingDocument(Ref, AddInfo = Undefined) Export
 	Return;
 EndProcedure
@@ -6,6 +8,10 @@ EndProcedure
 Procedure BeforePostingDocument(Object, AddInfo = Undefined) Export
 	Return;
 EndProcedure
+
+#EndRegion
+
+#Region Public
 
 Function GetLastRetailSalesReceiptDoc(AddInfo = Undefined) Export
 	Query = New Query;
@@ -40,3 +46,5 @@ Function GetRetailSalesReceiptPrint(Workstation, Ref, AddInfo = Undefined) Expor
 	EndIf;		
 	Return Documents.RetailSalesReceipt.GetPrintForm(Ref, PrintTemplate, "POS");	
 EndFunction
+
+#EndRegion

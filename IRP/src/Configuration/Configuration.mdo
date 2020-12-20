@@ -468,6 +468,7 @@
   <commonForms>CommonForm.ShareToUsers</commonForms>
   <commonForms>CommonForm.EditTax</commonForms>
   <commonForms>CommonForm.DataMappingForm</commonForms>
+  <commonForms>CommonForm.PrintForm</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
@@ -610,6 +611,7 @@
   <enums>Enum.MetadataTypes</enums>
   <enums>Enum.MetadataSubtype</enums>
   <enums>Enum.Rights</enums>
+  <enums>Enum.PrintTemplateTypes</enums>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>

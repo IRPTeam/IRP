@@ -308,6 +308,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_088", NStr("en = 'Basis unit has to be filled, if item filter used.'", Lang));
 	
 	Strings.Insert("Error_089", NStr("en = 'Description%1 ""%2"" is already in use.'", Lang));
+	Strings.Insert("Error_090", NStr("en = '%1 is undefined.'", Lang));
 	
 	// %1 - Boots
 	// %2 - Red XL

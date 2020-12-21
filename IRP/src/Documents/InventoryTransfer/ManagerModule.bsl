@@ -4,14 +4,23 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("TransferOrderBalance", PostingServer.CreateTable(AccReg.TransferOrderBalance));
-	Tables.Insert("StockReservation_Expense", AccReg.StockReservation);
-	Tables.Insert("StockReservation_Receipt", AccReg.StockReservation);
-	Tables.Insert("StockBalance_Expense", AccReg.StockBalance);
-	Tables.Insert("StockBalance_Receipt", AccReg.StockBalance);
-	Tables.Insert("StockBalance_Transit", AccReg.StockBalance);
-	Tables.Insert("GoodsInTransitIncoming", AccReg.GoodsInTransitIncoming);
-	Tables.Insert("GoodsInTransitOutgoing", AccReg.GoodsInTransitOutgoing);
+	Tables.Insert("TransferOrderBalance"     , PostingServer.CreateTable(AccReg.TransferOrderBalance));
+	Tables.Insert("StockReservation_Expense" , PostingServer.CreateTable(AccReg.StockReservation));
+	Tables.Insert("StockReservation_Receipt" , PostingServer.CreateTable(AccReg.StockReservation));
+	Tables.Insert("StockBalance_Expense"     , PostingServer.CreateTable(AccReg.StockBalance));
+	Tables.Insert("StockBalance_Receipt"     , PostingServer.CreateTable(AccReg.StockBalance));
+	Tables.Insert("StockBalance_Transit"     , PostingServer.CreateTable(AccReg.StockBalance));
+	Tables.Insert("GoodsInTransitIncoming"   , PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
+	Tables.Insert("GoodsInTransitOutgoing"   , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
+	
+	Tables.Insert("StockReservation_Exists" , PostingServer.CreateTable(AccReg.StockReservation));
+	Tables.Insert("StockBalance_Exists"     , PostingServer.CreateTable(AccReg.StockBalance));
+	
+	Tables.StockReservation_Exists = 
+	AccumulationRegisters.StockReservation.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
+	
+	Tables.StockBalance_Exists = 
+	AccumulationRegisters.StockBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
 	
 	QueryItemList = New Query();
 	QueryItemList.Text = GetQueryTextInventoryTransferItemList();
@@ -26,14 +35,14 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("QueryTable", QueryTableItemList);
 	QueryResults = Query.ExecuteBatch();
 	
-	Tables.TransferOrderBalance = QueryResults[1].Unload();
+	Tables.TransferOrderBalance     = QueryResults[1].Unload();
 	Tables.StockReservation_Expense = QueryResults[2].Unload();
 	Tables.StockReservation_Receipt = QueryResults[4].Unload();
-	Tables.StockBalance_Expense = QueryResults[5].Unload();
-	Tables.StockBalance_Receipt = QueryResults[3].Unload();
-	Tables.GoodsInTransitIncoming = QueryResults[6].Unload();
-	Tables.GoodsInTransitOutgoing = QueryResults[7].Unload();
-	Tables.StockBalance_Transit = QueryResults[8].Unload();
+	Tables.StockBalance_Expense     = QueryResults[5].Unload();
+	Tables.StockBalance_Receipt     = QueryResults[3].Unload();
+	Tables.GoodsInTransitIncoming   = QueryResults[6].Unload();
+	Tables.GoodsInTransitOutgoing   = QueryResults[7].Unload();
+	Tables.StockBalance_Transit     = QueryResults[8].Unload();
 	
 	Header = New Structure();
 	Header.Insert("StoreReceiverUseGoodsReceipt", Ref.StoreReceiver.UseGoodsReceipt);
@@ -355,7 +364,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			New Structure("RecordType, RecordSet, WriteInTransaction",
 				AccumulationRecordType.Expense,
 				Parameters.DocumentDataTables.StockReservation_Expense,
-				Parameters.IsReposting));
+				True));
 		
 		
 		// GoodsInTransitIncoming (Receiver) GoodsInTransitIncoming [Receipt]
@@ -380,7 +389,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			New Structure("RecordType, RecordSet, WriteInTransaction",
 				AccumulationRecordType.Expense,
 				Parameters.DocumentDataTables.StockReservation_Expense,
-				Parameters.IsReposting));
+				True));
 		
 		// GoodsInTransitIncoming (Receiver) GoodsInTransitIncoming [Receipt]
 		PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitIncoming,
@@ -406,7 +415,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
 			New Structure("RecordSet, WriteInTransaction",
 				PostingServer.JoinTables(ArrayOfTables, "RecordType, Period, Store, ItemKey, Quantity"),
-				Parameters.IsReposting));
+				True));
 		
 	ElsIf Not Parameters.DocumentDataTables.Header.StoreReceiverUseGoodsReceipt
 		And Parameters.DocumentDataTables.Header.StoreSenderUseShipmentConfirmation Then
@@ -428,14 +437,14 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockReservation,
 			New Structure("RecordSet, WriteInTransaction",
 				PostingServer.JoinTables(ArrayOfTables, "RecordType, Period, Store, ItemKey, Quantity"),
-				Parameters.IsReposting));
+				True));
 		
 		// StockBalance (Receiver) StockBalance_Receipt [Receipt]
 		PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
 			New Structure("RecordType, RecordSet, WriteInTransaction",
 				AccumulationRecordType.Receipt,
 				Parameters.DocumentDataTables.StockBalance_Receipt,
-				Parameters.IsReposting));
+				True));
 		
 		// GoodsInTransitOutgoing (Sender) GoodsInTransitOutgoing [Receipt] 
 		PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitOutgoing,
@@ -464,7 +473,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockReservation,
 			New Structure("RecordSet, WriteInTransaction",
 				PostingServer.JoinTables(ArrayOfTables, "RecordType, Period, Store, ItemKey, Quantity"),
-				Parameters.IsReposting));
+				True));
 		
 		
 		// StockBalance (Sender and Receiver) 
@@ -484,7 +493,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
 			New Structure("RecordSet, WriteInTransaction",
 				PostingServer.JoinTables(ArrayOfTables, "RecordType, Period, Store, ItemKey, Quantity"),
-				Parameters.IsReposting));
+				True));
 		
 	EndIf;
 	
@@ -492,7 +501,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 EndFunction
 
 Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
+	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
 EndProcedure
 
 #EndRegion
@@ -500,11 +509,22 @@ EndProcedure
 #Region Undoposting
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return Undefined;
+	Return PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return Undefined;
+	DocumentDataTables = Parameters.DocumentDataTables;
+	DataMapWithLockFields = New Map();
+	
+	// StockReservation
+	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation_Exists);
+	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
+	
+	// StockBalance
+	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Exists);
+	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
+	
+	Return DataMapWithLockFields;
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -512,8 +532,19 @@ Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefin
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return;
+	Parameters.Insert("Unposting", True);
+	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
 EndProcedure
 
 #EndRegion
 
+#Region CheckAfterWrite
+
+Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+	If Not (Parameters.Property("Unposting") And Parameters.Unposting) Then
+		Parameters.Insert("RecordType", AccumulationRecordType.Expense);
+	EndIf;
+	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.InventoryTransfer.ItemList", AddInfo);
+EndProcedure
+
+#EndRegion

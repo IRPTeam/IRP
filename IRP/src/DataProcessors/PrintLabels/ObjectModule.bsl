@@ -66,6 +66,9 @@ Procedure FillAtServer(Object, Form) Export
 	|	ItemTable.Unit,
 	|	ItemTable.Barcode,
 	|	1 AS Quantity,
+	|	ItemTable.ItemKey.Unit AS ItemKeyUnit,
+	|	ItemTable.ItemKey.Unit AS ItemUnit,
+	|	NOT ItemTable.ItemKey.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
 	|	ISNULL(PriceTable.Price, 0) AS Price
 	|FROM
 	|	ItemTable AS ItemTable

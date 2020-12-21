@@ -3512,7 +3512,7 @@ Scenario: _0154190 check filling in Retail sales receipt when copying
 			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '520'    |
 			| 'Reporting currency' | 'Reporting'    | 'TRY'           | 'USD'      | '0,1712'            | '1'            | '89,02'  |
 		Then the form attribute named "BusinessUnit" became equal to "Shop 01"
-		Then the form attribute named "Author" became equal to "en description is empty"
+		Then the form attribute named "Author" became equal to "CI"
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "Manager" became equal to ""
 		Then the form attribute named "Currency" became equal to "TRY"

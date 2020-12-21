@@ -24,57 +24,24 @@
       <param name="env.RunSaasMode" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.SaasTag" value="SaasPrepare" />
       <param name="env.SonarParamCover" value="" />
+      <param name="env.StartDebug" value="true" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.StopOnError" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.StreamCount" value="3" />
       <param name="env.TR_Bank_Key" value="credentialsJSON:8036a633-0c14-4d64-991c-b98b36c82dd1" spec="password display='normal' readOnly='true'" />
-      <param name="env.TagsFullList" value="&quot;Discount&quot;, &quot;Forms&quot;, &quot;FillingDocuments&quot;, &quot;CreationBasedMulti&quot;, &quot;Other&quot;, &quot;CashManagement&quot;, &quot;Inventory&quot;, &quot;BankCashDocuments&quot;, &quot;Filters&quot;, &quot;Purchase&quot;, &quot;AdditionalAttributes&quot;, &quot;UserSettings&quot;, &quot;Sales&quot;, &quot;LinkedTransaction&quot;, &quot;AgingAndCreditLimit&quot;, &quot;RetailDocuments&quot;, &quot;PartnerCatalogs&quot;, &quot;InfoMessages&quot;, &quot;ExtensionReportForm&quot;, &quot;ContactInformation&quot;, &quot;DocumentVerification&quot;, &quot;StandartAgreement&quot;, &quot;AccessRights&quot;, &quot;ItemCatalogs&quot;, &quot;PhysicalInventory&quot;, &quot;Price&quot;, &quot;SerialLotNumber&quot;, &quot;InputBySearchInLine&quot;, &quot;LoadInfo&quot;, &quot;Services&quot;, &quot;SettingsCatalogs&quot;, &quot;BasicFormsCheck&quot;, &quot;OpeningEntries&quot;, &quot;ProcurementDataProc&quot;, &quot;InventoryTransfer&quot;, &quot;UserCatalogs&quot;, &quot;CompanyCatalogs&quot;, &quot;TaxCalculation&quot;, &quot;PrintForm&quot;, &quot;CurrencyRate&quot;, &quot;Barcodes&quot;" />
+      <param name="env.TagsFullList" value="&quot;Discount&quot;, &quot;StockControl&quot;, &quot;Forms&quot;, &quot;FillingDocuments&quot;, &quot;CreationBasedMulti&quot;, &quot;Other&quot;, &quot;CashManagement&quot;, &quot;Inventory&quot;, &quot;BankCashDocuments&quot;, &quot;Filters&quot;, &quot;Purchase&quot;, &quot;AdditionalAttributes&quot;, &quot;UserSettings&quot;, &quot;Sales&quot;, &quot;LinkedTransaction&quot;, &quot;AgingAndCreditLimit&quot;, &quot;RetailDocuments&quot;, &quot;PartnerCatalogs&quot;, &quot;InfoMessages&quot;, &quot;ExtensionReportForm&quot;, &quot;ContactInformation&quot;, &quot;DocumentVerification&quot;, &quot;StandartAgreement&quot;, &quot;AccessRights&quot;, &quot;ItemCatalogs&quot;, &quot;PhysicalInventory&quot;, &quot;Price&quot;, &quot;SerialLotNumber&quot;, &quot;InputBySearchInLine&quot;, &quot;LoadInfo&quot;, &quot;Services&quot;, &quot;SettingsCatalogs&quot;, &quot;BasicFormsCheck&quot;, &quot;OpeningEntries&quot;, &quot;ProcurementDataProc&quot;, &quot;InventoryTransfer&quot;, &quot;UserCatalogs&quot;, &quot;CompanyCatalogs&quot;, &quot;TaxCalculation&quot;, &quot;PrintForm&quot;, &quot;CurrencyRate&quot;, &quot;Barcodes&quot;" />
       <param name="env.VA.FeaturePath" value="%teamcity.build.workingDir%/features/" />
       <param name="env.VA_PID" value="" />
       <param name="env.dbgs_PID" value="" />
     </parameters>
     <build-runners>
-      <runner id="RUNNER_69" name="Set env" type="jetbrains_powershell">
-        <parameters>
-          <param name="jetbrains_powershell_execution" value="PS1" />
-          <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code"><![CDATA[echo "BranchToStartVA %env.BranchToStartVA%"
-echo "teamcity.pullRequest.target.branch %teamcity.pullRequest.target.branch%"
-echo "teamcity.build.branch %teamcity.build.branch%"
-$VA_Tags = ""
-
-if('%teamcity.pullRequest.target.branch%' -eq '%env.BranchToStartVA%')
-{
-	$SonarParamCover = "-Dsonar.coverageReportPaths=%system.teamcity.build.workingDir%/Cover.xml"
- 	$InfobaseName = "%env.Database1CName%_%teamcity.pullRequest.target.branch%_pull%teamcity.pullRequest.number%"
-    
-}
-elseif('%teamcity.build.branch%' -eq '%env.BranchToStartVA%')
-{
-	$SonarParamCover = "-Dsonar.coverageReportPaths=%system.teamcity.build.workingDir%/Cover.xml"
-	$InfobaseName = "%env.Database1CName%_%teamcity.build.branch%"
-    
-}
-else
-{
-	$SonarParamCover = "-Dsonar.coverageReportPaths=%system.teamcity.build.workingDir%/Cover.xml"
-	$InfobaseName = "%env.Database1CName%_%teamcity.build.branch%"
-}
-
-$InfobaseName = $InfobaseName -replace "\\", "_" 
-$InfobaseName = $InfobaseName -replace "\/", "_" 
-$InfobaseName = $InfobaseName -replace "\-", "_"
-
-echo "##teamcity[setParameter name='env.Database1CName' value='$InfobaseName']"
-echo "##teamcity[setParameter name='env.SonarParamCover' value='$SonarParamCover']"]]></param>
-          <param name="jetbrains_powershell_script_mode" value="CODE" />
-          <param name="teamcity.step.mode" value="default" />
-        </parameters>
-      </runner>
       <runner id="RUNNER_31" name="Copy add data  proc from tools" type="jetbrains_powershell">
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code" value="Copy-Item -Path &quot;%teamcity.tool.ExtDataProc%/*&quot; -Destination &quot;%teamcity.build.workingDir%/DataProcessor&quot;" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[Copy-Item -Path "%teamcity.tool.ExtDataProc%/*" -Destination "%teamcity.build.workingDir%/DataProcessor"
+
+New-Item %system.teamcity.build.workingDir%/Cover.xml
+Set-Content %system.teamcity.build.workingDir%/Cover.xml "<coverage version=""1""/>"]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>
@@ -99,6 +66,9 @@ rd /q /s "%%userprofile%%\AppData\Roaming\1C\1Cv8\"]]></param>
         </parameters>
       </runner>
       <runner id="RUNNER_55" name="Start debug" type="jetbrains_powershell">
+        <conditions>
+          <equals name="env.StartDebug" value="true" />
+        </conditions>
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
@@ -118,6 +88,9 @@ echo "##teamcity[setParameter name='env.dbgs_PID' value='$dbgs_PID']"]]></param>
         </parameters>
       </runner>
       <runner id="RUNNER_14" name="Start Coverage" type="simpleRunner">
+        <conditions>
+          <equals name="env.StartDebug" value="true" />
+        </conditions>
         <parameters>
           <param name="script.content"><![CDATA[coverage-cli start --infobase DefAlias  --debugger http://localhost:%env.DebugPort% --output %system.teamcity.build.workingDir%/Cover.csv > "%system.teamcity.build.tempDir%\Cover.Log"
 rem coverage-cli start --infobase %env.Database1CName%  --debugger http://localhost:%env.DebugPort% --output %system.teamcity.build.workingDir%/Cover.csv > "%system.teamcity.build.tempDir%\Cover.Log"]]></param>
@@ -474,11 +447,11 @@ $VanessaRun = {
     Write-Output "$startPort - $portmax"
     $allurePath = "%system.teamcity.build.workingDir%/allure" | ForEach-Object { $_ -replace '\\', '/' }
     if ($RunSaasMode -and $elementTag -eq "%env.SaasTag%") {
-        $TempDb = "/F%system.teamcity.build.workingDir%\TempDB" | ForEach-Object { $_ -replace '\\', '/' } 
+        $TempDb = "/F%system.teamcity.build.workingDir%\AllSteps\Template" | ForEach-Object { $_ -replace '\\', '/' } 
         Write-Output "Run first setup in $TempDb"
     } else {
         if($RunSaasMode){
-            $TempDb = "/F%system.teamcity.build.workingDir%\TempDB" | ForEach-Object { $_ -replace '\\', '/' } 
+            $TempDb = "/F%system.teamcity.build.workingDir%\AllSteps\Template" | ForEach-Object { $_ -replace '\\', '/' } 
             $AreaID = "/Z $CurrentID"
             Write-Output "Run DB in $TempDb /Z $CurrentID in SaaS mode"
 
@@ -490,8 +463,15 @@ $VanessaRun = {
         }
     }
     #$TempDb = "'/Slocalhost/%env.Database1CName%'" | ForEach-Object { $_ -replace '\\', '/' }
-     
-    $connection = "' $AreaID /N %env.LoginTo1C% /P %env.PassTo1C% /Len /UseHwLicenses+ /TComp -SDC  /DisableStartupMessages /DisplayPerformance /DisplayAllFunctions /EnableCheckModal /EnableCheckExtensionsAndAddInsSyncCalls /DEBUG -http -attach /DEBUGGERURL http://localhost:%env.DebugPort%'"
+    
+    $UseDebug = $%env.StartDebug% 
+    $DebugString = ""
+    If ($UseDebug){
+    	$DebugString = "/DEBUG -http -attach /DEBUGGERURL http://localhost:%env.DebugPort%"
+    }
+    
+    $connection = "' $AreaID /N %env.LoginTo1C% /P %env.PassTo1C% /Len /UseHwLicenses+ /TComp -SDC  /DisableStartupMessages /DisplayPerformance /DisplayAllFunctions /EnableCheckModal /EnableCheckExtensionsAndAddInsSyncCalls $DebugString'"
+    
     $TempDbJson = "'$TempDb'"
     $text = "{
     'AllureReport': {
@@ -1156,6 +1136,9 @@ Start-Sleep -s 5]]></param>
         </parameters>
       </runner>
       <runner id="RUNNER_4" name="Cover stop" type="simpleRunner">
+        <conditions>
+          <equals name="env.StartDebug" value="true" />
+        </conditions>
         <parameters>
           <param name="script.content" value="coverage-cli stop -p %env.PID_ID%" />
           <param name="teamcity.step.mode" value="execute_always" />
@@ -1185,6 +1168,9 @@ Start-Sleep 10]]></param>
         </parameters>
       </runner>
       <runner id="RUNNER_16" name="Cover convert" type="simpleRunner">
+        <conditions>
+          <equals name="env.StartDebug" value="true" />
+        </conditions>
         <parameters>
           <param name="script.content" value="coverage-cli convert --input %system.teamcity.build.workingDir%/Cover.csv --output  %system.teamcity.build.workingDir%/Cover.xml --sources IRP\src --format EDT &amp; powershell -command &quot;(Get-Content %system.teamcity.build.workingDir%/Cover.xml) | ForEach-Object { $_ -replace '\\', '/' } | Set-Content %system.teamcity.build.workingDir%/Cover.xml&quot;" />
           <param name="teamcity.step.mode" value="execute_always" />
@@ -1207,8 +1193,16 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code"><![CDATA[Compress-Archive -Path AllSteps\* -DestinationPath %teamcity.project.id%.zip
-Compress-Archive -Path Cover.xml -DestinationPath Cover.zip]]></param>
+          <param name="jetbrains_powershell_script_code" value="Compress-Archive -Path AllSteps\* -DestinationPath %teamcity.project.id%.zip" />
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
+          <param name="teamcity.step.mode" value="execute_always" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_71" name="Zip cover file" type="jetbrains_powershell">
+        <parameters>
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code" value="Compress-Archive -Path Cover.xml -DestinationPath Cover.zip" />
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="execute_always" />
         </parameters>

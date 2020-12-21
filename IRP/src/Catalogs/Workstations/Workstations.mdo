@@ -76,6 +76,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="3fcb5091-199a-479b-864a-c80c0880e742">
+    <name>PrintTemplate</name>
+    <synonym>
+      <key>en</key>
+      <value>Print template</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.PrintTemplates</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="31aae4b9-cf91-4ffc-861f-348ec53883c9">
     <producedTypes>
       <objectType typeId="db70d75b-9ed3-4ca7-9b8e-7b1c0d5d1cfe" valueTypeId="dc6b2db3-466c-42fe-990f-bcd1bb236cad"/>

@@ -9,5 +9,6 @@
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Catalog.Hardware</content>
   <content>Catalog.EquipmentDrivers</content>
+  <content>Catalog.Workstations</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

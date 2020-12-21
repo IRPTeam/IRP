@@ -778,9 +778,7 @@ Scenario: Create document Unbundling objects
 		| 'e1cib/data/Document.Unbundling?ref=aa78120ed92fbced11eaf11df09c894b' | '776a0d92-078c-4236-bc89-a27877331722' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '1'        |
 		| 'e1cib/data/Document.Unbundling?ref=aa78120ed92fbced11eaf11df09c894b' | '100877b7-5772-4487-aa3b-27be07f95a37' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf11df09c894a' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '2'        |
 		| 'e1cib/data/Document.Unbundling?ref=aa78120ed92fbced11eaf11df09c894b' | '0da85fa0-30c7-4966-addd-de6a2d000b95' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fe' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '2'        |
-<<<<<<< Updated upstream
-		
-=======
+
 
 Scenario: Create document OpeningEntry objects (stock)
 
@@ -828,6 +826,7 @@ Scenario: Create document OpeningEntry objects (stock)
 
 
 
+
 Scenario: Create document GoodsReceipt objects (for stock remaining control)
 
 	And I check or create document "GoodsReceipt" objects:
@@ -857,4 +856,4 @@ Scenario: Create document PurchaseInvoice objects (for stock remaining control)
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb41477b470651' | 'b2678444-8eeb-44a0-a93b-1f3b680022f2' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '1'      | '1'           | 'No'              | '1'            | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | '122 720'   |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb41477b470651' | 'b2678444-8eeb-44a0-a93b-1f3b680022f2' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '1'      | '1'           | 'No'              | '1'            | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d' | '122 720'   |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b75dad46e66c4c2c11eb41477b470651' | 'b2678444-8eeb-44a0-a93b-1f3b680022f2' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '0,1712' | '5,8411'      | 'No'              | '1'            | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e' | '21 009,66' |
->>>>>>> Stashed changes
+

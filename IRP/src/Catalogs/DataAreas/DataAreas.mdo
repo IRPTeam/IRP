@@ -134,7 +134,7 @@
     <name>AdminLogin</name>
     <synonym>
       <key>en</key>
-      <value>Admin login</value>
+      <value>Login</value>
     </synonym>
     <type>
       <types>String</types>
@@ -156,7 +156,7 @@
     <name>AdminPassword</name>
     <synonym>
       <key>en</key>
-      <value>Admin password</value>
+      <value>Password</value>
     </synonym>
     <type>
       <types>String</types>
@@ -177,7 +177,7 @@
     <name>AdminLocalization</name>
     <synonym>
       <key>en</key>
-      <value>Admin localization</value>
+      <value>Localization</value>
     </synonym>
     <type>
       <types>String</types>
@@ -188,6 +188,28 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="eb5be1a5-fce6-49c0-b03b-ee5645a5f908">
+    <name>InterfaceLocalizationCode</name>
+    <synonym>
+      <key>en</key>
+      <value>Interface</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>5</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:StringValue">
       <value></value>
     </fillValue>
@@ -214,52 +236,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="32d65d8e-e142-4be2-849c-8fbe1ae5e471">
-    <name>CompanyLocalization</name>
-    <synonym>
-      <key>en</key>
-      <value>Company localization</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>2</length>
-        <fixed>true</fixed>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <tabularSections uuid="3ae27745-18a9-4e6e-ad18-252d15819e8d">
-    <producedTypes>
-      <objectType typeId="73e1b7e5-274a-4bd3-a177-436179d86d59" valueTypeId="d93aab2f-0985-4fa6-8c5c-baabaaf89168"/>
-      <rowType typeId="0099b2e5-f10e-4742-a90f-386e53ad6774" valueTypeId="ab9b1b7a-70c7-4787-ab16-a0453396c362"/>
-    </producedTypes>
-    <name>Extensions</name>
-    <synonym>
-      <key>en</key>
-      <value>Extensions</value>
-    </synonym>
-    <attributes uuid="25a918ec-8f5c-4681-a9cd-9be04f19d329">
-      <name>Extension</name>
-      <synonym>
-        <key>en</key>
-        <value>Extension</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Extensions</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
   <forms uuid="4595f5e6-379f-4749-9857-2ee6be27244b">
     <name>ItemForm</name>
     <synonym>
@@ -297,11 +273,20 @@
       <key>en</key>
       <value>Log out from area</value>
     </synonym>
-    <group>FormCommandBarImportant</group>
-    <commandParameterType>
-      <types>CatalogRef.DataAreas</types>
-    </commandParameterType>
+    <group>NavigationPanelOrdinary</group>
     <representation>Auto</representation>
     <shortcut></shortcut>
+  </commands>
+  <commands uuid="f11e090e-06b6-40ca-bf8b-4266cf467009">
+    <name>UpdateAreas</name>
+    <synonym>
+      <key>en</key>
+      <value>Update areas</value>
+    </synonym>
+    <group>ActionsPanelTools</group>
+    <representation>PictureAndText</representation>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.AppearanceFlagGreen</picture>
+    </picture>
   </commands>
 </mdclass:Catalog>

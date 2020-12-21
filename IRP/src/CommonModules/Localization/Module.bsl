@@ -308,6 +308,16 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_088", NStr("en = 'Basis unit has to be filled, if item filter used.'", Lang));
 	
 	Strings.Insert("Error_089", NStr("en = 'Description%1 ""%2"" is already in use.'", Lang));
+	Strings.Insert("Error_090", NStr("en = '%1 is undefined.'", Lang));
+	
+	// %1 - Boots
+	// %2 - Red XL
+	// %3 - ordered
+	// %4 - 11
+	// %5 - 15
+	// %6 - 4
+	// %7 - pcs
+	Strings.Insert("Error_090", NStr("en = '[%1 %2] %3 remaining: %4 %7. Required: %5 %7. Lacking: %6 %7.'", Lang));
 	
 	#EndRegion
 	
@@ -433,6 +443,8 @@ Function Strings(Lang) Export
 	
 	// %1 - en
 	Strings.Insert("Saas_003", NStr("en = 'Localization %1 of the company is not available.'", Lang));
+	
+	Strings.Insert("Saas_004", NStr("en = 'Area preparation completed'", Lang));
 	#EndRegion
 	
 	#Region FillingFromClassifiers

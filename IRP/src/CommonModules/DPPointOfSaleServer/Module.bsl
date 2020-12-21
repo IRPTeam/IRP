@@ -1,4 +1,6 @@
 
+#Region EventHandlers
+
 Procedure AfterPostingDocument(Ref, AddInfo = Undefined) Export
 	Return;
 EndProcedure
@@ -6,6 +8,10 @@ EndProcedure
 Procedure BeforePostingDocument(Object, AddInfo = Undefined) Export
 	Return;
 EndProcedure
+
+#EndRegion
+
+#Region Public
 
 Function GetLastRetailSalesReceiptDoc(AddInfo = Undefined) Export
 	Query = New Query;
@@ -31,8 +37,14 @@ Function GetLastRetailSalesReceiptDoc(AddInfo = Undefined) Export
 	Return Documents.RetailSalesReceipt.EmptyRef();
 EndFunction
 
-Function GetRetailSalesReceiptPrint(Ref, AddInfo = Undefined) Export
-	
-	Return Documents.RetailSalesReceipt.GetPrintForm(Ref, "POS");
-	
+Function GetRetailSalesReceiptPrint(Workstation, Ref, AddInfo = Undefined) Export	
+	TemplateStructure = Workstation.PrintTemplate.ValueOfTemplate.Get();
+	If TemplateStructure = Undefined Then
+		Return New SpreadsheetDocument();
+	Else		
+		PrintTemplate = TemplateStructure.Spreadsheet;
+	EndIf;		
+	Return Documents.RetailSalesReceipt.GetPrintForm(Ref, PrintTemplate, "POS");	
 EndFunction
+
+#EndRegion

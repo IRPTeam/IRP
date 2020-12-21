@@ -3,6 +3,8 @@ Procedure BeforeWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
+	
+	DataExchange.Load = True;
 EndProcedure
 
 Procedure OnWrite(Cancel)

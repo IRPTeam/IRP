@@ -28,16 +28,11 @@ EndProcedure
 
 &AtServer
 Procedure FillRecordTypeChoiceList()
-	isSaasMode = Saas.isSaasMode();
 	ThisObject.Items.RecordType.ChoiceList.Add("All", R().CLV_1);
-	If Not isSaasMode Then
-		ThisObject.Items.RecordType.ChoiceList.Add("ItemKey", Metadata.Catalogs.ItemKeys.ObjectPresentation);
-	EndIf;
+	ThisObject.Items.RecordType.ChoiceList.Add("ItemKey", Metadata.Catalogs.ItemKeys.ObjectPresentation);
 	ThisObject.Items.RecordType.ChoiceList.Add("Item", Metadata.Catalogs.Items.ObjectPresentation);
 	ThisObject.Items.RecordType.ChoiceList.Add("ItemType", Metadata.Catalogs.ItemTypes.ObjectPresentation);
-	If Not isSaasMode Then
-		ThisObject.Items.RecordType.ChoiceList.Add("Agreement", Metadata.Catalogs.Agreements.ObjectPresentation);
-	EndIf;
+	ThisObject.Items.RecordType.ChoiceList.Add("Agreement", Metadata.Catalogs.Agreements.ObjectPresentation);
 EndProcedure
 
 &AtServer

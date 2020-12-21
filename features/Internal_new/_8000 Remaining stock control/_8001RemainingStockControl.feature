@@ -1877,7 +1877,7 @@ Scenario:_800046 check remaining stock control when unpost/change Inventory tran
 	* Try to post Inventory transfer order (no balance to write off), status Wait
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I select "Wait" exact value from "Status" drop-down list
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then system warning window does not appear
 		Then user message window does not contain messages		
 	* Change store and post Inventory transfer order with status Approved
@@ -1892,7 +1892,7 @@ Scenario:_800046 check remaining stock control when unpost/change Inventory tran
 			| 'Store 03'    |
 		And I select current line in "List" table
 		And I select "Approved" exact value from "Status" drop-down list
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I move to "Item list" tab
@@ -1902,7 +1902,7 @@ Scenario:_800046 check remaining stock control when unpost/change Inventory tran
 		| 'Shirt' | '36/Red' |
 		And I select current line in "ItemList" table
 		And I input "20,000" text in "Quantity" field of "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then system warning window does not appear
 		Then user message window does not contain messages
 	* Try post Sales order (reserve)
@@ -1947,12 +1947,12 @@ Scenario:_800046 check remaining stock control when unpost/change Inventory tran
 		And I activate "Q" field in "ItemList" table
 		And I input "5,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Then I wait that in user messages the "Line No. [1] [Shirt 38/Black] Reservation remaining: 0 . Required: 5 . Lacking: 5 ." substring will appear in 10 seconds
 		And I select "Wait" exact value from "Status" drop-down list
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then system warning window does not appear
 		Then user message window does not contain messages
 	* Change inventory transfer order and try post SO (status Approved)
@@ -1964,7 +1964,7 @@ Scenario:_800046 check remaining stock control when unpost/change Inventory tran
 		And I select current line in "ItemList" table
 		And I input "15,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then system warning window does not appear
 		Then user message window does not contain messages
 		And I close all client application windows
@@ -2004,7 +2004,7 @@ Scenario:_800048 check remaining stock control when unpost/change Inventory tran
 		And I activate "Quantity" field in "ItemList" table
 		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Then I wait that in user messages the "Line No. [1] [Shirt 38/Black] Reservation remaining: 0 . Required: 5 . Lacking: 5 ." substring will appear in 10 seconds
@@ -2014,7 +2014,7 @@ Scenario:_800048 check remaining stock control when unpost/change Inventory tran
 			| 'Number' |
 			| '$$NumberInventoryTransferOrder1$$'   |
 		And I click the button named "FormDocumentInventoryTransferGenerateInventoryTransfer"
-		And I click "Post" button
+		And I click the button named "FormPost"
 		And I delete "$$NumberInventoryTransfer2$$" variable
 		And I save the value of "Number" field as "$$NumberInventoryTransfer2$$"
 		Then system warning window does not appear

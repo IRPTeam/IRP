@@ -2002,12 +2002,12 @@ Scenario:_800048 check remaining stock control when unpost/change Inventory tran
 		And I activate "Item key" field in "List" table
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
-		And I input "5,000" text in "Quantity" field of "ItemList" table
+		And I input "25,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [1] [Shirt 38/Black] Reservation remaining: 0 . Required: 5 . Lacking: 5 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [1] [Shirt 38/Black] Reservation remaining: 5 . Required: 25 . Lacking: 20 ." substring will appear in 10 seconds
 	* Create Inventory transfer based on Inventory transfer order
 		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"	
 		And I go to line in "List" table
@@ -2064,12 +2064,12 @@ Scenario:_800048 check remaining stock control when unpost/change Inventory tran
 		And I activate "Item key" field in "List" table
 		And I select current line in "List" table
 		And I activate "Q" field in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "15,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [1] [Shirt 38/Black] Reservation remaining: 0 . Required: 5 . Lacking: 5 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [1] [Shirt 38/Black] Reservation remaining: 5 . Required: 15 . Lacking: 10 ." substring will appear in 10 seconds
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description' |

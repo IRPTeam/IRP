@@ -794,6 +794,9 @@ Scenario: Create document OpeningEntry objects (stock)
 		| 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340' | 'b0e7bfa1-d4bb-4071-be0c-067b55999754' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c60e' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc92' | '100'      |
 		| 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340' | 'a9108d8d-5bb0-4fe3-b085-fde6088328ba' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc93' | '50'       |
 		| 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340' | '34a83698-d2bd-49b5-96b8-c1572efb2063' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c60e' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc93' | '100'      |
+		| 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340' | 'ae0c6013-73f6-4455-a1c2-48cfd6b8127a' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fb' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df444' | '120'      |
+		| 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340' | 'e2151488-7e07-49ad-93f0-060a19e8899c' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c602' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | '20'       |
+		| 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340' | 'e7e953f5-9336-4fa3-94ce-27f5d637507b' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c603' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | '20'       |
 
 	And I check or create accumulation register "InventoryBalance" records:
 		| 'Period'              | 'Recorder'                                                                 | 'LineNumber' | 'Active' | 'RecordType' | 'Company'                                                           | 'ItemKey'                                                          | 'Quantity' |
@@ -803,6 +806,10 @@ Scenario: Create document OpeningEntry objects (stock)
 		| '17.12.2020 11:41:04' | 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340'    | '4'          | 'Yes'    | 'Receipt'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c60e' | '100'      |
 		| '17.12.2020 11:41:04' | 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340'    | '5'          | 'Yes'    | 'Receipt'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | '50'       |
 		| '17.12.2020 11:41:04' | 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340'    | '6'          | 'Yes'    | 'Receipt'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c60e' | '100'      |
+		| '17.12.2020 11:41:04' | 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340'    | '7'          | 'Yes'    | 'Receipt'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fb' | '120'      |
+		| '17.12.2020 11:41:04' | 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340'    | '8'          | 'Yes'    | 'Receipt'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c602' | '20'       |
+		| '17.12.2020 11:41:04' | 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340'    | '9'          | 'Yes'    | 'Receipt'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c603' | '20'       |
+
 
 	And I check or create accumulation register "StockBalance" records:
 		| 'Period'              | 'Recorder'                                                                 | 'LineNumber' | 'Active' | 'RecordType' | 'Store'                                                          | 'ItemKey'                                                          | 'Quantity' |
@@ -812,7 +819,9 @@ Scenario: Create document OpeningEntry objects (stock)
 		| '17.12.2020 11:41:04' | 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340'    | '4'          | 'Yes'    | 'Receipt'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc92' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c60e' | '100'      |
 		| '17.12.2020 11:41:04' | 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340'    | '5'          | 'Yes'    | 'Receipt'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc93' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | '50'       |
 		| '17.12.2020 11:41:04' | 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340'    | '6'          | 'Yes'    | 'Receipt'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc93' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c60e' | '100'      |
-
+		| '17.12.2020 11:41:04' | 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340'    | '7'          | 'Yes'    | 'Receipt'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df444' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fb' | '120'      |
+		| '17.12.2020 11:41:04' | 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340'    | '8'          | 'Yes'    | 'Receipt'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c602' | '20'       |
+		| '17.12.2020 11:41:04' | 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340'    | '9'          | 'Yes'    | 'Receipt'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c603' | '20'       |
 
 	And I check or create accumulation register "StockReservation" records:
 		| 'Period'              | 'Recorder'                                                                 | 'LineNumber' | 'Active' | 'RecordType' | 'Store'                                                          | 'ItemKey'                                                          | 'Quantity' |
@@ -822,8 +831,9 @@ Scenario: Create document OpeningEntry objects (stock)
 		| '17.12.2020 11:41:04' | 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340'    | '4'          | 'Yes'    | 'Receipt'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc92' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c60e' | '100'      |
 		| '17.12.2020 11:41:04' | 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340'    | '5'          | 'Yes'    | 'Receipt'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc93' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | '50'       |
 		| '17.12.2020 11:41:04' | 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340'    | '6'          | 'Yes'    | 'Receipt'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc93' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c60e' | '100'      |
-
-
+		| '17.12.2020 11:41:04' | 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340'    | '7'          | 'Yes'    | 'Receipt'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df444' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fb' | '120'      |
+		| '17.12.2020 11:41:04' | 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340'    | '8'          | 'Yes'    | 'Receipt'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c602' | '20'       |
+		| '17.12.2020 11:41:04' | 'e1cib/data/Document.OpeningEntry?ref=b75dad46e66c4c2c11eb404a0b203340'    | '9'          | 'Yes'    | 'Receipt'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c603' | '20'       |
 
 
 

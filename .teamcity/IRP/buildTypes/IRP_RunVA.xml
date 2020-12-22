@@ -9,6 +9,7 @@
       <option name="cleanBuild" value="true" />
     </options>
     <disabled-settings>
+      <setting-ref ref="BUILD_EXT_19" />
       <setting-ref ref="RUNNER_6" />
     </disabled-settings>
     <parameters>

@@ -281,7 +281,7 @@ Procedure GetTables_NotUseShipmentBeforeInvoice_IsProcMethStock_NotUseShipmentCo
 	
 	#Region QueryText
 	Query.Text = "
-		// [0] StockReservation
+		|// [0] StockReservation
 		|SELECT
 		|	tmp.Store,
 		|	tmp.ItemKey,

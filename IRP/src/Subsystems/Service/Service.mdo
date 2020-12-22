@@ -5,6 +5,7 @@
     <key>en</key>
     <value>Service</value>
   </synonym>
+  <content>DocumentJournal.AllDocuments</content>
   <subsystems>Catalogs</subsystems>
   <subsystems>Documents</subsystems>
 </mdclass:Subsystem>

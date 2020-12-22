@@ -10,6 +10,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("ShipmentConfirmationSchedule" , PostingServer.CreateTable(AccReg.ShipmentConfirmationSchedule));
 	Tables.Insert("InventoryBalance"             , PostingServer.CreateTable(AccReg.InventoryBalance));
 	Tables.Insert("StockReservation"             , PostingServer.CreateTable(AccReg.StockReservation));
+	Tables.Insert("SupplyRequestProcurement" , PostingServer.CreateTable(AccReg.SupplyRequestProcurement));
 	
 	Tables.Insert("GoodsInTransitOutgoing_Exists" , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
 	Tables.Insert("ShipmentOrders_Exists"         , PostingServer.CreateTable(AccReg.ShipmentOrders));
@@ -238,7 +239,33 @@ Procedure GetTables_NotUseSO_IsProduct(Tables, TempManager, TableName)
 		|GROUP BY
 		|	tmp.ItemKey,
 		|	tmp.Period,
-		|	CAST(tmp.ShipmentBasis AS Document.InventoryTransfer).StoreTransit";
+		|	CAST(tmp.ShipmentBasis AS Document.InventoryTransfer).StoreTransit
+		|;
+		|//[4] - SupplyRequestProcurement
+		|SELECT
+		|	tmp.Period AS Period,
+		|	tmp.Company AS Company,
+		|	tmp.Store AS Store,
+		|	tmp.ItemKey AS ItemKey,
+		|	OrderBalance.Order AS InternalSupplyRequest,
+		|	tmp.Period AS SentDate,
+		|	tmp.Quantity AS SentQuantity
+		|FROM
+		|	tmp AS tmp
+		|INNER JOIN AccumulationRegister.TransferOrderBalance AS TransferOrderBalance
+		|ON tmp.ShipmentBasis = TransferOrderBalance.Recorder
+		|	AND (TransferOrderBalance.Order REFS Document.InventoryTransferOrder)
+		|	AND (TransferOrderBalance.RecordType = VALUE(AccumulationRecordType.Expense))
+		|	AND (NOT tmp.ShipmentBasis.Date IS NULL)
+		|	AND tmp.Store = TransferOrderBalance.StoreSender
+		|	AND tmp.ItemKey = TransferOrderBalance.ItemKey
+		|INNER JOIN AccumulationRegister.OrderBalance AS OrderBalance
+		|ON (TransferOrderBalance.Order = OrderBalance.Recorder)
+		|	AND (OrderBalance.Order REFS Document.InternalSupplyRequest)
+		|	AND (OrderBalance.RecordType = VALUE(AccumulationRecordType.Expense))
+		|	AND (NOT TransferOrderBalance.Order.Date IS NULL)
+		|	AND (TransferOrderBalance.StoreReceiver = OrderBalance.Store)
+		|	AND (TransferOrderBalance.ItemKey = OrderBalance.ItemKey)";
 	
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
@@ -249,6 +276,7 @@ Procedure GetTables_NotUseSO_IsProduct(Tables, TempManager, TableName)
 	PostingServer.MergeTables(Tables.StockBalance_Expense         , QueryResults[1].Unload());
 	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule , QueryResults[2].Unload());
 	PostingServer.MergeTables(Tables.StockBalance_Receipt         , QueryResults[3].Unload());
+	PostingServer.MergeTables(Tables.SupplyRequestProcurement     , QueryResults[4].Unload());
 EndProcedure
 
 #EndRegion
@@ -349,7 +377,33 @@ Procedure GetTables_UseSO_NotSCBeforeInvoice_IsProduct(Tables, TempManager, Tabl
 		|GROUP BY
 		|	tmp.ItemKey,
 		|	tmp.Period,
-		|	CAST(tmp.ShipmentBasis AS Document.InventoryTransfer).StoreTransit";
+		|	CAST(tmp.ShipmentBasis AS Document.InventoryTransfer).StoreTransit
+		|;
+		|//[5] - SupplyRequestProcurement
+		|SELECT
+		|	tmp.Period AS Period,
+		|	tmp.Company AS Company,
+		|	tmp.Store AS Store,
+		|	tmp.ItemKey AS ItemKey,
+		|	OrderBalance.Order AS InternalSupplyRequest,
+		|	tmp.Period AS SentDate,
+		|	tmp.Quantity AS SentQuantity
+		|FROM
+		|	tmp AS tmp
+		|INNER JOIN AccumulationRegister.TransferOrderBalance AS TransferOrderBalance
+		|ON tmp.ShipmentBasis = TransferOrderBalance.Recorder
+		|	AND (TransferOrderBalance.Order REFS Document.InventoryTransferOrder)
+		|	AND (TransferOrderBalance.RecordType = VALUE(AccumulationRecordType.Expense))
+		|	AND (NOT tmp.ShipmentBasis.Date IS NULL)
+		|	AND tmp.Store = TransferOrderBalance.StoreSender
+		|	AND tmp.ItemKey = TransferOrderBalance.ItemKey
+		|INNER JOIN AccumulationRegister.OrderBalance AS OrderBalance
+		|ON (TransferOrderBalance.Order = OrderBalance.Recorder)
+		|	AND (OrderBalance.Order REFS Document.InternalSupplyRequest)
+		|	AND (OrderBalance.RecordType = VALUE(AccumulationRecordType.Expense))
+		|	AND (NOT TransferOrderBalance.Order.Date IS NULL)
+		|	AND (TransferOrderBalance.StoreReceiver = OrderBalance.Store)
+		|	AND (TransferOrderBalance.ItemKey = OrderBalance.ItemKey)";
 	
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
@@ -361,6 +415,7 @@ Procedure GetTables_UseSO_NotSCBeforeInvoice_IsProduct(Tables, TempManager, Tabl
 	PostingServer.MergeTables(Tables.ShipmentOrders               , QueryResults[2].Unload());
 	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule , QueryResults[3].Unload());
 	PostingServer.MergeTables(Tables.StockBalance_Receipt         , QueryResults[4].Unload());
+	PostingServer.MergeTables(Tables.SupplyRequestProcurement     , QueryResults[5].Unload());
 EndProcedure
 
 #EndRegion
@@ -475,8 +530,34 @@ Procedure GetTables_UseSO_SCBeforeInvoice_IsProduct(Tables, TempManager, TableNa
 		|GROUP BY
 		|	tmp.ItemKey,
 		|	tmp.Period,
-		|	CAST(tmp.ShipmentBasis AS Document.InventoryTransfer).StoreTransit";
-	
+		|	CAST(tmp.ShipmentBasis AS Document.InventoryTransfer).StoreTransit
+		|;
+		|//[6] - SupplyRequestProcurement
+		|SELECT
+		|	tmp.Period AS Period,
+		|	tmp.Company AS Company,
+		|	tmp.Store AS Store,
+		|	tmp.ItemKey AS ItemKey,
+		|	OrderBalance.Order AS InternalSupplyRequest,
+		|	tmp.Period AS SentDate,
+		|	tmp.Quantity AS SentQuantity
+		|FROM
+		|	tmp AS tmp
+		|INNER JOIN AccumulationRegister.TransferOrderBalance AS TransferOrderBalance
+		|ON tmp.ShipmentBasis = TransferOrderBalance.Recorder
+		|	AND (TransferOrderBalance.Order REFS Document.InventoryTransferOrder)
+		|	AND (TransferOrderBalance.RecordType = VALUE(AccumulationRecordType.Expense))
+		|	AND (NOT tmp.ShipmentBasis.Date IS NULL)
+		|	AND tmp.Store = TransferOrderBalance.StoreSender
+		|	AND tmp.ItemKey = TransferOrderBalance.ItemKey
+		|INNER JOIN AccumulationRegister.OrderBalance AS OrderBalance
+		|ON (TransferOrderBalance.Order = OrderBalance.Recorder)
+		|	AND (OrderBalance.Order REFS Document.InternalSupplyRequest)
+		|	AND (OrderBalance.RecordType = VALUE(AccumulationRecordType.Expense))
+		|	AND (NOT TransferOrderBalance.Order.Date IS NULL)
+		|	AND (TransferOrderBalance.StoreReceiver = OrderBalance.Store)
+		|	AND (TransferOrderBalance.ItemKey = OrderBalance.ItemKey)";
+
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
 	
@@ -488,6 +569,7 @@ Procedure GetTables_UseSO_SCBeforeInvoice_IsProduct(Tables, TempManager, TableNa
 	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule , QueryResults[3].Unload());
 	PostingServer.MergeTables(Tables.InventoryBalance             , QueryResults[4].Unload());
 	PostingServer.MergeTables(Tables.StockBalance_Receipt         , QueryResults[5].Unload());
+	PostingServer.MergeTables(Tables.SupplyRequestProcurement     , QueryResults[6].Unload());
 EndProcedure
 
 #EndRegion
@@ -569,17 +651,45 @@ Procedure GetTables_NotUseSCBasis_IsProduct(Tables, TempManager, TableName)
 		|GROUP BY
 		|	tmp.ItemKey,
 		|	tmp.Period,
-		|	CAST(tmp.ShipmentBasis AS Document.InventoryTransfer).StoreTransit";
+		|	CAST(tmp.ShipmentBasis AS Document.InventoryTransfer).StoreTransit
+		|;
+		|//[4] - SupplyRequestProcurement
+		|SELECT
+		|	tmp.Period AS Period,
+		|	tmp.Company AS Company,
+		|	tmp.Store AS Store,
+		|	tmp.ItemKey AS ItemKey,
+		|	OrderBalance.Order AS InternalSupplyRequest,
+		|	tmp.Period AS SentDate,
+		|	tmp.Quantity AS SentQuantity
+		|FROM
+		|	tmp AS tmp
+		|INNER JOIN AccumulationRegister.TransferOrderBalance AS TransferOrderBalance
+		|ON tmp.ShipmentBasis = TransferOrderBalance.Recorder
+		|	AND (TransferOrderBalance.Order REFS Document.InventoryTransferOrder)
+		|	AND (TransferOrderBalance.RecordType = VALUE(AccumulationRecordType.Expense))
+		|	AND (NOT tmp.ShipmentBasis.Date IS NULL)
+		|	AND tmp.Store = TransferOrderBalance.StoreSender
+		|	AND tmp.ItemKey = TransferOrderBalance.ItemKey
+		|INNER JOIN AccumulationRegister.OrderBalance AS OrderBalance
+		|ON (TransferOrderBalance.Order = OrderBalance.Recorder)
+		|	AND (OrderBalance.Order REFS Document.InternalSupplyRequest)
+		|	AND (OrderBalance.RecordType = VALUE(AccumulationRecordType.Expense))
+		|	AND (NOT TransferOrderBalance.Order.Date IS NULL)
+		|	AND (TransferOrderBalance.StoreReceiver = OrderBalance.Store)
+		|	AND (TransferOrderBalance.ItemKey = OrderBalance.ItemKey)";
+
 	
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
 	
 	QueryResults = Query.ExecuteBatch();
 	
-	PostingServer.MergeTables(Tables.GoodsInTransitOutgoing , QueryResults[0].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Expense   , QueryResults[1].Unload());
-	PostingServer.MergeTables(Tables.StockReservation       , QueryResults[2].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Receipt   , QueryResults[3].Unload());
+	PostingServer.MergeTables(Tables.GoodsInTransitOutgoing   , QueryResults[0].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Expense     , QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.StockReservation         , QueryResults[2].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Receipt     , QueryResults[3].Unload());
+	PostingServer.MergeTables(Tables.SupplyRequestProcurement , QueryResults[4].Unload());
 EndProcedure
 
 #EndRegion
@@ -679,6 +789,12 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.StockReservation,
 			True));
+	
+	// SupplyRequestProcurement
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.SupplyRequestProcurement,
+		New Structure("RecordSet, WriteInTransaction",
+			Parameters.DocumentDataTables.SupplyRequestProcurement,
+			False));
 	
 	Return PostingDataTables;
 EndFunction

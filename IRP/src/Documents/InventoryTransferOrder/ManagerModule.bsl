@@ -4,9 +4,10 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("TransferOrderBalance" , PostingServer.CreateTable(AccReg.TransferOrderBalance));
-	Tables.Insert("StockReservation"     , PostingServer.CreateTable(AccReg.StockReservation));
-	Tables.Insert("OrderBalance"         , PostingServer.CreateTable(AccReg.OrderBalance));
+	Tables.Insert("TransferOrderBalance"     , PostingServer.CreateTable(AccReg.TransferOrderBalance));
+	Tables.Insert("StockReservation"         , PostingServer.CreateTable(AccReg.StockReservation));
+	Tables.Insert("OrderBalance"             , PostingServer.CreateTable(AccReg.OrderBalance));
+	Tables.Insert("SupplyRequestProcurement" , PostingServer.CreateTable(AccReg.SupplyRequestProcurement));
 	
 	Tables.Insert("StockReservation_Exists" , PostingServer.CreateTable(AccReg.StockReservation));
 	
@@ -15,9 +16,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status, CurrentUniversalDate());
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
-	If Not StatusInfo.Posting Then
-		Return Tables;
-	EndIf;
 	
 	Query = New Query();
 	Query.Text =
@@ -28,7 +26,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	InventoryTransferOrderItemList.Ref AS Order,
 		|	InventoryTransferOrderItemList.InternalSupplyRequest AS InternalSupplyRequest,
 		|	InventoryTransferOrderItemList.ItemKey AS ItemKey,
-		|	SUM(InventoryTransferOrderItemList.Quantity) AS Quantity,
+		|	InventoryTransferOrderItemList.Quantity AS Quantity,
 		|	0 AS BasisQuantity,
 		|	InventoryTransferOrderItemList.Unit,
 		|	InventoryTransferOrderItemList.ItemKey.Item.Unit AS ItemUnit,
@@ -36,27 +34,17 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
 		|	InventoryTransferOrderItemList.ItemKey.Item AS Item,
 		|	&Period AS Period,
-		|	InventoryTransferOrderItemList.Key AS RowKey
+		|	InventoryTransferOrderItemList.Key AS RowKey,
+		|	InventoryTransferOrderItemList.Ref.Date AS DocumentDate,
+		|	&StatusInfo_Posting AS StatusInfo_Posting
 		|FROM
 		|	Document.InventoryTransferOrder.ItemList AS InventoryTransferOrderItemList
 		|WHERE
-		|	InventoryTransferOrderItemList.Ref = &Ref
-		|GROUP BY
-		|	InventoryTransferOrderItemList.Ref.Company,
-		|	InventoryTransferOrderItemList.Ref.StoreSender,
-		|	InventoryTransferOrderItemList.Ref.StoreReceiver,
-		|	InventoryTransferOrderItemList.Ref,
-		|	InventoryTransferOrderItemList.InternalSupplyRequest,
-		|	InventoryTransferOrderItemList.ItemKey,
-		|	InventoryTransferOrderItemList.Unit,
-		|	InventoryTransferOrderItemList.ItemKey.Item.Unit,
-		|	InventoryTransferOrderItemList.ItemKey.Unit,
-		|	InventoryTransferOrderItemList.ItemKey.Item,
-		|	VALUE(Catalog.Units.EmptyRef),
-		|	InventoryTransferOrderItemList.Key";
+		|	InventoryTransferOrderItemList.Ref = &Ref";
 	
 	Query.SetParameter("Ref", Ref);
 	Query.SetParameter("Period", StatusInfo.Period);
+	Query.SetParameter("StatusInfo_Posting", StatusInfo.Posting);
 	QueryResults = Query.Execute();
 	
 	QueryTable = QueryResults.Unload();
@@ -75,12 +63,14 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	QueryTable.BasisQuantity AS Quantity,
 		|	QueryTable.BasisUnit AS Unit,
 		|	QueryTable.Period AS Period,
-		|	QueryTable.RowKey AS RowKey
+		|	QueryTable.RowKey AS RowKey,
+		|	QueryTable.DocumentDate,
+		|	QueryTable.StatusInfo_Posting
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable
 		|;
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[1]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.StoreSender AS StoreSender,
@@ -88,22 +78,13 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Order AS Order,
 		|	tmp.ItemKey,
 		|	tmp.RowKey,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.Unit AS Unit,
 		|	tmp.Period
 		|FROM
 		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.StoreSender,
-		|	tmp.StoreReceiver,
-		|	tmp.Order,
-		|	tmp.RowKey,
-		|	tmp.ItemKey,
-		|	tmp.Unit,
-		|	tmp.Period
 		|;
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[2]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.StoreSender AS Store,
@@ -120,11 +101,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Unit,
 		|	tmp.Period
 		|;
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[3]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.StoreReceiver AS Store,
 		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Quantity AS Quantity,
 		|	tmp.InternalSupplyRequest AS Order,
 		|	tmp.Period,
 		|	tmp.RowKey
@@ -132,19 +113,43 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp AS tmp
 		|WHERE
 		|	tmp.InternalSupplyRequest <> VALUE(Document.InternalSupplyRequest.EmptyRef)
-		|GROUP BY
-		|	tmp.StoreReceiver,
+		|;
+		|//[4]/////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmp.DocumentDate AS Period,
+		|	tmp.Company,
 		|	tmp.ItemKey,
+		|	tmp.StoreReceiver AS Store,
 		|	tmp.InternalSupplyRequest,
-		|	tmp.Period,
-		|	tmp.RowKey";
+		|	tmp.DocumentDate AS OrderCreationDate,
+		|	CASE 
+		|		WHEN StatusInfo_Posting THEN 
+		|			tmp.Period 
+		|		ELSE
+		|			DATETIME(1,1,1)
+		|		END AS OrderApprovalDate,
+		|	CASE 
+		|		WHEN StatusInfo_Posting THEN
+		|			tmp.Period 
+		|		ELSE
+		|			DATETIME(1,1,1)
+		|		END AS OrderDeliveryDate,
+		|	tmp.Quantity AS OrderQuantity
+		|FROM 
+		|	tmp AS tmp
+		|WHERE
+		|	tmp.InternalSupplyRequest <> VALUE(Document.InternalSupplyRequest.EmptyRef)";
 	
 	Query.SetParameter("QueryTable", QueryTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	Tables.TransferOrderBalance = QueryResults[1].Unload();
-	Tables.StockReservation     = QueryResults[2].Unload();
-	Tables.OrderBalance         = QueryResults[3].Unload();
+	If StatusInfo.Posting Then
+		Tables.TransferOrderBalance = QueryResults[1].Unload();
+		Tables.StockReservation     = QueryResults[2].Unload();
+		Tables.OrderBalance         = QueryResults[3].Unload();
+	EndIf;
+	
+	Tables.SupplyRequestProcurement = QueryResults[4].Unload();
 	
 	Parameters.IsReposting = False;
 	
@@ -200,6 +205,12 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.OrderBalance,
 			Parameters.IsReposting));
+	
+	// SupplyRequestProcurement
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.SupplyRequestProcurement,
+		New Structure("RecordSet, WriteInTransaction",
+			Parameters.DocumentDataTables.SupplyRequestProcurement,
+			False));
 	
 	Return PostingDataTables;
 EndFunction

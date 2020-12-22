@@ -685,6 +685,7 @@
   <accumulationRegisters>AccumulationRegister.RetailSales</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.RetailCash</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.Aging</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.SupplyRequestProcurement</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.IDInfoTypes</chartsOfCharacteristicTypes>

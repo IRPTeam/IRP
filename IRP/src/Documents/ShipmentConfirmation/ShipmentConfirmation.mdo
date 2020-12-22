@@ -60,6 +60,7 @@
   <registerRecords>AccumulationRegister.ShipmentOrders</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
   <registerRecords>AccumulationRegister.ShipmentConfirmationSchedule</registerRecords>
+  <registerRecords>AccumulationRegister.SupplyRequestProcurement</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

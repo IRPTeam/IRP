@@ -12,6 +12,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("StockBalance_Transit"     , PostingServer.CreateTable(AccReg.StockBalance));
 	Tables.Insert("GoodsInTransitIncoming"   , PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
 	Tables.Insert("GoodsInTransitOutgoing"   , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
+	Tables.Insert("SupplyRequestProcurement" , PostingServer.CreateTable(AccReg.SupplyRequestProcurement));
 	
 	Tables.Insert("StockReservation_Exists" , PostingServer.CreateTable(AccReg.StockReservation));
 	Tables.Insert("StockBalance_Exists"     , PostingServer.CreateTable(AccReg.StockBalance));
@@ -43,6 +44,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.GoodsInTransitIncoming   = QueryResults[6].Unload();
 	Tables.GoodsInTransitOutgoing   = QueryResults[7].Unload();
 	Tables.StockBalance_Transit     = QueryResults[8].Unload();
+	Tables.SupplyRequestProcurement = QueryResults[9].Unload();
 	
 	Header = New Structure();
 	Header.Insert("StoreReceiverUseGoodsReceipt", Ref.StoreReceiver.UseGoodsReceipt);
@@ -236,13 +238,67 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|FROM
 		|	tmp AS tmp
-		|Where
+		|WHERE
 		|	tmp.StoreTransit <> VALUE(Catalog.Stores.EmptyRef)
 		|GROUP BY
 		|	tmp.StoreTransit,
 		|	tmp.ItemKey,
 		|	tmp.Period
-		|";
+		|;
+		|// 9 - SupplyRequestProcurement, Sent (StockBalance Expense)
+		|SELECT
+		|	tmp.Company,
+		|	tmp.StoreReceiver AS Store,
+		|	tmp.ItemKey,
+		|	SUM(tmp.Quantity) AS SentQuantity,
+		|	0 AS ReceiptQuantity,
+		|	tmp.Period,
+		|	tmp.Period AS SentDate,
+		|	DATETIME(1,1,1)	AS ReceiptDate,
+		|	OrderBalance.Order AS InternalSupplyRequest
+		|FROM
+		|	tmp AS tmp INNER JOIN AccumulationRegister.OrderBalance AS OrderBalance
+		|		ON tmp.Order = OrderBalance.Recorder
+		|		AND OrderBalance.Order Refs Document.InternalSupplyRequest
+		|		AND OrderBalance.RecordType = VALUE(AccumulationRecordType.Expense)
+		|		AND tmp.Order <> VALUE(Document.InventoryTransferOrder.EmptyRef)
+		|		AND tmp.StoreReceiver = OrderBalance.Store
+		|		AND tmp.ItemKey = OrderBalance.ItemKey
+		|		AND NOT tmp.StoreSender.UseShipmentConfirmation
+		|GROUP BY
+		|	tmp.Company,
+		|	tmp.StoreReceiver,
+		|	tmp.ItemKey,
+		|	tmp.Period,
+		|	OrderBalance.Order
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	tmp.Company,
+		|	tmp.StoreReceiver AS Store,
+		|	tmp.ItemKey,
+		|	0,
+		|	SUM(tmp.Quantity),
+		|	tmp.Period,
+		|	DATETIME(1,1,1),
+		|	tmp.Period,
+		|	OrderBalance.Order
+		|FROM
+		|	tmp AS tmp INNER JOIN AccumulationRegister.OrderBalance AS OrderBalance
+		|		ON tmp.Order = OrderBalance.Recorder
+		|		AND OrderBalance.Order Refs Document.InternalSupplyRequest
+		|		AND OrderBalance.RecordType = VALUE(AccumulationRecordType.Expense)
+		|		AND tmp.Order <> VALUE(Document.InventoryTransferOrder.EmptyRef)
+		|		AND tmp.StoreReceiver = OrderBalance.Store
+		|		AND tmp.ItemKey = OrderBalance.ItemKey
+		|		AND NOT tmp.StoreReceiver.UseGoodsReceipt
+		|GROUP BY
+		|	tmp.Company,
+		|	tmp.StoreReceiver,
+		|	tmp.ItemKey,
+		|	tmp.Period,
+		|	OrderBalance.Order";
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -355,6 +411,12 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.TransferOrderBalance,
 			Parameters.IsReposting));
+		
+	// SupplyRequestProcurement
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.SupplyRequestProcurement,
+	New Structure("RecordSet, WriteInTransaction",
+			Parameters.DocumentDataTables.SupplyRequestProcurement,
+			False));	
 	
 	If Parameters.DocumentDataTables.Header.StoreReceiverUseGoodsReceipt
 		And Parameters.DocumentDataTables.Header.StoreSenderUseShipmentConfirmation Then
@@ -494,7 +556,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			New Structure("RecordSet, WriteInTransaction",
 				PostingServer.JoinTables(ArrayOfTables, "RecordType, Period, Store, ItemKey, Quantity"),
 				True));
-		
+				
 	EndIf;
 	
 	Return PostingDataTables;

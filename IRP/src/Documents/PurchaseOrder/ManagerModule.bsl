@@ -14,6 +14,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("GoodsReceiptSchedule_Receipt" , PostingServer.CreateTable(AccReg.GoodsReceiptSchedule));
 	Tables.Insert("GoodsReceiptSchedule_Expense" , PostingServer.CreateTable(AccReg.GoodsReceiptSchedule));
 	Tables.Insert("OrderProcurement"             , PostingServer.CreateTable(AccReg.OrderProcurement));
+	Tables.Insert("SupplyRequestProcurement"     , PostingServer.CreateTable(AccReg.SupplyRequestProcurement));
 	
 	Tables.Insert("OrderBalance_Exists_Receipt"   , PostingServer.CreateTable(AccReg.OrderBalance));
 	Tables.Insert("OrderBalance_Exists_Expense"   , PostingServer.CreateTable(AccReg.OrderBalance));
@@ -47,14 +48,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status, CurrentUniversalDate());
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
-	If Not StatusInfo.Posting Then
-		Return Tables;
-	EndIf;
 	
 	Query = New Query();
 	Query.Text =
 		"SELECT
 		|	PurchaseOrdertemList.Ref.Company AS Company,
+		|	PurchaseOrdertemList.Ref.Date AS DocumentDate,
 		|	PurchaseOrdertemList.Store AS Store,
 		|	PurchaseOrdertemList.Store.UseGoodsReceipt AS UseGoodsReceipt,
 		|	PurchaseOrdertemList.Ref.GoodsReceiptBeforePurchaseInvoice AS GoodsReceiptBeforePurchaseInvoice,
@@ -91,14 +90,16 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|		NOT PurchaseOrdertemList.PurchaseBasis.Date IS NULL
 		|			THEN TRUE
 		|		ELSE FALSE
-		|	END AS UseSalesOrder	
+		|	END AS UseSalesOrder,
+		|	&StatusInfo_Posting AS StatusInfo_Posting
 		|FROM
 		|	Document.PurchaseOrder.ItemList AS PurchaseOrdertemList
 		|WHERE
 		|	PurchaseOrdertemList.Ref = &Ref";
 	
-	Query.SetParameter("Ref", Ref);
-	Query.SetParameter("Period", StatusInfo.Period);
+	Query.SetParameter("Ref"                , Ref);
+	Query.SetParameter("Period"             , StatusInfo.Period);
+	Query.SetParameter("StatusInfo_Posting" , StatusInfo.Posting);
 	QueryResults = Query.Execute();
 	QueryTable = QueryResults.Unload();
 	
@@ -109,6 +110,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.Text =
 		"SELECT
 		|	QueryTable.Company AS Company,
+		|	QueryTable.DocumentDate AS DocumentDate,
 		|	QueryTable.Store AS Store,
 		|	QueryTable.GoodsReceiptBeforePurchaseInvoice AS GoodsReceiptBeforePurchaseInvoice,
 		|	QueryTable.UseGoodsReceipt AS UseGoodsReceipt,
@@ -124,7 +126,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	QueryTable.IsService AS IsService,
 		|   QueryTable.DeliveryDate AS DeliveryDate,
 		|   QueryTable.UseInternalSupplyRequest AS UseInternalSupplyRequest,
-		|   QueryTable.UseSalesOrder AS UseSalesOrder
+		|   QueryTable.UseSalesOrder AS UseSalesOrder,
+		|	QueryTable.StatusInfo_Posting AS StatusInfo_Posting
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable
@@ -318,22 +321,66 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp AS tmp
 		|WHERE
 		|   tmp.UseSalesOrder
-		|";
+		|;
+		|//[12]///////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmp.DocumentDate AS Period,
+		|	tmp.Company,
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.PurchaseBasis AS InternalSupplyRequest,
+		|	tmp.DocumentDate AS OrderCreationDate,
+		|	tmp.Period AS OrderApprovalDate,
+		|	tmp.DeliveryDate AS OrderDeliveryDate,
+		|	tmp.Quantity AS OrderQuantity,
+		|	DATETIME(1,1,1) AS SentDate,
+		|	0 AS SentQuantity
+		|FROM 
+		|	tmp AS tmp
+		|WHERE
+		|	tmp.UseInternalSupplyRequest
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	tmp.DocumentDate,
+		|	tmp.Company,
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.PurchaseBasis,
+		|	DATETIME(1,1,1),
+		|	DATETIME(1,1,1),
+		|	DATETIME(1,1,1),
+		|	0,
+		|	tmp.Period,
+		|	tmp.Quantity
+		|FROM
+		|	tmp AS tmp
+		|WHERE
+		|	tmp.GoodsReceiptBeforePurchaseInvoice
+		|	AND tmp.UseGoodsReceipt
+		|	AND NOT tmp.IsService
+		|	AND StatusInfo_Posting
+		|	AND tmp.UseInternalSupplyRequest";
 	
 	Query.SetParameter("QueryTable", QueryTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	Tables.OrderBalance_Receipt         = QueryResults[1].Unload();
-	Tables.OrderBalance_Expense         = QueryResults[2].Unload();
-	Tables.InventoryBalance             = QueryResults[3].Unload();
-	Tables.GoodsInTransitIncoming       = QueryResults[4].Unload();
-	Tables.StockBalance                 = QueryResults[5].Unload();
-	Tables.StockReservation_Receipt     = QueryResults[6].Unload();
-	Tables.StockReservation_Expense     = QueryResults[7].Unload();	
-	Tables.ReceiptOrders                = QueryResults[8].Unload();
-	Tables.GoodsReceiptSchedule_Receipt = QueryResults[9].Unload();
-	Tables.GoodsReceiptSchedule_Expense = QueryResults[10].Unload();
-	Tables.OrderProcurement             = QueryResults[11].Unload();
+	If StatusInfo.Posting Then
+		Tables.OrderBalance_Receipt         = QueryResults[1].Unload();
+		Tables.OrderBalance_Expense         = QueryResults[2].Unload();
+		Tables.InventoryBalance             = QueryResults[3].Unload();
+		Tables.GoodsInTransitIncoming       = QueryResults[4].Unload();
+		Tables.StockBalance                 = QueryResults[5].Unload();
+		Tables.StockReservation_Receipt     = QueryResults[6].Unload();
+		Tables.StockReservation_Expense     = QueryResults[7].Unload();	
+		Tables.ReceiptOrders                = QueryResults[8].Unload();
+		Tables.GoodsReceiptSchedule_Receipt = QueryResults[9].Unload();
+		Tables.GoodsReceiptSchedule_Expense = QueryResults[10].Unload();
+		Tables.OrderProcurement             = QueryResults[11].Unload();
+	EndIf;
+	
+	Tables.SupplyRequestProcurement = QueryResults[12].Unload();
 	
 	Parameters.IsReposting = False;
 	Return Tables;
@@ -484,6 +531,12 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.OrderProcurement,
 			True));
+	
+	// SupplyRequestProcurement
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.SupplyRequestProcurement,
+		New Structure("RecordSet, WriteInTransaction",
+			Parameters.DocumentDataTables.SupplyRequestProcurement,
+			False));
 	
 	Return PostingDataTables;
 EndFunction

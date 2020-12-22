@@ -3,7 +3,8 @@
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure();
 	AccReg = Metadata.AccumulationRegisters;
-	Tables.Insert("OrderBalance", PostingServer.CreateTable(AccReg.OrderBalance));
+	Tables.Insert("OrderBalance"             , PostingServer.CreateTable(AccReg.OrderBalance));
+	Tables.Insert("SupplyRequestProcurement" , PostingServer.CreateTable(AccReg.SupplyRequestProcurement));
 	
 	Tables.Insert("OrderBalance_Exists", PostingServer.CreateTable(AccReg.OrderBalance));
 	
@@ -16,6 +17,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	InternalSupplyRequestItemList.Ref.Company AS Company,
 		|	InternalSupplyRequestItemList.Ref.Store AS Store,
 		|	InternalSupplyRequestItemList.ItemKey AS ItemKey,
+		|	InternalSupplyRequestItemList.Ref.ProcurementDate AS ProcurementDate,
 		|	InternalSupplyRequestItemList.Ref AS InternalSupplyRequest,
 		|	InternalSupplyRequestItemList.Quantity AS Quantity,
 		|	0 AS BasisQuantity,
@@ -43,7 +45,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		"SELECT
 		|	QueryTable.Company AS Company,
 		|	QueryTable.Store AS Store,
+		|	QueryTable.ProcurementDate AS ProcurementDate,
 		|	QueryTable.ItemKey AS ItemKey,
+		|	QueryTable.InternalSupplyRequest AS InternalSupplyRequest,
 		|	QueryTable.InternalSupplyRequest AS Order,
 		|	QueryTable.BasisQuantity AS Quantity,
 		|	QueryTable.BasisUnit AS Unit,
@@ -54,7 +58,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	&QueryTable AS QueryTable
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[1]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Store,
 		|	tmp.ItemKey,
@@ -63,12 +67,31 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Period,
 		|   tmp.RowKey
 		|FROM
-		|	tmp AS tmp";
+		|	tmp AS tmp
+		|;
+		|//[2]/////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmp.Period,
+		|	tmp.Company,
+		|	tmp.ItemKey,
+		|	tmp.Store,
+		|	tmp.InternalSupplyRequest,
+		|	CASE 
+		|		WHEN tmp.ProcurementDate = DATETIME(1,1,1) THEN
+		|		tmp.Period
+		|	ELSE
+		|		tmp.ProcurementDate
+		|	END AS ProcurementDate,
+		|	tmp.Quantity AS InternalSupplyRequestQuantity
+		|FROM 
+		|	tmp AS tmp
+		|";
 	
 	Query.SetParameter("QueryTable", QueryTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	Tables.OrderBalance = QueryResults[1].Unload();
+	Tables.OrderBalance             = QueryResults[1].Unload();
+	Tables.SupplyRequestProcurement = QueryResults[2].Unload();
 	
 	Parameters.IsReposting = False;
 	Return Tables;
@@ -98,6 +121,12 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.OrderBalance,
 			True));
+	
+	// SupplyRequestProcurement
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.SupplyRequestProcurement,
+		New Structure("RecordSet, WriteInTransaction",
+			Parameters.DocumentDataTables.SupplyRequestProcurement,
+			False));
 	
 	Return PostingDataTables;
 EndFunction

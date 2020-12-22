@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="361e658a-b329-4d83-adb6-c532a08a0e27">
+  <producedTypes>
+    <selectionType typeId="c2e53123-09b6-4de3-a043-be19449812a8" valueTypeId="38407986-3c70-4211-ac01-7eb59dba2fb1"/>
+    <listType typeId="ed877ab7-893b-4a41-9cf3-2f2198204264" valueTypeId="f654b074-1bf2-45ff-8f73-b838a7248ed0"/>
+    <managerType typeId="09a49f7b-b4bf-4766-9216-50fcda23c823" valueTypeId="df02be87-d018-447c-a8a0-69b1b4ae0e1b"/>
+    <recordSetType typeId="dd90e17e-b396-4de9-9c8d-12cc54dad4b5" valueTypeId="df3158e4-ff3e-48d1-8084-6221c5c61cf2"/>
+    <recordKeyType typeId="dfe2883b-3d58-47e1-b087-06bed0fcfe05" valueTypeId="7f13955e-5b6f-41e5-af76-4623d02aa462"/>
+    <recordType typeId="9ff5f016-c21d-4f97-ad8b-8fc48c2dba7d" valueTypeId="dd114cf1-2fce-4d39-b7c7-7cd2622ea17c"/>
+  </producedTypes>
+  <name>SupplyRequestProcurement</name>
+  <synonym>
+    <key>en</key>
+    <value>Supply request procurement</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <registerType>Turnovers</registerType>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <enableTotalsSplitting>true</enableTotalsSplitting>
+  <resources uuid="ec4332ad-428c-42c1-af5c-33f7013aa737">
+    <name>InternalSupplyRequestQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Internal supply request quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="f010aade-af6b-4936-b4a8-ffa978fc5959">
+    <name>OrderQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Order quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="7760fb25-3922-43a4-b23a-cf2949c5d6fd">
+    <name>SentQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Sent quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="735715cd-f7c3-483c-9307-2cff654e891f">
+    <name>ReceiptQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Receipt quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <dimensions uuid="9d55c073-f3dd-435b-9fec-6da7b552063c">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="33d38f0d-f47f-48ec-8938-5b56ae47f57b">
+    <name>ItemKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="0638ffa6-c5d1-4896-b4dc-bfecc5185bf5">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="1c663e12-6377-4769-9414-45e3c57bcc7a">
+    <name>InternalSupplyRequest</name>
+    <synonym>
+      <key>en</key>
+      <value>Internal supply request</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.InternalSupplyRequest</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="39316a17-ea02-4c17-9eb6-4dfc44441df0">
+    <name>ProcurementDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Procurement date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="55c4f92b-9fde-4720-9709-0c3c12da64fd">
+    <name>OrderCreationDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Order creation date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="e690012e-afff-4c9c-bd97-ebefe5809ddb">
+    <name>OrderApprovalDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Order approval date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="6ff35761-4359-42bc-b76f-fc90234449b8">
+    <name>OrderDeliveryDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Order delivery date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="4dc5a81d-27b4-4ed0-9f2b-6e861cc1eb78">
+    <name>SentDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Sent date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="95259fb6-c0c5-47df-ac66-2be1c9ea94af">
+    <name>ReceiptDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Receipt date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+</mdclass:AccumulationRegister>

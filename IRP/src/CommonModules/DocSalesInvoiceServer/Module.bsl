@@ -455,7 +455,7 @@ Procedure FillDocumentWithShipmentConfirmationArray(Object, Form, ArrayOfBasisDo
 	
 	QueryTableOrderBalance = Query.Execute().Unload();
 	
-	QueryTableOrderBalance.Columns.Add("Key", New TypeDescription("UUID"));
+	QueryTableOrderBalance.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	For Each Row In QueryTableOrderBalance Do
 		Row.Key = New UUID(Row.RowKey);
 	EndDo;

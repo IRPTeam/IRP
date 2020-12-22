@@ -294,7 +294,7 @@ EndFunction
 Function CalculateOffersTree_Documents(Object, OffersInfo, AddInfo = Undefined)
 	OffersTree = GetFromTempStorage(OffersInfo.OffersAddress);
 	DeleteFromTempStorage(OffersInfo.OffersAddress);
-	OffersTree.Columns.Add("Key", New TypeDescription("UUID"));
+	OffersTree.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	OffersTree.Columns.Add("Amount", New TypeDescription("Number"));
 	OffersTree.Columns.Add("TotalInGroupOffers", New TypeDescription("Number"));
 	OffersTree.Columns.Add("AllRuleIsOk", New TypeDescription("Boolean"));

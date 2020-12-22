@@ -42,7 +42,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 		, New TypeDescription(Metadata.AccumulationRegisters.TransferOrderBalance.Dimensions.Order.Type));
 	ValueTable.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
 	ValueTable.Columns.Add("Quantity", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
-	ValueTable.Columns.Add("Key", New TypeDescription("UUID"));
+	ValueTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	
 	For Each Table In ArrayOfTables Do
 		For Each Row In Table Do
@@ -88,7 +88,7 @@ EndFunction
 
 &AtServer
 Function ExtractInfoFromOrderRows(QueryTable)
-	QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
+	QueryTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	For Each Row In QueryTable Do
 		Row.Key = New UUID(Row.RowKey);
 	EndDo;

@@ -78,7 +78,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFields)
 	ValueTable.Columns.Add("Quantity", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
 	ValueTable.Columns.Add("ReceiptBasis", New TypeDescription(Metadata.DefinedTypes.typeReceiptBasis.Type));
 	ValueTable.Columns.Add("RowKey", New TypeDescription("String"));
-	ValueTable.Columns.Add("Key", New TypeDescription("UUID"));
+	ValueTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	ValueTable.Columns.Add("SalesOrder", New TypeDescription("DocumentRef.SalesOrder"));
 	
 	For Each Table In ArrayOfTables Do
@@ -117,7 +117,7 @@ EndFunction
 
 &AtServer
 Function PutQueryTableToTempTable(QueryTable)
-	QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
+	QueryTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	For Each Row In QueryTable Do
 		Row.Key = New UUID(Row.RowKey);
 	EndDo;

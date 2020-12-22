@@ -114,7 +114,7 @@ Procedure FillDocumentsTree(FilterValues, ExistingRows)
 	Query.SetParameter("Ref", FilterValues.Ref);
 	
 	QueryTableOrders = Query.Execute().Unload();
-	QueryTableOrders.Columns.Add("Key", New TypeDescription("UUID"));
+	QueryTableOrders.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	For Each Row In QueryTableOrders Do
 		Row.Key = New UUID(Row.RowKey);
 	EndDo;

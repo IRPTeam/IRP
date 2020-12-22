@@ -52,7 +52,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 				TableOfAgreementMovementTypes.Columns.Add("Key");
 				For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
 					If TypeOf(ItemOfPostingInfo.Key) = RegisterType Then
-						ItemOfPostingInfo.Value.Recordset.Columns.Add("Key", New TypeDescription("UUID"));
+						ItemOfPostingInfo.Value.Recordset.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 						For Each RowRecordset In ItemOfPostingInfo.Value.Recordset Do
 							NewRow = TableOfAgreementMovementTypes.Add();
 							NewRow.MovementType = RowRecordset.Agreement.CurrencyMovementType;
@@ -264,7 +264,7 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|DROP RecordSet";
 	UseKey = RecordSet.Columns.Find("Key") <> Undefined;
 	If Not UseKey Then
-		RecordSet.Columns.Add("Key", New TypeDescription("UUID"));
+		RecordSet.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	EndIf;
 	
 	Query.SetParameter("RecordSet", RecordSet);

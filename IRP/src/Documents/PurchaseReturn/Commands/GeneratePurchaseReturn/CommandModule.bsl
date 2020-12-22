@@ -75,7 +75,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFields)
 	ItemList.Columns.Add("OffersAmount"		, New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
 	ItemList.Columns.Add("PriceType"		, New TypeDescription("CatalogRef.PriceTypes"));
 	ItemList.Columns.Add("Price"			, New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
-	ItemList.Columns.Add("Key"				, New TypeDescription("UUID"));
+	ItemList.Columns.Add("Key"				, New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	ItemList.Columns.Add("RowKey"			, New TypeDescription("String"));
 	ItemList.Columns.Add("DontCalculateRow" , New TypeDescription("Boolean"));
 	
@@ -232,7 +232,7 @@ EndFunction
 
 &AtServer
 Function ExtractInfoFromOrderRows(QueryTable)
-	QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
+	QueryTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	For Each Row In QueryTable Do
 		Row.Key = New UUID(Row.RowKey);
 	EndDo;
@@ -329,7 +329,7 @@ EndFunction
 
 &AtServer
 Function ExtractInfoFromOrderRows_PurchaseReturnOrder(QueryTable)
-	QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
+	QueryTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	For Each Row In QueryTable Do
 		Row.Key = New UUID(Row.RowKey);
 	EndDo;

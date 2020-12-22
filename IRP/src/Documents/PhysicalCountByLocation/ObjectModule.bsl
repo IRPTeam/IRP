@@ -10,7 +10,7 @@ Procedure OnWrite(Cancel)
 		Return;
 	EndIf;	
 	
-	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status, CurrentUniversalDate());
+	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 EndProcedure
 
 Procedure BeforeDelete(Cancel)

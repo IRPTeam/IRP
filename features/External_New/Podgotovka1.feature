@@ -488,6 +488,8 @@ Scenario: create purchase invoice without order (Vendor Ferron, USD, store 01)
 		And I activate "Price" field in "ItemList" table
 		And I input "15,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
+		And I save "CurrentDate() - 10800" in "$$$$PreviousDate1$$$$" variable
+		And I input "$$$$PreviousDate1$$$$" variable value in "Date" field
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseInvoice31004$$" variable
 		And I delete "$$PurchaseInvoice31004$$" variable

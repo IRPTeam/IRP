@@ -245,7 +245,7 @@ Procedure GetTables_NotUseSO_IsProduct(Tables, TempManager, TableName)
 		|SELECT
 		|	tmp.Period AS Period,
 		|	tmp.Company AS Company,
-		|	tmp.Store AS Store,
+		|	OrderBalance.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	OrderBalance.Order AS InternalSupplyRequest,
 		|	tmp.Period AS SentDate,
@@ -259,13 +259,15 @@ Procedure GetTables_NotUseSO_IsProduct(Tables, TempManager, TableName)
 		|	AND (NOT tmp.ShipmentBasis.Date IS NULL)
 		|	AND tmp.Store = TransferOrderBalance.StoreSender
 		|	AND tmp.ItemKey = TransferOrderBalance.ItemKey
+		|	AND tmp.RowKey = TransferOrderBalance.RowKey
 		|INNER JOIN AccumulationRegister.OrderBalance AS OrderBalance
 		|ON (TransferOrderBalance.Order = OrderBalance.Recorder)
 		|	AND (OrderBalance.Order REFS Document.InternalSupplyRequest)
 		|	AND (OrderBalance.RecordType = VALUE(AccumulationRecordType.Expense))
 		|	AND (NOT TransferOrderBalance.Order.Date IS NULL)
 		|	AND (TransferOrderBalance.StoreReceiver = OrderBalance.Store)
-		|	AND (TransferOrderBalance.ItemKey = OrderBalance.ItemKey)";
+		|	AND (TransferOrderBalance.ItemKey = OrderBalance.ItemKey)
+		|	AND (TransferOrderBalance.RowKey = OrderBalance.RowKey)";
 	
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
@@ -383,7 +385,7 @@ Procedure GetTables_UseSO_NotSCBeforeInvoice_IsProduct(Tables, TempManager, Tabl
 		|SELECT
 		|	tmp.Period AS Period,
 		|	tmp.Company AS Company,
-		|	tmp.Store AS Store,
+		|	OrderBalance.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	OrderBalance.Order AS InternalSupplyRequest,
 		|	tmp.Period AS SentDate,
@@ -397,13 +399,15 @@ Procedure GetTables_UseSO_NotSCBeforeInvoice_IsProduct(Tables, TempManager, Tabl
 		|	AND (NOT tmp.ShipmentBasis.Date IS NULL)
 		|	AND tmp.Store = TransferOrderBalance.StoreSender
 		|	AND tmp.ItemKey = TransferOrderBalance.ItemKey
+		|	AND tmp.RowKey = TransferOrderBalance.RowKey
 		|INNER JOIN AccumulationRegister.OrderBalance AS OrderBalance
 		|ON (TransferOrderBalance.Order = OrderBalance.Recorder)
 		|	AND (OrderBalance.Order REFS Document.InternalSupplyRequest)
 		|	AND (OrderBalance.RecordType = VALUE(AccumulationRecordType.Expense))
 		|	AND (NOT TransferOrderBalance.Order.Date IS NULL)
 		|	AND (TransferOrderBalance.StoreReceiver = OrderBalance.Store)
-		|	AND (TransferOrderBalance.ItemKey = OrderBalance.ItemKey)";
+		|	AND (TransferOrderBalance.ItemKey = OrderBalance.ItemKey)
+		|	AND (TransferOrderBalance.RowKey = OrderBalance.RowKey)";
 	
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
@@ -536,7 +540,7 @@ Procedure GetTables_UseSO_SCBeforeInvoice_IsProduct(Tables, TempManager, TableNa
 		|SELECT
 		|	tmp.Period AS Period,
 		|	tmp.Company AS Company,
-		|	tmp.Store AS Store,
+		|	OrderBalance.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	OrderBalance.Order AS InternalSupplyRequest,
 		|	tmp.Period AS SentDate,
@@ -550,13 +554,15 @@ Procedure GetTables_UseSO_SCBeforeInvoice_IsProduct(Tables, TempManager, TableNa
 		|	AND (NOT tmp.ShipmentBasis.Date IS NULL)
 		|	AND tmp.Store = TransferOrderBalance.StoreSender
 		|	AND tmp.ItemKey = TransferOrderBalance.ItemKey
+		|	AND tmp.RowKey = TransferOrderBalance.RowKey
 		|INNER JOIN AccumulationRegister.OrderBalance AS OrderBalance
 		|ON (TransferOrderBalance.Order = OrderBalance.Recorder)
 		|	AND (OrderBalance.Order REFS Document.InternalSupplyRequest)
 		|	AND (OrderBalance.RecordType = VALUE(AccumulationRecordType.Expense))
 		|	AND (NOT TransferOrderBalance.Order.Date IS NULL)
 		|	AND (TransferOrderBalance.StoreReceiver = OrderBalance.Store)
-		|	AND (TransferOrderBalance.ItemKey = OrderBalance.ItemKey)";
+		|	AND (TransferOrderBalance.ItemKey = OrderBalance.ItemKey)
+		|	AND (TransferOrderBalance.RowKey = OrderBalance.RowKey)";
 
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
@@ -657,7 +663,7 @@ Procedure GetTables_NotUseSCBasis_IsProduct(Tables, TempManager, TableName)
 		|SELECT
 		|	tmp.Period AS Period,
 		|	tmp.Company AS Company,
-		|	tmp.Store AS Store,
+		|	OrderBalance.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	OrderBalance.Order AS InternalSupplyRequest,
 		|	tmp.Period AS SentDate,
@@ -671,13 +677,15 @@ Procedure GetTables_NotUseSCBasis_IsProduct(Tables, TempManager, TableName)
 		|	AND (NOT tmp.ShipmentBasis.Date IS NULL)
 		|	AND tmp.Store = TransferOrderBalance.StoreSender
 		|	AND tmp.ItemKey = TransferOrderBalance.ItemKey
+		|	AND tmp.RowKey = TransferOrderBalance.RowKey
 		|INNER JOIN AccumulationRegister.OrderBalance AS OrderBalance
 		|ON (TransferOrderBalance.Order = OrderBalance.Recorder)
 		|	AND (OrderBalance.Order REFS Document.InternalSupplyRequest)
 		|	AND (OrderBalance.RecordType = VALUE(AccumulationRecordType.Expense))
 		|	AND (NOT TransferOrderBalance.Order.Date IS NULL)
 		|	AND (TransferOrderBalance.StoreReceiver = OrderBalance.Store)
-		|	AND (TransferOrderBalance.ItemKey = OrderBalance.ItemKey)";
+		|	AND (TransferOrderBalance.ItemKey = OrderBalance.ItemKey)
+		|	AND (TransferOrderBalance.RowKey = OrderBalance.RowKey)";
 
 	
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);

@@ -30,6 +30,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryTableItemList = QueryResultsItemList.Unload();
 	
 	PostingServer.CalculateQuantityByUnit(QueryTableItemList);
+	PostingServer.UUIDToString(QueryTableItemList);
 	
 	Query = New Query();
 	Query.Text = GetQueryTextQueryTable();
@@ -66,10 +67,10 @@ Function GetQueryTextInventoryTransferItemList()
 		|	InventoryTransferItemList.Ref.StoreTransit AS StoreTransit,
 		|	InventoryTransferItemList.InventoryTransferOrder AS Order,
 		|	InventoryTransferItemList.ItemKey AS ItemKey,
-		|	SUM(InventoryTransferItemList.Quantity) AS Quantity,
+		|	InventoryTransferItemList.Quantity AS Quantity,
 		|	0 AS BasisQuantity,
 		|	InventoryTransferItemList.Unit,
-		|	InventoryTransferItemList.Key AS RowKey,
+		|	InventoryTransferItemList.Key AS RowKeyUUID,
 		|	InventoryTransferItemList.ItemKey.Item.Unit AS ItemUnit,
 		|	InventoryTransferItemList.ItemKey.Unit AS ItemKeyUnit,
 		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
@@ -80,21 +81,7 @@ Function GetQueryTextInventoryTransferItemList()
 		|FROM
 		|	Document.InventoryTransfer.ItemList AS InventoryTransferItemList
 		|WHERE
-		|	InventoryTransferItemList.Ref = &Ref
-		|GROUP BY
-		|	InventoryTransferItemList.Ref.Company,
-		|	InventoryTransferItemList.Ref.StoreSender,
-		|	InventoryTransferItemList.Ref.StoreReceiver,
-		|	InventoryTransferItemList.InventoryTransferOrder,
-		|	InventoryTransferItemList.Key,
-		|	InventoryTransferItemList.ItemKey,
-		|	InventoryTransferItemList.Unit,
-		|	InventoryTransferItemList.ItemKey.Item.Unit,
-		|	InventoryTransferItemList.ItemKey.Unit,
-		|	InventoryTransferItemList.ItemKey.Item,
-		|	InventoryTransferItemList.Ref.Date,
-		|	InventoryTransferItemList.Ref,
-		|	VALUE(Catalog.Units.EmptyRef)";
+		|	InventoryTransferItemList.Ref = &Ref";
 EndFunction
 
 Function GetQueryTextQueryTable()
@@ -250,7 +237,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Company,
 		|	tmp.StoreReceiver AS Store,
 		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS SentQuantity,
+		|	tmp.Quantity AS SentQuantity,
 		|	0 AS ReceiptQuantity,
 		|	tmp.Period,
 		|	tmp.Period AS SentDate,
@@ -264,13 +251,8 @@ Function GetQueryTextQueryTable()
 		|		AND tmp.Order <> VALUE(Document.InventoryTransferOrder.EmptyRef)
 		|		AND tmp.StoreReceiver = OrderBalance.Store
 		|		AND tmp.ItemKey = OrderBalance.ItemKey
+		|		AND tmp.RowKey = OrderBalance.RowKey
 		|		AND NOT tmp.StoreSender.UseShipmentConfirmation
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.StoreReceiver,
-		|	tmp.ItemKey,
-		|	tmp.Period,
-		|	OrderBalance.Order
 		|
 		|UNION ALL
 		|
@@ -279,7 +261,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.StoreReceiver AS Store,
 		|	tmp.ItemKey,
 		|	0,
-		|	SUM(tmp.Quantity),
+		|	tmp.Quantity,
 		|	tmp.Period,
 		|	DATETIME(1,1,1),
 		|	tmp.Period,
@@ -293,12 +275,7 @@ Function GetQueryTextQueryTable()
 		|		AND tmp.StoreReceiver = OrderBalance.Store
 		|		AND tmp.ItemKey = OrderBalance.ItemKey
 		|		AND NOT tmp.StoreReceiver.UseGoodsReceipt
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.StoreReceiver,
-		|	tmp.ItemKey,
-		|	tmp.Period,
-		|	OrderBalance.Order";
+		|		AND tmp.RowKey = OrderBalance.RowKey";
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export

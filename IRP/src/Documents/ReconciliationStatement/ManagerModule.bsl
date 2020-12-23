@@ -1,7 +1,7 @@
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status, CurrentUniversalDate());
+	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 	Return New Structure();
 EndFunction
 

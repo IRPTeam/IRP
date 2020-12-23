@@ -2003,3 +2003,7 @@ Scenario: Create information register UserSettings records (remaining stock cont
 		| '$$IdCI$$' | 'Document.StockAdjustmentAsWriteOff' | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
 		| '$$IdCI$$' | 'Document.Unbundling'                | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
 		| '$$IdCI$$' | 'Document.Unbundling'                | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.InventoryTransfer'         | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.InventoryTransfer'         | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.InventoryTransferOrder'    | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+		| '$$IdCI$$' | 'Document.InventoryTransferOrder'    | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |

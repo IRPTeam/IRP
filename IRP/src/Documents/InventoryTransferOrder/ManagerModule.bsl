@@ -14,7 +14,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.StockReservation_Exists = 
 	AccumulationRegisters.StockReservation.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
 	
-	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status, CurrentUniversalDate());
+	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	
 	Query = New Query();

@@ -32,7 +32,7 @@ $PostData = "{
     'value' : '%env.ProjectID%'
     }]
     }"
-Invoke-WebRequest -UseBasicParsing -uri https://web.bilist.com.tr:1512/Translator/hs/sync/command?Z=%env.CustomerRegion% -Method POST -Body $PostData -Headers $Headers]]></param>
+Invoke-WebRequest -UseBasicParsing -uri https://web.irpteam.com/Translator/hs/sync/command?Z=%env.CustomerRegion% -Method POST -Body $PostData -Headers $Headers]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>

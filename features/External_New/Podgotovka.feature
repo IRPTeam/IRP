@@ -1445,3 +1445,79 @@ Scenario: auto filling Configuration metadata catalog
 		| 'Users'                          |
 		| 'Workstations'                   |
 	And I close all client application windows
+
+Scenario: create payment terminal
+		Given I open hyperlink "e1cib/list/Catalog.PaymentTerminals"
+		And I click the button named "FormCreate"
+		And I input "Payment terminal 01" text in the field named "Description_en"
+		And I click Select button of "Account" field
+		Then "Cash/Bank accounts" window is opened
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Transit Main' |
+		And I select current line in "List" table
+		And I input "1,00" text in "Percent" field
+		And I click "Save and close" button
+
+Scenario: create PaymentTypes
+		Given I open hyperlink "e1cib/list/Catalog.PaymentTypes"
+		And I click the button named "FormCreate"
+		And I input "Cash" text in the field named "Description_en"
+		And I select "Cash" exact value from "Type" drop-down list
+		And I click "Save and close" button
+		And I click the button named "FormCreate"
+		And I input "Card 01" text in the field named "Description_en"
+		And I select "Card" exact value from "Type" drop-down list
+		And I click "Save and close" button
+		And I click the button named "FormCreate"
+		And I input "Card 02" text in the field named "Description_en"
+		And I select "Card" exact value from "Type" drop-down list
+		And I click "Save and close" button
+
+Scenario: create Bank terms
+		Given I open hyperlink "e1cib/list/Catalog.BankTerms"
+		And I click the button named "FormCreate"
+		And I input "Bank term 01" text in "ENG" field
+		And in the table "PaymentTypes" I click the button named "PaymentTypesAdd"
+		And I click choice button of "Payment type" attribute in "PaymentTypes" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 01'     |
+		And I select current line in "List" table
+		And I activate "Account" field in "PaymentTypes" table
+		And I click choice button of "Account" attribute in "PaymentTypes" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Transit Main' |
+		And I select current line in "List" table
+		And I activate "Percent" field in "PaymentTypes" table
+		And I input "1,00" text in "Percent" field of "PaymentTypes" table
+		And I finish line editing in "PaymentTypes" table
+		And in the table "PaymentTypes" I click the button named "PaymentTypesAdd"
+		And I click choice button of "Payment type" attribute in "PaymentTypes" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 02'     |
+		And I select current line in "List" table
+		And I activate "Account" field in "PaymentTypes" table
+		And I click choice button of "Account" attribute in "PaymentTypes" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Transit Second' |
+		And I select current line in "List" table
+		And I activate "Percent" field in "PaymentTypes" table
+		And I input "2,00" text in "Percent" field of "PaymentTypes" table
+		And I finish line editing in "PaymentTypes" table
+		And I click "Save" button
+		And In this window I click command interface button "Business unit bank terms"
+		And I click the button named "FormCreate"
+		Then "Business unit bank terms (create)" window is opened
+		And I click Select button of "Business unit" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shop 01'     |
+		And I select current line in "List" table
+		And I click Select button of "Bank term" field
+		Then "Bank terms" window is opened
+		And I select current line in "List" table
+		And I click "Save and close" button		

@@ -1259,6 +1259,8 @@ Scenario:_800032 check remaining stock control when unpost/change Unbundling
 		Then I wait that in user messages the "[Dress Dress/A-8] Reservation remaining: 100 . Required: 105 . Lacking: 5 ." substring will appear in 10 seconds
 	* Change quantity back
 		And I input "10,000" text in "Quantity" field
+		And I save "CurrentDate() - 10800" in "$$$$PreviousDate1$$$$" variable
+		And I input "$$$$PreviousDate1$$$$" variable value in "Date" field
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
 		And I delete "$$NumberUnbundling1$$" variable
@@ -2200,7 +2202,9 @@ Scenario:_800050 check remaining stock control when unpost/change Opening entry
 		And I close all client application windows
 
 
-
+	
+		
+		
 		
 				
 		

@@ -84,8 +84,16 @@ Scenario:_800000 preparation (remaining stock control)
 		When Create document PurchaseOrder objects
 		When Create document InventoryTransfer objects
 		When Create document InventoryTransferOrder objects
+		When Create document GoodsReceipt objects (for stock remaining control)
+		When Create document PurchaseInvoice objects (for stock remaining control)
+		When Create information register UserSettings records (Retail document)
+	When create payment terminal
+	When create PaymentTypes
+	When create bank terms
+	* Workstation
+		When create Workstation
 
-
+		
 // expense documents
 
 	Scenario:_800005 check remaining stock control in the Sales order
@@ -165,7 +173,7 @@ Scenario:_800000 preparation (remaining stock control)
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 		* Check remaining stock control (store does not use SC and GR)
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -178,7 +186,7 @@ Scenario:_800000 preparation (remaining stock control)
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -191,7 +199,7 @@ Scenario:_800000 preparation (remaining stock control)
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -204,7 +212,7 @@ Scenario:_800000 preparation (remaining stock control)
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -222,7 +230,7 @@ Scenario:_800000 preparation (remaining stock control)
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
 			And I select "Repeal" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberSalesOrder1$$"
 			Then user message window does not contain messages
 		* Change procurement back and set checkbox SC before SI
@@ -240,7 +248,7 @@ Scenario:_800000 preparation (remaining stock control)
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I move to "Other" tab
 			And I set checkbox "Shipment confirmations before sales invoice"	
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -327,7 +335,7 @@ Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 		* Check remaining stock control (store does not use SC and GR)
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -340,7 +348,7 @@ Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -353,7 +361,7 @@ Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -366,7 +374,7 @@ Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -383,7 +391,7 @@ Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I delete a line in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberSalesInvoice1$$"
 			Then user message window does not contain messages
 		* Clear posting SI
@@ -469,7 +477,7 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 		* Check remaining stock control (store does not use SC and GR)
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -482,7 +490,7 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -495,7 +503,7 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -508,7 +516,7 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -525,7 +533,7 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I delete a line in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberRetailSalesReceipt1$$"
 			Then user message window does not contain messages
 		* Clear posting RSR
@@ -609,7 +617,7 @@ Scenario:_800014 check remaining stock control in the Bundling
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 		* Check remaining stock control (store does not use SC and GR)
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -621,7 +629,7 @@ Scenario:_800014 check remaining stock control in the Bundling
 				| 'Store 02'    |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -633,7 +641,7 @@ Scenario:_800014 check remaining stock control in the Bundling
 				| 'Store 08'    |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -645,7 +653,7 @@ Scenario:_800014 check remaining stock control in the Bundling
 				| 'Store 07'    |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -662,7 +670,7 @@ Scenario:_800014 check remaining stock control in the Bundling
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I delete a line in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberBundling1$$"
 			Then user message window does not contain messages
 		* Clear posting Bundling
@@ -767,7 +775,7 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 				| 'Expense'     |
 			And I select current line in "List" table	
 		* Check remaining stock control (store does not use SC and GR)
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -779,7 +787,7 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 				| 'Store 02'    |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -791,7 +799,7 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 				| 'Store 08'    |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -803,7 +811,7 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 				| 'Store 07'    |
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -820,7 +828,7 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I delete a line in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberStockAdjustmentAsWriteOff1$$"
 			Then user message window does not contain messages
 		* Clear posting Stock adjustment as write off	
@@ -908,7 +916,7 @@ Scenario:_800017 check remaining stock control in the Purchase return order
 			And I select current line in "List" table
 			And I select "Approved" exact value from "Status" drop-down list		
 		* Check remaining stock control (store does not use SC and GR)
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -921,7 +929,7 @@ Scenario:_800017 check remaining stock control in the Purchase return order
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -934,7 +942,7 @@ Scenario:_800017 check remaining stock control in the Purchase return order
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -947,7 +955,7 @@ Scenario:_800017 check remaining stock control in the Purchase return order
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -964,7 +972,7 @@ Scenario:_800017 check remaining stock control in the Purchase return order
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I delete a line in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseReturnOrder1$$"
 			Then user message window does not contain messages
 		* Clear posting PRO
@@ -1050,7 +1058,7 @@ Scenario:_800020 check remaining stock control in the Purchase return
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table		
 		* Check remaining stock control (store does not use SC and GR)
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -1063,7 +1071,7 @@ Scenario:_800020 check remaining stock control in the Purchase return
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -1076,7 +1084,7 @@ Scenario:_800020 check remaining stock control in the Purchase return
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -1089,7 +1097,7 @@ Scenario:_800020 check remaining stock control in the Purchase return
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -1106,7 +1114,7 @@ Scenario:_800020 check remaining stock control in the Purchase return
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I delete a line in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseReturn1$$"
 			Then user message window does not contain messages
 		* Clear posting PR
@@ -1191,7 +1199,7 @@ Scenario:_800022 check remaining stock control in the shipment confirmation
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table	
 		* Check remaining stock control (store use SC and GR)
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -1203,7 +1211,7 @@ Scenario:_800022 check remaining stock control in the shipment confirmation
 				| 'Store 08'    |
 			And I select current line in "List" table
 			And I click "Yes" button			
-			And I click "Post" button
+			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] Reservation remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
@@ -1220,7 +1228,7 @@ Scenario:_800022 check remaining stock control in the shipment confirmation
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I delete a line in "ItemList" table
-			And I click "Post" button
+			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation1$$"
 			Then user message window does not contain messages
 		* Clear posting SC
@@ -1231,8 +1239,6 @@ Scenario:_800022 check remaining stock control in the shipment confirmation
 
 // incoming documents
 
-
-
 	
 Scenario:_800032 check remaining stock control when unpost/change Unbundling
 	* Post Unbundling
@@ -1242,39 +1248,848 @@ Scenario:_800032 check remaining stock control when unpost/change Unbundling
 			| '1'   |
 		And I select current line in "List" table
 		And I input current date and time in "Date" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then user message window does not contain messages
 	* Change quantity for Item bundle (more than there is on the remains)
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I input "105,000" text in "Quantity" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Then I wait that in user messages the "[Dress Dress/A-8] Reservation remaining: 100 . Required: 105 . Lacking: 5 ." substring will appear in 10 seconds
 	* Change quantity back
 		And I input "10,000" text in "Quantity" field
-		And I click "Post" button
+		And I save "CurrentDate() - 10800" in "$$$$PreviousDate1$$$$" variable
+		And I input "$$$$PreviousDate1$$$$" variable value in "Date" field
+		And I click the button named "FormPost"
 		Then user message window does not contain messages
 		And I delete "$$NumberUnbundling1$$" variable
 		And I save the value of "Number" field as "$$NumberUnbundling1$$"
 		And I close all client application windows
 	* Post Sales order and try unpost Unbundling (check reserve)
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'    |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/Brown'  |
+		And I activate "Item key" field in "List" table
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "20,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then user message window does not contain messages
+		And I delete "$$NumberSalesOrder2$$" variable
+		And I save the value of "Number" field as "$$NumberSalesOrder2$$"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I go to line in "List" table
 			| 'Number' |
-			| '$$NumberSalesOrder1$$'   |
+			| '1'   |
 		And I select current line in "List" table
-		And I input current date and time in "Date" field
-		And I click "Post" button
+		And I click "Clear posting" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [3] [Dress M/Brown] Reservation remaining: 20 . Required: 0 . Lacking: 20 ." substring will appear in 10 seconds
+	* Change quantity in the Unbundling
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Quantity' |
+			| 'Dress' | 'M/Brown'  | '2,000'    |
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
+		And I click the button named "FormPost"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [3] [Dress M/Brown] Reservation remaining: 0 . Required: 10 . Lacking: 10 ." substring will appear in 10 seconds
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/Brown'  |
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "3,000" text in "Quantity" field of "ItemList" table
+		And I click the button named "FormPost"
 		Then user message window does not contain messages
+	* Create Sales invoice (quantity more than free stock balance)
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'    |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/Brown'  |
+		And I activate "Item key" field in "List" table
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "11,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [1] [Dress M/Brown] Reservation remaining: 10 . Required: 11 . Lacking: 1 ." substring will appear in 10 seconds
+		And I close all client application windows
+		
+
+Scenario:_800036 check remaining stock control when unpost/change Sales return/Goods receipt
+	* Post Sales Return
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'   |
+		And I select current line in "List" table
+		And I input current date and time in "Date" field	
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'L/Green'  |
+		And I input "4,000" text in "Q" field of "ItemList" table
+		And I click the button named "FormPost"
+		Then user message window does not contain messages
+		And I delete "$$NumberSalesReturn1$$" variable
+		And I save the value of "Number" field as "$$NumberSalesReturn1$$"
+		And I close all client application windows
+	* Try to post Sales invoice (Sales return doesn't have GR)
+		* Create SI
+			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+			And I click the button named "FormCreate"
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Ferron BP'   |
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'Company Ferron BP' |
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description'              |
+				| 'Basic Partner terms, TRY' |
+			And I select current line in "List" table
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' |
+			And I select current line in "List" table
+			And I click Choice button of the field named "Store"
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 02'    |
+			And I select current line in "List" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'L/Green'  |
+			And I activate "Item key" field in "List" table
+			And I select current line in "List" table
+			And I activate "Q" field in "ItemList" table
+			And I input "4,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "FormPost"
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button
+			Then I wait that in user messages the "Line No. [1] [Dress L/Green] Reservation remaining: 0 . Required: 4 . Lacking: 4 ." substring will appear in 10 seconds
+			And I click "Save" button
+			And I delete "$$NumberSalesInvoice4$$" variable
+			And I save the value of "Number" field as "$$NumberSalesInvoice4$$"
+	* Create GR
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberSalesReturn1$$'   |
+		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+		And I click the button named "FormPost"
+		And I delete "$$NumberGoodsReceipt2$$" variable
+		And I save the value of "Number" field as "$$NumberGoodsReceipt2$$"
+		And I close all client application windows
+	* Post SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberSalesInvoice4$$'   |
+		And I select current line in "List" table
+		And I input current date and time in "Date" field	
+		And I click "Post and close" button
+		Then user message window does not contain messages
+	* Try unpost GR
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberGoodsReceipt2$$'   |
+		And I select current line in "List" table
+		And I click "Clear posting" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [1] [Dress L/Green] Reservation remaining: 4 . Required: 0 . Lacking: 4 ." substring will appear in 10 seconds
+	* Try change quantity in GR (less than in the SI)
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "3,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [1] [Dress L/Green] Reservation remaining: 4 . Required: 3 . Lacking: 1 ." substring will appear in 10 seconds
+		And I close all client application windows
+
+
+Scenario:_800040 check remaining stock control when unpost/change Stock adjustment as surplus
+	* Post Stock adjustment as surplus
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'   |
+		And I select current line in "List" table
+		And I input current date and time in "Date" field	
+		And I click the button named "FormPost"
+		Then user message window does not contain messages
+		And I delete "$$NumberStockAdjustmentAsSurplus1$$" variable
+		And I save the value of "Number" field as "$$NumberStockAdjustmentAsSurplus1$$"
+		And I close all client application windows
+	* Try to post Sales invoice
+		* Create SI
+			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+			And I click the button named "FormCreate"
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Ferron BP'   |
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'Company Ferron BP' |
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description'              |
+				| 'Basic Partner terms, TRY' |
+			And I select current line in "List" table
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' |
+			And I select current line in "List" table
+			And I click Choice button of the field named "Store"
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 01'    |
+			And I select current line in "List" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'M/White'  |
+			And I activate "Item key" field in "List" table
+			And I select current line in "List" table
+			And I activate "Q" field in "ItemList" table
+			And I input "9,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "FormPost"
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button
+			Then I wait that in user messages the "Line No. [1] [Dress M/White] Reservation remaining: 8 . Required: 9 . Lacking: 1 ." substring will appear in 10 seconds
+			And I click "Save" button
+			And I delete "$$NumberSalesInvoice5$$" variable
+			And I save the value of "Number" field as "$$NumberSalesInvoice5$$"
+	* Change quantity and post SI
+		And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'M/White'  |
+		And I activate "Q" field in "ItemList" table
+		And I input "7,000" text in "Q" field of "ItemList" table
+		And I click "Post and close" button
+		Then user message window does not contain messages
+	* Try unpost Stock adjustment as surplus
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberStockAdjustmentAsSurplus1$$'   |
+		And I select current line in "List" table
+		And I click "Clear posting" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [1] [Dress M/White] Reservation remaining: 7 . Required: 0 . Lacking: 7 ." substring will appear in 10 seconds
+	* Try change quantity in StockAdjustmentAsSurplus (less than in the SI)
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "6,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [1] [Dress M/White] Reservation remaining: 7 . Required: 6 . Lacking: 1 ." substring will appear in 10 seconds
+		And I close all client application windows
 	
 
+Scenario:_800042 check remaining stock control when unpost/change Physical inventory
+	* Try to post Physical inventory (no balance to write off)
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'   |
+		And I select current line in "List" table
+		And I input current date and time in "Date" field	
+		And I click the button named "FormPost"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [2] [Dress XS/Blue] Reservation remaining: 0 . Required: 2 . Lacking: 2 ." substring will appear in 10 seconds
+		And I click "Save" button
+		And I delete "$$NumberPhysicalInventory1$$" variable
+		And I save the value of "Number" field as "$$NumberPhysicalInventory1$$"
+		And I close all client application windows
+	* Post PI and GR for Store 05
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '2'   |
+		And I click the button named "FormPost"
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '4'   |
+		And I click the button named "FormPost"
+	* Try to post Physical inventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberPhysicalInventory1$$'   |
+		And I select current line in "List" table
+		And I input current date and time in "Date" field	
+		And I click the button named "FormPost"
+		Then user message window does not contain messages
+	* Try to post Sales invoice
+		* Create SI
+			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+			And I click the button named "FormCreate"
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Ferron BP'   |
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'Company Ferron BP' |
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description'              |
+				| 'Basic Partner terms, TRY' |
+			And I select current line in "List" table
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' |
+			And I select current line in "List" table
+			And I click Choice button of the field named "Store"
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 05'    |
+			And I select current line in "List" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XS/Blue'  |
+			And I activate "Item key" field in "List" table
+			And I select current line in "List" table
+			And I activate "Q" field in "ItemList" table
+			And I input "200,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'S/Yellow'  |
+			And I activate "Item key" field in "List" table
+			And I select current line in "List" table
+			And I activate "Q" field in "ItemList" table
+			And I input "125,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "FormPost"
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button
+			Then I wait that in user messages the "Line No. [1] [Dress XS/Blue] Reservation remaining: 198 . Required: 200 . Lacking: 2 ." substring will appear in 10 seconds
+			And I click "Save" button
+			And I delete "$$NumberSalesInvoice5$$" variable
+			And I save the value of "Number" field as "$$NumberSalesInvoice5$$"
+	* Change quantity and post SI
+		And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XS/Blue'  |
+		And I activate "Q" field in "ItemList" table
+		And I input "8,000" text in "Q" field of "ItemList" table
+		And I click "Post and close" button
+		Then system warning window does not appear
+		Then user message window does not contain messages
+	* Try unpost Physical inventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberPhysicalInventory1$$'   |
+		And I select current line in "List" table
+		And I click "Clear posting" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [1] [Dress S/Yellow] Reservation remaining: 5 . Required: 0 . Lacking: 5 ." substring will appear in 10 seconds
+	* Try change quantity in PhysicalInventory (less than in the SI)
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'S/Yellow' |
+		And I select current line in "ItemList" table
+		And I input "120,000" text in "Phys. count" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [1] [Dress S/Yellow] Reservation remaining: 0 . Required: 5 . Lacking: 5 ." substring will appear in 10 seconds
+		And I close all client application windows
 
 
+Scenario:_800044 check remaining stock control when unpost/change Retail return receipt
+	* Create Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Retail customer' |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Scarf'       |
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "5,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "50,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "Payments" I click the button named "PaymentsAdd"
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Cash'        |
+		And I select current line in "List" table
+		And I activate "Account" field in "Payments" table
+		And I click choice button of "Account" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №2' |
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I input "250,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table
+		And I click the button named "FormPost"
+		And I delete "$$NumberRetailReturnReceipt1$$" variable
+		And I save the value of "Number" field as "$$NumberRetailReturnReceipt1$$"
+		And I close all client application windows
+	* Try to post Sales invoice
+		* Create SI
+			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+			And I click the button named "FormCreate"
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Ferron BP'   |
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'Company Ferron BP' |
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description'              |
+				| 'Basic Partner terms, TRY' |
+			And I select current line in "List" table
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' |
+			And I select current line in "List" table
+			And I click Choice button of the field named "Store"
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 01'    |
+			And I select current line in "List" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Scarf'       |
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Scarf' | 'XS/Red'  |
+			And I activate "Item key" field in "List" table
+			And I select current line in "List" table
+			And I activate "Q" field in "ItemList" table
+			And I input "5,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "FormPost"
+			And I delete "$$NumberSalesInvoice6$$" variable
+			And I save the value of "Number" field as "$$NumberSalesInvoice6$$"
+			Then system warning window does not appear
+			Then user message window does not contain messages
+	* Try unpost RetailReturnReceipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberRetailReturnReceipt1$$'   |
+		And I select current line in "List" table
+		And I click "Clear posting" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [1] [Scarf XS/Red] Reservation remaining: 5 . Required: 0 . Lacking: 5 ." substring will appear in 10 seconds
+	* Try change quantity in RetailReturnReceipt (less than in the SI)
+		And I go to line in "ItemList" table
+			| 'Item'  |
+			| 'Scarf' |
+		And I select current line in "ItemList" table
+		And I input "4,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to "Payments" tab
+		And I activate "Amount" field in "Payments" table
+		And I select current line in "Payments" table
+		And I input "200,00" text in "Amount" field of "Payments" table
+		And I finish line editing in "Payments" table	
+		And I click the button named "FormPost"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [1] [Scarf XS/Red] Reservation remaining: 5 . Required: 4 . Lacking: 1 ." substring will appear in 10 seconds
+		And I close all client application windows
 
+
+Scenario:_800046 check remaining stock control when unpost/change Inventory transfer order
+	And I close all client application windows
+	* Try to post Inventory transfer order (no balance to write off), status Approved
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '200'   |
+		And I select current line in "List" table
+		And I input current date and time in "Date" field	
+		And I click the button named "FormPost"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [1] [Shirt 36/Red] Reservation remaining: 0 . Required: 25 . Lacking: 25 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [2] [Shirt 38/Black] Reservation remaining: 0 . Required: 20 . Lacking: 20 ." substring will appear in 10 seconds
+		And I click "Save" button
+		And I delete "$$NumberInventoryTransferOrder1$$" variable
+		And I save the value of "Number" field as "$$NumberInventoryTransferOrder1$$"
+	* Try to post Inventory transfer order (no balance to write off), status Wait
+		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+		And I select "Wait" exact value from "Status" drop-down list
+		And I click the button named "FormPost"
+		Then system warning window does not appear
+		Then user message window does not contain messages		
+	* Change store and post Inventory transfer order with status Approved
+		And I click Select button of "Store sender" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'    |
+		And I select current line in "List" table
+		And I click Select button of "Store receiver" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 03'    |
+		And I select current line in "List" table
+		And I select "Approved" exact value from "Status" drop-down list
+		And I click the button named "FormPost"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I move to "Item list" tab
+		And I activate "Quantity" field in "ItemList" table
+		And I go to line in "ItemList" table
+		| 'Item'  | 'Item key' |
+		| 'Shirt' | '36/Red' |
+		And I select current line in "ItemList" table
+		And I input "20,000" text in "Quantity" field of "ItemList" table
+		And I click the button named "FormPost"
+		Then system warning window does not appear
+		Then user message window does not contain messages
+	* Try post Sales order (reserve)
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'                      |
+			| 'Basic Partner terms, without VAT' |
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'    |
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I activate "Item key" field in "List" table
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "5,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [1] [Shirt 38/Black] Reservation remaining: 0 . Required: 5 . Lacking: 5 ." substring will appear in 10 seconds
+		And I select "Wait" exact value from "Status" drop-down list
+		And I click the button named "FormPost"
+		Then system warning window does not appear
+		Then user message window does not contain messages
+	* Change inventory transfer order and try post SO (status Approved)
+		When in opened panel I select "Inventory transfer order 200*"
+		Then "Inventory transfer order * dated *" window is opened
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "ItemList" table
+		And I input "15,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then system warning window does not appear
+		Then user message window does not contain messages
+		And I close all client application windows
 		
-						
-
+Scenario:_800048 check remaining stock control when unpost/change Inventory transfer		
+	* Create Inventory transfer
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"	
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Select button of "Store sender" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'    |
+		And I select current line in "List" table
+		And I click Select button of "Store receiver" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 08'    |
+		And I select current line in "List" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I activate "Item key" field in "List" table
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "25,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [1] [Shirt 38/Black] Reservation remaining: 5 . Required: 25 . Lacking: 20 ." substring will appear in 10 seconds
+	* Create Inventory transfer based on Inventory transfer order
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"	
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberInventoryTransferOrder1$$'   |
+		And I click the button named "FormDocumentInventoryTransferGenerateInventoryTransfer"
+		And I click the button named "FormPost"
+		And I delete "$$NumberInventoryTransfer2$$" variable
+		And I save the value of "Number" field as "$$NumberInventoryTransfer2$$"
+		Then system warning window does not appear
+		Then user message window does not contain messages
+	* Create GR
+		And I click "Goods receipt" button
+		And I click "Post and close" button	
+	* Create SI for transfer remainings
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'    |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black'  |
+		And I activate "Item key" field in "List" table
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "15,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [1] [Shirt 38/Black] Reservation remaining: 5 . Required: 15 . Lacking: 10 ." substring will appear in 10 seconds
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 03'    |
+		And I select current line in "List" table
+		And I click "OK" button		
+		And I click the button named "FormPost"
+		Then system warning window does not appear
+		Then user message window does not contain messages	
+		And I delete "$$NumberSalesInvoice7$$" variable
+		And I save the value of "Number" field as "$$NumberSalesInvoice7$$"
+		And I close all client application windows
+		
+		
+				
+		
+		
+				
 		
 
 
@@ -1308,7 +2123,7 @@ Scenario:_800050 check remaining stock control when unpost/change Opening entry
 		And I select current line in "Inventory" table
 		And I input "8,000" text in "Quantity" field of "Inventory" table
 		And I finish line editing in "Inventory" table
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Then I wait that in user messages the "Line No. [1] [Dress XS/Blue] Reservation remaining: 10 . Required: 8 . Lacking: 2 ." substring will appear in 10 seconds
@@ -1378,7 +2193,7 @@ Scenario:_800050 check remaining stock control when unpost/change Opening entry
 		And I save the value of "Number" field as "$$NumberSalesInvoice2$$"
 		And I save "CurrentDate() - 14400" in "$$$$PreviousDate$$$$" variable
 		And I input "$$$$PreviousDate$$$$" variable value in "Date" field
-		And I click "Post" button
+		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Then I wait that in user messages the "Line No. [1] [Dress XS/Blue] Reservation remaining: 40 . Required: 42 . Lacking: 2 ." substring will appear in 10 seconds
@@ -1387,7 +2202,9 @@ Scenario:_800050 check remaining stock control when unpost/change Opening entry
 		And I close all client application windows
 
 
-
+	
+		
+		
 		
 				
 		

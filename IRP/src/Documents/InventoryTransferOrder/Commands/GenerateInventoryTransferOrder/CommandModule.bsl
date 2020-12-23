@@ -114,7 +114,7 @@ Function OrdersExist(ArrayOfBasises)
 		|FROM
 		|	AccumulationRegister.OrderBalance.Balance(&Period, Order IN (&ArrayOfBasises)) AS OrderBalanceBalance";
 	Query.SetParameter("ArrayOfBasises", ArrayOfBasises);
-	Query.SetParameter("Period", New Boundary(CurrentDate(), BoundaryType.Excluding));
+	Query.SetParameter("Period", New Boundary(CurrentSessionDate(), BoundaryType.Excluding));
 	
 	Return Query.Execute().IsEmpty();
 	

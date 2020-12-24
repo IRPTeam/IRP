@@ -41,7 +41,10 @@ Scenario: 950503 change login and check access
 	And I click "Save and close" button	
 	And I connect "BorisovaS" TestClient using "BorisovaS" login and "F12345" password
 	And Delay 3
-	When in sections panel I select "Treasury"
+	If sections panel contains "Treasury" command Then
+		When in sections panel I select "Treasury"
+	If sections panel contains "Finans" command Then
+		When in sections panel I select "Finans"
 	And I close TestClient session	
 	Then I connect launched Test client "Этот клиент"
 	Given I open hyperlink 'e1cib/list/Catalog.Users'

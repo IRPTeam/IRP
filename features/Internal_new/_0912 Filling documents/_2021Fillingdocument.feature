@@ -48,6 +48,7 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
+		When Create catalog PartnersBankAccounts objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -1414,8 +1415,18 @@ Scenario: _0154105 check filling in and refilling Purchase order
 				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 770,00"
 				Then the form attribute named "ItemListTotalTaxAmount" became equal to "192,60"
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 962,60"
-
-
+	* Check filling in Partner bank account
+		And I move to "Other" tab
+		And I click Select button of "Partner bank account" field
+		And "List" table contains lines
+			| 'Bank name' | 'Number'           | 'Currency' |
+			| 'Bank name' | '0000000000000000' | 'EUR'      |
+		Then the number of "TableName" table lines is "равно" "1"
+		And I select current line in "List" table
+		Then the form attribute named "PartnerBankAccount" became equal to "Partner bank account (Ferron)"
+		And I close all client application windows
+		
+		
 
 
 Scenario: _0154106 check filling in and refilling Purchase invoice
@@ -2646,6 +2657,9 @@ Scenario: _01541140 total amount calculation in Incoming payment order
 		And I input "80,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "460,00"
+
+
+
 
 Scenario: _01541141 total amount calculation in Outgoing payment order
 	* Open form Bank payment
@@ -4484,7 +4498,6 @@ Scenario: _0154133  check currency form in Outgoing payment order
 		# 		| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 		# 		| 'Local currency' | 'Legal'     | 'USD'           | 'TRY'      | '5,6497'             | '1 129,94' | '1'            |
 		And I close all client application windows
-
 Scenario: _0154150 check function DontCalculateRow in the Purchase order
 	* Open the Purchase order creation form
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"

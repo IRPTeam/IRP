@@ -2007,3 +2007,12 @@ Scenario: Create information register UserSettings records (remaining stock cont
 		| '$$IdCI$$' | 'Document.InventoryTransfer'         | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
 		| '$$IdCI$$' | 'Document.InventoryTransferOrder'    | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
 		| '$$IdCI$$' | 'Document.InventoryTransferOrder'    | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'Yes'   |
+
+
+
+Scenario: Create catalog PartnersBankAccounts objects
+
+	And I check or create catalog "PartnersBankAccounts" objects:
+		| 'Ref'                                                                          | 'DeletionMark' | 'Code'         | 'BankName'  | 'Number'            | 'BusinessUnit'                                                          | 'Currency'                                                           | 'Partner'                                                          | 'LegalEntity'                                                       | 'Description_en'                | 'Description_hash' | 'Description_ru'                     | 'Description_tr'                   |
+		| 'e1cib/data/Catalog.PartnersBankAccounts?ref=b75dad46e66c4c2c11eb4522c1c161a1' | 'No'           | '000000000002' | 'Bank name' | '0000000000000000'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1857' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'Partner bank account (Ferron)' | ''                 | 'Банковский счет партнера (Ferron)'  | 'Partner bank account (Ferron) TR' |
+		| 'e1cib/data/Catalog.PartnersBankAccounts?ref=b75dad46e66c4c2c11eb451e00a38c06' | 'No'           | '000000000001' | 'Bank name' | '56788888888888689' | ''                                                                      | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1857' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1871' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a3' | 'Partner bank account (Kalipso)'| ''                 | 'Банковский счет партнера (Kalipso)' | 'Partner bank account (Kalipso) TR'|

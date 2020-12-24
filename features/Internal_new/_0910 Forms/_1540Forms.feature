@@ -1380,6 +1380,75 @@ Scenario: _012017 check row key when cloning a string in Shipment confirmation
 		Then the number of "List" table lines is "меньше или равно" 1
 
 
+Scenario: _012020 check row key when cloning a string in Internal supply request
+	And I close all client application windows
+	* Filling in the details of the document Internal supply request
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I click the button named "FormCreate"
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Store 02'     |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Main Company'     |
+		And I select current line in "List" table
+	* Filling in Internal supply request
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,00" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListItem" in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		And I delete "$$NumberISR$$" variable
+		And I save the value of "Number" field as "$$NumberISR$$"
+	* Check that the row keys do not match
+		And I click "Registrations report" button
+		And I delete "$$$$RovISR1$$$$" variable
+		And I delete "$$$$RovISR2$$$$" variable
+		And in "ResultTable" spreadsheet document I move to "R12C8" cell
+		And I save spreadsheet document cell value "ResultTable" "R12C8" to "$$$$RovISR1$$$$" variable
+		And in "ResultTable" spreadsheet document I move to "R13C8" cell
+		And I save spreadsheet document cell value "ResultTable" "R13C8" to "$$$$RovISR2$$$$" variable
+		And I display "$$$$RovISR1$$$$" variable value
+		And I display "$$$$RovISR2$$$$" variable value
+		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance""
+		And I go to line in "List" table
+		| 'Row key' |
+		| '$$$$RovISR1$$$$'    |
+		And I activate "Row key" field in "List" table
+		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
+		Then the number of "List" table lines is "меньше или равно" 1
+		And I close all client application windows
+	* Copy ISR and check row key
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberISR$$'    |
+		And in the table "List" I click the button named "ListContextMenuCopy"
+		And I click the button named "FormPost"
+		And I click "Registrations report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| '$$$$RovISR1$$$$' |
+			| '$$$$RovISR2$$$$' |
+		And I close all client application windows
+				
+		
 
 
 

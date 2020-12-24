@@ -23,6 +23,7 @@ Scenario: _005022 filling in the "Partners bank account" catalog
 	When Create catalog Partners objects (Kalipso)
 	When Create catalog Currencies objects
 	When Create catalog BusinessUnits objects
+	When Create catalog Companies objects (partners company)
 	* Opening the form for filling in Partners bank account
 		Given I open hyperlink "e1cib/list/Catalog.PartnersBankAccounts"
 		And I click the button named "FormCreate"

@@ -7,7 +7,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("OrderBalance", PostingServer.CreateTable(AccReg.OrderBalance));
 	Tables.Insert("SalesTurnovers", PostingServer.CreateTable(AccReg.SalesTurnovers));
 	
-	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status, CurrentUniversalDate());
+	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	If Not StatusInfo.Posting Then
 		Return Tables;

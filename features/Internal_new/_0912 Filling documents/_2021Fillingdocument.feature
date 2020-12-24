@@ -1420,10 +1420,10 @@ Scenario: _0154105 check filling in and refilling Purchase order
 		And I click Select button of "Partner bank account" field
 		And "List" table contains lines
 			| 'Bank name' | 'Number'           | 'Currency' |
-			| 'Bank name' | '0000000000000000' | 'EUR'      |
-		Then the number of "TableName" table lines is "равно" "1"
+			| 'Bank name' | '56788888888888689' | 'EUR'      |
+		Then the number of "List" table lines is "равно" "1"
 		And I select current line in "List" table
-		Then the form attribute named "PartnerBankAccount" became equal to "Partner bank account (Ferron)"
+		Then the form attribute named "PartnerBankAccount" became equal to "Partner bank account (Partner Kalipso)"
 		And I close all client application windows
 		
 		

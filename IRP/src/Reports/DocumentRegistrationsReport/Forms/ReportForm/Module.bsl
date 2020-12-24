@@ -2,6 +2,10 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Property("Document") Then
 		ThisObject.Document = Parameters.Document;
+		DocumentRegisterRecords = Parameters.Document.Metadata().RegisterRecords;
+		For Each RegisterRecord In DocumentRegisterRecords Do
+			Items.FilterRegister.ChoiceList.Add(RegisterRecord.FullName(), RegisterRecord.Synonym);
+		EndDo;
 	EndIf;
 	
 	If Parameters.Property("PutInTable") Then
@@ -87,15 +91,26 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 	
 	DocumentRegisterRecords = DocumentRef.Metadata().RegisterRecords;
 	
+	ArrayOfDocumentRegisterRecords = New Array();
+	For Each RegisterRecord In DocumentRegisterRecords Do
+		If ValueIsFilled(ThisObject.FilterRegister) Then
+			If Upper(RegisterRecord.FullName()) = Upper(ThisObject.FilterRegister) Then
+				ArrayOfDocumentRegisterRecords.Add(RegisterRecord);
+			EndIf;
+		Else
+			ArrayOfDocumentRegisterRecords.Add(RegisterRecord);
+		EndIf;
+	EndDo;
+	
 	RegisterNumber = - 1;
 	
-	TableOfRegistrations = GetTableRegistrations(DocumentRef);
+	TableOfRegistrations = GetTableRegistrations(ArrayOfDocumentRegisterRecords, DocumentRef);
 	
 	For Each Row In TableOfRegistrations Do
 		Row.Name = Upper(TrimAll(Row.Name));
 	EndDo;
 	
-	For Each ObjectProperty In DocumentRegisterRecords Do
+	For Each ObjectProperty In ArrayOfDocumentRegisterRecords Do
 		
 		If TableOfRegistrations.Find(Upper(ObjectProperty.FullName()), "Name") = Undefined Then
 			Continue;
@@ -472,15 +487,14 @@ Procedure PrepareTemplateDetails(ListOfFields
 EndProcedure
 
 &AtServer
-Function GetTableRegistrations(DocumentRef)
+Function GetTableRegistrations(ArrayOfRegisterRecords, DocumentRef)
 	QueryText = "";
 	
-	DocumentMetadata = DocumentRef.Metadata();
-	If DocumentMetadata.RegisterRecords.Count() = 0 Then
+	If Not ArrayOfRegisterRecords.Count() Then
 		Return New ValueTable();
 	EndIf;
 	
-	For Each Row In DocumentMetadata.RegisterRecords Do
+	For Each Row In ArrayOfRegisterRecords Do
 		QueryText = QueryText + "
 			|" + ?(QueryText = "", "", "UNION ALL ") + "
 			|SELECT TOP 1 CAST(""" + Row.FullName()

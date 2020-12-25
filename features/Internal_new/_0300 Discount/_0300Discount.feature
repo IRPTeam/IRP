@@ -61,7 +61,7 @@ Scenario: _03000 preparation (Discount)
 Scenario: _030001 add Plugin SpecialMessage
 	Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 	And I click the button named "FormCreate"
-	And I select external file "#workingDir#\DataProcessor\SpecialOffer_Message.epf"
+	And I select external file "#workingDir#/DataProcessor/SpecialOffer_Message.epf"
 	And I click the button named "FormAddExtDataProc"
 	And I input "" text in "Path to plugin for test" field
 	And I input "ExternalSpecialMessage" text in "Name" field
@@ -76,7 +76,7 @@ Scenario: _030001 add Plugin SpecialMessage
 Scenario: _030002 add Plugin DocumentDiscount
 	Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 	And I click the button named "FormCreate"
-	And I select external file "#workingDir#\DataProcessor\DocumentDiscount.epf"
+	And I select external file "#workingDir#/DataProcessor/DocumentDiscount.epf"
 	And I click the button named "FormAddExtDataProc"
 	And I input "" text in "Path to plugin for test" field
 	And I input "DocumentDiscount" text in "Name" field
@@ -91,7 +91,7 @@ Scenario: _030002 add Plugin DocumentDiscount
 Scenario: _030003 add Plugin SpecialRules
 	Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 	And I click the button named "FormCreate"
-	And I select external file "#workingDir#\DataProcessor\SpecialOfferRules.epf"
+	And I select external file "#workingDir#/DataProcessor/SpecialOfferRules.epf"
 	And I click the button named "FormAddExtDataProc"
 	And I input "" text in "Path to plugin for test" field
 	And I input "ExternalSpecialOfferRules" text in "Name" field
@@ -106,7 +106,7 @@ Scenario: _030003 add Plugin SpecialRules
 Scenario: _030004 add Plugin RangeDiscount
 	Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 	And I click the button named "FormCreate"
-	And I select external file "#workingDir#\DataProcessor\RangeDiscount.epf"
+	And I select external file "#workingDir#/DataProcessor/RangeDiscount.epf"
 	And I click the button named "FormAddExtDataProc"
 	And I input "" text in "Path to plugin for test" field
 	And I input "ExternalRangeDiscount" text in "Name" field
@@ -124,7 +124,7 @@ Scenario: _030005 add Plugin FivePlusOne
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		And I click the button named "FormCreate"
 	* Add Plugin FivePlusOneType
-		And I select external file "#workingDir#\DataProcessor\FivePlusOne.epf"
+		And I select external file "#workingDir#/DataProcessor/FivePlusOne.epf"
 		And I click the button named "FormAddExtDataProc"
 		And I input "" text in "Path to plugin for test" field
 		And I input "ExternalFivePlusOne" text in "Name" field

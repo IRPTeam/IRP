@@ -1226,8 +1226,8 @@ Scenario: Create catalog IntegrationSettings objects
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c1859' | 'Port'             | '443'                                                                   |
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c1859' | 'TimeOut'          | '60'                                                                    |
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c1859' | 'SecureConnection' | 'Yes'                                                                   |
-		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf13dc8cb47e4' | 'AddressPath'      | 'C:\BuildAgentThird\work\161527a3295c878a\DataProcessor\Picture\Source' |
-		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf13dc8cb47e5' | 'AddressPath'      | 'C:\Users\NTrukhacheva\Desktop\Picture\Prewiev'                         |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf13dc8cb47e4' | 'AddressPath'      | '#workingDir#/Picture/Source' 							               |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf13dc8cb47e5' | 'AddressPath'      | '#workingDir#/Picture/Prewiev'                                          |
 	
 Scenario: Create information register CurrencyRates records
 

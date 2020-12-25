@@ -51,7 +51,7 @@ Scenario: _4000201 driver install
 		And I click "Yes" button
 		Given Recent TestClient message contains "Before install driver - it has to be loaded." string by template
 	* Instal driver
-		And I select external file "C:\AddComponents\1Native"
+		And I select external file "C:/AddComponents/1Native"
 		And I click "Add file" button	
 		And Delay 10
 		And I click the button named "FormWrite"	

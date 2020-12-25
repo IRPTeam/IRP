@@ -23,7 +23,7 @@ Scenario: _005012 filling in the "Integration settings" catalog
 	* Preparation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		And I click the button named "FormCreate"
-		And I select external file "#workingDir#\DataProcessor\bank_gov_ua.epf"
+		And I select external file "#workingDir#/DataProcessor/bank_gov_ua.epf"
 		And I click the button named "FormAddExtDataProc"
 		And I input "" text in "Path to plugin for test" field
 		And I input "ExternalBankUa" text in "Name" field
@@ -46,7 +46,7 @@ Scenario: _005012 filling in the "Integration settings" catalog
 			| 'AddressPath' |
 		And I activate "Value" field in "ConnectionSetting" table
 		And I select current line in "ConnectionSetting" table
-		And I input "#workingDir#\DataProcessor\Picture\Source" text in "Value" field of "ConnectionSetting" table
+		And I input "#workingDir#/Picture/Source" text in "Value" field of "ConnectionSetting" table
 		And I finish line editing in "ConnectionSetting" table
 		And I go to line in "ConnectionSetting" table
 			| 'Key'       | 'Value' |

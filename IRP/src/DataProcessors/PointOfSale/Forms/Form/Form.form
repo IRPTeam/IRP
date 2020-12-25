@@ -4683,6 +4683,23 @@ WHERE
       </edit>
     </columns>
   </attributes>
+  <attributes>
+    <name>Workstation</name>
+    <title>
+      <key>en</key>
+      <value>Workstation</value>
+    </title>
+    <id>168</id>
+    <valueType>
+      <types>CatalogRef.Workstations</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>qPayment</name>
     <title>
@@ -4959,7 +4976,6 @@ current row</value>
         <name>SetSpecialOffersAtRow</name>
       </handler>
     </action>
-    
     <representation>Text</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
@@ -4982,7 +4998,6 @@ document</value>
         <name>SetSpecialOffers</name>
       </handler>
     </action>
-    
     <representation>Text</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>

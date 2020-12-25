@@ -596,7 +596,7 @@ EndProcedure
 
 #Region PrintForm
 
-Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+Function GetPrintForm(Ref, PrintTemplate, AddInfo = Undefined) Export
 	Return Undefined;
 EndFunction
 

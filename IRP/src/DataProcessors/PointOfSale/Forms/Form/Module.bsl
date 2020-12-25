@@ -8,6 +8,10 @@ Var Component Export;
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	HTMLDate = GetCommonTemplate("HTMLClock").GetText();
 	HTMLTextTemplate = GetCommonTemplate("HTMLTextField").GetText();
+	Workstation = SessionParametersClientServer.GetSessionParameter("Workstation");
+	If Workstation.IsEmpty() Then
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_090, "Workstation"));
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -239,7 +243,7 @@ Procedure qPayment(Command)
 	ObjectParameters = New Structure;
 	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
 	ObjectParameters.Insert("BusinessUnit", Object.BusinessUnit);
-	ObjectParameters.Insert("Workstation", SessionParametersClientServer.GetSessionParameter("Workstation"));
+	ObjectParameters.Insert("Workstation", Workstation);
 	OpenFormParameters = New Structure;
 	OpenFormParameters.Insert("Parameters", ObjectParameters);
 	OpenForm("DataProcessor.PointOfSale.Form.Payment"
@@ -354,7 +358,7 @@ EndProcedure
 &AtClient
 Procedure ConnectBarcodeScanners()
 	HardwareParameters = New Structure;
-	HardwareParameters.Insert("Workstation", SessionParametersClientServer.GetSessionParameter("Workstation"));
+	HardwareParameters.Insert("Workstation", Workstation);
 	HardwareParameters.Insert("EquipmentType", PredefinedValue("Enum.EquipmentTypes.BarcodeScanner"));
 	HardwareParameters.Insert("ConnectionNotify" , New NotifyDescription("ConnectHardware_End", ThisObject));		                                 
 	HardwareClient.BeginConnectEquipment(HardwareParameters);

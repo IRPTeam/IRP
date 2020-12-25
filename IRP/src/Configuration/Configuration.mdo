@@ -199,7 +199,9 @@
   <commonModules>CommonModule.CatCashAccountsServer</commonModules>
   <commonModules>CommonModule.CatCompaniesClient</commonModules>
   <commonModules>CommonModule.CatCompaniesServer</commonModules>
+  <commonModules>CommonModule.CatConfigurationMetadataServer</commonModules>
   <commonModules>CommonModule.CatCurrenciesServer</commonModules>
+  <commonModules>CommonModule.CatExpenseAndRevenueTypesServer</commonModules>
   <commonModules>CommonModule.CatItemsClient</commonModules>
   <commonModules>CommonModule.CatItemsServer</commonModules>
   <commonModules>CommonModule.CatPartnersServer</commonModules>
@@ -322,6 +324,8 @@
   <commonModules>CommonModule.LocalizationEvents</commonModules>
   <commonModules>CommonModule.LocalizationReuse</commonModules>
   <commonModules>CommonModule.LocalizationServer</commonModules>
+  <commonModules>CommonModule.LockDataModificationPriveleged</commonModules>
+  <commonModules>CommonModule.MetadataInfo</commonModules>
   <commonModules>CommonModule.MobileEvents</commonModules>
   <commonModules>CommonModule.MobileSubsystem</commonModules>
   <commonModules>CommonModule.ObjectStatusesClient</commonModules>
@@ -353,10 +357,6 @@
   <commonModules>CommonModule.UsersEvent</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.CatExpenseAndRevenueTypesServer</commonModules>
-  <commonModules>CommonModule.LockDataModificationPriveleged</commonModules>
-  <commonModules>CommonModule.MetadataInfo</commonModules>
-  <commonModules>CommonModule.CatConfigurationMetadataServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -449,11 +449,12 @@
   <constants>Constant.UseCompanies</constants>
   <constants>Constant.UseItemKey</constants>
   <constants>Constant.UseLockDataModification</constants>
-  <commonForms>CommonForm.DataClassifier</commonForms>
+  <commonForms>CommonForm.DataMappingForm</commonForms>
   <commonForms>CommonForm.EditAddProperties</commonForms>
   <commonForms>CommonForm.EditDescriptions</commonForms>
   <commonForms>CommonForm.EditIDInfo</commonForms>
   <commonForms>CommonForm.EditMultilineText</commonForms>
+  <commonForms>CommonForm.EditTax</commonForms>
   <commonForms>CommonForm.EditUserSettings</commonForms>
   <commonForms>CommonForm.HTMLField</commonForms>
   <commonForms>CommonForm.MainSettings</commonForms>
@@ -465,10 +466,8 @@
   <commonForms>CommonForm.PictureViewerFormRegular</commonForms>
   <commonForms>CommonForm.RelatedDocuments</commonForms>
   <commonForms>CommonForm.ReportForm</commonForms>
-  <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.ShareToUsers</commonForms>
-  <commonForms>CommonForm.EditTax</commonForms>
-  <commonForms>CommonForm.DataMappingForm</commonForms>
+  <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>

@@ -30,7 +30,7 @@
 		</languageInfo>
 	</languageSettings>
 	<columns>
-		<size>15</size>
+		<size>11</size>
 		<columnsItem>
 			<index>1</index>
 			<column>
@@ -44,62 +44,44 @@
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>7</index>
-			<column>
-				<formatIndex>3</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
 			<index>6</index>
 			<column>
-				<formatIndex>4</formatIndex>
+				<formatIndex>3</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
 			<index>5</index>
 			<column>
-				<formatIndex>5</formatIndex>
+				<formatIndex>4</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
 			<index>3</index>
 			<column>
-				<formatIndex>6</formatIndex>
+				<formatIndex>5</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>11</index>
+			<index>7</index>
 			<column>
-				<formatIndex>7</formatIndex>
+				<formatIndex>6</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
 			<index>10</index>
 			<column>
-				<formatIndex>8</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
-			<index>8</index>
-			<column>
-				<formatIndex>9</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
-			<index>14</index>
-			<column>
-				<formatIndex>3</formatIndex>
+				<formatIndex>7</formatIndex>
 			</column>
 		</columnsItem>
 	</columns>
 	<rowsItem>
 		<index>1</index>
 		<row>
-			<formatIndex>10</formatIndex>
+			<formatIndex>8</formatIndex>
 			<c>
 				<i>1</i>
 				<c>
-					<f>11</f>
+					<f>9</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -110,12 +92,12 @@
 			</c>
 			<c>
 				<c>
-					<f>11</f>
+					<f>9</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>11</f>
+					<f>9</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -126,7 +108,7 @@
 			</c>
 			<c>
 				<c>
-					<f>11</f>
+					<f>9</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -137,7 +119,7 @@
 			</c>
 			<c>
 				<c>
-					<f>12</f>
+					<f>10</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -148,7 +130,7 @@
 			</c>
 			<c>
 				<c>
-					<f>11</f>
+					<f>9</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -159,51 +141,7 @@
 			</c>
 			<c>
 				<c>
-					<f>13</f>
-					<tl>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>For purchase</v8:content>
-						</v8:item>
-					</tl>
-				</c>
-			</c>
-			<c>
-				<c>
 					<f>11</f>
-					<tl>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Purchased</v8:content>
-						</v8:item>
-					</tl>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>11</f>
-					<tl>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Reserved</v8:content>
-						</v8:item>
-					</tl>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>13</f>
-					<tl>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Shipped</v8:content>
-						</v8:item>
-					</tl>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>14</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -214,7 +152,7 @@
 			</c>
 			<c>
 				<c>
-					<f>14</f>
+					<f>11</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -225,7 +163,7 @@
 			</c>
 			<c>
 				<c>
-					<f>15</f>
+					<f>12</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -236,7 +174,7 @@
 			</c>
 			<c>
 				<c>
-					<f>14</f>
+					<f>11</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -253,75 +191,55 @@
 			<c>
 				<i>1</i>
 				<c>
-					<f>16</f>
+					<f>13</f>
 					<parameter>SalesOrder</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>14</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>18</f>
+					<f>15</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>18</f>
+					<f>15</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>19</f>
+					<f>16</f>
 					<parameter>DeliveryDate</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>20</f>
+					<f>17</f>
 					<parameter>CanBeReservedDate</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>18</f>
+					<f>15</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>15</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>14</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>18</f>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>18</f>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>18</f>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>17</f>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>18</f>
+					<f>15</f>
 				</c>
 			</c>
 		</row>
@@ -332,84 +250,60 @@
 			<c>
 				<i>1</i>
 				<c>
-					<f>21</f>
+					<f>18</f>
 					<parameter>ItemInfo</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>22</f>
+					<f>19</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>23</f>
+					<f>20</f>
 					<parameter>Quantity</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>21</f>
 					<parameter>Unit</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>25</f>
+					<f>22</f>
 					<parameter>DeliveryDate</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>26</f>
+					<f>23</f>
 					<parameter>CanBeReservedDate</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>27</f>
-					<parameter>QuantityForPurchase</parameter>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>28</f>
-					<parameter>QuantityPurchased</parameter>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>29</f>
-					<parameter>QuantityReservedOnStock</parameter>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>30</f>
-					<parameter>QuantityShippedFromStock</parameter>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>31</f>
+					<f>24</f>
 					<parameter>QuantityStock</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>29</f>
+					<f>25</f>
 					<parameter>QuantityStockReservation</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
+					<f>26</f>
 					<parameter>QuantityStockWaitIncome</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>33</f>
+					<f>27</f>
 					<parameter>QuantityStockFree</parameter>
 				</c>
 			</c>
@@ -425,32 +319,89 @@
 			</c>
 			<c>
 				<c>
-					<f>34</f>
+					<f>28</f>
 					<parameter>ItemInfo</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>35</f>
+					<f>29</f>
 					<parameter>RowKey</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>36</f>
+					<f>30</f>
 					<parameter>Quantity</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>37</f>
+					<f>31</f>
 					<parameter>Unit</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>38</f>
+					<f>32</f>
 					<parameter>DeliveryDate</parameter>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>33</f>
+					<parameter>CanBeReservedDate</parameter>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>34</f>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>35</f>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>36</f>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>37</f>
+				</c>
+			</c>
+		</row>
+	</rowsItem>
+	<rowsItem>
+		<index>6</index>
+		<row>
+			<c>
+				<i>1</i>
+				<c>
+					<f>38</f>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>38</f>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>38</f>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>38</f>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>38</f>
 				</c>
 			</c>
 			<c>
@@ -462,52 +413,37 @@
 			<c>
 				<c>
 					<f>40</f>
-					<parameter>QuantityForPurchase</parameter>
+					<parameter>QuantityStockBalance</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
-					<parameter>QuantityPurchased</parameter>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>32</f>
-					<parameter>QuantityReservedOnStock</parameter>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>32</f>
-					<parameter>QuantityShippedFromStock</parameter>
+					<f>40</f>
+					<parameter>QuantityStockReserved</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
 					<f>41</f>
+					<parameter>QuantityGoodsReceiptSchedule</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
 					<f>42</f>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>43</f>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>44</f>
+					<parameter>QuantityStockFree</parameter>
 				</c>
 			</c>
 		</row>
 	</rowsItem>
 	<templateMode>true</templateMode>
-	<height>6</height>
-	<vgRows>6</vgRows>
+	<height>7</height>
+	<vgRows>7</vgRows>
+	<merge>
+		<r>6</r>
+		<c>1</c>
+		<w>4</w>
+	</merge>
 	<namedItem xsi:type="NamedItemCells">
 		<name>Title</name>
 		<area>
@@ -548,6 +484,16 @@
 			<endColumn>-1</endColumn>
 		</area>
 	</namedItem>
+	<namedItem xsi:type="NamedItemCells">
+		<name>Dates</name>
+		<area>
+			<type>Rows</type>
+			<beginRow>6</beginRow>
+			<endRow>6</endRow>
+			<beginColumn>-1</beginColumn>
+			<endColumn>-1</endColumn>
+		</area>
+	</namedItem>
 	<line width="1" gap="false">
 		<v8ui:style xsi:type="v8ui:SpreadsheetDocumentCellLineType">Solid</v8ui:style>
 	</line>
@@ -557,9 +503,6 @@
 	</format>
 	<format>
 		<width>22</width>
-	</format>
-	<format>
-		<width>88</width>
 	</format>
 	<format>
 		<width>114</width>
@@ -574,10 +517,7 @@
 		<width>98</width>
 	</format>
 	<format>
-		<width>69</width>
-	</format>
-	<format>
-		<width>78</width>
+		<width>88</width>
 	</format>
 	<format>
 		<height>114</height>
@@ -594,13 +534,6 @@
 		<font>0</font>
 		<border>0</border>
 		<width>94</width>
-		<horizontalAlignment>Center</horizontalAlignment>
-		<verticalAlignment>Center</verticalAlignment>
-		<backColor>#DCDCDC</backColor>
-	</format>
-	<format>
-		<font>0</font>
-		<border>0</border>
 		<horizontalAlignment>Center</horizontalAlignment>
 		<verticalAlignment>Center</verticalAlignment>
 		<backColor>#DCDCDC</backColor>
@@ -716,34 +649,13 @@
 	<format>
 		<font>0</font>
 		<border>0</border>
-		<width>152</width>
-		<horizontalAlignment>Right</horizontalAlignment>
-		<fillType>Parameter</fillType>
-	</format>
-	<format>
-		<font>0</font>
-		<border>0</border>
-		<width>78</width>
-		<horizontalAlignment>Right</horizontalAlignment>
-		<fillType>Parameter</fillType>
-	</format>
-	<format>
-		<font>0</font>
-		<border>0</border>
-		<horizontalAlignment>Right</horizontalAlignment>
-		<fillType>Parameter</fillType>
-	</format>
-	<format>
-		<font>0</font>
-		<border>0</border>
-		<width>69</width>
-		<horizontalAlignment>Right</horizontalAlignment>
-		<fillType>Parameter</fillType>
-	</format>
-	<format>
-		<font>0</font>
-		<border>0</border>
 		<width>98</width>
+		<horizontalAlignment>Right</horizontalAlignment>
+		<fillType>Parameter</fillType>
+	</format>
+	<format>
+		<font>0</font>
+		<border>0</border>
 		<horizontalAlignment>Right</horizontalAlignment>
 		<fillType>Parameter</fillType>
 	</format>
@@ -801,12 +713,6 @@
 	</format>
 	<format>
 		<border>0</border>
-		<width>152</width>
-		<horizontalAlignment>Right</horizontalAlignment>
-		<fillType>Parameter</fillType>
-	</format>
-	<format>
-		<border>0</border>
 		<width>98</width>
 		<horizontalAlignment>Right</horizontalAlignment>
 		<fillType>Parameter</fillType>
@@ -822,6 +728,38 @@
 		<horizontalAlignment>Right</horizontalAlignment>
 	</format>
 	<format>
+		<border>0</border>
+		<width>88</width>
+		<horizontalAlignment>Right</horizontalAlignment>
+		<fillType>Parameter</fillType>
+	</format>
+	<format>
+		<border>0</border>
+	</format>
+	<format>
+		<border>0</border>
+		<width>114</width>
+		<horizontalAlignment>Right</horizontalAlignment>
+		<textPlacement>Wrap</textPlacement>
+		<fillType>Parameter</fillType>
+		<format>
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>DF=dd.MM.yyyy</v8:content>
+			</v8:item>
+		</format>
+	</format>
+	<format>
+		<horizontalAlignment>Right</horizontalAlignment>
+		<fillType>Parameter</fillType>
+	</format>
+	<format>
+		<border>0</border>
+		<horizontalAlignment>Right</horizontalAlignment>
+		<fillType>Parameter</fillType>
+	</format>
+	<format>
+		<font>0</font>
 		<border>0</border>
 		<width>88</width>
 		<horizontalAlignment>Right</horizontalAlignment>

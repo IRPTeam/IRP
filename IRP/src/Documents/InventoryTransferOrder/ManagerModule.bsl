@@ -134,7 +134,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|		ELSE
 		|			DATETIME(1,1,1)
 		|		END AS OrderDeliveryDate,
-		|	tmp.Quantity AS OrderQuantity
+		|	VALUE(Enum.ProcurementMovementTypes.Order) AS MovementType,
+		|	tmp.Quantity AS Quantity
 		|FROM 
 		|	tmp AS tmp
 		|WHERE

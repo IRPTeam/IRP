@@ -82,7 +82,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	ELSE
 		|		tmp.ProcurementDate
 		|	END AS ProcurementDate,
-		|	tmp.Quantity AS InternalSupplyRequestQuantity
+		|	VALUE(Enum.ProcurementMovementTypes.Request) AS MovementType,
+		|	tmp.Quantity AS Quantity
 		|FROM 
 		|	tmp AS tmp
 		|";

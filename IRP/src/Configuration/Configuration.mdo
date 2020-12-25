@@ -612,6 +612,7 @@
   <enums>Enum.MetadataSubtype</enums>
   <enums>Enum.Rights</enums>
   <enums>Enum.PrintTemplateTypes</enums>
+  <enums>Enum.ProcurementMovementTypes</enums>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>

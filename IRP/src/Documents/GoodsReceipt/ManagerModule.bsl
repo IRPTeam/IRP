@@ -280,8 +280,9 @@ Procedure GetTables_NotUseSO_NotUsePO_IsProduct(Tables, TempManager, TableName)
 	|	tmp.Store AS Store,
 	|	tmp.ItemKey AS ItemKey,
 	|	OrderBalance.Order AS InternalSupplyRequest,
+	|	VALUE(Enum.ProcurementMovementTypes.Receipt) AS MovementType,
 	|	tmp.Period AS ReceiptDate,
-	|	tmp.Quantity AS ReceiptQuantity
+	|	tmp.Quantity AS Quantity
 	|FROM
 	|	tmp AS tmp
 	|	INNER JOIN AccumulationRegister.TransferOrderBalance AS TransferOrderBalance
@@ -304,13 +305,14 @@ Procedure GetTables_NotUseSO_NotUsePO_IsProduct(Tables, TempManager, TableName)
 	|UNION ALL
 	|
 	|SELECT
-	|	tmp.Period AS Period,
-	|	tmp.Company AS Company,
-	|	tmp.Store AS Store,
-	|	tmp.ItemKey AS ItemKey,
-	|	OrderBalance.Order AS InternalSupplyRequest,
-	|	tmp.Period AS ReceiptDate,
-	|	tmp.Quantity AS ReceiptQuantity
+	|	tmp.Period,
+	|	tmp.Company,
+	|	tmp.Store,
+	|	tmp.ItemKey,
+	|	OrderBalance.Order,
+	|	VALUE(Enum.ProcurementMovementTypes.Receipt),
+	|	tmp.Period,
+	|	tmp.Quantity
 	|FROM
 	|	tmp AS tmp
 	|		INNER JOIN AccumulationRegister.GoodsInTransitIncoming AS GoodsInTransitIncoming
@@ -337,6 +339,7 @@ Procedure GetTables_NotUseSO_NotUsePO_IsProduct(Tables, TempManager, TableName)
 	|	tmp.Store,
 	|	tmp.ItemKey,
 	|	OrderBalanceInternalSupplyRequest.Order,
+	|	VALUE(Enum.ProcurementMovementTypes.Receipt),
 	|	tmp.Period,
 	|	tmp.Quantity
 	|FROM
@@ -560,8 +563,9 @@ Procedure GetTables_UseSO_NotUsePO_NotUseSC_NotSCBeforeInvoice_IsProduct(Tables,
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	OrderBalance.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt) AS MovementType,
 		|	tmp.Period AS ReceiptDate,
-		|	tmp.Quantity AS ReceiptQuantity
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|	INNER JOIN AccumulationRegister.TransferOrderBalance AS TransferOrderBalance
@@ -589,6 +593,7 @@ Procedure GetTables_UseSO_NotUsePO_NotUseSC_NotSCBeforeInvoice_IsProduct(Tables,
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	OrderBalance.Order,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt),
 		|	tmp.Period,
 		|	tmp.Quantity
 		|FROM
@@ -618,6 +623,7 @@ Procedure GetTables_UseSO_NotUsePO_NotUseSC_NotSCBeforeInvoice_IsProduct(Tables,
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	OrderBalanceInternalSupplyRequest.Order,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt),
 		|	tmp.Period,
 		|	tmp.Quantity
 		|FROM
@@ -798,8 +804,9 @@ Procedure GetTables_UseSO_NotUsePO_UseSC_SCBeforeInvoice_IsProduct(Tables, TempM
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	OrderBalance.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt) AS MovementType,
 		|	tmp.Period AS ReceiptDate,
-		|	tmp.Quantity AS ReceiptQuantity
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|	INNER JOIN AccumulationRegister.TransferOrderBalance AS TransferOrderBalance
@@ -826,6 +833,7 @@ Procedure GetTables_UseSO_NotUsePO_UseSC_SCBeforeInvoice_IsProduct(Tables, TempM
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	OrderBalance.Order,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt),
 		|	tmp.Period,
 		|	tmp.Quantity
 		|FROM
@@ -855,6 +863,7 @@ Procedure GetTables_UseSO_NotUsePO_UseSC_SCBeforeInvoice_IsProduct(Tables, TempM
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	OrderBalanceInternalSupplyRequest.Order,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt),
 		|	tmp.Period,
 		|	tmp.Quantity
 		|FROM
@@ -1025,8 +1034,9 @@ Procedure GetTables_UseSO_NotUsePO_UseSC_NotSCBeforeInvoice_IsProduct(Tables, Te
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	OrderBalance.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt) AS MovementType,
 		|	tmp.Period AS ReceiptDate,
-		|	tmp.Quantity AS ReceiptQuantity
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|	INNER JOIN AccumulationRegister.TransferOrderBalance AS TransferOrderBalance
@@ -1054,6 +1064,7 @@ Procedure GetTables_UseSO_NotUsePO_UseSC_NotSCBeforeInvoice_IsProduct(Tables, Te
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	OrderBalance.Order,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt),
 		|	tmp.Period,
 		|	tmp.Quantity
 		|FROM
@@ -1083,6 +1094,7 @@ Procedure GetTables_UseSO_NotUsePO_UseSC_NotSCBeforeInvoice_IsProduct(Tables, Te
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	OrderBalanceInternalSupplyRequest.Order,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt),
 		|	tmp.Period,
 		|	tmp.Quantity
 		|FROM
@@ -1328,8 +1340,9 @@ Procedure GetTables_UseSO_UsePO_NotUseSC_NotSCBeforeInvoice_IsProduct(Tables, Te
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	OrderBalance.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt) AS MovementType,
 		|	tmp.Period AS ReceiptDate,
-		|	tmp.Quantity AS ReceiptQuantity
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|	INNER JOIN AccumulationRegister.TransferOrderBalance AS TransferOrderBalance
@@ -1357,6 +1370,7 @@ Procedure GetTables_UseSO_UsePO_NotUseSC_NotSCBeforeInvoice_IsProduct(Tables, Te
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	OrderBalance.Order,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt),
 		|	tmp.Period,
 		|	tmp.Quantity
 		|FROM
@@ -1386,6 +1400,7 @@ Procedure GetTables_UseSO_UsePO_NotUseSC_NotSCBeforeInvoice_IsProduct(Tables, Te
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	OrderBalanceInternalSupplyRequest.Order,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt),
 		|	tmp.Period,
 		|	tmp.Quantity
 		|FROM
@@ -1592,8 +1607,9 @@ Procedure GetTables_UseSO_UsePO_UseSC_SCBeforeInvoice_IsProduct(Tables, TempMana
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	OrderBalance.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt) AS MovementType,
 		|	tmp.Period AS ReceiptDate,
-		|	tmp.Quantity AS ReceiptQuantity
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|	INNER JOIN AccumulationRegister.TransferOrderBalance AS TransferOrderBalance
@@ -1621,6 +1637,7 @@ Procedure GetTables_UseSO_UsePO_UseSC_SCBeforeInvoice_IsProduct(Tables, TempMana
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	OrderBalance.Order,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt),
 		|	tmp.Period,
 		|	tmp.Quantity
 		|FROM
@@ -1650,6 +1667,7 @@ Procedure GetTables_UseSO_UsePO_UseSC_SCBeforeInvoice_IsProduct(Tables, TempMana
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	OrderBalanceInternalSupplyRequest.Order,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt),
 		|	tmp.Period,
 		|	tmp.Quantity
 		|FROM
@@ -1846,8 +1864,9 @@ Procedure GetTables_UseSO_UsePO_UseSC_NotSCBeforeInvoice_IsProduct(Tables, TempM
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	OrderBalance.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt) AS MovementType,
 		|	tmp.Period AS ReceiptDate,
-		|	tmp.Quantity AS ReceiptQuantity
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|	INNER JOIN AccumulationRegister.TransferOrderBalance AS TransferOrderBalance
@@ -1875,6 +1894,7 @@ Procedure GetTables_UseSO_UsePO_UseSC_NotSCBeforeInvoice_IsProduct(Tables, TempM
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	OrderBalance.Order,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt),
 		|	tmp.Period,
 		|	tmp.Quantity
 		|FROM
@@ -1904,6 +1924,7 @@ Procedure GetTables_UseSO_UsePO_UseSC_NotSCBeforeInvoice_IsProduct(Tables, TempM
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	OrderBalanceInternalSupplyRequest.Order,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt),
 		|	tmp.Period,
 		|	tmp.Quantity
 		|FROM
@@ -2099,8 +2120,9 @@ Procedure GetTables_NotUseSO_UsePO_IsProduct(Tables, TempManager, TableName)
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	OrderBalance.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt) AS MovementType,
 		|	tmp.Period AS ReceiptDate,
-		|	tmp.Quantity AS ReceiptQuantity
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|	INNER JOIN AccumulationRegister.TransferOrderBalance AS TransferOrderBalance
@@ -2126,6 +2148,7 @@ Procedure GetTables_NotUseSO_UsePO_IsProduct(Tables, TempManager, TableName)
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	OrderBalance.Order,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt),
 		|	tmp.Period,
 		|	tmp.Quantity
 		|FROM

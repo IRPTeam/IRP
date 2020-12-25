@@ -597,11 +597,42 @@ Procedure GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(T
 		|	tmp.Company AS Company,
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
-		|	OrderBalanceInternalSupplyRequest.Order AS InternalSupplyRequest,	
-		|	tmp.Period AS ReceiptDate,
-		|	tmp.Quantity AS ReceiptQuantity,
+		|	OrderBalanceInternalSupplyRequest.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Sent) AS MovementType,
 		|	tmp.Period AS SentDate,
-		|	tmp.Quantity AS SentQuantity
+		|	DATETIME(1,1,1) AS ReceiptDate,
+		|	tmp.Quantity AS Quantity
+		|FROM
+		|	tmp AS tmp
+		|		INNER JOIN AccumulationRegister.OrderBalance AS OrderBalancePurchaseOrder
+		|		ON tmp.Order = OrderBalancePurchaseOrder.Recorder
+		|			AND (OrderBalancePurchaseOrder.Order REFS Document.PurchaseOrder)
+		|			AND (OrderBalancePurchaseOrder.RecordType = VALUE(AccumulationRecordType.Receipt))
+		|			AND (NOT tmp.Order.Date IS NULL)
+		|			AND tmp.Store = OrderBalancePurchaseOrder.Store
+		|			AND tmp.ItemKey = OrderBalancePurchaseOrder.ItemKey
+		|			AND tmp.RowKey = OrderBalancePurchaseOrder.RowKey
+		|		INNER JOIN AccumulationRegister.OrderBalance AS OrderBalanceInternalSupplyRequest
+		|		ON (OrderBalancePurchaseOrder.Order = OrderBalanceInternalSupplyRequest.Recorder)
+		|			AND (OrderBalanceInternalSupplyRequest.Order REFS Document.InternalSupplyRequest)
+		|			AND (OrderBalanceInternalSupplyRequest.RecordType = VALUE(AccumulationRecordType.Expense))
+		|			AND (NOT OrderBalancePurchaseOrder.Order.Date IS NULL)
+		|			AND (OrderBalancePurchaseOrder.Store = OrderBalanceInternalSupplyRequest.Store)
+		|			AND (OrderBalancePurchaseOrder.ItemKey = OrderBalanceInternalSupplyRequest.ItemKey)
+		|			AND OrderBalancePurchaseOrder.RowKey = OrderBalanceInternalSupplyRequest.RowKey
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	tmp.Period,
+		|	tmp.Company,
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	OrderBalanceInternalSupplyRequest.Order,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt),
+		|	DATETIME(1,1,1),
+		|	tmp.Period,
+		|	tmp.Quantity
 		|FROM
 		|	tmp AS tmp
 		|		INNER JOIN AccumulationRegister.OrderBalance AS OrderBalancePurchaseOrder
@@ -620,6 +651,7 @@ Procedure GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(T
 		|			AND (OrderBalancePurchaseOrder.Store = OrderBalanceInternalSupplyRequest.Store)
 		|			AND (OrderBalancePurchaseOrder.ItemKey = OrderBalanceInternalSupplyRequest.ItemKey)
 		|			AND OrderBalancePurchaseOrder.RowKey = OrderBalanceInternalSupplyRequest.RowKey";
+		
 		
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
@@ -687,9 +719,10 @@ Procedure GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice_UseGR_IsProduct(Tabl
 		|	tmp.Company AS Company,
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
-		|	OrderBalanceInternalSupplyRequest.Order AS InternalSupplyRequest,	
+		|	OrderBalanceInternalSupplyRequest.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Sent) AS MovementType,
 		|	tmp.Period AS SentDate,
-		|	tmp.Quantity AS SentQuantity
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|		INNER JOIN AccumulationRegister.OrderBalance AS OrderBalancePurchaseOrder
@@ -926,11 +959,11 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 		|	tmp.Company AS Company,
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
-		|	OrderBalanceInternalSupplyRequest.Order AS InternalSupplyRequest,	
-		|	tmp.Period AS ReceiptDate,
-		|	tmp.Quantity AS ReceiptQuantity,
+		|	OrderBalanceInternalSupplyRequest.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Sent) AS MovementType,
 		|	tmp.Period AS SentDate,
-		|	tmp.Quantity AS SentQuantity
+		|	DATETIME(1,1,1) AS ReceiptDate,
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|		INNER JOIN AccumulationRegister.OrderBalance AS OrderBalancePurchaseOrder
@@ -948,7 +981,38 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 		|			AND (NOT OrderBalancePurchaseOrder.Order.Date IS NULL)
 		|			AND (OrderBalancePurchaseOrder.Store = OrderBalanceInternalSupplyRequest.Store)
 		|			AND (OrderBalancePurchaseOrder.ItemKey = OrderBalanceInternalSupplyRequest.ItemKey)
-		|			AND (OrderBalancePurchaseOrder.RowKey = OrderBalanceInternalSupplyRequest.RowKey)";
+		|			AND OrderBalancePurchaseOrder.RowKey = OrderBalanceInternalSupplyRequest.RowKey
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	tmp.Period,
+		|	tmp.Company,
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	OrderBalanceInternalSupplyRequest.Order,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt),
+		|	DATETIME(1,1,1),
+		|	tmp.Period,
+		|	tmp.Quantity
+		|FROM
+		|	tmp AS tmp
+		|		INNER JOIN AccumulationRegister.OrderBalance AS OrderBalancePurchaseOrder
+		|		ON tmp.Order = OrderBalancePurchaseOrder.Recorder
+		|			AND (OrderBalancePurchaseOrder.Order REFS Document.PurchaseOrder)
+		|			AND (OrderBalancePurchaseOrder.RecordType = VALUE(AccumulationRecordType.Receipt))
+		|			AND (NOT tmp.Order.Date IS NULL)
+		|			AND tmp.Store = OrderBalancePurchaseOrder.Store
+		|			AND tmp.ItemKey = OrderBalancePurchaseOrder.ItemKey
+		|			AND tmp.RowKey = OrderBalancePurchaseOrder.RowKey
+		|		INNER JOIN AccumulationRegister.OrderBalance AS OrderBalanceInternalSupplyRequest
+		|		ON (OrderBalancePurchaseOrder.Order = OrderBalanceInternalSupplyRequest.Recorder)
+		|			AND (OrderBalanceInternalSupplyRequest.Order REFS Document.InternalSupplyRequest)
+		|			AND (OrderBalanceInternalSupplyRequest.RecordType = VALUE(AccumulationRecordType.Expense))
+		|			AND (NOT OrderBalancePurchaseOrder.Order.Date IS NULL)
+		|			AND (OrderBalancePurchaseOrder.Store = OrderBalanceInternalSupplyRequest.Store)
+		|			AND (OrderBalancePurchaseOrder.ItemKey = OrderBalanceInternalSupplyRequest.ItemKey)
+		|			AND OrderBalancePurchaseOrder.RowKey = OrderBalanceInternalSupplyRequest.RowKey";
 
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
@@ -1052,9 +1116,10 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_UseGR_IsProduct(Tables,
 		|	tmp.Company AS Company,
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
-		|	OrderBalanceInternalSupplyRequest.Order AS InternalSupplyRequest,	
+		|	OrderBalanceInternalSupplyRequest.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Sent) AS MovementType,
 		|	tmp.Period AS SentDate,
-		|	tmp.Quantity AS SentQuantity
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|		INNER JOIN AccumulationRegister.OrderBalance AS OrderBalancePurchaseOrder
@@ -1510,11 +1575,11 @@ Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_NotUseGR_I
 		|	tmp.Company AS Company,
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
-		|	OrderBalanceInternalSupplyRequest.Order AS InternalSupplyRequest,	
-		|	tmp.Period AS ReceiptDate,
-		|	tmp.Quantity AS ReceiptQuantity,
+		|	OrderBalanceInternalSupplyRequest.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Sent) AS MovementType,
 		|	tmp.Period AS SentDate,
-		|	tmp.Quantity AS SentQuantity
+		|	DATETIME(1,1,1) AS ReceiptDate,
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|		INNER JOIN AccumulationRegister.OrderBalance AS OrderBalancePurchaseOrder
@@ -1532,7 +1597,38 @@ Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_NotUseGR_I
 		|			AND (NOT OrderBalancePurchaseOrder.Order.Date IS NULL)
 		|			AND (OrderBalancePurchaseOrder.Store = OrderBalanceInternalSupplyRequest.Store)
 		|			AND (OrderBalancePurchaseOrder.ItemKey = OrderBalanceInternalSupplyRequest.ItemKey)
-		|			AND (OrderBalancePurchaseOrder.RowKey = OrderBalanceInternalSupplyRequest.RowKey)";
+		|			AND OrderBalancePurchaseOrder.RowKey = OrderBalanceInternalSupplyRequest.RowKey
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	tmp.Period,
+		|	tmp.Company,
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	OrderBalanceInternalSupplyRequest.Order,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt),
+		|	DATETIME(1,1,1),
+		|	tmp.Period,
+		|	tmp.Quantity
+		|FROM
+		|	tmp AS tmp
+		|		INNER JOIN AccumulationRegister.OrderBalance AS OrderBalancePurchaseOrder
+		|		ON tmp.Order = OrderBalancePurchaseOrder.Recorder
+		|			AND (OrderBalancePurchaseOrder.Order REFS Document.PurchaseOrder)
+		|			AND (OrderBalancePurchaseOrder.RecordType = VALUE(AccumulationRecordType.Receipt))
+		|			AND (NOT tmp.Order.Date IS NULL)
+		|			AND tmp.Store = OrderBalancePurchaseOrder.Store
+		|			AND tmp.ItemKey = OrderBalancePurchaseOrder.ItemKey
+		|			AND tmp.RowKey = OrderBalancePurchaseOrder.RowKey
+		|		INNER JOIN AccumulationRegister.OrderBalance AS OrderBalanceInternalSupplyRequest
+		|		ON (OrderBalancePurchaseOrder.Order = OrderBalanceInternalSupplyRequest.Recorder)
+		|			AND (OrderBalanceInternalSupplyRequest.Order REFS Document.InternalSupplyRequest)
+		|			AND (OrderBalanceInternalSupplyRequest.RecordType = VALUE(AccumulationRecordType.Expense))
+		|			AND (NOT OrderBalancePurchaseOrder.Order.Date IS NULL)
+		|			AND (OrderBalancePurchaseOrder.Store = OrderBalanceInternalSupplyRequest.Store)
+		|			AND (OrderBalancePurchaseOrder.ItemKey = OrderBalanceInternalSupplyRequest.ItemKey)
+		|			AND OrderBalancePurchaseOrder.RowKey = OrderBalanceInternalSupplyRequest.RowKey";
 	
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
@@ -1637,9 +1733,10 @@ Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_UseGR_IsPr
 		|	tmp.Company AS Company,
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
-		|	OrderBalanceInternalSupplyRequest.Order AS InternalSupplyRequest,	
+		|	OrderBalanceInternalSupplyRequest.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Sent) AS MovementType,
 		|	tmp.Period AS SentDate,
-		|	tmp.Quantity AS SentQuantity
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|		INNER JOIN AccumulationRegister.OrderBalance AS OrderBalancePurchaseOrder
@@ -1903,11 +2000,11 @@ Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_NotUseG
 		|	tmp.Company AS Company,
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
-		|	OrderBalanceInternalSupplyRequest.Order AS InternalSupplyRequest,	
-		|	tmp.Period AS ReceiptDate,
-		|	tmp.Quantity AS ReceiptQuantity,
+		|	OrderBalanceInternalSupplyRequest.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Sent) AS MovementType,
 		|	tmp.Period AS SentDate,
-		|	tmp.Quantity AS SentQuantity
+		|	DATETIME(1,1,1) AS ReceiptDate,
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|		INNER JOIN AccumulationRegister.OrderBalance AS OrderBalancePurchaseOrder
@@ -1925,7 +2022,38 @@ Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_NotUseG
 		|			AND (NOT OrderBalancePurchaseOrder.Order.Date IS NULL)
 		|			AND (OrderBalancePurchaseOrder.Store = OrderBalanceInternalSupplyRequest.Store)
 		|			AND (OrderBalancePurchaseOrder.ItemKey = OrderBalanceInternalSupplyRequest.ItemKey)
-		|			AND (OrderBalancePurchaseOrder.RowKey = OrderBalanceInternalSupplyRequest.RowKey)";
+		|			AND OrderBalancePurchaseOrder.RowKey = OrderBalanceInternalSupplyRequest.RowKey
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	tmp.Period,
+		|	tmp.Company,
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	OrderBalanceInternalSupplyRequest.Order,
+		|	VALUE(Enum.ProcurementMovementTypes.Receipt),
+		|	DATETIME(1,1,1),
+		|	tmp.Period,
+		|	tmp.Quantity
+		|FROM
+		|	tmp AS tmp
+		|		INNER JOIN AccumulationRegister.OrderBalance AS OrderBalancePurchaseOrder
+		|		ON tmp.Order = OrderBalancePurchaseOrder.Recorder
+		|			AND (OrderBalancePurchaseOrder.Order REFS Document.PurchaseOrder)
+		|			AND (OrderBalancePurchaseOrder.RecordType = VALUE(AccumulationRecordType.Receipt))
+		|			AND (NOT tmp.Order.Date IS NULL)
+		|			AND tmp.Store = OrderBalancePurchaseOrder.Store
+		|			AND tmp.ItemKey = OrderBalancePurchaseOrder.ItemKey
+		|			AND tmp.RowKey = OrderBalancePurchaseOrder.RowKey
+		|		INNER JOIN AccumulationRegister.OrderBalance AS OrderBalanceInternalSupplyRequest
+		|		ON (OrderBalancePurchaseOrder.Order = OrderBalanceInternalSupplyRequest.Recorder)
+		|			AND (OrderBalanceInternalSupplyRequest.Order REFS Document.InternalSupplyRequest)
+		|			AND (OrderBalanceInternalSupplyRequest.RecordType = VALUE(AccumulationRecordType.Expense))
+		|			AND (NOT OrderBalancePurchaseOrder.Order.Date IS NULL)
+		|			AND (OrderBalancePurchaseOrder.Store = OrderBalanceInternalSupplyRequest.Store)
+		|			AND (OrderBalancePurchaseOrder.ItemKey = OrderBalanceInternalSupplyRequest.ItemKey)
+		|			AND OrderBalancePurchaseOrder.RowKey = OrderBalanceInternalSupplyRequest.RowKey";
 	
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
@@ -1996,8 +2124,9 @@ Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_UseGR_I
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	OrderBalanceInternalSupplyRequest.Order AS InternalSupplyRequest,	
+		|	VALUE(Enum.ProcurementMovementTypes.Sent) AS MovementType,
 		|	tmp.Period AS SentDate,
-		|	tmp.Quantity AS SentQuantity
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|		INNER JOIN AccumulationRegister.OrderBalance AS OrderBalancePurchaseOrder
@@ -2446,8 +2575,9 @@ Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_UseGR_IsProdu
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	OrderBalanceInternalSupplyRequest.Order AS InternalSupplyRequest,	
+		|	VALUE(Enum.ProcurementMovementTypes.Sent) AS MovementType,
 		|	tmp.Period AS SentDate,
-		|	tmp.Quantity AS SentQuantity
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|		INNER JOIN AccumulationRegister.OrderBalance AS OrderBalancePurchaseOrder
@@ -2606,9 +2736,10 @@ Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_UseGR_UseS
 		|	tmp.Company AS Company,
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
-		|	OrderBalanceInternalSupplyRequest.Order AS InternalSupplyRequest,	
+		|	OrderBalanceInternalSupplyRequest.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Sent) AS MovementType,
 		|	tmp.Period AS SentDate,
-		|	tmp.Quantity AS SentQuantity
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|		INNER JOIN AccumulationRegister.OrderBalance AS OrderBalancePurchaseOrder

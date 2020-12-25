@@ -17,50 +17,11 @@
   <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="ec4332ad-428c-42c1-af5c-33f7013aa737">
-    <name>InternalSupplyRequestQuantity</name>
+  <resources uuid="0618ad1a-39c0-495d-9218-cbf362e1b6a2">
+    <name>Quantity</name>
     <synonym>
       <key>en</key>
-      <value>Internal supply request quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="f010aade-af6b-4936-b4a8-ffa978fc5959">
-    <name>OrderQuantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Order quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="7760fb25-3922-43a4-b23a-cf2949c5d6fd">
-    <name>SentQuantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Sent quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="735715cd-f7c3-483c-9307-2cff654e891f">
-    <name>ReceiptQuantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Receipt quantity</value>
+      <value>Quantity</value>
     </synonym>
     <type>
       <types>DefinedType.typeQuantity</types>
@@ -221,6 +182,20 @@
       <dateQualifiers>
         <dateFractions>Date</dateFractions>
       </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="4fc24fdc-fe35-4f55-bb37-a3b8f04361e6">
+    <name>MovementType</name>
+    <synonym>
+      <key>en</key>
+      <value>Movement type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.ProcurementMovementTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

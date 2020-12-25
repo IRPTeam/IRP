@@ -248,8 +248,9 @@ Procedure GetTables_NotUseSO_IsProduct(Tables, TempManager, TableName)
 		|	OrderBalance.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	OrderBalance.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Sent) AS MovementType,
 		|	tmp.Period AS SentDate,
-		|	tmp.Quantity AS SentQuantity
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|INNER JOIN AccumulationRegister.TransferOrderBalance AS TransferOrderBalance
@@ -388,8 +389,9 @@ Procedure GetTables_UseSO_NotSCBeforeInvoice_IsProduct(Tables, TempManager, Tabl
 		|	OrderBalance.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	OrderBalance.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Sent) AS MovementType,
 		|	tmp.Period AS SentDate,
-		|	tmp.Quantity AS SentQuantity
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|INNER JOIN AccumulationRegister.TransferOrderBalance AS TransferOrderBalance
@@ -543,8 +545,9 @@ Procedure GetTables_UseSO_SCBeforeInvoice_IsProduct(Tables, TempManager, TableNa
 		|	OrderBalance.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	OrderBalance.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Sent) AS MovementType,
 		|	tmp.Period AS SentDate,
-		|	tmp.Quantity AS SentQuantity
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|INNER JOIN AccumulationRegister.TransferOrderBalance AS TransferOrderBalance
@@ -666,8 +669,9 @@ Procedure GetTables_NotUseSCBasis_IsProduct(Tables, TempManager, TableName)
 		|	OrderBalance.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	OrderBalance.Order AS InternalSupplyRequest,
+		|	VALUE(Enum.ProcurementMovementTypes.Sent) AS MovementType,
 		|	tmp.Period AS SentDate,
-		|	tmp.Quantity AS SentQuantity
+		|	tmp.Quantity AS Quantity
 		|FROM
 		|	tmp AS tmp
 		|INNER JOIN AccumulationRegister.TransferOrderBalance AS TransferOrderBalance

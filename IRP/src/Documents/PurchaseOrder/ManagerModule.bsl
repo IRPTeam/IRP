@@ -330,11 +330,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.ItemKey,
 		|	tmp.PurchaseBasis AS InternalSupplyRequest,
 		|	tmp.DocumentDate AS OrderCreationDate,
-		|	tmp.Period AS OrderApprovalDate,
+		|	tmp.Period       AS OrderApprovalDate,
 		|	tmp.DeliveryDate AS OrderDeliveryDate,
-		|	tmp.Quantity AS OrderQuantity,
-		|	DATETIME(1,1,1) AS SentDate,
-		|	0 AS SentQuantity
+		|	DATETIME(1,1,1)  AS SentDate,
+		|	tmp.Quantity AS Quantity,
+		|	VALUE(Enum.ProcurementMovementTypes.Order) AS MovementType
+		|	
 		|FROM 
 		|	tmp AS tmp
 		|WHERE
@@ -351,9 +352,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	DATETIME(1,1,1),
 		|	DATETIME(1,1,1),
 		|	DATETIME(1,1,1),
-		|	0,
 		|	tmp.Period,
-		|	tmp.Quantity
+		|	tmp.Quantity,
+		|	VALUE(Enum.ProcurementMovementTypes.Sent)
 		|FROM
 		|	tmp AS tmp
 		|WHERE

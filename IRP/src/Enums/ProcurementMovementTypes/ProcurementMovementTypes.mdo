@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e28aff43-bb20-4313-ad42-90e85429daab">
+  <producedTypes>
+    <refType typeId="194c8584-c4ae-461a-913a-00525a037d67" valueTypeId="8e3c562f-3ecc-4354-be9b-6df874b8800c"/>
+    <listType typeId="7661f379-4465-4602-8aba-18dcd4213618" valueTypeId="3a0baa04-98de-4339-be18-e801192d7f59"/>
+    <managerType typeId="3115ed16-58be-49ca-ae76-17127ea4dcd2" valueTypeId="f8a4dc3c-3938-43c8-92a3-a9489de8e2a0"/>
+  </producedTypes>
+  <name>ProcurementMovementTypes</name>
+  <synonym>
+    <key>en</key>
+    <value>Procurement movement types</value>
+  </synonym>
+  <quickChoice>true</quickChoice>
+  <choiceMode>BothWays</choiceMode>
+  <enumValues uuid="f14d0f0a-4f70-47dc-afa3-e01aa7b04ce8">
+    <name>Request</name>
+    <synonym>
+      <key>en</key>
+      <value>Request</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="8b57e88d-80ed-4afe-bc6c-00779ee3ef43">
+    <name>Order</name>
+    <synonym>
+      <key>en</key>
+      <value>Order</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="8981b95f-a122-4b0f-8412-7cb1caa8b0a9">
+    <name>Sent</name>
+    <synonym>
+      <key>en</key>
+      <value>Sent</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="58a514a2-5687-4955-aa0b-5c2a5c278231">
+    <name>Receipt</name>
+    <synonym>
+      <key>en</key>
+      <value>Receipt</value>
+    </synonym>
+  </enumValues>
+</mdclass:Enum>

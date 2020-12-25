@@ -182,8 +182,10 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseOrder017005$$" variable
 		And I delete "$$PurchaseOrder017005$$" variable
+		And I delete "$$DatePurchaseOrderWait017005$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder017005$$"
 		And I save the window as "$$PurchaseOrder017005$$"
+		And I save the value of "Date" field as "$$DatePurchaseOrderWait017005$$"
 		And I click the button named "FormPostAndClose"
 		And I close current window
 	* Check the absence of movements Purchase Order N101 by register Order Balance
@@ -203,9 +205,12 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 		And I click the button named "FormPost"
 		And I click the hyperlink named "DecorationStatusHistory"
 		And "List" table contains lines
-			| 'Object'                  | 'Status'   |
-			| '$$PurchaseOrder017005$$' | 'Wait'     |
-			| '$$PurchaseOrder017005$$' | 'Approved' |
+			| 'Object'                  | 'Status'   | 'Period'                         |
+			| '$$PurchaseOrder017005$$' | 'Wait'     |'$$DatePurchaseOrderWait017005$$' |
+			| '$$PurchaseOrder017005$$' | 'Approved' |'*'                               |
+		And "List" table does not contain lines
+			| 'Object'                  | 'Status'   | 'Period'                         |
+			| '$$PurchaseOrder017005$$' | 'Approved' |'$$DatePurchaseOrderWait017005$$' |
 		And I close current window
 		And I click the button named "FormPostAndClose"
 		And I close current window

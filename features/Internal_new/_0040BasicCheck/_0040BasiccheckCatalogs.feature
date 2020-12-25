@@ -913,3 +913,18 @@ Scenario: Open object form "DataMappingItems"
 	If the warning is displayed then
 		Then I raise "Failed to open catalog form DataMappingItems" exception
 	And I close current window
+
+	
+Scenario: Open list form "PartnersBankAccounts" 
+	And I close all client application windows
+	Given I open "PartnersBankAccounts" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PartnersBankAccounts" exception
+	And I close current window
+
+Scenario: Open object form "PartnersBankAccounts"
+	And I close all client application windows
+	Given I open "PartnersBankAccounts" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PartnersBankAccounts" exception
+	And I close current window

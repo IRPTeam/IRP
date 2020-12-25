@@ -295,7 +295,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.ItemKey AS ItemKey,
 		|	tmp.RowKey AS RowKey,
 		|	tmp.Quantity,
-		|	tmp.DeliveryDate,
+		|	tmp.DeliveryDate AS Period,
 		|	tmp.DeliveryDate AS DeliveryDate
 		|FROM
 		|	tmp AS tmp

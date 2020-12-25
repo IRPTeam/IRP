@@ -1421,10 +1421,8 @@ Scenario: _012020 check row key when cloning a string in Internal supply request
 		And I click "Registrations report" button
 		And I delete "$$$$RovISR1$$$$" variable
 		And I delete "$$$$RovISR2$$$$" variable
-		// And in "ResultTable" spreadsheet document I move to "R12C8" cell
-		// And I save spreadsheet document cell value "ResultTable" "R12C8" to "$$$$RovISR1$$$$" variable
-		// And in "ResultTable" spreadsheet document I move to "R13C8" cell
-		// And I save spreadsheet document cell value "ResultTable" "R13C8" to "$$$$RovISR2$$$$" variable
+		And I select "Order balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And in "ResultTable" spreadsheet document I move to "R6C8" cell
 		And I save spreadsheet document cell value "ResultTable" "R6C8" to "$$$$RovISR1$$$$" variable
 		And in "ResultTable" spreadsheet document I move to "R7C8" cell

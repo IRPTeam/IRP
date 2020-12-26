@@ -309,7 +309,7 @@ EndFunction
 Function ExtractInfoFromOrderRows(QueryTable, ShipmentConfirmationsTable = Undefined)
 	QueryTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	For Each Row In QueryTable Do
-		Row.Key = New UUID(Row.RowKey);
+		Row.Key = Row.RowKey;
 	EndDo;
 	
 	Query = New Query();
@@ -595,7 +595,7 @@ Function GetDocumentTable_ShipmentConfirmation(ArrayOfBasisDocuments)
 		NewRow = ShipmentConfirmationsTable.Add();
 		NewRow.Ref = Row.Order;
 		NewRow.ShipmentConfirmation = Row.ShipmentConfirmation;
-		NewRow.Key = New UUID(Row.RowKey);
+		NewRow.Key = Row.RowKey;
 		NewRow.Quantity = Row.Quantity;
 		NewRow.QuantityInShipmentConfirmation = Row.Quantity;
 	EndDo;

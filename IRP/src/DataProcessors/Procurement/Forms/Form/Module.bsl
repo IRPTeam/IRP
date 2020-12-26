@@ -938,7 +938,7 @@ Procedure Fill_Details(ItemKey)
 			
 		ProcurementRecorderSelection = ProcurementDocumentsSelection.Select();
 		While ProcurementRecorderSelection.Next() Do
-			NewRowDetails.RowKey = New UUID(ProcurementRecorderSelection.RowKey);
+			NewRowDetails.RowKey = ProcurementRecorderSelection.RowKey;
 				
 			If ValueIsFilled(ProcurementRecorderSelection.Recorder) Then
 				NewRowDetailsRecorder = NewRowDetails.GetItems().Add();

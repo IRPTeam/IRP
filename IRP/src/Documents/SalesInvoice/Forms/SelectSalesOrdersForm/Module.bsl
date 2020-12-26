@@ -116,7 +116,7 @@ Procedure FillDocumentsTree(FilterValues, ExistingRows)
 	QueryTableOrders = Query.Execute().Unload();
 	QueryTableOrders.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	For Each Row In QueryTableOrders Do
-		Row.Key = New UUID(Row.RowKey);
+		Row.Key = Row.RowKey;
 	EndDo;
 	
 	Query = New Query();

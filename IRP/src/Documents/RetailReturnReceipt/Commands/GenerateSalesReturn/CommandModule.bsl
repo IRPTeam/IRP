@@ -159,7 +159,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFields)
 				NewRow.Insert(ColumnItemList.Name, RowItemList[ColumnItemList.Name]);
 			EndDo;
 			
-			NewRow.Key = New UUID(RowItemList.RowKey);
+			NewRow.Key = RowItemList.RowKey;
 			
 			ArrayOfTaxListFilters.Add(New Structure("Key", NewRow.Key));
 			ArrayOfSpecialOffersFilters.Add(New Structure("Key", NewRow.Key));
@@ -257,7 +257,7 @@ EndFunction
 Function ExtractInfoFromOrderRows(QueryTable)
 	QueryTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	For Each Row In QueryTable Do
-		Row.Key = New UUID(Row.RowKey);
+		Row.Key = Row.RowKey;
 	EndDo;
 	
 	Query = New Query();
@@ -275,7 +275,7 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|FROM
 		|	&QueryTable AS QueryTable
 		|;
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[1]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmpQueryTableFull.BasedOn,
 		|	tmpQueryTableFull.RetailSalesReceipt,
@@ -295,7 +295,7 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	tmpQueryTableFull.RowKey,
 		|	tmpQueryTableFull.Unit
 		|;
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[2]//////////////////////////////////////////////////////////////////////////////
 		|SELECT ALLOWED
 		|	tmpQueryTable.BasedOn AS BasedOn,
 		|	tmpQueryTable.ItemKey AS ItemKey,
@@ -330,7 +330,7 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|ORDER BY
 		|	ItemList.LineNumber
 		|;
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[3]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	TaxList.Ref,
 		|	TaxList.Key,
@@ -346,7 +346,7 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|		ON tmpQueryTable.RetailSalesReceipt = TaxList.Ref
 		|		AND tmpQueryTable.Key = TaxList.Key
 		|;
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[4]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	SpecialOffers.Ref,
 		|	SpecialOffers.Key,
@@ -358,7 +358,7 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|		ON tmpQueryTable.RetailSalesReceipt = SpecialOffers.Ref
 		|		AND tmpQueryTable.Key = SpecialOffers.Key
 		|;
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[5]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	SerialLotNumbers.Ref,
 		|	SerialLotNumbers.Key,
@@ -373,7 +373,7 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|WHERE
 		|	tmpQueryTableFull.Quantity > 0
 		|;
-		|////////////////////////////////////////////////////////////////////////////////
+		|//[6]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	Payments.Ref,
 		|	Payments.PaymentType,

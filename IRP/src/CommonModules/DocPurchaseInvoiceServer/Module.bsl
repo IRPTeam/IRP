@@ -224,7 +224,7 @@ Procedure FillDocumentWithGoodsReceiptArray(Object, Form, ArrayOfBasisDocuments)
 		NewRow = GoodsReceiptsTable.Add();
 		NewRow.Ref = Row.Order;
 		NewRow.GoodsReceipt = Row.GoodsReceipt;
-		NewRow.Key = New UUID(Row.RowKey);
+		NewRow.Key = Row.RowKey;
 		NewRow.Quantity = Row.Quantity;
 		NewRow.QuantityInGoodsReceipt = Row.Quantity;
 	EndDo;
@@ -276,7 +276,7 @@ Procedure FillDocumentWithGoodsReceiptArray(Object, Form, ArrayOfBasisDocuments)
 	
 	QueryTableOrderBalance.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	For Each Row In QueryTableOrderBalance Do
-		Row.Key = New UUID(Row.RowKey);
+		Row.Key = Row.RowKey;
 	EndDo;
 	
 	Query = New Query();

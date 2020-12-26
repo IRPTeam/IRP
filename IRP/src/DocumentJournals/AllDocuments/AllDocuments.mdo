@@ -10,6 +10,7 @@
     <key>en</key>
     <value>All documents</value>
   </synonym>
+  <defaultForm>DocumentJournal.AllDocuments.Form.ListForm</defaultForm>
   <useStandardCommands>true</useStandardCommands>
   <registeredDocuments>Document.BankPayment</registeredDocuments>
   <registeredDocuments>Document.BankReceipt</registeredDocuments>
@@ -59,4 +60,13 @@
     </synonym>
     <references>Document.BankPayment.Attribute.Company</references>
   </columns>
+  <forms uuid="23009b7b-ed27-4f36-bfa4-c1fe705a2940">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:DocumentJournal>

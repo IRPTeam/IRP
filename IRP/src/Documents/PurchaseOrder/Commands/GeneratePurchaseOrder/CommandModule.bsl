@@ -89,7 +89,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFields)
 			NewRow.Insert("Unit", RowItemList.Unit);
 			NewRow.Insert("Quantity", RowItemList.Quantity);
 			NewRow.Insert("PurchaseBasis", RowItemList.PurchaseBasis);
-			NewRow.Insert("Key", New UUID(RowItemList.RowKey));
+			NewRow.Insert("Key", RowItemList.RowKey);
 			Result.ItemList.Add(NewRow);
 		EndDo;
 		ArrayOfResults.Add(Result);

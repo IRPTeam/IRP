@@ -23,6 +23,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables.Insert("StockReservation_Exists" , PostingServer.CreateTable(AccReg.StockReservation));
 	Tables.Insert("StockBalance_Exists"     , PostingServer.CreateTable(AccReg.StockBalance));
+
+	Tables.Insert("SalesOrder_ByPlannedDate"                  , PostingServer.CreateTable(AccReg.SalesOrder_ByPlannedDate));
 	
 	Tables.OrderBalance_Exists = 
 	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
@@ -223,8 +225,8 @@ Procedure GetTables_Common(Tables, TempManager, TableName)
 	Query.TempTablesManager = TempManager;
 	#Region QueryText
 	Query.Text =
-		// [0]
-		"SELECT
+		"// [0]
+		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.Order AS SalesOrder,
 		|	tmp.Currency AS Currency,
@@ -234,6 +236,18 @@ Procedure GetTables_Common(Tables, TempManager, TableName)
 		|	tmp.Amount AS Amount,
 		|	tmp.Period
 		|FROM
+		|	tmp AS tmp
+		|
+		|;
+		|// [1]
+		|SELECT
+		|	tmp.Company AS Company,
+		|	tmp.Order AS Order,
+		|	tmp.Store AS Store,
+		|	tmp.ItemKey AS ItemKey,
+		|	tmp.Quantity AS Quantity,
+		|	tmp.DeliveryDate AS Period
+		|FROM
 		|	tmp AS tmp";
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
@@ -241,6 +255,7 @@ Procedure GetTables_Common(Tables, TempManager, TableName)
 	QueryResults = Query.ExecuteBatch();
 	
 	Tables.SalesOrderTurnovers = QueryResults[0].Unload();
+	Tables.SalesOrder_ByPlannedDate = QueryResults[1].Unload();
 EndProcedure
 
 #Region Table_tmp_1
@@ -1202,6 +1217,10 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	// OrderProcurement
 	OrderProcurement = AccumulationRegisters.OrderProcurement.GetLockFields(DocumentDataTables.OrderProcurement);
 	DataMapWithLockFields.Insert(OrderProcurement.RegisterName, OrderProcurement.LockInfo);
+
+	// SalesOrder_ByPlannedDate
+	SalesOrder_ByPlannedDate = AccumulationRegisters.SalesOrder_ByPlannedDate.GetLockFields(DocumentDataTables.SalesOrder_ByPlannedDate);
+	DataMapWithLockFields.Insert(SalesOrder_ByPlannedDate.RegisterName, SalesOrder_ByPlannedDate.LockInfo);
 	
 	Return DataMapWithLockFields;
 EndFunction
@@ -1295,7 +1314,13 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordSet, WriteInTransaction",
 			Parameters.DocumentDataTables.SalesOrderTurnovers,
 			Parameters.IsReposting));
-	
+			
+	// SalesOrder_ByPlannedDate
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.SalesOrder_ByPlannedDate,
+		New Structure("RecordType, RecordSet, WriteInTransaction",
+			AccumulationRecordType.Expense,
+			Parameters.DocumentDataTables.SalesOrder_ByPlannedDate,
+			True));	
 	Return PostingDataTables;
 EndFunction
 

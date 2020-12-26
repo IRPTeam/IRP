@@ -21,8 +21,10 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("OrderProcurement_Exists"       , PostingServer.CreateTable(AccReg.OrderProcurement));
 	Tables.Insert("ReceiptOrders_Exists"          , PostingServer.CreateTable(AccReg.ReceiptOrders));
 	
-	Tables.Insert("StockReservation_Exists" , PostingServer.CreateTable(AccReg.StockReservation));
-	Tables.Insert("StockBalance_Exists"     , PostingServer.CreateTable(AccReg.StockBalance));
+	Tables.Insert("StockReservation_Exists" 	  , PostingServer.CreateTable(AccReg.StockReservation));
+	Tables.Insert("StockBalance_Exists"           , PostingServer.CreateTable(AccReg.StockBalance));
+
+	Tables.Insert("SalesOrder_ByPlannedDate"      , PostingServer.CreateTable(AccReg.SalesOrder_ByPlannedDate));
 	
 	Tables.OrderBalance_Exists_Receipt =
 	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
@@ -318,6 +320,21 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp AS tmp
 		|WHERE
 		|   tmp.UseSalesOrder
+		|;
+		|
+		|//[12]//////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmp.Company AS Company,
+		|	tmp.PurchaseBasis AS Order,
+		|	tmp.Store AS Store,
+		|	tmp.ItemKey AS ItemKey,
+		|	tmp.Quantity,
+		|	tmp.DeliveryDate AS Period
+		|FROM
+		|	tmp AS tmp
+		|WHERE
+		|	tmp.DeliveryDate <> DATETIME(1, 1, 1) 
+		|	AND tmp.PurchaseBasis REFS Document.SalesOrder
 		|";
 	
 	Query.SetParameter("QueryTable", QueryTable);
@@ -334,6 +351,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.GoodsReceiptSchedule_Receipt = QueryResults[9].Unload();
 	Tables.GoodsReceiptSchedule_Expense = QueryResults[10].Unload();
 	Tables.OrderProcurement             = QueryResults[11].Unload();
+	
+	Tables.SalesOrder_ByPlannedDate             = QueryResults[12].Unload();
 	
 	Parameters.IsReposting = False;
 	Return Tables;
@@ -381,6 +400,9 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	OrderProcurement = AccumulationRegisters.OrderProcurement.GetLockFields(DocumentDataTables.OrderProcurement);
 	DataMapWithLockFields.Insert(OrderProcurement.RegisterName, OrderProcurement.LockInfo);
 	
+	// SalesOrder_ByPlannedDate
+	SalesOrder_ByPlannedDate = AccumulationRegisters.SalesOrder_ByPlannedDate.GetLockFields(DocumentDataTables.SalesOrder_ByPlannedDate);
+	DataMapWithLockFields.Insert(SalesOrder_ByPlannedDate.RegisterName, SalesOrder_ByPlannedDate.LockInfo);
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -484,7 +506,14 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.OrderProcurement,
 			True));
-	
+
+	// SalesOrder_ByPlannedDate
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.SalesOrder_ByPlannedDate,
+		New Structure("RecordType, RecordSet, WriteInTransaction",
+			AccumulationRecordType.Receipt,
+			Parameters.DocumentDataTables.SalesOrder_ByPlannedDate,
+			True));
+				
 	Return PostingDataTables;
 EndFunction
 

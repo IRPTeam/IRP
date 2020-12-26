@@ -361,7 +361,7 @@ Procedure FillDocumentWithShipmentConfirmationArray(Object, Form, ArrayOfBasisDo
 		NewRow = ShipmentConfirmationsTable.Add();
 		NewRow.Ref = Row.Order;
 		NewRow.ShipmentConfirmation = Row.ShipmentConfirmation;
-		NewRow.Key = New UUID(Row.RowKey);
+		NewRow.Key = Row.RowKey;
 		NewRow.Quantity = Row.Quantity;
 		NewRow.QuantityInShipmentConfirmation = Row.Quantity;
 	EndDo;
@@ -457,7 +457,7 @@ Procedure FillDocumentWithShipmentConfirmationArray(Object, Form, ArrayOfBasisDo
 	
 	QueryTableOrderBalance.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	For Each Row In QueryTableOrderBalance Do
-		Row.Key = New UUID(Row.RowKey);
+		Row.Key = Row.RowKey;
 	EndDo;
 	
 	Query = New Query();

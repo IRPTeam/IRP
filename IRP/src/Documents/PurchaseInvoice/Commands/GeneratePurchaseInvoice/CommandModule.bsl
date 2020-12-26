@@ -188,7 +188,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFields)
 				NewRow.Insert(ColumnItemList.Name, RowItemList[ColumnItemList.Name]);
 			EndDo;
 			
-			NewRow.Key = New UUID(RowItemList.RowKey);
+			NewRow.Key = RowItemList.RowKey;
 			
 			ArrayOfTaxListFilters.Add(New Structure("Ref, Key", RowItemList.PurchaseOrder, NewRow.Key));
 			ArrayOfSpecialOffersFilters.Add(New Structure("Ref, Key", RowItemList.PurchaseOrder, NewRow.Key));
@@ -242,7 +242,7 @@ EndFunction
 Function ExtractInfoFrom_PurchaseOrder(QueryTable, GoodsReceiptsTable = Undefined)
 	QueryTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	For Each Row In QueryTable Do
-		Row.Key = New UUID(Row.RowKey);
+		Row.Key = Row.RowKey;
 	EndDo;
 	
 	Query = New Query();
@@ -481,7 +481,7 @@ Function GetDocumentTable_GoodsReceipt(ArrayOfBasisDocuments)
 		NewRow = GoodsReceiptsTable.Add();
 		NewRow.Ref = Row.Order;
 		NewRow.GoodsReceipt = Row.GoodsReceipt;
-		NewRow.Key = New UUID(Row.RowKey);
+		NewRow.Key = Row.RowKey;
 		NewRow.Quantity = Row.Quantity;
 		NewRow.QuantityInGoodsReceipt = Row.Quantity;
 	EndDo;

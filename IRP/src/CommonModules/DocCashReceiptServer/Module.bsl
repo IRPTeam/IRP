@@ -89,7 +89,7 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate = U
 	Query.SetParameter("ArrayOfBasisDocuments", ArrayOfBasisDocuments);
 	Query.SetParameter("UseArrayOfBasisDocuments", True);
 	If EndOfDate = Undefined Then
-		Query.SetParameter("EndOfDate", CurrentDate());
+		Query.SetParameter("EndOfDate", CurrentSessionDate());
 	Else
 		Query.SetParameter("EndOfDate", EndOfDate);
 	EndIf;

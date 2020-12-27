@@ -471,7 +471,7 @@ Function CreateDocumentsAtServer()
 	TransferDataTable = New ValueTable();
 	TransferDataTable.Columns.Add("StoreSender");
 	TransferDataTable.Columns.Add("InternalSupplyRequest");
-	TransferDataTable.Columns.Add("RowKey");
+	TransferDataTable.Columns.Add("RowKey", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	TransferDataTable.Columns.Add("ItemKey");
 	TransferDataTable.Columns.Add("Quantity");
 
@@ -493,7 +493,7 @@ Function CreateDocumentsAtServer()
 	PurchaseDataTable.Columns.Add("Price");
 	PurchaseDataTable.Columns.Add("DeliveryDate");
 	PurchaseDataTable.Columns.Add("InternalSupplyRequest");
-	PurchaseDataTable.Columns.Add("RowKey");
+	PurchaseDataTable.Columns.Add("RowKey", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	PurchaseDataTable.Columns.Add("ItemKey");
 	PurchaseDataTable.Columns.Add("Quantity");
 	
@@ -587,7 +587,7 @@ Function CollectDataFor_InventoryTransferOrder(ItemKey)
 	DataTable = New ValueTable();
 	DataTable.Columns.Add("StoreSender");
 	DataTable.Columns.Add("InternalSupplyRequest");
-	DataTable.Columns.Add("RowKey");
+	DataTable.Columns.Add("RowKey", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	DataTable.Columns.Add("ItemKey");
 	DataTable.Columns.Add("Quantity");
 	
@@ -682,7 +682,7 @@ Function CollectDataFor_PurchaseOrder(ItemKey)
 	DataTable.Columns.Add("Price");
 	DataTable.Columns.Add("DeliveryDate");
 	DataTable.Columns.Add("InternalSupplyRequest");
-	DataTable.Columns.Add("RowKey");
+	DataTable.Columns.Add("RowKey", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	DataTable.Columns.Add("ItemKey");
 	DataTable.Columns.Add("Quantity");
 	

@@ -1199,9 +1199,16 @@ Scenario: _012014 check row key when cloning a string in Sales order
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 	* Check that the row keys do not match
-		And I click "Registrations report" button
-		And I save spreadsheet document cell value "ResultTable" "R34C8" to "Rov1" variable
-		And I save spreadsheet document cell value "ResultTable" "R35C8" to "Rov2" variable
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "Rov1"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I save the current field value as "Rov2"		
 		And I display "Rov1" variable value
 		And I display "Rov2" variable value
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
@@ -1246,9 +1253,16 @@ Scenario: _012015 check row key when cloning a string in Sales invoice
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 	* Check that the row keys do not match
-		And I click "Registrations report" button
-		And I save spreadsheet document cell value "ResultTable" "R19C8" to "Rov1" variable
-		And I save spreadsheet document cell value "ResultTable" "R20C8" to "Rov2" variable
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "Rov1"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I save the current field value as "Rov2"		
 		And I display "Rov1" variable value
 		And I display "Rov2" variable value
 		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
@@ -1306,9 +1320,16 @@ Scenario: _012016 check row key when cloning a string in Purchase order
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 	* Check that the row keys do not match
-		And I click "Registrations report" button
-		And I save spreadsheet document cell value "ResultTable" "R6C9" to "Rov1" variable
-		And I save spreadsheet document cell value "ResultTable" "R7C9" to "Rov2" variable
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "Rov1"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I save the current field value as "Rov2"		
 		And I display "Rov1" variable value
 		And I display "Rov2" variable value
 		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsReceiptSchedule"
@@ -1366,9 +1387,16 @@ Scenario: _012017 check row key when cloning a string in Shipment confirmation
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 	* Check that the row keys do not match
-		And I click "Registrations report" button
-		And I save spreadsheet document cell value "ResultTable" "R6C8" to "Rov1" variable
-		And I save spreadsheet document cell value "ResultTable" "R7C8" to "Rov2" variable
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "Rov1"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I save the current field value as "Rov2"		
 		And I display "Rov1" variable value
 		And I display "Rov2" variable value
 		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
@@ -1418,17 +1446,18 @@ Scenario: _012020 check row key when cloning a string in Internal supply request
 		And I delete "$$NumberISR$$" variable
 		And I save the value of "Number" field as "$$NumberISR$$"
 	* Check that the row keys do not match
-		And I click "Registrations report" button
 		And I delete "$$$$RovISR1$$$$" variable
 		And I delete "$$$$RovISR2$$$$" variable
-		// And in "ResultTable" spreadsheet document I move to "R12C8" cell
-		// And I save spreadsheet document cell value "ResultTable" "R12C8" to "$$$$RovISR1$$$$" variable
-		// And in "ResultTable" spreadsheet document I move to "R13C8" cell
-		// And I save spreadsheet document cell value "ResultTable" "R13C8" to "$$$$RovISR2$$$$" variable
-		And in "ResultTable" spreadsheet document I move to "R6C8" cell
-		And I save spreadsheet document cell value "ResultTable" "R6C8" to "$$$$RovISR1$$$$" variable
-		And in "ResultTable" spreadsheet document I move to "R7C8" cell
-		And I save spreadsheet document cell value "ResultTable" "R7C8" to "$$$$RovISR2$$$$" variable
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$$$RovISR1$$$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I save the current field value as "$$$$RovISR2$$$$"		
 		And I display "$$$$RovISR1$$$$" variable value
 		And I display "$$$$RovISR2$$$$" variable value
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance""
@@ -1452,7 +1481,72 @@ Scenario: _012020 check row key when cloning a string in Internal supply request
 			| '$$$$RovISR2$$$$' |
 		And I close all client application windows
 				
-		
+
+Scenario: _012021 check row key when cloning a string in Purchase invoice
+	And I close all client application windows
+	* Filling in the details of the document Purchase invoice
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Store 02'     |
+		And I select current line in "List" table
+	* Filling in Purchase invoice
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I activate "Price" field in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListItem" in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+	* Check that the row keys do not match
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "Rov1"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I save the current field value as "Rov2"		
+		And I display "Rov1" variable value
+		And I display "Rov2" variable value
+		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsReceiptSchedule"
+		And I go to line in "List" table
+		| 'Row key' |
+		| '$Rov1$'    |
+		And I activate "Row key" field in "List" table
+		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
+		Then the number of "List" table lines is "меньше или равно" 1		
 
 
 

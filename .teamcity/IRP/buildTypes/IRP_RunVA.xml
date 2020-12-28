@@ -11,6 +11,7 @@
     <disabled-settings>
       <setting-ref ref="BUILD_EXT_19" />
       <setting-ref ref="RUNNER_6" />
+      <setting-ref ref="RUNNER_68" />
     </disabled-settings>
     <parameters>
       <param name="env.BranchToStartVA" value="develop" />
@@ -419,9 +420,6 @@ $JobTimes]]></param>
         </parameters>
       </runner>
       <runner id="RUNNER_70" name="Run VA in SaaS" type="jetbrains_powershell">
-        <conditions>
-          <equals name="env.RunSaasMode" value="true" />
-        </conditions>
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
@@ -559,8 +557,8 @@ $VanessaRun = {
 }"
     #Write-Output "$text"
     $a = $text | ConvertFrom-Json
-    #Write-Output "featurepath - %env.VA.FeaturePath%Internal_New"
-    $a | Add-Member -Type NoteProperty -Name 'featurepath' -Value '%env.VA.FeaturePath%Internal_New'
+    #Write-Output "featurepath - %env.VA.FeaturePath%Internal"
+    $a | Add-Member -Type NoteProperty -Name 'featurepath' -Value '%env.VA.FeaturePath%Internal'
     #Write-Output "projectpath - %system.teamcity.build.workingDir%"
     $a | Add-Member -Type NoteProperty -Name 'projectpath' -Value '%system.teamcity.build.workingDir%'
     #Write-Output "outputscreenshot - %system.teamcity.build.tempDir%"
@@ -580,7 +578,7 @@ $VanessaRun = {
     $a | Add-Member -Type NoteProperty -Name 'logpath' -Value "%system.teamcity.build.workingDir%\logpath\$elementTag.log"    
    
     $a.librarycatalogs += '%system.teamcity.build.workingDir%\DataProcessor'
-    $a.librarycatalogs += '%env.VA.FeaturePath%External_New'
+    $a.librarycatalogs += '%env.VA.FeaturePath%External'
     $a.librarycatalogs += '%env.OScript%/lib/vanessa-automation/features/Libraries'
     $a.filtertags += $elementTag
   

@@ -48,7 +48,7 @@ EndProcedure
 #Region LockAttributes
 &AtServer
 Procedure UnlockAttributeAtServer()
-	LockAttribute = LockDataModificationPriveleged.IsLockFormAttribute(Object.Ref);
+	LockAttribute = LockDataModificationPrivileged.IsLockFormAttribute(Object.Ref);
 	LockFormAttribute(LockAttribute);
 EndProcedure
 

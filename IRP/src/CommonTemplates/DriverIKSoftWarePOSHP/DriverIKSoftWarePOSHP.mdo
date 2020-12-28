@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:CommonTemplate xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="539c62ec-c4f4-4f56-aa40-f71d3e03cd39">
-  <name>DriverIKSoftWarePOSHP</name>
-  <synonym>
-    <key>en</key>
-    <value>Driver IKSoft ware POSHP</value>
-  </synonym>
-  <templateType>BinaryData</templateType>
-</mdclass:CommonTemplate>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:CommonTemplate xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4320a0b3-86f4-4941-b407-5128d3e9cbfa">
-  <name>Fiscal1C</name>
-  <synonym>
-    <key>en</key>
-    <value>Fiscal 1C</value>
-  </synonym>
-  <templateType>BinaryData</templateType>
-</mdclass:CommonTemplate>

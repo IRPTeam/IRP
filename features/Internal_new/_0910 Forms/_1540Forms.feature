@@ -1446,22 +1446,24 @@ Scenario: _012020 check row key when cloning a string in Internal supply request
 		And I delete "$$NumberISR$$" variable
 		And I save the value of "Number" field as "$$NumberISR$$"
 	* Check that the row keys do not match
+		And I delete "$$$$RovISR1$$$$" variable
+		And I delete "$$$$RovISR2$$$$" variable
 		And I click "Show row key" button
 		And I go to line in "ItemList" table
 			| '#' |
 			| '1' |
 		And I activate "Key" field in "ItemList" table
-		And I save the current field value as "RovISR1"
+		And I save the current field value as "$$$$RovISR1$$$$"
 		And I go to line in "ItemList" table
 			| '#' |
 			| '2' |
-		And I save the current field value as "RovISR2"		
-		And I display "RovISR1" variable value
-		And I display "RovISR2" variable value
+		And I save the current field value as "$$$$RovISR2$$$$"		
+		And I display "$$$$RovISR1$$$$" variable value
+		And I display "$$$$RovISR2$$$$" variable value
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance""
 		And I go to line in "List" table
 		| 'Row key' |
-		| 'RovISR1'    |
+		| '$$$$RovISR1$$$$'    |
 		And I activate "Row key" field in "List" table
 		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
 		Then the number of "List" table lines is "меньше или равно" 1
@@ -1475,8 +1477,8 @@ Scenario: _012020 check row key when cloning a string in Internal supply request
 		And I click the button named "FormPost"
 		And I click "Registrations report" button
 		And "ResultTable" spreadsheet document does not contain values
-			| 'RovISR1' |
-			| 'RovISR2' |
+			| '$$$$RovISR1$$$$' |
+			| '$$$$RovISR2$$$$' |
 		And I close all client application windows
 				
 

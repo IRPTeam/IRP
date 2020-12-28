@@ -9,5 +9,5 @@
     <types>DocumentObject</types>
   </source>
   <event>BeforeWrite</event>
-  <handler>CommonModule.LockDataModificationPriveleged.BeforeWrite_DocumentsLockDataModification</handler>
+  <handler>CommonModule.LockDataModificationPrivileged.BeforeWrite_DocumentsLockDataModification</handler>
 </mdclass:EventSubscription>

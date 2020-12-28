@@ -319,6 +319,9 @@ Function Strings(Lang) Export
 	// %7 - pcs
 	Strings.Insert("Error_090", NStr("en = '[%1 %2] %3 remaining: %4 %7. Required: %5 %7. Lacking: %6 %7.'", Lang));
 	
+	Strings.Insert("Error_091", NStr("en = 'You have to be Administrator for create users.'", Lang));
+	
+	Strings.Insert("Error_092", NStr("en = 'You can not use %1 role in SaaS mode'", Lang));
 	#EndRegion
 	
 	#Region InfoMessages

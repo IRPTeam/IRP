@@ -171,15 +171,13 @@
   <roles>Role.UseEventLog</roles>
   <roles>Role.UseExternalDataProcessors</roles>
   <roles>Role.UseExternalReports</roles>
-  <roles>Role.UseMultiThreading</roles>
   <roles>Role.UseOutput</roles>
   <roles>Role.FullAccessOnlyRead</roles>
-  <commonTemplates>CommonTemplate.DriverIKSoftWarePOSHP</commonTemplates>
-  <commonTemplates>CommonTemplate.Fiscal1C</commonTemplates>
+  <roles>Role.FullAccessInArea</roles>
+  <roles>Role.CreateOrModifyUsers</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
-  <commonTemplates>CommonTemplate.MonacoEditor</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLTextField</commonTemplates>
   <filterCriteria>FilterCriterion.RelatedDocuments</filterCriteria>
@@ -187,6 +185,7 @@
   <commonModules>CommonModule.AddAttributesAndPropertiesServer</commonModules>
   <commonModules>CommonModule.AddDataProcClient</commonModules>
   <commonModules>CommonModule.AddDataProcServer</commonModules>
+  <commonModules>CommonModule.AdminFunctionsPrivileged</commonModules>
   <commonModules>CommonModule.BarcodeClient</commonModules>
   <commonModules>CommonModule.BarcodeReuse</commonModules>
   <commonModules>CommonModule.BarcodeServer</commonModules>
@@ -313,7 +312,7 @@
   <commonModules>CommonModule.IDInfoServer</commonModules>
   <commonModules>CommonModule.IntegrationClientServer</commonModules>
   <commonModules>CommonModule.IntegrationServer</commonModules>
-  <commonModules>CommonModule.IntegrationServerPriveleged</commonModules>
+  <commonModules>CommonModule.IntegrationServerPrivileged</commonModules>
   <commonModules>CommonModule.IntegrationServerReuse</commonModules>
   <commonModules>CommonModule.JorDocumentsClient</commonModules>
   <commonModules>CommonModule.JorDocumentsServer</commonModules>
@@ -324,7 +323,7 @@
   <commonModules>CommonModule.LocalizationEvents</commonModules>
   <commonModules>CommonModule.LocalizationReuse</commonModules>
   <commonModules>CommonModule.LocalizationServer</commonModules>
-  <commonModules>CommonModule.LockDataModificationPriveleged</commonModules>
+  <commonModules>CommonModule.LockDataModificationPrivileged</commonModules>
   <commonModules>CommonModule.MetadataInfo</commonModules>
   <commonModules>CommonModule.MobileEvents</commonModules>
   <commonModules>CommonModule.MobileSubsystem</commonModules>

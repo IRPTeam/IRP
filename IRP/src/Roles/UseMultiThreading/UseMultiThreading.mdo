@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fcee228c-bc88-48a1-8d29-ce0715bc4da1">
-  <name>UseMultiThreading</name>
-  <synonym>
-    <key>en</key>
-    <value>Use multi threading</value>
-  </synonym>
-</mdclass:Role>

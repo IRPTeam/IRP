@@ -8,4 +8,5 @@
   <location>Constant.SaasMode</location>
   <privilegedGetMode>true</privilegedGetMode>
   <content>Subsystem.Saas</content>
+  <content>Catalog.DataAreas</content>
 </mdclass:FunctionalOption>

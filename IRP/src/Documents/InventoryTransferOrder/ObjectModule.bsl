@@ -85,7 +85,7 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	While QuerySelection.Next() Do
 		NewRow = ThisObject.ItemList.Add();
 		FillPropertyValues(NewRow, QuerySelection);
-		NewRow.Key = New UUID(QuerySelection.RowKey);
+		NewRow.Key = QuerySelection.RowKey;
 		If ValueIsFilled(QuerySelection.Unit) And ValueIsFilled(QuerySelection.Unit.Quantity) Then
 			NewRow.Quantity = QuerySelection.Quantity / QuerySelection.Unit.Quantity;
 			EndIf;

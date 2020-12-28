@@ -2871,7 +2871,7 @@
       </title>
       <id>31</id>
       <valueType>
-        <types>UUID</types>
+        <types>DefinedType.typeRowID</types>
       </valueType>
       <view>
         <common>true</common>

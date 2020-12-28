@@ -68,7 +68,7 @@ EndProcedure
 &AtServer
 Procedure CreateTaxTree()
 	MainTable = New ValueTable;
-	MainTable.Columns.Add("Key", New TypeDescription("UUID"));
+	MainTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	MainTable.Columns.Add("Currency", New TypeDescription("CatalogRef.Currencies"));
 
 	NewRowMainTable = MainTable.Add();

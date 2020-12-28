@@ -311,9 +311,9 @@ Function InfoReceiptBasisesFilling(FilterValues, ExistingRows, Ref) Export
 EndFunction
 
 Function PutQueryTableToTempTable(QueryTable) Export
-	QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
+	QueryTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	For Each Row In QueryTable Do
-		Row.Key = New UUID(Row.RowKey);
+		Row.Key = Row.RowKey;
 	EndDo;
 	tempManager = New TempTablesManager();
 	Query = New Query();

@@ -472,6 +472,9 @@ Function Strings(Lang) Export
 	Strings.Insert("CLV_1", NStr("en = 'All'", Lang));
 	#EndRegion
 	
+	#Region SalesOrderStatusReport
+	Strings.Insert("SOR_1", NStr("en = 'Not enough items in free stock'", Lang));
+	#EndRegion	
 	Return Strings;
 EndFunction
 

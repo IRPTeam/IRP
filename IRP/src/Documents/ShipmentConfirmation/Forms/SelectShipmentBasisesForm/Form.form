@@ -922,8 +922,7 @@
       </title>
       <id>9</id>
       <valueType>
-        <types>String</types>
-        <stringQualifiers/>
+        <types>DefinedType.typeRowID</types>
       </valueType>
       <view>
         <common>true</common>
@@ -940,7 +939,7 @@
       </title>
       <id>13</id>
       <valueType>
-        <types>UUID</types>
+        <types>DefinedType.typeRowID</types>
       </valueType>
       <view>
         <common>true</common>

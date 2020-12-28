@@ -12,8 +12,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("CashAdvance"                           , PostingServer.CreateTable(AccReg.CashAdvance));
 	Tables.Insert("PartnerApTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.PartnerApTransactions));
 	
-	Tables.AdvanceToSuppliers.Columns.Add("Key", New TypeDescription("UUID"));
-	Tables.PartnerApTransactions.Columns.Add("Key", New TypeDescription("UUID"));
+	Tables.AdvanceToSuppliers.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+	Tables.PartnerApTransactions.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	
 	QueryPaymentList = New Query();
 	QueryPaymentList.Text = GetQueryTextCashPaymentPaymentList();

@@ -199,7 +199,9 @@
   <commonModules>CommonModule.CatCashAccountsServer</commonModules>
   <commonModules>CommonModule.CatCompaniesClient</commonModules>
   <commonModules>CommonModule.CatCompaniesServer</commonModules>
+  <commonModules>CommonModule.CatConfigurationMetadataServer</commonModules>
   <commonModules>CommonModule.CatCurrenciesServer</commonModules>
+  <commonModules>CommonModule.CatExpenseAndRevenueTypesServer</commonModules>
   <commonModules>CommonModule.CatItemsClient</commonModules>
   <commonModules>CommonModule.CatItemsServer</commonModules>
   <commonModules>CommonModule.CatPartnersServer</commonModules>
@@ -322,6 +324,8 @@
   <commonModules>CommonModule.LocalizationEvents</commonModules>
   <commonModules>CommonModule.LocalizationReuse</commonModules>
   <commonModules>CommonModule.LocalizationServer</commonModules>
+  <commonModules>CommonModule.LockDataModificationPriveleged</commonModules>
+  <commonModules>CommonModule.MetadataInfo</commonModules>
   <commonModules>CommonModule.MobileEvents</commonModules>
   <commonModules>CommonModule.MobileSubsystem</commonModules>
   <commonModules>CommonModule.ObjectStatusesClient</commonModules>
@@ -353,10 +357,6 @@
   <commonModules>CommonModule.UsersEvent</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.CatExpenseAndRevenueTypesServer</commonModules>
-  <commonModules>CommonModule.LockDataModificationPriveleged</commonModules>
-  <commonModules>CommonModule.MetadataInfo</commonModules>
-  <commonModules>CommonModule.CatConfigurationMetadataServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
@@ -431,6 +431,7 @@
   <definedTypes>DefinedType.typeStockAdjustmentAsSurplusBasises</definedTypes>
   <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
   <definedTypes>DefinedType.UseUniqueID</definedTypes>
+  <definedTypes>DefinedType.typeRowID</definedTypes>
   <commonCommands>CommonCommand.AddProperties</commonCommands>
   <commonCommands>CommonCommand.IDInfo</commonCommands>
   <commonCommands>CommonCommand.OpenCompanies</commonCommands>
@@ -448,11 +449,12 @@
   <constants>Constant.UseCompanies</constants>
   <constants>Constant.UseItemKey</constants>
   <constants>Constant.UseLockDataModification</constants>
-  <commonForms>CommonForm.DataClassifier</commonForms>
+  <commonForms>CommonForm.DataMappingForm</commonForms>
   <commonForms>CommonForm.EditAddProperties</commonForms>
   <commonForms>CommonForm.EditDescriptions</commonForms>
   <commonForms>CommonForm.EditIDInfo</commonForms>
   <commonForms>CommonForm.EditMultilineText</commonForms>
+  <commonForms>CommonForm.EditTax</commonForms>
   <commonForms>CommonForm.EditUserSettings</commonForms>
   <commonForms>CommonForm.HTMLField</commonForms>
   <commonForms>CommonForm.MainSettings</commonForms>
@@ -464,10 +466,8 @@
   <commonForms>CommonForm.PictureViewerFormRegular</commonForms>
   <commonForms>CommonForm.RelatedDocuments</commonForms>
   <commonForms>CommonForm.ReportForm</commonForms>
-  <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.ShareToUsers</commonForms>
-  <commonForms>CommonForm.EditTax</commonForms>
-  <commonForms>CommonForm.DataMappingForm</commonForms>
+  <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.PrintForm</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
@@ -573,6 +573,7 @@
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForCreditDebitNote</documentJournals>
+  <documentJournals>DocumentJournal.AllDocuments</documentJournals>
   <enums>Enum.AgreementKinds</enums>
   <enums>Enum.AgreementTypes</enums>
   <enums>Enum.ApArPostingDetail</enums>
@@ -621,6 +622,7 @@
   <dataProcessors>DataProcessor.MobileInvent</dataProcessors>
   <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>
   <dataProcessors>DataProcessor.Procurement</dataProcessors>
+  <dataProcessors>DataProcessor.SalesOrderStatusReport</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>
@@ -685,6 +687,7 @@
   <accumulationRegisters>AccumulationRegister.RetailSales</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.RetailCash</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.Aging</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.SalesOrder_ByPlannedDate</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.IDInfoTypes</chartsOfCharacteristicTypes>

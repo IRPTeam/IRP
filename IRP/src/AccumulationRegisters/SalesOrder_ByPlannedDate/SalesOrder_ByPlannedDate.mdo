@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="12c33e1e-c2f0-4fb7-9dca-68c6dbc1d7c4">
+  <producedTypes>
+    <selectionType typeId="76d585a8-759c-4a63-b935-e0fdfa215abf" valueTypeId="dcd8d1fe-83a3-413c-9aa8-457808729abe"/>
+    <listType typeId="d16ffdc1-59d2-4d69-b382-2aa355e60056" valueTypeId="2a2f0e1c-728b-4132-91aa-c1e0b26453fa"/>
+    <managerType typeId="bde4307a-bfeb-483d-88b6-b393a06c12a0" valueTypeId="eaac1b98-8311-4159-aae7-14d866da5ed4"/>
+    <recordSetType typeId="204d68ab-aac6-409e-9236-382db8849301" valueTypeId="6f4eb029-c5c5-430d-880e-f73ba9217d07"/>
+    <recordKeyType typeId="04d174d6-0c6c-4622-b8cf-f47392e00d75" valueTypeId="9624b64e-32bb-4a28-a2f5-e86492975c88"/>
+    <recordType typeId="8bc60c4b-df07-41ce-b799-c774b7466447" valueTypeId="4c22ec9a-b874-400f-bc58-cae912880769"/>
+  </producedTypes>
+  <name>SalesOrder_ByPlannedDate</name>
+  <synonym>
+    <key>en</key>
+    <value>Sales order by planned date</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <enableTotalsSplitting>true</enableTotalsSplitting>
+  <resources uuid="1524d0cd-d606-46e0-a305-c3a8e1c68769">
+    <name>Quantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <dimensions uuid="d4fd29e0-8a23-4a65-afc5-1b6eeb1597e0">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="f0c3f2f3-f3ca-4fbd-9860-da670bb309e4">
+    <name>Order</name>
+    <synonym>
+      <key>en</key>
+      <value>Order</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeOrders</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="600c31e3-afa0-4e2b-83b1-7961efab9df1">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="83af8720-969b-4659-969c-6cff9dd314c1">
+    <name>ItemKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+</mdclass:AccumulationRegister>

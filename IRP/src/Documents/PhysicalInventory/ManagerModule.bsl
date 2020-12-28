@@ -340,7 +340,7 @@ Function GetItemListWithFillingPhysCount(Ref, ItemList) Export
 	AccReg = Metadata.AccumulationRegisters.StockBalance;
 		
 	ItemListTyped = New ValueTable();
-	ItemListTyped.Columns.Add("Key", New TypeDescription("UUID"));
+	ItemListTyped.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	ItemListTyped.Columns.Add("ItemKey", AccReg.Dimensions.ItemKey.Type);
 	For Each Row In ItemList Do
 		FillPropertyValues(ItemListTyped.Add(), Row);
@@ -393,7 +393,7 @@ Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined) Export
 		AccReg = Metadata.AccumulationRegisters.StockBalance;
 		
 		ItemListTyped = New ValueTable();
-		ItemListTyped.Columns.Add("Key", New TypeDescription("UUID"));
+		ItemListTyped.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 		ItemListTyped.Columns.Add("LineNumber", New TypeDescription("Number"));
 		ItemListTyped.Columns.Add("Store", AccReg.Dimensions.Store.Type);
 		ItemListTyped.Columns.Add("ItemKey", AccReg.Dimensions.ItemKey.Type);
@@ -419,7 +419,7 @@ Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined) Export
 	QueryTable = QueryResult.Unload();
 	
 	If QueryTable.Columns.Find("Key") = Undefined Then
-		QueryTable.Columns.Add("Key", New TypeDescription("UUID"));
+		QueryTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	EndIf;
 	
 	If QueryTable.Columns.Find("LineNumber") <> Undefined Then

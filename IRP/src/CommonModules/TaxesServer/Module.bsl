@@ -391,7 +391,7 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 	If Not CommonFunctionsServer.FormHaveAttribute(Form, AttrNames.TableName) Then
 		ArrayOfNewAttribute = New Array();
 		ArrayOfNewAttribute.Add(New FormAttribute(AttrNames.TableName, New TypeDescription("ValueTable")));
-		ArrayOfNewAttribute.Add(New FormAttribute("Key", New TypeDescription("UUID"), AttrNames.TableName));
+		ArrayOfNewAttribute.Add(New FormAttribute("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type), AttrNames.TableName));
 		ArrayOfNewAttribute.Add(New FormAttribute("Tax", New TypeDescription("CatalogRef.Taxes"), AttrNames.TableName));
 		
 		ArrayOfValueTypes = New Array();

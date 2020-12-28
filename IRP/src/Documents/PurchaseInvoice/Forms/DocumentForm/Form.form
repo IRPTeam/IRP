@@ -6041,7 +6041,7 @@
       </title>
       <id>123</id>
       <valueType>
-        <types>UUID</types>
+        <types>DefinedType.typeRowID</types>
       </valueType>
       <view>
         <common>true</common>

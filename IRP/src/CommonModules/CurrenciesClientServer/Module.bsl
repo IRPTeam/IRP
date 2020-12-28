@@ -374,12 +374,12 @@ Function ReplacePropertyNames(TableName, Data) Export
 EndFunction
 
 Function FindRowByUUID(Object, TableName, RowKey) Export
-	For Each Row In Object[TableName] Do
-		If Row.Key = RowKey Then
-			Return Row;
-		EndIf;
-	EndDo;
-	Return Undefined;
+	Rows = Object[TableName].FindRows(New Structure("Key", RowKey));
+	If Rows.Count() Then
+		Return Rows[0];
+	Else
+		Return Undefined;
+	EndIf;
 EndFunction
 
 Function ExtractCurrency(Header, Row)

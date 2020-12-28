@@ -870,8 +870,7 @@
       </title>
       <id>9</id>
       <valueType>
-        <types>String</types>
-        <stringQualifiers/>
+        <types>DefinedType.typeRowID</types>
       </valueType>
       <view>
         <common>true</common>

@@ -1,4 +1,6 @@
 
+#Region Public
+
 Procedure FillAtServer(Object, Form) Export
 	ItemTable = Form.FormAttributeToValue("ItemList");
 	
@@ -88,10 +90,8 @@ Procedure FillAtServer(Object, Form) Export
 	
 EndProcedure
 
-Function PrintLabels(Object, Form) Export
-	
+Function PrintLabels(Object, Form) Export	
 	SpreadDocsArray = New Array;
-	
 	SpreadDoc  = New SpreadsheetDocument();
 	SpreadDoc.PrintParametersName = "PrintParameters_PrintLabels";
 	
@@ -99,7 +99,6 @@ Function PrintLabels(Object, Form) Export
 	TemplateTableFilter.Insert("Print", True);
 	TemplateTable = Form.ItemList.Unload(TemplateTableFilter, "Template");
 	TemplateTable.GroupBy("Template");
-	
 	ItemListTable = Form.FormAttributeToValue("ItemList");
 	
 	For Each TemplateRow In TemplateTable Do		
@@ -128,28 +127,22 @@ Function PrintLabels(Object, Form) Export
 		EndIf;		
 		
 		Settings = DataSourceScheme.DefaultSettings;
-				
-		Settings.Structure.Clear();
-		
+		Settings.Structure.Clear();		
 		StructureGroup = Settings.Structure.Add(Type("DataCompositionGroup"));
 		StructureGroup.Use = True;
 		StructureGroup.Selection.Items.Add(Type("DataCompositionAutoSelectedField"));
 		StructureGroup.Order.Items.Add(Type("DataCompositionAutoOrderItem"));
 		
-		For Each TemplateAreaParameter In TemplateAreaParameters Do
-			
+		For Each TemplateAreaParameter In TemplateAreaParameters Do			
 			TemplateAreaParameterKey = TemplateAreaParameter.Key;
 			TemplateAreaParameterKey = StrReplace(TemplateAreaParameterKey, "{", "");
-			TemplateAreaParameterKey = StrReplace(TemplateAreaParameterKey, "}", "");
-					
+			TemplateAreaParameterKey = StrReplace(TemplateAreaParameterKey, "}", "");					
+			StructureGroupField = StructureGroup.GroupFields.Items.Add(Type("DataCompositionGroupField"));
+			StructureGroupField.Use = True;
+			StructureGroupField.Field = New DataCompositionField(TemplateAreaParameterKey);		
 			StructureGroupField = StructureGroup.GroupFields.Items.Add(Type("DataCompositionGroupField"));
 			StructureGroupField.Use = True;
 			StructureGroupField.Field = New DataCompositionField(TemplateAreaParameterKey);
-		
-			StructureGroupField = StructureGroup.GroupFields.Items.Add(Type("DataCompositionGroupField"));
-			StructureGroupField.Use = True;
-			StructureGroupField.Field = New DataCompositionField(TemplateAreaParameterKey);
-					
 		EndDo;
 		
 		For Each Column In ItemListValue.Columns Do		
@@ -199,59 +192,25 @@ Function PrintLabels(Object, Form) Export
 		ExtDataSets = New Structure("DataSource", QueryUnload);
 		CompositionProcessor = New DataCompositionProcessor;
 		CompositionProcessor.Initialize(ComposerOfTemplate, ExtDataSets, Undefined, True);
-
 		Result = New ValueTable();		
 		OutputProcessor = New DataCompositionResultValueCollectionOutputProcessor;
 		OutputProcessor.SetObject(Result);
 		OutputProcessor.Output(CompositionProcessor);				
 		
 		TemplateFilter = New Structure;
-		TemplateFilter.Insert("Template", TemplateRow.Template);		
-		
-		TemplateArea = Template.GetArea();
-		
+		TemplateFilter.Insert("Template", TemplateRow.Template);
+		TemplateArea = Template.GetArea();		
 		LabelsInRowIterator = 1;
 		LabelsInColumnIterator = 1;
 			
-		For Each QuerySelection In Result Do			
-			
+		For Each QuerySelection In Result Do
 			For Each ItemMap In TemplateAreaParameters Do
 				TemplateArea.Parameters[ItemMap.Key] = QuerySelection[ItemMap.Value];
 			EndDo;
 			
 			If TemplateArea.Drawings.Count() Then
-
-				BarcodeParameters = New Structure;				
-				
-				For Each Drawing In TemplateArea.Drawings Do					
-					If Drawing.Name = "BarcodePicture" Then
-						BarcodeParameters.Insert("Width", Round(Drawing.Width / 0.1));
-						BarcodeParameters.Insert("Height", Round(Drawing.Height / 0.1));
-						BarcodeParameters.Insert("Barcode", QuerySelection.Barcode);
-						BarcodeParameters.Insert("CodeType", QuerySelection.BarcodeType);
-						BarcodeParameters.Insert("ShowText", True);
-						BarcodeParameters.Insert("SizeOfFont", 14);
-						Drawing.Picture = BarcodeServer.GetBarcodePicture(BarcodeParameters);
-					ElsIf Drawing.Name = "QRPicture" Then
-						BarcodeParameters.Insert("Barcode", QuerySelection.Barcode);
-						Drawing.Picture = BarcodeServer.GetQRPicture(BarcodeParameters);					
-					ElsIf Drawing.Name = "ItemPicture" Then
-						Drawing.Picture = New Picture();
-						ArrayOfFiles = PictureViewerServer.GetPicturesByObjectRefAsArrayOfRefs(QuerySelection.Item);
-						If ArrayOfFiles.Count() Then
-							If ArrayOfFiles[0].isPreviewSet Then
-								Drawing.Picture = New Picture(ArrayOfFiles[0].Preview.Get());
-							EndIf;
-						EndIf;
-					ElsIf Drawing.Name = "ItemKeyPicture" Then
-						Drawing.Picture = New Picture();
-						ArrayOfFiles = PictureViewerServer.GetPicturesByObjectRefAsArrayOfRefs(QuerySelection.ItemKey);
-						If ArrayOfFiles.Count() Then
-							If ArrayOfFiles[0].isPreviewSet Then
-								Drawing.Picture =  New Picture(ArrayOfFiles[0].Preview.Get());
-							EndIf;
-						EndIf;
-					EndIf;
+				For Each Drawing In TemplateArea.Drawings Do
+					SetDrawingPicture(Drawing, QuerySelection);
 				EndDo;
 			EndIf;
 			
@@ -272,23 +231,18 @@ Function PrintLabels(Object, Form) Export
 						SpreadDoc.Join(TemplateArea);
 					EndIf;
 				EndIf;
-			EndDo;
-						
+			EndDo;						
 		EndDo;
 		
-		If Form.SplitTemplatesByPages Then
-			
+		If Form.SplitTemplatesByPages Then			
 			SpreadDoc.PutHorizontalPageBreak();
 			SpreadDoc.FitToPage = True;
 			SpreadDocsArray.Add(SpreadDoc);
 			
 			SpreadDoc  = New SpreadsheetDocument();
 			SpreadDoc.PrintParametersKey = TemplateStructure.PrintParametersKey;
-			
-		EndIf;
-		
-		SpreadDoc.PutHorizontalPageBreak();
-	
+		EndIf;		
+		SpreadDoc.PutHorizontalPageBreak();	
 	EndDo;
 	
 	If SpreadDoc.TableHeight <> 0 Then
@@ -298,8 +252,11 @@ Function PrintLabels(Object, Form) Export
 	EndIf;
 	
 	Return SpreadDocsArray;	
-	
 EndFunction
+
+#EndRegion
+
+#Region Private
 
 Procedure SetDataSetFields(DataSet, AddDataProc)	
 	AvailableFields = AddDataProc.GetAvailableFields();	
@@ -329,3 +286,44 @@ Procedure FillDataTable(DataTable, AddDataProc)
 	
 EndProcedure
 
+Procedure SetDrawingPicture(Drawing, QuerySelection)
+	BarcodeParameters = New Structure;
+	If Drawing.Name = "BarcodePicture" Then
+		If ValueIsFilled(QuerySelection.Barcode) Then
+			BarcodeParameters.Insert("Width", Round(Drawing.Width / 0.1));
+			BarcodeParameters.Insert("Height", Round(Drawing.Height / 0.1));
+			BarcodeParameters.Insert("Barcode", QuerySelection.Barcode);
+			BarcodeParameters.Insert("CodeType", QuerySelection.BarcodeType);
+			BarcodeParameters.Insert("ShowText", True);
+			BarcodeParameters.Insert("SizeOfFont", 14);
+			Drawing.Picture = BarcodeServer.GetBarcodePicture(BarcodeParameters);
+		Else
+			Drawing.Picture = New Picture;
+		EndIf;
+	ElsIf Drawing.Name = "QRPicture" Then
+		If ValueIsFilled(QuerySelection.Barcode) Then
+			BarcodeParameters.Insert("Barcode", QuerySelection.Barcode);
+			Drawing.Picture = BarcodeServer.GetQRPicture(BarcodeParameters);
+		Else
+			Drawing.Picture = New Picture;
+		EndIf;
+	ElsIf Drawing.Name = "ItemPicture" Then
+		Drawing.Picture = New Picture;
+		ArrayOfFiles = PictureViewerServer.GetPicturesByObjectRefAsArrayOfRefs(QuerySelection.Item);
+		If ArrayOfFiles.Count() Then
+			If ArrayOfFiles[0].isPreviewSet Then
+				Drawing.Picture = New Picture(ArrayOfFiles[0].Preview.Get());
+			EndIf;
+		EndIf;
+	ElsIf Drawing.Name = "ItemKeyPicture" Then
+		Drawing.Picture = New Picture;
+		ArrayOfFiles = PictureViewerServer.GetPicturesByObjectRefAsArrayOfRefs(QuerySelection.ItemKey);
+		If ArrayOfFiles.Count() Then
+			If ArrayOfFiles[0].isPreviewSet Then
+				Drawing.Picture =  New Picture(ArrayOfFiles[0].Preview.Get());
+			EndIf;
+		EndIf;
+	EndIf;
+EndProcedure
+
+#EndRegion

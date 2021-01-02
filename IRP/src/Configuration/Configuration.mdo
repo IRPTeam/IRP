@@ -116,6 +116,7 @@
   <commonPictures>CommonPicture.AutoTest</commonPictures>
   <commonPictures>CommonPicture.Barcode</commonPictures>
   <commonPictures>CommonPicture.BarcodePicture</commonPictures>
+  <commonPictures>CommonPicture.CashOk</commonPictures>
   <commonPictures>CommonPicture.Cloud</commonPictures>
   <commonPictures>CommonPicture.CurrencyRateDirection</commonPictures>
   <commonPictures>CommonPicture.Delivery</commonPictures>
@@ -126,31 +127,31 @@
   <commonPictures>CommonPicture.IconCollection2</commonPictures>
   <commonPictures>CommonPicture.IconCollection3</commonPictures>
   <commonPictures>CommonPicture.IDInfo</commonPictures>
+  <commonPictures>CommonPicture.Info</commonPictures>
   <commonPictures>CommonPicture.Integration</commonPictures>
   <commonPictures>CommonPicture.ItemKeyPicture</commonPictures>
   <commonPictures>CommonPicture.ItemPicture</commonPictures>
   <commonPictures>CommonPicture.LockedRows</commonPictures>
+  <commonPictures>CommonPicture.Mobile</commonPictures>
+  <commonPictures>CommonPicture.OtherGroup</commonPictures>
+  <commonPictures>CommonPicture.Payment</commonPictures>
+  <commonPictures>CommonPicture.Price</commonPictures>
   <commonPictures>CommonPicture.Purchase</commonPictures>
   <commonPictures>CommonPicture.QRPicture</commonPictures>
+  <commonPictures>CommonPicture.Quantity</commonPictures>
   <commonPictures>CommonPicture.RadioButton</commonPictures>
   <commonPictures>CommonPicture.Reports</commonPictures>
+  <commonPictures>CommonPicture.Retail</commonPictures>
   <commonPictures>CommonPicture.Sales</commonPictures>
+  <commonPictures>CommonPicture.SerialNumber</commonPictures>
   <commonPictures>CommonPicture.Settings</commonPictures>
   <commonPictures>CommonPicture.Share</commonPictures>
   <commonPictures>CommonPicture.SpecialOffer</commonPictures>
   <commonPictures>CommonPicture.Store</commonPictures>
-  <commonPictures>CommonPicture.Retail</commonPictures>
-  <commonPictures>CommonPicture.Price</commonPictures>
-  <commonPictures>CommonPicture.Quantity</commonPictures>
   <commonPictures>CommonPicture.Total</commonPictures>
-  <commonPictures>CommonPicture.SerialNumber</commonPictures>
-  <commonPictures>CommonPicture.Info</commonPictures>
-  <commonPictures>CommonPicture.Payment</commonPictures>
-  <commonPictures>CommonPicture.CashOk</commonPictures>
-  <commonPictures>CommonPicture.OtherGroup</commonPictures>
-  <commonPictures>CommonPicture.Mobile</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
+  <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
   <sessionParameters>SessionParameter.CurrentUser</sessionParameters>
   <sessionParameters>SessionParameter.CurrentUserPartner</sessionParameters>
   <sessionParameters>SessionParameter.IDUse</sessionParameters>
@@ -160,10 +161,12 @@
   <sessionParameters>SessionParameter.LocalizationCode</sessionParameters>
   <sessionParameters>SessionParameter.OurCompanies</sessionParameters>
   <sessionParameters>SessionParameter.Workstation</sessionParameters>
-  <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
   <roles>Role.BasicRole</roles>
+  <roles>Role.CreateOrModifyUsers</roles>
   <roles>Role.FilterForUserSettings</roles>
   <roles>Role.FullAccess</roles>
+  <roles>Role.FullAccessInArea</roles>
+  <roles>Role.FullAccessOnlyRead</roles>
   <roles>Role.RunMobileClient</roles>
   <roles>Role.RunThickClient</roles>
   <roles>Role.RunThinClient</roles>
@@ -174,9 +177,6 @@
   <roles>Role.UseExternalDataProcessors</roles>
   <roles>Role.UseExternalReports</roles>
   <roles>Role.UseOutput</roles>
-  <roles>Role.FullAccessOnlyRead</roles>
-  <roles>Role.FullAccessInArea</roles>
-  <roles>Role.CreateOrModifyUsers</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -359,26 +359,32 @@
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
+  <commonAttributes>CommonAttribute.BusinessUnit</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
   <commonAttributes>CommonAttribute.Description_hash</commonAttributes>
   <commonAttributes>CommonAttribute.Description_ru</commonAttributes>
   <commonAttributes>CommonAttribute.Description_tr</commonAttributes>
   <commonAttributes>CommonAttribute.DocumentAmount</commonAttributes>
-  <commonAttributes>CommonAttribute.ID</commonAttributes>
-  <commonAttributes>CommonAttribute.UniqueID</commonAttributes>
-  <commonAttributes>CommonAttribute.BusinessUnit</commonAttributes>
-  <commonAttributes>CommonAttribute.Length</commonAttributes>
-  <commonAttributes>CommonAttribute.Width</commonAttributes>
   <commonAttributes>CommonAttribute.Height</commonAttributes>
+  <commonAttributes>CommonAttribute.ID</commonAttributes>
+  <commonAttributes>CommonAttribute.Length</commonAttributes>
+  <commonAttributes>CommonAttribute.UniqueID</commonAttributes>
   <commonAttributes>CommonAttribute.Volume</commonAttributes>
   <commonAttributes>CommonAttribute.Weight</commonAttributes>
+  <commonAttributes>CommonAttribute.Width</commonAttributes>
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.FileTransferService</httpServices>
+  <eventSubscriptions>EventSubscription.BeforeWrite_AccumulationRegistersLockDataModification</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_CatalogsLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_CheckUniqueID</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_DescriptionsCheckFilling</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_DocumentsLockDataModification</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_InformationRegistersLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_RefreshReusableValues</eventSubscriptions>
   <eventSubscriptions>EventSubscription.ChoiceDataGetProcessing_FindDataForInputString</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.FillCheckProcessing_DescriptionCheckFilling</eventSubscriptions>
   <eventSubscriptions>EventSubscription.Filling_DocumentsWithDefaultData</eventSubscriptions>
   <eventSubscriptions>EventSubscription.FormGetProcessing_OpenMobileForm</eventSubscriptions>
   <eventSubscriptions>EventSubscription.OnCopy_AddAttributes</eventSubscriptions>
@@ -388,12 +394,6 @@
   <eventSubscriptions>EventSubscription.OnWrite_UpdateUsersRoleOnWrite</eventSubscriptions>
   <eventSubscriptions>EventSubscription.PresentationFieldsGetProcessing_GetCatalogPresentationFields</eventSubscriptions>
   <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetCatalogPresentation</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.BeforeWrite_DocumentsLockDataModification</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.BeforeWrite_CatalogsLockDataModification</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.BeforeWrite_AccumulationRegistersLockDataModification</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.BeforeWrite_InformationRegistersLockDataModification</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.BeforeWrite_DescriptionsCheckFilling</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.FillCheckProcessing_DescriptionCheckFilling</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
   <settingsStorages>SettingsStorage.ReportOptions</settingsStorages>
@@ -428,11 +428,11 @@
   <definedTypes>DefinedType.typeQuantity</definedTypes>
   <definedTypes>DefinedType.typeReceiptBasis</definedTypes>
   <definedTypes>DefinedType.typeReconciliationStatementDocuments</definedTypes>
+  <definedTypes>DefinedType.typeRowID</definedTypes>
   <definedTypes>DefinedType.typeShipmentBasis</definedTypes>
   <definedTypes>DefinedType.typeStockAdjustmentAsSurplusBasises</definedTypes>
   <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
   <definedTypes>DefinedType.UseUniqueID</definedTypes>
-  <definedTypes>DefinedType.typeRowID</definedTypes>
   <commonCommands>CommonCommand.AddProperties</commonCommands>
   <commonCommands>CommonCommand.IDInfo</commonCommands>
   <commonCommands>CommonCommand.OpenCompanies</commonCommands>
@@ -465,11 +465,11 @@
   <commonForms>CommonForm.PictureGalleryForm</commonForms>
   <commonForms>CommonForm.PictureViewerFormHTML</commonForms>
   <commonForms>CommonForm.PictureViewerFormRegular</commonForms>
+  <commonForms>CommonForm.PrintForm</commonForms>
   <commonForms>CommonForm.RelatedDocuments</commonForms>
   <commonForms>CommonForm.ReportForm</commonForms>
   <commonForms>CommonForm.ShareToUsers</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
-  <commonForms>CommonForm.PrintForm</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
@@ -477,6 +477,7 @@
   <catalogs>Catalog.Agreements</catalogs>
   <catalogs>Catalog.BankTerms</catalogs>
   <catalogs>Catalog.BusinessUnits</catalogs>
+  <catalogs>Catalog.CancelReturnReasons</catalogs>
   <catalogs>Catalog.CashAccounts</catalogs>
   <catalogs>Catalog.CashStatementStatuses</catalogs>
   <catalogs>Catalog.ChequeBonds</catalogs>
@@ -531,7 +532,6 @@
   <catalogs>Catalog.UserGroups</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
-  <catalogs>Catalog.CancelReturnReasons</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>
@@ -539,9 +539,12 @@
   <documents>Document.CashPayment</documents>
   <documents>Document.CashReceipt</documents>
   <documents>Document.CashRevenue</documents>
+  <documents>Document.CashStatement</documents>
   <documents>Document.CashTransferOrder</documents>
   <documents>Document.ChequeBondTransaction</documents>
   <documents>Document.ChequeBondTransactionItem</documents>
+  <documents>Document.CreditNote</documents>
+  <documents>Document.DebitNote</documents>
   <documents>Document.GoodsReceipt</documents>
   <documents>Document.IncomingPaymentOrder</documents>
   <documents>Document.InternalSupplyRequest</documents>
@@ -549,6 +552,7 @@
   <documents>Document.InventoryTransferOrder</documents>
   <documents>Document.InvoiceMatch</documents>
   <documents>Document.Labeling</documents>
+  <documents>Document.ManualRegisterEntry</documents>
   <documents>Document.OpeningEntry</documents>
   <documents>Document.OutgoingPaymentOrder</documents>
   <documents>Document.PhysicalCountByLocation</documents>
@@ -559,6 +563,8 @@
   <documents>Document.PurchaseReturn</documents>
   <documents>Document.PurchaseReturnOrder</documents>
   <documents>Document.ReconciliationStatement</documents>
+  <documents>Document.RetailReturnReceipt</documents>
+  <documents>Document.RetailSalesReceipt</documents>
   <documents>Document.SalesInvoice</documents>
   <documents>Document.SalesOrder</documents>
   <documents>Document.SalesReturn</documents>
@@ -567,12 +573,6 @@
   <documents>Document.StockAdjustmentAsSurplus</documents>
   <documents>Document.StockAdjustmentAsWriteOff</documents>
   <documents>Document.Unbundling</documents>
-  <documents>Document.RetailSalesReceipt</documents>
-  <documents>Document.RetailReturnReceipt</documents>
-  <documents>Document.CreditNote</documents>
-  <documents>Document.DebitNote</documents>
-  <documents>Document.CashStatement</documents>
-  <documents>Document.ManualRegisterEntry</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForCreditDebitNote</documentJournals>
@@ -633,6 +633,7 @@
   <informationRegisters>InformationRegister.BundleContents</informationRegisters>
   <informationRegisters>InformationRegister.BusinessUnitBankTerms</informationRegisters>
   <informationRegisters>InformationRegister.ChequeBondStatuses</informationRegisters>
+  <informationRegisters>InformationRegister.CreatedProcurementOrders</informationRegisters>
   <informationRegisters>InformationRegister.CurrencyRates</informationRegisters>
   <informationRegisters>InformationRegister.DataMappingTable</informationRegisters>
   <informationRegisters>InformationRegister.ExternalCommands</informationRegisters>
@@ -651,7 +652,6 @@
   <informationRegisters>InformationRegister.Taxes</informationRegisters>
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
-  <informationRegisters>InformationRegister.CreatedProcurementOrders</informationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountsStatement</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AdvanceFromCustomers</accumulationRegisters>

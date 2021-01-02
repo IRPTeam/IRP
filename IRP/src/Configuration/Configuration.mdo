@@ -572,6 +572,7 @@
   <documents>Document.CreditNote</documents>
   <documents>Document.DebitNote</documents>
   <documents>Document.CashStatement</documents>
+  <documents>Document.ManualRegisterEntry</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForCreditDebitNote</documentJournals>

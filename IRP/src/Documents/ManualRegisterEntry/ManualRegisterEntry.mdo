@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="09930681-7d82-4725-ad79-b389896a8e4d">
+  <producedTypes>
+    <objectType typeId="dac84901-80b9-4677-b38e-0825d32efef5" valueTypeId="a0fc0e73-3ac9-4fce-97c1-328b858b1b1a"/>
+    <refType typeId="48705453-133a-4871-994b-c0305e84dc19" valueTypeId="0beb7976-c6c1-4194-9423-04aebadd8dad"/>
+    <selectionType typeId="9230bc9d-08c5-4cb6-902e-60bbe2da025f" valueTypeId="a4fe38d7-6e21-41a0-ab17-95e638fd59a5"/>
+    <listType typeId="e964e518-ae8b-4f98-b8ad-278b7136266e" valueTypeId="88eb3ee5-bf55-4f68-a132-4a5a7fbad0c2"/>
+    <managerType typeId="28e94b5a-8d30-42f7-a7dd-a92fd08cf448" valueTypeId="05c34004-80ec-4283-837e-5334e8fdee93"/>
+  </producedTypes>
+  <name>ManualRegisterEntry</name>
+  <synonym>
+    <key>en</key>
+    <value>Manual register entry</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.ManualRegisterEntry.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <registerRecords>AccumulationRegister.R1001_Purchases</registerRecords>
+  <registerRecords>AccumulationRegister.R1002_PurchaseReturns</registerRecords>
+  <registerRecords>AccumulationRegister.R1005_PurchaseSpecialOffers</registerRecords>
+  <registerRecords>AccumulationRegister.R1010_PurchaseOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R1011_PurchaseOrdersReceipt</registerRecords>
+  <registerRecords>AccumulationRegister.R1012_PurchaseOrdersInvoiceClosing</registerRecords>
+  <registerRecords>AccumulationRegister.R1014_CanceledPurchaseOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R1020_AdvancesToVendors</registerRecords>
+  <registerRecords>AccumulationRegister.R1021_VendorsTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R1031_ReceiptInvoicing</registerRecords>
+  <registerRecords>AccumulationRegister.R1040_TaxesOutgoing</registerRecords>
+  <registerRecords>AccumulationRegister.R2001_Sales</registerRecords>
+  <registerRecords>AccumulationRegister.R2002_SalesReturns</registerRecords>
+  <registerRecords>AccumulationRegister.R2005_SalesSpecialOffers</registerRecords>
+  <registerRecords>AccumulationRegister.R2010_SalesOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R2011_SalesOrdersShipment</registerRecords>
+  <registerRecords>AccumulationRegister.R2013_SalesOrdersProcurement</registerRecords>
+  <registerRecords>AccumulationRegister.R2014_CanceledSalesOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R2012_SalesOrdersInvoiceClosing</registerRecords>
+  <registerRecords>AccumulationRegister.R2020_AdvancesFromCustomers</registerRecords>
+  <registerRecords>AccumulationRegister.R2021_CustomersTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R2031_ShipmentInvoicing</registerRecords>
+  <registerRecords>AccumulationRegister.R2040_TaxesIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.R3010_CashOnHand</registerRecords>
+  <registerRecords>AccumulationRegister.R3011_CashMovements</registerRecords>
+  <registerRecords>AccumulationRegister.R3015_CashAdvance</registerRecords>
+  <registerRecords>AccumulationRegister.R3016_ChequeAndBonds</registerRecords>
+  <registerRecords>AccumulationRegister.R3021_CashInTransitIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.R3022_CashInTransitOutgoing</registerRecords>
+  <registerRecords>AccumulationRegister.R3033_CashPlanningIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.R3034_CashPlanningOutgoing</registerRecords>
+  <registerRecords>AccumulationRegister.R4010_ActualStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R4011_FreeStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R4012_StockReservation</registerRecords>
+  <registerRecords>AccumulationRegister.R4013_StockReservationPlanning</registerRecords>
+  <registerRecords>AccumulationRegister.R4015_InternalSupplyRequests</registerRecords>
+  <registerRecords>AccumulationRegister.R4016_InternalSupplyRequestOrdering</registerRecords>
+  <registerRecords>AccumulationRegister.R4017_InternalSupplyRequestProcurement</registerRecords>
+  <registerRecords>AccumulationRegister.R4020_StockTransferOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R4021_StockTransferOrdersReceipt</registerRecords>
+  <registerRecords>AccumulationRegister.R4022_StockTransferOrdersShipment</registerRecords>
+  <registerRecords>AccumulationRegister.R4031_GoodsInTransitIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.R4032_GoodsInTransitOutgoing</registerRecords>
+  <registerRecords>AccumulationRegister.R4033_GoodsReceiptSchedule</registerRecords>
+  <registerRecords>AccumulationRegister.R4034_GoodsShipmentSchedule</registerRecords>
+  <registerRecords>AccumulationRegister.R4050_StockInventory</registerRecords>
+  <registerRecords>AccumulationRegister.R4051_StockAdjustmentAsWriteOff</registerRecords>
+  <registerRecords>AccumulationRegister.R4052_StockAdjustmentAsSurplus</registerRecords>
+  <registerRecords>AccumulationRegister.R5010_ReconciliationStatement</registerRecords>
+  <registerRecords>AccumulationRegister.R5011_PartnersAging</registerRecords>
+  <registerRecords>AccumulationRegister.R5021_Revenues</registerRecords>
+  <registerRecords>AccumulationRegister.R5022_Expenses</registerRecords>
+  <registerRecords>AccumulationRegister.R5041_TaxesPayable</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+</mdclass:Document>

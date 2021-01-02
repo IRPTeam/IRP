@@ -14,6 +14,7 @@
     <value>R4015 Internal supply requests</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
+  <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
   <resources uuid="4a76113d-c838-4826-9665-6dd4d1af4742">

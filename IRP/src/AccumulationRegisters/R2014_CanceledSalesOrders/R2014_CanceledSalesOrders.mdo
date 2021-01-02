@@ -14,6 +14,7 @@
     <value>R2014 Canceled purchase orders</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
+  <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
   <resources uuid="2285c46d-6ec9-4aac-8961-a28f255df1ed">

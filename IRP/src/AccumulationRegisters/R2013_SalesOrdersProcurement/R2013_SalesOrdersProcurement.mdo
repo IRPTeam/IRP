@@ -14,6 +14,7 @@
     <value>R2013 Procurement of sales orders</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
+  <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
   <resources uuid="43e70d62-91ef-4a49-a60b-c3fa9728b17f">

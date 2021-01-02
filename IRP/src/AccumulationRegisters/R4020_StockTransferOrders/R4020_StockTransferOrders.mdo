@@ -14,6 +14,7 @@
     <value>R4020 Stock transfer orders</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
+  <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
   <resources uuid="964ae822-76b2-427c-ab7d-5c36bfa4d5b8">

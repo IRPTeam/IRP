@@ -14,6 +14,7 @@
     <value>R2010 Sales orders</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
+  <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
   <resources uuid="d7dc19e6-684f-4d0d-8158-409e3c8466bf">

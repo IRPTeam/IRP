@@ -8,7 +8,7 @@
     <recordKeyType typeId="8a6b9ef7-6c21-448e-adca-0c792443609b" valueTypeId="b8c5803f-dd59-4fab-9520-bc8dd288b80d"/>
     <recordType typeId="b4d1b514-4b4a-48bf-a19b-ec33d73f9fa9" valueTypeId="5abf1864-58b3-4799-9306-af3a039cdb99"/>
   </producedTypes>
-  <name>R4033_GoodsReceiptShedule</name>
+  <name>R4033_GoodsReceiptSchedule</name>
   <synonym>
     <key>en</key>
     <value>R4033 Scheduled goods receipts</value>

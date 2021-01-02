@@ -14,6 +14,7 @@
     <value>R2005 Sales special offers</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
+  <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
   <resources uuid="d657341f-caab-488f-bc74-4f7a85fd61d2">

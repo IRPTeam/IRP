@@ -14,6 +14,7 @@
     <value>R2002 Sales returns</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
+  <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
   <resources uuid="0e824b6b-167f-4633-b6b8-d5bc1b0c8161">

@@ -14,6 +14,7 @@
     <value>R1002 Purchase returns</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
+  <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
   <resources uuid="04d3ed32-b9f0-48a0-a85a-b847ac7151c3">

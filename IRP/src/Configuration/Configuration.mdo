@@ -716,7 +716,7 @@
   <accumulationRegisters>AccumulationRegister.R4022_StockTransferOrdersShipment</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4031_GoodsInTransitIncoming</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4032_GoodsInTransitOutgoing</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R4033_GoodsReceiptShedule</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4033_GoodsReceiptSchedule</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4034_GoodsShipmentSchedule</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4050_StockInventory</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4051_StockAdjustmentAsWriteOff</accumulationRegisters>

@@ -14,6 +14,7 @@
     <value>R5022 Expenses</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
+  <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
   <resources uuid="b26a1a44-4bd6-4e8d-afb7-26b06a4636e1">

@@ -14,6 +14,7 @@
     <value>R1001 Purchases</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
+  <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
   <resources uuid="bce1b574-6597-4606-b569-e56970be1fbb">

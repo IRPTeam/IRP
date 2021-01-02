@@ -14,6 +14,7 @@
     <value>R5021 Revenues</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
+  <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
   <resources uuid="f92bec09-510e-450b-b825-3ac02ca41569">

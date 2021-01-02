@@ -14,6 +14,7 @@
     <value>R3011 Cash movements</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
+  <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
   <resources uuid="e806f098-3665-4b91-bda7-50dd652770a6">

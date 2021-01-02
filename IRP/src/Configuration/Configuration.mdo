@@ -41,7 +41,7 @@
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectAutonumerationMode>NotAutoFree</objectAutonumerationMode>
   <modalityUseMode>DontUse</modalityUseMode>
-  <compatibilityMode>8.3.16</compatibilityMode>
+  <compatibilityMode>8.3.17</compatibilityMode>
   <languages uuid="f1c59d1c-aafe-420b-96cd-c5f1608cf9c1">
     <name>English</name>
     <synonym>
@@ -531,6 +531,7 @@
   <catalogs>Catalog.UserGroups</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
+  <catalogs>Catalog.CancelReturnReasons</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>
@@ -582,9 +583,12 @@
   <enums>Enum.CashAccountTypes</enums>
   <enums>Enum.CashFlowDirections</enums>
   <enums>Enum.ChequeBondTypes</enums>
+  <enums>Enum.CompanyLegalType</enums>
   <enums>Enum.CurrencyType</enums>
   <enums>Enum.DataAreaStatus</enums>
   <enums>Enum.DocumentPostingTypes</enums>
+  <enums>Enum.EquipmentTypes</enums>
+  <enums>Enum.ExpenseAndRevenueTypes</enums>
   <enums>Enum.FileTypes</enums>
   <enums>Enum.FormTypes</enums>
   <enums>Enum.GoodsReceiptTransactionTypes</enums>
@@ -593,10 +597,17 @@
   <enums>Enum.InvoiceMatchOperationsTypes</enums>
   <enums>Enum.ItemTypes</enums>
   <enums>Enum.KindsOfAttributes</enums>
+  <enums>Enum.MetadataSubtype</enums>
+  <enums>Enum.MetadataTypes</enums>
   <enums>Enum.OffersDocumentTypes</enums>
   <enums>Enum.OutgoingPaymentTransactionTypes</enums>
+  <enums>Enum.PaymentTypes</enums>
   <enums>Enum.PriceListTypes</enums>
+  <enums>Enum.PrintTemplateTypes</enums>
   <enums>Enum.ProcurementMethods</enums>
+  <enums>Enum.Rights</enums>
+  <enums>Enum.SerialNumbersOwner</enums>
+  <enums>Enum.SerialNumberTypes</enums>
   <enums>Enum.ShipmentConfirmationTransactionTypes</enums>
   <enums>Enum.SpecialOfferTypes</enums>
   <enums>Enum.SpecificationType</enums>
@@ -604,16 +615,6 @@
   <enums>Enum.TaxType</enums>
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
-  <enums>Enum.CompanyLegalType</enums>
-  <enums>Enum.PaymentTypes</enums>
-  <enums>Enum.SerialNumberTypes</enums>
-  <enums>Enum.SerialNumbersOwner</enums>
-  <enums>Enum.EquipmentTypes</enums>
-  <enums>Enum.ExpenseAndRevenueTypes</enums>
-  <enums>Enum.MetadataTypes</enums>
-  <enums>Enum.MetadataSubtype</enums>
-  <enums>Enum.Rights</enums>
-  <enums>Enum.PrintTemplateTypes</enums>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
@@ -654,6 +655,7 @@
   <accumulationRegisters>AccumulationRegister.AccountsStatement</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AdvanceFromCustomers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AdvanceToSuppliers</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.Aging</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.CashAdvance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.ChequeBondBalance</accumulationRegisters>
@@ -671,9 +673,65 @@
   <accumulationRegisters>AccumulationRegister.PlaningCashTransactions</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.PurchaseReturnTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.PurchaseTurnovers</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R1001_Purchases</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R1002_PurchaseReturns</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R1005_PurchaseSpecialOffers</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R1010_PurchaseOrders</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R1011_PurchaseOrdersReceipt</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R1012_PurchaseOrdersInvoiceClosing</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R1014_CanceledPurchaseOrders</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R1020_AdvancesToVendors</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R1021_VendorsTransactions</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R1031_ReceiptInvoicing</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R1040_TaxesOutgoing</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R2001_Sales</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R2002_SalesReturns</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R2005_SalesSpecialOffers</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R2010_SalesOrders</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R2011_SalesOrdersShipment</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R2012_SalesOrdersInvoiceClosing</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R2013_SalesOrdersProcurement</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R2014_CanceledSalesOrders</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R2020_AdvancesFromCustomers</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R2021_CustomersTransactions</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R2031_ShipmentInvoicing</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R2040_TaxesIncoming</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3010_CashOnHand</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3011_CashMovements</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3015_CashAdvance</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3016_ChequeAndBonds</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3021_CashInTransitIncoming</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3022_CashInTransitOutgoing</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3033_CashPlanningIncoming</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3034_CashPlanningOutgoing</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4010_ActualStocks</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4011_FreeStocks</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4012_StockReservation</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4013_StockReservationPlanning</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4015_InternalSupplyRequests</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4016_InternalSupplyRequestOrdering</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4017_InternalSupplyRequestProcurement</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4020_StockTransferOrders</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4021_StockTransferOrdersReceipt</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4022_StockTransferOrdersShipment</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4031_GoodsInTransitIncoming</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4032_GoodsInTransitOutgoing</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4033_GoodsReceiptShedule</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4034_GoodsShipmentSchedule</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4050_StockInventory</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4051_StockAdjustmentAsWriteOff</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4052_StockAdjustmentAsSurplus</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R5010_ReconciliationStatement</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R5011_PartnersAging</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R5021_Revenues</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R5022_Expenses</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R5041_TaxesPayable</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.ReceiptOrders</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.ReconciliationStatement</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.RetailCash</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.RetailSales</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.RevenuesTurnovers</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.SalesOrder_ByPlannedDate</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.SalesOrderTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.SalesReturnTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.SalesTurnovers</accumulationRegisters>
@@ -685,10 +743,6 @@
   <accumulationRegisters>AccumulationRegister.StockReservation</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TaxesTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TransferOrderBalance</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.RetailSales</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.RetailCash</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.Aging</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.SalesOrder_ByPlannedDate</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.IDInfoTypes</chartsOfCharacteristicTypes>

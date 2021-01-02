@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="75e765ae-f6c5-45c6-80c9-051eaa1592d6">
+  <producedTypes>
+    <selectionType typeId="565248ef-e51b-4032-acd5-02b51023831b" valueTypeId="01640f07-cbf3-4a73-b0fd-ebf8b69f5048"/>
+    <listType typeId="d9e94bcc-289b-43a0-9b44-49df1ee79845" valueTypeId="1d4003f3-a7f4-40e1-b47e-c3665724d177"/>
+    <managerType typeId="3d16730d-515d-40c0-a864-73ea6cad3787" valueTypeId="b6e41e5e-7639-4162-981c-ff7fbf45d0b0"/>
+    <recordSetType typeId="bc5069f2-cbce-481d-b692-2394db69e34a" valueTypeId="9946d8d9-e6a7-4092-b97d-e194f1eb3e72"/>
+    <recordKeyType typeId="e5d8d4ef-3b4a-414a-ab02-24d406ec131d" valueTypeId="4059ffbb-86a9-420e-9b07-8fcab7030e2c"/>
+    <recordType typeId="315782e1-8526-4732-ada7-8a31d60f31f3" valueTypeId="993b586c-a475-40bc-b489-1ba4e0565927"/>
+  </producedTypes>
+  <name>R3033_CashPlanningIncoming</name>
+  <synonym>
+    <key>en</key>
+    <value>R3033 Cash planning (incoming)</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <enableTotalsSplitting>true</enableTotalsSplitting>
+  <resources uuid="a9e9d166-3017-42b6-934b-4218fb747c72">
+    <name>Amount</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <attributes uuid="606a2921-470c-496e-9d7f-2177074dfd81">
+    <name>DeferredCalculation</name>
+    <synonym>
+      <key>en</key>
+      <value>Deferred calculation</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <dimensions uuid="7f270613-8c77-433f-9077-19f024d7eff7">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="d765a841-c2f5-46e0-ac7f-1c7c37ec2ba5">
+    <name>CurrencyMovementType</name>
+    <synonym>
+      <key>en</key>
+      <value>Multi currency movement type</value>
+    </synonym>
+    <type>
+      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="2cd0c586-0155-41bb-a952-1f1b1c2f7588">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="2ffd1883-8dbf-469a-abc1-a8b524fc1f88">
+    <name>Account</name>
+    <synonym>
+      <key>en</key>
+      <value>Account</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.CashAccounts</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="444e0db3-77b7-4f64-9b8b-dbf19b93a4de">
+    <name>Basis</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>10</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="1fe121f6-4449-454b-ab96-21a09102f1d7">
+    <name>MovementType</name>
+    <synonym>
+      <key>en</key>
+      <value>Movement type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ExpenseAndRevenueTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+</mdclass:AccumulationRegister>

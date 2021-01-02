@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0b56af02-dbd7-4fef-b92b-2903021e692f">
+  <producedTypes>
+    <selectionType typeId="060b03ca-0228-4ba1-92dd-bb9361e7b1c7" valueTypeId="5ba4b1a3-3f85-4f6c-b841-6fc5c5a0e01d"/>
+    <listType typeId="bd85966c-f812-4be6-a14f-2ebf413700ae" valueTypeId="e9f0a7aa-b3c3-4ae3-861b-45f33929a0ee"/>
+    <managerType typeId="83c4fcb0-7588-4d9e-8d51-f8da23d37929" valueTypeId="6504be4d-9440-472c-b166-aebde8f218dc"/>
+    <recordSetType typeId="0a1dc27c-d88f-4986-a0a3-9ffa3dace02c" valueTypeId="a3805f13-1665-4f62-b989-647afcf3c538"/>
+    <recordKeyType typeId="1291c7ab-26c8-415f-afaa-acfe6d83c309" valueTypeId="b90498e4-d542-4fe9-8f7c-ba8805d9869b"/>
+    <recordType typeId="9e991ad8-d21f-4b40-8f09-4d863ccb6ff0" valueTypeId="f08b91b7-e96d-46c1-85e1-867c77debd53"/>
+  </producedTypes>
+  <name>R5022_Expenses</name>
+  <synonym>
+    <key>en</key>
+    <value>R5022 Expenses</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <enableTotalsSplitting>true</enableTotalsSplitting>
+  <resources uuid="b26a1a44-4bd6-4e8d-afb7-26b06a4636e1">
+    <name>Amount</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <dimensions uuid="cf230907-0f51-447c-9786-e93f5355ad79">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="558e5f58-a31a-4159-ad88-1881c2d1fe0e">
+    <name>BusinessUnit</name>
+    <synonym>
+      <key>en</key>
+      <value>Business unit</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="97e165c0-8959-4b53-899f-376587cc857a">
+    <name>ExpenseType</name>
+    <synonym>
+      <key>en</key>
+      <value>Expense type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ExpenseAndRevenueTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="a42eb6ec-91a3-4904-9953-1ca4d87d4b20">
+    <name>ItemKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="800e2f34-8d88-485f-af3e-20f0e257d230">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="31d541ab-34d6-4e27-9401-b8ac728f6549">
+    <name>AdditionalAnalytic</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional analytic</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.AddAttributeAndPropertyValues</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="b071fe71-9fdf-4528-a5e0-cccfa3c2e3b3">
+    <name>CurrencyMovementType</name>
+    <synonym>
+      <key>en</key>
+      <value>Multi currency movement type</value>
+    </synonym>
+    <type>
+      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+</mdclass:AccumulationRegister>

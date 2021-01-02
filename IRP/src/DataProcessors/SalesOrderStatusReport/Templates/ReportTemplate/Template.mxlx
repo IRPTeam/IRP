@@ -11,40 +11,45 @@
 		<languageInfo>
 			<id>tr</id>
 			<code>Turkish</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>ru</id>
 			<code>Russian</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>fr</id>
 			<code>French</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>de</id>
 			<code>German</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>ha</id>
 			<code>HASH</code>
+			<description/>
 		</languageInfo>
 	</languageSettings>
 	<columns>
 		<size>11</size>
 		<columnsItem>
-			<index>1</index>
+			<index>0</index>
 			<column>
 				<formatIndex>1</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>0</index>
+			<index>1</index>
 			<column>
 				<formatIndex>2</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>6</index>
+			<index>3</index>
 			<column>
 				<formatIndex>3</formatIndex>
 			</column>
@@ -56,7 +61,7 @@
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>3</index>
+			<index>6</index>
 			<column>
 				<formatIndex>5</formatIndex>
 			</column>
@@ -74,6 +79,12 @@
 			</column>
 		</columnsItem>
 	</columns>
+	<rowsItem>
+		<index>0</index>
+		<row>
+			<empty>true</empty>
+		</row>
+	</rowsItem>
 	<rowsItem>
 		<index>1</index>
 		<row>
@@ -183,6 +194,12 @@
 					</tl>
 				</c>
 			</c>
+		</row>
+	</rowsItem>
+	<rowsItem>
+		<index>2</index>
+		<row>
+			<empty>true</empty>
 		</row>
 	</rowsItem>
 	<rowsItem>
@@ -314,7 +331,7 @@
 		<row>
 			<c>
 				<c>
-					<f>2</f>
+					<f>1</f>
 				</c>
 			</c>
 			<c>
@@ -424,13 +441,13 @@
 			</c>
 			<c>
 				<c>
-					<f>41</f>
+					<f>40</f>
 					<parameter>QuantityGoodsReceiptSchedule</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>42</f>
+					<f>41</f>
 					<parameter>QuantityStockFree</parameter>
 				</c>
 			</c>
@@ -445,31 +462,11 @@
 		<w>4</w>
 	</merge>
 	<namedItem xsi:type="NamedItemCells">
-		<name>Title</name>
+		<name>Dates</name>
 		<area>
 			<type>Rows</type>
-			<beginRow>1</beginRow>
-			<endRow>1</endRow>
-			<beginColumn>-1</beginColumn>
-			<endColumn>-1</endColumn>
-		</area>
-	</namedItem>
-	<namedItem xsi:type="NamedItemCells">
-		<name>OrderRow</name>
-		<area>
-			<type>Rows</type>
-			<beginRow>3</beginRow>
-			<endRow>3</endRow>
-			<beginColumn>-1</beginColumn>
-			<endColumn>-1</endColumn>
-		</area>
-	</namedItem>
-	<namedItem xsi:type="NamedItemCells">
-		<name>ItemInfoRow</name>
-		<area>
-			<type>Rows</type>
-			<beginRow>4</beginRow>
-			<endRow>4</endRow>
+			<beginRow>6</beginRow>
+			<endRow>6</endRow>
 			<beginColumn>-1</beginColumn>
 			<endColumn>-1</endColumn>
 		</area>
@@ -485,11 +482,31 @@
 		</area>
 	</namedItem>
 	<namedItem xsi:type="NamedItemCells">
-		<name>Dates</name>
+		<name>ItemInfoRow</name>
 		<area>
 			<type>Rows</type>
-			<beginRow>6</beginRow>
-			<endRow>6</endRow>
+			<beginRow>4</beginRow>
+			<endRow>4</endRow>
+			<beginColumn>-1</beginColumn>
+			<endColumn>-1</endColumn>
+		</area>
+	</namedItem>
+	<namedItem xsi:type="NamedItemCells">
+		<name>OrderRow</name>
+		<area>
+			<type>Rows</type>
+			<beginRow>3</beginRow>
+			<endRow>3</endRow>
+			<beginColumn>-1</beginColumn>
+			<endColumn>-1</endColumn>
+		</area>
+	</namedItem>
+	<namedItem xsi:type="NamedItemCells">
+		<name>Title</name>
+		<area>
+			<type>Rows</type>
+			<beginRow>1</beginRow>
+			<endRow>1</endRow>
 			<beginColumn>-1</beginColumn>
 			<endColumn>-1</endColumn>
 		</area>
@@ -499,19 +516,19 @@
 	</line>
 	<font faceName="Arial" height="8" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 	<format>
-		<width>354</width>
-	</format>
-	<format>
 		<width>22</width>
 	</format>
 	<format>
-		<width>114</width>
+		<width>354</width>
+	</format>
+	<format>
+		<width>93</width>
 	</format>
 	<format>
 		<width>94</width>
 	</format>
 	<format>
-		<width>93</width>
+		<width>114</width>
 	</format>
 	<format>
 		<width>98</width>
@@ -750,10 +767,6 @@
 		</format>
 	</format>
 	<format>
-		<horizontalAlignment>Right</horizontalAlignment>
-		<fillType>Parameter</fillType>
-	</format>
-	<format>
 		<border>0</border>
 		<horizontalAlignment>Right</horizontalAlignment>
 		<fillType>Parameter</fillType>
@@ -765,5 +778,4 @@
 		<horizontalAlignment>Right</horizontalAlignment>
 		<fillType>Parameter</fillType>
 	</format>
-	<textDirection>LeftToRight</textDirection>
 </document>

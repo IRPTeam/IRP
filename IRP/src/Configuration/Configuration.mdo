@@ -20,6 +20,8 @@
   <vendor>IRP Team</vendor>
   <version>2020.03.#BuildNumber#</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
+  <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
+  <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
   <reportsVariantsStorage>SettingsStorage.ReportOptions</reportsVariantsStorage>
   <defaultReportForm>CommonForm.ReportForm</defaultReportForm>
   <mainSectionPicture/>

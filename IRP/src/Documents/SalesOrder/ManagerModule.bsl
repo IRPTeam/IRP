@@ -246,7 +246,11 @@ Procedure GetTables_Common(Tables, TempManager, TableName)
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
 		|	tmp.Quantity AS Quantity,
-		|	tmp.DeliveryDate AS Period
+		|	CASE WHEN tmp.DeliveryDate <> DATETIME(1, 1, 1) THEN
+		|		tmp.DeliveryDate
+	    |   ELSE
+		|		tmp.Period
+		|   END AS Period
 		|FROM
 		|	tmp AS tmp";
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);

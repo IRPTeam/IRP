@@ -5,6 +5,8 @@
     <key>en</key>
     <value>Session parameters client server</value>
   </synonym>
+  <clientManagedApplication>true</clientManagedApplication>
   <server>true</server>
+  <clientOrdinaryApplication>true</clientOrdinaryApplication>
   <serverCall>true</serverCall>
 </mdclass:CommonModule>

@@ -66,7 +66,6 @@
   <defaultListForm>Document.SalesOrder.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.SalesOrder.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.SalesOrder_ByPlannedDate</registerRecords>
   <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
   <registerRecords>AccumulationRegister.ItemsInStores</registerRecords>
   <registerRecords>AccumulationRegister.GoodsInTransitOutgoing</registerRecords>
@@ -78,6 +77,15 @@
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
   <registerRecords>AccumulationRegister.ShipmentConfirmationSchedule</registerRecords>
+  <registerRecords>AccumulationRegister.R2010_SalesOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R2011_SalesOrdersShipment</registerRecords>
+  <registerRecords>AccumulationRegister.R2012_SalesOrdersInvoiceClosing</registerRecords>
+  <registerRecords>AccumulationRegister.R2013_SalesOrdersProcurement</registerRecords>
+  <registerRecords>AccumulationRegister.R2014_CanceledSalesOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R4011_FreeStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R4012_StockReservation</registerRecords>
+  <registerRecords>AccumulationRegister.R4013_StockReservationPlanning</registerRecords>
+  <registerRecords>AccumulationRegister.R4034_GoodsShipmentSchedule</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -546,6 +554,34 @@
       </synonym>
       <type>
         <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b4e1d9e1-b8c2-4af2-8632-70d35e778a70">
+      <name>QuantityInBaseUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Q</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="cbd4d052-b0d4-4c37-8bb4-922394bcc74f">
+      <name>CancelReason</name>
+      <synonym>
+        <key>en</key>
+        <value>Cancel reason</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.CancelReturnReasons</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

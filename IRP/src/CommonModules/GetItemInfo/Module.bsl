@@ -697,3 +697,7 @@ Function ItemUnitInfo(ItemKey) Export
 	EndIf;
 	Return New Structure("Unit", Undefined);
 EndFunction
+
+Function GetUnitFactor(ItemKey, Unit) Export
+	Return Catalogs.Units.GetUnitFactor(Unit, ItemKey.Item.Unit);
+EndFunction

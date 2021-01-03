@@ -74,7 +74,6 @@
   <registerRecords>AccumulationRegister.GoodsReceiptSchedule</registerRecords>
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
-  <registerRecords>AccumulationRegister.SalesOrder_ByPlannedDate</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

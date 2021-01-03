@@ -1659,14 +1659,14 @@ Scenario: _012018 check filling in procurement method using the button Fill in S
 			| 'Boots' | '38/18SD'  | '8,000' |
 		And I move one line down in "ItemList" table and select line
 		And in the table "ItemList" I click "Procurement" button
-		And I change checkbox "Repeal"
+		And I change checkbox "NoReserve"
 		And I click "OK" button
 	* Check filling in Procurement method in the Sales order
 		And "ItemList" table contains lines
 		| 'Item'       | 'Item key'  | 'Procurement method' | 'Q'     |
 		| 'Shirt'      | '38/Black'  | 'Stock'              | '5,000' |
-		| 'Boots'      | '38/18SD'   | 'Repeal'             | '8,000' |
-		| 'High shoes' | '37/19SD'   | 'Repeal'             | '2,000' |
+		| 'Boots'      | '38/18SD'   | 'NoReserve'             | '8,000' |
+		| 'High shoes' | '37/19SD'   | 'NoReserve'             | '2,000' |
 		| 'Trousers'   | '38/Yellow' | 'Purchase'           | '3,000' |
 	* Add a line with the service
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1699,8 +1699,8 @@ Scenario: _012018 check filling in procurement method using the button Fill in S
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'  | 'Procurement method' |
 			| 'Shirt'      | '38/Black'  | 'Stock'              |
-			| 'Boots'      | '38/18SD'   | 'Repeal'             |
-			| 'High shoes' | '37/19SD'   | 'Repeal'             |
+			| 'Boots'      | '38/18SD'   | 'NoReserve'             |
+			| 'High shoes' | '37/19SD'   | 'NoReserve'             |
 			| 'Trousers'   | '38/Yellow' | 'Purchase'           |
 			| 'Service'    | 'Rent'      | ''                   |
 		And I click the button named "FormPost"
@@ -1712,7 +1712,7 @@ Scenario: _012018 check filling in procurement method using the button Fill in S
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| 'Item'       | 'Item key' | 'Procurement method' |
-			| 'High shoes' | '37/19SD'  | 'Repeal'             |
+			| 'High shoes' | '37/19SD'  | 'NoReserve'             |
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Procurement method] is empty." substring will appear in 30 seconds
 		And I close all client application windows

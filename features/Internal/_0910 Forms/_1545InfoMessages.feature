@@ -873,7 +873,7 @@ Scenario: _154526 message when trying to create Goods receipt based on Purchase 
 		Then warning message containing text 'There are no lines for which you need to create a "Goods receipt" document in the "Purchase invoice" document.' appears
 		And I close all client application windows
 
-Scenario: _154528 message when trying to create Purchase order based on Sales order with procurement method stock and repeal, with Service
+Scenario: _154528 message when trying to create Purchase order based on Sales order with procurement method stock and NoReserve, with Service
 	* Create Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click "Create" button
@@ -932,7 +932,7 @@ Scenario: _154528 message when trying to create Purchase order based on Sales or
 				| 'Item'  | 'Item key' |
 				| 'Boots' | '37/18SD'  |
 			And I select current line in "List" table
-			And I select "Repeal" exact value from "Procurement method" drop-down list in "ItemList" table
+			And I select "NoReserve" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder154512$$" variable

@@ -112,17 +112,17 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="9915a3d7-c536-4059-ba7e-77b5eb175ead">
+  <dimensions uuid="1c8d3bc4-0e68-48f5-ae64-5e75eb51fb87">
     <name>Basis</name>
     <synonym>
       <key>en</key>
       <value>Basis</value>
     </synonym>
     <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>10</length>
-      </stringQualifiers>
+      <types>DocumentRef.BankReceipt</types>
+      <types>DocumentRef.CashReceipt</types>
+      <types>DocumentRef.OpeningEntry</types>
+      <types>DocumentRef.ChequeBondTransactionItem</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

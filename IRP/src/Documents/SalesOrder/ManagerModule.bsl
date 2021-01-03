@@ -2,6 +2,8 @@
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure();
+	
+#Region OldPosting	
 	AccReg = Metadata.AccumulationRegisters;
 	Tables.Insert("StockReservation"                     , PostingServer.CreateTable(AccReg.StockReservation));
 	Tables.Insert("OrderBalance"                         , PostingServer.CreateTable(AccReg.OrderBalance));
@@ -23,8 +25,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables.Insert("StockReservation_Exists" , PostingServer.CreateTable(AccReg.StockReservation));
 	Tables.Insert("StockBalance_Exists"     , PostingServer.CreateTable(AccReg.StockBalance));
-
-	Tables.Insert("SalesOrder_ByPlannedDate"                  , PostingServer.CreateTable(AccReg.SalesOrder_ByPlannedDate));
 	
 	Tables.OrderBalance_Exists = 
 	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
@@ -74,7 +74,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	SalesOrderItemList.DeliveryDate AS DeliveryDate,
 		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS IsProcurementMethod_Stock,
 		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase) AS IsProcurementMethod_Purchase,
-		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Repeal) AS IsProcurementMethod_Repeal,
+		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.NoReserve) AS IsProcurementMethod_NoReserve,
 		|	CASE
 		|		WHEN SalesOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
 		|			THEN TRUE
@@ -113,7 +113,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	QueryTable.DeliveryDate AS DeliveryDate,
 		|   QueryTable.IsProcurementMethod_Stock AS IsProcMeth_Stock,
 		|   QueryTable.IsProcurementMethod_Purchase AS IsProcMeth_Purchase,
-		|   QueryTable.IsProcurementMethod_Repeal AS IsProcMeth_Repeal,
+		|   QueryTable.IsProcurementMethod_NoReserve AS IsProcMeth_NoReserve,
 		|   QueryTable.IsService AS IsService,
 		|	QueryTable.Amount AS Amount,
 		|	QueryTable.Currency AS Currency
@@ -157,7 +157,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		"SELECT * INTO tmp_3 FROM tmp AS tmp
 		|WHERE
 		|    NOT tmp.UseShipmentBeforeInvoice
-		|AND     tmp.IsProcMeth_Repeal
+		|AND     tmp.IsProcMeth_NoReserve
 		|AND NOT tmp.IsService";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_3").GetData().IsEmpty() Then
@@ -196,7 +196,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		"SELECT * INTO tmp_6 FROM tmp AS tmp
 		|WHERE
 		|        tmp.UseShipmentBeforeInvoice
-		|AND     tmp.IsProcMeth_Repeal
+		|AND     tmp.IsProcMeth_NoReserve
 		|AND NOT tmp.IsService";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_6").GetData().IsEmpty() Then
@@ -214,10 +214,43 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		GetTables_IsService(Tables, TempManager, "tmp_7");
 	EndIf;
 	
+#EndRegion	
 	Parameters.IsReposting = False;
+
+#Region NewRegistersPosting	
+	SetRegisters(Tables);
+	Query = New Query;
+	Query.TempTablesManager = New TempTablesManager();
+	Query.SetParameter("Ref", Ref);
 	
+	QueryArray = New Array;
+	SetQueryTexts(QueryArray);
+	
+	Query.Text = StrConcat(QueryArray, Chars.LF + ";" + Chars.LF);
+	Query.Execute();
+	For Each VT In Tables Do
+		VTSearch = Query.TempTablesManager.Tables.Find(VT.Key);
+		If VTSearch = Undefined Then
+			Continue;
+		EndIf;
+		PostingServer.MergeTables(Tables[VT.Key], VTSearch.GetData().Unload());
+	EndDo;
+#EndRegion	
 	Return Tables;
 EndFunction
+
+Procedure SetQueryTexts(QueryArray)
+	QueryArray.Add(SetItemListVT());
+	QueryArray.Add(SetPostingTables_R2010_SalesOrders());
+	QueryArray.Add(SetPostingTables_R2011_SalesOrdersShipment());
+	QueryArray.Add(SetPostingTables_R2012_SalesOrdersInvoiceClosing());
+	QueryArray.Add(SetPostingTables_R2013_SalesOrdersProcurement());
+	QueryArray.Add(SetPostingTables_R2014_CanceledSalesOrders());
+	QueryArray.Add(SetPostingTables_R4011_FreeStocks());
+	QueryArray.Add(SetPostingTables_R4012_StockReservation());
+	QueryArray.Add(SetPostingTables_R4013_StockReservationPlanning());
+	QueryArray.Add(SetPostingTables_R4034_GoodsShipmentSchedule());
+EndProcedure
 
 Procedure GetTables_Common(Tables, TempManager, TableName)
 	// tmp
@@ -236,22 +269,6 @@ Procedure GetTables_Common(Tables, TempManager, TableName)
 		|	tmp.Amount AS Amount,
 		|	tmp.Period
 		|FROM
-		|	tmp AS tmp
-		|
-		|;
-		|// [1]
-		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.Order AS Order,
-		|	tmp.Store AS Store,
-		|	tmp.ItemKey AS ItemKey,
-		|	tmp.Quantity AS Quantity,
-		|	CASE WHEN tmp.DeliveryDate <> DATETIME(1, 1, 1) THEN
-		|		tmp.DeliveryDate
-	    |   ELSE
-		|		tmp.Period
-		|   END AS Period
-		|FROM
 		|	tmp AS tmp";
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
@@ -259,7 +276,6 @@ Procedure GetTables_Common(Tables, TempManager, TableName)
 	QueryResults = Query.ExecuteBatch();
 	
 	Tables.SalesOrderTurnovers = QueryResults[0].Unload();
-	Tables.SalesOrder_ByPlannedDate = QueryResults[1].Unload();
 EndProcedure
 
 #Region Table_tmp_1
@@ -1221,11 +1237,9 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	// OrderProcurement
 	OrderProcurement = AccumulationRegisters.OrderProcurement.GetLockFields(DocumentDataTables.OrderProcurement);
 	DataMapWithLockFields.Insert(OrderProcurement.RegisterName, OrderProcurement.LockInfo);
-
-	// SalesOrder_ByPlannedDate
-	SalesOrder_ByPlannedDate = AccumulationRegisters.SalesOrder_ByPlannedDate.GetLockFields(DocumentDataTables.SalesOrder_ByPlannedDate);
-	DataMapWithLockFields.Insert(SalesOrder_ByPlannedDate.RegisterName, SalesOrder_ByPlannedDate.LockInfo);
-	
+#Region NewRegistersPosting	
+	GetLockDataSource(DataMapWithLockFields, DocumentDataTables);
+#EndRegion	
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -1318,13 +1332,11 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordSet, WriteInTransaction",
 			Parameters.DocumentDataTables.SalesOrderTurnovers,
 			Parameters.IsReposting));
+		
+#Region NewRegistersPosting
+	SetPostingDataTables(PostingDataTables, Parameters);
+#EndRegion		
 			
-	// SalesOrder_ByPlannedDate
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.SalesOrder_ByPlannedDate,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.SalesOrder_ByPlannedDate,
-			True));	
 	Return PostingDataTables;
 EndFunction
 
@@ -1367,7 +1379,10 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 	// StockBalance
 	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Exists);
 	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
+
+#Region NewRegistersPosting	
+	GetLockDataSource(DataMapWithLockFields, DocumentDataTables);
+#EndRegion	
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -1425,5 +1440,230 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 		Cancel = True;
 	EndIf;
 EndProcedure
+
+#EndRegion
+
+#Region NewRegistersPosting
+
+Procedure SetRegisters(Tables)
+
+	For Each Register In Metadata.Documents.SalesOrder.RegisterRecords Do
+		// use only new registers
+		If Not StrFind(Register.Name, "_") Then
+			Continue;
+		EndIf;
+		Tables.Insert(Register.Name, PostingServer.CreateTable(Register));
+	EndDo;
+	
+EndProcedure
+
+Procedure GetLockDataSource(DataMapWithLockFields, DocumentDataTables)
+
+	For Each Register In DocumentDataTables Do
+		// use only new registers
+		If Not (StrFind(Register.Key, "_") And StrStartsWith(Register.Key, "R")) Then
+			Continue;
+		EndIf;
+		LockData = AccumulationRegisters[Register.Key].GetLockFields(DocumentDataTables[Register.Key]);
+		DataMapWithLockFields.Insert(LockData.RegisterName, LockData.LockInfo);
+	
+	EndDo;
+	
+EndProcedure
+
+Procedure SetPostingDataTables(PostingDataTables, Parameters)
+
+	Settings = New Structure("RegisterName", "R2010_SalesOrders");
+	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
+	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
+	Settings.Insert("WriteInTransaction", True);
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
+
+	Settings = New Structure("RegisterName", "R2011_SalesOrdersShipment");
+	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
+	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
+	Settings.Insert("WriteInTransaction", True);
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
+	
+	Settings = New Structure("RegisterName", "R2012_SalesOrdersInvoiceClosing");
+	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
+	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
+	Settings.Insert("WriteInTransaction", True);
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
+	
+	Settings = New Structure("RegisterName", "R2013_SalesOrdersProcurement");
+	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
+	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
+	Settings.Insert("WriteInTransaction", True);
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
+
+	Settings = New Structure("RegisterName", "R2014_CanceledSalesOrders");
+	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
+	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
+	Settings.Insert("WriteInTransaction", True);
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);		
+	
+	Settings = New Structure("RegisterName", "R4011_FreeStocks");
+	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
+	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
+	Settings.Insert("WriteInTransaction", True);
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
+	
+	Settings = New Structure("RegisterName", "R4012_StockReservation");
+	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
+	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
+	Settings.Insert("WriteInTransaction", True);
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
+	
+	Settings = New Structure("RegisterName", "R4013_StockReservationPlanning");
+	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
+	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
+	Settings.Insert("WriteInTransaction", True);
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
+	
+	Settings = New Structure("RegisterName", "R4034_GoodsShipmentSchedule");
+	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
+	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
+	Settings.Insert("WriteInTransaction", True);
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
+	
+EndProcedure
+
+Function SetItemListVT()
+
+	Return
+		"SELECT
+		|	SalesOrderItemList.Ref.Company AS Company,
+		|	SalesOrderItemList.Ref.ShipmentConfirmationsBeforeSalesInvoice AS ShipmentConfirmationsBeforeSalesInvoice,
+		|	SalesOrderItemList.Store AS Store,
+		|	SalesOrderItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
+		|	SalesOrderItemList.ItemKey AS ItemKey,
+		|	SalesOrderItemList.Ref AS Order,
+		|	SalesOrderItemList.Quantity AS UnitQuantity,
+		|	SalesOrderItemList.QuantityInBaseUnit AS Quantity,
+		|	SalesOrderItemList.Unit,
+		|	SalesOrderItemList.ItemKey.Item AS Item,
+		|	SalesOrderItemList.Ref.Date AS Period,
+		|	SalesOrderItemList.Key AS RowKey,
+		|	SalesOrderItemList.DeliveryDate AS DeliveryDate,
+		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS IsProcurementMethod_Stock,
+		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase) AS IsProcurementMethod_Purchase,
+		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.NoReserve) AS IsProcurementMethod_NonReserve,
+		|	SalesOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+		|	SalesOrderItemList.TotalAmount AS Amount,
+		|	SalesOrderItemList.Ref.Currency AS Currency,
+		|	SalesOrderItemList.Cancel AS IsCanceled,
+		|	SalesOrderItemList.CancelReason,
+		|	SalesOrderItemList.NetAmount
+		|INTO DocData
+		|FROM
+		|	Document.SalesOrder.ItemList AS SalesOrderItemList
+		|WHERE
+		|	SalesOrderItemList.Ref = &Ref";
+EndFunction
+
+Function SetPostingTables_R2010_SalesOrders()
+	Return
+		"SELECT *
+		|INTO R2010_SalesOrders
+		|FROM
+		|	DocData AS QueryTable
+		|WHERE NOT QueryTable.isCanceled";
+
+EndFunction
+
+Function SetPostingTables_R2011_SalesOrdersShipment()
+	Return
+		"SELECT *
+		|INTO R2011_SalesOrdersShipment
+		|FROM
+		|	DocData AS QueryTable
+		|WHERE NOT QueryTable.isCanceled
+		|	AND NOT QueryTable.IsService";
+
+EndFunction
+
+Function SetPostingTables_R2012_SalesOrdersInvoiceClosing()
+	Return
+		"SELECT *
+		|INTO R2012_SalesOrdersInvoiceClosing
+		|FROM
+		|	DocData AS QueryTable
+		|WHERE NOT QueryTable.isCanceled";
+
+EndFunction
+
+Function SetPostingTables_R2013_SalesOrdersProcurement()
+	Return
+		"SELECT *
+		|INTO R2013_SalesOrdersProcurement
+		|FROM
+		|	DocData AS QueryTable
+		|WHERE NOT QueryTable.isCanceled AND NOT QueryTable.IsService
+		|	AND QueryTable.IsProcurementMethod_Purchase";
+
+EndFunction
+
+Function SetPostingTables_R2014_CanceledSalesOrders()
+	Return
+		"SELECT *
+		|INTO R2014_CanceledSalesOrders
+		|FROM
+		|	DocData AS QueryTable
+		|WHERE QueryTable.isCanceled";
+
+EndFunction
+
+Function SetPostingTables_R4011_FreeStocks()
+	Return
+		"SELECT *
+		|INTO R4011_FreeStocks
+		|FROM
+		|	DocData AS QueryTable
+		|WHERE NOT QueryTable.isCanceled AND NOT QueryTable.IsService
+		|	AND QueryTable.IsProcurementMethod_Stock";
+
+EndFunction
+
+Function SetPostingTables_R4012_StockReservation()
+	Return
+		"SELECT *
+		|INTO R4012_StockReservation
+		|FROM
+		|	DocData AS QueryTable
+		|WHERE  NOT QueryTable.isCanceled AND NOT QueryTable.IsService
+		|	AND QueryTable.IsProcurementMethod_Stock";
+
+EndFunction
+
+Function SetPostingTables_R4013_StockReservationPlanning()
+	Return
+		"SELECT *
+		|
+		|INTO R4013_StockReservationPlanning
+		|FROM
+		|	DocData AS QueryTable
+		|WHERE FALSE";
+
+EndFunction
+
+Function SetPostingTables_R4034_GoodsShipmentSchedule()
+	Return
+		"SELECT 
+		|	CASE WHEN QueryTable.DeliveryDate = DATETIME(1, 1, 1) THEN
+		|		QueryTable.Period
+		|	ELSE
+		|		QueryTable.DeliveryDate
+		|	END AS Period,
+		|	QueryTable.Order AS Basis,
+		|*
+		|
+		|INTO R4034_GoodsShipmentSchedule
+		|FROM
+		|	DocData AS QueryTable
+		|WHERE NOT QueryTable.isCanceled AND NOT QueryTable.IsService
+		|	AND QueryTable.IsProcurementMethod_Stock";
+
+EndFunction
 
 #EndRegion

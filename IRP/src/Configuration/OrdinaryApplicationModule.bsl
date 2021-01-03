@@ -1,25 +1,10 @@
+
 Var globalEquipments Export; 
 
 Procedure OnStart()
 	isMobile = False;
-	#If MobileAppClient OR MobileClient OR MobileAppServer Then
-	isMobile = True;
-	#EndIf
-	
 	ClientType = PredefinedValue("Enum.SystemClientType.Other");
-	
-	#If MobileAppClient Then
-	ClientType = PredefinedValue("Enum.SystemClientType.MobileAppClient");
-	#ElsIf MobileClient Then
-	ClientType = PredefinedValue("Enum.SystemClientType.MobileClient");
-	#ElsIf ThickClientManagedApplication Then
-	ClientType = PredefinedValue("Enum.SystemClientType.ThickClientManagedApplication");
-	#ElsIf ThinClient Then
-	ClientType = PredefinedValue("Enum.SystemClientType.ThinClient");
-	#ElsIf WebClient Then
-	ClientType = PredefinedValue("Enum.SystemClientType.WebClient");
-	#EndIf
-	
+
 	ServiceSystemClient.SetSessionParameter("isMobile", isMobile);
 	ServiceSystemClient.SetSessionParameter("ClientType", ClientType);
 	ServiceSystemClient.SetSessionParameter("Workstation", WorkstationClient.GetCurrentWorkstation());

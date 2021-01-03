@@ -732,7 +732,6 @@
   <accumulationRegisters>AccumulationRegister.RetailCash</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.RetailSales</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.RevenuesTurnovers</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.SalesOrder_ByPlannedDate</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.SalesOrderTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.SalesReturnTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.SalesTurnovers</accumulationRegisters>

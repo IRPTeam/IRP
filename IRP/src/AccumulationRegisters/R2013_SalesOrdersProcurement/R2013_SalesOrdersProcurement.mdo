@@ -110,16 +110,13 @@
     <useInTotals>true</useInTotals>
   </dimensions>
   <dimensions uuid="0b0531d6-6e3b-4c3e-b270-2805b81c4c31">
-    <name>SalesOrder</name>
+    <name>Order</name>
     <synonym>
       <key>en</key>
-      <value>Sales order</value>
+      <value>Order</value>
     </synonym>
     <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>10</length>
-      </stringQualifiers>
+      <types>DocumentRef.SalesOrder</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

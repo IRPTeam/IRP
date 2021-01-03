@@ -229,7 +229,7 @@ Scenario:_800000 preparation (remaining stock control)
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
-			And I select "Repeal" exact value from "Procurement method" drop-down list in "ItemList" table
+			And I select "NoReserve" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberSalesOrder1$$"
 			Then user message window does not contain messages

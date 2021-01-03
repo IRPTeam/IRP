@@ -93,6 +93,9 @@ Function SetLock(LockDataSources)
 	DataLock = New DataLock();
 	
 	For Each Row In LockDataSources Do
+		If Not Row.Value.Fields.Count() Then
+			Continue;
+		EndIf;
 		DataLockItem = DataLock.Add(Row.Key);
 		
 		DataLockItem.Mode = DataLockMode.Exclusive;
@@ -1005,7 +1008,7 @@ EndFunction
 
 Function GetLockFieldsMap(LockFieldNames) Export
 	Fields = New Map();
-	ArrayOfFieldNames = StrSplit(LockFieldNames, ",");
+	ArrayOfFieldNames = StrSplit(LockFieldNames, ",", False);
 	For Each ItemFieldName In ArrayOfFieldNames Do
 		Fields.Insert(TrimAll(ItemFieldName), TrimAll(ItemFieldName));
 	EndDo;

@@ -117,7 +117,7 @@ Procedure UpdateTotalAmounts()
 	ThisObject.TotalTotalAmount = 0;
 	ThisObject.TotalTaxAmount = 0;
 	ThisObject.TotalOffersAmount = 0;
-	ProcurementMethods_Repeal = PredefinedValue("Enum.ProcurementMethods.Repeal");
+	ProcurementMethods_Repeal = PredefinedValue("Enum.ProcurementMethods.NoReserve");
 	ProcurementMethods_EmptyRef = PredefinedValue("Enum.ProcurementMethods.EmptyRef");
 	IsService = PredefinedValue("Enum.ItemTypes.Service");
 	For Each Row In Object.ItemList Do

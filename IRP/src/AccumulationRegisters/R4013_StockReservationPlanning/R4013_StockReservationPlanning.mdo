@@ -50,10 +50,9 @@
       <value>Order</value>
     </synonym>
     <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>10</length>
-      </stringQualifiers>
+      <types>DocumentRef.InventoryTransferOrder</types>
+      <types>DocumentRef.PurchaseReturnOrder</types>
+      <types>DocumentRef.SalesOrder</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -67,10 +66,9 @@
       <value>Incoming document</value>
     </synonym>
     <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>10</length>
-      </stringQualifiers>
+      <types>DocumentRef.PurchaseOrder</types>
+      <types>DocumentRef.SalesReturnOrder</types>
+      <types>DocumentRef.InventoryTransferOrder</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

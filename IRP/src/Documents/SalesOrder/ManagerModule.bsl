@@ -239,19 +239,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Return Tables;
 EndFunction
 
-Procedure SetQueryTexts(QueryArray)
-	QueryArray.Add(SetItemListVT());
-	QueryArray.Add(SetPostingTables_R2010_SalesOrders());
-	QueryArray.Add(SetPostingTables_R2011_SalesOrdersShipment());
-	QueryArray.Add(SetPostingTables_R2012_SalesOrdersInvoiceClosing());
-	QueryArray.Add(SetPostingTables_R2013_SalesOrdersProcurement());
-	QueryArray.Add(SetPostingTables_R2014_CanceledSalesOrders());
-	QueryArray.Add(SetPostingTables_R4011_FreeStocks());
-	QueryArray.Add(SetPostingTables_R4012_StockReservation());
-	QueryArray.Add(SetPostingTables_R4013_StockReservationPlanning());
-	QueryArray.Add(SetPostingTables_R4034_GoodsShipmentSchedule());
-EndProcedure
-
 Procedure GetTables_Common(Tables, TempManager, TableName)
 	// tmp
 	Query = New Query();
@@ -1457,6 +1444,19 @@ Procedure SetRegisters(Tables)
 	
 EndProcedure
 
+Procedure SetQueryTexts(QueryArray)
+	QueryArray.Add(SetItemListVT());
+	QueryArray.Add(SetPostingTables_R2010_SalesOrders());
+	QueryArray.Add(SetPostingTables_R2011_SalesOrdersShipment());
+	QueryArray.Add(SetPostingTables_R2012_SalesOrdersInvoiceClosing());
+	QueryArray.Add(SetPostingTables_R2013_SalesOrdersProcurement());
+	QueryArray.Add(SetPostingTables_R2014_CanceledSalesOrders());
+	QueryArray.Add(SetPostingTables_R4011_FreeStocks());
+	QueryArray.Add(SetPostingTables_R4012_StockReservation());
+	QueryArray.Add(SetPostingTables_R4013_StockReservationPlanning());
+	QueryArray.Add(SetPostingTables_R4034_GoodsShipmentSchedule());
+EndProcedure
+
 Procedure GetLockDataSource(DataMapWithLockFields, DocumentDataTables)
 
 	For Each Register In DocumentDataTables Do
@@ -1595,7 +1595,9 @@ EndFunction
 
 Function SetPostingTables_R2013_SalesOrdersProcurement()
 	Return
-		"SELECT *
+		"SELECT 
+		|QueryTable.Quantity AS OrderedQuantity,
+		|*
 		|INTO R2013_SalesOrdersProcurement
 		|FROM
 		|	DocData AS QueryTable

@@ -54,7 +54,7 @@ EndProcedure
 
 Function GetColumnNames_ItemList(ArrayOfTaxInfo = Undefined) Export
 	ColumnNames = "Key, Unit, Price, PriceType, ItemKey, Quantity, OffersAmount, 
-				  |TotalAmount, NetAmount, TaxAmount, Info, Barcode, DontCalculateRow";
+				  |TotalAmount, NetAmount, TaxAmount, Info, Barcode, DontCalculateRow, QuantityInBaseUnit";
 	If ArrayOfTaxInfo <> Undefined Then
 		For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
 			ColumnNames = ColumnNames + "," +	ItemOfTaxInfo.Name;

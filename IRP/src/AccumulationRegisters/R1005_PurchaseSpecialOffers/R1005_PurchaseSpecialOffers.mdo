@@ -17,32 +17,6 @@
   <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="a9df4de8-c653-4312-b698-2993c089c208">
-    <name>PurchaseAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Purchase amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="f617dc0b-0a81-47ad-9f50-984736ea3de8">
-    <name>NetAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Net amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
   <resources uuid="5b762491-e601-4949-81cf-505d6b1f5564">
     <name>OffersAmount</name>
     <synonym>
@@ -56,19 +30,19 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
-  <resources uuid="4744f345-c818-423f-bb54-cba2b6f6523c">
-    <name>NetOfferAmount</name>
+  <attributes uuid="c8e2afe3-c77d-43be-a085-d04daf52436c">
+    <name>DeferredCalculation</name>
     <synonym>
       <key>en</key>
-      <value>Net offer amount</value>
+      <value>Deferred calculation</value>
     </synonym>
     <type>
-      <types>DefinedType.typeAmount</types>
+      <types>Boolean</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
-  </resources>
+  </attributes>
   <dimensions uuid="af5002a9-d9fd-4b25-9913-2400af0763e8">
     <name>Company</name>
     <synonym>

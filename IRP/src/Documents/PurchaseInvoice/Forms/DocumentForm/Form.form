@@ -2288,6 +2288,49 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
+          <name>ItemListUseGoodsReceipt</name>
+          <id>649</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.UseGoodsReceipt</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ItemListUseGoodsReceiptExtendedTooltip</name>
+            <id>651</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListUseGoodsReceiptContextMenu</name>
+            <id>650</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>CheckBoxField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+        </items>
+        <items xsi:type="form:FormField">
           <name>ItemListDetail</name>
           <id>419</id>
           <visible>true</visible>
@@ -6099,7 +6142,6 @@
         <name>SearchByBarcode</name>
       </handler>
     </action>
-    
     <representation>Picture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
@@ -6152,7 +6194,6 @@
         <name>SetSpecialOffers</name>
       </handler>
     </action>
-    
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -6170,7 +6211,6 @@
         <name>SetSpecialOffersAtRow</name>
       </handler>
     </action>
-    
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>

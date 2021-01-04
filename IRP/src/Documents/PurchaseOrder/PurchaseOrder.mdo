@@ -74,6 +74,13 @@
   <registerRecords>AccumulationRegister.GoodsReceiptSchedule</registerRecords>
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R1010_PurchaseOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R1011_PurchaseOrdersReceipt</registerRecords>
+  <registerRecords>AccumulationRegister.R1012_PurchaseOrdersInvoiceClosing</registerRecords>
+  <registerRecords>AccumulationRegister.R1014_CanceledPurchaseOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R4033_GoodsReceiptSchedule</registerRecords>
+  <registerRecords>AccumulationRegister.R2013_SalesOrdersProcurement</registerRecords>
+  <registerRecords>AccumulationRegister.R4016_InternalSupplyRequestOrdering</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -496,6 +503,75 @@
       </synonym>
       <type>
         <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2c581d14-9146-4c93-b4e6-468b8b7c10a5">
+      <name>QuantityInBaseUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Q</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="d1ffe5f7-0c22-44b8-bf6e-25f5049badff">
+      <name>Cancel</name>
+      <synonym>
+        <key>en</key>
+        <value>Cancel</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="5ca11724-52a8-4e06-b5d8-f08cf934a495">
+      <name>CancelReason</name>
+      <synonym>
+        <key>en</key>
+        <value>Cancel reason</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.CancelReturnReasons</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2bfdaf4a-ace0-4226-a8f7-88c634b07fba">
+      <name>SalesOrder</name>
+      <synonym>
+        <key>en</key>
+        <value>Sales order</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.SalesOrder</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="6f100883-d062-4e1e-94af-a93aa005a17d">
+      <name>InternalSupplyRequest</name>
+      <synonym>
+        <key>en</key>
+        <value>Internal supply request</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.InternalSupplyRequest</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

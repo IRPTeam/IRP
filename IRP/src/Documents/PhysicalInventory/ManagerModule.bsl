@@ -333,20 +333,10 @@ EndProcedure
 
 #EndRegion
 
-Function GetItemListWithFillingPhysCount(Ref, ItemList) Export
+Function GetItemListWithFillingPhysCount(Ref) Export
 	Query = New Query();
 	Query.Text = GetQueryTextFillPhysCount_ByItemList();
 	
-	AccReg = Metadata.AccumulationRegisters.StockBalance;
-		
-	ItemListTyped = New ValueTable();
-	ItemListTyped.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
-	ItemListTyped.Columns.Add("ItemKey", AccReg.Dimensions.ItemKey.Type);
-	For Each Row In ItemList Do
-		FillPropertyValues(ItemListTyped.Add(), Row);
-	EndDo;
-		
-	Query.SetParameter("ItemList", ItemListTyped);
 	Query.SetParameter("Ref", Ref);
 	
 	QueryResult = Query.Execute();
@@ -357,29 +347,48 @@ EndFunction
 Function GetQueryTextFillPhysCount_ByItemList()
 	Return
 	"SELECT
-	|	tmp.Key AS Key,
-	|	tmp.ItemKey AS ItemKey
-	|INTO ItemList
+	|	NestedSelect.ItemKey.Item AS Item,
+	|	NestedSelect.ItemKey AS ItemKey,
+	|	NestedSelect.Unit AS Unit,
+	|	SUM(NestedSelect.ExpCount) AS ExpCount,
+	|	SUM(NestedSelect.PhysCount) AS PhysCount,
+	|	SUM(NestedSelect.PhysCount) - SUM(NestedSelect.ExpCount) AS Difference
 	|FROM
-	|	&ItemList AS tmp
-	|;
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	PhysicalCountByLocationItemList.Key,
-	|	PhysicalCountByLocationItemList.ItemKey,
-	|	SUM(ISNULL(PhysicalCountByLocationItemList.PhysCount, 0)) AS PhysCount
-	|FROM
-	|	ItemList AS ItemList
-	|		LEFT JOIN Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList
-	|		ON ItemList.Key = PhysicalCountByLocationItemList.Key
-	|		AND ItemList.ItemKey = PhysicalCountByLocationItemList.ItemKey
-	|		AND PhysicalCountByLocationItemList.Ref.PhysicalInventory = &Ref
-	|		AND
-	|		NOT PhysicalCountByLocationItemList.Ref.DeletionMark
-	|		AND PhysicalCountByLocationItemList.Ref.Status.Posting
+	|	(SELECT
+	|		PhysicalInventoryItemList.ItemKey AS ItemKey,
+	|		PhysicalInventoryItemList.Unit AS Unit,
+	|		SUM(PhysicalInventoryItemList.ExpCount) AS ExpCount,
+	|		0 AS PhysCount
+	|	FROM
+	|		Document.PhysicalInventory.ItemList AS PhysicalInventoryItemList
+	|	WHERE
+	|		PhysicalInventoryItemList.Ref = &Ref
+	|	
+	|	GROUP BY
+	|		PhysicalInventoryItemList.ItemKey,
+	|		PhysicalInventoryItemList.Unit
+	|	
+	|	UNION ALL
+	|	
+	|	SELECT
+	|		PhysicalCountByLocationItemList.ItemKey,
+	|		PhysicalCountByLocationItemList.Unit,
+	|		0,
+	|		SUM(PhysicalCountByLocationItemList.PhysCount)
+	|	FROM
+	|		Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList
+	|	WHERE
+	|		PhysicalCountByLocationItemList.Ref.PhysicalInventory = &Ref
+	|		AND NOT PhysicalCountByLocationItemList.Ref.DeletionMark
+	|	
+	|	GROUP BY
+	|		PhysicalCountByLocationItemList.ItemKey,
+	|		PhysicalCountByLocationItemList.Unit) AS NestedSelect
+	|
 	|GROUP BY
-	|	PhysicalCountByLocationItemList.Key,
-	|	PhysicalCountByLocationItemList.ItemKey";
+	|	NestedSelect.ItemKey.Item,
+	|	NestedSelect.ItemKey,
+	|	NestedSelect.Unit";
 EndFunction
 
 Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined) Export

@@ -124,10 +124,6 @@
 			<name>Get</name>
 			<value>true</value>
 		</right>
-		<right>
-			<name>Set</name>
-			<value>true</value>
-		</right>
 	</object>
 	<object>
 		<name>Catalog.Workstations</name>
@@ -255,10 +251,6 @@
 		<name>SessionParameter.IDValue</name>
 		<right>
 			<name>Get</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Set</name>
 			<value>true</value>
 		</right>
 	</object>

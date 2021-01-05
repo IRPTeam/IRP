@@ -35,7 +35,7 @@ EndProcedure
 
 Procedure SaveSettingsInInfoReg(SettingsTab) Export
 
-  IntegrationServerPriveleged.SaveSettingsInInfoReg(SettingsTab);
+  IntegrationServerPrivileged.SaveSettingsInInfoReg(SettingsTab);
     
 EndProcedure
 

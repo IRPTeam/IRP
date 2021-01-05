@@ -141,6 +141,11 @@ Function SessionParametersSetCurrentUser() Export
 	If NOT ValueIsFilled(InfobaseUserName) Then
 		Return Catalogs.Users.EmptyRef();
 	EndIf;
+		
+	// If Saas Admin
+	If Saas.isSaasMode() And Not CurrentInfobaseUser.DataSeparation.Count() Then
+		Return Catalogs.Users.EmptyRef();
+	EndIf;
 	
 	FoundUser = Catalogs.Users.FindByAttribute("InfobaseUserID", InfobaseUserID);
 	If FoundUser.IsEmpty() Then

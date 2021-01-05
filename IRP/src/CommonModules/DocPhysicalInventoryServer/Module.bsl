@@ -144,11 +144,11 @@ Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined) Export
 	Return ArrayOfResult;
 EndFunction
 
-Function GetItemListWithFillingPhysCount(Ref, ItemList) Export
-	Result = Documents.PhysicalInventory.GetItemListWithFillingPhysCount(Ref, ItemList);
+Function GetItemListWithFillingPhysCount(Ref) Export
+	Result = Documents.PhysicalInventory.GetItemListWithFillingPhysCount(Ref);
 	ArrayOfResult = New Array();
 	For Each Row In Result Do
-		NewRow = New Structure("Key, ItemKey, PhysCount");
+		NewRow = New Structure("Item, ItemKey, Unit, PhysCount, ExpCount");
 		FillPropertyValues(NewRow, Row);
 		ArrayOfResult.Add(NewRow);
 	EndDo;

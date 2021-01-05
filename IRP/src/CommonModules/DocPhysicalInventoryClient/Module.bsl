@@ -166,15 +166,9 @@ Procedure UpdateExpCount(Object, Form) Export
 EndProcedure
 
 Procedure UpdatePhysCount(Object, Form) Export
-	ItemList = New Array();
-	For Each Row In Object.ItemList Do
-		NewRow = New Structure("Key, ItemKey");
-		FillPropertyValues(NewRow, Row);
-		ItemList.Add(NewRow);
-	EndDo;
 	UpdateItemList(Object, 
 					Form, 
-					DocPhysicalInventoryServer.GetItemListWithFillingPhysCount(Object.Ref, ItemList));
+					DocPhysicalInventoryServer.GetItemListWithFillingPhysCount(Object.Ref));
 EndProcedure
 
 Procedure FillItemList(Object, Form, Result)
@@ -193,9 +187,13 @@ Procedure UpdateItemList(Object, Form, Result)
 	EndDo;
 	
 	For Each Row In Result Do
-		For Each ItemListRow In Object.ItemList.FindRows(New Structure("Key, ItemKey", Row.Key, Row.ItemKey)) Do
-			FillPropertyValues(ItemListRow, Row);
-			ItemListRow.Difference = ItemListRow.PhysCount - ItemListRow.ExpCount;
-		EndDo;
+		ItemListFoundRows = Object.ItemList.FindRows(New Structure("Unit, ItemKey", Row.Unit, Row.ItemKey));
+		If ItemListFoundRows.Count() Then
+			ItemListRow = ItemListFoundRows[0];
+		Else
+			ItemListRow = Object.ItemList.Add();			
+		EndIf;
+		FillPropertyValues(ItemListRow, Row);
+		ItemListRow.Difference = ItemListRow.PhysCount - ItemListRow.ExpCount;
 	EndDo;
 EndProcedure

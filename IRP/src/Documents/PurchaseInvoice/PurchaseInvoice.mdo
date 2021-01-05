@@ -81,23 +81,23 @@
   <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R1001_Purchases</registerRecords>
-  <registerRecords>AccumulationRegister.R1005_PurchaseSpecialOffers</registerRecords>
-  <registerRecords>AccumulationRegister.R1011_PurchaseOrdersReceipt</registerRecords>
-  <registerRecords>AccumulationRegister.R1012_PurchaseOrdersInvoiceClosing</registerRecords>
-  <registerRecords>AccumulationRegister.R1031_ReceiptInvoicing</registerRecords>
-  <registerRecords>AccumulationRegister.R1040_TaxesOutgoing</registerRecords>
-  <registerRecords>AccumulationRegister.R1020_AdvancesToVendors</registerRecords>
-  <registerRecords>AccumulationRegister.R1021_VendorsTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R2013_SalesOrdersProcurement</registerRecords>
-  <registerRecords>AccumulationRegister.R4010_ActualStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R4011_FreeStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R4017_InternalSupplyRequestProcurement</registerRecords>
-  <registerRecords>AccumulationRegister.R4031_GoodsInTransitIncoming</registerRecords>
-  <registerRecords>AccumulationRegister.R4032_GoodsInTransitOutgoing</registerRecords>
-  <registerRecords>AccumulationRegister.R4050_StockInventory</registerRecords>
-  <registerRecords>AccumulationRegister.R5010_ReconciliationStatement</registerRecords>
-  <registerRecords>AccumulationRegister.R5022_Expenses</registerRecords>
+  <registerRecords>AccumulationRegister.R1001T_Purchases</registerRecords>
+  <registerRecords>AccumulationRegister.R1005T_PurchaseSpecialOffers</registerRecords>
+  <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
+  <registerRecords>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</registerRecords>
+  <registerRecords>AccumulationRegister.R1031B_ReceiptInvoicing</registerRecords>
+  <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
+  <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
+  <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
+  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R4017B_InternalSupplyRequestProcurement</registerRecords>
+  <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
+  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
+  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
+  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

@@ -68,10 +68,6 @@
 			</role>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>PurchaseAmountTurnover</dataPath>
-			<field>PurchaseAmountTurnover</field>
-		</field>
-		<field xsi:type="DataSetFieldField">
 			<dataPath>NetOfferAmountTurnover</dataPath>
 			<field>NetOfferAmountTurnover</field>
 		</field>
@@ -291,14 +287,7 @@
 			<field>Recorder</field>
 		</field>
 		<item xsi:type="DataSetQuery">
-			<name>R1001_Purchases</name>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>ItemKey</dataPath>
-				<field>ItemKey</field>
-				<role>
-					<dcscom:dimension>true</dcscom:dimension>
-				</role>
-			</field>
+			<name>R1001T_Purchases</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>RegisterName</dataPath>
 				<field>RegisterName</field>
@@ -309,88 +298,25 @@
 					</v8:item>
 				</title>
 			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Invoice</dataPath>
-				<field>Invoice</field>
-				<role>
-					<dcscom:dimension>true</dcscom:dimension>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>CurrencyMovementType</dataPath>
-				<field>CurrencyMovementType</field>
-				<role>
-					<dcscom:dimension>true</dcscom:dimension>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountTurnover</dataPath>
-				<field>AmountTurnover</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>QuantityTurnover</dataPath>
-				<field>QuantityTurnover</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>NetAmountTurnover</dataPath>
-				<field>NetAmountTurnover</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Company</dataPath>
-				<field>Company</field>
-				<role>
-					<dcscom:dimension>true</dcscom:dimension>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Currency</dataPath>
-				<field>Currency</field>
-				<role>
-					<dcscom:dimension>true</dcscom:dimension>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>RowKey</dataPath>
-				<field>RowKey</field>
-				<role>
-					<dcscom:dimension>true</dcscom:dimension>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>OffersAmountTurnover</dataPath>
-				<field>OffersAmountTurnover</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Recorder</dataPath>
-				<field>Recorder</field>
-				<role>
-					<dcscom:periodNumber>1</dcscom:periodNumber>
-					<dcscom:periodType>Main</dcscom:periodType>
-				</role>
-			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R1001_Purchases" AS RegisterName,
-	R1001_PurchasesTurnovers.Company,
-	R1001_PurchasesTurnovers.CurrencyMovementType,
-	R1001_PurchasesTurnovers.Currency,
-	R1001_PurchasesTurnovers.Invoice,
-	R1001_PurchasesTurnovers.ItemKey,
-	R1001_PurchasesTurnovers.RowKey,
-	R1001_PurchasesTurnovers.QuantityTurnover,
-	R1001_PurchasesTurnovers.AmountTurnover,
-	R1001_PurchasesTurnovers.NetAmountTurnover,
-	R1001_PurchasesTurnovers.OffersAmountTurnover,
-	R1001_PurchasesTurnovers.Recorder
+	"R1001T_Purchases" AS RegisterName,
+	R1001T_PurchasesTurnovers.Company,
+	R1001T_PurchasesTurnovers.CurrencyMovementType,
+	R1001T_PurchasesTurnovers.Currency,
+	R1001T_PurchasesTurnovers.Invoice,
+	R1001T_PurchasesTurnovers.ItemKey,
+	R1001T_PurchasesTurnovers.RowKey,
+	R1001T_PurchasesTurnovers.QuantityTurnover,
+	R1001T_PurchasesTurnovers.AmountTurnover,
+	R1001T_PurchasesTurnovers.NetAmountTurnover,
+	R1001T_PurchasesTurnovers.OffersAmountTurnover,
+	R1001T_PurchasesTurnovers.Recorder
 FROM
-	AccumulationRegister.R1001_Purchases.Turnovers(,, Recorder,) AS R1001_PurchasesTurnovers</query>
+	AccumulationRegister.R1001T_Purchases.Turnovers(,, Recorder,) AS R1001T_PurchasesTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R1002_PurchaseReturns</name>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>QuantityTurnover</dataPath>
-				<field>QuantityTurnover</field>
-			</field>
+			<name>R1002T_PurchaseReturns</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>RegisterName</dataPath>
 				<field>RegisterName</field>
@@ -401,87 +327,22 @@ FROM
 					</v8:item>
 				</title>
 			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Currency</dataPath>
-				<field>Currency</field>
-				<role>
-					<dcscom:dimension>true</dcscom:dimension>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>NetAmountTurnover</dataPath>
-				<field>NetAmountTurnover</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Invoice</dataPath>
-				<field>Invoice</field>
-				<role>
-					<dcscom:dimension>true</dcscom:dimension>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>ItemKey</dataPath>
-				<field>ItemKey</field>
-				<role>
-					<dcscom:dimension>true</dcscom:dimension>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>AmountTurnover</dataPath>
-				<field>AmountTurnover</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Company</dataPath>
-				<field>Company</field>
-				<role>
-					<dcscom:dimension>true</dcscom:dimension>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>CurrencyMovementType</dataPath>
-				<field>CurrencyMovementType</field>
-				<role>
-					<dcscom:dimension>true</dcscom:dimension>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>ReturnReason</dataPath>
-				<field>ReturnReason</field>
-				<role>
-					<dcscom:dimension>true</dcscom:dimension>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>RowKey</dataPath>
-				<field>RowKey</field>
-				<role>
-					<dcscom:dimension>true</dcscom:dimension>
-				</role>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Recorder</dataPath>
-				<field>Recorder</field>
-				<role>
-					<dcscom:periodNumber>1</dcscom:periodNumber>
-					<dcscom:periodType>Main</dcscom:periodType>
-				</role>
-			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R1002_PurchaseReturns" AS RegisterName,
-	R1002_PurchaseReturnsTurnovers.Company,
-	R1002_PurchaseReturnsTurnovers.CurrencyMovementType,
-	R1002_PurchaseReturnsTurnovers.Currency,
-	R1002_PurchaseReturnsTurnovers.Invoice,
-	R1002_PurchaseReturnsTurnovers.ItemKey,
-	R1002_PurchaseReturnsTurnovers.RowKey,
-	R1002_PurchaseReturnsTurnovers.ReturnReason,
-	R1002_PurchaseReturnsTurnovers.QuantityTurnover,
-	R1002_PurchaseReturnsTurnovers.AmountTurnover,
-	R1002_PurchaseReturnsTurnovers.NetAmountTurnover,
-	R1002_PurchaseReturnsTurnovers.Recorder
+	"R1002T_PurchaseReturns" AS RegisterName,
+	R1002T_PurchaseReturnsTurnovers.Company,
+	R1002T_PurchaseReturnsTurnovers.CurrencyMovementType,
+	R1002T_PurchaseReturnsTurnovers.Currency,
+	R1002T_PurchaseReturnsTurnovers.Invoice,
+	R1002T_PurchaseReturnsTurnovers.ItemKey,
+	R1002T_PurchaseReturnsTurnovers.RowKey,
+	R1002T_PurchaseReturnsTurnovers.ReturnReason,
+	R1002T_PurchaseReturnsTurnovers.QuantityTurnover,
+	R1002T_PurchaseReturnsTurnovers.AmountTurnover,
+	R1002T_PurchaseReturnsTurnovers.NetAmountTurnover,
+	R1002T_PurchaseReturnsTurnovers.Recorder
 FROM
-	AccumulationRegister.R1002_PurchaseReturns.Turnovers(,, Recorder,) AS R1002_PurchaseReturnsTurnovers</query>
+	AccumulationRegister.R1002T_PurchaseReturns.Turnovers(,, Recorder,) AS R1002T_PurchaseReturnsTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
 			<name>R1005_PurchaseSpecialOffers</name>
@@ -500,10 +361,6 @@ FROM
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>NetAmountTurnover</dataPath>
-				<field>NetAmountTurnover</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
 				<dataPath>CurrencyMovementType</dataPath>
 				<field>CurrencyMovementType</field>
 				<role>
@@ -525,10 +382,6 @@ FROM
 				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>PurchaseAmountTurnover</dataPath>
-				<field>PurchaseAmountTurnover</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
 				<dataPath>ItemKey</dataPath>
 				<field>ItemKey</field>
 				<role>
@@ -547,10 +400,6 @@ FROM
 				<field>OffersAmountTurnover</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>NetOfferAmountTurnover</dataPath>
-				<field>NetOfferAmountTurnover</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
 				<dataPath>RegisterName</dataPath>
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
@@ -565,7 +414,7 @@ FROM
 				<field>Recorder</field>
 				<role>
 					<dcscom:periodNumber>1</dcscom:periodNumber>
-					<dcscom:periodType>Main</dcscom:periodType>
+					<dcsR1005T_PurchaseSpecialOffers:periodType>
 				</role>
 			</field>
 			<dataSource>DataSource1</dataSource>
@@ -578,16 +427,13 @@ FROM
 	R1005_PurchaseSpecialOffersTurnovers.ItemKey AS ItemKey,
 	R1005_PurchaseSpecialOffersTurnovers.RowKey AS RowKey,
 	R1005_PurchaseSpecialOffersTurnovers.SpecialOffer AS SpecialOffer,
-	R1005_PurchaseSpecialOffersTurnovers.PurchaseAmountTurnover AS PurchaseAmountTurnover,
-	R1005_PurchaseSpecialOffersTurnovers.NetAmountTurnover AS NetAmountTurnover,
 	R1005_PurchaseSpecialOffersTurnovers.OffersAmountTurnover AS OffersAmountTurnover,
-	R1005_PurchaseSpecialOffersTurnovers.NetOfferAmountTurnover AS NetOfferAmountTurnover,
 	R1005_PurchaseSpecialOffersTurnovers.Recorder
 FROM
 	AccumulationRegister.R1005_PurchaseSpecialOffers.Turnovers(,, Recorder,) AS R1005_PurchaseSpecialOffersTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R1010_PurchaseOrders</name>
+			<name>R1010T_PurchaseOrders</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>Company</dataPath>
 				<field>Company</field>
@@ -642,18 +488,18 @@ FROM
 					<dcscom:dimension>true</dcscom:dimension>
 				</role>
 			</field>
+		R1005T_PurchaseSpecialOfferseldField">
+	R1005T_PurchaseSpecialOffersdataPath>
+	R1005T_PurchaseSpecialOffersld>
+	R1005T_PurchaseSpecialOfferslStringType">
+	R1005T_PurchaseSpecialOffers
+	R1005T_PurchaseSpecialOffers
+	R1005T_PurchaseSpecialOffersame</v8:content>
+	R1005T_PurchaseSpecialOffers
+	R1005T_PurchaseSpecialOffers
+	R1005T_PurchaseSpecialOffers
 			<field xsi:type="DataSetFieldField">
-				<dataPath>RegisterName</dataPath>
-				<field>RegisterName</field>
-				<title xsi:type="v8:LocalStringType">
-					<v8:item>
-						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
-					</v8:item>
-				</title>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Recorder</dataPath>
+				<dataPath>RecorderR1005T_PurchaseSpecialOffersR1005T_PurchaseSpecialOffers
 				<field>Recorder</field>
 				<role>
 					<dcscom:periodNumber>1</dcscom:periodNumber>
@@ -662,22 +508,22 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R1010_PurchaseOrders" AS RegisterName,
-	R1010_PurchaseOrdersTurnovers.Company AS Company,
-	R1010_PurchaseOrdersTurnovers.CurrencyMovementType AS CurrencyMovementType,
-	R1010_PurchaseOrdersTurnovers.Currency AS Currency,
-	R1010_PurchaseOrdersTurnovers.Order AS Order,
-	R1010_PurchaseOrdersTurnovers.ItemKey AS ItemKey,
-	R1010_PurchaseOrdersTurnovers.RowKey AS RowKey,
-	R1010_PurchaseOrdersTurnovers.QuantityTurnover AS QuantityTurnover,
-	R1010_PurchaseOrdersTurnovers.AmountTurnover AS AmountTurnover,
-	R1010_PurchaseOrdersTurnovers.NetAmountTurnover AS NetAmountTurnover,
-	R1010_PurchaseOrdersTurnovers.Recorder
+	"R1010T_PurchaseOrders" AS RegisterName,
+	R1010T_PurchaseOrdersTurnovers.Company AS Company,
+	R1010T_PurchaseOrdersTurnovers.CurrencyMovementType AS CurrencyMovementType,
+	R1010T_PurchaseOrdersTurnovers.Currency AS Currency,
+	R1010T_PurchaseOrdersTurnovers.Order AS Order,
+	R1010T_PurchaseOrdersTurnovers.ItemKey AS ItemKey,
+	R1010T_PurchaseOrdersTurnovers.RowKey AS RowKey,
+	R1010T_PurchaseOrdersTurnovers.QuantityTurnover AS QuantityTurnover,
+	R1010T_PurchaseOrdersTurnovers.AmountTurnover AS AmountTurnover,
+	R1010T_PurchaseOrdersTurnovers.NetAmountTurnover AS NetAmountTurnover,
+	R1010T_PurchaseOrdersTurnovers.Recorder
 FROM
-	AccumulationRegister.R1010_PurchaseOrders.Turnovers(,, Recorder,) AS R1010_PurchaseOrdersTurnovers</query>
+	AccumulationRegister.R1010T_PurchaseOrders.Turnovers(,, Recorder,) AS R1010T_PurchaseOrdersTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R1011_PurchaseOrdersReceipt</name>
+			<name>R1011B_PurchaseOrdersReceipt</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>Order</dataPath>
 				<field>Order</field>
@@ -749,19 +595,19 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R1011_PurchaseOrdersReceipt" AS RegisterName,
-	R1011_PurchaseOrdersReceiptBalanceAndTurnovers.Company,
-	R1011_PurchaseOrdersReceiptBalanceAndTurnovers.Order,
-	R1011_PurchaseOrdersReceiptBalanceAndTurnovers.ItemKey,
-	R1011_PurchaseOrdersReceiptBalanceAndTurnovers.QuantityClosingBalance,
-	R1011_PurchaseOrdersReceiptBalanceAndTurnovers.QuantityExpense,
-	R1011_PurchaseOrdersReceiptBalanceAndTurnovers.QuantityOpeningBalance,
-	R1011_PurchaseOrdersReceiptBalanceAndTurnovers.QuantityReceipt,
-	R1011_PurchaseOrdersReceiptBalanceAndTurnovers.QuantityTurnover,
-	R1011_PurchaseOrdersReceiptBalanceAndTurnovers.Recorder
+	"R1011B_PurchaseOrdersReceipt" AS RegisterName,
+	R1011B_PurchaseOrdersReceiptBalanceAndTurnovers.Company,
+	R1011B_PurchaseOrdersReceiptBalanceAndTurnovers.Order,
+	R1011B_PurchaseOrdersReceiptBalanceAndTurnovers.ItemKey,
+	R1011B_PurchaseOrdersReceiptBalanceAndTurnovers.QuantityClosingBalance,
+	R1011B_PurchaseOrdersReceiptBalanceAndTurnovers.QuantityExpense,
+	R1011B_PurchaseOrdersReceiptBalanceAndTurnovers.QuantityOpeningBalance,
+	R1011B_PurchaseOrdersReceiptBalanceAndTurnovers.QuantityReceipt,
+	R1011B_PurchaseOrdersReceiptBalanceAndTurnovers.QuantityTurnover,
+	R1011B_PurchaseOrdersReceiptBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R1011_PurchaseOrdersReceipt.BalanceAndTurnovers(,, Recorder,,) AS
-		R1011_PurchaseOrdersReceiptBalanceAndTurnovers</query>
+	AccumulationRegister.R1011B_PurchaseOrdersReceipt.BalanceAndTurnovers(,, Recorder,,) AS
+		R1011B_PurchaseOrdersReceiptBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
 			<name>R1012_PurchaseOrdersInvoice</name>
@@ -911,33 +757,33 @@ FROM
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
 	"R1012_PurchaseOrdersInvoice" AS RegisterName,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.Company,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.Order,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.Currency,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.ItemKey,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.RowKey,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.QuantityClosingBalance,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.QuantityExpense,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.QuantityOpeningBalance,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.QuantityReceipt,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.QuantityTurnover,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.AmountClosingBalance,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.AmountExpense,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.AmountOpeningBalance,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.AmountReceipt,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.AmountTurnover,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.NetAmountClosingBalance,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.NetAmountExpense,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.NetAmountOpeningBalance,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.NetAmountReceipt,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.NetAmountTurnover,
-	R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.Recorder
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.Company,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.Order,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.Currency,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.ItemKey,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.RowKey,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.QuantityClosingBalance,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.QuantityExpense,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.QuantityOpeningBalance,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.QuantityReceipt,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.QuantityTurnover,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.AmountClosingBalance,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.AmountExpense,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.AmountOpeningBalance,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.AmountReceipt,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.AmountTurnover,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.NetAmountClosingBalance,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.NetAmountExpense,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.NetAmountOpeningBalance,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.NetAmountReceipt,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.NetAmountTurnover,
+	R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R1012_PurchaseOrdersInvoiceClosing.BalanceAndTurnovers(,, Recorder,,) AS
-		R1012_PurchaseOrdersInvoiceClosingBalanceAndTurnovers</query>
+	AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing.BalanceAndTurnovers(,, Recorder,,) AS
+		R1012B_PurchaseOrdersInvoiceClosingBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R1014_CanceledPurchaseOrders</name>
+			<name>R1014T_CanceledPurchaseOrders</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>NetAmountTurnover</dataPath>
 				<field>NetAmountTurnover</field>
@@ -1019,23 +865,23 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R1014_CanceledPurchaseOrders" AS RegisterName,
-	R1014_CanceledPurchaseOrdersTurnovers.Company,
-	R1014_CanceledPurchaseOrdersTurnovers.CurrencyMovementType,
-	R1014_CanceledPurchaseOrdersTurnovers.Currency,
-	R1014_CanceledPurchaseOrdersTurnovers.Order,
-	R1014_CanceledPurchaseOrdersTurnovers.ItemKey,
-	R1014_CanceledPurchaseOrdersTurnovers.RowKey,
-	R1014_CanceledPurchaseOrdersTurnovers.CancelReason,
-	R1014_CanceledPurchaseOrdersTurnovers.QuantityTurnover,
-	R1014_CanceledPurchaseOrdersTurnovers.AmountTurnover,
-	R1014_CanceledPurchaseOrdersTurnovers.NetAmountTurnover,
-	R1014_CanceledPurchaseOrdersTurnovers.Recorder
+	"R1014T_CanceledPurchaseOrders" AS RegisterName,
+	R1014T_CanceledPurchaseOrdersTurnovers.Company,
+	R1014T_CanceledPurchaseOrdersTurnovers.CurrencyMovementType,
+	R1014T_CanceledPurchaseOrdersTurnovers.Currency,
+	R1014T_CanceledPurchaseOrdersTurnovers.Order,
+	R1014T_CanceledPurchaseOrdersTurnovers.ItemKey,
+	R1014T_CanceledPurchaseOrdersTurnovers.RowKey,
+	R1014T_CanceledPurchaseOrdersTurnovers.CancelReason,
+	R1014T_CanceledPurchaseOrdersTurnovers.QuantityTurnover,
+	R1014T_CanceledPurchaseOrdersTurnovers.AmountTurnover,
+	R1014T_CanceledPurchaseOrdersTurnovers.NetAmountTurnover,
+	R1014T_CanceledPurchaseOrdersTurnovers.Recorder
 FROM
-	AccumulationRegister.R1014_CanceledPurchaseOrders.Turnovers(,, Recorder,) AS R1014_CanceledPurchaseOrdersTurnovers</query>
+	AccumulationRegister.R1014T_CanceledPurchaseOrders.Turnovers(,, Recorder,) AS R1014T_CanceledPurchaseOrdersTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R1020_AdvancesToVendors</name>
+			<name>R1020B_AdvancesToVendors</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>Basis</dataPath>
 				<field>Basis</field>
@@ -1128,25 +974,25 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R1020_AdvancesToVendors" AS RegisterName,
-	R1020_AdvancesToVendorsBalanceAndTurnovers.Company,
-	R1020_AdvancesToVendorsBalanceAndTurnovers.CurrencyMovementType,
-	R1020_AdvancesToVendorsBalanceAndTurnovers.Currency,
-	R1020_AdvancesToVendorsBalanceAndTurnovers.LegalName,
-	R1020_AdvancesToVendorsBalanceAndTurnovers.Partner,
-	R1020_AdvancesToVendorsBalanceAndTurnovers.Basis,
-	R1020_AdvancesToVendorsBalanceAndTurnovers.AmountClosingBalance,
-	R1020_AdvancesToVendorsBalanceAndTurnovers.AmountExpense,
-	R1020_AdvancesToVendorsBalanceAndTurnovers.AmountOpeningBalance,
-	R1020_AdvancesToVendorsBalanceAndTurnovers.AmountReceipt,
-	R1020_AdvancesToVendorsBalanceAndTurnovers.AmountTurnover,
-	R1020_AdvancesToVendorsBalanceAndTurnovers.Recorder
+	"R1020B_AdvancesToVendors" AS RegisterName,
+	R1020B_AdvancesToVendorsBalanceAndTurnovers.Company,
+	R1020B_AdvancesToVendorsBalanceAndTurnovers.CurrencyMovementType,
+	R1020B_AdvancesToVendorsBalanceAndTurnovers.Currency,
+	R1020B_AdvancesToVendorsBalanceAndTurnovers.LegalName,
+	R1020B_AdvancesToVendorsBalanceAndTurnovers.Partner,
+	R1020B_AdvancesToVendorsBalanceAndTurnovers.Basis,
+	R1020B_AdvancesToVendorsBalanceAndTurnovers.AmountClosingBalance,
+	R1020B_AdvancesToVendorsBalanceAndTurnovers.AmountExpense,
+	R1020B_AdvancesToVendorsBalanceAndTurnovers.AmountOpeningBalance,
+	R1020B_AdvancesToVendorsBalanceAndTurnovers.AmountReceipt,
+	R1020B_AdvancesToVendorsBalanceAndTurnovers.AmountTurnover,
+	R1020B_AdvancesToVendorsBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R1020_AdvancesToVendors.BalanceAndTurnovers(,, Recorder,,) AS
-		R1020_AdvancesToVendorsBalanceAndTurnovers</query>
+	AccumulationRegister.R1020B_AdvancesToVendors.BalanceAndTurnovers(,, Recorder,,) AS
+		R1020B_AdvancesToVendorsBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R1021_VendorsTransactions</name>
+			<name>R1021B_VendorsTransactions</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>AmountReceipt</dataPath>
 				<field>AmountReceipt</field>
@@ -1246,26 +1092,26 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R1021_VendorsTransactions" AS RegisterName,
-	R1021_VendorsTransactionsBalanceAndTurnovers.Company,
-	R1021_VendorsTransactionsBalanceAndTurnovers.CurrencyMovementType,
-	R1021_VendorsTransactionsBalanceAndTurnovers.Currency,
-	R1021_VendorsTransactionsBalanceAndTurnovers.LegalName,
-	R1021_VendorsTransactionsBalanceAndTurnovers.Partner,
-	R1021_VendorsTransactionsBalanceAndTurnovers.Agreement,
-	R1021_VendorsTransactionsBalanceAndTurnovers.Basis,
-	R1021_VendorsTransactionsBalanceAndTurnovers.AmountClosingBalance,
-	R1021_VendorsTransactionsBalanceAndTurnovers.AmountExpense,
-	R1021_VendorsTransactionsBalanceAndTurnovers.AmountOpeningBalance,
-	R1021_VendorsTransactionsBalanceAndTurnovers.AmountReceipt,
-	R1021_VendorsTransactionsBalanceAndTurnovers.AmountTurnover,
-	R1021_VendorsTransactionsBalanceAndTurnovers.Recorder
+	"R1021B_VendorsTransactions" AS RegisterName,
+	R1021B_VendorsTransactionsBalanceAndTurnovers.Company,
+	R1021B_VendorsTransactionsBalanceAndTurnovers.CurrencyMovementType,
+	R1021B_VendorsTransactionsBalanceAndTurnovers.Currency,
+	R1021B_VendorsTransactionsBalanceAndTurnovers.LegalName,
+	R1021B_VendorsTransactionsBalanceAndTurnovers.Partner,
+	R1021B_VendorsTransactionsBalanceAndTurnovers.Agreement,
+	R1021B_VendorsTransactionsBalanceAndTurnovers.Basis,
+	R1021B_VendorsTransactionsBalanceAndTurnovers.AmountClosingBalance,
+	R1021B_VendorsTransactionsBalanceAndTurnovers.AmountExpense,
+	R1021B_VendorsTransactionsBalanceAndTurnovers.AmountOpeningBalance,
+	R1021B_VendorsTransactionsBalanceAndTurnovers.AmountReceipt,
+	R1021B_VendorsTransactionsBalanceAndTurnovers.AmountTurnover,
+	R1021B_VendorsTransactionsBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R1021_VendorsTransactions.BalanceAndTurnovers(,, Recorder,,) AS
-		R1021_VendorsTransactionsBalanceAndTurnovers</query>
+	AccumulationRegister.R1021B_VendorsTransactions.BalanceAndTurnovers(,, Recorder,,) AS
+		R1021B_VendorsTransactionsBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R1031_ReceiptInvoicing</name>
+			<name>R1031B_ReceiptInvoicing</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>Company</dataPath>
 				<field>Company</field>
@@ -1337,22 +1183,22 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R1031_ReceiptInvoicing" AS RegisterName,
-	R1031_ReceiptInvoicingBalanceAndTurnovers.Company,
-	R1031_ReceiptInvoicingBalanceAndTurnovers.Basis,
-	R1031_ReceiptInvoicingBalanceAndTurnovers.ItemKey,
-	R1031_ReceiptInvoicingBalanceAndTurnovers.QuantityClosingBalance,
-	R1031_ReceiptInvoicingBalanceAndTurnovers.QuantityExpense,
-	R1031_ReceiptInvoicingBalanceAndTurnovers.QuantityOpeningBalance,
-	R1031_ReceiptInvoicingBalanceAndTurnovers.QuantityReceipt,
-	R1031_ReceiptInvoicingBalanceAndTurnovers.QuantityTurnover,
-	R1031_ReceiptInvoicingBalanceAndTurnovers.Recorder
+	"R1031B_ReceiptInvoicing" AS RegisterName,
+	R1031B_ReceiptInvoicingBalanceAndTurnovers.Company,
+	R1031B_ReceiptInvoicingBalanceAndTurnovers.Basis,
+	R1031B_ReceiptInvoicingBalanceAndTurnovers.ItemKey,
+	R1031B_ReceiptInvoicingBalanceAndTurnovers.QuantityClosingBalance,
+	R1031B_ReceiptInvoicingBalanceAndTurnovers.QuantityExpense,
+	R1031B_ReceiptInvoicingBalanceAndTurnovers.QuantityOpeningBalance,
+	R1031B_ReceiptInvoicingBalanceAndTurnovers.QuantityReceipt,
+	R1031B_ReceiptInvoicingBalanceAndTurnovers.QuantityTurnover,
+	R1031B_ReceiptInvoicingBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R1031_ReceiptInvoicing.BalanceAndTurnovers(,, Recorder,,) AS
-		R1031_ReceiptInvoicingBalanceAndTurnovers</query>
+	AccumulationRegister.R1031B_ReceiptInvoicing.BalanceAndTurnovers(,, Recorder,,) AS
+		R1031B_ReceiptInvoicingBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R1040_TaxesOutgoing</name>
+			<name>R1040B_TaxesOutgoing</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>TaxAmountReceipt</dataPath>
 				<field>TaxAmountReceipt</field>
@@ -1461,27 +1307,27 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R1040_TaxesOutgoing" AS RegisterName,
-	R1040_TaxesOutgoingBalanceAndTurnovers.Company,
-	R1040_TaxesOutgoingBalanceAndTurnovers.Tax,
-	R1040_TaxesOutgoingBalanceAndTurnovers.TaxRate,
-	R1040_TaxesOutgoingBalanceAndTurnovers.TaxMovementType,
-	R1040_TaxesOutgoingBalanceAndTurnovers.TaxableAmountClosingBalance,
-	R1040_TaxesOutgoingBalanceAndTurnovers.TaxableAmountExpense,
-	R1040_TaxesOutgoingBalanceAndTurnovers.TaxableAmountOpeningBalance,
-	R1040_TaxesOutgoingBalanceAndTurnovers.TaxableAmountReceipt,
-	R1040_TaxesOutgoingBalanceAndTurnovers.TaxableAmountTurnover,
-	R1040_TaxesOutgoingBalanceAndTurnovers.TaxAmountClosingBalance,
-	R1040_TaxesOutgoingBalanceAndTurnovers.TaxAmountExpense,
-	R1040_TaxesOutgoingBalanceAndTurnovers.TaxAmountOpeningBalance,
-	R1040_TaxesOutgoingBalanceAndTurnovers.TaxAmountReceipt,
-	R1040_TaxesOutgoingBalanceAndTurnovers.TaxAmountTurnover,
-	R1040_TaxesOutgoingBalanceAndTurnovers.Recorder
+	"R1040B_TaxesOutgoing" AS RegisterName,
+	R1040B_TaxesOutgoingBalanceAndTurnovers.Company,
+	R1040B_TaxesOutgoingBalanceAndTurnovers.Tax,
+	R1040B_TaxesOutgoingBalanceAndTurnovers.TaxRate,
+	R1040B_TaxesOutgoingBalanceAndTurnovers.TaxMovementType,
+	R1040B_TaxesOutgoingBalanceAndTurnovers.TaxableAmountClosingBalance,
+	R1040B_TaxesOutgoingBalanceAndTurnovers.TaxableAmountExpense,
+	R1040B_TaxesOutgoingBalanceAndTurnovers.TaxableAmountOpeningBalance,
+	R1040B_TaxesOutgoingBalanceAndTurnovers.TaxableAmountReceipt,
+	R1040B_TaxesOutgoingBalanceAndTurnovers.TaxableAmountTurnover,
+	R1040B_TaxesOutgoingBalanceAndTurnovers.TaxAmountClosingBalance,
+	R1040B_TaxesOutgoingBalanceAndTurnovers.TaxAmountExpense,
+	R1040B_TaxesOutgoingBalanceAndTurnovers.TaxAmountOpeningBalance,
+	R1040B_TaxesOutgoingBalanceAndTurnovers.TaxAmountReceipt,
+	R1040B_TaxesOutgoingBalanceAndTurnovers.TaxAmountTurnover,
+	R1040B_TaxesOutgoingBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R1040_TaxesOutgoing.BalanceAndTurnovers(,, Recorder,,) AS R1040_TaxesOutgoingBalanceAndTurnovers</query>
+	AccumulationRegister.R1040B_TaxesOutgoing.BalanceAndTurnovers(,, Recorder,,) AS R1040B_TaxesOutgoingBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R2001_Sales</name>
+			<name>R2001T_Sales</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>RowKey</dataPath>
 				<field>RowKey</field>
@@ -1560,23 +1406,23 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R2001_Sales" AS RegisterName,
-	R2001_SalesTurnovers.Company,
-	R2001_SalesTurnovers.CurrencyMovementType,
-	R2001_SalesTurnovers.Currency,
-	R2001_SalesTurnovers.Invoice,
-	R2001_SalesTurnovers.ItemKey,
-	R2001_SalesTurnovers.RowKey,
-	R2001_SalesTurnovers.QuantityTurnover,
-	R2001_SalesTurnovers.AmountTurnover,
-	R2001_SalesTurnovers.NetAmountTurnover,
-	R2001_SalesTurnovers.OffersAmountTurnover,
-	R2001_SalesTurnovers.Recorder
+	"R2001T_Sales" AS RegisterName,
+	R2001T_SalesTurnovers.Company,
+	R2001T_SalesTurnovers.CurrencyMovementType,
+	R2001T_SalesTurnovers.Currency,
+	R2001T_SalesTurnovers.Invoice,
+	R2001T_SalesTurnovers.ItemKey,
+	R2001T_SalesTurnovers.RowKey,
+	R2001T_SalesTurnovers.QuantityTurnover,
+	R2001T_SalesTurnovers.AmountTurnover,
+	R2001T_SalesTurnovers.NetAmountTurnover,
+	R2001T_SalesTurnovers.OffersAmountTurnover,
+	R2001T_SalesTurnovers.Recorder
 FROM
-	AccumulationRegister.R2001_Sales.Turnovers(,, Recorder,) AS R2001_SalesTurnovers</query>
+	AccumulationRegister.R2001T_Sales.Turnovers(,, Recorder,) AS R2001T_SalesTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R2002_SalesReturns</name>
+			<name>R2002T_SalesReturns</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>RowKey</dataPath>
 				<field>RowKey</field>
@@ -1658,23 +1504,23 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R2002_SalesReturns" AS RegisterName,
-	R2002_SalesReturnsTurnovers.Company,
-	R2002_SalesReturnsTurnovers.CurrencyMovementType,
-	R2002_SalesReturnsTurnovers.Currency,
-	R2002_SalesReturnsTurnovers.Invoice,
-	R2002_SalesReturnsTurnovers.ItemKey,
-	R2002_SalesReturnsTurnovers.RowKey,
-	R2002_SalesReturnsTurnovers.ReturnReason,
-	R2002_SalesReturnsTurnovers.QuantityTurnover,
-	R2002_SalesReturnsTurnovers.AmountTurnover,
-	R2002_SalesReturnsTurnovers.NetAmountTurnover,
-	R2002_SalesReturnsTurnovers.Recorder
+	"R2002T_SalesReturns" AS RegisterName,
+	R2002T_SalesReturnsTurnovers.Company,
+	R2002T_SalesReturnsTurnovers.CurrencyMovementType,
+	R2002T_SalesReturnsTurnovers.Currency,
+	R2002T_SalesReturnsTurnovers.Invoice,
+	R2002T_SalesReturnsTurnovers.ItemKey,
+	R2002T_SalesReturnsTurnovers.RowKey,
+	R2002T_SalesReturnsTurnovers.ReturnReason,
+	R2002T_SalesReturnsTurnovers.QuantityTurnover,
+	R2002T_SalesReturnsTurnovers.AmountTurnover,
+	R2002T_SalesReturnsTurnovers.NetAmountTurnover,
+	R2002T_SalesReturnsTurnovers.Recorder
 FROM
-	AccumulationRegister.R2002_SalesReturns.Turnovers(,, Recorder,) AS R2002_SalesReturnsTurnovers</query>
+	AccumulationRegister.R2002T_SalesReturns.Turnovers(,, Recorder,) AS R2002T_SalesReturnsTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R2005_SalesSpecialOffers</name>
+			<name>R2005T_SalesSpecialOffers</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>CurrencyMovementType</dataPath>
 				<field>CurrencyMovementType</field>
@@ -1760,24 +1606,24 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R2005_SalesSpecialOffers" AS RegisterName,
-	R2005_SalesSpecialOffersTurnovers.Company,
-	R2005_SalesSpecialOffersTurnovers.CurrencyMovementType,
-	R2005_SalesSpecialOffersTurnovers.Currency,
-	R2005_SalesSpecialOffersTurnovers.Invoice,
-	R2005_SalesSpecialOffersTurnovers.ItemKey,
-	R2005_SalesSpecialOffersTurnovers.RowKey,
-	R2005_SalesSpecialOffersTurnovers.SpecialOffer,
-	R2005_SalesSpecialOffersTurnovers.SalesAmountTurnover,
-	R2005_SalesSpecialOffersTurnovers.NetAmountTurnover,
-	R2005_SalesSpecialOffersTurnovers.OffersAmountTurnover,
-	R2005_SalesSpecialOffersTurnovers.NetOfferAmountTurnover,
-	R2005_SalesSpecialOffersTurnovers.Recorder
+	"R2005T_SalesSpecialOffers" AS RegisterName,
+	R2005T_SalesSpecialOffersTurnovers.Company,
+	R2005T_SalesSpecialOffersTurnovers.CurrencyMovementType,
+	R2005T_SalesSpecialOffersTurnovers.Currency,
+	R2005T_SalesSpecialOffersTurnovers.Invoice,
+	R2005T_SalesSpecialOffersTurnovers.ItemKey,
+	R2005T_SalesSpecialOffersTurnovers.RowKey,
+	R2005T_SalesSpecialOffersTurnovers.SpecialOffer,
+	R2005T_SalesSpecialOffersTurnovers.SalesAmountTurnover,
+	R2005T_SalesSpecialOffersTurnovers.NetAmountTurnover,
+	R2005T_SalesSpecialOffersTurnovers.OffersAmountTurnover,
+	R2005T_SalesSpecialOffersTurnovers.NetOfferAmountTurnover,
+	R2005T_SalesSpecialOffersTurnovers.Recorder
 FROM
-	AccumulationRegister.R2005_SalesSpecialOffers.Turnovers(,, Recorder,) AS R2005_SalesSpecialOffersTurnovers</query>
+	AccumulationRegister.R2005T_SalesSpecialOffers.Turnovers(,, Recorder,) AS R2005T_SalesSpecialOffersTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R2010_SalesOrders</name>
+			<name>R2010T_SalesOrders</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>QuantityTurnover</dataPath>
 				<field>QuantityTurnover</field>
@@ -1852,22 +1698,22 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R2010_SalesOrders" AS RegisterName,
-	R2010_SalesOrdersTurnovers.Company,
-	R2010_SalesOrdersTurnovers.CurrencyMovementType,
-	R2010_SalesOrdersTurnovers.Currency,
-	R2010_SalesOrdersTurnovers.Order,
-	R2010_SalesOrdersTurnovers.ItemKey,
-	R2010_SalesOrdersTurnovers.RowKey,
-	R2010_SalesOrdersTurnovers.QuantityTurnover,
-	R2010_SalesOrdersTurnovers.AmountTurnover,
-	R2010_SalesOrdersTurnovers.NetAmountTurnover,
-	R2010_SalesOrdersTurnovers.Recorder
+	"R2010T_SalesOrders" AS RegisterName,
+	R2010T_SalesOrdersTurnovers.Company,
+	R2010T_SalesOrdersTurnovers.CurrencyMovementType,
+	R2010T_SalesOrdersTurnovers.Currency,
+	R2010T_SalesOrdersTurnovers.Order,
+	R2010T_SalesOrdersTurnovers.ItemKey,
+	R2010T_SalesOrdersTurnovers.RowKey,
+	R2010T_SalesOrdersTurnovers.QuantityTurnover,
+	R2010T_SalesOrdersTurnovers.AmountTurnover,
+	R2010T_SalesOrdersTurnovers.NetAmountTurnover,
+	R2010T_SalesOrdersTurnovers.Recorder
 FROM
-	AccumulationRegister.R2010_SalesOrders.Turnovers(,, Recorder,) AS R2010_SalesOrdersTurnovers</query>
+	AccumulationRegister.R2010T_SalesOrders.Turnovers(,, Recorder,) AS R2010T_SalesOrdersTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R2011_SalesOrdersShipment</name>
+			<name>R2011B_SalesOrdersShipment</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>QuantityTurnover</dataPath>
 				<field>QuantityTurnover</field>
@@ -1939,22 +1785,22 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R2011_SalesOrdersShipment" AS RegisterName,
-	R2011_SalesOrdersShipmentBalanceAndTurnovers.Company,
-	R2011_SalesOrdersShipmentBalanceAndTurnovers.Order,
-	R2011_SalesOrdersShipmentBalanceAndTurnovers.ItemKey,
-	R2011_SalesOrdersShipmentBalanceAndTurnovers.QuantityClosingBalance,
-	R2011_SalesOrdersShipmentBalanceAndTurnovers.QuantityExpense,
-	R2011_SalesOrdersShipmentBalanceAndTurnovers.QuantityOpeningBalance,
-	R2011_SalesOrdersShipmentBalanceAndTurnovers.QuantityReceipt,
-	R2011_SalesOrdersShipmentBalanceAndTurnovers.QuantityTurnover,
-	R2011_SalesOrdersShipmentBalanceAndTurnovers.Recorder
+	"R2011B_SalesOrdersShipment" AS RegisterName,
+	R2011B_SalesOrdersShipmentBalanceAndTurnovers.Company,
+	R2011B_SalesOrdersShipmentBalanceAndTurnovers.Order,
+	R2011B_SalesOrdersShipmentBalanceAndTurnovers.ItemKey,
+	R2011B_SalesOrdersShipmentBalanceAndTurnovers.QuantityClosingBalance,
+	R2011B_SalesOrdersShipmentBalanceAndTurnovers.QuantityExpense,
+	R2011B_SalesOrdersShipmentBalanceAndTurnovers.QuantityOpeningBalance,
+	R2011B_SalesOrdersShipmentBalanceAndTurnovers.QuantityReceipt,
+	R2011B_SalesOrdersShipmentBalanceAndTurnovers.QuantityTurnover,
+	R2011B_SalesOrdersShipmentBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R2011_SalesOrdersShipment.BalanceAndTurnovers(,, Recorder,,) AS
-		R2011_SalesOrdersShipmentBalanceAndTurnovers</query>
+	AccumulationRegister.R2011B_SalesOrdersShipment.BalanceAndTurnovers(,, Recorder,,) AS
+		R2011B_SalesOrdersShipmentBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R2012_SalesOrdersInvoiceClosing</name>
+			<name>R2012B_SalesOrdersInvoiceClosing</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>QuantityReceipt</dataPath>
 				<field>QuantityReceipt</field>
@@ -2100,34 +1946,34 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R2012_SalesOrdersInvoiceClosing" AS RegisterName,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.Company,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.Order,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.Currency,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.ItemKey,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.RowKey,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.QuantityClosingBalance,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.QuantityExpense,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.QuantityOpeningBalance,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.QuantityReceipt,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.QuantityTurnover,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.AmountClosingBalance,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.AmountExpense,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.AmountOpeningBalance,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.AmountReceipt,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.AmountTurnover,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.NetAmountClosingBalance,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.NetAmountExpense,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.NetAmountOpeningBalance,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.NetAmountReceipt,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.NetAmountTurnover,
-	R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers.Recorder
+	"R2012B_SalesOrdersInvoiceClosing" AS RegisterName,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.Company,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.Order,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.Currency,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.ItemKey,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.RowKey,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.QuantityClosingBalance,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.QuantityExpense,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.QuantityOpeningBalance,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.QuantityReceipt,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.QuantityTurnover,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.AmountClosingBalance,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.AmountExpense,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.AmountOpeningBalance,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.AmountReceipt,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.AmountTurnover,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.NetAmountClosingBalance,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.NetAmountExpense,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.NetAmountOpeningBalance,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.NetAmountReceipt,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.NetAmountTurnover,
+	R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R2012_SalesOrdersInvoiceClosing.BalanceAndTurnovers(,, Recorder,,) AS
-		R2012_SalesOrdersInvoiceClosingBalanceAndTurnovers</query>
+	AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.BalanceAndTurnovers(,, Recorder,,) AS
+		R2012B_SalesOrdersInvoiceClosingBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R2013_SalesOrdersProcurement</name>
+			<name>R2013T_SalesOrdersProcurement</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>Company</dataPath>
 				<field>Company</field>
@@ -2193,22 +2039,22 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R2013_SalesOrdersProcurement" AS RegisterName,
-	R2013_SalesOrdersProcurementTurnovers.Company,
-	R2013_SalesOrdersProcurementTurnovers.Order,
-	R2013_SalesOrdersProcurementTurnovers.ItemKey,
-	R2013_SalesOrdersProcurementTurnovers.OrderedQuantityTurnover,
-	R2013_SalesOrdersProcurementTurnovers.ReOrderedQuantityTurnover,
-	R2013_SalesOrdersProcurementTurnovers.ReceiptQuantityTurnover,
-	R2013_SalesOrdersProcurementTurnovers.PurchaseQuantityTurnover,
-	R2013_SalesOrdersProcurementTurnovers.ShippedQuantityTurnover,
-	R2013_SalesOrdersProcurementTurnovers.SalesQuantityTurnover,
-	R2013_SalesOrdersProcurementTurnovers.Recorder
+	"R2013T_SalesOrdersProcurement" AS RegisterName,
+	R2013T_SalesOrdersProcurementTurnovers.Company,
+	R2013T_SalesOrdersProcurementTurnovers.Order,
+	R2013T_SalesOrdersProcurementTurnovers.ItemKey,
+	R2013T_SalesOrdersProcurementTurnovers.OrderedQuantityTurnover,
+	R2013T_SalesOrdersProcurementTurnovers.ReOrderedQuantityTurnover,
+	R2013T_SalesOrdersProcurementTurnovers.ReceiptQuantityTurnover,
+	R2013T_SalesOrdersProcurementTurnovers.PurchaseQuantityTurnover,
+	R2013T_SalesOrdersProcurementTurnovers.ShippedQuantityTurnover,
+	R2013T_SalesOrdersProcurementTurnovers.SalesQuantityTurnover,
+	R2013T_SalesOrdersProcurementTurnovers.Recorder
 FROM
-	AccumulationRegister.R2013_SalesOrdersProcurement.Turnovers(,, Recorder,) AS R2013_SalesOrdersProcurementTurnovers</query>
+	AccumulationRegister.R2013T_SalesOrdersProcurement.Turnovers(,, Recorder,) AS R2013T_SalesOrdersProcurementTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R2014_CanceledSalesOrders</name>
+			<name>R2014T_CanceledSalesOrders</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>QuantityTurnover</dataPath>
 				<field>QuantityTurnover</field>
@@ -2290,23 +2136,23 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R2014_CanceledSalesOrders" AS RegisterName,
-	R2014_CanceledSalesOrdersTurnovers.Company,
-	R2014_CanceledSalesOrdersTurnovers.CurrencyMovementType,
-	R2014_CanceledSalesOrdersTurnovers.Currency,
-	R2014_CanceledSalesOrdersTurnovers.Order,
-	R2014_CanceledSalesOrdersTurnovers.ItemKey,
-	R2014_CanceledSalesOrdersTurnovers.RowKey,
-	R2014_CanceledSalesOrdersTurnovers.CancelReason,
-	R2014_CanceledSalesOrdersTurnovers.QuantityTurnover,
-	R2014_CanceledSalesOrdersTurnovers.AmountTurnover,
-	R2014_CanceledSalesOrdersTurnovers.NetAmountTurnover,
-	R2014_CanceledSalesOrdersTurnovers.Recorder
+	"R2014T_CanceledSalesOrders" AS RegisterName,
+	R2014T_CanceledSalesOrdersTurnovers.Company,
+	R2014T_CanceledSalesOrdersTurnovers.CurrencyMovementType,
+	R2014T_CanceledSalesOrdersTurnovers.Currency,
+	R2014T_CanceledSalesOrdersTurnovers.Order,
+	R2014T_CanceledSalesOrdersTurnovers.ItemKey,
+	R2014T_CanceledSalesOrdersTurnovers.RowKey,
+	R2014T_CanceledSalesOrdersTurnovers.CancelReason,
+	R2014T_CanceledSalesOrdersTurnovers.QuantityTurnover,
+	R2014T_CanceledSalesOrdersTurnovers.AmountTurnover,
+	R2014T_CanceledSalesOrdersTurnovers.NetAmountTurnover,
+	R2014T_CanceledSalesOrdersTurnovers.Recorder
 FROM
-	AccumulationRegister.R2014_CanceledSalesOrders.Turnovers(,, Recorder,) AS R2014_CanceledSalesOrdersTurnovers</query>
+	AccumulationRegister.R2014T_CanceledSalesOrders.Turnovers(,, Recorder,) AS R2014T_CanceledSalesOrdersTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R2020_AdvancesFromCustomers</name>
+			<name>R2020B_AdvancesFromCustomers</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>LegalName</dataPath>
 				<field>LegalName</field>
@@ -2399,25 +2245,25 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R2020_AdvancesFromCustomers" AS RegisterName,
-	R2020_AdvancesFromCustomersBalanceAndTurnovers.Company,
-	R2020_AdvancesFromCustomersBalanceAndTurnovers.CurrencyMovementType,
-	R2020_AdvancesFromCustomersBalanceAndTurnovers.Currency,
-	R2020_AdvancesFromCustomersBalanceAndTurnovers.LegalName,
-	R2020_AdvancesFromCustomersBalanceAndTurnovers.Partner,
-	R2020_AdvancesFromCustomersBalanceAndTurnovers.Basis,
-	R2020_AdvancesFromCustomersBalanceAndTurnovers.AmountClosingBalance,
-	R2020_AdvancesFromCustomersBalanceAndTurnovers.AmountExpense,
-	R2020_AdvancesFromCustomersBalanceAndTurnovers.AmountOpeningBalance,
-	R2020_AdvancesFromCustomersBalanceAndTurnovers.AmountReceipt,
-	R2020_AdvancesFromCustomersBalanceAndTurnovers.AmountTurnover,
-	R2020_AdvancesFromCustomersBalanceAndTurnovers.Recorder
+	"R2020B_AdvancesFromCustomers" AS RegisterName,
+	R2020B_AdvancesFromCustomersBalanceAndTurnovers.Company,
+	R2020B_AdvancesFromCustomersBalanceAndTurnovers.CurrencyMovementType,
+	R2020B_AdvancesFromCustomersBalanceAndTurnovers.Currency,
+	R2020B_AdvancesFromCustomersBalanceAndTurnovers.LegalName,
+	R2020B_AdvancesFromCustomersBalanceAndTurnovers.Partner,
+	R2020B_AdvancesFromCustomersBalanceAndTurnovers.Basis,
+	R2020B_AdvancesFromCustomersBalanceAndTurnovers.AmountClosingBalance,
+	R2020B_AdvancesFromCustomersBalanceAndTurnovers.AmountExpense,
+	R2020B_AdvancesFromCustomersBalanceAndTurnovers.AmountOpeningBalance,
+	R2020B_AdvancesFromCustomersBalanceAndTurnovers.AmountReceipt,
+	R2020B_AdvancesFromCustomersBalanceAndTurnovers.AmountTurnover,
+	R2020B_AdvancesFromCustomersBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R2020_AdvancesFromCustomers.BalanceAndTurnovers(,, Recorder,,) AS
-		R2020_AdvancesFromCustomersBalanceAndTurnovers</query>
+	AccumulationRegister.R2020B_AdvancesFromCustomers.BalanceAndTurnovers(,, Recorder,,) AS
+		R2020B_AdvancesFromCustomersBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R2021_CustomersTransactions</name>
+			<name>R2021B_CustomersTransactions</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>Company</dataPath>
 				<field>Company</field>
@@ -2517,26 +2363,26 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R2021_CustomersTransactions" AS RegisterName,
-	R2021_CustomersTransactionsBalanceAndTurnovers.Company,
-	R2021_CustomersTransactionsBalanceAndTurnovers.CurrencyMovementType,
-	R2021_CustomersTransactionsBalanceAndTurnovers.Currency,
-	R2021_CustomersTransactionsBalanceAndTurnovers.LegalName,
-	R2021_CustomersTransactionsBalanceAndTurnovers.Partner,
-	R2021_CustomersTransactionsBalanceAndTurnovers.Agreement,
-	R2021_CustomersTransactionsBalanceAndTurnovers.Basis,
-	R2021_CustomersTransactionsBalanceAndTurnovers.AmountClosingBalance,
-	R2021_CustomersTransactionsBalanceAndTurnovers.AmountExpense,
-	R2021_CustomersTransactionsBalanceAndTurnovers.AmountOpeningBalance,
-	R2021_CustomersTransactionsBalanceAndTurnovers.AmountReceipt,
-	R2021_CustomersTransactionsBalanceAndTurnovers.AmountTurnover,
-	R2021_CustomersTransactionsBalanceAndTurnovers.Recorder
+	"R2021B_CustomersTransactions" AS RegisterName,
+	R2021B_CustomersTransactionsBalanceAndTurnovers.Company,
+	R2021B_CustomersTransactionsBalanceAndTurnovers.CurrencyMovementType,
+	R2021B_CustomersTransactionsBalanceAndTurnovers.Currency,
+	R2021B_CustomersTransactionsBalanceAndTurnovers.LegalName,
+	R2021B_CustomersTransactionsBalanceAndTurnovers.Partner,
+	R2021B_CustomersTransactionsBalanceAndTurnovers.Agreement,
+	R2021B_CustomersTransactionsBalanceAndTurnovers.Basis,
+	R2021B_CustomersTransactionsBalanceAndTurnovers.AmountClosingBalance,
+	R2021B_CustomersTransactionsBalanceAndTurnovers.AmountExpense,
+	R2021B_CustomersTransactionsBalanceAndTurnovers.AmountOpeningBalance,
+	R2021B_CustomersTransactionsBalanceAndTurnovers.AmountReceipt,
+	R2021B_CustomersTransactionsBalanceAndTurnovers.AmountTurnover,
+	R2021B_CustomersTransactionsBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R2021_CustomersTransactions.BalanceAndTurnovers(,, Recorder,,) AS
-		R2021_CustomersTransactionsBalanceAndTurnovers</query>
+	AccumulationRegister.R2021B_CustomersTransactions.BalanceAndTurnovers(,, Recorder,,) AS
+		R2021B_CustomersTransactionsBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R2031_ShipmentInvoicing</name>
+			<name>R2031B_ShipmentInvoicing</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>QuantityReceipt</dataPath>
 				<field>QuantityReceipt</field>
@@ -2608,22 +2454,22 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R2031_ShipmentInvoicing" AS RegisterName,
-	R2031_ShipmentInvoicingBalanceAndTurnovers.Company,
-	R2031_ShipmentInvoicingBalanceAndTurnovers.Basis,
-	R2031_ShipmentInvoicingBalanceAndTurnovers.ItemKey,
-	R2031_ShipmentInvoicingBalanceAndTurnovers.QuantityClosingBalance,
-	R2031_ShipmentInvoicingBalanceAndTurnovers.QuantityExpense,
-	R2031_ShipmentInvoicingBalanceAndTurnovers.QuantityOpeningBalance,
-	R2031_ShipmentInvoicingBalanceAndTurnovers.QuantityReceipt,
-	R2031_ShipmentInvoicingBalanceAndTurnovers.QuantityTurnover,
-	R2031_ShipmentInvoicingBalanceAndTurnovers.Recorder
+	"R2031B_ShipmentInvoicing" AS RegisterName,
+	R2031B_ShipmentInvoicingBalanceAndTurnovers.Company,
+	R2031B_ShipmentInvoicingBalanceAndTurnovers.Basis,
+	R2031B_ShipmentInvoicingBalanceAndTurnovers.ItemKey,
+	R2031B_ShipmentInvoicingBalanceAndTurnovers.QuantityClosingBalance,
+	R2031B_ShipmentInvoicingBalanceAndTurnovers.QuantityExpense,
+	R2031B_ShipmentInvoicingBalanceAndTurnovers.QuantityOpeningBalance,
+	R2031B_ShipmentInvoicingBalanceAndTurnovers.QuantityReceipt,
+	R2031B_ShipmentInvoicingBalanceAndTurnovers.QuantityTurnover,
+	R2031B_ShipmentInvoicingBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R2031_ShipmentInvoicing.BalanceAndTurnovers(,, Recorder,,) AS
-		R2031_ShipmentInvoicingBalanceAndTurnovers</query>
+	AccumulationRegister.R2031B_ShipmentInvoicing.BalanceAndTurnovers(,, Recorder,,) AS
+		R2031B_ShipmentInvoicingBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R2040_TaxesIncoming</name>
+			<name>R2040B_TaxesIncoming</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>TaxAmountClosingBalance</dataPath>
 				<field>TaxAmountClosingBalance</field>
@@ -2732,27 +2578,27 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R2040_TaxesIncoming" AS RegisterName,
-	R2040_TaxesIncomingBalanceAndTurnovers.Company,
-	R2040_TaxesIncomingBalanceAndTurnovers.Tax,
-	R2040_TaxesIncomingBalanceAndTurnovers.TaxRate,
-	R2040_TaxesIncomingBalanceAndTurnovers.TaxMovementType,
-	R2040_TaxesIncomingBalanceAndTurnovers.TaxableAmountClosingBalance,
-	R2040_TaxesIncomingBalanceAndTurnovers.TaxableAmountExpense,
-	R2040_TaxesIncomingBalanceAndTurnovers.TaxableAmountOpeningBalance,
-	R2040_TaxesIncomingBalanceAndTurnovers.TaxableAmountReceipt,
-	R2040_TaxesIncomingBalanceAndTurnovers.TaxableAmountTurnover,
-	R2040_TaxesIncomingBalanceAndTurnovers.TaxAmountClosingBalance,
-	R2040_TaxesIncomingBalanceAndTurnovers.TaxAmountExpense,
-	R2040_TaxesIncomingBalanceAndTurnovers.TaxAmountOpeningBalance,
-	R2040_TaxesIncomingBalanceAndTurnovers.TaxAmountReceipt,
-	R2040_TaxesIncomingBalanceAndTurnovers.TaxAmountTurnover,
-	R2040_TaxesIncomingBalanceAndTurnovers.Recorder
+	"R2040B_TaxesIncoming" AS RegisterName,
+	R2040B_TaxesIncomingBalanceAndTurnovers.Company,
+	R2040B_TaxesIncomingBalanceAndTurnovers.Tax,
+	R2040B_TaxesIncomingBalanceAndTurnovers.TaxRate,
+	R2040B_TaxesIncomingBalanceAndTurnovers.TaxMovementType,
+	R2040B_TaxesIncomingBalanceAndTurnovers.TaxableAmountClosingBalance,
+	R2040B_TaxesIncomingBalanceAndTurnovers.TaxableAmountExpense,
+	R2040B_TaxesIncomingBalanceAndTurnovers.TaxableAmountOpeningBalance,
+	R2040B_TaxesIncomingBalanceAndTurnovers.TaxableAmountReceipt,
+	R2040B_TaxesIncomingBalanceAndTurnovers.TaxableAmountTurnover,
+	R2040B_TaxesIncomingBalanceAndTurnovers.TaxAmountClosingBalance,
+	R2040B_TaxesIncomingBalanceAndTurnovers.TaxAmountExpense,
+	R2040B_TaxesIncomingBalanceAndTurnovers.TaxAmountOpeningBalance,
+	R2040B_TaxesIncomingBalanceAndTurnovers.TaxAmountReceipt,
+	R2040B_TaxesIncomingBalanceAndTurnovers.TaxAmountTurnover,
+	R2040B_TaxesIncomingBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R2040_TaxesIncoming.BalanceAndTurnovers(,, Recorder,,) AS R2040_TaxesIncomingBalanceAndTurnovers</query>
+	AccumulationRegister.R2040B_TaxesIncoming.BalanceAndTurnovers(,, Recorder,,) AS R2040B_TaxesIncomingBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R3010_CashOnHand</name>
+			<name>R3010B_CashOnHand</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>AmountOpeningBalance</dataPath>
 				<field>AmountOpeningBalance</field>
@@ -2838,23 +2684,23 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R3010_CashOnHand" AS RegisterName,
-	R3010_CashOnHandBalanceAndTurnovers.Company,
-	R3010_CashOnHandBalanceAndTurnovers.Account,
-	R3010_CashOnHandBalanceAndTurnovers.Currency,
-	R3010_CashOnHandBalanceAndTurnovers.CurrencyMovementType,
-	R3010_CashOnHandBalanceAndTurnovers.MovementType,
-	R3010_CashOnHandBalanceAndTurnovers.AmountClosingBalance,
-	R3010_CashOnHandBalanceAndTurnovers.AmountExpense,
-	R3010_CashOnHandBalanceAndTurnovers.AmountOpeningBalance,
-	R3010_CashOnHandBalanceAndTurnovers.AmountReceipt,
-	R3010_CashOnHandBalanceAndTurnovers.AmountTurnover,
-	R3010_CashOnHandBalanceAndTurnovers.Recorder
+	"R3010B_CashOnHand" AS RegisterName,
+	R3010B_CashOnHandBalanceAndTurnovers.Company,
+	R3010B_CashOnHandBalanceAndTurnovers.Account,
+	R3010B_CashOnHandBalanceAndTurnovers.Currency,
+	R3010B_CashOnHandBalanceAndTurnovers.CurrencyMovementType,
+	R3010B_CashOnHandBalanceAndTurnovers.MovementType,
+	R3010B_CashOnHandBalanceAndTurnovers.AmountClosingBalance,
+	R3010B_CashOnHandBalanceAndTurnovers.AmountExpense,
+	R3010B_CashOnHandBalanceAndTurnovers.AmountOpeningBalance,
+	R3010B_CashOnHandBalanceAndTurnovers.AmountReceipt,
+	R3010B_CashOnHandBalanceAndTurnovers.AmountTurnover,
+	R3010B_CashOnHandBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R3010_CashOnHand.BalanceAndTurnovers(,, Recorder,,) AS R3010_CashOnHandBalanceAndTurnovers</query>
+	AccumulationRegister.R3010B_CashOnHand.BalanceAndTurnovers(,, Recorder,,) AS R3010B_CashOnHandBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R3011_CashMovements</name>
+			<name>R3011T_CashMovements</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>Currency</dataPath>
 				<field>Currency</field>
@@ -2907,18 +2753,18 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R3011_CashMovements" AS RegisterName,
-	R3011_CashMovementsTurnovers.Company,
-	R3011_CashMovementsTurnovers.Account,
-	R3011_CashMovementsTurnovers.Currency,
-	R3011_CashMovementsTurnovers.CurrencyMovementType,
-	R3011_CashMovementsTurnovers.AmountTurnover,
-	R3011_CashMovementsTurnovers.Recorder
+	"R3011T_CashMovements" AS RegisterName,
+	R3011T_CashMovementsTurnovers.Company,
+	R3011T_CashMovementsTurnovers.Account,
+	R3011T_CashMovementsTurnovers.Currency,
+	R3011T_CashMovementsTurnovers.CurrencyMovementType,
+	R3011T_CashMovementsTurnovers.AmountTurnover,
+	R3011T_CashMovementsTurnovers.Recorder
 FROM
-	AccumulationRegister.R3011_CashMovements.Turnovers(,, Recorder,) AS R3011_CashMovementsTurnovers</query>
+	AccumulationRegister.R3011T_CashMovements.Turnovers(,, Recorder,) AS R3011T_CashMovementsTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R3015_CashAdvance</name>
+			<name>R3015B_CashAdvance</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>Company</dataPath>
 				<field>Company</field>
@@ -3004,23 +2850,23 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R3015_CashAdvance" AS RegisterName,
-	R3015_CashAdvanceBalanceAndTurnovers.Company,
-	R3015_CashAdvanceBalanceAndTurnovers.CurrencyMovementType,
-	R3015_CashAdvanceBalanceAndTurnovers.Currency,
-	R3015_CashAdvanceBalanceAndTurnovers.Partner,
-	R3015_CashAdvanceBalanceAndTurnovers.Basis,
-	R3015_CashAdvanceBalanceAndTurnovers.AmountClosingBalance,
-	R3015_CashAdvanceBalanceAndTurnovers.AmountExpense,
-	R3015_CashAdvanceBalanceAndTurnovers.AmountOpeningBalance,
-	R3015_CashAdvanceBalanceAndTurnovers.AmountReceipt,
-	R3015_CashAdvanceBalanceAndTurnovers.AmountTurnover,
-	R3015_CashAdvanceBalanceAndTurnovers.Recorder
+	"R3015B_CashAdvance" AS RegisterName,
+	R3015B_CashAdvanceBalanceAndTurnovers.Company,
+	R3015B_CashAdvanceBalanceAndTurnovers.CurrencyMovementType,
+	R3015B_CashAdvanceBalanceAndTurnovers.Currency,
+	R3015B_CashAdvanceBalanceAndTurnovers.Partner,
+	R3015B_CashAdvanceBalanceAndTurnovers.Basis,
+	R3015B_CashAdvanceBalanceAndTurnovers.AmountClosingBalance,
+	R3015B_CashAdvanceBalanceAndTurnovers.AmountExpense,
+	R3015B_CashAdvanceBalanceAndTurnovers.AmountOpeningBalance,
+	R3015B_CashAdvanceBalanceAndTurnovers.AmountReceipt,
+	R3015B_CashAdvanceBalanceAndTurnovers.AmountTurnover,
+	R3015B_CashAdvanceBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R3015_CashAdvance.BalanceAndTurnovers(,, Recorder,,) AS R3015_CashAdvanceBalanceAndTurnovers</query>
+	AccumulationRegister.R3015B_CashAdvance.BalanceAndTurnovers(,, Recorder,,) AS R3015B_CashAdvanceBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R3016_ChequeAndBonds</name>
+			<name>R3016B_ChequeAndBonds</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>AmountReceipt</dataPath>
 				<field>AmountReceipt</field>
@@ -3113,25 +2959,25 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R3016_ChequeAndBonds" AS RegisterName,
-	R3016_ChequeAndBondsBalanceAndTurnovers.Company,
-	R3016_ChequeAndBondsBalanceAndTurnovers.CurrencyMovementType,
-	R3016_ChequeAndBondsBalanceAndTurnovers.Currency,
-	R3016_ChequeAndBondsBalanceAndTurnovers.Cheque,
-	R3016_ChequeAndBondsBalanceAndTurnovers.Partner,
-	R3016_ChequeAndBondsBalanceAndTurnovers.LegalName,
-	R3016_ChequeAndBondsBalanceAndTurnovers.AmountClosingBalance,
-	R3016_ChequeAndBondsBalanceAndTurnovers.AmountExpense,
-	R3016_ChequeAndBondsBalanceAndTurnovers.AmountOpeningBalance,
-	R3016_ChequeAndBondsBalanceAndTurnovers.AmountReceipt,
-	R3016_ChequeAndBondsBalanceAndTurnovers.AmountTurnover,
-	R3016_ChequeAndBondsBalanceAndTurnovers.Recorder
+	"R3016B_ChequeAndBonds" AS RegisterName,
+	R3016B_ChequeAndBondsBalanceAndTurnovers.Company,
+	R3016B_ChequeAndBondsBalanceAndTurnovers.CurrencyMovementType,
+	R3016B_ChequeAndBondsBalanceAndTurnovers.Currency,
+	R3016B_ChequeAndBondsBalanceAndTurnovers.Cheque,
+	R3016B_ChequeAndBondsBalanceAndTurnovers.Partner,
+	R3016B_ChequeAndBondsBalanceAndTurnovers.LegalName,
+	R3016B_ChequeAndBondsBalanceAndTurnovers.AmountClosingBalance,
+	R3016B_ChequeAndBondsBalanceAndTurnovers.AmountExpense,
+	R3016B_ChequeAndBondsBalanceAndTurnovers.AmountOpeningBalance,
+	R3016B_ChequeAndBondsBalanceAndTurnovers.AmountReceipt,
+	R3016B_ChequeAndBondsBalanceAndTurnovers.AmountTurnover,
+	R3016B_ChequeAndBondsBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R3016_ChequeAndBonds.BalanceAndTurnovers(,, Recorder,,) AS
-		R3016_ChequeAndBondsBalanceAndTurnovers</query>
+	AccumulationRegister.R3016B_ChequeAndBonds.BalanceAndTurnovers(,, Recorder,,) AS
+		R3016B_ChequeAndBondsBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R3021_CashInTransitIncoming</name>
+			<name>R3021B_CashInTransitIncoming</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>CurrencyMovementType</dataPath>
 				<field>CurrencyMovementType</field>
@@ -3217,24 +3063,24 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R3021_CashInTransitIncoming" AS RegisterName,
-	R3021_CashInTransitIncomingBalanceAndTurnovers.Company,
-	R3021_CashInTransitIncomingBalanceAndTurnovers.CurrencyMovementType,
-	R3021_CashInTransitIncomingBalanceAndTurnovers.Currency,
-	R3021_CashInTransitIncomingBalanceAndTurnovers.Account,
-	R3021_CashInTransitIncomingBalanceAndTurnovers.Basis,
-	R3021_CashInTransitIncomingBalanceAndTurnovers.AmountClosingBalance,
-	R3021_CashInTransitIncomingBalanceAndTurnovers.AmountExpense,
-	R3021_CashInTransitIncomingBalanceAndTurnovers.AmountOpeningBalance,
-	R3021_CashInTransitIncomingBalanceAndTurnovers.AmountReceipt,
-	R3021_CashInTransitIncomingBalanceAndTurnovers.AmountTurnover,
-	R3021_CashInTransitIncomingBalanceAndTurnovers.Recorder
+	"R3021B_CashInTransitIncoming" AS RegisterName,
+	R3021B_CashInTransitIncomingBalanceAndTurnovers.Company,
+	R3021B_CashInTransitIncomingBalanceAndTurnovers.CurrencyMovementType,
+	R3021B_CashInTransitIncomingBalanceAndTurnovers.Currency,
+	R3021B_CashInTransitIncomingBalanceAndTurnovers.Account,
+	R3021B_CashInTransitIncomingBalanceAndTurnovers.Basis,
+	R3021B_CashInTransitIncomingBalanceAndTurnovers.AmountClosingBalance,
+	R3021B_CashInTransitIncomingBalanceAndTurnovers.AmountExpense,
+	R3021B_CashInTransitIncomingBalanceAndTurnovers.AmountOpeningBalance,
+	R3021B_CashInTransitIncomingBalanceAndTurnovers.AmountReceipt,
+	R3021B_CashInTransitIncomingBalanceAndTurnovers.AmountTurnover,
+	R3021B_CashInTransitIncomingBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R3021_CashInTransitIncoming.BalanceAndTurnovers(,, Recorder,,) AS
-		R3021_CashInTransitIncomingBalanceAndTurnovers</query>
+	AccumulationRegister.R3021B_CashInTransitIncoming.BalanceAndTurnovers(,, Recorder,,) AS
+		R3021B_CashInTransitIncomingBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R3022_CashInTransitOutgoing</name>
+			<name>R3022B_CashInTransitOutgoing</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>AmountClosingBalance</dataPath>
 				<field>AmountClosingBalance</field>
@@ -3320,24 +3166,24 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R3022_CashInTransitOutgoing" AS RegisterName,
-	R3022_CashInTransitOutgoingBalanceAndTurnovers.Company,
-	R3022_CashInTransitOutgoingBalanceAndTurnovers.CurrencyMovementType,
-	R3022_CashInTransitOutgoingBalanceAndTurnovers.Currency,
-	R3022_CashInTransitOutgoingBalanceAndTurnovers.Account,
-	R3022_CashInTransitOutgoingBalanceAndTurnovers.Basis,
-	R3022_CashInTransitOutgoingBalanceAndTurnovers.AmountClosingBalance,
-	R3022_CashInTransitOutgoingBalanceAndTurnovers.AmountExpense,
-	R3022_CashInTransitOutgoingBalanceAndTurnovers.AmountOpeningBalance,
-	R3022_CashInTransitOutgoingBalanceAndTurnovers.AmountReceipt,
-	R3022_CashInTransitOutgoingBalanceAndTurnovers.AmountTurnover,
-	R3022_CashInTransitOutgoingBalanceAndTurnovers.Recorder
+	"R3022B_CashInTransitOutgoing" AS RegisterName,
+	R3022B_CashInTransitOutgoingBalanceAndTurnovers.Company,
+	R3022B_CashInTransitOutgoingBalanceAndTurnovers.CurrencyMovementType,
+	R3022B_CashInTransitOutgoingBalanceAndTurnovers.Currency,
+	R3022B_CashInTransitOutgoingBalanceAndTurnovers.Account,
+	R3022B_CashInTransitOutgoingBalanceAndTurnovers.Basis,
+	R3022B_CashInTransitOutgoingBalanceAndTurnovers.AmountClosingBalance,
+	R3022B_CashInTransitOutgoingBalanceAndTurnovers.AmountExpense,
+	R3022B_CashInTransitOutgoingBalanceAndTurnovers.AmountOpeningBalance,
+	R3022B_CashInTransitOutgoingBalanceAndTurnovers.AmountReceipt,
+	R3022B_CashInTransitOutgoingBalanceAndTurnovers.AmountTurnover,
+	R3022B_CashInTransitOutgoingBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R3022_CashInTransitOutgoing.BalanceAndTurnovers(,, Recorder,,) AS
-		R3022_CashInTransitOutgoingBalanceAndTurnovers</query>
+	AccumulationRegister.R3022B_CashInTransitOutgoing.BalanceAndTurnovers(,, Recorder,,) AS
+		R3022B_CashInTransitOutgoingBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R3033_CashPlanningIncoming</name>
+			<name>R3033B_CashPlanningIncoming</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>AmountReceipt</dataPath>
 				<field>AmountReceipt</field>
@@ -3430,25 +3276,25 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R3033_CashPlanningIncoming" AS RegisterName,
-	R3033_CashPlanningIncomingBalanceAndTurnovers.Company,
-	R3033_CashPlanningIncomingBalanceAndTurnovers.CurrencyMovementType,
-	R3033_CashPlanningIncomingBalanceAndTurnovers.Currency,
-	R3033_CashPlanningIncomingBalanceAndTurnovers.Account,
-	R3033_CashPlanningIncomingBalanceAndTurnovers.Basis,
-	R3033_CashPlanningIncomingBalanceAndTurnovers.MovementType,
-	R3033_CashPlanningIncomingBalanceAndTurnovers.AmountClosingBalance,
-	R3033_CashPlanningIncomingBalanceAndTurnovers.AmountExpense,
-	R3033_CashPlanningIncomingBalanceAndTurnovers.AmountOpeningBalance,
-	R3033_CashPlanningIncomingBalanceAndTurnovers.AmountReceipt,
-	R3033_CashPlanningIncomingBalanceAndTurnovers.AmountTurnover,
-	R3033_CashPlanningIncomingBalanceAndTurnovers.Recorder
+	"R3033B_CashPlanningIncoming" AS RegisterName,
+	R3033B_CashPlanningIncomingBalanceAndTurnovers.Company,
+	R3033B_CashPlanningIncomingBalanceAndTurnovers.CurrencyMovementType,
+	R3033B_CashPlanningIncomingBalanceAndTurnovers.Currency,
+	R3033B_CashPlanningIncomingBalanceAndTurnovers.Account,
+	R3033B_CashPlanningIncomingBalanceAndTurnovers.Basis,
+	R3033B_CashPlanningIncomingBalanceAndTurnovers.MovementType,
+	R3033B_CashPlanningIncomingBalanceAndTurnovers.AmountClosingBalance,
+	R3033B_CashPlanningIncomingBalanceAndTurnovers.AmountExpense,
+	R3033B_CashPlanningIncomingBalanceAndTurnovers.AmountOpeningBalance,
+	R3033B_CashPlanningIncomingBalanceAndTurnovers.AmountReceipt,
+	R3033B_CashPlanningIncomingBalanceAndTurnovers.AmountTurnover,
+	R3033B_CashPlanningIncomingBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R3033_CashPlanningIncoming.BalanceAndTurnovers(,, Recorder,,) AS
-		R3033_CashPlanningIncomingBalanceAndTurnovers</query>
+	AccumulationRegister.R3033B_CashPlanningIncoming.BalanceAndTurnovers(,, Recorder,,) AS
+		R3033B_CashPlanningIncomingBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R3034_CashPlanningOutgoing</name>
+			<name>R3034B_CashPlanningOutgoing</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>MovementType</dataPath>
 				<field>MovementType</field>
@@ -3541,25 +3387,25 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R3034_CashPlanningOutgoing" AS RegisterName,
-	R3034_CashPlanningOutgoingBalanceAndTurnovers.Company,
-	R3034_CashPlanningOutgoingBalanceAndTurnovers.CurrencyMovementType,
-	R3034_CashPlanningOutgoingBalanceAndTurnovers.Currency,
-	R3034_CashPlanningOutgoingBalanceAndTurnovers.Account,
-	R3034_CashPlanningOutgoingBalanceAndTurnovers.Basis,
-	R3034_CashPlanningOutgoingBalanceAndTurnovers.MovementType,
-	R3034_CashPlanningOutgoingBalanceAndTurnovers.AmountClosingBalance,
-	R3034_CashPlanningOutgoingBalanceAndTurnovers.AmountExpense,
-	R3034_CashPlanningOutgoingBalanceAndTurnovers.AmountOpeningBalance,
-	R3034_CashPlanningOutgoingBalanceAndTurnovers.AmountReceipt,
-	R3034_CashPlanningOutgoingBalanceAndTurnovers.AmountTurnover,
-	R3034_CashPlanningOutgoingBalanceAndTurnovers.Recorder
+	"R3034B_CashPlanningOutgoing" AS RegisterName,
+	R3034B_CashPlanningOutgoingBalanceAndTurnovers.Company,
+	R3034B_CashPlanningOutgoingBalanceAndTurnovers.CurrencyMovementType,
+	R3034B_CashPlanningOutgoingBalanceAndTurnovers.Currency,
+	R3034B_CashPlanningOutgoingBalanceAndTurnovers.Account,
+	R3034B_CashPlanningOutgoingBalanceAndTurnovers.Basis,
+	R3034B_CashPlanningOutgoingBalanceAndTurnovers.MovementType,
+	R3034B_CashPlanningOutgoingBalanceAndTurnovers.AmountClosingBalance,
+	R3034B_CashPlanningOutgoingBalanceAndTurnovers.AmountExpense,
+	R3034B_CashPlanningOutgoingBalanceAndTurnovers.AmountOpeningBalance,
+	R3034B_CashPlanningOutgoingBalanceAndTurnovers.AmountReceipt,
+	R3034B_CashPlanningOutgoingBalanceAndTurnovers.AmountTurnover,
+	R3034B_CashPlanningOutgoingBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R3034_CashPlanningOutgoing.BalanceAndTurnovers(,, Recorder,,) AS
-		R3034_CashPlanningOutgoingBalanceAndTurnovers</query>
+	AccumulationRegister.R3034B_CashPlanningOutgoing.BalanceAndTurnovers(,, Recorder,,) AS
+		R3034B_CashPlanningOutgoingBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R4010_ActualStocks</name>
+			<name>R4010B_ActualStocks</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>ItemKey</dataPath>
 				<field>ItemKey</field>
@@ -3631,21 +3477,21 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R4010_ActualStocks" AS RegisterName,
-	R4010_ActualStocksBalanceAndTurnovers.Store,
-	R4010_ActualStocksBalanceAndTurnovers.ItemKey,
-	R4010_ActualStocksBalanceAndTurnovers.SerialLotNumber,
-	R4010_ActualStocksBalanceAndTurnovers.QuantityClosingBalance,
-	R4010_ActualStocksBalanceAndTurnovers.QuantityExpense,
-	R4010_ActualStocksBalanceAndTurnovers.QuantityOpeningBalance,
-	R4010_ActualStocksBalanceAndTurnovers.QuantityReceipt,
-	R4010_ActualStocksBalanceAndTurnovers.QuantityTurnover,
-	R4010_ActualStocksBalanceAndTurnovers.Recorder
+	"R4010B_ActualStocks" AS RegisterName,
+	R4010B_ActualStocksBalanceAndTurnovers.Store,
+	R4010B_ActualStocksBalanceAndTurnovers.ItemKey,
+	R4010B_ActualStocksBalanceAndTurnovers.SerialLotNumber,
+	R4010B_ActualStocksBalanceAndTurnovers.QuantityClosingBalance,
+	R4010B_ActualStocksBalanceAndTurnovers.QuantityExpense,
+	R4010B_ActualStocksBalanceAndTurnovers.QuantityOpeningBalance,
+	R4010B_ActualStocksBalanceAndTurnovers.QuantityReceipt,
+	R4010B_ActualStocksBalanceAndTurnovers.QuantityTurnover,
+	R4010B_ActualStocksBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R4010_ActualStocks.BalanceAndTurnovers(,, Recorder,,) AS R4010_ActualStocksBalanceAndTurnovers</query>
+	AccumulationRegister.R4010B_ActualStocks.BalanceAndTurnovers(,, Recorder,,) AS R4010B_ActualStocksBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R4011_FreeStocks</name>
+			<name>R4011B_FreeStocks</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>QuantityClosingBalance</dataPath>
 				<field>QuantityClosingBalance</field>
@@ -3717,21 +3563,21 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R4011_FreeStocks" AS RegisterName,
-	R4011_FreeStocksBalanceAndTurnovers.Store,
-	R4011_FreeStocksBalanceAndTurnovers.ItemKey,
-	R4011_FreeStocksBalanceAndTurnovers.SerialLotNumber,
-	R4011_FreeStocksBalanceAndTurnovers.QuantityClosingBalance,
-	R4011_FreeStocksBalanceAndTurnovers.QuantityExpense,
-	R4011_FreeStocksBalanceAndTurnovers.QuantityOpeningBalance,
-	R4011_FreeStocksBalanceAndTurnovers.QuantityReceipt,
-	R4011_FreeStocksBalanceAndTurnovers.QuantityTurnover,
-	R4011_FreeStocksBalanceAndTurnovers.Recorder
+	"R4011B_FreeStocks" AS RegisterName,
+	R4011B_FreeStocksBalanceAndTurnovers.Store,
+	R4011B_FreeStocksBalanceAndTurnovers.ItemKey,
+	R4011B_FreeStocksBalanceAndTurnovers.SerialLotNumber,
+	R4011B_FreeStocksBalanceAndTurnovers.QuantityClosingBalance,
+	R4011B_FreeStocksBalanceAndTurnovers.QuantityExpense,
+	R4011B_FreeStocksBalanceAndTurnovers.QuantityOpeningBalance,
+	R4011B_FreeStocksBalanceAndTurnovers.QuantityReceipt,
+	R4011B_FreeStocksBalanceAndTurnovers.QuantityTurnover,
+	R4011B_FreeStocksBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R4011_FreeStocks.BalanceAndTurnovers(,, Recorder,,) AS R4011_FreeStocksBalanceAndTurnovers</query>
+	AccumulationRegister.R4011B_FreeStocks.BalanceAndTurnovers(,, Recorder,,) AS R4011B_FreeStocksBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R4012_StockReservation</name>
+			<name>R4012B_StockReservation</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>QuantityReceipt</dataPath>
 				<field>QuantityReceipt</field>
@@ -3803,22 +3649,22 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R4012_StockReservation" AS RegisterName,
-	R4012_StockReservationBalanceAndTurnovers.Store,
-	R4012_StockReservationBalanceAndTurnovers.ItemKey,
-	R4012_StockReservationBalanceAndTurnovers.Order,
-	R4012_StockReservationBalanceAndTurnovers.QuantityClosingBalance,
-	R4012_StockReservationBalanceAndTurnovers.QuantityExpense,
-	R4012_StockReservationBalanceAndTurnovers.QuantityOpeningBalance,
-	R4012_StockReservationBalanceAndTurnovers.QuantityReceipt,
-	R4012_StockReservationBalanceAndTurnovers.QuantityTurnover,
-	R4012_StockReservationBalanceAndTurnovers.Recorder
+	"R4012B_StockReservation" AS RegisterName,
+	R4012B_StockReservationBalanceAndTurnovers.Store,
+	R4012B_StockReservationBalanceAndTurnovers.ItemKey,
+	R4012B_StockReservationBalanceAndTurnovers.Order,
+	R4012B_StockReservationBalanceAndTurnovers.QuantityClosingBalance,
+	R4012B_StockReservationBalanceAndTurnovers.QuantityExpense,
+	R4012B_StockReservationBalanceAndTurnovers.QuantityOpeningBalance,
+	R4012B_StockReservationBalanceAndTurnovers.QuantityReceipt,
+	R4012B_StockReservationBalanceAndTurnovers.QuantityTurnover,
+	R4012B_StockReservationBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R4012_StockReservation.BalanceAndTurnovers(,, Recorder,,) AS
-		R4012_StockReservationBalanceAndTurnovers</query>
+	AccumulationRegister.R4012B_StockReservation.BalanceAndTurnovers(,, Recorder,,) AS
+		R4012B_StockReservationBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R4013_StockReservationPlanning</name>
+			<name>R4013B_StockReservationPlanning</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>QuantityOpeningBalance</dataPath>
 				<field>QuantityOpeningBalance</field>
@@ -3890,22 +3736,22 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R4013_StockReservationPlanning" AS RegisterName,
-	R4013_StockReservationPlanningBalanceAndTurnovers.ItemKey,
-	R4013_StockReservationPlanningBalanceAndTurnovers.Order,
-	R4013_StockReservationPlanningBalanceAndTurnovers.IncomingDocument,
-	R4013_StockReservationPlanningBalanceAndTurnovers.QuantityClosingBalance,
-	R4013_StockReservationPlanningBalanceAndTurnovers.QuantityExpense,
-	R4013_StockReservationPlanningBalanceAndTurnovers.QuantityOpeningBalance,
-	R4013_StockReservationPlanningBalanceAndTurnovers.QuantityReceipt,
-	R4013_StockReservationPlanningBalanceAndTurnovers.QuantityTurnover,
-	R4013_StockReservationPlanningBalanceAndTurnovers.Recorder
+	"R4013B_StockReservationPlanning" AS RegisterName,
+	R4013B_StockReservationPlanningBalanceAndTurnovers.ItemKey,
+	R4013B_StockReservationPlanningBalanceAndTurnovers.Order,
+	R4013B_StockReservationPlanningBalanceAndTurnovers.IncomingDocument,
+	R4013B_StockReservationPlanningBalanceAndTurnovers.QuantityClosingBalance,
+	R4013B_StockReservationPlanningBalanceAndTurnovers.QuantityExpense,
+	R4013B_StockReservationPlanningBalanceAndTurnovers.QuantityOpeningBalance,
+	R4013B_StockReservationPlanningBalanceAndTurnovers.QuantityReceipt,
+	R4013B_StockReservationPlanningBalanceAndTurnovers.QuantityTurnover,
+	R4013B_StockReservationPlanningBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R4013_StockReservationPlanning.BalanceAndTurnovers(,, Recorder,,) AS
-		R4013_StockReservationPlanningBalanceAndTurnovers</query>
+	AccumulationRegister.R4013B_StockReservationPlanning.BalanceAndTurnovers(,, Recorder,,) AS
+		R4013B_StockReservationPlanningBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R4015_InternalSupplyRequests</name>
+			<name>R4015T_InternalSupplyRequests</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>ItemKey</dataPath>
 				<field>ItemKey</field>
@@ -3958,18 +3804,18 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R4015_InternalSupplyRequests" AS RegisterName,
-	R4015_InternalSupplyRequestsTurnovers.Company,
-	R4015_InternalSupplyRequestsTurnovers.Store,
-	R4015_InternalSupplyRequestsTurnovers.InternalSupplyRequest,
-	R4015_InternalSupplyRequestsTurnovers.ItemKey,
-	R4015_InternalSupplyRequestsTurnovers.QuantityTurnover,
-	R4015_InternalSupplyRequestsTurnovers.Recorder
+	"R4015T_InternalSupplyRequests" AS RegisterName,
+	R4015T_InternalSupplyRequestsTurnovers.Company,
+	R4015T_InternalSupplyRequestsTurnovers.Store,
+	R4015T_InternalSupplyRequestsTurnovers.InternalSupplyRequest,
+	R4015T_InternalSupplyRequestsTurnovers.ItemKey,
+	R4015T_InternalSupplyRequestsTurnovers.QuantityTurnover,
+	R4015T_InternalSupplyRequestsTurnovers.Recorder
 FROM
-	AccumulationRegister.R4015_InternalSupplyRequests.Turnovers(,, Recorder,) AS R4015_InternalSupplyRequestsTurnovers</query>
+	AccumulationRegister.R4015T_InternalSupplyRequests.Turnovers(,, Recorder,) AS R4015T_InternalSupplyRequestsTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R4016_InternalSupplyRequestOrdering</name>
+			<name>R4016B_InternalSupplyRequestOrdering</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>Company</dataPath>
 				<field>Company</field>
@@ -4048,23 +3894,23 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R4016_InternalSupplyRequestOrdering" AS RegisterName,
-	R4016_InternalSupplyRequestOrderingBalanceAndTurnovers.Company,
-	R4016_InternalSupplyRequestOrderingBalanceAndTurnovers.Store,
-	R4016_InternalSupplyRequestOrderingBalanceAndTurnovers.InternalSupplyRequest,
-	R4016_InternalSupplyRequestOrderingBalanceAndTurnovers.ItemKey,
-	R4016_InternalSupplyRequestOrderingBalanceAndTurnovers.QuantityClosingBalance,
-	R4016_InternalSupplyRequestOrderingBalanceAndTurnovers.QuantityExpense,
-	R4016_InternalSupplyRequestOrderingBalanceAndTurnovers.QuantityOpeningBalance,
-	R4016_InternalSupplyRequestOrderingBalanceAndTurnovers.QuantityReceipt,
-	R4016_InternalSupplyRequestOrderingBalanceAndTurnovers.QuantityTurnover,
-	R4016_InternalSupplyRequestOrderingBalanceAndTurnovers.Recorder
+	"R4016B_InternalSupplyRequestOrdering" AS RegisterName,
+	R4016B_InternalSupplyRequestOrderingBalanceAndTurnovers.Company,
+	R4016B_InternalSupplyRequestOrderingBalanceAndTurnovers.Store,
+	R4016B_InternalSupplyRequestOrderingBalanceAndTurnovers.InternalSupplyRequest,
+	R4016B_InternalSupplyRequestOrderingBalanceAndTurnovers.ItemKey,
+	R4016B_InternalSupplyRequestOrderingBalanceAndTurnovers.QuantityClosingBalance,
+	R4016B_InternalSupplyRequestOrderingBalanceAndTurnovers.QuantityExpense,
+	R4016B_InternalSupplyRequestOrderingBalanceAndTurnovers.QuantityOpeningBalance,
+	R4016B_InternalSupplyRequestOrderingBalanceAndTurnovers.QuantityReceipt,
+	R4016B_InternalSupplyRequestOrderingBalanceAndTurnovers.QuantityTurnover,
+	R4016B_InternalSupplyRequestOrderingBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R4016_InternalSupplyRequestOrdering.BalanceAndTurnovers(,, Recorder,,) AS
-		R4016_InternalSupplyRequestOrderingBalanceAndTurnovers</query>
+	AccumulationRegister.R4016B_InternalSupplyRequestOrdering.BalanceAndTurnovers(,, Recorder,,) AS
+		R4016B_InternalSupplyRequestOrderingBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R4017_InternalSupplyRequestProcurement</name>
+			<name>R4017B_InternalSupplyRequestProcurement</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>QuantityTurnover</dataPath>
 				<field>QuantityTurnover</field>
@@ -4143,23 +3989,23 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R4017_InternalSupplyRequestProcurement" AS RegisterName,
-	R4017_InternalSupplyRequestProcurementBalanceAndTurnovers.Company,
-	R4017_InternalSupplyRequestProcurementBalanceAndTurnovers.Store,
-	R4017_InternalSupplyRequestProcurementBalanceAndTurnovers.InternalSupplyRequest,
-	R4017_InternalSupplyRequestProcurementBalanceAndTurnovers.ItemKey,
-	R4017_InternalSupplyRequestProcurementBalanceAndTurnovers.QuantityClosingBalance,
-	R4017_InternalSupplyRequestProcurementBalanceAndTurnovers.QuantityExpense,
-	R4017_InternalSupplyRequestProcurementBalanceAndTurnovers.QuantityOpeningBalance,
-	R4017_InternalSupplyRequestProcurementBalanceAndTurnovers.QuantityReceipt,
-	R4017_InternalSupplyRequestProcurementBalanceAndTurnovers.QuantityTurnover,
-	R4017_InternalSupplyRequestProcurementBalanceAndTurnovers.Recorder
+	"R4017B_InternalSupplyRequestProcurement" AS RegisterName,
+	R4017B_InternalSupplyRequestProcurementBalanceAndTurnovers.Company,
+	R4017B_InternalSupplyRequestProcurementBalanceAndTurnovers.Store,
+	R4017B_InternalSupplyRequestProcurementBalanceAndTurnovers.InternalSupplyRequest,
+	R4017B_InternalSupplyRequestProcurementBalanceAndTurnovers.ItemKey,
+	R4017B_InternalSupplyRequestProcurementBalanceAndTurnovers.QuantityClosingBalance,
+	R4017B_InternalSupplyRequestProcurementBalanceAndTurnovers.QuantityExpense,
+	R4017B_InternalSupplyRequestProcurementBalanceAndTurnovers.QuantityOpeningBalance,
+	R4017B_InternalSupplyRequestProcurementBalanceAndTurnovers.QuantityReceipt,
+	R4017B_InternalSupplyRequestProcurementBalanceAndTurnovers.QuantityTurnover,
+	R4017B_InternalSupplyRequestProcurementBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R4017_InternalSupplyRequestProcurement.BalanceAndTurnovers(,, Recorder,,) AS
-		R4017_InternalSupplyRequestProcurementBalanceAndTurnovers</query>
+	AccumulationRegister.R4017B_InternalSupplyRequestProcurement.BalanceAndTurnovers(,, Recorder,,) AS
+		R4017B_InternalSupplyRequestProcurementBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R4020_StockTransferOrders</name>
+			<name>R4020T_StockTransferOrders</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>QuantityTurnover</dataPath>
 				<field>QuantityTurnover</field>
@@ -4219,19 +4065,19 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R4020_StockTransferOrders" AS RegisterName,
-	R4020_StockTransferOrdersTurnovers.StoreSender,
-	R4020_StockTransferOrdersTurnovers.StoreReceiver,
-	R4020_StockTransferOrdersTurnovers.Order,
-	R4020_StockTransferOrdersTurnovers.ItemKey,
-	R4020_StockTransferOrdersTurnovers.RowKey,
-	R4020_StockTransferOrdersTurnovers.QuantityTurnover,
-	R4020_StockTransferOrdersTurnovers.Recorder
+	"R4020T_StockTransferOrders" AS RegisterName,
+	R4020T_StockTransferOrdersTurnovers.StoreSender,
+	R4020T_StockTransferOrdersTurnovers.StoreReceiver,
+	R4020T_StockTransferOrdersTurnovers.Order,
+	R4020T_StockTransferOrdersTurnovers.ItemKey,
+	R4020T_StockTransferOrdersTurnovers.RowKey,
+	R4020T_StockTransferOrdersTurnovers.QuantityTurnover,
+	R4020T_StockTransferOrdersTurnovers.Recorder
 FROM
-	AccumulationRegister.R4020_StockTransferOrders.Turnovers(,, Recorder,) AS R4020_StockTransferOrdersTurnovers</query>
+	AccumulationRegister.R4020T_StockTransferOrders.Turnovers(,, Recorder,) AS R4020T_StockTransferOrdersTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R4021_StockTransferOrdersReceipt</name>
+			<name>R4021B_StockTransferOrdersReceipt</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>Order</dataPath>
 				<field>Order</field>
@@ -4310,23 +4156,23 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R4021_StockTransferOrdersReceipt" AS RegisterName,
-	R4021_StockTransferOrdersReceiptBalanceAndTurnovers.Store,
-	R4021_StockTransferOrdersReceiptBalanceAndTurnovers.Order,
-	R4021_StockTransferOrdersReceiptBalanceAndTurnovers.ItemKey,
-	R4021_StockTransferOrdersReceiptBalanceAndTurnovers.RowKey,
-	R4021_StockTransferOrdersReceiptBalanceAndTurnovers.QuantityClosingBalance,
-	R4021_StockTransferOrdersReceiptBalanceAndTurnovers.QuantityExpense,
-	R4021_StockTransferOrdersReceiptBalanceAndTurnovers.QuantityOpeningBalance,
-	R4021_StockTransferOrdersReceiptBalanceAndTurnovers.QuantityReceipt,
-	R4021_StockTransferOrdersReceiptBalanceAndTurnovers.QuantityTurnover,
-	R4021_StockTransferOrdersReceiptBalanceAndTurnovers.Recorder
+	"R4021B_StockTransferOrdersReceipt" AS RegisterName,
+	R4021B_StockTransferOrdersReceiptBalanceAndTurnovers.Store,
+	R4021B_StockTransferOrdersReceiptBalanceAndTurnovers.Order,
+	R4021B_StockTransferOrdersReceiptBalanceAndTurnovers.ItemKey,
+	R4021B_StockTransferOrdersReceiptBalanceAndTurnovers.RowKey,
+	R4021B_StockTransferOrdersReceiptBalanceAndTurnovers.QuantityClosingBalance,
+	R4021B_StockTransferOrdersReceiptBalanceAndTurnovers.QuantityExpense,
+	R4021B_StockTransferOrdersReceiptBalanceAndTurnovers.QuantityOpeningBalance,
+	R4021B_StockTransferOrdersReceiptBalanceAndTurnovers.QuantityReceipt,
+	R4021B_StockTransferOrdersReceiptBalanceAndTurnovers.QuantityTurnover,
+	R4021B_StockTransferOrdersReceiptBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R4021_StockTransferOrdersReceipt.BalanceAndTurnovers(,, Recorder,,) AS
-		R4021_StockTransferOrdersReceiptBalanceAndTurnovers</query>
+	AccumulationRegister.R4021B_StockTransferOrdersReceipt.BalanceAndTurnovers(,, Recorder,,) AS
+		R4021B_StockTransferOrdersReceiptBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R4022_StockTransferOrdersShipment</name>
+			<name>R4022B_StockTransferOrdersShipment</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>QuantityOpeningBalance</dataPath>
 				<field>QuantityOpeningBalance</field>
@@ -4405,23 +4251,23 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R4022_StockTransferOrdersShipment" AS RegisterName,
-	R4022_StockTransferOrdersShipmentBalanceAndTurnovers.Store,
-	R4022_StockTransferOrdersShipmentBalanceAndTurnovers.Order,
-	R4022_StockTransferOrdersShipmentBalanceAndTurnovers.ItemKey,
-	R4022_StockTransferOrdersShipmentBalanceAndTurnovers.RowKey,
-	R4022_StockTransferOrdersShipmentBalanceAndTurnovers.QuantityClosingBalance,
-	R4022_StockTransferOrdersShipmentBalanceAndTurnovers.QuantityExpense,
-	R4022_StockTransferOrdersShipmentBalanceAndTurnovers.QuantityOpeningBalance,
-	R4022_StockTransferOrdersShipmentBalanceAndTurnovers.QuantityReceipt,
-	R4022_StockTransferOrdersShipmentBalanceAndTurnovers.QuantityTurnover,
-	R4022_StockTransferOrdersShipmentBalanceAndTurnovers.Recorder
+	"R4022B_StockTransferOrdersShipment" AS RegisterName,
+	R4022B_StockTransferOrdersShipmentBalanceAndTurnovers.Store,
+	R4022B_StockTransferOrdersShipmentBalanceAndTurnovers.Order,
+	R4022B_StockTransferOrdersShipmentBalanceAndTurnovers.ItemKey,
+	R4022B_StockTransferOrdersShipmentBalanceAndTurnovers.RowKey,
+	R4022B_StockTransferOrdersShipmentBalanceAndTurnovers.QuantityClosingBalance,
+	R4022B_StockTransferOrdersShipmentBalanceAndTurnovers.QuantityExpense,
+	R4022B_StockTransferOrdersShipmentBalanceAndTurnovers.QuantityOpeningBalance,
+	R4022B_StockTransferOrdersShipmentBalanceAndTurnovers.QuantityReceipt,
+	R4022B_StockTransferOrdersShipmentBalanceAndTurnovers.QuantityTurnover,
+	R4022B_StockTransferOrdersShipmentBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R4022_StockTransferOrdersShipment.BalanceAndTurnovers(,, Recorder,,) AS
-		R4022_StockTransferOrdersShipmentBalanceAndTurnovers</query>
+	AccumulationRegister.R4022B_StockTransferOrdersShipment.BalanceAndTurnovers(,, Recorder,,) AS
+		R4022B_StockTransferOrdersShipmentBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R4031_GoodsInTransitIncoming</name>
+			<name>R4031B_GoodsInTransitIncoming</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>ItemKey</dataPath>
 				<field>ItemKey</field>
@@ -4493,22 +4339,22 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R4031_GoodsInTransitIncoming" AS RegisterName,
-	R4031_GoodsInTransitIncomingBalanceAndTurnovers.Store,
-	R4031_GoodsInTransitIncomingBalanceAndTurnovers.Basis,
-	R4031_GoodsInTransitIncomingBalanceAndTurnovers.ItemKey,
-	R4031_GoodsInTransitIncomingBalanceAndTurnovers.QuantityClosingBalance,
-	R4031_GoodsInTransitIncomingBalanceAndTurnovers.QuantityExpense,
-	R4031_GoodsInTransitIncomingBalanceAndTurnovers.QuantityOpeningBalance,
-	R4031_GoodsInTransitIncomingBalanceAndTurnovers.QuantityReceipt,
-	R4031_GoodsInTransitIncomingBalanceAndTurnovers.QuantityTurnover,
-	R4031_GoodsInTransitIncomingBalanceAndTurnovers.Recorder
+	"R4031B_GoodsInTransitIncoming" AS RegisterName,
+	R4031B_GoodsInTransitIncomingBalanceAndTurnovers.Store,
+	R4031B_GoodsInTransitIncomingBalanceAndTurnovers.Basis,
+	R4031B_GoodsInTransitIncomingBalanceAndTurnovers.ItemKey,
+	R4031B_GoodsInTransitIncomingBalanceAndTurnovers.QuantityClosingBalance,
+	R4031B_GoodsInTransitIncomingBalanceAndTurnovers.QuantityExpense,
+	R4031B_GoodsInTransitIncomingBalanceAndTurnovers.QuantityOpeningBalance,
+	R4031B_GoodsInTransitIncomingBalanceAndTurnovers.QuantityReceipt,
+	R4031B_GoodsInTransitIncomingBalanceAndTurnovers.QuantityTurnover,
+	R4031B_GoodsInTransitIncomingBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R4031_GoodsInTransitIncoming.BalanceAndTurnovers(,, Recorder,,) AS
-		R4031_GoodsInTransitIncomingBalanceAndTurnovers</query>
+	AccumulationRegister.R4031B_GoodsInTransitIncoming.BalanceAndTurnovers(,, Recorder,,) AS
+		R4031B_GoodsInTransitIncomingBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R4032_GoodsInTransitOutgoing</name>
+			<name>R4032B_GoodsInTransitOutgoing</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>ItemKey</dataPath>
 				<field>ItemKey</field>
@@ -4580,22 +4426,22 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R4032_GoodsInTransitOutgoing" AS RegisterName,
-	R4032_GoodsInTransitOutgoingBalanceAndTurnovers.Store,
-	R4032_GoodsInTransitOutgoingBalanceAndTurnovers.Basis,
-	R4032_GoodsInTransitOutgoingBalanceAndTurnovers.ItemKey,
-	R4032_GoodsInTransitOutgoingBalanceAndTurnovers.QuantityClosingBalance,
-	R4032_GoodsInTransitOutgoingBalanceAndTurnovers.QuantityExpense,
-	R4032_GoodsInTransitOutgoingBalanceAndTurnovers.QuantityOpeningBalance,
-	R4032_GoodsInTransitOutgoingBalanceAndTurnovers.QuantityReceipt,
-	R4032_GoodsInTransitOutgoingBalanceAndTurnovers.QuantityTurnover,
-	R4032_GoodsInTransitOutgoingBalanceAndTurnovers.Recorder
+	"R4032B_GoodsInTransitOutgoing" AS RegisterName,
+	R4032B_GoodsInTransitOutgoingBalanceAndTurnovers.Store,
+	R4032B_GoodsInTransitOutgoingBalanceAndTurnovers.Basis,
+	R4032B_GoodsInTransitOutgoingBalanceAndTurnovers.ItemKey,
+	R4032B_GoodsInTransitOutgoingBalanceAndTurnovers.QuantityClosingBalance,
+	R4032B_GoodsInTransitOutgoingBalanceAndTurnovers.QuantityExpense,
+	R4032B_GoodsInTransitOutgoingBalanceAndTurnovers.QuantityOpeningBalance,
+	R4032B_GoodsInTransitOutgoingBalanceAndTurnovers.QuantityReceipt,
+	R4032B_GoodsInTransitOutgoingBalanceAndTurnovers.QuantityTurnover,
+	R4032B_GoodsInTransitOutgoingBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R4032_GoodsInTransitOutgoing.BalanceAndTurnovers(,, Recorder,,) AS
-		R4032_GoodsInTransitOutgoingBalanceAndTurnovers</query>
+	AccumulationRegister.R4032B_GoodsInTransitOutgoing.BalanceAndTurnovers(,, Recorder,,) AS
+		R4032B_GoodsInTransitOutgoingBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R4033_GoodsReceiptSchedule</name>
+			<name>R4033B_GoodsReceiptSchedule</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>QuantityTurnover</dataPath>
 				<field>QuantityTurnover</field>
@@ -4681,24 +4527,24 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R4033_GoodsReceiptSchedule" AS RegisterName,
-	R4033_GoodsReceiptScheduleBalanceAndTurnovers.Company,
-	R4033_GoodsReceiptScheduleBalanceAndTurnovers.Basis,
-	R4033_GoodsReceiptScheduleBalanceAndTurnovers.Store,
-	R4033_GoodsReceiptScheduleBalanceAndTurnovers.ItemKey,
-	R4033_GoodsReceiptScheduleBalanceAndTurnovers.RowKey,
-	R4033_GoodsReceiptScheduleBalanceAndTurnovers.QuantityClosingBalance,
-	R4033_GoodsReceiptScheduleBalanceAndTurnovers.QuantityExpense,
-	R4033_GoodsReceiptScheduleBalanceAndTurnovers.QuantityOpeningBalance,
-	R4033_GoodsReceiptScheduleBalanceAndTurnovers.QuantityReceipt,
-	R4033_GoodsReceiptScheduleBalanceAndTurnovers.QuantityTurnover,
-	R4033_GoodsReceiptScheduleBalanceAndTurnovers.Recorder
+	"R4033B_GoodsReceiptSchedule" AS RegisterName,
+	R4033B_GoodsReceiptScheduleBalanceAndTurnovers.Company,
+	R4033B_GoodsReceiptScheduleBalanceAndTurnovers.Basis,
+	R4033B_GoodsReceiptScheduleBalanceAndTurnovers.Store,
+	R4033B_GoodsReceiptScheduleBalanceAndTurnovers.ItemKey,
+	R4033B_GoodsReceiptScheduleBalanceAndTurnovers.RowKey,
+	R4033B_GoodsReceiptScheduleBalanceAndTurnovers.QuantityClosingBalance,
+	R4033B_GoodsReceiptScheduleBalanceAndTurnovers.QuantityExpense,
+	R4033B_GoodsReceiptScheduleBalanceAndTurnovers.QuantityOpeningBalance,
+	R4033B_GoodsReceiptScheduleBalanceAndTurnovers.QuantityReceipt,
+	R4033B_GoodsReceiptScheduleBalanceAndTurnovers.QuantityTurnover,
+	R4033B_GoodsReceiptScheduleBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R4033_GoodsReceiptSchedule.BalanceAndTurnovers(,, Recorder,,) AS
-		R4033_GoodsReceiptScheduleBalanceAndTurnovers</query>
+	AccumulationRegister.R4033B_GoodsReceiptSchedule.BalanceAndTurnovers(,, Recorder,,) AS
+		R4033B_GoodsReceiptScheduleBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R4034_GoodsShipmentSchedule</name>
+			<name>R4034B_GoodsShipmentSchedule</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>ItemKey</dataPath>
 				<field>ItemKey</field>
@@ -4784,24 +4630,24 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R4034_GoodsShipmentSchedule" AS RegisterName,
-	R4034_GoodsShipmentScheduleBalanceAndTurnovers.Company,
-	R4034_GoodsShipmentScheduleBalanceAndTurnovers.Basis,
-	R4034_GoodsShipmentScheduleBalanceAndTurnovers.Store,
-	R4034_GoodsShipmentScheduleBalanceAndTurnovers.ItemKey,
-	R4034_GoodsShipmentScheduleBalanceAndTurnovers.RowKey,
-	R4034_GoodsShipmentScheduleBalanceAndTurnovers.QuantityClosingBalance,
-	R4034_GoodsShipmentScheduleBalanceAndTurnovers.QuantityExpense,
-	R4034_GoodsShipmentScheduleBalanceAndTurnovers.QuantityOpeningBalance,
-	R4034_GoodsShipmentScheduleBalanceAndTurnovers.QuantityReceipt,
-	R4034_GoodsShipmentScheduleBalanceAndTurnovers.QuantityTurnover,
-	R4034_GoodsShipmentScheduleBalanceAndTurnovers.Recorder
+	"R4034B_GoodsShipmentSchedule" AS RegisterName,
+	R4034B_GoodsShipmentScheduleBalanceAndTurnovers.Company,
+	R4034B_GoodsShipmentScheduleBalanceAndTurnovers.Basis,
+	R4034B_GoodsShipmentScheduleBalanceAndTurnovers.Store,
+	R4034B_GoodsShipmentScheduleBalanceAndTurnovers.ItemKey,
+	R4034B_GoodsShipmentScheduleBalanceAndTurnovers.RowKey,
+	R4034B_GoodsShipmentScheduleBalanceAndTurnovers.QuantityClosingBalance,
+	R4034B_GoodsShipmentScheduleBalanceAndTurnovers.QuantityExpense,
+	R4034B_GoodsShipmentScheduleBalanceAndTurnovers.QuantityOpeningBalance,
+	R4034B_GoodsShipmentScheduleBalanceAndTurnovers.QuantityReceipt,
+	R4034B_GoodsShipmentScheduleBalanceAndTurnovers.QuantityTurnover,
+	R4034B_GoodsShipmentScheduleBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R4034_GoodsShipmentSchedule.BalanceAndTurnovers(,, Recorder,,) AS
-		R4034_GoodsShipmentScheduleBalanceAndTurnovers</query>
+	AccumulationRegister.R4034B_GoodsShipmentSchedule.BalanceAndTurnovers(,, Recorder,,) AS
+		R4034B_GoodsShipmentScheduleBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R4050_StockInventory</name>
+			<name>R4050B_StockInventory</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>QuantityClosingBalance</dataPath>
 				<field>QuantityClosingBalance</field>
@@ -4873,19 +4719,19 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R4050_StockInventory" AS RegisterName,
-	R4050_StockInventoryBalanceAndTurnovers.Company,
-	R4050_StockInventoryBalanceAndTurnovers.Store,
-	R4050_StockInventoryBalanceAndTurnovers.ItemKey,
-	R4050_StockInventoryBalanceAndTurnovers.QuantityClosingBalance,
-	R4050_StockInventoryBalanceAndTurnovers.QuantityExpense,
-	R4050_StockInventoryBalanceAndTurnovers.QuantityOpeningBalance,
-	R4050_StockInventoryBalanceAndTurnovers.QuantityReceipt,
-	R4050_StockInventoryBalanceAndTurnovers.QuantityTurnover,
-	R4050_StockInventoryBalanceAndTurnovers.Recorder
+	"R4050B_StockInventory" AS RegisterName,
+	R4050B_StockInventoryBalanceAndTurnovers.Company,
+	R4050B_StockInventoryBalanceAndTurnovers.Store,
+	R4050B_StockInventoryBalanceAndTurnovers.ItemKey,
+	R4050B_StockInventoryBalanceAndTurnovers.QuantityClosingBalance,
+	R4050B_StockInventoryBalanceAndTurnovers.QuantityExpense,
+	R4050B_StockInventoryBalanceAndTurnovers.QuantityOpeningBalance,
+	R4050B_StockInventoryBalanceAndTurnovers.QuantityReceipt,
+	R4050B_StockInventoryBalanceAndTurnovers.QuantityTurnover,
+	R4050B_StockInventoryBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R4050_StockInventory.BalanceAndTurnovers(,, Recorder,,) AS
-		R4050_StockInventoryBalanceAndTurnovers</query>
+	AccumulationRegister.R4050B_StockInventory.BalanceAndTurnovers(,, Recorder,,) AS
+		R4050B_StockInventoryBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
 			<name>R4051_StockAdjustmentAsWrite</name>
@@ -4934,18 +4780,18 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R4051_StockAdjustmentAsWriteOff" AS RegisterName,
-	R4051_StockAdjustmentAsWriteOffTurnovers.Store,
-	R4051_StockAdjustmentAsWriteOffTurnovers.Basis,
-	R4051_StockAdjustmentAsWriteOffTurnovers.ItemKey,
-	R4051_StockAdjustmentAsWriteOffTurnovers.QuantityTurnover,
-	R4051_StockAdjustmentAsWriteOffTurnovers.Recorder
+	"R4051T_StockAdjustmentAsWriteOff" AS RegisterName,
+	R4051T_StockAdjustmentAsWriteOffTurnovers.Store,
+	R4051T_StockAdjustmentAsWriteOffTurnovers.Basis,
+	R4051T_StockAdjustmentAsWriteOffTurnovers.ItemKey,
+	R4051T_StockAdjustmentAsWriteOffTurnovers.QuantityTurnover,
+	R4051T_StockAdjustmentAsWriteOffTurnovers.Recorder
 FROM
-	AccumulationRegister.R4051_StockAdjustmentAsWriteOff.Turnovers(,, Recorder,) AS
-		R4051_StockAdjustmentAsWriteOffTurnovers</query>
+	AccumulationRegister.R4051T_StockAdjustmentAsWriteOff.Turnovers(,, Recorder,) AS
+		R4051T_StockAdjustmentAsWriteOffTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R5010_ReconciliationStatement</name>
+			<name>R5010B_ReconciliationStatement</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>AmountTurnover</dataPath>
 				<field>AmountTurnover</field>
@@ -5017,22 +4863,22 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R5010_ReconciliationStatement" AS RegisterName,
-	R5010_ReconciliationStatementBalanceAndTurnovers.Currency,
-	R5010_ReconciliationStatementBalanceAndTurnovers.Company,
-	R5010_ReconciliationStatementBalanceAndTurnovers.LegalName,
-	R5010_ReconciliationStatementBalanceAndTurnovers.AmountClosingBalance,
-	R5010_ReconciliationStatementBalanceAndTurnovers.AmountExpense,
-	R5010_ReconciliationStatementBalanceAndTurnovers.AmountOpeningBalance,
-	R5010_ReconciliationStatementBalanceAndTurnovers.AmountReceipt,
-	R5010_ReconciliationStatementBalanceAndTurnovers.AmountTurnover,
-	R5010_ReconciliationStatementBalanceAndTurnovers.Recorder
+	"R5010B_ReconciliationStatement" AS RegisterName,
+	R5010B_ReconciliationStatementBalanceAndTurnovers.Currency,
+	R5010B_ReconciliationStatementBalanceAndTurnovers.Company,
+	R5010B_ReconciliationStatementBalanceAndTurnovers.LegalName,
+	R5010B_ReconciliationStatementBalanceAndTurnovers.AmountClosingBalance,
+	R5010B_ReconciliationStatementBalanceAndTurnovers.AmountExpense,
+	R5010B_ReconciliationStatementBalanceAndTurnovers.AmountOpeningBalance,
+	R5010B_ReconciliationStatementBalanceAndTurnovers.AmountReceipt,
+	R5010B_ReconciliationStatementBalanceAndTurnovers.AmountTurnover,
+	R5010B_ReconciliationStatementBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R5010_ReconciliationStatement.BalanceAndTurnovers(,, Recorder,,) AS
-		R5010_ReconciliationStatementBalanceAndTurnovers</query>
+	AccumulationRegister.R5010B_ReconciliationStatement.BalanceAndTurnovers(,, Recorder,,) AS
+		R5010B_ReconciliationStatementBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R5011_PartnersAging</name>
+			<name>R5011B_PartnersAging</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>AmountOpeningBalance</dataPath>
 				<field>AmountOpeningBalance</field>
@@ -5125,24 +4971,24 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R5011_PartnersAging" AS RegisterName,
-	R5011_PartnersAgingBalanceAndTurnovers.Company,
-	R5011_PartnersAgingBalanceAndTurnovers.Currency,
-	R5011_PartnersAgingBalanceAndTurnovers.Agreement,
-	R5011_PartnersAgingBalanceAndTurnovers.Partner,
-	R5011_PartnersAgingBalanceAndTurnovers.Invoice,
-	R5011_PartnersAgingBalanceAndTurnovers.PaymentDate,
-	R5011_PartnersAgingBalanceAndTurnovers.AmountClosingBalance,
-	R5011_PartnersAgingBalanceAndTurnovers.AmountExpense,
-	R5011_PartnersAgingBalanceAndTurnovers.AmountOpeningBalance,
-	R5011_PartnersAgingBalanceAndTurnovers.AmountReceipt,
-	R5011_PartnersAgingBalanceAndTurnovers.AmountTurnover,
-	R5011_PartnersAgingBalanceAndTurnovers.Recorder
+	"R5011B_PartnersAging" AS RegisterName,
+	R5011B_PartnersAgingBalanceAndTurnovers.Company,
+	R5011B_PartnersAgingBalanceAndTurnovers.Currency,
+	R5011B_PartnersAgingBalanceAndTurnovers.Agreement,
+	R5011B_PartnersAgingBalanceAndTurnovers.Partner,
+	R5011B_PartnersAgingBalanceAndTurnovers.Invoice,
+	R5011B_PartnersAgingBalanceAndTurnovers.PaymentDate,
+	R5011B_PartnersAgingBalanceAndTurnovers.AmountClosingBalance,
+	R5011B_PartnersAgingBalanceAndTurnovers.AmountExpense,
+	R5011B_PartnersAgingBalanceAndTurnovers.AmountOpeningBalance,
+	R5011B_PartnersAgingBalanceAndTurnovers.AmountReceipt,
+	R5011B_PartnersAgingBalanceAndTurnovers.AmountTurnover,
+	R5011B_PartnersAgingBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R5011_PartnersAging.BalanceAndTurnovers(,, Recorder,,) AS R5011_PartnersAgingBalanceAndTurnovers</query>
+	AccumulationRegister.R5011B_PartnersAging.BalanceAndTurnovers(,, Recorder,,) AS R5011B_PartnersAgingBalanceAndTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R5021_Revenues</name>
+			<name>R5021T_Revenues</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>BusinessUnit</dataPath>
 				<field>BusinessUnit</field>
@@ -5216,21 +5062,21 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R5021_Revenues" AS RegisterName,
-	R5021_RevenuesTurnovers.Company,
-	R5021_RevenuesTurnovers.BusinessUnit,
-	R5021_RevenuesTurnovers.RevenueType,
-	R5021_RevenuesTurnovers.ItemKey,
-	R5021_RevenuesTurnovers.Currency,
-	R5021_RevenuesTurnovers.AdditionalAnalytic,
-	R5021_RevenuesTurnovers.CurrencyMovementType,
-	R5021_RevenuesTurnovers.AmountTurnover,
-	R5021_RevenuesTurnovers.Recorder
+	"R5021T_Revenues" AS RegisterName,
+	R5021T_RevenuesTurnovers.Company,
+	R5021T_RevenuesTurnovers.BusinessUnit,
+	R5021T_RevenuesTurnovers.RevenueType,
+	R5021T_RevenuesTurnovers.ItemKey,
+	R5021T_RevenuesTurnovers.Currency,
+	R5021T_RevenuesTurnovers.AdditionalAnalytic,
+	R5021T_RevenuesTurnovers.CurrencyMovementType,
+	R5021T_RevenuesTurnovers.AmountTurnover,
+	R5021T_RevenuesTurnovers.Recorder
 FROM
-	AccumulationRegister.R5021_Revenues.Turnovers(,, Recorder,) AS R5021_RevenuesTurnovers</query>
+	AccumulationRegister.R5021T_Revenues.Turnovers(,, Recorder,) AS R5021T_RevenuesTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R5022_Expenses</name>
+			<name>R5022T_Expenses</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>AdditionalAnalytic</dataPath>
 				<field>AdditionalAnalytic</field>
@@ -5304,21 +5150,21 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R5022_Expenses" AS RegisterName,
-	R5022_ExpensesTurnovers.Company,
-	R5022_ExpensesTurnovers.BusinessUnit,
-	R5022_ExpensesTurnovers.ExpenseType,
-	R5022_ExpensesTurnovers.ItemKey,
-	R5022_ExpensesTurnovers.Currency,
-	R5022_ExpensesTurnovers.AdditionalAnalytic,
-	R5022_ExpensesTurnovers.CurrencyMovementType,
-	R5022_ExpensesTurnovers.AmountTurnover,
-	R5022_ExpensesTurnovers.Recorder
+	"R5022T_Expenses" AS RegisterName,
+	R5022T_ExpensesTurnovers.Company,
+	R5022T_ExpensesTurnovers.BusinessUnit,
+	R5022T_ExpensesTurnovers.ExpenseType,
+	R5022T_ExpensesTurnovers.ItemKey,
+	R5022T_ExpensesTurnovers.Currency,
+	R5022T_ExpensesTurnovers.AdditionalAnalytic,
+	R5022T_ExpensesTurnovers.CurrencyMovementType,
+	R5022T_ExpensesTurnovers.AmountTurnover,
+	R5022T_ExpensesTurnovers.Recorder
 FROM
-	AccumulationRegister.R5022_Expenses.Turnovers(,, Recorder,) AS R5022_ExpensesTurnovers</query>
+	AccumulationRegister.R5022T_Expenses.Turnovers(,, Recorder,) AS R5022T_ExpensesTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
-			<name>R5041_TaxesPayable</name>
+			<name>R5041B_TaxesPayable</name>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>TaxAmountReceipt</dataPath>
 				<field>TaxAmountReceipt</field>
@@ -5427,24 +5273,24 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R5041_TaxesPayable" AS RegisterName,
-	R5041_TaxesPayableBalanceAndTurnovers.Company,
-	R5041_TaxesPayableBalanceAndTurnovers.Tax,
-	R5041_TaxesPayableBalanceAndTurnovers.TaxRate,
-	R5041_TaxesPayableBalanceAndTurnovers.TaxMovementType,
-	R5041_TaxesPayableBalanceAndTurnovers.TaxableAmountClosingBalance,
-	R5041_TaxesPayableBalanceAndTurnovers.TaxableAmountExpense,
-	R5041_TaxesPayableBalanceAndTurnovers.TaxableAmountOpeningBalance,
-	R5041_TaxesPayableBalanceAndTurnovers.TaxableAmountReceipt,
-	R5041_TaxesPayableBalanceAndTurnovers.TaxableAmountTurnover,
-	R5041_TaxesPayableBalanceAndTurnovers.TaxAmountClosingBalance,
-	R5041_TaxesPayableBalanceAndTurnovers.TaxAmountExpense,
-	R5041_TaxesPayableBalanceAndTurnovers.TaxAmountOpeningBalance,
-	R5041_TaxesPayableBalanceAndTurnovers.TaxAmountReceipt,
-	R5041_TaxesPayableBalanceAndTurnovers.TaxAmountTurnover,
-	R5041_TaxesPayableBalanceAndTurnovers.Recorder
+	"R5041B_TaxesPayable" AS RegisterName,
+	R5041B_TaxesPayableBalanceAndTurnovers.Company,
+	R5041B_TaxesPayableBalanceAndTurnovers.Tax,
+	R5041B_TaxesPayableBalanceAndTurnovers.TaxRate,
+	R5041B_TaxesPayableBalanceAndTurnovers.TaxMovementType,
+	R5041B_TaxesPayableBalanceAndTurnovers.TaxableAmountClosingBalance,
+	R5041B_TaxesPayableBalanceAndTurnovers.TaxableAmountExpense,
+	R5041B_TaxesPayableBalanceAndTurnovers.TaxableAmountOpeningBalance,
+	R5041B_TaxesPayableBalanceAndTurnovers.TaxableAmountReceipt,
+	R5041B_TaxesPayableBalanceAndTurnovers.TaxableAmountTurnover,
+	R5041B_TaxesPayableBalanceAndTurnovers.TaxAmountClosingBalance,
+	R5041B_TaxesPayableBalanceAndTurnovers.TaxAmountExpense,
+	R5041B_TaxesPayableBalanceAndTurnovers.TaxAmountOpeningBalance,
+	R5041B_TaxesPayableBalanceAndTurnovers.TaxAmountReceipt,
+	R5041B_TaxesPayableBalanceAndTurnovers.TaxAmountTurnover,
+	R5041B_TaxesPayableBalanceAndTurnovers.Recorder
 FROM
-	AccumulationRegister.R5041_TaxesPayable.BalanceAndTurnovers(,, Recorder,,) AS R5041_TaxesPayableBalanceAndTurnovers</query>
+	AccumulationRegister.R5041B_TaxesPayable.BalanceAndTurnovers(,, Recorder,,) AS R5041B_TaxesPayableBalanceAndTurnovers</query>
 		</item>
 	</dataSet>
 	<totalField>
@@ -5498,10 +5344,6 @@ FROM
 	<totalField>
 		<dataPath>OrderedQuantityTurnover</dataPath>
 		<expression>Sum(OrderedQuantityTurnover)</expression>
-	</totalField>
-	<totalField>
-		<dataPath>PurchaseAmountTurnover</dataPath>
-		<expression>Sum(PurchaseAmountTurnover)</expression>
 	</totalField>
 	<totalField>
 		<dataPath>PurchaseQuantityTurnover</dataPath>

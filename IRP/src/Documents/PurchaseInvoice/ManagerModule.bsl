@@ -357,7 +357,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 #Region NewRegistersPosting	
 	SetRegisters(Tables);
 	
-	Tables.R1031_ReceiptInvoicing.Columns.Add("RecordType");
+	Tables.R1031B_ReceiptInvoicing.Columns.Add("RecordType");
 	
 	Query = New Query;
 	Query.TempTablesManager = New TempTablesManager();
@@ -2871,23 +2871,23 @@ EndProcedure
 
 Procedure SetQueryTexts(QueryArray)
 	QueryArray.Add(SetItemListVT());
-	QueryArray.Add(SetPostingTables_R1001_Purchases());
-	QueryArray.Add(SetPostingTables_R1005_PurchaseSpecialOffers());
-	QueryArray.Add(SetPostingTables_R1011_PurchaseOrdersReceipt());
-	QueryArray.Add(SetPostingTables_R1012_PurchaseOrdersInvoiceClosing());
-	QueryArray.Add(SetPostingTables_R1020_AdvancesToVendors());
-	QueryArray.Add(SetPostingTables_R1021_VendorsTransactions());
-	QueryArray.Add(SetPostingTables_R1031_ReceiptInvoicing());
-	QueryArray.Add(SetPostingTables_R1040_TaxesOutgoing());
-	QueryArray.Add(SetPostingTables_R2013_SalesOrdersProcurement());
-	QueryArray.Add(SetPostingTables_R4010_ActualStocks());
-	QueryArray.Add(SetPostingTables_R4011_FreeStocks());
-	QueryArray.Add(SetPostingTables_R4017_InternalSupplyRequestProcurement());
-	QueryArray.Add(SetPostingTables_R4031_GoodsInTransitIncoming());
-	QueryArray.Add(SetPostingTables_R4032_GoodsInTransitOutgoing());
-	QueryArray.Add(SetPostingTables_R4050_StockInventory());
-	QueryArray.Add(SetPostingTables_R5010_ReconciliationStatement());
-	QueryArray.Add(SetPostingTables_R5022_Expenses());
+	QueryArray.Add(SetPostingTables_R1001T_Purchases());
+	QueryArray.Add(SetPostingTables_R1005T_PurchaseSpecialOffers());
+	QueryArray.Add(SetPostingTables_R1011B_PurchaseOrdersReceipt());
+	QueryArray.Add(SetPostingTables_R1012B_PurchaseOrdersInvoiceClosing());
+	QueryArray.Add(SetPostingTables_R1020B_AdvancesToVendors());
+	QueryArray.Add(SetPostingTables_R1021B_VendorsTransactions());
+	QueryArray.Add(SetPostingTables_R1031B_ReceiptInvoicing());
+	QueryArray.Add(SetPostingTables_R1040B_TaxesOutgoing());
+	QueryArray.Add(SetPostingTables_R2013T_SalesOrdersProcurement());
+	QueryArray.Add(SetPostingTables_R4010B_ActualStocks());
+	QueryArray.Add(SetPostingTables_R4011B_FreeStocks());
+	QueryArray.Add(SetPostingTables_R4017B_InternalSupplyRequestProcurement());
+	QueryArray.Add(SetPostingTables_R4031B_GoodsInTransitIncoming());
+	QueryArray.Add(SetPostingTables_R4032B_GoodsInTransitOutgoing());
+	QueryArray.Add(SetPostingTables_R4050B_StockInventory());
+	QueryArray.Add(SetPostingTables_R5010B_ReconciliationStatement());
+	QueryArray.Add(SetPostingTables_R5022T_Expenses());
 EndProcedure
 
 Procedure GetLockDataSource(DataMapWithLockFields, DocumentDataTables)
@@ -2906,103 +2906,103 @@ EndProcedure
 
 Procedure SetPostingDataTables(PostingDataTables, Parameters)
 
-	Settings = New Structure("RegisterName", "R1001_Purchases");
+	Settings = New Structure("RegisterName", "R1001T_Purchases");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 
-	Settings = New Structure("RegisterName", "R1005_PurchaseSpecialOffers");
+	Settings = New Structure("RegisterName", "R1005T_PurchaseSpecialOffers");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 	
-	Settings = New Structure("RegisterName", "R1011_PurchaseOrdersReceipt");
+	Settings = New Structure("RegisterName", "R1011B_PurchaseOrdersReceipt");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 	
-	Settings = New Structure("RegisterName", "R1012_PurchaseOrdersInvoiceClosing");
+	Settings = New Structure("RegisterName", "R1012B_PurchaseOrdersInvoiceClosing");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 
-	Settings = New Structure("RegisterName", "R1020_AdvancesToVendors");
+	Settings = New Structure("RegisterName", "R1020B_AdvancesToVendors");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);		
 	
-	Settings = New Structure("RegisterName", "R1021_VendorsTransactions");
+	Settings = New Structure("RegisterName", "R1021B_VendorsTransactions");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 		
-	Settings = New Structure("RegisterName", "R1031_ReceiptInvoicing");
+	Settings = New Structure("RegisterName", "R1031B_ReceiptInvoicing");
 //	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 
-	Settings = New Structure("RegisterName", "R1040_TaxesOutgoing");
+	Settings = New Structure("RegisterName", "R1040B_TaxesOutgoing");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 	
-	Settings = New Structure("RegisterName", "R2013_SalesOrdersProcurement");
+	Settings = New Structure("RegisterName", "R2013T_SalesOrdersProcurement");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 	
-	Settings = New Structure("RegisterName", "R4010_ActualStocks");
+	Settings = New Structure("RegisterName", "R4010B_ActualStocks");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);	
 	
-	Settings = New Structure("RegisterName", "R4011_FreeStocks");
+	Settings = New Structure("RegisterName", "R4011B_FreeStocks");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 	
-	Settings = New Structure("RegisterName", "R4017_InternalSupplyRequestProcurement");
+	Settings = New Structure("RegisterName", "R4017B_InternalSupplyRequestProcurement");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 	
-	Settings = New Structure("RegisterName", "R4031_GoodsInTransitIncoming");
+	Settings = New Structure("RegisterName", "R4031B_GoodsInTransitIncoming");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 	
-	Settings = New Structure("RegisterName", "R4032_GoodsInTransitOutgoing");
+	Settings = New Structure("RegisterName", "R4032B_GoodsInTransitOutgoing");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 	
-	Settings = New Structure("RegisterName", "R4050_StockInventory");
+	Settings = New Structure("RegisterName", "R4050B_StockInventory");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 
-	Settings = New Structure("RegisterName", "R5010_ReconciliationStatement");
+	Settings = New Structure("RegisterName", "R5010B_ReconciliationStatement");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 
-	Settings = New Structure("RegisterName", "R5022_Expenses");
+	Settings = New Structure("RegisterName", "R5022T_Expenses");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
@@ -3095,74 +3095,90 @@ Function SetItemListVT()
 		|FROM
 		|	Document.PurchaseInvoice.GoodsReceipts AS PurchaseInvoiceGoodsReceipts
 		|WHERE
-		|	PurchaseInvoiceGoodsReceipts.Ref = &Ref";
+		|	PurchaseInvoiceGoodsReceipts.Ref = &Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	PurchaseInvoiceTaxList.Ref.Company AS Company,
+		|	PurchaseInvoiceTaxList.Tax AS Tax,
+		|	PurchaseInvoiceTaxList.TaxRate AS TaxRate,
+		|	PurchaseInvoiceTaxList.Amount + PurchaseInvoiceTaxList.ManualAmount AS TaxAmount,
+		|	PurchaseInvoiceItemList.NetAmount AS TaxableAmount
+		|INTO Taxes
+		|FROM
+		|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
+		|		LEFT JOIN Document.PurchaseInvoice.TaxList AS PurchaseInvoiceTaxList
+		|		ON PurchaseInvoiceItemList.Key = PurchaseInvoiceTaxList.Key";
 EndFunction
 
-Function SetPostingTables_R1001_Purchases()
+Function SetPostingTables_R1001T_Purchases()
 	Return
-		"SELECT *
-		|INTO R1001_Purchases
+		"SELECT 
+		|VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|*
+		|INTO R1001T_Purchases
 		|FROM
 		|	DocData AS QueryTable
 		|WHERE TRUE";
 
 EndFunction
 
-Function SetPostingTables_R1005_PurchaseSpecialOffers()
+Function SetPostingTables_R1005T_PurchaseSpecialOffers()
 	Return
 		"SELECT *
-		|INTO R1005_PurchaseSpecialOffers
+		|INTO R1005T_PurchaseSpecialOffers
 		|FROM
 		|	OffersInfo AS QueryTable
-		|WHERE FALSE";
+		|WHERE TRUE";
 
 EndFunction
 
-Function SetPostingTables_R1011_PurchaseOrdersReceipt()
+Function SetPostingTables_R1011B_PurchaseOrdersReceipt()
 	Return
 		"SELECT
 		|	QueryTable.PurchaseOrder AS Order,
 		|	*
-		|INTO R1011_PurchaseOrdersReceipt
+		|INTO R1011B_PurchaseOrdersReceipt
 		|FROM
 		|	DocData AS QueryTable
 		|WHERE NOT QueryTable.UseGoodsReceipt AND QueryTable.UsePurchaseOrder";
 
 EndFunction
 
-Function SetPostingTables_R1012_PurchaseOrdersInvoiceClosing()
+Function SetPostingTables_R1012B_PurchaseOrdersInvoiceClosing()
 	Return
 		"SELECT 
 		|	QueryTable.PurchaseOrder AS Order,
 		|	*
-		|INTO R1012_PurchaseOrdersInvoiceClosing
+		|INTO R1012B_PurchaseOrdersInvoiceClosing
 		|FROM
 		|	DocData AS QueryTable
 		|WHERE QueryTable.UsePurchaseOrder";
 
 EndFunction
 
-Function SetPostingTables_R1020_AdvancesToVendors()
+Function SetPostingTables_R1020B_AdvancesToVendors()
 	Return
 		"SELECT *
-		|INTO R1020_AdvancesToVendors
+		|INTO R1020B_AdvancesToVendors
 		|FROM
 		|	DocData AS QueryTable
 		|WHERE FALSE";
 
 EndFunction
 
-Function SetPostingTables_R1021_VendorsTransactions()
+Function SetPostingTables_R1021B_VendorsTransactions()
 	Return
 		"SELECT *
-		|INTO R1021_VendorsTransactions
+		|INTO R1021B_VendorsTransactions
 		|FROM
 		|	DocData AS QueryTable
 		|WHERE FALSE";
 
 EndFunction
 
-Function SetPostingTables_R1031_ReceiptInvoicing()
+Function SetPostingTables_R1031B_ReceiptInvoicing()
 	Return
 		"SELECT 
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
@@ -3171,7 +3187,7 @@ Function SetPostingTables_R1031_ReceiptInvoicing()
 		|	QueryTable.Company,
 		|	QueryTable.Period,
 		|	QueryTable.ItemKey
-		|INTO R1031_ReceiptInvoicing
+		|INTO R1031B_ReceiptInvoicing
 		|FROM
 		|	DocData AS QueryTable
 		|WHERE QueryTable.UseGoodsReceipt AND NOT QueryTable.GoodsReceiptExists
@@ -3193,105 +3209,110 @@ Function SetPostingTables_R1031_ReceiptInvoicing()
 
 EndFunction
 
-Function SetPostingTables_R1040_TaxesOutgoing()
+Function SetPostingTables_R1040B_TaxesOutgoing()
 	Return
 		"SELECT *
-		|INTO R1040_TaxesOutgoing
+		|INTO R1040B_TaxesOutgoing
+		|FROM
+		|	Taxes AS QueryTable
+		|WHERE TRUE";
+
+EndFunction
+
+Function SetPostingTables_R2013T_SalesOrdersProcurement()
+	Return
+		"SELECT
+		|	QueryTable.Quantity AS PurchaseQuantity,
+		|	QueryTable.SalesOrder AS Order,
+		|	*
+		|INTO R2013T_SalesOrdersProcurement
+		|FROM
+		|	DocData AS QueryTable
+		|WHERE
+		|	NOT QueryTable.IsService
+		|	AND NOT QueryTable.SalesOrder = Value(Document.SalesOrder.EmptyRef)";
+
+EndFunction
+
+Function SetPostingTables_R4010B_ActualStocks()
+	Return
+		"SELECT *
+		|INTO R4010B_ActualStocks
+		|FROM
+		|	DocData AS QueryTable
+		|WHERE NOT QueryTable.IsService AND NOT QueryTable.UseGoodsReceipt";
+
+EndFunction
+
+Function SetPostingTables_R4011B_FreeStocks()
+	Return
+		"SELECT *
+		|INTO R4011B_FreeStocks
+		|FROM
+		|	DocData AS QueryTable
+		|WHERE  NOT QueryTable.IsService AND NOT QueryTable.UseGoodsReceipt";
+
+EndFunction
+
+Function SetPostingTables_R4017B_InternalSupplyRequestProcurement()
+	Return
+		"SELECT *
+		|INTO R4017B_InternalSupplyRequestProcurement
+		|FROM
+		|	DocData AS QueryTable
+		|WHERE NOT QueryTable.IsService
+		|	AND NOT QueryTable.InternalSupplyRequest = Value(Document.InternalSupplyRequest.EmptyRef)";
+
+EndFunction
+
+Function SetPostingTables_R4031B_GoodsInTransitIncoming()
+	Return
+		"SELECT *
+		|INTO R4031B_GoodsInTransitIncoming
 		|FROM
 		|	DocData AS QueryTable
 		|WHERE FALSE";
 
 EndFunction
 
-Function SetPostingTables_R2013_SalesOrdersProcurement()
+Function SetPostingTables_R4032B_GoodsInTransitOutgoing()
 	Return
 		"SELECT *
-		|INTO R2013_SalesOrdersProcurement
+		|INTO R4032B_GoodsInTransitOutgoing
 		|FROM
 		|	DocData AS QueryTable
 		|WHERE FALSE";
 
 EndFunction
 
-Function SetPostingTables_R4010_ActualStocks()
+Function SetPostingTables_R4050B_StockInventory()
 	Return
 		"SELECT *
-		|INTO R4010_ActualStocks
+		|INTO R4050B_StockInventory
 		|FROM
 		|	DocData AS QueryTable
 		|WHERE FALSE";
 
 EndFunction
 
-Function SetPostingTables_R4011_FreeStocks()
+Function SetPostingTables_R5010B_ReconciliationStatement()
 	Return
 		"SELECT *
-		|INTO R4011_FreeStocks
+		|INTO R5010B_ReconciliationStatement
 		|FROM
 		|	DocData AS QueryTable
 		|WHERE FALSE";
 
 EndFunction
 
-Function SetPostingTables_R4017_InternalSupplyRequestProcurement()
+Function SetPostingTables_R5022T_Expenses()
 	Return
 		"SELECT *
-		|INTO R4017_InternalSupplyRequestProcurement
+		|INTO R5022T_Expenses
 		|FROM
 		|	DocData AS QueryTable
 		|WHERE FALSE";
 
 EndFunction
-
-Function SetPostingTables_R4031_GoodsInTransitIncoming()
-	Return
-		"SELECT *
-		|INTO R4031_GoodsInTransitIncoming
-		|FROM
-		|	DocData AS QueryTable
-		|WHERE FALSE";
-
-EndFunction
-
-Function SetPostingTables_R4032_GoodsInTransitOutgoing()
-	Return
-		"SELECT *
-		|INTO R4032_GoodsInTransitOutgoing
-		|FROM
-		|	DocData AS QueryTable
-		|WHERE FALSE";
-
-EndFunction
-
-Function SetPostingTables_R4050_StockInventory()
-	Return
-		"SELECT *
-		|INTO R4050_StockInventory
-		|FROM
-		|	DocData AS QueryTable
-		|WHERE FALSE";
-
-EndFunction
-
-Function SetPostingTables_R5010_ReconciliationStatement()
-	Return
-		"SELECT *
-		|INTO R5010_ReconciliationStatement
-		|FROM
-		|	DocData AS QueryTable
-		|WHERE FALSE";
-
-EndFunction
-
-Function SetPostingTables_R5022_Expenses()
-	Return
-		"SELECT *
-		|INTO R5022_Expenses
-		|FROM
-		|	DocData AS QueryTable
-		|WHERE FALSE";
-
-EndFunction
-
 
 #EndRegion

@@ -670,13 +670,13 @@ EndProcedure
 
 Procedure SetQueryTexts(QueryArray)
 	QueryArray.Add(SetItemListVT());
-	QueryArray.Add(SetPostingTables_R1010_PurchaseOrders());
-	QueryArray.Add(SetPostingTables_R1011_PurchaseOrdersReceipt());
-	QueryArray.Add(SetPostingTables_R1012_PurchaseOrdersInvoiceClosing());
-	QueryArray.Add(SetPostingTables_R1014_CanceledPurchaseOrders());
-	QueryArray.Add(SetPostingTables_R2013_SalesOrdersProcurement());
-	QueryArray.Add(SetPostingTables_R4016_InternalSupplyRequestOrdering());
-	QueryArray.Add(SetPostingTables_R4033_GoodsReceiptSchedule());
+	QueryArray.Add(SetPostingTables_R1010T_PurchaseOrders());
+	QueryArray.Add(SetPostingTables_R1011B_PurchaseOrdersReceipt());
+	QueryArray.Add(SetPostingTables_R1012B_PurchaseOrdersInvoiceClosing());
+	QueryArray.Add(SetPostingTables_R1014T_CanceledPurchaseOrders());
+	QueryArray.Add(SetPostingTables_R2013T_SalesOrdersProcurement());
+	QueryArray.Add(SetPostingTables_R4016B_InternalSupplyRequestOrdering());
+	QueryArray.Add(SetPostingTables_R4033B_GoodsReceiptSchedule());
 
 EndProcedure
 
@@ -696,43 +696,43 @@ EndProcedure
 
 Procedure SetPostingDataTables(PostingDataTables, Parameters)
 
-	Settings = New Structure("RegisterName", "R1010_PurchaseOrders");
+	Settings = New Structure("RegisterName", "R1010T_PurchaseOrders");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 
-	Settings = New Structure("RegisterName", "R1011_PurchaseOrdersReceipt");
+	Settings = New Structure("RegisterName", "R1011B_PurchaseOrdersReceipt");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 	
-	Settings = New Structure("RegisterName", "R1012_PurchaseOrdersInvoiceClosing");
+	Settings = New Structure("RegisterName", "R1012B_PurchaseOrdersInvoiceClosing");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 	
-	Settings = New Structure("RegisterName", "R1014_CanceledPurchaseOrders");
+	Settings = New Structure("RegisterName", "R1014T_CanceledPurchaseOrders");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 
-	Settings = New Structure("RegisterName", "R2013_SalesOrdersProcurement");
+	Settings = New Structure("RegisterName", "R2013T_SalesOrdersProcurement");
 	Settings.Insert("RecordType", AccumulationRecordType.Expense);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);		
 	
-	Settings = New Structure("RegisterName", "R4016_InternalSupplyRequestOrdering");
+	Settings = New Structure("RegisterName", "R4016B_InternalSupplyRequestOrdering");
 	Settings.Insert("RecordType", AccumulationRecordType.Expense);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords[Settings.RegisterName], Settings);
 		
-	Settings = New Structure("RegisterName", "R4033_GoodsReceiptSchedule");
+	Settings = New Structure("RegisterName", "R4033B_GoodsReceiptSchedule");
 	Settings.Insert("RecordType", AccumulationRecordType.Receipt);
 	Settings.Insert("RecordSet", Parameters.DocumentDataTables[Settings.RegisterName]);
 	Settings.Insert("WriteInTransaction", True);
@@ -774,20 +774,20 @@ Function SetItemListVT()
 		|	PurchaseOrderItems.Ref = &Ref";
 EndFunction
 
-Function SetPostingTables_R1010_PurchaseOrders()
+Function SetPostingTables_R1010T_PurchaseOrders()
 	Return
 		"SELECT *
-		|INTO R1010_PurchaseOrders
+		|INTO R1010T_PurchaseOrders
 		|FROM
 		|	DocData AS QueryTable
 		|WHERE NOT QueryTable.isCanceled";
 
 EndFunction
 
-Function SetPostingTables_R1011_PurchaseOrdersReceipt()
+Function SetPostingTables_R1011B_PurchaseOrdersReceipt()
 	Return
 		"SELECT *
-		|INTO R1011_PurchaseOrdersReceipt
+		|INTO R1011B_PurchaseOrdersReceipt
 		|FROM
 		|	DocData AS QueryTable
 		|WHERE NOT QueryTable.isCanceled
@@ -795,33 +795,33 @@ Function SetPostingTables_R1011_PurchaseOrdersReceipt()
 
 EndFunction
 
-Function SetPostingTables_R1012_PurchaseOrdersInvoiceClosing()
+Function SetPostingTables_R1012B_PurchaseOrdersInvoiceClosing()
 	Return
 		"SELECT *
-		|INTO R1012_PurchaseOrdersInvoiceClosing
+		|INTO R1012B_PurchaseOrdersInvoiceClosing
 		|FROM
 		|	DocData AS QueryTable
 		|WHERE NOT QueryTable.isCanceled";
 
 EndFunction
 
-Function SetPostingTables_R1014_CanceledPurchaseOrders()
+Function SetPostingTables_R1014T_CanceledPurchaseOrders()
 	Return
 		"SELECT *
-		|INTO R1014_CanceledPurchaseOrders
+		|INTO R1014T_CanceledPurchaseOrders
 		|FROM
 		|	DocData AS QueryTable
 		|WHERE QueryTable.isCanceled";
 
 EndFunction
 
-Function SetPostingTables_R2013_SalesOrdersProcurement()
+Function SetPostingTables_R2013T_SalesOrdersProcurement()
 	Return
 		"SELECT
 		|	QueryTable.Quantity AS ReOrderedQuantity,
 		|	QueryTable.SalesOrder AS Order,
 		|	*
-		|INTO R2013_SalesOrdersProcurement
+		|INTO R2013T_SalesOrdersProcurement
 		|FROM
 		|	DocData AS QueryTable
 		|WHERE
@@ -831,13 +831,13 @@ Function SetPostingTables_R2013_SalesOrdersProcurement()
 
 EndFunction
 
-Function SetPostingTables_R4016_InternalSupplyRequestOrdering()
+Function SetPostingTables_R4016B_InternalSupplyRequestOrdering()
 	Return
 		"SELECT
 		|	QueryTable.Quantity AS Quantity,
 		|	QueryTable.InternalSupplyRequest AS InternalSupplyRequest,
 		|	*
-		|INTO R4016_InternalSupplyRequestOrdering
+		|INTO R4016B_InternalSupplyRequestOrdering
 		|FROM
 		|	DocData AS QueryTable
 		|WHERE
@@ -847,7 +847,7 @@ Function SetPostingTables_R4016_InternalSupplyRequestOrdering()
 
 EndFunction
 
-Function SetPostingTables_R4033_GoodsReceiptSchedule()
+Function SetPostingTables_R4033B_GoodsReceiptSchedule()
 	Return
 		"SELECT 
 		|	CASE WHEN QueryTable.DeliveryDate = DATETIME(1, 1, 1) THEN
@@ -858,7 +858,7 @@ Function SetPostingTables_R4033_GoodsReceiptSchedule()
 		|	QueryTable.Order AS Basis,
 		|*
 		|
-		|INTO R4033_GoodsReceiptSchedule
+		|INTO R4033B_GoodsReceiptSchedule
 		|FROM
 		|	DocData AS QueryTable
 		|WHERE NOT QueryTable.isCanceled AND NOT QueryTable.IsService

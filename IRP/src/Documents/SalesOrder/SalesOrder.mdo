@@ -77,15 +77,15 @@
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
   <registerRecords>AccumulationRegister.ShipmentConfirmationSchedule</registerRecords>
-  <registerRecords>AccumulationRegister.R2010_SalesOrders</registerRecords>
-  <registerRecords>AccumulationRegister.R2011_SalesOrdersShipment</registerRecords>
-  <registerRecords>AccumulationRegister.R2012_SalesOrdersInvoiceClosing</registerRecords>
-  <registerRecords>AccumulationRegister.R2013_SalesOrdersProcurement</registerRecords>
-  <registerRecords>AccumulationRegister.R2014_CanceledSalesOrders</registerRecords>
-  <registerRecords>AccumulationRegister.R4011_FreeStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R4012_StockReservation</registerRecords>
-  <registerRecords>AccumulationRegister.R4013_StockReservationPlanning</registerRecords>
-  <registerRecords>AccumulationRegister.R4034_GoodsShipmentSchedule</registerRecords>
+  <registerRecords>AccumulationRegister.R2010T_SalesOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
+  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
+  <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
+  <registerRecords>AccumulationRegister.R2014T_CanceledSalesOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
+  <registerRecords>AccumulationRegister.R4013B_StockReservationPlanning</registerRecords>
+  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

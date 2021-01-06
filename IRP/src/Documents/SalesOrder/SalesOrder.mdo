@@ -267,6 +267,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="dfff36bf-633a-4024-993c-19a27e4d6fd1">
+    <name>UseItemsShipmentScheduling</name>
+    <synonym>
+      <key>en</key>
+      <value>Use items shipment scheduling</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="da0b4929-44ad-4c0f-a6f4-ef6de3bf7bf4">
     <name>DocumentForm</name>
     <synonym>

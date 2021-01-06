@@ -157,6 +157,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Parameters.IsReposting = False;
 	
+#Region NewRegistersPosting	
+	PostingServer.SetRegisters(Tables, Ref);
+	QueryArray = GetQueryTexts();
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray);
+#EndRegion	
+
 	Return Tables;
 EndFunction
 
@@ -1483,6 +1489,10 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	InventoryBalance = 
 	AccumulationRegisters.InventoryBalance.GetLockFields(DocumentDataTables.InventoryBalance);
 	DataMapWithLockFields.Insert(InventoryBalance.RegisterName, InventoryBalance.LockInfo);
+
+#Region NewRegistersPosting	
+	PostingServer.GetLockDataSource(DataMapWithLockFields, DocumentDataTables);
+#EndRegion	
 	
 	Return DataMapWithLockFields;
 EndFunction
@@ -1568,6 +1578,10 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.InventoryBalance,
 			Parameters.IsReposting));
+			
+#Region NewRegistersPosting
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+#EndRegion		
 	
 	Return PostingDataTables;
 EndFunction
@@ -1655,3 +1669,164 @@ EndProcedure
 
 #EndRegion
 
+#Region NewRegistersPosting
+
+Function GetQueryTexts()
+	QueryArray = New Array;
+	QueryArray.Add(ItemList());
+	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
+	QueryArray.Add(R1031B_ReceiptInvoicing());
+	QueryArray.Add(R2013T_SalesOrdersProcurement());
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4017B_InternalSupplyRequestProcurement());
+	QueryArray.Add(R4021B_StockTransferOrdersReceipt());
+	QueryArray.Add(R4033B_GoodsReceiptSchedule());
+	Return QueryArray;
+EndFunction
+
+Function ItemList()
+	Return
+		"SELECT
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Store AS Store,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.ReceiptBasis AS ReceiptBasis,
+		|	ItemList.Quantity AS UnitQuantity,
+		|	ItemList.QuantityInBaseUnit AS Quantity,
+		|	ItemList.Unit,
+		|	ItemList.Ref.Date AS Period,
+		|	ItemList.Ref AS GoodsReceipt,
+		|	ItemList.Key AS RowKey,
+		|	ItemList.SalesOrder AS SalesOrder,
+		|	NOT ItemList.SalesOrder = Value(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
+		|	ItemList.SalesInvoice AS SalesInvoice,
+		|	NOT ItemList.SalesInvoice = Value(Document.SalesInvoice.EmptyRef) AS SalesInvoiceExists,
+		|	ItemList.PurchaseOrder AS PurchaseOrder,
+		|	NOT ItemList.PurchaseOrder = Value(Document.PurchaseOrder.EmptyRef) AS PurchaseOrderExists,
+		|	ItemList.PurchaseInvoice AS PurchaseInvoice,
+		|	NOT ItemList.PurchaseInvoice = Value(Document.PurchaseInvoice.EmptyRef) AS PurchaseInvoiceExists,
+		|	ItemList.InternalSupplyRequest AS InternalSupplyRequest,
+		|	NOT ItemList.InternalSupplyRequest = Value(Document.InternalSupplyRequest.EmptyRef) AS InternalSupplyRequestExists,
+		|	ItemList.InventoryTransferOrder AS InventoryTransferOrder,
+		|	NOT ItemList.InventoryTransferOrder = Value(Document.InventoryTransferOrder.EmptyRef) AS InventoryTransferOrderExists,
+		|	ItemList.InventoryTransfer AS InventoryTransfer,
+		|	NOT ItemList.InventoryTransfer = Value(Document.InventoryTransfer.EmptyRef) AS InventoryTransferExists,
+		|	ItemList.SalesReturn AS SalesReturn,
+		|	NOT ItemList.SalesReturn = Value(Document.SalesReturn.EmptyRef) AS SalesReturnExists,
+		|	ItemList.SalesReturnOrder AS SalesReturnOrder,
+		|	NOT ItemList.SalesReturnOrder = Value(Document.SalesReturnOrder.EmptyRef) AS SalesReturnOrderExists
+		|INTO ItemList
+		|FROM
+		|	Document.GoodsReceipt.ItemList AS ItemList
+		|WHERE
+		|	ItemList.Ref = &Ref";
+EndFunction
+
+Function R1011B_PurchaseOrdersReceipt()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	QueryTable.PurchaseOrder AS Order,
+		|	*
+		|INTO R1011B_PurchaseOrdersReceipt
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE QueryTable.PurchaseOrderExists";
+
+EndFunction
+
+Function R1031B_ReceiptInvoicing()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	QueryTable.GoodsReceipt AS Basis,
+		|	QueryTable.Quantity AS Quantity,
+		|	QueryTable.Company,
+		|	QueryTable.Period,
+		|	QueryTable.ItemKey
+		|INTO R1031B_ReceiptInvoicing
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE NOT QueryTable.PurchaseInvoiceExists
+		|
+		|UNION ALL
+		|
+		|SELECT 
+		|	VALUE(AccumulationRecordType.Expense),
+		|	QueryTable.PurchaseInvoice,
+		|	QueryTable.Quantity,
+		|	QueryTable.Company,
+		|	QueryTable.Period,
+		|	QueryTable.ItemKey
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE QueryTable.PurchaseInvoiceExists";
+
+EndFunction
+
+Function R2013T_SalesOrdersProcurement()
+	Return
+		"SELECT
+		|	QueryTable.Quantity AS ReceiptQuantity,
+		|	QueryTable.SalesOrder AS Order,
+		|	*
+		|INTO R2013T_SalesOrdersProcurement
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE
+		|	QueryTable.SalesOrderExists";
+
+EndFunction
+
+Function R4010B_ActualStocks()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R4010B_ActualStocks
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE TRUE";
+
+EndFunction
+
+Function R4017B_InternalSupplyRequestProcurement()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	*
+		|INTO R4017B_InternalSupplyRequestProcurement
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE QueryTable.InternalSupplyRequestExists";
+
+EndFunction
+
+Function R4021B_StockTransferOrdersReceipt()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	QueryTable.InventoryTransferOrder AS Order,
+		|	*
+		|INTO R4021B_StockTransferOrdersReceipt
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE QueryTable.InventoryTransferOrderExists";
+
+EndFunction
+
+Function R4033B_GoodsReceiptSchedule()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	QueryTable.PurchaseOrder AS Basis,
+		|	*
+		|INTO R4033B_GoodsReceiptSchedule
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE QueryTable.PurchaseOrderExists
+		|	AND QueryTable.PurchaseOrder.UseItemsReceiptScheduling";
+
+EndFunction
+
+#EndRegion

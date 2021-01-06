@@ -646,18 +646,18 @@ EndProcedure
 
 Function GetQueryTexts()
 	QueryArray = New Array;
-	QueryArray.Add(SetItemListVT());
-	QueryArray.Add(SetPostingTables_R1010T_PurchaseOrders());
-	QueryArray.Add(SetPostingTables_R1011B_PurchaseOrdersReceipt());
-	QueryArray.Add(SetPostingTables_R1012B_PurchaseOrdersInvoiceClosing());
-	QueryArray.Add(SetPostingTables_R1014T_CanceledPurchaseOrders());
-	QueryArray.Add(SetPostingTables_R2013T_SalesOrdersProcurement());
-	QueryArray.Add(SetPostingTables_R4016B_InternalSupplyRequestOrdering());
-	QueryArray.Add(SetPostingTables_R4033B_GoodsReceiptSchedule());
+	QueryArray.Add(ItemList());
+	QueryArray.Add(R1010T_PurchaseOrders());
+	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
+	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
+	QueryArray.Add(R1014T_CanceledPurchaseOrders());
+	QueryArray.Add(R2013T_SalesOrdersProcurement());
+	QueryArray.Add(R4016B_InternalSupplyRequestOrdering());
+	QueryArray.Add(R4033B_GoodsReceiptSchedule());
 	Return QueryArray;
 EndFunction
 
-Function SetItemListVT()
+Function ItemList()
 
 	Return
 		"SELECT
@@ -683,60 +683,61 @@ Function SetItemListVT()
 		|	PurchaseOrderItems.Cancel AS IsCanceled,
 		|	PurchaseOrderItems.CancelReason,
 		|	PurchaseOrderItems.TotalAmount AS Amount,
-		|	PurchaseOrderItems.NetAmount
-		|INTO DocData
+		|	PurchaseOrderItems.NetAmount,
+		|	PurchaseOrderItems.Ref.UseItemsReceiptScheduling AS UseItemsReceiptScheduling
+		|INTO ItemList
 		|FROM
 		|	Document.PurchaseOrder.ItemList AS PurchaseOrderItems
 		|WHERE
 		|	PurchaseOrderItems.Ref = &Ref";
 EndFunction
 
-Function SetPostingTables_R1010T_PurchaseOrders()
+Function R1010T_PurchaseOrders()
 	Return
 		"SELECT *
 		|INTO R1010T_PurchaseOrders
 		|FROM
-		|	DocData AS QueryTable
+		|	ItemList AS QueryTable
 		|WHERE NOT QueryTable.isCanceled";
 
 EndFunction
 
-Function SetPostingTables_R1011B_PurchaseOrdersReceipt()
+Function R1011B_PurchaseOrdersReceipt()
 	Return
 		"SELECT 
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	*
 		|INTO R1011B_PurchaseOrdersReceipt
 		|FROM
-		|	DocData AS QueryTable
+		|	ItemList AS QueryTable
 		|WHERE NOT QueryTable.isCanceled
 		|	AND NOT QueryTable.IsService";
 
 EndFunction
 
-Function SetPostingTables_R1012B_PurchaseOrdersInvoiceClosing()
+Function R1012B_PurchaseOrdersInvoiceClosing()
 	Return
 		"SELECT 
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	*
 		|INTO R1012B_PurchaseOrdersInvoiceClosing
 		|FROM
-		|	DocData AS QueryTable
+		|	ItemList AS QueryTable
 		|WHERE NOT QueryTable.isCanceled";
 
 EndFunction
 
-Function SetPostingTables_R1014T_CanceledPurchaseOrders()
+Function R1014T_CanceledPurchaseOrders()
 	Return
 		"SELECT *
 		|INTO R1014T_CanceledPurchaseOrders
 		|FROM
-		|	DocData AS QueryTable
+		|	ItemList AS QueryTable
 		|WHERE QueryTable.isCanceled";
 
 EndFunction
 
-Function SetPostingTables_R2013T_SalesOrdersProcurement()
+Function R2013T_SalesOrdersProcurement()
 	Return
 		"SELECT
 		|	QueryTable.Quantity AS ReOrderedQuantity,
@@ -744,7 +745,7 @@ Function SetPostingTables_R2013T_SalesOrdersProcurement()
 		|	*
 		|INTO R2013T_SalesOrdersProcurement
 		|FROM
-		|	DocData AS QueryTable
+		|	ItemList AS QueryTable
 		|WHERE
 		|	NOT QueryTable.isCanceled
 		|	AND NOT QueryTable.IsService
@@ -752,7 +753,7 @@ Function SetPostingTables_R2013T_SalesOrdersProcurement()
 
 EndFunction
 
-Function SetPostingTables_R4016B_InternalSupplyRequestOrdering()
+Function R4016B_InternalSupplyRequestOrdering()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
@@ -761,7 +762,7 @@ Function SetPostingTables_R4016B_InternalSupplyRequestOrdering()
 		|	*
 		|INTO R4016B_InternalSupplyRequestOrdering
 		|FROM
-		|	DocData AS QueryTable
+		|	ItemList AS QueryTable
 		|WHERE
 		|	NOT QueryTable.isCanceled
 		|	AND NOT QueryTable.IsService
@@ -769,7 +770,7 @@ Function SetPostingTables_R4016B_InternalSupplyRequestOrdering()
 
 EndFunction
 
-Function SetPostingTables_R4033B_GoodsReceiptSchedule()
+Function R4033B_GoodsReceiptSchedule()
 	Return
 		"SELECT 
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
@@ -783,9 +784,10 @@ Function SetPostingTables_R4033B_GoodsReceiptSchedule()
 		|
 		|INTO R4033B_GoodsReceiptSchedule
 		|FROM
-		|	DocData AS QueryTable
-		|WHERE NOT QueryTable.isCanceled AND NOT QueryTable.IsService
-		|	AND QueryTable.SalesOrder = Value(Document.SalesOrder.EmptyRef)";
+		|	ItemList AS QueryTable
+		|WHERE NOT QueryTable.isCanceled 
+		|	AND NOT QueryTable.IsService 
+		|	AND QueryTable.UseItemsReceiptScheduling";
 
 EndFunction
 

@@ -234,6 +234,21 @@
     <createOnInput>Use</createOnInput>
     <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="18f464f0-9cba-437d-a0ef-3cec8a56039e">
+    <name>UseItemsReceiptScheduling</name>
+    <synonym>
+      <key>en</key>
+      <value>Use items receipt scheduling</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="8f595946-9ad8-46e0-bc8c-85fe1da258a5">
     <name>DocumentForm</name>
     <synonym>

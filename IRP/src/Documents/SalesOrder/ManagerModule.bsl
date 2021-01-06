@@ -1420,20 +1420,20 @@ EndProcedure
 
 Function GetQueryTexts()
 	QueryArray = New Array;
-	QueryArray.Add(SetItemListVT());
-	QueryArray.Add(SetPostingTables_R2010T_SalesOrders());
-	QueryArray.Add(SetPostingTables_R2011B_SalesOrdersShipment());
-	QueryArray.Add(SetPostingTables_R2012B_SalesOrdersInvoiceClosing());
-	QueryArray.Add(SetPostingTables_R2013T_SalesOrdersProcurement());
-	QueryArray.Add(SetPostingTables_R2014T_CanceledSalesOrders());
-	QueryArray.Add(SetPostingTables_R4011B_FreeStocks());
-	QueryArray.Add(SetPostingTables_R4012B_StockReservation());
-	QueryArray.Add(SetPostingTables_R4013B_StockReservationPlanning());
-	QueryArray.Add(SetPostingTables_R4034B_GoodsShipmentSchedule());
+	QueryArray.Add(ItemList());
+	QueryArray.Add(R2010T_SalesOrders());
+	QueryArray.Add(R2011B_SalesOrdersShipment());
+	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
+	QueryArray.Add(R2013T_SalesOrdersProcurement());
+	QueryArray.Add(R2014T_CanceledSalesOrders());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4012B_StockReservation());
+	QueryArray.Add(R4013B_StockReservationPlanning());
+	QueryArray.Add(R4034B_GoodsShipmentSchedule());
 	Return QueryArray;
 EndFunction
 
-Function SetItemListVT()
+Function ItemList()
 
 	Return
 		"SELECT
@@ -1458,111 +1458,112 @@ Function SetItemListVT()
 		|	SalesOrderItemList.Ref.Currency AS Currency,
 		|	SalesOrderItemList.Cancel AS IsCanceled,
 		|	SalesOrderItemList.CancelReason,
-		|	SalesOrderItemList.NetAmount
-		|INTO DocData
+		|	SalesOrderItemList.NetAmount,
+		|	SalesOrderItemList.Ref.UseItemsShipmentScheduling AS UseItemsShipmentScheduling
+		|INTO ItemList
 		|FROM
 		|	Document.SalesOrder.ItemList AS SalesOrderItemList
 		|WHERE
 		|	SalesOrderItemList.Ref = &Ref";
 EndFunction
 
-Function SetPostingTables_R2010T_SalesOrders()
+Function R2010T_SalesOrders()
 	Return
 		"SELECT *
 		|INTO R2010T_SalesOrders
 		|FROM
-		|	DocData AS QueryTable
+		|	ItemList AS QueryTable
 		|WHERE NOT QueryTable.isCanceled";
 
 EndFunction
 
-Function SetPostingTables_R2011B_SalesOrdersShipment()
+Function R2011B_SalesOrdersShipment()
 	Return
 		"SELECT 
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	*
 		|INTO R2011B_SalesOrdersShipment
 		|FROM
-		|	DocData AS QueryTable
+		|	ItemList AS QueryTable
 		|WHERE NOT QueryTable.isCanceled
 		|	AND NOT QueryTable.IsService";
 
 EndFunction
 
-Function SetPostingTables_R2012B_SalesOrdersInvoiceClosing()
+Function R2012B_SalesOrdersInvoiceClosing()
 	Return
 		"SELECT 
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	*
 		|INTO R2012B_SalesOrdersInvoiceClosing
 		|FROM
-		|	DocData AS QueryTable
+		|	ItemList AS QueryTable
 		|WHERE NOT QueryTable.isCanceled";
 
 EndFunction
 
-Function SetPostingTables_R2013T_SalesOrdersProcurement()
+Function R2013T_SalesOrdersProcurement()
 	Return
 		"SELECT 
 		|QueryTable.Quantity AS OrderedQuantity,
 		|*
 		|INTO R2013T_SalesOrdersProcurement
 		|FROM
-		|	DocData AS QueryTable
+		|	ItemList AS QueryTable
 		|WHERE NOT QueryTable.isCanceled AND NOT QueryTable.IsService
 		|	AND QueryTable.IsProcurementMethod_Purchase";
 
 EndFunction
 
-Function SetPostingTables_R2014T_CanceledSalesOrders()
+Function R2014T_CanceledSalesOrders()
 	Return
 		"SELECT *
 		|INTO R2014T_CanceledSalesOrders
 		|FROM
-		|	DocData AS QueryTable
+		|	ItemList AS QueryTable
 		|WHERE QueryTable.isCanceled";
 
 EndFunction
 
-Function SetPostingTables_R4011B_FreeStocks()
+Function R4011B_FreeStocks()
 	Return
 		"SELECT 
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	*
 		|INTO R4011B_FreeStocks
 		|FROM
-		|	DocData AS QueryTable
+		|	ItemList AS QueryTable
 		|WHERE NOT QueryTable.isCanceled AND NOT QueryTable.IsService
 		|	AND QueryTable.IsProcurementMethod_Stock";
 
 EndFunction
 
-Function SetPostingTables_R4012B_StockReservation()
+Function R4012B_StockReservation()
 	Return
 		"SELECT 
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	*
 		|INTO R4012B_StockReservation
 		|FROM
-		|	DocData AS QueryTable
+		|	ItemList AS QueryTable
 		|WHERE  NOT QueryTable.isCanceled AND NOT QueryTable.IsService
 		|	AND QueryTable.IsProcurementMethod_Stock";
 
 EndFunction
 
-Function SetPostingTables_R4013B_StockReservationPlanning()
+Function R4013B_StockReservationPlanning()
 	Return
 		"SELECT 
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	*
 		|INTO R4013B_StockReservationPlanning
 		|FROM
-		|	DocData AS QueryTable
+		|	ItemList AS QueryTable
 		|WHERE FALSE";
 
 EndFunction
 
-Function SetPostingTables_R4034B_GoodsShipmentSchedule()
+Function R4034B_GoodsShipmentSchedule()
 	Return
 		"SELECT 
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
@@ -1576,9 +1577,11 @@ Function SetPostingTables_R4034B_GoodsShipmentSchedule()
 		|
 		|INTO R4034B_GoodsShipmentSchedule
 		|FROM
-		|	DocData AS QueryTable
-		|WHERE NOT QueryTable.isCanceled AND NOT QueryTable.IsService
-		|	AND QueryTable.IsProcurementMethod_Stock";
+		|	ItemList AS QueryTable
+		|WHERE NOT QueryTable.isCanceled 
+		|	AND NOT QueryTable.IsService
+		|	AND QueryTable.IsProcurementMethod_Stock
+		|	AND QueryTable.UseItemsShipmentScheduling";
 
 EndFunction
 

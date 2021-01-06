@@ -419,7 +419,7 @@ FROM
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
-	"R1005_PurchaseSpecialOffers" AS RegisterName,
+	"R1005T_PurchaseSpecialOffers" AS RegisterName,
 	R1005_PurchaseSpecialOffersTurnovers.Company AS Company,
 	R1005_PurchaseSpecialOffersTurnovers.CurrencyMovementType AS CurrencyMovementType,
 	R1005_PurchaseSpecialOffersTurnovers.Currency AS Currency,
@@ -430,7 +430,7 @@ FROM
 	R1005_PurchaseSpecialOffersTurnovers.OffersAmountTurnover AS OffersAmountTurnover,
 	R1005_PurchaseSpecialOffersTurnovers.Recorder
 FROM
-	AccumulationRegister.R1005_PurchaseSpecialOffers.Turnovers(,, Recorder,) AS R1005_PurchaseSpecialOffersTurnovers</query>
+	AccumulationRegister.R1005T_PurchaseSpecialOffers.Turnovers(,, Recorder,) AS R1005_PurchaseSpecialOffersTurnovers</query>
 		</item>
 		<item xsi:type="DataSetQuery">
 			<name>R1010T_PurchaseOrders</name>
@@ -488,16 +488,15 @@ FROM
 					<dcscom:dimension>true</dcscom:dimension>
 				</role>
 			</field>
-		R1005T_PurchaseSpecialOfferseldField">
-	R1005T_PurchaseSpecialOffersdataPath>
-	R1005T_PurchaseSpecialOffersld>
-	R1005T_PurchaseSpecialOfferslStringType">
-	R1005T_PurchaseSpecialOffers
-	R1005T_PurchaseSpecialOffers
-	R1005T_PurchaseSpecialOffersame</v8:content>
-	R1005T_PurchaseSpecialOffers
-	R1005T_PurchaseSpecialOffers
-	R1005T_PurchaseSpecialOffers
+							<dataPath>RegisterName</dataPath>
+				<field>RegisterName</field>
+				<title xsi:type="v8:LocalStringType">
+					<v8:item>
+						<v8:lang>en</v8:lang>
+						<v8:content>Register name</v8:content>
+					</v8:item>
+				</title>
+			</field>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>RecorderR1005T_PurchaseSpecialOffersR1005T_PurchaseSpecialOffers
 				<field>Recorder</field>

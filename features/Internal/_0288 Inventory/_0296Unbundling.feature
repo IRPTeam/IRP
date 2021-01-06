@@ -398,20 +398,26 @@ Scenario: _029612 create Unbundling (Store use Goods receipt and does not use Sh
 		And I save the window as "$$Unbundling0029612$$"
 		And Delay 5
 		And I click "Registrations report" button
+		And I select "Goods in transit incoming" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$Unbundling0029612$$'                 | ''            | ''       | ''          | ''           | ''                              | ''         | ''        |
-			| 'Document registrations records'        | ''            | ''       | ''          | ''           | ''                              | ''         | ''        |
-			| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''           | ''                              | ''         | ''        |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                              | ''         | ''        |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Receipt basis'                 | 'Item key' | 'Row key' |
-			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 07'   | '$$Unbundling0029612$$'         | 'XS/Blue'  | '*'       |
-			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 07'   | '$$Unbundling0029612$$'         | '36/Red'   | '*'       |
-			| ''                                      | ''            | ''       | ''          | ''           | ''                              | ''         | ''        |
-			| 'Register  "Stock reservation"'         | ''            | ''       | ''          | ''           | ''                              | ''         | ''        |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                              | ''         | ''        |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                      | ''         | ''        |
-			| ''                                      | 'Expense'     | '*'      | '2'         | 'Store 07'   | 'Bound Dress+Shirt/Dress+Shirt' | ''         | ''        |
-			| ''                                      | ''            | ''       | ''          | ''           | ''                              | ''         | ''        |
+			| '$$Unbundling0029612$$'                 | ''            | ''       | ''          | ''           | ''                      | ''         | ''        |
+			| 'Document registrations records'        | ''            | ''       | ''          | ''           | ''                      | ''         | ''        |
+			| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''           | ''                      | ''         | ''        |
+			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                      | ''         | ''        |
+			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Receipt basis'         | 'Item key' | 'Row key' |
+			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 07'   | '$$Unbundling0029612$$' | 'XS/Blue'  | '*'       |
+			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 07'   | '$$Unbundling0029612$$' | '36/Red'   | '*'       |
+		And I select "Stock reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''                              | '' | '' |
+			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                              | '' | '' |
+			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                      | '' | '' |
+			| ''                              | 'Expense'     | '*'      | '2'         | 'Store 07'   | 'Bound Dress+Shirt/Dress+Shirt' | '' | '' |
+		And I select "Stock balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 			| 'Register  "Stock balance"'             | ''            | ''       | ''          | ''           | ''                              | ''         | ''        |
 			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                              | ''         | ''        |
 			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                      | ''         | ''        |
@@ -459,21 +465,27 @@ Scenario: _029613 create Unbundling (Store use Shipment confirmation and does no
 		And I save the window as "$$Unbundling0029613$$"
 		And Delay 5
 		And I click "Registrations report" button
+		And I select "Goods in transit outgoing" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$Unbundling0029613$$'                 | ''            | ''       | ''          | ''           | ''                              | ''                              | ''        |
-			| 'Document registrations records'        | ''            | ''       | ''          | ''           | ''                              | ''                              | ''        |
-			| 'Register  "Goods in transit outgoing"' | ''            | ''       | ''          | ''           | ''                              | ''                              | ''        |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                              | ''                              | ''        |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Shipment basis'                | 'Item key'                      | 'Row key' |
-			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 08'   | '$$Unbundling0029613$$'         | 'Bound Dress+Shirt/Dress+Shirt' | '*'       |
-			| ''                                      | ''            | ''       | ''          | ''           | ''                              | ''                              | ''        |
-			| 'Register  "Stock reservation"'         | ''            | ''       | ''          | ''           | ''                              | ''                              | ''        |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                              | ''                              | ''        |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                      | ''                              | ''        |
-			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 08'   | 'XS/Blue'                       | ''                              | ''        |
-			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 08'   | '36/Red'                        | ''                              | ''        |
-			| ''                                      | 'Expense'     | '*'      | '2'         | 'Store 08'   | 'Bound Dress+Shirt/Dress+Shirt' | ''                              | ''        |
-			| ''                                      | ''            | ''       | ''          | ''           | ''                              | ''                              | ''        |
+			| '$$Unbundling0029613$$'                 | ''            | ''       | ''          | ''           | ''                      | ''                              | ''        |
+			| 'Document registrations records'        | ''            | ''       | ''          | ''           | ''                      | ''                              | ''        |
+			| 'Register  "Goods in transit outgoing"' | ''            | ''       | ''          | ''           | ''                      | ''                              | ''        |
+			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                      | ''                              | ''        |
+			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Shipment basis'        | 'Item key'                      | 'Row key' |
+			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 08'   | '$$Unbundling0029613$$' | 'Bound Dress+Shirt/Dress+Shirt' | '*'       |
+		And I select "Stock reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''                              | '' | '' |
+			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                              | '' | '' |
+			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                      | '' | '' |
+			| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 08'   | 'XS/Blue'                       | '' | '' |
+			| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 08'   | '36/Red'                        | '' | '' |
+			| ''                              | 'Expense'     | '*'      | '2'         | 'Store 08'   | 'Bound Dress+Shirt/Dress+Shirt' | '' | '' |
+		And I select "Stock balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 			| 'Register  "Stock balance"'             | ''            | ''       | ''          | ''           | ''                              | ''                              | ''        |
 			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                              | ''                              | ''        |
 			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                      | ''                              | ''        |
@@ -491,6 +503,8 @@ Scenario: _029612 check the output of the document movement report for Unbundlin
 		| '$$NumberUnBundling0029601$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
+		And I select "Stock reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 		| '$$UnBundling0029601$$'          | ''            | ''       | ''          | ''           | ''          |
 		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          |
@@ -502,7 +516,9 @@ Scenario: _029612 check the output of the document movement report for Unbundlin
 		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'L/Green'   |
 		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
 		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
-		| ''                               | ''            | ''       | ''          | ''           | ''          |
+		And I select "Stock balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Stock balance"'      | ''            | ''       | ''          | ''           | ''          |
 		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
 		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  |
@@ -521,6 +537,8 @@ Scenario: _029612 check the output of the document movement report for Unbundlin
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
+		And I select "Stock reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 		| '$$UnBundling0029601$$'          | ''            | ''       | ''          | ''           | ''          |
 		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          |
@@ -532,7 +550,9 @@ Scenario: _029612 check the output of the document movement report for Unbundlin
 		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'L/Green'   |
 		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
 		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
-		| ''                               | ''            | ''       | ''          | ''           | ''          |
+		And I select "Stock balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Stock balance"'      | ''            | ''       | ''          | ''           | ''          |
 		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
 		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  |
@@ -565,8 +585,10 @@ Scenario: _02961201 clear movements Unbundling and check that there is no moveme
 			| '$$NumberUnBundling0029601$$' |     
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select "Stock reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$UnBundling0029601$$'                  | ''            | ''       | ''          | ''           | ''          |
+		| '$$UnBundling0029601$$'          | ''            | ''       | ''          | ''           | ''          |
 		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          |
 		| 'Register  "Stock reservation"'  | ''            | ''       | ''          | ''           | ''          |
 		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
@@ -576,7 +598,9 @@ Scenario: _02961201 clear movements Unbundling and check that there is no moveme
 		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'L/Green'   |
 		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
 		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
-		| ''                               | ''            | ''       | ''          | ''           | ''          |
+		And I select "Stock balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Stock balance"'      | ''            | ''       | ''          | ''           | ''          |
 		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
 		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  |

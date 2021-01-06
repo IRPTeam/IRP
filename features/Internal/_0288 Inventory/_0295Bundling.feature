@@ -573,26 +573,34 @@ Scenario: _029519 create Bundling (Store use Goods receipt, does not use Shipmen
 		And I click the button named "FormPost"
 		And Delay 5
 		And I click "Registrations report" button
-		And "ResultTable" spreadsheet document contains lines by template:
-		| '$$Bundling0029519$$'                   | ''            | ''          | ''                                            | ''           | ''                    | ''                                            | ''        |
-		| 'Document registrations records'        | ''            | ''          | ''                                            | ''           | ''                    | ''                                            | ''        |
-		| 'Register  "Bundles content"'           | ''            | ''          | ''                                            | ''           | ''                    | ''                                            | ''        |
-		| ''                                      | 'Period'      | 'Resources' | 'Dimensions'                                  | ''           | ''                    | ''                                            | ''        |
-		| ''                                      | ''            | 'Quantity'  | 'Item key bundle'                             | 'Item key'   | ''                    | ''                                            | ''        |
-		| ''                                      | '*'           | '2'         | 'Skittles + Chewing gum/Skittles+Chewing gum' | 'Mint/Mango' | ''                    | ''                                            | ''        |
-		| ''                                      | '*'           | '2'         | 'Skittles + Chewing gum/Skittles+Chewing gum' | 'Fruit'      | ''                    | ''                                            | ''        |
-		| ''                                      | ''            | ''          | ''                                            | ''           | ''                    | ''                                            | ''        |
-		| 'Register  "Goods in transit incoming"' | ''            | ''          | ''                                            | ''           | ''                    | ''                                            | ''        |
-		| ''                                      | 'Record type' | 'Period'    | 'Resources'                                   | 'Dimensions' | ''                    | ''                                            | ''        |
-		| ''                                      | ''            | ''          | 'Quantity'                                    | 'Store'      | 'Receipt basis'       | 'Item key'                                    | 'Row key' |
-		| ''                                      | 'Receipt'     | '*'         | '7'                                           | 'Store 07'   | '$$Bundling0029519$$' | 'Skittles + Chewing gum/Skittles+Chewing gum' | '*'       |
-		| ''                                      | ''            | ''          | ''                                            | ''           | ''                    | ''                                            | ''        |
-		| 'Register  "Stock reservation"'         | ''            | ''          | ''                                            | ''           | ''                    | ''                                            | ''        |
-		| ''                                      | 'Record type' | 'Period'    | 'Resources'                                   | 'Dimensions' | ''                    | ''                                            | ''        |
-		| ''                                      | ''            | ''          | 'Quantity'                                    | 'Store'      | 'Item key'            | ''                                            | ''        |
-		| ''                                      | 'Expense'     | '*'         | '14'                                          | 'Store 07'   | 'Mint/Mango'          | ''                                            | ''        |
-		| ''                                      | 'Expense'     | '*'         | '14'                                          | 'Store 07'   | 'Fruit'               | ''                                            | ''        |
-		| ''                                      | ''            | ''          | ''                                            | ''           | ''                    | ''                                            | ''        |
+		And I select "Bundles content" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$Bundling0029519$$'            | ''       | ''          | ''                                            | ''           | '' | '' | '' |
+		| 'Document registrations records' | ''       | ''          | ''                                            | ''           | '' | '' | '' |
+		| 'Register  "Bundles content"'    | ''       | ''          | ''                                            | ''           | '' | '' | '' |
+		| ''                               | 'Period' | 'Resources' | 'Dimensions'                                  | ''           | '' | '' | '' |
+		| ''                               | ''       | 'Quantity'  | 'Item key bundle'                             | 'Item key'   | '' | '' | '' |
+		| ''                               | '*'      | '2'         | 'Skittles + Chewing gum/Skittles+Chewing gum' | 'Mint/Mango' | '' | '' | '' |
+		| ''                               | '*'      | '2'         | 'Skittles + Chewing gum/Skittles+Chewing gum' | 'Fruit'      | '' | '' | '' |
+		And I select "Goods in transit incoming" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''           | ''                    | ''                                            | ''        |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                    | ''                                            | ''        |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Receipt basis'       | 'Item key'                                    | 'Row key' |
+		| ''                                      | 'Receipt'     | '*'      | '7'         | 'Store 07'   | '$$Bundling0029519$$' | 'Skittles + Chewing gum/Skittles+Chewing gum' | '*'       |
+		And I select "Stock reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''           | '' | '' |
+		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''           | '' | '' |
+		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'   | '' | '' |
+		| ''                              | 'Expense'     | '*'      | '14'        | 'Store 07'   | 'Mint/Mango' | '' | '' |
+		| ''                              | 'Expense'     | '*'      | '14'        | 'Store 07'   | 'Fruit'      | '' | '' |
+		And I select "Stock balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Stock balance"'             | ''            | ''          | ''                                            | ''           | ''                    | ''                                            | ''        |
 		| ''                                      | 'Record type' | 'Period'    | 'Resources'                                   | 'Dimensions' | ''                    | ''                                            | ''        |
 		| ''                                      | ''            | ''          | 'Quantity'                                    | 'Store'      | 'Item key'            | ''                                            | ''        |
@@ -665,28 +673,36 @@ Scenario: _029520 create Bundling (Store use Shipment confirmation, does not use
 		And I click the button named "FormPost"
 		And Delay 5
 		And I click "Registrations report" button
+		And I select "Bundles content" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$Bundling0029520$$'                   | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
-			| 'Document registrations records'        | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
-			| 'Register  "Bundles content"'           | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
-			| ''                                      | 'Period'      | 'Resources' | 'Dimensions'                          | ''           | ''                                    | ''          | ''        |
-			| ''                                      | ''            | 'Quantity'  | 'Item key bundle'                     | 'Item key'   | ''                                    | ''          | ''        |
-			| ''                                      | '*'           | '2'         | 'Skittles + Chewing gum/Skittles+Chewing gum' | 'Mint/Mango'    | ''                                    | ''          | ''        |
-			| ''                                      | '*'           | '2'         | 'Skittles + Chewing gum/Skittles+Chewing gum' | 'Fruit'  | ''                                    | ''          | ''        |
-			| ''                                      | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
-			| 'Register  "Goods in transit outgoing"' | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
-			| ''                                      | 'Record type' | 'Period'    | 'Resources'                           | 'Dimensions' | ''                                    | ''          | ''        |
-			| ''                                      | ''            | ''          | 'Quantity'                            | 'Store'      | 'Shipment basis'                      | 'Item key'  | 'Row key' |
-			| ''                                      | 'Receipt'     | '*'         | '14'                                  | 'Store 08'   | '$$Bundling0029520$$'                 | 'Mint/Mango'   | '*'       |
-			| ''                                      | 'Receipt'     | '*'         | '14'                                  | 'Store 08'   | '$$Bundling0029520$$'                 | 'Fruit' | '*'       |
-			| ''                                      | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
-			| 'Register  "Stock reservation"'         | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
-			| ''                                      | 'Record type' | 'Period'    | 'Resources'                           | 'Dimensions' | ''                                    | ''          | ''        |
-			| ''                                      | ''            | ''          | 'Quantity'                            | 'Store'      | 'Item key'                            | ''          | ''        |
-			| ''                                      | 'Receipt'     | '*'         | '7'                                   | 'Store 08'   | 'Skittles + Chewing gum/Skittles+Chewing gum' | ''          | ''        |
-			| ''                                      | 'Expense'     | '*'         | '14'                                  | 'Store 08'   | 'Mint/Mango'                             | ''          | ''        |
-			| ''                                      | 'Expense'     | '*'         | '14'                                  | 'Store 08'   | 'Fruit'                           | ''          | ''        |
-			| ''                                      | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
+			| '$$Bundling0029520$$'            | ''       | ''          | ''                                            | ''           | '' | '' | '' |
+			| 'Document registrations records' | ''       | ''          | ''                                            | ''           | '' | '' | '' |
+			| 'Register  "Bundles content"'    | ''       | ''          | ''                                            | ''           | '' | '' | '' |
+			| ''                               | 'Period' | 'Resources' | 'Dimensions'                                  | ''           | '' | '' | '' |
+			| ''                               | ''       | 'Quantity'  | 'Item key bundle'                             | 'Item key'   | '' | '' | '' |
+			| ''                               | '*'      | '2'         | 'Skittles + Chewing gum/Skittles+Chewing gum' | 'Mint/Mango' | '' | '' | '' |
+			| ''                               | '*'      | '2'         | 'Skittles + Chewing gum/Skittles+Chewing gum' | 'Fruit'      | '' | '' | '' |
+		And I select "Goods in transit outgoing" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| 'Register  "Goods in transit outgoing"' | ''            | ''       | ''          | ''           | ''                    | ''           | ''        |
+			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                    | ''           | ''        |
+			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Shipment basis'      | 'Item key'   | 'Row key' |
+			| ''                                      | 'Receipt'     | '*'      | '14'        | 'Store 08'   | '$$Bundling0029520$$' | 'Mint/Mango' | '*'       |
+			| ''                                      | 'Receipt'     | '*'      | '14'        | 'Store 08'   | '$$Bundling0029520$$' | 'Fruit'      | '*'       |
+		And I select "Stock reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''                                            | '' | '' |
+			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                                            | '' | '' |
+			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                                    | '' | '' |
+			| ''                              | 'Receipt'     | '*'      | '7'         | 'Store 08'   | 'Skittles + Chewing gum/Skittles+Chewing gum' | '' | '' |
+			| ''                              | 'Expense'     | '*'      | '14'        | 'Store 08'   | 'Mint/Mango'                                  | '' | '' |
+			| ''                              | 'Expense'     | '*'      | '14'        | 'Store 08'   | 'Fruit'                                       | '' | '' |
+		And I select "Stock balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 			| 'Register  "Stock balance"'             | ''            | ''          | ''                                    | ''           | ''                                    | ''          | ''        |
 			| ''                                      | 'Record type' | 'Period'    | 'Resources'                           | 'Dimensions' | ''                                    | ''          | ''        |
 			| ''                                      | ''            | ''          | 'Quantity'                            | 'Store'      | 'Item key'                            | ''          | ''        |
@@ -704,22 +720,28 @@ Scenario: _029521 check the output of the document movement report for Bundling
 		| '$$NumberBundling0029501$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
-		And "ResultTable" spreadsheet document contains lines by template:
-		| '$$Bundling0029501$$'            | ''            | ''          | ''                          | ''           | ''                          |
-		| 'Document registrations records' | ''            | ''          | ''                          | ''           | ''                          |
-		| 'Register  "Bundles content"'    | ''            | ''          | ''                          | ''           | ''                          |
-		| ''                               | 'Period'      | 'Resources' | 'Dimensions'                | ''           | ''                          |
-		| ''                               | ''            | 'Quantity'  | 'Item key bundle'           | 'Item key'   | ''                          |
-		| ''                               | '*'           | '1'         | 'Scarf + Dress/Dress+Scarf' | 'XS/Blue'    | ''                          |
-		| ''                               | '*'           | '1'         | 'Scarf + Dress/Dress+Scarf' | 'XS/Red'     | ''                          |
-		| ''                               | ''            | ''          | ''                          | ''           | ''                          |
-		| 'Register  "Stock reservation"'  | ''            | ''          | ''                          | ''           | ''                          |
-		| ''                               | 'Record type' | 'Period'    | 'Resources'                 | 'Dimensions' | ''                          |
-		| ''                               | ''            | ''          | 'Quantity'                  | 'Store'      | 'Item key'                  |
-		| ''                               | 'Receipt'     | '*'         | '10'                        | 'Store 01'   | 'Scarf + Dress/Dress+Scarf' |
-		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Blue'                   |
-		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Red'                    |
-		| ''                               | ''            | ''          | ''                          | ''           | ''                          |
+		And I select "Bundles content" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| '$$Bundling0029501$$'            | ''       | ''          | ''                          | ''         | '' |
+		| 'Document registrations records' | ''       | ''          | ''                          | ''         | '' |
+		| 'Register  "Bundles content"'    | ''       | ''          | ''                          | ''         | '' |
+		| ''                               | 'Period' | 'Resources' | 'Dimensions'                | ''         | '' |
+		| ''                               | ''       | 'Quantity'  | 'Item key bundle'           | 'Item key' | '' |
+		| ''                               | '*'      | '1'         | 'Scarf + Dress/Dress+Scarf' | 'XS/Blue'  | '' |
+		| ''                               | '*'      | '1'         | 'Scarf + Dress/Dress+Scarf' | 'XS/Red'   | '' |
+		And I select "Stock reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''                          |
+		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                          |
+		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                  |
+		| ''                              | 'Receipt'     | '*'      | '10'        | 'Store 01'   | 'Scarf + Dress/Dress+Scarf' |
+		| ''                              | 'Expense'     | '*'      | '10'        | 'Store 01'   | 'XS/Blue'                   |
+		| ''                              | 'Expense'     | '*'      | '10'        | 'Store 01'   | 'XS/Red'                    |
+		And I select "Stock balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Stock balance"'      | ''            | ''          | ''                          | ''           | ''                          |
 		| ''                               | 'Record type' | 'Period'    | 'Resources'                 | 'Dimensions' | ''                          |
 		| ''                               | ''            | ''          | 'Quantity'                  | 'Store'      | 'Item key'                  |
@@ -737,21 +759,25 @@ Scenario: _029521 check the output of the document movement report for Bundling
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$Bundling0029501$$'            | ''            | ''          | ''                          | ''           | ''                          |
-		| 'Document registrations records' | ''            | ''          | ''                          | ''           | ''                          |
-		| 'Register  "Bundles content"'    | ''            | ''          | ''                          | ''           | ''                          |
-		| ''                               | 'Period'      | 'Resources' | 'Dimensions'                | ''           | ''                          |
-		| ''                               | ''            | 'Quantity'  | 'Item key bundle'           | 'Item key'   | ''                          |
-		| ''                               | '*'           | '1'         | 'Scarf + Dress/Dress+Scarf' | 'XS/Blue'    | ''                          |
-		| ''                               | '*'           | '1'         | 'Scarf + Dress/Dress+Scarf' | 'XS/Red'     | ''                          |
-		| ''                               | ''            | ''          | ''                          | ''           | ''                          |
-		| 'Register  "Stock reservation"'  | ''            | ''          | ''                          | ''           | ''                          |
-		| ''                               | 'Record type' | 'Period'    | 'Resources'                 | 'Dimensions' | ''                          |
-		| ''                               | ''            | ''          | 'Quantity'                  | 'Store'      | 'Item key'                  |
-		| ''                               | 'Receipt'     | '*'         | '10'                        | 'Store 01'   | 'Scarf + Dress/Dress+Scarf' |
-		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Blue'                   |
-		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Red'                    |
-		| ''                               | ''            | ''          | ''                          | ''           | ''                          |
+		| '$$Bundling0029501$$'            | ''       | ''          | ''                          | ''         | '' |
+		| 'Document registrations records' | ''       | ''          | ''                          | ''         | '' |
+		| 'Register  "Bundles content"'    | ''       | ''          | ''                          | ''         | '' |
+		| ''                               | 'Period' | 'Resources' | 'Dimensions'                | ''         | '' |
+		| ''                               | ''       | 'Quantity'  | 'Item key bundle'           | 'Item key' | '' |
+		| ''                               | '*'      | '1'         | 'Scarf + Dress/Dress+Scarf' | 'XS/Blue'  | '' |
+		| ''                               | '*'      | '1'         | 'Scarf + Dress/Dress+Scarf' | 'XS/Red'   | '' |
+		And I select "Stock reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''                          |
+		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                          |
+		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                  |
+		| ''                              | 'Receipt'     | '*'      | '10'        | 'Store 01'   | 'Scarf + Dress/Dress+Scarf' |
+		| ''                              | 'Expense'     | '*'      | '10'        | 'Store 01'   | 'XS/Blue'                   |
+		| ''                              | 'Expense'     | '*'      | '10'        | 'Store 01'   | 'XS/Red'                    |
+		And I select "Stock balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Stock balance"'      | ''            | ''          | ''                          | ''           | ''                          |
 		| ''                               | 'Record type' | 'Period'    | 'Resources'                 | 'Dimensions' | ''                          |
 		| ''                               | ''            | ''          | 'Quantity'                  | 'Store'      | 'Item key'                  |
@@ -784,22 +810,27 @@ Scenario: _02951901 clear movements Bundling and check that there is no movement
 			| '$$NumberBundling0029501$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$Bundling0029501$$'            | ''            | ''          | ''                          | ''           | ''                          |
-		| 'Document registrations records' | ''            | ''          | ''                          | ''           | ''                          |
-		| 'Register  "Bundles content"'    | ''            | ''          | ''                          | ''           | ''                          |
-		| ''                               | 'Period'      | 'Resources' | 'Dimensions'                | ''           | ''                          |
-		| ''                               | ''            | 'Quantity'  | 'Item key bundle'           | 'Item key'   | ''                          |
-		| ''                               | '*'           | '1'         | 'Scarf + Dress/Dress+Scarf' | 'XS/Blue'    | ''                          |
-		| ''                               | '*'           | '1'         | 'Scarf + Dress/Dress+Scarf' | 'XS/Red'     | ''                          |
-		| ''                               | ''            | ''          | ''                          | ''           | ''                          |
-		| 'Register  "Stock reservation"'  | ''            | ''          | ''                          | ''           | ''                          |
-		| ''                               | 'Record type' | 'Period'    | 'Resources'                 | 'Dimensions' | ''                          |
-		| ''                               | ''            | ''          | 'Quantity'                  | 'Store'      | 'Item key'                  |
-		| ''                               | 'Receipt'     | '*'         | '10'                        | 'Store 01'   | 'Scarf + Dress/Dress+Scarf' |
-		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Blue'                   |
-		| ''                               | 'Expense'     | '*'         | '10'                        | 'Store 01'   | 'XS/Red'                    |
-		| ''                               | ''            | ''          | ''                          | ''           | ''                          |
+		| '$$Bundling0029501$$'            | ''       | ''          | ''                          | ''         | '' |
+		| 'Document registrations records' | ''       | ''          | ''                          | ''         | '' |
+		| 'Register  "Bundles content"'    | ''       | ''          | ''                          | ''         | '' |
+		| ''                               | 'Period' | 'Resources' | 'Dimensions'                | ''         | '' |
+		| ''                               | ''       | 'Quantity'  | 'Item key bundle'           | 'Item key' | '' |
+		| ''                               | '*'      | '1'         | 'Scarf + Dress/Dress+Scarf' | 'XS/Blue'  | '' |
+		| ''                               | '*'      | '1'         | 'Scarf + Dress/Dress+Scarf' | 'XS/Red'   | '' |
+		And I select "Stock reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''                          |
+		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                          |
+		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                  |
+		| ''                              | 'Receipt'     | '*'      | '10'        | 'Store 01'   | 'Scarf + Dress/Dress+Scarf' |
+		| ''                              | 'Expense'     | '*'      | '10'        | 'Store 01'   | 'XS/Blue'                   |
+		| ''                              | 'Expense'     | '*'      | '10'        | 'Store 01'   | 'XS/Red'                    |
+		And I select "Stock balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Stock balance"'      | ''            | ''          | ''                          | ''           | ''                          |
 		| ''                               | 'Record type' | 'Period'    | 'Resources'                 | 'Dimensions' | ''                          |
 		| ''                               | ''            | ''          | 'Quantity'                  | 'Store'      | 'Item key'                  |

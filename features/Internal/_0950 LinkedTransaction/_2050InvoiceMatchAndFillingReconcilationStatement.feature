@@ -382,16 +382,20 @@ Scenario: _2050005 check the movements of the Invoice match document with the ve
 		And I save the value of "Number" field as "$$NumberInvoiceMatch2050005$$"
 	* Check movements
 		And I click "Registrations report" button
+		And I select "Advance to suppliers" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$InvoiceMatch2050005$$'             | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                       | ''                             | ''                             | ''                     |
-		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                       | ''                             | ''                             | ''                     |
-		| 'Register  "Advance to suppliers"'    | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                       | ''                             | ''                             | ''                     |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                           | ''             | ''             | ''                       | ''                             | 'Attributes'                   | ''                     |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Partner'                    | 'Legal name'   | 'Currency'     | 'Payment document'       | 'Multi currency movement type' | 'Deferred calculation'         | ''                     |
-		| ''                                    | 'Expense'     | '*'      | '171,2'    | 'Main Company' | 'Crystal'                    | 'Company Adel' | 'USD'          | '$$BankPayment2050001$$' | 'Reporting currency'           | 'No'                           | ''                     |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'                    | 'Company Adel' | 'TRY'          | '$$BankPayment2050001$$' | 'en description is empty'      | 'No'                           | ''                     |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal'                    | 'Company Adel' | 'TRY'          | '$$BankPayment2050001$$' | 'Local currency'               | 'No'                           | ''                     |
-		| ''                                    | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                       | ''                             | ''                             | ''                     |
+		| '$$InvoiceMatch2050005$$'          | ''            | ''       | ''          | ''             | ''        | ''             | ''         | ''                       | ''                             | ''                     | '' |
+		| 'Document registrations records'   | ''            | ''       | ''          | ''             | ''        | ''             | ''         | ''                       | ''                             | ''                     | '' |
+		| 'Register  "Advance to suppliers"' | ''            | ''       | ''          | ''             | ''        | ''             | ''         | ''                       | ''                             | ''                     | '' |
+		| ''                                 | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''        | ''             | ''         | ''                       | ''                             | 'Attributes'           | '' |
+		| ''                                 | ''            | ''       | 'Amount'    | 'Company'      | 'Partner' | 'Legal name'   | 'Currency' | 'Payment document'       | 'Multi currency movement type' | 'Deferred calculation' | '' |
+		| ''                                 | 'Expense'     | '*'      | '171,2'     | 'Main Company' | 'Crystal' | 'Company Adel' | 'USD'      | '$$BankPayment2050001$$' | 'Reporting currency'           | 'No'                   | '' |
+		| ''                                 | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal' | 'Company Adel' | 'TRY'      | '$$BankPayment2050001$$' | 'en description is empty'      | 'No'                   | '' |
+		| ''                                 | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Crystal' | 'Company Adel' | 'TRY'      | '$$BankPayment2050001$$' | 'Local currency'               | 'No'                   | '' |
+		And I select "Partner AP transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Partner AP transactions"' | ''            | ''       | ''          | ''             | ''                           | ''             | ''             | ''                       | ''                             | ''                             | ''                     |
 		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                           | ''             | ''             | ''                       | ''                             | ''                             | 'Attributes'           |
 		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'             | 'Partner'      | 'Legal name'   | 'Partner term'           | 'Currency'                     | 'Multi currency movement type' | 'Deferred calculation' |
@@ -463,16 +467,20 @@ Scenario: _2050006 check the movements of the Invoice match document with the cu
 		And I save the value of "Number" field as "$$NumberInvoiceMatch2050006$$"
 	* Check movements
 		And I click "Registrations report" button
+		And I select "Partner AR transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$InvoiceMatch2050006$$'             | ''            | ''       | ''          | ''             | ''                         | ''             | ''             | ''                         | ''                             | ''                             | ''                     |
-		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                         | ''             | ''             | ''                         | ''                             | ''                             | ''                     |
-		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                         | ''             | ''             | ''                         | ''                             | ''                             | ''                     |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''             | ''             | ''                         | ''                             | ''                             | 'Attributes'           |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'           | 'Partner'      | 'Legal name'   | 'Partner term'             | 'Currency'                     | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                    | 'Expense'     | '*'      | '171,2'    | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal'      | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'                          | 'Reporting currency'           | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal'      | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'                          | 'en description is empty'      | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal'      | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'                          | 'Local currency'               | 'No'                   |
-		| ''                                    | ''            | ''       | ''          | ''             | ''                         | ''             | ''             | ''                         | ''                             | ''                             | ''                     |
+		| '$$InvoiceMatch2050006$$'             | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
+		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
+		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
+		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''        | ''             | ''                         | ''         | ''                             | 'Attributes'           |
+		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'           | 'Partner' | 'Legal name'   | 'Partner term'             | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+		| ''                                    | 'Expense'     | '*'      | '171,2'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+		And I select "Advance from customers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Advance from customers"'  | ''            | ''       | ''          | ''             | ''                         | ''             | ''             | ''                         | ''                             | ''                             | ''                     |
 		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''             | ''             | ''                         | ''                             | 'Attributes'                   | ''                     |
 		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Partner'                  | 'Legal name'   | 'Currency'     | 'Receipt document'         | 'Multi currency movement type' | 'Deferred calculation'         | ''                     |
@@ -549,6 +557,8 @@ Scenario: _2050007 check the movements of the Invoice match document with the cl
 		And I save the window as "$$InvoiceMatch2050007$$"
 		And I save the value of "Number" field as "$$NumberInvoiceMatch2050007$$"
 		And I click "Registrations report" button
+		And I select "Partner AR transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 		| '$$InvoiceMatch2050007$$'             | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
 		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
@@ -584,6 +594,8 @@ Scenario: _2050008 check of movements in case of cancellation and re-post of Inv
 			| '$$NumberInvoiceMatch2050007$$'     |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click "Registrations report" button
+		And I select "Partner AR transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 		| '$$InvoiceMatch2050007$$'             | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
 		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |

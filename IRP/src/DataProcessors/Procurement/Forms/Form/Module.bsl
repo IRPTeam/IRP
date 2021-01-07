@@ -18,6 +18,8 @@ Procedure RestoreSettings()
 		RestoreSettingIfPresent(Settings, "VisibleCreatedDocumentTables", "All");
 		RestoreSettingIfPresent(Settings, "VisibleSelectionTables", "All");
 		RestoreSettingIfPresent(Settings, "ShowPrecision", True);
+		RestoreSettingIfPresent(Settings, "Period", Undefined);
+		RestoreSettingIfPresent(Settings, "Periodicity", Undefined);
 	EndIf;
 EndProcedure
 
@@ -40,6 +42,8 @@ Procedure SaveSettings()
 	Settings.Insert("VisibleCreatedDocumentTables", ThisObject.VisibleCreatedDocumentTables);
 	Settings.Insert("VisibleSelectionTables", ThisObject.VisibleSelectionTables);
 	Settings.Insert("ShowPrecision", ThisObject.ShowPrecision);
+	Settings.Insert("Period", ThisObject.Period);
+	Settings.Insert("Periodicity", ThisObject.Periodicity);
 	
 	FormDataSettingsStorage.Save("DataProcessor.Procurement", "FormSettings", Settings);
 EndProcedure
@@ -56,6 +60,16 @@ EndProcedure
 
 &AtClient
 Procedure CompanyOnChange(Item)
+	SaveSettings();
+EndProcedure
+
+&AtClient
+Procedure PeriodOnChange(Item)
+	SaveSettings();
+EndProcedure
+
+&AtClient
+Procedure PeriodicityOnChange(Item)
 	SaveSettings();
 EndProcedure
 
@@ -312,6 +326,8 @@ Function CollectParametersForCreateOrdersForm(Item, ItemKey, Unit)
 		NewRow = New Structure();
 		NewRow.Insert("Store", Row.Store);
 		NewRow.Insert("Quantity", Row.Quantity);
+		NewRow.Insert("QuantityIncomming", Row.QuantityIncomming);
+		NewRow.Insert("PurchaseOrder", Row.PurchaseOrder);
 		FormParameters.TableOfBalance.Add(NewRow);
 	EndDo;
 	
@@ -324,6 +340,8 @@ Function CollectParametersForCreateOrdersForm(Item, ItemKey, Unit)
 		NewRow.Insert("DateOfRelevance", Row.DateOfRelevance);
 		NewRow.Insert("Agreement", Row.Agreement);
 		NewRow.Insert("DeliveryDate", Row.DeliveryDate);
+		NewRow.Insert("Unit", Row.Unit);
+		NewRow.Insert("Store", Row.Store);
 		FormParameters.TableOfPurchase.Add(NewRow);
 	EndDo;
 	
@@ -390,7 +408,12 @@ Procedure CreateOrdersEnd(Result, AdditionalParameters) Export
 		Return;
 	EndIf;		
 	
-	ThisObject.VisibleSelectionTables = Result.VisibleSelectionTables; 
+	SaveSettings();
+	ThisObject.VisibleSelectionTables = Result.VisibleSelectionTables;
+	
+	If Not Result.IsOkPressed Then
+		Return;
+	EndIf;
 	
 	ClearResultsTable(Result.ItemKey);
 	
@@ -412,7 +435,6 @@ Procedure CreateOrdersEnd(Result, AdditionalParameters) Export
 		FillPropertyValues(ThisObject.ResultsTableOfInternalSupplyRequest.Add(), Row);
 	EndDo;
 	SetVisibleInResultTables();	
-	SaveSettings();
 EndProcedure
 
 &AtClient
@@ -468,12 +490,14 @@ Function CreateDocumentsAtServer()
 	CreatedDocuments.Insert("TransferOrders", New Array());
 	CreatedDocuments.Insert("PurchaseOrders", New Array());
 	
-	TransferDataTable = New ValueTable();
-	TransferDataTable.Columns.Add("StoreSender");
-	TransferDataTable.Columns.Add("InternalSupplyRequest");
-	TransferDataTable.Columns.Add("RowKey", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
-	TransferDataTable.Columns.Add("ItemKey");
-	TransferDataTable.Columns.Add("Quantity");
+	TransferDataTable = GetEmptyDataTable_InventoryTransferOrder();
+//	TransferDataTable = New ValueTable();
+//	TransferDataTable.Columns.Add("StoreSender");
+//	TransferDataTable.Columns.Add("InternalSupplyRequest");
+//	TransferDataTable.Columns.Add("PurchaseOrder");
+//	TransferDataTable.Columns.Add("RowKey", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+//	TransferDataTable.Columns.Add("ItemKey");
+//	TransferDataTable.Columns.Add("Quantity");
 
 	For Each Row In ThisObject.ResultsItemList Do
 		DataTable = CollectDataFor_InventoryTransferOrder(Row.ItemKey);
@@ -486,16 +510,19 @@ Function CreateDocumentsAtServer()
 		CreatedDocuments.TransferOrders = Create_InventoryTransferOrder(TransferDataTable);
 	EndIf;
 	
-	PurchaseDataTable = New ValueTable();
-	PurchaseDataTable.Columns.Add("Partner");
-	PurchaseDataTable.Columns.Add("Agreement");
-	PurchaseDataTable.Columns.Add("PriceType");
-	PurchaseDataTable.Columns.Add("Price");
-	PurchaseDataTable.Columns.Add("DeliveryDate");
-	PurchaseDataTable.Columns.Add("InternalSupplyRequest");
-	PurchaseDataTable.Columns.Add("RowKey", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
-	PurchaseDataTable.Columns.Add("ItemKey");
-	PurchaseDataTable.Columns.Add("Quantity");
+	PurchaseDataTable = GetEmptyDataTable_PurchaseOrder();
+//	PurchaseDataTable = New ValueTable();
+//	PurchaseDataTable.Columns.Add("Partner");
+//	PurchaseDataTable.Columns.Add("Agreement");
+//	PurchaseDataTable.Columns.Add("PriceType");
+//	PurchaseDataTable.Columns.Add("Price");
+//	PurchaseDataTable.Columns.Add("DeliveryDate");
+//	PurchaseDataTable.Columns.Add("InternalSupplyRequest");
+//	PurchaseDataTable.Columns.Add("RowKey", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+//	PurchaseDataTable.Columns.Add("ItemKey");
+//	PurchaseDataTable.Columns.Add("Store");
+//	PurchaseDataTable.Columns.Add("Unit");
+//	PurchaseDataTable.Columns.Add("Quantity");
 	
 	For Each Row In ThisObject.ResultsItemList Do	
 		DataTable = CollectDataFor_PurchaseOrder(Row.ItemKey);
@@ -505,7 +532,14 @@ Function CreateDocumentsAtServer()
 	EndDo;
 	
 	If PurchaseDataTable.Count() Then
-		CreatedDocuments.PurchaseOrders = Create_PurchaseOrder(PurchaseDataTable);
+		Result_Create_PurchaseOrder = Create_PurchaseOrder(PurchaseDataTable);
+		CreatedDocuments.PurchaseOrders = Result_Create_PurchaseOrder.ArrayOfPurchaseOrders;
+		If Result_Create_PurchaseOrder.LinkedTransferOrders_DataTable.Count() Then
+			ArrayOfLinked_TransferOrders = Create_InventoryTransferOrder(Result_Create_PurchaseOrder.LinkedTransferOrders_DataTable);
+			For Each ItemOfArray In ArrayOfLinked_TransferOrders Do
+				CreatedDocuments.TransferOrders.Add(ItemOfArray);
+			EndDo;
+		EndIf;
 	EndIf;
 	
 	For Each Doc In CreatedDocuments.PurchaseOrders Do
@@ -583,13 +617,20 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 EndProcedure
 
 &AtServer
-Function CollectDataFor_InventoryTransferOrder(ItemKey)
+Function GetEmptyDataTable_InventoryTransferOrder()
 	DataTable = New ValueTable();
 	DataTable.Columns.Add("StoreSender");
 	DataTable.Columns.Add("InternalSupplyRequest");
+	DataTable.Columns.Add("PurchaseOrder");
 	DataTable.Columns.Add("RowKey", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	DataTable.Columns.Add("ItemKey");
 	DataTable.Columns.Add("Quantity");
+	Return DataTable;
+EndFunction
+
+&AtServer
+Function CollectDataFor_InventoryTransferOrder(ItemKey)
+	DataTable = GetEmptyDataTable_InventoryTransferOrder();
 	
 	Filter = New Structure("ItemKey", ItemKey);
 	
@@ -597,6 +638,7 @@ Function CollectDataFor_InventoryTransferOrder(ItemKey)
 	TableOfBalance = ThisObject.ResultsTableOfBalance.Unload(Filter); 
 	
 	For Each Row In TableOfBalance Do
+		// by Internal supply request
 		NeededQuantity = Row.Quantity;
 		For Each RowSupplyRequest In SupplyRequests Do
 			If Not ValueIsFilled(NeededQuantity) Or Not ValueIsFilled(RowSupplyRequest.Transfer) Then
@@ -611,10 +653,28 @@ Function CollectDataFor_InventoryTransferOrder(ItemKey)
 			RowSupplyRequest.Transfer = RowSupplyRequest.Transfer - NewRow.Quantity;
 			NeededQuantity =  NeededQuantity - NewRow.Quantity;
 		EndDo;
+		
+		// by Internal supply request and Purchase orders
+		NeededQuantity = Row.QuantityIncomming;
+		For Each RowSupplyRequest In SupplyRequests Do
+			If Not ValueIsFilled(NeededQuantity) Or Not ValueIsFilled(RowSupplyRequest.Transfer) Then
+				Continue;
+			EndIf;
+			NewRow = DataTable.Add();
+			NewRow.StoreSender = Row.Store;
+			NewRow.InternalSupplyRequest = RowSupplyRequest.InternalSupplyRequest;
+			NewRow.PurchaseOrder = Row.PurchaseOrder;
+			NewRow.RowKey = RowSupplyRequest.RowKey;
+			NewRow.Quantity = Min(NeededQuantity, RowSupplyRequest.Transfer);
+			NewRow.ItemKey = ItemKey;
+			RowSupplyRequest.Transfer = RowSupplyRequest.Transfer - NewRow.Quantity;
+			NeededQuantity =  NeededQuantity - NewRow.Quantity;
+		EndDo;
 	EndDo;
 	
-	DataTable.GroupBy("StoreSender, InternalSupplyRequest, RowKey, ItemKey", "Quantity");
+	DataTable.GroupBy("StoreSender, InternalSupplyRequest, PurchaseOrder, RowKey, ItemKey", "Quantity");
 	
+	// without Internal supply request
 	For Each Row In TableOfBalance Do
 		If Not ValueIsFilled(Row.Quantity) Then
 			Continue;
@@ -642,7 +702,7 @@ Function Create_InventoryTransferOrder(DataTable)
 	ArrayOfTransferOrders = New Array();
 	
 	DataTableFilter = DataTable.Copy();
-	DataTableFilter.GroupBy("StoreSender");
+	DataTableFilter.GroupBy("StoreSender, RowKey");
 	For Each RowFilter In DataTableFilter Do
 		
 		NewTransferOrder = Documents.InventoryTransferOrder.CreateDocument();
@@ -653,6 +713,7 @@ Function Create_InventoryTransferOrder(DataTable)
 		
 		Filter = New Structure();
 		Filter.Insert("StoreSender", RowFilter.StoreSender);
+		Filter.Insert("RowKey", RowFilter.RowKey);
 		ArrayOfRows = DataTable.FindRows(Filter);
 		For Each ItemOfRow In ArrayOfRows Do
 			NewRow = NewTransferOrder.ItemList.Add();
@@ -664,6 +725,7 @@ Function Create_InventoryTransferOrder(DataTable)
 			
 			NewRow.Quantity = ItemOfRow.Quantity;
 			NewRow.InternalSupplyRequest = ItemOfRow.InternalSupplyRequest;
+			NewRow.PurchaseOrder = ItemOfRow.PurchaseOrder;
 		EndDo;
 		
 		NewTransferOrder.Fill(Undefined);
@@ -674,7 +736,7 @@ Function Create_InventoryTransferOrder(DataTable)
 EndFunction
 
 &AtServer
-Function CollectDataFor_PurchaseOrder(ItemKey)
+Function GetEmptyDataTable_PurchaseOrder()
 	DataTable = New ValueTable();
 	DataTable.Columns.Add("Partner");
 	DataTable.Columns.Add("Agreement");
@@ -684,7 +746,19 @@ Function CollectDataFor_PurchaseOrder(ItemKey)
 	DataTable.Columns.Add("InternalSupplyRequest");
 	DataTable.Columns.Add("RowKey", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	DataTable.Columns.Add("ItemKey");
+	DataTable.Columns.Add("Unit");
+	DataTable.Columns.Add("Store");
 	DataTable.Columns.Add("Quantity");
+	DataTable.Columns.Add("BasisQuantity");
+	DataTable.Columns.Add("BasisUnit");
+	DataTable.Columns.Add("UnitFactor");
+	DataTable.Columns.Add("ReverseUnitFactor");
+	Return DataTable;
+EndFunction
+
+&AtServer
+Function CollectDataFor_PurchaseOrder(ItemKey)
+	DataTable = GetEmptyDataTable_PurchaseOrder();
 	
 	Filter = New Structure("ItemKey", ItemKey);
 	
@@ -692,7 +766,10 @@ Function CollectDataFor_PurchaseOrder(ItemKey)
 	TableOfPurchase = ThisObject.ResultsTableOfPurchase.Unload(Filter);
 	
 	For Each Row In TableOfPurchase Do
-		NeededQuantity = Row.Quantity;
+		NeededQuantity = Row.BasisQuantity;
+		UnitFactor = Catalogs.Units.GetUnitFactor(Row.Unit, Row.BasisUnit);
+		ReverseUnitFactor = 1 / UnitFactor;
+		
 		For Each RowSupplyRequest In SupplyRequests Do
 			If Not ValueIsFilled(NeededQuantity) Or Not ValueIsFilled(RowSupplyRequest.Purchase) Then
 				Continue;
@@ -706,14 +783,26 @@ Function CollectDataFor_PurchaseOrder(ItemKey)
 			NewRow.InternalSupplyRequest = RowSupplyRequest.InternalSupplyRequest;
 			NewRow.RowKey = RowSupplyRequest.RowKey;
 			NewRow.ItemKey = ItemKey;
-			NewRow.Quantity = Min(NeededQuantity, RowSupplyRequest.Purchase);
-			RowSupplyRequest.Purchase = RowSupplyRequest.Purchase - NewRow.Quantity;
-			NeededQuantity =  NeededQuantity - NewRow.Quantity;
+			
+			NewRow.Unit = Row.Unit;
+			NewRow.BasisUnit = Row.BasisUnit;
+			NewRow.UnitFactor = UnitFactor;
+			NewRow.ReverseUnitFactor = ReverseUnitFactor;
+	
+			NewRow.Store = Row.Store;
+		
+			MinQuantity = Min(NeededQuantity, RowSupplyRequest.Purchase);
+			NewRow.Quantity = MinQuantity * ReverseUnitFactor;
+			NewRow.BasisQuantity = MinQuantity;
+			
+			RowSupplyRequest.Purchase = RowSupplyRequest.Purchase - MinQuantity;
+			NeededQuantity =  NeededQuantity - MinQuantity;
 		EndDo;
 	EndDo;
 	
-	DataTable.GroupBy("Partner, Agreement, PriceType, Price, DeliveryDate, InternalSupplyRequest, RowKey, ItemKey", 
-			"Quantity");
+	DataTable.GroupBy("Partner, Agreement, PriceType, Price, 
+	|DeliveryDate, InternalSupplyRequest, RowKey, ItemKey, Unit, Store,
+	|BasisUnit, UnitFactor, ReverseUnitFactor", "Quantity, BasisQuantity");
 	
 	For Each Row In TableOfPurchase Do
 		If Not ValueIsFilled(Row.Quantity) Then
@@ -725,6 +814,8 @@ Function CollectDataFor_PurchaseOrder(ItemKey)
 		FIlter.Insert("PriceType", Row.PriceType);
 		FIlter.Insert("Price", Row.Price);
 		FIlter.Insert("DeliveryDate", Row.DeliveryDate);
+		FIlter.Insert("Unit", Row.Unit);
+		FIlter.Insert("Store", Row.Store);
 		
 		ArrayOfRows = DataTable.FindRows(Filter);
 		TotalQ = 0;
@@ -738,9 +829,17 @@ Function CollectDataFor_PurchaseOrder(ItemKey)
 			NewRow.PriceType = Row.PriceType;
 			NewRow.Price = Row.Price;
 			NewRow.DeliveryDate = Row.DeliveryDate;
-			NewRow.RowKey = New UUID();
+			NewRow.Unit = Row.Unit;
+			NewRow.Store = Row.Store;
 			NewRow.ItemKey = ItemKey;
 			NewRow.Quantity = Row.Quantity - TotalQ;
+			NewRow.RowKey = String(New UUID());
+			
+			NewRow.UnitFactor = Catalogs.Units.GetUnitFactor(Row.Unit, Row.BasisUnit);
+			NewRow.ReverseUnitFactor = 1 / UnitFactor;
+		
+			NewRow.BasisUnit = Row.BasisUnit;
+			NewRow.BasisQuantity = NewRow.Quantity * NewRow.UnitFactor;
 		EndIf;
 	EndDo;
 	Return DataTable;
@@ -750,9 +849,13 @@ EndFunction
 Function Create_PurchaseOrder(DataTable)	
 	ArrayOfPurchaseOrders = New Array();
 	
+	LinkedTransferOrders_DataTable_All = GetEmptyDataTable_InventoryTransferOrder();
+	
 	DataTableFilter = DataTable.Copy();
 	DataTableFilter.GroupBy("Partner, Agreement");
 	For Each RowFilter In DataTableFilter Do
+		LinkedTransferOrders_DataTable = GetEmptyDataTable_InventoryTransferOrder();
+	
 		AgreementInfo = CatAgreementsServer.GetAgreementInfo(RowFilter.Agreement);
 		
 		NewPurchaseOrder = Documents.PurchaseOrder.CreateDocument();
@@ -773,23 +876,43 @@ Function Create_PurchaseOrder(DataTable)
 			NewRow = NewPurchaseOrder.ItemList.Add();
 			NewRow.Key = ItemOfRow.RowKey;
 			NewRow.ItemKey = ItemOfRow.ItemKey;
-			NewRow.Store = ThisObject.Store;
+			NewRow.Unit = ItemOfRow.Unit;
+			NewRow.Store = ?(ValueIsFilled(ItemOfRow.Store), ItemOfRow.Store, ThisObject.Store);
 			
-			UnitInfo = GetItemInfo.ItemUnitInfo(NewRow.ItemKey);
-			NewRow.Unit = UnitInfo.Unit;
+			If Not ValueIsFilled(NewRow.Unit) Then
+				UnitInfo = GetItemInfo.ItemUnitInfo(NewRow.ItemKey);
+				NewRow.Unit = UnitInfo.Unit;
+			EndIf;
 			
 			NewRow.Quantity = ItemOfRow.Quantity;
 			NewRow.PurchaseBasis = ItemOfRow.InternalSupplyRequest;
 			NewRow.Price = ItemOfRow.Price;
 			NewRow.PriceType = ItemOfRow.PriceType;
 			NewRow.DeliveryDate = ItemOfRow.DeliveryDate;
+			
+			If NewRow.Store <> ThisObject.Store Then
+				NewRow_LinkedTransferOrders = LinkedTransferOrders_DataTable.Add();
+				NewRow_LinkedTransferOrders.StoreSender = NewRow.Store;
+				NewRow_LinkedTransferOrders.RowKey = ItemOfRow.RowKey;
+				NewRow_LinkedTransferOrders.ItemKey = ItemOfRow.ItemKey;
+				NewRow_LinkedTransferOrders.Quantity = ItemOfRow.BasisQuantity;
+			EndIf;
 		EndDo;
 		
 		NewPurchaseOrder.Fill(Undefined);
 		NewPurchaseOrder.Write(DocumentWriteMode.Write);	
 		ArrayOfPurchaseOrders.Add(NewPurchaseOrder.Ref);
+		
+		LinkedTransferOrders_DataTable.FillValues(NewPurchaseOrder.Ref, "PurchaseOrder");
+		
+		For Each LinkedRow In LinkedTransferOrders_DataTable Do
+			FillPropertyValues(LinkedTransferOrders_DataTable_All.Add(), LinkedRow);
+		EndDo;
 	EndDo;
-	Return ArrayOfPurchaseOrders;
+	Result = New Structure();
+	Result.Insert("ArrayOfPurchaseOrders", ArrayOfPurchaseOrders);
+	Result.Insert("LinkedTransferOrders_DataTable", LinkedTransferOrders_DataTable_All);
+	Return Result;
 EndFunction
 
 &AtClient

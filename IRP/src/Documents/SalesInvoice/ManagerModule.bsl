@@ -1263,6 +1263,7 @@ EndFunction
 Function OffersInfo()
 	Return
 		"SELECT
+		|	SalesInvoiceItemList.Ref.Date AS Period,
 		|	SalesInvoiceItemList.Ref AS Invoice,
 		|	SalesInvoiceItemList.Key AS RowKey,
 		|	SalesInvoiceItemList.ItemKey,

@@ -94,6 +94,8 @@
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R4035_IncommingStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R4036_IncommingStocksRequested</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

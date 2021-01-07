@@ -932,7 +932,7 @@ Scenario: _154528 message when trying to create Purchase order based on Sales or
 				| 'Item'  | 'Item key' |
 				| 'Boots' | '37/18SD'  |
 			And I select current line in "List" table
-			And I select "NoReserve" exact value from "Procurement method" drop-down list in "ItemList" table
+			And I select "No reserve" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder154512$$" variable

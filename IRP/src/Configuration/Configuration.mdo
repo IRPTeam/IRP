@@ -745,6 +745,8 @@
   <accumulationRegisters>AccumulationRegister.StockReservation</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TaxesTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TransferOrderBalance</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4035_IncommingStocks</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4036_IncommingStocksRequested</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.IDInfoTypes</chartsOfCharacteristicTypes>

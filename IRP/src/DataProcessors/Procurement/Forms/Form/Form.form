@@ -175,6 +175,10 @@
             <dataPath xsi:type="form:DataPath">
               <segments>Period</segments>
             </dataPath>
+            <handlers>
+              <event>OnChange</event>
+              <name>PeriodOnChange</name>
+            </handlers>
             <extendedTooltip>
               <name>PeriodExtendedTooltip</name>
               <id>130</id>
@@ -225,6 +229,10 @@
             <dataPath xsi:type="form:DataPath">
               <segments>Periodicity</segments>
             </dataPath>
+            <handlers>
+              <event>OnChange</event>
+              <name>PeriodicityOnChange</name>
+            </handlers>
             <extendedTooltip>
               <name>PeriodicityExtendedTooltip</name>
               <id>106</id>
@@ -2428,6 +2436,56 @@
             </extInfo>
           </items>
           <items xsi:type="form:FormField">
+            <name>ResultsTableOfBalancePurchaseOrder</name>
+            <id>402</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>ResultsTableOfBalance.PurchaseOrder</segments>
+            </dataPath>
+            <extendedTooltip>
+              <name>ResultsTableOfBalancePurchaseOrderExtendedTooltip</name>
+              <id>404</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>ResultsTableOfBalancePurchaseOrderContextMenu</name>
+              <id>403</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>InputField</type>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:InputFieldExtInfo">
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <wrap>true</wrap>
+              <chooseType>true</chooseType>
+              <typeDomainEnabled>true</typeDomainEnabled>
+              <textEdit>true</textEdit>
+            </extInfo>
+          </items>
+          <items xsi:type="form:FormField">
             <name>ResultsTableOfBalanceQuantity</name>
             <id>193</id>
             <visible>true</visible>
@@ -2461,6 +2519,61 @@
             <contextMenu>
               <name>ResultsTableOfBalanceQuantityContextMenu</name>
               <id>194</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>InputField</type>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:InputFieldExtInfo">
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <wrap>true</wrap>
+              <chooseType>true</chooseType>
+              <typeDomainEnabled>true</typeDomainEnabled>
+              <textEdit>true</textEdit>
+              <backColor xsi:type="core:ColorDef">
+                <red>204</red>
+                <green>255</green>
+                <blue>255</blue>
+              </backColor>
+            </extInfo>
+          </items>
+          <items xsi:type="form:FormField">
+            <name>ResultsTableOfBalanceQuantityIncomming</name>
+            <id>399</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>ResultsTableOfBalance.QuantityIncomming</segments>
+            </dataPath>
+            <extendedTooltip>
+              <name>ResultsTableOfBalanceQuantityIncommingExtendedTooltip</name>
+              <id>401</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>ResultsTableOfBalanceQuantityIncommingContextMenu</name>
+              <id>400</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -2999,6 +3112,121 @@
               <chooseType>true</chooseType>
               <typeDomainEnabled>true</typeDomainEnabled>
               <textEdit>true</textEdit>
+              <backColor xsi:type="core:ColorDef">
+                <red>204</red>
+                <green>255</green>
+                <blue>255</blue>
+              </backColor>
+            </extInfo>
+          </items>
+          <items xsi:type="form:FormField">
+            <name>ResultsTableOfPurchaseStore</name>
+            <id>405</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>ResultsTableOfPurchase.Store</segments>
+            </dataPath>
+            <extendedTooltip>
+              <name>ResultsTableOfPurchaseStoreExtendedTooltip</name>
+              <id>407</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>ResultsTableOfPurchaseStoreContextMenu</name>
+              <id>406</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>InputField</type>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:InputFieldExtInfo">
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <wrap>true</wrap>
+              <chooseType>true</chooseType>
+              <typeDomainEnabled>true</typeDomainEnabled>
+              <textEdit>true</textEdit>
+              <backColor xsi:type="core:ColorDef">
+                <red>204</red>
+                <green>255</green>
+                <blue>255</blue>
+              </backColor>
+            </extInfo>
+          </items>
+          <items xsi:type="form:FormField">
+            <name>ResultsTableOfPurchaseUnit</name>
+            <id>408</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>ResultsTableOfPurchase.Unit</segments>
+            </dataPath>
+            <extendedTooltip>
+              <name>ResultsTableOfPurchaseUnitExtendedTooltip</name>
+              <id>410</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>ResultsTableOfPurchaseUnitContextMenu</name>
+              <id>409</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>InputField</type>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:InputFieldExtInfo">
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <wrap>true</wrap>
+              <chooseType>true</chooseType>
+              <typeDomainEnabled>true</typeDomainEnabled>
+              <textEdit>true</textEdit>
+              <backColor xsi:type="core:ColorDef">
+                <red>204</red>
+                <green>255</green>
+                <blue>255</blue>
+              </backColor>
             </extInfo>
           </items>
           <items xsi:type="form:FormField">
@@ -5522,6 +5750,40 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>QuantityIncomming</name>
+      <title>
+        <key>en</key>
+        <value>Incomming</value>
+      </title>
+      <id>69</id>
+      <valueType>
+        <types>DefinedType.typeQuantity</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>PurchaseOrder</name>
+      <title>
+        <key>en</key>
+        <value>Purchase order</value>
+      </title>
+      <id>70</id>
+      <valueType>
+        <types>DocumentRef.PurchaseOrder</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>ResultsItemList</name>
@@ -5782,6 +6044,74 @@
       <id>46</id>
       <valueType>
         <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Unit</name>
+      <title>
+        <key>en</key>
+        <value>Unit</value>
+      </title>
+      <id>71</id>
+      <valueType>
+        <types>CatalogRef.Units</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Store</name>
+      <title>
+        <key>en</key>
+        <value>Store</value>
+      </title>
+      <id>72</id>
+      <valueType>
+        <types>CatalogRef.Stores</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>BasisUnit</name>
+      <title>
+        <key>en</key>
+        <value>Basis unit</value>
+      </title>
+      <id>73</id>
+      <valueType>
+        <types>CatalogRef.Units</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>BasisQuantity</name>
+      <title>
+        <key>en</key>
+        <value>Basis quantity</value>
+      </title>
+      <id>74</id>
+      <valueType>
+        <types>DefinedType.typeQuantity</types>
       </valueType>
       <view>
         <common>true</common>

@@ -25,6 +25,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("StockBalance_Exists"           , PostingServer.CreateTable(AccReg.StockBalance));
 
 	Tables.Insert("SalesOrder_ByPlannedDate"      , PostingServer.CreateTable(AccReg.SalesOrder_ByPlannedDate));
+	Tables.Insert("R4035_IncommingStocks"         , PostingServer.CreateTable(AccReg.R4035_IncommingStocks));
 	
 	Tables.OrderBalance_Exists_Receipt =
 	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
@@ -335,6 +336,17 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|WHERE
 		|	tmp.DeliveryDate <> DATETIME(1, 1, 1) 
 		|	AND tmp.PurchaseBasis REFS Document.SalesOrder
+		|;
+		|//[13]//////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmp.Period AS Period,
+		|	tmp.Store AS Store,
+		|	tmp.ItemKey AS ItemKey,
+		|	tmp.Order AS Order,
+		|	tmp.Quantity AS Quantity
+		|WHERE
+		|	NOT tmp.UseSalesOrder
+		|	AND NOT tmp.IsService
 		|";
 	
 	Query.SetParameter("QueryTable", QueryTable);
@@ -353,6 +365,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.OrderProcurement             = QueryResults[11].Unload();
 	
 	Tables.SalesOrder_ByPlannedDate             = QueryResults[12].Unload();
+	Tables.R4035_IncommingStocks                = QueryResults[13].Unload();
 	
 	Parameters.IsReposting = False;
 	Return Tables;
@@ -512,6 +525,13 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.SalesOrder_ByPlannedDate,
+			True));
+	
+	// R4035_IncommingStocks
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4035_IncommingStocks,
+		New Structure("RecordType, RecordSet, WriteInTransaction",
+			AccumulationRecordType.Receipt,
+			Parameters.DocumentDataTables.R4035_IncommingStocks,
 			True));
 				
 	Return PostingDataTables;

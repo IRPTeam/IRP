@@ -43,7 +43,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Query.Text = 
 	"SELECT
 	|	tmp.Store,
-	|	tmp.Balance
+	|	tmp.Balance,
+	|	tmp.BalanceIncomming,
+	|	tmp.PurchaseOrder
 	|INTO TableOfBalance
 	|FROM
 	|	&TableOfBalance AS tmp
@@ -52,7 +54,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Store,
-	|	tmp.Quantity
+	|	tmp.Quantity,
+	|	tmp.QuantityIncomming,
+	|	tmp.PurchaseOrder
 	|INTO ResultsTableOfBalance
 	|FROM
 	|	&ResultsTableOfBalance AS tmp
@@ -65,7 +69,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|	tmp.Price,
 	|	tmp.DateOfRelevance,
 	|	tmp.Agreement,
-	|	tmp.DeliveryDate
+	|	tmp.DeliveryDate,
+	|	&Store AS Store,
+	|	tmp.Unit
 	|INTO TableOfPurchase
 	|FROM
 	|	&TableOfPurchase AS tmp
@@ -79,7 +85,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|	tmp.Quantity,
 	|	tmp.DateOfRelevance,
 	|	tmp.Agreement,
-	|	tmp.DeliveryDate
+	|	tmp.DeliveryDate,
+	|	tmp.Store,
+	|	tmp.Unit
 	|INTO ResultsTableOfPurchase
 	|FROM
 	|	&ResultsTableOfPurchase AS tmp
@@ -89,11 +97,15 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|SELECT
 	|	TableOfBalance.Store,
 	|	TableOfBalance.Balance,
-	|	ISNULL(ResultsTableOfBalance.Quantity, 0) AS Quantity
+	|	TableOfBalance.BalanceIncomming,
+	|	TableOfBalance.PurchaseOrder,
+	|	ISNULL(ResultsTableOfBalance.Quantity, 0) AS Quantity,
+	|	ISNULL(ResultsTableOfBalance.QuantityIncomming, 0) AS QuantityIncomming
 	|FROM
 	|	TableOfBalance AS TableOfBalance
 	|		LEFT JOIN ResultsTableOfBalance AS ResultsTableOfBalance
 	|		ON TableOfBalance.Store = ResultsTableOfBalance.Store
+	|		AND TableOfBalance.PurchaseOrder = ResultsTableOfBalance.PurchaseOrder
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -103,8 +115,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|	TableOfPurchase.Price,
 	|	TableOfPurchase.DateOfRelevance,
 	|	TableOfPurchase.Agreement,
-	|	TableOfPurchase.DeliveryDate,
-	|	ISNULL(ResultsTableOfPurchase.Quantity, 0) AS Quantity
+	|	ISNULL(ResultsTableOfPurchase.Quantity, 0) AS Quantity,
+	|	ISNULL(ResultsTableOfPurchase.DeliveryDate, TableOfPurchase.DeliveryDate) DeliveryDate,
+	|	ISNULL(ResultsTableOfPurchase.Store, TableOfPurchase.Store) Store,
+	|	ISNULL(ResultsTableOfPurchase.Unit, TableOfPurchase.Unit) Unit,
+	|	TableOfPurchase.Unit AS BasisUnit
 	|FROM
 	|	TableOfPurchase AS TableOfPurchase
 	|		LEFT JOIN ResultsTableOfPurchase AS ResultsTableOfPurchase
@@ -113,7 +128,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|		AND TableOfPurchase.Price = ResultsTableOfPurchase.Price
 	|		AND TableOfPurchase.DateOfRelevance = ResultsTableOfPurchase.DateOfRelevance
 	|		AND TableOfPurchase.Agreement = ResultsTableOfPurchase.Agreement
-	|		AND TableOfPurchase.DeliveryDate = ResultsTableOfPurchase.DeliveryDate";
+	//|		AND TableOfPurchase.DeliveryDate = ResultsTableOfPurchase.DeliveryDate
+	//|		AND TableOfPurchase.Store = ResultsTableOfPurchase.Store
+	//|		AND TableOfPurchase.Unit = ResultsTableOfPurchase.Unit
+	|";
+	Query.SetParameter("Store", ThisObject.Store);
 	Query.SetParameter("TableOfBalance", ThisObject.TableOfBalance.Unload());
 	Query.SetParameter("ResultsTableOfBalance", ResultsTableOfBalance);
 	Query.SetParameter("TableOfPurchase", ThisObject.TableOfPurchase.Unload());
@@ -122,6 +141,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	QueryResults = Query.ExecuteBatch();
 	ThisObject.TableOfBalance.Load(QueryResults[4].Unload());
 	ThisObject.TableOfPurchase.Load(QueryResults[5].Unload());
+	
+	RecalculateBasisQuantity();
 EndProcedure
 
 &AtClient
@@ -183,6 +204,15 @@ Procedure TableOfBalanceSelection(Item, RowSelected, Field, StandardProcessing)
 		OpenParameters.Insert("Key", CurrentData.Store);
 		OpenForm(GetMetadataFullName(CurrentData.Store) + ".ObjectForm", OpenParameters);
 	EndIf;
+	If Upper(Field.Name) = Upper("TableOfBalancePurchaseOrder") Then
+		StandardProcessing = False;
+		If Not ValueIsFilled(CurrentData.PurchaseOrder) Then
+			Return;
+		EndIf;
+		OpenParameters = New Structure();
+		OpenParameters.Insert("Key", CurrentData.PurchaseOrder);
+		OpenForm(GetMetadataFullName(CurrentData.PurchaseOrder) + ".ObjectForm", OpenParameters);
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -233,6 +263,11 @@ Procedure TableOfBalanceQuantityOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure TableOfBalanceQuantityIncommingOnChange(Item)
+	Update_TotalQuantity();	
+EndProcedure
+
+&AtClient
 Procedure OnOpen(Cancel)
 	Update_TotalQuantity();
 	SetVisible();
@@ -240,6 +275,11 @@ EndProcedure
 
 &AtClient
 Procedure TableOfPurchaseQuantityOnChange(Item)
+	CurrentData = Items.TableOfPurchase.CurrentData;
+	If CurrentData <> Undefined Then
+		UnitFactor = GetUnitFactor(CurrentData.Unit, CurrentData.BasisUnit);
+		CurrentData.BasisQuantity = CurrentData.Quantity * UnitFactor;
+	EndIf;
 	Update_TotalQuantity();
 EndProcedure
 
@@ -249,12 +289,12 @@ Procedure Update_TotalQuantity()
 	TransferQuantity = 0;
 	PurchaseQuantity = 0;
 	For Each Row In ThisObject.TableOfBalance Do
-		ThisObject.SelectedQuantity = ThisObject.SelectedQuantity + Row.Quantity;
-		TransferQuantity = TransferQuantity + Row.Quantity;
+		ThisObject.SelectedQuantity = ThisObject.SelectedQuantity + Row.Quantity + Row.QuantityIncomming;
+		TransferQuantity = TransferQuantity + Row.Quantity + Row.QuantityIncomming;
 	EndDo;
 	For Each Row In ThisObject.TableOfPurchase Do
-		ThisObject.SelectedQuantity = ThisObject.SelectedQuantity + Row.Quantity;
-		PurchaseQuantity = PurchaseQuantity + Row.Quantity;
+		ThisObject.SelectedQuantity = ThisObject.SelectedQuantity + Row.BasisQuantity;
+		PurchaseQuantity = PurchaseQuantity + Row.BasisQuantity;
 	EndDo;
 	ThisObject.LackQuantity = ThisObject.TotalQuantity - ThisObject.SelectedQuantity;
 	
@@ -281,6 +321,29 @@ Procedure Update_TotalQuantity()
 EndProcedure
 
 &AtClient
+Procedure TableOfPurchaseUnitOnChange(Item)
+	CurrentData = Items.TableOfPurchase.CurrentData;
+	If CurrentData <> Undefined Then
+		UnitFactor = GetUnitFactor(CurrentData.Unit, CurrentData.BasisUnit);
+		CurrentData.BasisQuantity = CurrentData.Quantity * UnitFactor;
+	EndIf;
+	Update_TotalQuantity();
+EndProcedure
+
+&AtServer
+Procedure RecalculateBasisQuantity()
+	For Each Row In ThisObject.TableOfPurchase Do
+		UnitFactor = Catalogs.Units.GetUnitFactor(Row.Unit, Row.BasisUnit);
+		Row.BasisQuantity = Row.Quantity * UnitFactor;
+	EndDo;
+EndProcedure
+
+&AtServerNoContext
+Function GetUnitFactor(FromUnit, ToUnit)
+	Return Catalogs.Units.GetUnitFactor(FromUnit, ToUnit);
+EndFunction
+
+&AtClient
 Procedure TableOfBalanceBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	Cancel = True;
 EndProcedure
@@ -302,8 +365,24 @@ EndProcedure
 
 &AtClient
 Procedure Cancel(Command)
-	Close(Undefined);
+	Result = New Structure();
+	Result.Insert("IsOkPressed", False);
+	Result.Insert("VisibleSelectionTables", ThisObject.VisibleSelectionTables);
+
+	Close(Result);
 EndProcedure
+
+&AtClient
+Procedure BeforeClose(Cancel, Exit, WarningText, StandardProcessing)
+	StandardProcessing = False;
+	Result = New Structure();
+	Result.Insert("IsOkPressed", False);
+	Result.Insert("VisibleSelectionTables", ThisObject.VisibleSelectionTables);
+	
+	Close(Result);
+EndProcedure
+
+
 
 &AtClient
 Procedure DateOfRelevanceOnChange(Item)
@@ -321,10 +400,23 @@ Procedure Update_TableOfBalance()
 	Query.Text = 
 	"SELECT
 	|	StockReservationBalance.Store,
-	|	StockReservationBalance.QuantityBalance AS Balance
+	|	UNDEFINED AS PurchaseOrder,
+	|	StockReservationBalance.QuantityBalance AS Balance,
+	|	0 AS BalanceIncomming
 	|FROM
 	|	AccumulationRegister.StockReservation.Balance(ENDOFPERIOD(&DateOfRelevance, day), ItemKey = &ItemKey
-	|	AND Store <> &Store) AS StockReservationBalance";
+	|	AND Store <> &Store) AS StockReservationBalance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	R4035_IncommingStocksBalance.Store,
+	|	R4035_IncommingStocksBalance.Order,
+	|	0,
+	|	R4035_IncommingStocksBalance.QuantityBalance
+	|FROM
+	|	AccumulationRegister.R4035_IncommingStocks.Balance(ENDOFPERIOD(&DateOfRelevance, day), ItemKey = &ItemKey
+	|	AND Store <> &Store) AS R4035_IncommingStocksBalance";
 	Query.SetParameter("Store", ThisObject.Store);
 	Query.SetParameter("DateOfRelevance", ThisObject.DateOfRelevance);
 	Query.SetParameter("ItemKey", ThisObject.ItemKey);
@@ -498,6 +590,12 @@ Procedure Update_TableOfPurchase()
 	|	ItemKeys.Agreement AS Agreement,
 	|	DATEADD(&Period, DAY, ItemKeys.Agreement.DaysBeforeDelivery) AS DeliveryDate,
 	|	ItemKeys.PriceType AS PriceType,
+	|	&Store AS Store,
+	|	CASE WHEN ItemKeys.Item.Unit = Value(Catalog.Units.EmptyRef) THEN
+	|		ItemKeys.ItemKey.Unit
+	|	ELSE
+	|		ItemKeys.Item.Unit
+	|	END AS Unit,
 	|	CASE
 	|		WHEN ISNULL(t_PricesByItemKeys.DateOfRelevance, DATETIME(1, 1, 1)) <> DATETIME(1, 1, 1)
 	|			THEN ISNULL(t_PricesByItemKeys.DateOfRelevance, DATETIME(1, 1, 1))
@@ -538,6 +636,7 @@ Procedure Update_TableOfPurchase()
 	|			THEN ISNULL(t_PricesByItems.Price, 0)
 	|	END <> 0";
 	
+	Query.SetParameter("Store", ThisObject.Store);
 	Query.SetParameter("ItemKey", ThisObject.ItemKey);
 	Query.SetParameter("Period", EndOfDay(ThisObject.DateOfRelevance));
 	QueryResult = Query.Execute();
@@ -548,23 +647,28 @@ EndProcedure
 &AtClient
 Procedure Ok(Command)
 	Result = New Structure();
+	Result.Insert("IsOkPressed", True);
+	Result.Insert("VisibleSelectionTables", ThisObject.VisibleSelectionTables);
+	
 	Result.Insert("Item", ThisObject.Item);
 	Result.Insert("ItemKey", ThisObject.ItemKey);
 	Result.Insert("Unit", ThisObject.Unit);
-	Result.Insert("VisibleSelectionTables", ThisObject.VisibleSelectionTables);
 	
 	Result.Insert("TableOfBalance", New Array());
 	Result.Insert("TableOfPurchase", New Array());
 	Result.Insert("TableOfInternalSupplyRequest", New Array());
 	
 	For Each Row In ThisObject.TableOfBalance Do
-		If Not ValueIsFilled(Row.Quantity) Then
+		If Not ValueIsFilled(Row.Quantity) And Not ValueIsFilled(Row.QuantityIncomming) Then
 			Continue;
 		EndIf;
 		NewRow = New Structure();
 		NewRow.Insert("ItemKey", ThisObject.ItemKey);
 		NewRow.Insert("Store", Row.Store);
 		NewRow.Insert("Quantity", Row.Quantity);
+		NewRow.Insert("QuantityIncomming", Row.QuantityIncomming);
+		NewRow.Insert("PurchaseOrder", Row.PurchaseOrder);
+		
 		Result.TableOfBalance.Add(NewRow);
 	EndDo;
 	
@@ -581,6 +685,10 @@ Procedure Ok(Command)
 		NewRow.Insert("DateOfRelevance", Row.DateOfRelevance);
 		NewRow.Insert("Agreement", Row.Agreement);
 		NewRow.Insert("DeliveryDate", Row.DeliveryDate);
+		NewRow.Insert("Unit", Row.Unit);
+		NewRow.Insert("Store", Row.Store);
+		NewRow.Insert("BasisUnit", Row.BasisUnit);
+		NewRow.Insert("BasisQuantity", Row.BasisQuantity);
 		Result.TableOfPurchase.Add(NewRow);
 	EndDo;
 	
@@ -620,3 +728,5 @@ Procedure SetVisible()
 		Items.TableOfPurchase.Visible = True;
 	EndIf;	
 EndProcedure
+
+

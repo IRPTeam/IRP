@@ -6086,6 +6086,40 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>BasisUnit</name>
+      <title>
+        <key>en</key>
+        <value>Basis unit</value>
+      </title>
+      <id>73</id>
+      <valueType>
+        <types>CatalogRef.Units</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>BasisQuantity</name>
+      <title>
+        <key>en</key>
+        <value>Basis quantity</value>
+      </title>
+      <id>74</id>
+      <valueType>
+        <types>DefinedType.typeQuantity</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>ResultsTableOfInternalSupplyRequest</name>

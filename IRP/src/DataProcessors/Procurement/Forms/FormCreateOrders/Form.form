@@ -1465,6 +1465,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>TableOfPurchase.Unit</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>TableOfPurchaseUnitOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>TableOfPurchaseUnitExtendedTooltip</name>
             <id>197</id>
@@ -3011,6 +3015,40 @@
       <id>39</id>
       <valueType>
         <types>CatalogRef.Stores</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>BasisUnit</name>
+      <title>
+        <key>en</key>
+        <value>Basis unit</value>
+      </title>
+      <id>40</id>
+      <valueType>
+        <types>CatalogRef.Units</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>BasisQuantity</name>
+      <title>
+        <key>en</key>
+        <value>Basis quantity</value>
+      </title>
+      <id>41</id>
+      <valueType>
+        <types>DefinedType.typeQuantity</types>
       </valueType>
       <view>
         <common>true</common>

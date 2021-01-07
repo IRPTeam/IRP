@@ -118,7 +118,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|	ISNULL(ResultsTableOfPurchase.Quantity, 0) AS Quantity,
 	|	ISNULL(ResultsTableOfPurchase.DeliveryDate, TableOfPurchase.DeliveryDate) DeliveryDate,
 	|	ISNULL(ResultsTableOfPurchase.Store, TableOfPurchase.Store) Store,
-	|	ISNULL(ResultsTableOfPurchase.Unit, TableOfPurchase.Unit) Unit
+	|	ISNULL(ResultsTableOfPurchase.Unit, TableOfPurchase.Unit) Unit,
+	|	TableOfPurchase.Unit AS BasisUnit
 	|FROM
 	|	TableOfPurchase AS TableOfPurchase
 	|		LEFT JOIN ResultsTableOfPurchase AS ResultsTableOfPurchase
@@ -140,6 +141,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	QueryResults = Query.ExecuteBatch();
 	ThisObject.TableOfBalance.Load(QueryResults[4].Unload());
 	ThisObject.TableOfPurchase.Load(QueryResults[5].Unload());
+	
+	RecalculateBasisQuantity();
 EndProcedure
 
 &AtClient
@@ -200,6 +203,15 @@ Procedure TableOfBalanceSelection(Item, RowSelected, Field, StandardProcessing)
 		OpenParameters = New Structure();
 		OpenParameters.Insert("Key", CurrentData.Store);
 		OpenForm(GetMetadataFullName(CurrentData.Store) + ".ObjectForm", OpenParameters);
+	EndIf;
+	If Upper(Field.Name) = Upper("TableOfBalancePurchaseOrder") Then
+		StandardProcessing = False;
+		If Not ValueIsFilled(CurrentData.PurchaseOrder) Then
+			Return;
+		EndIf;
+		OpenParameters = New Structure();
+		OpenParameters.Insert("Key", CurrentData.PurchaseOrder);
+		OpenForm(GetMetadataFullName(CurrentData.PurchaseOrder) + ".ObjectForm", OpenParameters);
 	EndIf;
 EndProcedure
 
@@ -263,6 +275,11 @@ EndProcedure
 
 &AtClient
 Procedure TableOfPurchaseQuantityOnChange(Item)
+	CurrentData = Items.TableOfPurchase.CurrentData;
+	If CurrentData <> Undefined Then
+		UnitFactor = GetUnitFactor(CurrentData.Unit, CurrentData.BasisUnit);
+		CurrentData.BasisQuantity = CurrentData.Quantity * UnitFactor;
+	EndIf;
 	Update_TotalQuantity();
 EndProcedure
 
@@ -276,11 +293,8 @@ Procedure Update_TotalQuantity()
 		TransferQuantity = TransferQuantity + Row.Quantity + Row.QuantityIncomming;
 	EndDo;
 	For Each Row In ThisObject.TableOfPurchase Do
-		// Catalogs.Units.GetUnitFactor(Row.Unit, Row.ItemUnit);
-		// Quantity
-		
-		ThisObject.SelectedQuantity = ThisObject.SelectedQuantity + Row.Quantity;
-		PurchaseQuantity = PurchaseQuantity + Row.Quantity;
+		ThisObject.SelectedQuantity = ThisObject.SelectedQuantity + Row.BasisQuantity;
+		PurchaseQuantity = PurchaseQuantity + Row.BasisQuantity;
 	EndDo;
 	ThisObject.LackQuantity = ThisObject.TotalQuantity - ThisObject.SelectedQuantity;
 	
@@ -305,6 +319,29 @@ Procedure Update_TotalQuantity()
 		PurchaseQuantity = PurchaseQuantity - Row.Purchase;
 	EndDo;
 EndProcedure
+
+&AtClient
+Procedure TableOfPurchaseUnitOnChange(Item)
+	CurrentData = Items.TableOfPurchase.CurrentData;
+	If CurrentData <> Undefined Then
+		UnitFactor = GetUnitFactor(CurrentData.Unit, CurrentData.BasisUnit);
+		CurrentData.BasisQuantity = CurrentData.Quantity * UnitFactor;
+	EndIf;
+	Update_TotalQuantity();
+EndProcedure
+
+&AtServer
+Procedure RecalculateBasisQuantity()
+	For Each Row In ThisObject.TableOfPurchase Do
+		UnitFactor = Catalogs.Units.GetUnitFactor(Row.Unit, Row.BasisUnit);
+		Row.BasisQuantity = Row.Quantity * UnitFactor;
+	EndDo;
+EndProcedure
+
+&AtServerNoContext
+Function GetUnitFactor(FromUnit, ToUnit)
+	Return Catalogs.Units.GetUnitFactor(FromUnit, ToUnit);
+EndFunction
 
 &AtClient
 Procedure TableOfBalanceBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
@@ -655,6 +692,8 @@ Procedure Ok(Command)
 		NewRow.Insert("DeliveryDate", Row.DeliveryDate);
 		NewRow.Insert("Unit", Row.Unit);
 		NewRow.Insert("Store", Row.Store);
+		NewRow.Insert("BasisUnit", Row.BasisUnit);
+		NewRow.Insert("BasisQuantity", Row.BasisQuantity);
 		Result.TableOfPurchase.Add(NewRow);
 	EndDo;
 	

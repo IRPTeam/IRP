@@ -41,7 +41,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	InventoryTransferOrderItemList.Key AS RowKey,
 		|	InventoryTransferOrderItemList.PurchaseOrder AS PurchaseOrder,
 		|	CASE
-		|		WHEN NOT InventoryTransferOrderItemList.PurchaseOrder IS NULL
+		|		WHEN NOT InventoryTransferOrderItemList.PurchaseOrder.Ref IS NULL
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS UsePurchaseOrder

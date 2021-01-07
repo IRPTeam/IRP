@@ -225,7 +225,6 @@ EndProcedure
 &AtClient
 Procedure UpdateAttributesTree()
 	UpdateAttributesTreeAtServer();
-	ThisObject.Items.AttributesTree.InitialTreeView = InitialTreeView.ExpandAllLevels;
 EndProcedure
 
 &AtServer

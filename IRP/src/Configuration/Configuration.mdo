@@ -346,7 +346,7 @@
   <commonModules>CommonModule.ServiceSystemClient</commonModules>
   <commonModules>CommonModule.ServiceSystemClientServer</commonModules>
   <commonModules>CommonModule.ServiceSystemServer</commonModules>
-  <commonModules>CommonModule.SessionParametersClientServer</commonModules>
+  <commonModules>CommonModule.SessionParametersServer</commonModules>
   <commonModules>CommonModule.TaxesClient</commonModules>
   <commonModules>CommonModule.TaxesClientServer</commonModules>
   <commonModules>CommonModule.TaxesServer</commonModules>

@@ -1,4 +1,4 @@
-&AtServer
+
 Procedure SessionParametersSetting(RequiredParameters) Export
 	
 	If RequiredParameters = Undefined Then
@@ -62,12 +62,10 @@ Procedure SessionParametersSetting(RequiredParameters) Export
 	EndIf;
 EndProcedure
 
-&AtServer
 Function GetSessionParameter(ParameterName) Export
 	Return SessionParameters[ParameterName];
 EndFunction
 
-&AtServer
 Function OurCompanies()
 	OurCompanies = New Array();
 	Query = New Query;

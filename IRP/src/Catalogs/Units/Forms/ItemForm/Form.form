@@ -757,12 +757,12 @@
   </commandInterface>
   <extInfo xsi:type="form:CatalogFormExtInfo">
     <handlers>
-      <event>BeforeWriteAtServer</event>
-      <name>BeforeWriteAtServer</name>
-    </handlers>
-    <handlers>
       <event>OnReadAtServer</event>
       <name>OnReadAtServer</name>
+    </handlers>
+    <handlers>
+      <event>BeforeWriteAtServer</event>
+      <name>BeforeWriteAtServer</name>
     </handlers>
   </extInfo>
 </form:Form>

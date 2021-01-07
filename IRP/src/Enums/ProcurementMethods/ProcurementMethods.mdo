@@ -28,10 +28,10 @@
     </synonym>
   </enumValues>
   <enumValues uuid="df48db5d-09e6-4327-9ddf-762cafdaaedd">
-    <name>Repeal</name>
+    <name>NoReserve</name>
     <synonym>
       <key>en</key>
-      <value>Repeal</value>
+      <value>No reserve</value>
     </synonym>
   </enumValues>
   <forms uuid="b97ec4ea-f339-408e-9f93-9ff3d56939ba">

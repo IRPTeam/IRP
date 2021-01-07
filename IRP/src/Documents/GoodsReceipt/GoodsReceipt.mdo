@@ -55,11 +55,18 @@
   <defaultChoiceForm>Document.GoodsReceipt.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R4017B_InternalSupplyRequestProcurement</registerRecords>
   <registerRecords>AccumulationRegister.GoodsInTransitOutgoing</registerRecords>
+  <registerRecords>AccumulationRegister.R1031B_ReceiptInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.GoodsInTransitIncoming</registerRecords>
   <registerRecords>AccumulationRegister.StockReservation</registerRecords>
+  <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
   <registerRecords>AccumulationRegister.ReceiptOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R4033B_GoodsReceiptSchedule</registerRecords>
   <registerRecords>AccumulationRegister.GoodsReceiptSchedule</registerRecords>
+  <registerRecords>AccumulationRegister.R4021B_StockTransferOrdersReceipt</registerRecords>
+  <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
@@ -263,6 +270,131 @@
       </synonym>
       <type>
         <types>DocumentRef.SalesOrder</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="1c338435-a816-4cb8-9e83-a51909247c7d">
+      <name>QuantityInBaseUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity in base unit</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="bbaaa84a-93a7-435d-b2a4-475cd64eef99">
+      <name>PurchaseInvoice</name>
+      <synonym>
+        <key>en</key>
+        <value>Purchase invoice</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.PurchaseInvoice</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b0f5cb06-08db-47d4-a771-1e3991543a90">
+      <name>PurchaseOrder</name>
+      <synonym>
+        <key>en</key>
+        <value>Purchase order</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.PurchaseOrder</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="72c98365-df35-49d1-8ed3-b9f1cf9acb51">
+      <name>InternalSupplyRequest</name>
+      <synonym>
+        <key>en</key>
+        <value>Internal supply request</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.InternalSupplyRequest</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="34245fa4-d0f8-4701-8b72-0d806e21edcf">
+      <name>InventoryTransferOrder</name>
+      <synonym>
+        <key>en</key>
+        <value>Inventory transfer order</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.InventoryTransferOrder</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2cdc1a1b-5b29-4cb4-aae0-36fd7e57acc4">
+      <name>SalesReturn</name>
+      <synonym>
+        <key>en</key>
+        <value>Sales return</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.SalesReturn</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="1cc11a21-de6a-4cb1-8cff-768642747749">
+      <name>SalesReturnOrder</name>
+      <synonym>
+        <key>en</key>
+        <value>Sales return order</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.SalesReturnOrder</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="3faa3c63-73ab-4707-b74c-7091081dd30f">
+      <name>InventoryTransfer</name>
+      <synonym>
+        <key>en</key>
+        <value>Inventory transfer</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.InventoryTransfer</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5377e8f3-eda6-4a5f-aeed-2cd8014d6c41">
+      <name>SalesInvoice</name>
+      <synonym>
+        <key>en</key>
+        <value>Sales invoice</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.SalesInvoice</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

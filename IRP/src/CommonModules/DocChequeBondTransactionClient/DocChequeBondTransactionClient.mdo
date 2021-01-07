@@ -6,4 +6,5 @@
     <value>Doc cheque bond transaction client</value>
   </synonym>
   <clientManagedApplication>true</clientManagedApplication>
+  <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

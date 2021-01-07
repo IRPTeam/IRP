@@ -6,4 +6,5 @@
     <value>Common form actions</value>
   </synonym>
   <clientManagedApplication>true</clientManagedApplication>
+  <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

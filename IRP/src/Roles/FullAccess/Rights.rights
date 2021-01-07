@@ -427,6 +427,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.CashStatementStatuses</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeletePredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeleteMarkedPredefinedData</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.PhysicalInventory</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -612,6 +627,13 @@
 		</right>
 	</object>
 	<object>
+		<name>ExchangePlan.FullExchange</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.ChequeBondTransaction</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -738,6 +760,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.DataMappingItems</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeletePredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeleteMarkedPredefinedData</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.DataAreas</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -754,6 +791,21 @@
 	</object>
 	<object>
 		<name>Catalog.Currencies</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeletePredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeleteMarkedPredefinedData</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.LockDataModificationReasons</name>
 		<right>
 			<name>InteractiveDelete</name>
 			<value>false</value>
@@ -1008,6 +1060,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.PartnersBankAccounts</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeletePredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeleteMarkedPredefinedData</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.GoodsReceipt</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -1202,73 +1269,6 @@
 		</right>
 		<right>
 			<name>InteractiveDeleteMarkedPredefinedData</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.CashStatementStatuses</name>
-		<right>
-			<name>InteractiveDeletePredefinedData</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDeleteMarkedPredefinedData</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.DataMappingItems</name>
-		<right>
-			<name>InteractiveDeletePredefinedData</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDeleteMarkedPredefinedData</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.LockDataModificationReasons</name>
-		<right>
-			<name>InteractiveDeletePredefinedData</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDeleteMarkedPredefinedData</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.PartnersBankAccounts</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDeletePredefinedData</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDeleteMarkedPredefinedData</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>ExchangePlan.FullExchange</name>
-		<right>
-			<name>InteractiveDelete</name>
 			<value>false</value>
 		</right>
 	</object>

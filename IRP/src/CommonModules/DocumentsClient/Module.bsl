@@ -2164,7 +2164,7 @@ Procedure ItemListUnitOnChange(Object, Form, Module, Item = Undefined, Settings 
 	Settings.CalculateSettings.Insert("UpdatePrice");
 	PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
 	Settings.CalculateSettings.UpdatePrice = New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType);
-	
+
 	ItemListCalculateRowsAmounts(Object, Form, Settings, Undefined, AddInfo);
 EndProcedure
 
@@ -2343,12 +2343,14 @@ EndProcedure
 #Region PrepareServerData
 
 Procedure CommonParametersToServer(Object, Form, ParametersToServer, AddInfo = Undefined)
-	ArrayOfMovementsTypes = New Array;
-	For Each Row In Object.Currencies Do
-		ArrayOfMovementsTypes.Add(Row.MovementType);
-	EndDo;
-	ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
 	
+	If Object.Property("Currencies") Then
+		ArrayOfMovementsTypes = New Array;
+		For Each Row In Object.Currencies Do
+			ArrayOfMovementsTypes.Add(Row.MovementType);
+		EndDo;
+		ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
+	EndIf;
 	ArrayOfItemKeys = New Array;
 	For Each Row In Object.ItemList Do
 		ArrayOfItemKeys.Add(Row.ItemKey);

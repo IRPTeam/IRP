@@ -2,11 +2,12 @@ Function GetCalculationSettings(Actions = Undefined, AddInfo = Undefined) Export
 	If Actions = Undefined Then
 		Actions = New Structure;
 	EndIf;
-	
+	Actions.Insert("CalculateQuantityInBaseUnit");
 	Actions.Insert("CalculateSpecialOffers");
 	Actions.Insert("CalculateNetAmount");
 	Actions.Insert("CalculateTax");
 	Actions.Insert("CalculateTotalAmount");
+	
 	#If MobileClient Then
 	Actions.Insert("UpdateInfoString");
 	#EndIf
@@ -53,7 +54,7 @@ EndProcedure
 
 Function GetColumnNames_ItemList(ArrayOfTaxInfo = Undefined) Export
 	ColumnNames = "Key, Unit, Price, PriceType, ItemKey, Quantity, OffersAmount, 
-				  |TotalAmount, NetAmount, TaxAmount, Info, Barcode, DontCalculateRow";
+				  |TotalAmount, NetAmount, TaxAmount, Info, Barcode, DontCalculateRow, QuantityInBaseUnit";
 	If ArrayOfTaxInfo <> Undefined Then
 		For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
 			ColumnNames = ColumnNames + "," +	ItemOfTaxInfo.Name;
@@ -197,6 +198,10 @@ Procedure CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo = Undefined
 	
 	If Actions.Property("UpdateRowUnit") Then
 		UpdateRowUnit(Object, ItemRow, AddInfo);
+	EndIf;
+
+	If Actions.Property("CalculateQuantityInBaseUnit") Then
+		CalculateQuantityInBaseUnit(Object, ItemRow, AddInfo);
 	EndIf;
 	
 	If Actions.Property("ChangePriceType") Then
@@ -806,7 +811,7 @@ Function UpdateBarcode(Object, ItemRow, AddInfo = Undefined)
 	Return ReturnValue;
 EndFunction
 
-#Region NeewForms
+#Region NewForms
 
 Procedure CalculateRow(Object, Form, Settings, Actions) Export
 	
@@ -889,6 +894,11 @@ Function UpdateUnit(Object, ItemRow, AddInfo = Undefined)
     ItemRow.Unit = UnitInfo.Unit;
     Return UnitInfo.Unit;
 EndFunction
+
+Procedure CalculateQuantityInBaseUnit(Object, ItemRow, AddInfo = Undefined)
+	UnitFactor = GetItemInfo.GetUnitFactor(ItemRow.ItemKey, ItemRow.Unit);
+	ItemRow.QuantityInBaseUnit = ItemRow.Quantity * UnitFactor;	
+EndProcedure
 
 Procedure UpdateRowUnit(Object, Form, Settings, AddInfo = Undefined)
 	

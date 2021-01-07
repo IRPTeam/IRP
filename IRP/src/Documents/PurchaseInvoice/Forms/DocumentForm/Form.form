@@ -2116,12 +2116,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartChoice</event>
-              <name>ItemListExpenseTypeStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>ItemListExpenseTypeEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>ItemListExpenseTypeStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -2286,6 +2286,103 @@
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
           </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>ItemListInternalSupplyRequest</name>
+          <id>652</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.InternalSupplyRequest</segments>
+            </paths>
+          </dataPath>
+          <extendedTooltip>
+            <name>ItemListInternalSupplyRequestExtendedTooltip</name>
+            <id>654</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListInternalSupplyRequestContextMenu</name>
+            <id>653</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>ItemListUseGoodsReceipt</name>
+          <id>649</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.UseGoodsReceipt</segments>
+            </paths>
+          </dataPath>
+          <extendedTooltip>
+            <name>ItemListUseGoodsReceiptExtendedTooltip</name>
+            <id>651</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListUseGoodsReceiptContextMenu</name>
+            <id>650</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>CheckBoxField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
         </items>
         <items xsi:type="form:FormField">
           <name>ItemListDetail</name>
@@ -6099,7 +6196,6 @@
         <name>SearchByBarcode</name>
       </handler>
     </action>
-    
     <representation>Picture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
@@ -6152,7 +6248,6 @@
         <name>SetSpecialOffers</name>
       </handler>
     </action>
-    
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -6170,7 +6265,6 @@
         <name>SetSpecialOffersAtRow</name>
       </handler>
     </action>
-    
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>

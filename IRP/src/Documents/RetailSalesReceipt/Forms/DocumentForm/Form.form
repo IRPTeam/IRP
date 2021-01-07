@@ -1968,12 +1968,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartChoice</event>
-              <name>ItemListRevenueTypeStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>ItemListRevenueTypeEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>ItemListRevenueTypeStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -6250,7 +6250,6 @@
         <name>SetSpecialOffersAtRow</name>
       </handler>
     </action>
-    
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -6268,7 +6267,6 @@
         <name>SetSpecialOffers</name>
       </handler>
     </action>
-    
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -6302,7 +6300,6 @@
         <name>SearchByBarcode</name>
       </handler>
     </action>
-    
     <representation>Picture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>

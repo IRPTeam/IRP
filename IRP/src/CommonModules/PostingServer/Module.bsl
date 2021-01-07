@@ -93,6 +93,9 @@ Function SetLock(LockDataSources)
 	DataLock = New DataLock();
 	
 	For Each Row In LockDataSources Do
+		If Not Row.Value.Fields.Count() Then
+			Continue;
+		EndIf;
 		DataLockItem = DataLock.Add(Row.Key);
 		
 		DataLockItem.Mode = DataLockMode.Exclusive;
@@ -339,8 +342,15 @@ Function JoinTables(ArrayOfJoiningTables, Fields) Export
 	EndIf;
 EndFunction
 
-Procedure MergeTables(MasterTable, SlaveTable) Export
-	For Each Row In SlaveTable Do
+Procedure MergeTables(MasterTable, SourceTable, AddColumnFromSourceTable = "") Export
+	If NOT IsBlankString(AddColumnFromSourceTable) Then
+		Column = SourceTable.Columns.Find(AddColumnFromSourceTable);
+		If NOT Column = Undefined
+			AND MasterTable.Columns.Find(AddColumnFromSourceTable) = Undefined Then
+				MasterTable.Columns.Add(AddColumnFromSourceTable, Column.ValueType);
+		EndIf;
+	EndIf;
+	For Each Row In SourceTable Do
 		FillPropertyValues(MasterTable.Add(), Row);
 	EndDo;
 EndProcedure
@@ -1005,7 +1015,7 @@ EndFunction
 
 Function GetLockFieldsMap(LockFieldNames) Export
 	Fields = New Map();
-	ArrayOfFieldNames = StrSplit(LockFieldNames, ",");
+	ArrayOfFieldNames = StrSplit(LockFieldNames, ",", False);
 	For Each ItemFieldName In ArrayOfFieldNames Do
 		Fields.Insert(TrimAll(ItemFieldName), TrimAll(ItemFieldName));
 	EndDo;
@@ -1383,3 +1393,63 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	EndIf;
 	Return Not Error;
 EndFunction
+
+#Region NewRegistersPosting
+
+Function NotUseRegister(Name) Export
+	Return NOT Mid(Name, 7, 1) = "_";
+EndFunction	
+
+Procedure FillPostingTables(Tables, Ref, QueryArray) Export
+	Query = New Query;
+	Query.TempTablesManager = New TempTablesManager();
+	Query.SetParameter("Ref", Ref);
+	
+	Query.Text = StrConcat(QueryArray, Chars.LF + ";" + Chars.LF);
+	Query.Execute();
+	For Each VT In Tables Do
+		VTSearch = Query.TempTablesManager.Tables.Find(VT.Key);
+		If VTSearch = Undefined Then
+			Continue;
+		EndIf;
+		MergeTables(Tables[VT.Key], VTSearch.GetData().Unload(), "RecordType");
+	EndDo;
+EndProcedure
+
+Procedure SetPostingDataTables(PostingDataTables, Parameters) Export
+
+	For Each Table In Parameters.DocumentDataTables Do
+		If NotUseRegister(Table.Key) Then
+			Continue;
+		EndIf;
+		Settings = New Structure("RegisterName", Table.Key);
+		Settings.Insert("RecordSet", Table.Value);
+		Settings.Insert("WriteInTransaction", True);
+		PostingDataTables.Insert(Parameters.Object.RegisterRecords[Table.Key], Settings);
+	EndDo;
+
+EndProcedure
+
+Procedure GetLockDataSource(DataMapWithLockFields, DocumentDataTables) Export
+
+	For Each Register In DocumentDataTables Do
+		If NotUseRegister(Register.Key) Then
+			Continue;
+		EndIf;
+		LockData = AccumulationRegisters[Register.Key].GetLockFields(DocumentDataTables[Register.Key]);
+		DataMapWithLockFields.Insert(LockData.RegisterName, LockData.LockInfo);
+	
+	EndDo;
+	
+EndProcedure
+
+Procedure SetRegisters(Tables, DocumentRef) Export
+
+	For Each Register In DocumentRef.Metadata().RegisterRecords Do
+		If NotUseRegister(Register.Name) Then
+			Continue;
+		EndIf;
+		Tables.Insert(Register.Name, PostingServer.CreateTable(Register));
+	EndDo;
+EndProcedure
+#EndRegion

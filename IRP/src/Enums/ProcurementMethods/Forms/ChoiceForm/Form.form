@@ -184,7 +184,7 @@
         <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
       </items>
       <items xsi:type="form:FormField">
-        <name>Repeal</name>
+        <name>NoReserve</name>
         <id>25</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -193,16 +193,16 @@
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
           <paths xsi:type="form:DataPath">
-            <segments>Repeal</segments>
+            <segments>NoReserve</segments>
           </paths>
         </dataPath>
         <titleLocation>Right</titleLocation>
         <handlers>
           <event>OnChange</event>
-          <name>RepealOnChange</name>
+          <name>NoReserveOnChange</name>
         </handlers>
         <extendedTooltip>
-          <name>RepealExtendedTooltip</name>
+          <name>NoReserveExtendedTooltip</name>
           <id>27</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -217,7 +217,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>RepealContextMenu</name>
+          <name>NoReserveContextMenu</name>
           <id>26</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -414,10 +414,10 @@
     </edit>
   </attributes>
   <attributes>
-    <name>Repeal</name>
+    <name>NoReserve</name>
     <title>
       <key>en</key>
-      <value>Repeal</value>
+      <value>No reserve</value>
     </title>
     <id>4</id>
     <valueType>

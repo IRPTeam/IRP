@@ -6,4 +6,5 @@
     <value>Doc goods receipt client</value>
   </synonym>
   <clientManagedApplication>true</clientManagedApplication>
+  <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

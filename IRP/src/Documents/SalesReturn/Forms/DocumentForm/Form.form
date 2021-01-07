@@ -5226,7 +5226,6 @@
         <name>SearchByBarcode</name>
       </handler>
     </action>
-    
     <representation>Picture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>

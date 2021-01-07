@@ -6,4 +6,5 @@
     <value>Doc shipment confirmation client</value>
   </synonym>
   <clientManagedApplication>true</clientManagedApplication>
+  <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

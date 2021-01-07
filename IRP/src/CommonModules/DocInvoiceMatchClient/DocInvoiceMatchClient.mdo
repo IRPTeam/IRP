@@ -6,4 +6,5 @@
     <value>Doc invoice match client</value>
   </synonym>
   <clientManagedApplication>true</clientManagedApplication>
+  <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

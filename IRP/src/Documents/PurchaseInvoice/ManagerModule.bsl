@@ -355,6 +355,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	EndIf;
 	
 	Parameters.IsReposting = False;	
+	
+#Region NewRegistersPosting	
+	QueryArray = GetQueryTexts();
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray);
+#EndRegion			
+	
 	Return Tables;
 EndFunction
 
@@ -2575,6 +2581,10 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	TaxesTurnovers = AccumulationRegisters.TaxesTurnovers.GetLockFields(DocumentDataTables.TaxesTurnovers);
 	DataMapWithLockFields.Insert(TaxesTurnovers.RegisterName, TaxesTurnovers.LockInfo);
 	
+#Region NewRegistersPosting	
+	PostingServer.GetLockDataSource(DataMapWithLockFields, DocumentDataTables);
+#EndRegion	
+
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -2796,7 +2806,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	// TaxesTurnovers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.TaxesTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.TaxesTurnovers));
-		
+	
 	// R4035_IncommingStocks
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4035_IncommingStocks,
 		New Structure("RecordType, RecordSet",
@@ -2808,7 +2818,10 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.R4036_IncommingStocksRequested));
-		
+
+#Region NewRegistersPosting
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+#EndRegion			
 	Return PostingDataTables;
 EndFunction
 
@@ -2852,6 +2865,10 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Exists);
 	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
 	
+#Region NewRegistersPosting	
+	PostingServer.GetLockDataSource(DataMapWithLockFields, DocumentDataTables);
+#EndRegion	
+
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -2906,3 +2923,336 @@ EndProcedure
 
 #EndRegion
 
+#Region NewRegistersPosting
+
+Function GetQueryTexts()
+	QueryArray = New Array;
+	QueryArray.Add(ItemList());
+	QueryArray.Add(R1001T_Purchases());
+	QueryArray.Add(R1005T_PurchaseSpecialOffers());
+	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
+	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
+	QueryArray.Add(R1020B_AdvancesToVendors());
+	QueryArray.Add(R1021B_VendorsTransactions());
+	QueryArray.Add(R1031B_ReceiptInvoicing());
+	QueryArray.Add(R1040B_TaxesOutgoing());
+	QueryArray.Add(R2013T_SalesOrdersProcurement());
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4017B_InternalSupplyRequestProcurement());
+	QueryArray.Add(R4033B_GoodsReceiptSchedule());
+	QueryArray.Add(R4050B_StockInventory());
+	Return QueryArray;
+EndFunction
+
+Function ItemList()
+
+	Return
+		"SELECT
+		|	GoodsReceipts.Key
+		|INTO GoodsReceipts
+		|FROM
+		|	Document.PurchaseInvoice.GoodsReceipts AS GoodsReceipts
+		|WHERE
+		|	GoodsReceipts.Ref = &Ref
+		|GROUP BY
+		|	GoodsReceipts.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	PurchaseInvoiceItemList.Ref.Date AS Period,
+		|	PurchaseInvoiceItemList.Ref AS Invoice,
+		|	PurchaseInvoiceItemList.Key AS RowKey,
+		|	PurchaseInvoiceItemList.ItemKey,
+		|	PurchaseInvoiceItemList.Ref.Company AS Company,
+		|	PurchaseInvoiceItemList.Ref.Currency,
+		|	PurchaseInvoiceSpecialOffers.Offer AS SpecialOffer,
+		|	PurchaseInvoiceSpecialOffers.Amount AS OffersAmount
+		|INTO OffersInfo
+		|FROM
+		|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
+		|		INNER JOIN Document.PurchaseInvoice.SpecialOffers AS PurchaseInvoiceSpecialOffers
+		|		ON PurchaseInvoiceItemList.Key = PurchaseInvoiceSpecialOffers.Key
+		|WHERE
+		|	PurchaseInvoiceItemList.Ref = &Ref
+		|	AND PurchaseInvoiceSpecialOffers.Ref = &Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	PurchaseInvoiceItemList.Ref.Company AS Company,
+		|	PurchaseInvoiceItemList.Store AS Store,
+		|	PurchaseInvoiceItemList.UseGoodsReceipt AS UseGoodsReceipt,
+		|	NOT PurchaseInvoiceItemList.PurchaseOrder = Value(Document.PurchaseOrder.EmptyRef) AS PurchaseOrderExists,
+		|	NOT PurchaseInvoiceItemList.SalesOrder = Value(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
+		| 	NOT PurchaseInvoiceItemList.InternalSupplyRequest = Value(Document.InternalSupplyRequest.EmptyRef) AS InternalSupplyRequestExists,
+		|	NOT GoodsReceipts.Key IS NULL AS GoodsReceiptExists,
+		|	PurchaseInvoiceItemList.ItemKey AS ItemKey,
+		|	PurchaseInvoiceItemList.PurchaseOrder AS PurchaseOrder,
+		|	PurchaseInvoiceItemList.SalesOrder AS SalesOrder,
+		|	PurchaseInvoiceItemList.InternalSupplyRequest,
+		|	PurchaseInvoiceItemList.Ref AS Invoice,
+		|	PurchaseInvoiceItemList.Quantity AS UnitQuantity,
+		|	PurchaseInvoiceItemList.QuantityInBaseUnit AS Quantity,
+		|	PurchaseInvoiceItemList.TotalAmount AS Amount,
+		|	PurchaseInvoiceItemList.Ref.Partner AS Partner,
+		|	PurchaseInvoiceItemList.Ref.LegalName AS LegalName,
+		|	CASE
+		|		WHEN PurchaseInvoiceItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+		|		AND PurchaseInvoiceItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+		|			THEN PurchaseInvoiceItemList.Ref.Agreement.StandardAgreement
+		|		ELSE PurchaseInvoiceItemList.Ref.Agreement
+		|	END AS Agreement,
+		|	ISNULL(PurchaseInvoiceItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
+		|	PurchaseInvoiceItemList.Unit AS Unit,
+		|	PurchaseInvoiceItemList.ItemKey.Item AS Item,
+		|	PurchaseInvoiceItemList.Ref.Date AS Period,
+		|	PurchaseInvoiceItemList.Key AS RowKey,
+		|	PurchaseInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
+		|	PurchaseInvoiceItemList.BusinessUnit AS BusinessUnit,
+		|	PurchaseInvoiceItemList.ExpenseType AS ExpenseType,
+		|	PurchaseInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+		|	PurchaseInvoiceItemList.DeliveryDate AS DeliveryDate,
+		|	PurchaseInvoiceItemList.NetAmount AS NetAmount
+		|INTO ItemList
+		|FROM
+		|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
+		|		LEFT JOIN GoodsReceipts AS GoodsReceipts
+		|		ON PurchaseInvoiceItemList.Key = GoodsReceipts.Key
+		|WHERE
+		|	PurchaseInvoiceItemList.Ref = &Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	PurchaseInvoiceGoodsReceipts.Key,
+		|	PurchaseInvoiceGoodsReceipts.GoodsReceipt,
+		|	PurchaseInvoiceGoodsReceipts.Quantity
+		|INTO GoodReceiptInfo
+		|FROM
+		|	Document.PurchaseInvoice.GoodsReceipts AS PurchaseInvoiceGoodsReceipts
+		|WHERE
+		|	PurchaseInvoiceGoodsReceipts.Ref = &Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	PurchaseInvoiceTaxList.Ref.Date AS Period,
+		|	PurchaseInvoiceTaxList.Ref.Company AS Company,
+		|	PurchaseInvoiceTaxList.Tax AS Tax,
+		|	PurchaseInvoiceTaxList.TaxRate AS TaxRate,
+		|	CASE
+		|		WHEN PurchaseInvoiceTaxList.ManualAmount = 0
+		|			THEN PurchaseInvoiceTaxList.Amount
+		|		ELSE PurchaseInvoiceTaxList.ManualAmount
+		|	END AS TaxAmount,
+		|	PurchaseInvoiceItemList.NetAmount AS TaxableAmount
+		|INTO Taxes
+		|FROM
+		|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
+		|		LEFT JOIN Document.PurchaseInvoice.TaxList AS PurchaseInvoiceTaxList
+		|		ON PurchaseInvoiceItemList.Key = PurchaseInvoiceTaxList.Key
+		|WHERE
+		|	PurchaseInvoiceItemList.Ref = &Ref
+		|	AND PurchaseInvoiceTaxList.Ref = &Ref";
+EndFunction
+
+Function R1001T_Purchases()
+	Return
+		"SELECT *
+		|INTO R1001T_Purchases
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE TRUE";
+
+EndFunction
+
+Function R1005T_PurchaseSpecialOffers()
+	Return
+		"SELECT *
+		|INTO R1005T_PurchaseSpecialOffers
+		|FROM
+		|	OffersInfo AS QueryTable
+		|WHERE TRUE";
+
+EndFunction
+
+Function R1011B_PurchaseOrdersReceipt()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	QueryTable.PurchaseOrder AS Order,
+		|	*
+		|INTO R1011B_PurchaseOrdersReceipt
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE NOT QueryTable.UseGoodsReceipt 
+		|	AND QueryTable.PurchaseOrderExists 
+		|	AND NOT QueryTable.IsService";
+
+EndFunction
+
+Function R1012B_PurchaseOrdersInvoiceClosing()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	QueryTable.PurchaseOrder AS Order,
+		|	*
+		|INTO R1012B_PurchaseOrdersInvoiceClosing
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE QueryTable.PurchaseOrderExists";
+
+EndFunction
+
+Function R1020B_AdvancesToVendors()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	*
+		|INTO R1020B_AdvancesToVendors
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE FALSE";
+
+EndFunction
+
+Function R1021B_VendorsTransactions()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R1021B_VendorsTransactions
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE FALSE";
+
+EndFunction
+
+Function R1031B_ReceiptInvoicing()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	QueryTable.Invoice AS Basis,
+		|	QueryTable.Quantity AS Quantity,
+		|	QueryTable.Company,
+		|	QueryTable.Period,
+		|	QueryTable.ItemKey
+		|INTO R1031B_ReceiptInvoicing
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE QueryTable.UseGoodsReceipt AND NOT QueryTable.GoodsReceiptExists
+		|
+		|UNION ALL
+		|
+		|SELECT 
+		|	VALUE(AccumulationRecordType.Expense),
+		|	GoodsReceipts.GoodsReceipt,
+		|	GoodsReceipts.Quantity,
+		|	QueryTable.Company,
+		|	QueryTable.Period,
+		|	QueryTable.ItemKey
+		|FROM
+		|	ItemList AS QueryTable
+		|		INNER JOIN GoodReceiptInfo AS GoodsReceipts
+		|		ON QueryTable.RowKey = GoodsReceipts.Key
+		|WHERE TRUE";
+
+EndFunction
+
+Function R1040B_TaxesOutgoing()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R1040B_TaxesOutgoing
+		|FROM
+		|	Taxes AS QueryTable
+		|WHERE TRUE";
+
+EndFunction
+
+Function R2013T_SalesOrdersProcurement()
+	Return
+		"SELECT
+		|	QueryTable.Quantity AS PurchaseQuantity,
+		|	QueryTable.SalesOrder AS Order,
+		|	*
+		|INTO R2013T_SalesOrdersProcurement
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE
+		|	NOT QueryTable.IsService
+		|	AND QueryTable.SalesOrderExists";
+
+EndFunction
+
+Function R4010B_ActualStocks()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R4010B_ActualStocks
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE NOT QueryTable.IsService AND NOT QueryTable.UseGoodsReceipt";
+
+EndFunction
+
+Function R4011B_FreeStocks()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R4011B_FreeStocks
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE  NOT QueryTable.IsService AND NOT QueryTable.UseGoodsReceipt";
+
+EndFunction
+
+Function R4017B_InternalSupplyRequestProcurement()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	*
+		|INTO R4017B_InternalSupplyRequestProcurement
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE NOT QueryTable.IsService
+		|	AND QueryTable.InternalSupplyRequestExists
+		|	AND NOT QueryTable.UseGoodsReceipt";
+
+EndFunction
+
+Function R4033B_GoodsReceiptSchedule()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	QueryTable.PurchaseOrder AS Basis,
+		|*
+		|
+		|INTO R4033B_GoodsReceiptSchedule
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE NOT QueryTable.IsService
+		|	AND NOT QueryTable.UseGoodsReceipt 
+		|	AND QueryTable.PurchaseOrderExists
+		|	AND QueryTable.PurchaseOrder.UseItemsReceiptScheduling";
+
+EndFunction
+
+Function R4050B_StockInventory()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType, 
+		|	*
+		|INTO R4050B_StockInventory
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE NOT QueryTable.IsService";
+
+EndFunction
+
+#EndRegion

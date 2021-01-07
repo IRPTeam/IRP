@@ -6,5 +6,4 @@
     <value>Admin functions privileged</value>
   </synonym>
   <server>true</server>
-  <privileged>true</privileged>
 </mdclass:CommonModule>

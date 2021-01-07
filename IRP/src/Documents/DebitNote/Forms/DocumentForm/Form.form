@@ -1032,12 +1032,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartChoice</event>
-              <name>TransactionsRevenueTypeStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>TransactionsRevenueTypeEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>TransactionsRevenueTypeStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>

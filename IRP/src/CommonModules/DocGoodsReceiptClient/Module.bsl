@@ -102,6 +102,36 @@ EndProcedure
 
 #EndRegion
 
+#Region ItemListItemsEvents
+
+#Region Unit
+
+Procedure ItemListUnitOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	Actions = New Structure("CalculateQuantityInBaseUnit");
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
+EndProcedure
+
+#EndRegion
+
+#Region Quantity
+
+Procedure ItemListQuantityOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	Actions = New Structure("CalculateQuantityInBaseUnit");
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
 Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
 	CurrentRow = Form.Items.ItemList.CurrentData;
 	If CurrentRow = Undefined Then

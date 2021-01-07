@@ -6,4 +6,5 @@
     <value>Doc stock adjustment as surplus client</value>
   </synonym>
   <clientManagedApplication>true</clientManagedApplication>
+  <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

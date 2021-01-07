@@ -8,7 +8,7 @@ Var Component Export;
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	HTMLDate = GetCommonTemplate("HTMLClock").GetText();
 	HTMLTextTemplate = GetCommonTemplate("HTMLTextField").GetText();
-	Workstation = SessionParametersClientServer.GetSessionParameter("Workstation");
+	Workstation = SessionParametersServer.GetSessionParameter("Workstation");
 	If Workstation.IsEmpty() Then
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_090, "Workstation"));
 	EndIf;

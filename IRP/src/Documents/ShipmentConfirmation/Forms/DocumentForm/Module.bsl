@@ -108,6 +108,16 @@ Procedure ItemListItemKeyOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure ItemListQuantityOnChange(Item)
+	DocShipmentConfirmationClient.ItemListQuantityOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListUnitOnChange(Item)
+	DocShipmentConfirmationClient.ItemListUnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure ItemListShipmentBasisStartChoice(Item, ChoiceData, StandardProcessing)
 	DocShipmentConfirmationClient.ItemListReceiptBasisStartChoice(
 													Object, ThisObject, Item, ChoiceData, StandardProcessing);

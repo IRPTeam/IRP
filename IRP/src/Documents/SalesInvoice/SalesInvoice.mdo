@@ -66,20 +66,33 @@
   <defaultListForm>Document.SalesInvoice.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.SalesInvoice.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
   <registerRecords>AccumulationRegister.PartnerArTransactions</registerRecords>
   <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
   <registerRecords>AccumulationRegister.ItemsInStores</registerRecords>
+  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
   <registerRecords>AccumulationRegister.GoodsInTransitOutgoing</registerRecords>
   <registerRecords>AccumulationRegister.Aging</registerRecords>
+  <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
+  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
+  <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
   <registerRecords>AccumulationRegister.OrderReservation</registerRecords>
+  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
   <registerRecords>AccumulationRegister.TaxesTurnovers</registerRecords>
   <registerRecords>AccumulationRegister.AccountsStatement</registerRecords>
   <registerRecords>AccumulationRegister.StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.SalesTurnovers</registerRecords>
+  <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
   <registerRecords>AccumulationRegister.ShipmentOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R5011B_PartnersAging</registerRecords>
+  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
   <registerRecords>AccumulationRegister.ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.RevenuesTurnovers</registerRecords>
+  <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
   <registerRecords>AccumulationRegister.AdvanceFromCustomers</registerRecords>
+  <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
+  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
   <registerRecords>AccumulationRegister.ShipmentConfirmationSchedule</registerRecords>
@@ -554,6 +567,33 @@
       <synonym>
         <key>en</key>
         <value>Dont calculate row</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="0804564b-8a52-420f-a2d5-298a6d62c055">
+      <name>QuantityInBaseUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity in base unit</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="a6323a17-2efd-44aa-aa68-4e85124ef738">
+      <name>UseShipmentConfirmation</name>
+      <synonym>
+        <key>en</key>
+        <value>Use shipment confirmation</value>
       </synonym>
       <type>
         <types>Boolean</types>

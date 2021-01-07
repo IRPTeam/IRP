@@ -1,4 +1,4 @@
 
 Procedure SessionParametersSetting(RequiredParameters)
-	SessionParametersClientServer.SessionParametersSetting(RequiredParameters);
+	SessionParametersServer.SessionParametersSetting(RequiredParameters);
 EndProcedure

@@ -1180,7 +1180,7 @@ Function GetQueryTexts()
 	QueryArray.Add(ItemList());
 	QueryArray.Add(OffersInfo());
 	QueryArray.Add(ShipmentConfirmationsInfo());
-	QueryArray.Add(SalesInvoiceTaxList());
+	QueryArray.Add(Taxes());
 	QueryArray.Add(R2001T_Sales());
 	QueryArray.Add(R2005T_SalesSpecialOffers());
 	QueryArray.Add(R2011B_SalesOrdersShipment());
@@ -1315,32 +1315,6 @@ Function Taxes()
 		|WHERE
 		|	SalesInvoiceItemList.Ref = &Ref
 		|	AND SalesInvoiceTaxList.Ref = &Ref";
-EndFunction
-
-Function SalesInvoiceTaxList()
-	Return
-			"SELECT
-			|	SalesInvoiceTaxList.Ref AS Document,
-			|	SalesInvoiceTaxList.Ref.Date AS Period,
-			|	SalesInvoiceTaxList.Ref.Currency AS Currency,
-			|	SalesInvoiceTaxList.Key AS RowKeyUUID,
-			|	SalesInvoiceTaxList.Tax AS Tax,
-			|	SalesInvoiceTaxList.Analytics AS Analytics,
-			|	SalesInvoiceTaxList.TaxRate AS TaxRate,
-			|	SalesInvoiceTaxList.Amount AS Amount,
-			|	SalesInvoiceTaxList.IncludeToTotalAmount AS IncludeToTotalAmount,
-			|	SalesInvoiceTaxList.ManualAmount AS ManualAmount,
-			|	SalesInvoiceItemList.NetAmount AS NetAmount
-			|INTO TaxList
-			|FROM
-			|	Document.SalesInvoice.TaxList AS SalesInvoiceTaxList
-			|		INNER JOIN Document.SalesInvoice.ItemList AS SalesInvoiceItemList
-			|		ON SalesInvoiceTaxList.Ref = SalesInvoiceItemList.Ref
-			|		AND SalesInvoiceItemList.Ref = &Ref
-			|		AND SalesInvoiceTaxList.Ref = &Ref
-			|		AND SalesInvoiceItemList.Key = SalesInvoiceTaxList.Key
-			|WHERE
-			|	SalesInvoiceTaxList.Ref = &Ref";
 EndFunction
 
 Function R2001T_Sales()

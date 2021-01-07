@@ -201,18 +201,17 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="e70b5a43-9b35-4800-88eb-b4f27a25a5ef">
-      <name>QuantityInBaseUnit</name>
-      <synonym>
-        <key>en</key>
-        <value>Q</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
+    <name>QuantityInBaseUnit</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity in base unit</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
   <tabularSections uuid="d3bdb973-bcef-4e33-b168-9e55eefca40f">

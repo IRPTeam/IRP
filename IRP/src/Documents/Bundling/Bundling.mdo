@@ -146,14 +146,13 @@
     <name>QuantityInBaseUnit</name>
     <synonym>
       <key>en</key>
-      <value>Q</value>
+      <value>Quantity in base unit</value>
     </synonym>
     <type>
       <types>DefinedType.typeQuantity</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
     <dataHistory>Use</dataHistory>
   </attributes>
   <forms uuid="0db23a6f-8213-496b-8a8d-4c109ff42333">
@@ -253,18 +252,17 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="47036e84-9af0-46cb-976e-ca55349c3ea9">
-      <name>QuantityInBaseUnit</name>
-      <synonym>
-        <key>en</key>
-        <value>Q</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
+     <name>QuantityInBaseUnit</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity in base unit</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
   <tabularSections uuid="99202154-ddde-48d9-a457-7fc2b5eec6d9">

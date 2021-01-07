@@ -577,18 +577,17 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="0804564b-8a52-420f-a2d5-298a6d62c055">
-      <name>QuantityInBaseUnit</name>
-      <synonym>
-        <key>en</key>
-        <value>Q</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
+    <name>QuantityInBaseUnit</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity in base unit</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="a6323a17-2efd-44aa-aa68-4e85124ef738">
       <name>UseShipmentConfirmation</name>

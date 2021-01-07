@@ -500,18 +500,17 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="225e6d1d-a9a2-42a1-a100-28f81b0583e8">
-      <name>QuantityInBaseUnit</name>
-      <synonym>
-        <key>en</key>
-        <value>Q</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
+    <name>QuantityInBaseUnit</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity in base unit</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
   <tabularSections uuid="0f1c088b-ddce-4044-a1b7-59571f850942">

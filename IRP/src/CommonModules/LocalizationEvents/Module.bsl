@@ -185,7 +185,7 @@ Procedure GetCatalogPresentationFieldsPresentationFieldsGetProcessing(Source, Fi
 		Return;
 	EndIf;
 	StandardProcessing = False;
-	Fields = LocalizationServer.FieldsListForDescriptions(Source);	
+	Fields = LocalizationServer.FieldsListForDescriptions(String(Source));	
 EndProcedure
 
 Procedure BeforeWrite_DescriptionsCheckFilling(Source, Cancel) Export

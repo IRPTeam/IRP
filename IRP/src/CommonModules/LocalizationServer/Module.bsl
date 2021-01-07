@@ -87,7 +87,7 @@ EndFunction
 
 Function UseMultiLanguage(MetadataFullName, LangCode = "", AddInfo = Undefined) Export
 	LangCode = ?(ValueIsFilled(LangCode), LangCode, LocalizationReuse.UserLanguageCode());
-	MetadataFullName = StrReplace(MetadataFullName, "Manager.", "Ref.");
+	MetadataFullName = StrReplace(MetadataFullName, "Manager.", ".");
 	MetadataObject = Metadata.FindByFullName(MetadataFullName);
 	DescriptionAttr = Metadata.CommonAttributes["Description_" + LangCode];
 	Content = DescriptionAttr.Content.Find(MetadataObject);
@@ -109,20 +109,20 @@ EndFunction
 
 Function FieldsListForDescriptions(Val Source) Export
 	Fields = New Array;
-	If TypeOf(Source) = Type("CatalogManager.Currencies") Then
+	If Source = "CatalogManager.Currencies" Then
 		Fields.Add("Code");
 		Return Fields;
-	ElsIf TypeOf(Source) = Type("CatalogManager.ItemKeys") Then
+	ElsIf Source = "CatalogManager.ItemKeys" Then
 		Fields.Add("Specification");
 		Fields.Add("Item");
 		Fields.Add("Ref");
-	ElsIf TypeOf(Source) = Type("CatalogManager.PriceKeys") Then
+	ElsIf Source = "CatalogManager.PriceKeys" Then
 		Fields.Add("Ref");
 		Return Fields;
-	ElsIf TypeOf(Source) = Type("CatalogManager.IDInfoAddresses") Then
+	ElsIf Source = "CatalogManager.IDInfoAddresses" Then
 		Fields.Add("FullDescription");
 		Return Fields;
-	ElsIf NOT LocalizationReuse.UseMultiLanguage(Metadata.FindByType(TypeOf(Source)).FullName()) Then
+	ElsIf NOT LocalizationReuse.UseMultiLanguage(Source) Then
 		Fields.Add("Description");
 		Return Fields;
 	EndIf;

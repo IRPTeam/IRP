@@ -344,7 +344,6 @@ Procedure FillTables(Ref, AddInfo, Tables)
 	Tables.Insert("StockReservation_Exists" 	  , PostingServer.CreateTable(AccReg.StockReservation));
 	Tables.Insert("StockBalance_Exists"           , PostingServer.CreateTable(AccReg.StockBalance));
 
-	Tables.Insert("SalesOrder_ByPlannedDate"      , PostingServer.CreateTable(AccReg.SalesOrder_ByPlannedDate));
 	Tables.Insert("R4035_IncommingStocks"         , PostingServer.CreateTable(AccReg.R4035_IncommingStocks));
 	
 	Tables.OrderBalance_Exists_Receipt =

@@ -352,27 +352,35 @@ Scenario: _050002 check Cash receipt movements with transaction type Payment fro
 			| '$$NumberCashReceipt0500011$$'      |
 	* Check movements Cash receipt 1
 		And I click "Registrations report" button
+		And I select "Partner AR transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$CashReceipt0500011$$'                      | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
-			| 'Document registrations records'       | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
-			| 'Register  "Partner AR transactions"'  | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'      | ''                     | ''             | ''                         | ''                      | ''         | ''                         | 'Attributes'           |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Basis document'       | 'Partner'      | 'Legal name'               | 'Partner term'             | 'Currency' | 'Multi currency movement type'   | 'Deferred calculation' |
-			| ''                                     | 'Expense'     | '*'      | '17,12'     | 'Main Company'    | '$$SalesInvoice024001$$'     | 'Ferron BP'    | 'Company Ferron BP'     | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   |
-			| ''                                     | 'Expense'     | '*'      | '100'       | 'Main Company'    | '$$SalesInvoice024001$$'     | 'Ferron BP'    | 'Company Ferron BP'     | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty' | 'No'                   |
-			| ''                                     | 'Expense'     | '*'      | '100'       | 'Main Company'    | '$$SalesInvoice024001$$'     | 'Ferron BP'    | 'Company Ferron BP'     | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'           | 'No'                   |
-			| ''                                     | 'Expense'     | '*'      | '100'       | 'Main Company'    | '$$SalesInvoice024001$$'     | 'Ferron BP'    | 'Company Ferron BP'     | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                      | 'No'                   |
-			| ''                                     | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
-			| 'Register  "Accounts statement"'       | ''            | ''                    | ''                    | ''               | ''                                          | ''               | ''                         | ''                      | ''                  | ''                         | ''                     |
-			| ''                                     | 'Record type' | 'Period'              | 'Resources'           | ''               | ''                                          | ''               | 'Dimensions'               | ''                      | ''                  | ''                         | ''                     |
-			| ''                                     | ''            | ''                    | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers'                    | 'Transaction AR' | 'Company'                  | 'Partner'               | 'Legal name'        | 'Basis document'           | 'Currency'             |
-			| ''                                     | 'Expense'     | '*'                   | ''                    | ''               | ''                                          | '100'            | 'Main Company'             | 'Ferron BP'             | 'Company Ferron BP' | '$$SalesInvoice024001$$'         | 'TRY'                  |
-			| ''                                     | ''            | ''                    | ''                    | ''               | ''                                          | ''               | ''                         | ''                      | ''                  | ''                         | ''                     |
-			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'      | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Legal name'           | 'Currency'     | ''                         | ''                      | ''         | ''                         | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '100'       | 'Main Company'    | 'Company Ferron BP'    | 'TRY'          | ''                         | ''                      | ''         | ''                         | ''                     |
-			| ''                                     | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
+			| '$$CashReceipt0500011$$'              | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     |
+			| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     |
+			| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     |
+			| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                       | ''          | ''                  | ''                         | ''         | ''                             | 'Attributes'           |
+			| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'         | 'Partner'   | 'Legal name'        | 'Partner term'             | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                    | 'Expense'     | '*'      | '17,12'     | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                    | 'Expense'     | '*'      | '100'       | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                    | 'Expense'     | '*'      | '100'       | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                    | 'Expense'     | '*'      | '100'       | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
+		And I select "Accounts statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                       | ''         |
+			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                       | ''         |
+			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'         | 'Currency' |
+			| ''                               | 'Expense'     | '*'      | ''                     | ''               | ''                       | '100'            | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | 'TRY'      |
+		And I select "Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' |
+			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' |
+			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' |
+			| ''                                     | 'Expense'     | '*'      | '100'       | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' |
+		And I select "Account balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 			| 'Register  "Account balance"'          | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
 			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'      | ''                     | ''             | ''                         | 'Attributes'            | ''         | ''                         | ''                     |
 			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Account'              | 'Currency'     | 'Multi currency movement type'   | 'Deferred calculation'  | ''         | ''                         | ''                     |
@@ -410,34 +418,42 @@ Scenario: _050002 check Cash receipt movements with transaction type Payment fro
 			And in the table "List" I click the button named "ListContextMenuPost"
 		* Check movements
 			And I click "Registrations report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| '$$CashReceipt0500011$$'                      | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
-			| 'Document registrations records'       | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
-			| 'Register  "Partner AR transactions"'  | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'      | ''                     | ''             | ''                         | ''                      | ''         | ''                         | 'Attributes'           |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Basis document'       | 'Partner'      | 'Legal name'               | 'Partner term'             | 'Currency' | 'Multi currency movement type'   | 'Deferred calculation' |
-			| ''                                     | 'Expense'     | '*'      | '17,12'     | 'Main Company'    | '$$SalesInvoice024001$$'     | 'Ferron BP'    | 'Company Ferron BP'     | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'       | 'No'                   |
-			| ''                                     | 'Expense'     | '*'      | '100'       | 'Main Company'    | '$$SalesInvoice024001$$'     | 'Ferron BP'    | 'Company Ferron BP'     | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty' | 'No'                   |
-			| ''                                     | 'Expense'     | '*'      | '100'       | 'Main Company'    | '$$SalesInvoice024001$$'     | 'Ferron BP'    | 'Company Ferron BP'     | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'           | 'No'                   |
-			| ''                                     | 'Expense'     | '*'      | '100'       | 'Main Company'    | '$$SalesInvoice024001$$'     | 'Ferron BP'    | 'Company Ferron BP'     | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                      | 'No'                   |
-			| ''                                     | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
-			| 'Register  "Accounts statement"'       | ''            | ''                    | ''                    | ''               | ''                                          | ''               | ''                         | ''                      | ''                  | ''                         | ''                     |
-			| ''                                     | 'Record type' | 'Period'              | 'Resources'           | ''               | ''                                          | ''               | 'Dimensions'               | ''                      | ''                  | ''                         | ''                     |
-			| ''                                     | ''            | ''                    | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers'                    | 'Transaction AR' | 'Company'                  | 'Partner'               | 'Legal name'        | 'Basis document'           | 'Currency'             |
-			| ''                                     | 'Expense'     | '*'                   | ''                    | ''               | ''                                          | '100'            | 'Main Company'             | 'Ferron BP'             | 'Company Ferron BP' | '$$SalesInvoice024001$$'         | 'TRY'                  |
-			| ''                                     | ''            | ''                    | ''                    | ''               | ''                                          | ''               | ''                         | ''                      | ''                  | ''                         | ''                     |
-			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'      | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Legal name'           | 'Currency'     | ''                         | ''                      | ''         | ''                         | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '100'       | 'Main Company'    | 'Company Ferron BP'    | 'TRY'          | ''                         | ''                      | ''         | ''                         | ''                     |
-			| ''                                     | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
-			| 'Register  "Account balance"'          | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'      | ''                     | ''             | ''                         | 'Attributes'            | ''         | ''                         | ''                     |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Account'              | 'Currency'     | 'Multi currency movement type'   | 'Deferred calculation'  | ''         | ''                         | ''                     |
-			| ''                                     | 'Receipt'     | '*'      | '17,12'     | 'Main Company'    | 'Cash desk №1'         | 'USD'          | 'Reporting currency'       | 'No'                    | ''         | ''                         | ''                     |
-			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company'    | 'Cash desk №1'         | 'TRY'          | 'en description is empty' | 'No'                    | ''         | ''                         | ''                     |
-			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company'    | 'Cash desk №1'         | 'TRY'          | 'Local currency'           | 'No'                    | ''         | ''                         | ''                     |
-			And I close all client application windows
+			And I select "Partner AR transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| '$$CashReceipt0500011$$'              | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     |
+			| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     |
+			| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     |
+			| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                       | ''          | ''                  | ''                         | ''         | ''                             | 'Attributes'           |
+			| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'         | 'Partner'   | 'Legal name'        | 'Partner term'             | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                    | 'Expense'     | '*'      | '17,12'     | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                    | 'Expense'     | '*'      | '100'       | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                    | 'Expense'     | '*'      | '100'       | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                    | 'Expense'     | '*'      | '100'       | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
+		And I select "Accounts statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                       | ''         |
+			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                       | ''         |
+			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'         | 'Currency' |
+			| ''                               | 'Expense'     | '*'      | ''                     | ''               | ''                       | '100'            | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | 'TRY'      |
+		And I select "Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' |
+			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' |
+			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' |
+			| ''                                     | 'Expense'     | '*'      | '100'       | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' |
+		And I select "Account balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| 'Register  "Account balance"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''                     | '' | '' | '' |
+			| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | 'Attributes'           | '' | '' | '' |
+			| ''                            | ''            | ''       | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' |
+			| ''                            | 'Receipt'     | '*'      | '17,12'     | 'Main Company' | 'Cash desk №1' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' |
+			| ''                            | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Cash desk №1' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' | '' |
+			| ''                            | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Cash desk №1' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' | '' |
+		And I close all client application windows
 
 
 

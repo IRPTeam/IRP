@@ -680,21 +680,27 @@ Scenario: _021048 check the output of the document movement report for Inventory
 			| '$$NumberInventoryTransfer021001$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
+		And I select "Transfer order balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$InventoryTransfer021001$$'                 | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
-		| 'Document registrations records'        | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
-		| 'Register  "Transfer order balance"'    | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''                              | ''         | ''        |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store sender' | 'Store receiver'        | 'Order'                         | 'Item key' | 'Row key' |
-		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 01'     | 'Store 02'              | '$$InventoryTransferOrder020001$$' | 'S/Yellow' | '*'       |
-		| ''                                      | 'Expense'     | '*'      | '50'        | 'Store 01'     | 'Store 02'              | '$$InventoryTransferOrder020001$$' | 'M/White'  | '*'       |
-		| ''                                      | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
-		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''                              | ''         | ''        |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Receipt basis'         | 'Item key'                      | 'Row key'  | ''        |
-		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'     | '$$InventoryTransfer021001$$' | 'S/Yellow'                      | '*'        | ''        |
-		| ''                                      | 'Receipt'     | '*'      | '50'        | 'Store 02'     | '$$InventoryTransfer021001$$' | 'M/White'                       | '*'        | ''        |
-		| ''                                      | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| '$$InventoryTransfer021001$$'        | ''            | ''       | ''          | ''             | ''               | ''                                 | ''         | ''        |
+		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''               | ''                                 | ''         | ''        |
+		| 'Register  "Transfer order balance"' | ''            | ''       | ''          | ''             | ''               | ''                                 | ''         | ''        |
+		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''               | ''                                 | ''         | ''        |
+		| ''                                   | ''            | ''       | 'Quantity'  | 'Store sender' | 'Store receiver' | 'Order'                            | 'Item key' | 'Row key' |
+		| ''                                   | 'Expense'     | '*'      | '10'        | 'Store 01'     | 'Store 02'       | '$$InventoryTransferOrder020001$$' | 'S/Yellow' | '*'       |
+		| ''                                   | 'Expense'     | '*'      | '50'        | 'Store 01'     | 'Store 02'       | '$$InventoryTransferOrder020001$$' | 'M/White'  | '*'       |
+		And I select "Goods in transit incoming" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''           | ''                            | ''         | ''        | '' |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                            | ''         | ''        | '' |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Receipt basis'               | 'Item key' | 'Row key' | '' |
+		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$InventoryTransfer021001$$' | 'S/Yellow' | '*'       | '' |
+		| ''                                      | 'Receipt'     | '*'      | '50'        | 'Store 02'   | '$$InventoryTransfer021001$$' | 'M/White'  | '*'       | '' |
+		And I select "Stock balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Stock balance"'             | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
 		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''                              | ''         | ''        |
 		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Item key'              | ''                              | ''         | ''        |
@@ -709,21 +715,27 @@ Scenario: _021048 check the output of the document movement report for Inventory
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
+		And I select "Transfer order balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$InventoryTransfer021001$$'                 | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
-		| 'Document registrations records'        | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
-		| 'Register  "Transfer order balance"'    | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''                              | ''         | ''        |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store sender' | 'Store receiver'        | 'Order'                         | 'Item key' | 'Row key' |
-		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 01'     | 'Store 02'              | '$$InventoryTransferOrder020001$$' | 'S/Yellow' | '*'       |
-		| ''                                      | 'Expense'     | '*'      | '50'        | 'Store 01'     | 'Store 02'              | '$$InventoryTransferOrder020001$$' | 'M/White'  | '*'       |
-		| ''                                      | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
-		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''                              | ''         | ''        |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Receipt basis'         | 'Item key'                      | 'Row key'  | ''        |
-		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'     | '$$InventoryTransfer021001$$' | 'S/Yellow'                      | '*'        | ''        |
-		| ''                                      | 'Receipt'     | '*'      | '50'        | 'Store 02'     | '$$InventoryTransfer021001$$' | 'M/White'                       | '*'        | ''        |
-		| ''                                      | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| '$$InventoryTransfer021001$$'        | ''            | ''       | ''          | ''             | ''               | ''                                 | ''         | ''        |
+		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''               | ''                                 | ''         | ''        |
+		| 'Register  "Transfer order balance"' | ''            | ''       | ''          | ''             | ''               | ''                                 | ''         | ''        |
+		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''               | ''                                 | ''         | ''        |
+		| ''                                   | ''            | ''       | 'Quantity'  | 'Store sender' | 'Store receiver' | 'Order'                            | 'Item key' | 'Row key' |
+		| ''                                   | 'Expense'     | '*'      | '10'        | 'Store 01'     | 'Store 02'       | '$$InventoryTransferOrder020001$$' | 'S/Yellow' | '*'       |
+		| ''                                   | 'Expense'     | '*'      | '50'        | 'Store 01'     | 'Store 02'       | '$$InventoryTransferOrder020001$$' | 'M/White'  | '*'       |
+		And I select "Goods in transit incoming" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''           | ''                            | ''         | ''        | '' |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                            | ''         | ''        | '' |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Receipt basis'               | 'Item key' | 'Row key' | '' |
+		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$InventoryTransfer021001$$' | 'S/Yellow' | '*'       | '' |
+		| ''                                      | 'Receipt'     | '*'      | '50'        | 'Store 02'   | '$$InventoryTransfer021001$$' | 'M/White'  | '*'       | '' |
+		And I select "Stock balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Stock balance"'             | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
 		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''                              | ''         | ''        |
 		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Item key'              | ''                              | ''         | ''        |
@@ -755,21 +767,28 @@ Scenario: _02104801 clear movements Inventory transfer and check that there is n
 			| '$$NumberInventoryTransfer021001$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+	heck the report generation
+		And I select "Transfer order balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$InventoryTransfer021001$$'                 | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
-		| 'Document registrations records'        | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
-		| 'Register  "Transfer order balance"'    | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''                              | ''         | ''        |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store sender' | 'Store receiver'        | 'Order'                         | 'Item key' | 'Row key' |
-		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 01'     | 'Store 02'              | '$$InventoryTransferOrder020001$$' | 'S/Yellow' | '*'       |
-		| ''                                      | 'Expense'     | '*'      | '50'        | 'Store 01'     | 'Store 02'              | '$$InventoryTransferOrder020001$$' | 'M/White'  | '*'       |
-		| ''                                      | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
-		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''                              | ''         | ''        |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Receipt basis'         | 'Item key'                      | 'Row key'  | ''        |
-		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'     | '$$InventoryTransfer021001$$' | 'S/Yellow'                      | '*'        | ''        |
-		| ''                                      | 'Receipt'     | '*'      | '50'        | 'Store 02'     | '$$InventoryTransfer021001$$' | 'M/White'                       | '*'        | ''        |
-		| ''                                      | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
+		| '$$InventoryTransfer021001$$'        | ''            | ''       | ''          | ''             | ''               | ''                                 | ''         | ''        |
+		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''               | ''                                 | ''         | ''        |
+		| 'Register  "Transfer order balance"' | ''            | ''       | ''          | ''             | ''               | ''                                 | ''         | ''        |
+		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''               | ''                                 | ''         | ''        |
+		| ''                                   | ''            | ''       | 'Quantity'  | 'Store sender' | 'Store receiver' | 'Order'                            | 'Item key' | 'Row key' |
+		| ''                                   | 'Expense'     | '*'      | '10'        | 'Store 01'     | 'Store 02'       | '$$InventoryTransferOrder020001$$' | 'S/Yellow' | '*'       |
+		| ''                                   | 'Expense'     | '*'      | '50'        | 'Store 01'     | 'Store 02'       | '$$InventoryTransferOrder020001$$' | 'M/White'  | '*'       |
+		And I select "Goods in transit incoming" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''           | ''                            | ''         | ''        | '' |
+		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                            | ''         | ''        | '' |
+		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Receipt basis'               | 'Item key' | 'Row key' | '' |
+		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$InventoryTransfer021001$$' | 'S/Yellow' | '*'       | '' |
+		| ''                                      | 'Receipt'     | '*'      | '50'        | 'Store 02'   | '$$InventoryTransfer021001$$' | 'M/White'  | '*'       | '' |
+		And I select "Stock balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Stock balance"'             | ''            | ''       | ''          | ''             | ''                      | ''                              | ''         | ''        |
 		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''                              | ''         | ''        |
 		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Item key'              | ''                              | ''         | ''        |

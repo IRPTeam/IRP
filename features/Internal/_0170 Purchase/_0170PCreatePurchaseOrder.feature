@@ -757,6 +757,8 @@ Scenario: _017002 check the output of the document movement report for Purchase 
 		| '$$NumberPurchaseOrder017001$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
+		And I select "Goods receipt schedule" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 		| '$$PurchaseOrder017001$$'            | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
@@ -766,7 +768,9 @@ Scenario: _017002 check the output of the document movement report for Purchase 
 		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'M/White'   | '*'       | '*'             |
 		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'L/Green'   | '*'       | '*'             |
 		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | '36/Yellow' | '*'       | '*'             |
-		| ''                                   | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		And I select "Order balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Order balance"'          | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
 		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | ''              |
 		| ''                                   | ''            | ''       | 'Quantity'  | 'Store'        | 'Order'                   | 'Item key'  | 'Row key'   | ''        | ''              |
@@ -782,6 +786,8 @@ Scenario: _017002 check the output of the document movement report for Purchase 
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
+		And I select "Goods receipt schedule" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 		| '$$PurchaseOrder017001$$'            | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
@@ -791,7 +797,9 @@ Scenario: _017002 check the output of the document movement report for Purchase 
 		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'M/White'   | '*'       | '*'             |
 		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'L/Green'   | '*'       | '*'             |
 		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | '36/Yellow' | '*'       | '*'             |
-		| ''                                   | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		And I select "Order balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Order balance"'          | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
 		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | ''              |
 		| ''                                   | ''            | ''       | 'Quantity'  | 'Store'        | 'Order'                   | 'Item key'  | 'Row key'   | ''        | ''              |
@@ -820,6 +828,8 @@ Scenario: _0170020 clear movements Purchase Order and check that there is no mov
 			| '$$NumberPurchaseOrder017001$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select "Goods receipt schedule" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 		| '$$PurchaseOrder017001$$'            | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
 		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
@@ -829,7 +839,9 @@ Scenario: _0170020 clear movements Purchase Order and check that there is no mov
 		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'M/White'   | '*'       | '*'             |
 		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'L/Green'   | '*'       | '*'             |
 		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | '36/Yellow' | '*'       | '*'             |
-		| ''                                   | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
+		And I select "Order balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Order balance"'          | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
 		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | ''              |
 		| ''                                   | ''            | ''       | 'Quantity'  | 'Store'        | 'Order'                   | 'Item key'  | 'Row key'   | ''        | ''              |

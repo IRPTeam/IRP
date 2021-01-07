@@ -318,6 +318,8 @@ Scenario: _016502 check the output of the document movement report for Internal 
 			| 'Number' |
 			| '$$NumberInternalSupplyRequest016501$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select "Order balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 		| '$$InternalSupplyRequest016501$$' | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
 		| 'Document registrations records'  | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
@@ -335,6 +337,8 @@ Scenario: _016502 check the output of the document movement report for Internal 
 			| '$$NumberInternalSupplyRequest016501$$'      |
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select "Order balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 		| '$$InternalSupplyRequest016501$$' | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
 		| 'Document registrations records'  | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
@@ -366,6 +370,8 @@ Scenario: _0170021 clear movements Internal Supply Request and check that there 
 			| '$$NumberInternalSupplyRequest016501$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select "Order balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 		| '$$InternalSupplyRequest016501$$' | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |
 		| 'Document registrations records'  | ''            | ''       | ''          | ''           | ''                                | ''          | ''        |

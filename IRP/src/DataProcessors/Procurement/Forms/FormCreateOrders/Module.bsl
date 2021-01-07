@@ -373,11 +373,6 @@ Procedure Cancel(Command)
 EndProcedure
 
 &AtClient
-Procedure OnClose(Exit)
-	
-EndProcedure
-
-&AtClient
 Procedure BeforeClose(Cancel, Exit, WarningText, StandardProcessing)
 	StandardProcessing = False;
 	Result = New Structure();

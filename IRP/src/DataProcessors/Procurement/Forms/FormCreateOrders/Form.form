@@ -2660,10 +2660,6 @@
     <name>OnOpen</name>
   </handlers>
   <handlers>
-    <event>OnClose</event>
-    <name>OnClose</name>
-  </handlers>
-  <handlers>
     <event>BeforeClose</event>
     <name>BeforeClose</name>
   </handlers>

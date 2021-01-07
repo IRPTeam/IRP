@@ -3,11 +3,12 @@
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure();
 	#Region OldPosting
+
 	FillTables(Ref, AddInfo, Tables);
-	
+
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
-	
+
 	If Not StatusInfo.Posting Then
 		Return Tables;
 	EndIf;
@@ -280,20 +281,16 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|WHERE
 		|   tmp.UseSalesOrder
 		|;
-		|
 		|//[12]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.PurchaseBasis AS Order,
+		|	tmp.Period AS Period,
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
-		|	tmp.Quantity,
-		|	tmp.DeliveryDate AS Period
-		|FROM
-		|	tmp AS tmp
+		|	tmp.Order AS Order,
+		|	tmp.Quantity AS Quantity
 		|WHERE
-		|	tmp.DeliveryDate <> DATETIME(1, 1, 1) 
-		|	AND tmp.PurchaseBasis REFS Document.SalesOrder
+		|	NOT tmp.UseSalesOrder
+		|	AND NOT tmp.IsService
 		|";
 	
 	Query.SetParameter("QueryTable", QueryTable);
@@ -310,8 +307,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.GoodsReceiptSchedule_Receipt = QueryResults[9].Unload();
 	Tables.GoodsReceiptSchedule_Expense = QueryResults[10].Unload();
 	Tables.OrderProcurement             = QueryResults[11].Unload();
-	
-	#EndRegion
+	Tables.R4035_IncommingStocks        = QueryResults[12].Unload();
+
+#EndRegion
 	Parameters.IsReposting = False;
 	
 #Region NewRegistersPosting	
@@ -346,6 +344,9 @@ Procedure FillTables(Ref, AddInfo, Tables)
 	Tables.Insert("StockReservation_Exists" 	  , PostingServer.CreateTable(AccReg.StockReservation));
 	Tables.Insert("StockBalance_Exists"           , PostingServer.CreateTable(AccReg.StockBalance));
 
+	Tables.Insert("SalesOrder_ByPlannedDate"      , PostingServer.CreateTable(AccReg.SalesOrder_ByPlannedDate));
+	Tables.Insert("R4035_IncommingStocks"         , PostingServer.CreateTable(AccReg.R4035_IncommingStocks));
+	
 	Tables.OrderBalance_Exists_Receipt =
 	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
 	
@@ -520,7 +521,13 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.OrderProcurement,
 			True));
-
+			
+	// R4035_IncommingStocks
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4035_IncommingStocks,
+		New Structure("RecordType, RecordSet, WriteInTransaction",
+			AccumulationRecordType.Receipt,
+			Parameters.DocumentDataTables.R4035_IncommingStocks,
+			True));
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 #EndRegion	

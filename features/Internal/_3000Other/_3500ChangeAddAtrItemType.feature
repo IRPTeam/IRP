@@ -116,6 +116,7 @@ Scenario: _350001 check the connection between adding additional details to item
             And I click "Save" button
         * Check to add them to Additional attribute sets by item key
             When in opened panel I select "Additional attribute sets"
+            And I expand current line in "AttributesTree" table			
             And "AttributesTree" table contains lines
                 | 'Presentation'    |
                 | 'Stockings'        |
@@ -142,6 +143,7 @@ Scenario: _350001 check the connection between adding additional details to item
             And I select current line in "List" table
             And I click "Save" button
             When in opened panel I select "Additional attribute sets"
+            And I expand current line in "AttributesTree" table	
             And "AttributesTree" table contains lines
                 | 'Presentation'    |
                 | 'Brand Stockings'  |
@@ -205,6 +207,7 @@ Scenario: _350002 check the connection between the installation according to the
             And I click "Save" button
         * Check the ligament with Additional attribute sets by price key
             When in opened panel I select "Additional attribute sets"
+            And I expand current line in "AttributesTree" table	
             And "AttributesTree" table contains lines
                 | 'Presentation'   |
                 | 'Stockings'       |
@@ -236,6 +239,7 @@ Scenario: _350002 check the connection between the installation according to the
             And I click "Save" button
         * Check the ligament Additional attribute sets by price key
             When in opened panel I select "Additional attribute sets"
+            And I expand current line in "AttributesTree" table	
             And "AttributesTree" table contains lines
                 | 'Presentation'   |
                 | 'Stockings'       |
@@ -323,6 +327,7 @@ Scenario: _350004 edit Item type and check changes in Add atribute and property 
         And I click "Save and close" button
     * Check item type replacement in Add atribute and property sets by item key
         When in opened panel I select "Additional attribute sets"
+        And I expand current line in "AttributesTree" table	
         And "AttributesTree" table contains lines
             | 'Presentation'    |
             | 'Warm Stockings'   |
@@ -411,6 +416,7 @@ Scenario: _350006 check error when doubling additional attribute on item
             | 'Catalog_Items'          |
         And I select current line in "List" table
     * Check additional attribute
+		
         And "Attributes" table contains lines
         | 'Attribute'                 |
         | 'Article'                |

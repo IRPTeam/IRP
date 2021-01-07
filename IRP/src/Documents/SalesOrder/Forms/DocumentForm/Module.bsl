@@ -117,11 +117,11 @@ Procedure UpdateTotalAmounts()
 	ThisObject.TotalTotalAmount = 0;
 	ThisObject.TotalTaxAmount = 0;
 	ThisObject.TotalOffersAmount = 0;
-	ProcurementMethods_Repeal = PredefinedValue("Enum.ProcurementMethods.NoReserve");
+	ProcurementMethods_NoReserve = PredefinedValue("Enum.ProcurementMethods.NoReserve");
 	ProcurementMethods_EmptyRef = PredefinedValue("Enum.ProcurementMethods.EmptyRef");
 	IsService = PredefinedValue("Enum.ItemTypes.Service");
 	For Each Row In Object.ItemList Do
-		If Row.ProcurementMethod = ProcurementMethods_Repeal 
+		If Row.ProcurementMethod = ProcurementMethods_NoReserve 
 		Or (Row.ProcurementMethod = ProcurementMethods_EmptyRef And Row.ItemType <> IsService) Then
 			Continue;
 		EndIf;

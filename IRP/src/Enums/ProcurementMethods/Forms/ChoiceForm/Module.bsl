@@ -3,7 +3,7 @@ Procedure StockOnChange(Item)
 	
 	If Stock Then
 		Purchase = False;
-		Repeal = False;
+		NoReserve = False;
 	EndIf;
 	
 	PickParameters = New Structure();
@@ -18,7 +18,7 @@ EndProcedure
 Procedure PurchaseOnChange(Item)
 	
 	If Purchase Then
-		Repeal = False;
+		NoReserve = False;
 		Stock = False;
 	EndIf;
 	
@@ -31,16 +31,16 @@ Procedure PurchaseOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure RepealOnChange(Item)
+Procedure NoReserveOnChange(Item)
 	
-	If Repeal Then
+	If NoReserve Then
 		Purchase = False;
 		Stock = False;
 	EndIf;
 	
 	PickParameters = New Structure();
 	PickParameters.Insert("ItemName", Item.Name);
-	PickParameters.Insert("ItemValue", Repeal);
+	PickParameters.Insert("ItemValue", NoReserve);
 	
 	PickedProcurementMethodsRefresh(PickParameters);
 	

@@ -12,7 +12,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		ThisObject.PutInTable = Parameters.PutInTable;
 	EndIf;
 	
-	If Parameters.Property("GenerateOnOpen") And Parameters.GenerateOnOpen Then
+	If Parameters.Property("GenerateOnOpen") And Not Parameters.GenerateOnOpen = Undefined And Parameters.GenerateOnOpen Then
 		GenerateReportAtServer(ThisObject.ResultTable);
 	EndIf;
 EndProcedure

@@ -2961,6 +2961,7 @@ Function ItemList()
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
+		|	PurchaseInvoiceItemList.Ref.Date AS Period,
 		|	PurchaseInvoiceItemList.Ref AS Invoice,
 		|	PurchaseInvoiceItemList.Key AS RowKey,
 		|	PurchaseInvoiceItemList.ItemKey,

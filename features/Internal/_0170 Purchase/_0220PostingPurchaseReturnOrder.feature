@@ -281,27 +281,35 @@ Scenario: _022011 check the output of the document movement report for Purchase 
 		| '$$NumberPurchaseReturnOrder022001$$'      |
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
+		And I select "Purchase turnovers" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseReturnOrder022001$$'  | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Document registrations records' | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Register  "Purchase turnovers"' | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Period'      | 'Resources' | ''          | ''           | 'Dimensions'                    | ''                          | ''         | ''         | ''        | ''                             | 'Attributes'           |
-		| ''                               | ''            | 'Quantity'  | 'Amount'    | 'Net amount' | 'Company'                       | 'Purchase invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                               | '*'           | '-2'        | '-450,2'    | '-381,54'           | 'Main Company'                  | '$$PurchaseInvoice018006$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | 'No'                   |
-		| ''                               | '*'           | '-2'        | '-80'       | '-67,8'           | 'Main Company'                  | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                               | '*'           | '-2'        | '-80'       | '-67,8'           | 'Main Company'                  | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                               | '*'           | '-2'        | '-80'       | '-67,8'           | 'Main Company'                  | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'USD'                          | 'No'                   |
-		| ''                               | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Register  "Order reservation"'  | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Item key'                      | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Receipt'     | '*'         | '2'         | 'Store 02'   | 'L/Green'                       | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Register  "Stock reservation"'  | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Item key'                      | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Expense'     | '*'         | '2'         | 'Store 02'   | 'L/Green'                       | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
+		| '$$PurchaseReturnOrder022001$$'  | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
+		| 'Document registrations records' | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
+		| 'Register  "Purchase turnovers"' | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
+		| ''                               | 'Period' | 'Resources' | ''       | ''           | 'Dimensions'   | ''                          | ''         | ''         | ''        | ''                             | 'Attributes'           |
+		| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Purchase invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
+		| ''                               | '*'      | '-2'        | '-450,2' | '-381,54'    | 'Main Company' | '$$PurchaseInvoice018006$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | 'No'                   |
+		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   |
+		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | 'No'                   |
+		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'USD'                          | 'No'                   |
+		And I select "Order reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
+		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
+		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
+		| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
+		And I select "Stock reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
+		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
+		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
+		| ''                              | 'Expense'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
+		And I select "Order balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Order balance"'      | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Order'                         | 'Item key'                  | 'Row key'  | ''         | ''        | ''                             | ''                     |
@@ -315,27 +323,35 @@ Scenario: _022011 check the output of the document movement report for Purchase 
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
+		And I select "Purchase turnovers" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseReturnOrder022001$$'  | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Document registrations records' | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Register  "Purchase turnovers"' | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Period'      | 'Resources' | ''          | ''           | 'Dimensions'                    | ''                          | ''         | ''         | ''        | ''                             | 'Attributes'           |
-		| ''                               | ''            | 'Quantity'  | 'Amount'    | 'Net amount' | 'Company'                       | 'Purchase invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                               | '*'           | '-2'        | '-450,2'    | '-381,54'           | 'Main Company'                  | '$$PurchaseInvoice018006$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | 'No'                   |
-		| ''                               | '*'           | '-2'        | '-80'       | '-67,8'           | 'Main Company'                  | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                               | '*'           | '-2'        | '-80'       | '-67,8'           | 'Main Company'                  | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                               | '*'           | '-2'        | '-80'       | '-67,8'           | 'Main Company'                  | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'USD'                          | 'No'                   |
-		| ''                               | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Register  "Order reservation"'  | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Item key'                      | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Receipt'     | '*'         | '2'         | 'Store 02'   | 'L/Green'                       | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Register  "Stock reservation"'  | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Item key'                      | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Expense'     | '*'         | '2'         | 'Store 02'   | 'L/Green'                       | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
+		| '$$PurchaseReturnOrder022001$$'  | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
+		| 'Document registrations records' | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
+		| 'Register  "Purchase turnovers"' | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
+		| ''                               | 'Period' | 'Resources' | ''       | ''           | 'Dimensions'   | ''                          | ''         | ''         | ''        | ''                             | 'Attributes'           |
+		| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Purchase invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
+		| ''                               | '*'      | '-2'        | '-450,2' | '-381,54'    | 'Main Company' | '$$PurchaseInvoice018006$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | 'No'                   |
+		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   |
+		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | 'No'                   |
+		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'USD'                          | 'No'                   |
+		And I select "Order reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
+		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
+		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
+		| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
+		And I select "Stock reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
+		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
+		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
+		| ''                              | 'Expense'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
+		And I select "Order balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Order balance"'      | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Order'                         | 'Item key'                  | 'Row key'  | ''         | ''        | ''                             | ''                     |
@@ -365,27 +381,35 @@ Scenario: _02201101 clear movements Purchase Return Order and check that there i
 			| '$$NumberPurchaseReturnOrder022001$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select "Purchase turnovers" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseReturnOrder022001$$'  | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Document registrations records' | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Register  "Purchase turnovers"' | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Period'      | 'Resources' | ''          | ''           | 'Dimensions'                    | ''                          | ''         | ''         | ''        | ''                             | 'Attributes'           |
-		| ''                               | ''            | 'Quantity'  | 'Amount'    | 'Net amount' | 'Company'                       | 'Purchase invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                               | '*'           | '-2'        | '-450,2'    | '-381,54'    | 'Main Company'                  | '$$PurchaseInvoice018006$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | 'No'                   |
-		| ''                               | '*'           | '-2'        | '-80'       | '-67,8'      | 'Main Company'                  | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                               | '*'           | '-2'        | '-80'       | '-67,8'      | 'Main Company'                  | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                               | '*'           | '-2'        | '-80'       | '-67,8'      | 'Main Company'                  | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'USD'                          | 'No'                   |
-		| ''                               | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Register  "Order reservation"'  | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Item key'                      | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Receipt'     | '*'         | '2'         | 'Store 02'   | 'L/Green'                       | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Register  "Stock reservation"'  | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Item key'                      | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Expense'     | '*'         | '2'         | 'Store 02'   | 'L/Green'                       | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
+		| '$$PurchaseReturnOrder022001$$'  | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
+		| 'Document registrations records' | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
+		| 'Register  "Purchase turnovers"' | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
+		| ''                               | 'Period' | 'Resources' | ''       | ''           | 'Dimensions'   | ''                          | ''         | ''         | ''        | ''                             | 'Attributes'           |
+		| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Purchase invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
+		| ''                               | '*'      | '-2'        | '-450,2' | '-381,54'    | 'Main Company' | '$$PurchaseInvoice018006$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | 'No'                   |
+		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   |
+		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | 'No'                   |
+		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'USD'                          | 'No'                   |
+		And I select "Order reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
+		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
+		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
+		| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
+		And I select "Stock reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
+		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
+		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
+		| ''                              | 'Expense'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
+		And I select "Order balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Order balance"'      | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
 		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Order'                         | 'Item key'                  | 'Row key'  | ''         | ''        | ''                             | ''                     |

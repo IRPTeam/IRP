@@ -340,39 +340,49 @@ Scenario: _023023 check the output of the document movement report for Sales Ord
 			| '$$NumberSalesOrder023001$$' |   
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
+		And I select "Order reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesOrder023001$$'                       | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| 'Document registrations records'             | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| 'Register  "Order reservation"'              | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Item key'             | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '4'         | 'Store 01'     | '36/Yellow'            | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Store 01'     | 'L/Green'              | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| 'Register  "Stock reservation"'              | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Item key'             | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '4'         | 'Store 01'     | '36/Yellow'            | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '5'         | 'Store 01'     | 'L/Green'              | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| 'Register  "Sales order turnovers"'          | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Period'      | 'Resources' | ''          | 'Dimensions'   | ''                     | ''          | ''          | ''        | ''                             | 'Attributes'           |
-		| ''                                           | ''            | 'Quantity'  | 'Amount'    | 'Company'      | 'Sales order'          | 'Currency'  | 'Item key'  | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                           | '*'           | '4'         | '273,92'    | 'Main Company' | '$$SalesOrder023001$$' | 'USD'       | '36/Yellow' | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                           | '*'           | '4'         | '1 600'     | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'       | '36/Yellow' | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                           | '*'           | '4'         | '1 600'     | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'       | '36/Yellow' | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                           | '*'           | '4'         | '1 600'     | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'       | '36/Yellow' | '*'       | 'TRY'                          | 'No'                   |
-		| ''                                           | '*'           | '5'         | '470,8'     | 'Main Company' | '$$SalesOrder023001$$' | 'USD'       | 'L/Green'   | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                           | '*'           | '5'         | '2 750'     | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'       | 'L/Green'   | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                           | '*'           | '5'         | '2 750'     | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'       | 'L/Green'   | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                           | '*'           | '5'         | '2 750'     | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'       | 'L/Green'   | '*'       | 'TRY'                          | 'No'                   |
-		| ''                                           | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| 'Register  "Order balance"'                  | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Order'                | 'Item key'  | 'Row key'   | ''        | ''                             | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '4'         | 'Store 01'     | '$$SalesOrder023001$$' | '36/Yellow' | '*'         | ''        | ''                             | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Store 01'     | '$$SalesOrder023001$$' | 'L/Green'   | '*'         | ''        | ''                             | ''                     |
-		| ''                                           | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
+		| '$$SalesOrder023001$$'           | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' |
+		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' |
+		| 'Register  "Order reservation"'  | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' |
+		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' | '' |
+		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' | '' |
+		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | '36/Yellow' | '' | '' | '' | '' | '' |
+		| ''                               | 'Receipt'     | '*'      | '5'         | 'Store 01'   | 'L/Green'   | '' | '' | '' | '' | '' |
+		And I select "Stock reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' |
+		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' | '' |
+		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' | '' |
+		| ''                              | 'Expense'     | '*'      | '4'         | 'Store 01'   | '36/Yellow' | '' | '' | '' | '' | '' |
+		| ''                              | 'Expense'     | '*'      | '5'         | 'Store 01'   | 'L/Green'   | '' | '' | '' | '' | '' |
+		And I select "Sales order turnovers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Sales order turnovers"' | ''       | ''          | ''       | ''             | ''                     | ''         | ''          | ''        | ''                             | ''                     |
+		| ''                                  | 'Period' | 'Resources' | ''       | 'Dimensions'   | ''                     | ''         | ''          | ''        | ''                             | 'Attributes'           |
+		| ''                                  | ''       | 'Quantity'  | 'Amount' | 'Company'      | 'Sales order'          | 'Currency' | 'Item key'  | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
+		| ''                                  | '*'      | '4'         | '273,92' | 'Main Company' | '$$SalesOrder023001$$' | 'USD'      | '36/Yellow' | '*'       | 'Reporting currency'           | 'No'                   |
+		| ''                                  | '*'      | '4'         | '1 600'  | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'      | '36/Yellow' | '*'       | 'en description is empty'      | 'No'                   |
+		| ''                                  | '*'      | '4'         | '1 600'  | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'      | '36/Yellow' | '*'       | 'Local currency'               | 'No'                   |
+		| ''                                  | '*'      | '4'         | '1 600'  | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'      | '36/Yellow' | '*'       | 'TRY'                          | 'No'                   |
+		| ''                                  | '*'      | '5'         | '470,8'  | 'Main Company' | '$$SalesOrder023001$$' | 'USD'      | 'L/Green'   | '*'       | 'Reporting currency'           | 'No'                   |
+		| ''                                  | '*'      | '5'         | '2 750'  | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'      | 'L/Green'   | '*'       | 'en description is empty'      | 'No'                   |
+		| ''                                  | '*'      | '5'         | '2 750'  | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'      | 'L/Green'   | '*'       | 'Local currency'               | 'No'                   |
+		| ''                                  | '*'      | '5'         | '2 750'  | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'      | 'L/Green'   | '*'       | 'TRY'                          | 'No'                   |
+		And I select "Order balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Order balance"' | ''            | ''       | ''          | ''           | ''                     | ''          | ''        | '' | '' | '' |
+		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                     | ''          | ''        | '' | '' | '' |
+		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                | 'Item key'  | 'Row key' | '' | '' | '' |
+		| ''                          | 'Receipt'     | '*'      | '4'         | 'Store 01'   | '$$SalesOrder023001$$' | '36/Yellow' | '*'       | '' | '' | '' |
+		| ''                          | 'Receipt'     | '*'      | '5'         | 'Store 01'   | '$$SalesOrder023001$$' | 'L/Green'   | '*'       | '' | '' | '' |
+		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Shipment confirmation schedule"' | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                     | ''          | ''          | ''        | 'Attributes'                   | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'      | 'Order'                | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date'                | ''                     |
@@ -387,39 +397,49 @@ Scenario: _023023 check the output of the document movement report for Sales Ord
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
+		And I select "Order reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesOrder023001$$'                       | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| 'Document registrations records'             | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| 'Register  "Order reservation"'              | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Item key'             | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '4'         | 'Store 01'     | '36/Yellow'            | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Store 01'     | 'L/Green'              | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| 'Register  "Stock reservation"'              | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Item key'             | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '4'         | 'Store 01'     | '36/Yellow'            | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '5'         | 'Store 01'     | 'L/Green'              | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| 'Register  "Sales order turnovers"'          | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Period'      | 'Resources' | ''          | 'Dimensions'   | ''                     | ''          | ''          | ''        | ''                             | 'Attributes'           |
-		| ''                                           | ''            | 'Quantity'  | 'Amount'    | 'Company'      | 'Sales order'          | 'Currency'  | 'Item key'  | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                           | '*'           | '4'         | '273,92'    | 'Main Company' | '$$SalesOrder023001$$' | 'USD'       | '36/Yellow' | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                           | '*'           | '4'         | '1 600'     | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'       | '36/Yellow' | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                           | '*'           | '4'         | '1 600'     | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'       | '36/Yellow' | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                           | '*'           | '4'         | '1 600'     | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'       | '36/Yellow' | '*'       | 'TRY'                          | 'No'                   |
-		| ''                                           | '*'           | '5'         | '470,8'     | 'Main Company' | '$$SalesOrder023001$$' | 'USD'       | 'L/Green'   | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                           | '*'           | '5'         | '2 750'     | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'       | 'L/Green'   | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                           | '*'           | '5'         | '2 750'     | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'       | 'L/Green'   | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                           | '*'           | '5'         | '2 750'     | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'       | 'L/Green'   | '*'       | 'TRY'                          | 'No'                   |
-		| ''                                           | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| 'Register  "Order balance"'                  | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                     | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | ''            | ''          | 'Quantity'  | 'Store'        | 'Order'                | 'Item key'  | 'Row key'   | ''        | ''                             | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '4'         | 'Store 01'     | '$$SalesOrder023001$$' | '36/Yellow' | '*'         | ''        | ''                             | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Store 01'     | '$$SalesOrder023001$$' | 'L/Green'   | '*'         | ''        | ''                             | ''                     |
-		| ''                                           | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
+		| '$$SalesOrder023001$$'           | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' |
+		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' |
+		| 'Register  "Order reservation"'  | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' |
+		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' | '' |
+		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' | '' |
+		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | '36/Yellow' | '' | '' | '' | '' | '' |
+		| ''                               | 'Receipt'     | '*'      | '5'         | 'Store 01'   | 'L/Green'   | '' | '' | '' | '' | '' |
+		And I select "Stock reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' |
+		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' | '' |
+		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' | '' |
+		| ''                              | 'Expense'     | '*'      | '4'         | 'Store 01'   | '36/Yellow' | '' | '' | '' | '' | '' |
+		| ''                              | 'Expense'     | '*'      | '5'         | 'Store 01'   | 'L/Green'   | '' | '' | '' | '' | '' |
+		And I select "Sales order turnovers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Sales order turnovers"' | ''       | ''          | ''       | ''             | ''                     | ''         | ''          | ''        | ''                             | ''                     |
+		| ''                                  | 'Period' | 'Resources' | ''       | 'Dimensions'   | ''                     | ''         | ''          | ''        | ''                             | 'Attributes'           |
+		| ''                                  | ''       | 'Quantity'  | 'Amount' | 'Company'      | 'Sales order'          | 'Currency' | 'Item key'  | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
+		| ''                                  | '*'      | '4'         | '273,92' | 'Main Company' | '$$SalesOrder023001$$' | 'USD'      | '36/Yellow' | '*'       | 'Reporting currency'           | 'No'                   |
+		| ''                                  | '*'      | '4'         | '1 600'  | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'      | '36/Yellow' | '*'       | 'en description is empty'      | 'No'                   |
+		| ''                                  | '*'      | '4'         | '1 600'  | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'      | '36/Yellow' | '*'       | 'Local currency'               | 'No'                   |
+		| ''                                  | '*'      | '4'         | '1 600'  | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'      | '36/Yellow' | '*'       | 'TRY'                          | 'No'                   |
+		| ''                                  | '*'      | '5'         | '470,8'  | 'Main Company' | '$$SalesOrder023001$$' | 'USD'      | 'L/Green'   | '*'       | 'Reporting currency'           | 'No'                   |
+		| ''                                  | '*'      | '5'         | '2 750'  | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'      | 'L/Green'   | '*'       | 'en description is empty'      | 'No'                   |
+		| ''                                  | '*'      | '5'         | '2 750'  | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'      | 'L/Green'   | '*'       | 'Local currency'               | 'No'                   |
+		| ''                                  | '*'      | '5'         | '2 750'  | 'Main Company' | '$$SalesOrder023001$$' | 'TRY'      | 'L/Green'   | '*'       | 'TRY'                          | 'No'                   |
+		And I select "Order balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+		| 'Register  "Order balance"' | ''            | ''       | ''          | ''           | ''                     | ''          | ''        | '' | '' | '' |
+		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                     | ''          | ''        | '' | '' | '' |
+		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                | 'Item key'  | 'Row key' | '' | '' | '' |
+		| ''                          | 'Receipt'     | '*'      | '4'         | 'Store 01'   | '$$SalesOrder023001$$' | '36/Yellow' | '*'       | '' | '' | '' |
+		| ''                          | 'Receipt'     | '*'      | '5'         | 'Store 01'   | '$$SalesOrder023001$$' | 'L/Green'   | '*'       | '' | '' | '' |
+		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Shipment confirmation schedule"' | ''            | ''          | ''          | ''             | ''                     | ''          | ''          | ''        | ''                             | ''                     |
 		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                     | ''          | ''          | ''        | 'Attributes'                   | ''                     |
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'      | 'Order'                | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date'                | ''                     |

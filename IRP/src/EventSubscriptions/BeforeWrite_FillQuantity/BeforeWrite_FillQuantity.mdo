@@ -6,25 +6,25 @@
     <value>Before write fill quantity</value>
   </synonym>
   <source>
-    <types>DocumentObject.Bundling</types>
-    <types>DocumentObject.GoodsReceipt</types>
-    <types>DocumentObject.InternalSupplyRequest</types>
-    <types>DocumentObject.InventoryTransfer</types>
-    <types>DocumentObject.InventoryTransferOrder</types>
-    <types>DocumentObject.PurchaseInvoice</types>
-    <types>DocumentObject.PurchaseOrder</types>
-    <types>DocumentObject.PurchaseReturn</types>
-    <types>DocumentObject.PurchaseReturnOrder</types>
-    <types>DocumentObject.RetailReturnReceipt</types>
     <types>DocumentObject.RetailSalesReceipt</types>
-    <types>DocumentObject.SalesInvoice</types>
     <types>DocumentObject.SalesOrder</types>
-    <types>DocumentObject.SalesReturn</types>
-    <types>DocumentObject.SalesReturnOrder</types>
-    <types>DocumentObject.ShipmentConfirmation</types>
-    <types>DocumentObject.Unbundling</types>
-    <types>DocumentObject.StockAdjustmentAsSurplus</types>
     <types>DocumentObject.StockAdjustmentAsWriteOff</types>
+    <types>DocumentObject.SalesReturn</types>
+    <types>DocumentObject.RetailReturnReceipt</types>
+    <types>DocumentObject.Bundling</types>
+    <types>DocumentObject.InternalSupplyRequest</types>
+    <types>DocumentObject.StockAdjustmentAsSurplus</types>
+    <types>DocumentObject.SalesReturnOrder</types>
+    <types>DocumentObject.PurchaseReturnOrder</types>
+    <types>DocumentObject.GoodsReceipt</types>
+    <types>DocumentObject.PurchaseReturn</types>
+    <types>DocumentObject.SalesInvoice</types>
+    <types>DocumentObject.InventoryTransfer</types>
+    <types>DocumentObject.ShipmentConfirmation</types>
+    <types>DocumentObject.PurchaseInvoice</types>
+    <types>DocumentObject.InventoryTransferOrder</types>
+    <types>DocumentObject.PurchaseOrder</types>
+    <types>DocumentObject.Unbundling</types>
   </source>
   <event>BeforeWrite</event>
   <handler>CommonModule.TempFunctions.BeforeWrite_FillQuantityBeforeWrite</handler>

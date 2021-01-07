@@ -1958,8 +1958,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.Cancel</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.Cancel</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListCancelExtendedTooltip</name>
@@ -2001,8 +2003,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.CancelReason</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.CancelReason</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListCancelReasonExtendedTooltip</name>
@@ -3712,8 +3716,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.UseItemsShipmentScheduling</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.UseItemsShipmentScheduling</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>UseItemsShipmentSchedulingExtendedTooltip</name>

@@ -19,11 +19,11 @@
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
   <type>
+    <types>CatalogRef.Companies</types>
     <types>Boolean</types>
     <types>String</types>
     <types>Date</types>
     <types>Number</types>
-    <types>CatalogRef.Companies</types>
     <types>CatalogRef.Stores</types>
     <numberQualifiers>
       <precision>12</precision>

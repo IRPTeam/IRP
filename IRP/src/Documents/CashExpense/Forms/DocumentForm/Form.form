@@ -769,12 +769,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartChoice</event>
-              <name>PaymentListExpenseTypeStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>PaymentListExpenseTypeEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>PaymentListExpenseTypeStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>

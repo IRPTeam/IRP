@@ -23,43 +23,7 @@
   <codeAllowedLength>Variable</codeAllowedLength>
   <descriptionLength>25</descriptionLength>
   <content>
-    <mdObject>Constant.ConnectionStatus</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Constant.DefaultPictureStorageVolume</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Constant.NotFirstStart</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Constant.UseCompanies</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Constant.UseItemKey</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Constant.UseLockDataModification</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.AccessGroups</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.AccessProfiles</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.AddAttributeAndPropertySets</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.AddAttributeAndPropertyValues</mdObject>
+    <mdObject>Catalog.PaymentTerminals</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
@@ -67,95 +31,7 @@
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>Catalog.BankTerms</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.BusinessUnits</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.CashAccounts</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.CashStatementStatuses</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.ChequeBonds</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.Companies</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.ConfigurationMetadata</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.Countries</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.Currencies</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.CurrencyMovementSets</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.DataMappingItems</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.EquipmentDrivers</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.ExpenseAndRevenueTypes</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.ExternalDataProc</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.Files</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.FileStoragesInfo</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
     <mdObject>Catalog.FileStorageVolumes</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.Hardware</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.IDInfoAddresses</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.IDInfoSets</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.IntegrationSettings</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.InterfaceGroups</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.ItemKeys</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
@@ -163,227 +39,7 @@
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>Catalog.ItemSegments</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.ItemTypes</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.ObjectStatuses</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.Partners</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.PartnerSegments</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.PaymentSchedules</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.PaymentTerminals</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.PaymentTypes</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.PriceKeys</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.PriceTypes</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.PrintTemplates</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.ReportOptions</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.RetailCustomers</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.SerialLotNumbers</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.SpecialOfferRules</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.SpecialOffers</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
     <mdObject>Catalog.SpecialOfferTypes</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.Specifications</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.Stores</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.TaxAnalytics</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.Taxes</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.TaxRates</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.Units</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.UnitsOfMeasurement</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.UserGroups</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.Users</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.Workstations</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Catalog.LockDataModificationReasons</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.BankPayment</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.BankReceipt</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.Bundling</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.CashExpense</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.CashPayment</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.CashReceipt</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.CashRevenue</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.CashTransferOrder</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.ChequeBondTransaction</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.ChequeBondTransactionItem</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.GoodsReceipt</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.IncomingPaymentOrder</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.InternalSupplyRequest</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.InventoryTransfer</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.InventoryTransferOrder</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.InvoiceMatch</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.Labeling</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.OpeningEntry</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.OutgoingPaymentOrder</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.PhysicalCountByLocation</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.PhysicalInventory</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.PriceList</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.PurchaseInvoice</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.PurchaseOrder</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.PurchaseReturn</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.PurchaseReturnOrder</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.ReconciliationStatement</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.SalesInvoice</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
@@ -391,147 +47,23 @@
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>Document.SalesReturn</mdObject>
+    <mdObject>Document.ChequeBondTransactionItem</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>Document.SalesReturnOrder</mdObject>
+    <mdObject>Document.Labeling</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>Document.ShipmentConfirmation</mdObject>
+    <mdObject>Catalog.Units</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>Document.StockAdjustmentAsSurplus</mdObject>
+    <mdObject>AccumulationRegister.PartnerArTransactions</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>Document.StockAdjustmentAsWriteOff</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.Unbundling</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.RetailSalesReceipt</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.RetailReturnReceipt</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.CreditNote</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.DebitNote</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>Document.CashStatement</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>ChartOfCharacteristicTypes.AddAttributeAndProperty</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>ChartOfCharacteristicTypes.CustomUserSettings</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>ChartOfCharacteristicTypes.IDInfoTypes</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>ChartOfCharacteristicTypes.CurrencyMovementType</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.AddProperties</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.AttachedFiles</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.Barcodes</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.BarcodeScanInfoCheck</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.BundleContents</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.BusinessUnitBankTerms</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.ChequeBondStatuses</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.CurrencyRates</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.DataMappingTable</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.ExternalCommands</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.IDInfo</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.IntegrationInfo</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.ItemSegments</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.LockDataModificationRules</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.ObjectStatuses</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.PartnerSegments</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.PricesByItemKeys</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.PricesByItems</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.PricesByProperties</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.RemainingItemsInfo</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.SavedItems</mdObject>
+    <mdObject>Catalog.PaymentSchedules</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
@@ -539,35 +71,15 @@
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>InformationRegister.Taxes</mdObject>
+    <mdObject>Document.PurchaseReturnOrder</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>InformationRegister.TaxSettings</mdObject>
+    <mdObject>Catalog.PartnerSegments</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>InformationRegister.UserSettings</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>InformationRegister.CreatedProcurementOrders</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.AccountBalance</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.AccountsStatement</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.AdvanceFromCustomers</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.AdvanceToSuppliers</mdObject>
+    <mdObject>InformationRegister.PricesByItems</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
@@ -575,27 +87,67 @@
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.CashInTransit</mdObject>
+    <mdObject>InformationRegister.IntegrationInfo</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.ChequeBondBalance</mdObject>
+    <mdObject>Catalog.Users</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.ExpensesTurnovers</mdObject>
+    <mdObject>Catalog.AddAttributeAndPropertySets</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.GoodsInTransitIncoming</mdObject>
+    <mdObject>Catalog.EquipmentDrivers</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.GoodsInTransitOutgoing</mdObject>
+    <mdObject>Catalog.InterfaceGroups</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.GoodsReceiptSchedule</mdObject>
+    <mdObject>AccumulationRegister.StockAdjustmentAsSurplus</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.CurrencyMovementSets</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.TransferOrderBalance</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.PurchaseReturnTurnovers</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.FileStoragesInfo</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.CreatedProcurementOrders</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.Countries</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.SalesReturn</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Constant.UseItemKey</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.CashAccounts</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.CurrencyRates</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
@@ -607,99 +159,79 @@
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.OrderBalance</mdObject>
+    <mdObject>InformationRegister.ItemSegments</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.OrderProcurement</mdObject>
+    <mdObject>Catalog.AddAttributeAndPropertyValues</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.OrderReservation</mdObject>
+    <mdObject>InformationRegister.BusinessUnitBankTerms</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.PartnerApTransactions</mdObject>
+    <mdObject>Catalog.BankTerms</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.PartnerArTransactions</mdObject>
+    <mdObject>InformationRegister.PartnerSegments</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.PlaningCashTransactions</mdObject>
+    <mdObject>Catalog.SpecialOffers</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.PurchaseReturnTurnovers</mdObject>
+    <mdObject>InformationRegister.AttachedFiles</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.PurchaseTurnovers</mdObject>
+    <mdObject>Catalog.Workstations</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.ReceiptOrders</mdObject>
+    <mdObject>InformationRegister.BundleContents</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.ReconciliationStatement</mdObject>
+    <mdObject>Document.ReconciliationStatement</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.RevenuesTurnovers</mdObject>
+    <mdObject>Catalog.TaxRates</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.SalesOrderTurnovers</mdObject>
+    <mdObject>AccumulationRegister.GoodsInTransitOutgoing</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.SalesReturnTurnovers</mdObject>
+    <mdObject>Document.RetailReturnReceipt</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.SalesTurnovers</mdObject>
+    <mdObject>Document.CashExpense</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.ShipmentConfirmationSchedule</mdObject>
+    <mdObject>Catalog.IDInfoSets</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.ShipmentOrders</mdObject>
+    <mdObject>Document.StockAdjustmentAsSurplus</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.StockAdjustmentAsSurplus</mdObject>
+    <mdObject>Catalog.ItemKeys</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.StockAdjustmentAsWriteOff</mdObject>
+    <mdObject>InformationRegister.ExternalCommands</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
-    <mdObject>AccumulationRegister.StockBalance</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.StockReservation</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.TaxesTurnovers</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.TransferOrderBalance</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.RetailSales</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.RetailCash</mdObject>
+    <mdObject>Catalog.CashStatementStatuses</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
@@ -707,7 +239,475 @@
     <autoRecord>Allow</autoRecord>
   </content>
   <content>
+    <mdObject>Document.PhysicalInventory</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.SalesReturnTurnovers</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.ItemSegments</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.PricesByItemKeys</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>ChartOfCharacteristicTypes.CustomUserSettings</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.PhysicalCountByLocation</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.IntegrationSettings</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.RetailSales</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.IDInfo</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Constant.DefaultPictureStorageVolume</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.Taxes</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.InventoryTransfer</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.SpecialOfferRules</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.PurchaseReturn</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.UnitsOfMeasurement</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.Files</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.SalesInvoice</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>ChartOfCharacteristicTypes.AddAttributeAndProperty</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.Stores</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.ChequeBondTransaction</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.PurchaseTurnovers</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.ExpensesTurnovers</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.BarcodeScanInfoCheck</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.RetailCash</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.OrderReservation</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.PlaningCashTransactions</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.OrderProcurement</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.AccessProfiles</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.CashRevenue</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.AccessGroups</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.ShipmentConfirmation</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.LockDataModificationRules</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.ConfigurationMetadata</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.Hardware</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.Specifications</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.PriceKeys</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.ReportOptions</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.DataMappingItems</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.TaxesTurnovers</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.GoodsInTransitIncoming</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.Currencies</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.DataMappingTable</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.AccountsStatement</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.PricesByProperties</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.LockDataModificationReasons</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.AddProperties</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.StockReservation</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.Unbundling</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.ChequeBondBalance</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.BusinessUnits</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.OpeningEntry</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.Bundling</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Constant.UseLockDataModification</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.SalesTurnovers</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.Taxes</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.ShipmentOrders</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.ExpenseAndRevenueTypes</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.ExternalDataProc</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.ReconciliationStatement</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.OutgoingPaymentOrder</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.CashInTransit</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.RetailSalesReceipt</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.RemainingItemsInfo</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.RevenuesTurnovers</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.StockAdjustmentAsWriteOff</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.Partners</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.InvoiceMatch</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.PriceList</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.ObjectStatuses</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.IncomingPaymentOrder</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Constant.NotFirstStart</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.AdvanceFromCustomers</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.ChequeBonds</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.ReceiptOrders</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.PrintTemplates</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.ItemTypes</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.CashReceipt</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.DebitNote</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.SalesReturnOrder</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Constant.UseCompanies</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.Barcodes</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.PurchaseInvoice</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.AdvanceToSuppliers</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.IDInfoAddresses</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.InventoryTransferOrder</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.StockAdjustmentAsWriteOff</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.PriceTypes</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
     <mdObject>Catalog.PartnersBankAccounts</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.GoodsReceipt</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.PurchaseOrder</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.GoodsReceiptSchedule</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>ChartOfCharacteristicTypes.CurrencyMovementType</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.RetailCustomers</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.PaymentTypes</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Constant.ConnectionStatus</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.SerialLotNumbers</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.UserGroups</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.CreditNote</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.BankPayment</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.PartnerApTransactions</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.AccountBalance</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.ChequeBondStatuses</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.UserSettings</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.InternalSupplyRequest</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.SavedItems</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.ObjectStatuses</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.CashPayment</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.CashTransferOrder</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.BankReceipt</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>InformationRegister.TaxSettings</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.SalesOrderTurnovers</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.OrderBalance</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.Companies</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.StockBalance</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Catalog.TaxAnalytics</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.ShipmentConfirmationSchedule</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>Document.CashStatement</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>ChartOfCharacteristicTypes.IDInfoTypes</mdObject>
     <autoRecord>Allow</autoRecord>
   </content>
   <defaultPresentation>AsDescription</defaultPresentation>

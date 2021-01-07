@@ -324,8 +324,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>Object.InterfaceLocalizationCode</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>Object.InterfaceLocalizationCode</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>InterfaceLocalizationCodeExtendedTooltip</name>

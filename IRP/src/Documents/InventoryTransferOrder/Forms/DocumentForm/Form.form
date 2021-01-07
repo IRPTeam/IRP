@@ -997,8 +997,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.Key</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.Key</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListKeyExtendedTooltip</name>
@@ -2068,6 +2070,10 @@
   </commandInterface>
   <extInfo xsi:type="form:DocumentFormExtInfo">
     <handlers>
+      <event>AfterWrite</event>
+      <name>AfterWrite</name>
+    </handlers>
+    <handlers>
       <event>AfterWriteAtServer</event>
       <name>AfterWriteAtServer</name>
     </handlers>
@@ -2082,10 +2088,6 @@
     <handlers>
       <event>OnWriteAtServer</event>
       <name>OnWriteAtServer</name>
-    </handlers>
-    <handlers>
-      <event>AfterWrite</event>
-      <name>AfterWrite</name>
     </handlers>
     <repostOnWrite>true</repostOnWrite>
   </extInfo>

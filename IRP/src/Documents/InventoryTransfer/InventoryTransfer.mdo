@@ -230,17 +230,17 @@
       <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="74c9a70d-1984-42ba-8f86-4ada1dbe624b">
-    <name>QuantityInBaseUnit</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity in base unit</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <dataHistory>Use</dataHistory>
+      <name>QuantityInBaseUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity in base unit</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
   <tabularSections uuid="c99d67d6-126b-41c7-a695-e2b052fbb9e1">

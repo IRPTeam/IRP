@@ -6,9 +6,9 @@
     <value>Before write descriptions check filling</value>
   </synonym>
   <source>
+    <types>ChartOfCharacteristicTypesObject</types>
     <types>ExchangePlanObject</types>
     <types>CatalogObject</types>
-    <types>ChartOfCharacteristicTypesObject</types>
   </source>
   <event>BeforeWrite</event>
   <handler>CommonModule.LocalizationEvents.BeforeWrite_DescriptionsCheckFilling</handler>

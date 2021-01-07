@@ -1590,8 +1590,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.SalesOrder</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.SalesOrder</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListSalesOrderExtendedTooltip</name>
@@ -1640,8 +1642,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.SalesInvoice</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.SalesInvoice</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListSalesInvoiceExtendedTooltip</name>
@@ -1690,8 +1694,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.InventoryTransferOrder</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.InventoryTransferOrder</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListInventoryTransferOrderExtendedTooltip</name>
@@ -1740,8 +1746,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.InventoryTransfer</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.InventoryTransfer</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListInventoryTransferExtendedTooltip</name>
@@ -1790,8 +1798,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.PurchaseReturnOrder</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.PurchaseReturnOrder</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListPurchaseReturnOrderExtendedTooltip</name>
@@ -1840,8 +1850,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.PurchaseReturn</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.PurchaseReturn</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListPurchaseReturnExtendedTooltip</name>

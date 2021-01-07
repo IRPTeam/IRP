@@ -55,17 +55,17 @@
   <defaultChoiceForm>Document.ShipmentConfirmation.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
   <registerRecords>AccumulationRegister.GoodsInTransitOutgoing</registerRecords>
+  <registerRecords>AccumulationRegister.R4022B_StockTransferOrdersShipment</registerRecords>
+  <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
   <registerRecords>AccumulationRegister.StockReservation</registerRecords>
+  <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
   <registerRecords>AccumulationRegister.ShipmentOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
+  <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
   <registerRecords>AccumulationRegister.ShipmentConfirmationSchedule</registerRecords>
-  <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
-  <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
-  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R4022B_StockTransferOrdersShipment</registerRecords>
-  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
-  <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -275,17 +275,17 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="ad036946-c3b6-4689-a697-c0cef1a0b597">
-    <name>QuantityInBaseUnit</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity in base unit</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <dataHistory>Use</dataHistory>
+      <name>QuantityInBaseUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity in base unit</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="4b992a5f-57d7-4835-8913-0f9a8c08c55c">
       <name>SalesOrder</name>

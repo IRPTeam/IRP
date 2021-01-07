@@ -980,6 +980,10 @@
     <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
   <handlers>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
+  </handlers>
+  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
   </handlers>
@@ -990,10 +994,6 @@
   <handlers>
     <event>FillCheckProcessingAtServer</event>
     <name>FillCheckProcessingAtServer</name>
-  </handlers>
-  <handlers>
-    <event>NotificationProcessing</event>
-    <name>NotificationProcessing</name>
   </handlers>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>

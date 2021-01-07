@@ -118,8 +118,8 @@
       <value>Order</value>
     </synonym>
     <type>
-      <types>DocumentRef.PurchaseOrder</types>
       <types>DocumentRef.PurchaseReturnOrder</types>
+      <types>DocumentRef.PurchaseOrder</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

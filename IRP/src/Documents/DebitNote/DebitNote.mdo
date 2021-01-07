@@ -59,8 +59,8 @@
   <registerRecords>AccumulationRegister.AccountsStatement</registerRecords>
   <registerRecords>AccumulationRegister.ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.RevenuesTurnovers</registerRecords>
-  <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
   <registerRecords>AccumulationRegister.AdvanceFromCustomers</registerRecords>
+  <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

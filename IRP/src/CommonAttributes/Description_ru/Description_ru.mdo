@@ -141,11 +141,19 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.CancelReturnReasons</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.ReportOptions</metadata>
     <use>DontUse</use>
   </content>
   <content>
     <metadata>Catalog.Currencies</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.LockDataModificationReasons</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -177,6 +185,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.PartnersBankAccounts</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>ChartOfCharacteristicTypes.CurrencyMovementType</metadata>
     <use>Use</use>
   </content>
@@ -202,18 +214,6 @@
   </content>
   <content>
     <metadata>ChartOfCharacteristicTypes.IDInfoTypes</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.LockDataModificationReasons</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.PartnersBankAccounts</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.CancelReturnReasons</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

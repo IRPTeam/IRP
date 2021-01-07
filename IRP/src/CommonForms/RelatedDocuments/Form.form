@@ -129,8 +129,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>DocumentsTree.Presentation</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>DocumentsTree.Presentation</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>DocumentsTreePresentationExtendedTooltip</name>

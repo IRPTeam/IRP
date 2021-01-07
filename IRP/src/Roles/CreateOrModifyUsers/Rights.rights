@@ -6,10 +6,6 @@
 	<object>
 		<name>Configuration.IRP</name>
 		<right>
-			<name>SaveUserData</name>
-			<value>true</value>
-		</right>
-		<right>
 			<name>ThinClient</name>
 			<value>true</value>
 		</right>
@@ -18,19 +14,7 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>MainWindowModeEmbeddedWorkplace</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>MainWindowModeKiosk</name>
-			<value>true</value>
-		</right>
-		<right>
 			<name>MainWindowModeNormal</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>MainWindowModeFullscreenWorkplace</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -38,7 +22,23 @@
 			<value>true</value>
 		</right>
 		<right>
+			<name>MainWindowModeEmbeddedWorkplace</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>MainWindowModeFullscreenWorkplace</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>MainWindowModeKiosk</name>
+			<value>true</value>
+		</right>
+		<right>
 			<name>AnalyticsSystemClient</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>SaveUserData</name>
 			<value>true</value>
 		</right>
 	</object>

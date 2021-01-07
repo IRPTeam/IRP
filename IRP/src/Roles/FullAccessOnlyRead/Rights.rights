@@ -503,6 +503,17 @@
 		</right>
 	</object>
 	<object>
+		<name>DocumentJournal.AllDocuments</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>AccumulationRegister.CashAdvance</name>
 		<right>
 			<name>Read</name>
@@ -722,6 +733,13 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonAttribute.Volume</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>AccumulationRegister.TransferOrderBalance</name>
 		<right>
 			<name>Read</name>
@@ -799,6 +817,20 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonAttribute.Height</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonAttribute.Weight</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonAttribute.Description_ru</name>
 		<right>
 			<name>View</name>
@@ -807,6 +839,28 @@
 	</object>
 	<object>
 		<name>Subsystem.Settings.Subsystem.Equipment</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>DataProcessor.SalesOrderStatusReport</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.CreatedProcurementOrders</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1083,6 +1137,13 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonForm.DataMappingForm</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.BusinessUnitBankTerms</name>
 		<right>
 			<name>Read</name>
@@ -1111,6 +1172,13 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Settings.Subsystem.LockDataModification</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1595,6 +1663,17 @@
 		</right>
 		<right>
 			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.Aging</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -2179,6 +2258,21 @@
 		</right>
 	</object>
 	<object>
+		<name>ExchangePlan.FullExchange</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.ChequeBondTransaction</name>
 		<right>
 			<name>Read</name>
@@ -2439,6 +2533,17 @@
 	</object>
 	<object>
 		<name>InformationRegister.Barcodes.Command.ShowBarcodeList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.LockDataModificationRules</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -2808,6 +2913,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.LockDataModificationReasons</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.AddProperties</name>
 		<right>
 			<name>Read</name>
@@ -3003,6 +3123,24 @@
 		</right>
 		<right>
 			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseLockDataModification</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Settings.Subsystem.BaseSettings</name>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -3879,6 +4017,13 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonAttribute.Length</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>AccumulationRegister.AdvanceToSuppliers</name>
 		<right>
 			<name>Read</name>
@@ -3963,6 +4108,13 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonAttribute.Width</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>AccumulationRegister.StockAdjustmentAsWriteOff</name>
 		<right>
 			<name>Read</name>
@@ -3997,6 +4149,17 @@
 		</right>
 		<right>
 			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.PartnersBankAccounts</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -4217,6 +4380,17 @@
 		</right>
 		<right>
 			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>DataProcessor.Procurement</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -4839,180 +5013,6 @@
 		</right>
 		<right>
 			<name>ViewDataHistory</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonAttribute.Width</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonAttribute.Height</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Settings.Subsystem.LockDataModification</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.LockDataModificationReasons</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InputByString</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonForm.DataMappingForm</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonAttribute.Weight</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonAttribute.Volume</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.LockDataModificationRules</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.Aging</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonAttribute.Length</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Constant.UseLockDataModification</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>ExchangePlan.FullExchange</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InputByString</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.PartnersBankAccounts</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>DocumentJournal.AllDocuments</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.CreatedProcurementOrders</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>DataProcessor.SalesOrderStatusReport</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>DataProcessor.Procurement</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Settings.Subsystem.BaseSettings</name>
-		<right>
-			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>

@@ -69,18 +69,18 @@
   <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
   <registerRecords>AccumulationRegister.OrderProcurement</registerRecords>
   <registerRecords>AccumulationRegister.GoodsInTransitIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</registerRecords>
   <registerRecords>AccumulationRegister.StockReservation</registerRecords>
+  <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
+  <registerRecords>AccumulationRegister.R1014T_CanceledPurchaseOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R4016B_InternalSupplyRequestOrdering</registerRecords>
   <registerRecords>AccumulationRegister.ReceiptOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R1010T_PurchaseOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R4033B_GoodsReceiptSchedule</registerRecords>
   <registerRecords>AccumulationRegister.GoodsReceiptSchedule</registerRecords>
+  <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R1010T_PurchaseOrders</registerRecords>
-  <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
-  <registerRecords>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</registerRecords>
-  <registerRecords>AccumulationRegister.R1014T_CanceledPurchaseOrders</registerRecords>
-  <registerRecords>AccumulationRegister.R4033B_GoodsReceiptSchedule</registerRecords>
-  <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
-  <registerRecords>AccumulationRegister.R4016B_InternalSupplyRequestOrdering</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -223,6 +223,8 @@
     <type>
       <types>CatalogRef.PartnersBankAccounts</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <choiceParameterLinks>
       <name>Filter.LegalEntity</name>
       <field>Document.PurchaseOrder.Attribute.LegalName</field>
@@ -232,6 +234,7 @@
       <field>Document.PurchaseOrder.Attribute.Partner</field>
     </choiceParameterLinks>
     <createOnInput>Use</createOnInput>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <attributes uuid="18f464f0-9cba-437d-a0ef-3cec8a56039e">
@@ -525,17 +528,17 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="2c581d14-9146-4c93-b4e6-468b8b7c10a5">
-    <name>QuantityInBaseUnit</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity in base unit</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <dataHistory>Use</dataHistory>
+      <name>QuantityInBaseUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity in base unit</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="d1ffe5f7-0c22-44b8-bf6e-25f5049badff">
       <name>Cancel</name>

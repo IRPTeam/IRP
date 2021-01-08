@@ -357,6 +357,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.IsReposting = False;	
 	
 #Region NewRegistersPosting	
+	PostingServer.SetRegisters(Tables, Ref);
 	QueryArray = GetQueryTexts();
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray);
 #EndRegion			

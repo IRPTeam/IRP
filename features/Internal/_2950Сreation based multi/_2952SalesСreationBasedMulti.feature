@@ -773,7 +773,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 					| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
-			And I select "Repeal" exact value from "Procurement method" drop-down list in "ItemList" table
+			And I select "No reserve" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I move to the next attribute
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -865,7 +865,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 					| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
-			And I select "Repeal" exact value from "Procurement method" drop-down list in "ItemList" table
+			And I select "No reserve" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I move to the next attribute
 			And I input "8,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table

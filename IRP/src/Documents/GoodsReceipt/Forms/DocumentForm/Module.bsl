@@ -88,6 +88,16 @@ Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
+Procedure ItemListQuantityOnChange(Item)
+	DocGoodsReceiptClient.ItemListQuantityOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListUnitOnChange(Item)
+	DocGoodsReceiptClient.ItemListUnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure ItemListOnActivateRow(Item)
 	DocGoodsReceiptClient.ItemListOnActivateRow(Object, ThisObject, Item);
 EndProcedure

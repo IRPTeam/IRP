@@ -33,4 +33,11 @@
       <value>Both</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="c46dcd0f-34d2-4750-a03e-f71863123e33">
+    <name>CashMovement</name>
+    <synonym>
+      <key>en</key>
+      <value>Cash movement</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

@@ -64,7 +64,7 @@ Procedure SaveSettingAtClient()
 		Notify = New NotifyDescription("SaveAsEnd", ThisObject);
 		ShowInputString(Notify, "", R().SuggestionToUser_3, 150);
 	Else
-		If CurrentData.Author = SessionParametersClientServer.GetSessionParameter("CurrentUser") Then
+		If CurrentData.Author = SessionParametersServer.GetSessionParameter("CurrentUser") Then
 			OptionDescriptionParameters = New Structure;
 			OptionDescriptionParameters.Insert("ReportOption", CurrentData.ReportOption);
 			OptionDescription = New NotifyDescription("OverwriteQuestionEnd", ThisObject, OptionDescriptionParameters);

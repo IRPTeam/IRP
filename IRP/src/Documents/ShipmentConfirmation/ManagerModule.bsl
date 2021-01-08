@@ -150,6 +150,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Parameters.IsReposting = False;
 	
+#Region NewRegistersPosting	
+	PostingServer.SetRegisters(Tables, Ref);
+	QueryArray = GetQueryTexts();
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray);
+#EndRegion	
 	Return Tables;
 EndFunction
 
@@ -618,6 +623,10 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation);
 	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
 		
+#Region NewRegistersPosting	
+	PostingServer.GetLockDataSource(DataMapWithLockFields, DocumentDataTables);
+#EndRegion	
+
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -679,6 +688,10 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.StockReservation,
 			True));
+			
+#Region NewRegistersPosting
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+#EndRegion		
 	
 	Return PostingDataTables;
 EndFunction
@@ -753,5 +766,147 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 		Cancel = True;
 	EndIf;
 EndProcedure
+
+#EndRegion
+
+#Region NewRegistersPosting
+
+Function GetQueryTexts()
+	QueryArray = New Array;
+	QueryArray.Add(ItemList());
+	QueryArray.Add(R2011B_SalesOrdersShipment());
+	QueryArray.Add(R2013T_SalesOrdersProcurement());
+	QueryArray.Add(R2031B_ShipmentInvoicing());
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4022B_StockTransferOrdersShipment());
+	QueryArray.Add(R4034B_GoodsShipmentSchedule());
+	Return QueryArray;
+EndFunction
+
+Function ItemList()
+	Return
+		"SELECT
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Store AS Store,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Ref AS ShipmentConfirmation,
+		|	ItemList.Quantity AS UnitQuantity,
+		|	ItemList.QuantityInBaseUnit AS Quantity,
+		|	ItemList.Unit,
+		|	ItemList.Ref.Date AS Period,
+		|	ItemList.Key AS RowKey,
+		|	ItemList.SalesOrder AS SalesOrder,
+		|	NOT ItemList.SalesOrder = Value(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
+		|	ItemList.SalesInvoice AS SalesInvoice,
+		|	NOT ItemList.SalesInvoice = Value(Document.SalesInvoice.EmptyRef) AS SalesInvoiceExists,
+		|	ItemList.PurchaseReturnOrder AS PurchaseReturnOrder,
+		|	NOT ItemList.PurchaseReturnOrder = Value(Document.PurchaseReturnOrder.EmptyRef) AS PurchaseReturnOrderExists,
+		|	ItemList.PurchaseReturn AS PurchaseReturn,
+		|	NOT ItemList.PurchaseReturn = Value(Document.PurchaseReturn.EmptyRef) AS PurchaseReturnExists,
+		|	ItemList.InventoryTransferOrder AS InventoryTransferOrder,
+		|	NOT ItemList.InventoryTransferOrder = Value(Document.InventoryTransferOrder.EmptyRef) AS InventoryTransferOrderExists,
+		|	ItemList.InventoryTransfer AS InventoryTransfer,
+		|	NOT ItemList.InventoryTransfer = Value(Document.InventoryTransfer.EmptyRef) AS InventoryTransferExists
+		|INTO ItemList
+		|FROM
+		|	Document.ShipmentConfirmation.ItemList AS ItemList
+		|WHERE
+		|	ItemList.Ref = &Ref";
+EndFunction
+
+Function R2011B_SalesOrdersShipment()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	QueryTable.SalesOrder AS Order,
+		|	*
+		|INTO R2011B_SalesOrdersShipment
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE QueryTable.SalesOrderExists";
+
+EndFunction
+
+Function R2013T_SalesOrdersProcurement()
+	Return
+		"SELECT
+		|	QueryTable.Quantity AS ShippedQuantity,
+		|	QueryTable.SalesOrder AS Order,
+		|	*
+		|INTO R2013T_SalesOrdersProcurement
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE
+		|	QueryTable.SalesOrderExists";
+
+EndFunction
+
+Function R2031B_ShipmentInvoicing()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	QueryTable.ShipmentConfirmation AS Basis,
+		|	QueryTable.Quantity AS Quantity,
+		|	QueryTable.Company,
+		|	QueryTable.Period,
+		|	QueryTable.ItemKey
+		|INTO R1031B_ReceiptInvoicing
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE NOT QueryTable.SalesInvoiceExists
+		|
+		|UNION ALL
+		|
+		|SELECT 
+		|	VALUE(AccumulationRecordType.Expense),
+		|	QueryTable.SalesInvoice,
+		|	QueryTable.Quantity,
+		|	QueryTable.Company,
+		|	QueryTable.Period,
+		|	QueryTable.ItemKey
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE QueryTable.SalesInvoiceExists";
+
+EndFunction
+
+Function R4010B_ActualStocks()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	*
+		|INTO R4010B_ActualStocks
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE TRUE";
+
+EndFunction
+
+Function R4022B_StockTransferOrdersShipment()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	QueryTable.InventoryTransferOrder AS Order,
+		|	*
+		|INTO R4022B_StockTransferOrdersShipment
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE QueryTable.InventoryTransferOrderExists";
+
+EndFunction
+
+Function R4034B_GoodsShipmentSchedule()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	QueryTable.SalesOrder AS Basis,
+		|	*
+		|INTO R4034B_GoodsShipmentSchedule
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE QueryTable.SalesOrderExists
+		|	AND QueryTable.SalesOrder.UseItemsShipmentScheduling";
+
+EndFunction
 
 #EndRegion

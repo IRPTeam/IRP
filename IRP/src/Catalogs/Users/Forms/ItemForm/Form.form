@@ -630,9 +630,6 @@
             <paths xsi:type="form:DataPath">
               <segments>RoleList.Value</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>RoleList.Значение</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>RoleListValueExtendedTooltip</name>
@@ -681,8 +678,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>RoleList.Presentation</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>RoleList.Presentation</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>RoleListPresentationExtendedTooltip</name>
@@ -1139,12 +1138,12 @@
   </commandInterface>
   <extInfo xsi:type="form:CatalogFormExtInfo">
     <handlers>
-      <event>BeforeWriteAtServer</event>
-      <name>BeforeWriteAtServer</name>
-    </handlers>
-    <handlers>
       <event>OnReadAtServer</event>
       <name>OnReadAtServer</name>
+    </handlers>
+    <handlers>
+      <event>BeforeWriteAtServer</event>
+      <name>BeforeWriteAtServer</name>
     </handlers>
   </extInfo>
 </form:Form>

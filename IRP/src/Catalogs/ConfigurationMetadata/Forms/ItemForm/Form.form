@@ -8,8 +8,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Description</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Description</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>DescriptionExtendedTooltip</name>
@@ -58,8 +60,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Parent</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Parent</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>ParentExtendedTooltip</name>
@@ -108,8 +112,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Extension</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Extension</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>ExtensionExtendedTooltip</name>
@@ -158,8 +164,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.CheckDescriptionDuplicate</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.CheckDescriptionDuplicate</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>CheckDescriptionDuplicateExtendedTooltip</name>
@@ -201,8 +209,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.CheckDescriptionFilling</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.CheckDescriptionFilling</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>CheckDescriptionFillingExtendedTooltip</name>
@@ -244,8 +254,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.ObjectName</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.ObjectName</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>ObjectNameExtendedTooltip</name>
@@ -294,8 +306,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.ObjectFullName</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.ObjectFullName</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>ObjectFullNameExtendedTooltip</name>
@@ -344,8 +358,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Unused</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Unused</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>UnusedExtendedTooltip</name>

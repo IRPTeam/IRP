@@ -164,8 +164,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.PrintTemplate</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.PrintTemplate</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>PrintTemplateExtendedTooltip</name>

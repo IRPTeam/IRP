@@ -19,8 +19,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>TableOfInternalSupplyRequest.RowKey</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>TableOfInternalSupplyRequest.RowKey</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>TableOfInternalSupplyRequestRowKeyExtendedTooltip</name>
@@ -69,9 +71,6 @@
         <paths xsi:type="form:DataPath">
           <segments>TableOfInternalSupplyRequest.Use</segments>
         </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>TableOfInternalSupplyRequest.Use</segments>
-        </paths>
       </dataPath>
       <titleLocation>None</titleLocation>
       <extendedTooltip>
@@ -117,8 +116,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>TableOfInternalSupplyRequest.Picture</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>TableOfInternalSupplyRequest.Picture</segments>
+          </paths>
         </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
@@ -171,9 +172,6 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>TableOfInternalSupplyRequest.InternalSupplyRequest</segments>
-          </paths>
           <paths xsi:type="form:DataPath">
             <segments>TableOfInternalSupplyRequest.InternalSupplyRequest</segments>
           </paths>
@@ -256,8 +254,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>TableOfInternalSupplyRequest.ProcurementDate</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>TableOfInternalSupplyRequest.ProcurementDate</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>TableOfInternalSupplyRequestProcurementDateExtendedTooltip</name>
@@ -308,9 +308,6 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>TableOfInternalSupplyRequest.Quantity</segments>
-        </paths>
         <paths xsi:type="form:DataPath">
           <segments>TableOfInternalSupplyRequest.Quantity</segments>
         </paths>
@@ -528,6 +525,7 @@
     <horizontalStretch>true</horizontalStretch>
     <verticalStretch>true</verticalStretch>
     <fileDragMode>AsFileRef</fileDragMode>
+    <rowFilter xsi:type="core:UndefinedValue"/>
   </items>
   <autoCommandBar>
     <name>FormCommandBar</name>

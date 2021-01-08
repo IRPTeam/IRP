@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8cb37f8e-17b3-4aef-8474-1d6f13e35370">
+  <producedTypes>
+    <objectType typeId="04b0d7e4-73ff-4a30-a1dc-da1d92d20b02" valueTypeId="152872c4-3d2e-408f-b157-cba724f4d11a"/>
+    <refType typeId="1178f313-275b-495d-a2c9-7f96198f84c5" valueTypeId="d37f8d06-e0a5-407a-a704-7f940bf4209e"/>
+    <selectionType typeId="3e9d2233-ad11-404c-8993-fbb684b7f3c8" valueTypeId="69101d83-956f-44c7-a761-d7b289a0ecb9"/>
+    <listType typeId="b8ba6bca-d4ea-4401-b5d2-ad5b3296c2dd" valueTypeId="b83c4e81-4982-4bd4-a322-beaf4047b6da"/>
+    <managerType typeId="3c5b4d5c-8c2d-4c67-a1a6-26814e311f58" valueTypeId="b2f4aff4-f3e7-45ad-8f7e-ddca7a6e1d83"/>
+  </producedTypes>
+  <name>CancelReturnReasons</name>
+  <synonym>
+    <key>en</key>
+    <value>Cancel/Return reasons</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.CancelReturnReasons.StandardAttribute.Code</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>12</codeLength>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+</mdclass:Catalog>

@@ -880,8 +880,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Result</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Result</segments>
+      </paths>
     </dataPath>
     <titleLocation>None</titleLocation>
     <extendedTooltip>

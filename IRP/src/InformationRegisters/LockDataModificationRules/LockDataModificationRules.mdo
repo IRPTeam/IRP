@@ -61,10 +61,10 @@
       <value>Value</value>
     </synonym>
     <type>
-      <types>Number</types>
+      <types>Boolean</types>
       <types>String</types>
       <types>Date</types>
-      <types>Boolean</types>
+      <types>Number</types>
       <types>AnyRef</types>
       <numberQualifiers>
         <precision>10</precision>

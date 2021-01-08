@@ -225,7 +225,6 @@ EndProcedure
 &AtClient
 Procedure UpdateAttributesTree()
 	UpdateAttributesTreeAtServer();
-	ExpandTree(ThisObject.AttributesTree, ThisObject.AttributesTree.GetItems());
 EndProcedure
 
 &AtServer
@@ -233,14 +232,6 @@ Procedure UpdateAttributesTreeAtServer()
 	ThisObject.AttributesTree.GetItems().Clear();
 	OnlyAffectPricing = Object.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_PriceKeys");
 	FillAttributesTree(GetItemTypesTree(), ThisObject.AttributesTree, OnlyAffectPricing);
-EndProcedure
-
-&AtClient
-Procedure ExpandTree(Tree, TreeRows)
-	For Each ItemTreeRows In TreeRows Do
-		ThisObject.Items.AttributesTree.Expand(ItemTreeRows.GetID());
-		ExpandTree(Tree, ItemTreeRows.GetItems());
-	EndDo;
 EndProcedure
 
 &AtClient

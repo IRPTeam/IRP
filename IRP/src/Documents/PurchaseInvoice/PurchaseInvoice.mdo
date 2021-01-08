@@ -66,21 +66,36 @@
   <defaultListForm>Document.PurchaseInvoice.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.PurchaseInvoice.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R1001T_Purchases</registerRecords>
+  <registerRecords>AccumulationRegister.R1005T_PurchaseSpecialOffers</registerRecords>
   <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R4017B_InternalSupplyRequestProcurement</registerRecords>
+  <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
+  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
   <registerRecords>AccumulationRegister.PurchaseTurnovers</registerRecords>
   <registerRecords>AccumulationRegister.ExpensesTurnovers</registerRecords>
   <registerRecords>AccumulationRegister.OrderProcurement</registerRecords>
+  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R1031B_ReceiptInvoicing</registerRecords>
+  <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
   <registerRecords>AccumulationRegister.TaxesTurnovers</registerRecords>
   <registerRecords>AccumulationRegister.GoodsInTransitIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</registerRecords>
   <registerRecords>AccumulationRegister.AccountsStatement</registerRecords>
   <registerRecords>AccumulationRegister.StockReservation</registerRecords>
+  <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
   <registerRecords>AccumulationRegister.ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.ReceiptOrders</registerRecords>
   <registerRecords>AccumulationRegister.AdvanceToSuppliers</registerRecords>
   <registerRecords>AccumulationRegister.GoodsReceiptSchedule</registerRecords>
   <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R4035_IncommingStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R4036_IncommingStocksRequested</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -293,19 +308,6 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
     </attributes>
-    <attributes uuid="bc5c0cac-a723-42f8-badb-e75c5d996fbe">
-      <name>PurchaseOrder</name>
-      <synonym>
-        <key>en</key>
-        <value>Purchase order</value>
-      </synonym>
-      <type>
-        <types>DocumentRef.PurchaseOrder</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
     <attributes uuid="72d817bf-4b74-40e5-a7c3-c589fd4c37f5">
       <name>ItemKey</name>
       <synonym>
@@ -333,6 +335,19 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="bc5c0cac-a723-42f8-badb-e75c5d996fbe">
+      <name>PurchaseOrder</name>
+      <synonym>
+        <key>en</key>
+        <value>Purchase order</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.PurchaseOrder</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="90f94165-993c-4afe-9744-4e61eaf01712">
       <name>Unit</name>
@@ -539,6 +554,47 @@
       </synonym>
       <type>
         <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d5bf9364-82c9-4ca8-b864-40ea9729cb83">
+      <name>QuantityInBaseUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity in base unit</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="6193e9d2-55f6-42d2-af8d-da571f9814b4">
+      <name>UseGoodsReceipt</name>
+      <synonym>
+        <key>en</key>
+        <value>Use goods receipt</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="52f08c40-0541-44bc-bc0f-65f957557a57">
+      <name>InternalSupplyRequest</name>
+      <synonym>
+        <key>en</key>
+        <value>Internal supply request</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.InternalSupplyRequest</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
@@ -848,43 +904,6 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
-  <tabularSections uuid="6f720701-e07f-423f-b80c-afee627b9c1d">
-    <producedTypes>
-      <objectType typeId="8fcf1197-27f0-4745-a7d1-1f4dd0db1699" valueTypeId="7e6b0bd3-7916-4b8a-a941-99e06d972580"/>
-      <rowType typeId="6f91c682-19b3-4299-9568-2c3106d0e05f" valueTypeId="b910df3f-7f33-4768-b2bf-f6cb0885e511"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="fb0089b5-c9ba-40e7-a877-ee0fd05b598a">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="2bc34fed-0127-4e1c-85a8-5a3ff9dd5997">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
   <tabularSections uuid="06524232-deb6-45e9-baa1-1a1b69c126ff">
     <producedTypes>
       <objectType typeId="6104b954-7d0d-4c7f-82d7-3a067c616282" valueTypeId="0ee58200-56ac-446f-9c88-166f9eba76bf"/>
@@ -949,6 +968,43 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="6f720701-e07f-423f-b80c-afee627b9c1d">
+    <producedTypes>
+      <objectType typeId="8fcf1197-27f0-4745-a7d1-1f4dd0db1699" valueTypeId="7e6b0bd3-7916-4b8a-a941-99e06d972580"/>
+      <rowType typeId="6f91c682-19b3-4299-9568-2c3106d0e05f" valueTypeId="b910df3f-7f33-4768-b2bf-f6cb0885e511"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="fb0089b5-c9ba-40e7-a877-ee0fd05b598a">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="2bc34fed-0127-4e1c-85a8-5a3ff9dd5997">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
   <commands uuid="67571b12-57b7-4fed-998a-8d6f75b9e9d9">

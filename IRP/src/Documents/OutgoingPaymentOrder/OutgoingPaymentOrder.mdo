@@ -233,6 +233,8 @@
       <type>
         <types>CatalogRef.PartnersBankAccounts</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <choiceParameterLinks>
         <name>Filter.Partner</name>
         <field>Document.OutgoingPaymentOrder.TabularSection.PaymentList.Attribute.Partner</field>

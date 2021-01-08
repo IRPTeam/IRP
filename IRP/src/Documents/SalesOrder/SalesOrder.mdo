@@ -66,18 +66,26 @@
   <defaultListForm>Document.SalesOrder.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.SalesOrder.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.R2010T_SalesOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R2014T_CanceledSalesOrders</registerRecords>
   <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
   <registerRecords>AccumulationRegister.ItemsInStores</registerRecords>
+  <registerRecords>AccumulationRegister.R4013B_StockReservationPlanning</registerRecords>
   <registerRecords>AccumulationRegister.GoodsInTransitOutgoing</registerRecords>
+  <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
   <registerRecords>AccumulationRegister.OrderReservation</registerRecords>
   <registerRecords>AccumulationRegister.OrderProcurement</registerRecords>
+  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.StockReservation</registerRecords>
+  <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
   <registerRecords>AccumulationRegister.ShipmentOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
+  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
   <registerRecords>AccumulationRegister.SalesOrderTurnovers</registerRecords>
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
   <registerRecords>AccumulationRegister.ShipmentConfirmationSchedule</registerRecords>
-  <registerRecords>AccumulationRegister.SalesOrder_ByPlannedDate</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -255,6 +263,21 @@
         <value>Catalog.ObjectStatuses.SalesOrder</value>
       </value>
     </choiceParameters>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="dfff36bf-633a-4024-993c-19a27e4d6fd1">
+    <name>UseItemsShipmentScheduling</name>
+    <synonym>
+      <key>en</key>
+      <value>Use items shipment scheduling</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -546,6 +569,33 @@
       </synonym>
       <type>
         <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b4e1d9e1-b8c2-4af2-8632-70d35e778a70">
+      <name>QuantityInBaseUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity in base unit</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="cbd4d052-b0d4-4c37-8bb4-922394bcc74f">
+      <name>CancelReason</name>
+      <synonym>
+        <key>en</key>
+        <value>Cancel reason</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.CancelReturnReasons</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

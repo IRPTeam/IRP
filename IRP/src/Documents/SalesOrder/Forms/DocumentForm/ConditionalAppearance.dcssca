@@ -90,4 +90,28 @@
 			</dcscor:item>
 		</appearance>
 	</item>
+	<item>
+		<selection>
+			<item>
+				<field>ItemList</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.ItemList.Cancel</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:boolean">true</right>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>TextColor</dcscor:parameter>
+				<dcscor:value xsi:type="v8ui:Color">style:ButtonBorderColor</dcscor:value>
+			</dcscor:item>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>Font</dcscor:parameter>
+				<dcscor:value xsi:type="v8ui:Font" ref="sys:DefaultGUIFont" bold="false" italic="false" underline="false" strikeout="true" kind="WindowsFont"/>
+			</dcscor:item>
+		</appearance>
+	</item>
 </ConditionalAppearance>

@@ -42,22 +42,21 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	PurchaseOrdertemList.DeliveryDate AS DeliveryDate,
 		|	CASE
 		|		WHEN PurchaseOrdertemList.PurchaseBasis REFS Document.InternalSupplyRequest
-		|		AND
-		|		NOT PurchaseOrdertemList.PurchaseBasis.Date IS NULL
+		|		AND NOT PurchaseOrdertemList.PurchaseBasis.Date IS NULL
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS UseInternalSupplyRequest,
-		|   CASE
+		|	CASE
 		|		WHEN PurchaseOrdertemList.PurchaseBasis REFS Document.SalesOrder
-		|		AND
-		|		NOT PurchaseOrdertemList.PurchaseBasis.Date IS NULL
+		|		AND NOT PurchaseOrdertemList.PurchaseBasis.Date IS NULL
 		|			THEN TRUE
 		|		ELSE FALSE
-		|	END AS UseSalesOrder	
+		|	END AS UseSalesOrder
 		|FROM
 		|	Document.PurchaseOrder.ItemList AS PurchaseOrdertemList
 		|WHERE
-		|	PurchaseOrdertemList.Ref = &Ref";
+		|	PurchaseOrdertemList.Ref = &Ref
+		|	AND NOT PurchaseOrdertemList.Cancel";
 	
 	Query.SetParameter("Ref", Ref);
 	Query.SetParameter("Period", StatusInfo.Period);

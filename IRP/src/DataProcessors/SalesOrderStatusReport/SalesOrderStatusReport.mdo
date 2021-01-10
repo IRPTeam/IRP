@@ -27,4 +27,12 @@
       <value>Report template</value>
     </synonym>
   </templates>
+  <templates uuid="30526239-90bb-4e99-a173-1837f31b411f">
+    <name>TemplateStock</name>
+    <synonym>
+      <key>en</key>
+      <value>Template stock</value>
+    </synonym>
+    <templateType>DataCompositionSchema</templateType>
+  </templates>
 </mdclass:DataProcessor>

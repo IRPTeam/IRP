@@ -1,4 +1,5 @@
 
+#Region Service
 Function GetLockFields(Data) Export
 	Result = New Structure();
 	Result.Insert("RegisterName", "AccumulationRegister.R5041B_TaxesPayable");
@@ -14,3 +15,4 @@ EndFunction
 Function GetExistsRecords(Ref, RecordType = Undefined, AddInfo = Undefined) Export
 	Return PostingServer.GetExistsRecordsFromAccRegister(Ref, "AccumulationRegister.R5041B_TaxesPayable", RecordType, AddInfo);
 EndFunction
+#EndRegion

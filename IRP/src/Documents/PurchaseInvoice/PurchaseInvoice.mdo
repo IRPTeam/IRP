@@ -84,18 +84,18 @@
   <registerRecords>AccumulationRegister.GoodsInTransitIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</registerRecords>
   <registerRecords>AccumulationRegister.AccountsStatement</registerRecords>
+  <registerRecords>AccumulationRegister.R4035_IncommingStocks</registerRecords>
   <registerRecords>AccumulationRegister.StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
   <registerRecords>AccumulationRegister.ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.ReceiptOrders</registerRecords>
   <registerRecords>AccumulationRegister.AdvanceToSuppliers</registerRecords>
   <registerRecords>AccumulationRegister.GoodsReceiptSchedule</registerRecords>
+  <registerRecords>AccumulationRegister.R4036_IncommingStocksRequested</registerRecords>
   <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R4035_IncommingStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R4036_IncommingStocksRequested</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

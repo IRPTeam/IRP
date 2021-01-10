@@ -14,7 +14,7 @@ Function ConnectAddDataProc(Info, AddInfo)
 			DataProc = ExternalDataProcessors.Connect(DataProcStorage, Info.ExternalDataProcName);
 		EndIf;
 	Else
-		DataProcStorage = PutToTempStorage(Info.ExternalDataProc.DataProcStorage.Get(), New UUID());
+		DataProcStorage = GetURL(Info.ExternalDataProc, "DataProcStorage");
 		If Info.ExternalDataProc.UnsafeMode Then
 			UnsafeOperationProtectionDescription = New UnsafeOperationProtectionDescription();
 			UnsafeOperationProtectionDescription.UnsafeOperationWarnings = False;
@@ -36,8 +36,14 @@ Function CreateAddDataProc(Info, AddInfo)
 	If ValueIsFilled(Info.ExternalDataProc.PathToExtDataProcForTest) Then
 		DataProc = ExternalDataProcessors.Create(Info.ExternalDataProc.PathToExtDataProcForTest, Info.ExternalDataProcName);
 	Else
+		#If ThickClientOrdinaryApplication Then
+		TmpFile = GetTempFileName();
+		Info.ExternalDataProc.DataProcStorage.Get().Write(TmpFile);
+		DataProc = ExternalDataProcessors.Create(TmpFile);			
+		#Else
 		ConnectedDataProc(Info, AddInfo);
 		DataProc = ExternalDataProcessors.Create(Info.ExternalDataProcName);
+		#EndIf
 	EndIf;
 	
 	Return DataProc;

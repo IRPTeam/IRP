@@ -1,4 +1,6 @@
 
+
+#Region Service
 Function GetLockFields(Data) Export
 	Result = New Structure();
 	Result.Insert("RegisterName", "AccumulationRegister.R4013B_StockReservationPlanning");
@@ -14,3 +16,4 @@ EndFunction
 Function GetExistsRecords(Ref, RecordType = Undefined, AddInfo = Undefined) Export
 	Return PostingServer.GetExistsRecordsFromAccRegister(Ref, "AccumulationRegister.R4013B_StockReservationPlanning", RecordType, AddInfo);
 EndFunction
+#EndRegion

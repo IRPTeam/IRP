@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dataSource>
+		<name>DataSource1</name>
+		<dataSourceType>Local</dataSourceType>
+	</dataSource>
+	<dataSet xsi:type="DataSetQuery">
+		<name>DataSet1</name>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ItemKey</dataPath>
+			<field>ItemKey</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>QuantityReceipt</dataPath>
+			<field>QuantityReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Receipt</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Period</dataPath>
+			<field>Period</field>
+			<role>
+				<dcscom:periodNumber>1</dcscom:periodNumber>
+				<dcscom:periodType>Main</dcscom:periodType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>DLF=D</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Store</dataPath>
+			<field>Store</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SerialLotNumber</dataPath>
+			<field>SerialLotNumber</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Company</dataPath>
+			<field>Company</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Basis</dataPath>
+			<field>Basis</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>RowKey</dataPath>
+			<field>RowKey</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>QuantityAtStock</dataPath>
+			<field>QuantityAtStock</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>At stock</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>QuantityTotal</dataPath>
+			<field>QuantityTotal</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Total</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>QuantityExpense</dataPath>
+			<field>QuantityExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Expense</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<dataSource>DataSource1</dataSource>
+		<query>SELECT
+	SalesOrderItemList.Ref AS SalesOrder,
+	SalesOrderItemList.Key AS RowKey,
+	SalesOrderItemList.Cancel AS Cancel,
+	SalesOrderItemList.ItemKey AS ItemKey,
+	SalesOrderItemList.Quantity AS QuantityInUnit,
+	SalesOrderItemList.Unit AS Unit,
+	SalesOrderItemList.DeliveryDate AS DeliveryDate,
+	SalesOrderItemList.Store AS Store,
+	SalesOrderItemList.ProcurementMethod AS ProcurementMethod,
+	SalesOrderItemList.QuantityInBaseUnit AS Quantity
+INTO ItemsData
+FROM
+	Document.SalesOrder.ItemList AS SalesOrderItemList
+WHERE
+	SalesOrderItemList.Ref IN(&amp;SalesOrderArray)
+	AND NOT SalesOrderItemList.Cancel
+	AND NOT SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase)
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT
+	NestedSelect.ItemKey AS ItemKey,
+	NestedSelect.Period AS Period,
+	NestedSelect.Store AS Store,
+	ISNULL(SUM(NestedSelect.QuantityTotal), 0) AS QuantityTotal,
+	ISNULL(SUM(NestedSelect.QuantityAtStock), 0) AS QuantityAtStock,
+	ISNULL(SUM(NestedSelect.QuantityExpense), 0) AS QuantityExpense,
+	ISNULL(SUM(NestedSelect.QuantityReceipt), 0) AS QuantityReceipt
+FROM
+	(SELECT
+		R4010B_ActualStocksBalanceAndTurnovers.ItemKey AS ItemKey,
+		R4010B_ActualStocksBalanceAndTurnovers.Store AS Store,
+		R4010B_ActualStocksBalanceAndTurnovers.Period AS Period,
+		R4010B_ActualStocksBalanceAndTurnovers.QuantityClosingBalance AS QuantityTotal,
+		R4010B_ActualStocksBalanceAndTurnovers.QuantityClosingBalance AS QuantityAtStock,
+		0 AS QuantityExpense,
+		0 AS QuantityReceipt
+	FROM
+		AccumulationRegister.R4010B_ActualStocks.BalanceAndTurnovers(
+				&amp;CurrentDate,
+				&amp;EndOfTheDate,
+				Day,
+				,
+				ItemKey IN
+					(SELECT
+						T.ItemKey
+					FROM
+						ItemsData AS T)) AS R4010B_ActualStocksBalanceAndTurnovers
+	
+	UNION ALL
+	
+	SELECT
+		R4034B_GoodsShipmentSchedule.ItemKey,
+		R4034B_GoodsShipmentSchedule.Store,
+		R4034B_GoodsShipmentSchedule.Period,
+		-R4034B_GoodsShipmentSchedule.QuantityClosingBalance,
+		0,
+		R4034B_GoodsShipmentSchedule.QuantityClosingBalance,
+		0
+	FROM
+		AccumulationRegister.R4034B_GoodsShipmentSchedule.BalanceAndTurnovers(
+				&amp;CurrentDate,
+				&amp;EndOfTheDate,
+				Day,
+				,
+				ItemKey IN
+					(SELECT
+						T.ItemKey
+					FROM
+						ItemsData AS T)) AS R4034B_GoodsShipmentSchedule
+	
+	UNION ALL
+	
+	SELECT
+		R4033B_GoodsReceiptScheduleBalanceAndTurnovers.ItemKey,
+		R4033B_GoodsReceiptScheduleBalanceAndTurnovers.Store,
+		R4033B_GoodsReceiptScheduleBalanceAndTurnovers.Period,
+		R4033B_GoodsReceiptScheduleBalanceAndTurnovers.QuantityClosingBalance,
+		0,
+		0,
+		R4033B_GoodsReceiptScheduleBalanceAndTurnovers.QuantityClosingBalance
+	FROM
+		AccumulationRegister.R4033B_GoodsReceiptSchedule.BalanceAndTurnovers(
+				&amp;CurrentDate,
+				&amp;EndOfTheDate,
+				Day,
+				,
+				ItemKey IN
+					(SELECT
+						T.ItemKey
+					FROM
+						ItemsData AS T)) AS R4033B_GoodsReceiptScheduleBalanceAndTurnovers) AS NestedSelect
+
+GROUP BY
+	NestedSelect.Period,
+	NestedSelect.ItemKey,
+	NestedSelect.Store
+
+ORDER BY
+	ItemKey,
+	Period</query>
+	</dataSet>
+	<totalField>
+		<dataPath>QuantityAtStock</dataPath>
+		<expression>Sum(QuantityAtStock)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>QuantityExpense</dataPath>
+		<expression>Sum(QuantityExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>QuantityReceipt</dataPath>
+		<expression>Sum(QuantityReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>QuantityTotal</dataPath>
+		<expression>Sum(QuantityTotal)</expression>
+	</totalField>
+	<parameter>
+		<name>BeginOfPeriod</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Begin of period</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+		<useRestriction>false</useRestriction>
+	</parameter>
+	<parameter>
+		<name>CurrentDate</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Current date</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+		<useRestriction>true</useRestriction>
+	</parameter>
+	<parameter>
+		<name>EndOfPeriod</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>End of period</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+		<useRestriction>false</useRestriction>
+	</parameter>
+	<parameter>
+		<name>EndOfTheDate</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>End of the date</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+		<useRestriction>true</useRestriction>
+	</parameter>
+	<parameter>
+		<name>SalesOrderArray</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Sales order array</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type xmlns:d4p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d4p1:DocumentRef.SalesOrder</v8:Type>
+		</valueType>
+		<value xsi:nil="true"/>
+		<useRestriction>true</useRestriction>
+		<valueListAllowed>true</valueListAllowed>
+	</parameter>
+	<settingsVariant>
+		<dcsset:name>Default</dcsset:name>
+		<dcsset:presentation xsi:type="xs:string">Основной</dcsset:presentation>
+		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
+			<dcsset:selection>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>ItemKey</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>Period</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>Store</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>QuantityAtStock</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>QuantityReceipt</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>QuantityExpense</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>QuantityTotal</dcsset:field>
+				</dcsset:item>
+			</dcsset:selection>
+			<dcsset:dataParameters>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:use>false</dcscor:use>
+					<dcscor:parameter>SalesOrderArray</dcscor:parameter>
+					<dcscor:value xsi:nil="true"/>
+				</dcscor:item>
+			</dcsset:dataParameters>
+			<dcsset:conditionalAppearance>
+				<dcsset:item>
+					<dcsset:selection>
+						<dcsset:item>
+							<dcsset:field>QuantityAtStock</dcsset:field>
+						</dcsset:item>
+						<dcsset:item>
+							<dcsset:field>QuantityExpense</dcsset:field>
+						</dcsset:item>
+						<dcsset:item>
+							<dcsset:field>QuantityReceipt</dcsset:field>
+						</dcsset:item>
+						<dcsset:item>
+							<dcsset:field>QuantityTotal</dcsset:field>
+						</dcsset:item>
+					</dcsset:selection>
+					<dcsset:filter/>
+					<dcsset:appearance>
+						<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:value xsi:type="xs:decimal">6</dcscor:value>
+						</dcscor:item>
+					</dcsset:appearance>
+				</dcsset:item>
+			</dcsset:conditionalAppearance>
+			<dcsset:outputParameters>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>AppearanceTemplate</dcscor:parameter>
+					<dcscor:value xsi:type="xs:string">Green</dcscor:value>
+				</dcscor:item>
+			</dcsset:outputParameters>
+			<dcsset:item xsi:type="dcsset:StructureItemTable">
+				<dcsset:column>
+					<dcsset:groupItems>
+						<dcsset:item xsi:type="dcsset:GroupItemField">
+							<dcsset:field>Period</dcsset:field>
+							<dcsset:groupType>Items</dcsset:groupType>
+							<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+							<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+							<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+						</dcsset:item>
+					</dcsset:groupItems>
+					<dcsset:order>
+						<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+					</dcsset:order>
+					<dcsset:selection>
+						<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+					</dcsset:selection>
+				</dcsset:column>
+				<dcsset:row>
+					<dcsset:groupItems>
+						<dcsset:item xsi:type="dcsset:GroupItemField">
+							<dcsset:field>ItemKey</dcsset:field>
+							<dcsset:groupType>Items</dcsset:groupType>
+							<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+							<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+							<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+						</dcsset:item>
+					</dcsset:groupItems>
+					<dcsset:order>
+						<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+					</dcsset:order>
+					<dcsset:selection>
+						<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+					</dcsset:selection>
+					<dcsset:item>
+						<dcsset:groupItems>
+							<dcsset:item xsi:type="dcsset:GroupItemField">
+								<dcsset:field>Store</dcsset:field>
+								<dcsset:groupType>Items</dcsset:groupType>
+								<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+								<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+								<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+							</dcsset:item>
+						</dcsset:groupItems>
+						<dcsset:order>
+							<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+						</dcsset:order>
+						<dcsset:selection>
+							<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+						</dcsset:selection>
+					</dcsset:item>
+				</dcsset:row>
+				<dcsset:selection>
+					<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+				</dcsset:selection>
+			</dcsset:item>
+		</dcsset:settings>
+	</settingsVariant>
+</DataCompositionSchema>

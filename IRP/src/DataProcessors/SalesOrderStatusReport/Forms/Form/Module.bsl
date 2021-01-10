@@ -10,5 +10,6 @@ Procedure GenerateReportAtServer()
 	SalesOrdersArray.Add(SalesOrder);
 	StrParams = New Structure;
 	StrParams.Insert("SalesOrders", SalesOrdersArray);
+	StrParams.Insert("EndOfTheDate", EndOfTheDate);
 	Report = DataProcessors.SalesOrderStatusReport.GenerateReport(StrParams);
 EndProcedure

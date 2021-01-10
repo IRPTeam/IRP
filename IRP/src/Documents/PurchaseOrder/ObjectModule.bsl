@@ -3,8 +3,9 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
 	EndIf;	
+	
+	ThisObject.DocumentAmount = CalculationServer.CalculateDocumentAmount(ItemList);
 
-	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 EndProcedure
 
 Procedure OnWrite(Cancel)

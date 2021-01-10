@@ -1894,6 +1894,10 @@
               <segments>Object.ItemList.NetAmount</segments>
             </paths>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListNetAmountOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ItemListNetAmountExtendedTooltip</name>
             <id>153</id>
@@ -2381,6 +2385,10 @@
               <segments>Object.ItemList.Cancel</segments>
             </paths>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListCancelOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ItemListCancelExtendedTooltip</name>
             <id>504</id>
@@ -4663,7 +4671,7 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.TotalOffersAmount</segments>
+              <segments>TotalOffersAmount</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -4753,7 +4761,7 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.TotalNetAmount</segments>
+              <segments>TotalNetAmount</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -4843,7 +4851,7 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.TotalTaxAmount</segments>
+              <segments>TotalTaxAmount</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -4933,7 +4941,7 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.TotalTotalAmount</segments>
+              <segments>TotalTotalAmount</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -4962,6 +4970,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>InputField</type>
+          <readOnly>true</readOnly>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -5484,6 +5493,74 @@
     <id>137</id>
     <valueType>
       <types>CatalogRef.Agreements</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>TotalNetAmount</name>
+    <title>
+      <key>en</key>
+      <value>Total net amount</value>
+    </title>
+    <id>2</id>
+    <valueType>
+      <types>DefinedType.typeAmount</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>TotalOffersAmount</name>
+    <title>
+      <key>en</key>
+      <value>Total offers amount</value>
+    </title>
+    <id>4</id>
+    <valueType>
+      <types>DefinedType.typeAmount</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>TotalTaxAmount</name>
+    <title>
+      <key>en</key>
+      <value>Total tax amount</value>
+    </title>
+    <id>5</id>
+    <valueType>
+      <types>DefinedType.typeAmount</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>TotalTotalAmount</name>
+    <title>
+      <key>en</key>
+      <value>Total total amount</value>
+    </title>
+    <id>6</id>
+    <valueType>
+      <types>DefinedType.typeAmount</types>
     </valueType>
     <view>
       <common>true</common>

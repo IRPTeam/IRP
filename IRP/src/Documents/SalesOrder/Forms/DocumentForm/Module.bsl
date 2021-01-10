@@ -117,12 +117,8 @@ Procedure UpdateTotalAmounts()
 	ThisObject.TotalTotalAmount = 0;
 	ThisObject.TotalTaxAmount = 0;
 	ThisObject.TotalOffersAmount = 0;
-	ProcurementMethods_NoReserve = PredefinedValue("Enum.ProcurementMethods.NoReserve");
-	ProcurementMethods_EmptyRef = PredefinedValue("Enum.ProcurementMethods.EmptyRef");
-	IsService = PredefinedValue("Enum.ItemTypes.Service");
 	For Each Row In Object.ItemList Do
-		If Row.ProcurementMethod = ProcurementMethods_NoReserve 
-		Or (Row.ProcurementMethod = ProcurementMethods_EmptyRef And Row.ItemType <> IsService) Then
+		If Row.Cancel Then
 			Continue;
 		EndIf;
 		ThisObject.TotalNetAmount = ThisObject.TotalNetAmount + Row.NetAmount;
@@ -304,7 +300,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListProcurementMethodOnChange(Item)
-	UpdateTotalAmounts();
+	Return;
 EndProcedure
 
 &AtClient
@@ -320,6 +316,11 @@ EndProcedure
 &AtClient
 Procedure ItemListRevenueTypeEditTextChange(Item, Text, StandardProcessing)
 	DocSalesOrderClient.ItemListRevenueTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListCancelOnChange(Item)
+	UpdateTotalAmounts();
 EndProcedure
 
 #EndRegion

@@ -483,7 +483,7 @@ WHERE
 			OR Table.Ref = &amp;Unit
 		ELSE Table.Item.Ref IS NULL
 	END OR
-	Table.Item = Value(Catalog.Items.EmptyRef)
+	Table.Item.Unit = Table.Ref
 	OR &amp;ShowAllUnits</queryText>
       <mainTable>Catalog.Units</mainTable>
       <dynamicDataRead>true</dynamicDataRead>

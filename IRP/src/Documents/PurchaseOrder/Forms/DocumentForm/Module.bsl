@@ -11,6 +11,7 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	DocPurchaseOrderClient.OnOpen(Object, ThisObject, Cancel);
+	UpdateTotalAmounts();
 EndProcedure
 
 &AtClient
@@ -35,6 +36,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	EndIf;
 	
 	If Upper(EventName) = Upper("CallbackHandler") Then
+		UpdateTotalAmounts();
 		CurrenciesClient.CalculateAmount(Object, ThisObject);
 		CurrenciesClient.SetRatePresentation(Object, ThisObject);
 				
@@ -58,6 +60,7 @@ EndProcedure
 Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
 	DocPurchaseOrderClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 	Notify("WriteProcurementOrder", , ThisObject);
+	UpdateTotalAmounts();
 EndProcedure
 
 &AtServer
@@ -81,6 +84,32 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form) Export
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
+EndProcedure
+
+&AtClient
+Procedure UpdateTotalAmounts()
+	ThisObject.TotalNetAmount = 0;
+	ThisObject.TotalTotalAmount = 0;
+	ThisObject.TotalTaxAmount = 0;
+	ThisObject.TotalOffersAmount = 0;
+	For Each Row In Object.ItemList Do
+		If Row.Cancel Then
+			Continue;
+		EndIf;
+		ThisObject.TotalNetAmount = ThisObject.TotalNetAmount + Row.NetAmount;
+		ThisObject.TotalTotalAmount = ThisObject.TotalTotalAmount + Row.TotalAmount;
+		
+		ArrayOfTaxesRows = Object.TaxList.FindRows(New Structure("Key", Row.Key));
+		For Each RowTax In ArrayOfTaxesRows Do
+			ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount 
+			+ ?(RowTax.IncludeToTotalAmount, RowTax.ManualAmount, 0);
+		EndDo;
+			
+		ArrayOfOffersRows = Object.SpecialOffers.FindRows(New Structure("Key", Row.Key));
+		For Each RowOffer In ArrayOfOffersRows Do
+			ThisObject.TotalOffersAmount = ThisObject.TotalOffersAmount + RowOffer.Amount;
+		EndDo;
+	EndDo;
 EndProcedure
 
 #EndRegion
@@ -150,6 +179,7 @@ EndProcedure
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocPurchaseOrderClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	UpdateTotalAmounts();
 EndProcedure
 
 &AtClient
@@ -222,12 +252,22 @@ EndProcedure
 &AtClient
 Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
 	DocPurchaseOrderClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData <> Undefined And CurrentData.DontCalculateRow Then
+		UpdateTotalAmounts();
+	EndIf;
 EndProcedure
 
 &AtClient
 Procedure ItemListTaxAmountOnChange(Item)
 	DocPurchaseOrderClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
 EndProcedure
+
+&AtClient
+Procedure ItemListNetAmountOnChange(Item)
+	UpdateTotalAmounts();
+EndProcedure
+
 
 &AtClient
 Procedure ItemListDontCalculateRowOnChange(Item)
@@ -247,6 +287,11 @@ EndProcedure
 &AtClient
 Procedure ItemListExpenseTypeEditTextChange(Item, Text, StandardProcessing)
 	DocPurchaseOrderClient.ItemListExpenseTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListCancelOnChange(Item)
+	UpdateTotalAmounts();
 EndProcedure
 
 #EndRegion

@@ -1963,6 +1963,10 @@
               <segments>Object.ItemList.Cancel</segments>
             </paths>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListCancelOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ItemListCancelExtendedTooltip</name>
             <id>608</id>
@@ -5169,11 +5173,7 @@
     </title>
     <id>175</id>
     <valueType>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>10</precision>
-        <scale>2</scale>
-      </numberQualifiers>
+      <types>DefinedType.typeAmount</types>
     </valueType>
     <view>
       <common>true</common>
@@ -5190,11 +5190,7 @@
     </title>
     <id>176</id>
     <valueType>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>10</precision>
-        <scale>2</scale>
-      </numberQualifiers>
+      <types>DefinedType.typeAmount</types>
     </valueType>
     <view>
       <common>true</common>
@@ -5211,11 +5207,7 @@
     </title>
     <id>177</id>
     <valueType>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>10</precision>
-        <scale>2</scale>
-      </numberQualifiers>
+      <types>DefinedType.typeAmount</types>
     </valueType>
     <view>
       <common>true</common>
@@ -5232,11 +5224,7 @@
     </title>
     <id>178</id>
     <valueType>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>10</precision>
-        <scale>2</scale>
-      </numberQualifiers>
+      <types>DefinedType.typeAmount</types>
     </valueType>
     <view>
       <common>true</common>

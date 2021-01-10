@@ -3,7 +3,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;	
 
-	ThisObject.DocumentAmount = ItemList.Total("TotalAmount");
+	ThisObject.DocumentAmount = CalculationServer.CalculateDocumentAmount(ItemList);
 EndProcedure
 
 Procedure OnWrite(Cancel)

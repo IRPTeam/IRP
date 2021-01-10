@@ -43,4 +43,14 @@ Procedure CalculateItemsRows(Object, ItemRows, Actions, ArrayOfTaxInfo = Undefin
 	Object.SpecialOffers = ValueTableToArrayOfStructures(Object.SpecialOffers , ColumnNames_SpecialOffers);
 	
 EndProcedure
+
+Function CalculateDocumentAmount(ItemList, AddInfo = Undefined) Export
 	
+	TotalAmount = ItemList.Total("TotalAmount");
+	CanceledRows = ItemList.FindRows(New Structure("Cancel", True));
+	For Each CanceledRow In CanceledRows Do
+		TotalAmount = TotalAmount - CanceledRow.TotalAmount;
+	EndDo;
+	Return TotalAmount;
+
+EndFunction

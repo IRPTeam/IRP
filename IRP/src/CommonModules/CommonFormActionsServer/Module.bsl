@@ -13,6 +13,18 @@ Function QuerySearchInputByString(Settings) Export
 		|	Table.Ref AS Ref,
 		|	Table.Presentation AS Presentation,
 		|	0 AS Sort
+		|INTO TempVTViaID
+		|FROM
+		|	%1 AS Table
+		|WHERE
+		|	Table.Ref.ItemID LIKE &SearchString + ""%%""
+		| 	AND Table.Ref REFS Catalog.Items
+		|;
+		|
+		|SELECT ALLOWED TOP 10
+		|	Table.Ref AS Ref,
+		|	Table.Presentation AS Presentation,
+		|	1 AS Sort
 		|INTO TempVT
 		|FROM
 		|	%1 AS Table
@@ -25,7 +37,7 @@ Function QuerySearchInputByString(Settings) Export
 		|SELECT ALLOWED TOP 10
 		|	Table.Ref AS Ref,
 		|	Table.Presentation AS Presentation,
-		|	1 AS Sort
+		|	2 AS Sort
 		|INTO TempVTSecond
 		|FROM
 		|	%1 AS Table
@@ -37,9 +49,18 @@ Function QuerySearchInputByString(Settings) Export
 		|				FROM
 		|					TempVT AS T)
 		| %2
+		|
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT TOP 10 DISTINCT
+		|	TempVT.Ref AS Ref,
+		|	TempVT.Presentation AS Presentation,
+		|	TempVT.Sort AS Sort
+		|FROM
+		|	TempVTViaID AS TempVT
+		|
+		|UNION
+		|
 		|SELECT TOP 10
 		|	TempVT.Ref AS Ref,
 		|	TempVT.Presentation AS Presentation,
@@ -55,7 +76,6 @@ Function QuerySearchInputByString(Settings) Export
 		|	TempVTSecond.Sort
 		|FROM
 		|	TempVTSecond AS TempVTSecond
-		|
 		|ORDER BY
 		|	Sort,
 		|	Presentation";

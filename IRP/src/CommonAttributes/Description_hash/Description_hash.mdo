@@ -90,7 +90,7 @@
   </content>
   <content>
     <metadata>Catalog.ItemKeys</metadata>
-    <use>DontUse</use>
+    <use>Use</use>
   </content>
   <content>
     <metadata>Catalog.CashStatementStatuses</metadata>

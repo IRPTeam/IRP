@@ -112,10 +112,6 @@ Function FieldsListForDescriptions(Val Source) Export
 	If Source = "CatalogManager.Currencies" Then
 		Fields.Add("Code");
 		Return Fields;
-	ElsIf Source = "CatalogManager.ItemKeys" Then
-		Fields.Add("Specification");
-		Fields.Add("Item");
-		Fields.Add("Ref");
 	ElsIf Source = "CatalogManager.PriceKeys" Then
 		Fields.Add("Ref");
 		Return Fields;

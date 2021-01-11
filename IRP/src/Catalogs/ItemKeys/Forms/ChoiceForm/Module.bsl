@@ -1,5 +1,8 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	
+	ThisObject.List.QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(ThisObject.List.QueryText);
+	
 	If NeedCreateFormFields(Parameters) Then
 		ThisObject.Item = Parameters.Filter.Item;
 		

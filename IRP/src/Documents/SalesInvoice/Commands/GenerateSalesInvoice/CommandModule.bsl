@@ -157,6 +157,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			FillPropertyValues(ShipmentConfirmations.Add(), Row);
 		EndDo;		
 	EndDo;
+	ItemList.Sort("Company Desc");
 	
 	KeyFields = "BasedOn, Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, ManagerSegment";
 	

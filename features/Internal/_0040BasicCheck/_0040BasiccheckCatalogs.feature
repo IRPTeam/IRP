@@ -928,3 +928,18 @@ Scenario: Open object form "PartnersBankAccounts"
 	If the warning is displayed then
 		Then I raise "Failed to open catalog form PartnersBankAccounts" exception
 	And I close current window
+
+
+Scenario: Open list form "CancelReturnReasons (Catalogs)" 
+
+	Given I open "CancelReturnReasons" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form CancelReturnReasons" exception
+	And I close current window
+
+Scenario: Open object form "CancelReturnReasons"
+	And I close all client application windows
+	Given I open "CancelReturnReasons" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form CancelReturnReasons" exception
+	And I close current window

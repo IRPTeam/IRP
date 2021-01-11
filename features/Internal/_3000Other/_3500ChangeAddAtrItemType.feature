@@ -158,7 +158,7 @@ Scenario: _350001 check the connection between adding additional details to item
                 And I go to line in "AttributesTree" table
                     | 'Presentation'    |
                     | 'Brand Stockings'  |
-                And I click "DeleteItemType" button
+                And in the table "AttributesTree" I click "Delete item type" button				
             * Open item type and check deletion
                 Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
                 And I go to line in "List" table

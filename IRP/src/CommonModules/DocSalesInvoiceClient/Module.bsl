@@ -38,7 +38,16 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 			DocumentsClient.CompanyOnChange(Object, Form, ThisObject, Undefined);
 		EndIf;
 		If ValueIsFilled(Object.Agreement) Then
-			DocumentsClient.AgreementOnChange(Object, Form, ThisObject, Undefined);
+			CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
+			AgreementSettings = AgreementSettings(Object, Form);
+			If AgreementSettings.Property("PutServerDataToAddInfo") And AgreementSettings.PutServerDataToAddInfo Then
+				AgreementOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+			EndIf;
+			AgreementSettings = AgreementSettings(Object, Form, AddInfo);	
+			AgreementSettings.Actions = New Structure("ChangePaymentTerm", "ChangePaymentTerm");
+			
+			Settings = New Structure("AgreementSettings", AgreementSettings);
+			DocumentsClient.AgreementOnChange(Object, Form, ThisObject, Undefined, Settings, AddInfo);
 		EndIf;
 	EndIf;
 	

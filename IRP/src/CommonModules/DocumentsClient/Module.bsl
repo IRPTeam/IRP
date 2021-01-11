@@ -253,13 +253,18 @@ EndProcedure
 #Region ItemAgreement
 
 Procedure AgreementOnChange(Object, Form, Module, Item = Undefined, Settings  = Undefined, AddInfo = Undefined) Export
-
-	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
-	AgreementSettings = Module.AgreementSettings(Object, Form);
-	If AgreementSettings.Property("PutServerDataToAddInfo") And AgreementSettings.PutServerDataToAddInfo Then
-		Module.AgreementOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+	If TypeOf(Settings) = Type("Structure") And 
+		Settings.Property("AgreementSettings") Then		
+		AgreementSettings = Settings.AgreementSettings;
+		Settings = Undefined;
+	Else
+		CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
+		AgreementSettings = Module.AgreementSettings(Object, Form);
+		If AgreementSettings.Property("PutServerDataToAddInfo") And AgreementSettings.PutServerDataToAddInfo Then
+			Module.AgreementOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+		EndIf;
+		AgreementSettings = Module.AgreementSettings(Object, Form, AddInfo);
 	EndIf;
-	AgreementSettings = Module.AgreementSettings(Object, Form, AddInfo);
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
 	
 	If Not Item = Undefined Then

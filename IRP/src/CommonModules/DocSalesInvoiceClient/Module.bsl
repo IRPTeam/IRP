@@ -37,6 +37,9 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 		If ValueIsFilled(Object.Company) Then
 			DocumentsClient.CompanyOnChange(Object, Form, ThisObject, Undefined);
 		EndIf;
+		If ValueIsFilled(Object.Agreement) Then
+			DocumentsClient.AgreementOnChange(Object, Form, ThisObject, Undefined);
+		EndIf;
 	EndIf;
 	
 	If Not ValueIsFilled(Form.CurrentStore) Then

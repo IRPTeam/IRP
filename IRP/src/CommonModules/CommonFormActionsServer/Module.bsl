@@ -12,7 +12,7 @@ Function QuerySearchInputByString(Settings) Export
 		"SELECT ALLOWED TOP 10
 		|	Table.Ref AS Ref,
 		|	Table.Presentation AS Presentation,
-		|	0 AS Sort
+		|	3 AS Sort
 		|INTO TempVTViaID
 		|FROM
 		|	%1 AS Table

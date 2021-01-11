@@ -17,8 +17,7 @@ Function QuerySearchInputByString(Settings) Export
 		|FROM
 		|	%1 AS Table
 		|WHERE
-		|	Table.Ref.ItemID LIKE &SearchString + ""%%""
-		| 	AND Table.Ref REFS Catalog.Items
+		|	%4
 		|;
 		|
 		|SELECT ALLOWED TOP 10
@@ -81,7 +80,13 @@ Function QuerySearchInputByString(Settings) Export
 		|	Presentation";
 
 	If Not Settings.MetadataObject.DescriptionLength Then
-		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter , "_" + "en");
+		IDSearch = "False";
+		If Settings.MetadataObject = Metadata.Catalogs.Items Then
+			IDSearch = "Table.Ref.ItemID LIKE &SearchString + ""%%""";
+		EndIf;
+		
+		
+		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter , "_" + "en", IDSearch);
 		QueryField = "CASE WHEN %1.Description%2 = """" THEN %1.Description_en ELSE %1.Description%2 END ";
 		QueryField = StrTemplate(QueryField, "Table", "_" + LocalizationReuse.GetLocalizationCode());
 		QueryText = StrReplace(QueryText, StrTemplate("%1.Description_en", "Table"), QueryField);

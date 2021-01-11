@@ -1219,7 +1219,7 @@ Function ItemList()
 		|	SalesInvoiceItemList.ItemKey AS ItemKey,
 		|	SalesInvoiceItemList.Quantity AS UnitQuantity,
 		|	SalesInvoiceItemList.QuantityInBaseUnit AS Quantity,
-		|	SalesInvoiceItemList.TotalAmount AS TotalAmount,
+		|	SalesInvoiceItemList.TotalAmount AS Amount,
 		|	SalesInvoiceItemList.Ref.Partner AS Partner,
 		|	SalesInvoiceItemList.Ref.LegalName AS LegalName,
 		|	CASE
@@ -1270,7 +1270,9 @@ Function OffersInfo()
 		|	SalesInvoiceItemList.Ref.Company AS Company,
 		|	SalesInvoiceItemList.Ref.Currency,
 		|	SalesInvoiceSpecialOffers.Offer AS SpecialOffer,
-		|	SalesInvoiceSpecialOffers.Amount AS OffersAmount
+		|	SalesInvoiceSpecialOffers.Amount AS OffersAmount,
+		|	SalesInvoiceItemList.SalesAmount,
+		|	SalesInvoiceItemList.NetAmount
 		|INTO OffersInfo
 		|FROM
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -1481,7 +1483,7 @@ EndFunction
 Function R4050B_StockInventory()
 	Return
 		"SELECT 
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|*
 		|INTO R4050B_StockInventory
 		|FROM

@@ -1748,5 +1748,45 @@ Scenario: _012019 check filling in partner and customer/vendor sign when creatin
 		Then the form attribute named "Type" became equal to "Vendor"
 	And I close all client application windows
 
+
+Scenario: _012020 check sorting of item keys
+	Given I open hyperlink "e1cib/list/Catalog.Items"
+	And I go to line in "List" table
+			| 'Description' |
+			| 'Dress' |
+	And I select current line in "List" table
+	And In this window I click command interface button "Item keys"
+	And I click "Configure list..." button
+	And I move to "Order" tab
+	And I go to line in "SettingsComposerUserSettingsItem1AvailableFieldsTable" table
+		| 'Available fields' |
+		| 'Item key'         |
+	And I select current line in "SettingsComposerUserSettingsItem1AvailableFieldsTable" table
+	And I activate "Sort direction" field in "SettingsComposerUserSettingsItem1Order" table
+	And I select current line in "SettingsComposerUserSettingsItem1Order" table
+	And I select "Ascending" exact value from "Sort direction" drop-down list in "SettingsComposerUserSettingsItem1Order" table
+	And I finish line editing in "SettingsComposerUserSettingsItem1Order" table
+	And I click "Finish editing" button
+	And "List" table became equal
+		| 'Code' | 'Item key'  | 'Specification' |
+		| '16'   | 'Dress/A-8' | 'A-8'           |
+		| '4'    | 'L/Green'   | ''              |
+		| '25'   | 'M/Brown'   | ''              |
+		| '3'    | 'M/White'   | ''              |
+		| '1'    | 'S/Yellow'  | ''              |
+		| '5'    | 'XL/Green'  | ''              |
+		| '2'    | 'XS/Blue'   | ''              |
+		| '18'   | 'XXL/Red'   | ''              |
+	And I close all client application windows
+	
+
+	
+		
+
+	
+		
+
+
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session

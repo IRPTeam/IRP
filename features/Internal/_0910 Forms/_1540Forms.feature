@@ -23,15 +23,15 @@ Scenario: _0154000 preparation
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog InterfaceGroups objects (Purchase and production,  Main information)
 		When Create catalog ObjectStatuses objects
-		When Create catalog ItemKeys objects
-		When Create catalog ItemTypes objects
 		When Create catalog Units objects
-		When Create catalog Items objects
 		When Create catalog PriceTypes objects
 		When Create catalog Specifications objects
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog ItemTypes objects
+		When Create catalog Items objects
+		When Create catalog ItemKeys objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
@@ -75,6 +75,7 @@ Scenario: _0154000 preparation
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
+		
 
 
 Scenario: _0154008 check autofilling the Partner term field in Purchase order

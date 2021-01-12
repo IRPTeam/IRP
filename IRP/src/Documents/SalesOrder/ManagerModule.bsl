@@ -1461,7 +1461,8 @@ Function ItemList()
 		|	SalesOrderItemList.Cancel AS IsCanceled,
 		|	SalesOrderItemList.CancelReason,
 		|	SalesOrderItemList.NetAmount,
-		|	SalesOrderItemList.Ref.UseItemsShipmentScheduling AS UseItemsShipmentScheduling
+		|	SalesOrderItemList.Ref.UseItemsShipmentScheduling AS UseItemsShipmentScheduling,
+		|	SalesOrderItemList.OffersAmount
 		|INTO ItemList
 		|FROM
 		|	Document.SalesOrder.ItemList AS SalesOrderItemList

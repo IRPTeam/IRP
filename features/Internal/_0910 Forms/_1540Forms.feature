@@ -75,7 +75,7 @@ Scenario: _0154000 preparation
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-		
+		And Delay 10
 
 
 Scenario: _0154008 check autofilling the Partner term field in Purchase order

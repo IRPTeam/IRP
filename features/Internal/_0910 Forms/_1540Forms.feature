@@ -1780,7 +1780,63 @@ Scenario: _012020 check sorting of item keys
 	And I close all client application windows
 	
 
+Scenario: _012025 check box Show item in item key it the Registrations report
+	And I close all client application windows
+	* Filling in the details of the documentsales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'                   |
+			| 'Basic Partner terms, without VAT' |
+		And I select current line in "List" table
+	* Filling in Sales order
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I click the button named "FormPost"	
+	* Check box Show item in item key
+		And I click "Registrations report" button
+		And I set checkbox "Show item in item key"
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains values
+			| 'Item key'  |
+			| '38/Yellow' |
+		And "ResultTable" spreadsheet document contains values
+			| 'ItemKeyItem' |
+			| 'Trousers'    |
+		And I remove checkbox "Show item in item key"
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains values
+			| 'Item key'  |
+			| '38/Yellow' |
+		And "ResultTable" spreadsheet document does not contain values
+			| 'ItemKeyItem' |
+			| 'Trousers'    |
+	And I close all client application windows
 	
+		
+		
+		
+				
+		
+					
+							
+		
 		
 
 	

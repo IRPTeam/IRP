@@ -404,7 +404,8 @@ EndProcedure
 
 Function CalculateAmount(ItemRow)
 	If CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "Price") Then
-		If CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "QuantityInBaseUnit") Then
+		If CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "QuantityInBaseUnit")
+			And ItemRow.PriceType = PredefinedValue("Catalog.PriceTypes.ManualPriceType") Then
 			Return ItemRow.Price * ItemRow.QuantityInBaseUnit;
 		ElsIf CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "Quantity") Then
 			Return ItemRow.Price * ItemRow.Quantity;

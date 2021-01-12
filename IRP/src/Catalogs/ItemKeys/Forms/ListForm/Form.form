@@ -701,8 +701,8 @@
 	END AS IsSpecification,
 	ItemKeys.Code,
 	ItemKeys.Description_en AS ItemKey,
-	ItemKeys.Item.Description_en AS Item,
-	ItemKeys.Specification.Description_en AS Specification
+	ItemKeys.Item AS Item,
+	ItemKeys.Specification AS Specification
 FROM
 	Catalog.ItemKeys AS ItemKeys</queryText>
       <mainTable>Catalog.ItemKeys</mainTable>

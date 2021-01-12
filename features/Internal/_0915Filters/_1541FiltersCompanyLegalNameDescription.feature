@@ -54,6 +54,7 @@ Scenario: _0154000 preparation
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
+		When update ItemKeys
 	
 
 

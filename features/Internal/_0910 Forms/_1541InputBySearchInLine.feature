@@ -66,6 +66,7 @@ Scenario: _0154000 preparation
 		When Create catalog Workstations objects  (Test)
 		When Create catalog ItemSegments objects
 		When Create catalog PaymentTypes objects
+		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then

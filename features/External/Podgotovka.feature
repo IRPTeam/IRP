@@ -1521,3 +1521,10 @@ Scenario: create Bank terms
 		Then "Bank terms" window is opened
 		And I select current line in "List" table
 		And I click "Save and close" button		
+	
+
+Scenario: update ItemKeys
+	Given I open hyperlink "e1cib/list/Catalog.ItemKeys"
+	And I click "Update item keys description" button
+	And Delay 5
+	And I close all client application windows

@@ -31,6 +31,7 @@ Scenario: _4000200 preparation
 		When Create catalog AccessGroups objects
 		When Create catalog AccessProfiles objects
 		When Create catalog CashAccounts objects
+		When update ItemKeys
 	* Add test extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
 		If "List" table does not contain lines Then

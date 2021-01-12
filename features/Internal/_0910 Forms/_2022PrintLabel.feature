@@ -28,6 +28,7 @@ Scenario: _0202200 preparation (label processing)
 		When Create catalog PriceTypes objects
 		When Create information register PricesByItemKeys records
 		When Create information register Barcodes records
+		When update ItemKeys
 
 Scenario: _0202201 create print layout
 	* Opening the constructor

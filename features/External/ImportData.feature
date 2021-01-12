@@ -572,6 +572,12 @@ Scenario: Create catalog ItemKeys objects
 		| 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf13dc8cb47d6' | 'fe773e93-b36a-4cea-9e05-7988cb899031' | ''                                                |
 		| 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf13dc8cb47d6' | '78b69bbb-0ee1-4edb-b7a7-d1beb4d59a2f' | ''                                                |
 
+	
+	
+		
+
+
+
 Scenario: Create catalog ItemTypes objects
 
 	And I check or create catalog "ItemTypes" objects:

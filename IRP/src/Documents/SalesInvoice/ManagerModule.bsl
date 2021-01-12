@@ -96,7 +96,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Aging_Receipt  = QueryTableAging;
 	
 #Region NewRegistersPosting	
-	Tables.Insert("Aging_Receipt_Test"                         , PostingServer.CreateTable(AccReg.Aging));
 	PostingServer.SetRegisters(Tables, Ref);
 	QueryArray = GetQueryTexts();
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray);

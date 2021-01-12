@@ -96,6 +96,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Aging_Receipt  = QueryTableAging;
 	
 #Region NewRegistersPosting	
+	Tables.Insert("Aging_Receipt_Test"                         , PostingServer.CreateTable(AccReg.Aging));
 	PostingServer.SetRegisters(Tables, Ref);
 	QueryArray = GetQueryTexts();
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray);
@@ -1271,7 +1272,7 @@ Function OffersInfo()
 		|	SalesInvoiceItemList.Ref.Currency,
 		|	SalesInvoiceSpecialOffers.Offer AS SpecialOffer,
 		|	SalesInvoiceSpecialOffers.Amount AS OffersAmount,
-		|	SalesInvoiceItemList.SalesAmount,
+		|	SalesInvoiceItemList.TotalAmount AS SalesAmount,
 		|	SalesInvoiceItemList.NetAmount
 		|INTO OffersInfo
 		|FROM

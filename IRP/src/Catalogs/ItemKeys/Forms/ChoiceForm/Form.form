@@ -787,6 +787,11 @@
 	ItemKeys.Ref,
 	ItemKeys.DeletionMark,
 	CASE
+		WHEN ItemKeys.Specification = VALUE(Catalog.Specifications.EmptyRef)
+			THEN FALSE
+		ELSE TRUE
+	END AS IsSpecificationFlag,
+	CASE
 		WHEN ItemKeys.DeletionMark
 		AND ItemKeys.Specification = VALUE(Catalog.Specifications.EmptyRef)
 			THEN 5

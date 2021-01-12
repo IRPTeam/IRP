@@ -8,6 +8,7 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	Parameters.Insert("Object", DocObject);
 	Parameters.Insert("IsReposting", False);
 	Parameters.Insert("PointInTime", DocObject.PointInTime());
+	Parameters.Insert("TempTablesManager", New TempTablesManager());
 	
 	Module = Documents[DocObject.Ref.Metadata().Name];
 	
@@ -1400,19 +1401,22 @@ Function NotUseRegister(Name) Export
 	Return NOT Mid(Name, 7, 1) = "_";
 EndFunction	
 
-Procedure FillPostingTables(Tables, Ref, QueryArray) Export
+Procedure FillPostingTables(Tables, Ref, QueryArray, TablesForMerge, Parameters) Export
 	Query = New Query;
-	Query.TempTablesManager = New TempTablesManager();
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.SetParameter("Ref", Ref);
 	
 	Query.Text = StrConcat(QueryArray, Chars.LF + ";" + Chars.LF);
 	Query.Execute();
-	For Each VT In Tables Do
-		VTSearch = Query.TempTablesManager.Tables.Find(VT.Key);
+	
+	ArrayOfTableNames = StrSplit(TablesForMerge, ",");
+	
+	For Each TableName In ArrayOfTableNames Do
+		VTSearch = Query.TempTablesManager.Tables.Find(TrimAll(TableName));
 		If VTSearch = Undefined Then
 			Continue;
 		EndIf;
-		MergeTables(Tables[VT.Key], VTSearch.GetData().Unload(), "RecordType");
+		MergeTables(Tables[TrimAll(TableName)], VTSearch.GetData().Unload(), "RecordType");
 	EndDo;
 EndProcedure
 

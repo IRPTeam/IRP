@@ -76,13 +76,7 @@ Procedure GetCatalogPresentation(Source, Data, Presentation, StandardProcessing)
 	EndIf;
 	StandardProcessing = False;
 	SourceType = TypeOf(Source);
-	If SourceType = Type("CatalogManager.ItemKeys") Then		
-		If ValueIsFilled(Data.Specification) Then
-			Presentation = String(Data.Item) + "/" + String(Data.Specification);
-		Else
-			Presentation = LocalizationReuse.CatalogDescriptionWithAddAttributes(Data.Ref);
-		EndIf;
-	ElsIf SourceType = Type("CatalogManager.Currencies") Then		
+	If SourceType = Type("CatalogManager.Currencies") Then		
 		Presentation = Data.Code;
 	ElsIf SourceType = Type("CatalogManager.PriceKeys") Then
 		Presentation = LocalizationReuse.CatalogDescriptionWithAddAttributes(Data.Ref);

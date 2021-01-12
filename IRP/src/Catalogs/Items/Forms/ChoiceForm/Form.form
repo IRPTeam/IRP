@@ -162,6 +162,7 @@
     <items xsi:type="form:FormField">
       <name>Ref</name>
       <id>22</id>
+      <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>

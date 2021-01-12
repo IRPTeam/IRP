@@ -31,6 +31,9 @@ Scenario: _016000 preparation
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
 		When  Create catalog Currencies objects
+		When update ItemKeys
+
+
 
 Scenario: _016001 base price fill (incl. VAT)
 	

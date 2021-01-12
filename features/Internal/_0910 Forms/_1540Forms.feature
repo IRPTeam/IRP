@@ -23,15 +23,15 @@ Scenario: _0154000 preparation
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog InterfaceGroups objects (Purchase and production,  Main information)
 		When Create catalog ObjectStatuses objects
-		When Create catalog ItemKeys objects
-		When Create catalog ItemTypes objects
 		When Create catalog Units objects
-		When Create catalog Items objects
 		When Create catalog PriceTypes objects
 		When Create catalog Specifications objects
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog ItemTypes objects
+		When Create catalog Items objects
+		When Create catalog ItemKeys objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
@@ -65,6 +65,7 @@ Scenario: _0154000 preparation
 		When Create catalog Workstations objects  (Test)
 		When Create catalog ItemSegments objects
 		When Create catalog PaymentTypes objects
+		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -74,6 +75,7 @@ Scenario: _0154000 preparation
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
+		And Delay 10
 
 
 Scenario: _0154008 check autofilling the Partner term field in Purchase order
@@ -1745,6 +1747,102 @@ Scenario: _012019 check filling in partner and customer/vendor sign when creatin
 		Then the form attribute named "Partner" became equal to "Veritas"
 		Then the form attribute named "Type" became equal to "Vendor"
 	And I close all client application windows
+
+
+Scenario: _012020 check sorting of item keys
+	Given I open hyperlink "e1cib/list/Catalog.Items"
+	And I go to line in "List" table
+			| 'Description' |
+			| 'Dress' |
+	And I select current line in "List" table
+	And In this window I click command interface button "Item keys"
+	And I click "Configure list..." button
+	And I move to "Order" tab
+	And I go to line in "SettingsComposerUserSettingsItem1AvailableFieldsTable" table
+		| 'Available fields' |
+		| 'Item key'         |
+	And I select current line in "SettingsComposerUserSettingsItem1AvailableFieldsTable" table
+	And I activate "Sort direction" field in "SettingsComposerUserSettingsItem1Order" table
+	And I select current line in "SettingsComposerUserSettingsItem1Order" table
+	And I select "Ascending" exact value from "Sort direction" drop-down list in "SettingsComposerUserSettingsItem1Order" table
+	And I finish line editing in "SettingsComposerUserSettingsItem1Order" table
+	And I click "Finish editing" button
+	And "List" table became equal
+		| 'Code' | 'Item key'  | 'Specification' |
+		| '16'   | 'Dress/A-8' | 'A-8'           |
+		| '4'    | 'L/Green'   | ''              |
+		| '25'   | 'M/Brown'   | ''              |
+		| '3'    | 'M/White'   | ''              |
+		| '1'    | 'S/Yellow'  | ''              |
+		| '5'    | 'XL/Green'  | ''              |
+		| '2'    | 'XS/Blue'   | ''              |
+		| '18'   | 'XXL/Red'   | ''              |
+	And I close all client application windows
+	
+
+Scenario: _012025 check box Show item in item key it the Registrations report
+	And I close all client application windows
+	* Filling in the details of the documentsales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'                   |
+			| 'Basic Partner terms, without VAT' |
+		And I select current line in "List" table
+	* Filling in Sales order
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I click the button named "FormPost"	
+	* Check box Show item in item key
+		And I click "Registrations report" button
+		And I set checkbox "Show item in item key"
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains values
+			| 'Item key'  |
+			| '38/Yellow' |
+		And "ResultTable" spreadsheet document contains values
+			| 'ItemKeyItem' |
+			| 'Trousers'    |
+		And I remove checkbox "Show item in item key"
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains values
+			| 'Item key'  |
+			| '38/Yellow' |
+		And "ResultTable" spreadsheet document does not contain values
+			| 'ItemKeyItem' |
+			| 'Trousers'    |
+	And I close all client application windows
+	
+		
+		
+		
+				
+		
+					
+							
+		
+		
+
+	
+		
+
+
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

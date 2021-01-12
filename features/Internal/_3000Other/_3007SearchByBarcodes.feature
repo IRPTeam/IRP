@@ -43,6 +43,7 @@ Scenario: _300700 preparation (add items to documents by barcode)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create information register Barcodes records
+		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then

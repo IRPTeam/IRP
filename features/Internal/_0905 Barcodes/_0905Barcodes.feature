@@ -28,6 +28,7 @@ Scenario: _090500 preparation (Barcodes)
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
+		When update ItemKeys
 	
 
 Scenario: _090501 barcode registry entry

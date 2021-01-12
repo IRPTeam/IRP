@@ -46,6 +46,7 @@ Scenario: _0299100 preparation
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When update ItemKeys
 		* Create test physical inventory and location count
 			Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 			And I click the button named "FormCreate"

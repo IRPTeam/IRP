@@ -103,7 +103,12 @@ Procedure BeforeWrite(Cancel)
 			EndIf;
 		EndIf;
 	EndIf;
+	
+	Catalogs.ItemKeys.UpdateDescriptions(ThisObject);
+	
 EndProcedure
+
+
 
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then

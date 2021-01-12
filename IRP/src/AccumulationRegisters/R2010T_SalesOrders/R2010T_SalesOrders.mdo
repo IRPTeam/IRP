@@ -56,6 +56,19 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <resources uuid="5489047a-61aa-48eb-843a-03c66a8822fa">
+    <name>OffersAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Offers amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
   <attributes uuid="7b69238f-0c51-4f2d-85ae-f80cebaa3048">
     <name>DeferredCalculation</name>
     <synonym>
@@ -153,5 +166,18 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="a6c6b741-c1f7-4de5-a387-4d59326f92e0">
+    <name>ProcurementMethod</name>
+    <synonym>
+      <key>en</key>
+      <value>Procurement method</value>
+    </synonym>
+    <type>
+      <types>EnumRef.ProcurementMethods</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
   </dimensions>
 </mdclass:AccumulationRegister>

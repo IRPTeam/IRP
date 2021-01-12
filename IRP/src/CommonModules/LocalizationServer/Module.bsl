@@ -55,7 +55,7 @@ Function CatalogDescriptionWithAddAttributes(Ref, LangCode = "", AddInfo = Undef
 	LangCode = ?(ValueIsFilled(LangCode), LangCode, LocalizationReuse.UserLanguageCode());
 	UsersL = New Array();
 	For Each AddAttribute In Ref.AddAttributes Do
-		If StrStartsWith("Catalog", Ref.Metadata().FullName()) Then
+		If StrSplit(Ref.Metadata().FullName(),".")[0] = "Catalog" Then
 			UsersL.Add(LocalizationReuse.CatalogDescription(AddAttribute.Value, LangCode, AddInfo));
 		Else
 			UsersL.Add(String(AddAttribute.Value));
@@ -67,7 +67,7 @@ Function CatalogDescriptionWithAddAttributes(Ref, LangCode = "", AddInfo = Undef
 		Return UsersLStr;
 	EndIf;
 	
-	If (TypeOf(Ref) = Type("CatalogRef.ItemKeys") Or TypeOf(Ref) = Type("CatalogRef.PriceKeys")) Then
+	If Ref.Metadata() = Metadata.Catalogs.ItemKeys Or Ref.Metadata() = Metadata.Catalogs.PriceKeys Then
 		If ValueIsFilled(Ref.Item) Then
 			Return LocalizationServer.CatalogDescription(Ref.Item, LangCode, AddInfo);
 		EndIf;
@@ -112,10 +112,6 @@ Function FieldsListForDescriptions(Val Source) Export
 	If Source = "CatalogManager.Currencies" Then
 		Fields.Add("Code");
 		Return Fields;
-	ElsIf Source = "CatalogManager.ItemKeys" Then
-		Fields.Add("Specification");
-		Fields.Add("Item");
-		Fields.Add("Ref");
 	ElsIf Source = "CatalogManager.PriceKeys" Then
 		Fields.Add("Ref");
 		Return Fields;

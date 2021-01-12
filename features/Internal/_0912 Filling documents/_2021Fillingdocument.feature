@@ -49,6 +49,7 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
+		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -655,13 +656,94 @@ Scenario: _0154101 check filling in and refilling Sales order
 				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 770,00"
 				Then the form attribute named "ItemListTotalTaxAmount" became equal to "210,30"
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 980,30"
-				
+				And I click "Post" button
+				And I save the value of "Number" field as "$$NumberSalesOrder0154101$$"					
+		* Cancel second line (Dress/L Green) and check totals
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key' |
+				| 'Dress'    | 'L/Green'  |
+			And I activate "Cancel" field in "ItemList" table
+			And I set "Cancel" checkbox in "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post" button
+			Then the form attribute named "ItemListTotalNetAmount" became equal to "1 220,00"
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "105,80"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 325,80"
+		* Add new line with procurement Purchase and check totals
+			And in the table "ItemList" I click "Add" button
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XL/Green' |
+			And I select current line in "List" table
+			And I activate "Procurement method" field in "ItemList" table
+			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
+			And I finish line editing in "ItemList" table
+			Then the form attribute named "ItemListTotalNetAmount" became equal to "1 770,00"
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "210,30"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 980,30"
+		* Delete line and check totals 
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XL/Green' |
+			And in the table "ItemList" I click "Delete" button
+			Then the form attribute named "ItemListTotalNetAmount" became equal to "1 220,00"
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "105,80"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 325,80"
+		* Add new line with procurement No reserve and check totals
+			And in the table "ItemList" I click "Add" button
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'S/Yellow' |
+			And I select current line in "List" table
+			And I activate "Procurement method" field in "ItemList" table
+			And I select "No reserve" exact value from "Procurement method" drop-down list in "ItemList" table
+			And I finish line editing in "ItemList" table
+			Then the form attribute named "ItemListTotalNetAmount" became equal to "1 770,00"
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "210,30"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 980,30"
+			And I click "Post" button
+			Then the form attribute named "ItemListTotalNetAmount" became equal to "1 770,00"
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "210,30"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 980,30"
+			And I click "Post and close" button
+			And "List" table contains lines
+				| 'Number'                     | 'Σ'        |
+				| '$$NumberSalesOrder0154101$$'| '1 980,30' |
+		* Unchecking the cancellation checkbox and check totals	
+			And I go to line in "List" table
+				| 'Number'                     | 'Σ'        |
+				| '$$NumberSalesOrder0154101$$'| '1 980,30' |
+			And I select current line in "List" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key' |
+				| 'Dress'    | 'L/Green'  |
+			And I activate "Cancel" field in "ItemList" table
+			And I remove "Cancel" checkbox in "ItemList" table
+			Then the form attribute named "ItemListTotalNetAmount" became equal to "2 320,00"
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "314,80"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "2 634,80"
+			And I click "Post and close" button
+			And "List" table contains lines
+				| 'Number'                     | 'Σ'        |
+				| '$$NumberSalesOrder0154101$$'| '2 634,80' |
+			And I close all client application windows
+			
 
-
-
-
-
-
+											
 
 
 
@@ -1424,7 +1506,66 @@ Scenario: _0154105 check filling in and refilling Purchase order
 		Then the number of "List" table lines is "равно" "1"
 		And I select current line in "List" table
 		Then the form attribute named "PartnerBankAccount" became equal to "Partner bank account (Partner Kalipso)"
-		And I close all client application windows
+		And I click "Post" button
+		And I save the value of "Number" field as "$$NumberPurchaseOrder0154101$$"	
+	* Cancel second line (Dress/L Green) and check totals
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key' |
+				| 'Dress'    | 'L/Green'  |
+			And I activate "Cancel" field in "ItemList" table
+			And I set "Cancel" checkbox in "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post" button
+			Then the form attribute named "ItemListTotalNetAmount" became equal to "1 220,00"
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "93,60"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 313,60"
+		* Add new line and check totals
+			And I click "Add" button
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XL/Green' |
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			Then the form attribute named "ItemListTotalNetAmount" became equal to "1 770,00"
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "192,60"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 962,60"
+		* Delete line and check totals 
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XL/Green' |
+			And I click "Delete" button
+			Then the form attribute named "ItemListTotalNetAmount" became equal to "1 220,00"
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "93,60"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 313,60"
+			And I click "Post and close" button
+			And "List" table contains lines
+				| 'Number'                         | 'Amount'   |
+				| '$$NumberPurchaseOrder0154101$$' | '1 313,60' |
+		* Unchecking the cancellation checkbox and check totals	
+			And I go to line in "List" table
+				| 'Number'                         | 'Amount'   |
+				| '$$NumberPurchaseOrder0154101$$' | '1 313,60' |
+			And I select current line in "List" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key' |
+				| 'Dress'    | 'L/Green'  |
+			And I activate "Cancel" field in "ItemList" table
+			And I remove "Cancel" checkbox in "ItemList" table
+			Then the form attribute named "ItemListTotalNetAmount" became equal to "1 770,00"
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "192,60"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 962,60"
+			And I click "Post and close" button
+			And "List" table contains lines
+				| 'Number'                         | 'Amount'   |
+				| '$$NumberPurchaseOrder0154101$$' | '1 962,60' |
+			And I close all client application windows
 		
 		
 

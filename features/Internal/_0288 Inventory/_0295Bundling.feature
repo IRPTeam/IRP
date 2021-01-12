@@ -28,6 +28,7 @@ Scenario: _029500 preparation (Bundling)
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Companies objects (Main company)
+		When update ItemKeys
 	
 
 

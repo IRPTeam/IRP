@@ -403,9 +403,14 @@ Procedure CalculateNetAmount_PriceNotIncludeTax(Object, ItemRow, AddInfo = Undef
 EndProcedure
 
 Function CalculateAmount(ItemRow)
-	If CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "Price") 
-			And CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "Quantity") Then
-		Return ItemRow.Price * ItemRow.Quantity;
+	If CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "Price") Then
+		If CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "QuantityInBaseUnit") Then
+			Return ItemRow.Price * ItemRow.QuantityInBaseUnit;
+		ElsIf CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "Quantity") Then
+			Return ItemRow.Price * ItemRow.Quantity;
+		Else
+			Return ItemRow.TotalAmount;
+		EndIf;
 	Else
 		Return ItemRow.TotalAmount;
 	EndIf;

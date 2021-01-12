@@ -67,7 +67,7 @@ Function CatalogDescriptionWithAddAttributes(Ref, LangCode = "", AddInfo = Undef
 		Return UsersLStr;
 	EndIf;
 	
-	If (TypeOf(Ref) = Type("CatalogRef.ItemKeys") Or TypeOf(Ref) = Type("CatalogRef.PriceKeys")) Then
+	If Ref.Metadata() = Metadata.Catalogs.ItemKeys Or Ref.Metadata() = Metadata.Catalogs.PriceKeys Then
 		If ValueIsFilled(Ref.Item) Then
 			Return LocalizationServer.CatalogDescription(Ref.Item, LangCode, AddInfo);
 		EndIf;

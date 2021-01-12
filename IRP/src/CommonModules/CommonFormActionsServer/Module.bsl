@@ -79,19 +79,18 @@ Function QuerySearchInputByString(Settings) Export
 		|	Sort,
 		|	Presentation";
 
+	IDSearch = "False";
+	If Settings.MetadataObject = Metadata.Catalogs.Items Then
+		IDSearch = "Table.Ref.ItemID LIKE &SearchString + ""%%""";
+	EndIf;
+		
 	If Not Settings.MetadataObject.DescriptionLength Then
-		IDSearch = "False";
-		If Settings.MetadataObject = Metadata.Catalogs.Items Then
-			IDSearch = "Table.Ref.ItemID LIKE &SearchString + ""%%""";
-		EndIf;
-		
-		
 		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter , "_" + "en", IDSearch);
 		QueryField = "CASE WHEN %1.Description%2 = """" THEN %1.Description_en ELSE %1.Description%2 END ";
 		QueryField = StrTemplate(QueryField, "Table", "_" + LocalizationReuse.GetLocalizationCode());
 		QueryText = StrReplace(QueryText, StrTemplate("%1.Description_en", "Table"), QueryField);
 	Else
-		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter, "");
+		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter, "", IDSearch);
 	EndIf;
 	Return 	QueryText;
 EndFunction

@@ -94,7 +94,13 @@ Scenario: _0154050 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "10001" from "Item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Dress'    |
 		And I close all client application windows
+
 	
 
 Scenario: _0154051 check item and item key input by search in line in a document Sales invoice (in english)
@@ -111,6 +117,11 @@ Scenario: _0154051 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "10001" from "Item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Dress'    |
 		And I close all client application windows
 
 Scenario: _0154052 check item and item key input by search in line in a document Sales return order (in english)
@@ -127,6 +138,11 @@ Scenario: _0154052 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "10001" from "Item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Dress'    |
 		And I close all client application windows
 
 Scenario: _0154053 check item and item key input by search in line in a document Sales return (in english)
@@ -143,6 +159,11 @@ Scenario: _0154053 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
+		And I click the button named "Add"
+		And I select "10001" from "Item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Dress'    |
 		And I close all client application windows
 
 Scenario: _0154054 check item and item key input by search in line in a document Purchase invoice (in english)
@@ -159,6 +180,11 @@ Scenario: _0154054 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
+		And I click the button named "Add"
+		And I select "10001" from "Item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Dress'    |
 		And I close all client application windows
 
 Scenario: _0154055 check item and item key input by search in line in a document Purchase order (in english)
@@ -175,6 +201,11 @@ Scenario: _0154055 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
+		And I click the button named "Add"
+		And I select "10001" from "Item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Dress'    |
 		And I close all client application windows
 
 Scenario: _0154056 check item and item key input by search in line in a document Goods Receipt (in english)
@@ -191,6 +222,11 @@ Scenario: _0154056 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
+		And I click the button named "ItemListAdd"
+		And I select "10001" from "Item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Dress'    |
 		And I close all client application windows
 
 Scenario: _0154057 check item and item key input by search in line in a document Shipment confirmation (in english)
@@ -207,6 +243,11 @@ Scenario: _0154057 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
+		And I click the button named "Add"
+		And I select "10001" from "Item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Dress'    |
 		And I close all client application windows
 
 Scenario: _0154058 check item and item key input by search in line in a document InternalSupplyRequest (in english)
@@ -223,6 +264,11 @@ Scenario: _0154058 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
+		And in the table "ItemList" I click "Add" button
+		And I select "10001" from "Item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Dress'    |
 		And I close all client application windows
 
 Scenario: _0154059 check item and item key input by search in line in a document InventoryTransferOrder (in english)
@@ -239,6 +285,11 @@ Scenario: _0154059 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
+		And I click "Add" button
+		And I select "10001" from "Item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Dress'    |
 		And I close all client application windows
 
 Scenario: _0154060 check item and item key input by search in line in a document InventoryTransfer (in english)
@@ -255,6 +306,11 @@ Scenario: _0154060 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
+		And I click "Add" button
+		And I select "10001" from "Item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Dress'    |
 		And I close all client application windows
 
 Scenario: _0154061 check item and item key input by search in line in a document Bundling (in english)
@@ -271,7 +327,13 @@ Scenario: _0154061 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "10001" from "Item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Dress'    |
 		And I close all client application windows
+
 
 Scenario: _0154062 check item and item key input by search in line in a document UnBundling (in english)
 	And I close all client application windows
@@ -287,6 +349,11 @@ Scenario: _0154062 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "10001" from "Item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Dress'    |
 		And I close all client application windows
 
 
@@ -304,6 +371,11 @@ Scenario: _015406401 check item and item key input by search in line in a docume
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
+		And I click "Add" button
+		And I select "10001" from "Item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Dress'    |
 		And I close all client application windows
 
 Scenario: _015406402 check item and item key input by search in line in a document StockAdjustmentAsWriteOff (in english)
@@ -320,6 +392,11 @@ Scenario: _015406402 check item and item key input by search in line in a docume
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
+		And I click "Add" button
+		And I select "10001" from "Item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Dress'    |
 		And I close all client application windows
 
 Scenario: _015406403 check item and item key input by search in line in a document PhysicalInventory (in english)
@@ -336,6 +413,11 @@ Scenario: _015406403 check item and item key input by search in line in a docume
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
+		And I click "Add" button
+		And I select "10001" from "Item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Dress'    |
 		And I close all client application windows
 
 Scenario: _015406404 check item and item key input by search in line in a document PhysicalCountByLocation (in english)
@@ -352,6 +434,11 @@ Scenario: _015406404 check item and item key input by search in line in a docume
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
+		And I click "Add" button
+		And I select "10001" from "Item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Dress'    |
 		And I close all client application windows
 
 Scenario: _0154065 check item, item key and properties input by search in line in a document Price list (in english)

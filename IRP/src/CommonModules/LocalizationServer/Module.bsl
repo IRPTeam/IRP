@@ -55,7 +55,7 @@ Function CatalogDescriptionWithAddAttributes(Ref, LangCode = "", AddInfo = Undef
 	LangCode = ?(ValueIsFilled(LangCode), LangCode, LocalizationReuse.UserLanguageCode());
 	UsersL = New Array();
 	For Each AddAttribute In Ref.AddAttributes Do
-		If StrStartsWith("Catalog", Ref.Metadata().FullName()) Then
+		If StrSplit(Ref.Metadata().FullName(),".")[0] = "Catalog" Then
 			UsersL.Add(LocalizationReuse.CatalogDescription(AddAttribute.Value, LangCode, AddInfo));
 		Else
 			UsersL.Add(String(AddAttribute.Value));

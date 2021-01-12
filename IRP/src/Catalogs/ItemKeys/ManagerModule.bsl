@@ -237,7 +237,7 @@ Function GetUniqueItemKeyByItem(Item) Export
 EndFunction
 
 Procedure UpdateDescriptions(ItemKeyObject, DescriptionsUpdated = False) Export
-	For Each Lang in LocalizationReuse.AllDescription() Do
+	For Each Lang In LocalizationReuse.AllDescription() Do
 		If ValueIsFilled(ItemKeyObject.Specification) Then
 			NewName = ItemKeyObject.Item[Lang] + "/" + ItemKeyObject.Specification[Lang];
 		Else

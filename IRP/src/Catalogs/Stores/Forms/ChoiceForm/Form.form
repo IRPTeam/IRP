@@ -441,7 +441,6 @@
 	Table.UseShipmentConfirmation,
 	Table.Transit,
 	Table.Description_en AS Description,
-	Table.Description_tr,
 	Table.Predefined,
 	Table.PredefinedDataName,
 	Table.Code

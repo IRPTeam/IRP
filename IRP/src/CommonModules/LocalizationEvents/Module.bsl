@@ -80,6 +80,9 @@ Procedure GetCatalogPresentation(Source, Data, Presentation, StandardProcessing)
 		Presentation = Data.Code;
 	ElsIf SourceType = Type("CatalogManager.PriceKeys") Then
 		Presentation = LocalizationReuse.CatalogDescriptionWithAddAttributes(Data.Ref);
+		If IsBlankString(Presentation) Then
+			Presentation = StrTemplate(R().Error_005, LocalizationReuse.UserLanguageCode());
+		EndIf;
 	ElsIf Data.Property("Description") Then
 		Presentation = Data["Description"];
 	ElsIf Data.Property("FullDescription") Then
@@ -91,7 +94,8 @@ Procedure GetCatalogPresentation(Source, Data, Presentation, StandardProcessing)
 				If KeyData.Value = "" Then 
 					Continue;
 				EndIf;
-				Presentation = KeyData.Value;				
+				Presentation = KeyData.Value;
+				Break;				
 			EndDo;
 			
 			If Presentation = "" Then

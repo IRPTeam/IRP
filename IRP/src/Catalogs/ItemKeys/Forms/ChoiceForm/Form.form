@@ -784,36 +784,36 @@
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
-	ItemKeys.Ref,
-	ItemKeys.DeletionMark,
+	Table.Ref,
+	Table.DeletionMark,
 	CASE
-		WHEN ItemKeys.Specification = VALUE(Catalog.Specifications.EmptyRef)
+		WHEN Table.Specification = VALUE(Catalog.Specifications.EmptyRef)
 			THEN FALSE
 		ELSE TRUE
 	END AS IsSpecificationFlag,
 	CASE
-		WHEN ItemKeys.DeletionMark
-		AND ItemKeys.Specification = VALUE(Catalog.Specifications.EmptyRef)
+		WHEN Table.DeletionMark
+		AND Table.Specification = VALUE(Catalog.Specifications.EmptyRef)
 			THEN 5
-		WHEN ItemKeys.DeletionMark
-		AND ItemKeys.Specification.Type = VALUE(Enum.SpecificationType.Set)
+		WHEN Table.DeletionMark
+		AND Table.Specification.Type = VALUE(Enum.SpecificationType.Set)
 			THEN 4
-		WHEN ItemKeys.DeletionMark
-		AND ItemKeys.Specification.type = VALUE(Enum.SpecificationType.Bundle)
+		WHEN Table.DeletionMark
+		AND Table.Specification.type = VALUE(Enum.SpecificationType.Bundle)
 			THEN 6
-		WHEN ItemKeys.Specification = VALUE(Catalog.Specifications.EmptyRef)
+		WHEN Table.Specification = VALUE(Catalog.Specifications.EmptyRef)
 			THEN 1
-		WHEN ItemKeys.Specification.Type = VALUE(Enum.SpecificationType.Set)
+		WHEN Table.Specification.Type = VALUE(Enum.SpecificationType.Set)
 			THEN 0
-		WHEN ItemKeys.Specification.type = VALUE(Enum.SpecificationType.Bundle)
+		WHEN Table.Specification.type = VALUE(Enum.SpecificationType.Bundle)
 			THEN 2
 	END AS IsSpecification,
-	ItemKeys.Code,
-	ItemKeys.Description_en AS ItemKey,
-	ItemKeys.Item AS Item,
-	ItemKeys.Specification AS Specification
+	Table.Code,
+	Table.Description_en AS ItemKey,
+	Table.Item AS Item,
+	Table.Specification AS Specification
 FROM
-	Catalog.ItemKeys AS ItemKeys</queryText>
+	Catalog.ItemKeys AS Table</queryText>
       <mainTable>Catalog.ItemKeys</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

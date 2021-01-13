@@ -8,35 +8,30 @@
 			<code>English</code>
 			<description>English</description>
 		</languageInfo>
+		<languageInfo>
+			<id>tr</id>
+			<code>Turkish</code>
+		</languageInfo>
+		<languageInfo>
+			<id>ru</id>
+			<code>Russian</code>
+		</languageInfo>
+		<languageInfo>
+			<id>fr</id>
+			<code>French</code>
+		</languageInfo>
+		<languageInfo>
+			<id>de</id>
+			<code>German</code>
+		</languageInfo>
+		<languageInfo>
+			<id>ha</id>
+			<code>HASH</code>
+		</languageInfo>
 	</languageSettings>
 	<columns>
-		<size>6</size>
+		<size>0</size>
 	</columns>
-	<rowsItem>
-		<index>0</index>
-		<indexTo>8</indexTo>
-		<row>
-			<empty>true</empty>
-		</row>
-	</rowsItem>
-	<rowsItem>
-		<index>9</index>
-		<row>
-			<c>
-				<i>5</i>
-				<c>
-					<f>0</f>
-					<tl>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content/>
-						</v8:item>
-					</tl>
-				</c>
-			</c>
-		</row>
-	</rowsItem>
 	<templateMode>true</templateMode>
-	<height>10</height>
-	<vgRows>10</vgRows>
+	<textDirection>LeftToRight</textDirection>
 </document>

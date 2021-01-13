@@ -534,10 +534,6 @@
 							<dcscor:value xsi:type="v8ui:HorizontalAlign">Center</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>Placement</dcscor:parameter>
-							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
-						</dcscor:item>
-						<dcscor:item>
 							<dcscor:parameter>MinimumWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">9.75</dcscor:value>
 						</dcscor:item>
@@ -549,23 +545,13 @@
 							<dcscor:parameter>Details</dcscor:parameter>
 							<dcscor:value xsi:type="dcscor:Parameter">PriceTypeDetails</dcscor:value>
 						</dcscor:item>
+						<dcscor:item>
+							<dcscor:parameter>Placement</dcscor:parameter>
+							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
+						</dcscor:item>
 					</dcsat:appearance>
 				</dcsat:tableCell>
 				<dcsat:tableCell>
-					<dcsat:item xsi:type="dcsat:Field">
-						<dcsat:value xsi:type="dcscor:Parameter">PriceDefinitionReasonString</dcsat:value>
-					</dcsat:item>
-					<dcsat:item xsi:type="dcsat:Field">
-						<dcsat:value xsi:type="v8:LocalStringType">
-							<v8:item>
-								<v8:lang>en</v8:lang>
-								<v8:content> </v8:content>
-							</v8:item>
-						</dcsat:value>
-					</dcsat:item>
-					<dcsat:item xsi:type="dcsat:Field">
-						<dcsat:value xsi:type="dcscor:Parameter">PriceDefinitionReason</dcsat:value>
-					</dcsat:item>
 					<dcsat:appearance>
 						<dcscor:item>
 							<dcscor:parameter>TextColor</dcscor:parameter>
@@ -602,20 +588,20 @@
 							</dcscor:item>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>Placement</dcscor:parameter>
-							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
-						</dcscor:item>
-						<dcscor:item>
 							<dcscor:parameter>MinimumWidth</dcscor:parameter>
-							<dcscor:value xsi:type="xs:decimal">30</dcscor:value>
+							<dcscor:value xsi:type="xs:decimal">30.0</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>MaximumWidth</dcscor:parameter>
-							<dcscor:value xsi:type="xs:decimal">30</dcscor:value>
+							<dcscor:value xsi:type="xs:decimal">30.0</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>Details</dcscor:parameter>
 							<dcscor:value xsi:type="dcscor:Parameter">PriceTypeDetails</dcscor:value>
+						</dcscor:item>
+						<dcscor:item>
+							<dcscor:parameter>Placement</dcscor:parameter>
+							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
 						</dcscor:item>
 					</dcsat:appearance>
 				</dcsat:tableCell>

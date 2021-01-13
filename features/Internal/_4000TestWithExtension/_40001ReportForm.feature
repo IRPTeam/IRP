@@ -26,6 +26,7 @@ Scenario: _4000100 preparation
 		When Create catalog Users objects
 		When Create catalog AccessGroups objects
 		When Create catalog AccessProfiles objects
+		When update ItemKeys
 		* Change test user info
 			Given I open hyperlink "e1cib/list/Catalog.Users"
 			And I go to line in "List" table

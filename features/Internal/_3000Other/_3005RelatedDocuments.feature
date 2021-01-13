@@ -39,6 +39,7 @@ Scenario: _300520 preparation (check post/unpost/mark for deletion from report R
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When update ItemKeys
 
 Scenario: _300521 check post/unpost/mark for deletion from report "Related documents"
 	* Preparation

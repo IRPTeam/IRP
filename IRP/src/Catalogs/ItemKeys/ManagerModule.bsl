@@ -236,6 +236,21 @@ Function GetUniqueItemKeyByItem(Item) Export
 	Return Catalogs.ItemKeys.EmptyRef();
 EndFunction
 
+Procedure UpdateDescriptions(ItemKeyObject, DescriptionsUpdated = False) Export
+	For Each Lang In LocalizationReuse.AllDescription() Do
+		If ValueIsFilled(ItemKeyObject.Specification) Then
+			NewName = ItemKeyObject.Item[Lang] + "/" + ItemKeyObject.Specification[Lang];
+		Else
+			NewName = LocalizationServer.CatalogDescriptionWithAddAttributes(ItemKeyObject, StrSplit(Lang, "_")[1]);
+		EndIf;
+		
+		If Not ItemKeyObject[Lang] = NewName Then
+			DescriptionsUpdated = True;
+			ItemKeyObject[Lang] = NewName;
+		EndIf;
+	EndDo;
+EndProcedure
+
 #Region Bundling
 
 Function FindOrCreateRefByProperties(TableOfProperties, Item, AddInfo = Undefined) Export

@@ -3,6 +3,9 @@ Var HTMLWindowPictures, HTMLWindowAddAttributes Export;
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	
+	ThisObject.List.QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(ThisObject.List.QueryText);
+	
 	If Parameters.Property("CustomFilter") Then
 		For Each KeyValue In Parameters.CustomFilter Do
 			FilterItem = ThisObject.List.Filter.Items.Add(Type("DataCompositionFilterItem"));

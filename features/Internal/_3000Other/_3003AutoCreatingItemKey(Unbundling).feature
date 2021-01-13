@@ -39,6 +39,7 @@ Scenario: _300301 preparation (creation item key when create Unbundling)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When update ItemKeys
 	* Create item for bundle
 	* Filling in add attribute and property values for Chewing gum brand and Chewing gum taste
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertyValues"

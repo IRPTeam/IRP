@@ -1580,6 +1580,11 @@ Scenario: check item key autofilling in sales/returns documents for an item that
 			| Scarf       |
 		And I select current line in "List" table
 	* Check filling in item key
+		# temporarily
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I close "Item keys" window
+		# temporarily
 		And "ItemList" table contains lines
 			| Item  |Item key | Unit |
 			| Scarf |XS/Red   | pcs  |

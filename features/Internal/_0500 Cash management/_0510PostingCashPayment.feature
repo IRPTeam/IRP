@@ -49,6 +49,7 @@ Scenario: _051001 preparation (Cash payment)
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
 		When Create catalog Partners objects
+		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then

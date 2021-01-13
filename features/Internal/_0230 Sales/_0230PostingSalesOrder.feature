@@ -48,6 +48,7 @@ Scenario: _023000 preparation (Sales order)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -316,21 +317,10 @@ Scenario: _023106 check the form of selection of items (sales order)
 	And I close all client application windows
 
 
+				
 
-Scenario: _023113 check totals in the document Sales order
-	* Open list form Sales order
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-	* Select Sales order
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberSalesOrder023001$$'      |
-		And I select current line in "List" table
-	* Check for document results
-		Then the form attribute named "ItemListTotalOffersAmount" became equal to "0,00"
-		Then the form attribute named "ItemListTotalNetAmount" became equal to "3 686,44"
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "663,56"
-		Then the form attribute named "ItemListTotalTotalAmount" became equal to "4 350,00"
-		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		
+				
 
 Scenario: _023023 check the output of the document movement report for Sales Order
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"

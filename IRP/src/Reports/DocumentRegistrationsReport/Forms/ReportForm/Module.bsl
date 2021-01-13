@@ -244,6 +244,10 @@ Function GetListOfFieldsByData(Data)
 	If ValueIsFilled(ListOfFields) Then
 		ListOfFields = Mid(ListOfFields, 2);
 	EndIf;
+	
+	If ShowItemInItemKey Then
+		ListOfFields = StrReplace(ListOfFields, " ItemKey" , "ItemKey.Item, ItemKey");
+	EndIf;
 	Return ListOfFields;
 EndFunction
 

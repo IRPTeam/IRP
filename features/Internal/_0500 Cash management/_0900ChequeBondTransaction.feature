@@ -47,6 +47,7 @@ Scenario: _090000 preparation (Cheque bond transaction)
 		When Create catalog PriceTypes objects
 		When Create catalog Specifications objects
 		When Create information register PricesByItemKeys records
+		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then

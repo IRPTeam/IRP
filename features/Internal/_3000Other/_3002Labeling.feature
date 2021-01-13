@@ -44,6 +44,7 @@ Scenario: _3001002 preparation
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When update ItemKeys
 		* Check or create PurchaseOrder017001
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 			If "List" table does not contain lines Then

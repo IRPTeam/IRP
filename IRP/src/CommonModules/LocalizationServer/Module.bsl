@@ -35,44 +35,44 @@ EndFunction
 
 Function CatalogDescription(Ref, LangCode = "", AddInfo = Undefined) Export
 	LangCode = ?(ValueIsFilled(LangCode), LangCode, LocalizationReuse.GetLocalizationCode());
+	Presentation = "";
 	If Not UseMultiLanguage(Ref.Metadata().FullName(), LangCode, AddInfo) Then
-		Return Strings(Ref);
+		Presentation = Strings(Ref);
+	ElsIf Not IsBlankString(Ref["Description_" + LangCode]) Then
+		Presentation = Ref["Description_" + LangCode];
+	ElsIf Not IsBlankString(Ref["Description_en"]) Then
+		Presentation = Ref["Description_en"];
+	Else
+		Presentation = "";
 	EndIf;
 	
-	UsersL = Ref["Description_" + LangCode];
-	If ValueIsFilled(UsersL) Then
-		Return UsersL;
-	EndIf;
-	
-	If ValueIsFilled(Ref["Description_en"]) Then
-		Return Ref["Description_en"];
-	EndIf;
-	
-	Return StrTemplate(R().Error_002, LangCode);
+	Return Presentation;
 EndFunction
 
 Function CatalogDescriptionWithAddAttributes(Ref, LangCode = "", AddInfo = Undefined) Export
+	
+	Presentation = "";
 	LangCode = ?(ValueIsFilled(LangCode), LangCode, LocalizationReuse.UserLanguageCode());
 	UsersL = New Array();
 	For Each AddAttribute In Ref.AddAttributes Do
-		If StrStartsWith("Catalog", Ref.Metadata().FullName()) Then
-			UsersL.Add(LocalizationReuse.CatalogDescription(AddAttribute.Value, LangCode, AddInfo));
+		If StrSplit(Ref.Metadata().FullName(), ".")[0] = "Catalog" Then
+			PresentationAttribute = LocalizationReuse.CatalogDescription(AddAttribute.Value, LangCode, AddInfo);
 		Else
-			UsersL.Add(String(AddAttribute.Value));
+			PresentationAttribute = String(AddAttribute.Value); 
+		EndIf;
+		If Not IsBlankString(PresentationAttribute) Then
+			UsersL.Add(PresentationAttribute);
 		EndIf;
 	EndDo;
 	
-	UsersLStr = StrConcat(UsersL, "/");
-	If ValueIsFilled(UsersLStr) Then
-		Return UsersLStr;
-	EndIf;
-	
-	If (TypeOf(Ref) = Type("CatalogRef.ItemKeys") Or TypeOf(Ref) = Type("CatalogRef.PriceKeys")) Then
-		If ValueIsFilled(Ref.Item) Then
-			Return LocalizationServer.CatalogDescription(Ref.Item, LangCode, AddInfo);
+	If UsersL.Count() Then
+		Presentation = StrConcat(UsersL, "/");
+	ElsIf Ref.Metadata() = Metadata.Catalogs.ItemKeys Or Ref.Metadata() = Metadata.Catalogs.PriceKeys Then
+		If ValueIsFilled(Ref.Item) AND Not Ref.AddAttributes.Count() Then
+			Presentation = LocalizationServer.CatalogDescription(Ref.Item, LangCode, AddInfo);
 		EndIf;
 	EndIf;
-	Return StrTemplate(R().Error_005, LangCode);
+	Return Presentation;
 EndFunction
 
 Function AllDescription(AddInfo = Undefined) Export
@@ -112,10 +112,6 @@ Function FieldsListForDescriptions(Val Source) Export
 	If Source = "CatalogManager.Currencies" Then
 		Fields.Add("Code");
 		Return Fields;
-	ElsIf Source = "CatalogManager.ItemKeys" Then
-		Fields.Add("Specification");
-		Fields.Add("Item");
-		Fields.Add("Ref");
 	ElsIf Source = "CatalogManager.PriceKeys" Then
 		Fields.Add("Ref");
 		Return Fields;

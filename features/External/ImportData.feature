@@ -572,6 +572,12 @@ Scenario: Create catalog ItemKeys objects
 		| 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf13dc8cb47d6' | 'fe773e93-b36a-4cea-9e05-7988cb899031' | ''                                                |
 		| 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf13dc8cb47d6' | '78b69bbb-0ee1-4edb-b7a7-d1beb4d59a2f' | ''                                                |
 
+	
+	
+		
+
+
+
 Scenario: Create catalog ItemTypes objects
 
 	And I check or create catalog "ItemTypes" objects:
@@ -906,9 +912,9 @@ Scenario: Create catalog AddAttributeAndPropertyValues objects
 		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf116b32709ab' | 'No'           | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf116b32709a8' | ''             | 'Region Ukraine' | ''                 | ''               | 'Ukraine TR'     | '_f878c59250494fe19de5b8058a799bc1' |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf11c17ff4366' | 'No'           | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf11c17ff4363' | ''             | 'Interner'       | ''                 | ''               | 'Interner TR'    | '_bbea9e0a994640faabd52382748a7446' |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf11c17ff4368' | 'No'           | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf11c17ff4363' | ''             | 'Rent'           | ''                 | ''               | 'Rent TR'        | '_abbb1b632f914128a7914b55e7478ba3' |
-		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf13dc8cb47d2' | 'No'           | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47ce' | ''             | ''               | ''                 | ''               | 'Cherry'         | '_4c070982aa7c41adb93406cd6d402bbf' |
-		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf13dc8cb47d3' | 'No'           | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47ce' | ''             | ''               | ''                 | ''               | 'Mango'          | '_b234e9f0f22340c0b7051871a81696dc' |
-		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf13dc8cb47d4' | 'No'           | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47cf' | ''             | ''               | ''                 | ''               | 'Mint'           | '_ecbd380a5e8d4f1a927c52d1b59cc956' |
+		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf13dc8cb47d2' | 'No'           | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47ce' | ''             | 'Cherry'         | ''                 | ''               | 'Cherry'         | '_4c070982aa7c41adb93406cd6d402bbf' |
+		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf13dc8cb47d3' | 'No'           | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47ce' | ''             | 'Mango'          | ''                 | ''               | 'Mango'          | '_b234e9f0f22340c0b7051871a81696dc' |
+		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf13dc8cb47d4' | 'No'           | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47cf' | ''             | 'Mint'           | ''                 | ''               | 'Mint'           | '_ecbd380a5e8d4f1a927c52d1b59cc956' |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa79120ed92fbced11eafcb72c775d77' | 'No'           | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47de' | ''             | 'Fruit'          | ''                 | ''               | ''               | '_7ad0648a2f6e46cfa6f3f7d2d0440bd9' |
 Scenario: Create catalog AddAttributeAndPropertySets objects
 

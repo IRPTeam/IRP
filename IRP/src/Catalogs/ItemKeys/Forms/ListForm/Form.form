@@ -108,20 +108,18 @@
       </items>
       <items xsi:type="form:FormField">
         <name>Ref</name>
-        <id>16</id>
+        <id>38</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>List.Ref</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>List.Ref</segments>
         </dataPath>
         <extendedTooltip>
           <name>RefExtendedTooltip</name>
-          <id>18</id>
+          <id>40</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -136,7 +134,7 @@
         </extendedTooltip>
         <contextMenu>
           <name>RefContextMenu</name>
-          <id>17</id>
+          <id>39</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -144,14 +142,118 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
-        <type>LabelField</type>
+        <type>InputField</type>
         <editMode>Enter</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
         <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:LabelFieldExtInfo">
+        <extInfo xsi:type="form:InputFieldExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
+          <wrap>true</wrap>
+          <chooseType>true</chooseType>
+          <typeDomainEnabled>true</typeDomainEnabled>
+          <textEdit>true</textEdit>
+        </extInfo>
+      </items>
+      <items xsi:type="form:FormField">
+        <name>ItemKey</name>
+        <id>32</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>List.ItemKey</segments>
+        </dataPath>
+        <extendedTooltip>
+          <name>ItemKeyExtendedTooltip</name>
+          <id>34</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <contextMenu>
+          <name>ItemKeyContextMenu</name>
+          <id>33</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <autoFill>true</autoFill>
+        </contextMenu>
+        <type>InputField</type>
+        <editMode>Enter</editMode>
+        <showInHeader>true</showInHeader>
+        <headerHorizontalAlign>Left</headerHorizontalAlign>
+        <showInFooter>true</showInFooter>
+        <extInfo xsi:type="form:InputFieldExtInfo">
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <wrap>true</wrap>
+          <chooseType>true</chooseType>
+          <typeDomainEnabled>true</typeDomainEnabled>
+          <textEdit>true</textEdit>
+        </extInfo>
+      </items>
+      <items xsi:type="form:FormField">
+        <name>Specification</name>
+        <id>35</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>List.Specification</segments>
+        </dataPath>
+        <extendedTooltip>
+          <name>SpecificationExtendedTooltip</name>
+          <id>37</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <contextMenu>
+          <name>SpecificationContextMenu</name>
+          <id>36</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <autoFill>true</autoFill>
+        </contextMenu>
+        <type>InputField</type>
+        <editMode>Enter</editMode>
+        <showInHeader>true</showInHeader>
+        <headerHorizontalAlign>Left</headerHorizontalAlign>
+        <showInFooter>true</showInFooter>
+        <extInfo xsi:type="form:InputFieldExtInfo">
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <wrap>true</wrap>
+          <chooseType>true</chooseType>
+          <typeDomainEnabled>true</typeDomainEnabled>
+          <textEdit>true</textEdit>
         </extInfo>
       </items>
       <commandBarLocation>None</commandBarLocation>
@@ -578,33 +680,31 @@
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
-	ItemKeys.Ref,
-	ItemKeys.DeletionMark,
-	ItemKeys.Item,
-	ItemKeys.Unit,
-	ItemKeys.Specification,
-	ItemKeys.Predefined,
-	ItemKeys.PredefinedDataName,
+	Table.Ref,
+	Table.DeletionMark,
 	CASE
-		WHEN ItemKeys.DeletionMark
-		AND ItemKeys.Specification = VALUE(Catalog.Specifications.EmptyRef)
+		WHEN Table.DeletionMark
+		AND Table.Specification = VALUE(Catalog.Specifications.EmptyRef)
 			THEN 5
-		WHEN ItemKeys.DeletionMark
-		AND ItemKeys.Specification.Type = VALUE(Enum.SpecificationType.Set)
+		WHEN Table.DeletionMark
+		AND Table.Specification.Type = VALUE(Enum.SpecificationType.Set)
 			THEN 4
-		WHEN ItemKeys.DeletionMark
-		AND ItemKeys.Specification.type = VALUE(Enum.SpecificationType.Bundle)
+		WHEN Table.DeletionMark
+		AND Table.Specification.type = VALUE(Enum.SpecificationType.Bundle)
 			THEN 6
-		WHEN ItemKeys.Specification = VALUE(Catalog.Specifications.EmptyRef)
+		WHEN Table.Specification = VALUE(Catalog.Specifications.EmptyRef)
 			THEN 1
-		WHEN ItemKeys.Specification.Type = VALUE(Enum.SpecificationType.Set)
+		WHEN Table.Specification.Type = VALUE(Enum.SpecificationType.Set)
 			THEN 0
-		WHEN ItemKeys.Specification.type = VALUE(Enum.SpecificationType.Bundle)
+		WHEN Table.Specification.type = VALUE(Enum.SpecificationType.Bundle)
 			THEN 2
 	END AS IsSpecification,
-	ItemKeys.Code
+	Table.Code,
+	Table.Description_en AS ItemKey,
+	Table.Item AS Item,
+	Table.Specification AS Specification
 FROM
-	Catalog.ItemKeys AS ItemKeys</queryText>
+	Catalog.ItemKeys AS Table</queryText>
       <mainTable>Catalog.ItemKeys</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

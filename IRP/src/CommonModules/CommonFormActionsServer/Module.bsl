@@ -12,7 +12,18 @@ Function QuerySearchInputByString(Settings) Export
 		"SELECT ALLOWED TOP 10
 		|	Table.Ref AS Ref,
 		|	Table.Presentation AS Presentation,
-		|	0 AS Sort
+		|	3 AS Sort
+		|INTO TempVTViaID
+		|FROM
+		|	%1 AS Table
+		|WHERE
+		|	%4
+		|;
+		|
+		|SELECT ALLOWED TOP 10
+		|	Table.Ref AS Ref,
+		|	Table.Presentation AS Presentation,
+		|	1 AS Sort
 		|INTO TempVT
 		|FROM
 		|	%1 AS Table
@@ -25,7 +36,7 @@ Function QuerySearchInputByString(Settings) Export
 		|SELECT ALLOWED TOP 10
 		|	Table.Ref AS Ref,
 		|	Table.Presentation AS Presentation,
-		|	1 AS Sort
+		|	2 AS Sort
 		|INTO TempVTSecond
 		|FROM
 		|	%1 AS Table
@@ -37,9 +48,18 @@ Function QuerySearchInputByString(Settings) Export
 		|				FROM
 		|					TempVT AS T)
 		| %2
+		|
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT TOP 10 DISTINCT
+		|	TempVT.Ref AS Ref,
+		|	TempVT.Presentation AS Presentation,
+		|	TempVT.Sort AS Sort
+		|FROM
+		|	TempVTViaID AS TempVT
+		|
+		|UNION
+		|
 		|SELECT TOP 10
 		|	TempVT.Ref AS Ref,
 		|	TempVT.Presentation AS Presentation,
@@ -55,18 +75,22 @@ Function QuerySearchInputByString(Settings) Export
 		|	TempVTSecond.Sort
 		|FROM
 		|	TempVTSecond AS TempVTSecond
-		|
 		|ORDER BY
 		|	Sort,
 		|	Presentation";
 
+	IDSearch = "False";
+	If Settings.MetadataObject = Metadata.Catalogs.Items Then
+		IDSearch = "Table.Ref.ItemID LIKE &SearchString + ""%%""";
+	EndIf;
+		
 	If Not Settings.MetadataObject.DescriptionLength Then
-		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter , "_" + "en");
+		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter , "_" + "en", IDSearch);
 		QueryField = "CASE WHEN %1.Description%2 = """" THEN %1.Description_en ELSE %1.Description%2 END ";
 		QueryField = StrTemplate(QueryField, "Table", "_" + LocalizationReuse.GetLocalizationCode());
 		QueryText = StrReplace(QueryText, StrTemplate("%1.Description_en", "Table"), QueryField);
 	Else
-		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter, "");
+		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter, "", IDSearch);
 	EndIf;
 	Return 	QueryText;
 EndFunction

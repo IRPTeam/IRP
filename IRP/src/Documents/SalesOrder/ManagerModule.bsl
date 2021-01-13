@@ -1451,6 +1451,7 @@ Function ItemList()
 		|	SalesOrderItemList.Ref.Date AS Period,
 		|	SalesOrderItemList.Key AS RowKey,
 		|	SalesOrderItemList.DeliveryDate AS DeliveryDate,
+		|	SalesOrderItemList.ProcurementMethod,
 		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS IsProcurementMethod_Stock,
 		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase) AS IsProcurementMethod_Purchase,
 		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.NoReserve) AS IsProcurementMethod_NonReserve,
@@ -1460,7 +1461,8 @@ Function ItemList()
 		|	SalesOrderItemList.Cancel AS IsCanceled,
 		|	SalesOrderItemList.CancelReason,
 		|	SalesOrderItemList.NetAmount,
-		|	SalesOrderItemList.Ref.UseItemsShipmentScheduling AS UseItemsShipmentScheduling
+		|	SalesOrderItemList.Ref.UseItemsShipmentScheduling AS UseItemsShipmentScheduling,
+		|	SalesOrderItemList.OffersAmount
 		|INTO ItemList
 		|FROM
 		|	Document.SalesOrder.ItemList AS SalesOrderItemList

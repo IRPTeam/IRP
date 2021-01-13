@@ -38,6 +38,7 @@ Scenario: _300100 preparation (image setting)
         When Create information register PricesByItemKeys records
         When Create catalog IntegrationSettings objects
         When Create information register CurrencyRates records
+        When update ItemKeys
     * Add test extension
         Given I open hyperlink "e1cib/list/Catalog.Extensions"
         If "List" table does not contain lines Then

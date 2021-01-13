@@ -80,6 +80,7 @@ Scenario: 950000 preparation (role Full access only read)
 	When Create information register UserSettings records (Retail document)
 	When Create catalog ItemKeys objects (Table)
 	When Create catalog Items objects (Table)
+	When update ItemKeys
 	When Create information register UserSettings records
 	When Create catalog SpecialOfferRules objects
 	When Create catalog SpecialOfferTypes objects

@@ -195,6 +195,13 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <templates uuid="5c2bb1f9-b0cd-448e-a1ff-b36b34edc031">
+    <name>Default</name>
+    <synonym>
+      <key>en</key>
+      <value>Default</value>
+    </synonym>
+  </templates>
   <templates uuid="72cf4cec-add8-4b70-b8c2-f342288a01f6">
     <name>DataSource</name>
     <synonym>
@@ -210,12 +217,5 @@
       <value>Template</value>
     </synonym>
     <templateType>DataCompositionSchema</templateType>
-  </templates>
-  <templates uuid="5c2bb1f9-b0cd-448e-a1ff-b36b34edc031">
-    <name>Default</name>
-    <synonym>
-      <key>en</key>
-      <value>Default</value>
-    </synonym>
   </templates>
 </mdclass:Catalog>

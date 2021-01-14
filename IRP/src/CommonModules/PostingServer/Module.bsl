@@ -1401,22 +1401,27 @@ Function NotUseRegister(Name) Export
 	Return NOT Mid(Name, 7, 1) = "_";
 EndFunction	
 
-Procedure FillPostingTables(Tables, Ref, QueryArray, TablesForMerge, Parameters) Export
+Procedure ExequteQuery(Ref, QueryArray, Parameters) Export
 	Query = New Query;
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.SetParameter("Ref", Ref);
-	
 	Query.Text = StrConcat(QueryArray, Chars.LF + ";" + Chars.LF);
 	Query.Execute();
-	
-	ArrayOfTableNames = StrSplit(TablesForMerge, ",");
-	
-	For Each TableName In ArrayOfTableNames Do
-		VTSearch = Query.TempTablesManager.Tables.Find(TrimAll(TableName));
-		If VTSearch = Undefined Then
-			Continue;
-		EndIf;
-		MergeTables(Tables[TrimAll(TableName)], VTSearch.GetData().Unload(), "RecordType");
+EndProcedure
+
+Function GetQueryTableByName(TableName, Parameters) Export
+	VTSearch = Parameters.TempTablesManager.Tables.Find(TableName);
+	If VTSearch = Undefined Then
+		Return New ValueTable();
+	EndIf;
+	Return VTSearch.GetData().Unload();
+EndFunction	
+
+Procedure FillPostingTables(Tables, Ref, QueryArray, Parameters) Export
+	ExequteQuery(Ref, QueryArray, Parameters);
+	SetRegisters(Tables, Ref);
+	For Each VT In Tables Do
+		MergeTables(Tables[VT.Key], GetQueryTableByName(VT.Key, Parameters), "RecordType");
 	EndDo;
 EndProcedure
 
@@ -1456,4 +1461,5 @@ Procedure SetRegisters(Tables, DocumentRef) Export
 		Tables.Insert(Register.Name, PostingServer.CreateTable(Register));
 	EndDo;
 EndProcedure
+
 #EndRegion

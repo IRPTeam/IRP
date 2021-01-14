@@ -96,17 +96,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Aging_Receipt  = QueryTableAging;
 	
 #Region NewRegistersPosting	
+	QueryArray = GetQueryTextsSecondaryTables();
+	PostingServer.ExequteQuery(Ref, QueryArray, Parameters);
+	
 	Tables.Insert("AdvancesFromCustomers_Lock", PostingServer.CreateTable(AccReg.R2020B_AdvancesFromCustomers));
-	PostingServer.SetRegisters(Tables, Ref);
-	QueryArray = GetQueryTextsBeforeSetLocks();
-	
-	TablesForMerge = 
-	"R2001T_Sales,                     R2005T_SalesSpecialOffers,     R2011B_SalesOrdersShipment, 
-	|R2012B_SalesOrdersInvoiceClosing, R2013T_SalesOrdersProcurement, R2031B_ShipmentInvoicing, 
-	|R2040B_TaxesIncoming,             R4010B_ActualStocks,           R4034B_GoodsShipmentSchedule,
-	|R4050B_StockInventory,            AdvancesFromCustomers_Lock";
-	
-	PostingServer.FillPostingTables(Tables, Ref, QueryArray, TablesForMerge, Parameters);
+	Tables.AdvancesFromCustomers_Lock = PostingServer.GetQueryTableByName("AdvancesFromCustomers_Lock", Parameters);	
 #EndRegion	
 		
 	Return Tables;
@@ -766,9 +760,7 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 #Region NewRegistersPosting
 	R2020B_AdvancesFromCustomers = 
 	AccumulationRegisters.R2020B_AdvancesFromCustomers.GetLockFields(DocumentDataTables.AdvancesFromCustomers_Lock);
-	DataMapWithLockFields.Insert(R2020B_AdvancesFromCustomers.RegisterName, R2020B_AdvancesFromCustomers.LockInfo);	
-	
-//	PostingServer.GetLockDataSource(DataMapWithLockFields, DocumentDataTables);
+	DataMapWithLockFields.Insert(R2020B_AdvancesFromCustomers.RegisterName, R2020B_AdvancesFromCustomers.LockInfo);
 #EndRegion	
 	
 	Return DataMapWithLockFields;
@@ -778,9 +770,9 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	
 #Region NewRegisterPosting
 	OffsetOfAdvanceServer.OffsetOfAdvanceFromCustomers_OnTransaction(Parameters);
-	QueryArray = GetQueryTextsAfterSetLocks();
-	TablesForMerge = "R2021B_CustomersTransactions, R2020B_AdvancesFromCustomers";
-	PostingServer.FillPostingTables(Parameters.DocumentDataTables, Ref, QueryArray, TablesForMerge, Parameters);
+	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.FillPostingTables(Parameters.DocumentDataTables, Ref, QueryArray, Parameters);
 #EndRegion
 	
 	// Advance from customers
@@ -1195,14 +1187,18 @@ EndProcedure
 
 #Region NewRegistersPosting
 
-Function GetQueryTextsBeforeSetLocks()
+Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
-	
 	QueryArray.Add(ItemList());
 	QueryArray.Add(OffersInfo());
 	QueryArray.Add(ShipmentConfirmationsInfo());
 	QueryArray.Add(Taxes());
-	
+	QueryArray.Add(AdvancesFromCustomers_Lock());
+	Return QueryArray;
+EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
 	QueryArray.Add(R2001T_Sales());	
 	QueryArray.Add(R2005T_SalesSpecialOffers());
 	QueryArray.Add(R2011B_SalesOrdersShipment());
@@ -1213,24 +1209,11 @@ Function GetQueryTextsBeforeSetLocks()
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
 	QueryArray.Add(R4050B_StockInventory());
-	QueryArray.Add(AdvancesFromCustomers_Lock());
-	
-	//QueryArray.Add(R5011B_PartnersAging());
-	//QueryArray.Add(R2020B_AdvancesFromCustomers());
-	//QueryArray.Add(R2021B_CustomersTransactions());
-	
-	Return QueryArray;
-EndFunction
-
-Function GetQueryTextsAfterSetLocks()
-	QueryArray = New Array;
-	
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
-	
+	//QueryArray.Add(R5011B_PartnersAging());
 	Return QueryArray;
 EndFunction
-
 
 Function ItemList()
 	Return
@@ -1421,7 +1404,7 @@ EndFunction
 Function R2020B_AdvancesFromCustomers()
 	Return
 		"SELECT
-		|	VALUE(AccumulationRecordType.Expense),
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	OffsetOfAdvance.Period,
 		|	OffsetOfAdvance.Company,
 		|	OffsetOfAdvance.Currency,
@@ -1429,6 +1412,7 @@ Function R2020B_AdvancesFromCustomers()
 		|	OffsetOfAdvance.Partner,
 		|	OffsetOfAdvance.ReceiptDocument AS Basis,
 		|	SUM(OffsetOfAdvance.Amount)
+		|INTO R2020B_AdvancesFromCustomers
 		|FROM
 		|	OffsetOfAdvance AS OffsetOfAdvance
 		|GROUP BY
@@ -1452,7 +1436,7 @@ Function R2021B_CustomersTransactions()
 		|	ItemList.Partner,
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument AS Basis,
-		|	SUM(ItemList.TotalAmount) AS Amount
+		|	SUM(ItemList.Amount) AS Amount
 		|INTO R2021B_CustomersTransactions
 		|FROM
 		|	ItemList AS ItemList
@@ -1600,7 +1584,7 @@ Function AdvancesFromCustomers_Lock()
 		|	ItemList.Partner,
 		|	ItemList.BasisDocument AS TransactionDocument,
 		|	ItemList.Agreement,
-		|	SUM(ItemList.TotalAmount) AS DocumentAmount
+		|	SUM(ItemList.Amount) AS DocumentAmount
 		|INTO AdvancesFromCustomers_Lock
 		|FROM
 		|	ItemList AS ItemList

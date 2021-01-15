@@ -403,12 +403,25 @@ Scenario: Create catalog Stores objects
 		| 'Ref'                                                            | 'DeletionMark' | 'UseGoodsReceipt' | 'UseShipmentConfirmation' | 'Transit' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
 		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | 'No'           | 'No'              | 'No'                      | 'No'      | 'Store 01'       | ''                 | ''               | 'Store 01 TR'    |
 		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c' | 'No'           | 'Yes'             | 'Yes'                     | 'No'      | 'Store 02'       | ''                 | ''               | 'Store 02 TR'    |
-		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d' | 'No'           | 'Yes'             | 'Yes'                     | 'No'      | 'Store 03'       | ''                 | ''               | 'Store 03 TR'    |
-		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00e' | 'No'           | 'No'              | 'No'                      | 'No'      | 'Store 04'       | ''                 | ''               | 'Store 04 TR'    |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d' | 'No'           | 'Yes'             | 'Yes'                     | 'No'      | 'Store 03'       | ''                 | ''               | 'Store 03 TR'    | 
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00e' | 'No'           | 'No'              | 'No'                      | 'No'      | 'Store 04'       | ''                 | ''               | 'Store 04 TR'    | 
 		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc92' | 'No'           | 'Yes'             | 'No'                      | 'No'      | 'Store 07'       | ''                 | ''               | 'Store 07 TR'    |
-		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc93' | 'No'           | 'No'              | 'Yes'                     | 'No'      | 'Store 08'       | ''                 | ''               | 'Store 08 TR'    |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc93' | 'No'           | 'No'              | 'Yes'                     | 'No'      | 'Store 08'       | ''                 | ''               | 'Store 08 TR'    | 
 		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df444' | 'No'           | 'Yes'             | 'Yes'                     | 'No'      | 'Store 05'       | ''                 | ''               | 'Store 05 TR'    |
-		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df445' | 'No'           | 'No'              | 'No'                      | 'No'      | 'Store 06'       | ''                 | ''               | 'Store 06 TR'    |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df445' | 'No'           | 'No'              | 'No'                      | 'No'      | 'Store 06'       | ''                 | ''               | 'Store 06 TR'    | 
+
+
+Scenario: Create catalog Stores objects (with remaining stock control)
+	And I check or create catalog "Stores" objects:
+		| 'Ref'                                                            | 'DeletionMark' | 'Code' | 'UseGoodsReceipt' | 'UseShipmentConfirmation' | 'Transit' | 'NegativeStockControl'  | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | 'No'           | '0'    | 'No'              | 'No'                      | 'No'      | 'Yes'                   | 'Store 01'       | ''                 | ''               | 'Store 01 TR'    |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c' | 'No'           | '0'    | 'Yes'             | 'Yes'                     | 'No'      | 'Yes'                   | 'Store 02'       | ''                 | ''               | 'Store 02 TR'    |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00e' | 'No'           | '0'    | 'No'              | 'No'                      | 'No'      | 'Yes'                   | 'Store 04'       | ''                 | ''               | 'Store 04 TR'    |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc92' | 'No'           | '0'    | 'Yes'             | 'No'                      | 'No'      | 'Yes'                   | 'Store 07'       | ''                 | ''               | 'Store 07 TR'    |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc93' | 'No'           | '0'    | 'No'              | 'Yes'                     | 'No'      | 'Yes'                   | 'Store 08'       | ''                 | ''               | 'Store 08 TR'    |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df444' | 'No'           | '0'    | 'Yes'             | 'Yes'                     | 'No'      | 'Yes'                   | 'Store 05'       | ''                 | ''               | 'Store 05 TR'    |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df445' | 'No'           | '0'    | 'No'              | 'No'                      | 'No'      | 'Yes'                   | 'Store 06'       | ''                 | ''               | 'Store 06 TR'    |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d' | 'No'           | '1'    | 'Yes'             | 'Yes'                     | 'No'      | 'Yes'                   | 'Store 03'       | ''                 | ''               | 'Store 03 TR'    |
 
 Scenario: Create catalog Units objects (box (8 pcs))
 

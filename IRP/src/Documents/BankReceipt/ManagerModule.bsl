@@ -401,10 +401,17 @@ EndFunction
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 
 #Region NewRegisterPosting
+	Tables = Parameters.DocumentDataTables;
+	
 	OffsetOfAdvanceServer.OffsetOfAdvanceFromCustomers_OnAdvance(Parameters);
-
+	
 	QueryArray = GetQueryTextsMasterTables();
-	PostingServer.FillPostingTables(Parameters.DocumentDataTables, Ref, QueryArray, Parameters);
+		
+	PostingServer.SetRegisters(Tables, Ref);
+	Tables.R2020B_AdvancesFromCustomers.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+	Tables.R2021B_CustomersTransactions.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+	
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
 	
 	// Advance from customers
@@ -765,6 +772,7 @@ Function R2021B_CustomersTransactions()
 		|	OffsetOfAdvance.TransactionDocument AS Basis,
 		|	OffsetOfAdvance.Key,
 		|	OffsetOfAdvance.Amount
+		|INTO R2021B_CustomersTransactions
 		|FROM
 		|	OffsetOfAdvance AS OffsetOfAdvance";
 EndFunction	

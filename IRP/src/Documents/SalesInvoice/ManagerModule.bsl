@@ -769,10 +769,13 @@ EndFunction
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	
 #Region NewRegisterPosting
+	Tables = Parameters.DocumentDataTables;
+	
 	OffsetOfAdvanceServer.OffsetOfAdvanceFromCustomers_OnTransaction(Parameters);
 	
 	QueryArray = GetQueryTextsMasterTables();
-	PostingServer.FillPostingTables(Parameters.DocumentDataTables, Ref, QueryArray, Parameters);
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
 	
 	// Advance from customers

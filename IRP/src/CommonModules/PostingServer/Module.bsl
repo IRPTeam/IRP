@@ -1419,7 +1419,6 @@ EndFunction
 
 Procedure FillPostingTables(Tables, Ref, QueryArray, Parameters) Export
 	ExequteQuery(Ref, QueryArray, Parameters);
-	SetRegisters(Tables, Ref);
 	For Each VT In Tables Do
 		MergeTables(Tables[VT.Key], GetQueryTableByName(VT.Key, Parameters), "RecordType");
 	EndDo;

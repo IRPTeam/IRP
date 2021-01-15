@@ -29,6 +29,21 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ItemTypeAfterSelection();
 EndProcedure
 
+&AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	Cancel = True;
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeRowChange(Item, Cancel)
+	Cancel = True;
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeDeleteRow(Item, Cancel)
+	Cancel = True;
+EndProcedure
+
 &AtServer
 Procedure ItemTypeAfterSelection()
 	ItemList.Clear();
@@ -38,7 +53,7 @@ Procedure ItemTypeAfterSelection()
 	ItemValueTable = ThisObject.ItemTableValue.Unload( , "Item, Quantity");
 	ItemValueTable.GroupBy("Item", "Quantity");
 	Query = New Query;
-	Query.Text = "SELECT
+	QueryText = "SELECT
 		|	ItemValueTable.Item,
 		|	ItemValueTable.Quantity
 		|INTO ItemPickedOut
@@ -103,7 +118,7 @@ Procedure ItemTypeAfterSelection()
 		|	Items.ItemKeyCount,
 		|	&PriceType AS PriceType,
 		|	0 AS Price,
-		|	PRESENTATION(Items.Item) AS ItemPresentation
+		|	Items.Item.Description_en AS ItemPresentation
 		|FROM
 		|	Items AS Items
 		|		LEFT JOIN ItemBalance AS ItemBalance
@@ -123,6 +138,8 @@ Procedure ItemTypeAfterSelection()
 	Else
 		Query.SetParameter("ItemType", True);
 	EndIf;
+	QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(QueryText, "Items.Item");
+	Query.Text = QueryText;		
 	QueryExecution = Query.Execute();
 	If Not QueryExecution.IsEmpty() Then
 		QueryUnload = QueryExecution.Unload();
@@ -181,7 +198,7 @@ Procedure ItemTypeAfterSelection()
 		If Not QueryPriceExecution.IsEmpty() Then
 			QueryPriceUnload = QueryPriceExecution.Unload();
 			LastQuery = New Query;
-			LastQuery.Text = "SELECT
+			QueryText = "SELECT
 			|	Items.Item,
 			|	Items.Unit,
 			|	Items.QuantityBalance,
@@ -208,35 +225,27 @@ Procedure ItemTypeAfterSelection()
 			|SELECT
 			|	Items.Item,
 			|	Items.Unit,
-			|	Items.QuantityBalance,
-			|	Items.QuantityBalanceReceiver,
-			|	Items.QuantityPickedOut,
+			|	Items.QuantityBalance AS InStock,
+			|	Items.QuantityBalanceReceiver AS InStockReceiver,
+			|	Items.QuantityPickedOut AS PickedOut,
 			|	Items.ItemKeyCount,
 			|	ISNULL(Prices.Price, 0) AS Price,
-			|	PRESENTATION(Items.Item) AS ItemPresentation
+			|	Items.Item.Description_en AS Title
 			|FROM
 			|	Items AS Items
 			|		LEFT JOIN Prices AS Prices
 			|		ON Items.Item = Prices.Item";
 			LastQuery.SetParameter("Items", QueryUnload);
 			LastQuery.SetParameter("Prices", QueryPriceUnload);
+			QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(QueryText, "Items.Item");
+			LastQuery.Text = QueryText;
 			LastQueryExecution = LastQuery.Execute();
 			If Not LastQueryExecution.IsEmpty() Then
 				LastQueryUnload = LastQueryExecution.Unload();
 				QueryUnload = LastQueryUnload;
 			EndIf;
 		EndIf;
-		For Each Row In QueryUnload Do
-			NewRow = ItemList.Add();
-			NewRow.Item = Row.Item;
-			NewRow.Title = Row.ItemPresentation;
-			NewRow.InStock = Row.QuantityBalance;
-			NewRow.InStockReceiver = Row.QuantityBalanceReceiver;
-			NewRow.PickedOut = Row.QuantityPickedOut;
-			NewRow.ItemKeyCount = Row.ItemKeyCount;
-			NewRow.Price = Row.Price;
-			NewRow.Unit = Row.Unit;
-		EndDo;
+		ItemList.Load(QueryUnload);		
 	EndIf;
 EndProcedure
 

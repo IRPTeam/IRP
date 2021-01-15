@@ -565,12 +565,7 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 		|INTO t_PricesByItemKeys
 		|FROM
 		|	t_ItemKeys AS ItemKeys
-		|		LEFT JOIN InformationRegister.PricesByItemKeys.SliceLast(&Period, (PriceType, ItemKey) IN
-		|			(SELECT
-		|				tmp.PriceType,
-		|				tmp.ItemKey
-		|			FROM
-		|				tmp AS tmp)) AS PricesByItemKeysSliceLast
+		|		LEFT JOIN InformationRegister.PricesByItemKeys.SliceLast(&Period) AS PricesByItemKeysSliceLast
 		|		ON ItemKeys.ItemKey = PricesByItemKeysSliceLast.ItemKey
 		|		AND ItemKeys.PriceType = PricesByItemKeysSliceLast.PriceType
 		|;
@@ -611,12 +606,7 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 		|INTO t_PricesByProperties
 		|FROM
 		|	t_PriceKeys AS PriceKeys
-		|		LEFT JOIN InformationRegister.PricesByProperties.SliceLast(&Period, (PriceType, PriceKey) IN
-		|			(SELECT
-		|				tmp.PriceType,
-		|				tmp.PriceKey
-		|			FROM
-		|				t_PriceKeys AS tmp)) AS PricesByPropertiesSliceLast
+		|		LEFT JOIN InformationRegister.PricesByProperties.SliceLast(&Period) AS PricesByPropertiesSliceLast
 		|		ON PriceKeys.PriceKey = PricesByPropertiesSliceLast.PriceKey
 		|		AND PriceKeys.PriceType = PricesByPropertiesSliceLast.PriceType
 		|;

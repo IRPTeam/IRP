@@ -412,7 +412,7 @@ Scenario: Create catalog Stores objects
 
 
 Scenario: Create catalog Stores objects (with remaining stock control)
-
+	And I check or create catalog "Stores" objects:
 		| 'Ref'                                                            | 'DeletionMark' | 'Code' | 'UseGoodsReceipt' | 'UseShipmentConfirmation' | 'Transit' | 'NegativeStockControl'  | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
 		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | 'No'           | '0'    | 'No'              | 'No'                      | 'No'      | 'Yes'                   | 'Store 01'       | ''                 | ''               | 'Store 01 TR'    |
 		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c' | 'No'           | '0'    | 'Yes'             | 'Yes'                     | 'No'      | 'Yes'                   | 'Store 02'       | ''                 | ''               | 'Store 02 TR'    |

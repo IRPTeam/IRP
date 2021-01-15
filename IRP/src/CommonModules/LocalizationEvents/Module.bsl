@@ -60,8 +60,19 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	ChoiceData = New ValueList();
 	QueryTable = Query.Execute().Unload();
 	For Each Row In QueryTable Do
-		ChoiceData.Add(Row.Ref, Row.Presentation);
-	EndDo;
+        If Not ChoiceData.FindByValue(Row.Ref) = Undefined Then
+            Continue;
+        EndIf;
+        If Row.Sort = 0 Then
+            If IsBlankString(Row.Ref.ItemID) Then
+                ChoiceData.Add(Row.Ref, Row.Presentation, , PictureLib.Price);
+            Else
+                ChoiceData.Add(Row.Ref, "(" + Row.Ref.ItemID + ") " + Row.Presentation, , PictureLib.Price);
+            EndIf;
+        Else
+            ChoiceData.Add(Row.Ref, Row.Presentation);
+        EndIf;
+    EndDo;
 EndProcedure
 
 Function ReplaceDescriptionLocalizationPrefix(QueryText, TableName = "Table") Export

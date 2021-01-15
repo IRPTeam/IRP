@@ -2203,7 +2203,83 @@ Scenario:_800050 check remaining stock control when unpost/change Opening entry
 		And I close all client application windows
 
 
+
+Scenario:_800080 set/remove checkbox Negative stock control from store amd check posting document (Negative stock)
+	* Remove checkbox
+		Given I open hyperlink "e1cib/list/Catalog.Stores"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 06'    |
+		And I select current line in "List" table
+		And I remove checkbox "Negative stock control"
+		And I click "Save and close" button
+	* Post SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 06'    |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I activate "Item key" field in "List" table
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "15000,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then system warning window does not appear
+		Then user message window does not contain messages
+		And I save the window as "$$SalesInvoice800080$$"
+	* Set checkbox and try to post SI
+		Given I open hyperlink "e1cib/list/Catalog.Stores"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 06'    |
+		And I select current line in "List" table
+		And I set checkbox "Negative stock control"
+		And I click "Save and close" button
+		When in opened panel I select "$$SalesInvoice800080$$"
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [1] [Dress XS/Blue] Reservation remaining: 0 . Required: 15 000 . Lacking: 15 000 ." substring will appear in 10 seconds
+		And I close all client application windows
+
+
+		
 	
+		
 		
 		
 		

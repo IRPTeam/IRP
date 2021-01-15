@@ -32,7 +32,7 @@ Scenario:_800000 preparation (remaining stock control)
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
-		When Create catalog Stores objects
+		When Create catalog Stores objects (with remaining stock control)
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
 		When Create information register PartnerSegments records

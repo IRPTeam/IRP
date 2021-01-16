@@ -133,7 +133,7 @@ Procedure ItemTypeAfterSelection()
 	Query.SetParameter("PriceType", PriceType);
 	Query.SetParameter("ReceiverStores", ThisObject.ReceiverStores);
 	If ValueIsFilled(ThisObject.ItemType) Then
-		Query.Text = StrReplace(Query.Text, "&ItemType", "ItemKey.Item.ItemType = &ItemType");
+		QueryText = StrReplace(QueryText, "&ItemType", "ItemKey.Item.ItemType = &ItemType");
 		Query.SetParameter("ItemType", ThisObject.ItemType);
 	Else
 		Query.SetParameter("ItemType", True);

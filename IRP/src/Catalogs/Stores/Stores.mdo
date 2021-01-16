@@ -102,6 +102,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="7ab9d0bf-d328-4e13-8c7d-3dd2fa27829e">
+    <name>NegativeStockControl</name>
+    <synonym>
+      <key>en</key>
+      <value>Negative stock control</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="324a6247-0e73-4a78-b83a-9fa7a0924c69">
     <producedTypes>
       <objectType typeId="25dd9507-dc8e-43e8-add3-5cd95a32e088" valueTypeId="2b4840fe-41e5-452f-805e-9f77528d64e8"/>

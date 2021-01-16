@@ -2,6 +2,7 @@
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	UpdateAllDescriptions();
+	RefreshReusableValues();
 EndProcedure
 
 &AtServer

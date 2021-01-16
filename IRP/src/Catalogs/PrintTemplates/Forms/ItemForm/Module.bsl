@@ -83,10 +83,19 @@ EndProcedure
 
 #EndRegion
 
-#Region Private
+#Region FormHeaderItemsEventHandlers
 
 &AtClient
 Procedure ExternalDataProcOnChange(Item)	
+	ExternalDataProcOnChangeAtServer();
+EndProcedure
+
+#EndRegion
+
+#Region Private
+
+&AtServer
+Procedure ExternalDataProcOnChangeAtServer()
 	DataSourceScheme = GenerateDataSourceScheme();
 	SetAvailableFields(DataSourceScheme);
 EndProcedure

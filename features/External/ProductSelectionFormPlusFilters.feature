@@ -1024,7 +1024,7 @@ Scenario: check the filter by my own company in Cheque bond transaction
 			|'Then the form attribute named "LegalName" became equal to 'Company Kalipso''|
 	And I close all client application windows
 
-Scenario: check the filter by my own company in Opening entry/Item stock adjustment/Item stock adjustment
+Scenario: check the filter by my own company in Opening entry/Item stock adjustment
 	And I click the button named "FormCreate"
 	* Check visual filter
 		And I click Select button of "Company" field

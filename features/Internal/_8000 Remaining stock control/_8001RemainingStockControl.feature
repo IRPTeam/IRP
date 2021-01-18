@@ -2352,6 +2352,7 @@ Scenario:_800092 set/remove checkbox Negative stock control from user settings a
 		And I click "OK" button
 		Then I wait that in user messages the "Line No. [1] [Dress XL/Green] Reservation remaining: 0 . Required: 15 000 . Lacking: 15 000 ." substring will appear in 10 seconds
 		And I close all client application windows
+
 		
 		
 		

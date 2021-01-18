@@ -1272,4 +1272,15 @@
 			<value>false</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.ItemStockAdjustment</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeleteMarked</name>
+			<value>false</value>
+		</right>
+	</object>
 </Rights>

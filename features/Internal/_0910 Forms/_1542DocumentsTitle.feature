@@ -196,6 +196,15 @@ Scenario: _028814 check the display of the header of the collapsible group in Sh
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
+Scenario: _028815 check the display of the header of the collapsible group in ItemStockAdjustment
+	Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+	When check the display of the header of the collapsible group in Shipment confirmation, Goods receipt, Bundling/Unbundling
+	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
+	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
+	When I Check the steps for Exception
+        |'And I click Select button of  "Store" field'|
+	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+	And I close all client application windows
 
 
 Scenario: _028908 check the display of the header of the collapsible group in Goods Receipt

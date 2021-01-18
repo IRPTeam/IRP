@@ -205,7 +205,7 @@ Scenario: _0202202 adding items to label printing processing
 			| ''           | '' | '' | '' | '' | '' | ''           |
 			| '550'        | '' | '' | '' | '' | '' | ''           |
 		And I close all client application windows
-
+		
 Scenario: _0202203 print layout creation with using external data processors
 	* Opening the constructor
 		Given I open hyperlink "e1cib/list/Catalog.PrintTemplates"
@@ -286,7 +286,7 @@ Scenario: _0202203 print layout creation with using external data processors
 		| ''               |
 		| '550'            |
 		| ''               |
-		| 'Price: 550 uah' |
+		| 'Цiна: 550 грн.' |
 	And I close all client application windows
 	
 

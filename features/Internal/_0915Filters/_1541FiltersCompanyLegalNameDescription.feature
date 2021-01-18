@@ -507,7 +507,7 @@ Scenario: _028061 check filter by own companies in the document  Opening entry
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 	* Check the filter for Own Company
-		When check the filter by my own company in Opening entry
+		When check the filter by my own company in Opening entry/Item stock adjustment
 
 Scenario: _028062 check Description in the document Inventory transfer
 	And I close all client application windows
@@ -520,6 +520,19 @@ Scenario: _028063 check Description in the document Invoice match
 	Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
 	When check Description
 	And I close all client application windows
+
+
+Scenario: _028064 check Description in the document ItemStockAdjustment
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+	When check Description
+
+
+Scenario: _028065 check filter by own companies in the document Item stock adjustment
+	* Open document form
+		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+	* Check the filter for Own Company
+		When check the filter by my own company in Opening entry/Item stock adjustment
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

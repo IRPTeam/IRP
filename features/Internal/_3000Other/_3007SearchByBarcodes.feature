@@ -144,3 +144,7 @@ Scenario: _300720 barcode check in PhysicalInventory
 Scenario: _300721 barcode check in PhysicalCountByLocation
 	Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 	When check the barcode search in storage operations documents
+
+Scenario: _300722 barcode check in Item stock adjustment
+	Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+	When check the barcode search in the Item stock adjustment

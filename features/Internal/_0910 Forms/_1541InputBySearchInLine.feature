@@ -94,7 +94,7 @@ Scenario: _0154050 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		And I click "Add" button
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
 		| (J22001) Jacket J22001 |
@@ -120,7 +120,7 @@ Scenario: _0154051 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		And I click "Add" button
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
 		| (J22001) Jacket J22001 |
@@ -144,7 +144,7 @@ Scenario: _0154052 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		And I click "Add" button
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
 		| (J22001) Jacket J22001 |
@@ -288,7 +288,7 @@ Scenario: _0154058 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		And I click "Add" button
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
 		| (J22001) Jacket J22001 |
@@ -360,7 +360,7 @@ Scenario: _0154061 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		And I click "Add" button
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
 		| (J22001) Jacket J22001 |
@@ -384,7 +384,7 @@ Scenario: _0154062 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		And I click "Add" button
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
 		| (J22001) Jacket J22001 |
@@ -482,6 +482,30 @@ Scenario: _015406404 check item and item key input by search in line in a docume
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		And I click "Add" button
+		And I input "J22001" text in "Item" field of "ItemList" table		
+		And drop-down list "Item" is equal to:
+		| (J22001) Jacket J22001 |
+		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Jacket J22001'    |
+		And I close all client application windows
+
+Scenario: _0154056 check item and item key input by search in line in a document ItemStockAdjustment (in english)
+	And I close all client application windows
+	* Open a creation form ItemStockAdjustment
+		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+		And I click the button named "FormCreate"
+	* Item and item key input by search in line
+		And in the table "ItemList" I click "Add" button
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
+		| 'Item'     | 'Item key'  |
+		| 'Boots'    | '36/18SD' |
+		And in the table "ItemList" I click "Add" button
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
 		| (J22001) Jacket J22001 |

@@ -807,6 +807,8 @@ Function R1021B_VendorsTransactions()
 		|	VendorsTransactions.Key,
 		|	VendorsTransactions.Amount
 		|INTO R1021B_VendorsTransactions
+		|FROM
+		|	VendorsTransactions AS VendorsTransactions
 		|
 		|UNION ALL
 		|

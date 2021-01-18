@@ -311,9 +311,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 #EndRegion
 	Parameters.IsReposting = False;
 	
-#Region NewRegistersPosting	
-	QueryArray = GetQueryTexts();
-	PostingServer.FillPostingTables(Tables, Ref, QueryArray);
+#Region NewRegistersPosting
+	QueryArray = GetQueryTextsSecondaryTables();
+	PostingServer.ExequteQuery(Ref, QueryArray, Parameters);
 #EndRegion	
 
 	Return Tables;
@@ -413,14 +413,16 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	OrderProcurement = AccumulationRegisters.OrderProcurement.GetLockFields(DocumentDataTables.OrderProcurement);
 	DataMapWithLockFields.Insert(OrderProcurement.RegisterName, OrderProcurement.LockInfo);
 	
-#Region NewRegistersPosting	
-	PostingServer.GetLockDataSource(DataMapWithLockFields, DocumentDataTables);
-#EndRegion
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
+#Region NewRegisterPosting
+	Tables = Parameters.DocumentDataTables;	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -578,9 +580,6 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 	// StockBalance
 	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Exists);
 	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-#Region NewRegistersPosting	
-	PostingServer.GetLockDataSource(DataMapWithLockFields, DocumentDataTables);
-#EndRegion	
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -649,9 +648,14 @@ EndProcedure
 
 #Region NewRegistersPosting
 
-Function GetQueryTexts()
+Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
+	Return QueryArray;
+EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
 	QueryArray.Add(R1010T_PurchaseOrders());
 	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
 	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
@@ -659,11 +663,10 @@ Function GetQueryTexts()
 	QueryArray.Add(R2013T_SalesOrdersProcurement());
 	QueryArray.Add(R4016B_InternalSupplyRequestOrdering());
 	QueryArray.Add(R4033B_GoodsReceiptSchedule());
-	Return QueryArray;
-EndFunction
+	Return QueryArray;	
+EndFunction	
 
 Function ItemList()
-
 	Return
 		"SELECT
 		|	PurchaseOrderItems.Ref.Company AS Company,

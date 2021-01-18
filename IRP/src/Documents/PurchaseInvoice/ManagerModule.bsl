@@ -362,10 +362,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables.Insert("VendorsTransactions", 
 	PostingServer.GetQueryTableByName("VendorsTransactions", Parameters));	
-	
-	//PostingServer.SetRegisters(Tables, Ref);
-	//QueryArray = GetQueryTexts();
-	//PostingServer.FillPostingTables(Tables, Ref, QueryArray);
 #EndRegion			
 	
 	Return Tables;
@@ -2885,10 +2881,6 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Exists);
 	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
 	
-#Region NewRegistersPosting	
-	PostingServer.GetLockDataSource(DataMapWithLockFields, DocumentDataTables);
-#EndRegion	
-
 	Return DataMapWithLockFields;
 EndFunction
 

@@ -1050,11 +1050,7 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 	// StockBalance
 	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Exists);
 	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
-#Region NewRegistersPosting	
-	PostingServer.GetLockDataSource(DataMapWithLockFields, DocumentDataTables);
-#EndRegion	
-	
+		
 	Return DataMapWithLockFields;
 EndFunction
 

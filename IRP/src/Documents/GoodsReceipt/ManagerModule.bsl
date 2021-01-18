@@ -157,10 +157,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Parameters.IsReposting = False;
 	
-#Region NewRegistersPosting	
-	PostingServer.SetRegisters(Tables, Ref);
-	QueryArray = GetQueryTexts();
-	PostingServer.FillPostingTables(Tables, Ref, QueryArray);
+#Region NewRegistersPosting
+	QueryArray = GetQueryTextsSecondaryTables();
+	PostingServer.ExequteQuery(Ref, QueryArray, Parameters);
 #EndRegion	
 
 	Return Tables;
@@ -1489,16 +1488,17 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	InventoryBalance = 
 	AccumulationRegisters.InventoryBalance.GetLockFields(DocumentDataTables.InventoryBalance);
 	DataMapWithLockFields.Insert(InventoryBalance.RegisterName, InventoryBalance.LockInfo);
-
-#Region NewRegistersPosting	
-	PostingServer.GetLockDataSource(DataMapWithLockFields, DocumentDataTables);
-#EndRegion	
 	
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
+#Region NewRegisterPosting
+	Tables = Parameters.DocumentDataTables;	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+#EndRegion	
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -1671,9 +1671,14 @@ EndProcedure
 
 #Region NewRegistersPosting
 
-Function GetQueryTexts()
+Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
+	Return QueryArray;	
+EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
 	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
 	QueryArray.Add(R1031B_ReceiptInvoicing());
 	QueryArray.Add(R2013T_SalesOrdersProcurement());
@@ -1681,8 +1686,8 @@ Function GetQueryTexts()
 	QueryArray.Add(R4017B_InternalSupplyRequestProcurement());
 	QueryArray.Add(R4021B_StockTransferOrdersReceipt());
 	QueryArray.Add(R4033B_GoodsReceiptSchedule());
-	Return QueryArray;
-EndFunction
+	Return QueryArray;	
+EndFunction	
 
 Function ItemList()
 	Return

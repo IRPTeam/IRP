@@ -247,8 +247,8 @@ Scenario: 2050002 check filling in Reconcilation statement
 		| '*'    | '$$SalesInvoice20400022$$'    | ''          | '19 240,00' |
 		| '*'    | '$$SalesInvoice2040002$$'     | ''          | '1 740,00'  |
 		| '*'    | '$$SalesInvoice20400021$$'    | ''          | '28 686,30' |
-		| '*'    | '$$PurchaseInvoice2040005$$'  | '13 570,00' | ''          |
-		| '*'    | '$$PurchaseInvoice20400051$$' | '4 212,60'  | ''          |
+		| '*'    | '$$PurchaseInvoice2040005$$'  | '39 270,40' | ''          |
+		| '*'    | '$$PurchaseInvoice20400051$$' | '42 763,20' | ''          |
 	* Check document
 		And I click the button named "FormPost"
 	* Clear movements

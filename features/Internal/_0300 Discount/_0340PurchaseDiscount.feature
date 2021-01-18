@@ -264,7 +264,7 @@ Scenario: _034003 check that discounts with the Sales document type are not disp
 		And I click "% Offers" button
 		And "Offers" table became equal
 		| 'Presentation'      | 'Is select' | '%' | '∑' |
-		| 'Document discount' | ' '         | ''  | ''  |
+		| 'Document discount' | '☐'         | ''  | ''  |
 		And I close all client application windows
 	* Open Purchase Order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -273,7 +273,7 @@ Scenario: _034003 check that discounts with the Sales document type are not disp
 		And I click "% Offers" button
 		And "Offers" table became equal
 		| 'Presentation'      | 'Is select' | '%' | '∑' |
-		| 'Document discount' | ' '         | ''  | ''  |
+		| 'Document discount' | '☐'        | ''  | ''  |
 		And I close all client application windows
 
 

@@ -20,5 +20,6 @@
   <content>CommonPicture.BarcodePicture</content>
   <content>CommonPicture.QRPicture</content>
   <content>Catalog.PrintTemplates</content>
+  <content>Document.ItemStockAdjustment</content>
   <parentSubsystem>Subsystem.Inventory</parentSubsystem>
 </mdclass:Subsystem>

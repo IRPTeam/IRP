@@ -1311,6 +1311,8 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	|INTO Records_All_Grouped
 	|FROM
 	|	Records_All AS Records_All
+	|WHERE
+	|	Records_All.Store.NegativeStockControl
 	|GROUP BY
 	|	Records_All.Store,
 	|	Records_All.ItemKey

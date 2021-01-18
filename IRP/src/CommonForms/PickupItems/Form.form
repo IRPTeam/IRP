@@ -172,21 +172,16 @@
       </dataPath>
       <titleLocation>None</titleLocation>
       <excludedCommands>Add</excludedCommands>
-      <excludedCommands>CancelSearch</excludedCommands>
       <excludedCommands>Change</excludedCommands>
       <excludedCommands>Copy</excludedCommands>
       <excludedCommands>CopyToClipboard</excludedCommands>
       <excludedCommands>Delete</excludedCommands>
       <excludedCommands>EndEdit</excludedCommands>
-      <excludedCommands>Find</excludedCommands>
       <excludedCommands>MoveDown</excludedCommands>
       <excludedCommands>MoveUp</excludedCommands>
-      <excludedCommands>OutputList</excludedCommands>
       <excludedCommands>SelectAll</excludedCommands>
       <excludedCommands>ShowMultipleSelection</excludedCommands>
       <excludedCommands>ShowRowRearrangement</excludedCommands>
-      <excludedCommands>SortListAsc</excludedCommands>
-      <excludedCommands>SortListDesc</excludedCommands>
       <items xsi:type="form:FormField">
         <name>ItemListTitle</name>
         <id>35</id>
@@ -551,6 +546,18 @@
         <event>Selection</event>
         <name>ItemListSelection</name>
       </handlers>
+      <handlers>
+        <event>BeforeAddRow</event>
+        <name>ItemListBeforeAddRow</name>
+      </handlers>
+      <handlers>
+        <event>BeforeRowChange</event>
+        <name>ItemListBeforeRowChange</name>
+      </handlers>
+      <handlers>
+        <event>BeforeDeleteRow</event>
+        <name>ItemListBeforeDeleteRow</name>
+      </handlers>
       <searchStringAddition>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -690,7 +697,6 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <readOnly>true</readOnly>
       <changeRowSet>true</changeRowSet>
       <changeRowOrder>true</changeRowOrder>
       <autoMaxWidth>true</autoMaxWidth>

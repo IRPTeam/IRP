@@ -50,7 +50,13 @@
       <value>Basis</value>
     </synonym>
     <type>
-      <types>DefinedType.typeOrders</types>
+      <types>DocumentRef.PurchaseOrder</types>
+      <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.PurchaseReturnOrder</types>
+      <types>DocumentRef.InternalSupplyRequest</types>
+      <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.SalesOrder</types>
+      <types>DocumentRef.SalesReturnOrder</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

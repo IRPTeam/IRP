@@ -368,8 +368,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Item</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Item</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>ItemExtendedTooltip</name>
@@ -418,8 +420,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.ItemKey</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.ItemKey</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>ItemKeyExtendedTooltip</name>
@@ -468,8 +472,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Specification</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Specification</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>SpecificationExtendedTooltip</name>

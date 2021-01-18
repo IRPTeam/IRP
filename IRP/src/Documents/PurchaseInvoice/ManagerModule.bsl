@@ -357,9 +357,15 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.IsReposting = False;	
 	
 #Region NewRegistersPosting	
-	PostingServer.SetRegisters(Tables, Ref);
-	QueryArray = GetQueryTexts();
-	PostingServer.FillPostingTables(Tables, Ref, QueryArray);
+	QueryArray = GetQueryTextsSecondaryTables();
+	PostingServer.ExequteQuery(Ref, QueryArray, Parameters);
+	
+	Tables.Insert("VendorsTransactions", 
+	PostingServer.GetQueryTableByName("VendorsTransactions", Parameters));	
+	
+	//PostingServer.SetRegisters(Tables, Ref);
+	//QueryArray = GetQueryTexts();
+	//PostingServer.FillPostingTables(Tables, Ref, QueryArray);
 #EndRegion			
 	
 	Return Tables;
@@ -2582,14 +2588,27 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	TaxesTurnovers = AccumulationRegisters.TaxesTurnovers.GetLockFields(DocumentDataTables.TaxesTurnovers);
 	DataMapWithLockFields.Insert(TaxesTurnovers.RegisterName, TaxesTurnovers.LockInfo);
 	
-#Region NewRegistersPosting	
-	PostingServer.GetLockDataSource(DataMapWithLockFields, DocumentDataTables);
+#Region NewRegistersPosting
+	PostingServer.SetLockDataSource(DataMapWithLockFields, 
+		AccumulationRegisters.R1020B_AdvancesToVendors, 
+		DocumentDataTables.VendorsTransactions);
 #EndRegion	
 
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	
+#Region NewRegisterPosting
+	Tables = Parameters.DocumentDataTables;
+	
+	OffsetOfPartnersServer.Vendors_OnTransaction(Parameters);
+	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+#EndRegion
+	
 	// Advance to suppliers
 	Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance =
 		AccumulationRegisters.AdvanceToSuppliers.GetTableAdvanceToSuppliers_OffsetOfAdvance(Parameters.Object.RegisterRecords
@@ -2926,9 +2945,15 @@ EndProcedure
 
 #Region NewRegistersPosting
 
-Function GetQueryTexts()
+Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
+	QueryArray.Add(VendorsTransactions());
+	Return QueryArray;
+EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
 	QueryArray.Add(R1001T_Purchases());
 	QueryArray.Add(R1005T_PurchaseSpecialOffers());
 	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
@@ -2943,11 +2968,11 @@ Function GetQueryTexts()
 	QueryArray.Add(R4017B_InternalSupplyRequestProcurement());
 	QueryArray.Add(R4033B_GoodsReceiptSchedule());
 	QueryArray.Add(R4050B_StockInventory());
+	QueryArray.Add(R5010B_ReconciliationStatement());
 	Return QueryArray;
 EndFunction
 
 Function ItemList()
-
 	Return
 		"SELECT
 		|	GoodsReceipts.Key
@@ -2985,9 +3010,10 @@ Function ItemList()
 		|	PurchaseInvoiceItemList.Ref.Company AS Company,
 		|	PurchaseInvoiceItemList.Store AS Store,
 		|	PurchaseInvoiceItemList.UseGoodsReceipt AS UseGoodsReceipt,
-		|	NOT PurchaseInvoiceItemList.PurchaseOrder = Value(Document.PurchaseOrder.EmptyRef) AS PurchaseOrderExists,
-		|	NOT PurchaseInvoiceItemList.SalesOrder = Value(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
-		| 	NOT PurchaseInvoiceItemList.InternalSupplyRequest = Value(Document.InternalSupplyRequest.EmptyRef) AS InternalSupplyRequestExists,
+		|	NOT PurchaseInvoiceItemList.PurchaseOrder = VALUE(Document.PurchaseOrder.EmptyRef) AS PurchaseOrderExists,
+		|	NOT PurchaseInvoiceItemList.SalesOrder = VALUE(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
+		|	NOT PurchaseInvoiceItemList.InternalSupplyRequest = VALUE(Document.InternalSupplyRequest.EmptyRef) AS
+		|		InternalSupplyRequestExists,
 		|	NOT GoodsReceipts.Key IS NULL AS GoodsReceiptExists,
 		|	PurchaseInvoiceItemList.ItemKey AS ItemKey,
 		|	PurchaseInvoiceItemList.PurchaseOrder AS PurchaseOrder,
@@ -3005,6 +3031,11 @@ Function ItemList()
 		|			THEN PurchaseInvoiceItemList.Ref.Agreement.StandardAgreement
 		|		ELSE PurchaseInvoiceItemList.Ref.Agreement
 		|	END AS Agreement,
+		|	CASE
+		|		WHEN PurchaseInvoiceItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			THEN PurchaseInvoiceItemList.Ref
+		|		ELSE UNDEFINED
+		|	END AS BasisDocument,
 		|	ISNULL(PurchaseInvoiceItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
 		|	PurchaseInvoiceItemList.Unit AS Unit,
 		|	PurchaseInvoiceItemList.ItemKey.Item AS Item,
@@ -3059,6 +3090,30 @@ Function ItemList()
 		|	AND PurchaseInvoiceTaxList.Ref = &Ref";
 EndFunction
 
+Function VendorsTransactions()
+	Return
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company AS Company,
+		|	ItemList.Currency AS Currency,
+		|	ItemList.LegalName AS LegalName,
+		|	ItemList.Partner AS Partner,
+		|	ItemList.BasisDocument TransactionDocument,
+		|	ItemList.Agreement AS Agreement,
+		|	SUM(ItemList.Amount) AS DocumentAmount
+		|INTO VendorsTransactions
+		|FROM
+		|	ItemList AS ItemList
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.BasisDocument,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.Currency,
+		|	ItemList.Period";
+EndFunction
+
 Function R1001T_Purchases()
 	Return
 		"SELECT *
@@ -3109,26 +3164,76 @@ EndFunction
 
 Function R1020B_AdvancesToVendors()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	*
+		|	OffsetOfAdvance.Period,
+		|	OffsetOfAdvance.Company,
+		|	OffsetOfAdvance.Currency,
+		|	OffsetOfAdvance.LegalName,
+		|	OffsetOfAdvance.Partner,
+		|	OffsetOfAdvance.AdvancesDocument AS Basis,
+		|	SUM(OffsetOfAdvance.Amount)
 		|INTO R1020B_AdvancesToVendors
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE FALSE";
-
+		|	OffsetOfAdvance AS OffsetOfAdvance
+		|GROUP BY
+		|	OffsetOfAdvance.Period,
+		|	OffsetOfAdvance.Company,
+		|	OffsetOfAdvance.Currency,
+		|	OffsetOfAdvance.LegalName,
+		|	OffsetOfAdvance.Partner,
+		|	OffsetOfAdvance.AdvancesDocument,
+		|	VALUE(AccumulationRecordType.Expense)";
 EndFunction
 
 Function R1021B_VendorsTransactions()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	*
+		|	VendorsTransactions.Period,
+		|	VendorsTransactions.Company,
+		|	VendorsTransactions.Currency,
+		|	VendorsTransactions.LegalName,
+		|	VendorsTransactions.Partner,
+		|	VendorsTransactions.Agreement,
+		|	VendorsTransactions.TransactionDocument AS Basis,
+		|	SUM(VendorsTransactions.DocumentAmount) AS Amount
 		|INTO R1021B_VendorsTransactions
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE FALSE";
-
+		|	VendorsTransactions AS VendorsTransactions
+		|GROUP BY
+		|	VendorsTransactions.Period,
+		|	VendorsTransactions.Company,
+		|	VendorsTransactions.Currency,
+		|	VendorsTransactions.LegalName,
+		|	VendorsTransactions.Partner,
+		|	VendorsTransactions.Agreement,
+		|	VendorsTransactions.TransactionDocument,
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	OffsetOfAdvance.Period,
+		|	OffsetOfAdvance.Company,
+		|	OffsetOfAdvance.Currency,
+		|	OffsetOfAdvance.LegalName,
+		|	OffsetOfAdvance.Partner,
+		|	OffsetOfAdvance.Agreement,
+		|	OffsetOfAdvance.TransactionDocument,
+		|	SUM(OffsetOfAdvance.Amount)
+		|FROM
+		|	OffsetOfAdvance AS OffsetOfAdvance
+		|GROUP BY
+		|	OffsetOfAdvance.Period,
+		|	OffsetOfAdvance.Company,
+		|	OffsetOfAdvance.Currency,
+		|	OffsetOfAdvance.LegalName,
+		|	OffsetOfAdvance.Partner,
+		|	OffsetOfAdvance.Agreement,
+		|	OffsetOfAdvance.TransactionDocument,
+		|	VALUE(AccumulationRecordType.Expense)";
 EndFunction
 
 Function R1031B_ReceiptInvoicing()
@@ -3254,6 +3359,25 @@ Function R4050B_StockInventory()
 		|	ItemList AS QueryTable
 		|WHERE NOT QueryTable.IsService";
 
+EndFunction
+
+Function R5010B_ReconciliationStatement()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Company AS Company,
+		|	ItemList.LegalName AS LegalName,
+		|	ItemList.Currency AS Currency,
+		|	SUM(ItemList.Amount) AS Amount,
+		|	ItemList.Period
+		|INTO R5010B_ReconciliationStatement
+		|FROM
+		|	ItemList AS ItemList
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.LegalName,
+		|	ItemList.Currency,
+		|	ItemList.Period";
 EndFunction
 
 #EndRegion

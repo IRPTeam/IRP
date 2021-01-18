@@ -359,7 +359,7 @@
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.TempFunctions</commonModules>
-  <commonModules>CommonModule.OffsetOfAdvanceServer</commonModules>
+  <commonModules>CommonModule.OffsetOfPartnersServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.BusinessUnit</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

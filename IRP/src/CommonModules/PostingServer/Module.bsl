@@ -1451,6 +1451,11 @@ Procedure GetLockDataSource(DataMapWithLockFields, DocumentDataTables) Export
 	
 EndProcedure
 
+Procedure SetLockDataSource(DataMap, RegisterManager, Table) Export
+	LockFields = RegisterManager.GetLockFields(Table);
+	DataMap.Insert(LockFields.RegisterName, LockFields.LockInfo);
+EndProcedure	
+
 Procedure SetRegisters(Tables, DocumentRef) Export
 
 	For Each Register In DocumentRef.Metadata().RegisterRecords Do

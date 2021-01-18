@@ -10,7 +10,7 @@ Function GetLockFields(Data) Export
 EndFunction
 
 Function GetLockFieldNames() Export
-	Return "";
+	Return "Company, Partner, LegalName, Currency";
 EndFunction
 
 Function GetExistsRecords(Ref, RecordType = Undefined, AddInfo = Undefined) Export

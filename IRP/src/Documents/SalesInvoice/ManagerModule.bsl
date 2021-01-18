@@ -99,8 +99,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExequteQuery(Ref, QueryArray, Parameters);
 	
-	Tables.Insert("AdvancesFromCustomers_Lock", PostingServer.CreateTable(AccReg.R2020B_AdvancesFromCustomers));
-	Tables.AdvancesFromCustomers_Lock = PostingServer.GetQueryTableByName("AdvancesFromCustomers_Lock", Parameters);	
+	Tables.Insert("CustomersTransactions", 
+	PostingServer.GetQueryTableByName("CustomersTransactions", Parameters));	
 #EndRegion	
 		
 	Return Tables;
@@ -758,9 +758,9 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	DataMapWithLockFields.Insert(Aging.RegisterName, Aging.LockInfo);
 
 #Region NewRegistersPosting
-	R2020B_AdvancesFromCustomers = 
-	AccumulationRegisters.R2020B_AdvancesFromCustomers.GetLockFields(DocumentDataTables.AdvancesFromCustomers_Lock);
-	DataMapWithLockFields.Insert(R2020B_AdvancesFromCustomers.RegisterName, R2020B_AdvancesFromCustomers.LockInfo);
+	PostingServer.SetLockDataSource(DataMapWithLockFields, 
+		AccumulationRegisters.R2020B_AdvancesFromCustomers, 
+		DocumentDataTables.CustomersTransactions);
 #EndRegion	
 	
 	Return DataMapWithLockFields;
@@ -771,7 +771,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 #Region NewRegisterPosting
 	Tables = Parameters.DocumentDataTables;
 	
-	OffsetOfAdvanceServer.OffsetOfAdvanceFromCustomers_OnTransaction(Parameters);
+	OffsetOfPartnersServer.Customers_OnTransaction(Parameters);
 	
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
@@ -1196,7 +1196,8 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(OffersInfo());
 	QueryArray.Add(ShipmentConfirmationsInfo());
 	QueryArray.Add(Taxes());
-	QueryArray.Add(AdvancesFromCustomers_Lock());
+	QueryArray.Add(CustomersTransactions());
+	QueryArray.Add(Aging());
 	Return QueryArray;
 EndFunction
 
@@ -1214,7 +1215,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
-	//QueryArray.Add(R5011B_PartnersAging());
+	QueryArray.Add(R5011B_PartnersAging());
+	QueryArray.Add(R5010B_ReconciliationStatement());
 	Return QueryArray;
 EndFunction
 
@@ -1299,9 +1301,8 @@ Function OffersInfo()
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
 		|		INNER JOIN Document.SalesInvoice.SpecialOffers AS SalesInvoiceSpecialOffers
 		|		ON SalesInvoiceItemList.Key = SalesInvoiceSpecialOffers.Key
-		|WHERE
-		|	SalesInvoiceItemList.Ref = &Ref
-		|	AND SalesInvoiceSpecialOffers.Ref = &Ref";
+		|		AND SalesInvoiceItemList.Ref = &Ref
+		|		AND SalesInvoiceSpecialOffers.Ref = &Ref";
 EndFunction
 
 Function ShipmentConfirmationsInfo()
@@ -1334,12 +1335,61 @@ Function Taxes()
 		|INTO Taxes
 		|FROM
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
-		|		LEFT JOIN Document.SalesInvoice.TaxList AS SalesInvoiceTaxList
+		|		INNER JOIN Document.SalesInvoice.TaxList AS SalesInvoiceTaxList
 		|		ON SalesInvoiceItemList.Key = SalesInvoiceTaxList.Key
-		|WHERE
-		|	SalesInvoiceItemList.Ref = &Ref
-		|	AND SalesInvoiceTaxList.Ref = &Ref";
+		|		AND SalesInvoiceItemList.Ref = &Ref
+		|		AND SalesInvoiceTaxList.Ref = &Ref";
 EndFunction
+
+Function CustomersTransactions()
+	Return
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Currency,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.BasisDocument AS TransactionDocument,
+		|	ItemList.Agreement,
+		|	SUM(ItemList.Amount) AS DocumentAmount
+		|INTO CustomersTransactions
+		|FROM
+		|	ItemList AS ItemList
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.BasisDocument,
+		|	ItemList.Agreement,
+		|	ItemList.Currency";
+EndFunction
+
+Function Aging()
+	Return
+		"SELECT
+		|	SalesInvoicePaymentTerms.Date AS PaymentDate,
+		|	SalesInvoicePaymentTerms.Ref.Date AS Period,
+		|	SUM(SalesInvoicePaymentTerms.Amount) AS Amount,
+		|	SalesInvoicePaymentTerms.Ref.Company AS Company,
+		|	SalesInvoicePaymentTerms.Ref.Partner AS Partner,
+		|	SalesInvoicePaymentTerms.Ref.Agreement AS Agreement,
+		|	SalesInvoicePaymentTerms.Ref.Currency AS Currency,
+		|	SalesInvoicePaymentTerms.Ref AS Invoice
+		|INTO Aging
+		|FROM
+		|	Document.SalesInvoice.PaymentTerms AS SalesInvoicePaymentTerms
+		|WHERE
+		|	SalesInvoicePaymentTerms.Ref = &Ref
+		|GROUP BY
+		|	SalesInvoicePaymentTerms.Date,
+		|	SalesInvoicePaymentTerms.Ref.Company,
+		|	SalesInvoicePaymentTerms.Ref.Partner,
+		|	SalesInvoicePaymentTerms.Ref.Agreement,
+		|	SalesInvoicePaymentTerms.Ref.Currency,
+		|	SalesInvoicePaymentTerms.Ref.Date,
+		|	SalesInvoicePaymentTerms.Ref";	
+EndFunction	
 
 Function R2001T_Sales()
 	Return
@@ -1402,80 +1452,6 @@ Function R2013T_SalesOrdersProcurement()
 		|	NOT QueryTable.IsService
 		|	AND QueryTable.SalesOrderExists";
 
-EndFunction
-
-Function R2020B_AdvancesFromCustomers()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	OffsetOfAdvance.Period,
-		|	OffsetOfAdvance.Company,
-		|	OffsetOfAdvance.Currency,
-		|	OffsetOfAdvance.LegalName,
-		|	OffsetOfAdvance.Partner,
-		|	OffsetOfAdvance.ReceiptDocument AS Basis,
-		|	SUM(OffsetOfAdvance.Amount)
-		|INTO R2020B_AdvancesFromCustomers
-		|FROM
-		|	OffsetOfAdvance AS OffsetOfAdvance
-		|GROUP BY
-		|	OffsetOfAdvance.Period,
-		|	OffsetOfAdvance.Company,
-		|	OffsetOfAdvance.Currency,
-		|	OffsetOfAdvance.LegalName,
-		|	OffsetOfAdvance.Partner,
-		|	OffsetOfAdvance.ReceiptDocument,
-		|	VALUE(AccumulationRecordType.Expense)";
-EndFunction
-
-Function R2021B_CustomersTransactions()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	ItemList.Period,
-		|	ItemList.Company,
-		|	ItemList.Currency,
-		|	ItemList.LegalName,
-		|	ItemList.Partner,
-		|	ItemList.Agreement,
-		|	ItemList.BasisDocument AS Basis,
-		|	SUM(ItemList.Amount) AS Amount
-		|INTO R2021B_CustomersTransactions
-		|FROM
-		|	ItemList AS ItemList
-		|GROUP BY
-		|	ItemList.Period,
-		|	ItemList.Company,
-		|	ItemList.Currency,
-		|	ItemList.LegalName,
-		|	ItemList.Partner,
-		|	ItemList.Agreement,
-		|	ItemList.BasisDocument,
-		|	VALUE(AccumulationRecordType.Receipt)
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
-		|	OffsetOfAdvance.Period,
-		|	OffsetOfAdvance.Company,
-		|	OffsetOfAdvance.Currency,
-		|	OffsetOfAdvance.LegalName,
-		|	OffsetOfAdvance.Partner,
-		|	OffsetOfAdvance.Agreement,
-		|	OffsetOfAdvance.TransactionDocument,
-		|	SUM(OffsetOfAdvance.Amount)
-		|FROM
-		|	OffsetOfAdvance AS OffsetOfAdvance
-		|GROUP BY
-		|	OffsetOfAdvance.Period,
-		|	OffsetOfAdvance.Company,
-		|	OffsetOfAdvance.Currency,
-		|	OffsetOfAdvance.LegalName,
-		|	OffsetOfAdvance.Partner,
-		|	OffsetOfAdvance.Agreement,
-		|	OffsetOfAdvance.TransactionDocument,
-		|	VALUE(AccumulationRecordType.Expense)";
 EndFunction
 
 Function R2031B_ShipmentInvoicing()
@@ -1567,38 +1543,129 @@ Function R4050B_StockInventory()
 
 EndFunction
 
-Function R5011B_PartnersAging()
-	Return
-		"SELECT *
-		|INTO R5011B_PartnersAging
-		|FROM
-		|	ItemList AS QueryTable
-		|WHERE False";
-
-EndFunction
-
-Function AdvancesFromCustomers_Lock()
+Function R2020B_AdvancesFromCustomers()
 	Return
 		"SELECT
-		|	ItemList.Period,
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAdvance.Period,
+		|	OffsetOfAdvance.Company,
+		|	OffsetOfAdvance.Currency,
+		|	OffsetOfAdvance.LegalName,
+		|	OffsetOfAdvance.Partner,
+		|	OffsetOfAdvance.AdvancesDocument AS Basis,
+		|	SUM(OffsetOfAdvance.Amount)
+		|INTO R2020B_AdvancesFromCustomers
+		|FROM
+		|	OffsetOfAdvance AS OffsetOfAdvance
+		|GROUP BY
+		|	OffsetOfAdvance.Period,
+		|	OffsetOfAdvance.Company,
+		|	OffsetOfAdvance.Currency,
+		|	OffsetOfAdvance.LegalName,
+		|	OffsetOfAdvance.Partner,
+		|	OffsetOfAdvance.AdvancesDocument,
+		|	VALUE(AccumulationRecordType.Expense)";
+EndFunction
+
+Function R2021B_CustomersTransactions()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	CustomersTransactions.Period,
+		|	CustomersTransactions.Company,
+		|	CustomersTransactions.Currency,
+		|	CustomersTransactions.LegalName,
+		|	CustomersTransactions.Partner,
+		|	CustomersTransactions.Agreement,
+		|	CustomersTransactions.TransactionDocument AS Basis,
+		|	SUM(CustomersTransactions.DocumentAmount) AS Amount
+		|INTO R2021B_CustomersTransactions
+		|FROM
+		|	CustomersTransactions AS CustomersTransactions
+		|GROUP BY
+		|	CustomersTransactions.Period,
+		|	CustomersTransactions.Company,
+		|	CustomersTransactions.Currency,
+		|	CustomersTransactions.LegalName,
+		|	CustomersTransactions.Partner,
+		|	CustomersTransactions.Agreement,
+		|	CustomersTransactions.TransactionDocument,
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	OffsetOfAdvance.Period,
+		|	OffsetOfAdvance.Company,
+		|	OffsetOfAdvance.Currency,
+		|	OffsetOfAdvance.LegalName,
+		|	OffsetOfAdvance.Partner,
+		|	OffsetOfAdvance.Agreement,
+		|	OffsetOfAdvance.TransactionDocument,
+		|	SUM(OffsetOfAdvance.Amount)
+		|FROM
+		|	OffsetOfAdvance AS OffsetOfAdvance
+		|GROUP BY
+		|	OffsetOfAdvance.Period,
+		|	OffsetOfAdvance.Company,
+		|	OffsetOfAdvance.Currency,
+		|	OffsetOfAdvance.LegalName,
+		|	OffsetOfAdvance.Partner,
+		|	OffsetOfAdvance.Agreement,
+		|	OffsetOfAdvance.TransactionDocument,
+		|	VALUE(AccumulationRecordType.Expense)";
+EndFunction
+
+Function R5011B_PartnersAging()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Aging.Period,
+		|	Aging.Company,
+		|	Aging.Currency,
+		|	Aging.Agreement,
+		|	Aging.Partner,
+		|	Aging.Invoice,
+		|	Aging.PaymentDate,
+		|	Aging.Amount
+		|INTO R5011B_PartnersAging
+		|FROM
+		|	Aging AS Aging
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	OffsetOfAging.Period,
+		|	OffsetOfAging.Company,
+		|	OffsetOfAging.Currency,
+		|	OffsetOfAging.Agreement,
+		|	OffsetOfAging.Partner,
+		|	OffsetOfAging.Invoice,
+		|	OffsetOfAging.PaymentDate,
+		|	OffsetOfAging.Amount
+		|FROM
+		|	OffsetOfAging AS OffsetOfAging";
+EndFunction
+
+Function R5010B_ReconciliationStatement()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Company,
-		|	ItemList.Currency,
 		|	ItemList.LegalName,
-		|	ItemList.Partner,
-		|	ItemList.BasisDocument AS TransactionDocument,
-		|	ItemList.Agreement,
-		|	SUM(ItemList.Amount) AS DocumentAmount
-		|INTO AdvancesFromCustomers_Lock
+		|	ItemList.Currency,
+		|	SUM(ItemList.Amount) AS Amount,
+		|	ItemList.Period
+		|INTO R5010B_ReconciliationStatement
 		|FROM
 		|	ItemList AS ItemList
 		|GROUP BY
-		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.LegalName,
-		|	ItemList.Partner,
-		|	ItemList.BasisDocument,
-		|	ItemList.Agreement,
-		|	ItemList.Currency";
+		|	ItemList.Currency,
+		|	ItemList.Period";
 EndFunction
 
 #EndRegion

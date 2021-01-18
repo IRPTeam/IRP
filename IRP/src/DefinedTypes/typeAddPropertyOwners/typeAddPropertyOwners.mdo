@@ -83,5 +83,6 @@
     <types>CatalogRef.ChequeBonds</types>
     <types>CatalogRef.BusinessUnits</types>
     <types>DocumentRef.CashExpense</types>
+    <types>DocumentRef.ItemStockAdjustment</types>
   </type>
 </mdclass:DefinedType>

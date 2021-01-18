@@ -567,6 +567,13 @@
         <value>77</value>
       </code>
     </items>
+    <items id="6fee8f30-c6a3-4cba-81c4-14e0c3e111db">
+      <name>Document_ItemStockAdjustment</name>
+      <description>Document Item stock adjustment</description>
+      <code xsi:type="core:NumberValue">
+        <value>78</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

@@ -192,7 +192,7 @@ Scenario: _0154054 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		And I click "Add" button
+		And I click the button named "Add"
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
 		| (J22001) Jacket J22001 |
@@ -491,7 +491,7 @@ Scenario: _015406404 check item and item key input by search in line in a docume
 		| 'Jacket J22001'    |
 		And I close all client application windows
 
-Scenario: _0154056 check item and item key input by search in line in a document ItemStockAdjustment (in english)
+Scenario: _015406405 check item and item key input by search in line in a document ItemStockAdjustment (in english)
 	And I close all client application windows
 	* Open a creation form ItemStockAdjustment
 		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
@@ -499,11 +499,11 @@ Scenario: _0154056 check item and item key input by search in line in a document
 	* Item and item key input by search in line
 		And in the table "ItemList" I click "Add" button
 		And I select "boo" from "Item" drop-down list by string in "ItemList" table
-		And I activate "Item key" field in "ItemList" table
+		And I activate "Item key (surplus)" field in "ItemList" table
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
+		| 'Item'     | 'Item key (surplus)'  |
 		| 'Boots'    | '36/18SD' |
 		And in the table "ItemList" I click "Add" button
 		And I input "J22001" text in "Item" field of "ItemList" table		

@@ -37,12 +37,10 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	ShipmentConfirmationItemList.ItemKey AS ItemKey,
 		|	ShipmentConfirmationItemList.ShipmentBasis AS ShipmentBasis,
 		|	ShipmentConfirmationItemList.ShipmentBasis REFS Document.SalesOrder
-		|	AND
-		|	NOT CAST(ShipmentConfirmationItemList.ShipmentBasis AS Document.SalesOrder).Date IS NULL AS UseSalesOrder,
+		|	AND NOT CAST(ShipmentConfirmationItemList.ShipmentBasis AS Document.SalesOrder).Date IS NULL AS UseSalesOrder,
 		|	CASE
 		|		WHEN ShipmentConfirmationItemList.ShipmentBasis REFS Document.SalesOrder
-		|		AND
-		|		NOT CAST(ShipmentConfirmationItemList.ShipmentBasis AS Document.SalesOrder).Date IS NULL
+		|		AND NOT CAST(ShipmentConfirmationItemList.ShipmentBasis AS Document.SalesOrder).Date IS NULL
 		|			THEN CAST(ShipmentConfirmationItemList.ShipmentBasis AS
 		|				Document.SalesOrder).ShipmentConfirmationsBeforeSalesInvoice
 		|		ELSE FALSE
@@ -51,11 +49,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|		WHEN ShipmentConfirmationItemList.ShipmentBasis.Date IS NULL
 		|			THEN FALSE
 		|		ELSE TRUE
-		|	END AS UseShipmentBasis,
+		|	END
+		|	AND SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS UseShipmentBasis,
 		|	ShipmentConfirmationItemList.Ref AS ShipmentConfirmation,
 		|	ShipmentConfirmationItemList.Quantity AS Quantity,
 		|	0 AS BasisQuantity,
-		|	ShipmentConfirmationItemList.Unit,
+		|	ShipmentConfirmationItemList.Unit AS Unit,
 		|	ShipmentConfirmationItemList.ItemKey.Item.Unit AS ItemUnit,
 		|	ShipmentConfirmationItemList.ItemKey.Unit AS ItemKeyUnit,
 		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
@@ -64,6 +63,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	ShipmentConfirmationItemList.Key AS RowKeyUUID
 		|FROM
 		|	Document.ShipmentConfirmation.ItemList AS ShipmentConfirmationItemList
+		|		LEFT JOIN Document.SalesOrder.ItemList AS SalesOrderItemList
+		|		ON ShipmentConfirmationItemList.Key = SalesOrderItemList.Key
+		|		AND CAST(ShipmentConfirmationItemList.ShipmentBasis AS Document.SalesOrder) = SalesOrderItemList.Ref
 		|WHERE
 		|	ShipmentConfirmationItemList.Ref = &Ref";
 	

@@ -1024,7 +1024,7 @@ Scenario: check the filter by my own company in Cheque bond transaction
 			|'Then the form attribute named "LegalName" became equal to 'Company Kalipso''|
 	And I close all client application windows
 
-Scenario: check the filter by my own company in Opening entry
+Scenario: check the filter by my own company in Opening entry/Item stock adjustment
 	And I click the button named "FormCreate"
 	* Check visual filter
 		And I click Select button of "Company" field
@@ -1709,3 +1709,13 @@ Scenario: check the barcode search in the PhysicalInventory documents
 			|'Dress' |'S/Yellow'  | 'pcs'  |
 	And I close all client application windows
 
+Scenario: check the barcode search in the Item stock adjustment
+	And I click the button named "FormCreate"
+	And I click "SearchByBarcode" button
+	And I input "2202283713" text in "InputFld" field
+	And I click "OK" button
+	* Check adding an items and filling in the price in the tabular part
+		And "ItemList" table contains lines
+			| 'Item' |'Item key (surplus)'     | 'Unit' |
+			|'Dress' |'S/Yellow'               | 'pcs'  |
+	And I close all client application windows

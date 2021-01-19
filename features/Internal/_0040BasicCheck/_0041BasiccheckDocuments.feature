@@ -715,3 +715,18 @@ Scenario: Open object form "CashStatement"
 	If the warning is displayed then
 		Then I raise "Failed to open document form CashStatement" exception
 	And I close current window
+
+
+Scenario: Open list form "ItemStockAdjustment" 
+	And I close all client application windows
+	Given I open "ItemStockAdjustment" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ItemStockAdjustment" exception
+	And I close current window
+
+Scenario: Open object form "ItemStockAdjustment"
+	And I close all client application windows
+	Given I open "ItemStockAdjustment" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ItemStockAdjustment" exception
+	And I close current window

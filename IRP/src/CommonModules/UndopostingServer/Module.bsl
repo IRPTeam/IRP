@@ -7,6 +7,7 @@ Procedure Undopost(DocObject, Cancel, AddInfo = Undefined) Export
 	Parameters.Insert("Object", DocObject);
 	Parameters.Insert("IsReposting", False);
 	Parameters.Insert("PointInTime", DocObject.PointInTime());
+	Parameters.Insert("TempTablesManager", New TempTablesManager());
 	
 	Module = Documents[DocObject.Ref.Metadata().Name];
 	

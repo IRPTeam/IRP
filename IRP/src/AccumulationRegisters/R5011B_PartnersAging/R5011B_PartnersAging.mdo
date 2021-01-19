@@ -94,6 +94,7 @@
     <type>
       <types>DocumentRef.OpeningEntry</types>
       <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.PurchaseInvoice</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

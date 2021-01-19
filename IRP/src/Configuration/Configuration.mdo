@@ -359,6 +359,7 @@
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.TempFunctions</commonModules>
+  <commonModules>CommonModule.OffsetOfPartnersServer</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentClient</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>

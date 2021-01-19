@@ -150,11 +150,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Parameters.IsReposting = False;
 	
-#Region NewRegistersPosting	
-	PostingServer.SetRegisters(Tables, Ref);
-	QueryArray = GetQueryTexts();
-	PostingServer.FillPostingTables(Tables, Ref, QueryArray);
-#EndRegion	
+#Region NewRegistersPosting
+	QueryArray = GetQueryTextsSecondaryTables();
+	PostingServer.ExequteQuery(Ref, QueryArray, Parameters);
+#EndRegion
+	
 	Return Tables;
 EndFunction
 
@@ -623,15 +623,16 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation);
 	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
 		
-#Region NewRegistersPosting	
-	PostingServer.GetLockDataSource(DataMapWithLockFields, DocumentDataTables);
-#EndRegion	
-
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
+#Region NewRegisterPosting
+	Tables = Parameters.DocumentDataTables;	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -771,17 +772,22 @@ EndProcedure
 
 #Region NewRegistersPosting
 
-Function GetQueryTexts()
+Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
+	Return QueryArray;	
+EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
 	QueryArray.Add(R2011B_SalesOrdersShipment());
 	QueryArray.Add(R2013T_SalesOrdersProcurement());
 	QueryArray.Add(R2031B_ShipmentInvoicing());
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4022B_StockTransferOrdersShipment());
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
-	Return QueryArray;
-EndFunction
+	Return QueryArray;	
+EndFunction	
 
 Function ItemList()
 	Return

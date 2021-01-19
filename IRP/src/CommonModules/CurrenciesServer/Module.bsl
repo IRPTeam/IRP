@@ -134,7 +134,9 @@ Function IsUseAgreementMovementType(ItemOfPostingInfo)
 	UseAgreementMovementType = True;
 	If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.AdvanceFromCustomers")
 		Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.AdvanceToSuppliers") 
-		Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.AccountBalance") Then
+		Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.AccountBalance") 
+		Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R2020B_AdvancesFromCustomers") 
+		Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R1020B_AdvancesToVendors") Then
 		UseAgreementMovementType = False;
 	EndIf;
 	Return UseAgreementMovementType;
@@ -149,6 +151,8 @@ Function IsUseCurrencyJoin(Parameters, ItemOfPostingInfo)
 	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.PartnerApTransactions"));
 	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.PartnerArTransactions"));
 	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.CashAdvance"));
+	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.R2021B_CustomersTransactions"));
+	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.R1021B_VendorsTransactions"));
 	
 	FilterByDocument = False;
 	

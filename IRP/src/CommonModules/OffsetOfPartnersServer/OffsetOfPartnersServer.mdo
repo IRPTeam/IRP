@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="715b3b48-b41d-44a6-a4d4-99d249f72e58">
+  <name>OffsetOfPartnersServer</name>
+  <synonym>
+    <key>en</key>
+    <value>Offset of partners server</value>
+  </synonym>
+  <server>true</server>
+  <serverCall>true</serverCall>
+</mdclass:CommonModule>

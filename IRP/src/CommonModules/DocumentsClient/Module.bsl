@@ -1212,6 +1212,10 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 	#If MobileClient Then
 	
 	#Else
+	// @TEST
+	OpenFormParameters.Insert("AssociatedTableName", Command.AssociatedTable.Name);
+	OpenFormParameters.Insert("Object", Object);
+	
 	FormName = "CommonForm.PickUpItems";
 	OpenForm(FormName, OpenFormParameters, Form, , , , NotifyDescription);
 	#EndIf

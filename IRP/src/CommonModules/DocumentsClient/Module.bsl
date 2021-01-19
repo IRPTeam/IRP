@@ -2943,7 +2943,13 @@ Procedure SetCurrentRow(Object, Form, Item, FormParameters, AttributeName)
 		If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, TabularSection) Then
 			CurrentData = Form.Items[TabularSection].CurrentData;
 			If CurrentData <> Undefined And CommonFunctionsClientServer.ObjectHasProperty(CurrentData, AttributeName) Then
-				FormParameters.Insert("CurrentRow", CurrentData[AttributeName]);
+				If Not ValueIsFilled(CurrentData[AttributeName]) And CommonFunctionsClientServer.ObjectHasProperty(CurrentData, "LineNumber") Then
+					RowIndex = CurrentData.LineNumber - 1;
+					PrevRow = ?(RowIndex > 0,  Object[TabularSection][RowIndex - 1]  , CurrentData);
+					FormParameters.Insert("CurrentRow", PrevRow[AttributeName]);
+				Else
+					FormParameters.Insert("CurrentRow", CurrentData[AttributeName]);
+				EndIf;
 			EndIf;
 		EndIf;
 	EndIf;

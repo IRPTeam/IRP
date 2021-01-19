@@ -78,6 +78,12 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 	If Not StoreArray.Count() And ValueIsFilled(Form.CurrentStore) Then
 		StoreArray.Add(Form.CurrentStore);
 	EndIf;
+	
+	If Command.AssociatedTable <> Undefined Then
+		OpenFormParameters.Insert("AssociatedTableName", Command.AssociatedTable.Name);
+		OpenFormParameters.Insert("Object", Object);
+	EndIf;
+	
 	OpenFormParameters.Insert("Stores", StoreArray);
 	OpenFormParameters.Insert("ReceiverStores", ReceiverStoreArray);
 	OpenFormParameters.Insert("EndPeriod", CommonFunctionsServer.GetCurrentSessionDate());

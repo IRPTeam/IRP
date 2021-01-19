@@ -28,7 +28,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndIf;	
 	ItemTypeAfterSelection();
 	
-	// @TEST
 	If Parameters.Property("AssociatedTableName") And ValueIsFilled(Parameters.AssociatedTableName) 
 		And Parameters.Property("Object") And Parameters.Object <> Undefined 
 		And CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, Parameters.AssociatedTableName) Then

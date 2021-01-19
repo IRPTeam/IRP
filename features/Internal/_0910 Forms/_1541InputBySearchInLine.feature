@@ -121,9 +121,9 @@ Scenario: _0154051 check item and item key input by search in line in a document
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
 		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I input "J22001" text in "Item" field of "ItemList" table		
-		And drop-down list "Item" is equal to:
-		| (J22001) Jacket J22001 |
+		And I input "J22001" text in "Item" field of "ItemList" table	
+		And in "ItemList" table drop-down list "Item" is equal to:
+			|" (J22001) Jacket J22001 "|
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
 		| 'Item'     |
@@ -194,8 +194,8 @@ Scenario: _0154054 check item and item key input by search in line in a document
 		| 'Boots'    | '36/18SD' |
 		And I click the button named "Add"
 		And I input "J22001" text in "Item" field of "ItemList" table		
-		And drop-down list "Item" is equal to:
-		| (J22001) Jacket J22001 |
+		And in "ItemList" table drop-down list "Item" is equal to:
+			|" (J22001) Jacket J22001 "|
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
 		| 'Item'     |

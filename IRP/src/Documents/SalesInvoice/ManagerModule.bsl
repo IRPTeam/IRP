@@ -213,6 +213,22 @@ Function GetQueryTextSalesInvoiceItemList()
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
+		|	SalesOrderItemList.Key AS Key,
+		|	SalesOrderItemList.ProcurementMethod AS ProcurementMethod
+		|INTO SalesOrderItemList
+		|FROM
+		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
+		|		INNER JOIN Document.SalesOrder.ItemList AS SalesOrderItemList
+		|		ON SalesInvoiceItemList.SalesOrder = SalesOrderItemList.Ref
+		|		AND SalesInvoiceItemList.Key = SalesOrderItemList.Key
+		|		AND SalesInvoiceItemList.Ref = &Ref
+		|GROUP BY
+		|	SalesOrderItemList.Key,
+		|	SalesOrderItemList.ProcurementMethod
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
 		|	SalesInvoiceItemList.Ref.Company AS Company,
 		|	SalesInvoiceItemList.Store AS Store,
 		|	ShipmentConfirmations.ShipmentConfirmationBeforeSalesInvoice AS ShipmentConfirmationBeforeSalesInvoice,
@@ -236,20 +252,15 @@ Function GetQueryTextSalesInvoiceItemList()
 		|	SalesInvoiceItemList.ItemKey.Item AS Item,
 		|	SalesInvoiceItemList.Ref.Date AS Period,
 		|	SalesInvoiceItemList.SalesOrder AS SalesOrder,
-		|	CASE
-		|		WHEN SalesInvoiceItemList.SalesOrder.Date IS NULL
-		|			THEN FALSE
-		|		ELSE TRUE
-		|	END AS UseSalesOrder,
+		|	NOT SalesInvoiceItemList.SalesOrder.Ref IS NULL AS UseSalesOrder,
+		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS ProcMeth_Stock,
+		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase) AS ProcMeth_Purchase,
+		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.NoReserve) AS ProcMeth_NoReserve,
 		|	SalesInvoiceItemList.Ref AS ShipmentBasis,
 		|	SalesInvoiceItemList.Ref AS SalesInvoice,
 		|	SalesInvoiceItemList.Key AS RowKeyUUID,
 		|	SalesInvoiceItemList.DeliveryDate AS DeliveryDate,
-		|	CASE
-		|		WHEN SalesInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
-		|			THEN TRUE
-		|		ELSE FALSE
-		|	END AS IsService,
+		|	SalesInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		|	SalesInvoiceItemList.BusinessUnit AS BusinessUnit,
 		|	SalesInvoiceItemList.RevenueType AS RevenueType,
 		|	SalesInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
@@ -267,6 +278,8 @@ Function GetQueryTextSalesInvoiceItemList()
 		|		AND SalesInvoiceItemList.Key = ShipmentConfirmations.Key
 		|		AND SalesInvoiceItemList.Ref = &Ref
 		|		AND ShipmentConfirmations.Ref = &Ref
+		|		LEFT JOIN SalesOrderItemList AS SalesOrderItemList
+		|		ON SalesInvoiceItemList.Key = SalesOrderItemList.Key
 		|WHERE
 		|	SalesInvoiceItemList.Ref = &Ref";
 EndFunction
@@ -349,7 +362,10 @@ Function GetQueryTextQueryTable()
 		|	QueryTable.OffersAmount AS OffersAmount,
 		|	QueryTable.IsService AS IsService,
 		|	QueryTable.BasisDocument AS BasisDocument,
-		|	QueryTable.RowKeyUUID AS RowKeyUUID
+		|	QueryTable.RowKeyUUID AS RowKeyUUID,
+		|	QueryTable.ProcMeth_Stock,
+		|	QueryTable.ProcMeth_Purchase,
+		|	QueryTable.ProcMeth_NoReserve
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable
@@ -400,7 +416,7 @@ Function GetQueryTextQueryTable()
 		|FROM
 		|	tmp AS tmp
 		|WHERE
-		|	NOT tmp.UseSalesOrder
+		|	(NOT tmp.UseSalesOrder OR tmp.ProcMeth_NoReserve)
 		|	AND
 		|	NOT tmp.ShipmentConfirmationBeforeSalesInvoice
 		|	AND 

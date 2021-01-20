@@ -46,11 +46,14 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|		ELSE FALSE
 		|	END AS ShipmentBeforeInvoice,
 		|	CASE
-		|		WHEN ShipmentConfirmationItemList.ShipmentBasis.Date IS NULL
-		|			THEN FALSE
-		|		ELSE TRUE
-		|	END
-		|	AND SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS UseShipmentBasis,
+		|		WHEN NOT ShipmentConfirmationItemList.ShipmentBasis.Ref IS NULL
+		|			THEN CASE
+		|				WHEN ShipmentConfirmationItemList.ShipmentBasis REFS Document.SalesOrder
+		|					THEN SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock)
+		|				ELSE TRUE
+		|			END
+		|		ELSE FALSE
+		|	END AS UseShipmentBasis,
 		|	ShipmentConfirmationItemList.Ref AS ShipmentConfirmation,
 		|	ShipmentConfirmationItemList.Quantity AS Quantity,
 		|	0 AS BasisQuantity,

@@ -1329,7 +1329,7 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	|INTO Lack
 	|FROM
 	|	Records_All_Grouped AS Records_All_Grouped
-	|		LEFT JOIN AccumulationRegister.%1.Balance(&Period, (Store, ItemKey) IN
+	|		LEFT JOIN AccumulationRegister.%1.Balance(%2, (Store, ItemKey) IN
 	|			(SELECT
 	|				Records_All_Grouped.Store,
 	|				Records_All_Grouped.ItemKey
@@ -1361,8 +1361,8 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	|	Lack.Quantity,
 	|	Lack.LackOfBalance,
 	|	Lack.Unposting";
-	
-	Query.Text = StrTemplate(Query.Text, Parameters.RegisterName);
+	PeriodTypeParameter = GetPeriodType(Query, Parameters);
+	Query.Text = StrTemplate(Query.Text, Parameters.RegisterName, PeriodTypeParameter);
 	
 	Query.SetParameter("Period"             , Parameters.BalancePeriod);
 	Query.SetParameter("ItemList_InDocument", Tables.ItemList_InDocument);
@@ -1395,6 +1395,10 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 		ShowPostingErrorMessage(QueryTable, ErrorParameters, AddInfo);
 	EndIf;
 	Return Not Error;
+EndFunction
+
+Function GetPeriodType(Query, Parameters)
+	Return "";
 EndFunction
 
 #Region NewRegistersPosting

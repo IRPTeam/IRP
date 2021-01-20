@@ -523,7 +523,7 @@ Scenario: _29700110 test filling-in SO - SС - SI by quantity
 				And I input "8,000" text in "Quantity" field of "ItemList" table
 				And I finish line editing in "ItemList" table
 		* Check the prohibition of holding SC for an amount greater than specified in the order (copy line)	
-			* Copy second kine
+			* Copy second line
 				And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' | 'Quantity'     |
 				| 'Dress' | 'M/White'  | '8,000' |
@@ -634,7 +634,7 @@ Scenario: _29700111 test filling-in SO - SC - SI by quantity (second part)
 			| 'Trousers' | '38/Yellow'  |
 			And I click the button named "FormPost"
 			Then user message window does not contain messages
-	* Check for a ban SC if you add a line to it (by copying) from an order for which SI has already been created (order by line is specified)
+	* Check for a ban SC if you add a line to it (by copying) from an order for which SС has already been created (order by line is specified)
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |

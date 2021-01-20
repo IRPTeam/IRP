@@ -240,6 +240,7 @@ Scenario: _090403 create Sales invoice for several Sales order with different pa
 		And I input "328" text in "Number" field
 	* Filling in customer info
 		And I click Select button of "Partner" field
+		And I click "List" button		
 		And I go to line in "List" table
 				| Description |
 				| Partner Ferron 1   |
@@ -775,6 +776,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "No reserve" exact value from "Procurement method" drop-down list in "ItemList" table
+			And I change "Cancel" checkbox in "ItemList" table			
 			And I move to the next attribute
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -867,6 +869,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "No reserve" exact value from "Procurement method" drop-down list in "ItemList" table
+			And I change "Cancel" checkbox in "ItemList" table
 			And I move to the next attribute
 			And I input "8,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table

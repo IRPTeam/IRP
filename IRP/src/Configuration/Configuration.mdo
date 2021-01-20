@@ -431,6 +431,7 @@
   <definedTypes>DefinedType.typePurchaseBasis</definedTypes>
   <definedTypes>DefinedType.typeQR</definedTypes>
   <definedTypes>DefinedType.typeQuantity</definedTypes>
+  <definedTypes>DefinedType.typeQuantityInSpecifications</definedTypes>
   <definedTypes>DefinedType.typeReceiptBasis</definedTypes>
   <definedTypes>DefinedType.typeReconciliationStatementDocuments</definedTypes>
   <definedTypes>DefinedType.typeRowID</definedTypes>

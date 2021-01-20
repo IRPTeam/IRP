@@ -8,6 +8,7 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	Parameters.Insert("Object", DocObject);
 	Parameters.Insert("IsReposting", False);
 	Parameters.Insert("PointInTime", DocObject.PointInTime());
+	Parameters.Insert("TempTablesManager", New TempTablesManager());
 	
 	Module = Documents[DocObject.Ref.Metadata().Name];
 	
@@ -1402,19 +1403,26 @@ Function NotUseRegister(Name) Export
 	Return NOT Mid(Name, 7, 1) = "_";
 EndFunction	
 
-Procedure FillPostingTables(Tables, Ref, QueryArray) Export
+Procedure ExequteQuery(Ref, QueryArray, Parameters) Export
 	Query = New Query;
-	Query.TempTablesManager = New TempTablesManager();
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.SetParameter("Ref", Ref);
-	
 	Query.Text = StrConcat(QueryArray, Chars.LF + ";" + Chars.LF);
 	Query.Execute();
+EndProcedure
+
+Function GetQueryTableByName(TableName, Parameters) Export
+	VTSearch = Parameters.TempTablesManager.Tables.Find(TableName);
+	If VTSearch = Undefined Then
+		Return New ValueTable();
+	EndIf;
+	Return VTSearch.GetData().Unload();
+EndFunction	
+
+Procedure FillPostingTables(Tables, Ref, QueryArray, Parameters) Export
+	ExequteQuery(Ref, QueryArray, Parameters);
 	For Each VT In Tables Do
-		VTSearch = Query.TempTablesManager.Tables.Find(VT.Key);
-		If VTSearch = Undefined Then
-			Continue;
-		EndIf;
-		MergeTables(Tables[VT.Key], VTSearch.GetData().Unload(), "RecordType");
+		MergeTables(Tables[VT.Key], GetQueryTableByName(VT.Key, Parameters), "RecordType");
 	EndDo;
 EndProcedure
 
@@ -1445,6 +1453,11 @@ Procedure GetLockDataSource(DataMapWithLockFields, DocumentDataTables) Export
 	
 EndProcedure
 
+Procedure SetLockDataSource(DataMap, RegisterManager, Table) Export
+	LockFields = RegisterManager.GetLockFields(Table);
+	DataMap.Insert(LockFields.RegisterName, LockFields.LockInfo);
+EndProcedure	
+
 Procedure SetRegisters(Tables, DocumentRef) Export
 
 	For Each Register In DocumentRef.Metadata().RegisterRecords Do
@@ -1454,4 +1467,5 @@ Procedure SetRegisters(Tables, DocumentRef) Export
 		Tables.Insert(Register.Name, PostingServer.CreateTable(Register));
 	EndDo;
 EndProcedure
+
 #EndRegion

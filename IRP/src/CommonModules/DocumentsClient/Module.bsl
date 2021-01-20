@@ -178,6 +178,8 @@ Procedure PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing,
 		OpenSettings.FormParameters.Insert("FillingData", OpenSettings.FillingData);
 	EndIf;
 	
+	SetCurrentRow(Object, Form, Item, OpenSettings.FormParameters, "Partner");
+		
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -353,6 +355,8 @@ Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 		OpenSettings.FormParameters.Insert("FillingData", OpenSettings.FillingData);
 	EndIf;
 	
+	SetCurrentRow(Object, Form, Item, OpenSettings.FormParameters, "Agreement");
+	
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -525,6 +529,8 @@ Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing,
 	Else
 		OpenSettings.FormParameters.Insert("FillingData", OpenSettings.FillingData);
 	EndIf;
+	
+	SetCurrentRow(Object, Form, Item, OpenSettings.FormParameters, "LegalName");
 	
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
@@ -1206,6 +1212,11 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 	#If MobileClient Then
 	
 	#Else
+	If Command.AssociatedTable <> Undefined Then
+		OpenFormParameters.Insert("AssociatedTableName", Command.AssociatedTable.Name);
+		OpenFormParameters.Insert("Object", Object);
+	EndIf;
+	
 	FormName = "CommonForm.PickUpItems";
 	OpenForm(FormName, OpenFormParameters, Form, , , , NotifyDescription);
 	#EndIf
@@ -1343,6 +1354,8 @@ Procedure ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, Op
 	Else
 		OpenSettings.FormParameters.Insert("FillingData", OpenSettings.FillingData);
 	EndIf;
+	
+	SetCurrentRow(Object, Form, Item, OpenSettings.FormParameters, "Item");
 	
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
@@ -2925,6 +2938,26 @@ Procedure ShowRowKey(Form) Export
 			Form.Items[ItemName].Visible = Not Form.Items[ItemName].Visible;
 		EndIf;
 	EndDo;
+EndProcedure
+
+Procedure SetCurrentRow(Object, Form, Item, FormParameters, AttributeName)
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, Item.Name) Then
+		FormParameters.Insert("CurrentRow", Object[Item.Name]);
+	Else
+		TabularSection = Left(Item.Name, StrLen(Item.Name) - StrLen(AttributeName));
+		If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, TabularSection) Then
+			CurrentData = Form.Items[TabularSection].CurrentData;
+			If CurrentData <> Undefined And CommonFunctionsClientServer.ObjectHasProperty(CurrentData, AttributeName) Then
+				If Not ValueIsFilled(CurrentData[AttributeName]) And CommonFunctionsClientServer.ObjectHasProperty(CurrentData, "LineNumber") Then
+					RowIndex = CurrentData.LineNumber - 1;
+					PrevRow = ?(RowIndex > 0,  Object[TabularSection][RowIndex - 1]  , CurrentData);
+					FormParameters.Insert("CurrentRow", PrevRow[AttributeName]);
+				Else
+					FormParameters.Insert("CurrentRow", CurrentData[AttributeName]);
+				EndIf;
+			EndIf;
+		EndIf;
+	EndIf;
 EndProcedure
 
 #EndRegion

@@ -27,6 +27,22 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		ThisObject.Items.ItemTableValueAmount.Visible = False;
 	EndIf;	
 	ItemTypeAfterSelection();
+	
+	If Parameters.Property("AssociatedTableName") And ValueIsFilled(Parameters.AssociatedTableName) 
+		And Parameters.Property("Object") And Parameters.Object <> Undefined 
+		And CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, Parameters.AssociatedTableName) Then
+		Table = Parameters.Object[Parameters.AssociatedTableName];
+		If Table.Count() Then
+			LastRowIndex = Table.Count() - 1;
+			LastInputRow = Table[LastRowIndex];
+			If CommonFunctionsClientServer.ObjectHasProperty(LastInputRow, "Item") Then
+				Rows = ThisObject.ItemList.FindRows(New Structure("Item", LastInputRow.Item));
+				If Rows.Count() Then
+					ThisObject.Items.ItemList.CurrentRow = Rows.Get(0).GetID();
+				EndIf;
+			EndIf;
+		EndIf;
+	EndIf;
 EndProcedure
 
 &AtClient

@@ -359,6 +359,7 @@
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.TempFunctions</commonModules>
+  <commonModules>CommonModule.OffsetOfPartnersServer</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentClient</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
@@ -430,6 +431,7 @@
   <definedTypes>DefinedType.typePurchaseBasis</definedTypes>
   <definedTypes>DefinedType.typeQR</definedTypes>
   <definedTypes>DefinedType.typeQuantity</definedTypes>
+  <definedTypes>DefinedType.typeQuantityInSpecifications</definedTypes>
   <definedTypes>DefinedType.typeReceiptBasis</definedTypes>
   <definedTypes>DefinedType.typeReconciliationStatementDocuments</definedTypes>
   <definedTypes>DefinedType.typeRowID</definedTypes>

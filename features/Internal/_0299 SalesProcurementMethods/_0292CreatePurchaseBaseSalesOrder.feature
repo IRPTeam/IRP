@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Inventory
+@SalesOrderProcurement
 
 Feature: create Purchase order based on a Sales order
 
@@ -173,7 +173,7 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 			And I input "11,000" text in "Q" field of "ItemList" table
 			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
-		* Change number
+		* Save number
 			And I click the button named "FormPost"
 			And I delete "$$NumberSalesOrder0292002$$" variable
 			And I delete "$$SalesOrder0292002$$" variable
@@ -235,7 +235,7 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 			And I input "7,000" text in "Q" field of "ItemList" table
 			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
-		* Change number
+		* Save number
 			And I move to "Other" tab
 			And I set checkbox "Shipment confirmations before sales invoice"
 			And I click the button named "FormPost"
@@ -299,7 +299,7 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
-		* Change number
+		* Save number
 			And I move to "Other" tab
 			And I set checkbox "Shipment confirmations before sales invoice"
 			And I click the button named "FormPost"
@@ -363,7 +363,7 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 			And I input "40,000" text in "Q" field of "ItemList" table
 			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
-		* Change number
+		* Save number
 			And I click the button named "FormPost"
 			And I delete "$$NumberSalesOrder0292005$$" variable
 			And I delete "$$SalesOrder0292005$$" variable

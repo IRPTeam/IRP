@@ -73,9 +73,10 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	&Period AS Period,
 		|	SalesOrderItemList.Key AS RowKeyUUID,
 		|	SalesOrderItemList.DeliveryDate AS DeliveryDate,
-		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS IsProcurementMethod_Stock,
-		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase) AS IsProcurementMethod_Purchase,
-		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.NoReserve) AS IsProcurementMethod_NoReserve,
+		|	SalesOrderItemList.Cancel AS IsCancel,
+		|	NOT SalesOrderItemList.Cancel AND SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS IsProcurementMethod_Stock,
+		|	NOT SalesOrderItemList.Cancel AND SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase) AS IsProcurementMethod_Purchase,
+		|	NOT SalesOrderItemList.Cancel AND SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.NoReserve) AS IsProcurementMethod_NoReserve,
 		|	CASE
 		|		WHEN SalesOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
 		|			THEN TRUE
@@ -116,6 +117,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|   QueryTable.IsProcurementMethod_Stock AS IsProcMeth_Stock,
 		|   QueryTable.IsProcurementMethod_Purchase AS IsProcMeth_Purchase,
 		|   QueryTable.IsProcurementMethod_NoReserve AS IsProcMeth_NoReserve,
+		|	QueryTable.IsCancel AS IsCancel,
 		|   QueryTable.IsService AS IsService,
 		|	QueryTable.Amount AS Amount,
 		|	QueryTable.Currency AS Currency
@@ -159,11 +161,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		"SELECT * INTO tmp_3 FROM tmp AS tmp
 		|WHERE
 		|    NOT tmp.UseShipmentBeforeInvoice
-		|AND     tmp.IsProcMeth_NoReserve
+		|AND     tmp.IsCancel
 		|AND NOT tmp.IsService";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_3").GetData().IsEmpty() Then
-		GetTables_NotUseShipmentBeforeInvoice_IsProcMethRepeal_NotIsService(Tables, TempManager, "tmp_3");
+		GetTables_NotUseShipmentBeforeInvoice_IsProcMethCancel_NotIsService(Tables, TempManager, "tmp_3");
 	EndIf;
 	
 	Query = New Query();
@@ -198,11 +200,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		"SELECT * INTO tmp_6 FROM tmp AS tmp
 		|WHERE
 		|        tmp.UseShipmentBeforeInvoice
-		|AND     tmp.IsProcMeth_NoReserve
+		|AND     tmp.IsCancel
 		|AND NOT tmp.IsService";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_6").GetData().IsEmpty() Then
-		GetTables_UseShipmentBeforeInvoice_IsProcMethRepeal_NotIsService(Tables, TempManager, "tmp_6");
+		GetTables_UseShipmentBeforeInvoice_IsProcMethCancel_NotIsService(Tables, TempManager, "tmp_6");
 	EndIf;
 	
 	Query = New Query();
@@ -214,6 +216,32 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_7").GetData().IsEmpty() Then
 		GetTables_IsService(Tables, TempManager, "tmp_7");
+	EndIf;
+	
+	Query = New Query();
+	Query.TempTablesManager = TempManager;
+	Query.Text =
+		"SELECT * INTO tmp_8 FROM tmp AS tmp
+		|WHERE
+		|    NOT tmp.UseShipmentBeforeInvoice
+		|AND     tmp.IsProcMeth_NoReserve
+		|AND NOT tmp.IsService";
+	Query.Execute();
+	If Not Query.TempTablesManager.Tables.Find("tmp_8").GetData().IsEmpty() Then
+		GetTables_NotUseShipmentBeforeInvoice_IsProcMethNoReserve_NotIsService(Tables, TempManager, "tmp_8");
+	EndIf;
+	
+	Query = New Query();
+	Query.TempTablesManager = TempManager;
+	Query.Text =
+		"SELECT * INTO tmp_9 FROM tmp AS tmp
+		|WHERE
+		|        tmp.UseShipmentBeforeInvoice
+		|AND     tmp.IsProcMeth_NoReserve
+		|AND NOT tmp.IsService";
+	Query.Execute();
+	If Not Query.TempTablesManager.Tables.Find("tmp_9").GetData().IsEmpty() Then
+		GetTables_UseShipmentBeforeInvoice_IsProcMethNoReserve_NotIsService(Tables, TempManager, "tmp_9");
 	EndIf;
 	
 #EndRegion	
@@ -599,7 +627,7 @@ EndProcedure
 
 #Region Table_tmp_3
 
-Procedure GetTables_NotUseShipmentBeforeInvoice_IsProcMethRepeal_NotIsService(Tables, TempManager, TableName)
+Procedure GetTables_NotUseShipmentBeforeInvoice_IsProcMethCancel_NotIsService(Tables, TempManager, TableName)
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
 	Query.Text =
@@ -611,7 +639,7 @@ Procedure GetTables_NotUseShipmentBeforeInvoice_IsProcMethRepeal_NotIsService(Ta
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_NotUseShipmentBeforeInvoice_IsProcMethRepeal_NotUseShipmentConfirmation_IsProduct(Tables, TempManager, NewTableName);
+		GetTables_NotUseShipmentBeforeInvoice_IsProcMethCancel_NotUseShipmentConfirmation_IsProduct(Tables, TempManager, NewTableName);
 	EndIf;
 	
 	Query = New Query();
@@ -625,15 +653,15 @@ Procedure GetTables_NotUseShipmentBeforeInvoice_IsProcMethRepeal_NotIsService(Ta
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_NotUseShipmentBeforeInvoice_IsProcMethRepeal_UseUseShipmentConfirmation_IsProduct(Tables, TempManager, NewTableName);
+		GetTables_NotUseShipmentBeforeInvoice_IsProcMethCancel_UseUseShipmentConfirmation_IsProduct(Tables, TempManager, NewTableName);
 	EndIf;
 EndProcedure
 
-Procedure GetTables_NotUseShipmentBeforeInvoice_IsProcMethRepeal_NotUseShipmentConfirmation_IsProduct(Tables, TempManager, TableName)
+Procedure GetTables_NotUseShipmentBeforeInvoice_IsProcMethCancel_NotUseShipmentConfirmation_IsProduct(Tables, TempManager, TableName)
 	Return;
 EndProcedure
 
-Procedure GetTables_NotUseShipmentBeforeInvoice_IsProcMethRepeal_UseUseShipmentConfirmation_IsProduct(Tables, TempManager, TableName)
+Procedure GetTables_NotUseShipmentBeforeInvoice_IsProcMethCancel_UseUseShipmentConfirmation_IsProduct(Tables, TempManager, TableName)
 	Return;
 EndProcedure
 
@@ -1085,7 +1113,7 @@ EndProcedure
 
 #Region Table_tmp_6
 
-Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethRepeal_NotIsService(Tables, TempManager, TableName)
+Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethCancel_NotIsService(Tables, TempManager, TableName)
 	// tmp_6
 	Query = New Query();
 	Query.TempTablesManager = TempManager;
@@ -1098,7 +1126,7 @@ Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethRepeal_NotIsService(Table
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UseShipmentBeforeInvoice_IsProcMethRepeal_NotUseShipmentConfirmation_IsProduct(Tables, TempManager, NewTableName);
+		GetTables_UseShipmentBeforeInvoice_IsProcMethCancel_NotUseShipmentConfirmation_IsProduct(Tables, TempManager, NewTableName);
 	EndIf;
 	
 	Query = New Query();
@@ -1112,16 +1140,16 @@ Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethRepeal_NotIsService(Table
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UseShipmentBeforeInvoice_IsProcMethRepeal_UseUseShipmentConfirmation_IsProduct(Tables, TempManager, NewTableName);
+		GetTables_UseShipmentBeforeInvoice_IsProcMethCancel_UseUseShipmentConfirmation_IsProduct(Tables, TempManager, NewTableName);
 	EndIf;
 	
 EndProcedure
 
-Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethRepeal_NotUseShipmentConfirmation_IsProduct(Tables, TempManager, TableName)
+Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethCancel_NotUseShipmentConfirmation_IsProduct(Tables, TempManager, TableName)
 	Return;
 EndProcedure
 
-Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethRepeal_UseUseShipmentConfirmation_IsProduct(Tables, TempManager, TableName)
+Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethCancel_UseUseShipmentConfirmation_IsProduct(Tables, TempManager, TableName)
 	Return;
 EndProcedure
 
@@ -1167,6 +1195,374 @@ Procedure GetTables_IsService(Tables, TempManager, TableName)
 	QueryResults = Query.ExecuteBatch();
 	PostingServer.MergeTables(Tables.OrderBalance                         , QueryResults[0].Unload());
 	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Receipt , QueryResults[1].Unload());
+EndProcedure
+
+#EndRegion
+
+#Region Table_tmp_8
+
+Procedure GetTables_NotUseShipmentBeforeInvoice_IsProcMethNoReserve_NotIsService(Tables, TempManager, TableName)
+	Query = New Query();
+	Query.TempTablesManager = TempManager;
+	Query.Text =
+		"SELECT * INTO tmp_1 FROM source AS tmp
+		|WHERE 
+		|	 NOT tmp.UseShipmentConfirmation";
+	NewTableName = StrReplace("tmp_1", "tmp", TableName);
+	Query.Text = StrReplace(Query.Text, "tmp_1", NewTableName);
+	Query.Text = StrReplace(Query.Text, "source", TableName);
+	Query.Execute();
+	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
+		GetTables_NotUseShipmentBeforeInvoice_IsProcMethNoReserve_NotUseShipmentConfirmation_IsProduct(Tables, TempManager, NewTableName);
+	EndIf;
+	
+	Query = New Query();
+	Query.TempTablesManager = TempManager;
+	Query.Text =
+		"SELECT * INTO tmp_2 FROM source AS tmp
+		|WHERE 
+		|	tmp.UseShipmentConfirmation";
+	NewTableName = StrReplace("tmp_2", "tmp", TableName);
+	Query.Text = StrReplace(Query.Text, "tmp_2", NewTableName);
+	Query.Text = StrReplace(Query.Text, "source", TableName);
+	Query.Execute();
+	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
+		GetTables_NotUseShipmentBeforeInvoice_IsProcMethNoReserve_UseUseShipmentConfirmation_IsProduct(Tables, TempManager, NewTableName);
+	EndIf;
+EndProcedure
+
+Procedure GetTables_NotUseShipmentBeforeInvoice_IsProcMethNoReserve_NotUseShipmentConfirmation_IsProduct(Tables, TempManager, TableName)
+	Query = New Query();
+	Query.TempTablesManager = TempManager;
+	
+	#Region QueryText
+	Query.Text = "
+		|//[0] OrderBalance
+		|SELECT
+		|	tmp.Store,
+		|   tmp.Order, 
+		|	tmp.ItemKey,
+		|	tmp.Quantity AS Quantity,
+		|	tmp.Period,
+		|	tmp.RowKey
+		|FROM
+		|	tmp AS tmp
+		|;
+		|
+		|//[1] OrderReservation
+		|SELECT
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.Period
+		|;	
+		|//[2] ShipmentConfirmationSchedule_Receipt
+		|SELECT
+		|	tmp.Company AS Company,
+		|	tmp.Order AS Order,
+		|	tmp.Store AS Store,
+		|	tmp.ItemKey AS ItemKey,
+		|	tmp.RowKey AS RowKey,
+		|	tmp.Quantity AS Quantity,
+		|	tmp.Period,
+		|	tmp.DeliveryDate
+		|FROM
+		|	tmp AS tmp
+		|WHERE
+		|	tmp.DeliveryDate <> DATETIME(1, 1, 1)";
+	
+	Query.Text = StrReplace(Query.Text, "tmp", TableName);
+	#EndRegion
+	
+	QueryResults = Query.ExecuteBatch();
+	
+	PostingServer.MergeTables(Tables.OrderBalance                         , QueryResults[0].Unload());
+	PostingServer.MergeTables(Tables.OrderReservation                     , QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Receipt , QueryResults[2].Unload());
+EndProcedure
+
+Procedure GetTables_NotUseShipmentBeforeInvoice_IsProcMethNoReserve_UseUseShipmentConfirmation_IsProduct(Tables, TempManager, TableName)
+	Query = New Query();
+	Query.TempTablesManager = TempManager;
+	
+	#Region QueryText
+	Query.Text = "
+		|//[0] OrderBalance
+		|SELECT
+		|	tmp.Store,
+		|   tmp.Order, 
+		|	tmp.ItemKey,
+		|	tmp.Quantity AS Quantity,
+		|	tmp.Period,
+		|	tmp.RowKey
+		|FROM
+		|	tmp AS tmp
+		|;
+		|
+		|//[1] OrderReservation
+		|SELECT
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.Period
+		|;	
+		|//[2] ShipmentConfirmationSchedule_Receipt
+		|SELECT
+		|	tmp.Company AS Company,
+		|	tmp.Order AS Order,
+		|	tmp.Store AS Store,
+		|	tmp.ItemKey AS ItemKey,
+		|	tmp.RowKey AS RowKey,
+		|	tmp.Quantity AS Quantity,
+		|	tmp.Period,
+		|	tmp.DeliveryDate
+		|FROM
+		|	tmp AS tmp
+		|WHERE
+		|	tmp.DeliveryDate <> DATETIME(1, 1, 1)";
+	
+	Query.Text = StrReplace(Query.Text, "tmp", TableName);
+	#EndRegion
+	
+	QueryResults = Query.ExecuteBatch();
+	
+	PostingServer.MergeTables(Tables.OrderBalance                         , QueryResults[0].Unload());
+	PostingServer.MergeTables(Tables.OrderReservation                     , QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Receipt , QueryResults[2].Unload());
+EndProcedure
+
+#EndRegion
+
+#Region Table_tmp_9
+
+Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethNoReserve_NotIsService(Tables, TempManager, TableName)
+	Query = New Query();
+	Query.TempTablesManager = TempManager;
+	Query.Text =
+		"SELECT * INTO tmp_1 FROM source AS tmp
+		|WHERE 
+		|	 NOT tmp.UseShipmentConfirmation";
+	NewTableName = StrReplace("tmp_1", "tmp", TableName);
+	Query.Text = StrReplace(Query.Text, "tmp_1", NewTableName);
+	Query.Text = StrReplace(Query.Text, "source", TableName);
+	Query.Execute();
+	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
+		GetTables_UseShipmentBeforeInvoice_IsProcMethNoReserve_NotUseShipmentConfirmation_IsProduct(Tables, TempManager, NewTableName);
+	EndIf;
+	
+	Query = New Query();
+	Query.TempTablesManager = TempManager;
+	Query.Text =
+		"SELECT * INTO tmp_2 FROM source AS tmp
+		|WHERE 
+		|	tmp.UseShipmentConfirmation";
+	NewTableName = StrReplace("tmp_2", "tmp", TableName);
+	Query.Text = StrReplace(Query.Text, "tmp_2", NewTableName);
+	Query.Text = StrReplace(Query.Text, "source", TableName);
+	Query.Execute();
+	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
+		GetTables_UseShipmentBeforeInvoice_IsProcMethNoReserve_UseUseShipmentConfirmation_IsProduct(Tables, TempManager, NewTableName);
+	EndIf;
+EndProcedure
+
+Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethNoReserve_NotUseShipmentConfirmation_IsProduct(Tables, TempManager, TableName)
+	Query = New Query();
+	Query.TempTablesManager = TempManager;
+	
+	#Region QueryText
+	Query.Text = "
+		|//[0] OrderBalance
+		|SELECT
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.Order,
+		|	tmp.Quantity AS Quantity,
+		|	tmp.Period,
+		|	tmp.RowKey
+		|FROM
+		|	tmp AS tmp
+		|;
+		|
+		|//[1] OrderReservation
+		|SELECT
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.Period
+		|;
+		|
+		|//[2] InventoryBalance
+		|SELECT
+		|	tmp.Company,
+		|	tmp.ItemKey,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		|	tmp.Company,
+		|	tmp.ItemKey,
+		|	tmp.Period
+		|;
+		|
+		|//[3] StockBalance
+		|SELECT
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.Period
+		|;
+		|
+		|//[4] ShipmentOrders
+		|SELECT
+		|	tmp.ItemKey,
+		|	tmp.Order AS Order,
+		|	tmp.Order AS ShipmentConfirmation,
+		|	tmp.Quantity AS Quantity,
+		|	tmp.Period,
+		|   tmp.RowKey
+		|FROM
+		|	tmp AS tmp
+		|;
+		|
+		|//[5] ShipmentConfirmationSchedule_Receipt
+		|SELECT
+		|	tmp.Company AS Company,
+		|	tmp.Order AS Order,
+		|	tmp.Store AS Store,
+		|	tmp.ItemKey AS ItemKey,
+		|	tmp.RowKey AS RowKey,
+		|	tmp.Quantity AS Quantity,
+		|	tmp.Period,
+		|	tmp.DeliveryDate
+		|FROM
+		|	tmp AS tmp
+		|WHERE
+		|	tmp.DeliveryDate <> DATETIME(1, 1, 1)
+		|;
+		|
+		|//[6] ShipmentConfirmationSchedule_Expense
+		|SELECT
+		|	tmp.Company AS Company,
+		|	tmp.Order AS Order,
+		|	tmp.Store AS Store,
+		|	tmp.ItemKey AS ItemKey,
+		|	tmp.RowKey AS RowKey,
+		|	tmp.Quantity AS Quantity,
+		|	tmp.Period,
+		|	tmp.Period AS DeliveryDate
+		|FROM
+		|	tmp AS tmp
+		|WHERE
+		|	tmp.DeliveryDate <> DATETIME(1, 1, 1)";
+	
+	Query.Text = StrReplace(Query.Text, "tmp", TableName);
+	#EndRegion
+	
+	QueryResults = Query.ExecuteBatch();
+	
+	PostingServer.MergeTables(Tables.OrderBalance                         , QueryResults[0].Unload());
+	PostingServer.MergeTables(Tables.OrderReservation                     , QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.InventoryBalance                     , QueryResults[2].Unload());
+	PostingServer.MergeTables(Tables.StockBalance                         , QueryResults[3].Unload());
+	PostingServer.MergeTables(Tables.ShipmentOrders                       , QueryResults[4].Unload());
+	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Receipt , QueryResults[5].Unload());
+	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Expense , QueryResults[6].Unload());
+EndProcedure
+
+Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethNoReserve_UseUseShipmentConfirmation_IsProduct(Tables, TempManager, TableName)
+	Query = New Query();
+	Query.TempTablesManager = TempManager;
+	
+	#Region QueryText
+	Query.Text = "
+		|// [0] OrderBalance
+		|SELECT
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.Order,
+		|	tmp.Quantity AS Quantity,
+		|	tmp.Period,
+		|	tmp.RowKey
+		|FROM
+		|	tmp AS tmp
+		|;
+		|
+		|//[1] OrderReservation
+		|SELECT
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.Period
+		|;
+		|
+		|
+		|//[2] GoodsInTransitOutgoing
+		|SELECT
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.Order AS ShipmentBasis,
+		|	tmp.Quantity AS Quantity,
+		|	tmp.Period, 
+		|   tmp.RowKey
+		|FROM
+		|	tmp AS tmp
+		|;
+		|
+		|//[3] ShipmentConfirmationSchedule_Receipt
+		|SELECT
+		|	tmp.Company AS Company,
+		|	tmp.Order AS Order,
+		|	tmp.Store AS Store,
+		|	tmp.ItemKey AS ItemKey,
+		|	tmp.RowKey AS RowKey,
+		|	tmp.Quantity AS Quantity,
+		|	tmp.Period,
+		|	tmp.DeliveryDate
+		|FROM
+		|	tmp AS tmp
+		|WHERE
+		|	tmp.DeliveryDate <> DATETIME(1, 1, 1)";
+	
+	Query.Text = StrReplace(Query.Text, "tmp", TableName);
+	#EndRegion
+	
+	QueryResults = Query.ExecuteBatch();
+	
+	PostingServer.MergeTables(Tables.OrderBalance                         , QueryResults[0].Unload());
+	PostingServer.MergeTables(Tables.OrderReservation                     , QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.GoodsInTransitOutgoing               , QueryResults[2].Unload());
+	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Receipt , QueryResults[3].Unload());
 EndProcedure
 
 #EndRegion

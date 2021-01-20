@@ -37,25 +37,32 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	ShipmentConfirmationItemList.ItemKey AS ItemKey,
 		|	ShipmentConfirmationItemList.ShipmentBasis AS ShipmentBasis,
 		|	ShipmentConfirmationItemList.ShipmentBasis REFS Document.SalesOrder
-		|	AND
-		|	NOT CAST(ShipmentConfirmationItemList.ShipmentBasis AS Document.SalesOrder).Date IS NULL AS UseSalesOrder,
+		|	AND NOT CAST(ShipmentConfirmationItemList.ShipmentBasis AS Document.SalesOrder).Date IS NULL AS UseSalesOrder,
 		|	CASE
 		|		WHEN ShipmentConfirmationItemList.ShipmentBasis REFS Document.SalesOrder
-		|		AND
-		|		NOT CAST(ShipmentConfirmationItemList.ShipmentBasis AS Document.SalesOrder).Date IS NULL
+		|		AND NOT CAST(ShipmentConfirmationItemList.ShipmentBasis AS Document.SalesOrder).Date IS NULL
 		|			THEN CAST(ShipmentConfirmationItemList.ShipmentBasis AS
 		|				Document.SalesOrder).ShipmentConfirmationsBeforeSalesInvoice
 		|		ELSE FALSE
 		|	END AS ShipmentBeforeInvoice,
-		|	CASE
-		|		WHEN ShipmentConfirmationItemList.ShipmentBasis.Date IS NULL
-		|			THEN FALSE
-		|		ELSE TRUE
-		|	END AS UseShipmentBasis,
+		|
+		|	
+		|	NOT ShipmentConfirmationItemList.ShipmentBasis.Ref IS NULL AS UseShipmentBasis,
+		|	
+		| 	NOT ShipmentConfirmationItemList.ShipmentBasis.Ref IS NULL
+		|	AND ShipmentConfirmationItemList.ShipmentBasis REFS Document.SalesOrder
+		|	AND ISNULL(SalesOrderItemList.ProcurementMethod, VALUE(Enum.ProcurementMethods.EmptyRef)) = VALUE(Enum.ProcurementMethods.Stock)
+		|	AS ProcMeth_Stock,
+		|
+		|	NOT ShipmentConfirmationItemList.ShipmentBasis.Ref IS NULL
+		|	AND ShipmentConfirmationItemList.ShipmentBasis REFS Document.SalesOrder
+		|	AND ISNULL(SalesOrderItemList.ProcurementMethod, VALUE(Enum.ProcurementMethods.EmptyRef)) = VALUE(Enum.ProcurementMethods.NoReserve)
+		|	AS ProcMeth_NoReserve,
+		|
 		|	ShipmentConfirmationItemList.Ref AS ShipmentConfirmation,
 		|	ShipmentConfirmationItemList.Quantity AS Quantity,
 		|	0 AS BasisQuantity,
-		|	ShipmentConfirmationItemList.Unit,
+		|	ShipmentConfirmationItemList.Unit AS Unit,
 		|	ShipmentConfirmationItemList.ItemKey.Item.Unit AS ItemUnit,
 		|	ShipmentConfirmationItemList.ItemKey.Unit AS ItemKeyUnit,
 		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
@@ -64,6 +71,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	ShipmentConfirmationItemList.Key AS RowKeyUUID
 		|FROM
 		|	Document.ShipmentConfirmation.ItemList AS ShipmentConfirmationItemList
+		|		LEFT JOIN Document.SalesOrder.ItemList AS SalesOrderItemList
+		|		ON ShipmentConfirmationItemList.Key = SalesOrderItemList.Key
+		|		AND CAST(ShipmentConfirmationItemList.ShipmentBasis AS Document.SalesOrder) = SalesOrderItemList.Ref
 		|WHERE
 		|	ShipmentConfirmationItemList.Ref = &Ref";
 	
@@ -91,7 +101,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	QueryTable.BasisUnit AS Unit,
 		|	QueryTable.Period AS Period,
 		|	QueryTable.RowKey AS RowKey,
-		|	QueryTable.UseShipmentBasis AS UseShipmentBasis
+		|	QueryTable.UseShipmentBasis AS UseShipmentBasis,
+		|	QueryTable.ProcMeth_Stock,
+		|	QueryTable.ProcMeth_NoReserve
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable
@@ -480,7 +492,22 @@ Procedure GetTables_UseSO_SCBeforeInvoice_IsProduct(Tables, TempManager, TableNa
 		|GROUP BY
 		|	tmp.ItemKey,
 		|	tmp.Period,
-		|	CAST(tmp.ShipmentBasis AS Document.InventoryTransfer).StoreTransit";
+		|	CAST(tmp.ShipmentBasis AS Document.InventoryTransfer).StoreTransit
+		|;
+		|//[2] - StockReservation
+		|SELECT
+		|	tmp.Store AS Store,
+		|	tmp.ItemKey AS ItemKey,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period
+		|FROM
+		|	tmp AS tmp
+		|WHERE
+		|	tmp.ProcMeth_NoReserve
+		|GROUP BY
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.Period";
 	
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
@@ -493,6 +520,7 @@ Procedure GetTables_UseSO_SCBeforeInvoice_IsProduct(Tables, TempManager, TableNa
 	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule , QueryResults[3].Unload());
 	PostingServer.MergeTables(Tables.InventoryBalance             , QueryResults[4].Unload());
 	PostingServer.MergeTables(Tables.StockBalance_Receipt         , QueryResults[5].Unload());
+	PostingServer.MergeTables(Tables.StockReservation             , QueryResults[6].Unload());
 EndProcedure
 
 #EndRegion

@@ -18,13 +18,13 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables = Parameters.DocumentDataTables;
 	
 	QueryArray = GetQueryTextsMasterTables();
-	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.SetRegisters(Tables, Ref, True);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
-	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters, True);
 	Return PostingDataTables;
 EndFunction
 
@@ -42,6 +42,7 @@ EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	DataMapWithLockFields = New Map();
+	PostingServer.GetLockDataSource(DataMapWithLockFields, Parameters, True);
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -79,6 +80,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
 	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());
+	QueryArray.Add(StockBalance());
+	QueryArray.Add(StockReservation());
 	Return QueryArray;	
 EndFunction	
 
@@ -185,6 +188,48 @@ Function R4052T_StockAdjustmentAsSurplus()
 		|FROM
 		|	ItemList AS QueryTable
 		|WHERE True";
+
+EndFunction
+
+Function StockBalance()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	QueryTable.ItemKey AS ItemKey,
+		|	*
+		|INTO StockBalance
+		|FROM
+		|	ItemList AS QueryTable
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	QueryTable.ItemKeyWriteOff AS ItemKey,
+		|	*
+		|FROM
+		|	ItemList AS QueryTable";
+
+EndFunction
+
+Function StockReservation()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	QueryTable.ItemKey AS ItemKey,
+		|	*
+		|INTO StockReservation
+		|FROM
+		|	ItemList AS QueryTable
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	QueryTable.ItemKeyWriteOff AS ItemKey,
+		|	*
+		|FROM
+		|	ItemList AS QueryTable";
 
 EndFunction
 

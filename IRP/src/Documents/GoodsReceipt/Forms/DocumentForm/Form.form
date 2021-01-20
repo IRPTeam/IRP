@@ -2942,6 +2942,9 @@
     </action>
     <modifiesStoredData>true</modifiesStoredData>
     <currentRowUse>Auto</currentRowUse>
+    <associatedTableElementId xsi:type="core:StringValue">
+      <value>ItemList</value>
+    </associatedTableElementId>
   </formCommands>
   <formCommands>
     <name>ShowRowKey</name>

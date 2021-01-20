@@ -1430,10 +1430,10 @@ Procedure FillPostingTables(Tables, Ref, QueryArray, Parameters) Export
 	EndDo;
 EndProcedure
 
-Procedure SetPostingDataTables(PostingDataTables, Parameters) Export
+Procedure SetPostingDataTables(PostingDataTables, Parameters, UseOldRegisters = False) Export
 
 	For Each Table In Parameters.DocumentDataTables Do
-		If NotUseRegister(Table.Key) Then
+		If Not UseOldRegisters AND NotUseRegister(Table.Key) Then
 			Continue;
 		EndIf;
 		Settings = New Structure("RegisterName", Table.Key);
@@ -1444,10 +1444,10 @@ Procedure SetPostingDataTables(PostingDataTables, Parameters) Export
 
 EndProcedure
 
-Procedure GetLockDataSource(DataMapWithLockFields, DocumentDataTables) Export
+Procedure GetLockDataSource(DataMapWithLockFields, DocumentDataTables, UseOldRegisters = False) Export
 
 	For Each Register In DocumentDataTables Do
-		If NotUseRegister(Register.Key) Then
+		If Not UseOldRegisters AND NotUseRegister(Register.Key) Then
 			Continue;
 		EndIf;
 		LockData = AccumulationRegisters[Register.Key].GetLockFields(DocumentDataTables[Register.Key]);
@@ -1462,10 +1462,10 @@ Procedure SetLockDataSource(DataMap, RegisterManager, Table) Export
 	DataMap.Insert(LockFields.RegisterName, LockFields.LockInfo);
 EndProcedure	
 
-Procedure SetRegisters(Tables, DocumentRef) Export
+Procedure SetRegisters(Tables, DocumentRef, UseOldRegisters = False) Export
 
 	For Each Register In DocumentRef.Metadata().RegisterRecords Do
-		If NotUseRegister(Register.Name) Then
+		If Not UseOldRegisters AND NotUseRegister(Register.Name) Then
 			Continue;
 		EndIf;
 		Tables.Insert(Register.Name, PostingServer.CreateTable(Register));

@@ -30,6 +30,12 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		SearchByBarcode(Parameter);
 	EndIf;
 EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	DocItemStockAdjustmentClient.OnOpen(Object, ThisObject, Cancel);
+EndProcedure
+
 #EndRegion
 
 #Region FormHeaderItemsEventHandlers
@@ -52,6 +58,18 @@ Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
 EndProcedure
 
 #EndRegion
+
+
+&AtClient
+Procedure StoreOnChange(Item)
+	DocItemStockAdjustmentClient.StoreOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure DateOnChange(Item)
+	DocItemStockAdjustmentClient.DateOnChange(Object, ThisObject, Item);
+EndProcedure
+
 
 #EndRegion
 

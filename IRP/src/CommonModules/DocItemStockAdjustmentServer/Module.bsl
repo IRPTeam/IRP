@@ -1,6 +1,7 @@
 #Region FormEvents
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
+	SetGroupItemsList(Object, Form);
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 EndProcedure
 

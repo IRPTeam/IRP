@@ -7,7 +7,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("TransferOrderBalance"         , PostingServer.CreateTable(AccReg.TransferOrderBalance));
 	Tables.Insert("StockReservation"             , PostingServer.CreateTable(AccReg.StockReservation));
 	Tables.Insert("OrderBalance"                 , PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("R4035_IncommingStocks"        , PostingServer.CreateTable(AccReg.R4035_IncommingStocks));
+	Tables.Insert("R4035_IncomingStocks"        , PostingServer.CreateTable(AccReg.R4035_IncomingStocks));
 	Tables.Insert("R4036_IncommingStocksRequested" , PostingServer.CreateTable(AccReg.R4036_IncommingStocksRequested));
 	
 	Tables.Insert("StockReservation_Exists" , PostingServer.CreateTable(AccReg.StockReservation));
@@ -135,7 +135,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	IncomingStocks.Order,
 		|	tmp.Quantity AS Quantity
 		|FROM
-		|	AccumulationRegister.R4035_IncommingStocks.Balance(&Period, (Store, ItemKey, Order) IN
+		|	AccumulationRegister.R4035_IncomingStocks.Balance(&Period, (Store, ItemKey, Order) IN
 		|		(SELECT
 		|			tmp.StoreSender,
 		|			tmp.ItemKey,
@@ -158,7 +158,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Order AS Requester,
 		|	tmp.Quantity AS Quantity
 		|FROM
-		|	AccumulationRegister.R4035_IncommingStocks.Balance(&Period, (Store, ItemKey, Order) IN
+		|	AccumulationRegister.R4035_IncomingStocks.Balance(&Period, (Store, ItemKey, Order) IN
 		|		(SELECT
 		|			tmp.StoreSender,
 		|			tmp.ItemKey,
@@ -180,7 +180,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.TransferOrderBalance         = QueryResults[1].Unload();
 	Tables.StockReservation             = QueryResults[2].Unload();
 	Tables.OrderBalance                 = QueryResults[3].Unload();
-	Tables.R4035_IncommingStocks        = QueryResults[4].Unload();
+	Tables.R4035_IncomingStocks        = QueryResults[4].Unload();
 	Tables.R4036_IncommingStocksRequested = QueryResults[5].Unload();
 	
 	Parameters.IsReposting = False;
@@ -238,11 +238,11 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			Parameters.DocumentDataTables.OrderBalance,
 			Parameters.IsReposting));
 	
-	// R4035_IncommingStocks
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4035_IncommingStocks,
+	// R4035_IncomingStocks
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4035_IncomingStocks,
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.R4035_IncommingStocks,
+			Parameters.DocumentDataTables.R4035_IncomingStocks,
 			True));
 	
 	// R4036_IncommingStocksRequested

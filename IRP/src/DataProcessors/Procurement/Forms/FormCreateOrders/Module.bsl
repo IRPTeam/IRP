@@ -410,13 +410,13 @@ Procedure Update_TableOfBalance()
 	|UNION ALL
 	|
 	|SELECT
-	|	R4035_IncommingStocksBalance.Store,
-	|	R4035_IncommingStocksBalance.Order,
+	|	R4035_IncomingStocksBalance.Store,
+	|	R4035_IncomingStocksBalance.Order,
 	|	0,
-	|	R4035_IncommingStocksBalance.QuantityBalance
+	|	R4035_IncomingStocksBalance.QuantityBalance
 	|FROM
-	|	AccumulationRegister.R4035_IncommingStocks.Balance(ENDOFPERIOD(&DateOfRelevance, day), ItemKey = &ItemKey
-	|	AND Store <> &Store) AS R4035_IncommingStocksBalance";
+	|	AccumulationRegister.R4035_IncomingStocks.Balance(ENDOFPERIOD(&DateOfRelevance, day), ItemKey = &ItemKey
+	|	AND Store <> &Store) AS R4035_IncomingStocksBalance";
 	Query.SetParameter("Store", ThisObject.Store);
 	Query.SetParameter("DateOfRelevance", ThisObject.DateOfRelevance);
 	Query.SetParameter("ItemKey", ThisObject.ItemKey);

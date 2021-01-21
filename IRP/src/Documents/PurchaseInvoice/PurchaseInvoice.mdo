@@ -84,7 +84,7 @@
   <registerRecords>AccumulationRegister.GoodsInTransitIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</registerRecords>
   <registerRecords>AccumulationRegister.AccountsStatement</registerRecords>
-  <registerRecords>AccumulationRegister.R4035_IncommingStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R4035_IncomingStocks</registerRecords>
   <registerRecords>AccumulationRegister.StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
   <registerRecords>AccumulationRegister.ReconciliationStatement</registerRecords>

@@ -21,7 +21,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("OrderProcurement"                      , PostingServer.CreateTable(AccReg.OrderProcurement));
 	Tables.Insert("ReconciliationStatement"               , PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("TaxesTurnovers"                        , PostingServer.CreateTable(AccReg.TaxesTurnovers));
-	Tables.Insert("R4035_IncommingStocks"                 , PostingServer.CreateTable(AccReg.R4035_IncommingStocks));
+	Tables.Insert("R4035_IncomingStocks"                 , PostingServer.CreateTable(AccReg.R4035_IncomingStocks));
 	Tables.Insert("R4036_IncommingStocksRequested"        , PostingServer.CreateTable(AccReg.R4036_IncommingStocksRequested));
 	
 	Tables.Insert("OrderBalance_Exists"           , PostingServer.CreateTable(AccReg.OrderBalance));
@@ -868,7 +868,7 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 		|FROM
 		|	tmp AS tmp
 		|;
-		|//[5] R4035_IncommingStocks
+		|//[5] R4035_IncomingStocks
 		|SELECT
 		|	tmp.Period,
 		|	IncomingStocks.Store AS Store,
@@ -877,7 +877,7 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 		|	CASE WHEN tmp.Quantity < IncomingStocks.QuantityBalance THEN
 		|	tmp.Quantity ELSE IncomingStocks.QuantityBalance END AS Quantity
 		|FROM
-		|	AccumulationRegister.R4035_IncommingStocks.Balance(&Period,(Store, ItemKey, Order) IN
+		|	AccumulationRegister.R4035_IncomingStocks.Balance(&Period,(Store, ItemKey, Order) IN
 		|		(SELECT
 		|			tmp.Store,
 		|			tmp.ItemKey,
@@ -946,7 +946,7 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 	PostingServer.MergeTables(Tables.StockReservation_Receipt       , QueryResults[2].Unload());
 	PostingServer.MergeTables(Tables.GoodsReceiptSchedule_Expense   , QueryResults[3].Unload());
 	PostingServer.MergeTables(Tables.OrderBalance                   , QueryResults[4].Unload());
-	PostingServer.MergeTables(Tables.R4035_IncommingStocks          , QueryResults[5].Unload());
+	PostingServer.MergeTables(Tables.R4035_IncomingStocks          , QueryResults[5].Unload());
 	PostingServer.MergeTables(Tables.R4036_IncommingStocksRequested , QueryResults[6].Unload());
 	PostingServer.MergeTables(Tables.StockReservation_Expense       , QueryResults[7].Unload());
 	
@@ -2823,11 +2823,11 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.TaxesTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.TaxesTurnovers));
 	
-	// R4035_IncommingStocks
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4035_IncommingStocks,
+	// R4035_IncomingStocks
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4035_IncomingStocks,
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.R4035_IncommingStocks));
+			Parameters.DocumentDataTables.R4035_IncomingStocks));
 	
 	// R4036_IncomingStockRequested
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4036_IncommingStocksRequested,

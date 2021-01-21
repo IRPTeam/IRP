@@ -49,10 +49,19 @@ Procedure PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing)
 	
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Vendor"		, True, DataCompositionComparisonType.Equal));
 	OpenSettings.FormParameters = New Structure();
-	OpenSettings.FormParameters.Insert("Filter", New Structure("Vendor" , True));
-	OpenSettings.FillingData = New Structure("Vendor", True);
+	
+	FilterParnerType = "";
+	If Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase") Then
+		FilterParnerType = "Vendor";
+	ElsIf Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer") Then
+		FilterParnerType = "Customer";
+	EndIf;
+	If Not IsBlankString(FilterParnerType) Then
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(FilterParnerType		, True, DataCompositionComparisonType.Equal));
+		OpenSettings.FormParameters.Insert("Filter", New Structure(FilterParnerType , True));
+		OpenSettings.FillingData = New Structure(FilterParnerType, True);
+	EndIf;
 	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 

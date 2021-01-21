@@ -458,6 +458,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.Store</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>StoreOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>StoreExtendedTooltip</name>
             <id>130</id>
@@ -531,6 +535,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
+      <title>
+        <key>en</key>
+        <value>Group title items</value>
+      </title>
       <extendedTooltip>
         <name>GroupTitleItemsExtendedTooltip</name>
         <id>99</id>
@@ -1293,6 +1301,10 @@
         <dataPath xsi:type="form:DataPath">
           <segments>Object.Date</segments>
         </dataPath>
+        <handlers>
+          <event>OnChange</event>
+          <name>DateOnChange</name>
+        </handlers>
         <extendedTooltip>
           <name>DateExtendedTooltip</name>
           <id>6</id>
@@ -1562,6 +1574,10 @@
   <handlers>
     <event>NotificationProcessing</event>
     <name>NotificationProcessing</name>
+  </handlers>
+  <handlers>
+    <event>OnOpen</event>
+    <name>OnOpen</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>

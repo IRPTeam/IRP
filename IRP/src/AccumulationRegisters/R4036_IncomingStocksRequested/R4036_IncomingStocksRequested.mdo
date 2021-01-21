@@ -8,7 +8,7 @@
     <recordKeyType typeId="e3b64a9a-1172-41c7-a0b8-ad639fe09666" valueTypeId="da3f1980-3b7e-4fad-b7a5-938107c8a32a"/>
     <recordType typeId="5d6ec0a6-4a7e-4a86-a07b-a4e758de9f2b" valueTypeId="710daa42-2d3b-4740-88de-c3d6315d0341"/>
   </producedTypes>
-  <name>R4036_IncommingStocksRequested</name>
+  <name>R4036_IncomingStocksRequested</name>
   <synonym>
     <key>en</key>
     <value>R4036 Incoming stock requested</value>

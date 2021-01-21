@@ -22,7 +22,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("ReconciliationStatement"               , PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("TaxesTurnovers"                        , PostingServer.CreateTable(AccReg.TaxesTurnovers));
 	Tables.Insert("R4035_IncomingStocks"                 , PostingServer.CreateTable(AccReg.R4035_IncomingStocks));
-	Tables.Insert("R4036_IncommingStocksRequested"        , PostingServer.CreateTable(AccReg.R4036_IncommingStocksRequested));
+	Tables.Insert("R4036_IncomingStocksRequested"        , PostingServer.CreateTable(AccReg.R4036_IncomingStocksRequested));
 	
 	Tables.Insert("OrderBalance_Exists"           , PostingServer.CreateTable(AccReg.OrderBalance));
 	Tables.Insert("GoodsInTransitIncoming_Exists" , PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
@@ -890,7 +890,7 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 		|		AND IncomingStocks.Order = tmp.Order
 		|		AND tmp.UsePurchaseOrder
 		|;
-		|//[6] R4036_IncommingStocksRequested
+		|//[6] R4036_IncomingStocksRequested
 		|SELECT
 		|	tmp.Period,
 		|	IncomingStocksRequested.IncommingStore,
@@ -901,7 +901,7 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 		|	CASE WHEN tmp.Quantity < IncomingStocksRequested.QuantityBalance THEN tmp.Quantity
 		|	ELSE IncomingStocksRequested.QuantityBalance END AS Quantity
 		|FROM
-		|	AccumulationRegister.R4036_IncommingStocksRequested.Balance(&Period,(IncommingStore, ItemKey, Order) IN
+		|	AccumulationRegister.R4036_IncomingStocksRequested.Balance(&Period,(IncommingStore, ItemKey, Order) IN
 		|		(SELECT
 		|			tmp.Store,
 		|			tmp.ItemKey,
@@ -922,7 +922,7 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 		|	CASE WHEN tmp.Quantity < IncomingStocksRequested.QuantityBalance THEN tmp.Quantity
 		|	ELSE IncomingStocksRequested.QuantityBalance END AS Quantity
 		|FROM
-		|	AccumulationRegister.R4036_IncommingStocksRequested.Balance(&Period, (IncommingStore, ItemKey, Order) IN
+		|	AccumulationRegister.R4036_IncomingStocksRequested.Balance(&Period, (IncommingStore, ItemKey, Order) IN
 		|		(SELECT
 		|			tmp.Store,
 		|			tmp.ItemKey,
@@ -947,7 +947,7 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 	PostingServer.MergeTables(Tables.GoodsReceiptSchedule_Expense   , QueryResults[3].Unload());
 	PostingServer.MergeTables(Tables.OrderBalance                   , QueryResults[4].Unload());
 	PostingServer.MergeTables(Tables.R4035_IncomingStocks          , QueryResults[5].Unload());
-	PostingServer.MergeTables(Tables.R4036_IncommingStocksRequested , QueryResults[6].Unload());
+	PostingServer.MergeTables(Tables.R4036_IncomingStocksRequested , QueryResults[6].Unload());
 	PostingServer.MergeTables(Tables.StockReservation_Expense       , QueryResults[7].Unload());
 	
 EndProcedure
@@ -2830,10 +2830,10 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			Parameters.DocumentDataTables.R4035_IncomingStocks));
 	
 	// R4036_IncomingStockRequested
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4036_IncommingStocksRequested,
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4036_IncomingStocksRequested,
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.R4036_IncommingStocksRequested));
+			Parameters.DocumentDataTables.R4036_IncomingStocksRequested));
 
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);

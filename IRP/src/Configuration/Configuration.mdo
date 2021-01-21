@@ -727,7 +727,7 @@
   <accumulationRegisters>AccumulationRegister.R4033B_GoodsReceiptSchedule</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4034B_GoodsShipmentSchedule</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4035_IncomingStocks</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R4036_IncommingStocksRequested</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4036_IncomingStocksRequested</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4050B_StockInventory</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4051T_StockAdjustmentAsWriteOff</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4052T_StockAdjustmentAsSurplus</accumulationRegisters>

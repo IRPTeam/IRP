@@ -11,7 +11,7 @@
   <name>R4035_IncomingStocks</name>
   <synonym>
     <key>en</key>
-    <value>R4035 Incomming stocks</value>
+    <value>R4035 Incoming stocks</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>

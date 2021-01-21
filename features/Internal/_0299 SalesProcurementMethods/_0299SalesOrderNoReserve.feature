@@ -691,7 +691,7 @@ Scenario: _029905 create Sales ivoice for SO (SC first) without reserve and chec
 			And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
 			And I go to line in "ShipmentConfirmationsTree" table
 				| 'Order'                              | 'Use' |
-				| '$$DateShipmentConfirmation029903$$' | 'No'  |
+				| '$$ShipmentConfirmation029903$$' | 'No'  |
 			And I change "Use" checkbox in "ShipmentConfirmationsTree" table
 			And I finish line editing in "ShipmentConfirmationsTree" table
 			And I click "Ok" button

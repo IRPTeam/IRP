@@ -667,7 +667,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>TableOfBalanceBalanceIncomming</name>
+          <name>TableOfBalanceBalanceIncoming</name>
           <id>183</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -675,10 +675,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>TableOfBalance.BalanceIncomming</segments>
+            <segments>TableOfBalance.BalanceIncoming</segments>
           </dataPath>
           <extendedTooltip>
-            <name>TableOfBalanceBalanceIncommingExtendedTooltip</name>
+            <name>TableOfBalanceBalanceIncomingExtendedTooltip</name>
             <id>185</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -693,7 +693,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>TableOfBalanceBalanceIncommingContextMenu</name>
+            <name>TableOfBalanceBalanceIncomingContextMenu</name>
             <id>184</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -830,7 +830,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>TableOfBalanceQuantityIncomming</name>
+          <name>TableOfBalanceQuantityIncoming</name>
           <id>186</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -838,14 +838,14 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>TableOfBalance.QuantityIncomming</segments>
+            <segments>TableOfBalance.QuantityIncoming</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
-            <name>TableOfBalanceQuantityIncommingOnChange</name>
+            <name>TableOfBalanceQuantityIncomingOnChange</name>
           </handlers>
           <extendedTooltip>
-            <name>TableOfBalanceQuantityIncommingExtendedTooltip</name>
+            <name>TableOfBalanceQuantityIncomingExtendedTooltip</name>
             <id>188</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -860,7 +860,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>TableOfBalanceQuantityIncommingContextMenu</name>
+            <name>TableOfBalanceQuantityIncomingContextMenu</name>
             <id>187</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2808,10 +2808,10 @@
       </edit>
     </columns>
     <columns>
-      <name>BalanceIncomming</name>
+      <name>BalanceIncoming</name>
       <title>
         <key>en</key>
-        <value>Incomming</value>
+        <value>Incoming</value>
       </title>
       <id>35</id>
       <valueType>
@@ -2825,10 +2825,10 @@
       </edit>
     </columns>
     <columns>
-      <name>QuantityIncomming</name>
+      <name>QuantityIncoming</name>
       <title>
         <key>en</key>
-        <value>Incomming</value>
+        <value>Incoming</value>
       </title>
       <id>36</id>
       <valueType>

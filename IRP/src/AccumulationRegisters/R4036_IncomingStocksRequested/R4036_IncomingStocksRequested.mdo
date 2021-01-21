@@ -30,10 +30,10 @@
     <fullTextSearch>Use</fullTextSearch>
   </resources>
   <dimensions uuid="f757a851-79ce-4d05-be44-b57a67b7b872">
-    <name>IncommingStore</name>
+    <name>IncomingStore</name>
     <synonym>
       <key>en</key>
-      <value>Incomming store</value>
+      <value>Incoming store</value>
     </synonym>
     <type>
       <types>CatalogRef.Stores</types>

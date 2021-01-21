@@ -893,7 +893,7 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 		|//[6] R4036_IncomingStocksRequested
 		|SELECT
 		|	tmp.Period,
-		|	IncomingStocksRequested.IncommingStore,
+		|	IncomingStocksRequested.IncomingStore,
 		|	IncomingStocksRequested.RequesterStore,
 		|	IncomingStocksRequested.ItemKey,
 		|	IncomingStocksRequested.Order,
@@ -901,7 +901,7 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 		|	CASE WHEN tmp.Quantity < IncomingStocksRequested.QuantityBalance THEN tmp.Quantity
 		|	ELSE IncomingStocksRequested.QuantityBalance END AS Quantity
 		|FROM
-		|	AccumulationRegister.R4036_IncomingStocksRequested.Balance(&Period,(IncommingStore, ItemKey, Order) IN
+		|	AccumulationRegister.R4036_IncomingStocksRequested.Balance(&Period,(IncomingStore, ItemKey, Order) IN
 		|		(SELECT
 		|			tmp.Store,
 		|			tmp.ItemKey,
@@ -909,7 +909,7 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 		|		FROM
 		|			tmp AS tmp)) AS IncomingStocksRequested
 		|		INNER JOIN tmp AS tmp
-		|		ON IncomingStocksRequested.IncommingStore = tmp.Store
+		|		ON IncomingStocksRequested.IncomingStore = tmp.Store
 		|		AND IncomingStocksRequested.ItemKey = tmp.ItemKey
 		|		AND IncomingStocksRequested.Order = tmp.Order
 		|		AND tmp.UsePurchaseOrder
@@ -917,12 +917,12 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 		|//[7] StockReservation_Expense
 		|SELECT
 		|	tmp.Period,
-		|	IncomingStocksRequested.IncommingStore AS Store,
+		|	IncomingStocksRequested.IncomingStore AS Store,
 		|	IncomingStocksRequested.ItemKey,
 		|	CASE WHEN tmp.Quantity < IncomingStocksRequested.QuantityBalance THEN tmp.Quantity
 		|	ELSE IncomingStocksRequested.QuantityBalance END AS Quantity
 		|FROM
-		|	AccumulationRegister.R4036_IncomingStocksRequested.Balance(&Period, (IncommingStore, ItemKey, Order) IN
+		|	AccumulationRegister.R4036_IncomingStocksRequested.Balance(&Period, (IncomingStore, ItemKey, Order) IN
 		|		(SELECT
 		|			tmp.Store,
 		|			tmp.ItemKey,
@@ -930,7 +930,7 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 		|		FROM
 		|			tmp AS tmp)) AS IncomingStocksRequested
 		|		INNER JOIN tmp AS tmp
-		|		ON IncomingStocksRequested.IncommingStore = tmp.Store
+		|		ON IncomingStocksRequested.IncomingStore = tmp.Store
 		|		AND IncomingStocksRequested.ItemKey = tmp.ItemKey
 		|		AND IncomingStocksRequested.Order = tmp.Order
 		|		AND tmp.UsePurchaseOrder";

@@ -151,7 +151,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|//[5]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Period,
-		|	IncomingStocks.Store AS IncommingStore,
+		|	IncomingStocks.Store AS IncomingStore,
 		|	tmp.StoreReceiver AS RequesterStore,
 		|	IncomingStocks.ItemKey,
 		|	IncomingStocks.Order,

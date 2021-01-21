@@ -500,7 +500,7 @@ Scenario: _015406405 check item and item key input by search in line in a docume
 		And in the table "ItemList" I click "Add" button
 		And I select "boo" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key (surplus)" field in "ItemList" table
-		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+		And I select "36" from "Item key (surplus)" drop-down list by string in "ItemList" table
 	* Check entered values
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key (surplus)'  |

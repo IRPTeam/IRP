@@ -602,7 +602,7 @@ Scenario: _029903 create Sales order without reserve and check its movements (SO
 			| 'Register  "Order reservation"' | '' | '' | '' | '' | '' |
 		And I close all client application windows		
 
-	Scenario: _029904 create Shipment confirmation for SO without reserve and check its movements (SO-SC-SI)
+Scenario: _029904 create Shipment confirmation for SO without reserve and check its movements (SO-SC-SI)
 		And I close all client application windows
 		* Create SC 
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -681,7 +681,7 @@ Scenario: _029903 create Sales order without reserve and check its movements (SO
 		And I close all client application windows
 	
 
-	Scenario: _029905 create Sales ivoice for SO (SC first) without reserve and check its movements (SO-SC-SI)
+Scenario: _029905 create Sales ivoice for SO (SC first) without reserve and check its movements (SO-SC-SI)
 		And I close all client application windows
 		* Create SI 
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"

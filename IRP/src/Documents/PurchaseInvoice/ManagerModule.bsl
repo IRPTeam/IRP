@@ -355,14 +355,14 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	If Not PostingServer.QueryTableIsExists("IncomingStocks", Parameters) Then
 		Query = New Query();
 		Query.TempTablesManager = Parameters.TempTablesManager;
-		Query.Text = "SELECT UNDEFINED INTO IncomingStocks;";
+		Query.Text = "SELECT UNDEFINED INTO IncomingStocks WHERE FALSE;";
 		Query.Execute();
 	EndIf;
 	
 	If Not PostingServer.QueryTableIsExists("IncomingStocksRequested", Parameters) Then
 		Query = New Query();
 		Query.TempTablesManager = Parameters.TempTablesManager;
-		Query.Text = "SELECT UNDEFINED INTO IncomingStocksRequested;";
+		Query.Text = "SELECT UNDEFINED INTO IncomingStocksRequested WHERE FALSE;";
 		Query.Execute();
 	EndIf;
 	

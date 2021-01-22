@@ -692,10 +692,10 @@
     <mdObject>AccumulationRegister.R4033B_GoodsReceiptSchedule</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.R4035_IncomingStocks</mdObject>
+    <mdObject>AccumulationRegister.R4035B_IncomingStocks</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.R4036_IncomingStocksRequested</mdObject>
+    <mdObject>AccumulationRegister.R4036B_IncomingStocksRequested</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R4050B_StockInventory</mdObject>

@@ -1438,6 +1438,10 @@ Procedure ExequteQuery(Ref, QueryArray, Parameters) Export
 	Query.Execute();
 EndProcedure
 
+Function QueryTableIsExists(TableName, Parameters) Export
+	Return Parameters.TempTablesManager.Tables.Find(TableName) <> Undefined;
+EndFunction
+
 Function GetQueryTableByName(TableName, Parameters) Export
 	VTSearch = Parameters.TempTablesManager.Tables.Find(TableName);
 	If VTSearch = Undefined Then
@@ -1449,7 +1453,10 @@ EndFunction
 Procedure FillPostingTables(Tables, Ref, QueryArray, Parameters) Export
 	ExequteQuery(Ref, QueryArray, Parameters);
 	For Each VT In Tables Do
-		MergeTables(Tables[VT.Key], GetQueryTableByName(VT.Key, Parameters), "RecordType");
+		QueryTable = GetQueryTableByName(VT.Key, Parameters);
+		If QueryTable.Count() Then
+			MergeTables(Tables[VT.Key], QueryTable, "RecordType");
+		EndIf;
 	EndDo;
 EndProcedure
 
@@ -1486,7 +1493,6 @@ Procedure SetLockDataSource(DataMap, RegisterManager, Table) Export
 EndProcedure	
 
 Procedure SetRegisters(Tables, DocumentRef, UseOldRegisters = False) Export
-
 	For Each Register In DocumentRef.Metadata().RegisterRecords Do
 		If Not UseOldRegisters AND NotUseRegister(Register.Name) Then
 			Continue;

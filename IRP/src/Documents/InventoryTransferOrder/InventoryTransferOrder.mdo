@@ -57,8 +57,8 @@
   <registerRecords>AccumulationRegister.TransferOrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R4035_IncomingStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R4036_IncomingStocksRequested</registerRecords>
+  <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

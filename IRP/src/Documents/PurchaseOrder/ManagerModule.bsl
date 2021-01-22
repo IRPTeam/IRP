@@ -306,7 +306,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.GoodsReceiptSchedule_Receipt = QueryResults[9].Unload();
 	Tables.GoodsReceiptSchedule_Expense = QueryResults[10].Unload();
 	Tables.OrderProcurement             = QueryResults[11].Unload();
-	Tables.R4035_IncomingStocks        = QueryResults[12].Unload();
+	Tables.R4035B_IncomingStocks        = QueryResults[12].Unload();
 
 #EndRegion
 	Parameters.IsReposting = False;
@@ -343,7 +343,7 @@ Procedure FillTables(Ref, AddInfo, Tables)
 	Tables.Insert("StockReservation_Exists" 	  , PostingServer.CreateTable(AccReg.StockReservation));
 	Tables.Insert("StockBalance_Exists"           , PostingServer.CreateTable(AccReg.StockBalance));
 
-	Tables.Insert("R4035_IncomingStocks"         , PostingServer.CreateTable(AccReg.R4035_IncomingStocks));
+	Tables.Insert("R4035B_IncomingStocks"         , PostingServer.CreateTable(AccReg.R4035B_IncomingStocks));
 	
 	Tables.OrderBalance_Exists_Receipt =
 	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
@@ -524,11 +524,11 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			Parameters.DocumentDataTables.OrderProcurement,
 			True));
 			
-	// R4035_IncomingStocks
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4035_IncomingStocks,
+	// R4035B_IncomingStocks
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4035B_IncomingStocks,
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.R4035_IncomingStocks,
+			Parameters.DocumentDataTables.R4035B_IncomingStocks,
 			True));
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);

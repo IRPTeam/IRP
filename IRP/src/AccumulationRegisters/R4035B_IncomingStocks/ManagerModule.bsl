@@ -1,6 +1,6 @@
 Function GetLockFields(Data) Export
 	Result = New Structure();
-	Result.Insert("RegisterName", "AccumulationRegister.R4035_IncomingStocks");
+	Result.Insert("RegisterName", "AccumulationRegister.R4035B_IncomingStocks");
 	Result.Insert("LockInfo", New Structure("Data, Fields", 
 	Data, PostingServer.GetLockFieldsMap(GetLockFieldNames())));
 	Return Result;
@@ -11,7 +11,7 @@ Function GetLockFieldNames() Export
 EndFunction
 
 Function GetExistsRecords(Ref, RecordType = Undefined, AddInfo = Undefined) Export
-	Return PostingServer.GetExistsRecordsFromAccRegister(Ref, "AccumulationRegister.R4035_IncomingStocks", RecordType, AddInfo);
+	Return PostingServer.GetExistsRecordsFromAccRegister(Ref, "AccumulationRegister.R4035B_IncomingStocks", RecordType, AddInfo);
 EndFunction
 
 Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
@@ -19,7 +19,7 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 // Doc.PurchaseInvoice - receipt
 // Doc.InventoryTransferOrder - expense
 	
-	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_R4035_IncomingStocks") Then
+	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_R4035B_IncomingStocks") Then
 		Return True;
 	EndIf;
 	
@@ -39,7 +39,7 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	|	&Unposting AS Unposting
 	|FROM
 	|	ItemList AS ItemList
-	|		INNER JOIN AccumulationRegister.R4035_IncomingStocks.Balance(, (Store, ItemKey, Order) IN
+	|		INNER JOIN AccumulationRegister.R4035B_IncomingStocks.Balance(, (Store, ItemKey, Order) IN
 	|			(SELECT
 	|				ItemList.Store,
 	|				ItemList.ItemKey,

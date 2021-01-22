@@ -7,17 +7,17 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("TransferOrderBalance"         , PostingServer.CreateTable(AccReg.TransferOrderBalance));
 	Tables.Insert("StockReservation"             , PostingServer.CreateTable(AccReg.StockReservation));
 	Tables.Insert("OrderBalance"                 , PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("R4035_IncomingStocks"        , PostingServer.CreateTable(AccReg.R4035_IncomingStocks));
-	Tables.Insert("R4036_IncomingStocksRequested" , PostingServer.CreateTable(AccReg.R4036_IncomingStocksRequested));
+	Tables.Insert("R4035B_IncomingStocks"        , PostingServer.CreateTable(AccReg.R4035B_IncomingStocks));
+	Tables.Insert("R4036B_IncomingStocksRequested" , PostingServer.CreateTable(AccReg.R4036B_IncomingStocksRequested));
 	
 	Tables.Insert("StockReservation_Exists" , PostingServer.CreateTable(AccReg.StockReservation));
-	Tables.Insert("R4035_IncomingStocks_Exists" , PostingServer.CreateTable(AccReg.R4035_IncomingStocks));
+	Tables.Insert("R4035B_IncomingStocks_Exists" , PostingServer.CreateTable(AccReg.R4035B_IncomingStocks));
 	
 	Tables.StockReservation_Exists = 
 	AccumulationRegisters.StockReservation.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
 	
-	Tables.R4035_IncomingStocks_Exists = 
-	AccumulationRegisters.R4035_IncomingStocks.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
+	Tables.R4035B_IncomingStocks_Exists = 
+	AccumulationRegisters.R4035B_IncomingStocks.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
 	
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
@@ -174,8 +174,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.TransferOrderBalance         = QueryResults[1].Unload();
 	Tables.StockReservation             = QueryResults[2].Unload();
 	Tables.OrderBalance                 = QueryResults[3].Unload();
-	Tables.R4035_IncomingStocks        = QueryResults[4].Unload();
-	Tables.R4036_IncomingStocksRequested = QueryResults[5].Unload();
+	Tables.R4035B_IncomingStocks        = QueryResults[4].Unload();
+	Tables.R4036B_IncomingStocksRequested = QueryResults[5].Unload();
 	
 	Parameters.IsReposting = False;
 	
@@ -232,18 +232,18 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			Parameters.DocumentDataTables.OrderBalance,
 			Parameters.IsReposting));
 	
-	// R4035_IncomingStocks
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4035_IncomingStocks,
+	// R4035B_IncomingStocks
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4035B_IncomingStocks,
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.R4035_IncomingStocks,
+			Parameters.DocumentDataTables.R4035B_IncomingStocks,
 			True));
 	
-	// R4036_IncomingStocksRequested
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4036_IncomingStocksRequested,
+	// R4036B_IncomingStocksRequested
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested,
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.R4036_IncomingStocksRequested,
+			Parameters.DocumentDataTables.R4036B_IncomingStocksRequested,
 			True));
 	
 	Return PostingDataTables;
@@ -298,9 +298,9 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.InventoryTransferOrder.ItemList", AddInfo);
 	
 	LineNumberAndRowKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.InventoryTransferOrder.ItemList");
-	If Not Cancel And Not AccReg.R4035_IncomingStocks.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
-	                                                                 Parameters.DocumentDataTables.R4035_IncomingStocks,
-	                                                                 Parameters.DocumentDataTables.R4035_IncomingStocks_Exists,
+	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
+	                                                                 Parameters.DocumentDataTables.R4035B_IncomingStocks,
+	                                                                 Parameters.DocumentDataTables.R4035B_IncomingStocks_Exists,
 	                                                                 AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;

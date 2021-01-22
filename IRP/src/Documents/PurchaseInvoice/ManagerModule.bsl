@@ -21,8 +21,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("OrderProcurement"                      , PostingServer.CreateTable(AccReg.OrderProcurement));
 	Tables.Insert("ReconciliationStatement"               , PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("TaxesTurnovers"                        , PostingServer.CreateTable(AccReg.TaxesTurnovers));
-	Tables.Insert("R4035_IncomingStocks"                 , PostingServer.CreateTable(AccReg.R4035_IncomingStocks));
-	Tables.Insert("R4036_IncomingStocksRequested"        , PostingServer.CreateTable(AccReg.R4036_IncomingStocksRequested));
 	
 	Tables.Insert("OrderBalance_Exists"           , PostingServer.CreateTable(AccReg.OrderBalance));
 	Tables.Insert("GoodsInTransitIncoming_Exists" , PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
@@ -354,10 +352,23 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Parameters.IsReposting = False;	
 	
+	If Not PostingServer.QueryTableIsExists("IncomingStocks", Parameters) Then
+		Query = New Query();
+		Query.TempTablesManager = Parameters.TempTablesManager;
+		Query.Text = "SELECT UNDEFINED INTO IncomingStocks;";
+		Query.Execute();
+	EndIf;
+	
+	If Not PostingServer.QueryTableIsExists("IncomingStocksRequested", Parameters) Then
+		Query = New Query();
+		Query.TempTablesManager = Parameters.TempTablesManager;
+		Query.Text = "SELECT UNDEFINED INTO IncomingStocksRequested;";
+		Query.Execute();
+	EndIf;
+	
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExequteQuery(Ref, QueryArray, Parameters);
-	
 	Tables.Insert("VendorsTransactions", 
 	PostingServer.GetQueryTableByName("VendorsTransactions", Parameters));	
 #EndRegion			
@@ -889,15 +900,9 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 	PostingServer.MergeTables(Tables.GoodsReceiptSchedule_Expense   , QueryResults[3].Unload());
 	PostingServer.MergeTables(Tables.OrderBalance                   , QueryResults[4].Unload());
 	
-	Parameters.Object.RegisterRecords.R4036_IncomingStocksRequested.Clear();
-	Parameters.Object.RegisterRecords.R4036_IncomingStocksRequested.Write();
+	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Clear();
+	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Write();
 	IncomingStocksServer.ClosureIncomingStocks(Parameters);
-	
-	PostingServer.MergeTables(Tables.R4035_IncomingStocks, 
-	PostingServer.GetQueryTableByName("IncomingStocks", Parameters));
-	
-	PostingServer.MergeTables(Tables.R4036_IncomingStocksRequested, 
-	PostingServer.GetQueryTableByName("IncomingStocksRequested", Parameters));
 	
 	PostingServer.MergeTables(Tables.StockReservation_Expense, 
 	PostingServer.GetQueryTableByName("FreeStocks", Parameters));	
@@ -2774,18 +2779,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.TaxesTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.TaxesTurnovers));
 	
-	// R4035_IncomingStocks
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4035_IncomingStocks,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.R4035_IncomingStocks));
-	
-	// R4036_IncomingStockRequested
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4036_IncomingStocksRequested,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.R4036_IncomingStocksRequested));
-
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 #EndRegion			
@@ -2912,6 +2905,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4033B_GoodsReceiptSchedule());
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R4035B_IncomingStocks());
+	QueryArray.Add(R4036B_IncomingStocksRequested());
 	Return QueryArray;
 EndFunction
 
@@ -3322,5 +3317,21 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Currency,
 		|	ItemList.Period";
 EndFunction
+
+Function R4035B_IncomingStocks()
+	Return
+		"SELECT *
+		|INTO R4035B_IncomingStocks
+		|FROM 
+		|	IncomingStocks AS IncomingStocks";
+EndFunction
+
+Function R4036B_IncomingStocksRequested()
+	Return
+		"SELECT *
+		|INTO R4036B_IncomingStocksRequested
+		|FROM
+		|	IncomingStocksRequested AS IncomingStocksRequested";
+EndFunction	
 
 #EndRegion

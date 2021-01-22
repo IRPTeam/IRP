@@ -51,7 +51,7 @@ Procedure ClosureIncomingStocks(Parameters) Export
 	|	IncomingStocksReal.Quantity AS RealIncomingQuantity
 	|INTO ClosureIncoming
 	|FROM
-	|	AccumulationRegister.R4036_IncomingStocksRequested.Balance(, (IncomingStore, ItemKey, Order) IN
+	|	AccumulationRegister.R4036B_IncomingStocksRequested.Balance(, (IncomingStore, ItemKey, Order) IN
 	|		(SELECT
 	|			IncomingStocksReal.Store,
 	|			IncomingStocksReal.ItemKey,
@@ -92,6 +92,23 @@ Procedure ClosureIncomingStocks(Parameters) Export
 	|WHERE
 	|	ClosureIncoming.Requester IS NULL
 	|	AND ClosureIncoming.RealIncomingQuantity - ClosureIncoming.RequestedQuantity > 0
+	|
+	|UNION ALL
+	|	
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense),
+	|	IncomingStocksReal.Period,
+	|	IncomingStocksReal.Store,
+	|	IncomingStocksReal.ItemKey,
+	|	IncomingStocksReal.Order,
+	|	IncomingStocksReal.Quantity
+	|FROM IncomingStocksReal AS IncomingStocksReal
+	|	LEFT JOIN ClosureIncoming AS ClosureIncoming
+	|	ON IncomingStocksReal.Store = ClosureIncoming.IncomingStore
+	|	AND IncomingStocksReal.ItemKey = ClosureIncoming.ItemKey
+	|	AND IncomingStocksReal.Order = ClosureIncoming.Order
+	|WHERE
+	|	ClosureIncoming.ItemKey IS NULL
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -103,6 +120,7 @@ Procedure ClosureIncomingStocks(Parameters) Export
 	|	ClosureIncoming.Requester,
 	|	ClosureIncoming.Order,
 	|	ClosureIncoming.RequestedQuantity,
+	|	ClosureIncoming.Requester.Date AS RequesterDate,
 	|	0 AS Quantity
 	|INTO ClosureIncomingStocksRequested
 	|FROM
@@ -127,6 +145,8 @@ Procedure ClosureIncomingStocks(Parameters) Export
 	
 	ClosureIncomingStocksRequested = PostingServer.GetQueryTableByName("ClosureIncomingStocksRequested", Parameters);
 	ClosureIncomingStocks = PostingServer.GetQueryTableByName("ClosureIncomingStocks", Parameters);
+	
+	ClosureIncomingStocksRequested.Sort("RequesterDate");
 	
 	For Each Row In ClosureIncomingStocks Do
 		Filter = New Structure("IncomingStore, ItemKey, Order");

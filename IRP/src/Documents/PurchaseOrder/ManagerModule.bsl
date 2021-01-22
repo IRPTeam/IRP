@@ -278,19 +278,19 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|FROM 
 		|	tmp AS tmp
 		|WHERE
-		|   tmp.UseSalesOrder
-		|;
-		|//[12]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Period AS Period,
-		|	tmp.Store AS Store,
-		|	tmp.ItemKey AS ItemKey,
-		|	tmp.Order AS Order,
-		|	tmp.Quantity AS Quantity
-		|WHERE
-		|	NOT tmp.UseSalesOrder
-		|	AND NOT tmp.IsService
-		|";
+		|   tmp.UseSalesOrder";
+//		|
+//		|//[12]//////////////////////////////////////////////////////////////////////////////
+//		|SELECT
+//		|	tmp.Period AS Period,
+//		|	tmp.Store AS Store,
+//		|	tmp.ItemKey AS ItemKey,
+//		|	tmp.Order AS Order,
+//		|	tmp.Quantity AS Quantity
+//		|WHERE
+//		|	NOT tmp.UseSalesOrder
+//		|	AND NOT tmp.IsService
+//		|";
 	
 	Query.SetParameter("QueryTable", QueryTable);
 	QueryResults = Query.ExecuteBatch();
@@ -306,7 +306,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.GoodsReceiptSchedule_Receipt = QueryResults[9].Unload();
 	Tables.GoodsReceiptSchedule_Expense = QueryResults[10].Unload();
 	Tables.OrderProcurement             = QueryResults[11].Unload();
-	Tables.R4035B_IncomingStocks        = QueryResults[12].Unload();
+	//Tables.R4035B_IncomingStocks        = QueryResults[12].Unload();
 
 #EndRegion
 	Parameters.IsReposting = False;
@@ -343,7 +343,7 @@ Procedure FillTables(Ref, AddInfo, Tables)
 	Tables.Insert("StockReservation_Exists" 	  , PostingServer.CreateTable(AccReg.StockReservation));
 	Tables.Insert("StockBalance_Exists"           , PostingServer.CreateTable(AccReg.StockBalance));
 
-	Tables.Insert("R4035B_IncomingStocks"         , PostingServer.CreateTable(AccReg.R4035B_IncomingStocks));
+	//Tables.Insert("R4035B_IncomingStocks"         , PostingServer.CreateTable(AccReg.R4035B_IncomingStocks));
 	
 	Tables.OrderBalance_Exists_Receipt =
 	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
@@ -366,9 +366,9 @@ Procedure FillTables(Ref, AddInfo, Tables)
 	Tables.StockBalance_Exists = 
 	AccumulationRegisters.StockBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
 	
-#Region NewRegistersPosting	
-	PostingServer.SetRegisters(Tables, Ref);
-#EndRegion	
+//#Region NewRegistersPosting	
+//	PostingServer.SetRegisters(Tables, Ref);
+//#EndRegion	
 EndProcedure
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -524,12 +524,12 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			Parameters.DocumentDataTables.OrderProcurement,
 			True));
 			
-	// R4035B_IncomingStocks
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4035B_IncomingStocks,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.R4035B_IncomingStocks,
-			True));
+//	// R4035B_IncomingStocks
+//	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4035B_IncomingStocks,
+//		New Structure("RecordType, RecordSet, WriteInTransaction",
+//			AccumulationRecordType.Receipt,
+//			Parameters.DocumentDataTables.R4035B_IncomingStocks,
+//			True));
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 #EndRegion	
@@ -665,6 +665,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2013T_SalesOrdersProcurement());
 	QueryArray.Add(R4016B_InternalSupplyRequestOrdering());
 	QueryArray.Add(R4033B_GoodsReceiptSchedule());
+	QueryArray.Add(R4035B_IncomingStocks());
 	Return QueryArray;	
 EndFunction	
 
@@ -694,7 +695,9 @@ Function ItemList()
 		|	PurchaseOrderItems.CancelReason,
 		|	PurchaseOrderItems.TotalAmount AS Amount,
 		|	PurchaseOrderItems.NetAmount,
-		|	PurchaseOrderItems.Ref.UseItemsReceiptScheduling AS UseItemsReceiptScheduling
+		|	PurchaseOrderItems.Ref.UseItemsReceiptScheduling AS UseItemsReceiptScheduling,
+		|	PurchaseOrderItems.PurchaseBasis REFS Document.SalesOrder
+		|	AND NOT PurchaseOrderItems.PurchaseBasis.REF IS NULL AS UseSalesOrder
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseOrder.ItemList AS PurchaseOrderItems
@@ -800,5 +803,19 @@ Function R4033B_GoodsReceiptSchedule()
 		|	AND QueryTable.UseItemsReceiptScheduling";
 
 EndFunction
+
+Function R4035B_IncomingStocks()
+	Return
+		"SELECT
+		|	ItemList.Period AS Period,
+		|	ItemList.Store AS Store,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Order AS Order,
+		|	ItemList.Quantity AS Quantity
+		|INTO R4035B_IncomingStocks
+		|WHERE
+		|	NOT ItemList.UseSalesOrder
+		|	AND NOT ItemList.IsService";
+EndFunction	
 
 #EndRegion

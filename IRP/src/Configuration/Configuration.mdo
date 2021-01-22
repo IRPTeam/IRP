@@ -362,6 +362,7 @@
   <commonModules>CommonModule.OffsetOfPartnersServer</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentClient</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentServer</commonModules>
+  <commonModules>CommonModule.IncomingStocksServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.BusinessUnit</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

@@ -16,47 +16,47 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query = New Query();
 	Query.Text =
 		"SELECT
-		|	PurchaseOrdertemList.Ref.Company AS Company,
-		|	PurchaseOrdertemList.Store AS Store,
-		|	PurchaseOrdertemList.Store.UseGoodsReceipt AS UseGoodsReceipt,
-		|	PurchaseOrdertemList.Ref.GoodsReceiptBeforePurchaseInvoice AS GoodsReceiptBeforePurchaseInvoice,
-		|	PurchaseOrdertemList.Ref AS Order,
-		|	PurchaseOrdertemList.PurchaseBasis AS PurchaseBasis,
-		|	PurchaseOrdertemList.ItemKey.Item AS Item,
-		|	PurchaseOrdertemList.ItemKey AS ItemKey,
-		|	PurchaseOrdertemList.Quantity AS Quantity,
-		|	PurchaseOrdertemList.Unit,
-		|	PurchaseOrdertemList.ItemKey.Item.Unit AS ItemUnit,
-		|	PurchaseOrdertemList.ItemKey.Unit AS ItemKeyUnit,
+		|	PurchaseOrderItemList.Ref.Company AS Company,
+		|	PurchaseOrderItemList.Store AS Store,
+		|	PurchaseOrderItemList.Store.UseGoodsReceipt AS UseGoodsReceipt,
+		|	PurchaseOrderItemList.Ref.GoodsReceiptBeforePurchaseInvoice AS GoodsReceiptBeforePurchaseInvoice,
+		|	PurchaseOrderItemList.Ref AS Order,
+		|	PurchaseOrderItemList.PurchaseBasis AS PurchaseBasis,
+		|	PurchaseOrderItemList.ItemKey.Item AS Item,
+		|	PurchaseOrderItemList.ItemKey AS ItemKey,
+		|	PurchaseOrderItemList.Quantity AS Quantity,
+		|	PurchaseOrderItemList.Unit,
+		|	PurchaseOrderItemList.ItemKey.Item.Unit AS ItemUnit,
+		|	PurchaseOrderItemList.ItemKey.Unit AS ItemKeyUnit,
 		|	0 AS BasisQuantity,
 		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
 		|	&Period AS Period,
-		|	PurchaseOrdertemList.Key AS RowKeyUUID,
-		|	PurchaseOrdertemList.BusinessUnit AS BusinessUnit,
-		|	PurchaseOrdertemList.ExpenseType AS ExpenseType,
+		|	PurchaseOrderItemList.Key AS RowKeyUUID,
+		|	PurchaseOrderItemList.BusinessUnit AS BusinessUnit,
+		|	PurchaseOrderItemList.ExpenseType AS ExpenseType,
 		|	CASE
-		|		WHEN PurchaseOrdertemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
+		|		WHEN PurchaseOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS IsService,
-		|	PurchaseOrdertemList.DeliveryDate AS DeliveryDate,
+		|	PurchaseOrderItemList.DeliveryDate AS DeliveryDate,
 		|	CASE
-		|		WHEN PurchaseOrdertemList.PurchaseBasis REFS Document.InternalSupplyRequest
-		|		AND NOT PurchaseOrdertemList.PurchaseBasis.Date IS NULL
+		|		WHEN PurchaseOrderItemList.PurchaseBasis REFS Document.InternalSupplyRequest
+		|		AND NOT PurchaseOrderItemList.PurchaseBasis.Date IS NULL
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS UseInternalSupplyRequest,
 		|	CASE
-		|		WHEN PurchaseOrdertemList.PurchaseBasis REFS Document.SalesOrder
-		|		AND NOT PurchaseOrdertemList.PurchaseBasis.Date IS NULL
+		|		WHEN PurchaseOrderItemList.PurchaseBasis REFS Document.SalesOrder
+		|		AND NOT PurchaseOrderItemList.PurchaseBasis.Date IS NULL
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS UseSalesOrder
 		|FROM
-		|	Document.PurchaseOrder.ItemList AS PurchaseOrdertemList
+		|	Document.PurchaseOrder.ItemList AS PurchaseOrderItemList
 		|WHERE
-		|	PurchaseOrdertemList.Ref = &Ref
-		|	AND NOT PurchaseOrdertemList.Cancel";
+		|	PurchaseOrderItemList.Ref = &Ref
+		|	AND NOT PurchaseOrderItemList.Cancel";
 	
 	Query.SetParameter("Ref", Ref);
 	Query.SetParameter("Period", StatusInfo.Period);
@@ -279,18 +279,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp AS tmp
 		|WHERE
 		|   tmp.UseSalesOrder";
-//		|
-//		|//[12]//////////////////////////////////////////////////////////////////////////////
-//		|SELECT
-//		|	tmp.Period AS Period,
-//		|	tmp.Store AS Store,
-//		|	tmp.ItemKey AS ItemKey,
-//		|	tmp.Order AS Order,
-//		|	tmp.Quantity AS Quantity
-//		|WHERE
-//		|	NOT tmp.UseSalesOrder
-//		|	AND NOT tmp.IsService
-//		|";
 	
 	Query.SetParameter("QueryTable", QueryTable);
 	QueryResults = Query.ExecuteBatch();
@@ -306,7 +294,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.GoodsReceiptSchedule_Receipt = QueryResults[9].Unload();
 	Tables.GoodsReceiptSchedule_Expense = QueryResults[10].Unload();
 	Tables.OrderProcurement             = QueryResults[11].Unload();
-	//Tables.R4035B_IncomingStocks        = QueryResults[12].Unload();
 
 #EndRegion
 	Parameters.IsReposting = False;
@@ -342,8 +329,6 @@ Procedure FillTables(Ref, AddInfo, Tables)
 	
 	Tables.Insert("StockReservation_Exists" 	  , PostingServer.CreateTable(AccReg.StockReservation));
 	Tables.Insert("StockBalance_Exists"           , PostingServer.CreateTable(AccReg.StockBalance));
-
-	//Tables.Insert("R4035B_IncomingStocks"         , PostingServer.CreateTable(AccReg.R4035B_IncomingStocks));
 	
 	Tables.OrderBalance_Exists_Receipt =
 	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
@@ -364,11 +349,7 @@ Procedure FillTables(Ref, AddInfo, Tables)
 	AccumulationRegisters.StockReservation.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
 	
 	Tables.StockBalance_Exists = 
-	AccumulationRegisters.StockBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
-	
-//#Region NewRegistersPosting	
-//	PostingServer.SetRegisters(Tables, Ref);
-//#EndRegion	
+	AccumulationRegisters.StockBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);	
 EndProcedure
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -524,12 +505,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			Parameters.DocumentDataTables.OrderProcurement,
 			True));
 			
-//	// R4035B_IncomingStocks
-//	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4035B_IncomingStocks,
-//		New Structure("RecordType, RecordSet, WriteInTransaction",
-//			AccumulationRecordType.Receipt,
-//			Parameters.DocumentDataTables.R4035B_IncomingStocks,
-//			True));
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 #EndRegion	
@@ -546,7 +521,14 @@ EndProcedure
 #Region Undoposting
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
+	Tables = PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
+#Region NewRegistersPosting
+	If Parameters.StatusInfo.Posting Then
+		QueryArray = GetQueryTextsMasterTables();
+		PostingServer.ExequteQuery(Ref, QueryArray, Parameters);
+	EndIf;
+#EndRegion	
+	Return Tables;
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -644,6 +626,14 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	                                                        AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
+	
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.PurchaseOrder.ItemList");
+	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
+	                                                                PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters),
+	                                                                PostingServer.GetQueryTableByName("R4035B_IncomingStocks_Exists", Parameters),
+	                                                                AccumulationRecordType.Expense, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -653,6 +643,7 @@ EndProcedure
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
+	QueryArray.Add(R4035B_IncomingStocks_Exists());
 	Return QueryArray;
 EndFunction
 
@@ -818,4 +809,14 @@ Function R4035B_IncomingStocks()
 		|	AND NOT ItemList.IsService";
 EndFunction	
 
+Function R4035B_IncomingStocks_Exists()
+	Return
+		"SELECT *
+		|	INTO R4035B_IncomingStocks_Exists
+		|FROM
+		|	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
+		|WHERE
+		|	R4035B_IncomingStocks.Recorder = &Ref";
+EndFunction
+		
 #EndRegion

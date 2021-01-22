@@ -534,6 +534,46 @@ Scenario: _028065 check filter by own companies in the document Item stock adjus
 	* Check the filter for Own Company
 		When check the filter by my own company in Opening entry/Item stock adjustment
 
+
+Scenario: _028066 check filter by partner in the document Goods receipt (Return from customer)
+	* Open document form
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click the button named "FormCreate"
+	* Check filter by partner in the document Goods receipt (Return from customer)
+		And I select "Return from customer" exact value from "Transaction type" drop-down list			
+		When check the filter by customers in the sales documents
+
+
+Scenario: _028067 check filter by partner in the document Goods receipt (Purchase)
+	* Open document form
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click the button named "FormCreate"
+	* Check filter by partner in the document Goods receipt (Return from customer)
+		And I select "Purchase" exact value from "Transaction type" drop-down list	
+		When check the filter by vendors in the purchase documents
+
+
+Scenario: _028067 check filter by partner in the document Shipment confirmation (Return to vendor)
+	* Open document form
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click the button named "FormCreate"
+	* Check filter by partner in the document Shipment confirmation (Return to vendor)
+		And I select "Return to vendor" exact value from "Transaction type" drop-down list			
+		When check the filter by vendors in the purchase documents
+
+Scenario: _028067 check filter by partner in the document Shipment confirmation (Return to vendor)
+	* Open document form
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click the button named "FormCreate"
+	* Check filter by partner in the document Shipment confirmation (Return to vendor)
+		And I select "Sales" exact value from "Transaction type" drop-down list			
+		When check the filter by customers in the sales documents
+
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session
 

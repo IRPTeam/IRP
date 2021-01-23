@@ -56,6 +56,7 @@
   <registerRecords>AccumulationRegister.R4052T_StockAdjustmentAsSurplus</registerRecords>
   <registerRecords>AccumulationRegister.StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="4b045ff1-41d1-423f-819f-68a05835a3d5">

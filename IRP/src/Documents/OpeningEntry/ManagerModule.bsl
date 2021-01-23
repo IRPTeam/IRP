@@ -616,6 +616,8 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4014B_SerialLotNumber());	
 	Return QueryArray;
 EndFunction
@@ -637,6 +639,32 @@ Function ItemList()
 		|	Document.OpeningEntry.Inventory AS OpeningEntryInventory
 		|WHERE
 		|	OpeningEntryInventory.Ref = &Ref";
+EndFunction
+
+Function R4010B_ActualStocks()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R4010B_ActualStocks
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE 
+		|	TRUE";
+
+EndFunction
+
+Function R4011B_FreeStocks()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R4011B_FreeStocks
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE
+		|	TRUE";
+
 EndFunction
 
 Function R4014B_SerialLotNumber()

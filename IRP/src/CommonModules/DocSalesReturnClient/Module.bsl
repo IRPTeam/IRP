@@ -69,7 +69,6 @@ EndProcedure
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
 	DocumentsClient.AfterWriteAtClientPutServerDataToAddInfo(Object, Form, AddInfo);	
 	CurrenciesClient.SetVisibleRows(Object, ThisObject, AddInfo);
-	
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
 EndProcedure
 

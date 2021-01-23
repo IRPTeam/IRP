@@ -754,7 +754,7 @@
       <headerHorizontalAlign>Left</headerHorizontalAlign>
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
-        <width>3</width>
+        <width>10</width>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <horizontalStretch>false</horizontalStretch>
@@ -765,9 +765,12 @@
         <borderColor xsi:type="core:ColorRef">
           <color>Style.FormBackColor</color>
         </borderColor>
-        <font xsi:type="core:FontDef">
-          <height>8.0</height>
+        <font xsi:type="core:FontRef">
+          <font>Style.NormalTextFont</font>
           <bold>true</bold>
+          <italic>false</italic>
+          <underline>false</underline>
+          <strikeout>false</strikeout>
         </font>
       </extInfo>
     </items>
@@ -862,7 +865,7 @@
       <headerHorizontalAlign>Left</headerHorizontalAlign>
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
-        <width>3</width>
+        <width>10</width>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <horizontalStretch>false</horizontalStretch>
@@ -873,9 +876,12 @@
         <borderColor xsi:type="core:ColorRef">
           <color>Style.FormBackColor</color>
         </borderColor>
-        <font xsi:type="core:FontDef">
-          <height>8.0</height>
+        <font xsi:type="core:FontRef">
+          <font>Style.NormalTextFont</font>
           <bold>true</bold>
+          <italic>false</italic>
+          <underline>false</underline>
+          <strikeout>false</strikeout>
         </font>
       </extInfo>
     </items>
@@ -884,6 +890,7 @@
     <userVisible>
       <common>true</common>
     </userVisible>
+    <horizontalStretch>true</horizontalStretch>
     <extendedTooltip>
       <name>GroupBottomExtendedTooltip</name>
       <id>51</id>

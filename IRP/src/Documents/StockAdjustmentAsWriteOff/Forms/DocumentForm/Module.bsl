@@ -31,6 +31,11 @@ Procedure OnOpen(Cancel)
 	DocStockAdjustmentAsWriteOffClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	DocStockAdjustmentAsWriteOffClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+EndProcedure
+
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	DocStockAdjustmentAsWriteOffServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
@@ -56,23 +61,25 @@ Procedure ItemListOnStartEdit(Item, NewRow, Clone)
 EndProcedure
 
 &AtClient
+Procedure ItemListAfterDeleteRow(Item)
+	DocStockAdjustmentAsWriteOffClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure ItemListItemOnChange(Item)
 	DocStockAdjustmentAsWriteOffClient.ItemListItemOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
-	CurrentRow = Items.ItemList.CurrentData;
-	If CurrentRow = Undefined Then
-		Return;
-	EndIf;
-	
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object,
-		CurrentRow,
-		CalculationSettings);
+	DocStockAdjustmentAsWriteOffClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
 EndProcedure
+
+&AtClient
+Procedure ItemListQuantityOnChange(Item)
+	DocStockAdjustmentAsWriteOffClient.ItemListQuantityOnChange(Object, ThisObject, Item);
+EndProcedure
+
 
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export

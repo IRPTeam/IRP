@@ -1081,6 +1081,10 @@
               <segments>Object.ItemList.Quantity</segments>
             </paths>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListQuantityOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ItemListQuantityExtendedTooltip</name>
             <id>269</id>
@@ -1359,6 +1363,10 @@
         <handlers>
           <event>OnChange</event>
           <name>ItemListOnChange</name>
+        </handlers>
+        <handlers>
+          <event>AfterDeleteRow</event>
+          <name>ItemListAfterDeleteRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -2652,6 +2660,10 @@
     <handlers>
       <event>OnWriteAtServer</event>
       <name>OnWriteAtServer</name>
+    </handlers>
+    <handlers>
+      <event>AfterWrite</event>
+      <name>AfterWrite</name>
     </handlers>
     <repostOnWrite>true</repostOnWrite>
   </extInfo>

@@ -4,6 +4,10 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);	
 EndProcedure
 
+Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
+EndProcedure
+
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings = Undefined) Export
 	For Each Row In Object.ItemList Do
 		If Not ValueIsFilled(Row.Key) Then
@@ -12,7 +16,12 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings =
 	EndDo;
 EndProcedure
 
-Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
+Procedure ItemListAfterDeleteRow(Object, Form, Item, AddInfo = Undefined) Export
+	SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Object);
+	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);	
+EndProcedure
+
+Procedure ItemListItemOnChange(Object, Form, Item = Undefined, AddInfo = Undefined) Export
 	CurrentRow = Form.Items.ItemList.CurrentData;
 	If CurrentRow = Undefined Then
 		Return;
@@ -28,6 +37,8 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
 	CalculationStringsClientServer.CalculateItemsRow(Object,
 		CurrentRow,
 		CalculationSettings);
+	
+	SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
 EndProcedure
 
 #Region PickUpItems
@@ -83,6 +94,24 @@ EndProcedure
 
 Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing);
+EndProcedure
+
+Procedure ItemListItemKeyOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	CurrentRow = Form.Items.ItemList.CurrentData;
+	If CurrentRow = Undefined Then
+		Return;
+	EndIf;
+	
+	CalculationSettings = New Structure();
+	CalculationSettings.Insert("UpdateUnit");
+	CalculationStringsClientServer.CalculateItemsRow(Object,
+		CurrentRow,
+		CalculationSettings);
+	SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
+EndProcedure
+
+Procedure ItemListQuantityOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);	
 EndProcedure
 
 #Region SerialLotNumbers

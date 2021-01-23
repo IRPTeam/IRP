@@ -2369,11 +2369,8 @@ Procedure CommonParametersToServer(Object, Form, ParametersToServer, AddInfo = U
 		EndDo;
 		ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
 	EndIf;
-	ArrayOfItemKeys = New Array;
-	For Each Row In Object.ItemList Do
-		ArrayOfItemKeys.Add(Row.ItemKey);
-	EndDo;
-	ParametersToServer.Insert("GetItemKeysWithSerialLotNumbers", ArrayOfItemKeys);
+	GetItemKeysWithSerialLotNumbers(Object, ParametersToServer);
+
 	
 	TaxesCacheParameters = New Structure();
 	TaxesCacheParameters.Insert("Cache"   , Form.TaxesCache); 
@@ -2389,6 +2386,14 @@ Procedure CommonParametersToServer(Object, Form, ParametersToServer, AddInfo = U
 	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
 	ParametersToServer.Insert("GetPurchaseReturnOrder_EmptyRef");
 	ParametersToServer.Insert("GetSalesReturnOrder_EmptyRef");	
+EndProcedure
+
+Procedure GetItemKeysWithSerialLotNumbers(Object, ParametersToServer) Export
+	ArrayOfItemKeys = New Array;
+	For Each Row In Object.ItemList Do
+		ArrayOfItemKeys.Add(Row.ItemKey);
+	EndDo;
+	ParametersToServer.Insert("GetItemKeysWithSerialLotNumbers", ArrayOfItemKeys);
 EndProcedure
 
 #Region FormEvents
@@ -2488,7 +2493,7 @@ EndProcedure
 Procedure ItemListSerialLotNumbersPutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
 	OnChangeItemName = "ItemListSerialLotNumbersPresentation";
 	ParametersToServer = New Structure();
-	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
+	GetItemKeysWithSerialLotNumbers(Object, ParametersToServer);
 			
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);

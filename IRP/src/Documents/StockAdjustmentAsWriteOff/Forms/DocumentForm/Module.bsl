@@ -75,6 +75,16 @@ Procedure ItemListItemKeyOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
+	DocStockAdjustmentAsWriteOffClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
+	DocStockAdjustmentAsWriteOffClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtClient
 Procedure OpenPickupItems(Command)
 	DocStockAdjustmentAsWriteOffClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure

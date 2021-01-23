@@ -3106,6 +3106,24 @@ Function VendorsTransactions()
 		|	ItemList.Period";
 EndFunction
 
+Function SerialLotNumbers()
+	Return
+		"SELECT
+		|	SerialLotNumbers.Ref.Date AS Period,
+		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity,
+		|	ItemList.ItemKey AS ItemKey
+		|INTO SerialLotNumbers
+		|FROM
+		|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
+		|		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
+		|		ON SerialLotNumbers.Key = ItemList.Key
+		|WHERE
+		|	SerialLotNumbers.Ref = &Ref";	
+EndFunction	
+
 Function R1001T_Purchases()
 	Return
 		"SELECT *

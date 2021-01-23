@@ -39,6 +39,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Parameters.IsReposting = False;
 	
+#Region NewRegistersPosting		
+	QueryArray = GetQueryTextsSecondaryTables();
+	PostingServer.ExequteQuery(Ref, QueryArray, Parameters);
+#EndRegion	
+
 	Return Tables;
 EndFunction
 	
@@ -187,12 +192,17 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	StockAdjustmentAsWriteOff = 
 	AccumulationRegisters.StockAdjustmentAsWriteOff.GetLockFields(DocumentDataTables.StockAdjustmentAsWriteOff);
 	DataMapWithLockFields.Insert(StockAdjustmentAsWriteOff.RegisterName, StockAdjustmentAsWriteOff.LockInfo);
-	
+
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
+#Region NewRegisterPosting
+	Tables = Parameters.DocumentDataTables;	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -227,6 +237,10 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.StockAdjustmentAsWriteOff));
+			
+#Region NewRegistersPosting
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+#EndRegion	
 			
 	Return PostingDataTables;
 EndFunction
@@ -282,6 +296,55 @@ EndProcedure
 
 Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
 	Return Undefined;
+EndFunction
+
+#EndRegion
+
+
+#Region NewRegistersPosting
+
+Function GetQueryTextsSecondaryTables()
+	QueryArray = New Array;
+	QueryArray.Add(ItemList());
+	Return QueryArray;
+EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R4014B_SerialLotNumber());	
+	Return QueryArray;
+EndFunction
+
+Function ItemList()
+	Return
+		"SELECT
+		|	OpeningEntryInventory.Ref,
+		|	OpeningEntryInventory.Key,
+		|	OpeningEntryInventory.ItemKey,
+		|	OpeningEntryInventory.Store,
+		|	OpeningEntryInventory.Quantity,
+		|	NOT OpeningEntryInventory.SerialLotNumber = VALUE(Catalog.SerialLotNumbers.EmptyRef) AS isSerialLotNumberSet,
+		|	OpeningEntryInventory.SerialLotNumber,
+		|	OpeningEntryInventory.Ref.Date AS Period,
+		|	OpeningEntryInventory.Ref.Company AS Company
+		|INTO ItemList
+		|FROM
+		|	Document.OpeningEntry.Inventory AS OpeningEntryInventory
+		|WHERE
+		|	OpeningEntryInventory.Ref = &Ref";
+EndFunction
+
+Function R4014B_SerialLotNumber()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R4014B_SerialLotNumber
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE 
+		|	QueryTable.isSerialLotNumberSet";
+
 EndFunction
 
 #EndRegion

@@ -1210,6 +1210,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(Taxes());
 	QueryArray.Add(CustomersTransactions());
 	QueryArray.Add(Aging());
+	QueryArray.Add(SerialLotNumbers());
 	Return QueryArray;
 EndFunction
 
@@ -1223,6 +1224,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2031B_ShipmentInvoicing());
 	QueryArray.Add(R2040B_TaxesIncoming());
 	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R2021B_CustomersTransactions());
@@ -1403,6 +1405,24 @@ Function Aging()
 		|	SalesInvoicePaymentTerms.Ref";	
 EndFunction	
 
+Function SerialLotNumbers()
+	Return
+		"SELECT
+		|	SerialLotNumbers.Ref.Date AS Period,
+		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity,
+		|	ItemList.ItemKey AS ItemKey
+		|INTO SerialLotNumbers
+		|FROM
+		|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
+		|		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
+		|		ON SerialLotNumbers.Key = ItemList.Key
+		|WHERE
+		|	SerialLotNumbers.Ref = &Ref";	
+EndFunction	
+
 Function R2001T_Sales()
 	Return
 		"SELECT *
@@ -1523,6 +1543,19 @@ Function R4010B_ActualStocks()
 		|WHERE 
 		|	NOT QueryTable.IsService 
 		|	AND NOT QueryTable.UseShipmentConfirmation";
+
+EndFunction
+
+Function R4014B_SerialLotNumber()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|*
+		|INTO R4014B_SerialLotNumber
+		|FROM
+		|	SerialLotNumbers AS QueryTable
+		|WHERE 
+		|	TRUE";
 
 EndFunction
 

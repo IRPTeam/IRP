@@ -55,6 +55,9 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	Else
 		CurrenciesClient.FullRefreshTable(Object, Form, AddInfo);
 	EndIf;
+	
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
+	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);	
 EndProcedure
 
 Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source) Export
@@ -193,6 +196,19 @@ Function ItemListItemKeySettings(Object, Form, AddInfo = Undefined) Export
 	Settings.AfterActionsCalculateSettings = AfterActionsCalculateSettings;
 	Return Settings;
 EndFunction
+
+#EndRegion
+
+#Region SerialLotNumbers
+
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
+	DocumentsClient.ItemListSerialLotNumbersPutServerDataToAddInfo(Object, Form, AddInfo);
+	SerialLotNumberClient.PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, AddInfo);
+EndProcedure	
+
+Procedure ItemListSerialLotNumbersPresentationClearing(Object, Form, Item, StandardProcessing, AddInfo = Undefined) Export
+	SerialLotNumberClient.PresentationClearing(Object, Form, Item, AddInfo);
+EndProcedure
 
 #EndRegion
 

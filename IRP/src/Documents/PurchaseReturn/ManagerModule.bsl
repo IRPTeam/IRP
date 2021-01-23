@@ -700,12 +700,12 @@ EndProcedure
 
 #EndRegion
 
-
 #Region NewRegistersPosting
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
+	QueryArray.Add(SerialLotNumbers());
 	Return QueryArray;
 EndFunction
 
@@ -734,16 +734,34 @@ Function ItemList()
 		|	OpeningEntryInventory.Ref = &Ref";
 EndFunction
 
+Function SerialLotNumbers()
+	Return
+		"SELECT
+		|	SerialLotNumbers.Ref.Date AS Period,
+		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity,
+		|	ItemList.ItemKey AS ItemKey
+		|INTO SerialLotNumbers
+		|FROM
+		|	Document.PurchaseReturn.SerialLotNumbers AS SerialLotNumbers
+		|		LEFT JOIN Document.PurchaseReturn.ItemList AS ItemList
+		|		ON SerialLotNumbers.Key = ItemList.Key
+		|WHERE
+		|	SerialLotNumbers.Ref = &Ref";	
+EndFunction	
+
 Function R4014B_SerialLotNumber()
 	Return
 		"SELECT 
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	*
 		|INTO R4014B_SerialLotNumber
 		|FROM
-		|	ItemList AS QueryTable
+		|	SerialLotNumbers AS QueryTable
 		|WHERE 
-		|	QueryTable.isSerialLotNumberSet";
+		|	TRUE";
 
 EndFunction
 

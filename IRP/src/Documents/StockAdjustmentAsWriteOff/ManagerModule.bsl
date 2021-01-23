@@ -305,7 +305,7 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
-	QueryArray.Add(ItemList());
+	QueryArray.Add(SerialLotNumbers());
 	Return QueryArray;
 EndFunction
 
@@ -315,35 +315,34 @@ Function GetQueryTextsMasterTables()
 	Return QueryArray;
 EndFunction
 
-Function ItemList()
+Function SerialLotNumbers()
 	Return
 		"SELECT
-		|	OpeningEntryInventory.Ref,
-		|	OpeningEntryInventory.Key,
-		|	OpeningEntryInventory.ItemKey,
-		|	OpeningEntryInventory.Store,
-		|	OpeningEntryInventory.Quantity,
-		|	NOT OpeningEntryInventory.SerialLotNumber = VALUE(Catalog.SerialLotNumbers.EmptyRef) AS isSerialLotNumberSet,
-		|	OpeningEntryInventory.SerialLotNumber,
-		|	OpeningEntryInventory.Ref.Date AS Period,
-		|	OpeningEntryInventory.Ref.Company AS Company
-		|INTO ItemList
+		|	SerialLotNumbers.Ref.Date AS Period,
+		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity,
+		|	ItemList.ItemKey AS ItemKey
+		|INTO SerialLotNumbers
 		|FROM
-		|	Document.OpeningEntry.Inventory AS OpeningEntryInventory
+		|	Document.StockAdjustmentAsWriteOff.SerialLotNumbers AS SerialLotNumbers
+		|		LEFT JOIN Document.StockAdjustmentAsWriteOff.ItemList AS ItemList
+		|		ON SerialLotNumbers.Key = ItemList.Key
 		|WHERE
-		|	OpeningEntryInventory.Ref = &Ref";
-EndFunction
+		|	SerialLotNumbers.Ref = &Ref";	
+EndFunction	
 
 Function R4014B_SerialLotNumber()
 	Return
 		"SELECT 
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	*
 		|INTO R4014B_SerialLotNumber
 		|FROM
 		|	ItemList AS QueryTable
 		|WHERE 
-		|	QueryTable.isSerialLotNumberSet";
+		|	TRUE";
 
 EndFunction
 

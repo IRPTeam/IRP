@@ -2941,6 +2941,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
 	QueryArray.Add(VendorsTransactions());
+	QueryArray.Add(SerialLotNumbers());
 	Return QueryArray;
 EndFunction
 
@@ -3117,8 +3118,8 @@ Function SerialLotNumbers()
 		|	ItemList.ItemKey AS ItemKey
 		|INTO SerialLotNumbers
 		|FROM
-		|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
-		|		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
+		|	Document.PurchaseInvoice.SerialLotNumbers AS SerialLotNumbers
+		|		LEFT JOIN Document.PurchaseInvoice.ItemList AS ItemList
 		|		ON SerialLotNumbers.Key = ItemList.Key
 		|WHERE
 		|	SerialLotNumbers.Ref = &Ref";	

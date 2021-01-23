@@ -819,6 +819,19 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="78d42685-2ac2-43b1-bf67-ffa9d4d886f4">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Item serial/lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <createOnInput>Use</createOnInput>
+      <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="ef266dd5-92e1-4516-90cd-9b41169c1fc8">
     <producedTypes>

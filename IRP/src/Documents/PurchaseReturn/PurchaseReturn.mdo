@@ -887,6 +887,59 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="da412ae7-da12-42d3-a0eb-d6b24a2a8116">
+    <producedTypes>
+      <objectType typeId="7011b89b-78f1-4637-a7a4-e0c3a97578a1" valueTypeId="e72d97b5-e092-417c-84a2-edb6c2fe367a"/>
+      <rowType typeId="67561d32-a28a-498f-a4fd-6de839fcc75b" valueTypeId="ee73fda4-b6f0-4bf6-91dc-3cfecb93b146"/>
+    </producedTypes>
+    <name>SerialLotNumbers</name>
+    <synonym>
+      <key>en</key>
+      <value>Serial lot numbers</value>
+    </synonym>
+    <attributes uuid="2ebc523d-8173-4504-9b0f-9c09f069ed1f">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="faf43e21-b7e7-45cc-a9ca-533f2a8e7aaa">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="0a145baa-e9f8-43a9-83c4-99ca1a9f9130">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <commands uuid="5d7fe07b-4c48-4b3f-88e6-db41ed5c7076">
     <name>GeneratePurchaseReturn</name>
     <synonym>

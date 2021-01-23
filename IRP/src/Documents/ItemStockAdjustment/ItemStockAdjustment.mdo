@@ -214,6 +214,34 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="dd043471-3536-482b-970c-a44c584bd14e">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number (surplus)</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ed27ab57-2726-47c5-b3b4-ac9becdd69f1">
+      <name>SerialLotNumberWriteOff</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number (write off)</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="af0ba146-a727-4f1f-837e-d274287042ed">
     <producedTypes>

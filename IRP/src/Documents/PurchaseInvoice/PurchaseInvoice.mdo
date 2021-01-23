@@ -1009,6 +1009,59 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="ebf24b52-ad5f-4fc8-b63e-dfb4cd34fe2f">
+    <producedTypes>
+      <objectType typeId="6601c923-4ac7-4e36-833c-ba2e244fe201" valueTypeId="f12a9d3c-3c07-49da-a4a9-5962d3bc837c"/>
+      <rowType typeId="5553d9ce-1692-4e82-a846-762e23b647e3" valueTypeId="83c13c51-2af8-4f99-a220-f25577058740"/>
+    </producedTypes>
+    <name>SerialLotNumbers</name>
+    <synonym>
+      <key>en</key>
+      <value>Serial lot numbers</value>
+    </synonym>
+    <attributes uuid="77ffa396-e1c0-49fe-90fa-2519446b2832">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ca9c5511-91bb-4ed5-9e06-4dada8e17f7c">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9f37a6e8-05ca-41e3-8a3b-ea356ca15922">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <commands uuid="67571b12-57b7-4fed-998a-8d6f75b9e9d9">
     <name>GeneratePurchaseInvoice</name>
     <synonym>

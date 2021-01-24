@@ -340,7 +340,7 @@ Function R4014B_SerialLotNumber()
 		|	*
 		|INTO R4014B_SerialLotNumber
 		|FROM
-		|	ItemList AS QueryTable
+		|	SerialLotNumbers AS QueryTable
 		|WHERE 
 		|	TRUE";
 

@@ -1224,6 +1224,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2031B_ShipmentInvoicing());
 	QueryArray.Add(R2040B_TaxesIncoming());
 	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
 	QueryArray.Add(R4050B_StockInventory());
@@ -1272,11 +1273,7 @@ Function ItemList()
 		|	NOT SalesInvoiceItemList.SalesOrder = Value(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
 		|	SalesInvoiceItemList.Key AS RowKey,
 		|	SalesInvoiceItemList.DeliveryDate AS DeliveryDate,
-		|	CASE
-		|		WHEN SalesInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
-		|			THEN TRUE
-		|		ELSE FALSE
-		|	END AS IsService,
+		|	SalesInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		|	SalesInvoiceItemList.BusinessUnit AS BusinessUnit,
 		|	SalesInvoiceItemList.RevenueType AS RevenueType,
 		|	SalesInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
@@ -1543,6 +1540,18 @@ Function R4010B_ActualStocks()
 		|WHERE 
 		|	NOT QueryTable.IsService 
 		|	AND NOT QueryTable.UseShipmentConfirmation";
+
+EndFunction
+
+Function R4011B_FreeStocks()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	*
+		|INTO R4011B_FreeStocks
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE  NOT QueryTable.IsService AND NOT QueryTable.UseShipmentConfirmation";
 
 EndFunction
 

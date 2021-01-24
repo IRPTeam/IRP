@@ -192,6 +192,16 @@ Procedure ItemListQuantityOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
+	DocPurchaseReturnClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
+	DocPurchaseReturnClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtClient
 Procedure ItemListPriceOnChange(Item, AddInfo = Undefined) Export
 	DocPurchaseReturnClient.ItemListPriceOnChange(Object, ThisObject, Item);
 EndProcedure

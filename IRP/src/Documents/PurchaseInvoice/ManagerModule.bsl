@@ -3246,13 +3246,29 @@ EndFunction
 
 Function R4011B_FreeStocks()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	*
+		|	QueryTable.Period AS Period,
+		|	QueryTable.Store AS Store,
+		|	QueryTable.ItemKey AS ItemKey,
+		|	QueryTable.Quantity AS Quantity
 		|INTO R4011B_FreeStocks
 		|FROM
 		|	ItemList AS QueryTable
-		|WHERE  NOT QueryTable.IsService AND NOT QueryTable.UseGoodsReceipt";
+		|WHERE
+		|	NOT QueryTable.IsService
+		|	AND NOT QueryTable.UseGoodsReceipt
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	FreeStocks.Period,
+		|	FreeStocks.Store,
+		|	FreeStocks.ItemKey,
+		|	FreeStocks.Quantity
+		|FROM
+		|	FreeStocks AS FreeStocks";
 
 EndFunction
 

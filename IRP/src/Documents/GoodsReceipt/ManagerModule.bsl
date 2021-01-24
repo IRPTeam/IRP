@@ -155,20 +155,26 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Parameters.IsReposting = False;
 
+	// legacy code fix
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	If Not PostingServer.QueryTableIsExists("IncomingStocks", Parameters) Then
-		Query = New Query();
-		Query.TempTablesManager = Parameters.TempTablesManager;
-		Query.Text = "SELECT UNDEFINED INTO IncomingStocks WHERE FALSE;";
-		Query.Execute();
-	EndIf;
-	
+		Query.Text = Query.Text + "SELECT UNDEFINED INTO IncomingStocks WHERE FALSE; ";
+	EndIf;	
 	If Not PostingServer.QueryTableIsExists("IncomingStocksRequested", Parameters) Then
-		Query = New Query();
-		Query.TempTablesManager = Parameters.TempTablesManager;
-		Query.Text = "SELECT UNDEFINED INTO IncomingStocksRequested WHERE FALSE;";
+		Query.Text = Query.Text + "SELECT UNDEFINED INTO IncomingStocksRequested WHERE FALSE; ";
+	EndIf;	
+	If Not PostingServer.QueryTableIsExists("FreeStocks", Parameters) Then
+		Query.Text = Query.Text + 
+		"SELECT 
+		|UNDEFINED AS RecordType, UNDEFINED AS Period, UNDEFINED AS Store, UNDEFINED AS ItemKey, UNDEFINED AS Quantity
+		|INTO FreeStocks 
+		|WHERE FALSE; ";
+	EndIf;	
+	If ValueIsFilled(Query.Text) Then
 		Query.Execute();
 	EndIf;
-	
+
 #Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExequteQuery(Ref, QueryArray, Parameters);

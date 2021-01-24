@@ -50,7 +50,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.AdvanceFromCustomers_Lock  = QueryResults[9].Unload();
 	Tables.ReconciliationStatement    = QueryResults[10].Unload();
 	Tables.PurchaseReturnTurnovers    = QueryResults[11].Unload();
-	
+
+#Region NewRegistersPosting		
+	QueryArray = GetQueryTextsSecondaryTables();
+	PostingServer.ExequteQuery(Ref, QueryArray, Parameters);
+#EndRegion	
+
 	Return Tables;
 EndFunction
 
@@ -456,6 +461,13 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+#Region NewRegisterPosting
+	Tables = Parameters.DocumentDataTables;	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+#EndRegion
+
 	// Advance from customers
 	Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance =
 		AccumulationRegisters.AdvanceFromCustomers.GetTableAdvanceFromCustomers_OffsetOfAdvance(
@@ -633,6 +645,10 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.ReconciliationStatement));
+			
+#Region NewRegistersPosting
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+#EndRegion	
 	
 	Return PostingDataTables;
 EndFunction
@@ -681,5 +697,72 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.PurchaseReturn.ItemList", AddInfo);
 EndProcedure
+
+#EndRegion
+
+#Region NewRegistersPosting
+
+Function GetQueryTextsSecondaryTables()
+	QueryArray = New Array;
+	QueryArray.Add(ItemList());
+	QueryArray.Add(SerialLotNumbers());
+	Return QueryArray;
+EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R4014B_SerialLotNumber());	
+	Return QueryArray;
+EndFunction
+
+Function ItemList()
+	Return
+		"SELECT
+		|	OpeningEntryInventory.Ref,
+		|	OpeningEntryInventory.Key,
+		|	OpeningEntryInventory.ItemKey,
+		|	OpeningEntryInventory.Store,
+		|	OpeningEntryInventory.Quantity,
+		|	NOT OpeningEntryInventory.SerialLotNumber = VALUE(Catalog.SerialLotNumbers.EmptyRef) AS isSerialLotNumberSet,
+		|	OpeningEntryInventory.SerialLotNumber,
+		|	OpeningEntryInventory.Ref.Date AS Period,
+		|	OpeningEntryInventory.Ref.Company AS Company
+		|INTO ItemList
+		|FROM
+		|	Document.OpeningEntry.Inventory AS OpeningEntryInventory
+		|WHERE
+		|	OpeningEntryInventory.Ref = &Ref";
+EndFunction
+
+Function SerialLotNumbers()
+	Return
+		"SELECT
+		|	SerialLotNumbers.Ref.Date AS Period,
+		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity,
+		|	ItemList.ItemKey AS ItemKey
+		|INTO SerialLotNumbers
+		|FROM
+		|	Document.PurchaseReturn.SerialLotNumbers AS SerialLotNumbers
+		|		LEFT JOIN Document.PurchaseReturn.ItemList AS ItemList
+		|		ON SerialLotNumbers.Key = ItemList.Key
+		|WHERE
+		|	SerialLotNumbers.Ref = &Ref";	
+EndFunction	
+
+Function R4014B_SerialLotNumber()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	*
+		|INTO R4014B_SerialLotNumber
+		|FROM
+		|	SerialLotNumbers AS QueryTable
+		|WHERE 
+		|	TRUE";
+
+EndFunction
 
 #EndRegion

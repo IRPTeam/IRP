@@ -232,7 +232,7 @@ Procedure ItemListReceiptBasisStartChoice(Object, Form, Item, ChoiceData, Standa
 EndProcedure
 
 Procedure SerialLotNumberListOnChange(Object, Form, Item = Undefined) Export
-	For Each Row In Object.SerialLotNumberList Do
+	For Each Row In Object.SerialLotNumbers Do
 		#If MobileClient Then
 		ItemListFilterStructure = New Structure;
 		ItemListFilterStructure.Insert("Key", Row.KeyRef);
@@ -369,11 +369,11 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 		Row.Quantity = Row.Quantity + ResultElement.Quantity;
 		
 		FillPropertyValues(SerialLotNumberListFilterStructure, ResultElement);
-		SerialLotNumberListExistingRows = Object.SerialLotNumberList.FindRows(SerialLotNumberListFilterStructure);
+		SerialLotNumberListExistingRows = Object.SerialLotNumbers.FindRows(SerialLotNumberListFilterStructure);
 		If SerialLotNumberListExistingRows.Count() Then
 			SerialLotNumberListRow = SerialLotNumberListExistingRows[0];
 		Else
-			SerialLotNumberListRow = Object.SerialLotNumberList.Add();
+			SerialLotNumberListRow = Object.SerialLotNumbers.Add();
 			FillPropertyValues(SerialLotNumberListRow, ResultElement, SerialLotNumberListString);
 		EndIf;
 		SerialLotNumberListRow.KeyRef = Row.Key;
@@ -394,9 +394,9 @@ Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel) Export
 	
 	SerialLotNumberListFilterStructure = New Structure;
 	SerialLotNumberListFilterStructure.Insert("KeyRef", CurrentData.Key);
-	SerialLotNumberListExistingRows = Object.SerialLotNumberList.FindRows(SerialLotNumberListFilterStructure);
+	SerialLotNumberListExistingRows = Object.SerialLotNumbers.FindRows(SerialLotNumberListFilterStructure);
 	For Each Row In SerialLotNumberListExistingRows Do
-		Object.SerialLotNumberList.Delete(Row);
+		Object.SerialLotNumbers.Delete(Row);
 	EndDo;
 	
 EndProcedure

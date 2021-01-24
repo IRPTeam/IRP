@@ -8,6 +8,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		EndDo;
 	EndIf;
 	
+	Items.FilterRegister.ChoiceList.SortByPresentation();
+	
 	If Parameters.Property("PutInTable") Then
 		ThisObject.PutInTable = Parameters.PutInTable;
 	EndIf;

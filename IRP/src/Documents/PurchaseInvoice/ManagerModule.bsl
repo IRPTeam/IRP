@@ -2941,6 +2941,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
 	QueryArray.Add(VendorsTransactions());
+	QueryArray.Add(SerialLotNumbers());
 	Return QueryArray;
 EndFunction
 
@@ -2957,6 +2958,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2013T_SalesOrdersProcurement());
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4017B_InternalSupplyRequestProcurement());
 	QueryArray.Add(R4033B_GoodsReceiptSchedule());
 	QueryArray.Add(R4050B_StockInventory());
@@ -3105,6 +3107,24 @@ Function VendorsTransactions()
 		|	ItemList.Currency,
 		|	ItemList.Period";
 EndFunction
+
+Function SerialLotNumbers()
+	Return
+		"SELECT
+		|	SerialLotNumbers.Ref.Date AS Period,
+		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity,
+		|	ItemList.ItemKey AS ItemKey
+		|INTO SerialLotNumbers
+		|FROM
+		|	Document.PurchaseInvoice.SerialLotNumbers AS SerialLotNumbers
+		|		LEFT JOIN Document.PurchaseInvoice.ItemList AS ItemList
+		|		ON SerialLotNumbers.Key = ItemList.Key
+		|WHERE
+		|	SerialLotNumbers.Ref = &Ref";	
+EndFunction	
 
 Function R1001T_Purchases()
 	Return
@@ -3307,6 +3327,19 @@ Function R4011B_FreeStocks()
 		|FROM
 		|	ItemList AS QueryTable
 		|WHERE  NOT QueryTable.IsService AND NOT QueryTable.UseGoodsReceipt";
+
+EndFunction
+
+Function R4014B_SerialLotNumber()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	*
+		|INTO R4014B_SerialLotNumber
+		|FROM
+		|	SerialLotNumbers AS QueryTable
+		|WHERE 
+		|	TRUE";
 
 EndFunction
 

@@ -407,7 +407,7 @@
       <objectType typeId="c039c36d-2a09-467c-8e7e-d423e56b2aa3" valueTypeId="9b9dc8f5-6849-4152-afba-68ec7576f516"/>
       <rowType typeId="d3b36ee4-d61b-4e5e-aadc-4fa48c489368" valueTypeId="2e3e1fc5-e14a-4f34-9637-8a10201683d8"/>
     </producedTypes>
-    <name>SerialLotNumberList</name>
+    <name>SerialLotNumbers</name>
     <synonym>
       <key>en</key>
       <value>Item serial/lot number list</value>

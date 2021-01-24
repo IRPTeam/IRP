@@ -66,6 +66,7 @@
   <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
   <registerRecords>AccumulationRegister.ShipmentConfirmationSchedule</registerRecords>
+  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -259,20 +260,6 @@
       <createOnInput>DontUse</createOnInput>
       <dataHistory>Use</dataHistory>
       <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-    </attributes>
-    <attributes uuid="a9c0e2b1-5d76-456a-a869-c56488e4707a">
-      <name>SerialLotNumber</name>
-      <synonym>
-        <key>en</key>
-        <value>Item serial/lot number</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.SerialLotNumbers</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="ad036946-c3b6-4689-a697-c0cef1a0b597">
       <name>QuantityInBaseUnit</name>

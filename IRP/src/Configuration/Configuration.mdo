@@ -362,6 +362,8 @@
   <commonModules>CommonModule.OffsetOfPartnersServer</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentClient</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentServer</commonModules>
+  <commonModules>CommonModule.DocManualRegisterEntryClient</commonModules>
+  <commonModules>CommonModule.DocManualRegisterEntryServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.BusinessUnit</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

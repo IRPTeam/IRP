@@ -574,6 +574,13 @@
         <value>78</value>
       </code>
     </items>
+    <items id="8a4cc1a3-e127-4c82-82b2-99af25bccff2">
+      <name>Document_ManualRegisterEntry</name>
+      <description>Document Manual register entry</description>
+      <code xsi:type="core:NumberValue">
+        <value>79</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

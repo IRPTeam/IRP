@@ -581,6 +581,13 @@
         <value>79</value>
       </code>
     </items>
+    <items id="a98a551d-17dc-45db-aac6-fa95fb59a46b">
+      <name>Document_SalesOrderClosing</name>
+      <description>Document Sales order closing</description>
+      <code xsi:type="core:NumberValue">
+        <value>80</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

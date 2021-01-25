@@ -75,6 +75,7 @@
       <types>DocumentRef.PhysicalCountByLocation</types>
       <types>DocumentRef.ItemStockAdjustment</types>
       <types>DocumentRef.ManualRegisterEntry</types>
+      <types>DocumentRef.SalesOrderClosing</types>
     </commandParameterType>
     <representation>Auto</representation>
     <shortcut></shortcut>

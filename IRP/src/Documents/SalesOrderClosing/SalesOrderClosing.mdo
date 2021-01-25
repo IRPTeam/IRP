@@ -32,7 +32,7 @@
     <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
     <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
     <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_SalesOrder</value>
+      <value>Catalog.AddAttributeAndPropertySets.Document_SalesOrderClosing</value>
     </typesFilterValue>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
@@ -44,7 +44,7 @@
     <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
     <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
     <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_SalesOrder</value>
+      <value>Catalog.AddAttributeAndPropertySets.Document_SalesOrderClosing</value>
     </typesFilterValue>
     <characteristicValues>Document.SalesOrderClosing.TabularSection.AddAttributes</characteristicValues>
     <objectField>Document.SalesOrderClosing.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
@@ -56,7 +56,7 @@
   <fullTextSearch>Use</fullTextSearch>
   <listPresentation>
     <key>en</key>
-    <value>Sales orders</value>
+    <value>Sales orders closing</value>
   </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
@@ -321,15 +321,6 @@
     <synonym>
       <key>en</key>
       <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="604154fe-3859-433d-9680-2bee58b74915">
-    <name>ReadForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Read form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
@@ -951,12 +942,4 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
-  <templates uuid="16853b41-567d-4754-8ea7-93cc6bd0d5d7">
-    <name>ReadDCS</name>
-    <synonym>
-      <key>en</key>
-      <value>Read DCS</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
 </mdclass:Document>

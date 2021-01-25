@@ -2565,7 +2565,7 @@
             </extInfo>
           </items>
           <items xsi:type="form:FormField">
-            <name>ResultsTableOfBalanceQuantityIncomming</name>
+            <name>ResultsTableOfBalanceQuantityIncoming</name>
             <id>399</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2573,10 +2573,10 @@
               <common>true</common>
             </userVisible>
             <dataPath xsi:type="form:DataPath">
-              <segments>ResultsTableOfBalance.QuantityIncomming</segments>
+              <segments>ResultsTableOfBalance.QuantityIncoming</segments>
             </dataPath>
             <extendedTooltip>
-              <name>ResultsTableOfBalanceQuantityIncommingExtendedTooltip</name>
+              <name>ResultsTableOfBalanceQuantityIncomingExtendedTooltip</name>
               <id>401</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -2591,7 +2591,7 @@
               </extInfo>
             </extendedTooltip>
             <contextMenu>
-              <name>ResultsTableOfBalanceQuantityIncommingContextMenu</name>
+              <name>ResultsTableOfBalanceQuantityIncomingContextMenu</name>
               <id>400</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -5734,10 +5734,10 @@
       </edit>
     </columns>
     <columns>
-      <name>QuantityIncomming</name>
+      <name>QuantityIncoming</name>
       <title>
         <key>en</key>
-        <value>Incomming</value>
+        <value>Incoming</value>
       </title>
       <id>69</id>
       <valueType>

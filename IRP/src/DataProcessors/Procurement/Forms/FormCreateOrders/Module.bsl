@@ -44,7 +44,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	"SELECT
 	|	tmp.Store,
 	|	tmp.Balance,
-	|	tmp.BalanceIncomming,
+	|	tmp.BalanceIncoming,
 	|	tmp.PurchaseOrder
 	|INTO TableOfBalance
 	|FROM
@@ -55,7 +55,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|SELECT
 	|	tmp.Store,
 	|	tmp.Quantity,
-	|	tmp.QuantityIncomming,
+	|	tmp.QuantityIncoming,
 	|	tmp.PurchaseOrder
 	|INTO ResultsTableOfBalance
 	|FROM
@@ -97,10 +97,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|SELECT
 	|	TableOfBalance.Store,
 	|	TableOfBalance.Balance,
-	|	TableOfBalance.BalanceIncomming,
+	|	TableOfBalance.BalanceIncoming,
 	|	TableOfBalance.PurchaseOrder,
 	|	ISNULL(ResultsTableOfBalance.Quantity, 0) AS Quantity,
-	|	ISNULL(ResultsTableOfBalance.QuantityIncomming, 0) AS QuantityIncomming
+	|	ISNULL(ResultsTableOfBalance.QuantityIncoming, 0) AS QuantityIncoming
 	|FROM
 	|	TableOfBalance AS TableOfBalance
 	|		LEFT JOIN ResultsTableOfBalance AS ResultsTableOfBalance
@@ -263,7 +263,7 @@ Procedure TableOfBalanceQuantityOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure TableOfBalanceQuantityIncommingOnChange(Item)
+Procedure TableOfBalanceQuantityIncomingOnChange(Item)
 	Update_TotalQuantity();	
 EndProcedure
 
@@ -289,8 +289,8 @@ Procedure Update_TotalQuantity()
 	TransferQuantity = 0;
 	PurchaseQuantity = 0;
 	For Each Row In ThisObject.TableOfBalance Do
-		ThisObject.SelectedQuantity = ThisObject.SelectedQuantity + Row.Quantity + Row.QuantityIncomming;
-		TransferQuantity = TransferQuantity + Row.Quantity + Row.QuantityIncomming;
+		ThisObject.SelectedQuantity = ThisObject.SelectedQuantity + Row.Quantity + Row.QuantityIncoming;
+		TransferQuantity = TransferQuantity + Row.Quantity + Row.QuantityIncoming;
 	EndDo;
 	For Each Row In ThisObject.TableOfPurchase Do
 		ThisObject.SelectedQuantity = ThisObject.SelectedQuantity + Row.BasisQuantity;
@@ -402,7 +402,7 @@ Procedure Update_TableOfBalance()
 	|	StockReservationBalance.Store,
 	|	UNDEFINED AS PurchaseOrder,
 	|	StockReservationBalance.QuantityBalance AS Balance,
-	|	0 AS BalanceIncomming
+	|	0 AS BalanceIncoming
 	|FROM
 	|	AccumulationRegister.StockReservation.Balance(ENDOFPERIOD(&DateOfRelevance, day), ItemKey = &ItemKey
 	|	AND Store <> &Store) AS StockReservationBalance
@@ -410,13 +410,13 @@ Procedure Update_TableOfBalance()
 	|UNION ALL
 	|
 	|SELECT
-	|	R4035_IncommingStocksBalance.Store,
-	|	R4035_IncommingStocksBalance.Order,
+	|	IncomingStocksBalance.Store,
+	|	IncomingStocksBalance.Order,
 	|	0,
-	|	R4035_IncommingStocksBalance.QuantityBalance
+	|	IncomingStocksBalance.QuantityBalance
 	|FROM
-	|	AccumulationRegister.R4035_IncommingStocks.Balance(ENDOFPERIOD(&DateOfRelevance, day), ItemKey = &ItemKey
-	|	AND Store <> &Store) AS R4035_IncommingStocksBalance";
+	|	AccumulationRegister.R4035B_IncomingStocks.Balance(ENDOFPERIOD(&DateOfRelevance, day), ItemKey = &ItemKey
+	|	AND Store <> &Store) AS IncomingStocksBalance";
 	Query.SetParameter("Store", ThisObject.Store);
 	Query.SetParameter("DateOfRelevance", ThisObject.DateOfRelevance);
 	Query.SetParameter("ItemKey", ThisObject.ItemKey);
@@ -659,14 +659,14 @@ Procedure Ok(Command)
 	Result.Insert("TableOfInternalSupplyRequest", New Array());
 	
 	For Each Row In ThisObject.TableOfBalance Do
-		If Not ValueIsFilled(Row.Quantity) And Not ValueIsFilled(Row.QuantityIncomming) Then
+		If Not ValueIsFilled(Row.Quantity) And Not ValueIsFilled(Row.QuantityIncoming) Then
 			Continue;
 		EndIf;
 		NewRow = New Structure();
 		NewRow.Insert("ItemKey", ThisObject.ItemKey);
 		NewRow.Insert("Store", Row.Store);
 		NewRow.Insert("Quantity", Row.Quantity);
-		NewRow.Insert("QuantityIncomming", Row.QuantityIncomming);
+		NewRow.Insert("QuantityIncoming", Row.QuantityIncoming);
 		NewRow.Insert("PurchaseOrder", Row.PurchaseOrder);
 		
 		Result.TableOfBalance.Add(NewRow);

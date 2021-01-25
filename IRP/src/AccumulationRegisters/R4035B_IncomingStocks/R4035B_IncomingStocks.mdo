@@ -8,10 +8,10 @@
     <recordKeyType typeId="6b6b70a0-14dc-4822-bf65-d1d0f87e999c" valueTypeId="289174c8-a41f-4a60-b7fd-9bb49c905e43"/>
     <recordType typeId="f19e3ae9-3443-4f2d-86b6-5d78e328c869" valueTypeId="6c82f3f8-23a2-4456-b0b6-58375a610818"/>
   </producedTypes>
-  <name>R4035_IncommingStocks</name>
+  <name>R4035B_IncomingStocks</name>
   <synonym>
     <key>en</key>
-    <value>R4035 Incomming stocks</value>
+    <value>R4035 Incoming stocks</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>

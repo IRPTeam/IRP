@@ -362,6 +362,7 @@
   <commonModules>CommonModule.OffsetOfPartnersServer</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentClient</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentServer</commonModules>
+  <commonModules>CommonModule.IncomingStocksServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.BusinessUnit</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -727,8 +728,8 @@
   <accumulationRegisters>AccumulationRegister.R4032B_GoodsInTransitOutgoing</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4033B_GoodsReceiptSchedule</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4034B_GoodsShipmentSchedule</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R4035_IncommingStocks</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R4036_IncommingStocksRequested</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4035B_IncomingStocks</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4036B_IncomingStocksRequested</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4050B_StockInventory</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4051T_StockAdjustmentAsWriteOff</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4052T_StockAdjustmentAsSurplus</accumulationRegisters>

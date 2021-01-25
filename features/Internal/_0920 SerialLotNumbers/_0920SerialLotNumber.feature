@@ -52,6 +52,7 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
+		When Create document PurchaseInvoice objects (for stock remaining control)
 		When Create catalog ExpenseAndRevenueTypes objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -610,7 +611,7 @@ Scenario: _092004 check serial lot number in the Sales invoice
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
         |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
-	* Post Retail sales receipt and check movements in the register Sales turnovers
+	* Post Retail sales receipt and check movements in the register Sales turnovers and R4014 Serial lot numbers
 		And I click the button named "FormPost"
 		And I delete "$$SalesInvoice092004$$" variable
 		And I delete "$$NumberSalesInvoice092004$$" variable
@@ -627,6 +628,19 @@ Scenario: _092004 check serial lot number in the Sales invoice
 			| 'USD'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '111,28' |
 			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '400,00' |
 			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '650,00' |
+		And I activate "$$SalesInvoice092004$$" window
+		And I click "Registrations report" button
+		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| '$$SalesInvoice092004$$'               | ''            | ''       | ''          | ''             | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''       | ''          | ''             | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | ''                  |
+			| ''                                     | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Expense'     | '*'      | '1'         | 'Main Company' | '38/Yellow' | '99098809009910'    |
+			| ''                                     | 'Expense'     | '*'      | '2'         | 'Main Company' | '38/Yellow' | '99098809009911'    |
+		And I close current window
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$SalesInvoice092004$$" window
 		And I go to line in "ItemList" table
@@ -783,7 +797,7 @@ Scenario: _092005 check serial lot number in the Sales return
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
         |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
-	* Post Retail return receipt and check movements in the register Sales turnovers
+	* Post Retail return receipt and check movements in the register Sales turnovers and R4014 Serial lot numbers
 		And I click the button named "FormPost"
 		And I delete "$$SalesReturn092005$$" variable
 		And I save the window as "$$SalesReturn092005$$"
@@ -802,6 +816,18 @@ Scenario: _092005 check serial lot number in the Sales return
 			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-2,000'   | '-800,00' |
 			| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-2,000'   | '-136,96' |
 			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-2,000'   | '-800,00' |
+		And I activate "$$SalesReturn092005$$" window
+		And I click "Registrations report" button
+		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| '$$SalesReturn092005$$'                | ''            | ''       | ''          | ''             | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''       | ''          | ''             | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | ''                  |
+			| ''                                     | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Receipt'     | '*'      | '1'         | 'Main Company' | '38/Yellow' | '99098809009911'    |
+		And I close current window
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$SalesReturn092005$$" window
 		And I go to line in "ItemList" table
@@ -1014,7 +1040,203 @@ Scenario: _092006 check serial lot number in the PurchaseInvoice
 		
 	
 	
-
+	
+Scenario: _0920061 check serial lot number controls in the PurchaseInvoice
+	* Create Purchase invoice
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'    |
+		And I select current line in "List" table
+	* Add items (first item with serial lot number, second - without serial lot number)
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I input "400,00" text in "Price" field of "ItemList" table	
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'       |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '38/18SD'  |
+		And I select current line in "List" table	
+		And I input "700,00" text in "Price" field of "ItemList" table		
+	* Filling in serial lot number in the first string
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Trousers' | '38/Yellow' | '1,000' |
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+		* Create serial lot number for item
+			And I click the button named "FormCreate"
+			And I input "99098809009999" text in "Serial number" field
+			And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Owner'     | 'Serial number'  |
+			| '38/Yellow' | '99098809009999' |
+		And I activate "Serial number" field in "List" table
+		And I click the button named "FormChoose"
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+	* Post Purchase invoice and check movements in the register Register  "R4014 Serial lot numbers"
+		And I click the button named "FormPost"
+		And I delete "$$PurchaseInvoice0920061$$" variable
+		And I delete "$$NumberPurchaseInvoice0920061$$" variable
+		And I delete "$$DatePurchaseInvoice0920061$$" variable
+		And I save the window as "$$PurchaseInvoice092006$$"
+		And I save the value of the field named "Number" as "$$NumberPurchaseInvoice0920061$$"
+		And I save the value of the field named "Date" as "$$DatePurchaseInvoice0920061$$"
+	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
+		And I activate "$$PurchaseInvoice092006$$" window
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Trousers' | '38/Yellow' | '1,000' |
+		And I input "3,000" text in "Q" field of "ItemList" table
+		And I click the button named "FormPost"
+		Then I wait that in user messages the "Quantity [3] does not match the quantity [1] by serial/lot numbers" substring will appear in "30" seconds
+		* Add one more serial lot number
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+			* Create serial lot number for item
+				And I click the button named "FormCreate"
+				And I input "99098809009908" text in "Serial number" field
+				And I click "Save and close" button
+			And I go to line in "List" table
+				| 'Owner'     | 'Serial number'  |
+				| '38/Yellow' | '99098809009908' |
+			And I activate "Serial number" field in "List" table
+			And I click the button named "FormChoose"
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "3,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button
+		And I click the button named "FormPost"
+		Then I wait that in user messages the "Quantity [3] does not match the quantity [4] by serial/lot numbers" substring will appear in "30" seconds
+		* Change serial/lot numbers quantity to 3
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And I go to line in "SerialLotNumbers" table
+				| 'Quantity' | 'Serial lot number' |
+				| '3,000'    | '99098809009908'    |
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I select current line in "SerialLotNumbers" table
+			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button
+	* Post Purchase invoice and check movements in the register R4014 Serial lot numbers
+		And I click the button named "FormPost"
+		And I click "Registrations report" button
+		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| '$$PurchaseInvoice0920061$$'            | ''            | ''                              | ''          | ''             | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''                              | ''          | ''             | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                              | ''          | ''             | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''          | ''                  |
+			| ''                                     | ''            | ''                              | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Receipt'     | '$$DatePurchaseInvoice0920061$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009999'    |
+			| ''                                     | 'Receipt'     | '$$DatePurchaseInvoice0920061$$' | '2'         | 'Main Company' | '38/Yellow' | '99098809009908'    |
+		And I close current window
+	* Check the message to the user when the serial number was not filled in
+		And I activate "$$PurchaseInvoice092006$$" window
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'L/Green'  |
+		And I select current line in "List" table
+		And I click the button named "FormPost"
+		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
+	* Change item that uses serial lot number to item that does not use serial lot number and check user message
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'L/Green'  |
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'       |
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '37/18SD'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then user message window does not contain messages
+	* Change item that does not use serial lot number to item that uses serial lot number and check user message
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '37/18SD'  |
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
+	And I close all client application windows
 
 
 Scenario: _092007 check serial lot number in the PurchaseReturn
@@ -1123,6 +1345,229 @@ Scenario: _092007 check serial lot number in the PurchaseReturn
 		
 
 	
+Scenario: _0920071 check serial lot number controls in the PurchaseReturn	
+	* Create Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'    |
+		And I select current line in "List" table
+	* Add items (first item with serial lot number, second - without serial lot number)
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I input "400,00" text in "Price" field of "ItemList" table	
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'       |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '38/18SD'  |
+		And I select current line in "List" table	
+		And I input "700,00" text in "Price" field of "ItemList" table		
+	* Filling in serial lot number in the first string
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Trousers' | '38/Yellow' | '1,000' |
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+		* Create serial lot number for item
+			And I click the button named "FormCreate"
+			And I input "99098809009999" text in "Serial number" field
+			And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Owner'     | 'Serial number'  |
+			| '38/Yellow' | '99098809009999' |
+		And I activate "Serial number" field in "List" table
+		And I click the button named "FormChoose"
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+	* Check that the field Serial lot number is inactive in the second string
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Boots'    | '38/18SD' | '1,000' |
+		And I select current line in "ItemList" table
+		When I Check the steps for Exception
+        |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
+	* Post Purchase return and check movements in the register Register  "R4014 Serial lot numbers"
+		And I click the button named "FormPost"
+		And I delete "$$PurchaseReturn0920071$$" variable
+		And I delete "$$NumberPurchaseReturn0920071$$" variable
+		And I delete "$$DatePurchaseReturn0920071$$" variable
+		And I save the window as "$$PurchaseReturn0920071$$"
+		And I save the value of the field named "Number" as "$$NumberPurchaseReturn0920071$$"
+		And I save the value of the field named "Date" as "$$DatePurchaseReturn0920071$$"
+	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
+		And I activate "$$PurchaseReturn0920071$$" window
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Trousers' | '38/Yellow' | '1,000' |
+		And I input "3,000" text in "Q" field of "ItemList" table
+		And I click the button named "FormPost"
+		Then I wait that in user messages the "Quantity [3] does not match the quantity [1] by serial/lot numbers" substring will appear in "30" seconds
+		* Add one more serial lot number
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+			* Create serial lot number for item
+				And I click the button named "FormCreate"
+				And I input "99098809009008" text in "Serial number" field
+				And I click "Save and close" button
+			And I go to line in "List" table
+				| 'Owner'     | 'Serial number'  |
+				| '38/Yellow' | '99098809009008' |
+			And I activate "Serial number" field in "List" table
+			And I click the button named "FormChoose"
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "3,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button
+		And I click the button named "FormPost"
+		Then I wait that in user messages the "Quantity [3] does not match the quantity [4] by serial/lot numbers" substring will appear in "30" seconds
+		* Change serial/lot numbers quantity to 3
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And I go to line in "SerialLotNumbers" table
+				| 'Quantity' | 'Serial lot number' |
+				| '3,000'    | '99098809009008'    |
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I select current line in "SerialLotNumbers" table
+			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button
+	* Post Purchase return and check movements in the register R4014 Serial lot numbers
+		And I click the button named "FormPost"
+		And I click "Registrations report" button
+		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| '$$PurchaseReturn0920071$$'             | ''            | ''                             | ''          | ''             | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''                             | ''          | ''             | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                             | ''          | ''             | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period'                       | 'Resources' | 'Dimensions'   | ''          | ''                  |
+			| ''                                     | ''            | ''                             | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Expense'     | '$$DatePurchaseReturn0920071$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009999'    |
+			| ''                                     | 'Expense'     | '$$DatePurchaseReturn0920071$$' | '2'         | 'Main Company' | '38/Yellow' | '99098809009008'    |
+		And I close current window
+	* Check the message to the user when the serial number was not filled in
+		And I activate "$$PurchaseReturn0920071$$" window
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'L/Green'  |
+		And I select current line in "List" table
+		And I click the button named "FormPost"
+		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
+	* Change item that uses serial lot number to item that does not use serial lot number and check user message
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'L/Green'  |
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'       |
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '37/18SD'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then user message window does not contain messages
+	* Change item that does not use serial lot number to item that uses serial lot number and check user message
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '37/18SD'  |
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
+	And I close all client application windows
+
+Scenario: _0920072 check filling in serial lot number in the PurchaseReturn	from Purchase invoice
+	* Create Purchase return based on Purchase invoice
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'     |
+			| '25' |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormDocumentPurchaseReturnGeneratePurchaseReturn"
+	* Check filling in serial lot number from Purchase invoice
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Serial lot numbers' | 'Q'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
+			| 'Dress' | 'XS/Blue'  | '05'                 | '200,000' | 'pcs'  | 'No'                 | '18 720,00'  | '520,00' | '18%' | ''              | '104 000,00' | 'Purchase invoice 25 dated 01.12.2020 12:00:00' | ''                      | '122 720,00'   | 'Store 05' |
+		And I click the button named "FormPost"
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Serial lot numbers' | 'Q'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
+			| 'Dress' | 'XS/Blue'  | '05'                 | '200,000' | 'pcs'  | 'No'                 | '18 720,00'  | '520,00' | '18%' | ''              | '104 000,00' | 'Purchase invoice 25 dated 01.12.2020 12:00:00' | ''                      | '122 720,00'   | 'Store 05' |
+		And I close all client application windows
+		
+					
 
 
 Scenario: _092008 check serial lot number in the Opening entry
@@ -1375,7 +1820,209 @@ Scenario: _092009 check serial lot number in the Stock adjustment as surplus
 		
 
 	
-
+Scenario: _0920091 check serial lot number controls in the Stock adjustment as surplus	
+	* Create stock adjustment as surplus
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
+	* Add items (first item with serial lot number, second - without serial lot number)
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListRevenueType" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Revenue' |
+		And I select current line in "List" table
+		And I input "1,00" text in "Quantity" field of "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'       |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '38/18SD'  |
+		And I select current line in "List" table	
+		And I input "2,00" text in "Quantity" field of "ItemList" table	
+		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListRevenueType" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Revenue' |
+		And I select current line in "List" table	
+	* Filling in serial lot number in the first string
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Quantity'     |
+			| 'Trousers' | '38/Yellow' | '1,000' |
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| 'Owner'     | 'Serial number'  |
+			| '38/Yellow' | '99098809009999' |
+		And I activate "Serial number" field in "List" table
+		And I click the button named "FormChoose"
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+	* Post Stock adjustment as surplus and check movements in the register Register  "R4014 Serial lot numbers"
+		And I click the button named "FormPost"
+		And I delete "$$StockAdjustmentAsSurplus0920091$$" variable
+		And I delete "$$NumberStockAdjustmentAsSurplus0920091$$" variable
+		And I delete "$$DateStockAdjustmentAsSurplus0920091$$" variable
+		And I save the window as "$$StockAdjustmentAsSurplus0920091$$"
+		And I save the value of the field named "Number" as "$$NumberStockAdjustmentAsSurplus0920091$$"
+		And I save the value of the field named "Date" as "$$DateStockAdjustmentAsSurplus0920091$$"
+	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
+		And I activate "$$StockAdjustmentAsSurplus0920091$$" window
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Quantity'     |
+			| 'Trousers' | '38/Yellow' | '1,000' |
+		And I input "3,000" text in "Quantity" field of "ItemList" table
+		And I click the button named "FormPost"
+		Then I wait that in user messages the "Quantity [3] does not match the quantity [1] by serial/lot numbers" substring will appear in "30" seconds
+		* Add one more serial lot number
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+			And I go to line in "List" table
+				| 'Owner'     | 'Serial number'  |
+				| '38/Yellow' | '99098809009008' |
+			And I activate "Serial number" field in "List" table
+			And I click the button named "FormChoose"
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "3,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button
+		And I click the button named "FormPost"
+		Then I wait that in user messages the "Quantity [3] does not match the quantity [4] by serial/lot numbers" substring will appear in "30" seconds
+		* Change serial/lot numbers quantity to 3
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And I go to line in "SerialLotNumbers" table
+				| 'Quantity' | 'Serial lot number' |
+				| '3,000'    | '99098809009008'    |
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I select current line in "SerialLotNumbers" table
+			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button
+	* Post Stock adjustment as surplus and check movements in the register R4014 Serial lot numbers
+		And I click the button named "FormPost"
+		And I click "Registrations report" button
+		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| '$$StockAdjustmentAsSurplus0920091$$'   | ''            | ''                                        | ''          | ''             | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''                                        | ''          | ''             | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                                        | ''          | ''             | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period'                                  | 'Resources' | 'Dimensions'   | ''          | ''                  |
+			| ''                                     | ''            | ''                                        | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Receipt'     | '$$DateStockAdjustmentAsSurplus0920091$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009999'    |
+			| ''                                     | 'Receipt'     | '$$DateStockAdjustmentAsSurplus0920091$$' | '2'         | 'Main Company' | '38/Yellow' | '99098809009008'    |
+		And I close current window
+	* Check the message to the user when the serial number was not filled in
+		And I activate "$$StockAdjustmentAsSurplus0920091$$" window
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'L/Green'  |
+		And I select current line in "List" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
+		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListRevenueType" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Revenue' |
+		And I select current line in "List" table	
+		And I click the button named "FormPost"
+		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
+	* Change item that uses serial lot number to item that does not use serial lot number and check user message
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'L/Green'  |
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'       |
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '37/18SD'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then user message window does not contain messages
+	* Change item that does not use serial lot number to item that uses serial lot number and check user message
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '37/18SD'  |
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
+	And I close all client application windows		
 
 
 
@@ -1485,6 +2132,209 @@ Scenario: _092010 check serial lot number in the Stock adjustment as write off
 		
 
 	
+Scenario: _09200101 check serial lot number controls in the Stock adjustment as write off	
+	* Create stock adjustment as write off
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
+	* Add items (first item with serial lot number, second - without serial lot number)
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListExpenseType" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Expense' |
+		And I select current line in "List" table
+		And I input "1,00" text in "Quantity" field of "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'       |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '38/18SD'  |
+		And I select current line in "List" table	
+		And I input "2,00" text in "Quantity" field of "ItemList" table	
+		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListExpenseType" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Expense' |
+		And I select current line in "List" table	
+	* Filling in serial lot number in the first string
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Quantity'     |
+			| 'Trousers' | '38/Yellow' | '1,000' |
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| 'Owner'     | 'Serial number'  |
+			| '38/Yellow' | '99098809009999' |
+		And I activate "Serial number" field in "List" table
+		And I click the button named "FormChoose"
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+	* Post Stock adjustment as write off and check movements in the register Register  "R4014 Serial lot numbers"
+		And I click the button named "FormPost"
+		And I delete "$$StockAdjustmentAsWriteOff09200101$$" variable
+		And I delete "$$NumberStockAdjustmentAsWriteOff09200101$$" variable
+		And I delete "$$DateStockAdjustmentAsWriteOff09200101$$" variable
+		And I save the window as "$$StockAdjustmentAsWriteOff09200101$$"
+		And I save the value of the field named "Number" as "$$NumberStockAdjustmentAsWriteOff09200101$$"
+		And I save the value of the field named "Date" as "$$DateStockAdjustmentAsWriteOff09200101$$"
+	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
+		And I activate "$$StockAdjustmentAsWriteOff09200101$$" window
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Quantity'     |
+			| 'Trousers' | '38/Yellow' | '1,000' |
+		And I input "3,000" text in "Quantity" field of "ItemList" table
+		And I click the button named "FormPost"
+		Then I wait that in user messages the "Quantity [3] does not match the quantity [1] by serial/lot numbers" substring will appear in "30" seconds
+		* Add one more serial lot number
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+			And I go to line in "List" table
+				| 'Owner'     | 'Serial number'  |
+				| '38/Yellow' | '99098809009008' |
+			And I activate "Serial number" field in "List" table
+			And I click the button named "FormChoose"
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "3,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button
+		And I click the button named "FormPost"
+		Then I wait that in user messages the "Quantity [3] does not match the quantity [4] by serial/lot numbers" substring will appear in "30" seconds
+		* Change serial/lot numbers quantity to 3
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And I go to line in "SerialLotNumbers" table
+				| 'Quantity' | 'Serial lot number' |
+				| '3,000'    | '99098809009008'    |
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I select current line in "SerialLotNumbers" table
+			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button
+	* Post stock adjustment as write off and check movements in the register R4014 Serial lot numbers
+		And I click the button named "FormPost"
+		And I click "Registrations report" button
+		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| '$$StockAdjustmentAsWriteOff09200101$$'| ''            | ''                                        | ''          | ''             | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''                                        | ''          | ''             | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                                        | ''          | ''             | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period'                                  | 'Resources' | 'Dimensions'   | ''          | ''                  |
+			| ''                                     | ''            | ''                                        | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Expense'     | '$$DateStockAdjustmentAsWriteOff09200101$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009999'    |
+			| ''                                     | 'Expense'     | '$$DateStockAdjustmentAsWriteOff09200101$$' | '2'         | 'Main Company' | '38/Yellow' | '99098809009008'    |
+		And I close current window
+	* Check the message to the user when the serial number was not filled in
+		And I activate "$$StockAdjustmentAsWriteOff09200101$$" window
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'L/Green'  |
+		And I select current line in "List" table
+		And I input "3,000" text in "Quantity" field of "ItemList" table
+		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListExpenseType" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Expense' |
+		And I select current line in "List" table	
+		And I click the button named "FormPost"
+		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
+	* Change item that uses serial lot number to item that does not use serial lot number and check user message
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'L/Green'  |
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'       |
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '37/18SD'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then user message window does not contain messages
+	* Change item that does not use serial lot number to item that uses serial lot number and check user message
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '37/18SD'  |
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
+	And I close all client application windows	
 
 Scenario: _092011 check serial lot number in the Item stock adjustment
 	* Create Item stock adjustment

@@ -326,7 +326,7 @@ Function CollectParametersForCreateOrdersForm(Item, ItemKey, Unit)
 		NewRow = New Structure();
 		NewRow.Insert("Store", Row.Store);
 		NewRow.Insert("Quantity", Row.Quantity);
-		NewRow.Insert("QuantityIncomming", Row.QuantityIncomming);
+		NewRow.Insert("QuantityIncoming", Row.QuantityIncoming);
 		NewRow.Insert("PurchaseOrder", Row.PurchaseOrder);
 		FormParameters.TableOfBalance.Add(NewRow);
 	EndDo;
@@ -655,7 +655,7 @@ Function CollectDataFor_InventoryTransferOrder(ItemKey)
 		EndDo;
 		
 		// by Internal supply request and Purchase orders
-		NeededQuantity = Row.QuantityIncomming;
+		NeededQuantity = Row.QuantityIncoming;
 		For Each RowSupplyRequest In SupplyRequests Do
 			If Not ValueIsFilled(NeededQuantity) Or Not ValueIsFilled(RowSupplyRequest.Transfer) Then
 				Continue;

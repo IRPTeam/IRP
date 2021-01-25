@@ -236,17 +236,17 @@ Scenario: Create catalog FileStorageVolumes objects
 Scenario: Create catalog InterfaceGroups objects (Purchase and production,  Main information)
 
 	And I check or create catalog "InterfaceGroups" objects:
-		| 'Ref'                                                                     | 'DeletionMark' | 'Code'      | 'Description' | 'FormPosition' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr'             |
-		| 'e1cib/data/Catalog.InterfaceGroups?ref=aa6b120ed92fbced11eacd8d38d0864c' | 'No'           | '000000003' | ''            | ''             | 'Purchase and production' | ''                 | ''               | 'Purchase and production TR' |
-		| 'e1cib/data/Catalog.InterfaceGroups?ref=aa6b120ed92fbced11eacd8f1ea7592a' | 'No'           | '000000004' | ''            | 'Left'         | 'Main information'        | ''                 | ''               | 'Main information TR'        |
+		| 'Ref'                                                                     | 'DeletionMark' | 'Code'      | 'Description' | 'FormPosition' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr'             | 'Behavior'                           | 'ChildFormItemsGroup'                              |
+		| 'e1cib/data/Catalog.InterfaceGroups?ref=aa6b120ed92fbced11eacd8d38d0864c' | 'No'           | '000000003' | ''            | ''             | 'Purchase and production' | ''                 | ''               | 'Purchase and production TR' | 'Enum.InterfaceGroupBehaviors.Usual' | 'Enum.InterfaceGroupChildFormItemsGroups.Vertical' |
+		| 'e1cib/data/Catalog.InterfaceGroups?ref=aa6b120ed92fbced11eacd8f1ea7592a' | 'No'           | '000000004' | ''            | 'Left'         | 'Main information'        | ''                 | ''               | 'Main information TR'        | 'Enum.InterfaceGroupBehaviors.Usual' | 'Enum.InterfaceGroupChildFormItemsGroups.Vertical' |
 
 Scenario: Create catalog InterfaceGroups objects
 
 	And I check or create catalog "InterfaceGroups" objects:
-		| 'Ref'                                                                     | 'DeletionMark' | 'Code'      | 'Description' | 'FormPosition' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr'             |
-		| 'e1cib/data/Catalog.InterfaceGroups?ref=aa78120ed92fbced11eaf114c59ef02d' | 'No'           | '000000001' | ''            | ''             | 'Product information'     | ''                 | ''               | 'Product information TR'     |
-		| 'e1cib/data/Catalog.InterfaceGroups?ref=aa78120ed92fbced11eaf114c59ef02e' | 'No'           | '000000002' | ''            | 'Right'        | 'Accounting information'  | ''                 | ''               | 'Accounting information TR'  |
-		| 'e1cib/data/Catalog.InterfaceGroups?ref=aa78120ed92fbced11eaf1365f10e31d' | 'No'           | '000000005' | ''            | ''             | 'Print'                   | ''                 | 'Печать'         | 'Print'                      |
+		| 'Ref'                                                                     | 'DeletionMark' | 'Code'      | 'Description' | 'FormPosition' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr'             | 'Behavior'                           | 'ChildFormItemsGroup'                              |
+		| 'e1cib/data/Catalog.InterfaceGroups?ref=aa78120ed92fbced11eaf114c59ef02d' | 'No'           | '000000001' | ''            | ''             | 'Product information'     | ''                 | ''               | 'Product information TR'     | 'Enum.InterfaceGroupBehaviors.Usual' | 'Enum.InterfaceGroupChildFormItemsGroups.Vertical' |
+		| 'e1cib/data/Catalog.InterfaceGroups?ref=aa78120ed92fbced11eaf114c59ef02e' | 'No'           | '000000002' | ''            | 'Right'        | 'Accounting information'  | ''                 | ''               | 'Accounting information TR'  | 'Enum.InterfaceGroupBehaviors.Usual' | 'Enum.InterfaceGroupChildFormItemsGroups.Vertical' |
+		| 'e1cib/data/Catalog.InterfaceGroups?ref=aa78120ed92fbced11eaf1365f10e31d' | 'No'           | '000000005' | ''            | ''             | 'Print'                   | ''                 | 'Печать'         | 'Print'                      | 'Enum.InterfaceGroupBehaviors.Usual' | 'Enum.InterfaceGroupChildFormItemsGroups.Vertical' |
 
 
 Scenario: Create catalog ItemSegments objects

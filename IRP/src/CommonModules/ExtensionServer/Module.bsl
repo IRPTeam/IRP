@@ -33,38 +33,36 @@ Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefin
 				ElementParent  = Form.Items.Add("ExtAttributes", Type("FormGroup"), ItemElement);
 				ElementParent.Type = FormGroupType.Page;
 				ElementParent.Title = R().Form_029;
-			ElsIf ItemElement.Type = FormGroupType.Page OR
-				ItemElement.Type = FormGroupType.UsualGroup Then
+			ElsIf ItemElement.Type = FormGroupType.Page
+				Or ItemElement.Type = FormGroupType.UsualGroup Then
 				ElementParent = ItemElement;
 			EndIf;
 		EndIf;
 	EndIf;
 	
 	ObjectMetadata = Metadata.FindByType(TypeOf(MetaTypeOrRef));
+	AttributesList = Catalogs.AddAttributeAndPropertySets.GetExtensionAttributesListByObjectMetadata(ObjectMetadata);
+	FormGroups = AddAttributesAndPropertiesServer.FormGroups(AttributesList);
+	If ElementParent <> Undefined Then
+		For Each FormGroup In FormGroups Do
+			FormGroup.ParentName = ElementParent.Name;
+		EndDo;
+	EndIf;
+	AddAttributesAndPropertiesServer.CreateFormGroups(Form, FormGroups);
 	
-	For Each Attribute In ObjectMetadata.Attributes Do
-		If Not StrFind(Attribute.Name, "_") Then 
-			Continue;
-		EndIf;
-		
-		If Not IsOutputAttribute(Attribute.Name, Form, MetaTypeOrRef, ItemElement) Then
-			Continue;
-		EndIf;
-		
-		OverrideInfo = OverrideElementParentInExtension(MetaTypeOrRef, Attribute.Name);
-		Parent = Undefined;
-		
-		If OverrideInfo <> Undefined And ValueIsFilled(OverrideInfo.ParentName) Then
-			Parent = Form.Items[OverrideInfo.ParentName];
+	For Each Attribute In AttributesList Do
+		If ValueIsFilled(Attribute.InterfaceGroup) Then
+			ParentName = "_" + StrReplace(Attribute.InterfaceGroup.UUID(), "-", "");
+			Parent = Form.Items[ParentName];
 		ElsIf ElementParent <> Undefined Then
 			Parent = ElementParent;
 		Else
 			Parent = Form;
 		EndIf;
 		
-		NewAttribute = Form.Items.Add(Attribute.Name, Type("FormField"), Parent);
+		NewAttribute = Form.Items.Add(Attribute.Attribute, Type("FormField"), Parent);
 		NewAttribute.Type = FormFieldType.InputField;
-		NewAttribute.DataPath = "Object." + Attribute.Name;
+		NewAttribute.DataPath = "Object." + Attribute.Attribute;
 	EndDo;
 	
 	For Each TabularSection In ObjectMetadata.TabularSections Do
@@ -79,18 +77,9 @@ Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefin
 			
 			NewColumn = Form.Items.Add(Column.Name, Type("FormField"), Parent);
 			NewColumn.Type = FormFieldType.InputField;
-			NewColumn.DataPath = "Object." + TabularSection.Name +"."+ Column.Name;
+			NewColumn.DataPath = "Object." + TabularSection.Name + "." + Column.Name;
 		EndDo;
-	EndDo;
-	
+	EndDo;	
 EndProcedure
-
-Function OverrideElementParentInExtension(Ref, AttributeName)
-	Return New Structure("ParentName");
-EndFunction
-
-Function IsOutputAttribute(AttributeName, Form, MetaTypeOrRef, ItemElement = Undefined)
-	Return True;
-EndFunction
 
 #EndRegion

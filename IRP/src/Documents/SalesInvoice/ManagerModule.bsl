@@ -1225,6 +1225,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2040B_TaxesIncoming());
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4012B_StockReservation());
 	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
 	QueryArray.Add(R4050B_StockInventory());
@@ -1551,7 +1552,60 @@ Function R4011B_FreeStocks()
 		|INTO R4011B_FreeStocks
 		|FROM
 		|	ItemList AS QueryTable
-		|WHERE  NOT QueryTable.IsService AND NOT QueryTable.UseShipmentConfirmation";
+		|WHERE NOT QueryTable.IsService AND NOT QueryTable.UseShipmentConfirmation";
+
+EndFunction
+
+Function R4012B_StockReservation()
+	Return
+		"SELECT
+		|	R4012B_StockReservationBalance.Store,
+		|	R4012B_StockReservationBalance.ItemKey,
+		|	R4012B_StockReservationBalance.Order,
+		|	R4012B_StockReservationBalance.QuantityBalance AS Quantity
+		|INTO BalanceWithoutRef
+		|FROM
+		|	AccumulationRegister.R4012B_StockReservation.Balance(, Order IN
+		|		(Select
+		|			T.SalesOrder
+		|		From
+		|			ItemList AS T)) AS R4012B_StockReservationBalance
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	R4012B_StockReservation.Store,
+		|	R4012B_StockReservation.ItemKey,
+		|	R4012B_StockReservation.Order,
+		|	R4012B_StockReservation.Quantity
+		|FROM
+		|	AccumulationRegister.R4012B_StockReservation AS R4012B_StockReservation
+		|WHERE
+		|	R4012B_StockReservation.Recorder = &Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	QueryTable.Period AS Period,
+		|	QueryTable.SalesOrder AS Order,
+		|	QueryTable.ItemKey AS ItemKey,
+		|	QueryTable.Store AS Store,
+		|	CASE
+		|		When BalanceWithoutRef.Quantity - QueryTable.Quantity >= 0
+		|			Then QueryTable.Quantity
+		|		Else BalanceWithoutRef.Quantity
+		|	END AS Quantity
+		|INTO R4012B_StockReservation
+		|FROM
+		|	ItemList AS QueryTable
+		|		LEFT JOIN BalanceWithoutRef AS BalanceWithoutRef
+		|		ON QueryTable.SalesOrder = BalanceWithoutRef.Order
+		|		AND QueryTable.ItemKey = BalanceWithoutRef.ItemKey
+		|		AND QueryTable.Store = BalanceWithoutRef.Store
+		|WHERE
+		|	BalanceWithoutRef.Quantity > 0
+		|	AND NOT QueryTable.UseShipmentConfirmation";
 
 EndFunction
 

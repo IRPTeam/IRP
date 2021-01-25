@@ -204,7 +204,11 @@ Function CreateFormGroups(Form, FormGroupsInfo, AddInfo = Undefined) Export
 		EndIf;
 		NewFormGroup = Form.Items.Add(GroupInfo.Name, Type("FormGroup"), GroupParent);
 		NewFormGroup.Type = FormGroupType.UsualGroup;
-		NewFormGroup.Group = ChildFormItemsGroup.Vertical;
+		NewFormGroup.Group = GroupInfo.ChildFormItemsGroup;
+		NewFormGroup.Behavior = GroupInfo.Behavior;
+		If NewFormGroup.Behavior = UsualGroupBehavior.Collapsible Then
+			NewFormGroup.Hide();
+		EndIf;
 		NewFormGroup.Title = GroupInfo.Title;
 		NewFormGroup.ThroughAlign = ThroughAlign.Use;
 		ArrayOfFormGroups.Add(NewFormGroup);
@@ -481,6 +485,9 @@ Function GroupInfo(Group, AddInfo = Undefined) Export
 	Result.Insert("Name", Name);
 	Result.Insert("ParentName", "Group" + Group.FormPosition);
 	Result.Insert("Title", String(Group));
+	Result.Insert("Behavior", UsualGroupBehavior[MetadataInfo.EnumNameByRef(Group.Behavior)]);
+	Result.Insert("ChildFormItemsGroup", ChildFormItemsGroup[MetadataInfo.EnumNameByRef(Group.ChildFormItemsGroup)]);
+	Result.Insert("Collapsed", Group.Collapsed);
 	Return Result;
 EndFunction
 

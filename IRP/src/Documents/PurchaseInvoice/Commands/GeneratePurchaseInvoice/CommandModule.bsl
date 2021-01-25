@@ -68,7 +68,9 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 				(TypeOf(Row.GoodsReceipt) = Type("DocumentRef.GoodsReceipt")
 					Or TypeOf(Row.GoodsReceipt) = Type("DocumentRef.PurchaseOrder")) Then
 				ArrayOf_GoodsReceipt.Add(Row);
-				ArrayOf_Service.Add(Row.Order);
+				If ValueIsFilled(Row.Order) Then
+					ArrayOf_Service.Add(Row.Order);
+				EndIf;
 			EndIf;
 		EndIf;
 		
@@ -554,7 +556,7 @@ Procedure SelectGoodsReceiptFinish(Result, AdditionalParameters) Export
 EndProcedure
 
 &AtServer
-Function GetInfoGoodsReceiptBeforePurchaseInvoice(ArrayOfPurchaseOrders)
+Function GetInfoGoodsReceiptBeforePurchaseInvoice(ArrayOfOrders)
 	Query = New Query();
 	Query.Text =
 		"SELECT ALLOWED
@@ -570,12 +572,12 @@ Function GetInfoGoodsReceiptBeforePurchaseInvoice(ArrayOfPurchaseOrders)
 		|	ReceiptOrdersBalance.QuantityBalance AS Quantity,
 		|	ReceiptOrdersBalance.RowKey
 		|FROM
-		|	AccumulationRegister.ReceiptOrders.Balance(, Order IN (&ArrayOfPurchaseOrders)) AS ReceiptOrdersBalance
+		|	AccumulationRegister.ReceiptOrders.Balance(, Order IN (&ArrayOfOrders)) AS ReceiptOrdersBalance
 		|TOTALS
 		|BY
 		|	Order,
 		|	GoodsReceipt";
-	Query.SetParameter("ArrayOfPurchaseOrders", ArrayOfPurchaseOrders);
+	Query.SetParameter("ArrayOfOrders", ArrayOfOrders);
 	QueryResult = Query.Execute();
 	QuerySelection_Order = QueryResult.Select(QueryResultIteration.ByGroups);
 	
@@ -638,20 +640,50 @@ Function GetInfoGoodsReceipt(ArrayOfGoodsReceipt)
 	Query = New Query();
 	Query.Text =
 		"SELECT ALLOWED
-		|	Table.Order AS Order,
-		|	Table.GoodsReceipt AS GoodsReceipt,
-		|	Table.ItemKey,
-		|	SUM(Table.QuantityBalance) AS Quantity,
-		|	Table.RowKey
+		|	ReceiptOrders.Order AS Order,
+		|	ReceiptOrders.GoodsReceipt AS GoodsReceipt,
+		|	ReceiptOrders.ItemKey,
+		|	SUM(ReceiptOrders.QuantityBalance) AS Quantity,
+		|	ReceiptOrders.RowKey
+		|INTO ReceiptOrders
 		|FROM
-		|	AccumulationRegister.ReceiptOrders.Balance(, GoodsReceipt IN (&ArrayOfGoodsReceipt)) AS Table
+		|	AccumulationRegister.ReceiptOrders.Balance(, GoodsReceipt IN (&ArrayOfGoodsReceipt)) AS ReceiptOrders
 		|GROUP BY
-		|	Table.Order,
-		|	Table.GoodsReceipt,
-		|	Table.ItemKey,
-		|	Table.RowKey
+		|	ReceiptOrders.Order,
+		|	ReceiptOrders.GoodsReceipt,
+		|	ReceiptOrders.ItemKey,
+		|	ReceiptOrders.RowKey
 		|HAVING
-		|	SUM(Table.QuantityBalance) > 0";
+		|	SUM(ReceiptOrders.QuantityBalance) > 0
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT ALLOWED
+		|	ReceiptOrders.Order AS Order,
+		|	ReceiptOrders.GoodsReceipt AS GoodsReceipt,
+		|	ReceiptOrders.ItemKey AS ItemKey,
+		|	ReceiptOrders.Quantity AS Quantity,
+		|	ReceiptOrders.RowKey AS RowKey
+		|FROM
+		|	ReceiptOrders AS ReceiptOrders
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	UNDEFINED,
+		|	ReceiptInvoicing.Basis,
+		|	ReceiptInvoicing.ItemKey,
+		|	ReceiptInvoicing.QuantityBalance,
+		|	UNDEFINED
+		|FROM
+		|	AccumulationRegister.R1031B_ReceiptInvoicing.Balance(, Basis IN (&ArrayOfGoodsReceipt)
+		|	AND NOT (Basis, ItemKey) IN
+		|		(SELECT
+		|			ReceiptOrders.GoodsReceipt,
+		|			ReceiptOrders.ItemKey
+		|		FROM
+		|			ReceiptOrders AS ReceiptOrders)) AS ReceiptInvoicing";
+		
 	Query.SetParameter("ArrayOfGoodsReceipt", ArrayOfGoodsReceipt);
 	Selection = Query.Execute().Select();
 	

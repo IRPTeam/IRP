@@ -69,7 +69,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|		WHEN GoodsReceiptItemList.ReceiptBasis REFS Document.PurchaseOrder
 		|			THEN TRUE
 		|		ELSE FALSE
-		|	END AS UsePurchaseOrder
+		|	END AS UsePurchaseOrder,
+		|	NOT GoodsReceiptItemList.ReceiptBasis.Ref IS NULL AS UseReceiptBasis
 		|FROM
 		|	Document.GoodsReceipt.ItemList AS GoodsReceiptItemList
 		|WHERE
@@ -99,7 +100,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|   QueryTable.UseSalesOrder AS UseSalesOrder,
 		|	QueryTable.UseShipmentConfirmation AS UseShipmentConfirmation,
 		|	QueryTable.ShipmentBeforeInvoice AS ShipmentBeforeInvoice,
-		|   QueryTable.UsePurchaseOrder AS UsePurchaseOrder
+		|   QueryTable.UsePurchaseOrder AS UsePurchaseOrder,
+		|	QueryTable.UseReceiptBasis AS UseReceiptBasis
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable";
@@ -112,7 +114,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		"SELECT * INTO tmp_1 FROM tmp AS tmp
 		|WHERE
 		|    NOT tmp.UseSalesOrder
-		|AND NOT tmp.UsePurchaseOrder";
+		|AND NOT tmp.UsePurchaseOrder
+		|AND tmp.UseReceiptBasis";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_1").GetData().IsEmpty() Then
 		GetTables_NotUseSO_NotUsePO(Tables, "tmp_1", Parameters);
@@ -124,7 +127,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		"SELECT * INTO tmp_2 FROM tmp AS tmp
 		|WHERE
 		|        tmp.UseSalesOrder
-		|AND NOT tmp.UsePurchaseOrder";
+		|AND NOT tmp.UsePurchaseOrder
+		|AND tmp.UseReceiptBasis";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_2").GetData().IsEmpty() Then
 		GetTables_UseSO_NotUsePO(Tables, "tmp_2", Parameters);
@@ -136,7 +140,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		"SELECT * INTO tmp_3 FROM tmp AS tmp
 		|WHERE
 		|     tmp.UseSalesOrder
-		|AND  tmp.UsePurchaseOrder";
+		|AND  tmp.UsePurchaseOrder
+		|AND tmp.UseReceiptBasis";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_3").GetData().IsEmpty() Then
 		GetTables_UseSO_UsePO(Tables, "tmp_3", Parameters);
@@ -148,10 +153,22 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		"SELECT * INTO tmp_4 FROM tmp AS tmp
 		|WHERE
 		|NOT tmp.UseSalesOrder
-		|AND tmp.UsePurchaseOrder";
+		|AND tmp.UsePurchaseOrder
+		|AND tmp.UseReceiptBasis";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_4").GetData().IsEmpty() Then
 		GetTables_NotUseSO_UsePO(Tables, "tmp_4", Parameters);
+	EndIf;
+	
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text =
+		"SELECT * INTO tmp_5 FROM tmp AS tmp
+		|WHERE
+		|NOT tmp.UseReceiptBasis";
+	Query.Execute();
+	If Not Query.TempTablesManager.Tables.Find("tmp_5").GetData().IsEmpty() Then
+		GetTables_NotUseReceiptBasis(Tables, "tmp_5", Parameters);
 	EndIf;
 	
 	Parameters.IsReposting = False;
@@ -1513,6 +1530,68 @@ Procedure GetTables_NotUseSO_UsePO_IsProduct(Tables, TableName, Parameters)
 	PostingServer.MergeTables(Tables.InventoryBalance         , QueryResults[5].Unload());
 	PostingServer.MergeTables(Tables.StockBalance_Expense     , QueryResults[6].Unload());
 	PostingServer.MergeTables(Tables.IncomingStocksReal       , QueryResults[7].Unload());
+EndProcedure
+
+#EndRegion
+
+#Region Table_tmp_5
+
+Procedure GetTables_NotUseReceiptBasis(Tables, TableName, Parameters)
+	// tmp_5
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text =
+		"SELECT * INTO tmp_1 FROM source AS tmp";
+	NewTableName = StrReplace("tmp_1", "tmp", TableName);
+	Query.Text = StrReplace(Query.Text, "tmp_1", NewTableName);
+	Query.Text = StrReplace(Query.Text, "source", TableName);
+	Query.Execute();
+	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
+		GetTables_NotUseReceiptBasis_IsProduct(Tables, NewTableName, Parameters);
+	EndIf;
+EndProcedure
+
+Procedure GetTables_NotUseReceiptBasis_IsProduct(Tables, TableName, Parameters)
+	// tmp_5_1
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	
+	#Region QueryText
+	Query.Text = "
+		|//[0] StockBalance_Receipt
+		|SELECT
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.Period
+		|;
+		|
+		|//[1] StockReservation_Receipt
+		|SELECT
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	SUM(tmp.Quantity) AS Quantity,
+		|	tmp.Period
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.Period";
+		
+	Query.Text = StrReplace(Query.Text, "tmp", TableName);
+	#EndRegion
+	
+	QueryResults = Query.ExecuteBatch();
+	
+	PostingServer.MergeTables(Tables.StockBalance_Receipt     , QueryResults[0].Unload());
+	PostingServer.MergeTables(Tables.StockReservation_Receipt , QueryResults[1].Unload());
 EndProcedure
 
 #EndRegion

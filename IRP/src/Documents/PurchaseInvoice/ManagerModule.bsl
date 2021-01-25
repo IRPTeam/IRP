@@ -21,8 +21,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("OrderProcurement"                      , PostingServer.CreateTable(AccReg.OrderProcurement));
 	Tables.Insert("ReconciliationStatement"               , PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("TaxesTurnovers"                        , PostingServer.CreateTable(AccReg.TaxesTurnovers));
-	Tables.Insert("R4035_IncommingStocks"                 , PostingServer.CreateTable(AccReg.R4035_IncommingStocks));
-	Tables.Insert("R4036_IncommingStocksRequested"        , PostingServer.CreateTable(AccReg.R4036_IncommingStocksRequested));
 	
 	Tables.Insert("OrderBalance_Exists"           , PostingServer.CreateTable(AccReg.OrderBalance));
 	Tables.Insert("GoodsInTransitIncoming_Exists" , PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
@@ -54,7 +52,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.Text =
 		"SELECT
 		|	GoodsReceipts.Key
-		|INTO GoodsReceipts
+		|INTO _GoodsReceipts
 		|FROM
 		|	Document.PurchaseInvoice.GoodsReceipts AS GoodsReceipts
 		|WHERE
@@ -130,7 +128,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	PurchaseInvoiceItemList.NetAmount AS NetAmount
 		|FROM
 		|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
-		|		LEFT JOIN GoodsReceipts AS GoodsReceipts
+		|		LEFT JOIN _GoodsReceipts AS GoodsReceipts
 		|		ON PurchaseInvoiceItemList.Key = GoodsReceipts.Key
 		|WHERE
 		|	PurchaseInvoiceItemList.Ref = &Ref";
@@ -172,17 +170,15 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	PostingServer.UUIDToString(QueryTableTaxList);
 	Tables.TaxesTurnovers = QueryTableTaxList;
 	
-	TempManager = New TempTablesManager();
-	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 	"SELECT
 	|	PurchaseInvoiceGoodsReceipts.Ref,
 	|	PurchaseInvoiceGoodsReceipts.Key AS RowKeyUUID,
 	|	PurchaseInvoiceGoodsReceipts.GoodsReceipt,
 	|	PurchaseInvoiceGoodsReceipts.Quantity
-	|INTO GoodsReceipts
+	|INTO _GoodsReceipts
 	|FROM
 	|	Document.PurchaseInvoice.GoodsReceipts AS PurchaseInvoiceGoodsReceipts
 	|WHERE
@@ -191,7 +187,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.Execute();
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT
 		|	QueryTable.Company AS Company,
@@ -229,10 +225,10 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("QueryTable", QueryTable);
 	Query.Execute();
 	
-	GetTables_Common(Tables, TempManager, "tmp", Parameters);
+	GetTables_Common(Tables, "tmp", Parameters);
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_1 FROM tmp AS tmp
 		|WHERE
@@ -241,11 +237,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|AND NOT tmp.UseGoodsReceiptBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_1").GetData().IsEmpty() Then
-		GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice(Tables, TempManager, "tmp_1", Parameters);
+		GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice(Tables, "tmp_1", Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_2 FROM tmp AS tmp
 		|WHERE
@@ -254,11 +250,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|AND NOT tmp.UseGoodsReceiptBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_2").GetData().IsEmpty() Then
-		GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice(Tables, TempManager, "tmp_2", Parameters);
+		GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice(Tables, "tmp_2", Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_3 FROM tmp AS tmp
 		|WHERE
@@ -267,11 +263,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|AND     tmp.UseGoodsReceiptBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_3").GetData().IsEmpty() Then
-		GetTables_UsePO_NotUseSO_UseGRBeforeInvoice(Tables, TempManager, "tmp_3", Parameters);
+		GetTables_UsePO_NotUseSO_UseGRBeforeInvoice(Tables, "tmp_3", Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_4 FROM tmp AS tmp
 		|WHERE
@@ -281,11 +277,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|AND NOT tmp.UseShipmentBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_4").GetData().IsEmpty() Then
-		GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice(Tables, TempManager, "tmp_4", Parameters);
+		GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice(Tables, "tmp_4", Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_5 FROM tmp AS tmp
 		|WHERE
@@ -295,11 +291,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|AND NOT tmp.UseShipmentBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_5").GetData().IsEmpty() Then
-		GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice(Tables, TempManager, "tmp_5", Parameters);
+		GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice(Tables, "tmp_5", Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_6 FROM tmp AS tmp
 		|WHERE
@@ -309,11 +305,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|AND NOT tmp.UseShipmentBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_6").GetData().IsEmpty() Then
-		GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice(Tables, TempManager, "tmp_6", Parameters);
+		GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice(Tables, "tmp_6", Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_7 FROM tmp AS tmp
 		|WHERE
@@ -323,11 +319,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|AND     tmp.UseShipmentBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_7").GetData().IsEmpty() Then
-		GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice(Tables, TempManager, "tmp_7", Parameters);
+		GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice(Tables, "tmp_7", Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_8 FROM tmp AS tmp
 		|WHERE
@@ -337,11 +333,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|AND     tmp.UseShipmentBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_8").GetData().IsEmpty() Then
-		GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice(Tables, TempManager, "tmp_8", Parameters);
+		GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice(Tables, "tmp_8", Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_9 FROM tmp AS tmp
 		|WHERE
@@ -351,15 +347,34 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|AND     tmp.UseShipmentBeforeInvoice";
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find("tmp_9").GetData().IsEmpty() Then
-		GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice(Tables, TempManager, "tmp_9", Parameters);
+		GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice(Tables, "tmp_9", Parameters);
 	EndIf;
 	
 	Parameters.IsReposting = False;	
 	
+	// legacy code fix
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	If Not PostingServer.QueryTableIsExists("IncomingStocks", Parameters) Then
+		Query.Text = Query.Text + "SELECT UNDEFINED INTO IncomingStocks WHERE FALSE; ";
+	EndIf;	
+	If Not PostingServer.QueryTableIsExists("IncomingStocksRequested", Parameters) Then
+		Query.Text = Query.Text + "SELECT UNDEFINED INTO IncomingStocksRequested WHERE FALSE; ";
+	EndIf;	
+	If Not PostingServer.QueryTableIsExists("FreeStocks", Parameters) Then
+		Query.Text = Query.Text + 
+		"SELECT 
+		|UNDEFINED AS RecordType, UNDEFINED AS Period, UNDEFINED AS Store, UNDEFINED AS ItemKey, UNDEFINED AS Quantity
+		|INTO FreeStocks 
+		|WHERE FALSE; ";
+	EndIf;	
+	If ValueIsFilled(Query.Text) Then
+		Query.Execute();
+	EndIf;
+	
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExequteQuery(Ref, QueryArray, Parameters);
-	
 	Tables.Insert("VendorsTransactions", 
 	PostingServer.GetQueryTableByName("VendorsTransactions", Parameters));	
 #EndRegion			
@@ -367,10 +382,10 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Return Tables;
 EndFunction
 
-Procedure GetTables_Common(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_Common(Tables, TableName, Parameters)
 	// tmp
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	#Region QueryText
 	Query.Text =
 		// [0]
@@ -476,10 +491,10 @@ EndProcedure
 
 #Region Table_tmp_1
 
-Procedure GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice(Tables, TableName, Parameters)
 	// tmp_1
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_1 FROM source AS tmp
 		|WHERE 
@@ -490,11 +505,11 @@ Procedure GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice(Tables, TempManager,
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tables, TempManager, NewTableName, Parameters);
+		GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tables, NewTableName, Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_2 FROM source AS tmp
 		|WHERE 
@@ -505,11 +520,11 @@ Procedure GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice(Tables, TempManager,
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice_UseGR_IsProduct(Tables, TempManager, NewTableName, Parameters);
+		GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice_UseGR_IsProduct(Tables, NewTableName, Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_3 FROM source AS tmp
 		|WHERE 
@@ -519,15 +534,15 @@ Procedure GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice(Tables, TempManager,
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice_IsService(Tables, TempManager, NewTableName, Parameters);
+		GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice_IsService(Tables, NewTableName, Parameters);
 	EndIf;
 EndProcedure
 
-Procedure GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tables, TableName, Parameters)
 	// tmp_1_1
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -612,10 +627,10 @@ Procedure GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(T
 	PostingServer.MergeTables(Tables.GoodsReceiptSchedule_Receipt , QueryResults[4].Unload());
 EndProcedure
 
-Procedure GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice_UseGR_IsProduct(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice_UseGR_IsProduct(Tables, TableName, Parameters)
 	// tmp_1_2
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -669,10 +684,10 @@ Procedure GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice_UseGR_IsProduct(Tabl
 	PostingServer.MergeTables(Tables.GoodsReceiptSchedule_Receipt , QueryResults[2].Unload());
 EndProcedure
 
-Procedure GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice_IsService(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_NotUsePO_NotUseSO_NotUseGRBeforeInvoice_IsService(Tables, TableName, Parameters)
 	// tmp_1_3
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -742,10 +757,10 @@ EndProcedure
 
 #Region Table_tmp_2
 
-Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice(Tables, TableName, Parameters)
 	// tmp_2
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_1 FROM source AS tmp
 		|WHERE 
@@ -756,11 +771,11 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice(Tables, TempManager, Ta
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tables, TempManager, NewTableName, Parameters);
+		GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tables, NewTableName, Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_2 FROM source AS tmp
 		|WHERE 
@@ -771,11 +786,11 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice(Tables, TempManager, Ta
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_UseGR_IsProduct(Tables, TempManager, NewTableName, Parameters);
+		GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_UseGR_IsProduct(Tables, NewTableName, Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_3 FROM source AS tmp
 		|WHERE 
@@ -785,15 +800,15 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice(Tables, TempManager, Ta
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_IsService(Tables, TempManager, NewTableName, Parameters);
+		GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_IsService(Tables, NewTableName, Parameters);
 	EndIf;
 EndProcedure
 
-Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tables, TableName, Parameters)
 	// tmp_2_1
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -868,74 +883,18 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 		|FROM
 		|	tmp AS tmp
 		|;
-		|//[5] R4035_IncommingStocks
+		|
+		|//[IncomingStocksReal]
 		|SELECT
 		|	tmp.Period,
-		|	IncomingStocks.Store AS Store,
-		|	IncomingStocks.ItemKey,
-		|	IncomingStocks.Order,
-		|	CASE WHEN tmp.Quantity < IncomingStocks.QuantityBalance THEN
-		|	tmp.Quantity ELSE IncomingStocks.QuantityBalance END AS Quantity
-		|FROM
-		|	AccumulationRegister.R4035_IncommingStocks.Balance(&Period,(Store, ItemKey, Order) IN
-		|		(SELECT
-		|			tmp.Store,
-		|			tmp.ItemKey,
-		|			tmp.Order
-		|		FROM
-		|			tmp AS tmp)) AS IncomingStocks
-		|		INNER JOIN tmp AS tmp
-		|		ON IncomingStocks.Store = tmp.Store
-		|		AND IncomingStocks.ItemKey = tmp.ItemKey
-		|		AND IncomingStocks.Order = tmp.Order
-		|		AND tmp.UsePurchaseOrder
-		|;
-		|//[6] R4036_IncommingStocksRequested
-		|SELECT
-		|	tmp.Period,
-		|	IncomingStocksRequested.IncommingStore,
-		|	IncomingStocksRequested.RequesterStore,
-		|	IncomingStocksRequested.ItemKey,
-		|	IncomingStocksRequested.Order,
-		|	IncomingStocksRequested.Requester AS Requester,
-		|	CASE WHEN tmp.Quantity < IncomingStocksRequested.QuantityBalance THEN tmp.Quantity
-		|	ELSE IncomingStocksRequested.QuantityBalance END AS Quantity
-		|FROM
-		|	AccumulationRegister.R4036_IncommingStocksRequested.Balance(&Period,(IncommingStore, ItemKey, Order) IN
-		|		(SELECT
-		|			tmp.Store,
-		|			tmp.ItemKey,
-		|			tmp.Order
-		|		FROM
-		|			tmp AS tmp)) AS IncomingStocksRequested
-		|		INNER JOIN tmp AS tmp
-		|		ON IncomingStocksRequested.IncommingStore = tmp.Store
-		|		AND IncomingStocksRequested.ItemKey = tmp.ItemKey
-		|		AND IncomingStocksRequested.Order = tmp.Order
-		|		AND tmp.UsePurchaseOrder
-		|;
-		|//[7] StockReservation_Expense
-		|SELECT
-		|	tmp.Period,
-		|	IncomingStocksRequested.IncommingStore AS Store,
-		|	IncomingStocksRequested.ItemKey,
-		|	CASE WHEN tmp.Quantity < IncomingStocksRequested.QuantityBalance THEN tmp.Quantity
-		|	ELSE IncomingStocksRequested.QuantityBalance END AS Quantity
-		|FROM
-		|	AccumulationRegister.R4036_IncommingStocksRequested.Balance(&Period, (IncommingStore, ItemKey, Order) IN
-		|		(SELECT
-		|			tmp.Store,
-		|			tmp.ItemKey,
-		|			tmp.Order
-		|		FROM
-		|			tmp AS tmp)) AS IncomingStocksRequested
-		|		INNER JOIN tmp AS tmp
-		|		ON IncomingStocksRequested.IncommingStore = tmp.Store
-		|		AND IncomingStocksRequested.ItemKey = tmp.ItemKey
-		|		AND IncomingStocksRequested.Order = tmp.Order
-		|		AND tmp.UsePurchaseOrder";
-	
-	Query.SetParameter("Period", New Boundary(Parameters.Object.Ref.PointInTime(), BoundaryType.Excluding));	
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.Order,
+		|	tmp.Quantity
+		|INTO IncomingStocksReal
+		|FROM tmp AS tmp
+		|";
+		
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
 	
@@ -946,16 +905,20 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 	PostingServer.MergeTables(Tables.StockReservation_Receipt       , QueryResults[2].Unload());
 	PostingServer.MergeTables(Tables.GoodsReceiptSchedule_Expense   , QueryResults[3].Unload());
 	PostingServer.MergeTables(Tables.OrderBalance                   , QueryResults[4].Unload());
-	PostingServer.MergeTables(Tables.R4035_IncommingStocks          , QueryResults[5].Unload());
-	PostingServer.MergeTables(Tables.R4036_IncommingStocksRequested , QueryResults[6].Unload());
-	PostingServer.MergeTables(Tables.StockReservation_Expense       , QueryResults[7].Unload());
 	
+	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.LockForUpdate = True;
+	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Clear();
+	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Write();
+	IncomingStocksServer.ClosureIncomingStocks(Parameters);
+	
+	PostingServer.MergeTables(Tables.StockReservation_Expense, 
+	PostingServer.GetQueryTableByName("FreeStocks", Parameters));	
 EndProcedure
 
-Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_UseGR_IsProduct(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_UseGR_IsProduct(Tables, TableName, Parameters)
 	// tmp_2_2
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -1046,10 +1009,10 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_UseGR_IsProduct(Tables,
 	PostingServer.MergeTables(Tables.OrderBalance                 , QueryResults[4].Unload());
 EndProcedure
 
-Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_IsService(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_IsService(Tables, TableName, Parameters)
 	// tmp_2_3
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -1121,10 +1084,10 @@ EndProcedure
 
 #Region Table_tmp_3
 
-Procedure GetTables_UsePO_NotUseSO_UseGRBeforeInvoice(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_NotUseSO_UseGRBeforeInvoice(Tables, TableName, Parameters)
 	// tmp_3
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_1 FROM source AS tmp
 		|WHERE 
@@ -1135,11 +1098,11 @@ Procedure GetTables_UsePO_NotUseSO_UseGRBeforeInvoice(Tables, TempManager, Table
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UsePO_NotUseSO_UseGRBeforeInvoice_NotUseGR_IsProduct(Tables, TempManager, NewTableName, Parameters);
+		GetTables_UsePO_NotUseSO_UseGRBeforeInvoice_NotUseGR_IsProduct(Tables, NewTableName, Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_2 FROM source AS tmp
 		|WHERE 
@@ -1150,11 +1113,11 @@ Procedure GetTables_UsePO_NotUseSO_UseGRBeforeInvoice(Tables, TempManager, Table
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UsePO_NotUseSO_UseGRBeforeInvoice_UseGR_IsProduct(Tables, TempManager, NewTableName, Parameters);
+		GetTables_UsePO_NotUseSO_UseGRBeforeInvoice_UseGR_IsProduct(Tables, NewTableName, Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_3 FROM source AS tmp
 		|WHERE 
@@ -1164,15 +1127,15 @@ Procedure GetTables_UsePO_NotUseSO_UseGRBeforeInvoice(Tables, TempManager, Table
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UsePO_NotUseSO_UseGRBeforeInvoice_IsService(Tables, TempManager, NewTableName, Parameters);
+		GetTables_UsePO_NotUseSO_UseGRBeforeInvoice_IsService(Tables, NewTableName, Parameters);
 	EndIf;
 EndProcedure
 
-Procedure GetTables_UsePO_NotUseSO_UseGRBeforeInvoice_NotUseGR_IsProduct(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_NotUseSO_UseGRBeforeInvoice_NotUseGR_IsProduct(Tables, TableName, Parameters)
 	// tmp_3_1
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -1186,7 +1149,7 @@ Procedure GetTables_UsePO_NotUseSO_UseGRBeforeInvoice_NotUseGR_IsProduct(Tables,
 		|	tmp.RowKey
 		|FROM
 		|	tmp AS tmp
-		|		LEFT JOIN GoodsReceipts AS GoodsReceipts
+		|		LEFT JOIN _GoodsReceipts AS GoodsReceipts
 		|		ON tmp.RowKeyUUID = GoodsReceipts.RowKeyUUID
 		|;
 		|
@@ -1209,10 +1172,10 @@ Procedure GetTables_UsePO_NotUseSO_UseGRBeforeInvoice_NotUseGR_IsProduct(Tables,
 	PostingServer.MergeTables(Tables.OrderBalance  , QueryResults[1].Unload());
 EndProcedure
 
-Procedure GetTables_UsePO_NotUseSO_UseGRBeforeInvoice_UseGR_IsProduct(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_NotUseSO_UseGRBeforeInvoice_UseGR_IsProduct(Tables, TableName, Parameters)
 	// tmp_3_2
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -1226,7 +1189,7 @@ Procedure GetTables_UsePO_NotUseSO_UseGRBeforeInvoice_UseGR_IsProduct(Tables, Te
 		|	tmp.RowKey
 		|FROM
 		|	tmp AS tmp
-		|		LEFT JOIN GoodsReceipts AS GoodsReceipts
+		|		LEFT JOIN _GoodsReceipts AS GoodsReceipts
 		|		ON tmp.RowKeyUUID = GoodsReceipts.RowKeyUUID
 		|;
 		|
@@ -1249,10 +1212,10 @@ Procedure GetTables_UsePO_NotUseSO_UseGRBeforeInvoice_UseGR_IsProduct(Tables, Te
 	PostingServer.MergeTables(Tables.OrderBalance  , QueryResults[1].Unload());
 EndProcedure
 
-Procedure GetTables_UsePO_NotUseSO_UseGRBeforeInvoice_IsService(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_NotUseSO_UseGRBeforeInvoice_IsService(Tables, TableName, Parameters)
 	// tmp_3_3
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -1324,10 +1287,10 @@ EndProcedure
 
 #Region Table_tmp_4
 
-Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice(Tables, TableName, Parameters)
 	// tmp_4
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_1 FROM source AS tmp
 		|WHERE 
@@ -1338,11 +1301,11 @@ Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice(Tables, Te
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_NotUseGR_IsProduct(Tables, TempManager, NewTableName, Parameters);
+		GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_NotUseGR_IsProduct(Tables, NewTableName, Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_2 FROM source AS tmp
 		|WHERE 
@@ -1353,11 +1316,11 @@ Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice(Tables, Te
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_UseGR_IsProduct(Tables, TempManager, NewTableName, Parameters);
+		GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_UseGR_IsProduct(Tables, NewTableName, Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_3 FROM source AS tmp
 		|WHERE 
@@ -1367,15 +1330,15 @@ Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice(Tables, Te
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_IsService(Tables, TempManager, NewTableName, Parameters);
+		GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_IsService(Tables, NewTableName, Parameters);
 	EndIf;
 EndProcedure
 
-Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_NotUseGR_IsProduct(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_NotUseGR_IsProduct(Tables, TableName, Parameters)
 	// tmp_4_1
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -1476,10 +1439,10 @@ Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_NotUseGR_I
 	PostingServer.MergeTables(Tables.OrderBalance                 , QueryResults[5].Unload());
 EndProcedure
 
-Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_UseGR_IsProduct(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_UseGR_IsProduct(Tables, TableName, Parameters)
 	// tmp_4_2
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -1571,10 +1534,10 @@ Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_UseGR_IsPr
 	PostingServer.MergeTables(Tables.OrderBalance                 , QueryResults[4].Unload());
 EndProcedure
 
-Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_IsService(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_IsService(Tables, TableName, Parameters)
 	// tmp_4_3
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -1646,10 +1609,10 @@ EndProcedure
 
 #Region Table_tmp_5
 
-Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice(Tables, TableName, Parameters)
 	// tmp_5
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_1 FROM source AS tmp
 		|WHERE 
@@ -1660,11 +1623,11 @@ Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice(Tables,
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_NotUseGR_IsProduct(Tables, TempManager, NewTableName, Parameters);
+		GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_NotUseGR_IsProduct(Tables, NewTableName, Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_2 FROM source AS tmp
 		|WHERE 
@@ -1675,11 +1638,11 @@ Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice(Tables,
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_UseGR_IsProduct(Tables, TempManager, NewTableName, Parameters);
+		GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_UseGR_IsProduct(Tables, NewTableName, Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_3 FROM source AS tmp
 		|WHERE 
@@ -1689,14 +1652,14 @@ Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice(Tables,
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_IsService(Tables, TempManager, NewTableName, Parameters);
+		GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_IsService(Tables, NewTableName, Parameters);
 	EndIf;
 EndProcedure
 
-Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_NotUseGR_IsProduct(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_NotUseGR_IsProduct(Tables, TableName, Parameters)
 	// tmp_5_1
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -1809,10 +1772,10 @@ Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_NotUseG
 	PostingServer.MergeTables(Tables.OrderProcurement             , QueryResults[6].Unload());
 EndProcedure
 
-Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_UseGR_IsProduct(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_UseGR_IsProduct(Tables, TableName, Parameters)
 	// tmp_5_2
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -1866,10 +1829,10 @@ Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_UseGR_I
 	PostingServer.MergeTables(Tables.GoodsReceiptSchedule_Receipt , QueryResults[2].Unload());
 EndProcedure
 
-Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_IsService(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_NotSCBeforeInvoice_IsService(Tables, TableName, Parameters)
 	// tmp_5_3
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -1940,10 +1903,10 @@ EndProcedure
 
 #Region Table_tmp_6
 
-Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice(Tables, TableName, Parameters)
 	// tmp_6
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_1 FROM source AS tmp
 		|WHERE 
@@ -1954,11 +1917,11 @@ Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice(Tables, TempM
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice_NotUseGR_IsProduct(Tables, TempManager, NewTableName, Parameters);
+		GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice_NotUseGR_IsProduct(Tables, NewTableName, Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_2 FROM source AS tmp
 		|WHERE 
@@ -1969,11 +1932,11 @@ Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice(Tables, TempM
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice_UseGR_IsProduct(Tables, TempManager, NewTableName, Parameters);
+		GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice_UseGR_IsProduct(Tables, NewTableName, Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_3 FROM source AS tmp
 		|WHERE 
@@ -1983,14 +1946,14 @@ Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice(Tables, TempM
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice_IsService(Tables, TempManager, NewTableName, Parameters);
+		GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice_IsService(Tables, NewTableName, Parameters);
 	EndIf;
 EndProcedure
 
-Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice_NotUseGR_IsProduct(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice_NotUseGR_IsProduct(Tables, TableName, Parameters)
 	// tmp_6_1
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -2004,7 +1967,7 @@ Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice_NotUseGR_IsPr
 		|	tmp.RowKey
 		|FROM
 		|	tmp AS tmp
-		|		LEFT JOIN GoodsReceipts AS GoodsReceipts
+		|		LEFT JOIN _GoodsReceipts AS GoodsReceipts
 		|		ON tmp.RowKeyUUID = GoodsReceipts.RowKeyUUID
 		|;
 		|
@@ -2027,10 +1990,10 @@ Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice_NotUseGR_IsPr
 	PostingServer.MergeTables(Tables.OrderBalance  , QueryResults[1].Unload());
 EndProcedure
 
-Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice_UseGR_IsProduct(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice_UseGR_IsProduct(Tables, TableName, Parameters)
 	// tmp_6_2
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -2044,7 +2007,7 @@ Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice_UseGR_IsProdu
 		|	tmp.RowKey
 		|FROM
 		|	tmp AS tmp
-		|		LEFT JOIN GoodsReceipts AS GoodsReceipts
+		|		LEFT JOIN _GoodsReceipts AS GoodsReceipts
 		|		ON tmp.RowKeyUUID = GoodsReceipts.RowKeyUUID
 		|;
 		|
@@ -2067,10 +2030,10 @@ Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice_UseGR_IsProdu
 	PostingServer.MergeTables(Tables.OrderBalance  , QueryResults[1].Unload());
 EndProcedure
 
-Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice_IsService(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice_IsService(Tables, TableName, Parameters)
 	// tmp_6_3
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -2142,10 +2105,10 @@ EndProcedure
 
 #Region Table_tmp_7
 
-Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice(Tables, TableName, Parameters)
 	// tmp_7
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_1 FROM source AS tmp
 		|WHERE 
@@ -2156,11 +2119,11 @@ Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice(Tables, TempM
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_NotUseGR_IsProduct(Tables, TempManager, NewTableName, Parameters);
+		GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_NotUseGR_IsProduct(Tables, NewTableName, Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_2 FROM source AS tmp
 		|WHERE 
@@ -2171,11 +2134,11 @@ Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice(Tables, TempM
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_UseGR_IsProduct(Tables, TempManager, NewTableName, Parameters);
+		GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_UseGR_IsProduct(Tables, NewTableName, Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_3 FROM source AS tmp
 		|WHERE 
@@ -2185,18 +2148,18 @@ Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice(Tables, TempM
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_IsService(Tables, TempManager, NewTableName, Parameters);
+		GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_IsService(Tables, NewTableName, Parameters);
 	EndIf;
 EndProcedure
 
-Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_NotUseGR_IsProduct(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_NotUseGR_IsProduct(Tables, TableName, Parameters)
 	Return;
 EndProcedure
 
-Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_UseGR_IsProduct(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_UseGR_IsProduct(Tables, TableName, Parameters)
 	// tmp_2_2
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -2290,7 +2253,7 @@ Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_UseGR_IsProdu
 	Return;
 EndProcedure
 
-Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_IsService(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_IsService(Tables, TableName, Parameters)
 	Return;
 EndProcedure
 
@@ -2298,10 +2261,10 @@ EndProcedure
 
 #Region Table_tmp_8
 
-Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice(Tables, TableName, Parameters)
 	// tmp_8
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_1 FROM source AS tmp
 		|WHERE 
@@ -2312,11 +2275,11 @@ Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice(Tables, Te
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_NotUseGR_IsProduct(Tables, TempManager, NewTableName, Parameters);
+		GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_NotUseGR_IsProduct(Tables, NewTableName, Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_2 FROM source AS tmp
 		|WHERE 
@@ -2328,11 +2291,11 @@ Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice(Tables, Te
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_UseGR_UseSC_IsProduct(Tables, TempManager, NewTableName, Parameters);
+		GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_UseGR_UseSC_IsProduct(Tables, NewTableName, Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_3 FROM source AS tmp
 		|WHERE 
@@ -2342,18 +2305,18 @@ Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice(Tables, Te
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_IsService(Tables, TempManager, NewTableName, Parameters);
+		GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_IsService(Tables, NewTableName, Parameters);
 	EndIf;
 EndProcedure
 
-Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_NotUseGR_IsProduct(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_NotUseGR_IsProduct(Tables, TableName, Parameters)
 	Return;	
 EndProcedure
 
-Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_UseGR_UseSC_IsProduct(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_UseGR_UseSC_IsProduct(Tables, TableName, Parameters)
 	// tmp_8_2
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -2420,7 +2383,7 @@ Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_UseGR_UseS
 	PostingServer.MergeTables(Tables.OrderProcurement             , QueryResults[3].Unload());
 EndProcedure
 
-Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_IsService(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_NotUsePO_UseSO_NotGRBeforeInvoice_SCBeforeInvoice_IsService(Tables, TableName, Parameters)
 	// tmp_8_3
 	Return;
 EndProcedure
@@ -2429,10 +2392,10 @@ EndProcedure
 
 #Region Table_tmp_9
 
-Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice(Tables, TableName, Parameters)
 	// tmp_9
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_1 FROM source AS tmp
 		|WHERE 
@@ -2443,11 +2406,11 @@ Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice(Tables, TempMana
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice_NotUseGR_IsProduct(Tables, TempManager, NewTableName, Parameters);
+		GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice_NotUseGR_IsProduct(Tables, NewTableName, Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_2 FROM source AS tmp
 		|WHERE 
@@ -2458,11 +2421,11 @@ Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice(Tables, TempMana
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice_UseGR_IsProduct(Tables, TempManager, NewTableName, Parameters);
+		GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice_UseGR_IsProduct(Tables, NewTableName, Parameters);
 	EndIf;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 		"SELECT * INTO tmp_3 FROM source AS tmp
 		|WHERE 
@@ -2472,19 +2435,19 @@ Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice(Tables, TempMana
 	Query.Text = StrReplace(Query.Text, "source", TableName);
 	Query.Execute();
 	If Not Query.TempTablesManager.Tables.Find(NewTableName).GetData().IsEmpty() Then
-		GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice_IsService(Tables, TempManager, NewTableName, Parameters);
+		GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice_IsService(Tables, NewTableName, Parameters);
 	EndIf;
 EndProcedure
 
-Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice_NotUseGR_IsProduct(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice_NotUseGR_IsProduct(Tables, TableName, Parameters)
 	// tmp_9_1
 	Return;
 EndProcedure
 
-Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice_UseGR_IsProduct(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice_UseGR_IsProduct(Tables, TableName, Parameters)
 	// tmp_9_2
 	Query = New Query();
-	Query.TempTablesManager = TempManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	
 	#Region QueryText
 	Query.Text =
@@ -2498,7 +2461,7 @@ Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice_UseGR_IsProduct(
 		|	tmp.RowKey
 		|FROM
 		|	tmp AS tmp
-		|		LEFT JOIN GoodsReceipts AS GoodsReceipts
+		|		LEFT JOIN _GoodsReceipts AS GoodsReceipts
 		|		ON tmp.RowKeyUUID = GoodsReceipts.RowKeyUUID
 		|;
 		|
@@ -2521,7 +2484,7 @@ Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice_UseGR_IsProduct(
 	PostingServer.MergeTables(Tables.OrderBalance  , QueryResults[1].Unload());
 EndProcedure
 
-Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice_IsService(Tables, TempManager, TableName, Parameters)
+Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice_IsService(Tables, TableName, Parameters)
 	// tmp_9_3
 	Return;	
 EndProcedure
@@ -2823,18 +2786,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.TaxesTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.TaxesTurnovers));
 	
-	// R4035_IncommingStocks
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4035_IncommingStocks,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.R4035_IncommingStocks));
-	
-	// R4036_IncomingStockRequested
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.R4036_IncommingStocksRequested,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.R4036_IncommingStocksRequested));
-
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 #EndRegion			
@@ -2941,6 +2892,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
 	QueryArray.Add(VendorsTransactions());
+	QueryArray.Add(SerialLotNumbers());
 	Return QueryArray;
 EndFunction
 
@@ -2957,10 +2909,13 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2013T_SalesOrdersProcurement());
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4017B_InternalSupplyRequestProcurement());
 	QueryArray.Add(R4033B_GoodsReceiptSchedule());
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R4035B_IncomingStocks());
+	QueryArray.Add(R4036B_IncomingStocksRequested());
 	Return QueryArray;
 EndFunction
 
@@ -3105,6 +3060,24 @@ Function VendorsTransactions()
 		|	ItemList.Currency,
 		|	ItemList.Period";
 EndFunction
+
+Function SerialLotNumbers()
+	Return
+		"SELECT
+		|	SerialLotNumbers.Ref.Date AS Period,
+		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity,
+		|	ItemList.ItemKey AS ItemKey
+		|INTO SerialLotNumbers
+		|FROM
+		|	Document.PurchaseInvoice.SerialLotNumbers AS SerialLotNumbers
+		|		LEFT JOIN Document.PurchaseInvoice.ItemList AS ItemList
+		|		ON SerialLotNumbers.Key = ItemList.Key
+		|WHERE
+		|	SerialLotNumbers.Ref = &Ref";	
+EndFunction	
 
 Function R1001T_Purchases()
 	Return
@@ -3300,13 +3273,42 @@ EndFunction
 
 Function R4011B_FreeStocks()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	*
+		|	QueryTable.Period AS Period,
+		|	QueryTable.Store AS Store,
+		|	QueryTable.ItemKey AS ItemKey,
+		|	QueryTable.Quantity AS Quantity
 		|INTO R4011B_FreeStocks
 		|FROM
 		|	ItemList AS QueryTable
-		|WHERE  NOT QueryTable.IsService AND NOT QueryTable.UseGoodsReceipt";
+		|WHERE
+		|	NOT QueryTable.IsService
+		|	AND NOT QueryTable.UseGoodsReceipt
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	FreeStocks.Period,
+		|	FreeStocks.Store,
+		|	FreeStocks.ItemKey,
+		|	FreeStocks.Quantity
+		|FROM
+		|	FreeStocks AS FreeStocks";
+
+EndFunction
+
+Function R4014B_SerialLotNumber()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	*
+		|INTO R4014B_SerialLotNumber
+		|FROM
+		|	SerialLotNumbers AS QueryTable
+		|WHERE 
+		|	TRUE";
 
 EndFunction
 
@@ -3371,5 +3373,21 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Currency,
 		|	ItemList.Period";
 EndFunction
+
+Function R4035B_IncomingStocks()
+	Return
+		"SELECT *
+		|INTO R4035B_IncomingStocks
+		|FROM 
+		|	IncomingStocks AS IncomingStocks";
+EndFunction
+
+Function R4036B_IncomingStocksRequested()
+	Return
+		"SELECT *
+		|INTO R4036B_IncomingStocksRequested
+		|FROM
+		|	IncomingStocksRequested AS IncomingStocksRequested";
+EndFunction	
 
 #EndRegion

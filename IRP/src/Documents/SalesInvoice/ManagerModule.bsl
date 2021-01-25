@@ -1210,6 +1210,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(Taxes());
 	QueryArray.Add(CustomersTransactions());
 	QueryArray.Add(Aging());
+	QueryArray.Add(SerialLotNumbers());
 	Return QueryArray;
 EndFunction
 
@@ -1223,6 +1224,9 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2031B_ShipmentInvoicing());
 	QueryArray.Add(R2040B_TaxesIncoming());
 	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4012B_StockReservation());
+	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R2021B_CustomersTransactions());
@@ -1270,11 +1274,7 @@ Function ItemList()
 		|	NOT SalesInvoiceItemList.SalesOrder = Value(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
 		|	SalesInvoiceItemList.Key AS RowKey,
 		|	SalesInvoiceItemList.DeliveryDate AS DeliveryDate,
-		|	CASE
-		|		WHEN SalesInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
-		|			THEN TRUE
-		|		ELSE FALSE
-		|	END AS IsService,
+		|	SalesInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		|	SalesInvoiceItemList.BusinessUnit AS BusinessUnit,
 		|	SalesInvoiceItemList.RevenueType AS RevenueType,
 		|	SalesInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
@@ -1403,6 +1403,24 @@ Function Aging()
 		|	SalesInvoicePaymentTerms.Ref";	
 EndFunction	
 
+Function SerialLotNumbers()
+	Return
+		"SELECT
+		|	SerialLotNumbers.Ref.Date AS Period,
+		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity,
+		|	ItemList.ItemKey AS ItemKey
+		|INTO SerialLotNumbers
+		|FROM
+		|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
+		|		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
+		|		ON SerialLotNumbers.Key = ItemList.Key
+		|WHERE
+		|	SerialLotNumbers.Ref = &Ref";	
+EndFunction	
+
 Function R2001T_Sales()
 	Return
 		"SELECT *
@@ -1523,6 +1541,84 @@ Function R4010B_ActualStocks()
 		|WHERE 
 		|	NOT QueryTable.IsService 
 		|	AND NOT QueryTable.UseShipmentConfirmation";
+
+EndFunction
+
+Function R4011B_FreeStocks()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	*
+		|INTO R4011B_FreeStocks
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE NOT QueryTable.IsService AND NOT QueryTable.UseShipmentConfirmation";
+
+EndFunction
+
+Function R4012B_StockReservation()
+	Return
+		"SELECT
+		|	R4012B_StockReservationBalance.Store,
+		|	R4012B_StockReservationBalance.ItemKey,
+		|	R4012B_StockReservationBalance.Order,
+		|	R4012B_StockReservationBalance.QuantityBalance AS Quantity
+		|INTO BalanceWithoutRef
+		|FROM
+		|	AccumulationRegister.R4012B_StockReservation.Balance(, Order IN
+		|		(Select
+		|			T.SalesOrder
+		|		From
+		|			ItemList AS T)) AS R4012B_StockReservationBalance
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	R4012B_StockReservation.Store,
+		|	R4012B_StockReservation.ItemKey,
+		|	R4012B_StockReservation.Order,
+		|	R4012B_StockReservation.Quantity
+		|FROM
+		|	AccumulationRegister.R4012B_StockReservation AS R4012B_StockReservation
+		|WHERE
+		|	R4012B_StockReservation.Recorder = &Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	QueryTable.Period AS Period,
+		|	QueryTable.SalesOrder AS Order,
+		|	QueryTable.ItemKey AS ItemKey,
+		|	QueryTable.Store AS Store,
+		|	CASE
+		|		When BalanceWithoutRef.Quantity - QueryTable.Quantity >= 0
+		|			Then QueryTable.Quantity
+		|		Else BalanceWithoutRef.Quantity
+		|	END AS Quantity
+		|INTO R4012B_StockReservation
+		|FROM
+		|	ItemList AS QueryTable
+		|		LEFT JOIN BalanceWithoutRef AS BalanceWithoutRef
+		|		ON QueryTable.SalesOrder = BalanceWithoutRef.Order
+		|		AND QueryTable.ItemKey = BalanceWithoutRef.ItemKey
+		|		AND QueryTable.Store = BalanceWithoutRef.Store
+		|WHERE
+		|	BalanceWithoutRef.Quantity > 0
+		|	AND NOT QueryTable.UseShipmentConfirmation";
+
+EndFunction
+
+Function R4014B_SerialLotNumber()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|*
+		|INTO R4014B_SerialLotNumber
+		|FROM
+		|	SerialLotNumbers AS QueryTable
+		|WHERE 
+		|	TRUE";
 
 EndFunction
 

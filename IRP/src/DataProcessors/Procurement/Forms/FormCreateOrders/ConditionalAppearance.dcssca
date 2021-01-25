@@ -23,7 +23,7 @@
 	<item>
 		<selection>
 			<item>
-				<field>TableOfBalanceQuantityIncomming</field>
+				<field>TableOfBalanceQuantityIncoming</field>
 			</item>
 		</selection>
 		<filter>

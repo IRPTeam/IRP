@@ -3333,7 +3333,7 @@ EndFunction
 Function R4014B_SerialLotNumber()
 	Return
 		"SELECT 
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	*
 		|INTO R4014B_SerialLotNumber
 		|FROM

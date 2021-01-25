@@ -52,6 +52,7 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
+		When Create document PurchaseInvoice objects (for stock remaining control)
 		When Create catalog ExpenseAndRevenueTypes objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -1522,6 +1523,29 @@ Scenario: _0920071 check serial lot number controls in the PurchaseReturn
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
 	And I close all client application windows
+
+Scenario: _0920072 check filling in serial lot number in the PurchaseReturn	from Purchase invoice
+	* Create Purchase return based on Purchase invoice
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'     |
+			| '25' |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormDocumentPurchaseReturnGeneratePurchaseReturn"
+	* Check filling in serial lot number from Purchase invoice
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Serial lot numbers' | 'Q'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
+			| 'Dress' | 'XS/Blue'  | '05'                 | '200,000' | 'pcs'  | 'No'                 | '18 720,00'  | '520,00' | '18%' | ''              | '104 000,00' | 'Purchase invoice 25 dated 01.12.2020 12:00:00' | ''                      | '122 720,00'   | 'Store 05' |
+		And I click the button named "FormPost"
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Serial lot numbers' | 'Q'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
+			| 'Dress' | 'XS/Blue'  | '05'                 | '200,000' | 'pcs'  | 'No'                 | '18 720,00'  | '520,00' | '18%' | ''              | '104 000,00' | 'Purchase invoice 25 dated 01.12.2020 12:00:00' | ''                      | '122 720,00'   | 'Store 05' |
+		And I close all client application windows
+		
+				
+		
+				
+		
 
 
 Scenario: _092008 check serial lot number in the Opening entry

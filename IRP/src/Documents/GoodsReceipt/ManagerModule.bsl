@@ -12,6 +12,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("GoodsReceiptSchedule"     , PostingServer.CreateTable(AccReg.GoodsReceiptSchedule));
 	Tables.Insert("GoodsInTransitOutgoing"   , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
 	Tables.Insert("InventoryBalance"         , PostingServer.CreateTable(AccReg.InventoryBalance));
+	Tables.Insert("IncomingStocksReal"       , PostingServer.CreateTable(AccReg.R4035B_IncomingStocks));
 	
 	Tables.Insert("GoodsInTransitIncoming_Exists", PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
 	Tables.Insert("GoodsInTransitOutgoing_Exists", PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
@@ -158,6 +159,28 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	// legacy code fix
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
+	
+	If Tables.IncomingStocksReal.Count() Then
+		Query.Text = 
+		"SELECT
+		|	IncomingStocksReal.Period,
+		|	IncomingStocksReal.Store,
+		|	IncomingStocksReal.ItemKey,
+		|	IncomingStocksReal.Order,
+		|	IncomingStocksReal.Quantity
+		|INTO IncomingStocksReal
+		|FROM
+		|	&IncomingStocksReal AS IncomingStocksReal";
+		Query.SetParameter("IncomingStocksReal", Tables.IncomingStocksReal);
+		Query.Execute();
+		Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Clear();
+		Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Write();
+		IncomingStocksServer.ClosureIncomingStocks(Parameters);
+	
+		PostingServer.MergeTables(Tables.StockReservation_Expense, 
+		PostingServer.GetQueryTableByName("FreeStocks", Parameters));		
+	EndIf;
+	Query.Text = "";
 	If Not PostingServer.QueryTableIsExists("IncomingStocks", Parameters) Then
 		Query.Text = Query.Text + "SELECT UNDEFINED INTO IncomingStocks WHERE FALSE; ";
 	EndIf;	
@@ -296,14 +319,13 @@ Procedure GetTables_NotUseSO_NotUsePO_IsProduct(Tables, TableName, Parameters)
 	|	CAST(tmp.ReceiptBasis AS Document.InventoryTransfer).StoreTransit
 	|;
 	|
-	|//[IncomingStocksReal]
+	|//[5][IncomingStocksReal]
 	|SELECT
 	|	tmp.Period,
 	|	tmp.Store,
 	|	tmp.ItemKey,
 	|	PurchaseOrderItemList.Ref AS Order,
 	|	tmp.Quantity
-	|INTO IncomingStocksReal
 	|FROM
 	|tmp AS tmp
 	|	INNER JOIN Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
@@ -323,13 +345,7 @@ Procedure GetTables_NotUseSO_NotUsePO_IsProduct(Tables, TableName, Parameters)
 	PostingServer.MergeTables(Tables.StockReservation_Receipt , QueryResults[2].Unload());
 	PostingServer.MergeTables(Tables.GoodsReceiptSchedule     , QueryResults[3].Unload());
 	PostingServer.MergeTables(Tables.StockBalance_Expense     , QueryResults[4].Unload());
-	
-	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Clear();
-	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Write();
-	IncomingStocksServer.ClosureIncomingStocks(Parameters);
-	
-	PostingServer.MergeTables(Tables.StockReservation_Expense, 
-	PostingServer.GetQueryTableByName("FreeStocks", Parameters));
+	PostingServer.MergeTables(Tables.IncomingStocksReal       , QueryResults[5].Unload());
 EndProcedure
 
 #EndRegion
@@ -1470,14 +1486,13 @@ Procedure GetTables_NotUseSO_UsePO_IsProduct(Tables, TableName, Parameters)
 		|	CAST(tmp.ReceiptBasis AS Document.InventoryTransfer).StoreTransit
 		|
 		|;
-		|//[IncomingStocksReal]
+		|//[7][IncomingStocksReal]
 		|SELECT
 		|	tmp.Period,
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	PurchaseOrderItemList.Ref AS Order,
 		|	tmp.Quantity
-		|INTO IncomingStocksReal
 		|FROM
 		|tmp AS tmp
 		|	INNER JOIN Document.PurchaseOrder.ItemList AS PurchaseOrderItemList
@@ -1496,13 +1511,7 @@ Procedure GetTables_NotUseSO_UsePO_IsProduct(Tables, TableName, Parameters)
 	PostingServer.MergeTables(Tables.GoodsReceiptSchedule     , QueryResults[4].Unload());
 	PostingServer.MergeTables(Tables.InventoryBalance         , QueryResults[5].Unload());
 	PostingServer.MergeTables(Tables.StockBalance_Expense     , QueryResults[6].Unload());
-	
-	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Clear();
-	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Write();
-	IncomingStocksServer.ClosureIncomingStocks(Parameters);
-	
-	PostingServer.MergeTables(Tables.StockReservation_Expense, 
-	PostingServer.GetQueryTableByName("FreeStocks", Parameters));
+	PostingServer.MergeTables(Tables.IncomingStocksReal       , QueryResults[7].Unload());
 EndProcedure
 
 #EndRegion

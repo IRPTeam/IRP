@@ -37,6 +37,21 @@
 //  *ItemKey
 //  *Quantity
 Procedure ClosureIncomingStocks(Parameters) Export
+	IncomingStocksReal_Lock = PostingServer.GetQueryTableByName("R5011B_PartnersAging_OffestOfAging_Lock", Parameters);
+		
+	DataLock = New DataLock();
+	LockFields = AccumulationRegisters.R4035B_IncomingStocks.GetLockFields(IncomingStocksReal_Lock);
+	DataLockItem = DataLock.Add(LockFields.RegisterName);
+	DataLockItem.Mode = DataLockMode.Exclusive;
+	DataLockItem.DataSource = LockFields.LockInfo.Data;
+	For Each Field In LockFields.LockInfo.Fields Do
+		DataLockItem.UseFromDataSource(Field.Key, Field.Value);
+	EndDo;
+	If LockFields.LockInfo.Data.Count() Then
+		DataLock.Lock();
+		Parameters.Insert("R4035B_IncomingStocks_IncomingStocksReal_Lock", DataLock);
+	EndIf;	
+	
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = 

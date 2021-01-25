@@ -39,11 +39,29 @@ EndProcedure
 //
 Function GetExtensionAttributesListByObjectMetadata(ObjectMetadata) Export
 	ObjectDataName = StrReplace(ObjectMetadata.FullName(), ".", "_");
+	
+	Query = New Query;
+	Query.Text = "SELECT
+	|	AddAttributeAndPropertySets.Ref,
+	|	AddAttributeAndPropertySets.PredefinedDataName
+	|FROM
+	|	Catalog.AddAttributeAndPropertySets AS AddAttributeAndPropertySets
+	|WHERE
+	|	AddAttributeAndPropertySets.Predefined";
+	PredefinedAddAttributeAndPropertySets = Query.Execute().Unload();
+	PredefinedNameFilter = New Structure;
+	PredefinedNameFilter.Insert("PredefinedDataName", ObjectDataName);
+	FoundRefs = PredefinedAddAttributeAndPropertySets.FindRows(PredefinedNameFilter);
+	If FoundRefs.Count() Then
+		AddAttributeAndPropertySetRef = FoundRefs[0].Ref;
+	Else
+		AddAttributeAndPropertySetRef = Catalogs.AddAttributeAndPropertySets.EmptyRef();
+	EndIf;
+	
 	AttributeNames = New Array;
 	For Each Attribute In ObjectMetadata.Attributes Do
 		AttributeNames.Add(Attribute.Name);
 	EndDo;
-	
 	Query = New Query();
 	Query.Text = "SELECT
 		|	ExtensionAttributes.Attribute AS Attribute,
@@ -55,9 +73,9 @@ Function GetExtensionAttributesListByObjectMetadata(ObjectMetadata) Export
 		|WHERE
 		|	ExtensionAttributes.Show
 		|	AND ExtensionAttributes.Attribute IN (&AttributeNames)
-		|	AND ExtensionAttributes.Ref.PredefinedDataName = &PredefinedDataName";
+		|	AND ExtensionAttributes.Ref = &AddAttributeAndPropertySetRef";
 	Query.SetParameter("AttributeNames", AttributeNames);
-	Query.SetParameter("PredefinedDataName", ObjectDataName);	
+	Query.SetParameter("AddAttributeAndPropertySetRef", AddAttributeAndPropertySetRef);	
 	Return Query.Execute().Unload();
 EndFunction
 

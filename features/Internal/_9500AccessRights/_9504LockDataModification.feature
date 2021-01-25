@@ -22,6 +22,26 @@ Scenario: 950400 preparation
 				| "Description" |
 				| "TestExtension" |
 			When add test extension
+	* Filling settings for attribute from extension
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| 'Predefined data name' |
+			| 'Catalog_Currencies'   |
+		And I select current line in "List" table
+		And I move to "Extension attributes" tab
+		And in the table "ExtensionAttributes" I click "Fill attributes list" button
+		And "ExtensionAttributes" table became equal
+			| '#' | 'Required' | 'Attribute'      | 'Show' | 'UI group' | 'Show in HTML' |
+			| '1' | 'No'       | 'REP_Attribute1' | 'No'   | ''         | 'No'           |
+		And I set "Show" checkbox in "ExtensionAttributes" table
+		And I select current line in "ExtensionAttributes" table
+		And I click choice button of the attribute named "ExtensionAttributesInterfaceGroup" in "ExtensionAttributes" table
+		And I go to line in "List" table
+			| 'Description'            |
+			| 'Accounting information' |
+		And I select current line in "List" table
+		And I finish line editing in "ExtensionAttributes" table
+		And I click "Save and close" button
 	* Filling in attribute from extension
 		Given I open hyperlink "e1cib/list/Catalog.Currencies"
 		And I go to line in "List" table
@@ -1662,52 +1682,52 @@ Scenario: 950480 check access to the Lock data modification for user with role F
 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 	And "List" table contains lines
 		| 'ENG'           |
-		| 'Doc lock'      |
-		| 'Register lock' |
-	And I close TestClient session
-	And I connect "Этот клиент" profile of TestClient
-		
-
-
-Scenario: 950490 switch off function option and check that rules does not work
-		And I connect "Этот клиент" profile of TestClient
-		* Preparation
-			Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
-			And I go to line in "List" table
-				| 'Type'                              |
-				| 'InformationRegister.CurrencyRates' |
-			And I select current line in "List" table
-			And I remove checkbox "Disable rule"				
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Type'                              |
-				| 'InformationRegister.Taxes' |
-			And I select current line in "List" table
-			And I remove checkbox "Disable rule"				
-			And I click "Save and close" button
-		And I set "False" value to the constant "UseLockDataModification"
+			| 'Doc lock'      |
+			| 'Register lock' |
 		And I close TestClient session
 		And I connect "Этот клиент" profile of TestClient
-		Given I open hyperlink 'e1cib/list/InformationRegister.Taxes'
-		And I go to line in "List" table
-			| 'Tax' |
-			| 'VAT' |
-		And I select current line in "List" table
-		And I input "01.02.2020" text in "Period" field	
-		And I click "Save and close" button
-		Then user message window does not contain messages
-		And I set "True" value to the constant "UseLockDataModification"
-		And I close TestClient session
-		And I connect "Этот клиент" profile of TestClient
-
-
-
-							
-
 			
-					
 
-			
-					
-			
-			
+
+	Scenario: 950490 switch off function option and check that rules does not work
+			And I connect "Этот клиент" profile of TestClient
+			* Preparation
+				Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
+				And I go to line in "List" table
+					| 'Type'                              |
+					| 'InformationRegister.CurrencyRates' |
+				And I select current line in "List" table
+				And I remove checkbox "Disable rule"				
+				And I click "Save and close" button
+				And I go to line in "List" table
+					| 'Type'                              |
+					| 'InformationRegister.Taxes' |
+				And I select current line in "List" table
+				And I remove checkbox "Disable rule"				
+				And I click "Save and close" button
+			And I set "False" value to the constant "UseLockDataModification"
+			And I close TestClient session
+			And I connect "Этот клиент" profile of TestClient
+			Given I open hyperlink 'e1cib/list/InformationRegister.Taxes'
+			And I go to line in "List" table
+				| 'Tax' |
+				| 'VAT' |
+			And I select current line in "List" table
+			And I input "01.02.2020" text in "Period" field	
+			And I click "Save and close" button
+			Then user message window does not contain messages
+			And I set "True" value to the constant "UseLockDataModification"
+			And I close TestClient session
+			And I connect "Этот клиент" profile of TestClient
+
+
+
+								
+
+				
+						
+
+				
+						
+				
+				

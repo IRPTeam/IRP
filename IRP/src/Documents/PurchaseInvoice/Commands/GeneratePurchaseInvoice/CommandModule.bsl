@@ -465,42 +465,71 @@ EndFunction
 
 &AtServer
 Function GetDocumentTable_GoodsReceipt(ArrayOfBasisDocuments)
-	ValueTable = New ValueTable();
-	ValueTable.Columns.Add("Order", New TypeDescription("DocumentRef.PurchaseOrder"));	
-	ValueTable.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
-	ValueTable.Columns.Add("Quantity", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
-	ValueTable.Columns.Add("RowKey", Metadata.AccumulationRegisters.ReceiptOrders.Dimensions.RowKey.Type);
+	BasedOnPurchaseOrderTable = New ValueTable();
+	BasedOnPurchaseOrderTable.Columns.Add("Order", New TypeDescription("DocumentRef.PurchaseOrder"));	
+	BasedOnPurchaseOrderTable.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
+	BasedOnPurchaseOrderTable.Columns.Add("Quantity", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
+	BasedOnPurchaseOrderTable.Columns.Add("RowKey", Metadata.AccumulationRegisters.ReceiptOrders.Dimensions.RowKey.Type);
+	
+	BasedOnGoodsReceiptTable = New ValueTable();
+	BasedOnGoodsReceiptTable.Columns.Add("Order", New TypeDescription("DocumentRef.PurchaseOrder"));
+	BasedOnGoodsReceiptTable.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
+	BasedOnGoodsReceiptTable.Columns.Add("Quantity", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
+	BasedOnGoodsReceiptTable.Columns.Add("RowKey", Metadata.AccumulationRegisters.ReceiptOrders.Dimensions.RowKey.Type);
+	BasedOnGoodsReceiptTable.Columns.Add("Partner", New TypeDescription("CatalogRef.Partners"));
+	BasedOnGoodsReceiptTable.Columns.Add("LegalName", New TypeDescription("CatalogRef.Companies"));
+	BasedOnGoodsReceiptTable.Columns.Add("Company", New TypeDescription("CatalogRef.Companies"));
+	BasedOnGoodsReceiptTable.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
 	
 	GoodsReceiptsTable = CreateTable_GoodsReceipts();
 	
-	For Each Row In ArrayOfBasisDocuments Do		
-		NewRow = ValueTable.Add();
-		NewRow.Order = Row.Order;
-		NewRow.ItemKey = Row.ItemKey;
-		NewRow.RowKey = Row.RowKey;
-		NewRow.Quantity = Row.Quantity;
+	For Each Row In ArrayOfBasisDocuments Do
+		RowKey = ?(ValueIsFilled(Row.RowKey), Row.RowKey, String(New UUID()));
+		If ValueIsFilled(Row.Order) Then		
+			BasedOnPurchaseOrderTable_NewRow = BasedOnPurchaseOrderTable.Add();
+			BasedOnPurchaseOrderTable_NewRow.Order = Row.Order;
+			BasedOnPurchaseOrderTable_NewRow.ItemKey = Row.ItemKey;
+			BasedOnPurchaseOrderTable_NewRow.RowKey = Row.RowKey;
+			BasedOnPurchaseOrderTable_NewRow.Quantity = Row.Quantity;
+		Else
+			BasedOnGoodsReceiptTable_NewRow = BasedOnGoodsReceiptTable.Add();
+			BasedOnGoodsReceiptTable_NewRow.Order = Row.Order;
+			BasedOnGoodsReceiptTable_NewRow.ItemKey = Row.ItemKey;
+			BasedOnGoodsReceiptTable_NewRow.RowKey = RowKey;
+			BasedOnGoodsReceiptTable_NewRow.Quantity = Row.Quantity;
+			BasedOnGoodsReceiptTable_NewRow.Partner = Row.GoodsReceipt.Partner;
+			BasedOnGoodsReceiptTable_NewRow.LegalName = Row.GoodsReceipt.LegalName;	
+			BasedOnGoodsReceiptTable_NewRow.Company = Row.GoodsReceipt.Company;	
+			If ValueIsFilled(Row.ItemKey.Unit) Then
+				BasedOnGoodsReceiptTable_NewRow.Unit = Row.ItemKey.Unit;
+			Else
+				If ValueIsFilled(Row.ItemKey.Item.Unit) Then
+					BasedOnGoodsReceiptTable_NewRow.Unit = Row.ItemKey.Item.Unit;
+				EndIf;
+			EndIf;
+		EndIf;
 		
-		NewRow = GoodsReceiptsTable.Add();
-		NewRow.Ref = Row.Order;
-		NewRow.GoodsReceipt = Row.GoodsReceipt;
-		NewRow.Key = Row.RowKey;
-		NewRow.Quantity = Row.Quantity;
-		NewRow.QuantityInGoodsReceipt = Row.Quantity;
+		GoodsReceiptsTable_NewRow = GoodsReceiptsTable.Add();
+		GoodsReceiptsTable_NewRow.Ref = Row.Order;
+		GoodsReceiptsTable_NewRow.GoodsReceipt = Row.GoodsReceipt;
+		GoodsReceiptsTable_NewRow.Key = RowKey;
+		GoodsReceiptsTable_NewRow.Quantity = Row.Quantity;
+		GoodsReceiptsTable_NewRow.QuantityInGoodsReceipt = Row.Quantity;
 	EndDo;
 	
-	ValueTable.GroupBy("Order, ItemKey, RowKey", "Quantity");
+	BasedOnPurchaseOrderTable.GroupBy("Order, ItemKey, RowKey", "Quantity");
 	GoodsReceiptsTable.GroupBy("GoodsReceipt, Key, Ref", "Quantity, QuantityInGoodsReceipt");
 	
 	Query = New Query();
 	Query.Text =
 		"SELECT
-		|	ValueTable.Order AS Order,
-		|	ValueTable.ItemKey AS ItemKey,
-		|	ValueTable.RowKey AS RowKey, 
-		|	ValueTable.Quantity AS Quantity
+		|	BasedOnPurchaseOrderTable.Order AS Order,
+		|	BasedOnPurchaseOrderTable.ItemKey AS ItemKey,
+		|	BasedOnPurchaseOrderTable.RowKey AS RowKey, 
+		|	BasedOnPurchaseOrderTable.Quantity AS Quantity
 		|INTO tmp
 		|FROM
-		|	&ValueTable AS ValueTable
+		|	&BasedOnPurchaseOrderTable AS BasedOnPurchaseOrderTable
 		|;
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT ALLOWED
@@ -529,10 +558,22 @@ Function GetDocumentTable_GoodsReceipt(ArrayOfBasisDocuments)
 		|		AND tmp.ItemKey = OrderBalanceBalance.ItemKey
 		|		AND tmp.RowKey = OrderBalanceBalance.RowKey
 		|		AND OrderBalanceBalance.QuantityBalance > 0";
-	Query.SetParameter("ValueTable", ValueTable);
+	Query.SetParameter("BasedOnPurchaseOrderTable", BasedOnPurchaseOrderTable);
 	
-	QueryTable = Query.Execute().Unload();
-	Return ExtractInfoFrom_PurchaseOrder(QueryTable, GoodsReceiptsTable);
+	OrderBalanceTable = Query.Execute().Unload();
+	
+	TablesFromPurchaseOrder = ExtractInfoFrom_PurchaseOrder(OrderBalanceTable, GoodsReceiptsTable);
+	
+	For Each Row In BasedOnGoodsReceiptTable Do
+	 	ItemLIst_NewRow = TablesFromPurchaseOrder.ItemList.Add();
+	 	FillPropertyValues(ItemLIst_NewRow, Row);
+	 	
+	 	ItemLIst_NewRow.BasedOn = "GoodsReceipt";
+	 	ItemLIst_NewRow.PurchaseOrder = Row.Order;
+	 	ItemLIst_NewRow.Key = Row.RowKey;	 	
+	 EndDo;
+	
+	Return TablesFromPurchaseOrder;
 EndFunction
 
 &AtClient
@@ -670,11 +711,11 @@ Function GetInfoGoodsReceipt(ArrayOfGoodsReceipt)
 		|UNION ALL
 		|
 		|SELECT
-		|	UNDEFINED,
+		|	VALUE(Document.PurchaseOrder.EmptyRef),
 		|	ReceiptInvoicing.Basis,
 		|	ReceiptInvoicing.ItemKey,
 		|	ReceiptInvoicing.QuantityBalance,
-		|	UNDEFINED
+		|	""""
 		|FROM
 		|	AccumulationRegister.R1031B_ReceiptInvoicing.Balance(, Basis IN (&ArrayOfGoodsReceipt)
 		|	AND NOT (Basis, ItemKey) IN
@@ -682,7 +723,9 @@ Function GetInfoGoodsReceipt(ArrayOfGoodsReceipt)
 		|			ReceiptOrders.GoodsReceipt,
 		|			ReceiptOrders.ItemKey
 		|		FROM
-		|			ReceiptOrders AS ReceiptOrders)) AS ReceiptInvoicing";
+		|			ReceiptOrders AS ReceiptOrders)
+		|	AND CAST(Basis AS Document.GoodsReceipt).TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.Purchase)) AS
+		|		ReceiptInvoicing";
 		
 	Query.SetParameter("ArrayOfGoodsReceipt", ArrayOfGoodsReceipt);
 	Selection = Query.Execute().Select();

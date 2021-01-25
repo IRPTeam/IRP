@@ -35,6 +35,9 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		If FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesOrder" Then
 			Filling_BasedOnPurchaseOrder(FillingData);
 		EndIf;
+		If FillingData.Property("BasedOn") And FillingData.BasedOn = "GoodsReceipt" Then
+			Filling_BasedOnGoodsReceipt(FillingData);
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -52,6 +55,19 @@ Procedure Filling_BasedOnPurchaseOrder(FillingData)
 	EndDo;
 	For Each Row In FillingData.SpecialOffers Do
 		NewRow = ThisObject.SpecialOffers.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+	For Each Row In FillingData.GoodsReceipts Do
+		NewRow = ThisObject.GoodsReceipts.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;	
+EndProcedure
+
+Procedure Filling_BasedOnGoodsReceipt(FillingData)
+	FillPropertyValues(ThisObject, FillingData, "Company,Partner,LegalName");
+	
+	For Each Row In FillingData.ItemList Do
+		NewRow = ThisObject.ItemList.Add();
 		FillPropertyValues(NewRow, Row);
 	EndDo;
 	For Each Row In FillingData.GoodsReceipts Do

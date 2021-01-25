@@ -173,6 +173,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	&IncomingStocksReal AS IncomingStocksReal";
 		Query.SetParameter("IncomingStocksReal", Tables.IncomingStocksReal);
 		Query.Execute();
+		Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.LockForUpdate = True;
 		Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Clear();
 		Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Write();
 		IncomingStocksServer.ClosureIncomingStocks(Parameters);

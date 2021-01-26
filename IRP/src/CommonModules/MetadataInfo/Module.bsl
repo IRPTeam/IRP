@@ -1,4 +1,6 @@
+
 #Region Internal
+
 Function RolesSet() Export
 	Settings = New Map;
 	
@@ -925,6 +927,12 @@ Function hasNoInternalInfo(RefData) Export
 	Array.Add(Enums.MetadataTypes.CommonForm);
 	Array.Add(Enums.MetadataTypes.Language);
 	Return NOT Array.Find(RefData) = Undefined;
+EndFunction
+
+Function EnumNameByRef(RefData) Export
+	RefNameType = RefData.Metadata().Name;
+	ValueIndex = Enums[RefNameType].IndexOf(RefData);
+	Return Metadata.Enums[RefNameType].EnumValues[ValueIndex].Name;
 EndFunction
 
 #EndRegion

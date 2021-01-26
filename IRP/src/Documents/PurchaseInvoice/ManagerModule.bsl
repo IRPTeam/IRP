@@ -3267,7 +3267,10 @@ Function R4010B_ActualStocks()
 		|INTO R4010B_ActualStocks
 		|FROM
 		|	ItemList AS QueryTable
-		|WHERE NOT QueryTable.IsService AND NOT QueryTable.UseGoodsReceipt";
+		|WHERE 
+		|	NOT QueryTable.IsService 
+		|	AND NOT QueryTable.UseGoodsReceipt
+		|	AND NOT QueryTable.GoodsReceiptExists";
 
 EndFunction
 
@@ -3285,6 +3288,7 @@ Function R4011B_FreeStocks()
 		|WHERE
 		|	NOT QueryTable.IsService
 		|	AND NOT QueryTable.UseGoodsReceipt
+		|	AND NOT QueryTable.GoodsReceiptExists
 		|
 		|UNION ALL
 		|

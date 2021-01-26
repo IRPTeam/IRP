@@ -624,6 +624,8 @@
   <enums>Enum.TaxType</enums>
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
+  <enums>Enum.InterfaceGroupBehaviors</enums>
+  <enums>Enum.InterfaceGroupChildFormItemsGroups</enums>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>

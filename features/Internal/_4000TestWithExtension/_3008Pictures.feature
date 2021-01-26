@@ -39,6 +39,7 @@ Scenario: _300100 preparation (image setting)
         When Create catalog IntegrationSettings objects
         When Create information register CurrencyRates records
         When update ItemKeys
+        When Create catalog InterfaceGroups objects
     * Add test extension
         Given I open hyperlink "e1cib/list/Catalog.Extensions"
         If "List" table does not contain lines Then
@@ -395,7 +396,28 @@ Scenario: _300115 check removal of pictures from Item
 Scenario: _4000105 check add attributes from extensions
     Then I connect launched Test client "Этот клиент"
     And I close all client application windows
-    Given I open hyperlink "e1cib/list/Catalog.Currencies"
-    And I click the button named "FormCreate"
-    And the field named "REP_Attribute1" exists on the form
-    And I close all client application windows
+    * Filling settings
+        Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+        And I go to line in "List" table
+            | 'Predefined data name' |
+            | 'Catalog_Currencies'   |
+        And I select current line in "List" table
+        And I move to "Extension attributes" tab
+        And in the table "ExtensionAttributes" I click "Fill attributes list" button
+        And "ExtensionAttributes" table became equal
+            | '#' | 'Required' | 'Attribute'      | 'Show' | 'UI group' | 'Show in HTML' |
+            | '1' | 'No'       | 'REP_Attribute1' | 'No'   | ''         | 'No'           |
+        And I set "Show" checkbox in "ExtensionAttributes" table
+        And I select current line in "ExtensionAttributes" table
+        And I click choice button of the attribute named "ExtensionAttributesInterfaceGroup" in "ExtensionAttributes" table
+        And I go to line in "List" table
+            | 'Description'            |
+            | 'Accounting information' |
+        And I select current line in "List" table
+        And I finish line editing in "ExtensionAttributes" table
+        And I click "Save and close" button
+    * Check add attributes from extensions			
+        Given I open hyperlink "e1cib/list/Catalog.Currencies"
+        And I click the button named "FormCreate"
+        And the field named "REP_Attribute1" exists on the form
+        And I close all client application windows

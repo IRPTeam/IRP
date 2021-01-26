@@ -744,6 +744,90 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="50db93fe-b52b-439b-a1f0-ee85def25385">
+    <producedTypes>
+      <objectType typeId="f04c6803-6dac-4170-a47e-9fb610342fcb" valueTypeId="3ff21d87-36cf-4340-befc-c1a7fb71e1e3"/>
+      <rowType typeId="aba69b67-d8e8-4fdd-9c47-d379f7d41e9f" valueTypeId="3ae9b7f8-d10e-4072-8f20-7024f44407d6"/>
+    </producedTypes>
+    <name>ExtensionAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Extension attributes</value>
+    </synonym>
+    <attributes uuid="cc91d81e-d42c-4e33-b97a-e31dfe9433a4">
+      <name>Attribute</name>
+      <synonym>
+        <key>en</key>
+        <value>Attribute</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>128</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="ec630a45-e714-4875-b9cb-b1d97ee41fd9">
+      <name>InterfaceGroup</name>
+      <synonym>
+        <key>en</key>
+        <value>UI group</value>
+      </synonym>
+      <comment>Name of group for attribute</comment>
+      <type>
+        <types>CatalogRef.InterfaceGroups</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a9b27c61-2808-425a-8afe-15a6dd7caabb">
+      <name>Required</name>
+      <synonym>
+        <key>en</key>
+        <value>Required</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="616a32e8-0418-4f30-91f8-4a55b78bdb6e">
+      <name>ShowInHTML</name>
+      <synonym>
+        <key>en</key>
+        <value>Show in HTML</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f187379b-1551-4e3d-a832-be0d79967ca4">
+      <name>Show</name>
+      <synonym>
+        <key>en</key>
+        <value>Show</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="333dfaea-30f0-4b62-a4f2-ec34b2892f28">
     <name>ItemForm</name>
     <synonym>

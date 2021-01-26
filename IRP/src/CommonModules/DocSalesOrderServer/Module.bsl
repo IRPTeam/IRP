@@ -207,7 +207,7 @@ Function GetLastSalesOrderClosingBySalesOrder(SalesOrder) Export
 	
 	QueryResult = Query.Execute();
 	
-	If QueryResult.IsEmpty() Then
+	If Not QueryResult.IsEmpty() Then
 		SelectionDetailRecords = QueryResult.Select();
 		SelectionDetailRecords.Next();
 		SalesOrderClosing = SelectionDetailRecords.Ref;

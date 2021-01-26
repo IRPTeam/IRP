@@ -287,6 +287,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="09803230-8112-42bf-88f9-49ac4cffdfd1">
+    <name>CloseOrder</name>
+    <synonym>
+      <key>en</key>
+      <value>Close order</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="09731346-be5a-4b53-9afc-332c33471ccc">
     <name>DocumentForm</name>
     <synonym>

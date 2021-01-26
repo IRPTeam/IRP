@@ -128,9 +128,8 @@ Function ItemList()
 		|	SalesOrderItemList.QuantityInBaseUnit AS Quantity,
 		|	SalesOrderItemList.OffersAmount,
 		|	SalesOrderItemList.NetAmount,
-		|	SalesOrderItemList.TotalAmount AS Amount,
-		|	1 AS Type
-		|INTO ItemListTmp
+		|	SalesOrderItemList.TotalAmount AS Amount
+		|	INTO ItemListTmp
 		|FROM
 		|	Document.SalesOrderClosing.ItemList AS SalesOrderItemList
 		|WHERE
@@ -162,12 +161,11 @@ Function ItemList()
 		|	-SalesOrderItemList.QuantityInBaseUnit AS Quantity,
 		|	-SalesOrderItemList.OffersAmount,
 		|	-SalesOrderItemList.NetAmount,
-		|	-SalesOrderItemList.TotalAmount AS Amount,
-		|	0
-		|FROM
+		|	-SalesOrderItemList.TotalAmount AS Amount
+		|	FROM
 		|	Document.SalesOrder.ItemList AS SalesOrderItemList
 		|WHERE
-		|	SalesOrderItemList.Ref = &SalesOrder
+		|	SalesOrderItemList.Ref = &SalesOrder AND SalesOrderItemList.Key IN (Select Key From Document.SalesOrderClosing.ItemList Where Ref = &Ref)
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -196,13 +194,10 @@ Function ItemList()
 		|	SUM(ItemListTmp.OffersAmount) AS OffersAmount,
 		|	SUM(ItemListTmp.NetAmount) AS NetAmount,
 		|	SUM(ItemListTmp.Amount) AS Amount,
-		|	SUM(ItemListTmp.Type) AS Type,
 		|	&Period AS Period
 		|INTO ItemList
 		|FROM
 		|	ItemListTmp AS ItemListTmp
-		|WHERE
-		|	ItemListTmp.Type = 1
 		|GROUP BY
 		|	ItemListTmp.Company,
 		|	ItemListTmp.ShipmentConfirmationsBeforeSalesInvoice,

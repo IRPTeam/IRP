@@ -68,6 +68,7 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create information register TaxSettings (Sales tax)
 		When Create information register Taxes records (Sales tax)
 		When add sales tax settings 
+		When Create document PurchaseInvoice objects (use serial lot number)
 
 Scenario: _092001 checkbox Use serial lot number in the Item type
 	Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
@@ -639,7 +640,6 @@ Scenario: _092004 check serial lot number in the Sales invoice
 			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | ''                  |
 			| ''                                     | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
 			| ''                                     | 'Expense'     | '*'      | '1'         | 'Main Company' | '38/Yellow' | '99098809009910'    |
-			| ''                                     | 'Expense'     | '*'      | '2'         | 'Main Company' | '38/Yellow' | '99098809009911'    |
 		And I close current window
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$SalesInvoice092004$$" window
@@ -826,7 +826,8 @@ Scenario: _092005 check serial lot number in the Sales return
 			| 'Register  "R4014 Serial lot numbers"' | ''            | ''       | ''          | ''             | ''          | ''                  |
 			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | ''                  |
 			| ''                                     | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '*'      | '1'         | 'Main Company' | '38/Yellow' | '99098809009911'    |
+			| ''                                     | 'Receipt'     | '*'      | '1'         | 'Main Company' | '38/Yellow' | '99098809009910'    |
+			| ''                                     | 'Receipt'     | '*'      | '2'         | 'Main Company' | '38/Yellow' | '99098809009911'    |
 		And I close current window
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$SalesReturn092005$$" window
@@ -1603,7 +1604,7 @@ Scenario: _092008 check serial lot number in the Opening entry
 		And I click choice button of "Item serial/lot number" attribute in "Inventory" table
 		And I go to line in "List" table
 			| 'Owner'   | 'Serial number' |
-			| 'Clothes' | '07'            |
+			| '38/Yellow' | '99098809009999'            |
 		And I select current line in "List" table
 		And I finish line editing in "Inventory" table	
 		And in the table "Inventory" I click the button named "InventoryAdd"
@@ -1641,7 +1642,7 @@ Scenario: _092008 check serial lot number in the Opening entry
 			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                           | ''          | ''             | ''          | ''                  |
 			| ''                                     | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''          | ''                  |
 			| ''                                     | ''            | ''                           | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '1'         | 'Main Company' | '38/Yellow' | '07'                |
+			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009999'                |
 		And I close current window
 	* Clear post Opening entry and check movements
 		And I activate "$$OpeningEntry092008$$" window			
@@ -1655,7 +1656,7 @@ Scenario: _092008 check serial lot number in the Opening entry
 		And I activate "$$OpeningEntry092008$$" window
 		And I go to line in "Inventory" table
 			| 'Item'     | 'Item key'  | 'Item serial/lot number' | 'Quantity' |
-			| 'Trousers' | '38/Yellow' | '07'                     | '1,000'    |
+			| 'Trousers' | '38/Yellow' | '99098809009999'                     | '1,000'    |
 		And I select current line in "Inventory" table
 		And I input "5,000" text in "Quantity" field of "Inventory" table
 		And I finish line editing in "Inventory" table
@@ -1669,7 +1670,7 @@ Scenario: _092008 check serial lot number in the Opening entry
 			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                           | ''          | ''             | ''          | ''                  |
 			| ''                                     | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''          | ''                  |
 			| ''                                     | ''            | ''                           | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '5'         | 'Main Company' | '38/Yellow' | '07'                |
+			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '5'         | 'Main Company' | '38/Yellow' | '99098809009999'                |
 		And I close current window
 	* Add one more string with the same item and different Serial lot number
 		And I activate "$$OpeningEntry092008$$" window
@@ -1695,7 +1696,7 @@ Scenario: _092008 check serial lot number in the Opening entry
 		And I click choice button of "Item serial/lot number" attribute in "Inventory" table
 		And I go to line in "List" table
 			| 'Owner'   | 'Serial number' |
-			| 'Clothes' | '11'            |
+			| '38/Yellow' | '99098809009008'            |
 		And I select current line in "List" table
 		And I finish line editing in "Inventory" table	
 		And I click the button named "FormPost"
@@ -1709,8 +1710,8 @@ Scenario: _092008 check serial lot number in the Opening entry
 			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                           | ''          | ''             | ''          | ''                  |
 			| ''                                     | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''          | ''                  |
 			| ''                                     | ''            | ''                           | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '5'         | 'Main Company' | '38/Yellow' | '07'                |
-			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '8'         | 'Main Company' | '38/Yellow' | '11'                |
+			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '5'         | 'Main Company' | '38/Yellow' | '99098809009999'                |
+			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '8'         | 'Main Company' | '38/Yellow' | '99098809009008'                |
 		And I close all client application windows
 
 
@@ -2368,7 +2369,7 @@ Scenario: _092011 check serial lot number in the Item stock adjustment
 		And I click choice button of "Serial lot number (surplus)" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Owner'   | 'Serial number' |
-			| 'Clothes' | '07'            |
+			| '38/Yellow' | '99098809009008'            |
 		And I select current line in "List" table
 		And I click choice button of "Item key (write off)" attribute in "ItemList" table
 		And I go to line in "List" table
@@ -2379,7 +2380,7 @@ Scenario: _092011 check serial lot number in the Item stock adjustment
 		And I click choice button of "Serial lot number (write off)" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Owner'   | 'Serial number' |
-			| 'Clothes' | '11'            |
+			| '38/Yellow' | '99098809009999'            |
 		And I select current line in "List" table
 		And in the table "ItemList" I click the button named "ItemListAdd"	
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -2422,8 +2423,8 @@ Scenario: _092011 check serial lot number in the Item stock adjustment
 			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                                  | ''          | ''             | ''          | ''                  |
 			| ''                                     | 'Record type' | 'Period'                            | 'Resources' | 'Dimensions'   | ''          | ''                  |
 			| ''                                     | ''            | ''                                  | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Expense'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '36/Yellow' | '11'                |
-			| ''                                     | 'Revenue'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '38/Yellow' | '07'                |
+			| ''                                     | 'Expense'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '36/Yellow' | '99098809009999'    |
+			| ''                                     | 'Revenue'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009008'    |
 		And I close all client application windows
 		
 

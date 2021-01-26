@@ -577,13 +577,13 @@
   <documents>Document.RetailSalesReceipt</documents>
   <documents>Document.SalesInvoice</documents>
   <documents>Document.SalesOrder</documents>
+  <documents>Document.SalesOrderClosing</documents>
   <documents>Document.SalesReturn</documents>
   <documents>Document.SalesReturnOrder</documents>
   <documents>Document.ShipmentConfirmation</documents>
   <documents>Document.StockAdjustmentAsSurplus</documents>
   <documents>Document.StockAdjustmentAsWriteOff</documents>
   <documents>Document.Unbundling</documents>
-  <documents>Document.SalesOrderClosing</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForCreditDebitNote</documentJournals>

@@ -6,6 +6,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocSalesOrderServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
+		
+		If Object.Ref.isEmpty() Then
+			Object.SalesOrder = Parameters.SalesOrder;
+		EndIf
 	EndIf;
 	ThisObject.TaxAndOffersCalculated = True;
 	SetConditionalAppearance();
@@ -565,4 +569,30 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
+#EndRegion
+
+#Region SalesOrderClosing
+&AtClient
+Procedure FillByOrder(Command)
+	FillByOrderAtServer();
+	Cancel = False;
+	DocSalesOrderClient.OnOpen(Object, ThisObject, Cancel);
+	UpdateTotalAmounts();
+EndProcedure
+
+&AtServer
+Procedure FillByOrderAtServer()
+	SalesOrderData = DocSalesOrderServer.GetSalesOrderInfo(Object.SalesOrder);
+	
+	FillPropertyValues(Object, SalesOrderData.SalesOrderInfo);
+	
+	For Each Table In SalesOrderData.Tables Do
+		Object[Table.Key].Load(Table.Value);
+	EndDo;
+	
+	Cancel = False;
+	StandardProcessing = True;
+	DocSalesOrderServer.OnReadAtServer(Object, ThisObject, Object);
+	DocSalesOrderServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+EndProcedure
 #EndRegion

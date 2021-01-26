@@ -582,7 +582,11 @@ EndProcedure
 
 &AtServer
 Procedure FillByOrderAtServer()
-	SalesOrderData = DocSalesOrderServer.GetSalesOrderInfo(Object.SalesOrder);
+	If Object.CloseOrder Then
+		SalesOrderData = DocSalesOrderServer.GetSalesOrderForClosing(Object.SalesOrder);
+	Else
+		SalesOrderData = DocSalesOrderServer.GetSalesOrderInfo(Object.SalesOrder);
+	EndIf;
 	
 	FillPropertyValues(Object, SalesOrderData.SalesOrderInfo);
 	

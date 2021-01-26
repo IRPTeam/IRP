@@ -963,7 +963,7 @@
     <name>GenerateSalesOrderClosing</name>
     <synonym>
       <key>en</key>
-      <value>Generate sales order closing</value>
+      <value>Close order</value>
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>

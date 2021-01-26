@@ -217,6 +217,83 @@ Function GetLastSalesOrderClosingBySalesOrder(SalesOrder) Export
 		
 EndFunction
 
+Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
+	
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	SalesOrder.Agreement,
+		|	SalesOrder.Company,
+		|	SalesOrder.Currency,
+		|	SalesOrder.DateOfShipment,
+		|	SalesOrder.LegalName,
+		|	SalesOrder.ManagerSegment,
+		|	SalesOrder.Partner,
+		|	SalesOrder.PriceIncludeTax,
+		|	SalesOrder.ShipmentConfirmationsBeforeSalesInvoice,
+		|	SalesOrder.Status,
+		|	SalesOrder.UseItemsShipmentScheduling,
+		|	SalesOrder.Author,
+		|	SalesOrder.BusinessUnit,
+		|	SalesOrder.Description,
+		|	SalesOrder.DocumentAmount
+		|FROM
+		|	Document.SalesOrder AS SalesOrder
+		|WHERE
+		|	SalesOrder.Ref = &SalesOrder
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT *
+		|INTO ItemList
+		|FROM
+		|	Document.SalesOrder.ItemList
+		|WHERE
+		|	Ref = &SalesOrder
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT *
+		|INTO SpecialOffers
+		|FROM
+		|	Document.SalesOrder.SpecialOffers
+		|WHERE
+		|	Ref = &SalesOrder
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT *
+		|INTO TaxList
+		|FROM
+		|	Document.SalesOrder.TaxList
+		|WHERE
+		|	Ref = &SalesOrder
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT *
+		|INTO Currencies
+		|FROM
+		|	Document.SalesOrder.Currencies
+		|WHERE
+		|	Ref = &SalesOrder";
+	Query.SetParameter("SalesOrder", SalesOrder);
+	Query.TempTablesManager = New TempTablesManager;
+	QueryResult = Query.Execute();
+	SalesOrderInfo = QueryResult.Select();
+	SalesOrderInfo.Next();
+	
+	Str = New Structure;
+	Str.Insert("SalesOrderInfo", SalesOrderInfo);
+	StrTables = New Structure;
+	For Each Table In Query.TempTablesManager.Tables Do
+		StrTables.Insert(Table.FullName, Table.GetData().Unload());
+	EndDo;
+	Str.Insert("Tables", StrTables);
+	Return Str;	
+
+EndFunction
+
 Function GetSalesOrderInfo(SalesOrder, AddInfo = Undefined) Export
 	
 	Query = New Query;

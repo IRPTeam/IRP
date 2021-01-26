@@ -631,6 +631,7 @@
   <enums>Enum.InterfaceGroupChildFormItemsGroups</enums>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
+  <reports>Report.AllRegistersMovement</reports>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
   <dataProcessors>DataProcessor.FirstStartSettings</dataProcessors>
   <dataProcessors>DataProcessor.PointOfSale</dataProcessors>

@@ -441,6 +441,7 @@ EndProcedure
 Procedure NewTransactionAtServer()
 	ObjectValue = Documents.RetailSalesReceipt.CreateDocument();
 	FillingWithDefaultDataEvent.FillingWithDefaultDataFilling(ObjectValue, Undefined, Undefined, True);
+	ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	ValueToFormAttribute(ObjectValue, "Object");
 	Cancel = False;
 	DocRetailSalesReceiptServer.OnCreateAtServer(Object, ThisObject, Cancel, True);

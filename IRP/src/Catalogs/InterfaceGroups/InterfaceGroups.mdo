@@ -141,6 +141,59 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="727b5db2-a516-4e70-8526-04e73e915091">
+    <name>Behavior</name>
+    <synonym>
+      <key>en</key>
+      <value>Behavior</value>
+    </synonym>
+    <type>
+      <types>EnumRef.InterfaceGroupBehaviors</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:ReferenceValue">
+      <value>Enum.InterfaceGroupBehaviors.EnumValue.Usual</value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="64eaa31e-8bbe-4a52-9571-5e813f386d9e">
+    <name>ChildFormItemsGroup</name>
+    <synonym>
+      <key>en</key>
+      <value>Child form items group</value>
+    </synonym>
+    <type>
+      <types>EnumRef.InterfaceGroupChildFormItemsGroups</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:ReferenceValue">
+      <value>Enum.InterfaceGroupChildFormItemsGroups.EnumValue.Vertical</value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="cffb28a4-e499-4c12-9445-27e92653bbf1">
+    <name>Collapsed</name>
+    <synonym>
+      <key>en</key>
+      <value>Collapsed</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="980e9405-07a9-44bb-ab5d-270556d15a31">
     <name>ItemForm</name>
     <synonym>

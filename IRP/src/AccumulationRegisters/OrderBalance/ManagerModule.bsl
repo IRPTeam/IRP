@@ -27,7 +27,7 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	
 	Query = New Query();
 	Query.TempTablesManager = 
-	PostingServer.PrepareRecordsTables(GetLockFieldNames(), ItemList_InDocument, Records_InDocument, Records_Exists, Unposting, AddInfo);
+	PostingServer.PrepareRecordsTables(GetLockFieldNames(), "RowKey", ItemList_InDocument, Records_InDocument, Records_Exists, Unposting, AddInfo);
 	Query.Text =
 	"SELECT
 	|	ItemList.ItemKey.Item AS Item,

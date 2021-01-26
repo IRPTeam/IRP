@@ -150,8 +150,8 @@ Function RegisterRecords(DocObject, PostingDataTables, AllRegisterRecords)
 		// Set write
 		If Row.Value.Property("WriteInTransaction") And Row.Value.WriteInTransaction Then
 			// write when transaction will be commited or rollback
+			RecordSet.LockForUpdate = True;
 			RecordSet.Write();
-			RecordSet.Write = False;
 		Else // write oly when transaction will be commited	
 			RecordSet.Write = True;
 		EndIf;
@@ -1044,11 +1044,21 @@ Function GetExistsRecordsFromAccRegister(Ref, RegisterFullName, RecordType = Und
 	Return QueryResult.Unload();
 EndFunction
 
-Function PrepareRecordsTables(Dimensions, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting, AddInfo = Undefined) Export
+Function PrepareRecordsTables(Dimensions, 
+							  LineNumberJoinConditionField, 
+							  ItemList_InDocument, 
+							  Records_InDocument, 
+							  Records_Exists, 
+							  Unposting, 
+							  AddInfo = Undefined) Export
+
 	ArrayOfDimensions = StrSplit(Dimensions, ",");
 	JoinCondition = "";
 	ArrayOfSelectedFields = New Array();
 	For Each ItemOfDimension In ArrayOfDimensions Do
+		If Upper(TrimAll(ItemOfDimension)) = Upper(TrimAll(LineNumberJoinConditionField)) Then
+			Continue;
+		EndIf;
 		ArrayOfSelectedFields.Add(" " + "Records." + TrimAll(ItemOfDimension));
 		JoinCondition = JoinCondition 
 		+ StrTemplate(" AND Records.%1 =  Records_with_LineNumbers.%1 ", TrimAll(ItemOfDimension));
@@ -1059,7 +1069,7 @@ Function PrepareRecordsTables(Dimensions, ItemList_InDocument, Records_InDocumen
 	Query.TempTablesManager = New TempTablesManager();
 	Query.Text =
 	"SELECT %1,
-	|	Records.RowKey,
+	|	Records.%2,
 	|	Records.Quantity
 	|INTO Records_InDocument
 	|FROM
@@ -1068,8 +1078,8 @@ Function PrepareRecordsTables(Dimensions, ItemList_InDocument, Records_InDocumen
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	ItemList_InDocument.LineNumber,
-	|	ItemList_InDocument.RowKey
+	|	ItemList_InDocument.%2,
+	|	ItemList_InDocument.LineNumber
 	|INTO ItemList_InDocument
 	|FROM
 	|	&ItemList_InDocument AS ItemList_InDocument
@@ -1077,7 +1087,7 @@ Function PrepareRecordsTables(Dimensions, ItemList_InDocument, Records_InDocumen
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT %1, 
-	|	Records.RowKey,
+	|	Records.%2,
 	|	Records.Quantity
 	|INTO Records_Exists
 	|FROM
@@ -1086,22 +1096,22 @@ Function PrepareRecordsTables(Dimensions, ItemList_InDocument, Records_InDocumen
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT %1,
-	|	Records.RowKey,
+	|	Records.%2,
 	|	Records.Quantity,
 	|	ItemList_InDocument.LineNumber
 	|INTO Records_with_LineNumbers
 	|FROM
 	|	Records_InDocument AS Records
 	|		LEFT JOIN ItemList_InDocument AS ItemList_InDocument
-	|		ON Records.RowKey = ItemList_InDocument.RowKey
+	|		ON Records.%2 = ItemList_InDocument.%2
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT %1,
 	|	Records.Quantity,
 	|	Records.LineNumber,
-	|	Records.RowKey
-	|INTO ItemList
+	|	Records.%2
+	|INTO ItemList_All
 	|FROM
 	|	Records_with_LineNumbers AS Records
 	|
@@ -1110,17 +1120,30 @@ Function PrepareRecordsTables(Dimensions, ItemList_InDocument, Records_InDocumen
 	|SELECT %1,
 	|	Records.Quantity,
 	|	UNDEFINED,
-	|	Records.RowKey AS RowKey
+	|	Records.%2
 	|FROM
 	|	Records_Exists AS Records
 	|		LEFT JOIN Records_with_LineNumbers AS Records_with_LineNumbers
-	|		ON  Records.RowKey = Records_with_LineNumbers.RowKey
-	| 		%2
+	|		ON  Records.%2 = Records_with_LineNumbers.%2
+	| 		%3
 	|WHERE
-	|	Records_with_LineNumbers.RowKey IS NULL
+	|	Records_with_LineNumbers.%2 IS NULL
 	|	AND NOT &Unposting
+	|;
+	|
+	|//////////////////////////////////////////////////////////////////////////////
+	|SELECT %1,
+	|	Records.%2,
+	|	MIN(Records.LineNumber) AS LineNumber,
+	|	SUM(Records.Quantity) AS Quantity
+	|INTO ItemList
+	|FROM 
+	|	ItemList_All AS Records
+	|GROUP BY
+	|	%1,
+	|	Records.%2
 	|;";
-	Query.Text = StrTemplate(Query.Text,StrSelectedFields, JoinCondition);
+	Query.Text = StrTemplate(Query.Text, StrSelectedFields, LineNumberJoinConditionField, JoinCondition);
 	
 	Query.SetParameter("Records_InDocument"  , Records_InDocument);
 	Query.SetParameter("ItemList_InDocument" , ItemList_InDocument);
@@ -1415,6 +1438,10 @@ Procedure ExequteQuery(Ref, QueryArray, Parameters) Export
 	Query.Execute();
 EndProcedure
 
+Function QueryTableIsExists(TableName, Parameters) Export
+	Return Parameters.TempTablesManager.Tables.Find(TableName) <> Undefined;
+EndFunction
+
 Function GetQueryTableByName(TableName, Parameters) Export
 	VTSearch = Parameters.TempTablesManager.Tables.Find(TableName);
 	If VTSearch = Undefined Then
@@ -1426,7 +1453,10 @@ EndFunction
 Procedure FillPostingTables(Tables, Ref, QueryArray, Parameters) Export
 	ExequteQuery(Ref, QueryArray, Parameters);
 	For Each VT In Tables Do
-		MergeTables(Tables[VT.Key], GetQueryTableByName(VT.Key, Parameters), "RecordType");
+		QueryTable = GetQueryTableByName(VT.Key, Parameters);
+		If QueryTable.Count() Then
+			MergeTables(Tables[VT.Key], QueryTable, "RecordType");
+		EndIf;
 	EndDo;
 EndProcedure
 
@@ -1463,7 +1493,6 @@ Procedure SetLockDataSource(DataMap, RegisterManager, Table) Export
 EndProcedure	
 
 Procedure SetRegisters(Tables, DocumentRef, UseOldRegisters = False) Export
-
 	For Each Register In DocumentRef.Metadata().RegisterRecords Do
 		If Not UseOldRegisters AND NotUseRegister(Register.Name) Then
 			Continue;

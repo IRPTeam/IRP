@@ -20,7 +20,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		OnlyAffectPricing = Object.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_PriceKeys");
 		FillAttributesTree(GetItemTypesTree(), ThisObject.AttributesTree, OnlyAffectPricing);
 	EndIf;
-	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.Pages);
+	//ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.Pages);
 
 EndProcedure
 
@@ -166,6 +166,11 @@ Procedure DeleteItemType(Command)
 		DeleteItemTypeAtServer(CurrentData.ItemType, CurrentData.Attribute);
 		UpdateAttributesTree();
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure FillExtensionAttributesList(Command)
+	FillExtensionAttributesListAtServer();
 EndProcedure
 
 #EndRegion
@@ -365,6 +370,25 @@ Procedure CopyAttributesPropertiesRowAtServer(AddInfo)
 	EndIf;
 	
 	CopiedAttribute = ChartsOfCharacteristicTypes.AddAttributeAndProperty.EmptyRef();	
+EndProcedure
+
+&AtServer
+Procedure FillExtensionAttributesListAtServer()
+	MetadataName = StrReplace(Object.PredefinedDataName, "_", ".");
+	ObjectMetadata = Metadata.FindByFullName(MetadataName);	
+	For Each Attribute In ObjectMetadata.Attributes Do
+		If Not StrFind(Attribute.Name, "_") Then 
+			Continue;
+		EndIf;
+		AttributeFilter = New Structure;
+		AttributeFilter.Insert("Attribute", Attribute.Name);
+		FoundRows = Object.ExtensionAttributes.FindRows(AttributeFilter);
+		If FoundRows.Count() Then
+			Continue;
+		EndIf;
+		NewRow = Object.ExtensionAttributes.Add();
+		NewRow.Attribute = Attribute.Name;
+	EndDo;
 EndProcedure
 
 #EndRegion

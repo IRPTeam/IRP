@@ -1,37 +1,37 @@
 Function GetLockFields(Data) Export
 	Result = New Structure();
-	Result.Insert("RegisterName", "AccumulationRegister.GoodsInTransitIncoming");
+	Result.Insert("RegisterName", "AccumulationRegister.R4035B_IncomingStocks");
 	Result.Insert("LockInfo", New Structure("Data, Fields", 
 	Data, PostingServer.GetLockFieldsMap(GetLockFieldNames())));
 	Return Result;
 EndFunction
 
 Function GetLockFieldNames() Export
-	Return "Store, ReceiptBasis, ItemKey";
+	Return "Store, ItemKey, Order";
 EndFunction
 
 Function GetExistsRecords(Ref, RecordType = Undefined, AddInfo = Undefined) Export
-	Return PostingServer.GetExistsRecordsFromAccRegister(Ref, "AccumulationRegister.GoodsInTransitIncoming", RecordType, AddInfo);
+	Return PostingServer.GetExistsRecordsFromAccRegister(Ref, "AccumulationRegister.R4035B_IncomingStocks", RecordType, AddInfo);
 EndFunction
 
 Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
-	
+
 // Doc.PurchaseInvoice - receipt
-// Doc.GoodsReceipt - expense
-// Doc.PurchaseInvoice - receipt
+// Doc.InventoryTransferOrder - expense
 	
-	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_GoodsInTransitIncoming") Then
+	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_R4035B_IncomingStocks") Then
 		Return True;
 	EndIf;
 	
 	Query = New Query();
 	Query.TempTablesManager = 
-	PostingServer.PrepareRecordsTables(GetLockFieldNames(), "RowKey", ItemList_InDocument, Records_InDocument, Records_Exists, Unposting, AddInfo);
+	PostingServer.PrepareRecordsTables(GetLockFieldNames(), "ItemKey", ItemList_InDocument, Records_InDocument, Records_Exists, Unposting, AddInfo);
 	Query.Text =
 	"SELECT
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.ItemKey,
-	|	ItemList.ReceiptBasis,
+	|	RegisterBalance.Store,
+	|	RegisterBalance.Order,
 	|	RegisterBalance.QuantityBalance AS QuantityBalance,
 	|	ItemList.Quantity,
 	|	-RegisterBalance.QuantityBalance AS LackOfBalance,
@@ -39,24 +39,18 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	|	&Unposting AS Unposting
 	|FROM
 	|	ItemList AS ItemList
-	|		INNER JOIN AccumulationRegister.GoodsInTransitIncoming.Balance(, (ReceiptBasis, ItemKey, Store, RowKey) IN
+	|		INNER JOIN AccumulationRegister.R4035B_IncomingStocks.Balance(, (Store, ItemKey, Order) IN
 	|			(SELECT
-	|				ItemList.ReceiptBasis,
-	|				ItemList.ItemKey,
 	|				ItemList.Store,
-	|				ItemList.RowKey
+	|				ItemList.ItemKey,
+	|				ItemList.Order
 	|			FROM
 	|				ItemList AS ItemList)) AS RegisterBalance
-	|		ON RegisterBalance.ReceiptBasis = ItemList.ReceiptBasis
+	|		ON  RegisterBalance.Store = ItemList.Store
 	|		AND RegisterBalance.ItemKey = ItemList.ItemKey
-	|		AND RegisterBalance.Store = ItemList.Store
-	|		AND RegisterBalance.RowKey = ItemList.RowKey
+	|		AND RegisterBalance.Order = ItemList.Order
 	|WHERE
-	|	CASE
-	|		WHEN VALUETYPE(ItemList.ReceiptBasis) = TYPE(Document.GoodsReceipt)
-	|			THEN RegisterBalance.QuantityBalance > 0
-	|		ELSE RegisterBalance.QuantityBalance < 0
-	|	END
+	|	RegisterBalance.QuantityBalance < 0
 	|ORDER BY
 	|	LineNumber";
 	Query.SetParameter("Unposting" , Unposting);
@@ -67,12 +61,12 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	If QueryTable.Count() Then
 		Error = True;
 		ErrorParameters = New Structure();
-		ErrorParameters.Insert("GroupColumns"  , "ReceiptBasis, ItemKey, Item, LackOfBalance");
+		ErrorParameters.Insert("GroupColumns"  , "Order, Store, ItemKey, Item, LackOfBalance");
 		ErrorParameters.Insert("SumColumns"    , "Quantity");
-		ErrorParameters.Insert("FilterColumns" , "ReceiptBasis, ItemKey, Item, LackOfBalance");
-		ErrorParameters.Insert("Operation"     , "Receipt");
+		ErrorParameters.Insert("FilterColumns" , "Order, Store, ItemKey, Item, LackOfBalance");
+		ErrorParameters.Insert("Operation"     , "Incoming reservation");
 		ErrorParameters.Insert("RecordType"    , RecordType);
 		PostingServer.ShowPostingErrorMessage(QueryTable, ErrorParameters, AddInfo);
 	EndIf;
 	Return Not Error;
-EndFunction
+EndFunction	

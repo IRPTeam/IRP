@@ -31,6 +31,7 @@
     <types>DocumentRef.PurchaseReturn</types>
     <types>DocumentRef.ChequeBondTransaction</types>
     <types>CatalogRef.PartnerSegments</types>
+    <types>DocumentRef.ManualRegisterEntry</types>
     <types>CatalogRef.ItemSegments</types>
     <types>DocumentRef.PurchaseReturnOrder</types>
     <types>CatalogRef.PriceTypes</types>
@@ -64,11 +65,13 @@
     <types>CatalogRef.SerialLotNumbers</types>
     <types>CatalogRef.Agreements</types>
     <types>CatalogRef.Taxes</types>
+    <types>DocumentRef.ItemStockAdjustment</types>
     <types>CatalogRef.RetailCustomers</types>
     <types>CatalogRef.Countries</types>
     <types>CatalogRef.SpecialOfferTypes</types>
     <types>DocumentRef.InventoryTransferOrder</types>
     <types>CatalogRef.CashStatementStatuses</types>
+    <types>DocumentRef.SalesOrderClosing</types>
     <types>CatalogRef.PriceKeys</types>
     <types>CatalogRef.Specifications</types>
     <types>CatalogRef.Stores</types>
@@ -83,8 +86,5 @@
     <types>CatalogRef.ChequeBonds</types>
     <types>CatalogRef.BusinessUnits</types>
     <types>DocumentRef.CashExpense</types>
-    <types>DocumentRef.ItemStockAdjustment</types>
-    <types>DocumentRef.ManualRegisterEntry</types>
-    <types>DocumentRef.SalesOrderClosing</types>
   </type>
 </mdclass:DefinedType>

@@ -46,6 +46,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ManualRegisterEntry</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.ShipmentConfirmation.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -588,6 +599,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ItemStockAdjustment</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.BankPayment.Attribute.Currency</name>
 		<right>
 			<name>View</name>
@@ -671,6 +693,17 @@
 	</object>
 	<object>
 		<name>Document.OutgoingPaymentOrder</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.SalesOrderClosing</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -1083,39 +1116,6 @@
 	</object>
 	<object>
 		<name>Document.IncomingPaymentOrder.Attribute.Account</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ItemStockAdjustment</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ManualRegisterEntry</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesOrderClosing</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>

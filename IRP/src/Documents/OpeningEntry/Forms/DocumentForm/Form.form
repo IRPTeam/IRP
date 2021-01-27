@@ -816,8 +816,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Inventory.SerialLotNumber</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.Inventory.SerialLotNumber</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>InventorySerialLotNumberExtendedTooltip</name>

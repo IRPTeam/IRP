@@ -551,12 +551,12 @@
         <name>ItemListBeforeAddRow</name>
       </handlers>
       <handlers>
-        <event>BeforeRowChange</event>
-        <name>ItemListBeforeRowChange</name>
-      </handlers>
-      <handlers>
         <event>BeforeDeleteRow</event>
         <name>ItemListBeforeDeleteRow</name>
+      </handlers>
+      <handlers>
+        <event>BeforeRowChange</event>
+        <name>ItemListBeforeRowChange</name>
       </handlers>
       <searchStringAddition>
         <visible>true</visible>

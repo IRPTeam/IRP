@@ -90,7 +90,7 @@
 			</dcscor:item>
 		</appearance>
 	</item>
-		<item>
+	<item>
 		<selection>
 			<item>
 				<field>SerialLotNumbersTreeSerialLotNumber</field>
@@ -242,5 +242,4 @@
 			</dcscor:item>
 		</appearance>
 	</item>
-
 </ConditionalAppearance>

@@ -97,11 +97,11 @@
       <types>DocumentRef.Bundling</types>
       <types>DocumentRef.RetailSalesReceipt</types>
       <types>DocumentRef.InventoryTransferOrder</types>
+      <types>DocumentRef.SalesOrderClosing</types>
       <types>DocumentRef.InventoryTransfer</types>
       <types>DocumentRef.GoodsReceipt</types>
       <types>DocumentRef.PhysicalInventory</types>
       <types>DocumentRef.SalesInvoice</types>
-      <types>DocumentRef.SalesOrderClosing</types>
     </commandParameterType>
     <representation>Auto</representation>
     <shortcut></shortcut>

@@ -1381,8 +1381,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.PurchaseOrder</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.PurchaseOrder</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListPurchaseOrderExtendedTooltip</name>

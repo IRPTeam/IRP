@@ -67,7 +67,6 @@
 					<v8:content>Register name</v8:content>
 				</v8:item>
 			</title>
-			<valueType/>
 			<availableValue>
 				<value xsi:type="xs:string">R1001T_Purchases</value>
 				<presentation xsi:type="v8:LocalStringType">
@@ -1097,7 +1096,6 @@
 			<field xsi:type="DataSetFieldField">
 				<dataPath>NetAmount</dataPath>
 				<field>NetAmount</field>
-				<valueType/>
 			</field>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>RegisterName</dataPath>
@@ -4114,7 +4112,6 @@
 					<dcsset:item xsi:type="dcsset:FilterItemComparison">
 						<dcsset:left xsi:type="dcscor:Field">CurrencyMovementType</dcsset:left>
 						<dcsset:comparisonType>NotFilled</dcsset:comparisonType>
-						<dcsset:right xsi:nil="true"/>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:FilterItemComparison">
 						<dcsset:left xsi:type="dcscor:Field">CurrencyMovementType.Type</dcsset:left>
@@ -4135,6 +4132,8 @@
 						<dcsset:field>RegisterName</dcsset:field>
 						<dcsset:groupType>Items</dcsset:groupType>
 						<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+						<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+						<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
 					</dcsset:item>
 				</dcsset:groupItems>
 				<dcsset:order>

@@ -46,6 +46,7 @@
       <types>DocumentRef.BankReceipt</types>
       <types>DocumentRef.PurchaseReturn</types>
       <types>DocumentRef.ChequeBondTransaction</types>
+      <types>DocumentRef.ManualRegisterEntry</types>
       <types>DocumentRef.PurchaseReturnOrder</types>
       <types>DocumentRef.BankPayment</types>
       <types>DocumentRef.ShipmentConfirmation</types>
@@ -61,21 +62,20 @@
       <types>DocumentRef.SalesReturn</types>
       <types>DocumentRef.CashRevenue</types>
       <types>DocumentRef.CashStatement</types>
+      <types>DocumentRef.PhysicalCountByLocation</types>
       <types>DocumentRef.StockAdjustmentAsSurplus</types>
       <types>DocumentRef.StockAdjustmentAsWriteOff</types>
       <types>DocumentRef.Bundling</types>
       <types>DocumentRef.RetailSalesReceipt</types>
+      <types>DocumentRef.ItemStockAdjustment</types>
       <types>DocumentRef.InventoryTransferOrder</types>
+      <types>DocumentRef.SalesOrderClosing</types>
       <types>DocumentRef.InventoryTransfer</types>
+      <types>DocumentRef.ReconciliationStatement</types>
       <types>DocumentRef.GoodsReceipt</types>
       <types>DocumentRef.PhysicalInventory</types>
       <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.CashExpense</types>
-      <types>DocumentRef.ReconciliationStatement</types>
-      <types>DocumentRef.PhysicalCountByLocation</types>
-      <types>DocumentRef.ItemStockAdjustment</types>
-      <types>DocumentRef.ManualRegisterEntry</types>
-      <types>DocumentRef.SalesOrderClosing</types>
     </commandParameterType>
     <representation>Auto</representation>
     <shortcut></shortcut>

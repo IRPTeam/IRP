@@ -2465,8 +2465,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>ResultsTableOfBalance.PurchaseOrder</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>ResultsTableOfBalance.PurchaseOrder</segments>
+              </paths>
             </dataPath>
             <extendedTooltip>
               <name>ResultsTableOfBalancePurchaseOrderExtendedTooltip</name>
@@ -2572,8 +2574,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>ResultsTableOfBalance.QuantityIncoming</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>ResultsTableOfBalance.QuantityIncoming</segments>
+              </paths>
             </dataPath>
             <extendedTooltip>
               <name>ResultsTableOfBalanceQuantityIncomingExtendedTooltip</name>
@@ -3129,8 +3133,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>ResultsTableOfPurchase.Store</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>ResultsTableOfPurchase.Store</segments>
+              </paths>
             </dataPath>
             <extendedTooltip>
               <name>ResultsTableOfPurchaseStoreExtendedTooltip</name>
@@ -3184,8 +3190,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>ResultsTableOfPurchase.Unit</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>ResultsTableOfPurchase.Unit</segments>
+              </paths>
             </dataPath>
             <extendedTooltip>
               <name>ResultsTableOfPurchaseUnitExtendedTooltip</name>

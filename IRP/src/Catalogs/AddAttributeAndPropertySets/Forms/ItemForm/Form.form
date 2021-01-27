@@ -1732,9 +1732,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.ExtensionAttributes.LineNumber</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ExtensionAttributes.НомерСтроки</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ExtensionAttributesLineNumberExtendedTooltip</name>
@@ -1787,9 +1784,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.ExtensionAttributes.Attribute</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ExtensionAttributes.Attribute</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ExtensionAttributesAttributeExtendedTooltip</name>
@@ -1838,8 +1832,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ExtensionAttributes.Show</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ExtensionAttributes.Show</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ExtensionAttributesShowExtendedTooltip</name>
@@ -1882,9 +1878,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ExtensionAttributes.InterfaceGroup</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>Object.ExtensionAttributes.InterfaceGroup</segments>
             </paths>
@@ -1940,9 +1933,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.ExtensionAttributes.Required</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ExtensionAttributes.Required</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ExtensionAttributesRequiredExtendedTooltip</name>
@@ -1985,9 +1975,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ExtensionAttributes.ShowInHTML</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>Object.ExtensionAttributes.ShowInHTML</segments>
             </paths>

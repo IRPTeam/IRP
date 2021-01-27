@@ -105,8 +105,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Behavior</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Behavior</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>BehaviourExtendedTooltip</name>
@@ -155,8 +157,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.ChildFormItemsGroup</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.ChildFormItemsGroup</segments>
+      </paths>
     </dataPath>
     <handlers>
       <event>OnChange</event>
@@ -209,8 +213,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Collapsed</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Collapsed</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>CollapsedExtendedTooltip</name>

@@ -674,8 +674,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>TableOfBalance.BalanceIncoming</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>TableOfBalance.BalanceIncoming</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>TableOfBalanceBalanceIncomingExtendedTooltip</name>
@@ -725,8 +727,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>TableOfBalance.PurchaseOrder</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>TableOfBalance.PurchaseOrder</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>TableOfBalancePurchaseOrderExtendedTooltip</name>
@@ -837,8 +841,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>TableOfBalance.QuantityIncoming</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>TableOfBalance.QuantityIncoming</segments>
+            </paths>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -1410,8 +1416,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>TableOfPurchase.Store</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>TableOfPurchase.Store</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>TableOfPurchaseStoreExtendedTooltip</name>
@@ -1465,8 +1473,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>TableOfPurchase.Unit</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>TableOfPurchase.Unit</segments>
+            </paths>
           </dataPath>
           <handlers>
             <event>OnChange</event>

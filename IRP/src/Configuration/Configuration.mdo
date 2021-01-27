@@ -13,17 +13,22 @@
   <containedObjects classId="51f2d5d8-ea4d-4064-8892-82951750031e" objectId="a6cea7c6-a6a3-47f6-9424-59d2f6347dae"/>
   <containedObjects classId="e68182ea-4237-4383-967f-90c1e3370bc7" objectId="9b7d6465-4ba2-48d9-be1b-7d5bffceab4a"/>
   <containedObjects classId="fb282519-d103-4dd3-bc12-cb271d631dfc" objectId="087e34df-3957-4ed1-a442-5f02f2e51da0"/>
-  <configurationExtensionCompatibilityMode>8.3.17</configurationExtensionCompatibilityMode>
+  <configurationExtensionCompatibilityMode>8.3.18</configurationExtensionCompatibilityMode>
   <defaultRunMode>ManagedApplication</defaultRunMode>
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2021.02.#BuildNumber#</version>
+  <version>2021.04.#BuildNumber#</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
   <reportsVariantsStorage>SettingsStorage.ReportOptions</reportsVariantsStorage>
   <defaultReportForm>CommonForm.ReportForm</defaultReportForm>
+  <usedMobileApplicationFunctionalities>
+    <functionality>
+      <use>true</use>
+    </functionality>
+  </usedMobileApplicationFunctionalities>
   <mainSectionPicture/>
   <defaultLanguage>Language.English</defaultLanguage>
   <copyright>
@@ -41,7 +46,7 @@
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectAutonumerationMode>NotAutoFree</objectAutonumerationMode>
   <modalityUseMode>DontUse</modalityUseMode>
-  <compatibilityMode>8.3.17</compatibilityMode>
+  <compatibilityMode>8.3.18</compatibilityMode>
   <languages uuid="f1c59d1c-aafe-420b-96cd-c5f1608cf9c1">
     <name>English</name>
     <synonym>

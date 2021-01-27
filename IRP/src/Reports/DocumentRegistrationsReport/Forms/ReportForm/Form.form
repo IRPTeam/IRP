@@ -203,8 +203,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>ShowItemInItemKey</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>ShowItemInItemKey</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>ShowItemInItemKeyExtendedTooltip</name>

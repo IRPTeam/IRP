@@ -41,6 +41,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.SalesOrderClosing</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.RetailSalesReceipt</metadata>
     <use>Use</use>
   </content>
@@ -74,10 +78,6 @@
   </content>
   <content>
     <metadata>Document.BankReceipt</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.SalesOrderClosing</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

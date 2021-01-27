@@ -3,7 +3,6 @@
 	<name>IRP</name>
 	<comment></comment>
 	<projects>
-		<project>IRP Proj</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

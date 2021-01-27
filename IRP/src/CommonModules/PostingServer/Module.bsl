@@ -1434,6 +1434,13 @@ Procedure ExequteQuery(Ref, QueryArray, Parameters) Export
 	Query = New Query;
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.SetParameter("Ref", Ref);
+	
+	If Parameters.Property("QueryParameters") Then
+		For Each Param In Parameters.QueryParameters Do
+			Query.SetParameter(Param.Key, Param.Value);
+		EndDo;
+	EndIf;
+	
 	Query.Text = StrConcat(QueryArray, Chars.LF + ";" + Chars.LF);
 	Query.Execute();
 EndProcedure

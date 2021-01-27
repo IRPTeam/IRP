@@ -43,3 +43,9 @@ Procedure Filling_BasedOn(FillingData)
 		EndIf;
 	EndDo;
 EndProcedure
+
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
+		Cancel = True;
+	EndIf;	
+EndProcedure

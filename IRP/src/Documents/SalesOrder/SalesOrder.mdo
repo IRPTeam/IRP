@@ -309,15 +309,6 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="f71fba22-5753-43d4-9e09-52b3ed061064">
-    <name>ReadForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Read form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <tabularSections uuid="0e15a78f-7f06-4645-94b0-f87294cd6fea">
     <producedTypes>
       <objectType typeId="32f9a8d5-bc00-4370-9c05-2229eeeae8b9" valueTypeId="1a9129b0-97b0-42f1-85d1-0de73f76dc0d"/>
@@ -935,12 +926,4 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
-  <templates uuid="49bcfb75-edcc-4bcc-aa5b-3e8fd79d8def">
-    <name>ReadDCS</name>
-    <synonym>
-      <key>en</key>
-      <value>Read DCS</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
 </mdclass:Document>

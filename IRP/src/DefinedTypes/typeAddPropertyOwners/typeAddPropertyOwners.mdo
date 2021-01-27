@@ -84,5 +84,7 @@
     <types>CatalogRef.BusinessUnits</types>
     <types>DocumentRef.CashExpense</types>
     <types>DocumentRef.ItemStockAdjustment</types>
+    <types>DocumentRef.ManualRegisterEntry</types>
+    <types>DocumentRef.SalesOrderClosing</types>
   </type>
 </mdclass:DefinedType>

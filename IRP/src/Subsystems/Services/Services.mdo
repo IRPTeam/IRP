@@ -6,4 +6,5 @@
     <value>Services</value>
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
+  <content>Report.AllRegistersMovement</content>
 </mdclass:Subsystem>

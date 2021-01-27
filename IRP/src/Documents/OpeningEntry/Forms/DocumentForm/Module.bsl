@@ -937,4 +937,3 @@ Procedure SetVisible(Object, Form, CurrentData = Undefined)
 		EndIf;
 	EndDo;
 EndProcedure
-	

@@ -1283,4 +1283,18 @@
 			<value>false</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.ManualRegisterEntry</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.SalesOrderClosing</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
 </Rights>

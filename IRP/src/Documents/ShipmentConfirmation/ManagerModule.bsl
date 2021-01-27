@@ -814,6 +814,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4012B_StockReservation());
 	QueryArray.Add(R4022B_StockTransferOrdersShipment());
+	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
 	Return QueryArray;	
 EndFunction	
@@ -980,6 +981,19 @@ Function R4022B_StockTransferOrdersShipment()
 		|FROM
 		|	ItemList AS QueryTable
 		|WHERE QueryTable.InventoryTransferOrderExists";
+
+EndFunction
+
+Function R4032B_GoodsInTransitOutgoing()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	QueryTable.InventoryTransfer AS Basis,
+		|	*
+		|INTO R4032B_GoodsInTransitOutgoing
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE QueryTable.InventoryTransferExists";
 
 EndFunction
 

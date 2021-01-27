@@ -362,6 +362,8 @@
   <commonModules>CommonModule.OffsetOfPartnersServer</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentClient</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentServer</commonModules>
+  <commonModules>CommonModule.DocManualRegisterEntryClient</commonModules>
+  <commonModules>CommonModule.DocManualRegisterEntryServer</commonModules>
   <commonModules>CommonModule.IncomingStocksServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.BusinessUnit</commonAttributes>
@@ -575,6 +577,7 @@
   <documents>Document.RetailSalesReceipt</documents>
   <documents>Document.SalesInvoice</documents>
   <documents>Document.SalesOrder</documents>
+  <documents>Document.SalesOrderClosing</documents>
   <documents>Document.SalesReturn</documents>
   <documents>Document.SalesReturnOrder</documents>
   <documents>Document.ShipmentConfirmation</documents>
@@ -628,6 +631,7 @@
   <enums>Enum.InterfaceGroupChildFormItemsGroups</enums>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
+  <reports>Report.AllRegistersMovement</reports>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
   <dataProcessors>DataProcessor.FirstStartSettings</dataProcessors>
   <dataProcessors>DataProcessor.PointOfSale</dataProcessors>

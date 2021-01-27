@@ -421,10 +421,10 @@ Scenario: _029902 create SI for SO without reserve and check its movements (SO-S
 		| ''                                           | 'Expense'     | '$$DateSalesInvoice029901$$' | '31'        | 'Main Company' | '$$SalesOrder029901$$' | '38/Yellow' |
 		| ''                                           | 'Expense'     | '$$DateSalesInvoice029901$$' | '40'        | 'Main Company' | '$$SalesOrder029901$$' | '38/Black'  |
 	* Check SI movements (Register  "R4011B Free stocks")
-		And I select "R4011B Free stocks" exact value from "Register" drop-down list
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register "R4011B Free stocks"' | '' | '' | '' | '' | '' |
+			| 'Register  "R4011 Free stocks"' | '' | '' | '' | '' | '' |
 	* Check that there is no movements in the Register  "R2013 Procurement of sales orders"
 		And I select "R2013 Procurement of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button

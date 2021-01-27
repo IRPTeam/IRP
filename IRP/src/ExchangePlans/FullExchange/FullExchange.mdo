@@ -721,6 +721,14 @@
   <content>
     <mdObject>AccumulationRegister.R5041B_TaxesPayable</mdObject>
   </content>
+  <content>
+    <mdObject>Document.SalesOrderClosing</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R4014B_SerialLotNumber</mdObject>
+    <autoRecord>Allow</autoRecord>
+  </content>
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

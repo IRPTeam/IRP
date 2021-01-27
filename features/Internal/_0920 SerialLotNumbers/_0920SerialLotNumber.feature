@@ -1568,7 +1568,7 @@ Scenario: _0920072 check filling in serial lot number in the PurchaseReturn	from
 			| 'Dress' | 'XS/Blue'  | '05'                 | '200,000' | 'pcs'  | 'No'                 | '18 720,00'  | '520,00' | '18%' | ''              | '104 000,00' | 'Purchase invoice 25 dated 01.12.2020 12:00:00' | ''                      | '122 720,00'   | 'Store 05' |
 		And I close all client application windows
 		
-					
+
 
 
 Scenario: _092008 check serial lot number in the Opening entry

@@ -1249,20 +1249,7 @@ Procedure GetTables_NotUseShipmentBeforeInvoice_IsProcMethNoReserve_NotUseShipme
 		|	tmp AS tmp
 		|;
 		|
-		|//[1] OrderReservation
-		|SELECT
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Period
-		|;	
-		|//[2] ShipmentConfirmationSchedule_Receipt
+		|//[1] ShipmentConfirmationSchedule_Receipt
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.Order AS Order,
@@ -1283,8 +1270,7 @@ Procedure GetTables_NotUseShipmentBeforeInvoice_IsProcMethNoReserve_NotUseShipme
 	QueryResults = Query.ExecuteBatch();
 	
 	PostingServer.MergeTables(Tables.OrderBalance                         , QueryResults[0].Unload());
-	PostingServer.MergeTables(Tables.OrderReservation                     , QueryResults[1].Unload());
-	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Receipt , QueryResults[2].Unload());
+	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Receipt , QueryResults[1].Unload());
 EndProcedure
 
 Procedure GetTables_NotUseShipmentBeforeInvoice_IsProcMethNoReserve_UseUseShipmentConfirmation_IsProduct(Tables, TempManager, TableName)
@@ -1305,20 +1291,7 @@ Procedure GetTables_NotUseShipmentBeforeInvoice_IsProcMethNoReserve_UseUseShipme
 		|	tmp AS tmp
 		|;
 		|
-		|//[1] OrderReservation
-		|SELECT
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Period
-		|;	
-		|//[2] ShipmentConfirmationSchedule_Receipt
+		|//[1] ShipmentConfirmationSchedule_Receipt
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.Order AS Order,
@@ -1339,8 +1312,7 @@ Procedure GetTables_NotUseShipmentBeforeInvoice_IsProcMethNoReserve_UseUseShipme
 	QueryResults = Query.ExecuteBatch();
 	
 	PostingServer.MergeTables(Tables.OrderBalance                         , QueryResults[0].Unload());
-	PostingServer.MergeTables(Tables.OrderReservation                     , QueryResults[1].Unload());
-	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Receipt , QueryResults[2].Unload());
+	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Receipt , QueryResults[1].Unload());
 EndProcedure
 
 #EndRegion
@@ -1395,49 +1367,7 @@ Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethNoReserve_NotUseShipmentC
 		|	tmp AS tmp
 		|;
 		|
-		|//[1] OrderReservation
-		|SELECT
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Period
-		|;
-		|
-		|//[2] InventoryBalance
-		|SELECT
-		|	tmp.Company,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.ItemKey,
-		|	tmp.Period
-		|;
-		|
-		|//[3] StockBalance
-		|SELECT
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Period
-		|;
-		|
-		|//[4] ShipmentOrders
+		|//[1] ShipmentOrders
 		|SELECT
 		|	tmp.ItemKey,
 		|	tmp.Order AS Order,
@@ -1449,7 +1379,7 @@ Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethNoReserve_NotUseShipmentC
 		|	tmp AS tmp
 		|;
 		|
-		|//[5] ShipmentConfirmationSchedule_Receipt
+		|//[2] ShipmentConfirmationSchedule_Receipt
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.Order AS Order,
@@ -1465,7 +1395,7 @@ Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethNoReserve_NotUseShipmentC
 		|	tmp.DeliveryDate <> DATETIME(1, 1, 1)
 		|;
 		|
-		|//[6] ShipmentConfirmationSchedule_Expense
+		|//[3] ShipmentConfirmationSchedule_Expense
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.Order AS Order,
@@ -1486,12 +1416,9 @@ Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethNoReserve_NotUseShipmentC
 	QueryResults = Query.ExecuteBatch();
 	
 	PostingServer.MergeTables(Tables.OrderBalance                         , QueryResults[0].Unload());
-	PostingServer.MergeTables(Tables.OrderReservation                     , QueryResults[1].Unload());
-	PostingServer.MergeTables(Tables.InventoryBalance                     , QueryResults[2].Unload());
-	PostingServer.MergeTables(Tables.StockBalance                         , QueryResults[3].Unload());
-	PostingServer.MergeTables(Tables.ShipmentOrders                       , QueryResults[4].Unload());
-	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Receipt , QueryResults[5].Unload());
-	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Expense , QueryResults[6].Unload());
+	PostingServer.MergeTables(Tables.ShipmentOrders                       , QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Receipt , QueryResults[2].Unload());
+	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Expense , QueryResults[3].Unload());
 EndProcedure
 
 Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethNoReserve_UseUseShipmentConfirmation_IsProduct(Tables, TempManager, TableName)
@@ -1512,22 +1439,7 @@ Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethNoReserve_UseUseShipmentC
 		|	tmp AS tmp
 		|;
 		|
-		|//[1] OrderReservation
-		|SELECT
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Period
-		|;
-		|
-		|
-		|//[2] GoodsInTransitOutgoing
+		|//[1] GoodsInTransitOutgoing
 		|SELECT
 		|	tmp.Store,
 		|	tmp.ItemKey,
@@ -1539,7 +1451,7 @@ Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethNoReserve_UseUseShipmentC
 		|	tmp AS tmp
 		|;
 		|
-		|//[3] ShipmentConfirmationSchedule_Receipt
+		|//[2] ShipmentConfirmationSchedule_Receipt
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.Order AS Order,
@@ -1560,54 +1472,14 @@ Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethNoReserve_UseUseShipmentC
 	QueryResults = Query.ExecuteBatch();
 	
 	PostingServer.MergeTables(Tables.OrderBalance                         , QueryResults[0].Unload());
-	PostingServer.MergeTables(Tables.OrderReservation                     , QueryResults[1].Unload());
-	PostingServer.MergeTables(Tables.GoodsInTransitOutgoing               , QueryResults[2].Unload());
-	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Receipt , QueryResults[3].Unload());
+	PostingServer.MergeTables(Tables.GoodsInTransitOutgoing               , QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Receipt , QueryResults[2].Unload());
 EndProcedure
 
 #EndRegion
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// StockReservation
-	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
-	// OrderBalance
-	OrderBalance = AccumulationRegisters.OrderBalance.GetLockFields(DocumentDataTables.OrderBalance);
-	DataMapWithLockFields.Insert(OrderBalance.RegisterName, OrderBalance.LockInfo);
-	
-	// OrderReservation
-	OrderReservation = AccumulationRegisters.OrderReservation.GetLockFields(DocumentDataTables.OrderReservation);
-	DataMapWithLockFields.Insert(OrderReservation.RegisterName, OrderReservation.LockInfo);
-	
-	// InventoryBalance
-	InventoryBalance = AccumulationRegisters.InventoryBalance.GetLockFields(DocumentDataTables.InventoryBalance);
-	DataMapWithLockFields.Insert(InventoryBalance.RegisterName, InventoryBalance.LockInfo);
-	
-	// GoodsInTransitOutgoing
-	GoodsInTransitOutgoing = AccumulationRegisters.GoodsInTransitOutgoing.GetLockFields(DocumentDataTables.GoodsInTransitOutgoing);
-	DataMapWithLockFields.Insert(GoodsInTransitOutgoing.RegisterName, GoodsInTransitOutgoing.LockInfo);
-	
-	// StockBalance
-	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance);
-	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
-	// ShipmentOrders
-	ShipmentOrders = AccumulationRegisters.ShipmentOrders.GetLockFields(DocumentDataTables.ShipmentOrders);
-	DataMapWithLockFields.Insert(ShipmentOrders.RegisterName, ShipmentOrders.LockInfo);
-	
-	// ShipmentConfirmationSchedule
-	ShipmentConfirmationSchedule 
-	= AccumulationRegisters.ShipmentConfirmationSchedule.GetLockFields(DocumentDataTables.ShipmentConfirmationSchedule_Expense);
-	DataMapWithLockFields.Insert(ShipmentConfirmationSchedule.RegisterName, ShipmentConfirmationSchedule.LockInfo);
-	
-	// OrderProcurement
-	OrderProcurement = AccumulationRegisters.OrderProcurement.GetLockFields(DocumentDataTables.OrderProcurement);
-	DataMapWithLockFields.Insert(OrderProcurement.RegisterName, OrderProcurement.LockInfo);
-	
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -1728,36 +1600,7 @@ Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Und
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// OrderBalance
-	OrderBalance = AccumulationRegisters.OrderBalance.GetLockFields(DocumentDataTables.OrderBalance_Exists);
-	DataMapWithLockFields.Insert(OrderBalance.RegisterName, OrderBalance.LockInfo);
-	
-	// GoodsInTransitOutgoing
-	GoodsInTransitOutgoing = AccumulationRegisters.GoodsInTransitOutgoing.GetLockFields(DocumentDataTables.GoodsInTransitOutgoing_Exists);
-	DataMapWithLockFields.Insert(GoodsInTransitOutgoing.RegisterName, GoodsInTransitOutgoing.LockInfo);
-	
-	// OrderProcurement
-	OrderProcurement = AccumulationRegisters.OrderProcurement.GetLockFields(DocumentDataTables.OrderProcurement_Exists);
-	DataMapWithLockFields.Insert(OrderProcurement.RegisterName, OrderProcurement.LockInfo);
-	
-	// ShipmentOrders
-	ShipmentOrders = AccumulationRegisters.ShipmentOrders.GetLockFields(DocumentDataTables.ShipmentOrders_Exists);
-	DataMapWithLockFields.Insert(ShipmentOrders.RegisterName, ShipmentOrders.LockInfo);
-	
-	// StockReservation
-	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation_Exists);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
-	// StockBalance
-	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Exists);
-	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-
-#Region NewRegistersPosting	
-	PostingServer.GetLockDataSource(DataMapWithLockFields, DocumentDataTables);
-#EndRegion	
 	Return DataMapWithLockFields;
 EndFunction
 

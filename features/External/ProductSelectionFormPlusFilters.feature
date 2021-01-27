@@ -1101,7 +1101,7 @@ Scenario: check the filter by customers in the sales documents
 	And Delay 2
 	And I input "Alexander Orlov" text in "Partner" field
 	And Delay 2
-	And I click Select button of "Partner term" field
+	And I click Select button of "Company" field
 	And "List" table does not contain lines
 			| Description  |
 			| Alexander Orlov |
@@ -1129,7 +1129,7 @@ Scenario: check the filter by vendors in the purchase documents
 	And Delay 2
 	And I input "Kalipso" text in "Partner" field
 	And Delay 2
-	And I click Select button of "Partner term" field
+	And I click Select button of "Company" field
 	And "List" table does not contain lines
 			| Description  |
 			| Kalipso |

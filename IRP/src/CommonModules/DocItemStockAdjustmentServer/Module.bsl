@@ -1,7 +1,9 @@
 #Region FormEvents
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
-	SetGroupItemsList(Object, Form);
+	If Not Form.GroupItems.Count() Then
+		SetGroupItemsList(Object, Form);
+	EndIf;
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 EndProcedure
 

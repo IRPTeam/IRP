@@ -77,6 +77,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
 	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());
@@ -97,7 +98,9 @@ Function ItemList()
 		|	ItemStockAdjustmentItemList.ItemKeyWriteOff,
 		|	ItemStockAdjustmentItemList.Ref.Date AS Period,
 		|	ItemStockAdjustmentItemList.Ref.Company AS Company,
-		|	ItemStockAdjustmentItemList.Ref.Store AS Store
+		|	ItemStockAdjustmentItemList.Ref.Store AS Store,
+		|	ItemStockAdjustmentItemList.SerialLotNumber,
+		|	ItemStockAdjustmentItemList.SerialLotNumberWriteOff
 		|INTO ItemList
 		|FROM
 		|	Document.ItemStockAdjustment.ItemList AS ItemStockAdjustmentItemList
@@ -144,6 +147,33 @@ Function R4011B_FreeStocks()
 		|	*
 		|FROM
 		|	ItemList AS QueryTable";
+
+EndFunction
+
+Function R4014B_SerialLotNumber()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	QueryTable.ItemKey AS ItemKey,
+		|	QueryTable.SerialLotNumber AS SerialLotNumber,
+		|	*
+		|INTO R4014B_SerialLotNumber
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE
+		|	Not QueryTable.SerialLotNumber = Value(Catalog.SerialLotNumbers.EmptyRef)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	QueryTable.ItemKeyWriteOff,
+		|	QueryTable.SerialLotNumberWriteOff,
+		|	*
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE
+		|	Not QueryTable.SerialLotNumberWriteOff = Value(Catalog.SerialLotNumbers.EmptyRef)";
 
 EndFunction
 

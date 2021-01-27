@@ -1461,6 +1461,7 @@ Function R2012B_SalesOrdersInvoiceClosing()
 	Return
 		"SELECT 
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	QueryTable.SalesOrder AS Order,
 		|	*
 		|INTO R2012B_SalesOrdersInvoiceClosing
 		|FROM

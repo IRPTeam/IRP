@@ -720,6 +720,15 @@
             <choiceList>
               <presentation>
                 <key>en</key>
+                <value>Sales order closing</value>
+              </presentation>
+              <value xsi:type="core:StringValue">
+                <value>SalesOrderClosing</value>
+              </value>
+            </choiceList>
+            <choiceList>
+              <presentation>
+                <key>en</key>
                 <value>Sales invoice</value>
               </presentation>
               <value xsi:type="core:StringValue">

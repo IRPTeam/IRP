@@ -12,5 +12,6 @@
   <content>5a2a8a1f-b29b-4352-9833-04e70902c2cb</content>
   <content>Document.ShipmentConfirmation</content>
   <content>DataProcessor.SalesOrderStatusReport</content>
+  <content>Document.SalesOrderClosing</content>
   <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
 </mdclass:Subsystem>

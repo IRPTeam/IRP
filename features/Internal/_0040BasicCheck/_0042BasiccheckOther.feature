@@ -1146,14 +1146,14 @@ Scenario: Open object form "R4034B_GoodsShipmentSchedule"
 
 Scenario: Open object form "R4035B_IncommingStocks"
 
-	Given I open "R4035B_IncommingStocks" accumulation register default form
+	Given I open "R4035B_IncomingStocks" accumulation register default form
 	If the warning is displayed then
 		Then I raise "Failed to open information register form R4035B_IncommingStocks" exception
 	And I close current window
 
 Scenario: Open object form "R4036B_IncommingStocksRequested"
 
-	Given I open "R4036B_IncommingStocksRequested" accumulation register default form
+	Given I open "R4036B_IncomingStocksRequested" accumulation register default form
 	If the warning is displayed then
 		Then I raise "Failed to open information register form R4036B_IncommingStocksRequested" exception
 	And I close current window

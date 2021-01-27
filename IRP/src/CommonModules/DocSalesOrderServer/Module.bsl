@@ -235,8 +235,7 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 		|	SalesOrder.UseItemsShipmentScheduling,
 		|	SalesOrder.Author,
 		|	SalesOrder.BusinessUnit,
-		|	SalesOrder.Description,
-		|	SalesOrder.DocumentAmount
+		|	SalesOrder.Description
 		|FROM
 		|	Document.SalesOrder AS SalesOrder
 		|WHERE
@@ -244,37 +243,33 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT *
+		|SELECT
+		|	ItemList.Ref,
+		|	ItemList.LineNumber,
+		|	ItemList.Key,
+		|	ItemList.Cancel,
+		|	ItemList.ItemKey,
+		|	ItemList.Store,
+		|	ItemList.Price,
+		|	ItemList.PriceType,
+		|	ItemList.ItemKey.Item.Unit AS Unit,
+		|	ItemList.DeliveryDate,
+		|	ItemList.ProcurementMethod,
+		|	ItemList.Detail,
+		|	ItemList.BusinessUnit,
+		|	ItemList.RevenueType,
+		|	ItemList.DontCalculateRow,
+		|	ItemList.CancelReason,
+		|	SalesOrdersInvoiceClosing.QuantityBalance AS QuantityInBaseUnit,
+		|	SalesOrdersInvoiceClosing.QuantityBalance AS Quantity,
+		|	SalesOrdersInvoiceClosing.AmountBalance AS TotalAmount,
+		|	SalesOrdersInvoiceClosing.NetAmountBalance AS NetAmount
 		|INTO ItemList
 		|FROM
-		|	Document.SalesOrder.ItemList
-		|WHERE
-		|	Ref = &SalesOrder
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT *
-		|INTO SpecialOffers
-		|FROM
-		|	Document.SalesOrder.SpecialOffers
-		|WHERE
-		|	Ref = &SalesOrder
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT *
-		|INTO TaxList
-		|FROM
-		|	Document.SalesOrder.TaxList
-		|WHERE
-		|	Ref = &SalesOrder
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT *
-		|INTO Currencies
-		|FROM
-		|	Document.SalesOrder.Currencies
+		|	Document.SalesOrder.ItemList AS ItemList
+		|		INNER JOIN AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Balance(, Order = &SalesOrder) AS
+		|			SalesOrdersInvoiceClosing
+		|		ON ItemList.Key = SalesOrdersInvoiceClosing.RowKey
 		|WHERE
 		|	Ref = &SalesOrder";
 	Query.SetParameter("SalesOrder", SalesOrder);

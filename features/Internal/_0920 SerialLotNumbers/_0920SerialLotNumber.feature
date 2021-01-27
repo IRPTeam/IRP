@@ -1696,7 +1696,7 @@ Scenario: _092008 check serial lot number in the Opening entry
 		And I click choice button of "Item serial/lot number" attribute in "Inventory" table
 		And I go to line in "List" table
 			| 'Owner'   | 'Serial number' |
-			| '38/Yellow' | '99098809009008'            |
+			| '38/Yellow' | '99098809009910'            |
 		And I select current line in "List" table
 		And I finish line editing in "Inventory" table	
 		And I click the button named "FormPost"
@@ -1710,8 +1710,8 @@ Scenario: _092008 check serial lot number in the Opening entry
 			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                           | ''          | ''             | ''          | ''                  |
 			| ''                                     | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''          | ''                  |
 			| ''                                     | ''            | ''                           | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '5'         | 'Main Company' | '38/Yellow' | '99098809009999'                |
-			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '8'         | 'Main Company' | '38/Yellow' | '99098809009008'                |
+			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '5'         | 'Main Company' | '38/Yellow' | '99098809009999'    |
+			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '8'         | 'Main Company' | '38/Yellow' | '99098809009910'    |
 		And I close all client application windows
 
 
@@ -2369,7 +2369,7 @@ Scenario: _092011 check serial lot number in the Item stock adjustment
 		And I click choice button of "Serial lot number (surplus)" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Owner'   | 'Serial number' |
-			| '38/Yellow' | '99098809009008'            |
+			| '38/Yellow' | '99098809009910'            |
 		And I select current line in "List" table
 		And I click choice button of "Item key (write off)" attribute in "ItemList" table
 		And I go to line in "List" table
@@ -2424,7 +2424,7 @@ Scenario: _092011 check serial lot number in the Item stock adjustment
 			| ''                                     | 'Record type' | 'Period'                            | 'Resources' | 'Dimensions'   | ''          | ''                  |
 			| ''                                     | ''            | ''                                  | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
 			| ''                                     | 'Expense'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '36/Yellow' | '99098809009999'    |
-			| ''                                     | 'Revenue'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009008'    |
+			| ''                                     | 'Revenue'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009910'    |
 		And I close all client application windows
 		
 

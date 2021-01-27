@@ -14,7 +14,7 @@ Procedure RestoreSettings()
 		RestoreSettingIfPresent(Settings, "Company", Undefined);
 		RestoreSettingIfPresent(Settings, "Store", Undefined);
 		RestoreSettingIfPresent(Settings, "VisibleResultTables", "All");
-		RestoreSettingIfPresent(Settings, "VisibleAnalyisRows", "All");
+		RestoreSettingIfPresent(Settings, "VisibleAnalysisRows", "All");
 		RestoreSettingIfPresent(Settings, "VisibleCreatedDocumentTables", "All");
 		RestoreSettingIfPresent(Settings, "VisibleSelectionTables", "All");
 		RestoreSettingIfPresent(Settings, "ShowPrecision", True);
@@ -38,7 +38,7 @@ Procedure SaveSettings()
 	Settings.Insert("Company", ThisObject.Company);
 	Settings.Insert("Store", ThisObject.Store);
 	Settings.Insert("VisibleResultTables", ThisObject.VisibleResultTables);
-	Settings.Insert("VisibleAnalyisRows", ThisObject.VisibleAnalyisRows);
+	Settings.Insert("VisibleAnalysisRows", ThisObject.VisibleAnalysisRows);
 	Settings.Insert("VisibleCreatedDocumentTables", ThisObject.VisibleCreatedDocumentTables);
 	Settings.Insert("VisibleSelectionTables", ThisObject.VisibleSelectionTables);
 	Settings.Insert("ShowPrecision", ThisObject.ShowPrecision);
@@ -1133,7 +1133,7 @@ Procedure VisibleResultTablesOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure VisibleAnalyisRowsOnChange(Item)
+Procedure VisibleAnalysisRowsOnChange(Item)
 	SetVisible();
 	SaveSettings();
 EndProcedure
@@ -1168,9 +1168,9 @@ Procedure SetVisible()
 		Items.CreatedPurchaseOrders.Visible = True;
 	EndIf;	
 	 
-	If Upper(ThisObject.VisibleAnalyisRows) = Upper("All") Then
+	If Upper(ThisObject.VisibleAnalysisRows) = Upper("All") Then
 		Items.Analysis.RowFilter = Undefined;
-	ElsIf Upper(ThisObject.VisibleAnalyisRows) = Upper("OnlyWithShortage") Then
+	ElsIf Upper(ThisObject.VisibleAnalysisRows) = Upper("OnlyWithShortage") Then
 		Items.Analysis.RowFilter = New FixedStructure("Visible", True);
 	EndIf;
 EndProcedure

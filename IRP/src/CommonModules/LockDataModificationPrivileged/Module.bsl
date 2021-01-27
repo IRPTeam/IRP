@@ -9,7 +9,7 @@ Procedure BeforeWrite_DocumentsLockDataModification(Source, Cancel, WriteMode, P
 	SourceParams.Source = Source;
 	SourceParams.isNew = Source.IsNew();
 	SourceParams.MetadataName = Source.Metadata().FullName();
-	If SourceisLocked(SourceParams) Then
+	If SourceIsLocked(SourceParams) Then
 		Cancel = True;
 	EndIf;
 EndProcedure
@@ -22,7 +22,7 @@ Procedure BeforeWrite_CatalogsLockDataModification(Source, Cancel, WriteMode, Po
 	SourceParams.Source = Source;
 	SourceParams.isNew = Source.IsNew();
 	SourceParams.MetadataName = Source.Metadata().FullName();
-	If SourceisLocked(SourceParams) Then
+	If SourceIsLocked(SourceParams) Then
 		Cancel = True;
 	EndIf;
 EndProcedure
@@ -35,7 +35,7 @@ Procedure BeforeWrite_InformationRegistersLockDataModification(Source, Cancel, R
 	SourceParams.Source = Source;
 	SourceParams.isNew = False;
 	SourceParams.MetadataName = Source.Metadata().FullName();
-	If SourceisLocked(SourceParams) Then
+	If SourceIsLocked(SourceParams) Then
 		Cancel = True;
 	EndIf;
 EndProcedure
@@ -48,7 +48,7 @@ Procedure BeforeWrite_AccumulationRegistersLockDataModification(Source, Cancel, 
 	SourceParams.Source = Source;
 	SourceParams.isNew = False;
 	SourceParams.MetadataName = Source.Metadata().FullName();
-	If SourceisLocked(SourceParams) Then
+	If SourceIsLocked(SourceParams) Then
 		Cancel = True;
 	EndIf;
 EndProcedure
@@ -96,7 +96,7 @@ Function FillLockDataSettings()
 	Return SourceParams;
 EndFunction
 
-Function SourceisLocked(Val SourceParams)
+Function SourceIsLocked(Val SourceParams)
 	Rules = CalculateRuleByObject(SourceParams);
 	If Rules = Undefined Then
 		Return False;

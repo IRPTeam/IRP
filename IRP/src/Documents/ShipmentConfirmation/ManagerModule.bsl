@@ -164,7 +164,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 #Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
-	PostingServer.ExequteQuery(Ref, QueryArray, Parameters);
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion
 	
 	Return Tables;

@@ -4,8 +4,6 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
 		SetGroupItemsList(Object, Form);
-	//	TODO: Fix client/server
-	//	Object.Account = CatCashAccountsServer.GetCashAccountByCompany(Object.Account, Object.Company);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
 EndProcedure

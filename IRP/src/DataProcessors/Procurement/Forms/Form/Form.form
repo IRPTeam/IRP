@@ -439,7 +439,7 @@
           <representationInContextMenu>Auto</representationInContextMenu>
         </items>
         <items xsi:type="form:FormField">
-          <name>VisibleAnalyisRows</name>
+          <name>VisibleAnalysisRows</name>
           <id>380</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -448,16 +448,16 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>VisibleAnalyisRows</segments>
+              <segments>VisibleAnalysisRows</segments>
             </paths>
           </dataPath>
           <titleLocation>None</titleLocation>
           <handlers>
             <event>OnChange</event>
-            <name>VisibleAnalyisRowsOnChange</name>
+            <name>VisibleAnalysisRowsOnChange</name>
           </handlers>
           <extendedTooltip>
-            <name>VisibleAnalyisRowsExtendedTooltip</name>
+            <name>VisibleAnalysisRowsExtendedTooltip</name>
             <id>382</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -472,7 +472,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>VisibleAnalyisRowsContextMenu</name>
+            <name>VisibleAnalysisRowsContextMenu</name>
             <id>381</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -6477,7 +6477,7 @@
     </edit>
   </attributes>
   <attributes>
-    <name>VisibleAnalyisRows</name>
+    <name>VisibleAnalysisRows</name>
     <title>
       <key>en</key>
       <value>Visible analyis rows</value>

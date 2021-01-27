@@ -1430,7 +1430,7 @@ Function NotUseRegister(Name) Export
 	Return NOT Mid(Name, 7, 1) = "_";
 EndFunction	
 
-Procedure ExequteQuery(Ref, QueryArray, Parameters) Export
+Procedure ExecuteQuery(Ref, QueryArray, Parameters) Export
 	Query = New Query;
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.SetParameter("Ref", Ref);
@@ -1458,7 +1458,7 @@ Function GetQueryTableByName(TableName, Parameters) Export
 EndFunction	
 
 Procedure FillPostingTables(Tables, Ref, QueryArray, Parameters) Export
-	ExequteQuery(Ref, QueryArray, Parameters);
+	ExecuteQuery(Ref, QueryArray, Parameters);
 	For Each VT In Tables Do
 		QueryTable = GetQueryTableByName(VT.Key, Parameters);
 		If QueryTable.Count() Then

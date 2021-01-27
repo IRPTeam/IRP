@@ -16,8 +16,8 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 	EndDo;
 	
 	For Each KeyValue In Data Do
-		FillAtribute = ServiceSystemClientServer.ObjectHasAttribute(KeyValue.Key, Source);
-		If FillAtribute Then		
+		FillAttribute = ServiceSystemClientServer.ObjectHasAttribute(KeyValue.Key, Source);
+		If FillAttribute Then		
 			If TypeOf(Source[KeyValue.Key]) = Type("Boolean")
 				And Not Source[KeyValue.Key] Then
 				Source[KeyValue.Key] = KeyValue.Value;

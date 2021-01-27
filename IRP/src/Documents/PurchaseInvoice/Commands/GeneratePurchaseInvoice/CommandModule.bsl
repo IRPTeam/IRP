@@ -565,12 +565,12 @@ Function GetDocumentTable_GoodsReceipt(ArrayOfBasisDocuments)
 	TablesFromPurchaseOrder = ExtractInfoFrom_PurchaseOrder(OrderBalanceTable, GoodsReceiptsTable);
 	
 	For Each Row In BasedOnGoodsReceiptTable Do
-	 	ItemLIst_NewRow = TablesFromPurchaseOrder.ItemList.Add();
-	 	FillPropertyValues(ItemLIst_NewRow, Row);
+	 	ItemList_NewRow = TablesFromPurchaseOrder.ItemList.Add();
+	 	FillPropertyValues(ItemList_NewRow, Row);
 	 	
-	 	ItemLIst_NewRow.BasedOn = "GoodsReceipt";
-	 	ItemLIst_NewRow.PurchaseOrder = Row.Order;
-	 	ItemLIst_NewRow.Key = Row.RowKey;	 	
+	 	ItemList_NewRow.BasedOn = "GoodsReceipt";
+	 	ItemList_NewRow.PurchaseOrder = Row.Order;
+	 	ItemList_NewRow.Key = Row.RowKey;	 	
 	 EndDo;
 	
 	Return TablesFromPurchaseOrder;

@@ -4,7 +4,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure();
 	
 	QueryArray = GetQueryTextsSecondaryTables();
-	PostingServer.ExequteQuery(Ref, QueryArray, Parameters);
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	
 	Return Tables;	
 EndFunction

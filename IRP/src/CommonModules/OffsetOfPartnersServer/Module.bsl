@@ -308,7 +308,7 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	|	OffsetOfAdvance.Agreement,
 	|	OffsetOfAdvance.TransactionDocument AS Invoice,
 	|	OffsetOfAdvance.Currency
-	|INTO R5011B_PartnersAging_OffestOfAging_Lock
+	|INTO R5011B_PartnersAging_OffsetOfAging_Lock
 	|FROM
 	|	OffsetOfAdvance AS OffsetOfAdvance
 	|;
@@ -365,7 +365,7 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	|	Transactions.Agreement,
 	|	Transactions.Currency";
 	Query.Execute();
-	Aging_Lock = PostingServer.GetQueryTableByName("R5011B_PartnersAging_OffestOfAging_Lock", Parameters);
+	Aging_Lock = PostingServer.GetQueryTableByName("R5011B_PartnersAging_OffsetOfAging_Lock", Parameters);
 		
 	DataLock = New DataLock();
 	LockFields = AccumulationRegisters.R5011B_PartnersAging.GetLockFields(Aging_Lock);
@@ -377,7 +377,7 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	EndDo;
 	If LockFields.LockInfo.Data.Count() Then
 		DataLock.Lock();
-		Parameters.Insert("R5011B_PartnersAging_OffestOfAging_Lock", DataLock);
+		Parameters.Insert("R5011B_PartnersAging_OffsetOfAging_Lock", DataLock);
 	EndIf;	
 	
 	Query.Text = 

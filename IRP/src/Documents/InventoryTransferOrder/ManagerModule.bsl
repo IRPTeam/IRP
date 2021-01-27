@@ -139,7 +139,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 #Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
-	PostingServer.ExequteQuery(Ref, QueryArray, Parameters);
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion
 	
 	Return Tables;
@@ -205,7 +205,7 @@ Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Und
 #Region NewRegistersPosting
 	If Parameters.StatusInfo.Posting Then
 		QueryArray = GetQueryTextsMasterTables();
-		PostingServer.ExequteQuery(Ref, QueryArray, Parameters);
+		PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	EndIf;
 #EndRegion
 	Return Tables;

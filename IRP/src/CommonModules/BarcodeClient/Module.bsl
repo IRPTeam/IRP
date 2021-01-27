@@ -54,7 +54,7 @@ Function GetBarcodesByItemKey(ItemKey) Export
 EndFunction
 
 Procedure SearchByBarcode(Barcode, Object, Form, ClientModule, AddInfo = Undefined) Export
-	MobileBarcodeMobule = BarcodeClient; 
+	MobileBarcodeModule = BarcodeClient; 
 	
 	NotifyParameters = New Structure;
 	NotifyParameters.Insert("Form", Form);
@@ -65,12 +65,12 @@ Procedure SearchByBarcode(Barcode, Object, Form, ClientModule, AddInfo = Undefin
 	Else
 		NotifyParameters.Insert("AddInfo", AddInfo);
 		If AddInfo.Property("MobileModule") Then
-			MobileBarcodeMobule = AddInfo.MobileModule;
+			MobileBarcodeModule = AddInfo.MobileModule;
 			AddInfo.Delete("MobileModule");
 		EndIf;
 	EndIf;	
 	NotifyDescription = New NotifyDescription("InputBarcodeEnd", BarcodeClient, NotifyParameters);
-	NotifyScan = New NotifyDescription("ScanBarcodeEndMobile", MobileBarcodeMobule, NotifyParameters);
+	NotifyScan = New NotifyDescription("ScanBarcodeEndMobile", MobileBarcodeModule, NotifyParameters);
 	If IsBlankString(Barcode) Then
 		DescriptionField = R().SuggestionToUser_2;	
 		#If MobileClient Then
@@ -85,7 +85,7 @@ Procedure SearchByBarcode(Barcode, Object, Form, ClientModule, AddInfo = Undefin
 		#EndIf
 	Else
 		#If MobileClient Then
-		MobileBarcodeMobule.ScanBarcodeEndMobile(Barcode, True, "", NotifyParameters);
+		MobileBarcodeModule.ScanBarcodeEndMobile(Barcode, True, "", NotifyParameters);
 		#Else
 		ExecuteNotifyProcessing(NotifyDescription, Barcode);
 		#EndIf

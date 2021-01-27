@@ -53,38 +53,38 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 				For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
 					If TypeOf(ItemOfPostingInfo.Key) = RegisterType Then
 						ItemOfPostingInfo.Value.Recordset.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
-						For Each RowRecordset In ItemOfPostingInfo.Value.Recordset Do
+						For Each RowRecordSet In ItemOfPostingInfo.Value.Recordset Do
 							NewRow = TableOfAgreementMovementTypes.Add();
-							NewRow.MovementType = RowRecordset.Agreement.CurrencyMovementType;
-							NewRow.Partner      = RowRecordset.Partner;
-							NewRow.LegalName    = RowRecordset.LegalName;
-							NewRow.Amount       = RowRecordset.Amount;
+							NewRow.MovementType = RowRecordSet.Agreement.CurrencyMovementType;
+							NewRow.Partner      = RowRecordSet.Partner;
+							NewRow.LegalName    = RowRecordSet.LegalName;
+							NewRow.Amount       = RowRecordSet.Amount;
 							For Each RowPaymentList In Parameters.Object.PaymentList Do
 								PartnerAndLegalNameCondition = False;
 								AgreementCondition = False;
 								BasisDocumentCondition = False;
-								If RowPaymentList.Partner = RowRecordset.Partner
-									And RowPaymentList[Name_LegalName] = RowRecordset.LegalName Then
+								If RowPaymentList.Partner = RowRecordSet.Partner
+									And RowPaymentList[Name_LegalName] = RowRecordSet.LegalName Then
 									PartnerAndLegalNameCondition = True;
 								EndIf;
 								If Not ValueIsFilled(RowPaymentList.Agreement) Then
 									AgreementCondition = True;
 								Else
 									If RowPaymentList.Agreement.ApArPostingDetail = Enums.ApArPostingDetail.ByStandardAgreement
-										And RowPaymentList.Agreement.StandardAgreement = RowRecordset.Agreement Then
+										And RowPaymentList.Agreement.StandardAgreement = RowRecordSet.Agreement Then
 										AgreementCondition = True;
 									Else
-										If RowPaymentList.Agreement = RowRecordset.Agreement Then
+										If RowPaymentList.Agreement = RowRecordSet.Agreement Then
 											AgreementCondition = True;
 										EndIf;
 									EndIf;
 								EndIf;
 								If Not ValueIsFilled(RowPaymentList.BasisDocument) 
-									Or RowPaymentList.BasisDocument = RowRecordset.BasisDocument Then
+									Or RowPaymentList.BasisDocument = RowRecordSet.BasisDocument Then
 									BasisDocumentCondition = True;
 								EndIf;
 								If PartnerAndLegalNameCondition And AgreementCondition And BasisDocumentCondition Then
-									RowRecordset.Key = RowPaymentList.Key;
+									RowRecordSet.Key = RowPaymentList.Key;
 								EndIf;
 							EndDo;
 						EndDo;

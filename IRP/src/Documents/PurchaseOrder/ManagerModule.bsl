@@ -353,47 +353,7 @@ Procedure FillTables(Ref, AddInfo, Tables)
 EndProcedure
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// OrderBalance
-	AccRegOrderBalance = AccumulationRegisters.OrderBalance;
-	ArrayOfTables = New Array();
-	ArrayOfTables.Add(DocumentDataTables.OrderBalance_Receipt);
-	ArrayOfTables.Add(DocumentDataTables.OrderBalance_Expense);
-	
-	OrderBalance = AccRegOrderBalance.GetLockFields(
-	PostingServer.JoinTables(ArrayOfTables, AccRegOrderBalance.GetLockFieldNames()));
-	DataMapWithLockFields.Insert(OrderBalance.RegisterName, OrderBalance.LockInfo);
-	
-	// InventoryBalance
-	InventoryBalance = AccumulationRegisters.InventoryBalance.GetLockFields(DocumentDataTables.InventoryBalance);
-	DataMapWithLockFields.Insert(InventoryBalance.RegisterName, InventoryBalance.LockInfo);
-	
-	// GoodsInTransitIncoming
-	GoodsInTransitIncoming = AccumulationRegisters.GoodsInTransitIncoming.GetLockFields(DocumentDataTables.GoodsInTransitIncoming);
-	DataMapWithLockFields.Insert(GoodsInTransitIncoming.RegisterName, GoodsInTransitIncoming.LockInfo);
-	
-	// StockBalance
-	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance);
-	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
-	// StockReservation
-	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation_Expense);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
-	// ReceiptOrders
-	ReceiptOrders = AccumulationRegisters.ReceiptOrders.GetLockFields(DocumentDataTables.ReceiptOrders);
-	DataMapWithLockFields.Insert(ReceiptOrders.RegisterName, ReceiptOrders.LockInfo);
-	
-	// GoodsReceiptSchedule
-	GoodsReceiptSchedule = AccumulationRegisters.GoodsReceiptSchedule.GetLockFields(DocumentDataTables.GoodsReceiptSchedule_Expense);
-	DataMapWithLockFields.Insert(GoodsReceiptSchedule.RegisterName, GoodsReceiptSchedule.LockInfo);
-	
-	// OrderProcurement
-	OrderProcurement = AccumulationRegisters.OrderProcurement.GetLockFields(DocumentDataTables.OrderProcurement);
-	DataMapWithLockFields.Insert(OrderProcurement.RegisterName, OrderProcurement.LockInfo);
-	
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -532,38 +492,7 @@ Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Und
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// OrderBalance
-	AccRegOrderBalance = AccumulationRegisters.OrderBalance;
-	ArrayOfTables = New Array();
-	ArrayOfTables.Add(DocumentDataTables.OrderBalance_Exists_Receipt);
-	ArrayOfTables.Add(DocumentDataTables.OrderBalance_Exists_Expense);
-	
-	OrderBalance = AccRegOrderBalance.GetLockFields(
-	PostingServer.JoinTables(ArrayOfTables, AccRegOrderBalance.GetLockFieldNames()));
-	DataMapWithLockFields.Insert(OrderBalance.RegisterName, OrderBalance.LockInfo);
-
-	// GoodsInTransitIncoming
-	GoodsInTransitIncoming = AccumulationRegisters.GoodsInTransitIncoming.GetLockFields(DocumentDataTables.GoodsInTransitIncoming_Exists);
-	DataMapWithLockFields.Insert(GoodsInTransitIncoming.RegisterName, GoodsInTransitIncoming.LockInfo);
-
-	// OrderProcurement
-	OrderProcurement = AccumulationRegisters.OrderProcurement.GetLockFields(DocumentDataTables.OrderProcurement_Exists);
-	DataMapWithLockFields.Insert(OrderProcurement.RegisterName, OrderProcurement.LockInfo);
-
-	// ReceiptOrders
-	ReceiptOrders = AccumulationRegisters.ReceiptOrders.GetLockFields(DocumentDataTables.ReceiptOrders_Exists);
-	DataMapWithLockFields.Insert(ReceiptOrders.RegisterName, ReceiptOrders.LockInfo);
-	
-	// StockReservation
-	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation_Exists);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
-	// StockBalance
-	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Exists);
-	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
 	Return DataMapWithLockFields;
 EndFunction
 

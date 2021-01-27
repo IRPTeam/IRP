@@ -136,6 +136,9 @@ Scenario: _022401 create GR and PI
 			Then "Update item list info" window is opened
 			And I click "OK" button
 			And I activate "Price" field in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
 			And I input "100,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -203,43 +206,43 @@ Scenario: _022402 check GR postings (register R1031)
 	And I select "R1031 Receipt invoicing" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
-		| 'Goods receipt 2 dated 26.01.2021 14:25:30' | ''            | ''                    | ''          | ''             | ''                                          | ''          |
-		| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                                          | ''          |
-		| 'Register  "R1031 Receipt invoicing"'       | ''            | ''                    | ''          | ''             | ''                                          | ''          |
-		| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                          | ''          |
-		| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Basis'                                     | 'Item key'  |
-		| ''                                          | 'Receipt'     | '26.01.2021 14:25:30' | '10'        | 'Main Company' | 'Goods receipt 2 dated 26.01.2021 14:25:30' | 'XS/Blue'   |
-		| ''                                          | 'Receipt'     | '26.01.2021 14:25:30' | '20'        | 'Main Company' | 'Goods receipt 2 dated 26.01.2021 14:25:30' | '38/Yellow' |
+		| '$$GoodsReceipt022401$$               | ''            | ''                           | ''          | ''             | ''                      | ''          |
+		| 'Document registrations records'      | ''            | ''                           | ''          | ''             | ''                      | ''          |
+		| 'Register  "R1031 Receipt invoicing"' | ''            | ''                           | ''          | ''             | ''                      | ''          |
+		| ''                                    | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''                      | ''          |
+		| ''                                    | ''            | ''                           | 'Quantity'  | 'Company'      | 'Basis'                 | 'Item key'  |
+		| ''                                    | 'Receipt'     | '$$DateGoodsReceipt022401$$' | '10'        | 'Main Company' | '$$GoodsReceipt022401$$ | 'XS/Blue'   |
+		| ''                                    | 'Receipt'     | '$$DateGoodsReceipt022401$$' | '20'        | 'Main Company' | '$$GoodsReceipt022401$$ | '38/Yellow' |
 	And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
-		| 'Goods receipt 2 dated 26.01.2021 14:25:30' | ''            | ''                    | ''          | ''           | ''          |
-		| 'Document registrations records'            | ''            | ''                    | ''          | ''           | ''          |
-		| 'Register  "R4010 Actual stocks"'           | ''            | ''                    | ''          | ''           | ''          |
-		| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-		| ''                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-		| ''                                          | 'Receipt'     | '26.01.2021 14:25:30' | '10'        | 'Store 02'   | 'XS/Blue'   |
-		| ''                                          | 'Receipt'     | '26.01.2021 14:25:30' | '20'        | 'Store 02'   | '38/Yellow' |
+		| '$$GoodsReceipt022401$$           | ''            | ''                           | ''          | ''           | ''          |
+		| 'Document registrations records'  | ''            | ''                           | ''          | ''           | ''          |
+		| 'Register  "R4010 Actual stocks"' | ''            | ''                           | ''          | ''           | ''          |
+		| ''                                | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions' | ''          |
+		| ''                                | ''            | ''                           | 'Quantity'  | 'Store'      | 'Item key'  |
+		| ''                                | 'Receipt'     | '$$DateGoodsReceipt022401$$' | '10'        | 'Store 02'   | 'XS/Blue'   |
+		| ''                                | 'Receipt'     | '$$DateGoodsReceipt022401$$' | '20'        | 'Store 02'   | '38/Yellow' |
 	And I select "R4011 Free stocks" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
-		| 'Goods receipt 2 dated 26.01.2021 14:25:30' | ''            | ''                    | ''          | ''           | ''          |
-		| 'Document registrations records'            | ''            | ''                    | ''          | ''           | ''          |
-		| 'Register  "R4011 Free stocks"'             | ''            | ''                    | ''          | ''           | ''          |
-		| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-		| ''                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-		| ''                                          | 'Receipt'     | '26.01.2021 14:25:30' | '10'        | 'Store 02'   | 'XS/Blue'   |
-		| ''                                          | 'Receipt'     | '26.01.2021 14:25:30' | '20'        | 'Store 02'   | '38/Yellow' |
+		| '$$GoodsReceipt022401$$          | ''            | ''                           | ''          | ''           | ''          |
+		| 'Document registrations records' | ''            | ''                           | ''          | ''           | ''          |
+		| 'Register  "R4011 Free stocks"'  | ''            | ''                           | ''          | ''           | ''          |
+		| ''                               | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions' | ''          |
+		| ''                               | ''            | ''                           | 'Quantity'  | 'Store'      | 'Item key'  |
+		| ''                               | 'Receipt'     | '$$DateGoodsReceipt022401$$' | '10'        | 'Store 02'   | 'XS/Blue'   |
+		| ''                               | 'Receipt'     | '$$DateGoodsReceipt022401$$' | '20'        | 'Store 02'   | '38/Yellow' |
 	And I select "Stock reservation" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
-		| 'Goods receipt 2 dated 26.01.2021 14:25:30' | ''            | ''                    | ''          | ''           | ''          |
-		| 'Document registrations records'            | ''            | ''                    | ''          | ''           | ''          |
-		| 'Register  "Stock reservation"'             | ''            | ''                    | ''          | ''           | ''          |
-		| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-		| ''                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-		| ''                                          | 'Receipt'     | '26.01.2021 14:25:30' | '10'        | 'Store 02'   | 'XS/Blue'   |
-		| ''                                          | 'Receipt'     | '26.01.2021 14:25:30' | '20'        | 'Store 02'   | '38/Yellow' |
+		| '$$GoodsReceipt022401$$          | ''            | ''                           | ''          | ''           | ''          |
+		| 'Document registrations records' | ''            | ''                           | ''          | ''           | ''          |
+		| 'Register  "Stock reservation"'  | ''            | ''                           | ''          | ''           | ''          |
+		| ''                               | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions' | ''          |
+		| ''                               | ''            | ''                           | 'Quantity'  | 'Store'      | 'Item key'  |
+		| ''                               | 'Receipt'     | '$$DateGoodsReceipt022401$$' | '10'        | 'Store 02'   | 'XS/Blue'   |
+		| ''                               | 'Receipt'     | '$$DateGoodsReceipt022401$$' | '20'        | 'Store 02'   | '38/Yellow' |
 	And I close all client application windows
 	
 	
@@ -257,13 +260,13 @@ Scenario: _022403 check PI postings
 	And I select "R1031 Receipt invoicing" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
-		| 'Purchase invoice 1 dated 26.01.2021 14:29:10' | ''            | ''                    | ''          | ''             | ''                                          | ''          |
-		| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                                          | ''          |
-		| 'Register  "R1031 Receipt invoicing"'          | ''            | ''                    | ''          | ''             | ''                                          | ''          |
-		| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                          | ''          |
-		| ''                                             | ''            | ''                    | 'Quantity'  | 'Company'      | 'Basis'                                     | 'Item key'  |
-		| ''                                             | 'Expense'     | '26.01.2021 14:29:10' | '5'         | 'Main Company' | 'Goods receipt 2 dated 26.01.2021 14:25:30' | 'XS/Blue'   |
-		| ''                                             | 'Expense'     | '26.01.2021 14:29:10' | '20'        | 'Main Company' | 'Goods receipt 2 dated 26.01.2021 14:25:30' | '38/Yellow' |
+		| '$$PurchaseInvoice0224011$$'          | ''            | ''                               | ''          | ''             | ''                      | ''          |
+		| 'Document registrations records'      | ''            | ''                               | ''          | ''             | ''                      | ''          |
+		| 'Register  "R1031 Receipt invoicing"' | ''            | ''                               | ''          | ''             | ''                      | ''          |
+		| ''                                    | 'Record type' | 'Period'                         | 'Resources' | 'Dimensions'   | ''                      | ''          |
+		| ''                                    | ''            | ''                               | 'Quantity'  | 'Company'      | 'Basis'                 | 'Item key'  |
+		| ''                                    | 'Expense'     | '$$DatePurchaseInvoice0224011$$' | '5'         | 'Main Company' | '$$GoodsReceipt022401$$ | 'XS/Blue'   |
+		| ''                                    | 'Expense'     | '$$DatePurchaseInvoice0224011$$' | '20'        | 'Main Company' | '$$GoodsReceipt022401$$ | '38/Yellow' |
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
@@ -274,12 +277,12 @@ Scenario: _022403 check PI postings
 	And I select "R1031 Receipt invoicing" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
-		| 'Purchase invoice 2 dated 26.01.2021 14:45:36' | ''            | ''                    | ''          | ''             | ''                                          | ''         |
-		| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                                          | ''         |
-		| 'Register  "R1031 Receipt invoicing"'          | ''            | ''                    | ''          | ''             | ''                                          | ''         |
-		| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                          | ''         |
-		| ''                                             | ''            | ''                    | 'Quantity'  | 'Company'      | 'Basis'                                     | 'Item key' |
-		| ''                                             | 'Expense'     | '26.01.2021 14:45:36' | '5'         | 'Main Company' | 'Goods receipt 2 dated 26.01.2021 14:25:30' | 'XS/Blue'  |
+		| '$$PurchaseInvoice0224012$$'          | ''            | ''                               | ''          | ''             | ''                      | ''         |
+		| 'Document registrations records'      | ''            | ''                               | ''          | ''             | ''                      | ''         |
+		| 'Register  "R1031 Receipt invoicing"' | ''            | ''                               | ''          | ''             | ''                      | ''         |
+		| ''                                    | 'Record type' | 'Period'                         | 'Resources' | 'Dimensions'   | ''                      | ''         |
+		| ''                                    | ''            | ''                               | 'Quantity'  | 'Company'      | 'Basis'                 | 'Item key' |
+		| ''                                    | 'Expense'     | '$$DatePurchaseInvoice0224012$$' | '5'         | 'Main Company' | '$$GoodsReceipt022401$$ | 'XS/Blue'  |
 	And I select "R4011 Free stocks" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document does not contain values

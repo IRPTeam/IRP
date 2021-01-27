@@ -701,6 +701,13 @@ Scenario: _030013 create Special Offer Rules (Partner term)
 	And I select current line in "List" table
 	And Delay 1
 	And I finish line editing in "ValueList" table
+	And I click the button named "Add"
+	And I click choice button of "Value" attribute in "ValueList" table
+	And I go to line in "List" table
+		| 'Description'             |
+		| 'Retail partner term' |
+	And I select current line in "List" table
+	And I finish line editing in "ValueList" table
 	And I click "OK" button
 	When save the special offer setting
 	Then I check for the "SpecialOfferRules" catalog element with the "Description_en" "Discount on Basic Partner terms"

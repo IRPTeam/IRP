@@ -1068,10 +1068,8 @@ Scenario: _29700121 test filling-in PO - PI - GR by quantity (second part)
 			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
-			Then "1C:Enterprise" window is opened
-			And I click "OK" button
-			Given Recent TestClient message contains "* [Boots Boots/S-8] Receipt remaining: 0 . Required: 2 . Lacking: 2 ." string by template
-		* Copy the string that is in the order clearing the basis document from the copied line and try to post and try to post
+			Then user message window does not contain messages
+		* Copy the string that is in the order clearing the basis document from the copied line and try to post
 			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |
 				| 'Dress' | 'L/Green'  |
@@ -1086,9 +1084,7 @@ Scenario: _29700121 test filling-in PO - PI - GR by quantity (second part)
 			And I click Clear button of "Receipt basis" attribute in "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
-			Then "1C:Enterprise" window is opened
-			And I click "OK" button
-			Given Recent TestClient message contains "* [Dress L/Green] Receipt remaining: 0 . Required: 19 . Lacking: 19 ." string by template
+			Then user message window does not contain messages
 		* Deleting a string that has PI and try to post
 			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |

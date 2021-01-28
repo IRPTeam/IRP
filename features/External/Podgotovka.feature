@@ -1528,3 +1528,34 @@ Scenario: update ItemKeys
 	And I click "Update item keys description" button
 	And Delay 5
 	And I close all client application windows
+
+Scenario: add Plugin for document discount
+		* Opening a form to add Plugin sessing
+			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		* Addition of Plugin sessing for calculating Tax types for Turkey (VAT)
+			And I click the button named "FormCreate"
+			And I select external file "#workingDir#/DataProcessor/DocumentDiscount.epf"
+			And I click the button named "FormAddExtDataProc"
+			And I input "" text in "Path to plugin for test" field
+			And I input "DocumentDiscount" text in "Name" field
+			And I click Open button of the field named "Description_en"
+			And I input "DocumentDiscount" text in the field named "Description_en"
+			And I input "DocumentDiscount_TR" text in the field named "Description_tr"
+			And I click "Ok" button
+			And I click "Save and close" button
+			And I wait "Plugins (create)" window closing in 10 seconds
+		* Check added processing
+			Then I check for the "ExternalDataProc" catalog element with the "Description_en" "DocumentDiscount"
+			Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"		
+			And I go to line in "List" table
+				| 'Description' |
+				| 'DocumentDiscount'         |
+			And I select current line in "List" table
+			And I click Open button of "Special offer type" field
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'      |
+				| 'DocumentDiscount' |
+			And I select current line in "List" table
+			And I click "Save and close" button
+		And I close all client application windows

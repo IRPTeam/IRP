@@ -134,6 +134,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 #Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref, StatusInfo));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion
 	
@@ -249,6 +250,12 @@ EndProcedure
 
 #Region NewRegistersPosting
 
+Function GetAdditionalQueryParamenters(Ref, StatusInfo)	
+	StrParams = New Structure();
+	StrParams.Insert("Period", StatusInfo.Period);
+	Return StrParams;
+EndFunction
+
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
@@ -258,6 +265,7 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4035B_IncomingStocks());
 	QueryArray.Add(R4036B_IncomingStocksRequested());
 	Return QueryArray;	
@@ -266,7 +274,7 @@ EndFunction
 Function ItemList()
 	Return
 		"SELECT
-		|	InventoryTransferOrderItemList.Ref.Date AS Period,
+		|	&Period AS Period,
 		|	InventoryTransferOrderItemList.Ref.Company AS Company,
 		|	InventoryTransferOrderItemList.Ref.StoreSender AS StoreSender,
 		|	InventoryTransferOrderItemList.Ref.StoreReceiver AS StoreReceiver,
@@ -283,6 +291,25 @@ Function ItemList()
 		|WHERE
 		|	InventoryTransferOrderItemList.Ref = &Ref";
 EndFunction	
+
+Function R4011B_FreeStocks()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.StoreSender AS Store,
+		|	ItemList.ItemKey,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO R4011B_FreeStocks
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemLIst.UsePurchaseOrder
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.StoreSender,
+		|	ItemList.ItemKey";
+EndFunction 
 
 Function R4035B_IncomingStocks()
 	Return

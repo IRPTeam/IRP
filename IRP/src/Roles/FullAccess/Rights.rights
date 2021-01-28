@@ -1297,4 +1297,11 @@
 			<value>false</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.PlannedReceiptReservation</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
 </Rights>

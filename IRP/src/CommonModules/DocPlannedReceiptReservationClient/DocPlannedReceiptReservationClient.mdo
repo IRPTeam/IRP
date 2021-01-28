@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="11a1930c-266d-4235-9a99-604a186b9ed9">
+  <name>DocPlannedReceiptReservationClient</name>
+  <synonym>
+    <key>en</key>
+    <value>Doc planned receipt reservation client</value>
+  </synonym>
+  <clientManagedApplication>true</clientManagedApplication>
+  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

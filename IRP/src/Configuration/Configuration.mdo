@@ -370,6 +370,8 @@
   <commonModules>CommonModule.DocManualRegisterEntryClient</commonModules>
   <commonModules>CommonModule.DocManualRegisterEntryServer</commonModules>
   <commonModules>CommonModule.IncomingStocksServer</commonModules>
+  <commonModules>CommonModule.DocPlannedReceiptReservationClient</commonModules>
+  <commonModules>CommonModule.DocPlannedReceiptReservationServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.BusinessUnit</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -589,6 +591,7 @@
   <documents>Document.StockAdjustmentAsSurplus</documents>
   <documents>Document.StockAdjustmentAsWriteOff</documents>
   <documents>Document.Unbundling</documents>
+  <documents>Document.PlannedReceiptReservation</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForCreditDebitNote</documentJournals>

@@ -915,9 +915,6 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 	PostingServer.MergeTables(Tables.GoodsReceiptSchedule_Expense   , QueryResults[3].Unload());
 	PostingServer.MergeTables(Tables.OrderBalance                   , QueryResults[4].Unload());
 	
-	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.LockForUpdate = True;
-	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Clear();
-	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Write();
 	IncomingStocksServer.ClosureIncomingStocks(Parameters);
 	
 	PostingServer.MergeTables(Tables.StockReservation_Expense, 

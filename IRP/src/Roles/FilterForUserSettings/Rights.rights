@@ -1121,4 +1121,22 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.PlannedReceiptReservation</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.PlannedReceiptReservation.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

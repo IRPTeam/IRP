@@ -252,7 +252,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Basis</segments>
+        <segments>List.Requester</segments>
       </dataPath>
       <extendedTooltip>
         <name>BasisExtendedTooltip</name>

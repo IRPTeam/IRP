@@ -251,99 +251,7 @@ Function GetQueryTextQueryTable()
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// TransferOrderBalance
-	TransferOrderBalance = 
-	AccumulationRegisters.TransferOrderBalance.GetLockFields(DocumentDataTables.TransferOrderBalance);
-	DataMapWithLockFields.Insert(TransferOrderBalance.RegisterName, TransferOrderBalance.LockInfo);
-	
-	If Parameters.DocumentDataTables.Header.StoreReceiverUseGoodsReceipt
-		And Parameters.DocumentDataTables.Header.StoreSenderUseShipmentConfirmation Then
-		
-		// StockReservation
-		StockReservation = 
-		AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation_Expense);
-		DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-		
-		// GoodsInTransitIncoming (Receiver) 
-		GoodsInTransitIncoming = 
-		AccumulationRegisters.GoodsInTransitIncoming.GetLockFields(DocumentDataTables.GoodsInTransitIncoming);
-		DataMapWithLockFields.Insert(GoodsInTransitIncoming.RegisterName, GoodsInTransitIncoming.LockInfo);
-		
-		// GoodsInTransitOutgoing (Sender)
-		GoodsInTransitOutgoing = 
-		AccumulationRegisters.GoodsInTransitOutgoing.GetLockFields(DocumentDataTables.GoodsInTransitOutgoing);
-		DataMapWithLockFields.Insert(GoodsInTransitOutgoing.RegisterName, GoodsInTransitOutgoing.LockInfo);
-		 
-	ElsIf Parameters.DocumentDataTables.Header.StoreReceiverUseGoodsReceipt
-		And Not Parameters.DocumentDataTables.Header.StoreSenderUseShipmentConfirmation Then
-		
-		// StockReservation (Sender)
-		StockReservation = 
-		AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation_Expense);
-		DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-		
-		// GoodsInTransitIncoming (Receiver) 
-		GoodsInTransitIncoming = 
-		AccumulationRegisters.GoodsInTransitIncoming.GetLockFields(DocumentDataTables.GoodsInTransitIncoming);
-		DataMapWithLockFields.Insert(GoodsInTransitIncoming.RegisterName, GoodsInTransitIncoming.LockInfo);
-		
-		// StockBalance (Sender) 
-		ArrayOfTables = New Array();
-		ArrayOfTables.Add(DocumentDataTables.StockBalance_Expense);
-		ArrayOfTables.Add(DocumentDataTables.StockBalance_Transit);
-		
-		StockBalance = 
-		AccumulationRegisters.StockBalance.GetLockFields(PostingServer.JoinTables(ArrayOfTables, "Store, ItemKey"));
-		DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-		
-	ElsIf Not Parameters.DocumentDataTables.Header.StoreReceiverUseGoodsReceipt
-		And Parameters.DocumentDataTables.Header.StoreSenderUseShipmentConfirmation Then
-		
-		// StockReservation (Sender and Receiver)
-		ArrayOfTables = New Array();
-		ArrayOfTables.Add(DocumentDataTables.StockReservation_Expense);
-		ArrayOfTables.Add(DocumentDataTables.StockReservation_Receipt);
-		
-		StockReservation = 
-		AccumulationRegisters.StockReservation.GetLockFields(PostingServer.JoinTables(ArrayOfTables, "Store, ItemKey"));
-		DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-		
-		// StockBalance (Receiver) 
-		StockBalance = 
-		AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Receipt);
-		DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-		
-		// GoodsInTransitOutgoing (Sender) 
-		GoodsInTransitOutgoing = 
-		AccumulationRegisters.GoodsInTransitOutgoing.GetLockFields(DocumentDataTables.GoodsInTransitOutgoing);
-		DataMapWithLockFields.Insert(GoodsInTransitOutgoing.RegisterName, GoodsInTransitOutgoing.LockInfo);
-		
-	ElsIf Not Parameters.DocumentDataTables.Header.StoreReceiverUseGoodsReceipt
-		And Not Parameters.DocumentDataTables.Header.StoreSenderUseShipmentConfirmation Then
-		
-		// StockReservation (Sender and Receiver) 
-		ArrayOfTables = New Array();
-		ArrayOfTables.Add(DocumentDataTables.StockReservation_Expense);
-		ArrayOfTables.Add(DocumentDataTables.StockReservation_Receipt);
-		
-		StockReservation = 
-		AccumulationRegisters.StockReservation.GetLockFields(PostingServer.JoinTables(ArrayOfTables, "Store, ItemKey"));
-		DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
-		// StockBalance (Sender and Receiver) 
-		ArrayOfTables = New Array();
-		ArrayOfTables.Add(DocumentDataTables.StockBalance_Expense);
-		ArrayOfTables.Add(DocumentDataTables.StockBalance_Receipt);
-		
-		StockBalance = 
-		AccumulationRegisters.StockBalance.GetLockFields(PostingServer.JoinTables(ArrayOfTables, "Store, ItemKey"));
-		DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
-	EndIf;
-	
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -527,17 +435,7 @@ Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Und
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// StockReservation
-	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation_Exists);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
-	// StockBalance
-	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Exists);
-	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -577,6 +475,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
 	QueryArray.Add(R4031B_GoodsInTransitIncoming());
+	QueryArray.Add(R4012B_StockReservation());
 	Return QueryArray;
 EndFunction
 
@@ -704,6 +603,22 @@ Function R4031B_GoodsInTransitIncoming()
 		|	ItemList AS ItemList
 		|WHERE
 		|	ItemList.ReceiverUseGoodsReceipt";
+EndFunction
+
+Function R4012B_StockReservation()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.StoreSender AS Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Order,
+		|	ItemList.Quantity
+		|INTO R4012B_StockReservation
+		|FROM 
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.UseOrder";
 EndFunction
 	
 #EndRegion	

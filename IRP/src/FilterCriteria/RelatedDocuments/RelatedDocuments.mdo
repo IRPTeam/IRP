@@ -60,7 +60,7 @@
   <content>Document.PurchaseInvoice.TabularSection.GoodsReceipts.Attribute.GoodsReceipt</content>
   <content>Document.InventoryTransferOrder.TabularSection.ItemList.Attribute.PurchaseOrder</content>
   <content>Document.SalesOrderClosing.Attribute.SalesOrder</content>
-  <content>Document.PlannedReceiptReservation.Attribute.Basis</content>
+  <content>Document.PlannedReceiptReservation.Attribute.Requester</content>
   <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
     <name>RelatedDocuments</name>
     <synonym>

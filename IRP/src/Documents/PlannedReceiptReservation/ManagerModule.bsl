@@ -68,198 +68,59 @@ EndProcedure
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
-//	QueryArray.Add(ItemList());
+	QueryArray.Add(ItemList());
 	Return QueryArray;	
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
-//	QueryArray.Add(R4010B_ActualStocks());
-//	QueryArray.Add(R4011B_FreeStocks());
-//	QueryArray.Add(R4014B_SerialLotNumber());
-//	QueryArray.Add(R4050B_StockInventory());
-//	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
-//	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());
-//	QueryArray.Add(StockBalance());
-//	QueryArray.Add(StockReservation());
+	QueryArray.Add(R4035B_IncomingStocks());
+	QueryArray.Add(R4036B_IncomingStocksRequested());
 	Return QueryArray;	
 EndFunction	
-//
-//Function ItemList()
-//	Return
-//		"SELECT
-//		|	ItemStockAdjustmentItemList.Ref,
-//		|	ItemStockAdjustmentItemList.Key,
-//		|	ItemStockAdjustmentItemList.ItemKey,
-//		|	ItemStockAdjustmentItemList.Unit,
-//		|	ItemStockAdjustmentItemList.Quantity,
-//		|	ItemStockAdjustmentItemList.QuantityInBaseUnit AS Quantity,
-//		|	ItemStockAdjustmentItemList.ItemKeyWriteOff,
-//		|	ItemStockAdjustmentItemList.Ref.Date AS Period,
-//		|	ItemStockAdjustmentItemList.Ref.Company AS Company,
-//		|	ItemStockAdjustmentItemList.Ref.Store AS Store,
-//		|	ItemStockAdjustmentItemList.SerialLotNumber,
-//		|	ItemStockAdjustmentItemList.SerialLotNumberWriteOff
-//		|INTO ItemList
-//		|FROM
-//		|	Document.ItemStockAdjustment.ItemList AS ItemStockAdjustmentItemList
-//		|WHERE
-//		|	ItemStockAdjustmentItemList.Ref = &Ref";
-//EndFunction
-//
-//Function R4010B_ActualStocks()
-//	Return
-//		"SELECT
-//		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-//		|	QueryTable.ItemKey AS ItemKey,
-//		|	*
-//		|INTO R4010B_ActualStocks
-//		|FROM
-//		|	ItemList AS QueryTable
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	VALUE(AccumulationRecordType.Expense),
-//		|	QueryTable.ItemKeyWriteOff AS ItemKey,
-//		|	*
-//		|FROM
-//		|	ItemList AS QueryTable";
-//
-//EndFunction
-//
-//Function R4011B_FreeStocks()
-//	Return
-//		"SELECT
-//		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-//		|	QueryTable.ItemKey AS ItemKey,
-//		|	*
-//		|INTO R4011B_FreeStocks
-//		|FROM
-//		|	ItemList AS QueryTable
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	VALUE(AccumulationRecordType.Expense),
-//		|	QueryTable.ItemKeyWriteOff AS ItemKey,
-//		|	*
-//		|FROM
-//		|	ItemList AS QueryTable";
-//
-//EndFunction
-//
-//Function R4014B_SerialLotNumber()
-//	Return
-//		"SELECT
-//		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-//		|	QueryTable.ItemKey AS ItemKey,
-//		|	QueryTable.SerialLotNumber AS SerialLotNumber,
-//		|	*
-//		|INTO R4014B_SerialLotNumber
-//		|FROM
-//		|	ItemList AS QueryTable
-//		|WHERE
-//		|	Not QueryTable.SerialLotNumber = Value(Catalog.SerialLotNumbers.EmptyRef)
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	VALUE(AccumulationRecordType.Expense),
-//		|	QueryTable.ItemKeyWriteOff,
-//		|	QueryTable.SerialLotNumberWriteOff,
-//		|	*
-//		|FROM
-//		|	ItemList AS QueryTable
-//		|WHERE
-//		|	Not QueryTable.SerialLotNumberWriteOff = Value(Catalog.SerialLotNumbers.EmptyRef)";
-//
-//EndFunction
-//
-//Function R4050B_StockInventory()
-//	Return
-//		"SELECT
-//		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-//		|	QueryTable.ItemKey AS ItemKey,
-//		|	*
-//		|INTO R4050B_StockInventory
-//		|FROM
-//		|	ItemList AS QueryTable
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	VALUE(AccumulationRecordType.Expense),
-//		|	QueryTable.ItemKeyWriteOff AS ItemKey,
-//		|	*
-//		|FROM
-//		|	ItemList AS QueryTable";
-//
-//EndFunction
-//
-//Function R4051T_StockAdjustmentAsWriteOff()
-//	Return
-//		"SELECT 
-//		|	*
-//		|INTO R4051T_StockAdjustmentAsWriteOff
-//		|FROM
-//		|	ItemList AS QueryTable
-//		|WHERE True";
-//
-//EndFunction
-//
-//Function R4052T_StockAdjustmentAsSurplus()
-//	Return
-//		"SELECT 
-//		|	QueryTable.ItemKeyWriteOff AS ItemKey,
-//		|	*
-//		|INTO R4052T_StockAdjustmentAsSurplus
-//		|FROM
-//		|	ItemList AS QueryTable
-//		|WHERE True";
-//
-//EndFunction
-//
-//Function StockBalance()
-//	Return
-//		"SELECT
-//		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-//		|	QueryTable.ItemKey AS ItemKey,
-//		|	*
-//		|INTO StockBalance
-//		|FROM
-//		|	ItemList AS QueryTable
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	VALUE(AccumulationRecordType.Expense),
-//		|	QueryTable.ItemKeyWriteOff AS ItemKey,
-//		|	*
-//		|FROM
-//		|	ItemList AS QueryTable";
-//
-//EndFunction
-//
-//Function StockReservation()
-//	Return
-//		"SELECT
-//		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-//		|	QueryTable.ItemKey AS ItemKey,
-//		|	*
-//		|INTO StockReservation
-//		|FROM
-//		|	ItemList AS QueryTable
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	VALUE(AccumulationRecordType.Expense),
-//		|	QueryTable.ItemKeyWriteOff AS ItemKey,
-//		|	*
-//		|FROM
-//		|	ItemList AS QueryTable";
-//
-//EndFunction
-//
+
+Function ItemList()
+	Return
+		"SELECT
+		|	PlannedReceiptReservationItemList.ItemKey,
+		|	PlannedReceiptReservationItemList.QuantityInBaseUnit AS Quantity,
+		|	PlannedReceiptReservationItemList.Ref.Store AS IncomingStore,
+		|	PlannedReceiptReservationItemList.Store AS RequesterStore,
+		|	PlannedReceiptReservationItemList.Ref.Requester AS Requester,
+		|	PlannedReceiptReservationItemList.IncomingDocument
+		|INTO ItemList
+		|FROM
+		|	Document.PlannedReceiptReservation.ItemList AS PlannedReceiptReservationItemList
+		|WHERE
+		|	PlannedReceiptReservationItemList.Ref = &Ref"
+EndFunction
+
+Function R4035B_IncomingStocks()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.IncomingStore AS Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Requester AS Order,
+		|	ItemList.Quantity
+		|INTO R4035B_IncomingStocks
+		|FROM
+		|	ItemList AS ItemList";
+EndFunction
+
+Function R4036B_IncomingStocksRequested()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.IncomingStore,
+		|	ItemList.RequesterStore,
+		|	ItemList.ItemKey,
+		|	ItemList.IncomingDocument AS Order,
+		|	ItemList.Requester,
+		|	ItemList.Quantity
+		|INTO R4036B_IncomingStocksRequested
+		|FROM 
+		|	ItemList AS ItemList";
+EndFunction
+
 #EndRegion

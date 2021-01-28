@@ -78,6 +78,7 @@
       <value>Order</value>
     </synonym>
     <type>
+      <types>DocumentRef.InventoryTransferOrder</types>
       <types>DocumentRef.PurchaseOrder</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>

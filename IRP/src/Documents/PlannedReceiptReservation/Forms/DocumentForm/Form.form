@@ -423,7 +423,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>Basis</name>
+          <name>Requester</name>
           <id>147</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -431,10 +431,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.Basis</segments>
+            <segments>Object.Requester</segments>
           </dataPath>
           <extendedTooltip>
-            <name>BasisExtendedTooltip</name>
+            <name>RequesterExtendedTooltip</name>
             <id>149</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -449,7 +449,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>BasisContextMenu</name>
+            <name>RequesterContextMenu</name>
             <id>148</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -956,6 +956,56 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
+          <name>ItemListStore</name>
+          <id>150</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.Store</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ItemListStoreExtendedTooltip</name>
+            <id>152</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListStoreContextMenu</name>
+            <id>151</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
           <name>ItemListQuantity</name>
           <id>48</id>
           <visible>true</visible>
@@ -999,6 +1049,56 @@
           </contextMenu>
           <type>InputField</type>
           <editMode>EnterOnInput</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>ItemListIncomingDocument</name>
+          <id>153</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.IncomingDocument</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ItemListIncomingDocumentExtendedTooltip</name>
+            <id>155</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListIncomingDocumentContextMenu</name>
+            <id>154</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>

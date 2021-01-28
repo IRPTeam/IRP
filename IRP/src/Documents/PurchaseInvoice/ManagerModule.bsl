@@ -3327,7 +3327,7 @@ Function R4012B_StockReservation()
 	Return
 		"SELECT 
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	IncomingStocksRequested.RequesterStore AS Store,
+		|	IncomingStocksRequested.IncomingStore AS Store,
 		|	IncomingStocksRequested.Requester AS Order,
 		|*
 		|INTO R4012B_StockReservation

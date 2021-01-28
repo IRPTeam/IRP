@@ -268,6 +268,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4035B_IncomingStocks());
 	QueryArray.Add(R4036B_IncomingStocksRequested());
+	QueryArray.Add(R4012B_StockReservation());
 	Return QueryArray;	
 EndFunction	
 
@@ -329,7 +330,24 @@ Function R4035B_IncomingStocks()
 		|	ItemList.Period,
 		|	ItemList.StoreSender,
 		|	ItemList.ItemKey,
-		|	ItemList.PurchaseOrder";	
+		|	ItemList.PurchaseOrder";
+//		|
+//		|UNION ALL
+//		|
+//		|SELECT
+//		|	VALUE(AccumulationRecordType.Receipt),
+//		|	ItemList.Period,
+//		|	ItemList.StoreReceiver,
+//		|	ItemList.ItemKey,
+//		|	ItemList.Order,
+//		|	SUM(ItemList.Quantity)
+//		|FROM
+//		|	ItemList AS ItemList
+//		|GROUP BY
+//		|	ItemList.Period,
+//		|	ItemList.StoreReceiver,
+//		|	ItemList.ItemKey,
+//		|	ItemList.Order";	
 EndFunction
 
 Function R4036B_IncomingStocksRequested()
@@ -356,6 +374,27 @@ Function R4036B_IncomingStocksRequested()
 		|	ItemList.PurchaseOrder,
 		|	ItemList.Order";
 EndFunction
+
+Function R4012B_StockReservation()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.StoreSender AS Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Order,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO R4012B_StockReservation
+		|FROM 
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.UsePurchaseOrder
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.StoreSender,
+		|	ItemList.ItemKey,
+		|	ItemList.Order";
+EndFunction	
 		
 Function R4035B_IncomingStocks_Exists()
 	Return

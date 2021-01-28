@@ -50,6 +50,8 @@
   <defaultListForm>Document.PlannedReceiptReservation.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.PlannedReceiptReservation.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="556915ac-9e34-4e26-b038-191cf09a89a6">
@@ -71,7 +73,7 @@
     <name>Store</name>
     <synonym>
       <key>en</key>
-      <value>Store</value>
+      <value>Store (incoming)</value>
     </synonym>
     <type>
       <types>CatalogRef.Stores</types>
@@ -84,10 +86,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="1f7a96ec-2087-4e73-a626-11c7da1b4ba2">
-    <name>Basis</name>
+    <name>Requester</name>
     <synonym>
       <key>en</key>
-      <value>Basis</value>
+      <value>Requester</value>
     </synonym>
     <type>
       <types>DocumentRef.SalesOrder</types>
@@ -206,6 +208,35 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="5cf244d2-411a-4936-ba21-1a7a9e991818">
+      <name>Store</name>
+      <synonym>
+        <key>en</key>
+        <value>Store (requester)</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Stores</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9109a37b-172f-463d-9082-a18699335cea">
+      <name>IncomingDocument</name>
+      <synonym>
+        <key>en</key>
+        <value>Incoming document</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.PurchaseOrder</types>
+        <types>DocumentRef.InventoryTransferOrder</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
   <tabularSections uuid="7d5e56cd-57a6-4e68-8c71-46b5433f87c2">

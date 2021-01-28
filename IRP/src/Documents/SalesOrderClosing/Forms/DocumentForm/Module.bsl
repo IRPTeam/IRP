@@ -3,13 +3,14 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	If Object.Ref.isEmpty() AND NOT Parameters.SalesOrder.IsEmpty() Then
+		Object.SalesOrder = Parameters.SalesOrder;
+		Object.CloseOrder = True;
+		FillByOrderAtServer();
+	EndIf;
 	DocSalesOrderServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
-		SetVisibilityAvailability(Object, ThisObject);
-		
-		If Object.Ref.isEmpty() Then
-			Object.SalesOrder = Parameters.SalesOrder;
-		EndIf
+		SetVisibilityAvailability(Object, ThisObject);	
 	EndIf;
 	ThisObject.TaxAndOffersCalculated = True;
 	SetConditionalAppearance();
@@ -573,7 +574,7 @@ EndProcedure
 
 #Region SalesOrderClosing
 &AtClient
-Procedure FillByOrder(Command)
+Procedure FillByOrder()
 	FillByOrderAtServer();
 	Cancel = False;
 	DocSalesOrderClient.OnOpen(Object, ThisObject, Cancel);

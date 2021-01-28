@@ -6,7 +6,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
-	;
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Return Tables;
 EndFunction
@@ -70,7 +69,15 @@ EndProcedure
 
 #EndRegion
 
-#Region NewRegistersPosting
+#Region PostingService
+
+Function GetInformationAboutMovements(Ref) Export
+	Str = New Structure;
+	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
+	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
+	Return Str;
+EndFunction
 
 Function GetAdditionalQueryParamenters(Ref)
 	
@@ -100,6 +107,10 @@ Function GetQueryTextsMasterTables()
 	Return QueryArray;	
 EndFunction	
 
+#EndRegion
+
+#Region QueryForTables
+
 Function ItemList()
 
 	Return
@@ -126,8 +137,8 @@ Function ItemList()
 		|	SalesOrderItemList.Ref.UseItemsShipmentScheduling AS UseItemsShipmentScheduling,
 		|	- SalesOrderItemList.Quantity AS UnitQuantity,
 		|	- SalesOrderItemList.QuantityInBaseUnit AS Quantity,
-		|	- SalesOrderItemList.OffersAmount,
-		|	- SalesOrderItemList.NetAmount,
+		|	- SalesOrderItemList.OffersAmount AS OffersAmount,
+		|	- SalesOrderItemList.NetAmount AS NetAmount,
 		|	- SalesOrderItemList.TotalAmount AS Amount
 		|	INTO ItemList
 		|FROM

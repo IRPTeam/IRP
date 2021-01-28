@@ -1310,13 +1310,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Reports</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Catalog.Workstations</name>
 		<right>
 			<name>Read</name>

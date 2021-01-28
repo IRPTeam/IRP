@@ -359,12 +359,21 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		Query.Text = Query.Text + "SELECT UNDEFINED INTO IncomingStocks WHERE FALSE; ";
 	EndIf;	
 	If Not PostingServer.QueryTableIsExists("IncomingStocksRequested", Parameters) Then
-		Query.Text = Query.Text + "SELECT UNDEFINED INTO IncomingStocksRequested WHERE FALSE; ";
+		Query.Text = Query.Text + 
+		"SELECT 
+		|	UNDEFINED AS RequesterStore,
+		|	UNDEFINED AS Requester
+		|INTO IncomingStocksRequested 
+		|WHERE FALSE; ";
 	EndIf;	
 	If Not PostingServer.QueryTableIsExists("FreeStocks", Parameters) Then
 		Query.Text = Query.Text + 
 		"SELECT 
-		|UNDEFINED AS RecordType, UNDEFINED AS Period, UNDEFINED AS Store, UNDEFINED AS ItemKey, UNDEFINED AS Quantity
+		|	UNDEFINED AS RecordType, 
+		|	UNDEFINED AS Period, 
+		|	UNDEFINED AS Store, 
+		|	UNDEFINED AS ItemKey, 
+		|	UNDEFINED AS Quantity
 		|INTO FreeStocks 
 		|WHERE FALSE; ";
 	EndIf;	

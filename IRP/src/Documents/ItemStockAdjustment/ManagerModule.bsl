@@ -42,7 +42,6 @@ EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	DataMapWithLockFields = New Map();
-	PostingServer.GetLockDataSource(DataMapWithLockFields, Parameters, True);
 	Return DataMapWithLockFields;
 EndFunction
 

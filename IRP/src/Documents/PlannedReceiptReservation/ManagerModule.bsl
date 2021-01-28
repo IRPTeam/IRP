@@ -82,6 +82,7 @@ EndFunction
 Function ItemList()
 	Return
 		"SELECT
+		|	PlannedReceiptReservationItemList.Ref.Date AS Period,
 		|	PlannedReceiptReservationItemList.ItemKey,
 		|	PlannedReceiptReservationItemList.QuantityInBaseUnit AS Quantity,
 		|	PlannedReceiptReservationItemList.Ref.Store AS IncomingStore,
@@ -99,9 +100,10 @@ Function R4035B_IncomingStocks()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
 		|	ItemList.IncomingStore AS Store,
 		|	ItemList.ItemKey,
-		|	ItemList.Requester AS Order,
+		|	ItemList.IncomingDocument AS Order,
 		|	ItemList.Quantity
 		|INTO R4035B_IncomingStocks
 		|FROM
@@ -112,6 +114,7 @@ Function R4036B_IncomingStocksRequested()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
 		|	ItemList.IncomingStore,
 		|	ItemList.RequesterStore,
 		|	ItemList.ItemKey,

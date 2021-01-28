@@ -7,20 +7,15 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("TransferOrderBalance"         , PostingServer.CreateTable(AccReg.TransferOrderBalance));
 	Tables.Insert("StockReservation"             , PostingServer.CreateTable(AccReg.StockReservation));
 	Tables.Insert("OrderBalance"                 , PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("R4035B_IncomingStocks"        , PostingServer.CreateTable(AccReg.R4035B_IncomingStocks));
-	Tables.Insert("R4036B_IncomingStocksRequested" , PostingServer.CreateTable(AccReg.R4036B_IncomingStocksRequested));
 	
 	Tables.Insert("StockReservation_Exists" , PostingServer.CreateTable(AccReg.StockReservation));
-	Tables.Insert("R4035B_IncomingStocks_Exists" , PostingServer.CreateTable(AccReg.R4035B_IncomingStocks));
 	
 	Tables.StockReservation_Exists = 
 	AccumulationRegisters.StockReservation.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
-	
-	Tables.R4035B_IncomingStocks_Exists = 
-	AccumulationRegisters.R4035B_IncomingStocks.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
-	
+		
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
+	Parameters.Insert("StatusInfo", StatusInfo);
 	If Not StatusInfo.Posting Then
 		Return Tables;
 	EndIf;
@@ -314,25 +309,25 @@ Function R4036B_IncomingStocksRequested()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	tmp.Period,
-		|	tmp.StoreSender AS IncomingStore,
-		|	tmp.StoreReceiver AS RequesterStore,
-		|	tmp.ItemKey,
-		|	tmp.PurchaseOrder AS Order,
-		|	tmp.Order AS Requester,
-		|	SUM(tmp.Quantity) AS Quantity
+		|	ItemList.Period,
+		|	ItemList.StoreSender AS IncomingStore,
+		|	ItemList.StoreReceiver AS RequesterStore,
+		|	ItemList.ItemKey,
+		|	ItemList.PurchaseOrder AS Order,
+		|	ItemList.Order AS Requester,
+		|	SUM(ItemList.Quantity) AS Quantity
 		|INTO R4036B_IncomingStocksRequested
 		|FROM
-		|	tmp AS tmp
+		|	ItemList AS ItemList
 		|WHERE
-		|	tmp.UsePurchaseOrder
+		|	ItemList.UsePurchaseOrder
 		|GROUP BY
-		|	tmp.Period,
-		|	tmp.StoreSender,
-		|	tmp.StoreReceiver,
-		|	tmp.ItemKey,
-		|	tmp.PurchaseOrder,
-		|	tmp.Order";
+		|	ItemList.Period,
+		|	ItemList.StoreSender,
+		|	ItemList.StoreReceiver,
+		|	ItemList.ItemKey,
+		|	ItemList.PurchaseOrder,
+		|	ItemList.Order";
 EndFunction
 		
 Function R4035B_IncomingStocks_Exists()

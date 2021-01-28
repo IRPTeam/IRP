@@ -1395,5 +1395,13 @@ Scenario: create a Purchase Order document
 		And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
 
-
+Scenario: checkbox Use serial lot number in the Item type Clothes
+	Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+	* Check box Use serial lot number
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Clothes'     |
+		And I select current line in "List" table
+		And I set checkbox "Use serial lot number"
+		And I click "Save and close" button	
 

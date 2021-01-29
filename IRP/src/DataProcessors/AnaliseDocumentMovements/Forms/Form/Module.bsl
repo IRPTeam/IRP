@@ -21,7 +21,7 @@ Procedure FillMovementsAtServer()
 	EndDo;
 	
 	For Each Document In Metadata.Documents Do
-		Ref = Documents.BankPayment.EmptyRef();
+		Ref = Documents[Document.Name].EmptyRef();
 		Try
 			ParametersStructure = Documents[Document.Name].GetInformationAboutMovements(Ref);
 		Except
@@ -29,10 +29,26 @@ Procedure FillMovementsAtServer()
 			Continue;
 		EndTry;
 		
-		QueryText = StrConcat(ParametersStructure.QueryTextsMasterTables, ";");
+		TotalQueryArray = ParametersStructure.QueryTextsSecondaryTables;
+		For Each El In ParametersStructure.QueryTextsMasterTables Do
+			TotalQueryArray.Add(El);
+		EndDo;
 		
-		QueryBuilder = New QueryBuilder(QueryText);
-//		QueryBuilder.
+		QuerySchema = New QuerySchema;
+		QuerySchema.SetQueryText(StrConcat(TotalQueryArray, Chars.LF+ Chars.LF + ";" + Chars.LF + Chars.LF));
+		For Each Batch In QuerySchema.QueryBatch Do
+			FindRows = Object.Info.FindRows(New Structure("Document, Register", Document.Name, Batch.PlacementTable));
+			If Not FindRows.Count() Then
+				Continue;
+			EndIf;
+			Conditions = New Array;
+			For Each Filter In Batch.Operators[0].Filter Do
+				Conditions.Add(Filter);
+			EndDo;
+			FindRows[0].Conditions = StrConcat(Conditions, Chars.LF);
+			FindRows[0].Query = Batch.GetQueryText();
+		EndDo;
+	
 	EndDo;
 EndProcedure
 

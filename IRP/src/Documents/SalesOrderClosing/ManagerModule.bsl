@@ -80,7 +80,6 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParamenters(Ref)
-	
 	StrParams = New Structure();
 	StrParams.Insert("SalesOrder", Ref.SalesOrder);
 	StrParams.Insert("Period", Ref.Date);

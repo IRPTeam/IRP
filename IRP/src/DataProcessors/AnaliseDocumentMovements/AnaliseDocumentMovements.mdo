@@ -73,6 +73,7 @@
         <types>String</types>
         <stringQualifiers/>
       </type>
+      <multiLine>true</multiLine>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
     </attributes>
@@ -86,6 +87,7 @@
         <types>String</types>
         <stringQualifiers/>
       </type>
+      <multiLine>true</multiLine>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
     </attributes>
@@ -99,6 +101,7 @@
         <types>String</types>
         <stringQualifiers/>
       </type>
+      <multiLine>true</multiLine>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
     </attributes>

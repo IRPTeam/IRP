@@ -30,6 +30,11 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 				+ "].ProcurementMethod", "Object.ItemList");
 			Cancel = True;
 		EndIf;
+		If Row.Cancel And Row.CancelReason.IsEmpty() Then
+			CommonFunctionsClientServer.ShowUsersMessage(R().Error_093, "Object.ItemList[" + RowIndex
+				+ "].CancelReason", "Object.ItemList");
+			Cancel = True;
+		EndIf;
 	EndDo;
 EndProcedure
 

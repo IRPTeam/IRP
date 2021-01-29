@@ -11,7 +11,7 @@
   <name>R2014T_CanceledSalesOrders</name>
   <synonym>
     <key>en</key>
-    <value>R2014 Canceled purchase orders</value>
+    <value>R2014 Canceled sales orders</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <registerType>Turnovers</registerType>

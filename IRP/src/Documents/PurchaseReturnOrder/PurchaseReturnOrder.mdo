@@ -232,7 +232,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <choiceParameters>
-      <name>Filter.Customer</name>
+      <name>Filter.Vendor</name>
       <value xsi:type="core:BooleanValue">
         <value>true</value>
       </value>

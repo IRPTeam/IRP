@@ -6,6 +6,7 @@
     <value>Service</value>
   </synonym>
   <content>DocumentJournal.AllDocuments</content>
+  <content>DataProcessor.AnaliseDocumentMovements</content>
   <subsystems>Catalogs</subsystems>
   <subsystems>Documents</subsystems>
 </mdclass:Subsystem>

@@ -1,0 +1,32 @@
+#language: en
+@tree
+@Positive
+@Movements
+
+Feature: check #DocumentSynonym#
+
+
+
+Background:
+	Given I launch TestClient opening script or connect the existing one
+
+
+	
+Scenario: _040#FeatureNumber# preparation (#DocumentSynonym#)
+	When set True value to the constant
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
+
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings #DocumentSynonym#
+		When filling in Tax settings for company
+	* Load #DocumentSynonym# document
+		When Create document #DocumentSynonym# (check movements)
+		And I execute 1C:Enterprise script at server
+ 			| "Documents.#DocumentName#.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |

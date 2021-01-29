@@ -969,6 +969,7 @@
     <commandParameterType>
       <types>DocumentRef.SalesOrder</types>
     </commandParameterType>
+    <modifiesData>true</modifiesData>
     <representation>Auto</representation>
     <shortcut></shortcut>
   </commands>

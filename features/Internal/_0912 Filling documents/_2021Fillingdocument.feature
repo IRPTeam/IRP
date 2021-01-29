@@ -64,6 +64,7 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create information register TaxSettings (Sales tax)
 		When Create information register Taxes records (Sales tax)
 		When add sales tax settings 
+		When Create catalog CancelReturnReasons objects
 	* For the test of completing the purchase documents
 		* Preparation: creating a vendor partner term for NDB
 			Given I open hyperlink "e1cib/list/Catalog.Agreements"
@@ -657,6 +658,7 @@ Scenario: _0154101 check filling in and refilling Sales order
 				Then the form attribute named "ItemListTotalTaxAmount" became equal to "210,30"
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 980,30"
 				And I click "Post" button
+				And I delete "$$NumberSalesOrder0154101$$" variable
 				And I save the value of "Number" field as "$$NumberSalesOrder0154101$$"					
 		* Cancel second line (Dress/L Green) and check totals
 			And I go to line in "ItemList" table
@@ -664,11 +666,17 @@ Scenario: _0154101 check filling in and refilling Sales order
 				| 'Dress'    | 'L/Green'  |
 			And I activate "Cancel" field in "ItemList" table
 			And I set "Cancel" checkbox in "ItemList" table
+			And I click choice button of "Cancel reason" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'     |
+				| 'not available'    |
+			And I select current line in "List" table			
 			And I finish line editing in "ItemList" table
 			And I click "Post" button
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "1 220,00"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "105,80"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 325,80"
+			And Delay 2
 		* Add new line with procurement Purchase and check totals
 			And in the table "ItemList" I click "Add" button
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -723,6 +731,7 @@ Scenario: _0154101 check filling in and refilling Sales order
 			And "List" table contains lines
 				| 'Number'                     | 'Σ'        |
 				| '$$NumberSalesOrder0154101$$'| '1 980,30' |
+			And Delay 2
 		* Unchecking the cancellation checkbox and check totals	
 			And I go to line in "List" table
 				| 'Number'                     | 'Σ'        |

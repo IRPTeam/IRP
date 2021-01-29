@@ -71,14 +71,7 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create document PurchaseInvoice objects (use serial lot number)
 
 Scenario: _092001 checkbox Use serial lot number in the Item type
-	Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
-	* Check box Use serial lot number
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Clothes'     |
-		And I select current line in "List" table
-		And I set checkbox "Use serial lot number"
-		And I click "Save and close" button	
+	When checkbox Use serial lot number in the Item type Clothes
 	* Check saving
 		And I go to line in "List" table
 			| 'Description' |

@@ -787,10 +787,6 @@
 			<name>InteractiveDelete</name>
 			<value>false</value>
 		</right>
-		<right>
-			<name>InteractiveDeleteMarked</name>
-			<value>false</value>
-		</right>
 	</object>
 	<object>
 		<name>Catalog.DataAreas</name>
@@ -1299,6 +1295,13 @@
 	</object>
 	<object>
 		<name>Document.PlannedReceiptReservation</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.CancelReturnReasons</name>
 		<right>
 			<name>InteractiveDelete</name>
 			<value>false</value>

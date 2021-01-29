@@ -260,6 +260,7 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 		|	ItemList.RevenueType,
 		|	ItemList.DontCalculateRow,
 		|	ItemList.CancelReason,
+		|	True AS Cancel,
 		|	SalesOrdersInvoiceClosing.QuantityBalance AS QuantityInBaseUnit,
 		|	SalesOrdersInvoiceClosing.QuantityBalance AS Quantity,
 		|	SalesOrdersInvoiceClosing.AmountBalance AS TotalAmount,

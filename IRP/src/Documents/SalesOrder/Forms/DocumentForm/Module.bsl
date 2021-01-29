@@ -75,6 +75,7 @@ EndProcedure
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocSalesOrderServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	ThisObject.ClosingOrder = DocSalesOrderServer.GetLastSalesOrderClosingBySalesOrder(Object.Ref);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
@@ -86,6 +87,10 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form) Export
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
+	If Not Form.ClosingOrder.IsEmpty() Then
+		Form.ReadOnly = True;
+	EndIf;
+	Form.Items.GroupHead.Visible = Not Form.ClosingOrder.IsEmpty();
 EndProcedure
 
 &AtServer

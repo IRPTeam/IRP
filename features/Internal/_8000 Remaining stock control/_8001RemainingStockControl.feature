@@ -1620,7 +1620,7 @@ Scenario:_800042 check remaining stock control when unpost/change Physical inven
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
 			| 'Number' |
-			| '2'   |
+			| '25'   |
 		And I click the button named "FormPost"
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table

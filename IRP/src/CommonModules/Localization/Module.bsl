@@ -319,9 +319,10 @@ Function Strings(Lang) Export
 	// %7 - pcs
 	Strings.Insert("Error_090", NStr("en = '[%1 %2] %3 remaining: %4 %7. Required: %5 %7. Lacking: %6 %7.'", Lang));
 	
-	Strings.Insert("Error_091", NStr("en = 'You have to be Administrator for create users.'", Lang));
+	Strings.Insert("Error_091", NStr("en = 'Only Administrator can create users.'", Lang));
 	
-	Strings.Insert("Error_092", NStr("en = 'You can not use %1 role in SaaS mode'", Lang));
+	Strings.Insert("Error_092", NStr("en = 'Can not use %1 role in SaaS mode'", Lang));
+	Strings.Insert("Error_093", NStr("en = 'Cancel reason has to be filled if string was canceled'", Lang));
 	#EndRegion
 	
 	#Region InfoMessages
@@ -370,10 +371,12 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("InfoMessage_019", NStr("en = 'Data lock reasons:'", Lang));
 	
-  Strings.Insert("InfoMessage_020", NStr("en = 'Created document: %1'", Lang));
+  	Strings.Insert("InfoMessage_020", NStr("en = 'Created document: %1'", Lang));
   
-  //%1 - 42
-  Strings.Insert("InfoMessage_021", NStr("en = 'Can not unlock attributes, this is element used %1 times, ex.:'", Lang));
+  	// %1 - 42
+  	Strings.Insert("InfoMessage_021", NStr("en = 'Can not unlock attributes, this is element used %1 times, ex.:'", Lang));
+  	// %1 - 
+  	Strings.Insert("InfoMessage_022", NStr("en = 'This order is closed by %1'", Lang));
 
 	#EndRegion
 	

@@ -253,8 +253,12 @@
   <commonModules>CommonModule.DocInventoryTransferServer</commonModules>
   <commonModules>CommonModule.DocInvoiceMatchClient</commonModules>
   <commonModules>CommonModule.DocInvoiceMatchServer</commonModules>
+  <commonModules>CommonModule.DocItemStockAdjustmentClient</commonModules>
+  <commonModules>CommonModule.DocItemStockAdjustmentServer</commonModules>
   <commonModules>CommonModule.DocLabelingClient</commonModules>
   <commonModules>CommonModule.DocLabelingServer</commonModules>
+  <commonModules>CommonModule.DocManualRegisterEntryClient</commonModules>
+  <commonModules>CommonModule.DocManualRegisterEntryServer</commonModules>
   <commonModules>CommonModule.DocOpeningEntryClient</commonModules>
   <commonModules>CommonModule.DocOpeningEntryServer</commonModules>
   <commonModules>CommonModule.DocOutgoingPaymentOrderClient</commonModules>
@@ -317,6 +321,7 @@
   <commonModules>CommonModule.HardwareServer</commonModules>
   <commonModules>CommonModule.IDInfoClient</commonModules>
   <commonModules>CommonModule.IDInfoServer</commonModules>
+  <commonModules>CommonModule.IncomingStocksServer</commonModules>
   <commonModules>CommonModule.IntegrationClientServer</commonModules>
   <commonModules>CommonModule.IntegrationServer</commonModules>
   <commonModules>CommonModule.IntegrationServerPrivileged</commonModules>
@@ -338,6 +343,7 @@
   <commonModules>CommonModule.ObjectStatusesServer</commonModules>
   <commonModules>CommonModule.OffersClient</commonModules>
   <commonModules>CommonModule.OffersServer</commonModules>
+  <commonModules>CommonModule.OffsetOfPartnersServer</commonModules>
   <commonModules>CommonModule.PickupItemsClient</commonModules>
   <commonModules>CommonModule.PictureViewerClient</commonModules>
   <commonModules>CommonModule.PictureViewerClientServer</commonModules>
@@ -355,6 +361,7 @@
   <commonModules>CommonModule.TaxesClient</commonModules>
   <commonModules>CommonModule.TaxesClientServer</commonModules>
   <commonModules>CommonModule.TaxesServer</commonModules>
+  <commonModules>CommonModule.TempFunctions</commonModules>
   <commonModules>CommonModule.UndopostingServer</commonModules>
   <commonModules>CommonModule.UniqueID</commonModules>
   <commonModules>CommonModule.UniqueIDReuse</commonModules>
@@ -640,6 +647,7 @@
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
   <reports>Report.AllRegistersMovement</reports>
+  <reports>Report.ItemsInfo</reports>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
   <dataProcessors>DataProcessor.FirstStartSettings</dataProcessors>
   <dataProcessors>DataProcessor.PointOfSale</dataProcessors>
@@ -648,6 +656,7 @@
   <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>
   <dataProcessors>DataProcessor.Procurement</dataProcessors>
   <dataProcessors>DataProcessor.SalesOrderStatusReport</dataProcessors>
+  <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

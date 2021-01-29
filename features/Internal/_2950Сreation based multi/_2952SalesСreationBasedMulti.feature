@@ -21,6 +21,7 @@ Scenario: _0295200 preparation (creation mechanism based on for sales documents)
 	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
+		When Create catalog CancelReturnReasons objects
 		When Create catalog Companies objects (own Second company)
 		When Create catalog CashAccounts objects
 		When Create catalog Agreements objects
@@ -776,7 +777,13 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "No reserve" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I change "Cancel" checkbox in "ItemList" table			
+			And I change "Cancel" checkbox in "ItemList" table	
+			And I activate "Cancel reason" field in "ItemList" table
+			And I click choice button of "Cancel reason" attribute in "ItemList" table	
+			And I go to line in "List" table
+					| 'Description'     |
+					| 'not available' |
+			And I select current line in "List" table		
 			And I move to the next attribute
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -870,6 +877,12 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "No reserve" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I change "Cancel" checkbox in "ItemList" table
+			And I activate "Cancel reason" field in "ItemList" table
+			And I click choice button of "Cancel reason" attribute in "ItemList" table	
+			And I go to line in "List" table
+					| 'Description'     |
+					| 'not available' |
+			And I select current line in "List" table
 			And I move to the next attribute
 			And I input "8,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table

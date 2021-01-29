@@ -729,6 +729,9 @@
   <content>
     <mdObject>ChartOfCharacteristicTypes.IDInfoTypes</mdObject>
   </content>
+  <content>
+    <mdObject>Document.PlannedReceiptReservation</mdObject>
+  </content>
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

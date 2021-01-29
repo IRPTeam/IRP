@@ -20,7 +20,7 @@
     <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
     <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
     <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_ItemStockAdjustment</value>
+      <value>Catalog.AddAttributeAndPropertySets.Document_PlannedReceiptReservation</value>
     </typesFilterValue>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
@@ -32,7 +32,7 @@
     <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
     <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
     <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_ItemStockAdjustment</value>
+      <value>Catalog.AddAttributeAndPropertySets.Document_PlannedReceiptReservation</value>
     </typesFilterValue>
     <characteristicValues>Document.PlannedReceiptReservation.TabularSection.AddAttributes</characteristicValues>
     <objectField>Document.PlannedReceiptReservation.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
@@ -65,22 +65,6 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="3644f7f9-0853-4387-986c-15761a781257">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store (incoming)</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>

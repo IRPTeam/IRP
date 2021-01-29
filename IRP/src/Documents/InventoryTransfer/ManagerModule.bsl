@@ -549,10 +549,10 @@ Function R4011B_FreeStocks()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
 		|	ItemList.StoreSender AS Store,
 		|	ItemList.ItemKey,
-		|	ItemList.Quantity,
-		|	ItemList.Period
+		|	ItemList.Quantity
 		|INTO R4011B_FreeStocks
 		|FROM
 		|	ItemList AS ItemList
@@ -563,10 +563,10 @@ Function R4011B_FreeStocks()
 		|
 		|SELECT
 		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
 		|	ItemList.StoreReceiver,
 		|	ItemLIst.ItemKey,
-		|	ItemList.Quantity,
-		|	ItemList.Period
+		|	ItemList.Quantity
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE

@@ -36,10 +36,6 @@ EndProcedure
 
 #EndRegion
 
-Procedure StoreOnChange(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-EndProcedure
-
 Procedure DateOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure

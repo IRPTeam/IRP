@@ -24,7 +24,7 @@
 //  *RecordType
 //  *Period
 //  *IncomingStore
-//  *RequestedStore
+//  *RequesterStore
 //  *ItemKey
 //  *Order
 //  *Requester

@@ -115,7 +115,7 @@ Function R4036B_IncomingStocksRequested()
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Period,
-		|	ItemList.IncomingStore,
+		|	ItemList.RequesterStore AS IncomingStore,
 		|	ItemList.RequesterStore,
 		|	ItemList.ItemKey,
 		|	ItemList.IncomingDocument AS Order,

@@ -60,12 +60,6 @@ EndProcedure
 
 #EndRegion
 
-
-&AtClient
-Procedure StoreOnChange(Item)
-	DocPlannedReceiptReservationClient.StoreOnChange(Object, ThisObject, Item);
-EndProcedure
-
 &AtClient
 Procedure DateOnChange(Item)
 	DocPlannedReceiptReservationClient.DateOnChange(Object, ThisObject, Item);

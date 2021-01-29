@@ -370,13 +370,6 @@
   <commonModules>CommonModule.UsersEvent</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.TempFunctions</commonModules>
-  <commonModules>CommonModule.OffsetOfPartnersServer</commonModules>
-  <commonModules>CommonModule.DocItemStockAdjustmentClient</commonModules>
-  <commonModules>CommonModule.DocItemStockAdjustmentServer</commonModules>
-  <commonModules>CommonModule.DocManualRegisterEntryClient</commonModules>
-  <commonModules>CommonModule.DocManualRegisterEntryServer</commonModules>
-  <commonModules>CommonModule.IncomingStocksServer</commonModules>
   <commonModules>CommonModule.DocPlannedReceiptReservationClient</commonModules>
   <commonModules>CommonModule.DocPlannedReceiptReservationServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>

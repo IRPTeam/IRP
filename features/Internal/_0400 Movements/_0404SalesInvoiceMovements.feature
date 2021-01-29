@@ -946,7 +946,7 @@ Scenario: _0401383 check Sales invoice movements by the Register  "R4011 Free st
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
+		Then "ResultTable" spreadsheet document is equal
 			| 'Sales invoice 3 dated 28.01.2021 18:50:57' | ''            | ''                    | ''          | ''           | ''         |
 			| 'Document registrations records'            | ''            | ''                    | ''          | ''           | ''         |
 			| 'Register  "R4011 Free stocks"'             | ''            | ''                    | ''          | ''           | ''         |

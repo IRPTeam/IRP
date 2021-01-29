@@ -2,6 +2,7 @@
 @tree
 @Positive
 @Movements
+@MovementsSalesInvoice
 
 Feature: check Sales invoice movements
 

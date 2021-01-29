@@ -2,6 +2,7 @@
 @tree
 @Positive
 @Movements
+@MovementsItemStockAdjustment
 
 Feature: check item stock adjustment movements
 
@@ -70,7 +71,7 @@ Scenario: _040002 check item stock adjustment movements by the Register  "R4010 
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R4010 Actual stocks" (Receipt, Expense)
+	* Check movements by the Register  "R4010 Actual stocks" 
 		And I click "Registrations report" button
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -88,29 +89,6 @@ Scenario: _040002 check item stock adjustment movements by the Register  "R4010 
 			| ''                                                  | 'Expense'     | '27.01.2021 19:04:15' | '16'        | 'Store 02'   | 'S/Yellow'  |
 		And I close all client application windows
 
-Scenario: _040003 check item stock adjustment movements by the Register  "R4010 Actual stocks"
-	* Select item stock adjustment
-		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
-	* Check movements by the Register  "R4010 Actual stocks" (Receipt, Expense)
-		And I click "Registrations report" button
-		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Item stock adjustment 1 dated 27.01.2021 19:04:15' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'                    | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4010 Actual stocks"'                   | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                                  | 'Receipt'     | '27.01.2021 19:04:15' | '5'         | 'Store 02'   | '36/Yellow' |
-			| ''                                                  | 'Receipt'     | '27.01.2021 19:04:15' | '10'        | 'Store 02'   | '37/18SD'   |
-			| ''                                                  | 'Receipt'     | '27.01.2021 19:04:15' | '16'        | 'Store 02'   | 'XS/Blue'   |
-			| ''                                                  | 'Expense'     | '27.01.2021 19:04:15' | '5'         | 'Store 02'   | '38/Yellow' |
-			| ''                                                  | 'Expense'     | '27.01.2021 19:04:15' | '10'        | 'Store 02'   | '38/18SD'   |
-			| ''                                                  | 'Expense'     | '27.01.2021 19:04:15' | '16'        | 'Store 02'   | 'S/Yellow'  |
-		And I close all client application windows
 		
 Scenario: _040004 check item stock adjustment movements by the Register  "R4050 Stock inventory"
 	* Select item stock adjustment
@@ -118,7 +96,7 @@ Scenario: _040004 check item stock adjustment movements by the Register  "R4050 
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R4050 Stock inventory" (Receipt, Expense)
+	* Check movements by the Register  "R4050 Stock inventory" 
 		And I click "Registrations report" button
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -142,7 +120,7 @@ Scenario: _040005 check item stock adjustment movements by the Register  "R4011 
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R4050 Stock inventory" (Receipt, Expense)
+	* Check movements by the Register  "R4050 Stock inventory" 
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button

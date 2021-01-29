@@ -2,6 +2,8 @@
 @tree
 @Positive
 @Movements
+@MovementsSalesOrder
+
 
 Feature: check Sales order movements
 
@@ -81,7 +83,7 @@ Scenario: _040149 check Sales order movements by the Register  "R2010 Sales orde
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R2010 Sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2010 Sales orders" 
 		And I click "Registrations report" button
 		And I select "R2010 Sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -115,7 +117,7 @@ Scenario: _040150 check Sales order movements by the Register  "R2014 Canceled s
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R2014 Canceled sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2014 Canceled sales orders" 
 		And I click "Registrations report" button
 		And I select "R2014 Canceled sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -138,7 +140,7 @@ Scenario: _040150 check Sales order movements by the Register  "R2014 Canceled s
 // 		And I go to line in "List" table
 // 			| 'Number'  |
 // 			| '1' |
-// 	* Check movements by the Register  "R4013 Stock Reservation planning" (Receipt, Expense)
+// 	* Check movements by the Register  "R4013 Stock Reservation planning" 
 // 		And I click "Registrations report" button
 // 		And I select "R4013 Stock Reservation planning" exact value from "Register" drop-down list
 // 		And I click "Generate report" button
@@ -155,7 +157,7 @@ Scenario: _040152 check Sales order movements by the Register  "R2011 Shipment o
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R2011 Shipment of sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2011 Shipment of sales orders" 
 		And I click "Registrations report" button
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -177,7 +179,7 @@ Scenario: _040153 check Sales order movements by the Register  "R4011 Free stock
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R4011 Free stocks" (Receipt, Expense)
+	* Check movements by the Register  "R4011 Free stocks" 
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -197,7 +199,7 @@ Scenario: _040154 check Sales order movements by the Register  "R4012 Stock Rese
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R4012 Stock Reservation" (Receipt, Expense)
+	* Check movements by the Register  "R4012 Stock Reservation" 
 		And I click "Registrations report" button
 		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -217,7 +219,7 @@ Scenario: _040155 check Sales order movements by the Register  "R2013 Procuremen
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R2013 Procurement of sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2013 Procurement of sales orders" 
 		And I click "Registrations report" button
 		And I select "R2013 Procurement of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -237,7 +239,7 @@ Scenario: _040156 check Sales order movements by the Register  "R4034 Scheduled 
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R4034 Scheduled goods shipments" (Receipt, Expense)
+	* Check movements by the Register  "R4034 Scheduled goods shipments" 
 		And I click "Registrations report" button
 		And I select "R4034 Scheduled goods shipments" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -256,7 +258,7 @@ Scenario: _040157 check Sales order movements by the Register  "R2012 Invoice cl
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R2012 Invoice closing of sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2012 Invoice closing of sales orders" 
 		And I click "Registrations report" button
 		And I select "R2012 Invoice closing of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -282,7 +284,7 @@ Scenario: _040157 check Sales order movements by the Register  "R2012 Invoice cl
 		And I go to line in "List" table
 			| 'Number'  |
 			| '2' |
-	* Check movements by the Register  "R2010 Sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2010 Sales orders" 
 		And I click "Registrations report" button
 		And I select "R2010 Sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -319,7 +321,7 @@ Scenario: _0401502 check Sales order movements by the Register  "R2014 Canceled 
 		And I go to line in "List" table
 			| 'Number'  |
 			| '2' |
-	* Check movements by the Register  "R2014 Canceled sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2014 Canceled sales orders" 
 		And I click "Registrations report" button
 		And I select "R2014 Canceled sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -344,7 +346,7 @@ Scenario: _0401502 check Sales order movements by the Register  "R2014 Canceled 
 // 		And I go to line in "List" table
 // 			| 'Number'  |
 // 			| '2' |
-// 	* Check movements by the Register  "R4013 Stock Reservation planning" (Receipt, Expense)
+// 	* Check movements by the Register  "R4013 Stock Reservation planning" 
 // 		And I click "Registrations report" button
 // 		And I select "R4013 Stock Reservation planning" exact value from "Register" drop-down list
 // 		And I click "Generate report" button
@@ -361,7 +363,7 @@ Scenario: _0401522 check Sales order movements by the Register  "R2011 Shipment 
 		And I go to line in "List" table
 			| 'Number'  |
 			| '2' |
-	* Check movements by the Register  "R2011 Shipment of sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2011 Shipment of sales orders" 
 		And I click "Registrations report" button
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -383,7 +385,7 @@ Scenario: _0401532 check Sales order movements by the Register  "R4011 Free stoc
 		And I go to line in "List" table
 			| 'Number'  |
 			| '2' |
-	* Check movements by the Register  "R4011 Free stocks" (Receipt, Expense)
+	* Check movements by the Register  "R4011 Free stocks" 
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -403,7 +405,7 @@ Scenario: _0401542 check Sales order movements by the Register  "R4012 Stock Res
 		And I go to line in "List" table
 			| 'Number'  |
 			| '2' |
-	* Check movements by the Register  "R4012 Stock Reservation" (Receipt, Expense)
+	* Check movements by the Register  "R4012 Stock Reservation" 
 		And I click "Registrations report" button
 		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -423,7 +425,7 @@ Scenario: _0401552 check Sales order movements by the Register  "R2013 Procureme
 		And I go to line in "List" table
 			| 'Number'  |
 			| '2' |
-	* Check movements by the Register  "R2013 Procurement of sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2013 Procurement of sales orders" 
 		And I click "Registrations report" button
 		And I select "R2013 Procurement of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -444,7 +446,7 @@ Scenario: _0401562 check Sales order movements by the Register  "R4034 Scheduled
 		And I go to line in "List" table
 			| 'Number'  |
 			| '2' |
-	* Check movements by the Register  "R4034 Scheduled goods shipments" (Receipt, Expense)
+	* Check movements by the Register  "R4034 Scheduled goods shipments" 
 		And I click "Registrations report" button
 		And I select "R4034 Scheduled goods shipments" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -458,7 +460,7 @@ Scenario: _0401572 check Sales order movements by the Register  "R2012 Invoice c
 		And I go to line in "List" table
 			| 'Number'  |
 			| '2' |
-	* Check movements by the Register  "R2012 Invoice closing of sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2012 Invoice closing of sales orders" 
 		And I click "Registrations report" button
 		And I select "R2012 Invoice closing of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -482,7 +484,7 @@ Scenario: _0401572 check Sales order movements by the Register  "R2012 Invoice c
 		And I go to line in "List" table
 			| 'Number'  |
 			| '3' |
-	* Check movements by the Register  "R2010 Sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2010 Sales orders" 
 		And I click "Registrations report" button
 		And I select "R2010 Sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -517,7 +519,7 @@ Scenario: _0401503 check Sales order movements by the Register  "R2014 Canceled 
 		And I go to line in "List" table
 			| 'Number'  |
 			| '3' |
-	* Check movements by the Register  "R2014 Canceled sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2014 Canceled sales orders" 
 		And I click "Registrations report" button
 		And I select "R2014 Canceled sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -542,7 +544,7 @@ Scenario: _0401503 check Sales order movements by the Register  "R2014 Canceled 
 // 		And I go to line in "List" table
 // 			| 'Number'  |
 // 			| '3' |
-// 	* Check movements by the Register  "R4013 Stock Reservation planning" (Receipt, Expense)
+// 	* Check movements by the Register  "R4013 Stock Reservation planning" 
 // 		And I click "Registrations report" button
 // 		And I select "R4013 Stock Reservation planning" exact value from "Register" drop-down list
 // 		And I click "Generate report" button
@@ -559,7 +561,7 @@ Scenario: _0401523 check Sales order movements by the Register  "R2011 Shipment 
 		And I go to line in "List" table
 			| 'Number'  |
 			| '3' |
-	* Check movements by the Register  "R2011 Shipment of sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2011 Shipment of sales orders" 
 		And I click "Registrations report" button
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -581,7 +583,7 @@ Scenario: _0401533 check Sales order movements by the Register  "R4011 Free stoc
 		And I go to line in "List" table
 			| 'Number'  |
 			| '3' |
-	* Check movements by the Register  "R4011 Free stocks" (Receipt, Expense)
+	* Check movements by the Register  "R4011 Free stocks" 
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -602,7 +604,7 @@ Scenario: _0401543 check Sales order movements by the Register  "R4012 Stock Res
 		And I go to line in "List" table
 			| 'Number'  |
 			| '3' |
-	* Check movements by the Register  "R4012 Stock Reservation" (Receipt, Expense)
+	* Check movements by the Register  "R4012 Stock Reservation" 
 		And I click "Registrations report" button
 		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -622,7 +624,7 @@ Scenario: _0401553 check Sales order movements by the Register  "R2013 Procureme
 		And I go to line in "List" table
 			| 'Number'  |
 			| '3' |
-	* Check movements by the Register  "R2013 Procurement of sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2013 Procurement of sales orders" 
 		And I click "Registrations report" button
 		And I select "R2013 Procurement of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -642,7 +644,7 @@ Scenario: _0401563 check Sales order movements by the Register  "R4034 Scheduled
 		And I go to line in "List" table
 			| 'Number'  |
 			| '3' |
-	* Check movements by the Register  "R4034 Scheduled goods shipments" (Receipt, Expense)
+	* Check movements by the Register  "R4034 Scheduled goods shipments" 
 		And I click "Registrations report" button
 		And I select "R4034 Scheduled goods shipments" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -656,7 +658,7 @@ Scenario: _0401573 check Sales order movements by the Register  "R2012 Invoice c
 		And I go to line in "List" table
 			| 'Number'  |
 			| '3' |
-	* Check movements by the Register  "R2012 Invoice closing of sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2012 Invoice closing of sales orders" 
 		And I click "Registrations report" button
 		And I select "R2012 Invoice closing of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button

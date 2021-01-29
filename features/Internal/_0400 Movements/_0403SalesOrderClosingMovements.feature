@@ -2,7 +2,7 @@
 @tree
 @Positive
 @Movements
-@SalesOrderClosingMovements
+@MovementsSalesOrderClosing
 
 Feature: check Sales order closing movements
 
@@ -85,7 +85,7 @@ Scenario: _040159 check Sales order closing movements by the Register  "R2010 Sa
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R2010 Sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2010 Sales orders" 
 		And I click "Registrations report" button
 		And I select "R2010 Sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -95,22 +95,22 @@ Scenario: _040159 check Sales order closing movements by the Register  "R2010 Sa
 			| 'Register  "R2010 Sales orders"'                  | ''                    | ''          | ''          | ''           | ''              | ''             | ''                             | ''         | ''                                        | ''         | ''                                     | ''                   | ''                     |
 			| ''                                                | 'Period'              | 'Resources' | ''          | ''           | ''              | 'Dimensions'   | ''                             | ''         | ''                                        | ''         | ''                                     | ''                   | 'Attributes'           |
 			| ''                                                | ''                    | 'Quantity'  | 'Amount'    | 'Net amount' | 'Offers amount' | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Order'                                   | 'Item key' | 'Row key'                              | 'Procurement method' | 'Deferred calculation' |
-			| ''                                                | '28.01.2021 14:46:50' | '-24'       | '-15 960'   | ''           | ''              | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'Purchase'           | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-24'       | '-15 960'   | ''           | ''              | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'Purchase'           | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-24'       | '-15 960'   | ''           | ''              | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'Purchase'           | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-24'       | '-2 732,35' | ''           | ''              | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'Purchase'           | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-10'       | '-3 325'    | ''           | ''              | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'No reserve'         | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-10'       | '-3 325'    | ''           | ''              | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'No reserve'         | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-10'       | '-3 325'    | ''           | ''              | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'No reserve'         | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-10'       | '-569,24'   | ''           | ''              | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'No reserve'         | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-494'      | ''           | ''              | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'Stock'              | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-494'      | ''           | ''              | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'Stock'              | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-494'      | ''           | ''              | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'Stock'              | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-95'       | ''           | ''              | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                   | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-95'       | ''           | ''              | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                   | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-95'       | ''           | ''              | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                   | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-84,57'    | ''           | ''              | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'Stock'              | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-16,26'    | ''           | ''              | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                   | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '-24'       | '-15 960'   | '-13 525,42' | ''              | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'Purchase'           | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '-24'       | '-15 960'   | '-13 525,42' | ''              | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'Purchase'           | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '-24'       | '-15 960'   | '-13 525,42' | ''              | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'Purchase'           | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '-24'       | '-2 732,35' | '-2 315,55'  | ''              | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'Purchase'           | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '-10'       | '-3 325'    | '-2 817,8'   | ''              | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'No reserve'         | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '-10'       | '-3 325'    | '-2 817,8'   | ''              | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'No reserve'         | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '-10'       | '-3 325'    | '-2 817,8'   | ''              | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'No reserve'         | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '-10'       | '-569,24'   | '-482,41'    | ''              | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'No reserve'         | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-494'      | '-418,64'    | ''              | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'Stock'              | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-494'      | '-418,64'    | ''              | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'Stock'              | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-494'      | '-418,64'    | ''              | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'Stock'              | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-95'       | '-80,51'     | ''              | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                   | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-95'       | '-80,51'     | ''              | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                   | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-95'       | '-80,51'     | ''              | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                   | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-84,57'    | '-71,67'     | ''              | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'Stock'              | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-16,26'    | '-13,78'     | ''              | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                   | 'No'                   |
 
 
 		And I close all client application windows
@@ -121,7 +121,7 @@ Scenario: _040160 check Sales order closing movements by the Register  "R2014 Ca
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R2014 Canceled sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2014 Canceled sales orders" 
 		And I click "Registrations report" button
 		And I select "R2014 Canceled sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -131,22 +131,22 @@ Scenario: _040160 check Sales order closing movements by the Register  "R2014 Ca
 			| 'Register  "R2014 Canceled sales orders"'         | ''                    | ''          | ''         | ''           | ''             | ''                             | ''         | ''                                        | ''         | ''                                     | ''              | ''                     |
 			| ''                                                | 'Period'              | 'Resources' | ''         | ''           | 'Dimensions'   | ''                             | ''         | ''                                        | ''         | ''                                     | ''              | 'Attributes'           |
 			| ''                                                | ''                    | 'Quantity'  | 'Amount'   | 'Net amount' | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Order'                                   | 'Item key' | 'Row key'                              | 'Cancel reason' | 'Deferred calculation' |
-			| ''                                                | '28.01.2021 14:46:50' | '24'        | '15 960'   | ''           | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '24'        | '15 960'   | ''           | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '24'        | '15 960'   | ''           | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '24'        | '2 732,35' | ''           | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '10'        | '3 325'    | ''           | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '10'        | '3 325'    | ''           | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '10'        | '3 325'    | ''           | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '10'        | '569,24'   | ''           | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '1'         | '494'      | ''           | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '1'         | '494'      | ''           | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '1'         | '494'      | ''           | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '1'         | '95'       | ''           | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '1'         | '95'       | ''           | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '1'         | '95'       | ''           | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '1'         | '84,57'    | ''           | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'not available' | 'No'                   |
-			| ''                                                | '28.01.2021 14:46:50' | '1'         | '16,26'    | ''           | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | 'not available' | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '24'        | '15 960'   | '13 525,42' | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'not available' | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '24'        | '15 960'   | '13 525,42' | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'not available' | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '24'        | '15 960'   | '13 525,42' | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'not available' | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '24'        | '2 732,35' | '2 315,55'  | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'not available' | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '10'        | '3 325'    | '2 817,8'   | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'not available' | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '10'        | '3 325'    | '2 817,8'   | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'not available' | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '10'        | '3 325'    | '2 817,8'   | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'not available' | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '10'        | '569,24'   | '482,41'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'not available' | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '1'         | '494'      | '418,64'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'not available' | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '1'         | '494'      | '418,64'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'not available' | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '1'         | '494'      | '418,64'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'not available' | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '1'         | '95'       | '80,51'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | 'not available' | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '1'         | '95'       | '80,51'     | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | 'not available' | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '1'         | '95'       | '80,51'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | 'not available' | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '1'         | '84,57'    | '71,67'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'not available' | 'No'                   |
+			| ''                                                | '28.01.2021 14:46:50' | '1'         | '16,26'    | '13,78'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | 'not available' | 'No'                   |
 
 
 
@@ -158,7 +158,7 @@ Scenario: _040160 check Sales order closing movements by the Register  "R2014 Ca
 // 		And I go to line in "List" table
 // 			| 'Number'  |
 // 			| '1' |
-// 	* Check movements by the Register  "R4013 Stock Reservation planning" (Receipt, Expense)
+// 	* Check movements by the Register  "R4013 Stock Reservation planning" 
 // 		And I click "Registrations report" button
 // 		And I select "R4013 Stock Reservation planning" exact value from "Register" drop-down list
 // 		And I click "Generate report" button
@@ -175,7 +175,7 @@ Scenario: _040162 check Sales order closing movements by the Register  "R2011 Sh
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R2011 Shipment of sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2011 Shipment of sales orders" 
 		And I click "Registrations report" button
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -197,7 +197,7 @@ Scenario: _040163 check Sales order closing movements by the Register  "R4011 Fr
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R4011 Free stocks" (Receipt, Expense)
+	* Check movements by the Register  "R4011 Free stocks" 
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -217,7 +217,7 @@ Scenario: _040164 check Sales order closing movements by the Register  "R4012 St
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R4012 Stock Reservation" (Receipt, Expense)
+	* Check movements by the Register  "R4012 Stock Reservation" 
 		And I click "Registrations report" button
 		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -237,7 +237,7 @@ Scenario: _040165 check Sales order closing movements by the Register  "R2013 Pr
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R2013 Procurement of sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2013 Procurement of sales orders" 
 		And I click "Registrations report" button
 		And I select "R2013 Procurement of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -256,7 +256,7 @@ Scenario: _040166 check Sales order closing movements by the Register  "R4034 Sc
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R4034 Scheduled goods shipments" (Receipt, Expense)
+	* Check movements by the Register  "R4034 Scheduled goods shipments" 
 		And I click "Registrations report" button
 		And I select "R4034 Scheduled goods shipments" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -277,7 +277,7 @@ Scenario: _040167 check Sales order closing movements by the Register  "R2012 In
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R2012 Invoice closing of sales orders" (Receipt, Expense)
+	* Check movements by the Register  "R2012 Invoice closing of sales orders" 
 		And I click "Registrations report" button
 		And I select "R2012 Invoice closing of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -287,9 +287,9 @@ Scenario: _040167 check Sales order closing movements by the Register  "R2012 In
 			| 'Register  "R2012 Invoice closing of sales orders"' | ''            | ''                    | ''          | ''        | ''           | ''             | ''                                        | ''         | ''         | ''                                     |
 			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | ''        | ''           | 'Dimensions'   | ''                                        | ''         | ''         | ''                                     |
 			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Amount'  | 'Net amount' | 'Company'      | 'Order'                                   | 'Currency' | 'Item key' | 'Row key'                              |
-			| ''                                                  | 'Receipt'     | '28.01.2021 14:46:50' | '-24'       | '-15 960' | ''           | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' |
-			| ''                                                  | 'Receipt'     | '28.01.2021 14:46:50' | '-10'       | '-3 325'  | ''           | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' |
-			| ''                                                  | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | '-494'    | ''           | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
-			| ''                                                  | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | '-95'     | ''           | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' |
+			| ''                                                  | 'Receipt'     | '28.01.2021 14:46:50' | '-24'       | '-15 960' | '-13 525,42' | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' |
+			| ''                                                  | 'Receipt'     | '28.01.2021 14:46:50' | '-10'       | '-3 325'  | '-2 817,8'   | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' |
+			| ''                                                  | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | '-494'    | '-418,64'    | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
+			| ''                                                  | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | '-95'     | '-80,51'     | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' |
 
 		And I close all client application windows

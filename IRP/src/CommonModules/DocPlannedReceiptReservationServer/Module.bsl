@@ -27,6 +27,7 @@ EndProcedure
 Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array;
 	AttributesArray.Add("Company");
+	AttributesArray.Add("Store");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Atr In AttributesArray Do
 		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title),

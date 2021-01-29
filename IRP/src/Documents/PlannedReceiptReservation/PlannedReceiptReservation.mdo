@@ -84,6 +84,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="a375c156-fcef-493f-b06f-c8ec9e599464">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store (incoming)</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="0be8cb62-393e-4b7b-9a55-10b477fa81fa">
     <name>DocumentForm</name>
     <synonym>

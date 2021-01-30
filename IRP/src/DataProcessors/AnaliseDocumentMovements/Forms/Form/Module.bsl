@@ -21,19 +21,15 @@ Procedure FillMovementsAtServer()
 	EndDo;
 	
 	For Each Document In Metadata.Documents Do
+
 		Ref = Documents[Document.Name].EmptyRef();
-		Try
-			ParametersStructure = Documents[Document.Name].GetInformationAboutMovements(Ref);
-		Except
-//			CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.DetailErrorDescription(ErrorInfo()));
-			Continue;
-		EndTry;
+		ParametersStructure = Documents[Document.Name].GetInformationAboutMovements(Ref);
 		
 		TotalQueryArray = ParametersStructure.QueryTextsSecondaryTables;
 		For Each El In ParametersStructure.QueryTextsMasterTables Do
 			TotalQueryArray.Add(El);
 		EndDo;
-		
+		TotalQueryArray.Add("SELECT NULL");
 		QuerySchema = New QuerySchema;
 		QuerySchema.SetQueryText(StrConcat(TotalQueryArray, Chars.LF+ Chars.LF + ";" + Chars.LF + Chars.LF));
 		For Each Batch In QuerySchema.QueryBatch Do

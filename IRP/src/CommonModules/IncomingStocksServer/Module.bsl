@@ -105,18 +105,44 @@ Procedure ClosureIncomingStocks(Parameters) Export
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 	|	ClosureIncoming.Period,
 	|	ClosureIncoming.IncomingStore AS Store,
 	|	ClosureIncoming.ItemKey,
 	|	ClosureIncoming.Order,
 	|	ClosureIncoming.RealIncomingQuantity - ClosureIncoming.RequestedQuantity AS Quantity
-	|INTO IncomingStocks
+	|INTO UsedIncomingStocks
 	|FROM
 	|	ClosureIncoming AS ClosureIncoming
 	|WHERE
-	|	ClosureIncoming.Requester IS NULL
+	|	ClosureIncoming.Requester.Ref IS NULL
 	|	AND ClosureIncoming.RealIncomingQuantity - ClosureIncoming.RequestedQuantity > 0
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	UsedIncomingStocks.Period,
+	|	UsedIncomingStocks.Store,
+	|	UsedIncomingStocks.ItemKey,
+	|	UsedIncomingStocks.Order,
+	|	CASE
+	|		WHEN IncomingStocksBalance.QuantityBalance < UsedIncomingStocks.Quantity
+	|			THEN IncomingStocksBalance.QuantityBalance
+	|		ELSE UsedIncomingStocks.Quantity
+	|	END AS Quantity
+	|INTO IncomingStocks
+	|FROM
+	|	UsedIncomingStocks AS UsedIncomingStocks
+	|		INNER JOIN AccumulationRegister.R4035B_IncomingStocks.Balance(, (Store, ItemKey, Order) IN
+	|			(SELECT
+	|				tmp.Store,
+	|				tmp.ItemKey,
+	|				tmp.Order
+	|			FROM
+	|				UsedIncomingStocks AS tmp)) AS IncomingStocksBalance
+	|		ON UsedIncomingStocks.Store = IncomingStocksBalance.Store
+	|		AND UsedIncomingStocks.ItemKey = IncomingStocksBalance.ItemKey
+	|		AND UsedIncomingStocks.Order = IncomingStocksBalance.Order
 	|
 	|UNION ALL
 	|

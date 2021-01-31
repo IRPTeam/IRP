@@ -21,9 +21,14 @@ Procedure FillMovementsAtServer()
 	EndDo;
 	
 	For Each Document In Metadata.Documents Do
-
 		Ref = Documents[Document.Name].EmptyRef();
 		ParametersStructure = Documents[Document.Name].GetInformationAboutMovements(Ref);
+		
+		ParametersInfo = New Array;
+		For Each Param In ParametersStructure.QueryParamenters Do
+			ParametersInfo.Add(Param.Key + ": " + TypeOf(Param.Value));
+		EndDo;
+		ParametersInfo = StrConcat(ParametersInfo, Chars.LF);
 		
 		TotalQueryArray = ParametersStructure.QueryTextsSecondaryTables;
 		For Each El In ParametersStructure.QueryTextsMasterTables Do
@@ -38,11 +43,29 @@ Procedure FillMovementsAtServer()
 				Continue;
 			EndIf;
 			Conditions = New Array;
-			For Each Filter In Batch.Operators[0].Filter Do
-				Conditions.Add(Filter);
+			For Index = 0 To Batch.Operators.Count() - 1 Do
+				Operator = Batch.Operators[Index];
+				RecordType = "";
+				
+				For Each SelectedField In Operator.SelectedFields Do
+					If Lower(SelectedField) = Lower("VALUE(AccumulationRecordType.Receipt)") Then
+						FindRows[0].Receipt = True;
+						RecordType = "Receipt";
+					ElsIf 	Lower(SelectedField) = Lower("VALUE(AccumulationRecordType.Expense)") Then
+						FindRows[0].Expense = True;
+						RecordType = "Expense";
+					EndIf;
+				EndDo;
+				If Batch.Operators.Count() > 1 Then
+					Conditions.Add("Query " + ?(IsBlankString(RecordType), Index, RecordType) + ":");
+				EndIf;
+				For Each Filter In Operator.Filter Do
+					Conditions.Add(Filter);
+				EndDo;
 			EndDo;
-			FindRows[0].Conditions = StrConcat(Conditions, Chars.LF);
+			FindRows[0].Conditions = StrReplace(StrConcat(Conditions, Chars.LF), "QueryTable.", "");
 			FindRows[0].Query = Batch.GetQueryText();
+			FindRows[0].Parameters = ParametersInfo;
 		EndDo;
 	
 	EndDo;

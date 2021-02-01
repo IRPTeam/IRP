@@ -361,10 +361,16 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	If Not PostingServer.QueryTableIsExists("IncomingStocksRequested", Parameters) Then
 		Query.Text = Query.Text + 
 		"SELECT 
+		|	UNDEFINED AS RecordType,
+		|	UNDEFINED AS Period,
+		|	UNDEFINED AS IncomingStore,
 		|	UNDEFINED AS RequesterStore,
-		|	UNDEFINED AS Requester
+		|	UNDEFINED AS ItemKey,
+		|	UNDEFINED AS Order,
+		|	UNDEFINED AS Requester,
+		|	UNDEFINED AS Quantity
 		|INTO IncomingStocksRequested 
-		|WHERE FALSE; ";
+		|WHERE FALSE; ";		
 	EndIf;	
 	If Not PostingServer.QueryTableIsExists("FreeStocks", Parameters) Then
 		Query.Text = Query.Text + 

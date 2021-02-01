@@ -496,7 +496,7 @@ $OScriptLib = "%env.OScript%"
 
 $LoginTo1C = "%env.LoginTo1C%"
 $PassTo1C = "%env.PassTo1C%"
-$PathTo1CPlatform = "%env.PathTo1CPlatform%"
+$PathTo1CPlatform = %env.PathTo1CPlatform% # it has to be into quotas. Path to 1cv8.exe
 
 $StopOnError = "%env.StopOnError%" #true or false
 $CloseVA = "%env.CloseVA%" # true or false

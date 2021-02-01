@@ -134,7 +134,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 #Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
-	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref, StatusInfo));
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion
 	
@@ -250,9 +250,19 @@ EndProcedure
 
 #Region NewRegistersPosting
 
-Function GetAdditionalQueryParamenters(Ref, StatusInfo)	
+Function GetInformationAboutMovements(Ref) Export
+	Str = New Structure;
+	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
+	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
+	Return Str;
+EndFunction
+
+Function GetAdditionalQueryParamenters(Ref)	
 	StrParams = New Structure();
+	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	StrParams.Insert("Period", StatusInfo.Period);
+	StrParams.Insert("Ref", Ref);
 	Return StrParams;
 EndFunction
 

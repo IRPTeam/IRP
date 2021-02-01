@@ -515,6 +515,7 @@ New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact"
 New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/Params"
 New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/allure/base"
 New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/logpath"
+New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/logdata"
 New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/AllSteps"
 New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/AllSteps/Template"
 
@@ -676,7 +677,7 @@ $VanessaRun = {
     Write-Host "##teamcity[testSuiteStarted name='$elementTag' flowId='$elementTag']"
 
 
-    Write-Output "Wait for log file: $elementTag"
+    Write-Output "Wait for log file: $ScriptLogFilePath"
     Write-Host "##teamcity[testStarted  name='Wait for log file: $elementTag' flowId='$elementTag']"
     $Skip = $false
     do {

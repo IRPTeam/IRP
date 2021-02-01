@@ -692,7 +692,7 @@ $VanessaRun = {
         
     } while (!(Test-Path $ScriptLogFilePath))
     Write-Host "##teamcity[testFinished name='Wait for log file: $elementTag' duration='$TotalMilliseconds' flowId='$elementTag']"
-    
+    $hasFailedTest = $false
     if (!$Skip) {
       Write-Output "Start tail: $elementTag"
 
@@ -749,6 +749,7 @@ $VanessaRun = {
                       $ErrorDescription = $ErrorDescription.replace("|", "||").replace("'", "|'").replace("[", "|[").replace("]", "|]").replace("`n", "|n").replace("`r", "|r")
                       Write-Host "##teamcity[testFailed name='$CurrentTest' message='$ErrorDescription' flowId='$elementTag']"
                   }    
+                  $hasFailedTest = $true
               }else{
                   if($CurrentTest -ne ""){
                       $line = $line.replace("|", "||").replace("'", "|'").replace("[", "|[").replace("]", "|]").replace("`n", "|n").replace("`r", "|r")
@@ -772,11 +773,11 @@ $VanessaRun = {
     Write-Host "##teamcity[testSuiteFinished name='$elementTag' flowId='$elementTag']"
     Write-Host "##teamcity[flowFinished flowId='$elementTag']"
     Remove-Desktop -Desktop $NewD -Verbose
-
-    &$AllureBatFilePath generate "$allurePath/$elementTag" --clean -o "$workingDir/$FolderForAllArtefact/allure-report/$elementTag"
-    Compress-Archive -Path "$workingDir/$FolderForAllArtefact/allure-report/$elementTag/*" -DestinationPath "$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip"
-    Write-Host "##teamcity[publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip']"
-
+    if ($hasFailedTest) {
+        &$AllureBatFilePath generate "$allurePath/$elementTag" --clean -o "$workingDir/$FolderForAllArtefact/allure-report/$elementTag"
+        Compress-Archive -Path "$workingDir/$FolderForAllArtefact/allure-report/$elementTag/*" -DestinationPath "$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip"
+        Write-Host "##teamcity[publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip']"
+    }
 }
 
 $JobArray = @{}

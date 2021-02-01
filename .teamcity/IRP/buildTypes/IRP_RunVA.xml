@@ -493,6 +493,7 @@ $startPort = 48010
 $workingDir = "%system.teamcity.build.workingDir%"
 $FeaturePath = "%env.VA.FeaturePath%" #inside 2 folders - External and Internal. In External has to be export steps, in internal - scenarios.
 $OScriptLib = "%env.OScript%"
+$AllureBatFilePath = "%teamcity.tool.allure-commandline%\bin\allure.bat"
 
 $LoginTo1C = "%env.LoginTo1C%"
 $PassTo1C = "%env.PassTo1C%"
@@ -523,7 +524,7 @@ Copy-Item -Path "$workingDir/TempDB/1Cv8.1CD" -Destination "$workingDir/$FolderF
 
 
 $VanessaRun = {
-    Param($elementTag, $startPort, $CurrentID, $RunSaasMode, $workingDir, $FeaturePath, $DebugString, $OScriptLib, $FolderForAllArtefact, $PathTo1CPlatform, $PassTo1C, $LoginTo1C, $StopOnError, $CloseVA)
+    Param($elementTag, $startPort, $CurrentID, $RunSaasMode, $workingDir, $FeaturePath, $DebugString, $OScriptLib, $FolderForAllArtefact, $PathTo1CPlatform, $PassTo1C, $LoginTo1C, $StopOnError, $CloseVA, $AllureBatFilePath)
     $AreaID = ""
     $portmax = $startPort + 9
     $ScriptLogFilePath = "$workingDir/$FolderForAllArtefact/logdata/$elementTag.log"
@@ -633,7 +634,7 @@ $VanessaRun = {
     'setvariablevaluesinstepsallurereport': true,
     'createlogs': true
 }"
-    Write-Output "$text"
+    #Write-Output "$text"
     $a = $text | ConvertFrom-Json
     $a | Add-Member -Type NoteProperty -Name 'featurepath' -Value "$FeaturePath/Internal"
     $a | Add-Member -Type NoteProperty -Name 'projectpath' -Value "$workingDir"
@@ -645,7 +646,7 @@ $VanessaRun = {
     $a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepath' -Value "$allurePath/$elementTag"
     $a | Add-Member -Type NoteProperty -Name 'logpath' -Value "$workingDir/$FolderForAllArtefact/logpath/$elementTag.log"    
    
-    $a.librarycatalogs += "$workingDir\DataProcessor"
+    $a.librarycatalogs += "$workingDir/DataProcessor"
     $a.librarycatalogs += "$FeaturePath/External"
     $a.librarycatalogs += "$OScriptLib/lib/vanessa-automation/features/Libraries"
     $a.filtertags += $elementTag
@@ -768,6 +769,11 @@ $VanessaRun = {
     Write-Host "##teamcity[testSuiteFinished name='$elementTag' flowId='$elementTag']"
     Write-Host "##teamcity[flowFinished flowId='$elementTag']"
     Remove-Desktop -Desktop $NewD -Verbose
+
+    $AllureBatFilePath generate $FolderForAllArtefact/allure/$elementTag/ --clean -o $FolderForAllArtefact/allure-report/$elementTag
+    Compress-Archive -Path "$FolderForAllArtefact/allure-report/$elementTag/*" -DestinationPath "$FolderForAllArtefact/allure-zip/allure_$elementTag.zip"
+    Write-Host "##teamcity[publishArtifacts '$FolderForAllArtefact/allure-zip/allure_$elementTag.zip']"
+
 }
 
 $JobArray = @{}
@@ -776,7 +782,7 @@ $CurrentID = 0
 if ($RunSaasMode) {
     $elementTag = "$TagForCreateSaas"
     $startPort += 10
-    $JobTailProc = Start-Job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort,$CurrentID,$RunSaasMode,$workingDir,$FeaturePath,$DebugString,$OScriptLib,$FolderForAllArtefact,$PathTo1CPlatform,$PassTo1C,$LoginTo1C,$StopOnError,$CloseVA
+    $JobTailProc = Start-Job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort,$CurrentID,$RunSaasMode,$workingDir,$FeaturePath,$DebugString,$OScriptLib,$FolderForAllArtefact,$PathTo1CPlatform,$PassTo1C,$LoginTo1C,$StopOnError,$CloseVA,$AllureBatFilePath
     $CurrentDate = Get-Date
     $JobArray.Add($elementTag,$JobTailProc)
     $JobTimes = $JobTimes + @{$elementTag=@($CurrentDate, "")}
@@ -808,7 +814,7 @@ if ($RunSaasMode) {
 foreach ($elementTag in $TagArray) {
     $startPort += 10
     $CurrentID += 1
-    $JobTailProc = Start-Job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort,$CurrentID,$RunSaasMode,$workingDir,$FeaturePath,$DebugString,$OScriptLib,$FolderForAllArtefact,$PathTo1CPlatform,$PassTo1C,$LoginTo1C,$StopOnError,$CloseVA
+    $JobTailProc = Start-Job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort,$CurrentID,$RunSaasMode,$workingDir,$FeaturePath,$DebugString,$OScriptLib,$FolderForAllArtefact,$PathTo1CPlatform,$PassTo1C,$LoginTo1C,$StopOnError,$CloseVA,$AllureBatFilePath
     $CurrentDate = Get-Date
     $JobArray.Add($elementTag,$JobTailProc)
     $JobTimes = $JobTimes + @{$elementTag=@($CurrentDate, "")}

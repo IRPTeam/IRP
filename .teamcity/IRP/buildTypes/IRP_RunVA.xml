@@ -523,7 +523,7 @@ Copy-Item -Path "$workingDir/TempDB/1Cv8.1CD" -Destination "$workingDir/$FolderF
 
 
 $VanessaRun = {
-    Param($elementTag, $startPort, $CurrentID, $RunSaasMode, $workingDir, $FeaturePath, $DebugString, $OScriptLib, $FolderForAllArtefact, $PathTo1CPlatform, $PassTo1C, $LoginTo1C, $StopOnError)
+    Param($elementTag, $startPort, $CurrentID, $RunSaasMode, $workingDir, $FeaturePath, $DebugString, $OScriptLib, $FolderForAllArtefact, $PathTo1CPlatform, $PassTo1C, $LoginTo1C, $StopOnError, $CloseVA)
     $AreaID = ""
     $portmax = $startPort + 9
     $ScriptLogFilePath = "$workingDir/$FolderForAllArtefact/logdata/$elementTag.log"
@@ -633,7 +633,7 @@ $VanessaRun = {
     'setvariablevaluesinstepsallurereport': true,
     'createlogs': true
 }"
-    #Write-Output "$text"
+    Write-Output "$text"
     $a = $text | ConvertFrom-Json
     $a | Add-Member -Type NoteProperty -Name 'featurepath' -Value "$FeaturePath/Internal"
     $a | Add-Member -Type NoteProperty -Name 'projectpath' -Value "$workingDir"
@@ -776,7 +776,7 @@ $CurrentID = 0
 if ($RunSaasMode) {
     $elementTag = "$TagForCreateSaas"
     $startPort += 10
-    $JobTailProc = Start-Job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort,$CurrentID,$RunSaasMode,$workingDir,$FeaturePath,$DebugString,$OScriptLib,$FolderForAllArtefact,$PathTo1CPlatform,$PassTo1C,$LoginTo1C,$StopOnError
+    $JobTailProc = Start-Job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort,$CurrentID,$RunSaasMode,$workingDir,$FeaturePath,$DebugString,$OScriptLib,$FolderForAllArtefact,$PathTo1CPlatform,$PassTo1C,$LoginTo1C,$StopOnError,$CloseVA
     $CurrentDate = Get-Date
     $JobArray.Add($elementTag,$JobTailProc)
     $JobTimes = $JobTimes + @{$elementTag=@($CurrentDate, "")}
@@ -808,7 +808,7 @@ if ($RunSaasMode) {
 foreach ($elementTag in $TagArray) {
     $startPort += 10
     $CurrentID += 1
-    $JobTailProc = Start-Job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort,$CurrentID,$RunSaasMode,$workingDir,$FeaturePath,$DebugString,$OScriptLib,$FolderForAllArtefact,$PathTo1CPlatform,$PassTo1C,$LoginTo1C,$StopOnError
+    $JobTailProc = Start-Job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort,$CurrentID,$RunSaasMode,$workingDir,$FeaturePath,$DebugString,$OScriptLib,$FolderForAllArtefact,$PathTo1CPlatform,$PassTo1C,$LoginTo1C,$StopOnError,$CloseVA
     $CurrentDate = Get-Date
     $JobArray.Add($elementTag,$JobTailProc)
     $JobTimes = $JobTimes + @{$elementTag=@($CurrentDate, "")}

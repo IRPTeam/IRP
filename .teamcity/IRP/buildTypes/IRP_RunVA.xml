@@ -494,9 +494,11 @@ $workingDir = "%system.teamcity.build.workingDir%"
 $FeaturePath = "%env.VA.FeaturePath%" #inside 2 folders - External and Internal. In External has to be export steps, in internal - scenarios.
 $OScriptLib = "%env.OScript%"
 
-$LoginTo1C
-$PassTo1C
+$LoginTo1C = "%env.LoginTo1C%"
+$PassTo1C = "%env.PassTo1C%"
+$PathTo1CPlatform = "%env.PathTo1CPlatform%"
 
+$StopOnError = "%env.StopOnError%" #true or false
 $CloseVA = "%env.CloseVA%" # true or false
 $UseDebug = $%env.StartDebug% # $true or $false
 $DebugPort = "%env.DebugPort%"
@@ -509,6 +511,7 @@ $FolderForAllArtefact = "VAResult"
 ######################################################################################################
 
 New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact"
+New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/Params"
 New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/allure/base"
 New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/logpath"
 New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/AllSteps"
@@ -520,7 +523,7 @@ Copy-Item -Path "$workingDir/TempDB/1Cv8.1CD" -Destination "$workingDir/$FolderF
 
 
 $VanessaRun = {
-    Param($elementTag, $startPort, $CurrentID, $RunSaasMode, $workingDir, $FeaturePath, $DebugString, $OScriptLib, $FolderForAllArtefact)
+    Param($elementTag, $startPort, $CurrentID, $RunSaasMode, $workingDir, $FeaturePath, $DebugString, $OScriptLib, $FolderForAllArtefact, $PathTo1CPlatform, $PassTo1C, $LoginTo1C, $StopOnError)
     $AreaID = ""
     $portmax = $startPort + 9
     $ScriptLogFilePath = "$workingDir/$FolderForAllArtefact/logdata/$elementTag.log"
@@ -543,9 +546,8 @@ $VanessaRun = {
             Write-Output "Run DB in $TempDb common mode"
         }
     }
-    #$TempDb = "'/Slocalhost/%env.Database1CName%'" | ForEach-Object { $_ -replace '\\', '/' }
          
-    $connection = "' $AreaID /N %env.LoginTo1C% /P %env.PassTo1C% /Len /UseHwLicenses+ /TComp -SDC  /DisableStartupMessages /DisplayPerformance /DisplayAllFunctions /EnableCheckModal /EnableCheckExtensionsAndAddInsSyncCalls $DebugString'"
+    $connection = "' $AreaID /N $LoginTo1C /P $PassTo1C /Len /UseHwLicenses+ /TComp -SDC  /DisableStartupMessages /DisplayPerformance /DisplayAllFunctions /EnableCheckModal /EnableCheckExtensionsAndAddInsSyncCalls $DebugString'"
     
     $TempDbJson = "'$TempDb'"
     $text = "{
@@ -575,7 +577,7 @@ $VanessaRun = {
         'pendingequalfailed': true,
         'safeexecutionofsteps': false,
         'showrownumberonerror': false,
-        'stoponerror': %env.StopOnError%,
+        'stoponerror': $StopOnError,
         'timeoutforasynchronoussteps': 0,
         'timetofindwindow': 5,
         'updatestatistics': false,
@@ -649,7 +651,9 @@ $VanessaRun = {
     $a.filtertags += $elementTag
   
     $b = $a | ConvertTo-Json -depth 32
-    $b | set-content "$workingDir/$FolderForAllArtefact/Params/va$elementTag.json"
+    
+    $VBParams="$workingDir/$FolderForAllArtefact/Params/va$elementTag.json"
+    $b | set-content $VBParams
 
     ### Run VA ########################################################################
     $NewD = New-Desktop
@@ -657,9 +661,9 @@ $VanessaRun = {
     Switch-Desktop -Desktop $NewD
     Start-Sleep 2
     $ProcessInfo = New-Object System.Diagnostics.ProcessStartInfo 
-    $ProcessInfo.FileName = %env.PathTo1CPlatform% 
+    $ProcessInfo.FileName = $PathTo1CPlatform
     $ProcessInfo.UseShellExecute = $false 
-    $ProcessInfo.Arguments = " $AreaID /N %env.LoginTo1C% /P %env.PassTo1C%  ""$TempDb"" /Execute ""$OScriptLib/lib/vanessa-automation/vanessa-automation.epf"" /TestManager /C""StartFeaturePlayer; VBParams=$workingDir/$FolderForAllArtefact/Params/va$elementTag.json""" 
+    $ProcessInfo.Arguments = " $AreaID /N $LoginTo1C /P $PassTo1C ""$TempDb"" /Execute ""$OScriptLib/lib/vanessa-automation/vanessa-automation.epf"" /TestManager /C""StartFeaturePlayer; VBParams=$VBParams""" 
     $Process = New-Object System.Diagnostics.Process 
     $Process.StartInfo = $ProcessInfo 
     $Process.Start() | Out-Null  
@@ -772,7 +776,7 @@ $CurrentID = 0
 if ($RunSaasMode) {
     $elementTag = "$TagForCreateSaas"
     $startPort += 10
-    $JobTailProc = Start-Job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort,$CurrentID,$RunSaasMode,$workingDir,$FeaturePath,$DebugString,$OScriptLib,$FolderForAllArtefact
+    $JobTailProc = Start-Job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort,$CurrentID,$RunSaasMode,$workingDir,$FeaturePath,$DebugString,$OScriptLib,$FolderForAllArtefact,$PathTo1CPlatform,$PassTo1C,$LoginTo1C,$StopOnError
     $CurrentDate = Get-Date
     $JobArray.Add($elementTag,$JobTailProc)
     $JobTimes = $JobTimes + @{$elementTag=@($CurrentDate, "")}
@@ -804,7 +808,7 @@ if ($RunSaasMode) {
 foreach ($elementTag in $TagArray) {
     $startPort += 10
     $CurrentID += 1
-    $JobTailProc = Start-Job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort,$CurrentID,$RunSaasMode,$workingDir,$FeaturePath,$DebugString,$OScriptLib,$FolderForAllArtefact
+    $JobTailProc = Start-Job -scriptBlock $VanessaRun -ArgumentList $elementTag,$startPort,$CurrentID,$RunSaasMode,$workingDir,$FeaturePath,$DebugString,$OScriptLib,$FolderForAllArtefact,$PathTo1CPlatform,$PassTo1C,$LoginTo1C,$StopOnError
     $CurrentDate = Get-Date
     $JobArray.Add($elementTag,$JobTailProc)
     $JobTimes = $JobTimes + @{$elementTag=@($CurrentDate, "")}

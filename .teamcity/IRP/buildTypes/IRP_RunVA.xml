@@ -644,7 +644,7 @@ $VanessaRun = {
     $a | Add-Member -Type NoteProperty -Name 'logpath' -Value "$workingDir/$FolderForAllArtefact/logpath/$elementTag.log"    
    
     $a.librarycatalogs += "$workingDir\DataProcessor"
-    $a.librarycatalogs += 'External'
+    $a.librarycatalogs += "$FeaturePath/External"
     $a.librarycatalogs += "$OScriptLib/lib/vanessa-automation/features/Libraries"
     $a.filtertags += $elementTag
   

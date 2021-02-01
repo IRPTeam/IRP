@@ -553,6 +553,7 @@ $VanessaRun = {
     'vanessarun': true,
     'vanessashutdown': %env.CloseVA%,
     'videcreate': false,
+    'setvariablevaluesinstepsallurereport': true,
     'createlogs': true
 }"
     #Write-Output "$text"

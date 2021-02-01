@@ -516,7 +516,7 @@ New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/Params"
 New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/allure/base"
 New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/logpath"
 New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/allure-zip"
-New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/allure-report"
+New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/allureTag"
 New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/logdata"
 New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/AllSteps"
 New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/AllSteps/Template"
@@ -774,8 +774,8 @@ $VanessaRun = {
     Write-Host "##teamcity[flowFinished flowId='$elementTag']"
     Remove-Desktop -Desktop $NewD -Verbose
     if ($hasFailedTest) {
-        &$AllureBatFilePath generate "$allurePath/$elementTag" --clean -o "$workingDir/$FolderForAllArtefact/allure-report/$elementTag"
-        Compress-Archive -Path "$workingDir/$FolderForAllArtefact/allure-report/$elementTag/*" -DestinationPath "$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip"
+        &$AllureBatFilePath generate "$allurePath/$elementTag" --clean -o "$workingDir/$FolderForAllArtefact/allureTag/$elementTag"
+        Compress-Archive -Path "$workingDir/$FolderForAllArtefact/allureTag/$elementTag/*" -DestinationPath "$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip"
         Write-Host "##teamcity[publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure/$elementTag']"
     }
 }

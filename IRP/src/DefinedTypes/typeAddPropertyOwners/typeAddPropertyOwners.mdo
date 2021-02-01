@@ -86,5 +86,6 @@
     <types>CatalogRef.ChequeBonds</types>
     <types>CatalogRef.BusinessUnits</types>
     <types>DocumentRef.CashExpense</types>
+    <types>DocumentRef.PlannedReceiptReservation</types>
   </type>
 </mdclass:DefinedType>

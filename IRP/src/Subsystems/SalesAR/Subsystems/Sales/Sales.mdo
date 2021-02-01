@@ -13,5 +13,6 @@
   <content>Document.ShipmentConfirmation</content>
   <content>DataProcessor.SalesOrderStatusReport</content>
   <content>Document.SalesOrderClosing</content>
+  <content>Document.PlannedReceiptReservation</content>
   <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
 </mdclass:Subsystem>

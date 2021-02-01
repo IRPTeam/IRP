@@ -78,6 +78,7 @@
       <value>Order</value>
     </synonym>
     <type>
+      <types>DocumentRef.InventoryTransferOrder</types>
       <types>DocumentRef.PurchaseOrder</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
@@ -93,6 +94,7 @@
     </synonym>
     <type>
       <types>DocumentRef.InventoryTransferOrder</types>
+      <types>DocumentRef.SalesOrder</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

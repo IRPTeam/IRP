@@ -24,7 +24,7 @@
 //  *RecordType
 //  *Period
 //  *IncomingStore
-//  *RequestedStore
+//  *RequesterStore
 //  *ItemKey
 //  *Order
 //  *Requester
@@ -37,21 +37,14 @@
 //  *ItemKey
 //  *Quantity
 Procedure ClosureIncomingStocks(Parameters) Export
-	IncomingStocksReal_Lock = PostingServer.GetQueryTableByName("R5011B_PartnersAging_OffsetOfAging_Lock", Parameters);
-		
-	DataLock = New DataLock();
-	LockFields = AccumulationRegisters.R4035B_IncomingStocks.GetLockFields(IncomingStocksReal_Lock);
-	DataLockItem = DataLock.Add(LockFields.RegisterName);
-	DataLockItem.Mode = DataLockMode.Exclusive;
-	DataLockItem.DataSource = LockFields.LockInfo.Data;
-	For Each Field In LockFields.LockInfo.Fields Do
-		DataLockItem.UseFromDataSource(Field.Key, Field.Value);
-	EndDo;
-	If LockFields.LockInfo.Data.Count() Then
-		DataLock.Lock();
-		Parameters.Insert("R4035B_IncomingStocks_IncomingStocksReal_Lock", DataLock);
-	EndIf;	
+	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.LockForUpdate = True;
+	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Clear();
+	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Write();
 	
+	Parameters.Object.RegisterRecords.R4035B_IncomingStocks.LockForUpdate = True;
+	Parameters.Object.RegisterRecords.R4035B_IncomingStocks.Clear();
+	Parameters.Object.RegisterRecords.R4035B_IncomingStocks.Write();
+		
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = 
@@ -95,35 +88,83 @@ Procedure ClosureIncomingStocks(Parameters) Export
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	IncomingStocksReal.Period,
+	|	IncomingStocksReal.Store,
+	|	IncomingStocksReal.ItemKey,
+	|	IncomingStocksReal.Order
+	|INTO UnusedIncomingStocks
+	|FROM
+	|	IncomingStocksReal AS IncomingStocksReal
+	|		LEFT JOIN ClosureIncoming AS ClosureIncoming
+	|		ON IncomingStocksReal.Store = ClosureIncoming.IncomingStore
+	|		AND IncomingStocksReal.ItemKey = ClosureIncoming.ItemKey
+	|		AND IncomingStocksReal.Order = ClosureIncoming.Order
+	|WHERE
+	|	ClosureIncoming.ItemKey IS NULL
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
 	|	ClosureIncoming.Period,
 	|	ClosureIncoming.IncomingStore AS Store,
 	|	ClosureIncoming.ItemKey,
 	|	ClosureIncoming.Order,
 	|	ClosureIncoming.RealIncomingQuantity - ClosureIncoming.RequestedQuantity AS Quantity
-	|INTO IncomingStocks
+	|INTO UsedIncomingStocks
 	|FROM
 	|	ClosureIncoming AS ClosureIncoming
 	|WHERE
-	|	ClosureIncoming.Requester IS NULL
+	|	ClosureIncoming.Requester.Ref IS NULL
 	|	AND ClosureIncoming.RealIncomingQuantity - ClosureIncoming.RequestedQuantity > 0
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	UsedIncomingStocks.Period,
+	|	UsedIncomingStocks.Store,
+	|	UsedIncomingStocks.ItemKey,
+	|	UsedIncomingStocks.Order,
+	|	CASE
+	|		WHEN IncomingStocksBalance.QuantityBalance < UsedIncomingStocks.Quantity
+	|			THEN IncomingStocksBalance.QuantityBalance
+	|		ELSE UsedIncomingStocks.Quantity
+	|	END AS Quantity
+	|INTO IncomingStocks
+	|FROM
+	|	UsedIncomingStocks AS UsedIncomingStocks
+	|		INNER JOIN AccumulationRegister.R4035B_IncomingStocks.Balance(, (Store, ItemKey, Order) IN
+	|			(SELECT
+	|				tmp.Store,
+	|				tmp.ItemKey,
+	|				tmp.Order
+	|			FROM
+	|				UsedIncomingStocks AS tmp)) AS IncomingStocksBalance
+	|		ON UsedIncomingStocks.Store = IncomingStocksBalance.Store
+	|		AND UsedIncomingStocks.ItemKey = IncomingStocksBalance.ItemKey
+	|		AND UsedIncomingStocks.Order = IncomingStocksBalance.Order
 	|
 	|UNION ALL
-	|	
+	|
 	|SELECT
 	|	VALUE(AccumulationRecordType.Expense),
-	|	IncomingStocksReal.Period,
-	|	IncomingStocksReal.Store,
-	|	IncomingStocksReal.ItemKey,
-	|	IncomingStocksReal.Order,
-	|	IncomingStocksReal.Quantity
-	|FROM IncomingStocksReal AS IncomingStocksReal
-	|	LEFT JOIN ClosureIncoming AS ClosureIncoming
-	|	ON IncomingStocksReal.Store = ClosureIncoming.IncomingStore
-	|	AND IncomingStocksReal.ItemKey = ClosureIncoming.ItemKey
-	|	AND IncomingStocksReal.Order = ClosureIncoming.Order
-	|WHERE
-	|	ClosureIncoming.ItemKey IS NULL
+	|	UnusedIncomingStocks.Period,
+	|	UnusedIncomingStocks.Store,
+	|	UnusedIncomingStocks.ItemKey,
+	|	UnusedIncomingStocks.Order,
+	|	IncomingStocksBalance.QuantityBalance
+	|FROM
+	|	UnusedIncomingStocks AS UnusedIncomingStocks
+	|		INNER JOIN AccumulationRegister.R4035B_IncomingStocks.Balance(, (Store, ItemKey, Order) IN
+	|			(SELECT
+	|				tmp.Store,
+	|				tmp.ItemKey,
+	|				tmp.Order
+	|			FROM
+	|				UnusedIncomingStocks AS tmp)) AS IncomingStocksBalance
+	|		ON UnusedIncomingStocks.Store = IncomingStocksBalance.Store
+	|		AND UnusedIncomingStocks.ItemKey = IncomingStocksBalance.ItemKey
+	|		AND UnusedIncomingStocks.Order = IncomingStocksBalance.Order
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////

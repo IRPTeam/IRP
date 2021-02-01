@@ -588,6 +588,12 @@
         <value>80</value>
       </code>
     </items>
+    <items id="302d65dc-1ddb-4dc6-8bf1-e6f6c9edb40b">
+      <name>Document_PlannedReceiptReservation</name>
+      <code xsi:type="core:NumberValue">
+        <value>81</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

@@ -416,7 +416,9 @@ Procedure Update_TableOfBalance()
 	|	IncomingStocksBalance.QuantityBalance
 	|FROM
 	|	AccumulationRegister.R4035B_IncomingStocks.Balance(ENDOFPERIOD(&DateOfRelevance, day), ItemKey = &ItemKey
-	|	AND Store <> &Store) AS IncomingStocksBalance";
+	|	AND Store <> &Store) AS IncomingStocksBalance
+	|WHERE
+	|	IncomingStocksBalance.Order REFS Document.PurchaseOrder";
 	Query.SetParameter("Store", ThisObject.Store);
 	Query.SetParameter("DateOfRelevance", ThisObject.DateOfRelevance);
 	Query.SetParameter("ItemKey", ThisObject.ItemKey);

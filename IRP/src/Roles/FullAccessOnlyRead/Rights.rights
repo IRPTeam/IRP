@@ -88,6 +88,10 @@
 			<name>View</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>DataProcessor.PrintLabels</name>
@@ -2778,6 +2782,10 @@
 			<name>ViewDataHistory</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>AccumulationRegister.TaxesTurnovers</name>
@@ -3356,6 +3364,10 @@
 		</right>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -4198,6 +4210,10 @@
 		</right>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -5678,6 +5694,78 @@
 		</right>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.PlannedReceiptReservation</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Reports</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Report.ItemsInfo</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonForm.PrintForm</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Reports.Subsystem.Finance</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Reports.Subsystem.Inventory</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Reports.Subsystem.Sales</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Reports.Subsystem.Purchase</name>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>

@@ -59,6 +59,8 @@
   <registerRecords>AccumulationRegister.StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

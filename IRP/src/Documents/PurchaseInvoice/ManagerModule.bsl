@@ -361,10 +361,16 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	If Not PostingServer.QueryTableIsExists("IncomingStocksRequested", Parameters) Then
 		Query.Text = Query.Text + 
 		"SELECT 
+		|	UNDEFINED AS RecordType,
+		|	UNDEFINED AS Period,
+		|	UNDEFINED AS IncomingStore,
 		|	UNDEFINED AS RequesterStore,
-		|	UNDEFINED AS Requester
+		|	UNDEFINED AS ItemKey,
+		|	UNDEFINED AS Order,
+		|	UNDEFINED AS Requester,
+		|	UNDEFINED AS Quantity
 		|INTO IncomingStocksRequested 
-		|WHERE FALSE; ";
+		|WHERE FALSE; ";		
 	EndIf;	
 	If Not PostingServer.QueryTableIsExists("FreeStocks", Parameters) Then
 		Query.Text = Query.Text + 
@@ -915,9 +921,6 @@ Procedure GetTables_UsePO_NotUseSO_NotUseGRBeforeInvoice_NotUseGR_IsProduct(Tabl
 	PostingServer.MergeTables(Tables.GoodsReceiptSchedule_Expense   , QueryResults[3].Unload());
 	PostingServer.MergeTables(Tables.OrderBalance                   , QueryResults[4].Unload());
 	
-	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.LockForUpdate = True;
-	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Clear();
-	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Write();
 	IncomingStocksServer.ClosureIncomingStocks(Parameters);
 	
 	PostingServer.MergeTables(Tables.StockReservation_Expense, 
@@ -2819,6 +2822,20 @@ EndProcedure
 
 #Region NewRegistersPosting
 
+Function GetInformationAboutMovements(Ref) Export
+	Str = New Structure;
+	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
+	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
+	Return Str;
+EndFunction
+
+Function GetAdditionalQueryParamenters(Ref)
+	StrParams = New Structure();
+	StrParams.Insert("Ref", Ref);
+	Return StrParams;
+EndFunction
+
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
@@ -3330,7 +3347,7 @@ Function R4012B_StockReservation()
 	Return
 		"SELECT 
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	IncomingStocksRequested.RequesterStore AS Store,
+		|	IncomingStocksRequested.IncomingStore AS Store,
 		|	IncomingStocksRequested.Requester AS Order,
 		|*
 		|INTO R4012B_StockReservation

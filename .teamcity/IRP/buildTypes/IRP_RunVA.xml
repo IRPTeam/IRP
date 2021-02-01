@@ -771,7 +771,7 @@ $VanessaRun = {
     Write-Host "##teamcity[flowFinished flowId='$elementTag']"
     Remove-Desktop -Desktop $NewD -Verbose
 
-    $AllureBatFilePath generate $FolderForAllArtefact/allure/$elementTag/ --clean -o $FolderForAllArtefact/allure-report/$elementTag
+    &$AllureBatFilePath generate $FolderForAllArtefact/allure/$elementTag/ --clean -o $FolderForAllArtefact/allure-report/$elementTag
     Compress-Archive -Path "$FolderForAllArtefact/allure-report/$elementTag/*" -DestinationPath "$FolderForAllArtefact/allure-zip/allure_$elementTag.zip"
     Write-Host "##teamcity[publishArtifacts '$FolderForAllArtefact/allure-zip/allure_$elementTag.zip']"
 

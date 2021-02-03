@@ -945,7 +945,7 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code" value="Compress-Archive -Path AllSteps\* -DestinationPath %teamcity.project.id%.zip" />
+          <param name="jetbrains_powershell_script_code" value="Compress-Archive -Path VAResult/AllSteps/* -DestinationPath %teamcity.project.id%.zip" />
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="execute_always" />
         </parameters>

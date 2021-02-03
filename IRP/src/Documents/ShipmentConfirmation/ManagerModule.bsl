@@ -866,57 +866,62 @@ EndFunction
 
 Function R2011B_SalesOrdersShipment()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	QueryTable.SalesOrder AS Order,
+		|	ItemList.SalesOrder AS Order,
 		|	*
 		|INTO R2011B_SalesOrdersShipment
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE QueryTable.SalesOrderExists";
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.SalesOrderExists";
 
 EndFunction
 
 Function R2013T_SalesOrdersProcurement()
 	Return
 		"SELECT
-		|	QueryTable.Quantity AS ShippedQuantity,
-		|	QueryTable.SalesOrder AS Order,
+		|	ItemList.Quantity AS ShippedQuantity,
+		|	ItemList.SalesOrder AS Order,
 		|	*
 		|INTO R2013T_SalesOrdersProcurement
 		|FROM
-		|	ItemList AS QueryTable
+		|	ItemList AS ItemList
 		|WHERE
-		|	QueryTable.SalesOrderExists";
+		|	ItemList.SalesOrderExists";
 
 EndFunction
 
 Function R2031B_ShipmentInvoicing()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	QueryTable.ShipmentConfirmation AS Basis,
-		|	QueryTable.Quantity AS Quantity,
-		|	QueryTable.Company,
-		|	QueryTable.Period,
-		|	QueryTable.ItemKey
-		|INTO R1031B_ReceiptInvoicing
+		|	ItemList.ShipmentConfirmation AS Basis,
+		|	ItemList.Quantity AS Quantity,
+		|	ItemList.Company,
+		|	ItemList.Period,
+		|	ItemList.ItemKey,
+		|	ItemList.Store
+		|INTO R2031B_ShipmentInvoicing
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE NOT QueryTable.SalesInvoiceExists
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.SalesInvoiceExists
 		|
 		|UNION ALL
 		|
-		|SELECT 
+		|SELECT
 		|	VALUE(AccumulationRecordType.Expense),
-		|	QueryTable.SalesInvoice,
-		|	QueryTable.Quantity,
-		|	QueryTable.Company,
-		|	QueryTable.Period,
-		|	QueryTable.ItemKey
+		|	ItemList.SalesInvoice,
+		|	ItemList.Quantity,
+		|	ItemList.Company,
+		|	ItemList.Period,
+		|	ItemList.ItemKey,
+		|	ItemList.Store
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE QueryTable.SalesInvoiceExists";
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.SalesInvoiceExists";
 
 EndFunction
 
@@ -927,8 +932,9 @@ Function R4010B_ActualStocks()
 		|	*
 		|INTO R4010B_ActualStocks
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE TRUE";
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
 
 EndFunction
 
@@ -960,68 +966,72 @@ Function R4012B_StockReservation()
 		|	R4012B_StockReservation.Recorder = &Ref
 		|;
 		|
+		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	QueryTable.Period AS Period,
-		|	QueryTable.SalesOrder AS Order,
-		|	QueryTable.ItemKey AS ItemKey,
-		|	QueryTable.Store AS Store,
+		|	ItemList.Period AS Period,
+		|	ItemList.SalesOrder AS Order,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Store AS Store,
 		|	CASE
-		|		When BalanceWithoutRef.Quantity - QueryTable.Quantity >= 0
-		|			Then QueryTable.Quantity
+		|		When BalanceWithoutRef.Quantity - ItemList.Quantity >= 0
+		|			Then ItemList.Quantity
 		|		Else BalanceWithoutRef.Quantity
 		|	END AS Quantity
 		|INTO R4012B_StockReservation
 		|FROM
-		|	ItemList AS QueryTable
+		|	ItemList AS ItemList
 		|		LEFT JOIN BalanceWithoutRef AS BalanceWithoutRef
-		|		ON QueryTable.SalesOrder = BalanceWithoutRef.Order
-		|		AND QueryTable.ItemKey = BalanceWithoutRef.ItemKey
-		|		AND QueryTable.Store = BalanceWithoutRef.Store
+		|		ON ItemList.SalesOrder = BalanceWithoutRef.Order
+		|		AND ItemList.ItemKey = BalanceWithoutRef.ItemKey
+		|		AND ItemList.Store = BalanceWithoutRef.Store
 		|WHERE
 		|	BalanceWithoutRef.Quantity > 0
-		|	AND QueryTable.SalesOrderExists";
+		|	AND ItemList.SalesOrderExists";
 
 EndFunction
 
 Function R4022B_StockTransferOrdersShipment()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	QueryTable.InventoryTransferOrder AS Order,
+		|	ItemList.InventoryTransferOrder AS Order,
 		|	*
 		|INTO R4022B_StockTransferOrdersShipment
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE QueryTable.InventoryTransferOrderExists";
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.InventoryTransferOrderExists";
 
 EndFunction
 
 Function R4032B_GoodsInTransitOutgoing()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	QueryTable.InventoryTransfer AS Basis,
+		|	ItemList.InventoryTransfer AS Basis,
 		|	*
 		|INTO R4032B_GoodsInTransitOutgoing
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE QueryTable.InventoryTransferExists";
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.InventoryTransferExists";
 
 EndFunction
 
 Function R4034B_GoodsShipmentSchedule()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	QueryTable.SalesOrder AS Basis,
+		|	ItemList.SalesOrder AS Basis,
 		|	*
 		|INTO R4034B_GoodsShipmentSchedule
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE QueryTable.SalesOrderExists
-		|	AND QueryTable.SalesOrder.UseItemsShipmentScheduling";
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.SalesOrderExists
+		|	AND ItemList.SalesOrder.UseItemsShipmentScheduling";
 
 EndFunction
 

@@ -494,7 +494,7 @@ Procedure GetTables_UseSO_SCBeforeInvoice_IsProduct(Tables, TempManager, TableNa
 		|	tmp.Period,
 		|	CAST(tmp.ShipmentBasis AS Document.InventoryTransfer).StoreTransit
 		|;
-		|//[2] - StockReservation
+		|//[6] - StockReservation
 		|SELECT
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
@@ -846,17 +846,17 @@ Function ItemList()
 		|	ItemList.Ref.Date AS Period,
 		|	ItemList.Key AS RowKey,
 		|	ItemList.SalesOrder AS SalesOrder,
-		|	NOT ItemList.SalesOrder = Value(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
+		|	NOT ItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
 		|	ItemList.SalesInvoice AS SalesInvoice,
-		|	NOT ItemList.SalesInvoice = Value(Document.SalesInvoice.EmptyRef) AS SalesInvoiceExists,
+		|	NOT ItemList.SalesInvoice.Ref IS NULL AS SalesInvoiceExists,
 		|	ItemList.PurchaseReturnOrder AS PurchaseReturnOrder,
-		|	NOT ItemList.PurchaseReturnOrder = Value(Document.PurchaseReturnOrder.EmptyRef) AS PurchaseReturnOrderExists,
+		|	NOT ItemList.PurchaseReturnOrder.Ref IS NULL AS PurchaseReturnOrderExists,
 		|	ItemList.PurchaseReturn AS PurchaseReturn,
-		|	NOT ItemList.PurchaseReturn = Value(Document.PurchaseReturn.EmptyRef) AS PurchaseReturnExists,
+		|	NOT ItemList.PurchaseReturn.Ref IS NULL AS PurchaseReturnExists,
 		|	ItemList.InventoryTransferOrder AS InventoryTransferOrder,
-		|	NOT ItemList.InventoryTransferOrder = Value(Document.InventoryTransferOrder.EmptyRef) AS InventoryTransferOrderExists,
+		|	NOT ItemList.InventoryTransferOrder.Ref IS NULL AS InventoryTransferOrderExists,
 		|	ItemList.InventoryTransfer AS InventoryTransfer,
-		|	NOT ItemList.InventoryTransfer = Value(Document.InventoryTransfer.EmptyRef) AS InventoryTransferExists
+		|	NOT ItemList.InventoryTransfer.Ref IS NULL AS InventoryTransferExists
 		|INTO ItemList
 		|FROM
 		|	Document.ShipmentConfirmation.ItemList AS ItemList

@@ -1206,7 +1206,7 @@ Function ItemList()
 		|	SalesInvoiceItemList.Unit AS Unit,
 		|	SalesInvoiceItemList.Ref.Date AS Period,
 		|	SalesInvoiceItemList.SalesOrder AS SalesOrder,
-		|	NOT SalesInvoiceItemList.SalesOrder = Value(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
+		|	NOT SalesInvoiceItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
 		|	SalesInvoiceItemList.Key AS RowKey,
 		|	SalesInvoiceItemList.DeliveryDate AS DeliveryDate,
 		|	SalesInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
@@ -1494,7 +1494,6 @@ Function R4011B_FreeStocks()
 		|WHERE
 		|	NOT ItemList.IsService
 		|	AND NOT ItemList.UseShipmentConfirmation";
-
 EndFunction
 
 Function R4012B_StockReservation()

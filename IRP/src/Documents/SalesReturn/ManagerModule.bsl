@@ -422,49 +422,7 @@ Function GetQueryTextQueryTable()
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// OrderBalance
-	OrderBalance = AccumulationRegisters.OrderBalance.GetLockFields(DocumentDataTables.OrderBalance);
-	DataMapWithLockFields.Insert(OrderBalance.RegisterName, OrderBalance.LockInfo);
-	
-	// SalesTurnovers
-	SalesTurnovers = AccumulationRegisters.SalesTurnovers.GetLockFields(DocumentDataTables.SalesTurnovers);
-	DataMapWithLockFields.Insert(SalesTurnovers.RegisterName, SalesTurnovers.LockInfo);
-	
-	// SalesReturnTurnovers
-	SalesReturnTurnovers = AccumulationRegisters.SalesReturnTurnovers.GetLockFields(DocumentDataTables.SalesReturnTurnovers);
-	DataMapWithLockFields.Insert(SalesReturnTurnovers.RegisterName, SalesReturnTurnovers.LockInfo);
-	
-	// InventoryBalance
-	InventoryBalance = AccumulationRegisters.InventoryBalance.GetLockFields(DocumentDataTables.InventoryBalance);
-	DataMapWithLockFields.Insert(InventoryBalance.RegisterName, InventoryBalance.LockInfo);
-	
-	// GoodsInTransitIncoming
-	GoodsInTransitIncoming = AccumulationRegisters.GoodsInTransitIncoming.GetLockFields(DocumentDataTables.GoodsInTransitIncoming);
-	DataMapWithLockFields.Insert(GoodsInTransitIncoming.RegisterName, GoodsInTransitIncoming.LockInfo);
-	
-	// StockBalance
-	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance);
-	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
-	// StockReservation
-	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
-	// PartnerApTransactions
-	PartnerApTransactions = AccumulationRegisters.PartnerApTransactions.GetLockFields(DocumentDataTables.PartnerApTransactions);
-	DataMapWithLockFields.Insert(PartnerApTransactions.RegisterName, PartnerApTransactions.LockInfo);
-	
-	// AdvanceToSuppliers
-	AdvanceToSuppliers = AccumulationRegisters.AdvanceToSuppliers.GetLockFields(DocumentDataTables.AdvanceToSuppliers_Lock);
-	DataMapWithLockFields.Insert(AdvanceToSuppliers.RegisterName, AdvanceToSuppliers.LockInfo);
-	
-	// ReconciliationStatement
-	ReconciliationStatement = AccumulationRegisters.ReconciliationStatement.GetLockFields(DocumentDataTables.ReconciliationStatement);
-	DataMapWithLockFields.Insert(ReconciliationStatement.RegisterName, ReconciliationStatement.LockInfo);
-	
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -687,17 +645,7 @@ Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Und
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// StockReservation
-	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation_Exists);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
-	// StockBalance
-	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Exists);
-	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -745,27 +693,66 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
-	QueryArray.Add(R4014B_SerialLotNumber());	
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R1031B_ReceiptInvoicing());	
 	Return QueryArray;
 EndFunction
 
 Function ItemList()
-	Return
+	Return	
 		"SELECT
-		|	OpeningEntryInventory.Ref,
-		|	OpeningEntryInventory.Key,
-		|	OpeningEntryInventory.ItemKey,
-		|	OpeningEntryInventory.Store,
-		|	OpeningEntryInventory.Quantity,
-		|	NOT OpeningEntryInventory.SerialLotNumber = VALUE(Catalog.SerialLotNumbers.EmptyRef) AS isSerialLotNumberSet,
-		|	OpeningEntryInventory.SerialLotNumber,
-		|	OpeningEntryInventory.Ref.Date AS Period,
-		|	OpeningEntryInventory.Ref.Company AS Company
-		|INTO ItemList
+		|	GoodsReceipts.Key,
+		|	GoodsReceipts.GoodsReceipt,
+		|	SUM(GoodsReceipts.Quantity) AS Quantity
+		|INTO GoodsReceipts
 		|FROM
-		|	Document.OpeningEntry.Inventory AS OpeningEntryInventory
+		|	Document.SalesReturn.GoodsReceipts AS GoodsReceipts
 		|WHERE
-		|	OpeningEntryInventory.Ref = &Ref";
+		|	GoodsReceipts.Ref = &Ref
+		|GROUP BY
+		|	GoodsReceipts.Key,
+		|	GoodsReceipts.GoodsReceipt
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	SalesReturnItemList.Ref.Company AS Company,
+		|	SalesReturnItemList.Store AS Store,
+		|	SalesReturnItemList.Store.UseGoodsReceipt AS UseGoodsReceipt,
+		|	SalesReturnItemList.ItemKey AS ItemKey,
+		|	SalesReturnItemList.SalesReturnOrder AS SalesReturnOrder,
+		|	SalesReturnItemList.Ref AS SalesReturn,
+		|	CASE
+		|		WHEN SalesReturnItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			THEN SalesReturnItemList.Ref
+		|		ELSE UNDEFINED
+		|	END AS BasisDocument,
+		|	SalesReturnItemList.QuantityInBaseUnit AS Quantity,
+		|	SalesReturnItemList.TotalAmount AS TotalAmount,
+		|	SalesReturnItemList.Ref.Partner AS Partner,
+		|	SalesReturnItemList.Ref.LegalName AS LegalName,
+		|	CASE
+		|		WHEN SalesReturnItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+		|		AND SalesReturnItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+		|			THEN SalesReturnItemList.Ref.Agreement.StandardAgreement
+		|		ELSE SalesReturnItemList.Ref.Agreement
+		|	END AS Agreement,
+		|	ISNULL(SalesReturnItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
+		|	SalesReturnItemList.Ref.Date AS Period,
+		|	CASE
+		|		WHEN SalesReturnItemList.SalesInvoice.Ref IS NULL
+		|		OR VALUETYPE(SalesReturnItemList.SalesInvoice) <> TYPE(Document.SalesInvoice)
+		|			THEN SalesReturnItemList.Ref
+		|		ELSE SalesReturnItemList.SalesInvoice
+		|	END AS SalesInvoice,
+		|	SalesReturnItemList.SalesInvoice AS AgingSalesInvoice,
+		|	SalesReturnItemList.Key,
+		|	SalesReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService
+		|INTO ItemLIst
+		|FROM
+		|	Document.SalesReturn.ItemList AS SalesReturnItemList
+		|WHERE
+		|	SalesReturnItemList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()
@@ -797,6 +784,25 @@ Function R4014B_SerialLotNumber()
 		|WHERE 
 		|	TRUE";
 
+EndFunction
+
+Function R1031B_ReceiptInvoicing()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	GoodsReceipts.GoodsReceipt AS Basis,
+		|	GoodsReceipts.Quantity,
+		|	ItemList.Company,
+		|	ItemList.Period,
+		|	ItemList.ItemKey,
+		|	ItemList.Store
+		|INTO R1031B_ReceiptInvoicing
+		|FROM
+		|	ItemList AS ItemList
+		|		INNER JOIN GoodsReceipts AS GoodsReceipts
+		|		ON ItemList.Key = GoodsReceipts.Key
+		|WHERE
+		|	TRUE";
 EndFunction
 
 #EndRegion

@@ -700,14 +700,6 @@
                   <value xsi:type="core:BooleanValue"/>
                 </value>
               </choiceParameters>
-              <choiceParameters>
-                <name>Filter.UseShipmentConfirmation</name>
-                <value xsi:type="form:FormChoiceListDesTimeValue">
-                  <value xsi:type="core:BooleanValue">
-                    <value>true</value>
-                  </value>
-                </value>
-              </choiceParameters>
             </extInfo>
           </items>
           <visible>true</visible>

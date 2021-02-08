@@ -387,13 +387,13 @@ Scenario: _040146 check Sales invoice movements by the Register  "R2031 Shipment
 		And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''            | ''                    | ''          | ''             | ''                                                  | ''         |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                                                  | ''         |
-			| 'Register  "R2031 Shipment invoicing"'      | ''            | ''                    | ''          | ''             | ''                                                  | ''         |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                                  | ''         |
-			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Basis'                                             | 'Item key' |
-			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '1'         | 'Main Company' | 'Shipment confirmation 2 dated 28.01.2021 18:43:36' | 'XS/Blue'  |
-			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '10'        | 'Main Company' | 'Shipment confirmation 2 dated 28.01.2021 18:43:36' | '36/Red'   |	
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''            | ''                    | ''          | ''             | ''             | ''                                                  | ''         |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''             | ''                                                  | ''         |
+			| 'Register  "R2031 Shipment invoicing"'      | ''            | ''                    | ''          | ''             | ''             | ''                                                  | ''         |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                                                  | ''         |
+			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'        | 'Basis'                                             | 'Item key' |
+			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '1'         | 'Main Company' | 'Store 02'     | 'Shipment confirmation 2 dated 28.01.2021 18:43:36' | 'XS/Blue'  |
+			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '10'        | 'Main Company' | 'Store 02'     | 'Shipment confirmation 2 dated 28.01.2021 18:43:36' | '36/Red'   |	
 		And I close all client application windows
 		
 Scenario: _040147 check Sales invoice movements by the Register  "R2012 Invoice closing of sales orders" SO-SC-SI (use shedule)
@@ -727,13 +727,13 @@ Scenario: _0401462 check Sales invoice movements by the Register  "R2031 Shipmen
 		And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 2 dated 28.01.2021 18:49:39' | ''            | ''                    | ''          | ''             | ''                                                  | ''         |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                                                  | ''         |
-			| 'Register  "R2031 Shipment invoicing"'      | ''            | ''                    | ''          | ''             | ''                                                  | ''         |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                                  | ''         |
-			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Basis'                                             | 'Item key' |
-			| ''                                          | 'Expense'     | '28.01.2021 18:49:39' | '1'         | 'Main Company' | 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | 'XS/Blue'  |
-			| ''                                          | 'Expense'     | '28.01.2021 18:49:39' | '10'        | 'Main Company' | 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | '36/Red'   |
+			| 'Sales invoice 2 dated 28.01.2021 18:49:39' | ''            | ''                    | ''          | ''             | ''             | ''                                                  | ''         |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''             | ''                                                  | ''         |
+			| 'Register  "R2031 Shipment invoicing"'      | ''            | ''                    | ''          | ''             | ''             | ''                                                  | ''         |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                                                  | ''         |
+			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'        | 'Basis'                                             | 'Item key' |
+			| ''                                          | 'Expense'     | '28.01.2021 18:49:39' | '1'         | 'Main Company' | 'Store 02'     | 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | 'XS/Blue'  |
+			| ''                                          | 'Expense'     | '28.01.2021 18:49:39' | '10'        | 'Main Company' | 'Store 02'     | 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | '36/Red'   |
 
 
 		And I close all client application windows
@@ -1086,13 +1086,13 @@ Scenario: _0401463 check Sales invoice movements by the Register  "R2031 Shipmen
 		And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 3 dated 28.01.2021 18:50:57' | ''            | ''                    | ''          | ''             | ''                                          | ''         |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                                          | ''         |
-			| 'Register  "R2031 Shipment invoicing"'      | ''            | ''                    | ''          | ''             | ''                                          | ''         |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                          | ''         |
-			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Basis'                                     | 'Item key' |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:50:57' | '1'         | 'Main Company' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | 'XS/Blue'  |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:50:57' | '10'        | 'Main Company' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | '36/Red'   |
+			| 'Sales invoice 3 dated 28.01.2021 18:50:57' | ''            | ''                    | ''          | ''             | ''             | ''                                          | ''         |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''             | ''                                          | ''         |
+			| 'Register  "R2031 Shipment invoicing"'      | ''            | ''                    | ''          | ''             | ''             | ''                                          | ''         |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                                          | ''         |
+			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'        | 'Basis'                                     | 'Item key' |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:50:57' | '1'         | 'Main Company' | 'Store 02'     | 'Sales invoice 3 dated 28.01.2021 18:50:57' | 'XS/Blue'  |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:50:57' | '10'        | 'Main Company' | 'Store 02'     | 'Sales invoice 3 dated 28.01.2021 18:50:57' | '36/Red'   |
 
 		And I close all client application windows
 		

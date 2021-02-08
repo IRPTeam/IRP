@@ -421,10 +421,10 @@ Scenario: 950409 create rules for information register (with recorder)
 		Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 		If "List" table does not contain lines Then
 			| "Number" |
-			| "2" |
+			| "16"  |
 				And I go to line in "List" table
 					| 'Number'         |
-					| '1' |
+					| '15' |
 				And in the table "List" I click the button named "ListContextMenuCopy"
 				And I click "Post and close" button
 		Given I open hyperlink 'e1cib/list/Document.SalesOrder'

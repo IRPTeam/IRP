@@ -116,6 +116,7 @@ Scenario: _022401 create GR and PI
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table contains lines
 			| 'Item'     | 'Item key'  | 'Dont calculate row' | 'Unit' | 'Q'      |
 			| 'Dress'    | 'XS/Blue'   | 'No'                 | 'pcs'  | '10,000' |
@@ -125,13 +126,6 @@ Scenario: _022401 create GR and PI
 			And I go to line in "List" table
 				| 'Description'        |
 				| 'Vendor Ferron, TRY' |
-			And I select current line in "List" table
-			Then "Update item list info" window is opened
-			And I click "OK" button
-			And I click Choice button of the field named "Store"
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
 			And I click "OK" button
@@ -164,6 +158,7 @@ Scenario: _022401 create GR and PI
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table contains lines
 			| 'Item'     | 'Item key'  | 'Dont calculate row' | 'Unit' | 'Q'      |
 			| 'Dress'    | 'XS/Blue'   | 'No'                 | 'pcs'  | '5,000' |
@@ -172,13 +167,6 @@ Scenario: _022401 create GR and PI
 			And I go to line in "List" table
 				| 'Description'        |
 				| 'Vendor Ferron, TRY' |
-			And I select current line in "List" table
-			Then "Update item list info" window is opened
-			And I click "OK" button
-			And I click Choice button of the field named "Store"
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
 			And I click "OK" button

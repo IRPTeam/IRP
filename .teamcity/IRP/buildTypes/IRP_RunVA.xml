@@ -716,9 +716,8 @@ $VanessaRun = {
                           $EndDate = Get-Date
                           $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
                           $TotalMilliseconds = [math]::Round($Diff.TotalMilliseconds)
-                          Write-Host "##teamcity[testMetadata testName='$CurrentTest' type='artifact' value='%teamcity.project.id%.zip!/$elementTag/1Cv8.1CD']"
-                                                                                                          
-                          Write-Host "##teamcity[testMetadata testName='$CurrentTest' type='artifact' value='allure/$elementTag/allure_$elementTag.zip!/index.html']"
+                      	  Write-Host "##teamcity[testMetadata testName='$CurrentTest' type='artifact' name='Database' value='$elementTag.zip!/$elementTag/1Cv8.1CD']"
+                      	  Write-Host "##teamcity[testMetadata testName='$CurrentTest' type='artifact' name='Allure' value='allure/allure_$elementTag.zip!/index.html']"
                           Write-Host "##teamcity[testFinished name='$CurrentTest' duration='$TotalMilliseconds' flowId='$elementTag']"
                           $CurrentTest = ""
                       }
@@ -739,8 +738,8 @@ $VanessaRun = {
                       $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
 
                       $TotalMilliseconds = [math]::Round($Diff.TotalMilliseconds)
-                      Write-Host "##teamcity[testMetadata testName='$CurrentTest' type='artifact' value='%teamcity.project.id%.zip!/$elementTag/1Cv8.1CD']"
-                      Write-Host "##teamcity[testMetadata testName='$CurrentTest' type='artifact' value='allure/$elementTag/allure_$elementTag.zip!/index.html']"
+                      Write-Host "##teamcity[testMetadata testName='$CurrentTest' type='artifact' name='Database' value='$elementTag.zip!/$elementTag/1Cv8.1CD']"
+                      Write-Host "##teamcity[testMetadata testName='$CurrentTest' type='artifact' name='Allure' value='allure/allure_$elementTag.zip!/index.html']"
                       Write-Host "##teamcity[testFinished name='$CurrentTest' duration='$TotalMilliseconds' flowId='$elementTag']"
                       $CurrentTest =  $Test[$Test.count - 1]
                       $CurrentTest = $CurrentTest.replace("|", "||").replace("'", "|'").replace("[", "|[").replace("]", "|]").replace("`n", "|n").replace("`r", "|r")
@@ -772,7 +771,9 @@ $VanessaRun = {
     $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
                         
     $TotalMilliseconds = [math]::Round($Diff.TotalMilliseconds)
-    Write-Host "##teamcity[testMetadata testName='$CurrentTest' type='artifact' value='allure/$elementTag/allure_$elementTag.zip/index.html']"
+    Write-Host "##teamcity[testMetadata testName='$CurrentTest' type='artifact' name='Database' value='$elementTag.zip!/$elementTag/1Cv8.1CD']"
+    Write-Host "##teamcity[testMetadata testName='$CurrentTest' type='artifact' name='Allure' value='allure/allure_$elementTag.zip!/index.html']"
+
     Write-Host "##teamcity[testFinished name='$CurrentTest' duration='$TotalMilliseconds' flowId='$elementTag']"
     Write-Host "##teamcity[testSuiteFinished name='$CurrentFeatureFile' flowId='$elementTag']"
 
@@ -783,8 +784,10 @@ $VanessaRun = {
     if ($hasFailedTest) {
         &$AllureBatFilePath generate "$allurePath/$elementTag" --clean -o "$workingDir/$FolderForAllArtefact/allureTag/$elementTag"
         Compress-Archive -Path "$workingDir/$FolderForAllArtefact/allureTag/$elementTag/*" -DestinationPath "$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip"
-        Write-Host "##teamcity[publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure/$elementTag']"
+        Write-Host "##teamcity[publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure']"
     }
+    Compress-Archive -Path "VAResult/AllSteps/$elementTag/*" -DestinationPath "$elementTag.zip"
+    Write-Host "##teamcity[publishArtifacts '$elementTag.zip => DataBase']"
 }
 
 $JobArray = @{}

@@ -97,6 +97,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	
 	Tables.Insert("CustomersTransactions", 
@@ -1134,6 +1135,7 @@ EndFunction
 Function GetAdditionalQueryParamenters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
+	StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
 	Return StrParams;
 EndFunction
 
@@ -1206,7 +1208,7 @@ Function ItemList()
 		|	SalesInvoiceItemList.Unit AS Unit,
 		|	SalesInvoiceItemList.Ref.Date AS Period,
 		|	SalesInvoiceItemList.SalesOrder AS SalesOrder,
-		|	NOT SalesInvoiceItemList.SalesOrder = Value(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
+		|	NOT SalesInvoiceItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
 		|	SalesInvoiceItemList.Key AS RowKey,
 		|	SalesInvoiceItemList.DeliveryDate AS DeliveryDate,
 		|	SalesInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
@@ -1473,82 +1475,70 @@ Function R4010B_ActualStocks()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	*
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Quantity
 		|INTO R4010B_ActualStocks
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.IsService
 		|	AND NOT ItemList.UseShipmentConfirmation";
-
 EndFunction
 
 Function R4011B_FreeStocks()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	*
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Quantity - ISNULL(StockReservation.QuantityBalance, 0) AS Quantity
 		|INTO R4011B_FreeStocks
 		|FROM
 		|	ItemList AS ItemList
+		|		LEFT JOIN AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
+		|			(SELECT
+		|				ItemList.Store,
+		|				ItemList.ItemKey,
+		|				ItemList.SalesOrder
+		|			FROM
+		|				ItemList AS ItemList)) AS StockReservation
+		|		ON ItemList.SalesOrder = StockReservation.Order
+		|		AND ItemList.ItemKey = StockReservation.ItemKey
+		|		AND ItemList.Store = StockReservation.Store
 		|WHERE
 		|	NOT ItemList.IsService
-		|	AND NOT ItemList.UseShipmentConfirmation";
-
+		|	AND (ItemList.Quantity - ISNULL(StockReservation.QuantityBalance, 0)) <> 0";
 EndFunction
 
 Function R4012B_StockReservation()
 	Return
 		"SELECT
-		|	R4012B_StockReservationBalance.Store,
-		|	R4012B_StockReservationBalance.ItemKey,
-		|	R4012B_StockReservationBalance.Order,
-		|	R4012B_StockReservationBalance.QuantityBalance AS Quantity
-		|INTO BalanceWithoutRef
-		|FROM
-		|	AccumulationRegister.R4012B_StockReservation.Balance(, Order IN
-		|		(Select
-		|			T.SalesOrder
-		|		From
-		|			ItemList AS T)) AS R4012B_StockReservationBalance
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	R4012B_StockReservation.Store,
-		|	R4012B_StockReservation.ItemKey,
-		|	R4012B_StockReservation.Order,
-		|	R4012B_StockReservation.Quantity
-		|FROM
-		|	AccumulationRegister.R4012B_StockReservation AS R4012B_StockReservation
-		|WHERE
-		|	R4012B_StockReservation.Recorder = &Ref
-		|;
-		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	ItemList.Period AS Period,
 		|	ItemList.SalesOrder AS Order,
 		|	ItemList.ItemKey AS ItemKey,
 		|	ItemList.Store AS Store,
 		|	CASE
-		|		When BalanceWithoutRef.Quantity - ItemList.Quantity >= 0
-		|			Then ItemList.Quantity
-		|		Else BalanceWithoutRef.Quantity
+		|		WHEN StockReservation.QuantityBalance > ItemList.Quantity
+		|			THEN ItemList.Quantity
+		|		ELSE StockReservation.QuantityBalance
 		|	END AS Quantity
 		|INTO R4012B_StockReservation
 		|FROM
 		|	ItemList AS ItemList
-		|		LEFT JOIN BalanceWithoutRef AS BalanceWithoutRef
-		|		ON ItemList.SalesOrder = BalanceWithoutRef.Order
-		|		AND ItemList.ItemKey = BalanceWithoutRef.ItemKey
-		|		AND ItemList.Store = BalanceWithoutRef.Store
-		|WHERE
-		|	BalanceWithoutRef.Quantity > 0
-		|	AND NOT ItemList.UseShipmentConfirmation";
-
+		|		INNER JOIN AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
+		|			(SELECT
+		|				ItemList.Store,
+		|				ItemList.ItemKey,
+		|				ItemList.SalesOrder
+		|			FROM
+		|				ItemList AS ItemList)) AS StockReservation
+		|		ON ItemList.SalesOrder = StockReservation.Order
+		|		AND ItemList.ItemKey = StockReservation.ItemKey
+		|		AND ItemList.Store = StockReservation.Store";
 EndFunction
 
 Function R4014B_SerialLotNumber()

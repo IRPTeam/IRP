@@ -1124,7 +1124,7 @@ Scenario: _0920061 check serial lot number controls in the PurchaseInvoice
 		And I delete "$$PurchaseInvoice0920061$$" variable
 		And I delete "$$NumberPurchaseInvoice0920061$$" variable
 		And I delete "$$DatePurchaseInvoice0920061$$" variable
-		And I save the window as "$$PurchaseInvoice092006$$"
+		And I save the window as "$$PurchaseInvoice0920061$$"
 		And I save the value of the field named "Number" as "$$NumberPurchaseInvoice0920061$$"
 		And I save the value of the field named "Date" as "$$DatePurchaseInvoice0920061$$"
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
@@ -1187,7 +1187,7 @@ Scenario: _0920061 check serial lot number controls in the PurchaseInvoice
 			| ''                                     | 'Receipt'     | '$$DatePurchaseInvoice0920061$$' | '2'         | 'Main Company' | '38/Yellow' | '99098809009908'    |
 		And I close current window
 	* Check the message to the user when the serial number was not filled in
-		And I activate "$$PurchaseInvoice092006$$" window
+		And I activate "$$PurchaseInvoice0920061$$" window
 		And I click the button named "Add"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
@@ -2423,8 +2423,8 @@ Scenario: _092011 check serial lot number in the Item stock adjustment
 			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                                  | ''          | ''             | ''          | ''                  |
 			| ''                                     | 'Record type' | 'Period'                            | 'Resources' | 'Dimensions'   | ''          | ''                  |
 			| ''                                     | ''            | ''                                  | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Expense'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009999'    |
-			| ''                                     | 'Revenue'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '36/Yellow' | '99098809009910'    |
+			| ''                                     | 'Receipt'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009910'    |
+			| ''                                     | 'Expense'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '36/Yellow' | '99098809009999'    |
 		And I close all client application windows
 		
 

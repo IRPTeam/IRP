@@ -943,8 +943,8 @@ Start-Sleep 10]]></param>
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code"><![CDATA[New-Item -Path "VAResult\allure\base" -Name "history" -ItemType "directory" -Force
-Copy-Item -Path "allure-history\*" -Destination "VAResult\allure\base\history" -Force
+          <param name="jetbrains_powershell_script_code"><![CDATA[#New-Item -Path "VAResult\allure\base" -Name "history" -ItemType "directory" -Force
+#Copy-Item -Path "allure-history\*" -Destination "VAResult\allure\base\history" -Force
 %teamcity.tool.allure-commandline%\bin\allure.bat generate "VAResult/allure/*" --clean -o "allure-report"
 Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />

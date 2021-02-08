@@ -715,7 +715,8 @@ $VanessaRun = {
                           $EndDate = Get-Date
                           $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
                           $TotalMilliseconds = [math]::Round($Diff.TotalMilliseconds)
-                          Write-Host "##teamcity[testMetadata testName='$CurrentTest' type='artifact' value='allure/$elementTag/allure_$elementTag.zip/index.html']"
+                          Write-Host "##teamcity[testMetadata testName='$CurrentTest' type='artifact' value='%teamcity.project.id%.zip!/$elementTag/1Cv8.1CD']"
+                          Write-Host "##teamcity[testMetadata testName='$CurrentTest' type='artifact' value='allure/$elementTag/allure_$elementTag.zip!/index.html']"
                           Write-Host "##teamcity[testFinished name='$CurrentTest' duration='$TotalMilliseconds' flowId='$elementTag']"
                           $CurrentTest = ""
                       }
@@ -736,6 +737,7 @@ $VanessaRun = {
                       $Diff =  New-TimeSpan -Start $CurrentDate -End $EndDate
 
                       $TotalMilliseconds = [math]::Round($Diff.TotalMilliseconds)
+                      Write-Host "##teamcity[testMetadata testName='$CurrentTest' type='artifact' value='%teamcity.project.id%.zip!/$elementTag/1Cv8.1CD']"
                       Write-Host "##teamcity[testMetadata testName='$CurrentTest' type='artifact' value='allure/$elementTag/allure_$elementTag.zip/index.html']"
                       Write-Host "##teamcity[testFinished name='$CurrentTest' duration='$TotalMilliseconds' flowId='$elementTag']"
                       $CurrentTest =  $Test[$Test.count - 1]

@@ -116,6 +116,7 @@ Scenario: _022401 create GR and PI
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table contains lines
 			| 'Item'     | 'Item key'  | 'Dont calculate row' | 'Unit' | 'Q'      |
 			| 'Dress'    | 'XS/Blue'   | 'No'                 | 'pcs'  | '10,000' |
@@ -125,13 +126,6 @@ Scenario: _022401 create GR and PI
 			And I go to line in "List" table
 				| 'Description'        |
 				| 'Vendor Ferron, TRY' |
-			And I select current line in "List" table
-			Then "Update item list info" window is opened
-			And I click "OK" button
-			And I click Choice button of the field named "Store"
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
 			And I click "OK" button
@@ -164,6 +158,7 @@ Scenario: _022401 create GR and PI
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table contains lines
 			| 'Item'     | 'Item key'  | 'Dont calculate row' | 'Unit' | 'Q'      |
 			| 'Dress'    | 'XS/Blue'   | 'No'                 | 'pcs'  | '5,000' |
@@ -172,13 +167,6 @@ Scenario: _022401 create GR and PI
 			And I go to line in "List" table
 				| 'Description'        |
 				| 'Vendor Ferron, TRY' |
-			And I select current line in "List" table
-			Then "Update item list info" window is opened
-			And I click "OK" button
-			And I click Choice button of the field named "Store"
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
 			And I select current line in "List" table
 			Then "Update item list info" window is opened
 			And I click "OK" button
@@ -206,13 +194,13 @@ Scenario: _022402 check GR postings (register R1031)
 	And I select "R1031 Receipt invoicing" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
-		| '$$GoodsReceipt022401$$'              | ''            | ''                           | ''          | ''             | ''                      | ''          |
-		| 'Document registrations records'      | ''            | ''                           | ''          | ''             | ''                      | ''          |
-		| 'Register  "R1031 Receipt invoicing"' | ''            | ''                           | ''          | ''             | ''                      | ''          |
-		| ''                                    | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''                      | ''          |
-		| ''                                    | ''            | ''                           | 'Quantity'  | 'Company'      | 'Basis'                 | 'Item key'  |
-		| ''                                    | 'Receipt'     | '$$DateGoodsReceipt022401$$' | '10'        | 'Main Company' | '$$GoodsReceipt022401$$' | 'XS/Blue'   |
-		| ''                                    | 'Receipt'     | '$$DateGoodsReceipt022401$$' | '20'        | 'Main Company' | '$$GoodsReceipt022401$$' | '38/Yellow' |
+		| '$$GoodsReceipt022401$$'              | ''            | ''                           | ''          | ''             | ''         | ''                       | ''          |
+		| 'Document registrations records'      | ''            | ''                           | ''          | ''             | ''         | ''                       | ''          |
+		| 'Register  "R1031 Receipt invoicing"' | ''            | ''                           | ''          | ''             | ''         | ''                       | ''          |
+		| ''                                    | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''         | ''                       | ''          |
+		| ''                                    | ''            | ''                           | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                  | 'Item key'  |
+		| ''                                    | 'Receipt'     | '$$DateGoodsReceipt022401$$' | '10'        | 'Main Company' | 'Store 02' | '$$GoodsReceipt022401$$' | 'XS/Blue'   |
+		| ''                                    | 'Receipt'     | '$$DateGoodsReceipt022401$$' | '20'        | 'Main Company' | 'Store 02' | '$$GoodsReceipt022401$$' | '38/Yellow' |
 	And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
@@ -260,13 +248,13 @@ Scenario: _022403 check PI postings
 	And I select "R1031 Receipt invoicing" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseInvoice0224011$$'          | ''            | ''                               | ''          | ''             | ''                      | ''          |
-		| 'Document registrations records'      | ''            | ''                               | ''          | ''             | ''                      | ''          |
-		| 'Register  "R1031 Receipt invoicing"' | ''            | ''                               | ''          | ''             | ''                      | ''          |
-		| ''                                    | 'Record type' | 'Period'                         | 'Resources' | 'Dimensions'   | ''                      | ''          |
-		| ''                                    | ''            | ''                               | 'Quantity'  | 'Company'      | 'Basis'                 | 'Item key'  |
-		| ''                                    | 'Expense'     | '$$DatePurchaseInvoice0224011$$' | '5'         | 'Main Company' | '$$GoodsReceipt022401$$' | 'XS/Blue'   |
-		| ''                                    | 'Expense'     | '$$DatePurchaseInvoice0224011$$' | '20'        | 'Main Company' | '$$GoodsReceipt022401$$' | '38/Yellow' |
+		| '$$PurchaseInvoice0224011$$'          | ''            | ''                               | ''          | ''             | ''                      | ''                       | ''          |
+		| 'Document registrations records'      | ''            | ''                               | ''          | ''             | ''                      | ''                       | ''          |
+		| 'Register  "R1031 Receipt invoicing"' | ''            | ''                               | ''          | ''             | ''                      | ''                       | ''          |
+		| ''                                    | 'Record type' | 'Period'                         | 'Resources' | 'Dimensions'   | ''                      | ''                       | ''          |
+		| ''                                    | ''            | ''                               | 'Quantity'  | 'Company'      | 'Store'                 | 'Basis'                  | 'Item key'  |
+		| ''                                    | 'Expense'     | '$$DatePurchaseInvoice0224011$$' | '5'         | 'Main Company' | 'Store 02'              | '$$GoodsReceipt022401$$' | 'XS/Blue'   |
+		| ''                                    | 'Expense'     | '$$DatePurchaseInvoice0224011$$' | '20'        | 'Main Company' | 'Store 02'              | '$$GoodsReceipt022401$$' | '38/Yellow' |
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
@@ -277,12 +265,12 @@ Scenario: _022403 check PI postings
 	And I select "R1031 Receipt invoicing" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseInvoice0224012$$'          | ''            | ''                               | ''          | ''             | ''                      | ''         |
-		| 'Document registrations records'      | ''            | ''                               | ''          | ''             | ''                      | ''         |
-		| 'Register  "R1031 Receipt invoicing"' | ''            | ''                               | ''          | ''             | ''                      | ''         |
-		| ''                                    | 'Record type' | 'Period'                         | 'Resources' | 'Dimensions'   | ''                      | ''         |
-		| ''                                    | ''            | ''                               | 'Quantity'  | 'Company'      | 'Basis'                 | 'Item key' |
-		| ''                                    | 'Expense'     | '$$DatePurchaseInvoice0224012$$' | '5'         | 'Main Company' | '$$GoodsReceipt022401$$' | 'XS/Blue'  |
+		| '$$PurchaseInvoice0224012$$'          | ''            | ''                               | ''          | ''             | ''                      | ''                      | ''         |
+		| 'Document registrations records'      | ''            | ''                               | ''          | ''             | ''                      | ''                      | ''         |
+		| 'Register  "R1031 Receipt invoicing"' | ''            | ''                               | ''          | ''             | ''                      | ''                      | ''         |
+		| ''                                    | 'Record type' | 'Period'                         | 'Resources' | 'Dimensions'   | ''                      | ''                      | ''         |
+		| ''                                    | ''            | ''                               | 'Quantity'  | 'Company'      | 'Store'                 | 'Basis'                 | 'Item key' |
+		| ''                                    | 'Expense'     | '$$DatePurchaseInvoice0224012$$' | '5'         | 'Main Company' | 'Store 02'              | '$$GoodsReceipt022401$$' | 'XS/Blue'  |
 	And I select "R4011 Free stocks" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document does not contain values

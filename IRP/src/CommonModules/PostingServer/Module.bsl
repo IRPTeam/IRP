@@ -150,7 +150,9 @@ Function RegisterRecords(DocObject, PostingDataTables, AllRegisterRecords)
 		// Set write
 		If Row.Value.Property("WriteInTransaction") And Row.Value.WriteInTransaction Then
 			// write when transaction will be commited or rollback
-			RecordSet.LockForUpdate = True;
+			If Metadata.AccumulationRegisters.Contains(RecordSet.Metadata()) Then
+				RecordSet.LockForUpdate = True;
+			EndIf;
 			RecordSet.Write();
 		Else // write oly when transaction will be commited	
 			RecordSet.Write = True;

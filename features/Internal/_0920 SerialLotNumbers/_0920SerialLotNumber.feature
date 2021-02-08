@@ -1128,7 +1128,7 @@ Scenario: _0920061 check serial lot number controls in the PurchaseInvoice
 		And I save the value of the field named "Number" as "$$NumberPurchaseInvoice0920061$$"
 		And I save the value of the field named "Date" as "$$DatePurchaseInvoice0920061$$"
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
-		And I activate "$$PurchaseInvoice092006$$" window
+		And I activate "$$PurchaseInvoice0920061$$" window
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  | 'Q'     |
 			| 'Trousers' | '38/Yellow' | '1,000' |
@@ -1568,7 +1568,7 @@ Scenario: _0920072 check filling in serial lot number in the PurchaseReturn	from
 			| 'Dress' | 'XS/Blue'  | '05'                 | '200,000' | 'pcs'  | 'No'                 | '18 720,00'  | '520,00' | '18%' | ''              | '104 000,00' | 'Purchase invoice 25 dated 01.12.2020 12:00:00' | ''                      | '122 720,00'   | 'Store 05' |
 		And I close all client application windows
 		
-
+					
 
 
 Scenario: _092008 check serial lot number in the Opening entry
@@ -2369,7 +2369,7 @@ Scenario: _092011 check serial lot number in the Item stock adjustment
 		And I click choice button of "Serial lot number (surplus)" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Owner'   | 'Serial number' |
-			| '38/Yellow' | '99098809009910'            |
+			| '38/Yellow' | '99098809009910'             |
 		And I select current line in "List" table
 		And I click choice button of "Item key (write off)" attribute in "ItemList" table
 		And I go to line in "List" table
@@ -2423,8 +2423,8 @@ Scenario: _092011 check serial lot number in the Item stock adjustment
 			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                                  | ''          | ''             | ''          | ''                  |
 			| ''                                     | 'Record type' | 'Period'                            | 'Resources' | 'Dimensions'   | ''          | ''                  |
 			| ''                                     | ''            | ''                                  | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Expense'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '36/Yellow' | '99098809009999'    |
-			| ''                                     | 'Revenue'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009910'    |
+			| ''                                     | 'Expense'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009999'    |
+			| ''                                     | 'Revenue'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '36/Yellow' | '99098809009910'    |
 		And I close all client application windows
 		
 

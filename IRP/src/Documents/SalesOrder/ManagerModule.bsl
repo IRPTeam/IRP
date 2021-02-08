@@ -1697,7 +1697,6 @@ Function GetQueryTextsMasterTables()
 EndFunction	
 
 Function ItemList()
-
 	Return
 		"SELECT
 		|	SalesOrderItemList.Ref.Company AS Company,
@@ -1734,119 +1733,132 @@ EndFunction
 
 Function R2010T_SalesOrders()
 	Return
-		"SELECT *
+		"SELECT
+		|	*
 		|INTO R2010T_SalesOrders
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE NOT QueryTable.isCanceled";
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.isCanceled";
 
 EndFunction
 
 Function R2011B_SalesOrdersShipment()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	*
 		|INTO R2011B_SalesOrdersShipment
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE NOT QueryTable.isCanceled
-		|	AND NOT QueryTable.IsService";
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.isCanceled
+		|	AND NOT ItemList.IsService";
 
 EndFunction
 
 Function R2012B_SalesOrdersInvoiceClosing()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	*
 		|INTO R2012B_SalesOrdersInvoiceClosing
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE NOT QueryTable.isCanceled";
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.isCanceled";
 
 EndFunction
 
 Function R2013T_SalesOrdersProcurement()
 	Return
-		"SELECT 
-		|QueryTable.Quantity AS OrderedQuantity,
-		|*
+		"SELECT
+		|	ItemList.Quantity AS OrderedQuantity,
+		|	*
 		|INTO R2013T_SalesOrdersProcurement
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE NOT QueryTable.isCanceled AND NOT QueryTable.IsService
-		|	AND QueryTable.IsProcurementMethod_Purchase";
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.isCanceled
+		|	AND NOT ItemList.IsService
+		|	AND ItemList.IsProcurementMethod_Purchase";
 
 EndFunction
 
 Function R2014T_CanceledSalesOrders()
 	Return
-		"SELECT *
+		"SELECT
+		|	*
 		|INTO R2014T_CanceledSalesOrders
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE QueryTable.isCanceled";
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.isCanceled";
 
 EndFunction
 
 Function R4011B_FreeStocks()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	*
 		|INTO R4011B_FreeStocks
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE NOT QueryTable.isCanceled AND NOT QueryTable.IsService
-		|	AND QueryTable.IsProcurementMethod_Stock";
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.isCanceled
+		|	AND NOT ItemList.IsService
+		|	AND ItemList.IsProcurementMethod_Stock";
 
 EndFunction
 
 Function R4012B_StockReservation()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	*
 		|INTO R4012B_StockReservation
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE  NOT QueryTable.isCanceled AND NOT QueryTable.IsService
-		|	AND QueryTable.IsProcurementMethod_Stock";
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.isCanceled
+		|	AND NOT ItemList.IsService
+		|	AND ItemList.IsProcurementMethod_Stock";
 
 EndFunction
 
 Function R4013B_StockReservationPlanning()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	*
 		|INTO R4013B_StockReservationPlanning
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE FALSE";
+		|	ItemList AS ItemList
+		|WHERE
+		|	FALSE";
 
 EndFunction
 
 Function R4034B_GoodsShipmentSchedule()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	CASE WHEN QueryTable.DeliveryDate = DATETIME(1, 1, 1) THEN
-		|		QueryTable.Period
-		|	ELSE
-		|		QueryTable.DeliveryDate
+		|	CASE
+		|		WHEN ItemList.DeliveryDate = DATETIME(1, 1, 1)
+		|			THEN ItemList.Period
+		|		ELSE ItemList.DeliveryDate
 		|	END AS Period,
-		|	QueryTable.Order AS Basis,
+		|	ItemList.Order AS Basis,
 		|	*
-		|
 		|INTO R4034B_GoodsShipmentSchedule
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE NOT QueryTable.isCanceled 
-		|	AND NOT QueryTable.IsService
-		|	AND QueryTable.IsProcurementMethod_Stock
-		|	AND QueryTable.UseItemsShipmentScheduling";
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.isCanceled
+		|	AND NOT ItemList.IsService
+		|	AND ItemList.IsProcurementMethod_Stock
+		|	AND ItemList.UseItemsShipmentScheduling";
 
 EndFunction
 

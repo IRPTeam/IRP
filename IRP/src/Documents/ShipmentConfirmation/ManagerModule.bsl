@@ -164,6 +164,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 #Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion
 	
@@ -494,7 +495,7 @@ Procedure GetTables_UseSO_SCBeforeInvoice_IsProduct(Tables, TempManager, TableNa
 		|	tmp.Period,
 		|	CAST(tmp.ShipmentBasis AS Document.InventoryTransfer).StoreTransit
 		|;
-		|//[2] - StockReservation
+		|//[6] - StockReservation
 		|SELECT
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
@@ -618,39 +619,7 @@ EndProcedure
 #EndRegion
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// GoodsInTransitOutgoing
-	GoodsInTransitOutgoing = 
-	AccumulationRegisters.GoodsInTransitOutgoing.GetLockFields(DocumentDataTables.GoodsInTransitOutgoing);
-	DataMapWithLockFields.Insert(GoodsInTransitOutgoing.RegisterName, GoodsInTransitOutgoing.LockInfo);
-	
-	// StockBalance
-	StockBalance = 
-	AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Expense);
-	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
-	// ShipmentOrders
-	ShipmentOrders = 
-	AccumulationRegisters.ShipmentOrders.GetLockFields(DocumentDataTables.ShipmentOrders);
-	DataMapWithLockFields.Insert(ShipmentOrders.RegisterName, ShipmentOrders.LockInfo);
-	
-	// ShipmentConfirmationSchedule
-	ShipmentConfirmationSchedule = 
-	AccumulationRegisters.ShipmentConfirmationSchedule.GetLockFields(DocumentDataTables.ShipmentConfirmationSchedule);
-	DataMapWithLockFields.Insert(ShipmentConfirmationSchedule.RegisterName, ShipmentConfirmationSchedule.LockInfo);
-	
-	// InventoryBalance
-	InventoryBalance = 
-	AccumulationRegisters.InventoryBalance.GetLockFields(DocumentDataTables.InventoryBalance);
-	DataMapWithLockFields.Insert(InventoryBalance.RegisterName, InventoryBalance.LockInfo);
-	
-	// StockReservation
-	StockReservation = 
-	AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-		
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -738,25 +707,7 @@ Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Und
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// GoodsInTransitOutgoing
-	GoodsInTransitOutgoing = AccumulationRegisters.GoodsInTransitOutgoing.GetLockFields(DocumentDataTables.GoodsInTransitOutgoing_Exists);
-	DataMapWithLockFields.Insert(GoodsInTransitOutgoing.RegisterName, GoodsInTransitOutgoing.LockInfo);
-	
-	// ShipmentOrders
-	ShipmentOrders = AccumulationRegisters.ShipmentOrders.GetLockFields(DocumentDataTables.ShipmentOrders_Exists);
-	DataMapWithLockFields.Insert(ShipmentOrders.RegisterName, ShipmentOrders.LockInfo);
-	
-	// StockReservation
-	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation_Exists);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
-	// StockBalance
-	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Exists);
-	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -811,6 +762,7 @@ EndFunction
 Function GetAdditionalQueryParamenters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
+	StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
 	Return StrParams;
 EndFunction
 
@@ -826,6 +778,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2013T_SalesOrdersProcurement());
 	QueryArray.Add(R2031B_ShipmentInvoicing());
 	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4012B_StockReservation());
 	QueryArray.Add(R4022B_StockTransferOrdersShipment());
 	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
@@ -846,17 +799,17 @@ Function ItemList()
 		|	ItemList.Ref.Date AS Period,
 		|	ItemList.Key AS RowKey,
 		|	ItemList.SalesOrder AS SalesOrder,
-		|	NOT ItemList.SalesOrder = Value(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
+		|	NOT ItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
 		|	ItemList.SalesInvoice AS SalesInvoice,
-		|	NOT ItemList.SalesInvoice = Value(Document.SalesInvoice.EmptyRef) AS SalesInvoiceExists,
+		|	NOT ItemList.SalesInvoice.Ref IS NULL AS SalesInvoiceExists,
 		|	ItemList.PurchaseReturnOrder AS PurchaseReturnOrder,
-		|	NOT ItemList.PurchaseReturnOrder = Value(Document.PurchaseReturnOrder.EmptyRef) AS PurchaseReturnOrderExists,
+		|	NOT ItemList.PurchaseReturnOrder.Ref IS NULL AS PurchaseReturnOrderExists,
 		|	ItemList.PurchaseReturn AS PurchaseReturn,
-		|	NOT ItemList.PurchaseReturn = Value(Document.PurchaseReturn.EmptyRef) AS PurchaseReturnExists,
+		|	NOT ItemList.PurchaseReturn.Ref IS NULL AS PurchaseReturnExists,
 		|	ItemList.InventoryTransferOrder AS InventoryTransferOrder,
-		|	NOT ItemList.InventoryTransferOrder = Value(Document.InventoryTransferOrder.EmptyRef) AS InventoryTransferOrderExists,
+		|	NOT ItemList.InventoryTransferOrder.Ref IS NULL AS InventoryTransferOrderExists,
 		|	ItemList.InventoryTransfer AS InventoryTransfer,
-		|	NOT ItemList.InventoryTransfer = Value(Document.InventoryTransfer.EmptyRef) AS InventoryTransferExists
+		|	NOT ItemList.InventoryTransfer.Ref IS NULL AS InventoryTransferExists
 		|INTO ItemList
 		|FROM
 		|	Document.ShipmentConfirmation.ItemList AS ItemList
@@ -866,58 +819,61 @@ EndFunction
 
 Function R2011B_SalesOrdersShipment()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	QueryTable.SalesOrder AS Order,
+		|	ItemList.SalesOrder AS Order,
 		|	*
 		|INTO R2011B_SalesOrdersShipment
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE QueryTable.SalesOrderExists";
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.SalesOrderExists";
 
 EndFunction
 
 Function R2013T_SalesOrdersProcurement()
 	Return
 		"SELECT
-		|	QueryTable.Quantity AS ShippedQuantity,
-		|	QueryTable.SalesOrder AS Order,
+		|	ItemList.Quantity AS ShippedQuantity,
+		|	ItemList.SalesOrder AS Order,
 		|	*
 		|INTO R2013T_SalesOrdersProcurement
 		|FROM
-		|	ItemList AS QueryTable
+		|	ItemList AS ItemList
 		|WHERE
-		|	QueryTable.SalesOrderExists";
-
+		|	ItemList.SalesOrderExists";
 EndFunction
 
 Function R2031B_ShipmentInvoicing()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	QueryTable.ShipmentConfirmation AS Basis,
-		|	QueryTable.Quantity AS Quantity,
-		|	QueryTable.Company,
-		|	QueryTable.Period,
-		|	QueryTable.ItemKey
-		|INTO R1031B_ReceiptInvoicing
+		|	ItemList.ShipmentConfirmation AS Basis,
+		|	ItemList.Quantity AS Quantity,
+		|	ItemList.Company,
+		|	ItemList.Period,
+		|	ItemList.ItemKey,
+		|	ItemList.Store
+		|INTO R2031B_ShipmentInvoicing
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE NOT QueryTable.SalesInvoiceExists
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.SalesInvoiceExists
 		|
 		|UNION ALL
 		|
-		|SELECT 
+		|SELECT
 		|	VALUE(AccumulationRecordType.Expense),
-		|	QueryTable.SalesInvoice,
-		|	QueryTable.Quantity,
-		|	QueryTable.Company,
-		|	QueryTable.Period,
-		|	QueryTable.ItemKey
+		|	ItemList.SalesInvoice,
+		|	ItemList.Quantity,
+		|	ItemList.Company,
+		|	ItemList.Period,
+		|	ItemList.ItemKey,
+		|	ItemList.Store
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE QueryTable.SalesInvoiceExists";
-
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.SalesInvoiceExists";
 EndFunction
 
 Function R4010B_ActualStocks()
@@ -927,101 +883,117 @@ Function R4010B_ActualStocks()
 		|	*
 		|INTO R4010B_ActualStocks
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE TRUE";
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
+EndFunction
 
+Function R4011B_FreeStocks()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Quantity - ISNULL(StockReservation.QuantityBalance, 0) - ISNULL(ShipmentInvoicing.QuantityBalance, 0) AS
+		|		Quantity
+		|INTO R4011B_FreeStocks
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
+		|			(SELECT
+		|				ItemList.Store,
+		|				ItemList.ItemKey,
+		|				ItemList.SalesOrder
+		|			FROM
+		|				ItemList AS ItemList)) AS StockReservation
+		|		ON ItemList.SalesOrder = StockReservation.Order
+		|		AND ItemList.ItemKey = StockReservation.ItemKey
+		|		AND ItemList.Store = StockReservation.Store
+		|		LEFT JOIN AccumulationRegister.R2031B_ShipmentInvoicing.Balance(&BalancePeriod, (Company, Store, Basis, ItemKey) IN
+		|			(SELECT
+		|				ItemList.Company,
+		|				ItemList.Store,
+		|				ItemList.SalesInvoice,
+		|				ItemList.ItemKey
+		|			FROM
+		|				ItemList AS ItemList)) AS ShipmentInvoicing
+		|		ON ItemList.Company = ShipmentInvoicing.Company
+		|		AND ItemList.Store = ShipmentInvoicing.Store
+		|		AND ItemList.SalesInvoice = ShipmentInvoicing.Basis
+		|		AND ItemList.ItemKey = ShipmentInvoicing.ItemKey
+		|WHERE
+		|	ItemList.Quantity - ISNULL(StockReservation.QuantityBalance, 0) - ISNULL(ShipmentInvoicing.QuantityBalance, 0) <> 0";
 EndFunction
 
 Function R4012B_StockReservation()
 	Return
 		"SELECT
-		|	R4012B_StockReservationBalance.Store,
-		|	R4012B_StockReservationBalance.ItemKey,
-		|	R4012B_StockReservationBalance.Order,
-		|	R4012B_StockReservationBalance.QuantityBalance AS Quantity
-		|INTO BalanceWithoutRef
-		|FROM
-		|	AccumulationRegister.R4012B_StockReservation.Balance(, Order IN
-		|		(Select
-		|			T.SalesOrder
-		|		From
-		|			ItemList AS T)) AS R4012B_StockReservationBalance
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	R4012B_StockReservation.Store,
-		|	R4012B_StockReservation.ItemKey,
-		|	R4012B_StockReservation.Order,
-		|	R4012B_StockReservation.Quantity
-		|FROM
-		|	AccumulationRegister.R4012B_StockReservation AS R4012B_StockReservation
-		|WHERE
-		|	R4012B_StockReservation.Recorder = &Ref
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	QueryTable.Period AS Period,
-		|	QueryTable.SalesOrder AS Order,
-		|	QueryTable.ItemKey AS ItemKey,
-		|	QueryTable.Store AS Store,
+		|	ItemList.Period AS Period,
+		|	ItemList.SalesOrder AS Order,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Store AS Store,
 		|	CASE
-		|		When BalanceWithoutRef.Quantity - QueryTable.Quantity >= 0
-		|			Then QueryTable.Quantity
-		|		Else BalanceWithoutRef.Quantity
+		|		WHEN StockReservation.QuantityBalance > ItemList.Quantity
+		|			THEN ItemList.Quantity
+		|		ELSE StockReservation.QuantityBalance
 		|	END AS Quantity
 		|INTO R4012B_StockReservation
 		|FROM
-		|	ItemList AS QueryTable
-		|		LEFT JOIN BalanceWithoutRef AS BalanceWithoutRef
-		|		ON QueryTable.SalesOrder = BalanceWithoutRef.Order
-		|		AND QueryTable.ItemKey = BalanceWithoutRef.ItemKey
-		|		AND QueryTable.Store = BalanceWithoutRef.Store
-		|WHERE
-		|	BalanceWithoutRef.Quantity > 0
-		|	AND QueryTable.SalesOrderExists";
-
+		|	ItemList AS ItemList
+		|		INNER JOIN AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
+		|			(SELECT
+		|				ItemList.Store,
+		|				ItemList.ItemKey,
+		|				ItemList.SalesOrder
+		|			FROM
+		|				ItemList AS ItemList)) AS StockReservation
+		|		ON ItemList.SalesOrder = StockReservation.Order
+		|		AND ItemList.ItemKey = StockReservation.ItemKey
+		|		AND ItemList.Store = StockReservation.Store";
 EndFunction
 
 Function R4022B_StockTransferOrdersShipment()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	QueryTable.InventoryTransferOrder AS Order,
+		|	ItemList.InventoryTransferOrder AS Order,
 		|	*
 		|INTO R4022B_StockTransferOrdersShipment
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE QueryTable.InventoryTransferOrderExists";
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.InventoryTransferOrderExists";
 
 EndFunction
 
 Function R4032B_GoodsInTransitOutgoing()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	QueryTable.InventoryTransfer AS Basis,
+		|	ItemList.InventoryTransfer AS Basis,
 		|	*
 		|INTO R4032B_GoodsInTransitOutgoing
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE QueryTable.InventoryTransferExists";
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.InventoryTransferExists";
 
 EndFunction
 
 Function R4034B_GoodsShipmentSchedule()
 	Return
-		"SELECT 
+		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	QueryTable.SalesOrder AS Basis,
+		|	ItemList.SalesOrder AS Basis,
 		|	*
 		|INTO R4034B_GoodsShipmentSchedule
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE QueryTable.SalesOrderExists
-		|	AND QueryTable.SalesOrder.UseItemsShipmentScheduling";
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.SalesOrderExists
+		|	AND ItemList.SalesOrder.UseItemsShipmentScheduling";
 
 EndFunction
 

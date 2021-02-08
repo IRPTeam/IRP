@@ -480,6 +480,7 @@ Function GetDocumentTable_GoodsReceipt(ArrayOfBasisDocuments)
 	BasedOnGoodsReceiptTable.Columns.Add("LegalName", New TypeDescription("CatalogRef.Companies"));
 	BasedOnGoodsReceiptTable.Columns.Add("Company", New TypeDescription("CatalogRef.Companies"));
 	BasedOnGoodsReceiptTable.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
+	BasedOnGoodsReceiptTable.Columns.Add("Store", New TypeDescription("CatalogRef.Stores"));
 	
 	GoodsReceiptsTable = CreateTable_GoodsReceipts();
 	
@@ -500,6 +501,7 @@ Function GetDocumentTable_GoodsReceipt(ArrayOfBasisDocuments)
 			BasedOnGoodsReceiptTable_NewRow.Partner = Row.GoodsReceipt.Partner;
 			BasedOnGoodsReceiptTable_NewRow.LegalName = Row.GoodsReceipt.LegalName;	
 			BasedOnGoodsReceiptTable_NewRow.Company = Row.GoodsReceipt.Company;	
+			BasedOnGoodsReceiptTable_NewRow.Store = Row.Store;	
 			If ValueIsFilled(Row.ItemKey.Unit) Then
 				BasedOnGoodsReceiptTable_NewRow.Unit = Row.ItemKey.Unit;
 			Else
@@ -704,7 +706,8 @@ Function GetInfoGoodsReceipt(ArrayOfGoodsReceipt)
 		|	ReceiptOrders.GoodsReceipt AS GoodsReceipt,
 		|	ReceiptOrders.ItemKey AS ItemKey,
 		|	ReceiptOrders.Quantity AS Quantity,
-		|	ReceiptOrders.RowKey AS RowKey
+		|	ReceiptOrders.RowKey AS RowKey,
+		|	VALUE(Catalog.Stores.EmptyRef) AS Store
 		|FROM
 		|	ReceiptOrders AS ReceiptOrders
 		|
@@ -715,7 +718,8 @@ Function GetInfoGoodsReceipt(ArrayOfGoodsReceipt)
 		|	ReceiptInvoicing.Basis,
 		|	ReceiptInvoicing.ItemKey,
 		|	ReceiptInvoicing.QuantityBalance,
-		|	""""
+		|	"""",
+		|	ReceiptInvoicing.Store
 		|FROM
 		|	AccumulationRegister.R1031B_ReceiptInvoicing.Balance(, Basis IN (&ArrayOfGoodsReceipt)
 		|	AND NOT (Basis, ItemKey) IN
@@ -732,7 +736,7 @@ Function GetInfoGoodsReceipt(ArrayOfGoodsReceipt)
 	
 	InfoGoodsReceipt = New Array;
 	While Selection.Next() Do
-		RowStructure = New Structure("Order,GoodsReceipt,ItemKey,RowKey,Quantity");
+		RowStructure = New Structure("Order, GoodsReceipt, Store, ItemKey, RowKey, Quantity");
 		FillPropertyValues(RowStructure, Selection);
 		InfoGoodsReceipt.Add(RowStructure);
 	EndDo;

@@ -30,8 +30,12 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") Then
 		If FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesInvoice" Then
 			Filling_BasedOnSalesInvoice(FillingData);
-		ElsIf FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesReturnOrder" Then
+		EndIf;
+		If FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesReturnOrder" Then
 			Filling_BasedOnSalesReturnOrder(FillingData);
+		EndIf;
+		If FillingData.Property("BasedOn") And FillingData.BasedOn = "GoodsReceipt" Then
+			Filling_BasedOnGoodsReceipt(FillingData);
 		EndIf;
 	EndIf;
 EndProcedure
@@ -74,6 +78,19 @@ Procedure Filling_BasedOnSalesReturnOrder(FillingData)
 		NewRow = ThisObject.SpecialOffers.Add();
 		FillPropertyValues(NewRow, Row);
 	EndDo;
+EndProcedure
+
+Procedure Filling_BasedOnGoodsReceipt(FillingData)
+	FillPropertyValues(ThisObject, FillingData, "Company,Partner,LegalName");
+	
+	For Each Row In FillingData.ItemList Do
+		NewRow = ThisObject.ItemList.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+	For Each Row In FillingData.GoodsReceipts Do
+		NewRow = ThisObject.GoodsReceipts.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;	
 EndProcedure
 
 Procedure OnCopy(CopiedObject)

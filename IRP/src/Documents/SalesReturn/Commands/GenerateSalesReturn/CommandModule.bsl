@@ -32,12 +32,15 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	
 	ArrayOf_SalesInvoice = New Array();
 	ArrayOf_SalesReturnOrder = New Array();
+	ArrayOf_GoodsReceipt = New Array();
 	
 	For Each Row In ArrayOfBasisDocuments Do
 		If TypeOf(Row) = Type("DocumentRef.SalesInvoice") Then
 			ArrayOf_SalesInvoice.Add(Row);
 		ElsIf TypeOf(Row) = Type("DocumentRef.SalesReturnOrder") Then
 			ArrayOf_SalesReturnOrder.Add(Row);
+		ElsIf TypeOf(Row) = Type("DocumentRef.GoodsReceipt") Then
+			ArrayOf_GoodsReceipt.Add(Row);
 		Else
 			Raise R().Error_043;
 		EndIf;
@@ -46,6 +49,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOfTables = New Array();
 	ArrayOfTables.Add(GetDocumentTable_SalesInvoice(ArrayOf_SalesInvoice));
 	ArrayOfTables.Add(GetDocumentTable_SalesReturnOrder(ArrayOf_SalesReturnOrder));
+	ArrayOfTables.Add(GetDocumentTable_GoodsReceipt(ArrayOf_GoodsReceipt));
 	
 	Return JoinDocumentsStructure(ArrayOfTables, 
 	"BasedOn, Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax");
@@ -79,7 +83,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFields)
 	ItemList.Columns.Add("RowKey"			, New TypeDescription("String"));
 	ItemList.Columns.Add("DontCalculateRow" , New TypeDescription("Boolean"));
 	
-	TaxListMetadataColumns = Metadata.Documents.SalesInvoice.TabularSections.TaxList.Attributes;
+	TaxListMetadataColumns = Metadata.Documents.SalesReturn.TabularSections.TaxList.Attributes;
 	TaxList = New ValueTable();
 	TaxList.Columns.Add("Key"					, TaxListMetadataColumns.Key.Type);
 	TaxList.Columns.Add("Tax"					, TaxListMetadataColumns.Tax.Type);
@@ -90,19 +94,27 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFields)
 	TaxList.Columns.Add("ManualAmount"			, TaxListMetadataColumns.ManualAmount.Type);
 	TaxList.Columns.Add("Ref"					, New TypeDescription("DocumentRef.SalesReturnOrder"));
 	
-	SpecialOffersMetadataColumns = Metadata.Documents.SalesInvoice.TabularSections.SpecialOffers.Attributes;
+	SpecialOffersMetadataColumns = Metadata.Documents.SalesReturn.TabularSections.SpecialOffers.Attributes;
 	SpecialOffers = New ValueTable();
 	SpecialOffers.Columns.Add("Key"		, SpecialOffersMetadataColumns.Key.Type);
 	SpecialOffers.Columns.Add("Offer"	, SpecialOffersMetadataColumns.Offer.Type);
 	SpecialOffers.Columns.Add("Amount"	, SpecialOffersMetadataColumns.Amount.Type);
 	SpecialOffers.Columns.Add("Ref"		, New TypeDescription("DocumentRef.SalesReturnOrder"));
 	
-	SerialLotNumbersMetadataColumns = Metadata.Documents.SalesInvoice.TabularSections.SerialLotNumbers.Attributes;
+	SerialLotNumbersMetadataColumns = Metadata.Documents.SalesReturn.TabularSections.SerialLotNumbers.Attributes;
 	SerialLotNumbers = New ValueTable();
 	SerialLotNumbers.Columns.Add("Key"		       , SerialLotNumbersMetadataColumns.Key.Type);
 	SerialLotNumbers.Columns.Add("SerialLotNumber" , SerialLotNumbersMetadataColumns.SerialLotNumber.Type);
 	SerialLotNumbers.Columns.Add("Quantity"	       , SerialLotNumbersMetadataColumns.Quantity.Type);
 	SerialLotNumbers.Columns.Add("Ref"		       , New TypeDescription("DocumentRef.SalesReturnOrder"));
+	
+	GoodsReceiptsMetadataColumns = Metadata.Documents.SalesReturn.TabularSections.GoodsReceipts.Attributes;
+	GoodsReceipts = New ValueTable();
+	GoodsReceipts.Columns.Add("Key"		               , GoodsReceiptsMetadataColumns.Key.Type);
+	GoodsReceipts.Columns.Add("GoodsReceipt"           , GoodsReceiptsMetadataColumns.GoodsReceipt.Type);
+	GoodsReceipts.Columns.Add("Quantity"	           , GoodsReceiptsMetadataColumns.Quantity.Type);
+	GoodsReceipts.Columns.Add("QuantityInGoodsReceipt" , GoodsReceiptsMetadataColumns.QuantityInGoodsReceipt.Type);
+	GoodsReceipts.Columns.Add("Ref"		               , New TypeDescription("DocumentRef.SalesReturnOrder"));
 	
 	For Each TableStructure In ArrayOfTables Do
 		For Each Row In TableStructure.ItemList Do
@@ -116,7 +128,10 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFields)
 		EndDo;
 		For Each Row In TableStructure.SerialLotNumbers Do
 			FillPropertyValues(SerialLotNumbers.Add(), Row);
-		EndDo;		
+		EndDo;	
+		For Each Row In TableStructure.GoodsReceipts Do
+			FillPropertyValues(GoodsReceipts.Add(), Row);
+		EndDo;
 	EndDo;
 	
 	ItemListCopy = ItemList.Copy();
@@ -132,6 +147,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFields)
 		Result.Insert("TaxList"			 , New Array());
 		Result.Insert("SpecialOffers"	 , New Array());
 		Result.Insert("SerialLotNumbers" , New Array());
+		Result.Insert("GoodsReceipts"    , New Array());
 		
 		Filter = New Structure(UnjoinFields);
 		FillPropertyValues(Filter, Row);
@@ -139,6 +155,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFields)
 		ArrayOfTaxListFilters = New Array();
 		ArrayOfSpecialOffersFilters = New Array();
 		ArrayOfSerialLotNumbersFilters = New Array();
+		ArrayOfGoodsReceiptsFilters = New Array();
 		
 		ItemListFiltered = ItemList.Copy(Filter);
 		For Each RowItemList In ItemListFiltered Do
@@ -153,6 +170,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFields)
 			ArrayOfTaxListFilters.Add(New Structure("Ref, Key", RowItemList.SalesReturnOrder, NewRow.Key));
 			ArrayOfSpecialOffersFilters.Add(New Structure("Ref, Key", RowItemList.SalesReturnOrder, NewRow.Key));
 			ArrayOfSerialLotNumbersFilters.Add(New Structure("Ref, Key", RowItemList.SalesReturnOrder, NewRow.Key));
+			ArrayOfGoodsReceiptsFilters.Add(New Structure("Ref, Key", RowItemList.SalesReturnOrder, NewRow.Key));
 			
 			Result.ItemList.Add(NewRow);
 		EndDo;
@@ -191,9 +209,50 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFields)
 			EndDo;
 		EndDo;
 		
+		For Each GoodsReceiptsFilter In ArrayOfGoodsReceiptsFilters Do
+			For Each RowGoodsReceipts In GoodsReceipts.Copy(GoodsReceiptsFilter) Do
+				NewRow = New Structure();
+				NewRow.Insert("Key"                    , RowGoodsReceipts.Key);			
+				NewRow.Insert("GoodsReceipt"           , RowGoodsReceipts.GoodsReceipt);
+				NewRow.Insert("Quantity"               , RowGoodsReceipts.Quantity);
+				NewRow.Insert("QuantityInGoodsReceipt" , RowGoodsReceipts.QuantityInGoodsReceipt);
+				Result.GoodsReceipts.Add(NewRow);
+			EndDo;
+		EndDo;
+		
 		ArrayOfResults.Add(Result);
 	EndDo;
 	Return ArrayOfResults;
+EndFunction
+
+&AtServer
+Function GetDocumentTable_GoodsReceipt(ArrayOfBasisDocuments)
+	Query = New Query();
+	Query.Text =
+		"SELECT ALLOWED
+		|	""GoodsReceipt"" AS BasedOn,
+		|	ReceiptInvoicing.Store AS Store,
+		|	VALUE(Document.SalesReturnOrder.EmptyRef) AS SalesReturnOrder,
+		|	ReceiptInvoicing.ItemKey AS ItemKey,
+		|	CASE
+		|		WHEN ReceiptInvoicing.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
+		|			THEN ReceiptInvoicing.ItemKey.Unit
+		|		ELSE ReceiptInvoicing.ItemKey.Item.Unit
+		|	END AS Unit,
+		|	CAST(ReceiptInvoicing.Basis AS Document.GoodsReceipt) AS GoodsReceipt,
+		|	CAST(ReceiptInvoicing.Basis AS Document.GoodsReceipt).Company AS Company,
+		|	CAST(ReceiptInvoicing.Basis AS Document.GoodsReceipt).Partner AS Partner,
+		|	CAST(ReceiptInvoicing.Basis AS Document.GoodsReceipt).LegalName AS LegalName,
+		|	ReceiptInvoicing.QuantityBalance AS Quantity
+		|FROM
+		|	AccumulationRegister.R1031B_ReceiptInvoicing.Balance(, Basis IN (&ArrayOfGoodsReceipt)
+		|	AND CAST(Basis AS
+		|		Document.GoodsReceipt).TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer)) AS
+		|		ReceiptInvoicing";
+	Query.SetParameter("ArrayOfGoodsReceipt", ArrayOfBasisDocuments);
+	
+	QueryTable = Query.Execute().Unload();
+	Return ExtractInfoFromRows_GoodsReceipt(QueryTable);
 EndFunction
 
 &AtServer
@@ -246,6 +305,35 @@ Function GetDocumentTable_SalesInvoice(ArrayOfBasisDocuments)
 	
 	QueryTable = Query.Execute().Unload();
 	Return ExtractInfoFromRows_SalesInvoice(QueryTable);
+EndFunction
+
+&AtServer
+Function ExtractInfoFromRows_GoodsReceipt(QueryTable)
+	GoodsReceiptsTable = CreateTable_GoodsReceipts();
+	ItemList = QueryTable.Copy();
+	ItemList.GroupBy("BasedOn, Store, SalesReturnOrder, ItemKey, Unit, Company, Partner, LegalName", "Quantity");
+	ItemList.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	ItemList.Columns.Add("RowKey", Metadata.DefinedTypes.typeRowID.Type);
+	For Each RowItemList In ItemList Do
+		RowKey = String(New UUID());
+		RowItemList.Key = RowKey;
+		RowItemList.RowKey = RowKey;
+		Filter = New Structure("BasedOn, Store, SalesReturnOrder, ItemKey, Unit, Company, Partner, LegalName");
+		FillPropertyValues(Filter, RowItemList);
+		For Each RowGoodsReceipts In QueryTable.Copy(Filter) Do
+			NewRowGoodsReceipts = GoodsReceiptsTable.Add();
+			NewRowGoodsReceipts.Key = RowItemList.Key;
+			NewRowGoodsReceipts.GoodsReceipt = RowGoodsReceipts.GoodsReceipt;
+			NewRowGoodsReceipts.Quantity = RowGoodsReceipts.Quantity;
+			NewRowGoodsReceipts.QuantityInGoodsReceipt = RowGoodsReceipts.Quantity;
+		EndDo;	
+	EndDo;
+	Return New Structure("ItemList, TaxList, SpecialOffers, SerialLotNumbers, GoodsReceipts", 
+	ItemList, 
+	New ValueTable(), 
+	New ValueTable(),
+	New ValueTable(),
+	GoodsReceiptsTable);
 EndFunction
 
 &AtServer
@@ -381,11 +469,12 @@ Function ExtractInfoFromRows_SalesInvoice(QueryTable)
 	QueryTable_SpecialOffers = QueryResults[4].Unload();
 	QueryTable_SerialLotNumbers = QueryResults[5].Unload();
 	
-	Return New Structure("ItemList, TaxList, SpecialOffers, SerialLotNumbers", 
+	Return New Structure("ItemList, TaxList, SpecialOffers, SerialLotNumbers, GoodsReceipts", 
 	QueryTable_ItemList, 
 	QueryTable_TaxList, 
 	QueryTable_SpecialOffers,
-	QueryTable_SerialLotNumbers);
+	QueryTable_SerialLotNumbers,
+	New ValueTable());
 EndFunction
 
 &AtServer
@@ -483,11 +572,23 @@ Function ExtractInfoFromRows_SalesReturnOrder(QueryTable)
 	QueryTable_TaxList = QueryResults[2].Unload();
 	QueryTable_SpecialOffers = QueryResults[3].Unload();
 	
-	Return New Structure("ItemList, TaxList, SpecialOffers, SerialLotNumbers", 
+	Return New Structure("ItemList, TaxList, SpecialOffers, SerialLotNumbers, GoodsReceipts", 
 	QueryTable_ItemList, 
 	QueryTable_TaxList, 
 	QueryTable_SpecialOffers,
+	New ValueTable(),
 	New ValueTable());
+EndFunction
+
+Function CreateTable_GoodsReceipts()
+	ColumnsMetadata = Metadata.Documents.SalesReturn.TabularSections.GoodsReceipts.Attributes;
+	GoodsReceiptsTable = New ValueTable();
+	GoodsReceiptsTable.Columns.Add("Key", ColumnsMetadata.Key.Type);
+	GoodsReceiptsTable.Columns.Add("GoodsReceipt", ColumnsMetadata.GoodsReceipt.Type);
+	GoodsReceiptsTable.Columns.Add("Quantity", ColumnsMetadata.Quantity.Type);
+	GoodsReceiptsTable.Columns.Add("QuantityInGoodsReceipt", ColumnsMetadata.Quantity.Type);
+	GoodsReceiptsTable.Columns.Add("Ref" , New TypeDescription("DocumentRef.SalesReturnOrder"));
+	Return GoodsReceiptsTable;
 EndFunction
 
 #Region Errors

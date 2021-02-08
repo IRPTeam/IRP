@@ -197,7 +197,7 @@ Scenario: 950405 create rules for documents
 			Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 			And I go to line in "List" table
 				| 'Number'         |
-				| '1' |
+				| '15' |
 			And in the table "List" I click the button named "ListContextMenuPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -206,7 +206,7 @@ Scenario: 950405 create rules for documents
 		* Create new
 			And I go to line in "List" table
 				| 'Number'         |
-				| '1' |
+				| '15' |
 			And in the table "List" I click the button named "ListContextMenuCopy"
 			And I click "Post and close" button
 			Then "1C:Enterprise" window is opened
@@ -218,7 +218,7 @@ Scenario: 950405 create rules for documents
 			Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 			And I go to line in "List" table
 				| 'Number'         |
-				| '1' |
+				| '15' |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -265,10 +265,10 @@ Scenario: 950407 create rules for accumulation register
 		Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 		If "List" table does not contain lines Then
 				| "Number" |
-				| "2" |
+				| "16" |
 				And I go to line in "List" table
 					| 'Number'         |
-					| '1' |
+					| '15' |
 				And in the table "List" I click the button named "ListContextMenuCopy"
 				And I click "Post and close" button
 		Given I open hyperlink 'e1cib/list/Document.SalesOrder'
@@ -361,7 +361,7 @@ Scenario: 950407 create rules for accumulation register
 			Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 			And I go to line in "List" table
 				| 'Number'         |
-				| '2' |
+				| '16' |
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"			
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -370,7 +370,7 @@ Scenario: 950407 create rules for accumulation register
 		* Create new
 			And I go to line in "List" table
 				| 'Number'         |
-				| '1' |
+				| '15' |
 			And in the table "List" I click the button named "ListContextMenuCopy"
 			And I click "Post and close" button
 			Then "1C:Enterprise" window is opened
@@ -382,7 +382,7 @@ Scenario: 950407 create rules for accumulation register
 			Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 			And I go to line in "List" table
 				| 'Number'         |
-				| '2' |
+				| '16' |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -395,7 +395,7 @@ Scenario: 950407 create rules for accumulation register
 			Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 			And I go to line in "List" table
 				| 'Number'         |
-				| '2' |
+				| '16' |
 			And in the table "List" I click the button named "ListContextMenuPost"
 			Then user message window does not contain messages
 			And I close all client application windows

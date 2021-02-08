@@ -1,6 +1,7 @@
 ﻿#language: en
-
 @tree
+@Positive
+@Sales
 
 Functionality: Goods receipt - Sales return
 

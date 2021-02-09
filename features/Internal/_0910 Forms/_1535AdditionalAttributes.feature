@@ -3123,3 +3123,43 @@ Scenario: _015400698 check that additional attributes and properties are display
 			| 'Property' | 'Value' |
 			| 'Test'     | ''      |	
 	And I close all client application windows
+
+Scenario: _015400699 check that additional attributes and properties are displayed on the form without reopening (document PlannedReceiptReservation)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Open a form to create PlannedReceiptReservation
+		Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
+	* Adding additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Document_PlannedReceiptReservation              |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I input "Planned receipt reservation" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Planned receipt reservation (create)"
+		And field "Test" is present on the form
+		And I click "Save" button
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows

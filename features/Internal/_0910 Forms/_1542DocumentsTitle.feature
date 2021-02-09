@@ -464,5 +464,16 @@ Scenario: _023122 check the display of the header of the collapsible group in Re
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
+Scenario: _02023 check the display of the header of the collapsible group in PlannedReceiptReservation
+	Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
+	* Check the display of the header of the collapsible group
+		When check the display of the header of the collapsible group in OpeningEntry
+		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
+	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
+	When I Check the steps for Exception
+        |'And I click Select button of  "Company" field'|
+	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+	And I close all client application windows
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session

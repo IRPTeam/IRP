@@ -827,6 +827,21 @@ Scenario: _200001 customize the CI user settings
 			| 'Store 02'    |
 		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
+	* Fill in custom settings for PlannedReceiptReservation
+		And I go to line in "MetadataTree" table
+			| 'Group name'              |
+			| 'Planned receipt reservation' |
+		And I go to line in "MetadataTree" table
+			| 'Group name' | 'Use' |
+			| 'Company'    | 'No'  |
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
 	And I click "Ok" button
 	And I click "Save and close" button
 
@@ -1318,6 +1333,12 @@ Scenario:  _200034 check filling in field from custom user settings in Cash stat
 		Then the form attribute named "CashAccount" became equal to "Cash desk №4"
 	And I close all client application windows	
 
+Scenario:  _200035 check filling in field from custom user settings in Planned receipt reservation
+	Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows	
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

@@ -475,5 +475,17 @@ Scenario: _02023 check the display of the header of the collapsible group in Pla
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
+Scenario: _023124 check the display of the header of the collapsible group in Sales order closing
+	* Open list form Sales order closing
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+	* Check the display of the header of the collapsible group
+		When check the display of the header of the collapsible group in sales, purchase and return documents
+		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP" text
+	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
+	When I Check the steps for Exception
+        |'And I click Select button of  "Partner" field'|
+	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+	And I close all client application windows
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session

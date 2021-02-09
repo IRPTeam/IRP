@@ -931,6 +931,7 @@ Scenario: _010017 gps coordinates on the map for clients from different countrie
 
 
 Scenario: _010018 command opening contact information in the partner list
+	And I close all client application windows
 	* Open catalog Partners and select partner
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I go to line in "List" table

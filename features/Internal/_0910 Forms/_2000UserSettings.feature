@@ -842,6 +842,21 @@ Scenario: _200001 customize the CI user settings
 			| 'Main Company' |
 		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
+	* Fill in custom settings for Sales order closing
+		And I go to line in "MetadataTree" table
+			| 'Group name'              |
+			| 'Sales order closing' |
+		And I go to line in "MetadataTree" table
+			| 'Group name' | 'Use' |
+			| 'Business unit'    | 'No'  |
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Front office' |
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
 	And I click "Ok" button
 	And I click "Save and close" button
 
@@ -1339,6 +1354,14 @@ Scenario:  _200035 check filling in field from custom user settings in Planned r
 	* Check that fields are filled in from user settings
 		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows	
+
+Scenario:  _200036 check filling in field from custom user settings in Sales order closing
+	Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "BusinessUnit" became equal to "Front office"
+	And I close all client application windows	
+
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

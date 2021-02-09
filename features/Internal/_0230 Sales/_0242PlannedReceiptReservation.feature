@@ -51,10 +51,10 @@ Scenario: _0242000 preparation (planned receipt reservation)
 		When filling in Tax settings for company
 		When Create document SalesOrder objects (SI before SC, not Use shipment sheduling)
 	And I execute 1C:Enterprise script at server
- 			| "Documents.SalesOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document PurchaseOrder objects (check reservation)
 	And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);" |
 	
 
 Scenario: _0242001 create planned receipt reservation

@@ -3163,7 +3163,171 @@ Scenario: _0205040 add test command to the list of documents Physical Inventory
 		And I close all client application windows
 
 
+Scenario: _0205041 add test command to the list of documents Sales order closing
+	* Open Command register
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And I click the button named "FormCreate"
+	* Filling test command data for Sales order closing
+		* Create metadata for Sales order closing and select it for the command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Sales order closing'  |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			Then "Plugins" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "List form" exact value from "Form type" drop-down list
+	* Save command
+		And I click "Save and close" button
+	* Check command save
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And "List" table contains lines
+		| 'Configuration metadata'       | 'Plugins' |
+		| 'Sales order closing'                | 'Test command'       |
+	* Check the command from the document list Sales order closing
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		And I go to the last line in "List" table
+		And I click "Test command" button
+		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+	* Check that the command is not displayed in the document
+		And I click "Create" button
+		When I Check the steps for Exception
+			|'And I click "Test command" button'|
+		And I close all client application windows
+	* Connect a command to a document form
+		* Open Command register
+			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+			And I click the button named "FormCreate"
+		* Filling in command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'Sales order closing' |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "Object form" exact value from "Form type" drop-down list
+			And I click "Save and close" button
+	* Check that the command is displayed in the document
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		And I click "Create" button
+		And I click "Test command" button
+		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+		And I close all client application windows
+	* Connect the command to the document selection form
+		* Open Command register
+			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+			And I click the button named "FormCreate"
+		* Filling in command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'Sales order closing' |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "Choice form" exact value from "Form type" drop-down list
+			And I click "Save and close" button
+		And I close all client application windows
 
+
+
+Scenario: _0205042 add test command to the list of documents Planned receipt reservation
+	* Open Command register
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And I click the button named "FormCreate"
+	* Filling test command data for Planned receipt reservation
+		* Create metadata for Planned receipt reservationg and select it for the command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Planned receipt reservation'  |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			Then "Plugins" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "List form" exact value from "Form type" drop-down list
+	* Save command
+		And I click "Save and close" button
+	* Check command save
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And "List" table contains lines
+		| 'Configuration metadata'      | 'Plugins'      |
+		| 'Planned receipt reservation' | 'Test command' |
+	* Check the command from the document list Planned receipt reservation
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		And I go to the last line in "List" table
+		And I click "Test command" button
+		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+	* Check that the command is not displayed in the document
+		And I click "Create" button
+		When I Check the steps for Exception
+			|'And I click "Test command" button'|
+		And I close all client application windows
+	* Connect a command to a document form
+		* Open Command register
+			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+			And I click the button named "FormCreate"
+		* Filling in command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'Planned receipt reservation' |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "Object form" exact value from "Form type" drop-down list
+			And I click "Save and close" button
+	* Check that the command is displayed in the document
+		Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
+		And I click "Create" button
+		And I click "Test command" button
+		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+		And I close all client application windows
+	* Connect the command to the document selection form
+		* Open Command register
+			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+			And I click the button named "FormCreate"
+		* Filling in command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'Planned receipt reservation' |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "Choice form" exact value from "Form type" drop-down list
+			And I click "Save and close" button
+		And I close all client application windows
 
 
 

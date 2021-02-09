@@ -1458,7 +1458,44 @@ Scenario: _01540106 check partner, legal name, Partner term, company and store i
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 
+Scenario: _01540107 company, store input by search in line in a document Planned receipt reservation (in english)
+	And I close all client application windows
+	* Open a creation form Planned receipt reservation
+		Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
+		And I click the button named "FormCreate"
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Store input by search in line
+		And I select from the drop-down list named "Store" by "01" string		
+	* Check entered values
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And I close all client application windows
 
+Scenario: _01540108 check item and item key input by search in line in a document Planned receipt reservation (in english)
+	And I close all client application windows
+	* Open a creation form Planned receipt reservation
+		Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
+		And I click the button named "FormCreate"
+	* Item and item key input by search in line
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+		And I select "01" from "Store (requester)" drop-down list by string in "ItemList" table			
+	* Check entered values
+		And "ItemList" table contains lines
+		| 'Item'     | 'Item key'  | 'Store (requester)'| 'Unit'|
+		| 'Boots'    | '36/18SD'   | 'Store 01'         | 'pcs' |
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I input "J22001" text in "Item" field of "ItemList" table	
+		And in "ItemList" table drop-down list "Item" is equal to:
+			|" (J22001) Jacket J22001 "|
+		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Jacket J22001'    |
+		And I close all client application windows
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

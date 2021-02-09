@@ -730,3 +730,17 @@ Scenario: Open object form "ItemStockAdjustment"
 	If the warning is displayed then
 		Then I raise "Failed to open document form ItemStockAdjustment" exception
 	And I close current window
+
+Scenario: Open list form "PlannedReceiptReservation" 
+	And I close all client application windows
+	Given I open "PlannedReceiptReservation" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form PlannedReceiptReservation" exception
+	And I close current window
+
+Scenario: Open object form "PlannedReceiptReservation"
+	And I close all client application windows
+	Given I open "PlannedReceiptReservation" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form PlannedReceiptReservation" exception
+	And I close current window

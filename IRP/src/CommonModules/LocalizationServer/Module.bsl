@@ -36,7 +36,10 @@ EndFunction
 Function CatalogDescription(Ref, LangCode = "", AddInfo = Undefined) Export
 	LangCode = ?(ValueIsFilled(LangCode), LangCode, LocalizationReuse.GetLocalizationCode());
 	Presentation = "";
-	If Not UseMultiLanguage(Ref.Metadata().FullName(), LangCode, AddInfo) Then
+	TypeOfRef = TypeOf(Ref);
+	If TypeOfRef = Type("String") Or TypeOfRef = Type("Date") Or TypeOfRef = Type("Number") Then
+		Presentation = String(Ref);
+	ElsIf Not UseMultiLanguage(Ref.Metadata().FullName(), LangCode, AddInfo) Then
 		Presentation = Strings(Ref);
 	ElsIf Not IsBlankString(Ref["Description_" + LangCode]) Then
 		Presentation = Ref["Description_" + LangCode];

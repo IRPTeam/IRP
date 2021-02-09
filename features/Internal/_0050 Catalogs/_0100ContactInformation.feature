@@ -375,7 +375,43 @@ Scenario: _010011 adding gps to a Contact info type
 			| Ukraine   |
 		And I select current line in "List" table
 		And I finish line editing in "ExternalDataProcess" table
+		And I click "Save and close" button
+	* Adding Contact info gps coordinates for partners in Turkey
+		And I click the button named "FormCreate"
+		And I click Select button of "Value type" field
+		And I go to line in "" table
+			| ''       |
+			| 'String' |
+		And I select current line in "" table
+		And I click "OK" button
+		And I input "GPSTurkey" text in "Unique ID" field
+		And I change checkbox "Show on form"
+		And I set checkbox named "ReadOnly"
+		And I click Open button of the field named "Description_en"
+		And I input "GPS Turkey" text in the field named "Description_en"
+		And I input "GPS Turkey TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
+		And I activate "Plugins" field in "ExternalDataProcess" table
+		And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
+		And I go to line in "List" table
+			| 'Description'                 |
+			| 'ExternalCoordinates'  |
+		And I select current line in "List" table
+		And I select current line in "ExternalDataProcess" table
+		And I click choice button of "Country" attribute in "ExternalDataProcess" table
+		And I go to line in "List" table
+			| Description |
+			| Turkey   |
+		And I select current line in "List" table
+		And I finish line editing in "ExternalDataProcess" table
+		And I click "Save and close" button
 	* Adding address structure by gps for Ukraine
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'GPS Ukraine' |
+		And I select current line in "List" table		
 		And in the table "ExternalDataProcess" I click "Set settings" button
 		Then "Coordinates" window is opened
 		* Specify the address that will be refilled when selecting gps
@@ -445,37 +481,13 @@ Scenario: _010011 adding gps to a Contact info type
 	* Check for created items
 		And "List" table contains lines
 		| 'Description'                     |
-		| 'GPS Ukraine'    |
-	* Adding Contact info gps coordinates for partners in Turkey
-		And I click the button named "FormCreate"
-		And I click Select button of "Value type" field
-		And I go to line in "" table
-			| ''       |
-			| 'String' |
-		And I select current line in "" table
-		And I click "OK" button
-		And I input "GPSTurkey" text in "Unique ID" field
-		And I change checkbox "Show on form"
-		And I set checkbox named "ReadOnly"
-		And I click Open button of the field named "Description_en"
-		And I input "GPS Turkey" text in the field named "Description_en"
-		And I input "GPS Turkey TR" text in the field named "Description_tr"
-		And I click "Ok" button
-		And in the table "ExternalDataProcess" I click the button named "ExternalDataProcessAdd"
-		And I activate "Plugins" field in "ExternalDataProcess" table
-		And I click choice button of "Plugins" attribute in "ExternalDataProcess" table
-		And I go to line in "List" table
-			| 'Description'                 |
-			| 'ExternalCoordinates'  |
-		And I select current line in "List" table
-		And I select current line in "ExternalDataProcess" table
-		And I click choice button of "Country" attribute in "ExternalDataProcess" table
-		And I go to line in "List" table
-			| Description |
-			| Turkey   |
-		And I select current line in "List" table
-		And I finish line editing in "ExternalDataProcess" table
+		| 'GPS Ukraine'    |	
 	* Adding gps address structure for Turkey
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'GPS Turkey' |
+		And I select current line in "List" table
 		And in the table "ExternalDataProcess" I click "Set settings" button
 		* Specify the address that will be refilled when selecting gps
 			And I click Select button of "Structured address" field
@@ -551,6 +563,7 @@ Scenario: _010012 adding additional details for partners "Division"
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Partners objects (Ferron BP)
 	* Opening a form for adding additional attributes for partners
+		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
 			| Predefined data name |

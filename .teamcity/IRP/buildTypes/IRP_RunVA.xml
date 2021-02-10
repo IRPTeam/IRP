@@ -786,7 +786,7 @@ $VanessaRun = {
         Compress-Archive -Path "$workingDir/$FolderForAllArtefact/allureTag/$elementTag/*" -DestinationPath "$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip"
         Write-Host "##teamcity[publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure']"
     }
-    Compress-Archive -Path "VAResult/AllSteps/$elementTag/*" -DestinationPath "$elementTag.zip"
+    Compress-Archive -Path "$FolderForAllArtefact/AllSteps/$elementTag/*" -DestinationPath "$elementTag.zip"
     Write-Host "##teamcity[publishArtifacts '$elementTag.zip => DataBase']"
 }
 

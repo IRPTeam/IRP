@@ -98,7 +98,7 @@ rem coverage-cli start --infobase %env.Database1CName%  --debugger http://localh
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_19" name="Run VA in SaaS New" type="jetbrains_powershell">
+      <runner id="RUNNER_19" name="Run VA in SaaS" type="jetbrains_powershell">
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
@@ -411,7 +411,7 @@ $VanessaRun = {
     Write-Host "##teamcity[publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure']"
 
 	Compress-Archive -Path "$workingDir/$FolderForAllArtefact/AllSteps/$elementTag/1Cv8.1CD" -DestinationPath "$workingDir/$elementTag.zip"
-    Write-Host "##teamcity[publishArtifacts '$elementTag.zip => DataBase']"
+    Write-Host "##teamcity[publishArtifacts '$workingDir/$elementTag.zip => DataBase']"
 }
 
 $JobArray = @{}

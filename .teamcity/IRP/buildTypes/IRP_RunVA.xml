@@ -782,12 +782,12 @@ $VanessaRun = {
     Write-Host "##teamcity[testSuiteFinished name='$elementTag' flowId='$elementTag']"
     Write-Host "##teamcity[flowFinished flowId='$elementTag']"
     Remove-Desktop -Desktop $NewD -Verbose
-    if ($hasFailedTest) {
-        &$AllureBatFilePath generate "$allurePath/$elementTag" --clean -o "$workingDir/$FolderForAllArtefact/allureTag/$elementTag"
-        Compress-Archive -Path "$workingDir/$FolderForAllArtefact/allureTag/$elementTag/*" -DestinationPath "$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip"
-        Write-Host "##teamcity[publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure']"
-    }
-    Compress-Archive -Path "$workingDir/$FolderForAllArtefact/AllSteps/$elementTag/1Cv8.1CD" -DestinationPath "$workingDir/$elementTag.zip"
+
+    &$AllureBatFilePath generate "$allurePath/$elementTag" --clean -o "$workingDir/$FolderForAllArtefact/allureTag/$elementTag"
+    Compress-Archive -Path "$workingDir/$FolderForAllArtefact/allureTag/$elementTag/*" -DestinationPath "$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip"
+    Write-Host "##teamcity[publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure']"
+
+	Compress-Archive -Path "$workingDir/$FolderForAllArtefact/AllSteps/$elementTag/1Cv8.1CD" -DestinationPath "$workingDir/$elementTag.zip"
     Write-Host "##teamcity[publishArtifacts '$elementTag.zip => DataBase']"
 }
 

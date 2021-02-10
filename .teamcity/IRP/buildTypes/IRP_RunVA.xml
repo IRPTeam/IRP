@@ -524,7 +524,8 @@ New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/AllSteps
 
 #here has to be template DB
 Copy-Item -Path "$workingDir/TempDB/1Cv8.1CD" -Destination "$workingDir/$FolderForAllArtefact/AllSteps/Template/1Cv8.1CD"
-
+Compress-Archive -Path "$workingDir/$FolderForAllArtefact/AllSteps/Template/1Cv8.1CD" -DestinationPath "$workingDir/Template.zip"
+Write-Host "##teamcity[publishArtifacts 'Template.zip => DataBase']"
 
 
 $VanessaRun = {
@@ -786,7 +787,7 @@ $VanessaRun = {
         Compress-Archive -Path "$workingDir/$FolderForAllArtefact/allureTag/$elementTag/*" -DestinationPath "$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip"
         Write-Host "##teamcity[publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure']"
     }
-    Compress-Archive -Path "$FolderForAllArtefact/AllSteps/$elementTag/*" -DestinationPath "$elementTag.zip"
+    Compress-Archive -Path "$workingDir/$FolderForAllArtefact/AllSteps/$elementTag/1Cv8.1CD" -DestinationPath "$workingDir/$elementTag.zip"
     Write-Host "##teamcity[publishArtifacts '$elementTag.zip => DataBase']"
 }
 

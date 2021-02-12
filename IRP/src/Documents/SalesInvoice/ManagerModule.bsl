@@ -1135,7 +1135,11 @@ EndFunction
 Function GetAdditionalQueryParamenters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
-	StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	If Ref.isEmpty() Then
+		StrParams.Insert("BalancePeriod", Ref.Date);
+	Else
+		StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	EndIf;
 	Return StrParams;
 EndFunction
 

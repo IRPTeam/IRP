@@ -67,13 +67,13 @@ Scenario: _040115 preparation (Purchase order)
 				| "Description" |
 				| "DocumentDiscount" |
 			When add Plugin for document discount
-			When Create catalog CancelReturnReasons objects
-			When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
-			When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)
-			When Create document InternalSupplyRequest objects (check movements)
-			And I execute 1C:Enterprise script at server
+		When Create catalog CancelReturnReasons objects
+		When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
+		When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)
+		When Create document InternalSupplyRequest objects (check movements)
+		And I execute 1C:Enterprise script at server
 				| "Documents.InternalSupplyRequest.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |	
-			When Create document PurchaseOrder objects (check movements, PI before GR, not Use receipt sheduling)
+		When Create document PurchaseOrder objects (check movements, PI before GR, not Use receipt sheduling)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |	
 			| "Documents.PurchaseOrder.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |

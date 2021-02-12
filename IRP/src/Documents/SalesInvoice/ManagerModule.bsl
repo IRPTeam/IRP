@@ -1534,18 +1534,33 @@ Function R4012B_StockReservation()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	ItemList.Period AS Period,
-		|	ItemList.SalesOrder AS Order,
-		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.Store AS Store,
+		|	ItemListGroup.Period AS Period,
+		|	ItemListGroup.SalesOrder AS Order,
+		|	ItemListGroup.ItemKey AS ItemKey,
+		|	ItemListGroup.Store AS Store,
 		|	CASE
-		|		WHEN StockReservation.QuantityBalance > ItemList.Quantity
-		|			THEN ItemList.Quantity
+		|		WHEN StockReservation.QuantityBalance > ItemListGroup.Quantity
+		|			THEN ItemListGroup.Quantity
 		|		ELSE StockReservation.QuantityBalance
 		|	END AS Quantity
 		|INTO R4012B_StockReservation
 		|FROM
-		|	ItemList AS ItemList
+		|	(SELECT
+		|		ItemList.Period,
+		|		ItemList.Store,
+		|		ItemList.ItemKey,
+		|		ItemList.SalesOrder,
+		|		SUM(ItemList.Quantity) AS Quantity
+		|	FROM
+		|		ItemList AS ItemList
+		|	WHERE
+		|		NOT ItemList.IsService
+		|		AND ItemList.UseShipmentConfirmation
+		|	GROUP BY
+		|		ItemList.Period,
+		|		ItemList.Store,
+		|		ItemList.ItemKey,
+		|		ItemList.SalesOrder) AS ItemListGroup
 		|		INNER JOIN AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
 		|			(SELECT
 		|				ItemList.Store,
@@ -1553,9 +1568,9 @@ Function R4012B_StockReservation()
 		|				ItemList.SalesOrder
 		|			FROM
 		|				ItemList AS ItemList)) AS StockReservation
-		|		ON ItemList.SalesOrder = StockReservation.Order
-		|		AND ItemList.ItemKey = StockReservation.ItemKey
-		|		AND ItemList.Store = StockReservation.Store";
+		|		ON ItemListGroup.SalesOrder = StockReservation.Order
+		|		AND ItemListGroup.ItemKey = StockReservation.ItemKey
+		|		AND ItemListGroup.Store = StockReservation.Store";
 EndFunction
 
 Function R4014B_SerialLotNumber()

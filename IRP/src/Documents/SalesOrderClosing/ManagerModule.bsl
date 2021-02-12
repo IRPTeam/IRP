@@ -196,7 +196,12 @@ EndFunction
 
 Function R2014T_CanceledSalesOrders()
 	Return
-		"SELECT *
+		"SELECT 
+		|	- QueryTable.Quantity AS Quantity,
+		|	- QueryTable.Amount AS Amount,
+		|	- QueryTable.NetAmount AS NetAmount,
+		|*
+		|
 		|INTO R2014T_CanceledSalesOrders
 		|FROM
 		|	ItemList AS QueryTable

@@ -45,19 +45,127 @@ Procedure ClosureIncomingStocks(Parameters) Export
 	Parameters.Object.RegisterRecords.R4035B_IncomingStocks.Clear();
 	Parameters.Object.RegisterRecords.R4035B_IncomingStocks.Write();
 		
+	If Not Parameters.ConsiderStocksRequested Then
+		IncomingStocks = GetIncomingStocks_NotConsiderStocksRequested(Parameters);
+		IncomingStocksRequested = GetIncomingStocksRequested_NotConsiderStocksRequested(Parameters);
+	Else
+		IncomingStocks = GetIncomingStocks_ConsiderStocksRequested(Parameters);
+		IncomingStocksRequested = GetIncomingStocksRequested_ConsiderStocksRequested(Parameters);
+	EndIf;
+	
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.SetParameter("IncomingStocks", IncomingStocks);
+	Query.SetParameter("IncomingStocksRequested", IncomingStocksRequested);
 	Query.Text = 
 	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	tmp.Period,
+	|	tmp.Store,
+	|	tmp.ItemKey,
+	|	tmp.Order,
+	|	tmp.Quantity
+	|INTO IncomingStocks
+	|FROM
+	|	&IncomingStocks AS tmp
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	tmp.Period,
+	|	tmp.IncomingStore,
+	|	tmp.RequesterStore,
+	|	tmp.ItemKey,
+	|	tmp.Order,
+	|	tmp.Requester,
+	|	tmp.Quantity
+	|INTO IncomingStocksRequested
+	|FROM
+	|	&IncomingStocksRequested AS tmp
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	tmp.Period,
+	|	tmp.IncomingStore AS Store,
+	|	tmp.ItemKey,
+	|	tmp.Quantity
+	|INTO FreeStocks
+	|FROM
+	|	&IncomingStocksRequested AS tmp";
+	Query.Execute();
+EndProcedure
+
+Function GetIncomingStocks_NotConsiderStocksRequested(Parameters)
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 	
+	"SELECT
 	|	IncomingStocksReal.Period,
-	|	IncomingStocksRequested.IncomingStore,
-	|	IncomingStocksRequested.RequesterStore,
-	|	IncomingStocksRequested.ItemKey,
-	|	IncomingStocksRequested.Requester,
-	|	IncomingStocksRequested.Order,
-	|	SUM(IncomingStocksRequested.QuantityBalance) AS RequestedQuantity,
-	|	IncomingStocksReal.Quantity AS RealIncomingQuantity
-	|INTO ClosureIncoming
+	|	R4035B_IncomingStocksBalance.Store,
+	|	R4035B_IncomingStocksBalance.ItemKey,
+	|	R4035B_IncomingStocksBalance.Order,
+	|	CASE
+	|		WHEN R4035B_IncomingStocksBalance.QuantityBalance < IncomingStocksReal.Quantity
+	|			THEN R4035B_IncomingStocksBalance.QuantityBalance
+	|		ELSE IncomingStocksReal.Quantity
+	|	END AS Quantity
+	|FROM
+	|	AccumulationRegister.R4035B_IncomingStocks.Balance(, (Store, ItemKey, Order) IN
+	|		(SELECT
+	|			IncomingStocksReal.Store,
+	|			IncomingStocksReal.ItemKey,
+	|			IncomingStocksReal.Order
+	|		FROM
+	|			IncomingStocksReal AS IncomingStocksReal)) AS R4035B_IncomingStocksBalance
+	|		INNER JOIN IncomingStocksReal AS IncomingStocksReal
+	|		ON R4035B_IncomingStocksBalance.Store = IncomingStocksReal.Store
+	|		AND R4035B_IncomingStocksBalance.ItemKey = IncomingStocksReal.ItemKey
+	|		AND R4035B_IncomingStocksBalance.Order = IncomingStocksReal.Order";
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
+
+Function GetIncomingStocks_ConsiderStocksRequested(Parameters)
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text =
+	"SELECT
+	|	IncomingStocksReal.Period,
+	|	R4035B_IncomingStocksBalance.Store,
+	|	R4035B_IncomingStocksBalance.ItemKey,
+	|	R4035B_IncomingStocksBalance.Order,
+	|	CASE
+	|		WHEN R4035B_IncomingStocksBalance.QuantityBalance < IncomingStocksReal.Quantity
+	|			THEN R4035B_IncomingStocksBalance.QuantityBalance
+	|		ELSE IncomingStocksReal.Quantity
+	|	END AS Quantity,
+	|	IncomingStocksReal.Quantity AS RealIncomingQuntity
+	|INTO IncomingBalance
+	|FROM
+	|	AccumulationRegister.R4035B_IncomingStocks.Balance(, (Store, ItemKey, Order) IN
+	|		(SELECT
+	|			IncomingStocksReal.Store,
+	|			IncomingStocksReal.ItemKey,
+	|			IncomingStocksReal.Order
+	|		FROM
+	|			IncomingStocksReal AS IncomingStocksReal)) AS R4035B_IncomingStocksBalance
+	|		INNER JOIN IncomingStocksReal AS IncomingStocksReal
+	|		ON R4035B_IncomingStocksBalance.Store = IncomingStocksReal.Store
+	|		AND R4035B_IncomingStocksBalance.ItemKey = IncomingStocksReal.ItemKey
+	|		AND R4035B_IncomingStocksBalance.Order = IncomingStocksReal.Order
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	R4036B_IncomingStocksRequested.IncomingStore AS Store,
+	|	R4036B_IncomingStocksRequested.ItemKey,
+	|	R4036B_IncomingStocksRequested.Order,
+	|	R4036B_IncomingStocksRequested.QuantityBalance AS Quantity
+	|INTO RequestedBalance
 	|FROM
 	|	AccumulationRegister.R4036B_IncomingStocksRequested.Balance(, (IncomingStore, ItemKey, Order) IN
 	|		(SELECT
@@ -65,150 +173,139 @@ Procedure ClosureIncomingStocks(Parameters) Export
 	|			IncomingStocksReal.ItemKey,
 	|			IncomingStocksReal.Order
 	|		FROM
-	|			IncomingStocksReal AS IncomingStocksReal)) AS IncomingStocksRequested
+	|			IncomingStocksReal AS IncomingStocksReal)) AS R4036B_IncomingStocksRequested
 	|		INNER JOIN IncomingStocksReal AS IncomingStocksReal
-	|		ON IncomingStocksRequested.IncomingStore = IncomingStocksReal.Store
-	|		AND IncomingStocksRequested.ItemKey = IncomingStocksReal.ItemKey
-	|		AND IncomingStocksRequested.Order = IncomingStocksReal.Order
-	|GROUP BY GROUPING SETS
-	|(
-	|	(IncomingStocksReal.Period,
-	|	IncomingStocksRequested.IncomingStore,
-	|	IncomingStocksRequested.RequesterStore,
-	|	IncomingStocksRequested.ItemKey,
-	|	IncomingStocksRequested.Requester,
-	|	IncomingStocksRequested.Order),
-	|	(IncomingStocksReal.Period,
-	|	IncomingStocksRequested.IncomingStore,
-	|	IncomingStocksRequested.ItemKey,
-	|	IncomingStocksRequested.Order,
-	|	IncomingStocksReal.Quantity)
-	|)
+	|		ON R4036B_IncomingStocksRequested.IncomingStore = IncomingStocksReal.Store
+	|		AND R4036B_IncomingStocksRequested.ItemKey = IncomingStocksReal.ItemKey
+	|		AND R4036B_IncomingStocksRequested.Order = IncomingStocksReal.Order
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	IncomingBalance.Period,
+	|	IncomingBalance.Store,
+	|	IncomingBalance.ItemKey,
+	|	IncomingBalance.Order,
+	|	SUM(CASE
+	|		WHEN IncomingBalance.Quantity - ISNULL(RequestedBalance.Quantity, 0) > 0
+	|			THEN (IncomingBalance.Quantity - ISNULL(RequestedBalance.Quantity, 0))  
+	|			+ (IncomingBalance.RealIncomingQuntity - IncomingBalance.Quantity)
+	|		ELSE 0
+	|	END) AS Quantity
+	|FROM
+	|	IncomingBalance AS IncomingBalance
+	|		LEFT JOIN RequestedBalance AS RequestedBalance
+	|		ON IncomingBalance.Store = RequestedBalance.Store
+	|		AND IncomingBalance.ItemKey = RequestedBalance.ItemKey
+	|		AND IncomingBalance.Order = RequestedBalance.Order
+	|GROUP BY
+	|	IncomingBalance.Period,
+	|	IncomingBalance.Store,
+	|	IncomingBalance.ItemKey,
+	|	IncomingBalance.Order
+	|HAVING
+	|	SUM(CASE
+	|		WHEN IncomingBalance.Quantity - ISNULL(RequestedBalance.Quantity, 0) > 0
+	|			THEN (IncomingBalance.Quantity - ISNULL(RequestedBalance.Quantity, 0)) 
+	|			+ (IncomingBalance.RealIncomingQuntity - IncomingBalance.Quantity)
+	|		ELSE 0
+	|	END) > 0";
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
+
+Function GetIncomingStocksRequested_NotConsiderStocksRequested(Parameters)
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text =
+	"SELECT
+	|	R4036B_IncomingStocksRequested.Period,
+	|	R4036B_IncomingStocksRequested.IncomingStore,
+	|	R4036B_IncomingStocksRequested.RequesterStore,
+	|	R4036B_IncomingStocksRequested.ItemKey,
+	|	R4036B_IncomingStocksRequested.Order,
+	|	R4036B_IncomingStocksRequested.Requester,
+	|	R4036B_IncomingStocksRequested.Quantity
+	|FROM
+	|	AccumulationRegister.R4036B_IncomingStocksRequested AS R4036B_IncomingStocksRequested
+	|WHERE
+	|	FALSE";
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
+
+Function GetIncomingStocksRequested_ConsiderStocksRequested(Parameters)
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text =
+	"SELECT
+	|	R4036B_IncomingStocksRequested.IncomingStore,
+	|	R4036B_IncomingStocksRequested.ItemKey,
+	|	R4036B_IncomingStocksRequested.Order,
+	|	CASE
+	|		WHEN R4036B_IncomingStocksRequested.QuantityBalance < IncomingStocksReal.Quantity
+	|			THEN R4036B_IncomingStocksRequested.QuantityBalance
+	|		ELSE IncomingStocksReal.Quantity
+	|	END AS Quantity
+	|FROM
+	|	AccumulationRegister.R4036B_IncomingStocksRequested.Balance(, (IncomingStore, ItemKey, Order) IN
+	|		(SELECT
+	|			IncomingStocksReal.Store,
+	|			IncomingStocksReal.ItemKey,
+	|			IncomingStocksReal.Order
+	|		FROM
+	|			IncomingStocksReal AS IncomingStocksReal)) AS R4036B_IncomingStocksRequested
+	|		INNER JOIN IncomingStocksReal AS IncomingStocksReal
+	|		ON R4036B_IncomingStocksRequested.IncomingStore = IncomingStocksReal.Store
+	|		AND R4036B_IncomingStocksRequested.ItemKey = IncomingStocksReal.ItemKey
+	|		AND R4036B_IncomingStocksRequested.Order = IncomingStocksReal.Order
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	IncomingStocksReal.Period,
-	|	IncomingStocksReal.Store,
-	|	IncomingStocksReal.ItemKey,
-	|	IncomingStocksReal.Order
-	|INTO UnusedIncomingStocks
-	|FROM
-	|	IncomingStocksReal AS IncomingStocksReal
-	|		LEFT JOIN ClosureIncoming AS ClosureIncoming
-	|		ON IncomingStocksReal.Store = ClosureIncoming.IncomingStore
-	|		AND IncomingStocksReal.ItemKey = ClosureIncoming.ItemKey
-	|		AND IncomingStocksReal.Order = ClosureIncoming.Order
-	|WHERE
-	|	ClosureIncoming.ItemKey IS NULL
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	ClosureIncoming.Period,
-	|	ClosureIncoming.IncomingStore AS Store,
-	|	ClosureIncoming.ItemKey,
-	|	ClosureIncoming.Order,
-	|	ClosureIncoming.RealIncomingQuantity - ClosureIncoming.RequestedQuantity AS Quantity
-	|INTO UsedIncomingStocks
-	|FROM
-	|	ClosureIncoming AS ClosureIncoming
-	|WHERE
-	|	ClosureIncoming.Requester.Ref IS NULL
-	|	AND ClosureIncoming.RealIncomingQuantity - ClosureIncoming.RequestedQuantity > 0
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	UsedIncomingStocks.Period,
-	|	UsedIncomingStocks.Store,
-	|	UsedIncomingStocks.ItemKey,
-	|	UsedIncomingStocks.Order,
-	|	CASE
-	|		WHEN IncomingStocksBalance.QuantityBalance < UsedIncomingStocks.Quantity
-	|			THEN IncomingStocksBalance.QuantityBalance
-	|		ELSE UsedIncomingStocks.Quantity
-	|	END AS Quantity
-	|INTO IncomingStocks
-	|FROM
-	|	UsedIncomingStocks AS UsedIncomingStocks
-	|		INNER JOIN AccumulationRegister.R4035B_IncomingStocks.Balance(, (Store, ItemKey, Order) IN
-	|			(SELECT
-	|				tmp.Store,
-	|				tmp.ItemKey,
-	|				tmp.Order
-	|			FROM
-	|				UsedIncomingStocks AS tmp)) AS IncomingStocksBalance
-	|		ON UsedIncomingStocks.Store = IncomingStocksBalance.Store
-	|		AND UsedIncomingStocks.ItemKey = IncomingStocksBalance.ItemKey
-	|		AND UsedIncomingStocks.Order = IncomingStocksBalance.Order
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	VALUE(AccumulationRecordType.Expense),
-	|	UnusedIncomingStocks.Period,
-	|	UnusedIncomingStocks.Store,
-	|	UnusedIncomingStocks.ItemKey,
-	|	UnusedIncomingStocks.Order,
-	|	IncomingStocksBalance.QuantityBalance
-	|FROM
-	|	UnusedIncomingStocks AS UnusedIncomingStocks
-	|		INNER JOIN AccumulationRegister.R4035B_IncomingStocks.Balance(, (Store, ItemKey, Order) IN
-	|			(SELECT
-	|				tmp.Store,
-	|				tmp.ItemKey,
-	|				tmp.Order
-	|			FROM
-	|				UnusedIncomingStocks AS tmp)) AS IncomingStocksBalance
-	|		ON UnusedIncomingStocks.Store = IncomingStocksBalance.Store
-	|		AND UnusedIncomingStocks.ItemKey = IncomingStocksBalance.ItemKey
-	|		AND UnusedIncomingStocks.Order = IncomingStocksBalance.Order
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	ClosureIncoming.Period,
-	|	ClosureIncoming.IncomingStore,
-	|	ClosureIncoming.RequesterStore,
-	|	ClosureIncoming.ItemKey,
-	|	ClosureIncoming.Requester,
-	|	ClosureIncoming.Order,
-	|	ClosureIncoming.RequestedQuantity,
-	|	ClosureIncoming.Requester.Date AS RequesterDate,
+	|	R4036B_IncomingStocksRequested.IncomingStore,
+	|	R4036B_IncomingStocksRequested.RequesterStore,
+	|	R4036B_IncomingStocksRequested.ItemKey,
+	|	R4036B_IncomingStocksRequested.Order,
+	|	R4036B_IncomingStocksRequested.Requester,
+	|	R4036B_IncomingStocksRequested.Requester.Date AS RequesterDate,
+	|	SUM(R4036B_IncomingStocksRequested.QuantityBalance) AS RequestedQuantity,
 	|	0 AS Quantity
-	|INTO ClosureIncomingStocksRequested
 	|FROM
-	|	ClosureIncoming AS ClosureIncoming
-	|WHERE
-	|	NOT ClosureIncoming.Requester IS NULL
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	ClosureIncoming.IncomingStore,
-	|	ClosureIncoming.ItemKey,
-	|	ClosureIncoming.Order,
-	|	ClosureIncoming.RealIncomingQuantity
-	|INTO ClosureIncomingStocks
-	|FROM
-	|	ClosureIncoming AS ClosureIncoming
-	|WHERE
-	|	ClosureIncoming.Requester IS NULL";
+	|	AccumulationRegister.R4036B_IncomingStocksRequested.Balance(, (IncomingStore, ItemKey, Order) IN
+	|		(SELECT
+	|			IncomingStocksReal.Store,
+	|			IncomingStocksReal.ItemKey,
+	|			IncomingStocksReal.Order
+	|		FROM
+	|			IncomingStocksReal AS IncomingStocksReal)) AS R4036B_IncomingStocksRequested
+	|		INNER JOIN IncomingStocksReal AS IncomingStocksReal
+	|		ON R4036B_IncomingStocksRequested.IncomingStore = IncomingStocksReal.Store
+	|		AND R4036B_IncomingStocksRequested.ItemKey = IncomingStocksReal.ItemKey
+	|		AND R4036B_IncomingStocksRequested.Order = IncomingStocksReal.Order
+	|GROUP BY
+	|	IncomingStocksReal.Period,
+	|	R4036B_IncomingStocksRequested.IncomingStore,
+	|	R4036B_IncomingStocksRequested.RequesterStore,
+	|	R4036B_IncomingStocksRequested.ItemKey,
+	|	R4036B_IncomingStocksRequested.Order,
+	|	R4036B_IncomingStocksRequested.Requester,
+	|	R4036B_IncomingStocksRequested.Requester.Date";
 	
-	Query.Execute();
+	QueryResults = Query.ExecuteBatch();
+	IncomingStocks = QueryResults[0].Unload();
+	IncomingStocksRequested = QueryResults[1].Unload();
+
+	IncomingStocksRequested.Sort("RequesterDate");
 	
-	ClosureIncomingStocksRequested = PostingServer.GetQueryTableByName("ClosureIncomingStocksRequested", Parameters);
-	ClosureIncomingStocks = PostingServer.GetQueryTableByName("ClosureIncomingStocks", Parameters);
-	
-	ClosureIncomingStocksRequested.Sort("RequesterDate");
-	
-	For Each Row In ClosureIncomingStocks Do
+	For Each Row In IncomingStocks Do
 		Filter = New Structure("IncomingStore, ItemKey, Order");
 		FillPropertyValues(Filter, Row);
-		ArrayOfRows = ClosureIncomingStocksRequested.FindRows(Filter);
-		NeedWriteOff = Row.RealIncomingQuantity;
+		ArrayOfRows = IncomingStocksRequested.FindRows(Filter);
+		NeedWriteOff = Row.Quantity;
 		For Each ItemOfArray In ArrayOfRows Do
 			If NeedWriteOff <= 0 Then
 				Break;
@@ -219,35 +316,5 @@ Procedure ClosureIncomingStocks(Parameters) Export
 		EndDo;
 	EndDo;
 	
-	Query.Text = 
-	"SELECT
-	|	*
-	|INTO ResultTable
-	|FROM
-	|	&IncomingStocksRequested AS ResultTable
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	*
-	|INTO IncomingStocksRequested
-	|FROM
-	|	ResultTable AS ResultTable
-	|WHERE
-	|	ResultTable.Quantity > 0
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	ResultTable.IncomingStore AS Store,
-	|	*
-	|INTO FreeStocks
-	|FROM
-	|	ResultTable AS ResultTable
-	|WHERE
-	|	ResultTable.Quantity > 0";
-	Query.SetParameter("IncomingStocksRequested", ClosureIncomingStocksRequested);
-	Query.Execute();
-EndProcedure
+	Return IncomingStocksRequested;
+EndFunction

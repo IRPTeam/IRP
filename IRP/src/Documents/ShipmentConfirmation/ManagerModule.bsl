@@ -896,38 +896,60 @@ Function R4011B_FreeStocks()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	ItemList.Period,
-		|	ItemList.Store,
-		|	ItemList.ItemKey,
-		|	ItemList.Quantity - ISNULL(StockReservation.QuantityBalance, 0) - ISNULL(ShipmentInvoicing.QuantityBalance, 0) AS
-		|		Quantity
+		|	ItemListGroup.Period,
+		|	ItemListGroup.Store,
+		|	ItemListGroup.ItemKey,
+		|	ItemListGroup.Quantity - ISNULL(ItemsBalance.Quantity, 0) AS Quantity
 		|INTO R4011B_FreeStocks
-		|FROM
-		|	ItemList AS ItemList
-		|		LEFT JOIN AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
-		|			(SELECT
-		|				ItemList.Store,
-		|				ItemList.ItemKey,
-		|				ItemList.SalesOrder
-		|			FROM
-		|				ItemList AS ItemList)) AS StockReservation
-		|		ON ItemList.SalesOrder = StockReservation.Order
-		|		AND ItemList.ItemKey = StockReservation.ItemKey
-		|		AND ItemList.Store = StockReservation.Store
-		|		LEFT JOIN AccumulationRegister.R2031B_ShipmentInvoicing.Balance(&BalancePeriod, (Company, Store, Basis, ItemKey) IN
-		|			(SELECT
-		|				ItemList.Company,
-		|				ItemList.Store,
-		|				ItemList.SalesInvoice,
-		|				ItemList.ItemKey
-		|			FROM
-		|				ItemList AS ItemList)) AS ShipmentInvoicing
-		|		ON ItemList.Company = ShipmentInvoicing.Company
-		|		AND ItemList.Store = ShipmentInvoicing.Store
-		|		AND ItemList.SalesInvoice = ShipmentInvoicing.Basis
-		|		AND ItemList.ItemKey = ShipmentInvoicing.ItemKey
+		|From
+		|	(SELECT
+		|		ItemList.Period,
+		|		ItemList.Store,
+		|		ItemList.ItemKey,
+		|		ItemList.SalesOrder,
+		|		SUM(ItemList.Quantity) AS Quantity
+		|	FROM
+		|		ItemList AS ItemList
+		|	GROUP BY
+		|		ItemList.Period,
+		|		ItemList.Store,
+		|		ItemList.ItemKey,
+		|		ItemList.SalesOrder) AS ItemListGroup
+		|		LEFT JOIN (SELECT
+		|			ShipmentInvoicing.Store,
+		|			ShipmentInvoicing.Basis,
+		|			ShipmentInvoicing.ItemKey,
+		|			- ShipmentInvoicing.QuantityBalance AS Quantity
+		|		FROM
+		|			AccumulationRegister.R2031B_ShipmentInvoicing.Balance(&BalancePeriod, (Company, Store, Basis, ItemKey) IN
+		|				(SELECT
+		|					ItemList.Company,
+		|					ItemList.Store,
+		|					ItemList.SalesInvoice,
+		|					ItemList.ItemKey
+		|				FROM
+		|					ItemList AS ItemList)) AS ShipmentInvoicing
+		|
+		|		UNION ALL
+		|
+		|		SELECT
+		|			StockReservation.Store,
+		|			StockReservation.Order,
+		|			StockReservation.ItemKey,
+		|			StockReservation.QuantityBalance AS QuantityBalance
+		|		FROM
+		|			AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
+		|				(SELECT
+		|					ItemList.Store,
+		|					ItemList.ItemKey,
+		|					ItemList.SalesOrder
+		|				FROM
+		|					ItemList AS ItemList)) AS StockReservation) AS ItemsBalance
+		|		ON ItemListGroup.Store = ItemsBalance.Store
+		|		AND ItemListGroup.ItemKey = ItemsBalance.ItemKey
+		|		AND ItemsBalance.Basis = ItemListGroup.SalesOrder
 		|WHERE
-		|	ItemList.Quantity - ISNULL(StockReservation.QuantityBalance, 0) - ISNULL(ShipmentInvoicing.QuantityBalance, 0) <> 0";
+		|	ItemListGroup.Quantity - ISNULL(ItemsBalance.Quantity, 0) <> 0";
 EndFunction
 
 Function R4012B_StockReservation()

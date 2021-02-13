@@ -88,140 +88,140 @@ Scenario: _040170 preparation (Shipment confirmation)
 			| "Documents.ShipmentConfirmation.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 
-// 1
+# // 1
 
-Scenario: _040171 check Shipment confirmation movements by the Register  "R4010 Actual stocks" (SO-SC-SI)
-	* Select Shipment confirmation
-		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
-	* Check movements by the Register  "R4010 Actual stocks" (Receipt, Expense)
-		And I click "Registrations report" button
-		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 1 dated *' | '' | '' | '' | '' | '' |
-			| 'Document registrations records'  | '' | '' | '' | '' | '' |
-			| 'Register  "R4010 Actual stocks"' | '' | '' | '' | '' | '' |
+# Scenario: _040171 check Shipment confirmation movements by the Register  "R4010 Actual stocks" (SO-SC-SI)
+# 	* Select Shipment confirmation
+# 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+# 		And I go to line in "List" table
+# 			| 'Number'  |
+# 			| '1' |
+# 	* Check movements by the Register  "R4010 Actual stocks" (Receipt, Expense)
+# 		And I click "Registrations report" button
+# 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+# 		And I click "Generate report" button
+# 		Then "ResultTable" spreadsheet document is equal
+# 			| 'Shipment confirmation 1 dated *' | '' | '' | '' | '' | '' |
+# 			| 'Document registrations records'  | '' | '' | '' | '' | '' |
+# 			| 'Register  "R4010 Actual stocks"' | '' | '' | '' | '' | '' |
 			
-		And I close all client application windows
+# 		And I close all client application windows
 		
-Scenario: _040172 check Shipment confirmation movements by the Register  "R4022 Shipment of stock transfer orders"
-	* Select Shipment confirmation
-		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
-	* Check movements by the Register  "R4022 Shipment of stock transfer orders" (Receipt, Expense)
-		And I click "Registrations report" button
-		And I select "R4022 Shipment of stock transfer orders" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 1 dated *'                     | '' | '' | '' | '' | '' |
-			| 'Document registrations records'                      | '' | '' | '' | '' | '' |
-			| 'Register  "R4022 Shipment of stock transfer orders"' | '' | '' | '' | '' | '' |
+# Scenario: _040172 check Shipment confirmation movements by the Register  "R4022 Shipment of stock transfer orders"
+# 	* Select Shipment confirmation
+# 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+# 		And I go to line in "List" table
+# 			| 'Number'  |
+# 			| '1' |
+# 	* Check movements by the Register  "R4022 Shipment of stock transfer orders" (Receipt, Expense)
+# 		And I click "Registrations report" button
+# 		And I select "R4022 Shipment of stock transfer orders" exact value from "Register" drop-down list
+# 		And I click "Generate report" button
+# 		Then "ResultTable" spreadsheet document is equal
+# 			| 'Shipment confirmation 1 dated *'                     | '' | '' | '' | '' | '' |
+# 			| 'Document registrations records'                      | '' | '' | '' | '' | '' |
+# 			| 'Register  "R4022 Shipment of stock transfer orders"' | '' | '' | '' | '' | '' |
 			
-		And I close all client application windows
+# 		And I close all client application windows
 		
-Scenario: _040173 check Shipment confirmation movements by the Register  "R2011 Shipment of sales orders"
-	* Select Shipment confirmation
-		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
-	* Check movements by the Register  "R2011 Shipment of sales orders" (Receipt, Expense)
-		And I click "Registrations report" button
-		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 1 dated *'            | '' | '' | '' | '' | '' |
-			| 'Document registrations records'             | '' | '' | '' | '' | '' |
-			| 'Register  "R2011 Shipment of sales orders"' | '' | '' | '' | '' | '' |
+# Scenario: _040173 check Shipment confirmation movements by the Register  "R2011 Shipment of sales orders"
+# 	* Select Shipment confirmation
+# 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+# 		And I go to line in "List" table
+# 			| 'Number'  |
+# 			| '1' |
+# 	* Check movements by the Register  "R2011 Shipment of sales orders" (Receipt, Expense)
+# 		And I click "Registrations report" button
+# 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
+# 		And I click "Generate report" button
+# 		Then "ResultTable" spreadsheet document is equal
+# 			| 'Shipment confirmation 1 dated *'            | '' | '' | '' | '' | '' |
+# 			| 'Document registrations records'             | '' | '' | '' | '' | '' |
+# 			| 'Register  "R2011 Shipment of sales orders"' | '' | '' | '' | '' | '' |
 			
-		And I close all client application windows
+# 		And I close all client application windows
 		
-Scenario: _040174 check Shipment confirmation movements by the Register  "R4032 Goods in transit (outgoing)"
-	* Select Shipment confirmation
-		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
-	* Check movements by the Register  "R4032 Goods in transit (outgoing)" (Receipt, Expense)
-		And I click "Registrations report" button
-		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 1 dated *'               | '' | '' | '' | '' | '' |
-			| 'Document registrations records'                | '' | '' | '' | '' | '' |
-			| 'Register  "R4032 Goods in transit (outgoing)"' | '' | '' | '' | '' | '' |
+# Scenario: _040174 check Shipment confirmation movements by the Register  "R4032 Goods in transit (outgoing)"
+# 	* Select Shipment confirmation
+# 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+# 		And I go to line in "List" table
+# 			| 'Number'  |
+# 			| '1' |
+# 	* Check movements by the Register  "R4032 Goods in transit (outgoing)" (Receipt, Expense)
+# 		And I click "Registrations report" button
+# 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
+# 		And I click "Generate report" button
+# 		Then "ResultTable" spreadsheet document is equal
+# 			| 'Shipment confirmation 1 dated *'               | '' | '' | '' | '' | '' |
+# 			| 'Document registrations records'                | '' | '' | '' | '' | '' |
+# 			| 'Register  "R4032 Goods in transit (outgoing)"' | '' | '' | '' | '' | '' |
 			
-		And I close all client application windows
+# 		And I close all client application windows
 		
-Scenario: _040175 check Shipment confirmation movements by the Register  "R4012 Stock Reservation"
-	* Select Shipment confirmation
-		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
-	* Check movements by the Register  "R4012 Stock Reservation" (Receipt, Expense)
-		And I click "Registrations report" button
-		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 1 dated *'     | '' | '' | '' | '' | '' |
-			| 'Document registrations records'      | '' | '' | '' | '' | '' |
-			| 'Register  "R4012 Stock Reservation"' | '' | '' | '' | '' | '' |
+# Scenario: _040175 check Shipment confirmation movements by the Register  "R4012 Stock Reservation"
+# 	* Select Shipment confirmation
+# 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+# 		And I go to line in "List" table
+# 			| 'Number'  |
+# 			| '1' |
+# 	* Check movements by the Register  "R4012 Stock Reservation" (Receipt, Expense)
+# 		And I click "Registrations report" button
+# 		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+# 		And I click "Generate report" button
+# 		Then "ResultTable" spreadsheet document is equal
+# 			| 'Shipment confirmation 1 dated *'     | '' | '' | '' | '' | '' |
+# 			| 'Document registrations records'      | '' | '' | '' | '' | '' |
+# 			| 'Register  "R4012 Stock Reservation"' | '' | '' | '' | '' | '' |
 			
-		And I close all client application windows
+# 		And I close all client application windows
 		
-Scenario: _040176 check Shipment confirmation movements by the Register  "R2013 Procurement of sales orders"
-	* Select Shipment confirmation
-		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
-	* Check movements by the Register  "R2013 Procurement of sales orders" (Receipt, Expense)
-		And I click "Registrations report" button
-		And I select "R2013 Procurement of sales orders" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 1 dated *'               | '' | '' | '' | '' | '' |
-			| 'Document registrations records'                | '' | '' | '' | '' | '' |
-			| 'Register  "R2013 Procurement of sales orders"' | '' | '' | '' | '' | '' |
+# Scenario: _040176 check Shipment confirmation movements by the Register  "R2013 Procurement of sales orders"
+# 	* Select Shipment confirmation
+# 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+# 		And I go to line in "List" table
+# 			| 'Number'  |
+# 			| '1' |
+# 	* Check movements by the Register  "R2013 Procurement of sales orders" (Receipt, Expense)
+# 		And I click "Registrations report" button
+# 		And I select "R2013 Procurement of sales orders" exact value from "Register" drop-down list
+# 		And I click "Generate report" button
+# 		Then "ResultTable" spreadsheet document is equal
+# 			| 'Shipment confirmation 1 dated *'               | '' | '' | '' | '' | '' |
+# 			| 'Document registrations records'                | '' | '' | '' | '' | '' |
+# 			| 'Register  "R2013 Procurement of sales orders"' | '' | '' | '' | '' | '' |
 			
-		And I close all client application windows
+# 		And I close all client application windows
 		
-Scenario: _040177 check Shipment confirmation movements by the Register  "R4034 Scheduled goods shipments"
-	* Select Shipment confirmation
-		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
-	* Check movements by the Register  "R4034 Scheduled goods shipments" (Receipt, Expense)
-		And I click "Registrations report" button
-		And I select "R4034 Scheduled goods shipments" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 1 dated *'             | '' | '' | '' | '' | '' |
-			| 'Document registrations records'              | '' | '' | '' | '' | '' |
-			| 'Register  "R4034 Scheduled goods shipments"' | '' | '' | '' | '' | '' |
+# Scenario: _040177 check Shipment confirmation movements by the Register  "R4034 Scheduled goods shipments"
+# 	* Select Shipment confirmation
+# 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+# 		And I go to line in "List" table
+# 			| 'Number'  |
+# 			| '1' |
+# 	* Check movements by the Register  "R4034 Scheduled goods shipments" (Receipt, Expense)
+# 		And I click "Registrations report" button
+# 		And I select "R4034 Scheduled goods shipments" exact value from "Register" drop-down list
+# 		And I click "Generate report" button
+# 		Then "ResultTable" spreadsheet document is equal
+# 			| 'Shipment confirmation 1 dated *'             | '' | '' | '' | '' | '' |
+# 			| 'Document registrations records'              | '' | '' | '' | '' | '' |
+# 			| 'Register  "R4034 Scheduled goods shipments"' | '' | '' | '' | '' | '' |
 			
-		And I close all client application windows
+# 		And I close all client application windows
 		
-Scenario: _040178 check Shipment confirmation movements by the Register  "R2031 Shipment invoicing"
-	* Select Shipment confirmation
-		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
-	* Check movements by the Register  "R2031 Shipment invoicing" (Receipt, Expense)
-		And I click "Registrations report" button
-		And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 1 dated *'      | '' | '' | '' | '' | '' |
-			| 'Document registrations records'       | '' | '' | '' | '' | '' |
-			| 'Register  "R2031 Shipment invoicing"' | '' | '' | '' | '' | '' |
+# Scenario: _040178 check Shipment confirmation movements by the Register  "R2031 Shipment invoicing"
+# 	* Select Shipment confirmation
+# 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+# 		And I go to line in "List" table
+# 			| 'Number'  |
+# 			| '1' |
+# 	* Check movements by the Register  "R2031 Shipment invoicing" (Receipt, Expense)
+# 		And I click "Registrations report" button
+# 		And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
+# 		And I click "Generate report" button
+# 		Then "ResultTable" spreadsheet document is equal
+# 			| 'Shipment confirmation 1 dated *'      | '' | '' | '' | '' | '' |
+# 			| 'Document registrations records'       | '' | '' | '' | '' | '' |
+# 			| 'Register  "R2031 Shipment invoicing"' | '' | '' | '' | '' | '' |
 			
-		And I close all client application windows
+# 		And I close all client application windows

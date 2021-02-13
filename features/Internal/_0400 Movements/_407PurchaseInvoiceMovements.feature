@@ -1075,6 +1075,7 @@ Scenario: _0401143 check Purchase invoice movements by the Register  "R1011 Rece
 
 	
 Scenario: _0401054 check Purchase invoice movements by the Register  "R4011 Free stocks"
+	And I close all client application windows
 	* Select Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
@@ -1095,6 +1096,7 @@ Scenario: _0401054 check Purchase invoice movements by the Register  "R4011 Free
 
 
 Scenario: _0401064 check Purchase invoice movements by the Register  "R1031 Receipt invoicing"
+	And I close all client application windows
 	* Select Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
@@ -1116,6 +1118,7 @@ Scenario: _0401064 check Purchase invoice movements by the Register  "R1031 Rece
 
 
 Scenario: _0401014 check Purchase invoice movements by the Register  "R4010 Actual stocks"
+	And I close all client application windows
 	* Select Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
@@ -1138,6 +1141,7 @@ Scenario: _0401014 check Purchase invoice movements by the Register  "R4010 Actu
 //GR-PI
 
 Scenario: _0401065 check Purchase invoice movements by the Register  "R1031 Receipt invoicing"
+	And I close all client application windows
 	* Select Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table

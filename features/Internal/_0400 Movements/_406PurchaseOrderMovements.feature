@@ -503,7 +503,7 @@ Scenario: _0401203 check Purchase order movements by the Register  "R4016 Orderi
 			| 'Register  "R4016 Ordering of internal supply requests"' | ''            | ''                    | ''          | ''             | ''         | ''                                                    | ''         |
 			| ''                                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                                    | ''         |
 			| ''                                                       | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Internal supply request'                             | 'Item key' |
-			| ''                                                       | 'Receipt'     | '12.02.2021 12:45:05' | '10'        | 'Main Company' | 'Store 02' | 'Internal supply request 1 dated 12.02.2021 14:39:38' | 'S/Yellow' |	
+			| ''                                                       | 'Receipt'     | '12.02.2021 12:45:05' | '10'        | 'Main Company' | 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'S/Yellow' |	
 		And I close all client application windows
 		
 Scenario: _0401213 check Purchase order movements by the Register  "R1010 Purchase orders"

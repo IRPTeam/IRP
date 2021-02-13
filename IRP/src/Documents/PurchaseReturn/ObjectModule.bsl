@@ -52,6 +52,10 @@ Procedure Filling_BasedOnPurchaseInvoice(FillingData)
 		NewRow = ThisObject.SpecialOffers.Add();
 		FillPropertyValues(NewRow, Row);
 	EndDo;
+	For Each Row In FillingData.SerialLotNumbers Do
+		NewRow = ThisObject.SerialLotNumbers.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
 EndProcedure
 
 Procedure Filling_BasedOnPurchaseReturnOrder(FillingData)

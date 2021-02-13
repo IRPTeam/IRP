@@ -560,7 +560,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
 	                                                                PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters),
 	                                                                PostingServer.GetQueryTableByName("R4035B_IncomingStocks_Exists", Parameters),
-	                                                                AccumulationRecordType.Expense, Unposting, AddInfo) Then
+	                                                                AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 EndProcedure

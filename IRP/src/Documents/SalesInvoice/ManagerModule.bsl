@@ -1135,7 +1135,11 @@ EndFunction
 Function GetAdditionalQueryParamenters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
-	StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	If ValueIsFilled(Ref) Then
+		StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	Else
+		StrParams.Insert("BalancePeriod", Undefined);
+	EndIf;
 	Return StrParams;
 EndFunction
 
@@ -1354,6 +1358,7 @@ Function SerialLotNumbers()
 		|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
 		|		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
 		|		ON SerialLotNumbers.Key = ItemList.Key
+		|		AND ItemList.Ref = &Ref
 		|WHERE
 		|	SerialLotNumbers.Ref = &Ref";	
 EndFunction	

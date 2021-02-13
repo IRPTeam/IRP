@@ -208,7 +208,6 @@ Scenario: _029901 create Sales order without reserve and check its movements (SO
 		And I select "Order reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document does not contain values
-			| '$$SalesOrder029901$$'          | '' | '' | '' | '' | '' |
 			| 'Register  "Order reservation"' | '' | '' | '' | '' | '' |
 	And I close all client application windows
 
@@ -598,7 +597,6 @@ Scenario: _029903 create Sales order without reserve and check its movements (SO
 		And I select "Order reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document does not contain values
-			| '$$SalesOrder029903$$'          | '' | '' | '' | '' | '' |
 			| 'Register  "Order reservation"' | '' | '' | '' | '' | '' |
 		And I close all client application windows		
 
@@ -663,21 +661,33 @@ Scenario: _029904 create Shipment confirmation for SO without reserve and check 
 			| ''                               | ''            | ''                                   | 'Quantity'  | 'Store'      | 'Item key'  |
 			| ''                               | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '31'        | 'Store 02'   | '38/Yellow' |
 			| ''                               | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '40'        | 'Store 02'   | '38/Black'  |
-		* Check SC movements Register  "R2031 Shipment invoicing")
+		* Check SC movements Register  "R2031 Shipment invoicing"
 			And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| 'Register "R2031 Shipment invoicing"' | '' | '' | '' | '' | '' |
-		* Check SC movements Register  "R2011 Shipment of sales orders")
+			| '$$ShipmentConfirmation029903$$'       | ''            | ''                                   | ''          | ''             | ''         | ''                               | ''          |
+			| 'Document registrations records'       | ''            | ''                                   | ''          | ''             | ''         | ''                               | ''          |
+			| 'Register  "R2031 Shipment invoicing"' | ''            | ''                                   | ''          | ''             | ''         | ''                               | ''          |
+			| ''                                     | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions'   | ''         | ''                               | ''          |
+			| ''                                     | ''            | ''                                   | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                          | 'Item key'  |
+			| ''                                     | 'Receipt'     | '$$DateShipmentConfirmation029903$$' | '31'        | 'Main Company' | 'Store 02' | '$$ShipmentConfirmation029903$$' | '38/Yellow' |
+			| ''                                     | 'Receipt'     | '$$DateShipmentConfirmation029903$$' | '40'        | 'Main Company' | 'Store 02' | '$$ShipmentConfirmation029903$$' | '38/Black'  |
+		* Check SC movements Register  "R2011 Shipment of sales orders"
 			And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| 'Register "R2011 Shipment of sales orders"' | '' | '' | '' | '' | '' |
+			| 'Register "R2011 Shipment of sales orders"' |
 		* Check SC movements Register  "R4011B_FreeStocks")
-			And I select "R4011B Free stocks" exact value from "Register" drop-down list
+			And I select "R4011 Free stocks" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| 'Register "R4011B Free stocks"' | '' | '' | '' | '' | '' |
+				| '$$ShipmentConfirmation029903$$' | ''            | ''                                   | ''          | ''           | ''          |
+				| 'Document registrations records' | ''            | ''                                   | ''          | ''           | ''          |
+				| 'Register  "R4011 Free stocks"'  | ''            | ''                                   | ''          | ''           | ''          |
+				| ''                               | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions' | ''          |
+				| ''                               | ''            | ''                                   | 'Quantity'  | 'Store'      | 'Item key'  |
+				| ''                               | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '31'        | 'Store 02'   | '38/Yellow' |
+				| ''                               | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '40'        | 'Store 02'   | '38/Black'  |
 		And I close all client application windows
 	
 
@@ -695,6 +705,16 @@ Scenario: _029905 create Sales ivoice for SO (SC first) without reserve and chec
 			And I change "Use" checkbox in "ShipmentConfirmationsTree" table
 			And I finish line editing in "ShipmentConfirmationsTree" table
 			And I click "Ok" button
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I set "Use shipment confirmation" checkbox in "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Shirt' | '38/Black' |
+			And I set "Use shipment confirmation" checkbox in "ItemList" table
+			And I finish line editing in "ItemList" table		
 			And I click the button named "FormPost"
 			And I delete "$$NumberSalesInvoice029903$$" variable
 			And I delete "$$SalesInvoice029903$$" variable
@@ -730,9 +750,7 @@ Scenario: _029905 create Sales ivoice for SO (SC first) without reserve and chec
 		* Check SI movements (Register  "R2011 Shipment of sales orders")
 			And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice029903$$'                       | ''            | ''                           | ''          | ''             | ''                     | ''          |
-			| 'Document registrations records'             | ''            | ''                           | ''          | ''             | ''                     | ''          |
+			And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                           | ''          | ''             | ''                     | ''          |
 			| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''                     | ''          |
 			| ''                                           | ''            | ''                           | 'Quantity'  | 'Company'      | 'Order'                | 'Item key'  |
@@ -855,17 +873,6 @@ Scenario: _029905 create Sales ivoice for SO (SC first) without reserve and chec
 			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Item key'  |
 			| ''                                          | 'Expense'     | '$$DateSalesInvoice029903$$' | '31'        | 'Main Company' | 'Store 02' | '38/Yellow' |
 			| ''                                          | 'Expense'     | '$$DateSalesInvoice029903$$' | '40'        | 'Main Company' | 'Store 02' | '38/Black'  |
-		* Check SI movements (Register  "R2011 Shipment of sales orders")
-			And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice029903$$'  | ''            | ''                    | ''          | ''             | ''                                         | ''          |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                                         | ''          |
-			| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                    | ''          | ''             | ''                                         | ''          |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                         | ''          |
-			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Order'                                    | 'Item key'  |
-			| ''                                           | 'Expense'     | '$$DateSalesInvoice029903$$' | '31'        | 'Main Company' | '$$SalesOrder029903$$' | '38/Yellow' |
-			| ''                                           | 'Expense'     | '$$DateSalesInvoice029903$$' | '40'        | 'Main Company' | '$$SalesOrder029903$$' | '38/Black'  |
 		* Check that there is no movements in the Register  "R2013 Procurement of sales orders"
 			And I select "R2013 Procurement of sales orders" exact value from "Register" drop-down list
 			And I click "Generate report" button
@@ -881,12 +888,11 @@ Scenario: _029905 create Sales ivoice for SO (SC first) without reserve and chec
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document does not contain values
 				| 'Register  "R4010 Actual stocks"' |
-			And I close all client application windows
 		* Check SI movements (Register  "R4011B Free stocks")
-			And I select "R4011B Free stocks" exact value from "Register" drop-down list
+			And I select "R4011 Free stocks" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document does not contain values
-				| 'Register "R4011B Free stocks"' |
+				| 'Register "R4011 Free stocks"' |
 			And I close all client application windows
 			
 			

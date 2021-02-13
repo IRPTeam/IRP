@@ -6,7 +6,7 @@
 Functionality: Goods receipt - Sales return
 
 Scenario: _028400 preparation (GR-SR)
-When set True value to the constant
+	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -47,7 +47,7 @@ When set True value to the constant
 	* Tax settings
 		When filling in Tax settings for company
 	When Create document SalesInvoice objects
-
+	
 
 
 Scenario: _028401 create GR with transaction type return from customer and create Sales return
@@ -94,10 +94,12 @@ Scenario: _028401 create GR with transaction type return from customer and creat
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
 		And I delete "$$GoodsReceipt028401$$" variable
-        And I delete "$$NumberGoodsReceipt028401$$" variable
-        And I save the window as "$$GoodsReceipt028401$$"
-        And I save the value of "Number" field as "$$NumberGoodsReceipt028401$$"
-        And I close current window
+		And I delete "$$NumberGoodsReceipt028401$$" variable
+		And I delete "$$DateGoodsReceipt028401$$" variable
+		And I save the window as "$$GoodsReceipt028401$$"
+		And I save the value of "Number" field as "$$NumberGoodsReceipt028401$$"
+		And I save the value of "Date" field as "$$DateGoodsReceipt028401$$"
+		And I close current window
 	* Create SR
 		And I click "Sales return" button
 		Then the form attribute named "Partner" became equal to "Kalipso"
@@ -128,13 +130,80 @@ Scenario: _028401 create GR with transaction type return from customer and creat
 		And I click "Post" button
 		And I delete "$$SalesReturn028401$$" variable
 		And I delete "$$NumberSalesReturn028401$$" variable
+		And I delete "$$DateSalesReturn028401$$" variable
 		And I save the window as "$$SalesReturn028401$$"
 		And I save the value of "Number" field as "$$NumberSalesReturn028401$$"
+		And I save the value of "Date" field as "$$DateSalesReturn028401$$"
 		And I close current window
 		
-				
+			
+Scenario: _028402 check GR - SR movements
+	* GR movements
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'                      |
+			| '$$NumberGoodsReceipt028401$$' |
+		And I click "Registrations report" button
+		And I select "R1031 Receipt invoicing" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains lines
+			| '$$GoodsReceipt028401$$'              | ''            | ''                           | ''          | ''             | ''         | ''                       | ''          |
+			| 'Document registrations records'      | ''            | ''                           | ''          | ''             | ''         | ''                       | ''          |
+			| 'Register  "R1031 Receipt invoicing"' | ''            | ''                           | ''          | ''             | ''         | ''                       | ''          |
+			| ''                                    | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''         | ''                       | ''          |
+			| ''                                    | ''            | ''                           | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                  | 'Item key'  |
+			| ''                                    | 'Receipt'     | '$$DateGoodsReceipt028401$$' | '1'         | 'Main Company' | 'Store 02' | '$$GoodsReceipt028401$$' | '38/Yellow' |
+		And I select "Stock reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains lines
+			| '$$GoodsReceipt028401$$'         | ''            | ''                           | ''          | ''           | ''          |
+			| 'Document registrations records' | ''            | ''                           | ''          | ''           | ''          |
+			| 'Register  "Stock reservation"'  | ''            | ''                           | ''          | ''           | ''          |
+			| ''                               | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions' | ''          |
+			| ''                               | ''            | ''                           | 'Quantity'  | 'Store'      | 'Item key'  |
+			| ''                               | 'Receipt'     | '$$DateGoodsReceipt028401$$' | '1'         | 'Store 02'   | '38/Yellow' |
+		And I select "Stock balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains lines
+			| '$$GoodsReceipt028401$$'         | ''            | ''                           | ''          | ''           | ''          |
+			| 'Document registrations records' | ''            | ''                           | ''          | ''           | ''          |
+			| 'Register  "Stock balance"'      | ''            | ''                           | ''          | ''           | ''          |
+			| ''                               | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions' | ''          |
+			| ''                               | ''            | ''                           | 'Quantity'  | 'Store'      | 'Item key'  |
+			| ''                               | 'Receipt'     | '$$DateGoodsReceipt028401$$' | '1'         | 'Store 02'   | '38/Yellow' |
+		And I close all client application windows
+	* SR movements
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'                      |
+			| '$$NumberSalesReturn028401$$' |
+		And I click "Registrations report" button
+		And I select "R1031 Receipt invoicing" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains lines
+			| '$$SalesReturn028401$$'               | ''            | ''                          | ''          | ''             | ''         | ''                       | ''          |
+			| 'Document registrations records'      | ''            | ''                          | ''          | ''             | ''         | ''                       | ''          |
+			| 'Register  "R1031 Receipt invoicing"' | ''            | ''                          | ''          | ''             | ''         | ''                       | ''          |
+			| ''                                    | 'Record type' | 'Period'                    | 'Resources' | 'Dimensions'   | ''         | ''                       | ''          |
+			| ''                                    | ''            | ''                          | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                  | 'Item key'  |
+			| ''                                    | 'Expense'     | '$$DateSalesReturn028401$$' | '1'         | 'Main Company' | 'Store 02' | '$$GoodsReceipt028401$$' | '38/Yellow' |
+		And I select "Stock reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'Register  "Stock reservation"'             |
+		And I select "Stock balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'Register  "Stock balance"'             |
+		And I close all client application windows
+		
 
 
+
+
+	
+		
+	
 		
 					
 				

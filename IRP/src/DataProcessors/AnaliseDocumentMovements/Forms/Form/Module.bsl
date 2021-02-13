@@ -38,6 +38,9 @@ Procedure FillMovementsAtServer()
 		QuerySchema = New QuerySchema;
 		QuerySchema.SetQueryText(StrConcat(TotalQueryArray, Chars.LF+ Chars.LF + ";" + Chars.LF + Chars.LF));
 		For Each Batch In QuerySchema.QueryBatch Do
+			If TypeOf(Batch) = Type("QuerySchemaTableDropQuery") Then
+				Continue;
+			EndIf;
 			FindRows = Object.Info.FindRows(New Structure("Document, Register", Document.Name, Batch.PlacementTable));
 			If Not FindRows.Count() Then
 				Continue;

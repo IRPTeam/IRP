@@ -1844,11 +1844,7 @@ Function R4034B_GoodsShipmentSchedule()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	CASE
-		|		WHEN ItemList.DeliveryDate = DATETIME(1, 1, 1)
-		|			THEN ItemList.Period
-		|		ELSE ItemList.DeliveryDate
-		|	END AS Period,
+		|	ItemList.DeliveryDate AS Period,
 		|	ItemList.Order AS Basis,
 		|	*
 		|INTO R4034B_GoodsShipmentSchedule
@@ -1857,7 +1853,7 @@ Function R4034B_GoodsShipmentSchedule()
 		|WHERE
 		|	NOT ItemList.isCanceled
 		|	AND NOT ItemList.IsService
-		|	AND ItemList.IsProcurementMethod_Stock
+		|	AND NOT ItemList.DeliveryDate = DATETIME(1, 1, 1)
 		|	AND ItemList.UseItemsShipmentScheduling";
 
 EndFunction

@@ -741,15 +741,19 @@ EndFunction
 Function R4035B_IncomingStocks()
 	Return
 		"SELECT
-		|	ItemList.Period AS Period,
-		|	ItemList.Store AS Store,
-		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.Order AS Order,
-		|	ItemList.Quantity AS Quantity
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	QueryTable.Period AS Period,
+		|	QueryTable.Store AS Store,
+		|	QueryTable.ItemKey AS ItemKey,
+		|	QueryTable.Order AS Order,
+		|	QueryTable.Quantity AS Quantity
 		|INTO R4035B_IncomingStocks
+		|FROM
+		|	ItemList AS QueryTable
 		|WHERE
-		|	NOT ItemList.UseSalesOrder
-		|	AND NOT ItemList.IsService";
+		|	NOT QueryTable.UseSalesOrder
+		|	AND NOT QueryTable.IsService
+		|	AND NOT QueryTable.IsCanceled";
 EndFunction	
 
 Function R4035B_IncomingStocks_Exists()

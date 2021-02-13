@@ -50,10 +50,27 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If FillingData = Undefined Then
 		Return;
 	EndIf;
+	If FillingData.Property("SalesOrder") Then
+		CloseOrder = True;
+		SalesOrder = FillingData.SalesOrder; 
+		If CloseOrder Then
+			SalesOrderData = DocSalesOrderServer.GetSalesOrderForClosing(FillingData.SalesOrder);
+		Else
+			SalesOrderData = DocSalesOrderServer.GetSalesOrderInfo(FillingData.SalesOrder);
+		EndIf;
 
-	FillPropertyValues(ThisObject, FillingData);
-	Number = Undefined;
-	Date = Undefined;
+		FillPropertyValues(ThisObject, SalesOrderData.SalesOrderInfo);
+
+		For Each Table In SalesOrderData.Tables Do
+			ThisObject[Table.Key].Load(Table.Value);
+		EndDo;
+
+	Else
+		FillPropertyValues(ThisObject, FillingData);
+		Number = Undefined;
+		Date = Undefined;
+	EndIf;
+	
 EndProcedure
 
 Procedure OnCopy(CopiedObject)

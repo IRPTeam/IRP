@@ -575,14 +575,15 @@ EndProcedure
 #Region SalesOrderClosing
 &AtClient
 Procedure FillByOrder()
-	FillByOrderAtServer();
+	FillByOrderAtServer(False);
 	Cancel = False;
 	DocSalesOrderClient.OnOpen(Object, ThisObject, Cancel);
+	DocSalesOrderClient.ItemListQuantityOnChange(Object, ThisObject, Undefined);
 	UpdateTotalAmounts();
 EndProcedure
 
 &AtServer
-Procedure FillByOrderAtServer()
+Procedure FillByOrderAtServer(OnOpen = True)
 	If Object.CloseOrder Then
 		SalesOrderData = DocSalesOrderServer.GetSalesOrderForClosing(Object.SalesOrder);
 	Else
@@ -595,9 +596,11 @@ Procedure FillByOrderAtServer()
 		Object[Table.Key].Load(Table.Value);
 	EndDo;
 	
-	Cancel = False;
-	StandardProcessing = True;
-	DocSalesOrderServer.OnReadAtServer(Object, ThisObject, Object);
-	DocSalesOrderServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	If Not OnOpen Then
+		Cancel = False;
+		StandardProcessing = True;
+		DocSalesOrderServer.OnReadAtServer(Object, ThisObject, Object);
+		DocSalesOrderServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	EndIf;
 EndProcedure
 #EndRegion

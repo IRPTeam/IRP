@@ -272,7 +272,27 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 		|			SalesOrdersInvoiceClosing
 		|		ON ItemList.Key = SalesOrdersInvoiceClosing.RowKey
 		|WHERE
-		|	Ref = &SalesOrder";
+		|	Ref = &SalesOrder
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	*
+		|INTO SpecialOffers
+		|FROM
+		|	Document.SalesOrder.SpecialOffers AS SalesOrderSpecialOffers
+		|WHERE
+		|	FALSE
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	*
+		|INTO TaxList
+		|FROM
+		|	Document.SalesOrder.TaxList AS SalesOrderTaxList
+		|WHERE
+		|	FALSE";
 	Query.SetParameter("SalesOrder", SalesOrder);
 	Query.TempTablesManager = New TempTablesManager;
 	QueryResult = Query.Execute();
@@ -285,6 +305,27 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 	For Each Table In Query.TempTablesManager.Tables Do
 		StrTables.Insert(Table.FullName, Table.GetData().Unload());
 	EndDo;
+	
+	For Each Row In StrTables.ItemList Do
+		ItemRowInSO = SalesOrder.ItemList.FindRows(New Structure("Key", Row.Key))[0];
+		QuantityPart = Row.QuantityInBaseUnit / ItemRowInSO.QuantityInBaseUnit;
+		
+		TaxRowInSO = SalesOrder.TaxList.FindRows(New Structure("Key", Row.Key));
+		For Each TaxRow In TaxRowInSO Do
+			NewTaxRow = StrTables.TaxList.Add();
+			FillPropertyValues(NewTaxRow, TaxRow);
+			NewTaxRow.Amount = TaxRow.Amount * QuantityPart;
+			NewTaxRow.ManualAmount = TaxRow.ManualAmount * QuantityPart;
+		EndDo;
+		
+		SpecialOffersRowInSO = SalesOrder.SpecialOffers.FindRows(New Structure("Key", Row.Key));
+		For Each SpecialOffersRow In SpecialOffersRowInSO Do
+			NewSpecialOffers = StrTables.SpecialOffers.Add();
+			FillPropertyValues(NewSpecialOffers, SpecialOffersRow);
+			NewSpecialOffers.Amount = SpecialOffersRow.Amount * QuantityPart;
+		EndDo;
+	EndDo;
+	
 	Str.Insert("Tables", StrTables);
 	Return Str;	
 

@@ -1535,7 +1535,7 @@ Function R4011B_FreeStocks()
 		|	ItemListGroup.Quantity - ISNULL(StockReservation.QuantityBalance, 0) AS Quantity
 		|INTO R4011B_FreeStocks
 		|FROM
-		|	ItemListGroup
+		|	TmpItemListGroup AS ItemListGroup
 		|		LEFT JOIN TmpStockReservation AS StockReservation
 		|		ON ItemListGroup.SalesOrder = StockReservation.Order
 		|		AND ItemListGroup.ItemKey = StockReservation.ItemKey

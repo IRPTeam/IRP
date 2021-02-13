@@ -1740,6 +1740,9 @@ Scenario: Create catalog SerialLotNumbers objects
 	And I check or create catalog "SerialLotNumbers" objects:
 		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Description' | 'SerialLotNumberOwner'                                              | 'Inactive' |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=aa7d120ed92fbced11eb095a22e1d875' | 'False'           | '1'    | '12345456'    | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf1277d18ed8a' | 'False'       |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a015' | 'False'        | '11'   | '0512'           | ''                                                                 | 'False'    |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a016' | 'False'        | '12'   | '0514'           | ''                                                                 | 'False'    |
+
 
 Scenario: Create catalog PaymentTerminals objects
 

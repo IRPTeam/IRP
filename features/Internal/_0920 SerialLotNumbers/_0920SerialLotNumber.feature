@@ -53,6 +53,7 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create information register CurrencyRates records
 		When update ItemKeys
 		When Create document PurchaseInvoice objects (for stock remaining control)
+		When Create catalog SerialLotNumbers objects
 		When Create catalog ExpenseAndRevenueTypes objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -1548,17 +1549,17 @@ Scenario: _0920072 check filling in serial lot number in the PurchaseReturn	from
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
 			| 'Number'     |
-			| '25' |
+			| '29' |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormDocumentPurchaseReturnGeneratePurchaseReturn"
 	* Check filling in serial lot number from Purchase invoice
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
-			| 'Dress' | 'M/White'  | '05'                 | '1,000' | 'pcs'  | 'No'                 | '106,78'     | '700,00' | '18%' | ''              | '593,22'     | 'Purchase invoice 25 dated 25.01.2021 12:37:04' | ''                      | '700,00'       | 'Store 01' |
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '0512; 0514'         | '3,000' | 'pcs'  | 'No'                 | '183,05'     | '400,00' | '18%' | ''              | '1 016,95'   | 'Purchase invoice 29 dated 25.01.2021 12:37:04' | ''                      | '1 200,00'     | 'Store 01' |
 		And I click the button named "FormPost"
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
-			| 'Dress' | 'M/White'  | '05'                 | '1,000' | 'pcs'  | 'No'                 | '106,78'     | '700,00' | '18%' | ''              | '593,22'     | 'Purchase invoice 25 dated 25.01.2021 12:37:04' | ''                      | '700,00'       | 'Store 01' |
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '0512; 0514'         | '3,000' | 'pcs'  | 'No'                 | '183,05'     | '400,00' | '18%' | ''              | '1 016,95'   | 'Purchase invoice 29 dated 25.01.2021 12:37:04' | ''                      | '1 200,00'     | 'Store 01' |
 		And I close all client application windows
 		
 					

@@ -1354,6 +1354,7 @@ Function SerialLotNumbers()
 		|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
 		|		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
 		|		ON SerialLotNumbers.Key = ItemList.Key
+		|		AND ItemList.Ref = &Ref
 		|WHERE
 		|	SerialLotNumbers.Ref = &Ref";	
 EndFunction	

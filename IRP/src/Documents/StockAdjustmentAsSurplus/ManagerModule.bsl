@@ -333,6 +333,7 @@ Function SerialLotNumbers()
 		|	Document.StockAdjustmentAsSurplus.SerialLotNumbers AS SerialLotNumbers
 		|		LEFT JOIN Document.StockAdjustmentAsSurplus.ItemList AS ItemList
 		|		ON SerialLotNumbers.Key = ItemList.Key
+		|		AND ItemList.Ref = &Ref
 		|WHERE
 		|	SerialLotNumbers.Ref = &Ref";	
 EndFunction	

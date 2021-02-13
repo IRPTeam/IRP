@@ -769,6 +769,7 @@ Function SerialLotNumbers()
 		|	Document.SalesReturn.SerialLotNumbers AS SerialLotNumbers
 		|		LEFT JOIN Document.SalesReturn.ItemList AS ItemList
 		|		ON SerialLotNumbers.Key = ItemList.Key
+		|		AND ItemList.Ref = &Ref
 		|WHERE
 		|	SerialLotNumbers.Ref = &Ref";	
 EndFunction	

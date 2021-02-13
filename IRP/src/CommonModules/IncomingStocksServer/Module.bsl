@@ -98,6 +98,53 @@ Procedure ClosureIncomingStocks(Parameters) Export
 	Query.Execute();
 EndProcedure
 
+Procedure ClosureIncomingStocks_Unposting(Parameters) Export
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"SELECT
+	|	Table.Period,
+	|	Table.Store,
+	|	Table.ItemKey,
+	|	Table.Order,
+	|	Table.Quantity
+	|INTO IncomingStocks
+	|FROM
+	|	AccumulationRegister.R4035B_IncomingStocks AS Table
+	|WHERE
+	|	FALSE
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Table.Period,
+	|	Table.IncomingStore,
+	|	Table.RequesterStore,
+	|	Table.ItemKey,
+	|	Table.Order,
+	|	Table.Requester,
+	|	Table.Quantity
+	|INTO IncomingStocksRequested
+	|FROM
+	|	AccumulationRegister.R4036B_IncomingStocksRequested AS Table
+	|WHERE
+	|	FALSE
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Table.Period,
+	|	Table.Store,
+	|	Table.ItemKey,
+	|	Table.Quantity
+	|INTO FreeStocks
+	|FROM
+	|	AccumulationRegister.R4011B_FreeStocks AS Table
+	|WHERE
+	|	FALSE";
+	Query.Execute();
+EndProcedure
+
 Function GetIncomingStocks_NotConsiderStocksRequested(Parameters)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;

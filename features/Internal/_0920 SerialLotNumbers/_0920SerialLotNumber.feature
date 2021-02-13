@@ -1553,12 +1553,12 @@ Scenario: _0920072 check filling in serial lot number in the PurchaseReturn	from
 		And I click the button named "FormDocumentPurchaseReturnGeneratePurchaseReturn"
 	* Check filling in serial lot number from Purchase invoice
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Serial lot numbers' | 'Q'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
-			| 'Dress' | 'XS/Blue'  | '05'                 | '200,000' | 'pcs'  | 'No'                 | '18 720,00'  | '520,00' | '18%' | ''              | '104 000,00' | 'Purchase invoice 25 dated 01.12.2020 12:00:00' | ''                      | '122 720,00'   | 'Store 05' |
+			| 'Item'  | 'Item key' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
+			| 'Dress' | 'M/White'  | '05'                 | '1,000' | 'pcs'  | 'No'                 | '106,78'     | '700,00' | '18%' | ''              | '593,22'     | 'Purchase invoice 25 dated 25.01.2021 12:37:04' | ''                      | '700,00'       | 'Store 01' |
 		And I click the button named "FormPost"
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Serial lot numbers' | 'Q'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
-			| 'Dress' | 'XS/Blue'  | '05'                 | '200,000' | 'pcs'  | 'No'                 | '18 720,00'  | '520,00' | '18%' | ''              | '104 000,00' | 'Purchase invoice 25 dated 01.12.2020 12:00:00' | ''                      | '122 720,00'   | 'Store 05' |
+			| 'Item'  | 'Item key' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
+			| 'Dress' | 'M/White'  | '05'                 | '1,000' | 'pcs'  | 'No'                 | '106,78'     | '700,00' | '18%' | ''              | '593,22'     | 'Purchase invoice 25 dated 25.01.2021 12:37:04' | ''                      | '700,00'       | 'Store 01' |
 		And I close all client application windows
 		
 					

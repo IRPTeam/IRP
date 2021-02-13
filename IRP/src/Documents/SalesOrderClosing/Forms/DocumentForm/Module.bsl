@@ -3,11 +3,6 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	If Object.Ref.isEmpty() AND NOT Parameters.SalesOrder.IsEmpty() Then
-		Object.SalesOrder = Parameters.SalesOrder;
-		Object.CloseOrder = True;
-		FillByOrderAtServer();
-	EndIf;
 	DocSalesOrderServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);	
@@ -575,7 +570,7 @@ EndProcedure
 #Region SalesOrderClosing
 &AtClient
 Procedure FillByOrder()
-	FillByOrderAtServer(False);
+	FillByOrderAtServer();
 	Cancel = False;
 	DocSalesOrderClient.OnOpen(Object, ThisObject, Cancel);
 	DocSalesOrderClient.ItemListQuantityOnChange(Object, ThisObject, Undefined);
@@ -583,7 +578,7 @@ Procedure FillByOrder()
 EndProcedure
 
 &AtServer
-Procedure FillByOrderAtServer(OnOpen = True)
+Procedure FillByOrderAtServer()
 	If Object.CloseOrder Then
 		SalesOrderData = DocSalesOrderServer.GetSalesOrderForClosing(Object.SalesOrder);
 	Else
@@ -595,12 +590,11 @@ Procedure FillByOrderAtServer(OnOpen = True)
 	For Each Table In SalesOrderData.Tables Do
 		Object[Table.Key].Load(Table.Value);
 	EndDo;
-	
-	If Not OnOpen Then
-		Cancel = False;
-		StandardProcessing = True;
-		DocSalesOrderServer.OnReadAtServer(Object, ThisObject, Object);
-		DocSalesOrderServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
-	EndIf;
+
+	Cancel = False;
+	StandardProcessing = True;
+	DocSalesOrderServer.OnReadAtServer(Object, ThisObject, Object);
+	DocSalesOrderServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+
 EndProcedure
 #EndRegion

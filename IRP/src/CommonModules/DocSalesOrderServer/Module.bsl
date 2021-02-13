@@ -222,20 +222,20 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 	Query = New Query;
 	Query.Text =
 		"SELECT
-		|	SalesOrder.Agreement,
-		|	SalesOrder.Company,
-		|	SalesOrder.Currency,
-		|	SalesOrder.DateOfShipment,
-		|	SalesOrder.LegalName,
-		|	SalesOrder.ManagerSegment,
-		|	SalesOrder.Partner,
-		|	SalesOrder.PriceIncludeTax,
-		|	SalesOrder.ShipmentConfirmationsBeforeSalesInvoice,
-		|	SalesOrder.Status,
-		|	SalesOrder.UseItemsShipmentScheduling,
-		|	SalesOrder.Author,
-		|	SalesOrder.BusinessUnit,
-		|	SalesOrder.Description
+		|	SalesOrder.Agreement AS Agreement,
+		|	SalesOrder.Company AS Company,
+		|	SalesOrder.Currency AS Currency,
+		|	SalesOrder.DateOfShipment AS DateOfShipment,
+		|	SalesOrder.LegalName AS LegalName,
+		|	SalesOrder.ManagerSegment AS ManagerSegment,
+		|	SalesOrder.Partner AS Partner,
+		|	SalesOrder.PriceIncludeTax AS PriceIncludeTax,
+		|	SalesOrder.ShipmentConfirmationsBeforeSalesInvoice AS ShipmentConfirmationsBeforeSalesInvoice,
+		|	SalesOrder.Status AS Status,
+		|	SalesOrder.UseItemsShipmentScheduling AS UseItemsShipmentScheduling,
+		|	SalesOrder.Author AS Author,
+		|	SalesOrder.BusinessUnit AS BusinessUnit,
+		|	SalesOrder.Description AS Description
 		|FROM
 		|	Document.SalesOrder AS SalesOrder
 		|WHERE
@@ -244,40 +244,46 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	ItemList.Ref,
-		|	ItemList.LineNumber,
-		|	ItemList.Key,
-		|	ItemList.Cancel,
-		|	ItemList.ItemKey,
-		|	ItemList.Store,
-		|	ItemList.Price,
-		|	ItemList.PriceType,
+		|	ItemList.Ref AS Ref,
+		|	ItemList.LineNumber AS LineNumber,
+		|	ItemList.Key AS Key,
+		|	ItemList.Cancel AS Cancel1,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Store AS Store,
+		|	ItemList.Price AS Price,
+		|	ItemList.PriceType AS PriceType,
 		|	ItemList.ItemKey.Item.Unit AS Unit,
-		|	ItemList.DeliveryDate,
-		|	ItemList.ProcurementMethod,
-		|	ItemList.Detail,
-		|	ItemList.BusinessUnit,
-		|	ItemList.RevenueType,
-		|	ItemList.DontCalculateRow,
-		|	ItemList.CancelReason,
-		|	True AS Cancel,
+		|	ItemList.DeliveryDate AS DeliveryDate,
+		|	ItemList.ProcurementMethod AS ProcurementMethod,
+		|	ItemList.Detail AS Detail,
+		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.RevenueType AS RevenueType,
+		|	ItemList.DontCalculateRow AS DontCalculateRow,
+		|	ItemList.CancelReason AS CancelReason,
+		|	TRUE AS Cancel,
 		|	SalesOrdersInvoiceClosing.QuantityBalance AS QuantityInBaseUnit,
 		|	SalesOrdersInvoiceClosing.QuantityBalance AS Quantity,
 		|	SalesOrdersInvoiceClosing.AmountBalance AS TotalAmount,
-		|	SalesOrdersInvoiceClosing.NetAmountBalance AS NetAmount
+		|	SalesOrdersInvoiceClosing.NetAmountBalance AS NetAmount,
+		|	ItemList.TaxAmount AS TaxAmount,
+		|	ItemList.OffersAmount AS OffersAmount
 		|INTO ItemList
 		|FROM
 		|	Document.SalesOrder.ItemList AS ItemList
-		|		INNER JOIN AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Balance(, Order = &SalesOrder) AS
-		|			SalesOrdersInvoiceClosing
+		|		INNER JOIN AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Balance(, Order = &SalesOrder) AS SalesOrdersInvoiceClosing
 		|		ON ItemList.Key = SalesOrdersInvoiceClosing.RowKey
 		|WHERE
-		|	Ref = &SalesOrder
+		|	ItemList.Ref = &SalesOrder
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	*
+		|	SalesOrderSpecialOffers.Ref AS Ref,
+		|	SalesOrderSpecialOffers.LineNumber AS LineNumber,
+		|	SalesOrderSpecialOffers.Key AS Key,
+		|	SalesOrderSpecialOffers.Offer AS Offer,
+		|	SalesOrderSpecialOffers.Amount AS Amount,
+		|	SalesOrderSpecialOffers.Percent AS Percent
 		|INTO SpecialOffers
 		|FROM
 		|	Document.SalesOrder.SpecialOffers AS SalesOrderSpecialOffers
@@ -287,7 +293,15 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	*
+		|	SalesOrderTaxList.Ref AS Ref,
+		|	SalesOrderTaxList.LineNumber AS LineNumber,
+		|	SalesOrderTaxList.Key AS Key,
+		|	SalesOrderTaxList.Tax AS Tax,
+		|	SalesOrderTaxList.Analytics AS Analytics,
+		|	SalesOrderTaxList.TaxRate AS TaxRate,
+		|	SalesOrderTaxList.Amount AS Amount,
+		|	SalesOrderTaxList.IncludeToTotalAmount AS IncludeToTotalAmount,
+		|	SalesOrderTaxList.ManualAmount AS ManualAmount
 		|INTO TaxList
 		|FROM
 		|	Document.SalesOrder.TaxList AS SalesOrderTaxList
@@ -311,19 +325,24 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 		QuantityPart = Row.QuantityInBaseUnit / ItemRowInSO.QuantityInBaseUnit;
 		
 		TaxRowInSO = SalesOrder.TaxList.FindRows(New Structure("Key", Row.Key));
+		TaxAmount = 0;
 		For Each TaxRow In TaxRowInSO Do
 			NewTaxRow = StrTables.TaxList.Add();
 			FillPropertyValues(NewTaxRow, TaxRow);
 			NewTaxRow.Amount = TaxRow.Amount * QuantityPart;
 			NewTaxRow.ManualAmount = TaxRow.ManualAmount * QuantityPart;
+			TaxAmount = TaxAmount + NewTaxRow.ManualAmount; 
 		EndDo;
-		
+		Row.TaxAmount = TaxAmount;
 		SpecialOffersRowInSO = SalesOrder.SpecialOffers.FindRows(New Structure("Key", Row.Key));
+		SpecialOffersAmount = 0;
 		For Each SpecialOffersRow In SpecialOffersRowInSO Do
 			NewSpecialOffers = StrTables.SpecialOffers.Add();
 			FillPropertyValues(NewSpecialOffers, SpecialOffersRow);
 			NewSpecialOffers.Amount = SpecialOffersRow.Amount * QuantityPart;
+			SpecialOffersAmount = SpecialOffersAmount + NewSpecialOffers.Amount;
 		EndDo;
+		Row.OffersAmount = SpecialOffersAmount;
 	EndDo;
 	
 	Str.Insert("Tables", StrTables);

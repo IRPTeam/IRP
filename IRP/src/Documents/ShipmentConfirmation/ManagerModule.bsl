@@ -976,7 +976,7 @@ Function R4012B_StockReservation()
 	Return
 		"SELECT
 		|	*
-		|INTO StockReservation
+		|INTO TmpStockReservation
 		|FROM
 		|	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
 		|		(SELECT
@@ -1015,7 +1015,7 @@ Function R4012B_StockReservation()
 		|INTO R4012B_StockReservation
 		|FROM
 		|	ItemList AS ItemList
-		|		INNER JOIN StockReservation
+		|		INNER JOIN TmpStockReservation AS StockReservation
 		|		ON (ItemList.SalesOrder = StockReservation.Order
 		|		OR ItemList.SalesInvoice = StockReservation.Order)
 		|		AND ItemList.ItemKey = StockReservation.ItemKey
@@ -1023,7 +1023,7 @@ Function R4012B_StockReservation()
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
-		|DROP StockReservation";
+		|DROP TmpStockReservation";
 EndFunction
 
 Function R4022B_StockTransferOrdersShipment()

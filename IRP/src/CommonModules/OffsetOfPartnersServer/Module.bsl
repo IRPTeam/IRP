@@ -145,6 +145,28 @@ Procedure Vendors_OnTransaction(Parameters) Export
 	AdvancesOnTransaction(Parameters, "R1020B_AdvancesToVendors", "VendorsTransactions");
 EndProcedure
 
+Procedure Vendors_OnTransaction_Unposting(Parameters) Export
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Currency,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Basis AS TransactionDocument,
+	|	Table.Basis AS AdvancesDocument,
+	|	Table.Agreement,
+	|	Table.Amount
+	|INTO OffsetOfAdvance
+	|FROM
+	|	AccumulationRegister.R1021B_VendorsTransactions AS Table
+	|WHERE
+	|	FALSE";
+	Query.Execute();	
+EndProcedure	
+
 Procedure AdvancesOnTransaction(Parameters, RegisterName, TransactionsTableName)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;

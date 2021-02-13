@@ -244,6 +244,13 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	                                                                 AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
+	
+	If Not Cancel And Not AccReg.R4036B_IncomingStocksRequested.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
+	                                                                PostingServer.GetQueryTableByName("R4036B_IncomingStocksRequested", Parameters),
+	                                                                PostingServer.GetQueryTableByName("R4036B_IncomingStocksRequested_Exists", Parameters),
+	                                                                AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -270,6 +277,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
 	QueryArray.Add(R4035B_IncomingStocks_Exists());
+	QueryArray.Add(R4036B_IncomingStocksRequested_Exists());
 	Return QueryArray;	
 EndFunction
 
@@ -341,23 +349,16 @@ Function R4035B_IncomingStocks()
 		|	ItemList.StoreSender,
 		|	ItemList.ItemKey,
 		|	ItemList.PurchaseOrder";
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	VALUE(AccumulationRecordType.Receipt),
-//		|	ItemList.Period,
-//		|	ItemList.StoreReceiver,
-//		|	ItemList.ItemKey,
-//		|	ItemList.Order,
-//		|	SUM(ItemList.Quantity)
-//		|FROM
-//		|	ItemList AS ItemList
-//		|GROUP BY
-//		|	ItemList.Period,
-//		|	ItemList.StoreReceiver,
-//		|	ItemList.ItemKey,
-//		|	ItemList.Order";	
+EndFunction
+
+Function R4035B_IncomingStocks_Exists()
+	Return
+		"SELECT *
+		|	INTO R4035B_IncomingStocks_Exists
+		|FROM
+		|	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
+		|WHERE
+		|	R4035B_IncomingStocks.Recorder = &Ref";
 EndFunction
 
 Function R4036B_IncomingStocksRequested()
@@ -385,6 +386,17 @@ Function R4036B_IncomingStocksRequested()
 		|	ItemList.Order";
 EndFunction
 
+Function R4036B_IncomingStocksRequested_Exists()
+	Return
+		"SELECT
+		|	*
+		|INTO R4036B_IncomingStocksRequested_Exists
+		|FROM
+		|	AccumulationRegister.R4036B_IncomingStocksRequested AS R4036B_IncomingStocksRequested
+		|WHERE
+		|	R4036B_IncomingStocksRequested.Recorder = &Ref";
+EndFunction
+
 Function R4012B_StockReservation()
 	Return
 		"SELECT
@@ -405,16 +417,6 @@ Function R4012B_StockReservation()
 		|	ItemList.ItemKey,
 		|	ItemList.Order";
 EndFunction	
-		
-Function R4035B_IncomingStocks_Exists()
-	Return
-		"SELECT *
-		|	INTO R4035B_IncomingStocks_Exists
-		|FROM
-		|	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
-		|WHERE
-		|	R4035B_IncomingStocks.Recorder = &Ref";
-EndFunction
 
 #EndRegion
 

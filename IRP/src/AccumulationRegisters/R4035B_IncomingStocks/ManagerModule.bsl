@@ -15,9 +15,6 @@ Function GetExistsRecords(Ref, RecordType = Undefined, AddInfo = Undefined) Expo
 EndFunction
 
 Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
-
-// Doc.PurchaseInvoice - receipt
-// Doc.InventoryTransferOrder - expense
 	
 	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_R4035B_IncomingStocks") Then
 		Return True;

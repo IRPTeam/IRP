@@ -140,15 +140,15 @@ Scenario: _028402 check SC - PR movements
 			| 'Number'                      |
 			| '$$NumberShipmentConfirmation022501$$' |
 		And I click "Registrations report" button
-		And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
+		And I select "R1031 Receipt invoicing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains lines
-			| '$$ShipmentConfirmation022501$$'       | ''            | ''                                   | ''          | ''             | ''         | ''                               | ''          |
-			| 'Document registrations records'       | ''            | ''                                   | ''          | ''             | ''         | ''                               | ''          |
-			| 'Register  "R2031 Shipment invoicing"' | ''            | ''                                   | ''          | ''             | ''         | ''                               | ''          |
-			| ''                                     | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions'   | ''         | ''                               | ''          |
-			| ''                                     | ''            | ''                                   | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                          | 'Item key'  |
-			| ''                                     | 'Receipt'     | '$$DateShipmentConfirmation022501$$' | '1'         | 'Main Company' | 'Store 02' | '$$ShipmentConfirmation022501$$' | '36/Yellow' |
+			| '$$ShipmentConfirmation022501$$'      | ''            | ''                                   | ''          | ''             | ''         | ''                               | ''          |
+			| 'Document registrations records'      | ''            | ''                                   | ''          | ''             | ''         | ''                               | ''          |
+			| 'Register  "R1031 Receipt invoicing"' | ''            | ''                                   | ''          | ''             | ''         | ''                               | ''          |
+			| ''                                    | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions'   | ''         | ''                               | ''          |
+			| ''                                    | ''            | ''                                   | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                          | 'Item key'  |
+			| ''                                    | 'Receipt'     | '$$DateShipmentConfirmation022501$$' | '1'         | 'Main Company' | 'Store 02' | '$$ShipmentConfirmation022501$$' | '36/Yellow' |
 		And I select "Stock reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains lines
@@ -174,15 +174,15 @@ Scenario: _028402 check SC - PR movements
 			| 'Number'                      |
 			| '$$NumberPurchaseReturn022501$$' |
 		And I click "Registrations report" button
-		And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
+		And I select "R1031 Receipt invoicing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains lines
-			| '$$PurchaseReturn022501$$'             | ''            | ''                             | ''          | ''             | ''         | ''                               | ''          |
-			| 'Document registrations records'       | ''            | ''                             | ''          | ''             | ''         | ''                               | ''          |
-			| 'Register  "R2031 Shipment invoicing"' | ''            | ''                             | ''          | ''             | ''         | ''                               | ''          |
-			| ''                                     | 'Record type' | 'Period'                       | 'Resources' | 'Dimensions'   | ''         | ''                               | ''          |
-			| ''                                     | ''            | ''                             | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                          | 'Item key'  |
-			| ''                                     | 'Expense'     | '$$DatePurchaseReturn022501$$' | '1'         | 'Main Company' | 'Store 02' | '$$ShipmentConfirmation022501$$' | '36/Yellow' |
+			| '$$PurchaseReturn022501$$'            | ''            | ''                             | ''          | ''             | ''         | ''                               | ''          |
+			| 'Document registrations records'      | ''            | ''                             | ''          | ''             | ''         | ''                               | ''          |
+			| 'Register  "R1031 Receipt invoicing"' | ''            | ''                             | ''          | ''             | ''         | ''                               | ''          |
+			| ''                                    | 'Record type' | 'Period'                       | 'Resources' | 'Dimensions'   | ''         | ''                               | ''          |
+			| ''                                    | ''            | ''                             | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                          | 'Item key'  |
+			| ''                                    | 'Expense'     | '$$DatePurchaseReturn022501$$' | '1'         | 'Main Company' | 'Store 02' | '$$ShipmentConfirmation022501$$' | '36/Yellow' |
 		And I select "Stock reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document does not contain values

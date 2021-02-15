@@ -26,6 +26,7 @@ Scenario: _0230000 preparation (Sales order closing)
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
 		When Create catalog Partners objects (Ferron BP)
+		When Create catalog BusinessUnits objects
 		When Create catalog Companies objects (partners company)
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
@@ -38,6 +39,8 @@ Scenario: _0230000 preparation (Sales order closing)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
+		When Create catalog ExpenseAndRevenueTypes objects
+		When Create catalog CancelReturnReasons objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -70,11 +73,11 @@ Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 		Then the form attribute named "SalesOrder" became equal to "Sales order 32 dated 09.02.2021 19:53:45"
 		Then the form attribute named "CloseOrder" became equal to "Yes"
 		And "ItemList" table contains lines
-			| 'Business unit'           | 'Price type'              | 'Item'    | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'    | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Revenue type' | 'Detail' | 'Item key' | 'Procurement method' | 'Cancel' | 'Delivery date' | 'Cancel reason' |
-			| 'Distribution department' | 'Basic Price Types'       | 'Dress'   | 'No'                 | '1,000'  | 'pcs'  | '79,32'      | '520,00'   | ''              | '440,68'     | '520,00'       | 'Store 02' | 'Revenue'      | ''       | 'XS/Blue'  | 'Stock'              | 'Yes'    | '09.02.2021'    | ''              |
-			| 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | 'No'                 | '10,000' | 'pcs'  | '533,90'     | '350,00'   | ''              | '2 966,10'   | '3 500,00'     | 'Store 02' | 'Revenue'      | ''       | '36/Red'   | 'No reserve'         | 'Yes'    | '09.02.2021'    | ''              |
-			| 'Distribution department' | 'Basic Price Types'       | 'Boots'   | 'No'                 | '24,000' | 'pcs'  | '2 562,71'   | '8 400,00' | ''              | '14 237,29'  | '16 800,00'    | 'Store 02' | 'Revenue'      | ''       | '37/18SD'  | 'Purchase'           | 'Yes'    | '09.02.2021'    | ''              |
-			| 'Front office'            | 'en description is empty' | 'Service' | 'No'                 | '1,000'  | 'pcs'  | '15,25'      | '100,00'   | ''              | '84,75'      | '100,00'       | 'Store 02' | 'Revenue'      | ''       | 'Interner' | ''                   | 'Yes'    | '09.02.2021'    | ''              |
+			| 'Price type'              | 'Item'    | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'    | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Revenue type' | 'Detail' | 'Item key' | 'Procurement method' | 'Cancel' | 'Delivery date' | 'Cancel reason' |
+			| 'Basic Price Types'       | 'Dress'   | 'No'                 | '1,000'  | 'pcs'  | '79,32'      | '520,00'   | ''              | '440,68'     | '520,00'       | 'Store 02' | 'Revenue'      | ''       | 'XS/Blue'  | 'Stock'              | 'Yes'    | '09.02.2021'    | ''              |
+			| 'Basic Price Types'       | 'Shirt'   | 'No'                 | '10,000' | 'pcs'  | '533,90'     | '350,00'   | ''              | '2 966,10'   | '3 500,00'     | 'Store 02' | 'Revenue'      | ''       | '36/Red'   | 'No reserve'         | 'Yes'    | '09.02.2021'    | ''              |
+			| 'Basic Price Types'       | 'Boots'   | 'No'                 | '24,000' | 'pcs'  | '2 562,71'   | '8 400,00' | ''              | '14 237,29'  | '16 800,00'    | 'Store 02' | 'Revenue'      | ''       | '37/18SD'  | 'Purchase'           | 'Yes'    | '09.02.2021'    | ''              |
+			| 'en description is empty' | 'Service' | 'No'                 | '1,000'  | 'pcs'  | '15,25'      | '100,00'   | ''              | '84,75'      | '100,00'       | 'Store 02' | 'Revenue'      | ''       | 'Interner' | ''                   | 'Yes'    | '09.02.2021'    | ''              |
 		Then the number of "ItemList" table lines is "equal" "4"
 		Then the form attribute named "Currency" became equal to "TRY"
 	* Try to post document without filling in cancel reason
@@ -84,7 +87,11 @@ Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'XS/Blue'   |
-		And I select "not available" exact value from "Cancel reason" drop-down list in "ItemList" table
+		And I click choice button of "Cancel reason" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'not available' |
+		And I select current line in "List" table	
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
@@ -123,9 +130,13 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 				| "$$NumberSalesOrderClosing0230001$$" |
 			And I execute 1C:Enterprise script at server
 				| "Documents.SalesOrderClosing.FindByNumber($$NumberSalesOrderClosing0230001$$).GetObject().Write(DocumentWriteMode.UndoPosting);" |
-		* Load SI for SO 32
-			When Create document SalesInvoice objects (for check SO closing)
+	* Load SI and SC for SO 32
+		When Create document SalesInvoice objects (for check SO closing)
+		When Create document ShipmentConfirmation objects (check SO closing)
+		And I execute 1C:Enterprise script at server
+ 			| "Documents.ShipmentConfirmation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |	
 	* Create Sales order closing 
+		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
 			| 'Number'  |

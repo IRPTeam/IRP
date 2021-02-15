@@ -397,7 +397,9 @@ Function GetQueryTextQueryTable()
 		|FROM
 		|	tmp AS tmp
 		|WHERE
-		|	tmp.SalesOrder <> VALUE(Document.SalesOrder.EmptyRef)
+		|	tmp.UseSalesOrder
+		|	AND
+		|	tmp.ProcMeth_Stock
 		|	AND
 		|	NOT tmp.IsService
 		|GROUP BY

@@ -231,24 +231,24 @@ Function GetDocumentTable_GoodsReceipt(ArrayOfBasisDocuments)
 	Query.Text =
 		"SELECT ALLOWED
 		|	""GoodsReceipt"" AS BasedOn,
-		|	ReceiptInvoicing.Store AS Store,
+		|	ShipmentInvoicing.Store AS Store,
 		|	VALUE(Document.SalesReturnOrder.EmptyRef) AS SalesReturnOrder,
-		|	ReceiptInvoicing.ItemKey AS ItemKey,
+		|	ShipmentInvoicing.ItemKey AS ItemKey,
 		|	CASE
-		|		WHEN ReceiptInvoicing.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
-		|			THEN ReceiptInvoicing.ItemKey.Unit
-		|		ELSE ReceiptInvoicing.ItemKey.Item.Unit
+		|		WHEN ShipmentInvoicing.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
+		|			THEN ShipmentInvoicing.ItemKey.Unit
+		|		ELSE ShipmentInvoicing.ItemKey.Item.Unit
 		|	END AS Unit,
-		|	CAST(ReceiptInvoicing.Basis AS Document.GoodsReceipt) AS GoodsReceipt,
-		|	CAST(ReceiptInvoicing.Basis AS Document.GoodsReceipt).Company AS Company,
-		|	CAST(ReceiptInvoicing.Basis AS Document.GoodsReceipt).Partner AS Partner,
-		|	CAST(ReceiptInvoicing.Basis AS Document.GoodsReceipt).LegalName AS LegalName,
-		|	ReceiptInvoicing.QuantityBalance AS Quantity
+		|	CAST(ShipmentInvoicing.Basis AS Document.GoodsReceipt) AS GoodsReceipt,
+		|	CAST(ShipmentInvoicing.Basis AS Document.GoodsReceipt).Company AS Company,
+		|	CAST(ShipmentInvoicing.Basis AS Document.GoodsReceipt).Partner AS Partner,
+		|	CAST(ShipmentInvoicing.Basis AS Document.GoodsReceipt).LegalName AS LegalName,
+		|	ShipmentInvoicing.QuantityBalance AS Quantity
 		|FROM
-		|	AccumulationRegister.R1031B_ReceiptInvoicing.Balance(, Basis IN (&ArrayOfGoodsReceipt)
+		|	AccumulationRegister.R2031B_ShipmentInvoicing.Balance(, Basis IN (&ArrayOfGoodsReceipt)
 		|	AND CAST(Basis AS
 		|		Document.GoodsReceipt).TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer)) AS
-		|		ReceiptInvoicing";
+		|		ShipmentInvoicing";
 	Query.SetParameter("ArrayOfGoodsReceipt", ArrayOfBasisDocuments);
 	
 	QueryTable = Query.Execute().Unload();

@@ -231,24 +231,24 @@ Function GetDocumentTable_ShipmentConfirmation(ArrayOfBasisDocuments)
 	Query.Text =
 		"SELECT ALLOWED
 		|	""ShipmentConfirmation"" AS BasedOn,
-		|	ShipmentInvoicing.Store AS Store,
+		|	ReceiptInvoicing.Store AS Store,
 		|	VALUE(Document.PurchaseReturnOrder.EmptyRef) AS PurchaseReturnOrder,
-		|	ShipmentInvoicing.ItemKey AS ItemKey,
+		|	ReceiptInvoicing.ItemKey AS ItemKey,
 		|	CASE
-		|		WHEN ShipmentInvoicing.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
-		|			THEN ShipmentInvoicing.ItemKey.Unit
-		|		ELSE ShipmentInvoicing.ItemKey.Item.Unit
+		|		WHEN ReceiptInvoicing.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
+		|			THEN ReceiptInvoicing.ItemKey.Unit
+		|		ELSE ReceiptInvoicing.ItemKey.Item.Unit
 		|	END AS Unit,
-		|	CAST(ShipmentInvoicing.Basis AS Document.ShipmentConfirmation) AS ShipmentConfirmation,
-		|	CAST(ShipmentInvoicing.Basis AS Document.ShipmentConfirmation).Company AS Company,
-		|	CAST(ShipmentInvoicing.Basis AS Document.ShipmentConfirmation).Partner AS Partner,
-		|	CAST(ShipmentInvoicing.Basis AS Document.ShipmentConfirmation).LegalName AS LegalName,
-		|	ShipmentInvoicing.QuantityBalance AS Quantity
+		|	CAST(ReceiptInvoicing.Basis AS Document.ShipmentConfirmation) AS ShipmentConfirmation,
+		|	CAST(ReceiptInvoicing.Basis AS Document.ShipmentConfirmation).Company AS Company,
+		|	CAST(ReceiptInvoicing.Basis AS Document.ShipmentConfirmation).Partner AS Partner,
+		|	CAST(ReceiptInvoicing.Basis AS Document.ShipmentConfirmation).LegalName AS LegalName,
+		|	ReceiptInvoicing.QuantityBalance AS Quantity
 		|FROM
-		|	AccumulationRegister.R2031B_ShipmentInvoicing.Balance(, Basis IN (&ArrayOfShipmentConfirmation)
+		|	AccumulationRegister.R1031B_ReceiptInvoicing.Balance(, Basis IN (&ArrayOfShipmentConfirmation)
 		|	AND CAST(Basis AS
 		|		Document.ShipmentConfirmation).TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor)) AS
-		|		ShipmentInvoicing";
+		|		ReceiptInvoicing";
 	Query.SetParameter("ArrayOfShipmentConfirmation", ArrayOfBasisDocuments);
 	
 	QueryTable = Query.Execute().Unload();

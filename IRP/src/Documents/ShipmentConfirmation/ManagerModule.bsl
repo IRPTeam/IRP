@@ -781,6 +781,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2011B_SalesOrdersShipment());
 	QueryArray.Add(R2013T_SalesOrdersProcurement());
 	QueryArray.Add(R2031B_ShipmentInvoicing());
+	QueryArray.Add(R1031B_ReceiptInvoicing());
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4012B_StockReservation());
@@ -813,7 +814,9 @@ Function ItemList()
 		|	ItemList.InventoryTransferOrder AS InventoryTransferOrder,
 		|	NOT ItemList.InventoryTransferOrder.Ref IS NULL AS InventoryTransferOrderExists,
 		|	ItemList.InventoryTransfer AS InventoryTransfer,
-		|	NOT ItemList.InventoryTransfer.Ref IS NULL AS InventoryTransferExists
+		|	NOT ItemList.InventoryTransfer.Ref IS NULL AS InventoryTransferExists,
+		|	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.Sales) AS IsTransaction_Sales,
+		|	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor) AS IsTransaction_ReturnToVendor
 		|INTO ItemList
 		|FROM
 		|	Document.ShipmentConfirmation.ItemList AS ItemList
@@ -863,6 +866,7 @@ Function R2031B_ShipmentInvoicing()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.SalesInvoiceExists
+		|	AND ItemList.IsTransaction_Sales
 		|
 		|UNION ALL
 		|
@@ -877,8 +881,43 @@ Function R2031B_ShipmentInvoicing()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.SalesInvoiceExists";
+		|	ItemList.SalesInvoiceExists
+		|	AND ItemList.IsTransaction_Sales";
 EndFunction
+
+Function R1031B_ReceiptInvoicing()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.ShipmentConfirmation AS Basis,
+		|	ItemList.Quantity AS Quantity,
+		|	ItemList.Company,
+		|	ItemList.Period,
+		|	ItemList.ItemKey,
+		|	ItemList.Store
+		|INTO R1031B_ReceiptInvoicing
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.PurchaseReturnExists
+		|	AND ItemList.IsTransaction_ReturnToVendor
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.PurchaseReturn,
+		|	ItemList.Quantity,
+		|	ItemList.Company,
+		|	ItemList.Period,
+		|	ItemList.ItemKey,
+		|	ItemList.Store
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.PurchaseReturnExists
+		|	AND ItemList.IsTransaction_ReturnToVendor";
+EndFunction	
 
 Function R4010B_ActualStocks()
 	Return

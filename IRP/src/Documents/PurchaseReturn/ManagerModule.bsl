@@ -727,7 +727,7 @@ EndFunction
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R2031B_ShipmentInvoicing());	
+	QueryArray.Add(R1031B_ReceiptInvoicing());	
 	Return QueryArray;
 EndFunction
 
@@ -819,7 +819,7 @@ Function R4014B_SerialLotNumber()
 
 EndFunction
 
-Function R2031B_ShipmentInvoicing()
+Function R1031B_ReceiptInvoicing()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
@@ -829,7 +829,7 @@ Function R2031B_ShipmentInvoicing()
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
-		|INTO R2031B_ShipmentInvoicing
+		|INTO R1031B_ReceiptInvoicing
 		|FROM
 		|	ItemList AS ItemList
 		|		INNER JOIN ShipmentConfirmations AS ShipmentConfirmations

@@ -30,8 +30,12 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") Then
 		If FillingData.Property("BasedOn") And FillingData.BasedOn = "PurchaseInvoice" Then
 			Filling_BasedOnPurchaseInvoice(FillingData);
-		ElsIf FillingData.Property("BasedOn") And FillingData.BasedOn = "PurchaseReturnOrder" Then
+		EndIf;
+		If FillingData.Property("BasedOn") And FillingData.BasedOn = "PurchaseReturnOrder" Then
 			Filling_BasedOnPurchaseReturnOrder(FillingData);
+		EndIf;
+		If FillingData.Property("BasedOn") And FillingData.BasedOn = "ShipmentConfirmation" Then
+			Filling_BasedOnShipmentConfirmation(FillingData);
 		EndIf;
 	EndIf;
 EndProcedure
@@ -74,6 +78,19 @@ Procedure Filling_BasedOnPurchaseReturnOrder(FillingData)
 		NewRow = ThisObject.SpecialOffers.Add();
 		FillPropertyValues(NewRow, Row);
 	EndDo;
+EndProcedure
+
+Procedure Filling_BasedOnShipmentConfirmation(FillingData)
+	FillPropertyValues(ThisObject, FillingData, "Company,Partner,LegalName");
+	
+	For Each Row In FillingData.ItemList Do
+		NewRow = ThisObject.ItemList.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+	For Each Row In FillingData.ShipmentConfirmations Do
+		NewRow = ThisObject.ShipmentConfirmations.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;	
 EndProcedure
 
 Procedure OnCopy(CopiedObject)

@@ -748,7 +748,7 @@ Function ItemList()
 		|	SalesReturnItemList.SalesInvoice AS AgingSalesInvoice,
 		|	SalesReturnItemList.Key,
 		|	SalesReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService
-		|INTO ItemLIst
+		|INTO ItemList
 		|FROM
 		|	Document.SalesReturn.ItemList AS SalesReturnItemList
 		|WHERE

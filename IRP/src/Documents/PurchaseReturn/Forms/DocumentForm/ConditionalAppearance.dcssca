@@ -242,4 +242,176 @@
 			</dcscor:item>
 		</appearance>
 	</item>
+	<item>
+		<selection>
+			<item>
+				<field>ShipmentConfirmationsTreeShipmentConfirmation</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">ShipmentConfirmationsTree.Level</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:decimal">1</right>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>Visible</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
+	<item>
+		<selection>
+			<item>
+				<field>ShipmentConfirmationsTreeItem</field>
+			</item>
+			<item>
+				<field>ShipmentConfirmationsTreeItemKey</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">ShipmentConfirmationsTree.Level</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:decimal">2</right>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>Visible</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
+	<item>
+		<selection>
+			<item>
+				<field>ShipmentConfirmationsTreeQuantityInInvoice</field>
+			</item>
+			<item>
+				<field>ShipmentConfirmationsTreeQuantityInShipmentConfirmation</field>
+			</item>
+			<item>
+				<field>ShipmentConfirmationsTreeQuantity</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">ShipmentConfirmationsTree.Level</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:decimal">1</right>
+			</item>
+			<item xsi:type="FilterItemGroup">
+				<groupType>OrGroup</groupType>
+				<item xsi:type="FilterItemComparison">
+					<left xsi:type="dcscor:Field">ShipmentConfirmationsTree.QuantityInInvoice</left>
+					<comparisonType>NotEqual</comparisonType>
+					<right xsi:type="dcscor:Field">ShipmentConfirmationsTree.Quantity</right>
+				</item>
+				<item xsi:type="FilterItemComparison">
+					<left xsi:type="dcscor:Field">ShipmentConfirmationsTree.QuantityInShipmentConfirmation</left>
+					<comparisonType>Less</comparisonType>
+					<right xsi:type="dcscor:Field">ShipmentConfirmationsTree.Quantity</right>
+				</item>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>TextColor</dcscor:parameter>
+				<dcscor:value xsi:type="v8ui:Color">#FF0000</dcscor:value>
+			</dcscor:item>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>Font</dcscor:parameter>
+				<dcscor:value xsi:type="v8ui:Font" faceName="MS Shell Dlg" height="10" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
+			</dcscor:item>
+		</appearance>
+	</item>
+	<item>
+		<selection>
+			<item>
+				<field>ShipmentConfirmationsTreeQuantityInInvoice</field>
+			</item>
+			<item>
+				<field>ShipmentConfirmationsTreeQuantityInShipmentConfirmation</field>
+			</item>
+			<item>
+				<field>ShipmentConfirmationsTreeQuantity</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">ShipmentConfirmationsTree.Level</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:decimal">1</right>
+			</item>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">ShipmentConfirmationsTree.QuantityInInvoice</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="dcscor:Field">ShipmentConfirmationsTree.Quantity</right>
+			</item>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">ShipmentConfirmationsTree.QuantityInShipmentConfirmation</left>
+				<comparisonType>GreaterOrEqual</comparisonType>
+				<right xsi:type="dcscor:Field">ShipmentConfirmationsTree.Quantity</right>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>TextColor</dcscor:parameter>
+				<dcscor:value xsi:type="v8ui:Color">#339966</dcscor:value>
+			</dcscor:item>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>Font</dcscor:parameter>
+				<dcscor:value xsi:type="v8ui:Font" faceName="MS Shell Dlg" height="10" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
+			</dcscor:item>
+		</appearance>
+	</item>
+	<item>
+		<selection>
+			<item>
+				<field>ShipmentConfirmationsTreeQuantity</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">ShipmentConfirmationsTree.Level</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:decimal">1</right>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>ReadOnly</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
+	<item>
+		<selection>
+			<item>
+				<field>ItemListItem</field>
+			</item>
+			<item>
+				<field>ItemListItemKey</field>
+			</item>
+			<item>
+				<field>ItemListPurchaseReturnOrder</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.ItemList.LockedRow</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:boolean">true</right>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>ReadOnly</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
 </ConditionalAppearance>

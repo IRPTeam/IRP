@@ -725,27 +725,65 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
-	QueryArray.Add(R4014B_SerialLotNumber());	
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R2031B_ShipmentInvoicing());	
 	Return QueryArray;
 EndFunction
 
 Function ItemList()
 	Return
 		"SELECT
-		|	OpeningEntryInventory.Ref,
-		|	OpeningEntryInventory.Key,
-		|	OpeningEntryInventory.ItemKey,
-		|	OpeningEntryInventory.Store,
-		|	OpeningEntryInventory.Quantity,
-		|	NOT OpeningEntryInventory.SerialLotNumber = VALUE(Catalog.SerialLotNumbers.EmptyRef) AS isSerialLotNumberSet,
-		|	OpeningEntryInventory.SerialLotNumber,
-		|	OpeningEntryInventory.Ref.Date AS Period,
-		|	OpeningEntryInventory.Ref.Company AS Company
+		|	ShipmentConfirmations.Key,
+		|	ShipmentConfirmations.ShipmentConfirmation,
+		|	SUM(ShipmentConfirmations.Quantity) AS Quantity
+		|INTO ShipmentConfirmations
+		|FROM
+		|	Document.PurchaseReturn.ShipmentConfirmations AS ShipmentConfirmations
+		|WHERE
+		|	ShipmentConfirmations.Ref = &Ref
+		|GROUP BY
+		|	ShipmentConfirmations.Key,
+		|	ShipmentConfirmations.ShipmentConfirmation
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	PurchaseReturnItemList.Ref.Company AS Company,
+		|	PurchaseReturnItemList.Store AS Store,
+		|	PurchaseReturnItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
+		|	PurchaseReturnItemList.ItemKey AS ItemKey,
+		|	PurchaseReturnItemList.PurchaseReturnOrder AS PurchaseReturnOrder,
+		|	PurchaseReturnItemList.Ref AS PurchaseReturn,
+		|	CASE
+		|		WHEN PurchaseReturnItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			THEN PurchaseReturnItemList.Ref
+		|		ELSE UNDEFINED
+		|	END AS BasisDocument,
+		|	PurchaseReturnItemList.QuantityInBaseUnit AS Quantity,
+		|	PurchaseReturnItemList.TotalAmount AS TotalAmount,
+		|	PurchaseReturnItemList.Ref.Partner AS Partner,
+		|	PurchaseReturnItemList.Ref.LegalName AS LegalName,
+		|	CASE
+		|		WHEN PurchaseReturnItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+		|		AND PurchaseReturnItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+		|			THEN PurchaseReturnItemList.Ref.Agreement.StandardAgreement
+		|		ELSE PurchaseReturnItemList.Ref.Agreement
+		|	END AS Agreement,
+		|	ISNULL(PurchaseReturnItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
+		|	PurchaseReturnItemList.Ref.Date AS Period,
+		|	CASE
+		|		WHEN PurchaseReturnItemList.PurchaseInvoice.Ref IS NULL
+		|		OR VALUETYPE(PurchaseReturnItemList.PurchaseInvoice) <> TYPE(Document.PurchaseInvoice)
+		|			THEN PurchaseReturnItemList.Ref
+		|		ELSE PurchaseReturnItemList.PurchaseInvoice
+		|	END AS SalesInvoice,
+		|	PurchaseReturnItemList.Key,
+		|	PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService
 		|INTO ItemList
 		|FROM
-		|	Document.OpeningEntry.Inventory AS OpeningEntryInventory
+		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
 		|WHERE
-		|	OpeningEntryInventory.Ref = &Ref";
+		|	PurchaseReturnItemList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()
@@ -778,6 +816,25 @@ Function R4014B_SerialLotNumber()
 		|WHERE 
 		|	TRUE";
 
+EndFunction
+
+Function R2031B_ShipmentInvoicing()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ShipmentConfirmations.ShipmentConfirmation AS Basis,
+		|	ShipmentConfirmations.Quantity,
+		|	ItemList.Company,
+		|	ItemList.Period,
+		|	ItemList.ItemKey,
+		|	ItemList.Store
+		|INTO R2031B_ShipmentInvoicing
+		|FROM
+		|	ItemList AS ItemList
+		|		INNER JOIN ShipmentConfirmations AS ShipmentConfirmations
+		|		ON ItemList.Key = ShipmentConfirmations.Key
+		|WHERE
+		|	TRUE";
 EndFunction
 
 #EndRegion

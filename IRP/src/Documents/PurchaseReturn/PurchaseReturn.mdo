@@ -121,6 +121,7 @@
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.StockBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -940,6 +941,72 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="d91d050c-e8d9-42a8-9f6e-355f3c83cf2e">
+    <producedTypes>
+      <objectType typeId="1f09a877-ee45-4222-aaaf-5f8ba524884a" valueTypeId="d168af1a-f1b6-48c0-8a86-78eb7b551d5f"/>
+      <rowType typeId="d924e5b4-d643-46a1-9dc9-0cd672d2e652" valueTypeId="1d8510c8-2c32-464b-bc44-37b1c8db0209"/>
+    </producedTypes>
+    <name>ShipmentConfirmations</name>
+    <synonym>
+      <key>en</key>
+      <value>Shipment confirmations</value>
+    </synonym>
+    <attributes uuid="4527f4cf-9cb1-4fb1-b79d-cf26da67562a">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="68b425db-aeca-4885-ae97-42302b7c411d">
+      <name>ShipmentConfirmation</name>
+      <synonym>
+        <key>en</key>
+        <value>Shipment confirmation</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.ShipmentConfirmation</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b0a73a4c-d69d-44eb-bd16-549c8266a30e">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="2ab14a4f-af87-46de-b80f-49da16d5a01c">
+      <name>QuantityInShipmentConfirmation</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity in shipment confirmation</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <commands uuid="5d7fe07b-4c48-4b3f-88e6-db41ed5c7076">
     <name>GeneratePurchaseReturn</name>
     <synonym>
@@ -950,6 +1017,7 @@
     <commandParameterType>
       <types>DocumentRef.PurchaseInvoice</types>
       <types>DocumentRef.PurchaseReturnOrder</types>
+      <types>DocumentRef.ShipmentConfirmation</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

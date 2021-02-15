@@ -829,3 +829,16 @@ Procedure OnCopyDocumentProcessingOnCopy(Source, CopiedObject, AddInfo = Undefin
 EndProcedure
 
 #EndRegion
+
+#Region ShipmentConfirationsGoodsReceiptd
+
+Procedure RecalculateInvoiceQuantity(ArrayOfRows) Export
+	For Each Row In ArrayOfRows Do
+		Row.Unit = ?(ValueIsFilled(Row.ItemKey.Unit), 
+		Row.ItemKey.Unit, Row.ItemKey.Item.Unit);
+		RecalculateQuantityInRow(Row);
+	EndDo;
+EndProcedure
+
+#EndRegion
+

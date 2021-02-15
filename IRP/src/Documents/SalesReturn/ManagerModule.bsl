@@ -306,7 +306,8 @@ Function GetQueryTextQueryTable()
 	|FROM
 	|	tmp AS tmp
 	|WHERE
-	|	NOT tmp.UseGoodsReceipt
+	|	tmp.SalesReturnOrder = VALUE(Document.SalesReturnOrder.EmptyRef)
+	|	AND NOT tmp.UseGoodsReceipt
 	|	AND Not tmp.IsService
 	|GROUP BY
 	|	tmp.Company,

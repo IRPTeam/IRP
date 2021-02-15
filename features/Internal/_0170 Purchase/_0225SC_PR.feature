@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@IgnoreOnCIMainBuild
+@Purchase
 
 Functionality: Shipment confirmation - Purchase return
 
@@ -54,7 +54,7 @@ Scenario: _022501 create SC with transaction type return to vendor and create Pu
 	* Open form SC
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click the button named "FormCreate"
-		And I select "Return from customer" exact value from "Transaction type" drop-down list
+		And I select "Return to vendor" exact value from "Transaction type" drop-down list
 	* Filling in main info
 		And I click Select button of "Company" field
 		And I go to line in "List" table
@@ -77,7 +77,7 @@ Scenario: _022501 create SC with transaction type return to vendor and create Pu
 			| 'Store 02'    |
 		And I select current line in "List" table
 	* Filling in items info
-		And I click the button named "ItemListAdd"
+		And I click the button named "Add"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -118,14 +118,10 @@ Scenario: _022501 create SC with transaction type return to vendor and create Pu
 		And I click "OK" button
 		* Select PI
 			And I select current line in "ItemList" table
-			And I click choice button of "Sales invoice" attribute in "ItemList" table
-			And I go to line in "" table
-				| ''              |
-				| 'Purchase invoice' |
-			And I select current line in "" table
+			And I click choice button of "Purchase invoice" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Amount' | 'Company'      | 'Currency' | 'Date'                | 'Legal name'      | 'Partner' |
-				| '137 000,00' | 'Main Company' | 'TRY'      | '07.09.2020 17:53:38' | 'Company Ferron BP' | 'Ferron BP' |
+				| 'Company'      | 'Currency' | 'Date'                | 'Legal name'      | 'Partner' |
+				| 'Main Company' | 'TRY'      | '07.09.2020 17:53:38' | 'Company Ferron BP' | 'Ferron BP' |
 			And I select current line in "List" table			
 		And I click "Post" button
 		And I delete "$$PurchaseReturn022501$$" variable
@@ -144,49 +140,49 @@ Scenario: _028402 check SC - PR movements
 			| 'Number'                      |
 			| '$$NumberShipmentConfirmation022501$$' |
 		And I click "Registrations report" button
-		And I select "R2031 Receipt invoicing" exact value from "Register" drop-down list
+		And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains lines
-			| '$$ShipmentConfirmation022501$'       | ''            | ''                                   | ''          | ''             | ''         | ''                              | ''          |
-			| 'Document registrations records'      | ''            | ''                                   | ''          | ''             | ''         | ''                              | ''          |
-			| 'Register  "R1031 Receipt invoicing"' | ''            | ''                                   | ''          | ''             | ''         | ''                              | ''          |
-			| ''                                    | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions'   | ''         | ''                              | ''          |
-			| ''                                    | ''            | ''                                   | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                         | 'Item key'  |
-			| ''                                    | 'Receipt'     | '$$DateShipmentConfirmation022501$$' | '1'         | 'Main Company' | 'Store 02' | '$$ShipmentConfirmation022501$' | '36/Yellow' |
+			| '$$ShipmentConfirmation022501$$'       | ''            | ''                                   | ''          | ''             | ''         | ''                               | ''          |
+			| 'Document registrations records'       | ''            | ''                                   | ''          | ''             | ''         | ''                               | ''          |
+			| 'Register  "R2031 Shipment invoicing"' | ''            | ''                                   | ''          | ''             | ''         | ''                               | ''          |
+			| ''                                     | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions'   | ''         | ''                               | ''          |
+			| ''                                     | ''            | ''                                   | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                          | 'Item key'  |
+			| ''                                     | 'Receipt'     | '$$DateShipmentConfirmation022501$$' | '1'         | 'Main Company' | 'Store 02' | '$$ShipmentConfirmation022501$$' | '36/Yellow' |
 		And I select "Stock reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains lines
-			| '$$ShipmentConfirmation022501$'  | ''            | ''                                   | ''          | ''           | ''          |
+			| '$$ShipmentConfirmation022501$$' | ''            | ''                                   | ''          | ''           | ''          |
 			| 'Document registrations records' | ''            | ''                                   | ''          | ''           | ''          |
 			| 'Register  "Stock reservation"'  | ''            | ''                                   | ''          | ''           | ''          |
 			| ''                               | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions' | ''          |
 			| ''                               | ''            | ''                                   | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                               | 'Expence'     | '$$DateShipmentConfirmation022501$$' | '1'         | 'Store 02'   | '36/Yellow' |
+			| ''                               | 'Expense'     | '$$DateShipmentConfirmation022501$$' | '1'         | 'Store 02'   | '36/Yellow' |
 		And I select "Stock balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains lines
-			| '$$ShipmentConfirmation022501$'  | ''            | ''                                   | ''          | ''           | ''          |
+			| '$$ShipmentConfirmation022501$$' | ''            | ''                                   | ''          | ''           | ''          |
 			| 'Document registrations records' | ''            | ''                                   | ''          | ''           | ''          |
 			| 'Register  "Stock balance"'      | ''            | ''                                   | ''          | ''           | ''          |
 			| ''                               | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions' | ''          |
 			| ''                               | ''            | ''                                   | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                               | 'Expence'     | '$$DateShipmentConfirmation022501$$' | '1'         | 'Store 02'   | '36/Yellow' |
+			| ''                               | 'Expense'     | '$$DateShipmentConfirmation022501$$' | '1'         | 'Store 02'   | '36/Yellow' |
 		And I close all client application windows
 	* PR movements
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I go to line in "List" table
 			| 'Number'                      |
-			| '$$NumberPurchaseReturn028401$$' |
+			| '$$NumberPurchaseReturn022501$$' |
 		And I click "Registrations report" button
-		And I select "R2031 Receipt invoicing" exact value from "Register" drop-down list
+		And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains lines
-			| '$$PurchaseReturn022501$$'            | ''            | ''                             | ''          | ''             | ''         | ''                              | ''          |
-			| 'Document registrations records'      | ''            | ''                             | ''          | ''             | ''         | ''                              | ''          |
-			| 'Register  "R1031 Receipt invoicing"' | ''            | ''                             | ''          | ''             | ''         | ''                              | ''          |
-			| ''                                    | 'Record type' | 'Period'                       | 'Resources' | 'Dimensions'   | ''         | ''                              | ''          |
-			| ''                                    | ''            | ''                             | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                         | 'Item key'  |
-			| ''                                    | 'Expense'     | '$$DatePurchaseReturn022501$$' | '1'         | 'Main Company' | 'Store 02' | '$$ShipmentConfirmation022501$' | '36/Yellow' |
+			| '$$PurchaseReturn022501$$'             | ''            | ''                             | ''          | ''             | ''         | ''                               | ''          |
+			| 'Document registrations records'       | ''            | ''                             | ''          | ''             | ''         | ''                               | ''          |
+			| 'Register  "R2031 Shipment invoicing"' | ''            | ''                             | ''          | ''             | ''         | ''                               | ''          |
+			| ''                                     | 'Record type' | 'Period'                       | 'Resources' | 'Dimensions'   | ''         | ''                               | ''          |
+			| ''                                     | ''            | ''                             | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                          | 'Item key'  |
+			| ''                                     | 'Expense'     | '$$DatePurchaseReturn022501$$' | '1'         | 'Main Company' | 'Store 02' | '$$ShipmentConfirmation022501$$' | '36/Yellow' |
 		And I select "Stock reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document does not contain values

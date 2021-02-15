@@ -399,7 +399,7 @@ Function GetQueryTextQueryTable()
 		|WHERE
 		|	tmp.UseSalesOrder
 		|	AND
-		|	tmp.ProcMeth_Stock
+		|	(tmp.ProcMeth_Stock OR tmp.ProcMeth_Purchase)
 		|	AND
 		|	NOT tmp.IsService
 		|GROUP BY

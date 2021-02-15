@@ -227,7 +227,6 @@ Function GetQueryTextQueryTable()
 		|	tmp AS tmp
 		|WHERE
 		|	tmp.PurchaseReturnOrder = VALUE(Document.PurchaseReturnOrder.EmptyRef)
-		|	AND NOT UseShipmentConfirmation
 		|	AND Not tmp.IsService
 		|GROUP BY
 		|	tmp.Company,
@@ -412,52 +411,7 @@ Function GetQueryTextQueryTable()
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
-	DataMapWithLockFields = New Map();
-	
-	// OrderBalance
-	OrderBalance = AccumulationRegisters.OrderBalance.GetLockFields(DocumentDataTables.OrderBalance);
-	DataMapWithLockFields.Insert(OrderBalance.RegisterName, OrderBalance.LockInfo);
-	
-	// PurchaseTurnovers
-	PurchaseTurnovers = AccumulationRegisters.PurchaseTurnovers.GetLockFields(DocumentDataTables.PurchaseTurnovers);
-	DataMapWithLockFields.Insert(PurchaseTurnovers.RegisterName, PurchaseTurnovers.LockInfo);
-	
-	// PurchaseReturnTurnovers
-	PurchaseReturnTurnovers = AccumulationRegisters.PurchaseReturnTurnovers.GetLockFields(DocumentDataTables.PurchaseReturnTurnovers);
-	DataMapWithLockFields.Insert(PurchaseReturnTurnovers.RegisterName, PurchaseReturnTurnovers.LockInfo);
-	
-	// InventoryBalance
-	InventoryBalance = AccumulationRegisters.InventoryBalance.GetLockFields(DocumentDataTables.InventoryBalance);
-	DataMapWithLockFields.Insert(InventoryBalance.RegisterName, InventoryBalance.LockInfo);
-	
-	// OrderReservation 
-	OrderReservation = AccumulationRegisters.OrderReservation.GetLockFields(DocumentDataTables.OrderReservation);
-	DataMapWithLockFields.Insert(OrderReservation.RegisterName, OrderReservation.LockInfo);
-	// StockReservation  
-	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
-	// GoodsInTransitOutgoing 
-	GoodsInTransitOutgoing = AccumulationRegisters.GoodsInTransitOutgoing.GetLockFields(DocumentDataTables.GoodsInTransitOutgoing);
-	DataMapWithLockFields.Insert(GoodsInTransitOutgoing.RegisterName, GoodsInTransitOutgoing.LockInfo);
-	
-	// StockBalance	
-	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance);
-	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
-	// PartnerArTransactions
-	PartnerArTransactions = AccumulationRegisters.PartnerArTransactions.GetLockFields(DocumentDataTables.PartnerArTransactions);
-	DataMapWithLockFields.Insert(PartnerArTransactions.RegisterName, PartnerArTransactions.LockInfo);
-	
-	// AdvanceFromCustomers (Lock use In PostingCheckBeforeWrite)
-	AdvanceFromCustomers = AccumulationRegisters.AdvanceFromCustomers.GetLockFields(DocumentDataTables.AdvanceFromCustomers_Lock);
-	DataMapWithLockFields.Insert(AdvanceFromCustomers.RegisterName, AdvanceFromCustomers.LockInfo);
-	
-	// ReconciliationStatement
-	ReconciliationStatement = AccumulationRegisters.ReconciliationStatement.GetLockFields(DocumentDataTables.ReconciliationStatement);
-	DataMapWithLockFields.Insert(ReconciliationStatement.RegisterName, ReconciliationStatement.LockInfo);
-	
+	DataMapWithLockFields = New Map();	
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -667,17 +621,7 @@ Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Und
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// StockReservation
-	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation_Exists);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
-	// StockBalance
-	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Exists);
-	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
 	Return DataMapWithLockFields;
 EndFunction
 

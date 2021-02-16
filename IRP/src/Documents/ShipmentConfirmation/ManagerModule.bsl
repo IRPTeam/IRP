@@ -547,7 +547,19 @@ Procedure GetTables_NotUseSCBasis_IsProduct(Tables, TempManager, TableName)
 	
 	#Region QueryText
 	Query.Text =
-		"SELECT
+		"//[0] - GoodsInTransitOutgoing
+		|SELECT
+		|	tmp.Store,
+		|	tmp.ItemKey,
+		|	tmp.ShipmentConfirmation AS ShipmentBasis,
+		|	tmp.Quantity AS Quantity,
+		|	tmp.Period,
+		|	tmp.RowKey AS RowKey
+		|FROM
+		|	tmp AS tmp
+		|;
+		|//[1] - Stock balance
+		|SELECT
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	SUM(tmp.Quantity) AS Quantity,
@@ -560,7 +572,7 @@ Procedure GetTables_NotUseSCBasis_IsProduct(Tables, TempManager, TableName)
 		|	tmp.Period
 		|;
 		|
-		|//[1] - StockReservation
+		|//[2] - StockReservation
 		|SELECT
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
@@ -574,7 +586,7 @@ Procedure GetTables_NotUseSCBasis_IsProduct(Tables, TempManager, TableName)
 		|	tmp.Period
 		|;
 		|
-		|//[2] - StockBalance_Receipt
+		|//[3] - StockBalance_Receipt
 		|SELECT
 		|	CAST(tmp.ShipmentBasis AS Document.InventoryTransfer).StoreTransit AS Store,
 		|	tmp.ItemKey,
@@ -596,10 +608,10 @@ Procedure GetTables_NotUseSCBasis_IsProduct(Tables, TempManager, TableName)
 	#EndRegion
 	
 	QueryResults = Query.ExecuteBatch();
-	
-	PostingServer.MergeTables(Tables.StockBalance_Expense   , QueryResults[0].Unload());
-	PostingServer.MergeTables(Tables.StockReservation       , QueryResults[1].Unload());
-	PostingServer.MergeTables(Tables.StockBalance_Receipt   , QueryResults[2].Unload());
+	PostingServer.MergeTables(Tables.GoodsInTransitOutgoing , QueryResults[0].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Expense   , QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.StockReservation       , QueryResults[2].Unload());
+	PostingServer.MergeTables(Tables.StockBalance_Receipt   , QueryResults[3].Unload());
 EndProcedure
 
 #EndRegion

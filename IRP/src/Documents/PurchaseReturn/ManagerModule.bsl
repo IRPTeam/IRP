@@ -296,7 +296,7 @@ Function GetQueryTextQueryTable()
 		|WHERE
 		|	tmp.UseShipmentConfirmation
 		|	AND Not tmp.IsService
-		|	AND Not tmp.ShipmentConfirmationExists
+	//	|	AND Not tmp.ShipmentConfirmationExists
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,

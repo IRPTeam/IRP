@@ -84,7 +84,7 @@ Scenario: _04096 preparation (Purchase invoice)
 	And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |	
 			| "Documents.GoodsReceipt.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.GoodsReceipt.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |
+			// | "Documents.GoodsReceipt.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.GoodsReceipt.FindByNumber(118).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.GoodsReceipt.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load PI
@@ -116,7 +116,11 @@ Scenario: _04097 check Purchase invoice movements by the Register  "R1021 Vendor
 			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '393,76'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | 'No'                   |
 			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '2 300'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | 'No'                   |
 			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '2 300'     | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | 'No'                   |
-			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '2 300'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | 'No'                   |	
+			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '2 300'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | 'No'                   |
+			| ''                                               | 'Expense'     | '12.02.2021 15:13:56' | '342,4'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | 'No'                   |
+			| ''                                               | 'Expense'     | '12.02.2021 15:13:56' | '2 000'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | 'No'                   |
+			| ''                                               | 'Expense'     | '12.02.2021 15:13:56' | '2 000'     | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | 'No'                   |
+			| ''                                               | 'Expense'     | '12.02.2021 15:13:56' | '2 000'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | 'No'                   |
 		And I close all client application windows
 		
 Scenario: _04098 check Purchase invoice movements by the Register  "R1001 Purchases"
@@ -214,7 +218,7 @@ Scenario: _040102 check Purchase invoice movements by the Register  "R4017 Procu
 			
 		And I close all client application windows
 		
-Scenario: _040103 check Purchase invoice movements by the Register  "R1020 Advances to vendors" (without advance)
+Scenario: _040103 check Purchase invoice movements by the Register  "R1020 Advances to vendors" (with advance)
 	* Select Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
@@ -224,9 +228,15 @@ Scenario: _040103 check Purchase invoice movements by the Register  "R1020 Advan
 		And I click "Registrations report" button
 		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R1020 Advances to vendors"'                     |
-			
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 115 dated 12.02.2021 15:13:56' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                                         | ''                     |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                                         | ''                     |
+			| 'Register  "R1020 Advances to vendors"'          | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                                         | ''                     |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                                         | 'Attributes'           |
+			| ''                                               | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Basis'                                    | 'Deferred calculation' |
+			| ''                                               | 'Expense'     | '12.02.2021 15:13:56' | '342,4'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Bank payment 1 dated 12.02.2021 11:24:13' | 'No'                   |
+			| ''                                               | 'Expense'     | '12.02.2021 15:13:56' | '2 000'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Bank payment 1 dated 12.02.2021 11:24:13' | 'No'                   |
+			| ''                                               | 'Expense'     | '12.02.2021 15:13:56' | '2 000'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Bank payment 1 dated 12.02.2021 11:24:13' | 'No'                   |	
 		And I close all client application windows
 		
 Scenario: _040104 check Purchase invoice movements by the Register  "R4050 Stock inventory"
@@ -510,27 +520,6 @@ Scenario: _0401064 check Purchase invoice movements by the Register  "R1021 Vend
 
 		And I close all client application windows
 
-Scenario: _0401065 check Purchase invoice movements by the Register  "R1020 Advances to vendors" (with advance)
-	* Select Purchase invoice
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '117' |
-	* Check movements by the Register  "R1020 Advances to vendors"
-		And I click "Registrations report" button
-		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 117 dated 12.02.2021 15:12:15' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                                         | ''                     |
-			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                                         | ''                     |
-			| 'Register  "R1020 Advances to vendors"'          | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                                         | ''                     |
-			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                                         | 'Attributes'           |
-			| ''                                               | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Basis'                                    | 'Deferred calculation' |
-			| ''                                               | 'Expense'     | '12.02.2021 15:12:15' | '342,4'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Bank payment 1 dated 12.02.2021 11:24:13' | 'No'                   |
-			| ''                                               | 'Expense'     | '12.02.2021 15:12:15' | '2 000'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Bank payment 1 dated 12.02.2021 11:24:13' | 'No'                   |
-			| ''                                               | 'Expense'     | '12.02.2021 15:12:15' | '2 000'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Bank payment 1 dated 12.02.2021 11:24:13' | 'No'                   |
-		And I close all client application windows
-
 Scenario: _0401066 check Purchase invoice movements by the Register  "R4017 Procurement of internal supply requests" (ISR exists)
 	* Select Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -551,25 +540,25 @@ Scenario: _0401066 check Purchase invoice movements by the Register  "R4017 Proc
 
 		And I close all client application windows
 
-Scenario: _0401067 check Purchase invoice movements by the Register  "R2013 Procurement of sales orders" (SO exists)
-	* Select Purchase invoice
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '117' |
-	* Check movements by the Register  "R2013 Procurement of sales orders"
-		And I click "Registrations report" button
-		And I select "R2013 Procurement of sales orders" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 117 dated 12.02.2021 15:12:15' | ''                    | ''                 | ''                    | ''                  | ''                 | ''                 | ''               | ''             | ''                                        | ''         |
-			| 'Document registrations records'                 | ''                    | ''                 | ''                    | ''                  | ''                 | ''                 | ''               | ''             | ''                                        | ''         |
-			| 'Register  "R2013 Procurement of sales orders"'  | ''                    | ''                 | ''                    | ''                  | ''                 | ''                 | ''               | ''             | ''                                        | ''         |
-			| ''                                               | 'Period'              | 'Resources'        | ''                    | ''                  | ''                 | ''                 | ''               | 'Dimensions'   | ''                                        | ''         |
-			| ''                                               | ''                    | 'Ordered quantity' | 'Re ordered quantity' | 'Purchase quantity' | 'Receipt quantity' | 'Shipped quantity' | 'Sales quantity' | 'Company'      | 'Order'                                   | 'Item key' |
-			| ''                                               | '12.02.2021 15:12:15' | ''                 | ''                    | '24'                | ''                 | ''                 | ''               | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  |
+// Scenario: _0401067 check Purchase invoice movements by the Register  "R2013 Procurement of sales orders" (SO exists)
+// 	* Select Purchase invoice
+// 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+// 		And I go to line in "List" table
+// 			| 'Number'  |
+// 			| '117' |
+// 	* Check movements by the Register  "R2013 Procurement of sales orders"
+// 		And I click "Registrations report" button
+// 		And I select "R2013 Procurement of sales orders" exact value from "Register" drop-down list
+// 		And I click "Generate report" button
+// 		Then "ResultTable" spreadsheet document is equal
+// 			| 'Purchase invoice 117 dated 12.02.2021 15:12:15' | ''                    | ''                 | ''                    | ''                  | ''                 | ''                 | ''               | ''             | ''                                        | ''         |
+// 			| 'Document registrations records'                 | ''                    | ''                 | ''                    | ''                  | ''                 | ''                 | ''               | ''             | ''                                        | ''         |
+// 			| 'Register  "R2013 Procurement of sales orders"'  | ''                    | ''                 | ''                    | ''                  | ''                 | ''                 | ''               | ''             | ''                                        | ''         |
+// 			| ''                                               | 'Period'              | 'Resources'        | ''                    | ''                  | ''                 | ''                 | ''               | 'Dimensions'   | ''                                        | ''         |
+// 			| ''                                               | ''                    | 'Ordered quantity' | 'Re ordered quantity' | 'Purchase quantity' | 'Receipt quantity' | 'Shipped quantity' | 'Sales quantity' | 'Company'      | 'Order'                                   | 'Item key' |
+// 			| ''                                               | '12.02.2021 15:12:15' | ''                 | ''                    | '24'                | ''                 | ''                 | ''               | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  |
 
-		And I close all client application windows
+// 		And I close all client application windows
 
 Scenario: _0401068 check Purchase invoice movements by the Register  "R1011 Receipt of purchase orders" (PO exists, not use GR)
 	* Select Purchase invoice

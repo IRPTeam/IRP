@@ -286,44 +286,44 @@ Scenario: _04021 check Goods receipt movements by the Register  "R1011 Receipt o
 		And I close all client application windows
 
 
-//117
+// //117
 
-Scenario: _040211 check Goods receipt movements by the Register  "R1031 Receipt invoicing" (PI exist)
-	* Select Goods receipt
-		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '117' |
-	* Check movements by the Register  "R1031 Receipt invoicing"
-		And I click "Registrations report" button
-		And I select "R1031 Receipt invoicing" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Goods receipt 117 dated 12.02.2021 15:13:11' | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''          |
-			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''          |
-			| 'Register  "R1031 Receipt invoicing"'         | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''          |
-			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                               | ''          |
-			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                                          | 'Item key'  |
-			| ''                                            | 'Expense'     | '12.02.2021 15:13:11' | '5'         | 'Main Company' | 'Store 02' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | '36/Yellow' |
-			| ''                                            | 'Expense'     | '12.02.2021 15:13:11' | '10'        | 'Main Company' | 'Store 02' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'S/Yellow'  |
-		And I close all client application windows
+// Scenario: _040211 check Goods receipt movements by the Register  "R1031 Receipt invoicing" (PI exist)
+// 	* Select Goods receipt
+// 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+// 		And I go to line in "List" table
+// 			| 'Number'  |
+// 			| '117' |
+// 	* Check movements by the Register  "R1031 Receipt invoicing"
+// 		And I click "Registrations report" button
+// 		And I select "R1031 Receipt invoicing" exact value from "Register" drop-down list
+// 		And I click "Generate report" button
+// 		Then "ResultTable" spreadsheet document is equal
+// 			| 'Goods receipt 117 dated 12.02.2021 15:13:11' | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''          |
+// 			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''          |
+// 			| 'Register  "R1031 Receipt invoicing"'         | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''          |
+// 			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                               | ''          |
+// 			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                                          | 'Item key'  |
+// 			| ''                                            | 'Expense'     | '12.02.2021 15:13:11' | '5'         | 'Main Company' | 'Store 02' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | '36/Yellow' |
+// 			| ''                                            | 'Expense'     | '12.02.2021 15:13:11' | '10'        | 'Main Company' | 'Store 02' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'S/Yellow'  |
+// 		And I close all client application windows
 
-Scenario: _040121 check Goods receipt movements by the Register  "R4017 Procurement of internal supply requests" (ISR exist)
-	* Select Goods receipt
-		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '117' |
-	* Check movements by the Register  "R4017 Procurement of internal supply requests"
-		And I click "Registrations report" button
-		And I select "R4017 Procurement of internal supply requests" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Goods receipt 117 dated 12.02.2021 15:13:11'               | ''            | ''                    | ''          | ''             | ''         | ''                                                      | ''          |
-			| 'Document registrations records'                            | ''            | ''                    | ''          | ''             | ''         | ''                                                      | ''          |
-			| 'Register  "R4017 Procurement of internal supply requests"' | ''            | ''                    | ''          | ''             | ''         | ''                                                      | ''          |
-			| ''                                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                                      | ''          |
-			| ''                                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Internal supply request'                               | 'Item key'  |
-			| ''                                                          | 'Expense'     | '12.02.2021 15:13:11' | '5'         | 'Main Company' | 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '36/Yellow' |
-			| ''                                                          | 'Expense'     | '12.02.2021 15:13:11' | '10'        | 'Main Company' | 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'S/Yellow'  |
-		And I close all client application windows
+// Scenario: _040121 check Goods receipt movements by the Register  "R4017 Procurement of internal supply requests" (ISR exist)
+// 	* Select Goods receipt
+// 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+// 		And I go to line in "List" table
+// 			| 'Number'  |
+// 			| '117' |
+// 	* Check movements by the Register  "R4017 Procurement of internal supply requests"
+// 		And I click "Registrations report" button
+// 		And I select "R4017 Procurement of internal supply requests" exact value from "Register" drop-down list
+// 		And I click "Generate report" button
+// 		Then "ResultTable" spreadsheet document is equal
+// 			| 'Goods receipt 117 dated 12.02.2021 15:13:11'               | ''            | ''                    | ''          | ''             | ''         | ''                                                      | ''          |
+// 			| 'Document registrations records'                            | ''            | ''                    | ''          | ''             | ''         | ''                                                      | ''          |
+// 			| 'Register  "R4017 Procurement of internal supply requests"' | ''            | ''                    | ''          | ''             | ''         | ''                                                      | ''          |
+// 			| ''                                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                                      | ''          |
+// 			| ''                                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Internal supply request'                               | 'Item key'  |
+// 			| ''                                                          | 'Expense'     | '12.02.2021 15:13:11' | '5'         | 'Main Company' | 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '36/Yellow' |
+// 			| ''                                                          | 'Expense'     | '12.02.2021 15:13:11' | '10'        | 'Main Company' | 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'S/Yellow'  |
+// 		And I close all client application windows

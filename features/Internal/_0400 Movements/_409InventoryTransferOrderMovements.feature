@@ -1,8 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Movements
-@MovementsInventoryTransferOrder
+
 
 
 Feature: check Inventory transfer order movements
@@ -161,5 +160,62 @@ Scenario: _040352 check Inventory transfer order movements by the Register  "R40
 			| ''                                                      | ''            | ''                    | 'Quantity'  | 'Incoming store' | 'Requester store' | 'Item key'  | 'Order'                                        | 'Requester'                                             |
 			| ''                                                      | 'Receipt'     | '16.02.2021 16:14:02' | '2'         | 'Store 02'       | 'Store 03'        | '36/Yellow' | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Inventory transfer order 21 dated 16.02.2021 16:14:02' |
 			| ''                                                      | 'Receipt'     | '16.02.2021 16:14:02' | '10'        | 'Store 02'       | 'Store 03'        | 'S/Yellow'  | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Inventory transfer order 21 dated 16.02.2021 16:14:02' |	
+		And I close all client application windows
+
+
+Scenario: _040353 check Inventory transfer order movements by the Register  "R4020 Stock transfer orders"
+	* Select Inventory transfer order
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '21' |
+	* Check movements by the Register  "R4036 Incoming stock requested"
+		And I click "Registrations report" button
+		And I select "R4020 Stock transfer orders" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains values
+			| 'Register  "R4020 Stock transfer orders"'                     |
+		And I close all client application windows
+
+Scenario: _040354 check Inventory transfer order movements by the Register  "R4021 Receipt of stock transfer orders"
+	* Select Inventory transfer order
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '21' |
+	* Check movements by the Register  "R4021 Receipt of stock transfer orders"
+		And I click "Registrations report" button
+		And I select "R4021 Receipt of stock transfer orders" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains values
+			| 'Register  "R4021 Receipt of stock transfer orders"'                     |
+		And I close all client application windows
+
+Scenario: _040355 check Inventory transfer order movements by the Register  "R4022 Shipment of stock transfer orders"
+	* Select Inventory transfer order
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '21' |
+	* Check movements by the Register  "R4022 Shipment of stock transfer orders"
+		And I click "Registrations report" button
+		And I select "R4021 Receipt of stock transfer orders" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains values
+			| 'Register  "R4022 Shipment of stock transfer orders"'                     |
+		And I close all client application windows
+
+Scenario: _040356 check Inventory transfer order movements by the Register  "R4016 Ordering of internal supply requests"
+	* Select Inventory transfer order
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '21' |
+	* Check movements by the Register  "R4016 Ordering of internal supply requests"
+		And I click "Registrations report" button
+		And I select "R4016 Ordering of internal supply requests" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains values
+			| 'Register  "R4016 Ordering of internal supply requests"'                     |
 		And I close all client application windows
 

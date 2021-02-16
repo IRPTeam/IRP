@@ -1291,6 +1291,7 @@
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
       <types>DocumentRef.ShipmentConfirmation</types>
+      <types>DocumentRef.SalesOrder</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

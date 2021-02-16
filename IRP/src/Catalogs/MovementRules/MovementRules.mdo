@@ -127,6 +127,13 @@
         <value>9</value>
       </code>
     </items>
+    <items id="62d169df-0f34-4698-baf4-dfb776e4cb5a">
+      <name>PO</name>
+      <description>PO</description>
+      <code xsi:type="core:StringValue">
+        <value>10</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

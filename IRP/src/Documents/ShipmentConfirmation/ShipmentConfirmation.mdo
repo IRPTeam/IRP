@@ -534,4 +534,19 @@
     <representation>Auto</representation>
     <shortcut></shortcut>
   </commands>
+  <commands uuid="c7df6d13-1d5e-44f0-8ab1-91615427c7bf">
+    <name>Generate</name>
+    <synonym>
+      <key>en</key>
+      <value>(new) Shipment confirmation</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.SalesOrder</types>
+      <types>DocumentRef.SalesInvoice</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <modifiesData>true</modifiesData>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

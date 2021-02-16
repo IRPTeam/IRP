@@ -41,36 +41,66 @@ Procedure Filling_BasedOnSalesOrder(FillingData)
 	FillPropertyValues(ThisObject, FillingData,
 		"Partner, Company, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName");
 	
-	For Each Row In FillingData.ItemList Do
-		NewRow = ThisObject.ItemList.Add();
-		FillPropertyValues(NewRow, Row);
-	EndDo;
-	For Each Row In FillingData.TaxList Do
-		NewRow = ThisObject.TaxList.Add();
-		FillPropertyValues(NewRow, Row);
-	EndDo;
-	For Each Row In FillingData.SpecialOffers Do
-		NewRow = ThisObject.SpecialOffers.Add();
-		FillPropertyValues(NewRow, Row);
-	EndDo;
-	For Each Row In FillingData.ShipmentConfirmations Do
-		NewRow = ThisObject.ShipmentConfirmations.Add();
-		FillPropertyValues(NewRow, Row);
-	EndDo;
+	If FillingData.Property("ItemList") Then
+		For Each Row In FillingData.ItemList Do
+			NewRow = ThisObject.ItemList.Add();
+			FillPropertyValues(NewRow, Row);
+		EndDo;
+	EndIf;
+	
+	If FillingData.Property("TaxList") Then
+		For Each Row In FillingData.TaxList Do
+			NewRow = ThisObject.TaxList.Add();
+			FillPropertyValues(NewRow, Row);
+		EndDo;
+	EndIf;
+	
+	If FillingData.Property("SpecialOffers") Then
+		For Each Row In FillingData.SpecialOffers Do
+			NewRow = ThisObject.SpecialOffers.Add();
+			FillPropertyValues(NewRow, Row);
+		EndDo;
+	EndIf;
+	
+	If FillingData.Property("ShipmentConfirmations") Then	
+		For Each Row In FillingData.ShipmentConfirmations Do
+			NewRow = ThisObject.ShipmentConfirmations.Add();
+			FillPropertyValues(NewRow, Row);
+		EndDo;
+	EndIf;
+	
+	If FillingData.Property("RowIDInfo") Then	
+		For Each Row In FillingData.RowIDInfo Do
+			NewRow = ThisObject.RowIDInfo.Add();
+			FillPropertyValues(NewRow, Row);
+		EndDo;
+	EndIf;
 EndProcedure
 
 Procedure Filling_BasedOnShipmentConfirmation(FillingData)
 	FillPropertyValues(ThisObject, FillingData, 
 		"Partner, Company, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName");
 	
-	For Each Row In FillingData.ItemList Do
-		NewRow = ThisObject.ItemList.Add();
-		FillPropertyValues(NewRow, Row);
-	EndDo;
-	For Each Row In FillingData.ShipmentConfirmations Do
-		NewRow = ThisObject.ShipmentConfirmations.Add();
-		FillPropertyValues(NewRow, Row);
-	EndDo;
+	If FillingData.Property("ItemList") Then
+		For Each Row In FillingData.ItemList Do
+			NewRow = ThisObject.ItemList.Add();
+			FillPropertyValues(NewRow, Row);
+		EndDo;
+	EndIf;
+	
+	If FillingData.Property("ShipmentConfirmations") Then
+		For Each Row In FillingData.ShipmentConfirmations Do
+			NewRow = ThisObject.ShipmentConfirmations.Add();
+			FillPropertyValues(NewRow, Row);
+		EndDo;
+	EndIf;
+	
+	If FillingData.Property("RowIDInfo") Then	
+		For Each Row In FillingData.RowIDInfo Do
+			NewRow = ThisObject.RowIDInfo.Add();
+			FillPropertyValues(NewRow, Row);
+		EndDo;
+	EndIf;
 EndProcedure
 
 Procedure OnCopy(CopiedObject)

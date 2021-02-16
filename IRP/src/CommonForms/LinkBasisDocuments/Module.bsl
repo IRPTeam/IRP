@@ -112,7 +112,7 @@ Procedure FillDocumentsTree(SelectedRow, FilterBySelectedRow);
 		EndDo;
 	EndIf;
 	
-	BasisesTable = RowIDInfo.GetBasisesForSalesInvoice(FullFilter);
+	BasisesTable = RowIDInfo.GetBasisesFor_SalesInvoice(FullFilter);
 	
 	TopLevelTable = BasisesTable.Copy(,"Basis");
 	TopLevelTable.GroupBy("Basis");

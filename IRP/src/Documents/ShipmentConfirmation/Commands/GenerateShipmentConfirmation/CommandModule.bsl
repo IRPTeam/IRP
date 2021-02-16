@@ -62,22 +62,6 @@ EndFunction
 
 &AtServer
 Function JoinDocumentsStructure(ArrayOfTables)
-	
-	// *Filter {Header}:
-	// BasedOn
-	// Company
-	// Partner
-	// LegalName
-	// Agreement
-	// Store
-	//
-	// ItemList
-	// -ItemKey
-	// -Store
-	// -Unit
-	// -Quantity
-	// -ShipmentBasis
-	
 	ValueTable = New ValueTable();
 	ValueTable.Columns.Add("BasedOn", New TypeDescription("String"));
 	ValueTable.Columns.Add("Company", New TypeDescription("CatalogRef.Companies"));
@@ -90,6 +74,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	ValueTable.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
 	ValueTable.Columns.Add("Quantity", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
 	ValueTable.Columns.Add("ShipmentBasis", New TypeDescription(Metadata.DefinedTypes.typeShipmentBasis.Type));
+	ValueTable.Columns.Add("SalesOrder", New TypeDescription(Metadata.DefinedTypes.typeShipmentBasis.Type));
 	ValueTable.Columns.Add("RowKey", New TypeDescription("String"));
 	
 	For Each Table In ArrayOfTables Do
@@ -129,6 +114,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			NewRow.Insert("Unit", RowItemList.Unit);
 			NewRow.Insert("Quantity", RowItemList.Quantity);
 			NewRow.Insert("ShipmentBasis", RowItemList.ShipmentBasis);
+			NewRow.Insert("SalesOrder", RowItemList.SalesOrder);
 			NewRow.Insert("Key", RowItemList.RowKey);
 			Result.ItemList.Add(NewRow);
 		EndDo;
@@ -216,6 +202,7 @@ Function GetDocumentTable_SalesOrder(ArrayOfBasisDocuments)
 		|	""SalesOrder"" AS BasedOn,
 		|	GoodsInTransitOutgoingBalance.Store AS Store,
 		|	CAST(GoodsInTransitOutgoingBalance.ShipmentBasis AS Document.SalesOrder) AS ShipmentBasis,
+		|	CAST(GoodsInTransitOutgoingBalance.ShipmentBasis AS Document.SalesOrder) AS SalesOrder,
 		|	CAST(GoodsInTransitOutgoingBalance.ShipmentBasis AS Document.SalesOrder).Partner AS Partner,
 		|	CAST(GoodsInTransitOutgoingBalance.ShipmentBasis AS Document.SalesOrder).LegalName AS LegalName,
 		|	CAST(GoodsInTransitOutgoingBalance.ShipmentBasis AS Document.SalesOrder).Agreement AS Agreement,

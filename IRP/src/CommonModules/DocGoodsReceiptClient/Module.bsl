@@ -58,17 +58,27 @@ Procedure PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing)
 		FilterPartnerType = "Customer";
 	EndIf;
 	If Not IsBlankString(FilterPartnerType) Then
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(FilterPartnerType		, True, DataCompositionComparisonType.Equal));
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(FilterPartnerType, True, DataCompositionComparisonType.Equal));
 		OpenSettings.FormParameters.Insert("Filter", New Structure(FilterPartnerType , True));
 		OpenSettings.FillingData = New Structure(FilterPartnerType, True);
 	EndIf;
+	
 	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 Procedure PartnerTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Vendor"		, True, ComparisonType.Equal));
+	
+	FilterPartnerType = "";
+	If Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase") Then
+		FilterPartnerType = "Vendor";
+	ElsIf Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer") Then
+		FilterPartnerType = "Customer";
+	EndIf;
+	
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(FilterPartnerType, True, ComparisonType.Equal));
+	
 	AdditionalParameters = New Structure();
 	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing,
 				ArrayOfFilters, AdditionalParameters);

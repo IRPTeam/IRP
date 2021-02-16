@@ -1826,6 +1826,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
 	QueryArray.Add(R1031B_ReceiptInvoicing());
+	QueryArray.Add(R2031B_ShipmentInvoicing());
 	QueryArray.Add(R2013T_SalesOrdersProcurement());
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4011B_FreeStocks());
@@ -1869,7 +1870,9 @@ Function ItemList()
 		|	ItemList.SalesReturn AS SalesReturn,
 		|	NOT ItemList.SalesReturn = Value(Document.SalesReturn.EmptyRef) AS SalesReturnExists,
 		|	ItemList.SalesReturnOrder AS SalesReturnOrder,
-		|	NOT ItemList.SalesReturnOrder = Value(Document.SalesReturnOrder.EmptyRef) AS SalesReturnOrderExists
+		|	NOT ItemList.SalesReturnOrder = Value(Document.SalesReturnOrder.EmptyRef) AS SalesReturnOrderExists,
+		|	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.Purchase) AS IsTransaction_Purchase,
+		|	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer) AS IsTransaction_ReturnFromCustomer
 		|INTO ItemList
 		|FROM
 		|	Document.GoodsReceipt.ItemList AS ItemList
@@ -1905,6 +1908,7 @@ Function R1031B_ReceiptInvoicing()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.PurchaseInvoiceExists
+		|	AND ItemList.IsTransaction_Purchase
 		|
 		|UNION ALL
 		|
@@ -1919,8 +1923,43 @@ Function R1031B_ReceiptInvoicing()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.PurchaseInvoiceExists";
+		|	ItemList.PurchaseInvoiceExists
+		|	AND ItemList.IsTransaction_Purchase";
 EndFunction
+
+Function R2031B_ShipmentInvoicing()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.GoodsReceipt AS Basis,
+		|	ItemList.Quantity AS Quantity,
+		|	ItemList.Company,
+		|	ItemList.Period,
+		|	ItemList.ItemKey,
+		|	ItemList.Store
+		|INTO R2031B_ShipmentInvoicing
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.SalesReturnExists
+		|	AND ItemList.IsTransaction_ReturnFromCustomer
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.SalesReturn,
+		|	ItemList.Quantity,
+		|	ItemList.Company,
+		|	ItemList.Period,
+		|	ItemList.ItemKey,
+		|	ItemList.Store
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.SalesReturnExists
+		|	AND ItemList.IsTransaction_ReturnFromCustomer";	
+EndFunction	
 
 Function R2013T_SalesOrdersProcurement()
 	Return

@@ -2966,3 +2966,116 @@ Procedure SetCurrentRow(Object, Form, Item, FormParameters, AttributeName)
 EndProcedure
 
 #EndRegion
+
+#Region ShipmentConfirationsGoodsReceiptd
+
+Procedure SetLockedRowsForItemListByTradeDocuments(Object, Form, TableName) Export
+	If Not Object[TableName].Count() Then
+		Return;
+	EndIf;
+	
+	For Each Row In Object.ItemList Do
+		Row.LockedRow = Object[TableName].FindRows(New Structure("Key", Row.Key)).Count() > 0;
+	EndDo;
+EndProcedure
+
+Procedure ClearTradeDocumentsTable(Object, Form, TableName) Export
+	If Not Object[TableName].Count() Then
+		Return;
+	EndIf;
+	
+	ArrayOfRows = New Array();
+	For Each Row In Object[TableName] Do
+		If Not Object.ItemList.FindRows(New Structure("Key", Row.Key)).Count() Then
+			ArrayOfRows.Add(Row);
+		EndIf;
+	EndDo;
+	
+	For Each Row In ArrayOfRows Do
+		Object[TableName].Delete(Row);
+	EndDo;
+EndProcedure	
+
+Procedure UpdateTradeDocumentsTree(Object, Form, TableName, TreeName, QuantityColumnName) Export
+	Form[TreeName].GetItems().Clear();
+	
+	If Not Object[TableName].Count() Then
+		Return;
+	EndIf;
+	
+	ArrayOfRows = New Array();
+	For Each Row In Object.ItemList Do
+		ArrayOfDocuments = Object[TableName].FindRows(New Structure("Key", Row.Key));
+		
+		If Not ArrayOfDocuments.Count() Then
+			Continue;
+		EndIf;
+		
+		NewRow = New Structure();
+		NewRow.Insert("Key"         , Row.Key);
+		NewRow.Insert("Item"        , Row.Item);
+		NewRow.Insert("ItemKey"     , Row.ItemKey);
+		NewRow.Insert("QuantityUnit", Row.Unit);
+		NewRow.Insert("Unit");
+		NewRow.Insert("Quantity"    , Row.Quantity);
+		ArrayOfRows.Add(NewRow);
+	EndDo;
+	
+	DocumentsServer.RecalculateInvoiceQuantity(ArrayOfRows);
+
+	For Each Row In ArrayOfRows Do		
+		NewRow0 = Form[TreeName].GetItems().Add();
+		NewRow0.Level             = 1;
+		NewRow0.Key               = Row.Key;
+		NewRow0.Item              = Row.Item;
+		NewRow0.ItemKey           = Row.ItemKey;
+		NewRow0.QuantityInInvoice = Row.Quantity;
+		
+		ArrayOfDocuments = Object[TableName].FindRows(New Structure("Key", Row.Key));
+		
+		If ArrayOfDocuments.Count() = 1 
+			And ArrayOfDocuments[0].Quantity <> Row.Quantity Then
+			ArrayOfDocuments[0].Quantity = Row.Quantity;
+		EndIf;
+		
+		For Each ItemOfArray In ArrayOfDocuments Do
+			NewRow1 = NewRow0.GetItems().Add();
+			FillPropertyValues(NewRow1, ItemOfArray);
+			NewRow1.Level                  = 2;
+			NewRow1.PictureEdit = True;
+			NewRow0.Quantity = NewRow0.Quantity + ItemOfArray.Quantity;
+			NewRow0[QuantityColumnName] = NewRow0[QuantityColumnName] + ItemOfArray[QuantityColumnName];
+		EndDo;
+	EndDo;
+	
+	For Each ItemTreeRows In Form[TreeName].GetItems() Do
+		Form.Items[TreeName].Expand(ItemTreeRows.GetID());
+	EndDo;	
+EndProcedure
+
+Procedure TradeDocumentsTreeQuantityOnChange(Object, Form, TableName, TreeName, DocumentColumnName) Export
+	CurrentRow = Form.Items[TreeName].CurrentData;
+	If CurrentRow = Undefined Then
+		Return;
+	EndIf;
+	RowParent = CurrentRow.GetParent();
+	TotalQuantity = 0;
+	For Each Row In RowParent.GetItems() Do
+		TotalQuantity = TotalQuantity + Row.Quantity;
+	EndDo;
+	RowParent.Quantity = TotalQuantity;
+	Filter = New Structure();
+	Filter.Insert("Key", CurrentRow.Key);
+	Filter.Insert(TrimAll(DocumentColumnName), CurrentRow[DocumentColumnName]);
+	ArrayOfRows = Object[TableName].FindRows(Filter);
+	For Each Row In ArrayOfRows Do
+		Row.Quantity = CurrentRow.Quantity;
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+
+
+
+

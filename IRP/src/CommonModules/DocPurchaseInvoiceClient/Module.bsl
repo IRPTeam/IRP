@@ -66,6 +66,9 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
 	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);	
+	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, Form, "GoodsReceipts");
+	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, 
+		"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
 EndProcedure
 
 Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source, AddInfo = Undefined) Export
@@ -76,6 +79,9 @@ Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined)
 	DocumentsClient.AfterWriteAtClientPutServerDataToAddInfo(Object, Form, AddInfo);	
 	CurrenciesClient.SetVisibleRows(Object, ThisObject, AddInfo);
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
+	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, Form, "GoodsReceipts");
+	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, 
+		"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
 EndProcedure
 
 #EndRegion
@@ -86,6 +92,9 @@ Procedure ItemListAfterDeleteRow(Object, Form, Item, AddInfo = Undefined) Export
 	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
 	SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Object);
 	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);	
+	DocumentsClient.ClearTradeDocumentsTable(Object, Form, "GoodsReceipts");
+	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, 
+		"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
 EndProcedure
 
 Procedure ItemListOnChange(Object, Form, Item, AddInfo = Undefined) Export
@@ -267,6 +276,8 @@ EndFunction
 
 Procedure ItemListUnitOnChange(Object, Form, Item = Undefined, AddInfo = Undefined) Export
 	DocumentsClient.ItemListUnitOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
+	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, 
+		"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
 EndProcedure
 
 Procedure ItemListUnitOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
@@ -297,6 +308,8 @@ Procedure ItemListQuantityOnChange(Object, Form, Item, AddInfo = Undefined) Expo
 	EndIf;	
 	DocumentsClient.ItemListCalculateRowAmounts_QuantityChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
 	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
+	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, 
+		"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
 EndProcedure
 
 Procedure ItemListQuantityPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export

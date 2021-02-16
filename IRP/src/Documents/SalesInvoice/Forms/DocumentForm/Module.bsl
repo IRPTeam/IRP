@@ -12,8 +12,6 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	DocSalesInvoiceClient.OnOpen(Object, ThisObject, Cancel);
-	SetLockedRowsByShipmentConfirmations();
-	UpdateShipmentConfirmationsTree();
 EndProcedure
 
 &AtClient
@@ -60,8 +58,6 @@ EndProcedure
 &AtClient
 Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
 	DocSalesInvoiceClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
-	SetLockedRowsByShipmentConfirmations();
-	UpdateShipmentConfirmationsTree();
 EndProcedure
 
 &AtServer
@@ -147,8 +143,6 @@ EndProcedure
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocSalesInvoiceClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
-	ClearShipmentConfirmationsTable();
-	UpdateShipmentConfirmationsTree();
 EndProcedure
 
 &AtClient
@@ -206,13 +200,11 @@ EndProcedure
 &AtClient
 Procedure ItemListUnitOnChange(Item, AddInfo = Undefined) Export
 	DocSalesInvoiceClient.ItemListUnitOnChange(Object, ThisObject, Item);
-	UpdateShipmentConfirmationsTree();
 EndProcedure
 
 &AtClient
 Procedure ItemListQuantityOnChange(Item, AddInfo = Undefined) Export
 	DocSalesInvoiceClient.ItemListQuantityOnChange(Object, ThisObject, Item);
-	UpdateShipmentConfirmationsTree();
 EndProcedure
 
 &AtClient
@@ -469,8 +461,9 @@ Procedure SelectShipmentConfirmationsContinue(Result, AdditionalParameters) Expo
 	EndDo;
 	SelectShipmentConfirmationsFinish(ArrayOfBasisDocuments);
 	Taxes_CreateFormControls();
-	SetLockedRowsByShipmentConfirmations();
-	UpdateShipmentConfirmationsTree();
+	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, ThisObject, "ShipmentConfirmations");
+	DocumentsClient.UpdateTradeDocumentsTree(Object, ThisObject, 
+		"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");	
 EndProcedure
 
 &AtServer
@@ -486,9 +479,7 @@ Procedure SelectSalesOrdersContinue(Result, AdditionalParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
-	
 	SelectSalesOrdersContinueAtServer(Result, AdditionalParameters);
-	
 	DocSalesInvoiceClient.ItemListOnChange(Object, ThisObject, Items.ItemList);
 EndProcedure
 
@@ -624,121 +615,9 @@ EndProcedure
 #Region ShipmentConfirmationsTree
 
 &AtClient
-Procedure SetLockedRowsByShipmentConfirmations()
-	If Not Object.ShipmentConfirmations.Count() Then
-		Return;
-	EndIf;
-	
-	For Each Row In Object.ItemList Do
-		Row.LockedRow = Object.ShipmentConfirmations.FindRows(New Structure("Key", Row.Key)).Count() > 0;
-	EndDo;
-EndProcedure
-
-&AtClient
-Procedure ClearShipmentConfirmationsTable()
-	If Not Object.ShipmentConfirmations.Count() Then
-		Return;
-	EndIf;
-	
-	ArrayOfRows = New Array();
-	For Each Row In Object.ShipmentConfirmations Do
-		If Not Object.ItemList.FindRows(New Structure("Key", Row.Key)).Count() Then
-			ArrayOfRows.Add(Row);
-		EndIf;
-	EndDo;
-	
-	For Each Row In ArrayOfRows Do
-		Object.ShipmentConfirmations.Delete(Row);
-	EndDo;
-EndProcedure	
-
-&AtClient
-Procedure UpdateShipmentConfirmationsTree()
-	ThisObject.ShipmentConfirmationsTree.GetItems().Clear();
-	
-	If Not Object.ShipmentConfirmations.Count() Then
-		Return;
-	EndIf;
-	
-	ArrayOfRows = New Array();
-	For Each Row In Object.ItemList Do
-		ArrayOfShipmentConfirmations = Object.ShipmentConfirmations.FindRows(New Structure("Key", Row.Key));
-		
-		If Not ArrayOfShipmentConfirmations.Count() Then
-			Continue;
-		EndIf;
-		
-		NewRow = New Structure();
-		NewRow.Insert("Key"         , Row.Key);
-		NewRow.Insert("Item"        , Row.Item);
-		NewRow.Insert("ItemKey"     , Row.ItemKey);
-		NewRow.Insert("QuantityUnit", Row.Unit);
-		NewRow.Insert("Unit"        );
-		NewRow.Insert("Quantity"    , Row.Quantity);
-		ArrayOfRows.Add(NewRow);
-	EndDo;
-	RecalculateInvoiceQuantity(ArrayOfRows);
-
-	For Each Row In ArrayOfRows Do		
-		NewRow0 = ThisObject.ShipmentConfirmationsTree.GetItems().Add();
-		NewRow0.Level             = 1;
-		NewRow0.Key               = Row.Key;
-		NewRow0.Item              = Row.Item;
-		NewRow0.ItemKey           = Row.ItemKey;
-		NewRow0.QuantityInInvoice = Row.Quantity;
-		
-		ArrayOfShipmentConfirmations = Object.ShipmentConfirmations.FindRows(New Structure("Key", Row.Key));
-		
-		If ArrayOfShipmentConfirmations.Count() = 1 
-			And ArrayOfShipmentConfirmations[0].Quantity <> Row.Quantity Then
-			ArrayOfShipmentConfirmations[0].Quantity = Row.Quantity;
-		EndIf;
-		
-		For Each ItemOfArray In ArrayOfShipmentConfirmations Do
-			NewRow1 = NewRow0.GetItems().Add();
-			NewRow1.Level                  = 2;
-			NewRow1.Key                    = ItemOfArray.Key;
-			NewRow1.ShipmentConfirmation   = ItemOfArray.ShipmentConfirmation;
-			NewRow1.Quantity               = ItemOfArray.Quantity;
-			NewRow1.QuantityInShipmentConfirmation = ItemOfArray.QuantityInShipmentConfirmation;
-			NewRow1.PictureEdit            = True;
-			NewRow0.Quantity               = NewRow0.Quantity + ItemOfArray.Quantity;
-			NewRow0.QuantityInShipmentConfirmation = 
-			NewRow0.QuantityInShipmentConfirmation + ItemOfArray.QuantityInShipmentConfirmation;
-		EndDo;
-	EndDo;
-	
-	For Each ItemTreeRows In ThisObject.ShipmentConfirmationsTree.GetItems() Do
-		ThisObject.Items.ShipmentConfirmationsTree.Expand(ItemTreeRows.GetID());
-	EndDo;	
-EndProcedure
-
-&AtServerNoContext
-Procedure RecalculateInvoiceQuantity(ArrayOfRows)
-	For Each Row In ArrayOfRows Do
-		Row.Unit = ?(ValueIsFilled(Row.ItemKey.Unit), 
-		Row.ItemKey.Unit, Row.ItemKey.Item.Unit);
-		DocumentsServer.RecalculateQuantityInRow(Row);
-	EndDo;
-EndProcedure
-
-&AtClient
 Procedure ShipmentConfirmationsTreeQuantityOnChange(Item)
-	CurrentRow = Items.ShipmentConfirmationsTree.CurrentData;
-	If CurrentRow = Undefined Then
-		Return;
-	EndIf;
-	RowParent = CurrentRow.GetParent();
-	TotalQuantity = 0;
-	For Each Row In RowParent.GetItems() Do
-		TotalQuantity = TotalQuantity + Row.Quantity;
-	EndDo;
-	RowParent.Quantity = TotalQuantity;
-	ArrayOfRows = Object.ShipmentConfirmations.FindRows(
-	New Structure("Key, ShipmentConfirmation", CurrentRow.Key, CurrentRow.ShipmentConfirmation));
-	For Each Row In ArrayOfRows Do
-		Row.Quantity = CurrentRow.Quantity;
-	EndDo;
+	DocumentsClient.TradeDocumentsTreeQuantityOnChange(Object, ThisObject, 
+		"ShipmentConfirmations", "ShipmentConfirmationsTree", "ShipmentConfirmation");
 EndProcedure
 
 &AtClient

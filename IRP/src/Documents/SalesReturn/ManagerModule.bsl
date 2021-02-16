@@ -70,7 +70,20 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 EndFunction
 
 Function GetQueryTextSalesReturnItemList()
-	Return	"SELECT
+	Return	
+	"SELECT
+	|	SalesReturnGoodsReceipts.Key
+	|INTO GoodsReceipts
+	|FROM
+	|	Document.SalesReturn.GoodsReceipts AS SalesReturnGoodsReceipts
+	|WHERE
+	|	SalesReturnGoodsReceipts.Ref = &Ref
+	|GROUP BY
+	|	SalesReturnGoodsReceipts.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
 	|	SalesReturnItemList.Ref.Company AS Company,
 	|	SalesReturnItemList.Store AS Store,
 	|	SalesReturnItemList.Store.UseGoodsReceipt AS UseGoodsReceipt,
@@ -112,9 +125,12 @@ Function GetQueryTextSalesReturnItemList()
 	|		WHEN SalesReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
 	|			THEN TRUE
 	|		ELSE FALSE
-	|	END AS IsService
+	|	END AS IsService,
+	|	NOT GoodsReceipts.Key IS NULL AS GoodsReceiptExists
 	|FROM
 	|	Document.SalesReturn.ItemList AS SalesReturnItemList
+	|		LEFT JOIN GoodsReceipts AS GoodsReceipts
+	|		ON SalesReturnItemList.Key = GoodsReceipts.Key
 	|WHERE
 	|	SalesReturnItemList.Ref = &Ref";
 EndFunction
@@ -215,7 +231,8 @@ Function GetQueryTextQueryTable()
 	|	QueryTable.SalesInvoice AS SalesInvoice,
 	|	QueryTable.AgingSalesInvoice AS AgingSalesInvoice,
 	|	QueryTable.RowKey AS RowKey,
-	|	QueryTable.IsService AS IsService
+	|	QueryTable.IsService AS IsService,
+	|	QueryTable.GoodsReceiptExists AS GoodsReceiptExists
 	|INTO tmp
 	|FROM
 	|	&QueryTable AS QueryTable
@@ -272,6 +289,7 @@ Function GetQueryTextQueryTable()
 	|WHERE
 	|	tmp.UseGoodsReceipt
 	|	AND Not tmp.IsService
+	|	AND NOT tmp.GoodsReceiptExists
 	|;
 	|
 	|// 4. StockBalance //////////////////////////////////////////////////////////////////////////////
@@ -287,6 +305,7 @@ Function GetQueryTextQueryTable()
 	|WHERE
 	|	NOT tmp.UseGoodsReceipt
 	|	AND Not tmp.IsService
+	|	AND NOT tmp.GoodsReceiptExists
 	|GROUP BY
 	|	tmp.Company,
 	|	tmp.Store,
@@ -306,8 +325,11 @@ Function GetQueryTextQueryTable()
 	|FROM
 	|	tmp AS tmp
 	|WHERE
+//	|	tmp.Order = VALUE(Document.SalesReturnOrder.EmptyRef)
+//	|	AND NOT tmp.UseGoodsReceipt
 	|	NOT tmp.UseGoodsReceipt
 	|	AND Not tmp.IsService
+	|	AND Not tmp.GoodsReceiptExists
 	|GROUP BY
 	|	tmp.Company,
 	|	tmp.Store,
@@ -694,7 +716,7 @@ EndFunction
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R1031B_ReceiptInvoicing());	
+	QueryArray.Add(R2031B_ShipmentInvoicing());	
 	Return QueryArray;
 EndFunction
 
@@ -748,7 +770,7 @@ Function ItemList()
 		|	SalesReturnItemList.SalesInvoice AS AgingSalesInvoice,
 		|	SalesReturnItemList.Key,
 		|	SalesReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService
-		|INTO ItemLIst
+		|INTO ItemList
 		|FROM
 		|	Document.SalesReturn.ItemList AS SalesReturnItemList
 		|WHERE
@@ -787,7 +809,7 @@ Function R4014B_SerialLotNumber()
 
 EndFunction
 
-Function R1031B_ReceiptInvoicing()
+Function R2031B_ShipmentInvoicing()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
@@ -797,7 +819,7 @@ Function R1031B_ReceiptInvoicing()
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
-		|INTO R1031B_ReceiptInvoicing
+		|INTO R2031B_ShipmentInvoicing
 		|FROM
 		|	ItemList AS ItemList
 		|		INNER JOIN GoodsReceipts AS GoodsReceipts

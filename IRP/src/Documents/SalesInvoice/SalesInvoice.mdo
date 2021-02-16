@@ -1282,4 +1282,17 @@
     <representation>Auto</representation>
     <shortcut></shortcut>
   </commands>
+  <commands uuid="884ba46e-eebe-48ad-aaf4-2d1edd607970">
+    <name>Generate</name>
+    <synonym>
+      <key>en</key>
+      <value>(new) Sales invoice</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.ShipmentConfirmation</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

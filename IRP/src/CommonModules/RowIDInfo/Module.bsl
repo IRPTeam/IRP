@@ -142,33 +142,66 @@ Procedure FillSalesInvoice(ArrayOfLinkedDocuments, Object) Export
 	EndDo;
 EndProcedure
 
+Procedure FillQueryParameters(Query, Parameters, FilterValues)
+	For Each Parameter In Parameters Do
+		Value = Undefined; Use = False;
+		If FilterValues.Property(Parameter) Then
+			Value = FilterValues[Parameter];
+			Use = True;
+		EndIf;
+		Query.SetParameter("Filter_" + Parameter, Use);
+		Query.SetParameter(Parameter, Value);
+	EndDo;
+EndProcedure	
+
 Function GetBasisesForSalesInvoice(FilterValues) Export
 	StepArray = New Array;
 	StepArray.Add(Catalogs.MovementRules.SI);
 	StepArray.Add(Catalogs.MovementRules.SI_SC);
+	
 	Query = New Query;
 	Query.SetParameter("StepArray", StepArray);	
-	Query.SetParameter("Company", FilterValues.Company);
-	Query.SetParameter("Partner", FilterValues.Partner);
-	Query.SetParameter("LegalName", FilterValues.LegalName);
-	Query.SetParameter("Agreement", FilterValues.Agreement);
-	Query.SetParameter("Currency", FilterValues.Currency);
-	Query.SetParameter("Ref", FilterValues.Ref);
-	Query.SetParameter("Period", New Boundary(FilterValues.Ref.PointInTime(), BoundaryType.Excluding));
+		
+	ParametersArray = New Array();
+	ParametersArray.Add("Basises");
+	ParametersArray.Add("Company");
+	ParametersArray.Add("Partner");
+	ParametersArray.Add("LegalName");
+	ParametersArray.Add("Agreement");
+	ParametersArray.Add("Currency");
+	ParametersArray.Add("ItemKey");
+	ParametersArray.Add("Store");
 	
-	Filter_ItemKey = Undefined;
-	If FilterValues.Property("ItemKey") Then
-		Filter_ItemKey = FilterValues.ItemKey;
-	EndIf;
-	Query.SetParameter("Filter_ItemKey", ValueIsFilled(Filter_ItemKey));
-	Query.SetParameter("ItemKey", Filter_ItemKey);
+	FillQueryParameters(Query, ParametersArray, FilterValues);
 	
-	Filter_Store = Undefined;
-	If FilterValues.Property("Store") Then
-		Filter_Store = FilterValues.Store;
+//	Query.SetParameter("Company", FilterValues.Company);
+//	Query.SetParameter("Partner", FilterValues.Partner);
+//	Query.SetParameter("LegalName", FilterValues.LegalName);
+//	Query.SetParameter("Agreement", FilterValues.Agreement);
+//	Query.SetParameter("Currency", FilterValues.Currency);
+	
+	Ref = Documents.SalesInvoice.EmptyRef();
+	Period =Undefined;
+	If FilterValues.Property("Ref")	And ValueIsFilled(FilterValues.Ref) Then
+		Ref = FilterValues.Ref;
+		Period = New Boundary(FilterValues.Ref.PointInTime(), BoundaryType.Excluding);
 	EndIf;
-	Query.SetParameter("Filter_Store", ValueIsFilled(Filter_Store));
-	Query.SetParameter("Store", Filter_Store);
+	Query.SetParameter("Ref", Ref);
+	Query.SetParameter("Period", Period);
+	
+//	Filter_ItemKey = Undefined;
+//	If FilterValues.Property("ItemKey") Then
+//		Filter_ItemKey = FilterValues.ItemKey;
+//	EndIf;
+//	Query.SetParameter("Filter_ItemKey", ValueIsFilled(Filter_ItemKey));
+//	Query.SetParameter("ItemKey", Filter_ItemKey);
+//	
+//	Filter_Store = Undefined;
+//	If FilterValues.Property("Store") Then
+//		Filter_Store = FilterValues.Store;
+//	EndIf;
+//	Query.SetParameter("Filter_Store", ValueIsFilled(Filter_Store));
+//	Query.SetParameter("Store", Filter_Store);
 	
 	
 	Query.Text =
@@ -181,11 +214,36 @@ Function GetBasisesForSalesInvoice(FilterValues) Export
 		|INTO tmpQueryTable
 		|FROM
 		|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
-		|	AND RowRef.Company = &Company
-		|	AND RowRef.Partner = &Partner
-		|	AND RowRef.LegalName = &LegalName
-		|	AND RowRef.Agreement = &Agreement
-		|	AND RowRef.Currency = &Currency
+		|	AND CASE
+		|		WHEN &Filter_Basises
+		|			THEN Basis IN (&Basises)
+		|		ELSE TRUE
+		|	END
+		|	AND CASE
+		|		WHEN &Filter_Company
+		|			THEN RowRef.Company = &Company
+		|		ELSE TRUE
+		|	END
+		|	AND CASE
+		|		WHEN &Filter_Partner
+		|			THEN RowRef.Partner = &Partner
+		|		ELSE TRUE
+		|	END
+		|	AND CASE
+		|		WHEN &Filter_LegalName
+		|			THEN RowRef.LegalName = &LegalName
+		|		ELSE TRUE
+		|	END
+		|	AND CASE
+		|		WHEN &Filter_Agreement
+		|			THEN RowRef.Agreement = &Agreement
+		|		ELSE TRUE
+		|	END
+		|	AND CASE
+		|		WHEN &Filter_Currency
+		|			THEN RowRef.Currency = &Currency
+		|		ELSE TRUE
+		|	END
 		|	AND CASE
 		|		WHEN &Filter_ItemKey
 		|			THEN RowRef.ItemKey = &ItemKey
@@ -217,8 +275,8 @@ Function GetBasisesForSalesInvoice(FilterValues) Export
 		|FROM
 		|	Document.SalesOrder.ItemList AS Doc
 		|		INNER JOIN tmpQueryTable AS tmpQueryTable
-		|		ON (tmpQueryTable.RowID = Doc.Key)
-		|		AND (tmpQueryTable.Basis = Doc.Ref)
+		|		ON tmpQueryTable.RowID = Doc.Key
+		|		AND tmpQueryTable.Basis = Doc.Ref
 		|
 		|UNION ALL
 		|
@@ -241,10 +299,10 @@ Function GetBasisesForSalesInvoice(FilterValues) Export
 		|	Document.ShipmentConfirmation.ItemList AS Doc
 		|		INNER JOIN Document.ShipmentConfirmation.RowIDInfo AS ShipmentConfirmationRowIDInfo
 		|			INNER JOIN tmpQueryTable AS tmpQueryTable
-		|			ON (tmpQueryTable.RowID = ShipmentConfirmationRowIDInfo.RowID
-		|			AND tmpQueryTable.Basis = ShipmentConfirmationRowIDInfo.Ref)
-		|		ON (Doc.Ref = ShipmentConfirmationRowIDInfo.Ref
-		|		AND Doc.Key = ShipmentConfirmationRowIDInfo.Key)";
+		|			ON tmpQueryTable.RowID = ShipmentConfirmationRowIDInfo.RowID
+		|			AND tmpQueryTable.Basis = ShipmentConfirmationRowIDInfo.Ref
+		|		ON Doc.Ref = ShipmentConfirmationRowIDInfo.Ref
+		|		AND Doc.Key = ShipmentConfirmationRowIDInfo.Key";
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	Return QueryTable;

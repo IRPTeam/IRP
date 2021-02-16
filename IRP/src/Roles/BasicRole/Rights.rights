@@ -160,6 +160,20 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonForm.LinkBasisDocuments</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonForm.EditTax</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonAttribute.Description_ru</name>
 		<right>
 			<name>View</name>
@@ -565,6 +579,13 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonForm.ShareToUsers</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonForm.PickUpDocuments</name>
 		<right>
 			<name>View</name>
@@ -586,6 +607,33 @@
 		</right>
 		<right>
 			<name>Set</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Configuration.IRP</name>
+		<right>
+			<name>MainWindowModeNormal</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>MainWindowModeWorkplace</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>MainWindowModeEmbeddedWorkplace</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>MainWindowModeFullscreenWorkplace</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>MainWindowModeKiosk</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>AnalyticsSystemClient</name>
 			<value>true</value>
 		</right>
 	</object>

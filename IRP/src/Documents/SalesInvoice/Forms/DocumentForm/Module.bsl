@@ -430,24 +430,6 @@ Procedure SelectShipmentConfirmation(Command)
 EndProcedure
 
 &AtClient
-Procedure SelectSalesOrders(Command)
-	FilterValues = New Structure("Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Ref");
-	FillPropertyValues(FilterValues, Object);
-	
-	ExistingRows = New Array;
-	For Each Row In Object.ItemList Do
-		RowStructure = New Structure("Key, Unit, Quantity");
-		FillPropertyValues(RowStructure, Row);
-		ExistingRows.Add(RowStructure);
-	EndDo;
-	
-	FormParameters = New Structure("FilterValues, ExistingRows", FilterValues, ExistingRows);
-	OpenForm("Document.SalesInvoice.Form.SelectSalesOrdersForm"
-		, FormParameters, , , ,
-		, New NotifyDescription("SelectSalesOrdersContinue", ThisObject));
-EndProcedure
-
-&AtClient
 Procedure SelectShipmentConfirmationsContinue(Result, AdditionalParameters) Export
 	If Result = Undefined Then
 		Return;
@@ -461,9 +443,8 @@ Procedure SelectShipmentConfirmationsContinue(Result, AdditionalParameters) Expo
 	EndDo;
 	SelectShipmentConfirmationsFinish(ArrayOfBasisDocuments);
 	Taxes_CreateFormControls();
-	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, ThisObject, "ShipmentConfirmations");
-	DocumentsClient.UpdateTradeDocumentsTree(Object, ThisObject, 
-		"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");	
+	SetLockedRowsByShipmentConfirmations();
+	UpdateShipmentConfirmationsTree();
 EndProcedure
 
 &AtServer
@@ -474,55 +455,43 @@ Procedure SelectShipmentConfirmationsFinish(ArrayOfBasisDocuments)
 	EndDo;
 EndProcedure
 
+//@NEW FILLING DOC
 &AtClient
-Procedure SelectSalesOrdersContinue(Result, AdditionalParameters) Export
-	If Result = Undefined Then
+Procedure LinkBasisDocuments(Command)
+	Filter = New Structure();
+	Filter.Insert("Company"         , Object.Company);
+	Filter.Insert("Partner"         , Object.Partner);
+	Filter.Insert("LegalName"       , Object.LegalName);
+	Filter.Insert("Agreement"       , Object.Agreement);
+	Filter.Insert("Currency"        , Object.Currency);
+	Filter.Insert("PriceIncludeTax" , Object.PriceIncludeTax);
+	Filter.Insert("Ref"             , Object.Ref);
+	
+	SelectedRowInfo = RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData);
+	TablesInfo = RowIDInfoClient.GetTablesInfo(Object);
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("Filter"           , Filter);
+	FormParameters.Insert("SelectedRowInfo"  , SelectedRowInfo);
+	FormParameters.Insert("TablesInfo"       , TablesInfo);
+	
+	OpenForm("CommonForm.LinkBasisDocuments"
+		, FormParameters, , , ,
+		, New NotifyDescription("LinkBasisDocumentsContinue", ThisObject)
+		, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure LinkBasisDocumentsContinue(ArrayOfLinkedDocuments, AdditionalParameters) Export
+	If ArrayOfLinkedDocuments = Undefined Then
 		Return;
 	EndIf;
-	SelectSalesOrdersContinueAtServer(Result, AdditionalParameters);
-	DocSalesInvoiceClient.ItemListOnChange(Object, ThisObject, Items.ItemList);
+	LinkBasisDocumentsContinueAtServer(ArrayOfLinkedDocuments);
 EndProcedure
 
 &AtServer
-Procedure SelectSalesOrdersContinueAtServer(Result, AdditionalParameters)
-	Settings = New Structure();
-	Settings.Insert("Rows", New Array());
-	Settings.Insert("CalculateSettings", New Structure());
-	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
-		
-	For Each ResultRow In Result Do
-		RowsByKey = Object.ItemList.FindRows(New Structure("Key", ResultRow.Key));
-		If RowsByKey.Count() Then
-			RowByKey = RowsByKey[0];
-			ItemKeyUnit = CatItemsServer.GetItemKeyUnit(ResultRow.ItemKey);
-			UnitFactorFrom = Catalogs.Units.GetUnitFactor(RowByKey.Unit, ItemKeyUnit);
-			UnitFactorTo = Catalogs.Units.GetUnitFactor(ResultRow.Unit, ItemKeyUnit);
-			FillPropertyValues(RowByKey, ResultRow, , "Quantity");
-			RowByKey.Quantity = ?(UnitFactorTo = 0,
-					0,
-					RowByKey.Quantity * UnitFactorFrom / UnitFactorTo) + ResultRow.Quantity;
-			RowByKey.PriceType = ResultRow.PriceType;
-			RowByKey.Price = ResultRow.Price;
-			Settings.Rows.Add(RowByKey);
-		Else
-			NewRow = Object.ItemList.Add();
-			FillPropertyValues(NewRow, ResultRow);
-			NewRow.PriceType = ResultRow.PriceType;
-			NewRow.Price = ResultRow.Price;
-			Settings.Rows.Add(NewRow);
-		EndIf;
-	EndDo;
-	
-	TaxInfo = Undefined;
-	SavedData = TaxesClientServer.GetSavedData(ThisObject, TaxesServer.GetAttributeNames().CacheName);
-	If SavedData.Property("ArrayOfColumnsInfo") Then
-		TaxInfo = SavedData.ArrayOfColumnsInfo;
-	EndIf;
-	CalculationStringsClientServer.CalculateItemsRows(Object,
-		ThisObject,
-		Settings.Rows,
-		Settings.CalculateSettings,
-		TaxInfo);
+Procedure LinkBasisDocumentsContinueAtServer(ArrayOfLinkedDocuments)
+	RowIDInfo.FillSalesInvoice(ArrayOfLinkedDocuments, Object);
 EndProcedure
 
 &AtClient
@@ -613,6 +582,105 @@ EndProcedure
 #EndRegion
 
 #Region ShipmentConfirmationsTree
+
+&AtClient
+Procedure SetLockedRowsByShipmentConfirmations()
+	If Not Object.ShipmentConfirmations.Count() Then
+		Return;
+	EndIf;
+	
+	For Each Row In Object.ItemList Do
+		Row.LockedRow = Object.ShipmentConfirmations.FindRows(New Structure("Key", Row.Key)).Count() > 0;
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure ClearShipmentConfirmationsTable()
+	If Not Object.ShipmentConfirmations.Count() Then
+		Return;
+	EndIf;
+	
+	ArrayOfRows = New Array();
+	For Each Row In Object.ShipmentConfirmations Do
+		If Not Object.ItemList.FindRows(New Structure("Key", Row.Key)).Count() Then
+			ArrayOfRows.Add(Row);
+		EndIf;
+	EndDo;
+	
+	For Each Row In ArrayOfRows Do
+		Object.ShipmentConfirmations.Delete(Row);
+	EndDo;
+EndProcedure	
+
+&AtClient
+Procedure UpdateShipmentConfirmationsTree()
+	ThisObject.ShipmentConfirmationsTree.GetItems().Clear();
+	
+	If Not Object.ShipmentConfirmations.Count() Then
+		Return;
+	EndIf;
+	
+	ArrayOfRows = New Array();
+	For Each Row In Object.ItemList Do
+		ArrayOfShipmentConfirmations = Object.ShipmentConfirmations.FindRows(New Structure("Key", Row.Key));
+		
+		If Not ArrayOfShipmentConfirmations.Count() Then
+			Continue;
+		EndIf;
+		
+		NewRow = New Structure();
+		NewRow.Insert("Key"         , Row.Key);
+		NewRow.Insert("Item"        , Row.Item);
+		NewRow.Insert("ItemKey"     , Row.ItemKey);
+		NewRow.Insert("QuantityUnit", Row.Unit);
+		NewRow.Insert("Unit"        );
+		NewRow.Insert("Quantity"    , Row.Quantity);
+		ArrayOfRows.Add(NewRow);
+	EndDo;
+	RecalculateInvoiceQuantity(ArrayOfRows);
+
+	For Each Row In ArrayOfRows Do		
+		NewRow0 = ThisObject.ShipmentConfirmationsTree.GetItems().Add();
+		NewRow0.Level             = 1;
+		NewRow0.Key               = Row.Key;
+		NewRow0.Item              = Row.Item;
+		NewRow0.ItemKey           = Row.ItemKey;
+		NewRow0.QuantityInInvoice = Row.Quantity;
+		
+		ArrayOfShipmentConfirmations = Object.ShipmentConfirmations.FindRows(New Structure("Key", Row.Key));
+		
+		If ArrayOfShipmentConfirmations.Count() = 1 
+			And ArrayOfShipmentConfirmations[0].Quantity <> Row.Quantity Then
+			ArrayOfShipmentConfirmations[0].Quantity = Row.Quantity;
+		EndIf;
+		
+		For Each ItemOfArray In ArrayOfShipmentConfirmations Do
+			NewRow1 = NewRow0.GetItems().Add();
+			NewRow1.Level                  = 2;
+			NewRow1.Key                    = ItemOfArray.Key;
+			NewRow1.ShipmentConfirmation   = ItemOfArray.ShipmentConfirmation;
+			NewRow1.Quantity               = ItemOfArray.Quantity;
+			NewRow1.QuantityInShipmentConfirmation = ItemOfArray.QuantityInShipmentConfirmation;
+			NewRow1.PictureEdit            = True;
+			NewRow0.Quantity               = NewRow0.Quantity + ItemOfArray.Quantity;
+			NewRow0.QuantityInShipmentConfirmation = 
+			NewRow0.QuantityInShipmentConfirmation + ItemOfArray.QuantityInShipmentConfirmation;
+		EndDo;
+	EndDo;
+	
+	For Each ItemTreeRows In ThisObject.ShipmentConfirmationsTree.GetItems() Do
+		ThisObject.Items.ShipmentConfirmationsTree.Expand(ItemTreeRows.GetID());
+	EndDo;	
+EndProcedure
+
+&AtServerNoContext
+Procedure RecalculateInvoiceQuantity(ArrayOfRows)
+	For Each Row In ArrayOfRows Do
+		Row.Unit = ?(ValueIsFilled(Row.ItemKey.Unit), 
+		Row.ItemKey.Unit, Row.ItemKey.Item.Unit);
+		DocumentsServer.RecalculateQuantityInRow(Row);
+	EndDo;
+EndProcedure
 
 &AtClient
 Procedure ShipmentConfirmationsTreeQuantityOnChange(Item)

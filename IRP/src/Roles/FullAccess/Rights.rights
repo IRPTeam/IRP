@@ -737,6 +737,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.CancelReturnReasons</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeletePredefinedData</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.PriceKeys</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -837,6 +848,17 @@
 		<name>Document.Unbundling</name>
 		<right>
 			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.RowIDs</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeletePredefinedData</name>
 			<value>false</value>
 		</right>
 	</object>
@@ -1110,6 +1132,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.PlannedReceiptReservation</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>ChartOfCharacteristicTypes.CurrencyMovementType</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -1206,6 +1235,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.MovementRules</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeletePredefinedData</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.ObjectStatuses</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -1290,20 +1330,6 @@
 		</right>
 		<right>
 			<name>InteractiveDeleteMarkedPredefinedData</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.PlannedReceiptReservation</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.CancelReturnReasons</name>
-		<right>
-			<name>InteractiveDelete</name>
 			<value>false</value>
 		</right>
 	</object>

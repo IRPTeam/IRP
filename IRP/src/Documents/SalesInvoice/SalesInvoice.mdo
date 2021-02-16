@@ -68,6 +68,7 @@
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
   <registerRecords>AccumulationRegister.PartnerArTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.T10000B_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
   <registerRecords>AccumulationRegister.ItemsInStores</registerRecords>
@@ -1149,6 +1150,121 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="fbcbcfc3-c845-4513-8009-208e4424514e">
+    <producedTypes>
+      <objectType typeId="0c5eb1a0-56c7-43e9-9790-3aa395139989" valueTypeId="944f5a82-308e-4289-aa4f-4f4f31613de4"/>
+      <rowType typeId="4115ae35-7421-422d-8623-d58fa48bcc3a" valueTypeId="e412ce93-cc04-432e-81cc-4f67f6eeffc5"/>
+    </producedTypes>
+    <name>RowIDInfo</name>
+    <synonym>
+      <key>en</key>
+      <value>Row IDInfo</value>
+    </synonym>
+    <standardAttributes>
+      <dataHistory>Use</dataHistory>
+      <name>LineNumber</name>
+      <fillValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </standardAttributes>
+    <attributes uuid="61963eb1-b9b3-4ef2-a3f8-c5c6a70702e3">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="8c0a7939-6f6e-4a8e-8e57-08d6710460e5">
+      <name>RowID</name>
+      <synonym>
+        <key>en</key>
+        <value>Row ID</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="e81ef1da-c80c-42e5-a375-eb168d78346e">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Q</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="6964f4be-b677-4c1b-a2d3-792af0fb2740">
+      <name>Basis</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis</value>
+      </synonym>
+      <type>
+        <types>DocumentRef</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="3160e716-1aa8-49ea-b75a-39ebedbd1a9d">
+      <name>CurrentStep</name>
+      <synonym>
+        <key>en</key>
+        <value>Current step</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.MovementRules</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <createOnInput>Use</createOnInput>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a5a2bd17-f2b7-4769-bb3f-8be1bba626ae">
+      <name>NextStep</name>
+      <synonym>
+        <key>en</key>
+        <value>Next step</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.MovementRules</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="72636a08-85e5-4b2d-8f3e-efd1fdad8d9d">
+      <name>RowRef</name>
+      <synonym>
+        <key>en</key>
+        <value>Row ref</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.RowIDs</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
   <commands uuid="1940e8ac-35c7-4889-9c93-09a9af1eb411">

@@ -70,7 +70,20 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 EndFunction
 
 Function GetQueryTextSalesReturnItemList()
-	Return	"SELECT
+	Return	
+	"SELECT
+	|	SalesReturnGoodsReceipts.Key
+	|INTO GoodsReceipts
+	|FROM
+	|	Document.SalesReturn.GoodsReceipts AS SalesReturnGoodsReceipts
+	|WHERE
+	|	SalesReturnGoodsReceipts.Ref = &Ref
+	|GROUP BY
+	|	SalesReturnGoodsReceipts.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
 	|	SalesReturnItemList.Ref.Company AS Company,
 	|	SalesReturnItemList.Store AS Store,
 	|	SalesReturnItemList.Store.UseGoodsReceipt AS UseGoodsReceipt,
@@ -112,9 +125,12 @@ Function GetQueryTextSalesReturnItemList()
 	|		WHEN SalesReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
 	|			THEN TRUE
 	|		ELSE FALSE
-	|	END AS IsService
+	|	END AS IsService,
+	|	NOT GoodsReceipts.Key IS NULL AS GoodsReceiptExists
 	|FROM
 	|	Document.SalesReturn.ItemList AS SalesReturnItemList
+	|		LEFT JOIN GoodsReceipts AS GoodsReceipts
+	|		ON SalesReturnItemList.Key = GoodsReceipts.Key
 	|WHERE
 	|	SalesReturnItemList.Ref = &Ref";
 EndFunction
@@ -215,7 +231,8 @@ Function GetQueryTextQueryTable()
 	|	QueryTable.SalesInvoice AS SalesInvoice,
 	|	QueryTable.AgingSalesInvoice AS AgingSalesInvoice,
 	|	QueryTable.RowKey AS RowKey,
-	|	QueryTable.IsService AS IsService
+	|	QueryTable.IsService AS IsService,
+	|	QueryTable.GoodsReceiptExists AS GoodsReceiptExists
 	|INTO tmp
 	|FROM
 	|	&QueryTable AS QueryTable
@@ -272,6 +289,7 @@ Function GetQueryTextQueryTable()
 	|WHERE
 	|	tmp.UseGoodsReceipt
 	|	AND Not tmp.IsService
+	|	AND NOT tmp.GoodsReceiptExists
 	|;
 	|
 	|// 4. StockBalance //////////////////////////////////////////////////////////////////////////////
@@ -287,6 +305,7 @@ Function GetQueryTextQueryTable()
 	|WHERE
 	|	NOT tmp.UseGoodsReceipt
 	|	AND Not tmp.IsService
+	|	AND NOT tmp.GoodsReceiptExists
 	|GROUP BY
 	|	tmp.Company,
 	|	tmp.Store,
@@ -309,6 +328,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.Order = VALUE(Document.SalesReturnOrder.EmptyRef)
 	|	AND NOT tmp.UseGoodsReceipt
 	|	AND Not tmp.IsService
+	|	AND Not tmp.GoodsReceiptExists
 	|GROUP BY
 	|	tmp.Company,
 	|	tmp.Store,

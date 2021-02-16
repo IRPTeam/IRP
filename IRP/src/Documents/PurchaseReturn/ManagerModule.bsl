@@ -62,6 +62,18 @@ EndFunction
 Function GetQueryTextPurchaseReturnItemList()
 	Return
 		"SELECT
+		|	PurchaseReturnShipmentConfirmations.Key
+		|INTO ShipmentConfirmations
+		|FROM
+		|	Document.PurchaseReturn.ShipmentConfirmations AS PurchaseReturnShipmentConfirmations
+		|WHERE
+		|	PurchaseReturnShipmentConfirmations.Ref = &Ref
+		|GROUP BY
+		|	PurchaseReturnShipmentConfirmations.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
 		|	PurchaseReturnItemList.Ref.Company AS Company,
 		|	PurchaseReturnItemList.Store AS Store,
 		|	PurchaseReturnItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
@@ -97,9 +109,12 @@ Function GetQueryTextPurchaseReturnItemList()
 		|		WHEN PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
 		|			THEN TRUE
 		|		ELSE FALSE
-		|	END AS IsService
+		|	END AS IsService,
+		|	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
+		|		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
+		|		ON PurchaseReturnItemList.Key = ShipmentConfirmations.Key
 		|WHERE
 		|	PurchaseReturnItemList.Ref = &Ref";
 EndFunction
@@ -124,7 +139,8 @@ Function GetQueryTextQueryTable()
 		|	QueryTable.BasisDocument,
 		|	QueryTable.NetAmount,
 		|	QueryTable.IsService,
-		|	QueryTable.RowKey
+		|	QueryTable.RowKey,
+		|	QueryTable.ShipmentConfirmationExists
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable
@@ -228,6 +244,8 @@ Function GetQueryTextQueryTable()
 		|WHERE
 		|	tmp.PurchaseReturnOrder = VALUE(Document.PurchaseReturnOrder.EmptyRef)
 		|	AND Not tmp.IsService
+		|	AND NOT tmp.ShipmentConfirmationExists
+		|	AND NOT tmp.UseShipmentConfirmation
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -278,6 +296,7 @@ Function GetQueryTextQueryTable()
 		|WHERE
 		|	tmp.UseShipmentConfirmation
 		|	AND Not tmp.IsService
+		|	AND Not tmp.ShipmentConfirmationExists
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -302,7 +321,8 @@ Function GetQueryTextQueryTable()
 		|FROM
 		|	tmp AS tmp
 		|WHERE
-		|	NOT tmp.UseShipmentConfirmation
+		|	NOT tmp.ShipmentConfirmationExists
+		|	AND NOT tmp.UseShipmentConfirmation
 		|	AND Not tmp.IsService
 		|GROUP BY
 		|	tmp.Company,

@@ -111,7 +111,7 @@ Scenario: _04011 check Goods receipt movements by the Register  "R4010 Actual st
 			| ''                                            | 'Receipt'     | '12.02.2021 15:10:35' | '10'        | 'Store 02'   | 'S/Yellow'  |	
 		And I close all client application windows
 		
-Scenario: _04012 check Goods receipt movements by the Register  "R4017 Procurement of internal supply requests"
+Scenario: _04012 check Goods receipt movements by the Register  "R4017 Procurement of internal supply requests" (without ISR)
 	* Select Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
@@ -147,7 +147,7 @@ Scenario: _04013 check Goods receipt movements by the Register  "R4011 Free stoc
 			
 		And I close all client application windows
 		
-Scenario: _04014 check Goods receipt movements by the Register  "R1031 Receipt invoicing"
+Scenario: _04014 check Goods receipt movements by the Register  "R1031 Receipt invoicing" (without PI)
 	* Select Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
@@ -187,19 +187,7 @@ Scenario: _04015 check Goods receipt movements by the Register  "R4035 Incoming 
 			| ''                                            | 'Expense'     | '12.02.2021 15:10:35' | '10'        | 'Store 02'   | 'S/Yellow'  | 'Purchase order 115 dated 12.02.2021 12:44:43' |
 		And I close all client application windows
 		
-Scenario: _04016 check Goods receipt movements by the Register  "R4031 Goods in transit (incoming)"
-	* Select Goods receipt
-		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '115' |
-	* Check movements by the Register  "R4031 Goods in transit (incoming)"
-		And I click "Registrations report" button
-		And I select "R4031 Goods in transit (incoming)" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R4031 Goods in transit (incoming)"'                     |	
-		And I close all client application windows
+
 		
 Scenario: _04017 check Goods receipt movements by the Register  "R2013 Procurement of sales orders"
 	* Select Goods receipt
@@ -215,7 +203,7 @@ Scenario: _04017 check Goods receipt movements by the Register  "R2013 Procureme
 			| 'Register  "R2013 Procurement of sales orders"'                     |	
 		And I close all client application windows
 		
-Scenario: _04018 check Goods receipt movements by the Register  "R4033 Scheduled goods receipts"
+Scenario: _04018 check Goods receipt movements by the Register  "R4033 Scheduled goods receipts" (use shedule)
 	* Select Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
@@ -233,6 +221,20 @@ Scenario: _04018 check Goods receipt movements by the Register  "R4033 Scheduled
 			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Basis'                                        | 'Store'    | 'Item key'  | 'Row key'                              |
 			| ''                                            | 'Expense'     | '12.02.2021 15:10:35' | '5'         | 'Main Company' | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Store 02' | '36/Yellow' | '18d36228-af88-4ba5-a17a-f3ab3ddb6816' |
 			| ''                                            | 'Expense'     | '12.02.2021 15:10:35' | '10'        | 'Main Company' | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Store 02' | 'S/Yellow'  | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce' |
+		And I close all client application windows
+
+Scenario: _040181 check Goods receipt movements by the Register  "R4033 Scheduled goods receipts" (not use shedule)
+	* Select Goods receipt
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '116' |
+	* Check movements by the Register  "R4033 Scheduled goods receipts"
+		And I click "Registrations report" button
+		And I select "R4033 Scheduled goods receipts" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4033 Scheduled goods receipts"'                     |	
 		And I close all client application windows
 		
 Scenario: _04019 check Goods receipt movements by the Register  "R4036 Incoming stock requested"
@@ -265,7 +267,7 @@ Scenario: _04020 check Goods receipt movements by the Register  "R4021 Receipt o
 			
 		And I close all client application windows
 		
-Scenario: _04021 check Goods receipt movements by the Register  "R1011 Receipt of purchase orders"
+Scenario: _04021 check Goods receipt movements by the Register  "R1011 Receipt of purchase orders" (PO exists)
 	* Select Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table

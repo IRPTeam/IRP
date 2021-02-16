@@ -265,17 +265,15 @@ Scenario: _040157 check Sales order movements by the Register  "R2012 Invoice cl
 		And I select "R2012 Invoice closing of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-		| 'Sales order 1 dated 27.01.2021 19:50:45'           | ''            | ''                    | ''          | ''       | ''           | ''             | ''                                        | ''         | ''         | ''                                     |
-		| 'Document registrations records'                    | ''            | ''                    | ''          | ''       | ''           | ''             | ''                                        | ''         | ''         | ''                                     |
-		| 'Register  "R2012 Invoice closing of sales orders"' | ''            | ''                    | ''          | ''       | ''           | ''             | ''                                        | ''         | ''         | ''                                     |
-		| ''                                                  | 'Record type' | 'Period'              | 'Resources' | ''       | ''           | 'Dimensions'   | ''                                        | ''         | ''         | ''                                     |
-		| ''                                                  | ''            | ''                    | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Order'                                   | 'Currency' | 'Item key' | 'Row key'                              |
-		| ''                                                  | 'Receipt'     | '27.01.2021 19:50:45' | '1'         | '95'     | '80,51'      | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' |
-		| ''                                                  | 'Receipt'     | '27.01.2021 19:50:45' | '1'         | '494'    | '418,64'     | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
-		| ''                                                  | 'Receipt'     | '27.01.2021 19:50:45' | '10'        | '3 325'  | '2 817,8'    | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' |
-		| ''                                                  | 'Receipt'     | '27.01.2021 19:50:45' | '24'        | '15 960' | '13 525,42'  | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' |
-
-
+			| 'Sales order 1 dated 27.01.2021 19:50:45'           | ''            | ''                    | ''          | ''       | ''           | ''             | ''                                        | ''         | ''         | ''                                     |
+			| 'Document registrations records'                    | ''            | ''                    | ''          | ''       | ''           | ''             | ''                                        | ''         | ''         | ''                                     |
+			| 'Register  "R2012 Invoice closing of sales orders"' | ''            | ''                    | ''          | ''       | ''           | ''             | ''                                        | ''         | ''         | ''                                     |
+			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | ''       | ''           | 'Dimensions'   | ''                                        | ''         | ''         | ''                                     |
+			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Order'                                   | 'Currency' | 'Item key' | 'Row key'                              |
+			| ''                                                  | 'Receipt'     | '27.01.2021 19:50:45' | '1'         | '95'     | '80,51'      | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' |
+			| ''                                                  | 'Receipt'     | '27.01.2021 19:50:45' | '1'         | '494'    | '418,64'     | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
+			| ''                                                  | 'Receipt'     | '27.01.2021 19:50:45' | '10'        | '3 325'  | '2 817,8'    | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' |
+			| ''                                                  | 'Receipt'     | '27.01.2021 19:50:45' | '24'        | '15 960' | '13 525,42'  | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' |
 
 		And I close all client application windows
 
@@ -296,6 +294,26 @@ Scenario: _0401562 check Sales order movements by the Register  "R4034 Scheduled
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document does not contain values
 			| Register  "R4034 Scheduled goods shipments" |
+		And I close all client application windows
+
+Scenario: _0401563 check Sales order movements by the Register  "R4011 Free stocks"
+	* Select Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Check movements by the Register  "R4011 Free stocks" 
+		And I click "Registrations report" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales order 2 dated 27.01.2021 19:50:45' | ''            | ''                    | ''          | ''           | ''         |
+			| 'Document registrations records'          | ''            | ''                    | ''          | ''           | ''         |
+			| 'Register  "R4011 Free stocks"'           | ''            | ''                    | ''          | ''           | ''         |
+			| ''                                        | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
+			| ''                                        | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
+			| ''                                        | 'Expense'     | '27.01.2021 19:50:45' | '1'         | 'Store 02'   | 'XS/Blue'  |
+			| ''                                        | 'Expense'     | '27.01.2021 19:50:45' | '2'         | 'Store 02'   | 'XS/Blue'  |
 		And I close all client application windows
 
 

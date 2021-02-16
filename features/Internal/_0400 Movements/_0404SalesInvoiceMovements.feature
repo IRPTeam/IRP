@@ -50,6 +50,8 @@ Scenario: _040130 preparation (Sales invoice)
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
 		When update ItemKeys
+		When Create catalog SerialLotNumbers objects
+		When Create catalog CashAccounts objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -67,6 +69,10 @@ Scenario: _040130 preparation (Sales invoice)
 				| "DocumentDiscount" |
 			When add Plugin for document discount
 			When Create catalog CancelReturnReasons objects
+	* Load Bank receipt
+		When Create document BankReceipt objects (check movements, advance)
+		And I execute 1C:Enterprise script at server
+ 			| "Documents.BankReceipt.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load SO
 			When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
 			When Create document SalesOrder objects (check movements, SC before SI, not Use shipment sheduling)
@@ -494,11 +500,108 @@ Scenario: _0401383 check Sales invoice movements by the Register  "R4011 Free st
 			| ''                                          | 'Expense'     | '28.01.2021 18:50:57' | '10'        | 'Store 02'   | '36/Red'   |
 		And I close all client application windows 
 		
+//4
 
-		
+Scenario: _0401314 check Sales invoice movements by the Register  "R5011 Partners aging" (use Aging)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '4' |
+	* Check movements by the Register  "R5011 Partners aging"
+		And I click "Registrations report" button
+		And I select "R5011 Partners aging" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''             | ''         | ''                          | ''        | ''                                          | ''                    |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''         | ''                          | ''        | ''                                          | ''                    |
+			| 'Register  "R5011 Partners aging"'          | ''            | ''                    | ''          | ''             | ''         | ''                          | ''        | ''                                          | ''                    |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                          | ''        | ''                                          | ''                    |
+			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'                 | 'Partner' | 'Invoice'                                   | 'Payment date'        |
+			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '23 374'    | 'Main Company' | 'USD'      | 'Personal Partner terms, $' | 'Kalipso' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | '23.02.2021 00:00:00' |
+			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10 000'    | 'Main Company' | 'USD'      | 'Personal Partner terms, $' | 'Kalipso' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | '23.02.2021 00:00:00' |
+		And I close all client application windows 
 
 
+Scenario: _0401315 check Sales invoice movements by the Register  "R4014 Serial lot numbers" (use Serial lot number)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '4' |
+	* Check movements by the Register  "R4014 Serial lot numbers"
+		And I click "Registrations report" button
+		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''             | ''         | ''                  |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''         | ''                  |
+			| 'Register  "R4014 Serial lot numbers"'      | ''            | ''                    | ''          | ''             | ''         | ''                  |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                  |
+			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Serial lot number' |
+			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10'        | 'Main Company' | '36/Red'   | '0512'              |
+		And I close all client application windows 
 
+Scenario: _0401316 check Sales invoice movements by the Register  "R2020 Advances from customer" (with advance)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '4' |
+	* Check movements by the Register  "R2020 Advances from customer"
+		And I click "Registrations report" button
+		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                         | ''                     |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                         | ''                     |
+			| 'Register  "R2020 Advances from customer"'  | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                         | ''                     |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                | ''        | ''                                         | 'Attributes'           |
+			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'      | 'Partner' | 'Basis'                                    | 'Deferred calculation' |
+			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10 000'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 1 dated 15.02.2021 11:20:08' | 'No'                   |
+			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10 000'    | 'Main Company' | 'en description is empty'      | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 1 dated 15.02.2021 11:20:08' | 'No'                   |
+			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '56 275'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 1 dated 15.02.2021 11:20:08' | 'No'                   |
+		And I close all client application windows 
+
+Scenario: _0401316 check Sales invoice movements by the Register  "R4012 Stock Reservation" (without SO, use SC)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '4' |
+	* Check movements by the Register  "R4012 Stock Reservation"
+		And I click "Registrations report" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''           | ''         | ''                                          |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''           | ''         | ''                                          |
+			| 'Register  "R4012 Stock Reservation"'       | ''            | ''                    | ''          | ''           | ''         | ''                                          |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                                          |
+			| ''                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Order'                                     |
+			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '1'         | 'Store 02'   | 'XS/Blue'  | 'Sales invoice 4 dated 16.02.2021 10:59:49' |
+			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '24'        | 'Store 02'   | '37/18SD'  | 'Sales invoice 4 dated 16.02.2021 10:59:49' |
+		And I close all client application windows
+
+Scenario: _0401317 check Sales invoice movements by the Register  "R2031 Shipment invoicing" (SI first, use SC)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '4' |
+	* Check movements by the Register  "R2031 Shipment invoicing"
+		And I click "Registrations report" button
+		And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''             | ''         | ''                                          | ''         |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''         | ''                                          | ''         |
+			| 'Register  "R2031 Shipment invoicing"'      | ''            | ''                    | ''          | ''             | ''         | ''                                          | ''         |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                          | ''         |
+			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                                     | 'Item key' |
+			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '1'         | 'Main Company' | 'Store 02' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'XS/Blue'  |
+			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '24'        | 'Main Company' | 'Store 02' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | '37/18SD'  |
+		And I close all client application windows
 
 		
 

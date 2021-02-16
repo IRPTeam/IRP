@@ -271,3 +271,38 @@ Scenario: _0401781 check Shipment confirmation movements by the Register  "R2031
 			| ''                                                  | 'Receipt'     | '28.01.2021 18:42:17' | '1'         | 'Main Company' | 'Store 02' | 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | 'XS/Blue'  |
 			| ''                                                  | 'Receipt'     | '28.01.2021 18:42:17' | '10'        | 'Main Company' | 'Store 02' | 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | '36/Red'   |
 		And I close all client application windows
+
+Scenario: _040179 check Shipment confirmation movements by the Register  "R4011 Free stocks" (not transfer)
+	* Select Shipment confirmation
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R4011 Free stocks"
+		And I click "Registrations report" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4011 Free stocks"' |
+		And I close all client application windows
+
+//4
+
+Scenario: _040179 check Shipment confirmation movements by the Register  "R4011 Free stocks" (not transfer)
+	* Select Shipment confirmation
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '4' |
+	* Check movements by the Register  "R4011 Free stocks"
+		And I click "Registrations report" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Shipment confirmation 4 dated 16.02.2021 12:14:52' | ''            | ''                    | ''          | ''           | ''         |
+			| 'Document registrations records'                    | ''            | ''                    | ''          | ''           | ''         |
+			| 'Register  "R4011 Free stocks"'                     | ''            | ''                    | ''          | ''           | ''         |
+			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
+			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
+			| ''                                                  | 'Expense'     | '16.02.2021 12:14:52' | '25'        | 'Store 02'   | 'XS/Blue'  |
+		And I close all client application windows

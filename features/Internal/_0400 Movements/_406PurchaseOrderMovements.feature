@@ -269,23 +269,10 @@ Scenario: _0401222 check Purchase order movements by the Register  "R4033 Schedu
 
 	
 
-// 117
 
 
 
 
 
-Scenario: _0401234 check Purchase order movements by the Register  "R1005 Special offers of purchases"
-	* Select Purchase order
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '117' |
-	* Check movements by the Register  "R1005 Special offers of purchases" 
-		And I click "Registrations report" button
-		And I select "R1005 Special offers of purchases" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document contains values
-			| 'Register  "R1005 Special offers of purchases"' |
-		And I close all client application windows
+
 	

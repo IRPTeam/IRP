@@ -61,29 +61,35 @@ Scenario: _04096 preparation (Purchase invoice)
 				| "Description" |
 				| "DocumentDiscount" |
 			When add Plugin for document discount
-			When Create catalog CancelReturnReasons objects
+	When Create catalog CancelReturnReasons objects
+	When Create catalog CashAccounts objects
+	When Create catalog SerialLotNumbers objects
+	* Load Bank payment
+	When Create document BankPayment objects (check movements, advance)
+	And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |	
 	* Load PO
-		When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
-		When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)
-		When Create document InternalSupplyRequest objects (check movements)
-		And I execute 1C:Enterprise script at server
+	When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
+	When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)
+	When Create document InternalSupplyRequest objects (check movements)
+	And I execute 1C:Enterprise script at server
 			| "Documents.InternalSupplyRequest.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |	
-		When Create document PurchaseOrder objects (check movements, PI before GR, not Use receipt sheduling)
-		And I execute 1C:Enterprise script at server
+	When Create document PurchaseOrder objects (check movements, PI before GR, not Use receipt sheduling)
+	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |	
 			| "Documents.PurchaseOrder.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.PurchaseOrder.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |	
 	* Load GR
-		When Create document GoodsReceipt objects (check movements)
-		And I execute 1C:Enterprise script at server
+	When Create document GoodsReceipt objects (check movements)
+	And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |	
 			| "Documents.GoodsReceipt.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.GoodsReceipt.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.GoodsReceipt.FindByNumber(118).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.GoodsReceipt.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load PI
-		When Create document PurchaseInvoice objects (check movements)
-		And I execute 1C:Enterprise script at server
+	When Create document PurchaseInvoice objects (check movements)
+	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |	
 			| "Documents.PurchaseInvoice.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.PurchaseInvoice.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |	
@@ -366,7 +372,7 @@ Scenario: _040111 check Purchase invoice movements by the Register  "R2013 Procu
 			
 		And I close all client application windows
 		
-Scenario: _040112 check Purchase invoice movements by the Register  "R4036 Incoming stock requested"
+Scenario: _040112 check Purchase invoice movements by the Register  "R4036 Incoming stock requested" (without IncomingStocksRequested)
 	* Select Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
@@ -381,7 +387,7 @@ Scenario: _040112 check Purchase invoice movements by the Register  "R4036 Incom
 			
 		And I close all client application windows
 		
-Scenario: _040113 check Purchase invoice movements by the Register  "R4014 Serial lot numbers"
+Scenario: _040113 check Purchase invoice movements by the Register  "R4014 Serial lot numbers" (not use Serial lot numbers)
 	* Select Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
@@ -396,7 +402,7 @@ Scenario: _040113 check Purchase invoice movements by the Register  "R4014 Seria
 			
 		And I close all client application windows
 		
-Scenario: _040114 check Purchase invoice movements by the Register  "R1011 Receipt of purchase orders"
+Scenario: _040114 check Purchase invoice movements by the Register  "R1011 Receipt of purchase orders" (use GR)
 	* Select Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
@@ -413,23 +419,6 @@ Scenario: _040114 check Purchase invoice movements by the Register  "R1011 Recei
 
 // 116
 
-		
-
-		
-Scenario: _0401032 check Purchase invoice movements by the Register  "R1020 Advances to vendors"
-	* Select Purchase invoice
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '116' |
-	* Check movements by the Register  "R1020 Advances to vendors"
-		And I click "Registrations report" button
-		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R1020 Advances to vendors"'                     |
-			
-		And I close all client application windows
 		
 
 
@@ -451,53 +440,6 @@ Scenario: _0401092 check Purchase invoice movements by the Register  "R4035 Inco
 		
 
 		
-
-		
-Scenario: _0401122 check Purchase invoice movements by the Register  "R4036 Incoming stock requested"
-	* Select Purchase invoice
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '116' |
-	* Check movements by the Register  "R4036 Incoming stock requested"
-		And I click "Registrations report" button
-		And I select "R4036 Incoming stock requested" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R4036 Incoming stock requested"'                     |
-			
-		And I close all client application windows
-		
-Scenario: _0401132 check Purchase invoice movements by the Register  "R4014 Serial lot numbers"
-	* Select Purchase invoice
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '116' |
-	* Check movements by the Register  "R4014 Serial lot numbers"
-		And I click "Registrations report" button
-		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R4014 Serial lot numbers"'                     |
-			
-		And I close all client application windows
-		
-Scenario: _0401142 check Purchase invoice movements by the Register  "R1011 Receipt of purchase orders"
-	* Select Purchase invoice
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '116' |
-	* Check movements by the Register  "R1011 Receipt of purchase orders"
-		And I click "Registrations report" button
-		And I select "R1011 Receipt of purchase orders" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R1011 Receipt of purchase orders"'                     |
-			
-		And I close all client application windows
-
 
 // 117
 
@@ -535,23 +477,7 @@ Scenario: _040993 check Purchase invoice movements by the Register  "R1005 Speci
 		And I close all client application windows
 		
 
-		
 
-		
-Scenario: _0401033 check Purchase invoice movements by the Register  "R1020 Advances to vendors"
-	* Select Purchase invoice
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '117' |
-	* Check movements by the Register  "R1020 Advances to vendors"
-		And I click "Registrations report" button
-		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R1020 Advances to vendors"'                     |
-			
-		And I close all client application windows
 		
 
 
@@ -577,71 +503,9 @@ Scenario: _0401063 check Purchase invoice movements by the Register  "R1031 Rece
 
 		And I close all client application windows
 		
-		
-
-		
-Scenario: _0401093 check Purchase invoice movements by the Register  "R4035 Incoming stocks"
-	* Select Purchase invoice
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '117' |
-	* Check movements by the Register  "R4035 Incoming stocks"
-		And I click "Registrations report" button
-		And I select "R4035 Incoming stocks" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R4035 Incoming stocks"'                     |
-			
-		And I close all client application windows
-		
 
 
-		
-Scenario: _0401123 check Purchase invoice movements by the Register  "R4036 Incoming stock requested"
-	* Select Purchase invoice
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '117' |
-	* Check movements by the Register  "R4036 Incoming stock requested"
-		And I click "Registrations report" button
-		And I select "R4036 Incoming stock requested" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R4036 Incoming stock requested"'                     |
-			
-		And I close all client application windows
-		
-Scenario: _0401133 check Purchase invoice movements by the Register  "R4014 Serial lot numbers"
-	* Select Purchase invoice
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '117' |
-	* Check movements by the Register  "R4014 Serial lot numbers"
-		And I click "Registrations report" button
-		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R4014 Serial lot numbers"'                     |
-			
-		And I close all client application windows
-		
-Scenario: _0401143 check Purchase invoice movements by the Register  "R1011 Receipt of purchase orders"
-	* Select Purchase invoice
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '117' |
-	* Check movements by the Register  "R1011 Receipt of purchase orders"
-		And I click "Registrations report" button
-		And I select "R1011 Receipt of purchase orders" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document contains values
-			| 'Register  "R1011 Receipt of purchase orders"'                     |
-			
-		And I close all client application windows
+
 
 
 

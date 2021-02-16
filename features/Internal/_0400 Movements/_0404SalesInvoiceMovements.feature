@@ -94,6 +94,7 @@ Scenario: _040130 preparation (Sales invoice)
  			| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesInvoice.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 
 //1
 
@@ -496,8 +497,8 @@ Scenario: _0401383 check Sales invoice movements by the Register  "R4011 Free st
 			| 'Register  "R4011 Free stocks"'             | ''            | ''                    | ''          | ''           | ''         |
 			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
 			| ''                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
-			| ''                                          | 'Expense'     | '28.01.2021 18:50:57' | '24'        | 'Store 02'   | '37/18SD'  |
 			| ''                                          | 'Expense'     | '28.01.2021 18:50:57' | '10'        | 'Store 02'   | '36/Red'   |
+			| ''                                          | 'Expense'     | '28.01.2021 18:50:57' | '24'        | 'Store 02'   | '37/18SD'  |
 		And I close all client application windows 
 		
 //4

@@ -12,8 +12,6 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	DocSalesReturnClient.OnOpen(Object, ThisObject, Cancel);
-	SetLockedRowsByGoodsReceipts();
-	UpdateGoodsReceiptsTree();
 EndProcedure
 
 &AtClient
@@ -60,8 +58,6 @@ EndProcedure
 &AtClient
 Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
 	DocSalesReturnClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
-	SetLockedRowsByGoodsReceipts();
-	UpdateGoodsReceiptsTree();	
 EndProcedure
 
 &AtServer
@@ -138,8 +134,6 @@ EndProcedure
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocSalesReturnClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
-	ClearGoodsReceiptsTable();
-	UpdateGoodsReceiptsTree();
 EndProcedure
 
 &AtClient
@@ -192,13 +186,11 @@ EndProcedure
 &AtClient
 Procedure ItemListUnitOnChange(Item, AddInfo = Undefined) Export
 	DocSalesReturnClient.ItemListUnitOnChange(Object, ThisObject, Item);
-	UpdateGoodsReceiptsTree();
 EndProcedure
 
 &AtClient
 Procedure ItemListQuantityOnChange(Item, AddInfo = Undefined) Export
 	DocSalesReturnClient.ItemListQuantityOnChange(Object, ThisObject, Item);
-	UpdateGoodsReceiptsTree();
 EndProcedure
 
 &AtClient
@@ -433,120 +425,9 @@ EndProcedure
 #Region GoodsReceiptsTree
 
 &AtClient
-Procedure SetLockedRowsByGoodsReceipts()
-	If Not Object.GoodsReceipts.Count() Then
-		Return;
-	EndIf;
-	
-	For Each Row In Object.ItemList Do
-		Row.LockedRow = Object.GoodsReceipts.FindRows(New Structure("Key", Row.Key)).Count() > 0;
-	EndDo;
-EndProcedure
-
-&AtClient
-Procedure ClearGoodsReceiptsTable()
-	If Not Object.GoodsReceipts.Count() Then
-		Return;
-	EndIf;
-	
-	ArrayOfRows = New Array();
-	For Each Row In Object.GoodsReceipts Do
-		If Not Object.ItemList.FindRows(New Structure("Key", Row.Key)).Count() Then
-			ArrayOfRows.Add(Row);
-		EndIf;
-	EndDo;
-	
-	For Each Row In ArrayOfRows Do
-		Object.GoodsReceipts.Delete(Row);
-	EndDo;
-EndProcedure	
-
-&AtClient
-Procedure UpdateGoodsReceiptsTree()
-	ThisObject.GoodsReceiptsTree.GetItems().Clear();
-	
-	If Not Object.GoodsReceipts.Count() Then
-		Return;
-	EndIf;
-	
-	ArrayOfRows = New Array();
-	For Each Row In Object.ItemList Do
-		ArrayOfGoodsReceipts = Object.GoodsReceipts.FindRows(New Structure("Key", Row.Key));
-		
-		If Not ArrayOfGoodsReceipts.Count() Then
-			Continue;
-		EndIf;
-		
-		NewRow = New Structure();
-		NewRow.Insert("Key"         , Row.Key);
-		NewRow.Insert("Item"        , Row.Item);
-		NewRow.Insert("ItemKey"     , Row.ItemKey);
-		NewRow.Insert("QuantityUnit", Row.Unit);
-		NewRow.Insert("Unit"        );
-		NewRow.Insert("Quantity"    , Row.Quantity);
-		ArrayOfRows.Add(NewRow);
-	EndDo;
-	RecalculateInvoiceQuantity(ArrayOfRows);
-
-	For Each Row In ArrayOfRows Do		
-		NewRow0 = ThisObject.GoodsReceiptsTree.GetItems().Add();
-		NewRow0.Level             = 1;
-		NewRow0.Key               = Row.Key;
-		NewRow0.Item              = Row.Item;
-		NewRow0.ItemKey           = Row.ItemKey;
-		NewRow0.QuantityInInvoice = Row.Quantity;
-		
-		ArrayOfGoodsReceipts = Object.GoodsReceipts.FindRows(New Structure("Key", Row.Key));
-		
-		If ArrayOfGoodsReceipts.Count() = 1 
-		And ArrayOfGoodsReceipts[0].Quantity <> Row.Quantity Then
-			ArrayOfGoodsReceipts[0].Quantity = Row.Quantity;
-		EndIf;
-		
-		For Each ItemOfArray In ArrayOfGoodsReceipts Do
-			NewRow1 = NewRow0.GetItems().Add();
-			NewRow1.Level                  = 2;
-			NewRow1.Key                    = ItemOfArray.Key;
-			NewRow1.GoodsReceipt           = ItemOfArray.GoodsReceipt;
-			NewRow1.Quantity               = ItemOfArray.Quantity;
-			NewRow1.QuantityInGoodsReceipt = ItemOfArray.QuantityInGoodsReceipt;
-			NewRow1.PictureEdit            = True;
-			NewRow0.Quantity               = NewRow0.Quantity + ItemOfArray.Quantity;
-			NewRow0.QuantityInGoodsReceipt = NewRow0.QuantityInGoodsReceipt + ItemOfArray.QuantityInGoodsReceipt;
-		EndDo;
-	EndDo;
-	
-	For Each ItemTreeRows In ThisObject.GoodsReceiptsTree.GetItems() Do
-		ThisObject.Items.GoodsReceiptsTree.Expand(ItemTreeRows.GetID());
-	EndDo;	
-EndProcedure
-
-&AtServerNoContext
-Procedure RecalculateInvoiceQuantity(ArrayOfRows)
-	For Each Row In ArrayOfRows Do
-		Row.Unit = ?(ValueIsFilled(Row.ItemKey.Unit), 
-		Row.ItemKey.Unit, Row.ItemKey.Item.Unit);
-		DocumentsServer.RecalculateQuantityInRow(Row);
-	EndDo;
-EndProcedure	
-
-&AtClient
 Procedure GoodsReceiptsTreeQuantityOnChange(Item)
-	CurrentRow = Items.GoodsReceiptsTree.CurrentData;
-	If CurrentRow = Undefined Then
-		Return;
-	EndIf;
-	RowParent = CurrentRow.GetParent();
-	TotalQuantity = 0;
-	For Each Row In RowParent.GetItems() Do
-		TotalQuantity = TotalQuantity + Row.Quantity;
-	EndDo;
-	RowParent.Quantity = TotalQuantity;
-	ArrayOfRows = Object.GoodsReceipts.FindRows(
-	New Structure("Key, GoodsReceipt", CurrentRow.Key, CurrentRow.GoodsReceipt));
-	For Each Row In ArrayOfRows Do
-		Row.Quantity = CurrentRow.Quantity;
-	EndDo;
+	DocumentsClient.TradeDocumentsTreeQuantityOnChange(Object, ThisObject, 
+		"GoodsReceipts", "GoodsReceiptsTree", "GoodsReceipt");
 EndProcedure
 
 &AtClient

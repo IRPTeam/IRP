@@ -416,3 +416,24 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
+
+#Region ShipmentConfirmationsTree
+
+&AtClient
+Procedure ShipmentConfirmationsTreeQuantityOnChange(Item)
+	DocumentsClient.TradeDocumentsTreeQuantityOnChange(Object, ThisObject, 
+		"ShipmentConfirmations", "ShipmentConfirmationsTree", "ShipmentConfirmation");
+EndProcedure
+
+&AtClient
+Procedure ShipmentConfirmationsTreeBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	Cancel = True;
+EndProcedure
+
+&AtClient
+Procedure ShipmentConfirmationsTreeBeforeDeleteRow(Item, Cancel)
+	Cancel = True;
+EndProcedure
+
+#EndRegion
+

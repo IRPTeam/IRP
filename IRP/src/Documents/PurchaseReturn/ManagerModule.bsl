@@ -62,6 +62,18 @@ EndFunction
 Function GetQueryTextPurchaseReturnItemList()
 	Return
 		"SELECT
+		|	PurchaseReturnShipmentConfirmations.Key
+		|INTO ShipmentConfirmations
+		|FROM
+		|	Document.PurchaseReturn.ShipmentConfirmations AS PurchaseReturnShipmentConfirmations
+		|WHERE
+		|	PurchaseReturnShipmentConfirmations.Ref = &Ref
+		|GROUP BY
+		|	PurchaseReturnShipmentConfirmations.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
 		|	PurchaseReturnItemList.Ref.Company AS Company,
 		|	PurchaseReturnItemList.Store AS Store,
 		|	PurchaseReturnItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
@@ -97,9 +109,12 @@ Function GetQueryTextPurchaseReturnItemList()
 		|		WHEN PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
 		|			THEN TRUE
 		|		ELSE FALSE
-		|	END AS IsService
+		|	END AS IsService,
+		|	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
+		|		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
+		|		ON PurchaseReturnItemList.Key = ShipmentConfirmations.Key
 		|WHERE
 		|	PurchaseReturnItemList.Ref = &Ref";
 EndFunction
@@ -124,7 +139,8 @@ Function GetQueryTextQueryTable()
 		|	QueryTable.BasisDocument,
 		|	QueryTable.NetAmount,
 		|	QueryTable.IsService,
-		|	QueryTable.RowKey
+		|	QueryTable.RowKey,
+		|	QueryTable.ShipmentConfirmationExists
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable
@@ -228,6 +244,8 @@ Function GetQueryTextQueryTable()
 		|WHERE
 		|	tmp.PurchaseReturnOrder = VALUE(Document.PurchaseReturnOrder.EmptyRef)
 		|	AND Not tmp.IsService
+		|	AND NOT tmp.ShipmentConfirmationExists
+//		|	AND NOT tmp.UseShipmentConfirmation
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -278,6 +296,7 @@ Function GetQueryTextQueryTable()
 		|WHERE
 		|	tmp.UseShipmentConfirmation
 		|	AND Not tmp.IsService
+	//	|	AND Not tmp.ShipmentConfirmationExists
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -302,7 +321,8 @@ Function GetQueryTextQueryTable()
 		|FROM
 		|	tmp AS tmp
 		|WHERE
-		|	NOT tmp.UseShipmentConfirmation
+		|	NOT tmp.ShipmentConfirmationExists
+		|	AND NOT tmp.UseShipmentConfirmation
 		|	AND Not tmp.IsService
 		|GROUP BY
 		|	tmp.Company,
@@ -411,52 +431,7 @@ Function GetQueryTextQueryTable()
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
-	DataMapWithLockFields = New Map();
-	
-	// OrderBalance
-	OrderBalance = AccumulationRegisters.OrderBalance.GetLockFields(DocumentDataTables.OrderBalance);
-	DataMapWithLockFields.Insert(OrderBalance.RegisterName, OrderBalance.LockInfo);
-	
-	// PurchaseTurnovers
-	PurchaseTurnovers = AccumulationRegisters.PurchaseTurnovers.GetLockFields(DocumentDataTables.PurchaseTurnovers);
-	DataMapWithLockFields.Insert(PurchaseTurnovers.RegisterName, PurchaseTurnovers.LockInfo);
-	
-	// PurchaseReturnTurnovers
-	PurchaseReturnTurnovers = AccumulationRegisters.PurchaseReturnTurnovers.GetLockFields(DocumentDataTables.PurchaseReturnTurnovers);
-	DataMapWithLockFields.Insert(PurchaseReturnTurnovers.RegisterName, PurchaseReturnTurnovers.LockInfo);
-	
-	// InventoryBalance
-	InventoryBalance = AccumulationRegisters.InventoryBalance.GetLockFields(DocumentDataTables.InventoryBalance);
-	DataMapWithLockFields.Insert(InventoryBalance.RegisterName, InventoryBalance.LockInfo);
-	
-	// OrderReservation 
-	OrderReservation = AccumulationRegisters.OrderReservation.GetLockFields(DocumentDataTables.OrderReservation);
-	DataMapWithLockFields.Insert(OrderReservation.RegisterName, OrderReservation.LockInfo);
-	// StockReservation  
-	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
-	// GoodsInTransitOutgoing 
-	GoodsInTransitOutgoing = AccumulationRegisters.GoodsInTransitOutgoing.GetLockFields(DocumentDataTables.GoodsInTransitOutgoing);
-	DataMapWithLockFields.Insert(GoodsInTransitOutgoing.RegisterName, GoodsInTransitOutgoing.LockInfo);
-	
-	// StockBalance	
-	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance);
-	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
-	// PartnerArTransactions
-	PartnerArTransactions = AccumulationRegisters.PartnerArTransactions.GetLockFields(DocumentDataTables.PartnerArTransactions);
-	DataMapWithLockFields.Insert(PartnerArTransactions.RegisterName, PartnerArTransactions.LockInfo);
-	
-	// AdvanceFromCustomers (Lock use In PostingCheckBeforeWrite)
-	AdvanceFromCustomers = AccumulationRegisters.AdvanceFromCustomers.GetLockFields(DocumentDataTables.AdvanceFromCustomers_Lock);
-	DataMapWithLockFields.Insert(AdvanceFromCustomers.RegisterName, AdvanceFromCustomers.LockInfo);
-	
-	// ReconciliationStatement
-	ReconciliationStatement = AccumulationRegisters.ReconciliationStatement.GetLockFields(DocumentDataTables.ReconciliationStatement);
-	DataMapWithLockFields.Insert(ReconciliationStatement.RegisterName, ReconciliationStatement.LockInfo);
-	
+	DataMapWithLockFields = New Map();	
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -666,17 +641,7 @@ Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Und
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// StockReservation
-	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation_Exists);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
-	// StockBalance
-	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Exists);
-	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -725,27 +690,65 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
-	QueryArray.Add(R4014B_SerialLotNumber());	
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R1031B_ReceiptInvoicing());	
 	Return QueryArray;
 EndFunction
 
 Function ItemList()
 	Return
 		"SELECT
-		|	OpeningEntryInventory.Ref,
-		|	OpeningEntryInventory.Key,
-		|	OpeningEntryInventory.ItemKey,
-		|	OpeningEntryInventory.Store,
-		|	OpeningEntryInventory.Quantity,
-		|	NOT OpeningEntryInventory.SerialLotNumber = VALUE(Catalog.SerialLotNumbers.EmptyRef) AS isSerialLotNumberSet,
-		|	OpeningEntryInventory.SerialLotNumber,
-		|	OpeningEntryInventory.Ref.Date AS Period,
-		|	OpeningEntryInventory.Ref.Company AS Company
+		|	ShipmentConfirmations.Key,
+		|	ShipmentConfirmations.ShipmentConfirmation,
+		|	SUM(ShipmentConfirmations.Quantity) AS Quantity
+		|INTO ShipmentConfirmations
+		|FROM
+		|	Document.PurchaseReturn.ShipmentConfirmations AS ShipmentConfirmations
+		|WHERE
+		|	ShipmentConfirmations.Ref = &Ref
+		|GROUP BY
+		|	ShipmentConfirmations.Key,
+		|	ShipmentConfirmations.ShipmentConfirmation
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	PurchaseReturnItemList.Ref.Company AS Company,
+		|	PurchaseReturnItemList.Store AS Store,
+		|	PurchaseReturnItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
+		|	PurchaseReturnItemList.ItemKey AS ItemKey,
+		|	PurchaseReturnItemList.PurchaseReturnOrder AS PurchaseReturnOrder,
+		|	PurchaseReturnItemList.Ref AS PurchaseReturn,
+		|	CASE
+		|		WHEN PurchaseReturnItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			THEN PurchaseReturnItemList.Ref
+		|		ELSE UNDEFINED
+		|	END AS BasisDocument,
+		|	PurchaseReturnItemList.QuantityInBaseUnit AS Quantity,
+		|	PurchaseReturnItemList.TotalAmount AS TotalAmount,
+		|	PurchaseReturnItemList.Ref.Partner AS Partner,
+		|	PurchaseReturnItemList.Ref.LegalName AS LegalName,
+		|	CASE
+		|		WHEN PurchaseReturnItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+		|		AND PurchaseReturnItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+		|			THEN PurchaseReturnItemList.Ref.Agreement.StandardAgreement
+		|		ELSE PurchaseReturnItemList.Ref.Agreement
+		|	END AS Agreement,
+		|	ISNULL(PurchaseReturnItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
+		|	PurchaseReturnItemList.Ref.Date AS Period,
+		|	CASE
+		|		WHEN PurchaseReturnItemList.PurchaseInvoice.Ref IS NULL
+		|		OR VALUETYPE(PurchaseReturnItemList.PurchaseInvoice) <> TYPE(Document.PurchaseInvoice)
+		|			THEN PurchaseReturnItemList.Ref
+		|		ELSE PurchaseReturnItemList.PurchaseInvoice
+		|	END AS SalesInvoice,
+		|	PurchaseReturnItemList.Key,
+		|	PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService
 		|INTO ItemList
 		|FROM
-		|	Document.OpeningEntry.Inventory AS OpeningEntryInventory
+		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
 		|WHERE
-		|	OpeningEntryInventory.Ref = &Ref";
+		|	PurchaseReturnItemList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()
@@ -778,6 +781,25 @@ Function R4014B_SerialLotNumber()
 		|WHERE 
 		|	TRUE";
 
+EndFunction
+
+Function R1031B_ReceiptInvoicing()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ShipmentConfirmations.ShipmentConfirmation AS Basis,
+		|	ShipmentConfirmations.Quantity,
+		|	ItemList.Company,
+		|	ItemList.Period,
+		|	ItemList.ItemKey,
+		|	ItemList.Store
+		|INTO R1031B_ReceiptInvoicing
+		|FROM
+		|	ItemList AS ItemList
+		|		INNER JOIN ShipmentConfirmations AS ShipmentConfirmations
+		|		ON ItemList.Key = ShipmentConfirmations.Key
+		|WHERE
+		|	TRUE";
 EndFunction
 
 #EndRegion

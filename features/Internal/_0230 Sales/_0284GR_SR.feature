@@ -144,12 +144,12 @@ Scenario: _028402 check GR - SR movements
 			| 'Number'                      |
 			| '$$NumberGoodsReceipt028401$$' |
 		And I click "Registrations report" button
-		And I select "R1031 Receipt invoicing" exact value from "Register" drop-down list
+		And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains lines
 			| '$$GoodsReceipt028401$$'              | ''            | ''                           | ''          | ''             | ''         | ''                       | ''          |
 			| 'Document registrations records'      | ''            | ''                           | ''          | ''             | ''         | ''                       | ''          |
-			| 'Register  "R1031 Receipt invoicing"' | ''            | ''                           | ''          | ''             | ''         | ''                       | ''          |
+			| 'Register  "R2031 Shipment invoicing"' | ''            | ''                           | ''          | ''             | ''         | ''                       | ''          |
 			| ''                                    | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''         | ''                       | ''          |
 			| ''                                    | ''            | ''                           | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                  | 'Item key'  |
 			| ''                                    | 'Receipt'     | '$$DateGoodsReceipt028401$$' | '1'         | 'Main Company' | 'Store 02' | '$$GoodsReceipt028401$$' | '38/Yellow' |
@@ -178,12 +178,12 @@ Scenario: _028402 check GR - SR movements
 			| 'Number'                      |
 			| '$$NumberSalesReturn028401$$' |
 		And I click "Registrations report" button
-		And I select "R1031 Receipt invoicing" exact value from "Register" drop-down list
+		And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains lines
 			| '$$SalesReturn028401$$'               | ''            | ''                          | ''          | ''             | ''         | ''                       | ''          |
 			| 'Document registrations records'      | ''            | ''                          | ''          | ''             | ''         | ''                       | ''          |
-			| 'Register  "R1031 Receipt invoicing"' | ''            | ''                          | ''          | ''             | ''         | ''                       | ''          |
+			| 'Register  "R2031 Shipment invoicing"' | ''            | ''                          | ''          | ''             | ''         | ''                       | ''          |
 			| ''                                    | 'Record type' | 'Period'                    | 'Resources' | 'Dimensions'   | ''         | ''                       | ''          |
 			| ''                                    | ''            | ''                          | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                  | 'Item key'  |
 			| ''                                    | 'Expense'     | '$$DateSalesReturn028401$$' | '1'         | 'Main Company' | 'Store 02' | '$$GoodsReceipt028401$$' | '38/Yellow' |

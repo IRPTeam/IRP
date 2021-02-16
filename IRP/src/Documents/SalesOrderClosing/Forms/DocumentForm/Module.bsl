@@ -3,11 +3,6 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	If Object.Ref.isEmpty() AND NOT Parameters.SalesOrder.IsEmpty() Then
-		Object.SalesOrder = Parameters.SalesOrder;
-		Object.CloseOrder = True;
-		FillByOrderAtServer();
-	EndIf;
 	DocSalesOrderServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);	
@@ -578,6 +573,7 @@ Procedure FillByOrder()
 	FillByOrderAtServer();
 	Cancel = False;
 	DocSalesOrderClient.OnOpen(Object, ThisObject, Cancel);
+	DocSalesOrderClient.ItemListQuantityOnChange(Object, ThisObject, Undefined);
 	UpdateTotalAmounts();
 EndProcedure
 
@@ -594,10 +590,11 @@ Procedure FillByOrderAtServer()
 	For Each Table In SalesOrderData.Tables Do
 		Object[Table.Key].Load(Table.Value);
 	EndDo;
-	
+
 	Cancel = False;
 	StandardProcessing = True;
 	DocSalesOrderServer.OnReadAtServer(Object, ThisObject, Object);
 	DocSalesOrderServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+
 EndProcedure
 #EndRegion

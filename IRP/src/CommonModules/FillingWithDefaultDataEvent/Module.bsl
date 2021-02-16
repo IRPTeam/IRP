@@ -49,7 +49,8 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 	
 	StatusAttribute = Attributes.Find("Status");
 	If StatusAttribute <> Undefined
-		And Source.Metadata().Attributes.Find("Status").Type = New TypeDescription("CatalogRef.ObjectStatuses") Then
+		And Source.Metadata().Attributes.Find("Status").Type = New TypeDescription("CatalogRef.ObjectStatuses")
+		And Not ValueIsFilled(Source.Status) Then
 		Source.Status = ObjectStatusesServer.GetStatusByDefault(Source.Ref);
 	EndIf;
 EndProcedure

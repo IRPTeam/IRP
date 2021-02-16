@@ -406,155 +406,155 @@ Scenario: _010011 adding gps to a Contact info type
 		And I select current line in "List" table
 		And I finish line editing in "ExternalDataProcess" table
 		And I click "Save and close" button
-	* Adding address structure by gps for Ukraine
-		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'GPS Ukraine' |
-		And I select current line in "List" table		
-		And in the table "ExternalDataProcess" I click "Set settings" button
-		Then "Coordinates" window is opened
-		* Specify the address that will be refilled when selecting gps
-			And I click Select button of "Structured address" field
-			Then "Contact info types" window is opened
-			And I go to line in "List" table
-				| Description       |
-				| Google Addreses |
-			And I select current line in "List" table
-		And in the table "Levels" I click "Get all levels" button
-		And Delay 2
-		And I input "46,477400" text in "Lat" field
-		And Delay 2
-		And I input "30,732872" text in "Lng" field
-		And I go to line in "AllLevels" table
-			| Level     |
-			| political |
-		And I go to line in "AllLevels" table
-			| Level   |
-			| country |
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And I go to line in "AllLevels" table
-			| Level    |
-			| locality |
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And I go to line in "AllLevels" table
-			| Level |
-			| route |
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveDown"
-		And I go to line in "AllLevels" table
-			| Level     |
-			| political |
-		And I delete a line in "AllLevels" table
-		And I delete a line in "AllLevels" table
-		And I delete a line in "AllLevels" table
-		And I delete a line in "AllLevels" table
-		And I click "Ok" button
-		Then "Coordinates" window is opened
-		And I click "Ok" button
-	* Filling in settings for gps coordinates
-		And I move to "Related values" tab
-		And in the table "RelatedValues" I click the button named "RelatedValuesAdd"
-		And I click choice button of "Contact info type" attribute in "RelatedValues" table
-		Then "Contact info types" window is opened
-		And I go to line in "List" table
-			| 'Description'                  |
-			| 'Location address (Partner)' |
-		And I select current line in "List" table
-		And Delay 1
-		And I finish line editing in "RelatedValues" table
-		And I click "Save and close" button
-		And Delay 5
-		And I enter the UniqueID String field value type
-	* Check for created items
-		And "List" table contains lines
-		| 'Description'                     |
-		| 'GPS Ukraine'    |	
-	* Adding gps address structure for Turkey
-		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'GPS Turkey' |
-		And I select current line in "List" table
-		And in the table "ExternalDataProcess" I click "Set settings" button
-		* Specify the address that will be refilled when selecting gps
-			And I click Select button of "Structured address" field
-			Then "Contact info types" window is opened
-			And I go to line in "List" table
-				| Description       |
-				| Google Addreses |
-			And I select current line in "List" table
-		And in the table "Levels" I click "Get all levels" button
-		And Delay 2
-		And I input "40,983577" text in "Lat" field
-		And Delay 2
-		And I input "29,078498" text in "Lng" field
-		And I go to line in "AllLevels" table
-		| Level   | Value  |
-		| country | Turkey |
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And I go to line in "AllLevels" table
-			| Level                       |
-			| administrative_area_level_1 |
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And I go to line in "AllLevels" table
-			| Level                       |
-			| administrative_area_level_2 |
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And I go to line in "AllLevels" table
-			| Level | Value            |
-			| route | Hafız İmam Sokak |
-		And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
-		And I go to line in "AllLevels" table
-			| Level                       |
-			| administrative_area_level_4 |
-		And I delete a line in "AllLevels" table
-		And I delete a line in "AllLevels" table
-		And I delete a line in "AllLevels" table
-		And I click "Ok" button
-		And I click "Ok" button
-	* Filling in gps coordinates settings
-		And I move to "Related values" tab
-		And in the table "RelatedValues" I click the button named "RelatedValuesAdd"
-		And I click choice button of "Contact info type" attribute in "RelatedValues" table
-		Then "Contact info types" window is opened
-		And I go to line in "List" table
-			| 'Description'                  |
-			| 'Location address (Partner)' |
-		And I select current line in "List" table
-		And Delay 1
-		And I finish line editing in "RelatedValues" table
-		And I click "Save and close" button
-		And Delay 5
-		And I enter a Unique ID String field type value for the GPS Turkey String
-	* Check for created items
-		And "List" table contains lines
-		| 'Description'                     |
-		| 'GPS Turkey'    |
+	// * Adding address structure by gps for Ukraine
+	// 	Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
+	// 	And I go to line in "List" table
+	// 		| 'Description' |
+	// 		| 'GPS Ukraine' |
+	// 	And I select current line in "List" table		
+	// 	And in the table "ExternalDataProcess" I click "Set settings" button
+	// 	Then "Coordinates" window is opened
+	// 	* Specify the address that will be refilled when selecting gps
+	// 		And I click Select button of "Structured address" field
+	// 		Then "Contact info types" window is opened
+	// 		And I go to line in "List" table
+	// 			| Description       |
+	// 			| Google Addreses |
+	// 		And I select current line in "List" table
+	// 	And in the table "Levels" I click "Get all levels" button
+	// 	And Delay 2
+	// 	And I input "46,477400" text in "Lat" field
+	// 	And Delay 2
+	// 	And I input "30,732872" text in "Lng" field
+	// 	And I go to line in "AllLevels" table
+	// 		| Level     |
+	// 		| political |
+	// 	And I go to line in "AllLevels" table
+	// 		| Level   |
+	// 		| country |
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And I go to line in "AllLevels" table
+	// 		| Level    |
+	// 		| locality |
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And I go to line in "AllLevels" table
+	// 		| Level |
+	// 		| route |
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveDown"
+	// 	And I go to line in "AllLevels" table
+	// 		| Level     |
+	// 		| political |
+	// 	And I delete a line in "AllLevels" table
+	// 	And I delete a line in "AllLevels" table
+	// 	And I delete a line in "AllLevels" table
+	// 	And I delete a line in "AllLevels" table
+	// 	And I click "Ok" button
+	// 	Then "Coordinates" window is opened
+	// 	And I click "Ok" button
+	// * Filling in settings for gps coordinates
+	// 	And I move to "Related values" tab
+	// 	And in the table "RelatedValues" I click the button named "RelatedValuesAdd"
+	// 	And I click choice button of "Contact info type" attribute in "RelatedValues" table
+	// 	Then "Contact info types" window is opened
+	// 	And I go to line in "List" table
+	// 		| 'Description'                  |
+	// 		| 'Location address (Partner)' |
+	// 	And I select current line in "List" table
+	// 	And Delay 1
+	// 	And I finish line editing in "RelatedValues" table
+	// 	And I click "Save and close" button
+	// 	And Delay 5
+	// 	And I enter the UniqueID String field value type
+	// * Check for created items
+	// 	And "List" table contains lines
+	// 	| 'Description'                     |
+	// 	| 'GPS Ukraine'    |	
+	// * Adding gps address structure for Turkey
+	// 	Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
+	// 	And I go to line in "List" table
+	// 		| 'Description' |
+	// 		| 'GPS Turkey' |
+	// 	And I select current line in "List" table
+	// 	And in the table "ExternalDataProcess" I click "Set settings" button
+	// 	* Specify the address that will be refilled when selecting gps
+	// 		And I click Select button of "Structured address" field
+	// 		Then "Contact info types" window is opened
+	// 		And I go to line in "List" table
+	// 			| Description       |
+	// 			| Google Addreses |
+	// 		And I select current line in "List" table
+	// 	And in the table "Levels" I click "Get all levels" button
+	// 	And Delay 2
+	// 	And I input "40,983577" text in "Lat" field
+	// 	And Delay 2
+	// 	And I input "29,078498" text in "Lng" field
+	// 	And I go to line in "AllLevels" table
+	// 	| Level   | Value  |
+	// 	| country | Turkey |
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And I go to line in "AllLevels" table
+	// 		| Level                       |
+	// 		| administrative_area_level_1 |
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And I go to line in "AllLevels" table
+	// 		| Level                       |
+	// 		| administrative_area_level_2 |
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And I go to line in "AllLevels" table
+	// 		| Level | Value            |
+	// 		| route | Hafız İmam Sokak |
+	// 	And in the table "AllLevels" I click the button named "AllLevelsMoveUp"
+	// 	And I go to line in "AllLevels" table
+	// 		| Level                       |
+	// 		| administrative_area_level_4 |
+	// 	And I delete a line in "AllLevels" table
+	// 	And I delete a line in "AllLevels" table
+	// 	And I delete a line in "AllLevels" table
+	// 	And I click "Ok" button
+	// 	And I click "Ok" button
+	// * Filling in gps coordinates settings
+	// 	And I move to "Related values" tab
+	// 	And in the table "RelatedValues" I click the button named "RelatedValuesAdd"
+	// 	And I click choice button of "Contact info type" attribute in "RelatedValues" table
+	// 	Then "Contact info types" window is opened
+	// 	And I go to line in "List" table
+	// 		| 'Description'                  |
+	// 		| 'Location address (Partner)' |
+	// 	And I select current line in "List" table
+	// 	And Delay 1
+	// 	And I finish line editing in "RelatedValues" table
+	// 	And I click "Save and close" button
+	// 	And Delay 5
+	// 	And I enter a Unique ID String field type value for the GPS Turkey String
+	// * Check for created items
+	// 	And "List" table contains lines
+	// 	| 'Description'                     |
+	// 	| 'GPS Turkey'    |
 
 
 
@@ -889,45 +889,45 @@ Scenario: _010016 address structure input
 		And I click "Save and close" button
 
 
-Scenario: _010017 gps coordinates on the map for clients from different countries and filling in the address from Google map
-	* Opening the catalog Partners
-		Given I open hyperlink "e1cib/list/Catalog.Partners"
-	* Filling in gps coordinates for Ferron BP client by searching for the address on the map (Ukraine)
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP' |
-		And I select current line in "List" table
-		And I move to "Contact information" tab
-		And I input "Odessa, Bunina, 2, №32" text in "Location address (Partner)" field
-		And I click "Save" button
-		And I click Open button of "GPS Ukraine" field
-		And Delay 5
-		And I click "Update address by GPS" button
-		And Delay 10
-		And I click "Ok" button
-		And Delay 10
-	* Check gps coordinates saved
-		Then the form attribute named "_GPS" became equal to "46.48082,30.748159"
-		And the field named "_Adr_10" is filled
-		And I click "Save and close" button
-		And I close all client application windows
-	* Filling in gps coordinates for Kalipso client by searching for the address on the map (Turkey)
-		Given I open hyperlink "e1cib/list/Catalog.Partners"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso' |
-		And I select current line in "List" table
-		And I move to "Contact information" tab
-		And I click Open button of "GPS Turkey" field
-		And I click "Update address by GPS" button
-		And Delay 10
-		And I click "Ok" button
-		And Delay 10
-	* Check gps coordinates saved
-		And the field named "_GPSTurkey" is filled
-		And the field named "_Adr_10" is filled
-		And I click "Save and close" button
-		And I close all client application windows
+// Scenario: _010017 gps coordinates on the map for clients from different countries and filling in the address from Google map
+// 	* Opening the catalog Partners
+// 		Given I open hyperlink "e1cib/list/Catalog.Partners"
+// 	* Filling in gps coordinates for Ferron BP client by searching for the address on the map (Ukraine)
+// 		And I go to line in "List" table
+// 			| 'Description' |
+// 			| 'Ferron BP' |
+// 		And I select current line in "List" table
+// 		And I move to "Contact information" tab
+// 		And I input "Odessa, Bunina, 2, №32" text in "Location address (Partner)" field
+// 		And I click "Save" button
+// 		And I click Open button of "GPS Ukraine" field
+// 		And Delay 5
+// 		And I click "Update address by GPS" button
+// 		And Delay 10
+// 		And I click "Ok" button
+// 		And Delay 10
+// 	* Check gps coordinates saved
+// 		Then the form attribute named "_GPS" became equal to "46.48082,30.748159"
+// 		And the field named "_Adr_10" is filled
+// 		And I click "Save and close" button
+// 		And I close all client application windows
+// 	* Filling in gps coordinates for Kalipso client by searching for the address on the map (Turkey)
+// 		Given I open hyperlink "e1cib/list/Catalog.Partners"
+// 		And I go to line in "List" table
+// 			| 'Description' |
+// 			| 'Kalipso' |
+// 		And I select current line in "List" table
+// 		And I move to "Contact information" tab
+// 		And I click Open button of "GPS Turkey" field
+// 		And I click "Update address by GPS" button
+// 		And Delay 10
+// 		And I click "Ok" button
+// 		And Delay 10
+// 	* Check gps coordinates saved
+// 		And the field named "_GPSTurkey" is filled
+// 		And the field named "_Adr_10" is filled
+// 		And I click "Save and close" button
+// 		And I close all client application windows
 
 
 Scenario: _010018 command opening contact information in the partner list

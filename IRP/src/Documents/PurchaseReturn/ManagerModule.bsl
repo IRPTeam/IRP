@@ -245,7 +245,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.PurchaseReturnOrder = VALUE(Document.PurchaseReturnOrder.EmptyRef)
 		|	AND Not tmp.IsService
 		|	AND NOT tmp.ShipmentConfirmationExists
-		|	AND NOT tmp.UseShipmentConfirmation
+//		|	AND NOT tmp.UseShipmentConfirmation
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,

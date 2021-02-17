@@ -1,12 +1,18 @@
 
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
-	ArrayFillingValues = GetArrayOfFillingValues(CommandParameter);
+	ArrayOfFillingValues = GetArrayOfFillingValues(CommandParameter);
+	If Not ArrayOfFillingValues.Count() Then
+		CommonFunctionsClientServer.ShowUsersMessage("nothing to fill");
+	EndIf;
+	For Each FillingValues In ArrayOfFillingValues Do
+		FormParameters = New Structure("FillingValues", FillingValues);
+		OpenForm("Document.ShipmentConfirmation.ObjectForm", FormParameters, , New UUID());
+	EndDo;
 EndProcedure
 
-&AtServer
 Function GetArrayOfFillingValues(Basises)
-	//Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, ManagerSegment
-	
-	BasisesTable = RowIDInfo.GetBasisesFor_SalesInvoice(New Structure("Basises", Basises));
+	BasisesTable = RowIDInfo.GetBasisesFor_ShipmentConfirmation(New Structure("Basises", Basises));
+	ExtractedData = RowIDInfo.ExtractData(BasisesTable);
+	Return RowIDInfo.ConvertDataToFillingValues(Metadata.Documents.ShipmentConfirmation, ExtractedData);	
 EndFunction

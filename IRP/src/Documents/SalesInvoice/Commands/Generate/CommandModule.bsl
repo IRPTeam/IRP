@@ -11,21 +11,9 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	EndDo;
 EndProcedure
 
-Function GetArrayOfFillingValues(Basises)
-	
+Function GetArrayOfFillingValues(Basises)	
 	BasisesTable = RowIDInfo.GetBasisesFor_SalesInvoice(New Structure("Basises", Basises));
-	
-	Basises_SalesOrder = BasisesTable.Copy();
-	Basises_SalesOrder.Clear();
-	For Each Row In BasisesTable Do
-		If TypeOf(Row.Basis) = Type("DocumentRef.SalesOrder") Then
-			FillPropertyValues(Basises_SalesOrder.Add(), Row);
-		EndIf;
-	EndDo;
-	
-	ExtractedData = New Array();
-	ExtractedData.Add(RowIDInfo.ExtractData_SalesOrder(Basises_SalesOrder));
-	
+	ExtractedData = RowIDInfo.ExtractData(BasisesTable);
 	Return RowIDInfo.ConvertDataToFillingValues(Metadata.Documents.SalesInvoice, ExtractedData);	
 EndFunction
 

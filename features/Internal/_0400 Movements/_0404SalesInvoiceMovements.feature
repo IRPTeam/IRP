@@ -95,8 +95,7 @@ Scenario: _040130 preparation (Sales invoice)
 			| "Documents.SalesInvoice.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesInvoice.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
-	And I execute 1C:Enterprise script at server
- 			| "Documents.SalesOrderClosing.FindByNumber(1).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+			| "Documents.SalesInvoice.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
 
 //1
 
@@ -428,13 +427,52 @@ Scenario: _0401442 check Sales invoice movements by the Register  "R4034 Schedul
 			| 'Register  "R4034 Scheduled goods shipments"' | ''            | ''                    | ''          | ''             | ''                                        | ''         | ''         | ''                                     |
 			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                        | ''         | ''         | ''                                     |
 			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Basis'                                   | 'Store'    | 'Item key' | 'Row key'                              |
-			| ''                                            | 'Expense'     | '28.01.2021 18:49:39' | '1'         | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Store 02' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
+			| ''                                            | 'Expense'     | '28.01.2021 18:49:39' | '5'         | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Store 02' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
 			| ''                                            | 'Expense'     | '28.01.2021 18:49:39' | '10'        | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Store 02' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' |
 	
 		And I close all client application windows
 		
+Scenario: _0401443 check Sales invoice movements by the Register  "R4011 Free stocks" (SO-SC-SI, SI,SC>SO)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Check movements by the Register  "R4011 Free stocks"
+		And I click "Registrations report" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4011 Free stocks"' |
+		And I close all client application windows
 
-		
+Scenario: _0401444 check Sales invoice movements by the Register  "R4012 Stock Reservation" (SO-SC-SI, SI,SC>SO)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Check movements by the Register  "R4012 Stock Reservation"
+		And I click "Registrations report" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4012 Stock Reservation"' |
+		And I close all client application windows
+
+Scenario: _0401445 check Sales invoice movements by the Register  "R4010 Actual stocks" (SO-SC-SI, SI,SC>SO)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Check movements by the Register  "R4010 Actual stocks"
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4010 Actual stocks"' |
+		And I close all client application windows	
 
 //3
 
@@ -493,7 +531,7 @@ Scenario: _0401383 check Sales invoice movements by the Register  "R4011 Free st
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
+		And "ResultTable" spreadsheet document does not contain values
 			| 'Sales invoice 3 dated 28.01.2021 18:50:57' | ''            | ''                    | ''          | ''           | ''         |
 			| 'Document registrations records'            | ''            | ''                    | ''          | ''           | ''         |
 			| 'Register  "R4011 Free stocks"'             | ''            | ''                    | ''          | ''           | ''         |
@@ -502,7 +540,24 @@ Scenario: _0401383 check Sales invoice movements by the Register  "R4011 Free st
 			| ''                                          | 'Expense'     | '28.01.2021 18:50:57' | '10'        | 'Store 02'   | '36/Red'   |
 			| ''                                          | 'Expense'     | '28.01.2021 18:50:57' | '24'        | 'Store 02'   | '37/18SD'  |
 		And I close all client application windows 
-		
+
+Scenario: _0401384 check Sales invoice movements by the Register  "R4012 Stock Reservation" SO-SI-SC (use SC)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '3' |
+	* Check movements by the Register  "R4012 Stock Reservation"
+		And I click "Registrations report" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4012 Stock Reservation"'                     |
+			
+		And I close all client application windows
+
+
+
 //4
 
 Scenario: _0401314 check Sales invoice movements by the Register  "R5011 Partners aging" (use Aging)
@@ -576,14 +631,8 @@ Scenario: _0401316 check Sales invoice movements by the Register  "R4012 Stock R
 		And I click "Registrations report" button
 		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''           | ''         | ''                                          |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''           | ''         | ''                                          |
-			| 'Register  "R4012 Stock Reservation"'       | ''            | ''                    | ''          | ''           | ''         | ''                                          |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                                          |
-			| ''                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Order'                                     |
-			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '1'         | 'Store 02'   | 'XS/Blue'  | 'Sales invoice 4 dated 16.02.2021 10:59:49' |
-			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '24'        | 'Store 02'   | '37/18SD'  | 'Sales invoice 4 dated 16.02.2021 10:59:49' |
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4012 Stock Reservation"'       | 
 		And I close all client application windows
 
 Scenario: _0401317 check Sales invoice movements by the Register  "R2031 Shipment invoicing" (SI first, use SC)
@@ -604,6 +653,25 @@ Scenario: _0401317 check Sales invoice movements by the Register  "R2031 Shipmen
 			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                                     | 'Item key' |
 			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '1'         | 'Main Company' | 'Store 02' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'XS/Blue'  |
 			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '24'        | 'Main Company' | 'Store 02' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | '37/18SD'  |
+		And I close all client application windows
+
+Scenario: _0401318 check Sales invoice movements by the Register  "R4011 Free stocks" (SI first, not use SC)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '4' |
+	* Check movements by the Register  "R4011 Free stocks"
+		And I click "Registrations report" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''           | ''         |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''           | ''         |
+			| 'Register  "R4011 Free stocks"'             | ''            | ''                    | ''          | ''           | ''         |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
+			| ''                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
+			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '20'        | 'Store 02'   | '36/Red'   |
 		And I close all client application windows
 
 		

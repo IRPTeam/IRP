@@ -424,11 +424,11 @@ Scenario: _029902 create SI for SO without reserve and check its movements (SO-S
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 			| 'Register  "R4011 Free stocks"' | '' | '' | '' | '' | '' |
-	* Check that there is no movements in the Register  "R2013 Procurement of sales orders"
-		And I select "R2013 Procurement of sales orders" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R2013 Procurement of sales orders"' | '' | '' | '' | '' | '' |
+	// * Check that there is no movements in the Register  "R2013 Procurement of sales orders"
+	// 	And I select "R2013 Procurement of sales orders" exact value from "Register" drop-down list
+	// 	And I click "Generate report" button
+	// 	And "ResultTable" spreadsheet document does not contain values
+	// 		| 'Register  "R2013 Procurement of sales orders"' | '' | '' | '' | '' | '' |
 	* Check that there is no movements in the Register  "Register  "Order reservation"
 		And I select "Order reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -676,7 +676,13 @@ Scenario: _029904 create Shipment confirmation for SO without reserve and check 
 			And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| 'Register "R2011 Shipment of sales orders"' |
+				| 'Shipment confirmation 5 dated 17.02.2021 09:36:22' | ''            | ''                    | ''          | ''             | ''                                        | ''          |
+				| 'Document registrations records'                    | ''            | ''                    | ''          | ''             | ''                                        | ''          |
+				| 'Register  "R2011 Shipment of sales orders"'        | ''            | ''                    | ''          | ''             | ''                                        | ''          |
+				| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                        | ''          |
+				| ''                                                  | ''            | ''                    | 'Quantity'  | 'Company'      | 'Order'                                   | 'Item key'  |
+				| ''                                                  | 'Expense'     | '17.02.2021 09:36:22' | '31'        | 'Main Company' | 'Sales order 5 dated 17.02.2021 09:36:06' | '38/Yellow' |
+				| ''                                                  | 'Expense'     | '17.02.2021 09:36:22' | '40'        | 'Main Company' | 'Sales order 5 dated 17.02.2021 09:36:06' | '38/Black'  |
 		* Check SC movements Register  "R4011B_FreeStocks")
 			And I select "R4011 Free stocks" exact value from "Register" drop-down list
 			And I click "Generate report" button
@@ -873,11 +879,11 @@ Scenario: _029905 create Sales ivoice for SO (SC first) without reserve and chec
 			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Item key'  |
 			| ''                                          | 'Expense'     | '$$DateSalesInvoice029903$$' | '31'        | 'Main Company' | 'Store 02' | '38/Yellow' |
 			| ''                                          | 'Expense'     | '$$DateSalesInvoice029903$$' | '40'        | 'Main Company' | 'Store 02' | '38/Black'  |
-		* Check that there is no movements in the Register  "R2013 Procurement of sales orders"
-			And I select "R2013 Procurement of sales orders" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document does not contain values
-				| 'Register  "R2013 Procurement of sales orders"' |
+		// * Check that there is no movements in the Register  "R2013 Procurement of sales orders"
+		// 	And I select "R2013 Procurement of sales orders" exact value from "Register" drop-down list
+		// 	And I click "Generate report" button
+		// 	And "ResultTable" spreadsheet document does not contain values
+		// 		| 'Register  "R2013 Procurement of sales orders"' |
 		* Check that there is no movements in the Register  "Register  "Order reservation"
 			And I select "Order reservation" exact value from "Register" drop-down list
 			And I click "Generate report" button

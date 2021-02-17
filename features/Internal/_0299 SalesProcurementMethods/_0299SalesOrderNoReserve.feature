@@ -676,13 +676,13 @@ Scenario: _029904 create Shipment confirmation for SO without reserve and check 
 			And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-				| 'Shipment confirmation 5 dated 17.02.2021 09:36:22' | ''            | ''                    | ''          | ''             | ''                                        | ''          |
-				| 'Document registrations records'                    | ''            | ''                    | ''          | ''             | ''                                        | ''          |
-				| 'Register  "R2011 Shipment of sales orders"'        | ''            | ''                    | ''          | ''             | ''                                        | ''          |
-				| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                        | ''          |
-				| ''                                                  | ''            | ''                    | 'Quantity'  | 'Company'      | 'Order'                                   | 'Item key'  |
-				| ''                                                  | 'Expense'     | '17.02.2021 09:36:22' | '31'        | 'Main Company' | 'Sales order 5 dated 17.02.2021 09:36:06' | '38/Yellow' |
-				| ''                                                  | 'Expense'     | '17.02.2021 09:36:22' | '40'        | 'Main Company' | 'Sales order 5 dated 17.02.2021 09:36:06' | '38/Black'  |
+				| '$$ShipmentConfirmation029903$$'             | ''            | ''                                   | ''          | ''             | ''                     | ''          |
+				| 'Document registrations records'             | ''            | ''                                   | ''          | ''             | ''                     | ''          |
+				| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                                   | ''          | ''             | ''                     | ''          |
+				| ''                                           | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions'   | ''                     | ''          |
+				| ''                                           | ''            | ''                                   | 'Quantity'  | 'Company'      | 'Order'                | 'Item key'  |
+				| ''                                           | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '31'        | 'Main Company' | '$$SalesOrder029903$$' | '38/Yellow' |
+				| ''                                           | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '40'        | 'Main Company' | '$$SalesOrder029903$$' | '38/Black'  |
 		* Check SC movements Register  "R4011B_FreeStocks")
 			And I select "R4011 Free stocks" exact value from "Register" drop-down list
 			And I click "Generate report" button
@@ -694,6 +694,7 @@ Scenario: _029904 create Shipment confirmation for SO without reserve and check 
 				| ''                               | ''            | ''                                   | 'Quantity'  | 'Store'      | 'Item key'  |
 				| ''                               | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '31'        | 'Store 02'   | '38/Yellow' |
 				| ''                               | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '40'        | 'Store 02'   | '38/Black'  |
+		
 		And I close all client application windows
 	
 

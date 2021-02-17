@@ -87,6 +87,7 @@ Scenario: _040170 preparation (Shipment confirmation)
 			| "Documents.ShipmentConfirmation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.ShipmentConfirmation.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 
 // 1
 
@@ -293,7 +294,7 @@ Scenario: _040179 check Shipment confirmation movements by the Register  "R4011 
 
 //4
 
-Scenario: _040179 check Shipment confirmation movements by the Register  "R4011 Free stocks" (not transfer)
+Scenario: _040179 check Shipment confirmation movements by the Register  "R4011 Free stocks" (SC first)
 	* Select Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
@@ -303,7 +304,7 @@ Scenario: _040179 check Shipment confirmation movements by the Register  "R4011 
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
+		Then "ResultTable" spreadsheet document is equal
 			| 'Shipment confirmation 4 dated 16.02.2021 12:14:52' | ''            | ''                    | ''          | ''           | ''         |
 			| 'Document registrations records'                    | ''            | ''                    | ''          | ''           | ''         |
 			| 'Register  "R4011 Free stocks"'                     | ''            | ''                    | ''          | ''           | ''         |

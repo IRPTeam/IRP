@@ -160,6 +160,7 @@ Scenario: _040174 check Shipment confirmation movements by the Register  "R4032 
 		And I close all client application windows
 		
 Scenario: _040175 check Shipment confirmation movements by the Register  "R4012 Stock Reservation"
+		And I close all client application windows
 	* Select Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
@@ -275,6 +276,7 @@ Scenario: _0401781 check Shipment confirmation movements by the Register  "R2031
 
 Scenario: _040179 check Shipment confirmation movements by the Register  "R4011 Free stocks" (not transfer)
 	* Select Shipment confirmation
+		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
 			| 'Number'  |
@@ -294,8 +296,9 @@ Scenario: _040179 check Shipment confirmation movements by the Register  "R4011 
 
 //4
 
-Scenario: _040179 check Shipment confirmation movements by the Register  "R4011 Free stocks" (SC first)
+Scenario: _040180 check Shipment confirmation movements by the Register  "R4011 Free stocks" (SC first)
 	* Select Shipment confirmation
+		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
 			| 'Number'  |

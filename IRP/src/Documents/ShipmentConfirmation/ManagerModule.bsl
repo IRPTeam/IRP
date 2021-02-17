@@ -917,6 +917,8 @@ Function R1031B_ReceiptInvoicing()
 		|	AND ItemList.IsTransaction_ReturnToVendor";
 EndFunction	
 
+#Region Stock
+
 Function R4010B_ActualStocks()
 	Return
 		"SELECT
@@ -955,7 +957,7 @@ Function R4011B_FreeStocks()
 		|	StockReservation.Order AS Basis,
 		|	StockReservation.ItemKey,
 		|	StockReservation.QuantityBalance AS Quantity
-		|INTO ItemsBalance
+		|INTO TmpStockReservation
 		|FROM
 		|	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
 		|		(SELECT
@@ -964,6 +966,8 @@ Function R4011B_FreeStocks()
 		|			ItemList.SalesOrder
 		|		FROM
 		|			ItemList AS ItemList)) AS StockReservation
+		|WHERE
+		|	StockReservation.QuantityBalance > 0
 		|
 		|UNION ALL
 		|
@@ -980,6 +984,8 @@ Function R4011B_FreeStocks()
 		|			ItemList.SalesInvoice
 		|		FROM
 		|			ItemList AS ItemList)) AS StockReservation
+		|WHERE
+		|	StockReservation.QuantityBalance > 0
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -988,17 +994,29 @@ Function R4011B_FreeStocks()
 		|	ItemListGroup.Period,
 		|	ItemListGroup.Store,
 		|	ItemListGroup.ItemKey,
-		|	ItemListGroup.Quantity - ISNULL(ItemsBalance.Quantity, 0) AS Quantity
+		|	CASE 
+		|		WHEN ISNULL(TmpStockReservation.Quantity, 0) > ItemListGroup.Quantity 
+		|	THEN
+		|		ItemListGroup.Quantity
+		|	ELSE
+		|		ItemListGroup.Quantity - ISNULL(TmpStockReservation.Quantity, 0)
+		|	END AS Quantity
 		|INTO R4011B_FreeStocks
 		|From
 		|	ItemListGroup
-		|		LEFT JOIN ItemsBalance
-		|		ON ItemListGroup.Store = ItemsBalance.Store
-		|		AND ItemListGroup.ItemKey = ItemsBalance.ItemKey
-		|		AND (ItemsBalance.Basis = ItemListGroup.SalesOrder
-		|		OR ItemsBalance.Basis = ItemListGroup.SalesInvoice)
+		|		LEFT JOIN TmpStockReservation
+		|		ON ItemListGroup.Store = TmpStockReservation.Store
+		|		AND ItemListGroup.ItemKey = TmpStockReservation.ItemKey
+		|		AND (TmpStockReservation.Basis = ItemListGroup.SalesOrder
+		|		OR TmpStockReservation.Basis = ItemListGroup.SalesInvoice)
 		|WHERE
-		|	ItemListGroup.Quantity - ISNULL(ItemsBalance.Quantity, 0) > 0
+		|	CASE 
+		|		WHEN ISNULL(TmpStockReservation.Quantity, 0) > ItemListGroup.Quantity 
+		|	THEN
+		|		ItemListGroup.Quantity
+		|	ELSE
+		|		ItemListGroup.Quantity - ISNULL(TmpStockReservation.Quantity, 0)
+		|	END > 0
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -1006,12 +1024,34 @@ Function R4011B_FreeStocks()
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
-		|DROP ItemsBalance";
+		|DROP TmpStockReservation";
 EndFunction
 
 Function R4012B_StockReservation()
 	Return
 		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.SalesOrder,
+		|	ItemList.SalesInvoice,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO ItemListGroup
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.SalesOrderExists
+		|	OR ItemList.SalesInvoiceExists
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.SalesOrder,
+		|	ItemList.SalesInvoice
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
 		|	*
 		|INTO TmpStockReservation
 		|FROM
@@ -1021,7 +1061,7 @@ Function R4012B_StockReservation()
 		|			ItemList.ItemKey,
 		|			ItemList.SalesOrder
 		|		FROM
-		|			ItemList AS ItemList))
+		|			ItemListGroup AS ItemList))
 		|
 		|UNION ALL
 		|
@@ -1034,7 +1074,7 @@ Function R4012B_StockReservation()
 		|			ItemList.ItemKey,
 		|			ItemList.SalesInvoice
 		|		FROM
-		|			ItemList AS ItemList))
+		|			ItemListGroup AS ItemList))
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -1051,17 +1091,47 @@ Function R4012B_StockReservation()
 		|	END AS Quantity
 		|INTO R4012B_StockReservation
 		|FROM
-		|	ItemList AS ItemList
+		|	ItemListGroup AS ItemList
 		|		INNER JOIN TmpStockReservation AS StockReservation
 		|		ON (ItemList.SalesOrder = StockReservation.Order
-		|		OR ItemList.SalesInvoice = StockReservation.Order)
+		|			OR ItemList.SalesInvoice = StockReservation.Order)
 		|		AND ItemList.ItemKey = StockReservation.ItemKey
 		|		AND ItemList.Store = StockReservation.Store
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
-		|DROP TmpStockReservation";
+		|DROP TmpStockReservation
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|DROP ItemListGroup";
 EndFunction
+
+Function R4032B_GoodsInTransitOutgoing()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|CASE When ItemList.SalesOrderExists Then
+		|		ItemList.SalesOrder
+		|	When ItemList.SalesInvoiceExists Then
+		|		ItemList.SalesInvoice
+		|	When ItemList.InventoryTransferOrderExists Then
+		|		ItemList.InventoryTransferOrder
+		|	When ItemList.InventoryTransferExists Then
+		|		ItemList.InventoryTransfer
+		|ELSE
+		|		ItemList.ShipmentConfirmation
+		|END AS Basis,
+		|	*
+		|INTO R4032B_GoodsInTransitOutgoing
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
+
+EndFunction
+
+#EndRegion
 
 Function R4022B_StockTransferOrdersShipment()
 	Return
@@ -1074,20 +1144,6 @@ Function R4022B_StockTransferOrdersShipment()
 		|	ItemList AS ItemList
 		|WHERE
 		|	ItemList.InventoryTransferOrderExists";
-
-EndFunction
-
-Function R4032B_GoodsInTransitOutgoing()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	ItemList.InventoryTransfer AS Basis,
-		|	*
-		|INTO R4032B_GoodsInTransitOutgoing
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	ItemList.InventoryTransferExists";
 
 EndFunction
 

@@ -18,6 +18,13 @@ Scenario: _040148 preparation (sales order movements)
 	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
+	* Unpost SO closing
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "1" |
+			And I execute 1C:Enterprise script at server
+ 				| "Documents.SalesOrderClosing.FindByNumber(1).GetObject().Write(DocumentWriteMode.UndoPosting);" |
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -67,9 +74,9 @@ Scenario: _040148 preparation (sales order movements)
 				| "Description" |
 				| "DocumentDiscount" |
 			When add Plugin for document discount
-			When Create catalog CancelReturnReasons objects
-			When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
-			When Create document SalesOrder objects (check movements, SC before SI, not Use shipment sheduling)
+		When Create catalog CancelReturnReasons objects
+		When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
+		When Create document SalesOrder objects (check movements, SC before SI, not Use shipment sheduling)
 
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |	

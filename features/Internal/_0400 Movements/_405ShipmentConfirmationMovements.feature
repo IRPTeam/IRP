@@ -17,6 +17,14 @@ Scenario: _040170 preparation (Shipment confirmation)
 	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
+	* Unpost SO closing
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		If "List" table contains lines Then
+				| "Number" |
+				| "1" |
+			And I execute 1C:Enterprise script at server
+				| "Documents.SalesOrderClosing.FindByNumber(1).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+		And I close all client application windows
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -88,14 +96,7 @@ Scenario: _040170 preparation (Shipment confirmation)
 			| "Documents.ShipmentConfirmation.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
-		* Unpost SO closing
-			Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
-			If "List" table does not contain lines Then
-					| "Number" |
-					| "1" |
-				And I execute 1C:Enterprise script at server
-					| "Documents.SalesOrderClosing.FindByNumber(1).GetObject().Write(DocumentWriteMode.UndoPosting);" |
-			And I close all client application windows
+	
 			
 // 1
 
@@ -266,6 +267,7 @@ Scenario: _040178 check Shipment confirmation movements by the Register  "R2031 
 			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                                     | 'Item key' |
 			| ''                                                  | 'Expense'     | '28.01.2021 18:52:05' | '1'         | 'Main Company' | 'Store 02' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | 'XS/Blue'  |
 			| ''                                                  | 'Expense'     | '28.01.2021 18:52:05' | '10'        | 'Main Company' | 'Store 02' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | '36/Red'   |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:52:05' | '24'        | 'Main Company' | 'Store 02' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | '37/18SD'  |
 		And I close all client application windows
 
 Scenario: _0401781 check Shipment confirmation movements by the Register  "R2031 Shipment invoicing" (SI not exists)
@@ -351,6 +353,9 @@ Scenario: _040182 check Shipment confirmation movements by the Register  "R4012 
 			| ''                                                  | 'Expense'     | '28.01.2021 18:52:05' | '1'         | 'Store 02'   | 'XS/Blue'  | 'Sales order 3 dated 27.01.2021 19:50:45' |
 		And I close all client application windows
 
+
+
+
 //4
 
 Scenario: _040180 check Shipment confirmation movements by the Register  "R4011 Free stocks" (SC first)
@@ -386,6 +391,27 @@ Scenario: _040183 check Shipment confirmation movements by the Register  "R4012 
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "R4012 Stock Reservation"'                     |
+		And I close all client application windows
+
+Scenario: _040187 check Shipment confirmation movements by the Register  "R4032 Goods in transit (outgoing)" (SC first)
+	* Select Shipment confirmation
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '4' |
+	* Check movements by the Register  "R4032 Goods in transit (outgoing)"
+		And I click "Registrations report" button
+		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Shipment confirmation 4 dated 16.02.2021 12:14:52' | ''            | ''                    | ''          | ''           | ''                                                  | ''         |
+			| 'Document registrations records'                    | ''            | ''                    | ''          | ''           | ''                                                  | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"'     | ''            | ''                    | ''          | ''           | ''                                                  | ''         |
+			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                                  | ''         |
+			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                             | 'Item key' |
+			| ''                                                  | 'Expense'     | '16.02.2021 12:14:52' | '10'        | 'Store 02'   | 'Shipment confirmation 4 dated 16.02.2021 12:14:52' | 'XS/Blue'  |
+			| ''                                                  | 'Expense'     | '16.02.2021 12:14:52' | '15'        | 'Store 02'   | 'Shipment confirmation 4 dated 16.02.2021 12:14:52' | 'XS/Blue'  |
 		And I close all client application windows
 
 //2 (SO-reserve 3, SC - 5)
@@ -433,7 +459,7 @@ Scenario: _040185 check Shipment confirmation movements by the Register  "R4012 
 			| ''                                                  | 'Expense'     | '28.01.2021 18:43:36' | '3'         | 'Store 02'   | 'XS/Blue'  | 'Sales order 2 dated 27.01.2021 19:50:45' |
 		And I close all client application windows
 
-Scenario: _040186 check Shipment confirmation movements by the Register  "R4010 Actual stocksn" (SO-SC-SI, SC>SO)
+Scenario: _040186 check Shipment confirmation movements by the Register  "R4010 Actual stocks" (SO-SC-SI, SC>SO)
 	* Select Shipment confirmation
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
@@ -453,4 +479,88 @@ Scenario: _040186 check Shipment confirmation movements by the Register  "R4010 
 			| ''                                                  | 'Expense'     | '28.01.2021 18:43:36' | '5'         | 'Store 02'   | 'XS/Blue'  |
 			| ''                                                  | 'Expense'     | '28.01.2021 18:43:36' | '10'        | 'Store 02'   | '36/Red'   |
 			| ''                                                  | 'Expense'     | '28.01.2021 18:43:36' | '12'        | 'Store 02'   | '36/18SD'  |
+		And I close all client application windows
+
+// 8 (SC>SI>SO)
+
+Scenario: _040190 check Shipment confirmation movements by the Register  "R4010 Actual stocks" (SO-SI-SC, SC>SI>SO)
+	* Select Shipment confirmation
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '8' |
+	* Check movements by the Register  "R4010 Actual stocks"
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Shipment confirmation 8 dated 18.02.2021 10:48:53' | ''            | ''                    | ''          | ''           | ''         |
+			| 'Document registrations records'                    | ''            | ''                    | ''          | ''           | ''         |
+			| 'Register  "R4010 Actual stocks"'                   | ''            | ''                    | ''          | ''           | ''         |
+			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
+			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
+			| ''                                                  | 'Expense'     | '18.02.2021 10:48:53' | '10'        | 'Store 02'   | 'XS/Blue'  |
+			| ''                                                  | 'Expense'     | '18.02.2021 10:48:53' | '16'        | 'Store 02'   | 'XS/Blue'  |
+		And I close all client application windows
+
+Scenario: _040191 check Shipment confirmation movements by the Register  "R4032 Goods in transit (outgoing)" (SO-SI-SC, SC>SI>SO)
+	* Select Shipment confirmation
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '8' |
+	* Check movements by the Register  "R4032 Goods in transit (outgoing)"
+		And I click "Registrations report" button
+		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Shipment confirmation 8 dated 18.02.2021 10:48:53' | ''            | ''                    | ''          | ''           | ''                                        | ''         |
+			| 'Document registrations records'                    | ''            | ''                    | ''          | ''           | ''                                        | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"'     | ''            | ''                    | ''          | ''           | ''                                        | ''         |
+			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                        | ''         |
+			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                   | 'Item key' |
+			| ''                                                  | 'Expense'     | '18.02.2021 10:48:53' | '10'        | 'Store 02'   | 'Sales order 5 dated 18.02.2021 10:48:33' | 'XS/Blue'  |
+			| ''                                                  | 'Expense'     | '18.02.2021 10:48:53' | '16'        | 'Store 02'   | 'Sales order 5 dated 18.02.2021 10:48:33' | 'XS/Blue'  |
+		And I close all client application windows
+
+Scenario: _040193 check Shipment confirmation movements by the Register  "R4012 Stock Reservation" (SO-SI-SC, SC>SI>SO)
+	* Select Shipment confirmation
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '8' |
+	* Check movements by the Register  "R4012 Stock Reservation"
+		And I click "Registrations report" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Shipment confirmation 8 dated 18.02.2021 10:48:53' | ''            | ''                    | ''          | ''           | ''         | ''                                        |
+			| 'Document registrations records'                    | ''            | ''                    | ''          | ''           | ''         | ''                                        |
+			| 'Register  "R4012 Stock Reservation"'               | ''            | ''                    | ''          | ''           | ''         | ''                                        |
+			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                                        |
+			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Order'                                   |
+			| ''                                                  | 'Expense'     | '18.02.2021 10:48:53' | '20'        | 'Store 02'   | 'XS/Blue'  | 'Sales order 5 dated 18.02.2021 10:48:33' |
+		And I close all client application windows
+
+Scenario: _040194 check Shipment confirmation movements by the Register  "R4011 Free stocks" (SO-SI-SC, SC>SI>SO)
+	* Select Shipment confirmation
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '8' |
+	* Check movements by the Register  "R4011 Free stocks"
+		And I click "Registrations report" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Shipment confirmation 8 dated 18.02.2021 10:48:53' | ''            | ''                    | ''          | ''           | ''         |
+			| 'Document registrations records'                    | ''            | ''                    | ''          | ''           | ''         |
+			| 'Register  "R4011 Free stocks"'                     | ''            | ''                    | ''          | ''           | ''         |
+			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
+			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
+			| ''                                                  | 'Expense'     | '18.02.2021 10:48:53' | '6'         | 'Store 02'   | 'XS/Blue'  | 
 		And I close all client application windows

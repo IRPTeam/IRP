@@ -19,7 +19,7 @@ Scenario: _040130 preparation (Sales invoice)
 	Given I open new TestClient session or connect the existing one
 	* Unpost SO closing
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
-		If "List" table does not contain lines Then
+		If "List" table contains lines Then
 				| "Number" |
 				| "1" |
 			And I execute 1C:Enterprise script at server
@@ -84,10 +84,12 @@ Scenario: _040130 preparation (Sales invoice)
 			When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
 			When Create document SalesOrder objects (check movements, SC before SI, not Use shipment sheduling)
 			When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
+		When Create document SalesOrder objects (SI more than SO)
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |	
 			| "Documents.SalesOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesOrder.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |	
 	
 	* Load SC
 		When Create document ShipmentConfirmation objects (check movements)
@@ -95,6 +97,7 @@ Scenario: _040130 preparation (Sales invoice)
  			| "Documents.ShipmentConfirmation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.ShipmentConfirmation.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Sales invoice document
 		When Create document SalesInvoice objects (check movements)
 		And I execute 1C:Enterprise script at server
@@ -103,6 +106,7 @@ Scenario: _040130 preparation (Sales invoice)
 			| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesInvoice.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesInvoice.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
 
 //1
 
@@ -289,7 +293,25 @@ Scenario: _040139 check Sales invoice movements by the Register  "R4012 Stock Re
 			
 		And I close all client application windows
 		
-
+Scenario: _040140 check Sales invoice movements by the Register  "R4032 Goods in transit (outgoing)" SO-SC-SI (use SC)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R4032 Goods in transit (outgoing)"
+		And I click "Registrations report" button
+		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53'     | ''            | ''                    | ''          | ''           | ''      | ''         |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''           | ''      | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"' | ''            | ''                    | ''          | ''           | ''      | ''         |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''      | ''         |
+			| ''                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis' | 'Item key' |
+			| ''                                              | 'Receipt'     | '28.01.2021 18:48:53' | '1'         | 'Store 02'   | ''      | 'XS/Blue'  |
+			| ''                                              | 'Receipt'     | '28.01.2021 18:48:53' | '10'        | 'Store 02'   | ''      | '36/Red'   |	
+		And I close all client application windows
 		
 Scenario: _040141 check Sales invoice movements by the Register  "R5011 Partners aging" (without aging)
 	* Select Sales invoice
@@ -560,6 +582,25 @@ Scenario: _0401384 check Sales invoice movements by the Register  "R4012 Stock R
 			
 		And I close all client application windows
 
+Scenario: _0401385 check Sales invoice movements by the Register  "R4032 Goods in transit (outgoing)" SO-SI-SC (use and not use SC)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '3' |
+	* Check movements by the Register "R4032 Goods in transit (outgoing)"
+		And I click "Registrations report" button
+		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 3 dated 28.01.2021 18:50:57'     | ''            | ''                    | ''          | ''           | ''      | ''         |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''           | ''      | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"' | ''            | ''                    | ''          | ''           | ''      | ''         |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''      | ''         |
+			| ''                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis' | 'Item key' |
+			| ''                                              | 'Receipt'     | '28.01.2021 18:50:57' | '1'         | 'Store 02'   | ''      | 'XS/Blue'  |
+			| ''                                              | 'Receipt'     | '28.01.2021 18:50:57' | '10'        | 'Store 02'   | ''      | '36/Red'   |	
+		And I close all client application windows
 
 
 //4
@@ -679,9 +720,75 @@ Scenario: _0401318 check Sales invoice movements by the Register  "R4011 Free st
 			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10'        | 'Store 02'   | '36/Red'   |
 		And I close all client application windows
 
-		
+Scenario: _0401319 check Sales invoice movements by the Register  "R4032 Goods in transit (outgoing)" (SI first, use and not use SC)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '4' |
+	* Check movements by the Register "R4032 Goods in transit (outgoing)"
+		And I click "Registrations report" button
+		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 4 dated 16.02.2021 10:59:49'     | ''            | ''                    | ''          | ''           | ''      | ''         |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''           | ''      | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"' | ''            | ''                    | ''          | ''           | ''      | ''         |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''      | ''         |
+			| ''                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis' | 'Item key' |
+			| ''                                              | 'Receipt'     | '16.02.2021 10:59:49' | '1'         | 'Store 02'   | ''      | 'XS/Blue'  |
+			| ''                                              | 'Receipt'     | '16.02.2021 10:59:49' | '24'        | 'Store 02'   | ''      | '37/18SD'  |
+		And I close all client application windows
 
+//8 SI>SO
+
+Scenario: _0401325 check Sales invoice movements by the Register  "R4011 Free stocks" (SI >SO, use SC)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '8' |
+	* Check movements by the Register  "R4011 Free stocks"
+		And I click "Registrations report" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4011 Free stocks"'             |
+		And I close all client application windows
 	
+Scenario: _0401326 check Sales invoice movements by the Register  "R4012 Stock Reservation" (SI >SO, use SC)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '8' |
+	* Check movements by the Register  "R4012 Stock Reservation"
+		And I click "Registrations report" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4012 Stock Reservation"'             |
+		And I close all client application windows
 
+
+Scenario: _0401327 check Sales invoice movements by the Register  "R4032 Goods in transit (outgoing)" (SI >SO, use SC)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '8' |
+	* Check movements by the Register  "R4012 Stock Reservation"
+		And I click "Registrations report" button
+		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 8 dated 18.02.2021 10:48:46'     | ''            | ''                    | ''          | ''           | ''      | ''         |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''           | ''      | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"' | ''            | ''                    | ''          | ''           | ''      | ''         |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''      | ''         |
+			| ''                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis' | 'Item key' |
+			| ''                                              | 'Receipt'     | '18.02.2021 10:48:46' | '10'        | 'Store 02'   | ''      | 'XS/Blue'  |
+			| ''                                              | 'Receipt'     | '18.02.2021 10:48:46' | '15'        | 'Store 02'   | ''      | 'XS/Blue'  |
+		And I close all client application windows
 
 

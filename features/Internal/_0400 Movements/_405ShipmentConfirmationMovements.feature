@@ -96,6 +96,7 @@ Scenario: _040170 preparation (Shipment confirmation)
 			| "Documents.ShipmentConfirmation.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.ShipmentConfirmation.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
 	
 			
 // 1
@@ -165,13 +166,13 @@ Scenario: _040174 check Shipment confirmation movements by the Register  "R4032 
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | ''            | ''                    | ''          | ''           | ''                                        | ''         |
-			| 'Document registrations records'                    | ''            | ''                    | ''          | ''           | ''                                        | ''         |
-			| 'Register  "R4032 Goods in transit (outgoing)"'     | ''            | ''                    | ''          | ''           | ''                                        | ''         |
-			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                        | ''         |
-			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                   | 'Item key' |
-			| ''                                                  | 'Expense'     | '28.01.2021 18:42:17' | '1'         | 'Store 02'   | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  |
-			| ''                                                  | 'Expense'     | '28.01.2021 18:42:17' | '10'        | 'Store 02'   | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   |
+			| 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | ''            | ''                    | ''          | ''           | ''                                                  | ''         |
+			| 'Document registrations records'                    | ''            | ''                    | ''          | ''           | ''                                                  | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"'     | ''            | ''                    | ''          | ''           | ''                                                  | ''         |
+			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                                  | ''         |
+			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                             | 'Item key' |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:42:17' | '1'         | 'Store 02'   | 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | 'XS/Blue'  |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:42:17' | '10'        | 'Store 02'   | 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | '36/Red'   |
 		And I close all client application windows
 		
 Scenario: _040175 check Shipment confirmation movements by the Register  "R4012 Stock Reservation" (SO-SC-SI)
@@ -521,8 +522,8 @@ Scenario: _040191 check Shipment confirmation movements by the Register  "R4032 
 			| 'Register  "R4032 Goods in transit (outgoing)"'     | ''            | ''                    | ''          | ''           | ''                                        | ''         |
 			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                        | ''         |
 			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                   | 'Item key' |
-			| ''                                                  | 'Expense'     | '18.02.2021 10:48:53' | '10'        | 'Store 02'   | 'Sales order 5 dated 18.02.2021 10:48:33' | 'XS/Blue'  |
-			| ''                                                  | 'Expense'     | '18.02.2021 10:48:53' | '16'        | 'Store 02'   | 'Sales order 5 dated 18.02.2021 10:48:33' | 'XS/Blue'  |
+			| ''                                                  | 'Expense'     | '18.02.2021 10:48:53' | '10'        | 'Store 02'   | 'Shipment confirmation 8 dated 18.02.2021 10:48:53' | 'XS/Blue'  |
+			| ''                                                  | 'Expense'     | '18.02.2021 10:48:53' | '16'        | 'Store 02'   | 'Shipment confirmation 8 dated 18.02.2021 10:48:53' | 'XS/Blue'  |
 		And I close all client application windows
 
 Scenario: _040193 check Shipment confirmation movements by the Register  "R4012 Stock Reservation" (SO-SI-SC, SC>SI>SO)

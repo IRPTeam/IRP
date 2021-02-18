@@ -163,53 +163,53 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 
 
 
-Scenario: _0230003 manually filling in Sales order closing (SO partially shipped)
-	* Preparation
-		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
-		If "List" table contains lines Then
-				| "Number" |
-				| "$$NumberSalesOrderClosing0230001$$" |
-			And I execute 1C:Enterprise script at server
-				| "Documents.SalesOrderClosing.FindByNumber($$NumberSalesOrderClosing0230001$$).GetObject().Write(DocumentWriteMode.UndoPosting);" |
-		* Load SI for SO 32
-			When Create document SalesInvoice objects (for check SO closing)
-			And I execute 1C:Enterprise script at server
- 				| "Documents.SalesInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |	
-	* Create Sales order closing  
-		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
-		And I click the button named "FormCreate"
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'   |
-		And I select current line in "List" table
-		And I click Select button of "Legal name" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Company Ferron BP' |
-		And I select current line in "List" table
-		And I click Select button of "Partner term" field
-		And I go to line in "List" table
-			| 'Description'              |
-			| 'Basic Partner terms, TRY' |
-		And I select current line in "List" table
-		And I select "Approved" exact value from "Status" drop-down list
-		And I click Select button of "Sales order" field
-		And I go to line in "List" table
-			| 'Number' |
-			| '32'     |
-		And I select current line in "List" table
-	* Filling in Sales order closing
-		And I set checkbox "Close order"
-		And I click "Fill by order" button
-		Then the form attribute named "Store" became equal to "Store 02"
-		And "ItemList" table contains lines
-			| 'Business unit'           | 'Price type'              | 'Item'    | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'    | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Revenue type' | 'Detail' | 'Item key' | 'Procurement method' | 'Cancel' | 'Delivery date' | 'Cancel reason' |
-			| 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | 'No'                 | '1,000'  | 'pcs'  | '53,39'      | '350,00'   | ''              | '296,61'     | '350,00'       | 'Store 02' | 'Revenue'      | ''       | '36/Red'   | 'No reserve'         | 'Yes'    | '09.02.2021'    | ''              |
-			| 'Distribution department' | 'Basic Price Types'       | 'Boots'   | 'No'                 | '24,000' | 'pcs'  | '2 562,71'   | '8 400,00' | ''              | '14 237,29'  | '16 800,00'    | 'Store 02' | 'Revenue'      | ''       | '37/18SD'  | 'Purchase'           | 'Yes'    | '09.02.2021'    | ''              |
-			| 'Front office'            | 'en description is empty' | 'Service' | 'No'                 | '1,000'  | 'pcs'  | '15,25'      | '100,00'   | ''              | '84,75'      | '100,00'       | 'Store 02' | 'Revenue'      | ''       | 'Interner' | ''                   | 'Yes'    | '09.02.2021'    | ''              |
-		Then the number of "ItemList" table lines is "equal" "3"
-		And I close all client application windows
+# Scenario: _0230003 manually filling in Sales order closing (SO partially shipped)
+# 	* Preparation
+# 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+# 		If "List" table contains lines Then
+# 				| "Number" |
+# 				| "$$NumberSalesOrderClosing0230001$$" |
+# 			And I execute 1C:Enterprise script at server
+# 				| "Documents.SalesOrderClosing.FindByNumber($$NumberSalesOrderClosing0230001$$).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+# 		* Load SI for SO 32
+# 			When Create document SalesInvoice objects (for check SO closing)
+# 			And I execute 1C:Enterprise script at server
+#  				| "Documents.SalesInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |	
+# 	* Create Sales order closing  
+# 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+# 		And I click the button named "FormCreate"
+# 		And I click Select button of "Partner" field
+# 		And I go to line in "List" table
+# 			| 'Description' |
+# 			| 'Ferron BP'   |
+# 		And I select current line in "List" table
+# 		And I click Select button of "Legal name" field
+# 		And I go to line in "List" table
+# 			| 'Description'       |
+# 			| 'Company Ferron BP' |
+# 		And I select current line in "List" table
+# 		And I click Select button of "Partner term" field
+# 		And I go to line in "List" table
+# 			| 'Description'              |
+# 			| 'Basic Partner terms, TRY' |
+# 		And I select current line in "List" table
+# 		And I select "Approved" exact value from "Status" drop-down list
+# 		And I click Select button of "Sales order" field
+# 		And I go to line in "List" table
+# 			| 'Number' |
+# 			| '32'     |
+# 		And I select current line in "List" table
+# 	* Filling in Sales order closing
+# 		And I set checkbox "Close order"
+# 		And I click "Fill by order" button
+# 		Then the form attribute named "Store" became equal to "Store 02"
+# 		And "ItemList" table contains lines
+# 			| 'Business unit'           | 'Price type'              | 'Item'    | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'    | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Revenue type' | 'Detail' | 'Item key' | 'Procurement method' | 'Cancel' | 'Delivery date' | 'Cancel reason' |
+# 			| 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | 'No'                 | '1,000'  | 'pcs'  | '53,39'      | '350,00'   | ''              | '296,61'     | '350,00'       | 'Store 02' | 'Revenue'      | ''       | '36/Red'   | 'No reserve'         | 'Yes'    | '09.02.2021'    | ''              |
+# 			| 'Distribution department' | 'Basic Price Types'       | 'Boots'   | 'No'                 | '24,000' | 'pcs'  | '2 562,71'   | '8 400,00' | ''              | '14 237,29'  | '16 800,00'    | 'Store 02' | 'Revenue'      | ''       | '37/18SD'  | 'Purchase'           | 'Yes'    | '09.02.2021'    | ''              |
+# 			| 'Front office'            | 'en description is empty' | 'Service' | 'No'                 | '1,000'  | 'pcs'  | '15,25'      | '100,00'   | ''              | '84,75'      | '100,00'       | 'Store 02' | 'Revenue'      | ''       | 'Interner' | ''                   | 'Yes'    | '09.02.2021'    | ''              |
+# 		Then the number of "ItemList" table lines is "equal" "3"
+# 		And I close all client application windows
 			
 
 		

@@ -79,6 +79,17 @@ Scenario: _040158 preparation (Sales order closing)
 		When Create document SalesOrderClosing objects (check movements)
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesOrderClosing.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I close all client application windows
+		
+		
+				
+
+
 
 Scenario: _040159 check Sales order closing movements by the Register  "R2010 Sales orders"
 	* Select Sales order closing
@@ -112,7 +123,7 @@ Scenario: _040159 check Sales order closing movements by the Register  "R2010 Sa
 			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-95'       | '-80,51'     | '-5'            | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                   | 'No'                   |
 			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-84,57'    | '-71,67'     | '-4,45'         | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'Stock'              | 'No'                   |
 			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-16,26'    | '-13,78'     | '-0,86'         | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                   | 'No'                   |
-
+		
 
 		And I close all client application windows
 		

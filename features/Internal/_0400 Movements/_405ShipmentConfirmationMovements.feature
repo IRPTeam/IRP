@@ -88,9 +88,15 @@ Scenario: _040170 preparation (Shipment confirmation)
 			| "Documents.ShipmentConfirmation.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
-	And I execute 1C:Enterprise script at server
- 			| "Documents.SalesOrderClosing.FindByNumber(1).GetObject().Write(DocumentWriteMode.UndoPosting);" |
-
+		* Unpost SO closing
+			Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+			If "List" table does not contain lines Then
+					| "Number" |
+					| "1" |
+				And I execute 1C:Enterprise script at server
+					| "Documents.SalesOrderClosing.FindByNumber(1).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+			And I close all client application windows
+			
 // 1
 
 Scenario: _040171 check Shipment confirmation movements by the Register  "R4010 Actual stocks"
@@ -147,7 +153,7 @@ Scenario: _040173 check Shipment confirmation movements by the Register  "R2011 
 			| ''                                                  | 'Expense'     | '28.01.2021 18:42:17' | '10'        | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   |
 		And I close all client application windows
 		
-Scenario: _040174 check Shipment confirmation movements by the Register  "R4032 Goods in transit (outgoing)" (without IT)
+Scenario: _040174 check Shipment confirmation movements by the Register  "R4032 Goods in transit (outgoing)" (SO-SC-SI)
 	* Select Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
@@ -157,8 +163,14 @@ Scenario: _040174 check Shipment confirmation movements by the Register  "R4032 
 		And I click "Registrations report" button
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R4032 Goods in transit (outgoing)"' |		
+		Then "ResultTable" spreadsheet document is equal
+			| 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | ''            | ''                    | ''          | ''           | ''                                        | ''         |
+			| 'Document registrations records'                    | ''            | ''                    | ''          | ''           | ''                                        | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"'     | ''            | ''                    | ''          | ''           | ''                                        | ''         |
+			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                        | ''         |
+			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                   | 'Item key' |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:42:17' | '1'         | 'Store 02'   | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:42:17' | '10'        | 'Store 02'   | 'Sales order 1 dated 27.01.2021 19:50:45' | '36/Red'   |
 		And I close all client application windows
 		
 Scenario: _040175 check Shipment confirmation movements by the Register  "R4012 Stock Reservation" (SO-SC-SI)
@@ -315,8 +327,8 @@ Scenario: _040181 check Shipment confirmation movements by the Register  "R4011 
 			| 'Register  "R4011 Free stocks"'                     | ''            | ''                    | ''          | ''           | ''         |
 			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
 			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
-			| ''                                                  | 'Expense'     | '28.01.2021 18:50:57' | '10'        | 'Store 02'   | '36/Red'   |
-			| ''                                                  | 'Expense'     | '28.01.2021 18:50:57' | '24'        | 'Store 02'   | '37/18SD'  |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:52:05' | '10'        | 'Store 02'   | '36/Red'   |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:52:05' | '24'        | 'Store 02'   | '37/18SD'  |
 		And I close all client application windows
 
 Scenario: _040182 check Shipment confirmation movements by the Register  "R4012 Stock Reservation" (SO-SI-SC)
@@ -368,12 +380,12 @@ Scenario: _040183 check Shipment confirmation movements by the Register  "R4012 
 		And I go to line in "List" table
 			| 'Number'  |
 			| '4' |
-	* Check movements by the Register  "R4011 Free stocks"
+	* Check movements by the Register  "R4012 Stock Reservation"
 		And I click "Registrations report" button
-		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R4011 Free stocks"'                     |
+			| 'Register  "R4012 Stock Reservation"'                     |
 		And I close all client application windows
 
 //2 (SO-reserve 3, SC - 5)
@@ -397,6 +409,8 @@ Scenario: _040184 check Shipment confirmation movements by the Register  "R4011 
 			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
 			| ''                                                  | 'Expense'     | '28.01.2021 18:43:36' | '2'         | 'Store 02'   | 'XS/Blue'  |
 			| ''                                                  | 'Expense'     | '28.01.2021 18:43:36' | '10'        | 'Store 02'   | '36/Red'   |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:43:36' | '12'        | 'Store 02'   | '36/18SD'  |
+
 		And I close all client application windows
 
 Scenario: _040185 check Shipment confirmation movements by the Register  "R4012 Stock Reservation" (SO-SC-SI, SC>SO)

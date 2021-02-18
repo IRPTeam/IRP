@@ -17,6 +17,13 @@ Scenario: _040130 preparation (Sales invoice)
 	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
+	* Unpost SO closing
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "1" |
+			And I execute 1C:Enterprise script at server
+ 				| "Documents.SalesOrderClosing.FindByNumber(1).GetObject().Write(DocumentWriteMode.UndoPosting);" |
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -421,9 +428,7 @@ Scenario: _0401442 check Sales invoice movements by the Register  "R4034 Schedul
 		And I click "Registrations report" button
 		And I select "R4034 Scheduled goods shipments" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 2 dated 28.01.2021 18:49:39'   | ''            | ''                    | ''          | ''             | ''                                        | ''         | ''         | ''                                     |
-			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''                                        | ''         | ''         | ''                                     |
+		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "R4034 Scheduled goods shipments"' | ''            | ''                    | ''          | ''             | ''                                        | ''         | ''         | ''                                     |
 			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                        | ''         | ''         | ''                                     |
 			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Basis'                                   | 'Store'    | 'Item key' | 'Row key'                              |
@@ -531,13 +536,12 @@ Scenario: _0401383 check Sales invoice movements by the Register  "R4011 Free st
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
+		Then "ResultTable" spreadsheet document is equal
 			| 'Sales invoice 3 dated 28.01.2021 18:50:57' | ''            | ''                    | ''          | ''           | ''         |
 			| 'Document registrations records'            | ''            | ''                    | ''          | ''           | ''         |
 			| 'Register  "R4011 Free stocks"'             | ''            | ''                    | ''          | ''           | ''         |
 			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
 			| ''                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
-			| ''                                          | 'Expense'     | '28.01.2021 18:50:57' | '10'        | 'Store 02'   | '36/Red'   |
 			| ''                                          | 'Expense'     | '28.01.2021 18:50:57' | '24'        | 'Store 02'   | '37/18SD'  |
 		And I close all client application windows 
 
@@ -671,7 +675,8 @@ Scenario: _0401318 check Sales invoice movements by the Register  "R4011 Free st
 			| 'Register  "R4011 Free stocks"'             | ''            | ''                    | ''          | ''           | ''         |
 			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
 			| ''                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
-			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '20'        | 'Store 02'   | '36/Red'   |
+			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10'        | 'Store 02'   | '36/Red'   |
+			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10'        | 'Store 02'   | '36/Red'   |
 		And I close all client application windows
 
 		

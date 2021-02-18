@@ -1,6 +1,10 @@
 
 Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 	
+	If Source.Metadata().TabularSections.Find("RowIDInfo") = Undefined Then
+		Return;
+	EndIf;
+	
 	Query = New Query;
 	Query.Text =
 		"SELECT

@@ -134,7 +134,9 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 		When Create document SalesInvoice objects (for check SO closing)
 		When Create document ShipmentConfirmation objects (check SO closing)
 		And I execute 1C:Enterprise script at server
- 			| "Documents.ShipmentConfirmation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |	
+ 			| "Documents.SalesInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
+ 			| "Documents.ShipmentConfirmation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Create Sales order closing 
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -171,6 +173,8 @@ Scenario: _0230003 manually filling in Sales order closing (SO partially shipped
 				| "Documents.SalesOrderClosing.FindByNumber($$NumberSalesOrderClosing0230001$$).GetObject().Write(DocumentWriteMode.UndoPosting);" |
 		* Load SI for SO 32
 			When Create document SalesInvoice objects (for check SO closing)
+			And I execute 1C:Enterprise script at server
+ 				| "Documents.SalesInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |	
 	* Create Sales order closing  
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I click the button named "FormCreate"

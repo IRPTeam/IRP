@@ -945,6 +945,21 @@ Function GetEmptyTable_ShipmentConfirmation()
 	Return Table;	
 EndFunction
 	
+//Function GetEmptyTable_Basises() Export
+//	Table = New ValueTable();
+//	Table.Columns.Add("ItemKey"     , New TypeDescription("CatalogRef.ItemKeys"));
+//	Table.Columns.Add("Item"        , New TypeDescription("CatalogRef.Items"));
+//	Table.Columns.Add("Store"       , New TypeDescription("CatalogRef.Stores"));
+//	Table.Columns.Add("BasisUnit"   , New TypeDescription("CatalogRef.Units"));
+//	Table.Columns.Add("CurrentStep" , New TypeDescription("CatalogRef.MovementRules"));
+//	Table.Columns.Add("RowRef"      , New TypeDescription("CatalogRef.RowIDs"));
+//	Table.Columns.Add("Key"         , Metadata.DefinedTypes.typeRowID.Type);
+//	Table.Columns.Add("RowID"       , Metadata.DefinedTypes.typeRowID.Type);
+//	Table.Columns.Add("Quantity"    , Metadata.DefinedTypes.typeQuantity.Type);
+//	Table.Columns.Add("Basis"       , Metadata.AccumulationRegisters.T10000B_RowIDMovements.Dimensions.Basis.Type);
+//	Return Table;
+//EndFunction
+	
 #EndRegion
 
 #EndRegion

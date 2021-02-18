@@ -4,6 +4,18 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.MainFilter = Parameters.Filter;
 	ThisObject.Mode = "LinkExists";
 	
+	For Each Row_IdInfo In Parameters.TablesInfo.RowIDInfoRows Do
+		NewRow = ThisObject.ResultsTable.Add();
+		FillPropertyValues(NewRow, Row_IDInfo);
+		For Each Row_ItemList In Parameters.TablesInfo.ItemListRows Do
+			If Row_IdInfo.Key = Row_ItemList.Key Then
+				FillPropertyValues(NewRow, Row_ItemList, "ItemKey, Item, Store");
+				NewRow.BasisUnit = ?(ValueIsFilled(Row_ItemList.ItemKey.Unit), 
+				Row_ItemList.ItemKey.Unit, Row_ItemList.ItemKey.Item.Unit);
+			EndIf;
+		EndDo;
+	EndDo;
+	
 	FillItemListRows(Parameters.TablesInfo.ItemListRows);
 	
 	FillResultsTree(Parameters.TablesInfo.RowIDInfoRows);
@@ -59,21 +71,22 @@ EndProcedure
 
 &AtServer
 Procedure FillResultsTree(RowIDInfoRows)
-	RowIDInfoTable = New ValueTable();
-	RowIDInfoTable.Columns.Add("Key");
-	RowIDInfoTable.Columns.Add("RowID"); 
-	RowIDInfoTable.Columns.Add("Quantity"); 
-	RowIDInfoTable.Columns.Add("Basis");
-	RowIDInfoTable.Columns.Add("CurrentStep");
-	RowIDInfoTable.Columns.Add("NextStep");
-	RowIDInfoTable.Columns.Add("RowRef");
-	For Each ItemOfArray In RowIDInfoRows Do
-		NewRow = RowIDInfoTable.Add();
-		For Each KeyValue In ItemOfArray Do
-			NewRow[KeyValue.Key] = KeyValue.Value;
-		EndDo;
-	EndDo;
-	RowIDInfoTableGrouped = RowIDInfoTable.Copy();
+//	RowIDInfoTable = New ValueTable();
+//	RowIDInfoTable.Columns.Add("Key");
+//	RowIDInfoTable.Columns.Add("RowID"); 
+//	RowIDInfoTable.Columns.Add("Quantity"); 
+//	RowIDInfoTable.Columns.Add("Basis");
+//	RowIDInfoTable.Columns.Add("CurrentStep");
+//	RowIDInfoTable.Columns.Add("NextStep");
+//	RowIDInfoTable.Columns.Add("RowRef");
+//	For Each ItemOfArray In RowIDInfoRows Do
+//		NewRow = RowIDInfoTable.Add();
+//		For Each KeyValue In ItemOfArray Do
+//			NewRow[KeyValue.Key] = KeyValue.Value;
+//		EndDo;
+//	EndDo;
+	
+	RowIDInfoTableGrouped = ThisObject.ResultsTable.Unload().Copy();
 	RowIDInfoTableGrouped.GroupBy("Key", "Quantity");
 	For Each Row In RowIDInfoTableGrouped Do
 		ArrayOfTopLevelRows = ThisObject.ItemListRows.FindRows(New Structure("Key", Row.Key));
@@ -86,7 +99,7 @@ Procedure FillResultsTree(RowIDInfoRows)
 			TopLevelNewRow.RowPresentation = 
 			"" + TopLevelRow.Item + ", " + TopLevelRow.ItemKey + ", " + TopLevelRow.Store;
 			
-			ArrayOfSecondLevelRows = RowIDInfoTable.FindRows(New Structure("Key", Row.Key));
+			ArrayOfSecondLevelRows = ThisObject.ResultsTable.FindRows(New Structure("Key", Row.Key));
 			
 			For Each SecondLevelRow In ArrayOfSecondLevelRows Do
 				SecondLevelNewRow = TopLevelNewRow.GetItems().Add();		
@@ -138,37 +151,40 @@ Procedure FillDocumentsTree(SelectedRow, FilterBySelectedRow);
 			SecondLevelNewRow.Level   = 2;
 			SecondLevelNewRow.Picture = 3;
 			
-			If SelectedRow <> Undefined Then
-				UnitFactorFrom = Catalogs.Units.GetUnitFactor(SecondLevelRow.BasisUnit, SecondLevelRow.Quantity);
-				UnitFactorTo = Catalogs.Units.GetUnitFactor(SelectedRow.Unit, SelectedRow.Quantity);
-				SecondLevelNewRow.Quantity = ?(UnitFactorTo = 0, 0, SecondLevelRow.Quantity * UnitFactorFrom / UnitFactorTo);
-				SecondLevelNewRow.Unit = SelectedRow.Unit;
-			Else
+//			If SelectedRow <> Undefined Then
+//				UnitFactorFrom = Catalogs.Units.GetUnitFactor(SecondLevelRow.BasisUnit, SecondLevelRow.Quantity);
+//				UnitFactorTo = Catalogs.Units.GetUnitFactor(SelectedRow.Unit, SelectedRow.Quantity);
+//				SecondLevelNewRow.Quantity = ?(UnitFactorTo = 0, 0, SecondLevelRow.Quantity * UnitFactorFrom / UnitFactorTo);
+//				SecondLevelNewRow.Unit = SelectedRow.Unit;
+//			Else
 				SecondLevelNewRow.Quantity = SecondLevelRow.Quantity;
-				SecondLevelNewRow.Unit = SecondLevelRow.BasisUnit;
-			EndIf;
+				SecondLevelNewRow.BasisUnit = SecondLevelRow.BasisUnit;
+//			EndIf;
 		EndDo;
 	EndDo;
 EndProcedure
 
 &AtClient
 Procedure Ok(Command)
-	ArrayOfRowIDInfo = New Array();
-	For Each TopLevelRow In ThisObject.ResultsTree.GetItems() Do
-		For Each SecondLevelRow In TopLevelRow.GetItems() Do
-			NewRowIDInfo = New Structure();
-			NewRowIDInfo.Insert("Key"          , SecondLevelRow.Key);
-			NewRowIDInfo.Insert("RowID"        , SecondLevelRow.RowID);
-			NewRowIDInfo.Insert("Quantity"     , SecondLevelRow.Quantity);
-			NewRowIDInfo.Insert("Basis"        , SecondLevelRow.Basis);
-			NewRowIDInfo.Insert("CurrentStep"  , SecondLevelRow.CurrentStep);
-			//NewRowIDInfo.Insert("NextStep"     , SecondLevelRow.NextStep);
-			NewRowIDInfo.Insert("RowRef"       , SecondLevelRow.RowRef);
-			ArrayOfRowIDInfo.Add(NewRowIDInfo);
-		EndDo;
-	EndDo;
-	Close(ArrayOfRowIDInfo);
+	FillingValues = GetFillingValues();
+//	ArrayOfRowIDInfo = New Array();
+//	For Each TopLevelRow In ThisObject.ResultsTree.GetItems() Do
+//		For Each SecondLevelRow In TopLevelRow.GetItems() Do
+//			NewRowIDInfo = New Structure();
+//			NewRowIDInfo.Insert("Key"          , SecondLevelRow.Key);
+//			NewRowIDInfo.Insert("RowID"        , SecondLevelRow.RowID);
+//			NewRowIDInfo.Insert("Quantity"     , SecondLevelRow.Quantity);
+//			NewRowIDInfo.Insert("Basis"        , SecondLevelRow.Basis);
+//			NewRowIDInfo.Insert("CurrentStep"  , SecondLevelRow.CurrentStep);
+//			//NewRowIDInfo.Insert("NextStep"     , SecondLevelRow.NextStep);
+//			NewRowIDInfo.Insert("RowRef"       , SecondLevelRow.RowRef);
+//			ArrayOfRowIDInfo.Add(NewRowIDInfo);
+//		EndDo;
+//	EndDo;
+//	Close(ArrayOfRowIDInfo);
 EndProcedure
+
+
 
 &AtClient
 Procedure Cancel(Command)
@@ -183,6 +199,10 @@ Procedure Link(Command)
 	If Not LinkInfo.IsCan Then
 		Return;
 	EndIf;
+	
+	FillPropertyValues(ThisObject.ResultsTable.Add(), LinkInfo);
+	
+	//FillingValues = GetFillingValues(LinkInfo);
 	
 	Filter = New Structure();
 	Filter.Insert("Key"   , LinkInfo.Key);
@@ -239,17 +259,33 @@ Function IsCanLink()
 			Result.Insert("Item"        , ItemListRowsCurrentData.Item);
 			Result.Insert("ItemKey"     , ItemListRowsCurrentData.ItemKey);
 			Result.Insert("Store"       , ItemListRowsCurrentData.Store);
-			Result.Insert("Quantity"    , ItemListRowsCurrentData.Quantity);
-			Result.Insert("Unit"        , ItemListRowsCurrentData.Unit);
+			
+			//Result.Insert("Quantity"    , ItemListRowsCurrentData.Quantity);
+			Result.Insert("Quantity"    , DocumentsTreeCurrentData.Quantity);
+			
+			//Result.Insert("Unit"        , ItemListRowsCurrentData.Unit);
+			Result.Insert("BasisUnit"     , DocumentsTreeCurrentData.BasisUnit);
+			
 			Result.Insert("RowRef"      , DocumentsTreeCurrentData.RowRef);
 			Result.Insert("CurrentStep" , DocumentsTreeCurrentData.CurrentStep);
 	
 			Result.Insert("Key"      , ItemListRowsCurrentData.Key);
 			Result.Insert("Basis"    , DocumentsTreeCurrentData.Basis);
 			Result.Insert("RowID"    , DocumentsTreeCurrentData.RowID);
+						
 		EndIf;
 	EndIf;
 	Return Result;
+EndFunction
+
+&AtServer
+Function GetFillingValues()
+	BasisesTable = ThisObject.ResultsTable.Unload(); //RowIDInfo.GetEmptyTable_Basises();
+	//NewRow = BasisesTable.Add();
+	//FillPropertyValues(NewRow, LinkInfo);
+		
+	ExtractedData = RowIDInfo.ExtractData(BasisesTable);
+	Return Undefined;
 EndFunction
 
 #EndRegion

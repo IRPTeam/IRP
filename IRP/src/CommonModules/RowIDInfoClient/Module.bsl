@@ -44,6 +44,7 @@ Function GetRowIDInfoRows(RowIDInfo) Export
 	RowIDInfoRows = New Array();
 	For Each Row In RowIDInfo Do
 		NewRow = New Structure();
+		//Item, ItemKey, BasisUnit, Store
 		NewRow.Insert("Key"         , Row.Key);
 		NewRow.Insert("RowID"       , Row.RowID); 
 		NewRow.Insert("Quantity"    , Row.Quantity); 

@@ -262,7 +262,7 @@ Function R4034B_GoodsShipmentSchedule()
 		"SELECT
 		|	&Period AS Period,
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	R4034B_GoodsShipmentScheduleBalance.QuantityBalance AS Quantity,
+		|	- R4034B_GoodsShipmentScheduleBalance.QuantityBalance AS Quantity,
 		|	*
 		|INTO R4034B_GoodsShipmentSchedule
 		|FROM

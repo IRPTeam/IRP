@@ -482,16 +482,16 @@ Procedure LinkBasisDocuments(Command)
 EndProcedure
 
 &AtClient
-Procedure LinkBasisDocumentsContinue(ArrayOfLinkedDocuments, AdditionalParameters) Export
-	If ArrayOfLinkedDocuments = Undefined Then
+Procedure LinkBasisDocumentsContinue(FillingValues, AdditionalParameters) Export
+	If FillingValues = Undefined Then
 		Return;
 	EndIf;
-	LinkBasisDocumentsContinueAtServer(ArrayOfLinkedDocuments);
+	LinkBasisDocumentsContinueAtServer(FillingValues);
 EndProcedure
 
 &AtServer
-Procedure LinkBasisDocumentsContinueAtServer(ArrayOfLinkedDocuments)
-	RowIDInfo.FillSalesInvoice(ArrayOfLinkedDocuments, Object);
+Procedure LinkBasisDocumentsContinueAtServer(FillingValues)
+	RowIDInfo.FillDocument_SalesInvoice(FillingValues, Object);
 EndProcedure
 
 &AtClient

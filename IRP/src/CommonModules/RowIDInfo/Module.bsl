@@ -136,6 +136,8 @@ Procedure SalesInvoice_FillRowID(Source)
 	EndDo;
 EndProcedure
 
+#Region ExtractData
+
 Function ExtractData(BasisesTable) Export
 	Basises_SO = BasisesTable.CopyColumns();
 	Basises_SC = BasisesTable.CopyColumns();
@@ -484,24 +486,14 @@ Function ExtractData_SalesOrder(BasisesTable, ShipmentConfirmationsTable)
 	Return Tables;
 EndFunction
 
-#Region FillBaseOnDocuments
+#EndRegion
 
-#Region SalesInvoice
+#Region FillDocument
 
-Procedure FillSalesInvoice(ArrayOfLinkedDocuments, Object) Export
-	Object.RowIDInfo.Clear();
-	For Each ItemOfArray In ArrayOfLinkedDocuments Do
-		FillPropertyValues(Object.RowIDInfo.Add(), ItemOfArray);
-	EndDo;
+Procedure FillDocument_SalesInvoice(FillingValues, Object) Export
+	f=1;
+	
 EndProcedure
-
-
-#EndRegion
-
-#Region ShipmentConfirmation
-
-
-#EndRegion
 
 #EndRegion
 

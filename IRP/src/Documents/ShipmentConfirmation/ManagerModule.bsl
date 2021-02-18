@@ -1111,8 +1111,7 @@ Function R4032B_GoodsInTransitOutgoing()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|CASE When ItemList.SalesOrderExists Then
-		|		ItemList.SalesOrder
+		|CASE
 		|	When ItemList.SalesInvoiceExists Then
 		|		ItemList.SalesInvoice
 		|	When ItemList.InventoryTransferOrderExists Then

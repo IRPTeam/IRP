@@ -266,8 +266,26 @@ Scenario: _0401222 check Purchase order movements by the Register  "R4033 Schedu
 			| 'Register  "R4033 Scheduled goods receipts"'   |
 		And I close all client application windows
 		
+// 117 
 
-	
+	Scenario: _0401231 check Purchase order movements by the Register  "R4016 Ordering of internal supply requests" (ISR exists)
+	* Select Purchase order
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '117' |
+	* Check movements by the Register  "R4016 Ordering of internal supply requests" 
+		And I click "Registrations report" button
+		And I select "R4016 Ordering of internal supply requests" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase order 117 dated 12.02.2021 12:45:05'           | ''            | ''                    | ''          | ''             | ''         | ''                                                      | ''         |
+			| 'Document registrations records'                         | ''            | ''                    | ''          | ''             | ''         | ''                                                      | ''         |
+			| 'Register  "R4016 Ordering of internal supply requests"' | ''            | ''                    | ''          | ''             | ''         | ''                                                      | ''         |
+			| ''                                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                                      | ''         |
+			| ''                                                       | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Internal supply request'                               | 'Item key' |
+			| ''                                                       | 'Receipt'     | '12.02.2021 12:45:05' | '10'        | 'Main Company' | 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'S/Yellow' |
+		And I close all client application windows
 
 
 

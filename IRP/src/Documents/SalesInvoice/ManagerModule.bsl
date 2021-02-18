@@ -1591,6 +1591,7 @@ Function R4032B_GoodsInTransitOutgoing()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Invoice AS Basis,
 		|	*
 		|INTO R4032B_GoodsInTransitOutgoing
 		|FROM

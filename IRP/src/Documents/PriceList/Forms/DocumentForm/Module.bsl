@@ -213,10 +213,8 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			If SearchInItemList.Count() Then
 				Items.ItemList.CurrentRow = SearchInItemList[0].GetID();				
 			Else
-				NewItemListRow = Object.ItemKeyList.Add();
-				NewItemListRow.ItemKey = ItemData.ItemKey;
+				NewItemListRow = Object.ItemList.Add();
 				NewItemListRow.Item = ItemData.Item;
-				NewItemListRow.Key = New UUID;
 				Items.ItemList.CurrentRow = NewItemListRow.GetID();
 			EndIf;
 		Else

@@ -1183,14 +1183,16 @@ EndFunction
 Function ItemList()
 	Return
 		"SELECT
-		|	ShipmentConfirmations.Key AS Key
+		|	ShipmentConfirmations.Key AS Key,
+		|	ShipmentConfirmations.ShipmentConfirmation
 		|INTO ShipmentConfirmations
 		|FROM
 		|	Document.SalesInvoice.ShipmentConfirmations AS ShipmentConfirmations
 		|WHERE
 		|	ShipmentConfirmations.Ref = &Ref
 		|GROUP BY
-		|	ShipmentConfirmations.Key
+		|	ShipmentConfirmations.Key,
+		|	ShipmentConfirmations.ShipmentConfirmation
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -1198,6 +1200,7 @@ Function ItemList()
 		|	SalesInvoiceItemList.Ref.Company AS Company,
 		|	SalesInvoiceItemList.Store AS Store,
 		|	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists,
+		|	ShipmentConfirmations.ShipmentConfirmation,
 		|	SalesInvoiceItemList.Ref AS Invoice,
 		|	SalesInvoiceItemList.ItemKey AS ItemKey,
 		|	SalesInvoiceItemList.Quantity AS UnitQuantity,
@@ -1591,14 +1594,19 @@ Function R4032B_GoodsInTransitOutgoing()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	ItemList.Invoice AS Basis,
+		|	CASE
+		|		WHEN ItemList.ShipmentConfirmationExists
+		|			Then ItemList.ShipmentConfirmation
+		|		Else ItemList.Invoice
+		|	End AS Basis,
 		|	*
 		|INTO R4032B_GoodsInTransitOutgoing
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.IsService
-		|	AND ItemList.UseShipmentConfirmation";
+		|	AND (ItemList.UseShipmentConfirmation
+		|		OR ItemList.ShipmentConfirmationExists)";
 
 EndFunction
 

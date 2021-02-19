@@ -77,28 +77,24 @@ Procedure FillResultsTree(SelectedRow)
 	ResultsTableGrouped.GroupBy("Key", "Quantity");
 	ThisObject.ResultsTree.GetItems().Clear();
 	For Each Row In ResultsTableGrouped Do
-		//ArrayOfTopLevelRows = ThisObject.ItemListRows.FindRows(New Structure("Key", Row.Key));
-		//For Each TopLevelRow In ArrayOfTopLevelRows Do
-			TopLevelNewRow = ThisObject.ResultsTree.GetItems().Add();
-			//FillPropertyValues(TopLevelNewRow, TopLevelRow);
-			FillPropertyValues(TopLevelNewRow, SelectedRow);
-			TopLevelNewRow.Level = 1;
-			TopLevelNewRow.Picture = 3;
-			TopLevelNewRow.Quantity = Row.Quantity;
-			TopLevelNewRow.RowPresentation = 
-			//"" + TopLevelRow.Item + ", " + TopLevelRow.ItemKey + ", " + TopLevelRow.Store;
-			"" + SelectedRow.Item + ", " + SelectedRow.ItemKey + ", " + SelectedRow.Store;
+		TopLevelNewRow = ThisObject.ResultsTree.GetItems().Add();
+		FillPropertyValues(TopLevelNewRow, SelectedRow);
+		TopLevelNewRow.Level = 1;
+		TopLevelNewRow.Picture = 3;
+		TopLevelNewRow.Quantity = 0;
+		TopLevelNewRow.BasisUnit = Undefined;
+		TopLevelNewRow.RowPresentation = 
+		"" + SelectedRow.Item + ", " + SelectedRow.ItemKey + ", " + SelectedRow.Store;
 			
-			ArrayOfSecondLevelRows = ThisObject.ResultsTable.FindRows(New Structure("Key", Row.Key));
+		ArrayOfSecondLevelRows = ThisObject.ResultsTable.FindRows(New Structure("Key", Row.Key));
 			
-			For Each SecondLevelRow In ArrayOfSecondLevelRows Do
-				SecondLevelNewRow = TopLevelNewRow.GetItems().Add();		
-				FillPropertyValues(SecondLevelNewRow, SecondLevelRow);
-				SecondLevelNewRow.Level = 2;
-				SecondLevelNewRow.Picture = 2;
-				SecondLevelNewRow.RowPresentation = String(SecondLevelRow.Basis);
-			EndDo;
-		//EndDo;
+		For Each SecondLevelRow In ArrayOfSecondLevelRows Do
+			SecondLevelNewRow = TopLevelNewRow.GetItems().Add();		
+			FillPropertyValues(SecondLevelNewRow, SecondLevelRow);
+			SecondLevelNewRow.Level = 2;
+			SecondLevelNewRow.Picture = 2;
+			SecondLevelNewRow.RowPresentation = String(SecondLevelRow.Basis);
+		EndDo;
 	EndDo;
 EndProcedure	
 

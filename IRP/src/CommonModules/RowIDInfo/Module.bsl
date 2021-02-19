@@ -518,7 +518,7 @@ EndFunction
 
 #Region FillDocument
 
-Procedure FillDocument_SalesInvoice(Object, FillingValues) Export
+Procedure FillDocument(Object, FillingValues) Export
 	FillingValue = Undefined;
 	If FillingValues.Count() = 1 Then
 		FillingValue = FillingValues[0];
@@ -526,35 +526,42 @@ Procedure FillDocument_SalesInvoice(Object, FillingValues) Export
 		Return;
 	EndIf;
 	
-	TablesWithLinkedDocuments = "ShipmentConfirmations";
+	// таблицы в которых есть связанные документы (будут очищены при отвязке строки)
+	TablesWithLinkedDocuments = "ShipmentConfirmations, GoodsReceipts";
+	
+	// реквизиты таб. части ItemList котрые хранят данные о связанных документах
 	AttributesWithLinkedDocuments = "SalesOrder";
+	
+	// таблицы в которых есть реквизит Key
+	TablesWithKeys = "ItemList, SpecialOffers, TaxList, Currencies, SerialLotNumbers, ShipmentConfirmations, GoodsReceipts";
+	
+	// таблицы которые обновлются при привязке документа (будут заполнены при привязке строки)
+	TablesRefreshable = "SpecialOffers, TaxList, ShipmentConfirmations, GoodsReceipts";
+	
+	
+	TableNames_LinkedDocuments = StrSplit(TablesWithLinkedDocuments, ",");
+	AttributeNames_LinkedDocuments = StrSplit(AttributesWithLinkedDocuments, ",");
+	TableNames_WithKeys = StrSplit(TablesWithKeys, ",");
+	TablesNames_Refreshable = StrSplit(TablesRefreshable, ",");
+	
 	
 	// Unlink
 	UnlinkRows = GetUnlinkRows(Object, FillingValue);
-	TableNames = StrSplit(TablesWithLinkedDocuments, ",");
-	AttributeNames = StrSplit(AttributesWithLinkedDocuments, ",");
 	For Each UnlinkRow In UnlinkRows Do
-		UnlinkTables(Object, UnlinkRow, TableNames);
+		UnlinkTables(Object, UnlinkRow, TableNames_LinkedDocuments);
 		
 		// Clear attributes in ItemList
 		LinkedRows = Object.ItemList.FindRows(New Structure("Key", UnlinkRow.Key));
 		For Each LinkedRow In LinkedRows Do			
-			If Not IsCanUnlinkAttributes(Object, UnlinkRow, TableNames) Then
+			If Not IsCanUnlinkAttributes(Object, UnlinkRow, TableNames_LinkedDocuments) Then
 				Continue;
 			EndIf;
-			UnlinkAttributes(LinkedRow, AttributeNames);
+			UnlinkAttributes(LinkedRow, AttributeNames_LinkedDocuments);
 		EndDo;
 	EndDo;
 	
-	Object.RowIDInfo.Clear();
-	For Each Row In FillingValue.RowIDInfo Do
-		FillPropertyValues(Object.RowIDInfo.Add(), Row);
-	EndDo;
-		
-	TablesWithKeys = "ItemList, SpecialOffers, TaxList, Currencies, SerialLotNumbers, ShipmentConfirmations";
-	
 	// Replace key
-	For Each TableName In StrSplit(TablesWithKeys, ",") Do
+	For Each TableName In TableNames_WithKeys Do
 		If Not Object.Property(TrimAll(TableName)) Then
 			Continue;
 		EndIf;
@@ -568,9 +575,49 @@ Procedure FillDocument_SalesInvoice(Object, FillingValues) Export
 		EndDo;
 	EndDo;
 	
-	// Link and refill rows
+	// Link
+	LinkRows = GetLinkRows(Object, FillingValue);
+	For Each LinkRow In LinkRows Do
+		// Refresh linking row
+		For Each Row_ItemLIst In FillingValue.ItemList Do
+			If LinkRow.Key <> Row_ItemList.Key Then
+				Continue;
+			EndIf;
+			For Each Row In Object.ItemList.FindRows(New Structure("Key", LinkRow.Key)) Do
+				FillPropertyValues(Row, Row_ItemList);
+			EndDo;
+		EndDo;
+		
+		// Reresh tables
+		For Each TableName In TablesNames_Refreshable Do
+			If Object.Property(TableName) Then
+				For Each DeletionRow In Object[TrimAll(TableName)].FindRows(New Structure("Key", LinkRow.Key)) Do
+					Object[TrimAll(TableName)].Delete(DeletionRow);
+				EndDo;
+			Else
+				Continue;
+			EndIf;
+			
+			If Not FillingValue.Property(TableName) Then
+				Continue;
+			EndIf;
+				
+			For Each Row In FillingValue[TrimAll(TableName)] Do
+				If Row.Key = LinkRow.Key Then
+					FillPropertyValues(Object[TrimAll(TableName)].Add(), Row);
+				EndIf;
+			EndDo;
+		EndDo;
+		
+	EndDo;
 	
+	Object.RowIDInfo.Clear();
+	For Each Row In FillingValue.RowIDInfo Do
+		FillPropertyValues(Object.RowIDInfo.Add(), Row);
+	EndDo;	
 EndProcedure
+
+#Region Unlink
 
 Function GetUnlinkRows(Object, FillingValue)
 	UnlinkRows = New Array();
@@ -585,7 +632,9 @@ Function GetUnlinkRows(Object, FillingValue)
 		
 		IsUnlink = True;
 		For Each NewRow In FillingValue.RowIDInfo Do
-			If NewKey = NewRow.Key And OldRow.BasisKey = NewRow.BasisKey Then
+			If NewKey = NewRow.Key 
+				And OldRow.BasisKey = NewRow.BasisKey 
+				And OldRow.Basis = NewRow.Basis Then
 				IsUnlink = False;
 				Break;
 			EndIf;
@@ -637,6 +686,39 @@ Procedure UnlinkAttributes(LinkedRow, AttributeNames)
 		EndIf;
 	EndDo;
 EndProcedure
+
+#EndRegion
+
+#Region Link
+
+Function GetLinkRows(Object, FillingValue)
+	LinkRows = New Array();
+	For Each NewRow In FillingValue.RowIDInfo Do
+		OldKey = NewRow.Key;
+		For Each Row_ItemList In FillingValue.ItemList Do
+			If Row_ItemList.Key = OldKey Then
+				OldKey = Row_ItemList.OldKey;
+				Break;
+			EndIf;
+		EndDo;
+		
+		IsLink = True;
+		For Each OldRow In Object.RowIDInfo Do
+			If OldKey = OldRow.Key
+				And NewRow.BasisKey = OldRow.BasisKey
+				And NewRow.Basis = OldRow.Basis Then
+				IsLink = False;
+				Break;
+			EndIf;
+		EndDo;
+		If IsLink Then
+			LinkRows.Add(NewRow);
+		EndIf;
+	EndDo;	
+	Return LinkRows;
+EndFunction
+
+#EndRegion
 
 #EndRegion
 
@@ -1016,6 +1098,7 @@ Function GetEmptyTable_ItemList()
 	|SalesOrder,
 	|Unit,
 	|Quantity,
+	|QuantityInBaseUnit,
 	|TaxAmount,
 	|TotalAmount,
 	|NetAmount,

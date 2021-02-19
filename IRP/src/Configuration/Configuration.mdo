@@ -648,15 +648,13 @@
   <reports>Report.PriceInfo</reports>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.ItemsInfo</reports>
-  <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
-  <dataProcessors>DataProcessor.FirstStartSettings</dataProcessors>
-  <dataProcessors>DataProcessor.PointOfSale</dataProcessors>
-  <dataProcessors>DataProcessor.DataHistory</dataProcessors>
-  <dataProcessors>DataProcessor.MobileInvent</dataProcessors>
-  <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>
-  <dataProcessors>DataProcessor.Procurement</dataProcessors>
-  <dataProcessors>DataProcessor.SalesOrderStatusReport</dataProcessors>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
+  <dataProcessors>DataProcessor.DataHistory</dataProcessors>
+  <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>
+  <dataProcessors>DataProcessor.MobileInvent</dataProcessors>
+  <dataProcessors>DataProcessor.PointOfSale</dataProcessors>
+  <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
+  <dataProcessors>DataProcessor.Procurement</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

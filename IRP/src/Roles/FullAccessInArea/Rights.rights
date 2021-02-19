@@ -2744,17 +2744,6 @@
 		</right>
 	</object>
 	<object>
-		<name>DataProcessor.SalesOrderStatusReport</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>InformationRegister.CreatedProcurementOrders</name>
 		<right>
 			<name>Read</name>
@@ -12498,17 +12487,6 @@
 		</right>
 		<right>
 			<name>SwitchToDataHistoryVersion</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>DataProcessor.FirstStartSettings</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>

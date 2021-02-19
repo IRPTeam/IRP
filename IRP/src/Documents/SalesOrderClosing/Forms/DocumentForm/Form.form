@@ -935,7 +935,6 @@
     <items xsi:type="form:FormField">
       <name>CloseOrder</name>
       <id>622</id>
-      <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
@@ -980,7 +979,6 @@
     <items xsi:type="form:Button">
       <name>FillByOrder</name>
       <id>620</id>
-      <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
@@ -1017,6 +1015,7 @@
       <key>en</key>
       <value>Group head</value>
     </title>
+    <readOnly>true</readOnly>
     <horizontalStretch>true</horizontalStretch>
     <extendedTooltip>
       <name>GroupHeadExtendedTooltip</name>

@@ -6,7 +6,8 @@ Function GetSelectedRowInfo(CurrentData) Export
 	EndIf;
 	
 	Result.SelectedRow = New Structure();
-	Result.SelectedRow.Insert("Item   "  , CurrentData.Item);
+	Result.SelectedRow.Insert("Key"      , CurrentData.Key);
+	Result.SelectedRow.Insert("Item"     , CurrentData.Item);
 	Result.SelectedRow.Insert("ItemKey"  , CurrentData.ItemKey);
 	Result.SelectedRow.Insert("Store"    , CurrentData.Store);
 	Result.SelectedRow.Insert("Unit"     , CurrentData.Unit);
@@ -44,10 +45,10 @@ Function GetRowIDInfoRows(RowIDInfo) Export
 	RowIDInfoRows = New Array();
 	For Each Row In RowIDInfo Do
 		NewRow = New Structure();
-		//Item, ItemKey, BasisUnit, Store
 		NewRow.Insert("Key"         , Row.Key);
 		NewRow.Insert("RowID"       , Row.RowID); 
-		NewRow.Insert("Quantity"    , Row.Quantity); 
+		NewRow.Insert("Quantity"    , Row.Quantity);
+		NewRow.Insert("BasisKey"    , Row.BasisKey); 
 		NewRow.Insert("Basis"       , Row.Basis);
 		NewRow.Insert("CurrentStep" , Row.CurrentStep);
 		NewRow.Insert("NextStep"    , Row.NextStep);

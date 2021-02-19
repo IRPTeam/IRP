@@ -487,11 +487,15 @@ Procedure LinkBasisDocumentsContinue(FillingValues, AdditionalParameters) Export
 		Return;
 	EndIf;
 	LinkBasisDocumentsContinueAtServer(FillingValues);
+	
+	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, ThisObject, "ShipmentConfirmations");
+	DocumentsClient.UpdateTradeDocumentsTree(Object, ThisObject, 
+		"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
 EndProcedure
 
 &AtServer
 Procedure LinkBasisDocumentsContinueAtServer(FillingValues)
-	RowIDInfo.FillDocument_SalesInvoice(FillingValues, Object);
+	RowIDInfo.FillDocument_SalesInvoice(Object, FillingValues);
 EndProcedure
 
 &AtClient

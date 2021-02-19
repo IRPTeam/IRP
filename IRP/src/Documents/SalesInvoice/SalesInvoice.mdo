@@ -1059,6 +1059,19 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="2b92ee60-2437-4a98-aa26-a3ef653544eb">
+      <name>BasisKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="a08281a0-3534-41ae-868b-aeaabd379135">
     <producedTypes>
@@ -1265,6 +1278,19 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="1a1fea41-147e-4a37-baa8-9b54250a71ac">
+      <name>BasisKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
   <commands uuid="1940e8ac-35c7-4889-9c93-09a9af1eb411">

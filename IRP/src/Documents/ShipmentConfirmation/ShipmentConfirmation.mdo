@@ -514,6 +514,19 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="42eeb0d8-8d37-42dd-b242-8adcd791da7a">
+      <name>BasisKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
   </tabularSections>
   <commands uuid="ee505248-867e-49a2-ab6b-efc12c78befc">
     <name>GenerateShipmentConfirmation</name>

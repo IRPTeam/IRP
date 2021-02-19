@@ -68,38 +68,46 @@ EndProcedure
 // 	Source - DocumentObject.SalesOrder
 Procedure SalesOrder_FillRowID(Source)
 	//@TEST
-	If Source.RowIDInfo.Count() Then
-		Return;
-	EndIf;
+//	If Source.RowIDInfo.Count() Then
+//		Return;
+//	EndIf;
 	//
 	
-	Source.RowIDInfo.Clear();
+//	Source.RowIDInfo.Clear();
 	For Each Row In Source.ItemList Do
-		
+	
 		If Row.Cancel Then
 			Continue;
 		EndIf;
 		
-		NewRow = Source.RowIDInfo.Add();
-		NewRow.Key = Row.Key;
-		NewRow.RowID = Row.Key;
-		NewRow.Quantity = Row.QuantityInBaseUnit;
-		
-		NextStep = Catalogs.MovementRules.EmptyRef();
-		
-		If Row.ProcurementMethod = Enums.ProcurementMethods.Purchase Then
-			NextStep = Catalogs.MovementRules.PO;
-		Else
-			If Source.ShipmentConfirmationsBeforeSalesInvoice Then
-				NextStep = Catalogs.MovementRules.SC;
-			Else
-				NextStep = Catalogs.MovementRules.SI;
-			EndIf;
+		RowIdInfoRow = Undefined;
+		RowIDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", Row.Key));
+		If RowIDInfoRows.Count() = 0 Then
+			RowIdInfoRow = Source.RowIDInfo.Add();
+		ElsIf RowIDInfoRows.Count() = 1 Then
+			RowIdInfoRow = RowIdInfoRows[0];
 		EndIf;
 		
-		NewRow.NextStep = NextStep;
 		
-		NewRow.RowRef = CreateRowIDCatalog(NewRow, Row, Source, NOT ValueIsFilled(NewRow.Basis));
+		RowIdInfoRow.Key = Row.Key;
+		RowIdInfoRow.RowID = Row.Key;
+		RowIdInfoRow.Quantity = Row.QuantityInBaseUnit;
+		//RowIdInfoRow.BasisKey = Row.Key;
+		
+		If Not ValueIsFilled(RowIdInfoRow.NextStep) Then
+			NextStep = Catalogs.MovementRules.EmptyRef();
+			If Row.ProcurementMethod = Enums.ProcurementMethods.Purchase Then
+				NextStep = Catalogs.MovementRules.PO;
+			Else
+				If Source.ShipmentConfirmationsBeforeSalesInvoice Then
+					NextStep = Catalogs.MovementRules.SC;
+				Else
+					NextStep = Catalogs.MovementRules.SI;
+				EndIf;
+			EndIf;
+			RowIdInfoRow.NextStep = NextStep;
+		EndIf;
+		RowIdInfoRow.RowRef = CreateRowIDCatalog(RowIdInfoRow, Row, Source);
 	EndDo;
 EndProcedure
 
@@ -109,31 +117,31 @@ EndProcedure
 // 	Source - DocumentObject.SalesInvoice
 Procedure SalesInvoice_FillRowID(Source)
 	//@TEST
-	If Source.RowIDInfo.Count() Then
-		Return;
-	EndIf;
-	
-	
-	Source.RowIDInfo.Clear();
-	For Each Row In Source.ItemList Do
-		NewRow = Source.RowIDInfo.Add();
-		NewRow.Key = Row.Key;
-		NewRow.RowID = Row.Key;
-		NewRow.Quantity = Row.QuantityInBaseUnit;
-		
-		NextStep = Catalogs.MovementRules.EmptyRef();
-		
-		If Row.UseShipmentConfirmation Then
-			NextStep = Catalogs.MovementRules.FromSItoSC;
-		EndIf;
-		If Not Row.SalesOrder.IsEmpty() Then
-			NewRow.Basis = Row.SalesOrder;
-			NewRow.CurrentStep = Catalogs.MovementRules.FromSOtoSI;			
-		EndIf;
-		
-		NewRow.NextStep = NextStep;
-		NewRow.RowRef = CreateRowIDCatalog(NewRow, Row, Source, NOT ValueIsFilled(NewRow.Basis));
-	EndDo;
+//	If Source.RowIDInfo.Count() Then
+//		Return;
+//	EndIf;
+//	
+//	
+//	Source.RowIDInfo.Clear();
+//	For Each Row In Source.ItemList Do
+//		NewRow = Source.RowIDInfo.Add();
+//		NewRow.Key = Row.Key;
+//		NewRow.RowID = Row.Key;
+//		NewRow.Quantity = Row.QuantityInBaseUnit;
+//		
+//		NextStep = Catalogs.MovementRules.EmptyRef();
+//		
+//		If Row.UseShipmentConfirmation Then
+//			NextStep = Catalogs.MovementRules.FromSItoSC;
+//		EndIf;
+//		If Not Row.SalesOrder.IsEmpty() Then
+//			NewRow.Basis = Row.SalesOrder;
+//			NewRow.CurrentStep = Catalogs.MovementRules.FromSOtoSI;			
+//		EndIf;
+//		
+//		NewRow.NextStep = NextStep;
+//		NewRow.RowRef = CreateRowIDCatalog(NewRow, Row, Source, NOT ValueIsFilled(NewRow.Basis));
+//	EndDo;
 EndProcedure
 
 #Region ExtractData
@@ -167,6 +175,7 @@ Function ExtractData_SalesOrder(BasisesTable, ShipmentConfirmationsTable)
 	Query = New Query();
 	Query.Text =
 		"SELECT
+		|	BasisesTable.OldKey,
 		|	BasisesTable.Key,
 		|	BasisesTable.RowID,
 		|	BasisesTable.CurrentStep,
@@ -181,6 +190,7 @@ Function ExtractData_SalesOrder(BasisesTable, ShipmentConfirmationsTable)
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
+		|	ShipmentConfirmationsTable.OldKey,
 		|	ShipmentConfirmationsTable.Key,
 		|	ShipmentConfirmationsTable.RowID,
 		|	ShipmentConfirmationsTable.CurrentStep,
@@ -196,6 +206,7 @@ Function ExtractData_SalesOrder(BasisesTable, ShipmentConfirmationsTable)
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT DISTINCT
+		|	BasisesTable.OldKey AS OldKey,
 		|	BasisesTable.Key AS Key,
 		|	BasisesTable.Basis AS Basis,
 		|	BasisesTable.BasisUnit AS BasisUnit,
@@ -208,6 +219,7 @@ Function ExtractData_SalesOrder(BasisesTable, ShipmentConfirmationsTable)
 		|UNION
 		|
 		|SELECT
+		|	ShipmentConfirmationsTable.OldKey,
 		|	ShipmentConfirmationsTable.RowID,
 		|	ShipmentConfirmationsTable.SalesOrder,
 		|	ShipmentConfirmationsTable.BasisUnit,
@@ -216,6 +228,7 @@ Function ExtractData_SalesOrder(BasisesTable, ShipmentConfirmationsTable)
 		|FROM
 		|	ShipmentConfirmationsTable AS ShipmentConfirmationsTable
 		|GROUP BY
+		|	ShipmentConfirmationsTable.OldKey,
 		|	ShipmentConfirmationsTable.RowID,
 		|	ShipmentConfirmationsTable.SalesOrder,
 		|	ShipmentConfirmationsTable.BasisUnit,
@@ -256,7 +269,8 @@ Function ExtractData_SalesOrder(BasisesTable, ShipmentConfirmationsTable)
 		|		WHEN FilterItemList.ShipmentKey = """"
 		|			THEN FALSE
 		|		ELSE TRUE
-		|	END AS HaveShipment
+		|	END AS HaveShipment,
+		|	FilterItemList.OldKey AS OldKey
 		|FROM
 		|	FilterItemList AS FilterItemList
 		|		LEFT JOIN Document.SalesOrder.ItemList AS ItemList
@@ -275,7 +289,8 @@ Function ExtractData_SalesOrder(BasisesTable, ShipmentConfirmationsTable)
 		|	BasisesTable.RowRef,
 		|	BasisesTable.Basis,
 		|	BasisesTable.Quantity,
-		|	"""" AS ShipmentKey
+		|	"""" AS ShipmentKey,
+		|	BasisesTable.Key AS BasisKey
 		|FROM
 		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.SalesOrder.ItemList AS ItemList
@@ -292,6 +307,7 @@ Function ExtractData_SalesOrder(BasisesTable, ShipmentConfirmationsTable)
 		|	ShipmentConfirmationsTable.RowRef,
 		|	ShipmentConfirmationsTable.Basis,
 		|	ShipmentConfirmationsTable.Quantity,
+		|	ShipmentConfirmationsTable.Key,
 		|	ShipmentConfirmationsTable.Key
 		|FROM
 		|	ShipmentConfirmationsTable AS ShipmentConfirmationsTable
@@ -338,7 +354,8 @@ Function ExtractData_SalesOrder(BasisesTable, ShipmentConfirmationsTable)
 		|	ShipmentConfirmationsTable.Basis AS ShipmentConfirmation,
 		|	ShipmentConfirmationsTable.Quantity,
 		|	ShipmentConfirmationsTable.Quantity AS QuantityInShipmentConfirmation,
-		|	ShipmentConfirmationsTable.Key AS ShipmentKey
+		|	ShipmentConfirmationsTable.Key AS ShipmentKey,
+		|	ShipmentConfirmationsTable.Key AS BasisKey
 		|FROM
 		|	ShipmentConfirmationsTable
 		|		INNER JOIN FilterItemList AS FilterItemList
@@ -395,14 +412,17 @@ Function ExtractData_SalesOrder(BasisesTable, ShipmentConfirmationsTable)
 		EndDo;
 		
 		For Each Row_RowIDInfo In Table_RowIDInfo.FindRows(Filter) Do
-			Row_RowIDInfo.TempKey = TempKey;
+			Row_RowIDInfo.TempKey  = TempKey;
 		EndDo;		
 	EndDo;
+	
+	Table_OldKeys = Table_ItemList.Copy(, "Ref, HaveShipment, Key, OldKey");
 	
 	Table_ItemList.GroupBy("BasedOn, Key, Ref, SalesOrder, Partner, LegalName, PriceIncludeTax, Agreement, 
 			|ManagerSegment, Currency, Company, ItemKey, Unit, Store, PriceType, DeliveryDate,
 			|DontCalculateRow, Quantity, OriginalQuantity, Price, TaxAmount, TotalAmount, NetAmount,
 			|OffersAmount, LineNumber, BasisUnit, HaveShipment" , "QuantityInBaseUnit");
+	Table_ItemList.Columns.Add("OldKey");
 	
 	For Each Row_ItemList In Table_ItemList Do
 		NewKey = String(New UUID());
@@ -425,6 +445,15 @@ Function ExtractData_SalesOrder(BasisesTable, ShipmentConfirmationsTable)
 				Row_Table_RowIDInfo.Key = NewKey;
 			EndDo;
 		EndDo;
+		
+		Filter_OldKeys = New Structure();
+		Filter_OldKeys.Insert("Key"          , Row_ItemList.Key);
+		Filter_OldKeys.Insert("Ref"          , Row_ItemList.Ref);
+		Filter_OldKeys.Insert("HaveShipment" , Row_ItemList.HaveShipment);
+		OldKeysRows = Table_OldKeys.FindRows(Filter_OldKeys);
+		If OldKeysRows.Count() Then
+			Row_ItemList.OldKey = OldKeysRows[0].OldKey;
+		EndIf;
 		
 		If Row_ItemList.Unit <> Row_ItemList.BasisUnit Then
 			UnitFactor = Catalogs.Units.GetUnitFactor(Row_ItemList.BasisUnit, Row_ItemList.Unit);		
@@ -472,8 +501,7 @@ Function ExtractData_SalesOrder(BasisesTable, ShipmentConfirmationsTable)
 				NewRow_SpecialOffers.Amount = NewRow_SpecialOffers.Amount / Row_ItemList.OriginalQuantity * Row_ItemList.QuantityInBaseUnit;
 			EndIf;
 			NewRow_SpecialOffers.Key = NewKey;
-		EndDo;		
-				
+		EndDo;	
 		Row_ItemList.Key = NewKey;
 	EndDo;
 	
@@ -490,9 +518,124 @@ EndFunction
 
 #Region FillDocument
 
-Procedure FillDocument_SalesInvoice(FillingValues, Object) Export
-	f=1;
+Procedure FillDocument_SalesInvoice(Object, FillingValues) Export
+	FillingValue = Undefined;
+	If FillingValues.Count() = 1 Then
+		FillingValue = FillingValues[0];
+	Else
+		Return;
+	EndIf;
 	
+	TablesWithLinkedDocuments = "ShipmentConfirmations";
+	AttributesWithLinkedDocuments = "SalesOrder";
+	
+	// Unlink
+	UnlinkRows = GetUnlinkRows(Object, FillingValue);
+	TableNames = StrSplit(TablesWithLinkedDocuments, ",");
+	AttributeNames = StrSplit(AttributesWithLinkedDocuments, ",");
+	For Each UnlinkRow In UnlinkRows Do
+		UnlinkTables(Object, UnlinkRow, TableNames);
+		
+		// Clear attributes in ItemList
+		LinkedRows = Object.ItemList.FindRows(New Structure("Key", UnlinkRow.Key));
+		For Each LinkedRow In LinkedRows Do			
+			If Not IsCanUnlinkAttributes(Object, UnlinkRow, TableNames) Then
+				Continue;
+			EndIf;
+			UnlinkAttributes(LinkedRow, AttributeNames);
+		EndDo;
+	EndDo;
+	
+	Object.RowIDInfo.Clear();
+	For Each Row In FillingValue.RowIDInfo Do
+		FillPropertyValues(Object.RowIDInfo.Add(), Row);
+	EndDo;
+		
+	TablesWithKeys = "ItemList, SpecialOffers, TaxList, Currencies, SerialLotNumbers, ShipmentConfirmations";
+	
+	// Replace key
+	For Each TableName In StrSplit(TablesWithKeys, ",") Do
+		If Not Object.Property(TrimAll(TableName)) Then
+			Continue;
+		EndIf;
+		
+		For Each Row_ItemList In FillingValue.ItemLIst Do
+			If ValueIsFilled(Row_ItemList.OldKey) And Row_ItemList.OldKey <> Row_ItemList.Key Then
+				For Each Row In Object[TrimAll(TableName)].FindRows(New Structure("Key", Row_ItemList.OldKey)) Do
+					Row.Key = Row_ItemList.Key;
+				EndDo;	
+			EndIf;
+		EndDo;
+	EndDo;
+	
+	// Link and refill rows
+	
+EndProcedure
+
+Function GetUnlinkRows(Object, FillingValue)
+	UnlinkRows = New Array();
+	For Each OldRow In Object.RowIDInfo Do
+		NewKey = OldRow.Key;
+		For Each Row_ItemList In FillingValue.ItemList Do
+			If ValueIsFilled(Row_ItemList.OldKey) And Row_ItemList.OldKey = NewKey Then
+				NewKey = Row_ItemList.Key;
+				Break;
+			EndIf;
+		EndDo;
+		
+		IsUnlink = True;
+		For Each NewRow In FillingValue.RowIDInfo Do
+			If NewKey = NewRow.Key And OldRow.BasisKey = NewRow.BasisKey Then
+				IsUnlink = False;
+				Break;
+			EndIf;
+		EndDo;
+		
+		If IsUnlink Then
+			UnlinkRows.Add(OldRow);
+		EndIf;
+	EndDo;
+	Return UnlinkRows;
+EndFunction
+
+Procedure UnlinkTables(Object, UnlinkRow, TableNames)
+	For Each TableName In TableNames Do
+		If Not Object.Property(TrimAll(TableName)) Then
+			Continue;
+		EndIf;
+			
+		Filter = New Structure("Key, BasisKey", UnlinkRow.Key, UnlinkRow.BasisKey);
+		LinkedRows = Object[TrimAll(TableName)].FindRows(Filter);
+			
+		For Each LinkedRow In LinkedRows Do
+			Object[TrimAll(TableName)].Delete(LinkedRow);
+		EndDo;
+	EndDo;
+EndProcedure
+
+Function IsCanUnlinkAttributes(Object, UnlinkRow, TableNames)
+	IsCanUnlink = True;
+	For Each TableName In TableNames Do
+		If Not Object.Property(TrimAll(TableName)) Then
+			Continue;
+		EndIf;
+			
+		Filter = New Structure("Key", UnlinkRow.Key);
+		LinkedRows = Object[TrimAll(TableName)].FindRows(Filter);
+		If LinkedRows.Count() Then
+			IsCanUnlink = False;
+			Break;
+		EndIf;
+	EndDo;
+	Return IsCanUnlink;
+EndFunction
+
+Procedure UnlinkAttributes(LinkedRow, AttributeNames)
+	For Each AttributeName In AttributeNames Do
+		If LinkedRow.Property(TrimAll(AttributeName)) Then
+			LinkedRow[TrimAll(AttributeName)] = Undefined;
+		EndIf;
+	EndDo;
 EndProcedure
 
 #EndRegion
@@ -660,6 +803,7 @@ Function GetBasises(StepArray, FilterValues, BasisesVariants)
 	|	Doc.Store AS Store,
 	|	Doc.Ref AS Basis,
 	|	Doc.Key AS Key,
+	|	Doc.Key AS OldKey,
 	|	CASE
 	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
 	|			THEN Doc.ItemKey.Item.Unit
@@ -685,6 +829,7 @@ Function GetBasises(StepArray, FilterValues, BasisesVariants)
 	|	Doc.ItemKey.Item,
 	|	Doc.Store,
 	|	Doc.Ref,
+	|	Doc.Key,
 	|	Doc.Key,
 	|	CASE
 	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
@@ -732,25 +877,7 @@ EndProcedure
 
 #Region Service
 
-Function GetRowInfo(RowIDList, StepArray)
-	Query = New Query;
-	Query.Text =
-		"SELECT
-		|	RowInfo.RowID,
-		|	RowInfo.Step,
-		|	RowInfo.Basis,
-		|	RowInfo.QuantityBalance
-		|FROM
-		|	AccumulationRegister.T10000B_RowIDMovements.Balance(, Step IN (&StepArray)
-		|	AND RowID IN (&RowIDList)) AS RowInfo";
-	
-	Query.SetParameter("RowIDList", RowIDList);
-	Query.SetParameter("StepArray", StepArray);
-	
-	Return Query.Execute().Unload();
-EndFunction
-
-Function CreateRowIDCatalog(NewRow, Row, Source, Update = False)
+Function CreateRowIDCatalog(RowIdInfoRow, Row, Source)
 	Query = New Query;
 	Query.Text =
 		"SELECT
@@ -760,26 +887,24 @@ Function CreateRowIDCatalog(NewRow, Row, Source, Update = False)
 		|WHERE
 		|	RowIDs.RowID = &RowID";
 	
-	Query.SetParameter("RowID", NewRow.RowID);
+	Query.SetParameter("RowID", RowIdInfoRow.RowID);
 	QueryResult = Query.Execute().Select();
 	
 	If QueryResult.Next() Then
-		If Not Update Then
-			Return QueryResult.Ref;
-		Else
-			RowRefObject = QueryResult.Ref.GetObject();
-		EndIf;
+		RowRefObject = QueryResult.Ref.GetObject();
 	Else
 		RowRefObject = Catalogs.RowIDs.CreateItem();
+		//RowRefObject.Basis = Source.Ref;
 	EndIf;
 	FillPropertyValues(RowRefObject, Source);
 	FillPropertyValues(RowRefObject, Row);
-	RowRefObject.Basis = Source.Ref;
-	RowRefObject.RowID = NewRow.RowID;
-	RowRefObject.Description = NewRow.RowID;
+	//RowRefObject.Basis = Undefined;
+	RowRefObject.RowID = RowIdInfoRow.RowID;
+	RowRefObject.Description = RowIdInfoRow.RowID;
 	RowRefObject.Write();
 	Return RowRefObject.Ref;
 EndFunction
+
 
 #EndRegion
 
@@ -877,6 +1002,7 @@ Function GetEmptyTable_ItemList()
 	Columns = 
 	"Ref,
 	|Key,
+	|OldKey,
 	|BasedOn,
 	|Company,
 	|Partner,
@@ -906,7 +1032,7 @@ Function GetEmptyTable_ItemList()
 EndFunction
 
 Function GetEmptyTable_RowIDInfo()
-	Columns = "Ref, Key, RowID, Quantity, Basis, CurrentStep, NextStep, RowRef";
+	Columns = "Ref, Key, RowID, Quantity, BasisKey, Basis, CurrentStep, NextStep, RowRef";
 	Table = New ValueTable();
 	For Each Column In StrSplit(Columns, ",") Do
 		Table.Columns.Add(TrimAll(Column));
@@ -933,28 +1059,13 @@ Function GetEmptyTable_SpecialOffers()
 EndFunction
 
 Function GetEmptyTable_ShipmentConfirmation()
-	Columns = "Ref, Key, ShipmentConfirmation, Quantity, QuantityInShipmentConfirmation";
+	Columns = "Ref, Key, BasisKey, ShipmentConfirmation, Quantity, QuantityInShipmentConfirmation";
 	Table = New ValueTable();
 	For Each Column In StrSplit(Columns, ",") Do
 		Table.Columns.Add(TrimAll(Column));
 	EndDo;
 	Return Table;	
 EndFunction
-	
-//Function GetEmptyTable_Basises() Export
-//	Table = New ValueTable();
-//	Table.Columns.Add("ItemKey"     , New TypeDescription("CatalogRef.ItemKeys"));
-//	Table.Columns.Add("Item"        , New TypeDescription("CatalogRef.Items"));
-//	Table.Columns.Add("Store"       , New TypeDescription("CatalogRef.Stores"));
-//	Table.Columns.Add("BasisUnit"   , New TypeDescription("CatalogRef.Units"));
-//	Table.Columns.Add("CurrentStep" , New TypeDescription("CatalogRef.MovementRules"));
-//	Table.Columns.Add("RowRef"      , New TypeDescription("CatalogRef.RowIDs"));
-//	Table.Columns.Add("Key"         , Metadata.DefinedTypes.typeRowID.Type);
-//	Table.Columns.Add("RowID"       , Metadata.DefinedTypes.typeRowID.Type);
-//	Table.Columns.Add("Quantity"    , Metadata.DefinedTypes.typeQuantity.Type);
-//	Table.Columns.Add("Basis"       , Metadata.AccumulationRegisters.T10000B_RowIDMovements.Dimensions.Basis.Type);
-//	Return Table;
-//EndFunction
 	
 #EndRegion
 

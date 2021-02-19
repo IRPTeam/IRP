@@ -63,6 +63,20 @@
   <content>Document.PlannedReceiptReservation.Attribute.Requester</content>
   <content>Document.SalesReturn.TabularSection.GoodsReceipts.Attribute.GoodsReceipt</content>
   <content>Document.PurchaseReturn.TabularSection.ShipmentConfirmations.Attribute.ShipmentConfirmation</content>
+  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.SalesOrder</content>
+  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.SalesInvoice</content>
+  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.InventoryTransferOrder</content>
+  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.InventoryTransfer</content>
+  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.PurchaseReturnOrder</content>
+  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.PurchaseReturn</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.PurchaseInvoice</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.PurchaseOrder</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.InternalSupplyRequest</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.InventoryTransferOrder</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SalesReturn</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SalesReturnOrder</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.InventoryTransfer</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SalesInvoice</content>
   <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
     <name>RelatedDocuments</name>
     <synonym>

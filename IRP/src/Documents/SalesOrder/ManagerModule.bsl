@@ -1797,6 +1797,8 @@ Function R2014T_CanceledSalesOrders()
 
 EndFunction
 
+#Region Stock
+
 Function R4011B_FreeStocks()
 	Return
 		"SELECT
@@ -1826,6 +1828,8 @@ Function R4012B_StockReservation()
 		|	AND ItemList.IsProcurementMethod_Stock";
 
 EndFunction
+
+#EndRegion
 
 Function R4013B_StockReservationPlanning()
 	Return

@@ -29,7 +29,6 @@ Procedure OnStart()
 
 		If Not ServiceSystemServer.GetConstantValue("NotFirstStart") Then
 			FillingFromClassifiers.FillDescriptionOfPredefinedCatalogs();
-			LocalizationClient.OpenFirstStartSettingsForm();
 			ServiceSystemServer.SetConstantValue("NotFirstStart", True);
 		EndIf;
 

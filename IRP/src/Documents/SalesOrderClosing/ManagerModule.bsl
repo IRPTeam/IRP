@@ -158,39 +158,46 @@ EndFunction
 
 Function R2011B_SalesOrdersShipment()
 	Return
-		"SELECT 
+		"SELECT
+		|	&Period AS Period,
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	- R2011B_SalesOrdersShipmentBalance.QuantityBalance AS Quantity,	
 		|	*
 		|INTO R2011B_SalesOrdersShipment
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE QueryTable.isCanceled
-		|	AND NOT QueryTable.IsService";
+		|	AccumulationRegister.R2011B_SalesOrdersShipment.Balance(, Order = &SalesOrder) AS R2011B_SalesOrdersShipmentBalance";
 
 EndFunction
 
 Function R2012B_SalesOrdersInvoiceClosing()
 	Return
-		"SELECT 
+		"SELECT
+		|	&Period AS Period,
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	- R2012B_SalesOrdersInvoiceClosingBalance.QuantityBalance AS Quantity,
+		|	- R2012B_SalesOrdersInvoiceClosingBalance.AmountBalance AS Amount,
+		|	- R2012B_SalesOrdersInvoiceClosingBalance.NetAmountBalance AS NetAmount,
 		|	*
 		|INTO R2012B_SalesOrdersInvoiceClosing
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE QueryTable.isCanceled";
+		|	AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Balance(, Order = &SalesOrder) AS
+		|		R2012B_SalesOrdersInvoiceClosingBalance";
 
 EndFunction
 
 Function R2013T_SalesOrdersProcurement()
 	Return
-		"SELECT 
-		|QueryTable.Quantity AS OrderedQuantity,
-		|*
+		"SELECT
+		|	QueryTable.Quantity AS OrderedQuantity,
+		|	*
 		|INTO R2013T_SalesOrdersProcurement
 		|FROM
 		|	ItemList AS QueryTable
-		|WHERE QueryTable.isCanceled AND NOT QueryTable.IsService
-		|	AND QueryTable.IsProcurementMethod_Purchase";
+		|WHERE
+		|	QueryTable.isCanceled
+		|	AND NOT QueryTable.IsService
+		|	AND QueryTable.IsProcurementMethod_Purchase
+		|	AND QueryTable.Quantity <> 0";
 
 EndFunction
 
@@ -200,7 +207,7 @@ Function R2014T_CanceledSalesOrders()
 		|	- QueryTable.Quantity AS Quantity,
 		|	- QueryTable.Amount AS Amount,
 		|	- QueryTable.NetAmount AS NetAmount,
-		|*
+		|	*
 		|
 		|INTO R2014T_CanceledSalesOrders
 		|FROM
@@ -218,7 +225,8 @@ Function R4011B_FreeStocks()
 		|FROM
 		|	ItemList AS QueryTable
 		|WHERE QueryTable.isCanceled AND NOT QueryTable.IsService
-		|	AND QueryTable.IsProcurementMethod_Stock";
+		|	AND QueryTable.IsProcurementMethod_Stock
+		|	AND QueryTable.Quantity <> 0";
 
 EndFunction
 
@@ -231,13 +239,15 @@ Function R4012B_StockReservation()
 		|FROM
 		|	ItemList AS QueryTable
 		|WHERE  QueryTable.isCanceled AND NOT QueryTable.IsService
-		|	AND QueryTable.IsProcurementMethod_Stock";
+		|	AND QueryTable.IsProcurementMethod_Stock
+		|	AND QueryTable.Quantity <> 0";
 
 EndFunction
 
 Function R4013B_StockReservationPlanning()
 	Return
-		"SELECT 
+		"SELECT
+		|	&Period AS Period,
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	*
 		|INTO R4013B_StockReservationPlanning
@@ -249,23 +259,15 @@ EndFunction
 
 Function R4034B_GoodsShipmentSchedule()
 	Return
-		"SELECT 
+		"SELECT
+		|	&Period AS Period,
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	CASE WHEN QueryTable.DeliveryDate = DATETIME(1, 1, 1) THEN
-		|		QueryTable.Period
-		|	ELSE
-		|		QueryTable.DeliveryDate
-		|	END AS Period,
-		|	QueryTable.Order AS Basis,
+		|	- R4034B_GoodsShipmentScheduleBalance.QuantityBalance AS Quantity,
 		|	*
-		|
 		|INTO R4034B_GoodsShipmentSchedule
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE QueryTable.isCanceled 
-		|	AND NOT QueryTable.IsService
-		|	AND QueryTable.IsProcurementMethod_Stock
-		|	AND QueryTable.UseItemsShipmentScheduling";
+		|	AccumulationRegister.R4034B_GoodsShipmentSchedule.Balance(, Basis = &SalesOrder) AS
+		|		R4034B_GoodsShipmentScheduleBalance";
 
 EndFunction
 

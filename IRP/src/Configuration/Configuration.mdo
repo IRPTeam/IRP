@@ -372,7 +372,7 @@
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.DocPlannedReceiptReservationClient</commonModules>
   <commonModules>CommonModule.DocPlannedReceiptReservationServer</commonModules>
-  <commonModules>CommonModule.RowIDInfo</commonModules>
+  <commonModules>CommonModule.RowIDInfoServer</commonModules>
   <commonModules>CommonModule.RowIDInfoClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.BusinessUnit</commonAttributes>
@@ -490,7 +490,8 @@
   <commonForms>CommonForm.ReportForm</commonForms>
   <commonForms>CommonForm.ShareToUsers</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
-  <commonForms>CommonForm.LinkBasisDocuments</commonForms>
+  <commonForms>CommonForm.LinkUnlinkDocumentRows</commonForms>
+  <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>

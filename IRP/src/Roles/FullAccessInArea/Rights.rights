@@ -2565,7 +2565,7 @@
 		</right>
 	</object>
 	<object>
-		<name>CommonForm.LinkBasisDocuments</name>
+		<name>CommonForm.LinkUnlinkDocumentRows</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

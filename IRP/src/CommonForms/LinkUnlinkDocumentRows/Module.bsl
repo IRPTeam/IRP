@@ -2,7 +2,6 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.MainFilter = Parameters.Filter;
-	ThisObject.Mode = "LinkExists";
 	
 	For Each Row_IdInfo In Parameters.TablesInfo.RowIDInfoRows Do
 		NewRow = ThisObject.ResultsTable.Add();
@@ -111,7 +110,7 @@ Procedure FillDocumentsTree(SelectedRow, FilterBySelectedRow);
 		EndDo;
 	EndIf;
 	
-	BasisesTable = RowIDInfo.GetBasisesFor_SalesInvoice(FullFilter);
+	BasisesTable = RowIDInfoServer.GetBasisesFor_SalesInvoice(FullFilter);
 	
 	TopLevelTable = BasisesTable.Copy(,"Basis");
 	TopLevelTable.GroupBy("Basis");
@@ -146,7 +145,7 @@ EndProcedure
 &AtClient
 Procedure Ok(Command)
 	FillingValues = GetFillingValues();
-	Close(FillingValues);
+	Close(New Structure("Operation, FillingValues", "LinkUnlinkDocumentRows", FillingValues));
 EndProcedure
 
 &AtServer
@@ -156,8 +155,8 @@ Function GetFillingValues()
 		Row.OldKey = Row.Key;
 		Row.Key = Row.BasisKey;
 	EndDo;
-	ExtractedData = RowIDInfo.ExtractData(BasisesTable);
-	FillingValues = RowIDInfo.ConvertDataToFillingValues(Metadata.Documents.SalesInvoice, ExtractedData);
+	ExtractedData = RowIDInfoServer.ExtractData(BasisesTable);
+	FillingValues = RowIDInfoServer.ConvertDataToFillingValues(Metadata.Documents.SalesInvoice, ExtractedData);
 	Return FillingValues;
 EndFunction
 

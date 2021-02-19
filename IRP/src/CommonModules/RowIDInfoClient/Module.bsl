@@ -19,10 +19,13 @@ Function GetSelectedRowInfo(CurrentData) Export
 	Return Result;
 EndFunction
 
-Function GetTablesInfo(Object) Export
-	TablesInfo = New Structure();
-	TablesInfo.Insert("ItemListRows"  , GetItemListRows(Object.ItemList));
-	TablesInfo.Insert("RowIDInfoRows" , GetRowIDInfoRows(Object.RowIDInfo));
+Function GetTablesInfo(Object = Undefined) Export
+	TablesInfo = New Structure("ItemListRows, RowIDInfoRows", New Array(), New Array());
+	If Object = Undefined Then
+		Return TablesInfo;
+	EndIf;
+	TablesInfo.ItemListRows  = GetItemListRows(Object.ItemList);
+	TablesInfo.RowIDInfoRows = GetRowIDInfoRows(Object.RowIDInfo);
 	Return TablesInfo;
 EndFunction
 

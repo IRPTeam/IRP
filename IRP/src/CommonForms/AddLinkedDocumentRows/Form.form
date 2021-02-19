@@ -1,36 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:Table">
-    <name>ShipmentConfirmationsTree</name>
-    <id>1</id>
+    <name>DocumentsTree</name>
+    <id>28</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>ShipmentConfirmationsTree</segments>
+      <segments>DocumentsTree</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
     <items xsi:type="form:FormGroup">
-      <name>ShipmentConfirmationsTreeGroup</name>
-      <id>39</id>
+      <name>Group9</name>
+      <id>162</id>
       <items xsi:type="form:FormField">
-        <name>ShipmentConfirmationsTreeUse</name>
-        <id>32</id>
+        <name>DocumentsTreeUse</name>
+        <id>324</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>ShipmentConfirmationsTree.Use</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>DocumentsTree.Use</segments>
         </dataPath>
         <extendedTooltip>
-          <name>ShipmentConfirmationsTreeUseExtendedTooltip</name>
-          <id>34</id>
+          <name>DocumentsTreeUseExtendedTooltip</name>
+          <id>326</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -44,8 +42,8 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>ShipmentConfirmationsTreeUseContextMenu</name>
-          <id>33</id>
+          <name>DocumentsTreeUseContextMenu</name>
+          <id>325</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -61,8 +59,8 @@
         <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
       </items>
       <items xsi:type="form:FormField">
-        <name>ShipmentConfirmationsTreeOrder</name>
-        <id>14</id>
+        <name>DocumentsTreePicture</name>
+        <id>251</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -70,12 +68,13 @@
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
           <paths xsi:type="form:DataPath">
-            <segments>ShipmentConfirmationsTree.Order</segments>
+            <segments>DocumentsTree.Picture</segments>
           </paths>
         </dataPath>
+        <titleLocation>None</titleLocation>
         <extendedTooltip>
-          <name>ShipmentConfirmationsTreeOrderExtendedTooltip</name>
-          <id>16</id>
+          <name>DocumentsTreePictureExtendedTooltip</name>
+          <id>253</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -89,8 +88,8 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>ShipmentConfirmationsTreeOrderContextMenu</name>
-          <id>15</id>
+          <name>DocumentsTreePictureContextMenu</name>
+          <id>252</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -98,23 +97,26 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
-        <type>InputField</type>
+        <type>PictureField</type>
+        <readOnly>true</readOnly>
         <editMode>Enter</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
         <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
+        <extInfo xsi:type="form:ImageFieldExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
+          <horizontalStretch>true</horizontalStretch>
+          <verticalStretch>true</verticalStretch>
+          <valuesPicture xsi:type="core:PictureRef">
+            <picture>CommonPicture.IconCollection2</picture>
+          </valuesPicture>
+          <fileDragMode>AsFileRef</fileDragMode>
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>ShipmentConfirmationsTreeItem</name>
-        <id>20</id>
+        <name>DocumentsTreeRowPresentation</name>
+        <id>248</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -122,12 +124,13 @@
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
           <paths xsi:type="form:DataPath">
-            <segments>ShipmentConfirmationsTree.Item</segments>
+            <segments>DocumentsTree.RowPresentation</segments>
           </paths>
         </dataPath>
+        <titleLocation>None</titleLocation>
         <extendedTooltip>
-          <name>ShipmentConfirmationsTreeItemExtendedTooltip</name>
-          <id>22</id>
+          <name>DocumentsTreeRowPresentationExtendedTooltip</name>
+          <id>250</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -141,8 +144,8 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>ShipmentConfirmationsTreeItemContextMenu</name>
-          <id>21</id>
+          <name>DocumentsTreeRowPresentationContextMenu</name>
+          <id>249</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -151,214 +154,7 @@
           <autoFill>true</autoFill>
         </contextMenu>
         <type>InputField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
-        </extInfo>
-      </items>
-      <items xsi:type="form:FormField">
-        <name>ShipmentConfirmationsTreeItemKey</name>
-        <id>23</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>ShipmentConfirmationsTree.ItemKey</segments>
-          </paths>
-        </dataPath>
-        <extendedTooltip>
-          <name>ShipmentConfirmationsTreeItemKeyExtendedTooltip</name>
-          <id>25</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>ShipmentConfirmationsTreeItemKeyContextMenu</name>
-          <id>24</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>InputField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
-        </extInfo>
-      </items>
-      <items xsi:type="form:FormField">
-        <name>ShipmentConfirmationsTreeUnit</name>
-        <id>26</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>ShipmentConfirmationsTree.Unit</segments>
-          </paths>
-        </dataPath>
-        <extendedTooltip>
-          <name>ShipmentConfirmationsTreeUnitExtendedTooltip</name>
-          <id>28</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>ShipmentConfirmationsTreeUnitContextMenu</name>
-          <id>27</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>InputField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
-        </extInfo>
-      </items>
-      <items xsi:type="form:FormField">
-        <name>ShipmentConfirmationsTreeQuantity</name>
-        <id>29</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>ShipmentConfirmationsTree.Quantity</segments>
-          </paths>
-        </dataPath>
-        <extendedTooltip>
-          <name>ShipmentConfirmationsTreeQuantityExtendedTooltip</name>
-          <id>31</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>ShipmentConfirmationsTreeQuantityContextMenu</name>
-          <id>30</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>InputField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
-        </extInfo>
-      </items>
-      <items xsi:type="form:FormField">
-        <name>ShipmentConfirmationsTreeShipmentConfirmation</name>
-        <id>41</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>ShipmentConfirmationsTree.ShipmentConfirmation</segments>
-          </paths>
-        </dataPath>
-        <extendedTooltip>
-          <name>ShipmentConfirmationsTreeShipmentConfirmationExtendedTooltip</name>
-          <id>43</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>ShipmentConfirmationsTreeShipmentConfirmationContextMenu</name>
-          <id>42</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>InputField</type>
+        <readOnly>true</readOnly>
         <editMode>Enter</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -377,13 +173,9 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <title>
-        <key>en</key>
-        <value>Shipment confirmations tree group</value>
-      </title>
       <extendedTooltip>
-        <name>ShipmentConfirmationsTreeGroupExtendedTooltip</name>
-        <id>40</id>
+        <name>Group9ExtendedTooltip</name>
+        <id>163</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -399,38 +191,24 @@
       <type>ColumnGroup</type>
       <extInfo xsi:type="form:ColumnGroupExtInfo">
         <group>InCell</group>
-        <showTitle>true</showTitle>
       </extInfo>
     </items>
-    <autoCommandBar>
-      <name>ShipmentConfirmationsTreeCommandBar</name>
-      <id>2</id>
+    <items xsi:type="form:FormField">
+      <name>DocumentsTreeUnit</name>
+      <id>50</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
-      <horizontalAlign>Left</horizontalAlign>
-    </autoCommandBar>
-    <handlers>
-      <event>BeforeAddRow</event>
-      <name>ShipmentConfirmationsTreeBeforeAddRow</name>
-    </handlers>
-    <handlers>
-      <event>BeforeDeleteRow</event>
-      <name>ShipmentConfirmationsTreeBeforeDeleteRow</name>
-    </handlers>
-    <searchStringAddition>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <name>ShipmentConfirmationsTreeSearchString</name>
-      <id>5</id>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>DocumentsTree.BasisUnit</segments>
+        </paths>
+      </dataPath>
       <extendedTooltip>
-        <name>ShipmentConfirmationsTreeSearchStringExtendedTooltip</name>
-        <id>7</id>
+        <name>DocumentsTreeUnitExtendedTooltip</name>
+        <id>52</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -444,8 +222,123 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>ShipmentConfirmationsTreeSearchStringContextMenu</name>
-        <id>6</id>
+        <name>DocumentsTreeUnitContextMenu</name>
+        <id>51</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <readOnly>true</readOnly>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <width>5</width>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>DocumentsTreeQuantity</name>
+      <id>53</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>DocumentsTree.Quantity</segments>
+        </paths>
+      </dataPath>
+      <extendedTooltip>
+        <name>DocumentsTreeQuantityExtendedTooltip</name>
+        <id>55</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>DocumentsTreeQuantityContextMenu</name>
+        <id>54</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <readOnly>true</readOnly>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <width>10</width>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <autoCommandBar>
+      <name>DocumentsTreeCommandBar</name>
+      <id>29</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <horizontalAlign>Left</horizontalAlign>
+    </autoCommandBar>
+    <handlers>
+      <event>OnActivateRow</event>
+      <name>DocumentsTreeOnActivateRow</name>
+    </handlers>
+    <searchStringAddition>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <name>DocumentsTreeSearchString</name>
+      <id>32</id>
+      <extendedTooltip>
+        <name>DocumentsTreeSearchStringExtendedTooltip</name>
+        <id>34</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>DocumentsTreeSearchStringContextMenu</name>
+        <id>33</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -463,11 +356,11 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>ShipmentConfirmationsTreeViewStatus</name>
-      <id>11</id>
+      <name>DocumentsTreeViewStatus</name>
+      <id>38</id>
       <extendedTooltip>
-        <name>ShipmentConfirmationsTreeViewStatusExtendedTooltip</name>
-        <id>13</id>
+        <name>DocumentsTreeViewStatusExtendedTooltip</name>
+        <id>40</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -481,8 +374,8 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>ShipmentConfirmationsTreeViewStatusContextMenu</name>
-        <id>12</id>
+        <name>DocumentsTreeViewStatusContextMenu</name>
+        <id>39</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -493,7 +386,6 @@
       <type>ViewStatusAddition</type>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
-        <horizontalLocation>Left</horizontalLocation>
       </extInfo>
     </viewStatusAddition>
     <searchControlAddition>
@@ -502,11 +394,11 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>ShipmentConfirmationsTreeSearchControl</name>
-      <id>8</id>
+      <name>DocumentsTreeSearchControl</name>
+      <id>35</id>
       <extendedTooltip>
-        <name>ShipmentConfirmationsTreeSearchControlExtendedTooltip</name>
-        <id>10</id>
+        <name>DocumentsTreeSearchControlExtendedTooltip</name>
+        <id>37</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -520,8 +412,8 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>ShipmentConfirmationsTreeSearchControlContextMenu</name>
-        <id>9</id>
+        <name>DocumentsTreeSearchControlContextMenu</name>
+        <id>36</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -535,8 +427,8 @@
       </extInfo>
     </searchControlAddition>
     <extendedTooltip>
-      <name>ShipmentConfirmationsTreeExtendedTooltip</name>
-      <id>4</id>
+      <name>DocumentsTreeExtendedTooltip</name>
+      <id>31</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -550,8 +442,8 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>ShipmentConfirmationsTreeContextMenu</name>
-      <id>3</id>
+      <name>DocumentsTreeContextMenu</name>
+      <id>30</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -566,6 +458,7 @@
     <autoMaxHeight>true</autoMaxHeight>
     <autoMaxRowsCount>true</autoMaxRowsCount>
     <selectionMode>MultiRow</selectionMode>
+    <header>true</header>
     <headerHeight>1</headerHeight>
     <footerHeight>1</footerHeight>
     <horizontalScrollBar>AutoUse</horizontalScrollBar>
@@ -574,17 +467,17 @@
     <verticalLines>true</verticalLines>
     <searchOnInput>Auto</searchOnInput>
     <initialListView>Auto</initialListView>
-    <initialTreeView>ExpandAllLevels</initialTreeView>
     <horizontalStretch>true</horizontalStretch>
     <verticalStretch>true</verticalStretch>
     <fileDragMode>AsFileRef</fileDragMode>
+    <searchStringLocation>Top</searchStringLocation>
   </items>
   <autoCommandBar>
     <name>FormCommandBar</name>
     <id>-1</id>
     <items xsi:type="form:Button">
       <name>FormOk</name>
-      <id>35</id>
+      <id>197</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -592,7 +485,7 @@
       </userVisible>
       <extendedTooltip>
         <name>FormOkExtendedTooltip</name>
-        <id>36</id>
+        <id>198</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -615,7 +508,7 @@
     </items>
     <items xsi:type="form:Button">
       <name>FormCancel</name>
-      <id>37</id>
+      <id>199</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -623,7 +516,7 @@
       </userVisible>
       <extendedTooltip>
         <name>FormCancelExtendedTooltip</name>
-        <id>38</id>
+        <id>200</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -644,16 +537,16 @@
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <items xsi:type="form:Button">
-      <name>FormSelectAll</name>
-      <id>44</id>
+      <name>FormCheckAll</name>
+      <id>327</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
       <extendedTooltip>
-        <name>FormSelectAllExtendedTooltip</name>
-        <id>45</id>
+        <name>FormCheckAllExtendedTooltip</name>
+        <id>328</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -666,27 +559,24 @@
           <horizontalAlign>Left</horizontalAlign>
         </extInfo>
       </extendedTooltip>
-      <commandName>Form.Command.SelectAll</commandName>
+      <commandName>Form.Command.CheckAll</commandName>
       <representation>Auto</representation>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
-      <picture xsi:type="core:PictureRef">
-        <picture>StdPicture.CheckAll</picture>
-      </picture>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <items xsi:type="form:Button">
-      <name>FormUnselectAll</name>
-      <id>46</id>
+      <name>FormUncheckAll</name>
+      <id>329</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
       <extendedTooltip>
-        <name>FormUnselectAllExtendedTooltip</name>
-        <id>47</id>
+        <name>FormUncheckAllExtendedTooltip</name>
+        <id>330</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -699,7 +589,7 @@
           <horizontalAlign>Left</horizontalAlign>
         </extInfo>
       </extendedTooltip>
-      <commandName>Form.Command.UnselectAll</commandName>
+      <commandName>Form.Command.UncheckAll</commandName>
       <representation>Auto</representation>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -714,10 +604,13 @@
     <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
   <handlers>
+    <event>OnOpen</event>
+    <name>OnOpen</name>
+  </handlers>
+  <handlers>
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
   </handlers>
-  <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -727,10 +620,10 @@
   <showTitle>true</showTitle>
   <showCloseButton>true</showCloseButton>
   <attributes>
-    <name>ShipmentConfirmationsTree</name>
+    <name>DocumentsTree</name>
     <title>
       <key>en</key>
-      <value>Shipment confirmations tree</value>
+      <value>Documents tree</value>
     </title>
     <id>1</id>
     <valueType>
@@ -743,32 +636,14 @@
       <common>true</common>
     </edit>
     <columns>
-      <name>Order</name>
+      <name>Basis</name>
       <title>
         <key>en</key>
-        <value>Order</value>
+        <value>Basis</value>
       </title>
-      <id>2</id>
+      <id>8</id>
       <valueType>
-        <types>DocumentRef.SalesOrder</types>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>ShipmentConfirmation</name>
-      <title>
-        <key>en</key>
-        <value>Shipment confirmation</value>
-      </title>
-      <id>3</id>
-      <valueType>
-        <types>DocumentRef.ShipmentConfirmation</types>
-        <types>DocumentRef.SalesOrder</types>
+        <types>DocumentRef</types>
       </valueType>
       <view>
         <common>true</common>
@@ -783,7 +658,7 @@
         <key>en</key>
         <value>Item</value>
       </title>
-      <id>4</id>
+      <id>9</id>
       <valueType>
         <types>CatalogRef.Items</types>
       </valueType>
@@ -800,7 +675,7 @@
         <key>en</key>
         <value>Item key</value>
       </title>
-      <id>5</id>
+      <id>10</id>
       <valueType>
         <types>CatalogRef.ItemKeys</types>
       </valueType>
@@ -812,12 +687,12 @@
       </edit>
     </columns>
     <columns>
-      <name>Unit</name>
+      <name>BasisUnit</name>
       <title>
         <key>en</key>
-        <value>Unit</value>
+        <value>Basis unit</value>
       </title>
-      <id>6</id>
+      <id>11</id>
       <valueType>
         <types>CatalogRef.Units</types>
       </valueType>
@@ -834,9 +709,152 @@
         <key>en</key>
         <value>Quantity</value>
       </title>
-      <id>7</id>
+      <id>12</id>
       <valueType>
         <types>DefinedType.typeQuantity</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Level</name>
+      <title>
+        <key>en</key>
+        <value>Level</value>
+      </title>
+      <id>15</id>
+      <valueType>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+        </numberQualifiers>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Key</name>
+      <title>
+        <key>en</key>
+        <value>Key</value>
+      </title>
+      <id>16</id>
+      <valueType>
+        <types>DefinedType.typeRowID</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Store</name>
+      <title>
+        <key>en</key>
+        <value>Store</value>
+      </title>
+      <id>21</id>
+      <valueType>
+        <types>CatalogRef.Stores</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>RowID</name>
+      <title>
+        <key>en</key>
+        <value>Row ID</value>
+      </title>
+      <id>27</id>
+      <valueType>
+        <types>DefinedType.typeRowID</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>RowRef</name>
+      <title>
+        <key>en</key>
+        <value>Row ref</value>
+      </title>
+      <id>28</id>
+      <valueType>
+        <types>CatalogRef.RowIDs</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>CurrentStep</name>
+      <title>
+        <key>en</key>
+        <value>Current step</value>
+      </title>
+      <id>31</id>
+      <valueType>
+        <types>CatalogRef.MovementRules</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>RowPresentation</name>
+      <title>
+        <key>en</key>
+        <value>Row presentation</value>
+      </title>
+      <id>33</id>
+      <valueType>
+        <types>String</types>
+        <stringQualifiers/>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Picture</name>
+      <title>
+        <key>en</key>
+        <value>Picture</value>
+      </title>
+      <id>34</id>
+      <valueType>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+        </numberQualifiers>
       </valueType>
       <view>
         <common>true</common>
@@ -851,7 +869,7 @@
         <key>en</key>
         <value>Use</value>
       </title>
-      <id>8</id>
+      <id>52</id>
       <valueType>
         <types>Boolean</types>
       </valueType>
@@ -863,12 +881,248 @@
       </edit>
     </columns>
     <columns>
-      <name>RowKey</name>
+      <name>Linked</name>
       <title>
         <key>en</key>
-        <value>Row key</value>
+        <value>Linked</value>
       </title>
-      <id>9</id>
+      <id>53</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+  </attributes>
+  <attributes>
+    <name>MainFilter</name>
+    <title>
+      <key>en</key>
+      <value>Main filter</value>
+    </title>
+    <id>13</id>
+    <valueType/>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>ResultsTable</name>
+    <title>
+      <key>en</key>
+      <value>Results table</value>
+    </title>
+    <id>38</id>
+    <valueType>
+      <types>ValueTable</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <columns>
+      <name>Item</name>
+      <title>
+        <key>en</key>
+        <value>Item</value>
+      </title>
+      <id>39</id>
+      <valueType>
+        <types>CatalogRef.Items</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>ItemKey</name>
+      <title>
+        <key>en</key>
+        <value>Item key</value>
+      </title>
+      <id>40</id>
+      <valueType>
+        <types>CatalogRef.ItemKeys</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Store</name>
+      <title>
+        <key>en</key>
+        <value>Store</value>
+      </title>
+      <id>41</id>
+      <valueType>
+        <types>CatalogRef.Stores</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>BasisUnit</name>
+      <title>
+        <key>en</key>
+        <value>Basis unit</value>
+      </title>
+      <id>42</id>
+      <valueType>
+        <types>CatalogRef.Units</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>CurrentStep</name>
+      <title>
+        <key>en</key>
+        <value>Current step</value>
+      </title>
+      <id>43</id>
+      <valueType>
+        <types>CatalogRef.MovementRules</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>RowRef</name>
+      <title>
+        <key>en</key>
+        <value>Row ref</value>
+      </title>
+      <id>44</id>
+      <valueType>
+        <types>CatalogRef.RowIDs</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Key</name>
+      <title>
+        <key>en</key>
+        <value>Key</value>
+      </title>
+      <id>45</id>
+      <valueType>
+        <types>DefinedType.typeRowID</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>RowID</name>
+      <title>
+        <key>en</key>
+        <value>Row ID</value>
+      </title>
+      <id>46</id>
+      <valueType>
+        <types>DefinedType.typeRowID</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Quantity</name>
+      <title>
+        <key>en</key>
+        <value>Quantity</value>
+      </title>
+      <id>47</id>
+      <valueType>
+        <types>DefinedType.typeQuantity</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Basis</name>
+      <title>
+        <key>en</key>
+        <value>Basis</value>
+      </title>
+      <id>48</id>
+      <valueType>
+        <types>DocumentRef</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>BasisKey</name>
+      <title>
+        <key>en</key>
+        <value>Basis key</value>
+      </title>
+      <id>49</id>
+      <valueType>
+        <types>DefinedType.typeRowID</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>OldKey</name>
+      <title>
+        <key>en</key>
+        <value>Old key</value>
+      </title>
+      <id>50</id>
       <valueType>
         <types>DefinedType.typeRowID</types>
       </valueType>
@@ -880,13 +1134,72 @@
       </edit>
     </columns>
   </attributes>
+  <attributes>
+    <name>SetAllCheckedOnOpen</name>
+    <title>
+      <key>en</key>
+      <value>Set all checked on open</value>
+    </title>
+    <id>54</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <formCommands>
+    <name>Link</name>
+    <title>
+      <key>en</key>
+      <value>Link</value>
+    </title>
+    <id>1</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.GotoURL</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>Link</name>
+      </handler>
+    </action>
+    <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Unlink</name>
+    <title>
+      <key>en</key>
+      <value>Unlink</value>
+    </title>
+    <id>2</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.GetURL</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>Unlink</name>
+      </handler>
+    </action>
+    <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
   <formCommands>
     <name>Ok</name>
     <title>
       <key>en</key>
       <value>Ok</value>
     </title>
-    <id>1</id>
+    <id>3</id>
     <use>
       <common>true</common>
     </use>
@@ -903,7 +1216,7 @@
       <key>en</key>
       <value>Cancel</value>
     </title>
-    <id>2</id>
+    <id>4</id>
     <use>
       <common>true</common>
     </use>
@@ -915,29 +1228,32 @@
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>SelectAll</name>
+    <name>CheckAll</name>
     <title>
       <key>en</key>
-      <value>Select all</value>
+      <value>Check all</value>
     </title>
-    <id>3</id>
+    <id>5</id>
     <use>
       <common>true</common>
     </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.CheckAll</picture>
+    </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>SelectAll</name>
+        <name>CheckAll</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>UnselectAll</name>
+    <name>UncheckAll</name>
     <title>
       <key>en</key>
-      <value>Unselect all</value>
+      <value>Uncheck all</value>
     </title>
-    <id>4</id>
+    <id>6</id>
     <use>
       <common>true</common>
     </use>
@@ -946,7 +1262,7 @@
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>UnselectAll</name>
+        <name>UncheckAll</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

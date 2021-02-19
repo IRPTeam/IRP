@@ -249,6 +249,7 @@ Function ExtractData_SalesOrder(BasisesTable, ShipmentConfirmationsTable)
 		|	ItemList.Ref.Company AS Company,
 		|	ItemList.Key,
 		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.ItemKey.Item AS Item,
 		|	ItemList.Unit AS Unit,
 		|	ItemList.Store AS Store,
 		|	ItemList.PriceType AS PriceType,
@@ -419,7 +420,7 @@ Function ExtractData_SalesOrder(BasisesTable, ShipmentConfirmationsTable)
 	Table_OldKeys = Table_ItemList.Copy(, "Ref, HaveShipment, Key, OldKey");
 	
 	Table_ItemList.GroupBy("BasedOn, Key, Ref, SalesOrder, Partner, LegalName, PriceIncludeTax, Agreement, 
-			|ManagerSegment, Currency, Company, ItemKey, Unit, Store, PriceType, DeliveryDate,
+			|ManagerSegment, Currency, Company, Item, ItemKey, Unit, Store, PriceType, DeliveryDate,
 			|DontCalculateRow, Quantity, OriginalQuantity, Price, TaxAmount, TotalAmount, NetAmount,
 			|OffersAmount, LineNumber, BasisUnit, HaveShipment" , "QuantityInBaseUnit");
 	Table_ItemList.Columns.Add("OldKey");
@@ -518,32 +519,50 @@ EndFunction
 
 #Region FillDocument
 
-Procedure FillDocument(Object, FillingValues) Export
-	FillingValue = Undefined;
-	If FillingValues.Count() = 1 Then
-		FillingValue = FillingValues[0];
-	Else
+Procedure AddLinkedDocumentRows(Object, FillingValues) Export
+	FillingValue = GetFillingValue(FillingValues);
+	If FillingValue = Undefined Then
+		Return;
+	EndIf;
+	TableNames_Refreshable = GetTableNames_Refreshable();
+	TableNames_Refreshable.Add("ItemList");
+	For Each TableName In TableNames_Refreshable Do
+		If FillingValue.Property(TableName) 
+			And CommonFunctionsClientServer.ObjectHasProperty(Object, TableName) Then
+			For Each Row In FillingValue[TableName] Do
+				FillPropertyValues(Object[TableName].Add(), Row);
+			EndDo;
+		EndIf;
+	EndDo;
+EndProcedure
+
+Procedure LinkUnlinkDocumentRows(Object, FillingValues) Export
+	FillingValue = GetFillingValue(FillingValues);
+	If FillingValue = Undefined Then
 		Return;
 	EndIf;
 	
 	// таблицы в которых есть связанные документы (будут очищены при отвязке строки)
-	TablesWithLinkedDocuments = "ShipmentConfirmations, GoodsReceipts";
+	TableNames_LinkedDocuments = New Array();
+	TableNames_LinkedDocuments.Add("ShipmentConfirmations");
+	TableNames_LinkedDocuments.Add("GoodsReceipts");
 	
 	// реквизиты таб. части ItemList котрые хранят данные о связанных документах
-	AttributesWithLinkedDocuments = "SalesOrder";
+	AttributeNames_LinkedDocuments = New Array();
+	AttributeNames_LinkedDocuments.Add("SalesOrder");
 	
 	// таблицы в которых есть реквизит Key
-	TablesWithKeys = "ItemList, SpecialOffers, TaxList, Currencies, SerialLotNumbers, ShipmentConfirmations, GoodsReceipts";
+	TableNames_WithKeys = New Array();
+	TableNames_WithKeys.Add("ItemList");
+	TableNames_WithKeys.Add("SpecialOffers");
+	TableNames_WithKeys.Add("TaxList");
+	TableNames_WithKeys.Add("Currencies");
+	TableNames_WithKeys.Add("SerialLotNumbers");
+	TableNames_WithKeys.Add("ShipmentConfirmations");
+	TableNames_WithKeys.Add("GoodsReceipts");
 	
 	// таблицы которые обновлются при привязке документа (будут заполнены при привязке строки)
-	TablesRefreshable = "SpecialOffers, TaxList, ShipmentConfirmations, GoodsReceipts";
-	
-	
-	TableNames_LinkedDocuments = StrSplit(TablesWithLinkedDocuments, ",");
-	AttributeNames_LinkedDocuments = StrSplit(AttributesWithLinkedDocuments, ",");
-	TableNames_WithKeys = StrSplit(TablesWithKeys, ",");
-	TablesNames_Refreshable = StrSplit(TablesRefreshable, ",");
-	
+	TableNames_Refreshable = GetTableNames_Refreshable();
 	
 	// Unlink
 	UnlinkRows = GetUnlinkRows(Object, FillingValue);
@@ -560,61 +579,47 @@ Procedure FillDocument(Object, FillingValues) Export
 		EndDo;
 	EndDo;
 	
-	// Replace key
-	For Each TableName In TableNames_WithKeys Do
-		If Not Object.Property(TrimAll(TableName)) Then
-			Continue;
-		EndIf;
-		
-		For Each Row_ItemList In FillingValue.ItemLIst Do
-			If ValueIsFilled(Row_ItemList.OldKey) And Row_ItemList.OldKey <> Row_ItemList.Key Then
-				For Each Row In Object[TrimAll(TableName)].FindRows(New Structure("Key", Row_ItemList.OldKey)) Do
-					Row.Key = Row_ItemList.Key;
-				EndDo;	
-			EndIf;
-		EndDo;
-	EndDo;
+	ReplaceKeys(Object, FillingValue, TableNames_WithKeys);
 	
 	// Link
 	LinkRows = GetLinkRows(Object, FillingValue);
 	For Each LinkRow In LinkRows Do
-		// Refresh linking row
-		For Each Row_ItemLIst In FillingValue.ItemList Do
-			If LinkRow.Key <> Row_ItemList.Key Then
-				Continue;
-			EndIf;
-			For Each Row In Object.ItemList.FindRows(New Structure("Key", LinkRow.Key)) Do
-				FillPropertyValues(Row, Row_ItemList);
-			EndDo;
-		EndDo;
+		// Update ItemList row
+		LinkAttributes(Object, FillingValue, LinkRow);
 		
-		// Reresh tables
-		For Each TableName In TablesNames_Refreshable Do
-			If Object.Property(TableName) Then
-				For Each DeletionRow In Object[TrimAll(TableName)].FindRows(New Structure("Key", LinkRow.Key)) Do
-					Object[TrimAll(TableName)].Delete(DeletionRow);
-				EndDo;
-			Else
-				Continue;
-			EndIf;
-			
-			If Not FillingValue.Property(TableName) Then
-				Continue;
-			EndIf;
-				
-			For Each Row In FillingValue[TrimAll(TableName)] Do
-				If Row.Key = LinkRow.Key Then
-					FillPropertyValues(Object[TrimAll(TableName)].Add(), Row);
-				EndIf;
-			EndDo;
-		EndDo;
-		
+		// Update tables
+		LinkTables(Object, FillingValue, LinkRow, TableNames_Refreshable);		
 	EndDo;
 	
 	Object.RowIDInfo.Clear();
 	For Each Row In FillingValue.RowIDInfo Do
 		FillPropertyValues(Object.RowIDInfo.Add(), Row);
 	EndDo;	
+EndProcedure
+
+Function GetFillingValue(FillingValues)
+	If TypeOf(FillingValues) = Type("Structure") Then
+		Return FillingValues;
+	ElsIf TypeOf(FillingValues) = Type("Array") And FillingValues.Count() = 1 Then
+		Return FillingValues[0];
+	EndIf;
+	Return Undefined;
+EndFunction
+
+Procedure ReplaceKeys(Object, FillingValue, TableNames)
+	For Each TableName In TableNames Do
+		If Not Object.Property(TableName) Then
+			Continue;
+		EndIf;
+		
+		For Each Row_ItemList In FillingValue.ItemLIst Do
+			If ValueIsFilled(Row_ItemList.OldKey) And Row_ItemList.OldKey <> Row_ItemList.Key Then
+				For Each Row In Object[TableName].FindRows(New Structure("Key", Row_ItemList.OldKey)) Do
+					Row.Key = Row_ItemList.Key;
+				EndDo;	
+			EndIf;
+		EndDo;
+	EndDo;
 EndProcedure
 
 #Region Unlink
@@ -649,15 +654,15 @@ EndFunction
 
 Procedure UnlinkTables(Object, UnlinkRow, TableNames)
 	For Each TableName In TableNames Do
-		If Not Object.Property(TrimAll(TableName)) Then
+		If Not Object.Property(TableName) Then
 			Continue;
 		EndIf;
 			
 		Filter = New Structure("Key, BasisKey", UnlinkRow.Key, UnlinkRow.BasisKey);
-		LinkedRows = Object[TrimAll(TableName)].FindRows(Filter);
+		LinkedRows = Object[TableName].FindRows(Filter);
 			
 		For Each LinkedRow In LinkedRows Do
-			Object[TrimAll(TableName)].Delete(LinkedRow);
+			Object[TableName].Delete(LinkedRow);
 		EndDo;
 	EndDo;
 EndProcedure
@@ -665,12 +670,12 @@ EndProcedure
 Function IsCanUnlinkAttributes(Object, UnlinkRow, TableNames)
 	IsCanUnlink = True;
 	For Each TableName In TableNames Do
-		If Not Object.Property(TrimAll(TableName)) Then
+		If Not Object.Property(TableName) Then
 			Continue;
 		EndIf;
 			
 		Filter = New Structure("Key", UnlinkRow.Key);
-		LinkedRows = Object[TrimAll(TableName)].FindRows(Filter);
+		LinkedRows = Object[TableName].FindRows(Filter);
 		If LinkedRows.Count() Then
 			IsCanUnlink = False;
 			Break;
@@ -681,8 +686,8 @@ EndFunction
 
 Procedure UnlinkAttributes(LinkedRow, AttributeNames)
 	For Each AttributeName In AttributeNames Do
-		If LinkedRow.Property(TrimAll(AttributeName)) Then
-			LinkedRow[TrimAll(AttributeName)] = Undefined;
+		If LinkedRow.Property(AttributeName) Then
+			LinkedRow[AttributeName] = Undefined;
 		EndIf;
 	EndDo;
 EndProcedure
@@ -717,6 +722,42 @@ Function GetLinkRows(Object, FillingValue)
 	EndDo;	
 	Return LinkRows;
 EndFunction
+
+Procedure LinkTables(Object, FillingValue, LinkRow, TableNames)
+	For Each TableName In TableNames Do
+		If Upper(TableName) = Upper("RowIDInfo") Then
+			Continue;
+		EndIf;
+		If Object.Property(TableName) Then
+			For Each DeletionRow In Object[TableName].FindRows(New Structure("Key", LinkRow.Key)) Do
+				Object[TableName].Delete(DeletionRow);
+			EndDo;
+		Else
+			Continue;
+		EndIf;
+			
+		If Not FillingValue.Property(TableName) Then
+			Continue;
+		EndIf;
+				
+		For Each Row In FillingValue[TableName] Do
+			If Row.Key = LinkRow.Key Then
+				FillPropertyValues(Object[TableName].Add(), Row);
+			EndIf;
+		EndDo;
+	EndDo;
+EndProcedure
+
+Procedure LinkAttributes(Object, FillingValue, LinkRow)
+	For Each Row_ItemLIst In FillingValue.ItemList Do
+		If LinkRow.Key <> Row_ItemList.Key Then
+			Continue;
+		EndIf;
+		For Each Row In Object.ItemList.FindRows(New Structure("Key", LinkRow.Key)) Do
+				FillPropertyValues(Row, Row_ItemList);
+		EndDo;
+	EndDo;
+EndProcedure
 
 #EndRegion
 
@@ -996,11 +1037,7 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData)	 Export
 
 	Tables = JoinAllExtractedData(ExtractedData);
 	
-	DepTables = New Array();
-	DepTables.Add("RowIDInfo");
-	DepTables.Add("TaxList");
-	DepTables.Add("SpecialOffers");
-	DepTables.Add("ShipmentConfirmations");
+	TableNames_Refreshable = GetTableNames_Refreshable();
 	
 	HeaderAttributes = New Array();
 	HeaderAttributes.Add("BasedOn");
@@ -1017,27 +1054,30 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData)	 Export
 	MainFilter = New Structure(SeparatorColumns);
 	ArrayOfFillingValues = New Array();
 	
-	For Each Row In UniqueRows Do
-		FillPropertyValues(MainFilter, Row);
+	For Each Row_UniqueRow In UniqueRows Do
+		FillPropertyValues(MainFilter, Row_UniqueRow);
 		TablesFilters = New Array();
 		
 		FillingValues = New Structure(SeparatorColumns);
-		FillPropertyValues(FillingValues, Row);			
+		FillPropertyValues(FillingValues, Row_UniqueRow);			
 		
 		FillingValues.Insert("ItemList", New Array());
-		For Each DepTable In DepTables Do
-			FillingValues.Insert(DepTable, New Array());
+		For Each TableName_Refreshable In TableNames_Refreshable Do
+			FillingValues.Insert(TableName_Refreshable, New Array());
 		EndDo;
 				
-		For Each Row In Tables.ItemList.Copy(MainFilter) Do
-			TablesFilters.Add(New Structure("Ref, Key", Row.Ref, Row.Key));			
-			FillingValues.ItemList.Add(ValueTableRowToStructure(Tables.ItemList.Columns, Row));
+		For Each Row_ItemList In Tables.ItemList.Copy(MainFilter) Do
+			TablesFilters.Add(New Structure("Ref, Key", Row_ItemList.Ref, Row_ItemList.Key));			
+			FillingValues.ItemList.Add(ValueTableRowToStructure(Tables.ItemList.Columns, Row_ItemList));
 		EndDo;
 		
 		For Each TableFilter In TablesFilters Do
-			For Each DepTable In DepTables Do
-				For Each Row In Tables[DepTable].Copy(TableFilter) Do
-					FillingValues[DepTable].Add(ValueTableRowToStructure(Tables[DepTable].Columns, Row));
+			For Each TableName_Refreshable In TableNames_Refreshable Do
+				If Not CommonFunctionsClientServer.ObjectHasProperty(Tables, TableName_Refreshable) Then
+					Continue;
+				EndIf;
+				For Each Row_DepTable In Tables[TableName_Refreshable].Copy(TableFilter) Do
+					FillingValues[TableName_Refreshable].Add(ValueTableRowToStructure(Tables[TableName_Refreshable].Columns, Row_DepTable));
 				EndDo;
 			EndDo;
 		EndDo;			
@@ -1053,7 +1093,7 @@ Function JoinAllExtractedData(ArrayOfData)
 	Tables.Insert("TaxList"               , GetEmptyTable_TaxList());
 	Tables.Insert("SpecialOffers"         , GetEmptyTable_SpecialOffers());
 	Tables.Insert("ShipmentConfirmations" , GetEmptyTable_ShipmentConfirmation());
-	
+	Tables.Insert("GoodsReceipts"         , GetEmptyTable_GoodsReceipts());
 	For Each Data In ArrayOfData Do
 		For Each Table In Tables Do
 			If Data.Property(Table.Key) Then
@@ -1062,6 +1102,16 @@ Function JoinAllExtractedData(ArrayOfData)
 		EndDo;
 	EndDo;
 	Return Tables;
+EndFunction
+
+Function GetTableNames_Refreshable()
+	TableNames_Refreshable = New Array();
+	TableNames_Refreshable.Add("RowIDInfo");
+	TableNames_Refreshable.Add("TaxList");
+	TableNames_Refreshable.Add("SpecialOffers");
+	TableNames_Refreshable.Add("ShipmentConfirmations");
+	TableNames_Refreshable.Add("GoodsReceipts");
+	Return TableNames_Refreshable;
 EndFunction
 
 Procedure CopyTable(Receiver, Source)
@@ -1095,6 +1145,7 @@ Function GetEmptyTable_ItemList()
 	|ManagerSegment,
 	|Store,
 	|ItemKey,
+	|Item,
 	|SalesOrder,
 	|Unit,
 	|Quantity,
@@ -1143,6 +1194,15 @@ EndFunction
 
 Function GetEmptyTable_ShipmentConfirmation()
 	Columns = "Ref, Key, BasisKey, ShipmentConfirmation, Quantity, QuantityInShipmentConfirmation";
+	Table = New ValueTable();
+	For Each Column In StrSplit(Columns, ",") Do
+		Table.Columns.Add(TrimAll(Column));
+	EndDo;
+	Return Table;	
+EndFunction
+
+Function GetEmptyTable_GoodsReceipts()
+	Columns = "Ref, Key, BasisKey, GoodsReceipt, Quantity, QuantityInGoodsReceipt";
 	Table = New ValueTable();
 	For Each Column In StrSplit(Columns, ",") Do
 		Table.Columns.Add(TrimAll(Column));

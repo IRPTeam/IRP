@@ -2227,16 +2227,16 @@
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
-            <name>ItemListSelectShipmentConfirmation</name>
-            <id>436</id>
+            <name>ItemListAddBasisDocuments</name>
+            <id>1095</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>ItemListSelectShipmentConfirmationExtendedTooltip</name>
-              <id>437</id>
+              <name>ItemListAddBasisDocumentsExtendedTooltip</name>
+              <id>1096</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -2249,7 +2249,7 @@
                 <horizontalAlign>Left</horizontalAlign>
               </extInfo>
             </extendedTooltip>
-            <commandName>Form.Command.SelectShipmentConfirmation</commandName>
+            <commandName>Form.Command.AddBasisDocuments</commandName>
             <representation>Auto</representation>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -2257,7 +2257,7 @@
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
-            <name>ItemListLinkBasisDocuments</name>
+            <name>ItemListLinkUnlinkBasisDocuments</name>
             <id>1022</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2265,7 +2265,7 @@
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>ItemListLinkBasisDocumentsExtendedTooltip</name>
+              <name>ItemListLinkUnlinkBasisDocumentsExtendedTooltip</name>
               <id>1023</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -2279,7 +2279,7 @@
                 <horizontalAlign>Left</horizontalAlign>
               </extInfo>
             </extendedTooltip>
-            <commandName>Form.Command.LinkBasisDocuments</commandName>
+            <commandName>Form.Command.LinkUnlinkBasisDocuments</commandName>
             <representation>Auto</representation>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -7893,40 +7893,6 @@
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>SelectShipmentConfirmation</name>
-    <title>
-      <key>en</key>
-      <value>Select shipment confirmations</value>
-    </title>
-    <id>7</id>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>SelectShipmentConfirmation</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>SelectSalesOrders</name>
-    <title>
-      <key>en</key>
-      <value>Select sales orders</value>
-    </title>
-    <id>8</id>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>SelectSalesOrders</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
     <name>ShowRowKey</name>
     <title>
       <key>en</key>
@@ -7947,18 +7913,41 @@
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>LinkBasisDocuments</name>
+    <name>LinkUnlinkBasisDocuments</name>
     <title>
       <key>en</key>
-      <value>Link basis documents</value>
+      <value>Link unlink basis documents</value>
     </title>
     <id>10</id>
     <use>
       <common>true</common>
     </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.QueryWizardTempTableDescription</picture>
+    </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>LinkBasisDocuments</name>
+        <name>LinkUnlinkBasisDocuments</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>AddBasisDocuments</name>
+    <title>
+      <key>en</key>
+      <value>Add basis documents</value>
+    </title>
+    <id>11</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.QueryWizardCreateTempTableDescription</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>AddBasisDocuments</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

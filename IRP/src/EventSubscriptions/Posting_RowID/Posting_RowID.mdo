@@ -9,5 +9,5 @@
     <types>DocumentObject</types>
   </source>
   <event>Posting</event>
-  <handler>CommonModule.RowIDInfo.Posting_RowID</handler>
+  <handler>CommonModule.RowIDInfoServer.Posting_RowID</handler>
 </mdclass:EventSubscription>

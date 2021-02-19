@@ -299,29 +299,11 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="dfb389b7-6c7d-4dbf-8cde-bed88383b118">
-    <name>SelectShipmentConfirmationsForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Select shipment confirmations</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="45ab9623-bbc3-4d68-ac44-7d2c65a2a8c4">
     <name>ChoiceFormWithDept</name>
     <synonym>
       <key>en</key>
       <value>Choice form with dept</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="fd82f6eb-0e9d-4a82-ab12-74440617f877">
-    <name>SelectSalesOrdersForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Select sales orders</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

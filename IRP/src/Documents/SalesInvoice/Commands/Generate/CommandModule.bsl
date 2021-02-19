@@ -1,19 +1,26 @@
 
 &AtClient
-Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
-	ArrayOfFillingValues = GetArrayOfFillingValues(CommandParameter);
-	If Not ArrayOfFillingValues.Count() Then
+Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)	
+	FormParameters = New Structure();
+	FormParameters.Insert("Filter"              , New Structure("Basises", CommandParameter));
+	FormParameters.Insert("TablesInfo"          , RowIDInfoClient.GetTablesInfo());
+	FormParameters.Insert("SetAllCheckedOnOpen" , True);
+	OpenForm("CommonForm.AddLinkedDocumentRows"
+		, FormParameters, , , ,
+		, New NotifyDescription("AddDocumentRowsContinue", ThisObject)
+		, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure AddDocumentRowsContinue(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	If Not Result.FillingValues.Count() Then
 		CommonFunctionsClientServer.ShowUsersMessage("nothing to fill");
 	EndIf;
-	For Each FillingValues In ArrayOfFillingValues Do
+	For Each FillingValues In Result.FillingValues Do
 		FormParameters = New Structure("FillingValues", FillingValues);
 		OpenForm("Document.SalesInvoice.ObjectForm", FormParameters, , New UUID());
 	EndDo;
 EndProcedure
-
-Function GetArrayOfFillingValues(Basises)	
-	BasisesTable = RowIDInfo.GetBasisesFor_SalesInvoice(New Structure("Basises", Basises));
-	ExtractedData = RowIDInfo.ExtractData(BasisesTable);
-	Return RowIDInfo.ConvertDataToFillingValues(Metadata.Documents.SalesInvoice, ExtractedData);	
-EndFunction
-

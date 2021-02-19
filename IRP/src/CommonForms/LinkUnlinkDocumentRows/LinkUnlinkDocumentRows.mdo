@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3384697a-7792-4450-b1d0-ff45912482fb">
-  <name>LinkBasisDocuments</name>
+  <name>LinkUnlinkDocumentRows</name>
   <synonym>
     <key>en</key>
-    <value>Link basis documents</value>
+    <value>Link / unlink document row</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

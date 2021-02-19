@@ -12,7 +12,7 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 EndProcedure
 
 Function GetArrayOfFillingValues(Basises)
-	BasisesTable = RowIDInfo.GetBasisesFor_ShipmentConfirmation(New Structure("Basises", Basises));
-	ExtractedData = RowIDInfo.ExtractData(BasisesTable);
-	Return RowIDInfo.ConvertDataToFillingValues(Metadata.Documents.ShipmentConfirmation, ExtractedData);	
+	BasisesTable = RowIDInfoServer.GetBasisesFor_ShipmentConfirmation(New Structure("Basises", Basises));
+	ExtractedData = RowIDInfoServer.ExtractData(BasisesTable);
+	Return RowIDInfoServer.ConvertDataToFillingValues(Metadata.Documents.ShipmentConfirmation, ExtractedData);	
 EndFunction

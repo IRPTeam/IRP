@@ -304,13 +304,13 @@ Scenario: _040140 check Sales invoice movements by the Register  "R4032 Goods in
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 dated 28.01.2021 18:48:53'     | ''            | ''                    | ''          | ''           | ''                                          | ''         |
-			| 'Document registrations records'                | ''            | ''                    | ''          | ''           | ''                                          | ''         |
-			| 'Register  "R4032 Goods in transit (outgoing)"' | ''            | ''                    | ''          | ''           | ''                                          | ''         |
-			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                          | ''         |
-			| ''                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                     | 'Item key' |
-			| ''                                              | 'Receipt'     | '28.01.2021 18:48:53' | '1'         | 'Store 02'   | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  |
-			| ''                                              | 'Receipt'     | '28.01.2021 18:48:53' | '10'        | 'Store 02'   | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   |
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53'     | ''            | ''                    | ''          | ''           | ''                                                  | ''         |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''           | ''                                                  | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"' | ''            | ''                    | ''          | ''           | ''                                                  | ''         |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                                  | ''         |
+			| ''                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                             | 'Item key' |
+			| ''                                              | 'Receipt'     | '28.01.2021 18:48:53' | '1'         | 'Store 02'   | 'Shipment confirmation 2 dated 28.01.2021 18:43:36' | 'XS/Blue'  |
+			| ''                                              | 'Receipt'     | '28.01.2021 18:48:53' | '10'        | 'Store 02'   | 'Shipment confirmation 2 dated 28.01.2021 18:43:36' | '36/Red'   |
 		And I close all client application windows
 		
 Scenario: _040141 check Sales invoice movements by the Register  "R5011 Partners aging" (without aging)

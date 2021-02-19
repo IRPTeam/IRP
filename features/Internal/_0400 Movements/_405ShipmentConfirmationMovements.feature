@@ -522,8 +522,8 @@ Scenario: _040191 check Shipment confirmation movements by the Register  "R4032 
 			| 'Register  "R4032 Goods in transit (outgoing)"'     | ''            | ''                    | ''          | ''           | ''                                        | ''         |
 			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                        | ''         |
 			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                   | 'Item key' |
-			| ''                                                  | 'Expense'     | '18.02.2021 10:48:53' | '10'        | 'Store 02'   | 'Shipment confirmation 8 dated 18.02.2021 10:48:53' | 'XS/Blue'  |
-			| ''                                                  | 'Expense'     | '18.02.2021 10:48:53' | '16'        | 'Store 02'   | 'Shipment confirmation 8 dated 18.02.2021 10:48:53' | 'XS/Blue'  |
+			| ''                                                  | 'Expense'     | '18.02.2021 10:48:53' | '10'        | 'Store 02'   | 'Sales invoice 8 dated 18.02.2021 10:48:46' | 'XS/Blue'  |
+			| ''                                                  | 'Expense'     | '18.02.2021 10:48:53' | '16'        | 'Store 02'   | 'Sales invoice 8 dated 18.02.2021 10:48:46' | 'XS/Blue'  |
 		And I close all client application windows
 
 Scenario: _040193 check Shipment confirmation movements by the Register  "R4012 Stock Reservation" (SO-SI-SC, SC>SI>SO)

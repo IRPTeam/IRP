@@ -5752,18 +5752,6 @@
     </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
-  <commandInterface>
-    <navigationPanel>
-      <cmiFragmentRecord>
-        <command>InformationRegister.CreatedProcurementOrders.StandardCommand.OpenByValue.Order</command>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Object.Ref</segments>
-        </commandParameter>
-        <userVisible/>
-      </cmiFragmentRecord>
-    </navigationPanel>
-    <commandBar/>
-  </commandInterface>
   <extInfo xsi:type="form:DocumentFormExtInfo">
     <handlers>
       <event>AfterWrite</event>

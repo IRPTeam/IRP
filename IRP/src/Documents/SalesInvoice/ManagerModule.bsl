@@ -1505,6 +1505,67 @@ Function R4011B_FreeStocks()
 	Return
 		
 		"SELECT
+		|	ShipmentConfirmations.Key AS Key,
+		|	ShipmentConfirmations.ShipmentConfirmation
+		|INTO ShipmentConfirmations
+		|FROM
+		|	Document.SalesInvoice.ShipmentConfirmations AS ShipmentConfirmations
+		|WHERE
+		|	ShipmentConfirmations.Ref = &Ref
+		|GROUP BY
+		|	ShipmentConfirmations.Key,
+		|	ShipmentConfirmations.ShipmentConfirmation
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	SalesInvoiceItemList.Ref.Company AS Company,
+		|	SalesInvoiceItemList.Store AS Store,
+		|	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists,
+		|	ShipmentConfirmations.ShipmentConfirmation,
+		|	SalesInvoiceItemList.Ref AS Invoice,
+		|	SalesInvoiceItemList.ItemKey AS ItemKey,
+		|	SalesInvoiceItemList.Quantity AS UnitQuantity,
+		|	SalesInvoiceItemList.QuantityInBaseUnit AS Quantity,
+		|	SalesInvoiceItemList.TotalAmount AS Amount,
+		|	SalesInvoiceItemList.Ref.Partner AS Partner,
+		|	SalesInvoiceItemList.Ref.LegalName AS LegalName,
+		|	CASE
+		|		WHEN SalesInvoiceItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+		|		AND SalesInvoiceItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+		|			THEN SalesInvoiceItemList.Ref.Agreement.StandardAgreement
+		|		ELSE SalesInvoiceItemList.Ref.Agreement
+		|	END AS Agreement,
+		|	SalesInvoiceItemList.Ref.Currency AS Currency,
+		|	SalesInvoiceItemList.Unit AS Unit,
+		|	SalesInvoiceItemList.Ref.Date AS Period,
+		|	SalesInvoiceItemList.SalesOrder AS SalesOrder,
+		|	NOT SalesInvoiceItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
+		|	SalesInvoiceItemList.Key AS RowKey,
+		|	SalesInvoiceItemList.DeliveryDate AS DeliveryDate,
+		|	SalesInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+		|	SalesInvoiceItemList.BusinessUnit AS BusinessUnit,
+		|	SalesInvoiceItemList.RevenueType AS RevenueType,
+		|	SalesInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
+		|	CASE
+		|		WHEN SalesInvoiceItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			THEN SalesInvoiceItemList.Ref
+		|		ELSE UNDEFINED
+		|	END AS BasisDocument,
+		|	SalesInvoiceItemList.NetAmount AS NetAmount,
+		|	SalesInvoiceItemList.OffersAmount AS OffersAmount,
+		|	SalesInvoiceItemList.UseShipmentConfirmation AS UseShipmentConfirmation
+		|INTO ItemList
+		|FROM
+		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
+		|		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
+		|		ON SalesInvoiceItemList.Key = ShipmentConfirmations.Key
+		|WHERE
+		|	SalesInvoiceItemList.Ref = &Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
 		|	ItemList.Period AS Period,
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey AS ItemKey,
@@ -1551,7 +1612,6 @@ Function R4011B_FreeStocks()
 		|	ItemListGroup.Period AS Period,
 		|	ItemListGroup.Store AS Store,
 		|	ItemListGroup.ItemKey AS ItemKey,
-		|	TmpStockReservation.Quantity AS TmpStockReservationQuantity,
 		|	ItemListGroup.Quantity - ISNULL(TmpStockReservation.Quantity, 0) AS Quantity
 		|INTO R4011B_FreeStocks
 		|FROM
@@ -1561,23 +1621,7 @@ Function R4011B_FreeStocks()
 		|		AND (ItemListGroup.ItemKey = TmpStockReservation.ItemKey)
 		|		AND TmpStockReservation.Basis = ItemListGroup.SalesOrder
 		|WHERE
-		|	ItemListGroup.SalesOrderExists
-		|	AND (ItemListGroup.Quantity > TmpStockReservation.Quantity
-		|	OR TmpStockReservation.Quantity IS NULL)
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
-		|	ItemListGroup.Period,
-		|	ItemListGroup.Store,
-		|	ItemListGroup.ItemKey,
-		|	NULL,
-		|	ItemListGroup.Quantity
-		|FROM
-		|	ItemListGroup AS ItemListGroup
-		|WHERE
-		|	NOT ItemListGroup.SalesOrderExists
+		|	ItemListGroup.Quantity > ISNULL(TmpStockReservation.Quantity, 0)
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////

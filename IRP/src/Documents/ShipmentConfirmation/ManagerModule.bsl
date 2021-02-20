@@ -934,11 +934,13 @@ EndFunction
 Function R4011B_FreeStocks()
 	Return
 		"SELECT
-		|	ItemList.Period,
-		|	ItemList.Store,
-		|	ItemList.ItemKey,
-		|	ItemList.SalesOrder,
-		|	ItemList.SalesInvoice,
+		|	ItemList.Period AS Period,
+		|	ItemList.Store AS Store,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.SalesOrder AS SalesOrder,
+		|	ItemList.SalesInvoice AS SalesInvoice,
+		|	ItemList.SalesOrderExists AS SalesOrderExists,
+		|	ItemList.SalesInvoiceExists AS SalesInvoiceExists,
 		|	SUM(ItemList.Quantity) AS Quantity
 		|INTO ItemListGroup
 		|FROM
@@ -948,14 +950,16 @@ Function R4011B_FreeStocks()
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
 		|	ItemList.SalesOrder,
-		|	ItemList.SalesInvoice
+		|	ItemList.SalesInvoice,
+		|	ItemList.SalesOrderExists,
+		|	ItemList.SalesInvoiceExists
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	StockReservation.Store,
+		|	StockReservation.Store AS Store,
 		|	StockReservation.Order AS Basis,
-		|	StockReservation.ItemKey,
+		|	StockReservation.ItemKey AS ItemKey,
 		|	StockReservation.QuantityBalance AS Quantity
 		|INTO TmpStockReservation
 		|FROM
@@ -973,9 +977,9 @@ Function R4011B_FreeStocks()
 		|
 		|SELECT
 		|	StockReservation.Store,
-		|	StockReservation.Order AS Basis,
+		|	StockReservation.Order,
 		|	StockReservation.ItemKey,
-		|	StockReservation.QuantityBalance AS Quantity
+		|	StockReservation.QuantityBalance
 		|FROM
 		|	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
 		|		(SELECT
@@ -991,32 +995,39 @@ Function R4011B_FreeStocks()
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	ItemListGroup.Period,
-		|	ItemListGroup.Store,
-		|	ItemListGroup.ItemKey,
-		|	CASE 
-		|		WHEN ISNULL(TmpStockReservation.Quantity, 0) > ItemListGroup.Quantity 
-		|	THEN
-		|		ItemListGroup.Quantity
-		|	ELSE
-		|		ItemListGroup.Quantity - ISNULL(TmpStockReservation.Quantity, 0)
-		|	END AS Quantity
+		|	ItemListGroup.Period AS Period,
+		|	ItemListGroup.Store AS Store,
+		|	ItemListGroup.ItemKey AS ItemKey,
+		|	TmpStockReservation.Quantity AS TmpStockReservationQuantity,
+		|	ItemListGroup.Quantity - ISNULL(TmpStockReservation.Quantity, 0) AS Quantity
 		|INTO R4011B_FreeStocks
-		|From
-		|	ItemListGroup
-		|		LEFT JOIN TmpStockReservation
-		|		ON ItemListGroup.Store = TmpStockReservation.Store
-		|		AND ItemListGroup.ItemKey = TmpStockReservation.ItemKey
+		|FROM
+		|	ItemListGroup AS ItemListGroup
+		|		LEFT JOIN TmpStockReservation AS TmpStockReservation
+		|		ON (ItemListGroup.Store = TmpStockReservation.Store)
+		|		AND (ItemListGroup.ItemKey = TmpStockReservation.ItemKey)
 		|		AND (TmpStockReservation.Basis = ItemListGroup.SalesOrder
 		|		OR TmpStockReservation.Basis = ItemListGroup.SalesInvoice)
 		|WHERE
-		|	CASE 
-		|		WHEN ISNULL(TmpStockReservation.Quantity, 0) > ItemListGroup.Quantity 
-		|	THEN
-		|		ItemListGroup.Quantity
-		|	ELSE
-		|		ItemListGroup.Quantity - ISNULL(TmpStockReservation.Quantity, 0)
-		|	END > 0
+		|	(ItemListGroup.SalesOrderExists
+		|	OR ItemListGroup.SalesInvoiceExists)
+		|	AND (ItemListGroup.Quantity > TmpStockReservation.Quantity
+		|	OR TmpStockReservation.Quantity IS NULL)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemListGroup.Period,
+		|	ItemListGroup.Store,
+		|	ItemListGroup.ItemKey,
+		|	NULL,
+		|	ItemListGroup.Quantity
+		|FROM
+		|	ItemListGroup AS ItemListGroup
+		|WHERE
+		|	NOT (ItemListGroup.SalesOrderExists
+		|	OR ItemListGroup.SalesInvoiceExists)
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////

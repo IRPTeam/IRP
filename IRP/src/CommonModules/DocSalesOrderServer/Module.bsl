@@ -260,17 +260,34 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
 		|	ItemList.CancelReason AS CancelReason,
-		|	TRUE AS Cancel,
-		|	SalesOrdersInvoiceClosing.QuantityBalance AS QuantityInBaseUnit,
-		|	SalesOrdersInvoiceClosing.QuantityBalance AS Quantity,
-		|	SalesOrdersInvoiceClosing.AmountBalance AS TotalAmount,
-		|	SalesOrdersInvoiceClosing.NetAmountBalance AS NetAmount,
+		|	SalesOrdersInvoiceClosing.QuantityBalance > 0 AS Cancel,
+		|	CASE
+		|		WHEN SalesOrdersInvoiceClosing.QuantityBalance > 0
+		|			THEN SalesOrdersInvoiceClosing.QuantityBalance
+		|		ELSE -1 * SalesOrdersInvoiceClosing.QuantityBalance
+		|	END AS QuantityInBaseUnit,
+		|	CASE
+		|		WHEN SalesOrdersInvoiceClosing.QuantityBalance > 0
+		|			THEN SalesOrdersInvoiceClosing.QuantityBalance
+		|		ELSE -1 * SalesOrdersInvoiceClosing.QuantityBalance
+		|	END AS Quantity,
+		|	CASE
+		|		WHEN SalesOrdersInvoiceClosing.AmountBalance > 0
+		|			THEN SalesOrdersInvoiceClosing.AmountBalance
+		|		ELSE -1 * SalesOrdersInvoiceClosing.AmountBalance
+		|	END AS TotalAmount,
+		|	CASE
+		|		WHEN SalesOrdersInvoiceClosing.NetAmountBalance > 0
+		|			THEN SalesOrdersInvoiceClosing.NetAmountBalance
+		|		ELSE -1 * SalesOrdersInvoiceClosing.NetAmountBalance
+		|	END AS NetAmount,
 		|	ItemList.TaxAmount AS TaxAmount,
 		|	ItemList.OffersAmount AS OffersAmount
 		|INTO ItemList
 		|FROM
 		|	Document.SalesOrder.ItemList AS ItemList
-		|		INNER JOIN AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Balance(, Order = &SalesOrder) AS SalesOrdersInvoiceClosing
+		|		INNER JOIN AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Balance(, Order = &SalesOrder) AS
+		|			SalesOrdersInvoiceClosing
 		|		ON ItemList.Key = SalesOrdersInvoiceClosing.RowKey
 		|WHERE
 		|	ItemList.Ref = &SalesOrder

@@ -1401,7 +1401,8 @@ Function R2011B_SalesOrdersShipment()
 		|WHERE
 		|	NOT ItemList.IsService
 		|	AND NOT ItemList.UseShipmentConfirmation
-		|	AND ItemList.SalesOrderExists";
+		|	AND ItemList.SalesOrderExists
+		|	AND NOT ItemList.ShipmentConfirmationExists";
 
 EndFunction
 

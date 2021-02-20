@@ -52,6 +52,10 @@
   <registeredDocuments>Document.CreditNote</registeredDocuments>
   <registeredDocuments>Document.DebitNote</registeredDocuments>
   <registeredDocuments>Document.CashStatement</registeredDocuments>
+  <registeredDocuments>Document.ItemStockAdjustment</registeredDocuments>
+  <registeredDocuments>Document.ManualRegisterEntry</registeredDocuments>
+  <registeredDocuments>Document.SalesOrderClosing</registeredDocuments>
+  <registeredDocuments>Document.PlannedReceiptReservation</registeredDocuments>
   <columns uuid="ef19537f-48b5-437d-a57d-75551c5c6d62">
     <name>Company</name>
     <synonym>

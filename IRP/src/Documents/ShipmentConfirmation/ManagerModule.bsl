@@ -678,17 +678,16 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			Parameters.DocumentDataTables.InventoryBalance,
 			Parameters.IsReposting));
 	
-	// StockReservation
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockReservation,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.StockReservation,
-			True));
-			
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 #EndRegion		
 	
+	// StockReservation
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockReservation,
+		New Structure("RecordType, RecordSet, WriteInTransaction",
+			AccumulationRecordType.Expense,
+			Parameters.DocumentDataTables.R4011B_FreeStocks,
+			True));
 	Return PostingDataTables;
 EndFunction
 

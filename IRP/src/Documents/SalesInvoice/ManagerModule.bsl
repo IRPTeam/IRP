@@ -819,14 +819,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.OrderReservation));
 	
-	// StockReservation	
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockReservation,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.StockReservation,
-			True));
-	
-	
 	// SalesTurnovers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.SalesTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.SalesTurnovers));
@@ -970,6 +962,12 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 #EndRegion			
 	
+	// StockReservation	
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockReservation,
+		New Structure("RecordType, RecordSet, WriteInTransaction",
+			AccumulationRecordType.Expense,
+			Parameters.DocumentDataTables.R4011B_FreeStocks,
+			True));
 	Return PostingDataTables;
 EndFunction
 
@@ -1503,17 +1501,91 @@ Function R4010B_ActualStocks()
 EndFunction
 
 Function R4011B_FreeStocks()
+	
 	Return
+		
 		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	*
-		|INTO R4011B_FreeStocks
+		|	ItemList.Period AS Period,
+		|	ItemList.Store AS Store,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.SalesOrder AS SalesOrder,
+		|	ItemList.SalesOrderExists AS SalesOrderExists,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO ItemListGroup
 		|FROM
 		|	ItemList AS ItemList
 		|Where
 		|	NOT ItemList.IsService
 		|	AND NOT ItemList.UseShipmentConfirmation
-		|	AND NOT ItemList.ShipmentConfirmationExists";
+		|	AND NOT ItemList.ShipmentConfirmationExists
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.SalesOrder,
+		|	ItemList.SalesOrderExists
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	StockReservation.Store AS Store,
+		|	StockReservation.Order AS Basis,
+		|	StockReservation.ItemKey AS ItemKey,
+		|	StockReservation.QuantityBalance AS Quantity
+		|INTO TmpStockReservation
+		|FROM
+		|	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
+		|		(SELECT
+		|			ItemList.Store,
+		|			ItemList.ItemKey,
+		|			ItemList.SalesOrder
+		|		FROM
+		|			ItemList AS ItemList)) AS StockReservation
+		|WHERE
+		|	StockReservation.QuantityBalance > 0
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemListGroup.Period AS Period,
+		|	ItemListGroup.Store AS Store,
+		|	ItemListGroup.ItemKey AS ItemKey,
+		|	TmpStockReservation.Quantity AS TmpStockReservationQuantity,
+		|	ItemListGroup.Quantity - ISNULL(TmpStockReservation.Quantity, 0) AS Quantity
+		|INTO R4011B_FreeStocks
+		|FROM
+		|	ItemListGroup AS ItemListGroup
+		|		LEFT JOIN TmpStockReservation AS TmpStockReservation
+		|		ON (ItemListGroup.Store = TmpStockReservation.Store)
+		|		AND (ItemListGroup.ItemKey = TmpStockReservation.ItemKey)
+		|		AND TmpStockReservation.Basis = ItemListGroup.SalesOrder
+		|WHERE
+		|	ItemListGroup.SalesOrderExists
+		|	AND (ItemListGroup.Quantity > TmpStockReservation.Quantity
+		|	OR TmpStockReservation.Quantity IS NULL)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemListGroup.Period,
+		|	ItemListGroup.Store,
+		|	ItemListGroup.ItemKey,
+		|	NULL,
+		|	ItemListGroup.Quantity
+		|FROM
+		|	ItemListGroup AS ItemListGroup
+		|WHERE
+		|	NOT ItemListGroup.SalesOrderExists
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|DROP ItemListGroup
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|DROP TmpStockReservation";
 EndFunction
 
 Function R4012B_StockReservation()

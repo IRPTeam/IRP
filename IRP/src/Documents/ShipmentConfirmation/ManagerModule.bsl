@@ -1105,10 +1105,10 @@ Function R4032B_GoodsInTransitOutgoing()
 		|CASE
 		|	When ItemList.SalesInvoiceExists Then
 		|		ItemList.SalesInvoice
-		|	When ItemList.InventoryTransferOrderExists Then
-		|		ItemList.InventoryTransferOrder
 		|	When ItemList.InventoryTransferExists Then
 		|		ItemList.InventoryTransfer
+		|	When ItemList.PurchaseReturnExists Then
+		|		ItemList.PurchaseReturn
 		|ELSE
 		|		ItemList.ShipmentConfirmation
 		|END AS Basis,

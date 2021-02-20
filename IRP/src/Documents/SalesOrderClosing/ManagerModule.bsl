@@ -238,7 +238,7 @@ Function R4011B_FreeStocks()
 	Return
 		"SELECT
 		|	&Period AS Period,
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	StockReservation.Store AS Store,
 		|	StockReservation.ItemKey AS ItemKey,
 		|	StockReservation.Order AS Order,

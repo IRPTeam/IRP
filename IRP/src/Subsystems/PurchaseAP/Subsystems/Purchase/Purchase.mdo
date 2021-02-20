@@ -12,5 +12,6 @@
   <content>Document.InternalSupplyRequest</content>
   <content>Document.Labeling</content>
   <content>Document.GoodsReceipt</content>
+  <content>Document.PurchaseOrderClosing</content>
   <parentSubsystem>Subsystem.PurchaseAP</parentSubsystem>
 </mdclass:Subsystem>

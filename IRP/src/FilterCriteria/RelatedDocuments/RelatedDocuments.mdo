@@ -63,6 +63,30 @@
   <content>Document.PlannedReceiptReservation.Attribute.Requester</content>
   <content>Document.SalesReturn.TabularSection.GoodsReceipts.Attribute.GoodsReceipt</content>
   <content>Document.PurchaseReturn.TabularSection.ShipmentConfirmations.Attribute.ShipmentConfirmation</content>
+  <content>Document.PurchaseOrderClosing.Attribute.PurchaseOrder</content>
+  <content>Document.PurchaseOrderClosing.TabularSection.ItemList.Attribute.PurchaseBasis</content>
+  <content>Document.PurchaseOrderClosing.TabularSection.ItemList.Attribute.SalesOrder</content>
+  <content>Document.PurchaseOrderClosing.TabularSection.ItemList.Attribute.InternalSupplyRequest</content>
+  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.SalesInvoice</content>
+  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.InventoryTransferOrder</content>
+  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.InventoryTransfer</content>
+  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.PurchaseReturnOrder</content>
+  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.PurchaseReturn</content>
+  <content>Document.PlannedReceiptReservation.TabularSection.ItemList.Attribute.IncomingDocument</content>
+  <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.SalesOrder</content>
+  <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.InternalSupplyRequest</content>
+  <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.InternalSupplyRequest</content>
+  <content>Document.PhysicalCountByLocation.Attribute.PhysicalInventory</content>
+  <content>Document.InvoiceMatch.TabularSection.Advances.Attribute.ReceiptDocument</content>
+  <content>Document.InvoiceMatch.TabularSection.Advances.Attribute.PaymentDocument</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.PurchaseInvoice</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.PurchaseOrder</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.InternalSupplyRequest</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.InventoryTransferOrder</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SalesReturn</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SalesReturnOrder</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.InventoryTransfer</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SalesInvoice</content>
   <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
     <name>RelatedDocuments</name>
     <synonym>
@@ -106,6 +130,12 @@
       <types>DocumentRef.PhysicalInventory</types>
       <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.PlannedReceiptReservation</types>
+      <types>DocumentRef.PurchaseOrderClosing</types>
+      <types>DocumentRef.PhysicalCountByLocation</types>
+      <types>DocumentRef.ItemStockAdjustment</types>
+      <types>DocumentRef.CashExpense</types>
+      <types>DocumentRef.CashRevenue</types>
+      <types>DocumentRef.CashStatement</types>
     </commandParameterType>
     <representation>Auto</representation>
     <shortcut></shortcut>

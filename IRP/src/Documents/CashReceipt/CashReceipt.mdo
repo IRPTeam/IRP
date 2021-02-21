@@ -159,6 +159,26 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="a4457bb6-57db-498b-80c0-5dc0eec60953">
+    <name>DocNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Doc number</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="a83ab1dd-773d-40f1-87c8-c27b69c84b4f">
     <name>DocumentForm</name>
     <synonym>

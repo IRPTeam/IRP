@@ -201,6 +201,49 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>Closed</name>
+      <id>49</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Closed</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>ClosedExtendedTooltip</name>
+        <id>51</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>ClosedContextMenu</name>
+        <id>50</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>CheckBoxField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+    </items>
+    <items xsi:type="form:FormField">
       <name>Partner</name>
       <id>28</id>
       <visible>true</visible>
@@ -786,9 +829,38 @@
     </edit>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
+      <queryText>SELECT 
+       PurchaseOrderList.Ref, 
+       PurchaseOrderList.DeletionMark, 
+       PurchaseOrderList.Number, 
+       PurchaseOrderList.Date, 
+       PurchaseOrderList.Posted, 
+       PurchaseOrderList.Agreement, 
+       PurchaseOrderList.Company, 
+       PurchaseOrderList.Currency, 
+       PurchaseOrderList.GoodsReceiptBeforePurchaseInvoice, 
+       PurchaseOrderList.LegalName, 
+       PurchaseOrderList.Partner, 
+       PurchaseOrderList.PriceIncludeTax, 
+       PurchaseOrderList.Status, 
+       PurchaseOrderList.PartnerBankAccount, 
+       PurchaseOrderList.UseItemsReceiptScheduling, 
+       PurchaseOrderList.Author, 
+       PurchaseOrderList.BusinessUnit, 
+       PurchaseOrderList.Description, 
+       PurchaseOrderList.DocumentAmount,
+       Not PurchaseOrderClosing.Ref IS NULL AS Closed,
+	   PurchaseOrderClosing.Ref AS ClosingOrder
+ FROM 
+       Document.PurchaseOrder AS PurchaseOrderList
+       		LEFT JOIN Document.PurchaseOrderClosing AS PurchaseOrderClosing
+		ON PurchaseOrderClosing.PurchaseOrder = PurchaseOrderList.Ref
+		AND PurchaseOrderClosing.Posted
+		AND PurchaseOrderClosing.CloseOrder
+ </queryText>
       <mainTable>Document.PurchaseOrder</mainTable>
-      <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
+      <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
     </extInfo>

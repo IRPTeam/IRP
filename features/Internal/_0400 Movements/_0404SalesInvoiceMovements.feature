@@ -716,8 +716,7 @@ Scenario: _0401318 check Sales invoice movements by the Register  "R4011 Free st
 			| 'Register  "R4011 Free stocks"'             | ''            | ''                    | ''          | ''           | ''         |
 			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
 			| ''                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
-			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10'        | 'Store 02'   | '36/Red'   |
-			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10'        | 'Store 02'   | '36/Red'   |
+			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '20'        | 'Store 02'   | '36/Red'   |
 		And I close all client application windows
 
 Scenario: _0401319 check Sales invoice movements by the Register  "R4032 Goods in transit (outgoing)" (SI first, use and not use SC)

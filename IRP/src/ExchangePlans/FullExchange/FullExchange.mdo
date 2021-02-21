@@ -504,7 +504,6 @@
   </content>
   <content>
     <mdObject>Document.SalesOrderClosing</mdObject>
-    <autoRecord>Allow</autoRecord>
   </content>
   <content>
     <mdObject>AccumulationRegister.R5021T_Revenues</mdObject>
@@ -731,6 +730,9 @@
   </content>
   <content>
     <mdObject>Document.PlannedReceiptReservation</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.PurchaseOrderClosing</mdObject>
   </content>
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>

@@ -574,9 +574,11 @@
   <documents>Document.OutgoingPaymentOrder</documents>
   <documents>Document.PhysicalCountByLocation</documents>
   <documents>Document.PhysicalInventory</documents>
+  <documents>Document.PlannedReceiptReservation</documents>
   <documents>Document.PriceList</documents>
   <documents>Document.PurchaseInvoice</documents>
   <documents>Document.PurchaseOrder</documents>
+  <documents>Document.PurchaseOrderClosing</documents>
   <documents>Document.PurchaseReturn</documents>
   <documents>Document.PurchaseReturnOrder</documents>
   <documents>Document.ReconciliationStatement</documents>
@@ -591,7 +593,6 @@
   <documents>Document.StockAdjustmentAsSurplus</documents>
   <documents>Document.StockAdjustmentAsWriteOff</documents>
   <documents>Document.Unbundling</documents>
-  <documents>Document.PlannedReceiptReservation</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForCreditDebitNote</documentJournals>

@@ -87,5 +87,6 @@
     <types>CatalogRef.BusinessUnits</types>
     <types>DocumentRef.CashExpense</types>
     <types>DocumentRef.PlannedReceiptReservation</types>
+    <types>DocumentRef.PurchaseOrderClosing</types>
   </type>
 </mdclass:DefinedType>

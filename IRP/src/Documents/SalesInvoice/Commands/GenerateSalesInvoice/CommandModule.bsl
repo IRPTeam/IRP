@@ -260,8 +260,9 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			
 			ArrayOfTaxListFilters.Add(New Structure("Ref, Key", RowItemList.SalesOrder, RowItemList.Key));
 			ArrayOfSpecialOffersFilters.Add(New Structure("Ref, Key", RowItemList.SalesOrder, RowItemList.Key));			
-			ArrayOfShipmentConfirmationsFilters.Add(New Structure("Ref, Key", RowItemList.SalesOrder, RowItemList.Key));
-			
+			SCFilter = New Structure("Ref, Key", RowItemList.SalesOrder, RowItemList.Key);
+			ArrayOfShipmentConfirmationsFilters.Add(SCFilter);
+			NewRow.Insert("UseShipmentConfirmation", ShipmentConfirmations.FindRows(SCFilter).Count() > 0);
 			Result.ItemList.Add(NewRow);
 		EndDo;
 		

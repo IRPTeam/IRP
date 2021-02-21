@@ -3192,6 +3192,7 @@ Function R1031B_ReceiptInvoicing()
 		|WHERE
 		|	ItemList.UseGoodsReceipt
 		|	AND NOT ItemList.GoodsReceiptExists
+		|	AND NOT ItemList.IsService
 		|
 		|UNION ALL
 		|

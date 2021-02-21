@@ -391,38 +391,38 @@ Scenario: _024034 Sales invoice creation on set, store use Goods receipt
 			| '1,000'    | '$$SalesInvoice024034$$' | '$$SalesInvoice024034$$' | 'Boots/S-8' |
 		And I close all client application windows
 
-Scenario: _024035 check the form of selection of items (sales invoice)
-	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-	And I click the button named "FormCreate"
-	* Filling in the main details of the document
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'  |
-		And I select current line in "List" table
-		And I click Select button of "Partner term" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Basic Partner terms, TRY' |
-		And I select current line in "List" table
-		And I click Select button of "Legal name" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Company Ferron BP'  |
-		And I select current line in "List" table
-	* Select Store
-		And I click Select button of "Store" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'  |
-		And I select current line in "List" table
-	When check the product selection form with price information in Sales invoice
-	And I click the button named "FormPostAndClose"
-	* Save check
-		And "List" table contains lines
-			| 'Partner'     |'Σ'          |
-			| 'Ferron BP'   | '2 050,00'  |
-	And I close all client application windows
+# Scenario: _024035 check the form of selection of items (sales invoice)
+# 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+# 	And I click the button named "FormCreate"
+# 	* Filling in the main details of the document
+# 		And I click Select button of "Partner" field
+# 		And I go to line in "List" table
+# 			| 'Description' |
+# 			| 'Ferron BP'  |
+# 		And I select current line in "List" table
+# 		And I click Select button of "Partner term" field
+# 		And I go to line in "List" table
+# 			| 'Description'       |
+# 			| 'Basic Partner terms, TRY' |
+# 		And I select current line in "List" table
+# 		And I click Select button of "Legal name" field
+# 		And I go to line in "List" table
+# 			| 'Description' |
+# 			| 'Company Ferron BP'  |
+# 		And I select current line in "List" table
+# 	* Select Store
+# 		And I click Select button of "Store" field
+# 		And I go to line in "List" table
+# 			| 'Description' |
+# 			| 'Store 01'  |
+# 		And I select current line in "List" table
+# 	When check the product selection form with price information in Sales invoice
+# 	And I click the button named "FormPostAndClose"
+# 	* Save check
+# 		And "List" table contains lines
+# 			| 'Partner'     |'Σ'          |
+# 			| 'Ferron BP'   | '2 050,00'  |
+# 	And I close all client application windows
 
 
 

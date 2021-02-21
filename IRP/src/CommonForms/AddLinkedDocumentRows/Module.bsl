@@ -2,8 +2,13 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.MainFilter = Parameters.Filter;
+
 	If Parameters.Property("SetAllCheckedOnOpen") Then
 		ThisObject.SetAllCheckedOnOpen = Parameters.SetAllCheckedOnOpen;
+	EndIf;
+	
+	If Parameters.Property("SeparateByBasedOn") Then
+		ThisObject.SeparateByBasedOn = Parameters.SeparateByBasedOn;		
 	EndIf;
 	
 	For Each Row_IdInfo In Parameters.TablesInfo.RowIDInfoRows Do
@@ -35,8 +40,9 @@ Procedure ExpandAllTrees() Export
 EndProcedure
 
 &AtServer
-Procedure FillDocumentsTree();	
-	BasisesTable = RowIDInfoServer.GetBasisesFor_SalesInvoice(ThisObject.MainFilter);
+Procedure FillDocumentsTree();
+		
+	BasisesTable = RowIDInfoServer.GetBasises(ThisObject.MainFilter.Ref, ThisObject.MainFilter);
 	
 	TopLevelTable = BasisesTable.Copy(,"Basis");
 	TopLevelTable.GroupBy("Basis");
@@ -49,7 +55,7 @@ Procedure FillDocumentsTree();
 		
 		TopLevelNewRow.RowPresentation = String(TopLevelRow.Basis);
 		TopLevelNewRow.Level = 1;
-		TopLevelNewRow.Picture = 2;
+		TopLevelNewRow.Picture = 1;
 		
 		SecondLevelRows = BasisesTable.FindRows(New Structure("Basis", TopLevelNewRow.Basis));
 		
@@ -60,7 +66,7 @@ Procedure FillDocumentsTree();
 			SecondLevelNewRow.RowPresentation = 
 			"" + SecondLevelRow.Item + ", " + SecondLevelRow.ItemKey + ", " + SecondLevelRow.Store;
 			SecondLevelNewRow.Level   = 2;
-			SecondLevelNewRow.Picture = 3;
+			SecondLevelNewRow.Picture = 0;
 			
 			SecondLevelNewRow.Quantity = SecondLevelRow.Quantity;
 			SecondLevelNewRow.BasisUnit = SecondLevelRow.BasisUnit;
@@ -95,7 +101,8 @@ Function GetFillingValues()
 	EndDo;
 	
 	ExtractedData = RowIDInfoServer.ExtractData(BasisesTable);
-	FillingValues = RowIDInfoServer.ConvertDataToFillingValues(Metadata.Documents.SalesInvoice, ExtractedData);
+	FillingValues = RowIDInfoServer.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), 
+		ExtractedData, ThisObject.SeparateByBasedOn);
 	Return FillingValues;
 EndFunction
 
@@ -121,5 +128,10 @@ Procedure SetChecked(Value)
 			SecondLevelRow.Use = Value;
 		EndDo;
 	EndDo;	
+EndProcedure
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);	
 EndProcedure
 

@@ -4667,22 +4667,18 @@
         </dataPath>
         <titleLocation>None</titleLocation>
         <items xsi:type="form:FormField">
-          <name>ShipmentConfirmationsTreeItem</name>
-          <id>844</id>
-          <visible>true</visible>
+          <name>ShipmentConfirmationsTreeKey</name>
+          <id>1097</id>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>ShipmentConfirmationsTree.Item</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>ShipmentConfirmationsTree.Key</segments>
           </dataPath>
-          <titleLocation>None</titleLocation>
           <extendedTooltip>
-            <name>ShipmentConfirmationsTreeItemExtendedTooltip</name>
-            <id>846</id>
+            <name>ShipmentConfirmationsTreeKeyExtendedTooltip</name>
+            <id>1099</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -4696,8 +4692,8 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ShipmentConfirmationsTreeItemContextMenu</name>
-            <id>845</id>
+            <name>ShipmentConfirmationsTreeKeyContextMenu</name>
+            <id>1098</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -4706,7 +4702,6 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>InputField</type>
-          <readOnly>true</readOnly>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -4718,6 +4713,195 @@
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>ShipmentConfirmationsTreeBasisKey</name>
+          <id>1100</id>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>ShipmentConfirmationsTree.BasisKey</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ShipmentConfirmationsTreeBasisKeyExtendedTooltip</name>
+            <id>1102</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ShipmentConfirmationsTreeBasisKeyContextMenu</name>
+            <id>1101</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormGroup">
+          <name>ShipmentConfirmationsTreeGroupItem</name>
+          <id>1103</id>
+          <items xsi:type="form:FormField">
+            <name>ShipmentConfirmationsTreePictureItem</name>
+            <id>1105</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>ShipmentConfirmationsTree.PictureItem</segments>
+            </dataPath>
+            <titleLocation>None</titleLocation>
+            <extendedTooltip>
+              <name>ShipmentConfirmationsTreePictureItemExtendedTooltip</name>
+              <id>1107</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>ShipmentConfirmationsTreePictureItemContextMenu</name>
+              <id>1106</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>PictureField</type>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:ImageFieldExtInfo">
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
+              <valuesPicture xsi:type="core:PictureRef">
+                <picture>CommonPicture.IconCollection4</picture>
+              </valuesPicture>
+              <fileDragMode>AsFileRef</fileDragMode>
+            </extInfo>
+          </items>
+          <items xsi:type="form:FormField">
+            <name>ShipmentConfirmationsTreeItem</name>
+            <id>844</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>ShipmentConfirmationsTree.Item</segments>
+              </paths>
+            </dataPath>
+            <titleLocation>None</titleLocation>
+            <extendedTooltip>
+              <name>ShipmentConfirmationsTreeItemExtendedTooltip</name>
+              <id>846</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>ShipmentConfirmationsTreeItemContextMenu</name>
+              <id>845</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>InputField</type>
+            <readOnly>true</readOnly>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:InputFieldExtInfo">
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <wrap>true</wrap>
+              <chooseType>true</chooseType>
+              <typeDomainEnabled>true</typeDomainEnabled>
+              <textEdit>true</textEdit>
+            </extInfo>
+          </items>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <title>
+            <key>en</key>
+            <value>Shipment confirmations tree group item</value>
+          </title>
+          <extendedTooltip>
+            <name>ShipmentConfirmationsTreeGroupItemExtendedTooltip</name>
+            <id>1104</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <type>ColumnGroup</type>
+          <extInfo xsi:type="form:ColumnGroupExtInfo">
+            <group>InCell</group>
+            <showTitle>true</showTitle>
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
@@ -4774,23 +4958,128 @@
             <textEdit>true</textEdit>
           </extInfo>
         </items>
-        <items xsi:type="form:FormField">
-          <name>ShipmentConfirmationsTreeShipmentConfirmation</name>
-          <id>850</id>
+        <items xsi:type="form:FormGroup">
+          <name>ShipmentConfirmationsTreeGroupDocument</name>
+          <id>1111</id>
+          <items xsi:type="form:FormField">
+            <name>ShipmentConfirmationsTreePictureDocument</name>
+            <id>1108</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>ShipmentConfirmationsTree.PictureDocument</segments>
+            </dataPath>
+            <titleLocation>None</titleLocation>
+            <extendedTooltip>
+              <name>ShipmentConfirmationsTreePictureDocumentExtendedTooltip</name>
+              <id>1110</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>ShipmentConfirmationsTreePictureDocumentContextMenu</name>
+              <id>1109</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>PictureField</type>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:ImageFieldExtInfo">
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
+              <valuesPicture xsi:type="core:PictureRef">
+                <picture>CommonPicture.IconCollection4</picture>
+              </valuesPicture>
+              <fileDragMode>AsFileRef</fileDragMode>
+            </extInfo>
+          </items>
+          <items xsi:type="form:FormField">
+            <name>ShipmentConfirmationsTreeShipmentConfirmation</name>
+            <id>850</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>ShipmentConfirmationsTree.ShipmentConfirmation</segments>
+              </paths>
+            </dataPath>
+            <titleLocation>None</titleLocation>
+            <extendedTooltip>
+              <name>ShipmentConfirmationsTreeShipmentConfirmationExtendedTooltip</name>
+              <id>852</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>ShipmentConfirmationsTreeShipmentConfirmationContextMenu</name>
+              <id>851</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>InputField</type>
+            <readOnly>true</readOnly>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:InputFieldExtInfo">
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <wrap>true</wrap>
+              <chooseType>true</chooseType>
+              <typeDomainEnabled>true</typeDomainEnabled>
+              <textEdit>true</textEdit>
+            </extInfo>
+          </items>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>ShipmentConfirmationsTree.ShipmentConfirmation</segments>
-            </paths>
-          </dataPath>
-          <titleLocation>None</titleLocation>
+          <title>
+            <key>en</key>
+            <value>Shipment confirmations tree group document</value>
+          </title>
           <extendedTooltip>
-            <name>ShipmentConfirmationsTreeShipmentConfirmationExtendedTooltip</name>
-            <id>852</id>
+            <name>ShipmentConfirmationsTreeGroupDocumentExtendedTooltip</name>
+            <id>1112</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -4803,29 +5092,10 @@
               <horizontalAlign>Left</horizontalAlign>
             </extInfo>
           </extendedTooltip>
-          <contextMenu>
-            <name>ShipmentConfirmationsTreeShipmentConfirmationContextMenu</name>
-            <id>851</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <autoFill>true</autoFill>
-          </contextMenu>
-          <type>InputField</type>
-          <readOnly>true</readOnly>
-          <editMode>Enter</editMode>
-          <showInHeader>true</showInHeader>
-          <headerHorizontalAlign>Left</headerHorizontalAlign>
-          <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:InputFieldExtInfo">
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <wrap>true</wrap>
-            <chooseType>true</chooseType>
-            <typeDomainEnabled>true</typeDomainEnabled>
-            <textEdit>true</textEdit>
+          <type>ColumnGroup</type>
+          <extInfo xsi:type="form:ColumnGroupExtInfo">
+            <group>InCell</group>
+            <showTitle>true</showTitle>
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
@@ -7820,6 +8090,63 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>BasisKey</name>
+      <title>
+        <key>en</key>
+        <value>Basis key</value>
+      </title>
+      <id>168</id>
+      <valueType>
+        <types>DefinedType.typeRowID</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>PictureItem</name>
+      <title>
+        <key>en</key>
+        <value>Picture item</value>
+      </title>
+      <id>169</id>
+      <valueType>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+        </numberQualifiers>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>PictureDocument</name>
+      <title>
+        <key>en</key>
+        <value>Picture document</value>
+      </title>
+      <id>170</id>
+      <valueType>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+        </numberQualifiers>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <formCommands>
     <name>SetSpecialOffersAtRow</name>
@@ -7930,6 +8257,7 @@
         <name>LinkUnlinkBasisDocuments</name>
       </handler>
     </action>
+    <representation>Picture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -7950,6 +8278,7 @@
         <name>AddBasisDocuments</name>
       </handler>
     </action>
+    <representation>Picture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

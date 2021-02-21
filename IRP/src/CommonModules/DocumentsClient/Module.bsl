@@ -2935,7 +2935,12 @@ EndProcedure
 #Region Utility
 
 Procedure ShowRowKey(Form) Export
-	ItemNames = "ItemListKey, SpecialOffersKey";
+	ItemNames = "ItemListKey, SpecialOffersKey,
+	|ItemListRowsKey,
+	|DocumentsTreeKey, DocumentsTreeBasisKey, DocumentsTreeRowID, DocumentsTreeRowRef,
+	|ResultsTreeKey, ResultsTreeRowID, ResultsTreeRowRef, ResultsTreeBasisKey,
+	|ResultsTable,
+	|ShipmentConfirmationsTreeKey, ShipmentConfirmationsTreeBasisKey";
 	ArrayOfItemNames = StrSplit(ItemNames, ",");
 	For Each ItemName In ArrayOfItemNames Do
 		ItemName = TrimAll(ItemName);	
@@ -3011,31 +3016,27 @@ Procedure UpdateTradeDocumentsTree(Object, Form, TableName, TreeName, QuantityCo
 			Continue;
 		EndIf;
 		
-		NewRow = New Structure();
-		NewRow.Insert("Key"         , Row.Key);
-		NewRow.Insert("Item"        , Row.Item);
-		NewRow.Insert("ItemKey"     , Row.ItemKey);
-		NewRow.Insert("QuantityUnit", Row.Unit);
-		NewRow.Insert("Unit");
-		NewRow.Insert("Quantity"    , Row.Quantity);
+		NewRow = New Structure("Key, Item, ItemKey, QuantityInBaseUnit");
+		FillPropertyValues(NewRow, Row);
 		ArrayOfRows.Add(NewRow);
 	EndDo;
-	
-	DocumentsServer.RecalculateInvoiceQuantity(ArrayOfRows);
 
-	For Each Row In ArrayOfRows Do		
+	For Each Row In ArrayOfRows Do	
 		NewRow0 = Form[TreeName].GetItems().Add();
 		NewRow0.Level             = 1;
 		NewRow0.Key               = Row.Key;
 		NewRow0.Item              = Row.Item;
 		NewRow0.ItemKey           = Row.ItemKey;
-		NewRow0.QuantityInInvoice = Row.Quantity;
+		NewRow0.QuantityInInvoice = Row.QuantityInBaseUnit;
+		If CommonFunctionsClientServer.ObjectHasProperty(NewRow0, "PictureItem") Then			
+			NewRow0.PictureItem = 0;
+		EndIf;
 		
 		ArrayOfDocuments = Object[TableName].FindRows(New Structure("Key", Row.Key));
 		
 		If ArrayOfDocuments.Count() = 1 
-			And ArrayOfDocuments[0].Quantity <> Row.Quantity Then
-			ArrayOfDocuments[0].Quantity = Row.Quantity;
+			And ArrayOfDocuments[0].Quantity <> Row.QuantityInBaseUnit Then
+			ArrayOfDocuments[0].Quantity = Row.QuantityInBaseUnit;
 		EndIf;
 		
 		For Each ItemOfArray In ArrayOfDocuments Do
@@ -3045,6 +3046,9 @@ Procedure UpdateTradeDocumentsTree(Object, Form, TableName, TreeName, QuantityCo
 			NewRow1.PictureEdit = True;
 			NewRow0.Quantity = NewRow0.Quantity + ItemOfArray.Quantity;
 			NewRow0[QuantityColumnName] = NewRow0[QuantityColumnName] + ItemOfArray[QuantityColumnName];
+			If CommonFunctionsClientServer.ObjectHasProperty(NewRow1, "PictureDocument") Then			
+				NewRow1.PictureDocument = 1;
+			EndIf;
 		EndDo;
 	EndDo;
 	

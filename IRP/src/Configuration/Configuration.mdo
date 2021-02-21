@@ -154,6 +154,7 @@
   <commonPictures>CommonPicture.SpecialOffer</commonPictures>
   <commonPictures>CommonPicture.Store</commonPictures>
   <commonPictures>CommonPicture.Total</commonPictures>
+  <commonPictures>CommonPicture.IconCollection4</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
@@ -413,6 +414,7 @@
   <eventSubscriptions>EventSubscription.BeforeWrite_FillQuantity</eventSubscriptions>
   <eventSubscriptions>EventSubscription.Posting_RowID</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_RowID</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnWrite_RowID</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
   <settingsStorages>SettingsStorage.ReportOptions</settingsStorages>

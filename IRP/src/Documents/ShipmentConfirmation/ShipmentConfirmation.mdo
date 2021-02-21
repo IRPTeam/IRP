@@ -162,15 +162,6 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="6d25ca4c-afc1-481d-bc0e-4569d377f067">
-    <name>SelectShipmentBasisesForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Select receipt basises</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <tabularSections uuid="42359745-e080-4344-86f6-41e63dc140f6">
     <producedTypes>
       <objectType typeId="a8debb24-2cb1-4480-814b-a0d3853d37da" valueTypeId="78ba8146-ff73-44d3-adc9-cf7a40841f6b"/>

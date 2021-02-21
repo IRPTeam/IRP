@@ -535,7 +535,6 @@ Procedure LinkUnlinkBasisDocuments(Command)
 	FormParameters.Insert("Filter"           , GetLinkedDocumentsFilter());
 	FormParameters.Insert("SelectedRowInfo"  , RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
 	FormParameters.Insert("TablesInfo"       , RowIDInfoClient.GetTablesInfo(Object));
-	
 	OpenForm("CommonForm.LinkUnlinkDocumentRows"
 		, FormParameters, , , ,
 		, New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject)
@@ -547,7 +546,6 @@ Procedure AddBasisDocuments(Command)
 	FormParameters = New Structure();
 	FormParameters.Insert("Filter"           , GetLinkedDocumentsFilter());
 	FormParameters.Insert("TablesInfo"       , RowIDInfoClient.GetTablesInfo(Object));
-	
 	OpenForm("CommonForm.AddLinkedDocumentRows"
 		, FormParameters, , , ,
 		, New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject)

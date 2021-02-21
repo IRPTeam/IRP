@@ -38,35 +38,13 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure Filling_BasedOnSalesOrder(FillingData)
-	FillPropertyValues(ThisObject, FillingData,
-		"Partner, Company, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName");
+	FillPropertyValues(ThisObject, FillingData, "Partner, Company, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName");
 	RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 EndProcedure
 
 Procedure Filling_BasedOnShipmentConfirmation(FillingData)
-	FillPropertyValues(ThisObject, FillingData, 
-		"Partner, Company, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName");
-	
-	If FillingData.Property("ItemList") Then
-		For Each Row In FillingData.ItemList Do
-			NewRow = ThisObject.ItemList.Add();
-			FillPropertyValues(NewRow, Row);
-		EndDo;
-	EndIf;
-	
-	If FillingData.Property("ShipmentConfirmations") Then
-		For Each Row In FillingData.ShipmentConfirmations Do
-			NewRow = ThisObject.ShipmentConfirmations.Add();
-			FillPropertyValues(NewRow, Row);
-		EndDo;
-	EndIf;
-	
-	If FillingData.Property("RowIDInfo") Then	
-		For Each Row In FillingData.RowIDInfo Do
-			NewRow = ThisObject.RowIDInfo.Add();
-			FillPropertyValues(NewRow, Row);
-		EndDo;
-	EndIf;
+	FillPropertyValues(ThisObject, FillingData, "Partner, Company, LegalName");
+	RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 EndProcedure
 
 Procedure OnCopy(CopiedObject)

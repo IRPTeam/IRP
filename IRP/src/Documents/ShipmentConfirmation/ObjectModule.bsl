@@ -72,20 +72,7 @@ EndProcedure
 
 Procedure Filling_BasedOn(FillingData)
 	FillPropertyValues(ThisObject, FillingData, "Company, Partner, LegalName");
-	
-	If FillingData.Property("ItemList") Then
-		For Each Row In FillingData.ItemList Do
-			NewRow = ThisObject.ItemList.Add();
-			FillPropertyValues(NewRow, Row);
-		EndDo;
-	EndIf;
-	
-	If FillingData.Property("RowIDInfo") Then
-		For Each Row In FillingData.RowIDInfo Do
-			NewRow = ThisObject.RowIDInfo.Add();
-			FillPropertyValues(NewRow, Row);
-		EndDo;
-	EndIf;
+	RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

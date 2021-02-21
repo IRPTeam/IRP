@@ -16,11 +16,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndDo;
 	
 	FillItemListRows(Parameters.TablesInfo.ItemListRows);
-	
 	FillResultsTree(Parameters.SelectedRowInfo.SelectedRow);
-			
-	FillDocumentsTree(Parameters.SelectedRowInfo.SelectedRow, 
-		Parameters.SelectedRowInfo.FilterBySelectedRow);
+	FillDocumentsTree(Parameters.SelectedRowInfo.FilterBySelectedRow);
 EndProcedure
 
 &AtClient
@@ -32,15 +29,12 @@ EndProcedure
 Procedure ExpandAllTrees() Export
 	RowIDInfoClient.ExpandTree(Items.DocumentsTree, ThisObject.DocumentsTree.GetItems());
 	RowIDInfoClient.ExpandTree(Items.ResultsTree, ThisObject.ResultsTree.GetItems());
+	SetButtonsEnabled();
 EndProcedure
 
 &AtClient
 Procedure ItemListRowsOnActivateRow(Item)
-	SelectedRowInfo = RowIDInfoClient.GetSelectedRowInfo(Items.ItemListRows.CurrentData);
-	FillDocumentsTree(SelectedRowInfo.SelectedRow, SelectedRowInfo.FilterBySelectedRow);
-	FillResultsTree(SelectedRowInfo.SelectedRow);
-	RowIDInfoClient.ExpandTree(Items.DocumentsTree, ThisObject.DocumentsTree.GetItems());
-	RowIDInfoClient.ExpandTree(Items.ResultsTree, ThisObject.ResultsTree.GetItems());
+	RefreshTrees();
 EndProcedure
 
 &AtClient
@@ -59,6 +53,17 @@ Procedure SetButtonsEnabled()
 	Items.Unlink.Enabled = IsCanUnlink().IsCan;
 EndProcedure
 
+&AtClient
+Procedure RefreshTrees()
+	SelectedRowInfo = RowIDInfoClient.GetSelectedRowInfo(Items.ItemListRows.CurrentData);
+	FillResultsTree(SelectedRowInfo.SelectedRow);
+	FillDocumentsTree(SelectedRowInfo.FilterBySelectedRow);
+		
+	SetButtonsEnabled();	
+	RowIDInfoClient.ExpandTree(Items.ResultsTree, ThisObject.ResultsTree.GetItems());
+	RowIDInfoClient.ExpandTree(Items.DocumentsTree, ThisObject.DocumentsTree.GetItems());
+EndProcedure	
+
 &AtServer
 Procedure FillItemListRows(ItemListRows)
 	For Each Row In ItemListRows Do
@@ -66,39 +71,57 @@ Procedure FillItemListRows(ItemListRows)
 		FillPropertyValues(NewRow, Row);
 		NewRow.RowPresentation = 
 		"" + Row.Item + ", " + Row.ItemKey + ", " + Row.Store;
-		NewRow.Picture = 3;
+		NewRow.Picture = 0;
 	EndDo;
 EndProcedure
 
 &AtServer
 Procedure FillResultsTree(SelectedRow)
+	ThisObject.ResultsTree.GetItems().Clear();
+	
+	If SelectedRow = Undefined Then
+		Return;
+	EndIf;
 	ResultsTableGrouped = ThisObject.ResultsTable.Unload().Copy(New Structure("Key", SelectedRow.Key));
 	ResultsTableGrouped.GroupBy("Key", "Quantity");
-	ThisObject.ResultsTree.GetItems().Clear();
+	
 	For Each Row In ResultsTableGrouped Do
+		ArrayOfSecondLevelRows = ThisObject.ResultsTable.FindRows(New Structure("Key", Row.Key));
+		
+		NotLinked = True;
+		For Each SecondLevelRow In ArrayOfSecondLevelRows Do
+			If ValueIsFilled(SecondLevelRow.Basis) Then
+				NotLinked = False;
+				Break;
+			EndIf;
+		EndDo;
+		If NotLinked Then
+			Continue;
+		EndIf;
+		
 		TopLevelNewRow = ThisObject.ResultsTree.GetItems().Add();
 		FillPropertyValues(TopLevelNewRow, SelectedRow);
 		TopLevelNewRow.Level = 1;
-		TopLevelNewRow.Picture = 3;
+		TopLevelNewRow.Picture = 0;
 		TopLevelNewRow.Quantity = 0;
 		TopLevelNewRow.BasisUnit = Undefined;
 		TopLevelNewRow.RowPresentation = 
 		"" + SelectedRow.Item + ", " + SelectedRow.ItemKey + ", " + SelectedRow.Store;
 			
-		ArrayOfSecondLevelRows = ThisObject.ResultsTable.FindRows(New Structure("Key", Row.Key));
-			
 		For Each SecondLevelRow In ArrayOfSecondLevelRows Do
 			SecondLevelNewRow = TopLevelNewRow.GetItems().Add();		
 			FillPropertyValues(SecondLevelNewRow, SecondLevelRow);
 			SecondLevelNewRow.Level = 2;
-			SecondLevelNewRow.Picture = 2;
+			SecondLevelNewRow.Picture = 1;
 			SecondLevelNewRow.RowPresentation = String(SecondLevelRow.Basis);
 		EndDo;
 	EndDo;
 EndProcedure	
 
 &AtServer
-Procedure FillDocumentsTree(SelectedRow, FilterBySelectedRow);
+Procedure FillDocumentsTree(FilterBySelectedRow)
+	ThisObject.DocumentsTree.GetItems().Clear();
+	
 	FullFilter = New Structure();
 	For Each KeyValue In ThisObject.MainFilter Do
 		FullFilter.Insert(KeyValue.Key, KeyValue.Value);
@@ -110,12 +133,10 @@ Procedure FillDocumentsTree(SelectedRow, FilterBySelectedRow);
 		EndDo;
 	EndIf;
 	
-	BasisesTable = RowIDInfoServer.GetBasisesFor_SalesInvoice(FullFilter);
+	BasisesTable = RowIDInfoServer.GetBasises(ThisObject.MainFilter.Ref, FullFilter);
 	
 	TopLevelTable = BasisesTable.Copy(,"Basis");
 	TopLevelTable.GroupBy("Basis");
-	
-	ThisObject.DocumentsTree.GetItems().Clear();
 	
 	For Each TopLevelRow In TopLevelTable Do
 		TopLevelNewRow = ThisObject.DocumentsTree.GetItems().Add();
@@ -123,7 +144,7 @@ Procedure FillDocumentsTree(SelectedRow, FilterBySelectedRow);
 		
 		TopLevelNewRow.RowPresentation = String(TopLevelRow.Basis);
 		TopLevelNewRow.Level = 1;
-		TopLevelNewRow.Picture = 2;
+		TopLevelNewRow.Picture = 1;
 		
 		SecondLevelRows = BasisesTable.FindRows(New Structure("Basis", TopLevelNewRow.Basis));
 		
@@ -134,7 +155,7 @@ Procedure FillDocumentsTree(SelectedRow, FilterBySelectedRow);
 			SecondLevelNewRow.RowPresentation = 
 			"" + SecondLevelRow.Item + ", " + SecondLevelRow.ItemKey + ", " + SecondLevelRow.Store;
 			SecondLevelNewRow.Level   = 2;
-			SecondLevelNewRow.Picture = 3;
+			SecondLevelNewRow.Picture = 0;
 			
 			SecondLevelNewRow.Quantity = SecondLevelRow.Quantity;
 			SecondLevelNewRow.BasisUnit = SecondLevelRow.BasisUnit;
@@ -151,12 +172,8 @@ EndProcedure
 &AtServer
 Function GetFillingValues()
 	BasisesTable = ThisObject.ResultsTable.Unload();
-	For Each Row In BasisesTable Do
-		Row.OldKey = Row.Key;
-		Row.Key = Row.BasisKey;
-	EndDo;
 	ExtractedData = RowIDInfoServer.ExtractData(BasisesTable);
-	FillingValues = RowIDInfoServer.ConvertDataToFillingValues(Metadata.Documents.SalesInvoice, ExtractedData);
+	FillingValues = RowIDInfoServer.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), ExtractedData);
 	Return FillingValues;
 EndFunction
 
@@ -175,34 +192,8 @@ Procedure Link(Command)
 	EndIf;
 	
 	FillPropertyValues(ThisObject.ResultsTable.Add(), LinkInfo);
-		
-	Filter = New Structure();
-	Filter.Insert("Key"   , LinkInfo.Key);
-	Filter.Insert("Level" , 1);
-	TreeRowID = RowIDInfoClient.FindRowInTree(Filter, ThisObject.ResultsTree);
-	If TreeRowID = Undefined Then
-		TopLevelNewRow = ThisObject.ResultsTree.GetItems().Add();
-	Else
-		TopLevelNewRow = ThisObject.ResultsTree.FindByID(TreeRowID);
-	EndIf;
 	
-	FillPropertyValues(TopLevelNewRow, LinkInfo);
-	TopLevelNewRow.Level = 1;
-	TopLevelNewRow.Picture = 3;
-	TopLevelNewRow.RowID = "";
-	TopLevelNewRow.RowRef = Undefined;
-	TopLevelNewRow.RowPresentation = 
-	"" + LinkInfo.Item + ", " + LinkInfo.ItemKey + ", " + LinkInfo.Store;
-	
-	
-	SecondLevelNewRow = TopLevelNewRow.GetItems().Add();		
-	FillPropertyValues(SecondLevelNewRow, LinkInfo);
-	SecondLevelNewRow.Level = 2;
-	SecondLevelNewRow.Picture = 2;
-	SecondLevelNewRow.RowPresentation = String(LinkInfo.Basis);
-		
-	SetButtonsEnabled();
-	RowIDInfoClient.ExpandTree(Items.ResultsTree, ThisObject.ResultsTree.GetItems());
+	RefreshTrees();
 EndProcedure
 
 &AtClient
@@ -238,7 +229,7 @@ Function IsCanLink()
 			Result.Insert("RowRef"      , DocumentsTreeCurrentData.RowRef);
 			Result.Insert("CurrentStep" , DocumentsTreeCurrentData.CurrentStep);
 			Result.Insert("Basis"       , DocumentsTreeCurrentData.Basis);
-			Result.Insert("BasisKey"    , DocumentsTreeCurrentData.Key);
+			Result.Insert("BasisKey"    , DocumentsTreeCurrentData.BasisKey);
 			Result.Insert("RowID"       , DocumentsTreeCurrentData.RowID);
 		EndIf;
 	EndIf;
@@ -263,20 +254,7 @@ Procedure Unlink(Command)
 		ThisObject.ResultsTable.Delete(Row);
 	EndDo;
 	
-	Filter.Insert("Level" , 2);
-	TreeRowID = RowIDInfoClient.FindRowInTree(Filter, ThisObject.ResultsTree);	
-	SecondLevelRow = ThisObject.ResultsTree.FindByID(TreeRowID);
-	SecondLevelRow.GetParent().GetItems().Delete(SecondLevelRow);
-	
-	TopLevelRowsForDelete = New Array();
-	For Each TopLevelRow In ThisObject.ResultsTree.GetItems() Do
-		If Not TopLevelRow.GetItems().Count() Then
-			TopLevelRowsForDelete.Add(TopLevelRow);
-		EndIf;
-	EndDo;
-	For Each Row In TopLevelRowsForDelete Do
-		ThisObject.ResultsTree.GetItems().Delete(Row);
-	EndDo;
+	RefreshTrees();	
 EndProcedure
 
 &AtClient
@@ -299,6 +277,10 @@ EndFunction
 
 #EndRegion
 
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
 
 
 

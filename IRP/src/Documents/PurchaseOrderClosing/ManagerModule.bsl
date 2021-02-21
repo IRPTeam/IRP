@@ -111,7 +111,7 @@ Function ItemList()
 		|	PurchaseOrderItems.Store AS Store,
 		|	PurchaseOrderItems.Store.UseGoodsReceipt AS UseGoodsReceipt,
 		|	PurchaseOrderItems.Ref.GoodsReceiptBeforePurchaseInvoice AS GoodsReceiptBeforePurchaseInvoice,
-		|	PurchaseOrderItems.Ref AS Order,
+		|	PurchaseOrderItems.Ref.PurchaseOrder AS Order,
 		|	PurchaseOrderItems.PurchaseBasis AS PurchaseBasis,
 		|	PurchaseOrderItems.ItemKey.Item AS Item,
 		|	PurchaseOrderItems.ItemKey AS ItemKey,
@@ -133,10 +133,11 @@ Function ItemList()
 		|	PurchaseOrderItems.Ref.UseItemsReceiptScheduling AS UseItemsReceiptScheduling,
 		|	PurchaseOrderItems.PurchaseBasis REFS Document.SalesOrder
 		|	AND NOT PurchaseOrderItems.PurchaseBasis.REF IS NULL AS UseSalesOrder,
-		|	PurchaseOrderItems.OffersAmount
+		|	PurchaseOrderItems.OffersAmount,
+		|	PurchaseOrderItems.Ref.Currency AS Currency
 		|INTO ItemList
 		|FROM
-		|	Document.PurchaseOrder.ItemList AS PurchaseOrderItems
+		|	Document.PurchaseOrderClosing.ItemList AS PurchaseOrderItems
 		|WHERE
 		|	PurchaseOrderItems.Ref = &Ref";
 EndFunction

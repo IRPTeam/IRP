@@ -63,7 +63,7 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		PurchaseOrder = FillingData.PurchaseOrder; 
 		PurchaseOrderData = DocPurchaseOrderServer.GetPurchaseOrderForClosing(FillingData.PurchaseOrder);
 
-		FillPropertyValues(ThisObject, PurchaseOrderData.SalesOrderInfo);
+		FillPropertyValues(ThisObject, PurchaseOrderData.PurchaseOrderInfo);
 
 		For Each Table In PurchaseOrderData.Tables Do
 			ThisObject[Table.Key].Load(Table.Value);

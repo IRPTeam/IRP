@@ -243,6 +243,7 @@ Function ExtractData(BasisesTable) Export
 	EndDo;
 	
 	ExtractedData = New Array();
+	
 	If Basises_SO.Count() Then
 		ExtractedData.Add(ExtractData_SO(Basises_SO));
 	EndIf;
@@ -254,6 +255,11 @@ Function ExtractData(BasisesTable) Export
 	If Basises_SC.Count() Then
 		ExtractedData.Add(ExtractData_SC(Basises_SC));
 	EndIf;
+	
+	If Basises_SO_SC.Count() Then
+		ExtractedData.Add(ExtractData_SO_SC(Basises_SO_SC));
+	EndIf;
+	
 	Return ExtractedData;
 EndFunction
 
@@ -524,8 +530,7 @@ Function ExtractData_SC(BasisesTable)
 		|SELECT ALLOWED
 		|	""ShipmentConfirmation"" AS BasedOn,
 		|	ItemList.Ref.Company AS Company,
-		//|	ItemList.Ref AS Ref,
-		|	Undefined AS Ref,
+		|	UNDEFINED AS Ref,
 		|	ItemList.Ref.Partner AS Partner,
 		|	ItemList.Ref.LegalName AS LegalName,
 		|	ItemList.Store AS Store,
@@ -547,8 +552,7 @@ Function ExtractData_SC(BasisesTable)
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		//|	BasisesTable.Basis AS Ref,
-		|	Undefined AS Ref,
+		|	UNDEFINED AS Ref,
 		|	BasisesTable.Key,
 		|	BasisesTable.BasisKey,
 		|	BasisesTable.RowID,
@@ -567,8 +571,7 @@ Function ExtractData_SC(BasisesTable)
 		|	ItemList.ItemKey.Item AS Item,
 		|	ItemList.ItemKey AS ItemKey,
 		|	ItemList.Unit AS Unit,
-		//|	ShipmentConfirmations.Basis AS Ref,
-		|	Undefined AS Ref,
+		|	UNDEFINED AS Ref,
 		|	ShipmentConfirmations.Key,
 		|	ShipmentConfirmations.BasisKey,
 		|	ShipmentConfirmations.Basis AS ShipmentConfirmation,
@@ -628,11 +631,9 @@ Function ExtractData_SC(BasisesTable)
 			Filter_Key = New Structure("Key" , Row.Key);
 			For Each Row_RowIDInfo In Table_RowIDInfo.FindRows(Filter_Key) Do
 				Row_RowIDInfo.Key = NewKey;
-				//Row_RowIDInfo.Ref = Undefined;
 			EndDo;
 			For Each Row_ShipmentConfirmations In Table_ShipmentConfirmations.FindRows(Filter_Key) Do
 				Row_ShipmentConfirmations.Key = NewKey;
-				//Row_ShipmentConfirmations.Ref = Undefined;
 			EndDo;
 		EndDo;
 		
@@ -641,7 +642,6 @@ Function ExtractData_SC(BasisesTable)
 		NewRow_ItemListResult.Quantity           = Row_ItemList.Quantity;
 		NewRow_ItemListResult.QuantityInBaseUnit = Row_ItemList.QuantityInBaseUnit;
 		NewRow_ItemListResult.Key = NewKey;
-		//NewRow_ItemListResult.Ref = Undefined;
 	EndDo;
 	
 	Tables = New Structure();
@@ -649,6 +649,82 @@ Function ExtractData_SC(BasisesTable)
 	Tables.Insert("ShipmentConfirmations", Table_ShipmentConfirmations);
 	Tables.Insert("RowIDInfo"            , Table_RowIDInfo);
 	Return Tables;
+EndFunction
+
+Function ExtractData_SO_SC(BasisesTable)
+	Query = New Query();
+	Query.Text =
+		"SELECT
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.RowID,
+		|	BasisesTable.CurrentStep,
+		|	BasisesTable.RowRef,
+		|	BasisesTable.Basis,
+		|	BasisesTable.SalesOrder,
+		|	BasisesTable.BasisUnit,
+		|	BasisesTable.Quantity
+		|INTO BasisesTable
+		|FROM
+		|	&BasisesTable AS BasisesTable
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT ALLOWED
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.RowID,
+		|	BasisesTable.CurrentStep,
+		|	BasisesTable.RowRef,
+		|	BasisesTable.Basis,
+		|	BasisesTable.SalesOrder,
+		|	BasisesTable.BasisUnit,
+		|	BasisesTable.Quantity
+		|FROM
+		|	BasisesTable AS BasisesTable
+		|		LEFT JOIN Document.ShipmentConfirmation.RowIDInfo AS RowIDInfo
+		|		ON BasisesTable.Basis = RowIDInfo.Ref
+		|		AND BasisesTable.BasisKey = RowIDInfo.Key";
+//		|ORDER BY
+//		|	ItemList.LineNumber
+//		|;
+//		|
+//		|////////////////////////////////////////////////////////////////////////////////
+//		|SELECT
+//		|	UNDEFINED AS Ref,
+//		|	BasisesTable.Key,
+//		|	BasisesTable.BasisKey,
+//		|	BasisesTable.RowID,
+//		|	BasisesTable.CurrentStep,
+//		|	BasisesTable.RowRef,
+//		|	BasisesTable.Basis,
+//		|	BasisesTable.BasisUnit,
+//		|	BasisesTable.Quantity
+//		|FROM
+//		|	BasisesTable AS BasisesTable
+//		|;
+//		|
+//		|////////////////////////////////////////////////////////////////////////////////
+//		|SELECT
+//		|	ItemList.Store AS Store,
+//		|	ItemList.ItemKey.Item AS Item,
+//		|	ItemList.ItemKey AS ItemKey,
+//		|	ItemList.Unit AS Unit,
+//		|	UNDEFINED AS Ref,
+//		|	ShipmentConfirmations.Key,
+//		|	ShipmentConfirmations.BasisKey,
+//		|	ShipmentConfirmations.Basis AS ShipmentConfirmation,
+//		|	ShipmentConfirmations.Quantity AS Quantity,
+//		|	ShipmentConfirmations.Quantity AS QuantityInShipmentConfirmation
+//		|FROM
+//		|	BasisesTable AS ShipmentConfirmations
+//		|		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
+//		|		ON ShipmentConfirmations.Basis = ItemList.Ref
+//		|		AND ShipmentConfirmations.BasisKey = ItemList.Key";
+			
+	Query.SetParameter("BasisesTable", BasisesTable);
+	QueryResults = Query.Execute();
+	table = QueryResults.Unload();
 EndFunction
 
 #EndRegion

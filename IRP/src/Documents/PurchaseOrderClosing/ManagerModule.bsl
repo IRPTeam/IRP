@@ -3,6 +3,7 @@
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure();
 	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Return Tables;
 EndFunction
@@ -14,12 +15,10 @@ EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 #Region NewRegisterPosting
-	If Parameters.StatusInfo.Posting Then
-		Tables = Parameters.DocumentDataTables;	
-		QueryArray = GetQueryTextsMasterTables();
-		PostingServer.SetRegisters(Tables, Ref);
-		PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-	EndIf;
+	Tables = Parameters.DocumentDataTables;	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
 EndProcedure
 
@@ -39,12 +38,8 @@ EndProcedure
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	Tables = PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
-#Region NewRegistersPosting
-	If Parameters.StatusInfo.Posting Then
-		QueryArray = GetQueryTextsMasterTables();
-		PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-	EndIf;
-#EndRegion	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Return Tables;
 EndFunction
 
@@ -97,7 +92,6 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
-	QueryArray.Add(R4035B_IncomingStocks_Exists());
 	Return QueryArray;
 EndFunction
 
@@ -107,10 +101,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
 	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
 	QueryArray.Add(R1014T_CanceledPurchaseOrders());
-	QueryArray.Add(R2013T_SalesOrdersProcurement());
-	QueryArray.Add(R4016B_InternalSupplyRequestOrdering());
-	QueryArray.Add(R4033B_GoodsReceiptSchedule());
-	QueryArray.Add(R4035B_IncomingStocks());
 	Return QueryArray;	
 EndFunction	
 
@@ -142,7 +132,8 @@ Function ItemList()
 		|	PurchaseOrderItems.NetAmount,
 		|	PurchaseOrderItems.Ref.UseItemsReceiptScheduling AS UseItemsReceiptScheduling,
 		|	PurchaseOrderItems.PurchaseBasis REFS Document.SalesOrder
-		|	AND NOT PurchaseOrderItems.PurchaseBasis.REF IS NULL AS UseSalesOrder
+		|	AND NOT PurchaseOrderItems.PurchaseBasis.REF IS NULL AS UseSalesOrder,
+		|	PurchaseOrderItems.OffersAmount
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseOrder.ItemList AS PurchaseOrderItems
@@ -152,8 +143,25 @@ EndFunction
 
 Function R1010T_PurchaseOrders()
 	Return
-		"SELECT *
+		"SELECT 
+		|	- QueryTable.Quantity AS Quantity,
+		|	- QueryTable.OffersAmount AS OffersAmount,
+		|	- QueryTable.NetAmount AS NetAmount,
+		|	- QueryTable.Amount AS Amount,
+		|	*
 		|INTO R1010T_PurchaseOrders
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE QueryTable.isCanceled
+		|
+		|UNION ALL
+		|
+		|SELECT 
+		|	QueryTable.Quantity AS Quantity,
+		|	QueryTable.OffersAmount AS OffersAmount,
+		|	QueryTable.NetAmount AS NetAmount,
+		|	QueryTable.Amount AS Amount,
+		|	*
 		|FROM
 		|	ItemList AS QueryTable
 		|WHERE NOT QueryTable.isCanceled";
@@ -162,26 +170,31 @@ EndFunction
 
 Function R1011B_PurchaseOrdersReceipt()
 	Return
-		"SELECT 
+		"SELECT
+		|	&Period AS Period,
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	-Balance.QuantityBalance AS Quantity,
 		|	*
 		|INTO R1011B_PurchaseOrdersReceipt
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE NOT QueryTable.isCanceled
-		|	AND NOT QueryTable.IsService";
+		|	AccumulationRegister.R1011B_PurchaseOrdersReceipt.Balance(&BalancePeriod, Order = &PurchaseOrder) AS Balance";
+
 
 EndFunction
 
 Function R1012B_PurchaseOrdersInvoiceClosing()
 	Return
-		"SELECT 
+		"SELECT
+		|	&Period AS Period,
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	-PurchaseOrdersInvoiceClosing.QuantityBalance AS Quantity,
+		|	-PurchaseOrdersInvoiceClosing.AmountBalance AS Amount,
+		|	-PurchaseOrdersInvoiceClosing.NetAmountBalance AS NetAmount,
 		|	*
 		|INTO R1012B_PurchaseOrdersInvoiceClosing
 		|FROM
-		|	ItemList AS QueryTable
-		|WHERE NOT QueryTable.isCanceled";
+		|	AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing.Balance(&BalancePeriod, Order = &PurchaseOrder) AS
+		|		PurchaseOrdersInvoiceClosing";
 
 EndFunction
 
@@ -195,86 +208,4 @@ Function R1014T_CanceledPurchaseOrders()
 
 EndFunction
 
-Function R2013T_SalesOrdersProcurement()
-	Return
-		"SELECT
-		|	QueryTable.Quantity AS ReOrderedQuantity,
-		|	QueryTable.SalesOrder AS Order,
-		|	*
-		|INTO R2013T_SalesOrdersProcurement
-		|FROM
-		|	ItemList AS QueryTable
-		|WHERE
-		|	NOT QueryTable.isCanceled
-		|	AND NOT QueryTable.IsService
-		|	AND NOT QueryTable.SalesOrder = Value(Document.SalesOrder.EmptyRef)";
-
-EndFunction
-
-Function R4016B_InternalSupplyRequestOrdering()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	QueryTable.Quantity AS Quantity,
-		|	QueryTable.InternalSupplyRequest AS InternalSupplyRequest,
-		|	*
-		|INTO R4016B_InternalSupplyRequestOrdering
-		|FROM
-		|	ItemList AS QueryTable
-		|WHERE
-		|	NOT QueryTable.isCanceled
-		|	AND NOT QueryTable.IsService
-		|	AND NOT QueryTable.InternalSupplyRequest = Value(Document.InternalSupplyRequest.EmptyRef)";
-
-EndFunction
-
-Function R4033B_GoodsReceiptSchedule()
-	Return
-		"SELECT 
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	CASE WHEN QueryTable.DeliveryDate = DATETIME(1, 1, 1) THEN
-		|		QueryTable.Period
-		|	ELSE
-		|		QueryTable.DeliveryDate
-		|	END AS Period,
-		|	QueryTable.Order AS Basis,
-		|*
-		|
-		|INTO R4033B_GoodsReceiptSchedule
-		|FROM
-		|	ItemList AS QueryTable
-		|WHERE NOT QueryTable.isCanceled 
-		|	AND NOT QueryTable.IsService 
-		|	AND QueryTable.UseItemsReceiptScheduling";
-
-EndFunction
-
-Function R4035B_IncomingStocks()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	QueryTable.Period AS Period,
-		|	QueryTable.Store AS Store,
-		|	QueryTable.ItemKey AS ItemKey,
-		|	QueryTable.Order AS Order,
-		|	QueryTable.Quantity AS Quantity
-		|INTO R4035B_IncomingStocks
-		|FROM
-		|	ItemList AS QueryTable
-		|WHERE
-		|	NOT QueryTable.UseSalesOrder
-		|	AND NOT QueryTable.IsService
-		|	AND NOT QueryTable.IsCanceled";
-EndFunction	
-
-Function R4035B_IncomingStocks_Exists()
-	Return
-		"SELECT *
-		|	INTO R4035B_IncomingStocks_Exists
-		|FROM
-		|	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
-		|WHERE
-		|	R4035B_IncomingStocks.Recorder = &Ref";
-EndFunction
-		
 #EndRegion

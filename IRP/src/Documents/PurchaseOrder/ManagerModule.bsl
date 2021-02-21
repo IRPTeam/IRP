@@ -631,7 +631,8 @@ Function ItemList()
 		|	PurchaseOrderItems.NetAmount,
 		|	PurchaseOrderItems.Ref.UseItemsReceiptScheduling AS UseItemsReceiptScheduling,
 		|	PurchaseOrderItems.PurchaseBasis REFS Document.SalesOrder
-		|	AND NOT PurchaseOrderItems.PurchaseBasis.REF IS NULL AS UseSalesOrder
+		|	AND NOT PurchaseOrderItems.PurchaseBasis.REF IS NULL AS UseSalesOrder,
+		|	PurchaseOrderItems.Ref.Currency AS Currency
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseOrder.ItemList AS PurchaseOrderItems

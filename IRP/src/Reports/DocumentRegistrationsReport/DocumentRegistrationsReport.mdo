@@ -77,6 +77,7 @@
       <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.CashExpense</types>
       <types>DocumentRef.PlannedReceiptReservation</types>
+      <types>DocumentRef.PurchaseOrderClosing</types>
     </commandParameterType>
     <representation>Auto</representation>
     <shortcut></shortcut>

@@ -31,7 +31,7 @@
     <types>Date</types>
     <types>Number</types>
     <numberQualifiers>
-      <precision>10</precision>
+      <precision>15</precision>
       <scale>4</scale>
     </numberQualifiers>
     <stringQualifiers>

@@ -287,34 +287,34 @@ Scenario: _023105 check that the Account field is missing from the order
 	And field "Account" is not present on the form
 
 
-Scenario: _023106 check the form of selection of items (sales order)
-	Given I open hyperlink "e1cib/list/Document.SalesOrder"
-	And I click the button named "FormCreate"
-	* Filling in the details
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'  |
-		And I select current line in "List" table
-		And I click Select button of "Partner term" field
-		And I go to line in "List" table
-				| 'Description'       |
-				| 'Basic Partner terms, TRY' |
-		And I select current line in "List" table
-		And I click Select button of "Legal name" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Company Ferron BP'  |
-		And I select current line in "List" table
-	When check the product selection form with price information in Sales order
-	And in the table "ItemList" I click "% Offers" button
-	And in the table "Offers" I click the button named "FormOK"
-	And I click the button named "FormPostAndClose"
-	* Check Sales order Saving
-		And "List" table contains lines
-		| 'Currency'  | 'Partner'     | 'Status'   | 'Σ'         |
-		| 'TRY'       | 'Ferron BP'   | 'Approved' | '2 050,00'  |
-	And I close all client application windows
+# Scenario: _023106 check the form of selection of items (sales order)
+# 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+# 	And I click the button named "FormCreate"
+# 	* Filling in the details
+# 		And I click Select button of "Partner" field
+# 		And I go to line in "List" table
+# 			| 'Description' |
+# 			| 'Ferron BP'  |
+# 		And I select current line in "List" table
+# 		And I click Select button of "Partner term" field
+# 		And I go to line in "List" table
+# 				| 'Description'       |
+# 				| 'Basic Partner terms, TRY' |
+# 		And I select current line in "List" table
+# 		And I click Select button of "Legal name" field
+# 		And I go to line in "List" table
+# 			| 'Description' |
+# 			| 'Company Ferron BP'  |
+# 		And I select current line in "List" table
+# 	When check the product selection form with price information in Sales order
+# 	And in the table "ItemList" I click "% Offers" button
+# 	And in the table "Offers" I click the button named "FormOK"
+# 	And I click the button named "FormPostAndClose"
+# 	* Check Sales order Saving
+# 		And "List" table contains lines
+# 		| 'Currency'  | 'Partner'     | 'Status'   | 'Σ'         |
+# 		| 'TRY'       | 'Ferron BP'   | 'Approved' | '2 050,00'  |
+# 	And I close all client application windows
 
 
 				

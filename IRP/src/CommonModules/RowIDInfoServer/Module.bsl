@@ -52,11 +52,11 @@ EndProcedure
 
 Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 	If TypeOf(Source) = Type("DocumentObject.SalesOrder") Then
-		FillRowID_SalesOrder(Source);	
+		FillRowID_SO(Source);	
 	ElsIf TypeOf(Source) = Type("DocumentObject.SalesInvoice") Then
-		FillRowID_SalesInvoice(Source);
+		FillRowID_SI(Source);
 	ElsIf TypeOf(Source) = Type("DocumentObject.ShipmentConfirmation") Then	
-		FillRowID_ShipmentConfirmation(Source);
+		FillRowID_SC(Source);
 	EndIf;
 EndProcedure
 
@@ -76,7 +76,7 @@ EndProcedure
 
 #Region RowID
 
-Procedure FillRowID_SalesOrder(Source)
+Procedure FillRowID_SO(Source)
 	For Each Row_ItemList In Source.ItemList Do
 	
 		If Row_ItemList.Cancel Then
@@ -95,13 +95,13 @@ Procedure FillRowID_SalesOrder(Source)
 		Row_IDInfoRow.RowID    = Row_ItemList.Key;
 		Row_IDInfoRow.Quantity = Row_ItemList.QuantityInBaseUnit;
 		
-		Row_IDInfoRow.NextStep = GetNextStep_SalesOrder(Source, Row_ItemList, Row_IDInfoRow);
+		Row_IDInfoRow.NextStep = GetNextStep_SO(Source, Row_ItemList, Row_IDInfoRow);
 		
 		Row_IDInfoRow.RowRef = CreateRowIDCatalog(Row_IDInfoRow, Row_ItemList, Source);
 	EndDo;
 EndProcedure
 
-Function GetNextStep_SalesOrder(Source, Row_ItemList, Row_IDInfoRow)
+Function GetNextStep_SO(Source, Row_ItemList, Row_IDInfoRow)
 	If ValueIsFilled(Row_IDInfoRow.NextStep) Then
 		Return Row_IDInfoRow.NextStep;
 	EndIf;
@@ -118,7 +118,7 @@ Function GetNextStep_SalesOrder(Source, Row_ItemList, Row_IDInfoRow)
 	Return NextStep;
 EndFunction	
 
-Procedure FillRowID_SalesInvoice(Source)
+Procedure FillRowID_SI(Source)
 	For Each Row_ItemList In Source.ItemList Do	
 		Row_IDInfoRow = Undefined;
 		RowIDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", Row_ItemList.Key));
@@ -127,7 +127,7 @@ Procedure FillRowID_SalesInvoice(Source)
 		ElsIf RowIDInfoRows.Count() = 1 Then
 			Row_IDInfoRow = RowIdInfoRows[0];
 			If ValueIsFilled(Row_IDInfoRow.RowRef) And Row_IDInfoRow.RowRef.Basis <> Source.Ref Then
-				Row_IDInfoRow.NextStep = GetNextStep_SalesInvoice(Source, Row_ItemList, Row_IDInfoRow);
+				Row_IDInfoRow.NextStep = GetNextStep_SI(Source, Row_ItemList, Row_IDInfoRow);
 				Continue;
 			EndIf;
 		EndIf;
@@ -135,13 +135,13 @@ Procedure FillRowID_SalesInvoice(Source)
 		Row_IDInfoRow.Key      = Row_ItemList.Key;
 		Row_IDInfoRow.RowID    = Row_ItemList.Key;
 		Row_IDInfoRow.Quantity = Row_ItemList.QuantityInBaseUnit;
-		Row_IDInfoRow.NextStep = GetNextStep_SalesInvoice(Source, Row_ItemList, Row_IDInfoRow);
+		Row_IDInfoRow.NextStep = GetNextStep_SI(Source, Row_ItemList, Row_IDInfoRow);
 		
 		Row_IDInfoRow.RowRef = CreateRowIDCatalog(Row_IDInfoRow, Row_ItemList, Source);
 	EndDo;
 EndProcedure
 
-Function GetNextStep_SalesInvoice(Source, Row_ItemList, Row_IDInfoRow)
+Function GetNextStep_SI(Source, Row_ItemList, Row_IDInfoRow)
 	If ValueIsFilled(Row_IDInfoRow.NextStep) Then
 		Return Row_IDInfoRow.NextStep;
 	EndIf;
@@ -152,7 +152,7 @@ Function GetNextStep_SalesInvoice(Source, Row_ItemList, Row_IDInfoRow)
 	Return NextStep;
 EndFunction	
 
-Procedure FillRowID_ShipmentConfirmation(Source)
+Procedure FillRowID_SC(Source)
 	For Each Row_ItemList In Source.ItemList Do	
 		Row_IDInfoRow = Undefined;
 		RowIDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", Row_ItemList.Key));
@@ -161,7 +161,7 @@ Procedure FillRowID_ShipmentConfirmation(Source)
 		ElsIf RowIDInfoRows.Count() = 1 Then
 			Row_IDInfoRow = RowIdInfoRows[0];
 			If ValueIsFilled(Row_IDInfoRow.RowRef) And Row_IDInfoRow.RowRef.Basis <> Source.Ref Then
-				Row_IDInfoRow.NextStep = GetNextStep_ShipmentConfirmation(Source, Row_ItemList, Row_IDInfoRow);
+				Row_IDInfoRow.NextStep = GetNextStep_SC(Source, Row_ItemList, Row_IDInfoRow);
 				Continue;
 			EndIf;
 		EndIf;
@@ -169,13 +169,13 @@ Procedure FillRowID_ShipmentConfirmation(Source)
 		Row_IDInfoRow.Key      = Row_ItemList.Key;
 		Row_IDInfoRow.RowID    = Row_ItemList.Key;
 		Row_IDInfoRow.Quantity = Row_ItemList.QuantityInBaseUnit;
-		Row_IDInfoRow.NextStep = GetNextStep_ShipmentConfirmation(Source, Row_ItemList, Row_IDInfoRow);
+		Row_IDInfoRow.NextStep = GetNextStep_SC(Source, Row_ItemList, Row_IDInfoRow);
 		
 		Row_IDInfoRow.RowRef = CreateRowIDCatalog(Row_IDInfoRow, Row_ItemList, Source);
 	EndDo;
 EndProcedure
 
-Function GetNextStep_ShipmentConfirmation(Source, Row_ItemList, Row_IDInfoRow)
+Function GetNextStep_SC(Source, Row_ItemList, Row_IDInfoRow)
 	If ValueIsFilled(Row_IDInfoRow.NextStep) Then
 		Return Row_IDInfoRow.NextStep;
 	EndIf;
@@ -244,20 +244,20 @@ Function ExtractData(BasisesTable) Export
 	
 	ExtractedData = New Array();
 	If Basises_SO.Count() Then
-		ExtractedData.Add(ExtractData_SalesOrder(Basises_SO));
+		ExtractedData.Add(ExtractData_SO(Basises_SO));
 	EndIf;
 	
 	If Basises_SI.Count() Then
-		ExtractedData.Add(ExtractData_SalesInvoice(Basises_SI));
+		ExtractedData.Add(ExtractData_SI(Basises_SI));
 	EndIf;
 	
 	If Basises_SC.Count() Then
-		ExtractedData.Add(ExtractData_ShipmentConfirmation(Basises_SC));
+		ExtractedData.Add(ExtractData_SC(Basises_SC));
 	EndIf;
 	Return ExtractedData;
 EndFunction
 
-Function ExtractData_SalesOrder(BasisesTable)
+Function ExtractData_SO(BasisesTable)
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -423,7 +423,7 @@ Function ExtractData_SalesOrder(BasisesTable)
 	Return Tables;
 EndFunction
 
-Function ExtractData_SalesInvoice(BasisesTable)
+Function ExtractData_SI(BasisesTable)
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -439,6 +439,7 @@ Function ExtractData_SalesInvoice(BasisesTable)
 		|FROM
 		|	&BasisesTable AS BasisesTable
 		|;
+		|
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT ALLOWED
@@ -463,7 +464,10 @@ Function ExtractData_SalesInvoice(BasisesTable)
 		|		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
 		|		ON BasisesTable.Basis = ItemList.Ref
 		|		AND BasisesTable.BasisKey = ItemList.Key
+		|ORDER BY
+		|	ItemList.LineNumber
 		|;
+		|
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
@@ -499,7 +503,7 @@ Function ExtractData_SalesInvoice(BasisesTable)
 	Return Tables;
 EndFunction
 
-Function ExtractData_ShipmentConfirmation(BasisesTable)
+Function ExtractData_SC(BasisesTable)
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -520,7 +524,8 @@ Function ExtractData_ShipmentConfirmation(BasisesTable)
 		|SELECT ALLOWED
 		|	""ShipmentConfirmation"" AS BasedOn,
 		|	ItemList.Ref.Company AS Company,
-		|	ItemList.Ref AS Ref,
+		//|	ItemList.Ref AS Ref,
+		|	Undefined AS Ref,
 		|	ItemList.Ref.Partner AS Partner,
 		|	ItemList.Ref.LegalName AS LegalName,
 		|	ItemList.Store AS Store,
@@ -536,11 +541,14 @@ Function ExtractData_ShipmentConfirmation(BasisesTable)
 		|		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
 		|		ON BasisesTable.Basis = ItemList.Ref
 		|		AND BasisesTable.BasisKey = ItemList.Key
+		|ORDER BY
+		|	ItemList.LineNumber
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	BasisesTable.Basis AS Ref,
+		//|	BasisesTable.Basis AS Ref,
+		|	Undefined AS Ref,
 		|	BasisesTable.Key,
 		|	BasisesTable.BasisKey,
 		|	BasisesTable.RowID,
@@ -555,18 +563,23 @@ Function ExtractData_ShipmentConfirmation(BasisesTable)
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	BasisesTable.Basis AS Ref,
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.Basis AS ShipmentConfirmation,
-		|	BasisesTable.Quantity AS Quantity,
-		|	BasisesTable.Quantity AS QuantityInShipmentConfirmation
+		|	ItemList.Store AS Store,
+		|	ItemList.ItemKey.Item AS Item,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Unit AS Unit,
+		//|	ShipmentConfirmations.Basis AS Ref,
+		|	Undefined AS Ref,
+		|	ShipmentConfirmations.Key,
+		|	ShipmentConfirmations.BasisKey,
+		|	ShipmentConfirmations.Basis AS ShipmentConfirmation,
+		|	ShipmentConfirmations.Quantity AS Quantity,
+		|	ShipmentConfirmations.Quantity AS QuantityInShipmentConfirmation
 		|FROM
-		|	BasisesTable AS BasisesTable";
-		
-		
-	//Ref, Key, BasisKey, ShipmentConfirmation, Quantity, QuantityInShipmentConfirmation
-		
+		|	BasisesTable AS ShipmentConfirmations
+		|		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
+		|		ON ShipmentConfirmations.Basis = ItemList.Ref
+		|		AND ShipmentConfirmations.BasisKey = ItemList.Key";
+			
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
@@ -582,10 +595,59 @@ Function ExtractData_ShipmentConfirmation(BasisesTable)
 			Row_ItemList.Quantity = Row_ItemList.QuantityInBaseUnit;
 		EndIf;
 	EndDo;
+	
+	Table_ItemListGrouped = Table_ItemList.Copy();
+	Table_ItemListGrouped.GroupBy("Item, ItemKey, Store, Unit", "Quantity, QuantityInBaseUnit");
+	
+	Table_ItemListResult = Table_ItemList.CopyColumns();
+	
+	For Each Row_ItemList In Table_ItemListGrouped Do
+		Filter = New Structure("Item, ItemKey, Store, Unit");
+		FillPropertyValues(Filter, Row_ItemList);
+		Rows_ItemList = Table_ItemList.FindRows(Filter);
+		
+		If Rows_ItemList.Count() = 1 Then
+			FillPropertyValues(Table_ItemListResult.Add(), Rows_ItemList[0]);
+			Continue;
+		Else
+			KeyTable = New ValueTable();
+			KeyTable.Columns.Add("Key");
+			For Each Row In Rows_ItemList Do
+				KeyTable.Add().Key = Row.Key;
+			EndDo;
+			 KeyTable.GroupBy("Key");
+			 If KeyTable.Count() = 1 Then
+			 	FillPropertyValues(Table_ItemListResult.Add(), Rows_ItemList[0]);
+			 	Continue;
+			 EndIf;
+		EndIf;
+		
+		NewKey = String(New UUID());
+		
+		For Each Row In Rows_ItemList Do
+			Filter_Key = New Structure("Key" , Row.Key);
+			For Each Row_RowIDInfo In Table_RowIDInfo.FindRows(Filter_Key) Do
+				Row_RowIDInfo.Key = NewKey;
+				//Row_RowIDInfo.Ref = Undefined;
+			EndDo;
+			For Each Row_ShipmentConfirmations In Table_ShipmentConfirmations.FindRows(Filter_Key) Do
+				Row_ShipmentConfirmations.Key = NewKey;
+				//Row_ShipmentConfirmations.Ref = Undefined;
+			EndDo;
+		EndDo;
+		
+		NewRow_ItemListResult = Table_ItemListResult.Add();
+		FillPropertyValues(NewRow_ItemListResult, Rows_ItemList[0]);
+		NewRow_ItemListResult.Quantity           = Row_ItemList.Quantity;
+		NewRow_ItemListResult.QuantityInBaseUnit = Row_ItemList.QuantityInBaseUnit;
+		NewRow_ItemListResult.Key = NewKey;
+		//NewRow_ItemListResult.Ref = Undefined;
+	EndDo;
+	
 	Tables = New Structure();
-	Tables.Insert("ItemList"                   , Table_ItemList);
-	Tables.Insert("Table_ShipmentConfirmations", Table_ShipmentConfirmations);
-	Tables.Insert("RowIDInfo"                  , Table_RowIDInfo);
+	Tables.Insert("ItemList"             , Table_ItemListResult);
+	Tables.Insert("ShipmentConfirmations", Table_ShipmentConfirmations);
+	Tables.Insert("RowIDInfo"            , Table_RowIDInfo);
 	Return Tables;
 EndFunction
 
@@ -843,36 +905,37 @@ EndProcedure
 
 Function GetBasises(Ref, FilterValues) Export
 	If TypeOf(Ref) = Type("DocumentRef.SalesInvoice") Then
-		Return GetBasises_SalesInvoice(FilterValues);
+		Return GetBasises_SI(FilterValues);
 	ElsIf TypeOf(Ref) = Type("DocumentRef.ShipmentConfirmation") Then
-		Return GetBasises_ShipmentConfirmation(FilterValues);
+		Return GetBasises_SC(FilterValues);
 	EndIf;
 EndFunction
 
-Function GetBasises_SalesInvoice(FilterValues)
+Function GetBasises_SI(FilterValues)
 	StepArray = New Array;
 	StepArray.Add(Catalogs.MovementRules.SI);
 	StepArray.Add(Catalogs.MovementRules.SI_SC);
 	
-	BasisesVariants = GetBasisesVariants();
-	BasisesVariants.SO = True;
-	BasisesVariants.SC = True;
+	BasisesTypes = GetBasisesTypes();
+	BasisesTypes.SO = True;
+	BasisesTypes.SC = True;
 	
-	Return GetBasisesTable(StepArray, FilterValues, BasisesVariants);
+	Return GetBasisesTable(StepArray, FilterValues, BasisesTypes);
 EndFunction
 
-Function GetBasises_ShipmentConfirmation(FilterValues)	
+Function GetBasises_SC(FilterValues)	
 	StepArray = New Array;
 	StepArray.Add(Catalogs.MovementRules.SC);
 	StepArray.Add(Catalogs.MovementRules.SI_SC);
-	BasisesVariants = GetBasisesVariants();
-	BasisesVariants.SO = True;
-	BasisesVariants.SI = True;
 	
-	Return GetBasisesTable(StepArray, FilterValues, BasisesVariants);
+	BasisesTypes = GetBasisesTypes();
+	BasisesTypes.SO = True;
+	BasisesTypes.SI = True;
+	
+	Return GetBasisesTable(StepArray, FilterValues, BasisesTypes);
 EndFunction
 
-Function GetBasisesVariants()
+Function GetBasisesTypes()
 	Result = New Structure();
 	Result.Insert("SO", False);
 	Result.Insert("SC", False);
@@ -880,12 +943,12 @@ Function GetBasisesVariants()
 	Return Result;
 EndFunction
 
-Function GetBasisesTable(StepArray, FilterValues, BasisesVariants)				
+Function GetBasisesTable(StepArray, FilterValues, BasisesTypes)				
 	Query = New Query;
 	FillQueryParameters(Query, FilterValues);
 	
 	Query.SetParameter("StepArray", StepArray);
-	For Each KeyValue In BasisesVariants Do
+	For Each KeyValue In BasisesTypes Do
 		Query.SetParameter(KeyValue.Key, KeyValue.Value);
 	EndDo;
 	

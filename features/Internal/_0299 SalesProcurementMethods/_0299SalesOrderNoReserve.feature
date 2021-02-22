@@ -112,6 +112,7 @@ Scenario: _029901 create Sales order without reserve and check its movements (SO
 		And I select "No reserve" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Save number
+		And I input end of the current month date in "Delivery date" field
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder029901$$" variable
 		And I delete "$$SalesOrder029901$$" variable
@@ -500,7 +501,8 @@ Scenario: _029903 create Sales order without reserve and check its movements (SO
 		And I finish line editing in "ItemList" table
 	* Save number
 		And I move to "Other" tab
-		And I set checkbox "Shipment confirmations before sales invoice"		
+		And I set checkbox "Shipment confirmations before sales invoice"	
+		And I input end of the current month date in "Delivery date" field	
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder029903$$" variable
 		And I delete "$$SalesOrder029903$$" variable

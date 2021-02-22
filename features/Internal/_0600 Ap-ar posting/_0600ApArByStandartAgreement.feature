@@ -87,6 +87,7 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 			And I activate "Q" field in "ItemList" table
 			And I input "20,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
+			And I input end of the current month date in "Delivery date" field
 			And I click the button named "FormPost"
 			And I delete "$$NumberSalesInvoice060002$$" variable
 			And I delete "$$SalesInvoice060002$$" variable
@@ -458,6 +459,7 @@ Scenario: _060004 check the offset of the advance for Sales invoice with the typ
 			And I activate "Q" field in "ItemList" table
 			And I input "20,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
+			And I input end of the current month date in "Delivery date" field
 			And I click the button named "FormPost"
 			And I delete "$$NumberSalesInvoice060004$$" variable
 			And I delete "$$SalesInvoice060004$$" variable
@@ -604,6 +606,7 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Price type'               | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '20,000' | 'en description is empty' | 'pcs'  | '1 677,97'   | '9 322,03'   | '11 000,00'    | 'Store 01' |
+			And I input end of the current month date in "Delivery date" field
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice060005$$" variable
 			And I delete "$$PurchaseInvoice060005$$" variable
@@ -872,6 +875,7 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 			And I input "20,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input "550,00" text in "Price" field of "ItemList" table
+			And I input end of the current month date in "Delivery date" field
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice060007$$" variable
 			And I delete "$$PurchaseInvoice060007$$" variable

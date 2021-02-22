@@ -496,7 +496,9 @@ Scenario: _019901 check changes in movements on a Purchase Order document when q
 		And "List" table does not contain lines
 			| 'Quantity' | 'Recorder'                | 'Line number' | 'Store'    | 'Order'                   | 'Item key' |
 			| '200,000'  | '$$PurchaseOrder019901$$' | '1'           | 'Store 03' | '$$PurchaseOrder019901$$' | 'S/Yellow' |
-	
+		
+		
+				
 Scenario: _019902 delete line in Purchase order and chek movements changes
 	* Delete last line in the order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"

@@ -73,6 +73,7 @@ EndProcedure
 Procedure OnReadAtServer(CurrentObject)
 	DocPurchaseOrderServer.OnReadAtServer(Object, ThisObject, CurrentObject);
 	Taxes_CreateFormControls();
+	ThisObject.ClosingOrder = DocPurchaseOrderServer.GetLastPurchaseOrderClosingByPurchaseOrder(Object.Ref);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
@@ -84,6 +85,10 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form) Export
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
+	If Not Form.ClosingOrder.IsEmpty() Then
+		Form.ReadOnly = True;
+	EndIf;
+	Form.Items.GroupHead.Visible = Not Form.ClosingOrder.IsEmpty();
 EndProcedure
 
 &AtClient

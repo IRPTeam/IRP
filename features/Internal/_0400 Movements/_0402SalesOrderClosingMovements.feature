@@ -79,6 +79,17 @@ Scenario: _040158 preparation (Sales order closing)
 		When Create document SalesOrderClosing objects (check movements)
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesOrderClosing.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I close all client application windows
+		
+		
+				
+
+
 
 Scenario: _040159 check Sales order closing movements by the Register  "R2010 Sales orders"
 	* Select Sales order closing
@@ -112,7 +123,7 @@ Scenario: _040159 check Sales order closing movements by the Register  "R2010 Sa
 			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-95'       | '-80,51'     | '-5'            | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                   | 'No'                   |
 			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-84,57'    | '-71,67'     | '-4,45'         | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'Stock'              | 'No'                   |
 			| ''                                                | '28.01.2021 14:46:50' | '-1'        | '-16,26'    | '-13,78'     | '-0,86'         | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                   | 'No'                   |
-
+		
 
 		And I close all client application windows
 		
@@ -265,7 +276,9 @@ Scenario: _040166 check Sales order closing movements by the Register  "R4034 Sc
 			| 'Register  "R4034 Scheduled goods shipments"'     | ''            | ''                    | ''          | ''             | ''                                        | ''         | ''         | ''                                     |
 			| ''                                                | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                        | ''         | ''         | ''                                     |
 			| ''                                                | ''            | ''                    | 'Quantity'  | 'Company'      | 'Basis'                                   | 'Store'    | 'Item key' | 'Row key'                              |
-			| ''                                                | 'Receipt'     | '27.01.2021 00:00:00' | '-1'        | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Store 02' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
+			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-24'       | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Store 02' | '37/18SD'  | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' |
+			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-10'       | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Store 02' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' |
+			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Store 02' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
 
 
 		And I close all client application windows

@@ -860,17 +860,6 @@
 		</right>
 	</object>
 	<object>
-		<name>DataProcessor.SalesOrderStatusReport</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>InformationRegister.CreatedProcurementOrders</name>
 		<right>
 			<name>Read</name>
@@ -3851,17 +3840,6 @@
 		</right>
 	</object>
 	<object>
-		<name>DataProcessor.FirstStartSettings</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Catalog.ItemTypes</name>
 		<right>
 			<name>Read</name>
@@ -5764,6 +5742,17 @@
 	</object>
 	<object>
 		<name>Subsystem.Reports.Subsystem.Purchase</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.PurchaseOrderClosing</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>

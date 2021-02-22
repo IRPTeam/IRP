@@ -148,3 +148,83 @@ Scenario: _300721 barcode check in PhysicalCountByLocation
 Scenario: _300722 barcode check in Item stock adjustment
 	Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
 	When check the barcode search in the Item stock adjustment
+
+Scenario: _300723 barcode check in Price list
+	Given I open hyperlink "e1cib/list/Document.PriceList"
+	And I click the button named "FormCreate"
+	* By item key
+		* Add first string
+			And I change "Set price" radio button value to "By item keys"
+			And I click the button named "SearchByBarcode"
+			And I input "2202283713" text in "InputFld" field
+			And I click "OK" button
+			And "ItemKeyList" table contains lines
+				| 'Item'  | 'Item key' | 'Price' |
+				| 'Dress' | 'S/Yellow' | ''      |
+		* Add second string
+			And I click the button named "SearchByBarcode"
+			And I input "978020137962" text in "InputFld" field
+			And I click "OK" button
+			And "ItemKeyList" table contains lines
+				| 'Item'  | 'Item key' | 'Price' |
+				| 'Dress' | 'S/Yellow' | ''      |
+				| 'Boots' | '37/18SD'  | ''      |
+		* Check active string when scan the same item
+			And I go to line in "ItemKeyList" table
+				| 'Item'  | 'Item key' |
+				| 'Boots' | '37/18SD'  |			
+			And I click the button named "SearchByBarcode"
+			And I input "2202283713" text in "InputFld" field
+			And I click "OK" button
+			And the current line of "ItemKeyList" table is equal to
+				| 'Item'  | 'Item key' | 'Price' |
+				| 'Dress' | 'S/Yellow' | ''      |
+			And I close all client application windows
+	* By item
+		Given I open hyperlink "e1cib/list/Document.PriceList"
+		And I click the button named "FormCreate"
+		* Add first string
+			And I change "Set price" radio button value to "By items"
+			And I click the button named "SearchByBarcodeItem"			
+			And I input "2202283713" text in "InputFld" field
+			And I click "OK" button
+			And "ItemList" table contains lines
+				| 'Item'  | 'Price' |
+				| 'Dress' | ''      |
+		* Add second string
+			And I click the button named "SearchByBarcodeItem"
+			And I input "978020137962" text in "InputFld" field
+			And I click "OK" button
+			And "ItemList" table contains lines
+				| 'Item'  | 'Price' |
+				| 'Dress' | ''      |
+				| 'Boots' | ''      |
+		* Check active string when scan the same item
+			And I go to line in "ItemList" table
+				| 'Item'  |
+				| 'Boots' |
+			And I click the button named "SearchByBarcodeItem"	
+			And I input "2202283713" text in "InputFld" field
+			And I click "OK" button
+			And the current line of "ItemList" table is equal to
+				| 'Item'  | 'Price' |
+				| 'Dress' | ''      |
+		And I close all client application windows
+		
+		
+			
+
+
+		
+
+		
+				
+		
+
+		
+			
+	
+		
+
+
+

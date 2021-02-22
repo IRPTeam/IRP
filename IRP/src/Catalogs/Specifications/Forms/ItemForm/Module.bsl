@@ -207,7 +207,7 @@ EndFunction
 
 &AtClient
 Procedure GroupMainPagesOnCurrentPageChange(Item, CurrentPage)
-	If CurrentPage.Name = "GroupAddNewPage" Then
+	If CurrentPage = Items.GroupAddNewPage Then
 		CreatePage();
 	EndIf;
 EndProcedure

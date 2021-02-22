@@ -13,5 +13,4 @@
   <content>DefinedType.typeDescription</content>
   <content>CommonModule.LocalizationEvents</content>
   <content>EventSubscription.PresentationGetProcessing_GetCatalogPresentation</content>
-  <content>DataProcessor.FirstStartSettings</content>
 </mdclass:Subsystem>

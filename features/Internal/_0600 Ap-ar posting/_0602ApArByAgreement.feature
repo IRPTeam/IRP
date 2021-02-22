@@ -93,6 +93,7 @@ Scenario: _060202 create Sales invoice with Ar details by Partner terms and chec
 			And I activate "Q" field in "ItemList" table
 			And I input "20,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
+			And I input end of the current month date in "Delivery date" field
 			And I click the button named "FormPost"
 			And I delete "$$NumberSalesInvoice062002$$" variable
 			And I delete "$$SalesInvoice060202$$" variable
@@ -457,6 +458,7 @@ Scenario: _060204 check the offset of the advance for Sales invoice with the typ
 			And I activate "Q" field in "ItemList" table
 			And I input "20,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
+			And I input end of the current month date in "Delivery date" field
 			And I click the button named "FormPost"
 			And I delete "$$NumberSalesInvoice060204$$" variable
 			And I delete "$$SalesInvoice060204$$" variable
@@ -610,6 +612,7 @@ Scenario: _060205 create Purchase invoice with Ap details by Partner terms and c
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Price type'               | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '20,000' | 'en description is empty' | 'pcs'  | '1 677,97'   | '9 322,03'   | '11 000,00'    | 'Store 01' |
+			And I input end of the current month date in "Delivery date" field
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice060205$$" variable
 			And I delete "$$PurchaseInvoice060205$$" variable
@@ -893,6 +896,7 @@ Scenario: _060207 check the offset of the advance for Purchase invoice with the 
 			And I move to "More" tab
 			And I set checkbox "Price includes tax"
 			And I move to "Item list" tab
+			And I input end of the current month date in "Delivery date" field
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice060207$$" variable
 			And I delete "$$PurchaseInvoice060207$$" variable

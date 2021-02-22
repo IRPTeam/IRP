@@ -40,8 +40,9 @@ EndProcedure
 &AtServer
 Procedure UpdateRolesInfo(CurrentObject)
 	User = Undefined;
-	If ValueIsFilled(CurrentObject.InfobaseUserID) Then
-		User = InfoBaseUsers.FindByUUID(CurrentObject.InfobaseUserID);
+	InfobaseUserIDValue = AdminFunctionsPrivileged.GetInfobaseUserIDByUser(CurrentObject);
+	If ValueIsFilled(InfobaseUserIDValue) Then
+		User = InfoBaseUsers.FindByUUID(InfobaseUserIDValue);
 	ElsIf ValueIsFilled(CurrentObject.Description) Then
 		User = InfoBaseUsers.FindByName(CurrentObject.Description);
 	EndIf;

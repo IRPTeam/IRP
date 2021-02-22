@@ -309,7 +309,7 @@ Scenario: _040211 check Goods receipt movements by the Register  "R1031 Receipt 
 			| ''                                            | 'Expense'     | '12.02.2021 15:13:11' | '10'        | 'Main Company' | 'Store 02' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'S/Yellow'  |
 		And I close all client application windows
 
-Scenario: _040121 check Goods receipt movements by the Register  "R4017 Procurement of internal supply requests" (ISR exist)
+Scenario: _0401211 check Goods receipt movements by the Register  "R4017 Procurement of internal supply requests" (ISR exist)
 	* Select Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table

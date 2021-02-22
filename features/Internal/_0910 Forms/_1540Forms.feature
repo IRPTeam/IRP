@@ -1320,6 +1320,7 @@ Scenario: _012016 check row key when cloning a string in Purchase order
 		And I activate field named "ItemListItem" in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
 		And I finish line editing in "ItemList" table
+		And I input end of the current month date in "Delivery date" field
 		And I click the button named "FormPost"
 	* Check that the row keys do not match
 		And I click "Show row key" button
@@ -1528,6 +1529,7 @@ Scenario: _012021 check row key when cloning a string in Purchase invoice
 		And I activate field named "ItemListItem" in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
 		And I finish line editing in "ItemList" table
+		And I input end of the current month date in "Delivery date" field
 		And I click the button named "FormPost"
 	* Check that the row keys do not match
 		And I click "Show row key" button

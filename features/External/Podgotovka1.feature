@@ -1116,6 +1116,7 @@ Scenario: create an order for Ferron BP Basic Partner term, TRY (Dress -10 and T
 		And I input "5,000" text in "Q" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
+		And I input end of the current month date in "Delivery date" field
 	And I click the button named "FormPost"
 
 Scenario: create a Purchase Order document

@@ -1182,7 +1182,7 @@ Scenario: create SalesInvoice024016 (Shipment confirmation does not used)
 			And I activate "Q" field in "ItemList" table
 			And I input "1,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "FormPost"
+		And I input end of the current month date in "Delivery date" field
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice024016$$" variable
 		And I delete "$$SalesInvoice024016$$" variable

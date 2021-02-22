@@ -292,3 +292,7 @@ Scenario: _040167 check Sales order closing movements by the Register  "R2012 In
 			| ''                                                  | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | '-95'     | '-80,51'     | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' |
 
 		And I close all client application windows
+
+Scenario: Refill constant NotFirstStart value
+
+	And I refill constant "NotFirstStart" "True"

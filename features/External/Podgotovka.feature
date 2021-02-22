@@ -311,6 +311,7 @@ Scenario: create PurchaseOrder017001
 		And "ItemList" table contains lines
 			| 'Item'     | 'Q' | 'Item key'  | 'Store' | 'Unit' |
 			| 'Dress'    | '100,000'  | 'M/White'   | 'Store 01'      | 'pcs' |
+		And I input end of the current month date in "Delivery date" field
 	* Post document
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseOrder017001$$" variable
@@ -375,6 +376,7 @@ Scenario: create PurchaseOrder017003
 			And I input "40,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Post document
+			And I input end of the current month date in "Delivery date" field
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseOrder017003$$" variable
 			And I delete "$$PurchaseOrder017003$$" variable
@@ -872,6 +874,7 @@ Scenario: create SalesOrder023005
 	* Check default sales order status
 		And I move to "Other" tab
 		Then the form attribute named "Status" became equal to "Approved"
+	And I input end of the current month date in "Delivery date" field
 	And I click the button named "FormPost"
 	And I delete "$$SalesOrder023005$$" variable
 	And I delete "$$NumberSalesOrder023005$$" variable

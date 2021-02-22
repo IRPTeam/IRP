@@ -178,6 +178,7 @@ Scenario: _029103 create a Purchase order for service
 		And I select current line in "ItemList" table
 		And I input "1000,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
+		And I input end of the current month date in "Delivery date" field
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseOrder029103$$" variable
 		And I delete "$$PurchaseOrder029103$$" variable
@@ -326,6 +327,7 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			And I activate "Price" field in "ItemList" table
 			And I input "200,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
+			And I input end of the current month date in "Delivery date" field
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice029106$$" variable
 			And I delete "$$PurchaseInvoice029106$$" variable
@@ -504,6 +506,7 @@ Scenario: _029107 create a Sales order for service and product (Store does not u
 			| 'Price'  | 'Item'    | 'VAT' | 'Item key' | 'Procurement method' | 'Price type'              | 'Q'      | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '100,00' | 'Service' | '18%' | 'Rent'     | ''                   | 'en description is empty' | '1,000'  | 'pcs'  | 'No'                 | '15,25'      | '84,75'      | '100,00'       | 'Store 01' |
 			| '700,00' | 'Table'   | '18%' | 'Table'    | 'Stock'              | 'en description is empty' | '10,000' | 'pcs'  | 'No'                 | '1 067,80'   | '5 932,20'   | '7 000,00'     | 'Store 01' |
+		And I input end of the current month date in "Delivery date" field
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder029107$$" variable
 		And I delete "$$SalesOrder029107$$" variable
@@ -632,6 +635,7 @@ Scenario: _029108 create a Sales order for service and product (Store use Shipme
 		And I select current line in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
+		And I input end of the current month date in "Delivery date" field
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder029108$$" variable
 		And I delete "$$SalesOrder029108$$" variable
@@ -765,6 +769,7 @@ Scenario: _029109 create a Sales order for service and product (Store does not u
 		And I move to "Other" tab
 		And I expand "More" group
 		And I set checkbox "Shipment confirmations before sales invoice"
+		And I input end of the current month date in "Delivery date" field
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder029109$$" variable
 		And I delete "$$SalesOrder029109$$" variable
@@ -917,6 +922,7 @@ Scenario: _029110 create a Sales order for service and product (Store use Shipme
 		And I move to "Other" tab
 		And I expand "More" group
 		And I set checkbox "Shipment confirmations before sales invoice"
+		And I input end of the current month date in "Delivery date" field
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder029110$$" variable
 		And I delete "$$SalesOrder029110$$" variable

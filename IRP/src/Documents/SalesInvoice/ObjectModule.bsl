@@ -47,15 +47,6 @@ Procedure Filling_BasedOnShipmentConfirmation(FillingData)
 	RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 EndProcedure
 
-Procedure OnCopy(CopiedObject)
-	LinkedTables = New Array();
-	LinkedTables.Add(SpecialOffers);
-	LinkedTables.Add(TaxList);
-	LinkedTables.Add(Currencies);
-	LinkedTables.Add(SerialLotNumbers);
-	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);
-EndProcedure
-
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If DocumentsServer.CheckItemListStores(ThisObject) Then
 		Cancel = True;	

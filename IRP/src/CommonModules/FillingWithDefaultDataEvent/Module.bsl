@@ -70,6 +70,34 @@ Procedure ClearDocumentBasisesOnCopy(Source, CopiedObject) Export
 				EndIf;	
 			EndDo;	
 		EndDo;
-	EndDo;	
+	EndDo;
+	
+	// Clear link to other rows
+	If CommonFunctionsClientServer.ObjectHasProperty(Source, "RowIDInfo") Then
+		Source.RowIDInfo.Clear();
+	EndIf;
+	
+	// Clear link to other documents
+	If CommonFunctionsClientServer.ObjectHasProperty(Source, "ShipmentConfirmations") Then
+		Source.ShipmentConfirmations.Clear();
+	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Source, "GoodsReceipts") Then
+		Source.GoodsReceipts.Clear();
+	EndIf;
+	
+	// Update key in tabular sections
+	If CommonFunctionsClientServer.ObjectHasProperty(Source, "ItemList") Then
+		LinkedTables = New Array();
+		For Each TabularSectionMetadata In SourceMetadata.TabularSections Do
+			If Upper(TabularSectionMetadata.Name) = Upper("ItemList") Then
+				Continue;
+			EndIf;
+			If TabularSectionMetadata.Attributes.Find("Key") <> Undefined Then
+				LinkedTables.Add(Source[TabularSectionMetadata.Name]);
+			EndIf;
+		EndDo;
+		DocumentsServer.SetNewTableUUID(Source.ItemList, LinkedTables);
+	EndIf;
 EndProcedure
 

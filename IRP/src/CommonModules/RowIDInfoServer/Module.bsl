@@ -370,46 +370,42 @@ Function ExtractData_SO(BasisesTable)
 	Table_TaxList       = QueryResults[3].Unload();
 	Table_SpecialOffers = QueryResults[4].Unload();
 	
-	For Each Row_ItemList In Table_ItemList Do
-		If Row_ItemList.Unit <> Row_ItemList.BasisUnit Then
-			UnitFactor = Catalogs.Units.GetUnitFactor(Row_ItemList.BasisUnit, Row_ItemList.Unit);		
-			Row_ItemList.Quantity = Row_ItemList.QuantityInBaseUnit * UnitFactor;
-		Else
-			Row_ItemList.Quantity = Row_ItemList.QuantityInBaseUnit;
-		EndIf;
+	For Each RowItemList In Table_ItemList Do
+		
+		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit, RowItemList.QuantityInBaseUnit);
 		
 		// ItemList
-		If Row_ItemList.OriginalQuantity = 0 Then
-			Row_ItemList.TaxAmount    = 0;
-			Row_ItemList.NetAmount    = 0;
-			Row_ItemList.TotalAmount  = 0;
-			Row_ItemList.OffersAmount = 0;
-		ElsIf Row_ItemList.OriginalQuantity <> Row_ItemList.QuantityInBaseUnit Then
-			Row_ItemList.TaxAmount    = Row_ItemList.TaxAmount    / Row_ItemList.OriginalQuantity * Row_ItemList.QuantityInBaseUnit;
-			Row_ItemList.NetAmount    = Row_ItemList.NetAmount    / Row_ItemList.OriginalQuantity * Row_ItemList.QuantityInBaseUnit;
-			Row_ItemList.TotalAmount  = Row_ItemList.TotalAmount  / Row_ItemList.OriginalQuantity * Row_ItemList.QuantityInBaseUnit;
-			Row_ItemList.OffersAmount = Row_ItemList.OffersAmount / Row_ItemList.OriginalQuantity * Row_ItemList.QuantityInBaseUnit;
+		If RowItemList.OriginalQuantity = 0 Then
+			RowItemList.TaxAmount    = 0;
+			RowItemList.NetAmount    = 0;
+			RowItemList.TotalAmount  = 0;
+			RowItemList.OffersAmount = 0;
+		ElsIf RowItemList.OriginalQuantity <> RowItemList.QuantityInBaseUnit Then
+			RowItemList.TaxAmount    = RowItemList.TaxAmount    / RowItemList.OriginalQuantity * RowItemList.QuantityInBaseUnit;
+			RowItemList.NetAmount    = RowItemList.NetAmount    / RowItemList.OriginalQuantity * RowItemList.QuantityInBaseUnit;
+			RowItemList.TotalAmount  = RowItemList.TotalAmount  / RowItemList.OriginalQuantity * RowItemList.QuantityInBaseUnit;
+			RowItemList.OffersAmount = RowItemList.OffersAmount / RowItemList.OriginalQuantity * RowItemList.QuantityInBaseUnit;
 		EndIf;	
 		
-		Filter = New Structure("Ref, Key", Row_ItemList.Ref, Row_ItemList.Key);
+		Filter = New Structure("Ref, Key", RowItemList.Ref, RowItemList.Key);
 		
 		// TaxList
-		For Each Row_TaxList In Table_TaxList.FindRows(Filter) Do
-			If Row_ItemList.OriginalQuantity = 0 Then
-				Row_TaxList.Amount       = 0;
-				Row_TaxList.ManualAmount = 0;
+		For Each RowTaxList In Table_TaxList.FindRows(Filter) Do
+			If RowItemList.OriginalQuantity = 0 Then
+				RowTaxList.Amount       = 0;
+				RowTaxList.ManualAmount = 0;
 			Else
-				Row_TaxList.Amount       = Row_TaxList.Amount       / Row_ItemList.OriginalQuantity * Row_ItemList.QuantityInBaseUnit;
-				Row_TaxList.ManualAmount = Row_TaxList.ManualAmount / Row_ItemList.OriginalQuantity * Row_ItemList.QuantityInBaseUnit;								
+				RowTaxList.Amount       = RowTaxList.Amount       / RowItemList.OriginalQuantity * RowItemList.QuantityInBaseUnit;
+				RowTaxList.ManualAmount = RowTaxList.ManualAmount / RowItemList.OriginalQuantity * RowItemList.QuantityInBaseUnit;								
 			EndIf;
 		EndDo;
 		
 		// SpecialOffers
-		For Each Row_SpecialOffers In Table_SpecialOffers.FindRows(Filter) Do
-			If Row_ItemList.OriginalQuantity = 0 Then
-				Row_SpecialOffers.Amount = 0;
+		For Each RowSpecialOffers In Table_SpecialOffers.FindRows(Filter) Do
+			If RowItemList.OriginalQuantity = 0 Then
+				RowSpecialOffers.Amount = 0;
 			Else
-				Row_SpecialOffers.Amount = Row_SpecialOffers.Amount / Row_ItemList.OriginalQuantity * Row_ItemList.QuantityInBaseUnit;
+				RowSpecialOffers.Amount = RowSpecialOffers.Amount / RowItemList.OriginalQuantity * RowItemList.QuantityInBaseUnit;
 			EndIf;
 		EndDo;
 	EndDo;
@@ -489,13 +485,8 @@ Function ExtractData_SI(BasisesTable)
 	Table_ItemList = QueryResults[1].Unload();
 	Table_RowIDInfo = QueryResults[2].Unload(); 
 	
-	For Each Row_ItemList In Table_ItemList Do
-		If Row_ItemList.Unit <> Row_ItemList.BasisUnit Then
-			UnitFactor = Catalogs.Units.GetUnitFactor(Row_ItemList.BasisUnit, Row_ItemList.Unit);		
-			Row_ItemList.Quantity = Row_ItemList.QuantityInBaseUnit * UnitFactor;
-		Else
-			Row_ItemList.Quantity = Row_ItemList.QuantityInBaseUnit;
-		EndIf;
+	For Each RowItemList In Table_ItemList Do
+		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit, RowItemList.QuantityInBaseUnit);
 	EndDo;
 	
 	Tables = New Structure();
@@ -586,13 +577,8 @@ Function ExtractData_SC(BasisesTable)
 	Table_RowIDInfo             = QueryResults[2].Unload(); 
 	Table_ShipmentConfirmations = QueryResults[3].Unload();
 	
-	For Each Row_ItemList In Table_ItemList Do
-		If Row_ItemList.Unit <> Row_ItemList.BasisUnit Then
-			UnitFactor = Catalogs.Units.GetUnitFactor(Row_ItemList.BasisUnit, Row_ItemList.Unit);		
-			Row_ItemList.Quantity = Row_ItemList.QuantityInBaseUnit * UnitFactor;
-		Else
-			Row_ItemList.Quantity = Row_ItemList.QuantityInBaseUnit;
-		EndIf;
+	For Each RowItemList In Table_ItemList Do
+		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit, RowItemList.QuantityInBaseUnit);
 	EndDo;
 		
 	Tables = New Structure();

@@ -112,6 +112,7 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I set checkbox "Shipment confirmations before sales invoice"
+			And I input end of the current month date in "Delivery date" field
 			And I click the button named "FormPost"
 			And I delete "$$NumberSalesOrder0292001$$" variable
 			And I delete "$$SalesOrder0292001$$" variable
@@ -173,6 +174,7 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 			And I input "11,000" text in "Q" field of "ItemList" table
 			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
+			And I input end of the current month date in "Delivery date" field
 		* Save number
 			And I click the button named "FormPost"
 			And I delete "$$NumberSalesOrder0292002$$" variable
@@ -235,6 +237,7 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 			And I input "7,000" text in "Q" field of "ItemList" table
 			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
+			And I input end of the current month date in "Delivery date" field
 		* Save number
 			And I move to "Other" tab
 			And I set checkbox "Shipment confirmations before sales invoice"
@@ -299,6 +302,7 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
+			And I input end of the current month date in "Delivery date" field
 		* Save number
 			And I move to "Other" tab
 			And I set checkbox "Shipment confirmations before sales invoice"
@@ -363,6 +367,7 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 			And I input "40,000" text in "Q" field of "ItemList" table
 			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
+			And I input end of the current month date in "Delivery date" field
 		* Save number
 			And I click the button named "FormPost"
 			And I delete "$$NumberSalesOrder0292005$$" variable
@@ -463,6 +468,7 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 		And I move to "Other" tab
 		And I expand "More" group
 		And I set checkbox "Shipment confirmations before sales invoice"
+		And I input end of the current month date in "Delivery date" field
 	* Post Sales order
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder029201$$" variable
@@ -751,6 +757,7 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 		And I move to "Other" tab
 		And I expand "More" group
 		And I set checkbox "Goods receipt before purchase invoice"
+		And I input end of the current month date in "Delivery date" field
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseOrder0292012$$" variable
 		And I delete "$$PurchaseOrder0292012$$" variable
@@ -1617,6 +1624,7 @@ Scenario: _029207 create Purchase order based on Sales order (Purchase invoice b
 		And I activate "Q" field in "ItemList" table
 		And I input "10,000" text in "Q" field of "ItemList" table
 		And I input "200,00" text in "Price" field of "ItemList" table
+		And I input end of the current month date in "Delivery date" field
 	* Post Sales order
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder0292071$$" variable
@@ -1900,6 +1908,7 @@ Scenario: _029207 create Purchase order based on Sales order (Purchase invoice b
 		And I select current line in "ItemList" table
 		And I input "180,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
+	And I input end of the current month date in "Delivery date" field
 	And I click the button named "FormPost"
 	And I delete "$$NumberPurchaseOrder0292073$$" variable
 	And I delete "$$PurchaseOrder0292073$$" variable

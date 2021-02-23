@@ -7,28 +7,50 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 	Query = New Query;
 	Query.Text =
 		"SELECT
-		|   Table.Ref AS Recorder,
-		|   Table.Ref.Date AS Period,
+		|	Table.Ref AS Recorder,
+		|	Table.Ref.Date AS Period,
 		|	*
 		|INTO RowIDMovements
 		|FROM
 		|	Document." + Source.Metadata().Name + ".RowIDInfo AS Table
 		|WHERE
 		|	Table.Ref = &Ref
-		|
 		|;
 		|
+		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	Table.Recorder,
+		|	Table.Period,
+		|	Table.RowID,
 		|	Table.CurrentStep AS Step,
-		|	CASE WHEN Table.Basis.Ref IS NULL THEN
-		|		&Ref
-		|	ELSE
-		|		Table.Basis
-		|	END AS Basis, 
-		|	*
+		|	CASE
+		|		WHEN Table.Basis.Ref IS NULL
+		|			THEN &Ref
+		|		ELSE Table.Basis
+		|	END AS Basis,
+		|	Table.RowRef,
+		|	CASE
+		|		WHEN ISNULL(T10000B_RowIDMovements.QuantityBalance, 0) < Table.Quantity
+		|			THEN ISNULL(T10000B_RowIDMovements.QuantityBalance, 0)
+		|		ELSE Table.Quantity
+		|	END AS Quantity
 		|FROM
 		|	RowIDMovements AS Table
+		|		INNER JOIN AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, (RowID, Step, Basis, RowRef) IN
+		|			(SELECT
+		|				Table.RowID,
+		|				Table.CurrentStep,
+		|				Table.Basis,
+		|				Table.RowRef
+		|			FROM
+		|				RowIDMovements AS Table
+		|			WHERE
+		|				NOT Table.CurrentStep = VALUE(Catalog.MovementRules.EmptyRef))) AS T10000B_RowIDMovements
+		|		ON T10000B_RowIDMovements.RowID = Table.RowID
+		|		AND T10000B_RowIDMovements.Step = Table.CurrentStep
+		|		AND T10000B_RowIDMovements.Basis = Table.Basis
+		|		AND T10000B_RowIDMovements.RowRef = Table.RowRef
 		|WHERE
 		|	NOT Table.CurrentStep = VALUE(Catalog.MovementRules.EmptyRef)
 		|
@@ -36,15 +58,20 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 		|
 		|SELECT
 		|	VALUE(AccumulationRecordType.Receipt),
+		|	Table.Recorder,
+		|	Table.Period,
+		|	Table.RowID,
 		|	Table.NextStep AS Step,
 		|	&Ref,
-		|	*
+		|	Table.RowRef,
+		|	Table.Quantity
 		|FROM
 		|	RowIDMovements AS Table
 		|WHERE
 		|	NOT Table.NextStep = VALUE(Catalog.MovementRules.EmptyRef)";
 
 	Query.SetParameter("Ref", Source.Ref);
+	Query.SetParameter("Period", New Boundary(Source.Ref.PointInTime(), BoundaryType.Excluding));
 	
 	QueryResult = Query.Execute().Unload();
 	Source.RegisterRecords.T10000B_RowIDMovements.Load(QueryResult);

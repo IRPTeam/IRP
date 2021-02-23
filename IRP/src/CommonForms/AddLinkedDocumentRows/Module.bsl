@@ -100,7 +100,7 @@ Function GetFillingValues()
 		EndDo;
 	EndDo;
 	
-	ExtractedData = RowIDInfoServer.ExtractData(BasisesTable);
+	ExtractedData = RowIDInfoServer.ExtractData(BasisesTable, ThisObject.MainFilter.Ref);
 	FillingValues = RowIDInfoServer.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), 
 		ExtractedData, ThisObject.SeparateByBasedOn);
 	Return FillingValues;

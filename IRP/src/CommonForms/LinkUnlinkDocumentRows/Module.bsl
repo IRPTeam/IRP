@@ -172,7 +172,7 @@ EndProcedure
 &AtServer
 Function GetFillingValues()
 	BasisesTable = ThisObject.ResultsTable.Unload();
-	ExtractedData = RowIDInfoServer.ExtractData(BasisesTable);
+	ExtractedData = RowIDInfoServer.ExtractData(BasisesTable, ThisObject.MainFilter.Ref);
 	FillingValues = RowIDInfoServer.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), ExtractedData);
 	Return FillingValues;
 EndFunction

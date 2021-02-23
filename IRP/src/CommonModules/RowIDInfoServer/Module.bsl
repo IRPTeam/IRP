@@ -214,7 +214,7 @@ EndFunction
 
 #Region ExtractData
 
-Function ExtractData(BasisesTable) Export
+Function ExtractData(BasisesTable, DataReceiver) Export
 	Basises_SO = BasisesTable.CopyColumns();
 	Basises_SO_SC = BasisesTable.CopyColumns();
 	Basises_SO_SC.Columns.Add("SalesOrder", New TypeDescription("DocumentRef.SalesOrder"));
@@ -241,25 +241,25 @@ Function ExtractData(BasisesTable) Export
 	ExtractedData = New Array();
 	
 	If Basises_SO.Count() Then
-		ExtractedData.Add(ExtractData_SO(Basises_SO));
+		ExtractedData.Add(ExtractData_SO(Basises_SO, DataReceiver));
 	EndIf;
 	
 	If Basises_SI.Count() Then
-		ExtractedData.Add(ExtractData_SI(Basises_SI));
+		ExtractedData.Add(ExtractData_SI(Basises_SI, DataReceiver));
 	EndIf;
 	
 	If Basises_SC.Count() Then
-		ExtractedData.Add(ExtractData_SC(Basises_SC));
+		ExtractedData.Add(ExtractData_SC(Basises_SC, DataReceiver));
 	EndIf;
 	
 	If Basises_SO_SC.Count() Then
-		ExtractedData.Add(ExtractData_SO_SC(Basises_SO_SC));
+		ExtractedData.Add(ExtractData_SO_SC(Basises_SO_SC, DataReceiver));
 	EndIf;
 	
 	Return ExtractedData;
 EndFunction
 
-Function ExtractData_SO(BasisesTable)
+Function ExtractData_SO(BasisesTable, DataReceiver)
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -419,7 +419,7 @@ Function ExtractData_SO(BasisesTable)
 	Return Tables;
 EndFunction
 
-Function ExtractData_SI(BasisesTable)
+Function ExtractData_SI(BasisesTable, DataReceiver)
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -496,7 +496,7 @@ Function ExtractData_SI(BasisesTable)
 	Return Tables;
 EndFunction
 
-Function ExtractData_SC(BasisesTable)
+Function ExtractData_SC(BasisesTable, DataReceiver)
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -589,7 +589,7 @@ Function ExtractData_SC(BasisesTable)
 	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit");
 EndFunction
 
-Function ExtractData_SO_SC(BasisesTable)
+Function ExtractData_SO_SC(BasisesTable, DataReceiver)
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -660,7 +660,7 @@ Function ExtractData_SO_SC(BasisesTable)
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	Tables_SO = ExtractData_SO(QueryResults[1].Unload());
+	Tables_SO = ExtractData_SO(QueryResults[1].Unload(), DataReceiver);
 	
 	Table_RowIDInfo             = QueryResults[2].Unload(); 
 	Table_ShipmentConfirmations = QueryResults[3].Unload();

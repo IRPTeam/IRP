@@ -323,6 +323,9 @@ Function ExtractData_SO(BasisesTable, DataReceiver)
 		|	ItemList.PriceType AS PriceType,
 		|	ItemList.DeliveryDate AS DeliveryDate,
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
+		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.RevenueType AS RevenueType,
+		|	ItemList.Detail AS Detail,
 		|	0 AS Quantity,
 		|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
 		|	ISNULL(ItemList.Price, 0) AS Price,
@@ -1495,7 +1498,10 @@ Function GetEmptyTable_ItemList()
 	|PriceType,
 	|Price,
 	|DeliveryDate,
-	|DontCalculateRow";
+	|DontCalculateRow,
+	|BusinessUnit,
+	|RevenueType,
+	|Detail";
 	Table = New ValueTable();
 	For Each Column In StrSplit(Columns, ",") Do
 		Table.Columns.Add(TrimAll(Column));

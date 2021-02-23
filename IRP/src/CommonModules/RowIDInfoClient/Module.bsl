@@ -1,4 +1,18 @@
 
+Procedure DeleteRows(Object, Form) Export
+	If Object.Property("RowIDInfo") And Object.Property("ItemList") Then
+		ArrayDelete = New Array();
+		For Each Row In Object.RowIDInfo Do
+			If Not Object.ItemList.FindRows(New Structure("Key", Row.Key)).Count() Then
+				ArrayDelete.Add(Row);
+			EndIf;
+		EndDo;
+		For Each ItemArray In ArrayDelete Do
+			Object.RowIDInfo.Delete(ItemArray);
+		EndDo;
+	EndIf;
+EndProcedure
+
 Function GetSelectedRowInfo(CurrentData) Export
 	Result = New Structure("SelectedRow, FilterBySelectedRow", Undefined, Undefined);
 	If CurrentData = Undefined Then

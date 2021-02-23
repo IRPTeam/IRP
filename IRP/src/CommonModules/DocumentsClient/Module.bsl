@@ -1758,7 +1758,9 @@ EndFunction
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 	OffersClient.RecalculateTaxAndOffers(Object, Form);
+	RowIDInfoClient.DeleteRows(Object, Form);	
 EndProcedure
+
 #EndRegion
 
 #Region TitleChanges

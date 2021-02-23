@@ -152,6 +152,10 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings =
 	DocumentsClientServer.FillStores(ObjectData, Form);
 EndProcedure
 
+Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
+	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
+EndProcedure
+
 Procedure ItemListOnActivateRow(Object, Form, Item) Export
 	If Form.Items.ItemList.CurrentData = Undefined Then
 		Return;

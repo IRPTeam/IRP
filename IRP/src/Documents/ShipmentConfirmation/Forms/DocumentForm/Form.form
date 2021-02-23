@@ -1918,6 +1918,10 @@
           <event>OnChange</event>
           <name>ItemListOnChange</name>
         </handlers>
+        <handlers>
+          <event>AfterDeleteRow</event>
+          <name>ItemListAfterDeleteRow</name>
+        </handlers>
         <searchStringAddition>
           <visible>true</visible>
           <enabled>true</enabled>

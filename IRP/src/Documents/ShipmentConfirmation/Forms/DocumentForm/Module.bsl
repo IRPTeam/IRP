@@ -77,6 +77,11 @@ Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
+Procedure ItemListAfterDeleteRow(Item)
+	DocShipmentConfirmationClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure ItemListOnActivateRow(Item)
 	DocShipmentConfirmationClient.ItemListOnActivateRow(Object, ThisObject, Item);
 EndProcedure

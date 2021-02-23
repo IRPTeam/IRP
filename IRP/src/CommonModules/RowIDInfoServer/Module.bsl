@@ -169,8 +169,9 @@ Function GetNextStep_SI(Source, RowItemList, Row)
 		Return Row.NextStep;
 	EndIf;
 	NextStep = Catalogs.MovementRules.EmptyRef();
-	If RowItemList.UseShipmentConfirmation Then
-		NextStep = Catalogs.MovementRules.SC;
+	If RowItemList.UseShipmentConfirmation
+		And Not Source.ShipmentConfirmations.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
+			NextStep = Catalogs.MovementRules.SC;
 	EndIf;
 	Return NextStep;
 EndFunction	
@@ -326,6 +327,7 @@ Function ExtractData_SO(BasisesTable, DataReceiver)
 		|	ItemList.BusinessUnit AS BusinessUnit,
 		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.Detail AS Detail,
+		|	FALSE AS UseShipmentConfirmation,
 		|	0 AS Quantity,
 		|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
 		|	ISNULL(ItemList.Price, 0) AS Price,
@@ -554,6 +556,7 @@ Function ExtractData_SC(BasisesTable, DataReceiver)
 		|	ItemList.ItemKey.Item AS Item,
 		|	ItemList.ItemKey AS ItemKey,
 		|	ItemList.Unit AS Unit,
+		|	TRUE AS UseShipmentConfirmation,
 		|	0 AS Quantity,
 		|	BasisesTable.Key,
 		|	BasisesTable.BasisUnit AS BasisUnit,
@@ -691,6 +694,7 @@ Function ExtractData_SO_SC(BasisesTable, DataReceiver)
 	QueryResults = Query.ExecuteBatch();
 	
 	Tables_SO = ExtractData_SO(QueryResults[1].Unload(), DataReceiver);
+	Tables_SO.ItemList.FillValues(True, "UseShipmentConfirmation");
 	
 	Table_RowIDInfo             = QueryResults[2].Unload(); 
 	Table_ShipmentConfirmations = QueryResults[3].Unload();
@@ -1501,7 +1505,8 @@ Function GetEmptyTable_ItemList()
 	|DontCalculateRow,
 	|BusinessUnit,
 	|RevenueType,
-	|Detail";
+	|Detail,
+	|UseShipmentConfirmation";
 	Table = New ValueTable();
 	For Each Column In StrSplit(Columns, ",") Do
 		Table.Columns.Add(TrimAll(Column));

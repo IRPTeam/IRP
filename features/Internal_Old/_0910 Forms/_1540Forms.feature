@@ -1167,6 +1167,59 @@ Scenario: _012013 check the selection of the segment manager in the sales order
 
 
 
+Scenario: _012014 check row key when cloning a string in Sales order
+	And I close all client application windows
+	* Filling in the details of the documentsales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'                   |
+			| 'Basic Partner terms, without VAT' |
+		And I select current line in "List" table
+	* Filling in Sales order
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListItem" in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+	* Check that the row keys do not match
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "Rov1"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I save the current field value as "Rov2"		
+		And I display "Rov1" variable value
+		And I display "Rov2" variable value
+		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+		And I go to line in "List" table
+		| 'Row key' |
+		| '$Rov1$'    |
+		And I activate "Row key" field in "List" table
+		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
+		Then the number of "List" table lines is "меньше или равно" 1
 
 Scenario: _012015 check row key when cloning a string in Sales invoice
 	And I close all client application windows
@@ -1502,6 +1555,171 @@ Scenario: _012021 check row key when cloning a string in Purchase invoice
 
 
 
+Scenario: _012018 check filling in procurement method using the button Fill in SO
+	And I close all client application windows
+	* Open a creation form Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+	* Adding items to Sales order (4 string)
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "5,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '38/18SD'  |
+		And I activate "Item" field in "List" table
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "8,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'High shoes'  |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
+			| 'Item'       | 'Item key' |
+			| 'High shoes' | '37/19SD'  |
+		And I activate "Item" field in "List" table
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "2,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I activate "Item" field in "List" table
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "3,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check the button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Q'     |
+			| 'Shirt' | '38/Black' | '5,000' |
+		And I move one line down in "ItemList" table and select line
+		And in the table "ItemList" I click "Procurement" button
+		And I set checkbox "Stock"
+		And I click "OK" button
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key' | 'Q'     |
+			| 'High shoes' | '37/19SD'  | '2,000' |
+		And I move one line down in "ItemList" table and select line
+		And in the table "ItemList" I click "Procurement" button
+		And I change checkbox "Purchase"
+		And I click "OK" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Q'     |
+			| 'Boots' | '38/18SD'  | '8,000' |
+		And I move one line down in "ItemList" table and select line
+		And in the table "ItemList" I click "Procurement" button
+		And I change checkbox "No reserve"
+		And I click "OK" button
+	* Check filling in Procurement method in the Sales order
+		And "ItemList" table contains lines
+		| 'Item'       | 'Item key'  | 'Procurement method' | 'Q'     |
+		| 'Shirt'      | '38/Black'  | 'Stock'              | '5,000' |
+		| 'Boots'      | '38/18SD'   | 'No reserve'             | '8,000' |
+		| 'High shoes' | '37/19SD'   | 'No reserve'             | '2,000' |
+		| 'Trousers'   | '38/Yellow' | 'Purchase'           | '3,000' |
+	* Add a line with the service
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Service'       |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Service'  | 'Rent' |
+		And I select current line in "List" table
+		And I activate "Procurement method" field in "ItemList" table
+		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check the cleaning method on the line with the service
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key' | 'Procurement method' |
+			| 'Service' | 'Rent'     | 'Stock'              |
+		And I activate "Procurement method" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click Clear button of "Procurement method" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Procurement method' |
+			| 'Trousers' | '38/Yellow' | 'Purchase'           |
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'  | 'Procurement method' |
+			| 'Shirt'      | '38/Black'  | 'Stock'              |
+			| 'Boots'      | '38/18SD'   | 'No reserve'             |
+			| 'High shoes' | '37/19SD'   | 'No reserve'             |
+			| 'Trousers'   | '38/Yellow' | 'Purchase'           |
+			| 'Service'    | 'Rent'      | ''                   |
+		And I click the button named "FormPost"
+	* Check the cleaning method on the line with the product
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Procurement method' |
+			| 'Trousers' | '38/Yellow' | 'Purchase'           |
+		And I click Clear button of "Procurement method" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key' | 'Procurement method' |
+			| 'High shoes' | '37/19SD'  | 'No reserve'             |
+		And I click the button named "FormPost"
+		Then I wait that in user messages the "Field [Procurement method] is empty." substring will appear in 30 seconds
+		And I close all client application windows
 
 
 Scenario: _012019 check filling in partner and customer/vendor sign when creating Partner term from partner card

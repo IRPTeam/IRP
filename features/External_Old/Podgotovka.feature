@@ -790,18 +790,6 @@ Scenario: create SalesOrder023001
 		And I activate "Q" field in "ItemList" table
 		And I input "5,000" text in "Q" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I activate "Business unit" field in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'             |
-			| 'Distribution department' |
-		And I select current line in "List" table
-		And I activate "Revenue type" field in "ItemList" table
-		And I click choice button of "Revenue type" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Revenue'     |
-		And I select current line in "List" table
-		And I input "123" text in "Detail" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -815,17 +803,6 @@ Scenario: create SalesOrder023001
 		And I activate "Q" field in "ItemList" table
 		And I input "4,000" text in "Q" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I activate "Business unit" field in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'             |
-			| 'Distribution department' |
-		And I select current line in "List" table
-		And I activate "Revenue type" field in "ItemList" table
-		And I click choice button of "Revenue type" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Revenue'     |
-		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 	* Check store filling in the tabular section
 		And "ItemList" table contains lines

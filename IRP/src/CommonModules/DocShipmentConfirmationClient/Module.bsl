@@ -150,6 +150,7 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings =
 	ObjectData = DocumentsClientServer.GetStructureFillStores();
 	FillPropertyValues(ObjectData, Object);
 	DocumentsClientServer.FillStores(ObjectData, Form);
+	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export

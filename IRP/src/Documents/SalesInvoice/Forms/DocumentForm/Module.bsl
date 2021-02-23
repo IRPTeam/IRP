@@ -500,6 +500,7 @@ EndProcedure
 Procedure ShipmentConfirmationsTreeQuantityOnChange(Item)
 	DocumentsClient.TradeDocumentsTreeQuantityOnChange(Object, ThisObject, 
 		"ShipmentConfirmations", "ShipmentConfirmationsTree", "ShipmentConfirmation");
+	RowIDInfoClient.UpdateQuantity(Object, ThisObject);
 EndProcedure
 
 &AtClient

@@ -13,6 +13,31 @@ Procedure DeleteRows(Object, Form) Export
 	EndIf;
 EndProcedure
 
+Procedure UpdateQuantity(Object, Form) Export
+	For Each RowItemList In Object.ItemList Do
+		IDInfoRows = Object.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		If IDInfoRows.Count() = 1 Then
+			IDInfoRows[0].Quantity = RowItemList.QuantityInBaseUnit;
+		Else
+			TabularSectionName = "";
+			If Object.Property("ShipmentConfirmations") Then
+				TabularSectionName = "ShipmentConfirmations";
+			ElsIf Object.Property("GoodsReceipts") Then
+				TabularSectionName = "GoodsReceipts";
+			EndIf;
+			If Not ValueIsFilled(TabularSectionName) Then
+				Continue;
+			EndIf;
+			For Each Row In Object[TabularSectionName] Do
+				IDInfoRows = Object.RowIDInfo.FindRows(New Structure("Key, BasisKey", Row.Key, Row.BasisKey));
+				If IDInfoRows.Count() = 1 Then
+					IDInfoRows[0].Quantity = Row.Quantity;
+				EndIf;
+			EndDo;
+		EndIf;
+	EndDo;
+EndProcedure
+
 Function GetSelectedRowInfo(CurrentData) Export
 	Result = New Structure("SelectedRow, FilterBySelectedRow", Undefined, Undefined);
 	If CurrentData = Undefined Then

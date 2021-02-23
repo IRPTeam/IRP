@@ -56,340 +56,111 @@ Scenario: _024000 preparation (Sales invoice)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-	* Check or create SalesOrder023001
+		When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
+		And I execute 1C:Enterprise script at server
+ 			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+
+Scenario: _024008 create document Sales Invoice based on sales order (partial quantity)
+	* Select SO
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberSalesOrder023001$$" |
-			When create SalesOrder023001
-	* Check or create SalesOrder023005
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberSalesOrder023005$$" |
-			When create SalesOrder023005
+		And I go to line in "List" table
+			| 'Number' | 'Partner'   | 'Date'                |
+			| '3'      | 'Ferron BP' | '27.01.2021 19:50:45' |
+	* Create SI
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "DocumentsTree" table
+		And "DocumentsTree" table became equal
+			| 'Row presentation'                        | 'Use'                                     | 'Basis unit' | 'Quantity' |
+			| 'Sales order 3 dated 27.01.2021 19:50:45' | 'Sales order 3 dated 27.01.2021 19:50:45' | ''           | ''         |
+			| 'Dress, XS/Blue, Store 02'                | 'Yes'                                     | 'pcs'        | '1,000'    |
+			| 'Shirt, 36/Red, Store 02'                 | 'Yes'                                     | 'pcs'        | '10,000'   |
+			| 'Service, Interner, Store 02'             | 'Yes'                                     | 'pcs'        | '1,000'    |
+		And I go to line in "DocumentsTree" table
+			| 'Row presentation'            |
+			| 'Service, Interner, Store 02' |
+		And I change "Use" checkbox in "DocumentsTree" table
+		And I finish line editing in "DocumentsTree" table
+		And I click "Ok" button
+	* Check filling in SI
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
+		And "ItemList" table contains lines
+			| 'Business unit' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                             | 'Revenue type' |
+			| ''              | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'No'                 | '1,000'  | 'pcs'  | '75,36'      | '520,00' | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | ''             |
+			| ''              | 'Basic Price Types' | 'Shirt' | '36/Red'   | 'No'                 | '10,000' | 'pcs'  | '507,20'     | '350,00' | '18%' | '175,00'        | '2 817,80'   | '3 325,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | ''             |
 
-Scenario: _024001 create document Sales Invoice based on order - Shipment confirmation does not used
-	When create SalesInvoice024001
+		And "SpecialOffers" table contains lines
+			| '#' | 'Amount' |
+			| '1' | '26,00'  |
+			| '2' | '175,00' |
 
-Scenario: _024002 check Sales invoice posting (based on order, store does not use Shipment confirmation) by register OrderBalance (-)
+		Then the number of "PaymentTerms" table lines is "равно" 0
+		And "ObjectCurrencies" table became equal
+			| 'Movement type'      | 'Type'         | 'Currency from' | 'Currency' | 'Rate presentation' | 'Multiplicity' | 'Amount' |
+			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1'            | '3 819'  |
+			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '3 819'  |
+			| 'Reporting currency' | 'Reporting'    | 'TRY'           | 'USD'      | '0,1712'            | '1'            | '653,81' |
+
+		Then the number of "ShipmentConfirmationsTree" table lines is "равно" 0
+		Then the form attribute named "ManagerSegment" became equal to "Region 1"
+		Then the form attribute named "BusinessUnit" became equal to ""
+		Then the form attribute named "Author" became equal to "en description is empty"
+		Then the form attribute named "Manager" became equal to ""
+		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+		Then the form attribute named "Date" became equal to "23.02.2021 00:00:00"
+		Then the form attribute named "Number" became equal to "0"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "DeliveryDate" became equal to "27.01.2021 00:00:00"
+		And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "201,00"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "3 236,44"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "582,56"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "3 819,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+	* Change quantity
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Q'      |
+			| 'Shirt' | '36/Red'   | '10,000' |
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		And I delete "$$SalesInvoice024008$$" variable
+		And I delete "$$NumberSalesInvoice024008$$" variable
+		And I save the window as "$$SalesInvoice024008$$"
+		And I save the value of "Number" field as "$$NumberSalesInvoice024008$$"
+		And I click the button named "FormPostAndClose"
+  
+		
+				
+		
+				
+		
+				
+		
+				
+		
+				
+
+
+		
+				
+		
 	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	And "List" table contains lines
-	| 'Quantity' | 'Recorder'               | 'Store'    | 'Order'                | 'Item key'  |
-	| '5,000'    | '$$SalesInvoice024001$$' | 'Store 01' | '$$SalesOrder023001$$' | 'L/Green'   |
-	| '4,000'    | '$$SalesInvoice024001$$' | 'Store 01' | '$$SalesOrder023001$$' | '36/Yellow' |
 
-Scenario: _024003 check Sales invoice posting (based on order, store does not use Shipment confirmation) by register OrderReservation (-)
+
+		
 	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'               | 'Store'    | 'Item key'  |
-		| '5,000'    | '$$SalesInvoice024001$$' | 'Store 01' | 'L/Green'   |
-		| '4,000'    | '$$SalesInvoice024001$$' | 'Store 01' | '36/Yellow' |
-
-
-Scenario: _024004 check Sales invoice posting (based on order, store does not use Shipment confirmation) by register InventoryBalance (-)
 	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'               | 'Company'      | 'Item key'  |
-		| '5,000'    | '$$SalesInvoice024001$$' | 'Main Company' | 'L/Green'   |
-		| '4,000'    | '$$SalesInvoice024001$$' | 'Main Company' | '36/Yellow' |
 
-Scenario: _024005 check Sales invoice posting (based on order, store does not use Shipment confirmation) by register StockBalance (-)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'               | 'Store'    | 'Item key'  |
-		| '5,000'    | '$$SalesInvoice024001$$' | 'Store 01' | 'L/Green'   |
-		| '4,000'    | '$$SalesInvoice024001$$' | 'Store 01' | '36/Yellow' |
-
-
-Scenario: _024006 check the absence posting of Sales invoice (based on order, store does not use Shipment confirmation) by register StockReservation
-# All lines in the sales invoice by order
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table does not contain lines
-		| 'Quantity' | 'Recorder'               | 'Store'    | 'Item key'  |
-		| '5,000'    | '$$SalesInvoice024001$$' | 'Store 01' | 'L/Green'   |
-		| '4,000'    | '$$SalesInvoice024001$$' | 'Store 01' | '36/Yellow' |
-
-Scenario: _024007 check Sales invoice posting (based on order, store does not use Shipment confirmation) by register SalesTurnovers
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'               | 'Sales invoice'          | 'Item key'  |
-		| '5,000'    | '$$SalesInvoice024001$$' | '$$SalesInvoice024001$$' | 'L/Green'   |
-		| '4,000'    | '$$SalesInvoice024001$$' | '$$SalesInvoice024001$$' | '36/Yellow' |
-
-Scenario: _024008 create document Sales Invoice based on order - Shipment confirmation used
-	When create SalesInvoice024008
-
-Scenario: _024009  check Sales invoice posting (based on order, store use Shipment confirmation) by register SalesTurnovers
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'               | 'Sales invoice'          | 'Item key'  |
-		| '10,000'   | '$$SalesInvoice024008$$' | '$$SalesInvoice024008$$' | 'L/Green'   |
-		| '14,000'   | '$$SalesInvoice024008$$' | '$$SalesInvoice024008$$' | '36/Yellow' |
-
-Scenario: _024010  check Sales invoice posting (based on order, store use Shipment confirmation) by register OrderBalance (-)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	And "List" table contains lines
-	| 'Quantity' | 'Recorder'               | 'Store'    | 'Order'          | 'Item key'  |
-	| '10,000'   | '$$SalesInvoice024008$$' | 'Store 02' | 'Sales order 2*' | 'L/Green'   |
-	| '14,000'   | '$$SalesInvoice024008$$' | 'Store 02' | 'Sales order 2*' | '36/Yellow' |
-
-Scenario: _024011  check Sales invoice posting (based on order, store use Shipment confirmation) by register InventoryBalance (-)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'               | 'Company'      | 'Item key'  |
-		| '10,000'   | '$$SalesInvoice024008$$' | 'Main Company' | 'L/Green'   |
-		| '14,000'   | '$$SalesInvoice024008$$' | 'Main Company' | '36/Yellow' |
-
-Scenario: _024012  check Sales invoice posting (based on order, store use Shipment confirmation) by register GoodsInTransitOutgoing
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'         | 'Shipment basis'   | 'Store'    | 'Item key' |
-		| '10,000'   | '$$SalesInvoice024008$$' | '$$SalesInvoice024008$$' | 'Store 02' | 'L/Green'  |
-		| '14,000'   | '$$SalesInvoice024008$$' | '$$SalesInvoice024008$$' | 'Store 02' | '36/Yellow'   |
-
-Scenario: _024013 check the absence posting of Sales invoice (based on order, store  use Shipment confirmation) by register StockBalance
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table does not contain lines
-		| 'Quantity' | 'Recorder'               | 'Store'    | 'Item key'  |
-		| '10,000'   | '$$SalesInvoice024008$$' | 'Store 02' | 'L/Green'   |
-		| '14,000'   | '$$SalesInvoice024008$$' | 'Store 02' | '36/Yellow' |
-
-Scenario: _024014 check Sales invoice posting (based on order, store use Shipment confirmation) by register OrderReservation (-)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'         | 'Store'    | 'Item key'  |
-		| '10,000'   | '$$SalesInvoice024008$$' | 'Store 02' | 'L/Green'   |
-		| '14,000'   | '$$SalesInvoice024008$$' | 'Store 02' | '36/Yellow' |
-
-
-Scenario: _024015 check the absence posting of Sales invoice (based on order, store  use Shipment confirmation) by register StockReservation
-# All lines in the sales invoice by order
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table does not contain lines
-		| 'Quantity' | 'Recorder'              | 'Store'    | 'Item key' |
-		| '5,000'    | '$$SalesInvoice024008$$'      | 'Store 02' | 'L/Green'  |
-		| '4,000'    | '$$SalesInvoice024008$$'      | 'Store 02' | '36/Yellow'   |
-
-
-Scenario: _024016 create document Sales Invoice order - Shipment confirmation does not used
-	When create SalesInvoice024016 (Shipment confirmation does not used)
-
-Scenario: _024017 check Sales invoice posting (without order, store does not use Shipment confirmation) by register StockReservation
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'              | 'Store'    | 'Item key' |
-		| '1,000'    | '$$SalesInvoice024016$$'      | 'Store 01' | 'L/Green'  |
-
-Scenario: _024018 check the absence posting of Sales invoice (without order, store  does not use Shipment confirmation) by register OrderBalance
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	And "List" table does not contain lines
-	| 'Quantity' | 'Recorder'             | 'Store'    | 'Order'              | 'Item key' |
-	| '1,000'    | '$$SalesInvoice024016$$'    | 'Store 01' | ''     | 'L/Green'  |
-
-Scenario: _024019 check the absence posting of Sales invoice (without order, store  does not use Shipment confirmation) by register OrderReservation
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
-	And "List" table does not contain lines
-	| 'Quantity' | 'Recorder'             | 'Store'    | 'Item key' |
-	| '1,000'    | '$$SalesInvoice024016$$'    | 'Store 01' |  'L/Green'  |
-
-Scenario: _024020 check Sales invoice posting (without order, store does not use Shipment confirmation) by register InventoryBalance
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'            | 'Company'      | 'Item key' |
-		| '1,000'    | '$$SalesInvoice024016$$'    | 'Main Company' | 'L/Green'  |
-
-Scenario: _024021 check Sales invoice posting (without order, store does not use Shipment confirmation) by register StockBalance
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'           | 'Store'    | 'Item key' |
-		| '1,000'    | '$$SalesInvoice024016$$'   | 'Store 01' | 'L/Green'  |
-
-Scenario: _024022 check the absence posting of Sales invoice (without order, store  does not use Shipment confirmation) by register GoodsInTransitOutgoing
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
-	And "List" table does not contain lines
-		| 'Quantity' | 'Recorder'         | 'Shipment basis'   | 'Store'    | 'Item key' |
-		| '1,000'   | '$$SalesInvoice024016$$'  | '$$SalesInvoice024016$$' | 'Store 01' | 'L/Green'  |
-
-Scenario: _024023 check Sales invoice posting (without order, store does not use Shipment confirmation) by register SalesTurnovers
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'         | 'Sales invoice'    | 'Item key' |
-		| '1,000'    | '$$SalesInvoice024016$$' | '$$SalesInvoice024016$$' | 'L/Green'  |
-
-Scenario: _024024 check the absence posting of Sales invoice (without order, store  does not use Shipment confirmation) by register OrderReservation (-)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
-	And "List" table does not contain lines
-		| 'Quantity' | 'Recorder'        | 'Store'    | 'Item key'  |
-		| '1,000'   | '$$SalesInvoice024016$$' | 'Store 01' | 'L/Green'   |
-
-
-
-Scenario: _024025 create document Sales Invoice without Sales order - Shipment confirmation used
+Scenario: _024025 create document Sales Invoice without Sales order
 	When create SalesInvoice024025
 
-Scenario: _024026 check Sales invoice posting (without order, store use Shipment confirmation) by register StockReservation
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'               | 'Store'     | 'Item key' |
-		| '20,000'    | '$$SalesInvoice024025$$'      | 'Store 02' | 'L/Green'  |
 
-Scenario: _024027 check the absence posting of Sales invoice (without order, store  use Shipment confirmation) by register OrderBalance
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	And "List" table does not contain lines
-	| 'Quantity' | 'Recorder'             | 'Store'    | 'Order'              | 'Item key' |
-	| '20,000'    | '$$SalesInvoice024025$$'   | 'Store 02' | ''                  | 'L/Green'  |
-
-Scenario: _024028 check the absence posting of Sales invoice (without order, store  use Shipment confirmation) by register OrderReservation
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
-	And "List" table does not contain lines
-	| 'Quantity' | 'Recorder'             | 'Store'    | 'Item key' |
-	| '20,000'    | '$$SalesInvoice024025$$'   | 'Store 02' | 'L/Green'  |
-
-Scenario: _024029 check Sales invoice posting (without order, store use Shipment confirmation) by register InventoryBalance
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'           | 'Company'      | 'Item key' |
-		| '20,000'    | '$$SalesInvoice024025$$'  | 'Main Company' | 'L/Green'  |
-
-Scenario: _024030 check Sales invoice posting (without order, store use Shipment confirmation) by register GoodsInTransitOutgoing
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'          | 'Shipment basis'   | 'Store'    | 'Item key' |
-		| '20,000'   | '$$SalesInvoice024025$$'  | '$$SalesInvoice024025$$' | 'Store 02' | 'L/Green'  |
-
-Scenario: _024031 check the absence posting of Sales invoice (without order, store  use Shipment confirmation) by register StockBalance
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table does not contain lines
-		| 'Quantity' | 'Recorder'             | 'Store'    | 'Item key' |
-		| '20,000'    | '$$SalesInvoice024025$$'    | 'Store 02' | 'L/Green'  |
-
-Scenario: _024032 check Sales invoice posting (without order, store use Shipment confirmation) by register SalesTurnovers
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'         | 'Sales invoice'    | 'Item key' |
-		| '20,000'   | '$$SalesInvoice024025$$' | '$$SalesInvoice024025$$' | 'L/Green'  |
-
-Scenario: _024033 check the absence posting of Sales invoice (without order, store  use Shipment confirmation) by register OrderReservation (-)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
-	And "List" table does not contain lines
-		| 'Quantity' | 'Recorder'         | 'Store'    | 'Item key'  |
-		| '20,000'   | '$$SalesInvoice024025$$' | 'Store 02' | 'L/Green'   |
-
-Scenario: _024034 Sales invoice creation on set, store use Goods receipt
-	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-	And I click the button named "FormCreate"
-	* Filling in customer information
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'     |
-		And I select current line in "List" table
-		And I click Select button of "Partner term" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Personal Partner terms, $' |
-		And I select current line in "List" table
-		And I click Select button of "Legal name" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Company Kalipso'  |
-		And I select current line in "List" table
-	* Select store 
-		And I click Select button of "Store" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'  |
-		And I select current line in "List" table
-	* Filling in items table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'       |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'  | 'Item key'  |
-			| 'Boots' | 'Boots/S-8' |
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
-		And I select current line in "List" table
-		And I move to the next attribute
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'  | 'Item key'  |
-			| 'Dress' | 'Dress/A-8' |
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-	And I move to "Item list" tab
-	And I click the button named "FormPost"
-	And I delete "$$NumberSalesInvoice024034$$" variable
-	And I delete "$$SalesInvoice024034$$" variable
-	And I save the value of "Number" field as "$$NumberSalesInvoice024034$$"
-	And I save the window as "$$SalesInvoice024034$$"
-	And I click the button named "FormPostAndClose"
-	And Delay 2
-	And "List" table contains lines
-			| 'Partner'       | 'Σ'        |
-			| 'Kalipso'       | '8 000,00' |
-	And I close all client application windows
-	*  check movements by register
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-		And "List" table contains lines
-			| 'Quantity' | 'Recorder'         | 'Store'    | 'Item key'  |
-			| '1,000'    | '$$SalesInvoice024034$$' | 'Store 02' | 'Dress/A-8' |
-			| '1,000'    | '$$SalesInvoice024034$$' | 'Store 02' | 'Boots/S-8' |
-		And I close all client application windows
-		Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
-		And "List" table contains lines
-			| 'Quantity' | 'Recorder'            | 'Company'      | 'Item key'  |
-			| '1,000'   | '$$SalesInvoice024034$$'    | 'Main Company' | 'Dress/A-8' |
-			| '1,000'   | '$$SalesInvoice024034$$'    | 'Main Company' | 'Boots/S-8' |
-		And I close all client application windows
-		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-		And "List" table contains lines
-			| 'Quantity' | 'Recorder'         | 'Sales invoice'    | 'Item key'  |
-			| '1,000'    | '$$SalesInvoice024034$$' | '$$SalesInvoice024034$$' | 'Dress/A-8' |
-			| '1,000'    | '$$SalesInvoice024034$$' | '$$SalesInvoice024034$$' | 'Boots/S-8' |
-		And I close all client application windows
 
 # Scenario: _024035 check the form of selection of items (sales invoice)
 # 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -441,382 +212,6 @@ Scenario: _024042 check totals in the document Sales invoice
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 
 
-
-
-
-Scenario: _024043 check the output of the document movement report for Sales Invoice
-	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-	* Check the report output for the selected document from the list
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberSalesInvoice024001$$'      |
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And I select "Partner AR transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesInvoice024001$$'              | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     | '' | '' |
-		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     | '' | '' |
-		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     | '' | '' |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                       | ''          | ''                  | ''                         | ''         | ''                             | 'Attributes'           | '' | '' |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'         | 'Partner'   | 'Legal name'        | 'Partner term'             | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '744,72'    | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '4 350'     | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '4 350'     | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '4 350'     | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Inventory balance"' | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '4'         | 'Main Company' | '36/Yellow' | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '5'         | 'Main Company' | 'L/Green'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '4'         | 'Store 01'   | '36/Yellow' | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '5'         | 'Store 01'   | 'L/Green'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Taxes turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Taxes turnovers"' | ''       | ''          | ''              | ''           | ''                       | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-		| ''                            | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'             | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
-		| ''                            | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'               | 'Tax' | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                            | '*'      | '41,78'     | '41,78'         | '232,14'     | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '71,82'     | '71,82'         | '398,98'     | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '244,07'    | '244,07'        | '1 355,93'   | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '244,07'    | '244,07'        | '1 355,93'   | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '244,07'    | '244,07'        | '1 355,93'   | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '419,49'    | '419,49'        | '2 330,51'   | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '419,49'    | '419,49'        | '2 330,51'   | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '419,49'    | '419,49'        | '2 330,51'   | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                       | ''         | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                       | ''         | '' | '' |
-		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'         | 'Currency' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '4 350'          | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | 'TRY'      | '' | '' |
-		And I select "Sales turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Sales turnovers"' | ''       | ''          | ''       | ''           | ''              | ''             | ''                       | ''         | ''          | ''        | ''                             | ''                  | ''                     |
-		| ''                            | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''                       | ''         | ''          | ''        | ''                             | ''                  | 'Attributes'           |
-		| ''                            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Sales invoice'          | 'Currency' | 'Item key'  | 'Row key' | 'Multi currency movement type' | 'Serial lot number' | 'Deferred calculation' |
-		| ''                            | '*'      | '4'         | '273,92' | '232,14'     | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'USD'      | '36/Yellow' | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-		| ''                            | '*'      | '4'         | '1 600'  | '1 355,93'   | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'TRY'      | '36/Yellow' | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-		| ''                            | '*'      | '4'         | '1 600'  | '1 355,93'   | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'TRY'      | '36/Yellow' | '*'       | 'Local currency'               | ''                  | 'No'                   |
-		| ''                            | '*'      | '4'         | '1 600'  | '1 355,93'   | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'TRY'      | '36/Yellow' | '*'       | 'TRY'                          | ''                  | 'No'                   |
-		| ''                            | '*'      | '5'         | '470,8'  | '398,98'     | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'USD'      | 'L/Green'   | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-		| ''                            | '*'      | '5'         | '2 750'  | '2 330,51'   | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'TRY'      | 'L/Green'   | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-		| ''                            | '*'      | '5'         | '2 750'  | '2 330,51'   | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'TRY'      | 'L/Green'   | '*'       | 'Local currency'               | ''                  | 'No'                   |
-		| ''                            | '*'      | '5'         | '2 750'  | '2 330,51'   | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'TRY'      | 'L/Green'   | '*'       | 'TRY'                          | ''                  | 'No'                   |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Receipt'     | '*'      | '4 350'     | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Revenues turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Revenues turnovers"' | ''       | ''          | ''             | ''              | ''             | ''          | ''         | ''                    | ''                             | ''                     | '' | '' | '' |
-		| ''                               | 'Period' | 'Resources' | 'Dimensions'   | ''              | ''             | ''          | ''         | ''                    | ''                             | 'Attributes'           | '' | '' | '' |
-		| ''                               | ''       | 'Amount'    | 'Company'      | 'Business unit' | 'Revenue type' | 'Item key'  | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' |
-		| ''                               | '*'      | '232,14'    | 'Main Company' | ''              | ''             | '36/Yellow' | 'USD'      | ''                    | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '398,98'    | 'Main Company' | ''              | ''             | 'L/Green'   | 'USD'      | ''                    | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '1 355,93'  | 'Main Company' | ''              | ''             | '36/Yellow' | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '1 355,93'  | 'Main Company' | ''              | ''             | '36/Yellow' | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '1 355,93'  | 'Main Company' | ''              | ''             | '36/Yellow' | 'TRY'      | ''                    | 'TRY'                          | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '2 330,51'  | 'Main Company' | ''              | ''             | 'L/Green'   | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '2 330,51'  | 'Main Company' | ''              | ''             | 'L/Green'   | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '2 330,51'  | 'Main Company' | ''              | ''             | 'L/Green'   | 'TRY'      | ''                    | 'TRY'                          | 'No'                   | '' | '' | '' |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"' | ''            | ''       | ''          | ''           | ''                     | ''          | ''        | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                     | ''          | ''        | '' | '' | '' | '' | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                | 'Item key'  | 'Row key' | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '4'         | 'Store 01'   | '$$SalesOrder023001$$' | '36/Yellow' | '*'       | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '5'         | 'Store 01'   | '$$SalesOrder023001$$' | 'L/Green'   | '*'       | '' | '' | '' | '' | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '4'         | 'Store 01'   | '36/Yellow' | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '5'         | 'Store 01'   | 'L/Green'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Shipment confirmation schedule"' | ''            | ''          | ''                     | ''               | ''                       | ''               | ''                       | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
-		| ''                                           | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                       | ''               | ''                       | ''                         | 'Attributes'                   | ''                             | ''                             | ''                             | ''                     |
-		| ''                                           | ''            | ''          | 'Quantity'             | 'Company'        | 'Order'                  | 'Store'          | 'Item key'               | 'Row key'                  | 'Delivery date'                | ''                             | ''                             | ''                             | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '4'                    | 'Main Company'   | '$$SalesOrder023001$$'   | 'Store 01'       | '36/Yellow'              | '*'                        | '*'                            | ''                             | ''                             | ''                             | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '5'                    | 'Main Company'   | '$$SalesOrder023001$$'   | 'Store 01'       | 'L/Green'                | '*'                        | '*'                            | ''                             | ''                             | ''                             | ''                     |
-
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-	* Check the report output from the selected document
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberSalesInvoice024001$$'      |
-		And I select current line in "List" table
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And I select "Partner AR transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesInvoice024001$$'              | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     | '' | '' |
-		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     | '' | '' |
-		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     | '' | '' |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                       | ''          | ''                  | ''                         | ''         | ''                             | 'Attributes'           | '' | '' |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'         | 'Partner'   | 'Legal name'        | 'Partner term'             | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '744,72'    | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '4 350'     | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '4 350'     | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '4 350'     | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Inventory balance"' | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '4'         | 'Main Company' | '36/Yellow' | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '5'         | 'Main Company' | 'L/Green'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '4'         | 'Store 01'   | '36/Yellow' | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '5'         | 'Store 01'   | 'L/Green'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Taxes turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Taxes turnovers"' | ''       | ''          | ''              | ''           | ''                       | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-		| ''                            | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'             | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
-		| ''                            | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'               | 'Tax' | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                            | '*'      | '41,78'     | '41,78'         | '232,14'     | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '71,82'     | '71,82'         | '398,98'     | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '244,07'    | '244,07'        | '1 355,93'   | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '244,07'    | '244,07'        | '1 355,93'   | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '244,07'    | '244,07'        | '1 355,93'   | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '419,49'    | '419,49'        | '2 330,51'   | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '419,49'    | '419,49'        | '2 330,51'   | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '419,49'    | '419,49'        | '2 330,51'   | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                       | ''         | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                       | ''         | '' | '' |
-		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'         | 'Currency' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '4 350'          | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | 'TRY'      | '' | '' |
-		And I select "Sales turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Sales turnovers"' | ''       | ''          | ''       | ''           | ''              | ''             | ''                       | ''         | ''          | ''        | ''                             | ''                  | ''                     |
-		| ''                            | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''                       | ''         | ''          | ''        | ''                             | ''                  | 'Attributes'           |
-		| ''                            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Sales invoice'          | 'Currency' | 'Item key'  | 'Row key' | 'Multi currency movement type' | 'Serial lot number' | 'Deferred calculation' |
-		| ''                            | '*'      | '4'         | '273,92' | '232,14'     | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'USD'      | '36/Yellow' | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-		| ''                            | '*'      | '4'         | '1 600'  | '1 355,93'   | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'TRY'      | '36/Yellow' | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-		| ''                            | '*'      | '4'         | '1 600'  | '1 355,93'   | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'TRY'      | '36/Yellow' | '*'       | 'Local currency'               | ''                  | 'No'                   |
-		| ''                            | '*'      | '4'         | '1 600'  | '1 355,93'   | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'TRY'      | '36/Yellow' | '*'       | 'TRY'                          | ''                  | 'No'                   |
-		| ''                            | '*'      | '5'         | '470,8'  | '398,98'     | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'USD'      | 'L/Green'   | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-		| ''                            | '*'      | '5'         | '2 750'  | '2 330,51'   | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'TRY'      | 'L/Green'   | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-		| ''                            | '*'      | '5'         | '2 750'  | '2 330,51'   | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'TRY'      | 'L/Green'   | '*'       | 'Local currency'               | ''                  | 'No'                   |
-		| ''                            | '*'      | '5'         | '2 750'  | '2 330,51'   | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'TRY'      | 'L/Green'   | '*'       | 'TRY'                          | ''                  | 'No'                   |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Receipt'     | '*'      | '4 350'     | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Revenues turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Revenues turnovers"' | ''       | ''          | ''             | ''              | ''             | ''          | ''         | ''                    | ''                             | ''                     | '' | '' | '' |
-		| ''                               | 'Period' | 'Resources' | 'Dimensions'   | ''              | ''             | ''          | ''         | ''                    | ''                             | 'Attributes'           | '' | '' | '' |
-		| ''                               | ''       | 'Amount'    | 'Company'      | 'Business unit' | 'Revenue type' | 'Item key'  | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' |
-		| ''                               | '*'      | '232,14'    | 'Main Company' | ''              | ''             | '36/Yellow' | 'USD'      | ''                    | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '398,98'    | 'Main Company' | ''              | ''             | 'L/Green'   | 'USD'      | ''                    | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '1 355,93'  | 'Main Company' | ''              | ''             | '36/Yellow' | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '1 355,93'  | 'Main Company' | ''              | ''             | '36/Yellow' | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '1 355,93'  | 'Main Company' | ''              | ''             | '36/Yellow' | 'TRY'      | ''                    | 'TRY'                          | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '2 330,51'  | 'Main Company' | ''              | ''             | 'L/Green'   | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '2 330,51'  | 'Main Company' | ''              | ''             | 'L/Green'   | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '2 330,51'  | 'Main Company' | ''              | ''             | 'L/Green'   | 'TRY'      | ''                    | 'TRY'                          | 'No'                   | '' | '' | '' |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"' | ''            | ''       | ''          | ''           | ''                     | ''          | ''        | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                     | ''          | ''        | '' | '' | '' | '' | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                | 'Item key'  | 'Row key' | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '4'         | 'Store 01'   | '$$SalesOrder023001$$' | '36/Yellow' | '*'       | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '5'         | 'Store 01'   | '$$SalesOrder023001$$' | 'L/Green'   | '*'       | '' | '' | '' | '' | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '4'         | 'Store 01'   | '36/Yellow' | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '5'         | 'Store 01'   | 'L/Green'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Shipment confirmation schedule"' | ''            | ''          | ''                     | ''               | ''                       | ''               | ''                       | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
-		| ''                                           | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                       | ''               | ''                       | ''                         | 'Attributes'                   | ''                             | ''                             | ''                             | ''                     |
-		| ''                                           | ''            | ''          | 'Quantity'             | 'Company'        | 'Order'                  | 'Store'          | 'Item key'               | 'Row key'                  | 'Delivery date'                | ''                             | ''                             | ''                             | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '4'                    | 'Main Company'   | '$$SalesOrder023001$$'   | 'Store 01'       | '36/Yellow'              | '*'                        | '*'                            | ''                             | ''                             | ''                             | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '5'                    | 'Main Company'   | '$$SalesOrder023001$$'   | 'Store 01'       | 'L/Green'                | '*'                        | '*'                            | ''                             | ''                             | ''                             | ''                     |
-
-	And I close all client application windows
-
-
-Scenario: _02404301 clear movements Sales invoice and check that there is no movements on the registers 
-	* Open list form Sales invoice
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-	* Check the report generation
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberSalesInvoice024001$$'      |
-	* Clear movements document and check that there is no movement on the registers
-		And in the table "List" I click the button named "ListContextMenuUndoPosting"
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "Partner AR transactions"'        |
-			| 'Register  "Inventory balance"'              |
-			| 'Register  "Order reservation"'              |
-			| 'Register  "Taxes turnovers"'                |
-			| 'Register  "Sales turnovers"'                |
-			| 'Register  "Reconciliation statement"'       |
-			| 'Register  "Order balance"'                  |
-		And I close all client application windows
-	* Posting the document and check movements
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberSalesInvoice024001$$'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		And I select "Partner AR transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesInvoice024001$$'              | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     | '' | '' |
-		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     | '' | '' |
-		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     | '' | '' |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                       | ''          | ''                  | ''                         | ''         | ''                             | 'Attributes'           | '' | '' |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'         | 'Partner'   | 'Legal name'        | 'Partner term'             | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '744,72'    | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '4 350'     | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '4 350'     | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '4 350'     | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Inventory balance"' | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '4'         | 'Main Company' | '36/Yellow' | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '5'         | 'Main Company' | 'L/Green'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '4'         | 'Store 01'   | '36/Yellow' | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '5'         | 'Store 01'   | 'L/Green'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Taxes turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Taxes turnovers"' | ''       | ''          | ''              | ''           | ''                       | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-		| ''                            | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'             | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
-		| ''                            | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'               | 'Tax' | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                            | '*'      | '41,78'     | '41,78'         | '232,14'     | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '71,82'     | '71,82'         | '398,98'     | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '244,07'    | '244,07'        | '1 355,93'   | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '244,07'    | '244,07'        | '1 355,93'   | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '244,07'    | '244,07'        | '1 355,93'   | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '419,49'    | '419,49'        | '2 330,51'   | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '419,49'    | '419,49'        | '2 330,51'   | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '419,49'    | '419,49'        | '2 330,51'   | '$$SalesInvoice024001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                       | ''         | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                       | ''         | '' | '' |
-		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'         | 'Currency' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '4 350'          | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | 'TRY'      | '' | '' |
-		And I select "Sales turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Sales turnovers"' | ''       | ''          | ''       | ''           | ''              | ''             | ''                       | ''         | ''          | ''        | ''                             | ''                  | ''                     |
-		| ''                            | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''                       | ''         | ''          | ''        | ''                             | ''                  | 'Attributes'           |
-		| ''                            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Sales invoice'          | 'Currency' | 'Item key'  | 'Row key' | 'Multi currency movement type' | 'Serial lot number' | 'Deferred calculation' |
-		| ''                            | '*'      | '4'         | '273,92' | '232,14'     | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'USD'      | '36/Yellow' | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-		| ''                            | '*'      | '4'         | '1 600'  | '1 355,93'   | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'TRY'      | '36/Yellow' | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-		| ''                            | '*'      | '4'         | '1 600'  | '1 355,93'   | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'TRY'      | '36/Yellow' | '*'       | 'Local currency'               | ''                  | 'No'                   |
-		| ''                            | '*'      | '4'         | '1 600'  | '1 355,93'   | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'TRY'      | '36/Yellow' | '*'       | 'TRY'                          | ''                  | 'No'                   |
-		| ''                            | '*'      | '5'         | '470,8'  | '398,98'     | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'USD'      | 'L/Green'   | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-		| ''                            | '*'      | '5'         | '2 750'  | '2 330,51'   | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'TRY'      | 'L/Green'   | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-		| ''                            | '*'      | '5'         | '2 750'  | '2 330,51'   | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'TRY'      | 'L/Green'   | '*'       | 'Local currency'               | ''                  | 'No'                   |
-		| ''                            | '*'      | '5'         | '2 750'  | '2 330,51'   | ''              | 'Main Company' | '$$SalesInvoice024001$$' | 'TRY'      | 'L/Green'   | '*'       | 'TRY'                          | ''                  | 'No'                   |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Receipt'     | '*'      | '4 350'     | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Revenues turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Revenues turnovers"' | ''       | ''          | ''             | ''              | ''             | ''          | ''         | ''                    | ''                             | ''                     | '' | '' | '' |
-		| ''                               | 'Period' | 'Resources' | 'Dimensions'   | ''              | ''             | ''          | ''         | ''                    | ''                             | 'Attributes'           | '' | '' | '' |
-		| ''                               | ''       | 'Amount'    | 'Company'      | 'Business unit' | 'Revenue type' | 'Item key'  | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' |
-		| ''                               | '*'      | '232,14'    | 'Main Company' | ''              | ''             | '36/Yellow' | 'USD'      | ''                    | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '398,98'    | 'Main Company' | ''              | ''             | 'L/Green'   | 'USD'      | ''                    | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '1 355,93'  | 'Main Company' | ''              | ''             | '36/Yellow' | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '1 355,93'  | 'Main Company' | ''              | ''             | '36/Yellow' | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '1 355,93'  | 'Main Company' | ''              | ''             | '36/Yellow' | 'TRY'      | ''                    | 'TRY'                          | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '2 330,51'  | 'Main Company' | ''              | ''             | 'L/Green'   | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '2 330,51'  | 'Main Company' | ''              | ''             | 'L/Green'   | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '2 330,51'  | 'Main Company' | ''              | ''             | 'L/Green'   | 'TRY'      | ''                    | 'TRY'                          | 'No'                   | '' | '' | '' |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"' | ''            | ''       | ''          | ''           | ''                     | ''          | ''        | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                     | ''          | ''        | '' | '' | '' | '' | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                | 'Item key'  | 'Row key' | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '4'         | 'Store 01'   | '$$SalesOrder023001$$' | '36/Yellow' | '*'       | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '5'         | 'Store 01'   | '$$SalesOrder023001$$' | 'L/Green'   | '*'       | '' | '' | '' | '' | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '4'         | 'Store 01'   | '36/Yellow' | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '5'         | 'Store 01'   | 'L/Green'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Shipment confirmation schedule"' | ''            | ''          | ''                     | ''               | ''                       | ''               | ''                       | ''                         | ''                             | ''                             | ''                             | ''                             | ''                     |
-		| ''                                           | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                       | ''               | ''                       | ''                         | 'Attributes'                   | ''                             | ''                             | ''                             | ''                     |
-		| ''                                           | ''            | ''          | 'Quantity'             | 'Company'        | 'Order'                  | 'Store'          | 'Item key'               | 'Row key'                  | 'Delivery date'                | ''                             | ''                             | ''                             | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '4'                    | 'Main Company'   | '$$SalesOrder023001$$'   | 'Store 01'       | '36/Yellow'              | '*'                        | '*'                            | ''                             | ''                             | ''                             | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '5'                    | 'Main Company'   | '$$SalesOrder023001$$'   | 'Store 01'       | 'L/Green'                | '*'                        | '*'                            | ''                             | ''                             | ''                             | ''                     |
-		And I close all client application windows
 
 
 Scenario: _300505 check connection to Sales invoice report "Related documents"

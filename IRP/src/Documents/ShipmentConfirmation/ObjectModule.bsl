@@ -72,16 +72,7 @@ EndProcedure
 
 Procedure Filling_BasedOn(FillingData)
 	FillPropertyValues(ThisObject, FillingData, "Company, Partner, LegalName");
-	For Each Row In FillingData.ItemList Do
-		NewRow = ThisObject.ItemList.Add();
-		FillPropertyValues(NewRow, Row);
-		If Not ValueIsFilled(NewRow.Key) Then
-			NewRow.Key = New UUID();
-		EndIf;
-		If ValueIsFilled(Row.Unit) And ValueIsFilled(Row.Unit.Quantity) Then
-			NewRow.Quantity = Row.Quantity / Row.Unit.Quantity;
-		EndIf;
-	EndDo;
+	RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

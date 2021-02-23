@@ -74,8 +74,4 @@ Procedure CreateUser(UserObject) Export
 	UserObject.InfobaseUserID = User.UUID;
 EndProcedure
 
-Function GetInfobaseUserIDByUser(UserData) Export
-	Return UserData.InfobaseUserID;
-EndFunction
-
 #EndRegion

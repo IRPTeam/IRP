@@ -21,7 +21,7 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 		|SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	Table.CurrentStep AS Step,
-		|	CASE When Table.Basis.Ref IS NULL Then
+		|	CASE WHEN Table.Basis.Ref IS NULL THEN
 		|		&Ref
 		|	ELSE
 		|		Table.Basis

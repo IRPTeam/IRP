@@ -6060,7 +6060,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormGroup">
-      <name>GroupRowID</name>
+      <name>GroupRowIDInfo</name>
       <id>983</id>
       <items xsi:type="form:Table">
         <name>RowIDInfo</name>
@@ -6716,10 +6716,10 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Row ID</value>
+        <value>Row ID Info</value>
       </title>
       <extendedTooltip>
-        <name>GroupRowIDExtendedTooltip</name>
+        <name>GroupRowIDInfoExtendedTooltip</name>
         <id>984</id>
         <visible>true</visible>
         <enabled>true</enabled>

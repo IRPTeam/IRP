@@ -77,111 +77,107 @@ EndProcedure
 #Region RowID
 
 Procedure FillRowID_SO(Source)
-	For Each Row_ItemList In Source.ItemList Do
+	For Each RowItemList In Source.ItemList Do
 	
-		If Row_ItemList.Cancel Then
+		If RowItemList.Cancel Then
 			Continue;
 		EndIf;
 		
-		Row_IDInfoRow = Undefined;
-		RowIDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", Row_ItemList.Key));
-		If RowIDInfoRows.Count() = 0 Then
-			Row_IDInfoRow = Source.RowIDInfo.Add();
-		ElsIf RowIDInfoRows.Count() = 1 Then
-			Row_IDInfoRow = RowIdInfoRows[0];
+		Row = Undefined;
+		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		If IDInfoRows.Count() = 0 Then
+			Row = Source.RowIDInfo.Add();
+		ElsIf IDInfoRows.Count() = 1 Then
+			Row = IDInfoRows[0];
 		EndIf;
 		
-		Row_IDInfoRow.Key      = Row_ItemList.Key;
-		Row_IDInfoRow.RowID    = Row_ItemList.Key;
-		Row_IDInfoRow.Quantity = Row_ItemList.QuantityInBaseUnit;
+		Row.Key      = RowItemList.Key;
+		Row.RowID    = RowItemList.Key;
+		Row.Quantity = RowItemList.QuantityInBaseUnit;
 		
-		Row_IDInfoRow.NextStep = GetNextStep_SO(Source, Row_ItemList, Row_IDInfoRow);
+		Row.NextStep = GetNextStep_SO(Source, RowItemList, Row);
 		
-		Row_IDInfoRow.RowRef = CreateRowIDCatalog(Row_IDInfoRow, Row_ItemList, Source);
+		Row.RowRef = CreateRowIDCatalog(Row, RowItemList, Source);
 	EndDo;
 EndProcedure
 
-Function GetNextStep_SO(Source, Row_ItemList, Row_IDInfoRow)
-	If ValueIsFilled(Row_IDInfoRow.NextStep) Then
-		Return Row_IDInfoRow.NextStep;
+Function GetNextStep_SO(Source, RowItemList, Row)
+	If ValueIsFilled(Row.NextStep) Then
+		Return Row.NextStep;
 	EndIf;
 	NextStep = Catalogs.MovementRules.EmptyRef();
-	If Row_ItemList.ProcurementMethod = Enums.ProcurementMethods.Purchase Then
+	If RowItemList.ProcurementMethod = Enums.ProcurementMethods.Purchase Then
 		NextStep = Catalogs.MovementRules.PO;
 	Else
-		If Source.ShipmentConfirmationsBeforeSalesInvoice Then
-			NextStep = Catalogs.MovementRules.SC;
-		Else
-			NextStep = Catalogs.MovementRules.SI;
-		EndIf;
+		NextStep = Catalogs.MovementRules.SI_SC;
 	EndIf;
 	Return NextStep;
 EndFunction	
 
 Procedure FillRowID_SI(Source)
-	For Each Row_ItemList In Source.ItemList Do	
-		Row_IDInfoRow = Undefined;
-		RowIDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", Row_ItemList.Key));
-		If RowIDInfoRows.Count() = 0 Then
-			Row_IDInfoRow = Source.RowIDInfo.Add();
-		ElsIf RowIDInfoRows.Count() = 1 Then
-			Row_IDInfoRow = RowIdInfoRows[0];
-			If ValueIsFilled(Row_IDInfoRow.RowRef) And Row_IDInfoRow.RowRef.Basis <> Source.Ref Then
-				Row_IDInfoRow.NextStep = GetNextStep_SI(Source, Row_ItemList, Row_IDInfoRow);
+	For Each RowItemList In Source.ItemList Do	
+		Row = Undefined;
+		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		If IDInfoRows.Count() = 0 Then
+			Row = Source.RowIDInfo.Add();
+		ElsIf IDInfoRows.Count() = 1 Then
+			Row = IDInfoRows[0];
+			If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
+				Row.NextStep = GetNextStep_SI(Source, RowItemList, Row);
 				Continue;
 			EndIf;
 		EndIf;
 
-		Row_IDInfoRow.Key      = Row_ItemList.Key;
-		Row_IDInfoRow.RowID    = Row_ItemList.Key;
-		Row_IDInfoRow.Quantity = Row_ItemList.QuantityInBaseUnit;
-		Row_IDInfoRow.NextStep = GetNextStep_SI(Source, Row_ItemList, Row_IDInfoRow);
+		Row.Key      = RowItemList.Key;
+		Row.RowID    = RowItemList.Key;
+		Row.Quantity = RowItemList.QuantityInBaseUnit;
+		Row.NextStep = GetNextStep_SI(Source, RowItemList, Row);
 		
-		Row_IDInfoRow.RowRef = CreateRowIDCatalog(Row_IDInfoRow, Row_ItemList, Source);
+		Row.RowRef = CreateRowIDCatalog(Row, RowItemList, Source);
 	EndDo;
 EndProcedure
 
-Function GetNextStep_SI(Source, Row_ItemList, Row_IDInfoRow)
-	If ValueIsFilled(Row_IDInfoRow.NextStep) Then
-		Return Row_IDInfoRow.NextStep;
+Function GetNextStep_SI(Source, RowItemList, Row)
+	If ValueIsFilled(Row.NextStep) Then
+		Return Row.NextStep;
 	EndIf;
 	NextStep = Catalogs.MovementRules.EmptyRef();
-	If Row_ItemList.UseShipmentConfirmation Then
+	If RowItemList.UseShipmentConfirmation Then
 		NextStep = Catalogs.MovementRules.SC;
 	EndIf;
 	Return NextStep;
 EndFunction	
 
 Procedure FillRowID_SC(Source)
-	For Each Row_ItemList In Source.ItemList Do	
-		Row_IDInfoRow = Undefined;
-		RowIDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", Row_ItemList.Key));
-		If RowIDInfoRows.Count() = 0 Then
-			Row_IDInfoRow = Source.RowIDInfo.Add();
-		ElsIf RowIDInfoRows.Count() = 1 Then
-			Row_IDInfoRow = RowIdInfoRows[0];
-			If ValueIsFilled(Row_IDInfoRow.RowRef) And Row_IDInfoRow.RowRef.Basis <> Source.Ref Then
-				Row_IDInfoRow.NextStep = GetNextStep_SC(Source, Row_ItemList, Row_IDInfoRow);
+	For Each RowItemList In Source.ItemList Do	
+		Row = Undefined;
+		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		If IDInfoRows.Count() = 0 Then
+			Row = Source.RowIDInfo.Add();
+		ElsIf IDInfoRows.Count() = 1 Then
+			Row = IDInfoRows[0];
+			If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
+				Row.NextStep = GetNextStep_SC(Source, RowItemList, Row);
 				Continue;
 			EndIf;
 		EndIf;
 
-		Row_IDInfoRow.Key      = Row_ItemList.Key;
-		Row_IDInfoRow.RowID    = Row_ItemList.Key;
-		Row_IDInfoRow.Quantity = Row_ItemList.QuantityInBaseUnit;
-		Row_IDInfoRow.NextStep = GetNextStep_SC(Source, Row_ItemList, Row_IDInfoRow);
+		Row.Key      = RowItemList.Key;
+		Row.RowID    = RowItemList.Key;
+		Row.Quantity = RowItemList.QuantityInBaseUnit;
+		Row.NextStep = GetNextStep_SC(Source, RowItemList, Row);
 		
-		Row_IDInfoRow.RowRef = CreateRowIDCatalog(Row_IDInfoRow, Row_ItemList, Source);
+		Row.RowRef = CreateRowIDCatalog(Row, RowItemList, Source);
 	EndDo;
 EndProcedure
 
-Function GetNextStep_SC(Source, Row_ItemList, Row_IDInfoRow)
-	If ValueIsFilled(Row_IDInfoRow.NextStep) Then
-		Return Row_IDInfoRow.NextStep;
+Function GetNextStep_SC(Source, ItemList, Row)
+	If ValueIsFilled(Row.NextStep) Then
+		Return Row.NextStep;
 	EndIf;
 	NextStep = Catalogs.MovementRules.EmptyRef();
 	If Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.Sales
-		And Not ValueIsFilled(Row_ItemList.SalesInvoice) Then
+		And Not ValueIsFilled(ItemList.SalesInvoice) Then
 		NextStep = Catalogs.MovementRules.SI;
 	EndIf;
 	Return NextStep;

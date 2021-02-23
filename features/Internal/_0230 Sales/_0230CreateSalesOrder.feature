@@ -150,7 +150,7 @@ Scenario: _023002 check filling in Row Id info table in the SO
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Q'     |
-			| '1' | 'Dress' | 'L/Green'  | '5,000' |
+			| '1' | 'Dress' | 'L/Green'  | '7,000' |
 		And I activate "Q" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "5,000" text in "Q" field of "ItemList" table

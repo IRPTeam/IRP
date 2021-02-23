@@ -64,6 +64,7 @@ EndProcedure
 Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
 	DocSalesOrderClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 	UpdateTotalAmounts();
+	NotifyChanged(Object.SalesOrder);
 EndProcedure
 
 &AtServer

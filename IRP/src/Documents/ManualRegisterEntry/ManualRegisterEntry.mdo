@@ -39,7 +39,7 @@
     <typeField>Document.ManualRegisterEntry.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.ManualRegisterEntry.TabularSection.AddAttributes.Attribute.Value</valueField>
   </characteristics>
-  <createOnInput>Use</createOnInput>
+  <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
   <numberLength>12</numberLength>
@@ -49,6 +49,7 @@
   <defaultObjectForm>Document.ManualRegisterEntry.Form.DocumentForm</defaultObjectForm>
   <defaultListForm>Document.ManualRegisterEntry.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.ManualRegisterEntry.Form.ChoiceForm</defaultChoiceForm>
+  <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.R1002T_PurchaseReturns</registerRecords>
   <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
   <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>

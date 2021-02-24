@@ -504,6 +504,56 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>Store</name>
+      <id>52</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Store</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>StoreExtendedTooltip</name>
+        <id>54</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>StoreContextMenu</name>
+        <id>53</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>Author</name>
       <id>40</id>
       <visible>true</visible>
@@ -829,35 +879,61 @@
     </edit>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
-      <queryText>SELECT 
-       PurchaseOrderList.Ref, 
-       PurchaseOrderList.DeletionMark, 
-       PurchaseOrderList.Number, 
-       PurchaseOrderList.Date, 
-       PurchaseOrderList.Posted, 
-       PurchaseOrderList.Agreement, 
-       PurchaseOrderList.Company, 
-       PurchaseOrderList.Currency, 
-       PurchaseOrderList.GoodsReceiptBeforePurchaseInvoice, 
-       PurchaseOrderList.LegalName, 
-       PurchaseOrderList.Partner, 
-       PurchaseOrderList.PriceIncludeTax, 
-       PurchaseOrderList.Status, 
-       PurchaseOrderList.PartnerBankAccount, 
-       PurchaseOrderList.UseItemsReceiptScheduling, 
-       PurchaseOrderList.Author, 
-       PurchaseOrderList.BusinessUnit, 
-       PurchaseOrderList.Description, 
-       PurchaseOrderList.DocumentAmount,
-       Not PurchaseOrderClosing.Ref IS NULL AS Closed,
-	   PurchaseOrderClosing.Ref AS ClosingOrder
- FROM 
-       Document.PurchaseOrder AS PurchaseOrderList
-       		LEFT JOIN Document.PurchaseOrderClosing AS PurchaseOrderClosing
+      <queryText>SELECT
+	PurchaseOrderList.Ref,
+	PurchaseOrderList.DeletionMark,
+	PurchaseOrderList.Number,
+	PurchaseOrderList.Date,
+	PurchaseOrderList.Posted,
+	PurchaseOrderList.Agreement,
+	PurchaseOrderList.Company,
+	PurchaseOrderList.Currency,
+	PurchaseOrderList.GoodsReceiptBeforePurchaseInvoice,
+	PurchaseOrderList.LegalName,
+	PurchaseOrderList.Partner,
+	PurchaseOrderList.PriceIncludeTax,
+	PurchaseOrderList.Status,
+	PurchaseOrderList.PartnerBankAccount,
+	PurchaseOrderList.UseItemsReceiptScheduling,
+	PurchaseOrderList.Author,
+	PurchaseOrderList.BusinessUnit,
+	PurchaseOrderList.Description,
+	PurchaseOrderList.DocumentAmount,
+	Not PurchaseOrderClosing.Ref IS NULL AS Closed,
+	PurchaseOrderClosing.Ref AS ClosingOrder,
+	CASE WHEN COUNT(DISTINCT PurchaseOrderItemList.Store) = 1 THEN
+		MAX(PurchaseOrderItemList.Store)
+	ELSE UNDEFINED END AS Store
+FROM
+	Document.PurchaseOrder AS PurchaseOrderList
+		LEFT JOIN Document.PurchaseOrderClosing AS PurchaseOrderClosing
 		ON PurchaseOrderClosing.PurchaseOrder = PurchaseOrderList.Ref
 		AND PurchaseOrderClosing.Posted
 		AND PurchaseOrderClosing.CloseOrder
- </queryText>
+		LEFT JOIN Document.PurchaseOrder.ItemList AS PurchaseOrderItemList
+		ON PurchaseOrderItemList.Ref = PurchaseOrderList.Ref
+GROUP BY
+	PurchaseOrderList.Ref,
+	PurchaseOrderList.DeletionMark,
+	PurchaseOrderList.Number,
+	PurchaseOrderList.Date,
+	PurchaseOrderList.Posted,
+	PurchaseOrderList.Agreement,
+	PurchaseOrderList.Company,
+	PurchaseOrderList.Currency,
+	PurchaseOrderList.GoodsReceiptBeforePurchaseInvoice,
+	PurchaseOrderList.LegalName,
+	PurchaseOrderList.Partner,
+	PurchaseOrderList.PriceIncludeTax,
+	PurchaseOrderList.Status,
+	PurchaseOrderList.PartnerBankAccount,
+	PurchaseOrderList.UseItemsReceiptScheduling,
+	PurchaseOrderList.Author,
+	PurchaseOrderList.BusinessUnit,
+	PurchaseOrderList.Description,
+	PurchaseOrderList.DocumentAmount,
+	NOT PurchaseOrderClosing.Ref IS NULL,
+	PurchaseOrderClosing.Ref</queryText>
       <mainTable>Document.PurchaseOrder</mainTable>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>

@@ -321,6 +321,56 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>Store</name>
+      <id>43</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Store</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>StoreExtendedTooltip</name>
+        <id>45</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>StoreContextMenu</name>
+        <id>44</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>BusinessUnit</name>
       <id>37</id>
       <visible>true</visible>
@@ -711,9 +761,31 @@
 	RetailSalesReceipt.BusinessUnit,
 	RetailSalesReceipt.Description,
 	RetailSalesReceipt.DocumentAmount,
-	RetailSalesReceipt.RetailCustomer
+	RetailSalesReceipt.RetailCustomer,
+	CASE WHEN COUNT(DISTINCT RetailSalesReceiptItemList.Store) = 1 THEN
+		MAX(RetailSalesReceiptItemList.Store)
+	ELSE UNDEFINED END AS Store
 FROM
-	Document.RetailSalesReceipt AS RetailSalesReceipt</queryText>
+	Document.RetailSalesReceipt AS RetailSalesReceipt
+		LEFT JOIN Document.RetailSalesReceipt.ItemList AS RetailSalesReceiptItemList
+		ON RetailSalesReceiptItemList.Ref = RetailSalesReceipt.Ref
+GROUP BY
+	RetailSalesReceipt.Ref,
+	RetailSalesReceipt.DeletionMark,
+	RetailSalesReceipt.Number,
+	RetailSalesReceipt.Date,
+	RetailSalesReceipt.Posted,
+	RetailSalesReceipt.Partner,
+	RetailSalesReceipt.LegalName,
+	RetailSalesReceipt.Company,
+	RetailSalesReceipt.Currency,
+	RetailSalesReceipt.Manager,
+	RetailSalesReceipt.BasisDocument,
+	RetailSalesReceipt.Author,
+	RetailSalesReceipt.BusinessUnit,
+	RetailSalesReceipt.Description,
+	RetailSalesReceipt.DocumentAmount,
+	RetailSalesReceipt.RetailCustomer</queryText>
       <mainTable>Document.RetailSalesReceipt</mainTable>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>

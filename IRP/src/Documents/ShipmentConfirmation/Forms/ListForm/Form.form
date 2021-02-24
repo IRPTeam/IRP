@@ -201,6 +201,56 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>Store</name>
+      <id>37</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Store</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>StoreExtendedTooltip</name>
+        <id>39</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>StoreContextMenu</name>
+        <id>38</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>TransactionType</name>
       <id>28</id>
       <visible>true</visible>
@@ -630,9 +680,43 @@
     </edit>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
+      <queryText>SELECT
+	ShipmentConfirmation.Ref,
+	ShipmentConfirmation.DeletionMark,
+	ShipmentConfirmation.Number,
+	ShipmentConfirmation.Date,
+	ShipmentConfirmation.Posted,
+	ShipmentConfirmation.Company,
+	ShipmentConfirmation.LegalName,
+	ShipmentConfirmation.Partner,
+	ShipmentConfirmation.TransactionType,
+	ShipmentConfirmation.Author,
+	ShipmentConfirmation.BusinessUnit,
+	ShipmentConfirmation.Description,
+	CASE WHEN COUNT(DISTINCT ShipmentConfirmationItemList.Store) = 1 THEN
+		MAX(ShipmentConfirmationItemList.Store)
+	ELSE UNDEFINED END AS Store
+FROM
+	Document.ShipmentConfirmation AS ShipmentConfirmation
+		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ShipmentConfirmationItemList
+		ON ShipmentConfirmationItemList.Ref = ShipmentConfirmation.Ref
+GROUP BY
+	ShipmentConfirmation.Ref,
+	ShipmentConfirmation.DeletionMark,
+	ShipmentConfirmation.Number,
+	ShipmentConfirmation.Date,
+	ShipmentConfirmation.Posted,
+	ShipmentConfirmation.Company,
+	ShipmentConfirmation.LegalName,
+	ShipmentConfirmation.Partner,
+	ShipmentConfirmation.TransactionType,
+	ShipmentConfirmation.Author,
+	ShipmentConfirmation.BusinessUnit,
+	ShipmentConfirmation.Description</queryText>
       <mainTable>Document.ShipmentConfirmation</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
+      <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
     </extInfo>

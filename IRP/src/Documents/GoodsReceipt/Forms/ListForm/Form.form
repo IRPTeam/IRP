@@ -201,6 +201,56 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>Store</name>
+      <id>40</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Store</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>StoreExtendedTooltip</name>
+        <id>42</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>StoreContextMenu</name>
+        <id>41</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>TransactionType</name>
       <id>31</id>
       <visible>true</visible>
@@ -630,9 +680,43 @@
     </edit>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
+      <queryText>SELECT
+	GoodsReceipt.Ref,
+	GoodsReceipt.DeletionMark,
+	GoodsReceipt.Number,
+	GoodsReceipt.Date,
+	GoodsReceipt.Posted,
+	GoodsReceipt.Company,
+	GoodsReceipt.LegalName,
+	GoodsReceipt.Partner,
+	GoodsReceipt.TransactionType,
+	GoodsReceipt.Author,
+	GoodsReceipt.BusinessUnit,
+	GoodsReceipt.Description,
+	CASE WHEN COUNT(DISTINCT GoodsReceiptItemList.Store) = 1 THEN
+		MAX(GoodsReceiptItemList.Store)
+	ELSE UNDEFINED END AS Store
+FROM
+	Document.GoodsReceipt AS GoodsReceipt
+		LEFT JOIN Document.GoodsReceipt.ItemList AS GoodsReceiptItemList
+		ON GoodsReceiptItemList.Ref = GoodsReceipt.Ref
+GROUP BY
+	GoodsReceipt.Ref,
+	GoodsReceipt.DeletionMark,
+	GoodsReceipt.Number,
+	GoodsReceipt.Date,
+	GoodsReceipt.Posted,
+	GoodsReceipt.Company,
+	GoodsReceipt.LegalName,
+	GoodsReceipt.Partner,
+	GoodsReceipt.TransactionType,
+	GoodsReceipt.Author,
+	GoodsReceipt.BusinessUnit,
+	GoodsReceipt.Description</queryText>
       <mainTable>Document.GoodsReceipt</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
+      <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
     </extInfo>

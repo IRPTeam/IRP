@@ -348,5 +348,20 @@ When Create information register UserSettings records (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
+* Posting RetailSalesReceipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting RetailReturnReceipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting PriceList
+		Given I open hyperlink "e1cib/list/Document.PriceList"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
 And I close all client application windows
 

@@ -1,0 +1,355 @@
+﻿#language: en
+@tree
+@Positive
+@TestDataBase
+
+Functionality: filling in test data base
+
+Background:
+		Given I open new TestClient session or connect the existing one
+
+
+Scenario: _970001 filling in test data base
+
+When Refill constant ConnectionStatus by value (test data base)
+And I close TestClient session
+Given I open new TestClient session or connect the existing one
+When Create catalog ExternalDataProc objects (test data base)
+* Add ExternalDataProc
+		* VAT
+				Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+				And I go to line in "List" table
+						| 'Description'    |
+						| 'Расчет налогов' |
+				And I select current line in "List" table
+				And I click "Add plugin" button
+				And I select external file "#workingDir#/DataProcessor/TaxCalculateVAT_TR.epf"
+				And I click the button named "FormAddExtDataProc"
+				And I input "" text in "Path to plugin for test" field
+				And I click "Save and close" button
+				And I wait "Plugins (create)" window closing in 5 seconds
+		* Discount
+				Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+				And I go to line in "List" table
+						| 'Description'    |
+						| 'DocumentDiscount' |
+				And I select current line in "List" table
+				And I click "Add plugin" button
+				And I select external file "#workingDir#/DataProcessor/DocumentDiscount.epf"
+				And I click the button named "FormAddExtDataProc"
+				And I input "" text in "Path to plugin for test" field
+				And I click "Save and close" button
+				And I wait "Plugins (create)" window closing in 5 seconds
+		* Contact info
+				Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+				And I go to line in "List" table
+						| 'Description'    |
+						| 'Адрес' |
+				And I select current line in "List" table
+				And I click "Add plugin" button
+				And I select external file "#workingDir#/DataProcessor/InputAddress.epf"
+				And I click the button named "FormAddExtDataProc"
+				And I input "" text in "Path to plugin for test" field
+				And I click "Save and close" button
+				And I wait "Plugins (create)" window closing in 5 seconds
+When Create catalog AddAttributeAndPropertySets objects (test data base)
+When Create catalog AddAttributeAndPropertyValues objects (test data base)
+When Create catalog IDInfoAddresses objects (test data base)
+When Create catalog BankTerms objects (test data base)
+When Create catalog BusinessUnits objects (test data base)
+When Create catalog CancelReturnReasons objects (test data base)
+When Create catalog CashStatementStatuses objects (test data base)
+When Create catalog CashAccounts objects (test data base)
+When Create catalog ChequeBonds objects (test data base)	
+When Create catalog Companies objects (test data base)
+When Create catalog ConfigurationMetadata objects (test data base)
+When Create catalog IDInfoSets objects (test data base)
+When Create catalog Countries objects (test data base)
+When Create catalog Currencies objects (test data base)
+When Create catalog DataBaseStatus objects (test data base)
+When Create catalog ExpenseAndRevenueTypes objects (test data base)
+When Create catalog IntegrationSettings objects (test data base)
+When Create catalog ItemKeys objects (test data base)
+When Create catalog ItemTypes objects (test data base)
+When Create catalog Units objects (test data base)
+When Create catalog Items objects (test data base)
+When Create catalog CurrencyMovementSets objects (test data base)
+When Create catalog ObjectStatuses objects (test data base)
+When Create catalog PartnerSegments objects (test data base)
+When Create catalog Agreements objects (test data base)
+When Create catalog Partners objects (test data base)
+When Create catalog PartnersBankAccounts objects (test data base)
+When Create catalog PaymentTerminals objects (test data base)
+When Create catalog PaymentSchedules objects (test data base)
+When Create catalog PaymentTypes objects (test data base)
+
+When Create catalog PriceTypes objects (test data base)
+When Create catalog RetailCustomers objects (test data base)	
+When Create catalog SpecialOfferTypes objects (test data base)
+When Create catalog SpecialOffers objects (test data base)
+When Create catalog Specifications objects (test data base)
+When Create catalog Stores objects (test data base)
+When Create catalog TaxRates objects (test data base)
+When Create catalog Taxes objects (test data base)
+When Create information register Taxes records (test data base)
+* Tax settings
+		Given I open hyperlink "e1cib/list/Catalog.Companies"
+		And I go to line in "List" table
+						| 'Description'  |
+						| 'Собственная компания 1' |
+		And I select current line in "List" table
+		And I move to "Tax types" tab
+		And I go to line in "CompanyTaxes" table
+						| 'Tax' |
+						| 'НДС' |
+		And I select current line in "CompanyTaxes" table
+		And I click Open button of "Tax" field
+		And I click "Settings" button
+		And I click "Ok" button
+		And I click "Save and close" button
+		And I close all client application windows
+When Create catalog InterfaceGroups objects (test data base)
+When Create catalog AccessGroups objects (test data base)
+When Create catalog AccessProfiles objects (test data base)
+When Create catalog UserGroups objects (test data base)
+When Create catalog Users objects (test data base)
+When Create catalog Workstations objects (test data base)
+When update ItemKeys
+When Create document BankPayment objects (test data base)
+When Create document BankReceipt objects (test data base)
+When Create document Bundling objects (test data base)
+When Create document CashExpense objects (test data base)
+When Create document CashPayment objects (test data base)
+When Create document CashReceipt objects (test data base)
+When Create document CashRevenue objects (test data base)
+When Create document CashTransferOrder objects (test data base)
+When Create document ChequeBondTransaction objects (test data base)
+When Create document ChequeBondTransactionItem objects (test data base)
+When Create document CreditNote objects (test data base)
+When Create document DebitNote objects (test data base)
+When Create document GoodsReceipt objects (test data base)
+When Create document IncomingPaymentOrder objects (test data base)
+When Create document InternalSupplyRequest objects (test data base)
+When Create document InventoryTransfer objects (test data base)
+When Create document InventoryTransferOrder objects (test data base)
+When Create document OpeningEntry objects (test data base)
+When Create document OutgoingPaymentOrder objects (test data base)
+When Create document PhysicalCountByLocation objects (test data base)
+When Create document PhysicalInventory objects (test data base)
+When Create document PlannedReceiptReservation objects (test data base)
+When Create document PriceList objects (test data base)
+When Create document PurchaseInvoice objects (test data base)
+When Create document PurchaseOrder objects (test data base)
+When Create document PurchaseOrderClosing objects (test data base)
+When Create document PurchaseReturn objects (test data base)
+When Create document ReconciliationStatement objects (test data base)
+When Create document RetailReturnReceipt objects (test data base)
+When Create document RetailSalesReceipt objects (test data base)
+When Create document SalesInvoice objects (test data base)
+When Create document SalesOrder objects (test data base)
+When Create document SalesOrderClosing objects (test data base)
+When Create document SalesReturn objects (test data base)
+When Create document SalesReturnOrder objects (test data base)
+When Create document ShipmentConfirmation objects (test data base)
+When Create document StockAdjustmentAsSurplus objects (test data base)
+When Create document StockAdjustmentAsWriteOff objects (test data base)
+When Create document Unbundling objects (test data base)
+When Create document ItemStockAdjustment objects  (test data base)
+When Create document PurchaseReturnOrder objects (test data base)
+When Create chart of characteristic types AddAttributeAndProperty objects (test data base)
+When Create chart of characteristic types IDInfoTypes objects (test data base)
+When Create chart of characteristic types CustomUserSettings objects (test data base)
+When Create chart of characteristic types CurrencyMovementType objects (test data base)
+When Create information register BundleContents records (test data base)
+When Create information register BusinessUnitBankTerms records (test data base)
+When Create information register ChequeBondStatuses records (test data base)
+When Create information register CurrencyRates records (test data base)
+When Create information register Barcodes records (test data base)
+When Create information register PartnerSegments records (test data base)
+When Create information register TaxSettings records (test data base)
+When Create information register UserSettings records (test data base)
+* Posting Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		Then "Opening entries" window is opened
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting Purchase order
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting Purchase invoice
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "5"
+* Posting Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting Sales invoice
+		And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ And Delay "3"
+* Posting Sales return order
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting Sales return
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting Goods receipt
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting Shipment confirmation
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting Stock adjustment as surplus
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting Stock adjustment as write off
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting Bundling
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting Unbundling
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting Inventory transfer order
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting Inventory transfer
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting InternalSupplyRequest
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting PurchaseOrderClosing
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting SalesOrderClosing
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting PlannedReceiptReservation
+		Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting PhysicalInventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting CashPayment
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting BankPayment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting BankReceipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting CashReceipt
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting CashExpense
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting CashRevenue
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting CashTransferOrder
+		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting CreditNote
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting DebitNote
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting ReconciliationStatement
+		Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting ChequeBondTransaction
+		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting IncomingPaymentOrder
+		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting OutgoingPaymentOrder
+		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting PurchaseReturnOrder
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting ItemStockAdjustment
+		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+And I close all client application windows
+

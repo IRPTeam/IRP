@@ -64,7 +64,7 @@ Scenario: _024000 preparation (Sales invoice)
 
 
 
-Scenario: _024001 create document Sales Invoice based on sales order (partial quantity)
+Scenario: _024001 create document Sales Invoice based on sales order (partial quantity, SO-SI)
 	* Select SO
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
@@ -142,7 +142,7 @@ Scenario: _024001 create document Sales Invoice based on sales order (partial qu
   
 		
 
-Scenario: _024002 check filling in Row Id info table in the SI
+Scenario: _024002 check filling in Row Id info table in the SI (SO-SI)
 	* Select SI
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
@@ -256,7 +256,7 @@ Scenario: _024002 check filling in Row Id info table in the SI
 
 
 	
-Scenario: _024003 copy SI (based on SO) and check filling in Row Id info table
+Scenario: _024003 copy SI (based on SO) and check filling in Row Id info table (SI)
 	* Copy SI
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
@@ -308,7 +308,7 @@ Scenario: _024003 copy SI (based on SO) and check filling in Row Id info table
 
 	
 
-Scenario: _024025 create document Sales Invoice without Sales order and check Row ID
+Scenario: _024025 create document Sales Invoice without Sales order and check Row ID (SI-SC)
 	When create SalesInvoice024025
 	* Check Row Id
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"

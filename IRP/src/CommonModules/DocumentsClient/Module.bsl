@@ -1757,7 +1757,10 @@ Function GetOpenSettingsStructure() Export
 EndFunction
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
-	OffersClient.RecalculateTaxAndOffers(Object, Form);
+	If CommonFunctionsClientServer.ObjectHasProperty(Form, "TaxAndOffersCalculated") Then
+		OffersClient.RecalculateTaxAndOffers(Object, Form);
+	EndIf;
+	
 	RowIDInfoClient.DeleteRows(Object, Form);	
 EndProcedure
 

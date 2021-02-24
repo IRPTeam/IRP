@@ -144,7 +144,6 @@ When Create document RetailReturnReceipt objects (test data base)
 When Create document RetailSalesReceipt objects (test data base)
 When Create document SalesInvoice objects (test data base)
 When Create document SalesOrder objects (test data base)
-When Create document SalesOrderClosing objects (test data base)
 When Create document SalesReturn objects (test data base)
 When Create document SalesReturnOrder objects (test data base)
 When Create document ShipmentConfirmation objects (test data base)
@@ -259,6 +258,7 @@ When Create information register UserSettings records (test data base)
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
 * Posting SalesOrderClosing
+		When Create document SalesOrderClosing objects (test data base)
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"

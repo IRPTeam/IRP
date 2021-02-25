@@ -29,22 +29,10 @@ EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") Then
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesOrder" Then
-			Filling_BasedOnSalesOrder(FillingData);
-		ElsIf FillingData.Property("BasedOn") And FillingData.BasedOn = "ShipmentConfirmation" Then
-			Filling_BasedOnShipmentConfirmation(FillingData);
-		EndIf;
+		FillPropertyValues(ThisObject, FillingData, 
+			"Partner, Company, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName");
+		RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 	EndIf;
-EndProcedure
-
-Procedure Filling_BasedOnSalesOrder(FillingData)
-	FillPropertyValues(ThisObject, FillingData, "Partner, Company, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName");
-	RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
-EndProcedure
-
-Procedure Filling_BasedOnShipmentConfirmation(FillingData)
-	FillPropertyValues(ThisObject, FillingData, "Partner, Company, LegalName");
-	RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

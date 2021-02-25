@@ -1467,25 +1467,52 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData, Separate
 	
 	UniqueRows = Tables.ItemList.Copy();
 	UniqueRows.GroupBy(SeparatorColumns);
+	
+	FullFilledUniqueRows = New Array();
+	For Each UniqueRow In UniqueRows Do
+		AllColumnsIsNotUndefined = True;
+		For Each Column In UniqueRows.Columns Do
+			If UniqueRow[Column.Name] = Undefined Then
+				AllColumnsIsNotUndefined = False;
+				Break;
+			EndIf;
+		EndDo;
+		
+		If AllColumnsIsNotUndefined Then
+			FullFilledUniqueRows.Add(UniqueRow);
+		EndIf;	
+	EndDo;
+	
+	If FullFilledUniqueRows.Count() = 1 Then
+		For Each Column In UniqueRows.Columns Do
+			For Each UniqueRow In UniqueRows Do
+				UniqueRow[Column.Name] = FullFilledUniqueRows[0][Column.Name]; 
+			EndDo;
+			For Each RowItemList In Tables.ItemList Do
+				RowItemList[Column.Name] = FullFilledUniqueRows[0][Column.Name];
+			EndDo;
+		EndDo;
+		UniqueRows.GroupBy(SeparatorColumns);
+	EndIf;	
 		
 	MainFilter = New Structure(SeparatorColumns);
 	ArrayOfFillingValues = New Array();
 	
-	For Each Row_UniqueRow In UniqueRows Do
-		FillPropertyValues(MainFilter, Row_UniqueRow);
+	For Each UniqueRow In UniqueRows Do
+		FillPropertyValues(MainFilter, UniqueRow);
 		TablesFilters = New Array();
 		
 		FillingValues = New Structure(SeparatorColumns);
-		FillPropertyValues(FillingValues, Row_UniqueRow);			
+		FillPropertyValues(FillingValues, UniqueRow);			
 		
 		FillingValues.Insert("ItemList", New Array());
 		For Each TableName_Refreshable In TableNames_Refreshable Do
 			FillingValues.Insert(TableName_Refreshable, New Array());
 		EndDo;
 				
-		For Each Row_ItemList In Tables.ItemList.Copy(MainFilter) Do
-			TablesFilters.Add(New Structure("Ref, Key", Row_ItemList.Ref, Row_ItemList.Key));			
-			FillingValues.ItemList.Add(ValueTableRowToStructure(Tables.ItemList.Columns, Row_ItemList));
+		For Each RowItemList In Tables.ItemList.Copy(MainFilter) Do
+			TablesFilters.Add(New Structure("Ref, Key", RowItemList.Ref, RowItemList.Key));			
+			FillingValues.ItemList.Add(ValueTableRowToStructure(Tables.ItemList.Columns, RowItemList));
 		EndDo;
 		
 		For Each TableFilter In TablesFilters Do

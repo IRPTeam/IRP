@@ -103,6 +103,13 @@ EndProcedure
 
 #Region RowID
 
+Procedure FillRowID(Source, Row, RowItemList)
+	Row.Key      = RowItemList.Key;
+	Row.RowID    = RowItemList.Key;
+	Row.Quantity = RowItemList.QuantityInBaseUnit;
+	Row.RowRef = CreateRowIDCatalog(Row, RowItemList, Source);	
+EndProcedure
+
 Procedure FillRowID_SO(Source)
 	For Each RowItemList In Source.ItemList Do
 	
@@ -117,14 +124,9 @@ Procedure FillRowID_SO(Source)
 		ElsIf IDInfoRows.Count() = 1 Then
 			Row = IDInfoRows[0];
 		EndIf;
-		
-		Row.Key      = RowItemList.Key;
-		Row.RowID    = RowItemList.Key;
-		Row.Quantity = RowItemList.QuantityInBaseUnit;
-		
+
+		FillRowID(Source, Row, RowItemList);
 		Row.NextStep = GetNextStep_SO(Source, RowItemList, Row);
-		
-		Row.RowRef = CreateRowIDCatalog(Row, RowItemList, Source);
 	EndDo;
 EndProcedure
 
@@ -147,22 +149,16 @@ Procedure FillRowID_SI(Source)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			Row.Key      = RowItemList.Key;
-			Row.RowID    = RowItemList.Key;
-			Row.Quantity = RowItemList.QuantityInBaseUnit;
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_SI(Source, RowItemList, Row);
-			Row.RowRef = CreateRowIDCatalog(Row, RowItemList, Source);
 		Else
 			For Each Row In IDInfoRows Do
 				If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
 					Row.NextStep = GetNextStep_SI(Source, RowItemList, Row);
 				 	Continue;
-		 	  	EndIf;
-				Row.Key      = RowItemList.Key;
-				Row.RowID    = RowItemList.Key;
-				Row.Quantity = RowItemList.QuantityInBaseUnit;
+				EndIf;
+				FillRowID(Source, Row, RowItemList);
 				Row.NextStep = GetNextStep_SI(Source, RowItemList, Row);
-				Row.RowRef = CreateRowIDCatalog(Row, RowItemList, Source);
 			EndDo;
 		EndIf;
 	EndDo;
@@ -194,12 +190,8 @@ Procedure FillRowID_SC(Source)
 			EndIf;
 		EndIf;
 
-		Row.Key      = RowItemList.Key;
-		Row.RowID    = RowItemList.Key;
-		Row.Quantity = RowItemList.QuantityInBaseUnit;
+		FillRowID(Source, Row, RowItemList);
 		Row.NextStep = GetNextStep_SC(Source, RowItemList, Row);
-		
-		Row.RowRef = CreateRowIDCatalog(Row, RowItemList, Source);
 	EndDo;
 EndProcedure
 

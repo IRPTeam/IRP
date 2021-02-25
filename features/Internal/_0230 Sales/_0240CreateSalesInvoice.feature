@@ -56,17 +56,18 @@ Scenario: _024000 preparation (Sales invoice)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-		When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
-<<<<<<< Updated upstream
-		And I execute 1C:Enterprise script at server
- 			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
-=======
-		When Create document SalesOrder objects (SC before SI, creation based on)
-		And I execute 1C:Enterprise script at server
- 			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.SalesOrder.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
->>>>>>> Stashed changes
-
+	When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
+	When Create document SalesOrder objects (SC before SI, creation based on)
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.SalesOrder.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create document ShipmentConfirmation objects (creation based on, for SI 15)
+	When Create document ShipmentConfirmation objects (creation based on, without SO and SI)
+	And I execute 1C:Enterprise script at server
+		| "Documents.ShipmentConfirmation.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.ShipmentConfirmation.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.ShipmentConfirmation.FindByNumber(17).GetObject().Write(DocumentWriteMode.Posting);" |
+	
 
 
 
@@ -308,18 +309,172 @@ Scenario: _024003 copy SI (based on SO) and check filling in Row Id info table (
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I close all client application windows			
 		
-<<<<<<< Updated upstream
-// Scenario: _024004 create SI based on SO, with SC
-=======
-Scenario: _024004 create SI based on SO, with 2 SC (SC>SO + new string)
-	
 
->>>>>>> Stashed changes
+Scenario: _024004 create SI based on 2 SC with SO (SC>SO + new string)
+	* Select SC
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '15'      |
+		And I move one line down in "List" table and select line
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                                   | 'Use'                                                | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 15 dated 01.02.2021 19:50:45'           | 'Sales order 15 dated 01.02.2021 19:50:45'           | ''         | ''     | ''       | ''         |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '7,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
+			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | ''         | ''     | ''       | ''         |
+			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '4,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''         | ''     | ''       | ''         |
+			| 'Shirt, 38/Black'                                    | 'Yes'                                                | '2,000'    | 'pcs'  | ''       | ''         |
+		Then the number of "BasisesTree" table lines is "равно" "9"
+	* Create SI
+		And I click "Ok" button
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
+		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+		And "ItemList" table contains lines
+			| 'Business unit'           | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' |
+			| 'Distribution department' | 'Basic Price Types'       | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '75,36'      | '520,00' | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+			| 'Distribution department' | 'Basic Price Types'       | 'Shirt' | '36/Red'   | 'No'                 | ''                   | '11,000' | 'pcs'  | '355,04'     | '350,00' | '18%' | '122,50'        | '1 972,46'   | '2 327,50'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+			| 'Distribution department' | 'en description is empty' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '2,000'  | 'pcs'  | '152,54'     | '500,00' | '18%' | ''              | '847,46'     | '1 000,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+			| 'Distribution department' | 'Basic Price Types'       | 'Shirt' | '38/Black' | 'No'                 | ''                   | '2,000'  | 'pcs'  | '106,78'     | '350,00' | '18%' | ''              | '593,22'     | '700,00'       | ''                    | 'Store 02' | ''              | 'Yes'                       | ''       | ''                                         | 'Revenue'      |
+		Then the number of "ItemList" table lines is "равно" "4"
+		And I close all client application windows
+		
+Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string from SO without SC)
+	* Select SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '15'      |
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                                   | 'Use'                                                | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 15 dated 01.02.2021 19:50:45'           | 'Sales order 15 dated 01.02.2021 19:50:45'           | ''         | ''     | ''       | ''         |
+			| 'Service, Interner'                                  | 'Yes'                                                | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '7,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
+			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | ''         | ''     | ''       | ''         |
+			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '4,000'    | 'pcs'  | '350,00' | 'TRY'      |	
+	* Select items for SI and check creation
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '10,000'   | 'Dress, XS/Blue'   | 'pcs'  | 'Yes' |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
+		And "ItemList" table contains lines
+			| '#' | 'Business unit'           | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' |
+			| '1' | 'Front office'            | 'en description is empty' | 'Service' | 'Interner' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+			| '2' | 'Distribution department' | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '75,36'      | '520,00' | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+			| '3' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '11,000' | 'pcs'  | '355,04'     | '350,00' | '18%' | '122,50'        | '1 972,46'   | '2 327,50'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+			| '4' | 'Distribution department' | 'en description is empty' | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '2,000'  | 'pcs'  | '152,54'     | '500,00' | '18%' | ''              | '847,46'     | '1 000,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+		Then the number of "ItemList" table lines is "равно" "4"
+		And I close current window
+	* Create SI for all items from SO and check creation
+		And I go to line in "List" table
+			| 'Number'  |
+			| '15'      |
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| '#' | 'Business unit'           | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' |
+			| '1' | 'Front office'            | 'en description is empty' | 'Service' | 'Interner' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+			| '2' | ''                        | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '10,000' | 'pcs'  | '793,22'     | '520,00' | '18%' | ''              | '4 406,78'   | '5 200,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | ''             |
+			| '3' | 'Distribution department' | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '75,36'      | '520,00' | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+			| '4' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '11,000' | 'pcs'  | '355,04'     | '350,00' | '18%' | '122,50'        | '1 972,46'   | '2 327,50'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+			| '5' | 'Distribution department' | 'en description is empty' | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '2,000'  | 'pcs'  | '152,54'     | '500,00' | '18%' | ''              | '847,46'     | '1 000,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+		Then the number of "ItemList" table lines is "равно" "5"
+		And I close current window
 
 
 
+Scenario: _024006 create SI based on 2 SO with SC
+	* Select SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '3'      |
+		And I move one line down in "List" table and select line
+		And I click the button named "FormDocumentSalesInvoiceGenerate"	
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                                   | 'Use'                                                | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 3 dated 27.01.2021 19:50:45'            | 'Sales order 3 dated 27.01.2021 19:50:45'            | ''         | ''     | ''       | ''         |
+			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '5,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Service, Interner'                                  | 'Yes'                                                | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
+			| 'Sales order 15 dated 01.02.2021 19:50:45'           | 'Sales order 15 dated 01.02.2021 19:50:45'           | ''         | ''     | ''       | ''         |
+			| 'Service, Interner'                                  | 'Yes'                                                | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '7,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
+			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | ''         | ''     | ''       | ''         |
+			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '4,000'    | 'pcs'  | '350,00' | 'TRY'      |
+		Then the number of "BasisesTree" table lines is "равно" "12"
+		And I click "Ok" button
+	* Create SI and check creation
+		And "ItemList" table contains lines
+			| '#' | 'Business unit'           | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' |
+			| '1' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '5,000'  | 'pcs'  | '253,60'     | '350,00' | '18%' | '87,50'         | '1 408,90'   | '1 662,50'     | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'Revenue'      |
+			| '2' | 'Front office'            | 'en description is empty' | 'Service' | 'Interner' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'Revenue'      |
+			| '3' | 'Front office'            | 'en description is empty' | 'Service' | 'Interner' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+			| '4' | ''                        | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '10,000' | 'pcs'  | '793,22'     | '520,00' | '18%' | ''              | '4 406,78'   | '5 200,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | ''             |
+			| '5' | 'Distribution department' | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '75,36'      | '520,00' | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+			| '6' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '11,000' | 'pcs'  | '355,04'     | '350,00' | '18%' | '122,50'        | '1 972,46'   | '2 327,50'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+			| '7' | 'Distribution department' | 'en description is empty' | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '2,000'  | 'pcs'  | '152,54'     | '500,00' | '18%' | ''              | '847,46'     | '1 000,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+		Then the number of "ItemList" table lines is "равно" "7"
+		And I close all client application windows
 
-	
+Scenario: _024007 create SI based on SC	without SO
+	* Select SC
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '17'      |
+		And I click the button named "FormDocumentSalesInvoiceGenerate"	
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                                   | 'Use'                                                | 'Quantity' | 'Unit' | 'Price' | 'Currency' |
+			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''         | ''     | ''      | ''         |
+			| 'Dress, S/Yellow'                                    | 'Yes'                                                | '10,000'   | 'pcs'  | ''      | ''         |
+			| 'Dress, S/Yellow'                                    | 'Yes'                                                | '5,000'    | 'pcs'  | ''      | ''         |
+			| 'Dress, L/Green'                                     | 'Yes'                                                | '8,000'    | 'pcs'  | ''      | ''         |
+		Then the number of "BasisesTree" table lines is "равно" "4"
+		And I click "Ok" button
+	* Create SI and check creation
+		And "ItemList" table contains lines
+			| '#' | 'Business unit' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' |
+			| '1' | ''              | ''           | 'Dress' | 'S/Yellow' | 'No'                 | ''                   | '15,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | ''            | ''             |
+			| '2' | ''              | ''           | 'Dress' | 'L/Green'  | 'No'                 | ''                   | '8,000'  | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | ''            | ''             |
+		Then the number of "ItemList" table lines is "равно" "2"
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ShipmentConfirmationsTree" table became equal
+			| 'Item'  | 'Shipment confirmation'                              | 'Item key' | 'Invoice' | 'SC'     | 'Q'      |
+			| 'Dress' | ''                                                   | 'S/Yellow' | '15,000'  | '15,000' | '15,000' |
+			| ''      | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''         | ''        | '10,000' | '10,000' |
+			| ''      | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''         | ''        | '5,000'  | '5,000'  |
+			| 'Dress' | ''                                                   | 'L/Green'  | '8,000'   | '8,000'  | '8,000'  |
+			| ''      | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''         | ''        | '8,000'  | '8,000'  |
+		And I close all client application windows
+				
+
 
 Scenario: _024025 create document Sales Invoice without Sales order and check Row ID (SI-SC)
 	When create SalesInvoice024025
@@ -408,10 +563,7 @@ Scenario: _024042 check totals in the document Sales invoice
 
 
 
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 Scenario: _300505 check connection to Sales invoice report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	* Form report Related documents
@@ -422,32 +574,4 @@ Scenario: _300505 check connection to Sales invoice report "Related documents"
 		And Delay 1
 	Then "Related documents" window is opened
 	And I close all client application windows
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
 

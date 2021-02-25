@@ -370,7 +370,7 @@ Function ExtractData_SO(BasisesTable, DataReceiver)
 		|	ItemList.BusinessUnit AS BusinessUnit,
 		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.Detail AS Detail,
-		|	FALSE AS UseShipmentConfirmation,
+		|	ItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
 		|	0 AS Quantity,
 		|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
 		|	ISNULL(ItemList.Price, 0) AS Price,

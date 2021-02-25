@@ -57,8 +57,15 @@ Scenario: _024000 preparation (Sales invoice)
 	* Tax settings
 		When filling in Tax settings for company
 		When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
+<<<<<<< Updated upstream
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+=======
+		When Create document SalesOrder objects (SC before SI, creation based on)
+		And I execute 1C:Enterprise script at server
+ 			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesOrder.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
+>>>>>>> Stashed changes
 
 
 
@@ -301,7 +308,13 @@ Scenario: _024003 copy SI (based on SO) and check filling in Row Id info table (
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I close all client application windows			
 		
+<<<<<<< Updated upstream
 // Scenario: _024004 create SI based on SO, with SC
+=======
+Scenario: _024004 create SI based on SO, with 2 SC (SC>SO + new string)
+	
+
+>>>>>>> Stashed changes
 
 
 
@@ -395,6 +408,10 @@ Scenario: _024042 check totals in the document Sales invoice
 
 
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 Scenario: _300505 check connection to Sales invoice report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	* Form report Related documents

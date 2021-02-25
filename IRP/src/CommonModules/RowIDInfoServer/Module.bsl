@@ -189,32 +189,43 @@ Procedure FillRowID_SC(Source)
 			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_SC(Source, RowItemList, Row);
 		Else
-
-			For Each Row In IDInfoRows Do
-				If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
-					Row.NextStep = GetNextStep_SC(Source, RowItemList, Row);
-					BalanceQuantity = GetBalanceQuantity(Source, Row); 
-					Row.Quantity = Min(BalanceQuantity, Row.QUantity);
-				Else
-					Source.RowIDInfo.Delete(Row);
+			
+			IDInfoRowsTable = Source.RowIDInfo.Unload().Copy(New Structure("Key", RowItemList.Key));
+			CurrentStep = Undefined;
+			For Each Row In IDInfoRowsTable Do
+				If ValueIsFilled(Row.CurrentStep) Then
+					CurrentStep = Row.CurrentStep;
+					Break;
 				EndIf;
 			EndDo;
-			
-			IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
-			TotalQuantity = 0;
+			IDInfoRowsTable.FillValues(CurrentStep, "CurrentStep");
+			IDInfoRowsTable.GroupBy("Key, RowID, Basis, CurrentStep, RowRef, BasisKey");
 			For Each Row In IDInfoRows Do
-				TotalQuantity = TotalQuantity + Row.Quantity;
+		    	Source.RowIDInfo.Delete(Row);
 			EndDo;
-			
+			TotalQuantity = 0;
+			For Each Row In IDInfoRowsTable Do
+				NewRow = Source.RowIDInfo.Add();
+				FillPropertyValues(NewRow, Row);
+				NewRow.NextStep = GetNextStep_SC(Source, RowItemList, NewRow);
+				If ValueIsFilled(Row.Basis) Then
+			    	BalanceQuantity = GetBalanceQuantity(Source, Row);
+					NewRow.Quantity = Min(BalanceQuantity, RowItemList.QuantityInBaseUnit);
+				Else
+					NewRow.Quantity = RowItemList.QuantityInBaseUnit;
+				EndIf;
+				TotalQuantity = TotalQuantity + NewRow.Quantity;
+			EndDo;
 			If RowItemList.QuantityInBaseUnit > TotalQuantity Then
-				Row = Source.RowIDInfo.Add();
-				FillRowID(Source, Row, RowItemList);
-				Row.Quantity = RowItemList.QuantityInBaseUnit - TotalQuantity;
-				Row.NextStep = Catalogs.MovementRules.SI;
-			EndIf;
-			
+				For Each Row In IDInfoRowsTable Do
+					NewRow = Source.RowIDInfo.Add();
+					FillPropertyValues(NewRow, Row);
+					NewRow.CurrentStep = Undefined;
+					NewRow.NextStep = Catalogs.MovementRules.SI;
+					NewRow.Quantity = RowItemList.QuantityInBaseUnit - TotalQuantity;
+				EndDo;	
+			EndIf;		
 		EndIf;
-
 	EndDo;
 EndProcedure
 
@@ -688,7 +699,7 @@ Function ExtractData_SO_SC(BasisesTable, DataReceiver)
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT ALLOWED
+		|SELECT DISTINCT ALLOWED
 		|	BasisesTable.Key,
 		|	RowIDInfo.BasisKey AS BasisKey,
 		|	BasisesTable.RowID,
@@ -1232,7 +1243,7 @@ Function GetBasisesTable(StepArray, FilterValues, BasisesTypes)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT DISTINCT
 	|	AllData.ItemKey,
 	|	AllData.Item,
 	|	AllData.Store,

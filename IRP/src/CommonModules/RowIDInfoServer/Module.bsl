@@ -385,7 +385,9 @@ Function ExtractData_SO(BasisesTable, DataReceiver)
 		|	ItemList.BusinessUnit AS BusinessUnit,
 		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.Detail AS Detail,
-		|	ItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
+		|	ItemList.Store.UseShipmentConfirmation 
+		|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) 
+		|	AS UseShipmentConfirmation,
 		|	0 AS Quantity,
 		|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
 		|	ISNULL(ItemList.Price, 0) AS Price,
@@ -1825,7 +1827,7 @@ EndFunction
 
 Procedure CreateBasisesTreeReverseRecursive(BasisesInfo, TreeRows, Level)
 	If BasisesInfo.Basis <> BasisesInfo.RowRef.Basis Then
-		ParentBasisInfo = GetBasisesInfo(BasisesInfo.RowRef.Basis, BasisesInfo.BasisKey, BasisesInfo.RowID);
+		ParentBasisInfo = GetBasisesInfo(BasisesInfo.ParentBasis, BasisesInfo.BasisKey, BasisesInfo.RowID);
 		Level = Level + 1;
 		NewTreeRow = TreeRows.Add();
 		NewTreeRow.Level = Level;
@@ -1849,6 +1851,7 @@ Function GetBasisesInfo(Basis, BasisKey, RowID)
 	|	RowIDInfo.RowRef AS RowRef,
 	|	RowIDInfo.BasisKey AS BasisKey,
 	|	RowIDInfo.RowID AS RowID,
+	|	RowIDInfo.Basis AS ParentBasis,
 	|	ItemList.Key AS Key,
 	|	ItemList.Price AS Price,
 	|	ItemList.Ref.Currency AS Currency,
@@ -1862,6 +1865,7 @@ Function GetBasisesInfo(Basis, BasisKey, RowID)
 	|		AND ItemList.Key = &BasisKey
 	|		AND RowIDInfo.Key = ItemList.Key
 	|		AND RowIDInfo.Ref = ItemList.Ref
+	|		AND RowIDInfo.RowID = &RowID
 	|
 	|UNION ALL
 	|
@@ -1870,6 +1874,7 @@ Function GetBasisesInfo(Basis, BasisKey, RowID)
 	|	RowIDInfo.RowRef,
 	|	RowIDInfo.BasisKey,
 	|	RowIDInfo.RowID,
+	|	RowIDInfo.Basis AS ParentBasis,
 	|	ItemList.Key,
 	|	0,
 	|	UNDEFINED,
@@ -1892,6 +1897,7 @@ Function GetBasisesInfo(Basis, BasisKey, RowID)
 	|	RowIDInfo.RowRef,
 	|	RowIDInfo.BasisKey,
 	|	RowIDInfo.RowID,
+	|	RowIDInfo.Basis AS ParentBasis,
 	|	ItemList.Key,
 	|	ItemList.Price,
 	|	ItemList.Ref.Currency,
@@ -1904,14 +1910,15 @@ Function GetBasisesInfo(Basis, BasisKey, RowID)
 	|		AND RowIDInfo.Key = &BasisKey
 	|		AND ItemList.Key = &BasisKey
 	|		AND RowIDInfo.Key = ItemList.Key
-	|		AND RowIDInfo.Ref = ItemList.Ref";
+	|		AND RowIDInfo.Ref = ItemList.Ref
+	|		AND RowIDInfo.RowID = &RowID";
 	
 	Query.SetParameter("Basis"    , Basis);
 	Query.SetParameter("BasisKey" , BasisKey);
 	Query.SetParameter("RowID"    , RowID);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
-	BasisInfo = New Structure("Key, Basis, RowRef, RowID, BasisKey, Price, Currency, Unit");
+	BasisInfo = New Structure("Key, Basis, RowRef, RowID, ParentBasis, BasisKey, Price, Currency, Unit");
 	If QuerySelection.Next() Then
 		FillPropertyValues(BasisInfo, QuerySelection);
 	EndIf;

@@ -405,13 +405,17 @@ $VanessaRun = {
     Write-Host "##teamcity[testSuiteFinished name='$elementTag' flowId='$elementTag']"
     Write-Host "##teamcity[flowFinished flowId='$elementTag']"
     Remove-Desktop -Desktop $NewD -Verbose
-
+    
+    Write-Host "publishArtifacts '$workingDir/$elementTag.zip => DataBase'"
+	Compress-Archive -Path "$workingDir/$FolderForAllArtefact/AllSteps/$elementTag/1Cv8.1CD" -DestinationPath "$workingDir/$elementTag.zip"
+    Write-Host "##teamcity[publishArtifacts '$workingDir/$elementTag.zip => DataBase']"
+    
+    Write-Host "publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure'"
     &$AllureBatFilePath generate "$allurePath/$elementTag" --clean -o "$workingDir/$FolderForAllArtefact/allureTag/$elementTag"
     Compress-Archive -Path "$workingDir/$FolderForAllArtefact/allureTag/$elementTag/*" -DestinationPath "$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip"
     Write-Host "##teamcity[publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure']"
 
-	Compress-Archive -Path "$workingDir/$FolderForAllArtefact/AllSteps/$elementTag/1Cv8.1CD" -DestinationPath "$workingDir/$elementTag.zip"
-    Write-Host "##teamcity[publishArtifacts '$workingDir/$elementTag.zip => DataBase']"
+
 }
 
 $JobArray = @{}

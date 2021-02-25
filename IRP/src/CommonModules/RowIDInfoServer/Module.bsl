@@ -1750,7 +1750,7 @@ Function CreateBasisesTreeReverse(BasisesTable) Export
 	
 	For Each TableRow In BasisesTable Do
 		
-		BasisesInfo = GetBasisesInfo(TableRow.Basis, TableRow.BasisKey);
+		BasisesInfo = GetBasisesInfo(TableRow.Basis, TableRow.BasisKey, TableRow.RowID);
 			
 		//top level
 		Level = 1;
@@ -1783,7 +1783,7 @@ EndFunction
 
 Procedure CreateBasisesTreeReverseRecursive(BasisesInfo, TreeRows, Level)
 	If BasisesInfo.Basis <> BasisesInfo.RowRef.Basis Then
-		ParentBasisInfo = GetBasisesInfo(BasisesInfo.RowRef.Basis, BasisesInfo.BasisKey);
+		ParentBasisInfo = GetBasisesInfo(BasisesInfo.RowRef.Basis, BasisesInfo.BasisKey, BasisesInfo.RowID);
 		Level = Level + 1;
 		NewTreeRow = TreeRows.Add();
 		NewTreeRow.Level = Level;
@@ -1799,7 +1799,7 @@ Procedure CreateBasisesTreeReverseRecursive(BasisesInfo, TreeRows, Level)
 	EndIf;
 EndProcedure
 
-Function GetBasisesInfo(Basis, BasisKey)
+Function GetBasisesInfo(Basis, BasisKey, RowID)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -1841,6 +1841,7 @@ Function GetBasisesInfo(Basis, BasisKey)
 	|		AND ItemList.Key = &BasisKey
 	|		AND RowIDInfo.Key = ItemList.Key
 	|		AND RowIDInfo.Ref = ItemList.Ref
+	|		AND RowIDInfo.RowID = &RowID
 	|
 	|UNION ALL
 	|
@@ -1863,8 +1864,9 @@ Function GetBasisesInfo(Basis, BasisKey)
 	|		AND RowIDInfo.Key = ItemList.Key
 	|		AND RowIDInfo.Ref = ItemList.Ref";
 	
-	Query.SetParameter("Basis", Basis);
-	Query.SetParameter("BasisKey", BasisKey);
+	Query.SetParameter("Basis"    , Basis);
+	Query.SetParameter("BasisKey" , BasisKey);
+	Query.SetParameter("RowID"    , RowID);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	BasisInfo = New Structure("Key, Basis, RowRef, RowID, BasisKey, Price, Currency, Unit");

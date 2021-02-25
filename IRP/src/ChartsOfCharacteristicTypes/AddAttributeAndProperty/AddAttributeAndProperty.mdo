@@ -41,12 +41,14 @@
       <dateFractions>Date</dateFractions>
     </dateQualifiers>
   </type>
+  <hierarchical>true</hierarchical>
   <foldersOnTop>true</foldersOnTop>
   <codeAllowedLength>Variable</codeAllowedLength>
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>BothWays</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>ChartOfCharacteristicTypes.AddAttributeAndProperty.Form.ItemForm</defaultObjectForm>
+  <defaultFolderForm>ChartOfCharacteristicTypes.AddAttributeAndProperty.Form.GroupForm</defaultFolderForm>
   <defaultListForm>ChartOfCharacteristicTypes.AddAttributeAndProperty.Form.ListForm</defaultListForm>
   <defaultChoiceForm>ChartOfCharacteristicTypes.AddAttributeAndProperty.Form.ChoiceForm</defaultChoiceForm>
   <attributes uuid="a46de28d-274c-4547-a6fd-6e426d8be0b0">
@@ -102,6 +104,15 @@
     <synonym>
       <key>en</key>
       <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="3812a981-a428-45ce-9ef3-67f2529720c8">
+    <name>GroupForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

@@ -3,21 +3,21 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.MainFilter = Parameters.Filter;
 	
-	For Each Row_IdInfo In Parameters.TablesInfo.RowIDInfoRows Do
+	For Each RowIdInfo In Parameters.TablesInfo.RowIDInfoRows Do
 		NewRow = ThisObject.ResultsTable.Add();
-		FillPropertyValues(NewRow, Row_IDInfo);
-		For Each Row_ItemList In Parameters.TablesInfo.ItemListRows Do
-			If Row_IdInfo.Key = Row_ItemList.Key Then
-				FillPropertyValues(NewRow, Row_ItemList, "ItemKey, Item, Store");
-				NewRow.BasisUnit = ?(ValueIsFilled(Row_ItemList.ItemKey.Unit), 
-				Row_ItemList.ItemKey.Unit, Row_ItemList.ItemKey.Item.Unit);
+		FillPropertyValues(NewRow, RowIdInfo);
+		For Each RowItemList In Parameters.TablesInfo.ItemListRows Do
+			If RowIdInfo.Key = RowItemList.Key Then
+				FillPropertyValues(NewRow, RowItemList, "ItemKey, Item, Store");
+				NewRow.BasisUnit = ?(ValueIsFilled(RowItemList.ItemKey.Unit), 
+				RowItemList.ItemKey.Unit, RowItemList.ItemKey.Item.Unit);
 			EndIf;
 		EndDo;
 	EndDo;
 	
 	FillItemListRows(Parameters.TablesInfo.ItemListRows);
 	FillResultsTree(Parameters.SelectedRowInfo.SelectedRow);
-	FillDocumentsTree(Parameters.SelectedRowInfo.FilterBySelectedRow);
+	FillBasisesTree(Parameters.SelectedRowInfo.FilterBySelectedRow);
 EndProcedure
 
 &AtClient
@@ -27,7 +27,7 @@ EndProcedure
 
 &AtClient
 Procedure ExpandAllTrees() Export
-	RowIDInfoClient.ExpandTree(Items.DocumentsTree, ThisObject.DocumentsTree.GetItems());
+	RowIDInfoClient.ExpandTree(Items.BasisesTree, ThisObject.BasisesTree.GetItems());
 	RowIDInfoClient.ExpandTree(Items.ResultsTree, ThisObject.ResultsTree.GetItems());
 	SetButtonsEnabled();
 EndProcedure
@@ -38,7 +38,7 @@ Procedure ItemListRowsOnActivateRow(Item)
 EndProcedure
 
 &AtClient
-Procedure DocumentsTreeOnActivateRow(Item)
+Procedure BasisesTreeOnActivateRow(Item)
 	SetButtonsEnabled();		
 EndProcedure
 
@@ -57,11 +57,9 @@ EndProcedure
 Procedure RefreshTrees()
 	SelectedRowInfo = RowIDInfoClient.GetSelectedRowInfo(Items.ItemListRows.CurrentData);
 	FillResultsTree(SelectedRowInfo.SelectedRow);
-	FillDocumentsTree(SelectedRowInfo.FilterBySelectedRow);
-		
-	SetButtonsEnabled();	
-	RowIDInfoClient.ExpandTree(Items.ResultsTree, ThisObject.ResultsTree.GetItems());
-	RowIDInfoClient.ExpandTree(Items.DocumentsTree, ThisObject.DocumentsTree.GetItems());
+	FillBasisesTree(SelectedRowInfo.FilterBySelectedRow);
+	
+	ExpandAllTrees();
 EndProcedure	
 
 &AtServer
@@ -69,58 +67,54 @@ Procedure FillItemListRows(ItemListRows)
 	For Each Row In ItemListRows Do
 		NewRow = ThisObject.ItemListRows.Add();
 		FillPropertyValues(NewRow, Row);
-		NewRow.RowPresentation = 
-		"" + Row.Item + ", " + Row.ItemKey + ", " + Row.Store;
+		NewRow.RowPresentation = "" + Row.Item + ", " + Row.ItemKey;
 		NewRow.Picture = 0;
+	EndDo;
+EndProcedure
+
+&AtServer
+Procedure SetAlreadyLinkedInfo(TreeRows)
+	For Each TreeRow In TreeRows Do
+		If TreeRow.DeepLevel Then
+			ThisObject.LinkedRowID = TreeRow.RowID;
+			If TypeOf(TreeRow.Basis) = Type("DocumentRef.ShipmentConfirmation")
+				Or TypeOf(TreeRow.Basis) = Type("DocumentRef.GoodsReceipt") Then
+				ThisObject.ShipingReceipt = True;
+			Else
+				ThisObject.ShipingReceipt = False;
+			EndIf;
+		EndIf;
+		SetAlreadyLinkedInfo(TreeRow.GetItems());
 	EndDo;
 EndProcedure
 
 &AtServer
 Procedure FillResultsTree(SelectedRow)
 	ThisObject.ResultsTree.GetItems().Clear();
-	
 	If SelectedRow = Undefined Then
 		Return;
 	EndIf;
-	ResultsTableGrouped = ThisObject.ResultsTable.Unload().Copy(New Structure("Key", SelectedRow.Key));
-	ResultsTableGrouped.GroupBy("Key", "Quantity");
 	
-	For Each Row In ResultsTableGrouped Do
-		ArrayOfSecondLevelRows = ThisObject.ResultsTable.FindRows(New Structure("Key", Row.Key));
-		
-		NotLinked = True;
-		For Each SecondLevelRow In ArrayOfSecondLevelRows Do
-			If ValueIsFilled(SecondLevelRow.Basis) Then
-				NotLinked = False;
-				Break;
-			EndIf;
-		EndDo;
-		If NotLinked Then
-			Continue;
+	TmpBasisTable = ThisObject.ResultsTable.Unload().Copy(New Structure("Key", SelectedRow.Key));
+	BasisesTable = TmpBasisTable.CopyColumns();
+	For Each Row In TmpBasisTable Do
+		If ValueIsFilled(Row.Basis) Then
+			FillPropertyValues(BasisesTable.Add(), Row);
 		EndIf;
-		
-		TopLevelNewRow = ThisObject.ResultsTree.GetItems().Add();
-		FillPropertyValues(TopLevelNewRow, SelectedRow);
-		TopLevelNewRow.Level = 1;
-		TopLevelNewRow.Picture = 0;
-		TopLevelNewRow.Quantity = 0;
-		TopLevelNewRow.BasisUnit = Undefined;
-		TopLevelNewRow.RowPresentation = 
-		"" + SelectedRow.Item + ", " + SelectedRow.ItemKey + ", " + SelectedRow.Store;
-			
-		For Each SecondLevelRow In ArrayOfSecondLevelRows Do
-			SecondLevelNewRow = TopLevelNewRow.GetItems().Add();		
-			FillPropertyValues(SecondLevelNewRow, SecondLevelRow);
-			SecondLevelNewRow.Level = 2;
-			SecondLevelNewRow.Picture = 1;
-			SecondLevelNewRow.RowPresentation = String(SecondLevelRow.Basis);
-		EndDo;
 	EndDo;
+	TreeReverseInfo = RowIDInfoServer.CreateBasisesTreeReverse(BasisesTable);
+	
+	RowIDInfoServer.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(), ThisObject.ResultsTree.GetItems());	
+	
+	ThisObject.LinkedRowID = "";
+	ThisObject.ShipingReceipt = False;
+		
+	SetAlreadyLinkedInfo(ThisObject.ResultsTree.GetItems());
 EndProcedure	
 
 &AtServer
-Procedure FillDocumentsTree(FilterBySelectedRow)
-	ThisObject.DocumentsTree.GetItems().Clear();
+Procedure FillBasisesTree(FilterBySelectedRow)
+	ThisObject.BasisesTree.GetItems().Clear();
 	
 	FullFilter = New Structure();
 	For Each KeyValue In ThisObject.MainFilter Do
@@ -135,32 +129,42 @@ Procedure FillDocumentsTree(FilterBySelectedRow)
 	
 	BasisesTable = RowIDInfoServer.GetBasises(ThisObject.MainFilter.Ref, FullFilter);
 	
-	TopLevelTable = BasisesTable.Copy(,"Basis");
-	TopLevelTable.GroupBy("Basis");
-	
-	For Each TopLevelRow In TopLevelTable Do
-		TopLevelNewRow = ThisObject.DocumentsTree.GetItems().Add();
-		TopLevelNewRow.Basis = TopLevelRow.Basis;
-		
-		TopLevelNewRow.RowPresentation = String(TopLevelRow.Basis);
-		TopLevelNewRow.Level = 1;
-		TopLevelNewRow.Picture = 1;
-		
-		SecondLevelRows = BasisesTable.FindRows(New Structure("Basis", TopLevelNewRow.Basis));
-		
-		For Each SecondLevelRow In SecondLevelRows Do
-			SecondLevelNewRow = TopLevelNewRow.GetItems().Add();
-			FillPropertyValues(SecondLevelNewRow, SecondLevelRow);
-			
-			SecondLevelNewRow.RowPresentation = 
-			"" + SecondLevelRow.Item + ", " + SecondLevelRow.ItemKey + ", " + SecondLevelRow.Store;
-			SecondLevelNewRow.Level   = 2;
-			SecondLevelNewRow.Picture = 0;
-			
-			SecondLevelNewRow.Quantity = SecondLevelRow.Quantity;
-			SecondLevelNewRow.BasisUnit = SecondLevelRow.BasisUnit;
+	// filter by already linked
+	For Each Row In ThisObject.ResultsTable Do
+		Filter = New Structure();
+		Filter.Insert("RowID"   , Row.RowID);
+		Filter.Insert("BasisKey", Row.BasisKey);
+		Filter.Insert("Basis"   , Row.Basis);
+		ArrayAlredyLinked = BasisesTable.FindRows(Filter);
+		For Each ItemArray In ArrayAlredyLinked Do
+			BasisesTable.Delete(ItemArray);
 		EndDo;
 	EndDo;
+	
+	ArrayForDelete = New Array();
+	If ValueIsFilled(ThisObject.LinkedRowID) Then
+		For Each Row In BasisesTable Do
+			If Row.RowID <> ThisObject.LinkedRowID Then
+				ArrayForDelete.Add(Row);
+				Continue;
+			EndIf;
+			If ThisObject.ShipingReceipt Then 
+				If Not (TypeOf(Row.Basis) = Type("DocumentRef.ShipmentConfirmation")
+					Or TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt")) Then
+					ArrayForDelete.Add(Row);
+				EndIf;
+			Else
+				ArrayForDelete.Add(Row);
+			EndIf;	
+		EndDo;
+	EndIf;
+	For Each ItemArray In ArrayForDelete Do
+		BasisesTable.Delete(ItemArray);
+	EndDo;
+	
+	TreeReverseInfo = RowIDInfoServer.CreateBasisesTreeReverse(BasisesTable);
+		
+	RowIDInfoServer.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(), ThisObject.BasisesTree.GetItems());
 EndProcedure
 
 &AtClient
@@ -205,36 +209,40 @@ Function IsCanLink()
 		Return Result;
 	EndIf;
 	
-	DocumentsTreeCurrentData = Items.DocumentsTree.CurrentData;
-	If DocumentsTreeCurrentData = Undefined Then
+	BasisesTreeCurrentData = Items.BasisesTree.CurrentData;
+	If BasisesTreeCurrentData = Undefined Then
 		Return Result;
 	EndIf;
 	
-	If DocumentsTreeCurrentData.Level = 2 Then
-		Filter = New Structure();
-		Filter.Insert("Key"   , ItemListRowsCurrentData.Key);
-		Filter.Insert("RowID" , DocumentsTreeCurrentData.RowID);
-		Filter.Insert("Basis" , DocumentsTreeCurrentData.Basis);
-		If RowIDInfoClient.FindRowInTree(Filter, ThisObject.ResultsTree) <> Undefined Then
-			Return Result;
-		Else
-			Result.IsCan = True;
-			Result.Insert("Key"         , ItemListRowsCurrentData.Key);
-			Result.Insert("Item"        , ItemListRowsCurrentData.Item);
-			Result.Insert("ItemKey"     , ItemListRowsCurrentData.ItemKey);
-			Result.Insert("Store"       , ItemListRowsCurrentData.Store);
-			
-			Result.Insert("Quantity"    , DocumentsTreeCurrentData.Quantity);
-			Result.Insert("BasisUnit"   , DocumentsTreeCurrentData.BasisUnit);
-			Result.Insert("RowRef"      , DocumentsTreeCurrentData.RowRef);
-			Result.Insert("CurrentStep" , DocumentsTreeCurrentData.CurrentStep);
-			Result.Insert("Basis"       , DocumentsTreeCurrentData.Basis);
-			Result.Insert("BasisKey"    , DocumentsTreeCurrentData.BasisKey);
-			Result.Insert("RowID"       , DocumentsTreeCurrentData.RowID);
-		EndIf;
+	If Not BasisesTreeCurrentData.DeepLevel Then
+		Return Result;
 	EndIf;
+	
+	Result.IsCan = True;
+	Result.Insert("Key"         , ItemListRowsCurrentData.Key);
+	Result.Insert("Item"        , ItemListRowsCurrentData.Item);
+	Result.Insert("ItemKey"     , ItemListRowsCurrentData.ItemKey);
+	Result.Insert("Store"       , ItemListRowsCurrentData.Store);
+			
+	Result.Insert("Quantity"    , BasisesTreeCurrentData.QuantityInBaseUnit);
+	Result.Insert("BasisUnit"   , BasisesTreeCurrentData.BasisUnit);
+	Result.Insert("RowRef"      , BasisesTreeCurrentData.RowRef);
+	Result.Insert("CurrentStep" , BasisesTreeCurrentData.CurrentStep);
+	Result.Insert("Basis"       , BasisesTreeCurrentData.Basis);
+	Result.Insert("BasisKey"    , BasisesTreeCurrentData.BasisKey);
+	Result.Insert("RowID"       , BasisesTreeCurrentData.RowID);
 	Return Result;
 EndFunction
+
+&AtClient
+Procedure BeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	Cancel = True;
+EndProcedure
+
+&AtClient
+Procedure BeforeDeleteRow(Item, Cancel)
+	Cancel = True;
+EndProcedure
 
 #EndRegion
 
@@ -266,7 +274,7 @@ Function IsCanUnlink()
 		Return Result;
 	EndIf;
 	
-	If ResultsTreeCurrentData.Level = 2 Then
+	If ResultsTreeCurrentData.DeepLevel Then
 		Result.IsCan = True;
 		Result.Insert("Key"      , ResultsTreeCurrentData.Key);
 		Result.Insert("RowID"    , ResultsTreeCurrentData.RowID);
@@ -281,8 +289,3 @@ EndFunction
 Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
-
-
-
-
-

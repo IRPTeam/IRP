@@ -72,12 +72,13 @@ Function GetItemListRows(ItemList) Export
 	ItemListRows = New Array();
 	For Each Row In ItemList Do
 		NewRow = New Structure();
-		NewRow.Insert("Key"      , Row.Key);
-		NewRow.Insert("Item"     , Row.Item); 
-		NewRow.Insert("ItemKey"  , Row.ItemKey); 
-		NewRow.Insert("Unit"     , Row.Unit);
-		NewRow.Insert("Store"    , Row.Store);
-		NewRow.Insert("Quantity" , Row.Quantity);
+		NewRow.Insert("LineNumber", Row.LineNumber);
+		NewRow.Insert("Key"       , Row.Key);
+		NewRow.Insert("Item"      , Row.Item); 
+		NewRow.Insert("ItemKey"   , Row.ItemKey); 
+		NewRow.Insert("Unit"      , Row.Unit);
+		NewRow.Insert("Store"     , Row.Store);
+		NewRow.Insert("Quantity"  , Row.Quantity);
 		ItemListRows.Add(NewRow);
 	EndDo;	
 	Return ItemListRows;
@@ -130,5 +131,6 @@ EndProcedure
 Procedure ExpandTree(Tree, TreeRows) Export
 	For Each ItemTreeRows In TreeRows Do
 		Tree.Expand(ItemTreeRows.GetID());
+		ExpandTree(Tree, ItemTreeRows.GetItems());
 	EndDo;
 EndProcedure

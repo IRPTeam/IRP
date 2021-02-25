@@ -2942,10 +2942,14 @@ EndProcedure
 Procedure ShowRowKey(Form) Export
 	ItemNames = "ItemListKey, SpecialOffersKey,
 	|ItemListRowsKey,
-	|DocumentsTreeKey, DocumentsTreeBasisKey, DocumentsTreeRowID, DocumentsTreeRowRef,
-	|ResultsTreeKey, ResultsTreeRowID, ResultsTreeRowRef, ResultsTreeBasisKey,
 	|ResultsTable,
-	|ShipmentConfirmationsTreeKey, ShipmentConfirmationsTreeBasisKey";
+	|ShipmentConfirmationsTreeKey, ShipmentConfirmationsTreeBasisKey
+	|BasisesTreeBasis, BasisesTreeBasisUnit, BasisesTreeQuantityInBaseUnit, BasisesTreeKey,
+	|BasisesTreeRowID, BasisesTreeRowRef, BasisesTreeBasisKey, BasisesTreeCurrentStep,
+	|ResultsTreeBasis, ResultsTreeBasisUnit, ResultsTreeQuantityInBaseUnit, ResultsTreeKey,
+	|ResultsTreeRowID, ResultsTreeRowRef, ResultsTreeBasisKey, ResultsTreeCurrentStep,
+	|LinkedBasises";
+	
 	ArrayOfItemNames = StrSplit(ItemNames, ",");
 	For Each ItemName In ArrayOfItemNames Do
 		ItemName = TrimAll(ItemName);	

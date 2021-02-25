@@ -3,14 +3,14 @@
 	<item>
 		<selection>
 			<item>
-				<field>DocumentsTreeUse</field>
+				<field>BasisesTreeUse</field>
 			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">DocumentsTree.Level</left>
+				<left xsi:type="dcscor:Field">BasisesTree.DeepLevel</left>
 				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:decimal">1</right>
+				<right xsi:type="xs:boolean">false</right>
 			</item>
 		</filter>
 		<appearance>
@@ -28,12 +28,12 @@
 	<item>
 		<selection>
 			<item>
-				<field>DocumentsTreeUse</field>
+				<field>BasisesTreeUse</field>
 			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">DocumentsTree.Linked</left>
+				<left xsi:type="dcscor:Field">BasisesTree.Linked</left>
 				<comparisonType>Equal</comparisonType>
 				<right xsi:type="xs:boolean">true</right>
 			</item>

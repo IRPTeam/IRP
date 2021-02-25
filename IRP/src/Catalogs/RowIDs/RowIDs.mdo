@@ -10,7 +10,7 @@
   <name>RowIDs</name>
   <synonym>
     <key>en</key>
-    <value>Row i ds</value>
+    <value>Row IDs</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <inputByString>Catalog.RowIDs.StandardAttribute.Description</inputByString>
@@ -96,9 +96,11 @@
   <fullTextSearch>Use</fullTextSearch>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
+  <codeLength>12</codeLength>
   <descriptionLength>36</descriptionLength>
-  <codeType>String</codeType>
   <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

@@ -147,20 +147,24 @@ Procedure FillRowID_SI(Source)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-		ElsIf IDInfoRows.Count() = 1 Then
-			Row = IDInfoRows[0];
-			If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
+			Row.Key      = RowItemList.Key;
+			Row.RowID    = RowItemList.Key;
+			Row.Quantity = RowItemList.QuantityInBaseUnit;
+			Row.NextStep = GetNextStep_SI(Source, RowItemList, Row);
+			Row.RowRef = CreateRowIDCatalog(Row, RowItemList, Source);
+		Else
+			For Each Row In IDInfoRows Do
+				If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
+					Row.NextStep = GetNextStep_SI(Source, RowItemList, Row);
+				 	Continue;
+		 	  	EndIf;
+				Row.Key      = RowItemList.Key;
+				Row.RowID    = RowItemList.Key;
+				Row.Quantity = RowItemList.QuantityInBaseUnit;
 				Row.NextStep = GetNextStep_SI(Source, RowItemList, Row);
-				Continue;
-			EndIf;
+				Row.RowRef = CreateRowIDCatalog(Row, RowItemList, Source);
+			EndDo;
 		EndIf;
-
-		Row.Key      = RowItemList.Key;
-		Row.RowID    = RowItemList.Key;
-		Row.Quantity = RowItemList.QuantityInBaseUnit;
-		Row.NextStep = GetNextStep_SI(Source, RowItemList, Row);
-		
-		Row.RowRef = CreateRowIDCatalog(Row, RowItemList, Source);
 	EndDo;
 EndProcedure
 
@@ -1115,7 +1119,9 @@ Function GetBasisesTable(StepArray, FilterValues, BasisesTypes)
 	|	RowIDMovements.Quantity AS Quantity,
 	|	RowIDMovements.RowRef AS RowRef,
 	|	RowIDMovements.RowID AS RowID,
-	|	RowIDMovements.Step AS CurrentStep
+	|	RowIDMovements.Step AS CurrentStep,
+	|	Doc.LineNumber AS LineNumber
+	|into AllData
 	|FROM
 	|	Document.SalesOrder.ItemList AS Doc
 	|		INNER JOIN Document.SalesOrder.RowIDInfo AS RowIDInfo
@@ -1142,7 +1148,8 @@ Function GetBasisesTable(StepArray, FilterValues, BasisesTypes)
 	|	RowIDMovements.Quantity,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.RowID,
-	|	RowIDMovements.Step
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
 	|FROM
 	|	Document.SalesInvoice.ItemList AS Doc
 	|		INNER JOIN Document.SalesInvoice.RowIDInfo AS RowIDInfo
@@ -1169,7 +1176,8 @@ Function GetBasisesTable(StepArray, FilterValues, BasisesTypes)
 	|	RowIDMovements.Quantity,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.RowID,
-	|	RowIDMovements.Step
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
 	|FROM
 	|	Document.ShipmentConfirmation.ItemList AS Doc
 	|		INNER JOIN Document.ShipmentConfirmation.RowIDInfo AS RowIDInfo
@@ -1177,7 +1185,29 @@ Function GetBasisesTable(StepArray, FilterValues, BasisesTypes)
 	|		AND Doc.Key = RowIDInfo.Key
 	|		INNER JOIN RowIDMovements_SC AS RowIDMovements
 	|		ON RowIDMovements.RowID = RowIDInfo.RowID
-	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	AllData.ItemKey,
+	|	AllData.Item,
+	|	AllData.Store,
+	|	AllData.Basis AS Basis,
+	|	AllData.Key,
+	|	AllData.BasisKey,
+	|	AllData.BasisUnit,
+	|	AllData.Quantity,
+	|	AllData.RowRef,
+	|	AllData.RowID,
+	|	AllData.CurrentStep,
+	|	AllData.LineNumber AS LineNumber
+	|FROM
+	|	AllData AS AllData
+	|ORDER BY
+	|	Basis,
+	|	LineNumber
+	|AUTOORDER";
 	
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
@@ -1560,6 +1590,250 @@ Function GetEmptyTable_GoodsReceipts()
 EndFunction
 	
 #EndRegion
+
+#EndRegion
+
+
+#Region BasisesTree
+
+&AtServer
+Function CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, BasisesTreeRows) Export
+	TreeReverse = TreeReverseInfo.Tree;
+	
+	BasisTable = New ValueTable();
+	BasisTable.Columns.Add("Basis");
+	
+	FilterTable = New ValueTable();
+	FilterTable.Columns.Add("Basis");
+	FilterTable.Columns.Add("Level");
+	FilterTable.Columns.Add("BasisKey");
+	FilterTable.Columns.Add("RowID");
+	FilterTable.Columns.Add("RowRef");
+	
+	LastRows = TreeReverse.Rows.FindRows(New Structure("LastRow", True), True);
+	If Not LastRows.Count() Then
+		Return Undefined;
+	EndIf;
+	
+	For Each LastRow In LastRows Do
+		LastRow.LastRow = False;
+		
+		FillPropertyValues(BasisTable.Add(), LastRow);
+		
+		NewFilterRow = FilterTable.Add();
+		FillPropertyValues(NewFilterRow, LastRow);
+		NewFilterRow.Level    = LastRow.Level - 1;
+		NewFilterRow.BasisKey = LastRow.Key;
+	EndDo;
+	
+	BasisTable.GroupBy("Basis");
+	FilterTable.GroupBy("Basis, Level, BasisKey, RowID, RowRef");
+		
+	For Each RowBasis In BasisTable Do
+		NewBasisesTreeRow = BasisesTreeRows.Add();
+		NewBasisesTreeRow.Picture = 1;
+		NewBasisesTreeRow.RowPresentation = String(RowBasis.Basis);
+		
+		FillPropertyValues(NewBasisesTreeRow, RowBasis);
+		
+		For Each RowFilter In FilterTable.FindRows(New Structure("Basis", RowBasis.Basis)) Do
+		
+			ParentFilter = New Structure("Level, BasisKey, RowID, RowRef");
+			FillPropertyValues(ParentFilter, RowFilter);
+			ParentRows = TreeReverse.Rows.FindRows(ParentFilter, True);
+		
+			If Not ParentRows.Count() Then
+				BasisesFilter = New Structure();
+				BasisesFilter.Insert("BasisKey" , RowFilter.BasisKey);
+				BasisesFilter.Insert("RowID"    , RowFilter.RowID);
+				BasisesFilter.Insert("RowRef"   , RowFilter.RowRef);
+				BasisesFilter.Insert("Basis"    , RowFilter.Basis);
+				For Each TableRow In BasisesTable.FindRows(BasisesFilter) Do
+					
+					// deep level
+					DeepLevelRow = NewBasisesTreeRow.GetItems().Add();
+					DeepLevelRow.Picture = 0;
+					DeepLevelRow.RowPresentation =
+					String(TableRow.Item) + ", " + String(TableRow.ItemKey);
+					
+					DeepLevelRow.DeepLevel = True;
+					FillPropertyValues(DeepLevelRow, TableRow);
+					
+					// price, currency, unit
+					BasisesInfoFilter = New Structure("RowID", TableRow.RowID);
+					For Each InfoRow In TreeReverseInfo.BasisesInfoTable.FindRows(BasisesInfoFilter) Do
+						FillPropertyValues(DeepLevelRow, InfoRow);
+					EndDo;
+					
+					DeepLevelRow.QuantityInBaseUnit = TableRow.Quantity;
+					DeepLevelRow.Quantity = Catalogs.Units.Convert(DeepLevelRow.BasisUnit, 
+						DeepLevelRow.Unit, DeepLevelRow.QuantityInBaseUnit);
+						
+						
+					ResultsFilter = New Structure();
+					ResultsFilter.Insert("RowID"    , DeepLevelRow.RowID);
+					ResultsFilter.Insert("BasisKey" , DeepLevelRow.Key);
+					ResultsFilter.Insert("Basis"    , DeepLevelRow.Basis);
+					If ResultsTable.FindRows(ResultsFilter).Count() Then
+						DeepLevelRow.Use = True;
+						DeepLevelRow.Linked = True;
+					EndIf;
+			
+				EndDo;
+			Else
+				For Each ParentRow In ParentRows Do
+					ParentRow.LastRow = True;
+				EndDo;
+				
+			EndIf; // ParentRows.Count()
+		
+		EndDo; // FilterTable
+	
+			CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, NewBasisesTreeRow.GetItems());
+		
+	EndDo; // BasisTable
+EndFunction
+
+Function CreateBasisesTreeReverse(BasisesTable) Export
+	Tree = New ValueTree();
+	Tree.Columns.Add("Key");
+	Tree.Columns.Add("Basis");
+	Tree.Columns.Add("RowRef");
+	Tree.Columns.Add("RowID");
+	Tree.Columns.Add("BasisKey");
+	
+	Tree.Columns.Add("Price");
+	Tree.Columns.Add("Currency");
+	Tree.Columns.Add("Unit");
+	
+	Tree.Columns.Add("Level");
+	Tree.Columns.Add("LastRow");
+	
+	For Each TableRow In BasisesTable Do
+		
+		BasisesInfo = GetBasisesInfo(TableRow.Basis, TableRow.BasisKey);
+			
+		//top level
+		Level = 1;
+		NewTreeRow = Tree.Rows.Add();
+		NewTreeRow.Level = Level;
+			
+		FillPropertyValues(NewTreeRow, BasisesInfo);
+		
+		CreateBasisesTreeReverseRecursive(BasisesInfo, NewTreeRow.Rows, Level);
+		
+		If Not NewTreeRow.Rows.Count() Then
+			NewTreeRow.LastRow = True;
+		EndIf;
+			
+	EndDo;
+		
+	BasisesInfoTable = New ValueTable();
+	BasisesInfoTable.Columns.Add("RowID");
+	BasisesInfoTable.Columns.Add("Price");
+	BasisesInfoTable.Columns.Add("Currency");
+	BasisesInfoTable.Columns.Add("Unit");
+	
+	LastRows =  Tree.Rows.FindRows(New Structure("LastRow", True), True);
+	For Each LastRow In LastRows Do
+		FillPropertyValues(BasisesInfoTable.Add(), LastRow);
+	EndDo;
+		
+	Return New Structure("Tree, BasisesInfoTable", Tree, BasisesInfoTable);
+EndFunction
+
+Procedure CreateBasisesTreeReverseRecursive(BasisesInfo, TreeRows, Level)
+	If BasisesInfo.Basis <> BasisesInfo.RowRef.Basis Then
+		ParentBasisInfo = GetBasisesInfo(BasisesInfo.RowRef.Basis, BasisesInfo.BasisKey);
+		Level = Level + 1;
+		NewTreeRow = TreeRows.Add();
+		NewTreeRow.Level = Level;
+		
+		FillPropertyValues(NewTreeRow, ParentBasisInfo);
+		
+		CreateBasisesTreeReverseRecursive(ParentBasisInfo, NewTreeRow.Rows, Level);
+		
+		If Not NewTreeRow.Rows.Count() Then
+			NewTreeRow.LastRow = True;
+		EndIf;
+		
+	EndIf;
+EndProcedure
+
+Function GetBasisesInfo(Basis, BasisKey)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	RowIDInfo.Ref AS Basis,
+	|	RowIDInfo.RowRef AS RowRef,
+	|	RowIDInfo.BasisKey AS BasisKey,
+	|	RowIDInfo.RowID AS RowID,
+	|	ItemList.Key AS Key,
+	|	ItemList.Price AS Price,
+	|	ItemList.Ref.Currency AS Currency,
+	|	ItemList.Unit AS Unit
+	|FROM
+	|	Document.SalesOrder.ItemList AS ItemList
+	|		INNER JOIN Document.SalesOrder.RowIDInfo AS RowIDInfo
+	|		ON RowIDInfo.Ref = &Basis
+	|		AND ItemList.Ref = &Basis
+	|		AND RowIDInfo.Key = &BasisKey
+	|		AND ItemList.Key = &BasisKey
+	|		AND RowIDInfo.Key = ItemList.Key
+	|		AND RowIDInfo.Ref = ItemList.Ref
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.RowRef,
+	|	RowIDInfo.BasisKey,
+	|	RowIDInfo.RowID,
+	|	ItemList.Key,
+	|	0,
+	|	UNDEFINED,
+	|	ItemList.Unit
+	|FROM
+	|	Document.ShipmentConfirmation.ItemList AS ItemList
+	|		INNER JOIN Document.ShipmentConfirmation.RowIDInfo AS RowIDInfo
+	|		ON RowIDInfo.Ref = &Basis
+	|		AND ItemList.Ref = &Basis
+	|		AND RowIDInfo.Key = &BasisKey
+	|		AND ItemList.Key = &BasisKey
+	|		AND RowIDInfo.Key = ItemList.Key
+	|		AND RowIDInfo.Ref = ItemList.Ref
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.RowRef,
+	|	RowIDInfo.BasisKey,
+	|	RowIDInfo.RowID,
+	|	ItemList.Key,
+	|	ItemList.Price,
+	|	ItemList.Ref.Currency,
+	|	ItemList.Unit
+	|FROM
+	|	Document.SalesInvoice.ItemList AS ItemList
+	|		INNER JOIN Document.SalesInvoice.RowIDInfo AS RowIDInfo
+	|		ON RowIDInfo.Ref = &Basis
+	|		AND ItemList.Ref = &Basis
+	|		AND RowIDInfo.Key = &BasisKey
+	|		AND ItemList.Key = &BasisKey
+	|		AND RowIDInfo.Key = ItemList.Key
+	|		AND RowIDInfo.Ref = ItemList.Ref";
+	
+	Query.SetParameter("Basis", Basis);
+	Query.SetParameter("BasisKey", BasisKey);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	BasisInfo = New Structure("Key, Basis, RowRef, RowID, BasisKey, Price, Currency, Unit");
+	If QuerySelection.Next() Then
+		FillPropertyValues(BasisInfo, QuerySelection);
+	EndIf;
+	Return BasisInfo;
+EndFunction
 
 #EndRegion
 

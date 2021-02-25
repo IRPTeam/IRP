@@ -182,16 +182,35 @@ Procedure FillRowID_SC(Source)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-		ElsIf IDInfoRows.Count() = 1 Then
-			Row = IDInfoRows[0];
-			If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
-				Row.NextStep = GetNextStep_SC(Source, RowItemList, Row);
-				Continue;
+			FillRowID(Source, Row, RowItemList);
+			Row.NextStep = GetNextStep_SC(Source, RowItemList, Row);
+		Else
+
+			For Each Row In IDInfoRows Do
+				If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
+					Row.NextStep = GetNextStep_SC(Source, RowItemList, Row);
+					BalanceQuantity = GetBalanceQuantity(Source, Row); 
+					Row.Quantity = Min(BalanceQuantity, Row.QUantity);
+				Else
+					Source.RowIDInfo.Delete(Row);
+				EndIf;
+			EndDo;
+			
+			IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+			TotalQuantity = 0;
+			For Each Row In IDInfoRows Do
+				TotalQuantity = TotalQuantity + Row.Quantity;
+			EndDo;
+			
+			If RowItemList.QuantityInBaseUnit > TotalQuantity Then
+				Row = Source.RowIDInfo.Add();
+				FillRowID(Source, Row, RowItemList);
+				Row.Quantity = RowItemList.QuantityInBaseUnit - TotalQuantity;
+				Row.NextStep = Catalogs.MovementRules.SI;
 			EndIf;
+			
 		EndIf;
 
-		FillRowID(Source, Row, RowItemList);
-		Row.NextStep = GetNextStep_SC(Source, RowItemList, Row);
 	EndDo;
 EndProcedure
 
@@ -232,6 +251,34 @@ Function CreateRowIDCatalog(RowIdInfoRow, Row, Source)
 	RowRefObject.Description = RowIdInfoRow.RowID;
 	RowRefObject.Write();
 	Return RowRefObject.Ref;
+EndFunction
+
+Function GetBalanceQuantity(Source, Row)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	T10000B_RowIDMovementsBalance.QuantityBalance
+	|FROM
+	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, RowID = &RowID
+	|	AND Step = &Step
+	|	AND Basis = &Basis
+	|	AND RowRef = &RowRef) AS T10000B_RowIDMovementsBalance";
+	Period = Undefined;
+	If ValueIsFilled(Source.Ref) Then
+		Period = New Boundary(Source.Ref.PointInTime(), BoundaryType.Excluding);
+	EndIf;
+	Query.SetParameter("Period" , Period);
+	Query.SetParameter("RowID"  , Row.RowID);
+	Query.SetParameter("Step"   , Row.CurrentStep);
+	Query.SetParameter("Basis"  , Row.Basis);
+	Query.SetParameter("RowRef" , Row.RowRef);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		Return QuerySelection.QuantityBalance;
+	Else
+		Return 0;
+	EndIf;
 EndFunction
 
 #EndRegion

@@ -138,7 +138,11 @@ Function GetNextStep_SO(Source, RowItemList, Row)
 	If RowItemList.ProcurementMethod = Enums.ProcurementMethods.Purchase Then
 		NextStep = Catalogs.MovementRules.PO;
 	Else
-		NextStep = Catalogs.MovementRules.SI_SC;
+		If RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service Then
+			NextStep = Catalogs.MovementRules.SI;
+		Else
+			NextStep = Catalogs.MovementRules.SI_SC;
+		EndIf;
 	EndIf;
 	Return NextStep;
 EndFunction	

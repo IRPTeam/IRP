@@ -308,4 +308,19 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="36946680-c7fd-4c04-84cc-ed54b5f272ae">
+    <name>ProcurementMethod</name>
+    <synonym>
+      <key>en</key>
+      <value>Procurement method</value>
+    </synonym>
+    <type>
+      <types>EnumRef.ProcurementMethods</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
 </mdclass:Catalog>

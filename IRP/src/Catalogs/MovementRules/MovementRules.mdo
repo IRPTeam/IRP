@@ -155,6 +155,13 @@
         <value>13</value>
       </code>
     </items>
+    <items id="4f9f3816-134c-40f4-896a-1d806ed54892">
+      <name>PO_PI</name>
+      <description>PO&amp;PI</description>
+      <code xsi:type="core:StringValue">
+        <value>14</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

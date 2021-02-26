@@ -136,7 +136,7 @@ EndProcedure
 Function GetNextStep_SO(Source, RowItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
 	If RowItemList.ProcurementMethod = Enums.ProcurementMethods.Purchase Then
-		NextStep = Catalogs.MovementRules.PO;
+		NextStep = Catalogs.MovementRules.PO_PI;
 	Else
 		If RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service Then
 			NextStep = Catalogs.MovementRules.SI;
@@ -528,6 +528,7 @@ Function ExtractData_SO(BasisesTable, DataReceiver)
 		|	UNDEFINED AS Ref,
 		|	ItemList.Ref AS SalesOrder,
 		|	ItemList.Ref AS ShipmentBasis,
+		|	ItemList.Ref AS PurchaseBasis,
 		|	ItemList.Ref.Partner AS Partner,
 		|	ItemList.Ref.LegalName AS LegalName,
 		|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
@@ -669,7 +670,7 @@ Function ExtractData_SO(BasisesTable, DataReceiver)
 	Tables.Insert("TaxList"               , Table_TaxList);
 	Tables.Insert("SpecialOffers"         , Table_SpecialOffers);
 	
-	Return Tables;
+	Return ReduseExtractedDataInfo_SO(Tables, DataReceiver);
 EndFunction
 
 Function ExtractData_SI(BasisesTable, DataReceiver)
@@ -1244,9 +1245,9 @@ Function ExtractData_GR(BasisesTable, DataReceiver)
 		|	ItemList.Unit AS Unit,
 		|	GoodsReceipt.Key,
 		|	GoodsReceipt.BasisKey,
-		|	GoodsReceipt.Basis AS ShipmentConfirmation,
+		|	GoodsReceipt.Basis AS GoodsReceipt,
 		|	GoodsReceipt.Quantity AS Quantity,
-		|	GoodsReceipt.Quantity AS QuantityInShipmentConfirmation
+		|	GoodsReceipt.Quantity AS QuantityInGoodsReceipt
 		|FROM
 		|	BasisesTable AS GoodsReceipt
 		|		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
@@ -1433,6 +1434,43 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames)
 	
 	Tables.ItemList = ItemListResult;
 	Return Tables;
+EndFunction
+
+Function ReduseExtractedDataInfo(Tables, ReduseInfo)
+	If Not ReduseInfo.Reduse Then
+		Return Tables;
+	EndIf;
+	
+	For Each KeyValue In Tables Do
+		TableName = KeyValue.Key;
+			
+		If Not ReduseInfo.Tables.Property(TableName) Then
+			Tables[TableName].Clear();
+		Else
+			ColumnNames = StrSplit(ReduseInfo.Tables[TableName], ",");
+			For Each Column In Tables[TableName] Do
+				If ColumnNames.Find(Column.Name) = Undefined Then
+					Tables[TableName].FillValues(Undefined, Column.Name);
+				EndIf;
+			EndDo;
+		EndIf;
+			
+	EndDo;
+	Return Tables;
+EndFunction
+
+Function ReduseExtractedDataInfo_SO(Tables, DataReceiver)
+	ReduseInfo = New Structure("Reduse, Tables", False, New Structure());
+	
+	If TypeOf(DataReceiver) = Type("DocumentRef.PurchaseOrder")
+		Or TypeOf(DataReceiver) = Type("DocumentRef.PurchaseInvoice") Then
+		
+		ReduseInfo.Reduse = True;
+		ReduseInfo.Tables.Insert("ItemList", 
+		"Key, BasedOn, Company, Store, PurchaseBasis, Item, ItemKey, Unit, BasisUnit, Quantity, QuantityInBaseUnit");
+	EndIf;
+	
+	Return ReduseExtractedDataInfo(Tables, ReduseInfo);
 EndFunction
 
 #EndRegion
@@ -1695,6 +1733,8 @@ Function GetBasises(Ref, FilterValues) Export
 		Return GetBasises_SI(FilterValues);
 	ElsIf TypeOf(Ref) = Type("DocumentRef.ShipmentConfirmation") Then
 		Return GetBasises_SC(FilterValues);
+	ElsIf TypeOf(Ref) = Type("DocumentRef.PurchaseOrder") Then
+		Return GetBasises_PO(FilterValues);
 	ElsIf TypeOf(Ref) = Type("DocumentRef.PurchaseInvoice") Then
 		Return GetBasises_PI(FilterValues);
 	ElsIf TypeOf(Ref) = Type("DocumentRef.GoodsReceipt") Then
@@ -1726,14 +1766,26 @@ Function GetBasises_SC(FilterValues)
 	Return GetBasisesTable(StepArray, FilterValues, BasisesTypes);
 EndFunction
 
+Function GetBasises_PO(FilterValues)
+	StepArray = New Array;
+	StepArray.Add(Catalogs.MovementRules.PO_PI);
+	
+	BasisesTypes = GetBasisesTypes();
+	BasisesTypes.SO_PO_PI = True;
+	
+	Return GetBasisesTable(StepArray, FilterValues, BasisesTypes);
+EndFunction
+
 Function GetBasises_PI(FilterValues)
 	StepArray = New Array;
 	StepArray.Add(Catalogs.MovementRules.PI);
 	StepArray.Add(Catalogs.MovementRules.PI_GR);
+	StepArray.Add(Catalogs.MovementRules.PO_PI);
 	
 	BasisesTypes = GetBasisesTypes();
 	BasisesTypes.PO = True;
 	BasisesTypes.GR = True;
+	BasisesTypes.SO_PO_PI = True;
 	
 	Return GetBasisesTable(StepArray, FilterValues, BasisesTypes);
 EndFunction
@@ -1758,7 +1810,7 @@ Function GetBasisesTypes()
 	Result.Insert("PO", False);
 	Result.Insert("GR", False);
 	Result.Insert("PI", False);
-	
+	Result.Insert("SO_PO_PI", False);
 	Return Result;
 EndFunction
 
@@ -1790,9 +1842,12 @@ Function GetBasisesTable(StepArray, FilterValues, BasisesTypes)
 	Query.SetParameter("Period", Period);
 	
 	Query.TempTablesManager = New TempTablesManager();
+	
 	CreateTempTable_RowIDMovements_SO(Query);
 	CreateTempTable_RowIDMovements_SI(Query);
 	CreateTempTable_RowIDMovements_SC(Query);
+	
+	CreateTempTable_RowIDMovements_SO_PO_PI(Query);
 	
 	CreateTempTable_RowIDMovements_PO(Query);
 	CreateTempTable_RowIDMovements_PI(Query);
@@ -1829,22 +1884,50 @@ Function GetBasisesTable(StepArray, FilterValues, BasisesTypes)
 	|UNION ALL
 	|
 	|SELECT
-	|	Doc.ItemKey AS ItemKey,
-	|	Doc.ItemKey.Item AS Item,
-	|	Doc.Store AS Store,
-	|	Doc.Ref AS Basis,
-	|	Doc.Key AS Key,
-	|	Doc.Key AS BasisKey,
+	|	Doc.ItemKey,
+	|	Doc.ItemKey.Item,
+	|	Doc.Store,
+	|	Doc.Ref,
+	|	Doc.Key,
+	|	Doc.Key,
 	|	CASE
 	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
 	|			THEN Doc.ItemKey.Item.Unit
 	|		ELSE Doc.ItemKey.Unit
-	|	END AS BasisUnit,
-	|	RowIDMovements.Quantity AS Quantity,
-	|	RowIDMovements.RowRef AS RowRef,
-	|	RowIDMovements.RowID AS RowID,
-	|	RowIDMovements.Step AS CurrentStep,
-	|	Doc.LineNumber AS LineNumber
+	|	END,
+	|	RowIDMovements.Quantity,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
+	|FROM
+	|	Document.SalesOrder.ItemList AS Doc
+	|		INNER JOIN Document.SalesOrder.RowIDInfo AS RowIDInfo
+	|		ON Doc.Ref = RowIDInfo.Ref
+	|		AND Doc.Key = RowIDInfo.Key
+	|		INNER JOIN RowIDMovements_SO_PO_PI AS RowIDMovements
+	|		ON RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Doc.ItemKey,
+	|	Doc.ItemKey.Item,
+	|	Doc.Store,
+	|	Doc.Ref,
+	|	Doc.Key,
+	|	Doc.Key,
+	|	CASE
+	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+	|			THEN Doc.ItemKey.Item.Unit
+	|		ELSE Doc.ItemKey.Unit
+	|	END,
+	|	RowIDMovements.Quantity,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
 	|FROM
 	|	Document.PurchaseOrder.ItemList AS Doc
 	|		INNER JOIN Document.PurchaseOrder.RowIDInfo AS RowIDInfo
@@ -2052,6 +2135,57 @@ Procedure CreateTempTable_RowIDMovements_SO(Query)
 	|			AND CASE
 	|				WHEN &Filter_Currency
 	|					THEN RowRef.Currency = &Currency
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ProcurementMethod
+	|					THEN RowRef.ProcurementMethod = &ProcurementMethod
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END)) AS RowIDMovements";
+	Query.Execute();
+EndProcedure	
+
+Procedure CreateTempTable_RowIDMovements_SO_PO_PI(Query)
+	Query.Text = 
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_SO_PO_PI
+	|FROM
+	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, &SO_PO_PI
+	|	AND Step IN (&StepArray)
+	|	AND RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Basises
+	|					THEN RowRef.Basis IN (&Basises)
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ProcurementMethod
+	|					THEN RowRef.ProcurementMethod = &ProcurementMethod
 	|				ELSE TRUE
 	|			END
 	|			AND CASE
@@ -2368,6 +2502,8 @@ Function GetSeperatorColumns(DocReceiverMetadata) Export
 		Return "Partner, Company, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName";
 	ElsIf DocReceiverMetadata = Metadata.Documents.ShipmentConfirmation Then
 		Return "Company, Partner, LegalName, TransactionType";
+	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseOrder Then
+		Return "Company";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseInvoice Then
 		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
 	ElsIf DocReceiverMetadata = Metadata.Documents.GoodsReceipt Then
@@ -2375,7 +2511,7 @@ Function GetSeperatorColumns(DocReceiverMetadata) Export
 	EndIf;
 EndFunction	
 
-Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData, SeparateByBasedOn = True) Export
+Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 
 	Tables = JoinAllExtractedData(ExtractedData);
 	

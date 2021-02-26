@@ -7,10 +7,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		ThisObject.SetAllCheckedOnOpen = Parameters.SetAllCheckedOnOpen;
 	EndIf;
 	
-	If Parameters.Property("SeparateByBasedOn") Then
-		ThisObject.SeparateByBasedOn = Parameters.SeparateByBasedOn;		
-	EndIf;
-	
 	// Fill ResultTable
 	For Each RowIdInfo In Parameters.TablesInfo.RowIDInfoRows Do
 		NewRow = ThisObject.ResultsTable.Add();
@@ -73,8 +69,7 @@ Function GetFillingValues()
 	CollectResultTableRecursive(ThisObject.BasisesTree.GetItems());
 	
 	ExtractedData = RowIDInfoServer.ExtractData(ThisObject.ResultsTable.Unload(), ThisObject.MainFilter.Ref);
-	FillingValues = RowIDInfoServer.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), 
-		ExtractedData, ThisObject.SeparateByBasedOn);
+	FillingValues = RowIDInfoServer.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), ExtractedData);
 	Return FillingValues;
 EndFunction
 

@@ -6,7 +6,7 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	New Structure("Basises, Ref", CommandParameter, PredefinedValue("Document.ShipmentConfirmation.EmptyRef")));
 	FormParameters.Insert("TablesInfo"          , RowIDInfoClient.GetTablesInfo());
 	FormParameters.Insert("SetAllCheckedOnOpen" , True);
-	FormParameters.Insert("SeparateByBasedOn"   , False);
+
 	OpenForm("CommonForm.AddLinkedDocumentRows"
 		, FormParameters, , , ,
 		, New NotifyDescription("AddDocumentRowsContinue", ThisObject)

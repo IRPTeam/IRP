@@ -813,7 +813,10 @@ Function ItemList()
 		|	ItemList.InventoryTransfer AS InventoryTransfer,
 		|	NOT ItemList.InventoryTransfer.Ref IS NULL AS InventoryTransferExists,
 		|	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.Sales) AS IsTransaction_Sales,
-		|	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor) AS IsTransaction_ReturnToVendor
+		|	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor) AS
+		|		IsTransaction_ReturnToVendor,
+		|	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.InventoryTransfer) AS
+		|		IsTransaction_InventoryTransfer
 		|INTO ItemList
 		|FROM
 		|	Document.ShipmentConfirmation.ItemList AS ItemList
@@ -1103,11 +1106,11 @@ Function R4032B_GoodsInTransitOutgoing()
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|CASE
-		|	When ItemList.SalesInvoiceExists Then
+		|	When ItemList.IsTransaction_Sales AND ItemList.SalesInvoiceExists Then
 		|		ItemList.SalesInvoice
-		|	When ItemList.InventoryTransferExists Then
+		|	When ItemList.IsTransaction_InventoryTransfer AND ItemList.InventoryTransferExists Then
 		|		ItemList.InventoryTransfer
-		|	When ItemList.PurchaseReturnExists Then
+		|	When ItemList.IsTransaction_ReturnToVendor AND ItemList.PurchaseReturnExists Then
 		|		ItemList.PurchaseReturn
 		|ELSE
 		|		ItemList.ShipmentConfirmation

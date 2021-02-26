@@ -39,7 +39,7 @@
     <typeField>Document.ChequeBondTransaction.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.ChequeBondTransaction.TabularSection.AddAttributes.Attribute.Value</valueField>
   </characteristics>
-  <createOnInput>Use</createOnInput>
+  <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
   <listPresentation>

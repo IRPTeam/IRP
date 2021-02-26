@@ -39,7 +39,7 @@
     <typeField>Document.PlannedReceiptReservation.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.PlannedReceiptReservation.TabularSection.AddAttributes.Attribute.Value</valueField>
   </characteristics>
-  <createOnInput>Use</createOnInput>
+  <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
   <numberLength>12</numberLength>

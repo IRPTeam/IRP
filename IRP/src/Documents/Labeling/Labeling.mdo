@@ -39,7 +39,7 @@
     <typeField>Document.Labeling.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.Labeling.TabularSection.AddAttributes.Attribute.Value</valueField>
   </characteristics>
-  <createOnInput>Use</createOnInput>
+  <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
   <listPresentation>
@@ -53,6 +53,7 @@
   <defaultObjectForm>Document.Labeling.Form.DocumentForm</defaultObjectForm>
   <defaultListForm>Document.Labeling.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.Labeling.Form.ChoiceForm</defaultChoiceForm>
+  <realTimePosting>Deny</realTimePosting>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

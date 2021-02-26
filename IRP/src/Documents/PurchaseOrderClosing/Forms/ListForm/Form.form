@@ -461,6 +461,56 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>Store</name>
+      <id>49</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Store</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>StoreExtendedTooltip</name>
+        <id>51</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>StoreContextMenu</name>
+        <id>50</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>Author</name>
       <id>40</id>
       <visible>true</visible>
@@ -786,9 +836,61 @@
     </edit>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
+      <queryText>SELECT
+	PurchaseOrderClosing.Ref,
+	PurchaseOrderClosing.DeletionMark,
+	PurchaseOrderClosing.Number,
+	PurchaseOrderClosing.Date,
+	PurchaseOrderClosing.Posted,
+	PurchaseOrderClosing.Agreement,
+	PurchaseOrderClosing.Company,
+	PurchaseOrderClosing.Currency,
+	PurchaseOrderClosing.GoodsReceiptBeforePurchaseInvoice,
+	PurchaseOrderClosing.LegalName,
+	PurchaseOrderClosing.Partner,
+	PurchaseOrderClosing.PriceIncludeTax,
+	PurchaseOrderClosing.Status,
+	PurchaseOrderClosing.PartnerBankAccount,
+	PurchaseOrderClosing.UseItemsReceiptScheduling,
+	PurchaseOrderClosing.CloseOrder,
+	PurchaseOrderClosing.PurchaseOrder,
+	PurchaseOrderClosing.Author,
+	PurchaseOrderClosing.BusinessUnit,
+	PurchaseOrderClosing.Description,
+	PurchaseOrderClosing.DocumentAmount,
+	CASE WHEN COUNT(DISTINCT PurchaseOrderClosingItemList.Store) = 1 THEN
+		MAX(PurchaseOrderClosingItemList.Store)
+	ELSE UNDEFINED END AS Store
+FROM
+	Document.PurchaseOrderClosing AS PurchaseOrderClosing
+		LEFT JOIN Document.PurchaseOrderClosing.ItemList AS PurchaseOrderClosingItemList
+		ON PurchaseOrderClosingItemList.Ref = PurchaseOrderClosing.Ref
+GROUP BY
+	PurchaseOrderClosing.Ref,
+	PurchaseOrderClosing.DeletionMark,
+	PurchaseOrderClosing.Number,
+	PurchaseOrderClosing.Date,
+	PurchaseOrderClosing.Posted,
+	PurchaseOrderClosing.Agreement,
+	PurchaseOrderClosing.Company,
+	PurchaseOrderClosing.Currency,
+	PurchaseOrderClosing.GoodsReceiptBeforePurchaseInvoice,
+	PurchaseOrderClosing.LegalName,
+	PurchaseOrderClosing.Partner,
+	PurchaseOrderClosing.PriceIncludeTax,
+	PurchaseOrderClosing.Status,
+	PurchaseOrderClosing.PartnerBankAccount,
+	PurchaseOrderClosing.UseItemsReceiptScheduling,
+	PurchaseOrderClosing.CloseOrder,
+	PurchaseOrderClosing.PurchaseOrder,
+	PurchaseOrderClosing.Author,
+	PurchaseOrderClosing.BusinessUnit,
+	PurchaseOrderClosing.Description,
+	PurchaseOrderClosing.DocumentAmount</queryText>
       <mainTable>Document.PurchaseOrderClosing</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
+      <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
     </extInfo>

@@ -588,7 +588,7 @@
     <name>Generate</name>
     <synonym>
       <key>en</key>
-      <value>(new) Purchase invoice</value>
+      <value>(new) Goods receipt</value>
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>

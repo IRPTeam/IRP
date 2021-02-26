@@ -134,6 +134,27 @@
         <value>10</value>
       </code>
     </items>
+    <items id="d2e0adcc-d1b1-46aa-b3bf-5b1a28d8399f">
+      <name>PI</name>
+      <description>PI</description>
+      <code xsi:type="core:StringValue">
+        <value>11</value>
+      </code>
+    </items>
+    <items id="c05dfc8d-3f3c-46c4-ad14-4af85cb42f32">
+      <name>PI_GR</name>
+      <description>PI&amp;GR</description>
+      <code xsi:type="core:StringValue">
+        <value>12</value>
+      </code>
+    </items>
+    <items id="ad857082-59dd-463c-8415-5bb39e8f758e">
+      <name>GR</name>
+      <description>GR</description>
+      <code xsi:type="core:StringValue">
+        <value>13</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

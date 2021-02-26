@@ -9,5 +9,5 @@
     <types>DocumentObject</types>
   </source>
   <event>OnWrite</event>
-  <handler>CommonModule.RowIDInfoServer.OnWrite_RowIDOnWrite</handler>
+  <handler>CommonModule.RowIDInfoServer.OnWrite_RowID</handler>
 </mdclass:EventSubscription>

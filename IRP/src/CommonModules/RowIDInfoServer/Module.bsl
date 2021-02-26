@@ -84,10 +84,12 @@ Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 		FillRowID_SI(Source);
 	ElsIf TypeOf(Source) = Type("DocumentObject.ShipmentConfirmation") Then	
 		FillRowID_SC(Source);
+	ElsIf TypeOf(Source) = Type("DocumentObject.PurchaseOrder") Then	
+		FillRowID_PO(Source);
 	EndIf;
 EndProcedure
 
-Procedure OnWrite_RowIDOnWrite(Source, Cancel) Export
+Procedure OnWrite_RowID(Source, Cancel) Export
 	If Source.Metadata().TabularSections.Find("RowIDInfo") = Undefined Then
 		Return;
 	EndIf;
@@ -258,14 +260,12 @@ EndProcedure
 Function GetNextStep_PO(Source, RowItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
 	If RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service Then
-		NextStep = Catalogs.MovementRules.SI;
+		NextStep = Catalogs.MovementRules.PI;
 	Else
-		NextStep = Catalogs.MovementRules.SI_SC;
+		NextStep = Catalogs.MovementRules.PI_GR;
 	EndIf;
 	Return NextStep;
 EndFunction	
-
-
 
 Procedure FillRowID(Source, Row, RowItemList)
 	Row.Key      = RowItemList.Key;
@@ -341,6 +341,14 @@ Function ExtractData(BasisesTable, DataReceiver) Export
 	Basises_SC = BasisesTable.CopyColumns();
 	Basises_SI = BasisesTable.CopyColumns();
 	
+	Basises_PO = BasisesTable.CopyColumns();
+	Basises_PO_GR = BasisesTable.CopyColumns();
+	Basises_PO_GR.Columns.Add("PurchaseOrder", New TypeDescription("DocumentRef.PurchaseOrder"));
+	
+	Basises_GR = BasisesTable.CopyColumns();
+	Basises_PI = BasisesTable.CopyColumns();
+	
+	
 	For Each Row In BasisesTable Do
 		If TypeOf(Row.Basis) = Type("DocumentRef.SalesOrder") Then
 			FillPropertyValues(Basises_SO.Add(), Row);
@@ -353,6 +361,18 @@ Function ExtractData(BasisesTable, DataReceiver) Export
 				NewRow.SalesOrder = Row.RowRef.Basis;
 			Else
 				FillPropertyValues(Basises_SC.Add(), Row);
+			EndIf;
+		ElsIf TypeOf(Row.Basis) = Type("DocumentRef.PurchaseOrder") Then
+			FillPropertyValues(Basises_PO.Add(), Row);
+		ElsIf TypeOf(Row.Basis) = Type("DocumentRef.PurchaseInvoice") Then
+			FillPropertyValues(Basises_PI.Add(), Row);
+		ElsIf TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt") Then
+			If TypeOf(Row.RowRef.Basis) = Type("DocumentRef.GoodsReceipt") Then
+				NewRow = Basises_PO_GR.Add();
+				FillPropertyValues(NewRow, Row);
+				NewRow.SalesOrder = Row.RowRef.Basis;
+			Else
+				FillPropertyValues(Basises_GR.Add(), Row);
 			EndIf;
 		EndIf;
 	EndDo;
@@ -373,6 +393,22 @@ Function ExtractData(BasisesTable, DataReceiver) Export
 	
 	If Basises_SO_SC.Count() Then
 		ExtractedData.Add(ExtractData_SO_SC(Basises_SO_SC, DataReceiver));
+	EndIf;
+	
+	If Basises_PO.Count() Then
+		ExtractedData.Add(ExtractData_PO(Basises_PO, DataReceiver));
+	EndIf;
+	
+	If Basises_PI.Count() Then
+		ExtractedData.Add(ExtractData_PI(Basises_PI, DataReceiver));
+	EndIf;
+	
+	If Basises_GR.Count() Then
+		ExtractedData.Add(ExtractData_GR(Basises_GR, DataReceiver));
+	EndIf;
+	
+	If Basises_PO_GR.Count() Then
+		ExtractedData.Add(ExtractData_PO_GR(Basises_PO_GR, DataReceiver));
 	EndIf;
 	
 	Return ExtractedData;
@@ -802,6 +838,435 @@ Function ExtractData_SO_SC(BasisesTable, DataReceiver)
 	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey");
 EndFunction
 
+Function ExtractData_PO(BasisesTable, DataReceiver)
+	Query = New Query();
+	Query.Text =
+		"SELECT
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.RowID,
+		|	BasisesTable.CurrentStep,
+		|	BasisesTable.RowRef,
+		|	BasisesTable.Basis,
+		|	BasisesTable.BasisUnit,
+		|	BasisesTable.Quantity
+		|INTO BasisesTable
+		|FROM
+		|	&BasisesTable AS BasisesTable
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT ALLOWED
+		|	""PurchaseOrder"" AS BasedOn,
+		|	UNDEFINED AS Ref,
+		|	ItemList.Ref AS PurchaseOrder,
+		|	ItemList.Ref AS ReceiptBasis,
+		|	ItemList.Ref.Partner AS Partner,
+		|	ItemList.Ref.LegalName AS LegalName,
+		|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
+		|	ItemList.Ref.Agreement AS Agreement,
+		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.ItemKey.Item AS Item,
+		|	ItemList.Unit AS Unit,
+		|	ItemList.Store AS Store,
+		|	ItemList.PriceType AS PriceType,
+		|	ItemList.DeliveryDate AS DeliveryDate,
+		|	ItemList.DontCalculateRow AS DontCalculateRow,
+		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.ExpenseType AS ExpenseType,
+		|	ItemList.Detail AS Detail,
+		|	ItemList.Store.UseGoodsReceipt 
+		|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) 
+		|	AS UseGoodsReceipt,
+		|	0 AS Quantity,
+		|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
+		|	ISNULL(ItemList.Price, 0) AS Price,
+		|	ISNULL(ItemList.TaxAmount, 0) AS TaxAmount,
+		|	ISNULL(ItemList.TotalAmount, 0) AS TotalAmount,
+		|	ISNULL(ItemList.NetAmount, 0) AS NetAmount,
+		|	ISNULL(ItemList.OffersAmount, 0) AS OffersAmount,
+		|	ItemList.LineNumber AS LineNumber,
+		|	ItemList.Key AS PurchaseOrderItemListKey,
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisUnit AS BasisUnit,
+		|	BasisesTable.Quantity AS QuantityInBaseUnit
+		|FROM
+		|	BasisesTable AS BasisesTable
+		|		LEFT JOIN Document.PurchaseOrder.ItemList AS ItemList
+		|		ON BasisesTable.Basis = ItemList.Ref
+		|		AND BasisesTable.BasisKey = ItemList.Key
+		|ORDER BY
+		|	LineNumber
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key AS Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.RowID,
+		|	BasisesTable.CurrentStep,
+		|	BasisesTable.RowRef,
+		|	BasisesTable.Basis,
+		|	BasisesTable.Quantity
+		|FROM
+		|	BasisesTable AS BasisesTable
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	TaxList.Tax,
+		|	TaxList.Analytics,
+		|	TaxList.TaxRate,
+		|	TaxList.Amount,
+		|	TaxList.IncludeToTotalAmount,
+		|	TaxList.ManualAmount
+		|FROM
+		|	Document.PurchaseOrder.TaxList AS TaxList
+		|		INNER JOIN BasisesTable AS BasisesTable
+		|		ON BasisesTable.BasisKey = TaxList.Key
+		|		AND BasisesTable.Basis = TaxList.Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	SpecialOffers.Offer,
+		|	SpecialOffers.Amount,
+		|	SpecialOffers.Percent
+		|FROM
+		|	Document.PurchaseOrder.SpecialOffers AS SpecialOffers
+		|		INNER JOIN BasisesTable AS BasisesTable
+		|		ON BasisesTable.Basis = SpecialOffers.Ref
+		|		AND BasisesTable.BasisKey = SpecialOffers.Key";
+
+	
+	Query.SetParameter("BasisesTable", BasisesTable);
+	QueryResults = Query.ExecuteBatch();
+	
+	Table_ItemList      = QueryResults[1].Unload();	
+	Table_RowIDInfo     = QueryResults[2].Unload();
+	Table_TaxList       = QueryResults[3].Unload();
+	Table_SpecialOffers = QueryResults[4].Unload();
+	
+	For Each RowItemList In Table_ItemList Do
+		
+		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit, RowItemList.QuantityInBaseUnit);
+		
+		// ItemList
+		If RowItemList.OriginalQuantity = 0 Then
+			RowItemList.TaxAmount    = 0;
+			RowItemList.NetAmount    = 0;
+			RowItemList.TotalAmount  = 0;
+			RowItemList.OffersAmount = 0;
+		ElsIf RowItemList.OriginalQuantity <> RowItemList.QuantityInBaseUnit Then
+			RowItemList.TaxAmount    = RowItemList.TaxAmount    / RowItemList.OriginalQuantity * RowItemList.QuantityInBaseUnit;
+			RowItemList.NetAmount    = RowItemList.NetAmount    / RowItemList.OriginalQuantity * RowItemList.QuantityInBaseUnit;
+			RowItemList.TotalAmount  = RowItemList.TotalAmount  / RowItemList.OriginalQuantity * RowItemList.QuantityInBaseUnit;
+			RowItemList.OffersAmount = RowItemList.OffersAmount / RowItemList.OriginalQuantity * RowItemList.QuantityInBaseUnit;
+		EndIf;	
+		
+		Filter = New Structure("Ref, Key", RowItemList.Ref, RowItemList.Key);
+		
+		// TaxList
+		For Each RowTaxList In Table_TaxList.FindRows(Filter) Do
+			If RowItemList.OriginalQuantity = 0 Then
+				RowTaxList.Amount       = 0;
+				RowTaxList.ManualAmount = 0;
+			Else
+				RowTaxList.Amount       = RowTaxList.Amount       / RowItemList.OriginalQuantity * RowItemList.QuantityInBaseUnit;
+				RowTaxList.ManualAmount = RowTaxList.ManualAmount / RowItemList.OriginalQuantity * RowItemList.QuantityInBaseUnit;								
+			EndIf;
+		EndDo;
+		
+		// SpecialOffers
+		For Each RowSpecialOffers In Table_SpecialOffers.FindRows(Filter) Do
+			If RowItemList.OriginalQuantity = 0 Then
+				RowSpecialOffers.Amount = 0;
+			Else
+				RowSpecialOffers.Amount = RowSpecialOffers.Amount / RowItemList.OriginalQuantity * RowItemList.QuantityInBaseUnit;
+			EndIf;
+		EndDo;
+	EndDo;
+	
+	Tables = New Structure();
+	Tables.Insert("ItemList"              , Table_ItemList);
+	Tables.Insert("RowIDInfo"             , Table_RowIDInfo);
+	Tables.Insert("TaxList"               , Table_TaxList);
+	Tables.Insert("SpecialOffers"         , Table_SpecialOffers);
+	
+	Return Tables;
+EndFunction
+
+Function ExtractData_PI(BasisesTable, DataReceiver)
+	Query = New Query();
+	Query.Text =
+		"SELECT
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.RowID,
+		|	BasisesTable.CurrentStep,
+		|	BasisesTable.RowRef,
+		|	BasisesTable.Basis,
+		|	BasisesTable.BasisUnit,
+		|	BasisesTable.Quantity
+		|INTO BasisesTable
+		|FROM
+		|	&BasisesTable AS BasisesTable
+		|;
+		|
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT ALLOWED
+		|	""PurchaseInvoice"" AS BasedOn,
+		|	UNDEFINED AS Ref,
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Ref AS ReceiptBasis,
+		|	ItemList.Ref AS PurchaseInvoice,
+		|	ItemList.PurchaseOrder AS PurchaseOrder,
+		|	ItemList.Ref.Partner AS Partner,
+		|	ItemList.Ref.LegalName AS LegalName,
+		|	ItemList.Store AS Store,
+		|	ItemList.ItemKey.Item AS Item,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Unit AS Unit,
+		|	0 AS Quantity,
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisUnit AS BasisUnit,
+		|	BasisesTable.Quantity AS QuantityInBaseUnit
+		|FROM
+		|	BasisesTable AS BasisesTable
+		|		LEFT JOIN Document.PurchaseInvoice.ItemList AS ItemList
+		|		ON BasisesTable.Basis = ItemList.Ref
+		|		AND BasisesTable.BasisKey = ItemList.Key
+		|ORDER BY
+		|	ItemList.LineNumber
+		|;
+		|
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.RowID,
+		|	BasisesTable.CurrentStep,
+		|	BasisesTable.RowRef,
+		|	BasisesTable.Basis,
+		|	BasisesTable.BasisUnit,
+		|	BasisesTable.Quantity
+		|FROM
+		|	BasisesTable AS BasisesTable";
+		
+	Query.SetParameter("BasisesTable", BasisesTable);
+	QueryResults = Query.ExecuteBatch();
+	
+	Table_ItemList = QueryResults[1].Unload();
+	Table_RowIDInfo = QueryResults[2].Unload(); 
+	
+	For Each RowItemList In Table_ItemList Do
+		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit, RowItemList.QuantityInBaseUnit);
+	EndDo;
+	
+	Tables = New Structure();
+	Tables.Insert("ItemList"  , Table_ItemList);
+	Tables.Insert("RowIDInfo" , Table_RowIDInfo);
+	
+	Return Tables;
+EndFunction
+
+Function ExtractData_GR(BasisesTable, DataReceiver)
+	Query = New Query();
+	Query.Text =
+		"SELECT
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.RowID,
+		|	BasisesTable.CurrentStep,
+		|	BasisesTable.RowRef,
+		|	BasisesTable.Basis,
+		|	BasisesTable.BasisUnit,
+		|	BasisesTable.Quantity
+		|INTO BasisesTable
+		|FROM
+		|	&BasisesTable AS BasisesTable
+		|;
+		|
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT ALLOWED
+		|	""GoodsReceipt"" AS BasedOn,
+		|	UNDEFINED AS Ref,
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Ref.Partner AS Partner,
+		|	ItemList.Ref.LegalName AS LegalName,
+		|	ItemList.Store AS Store,
+		|	ItemList.ItemKey.Item AS Item,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Unit AS Unit,
+		|	TRUE AS UseGoodsReceipt,
+		|	0 AS Quantity,
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisUnit AS BasisUnit,
+		|	BasisesTable.Quantity AS QuantityInBaseUnit
+		|FROM
+		|	BasisesTable AS BasisesTable
+		|		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
+		|		ON BasisesTable.Basis = ItemList.Ref
+		|		AND BasisesTable.BasisKey = ItemList.Key
+		|ORDER BY
+		|	ItemList.LineNumber
+		|;
+		|
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.RowID,
+		|	BasisesTable.CurrentStep,
+		|	BasisesTable.RowRef,
+		|	BasisesTable.Basis,
+		|	BasisesTable.BasisUnit,
+		|	BasisesTable.Quantity
+		|FROM
+		|	BasisesTable AS BasisesTable
+		|;
+		|
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	ItemList.Store AS Store,
+		|	ItemList.ItemKey.Item AS Item,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Unit AS Unit,
+		|	GoodsReceipt.Key,
+		|	GoodsReceipt.BasisKey,
+		|	GoodsReceipt.Basis AS ShipmentConfirmation,
+		|	GoodsReceipt.Quantity AS Quantity,
+		|	GoodsReceipt.Quantity AS QuantityInShipmentConfirmation
+		|FROM
+		|	BasisesTable AS GoodsReceipt
+		|		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
+		|		ON GoodsReceipt.Basis = ItemList.Ref
+		|		AND GoodsReceipt.BasisKey = ItemList.Key";
+			
+	Query.SetParameter("BasisesTable", BasisesTable);
+	QueryResults = Query.ExecuteBatch();
+	
+	Table_ItemList      = QueryResults[1].Unload();
+	Table_RowIDInfo     = QueryResults[2].Unload(); 
+	Table_GoodsReceipts = QueryResults[3].Unload();
+	
+	For Each RowItemList In Table_ItemList Do
+		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit, RowItemList.QuantityInBaseUnit);
+	EndDo;
+		
+	Tables = New Structure();
+	Tables.Insert("ItemList"      , Table_ItemList);
+	Tables.Insert("RowIDInfo"     , Table_RowIDInfo);
+	Tables.Insert("GoodsReceipts" , Table_GoodsReceipts);
+	
+	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit");
+EndFunction
+
+Function ExtractData_PO_GR(BasisesTable, DataReceiver)
+	Query = New Query();
+	Query.Text =
+		"SELECT
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.RowID,
+		|	BasisesTable.CurrentStep,
+		|	BasisesTable.RowRef,
+		|	BasisesTable.Basis,
+		|	BasisesTable.PurchaseOrder,
+		|	BasisesTable.BasisUnit,
+		|	BasisesTable.Quantity
+		|INTO BasisesTable
+		|FROM
+		|	&BasisesTable AS BasisesTable
+		|;
+		|
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT ALLOWED
+		|	BasisesTable.Key,
+		|	RowIDInfo.BasisKey AS BasisKey,
+		|	BasisesTable.RowID,
+		|	BasisesTable.CurrentStep,
+		|	BasisesTable.RowRef,
+		|	BasisesTable.PurchaseOrder AS Basis,
+		|	BasisesTable.BasisUnit,
+		|	BasisesTable.Quantity
+		|FROM
+		|	BasisesTable AS BasisesTable
+		|		LEFT JOIN Document.GoodsReceipt.RowIDInfo AS RowIDInfo
+		|		ON BasisesTable.Basis = RowIDInfo.Ref
+		|		AND BasisesTable.BasisKey = RowIDInfo.Key
+		|;
+		|
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.RowID,
+		|	BasisesTable.CurrentStep,
+		|	BasisesTable.RowRef,
+		|	BasisesTable.Basis,
+		|	BasisesTable.BasisUnit,
+		|	BasisesTable.Quantity
+		|FROM
+		|	BasisesTable AS BasisesTable
+		|;
+		|
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	ItemList.Store AS Store,
+		|	ItemList.ItemKey.Item AS Item,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Unit AS Unit,
+		|	GoodsReceipt.Key,
+		|	GoodsReceipt.BasisKey,
+		|	GoodsReceipt.Basis AS ShipmentConfirmation,
+		|	GoodsReceipt.Quantity AS Quantity,
+		|	GoodsReceipt.Quantity AS QuantityInShipmentConfirmation
+		|FROM
+		|	BasisesTable AS GoodsReceipt
+		|		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
+		|		ON GoodsReceipt.Basis = ItemList.Ref
+		|		AND GoodsReceipt.BasisKey = ItemList.Key";
+	
+	Query.SetParameter("BasisesTable", BasisesTable);
+	QueryResults = Query.ExecuteBatch();
+	
+	Tables_PO = ExtractData_PO(QueryResults[1].Unload(), DataReceiver);
+	Tables_PO.ItemList.FillValues(True, "UseGoodsReceipt");
+	
+	Table_RowIDInfo     = QueryResults[2].Unload(); 
+	Table_GoodsReceipts = QueryResults[3].Unload();
+	
+	Tables = New Structure();
+	Tables.Insert("ItemList"              , Tables_PO.ItemList);
+	Tables.Insert("RowIDInfo"             , Table_RowIDInfo);
+	Tables.Insert("TaxList"               , Tables_PO.TaxList);
+	Tables.Insert("SpecialOffers"         , Tables_PO.SpecialOffers);
+	Tables.Insert("ShipmentConfirmations" , Table_GoodsReceipts);
+	
+	Return CollapseRepeatingItemListRows(Tables, "PurchaseOrderItemListKey");
+EndFunction
+
 Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames)
 	ItemListGrouped = Tables.ItemList.Copy();
 	ItemListGrouped.GroupBy(UniqueColumnNames, "Quantity, QuantityInBaseUnit");
@@ -852,6 +1317,12 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames)
 			EndIf;
 			
 			If Tables.Property("ShipmentConfirmations") Then
+				For Each Row In Tables.ShipmentConfirmations.FindRows(Filter) Do
+					Row.Key = NewKey;
+				EndDo;
+			EndIf;
+			
+			If Tables.Property("GoodsReceipts") Then
 				For Each Row In Tables.ShipmentConfirmations.FindRows(Filter) Do
 					Row.Key = NewKey;
 				EndDo;
@@ -922,6 +1393,9 @@ Procedure LinkUnlinkDocumentRows(Object, FillingValues) Export
 	AttributeNames_LinkedDocuments.Add("SalesOrder");
 	AttributeNames_LinkedDocuments.Add("ShipmentBasis");
 	AttributeNames_LinkedDocuments.Add("SalesInvoice");
+	AttributeNames_LinkedDocuments.Add("PurchaseOrder");
+	AttributeNames_LinkedDocuments.Add("ReceiptBasis");
+	AttributeNames_LinkedDocuments.Add("PurchaseInvoice");
 	
 	// таблицы в которых есть реквизит Key
 	TableNames_WithKeys = New Array();
@@ -1126,6 +1600,10 @@ Function GetBasises(Ref, FilterValues) Export
 		Return GetBasises_SI(FilterValues);
 	ElsIf TypeOf(Ref) = Type("DocumentRef.ShipmentConfirmation") Then
 		Return GetBasises_SC(FilterValues);
+	ElsIf TypeOf(Ref) = Type("DocumentRef.PurchaseInvoice") Then
+		Return GetBasises_PI(FilterValues);
+	ElsIf TypeOf(Ref) = Type("DocumentRef.GoodsReceipt") Then
+		Return GetBasises_GR(FilterValues);
 	EndIf;
 EndFunction
 
@@ -1153,11 +1631,39 @@ Function GetBasises_SC(FilterValues)
 	Return GetBasisesTable(StepArray, FilterValues, BasisesTypes);
 EndFunction
 
+Function GetBasises_PI(FilterValues)
+	StepArray = New Array;
+	StepArray.Add(Catalogs.MovementRules.PI);
+	StepArray.Add(Catalogs.MovementRules.PI_GR);
+	
+	BasisesTypes = GetBasisesTypes();
+	BasisesTypes.PO = True;
+	BasisesTypes.GR = True;
+	
+	Return GetBasisesTable(StepArray, FilterValues, BasisesTypes);
+EndFunction
+
+Function GetBasises_GR(FilterValues)	
+	StepArray = New Array;
+	StepArray.Add(Catalogs.MovementRules.GR);
+	StepArray.Add(Catalogs.MovementRules.PI_GR);
+	
+	BasisesTypes = GetBasisesTypes();
+	BasisesTypes.PO = True;
+	BasisesTypes.PI = True;
+	
+	Return GetBasisesTable(StepArray, FilterValues, BasisesTypes);
+EndFunction
+
 Function GetBasisesTypes()
 	Result = New Structure();
 	Result.Insert("SO", False);
 	Result.Insert("SC", False);
 	Result.Insert("SI", False);
+	Result.Insert("PO", False);
+	Result.Insert("GR", False);
+	Result.Insert("PI", False);
+	
 	Return Result;
 EndFunction
 
@@ -1192,6 +1698,11 @@ Function GetBasisesTable(StepArray, FilterValues, BasisesTypes)
 	CreateTempTable_RowIDMovements_SO(Query);
 	CreateTempTable_RowIDMovements_SI(Query);
 	CreateTempTable_RowIDMovements_SC(Query);
+	
+	CreateTempTable_RowIDMovements_PO(Query);
+	CreateTempTable_RowIDMovements_PI(Query);
+	CreateTempTable_RowIDMovements_GR(Query);
+	
 	Query.Text =
 	"SELECT ALLOWED
 	|	Doc.ItemKey AS ItemKey,
@@ -1210,13 +1721,41 @@ Function GetBasisesTable(StepArray, FilterValues, BasisesTypes)
 	|	RowIDMovements.RowID AS RowID,
 	|	RowIDMovements.Step AS CurrentStep,
 	|	Doc.LineNumber AS LineNumber
-	|into AllData
+	|INTO AllData
 	|FROM
 	|	Document.SalesOrder.ItemList AS Doc
 	|		INNER JOIN Document.SalesOrder.RowIDInfo AS RowIDInfo
 	|		ON Doc.Ref = RowIDInfo.Ref
 	|		AND Doc.Key = RowIDInfo.Key
 	|		INNER JOIN RowIDMovements_SO AS RowIDMovements
+	|		ON RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Doc.ItemKey AS ItemKey,
+	|	Doc.ItemKey.Item AS Item,
+	|	Doc.Store AS Store,
+	|	Doc.Ref AS Basis,
+	|	Doc.Key AS Key,
+	|	Doc.Key AS BasisKey,
+	|	CASE
+	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+	|			THEN Doc.ItemKey.Item.Unit
+	|		ELSE Doc.ItemKey.Unit
+	|	END AS BasisUnit,
+	|	RowIDMovements.Quantity AS Quantity,
+	|	RowIDMovements.RowRef AS RowRef,
+	|	RowIDMovements.RowID AS RowID,
+	|	RowIDMovements.Step AS CurrentStep,
+	|	Doc.LineNumber AS LineNumber
+	|FROM
+	|	Document.PurchaseOrder.ItemList AS Doc
+	|		INNER JOIN Document.PurchaseOrder.RowIDInfo AS RowIDInfo
+	|		ON Doc.Ref = RowIDInfo.Ref
+	|		AND Doc.Key = RowIDInfo.Key
+	|		INNER JOIN RowIDMovements_PO AS RowIDMovements
 	|		ON RowIDMovements.RowID = RowIDInfo.RowID
 	|		AND RowIDMovements.Basis = RowIDInfo.Ref
 	|
@@ -1268,11 +1807,67 @@ Function GetBasisesTable(StepArray, FilterValues, BasisesTypes)
 	|	RowIDMovements.Step,
 	|	Doc.LineNumber
 	|FROM
+	|	Document.PurchaseInvoice.ItemList AS Doc
+	|		INNER JOIN Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
+	|		ON Doc.Ref = RowIDInfo.Ref
+	|		AND Doc.Key = RowIDInfo.Key
+	|		INNER JOIN RowIDMovements_PI AS RowIDMovements
+	|		ON RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Doc.ItemKey,
+	|	Doc.ItemKey.Item,
+	|	Doc.Store,
+	|	Doc.Ref,
+	|	Doc.Key,
+	|	Doc.Key,
+	|	CASE
+	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+	|			THEN Doc.ItemKey.Item.Unit
+	|		ELSE Doc.ItemKey.Unit
+	|	END,
+	|	RowIDMovements.Quantity,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
+	|FROM
 	|	Document.ShipmentConfirmation.ItemList AS Doc
 	|		INNER JOIN Document.ShipmentConfirmation.RowIDInfo AS RowIDInfo
 	|		ON Doc.Ref = RowIDInfo.Ref
 	|		AND Doc.Key = RowIDInfo.Key
 	|		INNER JOIN RowIDMovements_SC AS RowIDMovements
+	|		ON RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Doc.ItemKey,
+	|	Doc.ItemKey.Item,
+	|	Doc.Store,
+	|	Doc.Ref,
+	|	Doc.Key,
+	|	Doc.Key,
+	|	CASE
+	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+	|			THEN Doc.ItemKey.Item.Unit
+	|		ELSE Doc.ItemKey.Unit
+	|	END,
+	|	RowIDMovements.Quantity,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
+	|FROM
+	|	Document.GoodsReceipt.ItemList AS Doc
+	|		INNER JOIN Document.GoodsReceipt.RowIDInfo AS RowIDInfo
+	|		ON Doc.Ref = RowIDInfo.Ref
+	|		AND Doc.Key = RowIDInfo.Key
+	|		INNER JOIN RowIDMovements_GR AS RowIDMovements
 	|		ON RowIDMovements.RowID = RowIDInfo.RowID
 	|		AND RowIDMovements.Basis = RowIDInfo.Ref
 	|;
@@ -1440,6 +2035,180 @@ Procedure CreateTempTable_RowIDMovements_SI(Query)
 	|INTO RowIDMovements_SI
 	|FROM
 	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, &SI
+	|	AND Step IN (&StepArray)
+	|	AND CASE
+	|			WHEN &Filter_Basises
+	|				THEN Basis IN (&Basises)
+	|			ELSE TRUE
+	|		END
+	|	AND RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Agreement
+	|					THEN RowRef.Agreement = &Agreement
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Currency
+	|					THEN RowRef.Currency = &Currency
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END)) AS RowIDMovements";
+	Query.Execute();
+EndProcedure
+
+Procedure CreateTempTable_RowIDMovements_PO(Query)
+	Query.Text = 
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_PO
+	|FROM
+	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, &PO
+	|	AND Step IN (&StepArray)
+	|	AND RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Basises
+	|					THEN RowRef.Basis IN (&Basises)
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Agreement
+	|					THEN RowRef.Agreement = &Agreement
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Currency
+	|					THEN RowRef.Currency = &Currency
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END)) AS RowIDMovements";
+	Query.Execute();
+EndProcedure	
+
+Procedure CreateTempTable_RowIDMovements_GR(Query)
+	Query.Text = 
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_GR
+	|FROM
+	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, &GR
+	|	AND Step IN (&StepArray)
+	|	AND (Basis IN (&Basises) OR
+	|	  RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Basises
+	|					THEN RowRef.Basis IN (&Basises)
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure
+
+Procedure CreateTempTable_RowIDMovements_PI(Query)
+	Query.Text = 
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_PI
+	|FROM
+	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, &PI
 	|	AND Step IN (&StepArray)
 	|	AND CASE
 	|			WHEN &Filter_Basises
@@ -1938,6 +2707,75 @@ Function GetBasisesInfo(Basis, BasisKey, RowID)
 	|FROM
 	|	Document.SalesInvoice.ItemList AS ItemList
 	|		INNER JOIN Document.SalesInvoice.RowIDInfo AS RowIDInfo
+	|		ON RowIDInfo.Ref = &Basis
+	|		AND ItemList.Ref = &Basis
+	|		AND RowIDInfo.Key = &BasisKey
+	|		AND ItemList.Key = &BasisKey
+	|		AND RowIDInfo.Key = ItemList.Key
+	|		AND RowIDInfo.Ref = ItemList.Ref
+	|		AND RowIDInfo.RowID = &RowID
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	RowIDInfo.Ref AS Basis,
+	|	RowIDInfo.RowRef AS RowRef,
+	|	RowIDInfo.BasisKey AS BasisKey,
+	|	RowIDInfo.RowID AS RowID,
+	|	RowIDInfo.Basis AS ParentBasis,
+	|	ItemList.Key AS Key,
+	|	ItemList.Price AS Price,
+	|	ItemList.Ref.Currency AS Currency,
+	|	ItemList.Unit AS Unit
+	|FROM
+	|	Document.PurchaseOrder.ItemList AS ItemList
+	|		INNER JOIN Document.PurchaseOrder.RowIDInfo AS RowIDInfo
+	|		ON RowIDInfo.Ref = &Basis
+	|		AND ItemList.Ref = &Basis
+	|		AND RowIDInfo.Key = &BasisKey
+	|		AND ItemList.Key = &BasisKey
+	|		AND RowIDInfo.Key = ItemList.Key
+	|		AND RowIDInfo.Ref = ItemList.Ref
+	|		AND RowIDInfo.RowID = &RowID
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.RowRef,
+	|	RowIDInfo.BasisKey,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.Basis AS ParentBasis,
+	|	ItemList.Key,
+	|	0,
+	|	UNDEFINED,
+	|	ItemList.Unit
+	|FROM
+	|	Document.GoodsReceipt.ItemList AS ItemList
+	|		INNER JOIN Document.GoodsReceipt.RowIDInfo AS RowIDInfo
+	|		ON RowIDInfo.Ref = &Basis
+	|		AND ItemList.Ref = &Basis
+	|		AND RowIDInfo.Key = &BasisKey
+	|		AND ItemList.Key = &BasisKey
+	|		AND RowIDInfo.Key = ItemList.Key
+	|		AND RowIDInfo.Ref = ItemList.Ref
+	|		AND RowIDInfo.RowID = &RowID
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.RowRef,
+	|	RowIDInfo.BasisKey,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.Basis AS ParentBasis,
+	|	ItemList.Key,
+	|	ItemList.Price,
+	|	ItemList.Ref.Currency,
+	|	ItemList.Unit
+	|FROM
+	|	Document.PurchaseInvoice.ItemList AS ItemList
+	|		INNER JOIN Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
 	|		ON RowIDInfo.Ref = &Basis
 	|		AND ItemList.Ref = &Basis
 	|		AND RowIDInfo.Key = &BasisKey

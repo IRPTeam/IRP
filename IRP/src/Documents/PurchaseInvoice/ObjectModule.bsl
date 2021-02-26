@@ -31,12 +31,9 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") Then
 		If FillingData.Property("BasedOn") And FillingData.BasedOn = "PurchaseOrder" Then
 			Filling_BasedOnPurchaseOrder(FillingData);
-		EndIf;
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesOrder" Then
-			Filling_BasedOnPurchaseOrder(FillingData);
-		EndIf;
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "GoodsReceipt" Then
-			Filling_BasedOnGoodsReceipt(FillingData);
+		Else
+			FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
+			RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 		EndIf;
 	EndIf;
 EndProcedure

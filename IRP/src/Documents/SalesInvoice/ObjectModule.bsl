@@ -29,8 +29,7 @@ EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") Then
-		FillPropertyValues(ThisObject, FillingData, 
-			"Partner, Company, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName");
+		FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
 		RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 	EndIf;
 EndProcedure

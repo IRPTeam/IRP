@@ -86,6 +86,10 @@ Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 		FillRowID_SC(Source);
 	ElsIf TypeOf(Source) = Type("DocumentObject.PurchaseOrder") Then	
 		FillRowID_PO(Source);
+	ElsIf TypeOf(Source) = Type("DocumentObject.PurchaseInvoice") Then	
+		FillRowID_PI(Source);
+	ElsIf TypeOf(Source) = Type("DocumentObject.GoodsReceipt") Then	
+		FillRowID_GR(Source);	
 	EndIf;
 EndProcedure
 
@@ -99,6 +103,10 @@ Procedure OnWrite_RowID(Source, Cancel) Export
 			RowRefObject = Row.RowRef.GetObject();
 			RowRefObject.Basis = Source.Ref;
 			RowRefObject.Write();
+		ElsIf Row.RowRef.Basis = Source.Ref Then
+			RowItemList = Source.ItemList.FindRows(New Structure("Key", Row.Key))[0];
+			RowRefObject = Row.RowRef.GetObject(); 
+			UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject)
 		EndIf;
 	EndDo;
 EndProcedure
@@ -126,9 +134,6 @@ Procedure FillRowID_SO(Source)
 EndProcedure
 
 Function GetNextStep_SO(Source, RowItemList, Row)
-	If ValueIsFilled(Row.NextStep) Then
-		Return Row.NextStep;
-	EndIf;
 	NextStep = Catalogs.MovementRules.EmptyRef();
 	If RowItemList.ProcurementMethod = Enums.ProcurementMethods.Purchase Then
 		NextStep = Catalogs.MovementRules.PO;
@@ -164,9 +169,6 @@ Procedure FillRowID_SI(Source)
 EndProcedure
 
 Function GetNextStep_SI(Source, RowItemList, Row)
-	If ValueIsFilled(Row.NextStep) Then
-		Return Row.NextStep;
-	EndIf;
 	NextStep = Catalogs.MovementRules.EmptyRef();
 	If RowItemList.UseShipmentConfirmation
 		And Not Source.ShipmentConfirmations.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
@@ -225,9 +227,6 @@ Procedure FillRowID_SC(Source)
 EndProcedure
 
 Function GetNextStep_SC(Source, ItemList, Row)
-	If ValueIsFilled(Row.NextStep) Then
-		Return Row.NextStep;
-	EndIf;
 	NextStep = Catalogs.MovementRules.EmptyRef();
 	If Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.Sales
 		And Not ValueIsFilled(ItemList.SalesInvoice) Then
@@ -267,14 +266,102 @@ Function GetNextStep_PO(Source, RowItemList, Row)
 	Return NextStep;
 EndFunction	
 
+Procedure FillRowID_PI(Source)
+	For Each RowItemList In Source.ItemList Do	
+		Row = Undefined;
+		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		If IDInfoRows.Count() = 0 Then
+			Row = Source.RowIDInfo.Add();
+			FillRowID(Source, Row, RowItemList);
+			Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
+		Else
+			For Each Row In IDInfoRows Do
+				If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
+					Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
+				 	Continue;
+				EndIf;
+				FillRowID(Source, Row, RowItemList);
+				Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
+			EndDo;
+		EndIf;
+	EndDo;
+EndProcedure
+
+Function GetNextStep_PI(Source, RowItemList, Row)
+	NextStep = Catalogs.MovementRules.EmptyRef();
+	If RowItemList.UseGoodsReceipt
+		And Not Source.GoodsReceipts.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
+			NextStep = Catalogs.MovementRules.GR;
+	EndIf;
+	Return NextStep;
+EndFunction	
+
+Procedure FillRowID_GR(Source)
+	For Each RowItemList In Source.ItemList Do	
+		Row = Undefined;
+		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		If IDInfoRows.Count() = 0 Then
+			Row = Source.RowIDInfo.Add();
+			FillRowID(Source, Row, RowItemList);
+			Row.NextStep = GetNextStep_GR(Source, RowItemList, Row);
+		Else
+			
+			IDInfoRowsTable = Source.RowIDInfo.Unload().Copy(New Structure("Key", RowItemList.Key));
+			CurrentStep = Undefined;
+			For Each Row In IDInfoRowsTable Do
+				If ValueIsFilled(Row.CurrentStep) Then
+					CurrentStep = Row.CurrentStep;
+					Break;
+				EndIf;
+			EndDo;
+			IDInfoRowsTable.FillValues(CurrentStep, "CurrentStep");
+			IDInfoRowsTable.GroupBy("Key, RowID, Basis, CurrentStep, RowRef, BasisKey");
+			For Each Row In IDInfoRows Do
+		    	Source.RowIDInfo.Delete(Row);
+			EndDo;
+			TotalQuantity = 0;
+			For Each Row In IDInfoRowsTable Do
+				NewRow = Source.RowIDInfo.Add();
+				FillPropertyValues(NewRow, Row);
+				NewRow.NextStep = GetNextStep_GR(Source, RowItemList, NewRow);
+				If ValueIsFilled(Row.Basis) Then
+			    	BalanceQuantity = GetBalanceQuantity(Source, Row);
+					NewRow.Quantity = Min(BalanceQuantity, RowItemList.QuantityInBaseUnit);
+				Else
+					NewRow.Quantity = RowItemList.QuantityInBaseUnit;
+				EndIf;
+				TotalQuantity = TotalQuantity + NewRow.Quantity;
+			EndDo;
+			If RowItemList.QuantityInBaseUnit > TotalQuantity Then
+				For Each Row In IDInfoRowsTable Do
+					NewRow = Source.RowIDInfo.Add();
+					FillPropertyValues(NewRow, Row);
+					NewRow.CurrentStep = Undefined;
+					NewRow.NextStep = Catalogs.MovementRules.PI;
+					NewRow.Quantity = RowItemList.QuantityInBaseUnit - TotalQuantity;
+				EndDo;	
+			EndIf;		
+		EndIf;
+	EndDo;
+EndProcedure
+
+Function GetNextStep_GR(Source, ItemList, Row)
+	NextStep = Catalogs.MovementRules.EmptyRef();
+	If Source.TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase
+		And Not ValueIsFilled(ItemList.PurchaseInvoice) Then
+		NextStep = Catalogs.MovementRules.PI;
+	EndIf;
+	Return NextStep;
+EndFunction	
+
 Procedure FillRowID(Source, Row, RowItemList)
 	Row.Key      = RowItemList.Key;
 	Row.RowID    = RowItemList.Key;
 	Row.Quantity = RowItemList.QuantityInBaseUnit;
-	Row.RowRef = CreateRowIDCatalog(Row, RowItemList, Source);	
+	Row.RowRef = FindOrCreateRowIDRef(Source, Row, RowItemList);	
 EndProcedure
 
-Function CreateRowIDCatalog(RowIdInfoRow, Row, Source)
+Function FindOrCreateRowIDRef(Source, Row, RowItemList)
 	Query = New Query;
 	Query.Text =
 		"SELECT
@@ -284,7 +371,7 @@ Function CreateRowIDCatalog(RowIdInfoRow, Row, Source)
 		|WHERE
 		|	RowIDs.RowID = &RowID";
 	
-	Query.SetParameter("RowID", RowIdInfoRow.RowID);
+	Query.SetParameter("RowID", Row.RowID);
 	QueryResult = Query.Execute().Select();
 	
 	If QueryResult.Next() Then
@@ -292,14 +379,18 @@ Function CreateRowIDCatalog(RowIdInfoRow, Row, Source)
 	Else
 		RowRefObject = Catalogs.RowIDs.CreateItem();
 	EndIf;
-	FillPropertyValues(RowRefObject, Source);
-	FillPropertyValues(RowRefObject, Row);
-	
-	RowRefObject.RowID = RowIdInfoRow.RowID;
-	RowRefObject.Description = RowIdInfoRow.RowID;
-	RowRefObject.Write();
+	UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject);
 	Return RowRefObject.Ref;
 EndFunction
+
+Procedure UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject)
+	FillPropertyValues(RowRefObject, Source);
+	FillPropertyValues(RowRefObject, RowItemList);
+	
+	RowRefObject.RowID       = Row.RowID;
+	RowRefObject.Description = Row.RowID;
+	RowRefObject.Write();
+EndProcedure
 
 Function GetBalanceQuantity(Source, Row)
 	Query = New Query();
@@ -367,10 +458,10 @@ Function ExtractData(BasisesTable, DataReceiver) Export
 		ElsIf TypeOf(Row.Basis) = Type("DocumentRef.PurchaseInvoice") Then
 			FillPropertyValues(Basises_PI.Add(), Row);
 		ElsIf TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt") Then
-			If TypeOf(Row.RowRef.Basis) = Type("DocumentRef.GoodsReceipt") Then
+			If TypeOf(Row.RowRef.Basis) = Type("DocumentRef.PurchaseOrder") Then
 				NewRow = Basises_PO_GR.Add();
 				FillPropertyValues(NewRow, Row);
-				NewRow.SalesOrder = Row.RowRef.Basis;
+				NewRow.PurchaseOrder = Row.RowRef.Basis;
 			Else
 				FillPropertyValues(Basises_GR.Add(), Row);
 			EndIf;
@@ -457,6 +548,7 @@ Function ExtractData_SO(BasisesTable, DataReceiver)
 		|	ItemList.Store.UseShipmentConfirmation 
 		|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) 
 		|	AS UseShipmentConfirmation,
+		|	VALUE(Enum.ShipmentConfirmationTransactionTypes.Sales) AS TransactionType,
 		|	0 AS Quantity,
 		|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
 		|	ISNULL(ItemList.Price, 0) AS Price,
@@ -612,6 +704,7 @@ Function ExtractData_SI(BasisesTable, DataReceiver)
 		|	ItemList.ItemKey.Item AS Item,
 		|	ItemList.ItemKey AS ItemKey,
 		|	ItemList.Unit AS Unit,
+		|	VALUE(Enum.ShipmentConfirmationTransactionTypes.Sales) AS TransactionType,
 		|	0 AS Quantity,
 		|	BasisesTable.Key,
 		|	BasisesTable.BasisUnit AS BasisUnit,
@@ -880,6 +973,7 @@ Function ExtractData_PO(BasisesTable, DataReceiver)
 		|	ItemList.Store.UseGoodsReceipt 
 		|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) 
 		|	AS UseGoodsReceipt,
+		|	VALUE(Enum.GoodsReceiptTransactionTypes.Purchase) AS TransactionType,
 		|	0 AS Quantity,
 		|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
 		|	ISNULL(ItemList.Price, 0) AS Price,
@@ -1035,6 +1129,7 @@ Function ExtractData_PI(BasisesTable, DataReceiver)
 		|	ItemList.ItemKey.Item AS Item,
 		|	ItemList.ItemKey AS ItemKey,
 		|	ItemList.Unit AS Unit,
+		|	VALUE(Enum.GoodsReceiptTransactionTypes.Purchase) AS TransactionType,
 		|	0 AS Quantity,
 		|	BasisesTable.Key,
 		|	BasisesTable.BasisUnit AS BasisUnit,
@@ -1239,9 +1334,9 @@ Function ExtractData_PO_GR(BasisesTable, DataReceiver)
 		|	ItemList.Unit AS Unit,
 		|	GoodsReceipt.Key,
 		|	GoodsReceipt.BasisKey,
-		|	GoodsReceipt.Basis AS ShipmentConfirmation,
+		|	GoodsReceipt.Basis AS GoodsReceipt,
 		|	GoodsReceipt.Quantity AS Quantity,
-		|	GoodsReceipt.Quantity AS QuantityInShipmentConfirmation
+		|	GoodsReceipt.Quantity AS QuantityInGoodsReceipt
 		|FROM
 		|	BasisesTable AS GoodsReceipt
 		|		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
@@ -1262,7 +1357,7 @@ Function ExtractData_PO_GR(BasisesTable, DataReceiver)
 	Tables.Insert("RowIDInfo"             , Table_RowIDInfo);
 	Tables.Insert("TaxList"               , Tables_PO.TaxList);
 	Tables.Insert("SpecialOffers"         , Tables_PO.SpecialOffers);
-	Tables.Insert("ShipmentConfirmations" , Table_GoodsReceipts);
+	Tables.Insert("GoodsReceipts"         , Table_GoodsReceipts);
 	
 	Return CollapseRepeatingItemListRows(Tables, "PurchaseOrderItemListKey");
 EndFunction
@@ -1323,7 +1418,7 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames)
 			EndIf;
 			
 			If Tables.Property("GoodsReceipts") Then
-				For Each Row In Tables.ShipmentConfirmations.FindRows(Filter) Do
+				For Each Row In Tables.GoodsReceipts.FindRows(Filter) Do
 					Row.Key = NewKey;
 				EndDo;
 			EndIf;
@@ -1984,8 +2079,8 @@ Procedure CreateTempTable_RowIDMovements_SC(Query)
 	|FROM
 	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, &SC
 	|	AND Step IN (&StepArray)
-	|	AND (Basis IN (&Basises) OR
-	|	  RowRef IN
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef IN
 	|		(SELECT
 	|			RowRef.Ref AS Ref
 	|		FROM
@@ -2009,6 +2104,11 @@ Procedure CreateTempTable_RowIDMovements_SC(Query)
 	|			AND CASE
 	|				WHEN &Filter_LegalName
 	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_TransactionType
+	|					THEN RowRef.TransactionType = &TransactionType
 	|				ELSE TRUE
 	|			END
 	|			AND CASE
@@ -2263,22 +2363,25 @@ EndProcedure
 
 #Region DataToFillingValues
 
+Function GetSeperatorColumns(DocReceiverMetadata) Export
+	If DocReceiverMetadata = Metadata.Documents.SalesInvoice Then
+		Return "Partner, Company, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName";
+	ElsIf DocReceiverMetadata = Metadata.Documents.ShipmentConfirmation Then
+		Return "Company, Partner, LegalName, TransactionType";
+	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseInvoice Then
+		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+	ElsIf DocReceiverMetadata = Metadata.Documents.GoodsReceipt Then
+		 Return "Company, Partner, LegalName, TransactionType";
+	EndIf;
+EndFunction	
+
 Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData, SeparateByBasedOn = True) Export
 
 	Tables = JoinAllExtractedData(ExtractedData);
 	
 	TableNames_Refreshable = GetTableNames_Refreshable();
-	
-	HeaderAttributes = New Array();
-	If SeparateByBasedOn Then
-		HeaderAttributes.Add("BasedOn");
-	EndIf;
-	For Each Column In Tables.ItemList.Columns Do
-		If DocReceiverMetadata.Attributes.Find(Column.Name) <> Undefined Then
-			HeaderAttributes.Add(Column.Name);
-		EndIf;
-	EndDo;
-	SeparatorColumns = StrConcat(HeaderAttributes, ",");
+		
+	SeparatorColumns = GetSeperatorColumns(DocReceiverMetadata);
 	
 	UniqueRows = Tables.ItemList.Copy();
 	UniqueRows.GroupBy(SeparatorColumns);
@@ -2407,6 +2510,9 @@ Function GetEmptyTable_ItemList()
 	|SalesOrder,
 	|ShipmentBasis,
 	|SalesInvoice,
+	|PurchaseOrder,
+	|ReceiptBasis,
+	|PurchaseInvoice,
 	|Unit,
 	|Quantity,
 	|QuantityInBaseUnit,
@@ -2420,8 +2526,11 @@ Function GetEmptyTable_ItemList()
 	|DontCalculateRow,
 	|BusinessUnit,
 	|RevenueType,
+	|ExpenseType,
 	|Detail,
-	|UseShipmentConfirmation";
+	|UseShipmentConfirmation,
+	|UseGoodsReceipt,
+	|TransactionType";
 	Table = New ValueTable();
 	For Each Column In StrSplit(Columns, ",") Do
 		Table.Columns.Add(TrimAll(Column));

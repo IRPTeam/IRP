@@ -593,7 +593,7 @@
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
       <types>DocumentRef.PurchaseOrder</types>
-      <types>DocumentRef.GoodsReceipt</types>
+      <types>DocumentRef.PurchaseInvoice</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

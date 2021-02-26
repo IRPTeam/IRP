@@ -166,15 +166,6 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="3caaaa06-4032-438b-a050-115c24d3cb3a">
-    <name>SelectReceiptBasisesForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Select receipt basises</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <tabularSections uuid="506c7b4d-f0ff-4625-914d-590053e7544f">
     <producedTypes>
       <objectType typeId="8509535a-15a6-40e7-84c1-e439f9b2d951" valueTypeId="9886a59c-aa6d-4e99-b83e-6192fe1ec6a1"/>
@@ -560,6 +551,19 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="2cf4b82e-ddc4-433b-a7fe-062b35cb497d">
+      <name>BasisKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
   </tabularSections>
   <commands uuid="8c19c753-9d70-4b53-95eb-a4ef841a951d">
     <name>GenerateGoodsReceipt</name>
@@ -579,5 +583,19 @@
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>
     <shortcut></shortcut>
+  </commands>
+  <commands uuid="1785d764-b574-4b4b-9d33-bb6b7dd137c1">
+    <name>Generate</name>
+    <synonym>
+      <key>en</key>
+      <value>(new) Purchase invoice</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.PurchaseOrder</types>
+      <types>DocumentRef.GoodsReceipt</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
   </commands>
 </mdclass:Document>

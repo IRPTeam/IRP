@@ -390,126 +390,6 @@ Procedure SearchByBarcode(Command, Barcode = "")
 EndProcedure
 
 &AtClient
-Procedure SelectGoodsReceipt(Command)
-	CommandParameters = New Structure("Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax");
-	FillPropertyValues(CommandParameters, Object);
-	AlreadySelectedGoodsReceipts = New Array();
-	For Each Row In Object.GoodsReceipts Do
-		If AlreadySelectedGoodsReceipts.Find(Row.GoodsReceipt) = Undefined Then
-			AlreadySelectedGoodsReceipts.Add(Row.GoodsReceipt);
-		EndIf;
-	EndDo;
-	CommandParameters.Insert("AlreadySelectedGoodsReceipts", AlreadySelectedGoodsReceipts);
-	InfoGoodsReceipt = DocPurchaseInvoiceServer.GetInfoGoodsReceiptBeforePurchaseInvoice(CommandParameters);
-	
-	FormParameters = New Structure("InfoGoodsReceipt", InfoGoodsReceipt.Tree);
-	OpenForm("Document.PurchaseInvoice.Form.SelectGoodsReceiptForm"
-		, FormParameters, , , ,
-		, New NotifyDescription("SelectGoodsReceiptContinue", ThisObject,
-			New Structure("InfoGoodsReceipt",
-				InfoGoodsReceipt)));
-EndProcedure
-
-&AtClient
-Procedure SelectGoodsReceiptContinue(Result, AdditionalParameters) Export
-	If Result = Undefined Then
-		Return;
-	EndIf;
-	
-	ArrayOfBasisDocuments = New Array();
-	For Each Row In AdditionalParameters.InfoGoodsReceipt.Linear Do
-		If Result.Find(Row.GoodsReceipt) <> Undefined Then
-			ArrayOfBasisDocuments.Add(Row);
-		EndIf;
-	EndDo;	
-	SelectGoodsReceiptFinish(ArrayOfBasisDocuments);
-	
-	Taxes_CreateFormControls();
-	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, ThisObject, "GoodsReceipts");
-	DocumentsClient.UpdateTradeDocumentsTree(Object, ThisObject, 
-		"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");	
-EndProcedure
-
-&AtServer
-Procedure SelectGoodsReceiptFinish(ArrayOfBasisDocuments)
-	DocPurchaseInvoiceServer.FillDocumentWithGoodsReceiptArray(Object, ThisObject, ArrayOfBasisDocuments);
-	For Each Row In Object.ItemList Do
-		Row.Item = Row.ItemKey.Item;
-	EndDo;
-EndProcedure
-
-&AtClient
-Procedure SelectPurchaseOrders(Command)
-	FilterValues = New Structure("Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax");
-	FillPropertyValues(FilterValues, Object);
-	
-	ExistingRows = New Array;
-	For Each Row In Object.ItemList Do
-		RowStructure = New Structure("Key, Unit, Quantity");
-		FillPropertyValues(RowStructure, Row);
-		ExistingRows.Add(RowStructure);
-	EndDo;
-	
-	FormParameters = New Structure("FilterValues, ExistingRows, Ref", FilterValues, ExistingRows, Object.Ref);
-	OpenForm("Document.PurchaseInvoice.Form.SelectPurchaseOrdersForm"
-		, FormParameters, , , ,
-		, New NotifyDescription("SelectPurchaseOrdersContinue", ThisObject));
-EndProcedure
-
-&AtClient
-Procedure SelectPurchaseOrdersContinue(Result, AdditionalParameters) Export
-	If Result = Undefined Then
-		Return;
-	EndIf;
-	
-	SelectPurchaseOrdersContinueAtServer(Result, AdditionalParameters);
-	
-	DocPurchaseInvoiceClient.ItemListOnChange(Object, ThisObject, Items.ItemList);
-EndProcedure
-
-&AtServer
-Procedure SelectPurchaseOrdersContinueAtServer(Result, AdditionalParameters)
-	Settings = New Structure();
-	Settings.Insert("Rows", New Array());
-	Settings.Insert("CalculateSettings", New Structure());
-	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
-	
-	For Each ResultRow In Result Do
-		RowsByKey = Object.ItemList.FindRows(New Structure("Key", ResultRow.Key));
-		If RowsByKey.Count() Then
-			RowByKey = RowsByKey[0];
-			ItemKeyUnit = CatItemsServer.GetItemKeyUnit(ResultRow.ItemKey);
-			UnitFactorFrom = Catalogs.Units.GetUnitFactor(RowByKey.Unit, ItemKeyUnit);
-			UnitFactorTo = Catalogs.Units.GetUnitFactor(ResultRow.Unit, ItemKeyUnit);
-			FillPropertyValues(RowByKey, ResultRow, , "Quantity");
-			RowByKey.Quantity = ?(UnitFactorTo = 0,
-					0,
-					RowByKey.Quantity * UnitFactorFrom / UnitFactorTo) + ResultRow.Quantity;
-			RowByKey.PriceType = ResultRow.PriceType;
-			RowByKey.Price = ResultRow.Price;
-			Settings.Rows.Add(RowByKey);
-		Else
-			NewRow = Object.ItemList.Add();
-			FillPropertyValues(NewRow, ResultRow);
-			NewRow.PriceType = ResultRow.PriceType;
-			NewRow.Price = ResultRow.Price;
-			Settings.Rows.Add(NewRow);
-		EndIf;
-	EndDo;
-	
-	TaxInfo = Undefined;
-	SavedData = TaxesClientServer.GetSavedData(ThisObject, TaxesServer.GetAttributeNames().CacheName);
-	If SavedData.Property("ArrayOfColumnsInfo") Then
-		TaxInfo = SavedData.ArrayOfColumnsInfo;
-	EndIf;
-	CalculationStringsClientServer.CalculateItemsRows(Object,
-		ThisObject,
-		Settings.Rows,
-		Settings.CalculateSettings,
-		TaxInfo);
-EndProcedure
-
-&AtClient
 Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
@@ -603,6 +483,7 @@ EndProcedure
 Procedure GoodsReceiptsTreeQuantityOnChange(Item)
 	DocumentsClient.TradeDocumentsTreeQuantityOnChange(Object, ThisObject, 
 		"GoodsReceipts", "GoodsReceiptsTree", "GoodsReceipt");
+	RowIDInfoClient.UpdateQuantity(Object, ThisObject);
 EndProcedure
 	
 &AtClient
@@ -616,3 +497,66 @@ Procedure GoodsReceiptsTreeBeforeDeleteRow(Item, Cancel)
 EndProcedure
 
 #EndRegion
+
+#Region LinkedDocuments
+
+&AtClient
+Function GetLinkedDocumentsFilter()
+	Filter = New Structure();
+//	Filter.Insert("Company"         , Object.Company);
+//	Filter.Insert("Partner"         , Object.Partner);
+//	Filter.Insert("LegalName"       , Object.LegalName);
+//	Filter.Insert("Agreement"       , Object.Agreement);
+//	Filter.Insert("Currency"        , Object.Currency);
+//	Filter.Insert("PriceIncludeTax" , Object.PriceIncludeTax);
+	Filter.Insert("Ref"             , Object.Ref);
+	Return Filter;
+EndFunction
+
+&AtClient
+Procedure LinkUnlinkBasisDocuments(Command)
+	FormParameters = New Structure();
+	FormParameters.Insert("Filter"           , GetLinkedDocumentsFilter());
+	FormParameters.Insert("SelectedRowInfo"  , RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
+	FormParameters.Insert("TablesInfo"       , RowIDInfoClient.GetTablesInfo(Object));
+	OpenForm("CommonForm.LinkUnlinkDocumentRows"
+		, FormParameters, , , ,
+		, New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject)
+		, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure AddBasisDocuments(Command)	
+	FormParameters = New Structure();
+	FormParameters.Insert("Filter"           , GetLinkedDocumentsFilter());
+	FormParameters.Insert("TablesInfo"       , RowIDInfoClient.GetTablesInfo(Object));
+	OpenForm("CommonForm.AddLinkedDocumentRows"
+		, FormParameters, , , ,
+		, New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject)
+		, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+
+&AtClient
+Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
+	Taxes_CreateFormControls();
+	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, ThisObject, "GoodsReceipts");
+	DocumentsClient.UpdateTradeDocumentsTree(Object, ThisObject, 
+		"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
+EndProcedure
+
+&AtServer
+Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
+	If Result.Operation = "LinkUnlinkDocumentRows" Then
+		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
+	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
+		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+	EndIf;
+EndProcedure
+
+#EndRegion
+

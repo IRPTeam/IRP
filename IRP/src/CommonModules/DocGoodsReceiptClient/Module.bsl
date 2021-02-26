@@ -191,6 +191,7 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings =
 	ObjectData = DocumentsClientServer.GetStructureFillStores();
 	FillPropertyValues(ObjectData, Object);
 	DocumentsClientServer.FillStores(ObjectData, Form);
+	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 
 Procedure ItemListOnActivateRow(Object, Form, Item) Export
@@ -413,102 +414,6 @@ EndProcedure
 
 Procedure SearchByBarcode(Barcode, Object, Form) Export
 	DocumentsClient.SearchByBarcode(Barcode, Object, Form);
-EndProcedure
-
-Procedure SelectReceiptBasises(Object, Form, Command) Export
-	FilterValues = New Structure("Company, Partner, LegalName");
-	FilterValues.Company = Object.Company;
-	FilterValues.Partner = ?(Form.Items.Partner.Visible, Object.Partner, Undefined);
-	FilterValues.LegalName = ?(Form.Items.LegalName.Visible, Object.LegalName, Undefined);
-	
-	ExistingRows = New Array;
-	For Each Row In Object.ItemList Do
-		RowStructure = New Structure("Key, Unit, Quantity");
-		FillPropertyValues(RowStructure, Row);
-		ExistingRows.Add(RowStructure);
-	EndDo;
-	
-	FormParameters = New Structure("FilterValues, ExistingRows, Ref", FilterValues, ExistingRows, Object.Ref);
-	NotifyParameters = New Structure;
-	NotifyParameters.Insert("Object", Object);
-	NotifyParameters.Insert("Form", Form);
-	NotifyParameters.Insert("Command", Command);
-	OpenForm("Document.GoodsReceipt.Form.SelectReceiptBasisesForm"
-		, FormParameters, , , ,
-		, New NotifyDescription("SelectReceiptBasisesContinue", ThisObject, NotifyParameters));
-EndProcedure
-
-Procedure SelectReceiptBasisesContinue(Result, AdditionalParameters) Export
-	
-	Object = AdditionalParameters.Object;
-	Form = AdditionalParameters.Form;
-	
-	If Result = Undefined Then
-		Return;
-	EndIf;
-	
-	For Each ResultRow In Result Do
-		RowsByKey = Object.ItemList.FindRows(New Structure("Key", ResultRow.Key));
-		If RowsByKey.Count() Then
-			RowByKey = RowsByKey[0];
-			ItemKeyUnit = CatItemsServer.GetItemKeyUnit(ResultRow.ItemKey);
-			UnitFactorFrom = DocGoodsReceiptServer.GetUnitFactor(RowByKey.Unit, ItemKeyUnit);
-			UnitFactorTo = DocGoodsReceiptServer.GetUnitFactor(ResultRow.Unit, ItemKeyUnit);
-			FillPropertyValues(RowByKey, ResultRow, , "Quantity");
-			RowByKey.Quantity = ?(UnitFactorTo = 0,
-					0,
-					RowByKey.Quantity * UnitFactorFrom / UnitFactorTo) + ResultRow.Quantity;
-		Else
-			NewRow = Object.ItemList.Add();
-			FillPropertyValues(NewRow, ResultRow);
-		EndIf;
-	EndDo;
-	
-	DocGoodsReceiptClient.ItemListOnChange(Object, Form, Form.Items.ItemList);
-	
-	Notify("ChoiceReceiptBasis", New Structure(), Result);
-EndProcedure
-
-Procedure SelectReceiptBasisInRowContinue(Result, AdditionalParameters) Export
-	
-	Object = AdditionalParameters.Object;
-	Form = AdditionalParameters.Form;
-	
-	If Result = Undefined OR Not Result.Count() Then
-		Return;
-	EndIf;
-	
-	Row = Object.ItemList.FindByID(AdditionalParameters.CurrentRow);
-	If Row = Undefined Then
-		Return;
-	EndIf;
-	FillPropertyValues(Row, Result[0], "Key, ReceiptBasis, SalesOrder");
-	
-	DocGoodsReceiptClient.ItemListOnChange(Object, Form, Form.Items.ItemList);
-	
-	Notify("ChoiceReceiptBasis", New Structure(), Result);
-EndProcedure
-
-Procedure FillReceiptBasises(Object, Form, Command) Export
-	
-	FilterValues = New Structure("Company, Partner, LegalName");
-	FillPropertyValues(FilterValues, Object);
-	
-	ExistingRows = New Array;
-	For Each Row In Object.ItemList Do
-		RowStructure = New Structure("ItemKey, Unit, Quantity, Store");
-		FillPropertyValues(RowStructure, Row);
-		ExistingRows.Add(RowStructure);
-	EndDo;
-	
-	Object.ItemList.Clear();
-	Result = DocGoodsReceiptServer.InfoReceiptBasisesFilling(FilterValues, ExistingRows, Object.Ref);
-	For Each ResultRow In Result Do
-		Row = Object.ItemList.Add();
-		FillPropertyValues(Row, ResultRow);
-	EndDo;
-	
-	DocGoodsReceiptClient.ItemListOnChange(Object, Form, Form.Items.ItemList);
 EndProcedure
 
 #Region PickUpItems

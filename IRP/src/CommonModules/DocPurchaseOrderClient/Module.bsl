@@ -91,6 +91,7 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings =
 	
 	DocumentsClient.FillDeliveryDates(Object, Form);
 	CurrenciesClient.CalculateAmount(Object, Form);
+	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 
 Procedure ItemListOnActivateRow(Object, Form, Item) Export

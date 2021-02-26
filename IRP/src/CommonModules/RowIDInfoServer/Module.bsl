@@ -103,13 +103,6 @@ EndProcedure
 
 #Region RowID
 
-Procedure FillRowID(Source, Row, RowItemList)
-	Row.Key      = RowItemList.Key;
-	Row.RowID    = RowItemList.Key;
-	Row.Quantity = RowItemList.QuantityInBaseUnit;
-	Row.RowRef = CreateRowIDCatalog(Row, RowItemList, Source);	
-EndProcedure
-
 Procedure FillRowID_SO(Source)
 	For Each RowItemList In Source.ItemList Do
 	
@@ -240,6 +233,46 @@ Function GetNextStep_SC(Source, ItemList, Row)
 	EndIf;
 	Return NextStep;
 EndFunction	
+
+Procedure FillRowID_PO(Source)
+	For Each RowItemList In Source.ItemList Do	
+		Row = Undefined;
+		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		If IDInfoRows.Count() = 0 Then
+			Row = Source.RowIDInfo.Add();
+			FillRowID(Source, Row, RowItemList);
+			Row.NextStep = GetNextStep_PO(Source, RowItemList, Row);
+		Else
+			For Each Row In IDInfoRows Do
+				If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
+					Row.NextStep = GetNextStep_PO(Source, RowItemList, Row);
+				 	Continue;
+				EndIf;
+				FillRowID(Source, Row, RowItemList);
+				Row.NextStep = GetNextStep_PO(Source, RowItemList, Row);
+			EndDo;
+		EndIf;
+	EndDo;
+EndProcedure
+
+Function GetNextStep_PO(Source, RowItemList, Row)
+	NextStep = Catalogs.MovementRules.EmptyRef();
+	If RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service Then
+		NextStep = Catalogs.MovementRules.SI;
+	Else
+		NextStep = Catalogs.MovementRules.SI_SC;
+	EndIf;
+	Return NextStep;
+EndFunction	
+
+
+
+Procedure FillRowID(Source, Row, RowItemList)
+	Row.Key      = RowItemList.Key;
+	Row.RowID    = RowItemList.Key;
+	Row.Quantity = RowItemList.QuantityInBaseUnit;
+	Row.RowRef = CreateRowIDCatalog(Row, RowItemList, Source);	
+EndProcedure
 
 Function CreateRowIDCatalog(RowIdInfoRow, Row, Source)
 	Query = New Query;

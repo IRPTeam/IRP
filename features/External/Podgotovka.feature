@@ -883,6 +883,7 @@ Scenario: create SalesOrder023005
 	And I input "10,000" text in "Q" field of "ItemList" table
 	And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 	And I activate "Business unit" field in "ItemList" table
+	And I click choice button of "Business unit" attribute in "ItemList" table
 	And I go to line in "List" table
 		| 'Description'             |
 		| 'Distribution department' |
@@ -908,6 +909,7 @@ Scenario: create SalesOrder023005
 	And I input "14,000" text in "Q" field of "ItemList" table
 	And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 	And I activate "Business unit" field in "ItemList" table
+	And I click choice button of "Business unit" attribute in "ItemList" table
 	And I go to line in "List" table
 		| 'Description'             |
 		| 'Distribution department' |
@@ -968,7 +970,8 @@ Scenario: create SalesInvoice024008
 		| 'Number'                     | 'Partner'   |
 		| '$$NumberSalesOrder023005$$' | 'Ferron BP' |
 	And I select current line in "List" table
-	And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+	And I click the button named "FormDocumentSalesInvoiceGenerate"
+	And I click "Ok" button
 	* Check the details
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"

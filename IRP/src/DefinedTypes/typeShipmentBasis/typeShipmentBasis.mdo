@@ -15,5 +15,6 @@
     <types>DocumentRef.Bundling</types>
     <types>DocumentRef.InventoryTransfer</types>
     <types>DocumentRef.SalesInvoice</types>
+    <types>DocumentRef.SalesOrder</types>
   </type>
 </mdclass:DefinedType>

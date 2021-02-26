@@ -2895,14 +2895,16 @@ EndFunction
 Function ItemList()
 	Return
 		"SELECT
-		|	GoodsReceipts.Key
+		|	GoodsReceipts.Key,
+		|	GoodsReceipts.GoodsReceipt
 		|INTO GoodsReceipts
 		|FROM
 		|	Document.PurchaseInvoice.GoodsReceipts AS GoodsReceipts
 		|WHERE
 		|	GoodsReceipts.Ref = &Ref
 		|GROUP BY
-		|	GoodsReceipts.Key
+		|	GoodsReceipts.Key,
+		|	GoodsReceipts.GoodsReceipt
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -2966,7 +2968,8 @@ Function ItemList()
 		|	PurchaseInvoiceItemList.ExpenseType AS ExpenseType,
 		|	PurchaseInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		|	PurchaseInvoiceItemList.DeliveryDate AS DeliveryDate,
-		|	PurchaseInvoiceItemList.NetAmount AS NetAmount
+		|	PurchaseInvoiceItemList.NetAmount AS NetAmount,
+		|	GoodsReceipts.GoodsReceipt
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
@@ -3306,14 +3309,19 @@ Function R4031B_GoodsInTransitIncoming()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	CASE
+		|		WHEN ItemList.GoodsReceiptExists
+		|			Then ItemList.GoodsReceipt
+		|		Else ItemList.Invoice
+		|	End AS Basis,
 		|	*
 		|INTO R4031B_GoodsInTransitIncoming
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.IsService
-		|	AND ItemList.UseGoodsReceipt
-		|	AND ItemList.GoodsReceiptExists";
+		|	AND (ItemList.UseGoodsReceipt
+		|		OR ItemList.GoodsReceiptExists)";
 
 EndFunction
 

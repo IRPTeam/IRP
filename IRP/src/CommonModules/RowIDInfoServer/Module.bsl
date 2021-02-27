@@ -468,160 +468,196 @@ EndFunction
 #Region ExtractData
 
 Function ExtractData(BasisesTable, DataReceiver) Export
-	Basises_SO = BasisesTable.CopyColumns();
 	
-	Basises_SO_SC = BasisesTable.CopyColumns();
-	Basises_SO_SC.Columns.Add("ParentBasis", New TypeDescription("DocumentRef.SalesOrder"));
+	Tables = CreateTablesForExtractData(BasisesTable.CopyColumns());
+		
+	For Each Row In BasisesTable Do
+		If TypeOf(Row.Basis) = Type("DocumentRef.SalesOrder") Then
+			FillTablesFor_SO(Tables, DataReceiver, Row);
+		ElsIf TypeOf(Row.Basis) = Type("DocumentRef.SalesInvoice") Then
+			FillTablesFor_SI(Tables, DataReceiver, Row);
+		ElsIf TypeOf(Row.Basis) = Type("DocumentRef.ShipmentConfirmation") Then
+			FillTablesFor_SC(Tables, DataReceiver, Row);
+		ElsIf TypeOf(Row.Basis) = Type("DocumentRef.PurchaseOrder") Then
+			FillTablesFor_PO(Tables, DataReceiver, Row);
+		ElsIf TypeOf(Row.Basis) = Type("DocumentRef.PurchaseInvoice") Then
+			FillTablesFor_PI(Tables, DataReceiver, Row);
+		ElsIf TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt") Then
+			FillTablesFor_GR(Tables, DataReceiver, Row);
+		EndIf;
+	EndDo;
 	
-	Basises_SO_PI_GR = BasisesTable.CopyColumns();
-	Basises_SO_PI_GR.Columns.Add("ParentBasis", New TypeDescription("DocumentRef.SalesOrder"));
+	Return ExtractDataByTables(Tables, DataReceiver);	
+EndFunction
+
+Function CreateTablesForExtractData(EmptyTable)
+	Tables = New Structure();
+	Tables.Insert("FromSO", EmptyTable.Copy());
+	Tables.Insert("FromSI", EmptyTable.Copy());
 	
-	Basises_SO_SC_PI_GR = BasisesTable.CopyColumns();
+	Tables.Insert("FromSC", EmptyTable.Copy());
+	
+	FromSC_ThenFromSO = EmptyTable.Copy();
+	FromSC_ThenFromSO.Columns.Add("ParentBasis", New TypeDescription("DocumentRef.SalesOrder"));
+	Tables.Insert("FromSC_ThenFromSO", FromSC_ThenFromSO);
+	
+	FromSC_ThenFromSI = EmptyTable.Copy();
+	FromSC_ThenFromSI.Columns.Add("ParentBasis", New TypeDescription("DocumentRef.SalesInvoice"));
+	Tables.Insert("FromSC_ThenFromSI", FromSC_ThenFromSI);
+	
+	FromSC_ThenFromPIGR_ThenFromSO = EmptyTable.Copy();
 	ArrayTypes = New Array();
 	ArrayTypes.Add(Type("DocumentRef.PurchaseInvoice"));
 	ArrayTypes.Add(Type("DocumentRef.GoodsReceipt"));
 	ParentBasisTypes = New TypeDescription(ArrayTypes);
-	Basises_SO_SC_PI_GR.Columns.Add("ParentBasis", ParentBasisTypes);
+	FromSC_ThenFromPIGR_ThenFromSO.Columns.Add("ParentBasis", ParentBasisTypes);
+	Tables.Insert("FromSC_ThenFromPIGR_ThenFromSO", FromSC_ThenFromPIGR_ThenFromSO);
 	
-	Basises_SI = BasisesTable.CopyColumns();
-	Basises_SI_SC = BasisesTable.CopyColumns();
-	Basises_SI_SC.Columns.Add("ParentBasis", New TypeDescription("DocumentRef.SalesInvoice"));
+	Tables.Insert("FromPO", EmptyTable.Copy());
+	Tables.Insert("FromPI", EmptyTable.Copy());
 	
-	Basises_SC = BasisesTable.CopyColumns();
+	Tables.Insert("FromGR", EmptyTable.Copy());
 	
-	Basises_PO = BasisesTable.CopyColumns();
-	Basises_PO_GR = BasisesTable.CopyColumns();
-	Basises_PO_GR.Columns.Add("ParentBasis", New TypeDescription("DocumentRef.PurchaseOrder"));
+	FromGR_ThenFromPO = EmptyTable.Copy();
+	FromGR_ThenFromPO.Columns.Add("ParentBasis", New TypeDescription("DocumentRef.PurchaseOrder"));
+	Tables.Insert("FromGR_ThenFromPO", FromGR_ThenFromPO);
 	
-	Basises_PI = BasisesTable.CopyColumns();
-	Basises_PI_GR = BasisesTable.CopyColumns();
-	Basises_PI_GR.Columns.Add("ParentBasis", New TypeDescription("DocumentRef.PurchaseInvoice"));
-		
-	Basises_GR = BasisesTable.CopyColumns();
+	FromGR_ThenFromPI = EmptyTable.Copy();
+	FromGR_ThenFromPI.Columns.Add("ParentBasis", New TypeDescription("DocumentRef.PurchaseInvoice"));
+	Tables.Insert("FromGR_ThenFromPI", FromGR_ThenFromPI);
 	
-	For Each Row In BasisesTable Do
-		If TypeOf(Row.Basis) = Type("DocumentRef.SalesOrder") Then
-			FillPropertyValues(Basises_SO.Add(), Row);
-		ElsIf TypeOf(Row.Basis) = Type("DocumentRef.SalesInvoice") Then
-			FillPropertyValues(Basises_SI.Add(), Row);
-		ElsIf TypeOf(Row.Basis) = Type("DocumentRef.ShipmentConfirmation") Then
-			
-			BasisesInfo = GetBasisesInfo(Row.Basis, Row.BasisKey, Row.RowID);
-			If TypeOf(BasisesInfo.ParentBasis) = Type("DocumentRef.SalesOrder") Then
-				NewRow = Basises_SO_SC.Add();
-				FillPropertyValues(NewRow, Row);
-				NewRow.ParentBasis = BasisesInfo.ParentBasis;
-			ElsIf TypeOf(BasisesInfo.ParentBasis) = Type("DocumentRef.SalesInvoice") Then
-				NewRow = Basises_SI_SC.Add();
-				FillPropertyValues(NewRow, Row);
-				NewRow.ParentBasis = BasisesInfo.ParentBasis;
-			ElsIf TypeOf(BasisesInfo.RowRef.Basis) = Type("DocumentRef.SalesOrder") 
-				And (TypeOf(BasisesInfo.ParentBasis) = Type("DocumentRef.GoodsReceipt") 
-				Or TypeOf(BasisesInfo.ParentBasis) = Type("DocumentRef.PurchaseInvoice")) Then	
+	FromPIGR_ThenFromSO = EmptyTable.Copy();
+	FromPIGR_ThenFromSO.Columns.Add("ParentBasis", New TypeDescription("DocumentRef.SalesOrder"));
+	Tables.Insert("FromPIGR_ThenFromSO", FromPIGR_ThenFromSO);
+	
+	Return Tables;
+EndFunction
+
+Procedure FillTablesFor_SO(Tables, DataReceiver, RowBasisesTable)
+	FillPropertyValues(Tables.FromSO.Add(), RowBasisesTable);
+EndProcedure
+
+Procedure FillTablesFor_SI(Tables, DataReceiver, RowBasisesTable)
+	FillPropertyValues(Tables.FromSI.Add(), RowBasisesTable);
+EndProcedure
+
+Procedure FillTablesFor_SC(Tables, DataReceiver, RowBasisesTable)
+	BasisesInfo = GetBasisesInfo(RowBasisesTable.Basis, RowBasisesTable.BasisKey, RowBasisesTable.RowID);
+	If TypeOf(BasisesInfo.ParentBasis) = Type("DocumentRef.SalesOrder") Then
+		NewRow = Tables.FromSC_ThenFromSO.Add();
+		FillPropertyValues(NewRow, RowBasisesTable);
+		NewRow.ParentBasis = BasisesInfo.ParentBasis;
+	ElsIf TypeOf(BasisesInfo.ParentBasis) = Type("DocumentRef.SalesInvoice") Then
+		NewRow = Tables.FromSC_ThenFromSI.Add();
+		FillPropertyValues(NewRow, RowBasisesTable);
+		NewRow.ParentBasis = BasisesInfo.ParentBasis;
+	ElsIf TypeOf(BasisesInfo.RowRef.Basis) = Type("DocumentRef.SalesOrder") 
+			And (TypeOf(BasisesInfo.ParentBasis) = Type("DocumentRef.GoodsReceipt") 
+			Or TypeOf(BasisesInfo.ParentBasis) = Type("DocumentRef.PurchaseInvoice")) Then	
 				
-				NewRow = Basises_SO_SC_PI_GR.Add();
-				FillPropertyValues(NewRow, Row);
-				NewRow.ParentBasis = BasisesInfo.ParentBasis;
+		NewRow = Tables.FromSC_ThenFromPIGR_ThenFromSO.Add();
+		FillPropertyValues(NewRow, RowBasisesTable);
+		NewRow.ParentBasis = BasisesInfo.ParentBasis;
 						
-			Else
-				FillPropertyValues(Basises_SC.Add(), Row);
-			EndIf;
-			
-		ElsIf TypeOf(Row.Basis) = Type("DocumentRef.PurchaseOrder") Then
-			FillPropertyValues(Basises_PO.Add(), Row);
-		ElsIf TypeOf(Row.Basis) = Type("DocumentRef.PurchaseInvoice") Then
-			
-			If TypeOf(Row.RowRef.Basis) = Type("DocumentRef.SalesOrder") 
-				And (TypeOf(DataReceiver) = Type("DocumentRef.SalesInvoice") 
-					Or TypeOf(DataReceiver) = Type("DocumentRef.ShipmentConfirmation")) Then
-				NewRow = Basises_SO_PI_GR.Add();
-				FillPropertyValues(NewRow, Row);
-				NewRow.ParentBasis = Row.RowRef.Basis;
-				Continue;
-			EndIf;
-			
-			FillPropertyValues(Basises_PI.Add(), Row);
-		ElsIf TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt") Then
-			
-			If TypeOf(Row.RowRef.Basis) = Type("DocumentRef.SalesOrder") 
-				And (TypeOf(DataReceiver) = Type("DocumentRef.SalesInvoice") 
-					Or TypeOf(DataReceiver) = Type("DocumentRef.ShipmentConfirmation")) Then
-				NewRow = Basises_SO_PI_GR.Add();
-				FillPropertyValues(NewRow, Row);
-				NewRow.ParentBasis = Row.RowRef.Basis;
-				Continue;
-			EndIf;
-			
-			BasisesInfo = GetBasisesInfo(Row.Basis, Row.BasisKey, Row.RowID);
-			If TypeOf(BasisesInfo.ParentBasis) = Type("DocumentRef.PurchaseOrder") Then
-				NewRow = Basises_PO_GR.Add();
-				FillPropertyValues(NewRow, Row);
-				NewRow.ParentBasis = BasisesInfo.ParentBasis;
-			ElsIf TypeOf(BasisesInfo.ParentBasis) = Type("DocumentRef.PurchaseInvoice") Then
-				NewRow = Basises_PI_GR.Add();
-				FillPropertyValues(NewRow, Row);
-				NewRow.ParentBasis = BasisesInfo.ParentBasis;				
-			Else
-				FillPropertyValues(Basises_GR.Add(), Row);
-			EndIf;
-			
-		EndIf;
-	EndDo;
+	Else
+		FillPropertyValues(Tables.FromSC.Add(), RowBasisesTable);
+	EndIf;		
+EndProcedure
 	
+Procedure FillTablesFor_PO(Tables, DataReceiver, RowBasisesTable)
+	FillPropertyValues(Tables.FromPO.Add(), RowBasisesTable);
+EndProcedure
+
+Procedure FillTablesFor_PI(Tables, DataReceiver, RowBasisesTable)
+	If TypeOf(RowBasisesTable.RowRef.Basis) = Type("DocumentRef.SalesOrder") 
+		And (TypeOf(DataReceiver) = Type("DocumentRef.SalesInvoice") 
+		Or TypeOf(DataReceiver) = Type("DocumentRef.ShipmentConfirmation")) Then
+				NewRow = Tables.FromPIGR_ThenFromSO.Add();
+				FillPropertyValues(NewRow, RowBasisesTable);
+				NewRow.ParentBasis = RowBasisesTable.RowRef.Basis;
+	Else
+		FillPropertyValues(Tables.FromPI.Add(), RowBasisesTable);
+	EndIf;	
+EndProcedure
+
+Procedure FillTablesFor_GR(Tables, DataReceiver, RowBasisesTable)
+	If TypeOf(RowBasisesTable.RowRef.Basis) = Type("DocumentRef.SalesOrder") 
+		And (TypeOf(DataReceiver) = Type("DocumentRef.SalesInvoice") 
+		Or TypeOf(DataReceiver) = Type("DocumentRef.ShipmentConfirmation")) Then
+			NewRow = Tables.FromPIGR_ThenFromSO.Add();
+			FillPropertyValues(NewRow, RowBasisesTable);
+			NewRow.ParentBasis = RowBasisesTable.RowRef.Basis;
+	Else
+		BasisesInfo = GetBasisesInfo(RowBasisesTable.Basis, RowBasisesTable.BasisKey, RowBasisesTable.RowID);
+		If TypeOf(BasisesInfo.ParentBasis) = Type("DocumentRef.PurchaseOrder") Then
+			NewRow = Tables.FromGR_ThenFromPO.Add();
+			FillPropertyValues(NewRow, RowBasisesTable);
+			NewRow.ParentBasis = BasisesInfo.ParentBasis;
+		ElsIf TypeOf(BasisesInfo.ParentBasis) = Type("DocumentRef.PurchaseInvoice") Then
+			NewRow = Tables.FromGR_ThenFromPI.Add();
+			FillPropertyValues(NewRow, RowBasisesTable);
+			NewRow.ParentBasis = BasisesInfo.ParentBasis;				
+		Else
+			FillPropertyValues(Tables.FromGR.Add(), RowBasisesTable);
+		EndIf;
+	EndIf;
+EndProcedure
+
+Function ExtractDataByTables(Tables, DataReceiver)
 	ExtractedData = New Array();
 	
-	If Basises_SO.Count() Then
-		ExtractedData.Add(ExtractData_SO(Basises_SO, DataReceiver));
+	If Tables.FromSO.Count() Then
+		ExtractedData.Add(ExtractData_FromSO(Tables.FromSO, DataReceiver));
 	EndIf;
 	
-	If Basises_SI.Count() Then
-		ExtractedData.Add(ExtractData_SI(Basises_SI, DataReceiver));
+	If Tables.FromSI.Count() Then
+		ExtractedData.Add(ExtractData_FromSI(Tables.FromSI, DataReceiver));
 	EndIf;
 	
-	If Basises_SC.Count() Then
-		ExtractedData.Add(ExtractData_SC(Basises_SC, DataReceiver));
+	If Tables.FromSC.Count() Then
+		ExtractedData.Add(ExtractData_FromSC(Tables.FromSC, DataReceiver));
 	EndIf;
 	
-	If Basises_SO_SC.Count() Then
-		ExtractedData.Add(ExtractData_SO_SC(Basises_SO_SC, DataReceiver));
+	If Tables.FromSC_ThenFromSO.Count() Then
+		ExtractedData.Add(ExtractData_FromSC_ThenFromSO(Tables.FromSC_ThenFromSO, DataReceiver));
 	EndIf;
 	
-	If Basises_SO_PI_GR.Count() Then
-		ExtractedData.Add(ExtractData_SO_PI_GR(Basises_SO_PI_GR, DataReceiver));
+	If Tables.FromPIGR_ThenFromSO.Count() Then
+		ExtractedData.Add(ExtractData_FromPIGR_ThenFromSO(Tables.FromPIGR_ThenFromSO, DataReceiver));
 	EndIf;
 	
-	If Basises_SO_SC_PI_GR.Count() Then
-		ExtractedData.Add(ExtractData_SO_SC_PI_GR(Basises_SO_SC_PI_GR, DataReceiver));
+	If Tables.FromSC_ThenFromPIGR_ThenFromSO.Count() Then
+		ExtractedData.Add(ExtractData_FromSC_ThenFromPIGR_ThenFromSO(Tables.FromSC_ThenFromPIGR_ThenFromSO, DataReceiver));
 	EndIf;
 	
-	If Basises_SI_SC.Count() Then
-		ExtractedData.Add(ExtractData_SI_SC(Basises_SI_SC, DataReceiver));
+	If Tables.FromSC_ThenFromSI.Count() Then
+		ExtractedData.Add(ExtractData_FromSC_ThenFromSI(Tables.FromSC_ThenFromSI, DataReceiver));
 	EndIf;
 	
-	If Basises_PO.Count() Then
-		ExtractedData.Add(ExtractData_PO(Basises_PO, DataReceiver));
+	If Tables.FromPO.Count() Then
+		ExtractedData.Add(ExtractData_FromPO(Tables.FromPO, DataReceiver));
 	EndIf;
 	
-	If Basises_PI.Count() Then
-		ExtractedData.Add(ExtractData_PI(Basises_PI, DataReceiver));
+	If Tables.FromPI.Count() Then
+		ExtractedData.Add(ExtractData_FromPI(Tables.FromPI, DataReceiver));
 	EndIf;
 	
-	If Basises_GR.Count() Then
-		ExtractedData.Add(ExtractData_GR(Basises_GR, DataReceiver));
+	If Tables.FromGR.Count() Then
+		ExtractedData.Add(ExtractData_FromGR(Tables.FromGR, DataReceiver));
 	EndIf;
 	
-	If Basises_PO_GR.Count() Then
-		ExtractedData.Add(ExtractData_PO_GR(Basises_PO_GR, DataReceiver));
+	If Tables.FromGR_ThenFromPO.Count() Then
+		ExtractedData.Add(ExtractData_FromGR_ThenFromPO(Tables.FromGR_ThenFromPO, DataReceiver));
 	EndIf;
 	
-	If Basises_PI_GR.Count() Then
-		ExtractedData.Add(ExtractData_PI_GR(Basises_PI_GR, DataReceiver));
+	If Tables.FromGR_ThenFromPI.Count() Then
+		ExtractedData.Add(ExtractData_FromGR_ThenFromPI(Tables.FromGR_ThenFromPI, DataReceiver));
 	EndIf;
 	
 	Return ExtractedData;
 EndFunction
 
-Function ExtractData_SO(BasisesTable, DataReceiver)
+Function ExtractData_FromSO(BasisesTable, DataReceiver)
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -754,7 +790,7 @@ Function ExtractData_SO(BasisesTable, DataReceiver)
 	Return ReduseExtractedDataInfo_SO(Tables, DataReceiver);
 EndFunction
 
-Function ExtractData_SI(BasisesTable, DataReceiver)
+Function ExtractData_FromSI(BasisesTable, DataReceiver)
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -883,7 +919,7 @@ Function ExtractData_SI(BasisesTable, DataReceiver)
 	Return Tables;
 EndFunction
 
-Function ExtractData_SC(BasisesTable, DataReceiver)
+Function ExtractData_FromSC(BasisesTable, DataReceiver)
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -977,7 +1013,7 @@ Function ExtractData_SC(BasisesTable, DataReceiver)
 	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit");
 EndFunction
 
-Function ExtractData_SO_SC(BasisesTable, DataReceiver)
+Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver)
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -1048,7 +1084,7 @@ Function ExtractData_SO_SC(BasisesTable, DataReceiver)
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TablesSO = ExtractData_SO(QueryResults[1].Unload(), DataReceiver);
+	TablesSO = ExtractData_FromSO(QueryResults[1].Unload(), DataReceiver);
 	TablesSO.ItemList.FillValues(True, "UseShipmentConfirmation");
 	
 	TableRowIDInfo             = QueryResults[2].Unload(); 
@@ -1064,7 +1100,94 @@ Function ExtractData_SO_SC(BasisesTable, DataReceiver)
 	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey");
 EndFunction
 
-Function ExtractData_SO_SC_PI_GR(BasisesTable, DataReceiver)
+Function ExtractData_FromSC_ThenFromSI(BasisesTable, DataReceiver)
+	Query = New Query();
+	Query.Text =
+		"SELECT
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.RowID,
+		|	BasisesTable.CurrentStep,
+		|	BasisesTable.RowRef,
+		|	BasisesTable.Basis,
+		|	BasisesTable.ParentBasis,
+		|	BasisesTable.BasisUnit,
+		|	BasisesTable.Quantity
+		|INTO BasisesTable
+		|FROM
+		|	&BasisesTable AS BasisesTable
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT ALLOWED
+		|	BasisesTable.Key,
+		|	RowIDInfo.BasisKey AS BasisKey,
+		|	BasisesTable.RowID,
+		|	BasisesTable.CurrentStep,
+		|	BasisesTable.RowRef,
+		|	BasisesTable.ParentBasis AS Basis,
+		|	BasisesTable.BasisUnit,
+		|	BasisesTable.Quantity
+		|FROM
+		|	BasisesTable AS BasisesTable
+		|		LEFT JOIN Document.ShipmentConfirmation.RowIDInfo AS RowIDInfo
+		|		ON BasisesTable.Basis = RowIDInfo.Ref
+		|		AND BasisesTable.BasisKey = RowIDInfo.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.RowID,
+		|	BasisesTable.CurrentStep,
+		|	BasisesTable.RowRef,
+		|	BasisesTable.Basis,
+		|	BasisesTable.BasisUnit,
+		|	BasisesTable.Quantity
+		|FROM
+		|	BasisesTable AS BasisesTable
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	ItemList.Store AS Store,
+		|	ItemList.ItemKey.Item AS Item,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Unit AS Unit,
+		|	ShipmentConfirmations.Key,
+		|	ShipmentConfirmations.BasisKey,
+		|	ShipmentConfirmations.Basis AS ShipmentConfirmation,
+		|	ShipmentConfirmations.Quantity AS Quantity,
+		|	ShipmentConfirmations.Quantity AS QuantityInShipmentConfirmation
+		|FROM
+		|	BasisesTable AS ShipmentConfirmations
+		|		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
+		|		ON ShipmentConfirmations.Basis = ItemList.Ref
+		|		AND ShipmentConfirmations.BasisKey = ItemList.Key";
+	
+	Query.SetParameter("BasisesTable", BasisesTable);
+	QueryResults = Query.ExecuteBatch();
+	
+	TablesSI = ExtractData_FromSI(QueryResults[1].Unload(), DataReceiver);
+	TablesSI.ItemList.FillValues(True, "UseShipmentConfirmation");
+	
+	TableRowIDInfo             = QueryResults[2].Unload(); 
+	TableShipmentConfirmations = QueryResults[3].Unload();
+	
+	Tables = New Structure();
+	Tables.Insert("ItemList"              , TablesSI.ItemList);
+	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
+	Tables.Insert("TaxList"               , TablesSI.TaxList);
+	Tables.Insert("SpecialOffers"         , TablesSI.SpecialOffers);
+	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
+	
+	Return CollapseRepeatingItemListRows(Tables, "SalesInvoiceItemListKey");
+EndFunction
+
+Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver)
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -1136,23 +1259,23 @@ Function ExtractData_SO_SC_PI_GR(BasisesTable, DataReceiver)
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TablesSOPIGR = ExtractData_SO_PI_GR(QueryResults[1].Unload(), DataReceiver);
-	TablesSOPIGR.ItemList.FillValues(True, "UseShipmentConfirmation");
+	TablesPIGRSO = ExtractData_FromPIGR_ThenFromSO(QueryResults[1].Unload(), DataReceiver);
+	TablesPIGRSO.ItemList.FillValues(True, "UseShipmentConfirmation");
 	
 	TableRowIDInfo             = QueryResults[2].Unload(); 
 	TableShipmentConfirmations = QueryResults[3].Unload();
 	
 	Tables = New Structure();
-	Tables.Insert("ItemList"              , TablesSOPIGR.ItemList);
+	Tables.Insert("ItemList"              , TablesPIGRSO.ItemList);
 	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
-	Tables.Insert("TaxList"               , TablesSOPIGR.TaxList);
-	Tables.Insert("SpecialOffers"         , TablesSOPIGR.SpecialOffers);
+	Tables.Insert("TaxList"               , TablesPIGRSO.TaxList);
+	Tables.Insert("SpecialOffers"         , TablesPIGRSO.SpecialOffers);
 	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
 	
 	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey");
 EndFunction
 
-Function ExtractData_SO_PI_GR(BasisesTable, DataReceiver)
+Function ExtractData_FromPIGR_ThenFromSO(BasisesTable, DataReceiver)
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -1203,7 +1326,7 @@ Function ExtractData_SO_PI_GR(BasisesTable, DataReceiver)
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TablesSO = ExtractData_SO(QueryResults[1].Unload(), DataReceiver);
+	TablesSO = ExtractData_FromSO(QueryResults[1].Unload(), DataReceiver);
 	
 	TableRowIDInfo     = QueryResults[2].Unload(); 
 	
@@ -1216,94 +1339,7 @@ Function ExtractData_SO_PI_GR(BasisesTable, DataReceiver)
 	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey");
 EndFunction
 
-Function ExtractData_SI_SC(BasisesTable, DataReceiver)
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.ParentBasis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|INTO BasisesTable
-		|FROM
-		|	&BasisesTable AS BasisesTable
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT ALLOWED
-		|	BasisesTable.Key,
-		|	RowIDInfo.BasisKey AS BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.ParentBasis AS Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|FROM
-		|	BasisesTable AS BasisesTable
-		|		LEFT JOIN Document.ShipmentConfirmation.RowIDInfo AS RowIDInfo
-		|		ON BasisesTable.Basis = RowIDInfo.Ref
-		|		AND BasisesTable.BasisKey = RowIDInfo.Key
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT
-		|	UNDEFINED AS Ref,
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|FROM
-		|	BasisesTable AS BasisesTable
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT
-		|	UNDEFINED AS Ref,
-		|	ItemList.Store AS Store,
-		|	ItemList.ItemKey.Item AS Item,
-		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.Unit AS Unit,
-		|	ShipmentConfirmations.Key,
-		|	ShipmentConfirmations.BasisKey,
-		|	ShipmentConfirmations.Basis AS ShipmentConfirmation,
-		|	ShipmentConfirmations.Quantity AS Quantity,
-		|	ShipmentConfirmations.Quantity AS QuantityInShipmentConfirmation
-		|FROM
-		|	BasisesTable AS ShipmentConfirmations
-		|		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
-		|		ON ShipmentConfirmations.Basis = ItemList.Ref
-		|		AND ShipmentConfirmations.BasisKey = ItemList.Key";
-	
-	Query.SetParameter("BasisesTable", BasisesTable);
-	QueryResults = Query.ExecuteBatch();
-	
-	TablesSI = ExtractData_SI(QueryResults[1].Unload(), DataReceiver);
-	TablesSI.ItemList.FillValues(True, "UseShipmentConfirmation");
-	
-	TableRowIDInfo             = QueryResults[2].Unload(); 
-	TableShipmentConfirmations = QueryResults[3].Unload();
-	
-	Tables = New Structure();
-	Tables.Insert("ItemList"              , TablesSI.ItemList);
-	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
-	Tables.Insert("TaxList"               , TablesSI.TaxList);
-	Tables.Insert("SpecialOffers"         , TablesSI.SpecialOffers);
-	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
-	
-	Return CollapseRepeatingItemListRows(Tables, "SalesInvoiceItemListKey");
-EndFunction
-
-Function ExtractData_PO(BasisesTable, DataReceiver)
+Function ExtractData_FromPO(BasisesTable, DataReceiver)
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -1432,7 +1468,7 @@ Function ExtractData_PO(BasisesTable, DataReceiver)
 	Return Tables;
 EndFunction
 
-Function ExtractData_PI(BasisesTable, DataReceiver)
+Function ExtractData_FromPI(BasisesTable, DataReceiver)
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -1560,7 +1596,7 @@ Function ExtractData_PI(BasisesTable, DataReceiver)
 	Return Tables;
 EndFunction
 
-Function ExtractData_GR(BasisesTable, DataReceiver)
+Function ExtractData_FromGR(BasisesTable, DataReceiver)
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -1657,7 +1693,7 @@ Function ExtractData_GR(BasisesTable, DataReceiver)
 	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit");
 EndFunction
 
-Function ExtractData_PO_GR(BasisesTable, DataReceiver)
+Function ExtractData_FromGR_ThenFromPO(BasisesTable, DataReceiver)
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -1731,7 +1767,7 @@ Function ExtractData_PO_GR(BasisesTable, DataReceiver)
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TablesPO = ExtractData_PO(QueryResults[1].Unload(), DataReceiver);
+	TablesPO = ExtractData_FromPO(QueryResults[1].Unload(), DataReceiver);
 	TablesPO.ItemList.FillValues(True, "UseGoodsReceipt");
 	
 	TableRowIDInfo     = QueryResults[2].Unload(); 
@@ -1747,7 +1783,7 @@ Function ExtractData_PO_GR(BasisesTable, DataReceiver)
 	Return CollapseRepeatingItemListRows(Tables, "PurchaseOrderItemListKey");
 EndFunction
 
-Function ExtractData_PI_GR(BasisesTable, DataReceiver)
+Function ExtractData_FromGR_ThenFromPI(BasisesTable, DataReceiver)
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -1821,7 +1857,7 @@ Function ExtractData_PI_GR(BasisesTable, DataReceiver)
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TablesPI = ExtractData_PI(QueryResults[1].Unload(), DataReceiver);
+	TablesPI = ExtractData_FromPI(QueryResults[1].Unload(), DataReceiver);
 	TablesPI.ItemList.FillValues(True, "UseGoodsReceipt");
 	
 	TableRowIDInfo     = QueryResults[2].Unload(); 
@@ -2241,85 +2277,85 @@ EndProcedure
 
 Function GetBasises(Ref, FilterValues) Export
 	If TypeOf(Ref) = Type("DocumentRef.SalesInvoice") Then
-		Return GetBasises_SI(FilterValues);
+		Return GetBasisesFor_SI(FilterValues);
 	ElsIf TypeOf(Ref) = Type("DocumentRef.ShipmentConfirmation") Then
-		Return GetBasises_SC(FilterValues);
+		Return GetBasisesFor_SC(FilterValues);
 	ElsIf TypeOf(Ref) = Type("DocumentRef.PurchaseOrder") Then
-		Return GetBasises_PO(FilterValues);
+		Return GetBasisesFor_PO(FilterValues);
 	ElsIf TypeOf(Ref) = Type("DocumentRef.PurchaseInvoice") Then
-		Return GetBasises_PI(FilterValues);
+		Return GetBasisesFor_PI(FilterValues);
 	ElsIf TypeOf(Ref) = Type("DocumentRef.GoodsReceipt") Then
-		Return GetBasises_GR(FilterValues);
+		Return GetBasisesFor_GR(FilterValues);
 	EndIf;
 EndFunction
 
-Function GetBasises_SI(FilterValues)
+Function GetBasisesFor_SI(FilterValues)
 	StepArray = New Array;
 	StepArray.Add(Catalogs.MovementRules.SI);
 	StepArray.Add(Catalogs.MovementRules.SI_SC);
 	
-	BasisesTypes = GetBasisesTypes();
-	BasisesTypes.SO = True;
-	BasisesTypes.SC = True;
+	FilterSets = GetAvailableFilterSets();
+	FilterSets.SO = True;
+	FilterSets.SC = True;
 	
-	BasisesTypes.GR = True;
-	BasisesTypes.PI = True;
+	FilterSets.GR = True;
+	FilterSets.PI = True;
 	
-	Return GetBasisesTable(StepArray, FilterValues, BasisesTypes);
+	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
 
-Function GetBasises_SC(FilterValues)	
+Function GetBasisesFor_SC(FilterValues)	
 	StepArray = New Array;
 	StepArray.Add(Catalogs.MovementRules.SC);
 	StepArray.Add(Catalogs.MovementRules.SI_SC);
 	
-	BasisesTypes = GetBasisesTypes();
-	BasisesTypes.SO = True;
-	BasisesTypes.SI = True;
+	FilterSets = GetAvailableFilterSets();
+	FilterSets.SO = True;
+	FilterSets.SI = True;
 	
-	BasisesTypes.GR = True;
-	BasisesTypes.PI = True;
+	FilterSets.GR = True;
+	FilterSets.PI = True;
 	
-	Return GetBasisesTable(StepArray, FilterValues, BasisesTypes);
+	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
 
-Function GetBasises_PO(FilterValues)
+Function GetBasisesFor_PO(FilterValues)
 	StepArray = New Array;
 	StepArray.Add(Catalogs.MovementRules.PO_PI);
 	
-	BasisesTypes = GetBasisesTypes();
-	BasisesTypes.SO_PO_PI = True;
+	FilterSets = GetAvailableFilterSets();
+	FilterSets.SO_ProcMethodPurchase = True;
 	
-	Return GetBasisesTable(StepArray, FilterValues, BasisesTypes);
+	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
 
-Function GetBasises_PI(FilterValues)
+Function GetBasisesFor_PI(FilterValues)
 	StepArray = New Array;
 	StepArray.Add(Catalogs.MovementRules.PI);
 	StepArray.Add(Catalogs.MovementRules.PI_GR);
 	StepArray.Add(Catalogs.MovementRules.PO_PI);
 	
-	BasisesTypes = GetBasisesTypes();
-	BasisesTypes.PO = True;
-	BasisesTypes.GR = True;
-	BasisesTypes.SO_PO_PI = True;
+	FilterSets = GetAvailableFilterSets();
+	FilterSets.PO = True;
+	FilterSets.GR = True;
+	FilterSets.SO_ProcMethodPurchase = True;
 	
-	Return GetBasisesTable(StepArray, FilterValues, BasisesTypes);
+	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
 
-Function GetBasises_GR(FilterValues)	
+Function GetBasisesFor_GR(FilterValues)	
 	StepArray = New Array;
 	StepArray.Add(Catalogs.MovementRules.GR);
 	StepArray.Add(Catalogs.MovementRules.PI_GR);
 	
-	BasisesTypes = GetBasisesTypes();
-	BasisesTypes.PO = True;
-	BasisesTypes.PI = True;
+	FilterSets = GetAvailableFilterSets();
+	FilterSets.PO = True;
+	FilterSets.PI = True;
 	
-	Return GetBasisesTable(StepArray, FilterValues, BasisesTypes);
+	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
 
-Function GetBasisesTypes()
+Function GetAvailableFilterSets()
 	Result = New Structure();
 	Result.Insert("SO", False);
 	Result.Insert("SC", False);
@@ -2327,16 +2363,16 @@ Function GetBasisesTypes()
 	Result.Insert("PO", False);
 	Result.Insert("GR", False);
 	Result.Insert("PI", False);
-	Result.Insert("SO_PO_PI", False);
+	Result.Insert("SO_ProcMethodPurchase", False);
 	Return Result;
 EndFunction
 
-Function GetBasisesTable(StepArray, FilterValues, BasisesTypes)				
+Function GetBasisesTable(StepArray, FilterValues, FilterSets)				
 	Query = New Query;
 	FillQueryParameters(Query, FilterValues);
 	
 	Query.SetParameter("StepArray", StepArray);
-	For Each KeyValue In BasisesTypes Do
+	For Each KeyValue In FilterSets Do
 		Query.SetParameter(KeyValue.Key, KeyValue.Value);
 	EndDo;
 	
@@ -2378,39 +2414,39 @@ Function GetBasisesTable(StepArray, FilterValues, BasisesTypes)
 	|INTO AllData
 	|WHERE FALSE ");
 	
-	If BasisesTypes.SO Then
-		CreateTempTable_RowIDMovements_SO(Query);
-		QueryArray.Add(GetQueryText_RowIDMovements_SO());
+	If FilterSets.SO Then
+		ApplyFilterSet_SO(Query);
+		QueryArray.Add(GetDataByFilterSet_SO());
 	EndIf;
 	
-	If BasisesTypes.SI Then
-		CreateTempTable_RowIDMovements_SI(Query);
-		QueryArray.Add(GetQueryText_RowIDMovements_SI());
+	If FilterSets.SI Then
+		ApplyFilterSet_SI(Query);
+		QueryArray.Add(GetDataByFilterSet_SI());
 	EndIf;
 	
-	If BasisesTypes.SC Then
-		CreateTempTable_RowIDMovements_SC(Query);
-		QueryArray.Add(GetQueryText_RowIDMovements_SC());
+	If FilterSets.SC Then
+		ApplyFilterSet_SC(Query);
+		QueryArray.Add(GetDataByFilterSet_SC());
 	EndIf;
 		
-	If BasisesTypes.PO Then
-		CreateTempTable_RowIDMovements_PO(Query);
-		QueryArray.Add(GetQueryText_RowIDMovements_PO());
+	If FilterSets.PO Then
+		ApplyFilterSet_PO(Query);
+		QueryArray.Add(GetDataByFilterSet_PO());
 	EndIf;
 	
-	If BasisesTypes.PI Then
-		CreateTempTable_RowIDMovements_PI(Query);
-		QueryArray.Add(GetQueryText_RowIDMovements_PI());
+	If FilterSets.PI Then
+		ApplyFIlterSet_PI(Query);
+		QueryArray.Add(GetDataByFilterSet_PI());
 	EndIf;
 	
-	If BasisesTypes.GR Then
-		CreateTempTable_RowIDMovements_GR(Query);
-		QueryArray.Add(GetQueryText_RowIDMovements_GR());
+	If FilterSets.GR Then
+		ApplyFilterSet_GR(Query);
+		QueryArray.Add(GetDataByFilterSet_GR());
 	EndIf;
 	
-	If BasisesTypes.SO_PO_PI Then
-		CreateTempTable_RowIDMovements_SO_PO_PI(Query);
-		QueryArray.Add(GetQueryText_RowIDMovements_SO_PO_PI());
+	If FilterSets.SO_ProcMethodPurchase Then
+		ApplyFilterSet_SO_ProcMethodPurchase(Query);
+		QueryArray.Add(GetDataByFilterSet_SO_ProcMethodPurchase());
 	EndIf;
 	
 	Query.Text = StrConcat(QueryArray, " UNION ALL ");
@@ -2458,7 +2494,7 @@ Procedure FillQueryParameters(Query, FilterValues)
 	EndDo;
 EndProcedure	
 
-Procedure CreateTempTable_RowIDMovements_SO(Query)
+Procedure ApplyFilterSet_SO(Query)
 	Query.Text = 
 	"SELECT
 	|	RowIDMovements.RowID,
@@ -2524,7 +2560,7 @@ Procedure CreateTempTable_RowIDMovements_SO(Query)
 	Query.Execute();
 EndProcedure	
 
-Procedure CreateTempTable_RowIDMovements_SC(Query)
+Procedure ApplyFilterSet_SC(Query)
 	Query.Text = 
 	"SELECT
 	|	RowIDMovements.RowID,
@@ -2581,7 +2617,7 @@ Procedure CreateTempTable_RowIDMovements_SC(Query)
 	Query.Execute();
 EndProcedure
 
-Procedure CreateTempTable_RowIDMovements_SI(Query)
+Procedure ApplyFilterSet_SI(Query)
 	Query.Text = 
 	"SELECT
 	|	RowIDMovements.RowID,
@@ -2642,7 +2678,7 @@ Procedure CreateTempTable_RowIDMovements_SI(Query)
 	Query.Execute();
 EndProcedure
 
-Procedure CreateTempTable_RowIDMovements_PO(Query)
+Procedure ApplyFilterSet_PO(Query)
 	Query.Text = 
 	"SELECT
 	|	RowIDMovements.RowID,
@@ -2704,7 +2740,7 @@ Procedure CreateTempTable_RowIDMovements_PO(Query)
 	Query.Execute();
 EndProcedure	
 
-Procedure CreateTempTable_RowIDMovements_GR(Query)
+Procedure ApplyFilterSet_GR(Query)
 	Query.Text = 
 	"SELECT
 	|	RowIDMovements.RowID,
@@ -2756,7 +2792,7 @@ Procedure CreateTempTable_RowIDMovements_GR(Query)
 	Query.Execute();
 EndProcedure
 
-Procedure CreateTempTable_RowIDMovements_PI(Query)
+Procedure ApplyFIlterSet_PI(Query)
 	Query.Text = 
 	"SELECT
 	|	RowIDMovements.RowID,
@@ -2818,7 +2854,7 @@ Procedure CreateTempTable_RowIDMovements_PI(Query)
 	Query.Execute();
 EndProcedure
 
-Procedure CreateTempTable_RowIDMovements_SO_PO_PI(Query)
+Procedure ApplyFilterSet_SO_ProcMethodPurchase(Query)
 	Query.Text = 
 	"SELECT
 	|	RowIDMovements.RowID,
@@ -2864,7 +2900,7 @@ Procedure CreateTempTable_RowIDMovements_SO_PO_PI(Query)
 	Query.Execute();
 EndProcedure	
 
-Function GetQueryText_RowIDMovements_SO()
+Function GetDataByFilterSet_SO()
 	Return
 	"SELECT 
 	|	Doc.ItemKey,
@@ -2893,7 +2929,7 @@ Function GetQueryText_RowIDMovements_SO()
 	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
 EndFunction
 
-Function GetQueryText_RowIDMovements_PO()
+Function GetDataByFilterSet_PO()
 	Return
 	"SELECT
 	|	Doc.ItemKey,
@@ -2922,7 +2958,7 @@ Function GetQueryText_RowIDMovements_PO()
 	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
 EndFunction
 
-Function GetQueryText_RowIDMovements_SI()
+Function GetDataByFilterSet_SI()
 	Return
 	"SELECT
 	|	Doc.ItemKey,
@@ -2951,7 +2987,7 @@ Function GetQueryText_RowIDMovements_SI()
 	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
 EndFunction
 
-Function GetQueryText_RowIDMovements_PI()
+Function GetDataByFilterSet_PI()
 	Return
 	"SELECT
 	|	Doc.ItemKey,
@@ -2980,7 +3016,7 @@ Function GetQueryText_RowIDMovements_PI()
 	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
 EndFunction
 
-Function GetQueryText_RowIDMovements_SC()
+Function GetDataByFilterSet_SC()
 	Return
 	"SELECT
 	|	Doc.ItemKey,
@@ -3009,7 +3045,7 @@ Function GetQueryText_RowIDMovements_SC()
 	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
 EndFunction
 
-Function GetQueryText_RowIDMovements_GR()
+Function GetDataByFilterSet_GR()
 	Return
 	"SELECT
 	|	Doc.ItemKey,
@@ -3038,7 +3074,7 @@ Function GetQueryText_RowIDMovements_GR()
 	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
 EndFunction
 
-Function GetQueryText_RowIDMovements_SO_PO_PI()
+Function GetDataByFilterSet_SO_ProcMethodPurchase()
 	Return
 	"SELECT
 	|	Doc.ItemKey,

@@ -520,14 +520,15 @@ EndProcedure
 &AtClient
 Function GetLinkedDocumentsFilter()
 	Filter = New Structure();
-	Filter.Insert("Company"         , Object.Company);
-	Filter.Insert("Partner"         , Object.Partner);
-	Filter.Insert("LegalName"       , Object.LegalName);
-	Filter.Insert("Agreement"       , Object.Agreement);
-	Filter.Insert("Currency"        , Object.Currency);
-	Filter.Insert("PriceIncludeTax" , Object.PriceIncludeTax);
-	Filter.Insert("TransactionType" , PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Sales"));
-	Filter.Insert("Ref"             , Object.Ref);
+	Filter.Insert("Company"           , Object.Company);
+	Filter.Insert("Partner"           , Object.Partner);
+	Filter.Insert("LegalName"         , Object.LegalName);
+	Filter.Insert("Agreement"         , Object.Agreement);
+	Filter.Insert("Currency"          , Object.Currency);
+	Filter.Insert("PriceIncludeTax"   , Object.PriceIncludeTax);
+	Filter.Insert("TransactionType"   , PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Sales"));
+	Filter.Insert("ProcurementMethod" , PredefinedValue("Enum.ProcurementMethods.Purchase"));
+	Filter.Insert("Ref"               , Object.Ref);
 	Return Filter;
 EndFunction
 

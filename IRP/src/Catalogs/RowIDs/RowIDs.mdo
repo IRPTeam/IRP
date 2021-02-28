@@ -292,22 +292,6 @@
     </fillValue>
     <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="680f3e63-d733-4fa4-b818-8534c0e018d1">
-    <name>TransactionType</name>
-    <synonym>
-      <key>en</key>
-      <value>Transaction type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.ShipmentConfirmationTransactionTypes</types>
-      <types>EnumRef.GoodsReceiptTransactionTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="36946680-c7fd-4c04-84cc-ed54b5f272ae">
     <name>ProcurementMethod</name>
     <synonym>
@@ -376,6 +360,22 @@
     </synonym>
     <type>
       <types>EnumRef.GoodsReceiptTransactionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="1daa5b17-bc59-4001-b273-6d398c6bb3bd">
+    <name>TransactionType</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.GoodsReceiptTransactionTypes</types>
+      <types>EnumRef.ShipmentConfirmationTransactionTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

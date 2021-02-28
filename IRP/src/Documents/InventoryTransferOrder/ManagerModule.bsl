@@ -415,7 +415,7 @@ Function R4035B_IncomingStocks()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemLIst.UsePurchaseOrder
+		|	ItemLIst.PurchaseOrderExists
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.StoreSender,
@@ -448,7 +448,7 @@ Function R4036B_IncomingStocksRequested()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.UsePurchaseOrder
+		|	ItemList.PurchaseOrderExists
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.StoreSender,

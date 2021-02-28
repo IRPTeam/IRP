@@ -92,12 +92,17 @@ EndProcedure
 
 #EndRegion
 
+Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
+	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
+EndProcedure
+
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings = Undefined) Export
 	For Each Row In Object.ItemList Do
 		If Not ValueIsFilled(Row.Key) Then
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
+	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 
 Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export

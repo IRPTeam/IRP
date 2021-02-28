@@ -402,6 +402,19 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="4a236a01-236d-4693-a593-e755c52b384e">
+      <name>BasisKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
   </tabularSections>
   <commands uuid="72dfe6ff-ce51-42e0-b41f-3290dfcc4448">
     <name>GenerateInventoryTransfer</name>
@@ -416,5 +429,18 @@
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>
     <shortcut></shortcut>
+  </commands>
+  <commands uuid="b6ec1896-3af6-4811-8258-60443b2206ea">
+    <name>Generate</name>
+    <synonym>
+      <key>en</key>
+      <value>(new) Inventory transfer</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.InventoryTransferOrder</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
   </commands>
 </mdclass:Document>

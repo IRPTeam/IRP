@@ -25,24 +25,8 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	
-	If FillingData = Undefined Then
-		Return;
-	EndIf;
-	
 	If TypeOf(FillingData) = Type("Structure") Then
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "InventoryTransferOrder" Then
-			Filling_BasedOnInventoryTransferOrder(FillingData);
-		EndIf;
+		FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
+		RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 	EndIf;
-EndProcedure
-
-Procedure Filling_BasedOnInventoryTransferOrder(FillingData)
-	FillPropertyValues(ThisObject, FillingData,
-		"StoreSender, StoreReceiver, Company");
-	
-	For Each Row In FillingData.ItemList Do
-		NewRow = ThisObject.ItemList.Add();
-		FillPropertyValues(NewRow, Row);
-	EndDo;
 EndProcedure

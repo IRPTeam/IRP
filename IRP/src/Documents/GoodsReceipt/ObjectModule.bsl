@@ -44,9 +44,6 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		If FillingData.Property("BasedOn") And FillingData.BasedOn = "Bundling" Then
 			TransactionType = Enums.GoodsReceiptTransactionTypes.Bundling;
 			Filling_BasedOn(FillingData);
-		ElsIf FillingData.Property("BasedOn") And FillingData.BasedOn = "InventoryTransfer" Then
-			TransactionType = Enums.GoodsReceiptTransactionTypes.InventoryTransfer;
-			Filling_BasedOn(FillingData);
 		ElsIf FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesReturn" Then
 			TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
 			Filling_BasedOn(FillingData);

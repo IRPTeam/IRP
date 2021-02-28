@@ -546,7 +546,7 @@ EndProcedure
 &AtClient
 Function GetLinkedDocumentsFilter()
 	Filter = New Structure();
-	Filter.Insert("Company"           , Object.Ref);
+	Filter.Insert("Company"           , Object.Company);
 	Filter.Insert("ProcurementMethod" , PredefinedValue("Enum.ProcurementMethods.Purchase"));
 	Filter.Insert("Ref"               , Object.Ref);
 	Return Filter;

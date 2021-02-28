@@ -272,10 +272,11 @@ EndProcedure
 &AtClient
 Function GetLinkedDocumentsFilter()
 	Filter = New Structure();
-	Filter.Insert("Company"   , Object.Company);
-	Filter.Insert("Partner"   , Object.Partner);
-	Filter.Insert("LegalName" , Object.LegalName);
-	Filter.Insert("Ref"       , Object.Ref);
+	Filter.Insert("Company"         , Object.Company);
+	Filter.Insert("Partner"         , Object.Partner);
+	Filter.Insert("LegalName"       , Object.LegalName);
+	Filter.Insert("TransactionType" , Object.TransactionType);
+	Filter.Insert("Ref"             , Object.Ref);
 	Return Filter;
 EndFunction
 

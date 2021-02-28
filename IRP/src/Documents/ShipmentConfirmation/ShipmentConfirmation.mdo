@@ -548,6 +548,7 @@
     <commandParameterType>
       <types>DocumentRef.SalesOrder</types>
       <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.InventoryTransfer</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <modifiesData>true</modifiesData>

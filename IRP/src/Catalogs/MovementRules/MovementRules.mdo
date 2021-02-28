@@ -162,6 +162,13 @@
         <value>14</value>
       </code>
     </items>
+    <items id="3953836b-262d-4b77-ace4-a4ddbfe7e814">
+      <name>IT</name>
+      <description>IT</description>
+      <code xsi:type="core:StringValue">
+        <value>15</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

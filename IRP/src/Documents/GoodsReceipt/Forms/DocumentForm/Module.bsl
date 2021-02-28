@@ -291,6 +291,7 @@ Function GetLinkedDocumentsFilter()
 	Filter.Insert("Company"         , Object.Company);
 	Filter.Insert("Partner"         , Object.Partner);
 	Filter.Insert("LegalName"       , Object.LegalName);
+	Filter.Insert("TransactionType" , Object.TransactionType);
 	Filter.Insert("Ref"             , Object.Ref);
 	Return Filter;
 EndFunction

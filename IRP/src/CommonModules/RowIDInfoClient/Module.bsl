@@ -43,18 +43,21 @@ Function GetSelectedRowInfo(CurrentData) Export
 	If CurrentData = Undefined Then
 		Return Result;
 	EndIf;
-	
+	Store = Undefined;
+	If CommonFunctionsClientServer.ObjectHasProperty(CurrentData, "Store") Then
+		Store = CurrentData.Store;
+	EndIf;
 	Result.SelectedRow = New Structure();
 	Result.SelectedRow.Insert("Key"      , CurrentData.Key);
 	Result.SelectedRow.Insert("Item"     , CurrentData.Item);
 	Result.SelectedRow.Insert("ItemKey"  , CurrentData.ItemKey);
-	Result.SelectedRow.Insert("Store"    , CurrentData.Store);
+	Result.SelectedRow.Insert("Store"    , Store);
 	Result.SelectedRow.Insert("Unit"     , CurrentData.Unit);
 	Result.SelectedRow.Insert("Quantity" , CurrentData.Quantity);
 		
 	Result.FilterBySelectedRow = New Structure();
 	Result.FilterBySelectedRow.Insert("ItemKey"  , CurrentData.ItemKey);
-	Result.FilterBySelectedRow.Insert("Store"    , CurrentData.Store);		
+	Result.FilterBySelectedRow.Insert("Store"    , Store);		
 	Return Result;
 EndFunction
 
@@ -77,7 +80,11 @@ Function GetItemListRows(ItemList) Export
 		NewRow.Insert("Item"      , Row.Item); 
 		NewRow.Insert("ItemKey"   , Row.ItemKey); 
 		NewRow.Insert("Unit"      , Row.Unit);
-		NewRow.Insert("Store"     , Row.Store);
+		If CommonFunctionsClientServer.ObjectHasProperty(Row, "Store") Then
+			NewRow.Insert("Store", Row.Store);
+		Else
+			NewRow.Insert("Store", Undefined);
+		EndIf;
 		NewRow.Insert("Quantity"  , Row.Quantity);
 		ItemListRows.Add(NewRow);
 	EndDo;	

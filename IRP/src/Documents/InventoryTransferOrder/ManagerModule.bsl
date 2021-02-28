@@ -290,6 +290,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4012B_StockReservation());
+	QueryArray.Add(R4016B_InternalSupplyRequestOrdering());
 	QueryArray.Add(R4020T_StockTransferOrders());
 	QueryArray.Add(R4021B_StockTransferOrdersReceipt());
 	QueryArray.Add(R4022B_StockTransferOrdersShipment());
@@ -307,12 +308,13 @@ Function ItemList()
 		|	InventoryTransferOrderItemList.Ref.StoreSender AS StoreSender,
 		|	InventoryTransferOrderItemList.Ref.StoreReceiver AS StoreReceiver,
 		|	InventoryTransferOrderItemList.Ref AS Order,
-		|	InventoryTransferOrderItemList.InternalSupplyRequest AS InternalSupplyRequest,
 		|	InventoryTransferOrderItemList.ItemKey AS ItemKey,
 		|	InventoryTransferOrderItemList.QuantityInBaseUnit AS Quantity,
 		|	InventoryTransferOrderItemList.Key AS RowKey,
 		|	InventoryTransferOrderItemList.PurchaseOrder AS PurchaseOrder,
 		|	NOT InventoryTransferOrderItemList.PurchaseOrder.Ref IS NULL AS PurchaseOrderExists,
+		|	InventoryTransferOrderItemList.InternalSupplyRequest AS InternalSupplyRequest,
+		|	NOT InventoryTransferOrderItemList.InternalSupplyRequest.Ref IS NULL AS InternalSupplyRequestExists,
 		|	InventoryTransferOrderItemList.Ref.UseGoodsReceipt AS UseGoodsReceipt,
 		|	InventoryTransferOrderItemList.Ref.UseShipmentConfirmation AS UseShipmentConfirmation
 		|INTO ItemList
@@ -364,6 +366,19 @@ Function R4012B_StockReservation()
 		|	ItemList.ItemKey,
 		|	ItemList.Order";
 EndFunction	
+
+Function R4016B_InternalSupplyRequestOrdering()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.StoreSender AS Store,
+		|	*
+		|INTO R4016B_InternalSupplyRequestOrdering
+		|FROM 
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.InternalSupplyRequestExists";
+EndFunction
 
 Function R4020T_StockTransferOrders()
 	Return

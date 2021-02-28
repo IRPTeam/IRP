@@ -54,6 +54,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion	
 	
@@ -474,6 +475,11 @@ EndFunction
 Function GetAdditionalQueryParamenters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
+	If ValueIsFilled(Ref) Then
+		StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	Else
+		StrParams.Insert("BalancePeriod", Undefined);
+	EndIf;
 	Return StrParams;
 EndFunction
 
@@ -575,7 +581,7 @@ Function R4011B_FreeStocks()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT InventoryTransferOrderExists
-		|	AND NOT ItemList.ReceiverUseGoodsReceipt";
+		|	AND NOT ItemList.UseGoodsReceipt";
 EndFunction
 
 Function R4012B_StockReservation()
@@ -719,7 +725,7 @@ Function R4050B_StockInventory()
 		|	ItemList.StoreSender AS Store,
 		|	ItemList.ItemKey,
 		|	ItemList.Quantity
-		|INTO R4011B_FreeStocks
+		|INTO R4050B_StockInventory
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE

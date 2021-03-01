@@ -1188,22 +1188,6 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
-  <commands uuid="67571b12-57b7-4fed-998a-8d6f75b9e9d9">
-    <name>GeneratePurchaseInvoice</name>
-    <synonym>
-      <key>en</key>
-      <value>Purchase invoice</value>
-    </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType>
-      <types>DocumentRef.PurchaseOrder</types>
-      <types>DocumentRef.SalesOrder</types>
-      <types>DocumentRef.GoodsReceipt</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-    <shortcut></shortcut>
-  </commands>
   <commands uuid="3d6c750a-5c87-42b0-935c-d84c03253f22">
     <name>Generate</name>
     <synonym>

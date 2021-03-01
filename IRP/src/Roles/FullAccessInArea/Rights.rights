@@ -16407,13 +16407,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.PurchaseInvoice.Command.GeneratePurchaseInvoice</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.PurchaseOrder.Command.GeneratePurchaseOrder</name>
 		<right>
 			<name>View</name>
@@ -16443,13 +16436,6 @@
 	</object>
 	<object>
 		<name>Document.RetailReturnReceipt.Command.GenerateSalesReturn</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesInvoice.Command.GenerateSalesInvoice</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

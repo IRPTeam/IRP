@@ -1276,21 +1276,6 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
-  <commands uuid="1940e8ac-35c7-4889-9c93-09a9af1eb411">
-    <name>GenerateSalesInvoice</name>
-    <synonym>
-      <key>en</key>
-      <value>Sales invoice</value>
-    </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType>
-      <types>DocumentRef.ShipmentConfirmation</types>
-      <types>DocumentRef.SalesOrder</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-    <shortcut></shortcut>
-  </commands>
   <commands uuid="884ba46e-eebe-48ad-aaf4-2d1edd607970">
     <name>Generate</name>
     <synonym>

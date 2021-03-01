@@ -306,48 +306,6 @@ Scenario: _028810 create document Shipment confirmation  based on Inventory tran
 
 
 
-Scenario: _02881101 clear movements Shipment confirmation and check that there is no movements on the registers 
-	* Open list form Shipment confirmation
-		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
-	* Check the report generation
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberShipmentConfirmation028801$$'      |
-	* Clear movements document and check that there is no movement on the registers
-		And in the table "List" I click the button named "ListContextMenuUndoPosting"
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "Goods in transit outgoing"'      |
-			| 'Register  "Stock balance"'                  |
-		And I close all client application windows
-	* Posting the document and check movements
-		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberShipmentConfirmation028801$$'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		And I select "Goods in transit outgoing" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$ShipmentConfirmation0028801$$'       | ''            | ''       | ''          | ''           | ''                       | ''          | ''        | '' | '' |
-		| 'Document registrations records'        | ''            | ''       | ''          | ''           | ''                       | ''          | ''        | '' | '' |
-		| 'Register  "Goods in transit outgoing"' | ''            | ''       | ''          | ''           | ''                       | ''          | ''        | '' | '' |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                       | ''          | ''        | '' | '' |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Shipment basis'         | 'Item key'  | 'Row key' | '' | '' |
-		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 02'   | '$$SalesInvoice024008$$' | 'L/Green'   | '*'       | '' | '' |
-		| ''                                      | 'Expense'     | '*'      | '14'        | 'Store 02'   | '$$SalesInvoice024008$$' | '36/Yellow' | '*'       | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '10'        | 'Store 02'   | 'L/Green'   | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '14'        | 'Store 02'   | '36/Yellow' | '' | '' | '' | '' |
-		And I close all client application windows
-
-
 Scenario: _300506 check connection to Shipment Confirmation report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 	* Form report Related documents

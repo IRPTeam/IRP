@@ -174,7 +174,7 @@ Scenario: _024002 check filling in Row Id info table in the SI (SO-SI)
 		And I activate "Key" field in "ItemList" table
 		And I save the current field value as "$$Rov3SalesInvoice023002$$"
 	* Check Row Id info table
-		And I move to "Row ID" tab
+		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'     | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | ''          | '1,000' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
@@ -195,7 +195,7 @@ Scenario: _024002 check filling in Row Id info table in the SI (SO-SI)
 			| '4' |
 		And I activate "Key" field in "ItemList" table
 		And I save the current field value as "$$Rov4SalesInvoice023002$$"
-		And I move to "Row ID" tab
+		And I move to "Row ID Info" tab
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
@@ -213,7 +213,7 @@ Scenario: _024002 check filling in Row Id info table in the SI (SO-SI)
 			| '#' | 'Item'  | 'Item key' | 'Q'     |
 			| '4' | 'Dress' | 'XS/Blue'  | '8,000' |
 		And in the table "ItemList" I click "Delete" button
-		And I move to "Row ID" tab
+		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | ''          | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
@@ -300,7 +300,7 @@ Scenario: _024003 copy SI (based on SO) and check filling in Row Id info table (
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Post SI and check Row ID Info tab
 		And I click the button named "FormPost"
-		And I move to "Row ID" tab
+		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines
 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | ''          | '7,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
@@ -490,7 +490,7 @@ Scenario: _024025 create document Sales Invoice without Sales order and check Ro
 			| '1' |
 		And I activate "Key" field in "ItemList" table
 		And I save the current field value as "$$Rov1SalesInvoice024025$$"
-		And I move to "Row ID" tab
+		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
 			| '#' | 'Key'                    | 'Basis' | 'Row ID'                 | 'Next step' | 'Q'      | 'Basis key' | 'Current step' | 'Row ref'                |
 			| '1' | 'Rov1SalesInvoice024025' | ''      | 'Rov1SalesInvoice024025' | ''          | '20,000' | ''          | ''             | 'Rov1SalesInvoice024025' |

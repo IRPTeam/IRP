@@ -207,41 +207,6 @@ Procedure ItemListOnActivateRow(Object, Form, Item) Export
 	EndIf;
 EndProcedure
 
-Procedure ItemListReceiptBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	StandardProcessing = False;
-	
-	FilterValues = New Structure();
-	FilterValues.Insert("Company"  , Object.Company);
-	FilterValues.Insert("Partner"  , ?(Form.Items.Partner.Visible, Object.Partner, Undefined));
-	FilterValues.Insert("LegalName", ?(Form.Items.LegalName.Visible, Object.LegalName, Undefined));
-	FilterValues.Insert("ItemKey"  , Form.Items.ItemList.CurrentData.ItemKey);
-	
-	ExistingRows = New Array;
-	For Each Row In Object.ItemList Do
-		If Row.GetID() = Form.Items.ItemList.CurrentRow Then
-			Continue;
-		EndIf;
-		RowStructure = New Structure("Key, Unit, Quantity");
-		FillPropertyValues(RowStructure, Row);
-		ExistingRows.Add(RowStructure);
-	EndDo;
-	
-	FormParameters = New Structure();
-	FormParameters.Insert("SelectReceiptBasisMode", True);
-	FormParameters.Insert("FilterValues"          , FilterValues);
-	FormParameters.Insert("ExistingRows"          , ExistingRows);
-	FormParameters.Insert("Ref"                   , Object.Ref);
-	
-	NotifyParameters = New Structure;
-	NotifyParameters.Insert("Object"    , Object);
-	NotifyParameters.Insert("Form"      , Form);
-	NotifyParameters.Insert("CurrentRow", Form.Items.ItemList.CurrentRow);
-	OpenForm("Document.GoodsReceipt.Form.SelectReceiptBasisesForm"
-		, FormParameters, , , ,
-		, New NotifyDescription("SelectReceiptBasisInRowContinue", ThisObject, NotifyParameters));
-	
-EndProcedure
-
 Procedure SerialLotNumberListOnChange(Object, Form, Item = Undefined) Export
 	For Each Row In Object.SerialLotNumbers Do
 		#If MobileClient Then

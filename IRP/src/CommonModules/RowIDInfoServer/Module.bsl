@@ -4046,7 +4046,8 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 					FillingValues[TableName_Refreshable].Add(ValueTableRowToStructure(Tables[TableName_Refreshable].Columns, Row_DepTable));
 				EndDo;
 			EndDo;
-		EndDo;			
+		EndDo;
+		FillingValues.Insert("BasedOn", True);
 		ArrayOfFillingValues.Add(FillingValues);
 	EndDo;	
 	Return ArrayOfFillingValues;
@@ -4098,7 +4099,7 @@ Function GetAttributeNames_LinkedDocuments()
 	NamesArray.Add("PurchaseInvoice");
 	NamesArray.Add("InternalSupplyRequest");
 	NamesArray.Add("InventoryTransferOrder");
-	
+	NamesArray.Add("InventoryTransfer");
 	Return NamesArray;
 EndFunction
 

@@ -74,7 +74,9 @@ Scenario: _04027 preparation (Inventory transfer order)
 			| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document InventoryTransferOrder objects (check movements)
 		And I execute 1C:Enterprise script at server
-			| "Documents.InventoryTransferOrder.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.InventoryTransferOrder.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);"  |
+			| "Documents.InventoryTransferOrder.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.InventoryTransferOrder.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);" |
 
 
 Scenario: _040322 check Inventory transfer order movements by the Register  "R4011 Free stocks"

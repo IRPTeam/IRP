@@ -1874,7 +1874,6 @@ Scenario:_800046 check remaining stock control when unpost/change Inventory tran
 		And I click "OK" button
 		Then I wait that in user messages the "Line No. [1] [Shirt 36/Red] Reservation remaining: 0 . Required: 25 . Lacking: 25 ." substring will appear in 10 seconds
 		Then I wait that in user messages the "Line No. [2] [Shirt 38/Black] Reservation remaining: 0 . Required: 20 . Lacking: 20 ." substring will appear in 10 seconds
-		And I click "Save" button
 		And I delete "$$NumberInventoryTransferOrder1$$" variable
 		And I save the value of "Number" field as "$$NumberInventoryTransferOrder1$$"
 	* Try to post Inventory transfer order (no balance to write off), status Wait

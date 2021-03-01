@@ -20,6 +20,7 @@
     <key>en</key>
     <value>Additional attribute set</value>
   </objectPresentation>
+  <hierarchical>true</hierarchical>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
   <codeLength>12</codeLength>
@@ -605,6 +606,7 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.AddAttributeAndPropertySets.Form.ItemForm</defaultObjectForm>
+  <defaultFolderForm>Catalog.AddAttributeAndPropertySets.Form.GroupForm</defaultFolderForm>
   <defaultListForm>Catalog.AddAttributeAndPropertySets.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.AddAttributeAndPropertySets.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -887,6 +889,15 @@
     <synonym>
       <key>en</key>
       <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="d2333d44-1952-410a-8fc9-b7b32b57396b">
+    <name>GroupForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

@@ -16,7 +16,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("PartnerArTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
 	Tables.Insert("ReconciliationStatement"               , PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("PurchaseReturnTurnovers"               , PostingServer.CreateTable(AccReg.PurchaseReturnTurnovers));
-	
+	Tables.Insert("RevenuesTurnovers"                     , PostingServer.CreateTable(AccReg.RevenuesTurnovers));	
 	Tables.Insert("StockReservation_Exists"               , PostingServer.CreateTable(AccReg.StockReservation));
 	Tables.Insert("StockBalance_Exists"                   , PostingServer.CreateTable(AccReg.StockBalance));
 	
@@ -26,31 +26,23 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.StockBalance_Exists = 
 	AccumulationRegisters.StockBalance.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
 	
-	QueryItemList = New Query();
-	QueryItemList.Text = GetQueryTextPurchaseReturnItemList();
-	
-	QueryItemList.SetParameter("Ref", Ref);
-	QueryResultsItemList = QueryItemList.Execute();
-	QueryTableItemList = QueryResultsItemList.Unload();
-	PostingServer.CalculateQuantityByUnit(QueryTableItemList);
-	
 	Query = New Query();
+	Query.SetParameter("Ref", Ref);
 	Query.Text = GetQueryTextQueryTable();
-	Query.SetParameter("QueryTable", QueryTableItemList);
 	QueryResults = Query.ExecuteBatch();
 	
-	Tables.OrderBalance               = QueryResults[1].Unload();
-	Tables.OrderReservation           = QueryResults[2].Unload();
-	Tables.PurchaseTurnovers          = QueryResults[3].Unload();
-	Tables.StockReservation           = QueryResults[4].Unload();
-	Tables.InventoryBalance           = QueryResults[5].Unload();
-	Tables.GoodsInTransitOutgoing     = QueryResults[6].Unload();
-	Tables.StockBalance               = QueryResults[7].Unload();
-	Tables.PartnerArTransactions      = QueryResults[8].Unload();
-	Tables.AdvanceFromCustomers_Lock  = QueryResults[9].Unload();
-	Tables.ReconciliationStatement    = QueryResults[10].Unload();
-	Tables.PurchaseReturnTurnovers    = QueryResults[11].Unload();
-
+	Tables.OrderBalance               = QueryResults[2].Unload();
+	Tables.OrderReservation           = QueryResults[3].Unload();
+	Tables.PurchaseTurnovers          = QueryResults[4].Unload();
+	Tables.StockReservation           = QueryResults[5].Unload();
+	Tables.InventoryBalance           = QueryResults[6].Unload();
+	Tables.GoodsInTransitOutgoing     = QueryResults[7].Unload();
+	Tables.StockBalance               = QueryResults[8].Unload();
+	Tables.PartnerArTransactions      = QueryResults[9].Unload();
+	Tables.AdvanceFromCustomers_Lock  = QueryResults[10].Unload();
+	Tables.ReconciliationStatement    = QueryResults[11].Unload();
+	Tables.PurchaseReturnTurnovers    = QueryResults[12].Unload();
+	Tables.RevenuesTurnovers          = QueryResults[13].Unload();
 #Region NewRegistersPosting		
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
@@ -59,7 +51,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Return Tables;
 EndFunction
 
-Function GetQueryTextPurchaseReturnItemList()
+Function GetQueryTextQueryTable()
 	Return
 		"SELECT
 		|	PurchaseReturnShipmentConfirmations.Key
@@ -78,8 +70,7 @@ Function GetQueryTextPurchaseReturnItemList()
 		|	PurchaseReturnItemList.Store AS Store,
 		|	PurchaseReturnItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
 		|	PurchaseReturnItemList.ItemKey AS ItemKey,
-		|	PurchaseReturnItemList.Quantity AS Quantity,
-		|	PurchaseReturnItemList.TotalAmount AS TotalAmount,
+		|	PurchaseReturnItemList.TotalAmount AS Amount,
 		|	PurchaseReturnItemList.Ref.Partner AS Partner,
 		|	PurchaseReturnItemList.Ref.LegalName AS LegalName,
 		|	CASE
@@ -89,7 +80,6 @@ Function GetQueryTextPurchaseReturnItemList()
 		|		ELSE PurchaseReturnItemList.Ref.Agreement
 		|	END AS Agreement,
 		|	ISNULL(PurchaseReturnItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
-		|	0 AS BasisQuantity,
 		|	PurchaseReturnItemList.Unit,
 		|	PurchaseReturnItemList.ItemKey.Item.Unit AS ItemUnit,
 		|	PurchaseReturnItemList.ItemKey.Unit AS ItemKeyUnit,
@@ -110,48 +100,21 @@ Function GetQueryTextPurchaseReturnItemList()
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS IsService,
-		|	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists
+		|	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists,
+		|	PurchaseReturnItemList.BusinessUnit,
+		|	PurchaseReturnItemList.RevenueType,
+		|	PurchaseReturnItemList.AdditionalAnalytic,
+		|	PurchaseReturnItemList.QuantityInBaseUnit AS Quantity
+		|INTO tmp
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
 		|		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
 		|		ON PurchaseReturnItemList.Key = ShipmentConfirmations.Key
 		|WHERE
-		|	PurchaseReturnItemList.Ref = &Ref";
-EndFunction
-
-Function GetQueryTextQueryTable()
-	Return
-		"SELECT
-		|	QueryTable.Company AS Company,
-		|	QueryTable.Store AS Store,
-		|	QueryTable.UseShipmentConfirmation,
-		|	QueryTable.ItemKey AS ItemKey,
-		|	QueryTable.BasisQuantity AS Quantity,
-		|	QueryTable.TotalAmount AS Amount,
-		|	QueryTable.Partner AS Partner,
-		|	QueryTable.LegalName AS LegalName,
-		|	QueryTable.Agreement AS Agreement,
-		|	QueryTable.Currency AS Currency,
-		|	QueryTable.Period AS Period,
-		|	QueryTable.PurchaseReturnOrder,
-		|	QueryTable.PurchaseInvoice,
-		|	QueryTable.ShipmentBasis,
-		|	QueryTable.BasisDocument,
-		|	QueryTable.NetAmount,
-		|	QueryTable.IsService,
-		|	QueryTable.RowKey,
-		|	QueryTable.ShipmentConfirmationExists
-		|INTO tmp
-		|FROM
-		|	&QueryTable AS QueryTable
+		|	PurchaseReturnItemList.Ref = &Ref
 		|;
 		|
-		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|
-		|
-		|// 1. ItemList_OrderBalance //////////////////////////////////////////////////////////////////////////////
+		|// 2. ItemList_OrderBalance //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Store,
@@ -173,12 +136,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.RowKey
 		|;
 		|
-		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|
-		|
-		|// 2. ItemList_OrderReservation //////////////////////////////////////////////////////////////////////////////
+		|// 3. ItemList_OrderReservation //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Store,
@@ -197,12 +155,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|
-		|
-		|// 3. ItemList_PurchaseTurnovers //////////////////////////////////////////////////////////////////////////////
+		|// 4. ItemList_PurchaseTurnovers //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.PurchaseInvoice AS PurchaseInvoice,
@@ -226,12 +179,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.RowKey
 		|;
 		|
-		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|
-		|
-		|// 4. ItemList_StockReservation //////////////////////////////////////////////////////////////////////////////
+		|// 5. ItemList_StockReservation //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Store,
@@ -245,7 +193,6 @@ Function GetQueryTextQueryTable()
 		|	tmp.PurchaseReturnOrder = VALUE(Document.PurchaseReturnOrder.EmptyRef)
 		|	AND Not tmp.IsService
 		|	AND NOT tmp.ShipmentConfirmationExists
-//		|	AND NOT tmp.UseShipmentConfirmation
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -254,12 +201,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.PurchaseInvoice
 		|;
 		|
-		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|
-		|
-		|// 5. ItemList_InventoryBalance //////////////////////////////////////////////////////////////////////////////
+		|// 6. ItemList_InventoryBalance //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Store,
@@ -277,12 +219,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|
-		|
-		|// 6. ItemList_GoodsInTransitOutgoing //////////////////////////////////////////////////////////////////////////////
+		|// 7. ItemList_GoodsInTransitOutgoing //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Store,
@@ -296,7 +233,6 @@ Function GetQueryTextQueryTable()
 		|WHERE
 		|	tmp.UseShipmentConfirmation
 		|	AND Not tmp.IsService
-	//	|	AND Not tmp.ShipmentConfirmationExists
 		|GROUP BY
 		|	tmp.Company,
 		|	tmp.Store,
@@ -306,12 +242,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.RowKey
 		|;
 		|
-		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|
-		|
-		|// 7. ItemList_StockBalance //////////////////////////////////////////////////////////////////////////////
+		|// 8. ItemList_StockBalance //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Store,
@@ -331,12 +262,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|
-		|
-		|// 8. ItemList_PartnerArTransactions //////////////////////////////////////////////////////////////////////////////
+		|// 9. ItemList_PartnerArTransactions //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -358,12 +284,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|
-		|
-		|// 9. ItemList_AdvanceFromCustomers_Lock //////////////////////////////////////////////////////////////////////////////
+		|// 10. ItemList_AdvanceFromCustomers_Lock //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -385,11 +306,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|
-		|// 10. ReconciliationStatement //////////////////////////////////////////////////////////////////////////////
+		|// 11. ReconciliationStatement //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.LegalName AS LegalName,
@@ -405,11 +322,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|
-		|// 11. PurchaseReturnTurnovers //////////////////////////////////////////////////////////////////////////////
+		|// 12. PurchaseReturnTurnovers //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.PurchaseInvoice AS PurchaseInvoice,
@@ -427,7 +340,28 @@ Function GetQueryTextQueryTable()
 		|	tmp.Currency,
 		|	tmp.ItemKey,
 		|	tmp.Period,
-		|	tmp.RowKey";
+		|	tmp.RowKey
+		|;
+		|// 13. RevenuesTurnovers  //////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmp.Period AS Period,
+		|	tmp.Company AS Company,
+		|	tmp.BusinessUnit AS BusinessUnit,
+		|	tmp.RevenueType AS RevenueType,
+		|	tmp.ItemKey AS ItemKey,
+		|	tmp.Currency AS Currency,
+		|	tmp.AdditionalAnalytic AS AdditionalAnalytic,
+		|	SUM(tmp.NetAmount) AS Amount
+		|FROM
+		|	tmp AS tmp
+		|GROUP BY
+		|	tmp.Period,
+		|	tmp.Company,
+		|	tmp.BusinessUnit,
+		|	tmp.RevenueType,
+		|	tmp.Currency,
+		|	tmp.AdditionalAnalytic,
+		|	tmp.ItemKey";
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -620,6 +554,12 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.ReconciliationStatement));
+			
+	// RevenuesTurnovers
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.RevenuesTurnovers,
+		New Structure("RecordSet, WriteInTransaction",
+			Parameters.DocumentDataTables.RevenuesTurnovers,
+			Parameters.IsReposting));			
 			
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);

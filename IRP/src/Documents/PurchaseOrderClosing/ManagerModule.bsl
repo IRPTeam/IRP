@@ -101,6 +101,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
 	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
 	QueryArray.Add(R1014T_CanceledPurchaseOrders());
+	QueryArray.Add(R4035B_IncomingStocks());
 	Return QueryArray;	
 EndFunction	
 
@@ -209,4 +210,17 @@ Function R1014T_CanceledPurchaseOrders()
 
 EndFunction
 
+Function R4035B_IncomingStocks()
+	Return
+		"SELECT
+		|	&Period AS Period,
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	-IncomingStocks.QuantityBalance AS Quantity,
+		|	*
+		|INTO R4035B_IncomingStocks
+		|FROM
+		|	AccumulationRegister.R4035B_IncomingStocks.Balance(&BalancePeriod, Order = &PurchaseOrder) AS
+		|		IncomingStocks";
+
+EndFunction
 #EndRegion

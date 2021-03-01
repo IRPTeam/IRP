@@ -246,6 +246,56 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>StoreOutgoing</name>
+      <id>40</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.StoreOutgoing</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>StoreOutgoingExtendedTooltip</name>
+        <id>42</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>StoreOutgoingContextMenu</name>
+        <id>41</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>Requester</name>
       <id>34</id>
       <visible>true</visible>
@@ -614,9 +664,39 @@
     </edit>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
+      <queryText>SELECT
+	PlannedReceiptReservation.Ref,
+	PlannedReceiptReservation.DeletionMark,
+	PlannedReceiptReservation.Number,
+	PlannedReceiptReservation.Date,
+	PlannedReceiptReservation.Posted,
+	PlannedReceiptReservation.Company,
+	PlannedReceiptReservation.Requester,
+	PlannedReceiptReservation.Store,
+	PlannedReceiptReservation.Author,
+	PlannedReceiptReservation.Description,
+	CASE WHEN COUNT(DISTINCT PlannedReceiptReservationItemList.Store) = 1 THEN
+		MAX(PlannedReceiptReservationItemList.Store)
+	ELSE UNDEFINED END AS StoreOutgoing
+FROM
+	Document.PlannedReceiptReservation AS PlannedReceiptReservation
+		LEFT JOIN Document.PlannedReceiptReservation.ItemList AS PlannedReceiptReservationItemList
+		ON PlannedReceiptReservation.Ref = PlannedReceiptReservationItemList.Ref
+GROUP BY
+	PlannedReceiptReservation.Ref,
+	PlannedReceiptReservation.DeletionMark,
+	PlannedReceiptReservation.Number,
+	PlannedReceiptReservation.Date,
+	PlannedReceiptReservation.Posted,
+	PlannedReceiptReservation.Company,
+	PlannedReceiptReservation.Requester,
+	PlannedReceiptReservation.Store,
+	PlannedReceiptReservation.Author,
+	PlannedReceiptReservation.Description</queryText>
       <mainTable>Document.PlannedReceiptReservation</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
+      <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
     </extInfo>

@@ -60,6 +60,7 @@ EndProcedure
 Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
 	DocPurchaseOrderClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 	Notify("WriteProcurementOrder", , ThisObject);
+	NotifyChanged(Object.PurchaseOrder);
 	UpdateTotalAmounts();
 EndProcedure
 

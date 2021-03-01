@@ -126,13 +126,7 @@ Scenario: _0154001 check that additional attributes and properties are displayed
 			| Test        |
 		And I select current line in "List" table
 		And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
-		And I click choice button of "Attribute" attribute in "AvailableAttributes" table
-		And I click the button named "FormCreate"
-		And I input "Test" text in the field named "Description_en"
-		And I click Open button of "ENG" field
-		And I input "Test TR" text in the field named "Description_tr"
-		And I click "Ok" button
-		And I click "Save and close" button
+		And I click choice button of "Attribute" attribute in "AvailableAttributes" table	
 		And I go to line in "List" table
 			| Description |
 			| Test        |
@@ -515,9 +509,10 @@ Scenario: _01540055 check that additional attributes and properties are displaye
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Hardware" text in the field named "Description_en"
-		And I click "Save and close" button
+		And I click "Save" button
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "Hardware"
+		And I activate "Hardware (create)" form
 		Then the form attribute named "__a154" became equal to ""
 		And I close current window
 		And I go to line in "List" table

@@ -22,6 +22,24 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 EndProcedure
 
+Procedure StoreSenderOnChange(Object) Export
+	Object.UseShipmentConfirmation = Object.StoreSender.UseShipmentConfirmation;
+	CheckAndUpdateUseGR(Object);
+EndProcedure
+
+Procedure StoreReceiverOnChange(Object) Export
+	Object.UseGoodsReceipt = Object.StoreReceiver.UseGoodsReceipt;
+	CheckAndUpdateUseGR(Object);
+EndProcedure
+
+Procedure CheckAndUpdateUseGR(Object) Export
+	If Object.UseShipmentConfirmation And Not Object.UseGoodsReceipt 
+		And Not Object.StoreSender.isEmpty() And Not Object.StoreReceiver.isEmpty() Then
+		Object.UseGoodsReceipt = True;
+		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_023, "Object.UseGoodsReceipt");
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 #Region GroupTitle

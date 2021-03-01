@@ -40,10 +40,14 @@ EndProcedure
 &AtServer
 Procedure UpdateRolesInfo(CurrentObject)
 	User = Undefined;
-	If ValueIsFilled(CurrentObject.InfobaseUserID) Then
-		User = InfoBaseUsers.FindByUUID(CurrentObject.InfobaseUserID);
-	ElsIf ValueIsFilled(CurrentObject.Description) Then
-		User = InfoBaseUsers.FindByName(CurrentObject.Description);
+	If AccessRight("DataAdministration", Metadata) Then
+		If ValueIsFilled(CurrentObject.InfobaseUserID) Then
+			User = InfoBaseUsers.FindByUUID(CurrentObject.InfobaseUserID);
+		ElsIf ValueIsFilled(CurrentObject.Description) Then
+			User = InfoBaseUsers.FindByName(CurrentObject.Description);
+		EndIf;
+	Else
+		User = Undefined;
 	EndIf;
 	If Not User = Undefined Then
 		For Each Role In User.Roles Do

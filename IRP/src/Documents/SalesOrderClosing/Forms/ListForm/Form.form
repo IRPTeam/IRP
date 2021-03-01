@@ -486,6 +486,56 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>Store</name>
+      <id>46</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Store</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>StoreExtendedTooltip</name>
+        <id>48</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>StoreContextMenu</name>
+        <id>47</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>Author</name>
       <id>40</id>
       <title>
@@ -815,29 +865,63 @@
     </edit>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
-      <queryText>SELECT 
-       SalesOrder.Ref, 
-       SalesOrder.DeletionMark, 
-       SalesOrder.Number, 
-       SalesOrder.Date, 
-       SalesOrder.Posted, 
-       SalesOrder.Partner, 
-       SalesOrder.Company, 
-       SalesOrder.Currency, 
-       SalesOrder.DateOfShipment,  
-       SalesOrder.ManagerSegment, 
-       SalesOrder.Status, 
-       SalesOrder.Agreement, 
-       SalesOrder.PriceIncludeTax, 
-       SalesOrder.DocumentAmount,
-       SalesOrder.Author
- FROM 
-       Document.SalesOrder
- AS 
-       SalesOrder</queryText>
+      <queryText>SELECT
+	SalesOrderClosing.Ref,
+	SalesOrderClosing.DeletionMark,
+	SalesOrderClosing.Number,
+	SalesOrderClosing.Date,
+	SalesOrderClosing.Posted,
+	SalesOrderClosing.Agreement,
+	SalesOrderClosing.Company,
+	SalesOrderClosing.Currency,
+	SalesOrderClosing.DateOfShipment,
+	SalesOrderClosing.LegalName,
+	SalesOrderClosing.ManagerSegment,
+	SalesOrderClosing.Partner,
+	SalesOrderClosing.PriceIncludeTax,
+	SalesOrderClosing.ShipmentConfirmationsBeforeSalesInvoice,
+	SalesOrderClosing.Status,
+	SalesOrderClosing.UseItemsShipmentScheduling,
+	SalesOrderClosing.SalesOrder,
+	SalesOrderClosing.CloseOrder,
+	SalesOrderClosing.Author,
+	SalesOrderClosing.BusinessUnit,
+	SalesOrderClosing.Description,
+	SalesOrderClosing.DocumentAmount,
+	CASE WHEN COUNT(DISTINCT SalesOrderClosingItemList.Store) = 1 THEN
+		MAX(SalesOrderClosingItemList.Store)
+	ELSE UNDEFINED END AS Store
+FROM
+	Document.SalesOrderClosing AS SalesOrderClosing
+		LEFT JOIN Document.SalesOrderClosing.ItemList AS SalesOrderClosingItemList
+		ON SalesOrderClosingItemList.Ref = SalesOrderClosing.Ref
+GROUP BY
+	SalesOrderClosing.Ref,
+	SalesOrderClosing.DeletionMark,
+	SalesOrderClosing.Number,
+	SalesOrderClosing.Date,
+	SalesOrderClosing.Posted,
+	SalesOrderClosing.Agreement,
+	SalesOrderClosing.Company,
+	SalesOrderClosing.Currency,
+	SalesOrderClosing.DateOfShipment,
+	SalesOrderClosing.LegalName,
+	SalesOrderClosing.ManagerSegment,
+	SalesOrderClosing.Partner,
+	SalesOrderClosing.PriceIncludeTax,
+	SalesOrderClosing.ShipmentConfirmationsBeforeSalesInvoice,
+	SalesOrderClosing.Status,
+	SalesOrderClosing.UseItemsShipmentScheduling,
+	SalesOrderClosing.SalesOrder,
+	SalesOrderClosing.CloseOrder,
+	SalesOrderClosing.Author,
+	SalesOrderClosing.BusinessUnit,
+	SalesOrderClosing.Description,
+	SalesOrderClosing.DocumentAmount</queryText>
       <mainTable>Document.SalesOrderClosing</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
+      <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
     </extInfo>

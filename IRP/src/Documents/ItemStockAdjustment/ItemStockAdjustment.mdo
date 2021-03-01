@@ -39,7 +39,7 @@
     <typeField>Document.ItemStockAdjustment.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.ItemStockAdjustment.TabularSection.AddAttributes.Attribute.Value</valueField>
   </characteristics>
-  <createOnInput>Use</createOnInput>
+  <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
   <numberLength>12</numberLength>
@@ -49,6 +49,7 @@
   <defaultObjectForm>Document.ItemStockAdjustment.Form.DocumentForm</defaultObjectForm>
   <defaultListForm>Document.ItemStockAdjustment.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.ItemStockAdjustment.Form.ChoiceForm</defaultChoiceForm>
+  <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>

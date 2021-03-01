@@ -52,7 +52,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOfTables.Add(GetDocumentTable_ShipmentConfirmation(ArrayOf_ShipmentConfirmation));
 	
 	Return JoinDocumentsStructure(ArrayOfTables, 
-	"BasedOn, Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax");
+	"BasedOn, Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, BusinessUnit, RevenueType, AdditionalAnalytic");
 EndFunction
 
 &AtServer
@@ -82,6 +82,9 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFields)
 	ItemList.Columns.Add("Key"				, New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	ItemList.Columns.Add("RowKey"			, New TypeDescription("String"));
 	ItemList.Columns.Add("DontCalculateRow" , New TypeDescription("Boolean"));
+	ItemList.Columns.Add("BusinessUnit"		, New TypeDescription("CatalogRef.BusinessUnits"));
+	ItemList.Columns.Add("RevenueType"		, New TypeDescription("CatalogRef.ExpenseAndRevenueTypes"));
+	ItemList.Columns.Add("AdditionalAnalytic");
 	
 	TaxListMetadataColumns = Metadata.Documents.PurchaseReturn.TabularSections.TaxList.Attributes;
 	TaxList = New ValueTable();
@@ -335,7 +338,6 @@ Function ExtractInfoFromRows_ShipmentConfirmation(QueryTable)
 	ShipmentConfirmationsTable);
 EndFunction
 
-
 &AtServer
 Function ExtractInfoFromRows_PurchaseInvoice(QueryTable)
 	QueryTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
@@ -382,7 +384,8 @@ Function ExtractInfoFromRows_PurchaseInvoice(QueryTable)
 		|	ISNULL(ItemList.OffersAmount, 0) AS OffersAmount,
 		|	ISNULL(ItemList.PriceType, VALUE(Catalog.PriceTypes.EmptyRef)) AS PriceType,
 		|	ISNULL(ItemList.Store, VALUE(Catalog.Stores.EmptyRef)) AS Store,
-		|	ISNULL(ItemList.DontCalculateRow, FALSE) AS DontCalculateRow
+		|	ISNULL(ItemList.DontCalculateRow, FALSE) AS DontCalculateRow,
+		|	*
 		|FROM
 		|	tmpQueryTable AS tmpQueryTable
 		|		INNER JOIN Document.PurchaseInvoice.ItemList AS ItemList
@@ -501,7 +504,8 @@ Function ExtractInfoFromRows_PurchaseReturnOrder(QueryTable)
 		|	ISNULL(ItemList.OffersAmount, 0) AS OffersAmount,
 		|	ISNULL(ItemList.PriceType, VALUE(Catalog.PriceTypes.EmptyRef)) AS PriceType,
 		|	ISNULL(ItemList.PurchaseInvoice, VALUE(Document.PurchaseInvoice.EmptyRef)) AS PurchaseInvoice,
-		|	ISNULL(ItemList.DontCalculateRow, FALSE) AS DontCalculateRow
+		|	ISNULL(ItemList.DontCalculateRow, FALSE) AS DontCalculateRow,
+		|	*
 		|FROM
 		|	Document.PurchaseReturnOrder.ItemList AS ItemList
 		|		INNER JOIN tmpQueryTable AS tmpQueryTable

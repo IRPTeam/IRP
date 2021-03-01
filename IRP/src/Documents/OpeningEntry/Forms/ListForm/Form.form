@@ -197,6 +197,56 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>Store</name>
+      <id>31</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Store</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>StoreExtendedTooltip</name>
+        <id>33</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>StoreContextMenu</name>
+        <id>32</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>Author</name>
       <id>25</id>
       <visible>true</visible>
@@ -519,9 +569,37 @@
     </edit>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
+      <queryText>SELECT
+	OpeningEntry.Ref,
+	OpeningEntry.DeletionMark,
+	OpeningEntry.Number,
+	OpeningEntry.Date,
+	OpeningEntry.Posted,
+	OpeningEntry.Company,
+	OpeningEntry.Author,
+	OpeningEntry.BusinessUnit,
+	OpeningEntry.Description,
+	CASE WHEN COUNT(DISTINCT OpeningEntryInventory.Store) = 1 THEN
+		MAX(OpeningEntryInventory.Store)
+	ELSE UNDEFINED END AS Store
+FROM
+	Document.OpeningEntry AS OpeningEntry
+		LEFT JOIN Document.OpeningEntry.Inventory AS OpeningEntryInventory
+		ON OpeningEntryInventory.Ref = OpeningEntry.Ref
+GROUP BY
+	OpeningEntry.Ref,
+	OpeningEntry.DeletionMark,
+	OpeningEntry.Number,
+	OpeningEntry.Date,
+	OpeningEntry.Posted,
+	OpeningEntry.Company,
+	OpeningEntry.Author,
+	OpeningEntry.BusinessUnit,
+	OpeningEntry.Description</queryText>
       <mainTable>Document.OpeningEntry</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
+      <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
     </extInfo>

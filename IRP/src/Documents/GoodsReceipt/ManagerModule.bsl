@@ -1872,7 +1872,8 @@ Function ItemList()
 		|	ItemList.SalesReturnOrder AS SalesReturnOrder,
 		|	NOT ItemList.SalesReturnOrder = Value(Document.SalesReturnOrder.EmptyRef) AS SalesReturnOrderExists,
 		|	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.Purchase) AS IsTransaction_Purchase,
-		|	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer) AS IsTransaction_ReturnFromCustomer
+		|	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer) AS IsTransaction_ReturnFromCustomer,
+		|	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.InventoryTransfer) AS IsTransaction_InventoryTransfer
 		|INTO ItemList
 		|FROM
 		|	Document.GoodsReceipt.ItemList AS ItemList
@@ -1998,18 +1999,7 @@ Function R4011B_FreeStocks()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	TRUE
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
-		|	FreeStocks.Period,
-		|	FreeStocks.Store,
-		|	FreeStocks.ItemKey,
-		|	FreeStocks.Quantity
-		|FROM
-		|	FreeStocks AS FreeStocks";
+		|	TRUE";
 EndFunction
 
 Function R4017B_InternalSupplyRequestProcurement()
@@ -2041,13 +2031,22 @@ Function R4031B_GoodsInTransitIncoming()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	ItemList.InventoryTransfer AS Basis,
+		|	CASE
+		|		WHEN ItemList.IsTransaction_InventoryTransfer AND ItemList.InventoryTransferExists
+		|			THEN ItemList.InventoryTransfer
+		|		WHEN ItemList.IsTransaction_Purchase AND ItemList.PurchaseInvoiceExists
+		|			THEN ItemList.PurchaseInvoice
+		|		WHEN ItemList.IsTransaction_ReturnFromCustomer AND ItemList.SalesReturnExists
+		|			THEN ItemList.SalesReturn
+		|	ELSE
+		|		ItemList.GoodsReceipt
+		|	END AS Basis,
 		|	*
 		|INTO R4031B_GoodsInTransitIncoming
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.InventoryTransferExists";
+		|	TRUE";
 EndFunction
 
 Function R4033B_GoodsReceiptSchedule()

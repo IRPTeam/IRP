@@ -1,3 +1,6 @@
+
+#Region Public
+
 Procedure CreateUser(UserObject) Export
 	If Not IsInRole(Metadata.Roles.FullAccess) AND 
 		Not IsInRole(Metadata.Roles.CreateOrModifyUsers) Then
@@ -70,3 +73,5 @@ Procedure CreateUser(UserObject) Export
 	
 	UserObject.InfobaseUserID = User.UUID;
 EndProcedure
+
+#EndRegion

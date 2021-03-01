@@ -409,6 +409,56 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>Store</name>
+      <id>43</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Store</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>StoreExtendedTooltip</name>
+        <id>45</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>StoreContextMenu</name>
+        <id>44</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>Author</name>
       <id>40</id>
       <visible>true</visible>
@@ -734,9 +784,55 @@
     </edit>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
+      <queryText>SELECT
+	RetailReturnReceipt.Ref,
+	RetailReturnReceipt.DeletionMark,
+	RetailReturnReceipt.Number,
+	RetailReturnReceipt.Date,
+	RetailReturnReceipt.Posted,
+	RetailReturnReceipt.Agreement,
+	RetailReturnReceipt.BaseDocument,
+	RetailReturnReceipt.Company,
+	RetailReturnReceipt.Currency,
+	RetailReturnReceipt.LegalName,
+	RetailReturnReceipt.ManagerSegment,
+	RetailReturnReceipt.Partner,
+	RetailReturnReceipt.PriceIncludeTax,
+	RetailReturnReceipt.RetailCustomer,
+	RetailReturnReceipt.Author,
+	RetailReturnReceipt.BusinessUnit,
+	RetailReturnReceipt.Description,
+	RetailReturnReceipt.DocumentAmount,
+	CASE WHEN COUNT(DISTINCT RetailReturnReceiptItemList.Store) = 1 THEN
+		MAX(RetailReturnReceiptItemList.Store)
+	ELSE UNDEFINED END AS Store
+FROM
+	Document.RetailReturnReceipt AS RetailReturnReceipt
+		LEFT JOIN Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
+		ON RetailReturnReceiptItemList.Ref = RetailReturnReceipt.Ref
+GROUP BY
+	RetailReturnReceipt.Ref,
+	RetailReturnReceipt.DeletionMark,
+	RetailReturnReceipt.Number,
+	RetailReturnReceipt.Date,
+	RetailReturnReceipt.Posted,
+	RetailReturnReceipt.Agreement,
+	RetailReturnReceipt.BaseDocument,
+	RetailReturnReceipt.Company,
+	RetailReturnReceipt.Currency,
+	RetailReturnReceipt.LegalName,
+	RetailReturnReceipt.ManagerSegment,
+	RetailReturnReceipt.Partner,
+	RetailReturnReceipt.PriceIncludeTax,
+	RetailReturnReceipt.RetailCustomer,
+	RetailReturnReceipt.Author,
+	RetailReturnReceipt.BusinessUnit,
+	RetailReturnReceipt.Description,
+	RetailReturnReceipt.DocumentAmount</queryText>
       <mainTable>Document.RetailReturnReceipt</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
+      <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
     </extInfo>

@@ -111,8 +111,34 @@ Scenario: _028800 preparation (Shipment confirmation)
 				| "Number" |
 				| "$$NumberInventoryTransfer021030$$" |	
 			When create InventoryTransfer021030
+	* Create SO
+		When Create document SalesOrder objects (SC before SI, creation based on)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Copy created SO 
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'                       |
+			| '15' |
+		And in the table "List" I click the button named "ListContextMenuCopy"
+		And I move to "Other" tab
+		And I input "16" text in "Number" field
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I input "16" text in "Number" field		
+		And I click "Post and close" button
+	* Create SI>SO
+		When Create document SalesOrder and SalesInvoice objects (creation based on, SI >SO)	
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+				
+		
 
-Scenario: _028801 create document Shipment confirmation based on Sales Invoice (with Sales order)
+
+
+
+Scenario: _028801 create document Shipment confirmation based on SI (with SO)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
 		| 'Number'                       | 'Partner'   |
@@ -139,22 +165,7 @@ Scenario: _028801 create document Shipment confirmation based on Sales Invoice (
 	And I close current window
 	
 
-Scenario: _028802 check Shipment confirmation posting (based on Sales invoice with Sales order) by register GoodsInTransitOutgoing (-)
-	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                  | 'Shipment basis'    | 'Store'    | 'Item key' |
-		| '10,000'   | '$$ShipmentConfirmation0028801$$' | '$$SalesInvoice024008$$' | 'Store 02' | 'L/Green'  |
-		| '14,000'   | '$$ShipmentConfirmation0028801$$' | '$$SalesInvoice024008$$' | 'Store 02' | '36/Yellow'   |
-
-Scenario: _028803 check Shipment confirmation posting (based on Sales invoice with Sales order) by register StockBalance (-)
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                  | 'Store'    | 'Item key' |
-		| '10,000'   | '$$ShipmentConfirmation0028801$$' | 'Store 02' | 'L/Green'  |
-		| '14,000'   | '$$ShipmentConfirmation0028801$$' | 'Store 02' | '36/Yellow'   |
-
-
-Scenario: _028804 create document Shipment confirmation  based on Sales Invoice (without Sales order)
+Scenario: _028804 create document Shipment confirmation based on SI (without SO)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
 		| 'Number' | 'Partner'    |
@@ -176,18 +187,70 @@ Scenario: _028804 create document Shipment confirmation  based on Sales Invoice 
 	And I click the button named "FormPostAndClose"
 	And I close current window
 
-Scenario: _028805 check Shipment confirmation posting (based on Sales invoice without Sales order) by register GoodsInTransitOutgoing (-)
-	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                        | 'Shipment basis'         | 'Line number' | 'Store'    | 'Item key' |
-		| '20,000'   | '$$ShipmentConfirmation0028804$$' | '$$SalesInvoice024025$$' | '1'           | 'Store 02' | 'L/Green'  |
+Scenario: _028805 create document Shipment confirmation based on 2 SO
+	* Select SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '15'      |
+		And I move one line down in "List" table and select line
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"	
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                         | 'Use'                                      | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 15 dated 01.02.2021 19:50:45' | 'Sales order 15 dated 01.02.2021 19:50:45' | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                           | 'Yes'                                      | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shirt, 36/Red'                            | 'Yes'                                      | '10,000'   | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                           | 'Yes'                                      | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                           | 'Yes'                                      | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Sales order 16 dated 26.02.2021 13:14:24' | 'Sales order 16 dated 26.02.2021 13:14:24' | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                           | 'Yes'                                      | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shirt, 36/Red'                            | 'Yes'                                      | '10,000'   | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                           | 'Yes'                                      | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                           | 'Yes'                                      | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
+		Then the number of "BasisesTree" table lines is "равно" "10"
+		And I click "Ok" button
+	* Create SC and check creation
+		And "ItemList" table contains lines
+			| '#' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Store'    | 'Shipment basis'                           | 'Sales order'                              | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Dress' | ''                   | 'XS/Blue'  | '1,000'    | ''              | 'pcs'  | 'Store 02' | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Sales order 15 dated 01.02.2021 19:50:45' | ''                         | ''                      | ''                |
+			| '2' | 'Dress' | ''                   | 'XS/Blue'  | '1,000'    | ''              | 'pcs'  | 'Store 02' | 'Sales order 16 dated 26.02.2021 13:14:24' | 'Sales order 16 dated 26.02.2021 13:14:24' | ''                         | ''                      | ''                |
+			| '3' | 'Shirt' | ''                   | '36/Red'   | '10,000'   | ''              | 'pcs'  | 'Store 02' | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Sales order 15 dated 01.02.2021 19:50:45' | ''                         | ''                      | ''                |
+			| '4' | 'Shirt' | ''                   | '36/Red'   | '10,000'   | ''              | 'pcs'  | 'Store 02' | 'Sales order 16 dated 26.02.2021 13:14:24' | 'Sales order 16 dated 26.02.2021 13:14:24' | ''                         | ''                      | ''                |
+			| '5' | 'Dress' | ''                   | 'XS/Blue'  | '2,000'    | ''              | 'pcs'  | 'Store 02' | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Sales order 15 dated 01.02.2021 19:50:45' | ''                         | ''                      | ''                |
+			| '6' | 'Dress' | ''                   | 'XS/Blue'  | '2,000'    | ''              | 'pcs'  | 'Store 02' | 'Sales order 16 dated 26.02.2021 13:14:24' | 'Sales order 16 dated 26.02.2021 13:14:24' | ''                         | ''                      | ''                |
+			| '7' | 'Dress' | ''                   | 'XS/Blue'  | '10,000'   | ''              | 'pcs'  | 'Store 02' | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Sales order 15 dated 01.02.2021 19:50:45' | ''                         | ''                      | ''                |
+			| '8' | 'Dress' | ''                   | 'XS/Blue'  | '10,000'   | ''              | 'pcs'  | 'Store 02' | 'Sales order 16 dated 26.02.2021 13:14:24' | 'Sales order 16 dated 26.02.2021 13:14:24' | ''                         | ''                      | ''                |
+		Then the number of "ItemList" table lines is "равно" "8"
+		And I close all client application windows
 
-Scenario: _028806 check Shipment confirmation posting (based on Sales invoice without Sales order) by register StockBalance (-)
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                        | 'Line number' | 'Store'    | 'Item key' |
-		| '20,000'   | '$$ShipmentConfirmation0028804$$' | '1'           | 'Store 02' | 'L/Green'  |
 
+Scenario: _028806 create document Shipment confirmation based on SI (with SO, SI>SO)
+	* Select SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '32'      |
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"	
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                           | 'Use'                                        | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
+			| 'Sales order 32 dated 26.02.2021 13:30:49'   | 'Sales order 32 dated 26.02.2021 13:30:49'   | ''         | ''               | ''         | ''         |
+			| 'Sales invoice 32 dated 26.02.2021 13:31:42' | 'Sales invoice 32 dated 26.02.2021 13:31:42' | ''         | ''               | ''         | ''         |
+			| 'Dress, XS/Blue'                             | 'Yes'                                        | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
+			| 'Shirt, 36/Red'                              | 'Yes'                                        | '12,000'   | 'pcs'            | '350,00'   | 'TRY'      |
+			| 'Boots, 37/18SD'                             | 'Yes'                                        | '2,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
+			| 'Sales invoice 32 dated 26.02.2021 13:31:42' | 'Sales invoice 32 dated 26.02.2021 13:31:42' | ''         | ''               | ''         | ''         |
+			| 'Shirt, 38/Black'                            | 'Yes'                                        | '2,000'    | 'pcs'            | '350,00'   | 'TRY'      |
+		Then the number of "BasisesTree" table lines is "равно" "7"
+		And I click "Ok" button
+	* Create SC and check creation
+		And "ItemList" table contains lines
+			| '#' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice'                              | 'Unit'           | 'Store'    | 'Shipment basis'                             | 'Sales order'                              | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Dress' | ''                   | 'XS/Blue'  | '1,000'    | 'Sales invoice 32 dated 26.02.2021 13:31:42' | 'pcs'            | 'Store 02' | 'Sales invoice 32 dated 26.02.2021 13:31:42' | 'Sales order 32 dated 26.02.2021 13:30:49' | ''                         | ''                      | ''                |
+			| '2' | 'Shirt' | ''                   | '36/Red'   | '12,000'   | 'Sales invoice 32 dated 26.02.2021 13:31:42' | 'pcs'            | 'Store 02' | 'Sales invoice 32 dated 26.02.2021 13:31:42' | 'Sales order 32 dated 26.02.2021 13:30:49' | ''                         | ''                      | ''                |
+			| '3' | 'Boots' | ''                   | '37/18SD'  | '2,000'    | 'Sales invoice 32 dated 26.02.2021 13:31:42' | 'Boots (12 pcs)' | 'Store 02' | 'Sales invoice 32 dated 26.02.2021 13:31:42' | 'Sales order 32 dated 26.02.2021 13:30:49' | ''                         | ''                      | ''                |
+			| '4' | 'Shirt' | ''                   | '38/Black' | '2,000'    | 'Sales invoice 32 dated 26.02.2021 13:31:42' | 'pcs'            | 'Store 02' | 'Sales invoice 32 dated 26.02.2021 13:31:42' | ''                                         | ''                         | ''                      | ''                |
+		Then the number of "ItemList" table lines is "равно" "4"
+		And I close all client application windows
 
 
 Scenario: _028807 create document Shipment confirmation based on Purchase return
@@ -242,77 +305,6 @@ Scenario: _028810 create document Shipment confirmation  based on Inventory tran
 
 
 
-Scenario: _028811 check the output of the document movement report for Shipment Confirmation
-	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
-	* Check the report output for the selected document from the list
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberShipmentConfirmation028801$$'      |
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And I select "Goods in transit outgoing" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$ShipmentConfirmation0028801$$'       | ''            | ''       | ''          | ''           | ''                       | ''          | ''        | '' | '' |
-		| 'Document registrations records'        | ''            | ''       | ''          | ''           | ''                       | ''          | ''        | '' | '' |
-		| 'Register  "Goods in transit outgoing"' | ''            | ''       | ''          | ''           | ''                       | ''          | ''        | '' | '' |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                       | ''          | ''        | '' | '' |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Shipment basis'         | 'Item key'  | 'Row key' | '' | '' |
-		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 02'   | '$$SalesInvoice024008$$' | 'L/Green'   | '*'       | '' | '' |
-		| ''                                      | 'Expense'     | '*'      | '14'        | 'Store 02'   | '$$SalesInvoice024008$$' | '36/Yellow' | '*'       | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '10'        | 'Store 02'   | 'L/Green'   | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '14'        | 'Store 02'   | '36/Yellow' | '' | '' | '' | '' |
-		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Shipment confirmation schedule"' | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
-		| ''                                           | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                 | ''          | ''          | ''        | 'Attributes'    |
-		| ''                                           | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'            | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
-		| ''                                           | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$SalesInvoice024008$$' | 'Store 02'  | 'L/Green'   | '*'       | '*'             |
-		| ''                                           | 'Expense'     | '*'      | '14'        | 'Main Company' | '$$SalesInvoice024008$$' | 'Store 02'  | '36/Yellow' | '*'       | '*'             |
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
-	* Check the report output from the selected document
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberShipmentConfirmation028801$$'      |
-		And I select current line in "List" table
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And I select "Goods in transit outgoing" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$ShipmentConfirmation0028801$$'       | ''            | ''       | ''          | ''           | ''                       | ''          | ''        | '' | '' |
-		| 'Document registrations records'        | ''            | ''       | ''          | ''           | ''                       | ''          | ''        | '' | '' |
-		| 'Register  "Goods in transit outgoing"' | ''            | ''       | ''          | ''           | ''                       | ''          | ''        | '' | '' |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                       | ''          | ''        | '' | '' |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Shipment basis'         | 'Item key'  | 'Row key' | '' | '' |
-		| ''                                      | 'Expense'     | '*'      | '10'        | 'Store 02'   | '$$SalesInvoice024008$$' | 'L/Green'   | '*'       | '' | '' |
-		| ''                                      | 'Expense'     | '*'      | '14'        | 'Store 02'   | '$$SalesInvoice024008$$' | '36/Yellow' | '*'       | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '10'        | 'Store 02'   | 'L/Green'   | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '14'        | 'Store 02'   | '36/Yellow' | '' | '' | '' | '' |
-		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Shipment confirmation schedule"' | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
-		| ''                                           | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                 | ''          | ''          | ''        | 'Attributes'    |
-		| ''                                           | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'            | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
-		| ''                                           | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$SalesInvoice024008$$' | 'Store 02'  | 'L/Green'   | '*'       | '*'             |
-		| ''                                           | 'Expense'     | '*'      | '14'        | 'Main Company' | '$$SalesInvoice024008$$' | 'Store 02'  | '36/Yellow' | '*'       | '*'             |
-	And I close all client application windows
-
 
 Scenario: _02881101 clear movements Shipment confirmation and check that there is no movements on the registers 
 	* Open list form Shipment confirmation
@@ -327,7 +319,6 @@ Scenario: _02881101 clear movements Shipment confirmation and check that there i
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "Goods in transit outgoing"'      |
 			| 'Register  "Stock balance"'                  |
-			| 'Register  "Shipment confirmation schedule"' |
 		And I close all client application windows
 	* Posting the document and check movements
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
@@ -354,14 +345,6 @@ Scenario: _02881101 clear movements Shipment confirmation and check that there i
 		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' |
 		| ''                          | 'Expense'     | '*'      | '10'        | 'Store 02'   | 'L/Green'   | '' | '' | '' | '' |
 		| ''                          | 'Expense'     | '*'      | '14'        | 'Store 02'   | '36/Yellow' | '' | '' | '' | '' |
-		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Shipment confirmation schedule"' | ''            | ''       | ''          | ''             | ''                 | ''          | ''          | ''        | ''              |
-		| ''                                           | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                 | ''          | ''          | ''        | 'Attributes'    |
-		| ''                                           | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'            | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
-		| ''                                           | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$SalesInvoice024008$$' | 'Store 02'  | 'L/Green'   | '*'       | '*'             |
-		| ''                                           | 'Expense'     | '*'      | '14'        | 'Main Company' | '$$SalesInvoice024008$$' | 'Store 02'  | '36/Yellow' | '*'       | '*'             |
 		And I close all client application windows
 
 

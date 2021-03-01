@@ -125,16 +125,6 @@ Procedure ItemListItemKeyOnChange(Item)
 		CalculationSettings);
 EndProcedure
 
-&AtClient
-Procedure ItemListReceiptBasisOnChange(Item)
-	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure ItemListReceiptBasisStartChoice(Item, ChoiceData, StandardProcessing)
-	DocGoodsReceiptClient.ItemListReceiptBasisStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
 #Region ItemCompany
 
 &AtClient

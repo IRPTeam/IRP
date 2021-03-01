@@ -214,6 +214,12 @@ Procedure FillRowID_PO(Source)
 	For Each RowItemList In Source.ItemList Do	
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		If RowItemList.Cancel Then
+			For Each Row In IDInfoRows Do
+				Source.RowIDInfo.Delete(Row);
+			EndDo;
+			Continue;
+		EndIf;
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
 			FillRowID(Source, Row, RowItemList);

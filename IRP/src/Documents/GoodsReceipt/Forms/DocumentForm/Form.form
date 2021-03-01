@@ -1458,10 +1458,6 @@
               <segments>Object.ItemList.ReceiptBasis</segments>
             </paths>
           </dataPath>
-          <handlers>
-            <event>OnChange</event>
-            <name>ItemListReceiptBasisOnChange</name>
-          </handlers>
           <extendedTooltip>
             <name>ItemListReceiptBasisExtendedTooltip</name>
             <id>52</id>
@@ -1493,10 +1489,6 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
-            <handlers>
-              <event>StartChoice</event>
-              <name>ItemListReceiptBasisStartChoice</name>
-            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>

@@ -389,11 +389,11 @@ Procedure FillRowID_IT(Source)
 			Row.NextStep = GetNextStep_IT(Source, RowItemList, Row);
 		EndIf;
 		
-		If Source.StoreReceiver.UseGoodsReceipt Then
+		If Source.UseGoodsReceipt Then
 			NewRowsGR.Insert(Row, RowItemList.QuantityInBaseUnit);
 		EndIf;
 		
-		If Source.StoreSender.UseShipmentConfirmation Then
+		If Source.UseShipmentConfirmation Then
 			NewRowsSC.Insert(Row, RowItemList.QuantityInBaseUnit);
 		EndIf;
 		

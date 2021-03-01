@@ -661,7 +661,66 @@ Scenario: _0401014 check Purchase invoice movements by the Register  "R4010 Actu
 			
 		And I close all client application windows
 
+Scenario: _0401015 check Purchase invoice movements by the Register  "R4031 Goods in transit (incoming)" (one string use GR, 2 string not use GR)
+	And I close all client application windows
+	* Select Purchase invoice
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '118' |
+	* Check movements by the Register  "R4031 Goods in transit (incoming)"
+		And I click "Registrations report" button
+		And I select "R4031 Goods in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 118 dated 12.02.2021 16:08:41' | ''            | ''                    | ''          | ''           | ''                                               | ''         |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''           | ''                                               | ''         |
+			| 'Register  "R4031 Goods in transit (incoming)"'  | ''            | ''                    | ''          | ''           | ''                                               | ''         |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                               | ''         |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                          | 'Item key' |
+			| ''                                               | 'Receipt'     | '12.02.2021 16:08:41' | '10'        | 'Store 02'   | 'Purchase invoice 118 dated 12.02.2021 16:08:41' | 'S/Yellow' |
+		And I close all client application windows
 
+Scenario: _0401016 check Purchase invoice movements by the Register  "R4031 Goods in transit (incoming)" (GR-PI)
+	And I close all client application windows
+	* Select Purchase invoice
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '119' |
+	* Check movements by the Register  "R4031 Goods in transit (incoming)"
+		And I click "Registrations report" button
+		And I select "R4031 Goods in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 119 dated 12.02.2021 16:21:23' | ''            | ''                    | ''          | ''           | ''                                            | ''          |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''           | ''                                            | ''          |
+			| 'Register  "R4031 Goods in transit (incoming)"'  | ''            | ''                    | ''          | ''           | ''                                            | ''          |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                            | ''          |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                       | 'Item key'  |
+			| ''                                               | 'Receipt'     | '12.02.2021 16:21:23' | '5'         | 'Store 02'   | 'Goods receipt 119 dated 12.02.2021 16:20:35' | '36/Yellow' |
+			| ''                                               | 'Receipt'     | '12.02.2021 16:21:23' | '10'        | 'Store 02'   | 'Goods receipt 119 dated 12.02.2021 16:20:35' | 'S/Yellow'  |
+		And I close all client application windows
 
+Scenario: _0401017 check Purchase invoice movements by the Register  "R4031 Goods in transit (incoming)" (PO-GR-PI)
+	And I close all client application windows
+	* Select Purchase invoice
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '115' |
+	* Check movements by the Register  "R4031 Goods in transit (incoming)"
+		And I click "Registrations report" button
+		And I select "R4031 Goods in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 115 dated 12.02.2021 15:13:56' | ''            | ''                    | ''          | ''           | ''                                            | ''          |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''           | ''                                            | ''          |
+			| 'Register  "R4031 Goods in transit (incoming)"'  | ''            | ''                    | ''          | ''           | ''                                            | ''          |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                            | ''          |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                       | 'Item key'  |
+			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '5'         | 'Store 02'   | 'Goods receipt 115 dated 12.02.2021 15:10:35' | '36/Yellow' |
+			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '10'        | 'Store 02'   | 'Goods receipt 115 dated 12.02.2021 15:10:35' | 'S/Yellow'  |
+		And I close all client application windows
 
 

@@ -323,6 +323,9 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("Error_092", NStr("en = 'Can not use %1 role in SaaS mode'", Lang));
 	Strings.Insert("Error_093", NStr("en = 'Cancel reason has to be filled if string was canceled'", Lang));
+	Strings.Insert("Error_094", NStr("en = 'Сan not use confirmation of shipment without goods receipt'", Lang));
+	
+	
 	#EndRegion
 	
 	#Region InfoMessages
@@ -377,7 +380,7 @@ Function Strings(Lang) Export
   	Strings.Insert("InfoMessage_021", NStr("en = 'Can not unlock attributes, this is element used %1 times, ex.:'", Lang));
   	// %1 - 
   	Strings.Insert("InfoMessage_022", NStr("en = 'This order is closed by %1'", Lang));
-
+	Strings.Insert("InfoMessage_023", NStr("en = 'Сan not use confirmation of shipment without goods receipt. Use goods receipt mode is enabled.'", Lang));
 	#EndRegion
 	
 	#Region QuestionToUser

@@ -103,6 +103,8 @@ EndProcedure
 
 #EndRegion
 
+#Region ItemList
+
 Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
 	CurrentRow = Form.Items.ItemList.CurrentData;
 	If CurrentRow = Undefined Then
@@ -138,6 +140,8 @@ Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessin
 	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing);
 EndProcedure
 
+#EndRegion
+
 #Region GroupTitleDecorationsEvents
 
 Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
@@ -161,4 +165,3 @@ EndProcedure
 Procedure SearchByBarcode(Barcode, Object, Form) Export
 	DocumentsClient.SearchByBarcode(Barcode, Object, Form);
 EndProcedure
-

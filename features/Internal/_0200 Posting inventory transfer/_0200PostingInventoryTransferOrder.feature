@@ -233,6 +233,75 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 			| '$$InventoryTransferOrder020013$$' |
 			And I close current window
 
+Scenario: _020014 check filling in fields Use GR and Use SC from Store in the Inventory transfer order (prohibit Use SC = True, Use GR = False)
+	* Opening a form to create Inventory transfer order
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And I click the button named "FormCreate"
+	* Filling in Store sender (Use SC) and Store receiver (Use GR) and check filling fields Use GR and Use SC
+		And I click Select button of "Store sender" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'  |
+		And I select current line in "List" table
+		And I click Select button of "Store receiver" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 03'  |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		Then the form attribute named "UseShipmentConfirmation" became equal to "Yes"
+		Then the form attribute named "UseGoodsReceipt" became equal to "Yes"
+	* Filling in Store sender (not use SC) and Store receiver ( not use GR) and check filling fields Use GR and Use SC
+		And I click Select button of "Store sender" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'  |
+		And I select current line in "List" table
+		And I click Select button of "Store receiver" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 04'  |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		Then the form attribute named "UseShipmentConfirmation" became equal to "No"
+		Then the form attribute named "UseGoodsReceipt" became equal to "No"
+	* Filling in Store sender (not use SC) and Store receiver ( use GR) and check filling fields Use GR and Use SC
+		And I click Select button of "Store sender" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'  |
+		And I select current line in "List" table
+		And I click Select button of "Store receiver" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 03'  |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		Then the form attribute named "UseShipmentConfirmation" became equal to "No"
+		Then the form attribute named "UseGoodsReceipt" became equal to "Yes"
+	* Filling in Store sender (use SC) and Store receiver ( not use GR) and check filling fields Use GR and Use SC
+		And I click Select button of "Store sender" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'  |
+		And I select current line in "List" table
+		And I click Select button of "Store receiver" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'  |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		Then I wait that in user messages the "Сan not use confirmation of shipment without goods receipt. Use goods receipt mode is enabled." substring will appear in 20 seconds
+		Then the form attribute named "UseShipmentConfirmation" became equal to "Yes"
+		Then the form attribute named "UseGoodsReceipt" became equal to "Yes"
+		And I close all client application windows
+		
+	
+
+
+
+		
+				
 
 
 	

@@ -249,9 +249,9 @@
   <commonModules>CommonModule.DocInternalSupplyRequestClient</commonModules>
   <commonModules>CommonModule.DocInternalSupplyRequestServer</commonModules>
   <commonModules>CommonModule.DocInventoryTransferClient</commonModules>
+  <commonModules>CommonModule.DocInventoryTransferServer</commonModules>
   <commonModules>CommonModule.DocInventoryTransferOrderClient</commonModules>
   <commonModules>CommonModule.DocInventoryTransferOrderServer</commonModules>
-  <commonModules>CommonModule.DocInventoryTransferServer</commonModules>
   <commonModules>CommonModule.DocInvoiceMatchClient</commonModules>
   <commonModules>CommonModule.DocInvoiceMatchServer</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentClient</commonModules>

@@ -270,6 +270,11 @@ Function GetAdditionalQueryParamenters(Ref)
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	StrParams.Insert("Period", StatusInfo.Period);
 	StrParams.Insert("Ref", Ref);
+	If ValueIsFilled(Ref) Then
+		StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	Else
+		StrParams.Insert("BalancePeriod", Undefined);
+	EndIf;
 	Return StrParams;
 EndFunction
 
@@ -284,9 +289,14 @@ EndFunction
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4012B_StockReservation());
+	QueryArray.Add(R4016B_InternalSupplyRequestOrdering());
+	QueryArray.Add(R4020T_StockTransferOrders());
+	QueryArray.Add(R4021B_StockTransferOrdersReceipt());
+	QueryArray.Add(R4022B_StockTransferOrdersShipment());
 	QueryArray.Add(R4035B_IncomingStocks());
 	QueryArray.Add(R4036B_IncomingStocksRequested());
-	QueryArray.Add(R4012B_StockReservation());
+	
 	Return QueryArray;	
 EndFunction	
 
@@ -298,12 +308,15 @@ Function ItemList()
 		|	InventoryTransferOrderItemList.Ref.StoreSender AS StoreSender,
 		|	InventoryTransferOrderItemList.Ref.StoreReceiver AS StoreReceiver,
 		|	InventoryTransferOrderItemList.Ref AS Order,
-		|	InventoryTransferOrderItemList.InternalSupplyRequest AS InternalSupplyRequest,
 		|	InventoryTransferOrderItemList.ItemKey AS ItemKey,
 		|	InventoryTransferOrderItemList.QuantityInBaseUnit AS Quantity,
 		|	InventoryTransferOrderItemList.Key AS RowKey,
 		|	InventoryTransferOrderItemList.PurchaseOrder AS PurchaseOrder,
-		|	NOT InventoryTransferOrderItemList.PurchaseOrder.Ref IS NULL AS UsePurchaseOrder
+		|	NOT InventoryTransferOrderItemList.PurchaseOrder.Ref IS NULL AS PurchaseOrderExists,
+		|	InventoryTransferOrderItemList.InternalSupplyRequest AS InternalSupplyRequest,
+		|	NOT InventoryTransferOrderItemList.InternalSupplyRequest.Ref IS NULL AS InternalSupplyRequestExists,
+		|	InventoryTransferOrderItemList.Ref.UseGoodsReceipt AS UseGoodsReceipt,
+		|	InventoryTransferOrderItemList.Ref.UseShipmentConfirmation AS UseShipmentConfirmation
 		|INTO ItemList
 		|FROM
 		|	Document.InventoryTransferOrder.ItemList AS InventoryTransferOrderItemList
@@ -323,12 +336,86 @@ Function R4011B_FreeStocks()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	NOT ItemLIst.UsePurchaseOrder
+		|	NOT ItemLIst.PurchaseOrderExists
+		|	AND (ItemLIst.UseGoodsReceipt OR ItemLIst.UseShipmentConfirmation)
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.StoreSender,
 		|	ItemList.ItemKey";
 EndFunction 
+
+
+Function R4012B_StockReservation()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.StoreSender AS Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Order,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO R4012B_StockReservation
+		|FROM 
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.PurchaseOrderExists
+		|	AND (ItemLIst.UseGoodsReceipt OR ItemLIst.UseShipmentConfirmation)
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.StoreSender,
+		|	ItemList.ItemKey,
+		|	ItemList.Order";
+EndFunction	
+
+Function R4016B_InternalSupplyRequestOrdering()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.StoreSender AS Store,
+		|	*
+		|INTO R4016B_InternalSupplyRequestOrdering
+		|FROM 
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.InternalSupplyRequestExists";
+EndFunction
+
+Function R4020T_StockTransferOrders()
+	Return
+		"SELECT
+		|	*
+		|INTO R4020T_StockTransferOrders
+		|FROM 
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R4021B_StockTransferOrdersReceipt()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.StoreReceiver AS Store,
+		|	*
+		|INTO R4021B_StockTransferOrdersReceipt
+		|FROM 
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R4022B_StockTransferOrdersShipment()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.StoreSender AS Store,
+		|	*
+		|INTO R4022B_StockTransferOrdersShipment
+		|FROM 
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
+EndFunction
 
 Function R4035B_IncomingStocks()
 	Return
@@ -343,7 +430,7 @@ Function R4035B_IncomingStocks()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemLIst.UsePurchaseOrder
+		|	ItemLIst.PurchaseOrderExists
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.StoreSender,
@@ -376,7 +463,7 @@ Function R4036B_IncomingStocksRequested()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.UsePurchaseOrder
+		|	ItemList.PurchaseOrderExists
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.StoreSender,
@@ -397,26 +484,6 @@ Function R4036B_IncomingStocksRequested_Exists()
 		|	R4036B_IncomingStocksRequested.Recorder = &Ref";
 EndFunction
 
-Function R4012B_StockReservation()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	ItemList.Period,
-		|	ItemList.StoreSender AS Store,
-		|	ItemList.ItemKey,
-		|	ItemList.Order,
-		|	SUM(ItemList.Quantity) AS Quantity
-		|INTO R4012B_StockReservation
-		|FROM 
-		|	ItemList AS ItemList
-		|WHERE
-		|	NOT ItemList.UsePurchaseOrder
-		|GROUP BY
-		|	ItemList.Period,
-		|	ItemList.StoreSender,
-		|	ItemList.ItemKey,
-		|	ItemList.Order";
-EndFunction	
 
 #EndRegion
 

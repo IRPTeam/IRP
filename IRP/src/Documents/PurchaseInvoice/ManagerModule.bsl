@@ -2882,26 +2882,29 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4017B_InternalSupplyRequestProcurement());
+	QueryArray.Add(R4031B_GoodsInTransitIncoming());
 	QueryArray.Add(R4033B_GoodsReceiptSchedule());
 	QueryArray.Add(R4050B_StockInventory());
-	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R4035B_IncomingStocks());
 	QueryArray.Add(R4036B_IncomingStocksRequested());
-	QueryArray.Add(R4012B_StockReservation());
+	QueryArray.Add(R5010B_ReconciliationStatement());
+
 	Return QueryArray;
 EndFunction
 
 Function ItemList()
 	Return
 		"SELECT
-		|	GoodsReceipts.Key
+		|	GoodsReceipts.Key,
+		|	GoodsReceipts.GoodsReceipt
 		|INTO GoodsReceipts
 		|FROM
 		|	Document.PurchaseInvoice.GoodsReceipts AS GoodsReceipts
 		|WHERE
 		|	GoodsReceipts.Ref = &Ref
 		|GROUP BY
-		|	GoodsReceipts.Key
+		|	GoodsReceipts.Key,
+		|	GoodsReceipts.GoodsReceipt
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -2965,7 +2968,8 @@ Function ItemList()
 		|	PurchaseInvoiceItemList.ExpenseType AS ExpenseType,
 		|	PurchaseInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		|	PurchaseInvoiceItemList.DeliveryDate AS DeliveryDate,
-		|	PurchaseInvoiceItemList.NetAmount AS NetAmount
+		|	PurchaseInvoiceItemList.NetAmount AS NetAmount,
+		|	GoodsReceipts.GoodsReceipt
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
@@ -3269,18 +3273,7 @@ Function R4011B_FreeStocks()
 		|WHERE
 		|	NOT ItemList.IsService
 		|	AND NOT ItemList.UseGoodsReceipt
-		|	AND NOT ItemList.GoodsReceiptExists
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
-		|	FreeStocks.Period,
-		|	FreeStocks.Store,
-		|	FreeStocks.ItemKey,
-		|	FreeStocks.Quantity
-		|FROM
-		|	FreeStocks AS FreeStocks";
+		|	AND NOT ItemList.GoodsReceiptExists";
 
 EndFunction
 
@@ -3309,6 +3302,26 @@ Function R4017B_InternalSupplyRequestProcurement()
 		|	NOT ItemList.IsService
 		|	AND ItemList.InternalSupplyRequestExists
 		|	AND NOT ItemList.UseGoodsReceipt";
+
+EndFunction
+
+Function R4031B_GoodsInTransitIncoming()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	CASE
+		|		WHEN ItemList.GoodsReceiptExists
+		|			Then ItemList.GoodsReceipt
+		|		Else ItemList.Invoice
+		|	End AS Basis,
+		|	*
+		|INTO R4031B_GoodsInTransitIncoming
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND (ItemList.UseGoodsReceipt
+		|		OR ItemList.GoodsReceiptExists)";
 
 EndFunction
 
@@ -3406,16 +3419,4 @@ Function R4036B_IncomingStocksRequested_Exists()
 		|	R4036B_IncomingStocksRequested.Recorder = &Ref";
 EndFunction
 
-Function R4012B_StockReservation()
-	Return
-		"SELECT 
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	IncomingStocksRequested.IncomingStore AS Store,
-		|	IncomingStocksRequested.Requester AS Order,
-		|*
-		|INTO R4012B_StockReservation
-		|FROM 
-		|	IncomingStocksRequested AS IncomingStocksRequested";	
-EndFunction
-	
 #EndRegion

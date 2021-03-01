@@ -306,6 +306,3 @@ Scenario: _040167 check Sales order closing movements by the Register  "R2012 In
 
 		And I close all client application windows
 
-Scenario: Refill constant NotFirstStart value
-
-	And I refill constant "NotFirstStart" "True"

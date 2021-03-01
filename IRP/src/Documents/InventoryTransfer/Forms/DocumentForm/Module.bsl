@@ -112,10 +112,51 @@ EndProcedure
 
 #EndRegion
 
+#Region StoreInfo
+
 &AtClient
 Procedure StoreTransitOnChange(Item)
 	DocInventoryTransferClient.StoreTransitOnChange(Object, ThisObject, Item);
 EndProcedure
+
+&AtClient
+Procedure StoreSenderOnChange(Item)
+	DocInventoryTransferClient.StoreSenderOnChange(Object, ThisObject, Item);
+	StoreSenderOnChangeAtServer();
+EndProcedure
+
+&AtServer
+Procedure StoreSenderOnChangeAtServer()
+	DocInventoryTransferServer.StoreSenderOnChange(Object);
+EndProcedure
+
+&AtClient
+Procedure StoreReceiverOnChange(Item)
+	DocInventoryTransferClient.StoreReceiverOnChange(Object, ThisObject, Item);
+	StoreReceiverOnChangeAtServer();
+EndProcedure
+
+&AtServer
+Procedure StoreReceiverOnChangeAtServer()
+	DocInventoryTransferServer.StoreReceiverOnChange(Object);
+EndProcedure
+
+&AtClient
+Procedure UseShipmentConfirmationOnChange(Item)
+	CheckAndUpdateUseGRAtServer();
+EndProcedure
+
+&AtServer
+Procedure CheckAndUpdateUseGRAtServer()
+	DocInventoryTransferServer.CheckAndUpdateUseGR(Object);
+EndProcedure
+
+&AtClient
+Procedure UseGoodsReceiptOnChange(Item)
+	CheckAndUpdateUseGRAtServer();
+EndProcedure
+
+#EndRegion
 
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
@@ -142,16 +183,6 @@ EndProcedure
 &AtClient
 Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
 	DocInventoryTransferClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure StoreSenderOnChange(Item)
-	DocInventoryTransferClient.StoreSenderOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure StoreReceiverOnChange(Item)
-	DocInventoryTransferClient.StoreReceiverOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

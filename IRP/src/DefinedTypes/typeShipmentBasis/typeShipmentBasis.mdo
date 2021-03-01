@@ -12,9 +12,9 @@
     <types>DocumentRef.PurchaseReturn</types>
     <types>DocumentRef.ShipmentConfirmation</types>
     <types>DocumentRef.Unbundling</types>
-    <types>DocumentRef.SalesOrder</types>
     <types>DocumentRef.Bundling</types>
     <types>DocumentRef.InventoryTransfer</types>
     <types>DocumentRef.SalesInvoice</types>
+    <types>DocumentRef.SalesOrder</types>
   </type>
 </mdclass:DefinedType>

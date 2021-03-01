@@ -257,7 +257,7 @@ Scenario: _0402411 check Inventory transfer movements by the Register  "R4011 Fr
 			| 'Register  "R4011 Free stocks"'                     |	
 		And I close all client application windows
 
-Scenario: _0402411 check Inventory transfer movements by the Register  "R4012 Stock Reservation" (not Use SC Use GR with ITO)
+Scenario: _0402412 check Inventory transfer movements by the Register  "R4012 Stock Reservation" (not Use SC Use GR with ITO)
 	* Select Inventory transfer
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table

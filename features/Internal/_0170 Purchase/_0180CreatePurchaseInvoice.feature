@@ -52,96 +52,250 @@ Scenario: _018000 preparation
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-	* Check or create PurchaseOrder017001
+	* Load documents
+		When Create document PurchaseOrder objects (creation based on)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(217).GetObject().Write(DocumentWriteMode.Posting);" |
+	
+
+
+
+Scenario: _018001 create document Purchase Invoice based on order (partial quantity, PO-PI)
+	* Select PO
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberPurchaseOrder017001$$" |
-			When create PurchaseOrder017001
-	* Check or create PurchaseOrder017003
-		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberPurchaseOrder017003$$" |
-			When create PurchaseOrder017001
+		And I go to line in "List" table
+			| 'Number'   | 'Partner'   | 'Date'                |
+			| '217'      | 'Ferron BP' | '12.02.2021 12:45:05' |
+	* Create PI
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And "BasisesTree" table became equal
+			| 'Row presentation'                             | 'Use'                                          | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
+			| 'Purchase order 217 dated 12.02.2021 12:45:05' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''         | ''               | ''       | ''         |
+			| 'Dress, S/Yellow'                              | 'Yes'                                          | '10,000'   | 'pcs'            | '100,00' | 'TRY'      |
+			| 'Service, Interner'                            | 'Yes'                                          | '2,000'    | 'pcs'            | '150,00' | 'TRY'      |
+			| 'Trousers, 36/Yellow'                          | 'Yes'                                          | '5,000'    | 'pcs'            | '200,00' | 'TRY'      |
+			| 'Trousers, 36/Yellow'                          | 'Yes'                                          | '8,000'    | 'pcs'            | '210,00' | 'TRY'      |
+			| 'Boots, 36/18SD'                               | 'Yes'                                          | '5,000'    | 'Boots (12 pcs)' | '200,00' | 'TRY'      |
+		And I go to line in "BasisesTree" table
+			| 'Row presentation'  |
+			| 'Service, Interner' |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+	* Check filling in PI
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
+		And "ItemList" table became equal
+			| '#' | 'Business unit' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Q'      | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                               | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '1' | 'Front office'  | 'en description is empty' | 'Dress'    | 'S/Yellow'  | 'No'                 | '137,29'     | 'pcs'            | ''                   | '10,000' | '100,00' | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '762,71'     | 'Yes'               |
+			| '2' | 'Front office'  | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '137,29'     | 'pcs'            | ''                   | '5,000'  | '200,00' | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '762,71'     | 'Yes'               |
+			| '3' | 'Front office'  | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '256,27'     | 'pcs'            | ''                   | '8,000'  | '210,00' | '18%' | ''              | '1 680,00'     | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '1 423,73'   | 'Yes'               |
+			| '4' | ''              | 'en description is empty' | 'Boots'    | '36/18SD'   | 'No'                 | '1 830,51'   | 'Boots (12 pcs)' | ''                   | '5,000'  | '200,00' | '18%' | ''              | '12 000,00'    | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '10 169,49'  | 'Yes'               |
+		And "SpecialOffers" table contains lines
+			| '#' | 'Amount' |
+			| '1' | '100,00' |
+			| '2' | '100,00' |
+		Then the form attribute named "BusinessUnit" became equal to ""
+		Then the form attribute named "Author" became equal to "en description is empty"
+		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+		Then the form attribute named "Currency" became equal to "TRY"
+		And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "200,00"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "13 118,64"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "2 361,36"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "15 480,00"
+	* Change quantity
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key'   | 'Q'      |
+			| 'Dress' | 'S/Yellow'   | '10,000' |
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		And I delete "$$PurchaseInvoice018001$$" variable
+		And I delete "$$NumberPurchaseInvoice018001$$" variable
+		And I save the window as "$$PurchaseInvoice018001$$"
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice018001$$"
+		And I click the button named "FormPostAndClose"
+
 	
 
+Scenario: _018002 check filling in Row Id info table in the PI (PO-PI)
+	* Select PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'                     |
+			| '$$NumberPurchaseInvoice018001$$' |
+		And I select current line in "List" table
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov1PurchaseInvoice018001$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov2PurchaseInvoice018001$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '3' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov3PurchaseInvoice018001$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '4' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov4PurchaseInvoice018001$$"
+	* Check Row Id info table
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Q'     | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'GR'        | '5,000' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'PI&GR'        | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' |
+			| '2' | '$$Rov2PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'GR'        | '5,000' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'PI&GR'        | '923e7825-c20f-4a3e-a983-3b85d80e475a' |
+			| '3' | '$$Rov3PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'GR'        | '8,000' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'PI&GR'        | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' |
+			| '4' | '$$Rov4PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '8d544e62-9a68-43c3-8399-b4ef451d9770' | 'GR'        | '60,000'| '8d544e62-9a68-43c3-8399-b4ef451d9770' | 'PI&GR'        | '8d544e62-9a68-43c3-8399-b4ef451d9770' |
+
+		Then the number of "RowIDInfo" table lines is "равно" "4"
+	* Copy string and check Row ID Info tab
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '1' | 'Dress' | 'S/Yellow'  | '5,000' |		
+		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| '#' |
+			| '5' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov5PurchaseInvoice018001$$"
+		And I move to "Row ID Info" tab
+		And I click the button named "FormPost"
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'GR'        | '5,000'  | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'PI&GR'        | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' |
+			| '2' | '$$Rov2PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'GR'        | '5,000'  | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'PI&GR'        | '923e7825-c20f-4a3e-a983-3b85d80e475a' |
+			| '3' | '$$Rov3PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'GR'        | '8,000'  | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'PI&GR'        | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' |
+			| '4' | '$$Rov4PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '8d544e62-9a68-43c3-8399-b4ef451d9770' | 'GR'        | '60,000' | '8d544e62-9a68-43c3-8399-b4ef451d9770' | 'PI&GR'        | '8d544e62-9a68-43c3-8399-b4ef451d9770' |
+			| '5' | '$$Rov5PurchaseInvoice018001$$' | ''                                             | '$$Rov5PurchaseInvoice018001$$'        | 'GR'        | '10,000' | ''                                     | ''             | '$$Rov5PurchaseInvoice018001$$'        |
+		Then the number of "RowIDInfo" table lines is "равно" "5"
+		And "RowIDInfo" table does not contain lines
+			| 'Key'                        | 'Q'     |
+			| '$$Rov1PurchaseInvoice018001$$' | '10,000' |
+	* Delete string and check Row ID Info tab
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '5' | 'Dress' | 'S/Yellow'  | '10,000' |	
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Q'     | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'GR'        | '5,000' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'PI&GR'        | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' |
+			| '2' | '$$Rov2PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'GR'        | '5,000' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'PI&GR'        | '923e7825-c20f-4a3e-a983-3b85d80e475a' |
+			| '3' | '$$Rov3PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'GR'        | '8,000' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'PI&GR'        | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' |
+			| '4' | '$$Rov4PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '8d544e62-9a68-43c3-8399-b4ef451d9770' | 'GR'        | '60,000'| '8d544e62-9a68-43c3-8399-b4ef451d9770' | 'PI&GR'        | '8d544e62-9a68-43c3-8399-b4ef451d9770' |
+		Then the number of "RowIDInfo" table lines is "равно" "4"
+	* Change quantity and check  Row ID Info tab
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'     | 'Item key'  | 'Q'     |
+			| '3' | 'Trousers' | '36/Yellow' | '8,000' |
+		And I activate "Q" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "7,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Q'     | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'GR'        | '5,000' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'PI&GR'        | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' |
+			| '2' | '$$Rov2PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'GR'        | '5,000' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'PI&GR'        | '923e7825-c20f-4a3e-a983-3b85d80e475a' |
+			| '3' | '$$Rov3PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'GR'        | '7,000' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'PI&GR'        | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' |
+			| '4' | '$$Rov4PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '8d544e62-9a68-43c3-8399-b4ef451d9770' | 'GR'        | '60,000'| '8d544e62-9a68-43c3-8399-b4ef451d9770' | 'PI&GR'        | '8d544e62-9a68-43c3-8399-b4ef451d9770' |
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'     | 'Item key'  | 'Q'     |
+			| '3' | 'Trousers' | '36/Yellow' | '7,000' |
+		And I activate "Q" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "8,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Change checkbox Use Goods receipt and check RowIDInfo
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Q'     | 'Unit'           |
+			| 'Boots' | '36/18SD'  | '5,000' | 'Boots (12 pcs)' |
+		And I remove "Use goods receipt" checkbox in "ItemList" table			
+		And I move to the tab named "GroupRowIDInfo"
+		And I click "Post" button
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Q'     | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'GR'        | '5,000' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'PI&GR'        | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' |
+			| '2' | '$$Rov2PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'GR'        | '5,000' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'PI&GR'        | '923e7825-c20f-4a3e-a983-3b85d80e475a' |
+			| '3' | '$$Rov3PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'GR'        | '8,000' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'PI&GR'        | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' |
+			| '4' | '$$Rov4PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '8d544e62-9a68-43c3-8399-b4ef451d9770' | ''          | '60,000'| '8d544e62-9a68-43c3-8399-b4ef451d9770' | 'PI&GR'        | '8d544e62-9a68-43c3-8399-b4ef451d9770' |
+		Then the number of "RowIDInfo" table lines is "равно" "4"	
+		And I click the button named "FormPostAndClose"
 
 
-Scenario: _018001 create document Purchase Invoice based on order - Goods receipt is not used
-	When create PurchaseInvoice018001 based on PurchaseOrder017001
+
+
+
 	
+Scenario: _018003 copy PI (based on PO) and check filling in Row Id info table (PI)
+	* Copy PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'                     |
+			| '$$NumberPurchaseInvoice018001$$' |
+		And in the table "List" I click the button named "ListContextMenuCopy"
+	* Check copy info
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
+		And "ItemList" table became equal
+			| '#' | 'Business unit' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Q'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order' | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '1' | 'Front office'  | 'en description is empty' | 'Dress'    | 'S/Yellow'  | 'No'                 | '61,02'      | 'pcs'            | ''                   | '5,000' | '100,00' | '18%' | '100,00'        | '400,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '338,98'     | 'Yes'               |
+			| '2' | 'Front office'  | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '137,29'     | 'pcs'            | ''                   | '5,000' | '200,00' | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '762,71'     | 'Yes'               |
+			| '3' | 'Front office'  | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '256,27'     | 'pcs'            | ''                   | '8,000' | '210,00' | '18%' | ''              | '1 680,00'     | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '1 423,73'   | 'Yes'               |
+			| '4' | ''              | 'en description is empty' | 'Boots'    | '36/18SD'   | 'No'                 | '1 830,51'   | 'Boots (12 pcs)' | ''                   | '5,000' | '200,00' | '18%' | ''              | '12 000,00'    | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '10 169,49'  | 'No'                |
 
-Scenario: _018002 check Purchase Invoice movements by register Order Balance (minus) - Goods receipt is not used
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                  | 'Store'    | 'Order'                   | 'Item key'  |
-		| '100,000'  | '$$PurchaseInvoice018001$$' | 'Store 01' | '$$PurchaseOrder017001$$' | 'M/White'   |
-		| '200,000'  | '$$PurchaseInvoice018001$$' | 'Store 01' | '$$PurchaseOrder017001$$' | 'L/Green'   |
-		| '300,000'  | '$$PurchaseInvoice018001$$' | 'Store 01' | '$$PurchaseOrder017001$$' | '36/Yellow' |
+		And "ObjectCurrencies" table became equal
+			| 'Movement type'      | 'Type'         | 'Currency from' | 'Currency' | 'Rate presentation' | 'Multiplicity' | 'Amount'   |
+			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1'            | '14 980'   |
+			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '14 980'   |
+			| 'Reporting currency' | 'Reporting'    | 'TRY'           | 'USD'      | '0,1712'            | '1'            | '2 564,58' |
+
+		Then the form attribute named "BusinessUnit" became equal to ""
+		Then the form attribute named "Author" became equal to "en description is empty"
+		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "12 694,91"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "2 285,09"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "14 980,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+	* Post PI and check Row ID Info tab
+		And I click the button named "FormPost"
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table does not contain lines
+			| 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '$$Rov1PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'GR'        | '5,000'  | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'PI&GR'        | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' |
+			| '$$Rov2PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'GR'        | '5,000'  | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'PI&GR'        | '923e7825-c20f-4a3e-a983-3b85d80e475a' |
+			| '$$Rov3PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'GR'        | '8,000'  | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'PI&GR'        | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' |
+			| '$$Rov4PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '8d544e62-9a68-43c3-8399-b4ef451d9770' | ''          | '60,000' | '8d544e62-9a68-43c3-8399-b4ef451d9770' | 'PI&GR'        | '8d544e62-9a68-43c3-8399-b4ef451d9770' |
+		Then the number of "RowIDInfo" table lines is "равно" "4"
+		And I close all client application windows		
 
 
-Scenario: _018003 check Purchase Invoice movements by register Stock Balance (plus) - Goods receipt is not used
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'            | 'Store'     | 'Item key' |
-		| '100,000'  | '$$PurchaseInvoice018001$$' | 'Store 01'  | 'M/White'  |
-		| '200,000'  | '$$PurchaseInvoice018001$$' |  'Store 01' | 'L/Green'  |
-		| '300,000'  | '$$PurchaseInvoice018001$$' |  'Store 01' | '36/Yellow'|
-
-Scenario: _018004 check Purchase Invoice movements by register Stock Reservation (plus) - Goods receipt is not used
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                  | 'Store'    | 'Item key'  |
-		| '100,000'  | '$$PurchaseInvoice018001$$' | 'Store 01' | 'M/White'   |
-		| '200,000'  | '$$PurchaseInvoice018001$$' | 'Store 01' | 'L/Green'   |
-		| '300,000'  | '$$PurchaseInvoice018001$$' | 'Store 01' | '36/Yellow' |
-
-Scenario: _018005 check Purchase Invoice movements by register Inventory Balance - Goods receipt is not used
-	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                  | 'Company'      | 'Item key'  |
-		| '100,000'  | '$$PurchaseInvoice018001$$' | 'Main Company' | 'M/White'   |
-		| '200,000'  | '$$PurchaseInvoice018001$$' | 'Main Company' | 'L/Green'   |
-		| '300,000'  | '$$PurchaseInvoice018001$$' | 'Main Company' | '36/Yellow' |
-
-Scenario: _018006 create document Purchase Invoice based on order - Goods receipt is used
-	When create PurchaseInvoice018006 based on PurchaseOrder017003
-	
-
-Scenario: _018007 check Purchase Invoice movements by register Order Balance (minus) - Goods receipt is used
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                  | 'Line number' | 'Store'    | 'Order'                   | 'Item key' |
-		| '500,000'  | '$$PurchaseInvoice018006$$' | '1'           | 'Store 02' | '$$PurchaseOrder017003$$' | 'L/Green'  |
-
-
-Scenario: _018008 check Purchase Invoice movements by register Inventory Balance (plus) - Goods receipt is used
-	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                  | 'Line number' | 'Company'      | 'Item key' |
-		| '500,000'  | '$$PurchaseInvoice018006$$' | '1'           | 'Main Company' | 'L/Green'  |
-
-Scenario: _018009 check Purchase Invoice movements by register GoodsInTransitIncoming (plus) - Goods receipt is used
-	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                  | 'Receipt basis'             | 'Line number' | 'Store'    | 'Item key' |
-		| '500,000'  | '$$PurchaseInvoice018006$$' | '$$PurchaseInvoice018006$$' | '1'           | 'Store 02' | 'L/Green'  |
-
-Scenario: _018010 check that there are no movements of Purchase Invoice document by register StockBalance if used Goods receipt 
-# if Goods receipt is used, there will be no posting
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table does not contain lines
-		| 'Quantity' | 'Recorder'                  | 'Line number' | 'Store'    | 'Item key' |
-		| '500,000'  | '$$PurchaseInvoice018006$$' | '1'           | 'Store 02' | 'L/Green'  |
-
-Scenario: _018011 check that there are no movements of Purchase Invoice document by register StockReservation if used Goods receipt 
-# if Goods receipt is used, there will be no posting
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table does not contain lines
-		| 'Quantity' | 'Recorder'                  | 'Line number' | 'Store'    | 'Item key' |
-		| '500,000'  | '$$PurchaseInvoice018006$$' | '1'           | 'Store 01' | 'L/Green'  |
-
-Scenario: _018012 Purchase invoice creation on set, store does not use Goods receipt
+Scenario: _018012 Purchase invoice creation without PO
 	* Creating Purchase Invoice without Purchase order	
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
@@ -232,17 +386,6 @@ Scenario: _018012 Purchase invoice creation on set, store does not use Goods rec
 			| '20,000'   | '$$PurchaseInvoice018012$$' | 'Boots/S-8' |
 
 
-Scenario: _018018 check totals in the document Purchase invoice
-	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-	* Select Purchase Invoice
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseInvoice018006$$'      |
-		And I select current line in "List" table
-	* Check totals
-		Then the form attribute named "ItemListTotalNetAmount" became equal to "16 949,15"
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "3 050,85"
-		Then the form attribute named "ItemListTotalTotalAmount" became equal to "20 000,00"
 
 
 // Scenario: _018020 check the form Pick up items in the document Purchase invoice
@@ -281,381 +424,12 @@ Scenario: _018018 check totals in the document Purchase invoice
 
 
 
-Scenario: _018019 check the output of the document movement report for Purchase Invoice
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-	* Check the report output for the selected document from the list
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseInvoice018001$$'      |
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseInvoice018001$$'      | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| 'Document registrations records' | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| 'Register  "Inventory balance"'  | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'M/White'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '200'       | 'Main Company' | 'L/Green'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '300'       | 'Main Company' | '36/Yellow' | '' | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Purchase turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Purchase turnovers"' | ''       | ''          | ''        | ''           | ''             | ''                          | ''         | ''          | ''        | ''                             | ''                     | '' | '' |
-		| ''                               | 'Period' | 'Resources' | ''        | ''           | 'Dimensions'   | ''                          | ''         | ''          | ''        | ''                             | 'Attributes'           | '' | '' |
-		| ''                               | ''       | 'Quantity'  | 'Amount'  | 'Net amount' | 'Company'      | 'Purchase invoice'          | 'Currency' | 'Item key'  | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-		| ''                               | '*'      | '100'       | '3 424'   | '2 901,69'   | 'Main Company' | '$$PurchaseInvoice018001$$' | 'USD'      | 'M/White'   | '*'       | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                               | '*'      | '100'       | '20 000'  | '16 949,15'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | 'M/White'   | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
-		| ''                               | '*'      | '100'       | '20 000'  | '16 949,15'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | 'M/White'   | '*'       | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                               | '*'      | '100'       | '20 000'  | '16 949,15'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | 'M/White'   | '*'       | 'TRY'                          | 'No'                   | '' | '' |
-		| ''                               | '*'      | '200'       | '7 190,4' | '6 093,56'   | 'Main Company' | '$$PurchaseInvoice018001$$' | 'USD'      | 'L/Green'   | '*'       | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                               | '*'      | '200'       | '42 000'  | '35 593,22'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | 'L/Green'   | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
-		| ''                               | '*'      | '200'       | '42 000'  | '35 593,22'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | 'L/Green'   | '*'       | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                               | '*'      | '200'       | '42 000'  | '35 593,22'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | 'L/Green'   | '*'       | 'TRY'                          | 'No'                   | '' | '' |
-		| ''                               | '*'      | '300'       | '12 840'  | '10 881,36'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'USD'      | '36/Yellow' | '*'       | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                               | '*'      | '300'       | '75 000'  | '63 559,32'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | '36/Yellow' | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
-		| ''                               | '*'      | '300'       | '75 000'  | '63 559,32'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | '36/Yellow' | '*'       | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                               | '*'      | '300'       | '75 000'  | '63 559,32'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | '36/Yellow' | '*'       | 'TRY'                          | 'No'                   | '' | '' |
-		And I select "Taxes turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Taxes turnovers"' | ''       | ''          | ''              | ''           | ''                          | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-		| ''                            | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'                | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
-		| ''                            | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'                  | 'Tax' | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                            | '*'      | '522,31'    | '522,31'        | '2 901,69'   | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '1 096,84'  | '1 096,84'      | '6 093,56'   | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '1 958,64'  | '1 958,64'      | '10 881,36'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '3 050,85'  | '3 050,85'      | '16 949,15'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '3 050,85'  | '3 050,85'      | '16 949,15'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '3 050,85'  | '3 050,85'      | '16 949,15'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '6 406,78'  | '6 406,78'      | '35 593,22'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '6 406,78'  | '6 406,78'      | '35 593,22'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '6 406,78'  | '6 406,78'      | '35 593,22'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '11 440,68' | '11 440,68'     | '63 559,32'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '11 440,68' | '11 440,68'     | '63 559,32'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '11 440,68' | '11 440,68'     | '63 559,32'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                          | ''         | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                          | ''         | '' | '' |
-		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'            | 'Currency' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | ''                     | '137 000'        | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' | 'TRY'      | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '100'       | 'Store 01'   | 'M/White'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '200'       | 'Store 01'   | 'L/Green'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '300'       | 'Store 01'   | '36/Yellow' | '' | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Expense'     | '*'      | '137 000'   | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Goods receipt schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                        | ''         | ''          | ''        | ''              | '' | '' | '' | '' |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''         | ''          | ''        | 'Attributes'    | '' | '' | '' | '' |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                   | 'Store'    | 'Item key'  | 'Row key' | 'Delivery date' | '' | '' | '' | '' |
-		| ''                                   | 'Expense'     | '*'      | '100'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01' | 'M/White'   | '*'       | '*'             | '' | '' | '' | '' |
-		| ''                                   | 'Expense'     | '*'      | '200'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01' | 'L/Green'   | '*'       | '*'             | '' | '' | '' | '' |
-		| ''                                   | 'Expense'     | '*'      | '300'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01' | '36/Yellow' | '*'       | '*'             | '' | '' | '' | '' |
-		And I select "Partner AP transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Partner AP transactions"' | ''            | ''       | ''          | ''             | ''                          | ''          | ''                  | ''                   | ''         | ''                             | ''                     | '' | '' |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''          | ''                  | ''                   | ''         | ''                             | 'Attributes'           | '' | '' |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'            | 'Partner'   | 'Legal name'        | 'Partner term'       | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '23 454,4'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '137 000'   | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '137 000'   | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '137 000'   | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"' | ''            | ''       | ''          | ''           | ''                        | ''          | ''        | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                        | ''          | ''        | '' | '' | '' | '' | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                   | 'Item key'  | 'Row key' | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '100'       | 'Store 01'   | '$$PurchaseOrder017001$$' | 'M/White'   | '*'       | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '200'       | 'Store 01'   | '$$PurchaseOrder017001$$' | 'L/Green'   | '*'       | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '300'       | 'Store 01'   | '$$PurchaseOrder017001$$' | '36/Yellow' | '*'       | '' | '' | '' | '' | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'            | ''            | ''          | ''                     | ''               | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | ''            | ''          | 'Quantity'             | 'Store'          | 'Item key'                  | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '*'         | '100'                  | 'Store 01'       | 'M/White'                   | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '*'         | '200'                  | 'Store 01'       | 'L/Green'                   | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '*'         | '300'                  | 'Store 01'       | '36/Yellow'                 | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-	* Check the report output from the selected document
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseInvoice018001$$'      |
-		And I select current line in "List" table
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseInvoice018001$$'      | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| 'Document registrations records' | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| 'Register  "Inventory balance"'  | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'M/White'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '200'       | 'Main Company' | 'L/Green'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '300'       | 'Main Company' | '36/Yellow' | '' | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Purchase turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Purchase turnovers"' | ''       | ''          | ''        | ''           | ''             | ''                          | ''         | ''          | ''        | ''                             | ''                     | '' | '' |
-		| ''                               | 'Period' | 'Resources' | ''        | ''           | 'Dimensions'   | ''                          | ''         | ''          | ''        | ''                             | 'Attributes'           | '' | '' |
-		| ''                               | ''       | 'Quantity'  | 'Amount'  | 'Net amount' | 'Company'      | 'Purchase invoice'          | 'Currency' | 'Item key'  | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-		| ''                               | '*'      | '100'       | '3 424'   | '2 901,69'   | 'Main Company' | '$$PurchaseInvoice018001$$' | 'USD'      | 'M/White'   | '*'       | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                               | '*'      | '100'       | '20 000'  | '16 949,15'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | 'M/White'   | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
-		| ''                               | '*'      | '100'       | '20 000'  | '16 949,15'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | 'M/White'   | '*'       | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                               | '*'      | '100'       | '20 000'  | '16 949,15'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | 'M/White'   | '*'       | 'TRY'                          | 'No'                   | '' | '' |
-		| ''                               | '*'      | '200'       | '7 190,4' | '6 093,56'   | 'Main Company' | '$$PurchaseInvoice018001$$' | 'USD'      | 'L/Green'   | '*'       | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                               | '*'      | '200'       | '42 000'  | '35 593,22'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | 'L/Green'   | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
-		| ''                               | '*'      | '200'       | '42 000'  | '35 593,22'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | 'L/Green'   | '*'       | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                               | '*'      | '200'       | '42 000'  | '35 593,22'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | 'L/Green'   | '*'       | 'TRY'                          | 'No'                   | '' | '' |
-		| ''                               | '*'      | '300'       | '12 840'  | '10 881,36'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'USD'      | '36/Yellow' | '*'       | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                               | '*'      | '300'       | '75 000'  | '63 559,32'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | '36/Yellow' | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
-		| ''                               | '*'      | '300'       | '75 000'  | '63 559,32'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | '36/Yellow' | '*'       | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                               | '*'      | '300'       | '75 000'  | '63 559,32'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | '36/Yellow' | '*'       | 'TRY'                          | 'No'                   | '' | '' |
-		And I select "Taxes turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Taxes turnovers"' | ''       | ''          | ''              | ''           | ''                          | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-		| ''                            | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'                | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
-		| ''                            | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'                  | 'Tax' | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                            | '*'      | '522,31'    | '522,31'        | '2 901,69'   | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '1 096,84'  | '1 096,84'      | '6 093,56'   | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '1 958,64'  | '1 958,64'      | '10 881,36'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '3 050,85'  | '3 050,85'      | '16 949,15'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '3 050,85'  | '3 050,85'      | '16 949,15'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '3 050,85'  | '3 050,85'      | '16 949,15'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '6 406,78'  | '6 406,78'      | '35 593,22'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '6 406,78'  | '6 406,78'      | '35 593,22'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '6 406,78'  | '6 406,78'      | '35 593,22'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '11 440,68' | '11 440,68'     | '63 559,32'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '11 440,68' | '11 440,68'     | '63 559,32'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '11 440,68' | '11 440,68'     | '63 559,32'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                          | ''         | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                          | ''         | '' | '' |
-		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'            | 'Currency' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | ''                     | '137 000'        | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' | 'TRY'      | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '100'       | 'Store 01'   | 'M/White'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '200'       | 'Store 01'   | 'L/Green'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '300'       | 'Store 01'   | '36/Yellow' | '' | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Expense'     | '*'      | '137 000'   | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Goods receipt schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                        | ''         | ''          | ''        | ''              | '' | '' | '' | '' |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''         | ''          | ''        | 'Attributes'    | '' | '' | '' | '' |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                   | 'Store'    | 'Item key'  | 'Row key' | 'Delivery date' | '' | '' | '' | '' |
-		| ''                                   | 'Expense'     | '*'      | '100'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01' | 'M/White'   | '*'       | '*'             | '' | '' | '' | '' |
-		| ''                                   | 'Expense'     | '*'      | '200'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01' | 'L/Green'   | '*'       | '*'             | '' | '' | '' | '' |
-		| ''                                   | 'Expense'     | '*'      | '300'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01' | '36/Yellow' | '*'       | '*'             | '' | '' | '' | '' |
-		And I select "Partner AP transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Partner AP transactions"' | ''            | ''       | ''          | ''             | ''                          | ''          | ''                  | ''                   | ''         | ''                             | ''                     | '' | '' |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''          | ''                  | ''                   | ''         | ''                             | 'Attributes'           | '' | '' |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'            | 'Partner'   | 'Legal name'        | 'Partner term'       | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '23 454,4'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '137 000'   | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '137 000'   | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '137 000'   | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"' | ''            | ''       | ''          | ''           | ''                        | ''          | ''        | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                        | ''          | ''        | '' | '' | '' | '' | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                   | 'Item key'  | 'Row key' | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '100'       | 'Store 01'   | '$$PurchaseOrder017001$$' | 'M/White'   | '*'       | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '200'       | 'Store 01'   | '$$PurchaseOrder017001$$' | 'L/Green'   | '*'       | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '300'       | 'Store 01'   | '$$PurchaseOrder017001$$' | '36/Yellow' | '*'       | '' | '' | '' | '' | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'            | ''            | ''          | ''                     | ''               | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | ''            | ''          | 'Quantity'             | 'Store'          | 'Item key'                  | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '*'         | '100'                  | 'Store 01'       | 'M/White'                   | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '*'         | '200'                  | 'Store 01'       | 'L/Green'                   | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '*'         | '300'                  | 'Store 01'       | '36/Yellow'                 | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-	And I close all client application windows
-
-Scenario: _01801901 clear movements Purchase invoice and check that there is no movements on the registers 
-	* Open list form Purchase invoice
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-	* Check the report generation
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPurchaseInvoice018001$$'      |
-	* Clear movements document and check that there is no movement on the registers
-		And in the table "List" I click the button named "ListContextMenuUndoPosting"
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		And "ResultTable" spreadsheet document does not contain values
-			| Register  "Purchase turnovers" |
-			| 'Register  "Inventory balance"'        |
-			| 'Register  "Taxes turnovers"'          |
-			| 'Register  "Stock reservation"'        |
-			| 'Register  "Reconciliation statement"' |
-		And I close all client application windows
-	* Posting the document and check movements
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPurchaseInvoice018001$$'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		And "ResultTable" spreadsheet document contains lines:
-			And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseInvoice018001$$'      | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| 'Document registrations records' | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| 'Register  "Inventory balance"'  | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'M/White'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '200'       | 'Main Company' | 'L/Green'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '300'       | 'Main Company' | '36/Yellow' | '' | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Purchase turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Purchase turnovers"' | ''       | ''          | ''        | ''           | ''             | ''                          | ''         | ''          | ''        | ''                             | ''                     | '' | '' |
-		| ''                               | 'Period' | 'Resources' | ''        | ''           | 'Dimensions'   | ''                          | ''         | ''          | ''        | ''                             | 'Attributes'           | '' | '' |
-		| ''                               | ''       | 'Quantity'  | 'Amount'  | 'Net amount' | 'Company'      | 'Purchase invoice'          | 'Currency' | 'Item key'  | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-		| ''                               | '*'      | '100'       | '3 424'   | '2 901,69'   | 'Main Company' | '$$PurchaseInvoice018001$$' | 'USD'      | 'M/White'   | '*'       | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                               | '*'      | '100'       | '20 000'  | '16 949,15'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | 'M/White'   | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
-		| ''                               | '*'      | '100'       | '20 000'  | '16 949,15'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | 'M/White'   | '*'       | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                               | '*'      | '100'       | '20 000'  | '16 949,15'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | 'M/White'   | '*'       | 'TRY'                          | 'No'                   | '' | '' |
-		| ''                               | '*'      | '200'       | '7 190,4' | '6 093,56'   | 'Main Company' | '$$PurchaseInvoice018001$$' | 'USD'      | 'L/Green'   | '*'       | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                               | '*'      | '200'       | '42 000'  | '35 593,22'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | 'L/Green'   | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
-		| ''                               | '*'      | '200'       | '42 000'  | '35 593,22'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | 'L/Green'   | '*'       | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                               | '*'      | '200'       | '42 000'  | '35 593,22'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | 'L/Green'   | '*'       | 'TRY'                          | 'No'                   | '' | '' |
-		| ''                               | '*'      | '300'       | '12 840'  | '10 881,36'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'USD'      | '36/Yellow' | '*'       | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                               | '*'      | '300'       | '75 000'  | '63 559,32'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | '36/Yellow' | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
-		| ''                               | '*'      | '300'       | '75 000'  | '63 559,32'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | '36/Yellow' | '*'       | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                               | '*'      | '300'       | '75 000'  | '63 559,32'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'TRY'      | '36/Yellow' | '*'       | 'TRY'                          | 'No'                   | '' | '' |
-		And I select "Taxes turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Taxes turnovers"' | ''       | ''          | ''              | ''           | ''                          | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-		| ''                            | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'                | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
-		| ''                            | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'                  | 'Tax' | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                            | '*'      | '522,31'    | '522,31'        | '2 901,69'   | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '1 096,84'  | '1 096,84'      | '6 093,56'   | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '1 958,64'  | '1 958,64'      | '10 881,36'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '3 050,85'  | '3 050,85'      | '16 949,15'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '3 050,85'  | '3 050,85'      | '16 949,15'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '3 050,85'  | '3 050,85'      | '16 949,15'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '6 406,78'  | '6 406,78'      | '35 593,22'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '6 406,78'  | '6 406,78'      | '35 593,22'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '6 406,78'  | '6 406,78'      | '35 593,22'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '11 440,68' | '11 440,68'     | '63 559,32'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '11 440,68' | '11 440,68'     | '63 559,32'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '11 440,68' | '11 440,68'     | '63 559,32'  | '$$PurchaseInvoice018001$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                          | ''         | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                          | ''         | '' | '' |
-		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'            | 'Currency' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | ''                     | '137 000'        | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' | 'TRY'      | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '100'       | 'Store 01'   | 'M/White'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '200'       | 'Store 01'   | 'L/Green'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '300'       | 'Store 01'   | '36/Yellow' | '' | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Expense'     | '*'      | '137 000'   | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Goods receipt schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                        | ''         | ''          | ''        | ''              | '' | '' | '' | '' |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''         | ''          | ''        | 'Attributes'    | '' | '' | '' | '' |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                   | 'Store'    | 'Item key'  | 'Row key' | 'Delivery date' | '' | '' | '' | '' |
-		| ''                                   | 'Expense'     | '*'      | '100'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01' | 'M/White'   | '*'       | '*'             | '' | '' | '' | '' |
-		| ''                                   | 'Expense'     | '*'      | '200'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01' | 'L/Green'   | '*'       | '*'             | '' | '' | '' | '' |
-		| ''                                   | 'Expense'     | '*'      | '300'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01' | '36/Yellow' | '*'       | '*'             | '' | '' | '' | '' |
-		And I select "Partner AP transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Partner AP transactions"' | ''            | ''       | ''          | ''             | ''                          | ''          | ''                  | ''                   | ''         | ''                             | ''                     | '' | '' |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''          | ''                  | ''                   | ''         | ''                             | 'Attributes'           | '' | '' |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'            | 'Partner'   | 'Legal name'        | 'Partner term'       | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '23 454,4'  | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '137 000'   | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '137 000'   | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '137 000'   | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"' | ''            | ''       | ''          | ''           | ''                        | ''          | ''        | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                        | ''          | ''        | '' | '' | '' | '' | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                   | 'Item key'  | 'Row key' | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '100'       | 'Store 01'   | '$$PurchaseOrder017001$$' | 'M/White'   | '*'       | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '200'       | 'Store 01'   | '$$PurchaseOrder017001$$' | 'L/Green'   | '*'       | '' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '300'       | 'Store 01'   | '$$PurchaseOrder017001$$' | '36/Yellow' | '*'       | '' | '' | '' | '' | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'            | ''            | ''          | ''                     | ''               | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | ''            | ''          | 'Quantity'             | 'Store'          | 'Item key'                  | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '*'         | '100'                  | 'Store 01'       | 'M/White'                   | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '*'         | '200'                  | 'Store 01'       | 'L/Green'                   | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '*'         | '300'                  | 'Store 01'       | '36/Yellow'                 | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		And I close all client application windows
-
-
 Scenario: _300503 check connection to Purchase invoice report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	* Form report Related documents
 		And I go to line in "List" table
-		| Number |
-		| $$NumberPurchaseInvoice018006$$      |
+		| 'Number' |
+		| '$$NumberPurchaseInvoice018012$$'      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened

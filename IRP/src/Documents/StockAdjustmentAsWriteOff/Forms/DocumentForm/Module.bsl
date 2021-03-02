@@ -80,6 +80,10 @@ Procedure ItemListQuantityOnChange(Item)
 	DocStockAdjustmentAsWriteOffClient.ItemListQuantityOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure ItemListUnitOnChange(Item)
+	DocStockAdjustmentAsWriteOffClient.ItemListUnitOnChange(Object, ThisObject, Item);
+EndProcedure
 
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
@@ -143,6 +147,11 @@ EndProcedure
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
 	DocStockAdjustmentAsWriteOffClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
 
 #Region GroupTitleDecorations

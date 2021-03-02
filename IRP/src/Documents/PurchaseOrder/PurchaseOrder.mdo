@@ -1089,6 +1089,7 @@
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
       <types>DocumentRef.SalesOrder</types>
+      <types>DocumentRef.InternalSupplyRequest</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

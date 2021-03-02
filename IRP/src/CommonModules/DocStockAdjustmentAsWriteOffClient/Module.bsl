@@ -56,7 +56,22 @@ Procedure ItemListItemKeyOnChange(Object, Form, Item, AddInfo = Undefined) Expor
 EndProcedure
 
 Procedure ItemListQuantityOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	Actions = New Structure("CalculateQuantityInBaseUnit");
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
 	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);	
+EndProcedure
+
+Procedure ItemListUnitOnChange(Object, Form, Item) Export
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	Actions = New Structure("CalculateQuantityInBaseUnit");
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
 EndProcedure
 
 #Region PickUpItems

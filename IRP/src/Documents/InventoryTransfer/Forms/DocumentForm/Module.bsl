@@ -79,6 +79,16 @@ Procedure ItemListItemKeyOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure ItemListQuantityOnChange(Item)
+	DocInventoryTransferClient.ItemListQuantityOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListUnitOnChange(Item)
+	DocInventoryTransferClient.ItemListUnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure OpenPickupItems(Command)
 	DocInventoryTransferClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure

@@ -80,6 +80,16 @@ Procedure ItemListItemKeyOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure ItemListQuantityOnChange(Item)
+	DocInventoryTransferOrderClient.ItemListQuantityOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListUnitOnChange(Item)
+	DocInventoryTransferOrderClient.ItemListUnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure DecorationStatusHistoryClick(Item)
 	ObjectStatusesClient.OpenHistoryByStatus(Object.Ref, ThisObject);
 EndProcedure
@@ -241,8 +251,8 @@ EndProcedure
 &AtClient
 Function GetLinkedDocumentsFilter()
 	Filter = New Structure();
-	Filter.Insert("Company"           , Object.Company);
-	Filter.Insert("Ref"               , Object.Ref);
+	Filter.Insert("Company" , Object.Company);
+	Filter.Insert("Ref"     , Object.Ref);
 	Return Filter;
 EndFunction
 

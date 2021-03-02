@@ -169,6 +169,13 @@
         <value>15</value>
       </code>
     </items>
+    <items id="b670d18b-c997-4049-94f2-33851e6a918e">
+      <name>ITO_PO_PI</name>
+      <description>ITO&amp;PO&amp;PI</description>
+      <code xsi:type="core:StringValue">
+        <value>16</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

@@ -184,15 +184,6 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="25893ebc-6263-4899-81ad-0da97b150f83">
-    <name>SelectStoreForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Select store</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="64609791-db74-48d0-8068-b5a444480022">
     <name>ChoiceForm</name>
     <synonym>
@@ -471,11 +462,11 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
-  <commands uuid="a1b5f914-0d10-4e9c-a0f5-5420027552ed">
-    <name>GenerateInventoryTransferOrder</name>
+  <commands uuid="05afd2ec-bc48-4541-b975-3137c621f045">
+    <name>Generate</name>
     <synonym>
       <key>en</key>
-      <value>Inventory transfer order</value>
+      <value>(new) Inventory transfer order</value>
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
@@ -483,6 +474,5 @@
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>
-    <shortcut></shortcut>
   </commands>
 </mdclass:Document>

@@ -6,4 +6,5 @@
     <value>Row ID Info</value>
   </synonym>
   <server>true</server>
+  <externalConnection>true</externalConnection>
 </mdclass:CommonModule>

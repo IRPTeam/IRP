@@ -2949,7 +2949,8 @@ Procedure ShowRowKey(Form) Export
 	|BasisesTreeRowID, BasisesTreeRowRef, BasisesTreeBasisKey, BasisesTreeCurrentStep,
 	|ResultsTreeBasis, ResultsTreeBasisUnit, ResultsTreeQuantityInBaseUnit, ResultsTreeKey,
 	|ResultsTreeRowID, ResultsTreeRowRef, ResultsTreeBasisKey, ResultsTreeCurrentStep,
-	|LinkedBasises";
+	|LinkedBasises,
+	|ItemListQuantityInBaseUnit";
 	
 	ArrayOfItemNames = StrSplit(ItemNames, ",");
 	For Each ItemName In ArrayOfItemNames Do

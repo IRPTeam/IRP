@@ -204,6 +204,16 @@ Procedure UnitOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure ItemListQuantityOnChange(Item)
+	DocUnbundlingClient.ItemListQuantityOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListUnitOnChange(Item)
+	DocUnbundlingClient.ItemListUnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure DateOnChange(Item)
 	DocUnbundlingClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure

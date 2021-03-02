@@ -132,6 +132,24 @@ Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessin
 	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing);
 EndProcedure
 
+Procedure ItemListQuantityOnChange(Object, Form, Item) Export
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	Actions = New Structure("CalculateQuantityInBaseUnit");
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);	
+EndProcedure
+
+Procedure ItemListUnitOnChange(Object, Form, Item) Export
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	Actions = New Structure("CalculateQuantityInBaseUnit");
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);	
+EndProcedure
+
 #Region GroupTitle
 
 #Region GroupTitleDecorationsEvents

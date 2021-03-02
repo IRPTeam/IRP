@@ -94,7 +94,9 @@ Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 	ElsIf Is(Source).ITO Then	
 		FillRowID_ITO(Source);
 	ElsIf Is(Source).IT Then	
-		FillRowID_IT(Source);			
+		FillRowID_IT(Source);
+	ElsIf Is(Source).ISR Then	
+		FillRowID_ISR(Source);				
 	EndIf;
 EndProcedure
 
@@ -345,7 +347,7 @@ Procedure FillRowID_GR(Source)
 		FillPropertyValues(NewRow, Row.Key);
 		NewRow.CurrentStep = Undefined;
 		NewRow.NextStep    = Catalogs.MovementRules.SI_SC;
-		NewRow.Quantity    =Row.Value;
+		NewRow.Quantity    = Row.Value;
 	EndDo;
 EndProcedure
 
@@ -355,12 +357,18 @@ Procedure FillRowID_ITO(Source)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-		ElsIf IDInfoRows.Count() = 1 Then
-			Row = IDInfoRows[0];
+			FillRowID(Source, Row, RowItemList);
+			Row.NextStep = GetNextStep_ITO(Source, RowItemList, Row);
+		Else
+			For Each Row In IDInfoRows Do
+				If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
+					Row.NextStep = GetNextStep_ITO(Source, RowItemList, Row);
+				 	Continue;
+				EndIf;
+				FillRowID(Source, Row, RowItemList);
+				Row.NextStep = GetNextStep_ITO(Source, RowItemList, Row);
+			EndDo;
 		EndIf;
-
-		FillRowID(Source, Row, RowItemList);
-		Row.NextStep = GetNextStep_ITO(Source, RowItemList, Row);
 	EndDo;
 EndProcedure
 
@@ -413,6 +421,21 @@ Procedure FillRowID_IT(Source)
 		NewRow.CurrentStep = Undefined;
 		NewRow.NextStep    = Catalogs.MovementRules.GR;
 		NewRow.Quantity    =Row.Value;
+	EndDo;
+EndProcedure
+
+Procedure FillRowID_ISR(Source)
+	For Each RowItemList In Source.ItemList Do	
+		Row = Undefined;
+		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		If IDInfoRows.Count() = 0 Then
+			Row = Source.RowIDInfo.Add();
+		ElsIf IDInfoRows.Count() = 1 Then
+			Row = IDInfoRows[0];
+		EndIf;
+
+		FillRowID(Source, Row, RowItemList);
+		Row.NextStep = GetNextStep_ISR(Source, RowItemList, Row);
 	EndDo;
 EndProcedure
 
@@ -487,6 +510,10 @@ EndFunction
 
 Function GetNextStep_IT(Source, RowItemList, Row)
 	Return Undefined;
+EndFunction	
+
+Function GetNextStep_ISR(Source, RowItemList, Row)
+	Return Catalogs.MovementRules.ITO_PO_PI;
 EndFunction	
 
 #EndRegion
@@ -595,7 +622,9 @@ Function ExtractData(BasisesTable, DataReceiver) Export
 		ElsIf Is(Row.Basis).ITO Then
 			FillTablesFor_ITO(Tables, DataReceiver, Row);
 		ElsIf Is(Row.Basis).IT Then
-			FillTablesFor_IT(Tables, DataReceiver, Row);		
+			FillTablesFor_IT(Tables, DataReceiver, Row);
+		ElsIf Is(Row.Basis).ISR Then
+			FillTablesFor_ISR(Tables, DataReceiver, Row);		
 		EndIf;
 	EndDo;
 	
@@ -642,8 +671,9 @@ Function CreateTablesForExtractData(EmptyTable)
 	FromPIGR_ThenFromSO.Columns.Add("ParentBasis", New TypeDescription("DocumentRef.SalesOrder"));
 	Tables.Insert("FromPIGR_ThenFromSO", FromPIGR_ThenFromSO);
 	
-	Tables.Insert("FromITO", EmptyTable.Copy());
-	Tables.Insert("FromIT", EmptyTable.Copy());
+	Tables.Insert("FromISR" , EmptyTable.Copy());
+	Tables.Insert("FromITO" , EmptyTable.Copy());
+	Tables.Insert("FromIT"  , EmptyTable.Copy());
 	Return Tables;
 EndFunction
 
@@ -733,6 +763,10 @@ Procedure FillTablesFor_IT(Tables, DataReceiver, RowBasisesTable)
 	FillPropertyValues(Tables.FromIT.Add(), RowBasisesTable);
 EndProcedure
 
+Procedure FillTablesFor_ISR(Tables, DataReceiver, RowBasisesTable)
+	FillPropertyValues(Tables.FromISR.Add(), RowBasisesTable);
+EndProcedure
+
 #EndRegion
 
 #Region ExtractDataFrom
@@ -794,6 +828,10 @@ Function ExtractDataByTables(Tables, DataReceiver)
 	
 	If Tables.FromIT.Count() Then
 		ExtractedData.Add(ExtractData_FromIT(Tables.FromIT, DataReceiver));
+	EndIf;
+	
+	If Tables.FromISR.Count() Then
+		ExtractedData.Add(ExtractData_FromISR(Tables.FromISR, DataReceiver));
 	EndIf;
 	
 	Return ExtractedData;
@@ -2113,6 +2151,8 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver)
 		|	ItemList.Ref AS InventoryTransfer,
 		|	ItemList.InventoryTransferOrder AS InventoryTransferOrder,
 		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Ref AS ShipmentBasis,
+		|	ItemList.Ref AS ReceiptBasis,
 		|	ItemList.Ref.%1 AS Store,
 		|	%2 AS TransactionType,
 		|	ItemList.ItemKey.Item AS Item,
@@ -2156,6 +2196,79 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver)
 	EndIf;
 	Query.Text = StrTemplate(Query.Text, StoreName, TransactionType);
 	
+	Query.SetParameter("BasisesTable", BasisesTable);
+	QueryResults = Query.ExecuteBatch();
+	
+	TableItemList      = QueryResults[1].Unload();
+	TableRowIDInfo     = QueryResults[2].Unload(); 
+	
+	For Each RowItemList In TableItemList Do
+		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit, RowItemList.QuantityInBaseUnit);
+	EndDo;
+		
+	Tables = New Structure();
+	Tables.Insert("ItemList"      , TableItemList);
+	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
+	
+	Return Tables;
+EndFunction
+
+Function ExtractData_FromISR(BasisesTable, DataReceiver)
+	Query = New Query();
+	Query.Text =
+		"SELECT
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.RowID,
+		|	BasisesTable.CurrentStep,
+		|	BasisesTable.RowRef,
+		|	BasisesTable.Basis,
+		|	BasisesTable.BasisUnit,
+		|	BasisesTable.Quantity
+		|INTO BasisesTable
+		|FROM
+		|	&BasisesTable AS BasisesTable
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT ALLOWED
+		|	""InternalSupplyRequest"" AS BasedOn,
+		|	UNDEFINED AS Ref,
+		|	ItemList.Ref AS InternalSupplyRequest,
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Ref.BusinessUnit AS BusinessUnit,
+		|	ItemList.Ref.Store AS Store,
+		|	ItemList.Ref.Store AS StoreReceiver,
+		|	ItemList.ItemKey.Item AS Item,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Unit AS Unit,
+		|	0 AS Quantity,
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisUnit AS BasisUnit,
+		|	BasisesTable.Quantity AS QuantityInBaseUnit
+		|FROM
+		|	BasisesTable AS BasisesTable
+		|		LEFT JOIN Document.InternalSupplyRequest.ItemList AS ItemList
+		|		ON BasisesTable.Basis = ItemList.Ref
+		|		AND BasisesTable.BasisKey = ItemList.Key
+		|ORDER BY
+		|	ItemList.LineNumber
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.RowID,
+		|	BasisesTable.CurrentStep,
+		|	BasisesTable.RowRef,
+		|	BasisesTable.Basis,
+		|	BasisesTable.BasisUnit,
+		|	BasisesTable.Quantity
+		|FROM
+		|	BasisesTable AS BasisesTable";
+				
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
@@ -2354,7 +2467,9 @@ Function GetBasises(Ref, FilterValues) Export
 	ElsIf Is(Ref).GR Then
 		Return GetBasisesFor_GR(FilterValues);
 	ElsIf Is(Ref).IT Then
-		Return GetBasisesFor_IT(FilterValues);	
+		Return GetBasisesFor_IT(FilterValues);
+	ElsIf Is(Ref).ITO Then
+		Return GetBasisesFor_ITO(FilterValues);			
 	EndIf;
 EndFunction
 
@@ -2395,9 +2510,11 @@ EndFunction
 Function GetBasisesFor_PO(FilterValues)
 	StepArray = New Array;
 	StepArray.Add(Catalogs.MovementRules.PO_PI);
+	StepArray.Add(Catalogs.MovementRules.ITO_PO_PI);
 	
 	FilterSets = GetAvailableFilterSets();
 	FilterSets.SO_ForPO_ForPI = True;
+	FilterSets.ISR_ForITO_ForPO_ForPI = True;
 	
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
@@ -2407,11 +2524,13 @@ Function GetBasisesFor_PI(FilterValues)
 	StepArray.Add(Catalogs.MovementRules.PI);
 	StepArray.Add(Catalogs.MovementRules.PI_GR);
 	StepArray.Add(Catalogs.MovementRules.PO_PI);
+	StepArray.Add(Catalogs.MovementRules.ITO_PO_PI);
 	
 	FilterSets = GetAvailableFilterSets();
 	FilterSets.PO_ForPI = True;
 	FilterSets.GR_ForPI = True;
 	FilterSets.SO_ForPO_ForPI = True;
+	FilterSets.ISR_ForITO_ForPO_ForPI = True;
 	
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
@@ -2436,6 +2555,16 @@ Function GetBasisesFor_IT(FilterValues)
 	
 	FilterSets = GetAvailableFilterSets();
 	FilterSets.ITO_ForIT = True;
+	
+	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
+EndFunction
+
+Function GetBasisesFor_ITO(FilterValues)	
+	StepArray = New Array;
+	StepArray.Add(Catalogs.MovementRules.ITO_PO_PI);
+	
+	FilterSets = GetAvailableFilterSets();
+	FilterSets.ISR_ForITO_ForPO_ForPI = True;
 	
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
@@ -2465,6 +2594,8 @@ Function GetAvailableFilterSets()
 	Result.Insert("ITO_ForIT"      , False);
 	Result.Insert("IT_ForSC"       , False);
 	Result.Insert("IT_ForGR"       , False);
+	
+	Result.Insert("ISR_ForITO_ForPO_ForPI", False);
 	Return Result;
 EndFunction
 
@@ -2539,6 +2670,12 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 		ApplyFilterSet_IT_ForGR(Query);
 		QueryArray.Add(GetDataByFilterSet_IT_ForGR());
 	EndIf;
+
+	If FilterSets.ISR_ForITO_ForPO_ForPI Then
+		ApplyFilterSet_ISR_ForITO_ForPO_ForPI(Query);
+		QueryArray.Add(GetDataByFilterSet_ISR_ForITO_ForPO_ForPI());
+	EndIf;
+	
 	
 EndProcedure
 
@@ -3222,6 +3359,42 @@ Procedure ApplyFilterSet_IT_ForGR(Query)
 	Query.Execute();
 EndProcedure
 
+Procedure ApplyFilterSet_ISR_ForITO_ForPO_ForPI(Query)
+	Query.Text = 
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_ISR_ForITO_ForPO_ForPI
+	|FROM
+	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure	
+
 #Region GetDataByFilterSet
 
 Function GetDataByFilterSet_SO_ForSI()
@@ -3630,6 +3803,35 @@ Function GetDataByFilterSet_IT_ForGR()
 	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
 EndFunction
 
+Function GetDataByFilterSet_ISR_ForITO_ForPO_ForPI()
+	Return
+	"SELECT 
+	|	Doc.ItemKey,
+	|	Doc.ItemKey.Item,
+	|	Doc.Ref.Store,
+	|	Doc.Ref,
+	|	Doc.Key,
+	|	Doc.Key,
+	|	CASE
+	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+	|			THEN Doc.ItemKey.Item.Unit
+	|		ELSE Doc.ItemKey.Unit
+	|	END AS BasisUnit,
+	|	RowIDMovements.Quantity,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
+	|FROM
+	|	Document.InternalSupplyRequest.ItemList AS Doc
+	|		INNER JOIN Document.InternalSupplyRequest.RowIDInfo AS RowIDInfo
+	|		ON Doc.Ref = RowIDInfo.Ref
+	|		AND Doc.Key = RowIDInfo.Key
+	|		INNER JOIN RowIDMovements_ISR_ForITO_ForPO_ForPI AS RowIDMovements
+	|		ON RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
+EndFunction
+
 #EndRegion
 
 #EndRegion
@@ -3977,6 +4179,8 @@ Function GetSeperatorColumns(DocReceiverMetadata) Export
 		Return "Company, Partner, LegalName, TransactionType";
 	ElsIf DocReceiverMetadata = Metadata.Documents.InventoryTransfer Then
 		Return "Company, BusinessUnit, StoreSender, StoreReceiver";	 
+	ElsIf DocReceiverMetadata = Metadata.Documents.InventoryTransferOrder Then
+		Return "Company, BusinessUnit, StoreReceiver";	 	
 	EndIf;
 EndFunction	
 
@@ -4405,7 +4609,9 @@ Function GetBasisesInfo(Basis, BasisKey, RowID)
 	ElsIf Is(Basis).ITO Then
 		Query.Text = GetBasisesInfoQueryText_ITO();
 	ElsIf Is(Basis).IT Then
-		Query.Text = GetBasisesInfoQueryText_IT();			
+		Query.Text = GetBasisesInfoQueryText_IT();
+	ElsIf Is(Basis).ISR Then
+		Query.Text = GetBasisesInfoQueryText_ISR();				
 	EndIf;
 	
 	Query.SetParameter("Basis"    , Basis);
@@ -4612,6 +4818,30 @@ Function GetBasisesInfoQueryText_IT()
 	|		AND RowIDInfo.RowID = &RowID";
 EndFunction
 
+Function GetBasisesInfoQueryText_ISR()
+	Return
+	"SELECT
+	|	RowIDInfo.Ref AS Basis,
+	|	RowIDInfo.RowRef AS RowRef,
+	|	RowIDInfo.BasisKey AS BasisKey,
+	|	RowIDInfo.RowID AS RowID,
+	|	RowIDInfo.Basis AS ParentBasis,
+	|	ItemList.Key AS Key,
+	|	0 AS Price,
+	|	UNDEFINED AS Currency,
+	|	ItemList.Unit AS Unit
+	|FROM
+	|	Document.InternalSupplyRequest.ItemList AS ItemList
+	|		INNER JOIN Document.InternalSupplyRequest.RowIDInfo AS RowIDInfo
+	|		ON RowIDInfo.Ref = &Basis
+	|		AND ItemList.Ref = &Basis
+	|		AND RowIDInfo.Key = &BasisKey
+	|		AND ItemList.Key = &BasisKey
+	|		AND RowIDInfo.Key = ItemList.Key
+	|		AND RowIDInfo.Ref = ItemList.Ref
+	|		AND RowIDInfo.RowID = &RowID";
+EndFunction
+
 #EndRegion
 
 #Region Service
@@ -4635,6 +4865,8 @@ Function Is(Source)
 	                  Or TypeOf = Type("DocumentRef.InventoryTransferOrder"));
 	Result.Insert("IT" , TypeOf = Type("DocumentObject.InventoryTransfer")      
 	                  Or TypeOf = Type("DocumentRef.InventoryTransfer"));
+	Result.Insert("ISR", TypeOf = Type("DocumentObject.InternalSupplyRequest")      
+	                  Or TypeOf = Type("DocumentRef.InternalSupplyRequest"));	                  
 	Return Result;
 EndFunction
 

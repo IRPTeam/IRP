@@ -362,7 +362,6 @@
   <commonModules>CommonModule.TaxesClient</commonModules>
   <commonModules>CommonModule.TaxesClientServer</commonModules>
   <commonModules>CommonModule.TaxesServer</commonModules>
-  <commonModules>CommonModule.TempFunctions</commonModules>
   <commonModules>CommonModule.UndopostingServer</commonModules>
   <commonModules>CommonModule.UniqueID</commonModules>
   <commonModules>CommonModule.UniqueIDReuse</commonModules>
@@ -415,7 +414,6 @@
   <eventSubscriptions>EventSubscription.OnWrite_UpdateUsersRoleOnWrite</eventSubscriptions>
   <eventSubscriptions>EventSubscription.PresentationFieldsGetProcessing_GetCatalogPresentationFields</eventSubscriptions>
   <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetCatalogPresentation</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.BeforeWrite_FillQuantity</eventSubscriptions>
   <eventSubscriptions>EventSubscription.Posting_RowID</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_RowID</eventSubscriptions>
   <eventSubscriptions>EventSubscription.OnWrite_RowID</eventSubscriptions>

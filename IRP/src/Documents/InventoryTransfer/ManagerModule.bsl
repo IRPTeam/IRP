@@ -644,15 +644,7 @@ Function R4012B_StockReservation()
 		|		INNER JOIN TmpStockReservation AS StockReservation
 		|		ON ItemListGroup.InventoryTransferOrder = StockReservation.Order
 		|		AND ItemListGroup.ItemKey = StockReservation.ItemKey
-		|		AND ItemListGroup.Store = StockReservation.Store
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|DROP TmpItemListGroup
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|DROP TmpStockReservation";
+		|		AND ItemListGroup.Store = StockReservation.Store";
 EndFunction
 
 Function R4021B_StockTransferOrdersReceipt()

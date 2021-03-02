@@ -1199,6 +1199,7 @@
       <types>DocumentRef.PurchaseOrder</types>
       <types>DocumentRef.GoodsReceipt</types>
       <types>DocumentRef.SalesOrder</types>
+      <types>DocumentRef.InternalSupplyRequest</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

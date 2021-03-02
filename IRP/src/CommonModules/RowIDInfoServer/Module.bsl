@@ -4,6 +4,13 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 		Return;
 	EndIf;
 	
+	If Source.Metadata().Attributes.Find("Status") <> Undefined Then
+		StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Source.Ref);
+		If Not StatusInfo.Posting Then
+			Return;
+		EndIf;
+	EndIf;
+	
 	Query = New Query;
 	Query.Text =
 		"SELECT

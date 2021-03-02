@@ -62,6 +62,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFields)
 	ItemList.Columns.Add("Store"			, New TypeDescription("CatalogRef.Stores"));
 	ItemList.Columns.Add("Unit"				, New TypeDescription("CatalogRef.Units"));
 	ItemList.Columns.Add("Quantity"			, New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
+	ItemList.Columns.Add("QuantityInBaseUnit", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));	
 	ItemList.Columns.Add("TaxAmount"		, New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
 	ItemList.Columns.Add("TotalAmount"		, New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
 	ItemList.Columns.Add("NetAmount"		, New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
@@ -240,6 +241,7 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	tmpQueryTable.RowKey,
 		|	tmpQueryTable.Unit AS QuantityUnit,
 		|	tmpQueryTable.Quantity AS Quantity,
+		|	tmpQueryTable.Quantity AS QuantityInBaseUnit,
 		|	ISNULL(ItemList.Price, 0) AS Price,
 		|	ISNULL(ItemList.Unit, VALUE(Catalog.Units.EmptyRef)) AS Unit,
 		|	ISNULL(ItemList.TaxAmount, 0) AS TaxAmount,

@@ -247,6 +247,9 @@
 			<item>
 				<field>GoodsReceiptsTreeGoodsReceipt</field>
 			</item>
+			<item>
+				<field>GoodsReceiptsTreePictureDocument</field>
+			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
@@ -269,6 +272,9 @@
 			</item>
 			<item>
 				<field>GoodsReceiptsTreeItemKey</field>
+			</item>
+			<item>
+				<field>GoodsReceiptsTreePictureItem</field>
 			</item>
 		</selection>
 		<filter>

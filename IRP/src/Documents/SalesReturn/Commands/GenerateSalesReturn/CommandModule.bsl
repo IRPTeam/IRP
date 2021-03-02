@@ -73,6 +73,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFields)
 	ItemList.Columns.Add("SalesInvoice"	, New TypeDescription("DocumentRef.SalesInvoice"));
 	ItemList.Columns.Add("Unit"				, New TypeDescription("CatalogRef.Units"));
 	ItemList.Columns.Add("Quantity"			, New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
+	ItemList.Columns.Add("QuantityInBaseUnit", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
 	ItemList.Columns.Add("TaxAmount"		, New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
 	ItemList.Columns.Add("TotalAmount"		, New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
 	ItemList.Columns.Add("NetAmount"		, New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
@@ -246,7 +247,8 @@ Function GetDocumentTable_GoodsReceipt(ArrayOfBasisDocuments)
 		|	CAST(ShipmentInvoicing.Basis AS Document.GoodsReceipt).Company AS Company,
 		|	CAST(ShipmentInvoicing.Basis AS Document.GoodsReceipt).Partner AS Partner,
 		|	CAST(ShipmentInvoicing.Basis AS Document.GoodsReceipt).LegalName AS LegalName,
-		|	ShipmentInvoicing.QuantityBalance AS Quantity
+		|	ShipmentInvoicing.QuantityBalance AS Quantity,
+		|	ShipmentInvoicing.QuantityBalance AS QuantityInBaseUnit
 		|FROM
 		|	AccumulationRegister.R2031B_ShipmentInvoicing.Balance(, Basis IN (&ArrayOfGoodsReceipt)
 		|	AND CAST(Basis AS
@@ -314,7 +316,7 @@ EndFunction
 Function ExtractInfoFromRows_GoodsReceipt(QueryTable)
 	GoodsReceiptsTable = CreateTable_GoodsReceipts();
 	ItemList = QueryTable.Copy();
-	ItemList.GroupBy("BasedOn, Store, SalesReturnOrder, ItemKey, Unit, Company, Partner, LegalName", "Quantity");
+	ItemList.GroupBy("BasedOn, Store, SalesReturnOrder, ItemKey, Unit, Company, Partner, LegalName", "Quantity, QuantityInBaseUnit");
 	ItemList.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	ItemList.Columns.Add("RowKey", Metadata.DefinedTypes.typeRowID.Type);
 	For Each RowItemList In ItemList Do
@@ -399,6 +401,7 @@ Function ExtractInfoFromRows_SalesInvoice(QueryTable)
 		|	tmpQueryTable.RowKey,
 		|	tmpQueryTable.Unit AS QuantityUnit,
 		|	tmpQueryTable.Quantity AS Quantity,
+		|	tmpQueryTable.Quantity AS QuantityInBaseUnit,
 		|	ISNULL(ItemList.Price, 0) AS Price,
 		|	ISNULL(ItemList.Unit, VALUE(Catalog.Units.EmptyRef)) AS Unit,
 		|	ISNULL(ItemList.TaxAmount, 0) AS TaxAmount,
@@ -520,6 +523,7 @@ Function ExtractInfoFromRows_SalesReturnOrder(QueryTable)
 		|	tmpQueryTable.RowKey,
 		|	tmpQueryTable.Unit AS QuantityUnit,
 		|	tmpQueryTable.Quantity AS Quantity,
+		|	tmpQueryTable.Quantity AS QuantityInBaseUnit,
 		|	ISNULL(ItemList.Price, 0) AS Price,
 		|	ISNULL(ItemList.Unit, VALUE(Catalog.Units.EmptyRef)) AS Unit,
 		|	ISNULL(ItemList.TaxAmount, 0) AS TaxAmount,

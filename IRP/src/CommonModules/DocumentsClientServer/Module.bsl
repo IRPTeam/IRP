@@ -253,7 +253,8 @@ EndFunction
 #Region Common
 Procedure FillDefinedData(Object, Form) Export
 	IsCopy = Form.Parameters.Property("CopyingValue") And ValueIsFilled(Form.Parameters.CopyingValue);
-	IsBasedOn = Form.Parameters.Property("BasedOn") Or Form.Parameters.FillingValues.Property("BasedOn");
+	IsBasedOn = Form.Parameters.Property("BasedOn") Or 
+	(Form.Parameters.Property("FillingValues") And Form.Parameters.FillingValues.Property("BasedOn"));
 	
 	If Not IsCopy And Not IsBasedOn Then
 		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);

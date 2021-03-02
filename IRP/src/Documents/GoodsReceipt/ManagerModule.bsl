@@ -44,7 +44,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryTable = QueryResults.Unload();
 	
 	PostingServer.CalculateQuantityByUnit(QueryTable);
-	PostingServer.UUIDToString(QueryTable);
 	
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
@@ -184,44 +183,60 @@ EndFunction
 
 Function GetQueryText_ItemList()
 	Return 
-		"SELECT
-		|	GoodsReceiptItemList.Ref.Company AS Company,
-		|	GoodsReceiptItemList.Store AS Store,
-		|	GoodsReceiptItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
-		|	CASE
-		|		WHEN NOT GoodsReceiptItemList.SalesOrder.Date IS NULL
-		|			THEN GoodsReceiptItemList.SalesOrder.ShipmentConfirmationsBeforeSalesInvoice
-		|		ELSE FALSE
-		|	END AS ShipmentBeforeInvoice,
-		|	GoodsReceiptItemList.ItemKey AS ItemKey,
-		|	GoodsReceiptItemList.ReceiptBasis AS ReceiptBasis,
-		|	GoodsReceiptItemList.Quantity AS Quantity,
-		|	0 AS BasisQuantity,
-		|	GoodsReceiptItemList.Unit,
-		|	GoodsReceiptItemList.ItemKey.Item.Unit AS ItemUnit,
-		|	GoodsReceiptItemList.ItemKey.Unit AS ItemKeyUnit,
-		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
-		|	GoodsReceiptItemList.ItemKey.Item AS Item,
-		|	GoodsReceiptItemList.Ref.Date AS Period,
-		|	GoodsReceiptItemList.Ref AS GoodsReceipt,
-		|	GoodsReceiptItemList.Key AS RowKeyUUID,
-		|	GoodsReceiptItemList.SalesOrder AS SalesOrder,
-		|	CASE
-		|		WHEN GoodsReceiptItemList.SalesOrder.Date IS NULL
-		|			THEN FALSE
-		|		ELSE TRUE
-		|	END AS UseSalesOrder,
-		|	CASE
-		|		WHEN GoodsReceiptItemList.ReceiptBasis REFS Document.PurchaseOrder
-		|			THEN TRUE
-		|		ELSE FALSE
-		|	END AS UsePurchaseOrder,
-		|	NOT GoodsReceiptItemList.ReceiptBasis.Ref IS NULL AS UseReceiptBasis
-		|
-		|FROM
-		|	Document.GoodsReceipt.ItemList AS GoodsReceiptItemList
-		|WHERE
-		|	GoodsReceiptItemList.Ref = &Ref";
+	"SELECT
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO RowIDInfo
+	|FROM
+	|	Document.GoodsReceipt.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	GoodsReceiptItemList.Ref.Company AS Company,
+	|	GoodsReceiptItemList.Store AS Store,
+	|	GoodsReceiptItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
+	|	CASE
+	|		WHEN NOT GoodsReceiptItemList.SalesOrder.Date IS NULL
+	|			THEN GoodsReceiptItemList.SalesOrder.ShipmentConfirmationsBeforeSalesInvoice
+	|		ELSE FALSE
+	|	END AS ShipmentBeforeInvoice,
+	|	GoodsReceiptItemList.ItemKey AS ItemKey,
+	|	GoodsReceiptItemList.ReceiptBasis AS ReceiptBasis,
+	|	GoodsReceiptItemList.Quantity AS Quantity,
+	|	0 AS BasisQuantity,
+	|	GoodsReceiptItemList.Unit,
+	|	GoodsReceiptItemList.ItemKey.Item.Unit AS ItemUnit,
+	|	GoodsReceiptItemList.ItemKey.Unit AS ItemKeyUnit,
+	|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
+	|	GoodsReceiptItemList.ItemKey.Item AS Item,
+	|	GoodsReceiptItemList.Ref.Date AS Period,
+	|	GoodsReceiptItemList.Ref AS GoodsReceipt,
+	|	RowIDInfo.RowID AS RowKey,
+	|	GoodsReceiptItemList.SalesOrder AS SalesOrder,
+	|	CASE
+	|		WHEN GoodsReceiptItemList.SalesOrder.Date IS NULL
+	|			THEN FALSE
+	|		ELSE TRUE
+	|	END AS UseSalesOrder,
+	|	CASE
+	|		WHEN GoodsReceiptItemList.ReceiptBasis REFS Document.PurchaseOrder
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END AS UsePurchaseOrder,
+	|	NOT GoodsReceiptItemList.ReceiptBasis.Ref IS NULL AS UseReceiptBasis
+	|FROM
+	|	Document.GoodsReceipt.ItemList AS GoodsReceiptItemList
+	|		LEFT JOIN RowIDInfo AS RowIDInfo
+	|		ON GoodsReceiptItemList.Key = RowIDInfo.Key
+	|WHERE
+	|	GoodsReceiptItemList.Ref = &Ref";
 EndFunction	
 
 Function GetQueryText_QueryTable()

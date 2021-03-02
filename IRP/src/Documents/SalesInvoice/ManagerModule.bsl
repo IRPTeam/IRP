@@ -51,14 +51,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResultItemList = QueryItemList.Execute();
 	QueryTableItemList = QueryResultItemList.Unload();
 	PostingServer.CalculateQuantityByUnit(QueryTableItemList);
-	PostingServer.UUIDToString(QueryTableItemList);
 	
 	QueryTaxList = New Query();
 	QueryTaxList.Text = GetQueryTextSalesInvoiceTaxList();
 	QueryTaxList.SetParameter("Ref", Ref);
 	QueryResultTaxList = QueryTaxList.Execute();
 	QueryTableTaxList = QueryResultTaxList.Unload();
-	PostingServer.UUIDToString(QueryTableTaxList);
 	
 	QuerySalesTurnovers = New Query();
 	QuerySalesTurnovers.Text = GetQueryTextSalesInvoiceSalesTurnovers();
@@ -190,6 +188,21 @@ EndFunction
 Function GetQueryTextSalesInvoiceItemList()
 	Return
 		"SELECT
+		|	RowIDInfo.Ref AS Ref,
+		|	RowIDInfo.Key AS Key,
+		|	MAX(RowIDInfo.RowID) AS RowID
+		|INTO RowIDInfo
+		|FROM
+		|	Document.SalesInvoice.RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.Ref = &Ref
+		|GROUP BY
+		|	RowIDInfo.Ref,
+		|	RowIDInfo.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
 		|	MAX(CASE
 		|		WHEN ShipmentConfirmations.ShipmentConfirmation IS NULL
 		|			THEN FALSE
@@ -259,7 +272,8 @@ Function GetQueryTextSalesInvoiceItemList()
 		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.NoReserve) AS ProcMeth_NoReserve,
 		|	SalesInvoiceItemList.Ref AS ShipmentBasis,
 		|	SalesInvoiceItemList.Ref AS SalesInvoice,
-		|	SalesInvoiceItemList.Key AS RowKeyUUID,
+		|	RowIDInfo.RowID AS RowKey,
+		|	SalesInvoiceItemList.Key AS Key,
 		|	SalesInvoiceItemList.DeliveryDate AS DeliveryDate,
 		|	SalesInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		|	SalesInvoiceItemList.BusinessUnit AS BusinessUnit,
@@ -281,6 +295,8 @@ Function GetQueryTextSalesInvoiceItemList()
 		|		AND ShipmentConfirmations.Ref = &Ref
 		|		LEFT JOIN SalesOrderItemList AS SalesOrderItemList
 		|		ON SalesInvoiceItemList.Key = SalesOrderItemList.Key
+		|		LEFT JOIN RowIDInfo AS RowIDInfo
+		|		ON SalesInvoiceItemList.Key = RowIDInfo.Key
 		|WHERE
 		|	SalesInvoiceItemList.Ref = &Ref";
 EndFunction
@@ -291,7 +307,7 @@ Function GetQueryTextSalesInvoiceTaxList()
 		|	SalesInvoiceTaxList.Ref AS Document,
 		|	SalesInvoiceTaxList.Ref.Date AS Period,
 		|	SalesInvoiceTaxList.Ref.Currency AS Currency,
-		|	SalesInvoiceTaxList.Key AS RowKeyUUID,
+		|	SalesInvoiceTaxList.Key AS RowKey,
 		|	SalesInvoiceTaxList.Tax AS Tax,
 		|	SalesInvoiceTaxList.Analytics AS Analytics,
 		|	SalesInvoiceTaxList.TaxRate AS TaxRate,
@@ -363,7 +379,7 @@ Function GetQueryTextQueryTable()
 		|	QueryTable.OffersAmount AS OffersAmount,
 		|	QueryTable.IsService AS IsService,
 		|	QueryTable.BasisDocument AS BasisDocument,
-		|	QueryTable.RowKeyUUID AS RowKeyUUID,
+		|	QueryTable.Key AS Key,
 		|	QueryTable.ProcMeth_Stock,
 		|	QueryTable.ProcMeth_Purchase,
 		|	QueryTable.ProcMeth_NoReserve
@@ -470,7 +486,7 @@ Function GetQueryTextQueryTable()
 		|FROM
 		|	tmp AS tmp
 		|	LEFT JOIN Document.SalesInvoice.ShipmentConfirmations AS ShipmentConfirmations
-		|	ON tmp.RowKeyUUID = ShipmentConfirmations.Key
+		|	ON tmp.Key = ShipmentConfirmations.Key
 		|	AND tmp.SalesInvoice = ShipmentConfirmations.Ref
 		|WHERE
 		|	tmp.UseShipmentConfirmation
@@ -513,7 +529,7 @@ Function GetQueryTextQueryTable()
 		|FROM
 		|	tmp AS tmp
 		|	LEFT JOIN Document.SalesInvoice.ShipmentConfirmations AS ShipmentConfirmations
-		|	ON tmp.RowKeyUUID = ShipmentConfirmations.Key
+		|	ON tmp.Key = ShipmentConfirmations.Key
 		|	AND tmp.SalesInvoice = ShipmentConfirmations.Ref
 		|WHERE
 		|	tmp.ShipmentConfirmationBeforeSalesInvoice

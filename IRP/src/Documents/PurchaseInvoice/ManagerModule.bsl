@@ -50,102 +50,119 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	GoodsReceipts.Key
-		|INTO _GoodsReceipts
-		|FROM
-		|	Document.PurchaseInvoice.GoodsReceipts AS GoodsReceipts
-		|WHERE
-		|	GoodsReceipts.Ref = &Ref
-		|GROUP BY
-		|	GoodsReceipts.Key
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	PurchaseInvoiceItemList.Ref.Company AS Company,
-		|	PurchaseInvoiceItemList.Store AS Store,
-		|	PurchaseInvoiceItemList.Store.UseGoodsReceipt AS UseGoodsReceipt,
-		|	PurchaseInvoiceItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
-		|	CASE
-		|		WHEN GoodsReceipts.Key IS NULL
-		|			THEN FALSE
-		|		ELSE TRUE
-		|	END
-		|	OR CASE
-		|		WHEN PurchaseInvoiceItemList.PurchaseOrder.Date IS NULL
-		|			THEN FALSE
-		|		ELSE PurchaseInvoiceItemList.PurchaseOrder.GoodsReceiptBeforePurchaseInvoice
-		|	END AS UseGoodsReceiptBeforeInvoice,
-		|	CASE
-		|		WHEN PurchaseInvoiceItemList.PurchaseOrder.Date IS NULL
-		|			THEN FALSE
-		|		ELSE TRUE
-		|	END AS UsePurchaseOrder,
-		|	CASE
-		|		WHEN PurchaseInvoiceItemList.SalesOrder.Date IS NULL
-		|			THEN FALSE
-		|		ELSE TRUE
-		|	END AS UseSalesOrder,
-		|	CASE
-		|		WHEN NOT PurchaseInvoiceItemList.SalesOrder.Date IS NULL
-		|			THEN PurchaseInvoiceItemList.SalesOrder.ShipmentConfirmationsBeforeSalesInvoice
-		|		ELSE FALSE
-		|	END AS UseShipmentBeforeInvoice,
-		|	PurchaseInvoiceItemList.ItemKey AS ItemKey,
-		|	PurchaseInvoiceItemList.PurchaseOrder AS PurchaseOrder,
-		|	PurchaseInvoiceItemList.SalesOrder AS SalesOrder,
-		|	PurchaseInvoiceItemList.Ref AS ReceiptBasis,
-		|	PurchaseInvoiceItemList.Ref AS PurchaseInvoice,
-		|	PurchaseInvoiceItemList.Quantity AS Quantity,
-		|	PurchaseInvoiceItemList.TotalAmount AS TotalAmount,
-		|	PurchaseInvoiceItemList.Ref.Partner AS Partner,
-		|	PurchaseInvoiceItemList.Ref.LegalName AS LegalName,
-		|	CASE
-		|		WHEN PurchaseInvoiceItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-		|		AND PurchaseInvoiceItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-		|			THEN PurchaseInvoiceItemList.Ref.Agreement.StandardAgreement
-		|		ELSE PurchaseInvoiceItemList.Ref.Agreement
-		|	END AS Agreement,
-		|	ISNULL(PurchaseInvoiceItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
-		|	0 AS BasisQuantity,
-		|	PurchaseInvoiceItemList.Unit AS Unit,
-		|	PurchaseInvoiceItemList.ItemKey.Item.Unit AS ItemUnit,
-		|	PurchaseInvoiceItemList.ItemKey.Unit AS ItemKeyUnit,
-		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
-		|	PurchaseInvoiceItemList.ItemKey.Item AS Item,
-		|	PurchaseInvoiceItemList.Ref.Date AS Period,
-		|	PurchaseInvoiceItemList.Key AS RowKeyUUID,
-		|	PurchaseInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	PurchaseInvoiceItemList.BusinessUnit AS BusinessUnit,
-		|	PurchaseInvoiceItemList.ExpenseType AS ExpenseType,
-		|	CASE
-		|		WHEN PurchaseInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
-		|			THEN TRUE
-		|		ELSE FALSE
-		|	END AS IsService,
-		|	PurchaseInvoiceItemList.DeliveryDate AS DeliveryDate,
-		|	PurchaseInvoiceItemList.NetAmount AS NetAmount
-		|FROM
-		|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
-		|		LEFT JOIN _GoodsReceipts AS GoodsReceipts
-		|		ON PurchaseInvoiceItemList.Key = GoodsReceipts.Key
-		|WHERE
-		|	PurchaseInvoiceItemList.Ref = &Ref";
+	"SELECT
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO RowIDInfo
+	|FROM
+	|	Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	GoodsReceipts.Key
+	|INTO _GoodsReceipts
+	|FROM
+	|	Document.PurchaseInvoice.GoodsReceipts AS GoodsReceipts
+	|WHERE
+	|	GoodsReceipts.Ref = &Ref
+	|GROUP BY
+	|	GoodsReceipts.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	PurchaseInvoiceItemList.Ref.Company AS Company,
+	|	PurchaseInvoiceItemList.Store AS Store,
+	|	PurchaseInvoiceItemList.Store.UseGoodsReceipt AS UseGoodsReceipt,
+	|	PurchaseInvoiceItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
+	|	CASE
+	|		WHEN GoodsReceipts.Key IS NULL
+	|			THEN FALSE
+	|		ELSE TRUE
+	|	END
+	|	OR CASE
+	|		WHEN PurchaseInvoiceItemList.PurchaseOrder.Date IS NULL
+	|			THEN FALSE
+	|		ELSE PurchaseInvoiceItemList.PurchaseOrder.GoodsReceiptBeforePurchaseInvoice
+	|	END AS UseGoodsReceiptBeforeInvoice,
+	|	CASE
+	|		WHEN PurchaseInvoiceItemList.PurchaseOrder.Date IS NULL
+	|			THEN FALSE
+	|		ELSE TRUE
+	|	END AS UsePurchaseOrder,
+	|	CASE
+	|		WHEN PurchaseInvoiceItemList.SalesOrder.Date IS NULL
+	|			THEN FALSE
+	|		ELSE TRUE
+	|	END AS UseSalesOrder,
+	|	CASE
+	|		WHEN NOT PurchaseInvoiceItemList.SalesOrder.Date IS NULL
+	|			THEN PurchaseInvoiceItemList.SalesOrder.ShipmentConfirmationsBeforeSalesInvoice
+	|		ELSE FALSE
+	|	END AS UseShipmentBeforeInvoice,
+	|	PurchaseInvoiceItemList.ItemKey AS ItemKey,
+	|	PurchaseInvoiceItemList.PurchaseOrder AS PurchaseOrder,
+	|	PurchaseInvoiceItemList.SalesOrder AS SalesOrder,
+	|	PurchaseInvoiceItemList.Ref AS ReceiptBasis,
+	|	PurchaseInvoiceItemList.Ref AS PurchaseInvoice,
+	|	PurchaseInvoiceItemList.Quantity AS Quantity,
+	|	PurchaseInvoiceItemList.TotalAmount AS TotalAmount,
+	|	PurchaseInvoiceItemList.Ref.Partner AS Partner,
+	|	PurchaseInvoiceItemList.Ref.LegalName AS LegalName,
+	|	CASE
+	|		WHEN PurchaseInvoiceItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+	|		AND PurchaseInvoiceItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+	|			THEN PurchaseInvoiceItemList.Ref.Agreement.StandardAgreement
+	|		ELSE PurchaseInvoiceItemList.Ref.Agreement
+	|	END AS Agreement,
+	|	ISNULL(PurchaseInvoiceItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
+	|	0 AS BasisQuantity,
+	|	PurchaseInvoiceItemList.Unit AS Unit,
+	|	PurchaseInvoiceItemList.ItemKey.Item.Unit AS ItemUnit,
+	|	PurchaseInvoiceItemList.ItemKey.Unit AS ItemKeyUnit,
+	|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
+	|	PurchaseInvoiceItemList.ItemKey.Item AS Item,
+	|	PurchaseInvoiceItemList.Ref.Date AS Period,
+	|	RowIDInfo.RowID AS RowKey,
+	|	PurchaseInvoiceItemList.Key AS Key,
+	|	PurchaseInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
+	|	PurchaseInvoiceItemList.BusinessUnit AS BusinessUnit,
+	|	PurchaseInvoiceItemList.ExpenseType AS ExpenseType,
+	|	CASE
+	|		WHEN PurchaseInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END AS IsService,
+	|	PurchaseInvoiceItemList.DeliveryDate AS DeliveryDate,
+	|	PurchaseInvoiceItemList.NetAmount AS NetAmount
+	|FROM
+	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
+	|		LEFT JOIN _GoodsReceipts AS GoodsReceipts
+	|		ON PurchaseInvoiceItemList.Key = GoodsReceipts.Key
+	|		LEFT JOIN RowIDInfo AS RowIDInfo
+	|		ON PurchaseInvoiceItemList.Key = RowIDInfo.Key
+	|WHERE
+	|	PurchaseInvoiceItemList.Ref = &Ref";
 	
 	Query.SetParameter("Ref", Ref);
 	QueryResults = Query.Execute();
 	QueryTable = QueryResults.Unload();
 	
 	PostingServer.CalculateQuantityByUnit(QueryTable);
-	PostingServer.UUIDToString(QueryTable);
 	
 	QueryTaxList = New Query();
 	QueryTaxList.Text =
 		"SELECT
 		|	PurchaseInvoiceTaxList.Ref AS Document,
 		|	PurchaseInvoiceTaxList.Ref.Date AS Period,
-		|	PurchaseInvoiceTaxList.Key AS RowKeyUUID,
+		|	PurchaseInvoiceTaxList.Key AS Key,
 		|	PurchaseInvoiceTaxList.Tax AS Tax,
 		|	PurchaseInvoiceTaxList.Analytics AS Analytics,
 		|	PurchaseInvoiceTaxList.TaxRate AS TaxRate,
@@ -167,7 +184,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryTaxList.SetParameter("Ref", Ref);
 	QueryResultTaxList = QueryTaxList.Execute();
 	QueryTableTaxList = QueryResultTaxList.Unload();
-	PostingServer.UUIDToString(QueryTableTaxList);
 	Tables.TaxesTurnovers = QueryTableTaxList;
 	
 	Query = New Query();
@@ -175,7 +191,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.Text =
 	"SELECT
 	|	PurchaseInvoiceGoodsReceipts.Ref,
-	|	PurchaseInvoiceGoodsReceipts.Key AS RowKeyUUID,
+	|	PurchaseInvoiceGoodsReceipts.Key AS Key,
 	|	PurchaseInvoiceGoodsReceipts.GoodsReceipt,
 	|	PurchaseInvoiceGoodsReceipts.Quantity
 	|INTO _GoodsReceipts
@@ -210,7 +226,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	QueryTable.BasisUnit AS Unit,
 		|	QueryTable.Period AS Period,
 		|	QueryTable.RowKey AS RowKey,
-		|	QueryTable.RowKeyUUID AS RowKeyUUID,
+		|	QueryTable.Key AS Key,
 		|	QueryTable.BusinessUnit AS BusinessUnit,
 		|	QueryTable.ExpenseType,
 		|	QueryTable.IsService AS IsService,
@@ -1163,7 +1179,7 @@ Procedure GetTables_UsePO_NotUseSO_UseGRBeforeInvoice_NotUseGR_IsProduct(Tables,
 		|FROM
 		|	tmp AS tmp
 		|		LEFT JOIN _GoodsReceipts AS GoodsReceipts
-		|		ON tmp.RowKeyUUID = GoodsReceipts.RowKeyUUID
+		|		ON tmp.Key = GoodsReceipts.Key
 		|;
 		|
 		|//[1] OrderBalance
@@ -1203,7 +1219,7 @@ Procedure GetTables_UsePO_NotUseSO_UseGRBeforeInvoice_UseGR_IsProduct(Tables, Ta
 		|FROM
 		|	tmp AS tmp
 		|		LEFT JOIN _GoodsReceipts AS GoodsReceipts
-		|		ON tmp.RowKeyUUID = GoodsReceipts.RowKeyUUID
+		|		ON tmp.Key = GoodsReceipts.Key
 		|;
 		|
 		|//[1] OrderBalance
@@ -1981,7 +1997,7 @@ Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice_NotUseGR_IsPr
 		|FROM
 		|	tmp AS tmp
 		|		LEFT JOIN _GoodsReceipts AS GoodsReceipts
-		|		ON tmp.RowKeyUUID = GoodsReceipts.RowKeyUUID
+		|		ON tmp.Key = GoodsReceipts.Key
 		|;
 		|
 		|//[1] OrderBalance
@@ -2021,7 +2037,7 @@ Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_NotSCBeforeInvoice_UseGR_IsProdu
 		|FROM
 		|	tmp AS tmp
 		|		LEFT JOIN _GoodsReceipts AS GoodsReceipts
-		|		ON tmp.RowKeyUUID = GoodsReceipts.RowKeyUUID
+		|		ON tmp.Key = GoodsReceipts.Key
 		|;
 		|
 		|//[1] OrderBalance
@@ -2475,7 +2491,7 @@ Procedure GetTables_UsePO_UseSO_GRBeforeInvoice_SCBeforeInvoice_UseGR_IsProduct(
 		|FROM
 		|	tmp AS tmp
 		|		LEFT JOIN _GoodsReceipts AS GoodsReceipts
-		|		ON tmp.RowKeyUUID = GoodsReceipts.RowKeyUUID
+		|		ON tmp.Key = GoodsReceipts.Key
 		|;
 		|
 		|//[1] OrderBalance

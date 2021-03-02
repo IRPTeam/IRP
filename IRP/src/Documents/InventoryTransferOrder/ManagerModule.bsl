@@ -22,28 +22,45 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	InventoryTransferOrderItemList.Ref.Company AS Company,
-		|	InventoryTransferOrderItemList.Ref.StoreSender AS StoreSender,
-		|	InventoryTransferOrderItemList.Ref.StoreReceiver AS StoreReceiver,
-		|	InventoryTransferOrderItemList.Ref AS Order,
-		|	InventoryTransferOrderItemList.InternalSupplyRequest AS InternalSupplyRequest,
-		|	InventoryTransferOrderItemList.ItemKey AS ItemKey,
-		|	InventoryTransferOrderItemList.Quantity AS Quantity,
-		|	0 AS BasisQuantity,
-		|	InventoryTransferOrderItemList.Unit,
-		|	InventoryTransferOrderItemList.ItemKey.Item.Unit AS ItemUnit,
-		|	InventoryTransferOrderItemList.ItemKey.Unit AS ItemKeyUnit,
-		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
-		|	InventoryTransferOrderItemList.ItemKey.Item AS Item,
-		|	&Period AS Period,
-		|	InventoryTransferOrderItemList.Key AS RowKey,
-		|	InventoryTransferOrderItemList.PurchaseOrder AS PurchaseOrder,
-		|	NOT InventoryTransferOrderItemList.PurchaseOrder.Ref IS NULL AS UsePurchaseOrder
-		|FROM
-		|	Document.InventoryTransferOrder.ItemList AS InventoryTransferOrderItemList
-		|WHERE
-		|	InventoryTransferOrderItemList.Ref = &Ref";
+	"SELECT
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO RowIDInfo
+	|FROM
+	|	Document.InventoryTransferOrder.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	InventoryTransferOrderItemList.Ref.Company AS Company,
+	|	InventoryTransferOrderItemList.Ref.StoreSender AS StoreSender,
+	|	InventoryTransferOrderItemList.Ref.StoreReceiver AS StoreReceiver,
+	|	InventoryTransferOrderItemList.Ref AS Order,
+	|	InventoryTransferOrderItemList.InternalSupplyRequest AS InternalSupplyRequest,
+	|	InventoryTransferOrderItemList.ItemKey AS ItemKey,
+	|	InventoryTransferOrderItemList.Quantity AS Quantity,
+	|	0 AS BasisQuantity,
+	|	InventoryTransferOrderItemList.Unit,
+	|	InventoryTransferOrderItemList.ItemKey.Item.Unit AS ItemUnit,
+	|	InventoryTransferOrderItemList.ItemKey.Unit AS ItemKeyUnit,
+	|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
+	|	InventoryTransferOrderItemList.ItemKey.Item AS Item,
+	|	&Period AS Period,
+	|	RowIDInfo.RowID AS RowKey,
+	|	InventoryTransferOrderItemList.PurchaseOrder AS PurchaseOrder,
+	|	NOT InventoryTransferOrderItemList.PurchaseOrder.Ref IS NULL AS UsePurchaseOrder
+	|FROM
+	|	Document.InventoryTransferOrder.ItemList AS InventoryTransferOrderItemList
+	|		LEFT JOIN RowIDInfo AS RowIDInfo
+	|		ON InventoryTransferOrderItemList.Key = RowIDInfo.Key
+	|WHERE
+	|	InventoryTransferOrderItemList.Ref = &Ref";
 	
 	Query.SetParameter("Ref", Ref);
 	Query.SetParameter("Period", StatusInfo.Period);

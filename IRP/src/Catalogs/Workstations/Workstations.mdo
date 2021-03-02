@@ -60,6 +60,7 @@
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.Workstations.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.Workstations.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.Workstations.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="757286e6-1359-4443-8450-2781d00eded7">
     <name>CashAccount</name>
@@ -144,6 +145,15 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="3789fe9d-01a1-476a-9ec5-fefcf41da73b">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

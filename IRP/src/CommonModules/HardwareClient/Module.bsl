@@ -33,8 +33,15 @@ EndProcedure
 Procedure BeginAttachingAddIn_End(Connected, AddInfo) Export	
 	DriverObject = Undefined;
 	
-	If Connected Then 
-		DriverObject = Новый (AddInfo.ProgID);
+	If Connected Then
+		Try
+			DriverObject = New (AddInfo.ProgID);
+		Except
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().EqError_005
+															, """" + AddInfo.EquipmentDriver + """"
+															, """" + AddInfo.ProgID + """"));
+			Return;
+		EndTry;
 		If DriverObject <> Undefined Then
 			globalEquipments.Drivers.Insert(AddInfo.EquipmentDriver, DriverObject);
 			DriverObject = globalEquipments.Drivers[AddInfo.EquipmentDriver];

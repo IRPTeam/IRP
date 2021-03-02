@@ -1839,7 +1839,7 @@
       </items>
       <items xsi:type="form:FormField">
         <name>UseShipmentConfirmation</name>
-        <id>162</id>
+        <id>205</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -1854,7 +1854,7 @@
         </handlers>
         <extendedTooltip>
           <name>UseShipmentConfirmationExtendedTooltip</name>
-          <id>164</id>
+          <id>207</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -1869,7 +1869,7 @@
         </extendedTooltip>
         <contextMenu>
           <name>UseShipmentConfirmationContextMenu</name>
-          <id>163</id>
+          <id>206</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -1886,7 +1886,7 @@
       </items>
       <items xsi:type="form:FormField">
         <name>UseGoodsReceipt</name>
-        <id>159</id>
+        <id>208</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -1901,7 +1901,7 @@
         </handlers>
         <extendedTooltip>
           <name>UseGoodsReceiptExtendedTooltip</name>
-          <id>161</id>
+          <id>210</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -1916,7 +1916,7 @@
         </extendedTooltip>
         <contextMenu>
           <name>UseGoodsReceiptContextMenu</name>
-          <id>160</id>
+          <id>209</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>

@@ -2039,6 +2039,7 @@ Function ExtractData_FromITO(BasisesTable, DataReceiver)
 		|	ItemList.Ref AS InventoryTransferOrder,
 		|	ItemList.InternalSupplyRequest AS InternalSupplyRequest,
 		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Ref.BusinessUnit AS BusinessUnit,
 		|	ItemList.Ref.StoreSender AS StoreSender,
 		|	ItemList.Ref.StoreReceiver AS StoreReceiver,
 		|	ItemList.ItemKey.Item AS Item,
@@ -3975,7 +3976,7 @@ Function GetSeperatorColumns(DocReceiverMetadata) Export
 	ElsIf DocReceiverMetadata = Metadata.Documents.GoodsReceipt Then
 		Return "Company, Partner, LegalName, TransactionType";
 	ElsIf DocReceiverMetadata = Metadata.Documents.InventoryTransfer Then
-		Return "Company, StoreSender, StoreReceiver";	 
+		Return "Company, BusinessUnit, StoreSender, StoreReceiver";	 
 	EndIf;
 EndFunction	
 

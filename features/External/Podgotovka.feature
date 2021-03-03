@@ -391,7 +391,8 @@ Scenario: create PurchaseInvoice018001 based on PurchaseOrder017001
 			| '$$NumberPurchaseOrder017001$$' |
 		And I select current line in "List" table
 		* Check filling of elements upon entry based on
-			And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+			And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+			And I click "Ok" button
 			Then the form attribute named "Partner" became equal to "Ferron BP"
 			Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 			Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
@@ -430,7 +431,8 @@ Scenario: create PurchaseInvoice018006 based on PurchaseOrder017003
 			| 'Number'                        |
 			| '$$NumberPurchaseOrder017003$$' |
 		And I select current line in "List" table
-		And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button
 		* Check filling of elements upon entry based on
 			Then the form attribute named "Partner" became equal to "Ferron BP"
 			Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -939,7 +941,8 @@ Scenario: create SalesInvoice024001
 	And I go to line in "List" table
 		| Number |
 		| $$NumberSalesOrder023001$$       |
-	And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+	And I click the button named "FormDocumentSalesInvoiceGenerate"	
+	And I click "Ok" button
 	* Check that information is filled in when creating based on
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -1117,6 +1120,7 @@ Scenario: create SalesInvoice024025
 		And I select current line in "List" table
 		And I activate "Q" field in "ItemList" table
 		And I input "20,000" text in "Q" field of "ItemList" table
+		And I set "Use shipment confirmation" checkbox in "ItemList" table
 		And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
 	And I delete "$$NumberSalesInvoice024025$$" variable

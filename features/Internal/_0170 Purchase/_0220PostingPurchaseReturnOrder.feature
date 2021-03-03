@@ -208,6 +208,7 @@ Scenario: _022006 create document Purchase return order, store does not use Ship
 			| 'Description' |
 			| 'Store 01'  |
 		And I select current line in "List" table
+		And I click "OK" button	
 	And I select "Approved" exact value from "Status" drop-down list
 	And I move to "Item list" tab
 	And I go to line in "ItemList" table
@@ -220,12 +221,16 @@ Scenario: _022006 create document Purchase return order, store does not use Ship
 	And I finish line editing in "ItemList" table
 	And I go to line in "ItemList" table
 		| 'Item'     | 'Item key'  | 'Unit' |
-		| 'Dress'    | 'L/Green'   | 'pcs' |
+		| 'Dress'    | 'S/Yellow'   | 'pcs' |
 	And Delay 2
 	And I delete a line in "ItemList" table
 	And I go to line in "ItemList" table
-		| 'Item'     | 'Item key'  | 'Unit' |
-		| 'Dress'    | 'M/White'   | 'pcs' |
+		| 'Item'        | 'Item key'    | 'Q'      |
+		| 'Trousers'    | '36/Yellow'   | '8,000'  |
+	And I delete a line in "ItemList" table
+	And I go to line in "ItemList" table
+		| 'Item'     | 
+		| 'Boots'    |
 	And I delete a line in "ItemList" table
 	And I click the button named "FormPost"
 	And I delete "$$NumberPurchaseReturnOrder022006$$" variable

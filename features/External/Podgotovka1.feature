@@ -627,7 +627,8 @@ Scenario: create purchase invoice without order (Vendor Ferron, USD, store 01)
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice29604$$"
 			And I save the window as "$$PurchaseInvoice29604$$"
 		* Create Goods receipt
-			And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+			And I click the button named "FormDocumentGoodsReceiptGenerate"
+			And I click "Ok" button
 			And I click Select button of "Company" field
 			And I go to line in "List" table
 					| 'Description'  |

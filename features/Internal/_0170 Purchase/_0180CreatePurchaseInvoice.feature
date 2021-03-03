@@ -294,6 +294,45 @@ Scenario: _018003 copy PI (based on PO) and check filling in Row Id info table (
 		Then the number of "RowIDInfo" table lines is "равно" "4"
 		And I close all client application windows		
 
+Scenario: _018004 create PI based on GR without PO
+	* Select GR
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '12'      |
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"	
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                           | 'Use'                                        | 'Quantity' | 'Unit'           | 'Price' | 'Currency' |
+			| 'Goods receipt 12 dated 02.03.2021 12:16:02' | 'Goods receipt 12 dated 02.03.2021 12:16:02' | ''         | ''               | ''      | ''         |
+			| 'Dress, XS/Blue'                             | 'Yes'                                        | '10,000'   | 'pcs'            | ''      | ''         |
+			| 'Trousers, 38/Yellow'                        | 'Yes'                                        | '20,000'   | 'pcs'            | ''      | ''         |
+			| 'Boots, 39/18SD'                             | 'Yes'                                        | '2,000'    | 'Boots (12 pcs)' | ''      | ''         |
+			| 'Dress, XS/Blue'                             | 'Yes'                                        | '2,000'    | 'pcs'            | ''      | ''         |
+		Then the number of "BasisesTree" table lines is "равно" "5"
+		And I click "Ok" button
+	* Create PI and check creation
+		And "ItemList" table contains lines
+			| '#' | 'Business unit' | 'Price type' | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Q'      | 'Price' | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order' | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '1' | ''              | ''           | 'Dress'    | 'XS/Blue'   | 'No'                 | ''           | 'pcs'            | ''                   | '12,000' | ''      | ''    | ''              | ''             | ''                    | ''                        | 'Store 02' | ''              | ''             | ''               | ''       | ''            | ''           | 'Yes'               |
+			| '2' | ''              | ''           | 'Trousers' | '38/Yellow' | 'No'                 | ''           | 'pcs'            | ''                   | '20,000' | ''      | ''    | ''              | ''             | ''                    | ''                        | 'Store 02' | ''              | ''             | ''               | ''       | ''            | ''           | 'Yes'               |
+			| '3' | ''              | ''           | 'Boots'    | '39/18SD'   | 'No'                 | ''           | 'Boots (12 pcs)' | ''                   | '2,000'  | ''      | ''    | ''              | ''             | ''                    | ''                        | 'Store 02' | ''              | ''             | ''               | ''       | ''            | ''           | 'Yes'               |
+		Then the number of "ItemList" table lines is "равно" "3"
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
+		And "GoodsReceiptsTree" table became equal
+			| 'Item'     | 'Item key'  | 'Goods receipt'                              | 'Invoice' | 'GR'     | 'Q'      |
+			| 'Dress'    | 'XS/Blue'   | ''                                           | '12,000'  | '12,000' | '12,000' |
+			| ''         | ''          | 'Goods receipt 12 dated 02.03.2021 12:16:02' | ''        | '10,000' | '10,000' |
+			| ''         | ''          | 'Goods receipt 12 dated 02.03.2021 12:16:02' | ''        | '2,000'  | '2,000'  |
+			| 'Trousers' | '38/Yellow' | ''                                           | '20,000'  | '20,000' | '20,000' |
+			| ''         | ''          | 'Goods receipt 12 dated 02.03.2021 12:16:02' | ''        | '20,000' | '20,000' |
+			| 'Boots'    | '39/18SD'   | ''                                           | '24,000'  | '24,000' | '24,000' |
+			| ''         | ''          | 'Goods receipt 12 dated 02.03.2021 12:16:02' | ''        | '24,000' | '24,000' |
+		And I close all client application windows
+
+
 
 Scenario: _018012 Purchase invoice creation without PO
 	* Creating Purchase Invoice without Purchase order	

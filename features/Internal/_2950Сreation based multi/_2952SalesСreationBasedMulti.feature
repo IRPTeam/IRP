@@ -104,7 +104,8 @@ Scenario: _090401 create Sales invoice for several Sales order with different le
 			| Number |
 			| 324    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+	And I click the button named "FormDocumentSalesInvoiceGenerate"
+	And I click "Ok" button
 	Then the form attribute named "Partner" became equal to "Ferron BP"
 	Then the form attribute named "LegalName" became equal to "Second Company Ferron BP"
 	Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
@@ -202,7 +203,8 @@ Scenario: _090402 create Sales invoice for several Sales order with the same par
 			| Number |
 			| 326    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+	And I click the button named "FormDocumentSalesInvoiceGenerate"
+	And I click "Ok" button
 	Then the form attribute named "Partner" became equal to "Ferron BP"
 	Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
@@ -313,7 +315,8 @@ Scenario: _090403 create Sales invoice for several Sales order with different pa
 			| Number |
 			| 328    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+	And I click the button named "FormDocumentSalesInvoiceGenerate"
+	And I click "Ok" button
 	Then the form attribute named "Partner" became equal to "Partner Ferron 2"
 	Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
@@ -447,7 +450,8 @@ Scenario: _090404 create Sales invoice for several Sales order with different pa
 			| Number |
 			| 330    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+	And I click the button named "FormDocumentSalesInvoiceGenerate"
+	And I click "Ok" button
 	Then the form attribute named "Partner" became equal to "Partner Ferron 1"
 	Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	Then the form attribute named "Agreement" became equal to "Basic Partner terms, without VAT"
@@ -572,7 +576,8 @@ Scenario: _090405 create Sales invoice for several Sales order with different st
 			| Number |
 			| 334    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+	And I click the button named "FormDocumentSalesInvoiceGenerate"
+	And I click "Ok" button
 	Then the form attribute named "Partner" became equal to "Partner Ferron 1"
 	Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
@@ -672,7 +677,8 @@ Scenario: _090406 create Sales invoice for several Sales order with different ow
 			| Number |
 			| 336    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+	And I click the button named "FormDocumentSalesInvoiceGenerate"
+	And I click "Ok" button
 	Then the form attribute named "Partner" became equal to "Partner Ferron 1"
 	Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
@@ -918,7 +924,8 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			| Number |
 			| 800    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+	And I click the button named "FormDocumentSalesInvoiceGenerate"
+	And I click "Ok" button
 	* Check filling in tabular part
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key' | 'Q'     |
@@ -930,7 +937,8 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			| Number |
 			| 800    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+	And I click the button named "FormDocumentShipmentConfirmationGenerate"
+	And I click "Ok" button	
 	* Check filling in details
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -959,7 +967,8 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			| Number |
 			| 800    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+	And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+	And I click "Ok" button
 	Then the number of "ItemList" table lines is "меньше или равно" 1
 	And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Sales order'      |
@@ -983,7 +992,8 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 			And I go to line in "List" table
 				| 'Number' |
 				| '$$NumberSalesOrder090408$$'    |
-			And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+			And I click the button named "FormDocumentShipmentConfirmationGenerate"
+			And I click "Ok" button	
 			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "5,000" text in "Quantity" field of "ItemList" table
@@ -1011,7 +1021,8 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 			And I go to line in "List" table
 				| 'Number' |
 				| '$$NumberSalesOrder090408$$'    |
-			And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+			And I click the button named "FormDocumentShipmentConfirmationGenerate"
+			And I click "Ok" button	
 			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "8,000" text in "Quantity" field of "ItemList" table
@@ -1039,7 +1050,8 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 			And I go to line in "List" table
 				| 'Number' |
 				| '$$NumberSalesOrder090408$$'    |
-			And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+			And I click the button named "FormDocumentShipmentConfirmationGenerate"
+			And I click "Ok" button	
 			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "7,000" text in "Quantity" field of "ItemList" table
@@ -1067,8 +1079,7 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberSalesOrder090408$$'    |
-		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
-		And I click the button named "FormSelectAll"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And I click "Ok" button
 		And "ItemList" table contains lines
 		| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Q'      | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'           |

@@ -120,7 +120,7 @@ Scenario: _017002 check filling in Row Id info table in the PO
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Q'       |
 			| '4' | 'Dress' | 'L/Green'  | '208,000' |
-		And in the table "ItemList" I click "Delete" button
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I move to "Row ID Info" tab
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines

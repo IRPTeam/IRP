@@ -253,8 +253,16 @@ Scenario: _0402411 check Inventory transfer movements by the Register  "R4011 Fr
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R4011 Free stocks"'                     |	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer 201 dated 01.03.2021 09:55:16' | ''            | ''                    | ''          | ''           | ''          |
+			| 'Document registrations records'                   | ''            | ''                    | ''          | ''           | ''          |
+			| 'Register  "R4011 Free stocks"'                    | ''            | ''                    | ''          | ''           | ''          |
+			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
+			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
+			| ''                                                 | 'Receipt'     | '01.03.2021 09:55:16' | '2'         | 'Store 03'   | '36/Yellow' |
+			| ''                                                 | 'Receipt'     | '01.03.2021 09:55:16' | '10'        | 'Store 03'   | 'S/Yellow'  |
+			| ''                                                 | 'Receipt'     | '01.03.2021 09:55:16' | '10'        | 'Store 03'   | 'XS/Blue'   |
+			| ''                                                 | 'Receipt'     | '01.03.2021 09:55:16' | '15'        | 'Store 03'   | '36/Red'    |
 		And I close all client application windows
 
 Scenario: _0402412 check Inventory transfer movements by the Register  "R4012 Stock Reservation" (not Use SC Use GR with ITO)

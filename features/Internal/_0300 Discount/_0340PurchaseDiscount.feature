@@ -129,7 +129,8 @@ Scenario: _034001 check the Document discount in Purchase order
 		| 'Trousers' | '250,00' | '36/Yellow' | '300,000' | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
 	* Check the transfer of the discount value from Purchase order to Purchase invoice when creating based on
 		And I click the button named "FormPost"
-		And I click "Purchase invoice" button
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button
 		And "ItemList" table contains lines
 		| 'Item'     | 'Price'  | 'Item key'  | 'Q'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
 		| 'Dress'    | '200,00' | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |

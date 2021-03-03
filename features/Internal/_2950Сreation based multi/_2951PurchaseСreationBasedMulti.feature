@@ -90,7 +90,8 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 			| Number |
 			| $$NumberPurchaseOrder09030201$$   |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -192,7 +193,8 @@ Scenario: _090303 create Purchase invoice for several Purchase order with the sa
 			| Number |
 			| $$NumberPurchaseOrder09030203$$    |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
@@ -310,7 +312,8 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 			| Number |
 			| $$NumberPurchaseOrder090302041$$    |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button
 		Then the number of "ItemList" table lines is "меньше или равно" 3
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseInvoice090302041$$" variable
@@ -433,7 +436,8 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 			| Number |
 			| $$NumberPurchaseOrder090302051$$    |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button
 		Then the form attribute named "Partner" became equal to "Partner Ferron 1"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -593,7 +597,8 @@ Scenario: _090306 create Purchase invoice for several Purchase order with differ
 			| Number |
 			| $$NumberPurchaseOrder090302061$$    |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button
 		Then the form attribute named "Partner" became equal to "Partner Ferron 1"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron Discount"
@@ -712,7 +717,8 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 			| Number |
 			| $$NumberPurchaseOrder09030701$$    |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button
 		Then the form attribute named "Partner" became equal to "Partner Ferron 1"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron Discount"
@@ -1811,10 +1817,8 @@ Scenario: _090318 create Purchase invoice for several Purchase order with differ
 			| 'Number' |
 			| '$$NumberPurchaseOrder0903N140$$'    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
-	* Select Goods Receipt for Purchase invoice
-		And I click the button named "FormSelectAll"
-		And I click "Ok" button
+	And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+	And I click "Ok" button
 	* Check filling in Purchase invoice 142
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
@@ -1887,10 +1891,8 @@ Scenario: _090319 create Purchase invoice for several Purchase order with differ
 			| 'Number' |
 			| '$$NumberPurchaseOrder0903N142$$'    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
-	Select Goods Receipt for Purchase invoice
-		And I click the button named "FormSelectAll"
-		And I click "Ok" button
+	And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+	And I click "Ok" button
 	* Check filling in Purchase invoice 145
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -1962,10 +1964,8 @@ Scenario: _090320 create Purchase invoice for several Purchase order with differ
 			| 'Number' |
 			| '$$NumberPurchaseOrder0903N144$$'    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
-	* Select Goods Receipt for Purchase invoice
-		And I click the button named "FormSelectAll"
-		And I click "Ok" button
+	And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+	And I click "Ok" button
 	* Check filling in Purchase invoice 145
 		Then the form attribute named "Partner" became equal to "Partner Ferron 1"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -2043,10 +2043,8 @@ Scenario: _090322 create Purchase invoice for several Purchase order with differ
 			| 'Number' |
 			| '$$NumberPurchaseOrder0903N148$$'    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
-	* Select Goods Receipt for Purchase invoice
-		And I click the button named "FormSelectAll"
-		And I click "Ok" button
+	And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+	And I click "Ok" button
 	* Check filling in Purchase invoice 148
 		Then the form attribute named "Partner" became equal to "Partner Ferron 1"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -2209,8 +2207,7 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 		And I go to line in "List" table
 			| Number |
 			| $$NumberPurchaseOrder090323$$    |
-		And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
-		And I click the button named "FormSelectAll"
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Price'  | 'Detail' | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Offers amount' | 'Price type'              | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'          |

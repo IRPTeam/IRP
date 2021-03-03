@@ -321,7 +321,8 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		| '458'    |
 		And I move one line down in "List" table and select line
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
@@ -539,7 +540,8 @@ Scenario: _090504 create Purchase invoice based on several Goods receipt
 		| '471'    |
 		And I move one line down in "List" table and select line
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -665,7 +667,8 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 		| 'Number' |
 		| '465'    |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
 		Then the form attribute named "Partner" became equal to "Kalipso"
 		Then the form attribute named "LegalName" became equal to "Company Kalipso"
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -822,7 +825,8 @@ Scenario: _090506 create Purchase invoice based on several Goods receipt
 		| 'Number' |
 		| '465'    |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Company" became equal to "Main Company"

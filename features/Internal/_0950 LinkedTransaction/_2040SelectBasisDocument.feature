@@ -536,7 +536,8 @@ Scenario: _2040001 preparation
 		And I go to line in "List" table
 			| 'Number'                       | 'Partner' |
 			| '$$NumberSalesOrder20400012$$' | 'Crystal' |
-		And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "Ok" button	
 		And I move to "Other" tab
 		And I click the button named "FormPost"
 		And I delete "$$ShipmentConfirmation20400018$$" variable

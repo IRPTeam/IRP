@@ -201,7 +201,7 @@ Scenario: _029609 create Goods receipt and Shipment confirmation based on Unbund
 		And I go to line in "List" table
 			| Company      | Item key bundle | Number |
 			| Main Company | Boots/S-8       | 2      |
-		And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+		And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"		
 		Then the form attribute named "Company" became equal to "Main Company"
 		And I click the button named "FormPost"
 		And I delete "$$NumberShipmentConfirmation0029609$$" variable

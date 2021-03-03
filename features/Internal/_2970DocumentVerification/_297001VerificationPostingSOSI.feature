@@ -324,7 +324,8 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			| 'Number' | 'Partner' |
 			| '$$NumberSalesInvoice29700102$$'  | 'Foxred'  |
 		* Create SC
-			And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+			And I click the button named "FormDocumentShipmentConfirmationGenerate"
+			And I click "Ok" button	
 			And "ItemList" table contains lines
 			| 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Store'    | 'Shipment basis'       |
 			| 'Dress' | '8,000'    | 'M/White'  | 'pcs'  | 'Store 02' | '$$SalesInvoice29700102$$' |
@@ -402,7 +403,8 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			And I go to line in "List" table
 				| 'Number' | 'Partner' |
 				| '$$NumberSalesInvoice29700102$$'  | 'Foxred'  |
-			And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+			And I click the button named "FormDocumentShipmentConfirmationGenerate"
+			And I click "Ok" button	
 			And "ItemList" table contains lines
 				| 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Store'    | 'Shipment basis'       |
 				| 'Dress' | '8,000'    | 'M/White'  | 'pcs'  | 'Store 02' | '$$SalesInvoice29700102$$' |
@@ -692,7 +694,8 @@ Scenario: _29700111 test filling-in SO - SC - SI by quantity (second part)
 			| 'Number' | 'Partner' |
 			| '$$NumberShipmentConfirmation29700104$$'  | 'Foxred'  |
 		* Create SI
-			And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+			And I click the button named "FormDocumentSalesInvoiceGenerate"
+			And I click "Ok" button
 			And "ItemList" table contains lines
 			| 'Item'  | 'Q'      | 'Item key' | 'Unit' | 'Store'    | 'Sales order'            |
 			| 'Dress' | '8,000'  | 'M/White'  | 'pcs'  | 'Store 02' | '$$SalesOrder29700102$$' |
@@ -765,8 +768,7 @@ Scenario: _29700111 test filling-in SO - SC - SI by quantity (second part)
 			And I go to line in "List" table
 				| 'Number' | 'Partner' |
 				| '$$NumberSalesOrder29700102$$'  | 'Foxred'  |
-			And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
-			And I click the button named "FormSelectAll"
+			And I click the button named "FormDocumentSalesInvoiceGenerate"
 			And I click "Ok" button		
 			And "ItemList" table contains lines
 				| 'Item'  | 'Q' | 'Item key' | 'Unit' | 'Store'    | 'Sales order'       |
@@ -1348,7 +1350,8 @@ Scenario: _29700123 test filling-in PO - GR - PI by quantity (second part)
 			| 'Number' |
 			| '$$NumberGoodsReceipt29700102$$'  |
 		* Create GR
-			And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+			And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+			And I click "Ok" button
 			And "ItemList" table contains lines
 			| 'Item'  | 'Q'      | 'Item key' | 'Unit' | 'Store'    | 'Purchase order'            |
 			| 'Dress' | '20,000' | 'M/White'  | 'pcs'  | 'Store 02' | '$$PurchaseOrder29700102$$' |
@@ -1390,7 +1393,8 @@ Scenario: _29700123 test filling-in PO - GR - PI by quantity (second part)
 			And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberGoodsReceipt29700102$$'  |
-			And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+			And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+			And I click "Ok" button
 			And "ItemList" table contains lines
 				| 'Item'  | 'Q' | 'Item key' | 'Unit' | 'Store'    | 'Purchase order'            |
 				| 'Dress' | '1,000'    | 'L/Green'  | 'pcs'  | 'Store 02' | '$$PurchaseOrder29700102$$' |

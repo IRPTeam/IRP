@@ -47,6 +47,9 @@ Scenario: _024000 preparation (Sales invoice)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
+		When Create catalog BusinessUnits objects
+		When Create catalog ExpenseAndRevenueTypes objects
+		When Create catalog Partners objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -81,19 +84,19 @@ Scenario: _024001 create document Sales Invoice based on sales order (partial qu
 	* Create SI
 		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		Then "Add linked document rows" window is opened
-		And I expand current line in "DocumentsTree" table
-		And "DocumentsTree" table became equal
-			| 'Row presentation'                        | 'Use'                                     | 'Basis unit' | 'Quantity' |
-			| 'Sales order 3 dated 27.01.2021 19:50:45' | 'Sales order 3 dated 27.01.2021 19:50:45' | ''           | ''         |
-			| 'Dress, XS/Blue, Store 02'                | 'Yes'                                     | 'pcs'        | '1,000'    |
-			| 'Shirt, 36/Red, Store 02'                 | 'Yes'                                     | 'pcs'        | '10,000'   |
-			| 'Service, Interner, Store 02'             | 'Yes'                                     | 'pcs'        | '1,000'    |
-			| 'Boots, 36/18SD, Store 02'                | 'Yes'                                     | 'pcs'        | '60,000'   |
-		And I go to line in "DocumentsTree" table
+		And I expand current line in "BasisesTree" table
+		And "BasisesTree" table became equal
+			| 'Row presentation'                        | 'Use'                                     | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
+			| 'Sales order 3 dated 27.01.2021 19:50:45' | 'Sales order 3 dated 27.01.2021 19:50:45' | ''         | ''               | ''         | ''         |
+			| 'Dress, XS/Blue'                          | 'Yes'                                     | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
+			| 'Shirt, 36/Red'                           | 'Yes'                                     | '10,000'   | 'pcs'            | '350,00'   | 'TRY'      |
+			| 'Service, Interner'                       | 'Yes'                                     | '1,000'    | 'pcs'            | '100,00'   | 'TRY'      |
+			| 'Boots, 36/18SD'                          | 'Yes'                                     | '5,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
+		And I go to line in "BasisesTree" table
 			| 'Row presentation'            |
-			| 'Service, Interner, Store 02' |
-		And I change "Use" checkbox in "DocumentsTree" table
-		And I finish line editing in "DocumentsTree" table
+			| 'Service, Interner' |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 	* Check filling in SI
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -102,10 +105,10 @@ Scenario: _024001 create document Sales Invoice based on sales order (partial qu
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table became equal
-			| '#' | 'Business unit' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                             | 'Revenue type' |
-			| '1' | ''              | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'            | '75,36'      | '520,00'   | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | ''             |
-			| '2' | ''              | 'Basic Price Types' | 'Shirt' | '36/Red'   | 'No'                 | ''                   | '10,000' | 'pcs'            | '507,20'     | '350,00'   | '18%' | '175,00'        | '2 817,80'   | '3 325,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | ''             |
-			| '3' | ''              | 'Basic Price Types' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '5,000'  | 'Boots (12 pcs)' | '6 406,78'   | '8 400,00' | '18%' | ''              | '35 593,22'  | '42 000,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | ''             |
+			| '#' | 'Business unit'           | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                             | 'Revenue type' |
+			| '1' | 'Distribution department' | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'            | '75,36'      | '520,00'   | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | 'Revenue'      |
+			| '2' | 'Distribution department' | 'Basic Price Types' | 'Shirt' | '36/Red'   | 'No'                 | ''                   | '10,000' | 'pcs'            | '507,20'     | '350,00'   | '18%' | '175,00'        | '2 817,80'   | '3 325,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | 'Revenue'      |
+			| '3' | 'Front office'            | 'Basic Price Types' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '5,000'  | 'Boots (12 pcs)' | '6 406,78'   | '8 400,00' | '18%' | ''              | '35 593,22'  | '42 000,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | 'Revenue'      |
 
 		And "SpecialOffers" table contains lines
 			| '#' | 'Amount' |
@@ -176,10 +179,10 @@ Scenario: _024002 check filling in Row Id info table in the SI (SO-SI)
 	* Check Row Id info table
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'     | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | ''          | '1,000' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
-			| '$$Rov2SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | ''          | '5,000' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
-			| '$$Rov3SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | ''          | '60,000'| 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
+			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
+			| '$$Rov2SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
+			| '$$Rov3SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SC'        | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Copy string and check Row ID Info tab
 		And I move to "Item list" tab
@@ -198,11 +201,11 @@ Scenario: _024002 check filling in Row Id info table in the SI (SO-SI)
 		And I move to "Row ID Info" tab
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | ''          | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
-			| '$$Rov2SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | ''          | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
-			| '$$Rov3SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | ''          | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
-			| '$$Rov4SalesInvoice023002$$' | ''                                        | '$$Rov4SalesInvoice023002$$'           | ''          | '8,000'  | ''                                     | ''             | '$$Rov4SalesInvoice023002$$'           |
+			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step'   | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'          | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
+			| '$$Rov2SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'          | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
+			| '$$Rov3SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SC'          | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
+			| '$$Rov4SalesInvoice023002$$' | ''                                        | '$$Rov4SalesInvoice023002$$'           | 'SC'          | '8,000'  | ''                                     | ''             | '$$Rov4SalesInvoice023002$$'           |
 		Then the number of "RowIDInfo" table lines is "равно" "4"
 		And "RowIDInfo" table does not contain lines
 			| 'Key'                        | 'Q'     |
@@ -216,9 +219,9 @@ Scenario: _024002 check filling in Row Id info table in the SI (SO-SI)
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | ''          | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
-			| '$$Rov2SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | ''          | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
-			| '$$Rov3SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | ''          | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
+			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
+			| '$$Rov2SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
+			| '$$Rov3SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SC'        | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Change quantity and check  Row ID Info tab
 		And I move to "Item list" tab
@@ -231,9 +234,9 @@ Scenario: _024002 check filling in Row Id info table in the SI (SO-SI)
 		And I finish line editing in "ItemList" table
 		And "RowIDInfo" table contains lines
 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | ''          | '7,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
-			| '$$Rov2SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | ''          | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
-			| '$$Rov3SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | ''          | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
+			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '7,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
+			| '$$Rov2SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
+			| '$$Rov3SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SC'        | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
@@ -248,14 +251,14 @@ Scenario: _024002 check filling in Row Id info table in the SI (SO-SI)
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Q'     | 'Unit'           |
 			| 'Boots' | '36/18SD'  | '5,000' | 'Boots (12 pcs)' |
-		And I set "Use shipment confirmation" checkbox in "ItemList" table
-		And I move to the tab named "GroupRowID"
+		And I remove "Use shipment confirmation" checkbox in "ItemList" table
+		And I move to the tab named "GroupRowIDInfo"
 		And I click "Post" button
 		And "RowIDInfo" table contains lines
 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | ''          | '7,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
-			| '$$Rov2SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | ''          | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
-			| '$$Rov3SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SC'        | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
+			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
+			| '$$Rov2SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
+			| '$$Rov3SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | ''          | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
 		Then the number of "RowIDInfo" table lines is "равно" "3"	
 		And I click the button named "FormPostAndClose"
 
@@ -279,10 +282,10 @@ Scenario: _024003 copy SI (based on SO) and check filling in Row Id info table (
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table became equal
-			| '#' | 'Business unit' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' |
-			| '1' | ''              | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000' | 'pcs'            | '79,32'      | '520,00'   | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | ''            | ''             |
-			| '2' | ''              | 'Basic Price Types' | 'Shirt' | '36/Red'   | 'No'                 | ''                   | '5,000' | 'pcs'            | '240,25'     | '350,00'   | '18%' | '175,00'        | '1 334,75'   | '1 575,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | ''            | ''             |
-			| '3' | ''              | 'Basic Price Types' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '5,000' | 'Boots (12 pcs)' | '6 406,78'   | '8 400,00' | '18%' | ''              | '35 593,22'  | '42 000,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | ''            | ''             |
+			| '#' | 'Business unit'           | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' |
+			| '1' | 'Distribution department' | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000' | 'pcs'            | '79,32'      | '520,00'   | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | ''            | 'Revenue'      |
+			| '2' | 'Distribution department' | 'Basic Price Types' | 'Shirt' | '36/Red'   | 'No'                 | ''                   | '5,000' | 'pcs'            | '240,25'     | '350,00'   | '18%' | '175,00'        | '1 334,75'   | '1 575,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | ''            | 'Revenue'      |
+			| '3' | 'Front office'            | 'Basic Price Types' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '5,000' | 'Boots (12 pcs)' | '6 406,78'   | '8 400,00' | '18%' | ''              | '35 593,22'  | '42 000,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | ''            | 'Revenue'      |
 
 		And "ObjectCurrencies" table became equal
 			| 'Movement type'      | 'Type'         | 'Currency from' | 'Currency' | 'Rate presentation' | 'Multiplicity' | 'Amount'   |
@@ -303,8 +306,8 @@ Scenario: _024003 copy SI (based on SO) and check filling in Row Id info table (
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines
 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | ''          | '7,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
-			| '$$Rov2SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | ''          | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
+			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '7,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
+			| '$$Rov2SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
 			| '$$Rov3SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | ''          | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I close all client application windows			
@@ -326,7 +329,7 @@ Scenario: _024004 create SI based on 2 SC with SO (SC>SO + new string)
 			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '7,000'    | 'pcs'  | '350,00' | 'TRY'      |
 			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
 			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | ''         | ''     | ''       | ''         |
-			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '4,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '3,000'    | 'pcs'  | '350,00' | 'TRY'      |
 			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''         | ''     | ''       | ''         |
 			| 'Shirt, 38/Black'                                    | 'Yes'                                                | '2,000'    | 'pcs'  | ''       | ''         |
 		Then the number of "BasisesTree" table lines is "равно" "9"
@@ -340,10 +343,10 @@ Scenario: _024004 create SI based on 2 SC with SO (SC>SO + new string)
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		And "ItemList" table contains lines
 			| 'Business unit'           | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' |
+			| ''                        | 'Basic Price Types'       | 'Shirt' | '38/Black' | 'No'                 | ''                   | '2,000'  | 'pcs'  | '106,78'     | '350,00' | '18%' | ''              | '593,22'     | '700,00'       | ''                    | 'Store 02' | ''              | 'Yes'                       | ''       | ''                                         | ''             |
 			| 'Distribution department' | 'Basic Price Types'       | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '75,36'      | '520,00' | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
-			| 'Distribution department' | 'Basic Price Types'       | 'Shirt' | '36/Red'   | 'No'                 | ''                   | '11,000' | 'pcs'  | '355,04'     | '350,00' | '18%' | '122,50'        | '1 972,46'   | '2 327,50'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+			| 'Distribution department' | 'Basic Price Types'       | 'Shirt' | '36/Red'   | 'No'                 | ''                   | '10,000' | 'pcs'  | '355,04'     | '350,00' | '18%' | '122,50'        | '1 972,46'   | '2 327,50'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
 			| 'Distribution department' | 'en description is empty' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '2,000'  | 'pcs'  | '152,54'     | '500,00' | '18%' | ''              | '847,46'     | '1 000,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
-			| 'Distribution department' | 'Basic Price Types'       | 'Shirt' | '38/Black' | 'No'                 | ''                   | '2,000'  | 'pcs'  | '106,78'     | '350,00' | '18%' | ''              | '593,22'     | '700,00'       | ''                    | 'Store 02' | ''              | 'Yes'                       | ''       | ''                                         | 'Revenue'      |
 		Then the number of "ItemList" table lines is "равно" "4"
 		And I close all client application windows
 		
@@ -364,7 +367,7 @@ Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string f
 			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '7,000'    | 'pcs'  | '350,00' | 'TRY'      |
 			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
 			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | ''         | ''     | ''       | ''         |
-			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '4,000'    | 'pcs'  | '350,00' | 'TRY'      |	
+			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '3,000'    | 'pcs'  | '350,00' | 'TRY'      |	
 	* Select items for SI and check creation
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
@@ -381,7 +384,7 @@ Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string f
 			| '#' | 'Business unit'           | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' |
 			| '1' | 'Front office'            | 'en description is empty' | 'Service' | 'Interner' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
 			| '2' | 'Distribution department' | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '75,36'      | '520,00' | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
-			| '3' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '11,000' | 'pcs'  | '355,04'     | '350,00' | '18%' | '122,50'        | '1 972,46'   | '2 327,50'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+			| '3' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '10,000' | 'pcs'  | '355,04'     | '350,00' | '18%' | '122,50'        | '1 972,46'   | '2 327,50'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
 			| '4' | 'Distribution department' | 'en description is empty' | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '2,000'  | 'pcs'  | '152,54'     | '500,00' | '18%' | ''              | '847,46'     | '1 000,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
 		Then the number of "ItemList" table lines is "равно" "4"
 		And I close current window
@@ -394,9 +397,9 @@ Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string f
 		And "ItemList" table contains lines
 			| '#' | 'Business unit'           | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' |
 			| '1' | 'Front office'            | 'en description is empty' | 'Service' | 'Interner' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
-			| '2' | ''                        | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '10,000' | 'pcs'  | '793,22'     | '520,00' | '18%' | ''              | '4 406,78'   | '5 200,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | ''             |
+			| '2' | ''                        | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '10,000' | 'pcs'  | '793,22'     | '520,00' | '18%' | ''              | '4 406,78'   | '5 200,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | ''             |
 			| '3' | 'Distribution department' | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '75,36'      | '520,00' | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
-			| '4' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '11,000' | 'pcs'  | '355,04'     | '350,00' | '18%' | '122,50'        | '1 972,46'   | '2 327,50'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+			| '4' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '10,000' | 'pcs'  | '355,04'     | '350,00' | '18%' | '122,50'        | '1 972,46'   | '2 327,50'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
 			| '5' | 'Distribution department' | 'en description is empty' | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '2,000'  | 'pcs'  | '152,54'     | '500,00' | '18%' | ''              | '847,46'     | '1 000,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
 		Then the number of "ItemList" table lines is "равно" "5"
 		And I close current window
@@ -407,8 +410,8 @@ Scenario: _024006 create SI based on 2 SO with SC
 	* Select SO
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '3'      |
+			| 'Number' | 'Date'                |
+			| '3'      | '27.01.2021 19:50:45' |
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentSalesInvoiceGenerate"	
 		And "BasisesTree" table contains lines
@@ -424,18 +427,18 @@ Scenario: _024006 create SI based on 2 SO with SC
 			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '7,000'    | 'pcs'  | '350,00' | 'TRY'      |
 			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
 			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | ''         | ''     | ''       | ''         |
-			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '4,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '3,000'    | 'pcs'  | '350,00' | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "12"
 		And I click "Ok" button
 	* Create SI and check creation
 		And "ItemList" table contains lines
 			| '#' | 'Business unit'           | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' |
-			| '1' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '5,000'  | 'pcs'  | '253,60'     | '350,00' | '18%' | '87,50'         | '1 408,90'   | '1 662,50'     | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'Revenue'      |
+			| '1' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '5,000'  | 'pcs'  | '253,60'     | '350,00' | '18%' | '87,50'         | '1 408,90'   | '1 662,50'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'Revenue'      |
 			| '2' | 'Front office'            | 'en description is empty' | 'Service' | 'Interner' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'Revenue'      |
 			| '3' | 'Front office'            | 'en description is empty' | 'Service' | 'Interner' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
-			| '4' | ''                        | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '10,000' | 'pcs'  | '793,22'     | '520,00' | '18%' | ''              | '4 406,78'   | '5 200,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | ''             |
+			| '4' | ''                        | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '10,000' | 'pcs'  | '793,22'     | '520,00' | '18%' | ''              | '4 406,78'   | '5 200,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | ''             |
 			| '5' | 'Distribution department' | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '75,36'      | '520,00' | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
-			| '6' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '11,000' | 'pcs'  | '355,04'     | '350,00' | '18%' | '122,50'        | '1 972,46'   | '2 327,50'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+			| '6' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '10,000' | 'pcs'  | '355,04'     | '350,00' | '18%' | '122,50'        | '1 972,46'   | '2 327,50'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
 			| '7' | 'Distribution department' | 'en description is empty' | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '2,000'  | 'pcs'  | '152,54'     | '500,00' | '18%' | ''              | '847,46'     | '1 000,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
 		Then the number of "ItemList" table lines is "равно" "7"
 		And I close all client application windows
@@ -482,29 +485,30 @@ Scenario: _024025 create document Sales Invoice without Sales order and check Ro
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
 			| 'Number'                     |
-			| '$$NumberSalesInvoice024008$$' |
+			| '$$NumberSalesInvoice024025$$' |
 		And I select current line in "List" table
 		And I click "Show row key" button
 		And I go to line in "ItemList" table
 			| '#' |
 			| '1' |
 		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov1SalesInvoice024025$$" variable
 		And I save the current field value as "$$Rov1SalesInvoice024025$$"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
 			| '#' | 'Key'                    | 'Basis' | 'Row ID'                 | 'Next step' | 'Q'      | 'Basis key' | 'Current step' | 'Row ref'                |
-			| '1' | 'Rov1SalesInvoice024025' | ''      | 'Rov1SalesInvoice024025' | ''          | '20,000' | ''          | ''             | 'Rov1SalesInvoice024025' |
+			| '1' | '$$Rov1SalesInvoice024025$$' | ''      | '$$Rov1SalesInvoice024025$$' | ''          | '20,000' | ''          | ''             | '$$Rov1SalesInvoice024025$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 	* Check next step
 		And I move to "Item list" tab
 		And I activate "Use shipment confirmation" field in "ItemList" table
 		And I change "Use shipment confirmation" checkbox in "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I move to the tab named "GroupRowID"
+		And I move to the tab named "GroupRowIDInfo"
 		And I click "Post" button
 		And "RowIDInfo" table contains lines
 			| '#' | 'Key'                    | 'Basis' | 'Row ID'                 | 'Next step' | 'Q'      | 'Basis key' | 'Current step' | 'Row ref'                |
-			| '1' | 'Rov1SalesInvoice024025' | ''      | 'Rov1SalesInvoice024025' | 'SC'        | '20,000' | ''          | ''             | 'Rov1SalesInvoice024025' |
+			| '1' | '$$Rov1SalesInvoice024025$$' | ''      | '$$Rov1SalesInvoice024025$$' | 'SC'        | '20,000' | ''          | ''             | '$$Rov1SalesInvoice024025$$' |
 		And I close all client application windows
 		
 
@@ -544,21 +548,6 @@ Scenario: _024025 create document Sales Invoice without Sales order and check Ro
 # 			| 'Ferron BP'   | '2 050,00'  |
 # 	And I close all client application windows
 
-
-
-Scenario: _024042 check totals in the document Sales invoice
-	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-	* Select Sales invoice
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberSalesInvoice024008$$'      |
-		And I select current line in "List" table
-	* Check totals
-		Then the form attribute named "ItemListTotalOffersAmount" became equal to "175,00"
-		Then the form attribute named "ItemListTotalNetAmount" became equal to "37 368,65"
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "6 726,35"
-		Then the form attribute named "ItemListTotalTotalAmount" became equal to "44 095,00"
-		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 
 
 

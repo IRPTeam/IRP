@@ -57,205 +57,42 @@ Scenario: _028900 preparation (Goods receipt)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-	* Check or create PurchaseOrder017003
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberPurchaseOrder017003$$" |
-			When create PurchaseOrder017003
-	* Check or create PurchaseInvoice018006
+	When Create document PurchaseOrder and Purchase invoice objects (creation based on, PI >PO)
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseOrder.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+	
+
+Scenario: _028901 create document Goods Receipt based on Purchase invoice (with PO, PI>PO)
+	* Select PI
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberPurchaseInvoice018006$$" |
-			When create PurchaseInvoice018006 based on PurchaseOrder017003
-	
-
-Scenario: _028901 create document Goods Receipt based on Purchase invoice
-	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-	And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseInvoice018006$$'      |
-	And I select current line in "List" table
-	And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-	* Check that information is filled in when creating based on
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "Store" became equal to "Store 02"
-	* Check the filling in the tabular part of the  items
+		And I go to line in "List" table
+			| 'Number'  |
+			| '102'      |
+		And I click the button named "FormDocumentGoodsReceiptGenerate"	
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                               | 'Use'                                            | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
+			| 'Purchase order 102 dated 03.03.2021 08:59:33'   | 'Purchase order 102 dated 03.03.2021 08:59:33'   | ''         | ''               | ''       | ''         |
+			| 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | ''         | ''               | ''       | ''         |
+			| 'Dress, XS/Blue'                                 | 'Yes'                                            | '1,000'    | 'pcs'            | '100,00' | 'TRY'      |
+			| 'Shirt, 36/Red'                                  | 'Yes'                                            | '12,000'   | 'pcs'            | '200,00' | 'TRY'      |
+			| 'Boots, 37/18SD'                                 | 'Yes'                                            | '2,000'    | 'Boots (12 pcs)' | '300,00' | 'TRY'      |
+			| 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | ''         | ''               | ''       | ''         |
+			| 'Shirt, 38/Black'                                | 'Yes'                                            | '2,000'    | 'pcs'            | '150,00' | 'TRY'      |
+		Then the number of "BasisesTree" table lines is "равно" "7"
+		And I click "Ok" button
+	* Create GR and check creation
 		And "ItemList" table contains lines
-		| '#' | 'Item'     | 'Receipt basis'     | 'Item key' | 'Unit' | 'Quantity'       |
-		| '1' | 'Dress'    | '$$PurchaseInvoice018006$$' | 'L/Green'  | 'pcs' | '500,000' |
-		And "ItemList" table contains lines
-		| 'Item'  | 'Quantity' | 'Item key' | 'Store'    | 'Unit' |
-		| 'Dress' | '500,000'  | 'L/Green'  | 'Store 02' | 'pcs' |
-	And I click the button named "FormPost"
-	And I delete "$$NumberGoodsReceipt028901$$" variable
-	And I delete "$$GoodsReceipt028901$$" variable
-	And I save the value of "Number" field as "$$NumberGoodsReceipt028901$$"
-	And I save the window as "$$GoodsReceipt028901$$"
-	And I click the button named "FormPostAndClose"
-	And I close current window
-	
-
-Scenario: _028902 check  Goods Receipt posting by register GoodsInTransitIncoming (-)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'          | 'Receipt basis'         | 'Line number' | 'Store'    | 'Item key'  |
-		| '500,000'  | '$$GoodsReceipt028901$$'  | '$$PurchaseInvoice018006$$'   | '1'           | 'Store 02' | 'L/Green'   |
-
-Scenario: _028903 check  Goods Receipt posting by register StockBalance (+)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'             | 'Line number'  | 'Store'    | 'Item key' |
-		| '500,000'  | '$$GoodsReceipt028901$$'   | '1'            | 'Store 02' | 'L/Green'  |
-
-Scenario: _028904 check  Goods Receipt posting by register StockReservation (+)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                          | 'Line number' | 'Store'    | 'Item key' |
-		| '500,000'  | '$$GoodsReceipt028901$$'                 | '1'           | 'Store 02'    | 'L/Green'  |
-
-
-
-
-
-Scenario: _028905 check the output of the document movement report for Goods Receipt
-	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
-	* Check the report output for the selected document from the list
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberGoodsReceipt028901$$'      |
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And I select "Goods in transit incoming" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$GoodsReceipt028901$$'                | ''            | ''       | ''          | ''           | ''                          | ''         | ''        | '' | '' |
-		| 'Document registrations records'        | ''            | ''       | ''          | ''           | ''                          | ''         | ''        | '' | '' |
-		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''           | ''                          | ''         | ''        | '' | '' |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                          | ''         | ''        | '' | '' |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Receipt basis'             | 'Item key' | 'Row key' | '' | '' |
-		| ''                                      | 'Expense'     | '*'      | '500'       | 'Store 02'   | '$$PurchaseInvoice018006$$' | 'L/Green'  | '*'       | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '500'       | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' |
-		And I select "Goods receipt schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                          | ''         | ''         | ''        | ''              |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''         | ''         | ''        | 'Attributes'    |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                     | 'Store'    | 'Item key' | 'Row key' | 'Delivery date' |
-		| ''                                   | 'Expense'     | '*'      | '500'       | 'Main Company' | '$$PurchaseInvoice018006$$' | 'Store 02' | 'L/Green'  | '*'       | '*'             |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'             | ''            | ''       | ''          | ''             | ''                    | ''         | ''         | ''        | ''              |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                    | ''         | ''         | ''        | ''              |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Item key'            | ''         | ''         | ''        | ''              |
-		| ''                                      | 'Receipt'     | '*'      | '500'       | 'Store 02'     | 'L/Green'             | ''         | ''         | ''        | ''              |
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
-	* Check the report output from the selected document
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberGoodsReceipt028901$$'      |
-		And I select current line in "List" table
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And I select "Goods in transit incoming" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$GoodsReceipt028901$$'                | ''            | ''       | ''          | ''           | ''                          | ''         | ''        | '' | '' |
-		| 'Document registrations records'        | ''            | ''       | ''          | ''           | ''                          | ''         | ''        | '' | '' |
-		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''           | ''                          | ''         | ''        | '' | '' |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                          | ''         | ''        | '' | '' |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Receipt basis'             | 'Item key' | 'Row key' | '' | '' |
-		| ''                                      | 'Expense'     | '*'      | '500'       | 'Store 02'   | '$$PurchaseInvoice018006$$' | 'L/Green'  | '*'       | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '500'       | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' |
-		And I select "Goods receipt schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                          | ''         | ''         | ''        | ''              |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''         | ''         | ''        | 'Attributes'    |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                     | 'Store'    | 'Item key' | 'Row key' | 'Delivery date' |
-		| ''                                   | 'Expense'     | '*'      | '500'       | 'Main Company' | '$$PurchaseInvoice018006$$' | 'Store 02' | 'L/Green'  | '*'       | '*'             |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'             | ''            | ''       | ''          | ''             | ''                    | ''         | ''         | ''        | ''              |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                    | ''         | ''         | ''        | ''              |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Item key'            | ''         | ''         | ''        | ''              |
-		| ''                                      | 'Receipt'     | '*'      | '500'       | 'Store 02'     | 'L/Green'             | ''         | ''         | ''        | ''              |
-	And I close all client application windows
-
-
-Scenario: _02890501 clear movements Goods receipt and check that there is no movements on the registers 
-	* Open list form Goods receipt
-		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
-	* Check the report generation
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberGoodsReceipt028901$$'      |
-	* Clear movements document and check that there is no movement on the registers
-		And in the table "List" I click the button named "ListContextMenuUndoPosting"
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "Goods in transit incoming"' |
-			| 'Register  "Stock reservation"'         |
-			| 'Register  "Goods receipt schedule"'    |
-			| 'Register  "Stock balance"'             |
+			| '#' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Store'    | 'Internal supply request' | 'Quantity' | 'Sales invoice' | 'Unit'           | 'Receipt basis'                                  | 'Purchase invoice'                               | 'Currency' | 'Sales return order' | 'Sales order' | 'Purchase order'                               | 'Inventory transfer order' | 'Sales return' |
+			| '1' | 'Dress' | ''                   | 'XS/Blue'  | 'Store 02' | ''                        | '1,000'    | ''              | 'pcs'            | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'TRY'      | ''                   | ''            | 'Purchase order 102 dated 03.03.2021 08:59:33' | ''                         | ''             |
+			| '2' | 'Shirt' | ''                   | '36/Red'   | 'Store 02' | ''                        | '12,000'   | ''              | 'pcs'            | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'TRY'      | ''                   | ''            | 'Purchase order 102 dated 03.03.2021 08:59:33' | ''                         | ''             |
+			| '3' | 'Boots' | ''                   | '37/18SD'  | 'Store 02' | ''                        | '2,000'    | ''              | 'Boots (12 pcs)' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'TRY'      | ''                   | ''            | 'Purchase order 102 dated 03.03.2021 08:59:33' | ''                         | ''             |
+			| '4' | 'Shirt' | ''                   | '38/Black' | 'Store 02' | ''                        | '2,000'    | ''              | 'pcs'            | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'TRY'      | ''                   | ''            | ''                                             | ''                         | ''             |
+		Then the number of "ItemList" table lines is "равно" "4"
 		And I close all client application windows
-	* Posting the document and check movements
-		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberGoodsReceipt028901$$'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		And I select "Goods in transit incoming" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$GoodsReceipt028901$$'                | ''            | ''       | ''          | ''           | ''                          | ''         | ''        | '' | '' |
-		| 'Document registrations records'        | ''            | ''       | ''          | ''           | ''                          | ''         | ''        | '' | '' |
-		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''           | ''                          | ''         | ''        | '' | '' |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                          | ''         | ''        | '' | '' |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Receipt basis'             | 'Item key' | 'Row key' | '' | '' |
-		| ''                                      | 'Expense'     | '*'      | '500'       | 'Store 02'   | '$$PurchaseInvoice018006$$' | 'L/Green'  | '*'       | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '500'       | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' |
-		And I select "Goods receipt schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                          | ''         | ''         | ''        | ''              |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''         | ''         | ''        | 'Attributes'    |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                     | 'Store'    | 'Item key' | 'Row key' | 'Delivery date' |
-		| ''                                   | 'Expense'     | '*'      | '500'       | 'Main Company' | '$$PurchaseInvoice018006$$' | 'Store 02' | 'L/Green'  | '*'       | '*'             |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'             | ''            | ''       | ''          | ''             | ''                    | ''         | ''         | ''        | ''              |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                    | ''         | ''         | ''        | ''              |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'        | 'Item key'            | ''         | ''         | ''        | ''              |
-		| ''                                      | 'Receipt'     | '*'      | '500'       | 'Store 02'     | 'L/Green'             | ''         | ''         | ''        | ''              |
-		And I close all client application windows
+
+
+
 
 
 Scenario: _300507 check connection to GoodsReceipt report "Related documents"

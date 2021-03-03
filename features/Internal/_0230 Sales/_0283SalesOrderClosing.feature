@@ -61,7 +61,7 @@ Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '32' |
+			| '32' |			
 		And I click the button named "FormDocumentSalesOrderClosingGenerateSalesOrderClosing"
 	* Check filling in
 		Then the form attribute named "Partner" became equal to "Ferron BP"

@@ -193,7 +193,8 @@ Scenario: _029104 create a Purchase invoice for service (based on Purchase order
 		| 'Number' |
 		| '$$NumberPurchaseOrder029103$$'      |
 	And I select current line in "List" table
-	And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+	And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+	And I click "Ok" button
 	* Check the filling of the tabular part
 		And "ItemList" table contains lines
 		| 'Price'    | 'Item'    | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Expense type'             | 'Business unit' | 'Purchase order'      |
@@ -1007,7 +1008,8 @@ Scenario: _029115 create a Sales invoice for service and product (Store does not
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberSalesOrder029107$$'       |
-		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice029115$$" variable
 		And I delete "$$SalesInvoice029115$$" variable
@@ -1137,7 +1139,8 @@ Scenario: _029117 create a Sales invoice for service and product (Store use Ship
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberSalesOrder029108$$'       |
-		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice029117$$" variable
 		And I delete "$$SalesInvoice029117$$" variable
@@ -1270,8 +1273,7 @@ Scenario: _029119 create a Sales invoice for service and product (Store does not
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberSalesOrder029109$$'       |	
-		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
-		And I click the button named "FormSelectAll"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And I click "Ok" button
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice029119$$" variable
@@ -1390,7 +1392,8 @@ Scenario: _029121 create a Sales invoice for service and product (Store use Ship
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberSalesOrder029110$$'       |	
-		And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "Ok" button		
 		And I click the button named "FormPost"
 		And I delete "$$NumberShipmentConfirmation029121$$" variable
 		And I delete "$$ShipmentConfirmation029121$$" variable
@@ -1439,8 +1442,7 @@ Scenario: _029121 create a Sales invoice for service and product (Store use Ship
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberSalesOrder029110$$'       |	
-		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
-		And I click the button named "FormSelectAll"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And I click "Ok" button
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice029121$$" variable

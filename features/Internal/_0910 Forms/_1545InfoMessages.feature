@@ -1298,7 +1298,8 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 				And I go to line in "List" table
 				| 'Number' | 'Partner'   |
 				| '$$NumberSalesOrder0154513$$'  | 'Kalipso'       |
-				And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+				And I click the button named "FormDocumentShipmentConfirmationGenerate"
+				And I click "Ok" button	
 				And "ItemList" table contains lines
 				| 'Item'     | 'Quantity' | 'Item key'  | 'Store'    |
 				| 'Trousers' | '4,000'    | '38/Yellow' | 'Store 02' |

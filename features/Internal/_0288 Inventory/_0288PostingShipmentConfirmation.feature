@@ -75,7 +75,7 @@ Scenario: _028800 preparation (Shipment confirmation)
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		If "List" table does not contain lines Then
 				| "Number" |
-				| "$$NumberSalesInvoice024025$$" |
+				| "$$NumberSalesInvoice024025$$" |					
 			When create SalesInvoice024025
 	* Check or create PurchaseOrder017003
 		If "List" table does not contain lines Then
@@ -144,7 +144,8 @@ Scenario: _028801 create document Shipment confirmation based on SI (with SO)
 		| 'Number'                       | 'Partner'   |
 		| '$$NumberSalesInvoice024008$$' | 'Ferron BP' |
 	And I select current line in "List" table
-	And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+	And I click the button named "FormDocumentShipmentConfirmationGenerate"
+	And I click "Ok" button	
 	* Check that information is filled in when creating based on
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
@@ -171,7 +172,8 @@ Scenario: _028804 create document Shipment confirmation based on SI (without SO)
 		| 'Number' | 'Partner'    |
 		| '$$NumberSalesInvoice024025$$'      | 'Kalipso' |
 	And I select current line in "List" table
-	And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+	And I click the button named "FormDocumentShipmentConfirmationGenerate"
+	And I click "Ok" button	
 	* Check that information is filled in when creating based on
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
@@ -190,6 +192,19 @@ Scenario: _028804 create document Shipment confirmation based on SI (without SO)
 Scenario: _028805 create document Shipment confirmation based on 2 SO
 	* Select SO
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		* List Options (ordering by number)
+			And I click "Configure list..." button
+			And I move to "Order" tab
+			And I go to line in "SettingsComposerUserSettingsItem1AvailableFieldsTable" table
+				| 'Available fields' |
+				| 'Number'           |
+			And I select current line in "SettingsComposerUserSettingsItem1AvailableFieldsTable" table
+			And I go to line in "SettingsComposerUserSettingsItem1Order" table
+				| 'Field' | 'Sort direction' | 'Use' |
+				| 'Date'  | 'Ascending'      | 'Yes' |
+			And I activate field named "SettingsComposerUserSettingsItem1OrderField" in "SettingsComposerUserSettingsItem1Order" table
+			And I delete a line in "SettingsComposerUserSettingsItem1Order" table
+			And I click "Finish editing" button
 		And I go to line in "List" table
 			| 'Number'  |
 			| '15'      |
@@ -202,7 +217,7 @@ Scenario: _028805 create document Shipment confirmation based on 2 SO
 			| 'Shirt, 36/Red'                            | 'Yes'                                      | '10,000'   | 'pcs'  | '350,00' | 'TRY'      |
 			| 'Dress, XS/Blue'                           | 'Yes'                                      | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
 			| 'Dress, XS/Blue'                           | 'Yes'                                      | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Sales order 16 dated 26.02.2021 13:14:24' | 'Sales order 16 dated 26.02.2021 13:14:24' | ''         | ''     | ''       | ''         |
+			| 'Sales order 16*'                          | 'Sales order 16*'                          | ''         | ''     | ''       | ''         |
 			| 'Dress, XS/Blue'                           | 'Yes'                                      | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
 			| 'Shirt, 36/Red'                            | 'Yes'                                      | '10,000'   | 'pcs'  | '350,00' | 'TRY'      |
 			| 'Dress, XS/Blue'                           | 'Yes'                                      | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
@@ -213,13 +228,13 @@ Scenario: _028805 create document Shipment confirmation based on 2 SO
 		And "ItemList" table contains lines
 			| '#' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Store'    | 'Shipment basis'                           | 'Sales order'                              | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
 			| '1' | 'Dress' | ''                   | 'XS/Blue'  | '1,000'    | ''              | 'pcs'  | 'Store 02' | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Sales order 15 dated 01.02.2021 19:50:45' | ''                         | ''                      | ''                |
-			| '2' | 'Dress' | ''                   | 'XS/Blue'  | '1,000'    | ''              | 'pcs'  | 'Store 02' | 'Sales order 16 dated 26.02.2021 13:14:24' | 'Sales order 16 dated 26.02.2021 13:14:24' | ''                         | ''                      | ''                |
+			| '2' | 'Dress' | ''                   | 'XS/Blue'  | '1,000'    | ''              | 'pcs'  | 'Store 02' | 'Sales order 16*'                          | 'Sales order 16*'                          | ''                         | ''                      | ''                |
 			| '3' | 'Shirt' | ''                   | '36/Red'   | '10,000'   | ''              | 'pcs'  | 'Store 02' | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Sales order 15 dated 01.02.2021 19:50:45' | ''                         | ''                      | ''                |
-			| '4' | 'Shirt' | ''                   | '36/Red'   | '10,000'   | ''              | 'pcs'  | 'Store 02' | 'Sales order 16 dated 26.02.2021 13:14:24' | 'Sales order 16 dated 26.02.2021 13:14:24' | ''                         | ''                      | ''                |
+			| '4' | 'Shirt' | ''                   | '36/Red'   | '10,000'   | ''              | 'pcs'  | 'Store 02' | 'Sales order 16*'                          | 'Sales order 16*'                          | ''                         | ''                      | ''                |
 			| '5' | 'Dress' | ''                   | 'XS/Blue'  | '2,000'    | ''              | 'pcs'  | 'Store 02' | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Sales order 15 dated 01.02.2021 19:50:45' | ''                         | ''                      | ''                |
-			| '6' | 'Dress' | ''                   | 'XS/Blue'  | '2,000'    | ''              | 'pcs'  | 'Store 02' | 'Sales order 16 dated 26.02.2021 13:14:24' | 'Sales order 16 dated 26.02.2021 13:14:24' | ''                         | ''                      | ''                |
+			| '6' | 'Dress' | ''                   | 'XS/Blue'  | '2,000'    | ''              | 'pcs'  | 'Store 02' | 'Sales order 16*'                          | 'Sales order 16*'                          | ''                         | ''                      | ''                |
 			| '7' | 'Dress' | ''                   | 'XS/Blue'  | '10,000'   | ''              | 'pcs'  | 'Store 02' | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Sales order 15 dated 01.02.2021 19:50:45' | ''                         | ''                      | ''                |
-			| '8' | 'Dress' | ''                   | 'XS/Blue'  | '10,000'   | ''              | 'pcs'  | 'Store 02' | 'Sales order 16 dated 26.02.2021 13:14:24' | 'Sales order 16 dated 26.02.2021 13:14:24' | ''                         | ''                      | ''                |
+			| '8' | 'Dress' | ''                   | 'XS/Blue'  | '10,000'   | ''              | 'pcs'  | 'Store 02' | 'Sales order 16*'                          | 'Sales order 16*'                          | ''                         | ''                      | ''                |
 		Then the number of "ItemList" table lines is "равно" "8"
 		And I close all client application windows
 
@@ -234,21 +249,21 @@ Scenario: _028806 create document Shipment confirmation based on SI (with SO, SI
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                           | 'Use'                                        | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
 			| 'Sales order 32 dated 26.02.2021 13:30:49'   | 'Sales order 32 dated 26.02.2021 13:30:49'   | ''         | ''               | ''         | ''         |
-			| 'Sales invoice 32 dated 26.02.2021 13:31:42' | 'Sales invoice 32 dated 26.02.2021 13:31:42' | ''         | ''               | ''         | ''         |
+			| 'Sales invoice 32 dated 02.03.2021 17:15:14' | 'Sales invoice 32 dated 02.03.2021 17:15:14' | ''         | ''               | ''         | ''         |
 			| 'Dress, XS/Blue'                             | 'Yes'                                        | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
 			| 'Shirt, 36/Red'                              | 'Yes'                                        | '12,000'   | 'pcs'            | '350,00'   | 'TRY'      |
 			| 'Boots, 37/18SD'                             | 'Yes'                                        | '2,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
-			| 'Sales invoice 32 dated 26.02.2021 13:31:42' | 'Sales invoice 32 dated 26.02.2021 13:31:42' | ''         | ''               | ''         | ''         |
+			| 'Sales invoice 32 dated 02.03.2021 17:15:14' | 'Sales invoice 32 dated 02.03.2021 17:15:14' | ''         | ''               | ''         | ''         |
 			| 'Shirt, 38/Black'                            | 'Yes'                                        | '2,000'    | 'pcs'            | '350,00'   | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "7"
 		And I click "Ok" button
 	* Create SC and check creation
 		And "ItemList" table contains lines
 			| '#' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice'                              | 'Unit'           | 'Store'    | 'Shipment basis'                             | 'Sales order'                              | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
-			| '1' | 'Dress' | ''                   | 'XS/Blue'  | '1,000'    | 'Sales invoice 32 dated 26.02.2021 13:31:42' | 'pcs'            | 'Store 02' | 'Sales invoice 32 dated 26.02.2021 13:31:42' | 'Sales order 32 dated 26.02.2021 13:30:49' | ''                         | ''                      | ''                |
-			| '2' | 'Shirt' | ''                   | '36/Red'   | '12,000'   | 'Sales invoice 32 dated 26.02.2021 13:31:42' | 'pcs'            | 'Store 02' | 'Sales invoice 32 dated 26.02.2021 13:31:42' | 'Sales order 32 dated 26.02.2021 13:30:49' | ''                         | ''                      | ''                |
-			| '3' | 'Boots' | ''                   | '37/18SD'  | '2,000'    | 'Sales invoice 32 dated 26.02.2021 13:31:42' | 'Boots (12 pcs)' | 'Store 02' | 'Sales invoice 32 dated 26.02.2021 13:31:42' | 'Sales order 32 dated 26.02.2021 13:30:49' | ''                         | ''                      | ''                |
-			| '4' | 'Shirt' | ''                   | '38/Black' | '2,000'    | 'Sales invoice 32 dated 26.02.2021 13:31:42' | 'pcs'            | 'Store 02' | 'Sales invoice 32 dated 26.02.2021 13:31:42' | ''                                         | ''                         | ''                      | ''                |
+			| '1' | 'Dress' | ''                   | 'XS/Blue'  | '1,000'    | 'Sales invoice 32 dated 02.03.2021 17:15:14' | 'pcs'            | 'Store 02' | 'Sales invoice 32 dated 02.03.2021 17:15:14' | 'Sales order 32 dated 26.02.2021 13:30:49' | ''                         | ''                      | ''                |
+			| '2' | 'Shirt' | ''                   | '36/Red'   | '12,000'   | 'Sales invoice 32 dated 02.03.2021 17:15:14' | 'pcs'            | 'Store 02' | 'Sales invoice 32 dated 02.03.2021 17:15:14' | 'Sales order 32 dated 26.02.2021 13:30:49' | ''                         | ''                      | ''                |
+			| '3' | 'Boots' | ''                   | '37/18SD'  | '2,000'    | 'Sales invoice 32 dated 02.03.2021 17:15:14' | 'Boots (12 pcs)' | 'Store 02' | 'Sales invoice 32 dated 02.03.2021 17:15:14' | 'Sales order 32 dated 26.02.2021 13:30:49' | ''                         | ''                      | ''                |
+			| '4' | 'Shirt' | ''                   | '38/Black' | '2,000'    | 'Sales invoice 32 dated 02.03.2021 17:15:14' | 'pcs'            | 'Store 02' | 'Sales invoice 32 dated 02.03.2021 17:15:14' | ''                                         | ''                         | ''                      | ''                |
 		Then the number of "ItemList" table lines is "равно" "4"
 		And I close all client application windows
 
@@ -259,7 +274,7 @@ Scenario: _028807 create document Shipment confirmation based on Purchase return
 		| 'Number' |
 		| '$$NumberPurchaseReturn022314$$'      |
 	And I select current line in "List" table
-	And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+	And I click "Shipment confirmation" button
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "Store" became equal to "Store 02"
 	And "ItemList" table contains lines
@@ -292,7 +307,8 @@ Scenario: _028810 create document Shipment confirmation  based on Inventory tran
 	And I go to line in "List" table
 		| 'Number'                           |
 		| '$$NumberInventoryTransfer021030$$' |
-	And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+	And I click the button named "FormDocumentShipmentConfirmationGenerate"
+	And I click "Ok" button	
 	And Delay 1
 	Then the form attribute named "Company" became equal to "Main Company"
 	And I click the button named "FormPost"

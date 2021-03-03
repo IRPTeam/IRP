@@ -146,21 +146,6 @@ Procedure StoreReceiverOnChangeAtServer()
 	DocInventoryTransferOrderServer.StoreReceiverOnChange(Object);
 EndProcedure
 
-&AtClient
-Procedure UseShipmentConfirmationOnChange(Item)
-	CheckAndUpdateUseGRAtServer();
-EndProcedure
-
-&AtServer
-Procedure CheckAndUpdateUseGRAtServer()
-	DocInventoryTransferOrderServer.CheckAndUpdateUseGR(Object);
-EndProcedure
-
-&AtClient
-Procedure UseGoodsReceiptOnChange(Item)
-	CheckAndUpdateUseGRAtServer();
-EndProcedure
-
 #EndRegion
 
 &AtClient

@@ -3,11 +3,6 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
 	EndIf;	
-	
-	If UseShipmentConfirmation And Not UseGoodsReceipt Then
-		CommonFunctionsClientServer.ShowUsersMessage(R().Error_094, "UseGoodsReceipt");
-		Cancel = True;
-	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)

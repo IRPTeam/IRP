@@ -331,9 +331,7 @@ Function ItemList()
 		|	InventoryTransferOrderItemList.PurchaseOrder AS PurchaseOrder,
 		|	NOT InventoryTransferOrderItemList.PurchaseOrder.Ref IS NULL AS PurchaseOrderExists,
 		|	InventoryTransferOrderItemList.InternalSupplyRequest AS InternalSupplyRequest,
-		|	NOT InventoryTransferOrderItemList.InternalSupplyRequest.Ref IS NULL AS InternalSupplyRequestExists,
-		|	InventoryTransferOrderItemList.Ref.UseGoodsReceipt AS UseGoodsReceipt,
-		|	InventoryTransferOrderItemList.Ref.UseShipmentConfirmation AS UseShipmentConfirmation
+		|	NOT InventoryTransferOrderItemList.InternalSupplyRequest.Ref IS NULL AS InternalSupplyRequestExists
 		|INTO ItemList
 		|FROM
 		|	Document.InventoryTransferOrder.ItemList AS InventoryTransferOrderItemList
@@ -354,7 +352,6 @@ Function R4011B_FreeStocks()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemLIst.PurchaseOrderExists
-		|	AND (ItemLIst.UseGoodsReceipt OR ItemLIst.UseShipmentConfirmation)
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.StoreSender,
@@ -376,7 +373,6 @@ Function R4012B_StockReservation()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.PurchaseOrderExists
-		|	AND (ItemLIst.UseGoodsReceipt OR ItemLIst.UseShipmentConfirmation)
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.StoreSender,

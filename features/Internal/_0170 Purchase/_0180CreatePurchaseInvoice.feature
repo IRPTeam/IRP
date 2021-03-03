@@ -28,6 +28,7 @@ Scenario: _018000 preparation
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog BusinessUnits objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
@@ -56,7 +57,10 @@ Scenario: _018000 preparation
 		When Create document PurchaseOrder objects (creation based on)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(217).GetObject().Write(DocumentWriteMode.Posting);" |
-	
+		When Create document GoodsReceipt objects (creation based on, without PO and PI)
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+
 
 
 

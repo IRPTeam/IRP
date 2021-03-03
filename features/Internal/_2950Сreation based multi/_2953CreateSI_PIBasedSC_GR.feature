@@ -105,7 +105,8 @@ Scenario: _090501 creation of Sales invoice based on Shipment confirmation (one 
 		And I click "Shipment confirmation" button
 		And I click the button named "FormPost"
 	* Create Sales invoice based on Shipment confirmation
-		And I click "Sales invoice" button
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
 	* Check filling in Sales invoice
 		And "ItemList" table contains lines
 		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount'  | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Sales order'                   |
@@ -163,7 +164,8 @@ Scenario: _090502 create a purchase invoice based on Goods receipt (one to one)
 		And I click "Goods receipt" button
 		And I click the button named "FormPost"
 	* Create Purchase invoice based on Goods receipt
-		And I click "Purchase invoice" button
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button
 	* Check filling in Purchase invoice
 		And "ItemList" table contains lines
 		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      |

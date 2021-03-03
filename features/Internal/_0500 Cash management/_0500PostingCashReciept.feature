@@ -49,6 +49,8 @@ Scenario: _050000 preparation (Cash receipt)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
+		When Create catalog ExpenseAndRevenueTypes objects
+		When Create catalog BusinessUnits objects
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"

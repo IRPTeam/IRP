@@ -57,103 +57,6 @@ Scenario: _154500 preparation (information messages)
 
 
 
-Scenario: _154501 message when trying to create a Sales invoice by Sales order with Shipment confirmation before Sales invoice (Shipment confirmation has not been created yet)
-	* Create Sales order
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I click "Create" button
-		* Filling in customer info
-			And I click Select button of "Partner" field
-			And I go to line in "List" table
-					| 'Description' |
-					| 'Ferron BP'  |
-			And I select current line in "List" table
-			And I click Select button of "Partner term" field
-			And I go to line in "List" table
-					| 'Description'       |
-					| 'Basic Partner terms, without VAT' |
-			And I select current line in "List" table
-			And I click Select button of "Legal name" field
-			And I go to line in "List" table
-					| 'Description' |
-					| 'Company Ferron BP'  |
-			And I select current line in "List" table
-		When adding the items to the sales order (Dress and Trousers)
-	* Click Shipment confirmation before Sales invoice
-		And I move to "Other" tab
-		And I expand "More" group
-		And I set checkbox "Shipment confirmations before sales invoice"
-	* Check the information message display when trying to create Sales invoice
-		And I move to "Item list" tab
-		And I click the button named "FormPost"
-		And I click "Sales invoice" button
-		Then warning message containing text 'First, create a "Shipment confirmation" document or clear the "Shipment confirmation before Sales invoice" check box on the "Other" tab.' appears
-		And I close all client application windows
-
-Scenario: _154503 message when trying to create a Purchase invoice by Purchase order with Goods receipt before Purchase invoice (Goods receipt has not been created yet)
-	* Create Purchase order
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I click the button named "FormCreate"
-		* Filling in the necessary details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-			| Description  |
-			| Main Company |
-			And I select current line in "List" table
-			And I select "Approved" exact value from "Status" drop-down list
-		* Filling in vendor's info
-			And I click Select button of "Partner" field
-			And I go to line in "List" table
-				| Description |
-				| Ferron BP   |
-			And I select current line in "List" table
-			And I click Select button of "Legal name" field
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
-			And I select current line in "List" table
-			And I click Select button of "Partner term" field
-			And I go to line in "List" table
-				| Description        |
-				| Vendor Ferron, USD |
-			And I select current line in "List" table
-			And I click Select button of "Store" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'  |
-			And I select current line in "List" table
-		* Filling in items table
-			And I click the button named "Add"
-			And I click choice button of "Item" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
-			And I select current line in "List" table
-			And I activate "Item key" field in "ItemList" table
-			And I click choice button of "Item key" attribute in "ItemList" table
-			Then "Item keys" window is opened
-			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
-			And I select current line in "List" table
-			And I finish line editing in "ItemList" table
-			And I go to line in "ItemList" table
-				| '#' | 'Item'  | 'Item key' | 'Unit' |
-				| '1' | 'Dress' | 'L/Green'  | 'pcs' |
-			And I select current line in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
-			And I input "40,00" text in "Price" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-		And I click the button named "FormPost"
-	* Click Goods receipt before Purchase invoice
-		And I move to "Other" tab
-		And I expand "More" group
-		And I set checkbox "Goods receipt before purchase invoice"
-	* Check the information message display when trying to create Sales invoice
-		And I click the button named "FormPost"
-		And I click "Purchase invoice" button
-		Then warning message containing text 'First, create a "Goods receipt" document or clear the "Goods receipt before Purchase invoice" check box on the "Other" tab.' appears
-		And I close all client application windows
 
 Scenario: _154505 message when trying to create Sales returm order based on Sales invoice when all products have already been returned
 	* Create Sales invoice
@@ -312,13 +215,14 @@ Scenario: _154509 message when trying to re-create Sales invoice based on Shipme
 		And I save the value of "Number" field as "$$NumberSalesOrder154503$$"
 		And I save the window as "$$SalesOrder154503$$"
 	* Create Shipment confirmation based on Sales order
-		And I click "Shipment confirmation" button
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "Ok" button
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation154503$$"
 		And I save the window as "$$ShipmentConfirmation154503$$"
 	* Create Sales invoice based on Shipment confirmation
-		And I click "Sales invoice" button
-		Then "Sales invoice (create)" window is opened
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice154503$$" variable
 		And I delete "$$SalesInvoice154503$$" variable
@@ -327,8 +231,8 @@ Scenario: _154509 message when trying to re-create Sales invoice based on Shipme
 		And I click the button named "FormPostAndClose"
 		And I wait "Sales invoice (create)" window closing in 20 seconds
 	* Check message display when trying to re-create Sales invoice
-		And I click "Sales invoice" button
-		Then warning message containing text 'There are no lines for which you need to create a "Sales invoice" document in the "Shipment confirmation" document.' appears
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		Then the number of "BasisesTree" table lines is "равно" 0
 		And I close all client application windows
 	* Create Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -435,15 +339,16 @@ Scenario: _154510 message when trying to re-create Purchase invoice based on Goo
 		And I save the value of "Number" field as "$$NumberPurchaseOrder154505$$"
 		And I save the window as "$$PurchaseOrder154505$$"
 	* Create Goods receipt based on urchase order
-		And I click "Goods receipt" button
+		And I click the button named "FormDocumentGoodsReceiptGenerate"
+		And I click "Ok" button			
 		And I click the button named "FormPost"
 		And I delete "$$NumberGoodsReceipt154505$$" variable
 		And I delete "$$GoodsReceipt154505$$" variable
 		And I save the value of "Number" field as "$$NumberGoodsReceipt154505$$"
 		And I save the window as "$$GoodsReceipt154505$$"
 	* Create Purchase invoice based on Goods receipt
-		And I click "Purchase invoice" button
-		And I move to "Other" tab
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button		
 		And I delete "$$NumberPurchaseInvoice154505$$" variable
 		And I delete "$$PurchaseInvoice154505$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice154505$$"
@@ -451,8 +356,9 @@ Scenario: _154510 message when trying to re-create Purchase invoice based on Goo
 		And I click the button named "FormPostAndClose"
 		And I wait "Purchase invoice (create)" window closing in 20 seconds
 	* Check message display when you try to re-create Purchase invoice
-		And I click "Purchase invoice" button
-		Then warning message containing text 'There are no lines for which you need to create a "Purchase invoice" document in the "Goods receipt" document.' appears
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		Then the number of "BasisesTree" table lines is "равно" 0
+
 		And I close all client application windows
 
 Scenario: _154512 message when trying to re-create Purchase invoice based on Purchase order
@@ -511,11 +417,12 @@ Scenario: _154512 message when trying to re-create Purchase invoice based on Pur
 			And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 	* Create Purchase invoice based on Purchase order
-		And I click "Purchase invoice" button
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button		
 		And I click the button named "FormPostAndClose"
 	* Check message display when you try to re-create Purchase invoice
-		And I click "Purchase invoice" button
-		Then warning message containing text 'There are no lines for which you need to create a "Purchase invoice" document in the "Purchase order" document.' appears
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		Then the number of "BasisesTree" table lines is "равно" 0
 		And I close all client application windows
 
 Scenario: _154514 message when trying to re-create Goods receipt based on Purchase order
@@ -582,7 +489,8 @@ Scenario: _154514 message when trying to re-create Goods receipt based on Purcha
 		And I save the value of "Number" field as "$$NumberPurchaseOrder154506$$"
 		And I save the window as "$$PurchaseOrder154506$$"
 	* Create Goods receipt based on Purchase order
-		And I click "Goods receipt" button
+		And I click the button named "FormDocumentGoodsReceiptGenerate"	
+		And I click "Ok" button
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseOrder1545061$$" variable
 		And I delete "$$PurchaseOrder1545061$$" variable
@@ -590,8 +498,8 @@ Scenario: _154514 message when trying to re-create Goods receipt based on Purcha
 		And I save the window as "$$GoodsReceipt1545061$$"
 		And I click the button named "FormPostAndClose"
 	* Check message display when you try to re-create Goods receipt
-		And I click "Goods receipt" button
-		Then warning message containing text 'All items in the "Purchase order" document(s) are already received using the "Goods receipt" document(s).' appears
+		And I click the button named "FormDocumentGoodsReceiptGenerate"	
+		Then the number of "BasisesTree" table lines is "равно" 0
 		And I close all client application windows
 
 Scenario: _154516 message when trying to re-create Sales invoice based on Sales order (Sales invoice before Shipment confirmation)
@@ -622,7 +530,8 @@ Scenario: _154516 message when trying to re-create Sales invoice based on Sales 
 		And I save the value of "Number" field as "$$NumberSalesOrder154507$$"
 		And I save the window as "$$SalesOrder154507$$"
 	* Create Sales invoice
-		And I click "Sales invoice" button
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice154507$$" variable
 		And I delete "$$SalesInvoice154507$$" variable
@@ -630,8 +539,8 @@ Scenario: _154516 message when trying to re-create Sales invoice based on Sales 
 		And I save the window as "$$SalesInvoice154507$$"
 		And I click the button named "FormPostAndClose"
 	* Check message display when you try to re-create Sales invoice
-		And I click "Sales invoice" button
-		Then warning message containing text 'There are no lines for which you need to create a "Sales invoice" document in the "Sales order" document.' appears
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		Then the number of "BasisesTree" table lines is "равно" 0
 		And I close all client application windows
 		
 Scenario: _154518 message when trying to re-create Shipment confirmation based on Sales order (Shipment confirmation before Sales invoic)
@@ -666,7 +575,8 @@ Scenario: _154518 message when trying to re-create Shipment confirmation based o
 		And I save the value of "Number" field as "$$NumberSalesOrder154507$$"
 		And I save the window as "$$SalesOrder154507$$"
 	* Create Shipment confirmation
-		And I click "Shipment confirmation" button
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "Ok" button
 		* Change number Shipment confirmation
 			And I move to "Other" tab
 			And I click the button named "FormPost"
@@ -676,8 +586,8 @@ Scenario: _154518 message when trying to re-create Shipment confirmation based o
 			And I save the window as "$$ShipmentConfirmation154507$$"
 			And I click the button named "FormPostAndClose"
 	* Check message display when you try to re-create Shipment confirmation
-		And I click "Shipment confirmation" button
-		Then warning message containing text 'There are no lines for which you need to create a "Shipment confirmation" document in the "Sales order" document.' appears
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		Then the number of "BasisesTree" table lines is "равно" 0
 		And I close all client application windows
 
 Scenario: _154520 message when trying to re-create Shipment confirmation based on Sales invoice
@@ -722,7 +632,8 @@ Scenario: _154520 message when trying to re-create Shipment confirmation based o
 			And I save the value of "Number" field as "$$NumberSalesInvoice154508$$"
 			And I save the window as "$$SalesInvoice154508$$"
 	* Create Shipment confirmation based on Sales invoice
-		And I click "Shipment confirmation" button
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "Ok" button
 		And I click the button named "FormPost"
 		And I delete "$$NumberShipmentConfirmation154508$$" variable
 		And I delete "$$ShipmentConfirmation154508$$" variable
@@ -730,55 +641,10 @@ Scenario: _154520 message when trying to re-create Shipment confirmation based o
 		And I save the window as "$$ShipmentConfirmation154508$$"
 		And I click the button named "FormPostAndClose"
 	* Check message display when you try to re-create Shipment confirmation
-		And I click "Shipment confirmation" button
-		Then warning message containing text 'There are no lines for which you need to create a "Shipment confirmation" document in the "Sales invoice" document.' appears
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		Then the number of "BasisesTree" table lines is "равно" 0
 		And I close all client application windows
 
-Scenario: _154522 message when trying to create Shipment confirmation based on Sales invoice (Stor does not use Shipment confirmation)
-	* Create Sales invoice
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I click the button named "FormCreate"
-		* Filling in customer info
-			And I click Select button of "Partner" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Kalipso'     |
-			And I select current line in "List" table
-			And I click Select button of "Partner term" field
-			And I select current line in "List" table
-		* Select Store
-			And I click Select button of "Store" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'  |
-			And I select current line in "List" table
-			And I click Select button of "Legal name" field
-			And I select current line in "List" table
-		* Filling in items tab
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I click choice button of "Item" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
-			And I select current line in "List" table
-			And I activate "Item key" field in "ItemList" table
-			And I click choice button of "Item key" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
-			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-			And I click the button named "FormPost"
-			And I delete "$$NumberSalesInvoice154509$$" variable
-			And I delete "$$SalesInvoice154509$$" variable
-			And I save the value of "Number" field as "$$NumberSalesInvoice154509$$"
-			And I save the window as "$$SalesInvoice154509$$"
-	* Check message display when you try to create Shipment confirmation based on Sales invoice (Stor does not use Shipment confirmation)
-		And I click "Shipment confirmation" button
-		Then warning message containing text 'There are no lines for which you need to create a "Shipment confirmation" document in the "Sales invoice" document.' appears
-		And I close all client application windows
 
 Scenario: _154524 message when trying to create Shipment confirmation based on Sales invoice with Service
 	* Create Sales invoice
@@ -823,8 +689,8 @@ Scenario: _154524 message when trying to create Shipment confirmation based on S
 			And I save the value of "Number" field as "$$NumberSalesInvoice154510$$"
 			And I save the window as "$$SalesInvoice154510$$"
 	* Check message display when you try to create Shipment confirmation based on Sales invoice with Service
-		And I click "Shipment confirmation" button
-		Then warning message containing text 'There are no lines for which you need to create a "Shipment confirmation" document in the "Sales invoice" document.' appears
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		Then the number of "BasisesTree" table lines is "равно" 0
 		And I close all client application windows
 
 Scenario: _154526 message when trying to create Goods receipt based on Purchase invoice with Service
@@ -870,8 +736,8 @@ Scenario: _154526 message when trying to create Goods receipt based on Purchase 
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice154511$$"
 			And I save the window as "$$PurchaseInvoice154511$$"
 	* Check message display when you try to create Goods receipt based on Purchase invoice with Service
-		And I click "Goods receipt" button
-		Then warning message containing text 'There are no lines for which you need to create a "Goods receipt" document in the "Purchase invoice" document.' appears
+		And I click the button named "FormDocumentGoodsReceiptGenerate"	
+		Then the number of "BasisesTree" table lines is "равно" 0
 		And I close all client application windows
 
 Scenario: _154528 message when trying to create Purchase order based on Sales order with procurement method stock and NoReserve, with Service
@@ -945,8 +811,8 @@ Scenario: _154528 message when trying to create Purchase order based on Sales or
 		Then warning message containing text "There are no lines with a correct procurement method." appears
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		And I click "Purchase invoice" button
-		Then warning message containing text 'There are no more items that you need to order from suppliers in the "Sales order" document.' appears
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		Then the number of "BasisesTree" table lines is "равно" 0
 		And I close all client application windows
 
 Scenario: _154530 message when trying to re-create Purchase order/Inventory transfer order based on Internal supply request
@@ -987,7 +853,8 @@ Scenario: _154530 message when trying to re-create Purchase order/Inventory tran
 		And I save the value of "Number" field as "$$NumberInternalSupplyRequest154513$$"
 		And I save the window as "$$InternalSupplyRequest154513$$"
 	* Create Purchase order based on Internal supply request
-		And I click "Purchase order" button
+		And I click the button named "FormDocumentPurchaseOrderGenerate"
+		And I click "OK" button
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -1012,13 +879,13 @@ Scenario: _154530 message when trying to re-create Purchase order/Inventory tran
 		And I finish line editing in "ItemList" table
 		And I select "Approved" exact value from "Status" drop-down list
 		And I click the button named "FormPostAndClose"
-	* Check message display when you try to re-create Purchase order/Inventory transfer order
-		And I click "Purchase order" button
-		Then warning message containing text 'There are no more items that you need to order from suppliers in the "Internal supply request" document.' appears
-		Then "1C:Enterprise" window is opened
+	* Check message display when you try to re-create Purchase order/Inventory transfer order		
+		And I click the button named "FormDocumentPurchaseOrderGenerate"
+		Then the number of "BasisesTree" table lines is "равно" 0
 		And I click "OK" button
-		And I click "Inventory transfer order" button
-		Then warning message containing text 'There are no more items that you need to order from suppliers in the "Internal supply request" document.' appears
+		And I click the button named "FormDocumentInventoryTransferOrderGenerate"
+		Then the number of "BasisesTree" table lines is "равно" 0
+		And I click "OK" button
 		And I close all client application windows
 
 
@@ -1062,12 +929,14 @@ Scenario: _154532 user notification when create a second partial sales invoice b
 		And I save the value of "Number" field as "$$NumberSalesOrder154514$$"
 		And I save the window as "$$SalesOrder154514$$"
 	* Create first Sales invoice
-		And I click "Sales invoice" button
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "OK" button
 		And I select current line in "ItemList" table
 		And I input "1,000" text in "Q" field of "ItemList" table
 		And I click the button named "FormPostAndClose"
 	* Create second Sales invoice
-		And I click "Sales invoice" button
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "OK" button
 		When TestClient messages log contains messages from the list only
 		| 'The "Sales invoice" document does not fully match the "Sales order" document because' |
 		| 'there is already another "Sales invoice" document that partially covered this "Sales order" document.'|
@@ -1119,12 +988,13 @@ Scenario: _154534 user notification when create a second partial purchase invoic
 		And I save the value of "Number" field as "$$NumberPurchaseOrder154515$$"
 		And I save the window as "$$PurchaseOrder154515$$"
 	* Create first Purchase invoice based on Purchase order
-		And I click "Purchase invoice" button
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "OK" button
 		And I select current line in "ItemList" table
 		And I input "1,000" text in "Q" field of "ItemList" table
 		And I click the button named "FormPostAndClose"
 	* Create second Purchase invoice based on Purchase order
-		And I click "Purchase invoice" button
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		When TestClient messages log contains messages from the list only
 		| 'The "Purchase invoice" document does not fully match the "Purchase order" document because'|
 		|  'there is already another "Purchase invoice" document that partially covered this "Purchase order" document.'|
@@ -1222,9 +1092,8 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 		* Check message output when trying to generate a PI
-			And I click "Purchase invoice" button
-			Then the field named "Message" value contains 'Cannot continue. The "Sales order' text
-			Then "1C:Enterprise" window is opened
+			And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+			Then the number of "BasisesTree" table lines is "равно" 0
 			And I click "OK" button
 	* Check the message output when it is impossible to create SC because the goods have not yet come from the vendor provided that the type of supply "through orders" is selected
 		* Change of document status
@@ -1234,18 +1103,19 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			And I set checkbox "Shipment confirmations before sales invoice"
 			And I click the button named "FormPost"
 		* Create SC for string with procurement method Stock
-			And I click "Shipment confirmation" button
+			And I click the button named "FormDocumentShipmentConfirmationGenerate"
+			And I click "Ok" button
 			Then "Shipment confirmation (create)" window is opened
 			And I click the button named "FormPostAndClose"
 			And Delay 2
 		* Check message output when trying to generate SC
-			And I click "Shipment confirmation" button
-			Then the form attribute named "Message" became equal to "There are no lines for which you need to create a \"Shipment confirmation\" document in the \"Sales order\" document. or Items were not received from the supplier according to the procurement method."
-			Then "1C:Enterprise" window is opened
+			And I click the button named "FormDocumentShipmentConfirmationGenerate"
+			Then the number of "BasisesTree" table lines is "равно" 0
 			And I click "OK" button
 	* Check when trying to create SC when only a PO has been created but the goods have not been delivered
 		* Create a partial PO
-			And I click "Purchase order" button
+			And I click the button named "FormDocumentPurchaseOrderGenerate"
+			And I click "OK" button
 			And I click Select button of "Partner" field
 			And I select current line in "List" table
 			And I click Select button of "Legal name" field
@@ -1280,9 +1150,8 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			And I save the window as "$$PurchaseOrder0154513$$"
 			And I click the button named "FormPostAndClose"
 		* Check message output when trying to create SC
-			And I click "Shipment confirmation" button
-			Then the form attribute named "Message" became equal to "There are no lines for which you need to create a \"Shipment confirmation\" document in the \"Sales order\" document. or Items were not received from the supplier according to the procurement method."
-			Then "1C:Enterprise" window is opened
+			And I click the button named "FormDocumentShipmentConfirmationGenerate"
+			Then the number of "BasisesTree" table lines is "равно" 0
 			And I click "OK" button
 			And I close all client application windows
 		* Create GR and try to re-create SC
@@ -1291,7 +1160,8 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 				And I go to line in "List" table
 				| 'Number' | 'Partner'   |
 				| '$$NumberPurchaseOrder0154513$$'  | 'Ferron BP' |
-				And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+				And I click the button named "FormDocumentGoodsReceiptGenerate"
+				And I click "OK" button
 				And I click the button named "FormPostAndClose"
 			* Create SC
 				Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -1313,7 +1183,8 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			| 'Number' | 'Partner'   |
 			| '$$NumberSalesOrder0154513$$'  | 'Kalipso'       |
 			And I select current line in "List" table
-			And I click "Purchase order" button
+			And I click the button named "FormDocumentPurchaseOrderGenerate"
+			And I click "Ok" button	
 			And I select "Approved" exact value from "Status" drop-down list
 			And I click Select button of "Partner" field
 			Then "Partners" window is opened
@@ -1340,8 +1211,8 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			And I go to line in "List" table
 			| 'Number' | 'Partner'   |
 			| '$$NumberSalesOrder0154513$$'  | 'Kalipso'       |
-			And I click the button named "FormDocumentPurchaseOrderGeneratePurchaseOrder"
-			Then the form attribute named "Message" became equal to 'All items in the "Sales order" document are already ordered using the "Purchase order" document(s).'
+			And I click the button named "FormDocumentPurchaseOrderGenerate"
+			Then the number of "BasisesTree" table lines is "равно" 0
 			And I close all client application windows
 	* Check the message when there are no lines in the sales  order with procurement method "purchase"
 		* Create SO with procurement method Stock
@@ -1383,9 +1254,8 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 				And I select current line in "List" table
 				And I click the button named "FormPost"
 		* Check message output when trying to create a PO
-			And I click "Purchase order" button
-			Then the form attribute named "Message" became equal to "There are no lines with a correct procurement method."
-			Then "1C:Enterprise" window is opened
+			And I click the button named "FormDocumentPurchaseOrderGenerate"
+			Then the number of "BasisesTree" table lines is "равно" 0
 			And I click "OK" button
 			And I close all client application windows
 
@@ -1437,21 +1307,17 @@ Scenario: _015452 check message output when trying to create a subsequent order 
 		And I save the value of "Number" field as "$$NumberSalesOrder0154514$$"
 		And I save the window as "$$SalesOrder0154514$$"
 		* Check message output when trying to create SalesInvoice
-			And I click "Sales invoice" button
-			Then the field named "Message" value contains 'Cannot continue. The "Sales order' text
-			Then "1C:Enterprise" window is opened
+			And I click the button named "FormDocumentSalesInvoiceGenerate"
+			Then the number of "BasisesTree" table lines is "равно" 0
 			And I click "OK" button
-			And I click "Purchase invoice" button
-			Then the field named "Message" value contains 'Cannot continue. The "Sales order' text
-			Then "1C:Enterprise" window is opened
+			And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+			Then the number of "BasisesTree" table lines is "равно" 0
 			And I click "OK" button
-			And I click "Purchase order" button
-			Then the field named "Message" value contains 'Cannot continue. The "Sales order' text
-			Then "1C:Enterprise" window is opened
+			And I click the button named "FormDocumentPurchaseOrderGenerate"
+			Then the number of "BasisesTree" table lines is "равно" 0
 			And I click "OK" button
-			And I click "Shipment confirmation" button
-			Then the field named "Message" value contains 'Cannot continue. The "Sales order' text
-			Then "1C:Enterprise" window is opened
+			And I click the button named "FormDocumentShipmentConfirmationGenerate"
+			Then the number of "BasisesTree" table lines is "равно" 0
 			And I click "OK" button
 			And I select "Approved" exact value from "Status" drop-down list
 			And I click the button named "FormPost"
@@ -1483,7 +1349,6 @@ Scenario: _015452 check message output when trying to create a subsequent order 
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I move to "Other" tab
-			And I set checkbox "Goods receipt before purchase invoice"
 			And I select "Wait" exact value from "Status" drop-down list
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseOrder0154514$$" variable
@@ -1491,37 +1356,13 @@ Scenario: _015452 check message output when trying to create a subsequent order 
 			And I save the value of "Number" field as "$$NumberPurchaseOrder0154514$$"
 			And I save the window as "$$PurchaseOrder0154514$$"
 		* Check the message output when trying to create PurchaseInvoice
-			And I click "Purchase invoice" button
-			Then the field named "Message" value contains 'Cannot continue. The "Purchase order' text
-			Then "1C:Enterprise" window is opened
+			And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+			Then the number of "BasisesTree" table lines is "равно" 0
 			And I click "OK" button
-			And I click "Goods receipt" button
-			Then the field named "Message" value contains 'Cannot continue. The "Purchase order' text
-			Then "1C:Enterprise" window is opened
-			And I click "OK" button
+			And I click the button named "FormDocumentGoodsReceiptGenerate"
+			Then the number of "BasisesTree" table lines is "равно" 0
 			And I close all client application windows
 
-Scenario: _015454 check the message output when trying to uncheck a tick for Store "Use shipment confirmation" and "Use Goods receipt" for which there were already Shipment confirmation and  Goods receipt
-	* Open Store 02
-		Given I open hyperlink "e1cib/list/Catalog.Stores"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
-		And I select current line in "List" table
-	* Check the message output when trying to uncheck a tick for Store "Use Goods receipt"
-		And I remove checkbox "Use goods receipt"
-		Then the form attribute named "Message" became equal to 'Cannot clear the "Use goods receipt" check box. Documents "Goods receipt" from store Store 02 were already created.'
-	And I close all client application windows
-	* Open Store 02
-		Given I open hyperlink "e1cib/list/Catalog.Stores"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
-		And I select current line in "List" table
-	* Check the message output when trying to uncheck a tick for Store "Use shipment confirmation"
-		And I remove checkbox "Use shipment confirmation"
-		Then the form attribute named "Message" became equal to 'Cannot clear the "Use shipment confirmation" check box.  Documents "Shipment confirmation" from store Store 02 were already created.'
-		And I close all client application windows
 
 
 

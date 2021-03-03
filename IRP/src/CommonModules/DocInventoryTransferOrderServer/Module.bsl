@@ -23,11 +23,11 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 EndProcedure
 
 Procedure StoreSenderOnChange(Object) Export
-	Object.UseShipmentConfirmation = Object.StoreSender.UseShipmentConfirmation;
+	Return;
 EndProcedure
 
 Procedure StoreReceiverOnChange(Object) Export
-	Object.UseGoodsReceipt = Object.StoreReceiver.UseGoodsReceipt;
+	Return;
 EndProcedure
 
 #EndRegion

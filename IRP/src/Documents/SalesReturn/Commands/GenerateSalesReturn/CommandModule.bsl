@@ -52,7 +52,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOfTables.Add(GetDocumentTable_GoodsReceipt(ArrayOf_GoodsReceipt));
 	
 	Return JoinDocumentsStructure(ArrayOfTables, 
-		"BasedOn, Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, BusinessUnit, ExpenseType, AdditionalAnalytic");
+		"BasedOn, Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax");
 EndFunction
 
 &AtServer

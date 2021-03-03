@@ -292,7 +292,7 @@ Function GetDocumentTable_SalesInvoice(ArrayOfBasisDocuments)
 		|	""SalesInvoice"" AS BasedOn,
 		|	Table.SalesInvoice AS SalesInvoice,
 		|	Table.ItemKey,
-		|	Table.RowKey,
+		|	Table.RowKey AS Key,
 		|	CASE
 		|		WHEN Table.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
 		|			THEN Table.ItemKey.Unit
@@ -343,19 +343,14 @@ EndFunction
 
 &AtServer
 Function ExtractInfoFromRows_SalesInvoice(QueryTable)
-	QueryTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
-	For Each Row In QueryTable Do
-		Row.Key = Row.RowKey;
-	EndDo;
-	
 	Query = New Query();
+	Query.TempTablesManager = New TempTablesManager();
 	Query.Text =
 		"SELECT
 		|	QueryTable.BasedOn,
 		|	QueryTable.SalesInvoice,
 		|	QueryTable.ItemKey,
 		|	QueryTable.Key,
-		|	QueryTable.RowKey,
 		|	QueryTable.Unit,
 		|	QueryTable.Quantity,
 		|	QueryTable.SerialLotNumber
@@ -370,7 +365,6 @@ Function ExtractInfoFromRows_SalesInvoice(QueryTable)
 		|	tmpQueryTableFull.SalesInvoice,
 		|	tmpQueryTableFull.ItemKey,
 		|	tmpQueryTableFull.Key,
-		|	tmpQueryTableFull.RowKey,
 		|	tmpQueryTableFull.Unit,
 		|	SUM(tmpQueryTableFull.Quantity) AS Quantity
 		|INTO tmpQueryTable
@@ -381,8 +375,61 @@ Function ExtractInfoFromRows_SalesInvoice(QueryTable)
 		|	tmpQueryTableFull.SalesInvoice,
 		|	tmpQueryTableFull.ItemKey,
 		|	tmpQueryTableFull.Key,
-		|	tmpQueryTableFull.RowKey,
 		|	tmpQueryTableFull.Unit
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	RowIDInfo.Ref,
+		|	RowIDInfo.Key,
+		|	MAX(RowIDInfo.RowID) AS RowID
+		|INTO RowIDInfo
+		|FROM
+		|	Document.SalesInvoice.RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.Ref IN
+		|		(SELECT
+		|			QueryTable.SalesInvoice
+		|		FROM
+		|			tmpQueryTable AS QueryTable)
+		|GROUP BY
+		|	RowIDInfo.Ref,
+		|	RowIDInfo.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	QueryTable.BasedOn,
+		|	QueryTable.SalesInvoice,
+		|	QueryTable.ItemKey,
+		|	RowIDInfo.Key AS Key,
+		|	RowIDInfo.RowID AS RowID,
+		|	QueryTable.Unit,
+		|	QueryTable.Quantity
+		|INTO tmpQueryTable_WithKey
+		|FROM
+		|	tmpQueryTable AS QueryTable
+		|		INNER JOIN RowIDInfo AS RowIDInfo
+		|		ON QueryTable.SalesInvoice = RowIDInfo.Ref
+		|		AND QueryTable.Key = RowIDInfo.RowID
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	QueryTable.BasedOn,
+		|	QueryTable.SalesInvoice,
+		|	QueryTable.ItemKey,
+		|	RowIDInfo.Key AS Key,
+		|	RowIDInfo.RowID AS RowID,
+		|	QueryTable.Unit,
+		|	QueryTable.Quantity,
+		|	QueryTable.SerialLotNumber
+		|INTO tmpQueryTable_WithKey_SerialLotNumbers
+		|FROM
+		|	tmpQueryTableFull AS QueryTable
+		|		INNER JOIN RowIDInfo AS RowIDInfo
+		|		ON QueryTable.SalesInvoice = RowIDInfo.Ref
+		|		AND QueryTable.Key = RowIDInfo.RowID
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -398,7 +445,7 @@ Function ExtractInfoFromRows_SalesInvoice(QueryTable)
 		|	CAST(tmpQueryTable.SalesInvoice AS Document.SalesInvoice).Currency AS Currency,
 		|	CAST(tmpQueryTable.SalesInvoice AS Document.SalesInvoice).Company AS Company,
 		|	tmpQueryTable.Key,
-		|	tmpQueryTable.RowKey,
+		|	tmpQueryTable.RowID AS RowKey,
 		|	tmpQueryTable.Unit AS QuantityUnit,
 		|	tmpQueryTable.Quantity AS Quantity,
 		|	tmpQueryTable.Quantity AS QuantityInBaseUnit,
@@ -413,7 +460,7 @@ Function ExtractInfoFromRows_SalesInvoice(QueryTable)
 		|	ISNULL(ItemList.DontCalculateRow, FALSE) AS DontCalculateRow,
 		|	*
 		|FROM
-		|	tmpQueryTable AS tmpQueryTable
+		|	tmpQueryTable_WithKey AS tmpQueryTable
 		|		INNER JOIN Document.SalesInvoice.ItemList AS ItemList
 		|		ON tmpQueryTable.Key = ItemList.Key
 		|		AND tmpQueryTable.SalesInvoice = ItemList.Ref
@@ -424,7 +471,7 @@ Function ExtractInfoFromRows_SalesInvoice(QueryTable)
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	TaxList.Ref,
-		|	TaxList.Key,
+		|	tmpQueryTable.RowID AS Key,
 		|	TaxList.Tax,
 		|	TaxList.Analytics,
 		|	TaxList.TaxRate,
@@ -433,7 +480,7 @@ Function ExtractInfoFromRows_SalesInvoice(QueryTable)
 		|	TaxList.ManualAmount
 		|FROM
 		|	Document.SalesInvoice.TaxList AS TaxList
-		|		INNER JOIN tmpQueryTable AS tmpQueryTable
+		|		INNER JOIN tmpQueryTable_WithKey AS tmpQueryTable
 		|		ON tmpQueryTable.SalesInvoice = TaxList.Ref
 		|		AND tmpQueryTable.Key = TaxList.Key
 		|;
@@ -441,12 +488,12 @@ Function ExtractInfoFromRows_SalesInvoice(QueryTable)
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	SpecialOffers.Ref,
-		|	SpecialOffers.Key,
+		|	tmpQueryTable.RowID AS Key,
 		|	SpecialOffers.Offer,
 		|	SpecialOffers.Amount
 		|FROM
 		|	Document.SalesInvoice.SpecialOffers AS SpecialOffers
-		|		INNER JOIN tmpQueryTable AS tmpQueryTable
+		|		INNER JOIN tmpQueryTable_WithKey AS tmpQueryTable
 		|		ON tmpQueryTable.SalesInvoice = SpecialOffers.Ref
 		|		AND tmpQueryTable.Key = SpecialOffers.Key
 		|;
@@ -454,12 +501,12 @@ Function ExtractInfoFromRows_SalesInvoice(QueryTable)
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	SerialLotNumbers.Ref,
-		|	SerialLotNumbers.Key,
+		|	tmpQueryTableFull.RowID AS Key,
 		|	SerialLotNumbers.SerialLotNumber,
 		|	tmpQueryTableFull.Quantity
 		|FROM
 		|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
-		|		INNER JOIN tmpQueryTableFull AS tmpQueryTableFull
+		|		INNER JOIN tmpQueryTable_WithKey_SerialLotNumbers AS tmpQueryTableFull
 		|		ON tmpQueryTableFull.SalesInvoice = SerialLotNumbers.Ref
 		|		AND tmpQueryTableFull.Key = SerialLotNumbers.Key
 		|		AND tmpQueryTableFull.SerialLotNumber = SerialLotNumbers.SerialLotNumber
@@ -469,12 +516,12 @@ Function ExtractInfoFromRows_SalesInvoice(QueryTable)
 	Query.SetParameter("QueryTable", QueryTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	QueryTable_ItemList = QueryResults[2].Unload();
+	QueryTable_ItemList = QueryResults[5].Unload();
 	DocumentsServer.RecalculateQuantityInTable(QueryTable_ItemList);
 	
-	QueryTable_TaxList = QueryResults[3].Unload();
-	QueryTable_SpecialOffers = QueryResults[4].Unload();
-	QueryTable_SerialLotNumbers = QueryResults[5].Unload();
+	QueryTable_TaxList = QueryResults[6].Unload();
+	QueryTable_SpecialOffers = QueryResults[7].Unload();
+	QueryTable_SerialLotNumbers = QueryResults[8].Unload();
 	
 	Return New Structure("ItemList, TaxList, SpecialOffers, SerialLotNumbers, GoodsReceipts", 
 	QueryTable_ItemList, 

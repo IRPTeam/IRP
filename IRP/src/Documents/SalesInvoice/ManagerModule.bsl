@@ -105,86 +105,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Return Tables;
 EndFunction
 
-Function GetQueryTextSalesInvoiceSalesTurnovers()
-	Return "SELECT
-	|	SalesInvoiceItemList.Ref.Company AS Company,
-	|	SalesInvoiceItemList.Ref.Currency AS Currency,
-	|	SalesInvoiceItemList.ItemKey AS ItemKey,
-	|	SUM(SalesInvoiceItemList.Quantity) AS Quantity,
-	|	SUM(ISNULL(SalesInvoiceSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
-	|	SalesInvoiceItemList.Ref.Date AS Period,
-	|	SalesInvoiceItemList.Ref AS SalesInvoice,
-	|	SUM(SalesInvoiceItemList.TotalAmount) AS Amount,
-	|	SUM(SalesInvoiceItemList.NetAmount) AS NetAmount,
-	|	SUM(SalesInvoiceItemList.OffersAmount) AS OffersAmount,
-	|	SalesInvoiceItemList.Key AS RowKey,
-	|	SalesInvoiceSerialLotNumbers.SerialLotNumber AS SerialLotNumber
-	|INTO tmp
-	|FROM
-	|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
-	|		LEFT JOIN Document.SalesInvoice.SerialLotNumbers AS SalesInvoiceSerialLotNumbers
-	|		ON SalesInvoiceItemList.Key = SalesInvoiceSerialLotNumbers.Key
-	|		AND SalesInvoiceItemList.Ref = SalesInvoiceSerialLotNumbers.Ref
-	|		AND SalesInvoiceItemList.Ref = &Ref
-	|		AND SalesInvoiceSerialLotNumbers.Ref = &Ref
-	|WHERE
-	|	SalesInvoiceItemList.Ref = &Ref
-	|GROUP BY
-	|	SalesInvoiceItemList.Ref.Company,
-	|	SalesInvoiceItemList.Ref.Currency,
-	|	SalesInvoiceItemList.ItemKey,
-	|	SalesInvoiceItemList.Ref.Date,
-	|	SalesInvoiceItemList.Ref,
-	|	SalesInvoiceItemList.Key,
-	|	SalesInvoiceSerialLotNumbers.SerialLotNumber
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmp.Company AS Company,
-	|	tmp.Currency AS Currency,
-	|	tmp.ItemKey AS ItemKey,
-	|	CASE
-	|		WHEN tmp.QuantityBySerialLtNumbers = 0
-	|			THEN tmp.Quantity
-	|		ELSE tmp.QuantityBySerialLtNumbers
-	|	END AS Quantity,
-	|	tmp.Period AS Period,
-	|	tmp.SalesInvoice AS SalesInvoice,
-	|	tmp.RowKey AS RowKey,
-	|	tmp.SerialLotNumber AS SerialLotNumber,
-	|	CASE
-	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
-	|			THEN CASE
-	|				WHEN tmp.Quantity = 0
-	|					THEN 0
-	|				ELSE tmp.Amount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
-	|			END
-	|		ELSE tmp.Amount
-	|	END AS Amount,
-	|	CASE
-	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
-	|			THEN CASE
-	|				WHEN tmp.Quantity = 0
-	|					THEN 0
-	|				ELSE tmp.NetAmount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
-	|			END
-	|		ELSE tmp.NetAmount
-	|	END AS NetAmount,
-	|	CASE
-	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
-	|			THEN CASE
-	|				WHEN tmp.Quantity = 0
-	|					THEN 0
-	|				ELSE tmp.OffersAmount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
-	|			END
-	|		ELSE tmp.OffersAmount
-	|	END AS OffersAmount
-	|FROM
-	|	tmp AS tmp";
-	
-EndFunction
-
 Function GetQueryTextSalesInvoiceItemList()
 	Return
 		"SELECT
@@ -301,29 +221,144 @@ Function GetQueryTextSalesInvoiceItemList()
 		|	SalesInvoiceItemList.Ref = &Ref";
 EndFunction
 
+Function GetQueryTextSalesInvoiceSalesTurnovers()
+	Return 
+	"SELECT
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO RowIDInfo
+	|FROM
+	|	Document.SalesInvoice.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SalesInvoiceItemList.Ref.Company AS Company,
+	|	SalesInvoiceItemList.Ref.Currency AS Currency,
+	|	SalesInvoiceItemList.ItemKey AS ItemKey,
+	|	SUM(SalesInvoiceItemList.Quantity) AS Quantity,
+	|	SUM(ISNULL(SalesInvoiceSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
+	|	SalesInvoiceItemList.Ref.Date AS Period,
+	|	SalesInvoiceItemList.Ref AS SalesInvoice,
+	|	SUM(SalesInvoiceItemList.TotalAmount) AS Amount,
+	|	SUM(SalesInvoiceItemList.NetAmount) AS NetAmount,
+	|	SUM(SalesInvoiceItemList.OffersAmount) AS OffersAmount,
+	|	RowIDInfo.RowID AS RowKey,
+	|	SalesInvoiceSerialLotNumbers.SerialLotNumber AS SerialLotNumber
+	|INTO tmp
+	|FROM
+	|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
+	|		LEFT JOIN Document.SalesInvoice.SerialLotNumbers AS SalesInvoiceSerialLotNumbers
+	|		ON SalesInvoiceItemList.Key = SalesInvoiceSerialLotNumbers.Key
+	|		AND SalesInvoiceItemList.Ref = SalesInvoiceSerialLotNumbers.Ref
+	|		AND SalesInvoiceItemList.Ref = &Ref
+	|		AND SalesInvoiceSerialLotNumbers.Ref = &Ref
+	|		LEFT JOIN RowIDInfo AS RowIDInfo
+	|		ON SalesInvoiceItemList.Key = RowIDInfo.Key
+	|WHERE
+	|	SalesInvoiceItemList.Ref = &Ref
+	|GROUP BY
+	|	SalesInvoiceItemList.Ref.Company,
+	|	SalesInvoiceItemList.Ref.Currency,
+	|	SalesInvoiceItemList.ItemKey,
+	|	SalesInvoiceItemList.Ref.Date,
+	|	SalesInvoiceItemList.Ref,
+	|	RowIDInfo.RowID,
+	|	SalesInvoiceSerialLotNumbers.SerialLotNumber
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp.Company AS Company,
+	|	tmp.Currency AS Currency,
+	|	tmp.ItemKey AS ItemKey,
+	|	CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers = 0
+	|			THEN tmp.Quantity
+	|		ELSE tmp.QuantityBySerialLtNumbers
+	|	END AS Quantity,
+	|	tmp.Period AS Period,
+	|	tmp.SalesInvoice AS SalesInvoice,
+	|	tmp.RowKey AS RowKey,
+	|	tmp.SerialLotNumber AS SerialLotNumber,
+	|	CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmp.Quantity = 0
+	|					THEN 0
+	|				ELSE tmp.Amount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmp.Amount
+	|	END AS Amount,
+	|	CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmp.Quantity = 0
+	|					THEN 0
+	|				ELSE tmp.NetAmount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmp.NetAmount
+	|	END AS NetAmount,
+	|	CASE
+	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmp.Quantity = 0
+	|					THEN 0
+	|				ELSE tmp.OffersAmount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmp.OffersAmount
+	|	END AS OffersAmount
+	|FROM
+	|	tmp AS tmp";
+	
+EndFunction
+
 Function GetQueryTextSalesInvoiceTaxList()
 	Return
-			"SELECT
-		|	SalesInvoiceTaxList.Ref AS Document,
-		|	SalesInvoiceTaxList.Ref.Date AS Period,
-		|	SalesInvoiceTaxList.Ref.Currency AS Currency,
-		|	SalesInvoiceTaxList.Key AS RowKey,
-		|	SalesInvoiceTaxList.Tax AS Tax,
-		|	SalesInvoiceTaxList.Analytics AS Analytics,
-		|	SalesInvoiceTaxList.TaxRate AS TaxRate,
-		|	SalesInvoiceTaxList.Amount AS Amount,
-		|	SalesInvoiceTaxList.IncludeToTotalAmount AS IncludeToTotalAmount,
-		|	SalesInvoiceTaxList.ManualAmount AS ManualAmount,
-		|	SalesInvoiceItemList.NetAmount AS NetAmount
-		|FROM
-		|	Document.SalesInvoice.TaxList AS SalesInvoiceTaxList
-		|		INNER JOIN Document.SalesInvoice.ItemList AS SalesInvoiceItemList
-		|		ON SalesInvoiceTaxList.Ref = SalesInvoiceItemList.Ref
-		|		AND SalesInvoiceItemList.Ref = &Ref
-		|		AND SalesInvoiceTaxList.Ref = &Ref
-		|		AND SalesInvoiceItemList.Key = SalesInvoiceTaxList.Key
-		|WHERE
-		|	SalesInvoiceTaxList.Ref = &Ref";
+	"SELECT
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO RowIDInfo
+	|FROM
+	|	Document.SalesInvoice.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SalesInvoiceTaxList.Ref AS Document,
+	|	SalesInvoiceTaxList.Ref.Date AS Period,
+	|	SalesInvoiceTaxList.Ref.Currency AS Currency,
+	|	RowIDInfo.RowID AS RowKey,
+	|	SalesInvoiceTaxList.Tax AS Tax,
+	|	SalesInvoiceTaxList.Analytics AS Analytics,
+	|	SalesInvoiceTaxList.TaxRate AS TaxRate,
+	|	SalesInvoiceTaxList.Amount AS Amount,
+	|	SalesInvoiceTaxList.IncludeToTotalAmount AS IncludeToTotalAmount,
+	|	SalesInvoiceTaxList.ManualAmount AS ManualAmount,
+	|	SalesInvoiceItemList.NetAmount AS NetAmount
+	|FROM
+	|	Document.SalesInvoice.TaxList AS SalesInvoiceTaxList
+	|		INNER JOIN Document.SalesInvoice.ItemList AS SalesInvoiceItemList
+	|		ON SalesInvoiceTaxList.Ref = SalesInvoiceItemList.Ref
+	|		AND SalesInvoiceItemList.Ref = &Ref
+	|		AND SalesInvoiceTaxList.Ref = &Ref
+	|		AND SalesInvoiceItemList.Key = SalesInvoiceTaxList.Key
+	|		LEFT JOIN RowIDInfo AS RowIDInfo
+	|		ON SalesInvoiceItemList.Key = RowIDInfo.Key
+	|WHERE
+	|	SalesInvoiceTaxList.Ref = &Ref";
 EndFunction
 
 Function GetQueryTextSalesInvoiceAging()

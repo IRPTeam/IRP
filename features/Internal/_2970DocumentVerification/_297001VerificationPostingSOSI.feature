@@ -134,7 +134,8 @@ Scenario: _29700102 test filling-in SO - SI - SC by quantity
 			| '$$NumberSalesOrder29700101$$' | 'Foxred'  |
 		And I select current line in "List" table
 	* Create SI based on SO
-		And I click "Sales invoice" button
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'      | 'Unit' | 'Store'    | 'Sales order'            |
 			| 'Dress' | 'L/Green'  | '20,000' | 'pcs'  | 'Store 02' | '$$SalesOrder29700101$$' |
@@ -262,7 +263,8 @@ Scenario: _29700103 test filling-in SO - SI - SC by quantity (second part)
 			And I click the button named "FormPost"
 			Then user message window does not contain messages
 		* Create SI on the added line
-			And I click "Sales invoice" button
+			And I click the button named "FormDocumentSalesInvoiceGenerate"
+			And I click "Ok" button
 			And "ItemList" table contains lines
 			| 'Item'     | 'Item key'   |
 			| 'Trousers' | '38/Yellow'  |
@@ -463,7 +465,8 @@ Scenario: _29700104 test filling-in SO - SI in different units (ban)
 				| '$$NumberSalesOrder29700104$$'  | 'Foxred'  |
 			And I select current line in "List" table
 		* Create SI based on SO
-			And I click "Sales invoice" button
+			And I click the button named "FormDocumentSalesInvoiceGenerate"
+			And I click "Ok" button
 			And "ItemList" table contains lines
 			| 'Item'  | 'Item key'  | 'Q'      | 'Unit'           |
 			| 'Dress' | 'M/White'   | '15,000' | 'pcs'            |
@@ -828,7 +831,8 @@ Scenario: _29700120 test filling-in PO - PI - GR by quantity
 			| '$$NumberPurchaseOrder29700101$$' |
 		And I select current line in "List" table
 	* Create PI based on PO
-		And I click "Purchase invoice" button
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Purchase order'            |
 			| 'Dress'    | 'L/Green'   | '20,000' | 'pcs'  | 'Store 02' | '$$PurchaseOrder29700101$$' |
@@ -958,7 +962,8 @@ Scenario: _29700121 test filling-in PO - PI - GR by quantity (second part)
 			And I click the button named "FormPost"
 			Then user message window does not contain messages
 		* Create PI on the added line
-			And I click "Purchase invoice" button
+			And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+			And I click "Ok" button
 			And "ItemList" table contains lines
 			| 'Item'     | 'Item key'   |
 			| 'Trousers' | '38/Yellow'  |

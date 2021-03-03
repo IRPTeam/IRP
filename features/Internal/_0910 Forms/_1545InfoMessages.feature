@@ -85,7 +85,7 @@ Scenario: _154501 message when trying to create a Sales invoice by Sales order w
 	* Check the information message display when trying to create Sales invoice
 		And I move to "Item list" tab
 		And I click the button named "FormPost"
-		And I click "Sales invoice" button
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		Then warning message containing text 'First, create a "Shipment confirmation" document or clear the "Shipment confirmation before Sales invoice" check box on the "Other" tab.' appears
 		And I close all client application windows
 
@@ -151,7 +151,7 @@ Scenario: _154503 message when trying to create a Purchase invoice by Purchase o
 		And I set checkbox "Goods receipt before purchase invoice"
 	* Check the information message display when trying to create Sales invoice
 		And I click the button named "FormPost"
-		And I click "Purchase invoice" button
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		Then warning message containing text 'First, create a "Goods receipt" document or clear the "Goods receipt before Purchase invoice" check box on the "Other" tab.' appears
 		And I close all client application windows
 
@@ -317,7 +317,7 @@ Scenario: _154509 message when trying to re-create Sales invoice based on Shipme
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation154503$$"
 		And I save the window as "$$ShipmentConfirmation154503$$"
 	* Create Sales invoice based on Shipment confirmation
-		And I click "Sales invoice" button
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		Then "Sales invoice (create)" window is opened
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice154503$$" variable
@@ -327,7 +327,7 @@ Scenario: _154509 message when trying to re-create Sales invoice based on Shipme
 		And I click the button named "FormPostAndClose"
 		And I wait "Sales invoice (create)" window closing in 20 seconds
 	* Check message display when trying to re-create Sales invoice
-		And I click "Sales invoice" button
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		Then warning message containing text 'There are no lines for which you need to create a "Sales invoice" document in the "Shipment confirmation" document.' appears
 		And I close all client application windows
 	* Create Sales invoice
@@ -442,7 +442,7 @@ Scenario: _154510 message when trying to re-create Purchase invoice based on Goo
 		And I save the value of "Number" field as "$$NumberGoodsReceipt154505$$"
 		And I save the window as "$$GoodsReceipt154505$$"
 	* Create Purchase invoice based on Goods receipt
-		And I click "Purchase invoice" button
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		And I move to "Other" tab
 		And I delete "$$NumberPurchaseInvoice154505$$" variable
 		And I delete "$$PurchaseInvoice154505$$" variable
@@ -451,7 +451,7 @@ Scenario: _154510 message when trying to re-create Purchase invoice based on Goo
 		And I click the button named "FormPostAndClose"
 		And I wait "Purchase invoice (create)" window closing in 20 seconds
 	* Check message display when you try to re-create Purchase invoice
-		And I click "Purchase invoice" button
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		Then warning message containing text 'There are no lines for which you need to create a "Purchase invoice" document in the "Goods receipt" document.' appears
 		And I close all client application windows
 
@@ -511,10 +511,10 @@ Scenario: _154512 message when trying to re-create Purchase invoice based on Pur
 			And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 	* Create Purchase invoice based on Purchase order
-		And I click "Purchase invoice" button
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		And I click the button named "FormPostAndClose"
 	* Check message display when you try to re-create Purchase invoice
-		And I click "Purchase invoice" button
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		Then warning message containing text 'There are no lines for which you need to create a "Purchase invoice" document in the "Purchase order" document.' appears
 		And I close all client application windows
 
@@ -622,7 +622,7 @@ Scenario: _154516 message when trying to re-create Sales invoice based on Sales 
 		And I save the value of "Number" field as "$$NumberSalesOrder154507$$"
 		And I save the window as "$$SalesOrder154507$$"
 	* Create Sales invoice
-		And I click "Sales invoice" button
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice154507$$" variable
 		And I delete "$$SalesInvoice154507$$" variable
@@ -630,7 +630,7 @@ Scenario: _154516 message when trying to re-create Sales invoice based on Sales 
 		And I save the window as "$$SalesInvoice154507$$"
 		And I click the button named "FormPostAndClose"
 	* Check message display when you try to re-create Sales invoice
-		And I click "Sales invoice" button
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		Then warning message containing text 'There are no lines for which you need to create a "Sales invoice" document in the "Sales order" document.' appears
 		And I close all client application windows
 		
@@ -945,7 +945,7 @@ Scenario: _154528 message when trying to create Purchase order based on Sales or
 		Then warning message containing text "There are no lines with a correct procurement method." appears
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		And I click "Purchase invoice" button
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		Then warning message containing text 'There are no more items that you need to order from suppliers in the "Sales order" document.' appears
 		And I close all client application windows
 
@@ -1062,12 +1062,12 @@ Scenario: _154532 user notification when create a second partial sales invoice b
 		And I save the value of "Number" field as "$$NumberSalesOrder154514$$"
 		And I save the window as "$$SalesOrder154514$$"
 	* Create first Sales invoice
-		And I click "Sales invoice" button
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And I select current line in "ItemList" table
 		And I input "1,000" text in "Q" field of "ItemList" table
 		And I click the button named "FormPostAndClose"
 	* Create second Sales invoice
-		And I click "Sales invoice" button
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		When TestClient messages log contains messages from the list only
 		| 'The "Sales invoice" document does not fully match the "Sales order" document because' |
 		| 'there is already another "Sales invoice" document that partially covered this "Sales order" document.'|
@@ -1119,12 +1119,12 @@ Scenario: _154534 user notification when create a second partial purchase invoic
 		And I save the value of "Number" field as "$$NumberPurchaseOrder154515$$"
 		And I save the window as "$$PurchaseOrder154515$$"
 	* Create first Purchase invoice based on Purchase order
-		And I click "Purchase invoice" button
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		And I select current line in "ItemList" table
 		And I input "1,000" text in "Q" field of "ItemList" table
 		And I click the button named "FormPostAndClose"
 	* Create second Purchase invoice based on Purchase order
-		And I click "Purchase invoice" button
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		When TestClient messages log contains messages from the list only
 		| 'The "Purchase invoice" document does not fully match the "Purchase order" document because'|
 		|  'there is already another "Purchase invoice" document that partially covered this "Purchase order" document.'|
@@ -1222,7 +1222,7 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 		* Check message output when trying to generate a PI
-			And I click "Purchase invoice" button
+			And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 			Then the field named "Message" value contains 'Cannot continue. The "Sales order' text
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -1437,11 +1437,11 @@ Scenario: _015452 check message output when trying to create a subsequent order 
 		And I save the value of "Number" field as "$$NumberSalesOrder0154514$$"
 		And I save the window as "$$SalesOrder0154514$$"
 		* Check message output when trying to create SalesInvoice
-			And I click "Sales invoice" button
+			And I click the button named "FormDocumentSalesInvoiceGenerate"
 			Then the field named "Message" value contains 'Cannot continue. The "Sales order' text
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			And I click "Purchase invoice" button
+			And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 			Then the field named "Message" value contains 'Cannot continue. The "Sales order' text
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -1491,7 +1491,7 @@ Scenario: _015452 check message output when trying to create a subsequent order 
 			And I save the value of "Number" field as "$$NumberPurchaseOrder0154514$$"
 			And I save the window as "$$PurchaseOrder0154514$$"
 		* Check the message output when trying to create PurchaseInvoice
-			And I click "Purchase invoice" button
+			And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 			Then the field named "Message" value contains 'Cannot continue. The "Purchase order' text
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button

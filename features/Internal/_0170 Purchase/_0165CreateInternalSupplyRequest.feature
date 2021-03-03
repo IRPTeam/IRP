@@ -165,13 +165,12 @@ Scenario: _016501 create document Internal Supply Request
 		And I go to line in "List" table
 			| 'Number'                                | 'Company'      | 'Store'    |
 			| '$$NumberInternalSupplyRequest016501$$' | 'Main Company' | 'Store 01' |
-		And I click the button named "FormDocumentInventoryTransferOrderGenerateInventoryTransferOrder"
+		And I click the button named "FormDocumentInventoryTransferOrderGenerate"
+		And I click "Ok" button
 		And I click Select button of "Store sender" field
 		And I go to line in "List" table
 			| Description |
 			| Store 03  |
-		And I select current line in "List" table
-		And I click Select button of "Company" field
 		And I select current line in "List" table
 		And I select "Approved" exact value from "Status" drop-down list
 		And I go to line in "ItemList" table

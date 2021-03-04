@@ -92,6 +92,36 @@ Scenario: _028901 create document Goods Receipt based on Purchase invoice (with 
 		And I close all client application windows
 
 
+Scenario: _028902 create document Goods Receipt based on Purchase order (with PI, PI>PO)
+	* Select PO
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '102'      |
+		And I click the button named "FormDocumentGoodsReceiptGenerate"	
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                               | 'Use'                                            | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
+			| 'Purchase order 102 dated 03.03.2021 08:59:33'   | 'Purchase order 102 dated 03.03.2021 08:59:33'   | ''         | ''               | ''       | ''         |
+			| 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | ''         | ''               | ''       | ''         |
+			| 'Dress, XS/Blue'                                 | 'Yes'                                            | '1,000'    | 'pcs'            | '100,00' | 'TRY'      |
+			| 'Shirt, 36/Red'                                  | 'Yes'                                            | '12,000'   | 'pcs'            | '200,00' | 'TRY'      |
+			| 'Boots, 37/18SD'                                 | 'Yes'                                            | '2,000'    | 'Boots (12 pcs)' | '300,00' | 'TRY'      |
+		Then the number of "BasisesTree" table lines is "равно" "5"
+		And I click "Ok" button
+	* Create GR and check creation
+		And "ItemList" table contains lines
+			| '#' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Store'    | 'Internal supply request' | 'Quantity' | 'Sales invoice' | 'Unit'           | 'Receipt basis'                                  | 'Purchase invoice'                               | 'Currency' | 'Sales return order' | 'Sales order' | 'Purchase order'                               | 'Inventory transfer order' | 'Sales return' |
+			| '1' | 'Dress' | ''                   | 'XS/Blue'  | 'Store 02' | ''                        | '1,000'    | ''              | 'pcs'            | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'TRY'      | ''                   | ''            | 'Purchase order 102 dated 03.03.2021 08:59:33' | ''                         | ''             |
+			| '2' | 'Shirt' | ''                   | '36/Red'   | 'Store 02' | ''                        | '12,000'   | ''              | 'pcs'            | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'TRY'      | ''                   | ''            | 'Purchase order 102 dated 03.03.2021 08:59:33' | ''                         | ''             |
+			| '3' | 'Boots' | ''                   | '37/18SD'  | 'Store 02' | ''                        | '2,000'    | ''              | 'Boots (12 pcs)' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'TRY'      | ''                   | ''            | 'Purchase order 102 dated 03.03.2021 08:59:33' | ''                         | ''             |
+		Then the number of "ItemList" table lines is "равно" "3"
+		And I click the button named "FormPost"
+		And I delete "$$NumberGoodsReceipt028901$$" variable
+		And I delete "$$GoodsReceipt028901$$" variable
+		And I save the value of "Number" field as "$$NumberGoodsReceipt028901$$"
+		And I save the window as "$$GoodsReceipt028901$$"
+		And I click the button named "FormPostAndClose"
+		And I close all client application windows
 
 
 
@@ -99,8 +129,8 @@ Scenario: _300507 check connection to GoodsReceipt report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 	* Form report Related documents
 		And I go to line in "List" table
-		| Number |
-		| $$NumberGoodsReceipt028901$$      |
+		| 'Number' |
+		| '$$NumberGoodsReceipt028901$$'      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened

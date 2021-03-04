@@ -117,33 +117,19 @@ Scenario: _028001 create document Sales return order, store use Goods receipt, b
 		And I click the button named "FormPostAndClose"
 
 
-Scenario: _028002 check  Sales  return order movements the OrderBalance register (store use Goods receipt, based on Sales invoice)  (+)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'              | 'Store'    | 'Order'              | 'Item key' |
-		| '1,000'    | '$$SalesReturnOrder028001$$' | 'Store 02' | '$$SalesReturnOrder028001$$' | 'L/Green'  |
-
-Scenario: _028003 check  Sales  return order movements the SalesTurnovers register (store use Goods receipt, based on Sales invoice)  (-)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'              | 'Sales invoice'    | 'Item key' |
-		| '-1,000'   | '$$SalesReturnOrder028001$$' | '$$SalesInvoice024008$$' | 'L/Green'  |
-
 
 Scenario: _028004 create document Sales return order, store does not use Goods receipt, based on Sales invoice
 	When create SalesReturnOrder028004
 	* Check for no movements in the registers
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
 		And "List" table contains lines
-			| 'Quantity' | 'Recorder'              | 'Store'    | 'Order'              | 'Item key' |
-			| '1,000'    | '$$SalesReturnOrder028001$$' | 'Store 02' | '$$SalesReturnOrder028001$$' | 'L/Green'  |
+			| 'Quantity' | 'Recorder'                   | 'Store'    | 'Order'                      | 'Item key' |
+			| '2,000'    | '$$SalesReturnOrder028004$$' | 'Store 01' | '$$SalesReturnOrder028004$$' | 'L/Green'  |
 		And I close current window
 		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
 		And "List" table contains lines
 			| 'Quantity' | 'Recorder'              | 'Sales invoice'    | 'Item key' |
-			| '-1,000'   | '$$SalesReturnOrder028001$$' | '$$SalesInvoice024008$$' | 'L/Green'  |
+			| '-2,000'   | '$$SalesReturnOrder028004$$' | '$$SalesInvoice024008$$' | 'L/Green'  |
 		And I close all client application windows
 	* And I set Approved status
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"

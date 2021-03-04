@@ -81,7 +81,22 @@ Function Convert(FromUnit, ToUnit, Quantity) Export
 	Return Quantity / UnitFactorTo * UnitFactorFrom;
 EndFunction	
 
+Function ConvertQuantityToQuantityInBaseUnit(ItemKey, Unit, Quantity) Export
+	BasisUnit = GetBasisQuantity(ItemKey); 
+	QuantityInBaseUnit =  Convert(Unit, BasisUnit, Quantity);
+	Return New Structure("BasisUnit, QuantityInBaseUnit", BasisUnit, QuantityInBaseUnit);
+EndFunction
+
+Function GetBasisQuantity(ItemKey) Export
+	If ValueIsFilled(ItemKey.Unit) Then
+		Return ItemKey.Unit;
+	Else
+		Return ItemKey.Item.Unit;
+	EndIf;
+EndFunction
+
 #Region LockAttributes
+
 Function GetListLockedAttributes_IncludeObjects() Export
 	Array = New Array;
 	Return Array;

@@ -648,47 +648,21 @@ EndFunction
 
 Function CreateTablesForExtractData(EmptyTable)
 	Tables = New Structure();
-	Tables.Insert("FromSO", EmptyTable.Copy());
-	Tables.Insert("FromSI", EmptyTable.Copy());
-	
-	Tables.Insert("FromSC", EmptyTable.Copy());
-	
-	FromSC_ThenFromSO = EmptyTable.Copy();
-	FromSC_ThenFromSO.Columns.Add("ParentBasis", New TypeDescription("DocumentRef.SalesOrder"));
-	Tables.Insert("FromSC_ThenFromSO", FromSC_ThenFromSO);
-	
-	FromSC_ThenFromSI = EmptyTable.Copy();
-	FromSC_ThenFromSI.Columns.Add("ParentBasis", New TypeDescription("DocumentRef.SalesInvoice"));
-	Tables.Insert("FromSC_ThenFromSI", FromSC_ThenFromSI);
-	
-	FromSC_ThenFromPIGR_ThenFromSO = EmptyTable.Copy();
-	ArrayTypes = New Array();
-	ArrayTypes.Add(Type("DocumentRef.PurchaseInvoice"));
-	ArrayTypes.Add(Type("DocumentRef.GoodsReceipt"));
-	ParentBasisTypes = New TypeDescription(ArrayTypes);
-	FromSC_ThenFromPIGR_ThenFromSO.Columns.Add("ParentBasis", ParentBasisTypes);
-	Tables.Insert("FromSC_ThenFromPIGR_ThenFromSO", FromSC_ThenFromPIGR_ThenFromSO);
-	
-	Tables.Insert("FromPO", EmptyTable.Copy());
-	Tables.Insert("FromPI", EmptyTable.Copy());
-	
-	Tables.Insert("FromGR", EmptyTable.Copy());
-	
-	FromGR_ThenFromPO = EmptyTable.Copy();
-	FromGR_ThenFromPO.Columns.Add("ParentBasis", New TypeDescription("DocumentRef.PurchaseOrder"));
-	Tables.Insert("FromGR_ThenFromPO", FromGR_ThenFromPO);
-	
-	FromGR_ThenFromPI = EmptyTable.Copy();
-	FromGR_ThenFromPI.Columns.Add("ParentBasis", New TypeDescription("DocumentRef.PurchaseInvoice"));
-	Tables.Insert("FromGR_ThenFromPI", FromGR_ThenFromPI);
-	
-	FromPIGR_ThenFromSO = EmptyTable.Copy();
-	FromPIGR_ThenFromSO.Columns.Add("ParentBasis", New TypeDescription("DocumentRef.SalesOrder"));
-	Tables.Insert("FromPIGR_ThenFromSO", FromPIGR_ThenFromSO);
-	
-	Tables.Insert("FromISR" , EmptyTable.Copy());
-	Tables.Insert("FromITO" , EmptyTable.Copy());
-	Tables.Insert("FromIT"  , EmptyTable.Copy());
+	Tables.Insert("FromSO"                         , EmptyTable.Copy());
+	Tables.Insert("FromSI"                         , EmptyTable.Copy());	
+	Tables.Insert("FromSC"                         , EmptyTable.Copy());
+	Tables.Insert("FromSC_ThenFromSO"              , EmptyTable.Copy());
+	Tables.Insert("FromSC_ThenFromSI"              , EmptyTable.Copy());
+	Tables.Insert("FromSC_ThenFromPIGR_ThenFromSO" , EmptyTable.Copy());
+	Tables.Insert("FromPO"                         , EmptyTable.Copy());
+	Tables.Insert("FromPI"                         , EmptyTable.Copy());
+	Tables.Insert("FromGR"                         , EmptyTable.Copy());
+	Tables.Insert("FromGR_ThenFromPO"              , EmptyTable.Copy());
+	Tables.Insert("FromGR_ThenFromPI"              , EmptyTable.Copy());
+	Tables.Insert("FromPIGR_ThenFromSO"            , EmptyTable.Copy());
+	Tables.Insert("FromISR"                        , EmptyTable.Copy());
+	Tables.Insert("FromITO"                        , EmptyTable.Copy());
+	Tables.Insert("FromIT"                         , EmptyTable.Copy());
 	Return Tables;
 EndFunction
 
@@ -852,9 +826,8 @@ Function ExtractDataByTables(Tables, DataReceiver)
 	Return ExtractedData;
 EndFunction
 
-Function ExtractData_FromSO(BasisesTable, DataReceiver)
-	Query = New Query();
-	Query.Text =
+Function GetQueryText_BasisesTable()
+	Return
 		"SELECT
 		|	BasisesTable.Key,
 		|	BasisesTable.BasisKey,
@@ -862,15 +835,33 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver)
 		|	BasisesTable.CurrentStep,
 		|	BasisesTable.RowRef,
 		|	BasisesTable.Basis,
+		|	BasisesTable.ParentBasis,
+		|	BasisesTable.Unit,
 		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
+		|	BasisesTable.QuantityInBaseUnit
 		|INTO BasisesTable
 		|FROM
 		|	&BasisesTable AS BasisesTable
-		|;
-		|
+		|; 
 		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT ALLOWED
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key AS Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.RowID,
+		|	BasisesTable.CurrentStep,
+		|	BasisesTable.RowRef,
+		|	BasisesTable.Basis,
+		|	BasisesTable.QuantityInBaseUnit AS Quantity
+		|FROM
+		|	BasisesTable AS BasisesTable
+		|; ";
+EndFunction
+
+Function ExtractData_FromSO(BasisesTable, DataReceiver)
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text +
+		"SELECT ALLOWED
 		|	""SalesOrder"" AS BasedOn,
 		|	UNDEFINED AS Ref,
 		|	ItemList.Ref AS SalesOrder,
@@ -885,7 +876,6 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver)
 		|	ItemList.Ref.Company AS Company,
 		|	ItemList.ItemKey AS ItemKey,
 		|	ItemList.ItemKey.Item AS Item,
-		|	ItemList.Unit AS Unit,
 		|	ItemList.Store AS Store,
 		|	ItemList.PriceType AS PriceType,
 		|	ItemList.DeliveryDate AS DeliveryDate,
@@ -910,8 +900,9 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver)
 		|	ItemList.LineNumber AS LineNumber,
 		|	ItemList.Key AS SalesOrderItemListKey,
 		|	BasisesTable.Key,
+		|	BasisesTable.Unit AS Unit,
 		|	BasisesTable.BasisUnit AS BasisUnit,
-		|	BasisesTable.Quantity AS QuantityInBaseUnit
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
 		|FROM
 		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.SalesOrder.ItemList AS ItemList
@@ -919,20 +910,6 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver)
 		|		AND BasisesTable.BasisKey = ItemList.Key
 		|ORDER BY
 		|	LineNumber
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT
-		|	UNDEFINED AS Ref,
-		|	BasisesTable.Key AS Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.Quantity
-		|FROM
-		|	BasisesTable AS BasisesTable
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -969,14 +946,14 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver)
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TableItemList      = QueryResults[1].Unload();	
-	TableRowIDInfo     = QueryResults[2].Unload();
+	TableRowIDInfo     = QueryResults[1].Unload();
+	TableItemList      = QueryResults[2].Unload();	
 	TableTaxList       = QueryResults[3].Unload();
 	TableSpecialOffers = QueryResults[4].Unload();
 		
 	Tables = New Structure();
-	Tables.Insert("ItemList"      , TableItemList);
 	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
+	Tables.Insert("ItemList"      , TableItemList);
 	Tables.Insert("TaxList"       , TableTaxList);
 	Tables.Insert("SpecialOffers" , TableSpecialOffers);
 	
@@ -988,24 +965,9 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver)
 EndFunction
 
 Function ExtractData_FromSI(BasisesTable, DataReceiver)
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|INTO BasisesTable
-		|FROM
-		|	&BasisesTable AS BasisesTable
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT ALLOWED
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text +
+		"SELECT ALLOWED
 		|	""SalesInvoice"" AS BasedOn,
 		|	UNDEFINED AS Ref,
 		|	ItemList.Ref AS SalesInvoice,
@@ -1020,7 +982,6 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver)
 		|	ItemList.Ref.Company AS Company,
 		|	ItemList.ItemKey AS ItemKey,
 		|	ItemList.ItemKey.Item AS Item,
-		|	ItemList.Unit AS Unit,
 		|	ItemList.Store AS Store,
 		|	ItemList.PriceType AS PriceType,
 		|	ItemList.DeliveryDate AS DeliveryDate,
@@ -1041,8 +1002,9 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver)
 		|	ItemList.LineNumber AS LineNumber,
 		|	ItemList.Key AS SalesInvoiceItemListKey,
 		|	BasisesTable.Key,
+		|	BasisesTable.Unit AS Unit,
 		|	BasisesTable.BasisUnit AS BasisUnit,
-		|	BasisesTable.Quantity AS QuantityInBaseUnit
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
 		|FROM
 		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
@@ -1050,21 +1012,6 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver)
 		|		AND BasisesTable.BasisKey = ItemList.Key
 		|ORDER BY
 		|	ItemList.LineNumber
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT
-		|	UNDEFINED AS Ref,
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|FROM
-		|	BasisesTable AS BasisesTable
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -1100,8 +1047,8 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver)
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TableItemList      = QueryResults[1].Unload();	
-	TableRowIDInfo     = QueryResults[2].Unload();
+	TableRowIDInfo     = QueryResults[1].Unload();
+	TableItemList      = QueryResults[2].Unload();	
 	TableTaxList       = QueryResults[3].Unload();
 	TableSpecialOffers = QueryResults[4].Unload();
 		
@@ -1119,24 +1066,9 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver)
 EndFunction
 
 Function ExtractData_FromSC(BasisesTable, DataReceiver)
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|INTO BasisesTable
-		|FROM
-		|	&BasisesTable AS BasisesTable
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT ALLOWED
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text +
+		"SELECT ALLOWED
 		|	""ShipmentConfirmation"" AS BasedOn,
 		|	UNDEFINED AS Ref,
 		|	ItemList.Ref.Company AS Company,
@@ -1145,12 +1077,12 @@ Function ExtractData_FromSC(BasisesTable, DataReceiver)
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey.Item AS Item,
 		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.Unit AS Unit,
 		|	TRUE AS UseShipmentConfirmation,
 		|	0 AS Quantity,
 		|	BasisesTable.Key,
+		|	BasisesTable.Unit AS Unit,
 		|	BasisesTable.BasisUnit AS BasisUnit,
-		|	BasisesTable.Quantity AS QuantityInBaseUnit
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
 		|FROM
 		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
@@ -1163,41 +1095,26 @@ Function ExtractData_FromSC(BasisesTable, DataReceiver)
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT DISTINCT
 		|	UNDEFINED AS Ref,
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|FROM
-		|	BasisesTable AS BasisesTable
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT
-		|	UNDEFINED AS Ref,
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey.Item AS Item,
 		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.Unit AS Unit,
-		|	ShipmentConfirmations.Key,
-		|	ShipmentConfirmations.BasisKey,
-		|	ShipmentConfirmations.Basis AS ShipmentConfirmation,
-		|	ShipmentConfirmations.Quantity AS Quantity,
-		|	ShipmentConfirmations.Quantity AS QuantityInShipmentConfirmation
+		|	BasisesTable.Unit AS Unit,
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.Basis AS ShipmentConfirmation,
+		|	BasisesTable.QuantityInBaseUnit AS Quantity,
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInShipmentConfirmation
 		|FROM
-		|	BasisesTable AS ShipmentConfirmations
+		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
-		|		ON ShipmentConfirmations.Basis = ItemList.Ref
-		|		AND ShipmentConfirmations.BasisKey = ItemList.Key";
+		|		ON BasisesTable.Basis = ItemList.Ref
+		|		AND BasisesTable.BasisKey = ItemList.Key";
 			
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TableItemList              = QueryResults[1].Unload();
-	TableRowIDInfo             = QueryResults[2].Unload(); 
+	TableRowIDInfo             = QueryResults[1].Unload();
+	TableItemList              = QueryResults[2].Unload();
 	TableShipmentConfirmations = QueryResults[3].Unload();
 	
 	For Each RowItemList In TableItemList Do
@@ -1215,33 +1132,19 @@ Function ExtractData_FromSC(BasisesTable, DataReceiver)
 EndFunction
 
 Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver)
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.ParentBasis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|INTO BasisesTable
-		|FROM
-		|	&BasisesTable AS BasisesTable
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT ALLOWED
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text +
+		"SELECT DISTINCT ALLOWED
 		|	BasisesTable.Key,
 		|	RowIDInfo.BasisKey AS BasisKey,
 		|	BasisesTable.RowID,
 		|	BasisesTable.CurrentStep,
 		|	BasisesTable.RowRef,
+		|	VALUE(Document.SalesOrder.EmptyRef) AS ParentBasis,
 		|	BasisesTable.ParentBasis AS Basis,
+		|	BasisesTable.Unit,
 		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
+		|	BasisesTable.QuantityInBaseUnit
 		|FROM
 		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.ShipmentConfirmation.RowIDInfo AS RowIDInfo
@@ -1252,43 +1155,28 @@ Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver)
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT DISTINCT
 		|	UNDEFINED AS Ref,
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|FROM
-		|	BasisesTable AS BasisesTable
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT
-		|	UNDEFINED AS Ref,
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey.Item AS Item,
 		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.Unit AS Unit,
-		|	ShipmentConfirmations.Key,
-		|	ShipmentConfirmations.BasisKey,
-		|	ShipmentConfirmations.Basis AS ShipmentConfirmation,
-		|	ShipmentConfirmations.Quantity AS Quantity,
-		|	ShipmentConfirmations.Quantity AS QuantityInShipmentConfirmation
+		|	BasisesTable.Unit AS Unit,
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.Basis AS ShipmentConfirmation,
+		|	BasisesTable.QuantityInBaseUnit AS Quantity,
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInShipmentConfirmation
 		|FROM
-		|	BasisesTable AS ShipmentConfirmations
+		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
-		|		ON ShipmentConfirmations.Basis = ItemList.Ref
-		|		AND ShipmentConfirmations.BasisKey = ItemList.Key";
+		|		ON BasisesTable.Basis = ItemList.Ref
+		|		AND BasisesTable.BasisKey = ItemList.Key";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TablesSO = ExtractData_FromSO(QueryResults[1].Unload(), DataReceiver);
+	TablesSO = ExtractData_FromSO(QueryResults[2].Unload(), DataReceiver);
 	TablesSO.ItemList.FillValues(True, "UseShipmentConfirmation");
 	
-	TableRowIDInfo             = QueryResults[2].Unload(); 
+	TableRowIDInfo             = QueryResults[1].Unload(); 
 	TableShipmentConfirmations = QueryResults[3].Unload();
 	
 	Tables = New Structure();
@@ -1304,33 +1192,19 @@ Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver)
 EndFunction
 
 Function ExtractData_FromSC_ThenFromSI(BasisesTable, DataReceiver)
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.ParentBasis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|INTO BasisesTable
-		|FROM
-		|	&BasisesTable AS BasisesTable
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT ALLOWED
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text + 
+		"SELECT DISTINCT ALLOWED
 		|	BasisesTable.Key,
 		|	RowIDInfo.BasisKey AS BasisKey,
 		|	BasisesTable.RowID,
 		|	BasisesTable.CurrentStep,
 		|	BasisesTable.RowRef,
+		|	VALUE(Document.SalesInvoice.EmptyRef) AS ParentBasis,
 		|	BasisesTable.ParentBasis AS Basis,
+		|	BasisesTable.Unit,
 		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
+		|	BasisesTable.QuantityInBaseUnit
 		|FROM
 		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.ShipmentConfirmation.RowIDInfo AS RowIDInfo
@@ -1341,43 +1215,28 @@ Function ExtractData_FromSC_ThenFromSI(BasisesTable, DataReceiver)
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT DISTINCT
 		|	UNDEFINED AS Ref,
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|FROM
-		|	BasisesTable AS BasisesTable
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT
-		|	UNDEFINED AS Ref,
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey.Item AS Item,
 		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.Unit AS Unit,
-		|	ShipmentConfirmations.Key,
-		|	ShipmentConfirmations.BasisKey,
-		|	ShipmentConfirmations.Basis AS ShipmentConfirmation,
-		|	ShipmentConfirmations.Quantity AS Quantity,
-		|	ShipmentConfirmations.Quantity AS QuantityInShipmentConfirmation
+		|	BasisesTable.Unit AS Unit,
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.Basis AS ShipmentConfirmation,
+		|	BasisesTable.QuantityInBaseUnit AS Quantity,
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInShipmentConfirmation
 		|FROM
-		|	BasisesTable AS ShipmentConfirmations
+		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
-		|		ON ShipmentConfirmations.Basis = ItemList.Ref
-		|		AND ShipmentConfirmations.BasisKey = ItemList.Key";
+		|		ON BasisesTable.Basis = ItemList.Ref
+		|		AND BasisesTable.BasisKey = ItemList.Key";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TablesSI = ExtractData_FromSI(QueryResults[1].Unload(), DataReceiver);
+	TablesSI = ExtractData_FromSI(QueryResults[2].Unload(), DataReceiver);
 	TablesSI.ItemList.FillValues(True, "UseShipmentConfirmation");
 	
-	TableRowIDInfo             = QueryResults[2].Unload(); 
+	TableRowIDInfo             = QueryResults[1].Unload(); 
 	TableShipmentConfirmations = QueryResults[3].Unload();
 	
 	Tables = New Structure();
@@ -1393,25 +1252,9 @@ Function ExtractData_FromSC_ThenFromSI(BasisesTable, DataReceiver)
 EndFunction
 
 Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver)
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.ParentBasis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|INTO BasisesTable
-		|FROM
-		|	&BasisesTable AS BasisesTable
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT ALLOWED
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text +
+		"SELECT DISTINCT ALLOWED
 		|	BasisesTable.Key,
 		|	RowIDInfo.BasisKey AS BasisKey,
 		|	BasisesTable.RowID,
@@ -1419,8 +1262,9 @@ Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver)
 		|	BasisesTable.RowRef,
 		|	BasisesTable.RowRef.Basis AS ParentBasis,
 		|	BasisesTable.ParentBasis AS Basis,
+		|	BasisesTable.Unit,
 		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
+		|	BasisesTable.QuantityInBaseUnit
 		|FROM
 		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.ShipmentConfirmation.RowIDInfo AS RowIDInfo
@@ -1431,43 +1275,28 @@ Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver)
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT DISTINCT
 		|	UNDEFINED AS Ref,
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|FROM
-		|	BasisesTable AS BasisesTable
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT
-		|	UNDEFINED AS Ref,
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey.Item AS Item,
 		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.Unit AS Unit,
-		|	ShipmentConfirmations.Key,
-		|	ShipmentConfirmations.BasisKey,
-		|	ShipmentConfirmations.Basis AS ShipmentConfirmation,
-		|	ShipmentConfirmations.Quantity AS Quantity,
-		|	ShipmentConfirmations.Quantity AS QuantityInShipmentConfirmation
+		|	BasisesTable.Unit AS Unit,
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.Basis AS ShipmentConfirmation,
+		|	BasisesTable.QuantityInBaseUnit AS Quantity,
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInShipmentConfirmation
 		|FROM
-		|	BasisesTable AS ShipmentConfirmations
+		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
-		|		ON ShipmentConfirmations.Basis = ItemList.Ref
-		|		AND ShipmentConfirmations.BasisKey = ItemList.Key";
+		|		ON BasisesTable.Basis = ItemList.Ref
+		|		AND BasisesTable.BasisKey = ItemList.Key";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TablesPIGRSO = ExtractData_FromPIGR_ThenFromSO(QueryResults[1].Unload(), DataReceiver);
+	TablesPIGRSO = ExtractData_FromPIGR_ThenFromSO(QueryResults[2].Unload(), DataReceiver);
 	TablesPIGRSO.ItemList.FillValues(True, "UseShipmentConfirmation");
 	
-	TableRowIDInfo             = QueryResults[2].Unload(); 
+	TableRowIDInfo             = QueryResults[1].Unload(); 
 	TableShipmentConfirmations = QueryResults[3].Unload();
 	
 	Tables = New Structure();
@@ -1483,59 +1312,28 @@ Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver)
 EndFunction
 
 Function ExtractData_FromPIGR_ThenFromSO(BasisesTable, DataReceiver)
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.ParentBasis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|INTO BasisesTable
-		|FROM
-		|	&BasisesTable AS BasisesTable
-		|;
-		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT ALLOWED
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text +
+		"SELECT DISTINCT ALLOWED
 		|	BasisesTable.Key,
 		|	BasisesTable.RowID AS BasisKey,
 		|	BasisesTable.RowID,
 		|	BasisesTable.CurrentStep,
 		|	BasisesTable.RowRef,
+		|	VALUE(Document.SalesOrder.EmptyRef) AS ParentBasis,
 		|	BasisesTable.ParentBasis AS Basis,
+		|	BasisesTable.Unit,
 		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|FROM
-		|	BasisesTable AS BasisesTable
-		|;
-		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT
-		|	UNDEFINED AS Ref,
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
+		|	BasisesTable.QuantityInBaseUnit
 		|FROM
 		|	BasisesTable AS BasisesTable";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TablesSO = ExtractData_FromSO(QueryResults[1].Unload(), DataReceiver);
+	TablesSO = ExtractData_FromSO(QueryResults[2].Unload(), DataReceiver);
 	
-	TableRowIDInfo     = QueryResults[2].Unload(); 
+	TableRowIDInfo = QueryResults[1].Unload(); 
 	
 	Tables = New Structure();
 	Tables.Insert("ItemList"      , TablesSO.ItemList);
@@ -1549,24 +1347,9 @@ Function ExtractData_FromPIGR_ThenFromSO(BasisesTable, DataReceiver)
 EndFunction
 
 Function ExtractData_FromPO(BasisesTable, DataReceiver)
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|INTO BasisesTable
-		|FROM
-		|	&BasisesTable AS BasisesTable
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT ALLOWED
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text +
+		"SELECT ALLOWED
 		|	""PurchaseOrder"" AS BasedOn,
 		|	UNDEFINED AS Ref,
 		|	ItemList.Ref AS PurchaseOrder,
@@ -1580,7 +1363,6 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver)
 		|	ItemList.Ref.Company AS Company,
 		|	ItemList.ItemKey AS ItemKey,
 		|	ItemList.ItemKey.Item AS Item,
-		|	ItemList.Unit AS Unit,
 		|	ItemList.Store AS Store,
 		|	ItemList.PriceType AS PriceType,
 		|	ItemList.DeliveryDate AS DeliveryDate,
@@ -1602,8 +1384,9 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver)
 		|	ItemList.LineNumber AS LineNumber,
 		|	ItemList.Key AS PurchaseOrderItemListKey,
 		|	BasisesTable.Key,
+		|	BasisesTable.Unit AS Unit,
 		|	BasisesTable.BasisUnit AS BasisUnit,
-		|	BasisesTable.Quantity AS QuantityInBaseUnit
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
 		|FROM
 		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.PurchaseOrder.ItemList AS ItemList
@@ -1611,20 +1394,6 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver)
 		|		AND BasisesTable.BasisKey = ItemList.Key
 		|ORDER BY
 		|	LineNumber
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT
-		|	UNDEFINED AS Ref,
-		|	BasisesTable.Key AS Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.Quantity
-		|FROM
-		|	BasisesTable AS BasisesTable
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -1661,8 +1430,8 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver)
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TableItemList      = QueryResults[1].Unload();	
-	TableRowIDInfo     = QueryResults[2].Unload();
+	TableRowIDInfo     = QueryResults[1].Unload();
+	TableItemList      = QueryResults[2].Unload();
 	TableTaxList       = QueryResults[3].Unload();
 	TableSpecialOffers = QueryResults[4].Unload();
 		
@@ -1680,24 +1449,9 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver)
 EndFunction
 
 Function ExtractData_FromPI(BasisesTable, DataReceiver)
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|INTO BasisesTable
-		|FROM
-		|	&BasisesTable AS BasisesTable
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT ALLOWED
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text + 
+		"SELECT ALLOWED
 		|	""PurchaseInvoice"" AS BasedOn,
 		|	UNDEFINED AS Ref,
 		|	ItemList.Ref AS ReceiptBasis,
@@ -1712,7 +1466,6 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver)
 		|	ItemList.Ref.Company AS Company,
 		|	ItemList.ItemKey AS ItemKey,
 		|	ItemList.ItemKey.Item AS Item,
-		|	ItemList.Unit AS Unit,
 		|	ItemList.Store AS Store,
 		|	ItemList.PriceType AS PriceType,
 		|	ItemList.DeliveryDate AS DeliveryDate,
@@ -1733,8 +1486,9 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver)
 		|	ItemList.LineNumber AS LineNumber,
 		|	ItemList.Key AS PurchaseInvoiceItemListKey,
 		|	BasisesTable.Key,
+		|	BasisesTable.Unit AS Unit,
 		|	BasisesTable.BasisUnit AS BasisUnit,
-		|	BasisesTable.Quantity AS QuantityInBaseUnit
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
 		|FROM
 		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.PurchaseInvoice.ItemList AS ItemList
@@ -1742,20 +1496,6 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver)
 		|		AND BasisesTable.BasisKey = ItemList.Key
 		|ORDER BY
 		|	ItemList.LineNumber
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT
-		|	UNDEFINED AS Ref,
-		|	BasisesTable.Key AS Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.Quantity
-		|FROM
-		|	BasisesTable AS BasisesTable
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -1790,9 +1530,9 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver)
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
-	
-	TableItemList      = QueryResults[1].Unload();	
-	TableRowIDInfo     = QueryResults[2].Unload();
+
+	TableRowIDInfo     = QueryResults[1].Unload();	
+	TableItemList      = QueryResults[2].Unload();	
 	TableTaxList       = QueryResults[3].Unload();
 	TableSpecialOffers = QueryResults[4].Unload();
 		
@@ -1810,25 +1550,9 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver)
 EndFunction
 
 Function ExtractData_FromGR(BasisesTable, DataReceiver)
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|INTO BasisesTable
-		|FROM
-		|	&BasisesTable AS BasisesTable
-		|;
-		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT ALLOWED
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text +
+		"SELECT ALLOWED
 		|	""GoodsReceipt"" AS BasedOn,
 		|	UNDEFINED AS Ref,
 		|	ItemList.Ref.Company AS Company,
@@ -1837,12 +1561,12 @@ Function ExtractData_FromGR(BasisesTable, DataReceiver)
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey.Item AS Item,
 		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.Unit AS Unit,
 		|	TRUE AS UseGoodsReceipt,
 		|	0 AS Quantity,
 		|	BasisesTable.Key,
+		|	BasisesTable.Unit AS Unit,
 		|	BasisesTable.BasisUnit AS BasisUnit,
-		|	BasisesTable.Quantity AS QuantityInBaseUnit
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
 		|FROM
 		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
@@ -1852,46 +1576,29 @@ Function ExtractData_FromGR(BasisesTable, DataReceiver)
 		|	ItemList.LineNumber
 		|;
 		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT
-		|	UNDEFINED AS Ref,
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|FROM
-		|	BasisesTable AS BasisesTable
-		|;
-		|
-		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT DISTINCT
 		|	UNDEFINED AS Ref,
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey.Item AS Item,
 		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.Unit AS Unit,
-		|	GoodsReceipt.Key,
-		|	GoodsReceipt.BasisKey,
-		|	GoodsReceipt.Basis AS GoodsReceipt,
-		|	GoodsReceipt.Quantity AS Quantity,
-		|	GoodsReceipt.Quantity AS QuantityInGoodsReceipt
+		|	BasisesTable.Unit AS Unit,
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.Basis AS GoodsReceipt,
+		|	BasisesTable.QuantityInBaseUnit AS Quantity,
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInGoodsReceipt
 		|FROM
-		|	BasisesTable AS GoodsReceipt
+		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
-		|		ON GoodsReceipt.Basis = ItemList.Ref
-		|		AND GoodsReceipt.BasisKey = ItemList.Key";
+		|		ON BasisesTable.Basis = ItemList.Ref
+		|		AND BasisesTable.BasisKey = ItemList.Key";
 			
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TableItemList      = QueryResults[1].Unload();
-	TableRowIDInfo     = QueryResults[2].Unload(); 
+	TableRowIDInfo     = QueryResults[1].Unload();
+	TableItemList      = QueryResults[2].Unload();
 	TableGoodsReceipts = QueryResults[3].Unload();
 	
 	For Each RowItemList In TableItemList Do
@@ -1909,34 +1616,19 @@ Function ExtractData_FromGR(BasisesTable, DataReceiver)
 EndFunction
 
 Function ExtractData_FromGR_ThenFromPO(BasisesTable, DataReceiver)
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.ParentBasis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|INTO BasisesTable
-		|FROM
-		|	&BasisesTable AS BasisesTable
-		|;
-		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT ALLOWED
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text +
+		"SELECT DISTINCT ALLOWED
 		|	BasisesTable.Key,
 		|	RowIDInfo.BasisKey AS BasisKey,
 		|	BasisesTable.RowID,
 		|	BasisesTable.CurrentStep,
 		|	BasisesTable.RowRef,
+		|	VALUE(Document.PurchaseOrder.EmptyRef) AS ParentBasis,
 		|	BasisesTable.ParentBasis AS Basis,
+		|	BasisesTable.Unit,
 		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
+		|	BasisesTable.QuantityInBaseUnit
 		|FROM
 		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.GoodsReceipt.RowIDInfo AS RowIDInfo
@@ -1944,48 +1636,31 @@ Function ExtractData_FromGR_ThenFromPO(BasisesTable, DataReceiver)
 		|		AND BasisesTable.BasisKey = RowIDInfo.Key
 		|;
 		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT
-		|	UNDEFINED AS Ref,
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|FROM
-		|	BasisesTable AS BasisesTable
-		|;
-		|
-		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT DISTINCT
 		|	UNDEFINED AS Ref,
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey.Item AS Item,
 		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.Unit AS Unit,
-		|	GoodsReceipt.Key,
-		|	GoodsReceipt.BasisKey,
-		|	GoodsReceipt.Basis AS GoodsReceipt,
-		|	GoodsReceipt.Quantity AS Quantity,
-		|	GoodsReceipt.Quantity AS QuantityInGoodsReceipt
+		|	BasisesTable.Unit AS Unit,
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.Basis AS GoodsReceipt,
+		|	BasisesTable.QuantityInBaseUnit AS Quantity,
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInGoodsReceipt
 		|FROM
-		|	BasisesTable AS GoodsReceipt
+		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
-		|		ON GoodsReceipt.Basis = ItemList.Ref
-		|		AND GoodsReceipt.BasisKey = ItemList.Key";
+		|		ON BasisesTable.Basis = ItemList.Ref
+		|		AND BasisesTable.BasisKey = ItemList.Key";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TablesPO = ExtractData_FromPO(QueryResults[1].Unload(), DataReceiver);
+	TablesPO = ExtractData_FromPO(QueryResults[2].Unload(), DataReceiver);
 	TablesPO.ItemList.FillValues(True, "UseGoodsReceipt");
 	
-	TableRowIDInfo     = QueryResults[2].Unload(); 
+	TableRowIDInfo     = QueryResults[1].Unload(); 
 	TableGoodsReceipts = QueryResults[3].Unload();
 	
 	Tables = New Structure();
@@ -2001,34 +1676,19 @@ Function ExtractData_FromGR_ThenFromPO(BasisesTable, DataReceiver)
 EndFunction
 
 Function ExtractData_FromGR_ThenFromPI(BasisesTable, DataReceiver)
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.ParentBasis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|INTO BasisesTable
-		|FROM
-		|	&BasisesTable AS BasisesTable
-		|;
-		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT ALLOWED
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text +
+		"SELECT DISTINCT ALLOWED
 		|	BasisesTable.Key,
 		|	RowIDInfo.BasisKey AS BasisKey,
 		|	BasisesTable.RowID,
 		|	BasisesTable.CurrentStep,
 		|	BasisesTable.RowRef,
+		|	VALUE(Document.PurchaseInvoice.EmptyRef) AS ParentBasis,
 		|	BasisesTable.ParentBasis AS Basis,
+		|	BasisesTable.Unit,
 		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
+		|	BasisesTable.QuantityInBaseUnit
 		|FROM
 		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.GoodsReceipt.RowIDInfo AS RowIDInfo
@@ -2036,48 +1696,31 @@ Function ExtractData_FromGR_ThenFromPI(BasisesTable, DataReceiver)
 		|		AND BasisesTable.BasisKey = RowIDInfo.Key
 		|;
 		|
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT
-		|	UNDEFINED AS Ref,
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|FROM
-		|	BasisesTable AS BasisesTable
-		|;
-		|
-		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT DISTINCT
 		|	UNDEFINED AS Ref,
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey.Item AS Item,
 		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.Unit AS Unit,
-		|	GoodsReceipt.Key,
-		|	GoodsReceipt.BasisKey,
-		|	GoodsReceipt.Basis AS GoodsReceipt,
-		|	GoodsReceipt.Quantity AS Quantity,
-		|	GoodsReceipt.Quantity AS QuantityInGoodsReceipt
+		|	BasisesTable.Unit AS Unit,
+		|	BasisesTable.Key,
+		|	BasisesTable.BasisKey,
+		|	BasisesTable.Basis AS GoodsReceipt,
+		|	BasisesTable.QuantityInBaseUnit AS Quantity,
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInGoodsReceipt
 		|FROM
-		|	BasisesTable AS GoodsReceipt
+		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
-		|		ON GoodsReceipt.Basis = ItemList.Ref
-		|		AND GoodsReceipt.BasisKey = ItemList.Key";
+		|		ON BasisesTable.Basis = ItemList.Ref
+		|		AND BasisesTable.BasisKey = ItemList.Key";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TablesPI = ExtractData_FromPI(QueryResults[1].Unload(), DataReceiver);
+	TablesPI = ExtractData_FromPI(QueryResults[2].Unload(), DataReceiver);
 	TablesPI.ItemList.FillValues(True, "UseGoodsReceipt");
 	
-	TableRowIDInfo     = QueryResults[2].Unload(); 
+	TableRowIDInfo     = QueryResults[1].Unload(); 
 	TableGoodsReceipts = QueryResults[3].Unload();
 	
 	Tables = New Structure();
@@ -2093,24 +1736,9 @@ Function ExtractData_FromGR_ThenFromPI(BasisesTable, DataReceiver)
 EndFunction
 
 Function ExtractData_FromITO(BasisesTable, DataReceiver)
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|INTO BasisesTable
-		|FROM
-		|	&BasisesTable AS BasisesTable
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT ALLOWED
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text +
+		"SELECT ALLOWED
 		|	""InventoryTransferOrder"" AS BasedOn,
 		|	UNDEFINED AS Ref,
 		|	ItemList.Ref AS InventoryTransferOrder,
@@ -2121,40 +1749,25 @@ Function ExtractData_FromITO(BasisesTable, DataReceiver)
 		|	ItemList.Ref.StoreReceiver AS StoreReceiver,
 		|	ItemList.ItemKey.Item AS Item,
 		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.Unit AS Unit,
 		|	0 AS Quantity,
 		|	BasisesTable.Key,
+		|	BasisesTable.Unit AS Unit,
 		|	BasisesTable.BasisUnit AS BasisUnit,
-		|	BasisesTable.Quantity AS QuantityInBaseUnit
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
 		|FROM
 		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.InventoryTransferOrder.ItemList AS ItemList
 		|		ON BasisesTable.Basis = ItemList.Ref
 		|		AND BasisesTable.BasisKey = ItemList.Key
 		|ORDER BY
-		|	ItemList.LineNumber
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT
-		|	UNDEFINED AS Ref,
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|FROM
-		|	BasisesTable AS BasisesTable";
+		|	ItemList.LineNumber";
 				
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TableItemList      = QueryResults[1].Unload();
-	TableRowIDInfo     = QueryResults[2].Unload(); 
-	
+	TableRowIDInfo = QueryResults[1].Unload();
+	TableItemList  = QueryResults[2].Unload();
+	 
 	For Each RowItemList In TableItemList Do
 		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit, RowItemList.QuantityInBaseUnit);
 	EndDo;
@@ -2169,24 +1782,9 @@ Function ExtractData_FromITO(BasisesTable, DataReceiver)
 EndFunction
 
 Function ExtractData_FromIT(BasisesTable, DataReceiver)
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|INTO BasisesTable
-		|FROM
-		|	&BasisesTable AS BasisesTable
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT ALLOWED
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text +
+		"SELECT ALLOWED
 		|	""InventoryTransfer"" AS BasedOn,
 		|	UNDEFINED AS Ref,
 		|	ItemList.Ref AS InventoryTransfer,
@@ -2198,33 +1796,18 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver)
 		|	%2 AS TransactionType,
 		|	ItemList.ItemKey.Item AS Item,
 		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.Unit AS Unit,
 		|	0 AS Quantity,
 		|	BasisesTable.Key,
+		|	BasisesTable.Unit AS Unit,
 		|	BasisesTable.BasisUnit AS BasisUnit,
-		|	BasisesTable.Quantity AS QuantityInBaseUnit
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
 		|FROM
 		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.InventoryTransfer.ItemList AS ItemList
 		|		ON BasisesTable.Basis = ItemList.Ref
 		|		AND BasisesTable.BasisKey = ItemList.Key
 		|ORDER BY
-		|	ItemList.LineNumber
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT
-		|	UNDEFINED AS Ref,
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|FROM
-		|	BasisesTable AS BasisesTable";
+		|	ItemList.LineNumber";
 	
 	StoreName = "UNDEFINED";
 	TransactionType = "UNDEFINED";
@@ -2240,9 +1823,9 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver)
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TableItemList      = QueryResults[1].Unload();
-	TableRowIDInfo     = QueryResults[2].Unload(); 
-	
+	TableRowIDInfo  = QueryResults[1].Unload();
+	TableItemList   = QueryResults[2].Unload();
+	 
 	For Each RowItemList In TableItemList Do
 		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit, RowItemList.QuantityInBaseUnit);
 	EndDo;
@@ -2257,24 +1840,9 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver)
 EndFunction
 
 Function ExtractData_FromISR(BasisesTable, DataReceiver)
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|INTO BasisesTable
-		|FROM
-		|	&BasisesTable AS BasisesTable
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT ALLOWED
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text +
+		"SELECT ALLOWED
 		|	""InternalSupplyRequest"" AS BasedOn,
 		|	UNDEFINED AS Ref,
 		|	ItemList.Ref AS InternalSupplyRequest,
@@ -2284,40 +1852,25 @@ Function ExtractData_FromISR(BasisesTable, DataReceiver)
 		|	ItemList.Ref.Store AS StoreReceiver,
 		|	ItemList.ItemKey.Item AS Item,
 		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.Unit AS Unit,
 		|	0 AS Quantity,
 		|	BasisesTable.Key,
+		|	BasisesTable.Unit AS Unit,
 		|	BasisesTable.BasisUnit AS BasisUnit,
-		|	BasisesTable.Quantity AS QuantityInBaseUnit
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
 		|FROM
 		|	BasisesTable AS BasisesTable
 		|		LEFT JOIN Document.InternalSupplyRequest.ItemList AS ItemList
 		|		ON BasisesTable.Basis = ItemList.Ref
 		|		AND BasisesTable.BasisKey = ItemList.Key
 		|ORDER BY
-		|	ItemList.LineNumber
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT DISTINCT
-		|	UNDEFINED AS Ref,
-		|	BasisesTable.Key,
-		|	BasisesTable.BasisKey,
-		|	BasisesTable.RowID,
-		|	BasisesTable.CurrentStep,
-		|	BasisesTable.RowRef,
-		|	BasisesTable.Basis,
-		|	BasisesTable.BasisUnit,
-		|	BasisesTable.Quantity
-		|FROM
-		|	BasisesTable AS BasisesTable";
+		|	ItemList.LineNumber";
 				
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TableItemList      = QueryResults[1].Unload();
-	TableRowIDInfo     = QueryResults[2].Unload(); 
-	
+	TableRowIDInfo     = QueryResults[1].Unload();
+	TableItemList      = QueryResults[2].Unload();
+
 	For Each RowItemList In TableItemList Do
 		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit, RowItemList.QuantityInBaseUnit);
 	EndDo;
@@ -3947,7 +3500,7 @@ Function GetBasisesTable(StepArray, FilterValues, FilterSets)
 	|UNDEFINED AS Key,
 	|UNDEFINED AS BasisKey,
 	|UNDEFINED AS BasisUnit,
-	|UNDEFINED AS Quantity,
+	|UNDEFINED AS QuantityInBaseUnit,
 	|UNDEFINED AS RowRef,
 	|UNDEFINED AS RowID,
 	|UNDEFINED AS CurrentStep,
@@ -3969,10 +3522,11 @@ Function GetBasisesTable(StepArray, FilterValues, FilterSets)
 	|	AllData.Item,
 	|	AllData.Store,
 	|	AllData.Basis AS Basis,
+	|	UNDEFINED AS ParentBasis,
 	|	AllData.Key,
 	|	AllData.BasisKey,
 	|	AllData.BasisUnit,
-	|	AllData.Quantity,
+	|	AllData.QuantityInBaseUnit,
 	|	AllData.RowRef,
 	|	AllData.RowID,
 	|	AllData.CurrentStep,
@@ -4613,7 +4167,6 @@ Function CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, BasisesT
 						FillPropertyValues(DeepLevelRow, InfoRow);
 					EndDo;
 					
-					DeepLevelRow.QuantityInBaseUnit = TableRow.Quantity;
 					DeepLevelRow.Quantity = Catalogs.Units.Convert(DeepLevelRow.BasisUnit, 
 						DeepLevelRow.Unit, DeepLevelRow.QuantityInBaseUnit);
 						

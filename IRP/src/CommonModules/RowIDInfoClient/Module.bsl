@@ -95,14 +95,14 @@ Function GetRowIDInfoRows(RowIDInfo) Export
 	RowIDInfoRows = New Array();
 	For Each Row In RowIDInfo Do
 		NewRow = New Structure();
-		NewRow.Insert("Key"         , Row.Key);
-		NewRow.Insert("RowID"       , Row.RowID); 
-		NewRow.Insert("Quantity"    , Row.Quantity);
-		NewRow.Insert("BasisKey"    , Row.BasisKey); 
-		NewRow.Insert("Basis"       , Row.Basis);
-		NewRow.Insert("CurrentStep" , Row.CurrentStep);
-		NewRow.Insert("NextStep"    , Row.NextStep);
-		NewRow.Insert("RowRef"      , Row.RowRef);
+		NewRow.Insert("Key"                , Row.Key);
+		NewRow.Insert("RowID"              , Row.RowID); 
+		NewRow.Insert("QuantityInBaseUnit" , Row.Quantity);
+		NewRow.Insert("BasisKey"           , Row.BasisKey); 
+		NewRow.Insert("Basis"              , Row.Basis);
+		NewRow.Insert("CurrentStep"        , Row.CurrentStep);
+		NewRow.Insert("NextStep"           , Row.NextStep);
+		NewRow.Insert("RowRef"             , Row.RowRef);
 		RowIDInfoRows.Add(NewRow);
 	EndDo;
 	Return RowIDInfoRows;

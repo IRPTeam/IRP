@@ -566,6 +566,7 @@ Function AgreementSettings(Object, Form, AddInfo = Undefined) Export
 	Actions.Insert("ChangeStore"			, "ChangeStore");
 	Actions.Insert("ChangeDeliveryDate"		, "ChangeDeliveryDate");
 	Actions.Insert("ChangePaymentTerm"		, "ChangePaymentTerm");
+	Actions.Insert("ChangeTaxRates"		    , "ChangeTaxRates");
 	
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax, ManagerSegment";

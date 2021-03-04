@@ -282,10 +282,6 @@ Procedure AgreementOnChange(Object, Form, Module, Item = Undefined, Settings  = 
 	Settings.Insert("ObjectAttributes"	, AgreementSettings.ObjectAttributes);
 	Settings.Insert("FormAttributes"	, AgreementSettings.FormAttributes);
 	
-	// {TAXES}
-	// рАЗДЕЛИТЬ ПРОЦЕДУРУ НА ЗАПОЛНЕНИЕ И ПЕРЕРАСЧЕТ
-	TaxesClient.ChangeTaxRatesByAgreement(Object, Form, AddInfo);
-	// {TAXES}
 	CurrentValuesStructure = CreateCurrentValuesStructure(Object, Settings.ObjectAttributes, Settings.FormAttributes);
 	FillPropertyValues(CurrentValuesStructure, Form, Settings.FormAttributes);
 	
@@ -1095,6 +1091,20 @@ Procedure ShowUserQueryBoxContinue(Result, AdditionalParameters) Export
 		If ProcedureName = "UpdatePaymentTerms" Then
 			CalculatePaymentTermDateAndAmount(Object, Form, AdditionalParameters.AddInfo);
 		EndIf;
+	EndIf;
+	
+	If Result.Property("UpdateTaxRates") Then
+		ArrayOfChangeTaxParameters = 
+			CommonFunctionsClientServer.GetFromAddInfo(AdditionalParameters.AddInfo, "ArrayOfChangeTaxParameters");
+			
+		For Each i In ArrayOfChangeTaxParameters Do
+			For Each Row In Object.ItemList Do
+				Row[i.TaxInfo.Name] = Undefined;
+			EndDo;
+		EndDo;
+		CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.ItemList,
+				TaxesClient.GetCalculateRowsActions(),
+				TaxesClient.GetArrayOfTaxInfo(Form));			
 	EndIf;
 	
 	Settings.CalculateSettings = New Structure();
@@ -1945,6 +1955,87 @@ Procedure UpdatePaymentTerm(Object, Form, Settings, AddInfo = Undefined) Export
 	EndIf;
 EndProcedure
 
+Procedure ChangeTaxRates(Object, Form, Settings, AddInfo = Undefined) Export
+	If Not ValueIsFilled(Object.Agreement) Then
+		Return;
+	EndIf;
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+	If ServerData = Undefined Then
+		ArrayOfTaxInfo = TaxesClient.GetArrayOfTaxInfo(Form);
+	Else
+		ArrayOfTaxInfo = ServerData.ArrayOfTaxInfo;
+	EndIf;
+	
+	ArrayOfCurrentTaxInfo = New Array();
+	For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
+		
+		TaxTypeIsRate = True;
+		If ItemOfTaxInfo.Property("TaxTypeIsRate") Then
+			TaxTypeIsRate = ItemOfTaxInfo.TaxTypeIsRate;
+		Else
+			TaxTypeIsRate = (ItemOfTaxInfo.Type = PredefinedValue("Enum.TaxType.Rate"));
+		EndIf;
+		
+		If TaxTypeIsRate Then
+			ArrayOfCurrentTaxRates = New Array();
+			For Each RowItemList In Object.ItemList Do
+				SelectedTaxRate = RowItemList[ItemOfTaxInfo.Name];
+				If ValueIsFilled(SelectedTaxRate) Then
+					ArrayOfCurrentTaxRates.Add(SelectedTaxRate);
+				EndIf;
+			EndDo;
+			
+			CurrentTaxInfo = New Structure();
+			CurrentTaxInfo.Insert("Date"                  , Object.Date);
+			CurrentTaxInfo.Insert("Company"               , Object.Company);
+			CurrentTaxInfo.Insert("Agreement"             , Object.Agreement);
+			CurrentTaxInfo.Insert("Tax"                   , ItemOfTaxInfo.Tax);
+			CurrentTaxInfo.Insert("ArrayOfCurrentTaxRates", ArrayOfCurrentTaxRates);
+			CurrentTaxInfo.Insert("TaxInfo"               , ItemOfTaxInfo);
+			
+			ArrayOfCurrentTaxInfo.Add(CurrentTaxInfo);
+		EndIf;
+	EndDo;
+	
+	ArrayOfChangeTaxParameters = New Array();
+	
+	For Each ItemOfCurrentTaxInfo In ArrayOfCurrentTaxInfo Do
+		ArrayOfTaxRates = New Array();
+		If ItemOfCurrentTaxInfo.TaxInfo.Property("ArrayOfTaxRatesForAgreement") Then
+			ArrayOfTaxRates = ItemOfCurrentTaxInfo.TaxInfo.ArrayOfTaxRatesForAgreement;
+		Else	
+			ArrayOfTaxRates = TaxesServer.GetTaxRatesForAgreement(ItemOfCurrentTaxInfo);
+		EndIf;
+		If Not ArrayOfTaxRates.Count() Then
+			If ItemOfCurrentTaxInfo.TaxInfo.Property("ArrayOfTaxRatesForCompany") Then
+				ArrayOfTaxRates = ItemOfCurrentTaxInfo.TaxInfo.ArrayOfTaxRatesForCompany;
+			Else	
+				ArrayOfTaxRates = TaxesServer.GetTaxRatesForCompany(ItemOfCurrentTaxInfo);
+			EndIf;
+		EndIf;
+		
+		NewTaxRate = Undefined;
+		If ArrayOfTaxRates.Count() Then
+			NewTaxRate = ArrayOfTaxRates[0].TaxRate;
+		EndIf;
+		For Each CurrentTaxRate In ItemOfCurrentTaxInfo.ArrayOfCurrentTaxRates Do
+			If CurrentTaxRate <> NewTaxRate Then
+				ArrayOfChangeTaxParameters.Add(ItemOfCurrentTaxInfo);
+				Break;
+			EndIf;
+		EndDo;
+	EndDo;
+	
+	If ArrayOfChangeTaxParameters.Count() Then
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ArrayOfChangeTaxParameters", ArrayOfChangeTaxParameters);
+		QuestionStructure = New Structure;
+		QuestionStructure.Insert("ProcedureName" , "ChangeTaxRates");
+		QuestionStructure.Insert("QuestionText"  , R().QuestionToUser_004);
+		QuestionStructure.Insert("Action"        , "TaxRates");
+		Settings.Questions.Add(QuestionStructure);
+	EndIf;
+EndProcedure
+
 Procedure CalculatePaymentTermDateAndAmount(Object, Form, AddInfo = Undefined) Export
 	If Not Object.PaymentTerms.Count() Then
 		Return;
@@ -2058,6 +2149,11 @@ Procedure DoTitleActions(Object, Form, Settings, Actions, AddInfo = Undefined) E
 		
 		If Action.Key = "UpdatePaymentTerm" Then
 			UpdatePaymentTerm(Object, Form, Settings, AddInfo);
+			Continue;
+		EndIf;
+		
+		If Action.Key = "ChangeTaxRates" Then
+			ChangeTaxRates(Object, Form, Settings, AddInfo);
 			Continue;
 		EndIf;
 	EndDo;

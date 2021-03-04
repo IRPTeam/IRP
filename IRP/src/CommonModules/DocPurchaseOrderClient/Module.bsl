@@ -495,6 +495,8 @@ Function AgreementSettings(Object, Form, AddInfo = Undefined) Export
 	Actions.Insert("ChangeStore"			, "ChangeStore");
 	Actions.Insert("ChangeDeliveryDate"		, "ChangeDeliveryDate");
 	Actions.Insert("ChangeGoodsReceiptBeforePurchaseInvoice", "ChangeGoodsReceiptBeforePurchaseInvoice");
+	Actions.Insert("ChangeTaxRates"		    , "ChangeTaxRates");
+	
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax";
 	Settings.FormAttributes = "Store, DeliveryDate, CurrentPriceType";

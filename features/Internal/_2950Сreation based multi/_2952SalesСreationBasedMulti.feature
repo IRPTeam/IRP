@@ -919,7 +919,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 				And I click "Yes" button
 				And I input "801" text in "Number" field
 			And I click the button named "FormPostAndClose"
-* Create Sales invoice based on SO №800 and SO №801 (should only get the service)
+* Create Sales invoice based on SO №800 and SO №801
 	And I go to line in "List" table
 			| Number |
 			| 800    |
@@ -928,9 +928,11 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 	And I click "Ok" button
 	* Check filling in tabular part
 		And "ItemList" table contains lines
-			| 'Item'    | 'Item key' | 'Q'     |
-			| 'Service' | 'Rent'     | '1,000' |
-		Then the number of "ItemList" table lines is "меньше или равно" 1
+			| 'Item'     | 'Item key'  | 'Q'      |
+			| 'Service'  | 'Rent'      | '1,000'  |
+			| 'Trousers' | '38/Yellow' | '10,000' |
+			| 'Trousers' | '38/Yellow' | '2,000'  |
+		Then the number of "ItemList" table lines is "меньше или равно" 3
 		And I close current window
 * Create Shipment confirmation based on SO №800 and SO №801 (should get 2 lines for items from two orders)
 	And I go to line in "List" table

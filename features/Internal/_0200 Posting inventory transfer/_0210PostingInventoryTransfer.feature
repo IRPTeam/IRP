@@ -29,6 +29,7 @@ Scenario: _0201000 preparation
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog BusinessUnits objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
@@ -119,6 +120,9 @@ Scenario: _0201001 create IT based on ITO
 			| 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '22,000' |
 			| 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '24,000' |
 			| ''                                                      | '3,000' |
+		And I move to "Other" tab
+		And I set checkbox "Use goods receipt"
+		And I set checkbox "Use shipment confirmation"		
 		And I click the button named "FormPost"
 		And I delete "$$InventoryTransfer0201001$$" variable
 		And I delete "$$NumberInventoryTransfer0201001$$" variable
@@ -223,11 +227,9 @@ Scenario: _0201003 copy IT (based on ITO) and check filling in Row Id info table
 			| '$$NumberInventoryTransfer0201001$$' |
 		And in the table "List" I click the button named "ListContextMenuCopy"
 	* Check copy info
-		Then the form attribute named "Partner" became equal to "Ferron BP"
-		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "Store" became equal to "Store 02"
+		Then the form attribute named "StoreSender" became equal to "Store 02"
+		Then the form attribute named "StoreReceiver" became equal to "Store 03"
 		And "ItemList" table became equal
 			| '#' | 'Item'     | 'Item key'  | 'Quantity' | 'Unit'           | 'Inventory transfer order' |
 			| '1' | 'Trousers' | '38/Yellow' | '22,000'   | 'pcs'            | ''                         |
@@ -241,10 +243,10 @@ Scenario: _0201003 copy IT (based on ITO) and check filling in Row Id info table
 		And I click the button named "FormPost"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines
-			| '#' | 'Key'                              | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-			| '1' | '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'GR'        | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'IT'           | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
-			| '2' | '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'GR'        | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'IT'           | '5165e259-51e5-4438-b7cb-ce848249e668' |
-			| '3' | '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$'     | 'GR'        | '3,000'  | ''                                     | ''             | '$$Rov3InventoryTransfer0201001$$'     |
+			| '#' | 'Key'                              | 'Basis'                                                 | 'Row ID'                           | 'Next step' | 'Q'      | 'Basis key' | 'Current step' | 'Row ref'                          |
+			| '1' | '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '*'                                | 'GR'        | '22,000' | '*'         | 'IT'           | '*'                                |
+			| '2' | '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '*'                                | 'GR'        | '24,000' | '*'         | 'IT'           | '*'                                |
+			| '3' | '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$' | 'GR'        | '3,000'  | ''          | ''             | '$$Rov3InventoryTransfer0201001$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "9"
 		And I close all client application windows		
 

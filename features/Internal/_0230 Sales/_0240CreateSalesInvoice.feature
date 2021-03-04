@@ -496,19 +496,9 @@ Scenario: _024025 create document Sales Invoice without Sales order and check Ro
 		And I save the current field value as "$$Rov1SalesInvoice024025$$"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                    | 'Basis' | 'Row ID'                 | 'Next step' | 'Q'      | 'Basis key' | 'Current step' | 'Row ref'                |
-			| '1' | '$$Rov1SalesInvoice024025$$' | ''      | '$$Rov1SalesInvoice024025$$' | ''          | '20,000' | ''          | ''             | '$$Rov1SalesInvoice024025$$' |
-		Then the number of "RowIDInfo" table lines is "равно" "1"
-	* Check next step
-		And I move to "Item list" tab
-		And I activate "Use shipment confirmation" field in "ItemList" table
-		And I change "Use shipment confirmation" checkbox in "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I move to the tab named "GroupRowIDInfo"
-		And I click "Post" button
-		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                    | 'Basis' | 'Row ID'                 | 'Next step' | 'Q'      | 'Basis key' | 'Current step' | 'Row ref'                |
+			| '#' | 'Key'                        | 'Basis' | 'Row ID'                     | 'Next step' | 'Q'      | 'Basis key' | 'Current step' | 'Row ref'                    |
 			| '1' | '$$Rov1SalesInvoice024025$$' | ''      | '$$Rov1SalesInvoice024025$$' | 'SC'        | '20,000' | ''          | ''             | '$$Rov1SalesInvoice024025$$' |
+		Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I close all client application windows
 		
 

@@ -117,34 +117,9 @@ Scenario: _028001 create document Sales return order, store use Goods receipt, b
 		And I click the button named "FormPostAndClose"
 
 
-Scenario: _028002 check  Sales  return order movements the OrderBalance register (store use Goods receipt, based on Sales invoice)  (+)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'              | 'Store'    | 'Order'              | 'Item key' |
-		| '1,000'    | '$$SalesReturnOrder028001$$' | 'Store 02' | '$$SalesReturnOrder028001$$' | 'L/Green'  |
-
-Scenario: _028003 check  Sales  return order movements the SalesTurnovers register (store use Goods receipt, based on Sales invoice)  (-)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'              | 'Sales invoice'    | 'Item key' |
-		| '-1,000'   | '$$SalesReturnOrder028001$$' | '$$SalesInvoice024008$$' | 'L/Green'  |
-
 
 Scenario: _028004 create document Sales return order, store does not use Goods receipt, based on Sales invoice
 	When create SalesReturnOrder028004
-	* Check for no movements in the registers
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-		And "List" table contains lines
-			| 'Quantity' | 'Recorder'              | 'Store'    | 'Order'              | 'Item key' |
-			| '1,000'    | '$$SalesReturnOrder028001$$' | 'Store 02' | '$$SalesReturnOrder028001$$' | 'L/Green'  |
-		And I close current window
-		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-		And "List" table contains lines
-			| 'Quantity' | 'Recorder'              | 'Sales invoice'    | 'Item key' |
-			| '-1,000'   | '$$SalesReturnOrder028001$$' | '$$SalesInvoice024008$$' | 'L/Green'  |
-		And I close all client application windows
 	* And I set Approved status
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		And I go to line in "List" table
@@ -189,106 +164,6 @@ Scenario: _028012 check totals in the document Sales return order
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 
 
-
-Scenario: _028013 check the output of the document movement report for Sales Return Order
-	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
-	* Check the report output for the selected document from the list
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberSalesReturnOrder028001$$'      |
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And I select "Sales turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesReturnOrder028001$$'     | ''       | ''          | ''       | ''           | ''              | ''             | ''                       | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''                       | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		| 'Register  "Sales turnovers"'    | ''       | ''          | ''       | ''           | ''              | ''             | ''                       | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''                       | ''         | ''         | ''        | ''                             | ''                  | 'Attributes'           |
-		| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Sales invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Serial lot number' | 'Deferred calculation' |
-		| ''                               | '*'      | '-1'        | '-550'   | ''           | ''              | 'Main Company' | '$$SalesInvoice024008$$' | 'TRY'      | 'L/Green'  | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-550'   | ''           | ''              | 'Main Company' | '$$SalesInvoice024008$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | ''                  | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-550'   | ''           | ''              | 'Main Company' | '$$SalesInvoice024008$$' | 'TRY'      | 'L/Green'  | '*'       | 'TRY'                          | ''                  | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-94,16' | ''           | ''              | 'Main Company' | '$$SalesInvoice024008$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"'      | ''            | ''          | ''          | ''           | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Order'                 | 'Item key'     | 'Row key'          | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		| ''                               | 'Receipt'     | '*'         | '1'         | 'Store 02'   | '$$SalesReturnOrder028001$$' | 'L/Green'      | '*'                | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
-	* Check the report output from the selected document
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberSalesReturnOrder028001$$'      |
-		And I select current line in "List" table
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And I select "Sales turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesReturnOrder028001$$'     | ''       | ''          | ''       | ''           | ''              | ''             | ''                       | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''                       | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		| 'Register  "Sales turnovers"'    | ''       | ''          | ''       | ''           | ''              | ''             | ''                       | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''                       | ''         | ''         | ''        | ''                             | ''                  | 'Attributes'           |
-		| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Sales invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Serial lot number' | 'Deferred calculation' |
-		| ''                               | '*'      | '-1'        | '-550'   | ''           | ''              | 'Main Company' | '$$SalesInvoice024008$$' | 'TRY'      | 'L/Green'  | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-550'   | ''           | ''              | 'Main Company' | '$$SalesInvoice024008$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | ''                  | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-550'   | ''           | ''              | 'Main Company' | '$$SalesInvoice024008$$' | 'TRY'      | 'L/Green'  | '*'       | 'TRY'                          | ''                  | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-94,16' | ''           | ''              | 'Main Company' | '$$SalesInvoice024008$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"'      | ''            | ''          | ''          | ''           | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Order'                 | 'Item key'     | 'Row key'          | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		| ''                               | 'Receipt'     | '*'         | '1'         | 'Store 02'   | '$$SalesReturnOrder028001$$' | 'L/Green'      | '*'                | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-	And I close all client application windows
-
-
-Scenario: _02801301 clear movements Sales Return Order and check that there is no movements on the registers 
-	* Open list form Sales Return Order
-		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
-	* Check the report generation
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberSalesReturnOrder028001$$'      |
-	* Clear movements document and check that there is no movement on the registers
-		And in the table "List" I click the button named "ListContextMenuUndoPosting"
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "Sales turnovers"'    |
-			| 'Register  "Order balance"'      |
-		And I close all client application windows
-	* Posting the document and check movements
-		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberSalesReturnOrder028001$$'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		And I select "Sales turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesReturnOrder028001$$'     | ''       | ''          | ''       | ''           | ''              | ''             | ''                       | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''                       | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		| 'Register  "Sales turnovers"'    | ''       | ''          | ''       | ''           | ''              | ''             | ''                       | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''                       | ''         | ''         | ''        | ''                             | ''                  | 'Attributes'           |
-		| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Sales invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Serial lot number' | 'Deferred calculation' |
-		| ''                               | '*'      | '-1'        | '-550'   | ''           | ''              | 'Main Company' | '$$SalesInvoice024008$$' | 'TRY'      | 'L/Green'  | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-550'   | ''           | ''              | 'Main Company' | '$$SalesInvoice024008$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | ''                  | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-550'   | ''           | ''              | 'Main Company' | '$$SalesInvoice024008$$' | 'TRY'      | 'L/Green'  | '*'       | 'TRY'                          | ''                  | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-94,16' | ''           | ''              | 'Main Company' | '$$SalesInvoice024008$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"'      | ''            | ''          | ''          | ''           | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                      | ''             | ''                 | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Order'                 | 'Item key'     | 'Row key'          | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		| ''                               | 'Receipt'     | '*'         | '1'         | 'Store 02'   | '$$SalesReturnOrder028001$$' | 'L/Green'      | '*'                | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-		And I close all client application windows
 
 
 Scenario: _300510 check connection to SalesReturnOrder report "Related documents"

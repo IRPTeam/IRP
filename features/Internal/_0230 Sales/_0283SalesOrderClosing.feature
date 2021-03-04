@@ -60,8 +60,8 @@ Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 	* Create Sales order closing 
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '32' |			
+			| 'Number'  | 'Date'                |
+			| '32'      | '09.02.2021 19:53:45'	|	
 		And I click the button named "FormDocumentSalesOrderClosingGenerateSalesOrderClosing"
 	* Check filling in
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -141,8 +141,8 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '32' |
+			| 'Number'  | 'Date'                |
+			| '32'      | '09.02.2021 19:53:45'	|
 		And I click the button named "FormDocumentSalesOrderClosingGenerateSalesOrderClosing"	
 	* Check filling in
 		Then the form attribute named "Partner" became equal to "Ferron BP"

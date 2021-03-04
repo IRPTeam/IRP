@@ -86,6 +86,10 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 EndProcedure
 
 Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
+	If Source.DataExchange.Load Then
+		Return;
+	EndIf;
+	
 	If Is(Source).SO Then
 		FillRowID_SO(Source);	
 	ElsIf Is(Source).SI Then
@@ -108,6 +112,10 @@ Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 EndProcedure
 
 Procedure OnWrite_RowID(Source, Cancel) Export
+	If Source.DataExchange.Load Then
+		Return;
+	EndIf;
+	
 	If Source.Metadata().TabularSections.Find("RowIDInfo") = Undefined Then
 		Return;
 	EndIf;

@@ -139,6 +139,7 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 			| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '610,17'     | '3 389,83'   | '4 000,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''            | ''                    |
 			| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '640,68'     | '3 559,32'   | '4 200,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''            | ''                    |
 			| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '961,02'     | '5 338,98'   | '6 300,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''            | ''                    |
+			
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice09030201$$" variable
 			And I delete "$$PurchaseInvoice09030201$$" variable
@@ -801,7 +802,8 @@ Scenario: _090308 create Goods receipt for Purchase invoice with different legal
 				| 'Number' |
 				| '$$NumberPurchaseInvoice09030202$$'    |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+		And I click the button named "FormDocumentGoodsReceiptGenerate"
+		And I click "Ok" button	
 	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
@@ -868,7 +870,8 @@ Scenario: _090309 create Goods receipt for several Purchase invoice with differe
 				| 'Number' |
 				| '$$NumberPurchaseInvoice090302041$$'    |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+		And I click the button named "FormDocumentGoodsReceiptGenerate"
+		And I click "Ok" button	
 	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -927,14 +930,15 @@ Scenario: _090309 create Goods receipt for several Purchase invoice with differe
 
 
 Scenario: _090310 create Goods receipt for several Purchase invoice with different partner terms, Purchase invoice before Goods receipt
-# Should be created 2 GR becouse partner terms different
+# Should be created 1 GR
 	* Create Goods receipt for PI PurchaseInvoice090302051, PurchaseInvoice090302052
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
 				| Number |
 				| $$NumberPurchaseInvoice090302051$$    |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+		And I click the button named "FormDocumentGoodsReceiptGenerate"
+		And I click "Ok" button	
 	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -962,38 +966,10 @@ Scenario: _090310 create Goods receipt for several Purchase invoice with differe
 			| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302052$$' |
 			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302052$$' |
 			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302052$$' |
-	And I click the button named "FormPostAndClose"
-	When I click command interface button "Goods receipt (create)"
-	* Check filling in second Goods receipt
-		And I save number of "ItemList" table lines as "D"
-		If "D" variable is equal to 1 Then
-			And I click the button named "FormPost"
-			And I delete "$$NumberGoodsReceipt0903N140$$" variable
-			And I delete "$$GoodsReceipt0903N140$$" variable
-			And I save the value of "Number" field as "$$NumberGoodsReceipt0903N140$$"
-			And I save the window as "$$GoodsReceipt0903N140$$"
-			And "ItemList" table contains lines
-			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
 			| 'Dress'    | '10,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseInvoice090302051$$' |
-		If "D" variable is equal to 3 Then
-			And I click the button named "FormPost"
-			And I delete "$$NumberGoodsReceipt0903N141$$" variable
-			And I delete "$$GoodsReceipt0903N141$$" variable
-			And I save the value of "Number" field as "$$NumberGoodsReceipt0903N141$$"
-			And I save the window as "$$GoodsReceipt0903N141$$"
-			And "ItemList" table contains lines
-			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'        |
-			| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' |  '$$PurchaseInvoice090302052$$' |
-			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' |  '$$PurchaseInvoice090302052$$' |
-			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' |  '$$PurchaseInvoice090302052$$' |
 	And I click the button named "FormPostAndClose"
-	* Create Goods receipt
-		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
-		And "List" table contains lines
-			| 'Number'  |
-			| '$$NumberGoodsReceipt0903N140$$'       |
-			| '$$NumberGoodsReceipt0903N141$$'       |
-		And I close all client application windows
+	And I close all client application windows
+	
 
 
 Scenario: _090311 create Goods receipt for several Purchase invoice with different stores, Purchase invoice before Goods receipt (only one store use Goods receipt)
@@ -1003,7 +979,8 @@ Scenario: _090311 create Goods receipt for several Purchase invoice with differe
 		And I go to line in "List" table
 				| Number |
 				| $$NumberPurchaseInvoice090302062$$    |
-		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+		And I click the button named "FormDocumentGoodsReceiptGenerate"
+		And I click "Ok" button	
 	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Description" became equal to "Click to enter description"
@@ -1033,7 +1010,8 @@ Scenario: _090312 create Goods receipt for several Purchase order with different
 			| 'Number' |
 			| '$$NumberPurchaseInvoice09030702$$'    |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+		And I click the button named "FormDocumentGoodsReceiptGenerate"
+		And I click "Ok" button	
 	* Check filling in Goods receipt
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Company" is equal to "Second Company" Then
@@ -1119,7 +1097,8 @@ Scenario: _090313 create Goods receipt for Purchase order with different legal n
 			| 'Number' |
 			| '$$NumberPurchaseOrder0903N140$$'    |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+		And I click the button named "FormDocumentGoodsReceiptGenerate"
+		And I click "Ok" button	
 	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
@@ -1276,7 +1255,8 @@ Scenario: _090314 create Goods receipt for several Purchase order with different
 			| 'Number' |
 			| '$$NumberPurchaseOrder0903N142$$'  |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+		And I click the button named "FormDocumentGoodsReceiptGenerate"
+		And I click "Ok" button	
 	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
@@ -1302,7 +1282,7 @@ Scenario: _090314 create Goods receipt for several Purchase order with different
 				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N142$$' |
 				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N142$$' |
 	And I click the button named "FormPostAndClose"
-	When I click command interface button "Goods receipt (create)"
+	When I click command interface button "Goods receipt (create)"	
 	* Check filling in Goods receipt
 		If the field named "Partner" is equal to "Partner Ferron 2" Then
 			And I click the button named "FormPost"
@@ -1334,7 +1314,7 @@ Scenario: _090314 create Goods receipt for several Purchase order with different
 		And I close all client application windows
 
 Scenario: _090315 create Goods receipt for several Purchase order with different partner terms, Purchase invoice after Goods receipt
-# should be created 2 Goods receipt
+# should be created 1 Goods receipt
 	* Create first test PO 144
 		When create the first test PO for a test on the creation mechanism based on
 		* Filling in vendor info
@@ -1427,70 +1407,35 @@ Scenario: _090315 create Goods receipt for several Purchase order with different
 			| 'Number' |
 			| '$$NumberPurchaseOrder0903N144$$'    |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+		And I click the button named "FormDocumentGoodsReceiptGenerate"
+		And I click "Ok" button	
 	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And I save number of "ItemList" table lines as "N"
-		If "N" variable is equal to 1 Then
-			And I click the button named "FormPost"
-			And I delete "$$NumberGoodsReceipt0903N145$$" variable
-			And I delete "$$GoodsReceipt0903N145$$" variable
-			And I save the value of "Number" field as "$$NumberGoodsReceipt0903N145$$"
-			And I save the window as "$$GoodsReceipt0903N145$$"
-			And "ItemList" table contains lines
-			| 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Store'    | 'Receipt basis'       |
-			| 'Dress' | '10,000'   | 'M/White'  | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N145$$' |
-		If "N" variable is equal to 3 Then
-			And I click the button named "FormPost"
-			And I delete "$$NumberGoodsReceipt0903N144$$" variable
-			And I delete "$$GoodsReceipt0903N144$$" variable
-			And I save the value of "Number" field as "$$NumberGoodsReceipt0903N144$$"
-			And I save the window as "$$GoodsReceipt0903N144$$"
-			And "ItemList" table contains lines
-			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'      |
-			| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N144$$' |
-			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N144$$' |
-			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N144$$' |
+		And I click the button named "FormPost"
+		And I delete "$$NumberGoodsReceipt0903N144$$" variable
+		And I delete "$$GoodsReceipt0903N144$$" variable
+		And I save the value of "Number" field as "$$NumberGoodsReceipt0903N144$$"
+		And I save the window as "$$GoodsReceipt0903N144$$"
+		And "ItemList" table contains lines
+		| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'      |
+		| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N144$$' |
+		| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N144$$' |
+		| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N144$$' |
+		| 'Dress' | '10,000'   | 'M/White'  | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N145$$' |
 	And I click the button named "FormPostAndClose"
-	When I click command interface button "Goods receipt (create)"
-	* Check filling in second Goods receipt
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "Store" became equal to "Store 02"
-		And I save number of "ItemList" table lines as "A"
-		If "A" variable is equal to 1 Then
-			And I click the button named "FormPost"
-			And I delete "$$NumberGoodsReceipt0903N145$$" variable
-			And I delete "$$GoodsReceipt0903N145$$" variable
-			And I save the value of "Number" field as "$$NumberGoodsReceipt0903N145$$"
-			And I save the window as "$$GoodsReceipt0903N145$$"
-			And "ItemList" table contains lines
-			| 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Store'    | 'Receipt basis'       |
-			| 'Dress' | '10,000'   | 'M/White'  | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N145$$' |
-		If "A" variable is equal to 3 Then
-			And I click the button named "FormPost"
-			And I delete "$$NumberGoodsReceipt0903N144$$" variable
-			And I delete "$$GoodsReceipt0903N144$$" variable
-			And I save the value of "Number" field as "$$NumberGoodsReceipt0903N144$$"
-			And I save the window as "$$GoodsReceipt0903N144$$"
-			And "ItemList" table contains lines
-			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'      |
-			| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N144$$' |
-			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N144$$' |
-			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N144$$' |
-	And I click the button named "FormPostAndClose"
-	* Create Goods receipt
+	* Check created Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
 			| 'Number'  |
 			| '$$NumberGoodsReceipt0903N144$$'       |
-			| '$$NumberGoodsReceipt0903N145$$'       |
 		And I close all client application windows
 
 
 
 Scenario: _090316 create Goods receipt for several Purchase order with different stores, Purchase invoice after Goods receipt
-# should be created 2 Goods receipt
+# should be created 1 Goods receipt
 	* Create first test PO 146
 		When create the first test PO for a test on the creation mechanism based on
 		* Filling in vendor info
@@ -1584,53 +1529,21 @@ Scenario: _090316 create Goods receipt for several Purchase order with different
 			| 'Number' |
 			| '$$NumberPurchaseOrder0903N146$$'    |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+		And I click the button named "FormDocumentGoodsReceiptGenerate"
+		And I click "Ok" button	
 	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
-		If the field named "Store" is equal to "Store 02" Then
-			And "ItemList" table contains lines
-				| 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Store'    | 'Receipt basis'       |
-				| 'Dress' | '10,000'   | 'M/White'  | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N147$$' |
-			And I click the button named "FormPost"
-			And I delete "$$NumberGoodsReceipt0903N147$$" variable
-			And I delete "$$GoodsReceipt0903N147$$" variable
-			And I save the value of "Number" field as "$$NumberGoodsReceipt0903N147$$"
-			And I save the window as "$$GoodsReceipt0903N147$$"
-		If the field named "Store" is equal to "Store 03" Then
-			And "ItemList" table contains lines
-				| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'      |
-				| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 03' | '$$PurchaseOrder0903N146$$' |
-				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 03' | '$$PurchaseOrder0903N146$$' |
-				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 03' | '$$PurchaseOrder0903N146$$' |
-			And I click the button named "FormPost"
-			And I delete "$$NumberGoodsReceipt0903N146$$" variable
-			And I delete "$$GoodsReceipt0903N146$$" variable
-			And I save the value of "Number" field as "$$NumberGoodsReceipt0903N146$$"
-			And I save the window as "$$GoodsReceipt0903N146$$"
-	And I click the button named "FormPostAndClose"
-	When I click command interface button "Goods receipt (create)"
-	* Check filling in Goods receipt
-		Then the form attribute named "Company" became equal to "Main Company"
-		If the field named "Store" is equal to "Store 02" Then
-			And "ItemList" table contains lines
-				| 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Store'    | 'Receipt basis'       |
-				| 'Dress' | '10,000'   | 'M/White'  | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N147$$' |
-			And I click the button named "FormPost"
-			And I delete "$$NumberGoodsReceipt0903N147$$" variable
-			And I delete "$$GoodsReceipt0903N147$$" variable
-			And I save the value of "Number" field as "$$NumberGoodsReceipt0903N147$$"
-			And I save the window as "$$GoodsReceipt0903N147$$"
-		If the field named "Store" is equal to "Store 03" Then
-			And "ItemList" table contains lines
-				| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'      |
-				| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 03' | '$$PurchaseOrder0903N146$$' |
-				| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 03' | '$$PurchaseOrder0903N146$$' |
-				| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 03' | '$$PurchaseOrder0903N146$$' |
-			And I click the button named "FormPost"
-			And I delete "$$NumberGoodsReceipt0903N146$$" variable
-			And I delete "$$GoodsReceipt0903N146$$" variable
-			And I save the value of "Number" field as "$$NumberGoodsReceipt0903N146$$"
-			And I save the window as "$$GoodsReceipt0903N146$$"
+		And "ItemList" table contains lines
+			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Receipt basis'      |
+			| 'Dress'    | '20,000'   | 'M/White'   | 'pcs'  | 'Store 03' | '$$PurchaseOrder0903N146$$' |
+			| 'Dress'    | '20,000'   | 'L/Green'   | 'pcs'  | 'Store 03' | '$$PurchaseOrder0903N146$$' |
+			| 'Trousers' | '30,000'   | '36/Yellow' | 'pcs'  | 'Store 03' | '$$PurchaseOrder0903N146$$' |
+			| 'Dress' | '10,000'   | 'M/White'  | 'pcs'  | 'Store 02' | '$$PurchaseOrder0903N147$$' |
+		And I click the button named "FormPost"
+		And I delete "$$NumberGoodsReceipt0903N146$$" variable
+		And I delete "$$GoodsReceipt0903N146$$" variable
+		And I save the value of "Number" field as "$$NumberGoodsReceipt0903N146$$"
+		And I save the window as "$$GoodsReceipt0903N146$$"
 	And I click the button named "FormPostAndClose"
 	* Check creation
 		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
@@ -1746,7 +1659,8 @@ Scenario: _090317 create Goods receipt for several Purchase order with different
 			| 'Number' |
 			| '$$NumberPurchaseOrder0903N149$$'    |
 		And I move one line up in "List" table and select line
-		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+		And I click the button named "FormDocumentGoodsReceiptGenerate"
+		And I click "Ok" button	
 	* Check filling in Goods receipt
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Company" is equal to "Main Company" Then
@@ -2123,7 +2037,8 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 			And I go to line in "List" table
 				| Number |
 				| $$NumberPurchaseOrder090323$$    |
-			And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+			And I click the button named "FormDocumentGoodsReceiptGenerate"
+			And I click "Ok" button	
 			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "5,000" text in "Quantity" field of "ItemList" table
@@ -2151,7 +2066,8 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 			And I go to line in "List" table
 				| Number |
 				| $$NumberPurchaseOrder090323$$    |
-			And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+			And I click the button named "FormDocumentGoodsReceiptGenerate"
+			And I click "Ok" button	
 			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "8,000" text in "Quantity" field of "ItemList" table
@@ -2179,7 +2095,8 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 			And I go to line in "List" table
 				| Number |
 				| $$NumberPurchaseOrder090323$$    |
-			And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
+			And I click the button named "FormDocumentGoodsReceiptGenerate"
+			And I click "Ok" button	
 			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "7,000" text in "Quantity" field of "ItemList" table

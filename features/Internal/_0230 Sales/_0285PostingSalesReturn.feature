@@ -135,49 +135,6 @@ Scenario: _028501 create document Sales return, store use Goods receipt, without
 	And I close current window
 
 
-Scenario: _028502 check that there are no movements of Sales return in register OrderBalance (store use Goods receipt, without Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	And "List" table does not contain lines
-		| 'Quantity' | 'Recorder'              | 'Line number' | 'Store'    | 'Item key' |
-		| '1,000'    | '$$SalesReturn028501$$' | '1'           | 'Store 02' | 'L/Green'  |
-
-
-Scenario: _028503 check movements of Sales return in register SalesTurnovers (store use Goods receipt, without Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'              | 'Line number' | 'Sales invoice'          | 'Item key' |
-		| '-1,000'   | '$$SalesReturn028501$$' | '1'           | '$$SalesInvoice024016$$' | 'L/Green'  |
-
-Scenario: _028504 check movements of Sales return in register InventoryBalance (store use Goods receipt, without Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'              | 'Line number' | 'Company'      | 'Item key' |
-		| '1,000'    | '$$SalesReturn028501$$' | '1'           | 'Main Company' | 'L/Green'  |
-
-Scenario: _028505 check movements of Sales return in register GoodsInTransitIncoming (store use Goods receipt, without Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'              | 'Receipt basis'         | 'Line number' | 'Store'    | 'Item key' |
-		| '1,000'    | '$$SalesReturn028501$$' | '$$SalesReturn028501$$' | '1'           | 'Store 02' | 'L/Green'  |
-
-Scenario: _028506 check that there are no movements of Sales return in register StockBalance (store use Goods receipt, without Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table does not contain lines
-	| 'Quantity' | 'Recorder'              | 'Line number' | 'Store'    | 'Item key' |
-	| '1,000'    | '$$SalesReturn028501$$' | '1'           | 'Store 02' | 'L/Green'  |
-
-Scenario: _028507 check that there are no movements of Sales return in register StockReservation (store use Goods receipt, without Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table does not contain lines
-	| 'Quantity' | 'Recorder'              | 'Line number' | 'Store'    | 'Item key' |
-	| '1,000'    | '$$SalesReturn028501$$' | '1'           | 'Store 02' | 'L/Green'  |
-
 
 
 Scenario: _028508 create document Sales return, store does not use Goods receipt, without Sales return order
@@ -220,48 +177,6 @@ Scenario: _028508 create document Sales return, store does not use Goods receipt
 	And I close current window
 
 
-Scenario: _028509 check that there are no movements of Sales return in register OrderBalance (store does not use Goods receipt, without Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	And "List" table does not contain lines
-		| 'Quantity' | 'Recorder'                    | 'Line number' | 'Store'    | 'Item key' |
-		| '1,000'    | '$$NumberSalesReturn028508$$' | '1'           | 'Store 01' | 'L/Green'  |
-
-Scenario: _028510 check movements of Sales return in register SalesTurnovers (store does not use Goods receipt, without Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                    | 'Line number' | 'Sales invoice'          | 'Item key' |
-		| '-1,000'   | '$$SalesReturn028508$$' | '1'           | '$$SalesInvoice024008$$' | 'L/Green'  |
-
-Scenario: _028511 check movements of Sales return in register InventoryBalance (store does not use Goods receipt, without Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                    | 'Line number' | 'Company'      | 'Item key' |
-		| '1,000'    | '$$SalesReturn028508$$' | '1'           | 'Main Company' | 'L/Green'  |
-
-Scenario: _028512 check that there are no movements of Sales return in register GoodsInTransitIncoming (store does not use Goods receipt, without Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
-	And "List" table does not contain lines
-		| 'Quantity' | 'Recorder'                    | 'Receipt basis'               | 'Line number' | 'Store'    | 'Item key' |
-		| '1,000'    | '$$SalesReturn028508$$' | '$$NumberSalesReturn028508$$' | '1'           | 'Store 01' | 'L/Green'  |
-
-Scenario: _028513 check movements of Sales return in register StockBalance (store does not use Goods receipt, without Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table contains lines
-	| 'Quantity' | 'Recorder'                    | 'Line number' | 'Store'    | 'Item key' |
-	| '1,000'    | '$$SalesReturn028508$$' | '1'           | 'Store 01' | 'L/Green'  |
-
-Scenario: _028514 check movements of Sales return in register StockReservation (store does not use Goods receipt, without Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table contains lines
-	| 'Quantity' | 'Recorder'                    | 'Line number' | 'Store'    | 'Item key' |
-	| '1,000'    | '$$SalesReturn028508$$' | '1'           | 'Store 01' | 'L/Green'  |
-
 
 
 Scenario: _028515 create document Sales return, store use Goods receipt, based on Sales return order
@@ -285,48 +200,6 @@ Scenario: _028515 create document Sales return, store use Goods receipt, based o
 	And I save the window as "$$SalesReturn028515$$"
 	And I click the button named "FormPostAndClose"
 	And I close current window
-
-Scenario: _028516 check movements of Sales return in register OrderBalance (store use Goods receipt,  based on Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'              | 'Store'    | 'Order'                      | 'Item key' |
-		| '1,000'    | '$$SalesReturn028515$$' | 'Store 02' | '$$SalesReturnOrder028001$$' | 'L/Green'  |
-
-Scenario: _028517 check movements of Sales return in register SalesTurnovers (store use Goods receipt, based on Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'              | 'Item key' |
-		| '-1,000'   | '$$SalesReturn028515$$' | 'L/Green'  |
-
-Scenario: _028518 check movements of Sales return in register InventoryBalance (store use Goods receipt,  based on Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'              | 'Company'      | 'Item key' |
-		| '1,000'    | '$$SalesReturn028515$$' | 'Main Company' | 'L/Green'  |
-
-Scenario: _028519 check movements of Sales return in register GoodsInTransitIncoming (store use Goods receipt,  based on Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'              | 'Receipt basis'         | 'Store'    | 'Item key' |
-		| '1,000'    | '$$SalesReturn028515$$' | '$$SalesReturn028515$$' | 'Store 02' | 'L/Green'  |
-
-Scenario: _028520 check that there are no movements of Sales return in register StockBalance (store use Goods receipt, based on Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table does not contain lines
-	| 'Quantity' | 'Recorder'              | 'Store'    | 'Item key' |
-	| '1,000'    | '$$SalesReturn028515$$' | 'Store 02' | 'L/Green'  |
-
-Scenario: _028521 check that there are no movements of Sales return in register StockReservation (store use Goods receipt, based on Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table does not contain lines
-	| 'Quantity' | 'Recorder'              | 'Store'    | 'Item key' |
-	| '1,000'    | '$$SalesReturn028515$$' | 'Store 02' | 'L/Green'  |
 
 
 Scenario: _028522 create document Sales return, store does not use Goods receipt, based on Sales return order
@@ -352,56 +225,6 @@ Scenario: _028522 create document Sales return, store does not use Goods receipt
 	And I close current window
 
 
-Scenario: _028523 check movements of Sales return in register OrderBalance (store use Goods receipt,  based on Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'        | 'Store'    | 'Item key'  |
-		| '2,000'    | '$$SalesReturn028522$$' | 'Store 01' | 'L/Green'   |
-		| '4,000'    | '$$SalesReturn028522$$' | 'Store 01' | '36/Yellow' |
-
-Scenario: _028524 check that there are no movements of Sales return in register SalesTurnovers (store does not use Goods receipt, based on Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-	And "List" table does not contain lines
-		| 'Quantity' | 'Recorder'        | 'Sales invoice'    | 'Item key' |
-		| '-2,000'   | '$$SalesReturn028522$$' | '$$SalesInvoice024025$$' | 'L/Green'  |
-		| '-4,000'   | '$$SalesReturn028522$$' | '$$SalesInvoice024025$$' | '36/Yellow' |
-
-
-Scenario: _028525 check movements of Sales return in register InventoryBalance (store does not use Goods receipt,  based on Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'        | 'Company'      | 'Item key'  |
-		| '2,000'    | '$$SalesReturn028522$$' | 'Main Company' | 'L/Green'   |
-		| '4,000'    | '$$SalesReturn028522$$' | 'Main Company' | '36/Yellow' |
-
-
-Scenario: _028526 check that there are no movements of Sales return in register GoodsInTransitIncoming (store does not use Goods receipt, based on Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
-	And "List" table does not contain lines
-		| 'Quantity' | 'Recorder'        | 'Receipt basis'   | 'Store'    | 'Item key' |
-		| '2,000'    | '$$SalesReturn028522$$' | '$$SalesReturn028522$$' | 'Store 01' | 'L/Green'  |
-		| '4,000'    | '$$SalesReturn028522$$' | '$$SalesReturn028522$$' | 'Store 01' | '36/Yellow'  |
-
-
-Scenario: _028527 check movements of Sales return in register StockBalance (store does not use Goods receipt,  based on Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table contains lines
-	| 'Quantity' | 'Recorder'        | 'Store'    | 'Item key'  |
-	| '2,000'    | '$$SalesReturn028522$$' | 'Store 01' | 'L/Green'   |
-	| '4,000'    | '$$SalesReturn028522$$' | 'Store 01' | '36/Yellow' |
-
-Scenario: _028528 check movements of Sales return in register StockReservation (store does not use Goods receipt,  based on Sales return order) 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table contains lines
-	| 'Quantity' | 'Recorder'        | 'Store'    | 'Item key'  |
-	| '2,000'    | '$$SalesReturn028522$$' | 'Store 01' | 'L/Green'   |
-	| '4,000'    | '$$SalesReturn028522$$' | 'Store 01' | '36/Yellow' |
 
 
 

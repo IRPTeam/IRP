@@ -975,10 +975,12 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver)
 	TableSpecialOffers = QueryResults[4].Unload();
 		
 	Tables = New Structure();
-	Tables.Insert("ItemList"       , TableItemList);
-	Tables.Insert("RowIDInfo"      , TableRowIDInfo);
-	Tables.Insert("TaxList"        , TableTaxList);
-	Tables.Insert("SpecialOffers"  , TableSpecialOffers);
+	Tables.Insert("ItemList"      , TableItemList);
+	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
+	Tables.Insert("TaxList"       , TableTaxList);
+	Tables.Insert("SpecialOffers" , TableSpecialOffers);
+	
+	AddTables(Tables);
 	
 	RecalculateAmounts(Tables);
 	
@@ -1104,11 +1106,13 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver)
 	TableSpecialOffers = QueryResults[4].Unload();
 		
 	Tables = New Structure();
-	Tables.Insert("ItemList"              , TableItemList);
-	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
-	Tables.Insert("TaxList"               , TableTaxList);
-	Tables.Insert("SpecialOffers"         , TableSpecialOffers);
-
+	Tables.Insert("ItemList"      , TableItemList);
+	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
+	Tables.Insert("TaxList"       , TableTaxList);
+	Tables.Insert("SpecialOffers" , TableSpecialOffers);
+	
+	AddTables(Tables);
+	
 	RecalculateAmounts(Tables);
 		
 	Return Tables;
@@ -1201,9 +1205,11 @@ Function ExtractData_FromSC(BasisesTable, DataReceiver)
 	EndDo;
 		
 	Tables = New Structure();
-	Tables.Insert("ItemList"             , TableItemList);
-	Tables.Insert("RowIDInfo"            , TableRowIDInfo);
-	Tables.Insert("ShipmentConfirmations", TableShipmentConfirmations);
+	Tables.Insert("ItemList"              , TableItemList);
+	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
+	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
+	
+	AddTables(Tables);
 	
 	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit");
 EndFunction
@@ -1292,6 +1298,8 @@ Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver)
 	Tables.Insert("SpecialOffers"         , TablesSO.SpecialOffers);
 	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
 	
+	AddTables(Tables);
+	
 	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey");
 EndFunction
 
@@ -1378,6 +1386,8 @@ Function ExtractData_FromSC_ThenFromSI(BasisesTable, DataReceiver)
 	Tables.Insert("TaxList"               , TablesSI.TaxList);
 	Tables.Insert("SpecialOffers"         , TablesSI.SpecialOffers);
 	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
+	
+	AddTables(Tables);
 	
 	Return CollapseRepeatingItemListRows(Tables, "SalesInvoiceItemListKey");
 EndFunction
@@ -1467,6 +1477,8 @@ Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver)
 	Tables.Insert("SpecialOffers"         , TablesPIGRSO.SpecialOffers);
 	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
 	
+	AddTables(Tables);
+	
 	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey");
 EndFunction
 
@@ -1530,6 +1542,8 @@ Function ExtractData_FromPIGR_ThenFromSO(BasisesTable, DataReceiver)
 	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
 	Tables.Insert("TaxList"       , TablesSO.TaxList);
 	Tables.Insert("SpecialOffers" , TablesSO.SpecialOffers);
+	
+	AddTables(Tables);
 	
 	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey");
 EndFunction
@@ -1658,6 +1672,8 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver)
 	Tables.Insert("TaxList"       , TableTaxList);
 	Tables.Insert("SpecialOffers" , TableSpecialOffers);
 	
+	AddTables(Tables);
+	
 	RecalculateAmounts(Tables);
 	
 	Return Tables;
@@ -1781,10 +1797,12 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver)
 	TableSpecialOffers = QueryResults[4].Unload();
 		
 	Tables = New Structure();
-	Tables.Insert("ItemList"              , TableItemList);
-	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
-	Tables.Insert("TaxList"               , TableTaxList);
-	Tables.Insert("SpecialOffers"         , TableSpecialOffers);
+	Tables.Insert("ItemList"      , TableItemList);
+	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
+	Tables.Insert("TaxList"       , TableTaxList);
+	Tables.Insert("SpecialOffers" , TableSpecialOffers);
+
+	AddTables(Tables);
 
 	RecalculateAmounts(Tables);
 		
@@ -1885,6 +1903,8 @@ Function ExtractData_FromGR(BasisesTable, DataReceiver)
 	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
 	Tables.Insert("GoodsReceipts" , TableGoodsReceipts);
 	
+	AddTables(Tables);
+	
 	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit");
 EndFunction
 
@@ -1975,6 +1995,8 @@ Function ExtractData_FromGR_ThenFromPO(BasisesTable, DataReceiver)
 	Tables.Insert("SpecialOffers" , TablesPO.SpecialOffers);
 	Tables.Insert("GoodsReceipts" , TableGoodsReceipts);
 	
+	AddTables(Tables);
+	
 	Return CollapseRepeatingItemListRows(Tables, "PurchaseOrderItemListKey");
 EndFunction
 
@@ -2059,11 +2081,13 @@ Function ExtractData_FromGR_ThenFromPI(BasisesTable, DataReceiver)
 	TableGoodsReceipts = QueryResults[3].Unload();
 	
 	Tables = New Structure();
-	Tables.Insert("ItemList"              , TablesPI.ItemList);
-	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
-	Tables.Insert("TaxList"               , TablesPI.TaxList);
-	Tables.Insert("SpecialOffers"         , TablesPI.SpecialOffers);
-	Tables.Insert("GoodsReceipts"         , TableGoodsReceipts);
+	Tables.Insert("ItemList"      , TablesPI.ItemList);
+	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
+	Tables.Insert("TaxList"       , TablesPI.TaxList);
+	Tables.Insert("SpecialOffers" , TablesPI.SpecialOffers);
+	Tables.Insert("GoodsReceipts" , TableGoodsReceipts);
+	
+	AddTables(Tables);
 	
 	Return CollapseRepeatingItemListRows(Tables, "PurchaseInvoiceItemListKey");
 EndFunction
@@ -2136,8 +2160,10 @@ Function ExtractData_FromITO(BasisesTable, DataReceiver)
 	EndDo;
 		
 	Tables = New Structure();
-	Tables.Insert("ItemList"      , TableItemList);
-	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
+	Tables.Insert("ItemList"  , TableItemList);
+	Tables.Insert("RowIDInfo" , TableRowIDInfo);
+	
+	AddTables(Tables);
 	
 	Return Tables;
 EndFunction
@@ -2222,8 +2248,10 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver)
 	EndDo;
 		
 	Tables = New Structure();
-	Tables.Insert("ItemList"      , TableItemList);
-	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
+	Tables.Insert("ItemList"  , TableItemList);
+	Tables.Insert("RowIDInfo" , TableRowIDInfo);
+	
+	AddTables(Tables);
 	
 	Return Tables;
 EndFunction
@@ -2295,13 +2323,49 @@ Function ExtractData_FromISR(BasisesTable, DataReceiver)
 	EndDo;
 		
 	Tables = New Structure();
-	Tables.Insert("ItemList"      , TableItemList);
-	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
+	Tables.Insert("ItemList"  , TableItemList);
+	Tables.Insert("RowIDInfo" , TableRowIDInfo);
+	
+	AddTables(Tables);
 	
 	Return Tables;
 EndFunction
 
 #EndRegion
+
+Procedure AddTables(Tables)
+	If Tables.Property("ItemList") Then
+		Tables.ItemList = AddColumnsToItemList(Tables.ItemList);
+	Else
+		Tables.Insert("ItemList", GetEmptyTable_ItemList());
+	EndIf;
+	
+	If Not Tables.Property("TaxList") Then
+		Tables.Insert("TaxList", GetEmptyTable_TaxList());
+	EndIf;
+	
+	If Not Tables.Property("SpecialOffers") Then
+		Tables.Insert("SpecialOffers", GetEmptyTable_SpecialOffers());
+	EndIf;
+	
+	If Not Tables.Property("ShipmentConfirmations") Then
+		Tables.Insert("ShipmentConfirmations", GetEmptyTable_ShipmentConfirmations());
+	EndIf;
+	
+	If Not Tables.Property("GoodsReceipts") Then
+		Tables.Insert("GoodsReceipts", GetEmptyTable_GoodsReceipts());
+	EndIf;
+EndProcedure
+
+Function AddColumnsToItemList(TableItemList)
+	EmptyTableItemList = GetEmptyTable_ItemList();
+	For Each Column In EmptyTableItemList.Columns Do
+		If TableItemList.Columns.Find(Column.Name) = Undefined Then
+			TableItemList.Columns.Add(Column.Name);
+		EndIf;
+	EndDo;
+	Return TableItemList;
+EndFunction
 
 Procedure RecalculateAmounts(Tables)
 	For Each RowItemList In Tables.ItemList Do
@@ -2351,7 +2415,7 @@ EndProcedure
 
 Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames)
 	ItemListGrouped = Tables.ItemList.Copy();
-	ItemListGrouped.GroupBy(UniqueColumnNames, "Quantity, QuantityInBaseUnit");
+	ItemListGrouped.GroupBy(UniqueColumnNames, GetColumnNamesSum_ItemList());
 	ItemListResult = Tables.ItemList.CopyColumns();
 	
 	For Each RowGrouped In ItemListGrouped Do
@@ -2380,43 +2444,37 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames)
 		For Each ItemOfArray In ArrayOfItemListRows Do
 			Filter = New Structure("Key" , ItemOfArray.Key);
 			
-			If Tables.Property("RowIDInfo") Then
-				For Each Row In Tables.RowIDInfo.FindRows(Filter) Do
-					Row.Key = NewKey;
-				EndDo;
-			EndIf;
+			For Each Row In Tables.RowIDInfo.FindRows(Filter) Do
+				Row.Key = NewKey;
+			EndDo;
 			
-			If Tables.Property("TaxList") Then
-				For Each Row In Tables.TaxList.FindRows(Filter) Do
-					Row.Key = NewKey;
-				EndDo;
-			EndIf;
+			For Each Row In Tables.TaxList.FindRows(Filter) Do
+				Row.Key = NewKey;
+			EndDo;
 			
-			If Tables.Property("SpecialOffers") Then
-				For Each Row In Tables.SpecialOffers.FindRows(Filter) Do
-					Row.Key = NewKey;
-				EndDo;
-			EndIf;
+			For Each Row In Tables.SpecialOffers.FindRows(Filter) Do
+				Row.Key = NewKey;
+			EndDo;
 			
-			If Tables.Property("ShipmentConfirmations") Then
-				For Each Row In Tables.ShipmentConfirmations.FindRows(Filter) Do
-					Row.Key = NewKey;
-				EndDo;
-			EndIf;
+			For Each Row In Tables.ShipmentConfirmations.FindRows(Filter) Do
+				Row.Key = NewKey;
+			EndDo;
 			
-			If Tables.Property("GoodsReceipts") Then
-				For Each Row In Tables.GoodsReceipts.FindRows(Filter) Do
-					Row.Key = NewKey;
-				EndDo;
-			EndIf;
+			For Each Row In Tables.GoodsReceipts.FindRows(Filter) Do
+				Row.Key = NewKey;
+			EndDo;
 		EndDo;
 		
 		NewRow = ItemListResult.Add();
 		FillPropertyValues(NewRow, ArrayOfItemListRows[0]);
-		NewRow.Quantity           = RowGrouped.Quantity;
-		NewRow.QuantityInBaseUnit = RowGrouped.QuantityInBaseUnit;
+		FillPropertyValues(NewRow, RowGrouped, GetColumnNamesSum_ItemList());
 		NewRow.Key = NewKey;
 	EndDo;
+	
+	Tables.TaxList.GroupBy(GetColumnNames_TaxList(), GetColumnNamesSum_TaxList());
+	Tables.SpecialOffers.GroupBy(GetColumnNames_SpecialOffers(), GetColumnNamesSum_SpecialOffers());
+	Tables.ShipmentConfirmations.GroupBy(GetColumnNames_ShipmentConfirmations(), GetColumnNamesSum_ShipmentConfirmations());
+	Tables.GoodsReceipts.GroupBy(GetColumnNames_GoodsReceipts(), GetColumnNamesSum_GoodsReceipts());
 	
 	Tables.ItemList = ItemListResult;
 	Return Tables;
@@ -4279,7 +4337,7 @@ Function JoinAllExtractedData(ArrayOfData)
 	Tables.Insert("RowIDInfo"             , GetEmptyTable_RowIDInfo());
 	Tables.Insert("TaxList"               , GetEmptyTable_TaxList());
 	Tables.Insert("SpecialOffers"         , GetEmptyTable_SpecialOffers());
-	Tables.Insert("ShipmentConfirmations" , GetEmptyTable_ShipmentConfirmation());
+	Tables.Insert("ShipmentConfirmations" , GetEmptyTable_ShipmentConfirmations());
 	Tables.Insert("GoodsReceipts"         , GetEmptyTable_GoodsReceipts());
 	For Each Data In ArrayOfData Do
 		For Each Table In Tables Do
@@ -4339,8 +4397,18 @@ EndFunction
 
 #Region EmptyTables
 
-Function GetEmptyTable_ItemList()
-	Columns = 
+Function GetEmptyTable(Columns)
+	Table = New ValueTable();
+	For Each Column In StrSplit(Columns, ",") Do
+		Table.Columns.Add(TrimAll(Column));
+	EndDo;
+	Return Table;	
+EndFunction
+
+#Region EmptyTables_ItemList
+
+Function GetColumnNames_ItemList()
+	Return
 	"Ref,
 	|Key,
 	|BasedOn,
@@ -4362,12 +4430,6 @@ Function GetEmptyTable_ItemList()
 	|ReceiptBasis,
 	|PurchaseInvoice,
 	|Unit,
-	|Quantity,
-	|QuantityInBaseUnit,
-	|TaxAmount,
-	|TotalAmount,
-	|NetAmount,
-	|OffersAmount,
 	|PriceType,
 	|Price,
 	|DeliveryDate,
@@ -4384,58 +4446,98 @@ Function GetEmptyTable_ItemList()
 	|InventoryTransfer,
 	|StoreSender,
 	|StoreReceiver";
-	Table = New ValueTable();
-	For Each Column In StrSplit(Columns, ",") Do
-		Table.Columns.Add(TrimAll(Column));
-	EndDo;
-	Return Table;
+EndFunction
+
+Function GetEmptyTable_ItemList()
+	Return GetEmptyTable(GetColumnNames_ItemList() + ", " + GetColumnNamesSum_ItemList());
+EndFunction
+
+Function GetColumnNamesSum_ItemList()
+	Return "Quantity, QuantityInBaseUnit, TaxAmount, TotalAmount, NetAmount, OffersAmount";
+EndFunction
+
+#EndRegion
+
+#Region EmptyTables_RowIDInfo
+
+Function GetColumnNames_RowIDInfo()
+	Return "Ref, Key, RowID, BasisKey, Basis, CurrentStep, NextStep, RowRef";
+EndFunction
+
+Function GetColumnNamesSum_RowIDInfo()
+	Return "Quantity";
 EndFunction
 
 Function GetEmptyTable_RowIDInfo()
-	Columns = "Ref, Key, RowID, Quantity, BasisKey, Basis, CurrentStep, NextStep, RowRef";
-	Table = New ValueTable();
-	For Each Column In StrSplit(Columns, ",") Do
-		Table.Columns.Add(TrimAll(Column));
-	EndDo;
-	Return Table;	
+	Return GetEmptyTable(GetColumnNames_RowIDInfo() + ", " + GetColumnNamesSum_RowIDInfo());
+EndFunction
+
+#EndRegion
+
+#Region EmptyTables_TaxList
+
+Function GetColumnNames_TaxList()
+	Return "Ref, Key, Tax, Analytics, TaxRate, IncludeToTotalAmount";
+EndFunction
+
+Function GetColumnNamesSum_TaxList()
+	Return "Amount, ManualAmount";
 EndFunction
 
 Function GetEmptyTable_TaxList()
-	Columns = "Ref, Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount";
-	Table = New ValueTable();
-	For Each Column In StrSplit(Columns, ",") Do
-		Table.Columns.Add(TrimAll(Column));
-	EndDo;
-	Return Table;	
+	Return GetEmptyTable(GetColumnNames_TaxList() + ", " + GetColumnNamesSum_TaxList());
+EndFunction
+
+#EndRegion
+
+#Region EmptyTables_SpecialOffers
+
+Function GetColumnNames_SpecialOffers()
+	Return "Ref, Key, Offer, Percent";
+EndFunction
+
+Function GetColumnNamesSum_SpecialOffers()
+	Return "Amount";
 EndFunction
 	
 Function GetEmptyTable_SpecialOffers()
-	Columns = "Ref, Key, Offer, Amount, Percent";
-	Table = New ValueTable();
-	For Each Column In StrSplit(Columns, ",") Do
-		Table.Columns.Add(TrimAll(Column));
-	EndDo;
-	Return Table;	
+	Return GetEmptyTable(GetColumnNames_SpecialOffers() + ", " + GetColumnNamesSum_SpecialOffers());
 EndFunction
 
-Function GetEmptyTable_ShipmentConfirmation()
-	Columns = "Ref, Key, BasisKey, ShipmentConfirmation, Quantity, QuantityInShipmentConfirmation";
-	Table = New ValueTable();
-	For Each Column In StrSplit(Columns, ",") Do
-		Table.Columns.Add(TrimAll(Column));
-	EndDo;
-	Return Table;	
+#EndRegion
+
+#Region EmptyTables_ShipmentConfirmations
+
+Function GetColumnNames_ShipmentConfirmations()
+	Return "Ref, Key, BasisKey, ShipmentConfirmation";
+EndFunction
+
+Function GetColumnNamesSum_ShipmentConfirmations()
+	Return "Quantity, QuantityInShipmentConfirmation";
+EndFunction
+
+Function GetEmptyTable_ShipmentConfirmations()
+	Return GetEmptyTable(GetColumnNames_ShipmentConfirmations() + ", " + GetColumnNamesSum_ShipmentConfirmations());
+EndFunction
+
+#EndRegion
+
+#Region EmptyTables_GoodsReceipts
+
+Function GetColumnNames_GoodsReceipts()
+	Return "Ref, Key, BasisKey, GoodsReceipt";
+EndFunction
+
+Function GetColumnNamesSum_GoodsReceipts()
+	Return "Quantity, QuantityInGoodsReceipt";
 EndFunction
 
 Function GetEmptyTable_GoodsReceipts()
-	Columns = "Ref, Key, BasisKey, GoodsReceipt, Quantity, QuantityInGoodsReceipt";
-	Table = New ValueTable();
-	For Each Column In StrSplit(Columns, ",") Do
-		Table.Columns.Add(TrimAll(Column));
-	EndDo;
-	Return Table;	
+	Return GetEmptyTable(GetColumnNames_GoodsReceipts() + ", " + GetColumnNamesSum_GoodsReceipts());
 EndFunction
-	
+
+#EndRegion
+
 #EndRegion
 
 #EndRegion

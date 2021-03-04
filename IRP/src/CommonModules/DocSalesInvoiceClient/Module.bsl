@@ -48,6 +48,12 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 			
 			Settings = New Structure("AgreementSettings", AgreementSettings);
 			DocumentsClient.AgreementOnChange(Object, Form, ThisObject, Undefined, Settings, AddInfo);
+			
+			CalculateSettings = New Structure("CalculateSpecialOffers, CalculateNetAmount, CalculateTax, CalculateTotalAmount");
+			PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
+			CalculateSettings.Insert("ChangePriceType", New Structure("Period, PriceType", PriceDate, ServerData.AgreementInfo.PriceType));	
+			Rows = Object.ItemList.FindRows(New Structure("Price", 0));
+			CalculationStringsClientServer.CalculateItemsRows(Object, Form, Rows, CalculateSettings, ServerData.ArrayOfTaxInfo, AddInfo);
 		EndIf;
 	EndIf;
 	

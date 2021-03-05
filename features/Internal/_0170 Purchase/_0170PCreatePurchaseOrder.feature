@@ -192,6 +192,7 @@ Scenario: _017003 copy PO and check filling in Row Id info table
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Post PO and check Row ID Info tab
 		And I click the button named "FormPost"
+		And I click "Show row key" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines
 			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                     |

@@ -209,7 +209,8 @@ Scenario: _016501 create document Internal Supply Request
 		And I go to line in "List" table
 			| 'Number'                                | 'Company'      | 'Store'    |
 			| '$$NumberInternalSupplyRequest016501$$' | 'Main Company' | 'Store 01' |
-		And I click the button named "FormDocumentPurchaseOrderGeneratePurchaseOrder"
+		And I click the button named "FormDocumentPurchaseOrderGenerate"
+		And I click "Ok" button
 		And I select "Approved" exact value from "Status" drop-down list
 		Then the form attribute named "Store" became equal to "Store 01"
 		And I click Select button of "Partner" field

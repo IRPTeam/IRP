@@ -287,6 +287,7 @@ Scenario: _018003 copy PI (based on PO) and check filling in Row Id info table (
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "14 980,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Post PI and check Row ID Info tab
+		And I click "Show row key" button
 		And I click the button named "FormPost"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines

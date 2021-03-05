@@ -883,7 +883,8 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			| Number |
 			| 800    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentPurchaseOrderGeneratePurchaseOrder"
+	And I click the button named "FormDocumentPurchaseOrderGenerate"
+	And I click "Ok" button
 	Then the number of "ItemList" table lines is "меньше или равно" 1
 	And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Purchase basis'   |

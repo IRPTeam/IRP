@@ -70,6 +70,9 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create information register Taxes records (Sales tax)
 		When add sales tax settings 
 		When Create document PurchaseInvoice objects (use serial lot number)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(29).GetObject().Write(DocumentWriteMode.Posting);" |
+
 
 Scenario: _092001 checkbox Use serial lot number in the Item type
 	When checkbox Use serial lot number in the Item type Clothes

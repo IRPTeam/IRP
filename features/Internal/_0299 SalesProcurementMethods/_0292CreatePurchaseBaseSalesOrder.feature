@@ -692,7 +692,8 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 		| 'Number'                     | 'Partner'  |
 		| '$$NumberSalesOrder029201$$' | 'Lomaniti' |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentPurchaseOrderGeneratePurchaseOrder"
+		And I click the button named "FormDocumentPurchaseOrderGenerate"
+		And I click "Ok" button
 	* Check filling of the tabular part of the Purchase order
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  | 'Store'    | 'Unit' | 'Q'      | 'Purchase basis'   |
@@ -863,11 +864,11 @@ Scenario: _029202 create Goods receipt based on Purchase order that based on Sal
 	* Check filling of the tabular part
 		And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Sales order'           | 'Store'    | 'Receipt basis'            |
-			| 'Dress'    | '10,000'   | 'XS/Blue'   | 'pcs'  | '$$SalesOrder029201$$'  | 'Store 01' | '$$PurchaseOrder0292012$$' |
-			| 'Trousers' | '5,000'    | '36/Yellow' | 'pcs'  | '$$SalesOrder029201$$'  | 'Store 01' | '$$PurchaseOrder0292012$$' |
+			| 'Dress'    | '5,000'    | 'XS/Blue'   | 'pcs'  | '$$SalesOrder029201$$'  | 'Store 01' | '$$PurchaseOrder0292012$$' |
+			| 'Trousers' | '5,000'    | '36/Yellow' | 'pcs'  | '$$SalesOrder0292012$$' | 'Store 02' | '$$PurchaseOrder0292012$$' |
 			| 'Trousers' | '10,000'   | '38/Yellow' | 'pcs'  | '$$SalesOrder0292012$$' | 'Store 02' | '$$PurchaseOrder0292012$$' |
 			| 'Dress'    | '10,000'   | 'XS/Blue'   | 'pcs'  | '$$SalesOrder0292012$$' | 'Store 02' | '$$PurchaseOrder0292012$$' |
-			| 'Trousers' | '5,000'    | '36/Yellow' | 'pcs'  | '$$SalesOrder0292012$$' | 'Store 02' | '$$PurchaseOrder0292012$$' |
+			| 'Trousers' | '10,000'   | '38/Yellow' | 'pcs'  | '$$SalesOrder029201$$'  | 'Store 01' | '$$PurchaseOrder0292012$$' |
 			| 'Trousers' | '10,000'   | '38/Yellow' | 'pcs'  | '$$SalesOrder0292012$$' | 'Store 02' | '$$PurchaseOrder0292012$$' |
 		And I click the button named "FormPost"
 		And I delete "$$NumberGoodsReceipt0292022$$" variable
@@ -1028,11 +1029,11 @@ Scenario: _029203 check movements if there is an additional line in the Purchase
 
 Scenario: _029204 create Purchase invoice based on Purchase order that based on Sales order (Goods receipt before Purchase invoice)
 	* Create Purchase invoice based on Purchase order
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
 			| 'Number' |
-			| '$$NumberPurchaseOrder0292012$$'   |
-		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+			| '$$NumberGoodsReceipt029203$$'   |
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"			
 		And I click "OK" button
 	* Check filling of the tabular part
 		And "ItemList" table contains lines

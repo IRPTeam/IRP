@@ -49,9 +49,9 @@ Scenario: _028800 preparation (Shipment confirmation)
 		When Create information register CurrencyRates records
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects
+		When update ItemKeys
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
-		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -118,7 +118,6 @@ Scenario: _028800 preparation (Shipment confirmation)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Copy created SO 
-		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
 			| 'Number'                       |
@@ -252,21 +251,21 @@ Scenario: _028806 create document Shipment confirmation based on SI (with SO, SI
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                           | 'Use'                                        | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
 			| 'Sales order 32 dated 26.02.2021 13:30:49'   | 'Sales order 32 dated 26.02.2021 13:30:49'   | ''         | ''               | ''         | ''         |
-			| 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | ''         | ''               | ''         | ''         |
+			| 'Sales invoice 32 dated 02.03.2021 17:15:14' | 'Sales invoice 32 dated 02.03.2021 17:15:14' | ''         | ''               | ''         | ''         |
 			| 'Dress, XS/Blue'                             | 'Yes'                                        | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
 			| 'Shirt, 36/Red'                              | 'Yes'                                        | '12,000'   | 'pcs'            | '350,00'   | 'TRY'      |
 			| 'Boots, 37/18SD'                             | 'Yes'                                        | '2,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
-			| 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | ''         | ''               | ''         | ''         |
+			| 'Sales invoice 32 dated 02.03.2021 17:15:14' | 'Sales invoice 32 dated 02.03.2021 17:15:14' | ''         | ''               | ''         | ''         |
 			| 'Shirt, 38/Black'                            | 'Yes'                                        | '2,000'    | 'pcs'            | '350,00'   | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "7"
 		And I click "Ok" button
 	* Create SC and check creation
 		And "ItemList" table contains lines
 			| '#' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice'                              | 'Unit'           | 'Store'    | 'Shipment basis'                             | 'Sales order'                              | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
-			| '1' | 'Dress' | ''                   | 'XS/Blue'  | '1,000'    | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'pcs'            | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Sales order 32 dated 26.02.2021 13:30:49' | ''                         | ''                      | ''                |
-			| '2' | 'Shirt' | ''                   | '36/Red'   | '12,000'   | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'pcs'            | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Sales order 32 dated 26.02.2021 13:30:49' | ''                         | ''                      | ''                |
-			| '3' | 'Boots' | ''                   | '37/18SD'  | '2,000'    | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Boots (12 pcs)' | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Sales order 32 dated 26.02.2021 13:30:49' | ''                         | ''                      | ''                |
-			| '4' | 'Shirt' | ''                   | '38/Black' | '2,000'    | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'pcs'            | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | ''                                         | ''                         | ''                      | ''                |
+			| '1' | 'Dress' | ''                   | 'XS/Blue'  | '1,000'    | 'Sales invoice 32 dated 02.03.2021 17:15:14' | 'pcs'            | 'Store 02' | 'Sales invoice 32 dated 02.03.2021 17:15:14' | 'Sales order 32 dated 26.02.2021 13:30:49' | ''                         | ''                      | ''                |
+			| '2' | 'Shirt' | ''                   | '36/Red'   | '12,000'   | 'Sales invoice 32 dated 02.03.2021 17:15:14' | 'pcs'            | 'Store 02' | 'Sales invoice 32 dated 02.03.2021 17:15:14' | 'Sales order 32 dated 26.02.2021 13:30:49' | ''                         | ''                      | ''                |
+			| '3' | 'Boots' | ''                   | '37/18SD'  | '2,000'    | 'Sales invoice 32 dated 02.03.2021 17:15:14' | 'Boots (12 pcs)' | 'Store 02' | 'Sales invoice 32 dated 02.03.2021 17:15:14' | 'Sales order 32 dated 26.02.2021 13:30:49' | ''                         | ''                      | ''                |
+			| '4' | 'Shirt' | ''                   | '38/Black' | '2,000'    | 'Sales invoice 32 dated 02.03.2021 17:15:14' | 'pcs'            | 'Store 02' | 'Sales invoice 32 dated 02.03.2021 17:15:14' | ''                                         | ''                         | ''                      | ''                |
 		Then the number of "ItemList" table lines is "равно" "4"
 		And I close all client application windows
 
@@ -277,7 +276,6 @@ Scenario: _028807 create document Shipment confirmation based on Purchase return
 		| 'Number' |
 		| '$$NumberPurchaseReturn022314$$'      |
 	And I select current line in "List" table
-	And I click "Shipment confirmation" button
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "Store" became equal to "Store 02"
 	And "ItemList" table contains lines

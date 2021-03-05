@@ -303,6 +303,7 @@ Scenario: _024003 copy SI (based on SO) and check filling in Row Id info table (
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Post SI and check Row ID Info tab
 		And I click the button named "FormPost"
+		And I click the button named "FormShowRowKey"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines
 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |

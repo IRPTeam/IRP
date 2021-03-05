@@ -17,19 +17,108 @@ Scenario: _2050001 preparation
 	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
-	* Check for Purchase invoice by Crystal
+	* Load info
+		When Create information register Barcodes records
+		When Create catalog Companies objects (own Second company)
+		When Create catalog CashAccounts objects
+		When Create catalog Agreements objects
+		When Create catalog ObjectStatuses objects
+		When Create catalog ItemKeys objects
+		When Create catalog ItemTypes objects
+		When Create catalog Units objects
+		When Create catalog Items objects
+		When Create catalog PriceTypes objects
+		When Create catalog Specifications objects
+		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog Partners objects
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create information register PricesByItemKeys records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+		When update ItemKeys
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+	* Tax settings
+		When filling in Tax settings for company
+	* Add sales tax
+		When Create catalog Taxes objects (Sales tax)
+		When Create information register TaxSettings (Sales tax)
+		When Create information register Taxes records (Sales tax)
+		When add sales tax settings 
+	When Create document PurchaseInvoice objects (linked)
+	And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Save PI numbers
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And "List" table contains lines
-		| 'Number'                            | 'Legal name'   | 'Partner' | 'Currency' | 'Company'      |
-		| '$$NumberPurchaseInvoice2040005$$'  | 'Company Adel' | 'Crystal' | 'TRY'      | 'Main Company' |
-		| '$$NumberPurchaseInvoice20400051$$' | 'Company Adel' | 'Crystal' | 'TRY'      | 'Main Company' |
-	* Check for Purchase invoice by Crystal
+		And I go to line in "List" table
+			| 'Number'    |
+			| '101' |
+		And I select current line in "List" table	
+		And I delete "$$PurchaseInvoice2040005$$" variable
+		And I delete "$$NumberPurchaseInvoice2040005$$" variable
+		And I save the window as "$$PurchaseInvoice2040005$$"
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice2040005$$"
+		And I close current window
+		And I go to line in "List" table
+			| 'Number'    |
+			| '102' |
+		And I select current line in "List" table	
+		And I delete "$$PurchaseInvoice20400051$$" variable
+		And I delete "$$NumberPurchaseInvoice20400051$$" variable
+		And I save the window as "$$PurchaseInvoice20400051$$"
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice20400051$$"
+		And I close all client application windows
+	When Create document SalesInvoice objects (linked)
+	And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Save SI numbers
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And "List" table contains lines
-		| 'Number'                         | 'Legal name'   | 'Partner' | 'Currency' |
-		| '$$NumberSalesInvoice20400022$$' | 'Company Adel' | 'Crystal' | 'TRY'      |
-		| '$$NumberSalesInvoice2040002$$'  | 'Company Adel' | 'Crystal' | 'TRY'      |
-		| '$$NumberSalesInvoice20400021$$' | 'Company Adel' | 'Crystal' | 'TRY'      |
+		And I go to line in "List" table
+			| 'Number'    |
+			| '101' |
+		And I select current line in "List" table	
+		And I delete "$$SalesInvoice20400022$$" variable
+		And I delete "$$NumberSalesInvoice20400022$$" variable
+		And I save the window as "$$SalesInvoice20400022$$"
+		And I save the value of "Number" field as "$$NumberSalesInvoice20400022$$"
+		And I close current window
+		And I go to line in "List" table
+			| 'Number'    |
+			| '102' |
+		And I select current line in "List" table	
+		And I delete "$$SalesInvoice2040002$$" variable
+		And I delete "$$NumberSalesInvoice2040002$$" variable
+		And I save the window as "$$SalesInvoice2040002$$"
+		And I save the value of "Number" field as "$$NumberSalesInvoice2040002$$"
+		And I close current window
+		And I go to line in "List" table
+			| 'Number'    |
+			| '103' |
+		And I select current line in "List" table	
+		And I delete "$$SalesInvoice20400021$$" variable
+		And I delete "$$NumberSalesInvoice20400021$$" variable
+		And I save the window as "$$SalesInvoice20400021$$"
+		And I save the value of "Number" field as "$$NumberSalesInvoice20400021$$"
+		And I close all client application windows
 	* Create Bank payment without reference to the partner term and the document
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I click the button named "FormCreate"
@@ -50,6 +139,7 @@ Scenario: _2050001 preparation
 		* Filling in partners in a tabular part
 			And I activate "Partner" field in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
+			And I click "List" button		
 			And I go to line in "List" table
 				| Description |
 				| Crystal   |
@@ -219,7 +309,7 @@ Scenario: 2050002 check filling in Reconcilation statement
 			| 'TRY'  | 'Turkish lira' |
 		And I select current line in "List" table
 		And I click Select button of "Begin period" field
-		And I input begin of the current month date in "Begin period" field
+		And I input "01.03.2020" text in "Begin period" field		
 		And I input end of the current month date in "End period" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
@@ -244,11 +334,10 @@ Scenario: 2050002 check filling in Reconcilation statement
 		| '*'    | '$$CashReceipt2050001$$*'     | '5 000,00'  | ''          |
 		| '*'    | '$$BankPayment2050001$$*'     | ''          | '1 000,00'  |
 		| '*'    | '$$BankReceipt2050001$$*'     | '20 000,00' | ''          |
-		| '*'    | '$$SalesInvoice20400022$$'    | ''          | '19 240,00' |
+		| '*'    | '$$SalesInvoice20400022$$'    | ''          | '20 980,00' |
 		| '*'    | '$$SalesInvoice2040002$$'     | ''          | '1 740,00'  |
 		| '*'    | '$$SalesInvoice20400021$$'    | ''          | '28 686,30' |
-		| '*'    | '$$PurchaseInvoice2040005$$'  | '39 270,40' | ''          |
-		| '*'    | '$$PurchaseInvoice20400051$$' | '42 763,20' | ''          |
+		| '*'    | '$$PurchaseInvoice2040005$$'  | '40 544,80' | ''          |
 	* Check document
 		And I click the button named "FormPost"
 	* Clear movements

@@ -179,6 +179,7 @@ $VanessaRun = {
     $connection = "' $AreaID /N $LoginTo1C /P $PassTo1C /Len /UseHwLicenses+ /TComp -SDC  /DisableStartupMessages /DisplayPerformance /DisplayAllFunctions /EnableCheckModal /EnableCheckExtensionsAndAddInsSyncCalls $DebugString'"
     
     $TempDbJson = "'$TempDb'"
+    $elementTagJson = "'$elementTag'"
     $text = "{
     'AllureReport': {
         'DataAllureMarks': [],
@@ -191,7 +192,15 @@ $VanessaRun = {
         'reportlevel1': '#report.epic=;catalog1',
         'reportlevel2': '#report.feature=;catalog2',
         'reportlevel3': '#report.story=;scenarioname',
-        'testsuites': ''
+        'testsuites': '',
+        'DataAllureMarks':
+        [
+        	{
+            	"RegularExpression": "",
+            	"LabelName": "thread",
+            	"Value":  $elementTagJson
+          	}
+        ]  
     },
     'DebugLog': false,
     'DownloadFeaturesOpen': 1,

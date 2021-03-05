@@ -223,6 +223,7 @@ Scenario: _0201002 check filling in Row Id info table in the IT (ITO-IT)
 			| '9' | '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'GR'        | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | ''             | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
 		Then the number of "RowIDInfo" table lines is "равно" "9"
 	* Change checkbox Use SC and check RowIDInfo
+		And I remove checkbox "Use shipment confirmation"
 		And I click "Post" button
 		And "RowIDInfo" table contains lines
 			| '#' | 'Key'                              | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |

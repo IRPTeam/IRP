@@ -889,116 +889,116 @@ Scenario: _154530 message when trying to re-create Purchase order/Inventory tran
 		And I close all client application windows
 
 
-Scenario: _154532 user notification when create a second partial sales invoice based on sales order
-	* Create Sales order
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I click "Create" button
-		* Filling in customer info
-			And I click Select button of "Partner" field
-			And I go to line in "List" table
-					| 'Description' |
-					| 'Ferron BP'  |
-			And I select current line in "List" table
-			And I click Select button of "Partner term" field
-			And I go to line in "List" table
-					| 'Description'       |
-					| 'Basic Partner terms, without VAT' |
-			And I select current line in "List" table
-			And I click Select button of "Legal name" field
-			And I go to line in "List" table
-					| 'Description' |
-					| 'Company Ferron BP'  |
-			And I select current line in "List" table
-		* Filling in items table
-			And in the table "ItemList" I click "Add" button
-			And I click choice button of "Item" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
-			And I select current line in "List" table
-			And I click choice button of "Item key" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
-			And I select current line in "List" table
-			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
-		And I click the button named "FormPost"
-		And I delete "$$NumberSalesOrder154514$$" variable
-		And I delete "$$SalesOrder154514$$" variable
-		And I save the value of "Number" field as "$$NumberSalesOrder154514$$"
-		And I save the window as "$$SalesOrder154514$$"
-	* Create first Sales invoice
-		And I click the button named "FormDocumentSalesInvoiceGenerate"
-		And I click "OK" button
-		And I select current line in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
-		And I click the button named "FormPostAndClose"
-	* Create second Sales invoice
-		And I click the button named "FormDocumentSalesInvoiceGenerate"
-		And I click "OK" button
-		When TestClient messages log contains messages from the list only
-		| 'The "Sales invoice" document does not fully match the "Sales order" document because' |
-		| 'there is already another "Sales invoice" document that partially covered this "Sales order" document.'|
-		And I close all client application windows
+# Scenario: _154532 user notification when create a second partial sales invoice based on sales order
+# 	* Create Sales order
+# 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+# 		And I click "Create" button
+# 		* Filling in customer info
+# 			And I click Select button of "Partner" field
+# 			And I go to line in "List" table
+# 					| 'Description' |
+# 					| 'Ferron BP'  |
+# 			And I select current line in "List" table
+# 			And I click Select button of "Partner term" field
+# 			And I go to line in "List" table
+# 					| 'Description'       |
+# 					| 'Basic Partner terms, without VAT' |
+# 			And I select current line in "List" table
+# 			And I click Select button of "Legal name" field
+# 			And I go to line in "List" table
+# 					| 'Description' |
+# 					| 'Company Ferron BP'  |
+# 			And I select current line in "List" table
+# 		* Filling in items table
+# 			And in the table "ItemList" I click "Add" button
+# 			And I click choice button of "Item" attribute in "ItemList" table
+# 			And I go to line in "List" table
+# 				| 'Description' |
+# 				| 'Trousers'    |
+# 			And I select current line in "List" table
+# 			And I click choice button of "Item key" attribute in "ItemList" table
+# 			And I go to line in "List" table
+# 				| 'Item'     | 'Item key'  |
+# 				| 'Trousers' | '38/Yellow' |
+# 			And I select current line in "List" table
+# 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+# 			And I input "2,000" text in "Q" field of "ItemList" table
+# 		And I click the button named "FormPost"
+# 		And I delete "$$NumberSalesOrder154514$$" variable
+# 		And I delete "$$SalesOrder154514$$" variable
+# 		And I save the value of "Number" field as "$$NumberSalesOrder154514$$"
+# 		And I save the window as "$$SalesOrder154514$$"
+# 	* Create first Sales invoice
+# 		And I click the button named "FormDocumentSalesInvoiceGenerate"
+# 		And I click "OK" button
+# 		And I select current line in "ItemList" table
+# 		And I input "1,000" text in "Q" field of "ItemList" table
+# 		And I click the button named "FormPostAndClose"
+# 	* Create second Sales invoice
+# 		And I click the button named "FormDocumentSalesInvoiceGenerate"
+# 		And I click "OK" button
+# 		When TestClient messages log contains messages from the list only
+# 		| 'The "Sales invoice" document does not fully match the "Sales order" document because' |
+# 		| 'there is already another "Sales invoice" document that partially covered this "Sales order" document.'|
+# 		And I close all client application windows
 
-Scenario: _154534 user notification when create a second partial purchase invoice based on purchase order
-	* Create Purchase order
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I click "Create" button
-		* Filling in customer info
-			And I click Select button of "Partner" field
-			And I go to line in "List" table
-					| 'Description' |
-					| 'Ferron BP'  |
-			And I select current line in "List" table
-			And I click Select button of "Partner term" field
-			And I go to line in "List" table
-					| 'Description'       |
-					| 'Vendor Ferron, TRY' |
-			And I select current line in "List" table
-			And I click Select button of "Legal name" field
-			And I go to line in "List" table
-					| 'Description' |
-					| 'Company Ferron BP'  |
-			And I select current line in "List" table
-			And I click Select button of "Store" field
-			And I go to line in "List" table
-				| Description |
-				| Store 03  |
-			And I select current line in "List" table
-		* Filling in items table
-			And I click the button named "Add"
-			And I click choice button of "Item" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
-			And I select current line in "List" table
-			And I click choice button of "Item key" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
-			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
-			And I input "10,00" text in "Price" field of "ItemList" table
-			And I select "Approved" exact value from "Status" drop-down list
-		And I click the button named "FormPost"
-		And I delete "$$NumberPurchaseOrder154515$$" variable
-		And I delete "$$PurchaseOrder154515$$" variable
-		And I save the value of "Number" field as "$$NumberPurchaseOrder154515$$"
-		And I save the window as "$$PurchaseOrder154515$$"
-	* Create first Purchase invoice based on Purchase order
-		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
-		And I click "OK" button
-		And I select current line in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
-		And I click the button named "FormPostAndClose"
-	* Create second Purchase invoice based on Purchase order
-		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
-		When TestClient messages log contains messages from the list only
-		| 'The "Purchase invoice" document does not fully match the "Purchase order" document because'|
-		|  'there is already another "Purchase invoice" document that partially covered this "Purchase order" document.'|
-		And I close all client application windows
+# Scenario: _154534 user notification when create a second partial purchase invoice based on purchase order
+# 	* Create Purchase order
+# 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+# 		And I click "Create" button
+# 		* Filling in customer info
+# 			And I click Select button of "Partner" field
+# 			And I go to line in "List" table
+# 					| 'Description' |
+# 					| 'Ferron BP'  |
+# 			And I select current line in "List" table
+# 			And I click Select button of "Partner term" field
+# 			And I go to line in "List" table
+# 					| 'Description'       |
+# 					| 'Vendor Ferron, TRY' |
+# 			And I select current line in "List" table
+# 			And I click Select button of "Legal name" field
+# 			And I go to line in "List" table
+# 					| 'Description' |
+# 					| 'Company Ferron BP'  |
+# 			And I select current line in "List" table
+# 			And I click Select button of "Store" field
+# 			And I go to line in "List" table
+# 				| Description |
+# 				| Store 03  |
+# 			And I select current line in "List" table
+# 		* Filling in items table
+# 			And I click the button named "Add"
+# 			And I click choice button of "Item" attribute in "ItemList" table
+# 			And I go to line in "List" table
+# 				| 'Description' |
+# 				| 'Trousers'    |
+# 			And I select current line in "List" table
+# 			And I click choice button of "Item key" attribute in "ItemList" table
+# 			And I go to line in "List" table
+# 				| 'Item'     | 'Item key'  |
+# 				| 'Trousers' | '38/Yellow' |
+# 			And I select current line in "List" table
+# 			And I input "2,000" text in "Q" field of "ItemList" table
+# 			And I input "10,00" text in "Price" field of "ItemList" table
+# 			And I select "Approved" exact value from "Status" drop-down list
+# 		And I click the button named "FormPost"
+# 		And I delete "$$NumberPurchaseOrder154515$$" variable
+# 		And I delete "$$PurchaseOrder154515$$" variable
+# 		And I save the value of "Number" field as "$$NumberPurchaseOrder154515$$"
+# 		And I save the window as "$$PurchaseOrder154515$$"
+# 	* Create first Purchase invoice based on Purchase order
+# 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+# 		And I click "OK" button
+# 		And I select current line in "ItemList" table
+# 		And I input "1,000" text in "Q" field of "ItemList" table
+# 		And I click the button named "FormPostAndClose"
+# 	* Create second Purchase invoice based on Purchase order
+# 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+# 		When TestClient messages log contains messages from the list only
+# 		| 'The "Purchase invoice" document does not fully match the "Purchase order" document because'|
+# 		|  'there is already another "Purchase invoice" document that partially covered this "Purchase order" document.'|
+# 		And I close all client application windows
 
 Scenario: _015450 check message output for SO when trying to create a purchase order/SC
 	* Open the Sales order creation form

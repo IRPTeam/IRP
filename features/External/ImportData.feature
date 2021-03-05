@@ -1928,7 +1928,7 @@ Scenario: Create document InternalSupplyRequest objects (for procurement)
 		| 'e1cib/data/Document.InternalSupplyRequest?ref=b75dad46e66c4c2c11eb38940abc212e' | 'd3c1ca05-5b4a-4692-8293-d4d9c7ab550d' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '7'        |
 
 Scenario: Create document PriceList objects (for procurement)
-	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	# And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
 	And I check or create document "PriceList" objects:
 		| 'Ref'                                                                | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'ItemType' | 'PriceListType'                    | 'PriceType'                                                          | 'Author'                                                        | 'Description' | 'BusinessUnit'                                                          |
 		| 'e1cib/data/Document.PriceList?ref=b75dad46e66c4c2c11eb38940abc2134' | 'False'           | '58'      | '07.12.2020 17:02:19' | 'True'    | ''         | 'Enum.PriceListTypes.PriceByItems' | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef005' | '$$IdCI$$' | ''            | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' |

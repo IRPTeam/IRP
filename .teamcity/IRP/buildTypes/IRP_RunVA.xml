@@ -196,9 +196,9 @@ $VanessaRun = {
         'DataAllureMarks':
         [
         	{
-            	"RegularExpression": "",
-            	"LabelName": "thread",
-            	"Value":  $elementTagJson
+            	'RegularExpression': '',
+            	'LabelName': 'thread',
+            	'Value':  $elementTagJson
           	}
         ]  
     },

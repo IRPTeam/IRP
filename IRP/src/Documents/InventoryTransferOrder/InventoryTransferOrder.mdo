@@ -438,7 +438,7 @@
     <name>Generate</name>
     <synonym>
       <key>en</key>
-      <value>(new) Inventory transfer order</value>
+      <value>Inventory transfer order</value>
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>

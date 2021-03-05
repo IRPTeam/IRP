@@ -1192,7 +1192,7 @@
     <name>Generate</name>
     <synonym>
       <key>en</key>
-      <value>(new) Purchase invoice</value>
+      <value>Purchase invoice</value>
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>

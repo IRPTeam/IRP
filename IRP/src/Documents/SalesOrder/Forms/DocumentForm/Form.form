@@ -4341,7 +4341,6 @@
       <items xsi:type="form:Table">
         <name>RowIDInfo</name>
         <id>631</id>
-        <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>

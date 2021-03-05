@@ -1280,7 +1280,7 @@
     <name>Generate</name>
     <synonym>
       <key>en</key>
-      <value>(new) Sales invoice</value>
+      <value>Sales invoice</value>
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>

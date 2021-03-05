@@ -1065,26 +1065,11 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
-  <commands uuid="496559c7-f7cd-402c-8890-4d84580ebb15">
-    <name>GeneratePurchaseOrder</name>
-    <synonym>
-      <key>en</key>
-      <value>Purchase order</value>
-    </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType>
-      <types>DocumentRef.InternalSupplyRequest</types>
-      <types>DocumentRef.SalesOrder</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-    <shortcut></shortcut>
-  </commands>
   <commands uuid="8dd76af3-6277-48eb-8356-498c1f68a2ef">
     <name>Generate</name>
     <synonym>
       <key>en</key>
-      <value>(new) Purchase order</value>
+      <value>Purchase order</value>
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>

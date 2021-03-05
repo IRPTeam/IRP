@@ -529,10 +529,7 @@
     <commandParameterType>
       <types>DocumentRef.PurchaseReturn</types>
       <types>DocumentRef.Unbundling</types>
-      <types>DocumentRef.SalesOrder</types>
       <types>DocumentRef.Bundling</types>
-      <types>DocumentRef.InventoryTransfer</types>
-      <types>DocumentRef.SalesInvoice</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>
@@ -542,7 +539,7 @@
     <name>Generate</name>
     <synonym>
       <key>en</key>
-      <value>(new) Shipment confirmation</value>
+      <value>Shipment confirmation</value>
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>

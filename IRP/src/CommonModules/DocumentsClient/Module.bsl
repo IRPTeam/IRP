@@ -3039,6 +3039,7 @@ Procedure ShowRowKey(Form) Export
 	ItemNames = "ItemListKey, SpecialOffersKey,
 	|ItemListRowsKey,
 	|ResultsTable,
+	|RowIDInfo,
 	|ShipmentConfirmationsTreeKey, ShipmentConfirmationsTreeBasisKey,
 	|GoodsReceiptsTreeKey, GoodsReceiptsTreeBasisKey,
 	|BasisesTreeBasis, BasisesTreeBasisUnit, BasisesTreeQuantityInBaseUnit, BasisesTreeKey,

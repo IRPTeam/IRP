@@ -16372,13 +16372,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.InventoryTransfer.Command.GenerateInventoryTransfer</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.Labeling.Command.GenerateLabeling</name>
 		<right>
 			<name>View</name>
@@ -16394,13 +16387,6 @@
 	</object>
 	<object>
 		<name>Document.PhysicalInventory.Command.GeneratePhysicalCountByLocation</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.PurchaseOrder.Command.GeneratePurchaseOrder</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

@@ -447,25 +447,11 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
-  <commands uuid="72dfe6ff-ce51-42e0-b41f-3290dfcc4448">
-    <name>GenerateInventoryTransfer</name>
-    <synonym>
-      <key>en</key>
-      <value>Inventory transfer</value>
-    </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType>
-      <types>DocumentRef.InventoryTransferOrder</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-    <shortcut></shortcut>
-  </commands>
   <commands uuid="b3bd26ef-fea3-4853-a7dd-48f7d3304d25">
     <name>Generate</name>
     <synonym>
       <key>en</key>
-      <value>(new) Inventory transfer</value>
+      <value>Inventory transfer</value>
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>

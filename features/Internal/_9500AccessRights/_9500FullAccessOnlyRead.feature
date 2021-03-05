@@ -146,7 +146,8 @@ Scenario: 950000 preparation (role Full access only read)
 		And I click "Update all user roles" button		
 	And I connect "TestAdmin" TestClient using "SBorisova" login and "F12345" password
 	And Delay 3
-
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 
 Scenario: 950001 check role Full access only read (Payment types)
 		And In the command interface I select "Master data" "Payment types"	

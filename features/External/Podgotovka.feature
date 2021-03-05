@@ -1049,7 +1049,7 @@ Scenario: create SalesReturnOrder028001
 	* Check the details
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, without VAT"
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Select store
 		And I click Select button of "Store" field

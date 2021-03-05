@@ -159,10 +159,16 @@ Scenario: _0201002 check filling in Row Id info table in the IT (ITO-IT)
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
 			| '#' | 'Key'                              | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-			| '1' | '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'GR'        | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'IT'           | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
-			| '2' | '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'GR'        | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'IT'           | '5165e259-51e5-4438-b7cb-ce848249e668' |
-			| '3' | '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$'     | 'GR'        | '3,000'  | ''                                     | ''             | '$$Rov3InventoryTransfer0201001$$'     |
-		Then the number of "RowIDInfo" table lines is "равно" "3"
+			| '1' | '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | ''          | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'IT'           | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
+			| '2' | '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | ''          | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'IT'           | '5165e259-51e5-4438-b7cb-ce848249e668' |
+			| '3' | '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$'     | ''          | '3,000'  | ''                                     | ''             | '$$Rov3InventoryTransfer0201001$$'     |
+			| '4' | '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$'     | 'SC'        | '3,000'  | ''                                     | ''             | '$$Rov3InventoryTransfer0201001$$'     |
+			| '5' | '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'SC'        | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | ''             | '5165e259-51e5-4438-b7cb-ce848249e668' |
+			| '6' | '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'SC'        | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | ''             | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
+			| '7' | '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$'     | 'GR'        | '3,000'  | ''                                     | ''             | '$$Rov3InventoryTransfer0201001$$'     |
+			| '8' | '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'GR'        | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | ''             | '5165e259-51e5-4438-b7cb-ce848249e668' |
+			| '9' | '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'GR'        | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | ''             | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
+		Then the number of "RowIDInfo" table lines is "равно" "9"
 	* Copy string and check Row ID Info tab
 		And I move to "Items" tab
 		And I go to line in "ItemList" table
@@ -180,12 +186,20 @@ Scenario: _0201002 check filling in Row Id info table in the IT (ITO-IT)
 		And I move to "Row ID Info" tab
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                              | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-			| '1' | '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'GR'        | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'IT'           | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
-			| '2' | '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'GR'        | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'IT'           | '5165e259-51e5-4438-b7cb-ce848249e668' |
-			| '3' | '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$'     | 'GR'        | '3,000'  | ''                                     | ''             | '$$Rov3InventoryTransfer0201001$$'     |
-			| '4' | '$$Rov4InventoryTransfer0201001$$' | ''                                                      | '$$Rov4InventoryTransfer0201001$$'     | 'GR'        | '10,000' | ''                                     | ''             | '$$Rov4InventoryTransfer0201001$$'     |
-		Then the number of "RowIDInfo" table lines is "равно" "4"
+			| '#'  | 'Key'                              | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1'  | '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | ''          | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'IT'           | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
+			| '2'  | '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | ''          | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'IT'           | '5165e259-51e5-4438-b7cb-ce848249e668' |
+			| '3'  | '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$'     | ''          | '3,000'  | ''                                     | ''             | '$$Rov3InventoryTransfer0201001$$'     |
+			| '4'  | '$$Rov4InventoryTransfer0201001$$' | ''                                                      | '$$Rov4InventoryTransfer0201001$$'     | ''          | '10,000' | ''                                     | ''             | '$$Rov4InventoryTransfer0201001$$'     |
+			| '5'  | '$$Rov4InventoryTransfer0201001$$' | ''                                                      | '$$Rov4InventoryTransfer0201001$$'     | 'SC'        | '10,000' | ''                                     | ''             | '$$Rov4InventoryTransfer0201001$$'     |
+			| '6'  | '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$'     | 'SC'        | '3,000'  | ''                                     | ''             | '$$Rov3InventoryTransfer0201001$$'     |
+			| '7'  | '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'SC'        | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | ''             | '5165e259-51e5-4438-b7cb-ce848249e668' |
+			| '8'  | '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'SC'        | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | ''             | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
+			| '9'  | '$$Rov4InventoryTransfer0201001$$' | ''                                                      | '$$Rov4InventoryTransfer0201001$$'     | 'GR'        | '10,000' | ''                                     | ''             | '$$Rov4InventoryTransfer0201001$$'     |
+			| '10' | '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$'     | 'GR'        | '3,000'  | ''                                     | ''             | '$$Rov3InventoryTransfer0201001$$'     |
+			| '11' | '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'GR'        | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | ''             | '5165e259-51e5-4438-b7cb-ce848249e668' |
+			| '12' | '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'GR'        | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | ''             | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
+		Then the number of "RowIDInfo" table lines is "равно" "12"
 		And "RowIDInfo" table does not contain lines
 			| 'Key'                              | 'Q'      |
 			| '$$Rov1InventoryTransfer0201001$$' | '10,000' |
@@ -198,20 +212,27 @@ Scenario: _0201002 check filling in Row Id info table in the IT (ITO-IT)
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
 			| '#' | 'Key'                              | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-			| '1' | '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'GR'        | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'IT'           | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
-			| '2' | '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'GR'        | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'IT'           | '5165e259-51e5-4438-b7cb-ce848249e668' |
-			| '3' | '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$'     | 'GR'        | '3,000'  | ''                                     | ''             | '$$Rov3InventoryTransfer0201001$$'     |
-		Then the number of "RowIDInfo" table lines is "равно" "3"
-	// * Change checkbox Use Goods receipt and check RowIDInfo
-		
-	// 	And I click "Post" button
-	// 	And "RowIDInfo" table contains lines
-	// 		| '#' | 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Q'     | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-	// 		| '1' | '$$Rov1InventoryTransfer0201001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'GR'        | '5,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'PI&GR'        | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
-	// 		| '2' | '$$Rov2InventoryTransfer0201001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'GR'        | '5,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'PI&GR'        | '5165e259-51e5-4438-b7cb-ce848249e668' |
-	// 		| '3' | '$$Rov3InventoryTransfer0201001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'GR'        | '8,000' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'PI&GR'        | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' |
-	// 		| '4' | '$$Rov4InventoryTransfer0201001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '8d544e62-9a68-43c3-8399-b4ef451d9770' | ''          | '60,000'| '8d544e62-9a68-43c3-8399-b4ef451d9770' | 'PI&GR'        | '8d544e62-9a68-43c3-8399-b4ef451d9770' |
-	// 	Then the number of "RowIDInfo" table lines is "равно" "4"	
+			| '1' | '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | ''          | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'IT'           | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
+			| '2' | '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | ''          | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'IT'           | '5165e259-51e5-4438-b7cb-ce848249e668' |
+			| '3' | '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$'     | ''          | '3,000'  | ''                                     | ''             | '$$Rov3InventoryTransfer0201001$$'     |
+			| '4' | '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$'     | 'SC'        | '3,000'  | ''                                     | ''             | '$$Rov3InventoryTransfer0201001$$'     |
+			| '5' | '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'SC'        | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | ''             | '5165e259-51e5-4438-b7cb-ce848249e668' |
+			| '6' | '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'SC'        | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | ''             | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
+			| '7' | '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$'     | 'GR'        | '3,000'  | ''                                     | ''             | '$$Rov3InventoryTransfer0201001$$'     |
+			| '8' | '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'GR'        | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | ''             | '5165e259-51e5-4438-b7cb-ce848249e668' |
+			| '9' | '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'GR'        | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | ''             | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
+		Then the number of "RowIDInfo" table lines is "равно" "9"
+	* Change checkbox Use SC and check RowIDInfo
+		And I click "Post" button
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                              | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | ''          | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'IT'           | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
+			| '2' | '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | ''          | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'IT'           | '5165e259-51e5-4438-b7cb-ce848249e668' |
+			| '3' | '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$'     | ''          | '3,000'  | ''                                     | ''             | '$$Rov3InventoryTransfer0201001$$'     |
+			| '4' | '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$'     | 'GR'        | '3,000'  | ''                                     | ''             | '$$Rov3InventoryTransfer0201001$$'     |
+			| '5' | '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'GR'        | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | ''             | '5165e259-51e5-4438-b7cb-ce848249e668' |
+			| '6' | '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'GR'        | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | ''             | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
+		Then the number of "RowIDInfo" table lines is "равно" "6"	
 		And I click the button named "FormPostAndClose"
 
 
@@ -222,6 +243,13 @@ Scenario: _0201002 check filling in Row Id info table in the IT (ITO-IT)
 Scenario: _0201003 copy IT (based on ITO) and check filling in Row Id info table (IT)
 	* Copy IT
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'                     |
+			| '$$NumberInventoryTransfer0201001$$' |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I set checkbox "Use shipment confirmation"
+		And I click the button named "FormPostAndClose"
 		And I go to line in "List" table
 			| 'Number'                     |
 			| '$$NumberInventoryTransfer0201001$$' |

@@ -73,11 +73,7 @@ Scenario: _028000 preparation (Sales return order)
 				| "Number" |
 				| "$$NumberSalesInvoice024001$$" |
 			When create SalesInvoice024001
-	* Check or create SalesInvoice024008 based on SalesOrder023005
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberSalesInvoice024008$$" |
+	* Create SalesInvoice024008 based on SalesOrder023005
 			When create SalesInvoice024008
 
 Scenario: _028001 create document Sales return order, store use Goods receipt, based on Sales invoice + check status

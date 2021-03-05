@@ -57,7 +57,7 @@ Procedure CollectResultTableRecursive(BasisesTreeRows)
 		If TreeRow.DeepLevel And TreeRow.Use And Not TreeRow.Linked Then
 			NewRowResultTable = ThisObject.ResultsTable.Add(); 
 			FillPropertyValues(NewRowResultTable, TreeRow);
-			NewRowResultTable.Quantity = TreeRow.QuantityInBaseUnit;
+			NewRowResultTable.QuantityInBaseUnit = TreeRow.QuantityInBaseUnit;
 		EndIf;
 		CollectResultTableRecursive(TreeRow.GetItems());
 	EndDo;

@@ -407,6 +407,8 @@ Function AgreementSettings(Object, Form, AddInfo = Undefined) Export
 	Actions.Insert("ChangeCurrency"			, "ChangeCurrency");
 	Actions.Insert("ChangePriceIncludeTax"	, "ChangePriceIncludeTax");
 	Actions.Insert("ChangeStore"			, "ChangeStore");
+	Actions.Insert("ChangeTaxRates"		    , "ChangeTaxRates");
+	
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax";
 	Settings.FormAttributes = "Store, CurrentPriceType";

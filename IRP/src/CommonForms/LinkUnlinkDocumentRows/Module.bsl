@@ -223,15 +223,38 @@ Function IsCanLink()
 	Result.Insert("Item"        , ItemListRowsCurrentData.Item);
 	Result.Insert("ItemKey"     , ItemListRowsCurrentData.ItemKey);
 	Result.Insert("Store"       , ItemListRowsCurrentData.Store);
-			
-	Result.Insert("Quantity"    , BasisesTreeCurrentData.QuantityInBaseUnit);
-	Result.Insert("BasisUnit"   , BasisesTreeCurrentData.BasisUnit);
+	
+	If ValueIsFilled(ItemListRowsCurrentData.ItemKey)
+		And ValueIsFilled(ItemListRowsCurrentData.Unit)
+		And ValueIsFilled(ItemListRowsCurrentData.Quantity) Then
+		ConvertationResult = ConvertQuantityToQuantityInBaseUnit(ItemListRowsCurrentData.ItemKey, 
+		                                                         ItemListRowsCurrentData.Unit, 
+		                                                         ItemListRowsCurrentData.Quantity);
+		
+		Result.Insert("QuantityInBaseUnit" , ConvertationResult.QuantityInBaseUnit);
+		Result.Insert("BasisUnit"          , ConvertationResult.BasisUnit);		                                                   
+	Else
+		Result.Insert("QuantityInBaseUnit" , BasisesTreeCurrentData.QuantityInBaseUnit);
+		Result.Insert("BasisUnit"          , BasisesTreeCurrentData.BasisUnit);
+	EndIf;
+	
+	If ValueIsFilled(ItemListRowsCurrentData.Unit) Then
+		Result.Insert("Unit" , ItemListRowsCurrentData.Unit);
+	Else
+		Result.Insert("Unit" , BasisesTreeCurrentData.Unit);
+	EndIf;
+	
 	Result.Insert("RowRef"      , BasisesTreeCurrentData.RowRef);
 	Result.Insert("CurrentStep" , BasisesTreeCurrentData.CurrentStep);
 	Result.Insert("Basis"       , BasisesTreeCurrentData.Basis);
 	Result.Insert("BasisKey"    , BasisesTreeCurrentData.BasisKey);
 	Result.Insert("RowID"       , BasisesTreeCurrentData.RowID);
 	Return Result;
+EndFunction
+
+&AtServer
+Function ConvertQuantityToQuantityInBaseUnit(ItemKey, Unit, Quantity)
+	Return Catalogs.Units.ConvertQuantityToQuantityInBaseUnit(ItemKey, Unit, Quantity);
 EndFunction
 
 &AtClient

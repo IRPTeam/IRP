@@ -242,7 +242,7 @@ Function GetQueryTextSalesInvoiceSalesTurnovers()
 	|	SalesInvoiceItemList.Ref.Company AS Company,
 	|	SalesInvoiceItemList.Ref.Currency AS Currency,
 	|	SalesInvoiceItemList.ItemKey AS ItemKey,
-	|	SUM(SalesInvoiceItemList.Quantity) AS Quantity,
+	|	SUM(SalesInvoiceItemList.QuantityInBaseUnit) AS Quantity,
 	|	SUM(ISNULL(SalesInvoiceSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
 	|	SalesInvoiceItemList.Ref.Date AS Period,
 	|	SalesInvoiceItemList.Ref AS SalesInvoice,

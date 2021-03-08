@@ -117,6 +117,7 @@ Scenario: _028800 preparation (Shipment confirmation)
 		When Create document SalesOrder objects (SC before SI, creation based on)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
+		And Delay 10
 	* Copy created SO 
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table

@@ -77,11 +77,6 @@ Scenario: _090401 create Sales invoice for several Sales order with different le
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I input "324" text in "Number" field
-		# temporarily
-	And I move to "Item list" tab
-	And in the table "ItemList" I click "% Offers" button
-	And in the table "Offers" I click the button named "FormOK"
-		# temporarily
 	And I click the button named "FormPostAndClose"
 * Create Sales order 325
 	When create the second test SO for a test on the creation mechanism based on
@@ -92,11 +87,6 @@ Scenario: _090401 create Sales invoice for several Sales order with different le
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I input "325" text in "Number" field
-		# temporarily
-	And I move to "Item list" tab
-	And in the table "ItemList" I click "% Offers" button
-	And in the table "Offers" I click the button named "FormOK"
-		# temporarily
 	And I click the button named "FormPostAndClose"
 * Create Sales invoice based on Sales order 324 and 325 (should be created 2)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -104,7 +94,8 @@ Scenario: _090401 create Sales invoice for several Sales order with different le
 			| Number |
 			| 324    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+	And I click the button named "FormDocumentSalesInvoiceGenerate"
+	And I click "Ok" button
 	Then the form attribute named "Partner" became equal to "Ferron BP"
 	Then the form attribute named "LegalName" became equal to "Second Company Ferron BP"
 	Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
@@ -120,11 +111,6 @@ Scenario: _090401 create Sales invoice for several Sales order with different le
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I input "325" text in "Number" field
-		# temporarily
-	And I move to "Item list" tab
-	And in the table "ItemList" I click "% Offers" button
-	And in the table "Offers" I click the button named "FormOK"
-		# temporarily
 	And I click the button named "FormPostAndClose"
 	When I click command interface button "Sales invoice (create)"
 	And Delay 2
@@ -146,11 +132,6 @@ Scenario: _090401 create Sales invoice for several Sales order with different le
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I input "324" text in "Number" field
-		# temporarily
-	And I move to "Item list" tab
-	And in the table "ItemList" I click "% Offers" button
-	And in the table "Offers" I click the button named "FormOK"
-		# temporarily
 	And I click the button named "FormPostAndClose"
 And I close all client application windows
 
@@ -170,11 +151,6 @@ Scenario: _090402 create Sales invoice for several Sales order with the same par
 			| Description       |
 			| Company Ferron BP |
 	And I select current line in "List" table
-		# temporarily
-	And I move to "Item list" tab
-	And in the table "ItemList" I click "% Offers" button
-	And in the table "Offers" I click the button named "FormOK"
-		# temporarily
 	And I click the button named "FormPostAndClose"
 * Create test Sales order 327
 	When create the second test SO for a test on the creation mechanism based on
@@ -190,11 +166,6 @@ Scenario: _090402 create Sales invoice for several Sales order with the same par
 			| Description       |
 			| Company Ferron BP |
 	And I select current line in "List" table
-		# temporarily
-	And I move to "Item list" tab
-	And in the table "ItemList" I click "% Offers" button
-	And in the table "Offers" I click the button named "FormOK"
-		# temporarily
 	And I click the button named "FormPostAndClose"
 * Create based on Sales order 326 and 327 Sales invoice (should be created 1)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -202,7 +173,8 @@ Scenario: _090402 create Sales invoice for several Sales order with the same par
 			| Number |
 			| 326    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+	And I click the button named "FormDocumentSalesInvoiceGenerate"
+	And I click "Ok" button
 	Then the form attribute named "Partner" became equal to "Ferron BP"
 	Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
@@ -220,11 +192,6 @@ Scenario: _090402 create Sales invoice for several Sales order with the same par
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I input "327" text in "Number" field
-		# temporarily
-	And I move to "Item list" tab
-	And in the table "ItemList" I click "% Offers" button
-	And in the table "Offers" I click the button named "FormOK"
-		# temporarily
 	And I click the button named "FormPostAndClose"
 	And I close all client application windows
 	
@@ -263,11 +230,6 @@ Scenario: _090403 create Sales invoice for several Sales order with different pa
 				| Store 02  |
 		And I select current line in "List" table
 		And I click "OK" button
-		# temporarily
-	And I move to "Item list" tab
-	And in the table "ItemList" I click "% Offers" button
-	And in the table "Offers" I click the button named "FormOK"
-		# temporarily
 	And I click the button named "FormPostAndClose"
 * Create second test SO 329
 	When create the second test SO for a test on the creation mechanism based on
@@ -301,11 +263,6 @@ Scenario: _090403 create Sales invoice for several Sales order with different pa
 				| Store 02  |
 		And I select current line in "List" table
 		And I click "OK" button
-		# temporarily
-	And I move to "Item list" tab
-	And in the table "ItemList" I click "% Offers" button
-	And in the table "Offers" I click the button named "FormOK"
-		# temporarily
 	And I click the button named "FormPostAndClose"
 * Create based on Sales order 328 and 329 Sales invoice (should be created 2)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -313,7 +270,8 @@ Scenario: _090403 create Sales invoice for several Sales order with different pa
 			| Number |
 			| 328    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+	And I click the button named "FormDocumentSalesInvoiceGenerate"
+	And I click "Ok" button
 	Then the form attribute named "Partner" became equal to "Partner Ferron 2"
 	Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
@@ -329,11 +287,6 @@ Scenario: _090403 create Sales invoice for several Sales order with different pa
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I input "329" text in "Number" field
-		# temporarily
-	And I move to "Item list" tab
-	And in the table "ItemList" I click "% Offers" button
-	And in the table "Offers" I click the button named "FormOK"
-		# temporarily
 	And I click the button named "FormPostAndClose"
 	When I click command interface button "Sales invoice (create)"
 	And Delay 2
@@ -355,11 +308,6 @@ Scenario: _090403 create Sales invoice for several Sales order with different pa
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I input "328" text in "Number" field
-		# temporarily
-	And I move to "Item list" tab
-	And in the table "ItemList" I click "% Offers" button
-	And in the table "Offers" I click the button named "FormOK"
-		# temporarily
 	And I click the button named "FormPostAndClose"
 And I close all client application windows
 
@@ -398,11 +346,6 @@ Scenario: _090404 create Sales invoice for several Sales order with different pa
 				| Store 02  |
 		And I select current line in "List" table
 		And I click "OK" button
-		# temporarily
-	And I move to "Item list" tab
-	And in the table "ItemList" I click "% Offers" button
-	And in the table "Offers" I click the button named "FormOK"
-		# temporarily
 	And I click the button named "FormPostAndClose"
 * Create second test SO 331 Partner Ferron 1 and select partner term Vendor Ferron Discount
 	When create the second test SO for a test on the creation mechanism based on
@@ -435,11 +378,6 @@ Scenario: _090404 create Sales invoice for several Sales order with different pa
 				| Description |
 				| Store 02  |
 		And I select current line in "List" table
-		# temporarily
-	And I move to "Item list" tab
-	And in the table "ItemList" I click "% Offers" button
-	And in the table "Offers" I click the button named "FormOK"
-		# temporarily
 	And I click the button named "FormPostAndClose"
 * Create based on Sales order 330 and 331 Sales invoice (should be created 2)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -447,7 +385,8 @@ Scenario: _090404 create Sales invoice for several Sales order with different pa
 			| Number |
 			| 330    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+	And I click the button named "FormDocumentSalesInvoiceGenerate"
+	And I click "Ok" button
 	Then the form attribute named "Partner" became equal to "Partner Ferron 1"
 	Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	Then the form attribute named "Agreement" became equal to "Basic Partner terms, without VAT"
@@ -522,11 +461,6 @@ Scenario: _090405 create Sales invoice for several Sales order with different st
 				| Store 02  |
 		And I select current line in "List" table
 		And I click "OK" button
-		# temporarily
-	And I move to "Item list" tab
-	And in the table "ItemList" I click "% Offers" button
-	And in the table "Offers" I click the button named "FormOK"
-		# temporarily
 	And I click the button named "FormPostAndClose"
 * Create second test SO 335
 	When create the second test SO for a test on the creation mechanism based on
@@ -560,11 +494,6 @@ Scenario: _090405 create Sales invoice for several Sales order with different st
 				| Store 03  |
 		And I select current line in "List" table
 		And I click "OK" button
-		# temporarily
-	And I move to "Item list" tab
-	And in the table "ItemList" I click "% Offers" button
-	And in the table "Offers" I click the button named "FormOK"
-		# temporarily
 	And I click the button named "FormPostAndClose"
 * Create based on Sales order 335 and 334 Sales invoice (should be created 1)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -572,7 +501,8 @@ Scenario: _090405 create Sales invoice for several Sales order with different st
 			| Number |
 			| 334    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+	And I click the button named "FormDocumentSalesInvoiceGenerate"
+	And I click "Ok" button
 	Then the form attribute named "Partner" became equal to "Partner Ferron 1"
 	Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
@@ -672,7 +602,8 @@ Scenario: _090406 create Sales invoice for several Sales order with different ow
 			| Number |
 			| 336    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+	And I click the button named "FormDocumentSalesInvoiceGenerate"
+	And I click "Ok" button
 	Then the form attribute named "Partner" became equal to "Partner Ferron 1"
 	Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
@@ -913,24 +844,28 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 				And I click "Yes" button
 				And I input "801" text in "Number" field
 			And I click the button named "FormPostAndClose"
-* Create Sales invoice based on SO №800 and SO №801 (should only get the service)
+* Create Sales invoice based on SO №800 and SO №801
 	And I go to line in "List" table
 			| Number |
 			| 800    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+	And I click the button named "FormDocumentSalesInvoiceGenerate"
+	And I click "Ok" button
 	* Check filling in tabular part
 		And "ItemList" table contains lines
-			| 'Item'    | 'Item key' | 'Q'     |
-			| 'Service' | 'Rent'     | '1,000' |
-		Then the number of "ItemList" table lines is "меньше или равно" 1
+			| 'Item'     | 'Item key'  | 'Q'      |
+			| 'Service'  | 'Rent'      | '1,000'  |
+			| 'Trousers' | '38/Yellow' | '10,000' |
+			| 'Trousers' | '38/Yellow' | '2,000'  |
+		Then the number of "ItemList" table lines is "меньше или равно" 3
 		And I close current window
 * Create Shipment confirmation based on SO №800 and SO №801 (should get 2 lines for items from two orders)
 	And I go to line in "List" table
 			| Number |
 			| 800    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+	And I click the button named "FormDocumentShipmentConfirmationGenerate"
+	And I click "Ok" button	
 	* Check filling in details
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -948,7 +883,8 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			| Number |
 			| 800    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentPurchaseOrderGeneratePurchaseOrder"
+	And I click the button named "FormDocumentPurchaseOrderGenerate"
+	And I click "Ok" button
 	Then the number of "ItemList" table lines is "меньше или равно" 1
 	And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Purchase basis'   |
@@ -959,7 +895,8 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			| Number |
 			| 800    |
 	And I move one line down in "List" table and select line
-	And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+	And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+	And I click "Ok" button
 	Then the number of "ItemList" table lines is "меньше или равно" 1
 	And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'     | 'Sales order'      |
@@ -983,7 +920,8 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 			And I go to line in "List" table
 				| 'Number' |
 				| '$$NumberSalesOrder090408$$'    |
-			And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+			And I click the button named "FormDocumentShipmentConfirmationGenerate"
+			And I click "Ok" button	
 			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "5,000" text in "Quantity" field of "ItemList" table
@@ -1011,7 +949,8 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 			And I go to line in "List" table
 				| 'Number' |
 				| '$$NumberSalesOrder090408$$'    |
-			And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+			And I click the button named "FormDocumentShipmentConfirmationGenerate"
+			And I click "Ok" button	
 			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "8,000" text in "Quantity" field of "ItemList" table
@@ -1039,7 +978,8 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 			And I go to line in "List" table
 				| 'Number' |
 				| '$$NumberSalesOrder090408$$'    |
-			And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+			And I click the button named "FormDocumentShipmentConfirmationGenerate"
+			And I click "Ok" button	
 			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "7,000" text in "Quantity" field of "ItemList" table
@@ -1067,8 +1007,7 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberSalesOrder090408$$'    |
-		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
-		And I click the button named "FormSelectAll"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And I click "Ok" button
 		And "ItemList" table contains lines
 		| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Q'      | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'           |
@@ -1093,45 +1032,6 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 		| ''                                    | 'Receipt'     | '*'      | '33 400'    | 'Main Company' | '$$SalesInvoice0904083$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 		| ''                                    | 'Receipt'     | '*'      | '33 400'    | 'Main Company' | '$$SalesInvoice0904083$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 		| ''                                    | 'Receipt'     | '*'      | '33 400'    | 'Main Company' | '$$SalesInvoice0904083$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '20'        | 'Store 02'   | 'M/White'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '20'        | 'Store 02'   | 'L/Green'   | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '30'        | 'Store 02'   | '36/Yellow' | '' | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Taxes turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Taxes turnovers"' | ''       | ''          | ''              | ''           | ''                        | ''         | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-		| ''                            | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'              | ''         | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
-		| ''                            | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'                | 'Tax'      | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                            | '*'      | '17,63'     | '17,63'         | '1 491,25'   | '$$SalesInvoice0904083$$' | 'SalesTax' | ''          | '1%'       | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '18,65'     | '18,65'         | '1 577,29'   | '$$SalesInvoice0904083$$' | 'SalesTax' | ''          | '1%'       | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '20,34'     | '20,34'         | '1 720,68'   | '$$SalesInvoice0904083$$' | 'SalesTax' | ''          | '1%'       | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '102,97'    | '102,97'        | '8 710,59'   | '$$SalesInvoice0904083$$' | 'SalesTax' | ''          | '1%'       | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '102,97'    | '102,97'        | '8 710,59'   | '$$SalesInvoice0904083$$' | 'SalesTax' | ''          | '1%'       | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '102,97'    | '102,97'        | '8 710,59'   | '$$SalesInvoice0904083$$' | 'SalesTax' | ''          | '1%'       | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '108,91'    | '108,91'        | '9 213,12'   | '$$SalesInvoice0904083$$' | 'SalesTax' | ''          | '1%'       | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '108,91'    | '108,91'        | '9 213,12'   | '$$SalesInvoice0904083$$' | 'SalesTax' | ''          | '1%'       | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '108,91'    | '108,91'        | '9 213,12'   | '$$SalesInvoice0904083$$' | 'SalesTax' | ''          | '1%'       | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '118,81'    | '118,81'        | '10 050,68'  | '$$SalesInvoice0904083$$' | 'SalesTax' | ''          | '1%'       | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '118,81'    | '118,81'        | '10 050,68'  | '$$SalesInvoice0904083$$' | 'SalesTax' | ''          | '1%'       | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '118,81'    | '118,81'        | '10 050,68'  | '$$SalesInvoice0904083$$' | 'SalesTax' | ''          | '1%'       | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '271,6'     | '271,6'         | '1 491,25'   | '$$SalesInvoice0904083$$' | 'VAT'      | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '287,27'    | '287,27'        | '1 577,29'   | '$$SalesInvoice0904083$$' | 'VAT'      | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '313,38'    | '313,38'        | '1 720,68'   | '$$SalesInvoice0904083$$' | 'VAT'      | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '1 586,44'  | '1 586,44'      | '8 710,59'   | '$$SalesInvoice0904083$$' | 'VAT'      | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '1 586,44'  | '1 586,44'      | '8 710,59'   | '$$SalesInvoice0904083$$' | 'VAT'      | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '1 586,44'  | '1 586,44'      | '8 710,59'   | '$$SalesInvoice0904083$$' | 'VAT'      | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 213,12'   | '$$SalesInvoice0904083$$' | 'VAT'      | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 213,12'   | '$$SalesInvoice0904083$$' | 'VAT'      | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 213,12'   | '$$SalesInvoice0904083$$' | 'VAT'      | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '1 830,51'  | '1 830,51'      | '10 050,68'  | '$$SalesInvoice0904083$$' | 'VAT'      | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '1 830,51'  | '1 830,51'      | '10 050,68'  | '$$SalesInvoice0904083$$' | 'VAT'      | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '1 830,51'  | '1 830,51'      | '10 050,68'  | '$$SalesInvoice0904083$$' | 'VAT'      | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
 		And I select "Accounts statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

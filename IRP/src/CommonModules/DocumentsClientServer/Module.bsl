@@ -252,12 +252,14 @@ EndFunction
 
 #Region Common
 Procedure FillDefinedData(Object, Form) Export
-	If (Not Form.Parameters.Property("CopyingValue") Or NOT ValueIsFilled(Form.Parameters.CopyingValue)) 
-		AND (Not Form.Parameters.Property("BasedOn") Or NOT Form.Parameters.FillingValues.Property("BasedOn")) Then
+	IsCopy = Form.Parameters.Property("CopyingValue") And ValueIsFilled(Form.Parameters.CopyingValue);
+	IsBasedOn = Form.Parameters.Property("BasedOn") Or 
+	(Form.Parameters.Property("FillingValues") And Form.Parameters.FillingValues.Property("BasedOn"));
+	
+	If Not IsCopy And Not IsBasedOn Then
 		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
 		Object.PriceIncludeTax 	= AgreementInfo.PriceIncludeTax;
 		Object.Currency 		= AgreementInfo.Currency;
-		
 	EndIf;
 EndProcedure
 #EndRegion

@@ -262,7 +262,8 @@ Scenario: _029513 create Shipment confirmation and Goods receipt based on Bundli
 	And I save the window as "$$GoodsReceipt0029513$$"
 	And I click the button named "FormPostAndClose"
 	And Delay 5
-	And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+	And I click the button named "FormDocumentShipmentConfirmationGenerate"
+	And I click "Ok" button	
 	Then the form attribute named "Company" became equal to "Main Company"
 	And I click the button named "FormPost"
 	And I delete "$$NumberShipmentConfirmation0029513$$" variable

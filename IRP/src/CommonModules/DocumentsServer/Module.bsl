@@ -437,6 +437,7 @@ Function PrepareServerData(Parameters) Export
 						ItemOfTaxInfo.Insert("ArrayOfTaxRates"             , StructureOfTaxRates.ArrayOfTaxRates);
 						ItemOfTaxInfo.Insert("ArrayOfTaxRatesForAgreement" , StructureOfTaxRates.ArrayOfTaxRatesForAgreement);
 						ItemOfTaxInfo.Insert("ArrayOfTaxRatesForItemKey"   , StructureOfTaxRates.ArrayOfTaxRatesForItemKey);
+						ItemOfTaxInfo.Insert("ArrayOfTaxRatesForCompany"   , StructureOfTaxRates.ArrayOfTaxRatesForCompany);						
 					EndIf;
 					ArrayOfTaxesInCache.Add(ItemOfTaxInfo.Tax);
 				EndDo;
@@ -661,11 +662,18 @@ Function GetCurrencyByMovementType(ArrayOfMovementsTypes)
 EndFunction
 
 Function GetStructureOfTaxRates(Tax, Date, Company, Parameters)
-	Result = New Structure("ArrayOfTaxRates, ArrayOfTaxRatesForItemKey, ArrayOfTaxRatesForAgreement", 
-	New Array(), New Array(), New Array());
+	Result = New Structure();
+	Result.Insert("ArrayOfTaxRates"             , New Array());
+	Result.Insert("ArrayOfTaxRatesForItemKey"   , New Array());
+	Result.Insert("ArrayOfTaxRatesForAgreement" , New Array());
+	Result.Insert("ArrayOfTaxRatesForCompany"   , New Array());
+	
+	Result.ArrayOfTaxRatesForCompany = TaxesServer.GetTaxRatesForCompany(New Structure("Date, Company, Tax",
+	Date, Company, Tax));
+	
 	
 	If Parameters.Property("Agreement") Then
-		Result.ArrayOfTaxRatesForAgreement = TaxesServer.TaxRatesForAgreement(New Structure("Date, Company, Tax, Agreement",
+		Result.ArrayOfTaxRatesForAgreement = TaxesServer.GetTaxRatesForAgreement(New Structure("Date, Company, Tax, Agreement",
 		Date, Company, Tax, Parameters.Agreement));
 	EndIf;
 	

@@ -247,6 +247,9 @@
 			<item>
 				<field>ShipmentConfirmationsTreeShipmentConfirmation</field>
 			</item>
+			<item>
+				<field>ShipmentConfirmationsTreePictureDocument</field>
+			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
@@ -269,6 +272,9 @@
 			</item>
 			<item>
 				<field>ShipmentConfirmationsTreeItemKey</field>
+			</item>
+			<item>
+				<field>ShipmentConfirmationsTreePictureItem</field>
 			</item>
 		</selection>
 		<filter>

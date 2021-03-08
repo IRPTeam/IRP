@@ -13,6 +13,21 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query = New Query();
 	Query.Text =
 		"SELECT
+		|	RowIDInfo.Ref AS Ref,
+		|	RowIDInfo.Key AS Key,
+		|	MAX(RowIDInfo.RowID) AS RowID
+		|INTO RowIDInfo
+		|FROM
+		|	Document.InternalSupplyRequest.RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.Ref = &Ref
+		|GROUP BY
+		|	RowIDInfo.Ref,
+		|	RowIDInfo.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
 		|	InternalSupplyRequestItemList.Ref.Company AS Company,
 		|	InternalSupplyRequestItemList.Ref.Store AS Store,
 		|	InternalSupplyRequestItemList.ItemKey AS ItemKey,
@@ -25,9 +40,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
 		|	InternalSupplyRequestItemList.ItemKey.Item AS Item,
 		|	InternalSupplyRequestItemList.Ref.Date AS Period,
-		|	InternalSupplyRequestItemList.Key AS RowKeyUUID
+		|	RowIDInfo.RowID AS RowKey
 		|FROM
 		|	Document.InternalSupplyRequest.ItemList AS InternalSupplyRequestItemList
+		|		LEFT JOIN RowIDInfo AS RowIDInfo
+		|		ON InternalSupplyRequestItemList.Key = RowIDInfo.Key
 		|WHERE
 		|	InternalSupplyRequestItemList.Ref = &Ref";
 	
@@ -35,7 +52,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResults = Query.Execute();
 	QueryTable = QueryResults.Unload();
 	
-	PostingServer.UUIDToString(QueryTable);
 	PostingServer.CalculateQuantityByUnit(QueryTable);
 	
 	Query = New Query();

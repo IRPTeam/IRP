@@ -2,7 +2,7 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	DocSalesOrderServer.OnCreateAtServerChoiceForm(ThisObject, Cancel, StandardProcessing);
+	DocSalesOrderClosingServer.OnCreateAtServerChoiceForm(ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
 #EndRegion

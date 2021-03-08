@@ -16,6 +16,21 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query = New Query();
 	Query.Text =
 		"SELECT
+		|	RowIDInfo.Ref AS Ref,
+		|	RowIDInfo.Key AS Key,
+		|	MAX(RowIDInfo.RowID) AS RowID
+		|INTO RowIDInfo
+		|FROM
+		|	Document.PurchaseOrder.RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.Ref = &Ref
+		|GROUP BY
+		|	RowIDInfo.Ref,
+		|	RowIDInfo.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
 		|	PurchaseOrderItemList.Ref.Company AS Company,
 		|	PurchaseOrderItemList.Store AS Store,
 		|	PurchaseOrderItemList.Store.UseGoodsReceipt AS UseGoodsReceipt,
@@ -31,7 +46,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	0 AS BasisQuantity,
 		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
 		|	&Period AS Period,
-		|	PurchaseOrderItemList.Key AS RowKeyUUID,
+		|	RowIDInfo.RowID AS RowKey,
 		|	PurchaseOrderItemList.BusinessUnit AS BusinessUnit,
 		|	PurchaseOrderItemList.ExpenseType AS ExpenseType,
 		|	CASE
@@ -54,6 +69,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	END AS UseSalesOrder
 		|FROM
 		|	Document.PurchaseOrder.ItemList AS PurchaseOrderItemList
+		|		LEFT JOIN RowIDInfo AS RowIDInfo
+		|		ON PurchaseOrderItemList.Key = RowIDInfo.Key
 		|WHERE
 		|	PurchaseOrderItemList.Ref = &Ref
 		|	AND NOT PurchaseOrderItemList.Cancel";
@@ -63,7 +80,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResults = Query.Execute();
 	QueryTable = QueryResults.Unload();
 	
-	PostingServer.UUIDToString(QueryTable);
+	
 	PostingServer.CalculateQuantityByUnit(QueryTable);
 	
 	Query = New Query();

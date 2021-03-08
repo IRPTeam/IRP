@@ -58,9 +58,9 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") Then
 		If FillingData.Property("BasedOn") And FillingData.BasedOn = "InternalSupplyRequest" Then
 			Filling_BasedOn(FillingData);
-		EndIf;
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesOrder" Then
-			Filling_BasedOn(FillingData);
+		Else
+			FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
+			RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 		EndIf;
 	EndIf;
 EndProcedure

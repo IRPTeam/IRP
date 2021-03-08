@@ -90,6 +90,11 @@ Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
+Procedure ItemListAfterDeleteRow(Item)
+	DocInternalSupplyRequestClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure ItemListOnStartEdit(Item, NewRow, Clone)
 	If Clone Then
 		Item.CurrentData.Key = New UUID();
@@ -113,6 +118,16 @@ EndProcedure
 &AtClient
 Procedure StoreOnChange(Item)
 	DocInternalSupplyRequestClient.StoreOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListQuantityOnChange(Item)
+	DocInternalSupplyRequestClient.ItemListQuantityOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListUnitOnChange(Item)
+	DocInternalSupplyRequestClient.ItemListUnitOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #Region GroupTitleDecorations

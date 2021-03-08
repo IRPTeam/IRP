@@ -633,16 +633,6 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 		| ''                               | '*'      | '20'        | '11 000'  | '9 322,03'   | 'Main Company' | '$$PurchaseInvoice060005$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | 'No'                   | '' | '' |
 		| ''                               | '*'      | '20'        | '11 000'  | '9 322,03'   | 'Main Company' | '$$PurchaseInvoice060005$$' | 'TRY'      | 'L/Green'  | '*'       | 'TRY'                          | 'No'                   | '' | '' |
 		| ''                               | '*'      | '20'        | '11 000'  | '9 322,03'   | 'Main Company' | '$$PurchaseInvoice060005$$' | 'TRY'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Taxes turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Taxes turnovers"' | ''       | ''          | ''              | ''           | ''                          | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-		| ''                            | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'                | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
-		| ''                            | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'                  | 'Tax' | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                            | '*'      | '287,27'    | '287,27'        | '1 595,93'   | '$$PurchaseInvoice060005$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$PurchaseInvoice060005$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$PurchaseInvoice060005$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$PurchaseInvoice060005$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
 		And I select "Accounts statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -902,16 +892,6 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 		| ''                               | '*'      | '20'        | '11 000'  | '9 322,03'   | 'Main Company' | '$$PurchaseInvoice060007$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | 'No'                   | '' | '' |
 		| ''                               | '*'      | '20'        | '11 000'  | '9 322,03'   | 'Main Company' | '$$PurchaseInvoice060007$$' | 'TRY'      | 'L/Green'  | '*'       | 'TRY'                          | 'No'                   | '' | '' |
 		| ''                               | '*'      | '20'        | '11 000'  | '9 322,03'   | 'Main Company' | '$$PurchaseInvoice060007$$' | 'TRY'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Taxes turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Taxes turnovers"' | ''       | ''          | ''              | ''           | ''                          | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-		| ''                            | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'                | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
-		| ''                            | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'                  | 'Tax' | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                            | '*'      | '287,27'    | '287,27'        | '1 595,93'   | '$$PurchaseInvoice060007$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$PurchaseInvoice060007$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$PurchaseInvoice060007$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$PurchaseInvoice060007$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
 		And I select "Accounts statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

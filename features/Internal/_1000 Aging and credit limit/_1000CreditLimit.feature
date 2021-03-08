@@ -293,7 +293,8 @@ Scenario: _1000000 preparation (credit limit)
 		And I go to line in "List" table
 			| 'Number'                       |
 			| '$$NumberSalesOrder20400012$$' |
-		And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "Ok" button	
 		And I move to "Other" tab
 		And I click the button named "FormPost"
 		And I delete "$$ShipmentConfirmation20400018$$" variable
@@ -368,7 +369,8 @@ Scenario: _1000002 check credit limit when post Sales invoice based on Sales ord
 		And I go to line in "List" table
 			| 'Number'              |
 			| '$$NumberSalesOrder20400011$$' |
-		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
 		And I click the button named "FormPost"
 		And I delete "$$SalesInvoice20400011$$" variable	
 		And I delete "$$NumberSalesInvoice20400011$$" variable
@@ -381,7 +383,8 @@ Scenario: _1000002 check credit limit when post Sales invoice based on Sales ord
 		And I go to line in "List" table
 			| 'Number'              |
 			| '$$NumberSalesOrder20400014$$' |
-		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
 		And I click the button named "FormPostAndClose"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button

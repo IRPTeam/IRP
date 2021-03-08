@@ -57,7 +57,46 @@ Procedure GetUnitFactorRecursion(FromUnit, ToUnit, Result)
 	EndIf;
 EndProcedure
 
+Function Convert(FromUnit, ToUnit, Quantity) Export
+	If FromUnit = ToUnit Then
+		Return Quantity;
+	EndIf;
+	
+	// To unit
+	Result = New Array();
+	GetUnitFactorRecursion(ToUnit, FromUnit, Result);
+	UnitFactorTo = 1;
+	For Each Value In Result Do
+		UnitFactorTo = UnitFactorTo * Value;
+	EndDo;
+	
+	// From unit
+	Result = New Array();
+	GetUnitFactorRecursion(FromUnit, ToUnit, Result);
+	UnitFactorFrom = 1;
+	For Each Value In Result Do
+		UnitFactorFrom = UnitFactorFrom * Value;
+	EndDo;
+	
+	Return Quantity / UnitFactorTo * UnitFactorFrom;
+EndFunction	
+
+Function ConvertQuantityToQuantityInBaseUnit(ItemKey, Unit, Quantity) Export
+	BasisUnit = GetBasisQuantity(ItemKey); 
+	QuantityInBaseUnit =  Convert(Unit, BasisUnit, Quantity);
+	Return New Structure("BasisUnit, QuantityInBaseUnit", BasisUnit, QuantityInBaseUnit);
+EndFunction
+
+Function GetBasisQuantity(ItemKey) Export
+	If ValueIsFilled(ItemKey.Unit) Then
+		Return ItemKey.Unit;
+	Else
+		Return ItemKey.Item.Unit;
+	EndIf;
+EndFunction
+
 #Region LockAttributes
+
 Function GetListLockedAttributes_IncludeObjects() Export
 	Array = New Array;
 	Return Array;

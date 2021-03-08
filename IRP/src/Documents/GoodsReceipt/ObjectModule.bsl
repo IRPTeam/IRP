@@ -44,31 +44,15 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		If FillingData.Property("BasedOn") And FillingData.BasedOn = "Bundling" Then
 			TransactionType = Enums.GoodsReceiptTransactionTypes.Bundling;
 			Filling_BasedOn(FillingData);
-		EndIf;
-		
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "InventoryTransfer" Then
-			TransactionType = Enums.GoodsReceiptTransactionTypes.InventoryTransfer;
-			Filling_BasedOn(FillingData);
-		EndIf;
-		
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "PurchaseInvoice" Then
-			TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase;
-			Filling_BasedOn(FillingData);
-		EndIf;
-		
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "PurchaseOrder" Then
-			TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase;
-			Filling_BasedOn(FillingData);
-		EndIf;
-		
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesReturn" Then
+		ElsIf FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesReturn" Then
 			TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
 			Filling_BasedOn(FillingData);
-		EndIf;
-		
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "Unbundling" Then
+		ElsIf FillingData.Property("BasedOn") And FillingData.BasedOn = "Unbundling" Then
 			TransactionType = Enums.GoodsReceiptTransactionTypes.Bundling;
 			Filling_BasedOn(FillingData);
+		Else
+			FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
+			RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 		EndIf;
 	EndIf;
 	

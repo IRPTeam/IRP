@@ -40,31 +40,15 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		If FillingData.Property("BasedOn") And FillingData.BasedOn = "Bundling" Then
 			TransactionType = Enums.ShipmentConfirmationTransactionTypes.Bundling;
 			Filling_BasedOn(FillingData);
-		EndIf;
-		
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "InventoryTransfer" Then
-			TransactionType = Enums.ShipmentConfirmationTransactionTypes.InventoryTransfer;
-			Filling_BasedOn(FillingData);
-		EndIf;
-		
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "PurchaseReturn" Then
+		ElsIf FillingData.Property("BasedOn") And FillingData.BasedOn = "PurchaseReturn" Then
 			TransactionType = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor;
 			Filling_BasedOn(FillingData);
-		EndIf;
-		
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesInvoice" Then
-			TransactionType = Enums.ShipmentConfirmationTransactionTypes.Sales;
-			Filling_BasedOn(FillingData);
-		EndIf;
-		
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesOrder" Then
-			TransactionType = Enums.ShipmentConfirmationTransactionTypes.Sales;
-			Filling_BasedOn(FillingData);
-		EndIf;
-		
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "Unbundling" Then
+		ElsIf FillingData.Property("BasedOn") And FillingData.BasedOn = "Unbundling" Then
 			TransactionType = Enums.ShipmentConfirmationTransactionTypes.Bundling;
 			Filling_BasedOn(FillingData);
+		Else
+			FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
+			RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);	
 		EndIf;
 	EndIf;
 	
@@ -72,16 +56,7 @@ EndProcedure
 
 Procedure Filling_BasedOn(FillingData)
 	FillPropertyValues(ThisObject, FillingData, "Company, Partner, LegalName");
-	For Each Row In FillingData.ItemList Do
-		NewRow = ThisObject.ItemList.Add();
-		FillPropertyValues(NewRow, Row);
-		If Not ValueIsFilled(NewRow.Key) Then
-			NewRow.Key = New UUID();
-		EndIf;
-		If ValueIsFilled(Row.Unit) And ValueIsFilled(Row.Unit.Quantity) Then
-			NewRow.Quantity = Row.Quantity / Row.Unit.Quantity;
-		EndIf;
-	EndDo;
+	RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

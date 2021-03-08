@@ -4815,7 +4815,8 @@ Scenario: _0154150 check function DontCalculateRow in the Purchase order
 			And I select "Approved" exact value from "Status" drop-down list
 			And I click the button named "FormPost"
 	* Check filling the recalculation check box when creating Purchase invoice bases on Purchase order
-		And I click "Purchase invoice" button
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button
 		And "ItemList" table contains lines
 		| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' |
 		| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     |
@@ -5528,7 +5529,8 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 691,80"
 			And I click the button named "FormPostAndClose"
 	* Check filling the recalculation check box when creating Sales invoice bases on Sales order
-		And I click "Sales invoice" button
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'              	| '129,00'     | '671,00'     | '800,50'       |

@@ -82,8 +82,10 @@ Scenario:_800000 preparation (remaining stock control)
 		When Create document GoodsReceipt objects
 		When Create document SalesReturn objects
 		When Create document SalesReturnOrder objects
+		When Create document InternalSupplyRequest objects
 		When Create document PurchaseOrder objects
 		When Create document InventoryTransfer objects
+		
 		When Create document InventoryTransferOrder objects
 		When Create document GoodsReceipt objects (for stock remaining control)
 		When Create document PurchaseInvoice objects (for stock remaining control)
@@ -2010,79 +2012,80 @@ Scenario:_800048 check remaining stock control when unpost/change Inventory tran
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Then I wait that in user messages the "Line No. [1] [Shirt 38/Black] Reservation remaining: 5 . Required: 25 . Lacking: 20 ." substring will appear in 10 seconds
-	* Create Inventory transfer based on Inventory transfer order
-		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"	
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberInventoryTransferOrder1$$'   |
-		And I click the button named "FormDocumentInventoryTransferGenerateInventoryTransfer"
-		And I click the button named "FormPost"
-		And I delete "$$NumberInventoryTransfer2$$" variable
-		And I save the value of "Number" field as "$$NumberInventoryTransfer2$$"
-		Then system warning window does not appear
-		Then user message window does not contain messages
-	* Create GR
-		And I click "Goods receipt" button
-		And I click "Post and close" button	
-	* Create SI for transfer remainings
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I click the button named "FormCreate"
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'   |
-		And I select current line in "List" table
-		And I click Select button of "Legal name" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Company Ferron BP' |
-		And I select current line in "List" table
-		And I click Select button of "Partner term" field
-		And I go to line in "List" table
-			| 'Description'              |
-			| 'Basic Partner terms, TRY' |
-		And I select current line in "List" table
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
-		And I click Choice button of the field named "Store"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
-		And I select current line in "List" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Shirt'       |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '38/Black'  |
-		And I activate "Item key" field in "List" table
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "15,000" text in "Q" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click the button named "FormPost"
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
-		Then I wait that in user messages the "Line No. [1] [Shirt 38/Black] Reservation remaining: 5 . Required: 15 . Lacking: 10 ." substring will appear in 10 seconds
-		And I click Choice button of the field named "Store"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 03'    |
-		And I select current line in "List" table
-		And I click "OK" button		
-		And I click the button named "FormPost"
-		Then system warning window does not appear
-		Then user message window does not contain messages	
-		And I delete "$$NumberSalesInvoice7$$" variable
-		And I save the value of "Number" field as "$$NumberSalesInvoice7$$"
+	// * Create Inventory transfer based on Inventory transfer order
+	// 	Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"	
+	// 	And I go to line in "List" table
+	// 		| 'Number' |
+	// 		| '$$NumberInventoryTransferOrder1$$'   |
+	// 	And I click the button named "FormDocumentInventoryTransferGenerate"
+	// 	And I click "OK" button
+	// 	And I click the button named "FormPost"
+	// 	And I delete "$$NumberInventoryTransfer2$$" variable
+	// 	And I save the value of "Number" field as "$$NumberInventoryTransfer2$$"
+	// 	Then system warning window does not appear
+	// 	Then user message window does not contain messages
+	// * Create GR
+	// 	And I click "Goods receipt" button
+	// 	And I click "Post and close" button	
+	// * Create SI for transfer remainings
+	// 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	// 	And I click the button named "FormCreate"
+	// 	And I click Select button of "Partner" field
+	// 	And I go to line in "List" table
+	// 		| 'Description' |
+	// 		| 'Ferron BP'   |
+	// 	And I select current line in "List" table
+	// 	And I click Select button of "Legal name" field
+	// 	And I go to line in "List" table
+	// 		| 'Description'       |
+	// 		| 'Company Ferron BP' |
+	// 	And I select current line in "List" table
+	// 	And I click Select button of "Partner term" field
+	// 	And I go to line in "List" table
+	// 		| 'Description'              |
+	// 		| 'Basic Partner terms, TRY' |
+	// 	And I select current line in "List" table
+	// 	And I click Select button of "Company" field
+	// 	And I go to line in "List" table
+	// 		| 'Description'  |
+	// 		| 'Main Company' |
+	// 	And I select current line in "List" table
+	// 	And I click Choice button of the field named "Store"
+	// 	And I go to line in "List" table
+	// 		| 'Description' |
+	// 		| 'Store 01'    |
+	// 	And I select current line in "List" table
+	// 	And in the table "ItemList" I click the button named "ItemListAdd"
+	// 	And I click choice button of "Item" attribute in "ItemList" table
+	// 	And I go to line in "List" table
+	// 		| 'Description' |
+	// 		| 'Shirt'       |
+	// 	And I select current line in "List" table
+	// 	And I activate "Item key" field in "ItemList" table
+	// 	And I click choice button of "Item key" attribute in "ItemList" table
+	// 	And I go to line in "List" table
+	// 		| 'Item'  | 'Item key' |
+	// 		| 'Shirt' | '38/Black'  |
+	// 	And I activate "Item key" field in "List" table
+	// 	And I select current line in "List" table
+	// 	And I activate "Q" field in "ItemList" table
+	// 	And I input "15,000" text in "Q" field of "ItemList" table
+	// 	And I finish line editing in "ItemList" table
+	// 	And I click the button named "FormPost"
+	// 	Then "1C:Enterprise" window is opened
+	// 	And I click "OK" button
+	// 	Then I wait that in user messages the "Line No. [1] [Shirt 38/Black] Reservation remaining: 5 . Required: 15 . Lacking: 10 ." substring will appear in 10 seconds
+	// 	And I click Choice button of the field named "Store"
+	// 	And I go to line in "List" table
+	// 		| 'Description' |
+	// 		| 'Store 03'    |
+	// 	And I select current line in "List" table
+	// 	And I click "OK" button		
+	// 	And I click the button named "FormPost"
+	// 	Then system warning window does not appear
+	// 	Then user message window does not contain messages	
+	// 	And I delete "$$NumberSalesInvoice7$$" variable
+	// 	And I save the value of "Number" field as "$$NumberSalesInvoice7$$"
 		And I close all client application windows
 		
 		

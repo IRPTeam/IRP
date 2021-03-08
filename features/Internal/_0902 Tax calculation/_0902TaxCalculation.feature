@@ -556,7 +556,8 @@ Scenario: _090205 check tax transfer in Sales invoice when it is created based o
 		And I save the window as "$$SalesInvoice090204$$"
 		And I click the button named "FormPost"
 	* Create Sales invoice based on Sales order and check filling Tax types
-		And I click "Sales invoice" button
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'SalesTax' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | 'pcs'  | '1%'       | '65,96'      | '334,04'     | '400,00'       | 'Store 01' |

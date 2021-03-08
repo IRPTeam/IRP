@@ -31,58 +31,104 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	ShipmentConfirmationItemList.Ref.Company AS Company,
-		|	ShipmentConfirmationItemList.Store AS Store,
-		|	ShipmentConfirmationItemList.ItemKey AS ItemKey,
-		|	ShipmentConfirmationItemList.ShipmentBasis AS ShipmentBasis,
-		|	ShipmentConfirmationItemList.ShipmentBasis REFS Document.SalesOrder
-		|	AND NOT CAST(ShipmentConfirmationItemList.ShipmentBasis AS Document.SalesOrder).Date IS NULL AS UseSalesOrder,
-		|	CASE
-		|		WHEN ShipmentConfirmationItemList.ShipmentBasis REFS Document.SalesOrder
-		|		AND NOT CAST(ShipmentConfirmationItemList.ShipmentBasis AS Document.SalesOrder).Date IS NULL
-		|			THEN CAST(ShipmentConfirmationItemList.ShipmentBasis AS
-		|				Document.SalesOrder).ShipmentConfirmationsBeforeSalesInvoice
-		|		ELSE FALSE
-		|	END AS ShipmentBeforeInvoice,
-		|
-		|	
-		|	NOT ShipmentConfirmationItemList.ShipmentBasis.Ref IS NULL AS UseShipmentBasis,
-		|	
-		| 	NOT ShipmentConfirmationItemList.ShipmentBasis.Ref IS NULL
-		|	AND ShipmentConfirmationItemList.ShipmentBasis REFS Document.SalesOrder
-		|	AND ISNULL(SalesOrderItemList.ProcurementMethod, VALUE(Enum.ProcurementMethods.EmptyRef)) = VALUE(Enum.ProcurementMethods.Stock)
-		|	AS ProcMeth_Stock,
-		|
-		|	NOT ShipmentConfirmationItemList.ShipmentBasis.Ref IS NULL
-		|	AND ShipmentConfirmationItemList.ShipmentBasis REFS Document.SalesOrder
-		|	AND ISNULL(SalesOrderItemList.ProcurementMethod, VALUE(Enum.ProcurementMethods.EmptyRef)) = VALUE(Enum.ProcurementMethods.NoReserve)
-		|	AS ProcMeth_NoReserve,
-		|
-		|	ShipmentConfirmationItemList.Ref AS ShipmentConfirmation,
-		|	ShipmentConfirmationItemList.Quantity AS Quantity,
-		|	0 AS BasisQuantity,
-		|	ShipmentConfirmationItemList.Unit AS Unit,
-		|	ShipmentConfirmationItemList.ItemKey.Item.Unit AS ItemUnit,
-		|	ShipmentConfirmationItemList.ItemKey.Unit AS ItemKeyUnit,
-		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
-		|	ShipmentConfirmationItemList.ItemKey.Item AS Item,
-		|	ShipmentConfirmationItemList.Ref.Date AS Period,
-		|	ShipmentConfirmationItemList.Key AS RowKeyUUID
-		|FROM
-		|	Document.ShipmentConfirmation.ItemList AS ShipmentConfirmationItemList
-		|		LEFT JOIN Document.SalesOrder.ItemList AS SalesOrderItemList
-		|		ON ShipmentConfirmationItemList.Key = SalesOrderItemList.Key
-		|		AND CAST(ShipmentConfirmationItemList.ShipmentBasis AS Document.SalesOrder) = SalesOrderItemList.Ref
-		|WHERE
-		|	ShipmentConfirmationItemList.Ref = &Ref";
+	
+			"SELECT
+			|	SalesOrderRowIDInfo.Ref AS SalesOrderRef,
+			|	SalesOrderRowIDInfo.Key AS SalesOrderKey,
+			|	MAX(SalesOrderRowIDInfo.RowID) AS SalesOrderRowID
+			|INTO SalesOrderRowIDInfo
+			|FROM
+			|	Document.SalesOrder.RowIDInfo AS SalesOrderRowIDInfo
+			|WHERE
+			|	SalesOrderRowIDInfo.Ref IN
+			|		(SELECT
+			|			CAST(ShipmentConfirmationItemList.ShipmentBasis AS Document.SalesOrder).Ref
+			|		FROM
+			|			Document.ShipmentConfirmation.ItemList AS ShipmentConfirmationItemList
+			|		WHERE
+			|			ShipmentConfirmationItemList.Ref = &Ref)
+			|GROUP BY
+			|	SalesOrderRowIDInfo.Ref,
+			|	SalesOrderRowIDInfo.Key
+			|;
+			|
+			|////////////////////////////////////////////////////////////////////////////////
+			|SELECT
+			|	SalesOrderItemList.Ref AS SalesOrderRef,
+			|	SalesOrderItemList.ProcurementMethod,
+			|	SalesOrderRowIDInfo.SalesOrderRowID AS SalesOrderRowID
+			|INTO SalesOrderItemList
+			|FROM
+			|	Document.SalesOrder.ItemList AS SalesOrderItemLIst
+			|		INNER JOIN SalesOrderRowIDInfo AS SalesOrderRowIDInfo
+			|		ON SalesOrderItemLIst.Ref = SalesOrderRowIDInfo.SalesOrderRef
+			|		AND SalesOrderItemLIst.Key = SalesOrderRowIDInfo.SalesOrderKey
+			|;
+			|
+			|////////////////////////////////////////////////////////////////////////////////
+			|SELECT
+			|	RowIDInfo.Ref AS Ref,
+			|	RowIDInfo.Key AS Key,
+			|	MAX(RowIDInfo.RowID) AS RowID
+			|INTO RowIDInfo
+			|FROM
+			|	Document.ShipmentConfirmation.RowIDInfo AS RowIDInfo
+			|WHERE
+			|	RowIDInfo.Ref = &Ref
+			|GROUP BY
+			|	RowIDInfo.Ref,
+			|	RowIDInfo.Key
+			|;
+			|
+			|////////////////////////////////////////////////////////////////////////////////
+			|SELECT
+			|	ShipmentConfirmationItemList.Ref.Company AS Company,
+			|	ShipmentConfirmationItemList.Store AS Store,
+			|	ShipmentConfirmationItemList.ItemKey AS ItemKey,
+			|	ShipmentConfirmationItemList.ShipmentBasis AS ShipmentBasis,
+			|	ShipmentConfirmationItemList.ShipmentBasis REFS Document.SalesOrder
+			|	AND NOT CAST(ShipmentConfirmationItemList.ShipmentBasis AS Document.SalesOrder).Date IS NULL AS UseSalesOrder,
+			|	CASE
+			|		WHEN ShipmentConfirmationItemList.ShipmentBasis REFS Document.SalesOrder
+			|		AND NOT CAST(ShipmentConfirmationItemList.ShipmentBasis AS Document.SalesOrder).Date IS NULL
+			|			THEN CAST(ShipmentConfirmationItemList.ShipmentBasis AS
+			|				Document.SalesOrder).ShipmentConfirmationsBeforeSalesInvoice
+			|		ELSE FALSE
+			|	END AS ShipmentBeforeInvoice,
+			|	NOT ShipmentConfirmationItemList.ShipmentBasis.Ref IS NULL AS UseShipmentBasis,
+			|	NOT ShipmentConfirmationItemList.ShipmentBasis.Ref IS NULL
+			|	AND ShipmentConfirmationItemList.ShipmentBasis REFS Document.SalesOrder
+			|	AND ISNULL(SalesOrderItemList.ProcurementMethod,
+			|		VALUE(Enum.ProcurementMethods.EmptyRef)) = VALUE(Enum.ProcurementMethods.Stock) AS ProcMeth_Stock,
+			|	NOT ShipmentConfirmationItemList.ShipmentBasis.Ref IS NULL
+			|	AND ShipmentConfirmationItemList.ShipmentBasis REFS Document.SalesOrder
+			|	AND ISNULL(SalesOrderItemList.ProcurementMethod,
+			|		VALUE(Enum.ProcurementMethods.EmptyRef)) = VALUE(Enum.ProcurementMethods.NoReserve) AS ProcMeth_NoReserve,
+			|	ShipmentConfirmationItemList.Ref AS ShipmentConfirmation,
+			|	ShipmentConfirmationItemList.Quantity AS Quantity,
+			|	0 AS BasisQuantity,
+			|	ShipmentConfirmationItemList.Unit AS Unit,
+			|	ShipmentConfirmationItemList.ItemKey.Item.Unit AS ItemUnit,
+			|	ShipmentConfirmationItemList.ItemKey.Unit AS ItemKeyUnit,
+			|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
+			|	ShipmentConfirmationItemList.ItemKey.Item AS Item,
+			|	ShipmentConfirmationItemList.Ref.Date AS Period,
+			|	RowIDInfo.RowID AS RowKey
+			|FROM
+			|	Document.ShipmentConfirmation.ItemList AS ShipmentConfirmationItemList
+			|		LEFT JOIN RowIDInfo AS RowIDInfo
+			|		ON ShipmentConfirmationItemList.Key = RowIDInfo.Key
+			|		LEFT JOIN SalesOrderItemList AS SalesOrderItemList
+			|		ON RowIDInfo.RowID = SalesOrderItemList.SalesOrderRowID
+			|		AND CAST(ShipmentConfirmationItemList.ShipmentBasis AS Document.SalesOrder) = SalesOrderItemList.SalesOrderRef
+			|WHERE
+			|	ShipmentConfirmationItemList.Ref = &Ref";
 	
 	Query.SetParameter("Ref", Ref);
 	QueryResults = Query.Execute();
 	QueryTable = QueryResults.Unload();
 	
 	PostingServer.CalculateQuantityByUnit(QueryTable);
-	PostingServer.UUIDToString(QueryTable);
 	
 	TempManager = New TempTablesManager();
 	

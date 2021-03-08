@@ -102,10 +102,12 @@ Scenario: _090501 creation of Sales invoice based on Shipment confirmation (one 
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And I click the button named "FormPost"
-		And I click "Shipment confirmation" button
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "OK" button
 		And I click the button named "FormPost"
 	* Create Sales invoice based on Shipment confirmation
-		And I click "Sales invoice" button
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
 	* Check filling in Sales invoice
 		And "ItemList" table contains lines
 		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount'  | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Sales order'                   |
@@ -160,10 +162,12 @@ Scenario: _090502 create a purchase invoice based on Goods receipt (one to one)
 		And I expand "More" group
 		And I set checkbox "Goods receipt before purchase invoice"
 		And I click the button named "FormPost"
-		And I click "Goods receipt" button
+		And I click the button named "FormDocumentGoodsReceiptGenerate"	
+		And I click "Ok" button
 		And I click the button named "FormPost"
 	* Create Purchase invoice based on Goods receipt
-		And I click "Purchase invoice" button
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button
 	* Check filling in Purchase invoice
 		And "ItemList" table contains lines
 		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Business unit' | 'Purchase order'      |
@@ -210,7 +214,8 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And I click the button named "FormPost"
-		And I click "Shipment confirmation" button
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "OK" button
 		* Change the document number to 458
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -256,7 +261,8 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And I click the button named "FormPost"
-		And I click "Shipment confirmation" button
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "OK" button
 		* Change the document number to 459
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -307,7 +313,8 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And I click the button named "FormPost"
-		And I click "Shipment confirmation" button
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "OK" button
 		* Change the document number to 460
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -321,7 +328,8 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		| '458'    |
 		And I move one line down in "List" table and select line
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
@@ -409,7 +417,8 @@ Scenario: _090504 create Purchase invoice based on several Goods receipt
 			And I click "Yes" button
 			And I input "2023" text in "Number" field
 		And I click the button named "FormPost"
-		And I click "Goods receipt" button
+		And I click the button named "FormDocumentGoodsReceiptGenerate"	
+		And I click "Ok" button
 		* Change the document number to 471
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -467,7 +476,8 @@ Scenario: _090504 create Purchase invoice based on several Goods receipt
 			And I click "Yes" button
 			And I input "2024" text in "Number" field
 		And I click the button named "FormPost"
-		And I click "Goods receipt" button
+		And I click the button named "FormDocumentGoodsReceiptGenerate"	
+		And I click "Ok" button
 		* Change the document number to 472
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -525,7 +535,8 @@ Scenario: _090504 create Purchase invoice based on several Goods receipt
 			And I click "Yes" button
 			And I input "2025" text in "Number" field
 		And I click the button named "FormPost"
-		And I click "Goods receipt" button
+		And I click the button named "FormDocumentGoodsReceiptGenerate"	
+		And I click "Ok" button
 		* Change the document number to 473
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -539,7 +550,8 @@ Scenario: _090504 create Purchase invoice based on several Goods receipt
 		| '471'    |
 		And I move one line down in "List" table and select line
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -606,7 +618,8 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 		And I expand "More" group
 		And I set checkbox "Shipment confirmations before sales invoice"
 		And I click the button named "FormPost"
-		And I click "Shipment confirmation" button
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "OK" button
 		* Change the document number to 465
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -652,7 +665,8 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And I click the button named "FormPost"
-		And I click "Shipment confirmation" button
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "OK" button
 		* Change the document number to 466
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -665,7 +679,8 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 		| 'Number' |
 		| '465'    |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
 		Then the form attribute named "Partner" became equal to "Kalipso"
 		Then the form attribute named "LegalName" became equal to "Company Kalipso"
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -756,7 +771,8 @@ Scenario: _090506 create Purchase invoice based on several Goods receipt
 		And I expand "More" group
 		And I set checkbox "Goods receipt before purchase invoice"
 		And I click the button named "FormPost"
-		And I click "Goods receipt" button
+		And I click the button named "FormDocumentGoodsReceiptGenerate"	
+		And I click "Ok" button
 		* Change the document number to 465
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -809,7 +825,8 @@ Scenario: _090506 create Purchase invoice based on several Goods receipt
 		And I expand "More" group
 		And I set checkbox "Goods receipt before purchase invoice"
 		And I click the button named "FormPost"
-		And I click "Goods receipt" button
+		And I click the button named "FormDocumentGoodsReceiptGenerate"	
+		And I click "Ok" button
 		* Change the document number to 466
 			And I input "1" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -822,7 +839,8 @@ Scenario: _090506 create Purchase invoice based on several Goods receipt
 		| 'Number' |
 		| '465'    |
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Company" became equal to "Main Company"

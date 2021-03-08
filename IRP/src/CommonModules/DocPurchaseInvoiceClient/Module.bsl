@@ -38,6 +38,18 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 		If ValueIsFilled(Object.Company) Then
 			DocumentsClient.CompanyOnChange(Object, Form, ThisObject, Undefined);
 		EndIf;
+		If ValueIsFilled(Object.Agreement) Then
+			CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
+			AgreementSettings = AgreementSettings(Object, Form);
+			If AgreementSettings.Property("PutServerDataToAddInfo") And AgreementSettings.PutServerDataToAddInfo Then
+				AgreementOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+			EndIf;
+			CalculateSettings = New Structure("CalculateSpecialOffers, CalculateNetAmount, CalculateTax, CalculateTotalAmount");
+			PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
+			CalculateSettings.Insert("ChangePriceType", New Structure("Period, PriceType", PriceDate, ServerData.AgreementInfo.PriceType));	
+			Rows = Object.ItemList.FindRows(New Structure("Price", 0));
+			CalculationStringsClientServer.CalculateItemsRows(Object, Form, Rows, CalculateSettings, ServerData.ArrayOfTaxInfo, AddInfo);
+		EndIf;
 	EndIf;
 	
 	If Not ValueIsFilled(Form.CurrentStore) Then
@@ -105,6 +117,7 @@ Procedure ItemListOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	EndDo;
 	DocumentsClient.FillDeliveryDates(Object, Form);
 	CurrenciesClient.CalculateAmount(Object, Form); 
+	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 
 Procedure ItemListOnActivateRow(Object, Form, Item, AddInfo = Undefined) Export
@@ -528,6 +541,7 @@ Function AgreementSettings(Object, Form, AddInfo = Undefined) Export
 	Actions.Insert("ChangePriceIncludeTax"	, "ChangePriceIncludeTax");
 	Actions.Insert("ChangeStore"			, "ChangeStore");
 	Actions.Insert("ChangeDeliveryDate"		, "ChangeDeliveryDate");
+	Actions.Insert("ChangeTaxRates"		    , "ChangeTaxRates");
 	
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax";

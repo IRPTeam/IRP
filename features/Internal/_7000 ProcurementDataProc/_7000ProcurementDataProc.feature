@@ -97,6 +97,7 @@ Scenario:_700000 preparation (procurement data proccessor)
 		And I input "$$$$Date4$$$$" variable value in "Procurement date" field
 		And I move to the next attribute
 		And I click "Post and close" button
+		And Delay 10
 	When Create document PriceList objects (for procurement)
 	When Create document PurchaseInvoice objects (for procurement)
 	* Change PI date

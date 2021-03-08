@@ -3,9 +3,11 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 	
 	Data.Insert("Author", SessionParameters.CurrentUser);
 	FillPropertyValues(Source, Data);
+	
 	FilterParameters = New Structure();
 	FilterParameters.Insert("MetadataObject", Source.Metadata());
 	UserSettings = UserSettingsServer.GetUserSettings(SessionParameters.CurrentUser, FilterParameters);
+	
 	Data = New Structure();
 	Data.Insert("ManagerSegment", SessionParameters.CurrentUserPartner);
 	For Each Row In UserSettings Do
@@ -16,20 +18,26 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 	EndDo;
 	
 	For Each KeyValue In Data Do
-		FillAttribute = ServiceSystemClientServer.ObjectHasAttribute(KeyValue.Key, Source);
-		If FillAttribute Then		
-			If TypeOf(Source[KeyValue.Key]) = Type("Boolean")
-				And Not Source[KeyValue.Key] Then
+		If ServiceSystemClientServer.ObjectHasAttribute(KeyValue.Key, Source) Then		
+			If TypeOf(Source[KeyValue.Key]) = Type("Boolean") And Not Source[KeyValue.Key] Then
 				Source[KeyValue.Key] = KeyValue.Value;
-			Else
-				If Not ValueIsFilled(Source[KeyValue.Key]) Then
-					Source[KeyValue.Key] = KeyValue.Value;
-				EndIf;
+			ElsIf Not ValueIsFilled(Source[KeyValue.Key]) Then
+				Source[KeyValue.Key] = KeyValue.Value;
 			EndIf;
 		EndIf;
 	EndDo;	
 	
 	Attributes = Source.Metadata().Attributes;
+	
+	UseShipmentConfirmation = False;
+	If Attributes.Find("StoreSender") <> Undefined And Attributes.Find("UseShipmentConfirmation") <> Undefined Then
+		UseShipmentConfirmation = Source.StoreSender.UseShipmentConfirmation;
+		Source.UseShipmentConfirmation = UseShipmentConfirmation;
+	EndIf;
+	
+	If Attributes.Find("StoreReceiver") <> Undefined And Attributes.Find("UseGoodsReceipt") <> Undefined Then
+		Source.UseGoodsReceipt = Source.StoreReceiver.UseGoodsReceipt Or UseShipmentConfirmation;
+	EndIf;
 	
 	AgreementAttribute = Attributes.Find("Agreement");
 	If AgreementAttribute <> Undefined And AgreementAttribute.Type = New TypeDescription("CatalogRef.Agreements") Then
@@ -45,11 +53,11 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 															PredefinedValue("Enum.AgreementKinds.Standard"), ComparisonType.NotEqual));
 			Source.Agreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
 		EndIf;
+		
 	EndIf;
 	
 	StatusAttribute = Attributes.Find("Status");
-	If StatusAttribute <> Undefined
-		And Source.Metadata().Attributes.Find("Status").Type = New TypeDescription("CatalogRef.ObjectStatuses")
+	If StatusAttribute <> Undefined And StatusAttribute.Type = New TypeDescription("CatalogRef.ObjectStatuses")
 		And Not ValueIsFilled(Source.Status) Then
 		Source.Status = ObjectStatusesServer.GetStatusByDefault(Source.Ref);
 	EndIf;
@@ -70,6 +78,34 @@ Procedure ClearDocumentBasisesOnCopy(Source, CopiedObject) Export
 				EndIf;	
 			EndDo;	
 		EndDo;
-	EndDo;	
+	EndDo;
+	
+	// Clear link to other rows
+	If CommonFunctionsClientServer.ObjectHasProperty(Source, "RowIDInfo") Then
+		Source.RowIDInfo.Clear();
+	EndIf;
+	
+	// Clear link to other documents
+	If CommonFunctionsClientServer.ObjectHasProperty(Source, "ShipmentConfirmations") Then
+		Source.ShipmentConfirmations.Clear();
+	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Source, "GoodsReceipts") Then
+		Source.GoodsReceipts.Clear();
+	EndIf;
+	
+	// Update key in tabular sections
+	If CommonFunctionsClientServer.ObjectHasProperty(Source, "ItemList") Then
+		LinkedTables = New Array();
+		For Each TabularSectionMetadata In SourceMetadata.TabularSections Do
+			If Upper(TabularSectionMetadata.Name) = Upper("ItemList") Then
+				Continue;
+			EndIf;
+			If TabularSectionMetadata.Attributes.Find("Key") <> Undefined Then
+				LinkedTables.Add(Source[TabularSectionMetadata.Name]);
+			EndIf;
+		EndDo;
+		DocumentsServer.SetNewTableUUID(Source.ItemList, LinkedTables);
+	EndIf;
 EndProcedure
 

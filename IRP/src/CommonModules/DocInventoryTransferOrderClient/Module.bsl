@@ -118,9 +118,11 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
 	
 	CalculationSettings = New Structure();
 	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object,
-		CurrentRow,
-		CalculationSettings);
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+EndProcedure
+
+Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
+	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
 EndProcedure
 
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings = Undefined) Export
@@ -129,6 +131,7 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings =
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
+	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 
 Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -138,6 +141,24 @@ EndProcedure
 
 Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing);
+EndProcedure
+
+Procedure ItemListQuantityOnChange(Object, Form, Item) Export
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	Actions = New Structure("CalculateQuantityInBaseUnit");
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);	
+EndProcedure
+
+Procedure ItemListUnitOnChange(Object, Form, Item) Export
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	Actions = New Structure("CalculateQuantityInBaseUnit");
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);	
 EndProcedure
 
 #EndRegion

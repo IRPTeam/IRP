@@ -22,28 +22,45 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	InventoryTransferOrderItemList.Ref.Company AS Company,
-		|	InventoryTransferOrderItemList.Ref.StoreSender AS StoreSender,
-		|	InventoryTransferOrderItemList.Ref.StoreReceiver AS StoreReceiver,
-		|	InventoryTransferOrderItemList.Ref AS Order,
-		|	InventoryTransferOrderItemList.InternalSupplyRequest AS InternalSupplyRequest,
-		|	InventoryTransferOrderItemList.ItemKey AS ItemKey,
-		|	InventoryTransferOrderItemList.Quantity AS Quantity,
-		|	0 AS BasisQuantity,
-		|	InventoryTransferOrderItemList.Unit,
-		|	InventoryTransferOrderItemList.ItemKey.Item.Unit AS ItemUnit,
-		|	InventoryTransferOrderItemList.ItemKey.Unit AS ItemKeyUnit,
-		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
-		|	InventoryTransferOrderItemList.ItemKey.Item AS Item,
-		|	&Period AS Period,
-		|	InventoryTransferOrderItemList.Key AS RowKey,
-		|	InventoryTransferOrderItemList.PurchaseOrder AS PurchaseOrder,
-		|	NOT InventoryTransferOrderItemList.PurchaseOrder.Ref IS NULL AS UsePurchaseOrder
-		|FROM
-		|	Document.InventoryTransferOrder.ItemList AS InventoryTransferOrderItemList
-		|WHERE
-		|	InventoryTransferOrderItemList.Ref = &Ref";
+	"SELECT
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO RowIDInfo
+	|FROM
+	|	Document.InventoryTransferOrder.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	InventoryTransferOrderItemList.Ref.Company AS Company,
+	|	InventoryTransferOrderItemList.Ref.StoreSender AS StoreSender,
+	|	InventoryTransferOrderItemList.Ref.StoreReceiver AS StoreReceiver,
+	|	InventoryTransferOrderItemList.Ref AS Order,
+	|	InventoryTransferOrderItemList.InternalSupplyRequest AS InternalSupplyRequest,
+	|	InventoryTransferOrderItemList.ItemKey AS ItemKey,
+	|	InventoryTransferOrderItemList.Quantity AS Quantity,
+	|	0 AS BasisQuantity,
+	|	InventoryTransferOrderItemList.Unit,
+	|	InventoryTransferOrderItemList.ItemKey.Item.Unit AS ItemUnit,
+	|	InventoryTransferOrderItemList.ItemKey.Unit AS ItemKeyUnit,
+	|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
+	|	InventoryTransferOrderItemList.ItemKey.Item AS Item,
+	|	&Period AS Period,
+	|	RowIDInfo.RowID AS RowKey,
+	|	InventoryTransferOrderItemList.PurchaseOrder AS PurchaseOrder,
+	|	NOT InventoryTransferOrderItemList.PurchaseOrder.Ref IS NULL AS UsePurchaseOrder
+	|FROM
+	|	Document.InventoryTransferOrder.ItemList AS InventoryTransferOrderItemList
+	|		LEFT JOIN RowIDInfo AS RowIDInfo
+	|		ON InventoryTransferOrderItemList.Key = RowIDInfo.Key
+	|WHERE
+	|	InventoryTransferOrderItemList.Ref = &Ref";
 	
 	Query.SetParameter("Ref", Ref);
 	Query.SetParameter("Period", StatusInfo.Period);
@@ -314,9 +331,7 @@ Function ItemList()
 		|	InventoryTransferOrderItemList.PurchaseOrder AS PurchaseOrder,
 		|	NOT InventoryTransferOrderItemList.PurchaseOrder.Ref IS NULL AS PurchaseOrderExists,
 		|	InventoryTransferOrderItemList.InternalSupplyRequest AS InternalSupplyRequest,
-		|	NOT InventoryTransferOrderItemList.InternalSupplyRequest.Ref IS NULL AS InternalSupplyRequestExists,
-		|	InventoryTransferOrderItemList.Ref.UseGoodsReceipt AS UseGoodsReceipt,
-		|	InventoryTransferOrderItemList.Ref.UseShipmentConfirmation AS UseShipmentConfirmation
+		|	NOT InventoryTransferOrderItemList.InternalSupplyRequest.Ref IS NULL AS InternalSupplyRequestExists
 		|INTO ItemList
 		|FROM
 		|	Document.InventoryTransferOrder.ItemList AS InventoryTransferOrderItemList
@@ -337,7 +352,6 @@ Function R4011B_FreeStocks()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemLIst.PurchaseOrderExists
-		|	AND (ItemLIst.UseGoodsReceipt OR ItemLIst.UseShipmentConfirmation)
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.StoreSender,
@@ -359,7 +373,6 @@ Function R4012B_StockReservation()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.PurchaseOrderExists
-		|	AND (ItemLIst.UseGoodsReceipt OR ItemLIst.UseShipmentConfirmation)
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.StoreSender,

@@ -159,6 +159,7 @@ Scenario: _020003 copy ITO and check filling in Row Id info table
 			| '2' | 'Dress' | 'S/Yellow' | '10,000'   | 'pcs'  | ''                        | ''               |
 	* Post ITO and check Row ID Info tab
 		And I click the button named "FormPost"
+		And I click "Show row key" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines
 			| 'Key'                                  | 'Basis' | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key' | 'Current step' | 'Row ref'                              |
@@ -285,7 +286,7 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 			And "List" table contains lines
 				| 'Object'                         | 'Status'   |
 				| '$$InventoryTransferOrder020013$$' | 'Wait' |
-				| '$$InventoryTransferOrder020013$$' | 'Approved'     |
+				| '$$InventoryTransferOrder020013$$' | 'Send'     |
 				| '$$InventoryTransferOrder020013$$' | 'Receive'  |
 			And I close current window
 			And I click the button named "FormPostAndClose"

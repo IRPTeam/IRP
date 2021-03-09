@@ -282,10 +282,6 @@ Procedure AgreementOnChange(Object, Form, Module, Item = Undefined, Settings  = 
 	Settings.Insert("ObjectAttributes"	, AgreementSettings.ObjectAttributes);
 	Settings.Insert("FormAttributes"	, AgreementSettings.FormAttributes);
 	
-	// {TAXES}
-	// рАЗДЕЛИТЬ ПРОЦЕДУРУ НА ЗАПОЛНЕНИЕ И ПЕРЕРАСЧЕТ
-	TaxesClient.ChangeTaxRatesByAgreement(Object, Form, AddInfo);
-	// {TAXES}
 	CurrentValuesStructure = CreateCurrentValuesStructure(Object, Settings.ObjectAttributes, Settings.FormAttributes);
 	FillPropertyValues(CurrentValuesStructure, Form, Settings.FormAttributes);
 	
@@ -1097,6 +1093,20 @@ Procedure ShowUserQueryBoxContinue(Result, AdditionalParameters) Export
 		EndIf;
 	EndIf;
 	
+	If Result.Property("UpdateTaxRates") Then
+		ArrayOfChangeTaxParameters = 
+			CommonFunctionsClientServer.GetFromAddInfo(AdditionalParameters.AddInfo, "ArrayOfChangeTaxParameters");
+			
+		For Each i In ArrayOfChangeTaxParameters Do
+			For Each Row In Object.ItemList Do
+				Row[i.TaxInfo.Name] = Undefined;
+			EndDo;
+		EndDo;
+		CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.ItemList,
+				TaxesClient.GetCalculateRowsActions(),
+				TaxesClient.GetArrayOfTaxInfo(Form));			
+	EndIf;
+	
 	Settings.CalculateSettings = New Structure();
 	Settings.Insert("Rows", Object.ItemList);
 	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
@@ -1757,8 +1767,13 @@ Function GetOpenSettingsStructure() Export
 EndFunction
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
-	OffersClient.RecalculateTaxAndOffers(Object, Form);
+	If CommonFunctionsClientServer.ObjectHasProperty(Form, "TaxAndOffersCalculated") Then
+		OffersClient.RecalculateTaxAndOffers(Object, Form);
+	EndIf;
+	
+	RowIDInfoClient.DeleteRows(Object, Form);	
 EndProcedure
+
 #EndRegion
 
 #Region TitleChanges
@@ -1940,6 +1955,87 @@ Procedure UpdatePaymentTerm(Object, Form, Settings, AddInfo = Undefined) Export
 	EndIf;
 EndProcedure
 
+Procedure ChangeTaxRates(Object, Form, Settings, AddInfo = Undefined) Export
+	If Not ValueIsFilled(Object.Agreement) Then
+		Return;
+	EndIf;
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+	If ServerData = Undefined Then
+		ArrayOfTaxInfo = TaxesClient.GetArrayOfTaxInfo(Form);
+	Else
+		ArrayOfTaxInfo = ServerData.ArrayOfTaxInfo;
+	EndIf;
+	
+	ArrayOfCurrentTaxInfo = New Array();
+	For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
+		
+		TaxTypeIsRate = True;
+		If ItemOfTaxInfo.Property("TaxTypeIsRate") Then
+			TaxTypeIsRate = ItemOfTaxInfo.TaxTypeIsRate;
+		Else
+			TaxTypeIsRate = (ItemOfTaxInfo.Type = PredefinedValue("Enum.TaxType.Rate"));
+		EndIf;
+		
+		If TaxTypeIsRate Then
+			ArrayOfCurrentTaxRates = New Array();
+			For Each RowItemList In Object.ItemList Do
+				SelectedTaxRate = RowItemList[ItemOfTaxInfo.Name];
+				If ValueIsFilled(SelectedTaxRate) Then
+					ArrayOfCurrentTaxRates.Add(SelectedTaxRate);
+				EndIf;
+			EndDo;
+			
+			CurrentTaxInfo = New Structure();
+			CurrentTaxInfo.Insert("Date"                  , Object.Date);
+			CurrentTaxInfo.Insert("Company"               , Object.Company);
+			CurrentTaxInfo.Insert("Agreement"             , Object.Agreement);
+			CurrentTaxInfo.Insert("Tax"                   , ItemOfTaxInfo.Tax);
+			CurrentTaxInfo.Insert("ArrayOfCurrentTaxRates", ArrayOfCurrentTaxRates);
+			CurrentTaxInfo.Insert("TaxInfo"               , ItemOfTaxInfo);
+			
+			ArrayOfCurrentTaxInfo.Add(CurrentTaxInfo);
+		EndIf;
+	EndDo;
+	
+	ArrayOfChangeTaxParameters = New Array();
+	
+	For Each ItemOfCurrentTaxInfo In ArrayOfCurrentTaxInfo Do
+		ArrayOfTaxRates = New Array();
+		If ItemOfCurrentTaxInfo.TaxInfo.Property("ArrayOfTaxRatesForAgreement") Then
+			ArrayOfTaxRates = ItemOfCurrentTaxInfo.TaxInfo.ArrayOfTaxRatesForAgreement;
+		Else	
+			ArrayOfTaxRates = TaxesServer.GetTaxRatesForAgreement(ItemOfCurrentTaxInfo);
+		EndIf;
+		If Not ArrayOfTaxRates.Count() Then
+			If ItemOfCurrentTaxInfo.TaxInfo.Property("ArrayOfTaxRatesForCompany") Then
+				ArrayOfTaxRates = ItemOfCurrentTaxInfo.TaxInfo.ArrayOfTaxRatesForCompany;
+			Else	
+				ArrayOfTaxRates = TaxesServer.GetTaxRatesForCompany(ItemOfCurrentTaxInfo);
+			EndIf;
+		EndIf;
+		
+		NewTaxRate = Undefined;
+		If ArrayOfTaxRates.Count() Then
+			NewTaxRate = ArrayOfTaxRates[0].TaxRate;
+		EndIf;
+		For Each CurrentTaxRate In ItemOfCurrentTaxInfo.ArrayOfCurrentTaxRates Do
+			If CurrentTaxRate <> NewTaxRate Then
+				ArrayOfChangeTaxParameters.Add(ItemOfCurrentTaxInfo);
+				Break;
+			EndIf;
+		EndDo;
+	EndDo;
+	
+	If ArrayOfChangeTaxParameters.Count() Then
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ArrayOfChangeTaxParameters", ArrayOfChangeTaxParameters);
+		QuestionStructure = New Structure;
+		QuestionStructure.Insert("ProcedureName" , "ChangeTaxRates");
+		QuestionStructure.Insert("QuestionText"  , R().QuestionToUser_004);
+		QuestionStructure.Insert("Action"        , "TaxRates");
+		Settings.Questions.Add(QuestionStructure);
+	EndIf;
+EndProcedure
+
 Procedure CalculatePaymentTermDateAndAmount(Object, Form, AddInfo = Undefined) Export
 	If Not Object.PaymentTerms.Count() Then
 		Return;
@@ -2053,6 +2149,11 @@ Procedure DoTitleActions(Object, Form, Settings, Actions, AddInfo = Undefined) E
 		
 		If Action.Key = "UpdatePaymentTerm" Then
 			UpdatePaymentTerm(Object, Form, Settings, AddInfo);
+			Continue;
+		EndIf;
+		
+		If Action.Key = "ChangeTaxRates" Then
+			ChangeTaxRates(Object, Form, Settings, AddInfo);
 			Continue;
 		EndIf;
 	EndDo;
@@ -2935,7 +3036,19 @@ EndProcedure
 #Region Utility
 
 Procedure ShowRowKey(Form) Export
-	ItemNames = "ItemListKey, SpecialOffersKey";
+	ItemNames = "ItemListKey, SpecialOffersKey,
+	|ItemListRowsKey,
+	|ResultsTable,
+	|RowIDInfo,
+	|ShipmentConfirmationsTreeKey, ShipmentConfirmationsTreeBasisKey,
+	|GoodsReceiptsTreeKey, GoodsReceiptsTreeBasisKey,
+	|BasisesTreeBasis, BasisesTreeBasisUnit, BasisesTreeQuantityInBaseUnit, BasisesTreeKey,
+	|BasisesTreeRowID, BasisesTreeRowRef, BasisesTreeBasisKey, BasisesTreeCurrentStep,
+	|ResultsTreeBasis, ResultsTreeBasisUnit, ResultsTreeQuantityInBaseUnit, ResultsTreeKey,
+	|ResultsTreeRowID, ResultsTreeRowRef, ResultsTreeBasisKey, ResultsTreeCurrentStep,
+	|LinkedBasises,
+	|ItemListQuantityInBaseUnit";
+	
 	ArrayOfItemNames = StrSplit(ItemNames, ",");
 	For Each ItemName In ArrayOfItemNames Do
 		ItemName = TrimAll(ItemName);	
@@ -3011,31 +3124,27 @@ Procedure UpdateTradeDocumentsTree(Object, Form, TableName, TreeName, QuantityCo
 			Continue;
 		EndIf;
 		
-		NewRow = New Structure();
-		NewRow.Insert("Key"         , Row.Key);
-		NewRow.Insert("Item"        , Row.Item);
-		NewRow.Insert("ItemKey"     , Row.ItemKey);
-		NewRow.Insert("QuantityUnit", Row.Unit);
-		NewRow.Insert("Unit");
-		NewRow.Insert("Quantity"    , Row.Quantity);
+		NewRow = New Structure("Key, Item, ItemKey, QuantityInBaseUnit");
+		FillPropertyValues(NewRow, Row);
 		ArrayOfRows.Add(NewRow);
 	EndDo;
-	
-	DocumentsServer.RecalculateInvoiceQuantity(ArrayOfRows);
 
-	For Each Row In ArrayOfRows Do		
+	For Each Row In ArrayOfRows Do	
 		NewRow0 = Form[TreeName].GetItems().Add();
 		NewRow0.Level             = 1;
 		NewRow0.Key               = Row.Key;
 		NewRow0.Item              = Row.Item;
 		NewRow0.ItemKey           = Row.ItemKey;
-		NewRow0.QuantityInInvoice = Row.Quantity;
+		NewRow0.QuantityInInvoice = Row.QuantityInBaseUnit;
+		If CommonFunctionsClientServer.ObjectHasProperty(NewRow0, "PictureItem") Then			
+			NewRow0.PictureItem = 0;
+		EndIf;
 		
 		ArrayOfDocuments = Object[TableName].FindRows(New Structure("Key", Row.Key));
 		
 		If ArrayOfDocuments.Count() = 1 
-			And ArrayOfDocuments[0].Quantity <> Row.Quantity Then
-			ArrayOfDocuments[0].Quantity = Row.Quantity;
+			And ArrayOfDocuments[0].Quantity <> Row.QuantityInBaseUnit Then
+			ArrayOfDocuments[0].Quantity = Row.QuantityInBaseUnit;
 		EndIf;
 		
 		For Each ItemOfArray In ArrayOfDocuments Do
@@ -3045,6 +3154,9 @@ Procedure UpdateTradeDocumentsTree(Object, Form, TableName, TreeName, QuantityCo
 			NewRow1.PictureEdit = True;
 			NewRow0.Quantity = NewRow0.Quantity + ItemOfArray.Quantity;
 			NewRow0[QuantityColumnName] = NewRow0[QuantityColumnName] + ItemOfArray[QuantityColumnName];
+			If CommonFunctionsClientServer.ObjectHasProperty(NewRow1, "PictureDocument") Then			
+				NewRow1.PictureDocument = 1;
+			EndIf;
 		EndDo;
 	EndDo;
 	
@@ -3074,8 +3186,6 @@ Procedure TradeDocumentsTreeQuantityOnChange(Object, Form, TableName, TreeName, 
 EndProcedure
 
 #EndRegion
-
-
 
 
 

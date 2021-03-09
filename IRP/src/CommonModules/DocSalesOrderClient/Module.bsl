@@ -97,6 +97,7 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings =
 
 	DocumentsClient.FillDeliveryDates(Object, Form);
 	CurrenciesClient.CalculateAmount(Object, Form);
+	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 
 Procedure ItemListOnActivateRow(Object, Form, Item) Export
@@ -504,6 +505,7 @@ Function AgreementSettings(Object, Form, AddInfo = Undefined) Export
 	Actions.Insert("ChangePriceIncludeTax"	, "ChangePriceIncludeTax");
 	Actions.Insert("ChangeStore"			, "ChangeStore");
 	Actions.Insert("ChangeDeliveryDate"		, "ChangeDeliveryDate");
+	Actions.Insert("ChangeTaxRates"		    , "ChangeTaxRates");
 	
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax, ManagerSegment";

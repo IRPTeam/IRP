@@ -56,46 +56,65 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	SalesOrderItemList.Ref.Company AS Company,
-		|	SalesOrderItemList.Ref.ShipmentConfirmationsBeforeSalesInvoice AS ShipmentConfirmationsBeforeSalesInvoice,
-		|	SalesOrderItemList.Store AS Store,
-		|	SalesOrderItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
-		|	SalesOrderItemList.ItemKey AS ItemKey,
-		|	SalesOrderItemList.Ref AS SalesOrder,
-		|	SalesOrderItemList.Quantity AS Quantity,
-		|	0 AS BasisQuantity,
-		|	SalesOrderItemList.Unit,
-		|	SalesOrderItemList.ItemKey.Item.Unit AS ItemUnit,
-		|	SalesOrderItemList.ItemKey.Unit AS ItemKeyUnit,
-		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
-		|	SalesOrderItemList.ItemKey.Item AS Item,
-		|	&Period AS Period,
-		|	SalesOrderItemList.Key AS RowKeyUUID,
-		|	SalesOrderItemList.DeliveryDate AS DeliveryDate,
-		|	SalesOrderItemList.Cancel AS IsCancel,
-		|	NOT SalesOrderItemList.Cancel AND SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS IsProcurementMethod_Stock,
-		|	NOT SalesOrderItemList.Cancel AND SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase) AS IsProcurementMethod_Purchase,
-		|	NOT SalesOrderItemList.Cancel AND SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.NoReserve) AS IsProcurementMethod_NoReserve,
-		|	CASE
-		|		WHEN SalesOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
-		|			THEN TRUE
-		|		ELSE FALSE
-		|	END AS IsService,
-		|	SalesOrderItemList.TotalAmount AS Amount,
-		|	SalesOrderItemList.Ref.Currency AS Currency
-		|FROM
-		|	Document.SalesOrder.ItemList AS SalesOrderItemList
-		|WHERE
-		|	SalesOrderItemList.Ref = &Ref
-		|	AND NOT SalesOrderItemList.Cancel";
+	"SELECT
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO RowIDInfo
+	|FROM
+	|	Document.SalesOrder.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SalesOrderItemList.Ref.Company AS Company,
+	|	SalesOrderItemList.Ref.ShipmentConfirmationsBeforeSalesInvoice AS ShipmentConfirmationsBeforeSalesInvoice,
+	|	SalesOrderItemList.Store AS Store,
+	|	SalesOrderItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
+	|	SalesOrderItemList.ItemKey AS ItemKey,
+	|	SalesOrderItemList.Ref AS SalesOrder,
+	|	SalesOrderItemList.Quantity AS Quantity,
+	|	0 AS BasisQuantity,
+	|	SalesOrderItemList.Unit,
+	|	SalesOrderItemList.ItemKey.Item.Unit AS ItemUnit,
+	|	SalesOrderItemList.ItemKey.Unit AS ItemKeyUnit,
+	|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
+	|	SalesOrderItemList.ItemKey.Item AS Item,
+	|	&Period AS Period,
+	|	RowIDInfo.RowID AS RowKey,
+	|	SalesOrderItemList.DeliveryDate AS DeliveryDate,
+	|	SalesOrderItemList.Cancel AS IsCancel,
+	|	NOT SalesOrderItemList.Cancel
+	|	AND SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS IsProcurementMethod_Stock,
+	|	NOT SalesOrderItemList.Cancel
+	|	AND SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase) AS IsProcurementMethod_Purchase,
+	|	NOT SalesOrderItemList.Cancel
+	|	AND SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.NoReserve) AS IsProcurementMethod_NoReserve,
+	|	CASE
+	|		WHEN SalesOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END AS IsService,
+	|	SalesOrderItemList.TotalAmount AS Amount,
+	|	SalesOrderItemList.Ref.Currency AS Currency
+	|FROM
+	|	Document.SalesOrder.ItemList AS SalesOrderItemList
+	|		LEFT JOIN RowIDInfo AS RowIDInfo
+	|		ON SalesOrderItemList.Key = RowIDInfo.Key
+	|WHERE
+	|	SalesOrderItemList.Ref = &Ref
+	|	AND NOT SalesOrderItemList.Cancel";
 	
 	Query.SetParameter("Ref", Ref);
 	Query.SetParameter("Period", StatusInfo.Period);
 	QueryResults = Query.Execute();
 	QueryTable = QueryResults.Unload();
 	PostingServer.CalculateQuantityByUnit(QueryTable);
-	PostingServer.UUIDToString(QueryTable);
 	
 	TempManager = New TempTablesManager();
 	

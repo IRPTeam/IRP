@@ -66,6 +66,7 @@
   <defaultListForm>Document.SalesOrderClosing.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.SalesOrderClosing.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.T10000B_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R2010T_SalesOrders</registerRecords>
   <registerRecords>AccumulationRegister.R2014T_CanceledSalesOrders</registerRecords>
   <registerRecords>AccumulationRegister.R4013B_StockReservationPlanning</registerRecords>

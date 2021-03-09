@@ -193,7 +193,8 @@ Scenario: _029104 create a Purchase invoice for service (based on Purchase order
 		| 'Number' |
 		| '$$NumberPurchaseOrder029103$$'      |
 	And I select current line in "List" table
-	And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
+	And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+	And I click "Ok" button
 	* Check the filling of the tabular part
 		And "ItemList" table contains lines
 		| 'Price'    | 'Item'    | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Expense type'             | 'Business unit' | 'Purchase order'      |
@@ -369,20 +370,20 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			| ''                               | '*'      | '100'       | 'Main Company' | 'Front office'  | 'Telephone communications' | 'Interner' | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
 			| ''                               | '*'      | '100'       | 'Main Company' | 'Front office'  | 'Telephone communications' | 'Interner' | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
 			| ''                               | '*'      | '100'       | 'Main Company' | 'Front office'  | 'Telephone communications' | 'Interner' | 'TRY'      | ''                    | 'TRY'                          | 'No'                   | '' | '' | '' |
-			And I select "Taxes turnovers" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Taxes turnovers"' | ''       | ''          | ''              | ''           | ''                          | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-			| ''                            | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'                | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
-			| ''                            | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'                  | 'Tax' | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                            | '*'      | '2,61'      | '2,61'          | '14,51'      | '$$PurchaseInvoice029106$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                            | '*'      | '5,22'      | '5,22'          | '29,02'      | '$$PurchaseInvoice029106$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                            | '*'      | '15,25'     | '15,25'         | '84,75'      | '$$PurchaseInvoice029106$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-			| ''                            | '*'      | '15,25'     | '15,25'         | '84,75'      | '$$PurchaseInvoice029106$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                            | '*'      | '15,25'     | '15,25'         | '84,75'      | '$$PurchaseInvoice029106$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-			| ''                            | '*'      | '30,51'     | '30,51'         | '169,49'     | '$$PurchaseInvoice029106$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-			| ''                            | '*'      | '30,51'     | '30,51'         | '169,49'     | '$$PurchaseInvoice029106$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                            | '*'      | '30,51'     | '30,51'         | '169,49'     | '$$PurchaseInvoice029106$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
+			// And I select "Taxes turnovers" exact value from "Register" drop-down list
+			// And I click "Generate report" button
+			// And "ResultTable" spreadsheet document contains lines:
+			// | 'Register  "Taxes turnovers"' | ''       | ''          | ''              | ''           | ''                          | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
+			// | ''                            | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'                | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
+			// | ''                            | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'                  | 'Tax' | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			// | ''                            | '*'      | '2,61'      | '2,61'          | '14,51'      | '$$PurchaseInvoice029106$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
+			// | ''                            | '*'      | '5,22'      | '5,22'          | '29,02'      | '$$PurchaseInvoice029106$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
+			// | ''                            | '*'      | '15,25'     | '15,25'         | '84,75'      | '$$PurchaseInvoice029106$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
+			// | ''                            | '*'      | '15,25'     | '15,25'         | '84,75'      | '$$PurchaseInvoice029106$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
+			// | ''                            | '*'      | '15,25'     | '15,25'         | '84,75'      | '$$PurchaseInvoice029106$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
+			// | ''                            | '*'      | '30,51'     | '30,51'         | '169,49'     | '$$PurchaseInvoice029106$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
+			// | ''                            | '*'      | '30,51'     | '30,51'         | '169,49'     | '$$PurchaseInvoice029106$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
+			// | ''                            | '*'      | '30,51'     | '30,51'         | '169,49'     | '$$PurchaseInvoice029106$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
 			And I select "Goods in transit incoming" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -1007,7 +1008,8 @@ Scenario: _029115 create a Sales invoice for service and product (Store does not
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberSalesOrder029107$$'       |
-		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice029115$$" variable
 		And I delete "$$SalesInvoice029115$$" variable
@@ -1034,13 +1036,13 @@ Scenario: _029115 create a Sales invoice for service and product (Store does not
 			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
 			| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
 			| ''                              | 'Expense'     | '*'      | '10'        | 'Main Company' | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '10'        | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
+		// And I select "Order reservation" exact value from "Register" drop-down list
+		// And I click "Generate report" button
+		// And "ResultTable" spreadsheet document contains lines:
+		// 	| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
+		// 	| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
+		// 	| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
+		// 	| ''                              | 'Expense'     | '*'      | '10'        | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Taxes turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -1137,7 +1139,8 @@ Scenario: _029117 create a Sales invoice for service and product (Store use Ship
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberSalesOrder029108$$'       |
-		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice029117$$" variable
 		And I delete "$$SalesInvoice029117$$" variable
@@ -1171,13 +1174,13 @@ Scenario: _029117 create a Sales invoice for service and product (Store use Ship
 			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                       | ''         | ''        | '' | '' | '' | '' | '' | '' |
 			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Shipment basis'         | 'Item key' | 'Row key' | '' | '' | '' | '' | '' | '' |
 			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$SalesInvoice029117$$' | 'Table'    | '*'       | '' | '' | '' | '' | '' | '' |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '10'        | 'Store 02'   | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
+		// And I select "Order reservation" exact value from "Register" drop-down list
+		// And I click "Generate report" button
+		// And "ResultTable" spreadsheet document contains lines:
+		// 	| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
+		// 	| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
+		// 	| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
+		// 	| ''                              | 'Expense'     | '*'      | '10'        | 'Store 02'   | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Taxes turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -1270,8 +1273,7 @@ Scenario: _029119 create a Sales invoice for service and product (Store does not
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberSalesOrder029109$$'       |	
-		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
-		And I click the button named "FormSelectAll"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And I click "Ok" button
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice029119$$" variable
@@ -1292,13 +1294,13 @@ Scenario: _029119 create a Sales invoice for service and product (Store does not
 			| ''                                    | 'Receipt'     | '*'      | '7 100'     | 'Main Company' | '$$SalesInvoice029119$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 			| ''                                    | 'Receipt'     | '*'      | '7 100'     | 'Main Company' | '$$SalesInvoice029119$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 			| ''                                    | 'Receipt'     | '*'      | '7 100'     | 'Main Company' | '$$SalesInvoice029119$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '10'        | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
+		// And I select "Order reservation" exact value from "Register" drop-down list
+		// And I click "Generate report" button
+		// And "ResultTable" spreadsheet document contains lines:
+		// 	| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
+		// 	| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
+		// 	| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
+		// 	| ''                              | 'Expense'     | '*'      | '10'        | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Taxes turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -1334,13 +1336,6 @@ Scenario: _029119 create a Sales invoice for service and product (Store does not
 			| ''                            | '*'      | '10'        | '7 000'   | '5 932,2'    | ''              | 'Main Company' | '$$SalesInvoice029119$$' | 'TRY'      | 'Table'    | '*'       | 'Local currency'               | ''                  | 'No'                   |
 			| ''                            | '*'      | '10'        | '7 000'   | '5 932,2'    | ''              | 'Main Company' | '$$SalesInvoice029119$$' | 'TRY'      | 'Table'    | '*'       | 'TRY'                          | ''                  | 'No'                   |
 			| ''                            | '*'      | '10'        | '7 000'   | '5 932,2'    | ''              | 'Main Company' | '$$SalesInvoice029119$$' | 'TRY'      | 'Table'    | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-		And I select "Shipment orders" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Shipment orders"' | ''            | ''       | ''          | ''                     | ''                      | ''         | ''        | '' | '' | '' | '' | '' | '' |
-			| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'           | ''                      | ''         | ''        | '' | '' | '' | '' | '' | '' |
-			| ''                            | ''            | ''       | 'Quantity'  | 'Order'                | 'Shipment confirmation' | 'Item key' | 'Row key' | '' | '' | '' | '' | '' | '' |
-			| ''                            | 'Expense'     | '*'      | '10'        | '$$SalesOrder029109$$' | ''                      | 'Table'    | '*'       | '' | '' | '' | '' | '' | '' |
 		And I select "Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -1390,7 +1385,8 @@ Scenario: _029121 create a Sales invoice for service and product (Store use Ship
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberSalesOrder029110$$'       |	
-		And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "Ok" button		
 		And I click the button named "FormPost"
 		And I delete "$$NumberShipmentConfirmation029121$$" variable
 		And I delete "$$ShipmentConfirmation029121$$" variable
@@ -1439,8 +1435,7 @@ Scenario: _029121 create a Sales invoice for service and product (Store use Ship
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberSalesOrder029110$$'       |	
-		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
-		And I click the button named "FormSelectAll"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And I click "Ok" button
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice029121$$" variable
@@ -1463,11 +1458,6 @@ Scenario: _029121 create a Sales invoice for service and product (Store use Ship
 			| ''                                    | 'Receipt'     | '*'      | '7 766,17'  | 'Main Company' | '$$SalesInvoice029121$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, without VAT' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
 		And I select "Order reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '10'        | 'Store 02'   | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Taxes turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

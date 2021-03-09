@@ -235,7 +235,7 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 	Return ArrayOfTaxes;
 EndFunction
 
-Function TaxRatesForAgreement(Parameters) Export
+Function GetTaxRatesForAgreement(Parameters, AddInfo = Undefined) Export
 	Query = New Query();
 	Query.Text =
 		"SELECT
@@ -268,6 +268,41 @@ Function TaxRatesForAgreement(Parameters) Export
 		ArrayOfTaxes.Add(Result);
 	EndDo;
 	Return ArrayOfTaxes;
+EndFunction
+
+Function GetTaxRatesForCompany(Parameters, AddInfo = Undefined) Export
+	Query = New Query();
+	Query.Text =
+		"SELECT
+		|	TaxRatesSliceLast.Company,
+		|	TaxRatesSliceLast.Tax,
+		|	TaxRatesSliceLast.TaxRate,
+		|	TaxRatesSliceLast.TaxRate.Rate AS Rate
+		|FROM
+		|	InformationRegister.TaxSettings.SliceLast(&Date, Company = &Company
+		|	AND Tax = &Tax
+		|	AND ItemKey = VALUE(Catalog.ItemKeys.EmptyRef)
+		|	AND Item = VALUE(Catalog.Items.EmptyRef)
+		|	AND ItemType = VALUE(Catalog.ItemTypes.EmptyRef)
+		|	AND Agreement = VALUE(Catalog.Agreements.EmptyRef)) AS TaxRatesSliceLast";
+	
+	Query.SetParameter("Date", Parameters.Date);
+	Query.SetParameter("Company", Parameters.Company);
+	Query.SetParameter("Tax", Parameters.Tax);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	ArrayOfTaxes = New Array();
+	
+	While QuerySelection.Next() Do
+		Result = New Structure();
+		Result.Insert("Company", QuerySelection.Company);
+		Result.Insert("Tax", QuerySelection.Tax);
+		Result.Insert("TaxRate", QuerySelection.TaxRate);
+		Result.Insert("Rate", QuerySelection.Rate);
+		ArrayOfTaxes.Add(Result);
+	EndDo;
+	Return ArrayOfTaxes;	
 EndFunction
 
 Function CalculateTax(Parameters, AddInfo = Undefined) Export

@@ -104,11 +104,7 @@ Scenario: _0154011  check autofilling the Partner term field in Purchase return 
 	And I close all client application windows
 
 
-Scenario: _0154012 check autofilling the Partner term field in Sales order
-	Given I open hyperlink "e1cib/list/Document.SalesOrder"
-	And I click the button named "FormCreate"
-	When check the autocompletion of the partner term (by customer) in the documents of sales/returns 
-	And I close all client application windows
+
 
 Scenario: _0154013 check autofilling the Partner term field in Sales invoice
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -128,10 +124,7 @@ Scenario: _0154015 check autofilling the Partner term field in Sales return
 	When check the autocompletion of the partner term (by customer) in the documents of sales/returns 
 	And I close all client application windows
 
-Scenario: _0154016 check autofilling item key in Sales order by item only with one item key
-	Given I open hyperlink "e1cib/list/Document.SalesOrder"
-	And I click the button named "FormCreate"
-	When check item key autofilling in sales/returns documents for an item that has only one item key
+
 
 Scenario: _0154017 check autofilling item key in Sales invoice by item only with one item key
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -243,50 +236,6 @@ Scenario: _0154033 check if the Partner form contains an option to include a par
 	And I close all client application windows
 
 
-Scenario: _0154034 check item key selection in the form of item key
-	* Open the item key selection form from the Sales order document.
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I click the button named "FormCreate"
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| Description |
-			| Partner Kalipso     |
-		And I select current line in "List" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| Description |
-			| Dress       |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-	* Check the selection by properties
-	# Single item key + item key specifications that contain this property should be displayed
-		And I select from "Color" drop-down list by "yellow" string
-		And I click Select button of "Color" field
-		And I go to line in "List" table
-			| Additional attribute | Description |
-			| Color         | Yellow      |
-		And I select current line in "List" table
-		And "List" table became equal
-			| Item key  | Item  |
-			| S/Yellow  | Dress |
-			| Dress/A-8 | Dress |
-	* Check the filter by single item key and by specifications
-		And I change "IsSpecificationFilter" radio button value to "Single"
-		And "List" table became equal
-			| Item key  | Item  |
-			| S/Yellow  | Dress |
-		And I change "IsSpecificationFilter" radio button value to "Specification"
-		And "List" table became equal
-			| Item key  | Item  |
-			| Dress/A-8 | Dress |
-		And I change "IsSpecificationFilter" radio button value to "All"
-		And "List" table became equal
-			| Item key  | Item  |
-			| S/Yellow  | Dress |
-			| Dress/A-8 | Dress |
-	And I close all client application windows
 
 
 Scenario: _0154035 search the item key selection list
@@ -366,83 +315,7 @@ Scenario: _0154035 search the item key selection list
 		And I close all client application windows
 
 
-Scenario: _0154036 check the Deleting of the store field value by line with the service in a document Sales order
-	* Open a creation form Sales Order
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I click the button named "FormCreate"
-	* Add to the table part of the product with the item type - Service
-		And I click Choice button of the field named "Store"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
-		And I select current line in "List" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Service'     |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'    | 'Item key' |
-			| 'Service' | 'Rent'     |
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
-		| 'Service'  | 'Rent'      | '1,000' | 'Store 01' |
-	* Deleting of the store field value by line with the service
-		And I activate field named "ItemListStore" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click Clear button of "Store" attribute in "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Check that the store field has been cleared
-		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
-		| 'Service'  | 'Rent'      | '1,000' | ''         |
-		And I close all client application windows
 
-Scenario: _0154037 check impossibility deleting of the store field by line with the product in a Sales order
-	* Open a creation form Sales Order
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I click the button named "FormCreate"
-	* Add to the table part of the product with the item type - Product
-		And I click Choice button of the field named "Store"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
-		And I select current line in "List" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'     |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'    | 'Item key' |
-			| 'Dress'   | 'M/White'     |
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
-	* Delete store field by product line 
-		And I activate field named "ItemListStore" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click Clear button of "Store" attribute in "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Check that the store field is still filled
-		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
-		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
-		And I close all client application windows
 	
 Scenario: _0154038 check the Deleting of the store field value by line with the service in a document Sales invoice
 	* Open a creation form Sales invoice
@@ -1143,83 +1016,10 @@ Scenario: _012012 inability to create your own company for Partner
 	* Check that OurCompany checkbox is not available
 		And field "Our Company" is not present on the form
 
-Scenario: _012013 check the selection of the segment manager in the sales order
-	And I close all client application windows
-	* Open the Sales order creation form
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I click the button named "FormCreate"
-	* Filling in Partner and Legal name
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'     |
-		And I select current line in "List" table
-		And I click Select button of "Legal name" field
-		And I select current line in "List" table
-		And I move to "Other" tab
-		And I expand "More" group
-		And I click Select button of "Manager segment" field
-	* Check the display of manager segments
-		And "List" table became equal
-		| 'Description' |
-		| 'Region 1'    |
-		| 'Region 2'    |
 
 
 
-Scenario: _012014 check row key when cloning a string in Sales order
-	And I close all client application windows
-	* Filling in the details of the documentsales order
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I click the button named "FormCreate"
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Kalipso'         |
-		And I select current line in "List" table
-		And I click Select button of "Partner term" field
-		And I go to line in "List" table
-			| 'Description'                   |
-			| 'Basic Partner terms, without VAT' |
-		And I select current line in "List" table
-	* Filling in Sales order
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
-		And I select current line in "List" table
-		And I activate field named "ItemListItemKey" in "ItemList" table
-		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I activate field named "ItemListItem" in "ItemList" table
-		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
-		And I finish line editing in "ItemList" table
-		And I click the button named "FormPost"
-	* Check that the row keys do not match
-		And I click "Show row key" button
-		And I go to line in "ItemList" table
-			| '#' |
-			| '1' |
-		And I activate "Key" field in "ItemList" table
-		And I save the current field value as "Rov1"
-		And I go to line in "ItemList" table
-			| '#' |
-			| '2' |
-		And I save the current field value as "Rov2"		
-		And I display "Rov1" variable value
-		And I display "Rov2" variable value
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-		And I go to line in "List" table
-		| 'Row key' |
-		| '$Rov1$'    |
-		And I activate "Row key" field in "List" table
-		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
-		Then the number of "List" table lines is "меньше или равно" 1
+
 
 Scenario: _012015 check row key when cloning a string in Sales invoice
 	And I close all client application windows
@@ -1555,171 +1355,6 @@ Scenario: _012021 check row key when cloning a string in Purchase invoice
 
 
 
-Scenario: _012018 check filling in procurement method using the button Fill in SO
-	And I close all client application windows
-	* Open a creation form Sales order
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I click the button named "FormCreate"
-	* Filling in the details
-		And I click Select button of "Partner" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Ferron BP'   |
-		And I select current line in "List" table
-		And I click Select button of "Legal name" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Company Ferron BP' |
-		And I select current line in "List" table
-		And I click Select button of "Partner term" field
-		And I go to line in "List" table
-			| 'Description'           |
-			| 'Basic Partner terms, TRY' |
-		And I select current line in "List" table
-	* Adding items to Sales order (4 string)
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Shirt'       |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I activate "Item key" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '38/Black' |
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Boots'       |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Boots' | '38/18SD'  |
-		And I activate "Item" field in "List" table
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "8,000" text in "Q" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'High shoes'  |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		Then "Item keys" window is opened
-		And I go to line in "List" table
-			| 'Item'       | 'Item key' |
-			| 'High shoes' | '37/19SD'  |
-		And I activate "Item" field in "List" table
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '38/Yellow' |
-		And I activate "Item" field in "List" table
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "3,000" text in "Q" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Check the button
-		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'     |
-			| 'Shirt' | '38/Black' | '5,000' |
-		And I move one line down in "ItemList" table and select line
-		And in the table "ItemList" I click "Procurement" button
-		And I set checkbox "Stock"
-		And I click "OK" button
-		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' | 'Q'     |
-			| 'High shoes' | '37/19SD'  | '2,000' |
-		And I move one line down in "ItemList" table and select line
-		And in the table "ItemList" I click "Procurement" button
-		And I change checkbox "Purchase"
-		And I click "OK" button
-		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'     |
-			| 'Boots' | '38/18SD'  | '8,000' |
-		And I move one line down in "ItemList" table and select line
-		And in the table "ItemList" I click "Procurement" button
-		And I change checkbox "No reserve"
-		And I click "OK" button
-	* Check filling in Procurement method in the Sales order
-		And "ItemList" table contains lines
-		| 'Item'       | 'Item key'  | 'Procurement method' | 'Q'     |
-		| 'Shirt'      | '38/Black'  | 'Stock'              | '5,000' |
-		| 'Boots'      | '38/18SD'   | 'No reserve'             | '8,000' |
-		| 'High shoes' | '37/19SD'   | 'No reserve'             | '2,000' |
-		| 'Trousers'   | '38/Yellow' | 'Purchase'           | '3,000' |
-	* Add a line with the service
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Service'       |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'     | 'Item key'  |
-			| 'Service'  | 'Rent' |
-		And I select current line in "List" table
-		And I activate "Procurement method" field in "ItemList" table
-		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "100,00" text in "Price" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Check the cleaning method on the line with the service
-		And I go to line in "ItemList" table
-			| 'Item'    | 'Item key' | 'Procurement method' |
-			| 'Service' | 'Rent'     | 'Stock'              |
-		And I activate "Procurement method" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click Clear button of "Procurement method" attribute in "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Procurement method' |
-			| 'Trousers' | '38/Yellow' | 'Purchase'           |
-		And "ItemList" table contains lines
-			| 'Item'       | 'Item key'  | 'Procurement method' |
-			| 'Shirt'      | '38/Black'  | 'Stock'              |
-			| 'Boots'      | '38/18SD'   | 'No reserve'             |
-			| 'High shoes' | '37/19SD'   | 'No reserve'             |
-			| 'Trousers'   | '38/Yellow' | 'Purchase'           |
-			| 'Service'    | 'Rent'      | ''                   |
-		And I click the button named "FormPost"
-	* Check the cleaning method on the line with the product
-		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Procurement method' |
-			| 'Trousers' | '38/Yellow' | 'Purchase'           |
-		And I click Clear button of "Procurement method" attribute in "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' | 'Procurement method' |
-			| 'High shoes' | '37/19SD'  | 'No reserve'             |
-		And I click the button named "FormPost"
-		Then I wait that in user messages the "Field [Procurement method] is empty." substring will appear in 30 seconds
-		And I close all client application windows
 
 
 Scenario: _012019 check filling in partner and customer/vendor sign when creating Partner term from partner card

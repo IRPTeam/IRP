@@ -86,7 +86,8 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			And I save the value of "Number" field as "$$NumberSalesOrder300521$$"
 			And I save the window as "$$SalesOrder300521$$"
 		* Create Shipment confirmation based on SO
-			And I click "Shipment confirmation" button
+			And I click the button named "FormDocumentShipmentConfirmationGenerate"
+			And I click "Ok" button		
 			And I click the button named "FormPost"
 			And I delete "$$NumberShipmentConfirmation300521$$" variable
 			And I delete "$$ShipmentConfirmation300521$$" variable
@@ -95,8 +96,7 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			And I click the button named "FormPostAndClose"
 			And Delay 5
 		* Create Sales invoice based on created SC
-			And I click "Sales invoice" button
-			And I click the button named "FormSelectAll"
+			And I click the button named "FormDocumentSalesInvoiceGenerate"
 			And I click "Ok" button
 			And I move to "Other" tab
 			And I click the button named "FormPost"

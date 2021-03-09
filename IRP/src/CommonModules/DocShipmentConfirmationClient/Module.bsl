@@ -150,6 +150,11 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings =
 	ObjectData = DocumentsClientServer.GetStructureFillStores();
 	FillPropertyValues(ObjectData, Object);
 	DocumentsClientServer.FillStores(ObjectData, Form);
+	RowIDInfoClient.UpdateQuantity(Object, Form);
+EndProcedure
+
+Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
+	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
 EndProcedure
 
 Procedure ItemListOnActivateRow(Object, Form, Item) Export
@@ -163,54 +168,6 @@ Procedure ItemListOnActivateRow(Object, Form, Item) Export
 		And CurrentRow.Store <> Form.CurrentStore Then
 		DocumentsClient.SetCurrentStore(Object, Form, CurrentRow.Store);
 	EndIf;
-EndProcedure
-
-Procedure ItemListReceiptBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	StandardProcessing = False;
-	
-	FilterValues = New Structure();
-	FilterValues.Insert("Company", Object.Company);
-	FilterValues.Insert("Partner", ?(Form.Items.Partner.Visible, Object.Partner, Undefined));
-	FilterValues.Insert("LegalName", ?(Form.Items.LegalName.Visible, Object.LegalName, Undefined));
-	FilterValues.Insert("ItemKey", Form.Items.ItemList.CurrentData.ItemKey);
-	
-	ExistingRows = New Array;
-	For Each Row In Object.ItemList Do
-		If Row.GetID() = Form.Items.ItemList.CurrentRow Then
-			Continue;
-		EndIf;
-		RowStructure = New Structure("Key, Unit, Quantity");
-		FillPropertyValues(RowStructure, Row);
-		ExistingRows.Add(RowStructure);
-	EndDo;
-	
-	FormParameters = New Structure("FilterValues, ExistingRows, Ref, SelectShipmentBasisMode", FilterValues, ExistingRows, Object.Ref, True);
-	NotifyParameters = New Structure;
-	NotifyParameters.Insert("Object", Object);
-	NotifyParameters.Insert("Form", Form);
-	NotifyParameters.Insert("CurrentRow", Form.Items.ItemList.CurrentRow);
-	OpenForm("Document.ShipmentConfirmation.Form.SelectShipmentBasisesForm"
-		, FormParameters, , , ,
-		, New NotifyDescription("SelectShipmentBasisInRowContinue", ThisObject, NotifyParameters));
-	
-EndProcedure
-
-Procedure SelectShipmentBasisInRowContinue(Result, AdditionalParameters) Export
-	
-	Object = AdditionalParameters.Object;
-	Form = AdditionalParameters.Form;
-	
-	If Result = Undefined OR Not Result.Count() Then
-		Return;
-	EndIf;
-	
-	Row = Object.ItemList.FindByID(AdditionalParameters.CurrentRow);
-	If Row = Undefined Then
-		Return;
-	EndIf;
-	FillPropertyValues(Row, Result[0], "Key, ShipmentBasis");
-	
-	DocShipmentConfirmationClient.ItemListOnChange(Object, Form, Form.Items.ItemList);
 EndProcedure
 
 Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export

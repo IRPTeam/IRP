@@ -64,41 +64,44 @@ EndFunction
 Function GetQueryTextInventoryTransferItemList()
 	Return
 	"SELECT
-		|	InventoryTransferItemList.Ref.Company AS Company,
-		|	InventoryTransferItemList.Ref.StoreSender AS StoreSender,
-		|	InventoryTransferItemList.Ref.StoreReceiver AS StoreReceiver,
-		|	InventoryTransferItemList.Ref.StoreTransit AS StoreTransit,
-		|	InventoryTransferItemList.InventoryTransferOrder AS Order,
-		|	InventoryTransferItemList.ItemKey AS ItemKey,
-		|	SUM(InventoryTransferItemList.Quantity) AS Quantity,
-		|	0 AS BasisQuantity,
-		|	InventoryTransferItemList.Unit,
-		|	InventoryTransferItemList.Key AS RowKey,
-		|	InventoryTransferItemList.ItemKey.Item.Unit AS ItemUnit,
-		|	InventoryTransferItemList.ItemKey.Unit AS ItemKeyUnit,
-		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
-		|	InventoryTransferItemList.ItemKey.Item AS Item,
-		|	InventoryTransferItemList.Ref.Date AS Period,
-		|	InventoryTransferItemList.Ref AS ReceiptBasis,
-		|	InventoryTransferItemList.Ref AS ShipmentBasis
-		|FROM
-		|	Document.InventoryTransfer.ItemList AS InventoryTransferItemList
-		|WHERE
-		|	InventoryTransferItemList.Ref = &Ref
-		|GROUP BY
-		|	InventoryTransferItemList.Ref.Company,
-		|	InventoryTransferItemList.Ref.StoreSender,
-		|	InventoryTransferItemList.Ref.StoreReceiver,
-		|	InventoryTransferItemList.InventoryTransferOrder,
-		|	InventoryTransferItemList.Key,
-		|	InventoryTransferItemList.ItemKey,
-		|	InventoryTransferItemList.Unit,
-		|	InventoryTransferItemList.ItemKey.Item.Unit,
-		|	InventoryTransferItemList.ItemKey.Unit,
-		|	InventoryTransferItemList.ItemKey.Item,
-		|	InventoryTransferItemList.Ref.Date,
-		|	InventoryTransferItemList.Ref,
-		|	VALUE(Catalog.Units.EmptyRef)";
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO RowIDInfo
+	|FROM
+	|	Document.InventoryTransfer.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	InventoryTransferItemList.Ref.Company AS Company,
+	|	InventoryTransferItemList.Ref.StoreSender AS StoreSender,
+	|	InventoryTransferItemList.Ref.StoreReceiver AS StoreReceiver,
+	|	InventoryTransferItemList.Ref.StoreTransit AS StoreTransit,
+	|	InventoryTransferItemList.InventoryTransferOrder AS Order,
+	|	InventoryTransferItemList.ItemKey AS ItemKey,
+	|	InventoryTransferItemList.Quantity AS Quantity,
+	|	0 AS BasisQuantity,
+	|	InventoryTransferItemList.Unit,
+	|	RowIDInfo.RowID AS RowKey,
+	|	InventoryTransferItemList.ItemKey.Item.Unit AS ItemUnit,
+	|	InventoryTransferItemList.ItemKey.Unit AS ItemKeyUnit,
+	|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
+	|	InventoryTransferItemList.ItemKey.Item AS Item,
+	|	InventoryTransferItemList.Ref.Date AS Period,
+	|	InventoryTransferItemList.Ref AS ReceiptBasis,
+	|	InventoryTransferItemList.Ref AS ShipmentBasis
+	|FROM
+	|	Document.InventoryTransfer.ItemList AS InventoryTransferItemList
+	|		LEFT JOIN RowIDInfo AS RowIDInfo
+	|		ON InventoryTransferItemList.Key = RowIDInfo.Key
+	|WHERE
+	|	InventoryTransferItemList.Ref = &Ref";
 EndFunction
 
 Function GetQueryTextQueryTable()
@@ -567,7 +570,6 @@ Function R4011B_FreeStocks()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT InventoryTransferOrderExists
-		|	AND NOT ItemList.UseShipmentConfirmation
 		|
 		|UNION ALL
 		|
@@ -580,8 +582,7 @@ Function R4011B_FreeStocks()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	NOT InventoryTransferOrderExists
-		|	AND NOT ItemList.UseGoodsReceipt";
+		|NOT ItemList.UseGoodsReceipt";
 EndFunction
 
 Function R4012B_StockReservation()
@@ -644,15 +645,7 @@ Function R4012B_StockReservation()
 		|		INNER JOIN TmpStockReservation AS StockReservation
 		|		ON ItemListGroup.InventoryTransferOrder = StockReservation.Order
 		|		AND ItemListGroup.ItemKey = StockReservation.ItemKey
-		|		AND ItemListGroup.Store = StockReservation.Store
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|DROP TmpItemListGroup
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|DROP TmpStockReservation";
+		|		AND ItemListGroup.Store = StockReservation.Store";
 EndFunction
 
 Function R4021B_StockTransferOrdersReceipt()

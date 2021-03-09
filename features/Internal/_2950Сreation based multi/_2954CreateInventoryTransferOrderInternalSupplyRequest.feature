@@ -276,7 +276,8 @@ Scenario: _295401 check filling in Inventory transfer order when creating based 
 			| '295' | 
 		And I move one line down in "List" table and select line
 	* Create Inventory transfer order and check filling in
-		And I click the button named "FormDocumentInventoryTransferOrderGenerateInventoryTransferOrder"
+		And I click the button named "FormDocumentInventoryTransferOrderGenerate"
+		And I click "Ok" button
 		And "ItemList" table contains lines
 		| 'Item'       | 'Quantity' | 'Internal supply request'      | 'Item key'  | 'Unit' |
 		| 'Dress'      | '2,000'    | 'Internal supply request 296*' | 'S/Yellow'  | 'pcs'  |
@@ -294,12 +295,7 @@ Scenario: _295402 check filling in Inventory transfer order when creating based 
 			| 'Number'  |
 			| '296' | 
 		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentInventoryTransferOrderGenerateInventoryTransferOrder"
-		And I go to line in "Stores" table
-			| 'Store'    |
-			| 'Store 03' |
-		And I set "Use" checkbox in "Stores" table
-		And I finish line editing in "Stores" table
+		And I click the button named "FormDocumentInventoryTransferOrderGenerate"
 		And I click "Ok" button
 	* Create Inventory transfer order and check filling in
 		And "ItemList" table contains lines

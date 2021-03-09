@@ -408,124 +408,6 @@ Procedure SearchByBarcode(Command, Barcode = "")
 EndProcedure
 
 &AtClient
-Procedure SelectShipmentConfirmation(Command)
-	CommandParameters = New Structure("Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax");
-	FillPropertyValues(CommandParameters, Object);
-	AlreadySelectedShipmentConfirmations = New Array();
-	For Each Row In Object.ShipmentConfirmations Do
-		If AlreadySelectedShipmentConfirmations.Find(Row.ShipmentConfirmation) = Undefined Then
-			AlreadySelectedShipmentConfirmations.Add(Row.ShipmentConfirmation);
-		EndIf;
-	EndDo;
-	CommandParameters.Insert("AlreadySelectedShipmentConfirmations", AlreadySelectedShipmentConfirmations);
-	
-	InfoShipmentConfirmation = DocSalesInvoiceServer.GetInfoShipmentConfirmationBeforeSalesInvoice(CommandParameters);
-	
-	FormParameters = New Structure("InfoShipmentConfirmations", InfoShipmentConfirmation.Tree);
-	OpenForm("Document.SalesInvoice.Form.SelectShipmentConfirmationsForm"
-		, FormParameters, , , ,
-		, New NotifyDescription("SelectShipmentConfirmationsContinue", ThisObject,
-			New Structure("InfoShipmentConfirmation",
-				InfoShipmentConfirmation)));
-EndProcedure
-
-&AtClient
-Procedure SelectSalesOrders(Command)
-	FilterValues = New Structure("Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Ref");
-	FillPropertyValues(FilterValues, Object);
-	
-	ExistingRows = New Array;
-	For Each Row In Object.ItemList Do
-		RowStructure = New Structure("Key, Unit, Quantity");
-		FillPropertyValues(RowStructure, Row);
-		ExistingRows.Add(RowStructure);
-	EndDo;
-	
-	FormParameters = New Structure("FilterValues, ExistingRows", FilterValues, ExistingRows);
-	OpenForm("Document.SalesInvoice.Form.SelectSalesOrdersForm"
-		, FormParameters, , , ,
-		, New NotifyDescription("SelectSalesOrdersContinue", ThisObject));
-EndProcedure
-
-&AtClient
-Procedure SelectShipmentConfirmationsContinue(Result, AdditionalParameters) Export
-	If Result = Undefined Then
-		Return;
-	EndIf;
-	
-	ArrayOfBasisDocuments = New Array();
-	For Each Row In AdditionalParameters.InfoShipmentConfirmation.Linear Do
-		If Result.Find(Row.ShipmentConfirmation) <> Undefined Then
-			ArrayOfBasisDocuments.Add(Row);
-		EndIf;
-	EndDo;
-	SelectShipmentConfirmationsFinish(ArrayOfBasisDocuments);
-	Taxes_CreateFormControls();
-	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, ThisObject, "ShipmentConfirmations");
-	DocumentsClient.UpdateTradeDocumentsTree(Object, ThisObject, 
-		"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");	
-EndProcedure
-
-&AtServer
-Procedure SelectShipmentConfirmationsFinish(ArrayOfBasisDocuments)
-	DocSalesInvoiceServer.FillDocumentWithShipmentConfirmationArray(Object, ThisObject, ArrayOfBasisDocuments);
-	For Each Row In Object.ItemList Do
-		Row.Item = Row.ItemKey.Item;
-	EndDo;
-EndProcedure
-
-&AtClient
-Procedure SelectSalesOrdersContinue(Result, AdditionalParameters) Export
-	If Result = Undefined Then
-		Return;
-	EndIf;
-	SelectSalesOrdersContinueAtServer(Result, AdditionalParameters);
-	DocSalesInvoiceClient.ItemListOnChange(Object, ThisObject, Items.ItemList);
-EndProcedure
-
-&AtServer
-Procedure SelectSalesOrdersContinueAtServer(Result, AdditionalParameters)
-	Settings = New Structure();
-	Settings.Insert("Rows", New Array());
-	Settings.Insert("CalculateSettings", New Structure());
-	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
-		
-	For Each ResultRow In Result Do
-		RowsByKey = Object.ItemList.FindRows(New Structure("Key", ResultRow.Key));
-		If RowsByKey.Count() Then
-			RowByKey = RowsByKey[0];
-			ItemKeyUnit = CatItemsServer.GetItemKeyUnit(ResultRow.ItemKey);
-			UnitFactorFrom = Catalogs.Units.GetUnitFactor(RowByKey.Unit, ItemKeyUnit);
-			UnitFactorTo = Catalogs.Units.GetUnitFactor(ResultRow.Unit, ItemKeyUnit);
-			FillPropertyValues(RowByKey, ResultRow, , "Quantity");
-			RowByKey.Quantity = ?(UnitFactorTo = 0,
-					0,
-					RowByKey.Quantity * UnitFactorFrom / UnitFactorTo) + ResultRow.Quantity;
-			RowByKey.PriceType = ResultRow.PriceType;
-			RowByKey.Price = ResultRow.Price;
-			Settings.Rows.Add(RowByKey);
-		Else
-			NewRow = Object.ItemList.Add();
-			FillPropertyValues(NewRow, ResultRow);
-			NewRow.PriceType = ResultRow.PriceType;
-			NewRow.Price = ResultRow.Price;
-			Settings.Rows.Add(NewRow);
-		EndIf;
-	EndDo;
-	
-	TaxInfo = Undefined;
-	SavedData = TaxesClientServer.GetSavedData(ThisObject, TaxesServer.GetAttributeNames().CacheName);
-	If SavedData.Property("ArrayOfColumnsInfo") Then
-		TaxInfo = SavedData.ArrayOfColumnsInfo;
-	EndIf;
-	CalculationStringsClientServer.CalculateItemsRows(Object,
-		ThisObject,
-		Settings.Rows,
-		Settings.CalculateSettings,
-		TaxInfo);
-EndProcedure
-
-&AtClient
 Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
@@ -618,6 +500,7 @@ EndProcedure
 Procedure ShipmentConfirmationsTreeQuantityOnChange(Item)
 	DocumentsClient.TradeDocumentsTreeQuantityOnChange(Object, ThisObject, 
 		"ShipmentConfirmations", "ShipmentConfirmationsTree", "ShipmentConfirmation");
+	RowIDInfoClient.UpdateQuantity(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -628,6 +511,70 @@ EndProcedure
 &AtClient
 Procedure ShipmentConfirmationsTreeBeforeDeleteRow(Item, Cancel)
 	Cancel = True;
+EndProcedure
+
+#EndRegion
+
+#Region LinkedDocuments
+
+&AtClient
+Function GetLinkedDocumentsFilter()
+	Filter = New Structure();
+	Filter.Insert("Company"           , Object.Company);
+	Filter.Insert("Partner"           , Object.Partner);
+	Filter.Insert("LegalName"         , Object.LegalName);
+	Filter.Insert("Agreement"         , Object.Agreement);
+	Filter.Insert("Currency"          , Object.Currency);
+	Filter.Insert("PriceIncludeTax"   , Object.PriceIncludeTax);
+	Filter.Insert("TransactionType"   , PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Sales"));
+	Filter.Insert("ProcurementMethod" , PredefinedValue("Enum.ProcurementMethods.Purchase"));
+	Filter.Insert("Ref"               , Object.Ref);
+	Return Filter;
+EndFunction
+
+&AtClient
+Procedure LinkUnlinkBasisDocuments(Command)
+	FormParameters = New Structure();
+	FormParameters.Insert("Filter"           , GetLinkedDocumentsFilter());
+	FormParameters.Insert("SelectedRowInfo"  , RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
+	FormParameters.Insert("TablesInfo"       , RowIDInfoClient.GetTablesInfo(Object));
+	OpenForm("CommonForm.LinkUnlinkDocumentRows"
+		, FormParameters, , , ,
+		, New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject)
+		, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure AddBasisDocuments(Command)	
+	FormParameters = New Structure();
+	FormParameters.Insert("Filter"           , GetLinkedDocumentsFilter());
+	FormParameters.Insert("TablesInfo"       , RowIDInfoClient.GetTablesInfo(Object));
+	OpenForm("CommonForm.AddLinkedDocumentRows"
+		, FormParameters, , , ,
+		, New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject)
+		, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+
+&AtClient
+Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
+	Taxes_CreateFormControls();
+	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, ThisObject, "ShipmentConfirmations");
+	DocumentsClient.UpdateTradeDocumentsTree(Object, ThisObject, 
+		"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
+EndProcedure
+
+&AtServer
+Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
+	If Result.Operation = "LinkUnlinkDocumentRows" Then
+		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
+	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
+		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+	EndIf;
 EndProcedure
 
 #EndRegion

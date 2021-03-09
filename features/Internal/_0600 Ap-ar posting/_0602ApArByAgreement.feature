@@ -576,6 +576,11 @@ Scenario: _060205 create Purchase invoice with Ap details by Partner terms and c
 				| 'Description' |
 				| 'Partner Ferron 1'     |
 			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'Company Ferron BP' |
+			And I select current line in "List" table			
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
 				| 'Description' |
@@ -639,16 +644,6 @@ Scenario: _060205 create Purchase invoice with Ap details by Partner terms and c
 		| ''                               | '*'      | '20'        | '11 000'  | '9 322,03'   | 'Main Company' | '$$PurchaseInvoice060205$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | 'No'                   | '' | '' |
 		| ''                               | '*'      | '20'        | '11 000'  | '9 322,03'   | 'Main Company' | '$$PurchaseInvoice060205$$' | 'TRY'      | 'L/Green'  | '*'       | 'TRY'                          | 'No'                   | '' | '' |
 		| ''                               | '*'      | '20'        | '11 000'  | '9 322,03'   | 'Main Company' | '$$PurchaseInvoice060205$$' | 'TRY'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Taxes turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Taxes turnovers"' | ''       | ''          | ''              | ''           | ''                          | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-		| ''                            | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'                | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
-		| ''                            | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'                  | 'Tax' | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                            | '*'      | '287,27'    | '287,27'        | '1 595,93'   | '$$PurchaseInvoice060205$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$PurchaseInvoice060205$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$PurchaseInvoice060205$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$PurchaseInvoice060205$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
 		And I select "Accounts statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -923,16 +918,6 @@ Scenario: _060207 check the offset of the advance for Purchase invoice with the 
 		| ''                               | '*'      | '20'        | '11 000'  | '9 322,03'   | 'Main Company' | '$$PurchaseInvoice060207$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | 'No'                   | '' | '' |
 		| ''                               | '*'      | '20'        | '11 000'  | '9 322,03'   | 'Main Company' | '$$PurchaseInvoice060207$$' | 'TRY'      | 'L/Green'  | '*'       | 'TRY'                          | 'No'                   | '' | '' |
 		| ''                               | '*'      | '20'        | '11 000'  | '9 322,03'   | 'Main Company' | '$$PurchaseInvoice060207$$' | 'TRY'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Taxes turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Taxes turnovers"' | ''       | ''          | ''              | ''           | ''                          | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-		| ''                            | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'                | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
-		| ''                            | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'                  | 'Tax' | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                            | '*'      | '287,27'    | '287,27'        | '1 595,93'   | '$$PurchaseInvoice060207$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$PurchaseInvoice060207$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$PurchaseInvoice060207$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$PurchaseInvoice060207$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
 		And I select "Accounts statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

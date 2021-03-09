@@ -520,7 +520,7 @@ Procedure CalculateTax(Object, ItemRow, PriceIncludeTax, ArrayOfTaxInfo, Reverse
 					Parameters.Insert("Company", Object.Company);
 					Parameters.Insert("Tax", ItemOfTaxInfo.Tax);
 					Parameters.Insert("Agreement", Object.Agreement);
-					ArrayOfTaxRates = TaxesServer.TaxRatesForAgreement(Parameters);
+					ArrayOfTaxRates = TaxesServer.GetTaxRatesForAgreement(Parameters);
 				EndIf;
 
 				If Not ArrayOfTaxRates.Count() Then
@@ -602,7 +602,7 @@ Procedure CalculateTaxManualPriority(Object, ItemRow, PriceIncludeTax, ArrayOfTa
 				Parameters.Insert("Tax", ItemOfTaxInfo.Tax);
 				Parameters.Insert("Agreement", Object.Agreement);
 				
-				ArrayOfTaxRates = TaxesServer.TaxRatesForAgreement(Parameters);
+				ArrayOfTaxRates = TaxesServer.GetTaxRatesForAgreement(Parameters);
 			EndIf;
 			
 			If Not ArrayOfTaxRates.Count() Then

@@ -219,7 +219,8 @@ Scenario: _029902 create SI for SO without reserve and check its movements (SO-S
 		And I go to line in "List" table
 			| 'Number'  |
 			| '$$NumberSalesOrder029901$$' |
-		And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice029901$$" variable
 		And I delete "$$SalesInvoice029901$$" variable
@@ -609,7 +610,8 @@ Scenario: _029904 create Shipment confirmation for SO without reserve and check 
 			And I go to line in "List" table
 				| 'Number'  |
 				| '$$NumberSalesOrder029903$$' |
-			And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"
+			And I click the button named "FormDocumentShipmentConfirmationGenerate"
+			And I click "Ok" button	
 			And I click the button named "FormPost"
 			And I delete "$$NumberShipmentConfirmation029903$$" variable
 			And I delete "$$ShipmentConfirmation029903$$" variable
@@ -707,23 +709,8 @@ Scenario: _029905 create Sales ivoice for SO (SC first) without reserve and chec
 			And I go to line in "List" table
 				| 'Number'  |
 				| '$$NumberSalesOrder029903$$' |
-			And I click the button named "FormDocumentSalesInvoiceGenerateSalesInvoice"
-			And I go to line in "ShipmentConfirmationsTree" table
-				| 'Order'                              | 'Use' |
-				| '$$ShipmentConfirmation029903$$' | 'No'  |
-			And I change "Use" checkbox in "ShipmentConfirmationsTree" table
-			And I finish line editing in "ShipmentConfirmationsTree" table
-			And I click "Ok" button
-			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
-			And I set "Use shipment confirmation" checkbox in "ItemList" table
-			And I finish line editing in "ItemList" table
-			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '38/Black' |
-			And I set "Use shipment confirmation" checkbox in "ItemList" table
-			And I finish line editing in "ItemList" table		
+			And I click the button named "FormDocumentSalesInvoiceGenerate"
+			And I click "Ok" button	
 			And I click the button named "FormPost"
 			And I delete "$$NumberSalesInvoice029903$$" variable
 			And I delete "$$SalesInvoice029903$$" variable

@@ -2,7 +2,7 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	DocPurchaseOrderServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	DocPurchaseOrderClosingServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
@@ -10,7 +10,7 @@ EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
-	DocPurchaseOrderClient.OnOpen(Object, ThisObject, Cancel);
+	DocPurchaseOrderClosingClient.OnOpen(Object, ThisObject, Cancel);
 	UpdateTotalAmounts();
 EndProcedure
 
@@ -24,7 +24,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		Return;
 	EndIf;
 	
-	DocPurchaseOrderClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
+	DocPurchaseOrderClosingClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
 	
 	ServerData = Undefined;		
 	If TypeOf(Parameter) = Type("Structure") And Parameter.Property("AddInfo") Then
@@ -58,7 +58,7 @@ EndProcedure
 
 &AtClient
 Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
-	DocPurchaseOrderClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+	DocPurchaseOrderClosingClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 	Notify("WriteProcurementOrder", , ThisObject);
 	NotifyChanged(Object.PurchaseOrder);
 	UpdateTotalAmounts();
@@ -66,13 +66,13 @@ EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
-	DocPurchaseOrderServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	DocPurchaseOrderClosingServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
-	DocPurchaseOrderServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	DocPurchaseOrderClosingServer.OnReadAtServer(Object, ThisObject, CurrentObject);
 	Taxes_CreateFormControls();
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
@@ -119,12 +119,12 @@ EndProcedure
 
 &AtClient
 Procedure DateOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseOrderClient.DateOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure StoreOnChange(Item)
-	DocPurchaseOrderClient.StoreOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.StoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -134,43 +134,43 @@ EndProcedure
 
 &AtClient
 Procedure PartnerOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseOrderClient.PartnerOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.PartnerOnChange(Object, ThisObject, Item);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
 Procedure LegalNameOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseOrderClient.LegalNameOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.LegalNameOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure AgreementOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseOrderClient.AgreementOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.AgreementOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure CompanyOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseOrderClient.CompanyOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.CompanyOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure PriceIncludeTaxOnChange(Item)
-	DocPurchaseOrderClient.PriceIncludeTaxOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.PriceIncludeTaxOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure CurrencyOnChange(Item)
-	DocPurchaseOrderClient.CurrencyOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.CurrencyOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure StatusOnChange(Item)
-	DocPurchaseOrderClient.StatusOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.StatusOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure NumberOnChange(Item)
-	DocPurchaseOrderClient.NumberOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.NumberOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -179,13 +179,13 @@ EndProcedure
 
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
-	DocPurchaseOrderClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
 	UpdateTotalAmounts();
 EndProcedure
 
 &AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseOrderClient.ItemListOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.ItemListOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -198,7 +198,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListOnActivateRow(Item)
-	DocPurchaseOrderClient.ItemListOnActivateRow(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.ItemListOnActivateRow(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -212,47 +212,47 @@ EndProcedure
 
 &AtClient
 Procedure ItemListItemOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseOrderClient.ItemListItemOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.ItemListItemOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPurchaseOrderClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocPurchaseOrderClosingClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
-	DocPurchaseOrderClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	DocPurchaseOrderClosingClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure ItemListItemKeyOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseOrderClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure ItemListPriceTypeOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseOrderClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure ItemListUnitOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseOrderClient.ItemListUnitOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.ItemListUnitOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure ItemListQuantityOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseOrderClient.ItemListQuantityOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.ItemListQuantityOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure ItemListPriceOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseOrderClient.ItemListPriceOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.ItemListPriceOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseOrderClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
 	CurrentData = Items.ItemList.CurrentData;
 	If CurrentData <> Undefined And CurrentData.DontCalculateRow Then
 		UpdateTotalAmounts();
@@ -261,7 +261,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListTaxAmountOnChange(Item)
-	DocPurchaseOrderClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -272,22 +272,22 @@ EndProcedure
 
 &AtClient
 Procedure ItemListDontCalculateRowOnChange(Item)
-	DocPurchaseOrderClient.ItemListDontCalculateRowOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.ItemListDontCalculateRowOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure ItemListStoreOnChange(Item)
-	DocPurchaseOrderClient.ItemListStoreOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClosingClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure ItemListExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPurchaseOrderClient.ItemListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocPurchaseOrderClosingClient.ItemListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure ItemListExpenseTypeEditTextChange(Item, Text, StandardProcessing)
-	DocPurchaseOrderClient.ItemListExpenseTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	DocPurchaseOrderClosingClient.ItemListExpenseTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -301,12 +301,12 @@ EndProcedure
 
 &AtClient
 Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPurchaseOrderClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocPurchaseOrderClosingClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
-	DocPurchaseOrderClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	DocPurchaseOrderClosingClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -315,12 +315,12 @@ EndProcedure
 
 &AtClient
 Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPurchaseOrderClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocPurchaseOrderClosingClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
-	DocPurchaseOrderClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	DocPurchaseOrderClosingClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -329,12 +329,12 @@ EndProcedure
 
 &AtClient
 Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPurchaseOrderClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocPurchaseOrderClosingClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
-	DocPurchaseOrderClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	DocPurchaseOrderClosingClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -350,12 +350,12 @@ EndProcedure
 
 &AtClient
 Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPurchaseOrderClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocPurchaseOrderClosingClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
-	DocPurchaseOrderClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	DocPurchaseOrderClosingClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -440,7 +440,7 @@ EndProcedure
 
 &AtClient
 Procedure TaxValueOnChange(Item) Export
-	DocPurchaseOrderClient.ItemListTaxValueOnChange(Object, ThisObject, Item);	
+	DocPurchaseOrderClosingClient.ItemListTaxValueOnChange(Object, ThisObject, Item);	
 EndProcedure
 
 &AtServer
@@ -459,12 +459,12 @@ EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocPurchaseOrderClient.OpenPickupItems(Object, ThisObject, Command);
+	DocPurchaseOrderClosingClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	DocPurchaseOrderClient.SearchByBarcode(Barcode, Object, ThisObject);
+	DocPurchaseOrderClosingClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
 &AtClient

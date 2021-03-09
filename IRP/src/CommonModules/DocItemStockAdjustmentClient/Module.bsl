@@ -174,9 +174,7 @@ Procedure ItemListQuantityOnChange(Object, Form, Item) Export
 	
 	CalculationSettings = New Structure();
 	CalculationSettings.Insert("CalculateQuantityInBaseUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object,
-		CurrentRow,
-		CalculationSettings);
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 EndProcedure
 #EndRegion
 
@@ -190,9 +188,7 @@ Procedure ItemListUnitOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	
 	CalculationSettings = New Structure();
 	CalculationSettings.Insert("CalculateQuantityInBaseUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object,
-		CurrentRow,
-		CalculationSettings);
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 EndProcedure
 
 #EndRegion

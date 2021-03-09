@@ -50,6 +50,7 @@
   <defaultListForm>Document.PlannedReceiptReservation.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.PlannedReceiptReservation.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.T10000B_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>

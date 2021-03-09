@@ -111,6 +111,3 @@ Scenario: _034803 check discount recalculation when change quantity in the SaLes
 				| 'Item'  | 'Price'  | 'Item key' | 'Q'      | 'Offers amount' | 'Unit' | 'Total amount' | 'Tax amount' | 'Net amount' |
 				| 'Dress' | '550,00' | 'L/Green'  | '1,000' | '55,00'         | 'pcs'  | '495,00'       | '75,51'      | '419,49'     |
 			And I click the button named "FormPostAndClose"	
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

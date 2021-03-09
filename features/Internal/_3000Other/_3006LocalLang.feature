@@ -33,6 +33,7 @@ Scenario: _300600 preparation (data multi-language)
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
 		When Create catalog Partners objects (Ferron BP)
+		When Create catalog BusinessUnits objects
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Companies objects (partners company)
 		When Create information register PartnerSegments records
@@ -43,6 +44,7 @@ Scenario: _300600 preparation (data multi-language)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
+		When Create catalog ExpenseAndRevenueTypes objects
 		* Check or create SalesOrder023001
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
 			If "List" table does not contain lines Then

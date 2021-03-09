@@ -1,4 +1,4 @@
-#Region FormEvents
+#Region FormEventHandlers
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
@@ -21,7 +21,7 @@ Procedure OnOpen(Cancel)
 EndProcedure
 #EndRegion
 
-#Region CommandInterface
+#Region FormCommandsEventHandlers
 
 &AtClient
 Procedure AddFile(Command)
@@ -42,7 +42,19 @@ Procedure SaveFile(Command)
     SaveFileContinue();
 EndProcedure
 
+&AtClient
+Procedure Install(Command)
+	If Modified Then
+		NotifyDescription = New NotifyDescription("InstallDriver_End", ThisObject);
+		ShowQueryBox(NotifyDescription, R().QuestionToUser_001, QuestionDialogMode.YesNo);
+	Else
+		InstallDriver();
+	EndIf;
+EndProcedure
+
 #EndRegion
+
+#Region Internal
 
 &AtClient
 Procedure AddFileEndCall(FileDescription, AddInfo) Export
@@ -73,24 +85,7 @@ Procedure SaveFileNewObjectContinue(Result, AddInfo = Undefined) Export
 	EndIf;
 EndProcedure
 
-&AtClient
-Procedure SaveFileContinue()
-	BeginGetFileFromServer(GetURL(Object.Ref, "Driver"), Object.Description);
-EndProcedure
-
 #Region Driver
-
-&AtClient
-Procedure UpdateDriverStatus()
-	
-	DriverData = New Structure();
-	DriverData.Insert("Driver"       , Object.Ref);
-	DriverData.Insert("AddInID"      , Object.AddInID);
-	
-	Notify = New NotifyDescription("BeginGetDriverEnd", ThisObject);
-	HardwareClient.BeginGetDriver(Notify, DriverData);
-	
-EndProcedure
 
 &AtClient
 Procedure BeginGetDriverEnd(DriverObject, Params) Export
@@ -121,8 +116,53 @@ Procedure BeginGetDriverEndAfter(Result, Params, AddInfo) Export
 EndProcedure
 
 &AtClient
-Procedure UpdateCurrentStatusDriver()
+Procedure GetVersionEnd(Result, Params, AddInfo) Export
+	If Not IsBlankString(Result) Then
+		CurrentVersion = Result;
+		UpdateCurrentStatusDriver();
+	EndIf;	
+EndProcedure
+
+&AtClient
+Procedure InstallDriver_End(Result, Params) Export
+	Если Result = DialogReturnCode.Yes Then
+		If Modified And Not Write() Then
+			Return;
+		EndIf;
+		InstallDriver();
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure InstallDriverFromZIPEnd(Result) Export
+	UpdateDriverStatus();
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region Private
+
+&AtClient
+Procedure SaveFileContinue()
+	BeginGetFileFromServer(GetURL(Object.Ref, "Driver"), Object.Description);
+EndProcedure
+
+#Region Driver
+
+&AtClient
+Procedure UpdateDriverStatus()
+	DriverData = New Structure();
+	DriverData.Insert("Driver"       , Object.Ref);
+	DriverData.Insert("AddInID"      , Object.AddInID);
 	
+	Notify = New NotifyDescription("BeginGetDriverEnd", ThisObject);
+	HardwareClient.BeginGetDriver(Notify, DriverData);
+EndProcedure
+
+&AtClient
+Procedure UpdateCurrentStatusDriver()
 	CurrentStatus = R().Eq_006;
 	
 	If Not IsBlankString(CurrentVersion) Then
@@ -130,45 +170,10 @@ Procedure UpdateCurrentStatusDriver()
 	Else
 		Items.CurrentStatus.Visible = False;
 	EndIf;
-	
 EndProcedure
 
 &AtClient
-Procedure GetVersionEnd(Result, Params, AddInfo) Export
-	
-	If Not IsBlankString(Result) Then
-		CurrentVersion = Result;
-		UpdateCurrentStatusDriver();
-	EndIf;
-	
-EndProcedure
-
-&AtClient
-Procedure Install(Command)
-	If Modified Then
-		NotifyDescription = New NotifyDescription("InstallDriver_End", ThisObject);
-		ShowQueryBox(NotifyDescription, R().QuestionToUser_001, QuestionDialogMode.YesNo);
-	Else
-		InstallDriver();
-	EndIf;
-
-EndProcedure
-
-&AtClient
-Procedure InstallDriver_End(Result, Params) Export 
-	
-	Если Result = DialogReturnCode.Yes Then
-		If Modified And Not Write() Then
-			Return;
-		EndIf;
-		InstallDriver();
-	EndIf;  
-	
-EndProcedure
-
-&AtClient
-Procedure InstallDriver()
-	
+Procedure InstallDriver()	
 	ClearMessages(); 
 	
 	If Not CheckFillingDriver() Then
@@ -177,15 +182,7 @@ Procedure InstallDriver()
 	
 	Notify = New NotifyDescription("InstallDriverFromZIPEnd", ThisObject);
 	
-	HardwareClient.InstallDriver(Object.AddInID, Notify);
-	
-EndProcedure
-
-&AtClient
-Procedure InstallDriverFromZIPEnd(Result) Export 
-	
-	UpdateDriverStatus();
-	
+	HardwareClient.InstallDriver(Object.AddInID, Notify);	
 EndProcedure
 
 &AtClient
@@ -201,4 +198,6 @@ Function CheckFillingDriver()
 	Return True;
 EndFunction
 
-#EndRegion 
+#EndRegion
+
+#EndRegion

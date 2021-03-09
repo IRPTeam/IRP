@@ -54,38 +54,154 @@ Scenario: _017000 preparation
 		When filling in Tax settings for company
 	
 
-Scenario: _017001 create document Purchase order - Goods receipt is not used
+Scenario: _017001 create document Purchase order
 	When create PurchaseOrder017001
 
-Scenario: _017002 check Purchase Order N2 posting by register Order Balance (+) - Goods receipt is not used
-	* Opening register Order Balance
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	* Check the register form
-		If "List" table contains columns Then
-			| 'Period' |
-			| 'Quantity' |
-			| 'Recorder' |
-			| 'Line number' |
-			| 'Store' |
-			| 'Order' |
-			| 'Item key' |
-	* Check Purchase Order N2 posting by register Order Balance
-		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                | 'Store'    | 'Order'                   | 'Item key'  |
-			| '100,000'  | '$$PurchaseOrder017001$$' | 'Store 01' | '$$PurchaseOrder017001$$' | 'M/White'   |
-			| '200,000'  | '$$PurchaseOrder017001$$' | 'Store 01' | '$$PurchaseOrder017001$$' | 'L/Green'   |
-			| '300,000'  | '$$PurchaseOrder017001$$' | 'Store 01' | '$$PurchaseOrder017001$$' | '36/Yellow' |
+Scenario: _017002 check filling in Row Id info table in the PO
+	* Select PO
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number'                     |
+			| '$$NumberPurchaseOrder017001$$' |
+		And I select current line in "List" table
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov1PurchaseOrder017001$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov2PurchaseOrder017001$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '3' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov3PurchaseOrder017001$$"
+	* Check Row Id info table
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table contains lines
+			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                     |
+			| '$$Rov1PurchaseOrder017001$$' | ''      | '$$Rov1PurchaseOrder017001$$' | 'PI&GR'     | '100,000' | ''          | ''             | '$$Rov1PurchaseOrder017001$$' |
+			| '$$Rov2PurchaseOrder017001$$' | ''      | '$$Rov2PurchaseOrder017001$$' | 'PI&GR'     | '200,000' | ''          | ''             | '$$Rov2PurchaseOrder017001$$' |
+			| '$$Rov3PurchaseOrder017001$$' | ''      | '$$Rov3PurchaseOrder017001$$' | 'PI&GR'     | '300,000' | ''          | ''             | '$$Rov3PurchaseOrder017001$$' |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+	* Copy string and check Row ID Info tab
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '2' | 'Dress' | 'L/Green'  | '200,000' |
+		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "208,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| '#' |
+			| '4' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov4PurchaseOrder017001$$"
+		And I move to "Row ID Info" tab
+		And I click the button named "FormPost"
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table contains lines
+			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref'                     |
+			| '$$Rov1PurchaseOrder017001$$' | ''      | '$$Rov1PurchaseOrder017001$$' | 'PI&GR'     | '100,000' | ''          | ''             | '$$Rov1PurchaseOrder017001$$' |
+			| '$$Rov2PurchaseOrder017001$$' | ''      | '$$Rov2PurchaseOrder017001$$' | 'PI&GR'     | '200,000' | ''          | ''             | '$$Rov2PurchaseOrder017001$$' |
+			| '$$Rov3PurchaseOrder017001$$' | ''      | '$$Rov3PurchaseOrder017001$$' | 'PI&GR'     | '300,000' | ''          | ''             | '$$Rov3PurchaseOrder017001$$' |
+			| '$$Rov4PurchaseOrder017001$$' | ''      | '$$Rov4PurchaseOrder017001$$' | 'PI&GR'     | '208,000' | ''          | ''             | '$$Rov4PurchaseOrder017001$$' |
+		Then the number of "RowIDInfo" table lines is "равно" "4"
+		And "RowIDInfo" table does not contain lines
+			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                     |
+			| '$$Rov2PurchaseOrder017001$$' | ''      | '$$Rov2PurchaseOrder017001$$' | 'PI&GR'     | '208,000' | ''          | ''             | '$$Rov2PurchaseOrder017001$$' |
+	* Delete string and check Row ID Info tab
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Q'       |
+			| '4' | 'Dress' | 'L/Green'  | '208,000' |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I move to "Row ID Info" tab
+		And I click the button named "FormPost"
+		And "RowIDInfo" table contains lines
+			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                     |
+			| '$$Rov1PurchaseOrder017001$$' | ''      | '$$Rov1PurchaseOrder017001$$' | 'PI&GR'     | '100,000' | ''          | ''             | '$$Rov1PurchaseOrder017001$$' |
+			| '$$Rov2PurchaseOrder017001$$' | ''      | '$$Rov2PurchaseOrder017001$$' | 'PI&GR'     | '200,000' | ''          | ''             | '$$Rov2PurchaseOrder017001$$' |
+			| '$$Rov3PurchaseOrder017001$$' | ''      | '$$Rov3PurchaseOrder017001$$' | 'PI&GR'     | '300,000' | ''          | ''             | '$$Rov3PurchaseOrder017001$$' |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+	* Change quantity and check  Row ID Info tab
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '2' | 'Dress' | 'L/Green'  | '200,000' |
+		And I activate "Q" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "7,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		And "RowIDInfo" table contains lines
+			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                     |
+			| '$$Rov1PurchaseOrder017001$$' | ''      | '$$Rov1PurchaseOrder017001$$' | 'PI&GR'     | '100,000' | ''          | ''             | '$$Rov1PurchaseOrder017001$$' |
+			| '$$Rov2PurchaseOrder017001$$' | ''      | '$$Rov2PurchaseOrder017001$$' | 'PI&GR'     | '7,000'   | ''          | ''             | '$$Rov2PurchaseOrder017001$$' |
+			| '$$Rov3PurchaseOrder017001$$' | ''      | '$$Rov3PurchaseOrder017001$$' | 'PI&GR'     | '300,000' | ''          | ''             | '$$Rov3PurchaseOrder017001$$' |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '2' | 'Dress' | 'L/Green'  | '7,000' |
+		And I activate "Q" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPostAndClose"
+		
+	
+Scenario: _017003 copy PO and check filling in Row Id info table
+	* Copy PO
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number'                     |
+			| '$$NumberPurchaseOrder017001$$' |
+		And in the table "List" I click the button named "ListContextMenuCopy"
+	* Check copy info
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
+		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Status" became equal to "Approved"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table became equal
+			| '#' | 'Business unit' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Q'       | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Internal supply request' | 'Store'    | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Cancel reason' |
+			| '1' | ''              | 'en description is empty' | 'Dress'    | 'M/White'   | 'No'                 | '3 050,85'   | '100,000' | 'pcs'  | '200,00' | '18%' | ''              | '16 949,15'  | '20 000,00'    | ''                        | 'Store 01' | ''             | ''       | ''            | 'No'     | ''               | ''              |
+			| '2' | ''              | 'en description is empty' | 'Dress'    | 'L/Green'   | 'No'                 | '6 406,78'   | '200,000' | 'pcs'  | '210,00' | '18%' | ''              | '35 593,22'  | '42 000,00'    | ''                        | 'Store 01' | ''             | ''       | ''            | 'No'     | ''               | ''              |
+			| '3' | ''              | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '11 440,68'  | '300,000' | 'pcs'  | '250,00' | '18%' | ''              | '63 559,32'  | '75 000,00'    | ''                        | 'Store 01' | ''             | ''       | ''            | 'No'     | ''               | ''              |
+		And "ObjectCurrencies" table became equal
+			| 'Movement type'      | 'Type'         | 'Currency from' | 'Currency' | 'Rate presentation' | 'Multiplicity' | 'Amount'    |
+			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1'            | '137 000'   |
+			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '137 000'   |
+			| 'Reporting currency' | 'Reporting'    | 'TRY'           | 'USD'      | '0,1712'            | '1'            | '23 454,40' |
+		Then the form attribute named "BusinessUnit" became equal to ""
+		Then the form attribute named "Autor" became equal to "en description is empty"
+		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+		Then the form attribute named "UseItemsReceiptScheduling" became equal to "No"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "116 101,69"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "20 898,31"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "137 000,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+	* Post PO and check Row ID Info tab
+		And I click the button named "FormPost"
+		And I click "Show row key" button
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table does not contain lines
+			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                     |
+			| '$$Rov1PurchaseOrder017001$$' | ''      | '$$Rov1PurchaseOrder017001$$' | 'PI&GR'     | '100,000' | ''          | ''             | '$$Rov1PurchaseOrder017001$$' |
+			| '$$Rov2PurchaseOrder017001$$' | ''      | '$$Rov2PurchaseOrder017001$$' | 'PI&GR'     | '200,000' | ''          | ''             | '$$Rov2PurchaseOrder017001$$' |
+			| '$$Rov3PurchaseOrder017001$$' | ''      | '$$Rov3PurchaseOrder017001$$' | 'PI&GR'     | '300,000' | ''          | ''             | '$$Rov3PurchaseOrder017001$$' |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+		And I close all client application windows
 
-Scenario: _017003 create document Purchase order - Goods receipt is used
-	When create PurchaseOrder017003
-
-Scenario: _017004 check Purchase Order N3 posting by register Order Balance (+) - Goods receipt is not used
-	* Opening of register Order Balance
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	* Check Purchase Order N3 posting by register Order Balance
-		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                | 'Line number' | 'Store'    | 'Order'                   | 'Item key' |
-			| '500,000'  | '$$PurchaseOrder017003$$' | '1'           | 'Store 02' | '$$PurchaseOrder017003$$' | 'L/Green'  |
 
 Scenario: _017005 check movements by status and status history of a Purchase Order document
 	And I close all client application windows
@@ -721,137 +837,9 @@ Scenario: _019907 clear posting document Purchase Order and check cancellation o
 			| '80,000'   | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '39/19SD'   |
 		And I close current window
 
-Scenario: _019908 create Purchase invoice and Goods receipt based on a Purchase order with that contains packages
-	# Packages are converted into pcs.
-	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-	And I go to line in "List" table
-		| 'Number'    |
-		| '$$NumberPurchaseOrder019901$$' |
-	And in the table "List" I click the button named "ListContextMenuPost"
-	And I click the button named "FormDocumentPurchaseInvoiceGeneratePurchaseInvoice"
-	And I click Select button of "Company" field
-	And I click the button named "FormChoose"
-	And I click Select button of "Store" field
-	And I go to line in "List" table
-		| 'Description' |
-		| 'Store 03'  |
-	And I select current line in "List" table
-	And I click the button named "FormPost"
-	* Post Goods receipt
-		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-		And I click Select button of "Company" field
-		And I select current line in "List" table
-		And I click Select button of "Store" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 03'  |
-		And I select current line in "List" table
-		And I click the button named "FormPostAndClose"
-	And I close current window
 
 
 
-
-Scenario: _017002 check the output of the document movement report for Purchase Order
-	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-	* Check the report output for the selected document from the list
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseOrder017001$$'      |
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And I select "Goods receipt schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseOrder017001$$'            | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
-		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
-		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | 'Attributes'    |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                   | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
-		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'M/White'   | '*'       | '*'             |
-		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'L/Green'   | '*'       | '*'             |
-		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | '36/Yellow' | '*'       | '*'             |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"'          | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | ''              |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Store'        | 'Order'                   | 'Item key'  | 'Row key'   | ''        | ''              |
-		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Store 01'     | '$$PurchaseOrder017001$$' | 'M/White'   | '*'         | ''        | ''              |
-		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Store 01'     | '$$PurchaseOrder017001$$' | 'L/Green'   | '*'         | ''        | ''              |
-		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Store 01'     | '$$PurchaseOrder017001$$' | '36/Yellow' | '*'         | ''        | ''              |
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-	* Check the report output from the selected document
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseOrder017001$$'      |
-		And I select current line in "List" table
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And I select "Goods receipt schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseOrder017001$$'            | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
-		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
-		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | 'Attributes'    |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                   | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
-		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'M/White'   | '*'       | '*'             |
-		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'L/Green'   | '*'       | '*'             |
-		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | '36/Yellow' | '*'       | '*'             |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"'          | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | ''              |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Store'        | 'Order'                   | 'Item key'  | 'Row key'   | ''        | ''              |
-		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Store 01'     | '$$PurchaseOrder017001$$' | 'M/White'   | '*'         | ''        | ''              |
-		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Store 01'     | '$$PurchaseOrder017001$$' | 'L/Green'   | '*'         | ''        | ''              |
-		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Store 01'     | '$$PurchaseOrder017001$$' | '36/Yellow' | '*'         | ''        | ''              |
-	And I close all client application windows
-
-Scenario: _0170020 clear movements Purchase Order and check that there is no movements on the registers
-	* Select Purchase order
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPurchaseOrder017001$$'      |
-	* Clear movements Purchase Order and check that there is no movement on the registers
-		And in the table "List" I click the button named "ListContextMenuUndoPosting"
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		And "ResultTable" spreadsheet document does not contain values
-		| Register  "Goods receipt schedule" |
-		| Register  "Order balance" |
-		And I close all client application windows
-	* Posting the document and check movements
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPurchaseOrder017001$$'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		And I select "Goods receipt schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseOrder017001$$'            | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
-		| 'Document registrations records'     | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
-		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | 'Attributes'    |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                   | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date' |
-		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'M/White'   | '*'       | '*'             |
-		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | 'L/Green'   | '*'       | '*'             |
-		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseOrder017001$$' | 'Store 01'  | '36/Yellow' | '*'       | '*'             |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"'          | ''            | ''       | ''          | ''             | ''                        | ''          | ''          | ''        | ''              |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''          | ''          | ''        | ''              |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Store'        | 'Order'                   | 'Item key'  | 'Row key'   | ''        | ''              |
-		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Store 01'     | '$$PurchaseOrder017001$$' | 'M/White'   | '*'         | ''        | ''              |
-		| ''                                   | 'Receipt'     | '*'      | '200'       | 'Store 01'     | '$$PurchaseOrder017001$$' | 'L/Green'   | '*'         | ''        | ''              |
-		| ''                                   | 'Receipt'     | '*'      | '300'       | 'Store 01'     | '$$PurchaseOrder017001$$' | '36/Yellow' | '*'         | ''        | ''              |
-	And I close all client application windows
 
 
 

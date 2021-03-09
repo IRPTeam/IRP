@@ -257,8 +257,16 @@ Scenario: _040357 check Inventory transfer order movements by the Register  "R40
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R4011 Free stocks"'                         |
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | ''            | ''       | ''          | ''           | ''          |
+			| 'Document registrations records'                         | ''            | ''       | ''          | ''           | ''          |
+			| 'Register  "R4011 Free stocks"'                          | ''            | ''       | ''          | ''           | ''          |
+			| ''                                                       | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
+			| ''                                                       | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  |
+			| ''                                                       | 'Expense'     | '*'      | '2'         | 'Store 02'   | '36/Yellow' |
+			| ''                                                       | 'Expense'     | '*'      | '10'        | 'Store 02'   | 'S/Yellow'  |
+			| ''                                                       | 'Expense'     | '*'      | '10'        | 'Store 02'   | 'XS/Blue'   |
+			| ''                                                       | 'Expense'     | '*'      | '15'        | 'Store 02'   | '36/Red'    |
 		And I close all client application windows
 
 Scenario: _040358 check Inventory transfer order movements by the Register  "R4012 Stock Reservation" (not use GR and SC)
@@ -271,6 +279,14 @@ Scenario: _040358 check Inventory transfer order movements by the Register  "R40
 		And I click "Registrations report" button
 		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R4012 Stock Reservation"'                   |	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | ''            | ''       | ''          | ''           | ''          | ''                                                       |
+			| 'Document registrations records'                         | ''            | ''       | ''          | ''           | ''          | ''                                                       |
+			| 'Register  "R4012 Stock Reservation"'                    | ''            | ''       | ''          | ''           | ''          | ''                                                       |
+			| ''                                                       | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | ''                                                       |
+			| ''                                                       | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | 'Order'                                                  |
+			| ''                                                       | 'Receipt'     | '*'      | '2'         | 'Store 02'   | '36/Yellow' | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' |
+			| ''                                                       | 'Receipt'     | '*'      | '10'        | 'Store 02'   | 'S/Yellow'  | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' |
+			| ''                                                       | 'Receipt'     | '*'      | '10'        | 'Store 02'   | 'XS/Blue'   | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' |
+			| ''                                                       | 'Receipt'     | '*'      | '15'        | 'Store 02'   | '36/Red'    | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' |
 		And I close all client application windows

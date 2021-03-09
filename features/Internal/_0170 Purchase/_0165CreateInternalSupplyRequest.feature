@@ -232,8 +232,8 @@ Scenario: _016501 create document Internal Supply Request
 		Then If dialog box is visible I click "No" button
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'     | 'Q'        | 'Purchase basis'    | 'Item key'          | 'Store'    | 'Unit' |
-			| 'Trousers' | '10,000'   | '$$InternalSupplyRequest016501$$' | '36/Yellow' | 'Store 01' | 'pcs' |
+			| 'Item'     | 'Q'      | 'Internal supply request'         | 'Item key'  | 'Store'    | 'Unit' |
+			| 'Trousers' | '10,000' | '$$InternalSupplyRequest016501$$' | '36/Yellow' | 'Store 01' | 'pcs'  |
 		And I select current line in "ItemList" table
 		And I activate "Q" field in "ItemList" table
 		And I input "9,000" text in "Q" field of "ItemList" table
@@ -247,12 +247,9 @@ Scenario: _016501 create document Internal Supply Request
 		And I save the value of "Number" field as "$$NumberPurchaseOrder016501$$"
 		And I save the window as "$$PurchaseOrder016501$$"
 		And I click the button named "FormPostAndClose"
-	* Check posting of a Purchase order document created based on InternalSupplyRequest
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
 		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                | 'Store'    | 'Order'                           | 'Item key'  |
-			| '9,000'    | '$$PurchaseOrder016501$$' | 'Store 01' | '$$PurchaseOrder016501$$'         | '36/Yellow' |
-			| '9,000'    | '$$PurchaseOrder016501$$' | 'Store 01' | '$$InternalSupplyRequest016501$$' | '36/Yellow' |
+			| 'Number'        |
+			| '$$NumberPurchaseOrder016501$$' |
 		And I close all client application windows
 	
 

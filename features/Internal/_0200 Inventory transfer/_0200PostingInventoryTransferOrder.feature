@@ -286,7 +286,7 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 			And "List" table contains lines
 				| 'Object'                         | 'Status'   |
 				| '$$InventoryTransferOrder020013$$' | 'Wait' |
-				| '$$InventoryTransferOrder020013$$' | 'Approved'     |
+				| '$$InventoryTransferOrder020013$$' | 'Send'     |
 				| '$$InventoryTransferOrder020013$$' | 'Receive'  |
 			And I close current window
 			And I click the button named "FormPostAndClose"

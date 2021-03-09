@@ -6824,6 +6824,161 @@ Scenario: _0154165 check tax and net amount calculation when change total amount
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
 			And I close all client application windows			
 
+
+Scenario: _0154167 check tax rate recalculation when change partner term (Purchase order)
+	* Create PO
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"	
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Adel'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Adel'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Vendor, USD'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I remove checkbox "Price includes tax"
+	* Check tax rate recalculation
+		And I move to "Item list" tab
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| 'Price type'        | 'Item'  | 'Item key' | 'Tax amount' | 'Q'     | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' |
+			| 'Basic Price Types' | 'Dress' | 'XS/Blue'  | ''           | '1,000' | 'pcs'  | '520,00' | '0%'  | ''              | '520,00'     | '520,00'       |
+		* Change partner term and update tax
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Vendor, TRY' |
+			And I select current line in "List" table
+			Then the form attribute named "TaxRates" became equal to "Yes"
+			Then "Update item list info" window is opened
+			And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Tax amount' | 'Q'     | 'Unit' | 'VAT' | 'Net amount' | 'Total amount' |
+			| 'Dress' | 'XS/Blue'  | '93,60'      | '1,000' | 'pcs'  | '18%' | '520,00'     | '613,60'       |
+		* Change partner term and not update tax
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Vendor, USD' |
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I change checkbox "Do you want to change tax rates according to the partner term?"
+			And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Tax amount' | 'Q'     | 'Unit' | 'VAT' | 'Net amount' | 'Total amount' |
+			| 'Dress' | 'XS/Blue'  | '93,60'      | '1,000' | 'pcs'  | '18%' | '520,00'     | '613,60'       |
+		And I close all client application windows
+
+
+Scenario: _0154168 check tax rate recalculation when change partner term (Purchase invoice)
+	* Create PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"	
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Adel'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Adel'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Vendor, USD'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I remove checkbox "Price includes tax"
+	* Check tax rate recalculation
+		And I move to "Item list" tab
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| 'Price type'        | 'Item'  | 'Item key' | 'Tax amount' | 'Q'     | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' |
+			| 'Basic Price Types' | 'Dress' | 'XS/Blue'  | ''           | '1,000' | 'pcs'  | '520,00' | '0%'  | ''              | '520,00'     | '520,00'       |
+		* Change partner term and update tax
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Vendor, TRY' |
+			And I select current line in "List" table
+			Then the form attribute named "TaxRates" became equal to "Yes"
+			Then "Update item list info" window is opened
+			And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Tax amount' | 'Q'     | 'Unit' | 'VAT' | 'Net amount' | 'Total amount' |
+			| 'Dress' | 'XS/Blue'  | '93,60'      | '1,000' | 'pcs'  | '18%' | '520,00'     | '613,60'       |
+		* Change partner term and not update tax
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Vendor, USD' |
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I change checkbox "Do you want to change tax rates according to the partner term?"
+			And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Tax amount' | 'Q'     | 'Unit' | 'VAT' | 'Net amount' | 'Total amount' |
+			| 'Dress' | 'XS/Blue'  | '93,60'      | '1,000' | 'pcs'  | '18%' | '520,00'     | '613,60'       |
+		And I close all client application windows		
+
+
+		
+				
+			
+						
+
+
+		
+				
+
+		
+				
+			
+
+
 Scenario: _0154180 check that author does not copy when copying a document
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"	
 	And I go to line in "List" table

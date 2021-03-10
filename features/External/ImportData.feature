@@ -1996,37 +1996,37 @@ Scenario: Create information register UserSettings records (remaining stock cont
 	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
 	And I check or create information register "UserSettings" records:
 		| 'UserOrGroup' | 'MetadataObject'                  | 'AttributeName'                 | 'KindOfAttribute'               | 'Value' |
-		| '$$IdCI$$' | 'Document.Bundling'                  | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.Bundling'                  | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.Bundling'                  | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.Bundling'                  | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
 		| '$$IdCI$$' | 'Document.GoodsReceipt'              | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
 		| '$$IdCI$$' | 'Document.GoodsReceipt'              | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.OpeningEntry'              | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.OpeningEntry'              | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PhysicalInventory'         | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PhysicalInventory'         | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.OpeningEntry'              | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.OpeningEntry'              | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.PhysicalInventory'         | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.PhysicalInventory'         | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
 		| '$$IdCI$$' | 'Document.PurchaseInvoice'           | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
 		| '$$IdCI$$' | 'Document.PurchaseInvoice'           | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
 		| '$$IdCI$$' | 'Document.PurchaseOrder'             | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
 		| '$$IdCI$$' | 'Document.PurchaseOrder'             | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseReturn'            | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseReturn'            | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseReturnOrder'       | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.RetailReturnReceipt'       | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.RetailReturnReceipt'       | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.RetailSalesReceipt'        | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.RetailSalesReceipt'        | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.PurchaseReturn'            | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.PurchaseReturn'            | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.PurchaseReturnOrder'       | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.RetailReturnReceipt'       | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.RetailReturnReceipt'       | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.RetailSalesReceipt'        | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.RetailSalesReceipt'        | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
 		| '$$IdCI$$' | 'Document.SalesInvoice'              | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
 		| '$$IdCI$$' | 'Document.SalesInvoice'              | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
 		| '$$IdCI$$' | 'Document.SalesOrder'                | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
 		| '$$IdCI$$' | 'Document.SalesOrder'                | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
 		| '$$IdCI$$' | 'Document.ShipmentConfirmation'      | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
 		| '$$IdCI$$' | 'Document.ShipmentConfirmation'      | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.StockAdjustmentAsSurplus'  | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.StockAdjustmentAsSurplus'  | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.StockAdjustmentAsWriteOff' | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.StockAdjustmentAsWriteOff' | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.Unbundling'                | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.Unbundling'                | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.StockAdjustmentAsSurplus'  | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.StockAdjustmentAsSurplus'  | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.StockAdjustmentAsWriteOff' | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.StockAdjustmentAsWriteOff' | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.Unbundling'                | 'CheckBalance_StockBalance'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.Unbundling'                | 'CheckBalance_StockReservation' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
 		| '$$IdCI$$' | 'Document.InventoryTransfer'         | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
 		| '$$IdCI$$' | 'Document.InventoryTransfer'         | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
 		| '$$IdCI$$' | 'Document.InventoryTransferOrder'    | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |

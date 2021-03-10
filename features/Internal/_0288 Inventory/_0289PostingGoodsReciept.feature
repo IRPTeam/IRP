@@ -81,7 +81,7 @@ Scenario: _028901 create document Goods Receipt based on Purchase invoice (with 
 			| 'Shirt, 38/Black'                                | 'Yes'                                            | '2,000'    | 'pcs'            | '150,00' | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "7"
 		And I click "Ok" button
-	* Create GR and check creation
+	* Create GR and check filling in
 		And "ItemList" table contains lines
 			| '#' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Store'    | 'Internal supply request' | 'Quantity' | 'Sales invoice' | 'Unit'           | 'Receipt basis'                                  | 'Purchase invoice'                               | 'Currency' | 'Sales return order' | 'Sales order' | 'Purchase order'                               | 'Inventory transfer order' | 'Sales return' |
 			| '1' | 'Dress' | ''                   | 'XS/Blue'  | 'Store 02' | ''                        | '1,000'    | ''              | 'pcs'            | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'TRY'      | ''                   | ''            | 'Purchase order 102 dated 03.03.2021 08:59:33' | ''                         | ''             |
@@ -89,6 +89,15 @@ Scenario: _028901 create document Goods Receipt based on Purchase invoice (with 
 			| '3' | 'Boots' | ''                   | '37/18SD'  | 'Store 02' | ''                        | '2,000'    | ''              | 'Boots (12 pcs)' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'TRY'      | ''                   | ''            | 'Purchase order 102 dated 03.03.2021 08:59:33' | ''                         | ''             |
 			| '4' | 'Shirt' | ''                   | '38/Black' | 'Store 02' | ''                        | '2,000'    | ''              | 'pcs'            | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'TRY'      | ''                   | ''            | ''                                             | ''                         | ''             |
 		Then the number of "ItemList" table lines is "равно" "4"
+	* Check RowId info
+		And I click "Show row key" button		
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key' | 'Basis'                                          | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '*'   | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'c9b5514d-364e-4712-bc66-6530bb6a9ec6' | ''          | '1,000'  | '06d436b9-6ac6-493d-a81d-c1bef6c8597e' | 'GR'           | 'c9b5514d-364e-4712-bc66-6530bb6a9ec6' |
+			| '2' | '*'   | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | '216a343e-3f69-40e5-a386-381f2dc9ed5f' | ''          | '12,000' | '42409c7c-a984-4411-b165-752fe75fe0a8' | 'GR'           | '216a343e-3f69-40e5-a386-381f2dc9ed5f' |
+			| '3' | '*'   | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'cbb88d81-b47c-4350-a555-6ab883274a1a' | ''          | '24,000' | 'cd747541-4559-4543-ba36-1f5b79b24fef' | 'GR'           | 'cbb88d81-b47c-4350-a555-6ab883274a1a' |
+			| '4' | '*'   | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'e3824d62-3c37-47e7-8d3e-81f29986e69f' | ''          | '2,000'  | 'e3824d62-3c37-47e7-8d3e-81f29986e69f' | 'GR'           | 'e3824d62-3c37-47e7-8d3e-81f29986e69f' |
+		Then the number of "RowIDInfo" table lines is "равно" "4"
 		And I close all client application windows
 
 
@@ -108,13 +117,21 @@ Scenario: _028902 create document Goods Receipt based on Purchase order (with PI
 			| 'Boots, 37/18SD'                                 | 'Yes'                                            | '2,000'    | 'Boots (12 pcs)' | '300,00' | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "5"
 		And I click "Ok" button
-	* Create GR and check creation
+	* Create GR and check filling in
 		And "ItemList" table contains lines
 			| '#' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Store'    | 'Internal supply request' | 'Quantity' | 'Sales invoice' | 'Unit'           | 'Receipt basis'                                  | 'Purchase invoice'                               | 'Currency' | 'Sales return order' | 'Sales order' | 'Purchase order'                               | 'Inventory transfer order' | 'Sales return' |
 			| '1' | 'Dress' | ''                   | 'XS/Blue'  | 'Store 02' | ''                        | '1,000'    | ''              | 'pcs'            | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'TRY'      | ''                   | ''            | 'Purchase order 102 dated 03.03.2021 08:59:33' | ''                         | ''             |
 			| '2' | 'Shirt' | ''                   | '36/Red'   | 'Store 02' | ''                        | '12,000'   | ''              | 'pcs'            | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'TRY'      | ''                   | ''            | 'Purchase order 102 dated 03.03.2021 08:59:33' | ''                         | ''             |
 			| '3' | 'Boots' | ''                   | '37/18SD'  | 'Store 02' | ''                        | '2,000'    | ''              | 'Boots (12 pcs)' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'TRY'      | ''                   | ''            | 'Purchase order 102 dated 03.03.2021 08:59:33' | ''                         | ''             |
 		Then the number of "ItemList" table lines is "равно" "3"
+	* Check RowId info
+		And I click "Show row key" button		
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key' | 'Basis'                                          | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '*'   | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'c9b5514d-364e-4712-bc66-6530bb6a9ec6' | ''          | '1,000'  | '06d436b9-6ac6-493d-a81d-c1bef6c8597e' | 'GR'           | 'c9b5514d-364e-4712-bc66-6530bb6a9ec6' |
+			| '2' | '*'   | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | '216a343e-3f69-40e5-a386-381f2dc9ed5f' | ''          | '12,000' | '42409c7c-a984-4411-b165-752fe75fe0a8' | 'GR'           | '216a343e-3f69-40e5-a386-381f2dc9ed5f' |
+			| '3' | '*'   | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'cbb88d81-b47c-4350-a555-6ab883274a1a' | ''          | '24,000' | 'cd747541-4559-4543-ba36-1f5b79b24fef' | 'GR'           | 'cbb88d81-b47c-4350-a555-6ab883274a1a' |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I click the button named "FormPost"
 		And I delete "$$NumberGoodsReceipt028901$$" variable
 		And I delete "$$GoodsReceipt028901$$" variable

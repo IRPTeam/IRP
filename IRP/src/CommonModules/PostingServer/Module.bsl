@@ -1178,71 +1178,56 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 	EndIf;
 	
 	LineNumberAndItemKeyFromItemList = GetLineNumberAndItemKeyFromItemList(Ref, TableNameWithItemKeys);
-	If Parameters.DocumentDataTables.Property("StockReservation_Exists") Then
-		Records_InDocument = Undefined;
-		If Unposting Then
-			Records_InDocument = Parameters.Object.RegisterRecords.StockReservation.Unload();
-		Else
-			PostingDataTable = Parameters.PostingDataTables[Parameters.Object.RegisterRecords.StockReservation];
-			If PostingDataTable <> Undefined Then
-				Records_InDocument = PostingDataTable.RecordSet;
-			EndIf;
-		EndIf;	
-			
-		If Records_InDocument <> Undefined 
-			And TypeOf(Records_InDocument) = Type("ValueTable") 
-			And Not Records_InDocument.Columns.Count() Then
-				Records_InDocument = PostingServer.CreateTable(Metadata.AccumulationRegisters.StockReservation);
-		EndIf;
+	
+	// R4011B_FreeStocks
+	Records_InDocument = Undefined;
+	If Unposting Then
+		Records_InDocument = Parameters.Object.RegisterRecords.R4011B_FreeStocks.Unload();
+	Else
+		Records_InDocument = GetQueryTableByName("R4011B_FreeStocks", Parameters);
+	EndIf;	
 		
-		If Not Cancel And Records_InDocument <> Undefined 
-			And Not AccReg.StockReservation.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
-			Records_InDocument, 
-			Parameters.DocumentDataTables.StockReservation_Exists, 
-			RecordType, Unposting, AddInfo) Then
-			Cancel = True;
-		EndIf;
+	If Not Records_InDocument.Columns.Count() Then
+		Records_InDocument = PostingServer.CreateTable(Metadata.AccumulationRegisters.R4011B_FreeStocks);
+	EndIf;
+				
+	If Not Cancel And Not AccReg.R4011B_FreeStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, Records_InDocument, 
+			                                                    GetQueryTableByName("Exists_R4011B_FreeStocks", Parameters), 
+			                                                    RecordType,  Unposting, AddInfo) Then
+		Cancel = True;
 	EndIf;
 	
-	If Parameters.DocumentDataTables.Property("StockBalance_Exists") Then
-		Records_InDocument = Undefined;
-		If Unposting Then
-			Records_InDocument = Parameters.Object.RegisterRecords.StockBalance.Unload();
-		Else
-			PostingDataTable = Parameters.PostingDataTables[Parameters.Object.RegisterRecords.StockBalance];
-			If PostingDataTable <> Undefined Then
-				Records_InDocument = PostingDataTable.RecordSet;
-			EndIf;
-		EndIf;
-		
-		If Records_InDocument <> Undefined 
-			And TypeOf(Records_InDocument) = Type("ValueTable") 
-			And Not Records_InDocument.Columns.Count() Then
-				Records_InDocument = PostingServer.CreateTable(Metadata.AccumulationRegisters.StockBalance);
-		EndIf;
-		
-		If Not Cancel And Records_InDocument <> Undefined
-			And Not AccReg.StockBalance.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
-			Records_InDocument, 
-			Parameters.DocumentDataTables.StockBalance_Exists, 
-			RecordType, Unposting, AddInfo) Then
-			Cancel = True;
-		EndIf;
+	// R4010B_ActualStocks
+	Records_InDocument = Undefined;
+	If Unposting Then
+		Records_InDocument = Parameters.Object.RegisterRecords.StockBalance.Unload();
+	Else
+		Records_InDocument = GetQueryTableByName("R4010B_ActualStocks", Parameters);
+	EndIf;
+	
+	If Not Records_InDocument.Columns.Count() Then
+		Records_InDocument = PostingServer.CreateTable(Metadata.AccumulationRegisters.R4010B_ActualStocks);
+	EndIf;
+			
+	If Not Cancel And Not AccReg.R4010B_ActualStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, Records_InDocument, 
+			                                                      GetQueryTableByName("R4010B_ActualStocks", Parameters), 
+			                                                      RecordType, Unposting, AddInfo) Then
+		Cancel = True;
 	EndIf;
 EndProcedure
 
-Function CheckBalance_StockReservation(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
+Function CheckBalance_R4011B_FreeStocks(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
 	Parameters = New Structure();
-	Parameters.Insert("RegisterName" , "StockReservation");
-	Parameters.Insert("Operation"    , "Reservation");
+	Parameters.Insert("RegisterName" , "R4011B_FreeStocks");
+	Parameters.Insert("Operation"    , "R4011B_FreeStocks");
 	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);	
 EndFunction	
 
-Function CheckBalance_StockBalance(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
+Function CheckBalance_R4010B_ActualStocks(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
 	Parameters = New Structure();
-	Parameters.Insert("RegisterName" , "StockBalance");
-	Parameters.Insert("Operation"    , "Write off");
-	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+	Parameters.Insert("RegisterName" , "R4010B_ActualStocks");
+	Parameters.Insert("Operation"    , "R4010B_ActualStocks");
+	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);	
 EndFunction	
 
 Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)

@@ -139,13 +139,6 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''               | ''         | '' | '' |
 			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document' | 'Currency' | '' | '' |
 			| ''                               | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '11 000'         | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | ''               | 'TRY'      | '' | '' |
-			And I select "Stock reservation" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '20'        | 'Store 01'   | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
 			And I select "Sales turnovers" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -173,13 +166,7 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 			| ''                               | '*'      | '9 322,03'  | 'Main Company' | ''              | ''             | 'L/Green'  | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
 			| ''                               | '*'      | '9 322,03'  | 'Main Company' | ''              | ''             | 'L/Green'  | 'TRY'      | ''                    | 'TRY'                          | 'No'                   | '' | '' | '' |
 			| ''                               | '*'      | '9 322,03'  | 'Main Company' | ''              | ''             | 'L/Green'  | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
-			And I select "Stock balance" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock balance"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                          | 'Expense'     | '*'      | '20'        | 'Store 01'   | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
+			
 			And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -513,13 +500,6 @@ Scenario: _060004 check the offset of the advance for Sales invoice with the typ
 			| ''                               | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '11 000'         | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | ''               | 'TRY'      | '' | '' |
 			| ''                               | 'Expense'     | '*'      | ''                     | ''               | ''                       | '11 000'         | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | ''               | 'TRY'      | '' | '' |
 			| ''                               | 'Expense'     | '*'      | ''                     | ''               | '11 000'                 | ''               | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | ''               | 'TRY'      | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '20'        | 'Store 01'   | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Sales turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -556,13 +536,7 @@ Scenario: _060004 check the offset of the advance for Sales invoice with the typ
 			| ''                                   | 'Expense'     | '*'      | '1 883,2'   | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | 'USD'      | '$$BankReceipt060004$$' | 'Reporting currency'           | 'No'                   | '' | '' | '' |
 			| ''                                   | 'Expense'     | '*'      | '11 000'    | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | 'TRY'      | '$$BankReceipt060004$$' | 'Local currency'               | 'No'                   | '' | '' | '' |
 			| ''                                   | 'Expense'     | '*'      | '11 000'    | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | 'TRY'      | '$$BankReceipt060004$$' | 'en description is empty'      | 'No'                   | '' | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock balance"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                          | 'Expense'     | '*'      | '20'        | 'Store 01'   | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
+		
 		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -640,13 +614,6 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''        | ''                 | ''               | ''         | '' | '' |
 		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name'       | 'Basis document' | 'Currency' | '' | '' |
 		| ''                               | 'Receipt'     | '*'      | ''                     | '11 000'         | ''                       | ''               | 'Main Company' | 'Veritas' | 'Company Veritas ' | ''               | 'TRY'      | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '20'        | 'Store 01'   | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -672,13 +639,7 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 		| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 		| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 		| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'            | ''            | ''          | ''                     | ''               | ''                          | ''                          | ''                 | ''                  | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                          | ''                          | ''                 | ''                  | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | ''            | ''          | 'Quantity'             | 'Store'          | 'Item key'                  | ''                          | ''                 | ''                  | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '*'         | '20'                   | 'Store 01'       | 'L/Green'                   | ''                          | ''                 | ''                  | ''                        | ''                             | ''                     | ''                             | ''                     |
+		
 		And I close all client application windows
 	
 Scenario: _060006 create Cash payment with the type of settlements under standard contracts and check its movements
@@ -901,13 +862,6 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 		| ''                               | 'Receipt'     | '*'      | ''                     | '11 000'         | ''                       | ''               | 'Main Company' | 'Veritas' | 'Company Veritas ' | ''               | 'TRY'      | '' | '' |
 		| ''                               | 'Expense'     | '*'      | ''                     | '11 000'         | ''                       | ''               | 'Main Company' | 'Veritas' | 'Company Veritas ' | ''               | 'TRY'      | '' | '' |
 		| ''                               | 'Expense'     | '*'      | '11 000'               | ''               | ''                       | ''               | 'Main Company' | 'Veritas' | 'Company Veritas ' | ''               | 'TRY'      | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '20'        | 'Store 01'   | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -946,13 +900,7 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 		| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 		| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 		| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'            | ''            | ''          | ''                     | ''               | ''                          | ''                          | ''                 | ''                      | ''                             | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                          | ''                          | ''                 | ''                      | ''                             | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | ''            | ''          | 'Quantity'             | 'Store'          | 'Item key'                  | ''                          | ''                 | ''                      | ''                             | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '*'         | '20'                   | 'Store 01'       | 'L/Green'                   | ''                          | ''                 | ''                      | ''                             | ''                             | ''                     | ''                             | ''                     |
+		
 	And I close all client application windows
 	
 

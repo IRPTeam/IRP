@@ -306,13 +306,6 @@ Scenario: _022011 check the output of the document movement report for Purchase 
 		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
 		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
 		| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
 		And I select "Order balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -348,13 +341,6 @@ Scenario: _022011 check the output of the document movement report for Purchase 
 		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
 		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
 		| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
 		And I select "Order balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -406,13 +392,6 @@ Scenario: _02201101 clear movements Purchase Return Order and check that there i
 		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
 		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
 		| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
 		And I select "Order balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

@@ -386,15 +386,6 @@ Scenario: _0154135 create document Retail Sales Receipt
 				| ''                            | '*'      | '106,78'    | '106,78'        | '593,22'     | '$$RetailSalesReceipt015413$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
 				| ''                            | '*'      | '106,78'    | '106,78'        | '593,22'     | '$$RetailSalesReceipt015413$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
 				| ''                            | '*'      | '106,78'    | '106,78'        | '593,22'     | '$$RetailSalesReceipt015413$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-			And I select "Stock reservation" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | 'Expense'     | '*'      | '1'         | 'Store 01'   | 'XS/Blue'  | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | 'Expense'     | '*'      | '1'         | 'Store 01'   | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | 'Expense'     | '*'      | '2'         | 'Store 01'   | '38/Black' | '' | '' | '' | '' | '' | '' | '' | '' |
 			And I select "Sales turnovers" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -440,15 +431,6 @@ Scenario: _0154135 create document Retail Sales Receipt
 				| ''                            | 'Receipt'     | '*'      | '220,85'    | 'Main Company' | 'Transit Main' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' | '' | '' |
 				| ''                            | 'Receipt'     | '*'      | '1 290'     | 'Main Company' | 'Transit Main' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' | '' | '' | '' |
 				| ''                            | 'Receipt'     | '*'      | '1 290'     | 'Main Company' | 'Transit Main' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' | '' | '' | '' |
-			And I select "Stock balance" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Stock balance"'      | ''            | ''          | ''              | ''              | ''                             | ''              | ''                             | ''                     | ''                             | ''                             | ''                             | ''                             | ''                     |
-				| ''                               | 'Record type' | 'Period'    | 'Resources'     | 'Dimensions'    | ''                             | ''              | ''                             | ''                     | ''                             | ''                             | ''                             | ''                             | ''                     |
-				| ''                               | ''            | ''          | 'Quantity'      | 'Store'         | 'Item key'                     | ''              | ''                             | ''                     | ''                             | ''                             | ''                             | ''                             | ''                     |
-				| ''                               | 'Expense'     | '*'         | '1'             | 'Store 01'      | 'XS/Blue'                      | ''              | ''                             | ''                     | ''                             | ''                             | ''                             | ''                             | ''                     |
-				| ''                               | 'Expense'     | '*'         | '1'             | 'Store 01'      | 'L/Green'                      | ''              | ''                             | ''                     | ''                             | ''                             | ''                             | ''                             | ''                     |
-				| ''                               | 'Expense'     | '*'         | '2'             | 'Store 01'      | '38/Black'                     | ''              | ''                             | ''                     | ''                             | ''                             | ''                             | ''                             | ''                     |
 			And I close all client application windows
 
 			
@@ -563,14 +545,6 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 			| ''                        | 'Record type' | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''              | ''             | ''             | ''                    | '' | '' | '' | '' |
 			| ''                        | ''            | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Business unit' | 'Payment type' | 'Account'      | 'Payment terminal'    | '' | '' | '' | '' |
 			| ''                        | 'Receipt'     | '*'      | '-900'      | '9'          | 'Main Company' | 'Shop 01'       | 'Card 01'      | 'Transit Main' | 'Payment terminal 01' | '' | '' | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Receipt'     | '*'      | '1'         | 'Store 01'   | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Receipt'     | '*'      | '1'         | 'Store 01'   | '38/Black' | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Sales turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -594,14 +568,7 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 			| ''                            | 'Expense'     | '*'      | '154,08'    | 'Main Company' | 'Transit Main' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' | '' | '' |
 			| ''                            | 'Expense'     | '*'      | '900'       | 'Main Company' | 'Transit Main' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' | '' | '' | '' |
 			| ''                            | 'Expense'     | '*'      | '900'       | 'Main Company' | 'Transit Main' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' | '' | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock balance"'          | ''            | ''          | ''          | ''             | ''                             | ''              | ''                             | ''                     | ''                             | ''                             | ''                             | ''                  | ''                     |
-			| ''                                   | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                             | ''              | ''                             | ''                     | ''                             | ''                             | ''                             | ''                  | ''                     |
-			| ''                                   | ''            | ''          | 'Quantity'  | 'Store'        | 'Item key'                     | ''              | ''                             | ''                     | ''                             | ''                             | ''                             | ''                  | ''                     |
-			| ''                                   | 'Receipt'     | '*'         | '1'         | 'Store 01'     | 'L/Green'                      | ''              | ''                             | ''                     | ''                             | ''                             | ''                             | ''                  | ''                     |
-			| ''                                   | 'Receipt'     | '*'         | '1'         | 'Store 01'     | '38/Black'                     | ''              | ''                             | ''                     | ''                             | ''                             | ''                             | ''                  | ''                     |
+		
 
 
 Scenario: _0154137 create document Retail Sales Receipt from Point of sale (payment by cash)

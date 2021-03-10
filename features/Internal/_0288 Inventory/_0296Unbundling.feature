@@ -409,20 +409,7 @@ Scenario: _029612 create Unbundling (Store use Goods receipt and does not use Sh
 			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Receipt basis'         | 'Item key' | 'Row key' |
 			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 07'   | '$$Unbundling0029612$$' | 'XS/Blue'  | '*'       |
 			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 07'   | '$$Unbundling0029612$$' | '36/Red'   | '*'       |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''                              | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                              | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                      | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '2'         | 'Store 07'   | 'Bound Dress+Shirt/Dress+Shirt' | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock balance"'             | ''            | ''       | ''          | ''           | ''                              | ''         | ''        |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                              | ''         | ''        |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                      | ''         | ''        |
-			| ''                                      | 'Expense'     | '*'      | '2'         | 'Store 07'   | 'Bound Dress+Shirt/Dress+Shirt' | ''         | ''        |
+		
 		And I close all client application windows
 	
 Scenario: _029613 create Unbundling (Store use Shipment confirmation and does not use Goods receipt)
@@ -475,142 +462,11 @@ Scenario: _029613 create Unbundling (Store use Shipment confirmation and does no
 			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                      | ''                              | ''        |
 			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Shipment basis'        | 'Item key'                      | 'Row key' |
 			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 08'   | '$$Unbundling0029613$$' | 'Bound Dress+Shirt/Dress+Shirt' | '*'       |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''                              | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                              | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                      | '' | '' |
-			| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 08'   | 'XS/Blue'                       | '' | '' |
-			| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 08'   | '36/Red'                        | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '2'         | 'Store 08'   | 'Bound Dress+Shirt/Dress+Shirt' | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock balance"'             | ''            | ''       | ''          | ''           | ''                              | ''                              | ''        |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                              | ''                              | ''        |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                      | ''                              | ''        |
-			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 08'   | 'XS/Blue'                       | ''                              | ''        |
-			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 08'   | '36/Red'                        | ''                              | ''        |
+	
 		And I close all client application windows
 
 
 
-Scenario: _029612 check the output of the document movement report for Unbundling
-	Given I open hyperlink "e1cib/list/Document.Unbundling"
-	* Check the report output for the selected document from the list
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberUnBundling0029601$$'      |
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$UnBundling0029601$$'          | ''            | ''       | ''          | ''           | ''          |
-		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          |
-		| 'Register  "Stock reservation"'  | ''            | ''       | ''          | ''           | ''          |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  |
-		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'S/Yellow'  |
-		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'XS/Blue'   |
-		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'L/Green'   |
-		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
-		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'      | ''            | ''       | ''          | ''           | ''          |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  |
-		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'S/Yellow'  |
-		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'XS/Blue'   |
-		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'L/Green'   |
-		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
-		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
-
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.Unbundling"
-	* Check the report output from the selected document
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberUnBundling0029601$$' |    
-		And I select current line in "List" table
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$UnBundling0029601$$'          | ''            | ''       | ''          | ''           | ''          |
-		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          |
-		| 'Register  "Stock reservation"'  | ''            | ''       | ''          | ''           | ''          |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  |
-		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'S/Yellow'  |
-		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'XS/Blue'   |
-		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'L/Green'   |
-		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
-		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'      | ''            | ''       | ''          | ''           | ''          |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  |
-		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'S/Yellow'  |
-		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'XS/Blue'   |
-		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'L/Green'   |
-		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
-		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
-
-	And I close all client application windows
-
-Scenario: _02961201 clear movements Unbundling and check that there is no movements on the registers 
-	* Open list form Unbundling
-		Given I open hyperlink "e1cib/list/Document.Unbundling"
-	* Check the report generation
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberUnBundling0029601$$'  |    
-	* Clear movements document and check that there is no movement on the registers
-		And in the table "List" I click the button named "ListContextMenuUndoPosting"
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "Stock reservation"'  |
-			| 'Register  "Stock balance"'      |
-		And I close all client application windows
-	* Posting the document and check movements
-		Given I open hyperlink "e1cib/list/Document.Unbundling"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberUnBundling0029601$$' |     
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$UnBundling0029601$$'          | ''            | ''       | ''          | ''           | ''          |
-		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          |
-		| 'Register  "Stock reservation"'  | ''            | ''       | ''          | ''           | ''          |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  |
-		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'S/Yellow'  |
-		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'XS/Blue'   |
-		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'L/Green'   |
-		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
-		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'      | ''            | ''       | ''          | ''           | ''          |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  |
-		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'S/Yellow'  |
-		| ''                               | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'XS/Blue'   |
-		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'L/Green'   |
-		| ''                               | 'Receipt'     | '*'      | '4'         | 'Store 01'   | 'M/Brown'   |
-		| ''                               | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Dress/A-8' |
-		And I close all client application windows
 
 
 Scenario: _300520 check connection to Unbundling report "Related documents"

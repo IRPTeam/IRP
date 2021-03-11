@@ -412,22 +412,7 @@ Scenario: _018012 Purchase invoice creation without PO
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice018012$$"
 		And I save the window as "$$PurchaseInvoice018012$$"
 		And I click the button named "FormPostAndClose"
-	* Check movements by register
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                  | 'Store'    | 'Item key'  |
-			| '10,000'   | '$$PurchaseInvoice018012$$' | 'Store 01' | 'Dress/A-8' |
-			| '20,000'   | '$$PurchaseInvoice018012$$' | 'Store 01' | 'Boots/S-8' |
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                  | 'Store'    | 'Item key'  |
-			| '10,000'   | '$$PurchaseInvoice018012$$' | 'Store 01' | 'Dress/A-8' |
-			| '20,000'   | '$$PurchaseInvoice018012$$' | 'Store 01' | 'Boots/S-8' |
-		Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
-		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                  | 'Item key'  |
-			| '10,000'   | '$$PurchaseInvoice018012$$' | 'Dress/A-8' |
-			| '20,000'   | '$$PurchaseInvoice018012$$' | 'Boots/S-8' |
+	
 
 
 

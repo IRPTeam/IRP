@@ -525,13 +525,6 @@ Scenario: _029107 create a Sales order for service and product (Store does not u
 		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' |
 		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' |
 		| ''                               | 'Receipt'     | '*'      | '10'        | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '10'        | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' |
 		And I select "Sales order turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -562,7 +555,7 @@ Scenario: _029107 create a Sales order for service and product (Store does not u
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'      | 'Order'                | 'Store'    | 'Item key' | 'Row key' | 'Delivery date'                | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '1'         | 'Main Company' | '$$SalesOrder029107$$' | 'Store 01' | 'Rent'     | '*'       | '*'                            | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | '$$SalesOrder029107$$' | 'Store 01' | 'Table'  | '*'       | '*'                            | ''                     |
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R4011B_FreeStocks"
 		And "List" table does not contain lines
 			| 'Recorder'             | 'Item key' |
 			| '$$SalesOrder029107$$' | 'Interner' |
@@ -654,13 +647,6 @@ Scenario: _029108 create a Sales order for service and product (Store use Shipme
 		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' |
 		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' |
 		| ''                               | 'Receipt'     | '*'      | '10'        | 'Store 02'   | 'Table'    | '' | '' | '' | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '10'        | 'Store 02'   | 'Table'    | '' | '' | '' | '' | '' |
 		And I select "Sales order turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -691,7 +677,7 @@ Scenario: _029108 create a Sales order for service and product (Store use Shipme
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'      | 'Order'                | 'Store'    | 'Item key' | 'Row key' | 'Delivery date'                | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '1'         | 'Main Company' | '$$SalesOrder029108$$' | 'Store 02' | 'Rent'     | '*'       | '*'                            | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | '$$SalesOrder029108$$' | 'Store 02' | 'Table'    | '*'       | '*'                            | ''                     |
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R4011B_FreeStocks"
 		And "List" table does not contain lines
 			| 'Recorder'             | 'Item key' |
 			| '$$SalesOrder029108$$' | 'Interner' |
@@ -795,13 +781,6 @@ Scenario: _029109 create a Sales order for service and product (Store does not u
 		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' |
 		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' |
 		| ''                              | 'Receipt'     | '*'      | '10'        | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '10'        | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' |
 		And I select "Shipment orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -831,13 +810,6 @@ Scenario: _029109 create a Sales order for service and product (Store does not u
 		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                | 'Item key' | 'Row key' | '' | '' | '' |
 		| ''                          | 'Receipt'     | '*'      | '1'         | 'Store 01'   | '$$SalesOrder029109$$' | 'Rent'     | '*'       | '' | '' | '' |
 		| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 01'   | '$$SalesOrder029109$$' | 'Table'    | '*'       | '' | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' |
-		| ''                          | 'Expense'     | '*'      | '10'        | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' |
 		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -847,7 +819,7 @@ Scenario: _029109 create a Sales order for service and product (Store does not u
 		| ''                                           | 'Receipt'     | '*'         | '1'         | 'Main Company'         | '$$SalesOrder029109$$'  | 'Store 01' | 'Rent'     | '*'       | '*'                            | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company'         | '$$SalesOrder029109$$'  | 'Store 01' | 'Table'  | '*'       | '*'                            | ''                     |
 		| ''                                           | 'Expense'     | '*'         | '10'        | 'Main Company'         | '$$SalesOrder029109$$'  | 'Store 01' | 'Table'  | '*'       | '*'                            | ''                     |
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R4011B_FreeStocks"
 		And "List" table does not contain lines
 			| 'Recorder'             | 'Item key' |
 			| '$$SalesOrder029109$$' | 'Interner' |
@@ -948,13 +920,6 @@ Scenario: _029110 create a Sales order for service and product (Store use Shipme
 		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' |
 		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' |
 		| ''                              | 'Receipt'     | '*'      | '10'        | 'Store 02'   | 'Table'    | '' | '' | '' | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '10'        | 'Store 02'   | 'Table'    | '' | '' | '' | '' | '' |
 		And I select "Sales order turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -985,7 +950,7 @@ Scenario: _029110 create a Sales order for service and product (Store use Shipme
 		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'      | 'Order'                | 'Store'    | 'Item key' | 'Row key' | 'Delivery date'                | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '1'         | 'Main Company' | '$$SalesOrder029110$$' | 'Store 02' | 'Rent'     | '*'       | '*'                            | ''                     |
 		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | '$$SalesOrder029110$$' | 'Store 02' | 'Table'  | '*'       | '*'                            | ''                     |
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R4011B_FreeStocks"
 		And "List" table does not contain lines
 			| 'Recorder'             | 'Item key' |
 			| '$$SalesOrder029110$$' | 'Interner' |
@@ -1107,13 +1072,6 @@ Scenario: _029115 create a Sales invoice for service and product (Store does not
 			| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                | 'Item key' | 'Row key' | '' | '' | '' | '' | '' | '' |
 			| ''                          | 'Expense'     | '*'      | '1'         | 'Store 01'   | '$$SalesOrder029107$$' | 'Rent'     | '*'       | '' | '' | '' | '' | '' | '' |
 			| ''                          | 'Expense'     | '*'      | '10'        | 'Store 01'   | '$$SalesOrder029107$$' | 'Table'    | '*'       | '' | '' | '' | '' | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock balance"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                          | 'Expense'     | '*'      | '10'        | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -1123,10 +1081,6 @@ Scenario: _029115 create a Sales invoice for service and product (Store does not
 			| ''                                           | 'Expense'     | '*'         | '1'                    | 'Main Company'   | '$$SalesOrder029107$$'    | 'Store 01'       | 'Rent'                    | '*'                        | '*'                            | ''                             | ''                             | ''                             | ''                     |
 			| ''                                           | 'Expense'     | '*'         | '10'                   | 'Main Company'   | '$$SalesOrder029107$$'    | 'Store 01'       | 'Table'                   | '*'                        | '*'                            | ''                             | ''                             | ''                             | ''                     |
 		And I close all client application windows
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-		And "List" table does not contain lines
-			| 'Recorder'             | 'Item key' |
-			| '$$SalesInvoice029115$$' | 'Interner' |
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
 		And "List" table does not contain lines
 			| 'Recorder'             | 'Item key' |
@@ -1416,13 +1370,7 @@ Scenario: _029121 create a Sales invoice for service and product (Store use Ship
 			| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'           | ''                               | ''         | ''        | '' | '' |
 			| ''                            | ''            | ''       | 'Quantity'  | 'Order'                | 'Shipment confirmation'          | 'Item key' | 'Row key' | '' | '' |
 			| ''                            | 'Receipt'     | '*'      | '10'        | '$$SalesOrder029110$$' | '$$ShipmentConfirmation029121$$' | 'Table'    | '*'       | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock balance"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' |
-			| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' |
-			| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' |
-			| ''                          | 'Expense'     | '*'      | '10'        | 'Store 02'   | 'Table'    | '' | '' | '' | '' |
+	
 		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -1642,13 +1590,6 @@ Scenario: _029130 create Retail sales receipt for service and product
 			| ''                            | '*'      | '30,51'     | '30,51'         | '169,49'     | '$$RetailSalesReceipt029130$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                            | '*'      | '30,51'     | '30,51'         | '169,49'     | '$$RetailSalesReceipt029130$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                            | '*'      | '30,51'     | '30,51'         | '169,49'     | '$$RetailSalesReceipt029130$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '2'         | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Sales turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -1677,23 +1618,10 @@ Scenario: _029130 create Retail sales receipt for service and product
 			| ''                               | '*'      | '338,98'    | 'Main Company' | ''              | ''             | 'Table'    | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
 			| ''                               | '*'      | '338,98'    | 'Main Company' | ''              | ''             | 'Table'    | 'TRY'      | ''                    | 'TRY'                          | 'No'                   | '' | '' | '' |
 			| ''                               | '*'      | '338,98'    | 'Main Company' | ''              | ''             | 'Table'    | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock balance"'      | ''            | ''          | ''              | ''              | ''                             | ''              | ''                             | ''                    | ''                             | ''                             | ''                             | ''                             | ''                     |
-			| ''                               | 'Record type' | 'Period'    | 'Resources'     | 'Dimensions'    | ''                             | ''              | ''                             | ''                    | ''                             | ''                             | ''                             | ''                             | ''                     |
-			| ''                               | ''            | ''          | 'Quantity'      | 'Store'         | 'Item key'                     | ''              | ''                             | ''                    | ''                             | ''                             | ''                             | ''                             | ''                     |
-			| ''                               | 'Expense'     | '*'         | '2'             | 'Store 01'      | 'Table'                        | ''              | ''                             | ''                    | ''                             | ''                             | ''                             | ''                             | ''                     |
+		
 		And I close all client application windows
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-		And "List" table does not contain lines
-			| 'Recorder'                     | 'Item key' |
-			| '$$RetailSalesReceipt029130$$' | 'Interner' |
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-		And "List" table does not contain lines
-			| 'Recorder'                     | 'Item key' |
-			| '$$RetailSalesReceipt029130$$' | 'Interner' |
-		And I close all client application windows
+	
+
 		
 
 				
@@ -1770,13 +1698,6 @@ Scenario: _029140 create PurchaseReturn for service and product (based on $$Purc
 		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                         | ''         |
 		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'           | 'Currency' |
 		| ''                               | 'Receipt'     | '*'      | ''                     | '-300'           | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseReturn029140$$' | 'TRY'      |
-	And I select "Stock reservation" exact value from "Register" drop-down list
-	And I click "Generate report" button
-	And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '1'         | 'Store 02'   | 'Router'   | '' | '' | '' | '' | '' | '' |
 	And I select "Reconciliation statement" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
@@ -1784,7 +1705,7 @@ Scenario: _029140 create PurchaseReturn for service and product (based on $$Purc
 		| ''                                      | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                          | ''                          | ''                  | ''                   | ''                             | ''                             | ''                     |
 		| ''                                      | ''            | ''          | 'Amount'               | 'Company'        | 'Legal name'                | 'Currency'                  | ''                  | ''                   | ''                             | ''                             | ''                     |
 		| ''                                      | 'Receipt'     | '*'         | '300'                  | 'Main Company'   | 'Company Ferron BP'         | 'TRY'                       | ''                  | ''                   | ''                             | ''                             | ''                     |
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R4011B_FreeStocks"
 	And "List" table does not contain lines
 		| 'Recorder'                     | 'Item key' |
 		| '$$PurchaseReturn029140$$' | 'Interner' |
@@ -1837,13 +1758,6 @@ Scenario: _029141 create Purchase return order and Purchase return for service a
 		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
 		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
 		| ''                              | 'Receipt'     | '*'      | '1'         | 'Store 02'   | 'Router'   | '' | '' | '' | '' | '' | '' |
-	And I select "Stock reservation" exact value from "Register" drop-down list
-	And I click "Generate report" button
-	And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '1'         | 'Store 02'   | 'Router'   | '' | '' | '' | '' | '' | '' |
 	And I select "Order balance" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
@@ -1852,7 +1766,7 @@ Scenario: _029141 create Purchase return order and Purchase return for service a
 		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Order'                         | 'Item key'                  | 'Row key'  | ''         | ''        | ''                             | ''                     |
 		| ''                               | 'Receipt'     | '*'         | '1'         | ''           | '$$PurchaseReturnOrder029141$$' | 'Interner'                  | '*'        | ''         | ''        | ''                             | ''                     |
 		| ''                               | 'Receipt'     | '*'         | '1'         | 'Store 02'   | '$$PurchaseReturnOrder029141$$' | 'Router'                    | '*'        | ''         | ''        | ''                             | ''                     |
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R4011B_FreeStocks"
 	And "List" table does not contain lines
 		| 'Recorder'                     | 'Item key' |
 		| '$$PurchaseReturnOrder029141$$' | 'Interner' |
@@ -2060,13 +1974,6 @@ Scenario: _029142 create Purchase return for service and product without Purchas
 			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                         | ''         |
 			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'           | 'Currency' |
 			| ''                               | 'Receipt'     | '*'      | ''                     | '-250'           | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseReturn029142$$' | 'TRY'      |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '1'         | 'Store 03'   | 'Table'    | '' | '' | '' | '' | '' | '' |
 		And I select "Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -2074,7 +1981,7 @@ Scenario: _029142 create Purchase return for service and product without Purchas
 			| ''                                      | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                         | ''                 | ''                  | ''                   | ''                             | ''                             | ''                     |
 			| ''                                      | ''            | ''          | 'Amount'               | 'Company'        | 'Legal name'               | 'Currency'         | ''                  | ''                   | ''                             | ''                             | ''                     |
 			| ''                                      | 'Receipt'     | '*'         | '250'                  | 'Main Company'   | 'Company Ferron BP'        | 'TRY'              | ''                  | ''                   | ''                             | ''                             | ''                     |
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R4011B_FreeStocks"
 		And "List" table does not contain lines
 			| 'Recorder'                     | 'Item key' |
 			| '$$PurchaseReturn029142$$' | 'Interner' |
@@ -2126,13 +2033,6 @@ Scenario: _029150 create Retail return receipt for service and product
 			| ''                        | 'Record type' | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''              | ''             | ''             | ''                 | '' | '' | '' | '' |
 			| ''                        | ''            | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Business unit' | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
 			| ''                        | 'Receipt'     | '*'      | '-450'      | ''           | 'Main Company' | ''              | 'Cash'         | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Sales turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -2156,13 +2056,7 @@ Scenario: _029150 create Retail return receipt for service and product
 			| ''                            | 'Expense'     | '*'      | '77,04'     | 'Main Company' | 'Cash desk №4' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' | '' | '' |
 			| ''                            | 'Expense'     | '*'      | '450'       | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' | '' | '' | '' |
 			| ''                            | 'Expense'     | '*'      | '450'       | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' | '' | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock balance"'          | ''            | ''          | ''          | ''             | ''                             | ''              | ''                             | ''                     | ''                             | ''                             | ''                             | ''                  | ''                     |
-			| ''                                   | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                             | ''              | ''                             | ''                     | ''                             | ''                             | ''                             | ''                  | ''                     |
-			| ''                                   | ''            | ''          | 'Quantity'  | 'Store'        | 'Item key'                     | ''              | ''                             | ''                     | ''                             | ''                             | ''                             | ''                  | ''                     |
-			| ''                                   | 'Receipt'     | '*'         | '2'         | 'Store 01'     | 'Table'                        | ''              | ''                             | ''                     | ''                             | ''                             | ''                             | ''                  | ''                     |
+		
 		And I close all client application windows
 	* Create Retail return receipt without Retail sales receipt
 			Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
@@ -2257,13 +2151,6 @@ Scenario: _029150 create Retail return receipt for service and product
 				| ''                        | 'Record type' | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''              | ''             | ''             | ''                 | '' | '' | '' | '' |
 				| ''                        | ''            | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Business unit' | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
 				| ''                        | 'Receipt'     | '*'      | '-250'      | ''           | 'Main Company' | ''              | 'Cash'         | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
-			And I select "Stock reservation" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | 'Receipt'     | '*'      | '1'         | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
 			And I select "Sales turnovers" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -2287,21 +2174,8 @@ Scenario: _029150 create Retail return receipt for service and product
 				| ''                            | 'Expense'     | '*'      | '42,8'      | 'Main Company' | 'Cash desk №4' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' | '' | '' |
 				| ''                            | 'Expense'     | '*'      | '250'       | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' | '' | '' | '' |
 				| ''                            | 'Expense'     | '*'      | '250'       | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' | '' | '' | '' |
-			And I select "Stock balance" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Stock balance"'          | ''            | ''          | ''          | ''             | ''                              | ''              | ''                              | ''                     | ''                             | ''                              | ''                             | ''                  | ''                     |
-				| ''                                   | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                              | ''              | ''                              | ''                     | ''                             | ''                              | ''                             | ''                  | ''                     |
-				| ''                                   | ''            | ''          | 'Quantity'  | 'Store'        | 'Item key'                      | ''              | ''                              | ''                     | ''                             | ''                              | ''                             | ''                  | ''                     |
-				| ''                                   | 'Receipt'     | '*'         | '1'         | 'Store 01'     | 'Table'                         | ''              | ''                              | ''                     | ''                             | ''                              | ''                             | ''                  | ''                     |
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-		And "List" table does not contain lines
-			| 'Recorder'                     | 'Item key' |
-			| '$$RetailReturnReceipt029150$$' | 'Interner' |
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-		And "List" table does not contain lines
-			| 'Recorder'                     | 'Item key' |
-			| '$$RetailReturnReceipt029150$$' | 'Interner' |
+			
+		
 		And I close all client application windows
 		
 Scenario: _029160 create Sales return for service and product (Store use Shipment confirmation, based on $$NumberSalesInvoice029121$$)
@@ -2438,13 +2312,6 @@ Scenario: _029161 create Sales return for service and product (Store does not us
 			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                     | ''         | '' | '' |
 			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'       | 'Currency' | '' | '' |
 			| ''                               | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '-7 100'         | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$SalesReturn29161$$' | 'TRY'      | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:	
-			| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Receipt'     | '*'      | '10'        | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Sales turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:	
@@ -2476,21 +2343,8 @@ Scenario: _029161 create Sales return for service and product (Store does not us
 			| ''                                    | 'Receipt'     | '*'      | '7 100'     | 'Main Company' | '$$SalesReturn29161$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 			| ''                                    | 'Receipt'     | '*'      | '7 100'     | 'Main Company' | '$$SalesReturn29161$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 			| ''                                    | 'Receipt'     | '*'      | '7 100'     | 'Main Company' | '$$SalesReturn29161$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:	
-			| 'Register  "Stock balance"'            | ''            | ''          | ''                     | ''               | ''                       | ''               | ''                       | ''                         | ''                             | ''                             | ''                             | ''                  | ''                     |
-			| ''                                     | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                       | ''               | ''                       | ''                         | ''                             | ''                             | ''                             | ''                  | ''                     |
-			| ''                                     | ''            | ''          | 'Quantity'             | 'Store'          | 'Item key'               | ''               | ''                       | ''                         | ''                             | ''                             | ''                             | ''                  | ''                     |
-			| ''                                     | 'Receipt'     | '*'         | '10'                   | 'Store 01'       | 'Table'                  | ''               | ''                       | ''                         | ''                             | ''                             | ''                             | ''                  | ''                     |
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-		And "List" table does not contain lines
-			| 'Recorder'                     | 'Item key' |
-			| '$$SalesReturn29161$$' | 'Interner' |
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-		And "List" table does not contain lines
-			| 'Recorder'                     | 'Item key' |
-			| '$$SalesReturn29161$$' | 'Interner' |
+		
+	
 		And I close all client application windows
 
 Scenario: _029162 create Sales return without Sales invoice
@@ -2570,13 +2424,6 @@ Scenario: _029162 create Sales return without Sales invoice
 			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                      | ''         | '' | '' |
 			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'        | 'Currency' | '' | '' |
 			| ''                               | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '-250'           | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$SalesReturn029162$$' | 'TRY'      | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Receipt'     | '*'      | '1'         | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Sales turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -2608,21 +2455,7 @@ Scenario: _029162 create Sales return without Sales invoice
 			| ''                                    | 'Receipt'     | '*'      | '250'       | 'Main Company' | '$$SalesReturn029162$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 			| ''                                    | 'Receipt'     | '*'      | '250'       | 'Main Company' | '$$SalesReturn029162$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 			| ''                                    | 'Receipt'     | '*'      | '250'       | 'Main Company' | '$$SalesReturn029162$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock balance"'            | ''            | ''          | ''                     | ''               | ''                       | ''               | ''                      | ''                         | ''                             | ''                             | ''                             | ''                  | ''                     |
-			| ''                                     | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                       | ''               | ''                      | ''                         | ''                             | ''                             | ''                             | ''                  | ''                     |
-			| ''                                     | ''            | ''          | 'Quantity'             | 'Store'          | 'Item key'               | ''               | ''                      | ''                         | ''                             | ''                             | ''                             | ''                  | ''                     |
-			| ''                                     | 'Receipt'     | '*'         | '1'                    | 'Store 01'       | 'Table'                  | ''               | ''                      | ''                         | ''                             | ''                             | ''                             | ''                  | ''                     |
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-		And "List" table does not contain lines
-			| 'Recorder'                     | 'Item key' |
-			| '$$SalesReturn029162$$' | 'Interner' |
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-		And "List" table does not contain lines
-			| 'Recorder'                     | 'Item key' |
-			| '$$SalesReturn029162$$' | 'Interner' |
+		
 		And I close all client application windows
 
 

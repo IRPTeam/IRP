@@ -139,11 +139,6 @@ Scenario: _022001 create document Purchase return order, store use Shipment conf
 			| 'Quantity' | 'Recorder'                      | 'Line number' | 'Store'    | 'Item key' |
 			| '2,000'    | '$$PurchaseReturnOrder022001$$' | '1'           | 'Store 02' | 'L/Green'  |
 		And I close current window
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-		And "List" table does not contain lines
-			| 'Quantity' | 'Recorder'                      | 'Line number' | 'Store'    | 'Item key' |
-			| '2,000'    | '$$PurchaseReturnOrder022001$$' | '1'           | 'Store 02' | 'L/Green'  |
-		And I close all client application windows
 	* Set Approved status
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 		And I go to line in "List" table
@@ -181,11 +176,6 @@ Scenario: _022004 check movements of the document Purchase return order in the O
 	| 'Quantity' | 'Recorder'                      | 'Line number' | 'Store'    | 'Item key' |
 	| '2,000'    | '$$PurchaseReturnOrder022001$$' | '1'           | 'Store 02' | 'L/Green'  |
 
-Scenario: _022005 check movements of the document Purchase return order in the StockReservation register (store use Shipment confirmation)
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table contains lines
-	| 'Quantity' | 'Recorder'                      | 'Line number' | 'Store'    | 'Item key' |
-	| '2,000'    | '$$PurchaseReturnOrder022001$$' | '1'           | 'Store 02' | 'L/Green'  |
 
 
 Scenario: _022006 create document Purchase return order, store does not use Shipment confirmation, based on Purchase invoice
@@ -258,11 +248,7 @@ Scenario: _022009 check movements of the document Purchase return order in the P
 	| 'Quantity' | 'Recorder'                      | 'Line number' | 'Store'    | 'Item key'  |
 	| '3,000'    | '$$PurchaseReturnOrder022006$$' | '1'           | 'Store 01' | '36/Yellow' |
 
-Scenario: _022010 check movements of the document Purchase return order in the StockReservation (store does not use Shipment confirmation)
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table contains lines
-	| 'Quantity' | 'Recorder'                      | 'Line number' | 'Store'    | 'Item key'  |
-	| '3,000'    | '$$PurchaseReturnOrder022006$$' | '1'           | 'Store 01' | '36/Yellow' |
+
 
 
 Scenario: _022016 check totals in the document Purchase return order
@@ -306,13 +292,6 @@ Scenario: _022011 check the output of the document movement report for Purchase 
 		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
 		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
 		| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
 		And I select "Order balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -348,13 +327,6 @@ Scenario: _022011 check the output of the document movement report for Purchase 
 		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
 		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
 		| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
 		And I select "Order balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -406,13 +378,6 @@ Scenario: _02201101 clear movements Purchase Return Order and check that there i
 		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
 		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
 		| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
 		And I select "Order balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

@@ -153,24 +153,6 @@ Scenario: _028402 check GR - SR movements
 			| ''                                    | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''         | ''                       | ''          |
 			| ''                                    | ''            | ''                           | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                  | 'Item key'  |
 			| ''                                    | 'Receipt'     | '$$DateGoodsReceipt028401$$' | '1'         | 'Main Company' | 'Store 02' | '$$GoodsReceipt028401$$' | '38/Yellow' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document contains lines
-			| '$$GoodsReceipt028401$$'         | ''            | ''                           | ''          | ''           | ''          |
-			| 'Document registrations records' | ''            | ''                           | ''          | ''           | ''          |
-			| 'Register  "Stock reservation"'  | ''            | ''                           | ''          | ''           | ''          |
-			| ''                               | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions' | ''          |
-			| ''                               | ''            | ''                           | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                               | 'Receipt'     | '$$DateGoodsReceipt028401$$' | '1'         | 'Store 02'   | '38/Yellow' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document contains lines
-			| '$$GoodsReceipt028401$$'         | ''            | ''                           | ''          | ''           | ''          |
-			| 'Document registrations records' | ''            | ''                           | ''          | ''           | ''          |
-			| 'Register  "Stock balance"'      | ''            | ''                           | ''          | ''           | ''          |
-			| ''                               | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions' | ''          |
-			| ''                               | ''            | ''                           | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                               | 'Receipt'     | '$$DateGoodsReceipt028401$$' | '1'         | 'Store 02'   | '38/Yellow' |
 		And I close all client application windows
 	* SR movements
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
@@ -187,14 +169,6 @@ Scenario: _028402 check GR - SR movements
 			| ''                                    | 'Record type' | 'Period'                    | 'Resources' | 'Dimensions'   | ''         | ''                       | ''          |
 			| ''                                    | ''            | ''                          | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                  | 'Item key'  |
 			| ''                                    | 'Expense'     | '$$DateSalesReturn028401$$' | '1'         | 'Main Company' | 'Store 02' | '$$GoodsReceipt028401$$' | '38/Yellow' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document does not contain values
-			| 'Register  "Stock reservation"'             |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document does not contain values
-			| 'Register  "Stock balance"'             |
 		And I close all client application windows
 		
 

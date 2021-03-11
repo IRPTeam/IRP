@@ -291,13 +291,6 @@ Scenario: _2990002 create Stock adjustment as surplus
 		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' |
 		| ''                                    | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' |
 		| ''                                    | 'Receipt'     | '*'      | '8'         | 'Main Company' | 'M/White'  | '' | '' | '' | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '8'         | 'Store 02'   | 'M/White'  | '' | '' | '' | '' | '' |
 		And I select "Revenues turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -305,13 +298,7 @@ Scenario: _2990002 create Stock adjustment as surplus
 		| ''                               | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'           |
 		| ''                               | ''       | 'Amount'    | 'Company'      | 'Business unit'           | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' |
 		| ''                               | '*'      | ''          | 'Main Company' | 'Distribution department' | 'Delivery'     | 'M/White'  | ''         | ''                    | ''                             | 'No'                   |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'           | ''            | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                     |
-		| ''                                    | 'Record type' | 'Period'    | 'Resources'    | 'Dimensions'              | ''             | ''         | ''         | ''                    | ''                             | ''                     |
-		| ''                                    | ''            | ''          | 'Quantity'     | 'Store'                   | 'Item key'     | ''         | ''         | ''                    | ''                             | ''                     |
-		| ''                                    | 'Receipt'     | '*'         | '8'            | 'Store 02'                | 'M/White'      | ''         | ''         | ''                    | ''                             | ''                     |
+		
 		And I close all client application windows
 	* Check movements after re-select store and company (store does not use Shipment confirmation and Goods receipt)
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
@@ -338,13 +325,6 @@ Scenario: _2990002 create Stock adjustment as surplus
 		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'     | ''         | '' | '' | '' | '' | '' |
 		| ''                                    | ''            | ''       | 'Quantity'  | 'Company'        | 'Item key' | '' | '' | '' | '' | '' |
 		| ''                                    | 'Receipt'     | '*'      | '8'         | 'Second Company' | 'M/White'  | '' | '' | '' | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '8'         | 'Store 01'   | 'M/White'  | '' | '' | '' | '' | '' |
 		And I select "Revenues turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -352,13 +332,7 @@ Scenario: _2990002 create Stock adjustment as surplus
 		| ''                               | 'Period' | 'Resources' | 'Dimensions'     | ''                        | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'           |
 		| ''                               | ''       | 'Amount'    | 'Company'        | 'Business unit'           | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' |
 		| ''                               | '*'      | ''          | 'Second Company' | 'Distribution department' | 'Delivery'     | 'M/White'  | ''         | ''                    | ''                             | 'No'                   |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'      | ''            | ''          | ''               | ''                        | ''             | ''         | ''         | ''                    | ''                       | ''                     |
-		| ''                               | 'Record type' | 'Period'    | 'Resources'      | 'Dimensions'              | ''             | ''         | ''         | ''                    | ''                       | ''                     |
-		| ''                               | ''            | ''          | 'Quantity'       | 'Store'                   | 'Item key'     | ''         | ''         | ''                    | ''                       | ''                     |
-		| ''                               | 'Receipt'     | '*'         | '8'              | 'Store 01'                | 'M/White'      | ''         | ''         | ''                    | ''                       | ''                     |
+	
 		And I close all client application windows
 
 Scenario: _2990003 create Stock adjustment as write off
@@ -430,20 +404,7 @@ Scenario: _2990003 create Stock adjustment as write off
 		| ''                               | 'Period' | 'Resources' | 'Dimensions'   | ''                        | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'           |
 		| ''                               | ''       | 'Amount'    | 'Company'      | 'Business unit'           | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' |
 		| ''                               | '*'      | ''          | 'Main Company' | 'Distribution department' | 'Delivery'     | 'M/White'  | ''         | ''                    | ''                             | 'No'                   |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '8'         | 'Store 02'   | 'M/White'  | '' | '' | '' | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'            | ''            | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                     |
-		| ''                                     | 'Record type' | 'Period'    | 'Resources'    | 'Dimensions'              | ''             | ''         | ''         | ''                    | ''                             | ''                     |
-		| ''                                     | ''            | ''          | 'Quantity'     | 'Store'                   | 'Item key'     | ''         | ''         | ''                    | ''                             | ''                     |
-		| ''                                     | 'Expense'     | '*'         | '8'            | 'Store 02'                | 'M/White'      | ''         | ''         | ''                    | ''                             | ''                     |
+	
 		And I close all client application windows
 	* Check movements after re-select store and company (store does not use Shipment confirmation and Goods receipt)
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
@@ -477,20 +438,7 @@ Scenario: _2990003 create Stock adjustment as write off
 		| ''                               | 'Period' | 'Resources' | 'Dimensions'     | ''                        | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'           |
 		| ''                               | ''       | 'Amount'    | 'Company'        | 'Business unit'           | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' |
 		| ''                               | '*'      | ''          | 'Second Company' | 'Distribution department' | 'Delivery'     | 'M/White'  | ''         | ''                    | ''                             | 'No'                   |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '8'         | 'Store 01'   | 'M/White'  | '' | '' | '' | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'            | ''            | ''          | ''               | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                     |
-		| ''                                     | 'Record type' | 'Period'    | 'Resources'      | 'Dimensions'              | ''             | ''         | ''         | ''                    | ''                             | ''                     |
-		| ''                                     | ''            | ''          | 'Quantity'       | 'Store'                   | 'Item key'     | ''         | ''         | ''                    | ''                             | ''                     |
-		| ''                                     | 'Expense'     | '*'         | '8'              | 'Store 01'                | 'M/White'      | ''         | ''         | ''                    | ''                             | ''                     |
+	
 		And I close all client application windows
 
 Scenario: _2990004 create Physical inventory (store use GR and SC)
@@ -541,14 +489,6 @@ Scenario: _2990004 create Physical inventory (store use GR and SC)
 		| ''                                        | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                             | ''         |
 		| ''                                        | ''            | ''       | 'Quantity'  | 'Store'      | 'Basis document'               | 'Item key' |
 		| ''                                        | 'Receipt'     | '*'      | '5'         | 'Store 05'   | '$$PhysicalInventory2990004$$' | 'S/Yellow' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' |
-		| ''                              | 'Receipt'     | '*'      | '5'         | 'Store 05'   | 'S/Yellow' | '' |
-		| ''                              | 'Expense'     | '*'      | '2'         | 'Store 05'   | 'XS/Blue'  | '' |
 		And I select "Stock adjustment as write-off" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -556,14 +496,7 @@ Scenario: _2990004 create Physical inventory (store use GR and SC)
 		| ''                                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                             | ''         |
 		| ''                                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Basis document'               | 'Item key' |
 		| ''                                          | 'Receipt'     | '*'      | '2'         | 'Store 05'   | '$$PhysicalInventory2990004$$' | 'XS/Blue'  |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'                 | ''            | ''       | ''          | ''           | ''                             | ''         |
-		| ''                                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                             | ''         |
-		| ''                                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                     | ''         |
-		| ''                                          | 'Receipt'     | '*'      | '5'         | 'Store 05'   | 'S/Yellow'                     | ''         |
-		| ''                                          | 'Expense'     | '*'      | '2'         | 'Store 05'   | 'XS/Blue'                      | ''         |
+	
 		And I close all client application windows
 	* Clear movements Physical Inventory and check movements
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
@@ -592,14 +525,6 @@ Scenario: _2990004 create Physical inventory (store use GR and SC)
 		| ''                                        | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                             | ''         |
 		| ''                                        | ''            | ''       | 'Quantity'  | 'Store'      | 'Basis document'               | 'Item key' |
 		| ''                                        | 'Receipt'     | '*'      | '5'         | 'Store 05'   | '$$PhysicalInventory2990004$$' | 'S/Yellow' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' |
-		| ''                              | 'Receipt'     | '*'      | '5'         | 'Store 05'   | 'S/Yellow' | '' |
-		| ''                              | 'Expense'     | '*'      | '2'         | 'Store 05'   | 'XS/Blue'  | '' |
 		And I select "Stock adjustment as write-off" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -607,14 +532,7 @@ Scenario: _2990004 create Physical inventory (store use GR and SC)
 		| ''                                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                             | ''         |
 		| ''                                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Basis document'               | 'Item key' |
 		| ''                                          | 'Receipt'     | '*'      | '2'         | 'Store 05'   | '$$PhysicalInventory2990004$$' | 'XS/Blue'  |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'                 | ''            | ''       | ''          | ''           | ''                             | ''         |
-		| ''                                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                             | ''         |
-		| ''                                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                     | ''         |
-		| ''                                          | 'Receipt'     | '*'      | '5'         | 'Store 05'   | 'S/Yellow'                     | ''         |
-		| ''                                          | 'Expense'     | '*'      | '2'         | 'Store 05'   | 'XS/Blue'                      | ''         |
+	
 		And I close all client application windows
 
 
@@ -666,14 +584,6 @@ Scenario: _2990005 create Physical inventory (store does not use GR and SC)
 		| ''                                        | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                             | ''          |
 		| ''                                        | ''            | ''       | 'Quantity'  | 'Store'      | 'Basis document'               | 'Item key'  |
 		| ''                                        | 'Receipt'     | '*'      | '5'         | 'Store 06'   | '$$PhysicalInventory2990005$$' | '36/Yellow' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''          | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' |
-		| ''                              | 'Receipt'     | '*'      | '5'         | 'Store 06'   | '36/Yellow' | '' |
-		| ''                              | 'Expense'     | '*'      | '2'         | 'Store 06'   | 'XS/Blue'   | '' |
 		And I select "Stock adjustment as write-off" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -681,14 +591,7 @@ Scenario: _2990005 create Physical inventory (store does not use GR and SC)
 		| ''                                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                             | ''         |
 		| ''                                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Basis document'               | 'Item key' |
 		| ''                                          | 'Receipt'     | '*'      | '2'         | 'Store 06'   | '$$PhysicalInventory2990005$$' | 'XS/Blue'  |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'                 | ''            | ''       | ''          | ''           | ''                      | ''          |
-		| ''                                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                      | ''          |
-		| ''                                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'              | ''          |
-		| ''                                          | 'Receipt'     | '*'      | '5'         | 'Store 06'   | '36/Yellow'             | ''          |
-		| ''                                          | 'Expense'     | '*'      | '2'         | 'Store 06'   | 'XS/Blue'               | ''          |
+	
 		And I close all client application windows
 
 Scenario: _2990006 create Stock adjustment as surplus based on Physical inventory

@@ -1226,6 +1226,7 @@ Function  GetTableOfSupplyRequests(Store, StartDate, EndDate)
 	|;
 	|
 	|
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmpOrderBalance.Store AS Store,
@@ -1238,20 +1239,18 @@ Function  GetTableOfSupplyRequests(Store, StartDate, EndDate)
 	|	END AS Unit,
 	|	tmpOrderBalance.QuantityProcurement AS QuantityProcurement,
 	|	tmpOrderBalance.QuantityOrdered AS QuantityOrdered,
-//	|	tmpOrderBalance.QuantityProcurement - tmpOrderBalance.QuantityOrdered -
-//	|		ISNULL(StockReservationBalance.QuantityBalance, 0) AS QuantityShortage,
 	|	OrderBalanceBalance.QuantityBalance AS QuantityExpired,
-	|	ISNULL(StockReservationBalance.QuantityBalance, 0) AS OpenBalance
+	|	ISNULL(R4011B_FreeStocksBalance.QuantityBalance, 0) AS OpenBalance
 	|FROM
 	|	tmpOrderBalance AS tmpOrderBalance
-	|		LEFT JOIN AccumulationRegister.StockReservation.Balance(BEGINOFPERIOD(&StartDate, DAY), (Store, ItemKey) IN
+	|		LEFT JOIN AccumulationRegister.R4011B_FreeStocks.Balance(BEGINOFPERIOD(&StartDate, DAY), (Store, ItemKey) IN
 	|			(SELECT
 	|				tmp.Store,
 	|				tmp.ItemKey
 	|			FROM
-	|				tmpOrderBalance AS tmp)) AS StockReservationBalance
-	|		ON tmpOrderBalance.Store = StockReservationBalance.Store
-	|		AND tmpOrderBalance.ItemKey = StockReservationBalance.ItemKey
+	|				tmpOrderBalance AS tmp)) AS R4011B_FreeStocksBalance
+	|		ON tmpOrderBalance.Store = R4011B_FreeStocksBalance.Store
+	|		AND tmpOrderBalance.ItemKey = R4011B_FreeStocksBalance.ItemKey
 	|		LEFT JOIN AccumulationRegister.OrderBalance.Balance(, (Store, ItemKey) IN
 	|			(SELECT
 	|				tmp.Store,

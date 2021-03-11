@@ -399,13 +399,13 @@ Procedure Update_TableOfBalance()
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	StockReservationBalance.Store,
+	|	R4011B_FreeStocksBalance.Store,
 	|	UNDEFINED AS PurchaseOrder,
-	|	StockReservationBalance.QuantityBalance AS Balance,
+	|	R4011B_FreeStocksBalance.QuantityBalance AS Balance,
 	|	0 AS BalanceIncoming
 	|FROM
-	|	AccumulationRegister.StockReservation.Balance(ENDOFPERIOD(&DateOfRelevance, day), ItemKey = &ItemKey
-	|	AND Store <> &Store) AS StockReservationBalance
+	|	AccumulationRegister.R4011B_FreeStocks.Balance(ENDOFPERIOD(&DateOfRelevance, day), ItemKey = &ItemKey
+	|	AND Store <> &Store) AS R4011B_FreeStocksBalance
 	|
 	|UNION ALL
 	|

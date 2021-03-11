@@ -9,7 +9,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("OrderReservation"                     , PostingServer.CreateTable(AccReg.OrderReservation));
 	Tables.Insert("InventoryBalance"                     , PostingServer.CreateTable(AccReg.InventoryBalance));
 	Tables.Insert("GoodsInTransitOutgoing"               , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
-	Tables.Insert("StockBalance"                         , PostingServer.CreateTable(AccReg.StockBalance));
 	Tables.Insert("ShipmentOrders"                       , PostingServer.CreateTable(AccReg.ShipmentOrders));
 	Tables.Insert("ShipmentConfirmationSchedule_Receipt" , PostingServer.CreateTable(AccReg.ShipmentConfirmationSchedule));
 	Tables.Insert("ShipmentConfirmationSchedule_Expense" , PostingServer.CreateTable(AccReg.ShipmentConfirmationSchedule));
@@ -20,8 +19,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("GoodsInTransitOutgoing_Exists" , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
 	Tables.Insert("OrderProcurement_Exists"       , PostingServer.CreateTable(AccReg.OrderProcurement));
 	Tables.Insert("ShipmentOrders_Exists"         , PostingServer.CreateTable(AccReg.ShipmentOrders));
-	
-	Tables.Insert("StockBalance_Exists"     , PostingServer.CreateTable(AccReg.StockBalance));
 	
 	Tables.OrderBalance_Exists = 
 	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
@@ -34,10 +31,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables.ShipmentOrders_Exists = 
 	AccumulationRegisters.ShipmentOrders.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
-
-	Tables.StockBalance_Exists = 
-	AccumulationRegisters.StockBalance.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
-	
 	
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
@@ -734,21 +727,7 @@ Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethStock_NotUseShipmentConfi
 		|	tmp.Period
 		|;
 		|
-		|//[3] StockBalance
-		|SELECT
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Period
-		|;
-		|
-		|//[4] ShipmentOrders
+		|//[3] ShipmentOrders
 		|SELECT
 		|	tmp.ItemKey,
 		|	tmp.Order AS Order,
@@ -760,7 +739,7 @@ Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethStock_NotUseShipmentConfi
 		|	tmp AS tmp
 		|;
 		|
-		|//[5] ShipmentConfirmationSchedule_Receipt
+		|//[4] ShipmentConfirmationSchedule_Receipt
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.Order AS Order,
@@ -776,7 +755,7 @@ Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethStock_NotUseShipmentConfi
 		|	tmp.DeliveryDate <> DATETIME(1, 1, 1)
 		|;
 		|
-		|//[6] ShipmentConfirmationSchedule_Expense
+		|//[5] ShipmentConfirmationSchedule_Expense
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.Order AS Order,
@@ -799,10 +778,9 @@ Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethStock_NotUseShipmentConfi
 	PostingServer.MergeTables(Tables.OrderBalance                         , QueryResults[0].Unload());
 	PostingServer.MergeTables(Tables.OrderReservation                     , QueryResults[1].Unload());
 	PostingServer.MergeTables(Tables.InventoryBalance                     , QueryResults[2].Unload());
-	PostingServer.MergeTables(Tables.StockBalance                         , QueryResults[3].Unload());
-	PostingServer.MergeTables(Tables.ShipmentOrders                       , QueryResults[4].Unload());
-	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Receipt , QueryResults[5].Unload());
-	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Expense , QueryResults[6].Unload());
+	PostingServer.MergeTables(Tables.ShipmentOrders                       , QueryResults[3].Unload());
+	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Receipt , QueryResults[4].Unload());
+	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule_Expense , QueryResults[5].Unload());
 EndProcedure
 
 Procedure GetTables_UseShipmentBeforeInvoice_IsProcMethStock_UseUseShipmentConfirmation_IsProduct(Tables, TempManager, TableName)
@@ -1483,13 +1461,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.GoodsInTransitOutgoing,
-			True));
-	
-	// StockBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.StockBalance,
 			True));
 	
 	// ShipmentOrders

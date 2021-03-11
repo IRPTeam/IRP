@@ -1180,39 +1180,43 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 	LineNumberAndItemKeyFromItemList = GetLineNumberAndItemKeyFromItemList(Ref, TableNameWithItemKeys);
 	
 	// R4011B_FreeStocks
-	Records_InDocument = Undefined;
-	If Unposting Then
-		Records_InDocument = Parameters.Object.RegisterRecords.R4011B_FreeStocks.Unload();
-	Else
-		Records_InDocument = GetQueryTableByName("R4011B_FreeStocks", Parameters);
-	EndIf;	
+	If Parameters.Object.RegisterRecords.Find("R4011B_FreeStocks") <> Undefined Then
+		Records_InDocument = Undefined;
+		If Unposting Then
+			Records_InDocument = Parameters.Object.RegisterRecords.R4011B_FreeStocks.Unload();
+		Else
+			Records_InDocument = GetQueryTableByName("R4011B_FreeStocks", Parameters);
+		EndIf;	
 		
-	If Not Records_InDocument.Columns.Count() Then
-		Records_InDocument = PostingServer.CreateTable(Metadata.AccumulationRegisters.R4011B_FreeStocks);
-	EndIf;
+		If Not Records_InDocument.Columns.Count() Then
+			Records_InDocument = PostingServer.CreateTable(Metadata.AccumulationRegisters.R4011B_FreeStocks);
+		EndIf;
 				
-	If Not Cancel And Not AccReg.R4011B_FreeStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, Records_InDocument, 
+		If Not Cancel And Not AccReg.R4011B_FreeStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, Records_InDocument, 
 			                                                    GetQueryTableByName("Exists_R4011B_FreeStocks", Parameters), 
 			                                                    RecordType,  Unposting, AddInfo) Then
-		Cancel = True;
+			Cancel = True;
+		EndIf;
 	EndIf;
 	
 	// R4010B_ActualStocks
-	Records_InDocument = Undefined;
-	If Unposting Then
-		Records_InDocument = Parameters.Object.RegisterRecords.StockBalance.Unload();
-	Else
-		Records_InDocument = GetQueryTableByName("R4010B_ActualStocks", Parameters);
-	EndIf;
+	If Parameters.Object.RegisterRecords.Find("R4010B_ActualStocks") <> Undefined Then
+		Records_InDocument = Undefined;
+		If Unposting Then
+			Records_InDocument = Parameters.Object.RegisterRecords.R4010B_ActualStocks.Unload();
+		Else
+			Records_InDocument = GetQueryTableByName("R4010B_ActualStocks", Parameters);
+		EndIf;
 	
-	If Not Records_InDocument.Columns.Count() Then
-		Records_InDocument = PostingServer.CreateTable(Metadata.AccumulationRegisters.R4010B_ActualStocks);
-	EndIf;
+		If Not Records_InDocument.Columns.Count() Then
+			Records_InDocument = PostingServer.CreateTable(Metadata.AccumulationRegisters.R4010B_ActualStocks);
+		EndIf;
 			
-	If Not Cancel And Not AccReg.R4010B_ActualStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, Records_InDocument, 
+		If Not Cancel And Not AccReg.R4010B_ActualStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, Records_InDocument, 
 			                                                      GetQueryTableByName("R4010B_ActualStocks", Parameters), 
 			                                                      RecordType, Unposting, AddInfo) Then
-		Cancel = True;
+			Cancel = True;
+		EndIf;
 	EndIf;
 EndProcedure
 

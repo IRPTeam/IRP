@@ -579,36 +579,7 @@ Scenario: _400002 opening entry inventory balance
 		| '500,000'  | '$$OpeningEntry400002$$' | 'Main Company' | 'L/Green'   |
 		| '100,000'  | '$$OpeningEntry400002$$' | 'Main Company' | 'L/Green'   |
 		And I close all client application windows
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-		And "List" table contains lines
-		| 'Quantity' | 'Recorder'         | 'Store'    | 'Item key'  |
-		| '500,000'  | '$$OpeningEntry400002$$' | 'Store 01' | 'XS/Blue'   |
-		| '400,000'  | '$$OpeningEntry400002$$' | 'Store 02' | 'S/Yellow'  |
-		| '400,000'  | '$$OpeningEntry400002$$' | 'Store 01' | 'XS/Blue'   |
-		| '100,000'  | '$$OpeningEntry400002$$' | 'Store 02' | '38/Yellow' |
-		| '100,000'  | '$$OpeningEntry400002$$' | 'Store 01' | '38/Yellow' |
-		| '100,000'  | '$$OpeningEntry400002$$' | 'Store 02' | '36/Red'    |
-		| '100,000'  | '$$OpeningEntry400002$$' | 'Store 01' | '36/Red'    |
-		| '200,000'  | '$$OpeningEntry400002$$' | 'Store 02' | '36/18SD'   |
-		| '300,000'  | '$$OpeningEntry400002$$' | 'Store 01' | '36/18SD'   |
-		| '500,000'  | '$$OpeningEntry400002$$' | 'Store 01' | 'L/Green'   |
-		| '100,000'  | '$$OpeningEntry400002$$' | 'Store 02' | 'L/Green'   |
-		And I close all client application windows
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-		And "List" table contains lines
-		| 'Quantity' | 'Recorder'         | 'Store'    | 'Item key'  |
-		| '500,000'  | '$$OpeningEntry400002$$' | 'Store 01' | 'XS/Blue'   |
-		| '400,000'  | '$$OpeningEntry400002$$' | 'Store 02' | 'S/Yellow'  |
-		| '400,000'  | '$$OpeningEntry400002$$' | 'Store 01' | 'XS/Blue'   |
-		| '100,000'  | '$$OpeningEntry400002$$' | 'Store 02' | '38/Yellow' |
-		| '100,000'  | '$$OpeningEntry400002$$' | 'Store 01' | '38/Yellow' |
-		| '100,000'  | '$$OpeningEntry400002$$' | 'Store 02' | '36/Red'    |
-		| '100,000'  | '$$OpeningEntry400002$$' | 'Store 01' | '36/Red'    |
-		| '200,000'  | '$$OpeningEntry400002$$' | 'Store 02' | '36/18SD'   |
-		| '300,000'  | '$$OpeningEntry400002$$' | 'Store 01' | '36/18SD'   |
-		| '500,000'  | '$$OpeningEntry400002$$' | 'Store 01' | 'L/Green'   |
-		| '100,000'  | '$$OpeningEntry400002$$' | 'Store 02' | 'L/Green'   |
-		And I close all client application windows
+	
 
 Scenario: _400003 opening entry advance balance
 	* Open document form opening entry

@@ -97,27 +97,7 @@ Scenario: _029601 create Unbundling on a product with a specification (specifica
 			| Dress/A-8       | Main Company |
 	And I close all client application windows
 	
-Scenario: _029602 check Bundling posting (store does not use Shipment confirmation and Goods receipt) by register Stock Balance
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                   | 'Store'    | 'Item key'                            |
-		| '2,000'    | '$$Unbundling0029601$$'              | 'Store 01' | 'S/Yellow'                            |
-		| '2,000'    | '$$Unbundling0029601$$'              | 'Store 01' | 'XS/Blue'                             |
-		| '4,000'    | '$$Unbundling0029601$$'              | 'Store 01' | 'L/Green'                             |
-		| '4,000'    | '$$Unbundling0029601$$'              | 'Store 01' | 'M/Brown'                             |
-		| '2,000'    | '$$Unbundling0029601$$'              | 'Store 01' | 'Dress/A-8'                           |
-	And I close all client application windows
 
-Scenario: _029603 check Bundling posting (store does not use Shipment confirmation and Goods receipt) by register Stock Reservation
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                    | 'Store'     | 'Item key'                                                            |
-		| '2,000'    | '$$Unbundling0029601$$'               | 'Store 01'  | 'S/Yellow'                                                            |
-		| '2,000'    | '$$Unbundling0029601$$'               | 'Store 01'  | 'XS/Blue'                                                             |
-		| '4,000'    | '$$Unbundling0029601$$'               | 'Store 01'  | 'L/Green'                                                             |
-		| '4,000'    | '$$Unbundling0029601$$'               | 'Store 01'  | 'M/Brown'                                                             |
-		| '2,000'    | '$$Unbundling0029601$$'               | 'Store 01'  | 'Dress/A-8'                                                           |
-	And I close all client application windows
 
 Scenario: _029604 create Unbundling on a product with a specification (specification created in advance, Store use Shipment confirmation and Goods receipt)
 	When create a purchase invoice for the purchase of sets and dimensional grids at the tore 02
@@ -164,19 +144,6 @@ Scenario: _029604 create Unbundling on a product with a specification (specifica
 			| Boots/S-8       | Main Company |
 	And I close all client application windows
 
-Scenario: _029605 check the absence posting of Unbundling (store use Shipment confirmation and Goods receipt) by register Stock Balance
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table does not contain lines
-		| 'Recorder'                   |
-		| '$$Unbundling0029604$$'              |
-	And I close all client application windows
-
-Scenario: _029606 check Bundling posting (store use Shipment confirmation and Goods receipt) by register Stock Reservation
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'              | 'Store'    | 'Item key'  |
-		| '2,000'    | '$$Unbundling0029604$$' | 'Store 02' | 'Boots/S-8' |
-	And I close all client application windows
 
 Scenario: _029607 check Bundling posting (store use Shipment confirmation and Goods receipt) by register GoodsInTransitOutgoing
 	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
@@ -221,22 +188,6 @@ Scenario: _029609 create Goods receipt and Shipment confirmation based on Unbund
 		And Delay 5
 		And I close all client application windows
 	* Check movements
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                | 'Store'    | 'Item key' |
-			| '2,000'    | '$$GoodsReceipt0029609$$' | 'Store 02' | '36/18SD'  |
-			| '2,000'    | '$$GoodsReceipt0029609$$' | 'Store 02' | '37/18SD'  |
-			| '2,000'    | '$$GoodsReceipt0029609$$' | 'Store 02' | '38/18SD'  |
-			| '2,000'    | '$$GoodsReceipt0029609$$' | 'Store 02' | '39/18SD'  |
-		And I close all client application windows
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                | 'Store'    | 'Item key' |
-			| '2,000'    | '$$GoodsReceipt0029609$$' | 'Store 02' | '36/18SD'  |
-			| '2,000'    | '$$GoodsReceipt0029609$$' | 'Store 02' | '37/18SD'  |
-			| '2,000'    | '$$GoodsReceipt0029609$$' | 'Store 02' | '38/18SD'  |
-			| '2,000'    | '$$GoodsReceipt0029609$$' | 'Store 02' | '39/18SD'  |
-		And I close all client application windows
 		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
 		And "List" table contains lines
 			| 'Quantity' | 'Recorder'                        | 'Shipment basis'        | 'Store'    | 'Item key'  |

@@ -155,18 +155,8 @@ Scenario: _022306 check that there are no movements of Purchase return in regist
 		| '-2,000'   | '$$PurchaseReturn022301$$' |
 	
 
-Scenario: _022307 check that there are no movements of Purchase return in register StockBalance (store use Shipment confirmation, based on Purchase return order)
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table does not contain lines
-		| 'Quantity' | 'Recorder'                 | 'Line number' | 'Store'    | 'Item key' |
-		| '2,000'    | '$$PurchaseReturn022301$$' | '1'           | 'Store 02' | 'L/Green'  |
 
 
-Scenario: _022308 check that there are no movements of Purchase return in register StockReservation (store use Shipment confirmation, based on Purchase return order)
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table does not contain lines
-	| 'Quantity' | 'Recorder'                 | 'Line number' | 'Store'    | 'Item key' |
-	| '2,000'    | '$$PurchaseReturn022301$$' | '1'           | 'Store 02' | 'L/Green'  |
 
 
 Scenario: _022309 create document Purchase retur, store use Shipment confirmation, based on Purchase return order
@@ -208,11 +198,6 @@ Scenario: _022311 check movements of the document Purchase return order in the I
 	| 'Quantity' | 'Recorder'                 | 'Line number' | 'Company'      | 'Item key'  |
 	| '3,000'    | '$$PurchaseReturn022309$$' | '1'           | 'Main Company' | '36/Yellow' |
 
-Scenario: _022312 check movements of the document Purchase return order in the InventoryBalance (store use Shipment confirmation, based on Purchase return order) - minus
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                 | 'Line number' | 'Store'    | 'Item key'  |
-		| '3,000'    | '$$PurchaseReturn022309$$' | '1'           | 'Store 01' | '36/Yellow' |
 
 Scenario: _022313 check movements of the document Purchase return order in the OrderReservation (store use Shipment confirmation, based on Purchase return order) - minus
 	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
@@ -261,17 +246,7 @@ Scenario: _022318 check movements of the document Purchase return order in the G
 	| 'Quantity' | 'Recorder'                 | 'Shipment basis'           | 'Line number' | 'Store'    | 'Item key' |
 	| '10,000'   | '$$PurchaseReturn022314$$' | '$$PurchaseReturn022314$$' | '1'           | 'Store 02' | 'L/Green'  |
 
-Scenario: _022319 check that there are no movements of Purchase return in register StockBalance (store use Shipment confirmation, without Purchase return order)
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table does not contain lines
-		| 'Quantity' | 'Recorder'                 | 'Line number' | 'Store'    | 'Item key' |
-		| '10,000'   | '$$PurchaseReturn022314$$' | '1'           | 'Store 02' | 'L/Green'  |
 
-Scenario: _022320 check purchase return movements by register StockReservation (store use Shipment confirmation, without Purchase return order)
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                 | 'Line number' | 'Store'    | 'Item key' |
-		| '10,000'   | '$$PurchaseReturn022314$$' | '1'           | 'Store 02' | 'L/Green'  |
 
 Scenario: _022321 check purchase return movements by register Purchase return in the register OrderReservation (store use Shipment confirmation, without Purchase return order)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
@@ -338,18 +313,6 @@ Scenario: _022325 check Purchase return movements by GoodsInTransitOutgoing (sto
 	And "List" table contains lines
 	| 'Quantity' | 'Recorder'                 | 'Shipment basis'           | 'Line number' | 'Item key'  |
 	| '7,000'    | '$$PurchaseReturn022322$$' | '$$PurchaseReturn022322$$' | '1'           | '36/Yellow' |
-
-Scenario: _022326 check movements of the document Purchase return order in the StockBalance (store does not use Shipment confirmation, without Purchase return order) - minus
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table does not contain lines
-		| 'Quantity' | 'Recorder'                 | 'Line number' | 'Store'    | 'Item key' |
-		| '7,000'    | '$$PurchaseReturn022322$$' | '1'           | 'Store 02' | '36/Yellow'  |
-
-Scenario: _022327 check movements of the document Purchase return in the StockReservation (store does not use Shipment confirmation, without Purchase return order) - minus
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                 | 'Line number' | 'Store'    | 'Item key' |
-		| '7,000'    | '$$PurchaseReturn022322$$' | '1'           | 'Store 02' | '36/Yellow'  |
 
 Scenario: _022329 check that there are no movements of Purchase return document by OrderReservation (store does not use Shipment confirmation, without Purchase return order)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"

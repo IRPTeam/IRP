@@ -582,7 +582,7 @@ Scenario: _023014 check movements by status and status history of a Sales Order 
 			| '$$SalesOrder023001$$' |'$$SalesOrder023001$$'  |
 			| '$$SalesOrder023001$$' |'$$SalesOrder023001$$' |
 		And I close current window
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R4011B_FreeStocks"
 		And "List" table does not contain lines
 			| 'Recorder'       |
 			| '$$SalesOrder023001$$' |
@@ -619,7 +619,7 @@ Scenario: _023014 check movements by status and status history of a Sales Order 
 			| '$$SalesOrder023001$$' |'$$SalesOrder023001$$'  |
 			| '$$SalesOrder023001$$' |'$$SalesOrder023001$$' |
 		And I close current window
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R4011B_FreeStocks"
 		And "List" table contains lines
 			| 'Recorder'       |
 			| '$$SalesOrder023001$$' |

@@ -36,12 +36,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	Parameters.Insert("StatusInfo", StatusInfo);
 	If Not StatusInfo.Posting Then
-
 #Region NewRegistersPosting
 		QueryArray = GetQueryTextsSecondaryTables();
+		Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
 		PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion	
-		
+#EndRegion
 		Return Tables;
 	EndIf;
 	
@@ -259,6 +258,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 
 #Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion	
 	Return Tables;
@@ -1422,12 +1422,10 @@ EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 #Region NewRegisterPosting
-	If Parameters.StatusInfo.Posting Then
-		Tables = Parameters.DocumentDataTables;	
-		QueryArray = GetQueryTextsMasterTables();
-		PostingServer.SetRegisters(Tables, Ref);
-		PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-	EndIf;
+	Tables = Parameters.DocumentDataTables;	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
 EndProcedure
 
@@ -1528,7 +1526,10 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return;
+#Region NewRegistersPosting
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -1597,6 +1598,8 @@ EndFunction
 
 Function GetAdditionalQueryParamenters(Ref)
 	StrParams = New Structure();
+	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
+	StrParams.Insert("StatusInfoPosting", StatusInfo.Posting);
 	Return StrParams;
 EndFunction
 
@@ -1648,23 +1651,14 @@ Function ItemList()
 		|	SalesOrderItemList.CancelReason,
 		|	SalesOrderItemList.NetAmount,
 		|	SalesOrderItemList.Ref.UseItemsShipmentScheduling AS UseItemsShipmentScheduling,
-		|	SalesOrderItemList.OffersAmount
+		|	SalesOrderItemList.OffersAmount,
+		|	&StatusInfoPosting
 		|INTO ItemList
 		|FROM
 		|	Document.SalesOrder.ItemList AS SalesOrderItemList
 		|WHERE
 		|	SalesOrderItemList.Ref = &Ref";
 EndFunction
-
-Function Exists_R4011B_FreeStocks()
-	Return
-	"SELECT *
-	|INTO Exists_R4011B_FreeStocks
-	|FROM
-	|	AccumulationRegister.R4011B_FreeStocks AS R4011B_FreeStocks
-	|WHERE
-	|	R4011B_FreeStocks.Recorder = &Ref";
-EndFunction	
 
 Function R2010T_SalesOrders()
 	Return
@@ -1674,7 +1668,8 @@ Function R2010T_SalesOrders()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	NOT ItemList.isCanceled";
+		|	NOT ItemList.isCanceled
+		|	AND ItemList.StatusInfoPosting";
 
 EndFunction
 
@@ -1688,7 +1683,8 @@ Function R2011B_SalesOrdersShipment()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.isCanceled
-		|	AND NOT ItemList.IsService";
+		|	AND NOT ItemList.IsService
+		|	AND ItemList.StatusInfoPosting";
 
 EndFunction
 
@@ -1701,7 +1697,8 @@ Function R2012B_SalesOrdersInvoiceClosing()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	NOT ItemList.isCanceled";
+		|	NOT ItemList.isCanceled
+		|	AND ItemList.StatusInfoPosting";
 
 EndFunction
 
@@ -1716,7 +1713,8 @@ Function R2013T_SalesOrdersProcurement()
 		|WHERE
 		|	NOT ItemList.isCanceled
 		|	AND NOT ItemList.IsService
-		|	AND ItemList.IsProcurementMethod_Purchase";
+		|	AND ItemList.IsProcurementMethod_Purchase
+		|	AND ItemList.StatusInfoPosting";
 
 EndFunction
 
@@ -1728,7 +1726,8 @@ Function R2014T_CanceledSalesOrders()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.isCanceled";
+		|	ItemList.isCanceled
+		|	AND ItemList.StatusInfoPosting";
 
 EndFunction
 
@@ -1745,9 +1744,20 @@ Function R4011B_FreeStocks()
 		|WHERE
 		|	NOT ItemList.isCanceled
 		|	AND NOT ItemList.IsService
-		|	AND ItemList.IsProcurementMethod_Stock";
+		|	AND ItemList.IsProcurementMethod_Stock
+		|	AND ItemList.StatusInfoPosting";
 
 EndFunction
+
+Function Exists_R4011B_FreeStocks()
+	Return
+	"SELECT *
+	|INTO Exists_R4011B_FreeStocks
+	|FROM
+	|	AccumulationRegister.R4011B_FreeStocks AS R4011B_FreeStocks
+	|WHERE
+	|	R4011B_FreeStocks.Recorder = &Ref";
+EndFunction	
 
 Function R4012B_StockReservation()
 	Return
@@ -1760,7 +1770,8 @@ Function R4012B_StockReservation()
 		|WHERE
 		|	NOT ItemList.isCanceled
 		|	AND NOT ItemList.IsService
-		|	AND ItemList.IsProcurementMethod_Stock";
+		|	AND ItemList.IsProcurementMethod_Stock
+		|	AND ItemList.StatusInfoPosting";
 
 EndFunction
 
@@ -1775,7 +1786,8 @@ Function R4013B_StockReservationPlanning()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	FALSE";
+		|	FALSE
+		|	AND ItemList.StatusInfoPosting";
 
 EndFunction
 
@@ -1793,7 +1805,8 @@ Function R4034B_GoodsShipmentSchedule()
 		|	NOT ItemList.isCanceled
 		|	AND NOT ItemList.IsService
 		|	AND NOT ItemList.DeliveryDate = DATETIME(1, 1, 1)
-		|	AND ItemList.UseItemsShipmentScheduling";
+		|	AND ItemList.UseItemsShipmentScheduling
+		|	AND ItemList.StatusInfoPosting";
 
 EndFunction
 

@@ -412,13 +412,13 @@ Scenario: _154512 message when trying to re-create Purchase invoice based on Pur
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '1' | 'Dress' | 'L/Green'  | 'pcs' |
 			And I select current line in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
 			And I input "40,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 	* Create Purchase invoice based on Purchase order
 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
-		And I click "Ok" button		
+		And I click "Ok" button	
+		And Delay 2	
 		And I click the button named "FormPostAndClose"
 	* Check message display when you try to re-create Purchase invoice
 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
@@ -491,6 +491,7 @@ Scenario: _154514 message when trying to re-create Goods receipt based on Purcha
 	* Create Goods receipt based on Purchase order
 		And I click the button named "FormDocumentGoodsReceiptGenerate"	
 		And I click "Ok" button
+		And Delay 2
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseOrder1545061$$" variable
 		And I delete "$$PurchaseOrder1545061$$" variable
@@ -808,8 +809,7 @@ Scenario: _154528 message when trying to create Purchase order based on Sales or
 		And I save the window as "$$SalesOrder154512$$"
 	* Check the message that there are no items to order with the vendor
 		And I click "Purchase order" button
-		Then warning message containing text "There are no lines with a correct procurement method." appears
-		Then "1C:Enterprise" window is opened
+		Then the number of "BasisesTree" table lines is "равно" 0
 		And I click "OK" button
 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		Then the number of "BasisesTree" table lines is "равно" 0
@@ -1088,8 +1088,7 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			And I click the button named "FormPost"
 		* Check message output when trying to generate a PO
 			And I click "Purchase order" button
-			Then the field named "Message" value contains 'Cannot continue. The "Sales order' text
-			Then "1C:Enterprise" window is opened
+			Then the number of "BasisesTree" table lines is "равно" 0
 			And I click "OK" button
 		* Check message output when trying to generate a PI
 			And I click the button named "FormDocumentPurchaseInvoiceGenerate"
@@ -1323,6 +1322,7 @@ Scenario: _015452 check message output when trying to create a subsequent order 
 			And I click the button named "FormPost"
 	* Check the output of messages when creating documents on PO with the status "without posting"
 			And I click "Purchase order" button
+			And I click "OK" button
 		* Filling in Purchase order
 			And I click Select button of "Partner" field
 			And I select current line in "List" table

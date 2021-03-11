@@ -95,6 +95,7 @@ Scenario: _0201001 create IT based on ITO
 		And I input "22,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
+		And I click "Show row key" button
 		And "RowIDInfo" table contains lines
 			| 'Basis'                                                 | 'Q'      |
 			| 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '22,000' |
@@ -270,6 +271,7 @@ Scenario: _0201003 copy IT (based on ITO) and check filling in Row Id info table
 		Then the form attribute named "Author" became equal to "en description is empty"
 	* Post IT and check Row ID Info tab
 		And I click the button named "FormPost"
+		And I click "Show row key" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines
 			| '#' | 'Key'                              | 'Basis'                                                 | 'Row ID'                           | 'Next step' | 'Q'      | 'Basis key' | 'Current step' | 'Row ref'                          |

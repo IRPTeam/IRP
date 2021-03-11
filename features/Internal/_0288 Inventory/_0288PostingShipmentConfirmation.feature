@@ -113,6 +113,7 @@ Scenario: _028800 preparation (Shipment confirmation)
 				| "Number" |
 				| "$$NumberInventoryTransfer021030$$" |	
 			When create InventoryTransfer021030
+		And Delay 5
 	* Create SO
 		When Create document SalesOrder objects (SC before SI, creation based on)
 		And I close all client application windows

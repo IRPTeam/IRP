@@ -1026,7 +1026,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4033B_GoodsReceiptSchedule());
 	QueryArray.Add(R4035B_IncomingStocks());
 	QueryArray.Add(R4036B_IncomingStocksRequested());
-	QueryArray.Add(R4012B_StockReservation());
 	Return QueryArray;	
 EndFunction	
 

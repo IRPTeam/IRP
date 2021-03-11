@@ -338,8 +338,8 @@ Procedure GetTables_UseSO_NotSCBeforeInvoice_IsProduct(Tables, TempManager, Tabl
 	QueryResults = Query.ExecuteBatch();
 	
 	PostingServer.MergeTables(Tables.GoodsInTransitOutgoing       , QueryResults[0].Unload());
-	PostingServer.MergeTables(Tables.ShipmentOrders               , QueryResults[2].Unload());
-	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule , QueryResults[3].Unload());
+	PostingServer.MergeTables(Tables.ShipmentOrders               , QueryResults[1].Unload());
+	PostingServer.MergeTables(Tables.ShipmentConfirmationSchedule , QueryResults[2].Unload());
 EndProcedure
 
 #EndRegion

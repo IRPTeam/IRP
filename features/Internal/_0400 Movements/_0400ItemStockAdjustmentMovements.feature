@@ -63,7 +63,28 @@ Scenario: _040001 preparation (item stock adjustment movements)
 		When Create document item stock adjustment (check movements)
 		And I execute 1C:Enterprise script at server
  			| "Documents.ItemStockAdjustment.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Check query for item stock adjustment movements
+		Given I open hyperlink "e1cib/app/DataProcessor.AnaliseDocumentMovements"
+		And in the table "Info" I click "Fill movements" button
+		And "Info" table contains lines
+			| 'Document'            | 'Register'                         | 'Recorder' | 'Conditions'                                                                                                                                                             | 'Query'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 'Parameters'                 | 'Receipt' | 'Expense' |
+			| 'ItemStockAdjustment' | 'R4010B_ActualStocks'              | 'Yes'      | 'Query Receipt:\nQuery Expense:'                                                                                                                                         | 'SELECT\n    VALUE(AccumulationRecordType.Receipt) AS RecordType,\n    QueryTable.ItemKey AS ItemKey,\n    QueryTable.Ref AS Ref,\n    QueryTable.Key AS Key,\n    QueryTable.ItemKey AS ItemKey1,\n    QueryTable.Unit AS Unit,\n    QueryTable.Quantity1 AS Quantity1,\n    QueryTable.Quantity AS Quantity,\n    QueryTable.ItemKeyWriteOff AS ItemKeyWriteOff,\n    QueryTable.Period AS Period,\n    QueryTable.Company AS Company,\n    QueryTable.Store AS Store,\n    QueryTable.SerialLotNumber AS SerialLotNumber,\n    QueryTable.SerialLotNumberWriteOff AS SerialLotNumberWriteOff\nINTO R4010B_ActualStocks\nFROM\n    ItemList AS QueryTable\n\nUNION ALL\n\nSELECT\n    VALUE(AccumulationRecordType.Expense),\n    QueryTable.ItemKeyWriteOff,\n    QueryTable.Ref,\n    QueryTable.Key,\n    QueryTable.ItemKey,\n    QueryTable.Unit,\n    QueryTable.Quantity1,\n    QueryTable.Quantity,\n    QueryTable.ItemKeyWriteOff,\n    QueryTable.Period,\n    QueryTable.Company,\n    QueryTable.Store,\n    QueryTable.SerialLotNumber,\n    QueryTable.SerialLotNumberWriteOff\nFROM\n    ItemList AS QueryTable'                                                                                                                                                                                                                                                                                      | 'Ref: Item stock adjustment' | 'Yes'     | 'Yes'     |
+			| 'ItemStockAdjustment' | 'R4050B_StockInventory'            | 'Yes'      | 'Query Receipt:\nQuery Expense:'                                                                                                                                         | 'SELECT\n    VALUE(AccumulationRecordType.Receipt) AS RecordType,\n    QueryTable.ItemKey AS ItemKey,\n    QueryTable.Ref AS Ref,\n    QueryTable.Key AS Key,\n    QueryTable.ItemKey AS ItemKey1,\n    QueryTable.Unit AS Unit,\n    QueryTable.Quantity1 AS Quantity1,\n    QueryTable.Quantity AS Quantity,\n    QueryTable.ItemKeyWriteOff AS ItemKeyWriteOff,\n    QueryTable.Period AS Period,\n    QueryTable.Company AS Company,\n    QueryTable.Store AS Store,\n    QueryTable.SerialLotNumber AS SerialLotNumber,\n    QueryTable.SerialLotNumberWriteOff AS SerialLotNumberWriteOff\nINTO R4050B_StockInventory\nFROM\n    ItemList AS QueryTable\n\nUNION ALL\n\nSELECT\n    VALUE(AccumulationRecordType.Expense),\n    QueryTable.ItemKeyWriteOff,\n    QueryTable.Ref,\n    QueryTable.Key,\n    QueryTable.ItemKey,\n    QueryTable.Unit,\n    QueryTable.Quantity1,\n    QueryTable.Quantity,\n    QueryTable.ItemKeyWriteOff,\n    QueryTable.Period,\n    QueryTable.Company,\n    QueryTable.Store,\n    QueryTable.SerialLotNumber,\n    QueryTable.SerialLotNumberWriteOff\nFROM\n    ItemList AS QueryTable'                                                                                                                                                                                                                                                                                    | 'Ref: Item stock adjustment' | 'Yes'     | 'Yes'     |
+			| 'ItemStockAdjustment' | 'R4011B_FreeStocks'                | 'Yes'      | 'Query Receipt:\nQuery Expense:'                                                                                                                                         | 'SELECT\n    VALUE(AccumulationRecordType.Receipt) AS RecordType,\n    QueryTable.ItemKey AS ItemKey,\n    QueryTable.Ref AS Ref,\n    QueryTable.Key AS Key,\n    QueryTable.ItemKey AS ItemKey1,\n    QueryTable.Unit AS Unit,\n    QueryTable.Quantity1 AS Quantity1,\n    QueryTable.Quantity AS Quantity,\n    QueryTable.ItemKeyWriteOff AS ItemKeyWriteOff,\n    QueryTable.Period AS Period,\n    QueryTable.Company AS Company,\n    QueryTable.Store AS Store,\n    QueryTable.SerialLotNumber AS SerialLotNumber,\n    QueryTable.SerialLotNumberWriteOff AS SerialLotNumberWriteOff\nINTO R4011B_FreeStocks\nFROM\n    ItemList AS QueryTable\n\nUNION ALL\n\nSELECT\n    VALUE(AccumulationRecordType.Expense),\n    QueryTable.ItemKeyWriteOff,\n    QueryTable.Ref,\n    QueryTable.Key,\n    QueryTable.ItemKey,\n    QueryTable.Unit,\n    QueryTable.Quantity1,\n    QueryTable.Quantity,\n    QueryTable.ItemKeyWriteOff,\n    QueryTable.Period,\n    QueryTable.Company,\n    QueryTable.Store,\n    QueryTable.SerialLotNumber,\n    QueryTable.SerialLotNumberWriteOff\nFROM\n    ItemList AS QueryTable'                                                                                                                                                                                                                                                                                        | 'Ref: Item stock adjustment' | 'Yes'     | 'Yes'     |
+			| 'ItemStockAdjustment' | 'R4052T_StockAdjustmentAsSurplus'  | 'Yes'      | 'TRUE'                                                                                                                                                                   | 'SELECT\n    QueryTable.ItemKeyWriteOff AS ItemKey,\n    QueryTable.Ref AS Ref,\n    QueryTable.Key AS Key,\n    QueryTable.ItemKey AS ItemKey1,\n    QueryTable.Unit AS Unit,\n    QueryTable.Quantity1 AS Quantity1,\n    QueryTable.Quantity AS Quantity,\n    QueryTable.ItemKeyWriteOff AS ItemKeyWriteOff,\n    QueryTable.Period AS Period,\n    QueryTable.Company AS Company,\n    QueryTable.Store AS Store,\n    QueryTable.SerialLotNumber AS SerialLotNumber,\n    QueryTable.SerialLotNumberWriteOff AS SerialLotNumberWriteOff\nINTO R4052T_StockAdjustmentAsSurplus\nFROM\n    ItemList AS QueryTable\nWHERE\n    TRUE'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 'Ref: Item stock adjustment' | 'No'      | 'No'      |
+			| 'ItemStockAdjustment' | 'R4051T_StockAdjustmentAsWriteOff' | 'Yes'      | 'TRUE'                                                                                                                                                                   | 'SELECT\n    QueryTable.Ref AS Ref,\n    QueryTable.Key AS Key,\n    QueryTable.ItemKey AS ItemKey,\n    QueryTable.Unit AS Unit,\n    QueryTable.Quantity1 AS Quantity1,\n    QueryTable.Quantity AS Quantity,\n    QueryTable.ItemKeyWriteOff AS ItemKeyWriteOff,\n    QueryTable.Period AS Period,\n    QueryTable.Company AS Company,\n    QueryTable.Store AS Store,\n    QueryTable.SerialLotNumber AS SerialLotNumber,\n    QueryTable.SerialLotNumberWriteOff AS SerialLotNumberWriteOff\nINTO R4051T_StockAdjustmentAsWriteOff\nFROM\n    ItemList AS QueryTable\nWHERE\n    TRUE'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | 'Ref: Item stock adjustment' | 'No'      | 'No'      |
+			| 'ItemStockAdjustment' | 'R4014B_SerialLotNumber'           | 'Yes'      | 'Query Receipt:\nNOT SerialLotNumber = VALUE(Catalog.SerialLotNumbers.EmptyRef)\nQuery Expense:\nNOT SerialLotNumberWriteOff = VALUE(Catalog.SerialLotNumbers.EmptyRef)' | 'SELECT\n    VALUE(AccumulationRecordType.Receipt) AS RecordType,\n    QueryTable.ItemKey AS ItemKey,\n    QueryTable.SerialLotNumber AS SerialLotNumber,\n    QueryTable.Ref AS Ref,\n    QueryTable.Key AS Key,\n    QueryTable.ItemKey AS ItemKey1,\n    QueryTable.Unit AS Unit,\n    QueryTable.Quantity1 AS Quantity1,\n    QueryTable.Quantity AS Quantity,\n    QueryTable.ItemKeyWriteOff AS ItemKeyWriteOff,\n    QueryTable.Period AS Period,\n    QueryTable.Company AS Company,\n    QueryTable.Store AS Store,\n    QueryTable.SerialLotNumber AS SerialLotNumber1,\n    QueryTable.SerialLotNumberWriteOff AS SerialLotNumberWriteOff\nINTO R4014B_SerialLotNumber\nFROM\n    ItemList AS QueryTable\nWHERE\n    NOT QueryTable.SerialLotNumber = VALUE(Catalog.SerialLotNumbers.EmptyRef)\n\nUNION ALL\n\nSELECT\n    VALUE(AccumulationRecordType.Expense),\n    QueryTable.ItemKeyWriteOff,\n    QueryTable.SerialLotNumberWriteOff,\n    QueryTable.Ref,\n    QueryTable.Key,\n    QueryTable.ItemKey,\n    QueryTable.Unit,\n    QueryTable.Quantity1,\n    QueryTable.Quantity,\n    QueryTable.ItemKeyWriteOff,\n    QueryTable.Period,\n    QueryTable.Company,\n    QueryTable.Store,\n    QueryTable.SerialLotNumber,\n    QueryTable.SerialLotNumberWriteOff\nFROM\n    ItemList AS QueryTable\nWHERE\n    NOT QueryTable.SerialLotNumberWriteOff = VALUE(Catalog.SerialLotNumbers.EmptyRef)' | 'Ref: Item stock adjustment' | 'Yes'     | 'Yes'     |
+		And I close all client application windows
+		
 
+		
+				
+				
+		
+				
+
+
+		
 
 Scenario: _040002 check item stock adjustment movements by the Register  "R4010 Actual stocks"
 	* Select item stock adjustment
@@ -179,4 +200,45 @@ Scenario: _040007 check item stock adjustment movements by the Register  "R4051 
 			| ''                                                  | '27.01.2021 19:04:15' | '10'        | 'Store 02'   | ''      | '37/18SD'   |
 			| ''                                                  | '27.01.2021 19:04:15' | '16'        | 'Store 02'   | ''      | 'XS/Blue'   |
 		And I close all client application windows	
-	
+
+Scenario: _040012 item stock adjustment clear posting
+	* Select item stock adjustment
+		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Clear posting
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Item stock adjustment 1 dated 27.01.2021 19:04:15' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Post item stock adjustment
+		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R4052 Stock adjustment (Surplus)' |
+			| 'R4011 Free stocks' |
+			| 'R4050 Stock inventory' |
+			| 'R4010 Actual stocks' |
+		And I close all client application windows
+		
+
+
+		
+			
+						
+		
+				
+		
+				
+

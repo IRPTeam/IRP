@@ -2286,13 +2286,13 @@ Scenario:_800092 set/remove checkbox Negative stock control from user settings a
 		Given I open hyperlink "e1cib/list/InformationRegister.UserSettings"
 		And I go to line in "List" table
 			| 'Attribute name'            | 'Metadata object'       | 'User or group'           |
-			| 'CheckBalance_StockBalance' | 'Document.SalesInvoice' | 'en description is empty' |
+			| 'CheckBalance_R4010B_ActualStocks' | 'Document.SalesInvoice' | 'en description is empty' |
 		And I delete a line in "List" table
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I go to line in "List" table
 			| 'Attribute name'                | 'Metadata object'       | 'User or group'           |
-			| 'CheckBalance_StockReservation' | 'Document.SalesInvoice' | 'en description is empty' |
+			| 'CheckBalance_R4010B_ActualStocks' | 'Document.SalesInvoice' | 'en description is empty' |
 		And I delete a line in "List" table
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button

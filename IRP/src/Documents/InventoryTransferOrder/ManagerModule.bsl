@@ -11,6 +11,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	Parameters.Insert("StatusInfo", StatusInfo);
 	If Not StatusInfo.Posting Then
+#Region NewRegistersPosting
+		QueryArray = GetQueryTextsSecondaryTables();
+		Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
+		PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion
 		Return Tables;
 	EndIf;
 	
@@ -136,13 +141,11 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-#Region NewRegisterPosting
-	If Parameters.StatusInfo.Posting Then
-		Tables = Parameters.DocumentDataTables;	
-		QueryArray = GetQueryTextsMasterTables();
-		PostingServer.SetRegisters(Tables, Ref);
-		PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-	EndIf;
+#Region NewRegistersPosting
+	Tables = Parameters.DocumentDataTables;	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
 EndProcedure
 
@@ -179,14 +182,7 @@ EndProcedure
 #Region Undoposting
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Tables = PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
-#Region NewRegistersPosting
-	If Parameters.StatusInfo.Posting Then
-		QueryArray = GetQueryTextsMasterTables();
-		PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-	EndIf;
-#EndRegion
-	Return Tables;
+	Return PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -195,7 +191,10 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return;
+#Region NewRegistersPosting
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -221,15 +220,15 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.InventoryTransferOrder.ItemList");
 	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-	                                                                 PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters),
-	                                                                 PostingServer.GetQueryTableByName("Exists_R4035B_IncomingStocks", Parameters),
+	                                                                 PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters, True),
+	                                                                 PostingServer.GetQueryTableByName("Exists_R4035B_IncomingStocks", Parameters, True),
 	                                                                 AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 	
 	If Not Cancel And Not AccReg.R4036B_IncomingStocksRequested.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-	                                                                PostingServer.GetQueryTableByName("R4036B_IncomingStocksRequested", Parameters),
-	                                                                PostingServer.GetQueryTableByName("Exists_R4036B_IncomingStocksRequested", Parameters),
+	                                                                PostingServer.GetQueryTableByName("R4036B_IncomingStocksRequested", Parameters, True),
+	                                                                PostingServer.GetQueryTableByName("Exists_R4036B_IncomingStocksRequested", Parameters, True),
 	                                                                AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
@@ -257,6 +256,9 @@ Function GetAdditionalQueryParamenters(Ref)
 	Else
 		StrParams.Insert("BalancePeriod", Undefined);
 	EndIf;
+	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
+	StrParams.Insert("StatusInfoPosting", StatusInfo.Posting);
+		
 	Return StrParams;
 EndFunction
 
@@ -279,7 +281,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4022B_StockTransferOrdersShipment());
 	QueryArray.Add(R4035B_IncomingStocks());
 	QueryArray.Add(R4036B_IncomingStocksRequested());
-	
 	Return QueryArray;	
 EndFunction	
 
@@ -297,7 +298,8 @@ Function ItemList()
 		|	InventoryTransferOrderItemList.PurchaseOrder AS PurchaseOrder,
 		|	NOT InventoryTransferOrderItemList.PurchaseOrder.Ref IS NULL AS PurchaseOrderExists,
 		|	InventoryTransferOrderItemList.InternalSupplyRequest AS InternalSupplyRequest,
-		|	NOT InventoryTransferOrderItemList.InternalSupplyRequest.Ref IS NULL AS InternalSupplyRequestExists
+		|	NOT InventoryTransferOrderItemList.InternalSupplyRequest.Ref IS NULL AS InternalSupplyRequestExists,
+		|	&StatusInfoPosting AS StatusInfoPosting
 		|INTO ItemList
 		|FROM
 		|	Document.InventoryTransferOrder.ItemList AS InventoryTransferOrderItemList
@@ -318,6 +320,7 @@ Function R4011B_FreeStocks()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemLIst.PurchaseOrderExists
+		|	AND ItemList.StatusInfoPosting
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.StoreSender,
@@ -348,6 +351,7 @@ Function R4012B_StockReservation()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.PurchaseOrderExists
+		|	AND ItemList.StatusInfoPosting
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.StoreSender,
@@ -365,7 +369,8 @@ Function R4016B_InternalSupplyRequestOrdering()
 		|FROM 
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.InternalSupplyRequestExists";
+		|	ItemList.InternalSupplyRequestExists
+		|	AND ItemLIst.StatusInfoPosting";
 EndFunction
 
 Function R4020T_StockTransferOrders()
@@ -376,7 +381,7 @@ Function R4020T_StockTransferOrders()
 		|FROM 
 		|	ItemList AS ItemList
 		|WHERE
-		|	TRUE";
+		|	ItemList.StatusInfoPosting";
 EndFunction
 
 Function R4021B_StockTransferOrdersReceipt()
@@ -389,7 +394,7 @@ Function R4021B_StockTransferOrdersReceipt()
 		|FROM 
 		|	ItemList AS ItemList
 		|WHERE
-		|	TRUE";
+		|	ItemList.StatusInfoPosting";
 EndFunction
 
 Function R4022B_StockTransferOrdersShipment()
@@ -402,7 +407,7 @@ Function R4022B_StockTransferOrdersShipment()
 		|FROM 
 		|	ItemList AS ItemList
 		|WHERE
-		|	TRUE";
+		|	ItemList.StatusInfoPosting";
 EndFunction
 
 Function R4035B_IncomingStocks()
@@ -419,6 +424,7 @@ Function R4035B_IncomingStocks()
 		|	ItemList AS ItemList
 		|WHERE
 		|	ItemLIst.PurchaseOrderExists
+		|	AND ItemList.StatusInfoPosting
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.StoreSender,
@@ -452,6 +458,7 @@ Function R4036B_IncomingStocksRequested()
 		|	ItemList AS ItemList
 		|WHERE
 		|	ItemList.PurchaseOrderExists
+		|	AND ItemLIst.StatusInfoPosting
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.StoreSender,

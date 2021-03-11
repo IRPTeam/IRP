@@ -1185,7 +1185,7 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 		If Unposting Then
 			Records_InDocument = Parameters.Object.RegisterRecords.R4011B_FreeStocks.Unload();
 		Else
-			Records_InDocument = GetQueryTableByName("R4011B_FreeStocks", Parameters);
+			Records_InDocument = GetQueryTableByName("R4011B_FreeStocks", Parameters, True);
 		EndIf;	
 		
 		If Not Records_InDocument.Columns.Count() Then
@@ -1193,7 +1193,7 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 		EndIf;
 				
 		If Not Cancel And Not AccReg.R4011B_FreeStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, Records_InDocument, 
-			                                                    GetQueryTableByName("Exists_R4011B_FreeStocks", Parameters), 
+			                                                    GetQueryTableByName("Exists_R4011B_FreeStocks", Parameters, True), 
 			                                                    RecordType,  Unposting, AddInfo) Then
 			Cancel = True;
 		EndIf;
@@ -1205,7 +1205,7 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 		If Unposting Then
 			Records_InDocument = Parameters.Object.RegisterRecords.R4010B_ActualStocks.Unload();
 		Else
-			Records_InDocument = GetQueryTableByName("R4010B_ActualStocks", Parameters);
+			Records_InDocument = GetQueryTableByName("R4010B_ActualStocks", Parameters, True);
 		EndIf;
 	
 		If Not Records_InDocument.Columns.Count() Then
@@ -1213,7 +1213,7 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 		EndIf;
 			
 		If Not Cancel And Not AccReg.R4010B_ActualStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, Records_InDocument, 
-			                                                      GetQueryTableByName("R4010B_ActualStocks", Parameters), 
+			                                                      GetQueryTableByName("R4010B_ActualStocks", Parameters, True), 
 			                                                      RecordType, Unposting, AddInfo) Then
 			Cancel = True;
 		EndIf;
@@ -1440,10 +1440,14 @@ Function QueryTableIsExists(TableName, Parameters) Export
 	Return Parameters.TempTablesManager.Tables.Find(TableName) <> Undefined;
 EndFunction
 
-Function GetQueryTableByName(TableName, Parameters) Export
+Function GetQueryTableByName(TableName, Parameters, RaiseExeption = False) Export
 	VTSearch = Parameters.TempTablesManager.Tables.Find(TableName);
 	If VTSearch = Undefined Then
-		Return New ValueTable();
+		If RaiseExeption Then
+			Raise StrTemplate("Table [%1] not found in temp tables", TableName);
+		Else
+			Return New ValueTable();
+		EndIf;
 	EndIf;
 	Return VTSearch.GetData().Unload();
 EndFunction	

@@ -476,7 +476,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.PurchaseOrder.ItemList");
 	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
 	                                                                PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters),
-	                                                                PostingServer.GetQueryTableByName("R4035B_IncomingStocks_Exists", Parameters),
+	                                                                PostingServer.GetQueryTableByName("Exists_R4035B_IncomingStocks", Parameters),
 	                                                                AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
@@ -503,7 +503,7 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
-	QueryArray.Add(R4035B_IncomingStocks_Exists());
+	QueryArray.Add(Exists_R4035B_IncomingStocks());
 	Return QueryArray;
 EndFunction
 
@@ -674,10 +674,10 @@ Function R4035B_IncomingStocks()
 		|	AND NOT QueryTable.IsCanceled";
 EndFunction	
 
-Function R4035B_IncomingStocks_Exists()
+Function Exists_R4035B_IncomingStocks()
 	Return
 		"SELECT *
-		|	INTO R4035B_IncomingStocks_Exists
+		|	INTO Exists_R4035B_IncomingStocks
 		|FROM
 		|	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
 		|WHERE

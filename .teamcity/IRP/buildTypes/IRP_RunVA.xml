@@ -441,6 +441,7 @@ $VanessaRun = {
     Compress-Archive -Path "$workingDir/$FolderForAllArtefact/allureTag/$elementTag/*" -DestinationPath "$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip"
     Write-Host "##teamcity[publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure']"
 
+	Write-Host "publishArtifacts importData type='junit' path='$FolderForAllArtefact/AllSteps/$elementTag'"
 	Write-Host "##teamcity[importData type='junit' path='$FolderForAllArtefact/AllSteps/$elementTag']"
 
 }

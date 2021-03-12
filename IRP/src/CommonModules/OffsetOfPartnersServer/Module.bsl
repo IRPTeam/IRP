@@ -115,6 +115,46 @@ Procedure Customers_OnTransaction(Parameters) Export
 		
 EndProcedure
 
+Procedure Customers_OnTransaction_Unposting(Parameters) Export
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Currency,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Basis AS TransactionDocument,
+	|	Table.Basis AS AdvancesDocument,
+	|	Table.Agreement,
+	|	Table.Amount
+	|INTO OffsetOfAdvance
+	|FROM
+	|	AccumulationRegister.R2021B_CustomersTransactions AS Table
+	|WHERE
+	|	FALSE
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Currency,
+	|	Table.Partner,
+	|	Table.Invoice,
+	|	Table.PaymentDate,
+	|	Table.Agreement,
+	|	Table.Amount
+	|INTO OffsetOfAging
+	|FROM
+	|	AccumulationRegister.R5011B_PartnersAging AS Table
+	|WHERE
+	|	FALSE";
+	Query.Execute();	
+
+EndProcedure
+
 // Parameters:
 // 
 // -->Input tables:

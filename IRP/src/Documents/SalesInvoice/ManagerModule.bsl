@@ -974,7 +974,12 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return;
+#Region NewRegisterPosting
+	OffsetOfPartnersServer.Customers_OnTransaction_Unposting(Parameters);
+	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export

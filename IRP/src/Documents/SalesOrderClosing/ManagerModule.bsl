@@ -91,7 +91,7 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
-	QueryArray.Add(Exists_R4011B_FreeStocks());
+	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	Return QueryArray;	
 EndFunction
 
@@ -245,16 +245,6 @@ Function R4011B_FreeStocks()
 		|FROM
 		|	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, Order = &SalesOrder) AS StockReservation";
 
-EndFunction
-
-Function Exists_R4011B_FreeStocks()
-	Return
-	"SELECT *
-	|INTO Exists_R4011B_FreeStocks
-	|FROM
-	|	AccumulationRegister.R4011B_FreeStocks AS R4011B_FreeStocks
-	|WHERE
-	|	R4011B_FreeStocks.Recorder = &Ref";
 EndFunction
 
 Function R4012B_StockReservation()

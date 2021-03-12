@@ -2651,8 +2651,8 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(VendorsTransactions());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(IncomingStocksReal());
-	QueryArray.Add(Exists_R4011B_FreeStocks());
-	QueryArray.Add(Exists_R4010B_ActualStocks());
+	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
+	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(Exists_R4035B_IncomingStocks());
 	QueryArray.Add(Exists_R4036B_IncomingStocksRequested());
 	Return QueryArray;
@@ -3068,16 +3068,6 @@ Function R4010B_ActualStocks()
 
 EndFunction
 
-Function Exists_R4010B_ActualStocks()
-	Return
-	"SELECT *
-	|INTO Exists_R4010B_ActualStocks
-	|FROM
-	|	AccumulationRegister.R4010B_ActualStocks AS R4010B_ActualStocks
-	|WHERE
-	|	R4010B_ActualStocks.Recorder = &Ref";
-EndFunction
-
 Function R4011B_FreeStocks()
 	Return
 		"SELECT
@@ -3107,16 +3097,6 @@ Function R4011B_FreeStocks()
 		|WHERE
 		|	TRUE";
 
-EndFunction
-
-Function Exists_R4011B_FreeStocks()
-	Return
-	"SELECT *
-	|INTO Exists_R4011B_FreeStocks
-	|FROM
-	|	AccumulationRegister.R4011B_FreeStocks AS R4011B_FreeStocks
-	|WHERE
-	|	R4011B_FreeStocks.Recorder = &Ref";
 EndFunction
 
 Function R4012B_StockReservation()

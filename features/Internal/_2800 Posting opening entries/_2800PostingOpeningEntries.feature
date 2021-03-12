@@ -563,21 +563,6 @@ Scenario: _400002 opening entry inventory balance
 		And I delete "$$OpeningEntry400002$$" variable
 		And I save the value of "Number" field as "$$NumberOpeningEntry400002$$"
 		And I save the window as "$$OpeningEntry400002$$"
-	* Check movements
-		Given I open hyperlink "e1cib/list/AccumulationRegister.InventoryBalance"
-		And "List" table contains lines
-		| 'Quantity' | 'Recorder'         | 'Company'      | 'Item key'  |
-		| '500,000'  | '$$OpeningEntry400002$$' | 'Main Company' | 'XS/Blue'   |
-		| '400,000'  | '$$OpeningEntry400002$$' | 'Main Company' | 'S/Yellow'  |
-		| '400,000'  | '$$OpeningEntry400002$$' | 'Main Company' | 'XS/Blue'   |
-		| '100,000'  | '$$OpeningEntry400002$$' | 'Main Company' | '38/Yellow' |
-		| '100,000'  | '$$OpeningEntry400002$$' | 'Main Company' | '38/Yellow' |
-		| '100,000'  | '$$OpeningEntry400002$$' | 'Main Company' | '36/Red'    |
-		| '100,000'  | '$$OpeningEntry400002$$' | 'Main Company' | '36/Red'    |
-		| '200,000'  | '$$OpeningEntry400002$$' | 'Main Company' | '36/18SD'   |
-		| '300,000'  | '$$OpeningEntry400002$$' | 'Main Company' | '36/18SD'   |
-		| '500,000'  | '$$OpeningEntry400002$$' | 'Main Company' | 'L/Green'   |
-		| '100,000'  | '$$OpeningEntry400002$$' | 'Main Company' | 'L/Green'   |
 		And I close all client application windows
 	
 

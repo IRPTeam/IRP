@@ -18,7 +18,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables = Parameters.DocumentDataTables;
 	
 	QueryArray = GetQueryTextsMasterTables();
-	PostingServer.SetRegisters(Tables, Ref, True);
+	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 

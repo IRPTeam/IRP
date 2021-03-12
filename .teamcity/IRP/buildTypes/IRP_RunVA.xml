@@ -250,7 +250,7 @@ $VanessaRun = {
     'htmlcreate': false,
     'ignoretags': ['IgnoreOnCIMainBuild', 'Negative'],
     'junitcreatereport': true,
-	"JUnitReport": {},
+	'JUnitReport': {},
     'librarycatalogs': [],
     'logerrorstotext': true,
     'logstepstotext': false,

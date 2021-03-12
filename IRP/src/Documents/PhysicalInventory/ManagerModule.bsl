@@ -3,26 +3,18 @@
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("StockReservation_Expense"  , PostingServer.CreateTable(AccReg.StockReservation));
-	Tables.Insert("StockReservation_Receipt"  , PostingServer.CreateTable(AccReg.StockReservation));
-	Tables.Insert("StockBalance_Expense"      , PostingServer.CreateTable(AccReg.StockBalance));
-	Tables.Insert("StockBalance_Receipt"      , PostingServer.CreateTable(AccReg.StockBalance));
 	Tables.Insert("StockAdjustmentAsWriteOff" , PostingServer.CreateTable(AccReg.StockAdjustmentAsWriteOff));
 	Tables.Insert("StockAdjustmentAsSurplus"  , PostingServer.CreateTable(AccReg.StockAdjustmentAsSurplus));
-	
-	Tables.Insert("StockReservation_Exists" , PostingServer.CreateTable(AccReg.StockReservation));
-	Tables.Insert("StockBalance_Exists"     , PostingServer.CreateTable(AccReg.StockBalance));
-	
-	Tables.StockReservation_Exists = 
-	AccumulationRegisters.StockReservation.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
-	
-	Tables.StockBalance_Exists = 
-	AccumulationRegisters.StockBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
 	
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	
 	If Not StatusInfo.Posting Then
+#Region NewRegistersPosting
+		QueryArray = GetQueryTextsSecondaryTables();
+		Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
+		PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion
 		Return Tables;
 	EndIf;
 	
@@ -39,12 +31,14 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("QueryTable", QueryTableItemList);
 	QueryResults = Query.ExecuteBatch();
 		
-	Tables.StockReservation_Expense  = QueryResults[1].Unload();
-	Tables.StockReservation_Receipt  = QueryResults[2].Unload();
-	Tables.StockBalance_Expense      = QueryResults[3].Unload();
-	Tables.StockBalance_Receipt      = QueryResults[4].Unload();
-	Tables.StockAdjustmentAsWriteOff = QueryResults[5].Unload();
-	Tables.StockAdjustmentAsSurplus  = QueryResults[6].Unload();
+	Tables.StockAdjustmentAsWriteOff = QueryResults[1].Unload();
+	Tables.StockAdjustmentAsSurplus  = QueryResults[2].Unload();
+	
+#Region NewRegistersPosting		
+	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion	
 	
 	Parameters.IsReposting = False;
 	
@@ -93,72 +87,7 @@ Function GetQueryTextQueryTable()
 		|FROM
 		|	&QueryTable AS QueryTable
 		|;
-		|
 		|//[1]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Store AS Store,
-		|	tmp.ItemKey AS ItemKey,
-		|	SUM(tmp.WriteOffQuantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Period
-		|HAVING
-		|	SUM(tmp.WriteOffQuantity) <> 0
-		|;
-		|
-		|//[2]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Store AS Store,
-		|	tmp.ItemKey AS ItemKey,
-		|	SUM(tmp.SurplusQuantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Period
-		|HAVING
-		|	SUM(tmp.SurplusQuantity) <> 0
-		|;
-		|
-		|//[3]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Store AS Store,
-		|	tmp.ItemKey AS ItemKey,
-		|	SUM(tmp.WriteOffQuantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Period
-		|HAVING
-		|	SUM(tmp.WriteOffQuantity) <> 0
-		|;
-		|
-		|//[4]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Store AS Store,
-		|	tmp.ItemKey AS ItemKey,
-		|	SUM(tmp.SurplusQuantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Period
-		|HAVING
-		|	SUM(tmp.SurplusQuantity) <> 0
-		|;
-		|
-		|//[5]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
@@ -176,7 +105,7 @@ Function GetQueryTextQueryTable()
 		|	SUM(tmp.WriteOffQuantity) <> 0
 		|;
 		|
-		|//[6]//////////////////////////////////////////////////////////////////////////////
+		|//[2]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Store AS Store,
 		|	tmp.ItemKey AS ItemKey,
@@ -195,75 +124,22 @@ Function GetQueryTextQueryTable()
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// StockReservation
-	StockReservation = 
-	AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation_Expense);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
-	// StockBalance
-	StockBalance = 
-	AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Expense);
-	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
-	// StockAdjustmentAsWriteOff
-	StockAdjustmentAsWriteOff = 
-	AccumulationRegisters.StockAdjustmentAsWriteOff.GetLockFields(DocumentDataTables.StockAdjustmentAsWriteOff);
-	DataMapWithLockFields.Insert(StockAdjustmentAsWriteOff.RegisterName, StockAdjustmentAsWriteOff.LockInfo);
-	
-	// StockAdjustmentAsSurplus
-	StockAdjustmentAsSurplus = 
-	AccumulationRegisters.StockAdjustmentAsSurplus.GetLockFields(DocumentDataTables.StockAdjustmentAsSurplus);
-	DataMapWithLockFields.Insert(StockAdjustmentAsSurplus.RegisterName, StockAdjustmentAsSurplus.LockInfo);
-	
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
+#Region NewRegisterPosting
+	Tables = Parameters.DocumentDataTables;	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
-	
-	// StockReservation
-	ArrayOfTables = New Array();
-	Table1 = Parameters.DocumentDataTables.StockReservation_Expense.Copy();
-	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table1);
-	
-	Table2 = Parameters.DocumentDataTables.StockReservation_Receipt.Copy();
-	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");
-	ArrayOfTables.Add(Table2);
-	
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockReservation,
-		New Structure("RecordSet, WriteInTransaction",
-			PostingServer.JoinTables(ArrayOfTables,
-			"RecordType, Period, Store, ItemKey, Quantity"),
-			True));
-	
-	// StockBalance
-	ArrayOfTables = New Array();
-	Table1 = Parameters.DocumentDataTables.StockBalance_Expense.Copy();
-	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table1);
-	
-	Table2 = Parameters.DocumentDataTables.StockBalance_Receipt.Copy();
-	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");
-	ArrayOfTables.Add(Table2);
-	
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
-		New Structure("RecordSet, WriteInTransaction",
-			PostingServer.JoinTables(ArrayOfTables,
-			"RecordType, Period, Store, ItemKey, Quantity"),
-			True));
-	
+		
 	// StockAdjustmentAsWriteOff
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockAdjustmentAsWriteOff,
 		New Structure("RecordType, RecordSet",
@@ -275,6 +151,10 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.StockAdjustmentAsSurplus));
+
+#Region NewRegistersPosting
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+#EndRegion	
 	
 	Return PostingDataTables;
 EndFunction
@@ -292,22 +172,15 @@ Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Und
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// StockReservation
-	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation_Exists);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
-	// StockBalance
-	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Exists);
-	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return;
+#Region NewRegistersPosting
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -322,8 +195,7 @@ EndProcedure
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	If StatusInfo.Posting Then
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "BalancePeriod", 
-			New Boundary(New PointInTime(StatusInfo.Period, Ref), BoundaryType.Including));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "BalancePeriod", New Boundary(New PointInTime(StatusInfo.Period, Ref), BoundaryType.Including));
 	EndIf;
 	If Not (Parameters.Property("Unposting") And Parameters.Unposting) Then
 		Parameters.Insert("RecordType", AccumulationRecordType.Expense);
@@ -446,18 +318,18 @@ EndFunction
 Function GetQueryTextFillExpCount()
 	Return 
 	"SELECT
-	|	StockBalanceBalance.Store,
-	|	StockBalanceBalance.ItemKey.Item AS Item,
-	|	StockBalanceBalance.ItemKey,
+	|	R4010B_ActualStocks.Store,
+	|	R4010B_ActualStocks.ItemKey.Item AS Item,
+	|	R4010B_ActualStocks.ItemKey,
 	|	CASE
-	|		WHEN StockBalanceBalance.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
-	|			THEN StockBalanceBalance.ItemKey.Unit
-	|		ELSE StockBalanceBalance.ItemKey.Item.Unit
+	|		WHEN R4010B_ActualStocks.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
+	|			THEN R4010B_ActualStocks.ItemKey.Unit
+	|		ELSE R4010B_ActualStocks.ItemKey.Item.Unit
 	|	END AS Unit,
-	|	StockBalanceBalance.QuantityBalance AS ExpCount,
+	|	R4010B_ActualStocks.QuantityBalance AS ExpCount,
 	|	0 AS PhysCount
 	|FROM
-	|	AccumulationRegister.StockBalance.Balance(&Period, Store = &Store) AS StockBalanceBalance";
+	|	AccumulationRegister.R4010B_ActualStocks.Balance(&Period, Store = &Store) AS R4010B_ActualStocks";
 EndFunction
 
 Function GetQueryTextFillExpCount_ByItemList()
@@ -474,40 +346,42 @@ Function GetQueryTextFillExpCount_ByItemList()
 	|FROM
 	|	&ItemList AS tmp
 	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	StockBalanceBalance.Store,
-	|	StockBalanceBalance.ItemKey,
+	|	R4010B_ActualStocks.Store,
+	|	R4010B_ActualStocks.ItemKey,
 	|	CASE
-	|		WHEN StockBalanceBalance.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
-	|			THEN StockBalanceBalance.ItemKey.Unit
-	|		ELSE StockBalanceBalance.ItemKey.Item.Unit
+	|		WHEN R4010B_ActualStocks.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
+	|			THEN R4010B_ActualStocks.ItemKey.Unit
+	|		ELSE R4010B_ActualStocks.ItemKey.Item.Unit
 	|	END AS Unit,
-	|	StockBalanceBalance.QuantityBalance AS ExpCount
-	|INTO StockBalance
+	|	R4010B_ActualStocks.QuantityBalance AS ExpCount
+	|INTO ActualStocks
 	|FROM
-	|	AccumulationRegister.StockBalance.Balance(&Period, (Store) IN
+	|	AccumulationRegister.R4010B_ActualStocks.Balance(&Period, Store IN
 	|		(SELECT
 	|			ItemList.Store
 	|		FROM
-	|			ItemList AS ItemList)) AS StockBalanceBalance
+	|			ItemList AS ItemList)) AS R4010B_ActualStocks
 	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	ItemList.Key,
-	|	ISNULL(ItemList.Store, StockBalance.Store) AS Store,
-	|	ISNULL(ItemList.ItemKey, StockBalance.ItemKey) AS ItemKey,
-	|	ISNULL(ItemList.ItemKey.Item, StockBalance.ItemKey.Item) AS Item,
-	|	ISNULL(ItemList.Unit, StockBalance.Unit) AS Unit,
+	|	ISNULL(ItemList.Store, ActualStocks.Store) AS Store,
+	|	ISNULL(ItemList.ItemKey, ActualStocks.ItemKey) AS ItemKey,
+	|	ISNULL(ItemList.ItemKey.Item, ActualStocks.ItemKey.Item) AS Item,
+	|	ISNULL(ItemList.Unit, ActualStocks.Unit) AS Unit,
 	|	ISNULL(ItemList.PhysCount, 0) AS PhysCount,
-	|	ISNULL(StockBalance.ExpCount, 0) AS ExpCount,
+	|	ISNULL(ActualStocks.ExpCount, 0) AS ExpCount,
 	|	ISNULL(ItemList.LineNumber, -1) AS LineNumber,
-	|	ISNULL(ItemList.ResponsiblePerson, Value(Catalog.Partners.EmptyRef)) AS ResponsiblePerson
+	|	ISNULL(ItemList.ResponsiblePerson, VALUE(Catalog.Partners.EmptyRef)) AS ResponsiblePerson
 	|FROM
 	|	ItemList AS ItemList
-	|		FULL JOIN StockBalance AS StockBalance
-	|		ON ItemList.Store = StockBalance.Store
-	|		AND ItemList.ItemKey = StockBalance.ItemKey
+	|		FULL JOIN ActualStocks AS ActualStocks
+	|		ON ItemList.Store = ActualStocks.Store
+	|		AND ItemList.ItemKey = ActualStocks.ItemKey
 	|ORDER BY
 	|	LineNumber";
 EndFunction
@@ -525,19 +399,98 @@ EndFunction
 Function GetAdditionalQueryParamenters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
+	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
+	StrParams.Insert("StatusInfoPosting", StatusInfo.Posting);
 	Return StrParams;
 EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
-
+	QueryArray.Add(ItemList());
+	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
+	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
-
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4010B_ActualStocks());
 	Return QueryArray;
+EndFunction
+
+Function ItemList()
+	Return
+		"SELECT
+		|	ItemList.Ref.Date AS Period,
+		|	ItemList.Ref.Store AS Store,
+		|	ItemList.ItemKey AS ItemKey,
+		|	CASE
+		|		WHEN ItemList.Difference > 0
+		|			THEN ItemList.Difference
+		|		ELSE 0
+		|	END AS SurplusQuantity,
+		|	CASE
+		|		WHEN ItemList.Difference < 0
+		|			THEN -ItemList.Difference
+		|		ELSE 0
+		|	END AS WriteOffQuantity,
+		|	&StatusInfoPosting AS StatusInfoPosting
+		|INTO ItemList
+		|FROM
+		|	Document.PhysicalInventory.ItemList AS ItemList
+		|WHERE
+		|	ItemList.Ref = &Ref
+		|	AND ItemList.Difference <> 0
+		|	AND &StatusInfoPosting";
+EndFunction
+
+Function R4011B_FreeStocks()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.SurplusQuantity AS Quantity,
+		|	*
+		|INTO R4011B_FreeStocks
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.SurplusQuantity <> 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.WriteOffQuantity AS Quantity,
+		|	*
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.WriteOffQuantity <> 0";
+EndFunction
+
+Function R4010B_ActualStocks()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.SurplusQuantity AS Quantity,
+		|	*
+		|INTO R4010B_ActualStocks
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.SurplusQuantity <> 0 
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.WriteOffQuantity AS Quantity,
+		|	*
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.WriteOffQuantity <> 0";
 EndFunction
 
 #EndRegion

@@ -176,6 +176,20 @@
         <value>16</value>
       </code>
     </items>
+    <items id="101bc9f0-3351-4061-a6f9-b404d5e75d27">
+      <name>StockAdjustmentAsSurplus</name>
+      <description>Stock adjustment as surplus</description>
+      <code xsi:type="core:StringValue">
+        <value>17</value>
+      </code>
+    </items>
+    <items id="30450097-4814-4e8b-b480-b8a235c42f33">
+      <name>StockAdjustmentAsWriteOff</name>
+      <description>Stock adjustment as write off</description>
+      <code xsi:type="core:StringValue">
+        <value>18</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

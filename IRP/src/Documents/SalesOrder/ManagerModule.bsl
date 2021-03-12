@@ -1657,7 +1657,8 @@ Function ItemList()
 		|FROM
 		|	Document.SalesOrder.ItemList AS SalesOrderItemList
 		|WHERE
-		|	SalesOrderItemList.Ref = &Ref";
+		|	SalesOrderItemList.Ref = &Ref
+		|	AND &StatusInfoPosting";
 EndFunction
 
 Function R2010T_SalesOrders()
@@ -1668,9 +1669,7 @@ Function R2010T_SalesOrders()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	NOT ItemList.isCanceled
-		|	AND ItemList.StatusInfoPosting";
-
+		|	NOT ItemList.isCanceled";
 EndFunction
 
 Function R2011B_SalesOrdersShipment()
@@ -1683,9 +1682,7 @@ Function R2011B_SalesOrdersShipment()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.isCanceled
-		|	AND NOT ItemList.IsService
-		|	AND ItemList.StatusInfoPosting";
-
+		|	AND NOT ItemList.IsService";
 EndFunction
 
 Function R2012B_SalesOrdersInvoiceClosing()
@@ -1697,9 +1694,7 @@ Function R2012B_SalesOrdersInvoiceClosing()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	NOT ItemList.isCanceled
-		|	AND ItemList.StatusInfoPosting";
-
+		|	NOT ItemList.isCanceled";
 EndFunction
 
 Function R2013T_SalesOrdersProcurement()
@@ -1713,9 +1708,7 @@ Function R2013T_SalesOrdersProcurement()
 		|WHERE
 		|	NOT ItemList.isCanceled
 		|	AND NOT ItemList.IsService
-		|	AND ItemList.IsProcurementMethod_Purchase
-		|	AND ItemList.StatusInfoPosting";
-
+		|	AND ItemList.IsProcurementMethod_Purchase";
 EndFunction
 
 Function R2014T_CanceledSalesOrders()
@@ -1726,9 +1719,7 @@ Function R2014T_CanceledSalesOrders()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.isCanceled
-		|	AND ItemList.StatusInfoPosting";
-
+		|	ItemList.isCanceled";
 EndFunction
 
 #Region Stock
@@ -1744,9 +1735,7 @@ Function R4011B_FreeStocks()
 		|WHERE
 		|	NOT ItemList.isCanceled
 		|	AND NOT ItemList.IsService
-		|	AND ItemList.IsProcurementMethod_Stock
-		|	AND ItemList.StatusInfoPosting";
-
+		|	AND ItemList.IsProcurementMethod_Stock";
 EndFunction
 
 Function R4012B_StockReservation()
@@ -1760,9 +1749,7 @@ Function R4012B_StockReservation()
 		|WHERE
 		|	NOT ItemList.isCanceled
 		|	AND NOT ItemList.IsService
-		|	AND ItemList.IsProcurementMethod_Stock
-		|	AND ItemList.StatusInfoPosting";
-
+		|	AND ItemList.IsProcurementMethod_Stock";
 EndFunction
 
 #EndRegion
@@ -1776,9 +1763,7 @@ Function R4013B_StockReservationPlanning()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	FALSE
-		|	AND ItemList.StatusInfoPosting";
-
+		|	FALSE";
 EndFunction
 
 Function R4034B_GoodsShipmentSchedule()
@@ -1795,9 +1780,7 @@ Function R4034B_GoodsShipmentSchedule()
 		|	NOT ItemList.isCanceled
 		|	AND NOT ItemList.IsService
 		|	AND NOT ItemList.DeliveryDate = DATETIME(1, 1, 1)
-		|	AND ItemList.UseItemsShipmentScheduling
-		|	AND ItemList.StatusInfoPosting";
-
+		|	AND ItemList.UseItemsShipmentScheduling";
 EndFunction
 
 #EndRegion

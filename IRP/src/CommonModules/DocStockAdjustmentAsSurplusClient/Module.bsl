@@ -14,11 +14,13 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings =
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
+	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item, AddInfo = Undefined) Export
 	SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Object);
 	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);	
+	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
 EndProcedure
 
 Procedure ItemListItemOnChange(Object, Form, Item = Undefined, AddInfo = Undefined) Export

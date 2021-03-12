@@ -8,6 +8,11 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings =
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
+	RowIDInfoClient.UpdateQuantity(Object, Form);
+EndProcedure
+
+Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
+	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
 EndProcedure
 
 Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
@@ -152,9 +157,7 @@ Procedure FillExpCount(Object, Form) Export
 		Return;
 	EndIf;
 	
-	FillItemList(Object, 
-				Form, 
-				DocPhysicalInventoryServer.GetItemListWithFillingExpCount(Object.Ref, Object.Store));
+	FillItemList(Object, Form, DocPhysicalInventoryServer.GetItemListWithFillingExpCount(Object.Ref, Object.Store));
 EndProcedure
 
 Procedure UpdateExpCount(Object, Form) Export
@@ -165,15 +168,11 @@ Procedure UpdateExpCount(Object, Form) Export
 		NewRow.Store = Object.Store;
 		ItemList.Add(NewRow);
 	EndDo;
-	FillItemList(Object, 
-				Form, 
-				DocPhysicalInventoryServer.GetItemListWithFillingExpCount(Object.Ref, Object.Store, ItemList));
+	FillItemList(Object, Form, DocPhysicalInventoryServer.GetItemListWithFillingExpCount(Object.Ref, Object.Store, ItemList));
 EndProcedure
 
 Procedure UpdatePhysCount(Object, Form) Export
-	UpdateItemList(Object, 
-					Form, 
-					DocPhysicalInventoryServer.GetItemListWithFillingPhysCount(Object.Ref));
+	UpdateItemList(Object, Form, DocPhysicalInventoryServer.GetItemListWithFillingPhysCount(Object.Ref));
 EndProcedure
 
 Procedure FillItemList(Object, Form, Result)

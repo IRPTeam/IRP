@@ -304,7 +304,8 @@ Function ItemList()
 		|FROM
 		|	Document.InventoryTransferOrder.ItemList AS InventoryTransferOrderItemList
 		|WHERE
-		|	InventoryTransferOrderItemList.Ref = &Ref";
+		|	InventoryTransferOrderItemList.Ref = &Ref
+		|	AND &StatusInfoPosting";
 EndFunction	
 
 Function R4011B_FreeStocks()
@@ -320,7 +321,6 @@ Function R4011B_FreeStocks()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemLIst.PurchaseOrderExists
-		|	AND ItemList.StatusInfoPosting
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.StoreSender,
@@ -341,7 +341,6 @@ Function R4012B_StockReservation()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.PurchaseOrderExists
-		|	AND ItemList.StatusInfoPosting
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.StoreSender,
@@ -359,8 +358,7 @@ Function R4016B_InternalSupplyRequestOrdering()
 		|FROM 
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.InternalSupplyRequestExists
-		|	AND ItemLIst.StatusInfoPosting";
+		|	ItemList.InternalSupplyRequestExists";
 EndFunction
 
 Function R4020T_StockTransferOrders()
@@ -371,7 +369,7 @@ Function R4020T_StockTransferOrders()
 		|FROM 
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.StatusInfoPosting";
+		|	TRUE";
 EndFunction
 
 Function R4021B_StockTransferOrdersReceipt()
@@ -384,7 +382,7 @@ Function R4021B_StockTransferOrdersReceipt()
 		|FROM 
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.StatusInfoPosting";
+		|	TRUE";
 EndFunction
 
 Function R4022B_StockTransferOrdersShipment()
@@ -397,7 +395,7 @@ Function R4022B_StockTransferOrdersShipment()
 		|FROM 
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.StatusInfoPosting";
+		|	TRUE";
 EndFunction
 
 Function R4035B_IncomingStocks()
@@ -414,7 +412,6 @@ Function R4035B_IncomingStocks()
 		|	ItemList AS ItemList
 		|WHERE
 		|	ItemLIst.PurchaseOrderExists
-		|	AND ItemList.StatusInfoPosting
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.StoreSender,
@@ -448,7 +445,6 @@ Function R4036B_IncomingStocksRequested()
 		|	ItemList AS ItemList
 		|WHERE
 		|	ItemList.PurchaseOrderExists
-		|	AND ItemLIst.StatusInfoPosting
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.StoreSender,
@@ -468,7 +464,6 @@ Function Exists_R4036B_IncomingStocksRequested()
 		|WHERE
 		|	R4036B_IncomingStocksRequested.Recorder = &Ref";
 EndFunction
-
 
 #EndRegion
 

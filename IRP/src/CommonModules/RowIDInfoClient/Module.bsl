@@ -17,23 +17,31 @@ Procedure UpdateQuantity(Object, Form) Export
 	For Each RowItemList In Object.ItemList Do
 		IDInfoRows = Object.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 1 Then
-			IDInfoRows[0].Quantity = RowItemList.QuantityInBaseUnit;
+			If CommonFunctionsClientServer.ObjectHasProperty(RowItemList, "Difference") Then
+				IDInfoRows[0].Quantity = ?(RowItemList.Difference < 0, -RowItemList.Difference, RowItemList.Difference);
+			Else
+				IDInfoRows[0].Quantity = RowItemList.QuantityInBaseUnit;
+			EndIf;
 		Else
+			
 			TabularSectionName = "";
 			If Object.Property("ShipmentConfirmations") Then
 				TabularSectionName = "ShipmentConfirmations";
 			ElsIf Object.Property("GoodsReceipts") Then
 				TabularSectionName = "GoodsReceipts";
 			EndIf;
+			
 			If Not ValueIsFilled(TabularSectionName) Then
 				Continue;
 			EndIf;
+			
 			For Each Row In Object[TabularSectionName] Do
 				IDInfoRows = Object.RowIDInfo.FindRows(New Structure("Key, BasisKey", Row.Key, Row.BasisKey));
 				If IDInfoRows.Count() = 1 Then
 					IDInfoRows[0].Quantity = Row.Quantity;
 				EndIf;
 			EndDo;
+			
 		EndIf;
 	EndDo;
 EndProcedure
@@ -66,12 +74,12 @@ Function GetTablesInfo(Object = Undefined) Export
 	If Object = Undefined Then
 		Return TablesInfo;
 	EndIf;
-	TablesInfo.ItemListRows  = GetItemListRows(Object.ItemList);
-	TablesInfo.RowIDInfoRows = GetRowIDInfoRows(Object.RowIDInfo);
+	TablesInfo.ItemListRows  = GetItemListRows(Object.ItemList, Object);
+	TablesInfo.RowIDInfoRows = GetRowIDInfoRows(Object.RowIDInfo, Object);
 	Return TablesInfo;
 EndFunction
 
-Function GetItemListRows(ItemList) Export
+Function GetItemListRows(ItemList, Object) Export
 	ItemListRows = New Array();
 	For Each Row In ItemList Do
 		NewRow = New Structure();
@@ -82,6 +90,8 @@ Function GetItemListRows(ItemList) Export
 		NewRow.Insert("Unit"      , Row.Unit);
 		If CommonFunctionsClientServer.ObjectHasProperty(Row, "Store") Then
 			NewRow.Insert("Store", Row.Store);
+		ElsIf CommonFunctionsClientServer.ObjectHasProperty(Object, "Store") Then
+			NewRow.Insert("Store", Object.Store);
 		Else
 			NewRow.Insert("Store", Undefined);
 		EndIf;
@@ -91,7 +101,7 @@ Function GetItemListRows(ItemList) Export
 	Return ItemListRows;
 EndFunction
 
-Function GetRowIDInfoRows(RowIDInfo) Export
+Function GetRowIDInfoRows(RowIDInfo, Object)
 	RowIDInfoRows = New Array();
 	For Each Row In RowIDInfo Do
 		NewRow = New Structure();

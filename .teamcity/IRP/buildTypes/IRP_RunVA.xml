@@ -144,6 +144,7 @@ New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/allureTa
 New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/logdata"
 New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/AllSteps"
 New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/AllSteps/Template"
+New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/AllSteps/junit"
 
 #here has to be template DB
 Copy-Item -Path "$workingDir/TempDB/1Cv8.1CD" -Destination "$workingDir/$FolderForAllArtefact/AllSteps/Template/1Cv8.1CD"
@@ -248,7 +249,8 @@ $VanessaRun = {
     'getallformsdataonerror': true,
     'htmlcreate': false,
     'ignoretags': ['IgnoreOnCIMainBuild', 'Negative'],
-    'junitcreatereport': false,
+    'junitcreatereport': true,
+	"JUnitReport": {},
     'librarycatalogs': [],
     'logerrorstotext': true,
     'logstepstotext': false,
@@ -281,6 +283,7 @@ $VanessaRun = {
     $a | Add-Member -Type NoteProperty -Name 'testclientports' -Value "$startPort - $portmax"
     $a.AllureReport | Add-Member -Type NoteProperty -Name 'directorytobuildhierarchy' -Value "$FeaturePath"
     $a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepath' -Value "$allurePath/$elementTag"
+    $a.JUnitReport  | Add-Member -Type NoteProperty -Name 'junitpath' -Value "$workingDir/$FolderForAllArtefact/junit"
     $a | Add-Member -Type NoteProperty -Name 'logpath' -Value "$workingDir/$FolderForAllArtefact/logpath/$elementTag.log"    
    
     $a.librarycatalogs += "$workingDir/DataProcessor"
@@ -438,6 +441,7 @@ $VanessaRun = {
     Compress-Archive -Path "$workingDir/$FolderForAllArtefact/allureTag/$elementTag/*" -DestinationPath "$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip"
     Write-Host "##teamcity[publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure']"
 
+	Write-Host "##teamcity[importData type='junit' path='$FolderForAllArtefact/junit']"
 
 }
 

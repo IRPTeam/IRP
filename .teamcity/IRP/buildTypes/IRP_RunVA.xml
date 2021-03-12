@@ -385,7 +385,21 @@ $VanessaRun = {
 
                   }else{
                       $ErrorDescription = $ErrorDescription.replace("|", "||").replace("'", "|'").replace("[", "|[").replace("]", "|]").replace("`n", "|n").replace("`r", "|r")
-                      Write-Host "##teamcity[testFailed name='$CurrentTest' details='$ErrorDescription' message='$ErrorDescription' flowId='$elementTag']"
+                      
+                      switch -regex ($ErrorDescription)
+                        {
+                            'and expected value is' {
+                                $matches = ([regex]'<.*?>').Matches($ErrorDescription) ;
+                                $expected = $matches[$matches.Count - 1].Value
+                                $actual = $matches[$matches.Count - 2].Value
+                                Write-Host "##teamcity[testFailed type='comparisonFailure' name='$CurrentTest' details='$ErrorDescription' message='$ErrorDescription' flowId='$elementTag' expected='$expected' actual='$actual']"
+                            }
+                            default  {
+                                Write-Host "##teamcity[testFailed name='$CurrentTest' details='$ErrorDescription' message='$ErrorDescription' flowId='$elementTag']"
+                            }
+                        }
+                      
+                      
                   }    
                   $hasFailedTest = $true
               }else{

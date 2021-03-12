@@ -1227,12 +1227,32 @@ Function CheckBalance_R4011B_FreeStocks(Ref, Tables, RecordType, Unposting, AddI
 	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);	
 EndFunction	
 
+Function Exists_R4011B_FreeStocks() Export
+	Return
+	"SELECT *
+	|INTO Exists_R4011B_FreeStocks
+	|FROM
+	|	AccumulationRegister.R4011B_FreeStocks AS R4011B_FreeStocks
+	|WHERE
+	|	R4011B_FreeStocks.Recorder = &Ref";
+EndFunction
+
 Function CheckBalance_R4010B_ActualStocks(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
 	Parameters = New Structure();
 	Parameters.Insert("RegisterName" , "R4010B_ActualStocks");
 	Parameters.Insert("Operation"    , "R4010B_ActualStocks");
 	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);	
 EndFunction	
+
+Function Exists_R4010B_ActualStocks() Export
+	Return
+	"SELECT *
+	|INTO Exists_R4010B_ActualStocks
+	|FROM
+	|	AccumulationRegister.R4010B_ActualStocks AS R4010B_ActualStocks
+	|WHERE
+	|	R4010B_ActualStocks.Recorder = &Ref";
+EndFunction
 
 Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
 	BalancePeriod = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod");

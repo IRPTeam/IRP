@@ -46,7 +46,8 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return;
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -59,7 +60,8 @@ EndProcedure
 #Region CheckAfterWrite
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
-	Return;
+	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
+	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.ItemStockAdjustment.ItemList", AddInfo);
 EndProcedure
 
 #EndRegion
@@ -82,6 +84,8 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
+	QueryArray.Add(Exists_R4011B_FreeStocks());
+	QueryArray.Add(Exists_R4010B_ActualStocks());
 	Return QueryArray;	
 EndFunction
 
@@ -93,8 +97,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
 	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());
-	QueryArray.Add(StockBalance());
-	QueryArray.Add(StockReservation());
 	Return QueryArray;	
 EndFunction	
 
@@ -141,6 +143,16 @@ Function R4010B_ActualStocks()
 
 EndFunction
 
+Function Exists_R4010B_ActualStocks()
+	Return
+	"SELECT *
+	|INTO Exists_R4010B_ActualStocks
+	|FROM
+	|	AccumulationRegister.R4010B_ActualStocks AS R4010B_ActualStocks
+	|WHERE
+	|	R4010B_ActualStocks.Recorder = &Ref";
+EndFunction
+
 Function R4011B_FreeStocks()
 	Return
 		"SELECT
@@ -160,6 +172,16 @@ Function R4011B_FreeStocks()
 		|FROM
 		|	ItemList AS QueryTable";
 
+EndFunction
+
+Function Exists_R4011B_FreeStocks()
+	Return
+	"SELECT *
+	|INTO Exists_R4011B_FreeStocks
+	|FROM
+	|	AccumulationRegister.R4011B_FreeStocks AS R4011B_FreeStocks
+	|WHERE
+	|	R4011B_FreeStocks.Recorder = &Ref";
 EndFunction
 
 Function R4014B_SerialLotNumber()
@@ -230,48 +252,6 @@ Function R4052T_StockAdjustmentAsSurplus()
 		|FROM
 		|	ItemList AS QueryTable
 		|WHERE True";
-
-EndFunction
-
-Function StockBalance()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	QueryTable.ItemKey AS ItemKey,
-		|	*
-		|INTO StockBalance
-		|FROM
-		|	ItemList AS QueryTable
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
-		|	QueryTable.ItemKeyWriteOff AS ItemKey,
-		|	*
-		|FROM
-		|	ItemList AS QueryTable";
-
-EndFunction
-
-Function StockReservation()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	QueryTable.ItemKey AS ItemKey,
-		|	*
-		|INTO StockReservation
-		|FROM
-		|	ItemList AS QueryTable
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
-		|	QueryTable.ItemKeyWriteOff AS ItemKey,
-		|	*
-		|FROM
-		|	ItemList AS QueryTable";
 
 EndFunction
 

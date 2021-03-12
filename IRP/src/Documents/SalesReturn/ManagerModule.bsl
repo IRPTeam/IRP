@@ -777,7 +777,8 @@ Function ItemList()
 		|	ItemList.Key AS RowKey,
 		|	NOT GoodsReceipts.Key IS NULL AS GoodsReceiptExists,
 		|	GoodsReceipts.GoodsReceipt,
-		|	ItemList.NetAmount
+		|	ItemList.NetAmount,
+		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService
 		|INTO ItemList
 		|FROM
 		|	Document.SalesReturn.ItemList AS ItemList
@@ -1011,7 +1012,8 @@ Function R4010B_ActualStocks()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	NOT ItemList.UseGoodsReceipt
+		|	NOT ItemList.IsService
+		|	AND NOT ItemList.UseGoodsReceipt
 		|	AND NOT ItemList.GoodsReceiptExists";
 EndFunction
 
@@ -1027,7 +1029,8 @@ Function R4011B_FreeStocks()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	NOT ItemList.UseGoodsReceipt
+		|	NOT ItemList.IsService
+		|	AND NOT ItemList.UseGoodsReceipt
 		|	AND NOT ItemList.GoodsReceiptExists";
 EndFunction
 
@@ -1072,7 +1075,7 @@ Function R4050B_StockInventory()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	TRUE";
+		|	NOT ItemList.IsService";
 
 EndFunction
 

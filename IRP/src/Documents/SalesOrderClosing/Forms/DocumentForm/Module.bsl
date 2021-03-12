@@ -189,11 +189,6 @@ Procedure CurrencyOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure StatusOnChange(Item)
-	DocSalesOrderClosingClient.StatusOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
 Procedure ManagerOnChange(Item)
 	Return;
 EndProcedure
@@ -487,11 +482,6 @@ EndProcedure
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
 	DocSalesOrderClosingClient.SearchByBarcode(Barcode, Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure DecorationStatusHistoryClick(Item)
-	ObjectStatusesClient.OpenHistoryByStatus(Object.Ref, ThisObject);
 EndProcedure
 
 &AtClient

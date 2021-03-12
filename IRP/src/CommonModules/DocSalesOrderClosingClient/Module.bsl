@@ -804,14 +804,3 @@ EndProcedure
 
 #EndRegion
 
-#Region Common
-
-Procedure StatusOnChange(Object, Form, Item) Export
-	// GroupTitle
-	#If Not MobileClient Then
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-	#EndIf
-EndProcedure
-
-#EndRegion
-

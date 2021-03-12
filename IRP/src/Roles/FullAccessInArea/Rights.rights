@@ -16449,20 +16449,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.StockAdjustmentAsSurplus.Command.GenerateStockAdjustmentAsSurplus</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.StockAdjustmentAsWriteOff.Command.GenerateStockAdjustmentAsWriteOff</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>FilterCriterion.RelatedDocuments.Command.RelatedDocuments</name>
 		<right>
 			<name>View</name>

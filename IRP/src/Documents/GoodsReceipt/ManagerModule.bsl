@@ -7,7 +7,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("ReceiptOrders"            , PostingServer.CreateTable(AccReg.ReceiptOrders));
 	Tables.Insert("GoodsReceiptSchedule"     , PostingServer.CreateTable(AccReg.GoodsReceiptSchedule));
 	Tables.Insert("GoodsInTransitOutgoing"   , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
-	Tables.Insert("InventoryBalance"         , PostingServer.CreateTable(AccReg.InventoryBalance));
 	Tables.Insert("GoodsInTransitIncoming_Exists", PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
 	Tables.Insert("GoodsInTransitOutgoing_Exists", PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
 	Tables.Insert("ReceiptOrders_Exists"         , PostingServer.CreateTable(AccReg.ReceiptOrders));
@@ -556,20 +555,7 @@ Procedure GetTables_UseSO_UsePO_NotUseSC_NotSCBeforeInvoice_IsProduct(Tables, Ta
 		|		AND GoodsReceiptSchedule.Company = tmp.Company
 		|		AND GoodsReceiptSchedule.Store = tmp.Store
 		|		AND GoodsReceiptSchedule.ItemKey = tmp.ItemKey
-		|       AND GoodsReceiptSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
-		|;
-		|//[3] InventoryBalance
-		|SELECT
-		|	tmp.Company,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.ItemKey,
-		|	tmp.Period";
+		|       AND GoodsReceiptSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)";
 	
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
@@ -579,7 +565,6 @@ Procedure GetTables_UseSO_UsePO_NotUseSC_NotSCBeforeInvoice_IsProduct(Tables, Ta
 	PostingServer.MergeTables(Tables.GoodsInTransitIncoming   , QueryResults[0].Unload());
 	PostingServer.MergeTables(Tables.ReceiptOrders            , QueryResults[1].Unload());
 	PostingServer.MergeTables(Tables.GoodsReceiptSchedule     , QueryResults[2].Unload());
-	PostingServer.MergeTables(Tables.InventoryBalance         , QueryResults[3].Unload());
 EndProcedure
 
 Procedure GetTables_UseSO_UsePO_UseSC_SCBeforeInvoice_IsProduct(Tables, TableName, Parameters)
@@ -642,20 +627,7 @@ Procedure GetTables_UseSO_UsePO_UseSC_SCBeforeInvoice_IsProduct(Tables, TableNam
 		|	tmp.Period, 
 		|   tmp.RowKey
 		|FROM
-		|	tmp AS tmp
-		|;
-		|//[4] InventoryBalance
-		|SELECT
-		|	tmp.Company,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.ItemKey,
-		|	tmp.Period";
+		|	tmp AS tmp";
 	
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
@@ -666,7 +638,6 @@ Procedure GetTables_UseSO_UsePO_UseSC_SCBeforeInvoice_IsProduct(Tables, TableNam
 	PostingServer.MergeTables(Tables.ReceiptOrders            , QueryResults[1].Unload());
 	PostingServer.MergeTables(Tables.GoodsReceiptSchedule     , QueryResults[2].Unload());
 	PostingServer.MergeTables(Tables.GoodsInTransitOutgoing   , QueryResults[3].Unload());
-	PostingServer.MergeTables(Tables.InventoryBalance         , QueryResults[4].Unload());
 EndProcedure
 
 Procedure GetTables_UseSO_UsePO_UseSC_NotSCBeforeInvoice_IsProduct(Tables, TableName, Parameters)
@@ -718,20 +689,7 @@ Procedure GetTables_UseSO_UsePO_UseSC_NotSCBeforeInvoice_IsProduct(Tables, Table
 		|		AND GoodsReceiptSchedule.Company = tmp.Company
 		|		AND GoodsReceiptSchedule.Store = tmp.Store
 		|		AND GoodsReceiptSchedule.ItemKey = tmp.ItemKey
-		|       AND GoodsReceiptSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
-		|;
-		|//[3] InventoryBalance
-		|SELECT
-		|	tmp.Company,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.ItemKey,
-		|	tmp.Period";
+		|       AND GoodsReceiptSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)";
 	
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
@@ -741,7 +699,6 @@ Procedure GetTables_UseSO_UsePO_UseSC_NotSCBeforeInvoice_IsProduct(Tables, Table
 	PostingServer.MergeTables(Tables.GoodsInTransitIncoming   , QueryResults[0].Unload());
 	PostingServer.MergeTables(Tables.ReceiptOrders            , QueryResults[1].Unload());
 	PostingServer.MergeTables(Tables.GoodsReceiptSchedule     , QueryResults[2].Unload());
-	PostingServer.MergeTables(Tables.InventoryBalance         , QueryResults[3].Unload());
 EndProcedure
 	
 #EndRegion
@@ -812,20 +769,7 @@ Procedure GetTables_NotUseSO_UsePO_IsProduct(Tables, TableName, Parameters)
 		|		AND GoodsReceiptSchedule.Company = tmp.Company
 		|		AND GoodsReceiptSchedule.Store = tmp.Store
 		|		AND GoodsReceiptSchedule.ItemKey = tmp.ItemKey
-		|       AND GoodsReceiptSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
-		|;
-		|//[3] InventoryBalance
-		|SELECT
-		|	tmp.Company,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.ItemKey,
-		|	tmp.Period";
+		|       AND GoodsReceiptSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)";
 		
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
@@ -835,7 +779,6 @@ Procedure GetTables_NotUseSO_UsePO_IsProduct(Tables, TableName, Parameters)
 	PostingServer.MergeTables(Tables.GoodsInTransitIncoming   , QueryResults[0].Unload());
 	PostingServer.MergeTables(Tables.ReceiptOrders            , QueryResults[1].Unload());
 	PostingServer.MergeTables(Tables.GoodsReceiptSchedule     , QueryResults[2].Unload());
-	PostingServer.MergeTables(Tables.InventoryBalance         , QueryResults[3].Unload());
 EndProcedure
 
 #EndRegion
@@ -888,14 +831,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.GoodsInTransitOutgoing,
 			True));
-	
-	// InventoryBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.InventoryBalance,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.InventoryBalance,
-			Parameters.IsReposting));
-			
+				
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 #EndRegion		

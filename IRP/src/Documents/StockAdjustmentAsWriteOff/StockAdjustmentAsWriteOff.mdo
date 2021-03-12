@@ -54,7 +54,6 @@
   <defaultListForm>Document.StockAdjustmentAsWriteOff.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.StockAdjustmentAsWriteOff.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
   <registerRecords>AccumulationRegister.ExpensesTurnovers</registerRecords>
   <registerRecords>AccumulationRegister.StockAdjustmentAsWriteOff</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
@@ -480,25 +479,11 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
-  <commands uuid="bba91882-3996-4f31-86b9-c3dcca0c9127">
-    <name>GenerateStockAdjustmentAsWriteOff</name>
-    <synonym>
-      <key>en</key>
-      <value>Stock adjustment as write-off</value>
-    </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType>
-      <types>DocumentRef.PhysicalInventory</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-    <shortcut></shortcut>
-  </commands>
   <commands uuid="afca89d7-6ca4-4ef4-be00-d3d54af55c69">
     <name>Generate</name>
     <synonym>
       <key>en</key>
-      <value>(new) Stock adjustment as write-off</value>
+      <value>Stock adjustment as write-off</value>
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>

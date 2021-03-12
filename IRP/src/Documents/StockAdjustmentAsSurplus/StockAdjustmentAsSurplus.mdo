@@ -55,7 +55,6 @@
   <defaultChoiceForm>Document.StockAdjustmentAsSurplus.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.StockAdjustmentAsSurplus</registerRecords>
-  <registerRecords>AccumulationRegister.InventoryBalance</registerRecords>
   <registerRecords>AccumulationRegister.RevenuesTurnovers</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.T10000B_RowIDMovements</registerRecords>
@@ -478,25 +477,11 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
-  <commands uuid="4e6fc5c0-6446-4663-b8ed-5b746de8c017">
-    <name>GenerateStockAdjustmentAsSurplus</name>
-    <synonym>
-      <key>en</key>
-      <value>Stock adjustment as surplus</value>
-    </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType>
-      <types>DocumentRef.PhysicalInventory</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-    <shortcut></shortcut>
-  </commands>
   <commands uuid="dcd5dc59-8ace-4a92-b575-3245c8435c5d">
     <name>Generate</name>
     <synonym>
       <key>en</key>
-      <value>(new) Stock adjustment as surplus</value>
+      <value>Stock adjustment as surplus</value>
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>

@@ -140,25 +140,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|
 		|//[3]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.ItemKey AS ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.GoodsReceiptBeforePurchaseInvoice
-		|   AND NOT tmp.UseGoodsReceipt
-		|	AND
-		|	NOT tmp.IsService
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.ItemKey,
-		|	tmp.Period
-		|;
-		|
-		|//[4]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
 		|	tmp.Store,
 		|	tmp.ItemKey,
 		|	tmp.Order AS ReceiptBasis,
@@ -173,7 +154,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	AND
 		|	NOT tmp.IsService
 		|;
-		|//[5]//////////////////////////////////////////////////////////////////////////////
+		|//[4]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.ItemKey,
 		|	tmp.Order AS Order,
@@ -191,7 +172,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	NOT tmp.IsService
 		|;
 		|
-		|//[6]//////////////////////////////////////////////////////////////////////////////
+		|//[5]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.Order AS Order,
@@ -207,7 +188,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.DeliveryDate <> DATETIME(1, 1, 1)
 		|;
 		|
-		|//[7]//////////////////////////////////////////////////////////////////////////////
+		|//[6]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.Order AS Order,
@@ -225,7 +206,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	AND
 		|	NOT tmp.UseGoodsReceipt
 		|;
-		|//[8]////////////////////////////////////////////////////////////////////////////////
+		|//[7]////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|   tmp.PurchaseBasis AS Order,
@@ -244,12 +225,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables.OrderBalance_Receipt         = QueryResults[1].Unload();
 	Tables.OrderBalance_Expense         = QueryResults[2].Unload();
-	Tables.InventoryBalance             = QueryResults[3].Unload();
-	Tables.GoodsInTransitIncoming       = QueryResults[4].Unload();
-	Tables.ReceiptOrders                = QueryResults[5].Unload();
-	Tables.GoodsReceiptSchedule_Receipt = QueryResults[6].Unload();
-	Tables.GoodsReceiptSchedule_Expense = QueryResults[7].Unload();
-	Tables.OrderProcurement             = QueryResults[8].Unload();
+	Tables.GoodsInTransitIncoming       = QueryResults[3].Unload();
+	Tables.ReceiptOrders                = QueryResults[4].Unload();
+	Tables.GoodsReceiptSchedule_Receipt = QueryResults[5].Unload();
+	Tables.GoodsReceiptSchedule_Expense = QueryResults[6].Unload();
+	Tables.OrderProcurement             = QueryResults[7].Unload();
 
 #EndRegion
 	Parameters.IsReposting = False;
@@ -267,7 +247,6 @@ Procedure FillTables(Ref, AddInfo, Tables)
 	AccReg = Metadata.AccumulationRegisters;
 	Tables.Insert("OrderBalance_Expense"         , PostingServer.CreateTable(AccReg.OrderBalance));
 	Tables.Insert("OrderBalance_Receipt"         , PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("InventoryBalance"             , PostingServer.CreateTable(AccReg.InventoryBalance));
 	Tables.Insert("GoodsInTransitIncoming"       , PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
 	Tables.Insert("ReceiptOrders"                , PostingServer.CreateTable(AccReg.ReceiptOrders));
 	Tables.Insert("GoodsReceiptSchedule_Receipt" , PostingServer.CreateTable(AccReg.GoodsReceiptSchedule));
@@ -334,13 +313,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordSet, WriteInTransaction",
 			PostingServer.JoinTables(ArrayOfTables, "RecordType, Period, Store, Order, ItemKey, RowKey, Quantity"), 
 			True));
-	
-	// InventoryBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.InventoryBalance,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.InventoryBalance,
-			Parameters.IsReposting));
 	
 	// GoodsInTransitIncoming
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitIncoming,

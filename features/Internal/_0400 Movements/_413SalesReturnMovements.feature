@@ -99,9 +99,11 @@ Scenario: _041300 preparation (Sales return)
 			| "Documents.SalesInvoice.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesInvoice.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesInvoice.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Load Goods
 		When Create document GoodsReceipt objects (check movements, transaction type - return from customers)
 		And I execute 1C:Enterprise script at server
  			| "Documents.GoodsReceipt.FindByNumber(125).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Load Sales return
 		When Create document SalesReturn objects (check movements)
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
@@ -109,6 +111,7 @@ Scenario: _041300 preparation (Sales return)
 			| "Documents.SalesReturn.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesReturn.FindByNumber(104).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesReturn.FindByNumber(105).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Load Sales return order
 		When Create document SalesReturnOrder objects (check movements)
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesReturnOrder.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |

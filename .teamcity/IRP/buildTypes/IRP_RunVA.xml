@@ -248,7 +248,7 @@ $VanessaRun = {
     'getallformsdataonerror': true,
     'htmlcreate': false,
     'ignoretags': ['IgnoreOnCIMainBuild', 'Negative'],
-    'junitcreatereport': true,
+    'junitcreatereport': false,
 	'JUnitReport': {},
     'librarycatalogs': [],
     'logerrorstotext': true,
@@ -441,8 +441,8 @@ $VanessaRun = {
     Compress-Archive -Path "$workingDir/$FolderForAllArtefact/allureTag/$elementTag/*" -DestinationPath "$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip"
     Write-Host "##teamcity[publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure']"
 
-	Write-Host "importData importData type='junit' path='$FolderForAllArtefact/AllSteps/$elementTag/junit'"
-	Write-Host "##teamcity[importData type='junit' path='$FolderForAllArtefact/AllSteps/$elementTag/junit']"
+#	Write-Host "importData importData type='junit' path='$FolderForAllArtefact/AllSteps/$elementTag/junit'"
+#	Write-Host "##teamcity[importData type='junit' path='$FolderForAllArtefact/AllSteps/$elementTag/junit']"
 
 }
 

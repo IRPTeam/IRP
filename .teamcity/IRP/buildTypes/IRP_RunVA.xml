@@ -385,7 +385,7 @@ $VanessaRun = {
 
                   }else{
                       $ErrorDescription = $ErrorDescription.replace("|", "||").replace("'", "|'").replace("[", "|[").replace("]", "|]").replace("`n", "|n").replace("`r", "|r")
-                      Write-Host "##teamcity[testFailed name='$CurrentTest' message='$ErrorDescription' flowId='$elementTag']"
+                      Write-Host "##teamcity[testFailed name='$CurrentTest' details='$ErrorDescription' message='$ErrorDescription' flowId='$elementTag']"
                   }    
                   $hasFailedTest = $true
               }else{

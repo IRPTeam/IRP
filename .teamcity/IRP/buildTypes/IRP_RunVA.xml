@@ -283,7 +283,7 @@ $VanessaRun = {
     $a | Add-Member -Type NoteProperty -Name 'testclientports' -Value "$startPort - $portmax"
     $a.AllureReport | Add-Member -Type NoteProperty -Name 'directorytobuildhierarchy' -Value "$FeaturePath"
     $a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepath' -Value "$allurePath/$elementTag"
-    $a.JUnitReport  | Add-Member -Type NoteProperty -Name 'junitpath' -Value "$workingDir/$FolderForAllArtefact/junit"
+    $a.JUnitReport  | Add-Member -Type NoteProperty -Name 'junitpath' -Value "$workingDir/$FolderForAllArtefact/AllSteps/$elementTag"
     $a | Add-Member -Type NoteProperty -Name 'logpath' -Value "$workingDir/$FolderForAllArtefact/logpath/$elementTag.log"    
    
     $a.librarycatalogs += "$workingDir/DataProcessor"
@@ -441,7 +441,7 @@ $VanessaRun = {
     Compress-Archive -Path "$workingDir/$FolderForAllArtefact/allureTag/$elementTag/*" -DestinationPath "$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip"
     Write-Host "##teamcity[publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure']"
 
-	Write-Host "##teamcity[importData type='junit' path='$FolderForAllArtefact/junit']"
+	Write-Host "##teamcity[importData type='junit' path='$FolderForAllArtefact/AllSteps/$elementTag']"
 
 }
 

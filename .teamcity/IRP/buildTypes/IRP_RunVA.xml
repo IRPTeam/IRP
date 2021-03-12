@@ -390,8 +390,8 @@ $VanessaRun = {
                         {
                             'and expected value is' {
                                 $matches = ([regex]'<.*?>').Matches($ErrorDescription) ;
-                                $expected = $matches[$matches.Count - 1].Value
-                                $actual = $matches[$matches.Count - 2].Value
+                                $expected = $matches[$matches.Count - 1].Value.replace("<", "").replace(">", "")
+                                $actual = $matches[$matches.Count - 2].Value.replace("<", "").replace(">", "")
                                 Write-Host "##teamcity[testFailed type='comparisonFailure' name='$CurrentTest' details='$ErrorDescription' message='$ErrorDescription' flowId='$elementTag' expected='$expected' actual='$actual']"
                             }
                             default  {

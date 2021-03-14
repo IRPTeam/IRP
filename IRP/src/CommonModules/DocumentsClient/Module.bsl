@@ -2470,7 +2470,9 @@ Procedure CommonParametersToServer(Object, Form, ParametersToServer, AddInfo = U
 		EndDo;
 		ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
 	EndIf;
-	GetItemKeysWithSerialLotNumbers(Object, ParametersToServer);
+	If Object.Property("ItemList") Then
+		GetItemKeysWithSerialLotNumbers(Object, ParametersToServer);
+	EndIf;
 
 	
 	TaxesCacheParameters = New Structure();

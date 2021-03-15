@@ -185,7 +185,7 @@ Function GetQueryText_RetailReturnReceipt_RetailSales()
 	|	RetailReturnReceiptItemList.Ref.BusinessUnit AS BusinessUnit,
 	|	RetailReturnReceiptItemList.Ref.Company AS Company,
 	|	RetailReturnReceiptItemList.ItemKey AS ItemKey,
-	|	SUM(RetailReturnReceiptItemList.Quantity) AS Quantity,
+	|	SUM(RetailReturnReceiptItemList.QuantityInBaseUnit) AS Quantity,
 	|	SUM(ISNULL(RetailReturnReceiptSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
 	|	RetailReturnReceiptItemList.Ref.Date AS Period,
 	|	CASE
@@ -275,7 +275,7 @@ Function GetQueryTextRetailReturnReceiptSalesTurnovers()
 	|	RetailReturnReceiptItemList.Ref.Company AS Company,
 	|	RetailReturnReceiptItemList.Ref.Currency AS Currency,
 	|	RetailReturnReceiptItemList.ItemKey AS ItemKey,
-	|	SUM(RetailReturnReceiptItemList.Quantity) AS Quantity,
+	|	SUM(RetailReturnReceiptItemList.QuantityInBaseUnit) AS Quantity,
 	|	SUM(ISNULL(RetailReturnReceiptSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
 	|	RetailReturnReceiptItemList.Ref.Date AS Period,
 	|	CASE

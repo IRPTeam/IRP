@@ -377,7 +377,8 @@ Function ItemList()
 		|	PurchaseReturnOrderItemList.Cancel AS IsCanceled,
 		|	PurchaseReturnOrderItemList.TotalAmount AS Amount,
 		|	PurchaseReturnOrderItemList.NetAmount,
-		|	PurchaseReturnOrderItemList.Ref.Currency AS Currency
+		|	PurchaseReturnOrderItemList.Ref.Currency AS Currency,
+		|	PurchaseReturnOrderItemList.PurchaseInvoice AS Invoice
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseReturnOrder.ItemList AS PurchaseReturnOrderItemList

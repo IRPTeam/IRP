@@ -703,7 +703,9 @@ Function ItemList()
 		|	PurchaseReturnItemList.Key AS RowKey,
 		|	PurchaseReturnItemList.Key,
 		|	PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
-		|	PurchaseReturnItemList.NetAmount
+		|	PurchaseReturnItemList.NetAmount,
+		|	PurchaseReturnItemList.PurchaseInvoice AS Invoice,
+		|	PurchaseReturnItemList.ReturnReason
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
@@ -764,11 +766,11 @@ Function OffersInfo()
 		|	PurchaseReturnItemList.Key AS RowKey,
 		|	PurchaseReturnItemList.ItemKey,
 		|	PurchaseReturnItemList.Ref.Company AS Company,
-		|	PurchaseReturnItemList.Ref.Currency,
+		|	PurchaseReturnItemList.Ref.Currency AS Currency,
 		|	PurchaseReturnSpecialOffers.Offer AS SpecialOffer,
 		|	PurchaseReturnSpecialOffers.Amount AS OffersAmount,
 		|	PurchaseReturnItemList.TotalAmount AS SalesAmount,
-		|	PurchaseReturnItemList.NetAmount
+		|	PurchaseReturnItemList.NetAmount AS NetAmount
 		|INTO OffersInfo
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList

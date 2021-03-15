@@ -337,15 +337,6 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			And I click the button named "FormPost"
 		* Check document movements using a report
 			And I click "Registrations report" button
-			And I select "Inventory balance" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| '$$PurchaseInvoice029106$$'      | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| 'Document registrations records' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| 'Register  "Inventory balance"'  | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                               | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                               | 'Receipt'     | '*'      | '1'         | 'Main Company' | 'Router'   | '' | '' | '' | '' | '' | '' | '' | '' |
 			And I select "Purchase turnovers" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -516,15 +507,7 @@ Scenario: _029107 create a Sales order for service and product (Store does not u
 		And I click the button named "FormPost"
 	* Check movements
 		And I click "Registrations report" button
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesOrder029107$$'           | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' |
-		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' |
-		| 'Register  "Order reservation"'  | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '10'        | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' |
+
 		And I select "Sales order turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -638,15 +621,7 @@ Scenario: _029108 create a Sales order for service and product (Store use Shipme
 		And I click the button named "FormPost"
 	* Check movements
 		And I click "Registrations report" button
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesOrder029108$$'           | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' |
-		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' |
-		| 'Register  "Order reservation"'  | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '10'        | 'Store 02'   | 'Table'    | '' | '' | '' | '' | '' |
+
 		And I select "Sales order turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -765,22 +740,7 @@ Scenario: _029109 create a Sales order for service and product (Store does not u
 		And I click the button named "FormPost"
 	* Check movements
 		And I click "Registrations report" button
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesOrder029109$$'           | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' |
-		| 'Document registrations records' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' |
-		| 'Register  "Inventory balance"'  | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' |
-		| ''                               | 'Expense'     | '*'      | '10'        | 'Main Company' | 'Table'    | '' | '' | '' | '' | '' |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '10'        | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' |
+
 		And I select "Shipment orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -913,13 +873,7 @@ Scenario: _029110 create a Sales order for service and product (Store use Shipme
 		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                     | ''         | ''        | '' | '' | '' |
 		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Shipment basis'       | 'Item key' | 'Row key' | '' | '' | '' |
 		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$SalesOrder029110$$' | 'Table'    | '*'       | '' | '' | '' |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '10'        | 'Store 02'   | 'Table'    | '' | '' | '' | '' | '' |
+
 		And I select "Sales order turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -994,20 +948,7 @@ Scenario: _029115 create a Sales invoice for service and product (Store does not
 			| ''                                    | 'Receipt'     | '*'      | '7 100'     | 'Main Company' | '$$SalesInvoice029115$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 			| ''                                    | 'Receipt'     | '*'      | '7 100'     | 'Main Company' | '$$SalesInvoice029115$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 			| ''                                    | 'Receipt'     | '*'      | '7 100'     | 'Main Company' | '$$SalesInvoice029115$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Inventory balance"' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '10'        | 'Main Company' | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
-		// And I select "Order reservation" exact value from "Register" drop-down list
-		// And I click "Generate report" button
-		// And "ResultTable" spreadsheet document contains lines:
-		// 	| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		// 	| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		// 	| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-		// 	| ''                              | 'Expense'     | '*'      | '10'        | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
+
 		And I select "Taxes turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -1114,13 +1055,6 @@ Scenario: _029117 create a Sales invoice for service and product (Store use Ship
 			| ''                                    | 'Receipt'     | '*'      | '7 766,17'  | 'Main Company' | '$$SalesInvoice029117$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, without VAT' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 			| ''                                    | 'Receipt'     | '*'      | '7 766,17'  | 'Main Company' | '$$SalesInvoice029117$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, without VAT' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 			| ''                                    | 'Receipt'     | '*'      | '7 766,17'  | 'Main Company' | '$$SalesInvoice029117$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, without VAT' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Inventory balance"' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '10'        | 'Main Company' | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Goods in transit outgoing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -1128,13 +1062,7 @@ Scenario: _029117 create a Sales invoice for service and product (Store use Ship
 			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                       | ''         | ''        | '' | '' | '' | '' | '' | '' |
 			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Shipment basis'         | 'Item key' | 'Row key' | '' | '' | '' | '' | '' | '' |
 			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$SalesInvoice029117$$' | 'Table'    | '*'       | '' | '' | '' | '' | '' | '' |
-		// And I select "Order reservation" exact value from "Register" drop-down list
-		// And I click "Generate report" button
-		// And "ResultTable" spreadsheet document contains lines:
-		// 	| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		// 	| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		// 	| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-		// 	| ''                              | 'Expense'     | '*'      | '10'        | 'Store 02'   | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
+
 		And I select "Taxes turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -1248,13 +1176,7 @@ Scenario: _029119 create a Sales invoice for service and product (Store does not
 			| ''                                    | 'Receipt'     | '*'      | '7 100'     | 'Main Company' | '$$SalesInvoice029119$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 			| ''                                    | 'Receipt'     | '*'      | '7 100'     | 'Main Company' | '$$SalesInvoice029119$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 			| ''                                    | 'Receipt'     | '*'      | '7 100'     | 'Main Company' | '$$SalesInvoice029119$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		// And I select "Order reservation" exact value from "Register" drop-down list
-		// And I click "Generate report" button
-		// And "ResultTable" spreadsheet document contains lines:
-		// 	| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		// 	| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		// 	| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-		// 	| ''                              | 'Expense'     | '*'      | '10'        | 'Store 01'   | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
+
 		And I select "Taxes turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -1347,15 +1269,6 @@ Scenario: _029121 create a Sales invoice for service and product (Store use Ship
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation029121$$"
 		And I save the window as "$$ShipmentConfirmation029121$$"
 		And I click "Registrations report" button
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$ShipmentConfirmation029121$$' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' |
-			| 'Document registrations records' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' |
-			| 'Register  "Inventory balance"'  | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' |
-			| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' |
-			| ''                               | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' |
-			| ''                               | 'Expense'     | '*'      | '10'        | 'Main Company' | 'Table'    | '' | '' | '' | '' |
 		And I select "Goods in transit outgoing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -1404,7 +1317,6 @@ Scenario: _029121 create a Sales invoice for service and product (Store use Ship
 			| ''                                    | 'Receipt'     | '*'      | '7 766,17'  | 'Main Company' | '$$SalesInvoice029121$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, without VAT' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 			| ''                                    | 'Receipt'     | '*'      | '7 766,17'  | 'Main Company' | '$$SalesInvoice029121$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, without VAT' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 			| ''                                    | 'Receipt'     | '*'      | '7 766,17'  | 'Main Company' | '$$SalesInvoice029121$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, without VAT' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Order reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And I select "Taxes turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -1663,13 +1575,6 @@ Scenario: _029140 create PurchaseReturn for service and product (based on $$Purc
 		| ''                                      | '*'      | '-1'        | '-100'   | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Interner' | '*'       | 'en description is empty'      | 'No'                   | '' |
 		| ''                                      | '*'      | '-1'        | '-34,24' | 'Main Company' | '$$PurchaseInvoice029106$$' | 'USD'      | 'Router'   | '*'       | 'Reporting currency'           | 'No'                   | '' |
 		| ''                                      | '*'      | '-1'        | '-17,12' | 'Main Company' | '$$PurchaseInvoice029106$$' | 'USD'      | 'Interner' | '*'       | 'Reporting currency'           | 'No'                   | '' |
-	And I select "Inventory balance" exact value from "Register" drop-down list
-	And I click "Generate report" button
-	And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Inventory balance"' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '1'         | 'Main Company' | 'Router'   | '' | '' | '' | '' | '' | '' |
 	And I select "Goods in transit outgoing" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
@@ -1751,13 +1656,6 @@ Scenario: _029141 create Purchase return order and Purchase return for service a
 		| ''                               | '*'      | '-1'        | '-100'   | '-84,75'     | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Interner' | '*'       | 'en description is empty'      | 'No'                   |
 		| ''                               | '*'      | '-1'        | '-34,24' | '-29,02'     | 'Main Company' | '$$PurchaseInvoice029106$$' | 'USD'      | 'Router'   | '*'       | 'Reporting currency'           | 'No'                   |
 		| ''                               | '*'      | '-1'        | '-17,12' | '-14,51'     | 'Main Company' | '$$PurchaseInvoice029106$$' | 'USD'      | 'Interner' | '*'       | 'Reporting currency'           | 'No'                   |
-	And I select "Order reservation" exact value from "Register" drop-down list
-	And I click "Generate report" button
-	And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '1'         | 'Store 02'   | 'Router'   | '' | '' | '' | '' | '' | '' |
 	And I select "Order balance" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
@@ -1812,13 +1710,6 @@ Scenario: _029141 create Purchase return order and Purchase return for service a
 		| ''                                      | '*'      | '-1'        | '-100'   | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Interner' | '*'       | 'en description is empty'      | 'No'                   | '' |
 		| ''                                      | '*'      | '-1'        | '-34,24' | 'Main Company' | '$$PurchaseInvoice029106$$' | 'USD'      | 'Router'   | '*'       | 'Reporting currency'           | 'No'                   | '' |
 		| ''                                      | '*'      | '-1'        | '-17,12' | 'Main Company' | '$$PurchaseInvoice029106$$' | 'USD'      | 'Interner' | '*'       | 'Reporting currency'           | 'No'                   | '' |
-	And I select "Inventory balance" exact value from "Register" drop-down list
-	And I click "Generate report" button
-	And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Inventory balance"' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '1'         | 'Main Company' | 'Router'   | '' | '' | '' | '' | '' | '' |
 	And I select "Goods in transit outgoing" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
@@ -1826,13 +1717,7 @@ Scenario: _029141 create Purchase return order and Purchase return for service a
 		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                         | ''         | ''        | '' | '' | '' | '' |
 		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Shipment basis'           | 'Item key' | 'Row key' | '' | '' | '' | '' |
 		| ''                                      | 'Receipt'     | '*'      | '1'         | 'Store 02'   | '$$PurchaseReturn029141$$' | 'Router'   | '*'       | '' | '' | '' | '' |
-	And I select "Order reservation" exact value from "Register" drop-down list
-	And I click "Generate report" button
-	And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '1'         | 'Store 02'   | 'Router'   | '' | '' | '' | '' | '' | '' |
+
 	And I select "Accounts statement" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
@@ -1939,13 +1824,6 @@ Scenario: _029142 create Purchase return for service and product without Purchas
 			| ''                                      | '*'      | '-1'        | '-50'    | 'Main Company' | ''                 | 'TRY'      | 'Interner' | '*'       | 'en description is empty'      | 'No'                   | '' |
 			| ''                                      | '*'      | '-1'        | '-34,24' | 'Main Company' | ''                 | 'USD'      | 'Table'    | '*'       | 'Reporting currency'           | 'No'                   | '' |
 			| ''                                      | '*'      | '-1'        | '-8,56'  | 'Main Company' | ''                 | 'USD'      | 'Interner' | '*'       | 'Reporting currency'           | 'No'                   | '' |
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Inventory balance"' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '1'         | 'Main Company' | 'Table'    | '' | '' | '' | '' | '' | '' |
 		And I select "Goods in transit outgoing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -2192,15 +2070,6 @@ Scenario: _029160 create Sales return for service and product (Store use Shipmen
 		And I save the window as "$$SalesReturn29160$$"
 	* Check movements
 		And I click "Registrations report" button
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesReturn29160$$'           | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| 'Document registrations records' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| 'Register  "Inventory balance"'  | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                               | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                               | 'Receipt'     | '*'      | '10'        | 'Main Company' | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Sales return turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -2282,15 +2151,6 @@ Scenario: _029161 create Sales return for service and product (Store does not us
 		And I save the window as "$$SalesReturn29161$$"
 	* Check movements
 		And I click "Registrations report" button
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:	
-			| '$$SalesReturn29161$$'           | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| 'Document registrations records' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| 'Register  "Inventory balance"'  | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                               | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                               | 'Receipt'     | '*'      | '10'        | 'Main Company' | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Sales return turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:	
@@ -2394,15 +2254,6 @@ Scenario: _029162 create Sales return without Sales invoice
 		And I save the window as "$$SalesReturn029162$$"
 	* Check movements
 		And I click "Registrations report" button
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesReturn029162$$'          | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| 'Document registrations records' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| 'Register  "Inventory balance"'  | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                               | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                               | 'Receipt'     | '*'      | '1'         | 'Main Company' | 'Table'    | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Sales return turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

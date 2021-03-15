@@ -366,13 +366,6 @@ Scenario: _022336 check the output of the document movement report for Purchase 
 		| ''                                      | '*'      | '-2'        | '-80'    | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   | '' |
 		| ''                                      | '*'      | '-2'        | '-80'    | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | 'No'                   | '' |
 		| ''                                      | '*'      | '-2'        | '-80'    | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'USD'                          | 'No'                   | '' |
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Inventory balance"' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '2'         | 'Main Company' | 'L/Green'  | '' | '' | '' | '' | '' | '' |
 		And I select "Goods in transit outgoing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -380,13 +373,7 @@ Scenario: _022336 check the output of the document movement report for Purchase 
 		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                         | ''         | ''        | '' | '' | '' | '' |
 		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Shipment basis'           | 'Item key' | 'Row key' | '' | '' | '' | '' |
 		| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 02'   | '$$PurchaseReturn022301$$' | 'L/Green'  | '*'       | '' | '' | '' | '' |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
+
 		And I select "Accounts statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -439,13 +426,6 @@ Scenario: _022336 check the output of the document movement report for Purchase 
 		| ''                                      | '*'      | '-2'        | '-80'    | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   | '' |
 		| ''                                      | '*'      | '-2'        | '-80'    | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | 'No'                   | '' |
 		| ''                                      | '*'      | '-2'        | '-80'    | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'USD'                          | 'No'                   | '' |
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Inventory balance"' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '2'         | 'Main Company' | 'L/Green'  | '' | '' | '' | '' | '' | '' |
 		And I select "Goods in transit outgoing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -453,13 +433,7 @@ Scenario: _022336 check the output of the document movement report for Purchase 
 		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                         | ''         | ''        | '' | '' | '' | '' |
 		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Shipment basis'           | 'Item key' | 'Row key' | '' | '' | '' | '' |
 		| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 02'   | '$$PurchaseReturn022301$$' | 'L/Green'  | '*'       | '' | '' | '' | '' |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
+
 		And I select "Accounts statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -496,9 +470,7 @@ Scenario: _02233601 clear movements Purchase Return and check that there is no m
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "Partner AR transactions"'   |
-			| 'Register  "Inventory balance"'         |
 			| 'Register  "Goods in transit outgoing"' |
-			| 'Register  "Order reservation"'         |
 			| 'Register  "Reconciliation statement"'  |
 			| 'Register  "Order balance"'             |
 		And I close all client application windows
@@ -531,13 +503,6 @@ Scenario: _02233601 clear movements Purchase Return and check that there is no m
 		| ''                                      | '*'      | '-2'        | '-80'    | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   | '' |
 		| ''                                      | '*'      | '-2'        | '-80'    | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | 'No'                   | '' |
 		| ''                                      | '*'      | '-2'        | '-80'    | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'USD'                          | 'No'                   | '' |
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Inventory balance"' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '2'         | 'Main Company' | 'L/Green'  | '' | '' | '' | '' | '' | '' |
 		And I select "Goods in transit outgoing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -545,13 +510,7 @@ Scenario: _02233601 clear movements Purchase Return and check that there is no m
 		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                         | ''         | ''        | '' | '' | '' | '' |
 		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Shipment basis'           | 'Item key' | 'Row key' | '' | '' | '' | '' |
 		| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 02'   | '$$PurchaseReturn022301$$' | 'L/Green'  | '*'       | '' | '' | '' | '' |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
+
 		And I select "Accounts statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

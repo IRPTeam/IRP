@@ -915,13 +915,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 				| ''                                    | 'Expense'     | '$$DateSalesInvoice0240164$$' | '430'       | 'Main Company' | '$$SalesInvoice0240164$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 				| ''                                    | 'Expense'     | '$$DateSalesInvoice0240164$$' | '430'       | 'Main Company' | '$$SalesInvoice0240164$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 				| ''                                    | 'Expense'     | '$$DateSalesInvoice0240164$$' | '430'       | 'Main Company' | '$$SalesInvoice0240164$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-			And I select "Inventory balance" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Inventory balance"' | ''            | ''                            | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | ''            | ''                            | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | 'Expense'     | '$$DateSalesInvoice0240164$$' | '1'         | 'Main Company' | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
+
 			And I select "Aging" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -1124,13 +1118,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 				| ''                                    | 'Expense'     | '$$DateSalesInvoice0240165$$' | '380'       | 'Main Company' | '$$SalesInvoice0240165$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 				| ''                                    | 'Expense'     | '$$DateSalesInvoice0240165$$' | '380'       | 'Main Company' | '$$SalesInvoice0240165$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 				| ''                                    | 'Expense'     | '$$DateSalesInvoice0240165$$' | '380'       | 'Main Company' | '$$SalesInvoice0240165$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-			And I select "Inventory balance" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Inventory balance"' | ''            | ''                            | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | ''            | ''                            | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | 'Expense'     | '$$DateSalesInvoice0240165$$' | '1'         | 'Main Company' | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
+
 			And I select "Aging" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:

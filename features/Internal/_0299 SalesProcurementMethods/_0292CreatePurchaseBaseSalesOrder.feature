@@ -482,26 +482,7 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 		| 'Number' |
 		| '$$NumberSalesOrder029201$$'    |
 		And I click "Registrations report" button
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesOrder029201$$'           | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' | '' |
-		| 'Document registrations records' | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' | '' |
-		| 'Register  "Inventory balance"'  | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | '' | '' | '' | '' | '' |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | '' | '' | '' | '' | '' |
-		| ''                               | 'Expense'     | '*'      | '1'         | 'Main Company' | '36/18SD'   | '' | '' | '' | '' | '' |
-		| ''                               | 'Expense'     | '*'      | '5'         | 'Main Company' | 'XS/Blue'   | '' | '' | '' | '' | '' |
-		| ''                               | 'Expense'     | '*'      | '10'        | 'Main Company' | '38/Yellow' | '' | '' | '' | '' | '' |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '1'         | 'Store 01'   | '36/18SD'   | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '5'         | 'Store 01'   | 'XS/Blue'   | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '10'        | 'Store 01'   | '38/Yellow' | '' | '' | '' | '' | '' |
+
 		And I select "Order procurement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -615,17 +596,7 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 		| 'Number' |
 		| '$$NumberSalesOrder0292012$$'    |
 		And I click "Registrations report" button
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesOrder0292012$$'          | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' |
-		| 'Document registrations records' | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' |
-		| 'Register  "Order reservation"'  | ''            | ''       | ''          | ''           | ''          | '' | '' | '' | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''          | '' | '' | '' | '' | '' |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'  | '' | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '5'         | 'Store 02'   | '36/Yellow' | '' | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '10'        | 'Store 02'   | 'XS/Blue'   | '' | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '38/Yellow' | '' | '' | '' | '' | '' |
+
 		And I select "Order procurement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -757,16 +728,6 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 		| 'Number' |
 		| '$$NumberPurchaseOrder0292012$$'    |
 		And I click "Registrations report" button
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseOrder0292012$$'       | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' |
-		| 'Document registrations records' | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' |
-		| 'Register  "Inventory balance"'  | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | '' | '' | '' | '' |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '5'         | 'Main Company' | 'XS/Blue'   | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '10'        | 'Main Company' | '38/Yellow' | '' | '' | '' | '' |
 		And I select "Order procurement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -891,16 +852,6 @@ Scenario: _029203 check movements if there is an additional line in the Purchase
 			| 'Number' |
 			| '$$NumberPurchaseOrder0292012$$'    |
 			And I click "Registrations report" button
-			And I select "Inventory balance" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| '$$PurchaseOrder0292012$$'       | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' |
-			| 'Document registrations records' | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' |
-			| 'Register  "Inventory balance"'  | ''            | ''       | ''          | ''             | ''          | '' | '' | '' | '' |
-			| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | '' | '' | '' | '' |
-			| ''                               | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | '' | '' | '' | '' |
-			| ''                               | 'Receipt'     | '*'      | '5'         | 'Main Company' | 'XS/Blue'   | '' | '' | '' | '' |
-			| ''                               | 'Receipt'     | '*'      | '10'        | 'Main Company' | '38/Yellow' | '' | '' | '' | '' |
 			And I select "Order procurement" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:

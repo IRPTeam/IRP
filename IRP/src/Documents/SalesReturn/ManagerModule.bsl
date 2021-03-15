@@ -813,7 +813,7 @@ Function OffersInfo()
 		|	SalesReturnSpecialOffers.Offer AS SpecialOffer,
 		|	- SalesReturnSpecialOffers.Amount AS OffersAmount,
 		|	- SalesReturnItemList.TotalAmount AS SalesAmount,
-		|	- SalesReturnItemList.NetAmount
+		|	- SalesReturnItemList.NetAmount AS NetAmount
 		|INTO OffersInfo
 		|FROM
 		|	Document.SalesReturn.ItemList AS SalesReturnItemList

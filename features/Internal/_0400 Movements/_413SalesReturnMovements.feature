@@ -105,6 +105,7 @@ Scenario: _041300 preparation (Sales return)
  			| "Documents.GoodsReceipt.FindByNumber(125).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Sales return order
 		When Create document SalesReturnOrder objects (check movements)
+		And Delay 5
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		And I go to line in "List" table
 			| 'Number'  |

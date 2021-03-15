@@ -285,13 +285,6 @@ Scenario: _022011 check the output of the document movement report for Purchase 
 		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   |
 		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | 'No'                   |
 		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'USD'                          | 'No'                   |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
 		And I select "Order balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -320,13 +313,7 @@ Scenario: _022011 check the output of the document movement report for Purchase 
 		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   |
 		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | 'No'                   |
 		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'USD'                          | 'No'                   |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
+
 		And I select "Order balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -348,7 +335,6 @@ Scenario: _02201101 clear movements Purchase Return Order and check that there i
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "Purchase turnovers"' |
-			| 'Register  "Order reservation"'  |
 			| 'Register  "Stock reservation"'  |
 			| 'Register  "Order balance"'      |
 		And I close all client application windows
@@ -371,13 +357,7 @@ Scenario: _02201101 clear movements Purchase Return Order and check that there i
 		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   |
 		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | 'No'                   |
 		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'USD'                          | 'No'                   |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
+
 		And I select "Order balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

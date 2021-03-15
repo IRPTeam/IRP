@@ -205,11 +205,7 @@ Scenario: _029901 create Sales order without reserve and check its movements (SO
 			| ''                                           | ''            | ''                         | 'Quantity'  | 'Company'      | 'Order'                | 'Store'    | 'Item key'  | 'Row key' | 'Delivery date' |
 			| ''                                           | 'Receipt'     | '$$DateSalesOrder029901$$' | '31'        | 'Main Company' | '$$SalesOrder029901$$' | 'Store 01' | '38/Yellow' | '*'       | '*'             |
 			| ''                                           | 'Receipt'     | '$$DateSalesOrder029901$$' | '40'        | 'Main Company' | '$$SalesOrder029901$$' | 'Store 01' | '38/Black'  | '*'       | '*'             |
-	* Check that there is no movements in the Register  "Register  "Order reservation"
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "Order reservation"' | '' | '' | '' | '' | '' |
+
 	And I close all client application windows
 
 Scenario: _029902 create SI for SO without reserve and check its movements (SO-SI)
@@ -252,17 +248,6 @@ Scenario: _029902 create SI for SO without reserve and check its movements (SO-S
 			| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions' | ''             | ''                 |
 			| ''                                           | ''            | ''                           | 'Amount'    | 'Currency'   | 'Company'      | 'Legal name'       |
 			| ''                                           | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'TRY'        | 'Main Company' | 'Company Lomaniti' |
-	* Check SI movements (Register  "Inventory balance")
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesInvoice029901$$'           | ''            | ''                           | ''          | ''             | ''          |
-		| 'Document registrations records' | ''            | ''                           | ''          | ''             | ''          |
-		| 'Register  "Inventory balance"'  | ''            | ''                           | ''          | ''             | ''          |
-		| ''                               | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''          |
-		| ''                               | ''            | ''                           | 'Quantity'  | 'Company'      | 'Item key'  |
-		| ''                               | 'Expense'     | '$$DateSalesInvoice029901$$' | '31'        | 'Main Company' | '38/Yellow' |
-		| ''                               | 'Expense'     | '$$DateSalesInvoice029901$$' | '40'        | 'Main Company' | '38/Black'  |
 	
 	* Check SI movements (Register  "R4010 Actual stocks")
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
@@ -419,11 +404,7 @@ Scenario: _029902 create SI for SO without reserve and check its movements (SO-S
 	// 	And I click "Generate report" button
 	// 	And "ResultTable" spreadsheet document does not contain values
 	// 		| 'Register  "R2013 Procurement of sales orders"' | '' | '' | '' | '' | '' |
-	* Check that there is no movements in the Register  "Register  "Order reservation"
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "Order reservation"' | '' | '' | '' | '' | '' |
+
 		And I close all client application windows
 
 
@@ -584,11 +565,7 @@ Scenario: _029903 create Sales order without reserve and check its movements (SO
 			| ''                                           | ''            | ''                         | 'Quantity'  | 'Company'      | 'Order'                | 'Store'    | 'Item key'  | 'Row key' | 'Delivery date' |
 			| ''                                           | 'Receipt'     | '$$DateSalesOrder029903$$' | '31'        | 'Main Company' | '$$SalesOrder029903$$' | 'Store 02' | '38/Yellow' | '*'       | '*'             |
 			| ''                                           | 'Receipt'     | '$$DateSalesOrder029903$$' | '40'        | 'Main Company' | '$$SalesOrder029903$$' | 'Store 02' | '38/Black'  | '*'       | '*'             |
-	* Check that there is no movements in the Register  "Register  "Order reservation"
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "Order reservation"' | '' | '' | '' | '' | '' |
+	
 		And I close all client application windows		
 
 Scenario: _029904 create Shipment confirmation for SO without reserve and check its movements (SO-SC-SI)
@@ -836,11 +813,7 @@ Scenario: _029905 create Sales ivoice for SO (SC first) without reserve and chec
 		// 	And I click "Generate report" button
 		// 	And "ResultTable" spreadsheet document does not contain values
 		// 		| 'Register  "R2013 Procurement of sales orders"' |
-		* Check that there is no movements in the Register  "Register  "Order reservation"
-			And I select "Order reservation" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document does not contain values
-				| 'Register  "Order reservation"' |
+	
 		* Check SI movements (Register  "R4010 Actual stocks")
 			And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 			And I click "Generate report" button

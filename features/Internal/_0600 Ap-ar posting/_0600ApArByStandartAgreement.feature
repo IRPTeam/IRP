@@ -115,13 +115,6 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 			| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 			| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 			| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-			And I select "Inventory balance" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Inventory balance"' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '20'        | 'Main Company' | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
 			And I select "Taxes turnovers" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -474,13 +467,6 @@ Scenario: _060004 check the offset of the advance for Sales invoice with the typ
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Inventory balance"' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '20'        | 'Main Company' | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Taxes turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -588,15 +574,6 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 			And I save the window as "$$PurchaseInvoice060005$$"
 	* Check Purchase Invoice movements 
 		And I click "Registrations report" button
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseInvoice060005$$'      | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| 'Document registrations records' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| 'Register  "Inventory balance"'  | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '20'        | 'Main Company' | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Purchase turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -834,15 +811,6 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 			And I save the window as "$$PurchaseInvoice060007$$"
 	* Check movements PurchaseInvoice by register PartnerApTransactions
 		And I click "Registrations report" button
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseInvoice060007$$'      | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| 'Document registrations records' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| 'Register  "Inventory balance"'  | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '20'        | 'Main Company' | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Purchase turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

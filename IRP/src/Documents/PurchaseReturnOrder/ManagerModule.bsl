@@ -228,7 +228,14 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
+#Region NewRegisterPosting
+	If Parameters.StatusInfo.Posting Then
+		Tables = Parameters.DocumentDataTables;	
+		QueryArray = GetQueryTextsMasterTables();
+		PostingServer.SetRegisters(Tables, Ref);
+		PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+	EndIf;
+#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -270,14 +277,6 @@ EndFunction
 
 Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
-	#Region NewRegisterPosting
-	If Parameters.StatusInfo.Posting Then
-		Tables = Parameters.DocumentDataTables;	
-		QueryArray = GetQueryTextsMasterTables();
-		PostingServer.SetRegisters(Tables, Ref);
-		PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-	EndIf;
-#EndRegion
 EndProcedure
 
 #EndRegion
@@ -285,7 +284,14 @@ EndProcedure
 #Region Undoposting
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
+	Tables = PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
+#Region NewRegistersPosting
+	If Parameters.StatusInfo.Posting Then
+		QueryArray = GetQueryTextsMasterTables();
+		PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+	EndIf;
+#EndRegion	
+	Return Tables;
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export

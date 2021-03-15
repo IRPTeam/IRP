@@ -32,17 +32,6 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	EndIf;
 EndProcedure
 
-Procedure Filling_BasedOn(FillingData)
-	FillPropertyValues(ThisObject, FillingData, "Store");
-	For Each Row In FillingData.ItemList Do
-		NewRow = ThisObject.ItemList.Add();
-		FillPropertyValues(NewRow, Row);
-		If Not ValueIsFilled(NewRow.Key) Then
-			NewRow.Key = New UUID();
-		EndIf;
-	EndDo;
-EndProcedure
-
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
 		Cancel = True;

@@ -456,7 +456,8 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 			| 'Number' |
 			| '$$NumberPhysicalInventory2990004$$'    |
 	* Create a document StockAdjustmentAsSurplus and check filling in
-		And I click the button named "FormDocumentStockAdjustmentAsSurplusGenerateStockAdjustmentAsSurplus"
+		And I click the button named "FormDocumentStockAdjustmentAsSurplusGenerate"
+		And I click "Ok" button	
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -494,7 +495,8 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 			| 'Number' |
 			| '$$NumberPhysicalInventory2990004$$'    |
 	* Create a document StockAdjustmentAsWriteOff and check filling in
-		And I click the button named "FormDocumentStockAdjustmentAsWriteOffGenerateStockAdjustmentAsWriteOff"
+		And I click the button named "FormDocumentStockAdjustmentAsWriteOffGenerate"
+		And I click "Ok" button	
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -531,7 +533,8 @@ Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as wr
 			| 'Number' |
 			| '$$NumberPhysicalInventory2990005$$'    |
 	* Create a document StockAdjustmentAsWriteOff on a partial quantity
-		And I click the button named "FormDocumentStockAdjustmentAsWriteOffGenerateStockAdjustmentAsWriteOff"
+		And I click the button named "FormDocumentStockAdjustmentAsWriteOffGenerate"
+		And I click "Ok" button
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -555,7 +558,8 @@ Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as wr
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
 	* Create a document StockAdjustmentAsWriteOff for the remaining quantity and check filling in
-		And I click the button named "FormDocumentStockAdjustmentAsWriteOffGenerateStockAdjustmentAsWriteOff"
+		And I click the button named "FormDocumentStockAdjustmentAsWriteOffGenerate"
+		And I click "Ok" button
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -578,7 +582,8 @@ Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as wr
 		Then the number of "ItemList" table lines is "меньше или равно" 1
 		And I click the button named "FormPostAndClose"
 	* Create a document StockAdjustmentAsSurplus on a partial quantity
-		And I click the button named "FormDocumentStockAdjustmentAsSurplusGenerateStockAdjustmentAsSurplus"
+		And I click the button named "FormDocumentStockAdjustmentAsSurplusGenerate"
+		And I click "Ok" button
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| 'Description'  |
@@ -602,7 +607,8 @@ Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as wr
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
 	* Create a document StockAdjustmentAsSurplus for the remaining quantity and check filling in
-		And I click the button named "FormDocumentStockAdjustmentAsSurplusGenerateStockAdjustmentAsSurplus"
+		And I click the button named "FormDocumentStockAdjustmentAsSurplusGenerate"
+		And I click "Ok" button
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| 'Description'  |

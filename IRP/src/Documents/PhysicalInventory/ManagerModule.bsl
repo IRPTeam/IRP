@@ -198,7 +198,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "BalancePeriod", New Boundary(New PointInTime(StatusInfo.Period, Ref), BoundaryType.Including));
 	EndIf;
 	If Not (Parameters.Property("Unposting") And Parameters.Unposting) Then
-		Parameters.Insert("RecordType", AccumulationRecordType.Expense);
+		Parameters.Insert("RecordType", AccumulationRecordType.Receipt);
 	EndIf;
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.PhysicalInventory.ItemList", AddInfo);
 EndProcedure

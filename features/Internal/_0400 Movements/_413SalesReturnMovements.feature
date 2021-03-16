@@ -105,16 +105,26 @@ Scenario: _041300 preparation (Sales return)
  			| "Documents.GoodsReceipt.FindByNumber(125).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Sales return order
 		When Create document SalesReturnOrder objects (check movements)
-		And I execute 1C:Enterprise script at server
- 			| "Documents.SalesReturnOrder.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+		And Delay 5
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '102' |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I close all client application windows
 	* Load Sales return
 		When Create document SalesReturn objects (check movements)
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesReturn.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesReturn.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.SalesReturn.FindByNumber(104).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesReturn.FindByNumber(105).GetObject().Write(DocumentWriteMode.Posting);" |
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '104' |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I close all client application windows
 	
 
 Scenario: _041301 check Sales return movements by the Register "R5010 Reconciliation statement"
@@ -171,18 +181,19 @@ Scenario: _041303 check Sales return movements by the Register  "R2005 Sales spe
 			| 'Register  "R2005 Sales special offers"'     | ''                    | ''             | ''           | ''              | ''                 | ''             | ''                             | ''         | ''                                           | ''         | ''                                     | ''                 |
 			| ''                                           | 'Period'              | 'Resources'    | ''           | ''              | ''                 | 'Dimensions'   | ''                             | ''         | ''                                           | ''         | ''                                     | ''                 |
 			| ''                                           | ''                    | 'Sales amount' | 'Net amount' | 'Offers amount' | 'Net offer amount' | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Invoice'                                    | 'Item key' | 'Row key'                              | 'Special offer'    |
-			| ''                                           | '12.03.2021 08:44:18' | '-665'         | '563,56'     | '-35'           | ''                 | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales return 101 dated 12.03.2021 08:44:18' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'DocumentDiscount' |
-			| ''                                           | '12.03.2021 08:44:18' | '-665'         | '563,56'     | '-35'           | ''                 | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales return 101 dated 12.03.2021 08:44:18' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'DocumentDiscount' |
-			| ''                                           | '12.03.2021 08:44:18' | '-665'         | '563,56'     | '-35'           | ''                 | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales return 101 dated 12.03.2021 08:44:18' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'DocumentDiscount' |
-			| ''                                           | '12.03.2021 08:44:18' | '-665'         | '563,56'     | '-5,99'         | ''                 | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales return 101 dated 12.03.2021 08:44:18' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'DocumentDiscount' |
-			| ''                                           | '12.03.2021 08:44:18' | '-494'         | '418,64'     | '-26'           | ''                 | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales return 101 dated 12.03.2021 08:44:18' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'DocumentDiscount' |
-			| ''                                           | '12.03.2021 08:44:18' | '-494'         | '418,64'     | '-26'           | ''                 | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales return 101 dated 12.03.2021 08:44:18' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'DocumentDiscount' |
-			| ''                                           | '12.03.2021 08:44:18' | '-494'         | '418,64'     | '-26'           | ''                 | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales return 101 dated 12.03.2021 08:44:18' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'DocumentDiscount' |
-			| ''                                           | '12.03.2021 08:44:18' | '-494'         | '418,64'     | '-4,45'         | ''                 | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales return 101 dated 12.03.2021 08:44:18' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'DocumentDiscount' |
-			| ''                                           | '12.03.2021 08:44:18' | '-95'          | '80,51'      | '-5'            | ''                 | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales return 101 dated 12.03.2021 08:44:18' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' | 'DocumentDiscount' |
-			| ''                                           | '12.03.2021 08:44:18' | '-95'          | '80,51'      | '-5'            | ''                 | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales return 101 dated 12.03.2021 08:44:18' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' | 'DocumentDiscount' |
-			| ''                                           | '12.03.2021 08:44:18' | '-95'          | '80,51'      | '-5'            | ''                 | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales return 101 dated 12.03.2021 08:44:18' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' | 'DocumentDiscount' |
-			| ''                                           | '12.03.2021 08:44:18' | '-95'          | '80,51'      | '-0,86'         | ''                 | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales return 101 dated 12.03.2021 08:44:18' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' | 'DocumentDiscount' |
+			| ''                                           | '12.03.2021 08:44:18' | '-665'         | '-563,56'    | '-35'           | ''                 | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales return 101 dated 12.03.2021 08:44:18' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'DocumentDiscount' |
+			| ''                                           | '12.03.2021 08:44:18' | '-665'         | '-563,56'    | '-35'           | ''                 | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales return 101 dated 12.03.2021 08:44:18' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'DocumentDiscount' |
+			| ''                                           | '12.03.2021 08:44:18' | '-665'         | '-563,56'    | '-35'           | ''                 | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales return 101 dated 12.03.2021 08:44:18' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'DocumentDiscount' |
+			| ''                                           | '12.03.2021 08:44:18' | '-494'         | '-418,64'    | '-26'           | ''                 | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales return 101 dated 12.03.2021 08:44:18' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'DocumentDiscount' |
+			| ''                                           | '12.03.2021 08:44:18' | '-494'         | '-418,64'    | '-26'           | ''                 | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales return 101 dated 12.03.2021 08:44:18' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'DocumentDiscount' |
+			| ''                                           | '12.03.2021 08:44:18' | '-494'         | '-418,64'    | '-26'           | ''                 | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales return 101 dated 12.03.2021 08:44:18' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'DocumentDiscount' |
+			| ''                                           | '12.03.2021 08:44:18' | '-113,85'       | '-96,48'     | '-5,99'         | ''                 | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales return 101 dated 12.03.2021 08:44:18' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'DocumentDiscount' |
+			| ''                                           | '12.03.2021 08:44:18' | '-95'          | '-80,51'     | '-5'            | ''                 | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales return 101 dated 12.03.2021 08:44:18' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' | 'DocumentDiscount' |
+			| ''                                           | '12.03.2021 08:44:18' | '-95'          | '-80,51'     | '-5'            | ''                 | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales return 101 dated 12.03.2021 08:44:18' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' | 'DocumentDiscount' |
+			| ''                                           | '12.03.2021 08:44:18' | '-95'          | '-80,51'     | '-5'            | ''                 | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales return 101 dated 12.03.2021 08:44:18' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' | 'DocumentDiscount' |
+			| ''                                           | '12.03.2021 08:44:18' | '-84,57'       | '-71,67'     | '-4,45'         | ''                 | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales return 101 dated 12.03.2021 08:44:18' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'DocumentDiscount' |
+			| ''                                           | '12.03.2021 08:44:18' | '-16,26'       | '-13,78'     | '-0,86'         | ''                 | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales return 101 dated 12.03.2021 08:44:18' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' | 'DocumentDiscount' |
+					
 	And I close all client application windows
 
 Scenario: _041304 check Sales return movements by the Register  "R2002 Sales returns"

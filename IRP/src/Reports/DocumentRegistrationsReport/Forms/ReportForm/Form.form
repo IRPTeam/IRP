@@ -376,7 +376,7 @@
     </title>
     <id>3</id>
     <valueType>
-      <types>DocumentRef</types>
+      <types>Arbitrary</types>
     </valueType>
     <view>
       <common>true</common>

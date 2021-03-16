@@ -101,8 +101,12 @@ Scenario: _041200 preparation (Sales return order)
 			| "Documents.SalesInvoice.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Sales return order
 		When Create document SalesReturnOrder objects (check movements)
-		And I execute 1C:Enterprise script at server
- 			| "Documents.SalesReturnOrder.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '102' |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I close all client application windows
 
 Scenario: _041201 check Sales return order movements by the Register  "R2010 Sales orders"
 	And I close all client application windows

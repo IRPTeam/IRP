@@ -190,6 +190,15 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	AddAmountsColumns(RecordSet, "ManualAmount");
 	AddAmountsColumns(RecordSet, "NetAmount");
 	AddAmountsColumns(RecordSet, "OffersAmount");
+	AddAmountsColumns(RecordSet, "SalesAmount");
+	AddAmountsColumns(RecordSet, "NetOfferAmount");
+	
+	If RecordSet.Columns.Find("SalesAmount") = Undefined Then
+		RecordSet.Columns.Add("SalesAmount", New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
+	EndIf;
+	If RecordSet.Columns.Find("NetOfferAmount") = Undefined Then
+		RecordSet.Columns.Add("NetOfferAmount", New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
+	EndIf;	
 	
 	Query = New Query();
 	Query.TempTablesManager = TempTableManager;
@@ -205,6 +214,18 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|SELECT
 	|	RecordSet.*,
 	|	CurrencyTable.MovementType AS CurrencyMovementType,
+	|	CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.NetOfferAmount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
+	|	END AS NetOfferAmount,
+	|	CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.SalesAmount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
+	|	END AS SalesAmount,
 	|	CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
@@ -254,6 +275,8 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|SELECT
 	|	RecordSet.*,
 	|	VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency),
+	|	RecordSet.NetOfferAmount,
+	|	RecordSet.SalesAmount,
 	|	RecordSet.Amount,
 	|	RecordSet.ManualAmount,
 	|	RecordSet.NetAmount,

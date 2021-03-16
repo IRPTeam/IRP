@@ -164,11 +164,6 @@ Procedure CurrencyOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure StatusOnChange(Item)
-	DocPurchaseOrderClosingClient.StatusOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
 Procedure NumberOnChange(Item)
 	DocPurchaseOrderClosingClient.NumberOnChange(Object, ThisObject, Item);
 EndProcedure

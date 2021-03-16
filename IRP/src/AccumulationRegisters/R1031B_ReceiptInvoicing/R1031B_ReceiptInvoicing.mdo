@@ -67,6 +67,7 @@
       <types>DocumentRef.PurchaseInvoice</types>
       <types>DocumentRef.GoodsReceipt</types>
       <types>DocumentRef.ShipmentConfirmation</types>
+      <types>DocumentRef.PurchaseReturn</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

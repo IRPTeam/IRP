@@ -242,19 +242,19 @@ Scenario: _028805 create document Shipment confirmation based on 2 SO
 			| '7' | 'Dress' | ''                   | 'XS/Blue'  | '10,000'   | ''              | 'pcs'  | 'Store 02' | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Sales order 15 dated 01.02.2021 19:50:45' | ''                         | ''                      | ''                |
 			| '8' | 'Dress' | ''                   | 'XS/Blue'  | '10,000'   | ''              | 'pcs'  | 'Store 02' | 'Sales order 16*'                          | 'Sales order 16*'                          | ''                         | ''                      | ''                |
 		Then the number of "ItemList" table lines is "равно" "8"
-	* Check RowId info
-		And I click "Show row key" button		
-		And "RowIDInfo" table contains lines
-			| '#' | 'Key' | 'Basis'                                    | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-			| '1' | '*'   | 'Sales order 15 dated 01.02.2021 19:50:45' | '63008c12-b682-4aff-b29f-e6927036b09a' | ''          | '1,000'  | '63008c12-b682-4aff-b29f-e6927036b09a' | 'SI&SC'        | '63008c12-b682-4aff-b29f-e6927036b09a' |
-			| '2' | '*'   | 'Sales order 16 dated 10.03.2021 16:43:13' | '975733f1-15a1-4644-858f-84261a448bad' | ''          | '1,000'  | '975733f1-15a1-4644-858f-84261a448bad' | 'SI&SC'        | '975733f1-15a1-4644-858f-84261a448bad' |
-			| '3' | '*'   | 'Sales order 15 dated 01.02.2021 19:50:45' | 'e34f52ea-1fe2-47b2-9b37-63c093896682' | ''          | '10,000' | 'e34f52ea-1fe2-47b2-9b37-63c093896682' | 'SI&SC'        | 'e34f52ea-1fe2-47b2-9b37-63c093896682' |
-			| '4' | '*'   | 'Sales order 16 dated 10.03.2021 16:43:13' | 'be22d49f-93bc-4969-80f5-b6b3eed52ad0' | ''          | '10,000' | 'be22d49f-93bc-4969-80f5-b6b3eed52ad0' | 'SI&SC'        | 'be22d49f-93bc-4969-80f5-b6b3eed52ad0' |
-			| '5' | '*'   | 'Sales order 15 dated 01.02.2021 19:50:45' | '6f6dfb41-d0f8-450e-a482-8ec73611481c' | ''          | '2,000'  | '6f6dfb41-d0f8-450e-a482-8ec73611481c' | 'SI&SC'        | '6f6dfb41-d0f8-450e-a482-8ec73611481c' |
-			| '6' | '*'   | 'Sales order 16 dated 10.03.2021 16:43:13' | '850045a0-23a9-4cb9-9a55-94a0df1be047' | ''          | '2,000'  | '850045a0-23a9-4cb9-9a55-94a0df1be047' | 'SI&SC'        | '850045a0-23a9-4cb9-9a55-94a0df1be047' |
-			| '7' | '*'   | 'Sales order 15 dated 01.02.2021 19:50:45' | '1d6247c2-19e2-4aa8-93a2-58e0867cc2be' | ''          | '10,000' | '1d6247c2-19e2-4aa8-93a2-58e0867cc2be' | 'SI&SC'        | '1d6247c2-19e2-4aa8-93a2-58e0867cc2be' |
-			| '8' | '*'   | 'Sales order 16 dated 10.03.2021 16:43:13' | '905374fc-9921-4a31-b69e-7fcbe885e9b3' | ''          | '10,000' | '905374fc-9921-4a31-b69e-7fcbe885e9b3' | 'SI&SC'        | '905374fc-9921-4a31-b69e-7fcbe885e9b3' |
-		Then the number of "RowIDInfo" table lines is "равно" "8"	
+	// * Check RowId info
+	// 	And I click "Show row key" button		
+	// 	And "RowIDInfo" table contains lines
+	// 		| '#' | 'Key' | 'Basis'                                    | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+	// 		| '1' | '*'   | 'Sales order 15 dated 01.02.2021 19:50:45' | '63008c12-b682-4aff-b29f-e6927036b09a' | ''          | '1,000'  | '63008c12-b682-4aff-b29f-e6927036b09a' | 'SI&SC'        | '63008c12-b682-4aff-b29f-e6927036b09a' |
+	// 		| '2' | '*'   | 'Sales order 16 dated 10.03.2021 16:43:13' | '*'                                    | ''          | '1,000'  | '*'                                    | 'SI&SC'        | '*'                                    |
+	// 		| '3' | '*'   | 'Sales order 15 dated 01.02.2021 19:50:45' | 'e34f52ea-1fe2-47b2-9b37-63c093896682' | ''          | '10,000' | 'e34f52ea-1fe2-47b2-9b37-63c093896682' | 'SI&SC'        | 'e34f52ea-1fe2-47b2-9b37-63c093896682' |
+	// 		| '4' | '*'   | 'Sales order 16 dated 10.03.2021 16:43:13' | '*'                                    | ''          | '10,000' | '*'                                    | 'SI&SC'        | '*'                                    |
+	// 		| '5' | '*'   | 'Sales order 15 dated 01.02.2021 19:50:45' | '6f6dfb41-d0f8-450e-a482-8ec73611481c' | ''          | '2,000'  | '6f6dfb41-d0f8-450e-a482-8ec73611481c' | 'SI&SC'        | '6f6dfb41-d0f8-450e-a482-8ec73611481c' |
+	// 		| '6' | '*'   | 'Sales order 16 dated 10.03.2021 16:43:13' | '*'                                    | ''          | '2,000'  | '*'                                    | 'SI&SC'        | '*'                                    |
+	// 		| '7' | '*'   | 'Sales order 15 dated 01.02.2021 19:50:45' | '1d6247c2-19e2-4aa8-93a2-58e0867cc2be' | ''          | '10,000' | '1d6247c2-19e2-4aa8-93a2-58e0867cc2be' | 'SI&SC'        | '1d6247c2-19e2-4aa8-93a2-58e0867cc2be' |
+	// 		| '8' | '*'   | 'Sales order 16 dated 10.03.2021 16:43:13' | '*'                                    | ''          | '10,000' | '*'                                    | 'SI&SC'        | '*'                                    |
+	// 	Then the number of "RowIDInfo" table lines is "равно" "8"	
 		And I close all client application windows
 
 

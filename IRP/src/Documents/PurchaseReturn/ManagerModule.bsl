@@ -5,26 +5,14 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
 	Tables.Insert("OrderBalance"                          , PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("OrderReservation"                      , PostingServer.CreateTable(AccReg.OrderReservation));
 	Tables.Insert("PurchaseTurnovers"                     , PostingServer.CreateTable(AccReg.PurchaseTurnovers));
-	Tables.Insert("StockReservation"                      , PostingServer.CreateTable(AccReg.StockReservation));
-	Tables.Insert("InventoryBalance"                      , PostingServer.CreateTable(AccReg.InventoryBalance));
 	Tables.Insert("GoodsInTransitOutgoing"                , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
-	Tables.Insert("StockBalance"                          , PostingServer.CreateTable(AccReg.StockBalance));
 	Tables.Insert("PartnerArTransactions"                 , PostingServer.CreateTable(AccReg.PartnerArTransactions));
 	Tables.Insert("AdvanceFromCustomers_Lock"             , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
 	Tables.Insert("PartnerArTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
 	Tables.Insert("ReconciliationStatement"               , PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("PurchaseReturnTurnovers"               , PostingServer.CreateTable(AccReg.PurchaseReturnTurnovers));
 	Tables.Insert("RevenuesTurnovers"                     , PostingServer.CreateTable(AccReg.RevenuesTurnovers));	
-	Tables.Insert("StockReservation_Exists"               , PostingServer.CreateTable(AccReg.StockReservation));
-	Tables.Insert("StockBalance_Exists"                   , PostingServer.CreateTable(AccReg.StockBalance));
-	
-	Tables.StockReservation_Exists = 
-	AccumulationRegisters.StockReservation.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
-	
-	Tables.StockBalance_Exists = 
-	AccumulationRegisters.StockBalance.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
 	
 	Query = New Query();
 	Query.SetParameter("Ref", Ref);
@@ -32,17 +20,14 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResults = Query.ExecuteBatch();
 	
 	Tables.OrderBalance               = QueryResults[2].Unload();
-	Tables.OrderReservation           = QueryResults[3].Unload();
-	Tables.PurchaseTurnovers          = QueryResults[4].Unload();
-	Tables.StockReservation           = QueryResults[5].Unload();
-	Tables.InventoryBalance           = QueryResults[6].Unload();
-	Tables.GoodsInTransitOutgoing     = QueryResults[7].Unload();
-	Tables.StockBalance               = QueryResults[8].Unload();
-	Tables.PartnerArTransactions      = QueryResults[9].Unload();
-	Tables.AdvanceFromCustomers_Lock  = QueryResults[10].Unload();
-	Tables.ReconciliationStatement    = QueryResults[11].Unload();
-	Tables.PurchaseReturnTurnovers    = QueryResults[12].Unload();
-	Tables.RevenuesTurnovers          = QueryResults[13].Unload();
+	Tables.PurchaseTurnovers          = QueryResults[3].Unload();
+	Tables.GoodsInTransitOutgoing     = QueryResults[4].Unload();
+	Tables.PartnerArTransactions      = QueryResults[5].Unload();
+	Tables.AdvanceFromCustomers_Lock  = QueryResults[6].Unload();
+	Tables.ReconciliationStatement    = QueryResults[7].Unload();
+	Tables.PurchaseReturnTurnovers    = QueryResults[8].Unload();
+	Tables.RevenuesTurnovers          = QueryResults[9].Unload();
+	
 #Region NewRegistersPosting		
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
@@ -136,26 +121,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.RowKey
 		|;
 		|
-		|// 3. ItemList_OrderReservation //////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.PurchaseReturnOrder <> VALUE(Document.PurchaseReturnOrder.EmptyRef)
-		|	AND Not tmp.IsService
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Period
-		|;
-		|
-		|// 4. ItemList_PurchaseTurnovers //////////////////////////////////////////////////////////////////////////////
+		|// 3. ItemList_PurchaseTurnovers //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.PurchaseInvoice AS PurchaseInvoice,
@@ -179,47 +145,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.RowKey
 		|;
 		|
-		|// 5. ItemList_StockReservation //////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period,
-		|	tmp.PurchaseInvoice AS PurchaseInvoice
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.PurchaseReturnOrder = VALUE(Document.PurchaseReturnOrder.EmptyRef)
-		|	AND Not tmp.IsService
-		|	AND NOT tmp.ShipmentConfirmationExists
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Period,
-		|	tmp.PurchaseInvoice
-		|;
-		|
-		|// 6. ItemList_InventoryBalance //////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	Not tmp.IsService
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Period
-		|;
-		|
-		|// 7. ItemList_GoodsInTransitOutgoing //////////////////////////////////////////////////////////////////////////////
+		|// 4. ItemList_GoodsInTransitOutgoing //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Store,
@@ -242,27 +168,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.RowKey
 		|;
 		|
-		|// 8. ItemList_StockBalance //////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.ShipmentConfirmationExists
-		|	AND NOT tmp.UseShipmentConfirmation
-		|	AND Not tmp.IsService
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Period
-		|;
-		|
-		|// 9. ItemList_PartnerArTransactions //////////////////////////////////////////////////////////////////////////////
+		|// 5. ItemList_PartnerArTransactions //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -284,7 +190,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|// 10. ItemList_AdvanceFromCustomers_Lock //////////////////////////////////////////////////////////////////////////////
+		|// 6. ItemList_AdvanceFromCustomers_Lock //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -306,7 +212,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|// 11. ReconciliationStatement //////////////////////////////////////////////////////////////////////////////
+		|// 7. ReconciliationStatement //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.LegalName AS LegalName,
@@ -322,7 +228,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|// 12. PurchaseReturnTurnovers //////////////////////////////////////////////////////////////////////////////
+		|// 8. PurchaseReturnTurnovers //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.PurchaseInvoice AS PurchaseInvoice,
@@ -342,7 +248,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period,
 		|	tmp.RowKey
 		|;
-		|// 13. RevenuesTurnovers  //////////////////////////////////////////////////////////////////////////////
+		|// 9. RevenuesTurnovers  //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Period AS Period,
 		|	tmp.Company AS Company,
@@ -445,38 +351,12 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	// PurchaseReturnTurnovers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PurchaseReturnTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.PurchaseReturnTurnovers));
-	
-	// InventoryBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.InventoryBalance,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.InventoryBalance));
-	
-	// OrderReservation
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.OrderReservation,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.OrderReservation));
-	
-	// StockReservation	
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockReservation,
-		New Structure("RecordType, RecordSet,WriteInTransaction",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.StockReservation,
-			True));
-	
+		
 	// GoodsInTransitOutgoing
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitOutgoing,
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.GoodsInTransitOutgoing));
-	
-	// StockBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.StockBalance,
-			True));
 	
 	// PartnerArTransactions
 	// PartnerArTransactions [Receipt]  
@@ -586,7 +466,10 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return;	
+#Region NewRegisterPosting
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -624,14 +507,31 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
+	QueryArray.Add(VendorsTransactions());
 	QueryArray.Add(SerialLotNumbers());
+	QueryArray.Add(OffersInfo());
+	QueryArray.Add(ShipmentConfirmationsInfo());
+	QueryArray.Add(Taxes());
+	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
+	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(R1002T_PurchaseReturns());
+	QueryArray.Add(R1005T_PurchaseSpecialOffers());
+	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
+	QueryArray.Add(R1021B_VendorsTransactions());
+	QueryArray.Add(R1031B_ReceiptInvoicing());
+	QueryArray.Add(R1040B_TaxesOutgoing());
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R1031B_ReceiptInvoicing());	
+	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
+	QueryArray.Add(R4050B_StockInventory());
+	QueryArray.Add(R5010B_ReconciliationStatement());
+
 	Return QueryArray;
 EndFunction
 
@@ -639,8 +539,7 @@ Function ItemList()
 	Return
 		"SELECT
 		|	ShipmentConfirmations.Key,
-		|	ShipmentConfirmations.ShipmentConfirmation,
-		|	SUM(ShipmentConfirmations.Quantity) AS Quantity
+		|	ShipmentConfirmations.ShipmentConfirmation
 		|INTO ShipmentConfirmations
 		|FROM
 		|	Document.PurchaseReturn.ShipmentConfirmations AS ShipmentConfirmations
@@ -655,9 +554,12 @@ Function ItemList()
 		|SELECT
 		|	PurchaseReturnItemList.Ref.Company AS Company,
 		|	PurchaseReturnItemList.Store AS Store,
-		|	PurchaseReturnItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
+		|	PurchaseReturnItemList.UseShipmentConfirmation AS UseShipmentConfirmation,
+		|	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists,
+		|	ShipmentConfirmations.ShipmentConfirmation,
 		|	PurchaseReturnItemList.ItemKey AS ItemKey,
 		|	PurchaseReturnItemList.PurchaseReturnOrder AS PurchaseReturnOrder,
+		|	NOT PurchaseReturnItemList.PurchaseReturnOrder.Ref IS NULL AS PurchaseReturnOrderExists,
 		|	PurchaseReturnItemList.Ref AS PurchaseReturn,
 		|	CASE
 		|		WHEN PurchaseReturnItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
@@ -666,6 +568,7 @@ Function ItemList()
 		|	END AS BasisDocument,
 		|	PurchaseReturnItemList.QuantityInBaseUnit AS Quantity,
 		|	PurchaseReturnItemList.TotalAmount AS TotalAmount,
+		|	PurchaseReturnItemList.TotalAmount AS Amount,
 		|	PurchaseReturnItemList.Ref.Partner AS Partner,
 		|	PurchaseReturnItemList.Ref.LegalName AS LegalName,
 		|	CASE
@@ -682,13 +585,43 @@ Function ItemList()
 		|			THEN PurchaseReturnItemList.Ref
 		|		ELSE PurchaseReturnItemList.PurchaseInvoice
 		|	END AS SalesInvoice,
+		|	PurchaseReturnItemList.Key AS RowKey,
 		|	PurchaseReturnItemList.Key,
-		|	PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService
+		|	PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+		|	PurchaseReturnItemList.NetAmount,
+		|	PurchaseReturnItemList.PurchaseInvoice AS Invoice,
+		|	PurchaseReturnItemList.ReturnReason
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
+		|		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
+		|		ON PurchaseReturnItemList.Key = ShipmentConfirmations.Key
 		|WHERE
 		|	PurchaseReturnItemList.Ref = &Ref";
+EndFunction
+
+Function VendorsTransactions()
+	Return
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company AS Company,
+		|	ItemList.Currency AS Currency,
+		|	ItemList.LegalName AS LegalName,
+		|	ItemList.Partner AS Partner,
+		|	ItemList.BasisDocument TransactionDocument,
+		|	ItemList.Agreement AS Agreement,
+		|	SUM(ItemList.Amount) AS DocumentAmount
+		|INTO VendorsTransactions
+		|FROM
+		|	ItemList AS ItemList
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.BasisDocument,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.Currency,
+		|	ItemList.Period";
 EndFunction
 
 Function SerialLotNumbers()
@@ -710,6 +643,208 @@ Function SerialLotNumbers()
 		|	SerialLotNumbers.Ref = &Ref";	
 EndFunction	
 
+Function OffersInfo()
+	Return
+		"SELECT
+		|	PurchaseReturnItemList.Ref.Date AS Period,
+		|	PurchaseReturnItemList.Ref AS Invoice,
+		|	PurchaseReturnItemList.Key AS RowKey,
+		|	PurchaseReturnItemList.ItemKey,
+		|	PurchaseReturnItemList.Ref.Company AS Company,
+		|	PurchaseReturnItemList.Ref.Currency AS Currency,
+		|	PurchaseReturnSpecialOffers.Offer AS SpecialOffer,
+		|	PurchaseReturnSpecialOffers.Amount AS OffersAmount,
+		|	PurchaseReturnItemList.TotalAmount AS SalesAmount,
+		|	PurchaseReturnItemList.NetAmount AS NetAmount
+		|INTO OffersInfo
+		|FROM
+		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
+		|		INNER JOIN Document.PurchaseReturn.SpecialOffers AS PurchaseReturnSpecialOffers
+		|		ON PurchaseReturnItemList.Key = PurchaseReturnSpecialOffers.Key
+		|		AND PurchaseReturnItemList.Ref = &Ref
+		|		AND PurchaseReturnSpecialOffers.Ref = &Ref";
+EndFunction
+
+Function ShipmentConfirmationsInfo()
+	Return
+		"SELECT
+		|	PurchaseReturnShipmentConfirmations.Key,
+		|	PurchaseReturnShipmentConfirmations.ShipmentConfirmation,
+		|	PurchaseReturnShipmentConfirmations.Quantity,
+		|	PurchaseReturnShipmentConfirmations.QuantityInShipmentConfirmation
+		|INTO ShipmentConfirmationsInfo
+		|FROM
+		|	Document.PurchaseReturn.ShipmentConfirmations AS PurchaseReturnShipmentConfirmations
+		|WHERE
+		|	PurchaseReturnShipmentConfirmations.Ref = &Ref";
+EndFunction
+
+Function Taxes()
+	Return
+		"SELECT
+		|	PurchaseReturnTaxList.Ref.Date AS Period,
+		|	PurchaseReturnTaxList.Ref.Company AS Company,
+		|	PurchaseReturnTaxList.Tax AS Tax,
+		|	PurchaseReturnTaxList.TaxRate AS TaxRate,
+		|	CASE
+		|		WHEN PurchaseReturnTaxList.ManualAmount = 0
+		|			THEN PurchaseReturnTaxList.Amount
+		|		ELSE PurchaseReturnTaxList.ManualAmount
+		|	END AS TaxAmount,
+		|	PurchaseReturnItemList.NetAmount AS TaxableAmount
+		|INTO Taxes
+		|FROM
+		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
+		|		INNER JOIN Document.PurchaseReturn.TaxList AS PurchaseReturnTaxList
+		|		ON PurchaseReturnItemList.Key = PurchaseReturnTaxList.Key
+		|		AND PurchaseReturnItemList.Ref = &Ref
+		|		AND PurchaseReturnTaxList.Ref = &Ref";
+EndFunction
+
+Function R1002T_PurchaseReturns()
+	Return
+		"SELECT *
+		|INTO R1002T_PurchaseReturns
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE TRUE";
+
+EndFunction
+
+Function R1005T_PurchaseSpecialOffers()
+	Return
+		"SELECT *
+		|INTO R1005T_PurchaseSpecialOffers
+		|FROM
+		|	OffersInfo AS OffersInfo
+		|WHERE TRUE";
+
+EndFunction
+
+Function R1012B_PurchaseOrdersInvoiceClosing()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.PurchaseReturnOrder AS Order,
+		|	*
+		|INTO R1012B_PurchaseOrdersInvoiceClosing
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.PurchaseReturnOrderExists";
+
+EndFunction
+
+Function R1021B_VendorsTransactions()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	VendorsTransactions.Period,
+		|	VendorsTransactions.Company,
+		|	VendorsTransactions.Currency,
+		|	VendorsTransactions.LegalName,
+		|	VendorsTransactions.Partner,
+		|	VendorsTransactions.Agreement,
+		|	VendorsTransactions.TransactionDocument AS Basis,
+		|	- SUM(VendorsTransactions.DocumentAmount) AS Amount
+		|INTO R1021B_VendorsTransactions
+		|FROM
+		|	VendorsTransactions AS VendorsTransactions
+		|GROUP BY
+		|	VendorsTransactions.Period,
+		|	VendorsTransactions.Company,
+		|	VendorsTransactions.Currency,
+		|	VendorsTransactions.LegalName,
+		|	VendorsTransactions.Partner,
+		|	VendorsTransactions.Agreement,
+		|	VendorsTransactions.TransactionDocument,
+		|	VALUE(AccumulationRecordType.Receipt)";
+EndFunction
+
+Function R1031B_ReceiptInvoicing()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.PurchaseReturn AS Basis,
+		|	ItemList.Quantity AS Quantity,
+		|	ItemList.Company,
+		|	ItemList.Period,
+		|	ItemList.ItemKey,
+		|	ItemList.Store
+		|INTO R1031B_ReceiptInvoicing
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.UseShipmentConfirmation
+		|	AND NOT ItemList.ShipmentConfirmationExists
+		|	AND NOT ItemList.IsService
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ShipmentConfirmations.ShipmentConfirmation,
+		|	ShipmentConfirmations.Quantity,
+		|	ItemList.Company,
+		|	ItemList.Period,
+		|	ItemList.ItemKey,
+		|	ItemList.Store
+		|FROM
+		|	ItemList AS ItemList
+		|		INNER JOIN ShipmentConfirmationsInfo AS ShipmentConfirmations
+		|		ON ItemList.RowKey = ShipmentConfirmations.Key
+		|WHERE
+		|	TRUE";
+
+EndFunction
+
+Function R1040B_TaxesOutgoing()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	- Taxes.TaxableAmount,
+		|	- Taxes.TaxAmount,
+		|	*
+		|INTO R1040B_TaxesOutgoing
+		|FROM
+		|	Taxes AS Taxes
+		|WHERE TRUE";
+
+EndFunction
+
+Function R4010B_ActualStocks()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	*
+		|INTO R4010B_ActualStocks
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND NOT ItemList.UseShipmentConfirmation
+		|	AND NOT ItemList.ShipmentConfirmationExists";
+
+EndFunction
+
+Function R4011B_FreeStocks()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period AS Period,
+		|	ItemList.Store AS Store,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Quantity AS Quantity
+		|INTO R4011B_FreeStocks
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND NOT ItemList.UseShipmentConfirmation
+		|	AND NOT ItemList.ShipmentConfirmationExists";
+
+EndFunction
+
 Function R4014B_SerialLotNumber()
 	Return
 		"SELECT 
@@ -723,23 +858,56 @@ Function R4014B_SerialLotNumber()
 
 EndFunction
 
-Function R1031B_ReceiptInvoicing()
+Function R4032B_GoodsInTransitOutgoing()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	CASE
+		|		WHEN ItemList.ShipmentConfirmationExists
+		|			Then ItemList.ShipmentConfirmation
+		|		Else ItemList.PurchaseReturn
+		|	End AS Basis,
+		|	*
+		|INTO R4032B_GoodsInTransitOutgoing
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND (ItemList.UseShipmentConfirmation
+		|		OR ItemList.ShipmentConfirmationExists)";
+
+EndFunction
+
+Function R4050B_StockInventory()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	ShipmentConfirmations.ShipmentConfirmation AS Basis,
-		|	ShipmentConfirmations.Quantity,
-		|	ItemList.Company,
-		|	ItemList.Period,
-		|	ItemList.ItemKey,
-		|	ItemList.Store
-		|INTO R1031B_ReceiptInvoicing
+		|	*
+		|INTO R4050B_StockInventory
 		|FROM
 		|	ItemList AS ItemList
-		|		INNER JOIN ShipmentConfirmations AS ShipmentConfirmations
-		|		ON ItemList.Key = ShipmentConfirmations.Key
 		|WHERE
-		|	TRUE";
+		|	NOT ItemList.IsService";
+
+EndFunction
+
+Function R5010B_ReconciliationStatement()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Company AS Company,
+		|	ItemList.LegalName AS LegalName,
+		|	ItemList.Currency AS Currency,
+		|	- SUM(ItemList.Amount) AS Amount,
+		|	ItemList.Period
+		|INTO R5010B_ReconciliationStatement
+		|FROM
+		|	ItemList AS ItemList
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.LegalName,
+		|	ItemList.Currency,
+		|	ItemList.Period";
 EndFunction
 
 #EndRegion

@@ -5,18 +5,17 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
 	Tables.Insert("OrderBalance"      , PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("OrderReservation"  , PostingServer.CreateTable(AccReg.OrderReservation));
-	Tables.Insert("StockReservation"  , PostingServer.CreateTable(AccReg.StockReservation));
 	Tables.Insert("PurchaseTurnovers" , PostingServer.CreateTable(AccReg.PurchaseTurnovers));
-	
-	Tables.Insert("StockReservation_Exists" , PostingServer.CreateTable(AccReg.StockReservation));
-	
-	Tables.StockReservation_Exists = 
-	AccumulationRegisters.StockReservation.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
 	
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
+	Parameters.Insert("StatusInfo", StatusInfo);
 	If Not StatusInfo.Posting Then
+#Region NewRegistersPosting
+		QueryArray = GetQueryTextsSecondaryTables();
+		Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
+		PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion
 		Return Tables;
 	EndIf;
 	
@@ -122,51 +121,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.RowKey
 		|;
 		|
-		|// 2. OrderReservation //////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.Order,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Unit AS Unit,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.IsService
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.Order,
-		|	tmp.ItemKey,
-		|	tmp.Unit,
-		|	tmp.Period
-		|;
-		|
-		|// 3. StockReservation //////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.Order,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Unit AS Unit,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.IsService
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.Order,
-		|	tmp.ItemKey,
-		|	tmp.Unit,
-		|	tmp.Period
-		|;
-		|
-		|// 4. PurchaseTurnovers//////////////////////////////////////////////////////////////////////////////
+		|// 2. PurchaseTurnovers//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.PurchaseInvoice,
@@ -191,38 +146,29 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResults = Query.ExecuteBatch();
 	
 	Tables.OrderBalance      = QueryResults[1].Unload();
-	Tables.OrderReservation  = QueryResults[2].Unload();
-	Tables.StockReservation  = QueryResults[3].Unload();
-	Tables.PurchaseTurnovers = QueryResults[4].Unload();
+	Tables.PurchaseTurnovers = QueryResults[2].Unload();
 	
+#Region NewRegistersPosting
+	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion	
+
 	Return Tables;
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// OrderBalance
-	OrderBalance = AccumulationRegisters.OrderBalance.GetLockFields(DocumentDataTables.OrderBalance);
-	DataMapWithLockFields.Insert(OrderBalance.RegisterName, OrderBalance.LockInfo);
-	
-	// PurchaseTurnovers
-	PurchaseTurnovers = AccumulationRegisters.PurchaseTurnovers.GetLockFields(DocumentDataTables.PurchaseTurnovers);
-	DataMapWithLockFields.Insert(PurchaseTurnovers.RegisterName, PurchaseTurnovers.LockInfo);
-
-	// OrderReservation
-	OrderReservation = AccumulationRegisters.OrderReservation.GetLockFields(DocumentDataTables.OrderReservation);
-	DataMapWithLockFields.Insert(OrderReservation.RegisterName, OrderReservation.LockInfo);
-	
-	// StockReservation
-	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-		
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
+#Region NewRegisterPosting
+	Tables = Parameters.DocumentDataTables;	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -241,19 +187,9 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			Parameters.DocumentDataTables.PurchaseTurnovers,
 			Parameters.IsReposting));
 	
-	// OrderReservation
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.OrderReservation,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.OrderReservation,
-			Parameters.IsReposting));
-	
-	// StockReservation
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockReservation,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.StockReservation,
-			True));
+#Region NewRegistersPosting
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+#EndRegion	
 	
 	Return PostingDataTables;
 EndFunction
@@ -271,18 +207,15 @@ Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Und
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// StockReservation
-	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation_Exists);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return;
+#Region NewRegistersPosting
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -295,18 +228,13 @@ EndProcedure
 #Region CheckAfterWrite
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
-	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
-	If StatusInfo.Posting Then
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "BalancePeriod", 
-			New Boundary(New PointInTime(StatusInfo.Period, Ref), BoundaryType.Including));
-	EndIf;
-	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
-	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.PurchaseReturnOrder.ItemList", AddInfo);
+	Return;
 EndProcedure
 
 #EndRegion
 
 #Region NewRegistersPosting
+
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
 	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
@@ -318,19 +246,73 @@ EndFunction
 Function GetAdditionalQueryParamenters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
+	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
+	StrParams.Insert("StatusInfoPosting", StatusInfo.Posting);
 	Return StrParams;
 EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
-
+	QueryArray.Add(ItemList());
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(R1010T_PurchaseOrders());
+	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
+	Return QueryArray;	
+EndFunction	
 
-	Return QueryArray;
+Function ItemList()
+	Return
+		"SELECT
+		|	PurchaseReturnOrderItemList.Ref.Company AS Company,
+		|	PurchaseReturnOrderItemList.Store AS Store,
+		|	PurchaseReturnOrderItemList.Ref AS Order,
+		|	PurchaseReturnOrderItemList.ItemKey.Item AS Item,
+		|	PurchaseReturnOrderItemList.ItemKey AS ItemKey,
+		|	PurchaseReturnOrderItemList.Quantity AS UnitQuantity,
+		|	PurchaseReturnOrderItemList.QuantityInBaseUnit AS Quantity,
+		|	PurchaseReturnOrderItemList.Unit,
+		|	PurchaseReturnOrderItemList.Ref.Date AS Period,
+		|	PurchaseReturnOrderItemList.Key AS RowKey,
+		|	PurchaseReturnOrderItemList.BusinessUnit AS BusinessUnit,
+		|	PurchaseReturnOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+		|	PurchaseReturnOrderItemList.Cancel AS IsCanceled,
+		|	PurchaseReturnOrderItemList.TotalAmount AS Amount,
+		|	PurchaseReturnOrderItemList.NetAmount,
+		|	PurchaseReturnOrderItemList.Ref.Currency AS Currency,
+		|	PurchaseReturnOrderItemList.PurchaseInvoice AS Invoice,
+		|	&StatusInfoPosting
+		|INTO ItemList
+		|FROM
+		|	Document.PurchaseReturnOrder.ItemList AS PurchaseReturnOrderItemList
+		|WHERE
+		|	PurchaseReturnOrderItemList.Ref = &Ref
+		|	AND &StatusInfoPosting";
+EndFunction
+
+Function R1010T_PurchaseOrders()
+	Return
+		"SELECT *
+		|INTO R1010T_PurchaseOrders
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE NOT QueryTable.isCanceled";
+
+EndFunction
+
+Function R1012B_PurchaseOrdersInvoiceClosing()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R1012B_PurchaseOrdersInvoiceClosing
+		|FROM
+		|	ItemList AS QueryTable
+		|WHERE NOT QueryTable.isCanceled";
+
 EndFunction
 
 #EndRegion

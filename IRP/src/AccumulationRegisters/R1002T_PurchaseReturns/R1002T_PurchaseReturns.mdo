@@ -118,7 +118,7 @@
       <value>Invoice</value>
     </synonym>
     <type>
-      <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.PurchaseInvoice</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

@@ -96,7 +96,7 @@ Scenario: _018021 check the display of the header of the collapsible group in Pu
 Scenario: _022017 check the display of the header of the collapsible group in Purchase Return Order
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 	When check the display of the header of the collapsible group in sales, purchase and return documents
-	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP   Status: Wait" text
+	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP " text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
         |'And I click Select button of  "Partner" field'|

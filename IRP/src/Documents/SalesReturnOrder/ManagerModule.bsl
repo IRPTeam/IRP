@@ -9,6 +9,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
+	Parameters.Insert("StatusInfo", StatusInfo);
 	If Not StatusInfo.Posting Then
 		Return Tables;
 	EndIf;
@@ -128,6 +129,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.OrderBalance = QueryResults[1].Unload();
 	Tables.SalesTurnovers = QueryResults[2].Unload();
 	
+#Region NewRegistersPosting
+	QueryArray = GetQueryTextsSecondaryTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion	
+	
 	Return Tables;
 EndFunction
 
@@ -147,7 +153,14 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
+#Region NewRegisterPosting
+	If Parameters.StatusInfo.Posting Then
+		Tables = Parameters.DocumentDataTables;	
+		QueryArray = GetQueryTextsMasterTables();
+		PostingServer.SetRegisters(Tables, Ref);
+		PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+	EndIf;
+#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -165,6 +178,10 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordSet, WriteInTransaction",
 			Parameters.DocumentDataTables.SalesTurnovers,
 			Parameters.IsReposting));
+			
+#Region NewRegistersPosting
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+#EndRegion	
 	
 	Return PostingDataTables;
 EndFunction
@@ -196,6 +213,7 @@ EndProcedure
 #EndRegion
 
 #Region NewRegistersPosting
+
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
 	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
@@ -206,20 +224,72 @@ EndFunction
 
 Function GetAdditionalQueryParamenters(Ref)
 	StrParams = New Structure();
-	StrParams.Insert("Ref", Ref);
 	Return StrParams;
 EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
-
-	Return QueryArray;
+	QueryArray.Add(ItemList());
+	Return QueryArray;	
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(R2010T_SalesOrders());
+	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
+	Return QueryArray;	
+EndFunction	
 
-	Return QueryArray;
+Function ItemList()
+	Return
+		"SELECT
+		|	SalesReturnOrderList.Ref.Company AS Company,
+		|	SalesReturnOrderList.Store AS Store,
+		|	SalesReturnOrderList.ItemKey AS ItemKey,
+		|	SalesReturnOrderList.Ref AS Order,
+		|	SalesReturnOrderList.Quantity AS UnitQuantity,
+		|	SalesReturnOrderList.QuantityInBaseUnit AS Quantity,
+		|	SalesReturnOrderList.Unit,
+		|	SalesReturnOrderList.ItemKey.Item AS Item,
+		|	SalesReturnOrderList.Ref.Date AS Period,
+		|	SalesReturnOrderList.Key AS RowKey,
+		|	VALUE(Enum.ProcurementMethods.EmptyRef) AS ProcurementMethod,
+		|	SalesReturnOrderList.TotalAmount AS Amount,
+		|	SalesReturnOrderList.Ref.Currency AS Currency,
+		|	SalesReturnOrderList.Cancel AS IsCanceled,
+		|	SalesReturnOrderList.CancelReason,
+		|	SalesReturnOrderList.NetAmount,
+		|	SalesReturnOrderList.OffersAmount
+		|INTO ItemList
+		|FROM
+		|	Document.SalesReturnOrder.ItemList AS SalesReturnOrderList
+		|WHERE
+		|	SalesReturnOrderList.Ref = &Ref";
+EndFunction
+
+Function R2010T_SalesOrders()
+	Return
+		"SELECT
+		|	*
+		|INTO R2010T_SalesOrders
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.isCanceled";
+
+EndFunction
+
+Function R2012B_SalesOrdersInvoiceClosing()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R2012B_SalesOrdersInvoiceClosing
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.isCanceled";
+
 EndFunction
 
 #EndRegion

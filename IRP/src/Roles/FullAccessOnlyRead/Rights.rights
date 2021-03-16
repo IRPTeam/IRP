@@ -1001,28 +1001,6 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.InventoryBalance</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.ItemsInStores</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>InformationRegister.ItemSegments</name>
 		<right>
 			<name>Read</name>
@@ -2377,17 +2355,6 @@
 		<name>HTTPService.FileTransferService.URLTemplate.FileTransfer.Method.POST</name>
 		<right>
 			<name>Use</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.OrderReservation</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>

@@ -5,10 +5,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
 	Tables.Insert("OrderBalance"                          , PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("InventoryBalance"                      , PostingServer.CreateTable(AccReg.InventoryBalance));
 	Tables.Insert("GoodsInTransitIncoming"                , PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
-	Tables.Insert("StockBalance"                          , PostingServer.CreateTable(AccReg.StockBalance));
-	Tables.Insert("StockReservation"                      , PostingServer.CreateTable(AccReg.StockReservation));
 	Tables.Insert("PartnerApTransactions"                 , PostingServer.CreateTable(AccReg.PartnerApTransactions));
 	Tables.Insert("AdvanceToSuppliers_Lock"               , PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
 	Tables.Insert("PartnerApTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
@@ -18,15 +15,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("Aging_Expense"                         , PostingServer.CreateTable(AccReg.Aging));
 	Tables.Insert("PartnerArTransactions"                 , PostingServer.CreateTable(AccReg.PartnerArTransactions));
 	Tables.Insert("ExpensesTurnovers"                     , PostingServer.CreateTable(AccReg.ExpensesTurnovers));
-	
-	Tables.Insert("StockReservation_Exists" , PostingServer.CreateTable(AccReg.StockReservation));
-	Tables.Insert("StockBalance_Exists"     , PostingServer.CreateTable(AccReg.StockBalance));
-	
-	Tables.StockReservation_Exists = 
-	AccumulationRegisters.StockReservation.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
-	
-	Tables.StockBalance_Exists = 
-	AccumulationRegisters.StockBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
 	
 	Query = New Query();
 	Query.SetParameter("Ref", Ref);
@@ -40,16 +28,13 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryTableSalesTurnovers = QueryResultSalesTurnovers.Unload();
 	
 	Tables.OrderBalance                     = QueryResults[2].Unload();
-	Tables.InventoryBalance                 = QueryResults[3].Unload();
-	Tables.GoodsInTransitIncoming           = QueryResults[4].Unload();
-	Tables.StockBalance                     = QueryResults[5].Unload();
-	Tables.StockReservation                 = QueryResults[6].Unload();
-	Tables.PartnerApTransactions            = QueryResults[7].Unload();
-	Tables.AdvanceToSuppliers_Lock          = QueryResults[8].Unload();
-	Tables.ReconciliationStatement          = QueryResults[9].Unload();
-	Tables.SalesReturnTurnovers             = QueryResults[10].Unload();
-	Tables.PartnerArTransactions            = QueryResults[11].Unload();
-	Tables.ExpensesTurnovers	            = QueryResults[12].Unload();
+	Tables.GoodsInTransitIncoming           = QueryResults[3].Unload();
+	Tables.PartnerApTransactions            = QueryResults[4].Unload();
+	Tables.AdvanceToSuppliers_Lock          = QueryResults[5].Unload();
+	Tables.ReconciliationStatement          = QueryResults[6].Unload();
+	Tables.SalesReturnTurnovers             = QueryResults[7].Unload();
+	Tables.PartnerArTransactions            = QueryResults[8].Unload();
+	Tables.ExpensesTurnovers	            = QueryResults[9].Unload();
 	
 	Tables.SalesTurnovers = QueryTableSalesTurnovers;
 	
@@ -61,7 +46,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	
 	Tables.Insert("CustomersTransactions", 
-		PostingServer.GetQueryTableByName("CustomersTransactions", Parameters));	
+	PostingServer.GetQueryTableByName("CustomersTransactions", Parameters));	
 #EndRegion	
 	
 	Return Tables;
@@ -227,26 +212,7 @@ Function GetQueryTextQueryTable()
 	|WHERE
 	|	tmp.Order <> VALUE(Document.SalesReturnOrder.EmptyRef)
 	|;
-	|// 3. InventoryBalance //////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmp.Company,
-	|	tmp.Store,
-	|	tmp.ItemKey,
-	|	SUM(tmp.Quantity) AS Quantity,
-	|	tmp.Unit AS Unit,
-	|	tmp.Period
-	|FROM
-	|	tmp AS tmp
-	|WHERE
-	|	Not tmp.IsService
-	|GROUP BY
-	|	tmp.Company,
-	|	tmp.Store,
-	|	tmp.ItemKey,
-	|	tmp.Unit,
-	|	tmp.Period
-	|;
-	|// 4. GoodsInTransitIncoming //////////////////////////////////////////////////////////////////////////////
+	|// 3. GoodsInTransitIncoming //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company,
 	|	tmp.Store,
@@ -263,49 +229,7 @@ Function GetQueryTextQueryTable()
 	|	AND Not tmp.IsService
 	|	AND NOT tmp.GoodsReceiptExists
 	|;
-	|// 5. StockBalance //////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmp.Company,
-	|	tmp.Store,
-	|	tmp.ItemKey,
-	|	SUM(tmp.Quantity) AS Quantity,
-	|	tmp.Unit AS Unit,
-	|	tmp.Period
-	|FROM
-	|	tmp AS tmp
-	|WHERE
-	|	NOT tmp.UseGoodsReceipt
-	|	AND Not tmp.IsService
-	|	AND NOT tmp.GoodsReceiptExists
-	|GROUP BY
-	|	tmp.Company,
-	|	tmp.Store,
-	|	tmp.ItemKey,
-	|	tmp.Unit,
-	|	tmp.Period
-	|;
-	|// 6. StockReservation //////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmp.Company,
-	|	tmp.Store,
-	|	tmp.ItemKey,
-	|	SUM(tmp.Quantity) AS Quantity,
-	|	tmp.Unit AS Unit,
-	|	tmp.Period
-	|FROM
-	|	tmp AS tmp
-	|WHERE
-	|	NOT tmp.UseGoodsReceipt
-	|	AND Not tmp.IsService
-	|	AND Not tmp.GoodsReceiptExists
-	|GROUP BY
-	|	tmp.Company,
-	|	tmp.Store,
-	|	tmp.ItemKey,
-	|	tmp.Unit,
-	|	tmp.Period
-	|;
-	|// 7. PartnerApTransactions //////////////////////////////////////////////////////////////////////////////
+	|// 4. PartnerApTransactions //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company AS Company,
 	|	tmp.BasisDocument AS BasisDocument,
@@ -326,7 +250,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.Currency,
 	|	tmp.Period
 	|;
-	|// 8. AdvanceToSuppliers_Lock //////////////////////////////////////////////////////////////////////////////
+	|// 5. AdvanceToSuppliers_Lock //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company AS Company,
 	|	tmp.BasisDocument AS BasisDocument,
@@ -347,7 +271,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.Currency,
 	|	tmp.Period
 	|;
-	|// 9. ReconciliationStatement //////////////////////////////////////////////////////////////////////////////
+	|// 6. ReconciliationStatement //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company AS Company,
 	|	tmp.LegalName AS LegalName,
@@ -362,7 +286,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.Currency,
 	|	tmp.Period
 	|;
-	|// 10. SalesReturnTurnovers //////////////////////////////////////////////////////////////////////////////
+	|// 7. SalesReturnTurnovers //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company,
 	|	tmp.Currency,
@@ -382,7 +306,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.SalesInvoice,
 	|	tmp.RowKey
 	|;
-	|// 11. PartnerArTransactions //////////////////////////////////////////////////////////////////////////////
+	|// 8. PartnerArTransactions //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company AS Company,
 	|	tmp.AgingSalesInvoice AS BasisDocument,
@@ -405,7 +329,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.Currency,
 	|	tmp.Period
 	|;
-	|// 12. ExpensesTurnovers //////////////////////////////////////////////////////////////////////////////
+	|// 9. ExpensesTurnovers //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company AS Company,
 	|	tmp.BusinessUnit AS BusinessUnit,
@@ -428,9 +352,7 @@ Function GetQueryTextQueryTable()
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Tables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -522,33 +444,12 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			Parameters.DocumentDataTables.SalesReturnTurnovers,
 			Parameters.IsReposting));
 	
-	// InventoryBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.InventoryBalance,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.InventoryBalance,
-			Parameters.IsReposting));
-	
 	// GoodsInTransitIncoming
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitIncoming,
 		New Structure("RecordType, RecordSet, WriteInTransaction",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.GoodsInTransitIncoming,
 			Parameters.IsReposting));
-	
-	// StockBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.StockBalance,
-			True));
-	
-	// StockReservation	
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockReservation,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.StockReservation,
-			True));
 	
 	// AccountsStatement
 	ArrayOfTables = New Array();
@@ -664,7 +565,10 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return;
+#Region NewRegisterPosting
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion	
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -706,6 +610,8 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(Taxes());
 	QueryArray.Add(CustomersTransactions());
 	QueryArray.Add(SerialLotNumbers());
+	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
+	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	Return QueryArray;
 EndFunction
 

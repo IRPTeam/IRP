@@ -155,12 +155,6 @@
     <mdObject>InformationRegister.CurrencyRates</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.InventoryBalance</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.ItemsInStores</mdObject>
-  </content>
-  <content>
     <mdObject>InformationRegister.ItemSegments</mdObject>
   </content>
   <content>
@@ -339,9 +333,6 @@
   </content>
   <content>
     <mdObject>AccumulationRegister.R2001T_Sales</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.OrderReservation</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.PlaningCashTransactions</mdObject>

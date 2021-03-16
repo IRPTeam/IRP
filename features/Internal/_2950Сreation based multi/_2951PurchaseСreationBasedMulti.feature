@@ -332,20 +332,7 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 		And I save the window as "$$PurchaseInvoice090302042$$"
 		And I click the button named "FormPostAndClose"
 	And I close all client application windows
-	* Check creation
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-		And "List" table contains lines
-		| 'Quantity' | 'Store'    | 'Order'               | 'Item key'  |
-		| '20,000'   | 'Store 02' | '$$PurchaseOrder090302041$$' | 'M/White'   |
-		| '20,000'   | 'Store 02' | '$$PurchaseOrder090302041$$' | 'L/Green'   |
-		| '30,000'   | 'Store 02' | '$$PurchaseOrder090302041$$' | '36/Yellow' |
-		| '10,000'   | 'Store 02' | '$$PurchaseOrder090302042$$' | 'M/White'   |
-		| '20,000'   | 'Store 02' | '$$PurchaseOrder090302041$$' | 'M/White'   |
-		| '20,000'   | 'Store 02' | '$$PurchaseOrder090302041$$' | 'L/Green'   |
-		| '30,000'   | 'Store 02' | '$$PurchaseOrder090302041$$' | '36/Yellow' |
-		| '10,000'   | 'Store 02' | '$$PurchaseOrder090302042$$' | 'M/White'   |
-		And Delay 5
-		And I close all client application windows
+
 
 
 
@@ -492,20 +479,7 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 			And I save the window as "$$PurchaseInvoice090302051$$"
 		And I click the button named "FormPostAndClose"
 	And I close all client application windows
-	* Check creation
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-		And "List" table contains lines
-		| 'Quantity' | 'Store'    | 'Order'               | 'Item key'  |
-		| '20,000'   | 'Store 02' | '$$PurchaseOrder090302051$$' | 'M/White'   |
-		| '20,000'   | 'Store 02' | '$$PurchaseOrder090302051$$' | 'L/Green'   |
-		| '30,000'   | 'Store 02' | '$$PurchaseOrder090302051$$' | '36/Yellow' |
-		| '10,000'   | 'Store 02' | '$$PurchaseOrder090302052$$' | 'M/White'   |
-		| '20,000'   | 'Store 02' | '$$PurchaseOrder090302051$$' | 'M/White'   |
-		| '20,000'   | 'Store 02' | '$$PurchaseOrder090302051$$' | 'L/Green'   |
-		| '30,000'   | 'Store 02' | '$$PurchaseOrder090302051$$' | '36/Yellow' |
-		| '10,000'   | 'Store 02' | '$$PurchaseOrder090302052$$' | 'M/White'   |
-		And Delay 5
-		And I close all client application windows
+	
 
 
 
@@ -2172,21 +2146,7 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 		| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
 		| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' | '' | '' |
 		| ''                                     | 'Expense'     | '*'      | '14 500'    | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' | '' | '' |
-		And I select "Receipt orders" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Receipt orders"' | ''            | ''       | ''          | ''                        | ''                         | ''          | ''        | '' | '' | '' | '' | '' | '' |
-		| ''                           | 'Record type' | 'Period' | 'Resources' | 'Dimensions'              | ''                         | ''          | ''        | '' | '' | '' | '' | '' | '' |
-		| ''                           | ''            | ''       | 'Quantity'  | 'Order'                   | 'Goods receipt'            | 'Item key'  | 'Row key' | '' | '' | '' | '' | '' | '' |
-		| ''                           | 'Expense'     | '*'      | '5'         | '$$PurchaseOrder090323$$' | '$$GoodsReceipte0903231$$' | 'M/White'   | '*'       | '' | '' | '' | '' | '' | '' |
-		| ''                           | 'Expense'     | '*'      | '5'         | '$$PurchaseOrder090323$$' | '$$GoodsReceipte0903231$$' | 'L/Green'   | '*'       | '' | '' | '' | '' | '' | '' |
-		| ''                           | 'Expense'     | '*'      | '7'         | '$$PurchaseOrder090323$$' | '$$GoodsReceipte0903233$$' | 'M/White'   | '*'       | '' | '' | '' | '' | '' | '' |
-		| ''                           | 'Expense'     | '*'      | '7'         | '$$PurchaseOrder090323$$' | '$$GoodsReceipte0903233$$' | 'L/Green'   | '*'       | '' | '' | '' | '' | '' | '' |
-		| ''                           | 'Expense'     | '*'      | '8'         | '$$PurchaseOrder090323$$' | '$$GoodsReceipte0903232$$' | 'M/White'   | '*'       | '' | '' | '' | '' | '' | '' |
-		| ''                           | 'Expense'     | '*'      | '8'         | '$$PurchaseOrder090323$$' | '$$GoodsReceipte0903232$$' | 'L/Green'   | '*'       | '' | '' | '' | '' | '' | '' |
-		| ''                           | 'Expense'     | '*'      | '8'         | '$$PurchaseOrder090323$$' | '$$GoodsReceipte0903233$$' | '36/Yellow' | '*'       | '' | '' | '' | '' | '' | '' |
-		| ''                           | 'Expense'     | '*'      | '10'        | '$$PurchaseOrder090323$$' | '$$GoodsReceipte0903231$$' | '36/Yellow' | '*'       | '' | '' | '' | '' | '' | '' |
-		| ''                           | 'Expense'     | '*'      | '12'        | '$$PurchaseOrder090323$$' | '$$GoodsReceipte0903232$$' | '36/Yellow' | '*'       | '' | '' | '' | '' | '' | '' |
+	
 		And I select "Partner AP transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -2197,13 +2157,5 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 		| ''                                    | 'Receipt'     | '*'      | '14 500'    | 'Main Company' | '$$PurchaseInvoice090323$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 		| ''                                    | 'Receipt'     | '*'      | '14 500'    | 'Main Company' | '$$PurchaseInvoice090323$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 		| ''                                    | 'Receipt'     | '*'      | '14 500'    | 'Main Company' | '$$PurchaseInvoice090323$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"'            | ''            | ''          | ''                     | ''                        | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'              | ''                          | ''                          | ''                  | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | ''            | ''          | 'Quantity'             | 'Store'                   | 'Order'                     | 'Item key'                  | 'Row key'           | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Expense'     | '*'         | '20'                   | 'Store 02'                | '$$PurchaseOrder090323$$'   | 'M/White'                   | '*'                 | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Expense'     | '*'         | '20'                   | 'Store 02'                | '$$PurchaseOrder090323$$'   | 'L/Green'                   | '*'                 | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Expense'     | '*'         | '30'                   | 'Store 02'                | '$$PurchaseOrder090323$$'   | '36/Yellow'                 | '*'                 | ''                   | ''                        | ''                             | ''                     | ''                             | ''                     |	
+	
 		And I close all client application windows

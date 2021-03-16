@@ -128,24 +128,6 @@ Scenario: _028004 create document Sales return order, store does not use Goods r
 
 
 
-Scenario: _028005 check Sales return order movements the OrderBalance register (store does not use Goods receipt, based on Sales invoice)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                   | 'Store'    | 'Order'                      | 'Item key'  |
-		| '2,000'    | '$$SalesReturnOrder028004$$' | 'Store 01' | '$$SalesReturnOrder028004$$' | 'L/Green'   |
-		| '4,000'    | '$$SalesReturnOrder028004$$' | 'Store 01' | '$$SalesReturnOrder028004$$' | '36/Yellow' |
-
-Scenario: _028006 check Sales return order movements the SalesTurnovers register (store does not use Goods receipt, based on Sales invoice) (-)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                   | 'Sales invoice'          | 'Item key'  |
-		| '-2,000'   | '$$SalesReturnOrder028004$$' | '$$SalesInvoice024001$$' | 'L/Green'   |
-		| '-4,000'   | '$$SalesReturnOrder028004$$' | '$$SalesInvoice024001$$' | '36/Yellow' |
-
-
-
 Scenario: _028012 check totals in the document Sales return order
 	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 	* Select Sales return

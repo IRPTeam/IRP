@@ -85,7 +85,6 @@ Procedure SetGroupItemsList(Object, Form)
 	AttributesArray.Add("Partner");
 	AttributesArray.Add("LegalName");
 	AttributesArray.Add("Agreement");
-	AttributesArray.Add("Status");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Atr In AttributesArray Do
 		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title),
@@ -137,7 +136,6 @@ Function GetPurchaseOrderForClosing(PurchaseOrder, AddInfo = Undefined) Export
 		|	PurchaseOrder.LegalName AS LegalName,
 		|	PurchaseOrder.Partner AS Partner,
 		|	PurchaseOrder.PriceIncludeTax AS PriceIncludeTax,
-		|	PurchaseOrder.Status AS Status,
 		|	PurchaseOrder.Author AS Author,
 		|	PurchaseOrder.BusinessUnit AS BusinessUnit,
 		|	PurchaseOrder.Description AS Description

@@ -348,21 +348,6 @@ Scenario: Open object form "GoodsReceiptSchedule"
 
 	
 	
-Scenario: Open list form "ItemsInStores" 
-
-	Given I open "ItemsInStores" accumulation register list form 
-	If the warning is displayed then 
-		Then I raise "Failed to open information register form ItemsInStores" exception
-	And I close current window
-
-Scenario: Open object form "ItemsInStores"
-
-	Given I open "ItemsInStores" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form ItemsInStores" exception
-	And I close current window
-
-	
 
 	
 Scenario: Open list form "OrderProcurement" 

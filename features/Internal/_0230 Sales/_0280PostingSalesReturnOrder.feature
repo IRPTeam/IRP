@@ -53,6 +53,8 @@ Scenario: _028000 preparation (Sales return order)
 				| "TaxCalculateVAT_TR" |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
+		When Create catalog BusinessUnits objects
+		When Create catalog ExpenseAndRevenueTypes objects
 	* Tax settings
 		When filling in Tax settings for company
 	* Check or create SalesOrder023001

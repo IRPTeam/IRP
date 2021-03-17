@@ -286,26 +286,43 @@ EndFunction
 
 Function ItemList()
 	Return
-		"SELECT
-		|	&Period AS Period,
-		|	InventoryTransferOrderItemList.Ref.Company AS Company,
-		|	InventoryTransferOrderItemList.Ref.StoreSender AS StoreSender,
-		|	InventoryTransferOrderItemList.Ref.StoreReceiver AS StoreReceiver,
-		|	InventoryTransferOrderItemList.Ref AS Order,
-		|	InventoryTransferOrderItemList.ItemKey AS ItemKey,
-		|	InventoryTransferOrderItemList.QuantityInBaseUnit AS Quantity,
-		|	InventoryTransferOrderItemList.Key AS RowKey,
-		|	InventoryTransferOrderItemList.PurchaseOrder AS PurchaseOrder,
-		|	NOT InventoryTransferOrderItemList.PurchaseOrder.Ref IS NULL AS PurchaseOrderExists,
-		|	InventoryTransferOrderItemList.InternalSupplyRequest AS InternalSupplyRequest,
-		|	NOT InventoryTransferOrderItemList.InternalSupplyRequest.Ref IS NULL AS InternalSupplyRequestExists,
-		|	&StatusInfoPosting AS StatusInfoPosting
-		|INTO ItemList
-		|FROM
-		|	Document.InventoryTransferOrder.ItemList AS InventoryTransferOrderItemList
-		|WHERE
-		|	InventoryTransferOrderItemList.Ref = &Ref
-		|	AND &StatusInfoPosting";
+	"SELECT
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO TableRowIDInfo
+	|FROM
+	|	Document.GoodsReceipt.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	&Period AS Period,
+	|	InventoryTransferOrderItemList.Ref.Company AS Company,
+	|	InventoryTransferOrderItemList.Ref.StoreSender AS StoreSender,
+	|	InventoryTransferOrderItemList.Ref.StoreReceiver AS StoreReceiver,
+	|	InventoryTransferOrderItemList.Ref AS Order,
+	|	InventoryTransferOrderItemList.ItemKey AS ItemKey,
+	|	InventoryTransferOrderItemList.QuantityInBaseUnit AS Quantity,
+	|	TableRowIDInfo.RowID AS RowKey,
+	|	InventoryTransferOrderItemList.PurchaseOrder AS PurchaseOrder,
+	|	NOT InventoryTransferOrderItemList.PurchaseOrder.Ref IS NULL AS PurchaseOrderExists,
+	|	InventoryTransferOrderItemList.InternalSupplyRequest AS InternalSupplyRequest,
+	|	NOT InventoryTransferOrderItemList.InternalSupplyRequest.Ref IS NULL AS InternalSupplyRequestExists,
+	|	&StatusInfoPosting AS StatusInfoPosting
+	|INTO ItemList
+	|FROM
+	|	Document.InventoryTransferOrder.ItemList AS InventoryTransferOrderItemList
+	|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+	|		ON InventoryTransferOrderItemList.Key = TableRowIDInfo.Key
+	|WHERE
+	|	InventoryTransferOrderItemList.Ref = &Ref
+	|	AND &StatusInfoPosting";
 EndFunction	
 
 Function R4011B_FreeStocks()

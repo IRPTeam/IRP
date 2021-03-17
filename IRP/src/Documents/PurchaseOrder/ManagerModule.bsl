@@ -492,41 +492,58 @@ EndFunction
 
 Function ItemList()
 	Return
-		"SELECT
-		|	PurchaseOrderItems.Ref.Company AS Company,
-		|	PurchaseOrderItems.Store AS Store,
-		|	PurchaseOrderItems.Store.UseGoodsReceipt AS UseGoodsReceipt,
-		|	PurchaseOrderItems.Ref.GoodsReceiptBeforePurchaseInvoice AS GoodsReceiptBeforePurchaseInvoice,
-		|	PurchaseOrderItems.Ref AS Order,
-		|	PurchaseOrderItems.PurchaseBasis AS PurchaseBasis,
-		|	PurchaseOrderItems.ItemKey.Item AS Item,
-		|	PurchaseOrderItems.ItemKey AS ItemKey,
-		|	PurchaseOrderItems.Quantity AS UnitQuantity,
-		|	PurchaseOrderItems.QuantityInBaseUnit AS Quantity,
-		|	PurchaseOrderItems.Unit,
-		|	PurchaseOrderItems.Ref.Date AS Period,
-		|	PurchaseOrderItems.Key AS RowKey,
-		|	PurchaseOrderItems.BusinessUnit AS BusinessUnit,
-		|	PurchaseOrderItems.ExpenseType AS ExpenseType,
-		|	PurchaseOrderItems.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
-		|	PurchaseOrderItems.DeliveryDate AS DeliveryDate,
-		|	PurchaseOrderItems.InternalSupplyRequest AS InternalSupplyRequest,
-		|	PurchaseOrderItems.SalesOrder AS SalesOrder,
-		|	PurchaseOrderItems.Cancel AS IsCanceled,
-		|	PurchaseOrderItems.CancelReason,
-		|	PurchaseOrderItems.TotalAmount AS Amount,
-		|	PurchaseOrderItems.NetAmount,
-		|	PurchaseOrderItems.Ref.UseItemsReceiptScheduling AS UseItemsReceiptScheduling,
-		|	PurchaseOrderItems.PurchaseBasis REFS Document.SalesOrder
-		|	AND NOT PurchaseOrderItems.PurchaseBasis.REF IS NULL AS UseSalesOrder,
-		|	PurchaseOrderItems.Ref.Currency AS Currency,
-		|	&StatusInfoPosting
-		|INTO ItemList
-		|FROM
-		|	Document.PurchaseOrder.ItemList AS PurchaseOrderItems
-		|WHERE
-		|	PurchaseOrderItems.Ref = &Ref
-		|	AND &StatusInfoPosting";
+	"SELECT
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO TableRowIDInfo
+	|FROM
+	|	Document.GoodsReceipt.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	PurchaseOrderItems.Ref.Company AS Company,
+	|	PurchaseOrderItems.Store AS Store,
+	|	PurchaseOrderItems.Store.UseGoodsReceipt AS UseGoodsReceipt,
+	|	PurchaseOrderItems.Ref.GoodsReceiptBeforePurchaseInvoice AS GoodsReceiptBeforePurchaseInvoice,
+	|	PurchaseOrderItems.Ref AS Order,
+	|	PurchaseOrderItems.PurchaseBasis AS PurchaseBasis,
+	|	PurchaseOrderItems.ItemKey.Item AS Item,
+	|	PurchaseOrderItems.ItemKey AS ItemKey,
+	|	PurchaseOrderItems.Quantity AS UnitQuantity,
+	|	PurchaseOrderItems.QuantityInBaseUnit AS Quantity,
+	|	PurchaseOrderItems.Unit,
+	|	PurchaseOrderItems.Ref.Date AS Period,
+	|	TableRowIDInfo.RowID AS RowKey,
+	|	PurchaseOrderItems.BusinessUnit AS BusinessUnit,
+	|	PurchaseOrderItems.ExpenseType AS ExpenseType,
+	|	PurchaseOrderItems.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+	|	PurchaseOrderItems.DeliveryDate AS DeliveryDate,
+	|	PurchaseOrderItems.InternalSupplyRequest AS InternalSupplyRequest,
+	|	PurchaseOrderItems.SalesOrder AS SalesOrder,
+	|	PurchaseOrderItems.Cancel AS IsCanceled,
+	|	PurchaseOrderItems.CancelReason,
+	|	PurchaseOrderItems.TotalAmount AS Amount,
+	|	PurchaseOrderItems.NetAmount,
+	|	PurchaseOrderItems.Ref.UseItemsReceiptScheduling AS UseItemsReceiptScheduling,
+	|	PurchaseOrderItems.PurchaseBasis REFS Document.SalesOrder
+	|	AND NOT PurchaseOrderItems.PurchaseBasis.REF IS NULL AS UseSalesOrder,
+	|	PurchaseOrderItems.Ref.Currency AS Currency,
+	|	&StatusInfoPosting
+	|INTO ItemList
+	|FROM
+	|	Document.PurchaseOrder.ItemList AS PurchaseOrderItems
+	|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+	|		ON PurchaseOrderItems.Key = TableRowIDInfo.Key
+	|WHERE
+	|	PurchaseOrderItems.Ref = &Ref
+	|	AND &StatusInfoPosting";
 EndFunction
 
 Function R1010T_PurchaseOrders()

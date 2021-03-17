@@ -608,38 +608,55 @@ EndFunction
 
 Function ItemList()
 	Return
-		"SELECT
-		|	ItemList.Ref.Company AS Company,
-		|	ItemList.Store AS Store,
-		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.Ref AS ShipmentConfirmation,
-		|	ItemList.Quantity AS UnitQuantity,
-		|	ItemList.QuantityInBaseUnit AS Quantity,
-		|	ItemList.Unit,
-		|	ItemList.Ref.Date AS Period,
-		|	ItemList.Key AS RowKey,
-		|	ItemList.SalesOrder AS SalesOrder,
-		|	NOT ItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
-		|	ItemList.SalesInvoice AS SalesInvoice,
-		|	NOT ItemList.SalesInvoice.Ref IS NULL AS SalesInvoiceExists,
-		|	ItemList.PurchaseReturnOrder AS PurchaseReturnOrder,
-		|	NOT ItemList.PurchaseReturnOrder.Ref IS NULL AS PurchaseReturnOrderExists,
-		|	ItemList.PurchaseReturn AS PurchaseReturn,
-		|	NOT ItemList.PurchaseReturn.Ref IS NULL AS PurchaseReturnExists,
-		|	ItemList.InventoryTransferOrder AS InventoryTransferOrder,
-		|	NOT ItemList.InventoryTransferOrder.Ref IS NULL AS InventoryTransferOrderExists,
-		|	ItemList.InventoryTransfer AS InventoryTransfer,
-		|	NOT ItemList.InventoryTransfer.Ref IS NULL AS InventoryTransferExists,
-		|	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.Sales) AS IsTransaction_Sales,
-		|	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor) AS
-		|		IsTransaction_ReturnToVendor,
-		|	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.InventoryTransfer) AS
-		|		IsTransaction_InventoryTransfer
-		|INTO ItemList
-		|FROM
-		|	Document.ShipmentConfirmation.ItemList AS ItemList
-		|WHERE
-		|	ItemList.Ref = &Ref";
+	"SELECT
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO TableRowIDInfo
+	|FROM
+	|	Document.GoodsReceipt.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.Ref AS ShipmentConfirmation,
+	|	ItemList.Quantity AS UnitQuantity,
+	|	ItemList.QuantityInBaseUnit AS Quantity,
+	|	ItemList.Unit,
+	|	ItemList.Ref.Date AS Period,
+	|	TableRowIDInfo.RowID AS RowKey,
+	|	ItemList.SalesOrder AS SalesOrder,
+	|	NOT ItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
+	|	ItemList.SalesInvoice AS SalesInvoice,
+	|	NOT ItemList.SalesInvoice.Ref IS NULL AS SalesInvoiceExists,
+	|	ItemList.PurchaseReturnOrder AS PurchaseReturnOrder,
+	|	NOT ItemList.PurchaseReturnOrder.Ref IS NULL AS PurchaseReturnOrderExists,
+	|	ItemList.PurchaseReturn AS PurchaseReturn,
+	|	NOT ItemList.PurchaseReturn.Ref IS NULL AS PurchaseReturnExists,
+	|	ItemList.InventoryTransferOrder AS InventoryTransferOrder,
+	|	NOT ItemList.InventoryTransferOrder.Ref IS NULL AS InventoryTransferOrderExists,
+	|	ItemList.InventoryTransfer AS InventoryTransfer,
+	|	NOT ItemList.InventoryTransfer.Ref IS NULL AS InventoryTransferExists,
+	|	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.Sales) AS IsTransaction_Sales,
+	|	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor) AS
+	|		IsTransaction_ReturnToVendor,
+	|	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.InventoryTransfer) AS
+	|		IsTransaction_InventoryTransfer
+	|INTO ItemList
+	|FROM
+	|	Document.ShipmentConfirmation.ItemList AS ItemList
+	|		INNER JOIN TableRowIDInfo AS TableRowIDInfo
+	|		ON ItemList.Key = TableRowIDInfo.Key
+	|WHERE
+	|	ItemList.Ref = &Ref";
 EndFunction
 
 Function R2011B_SalesOrdersShipment()

@@ -1695,6 +1695,8 @@ Scenario: Create information register UserSettings records (remaining stock cont
 		| '$$IdCI$$' | 'Document.InventoryTransferOrder'    | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
 		| '$$IdCI$$' | 'Document.InventoryTransferOrder'    | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
 		| '$$IdCI$$' | 'Document.SalesOrderClosing'         | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.SalesReturn'               | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| '$$IdCI$$' | 'Document.SalesReturn'               | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
 
 
 

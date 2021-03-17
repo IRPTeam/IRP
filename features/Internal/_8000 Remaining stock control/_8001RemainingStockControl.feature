@@ -717,8 +717,8 @@ Scenario:_800014 check remaining stock control in the Bundling
 			Then user message window does not contain messages
 		And I close all client application windows
 		
-Scenario:_800017 check remaining stock control in the Stock adjustment as write off				
-	And I close all client application windows
+Scenario:_800017 check remaining stock control in the Stock adjustment as write off		
+		And I close all client application windows
 		* Create Stock adjustment as write off
 			Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 			And I click the button named "FormCreate"	
@@ -817,8 +817,8 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011B_FreeStocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
-			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4010B_ActualStocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4010B_ActualStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Check remaining stock control (store use SC and GR)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
@@ -829,8 +829,8 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011B_FreeStocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
-			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4010B_ActualStocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4010B_ActualStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Check remaining stock control (store use SC and does not use GR)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
@@ -841,8 +841,8 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011B_FreeStocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
-			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4010B_ActualStocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4010B_ActualStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Check remaining stock control (store use GR and does not use SC)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
@@ -853,8 +853,8 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011B_FreeStocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
-			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4010B_ActualStocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4010B_ActualStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Change items and post document
 			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key'  |
@@ -1433,113 +1433,62 @@ Scenario:_800032 check remaining stock control when unpost/change Unbundling
 		And I close all client application windows
 		
 
-Scenario:_800036 check remaining stock control when unpost/change Sales return/Goods receipt
-	* Post Sales Return
+Scenario:_800036 check remaining stock control when unpost/change Sales return
+	And I close all client application windows
+	* Try unpost (balances written off by SI)
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
 			| 'Number' |
-			| '1'   |
+			| '251'   |
 		And I select current line in "List" table
-		And I input current date and time in "Date" field	
-		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' |
-			| 'Dress' | 'L/Green'  |
-		And I input "4,000" text in "Q" field of "ItemList" table
-		And I click the button named "FormPost"
-		Then user message window does not contain messages
-		And I delete "$$NumberSalesReturn1$$" variable
-		And I save the value of "Number" field as "$$NumberSalesReturn1$$"
-		And I close all client application windows
-	* Try to post Sales invoice (Sales return doesn't have GR)
-		* Create SI
-			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-			And I click the button named "FormCreate"
-			And I click Select button of "Partner" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Ferron BP'   |
-			And I select current line in "List" table
-			And I click Select button of "Legal name" field
-			And I go to line in "List" table
-				| 'Description'       |
-				| 'Company Ferron BP' |
-			And I select current line in "List" table
-			And I click Select button of "Partner term" field
-			And I go to line in "List" table
-				| 'Description'              |
-				| 'Basic Partner terms, TRY' |
-			And I select current line in "List" table
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
-			And I select current line in "List" table
-			And I click Choice button of the field named "Store"
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
-			And I select current line in "List" table
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I click choice button of "Item" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
-			And I select current line in "List" table
-			And I activate "Item key" field in "ItemList" table
-			And I click choice button of "Item key" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Dress' | 'L/Green'  |
-			And I activate "Item key" field in "List" table
-			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "4,000" text in "Q" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-			And I click the button named "FormPost"
-			Then "1C:Enterprise" window is opened
-			And I click "OK" button
-			Then I wait that in user messages the "Line No. [1] [Dress L/Green] Reservation remaining: 0 . Required: 4 . Lacking: 4 ." substring will appear in 10 seconds
-			And I click "Save" button
-			And I delete "$$NumberSalesInvoice4$$" variable
-			And I save the value of "Number" field as "$$NumberSalesInvoice4$$"
-	* Create GR
-		Given I open hyperlink "e1cib/list/Document.SalesReturn"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberSalesReturn1$$'   |
-		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-		And I click the button named "FormPost"
-		And I delete "$$NumberGoodsReceipt2$$" variable
-		And I save the value of "Number" field as "$$NumberGoodsReceipt2$$"
-		And I close all client application windows
-	* Post SI
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberSalesInvoice4$$'   |
-		And I select current line in "List" table
-		And I input current date and time in "Date" field	
-		And I click "Post and close" button
-		Then user message window does not contain messages
-	* Try unpost GR
-		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberGoodsReceipt2$$'   |
-		And I select current line in "List" table
-		And I click "Clear posting" button
+		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [1] [Dress L/Green] Reservation remaining: 4 . Required: 0 . Lacking: 4 ." substring will appear in 10 seconds
-	* Try change quantity in GR (less than in the SI)
-		And I activate "Quantity" field in "ItemList" table
+		Then I wait that in user messages the "Line No. [1] [High shoes 39/19SD] R4011B_FreeStocks remaining: 160 . Required: 0 . Lacking: 160 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [2] [Bag ODS] R4011B_FreeStocks remaining: 40 . Required: 0 . Lacking: 40 ." substring will appear in 10 seconds
+	* Try change quantity (less than in the SI)
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key' |
+			| 'High shoes' | '39/19SD'  |
+		And I activate "Q" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "3,000" text in "Quantity" field of "ItemList" table
+		And I input "6,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [1] [Dress L/Green] Reservation remaining: 4 . Required: 3 . Lacking: 1 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [1] [High shoes 39/19SD] R4011B_FreeStocks remaining: 160 . Required: 128 . Lacking: 32 ." substring will appear in 10 seconds
+	* Delete string and try to post
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key' |
+			| 'High shoes' | '39/19SD'  |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I click the button named "FormPost"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [2] [High shoes 39/19SD] R4011B_FreeStocks remaining: 160 . Required: 80 . Lacking: 80 ." substring will appear in 10 seconds
+		And I close all client application windows
+	* Add one more string and check posting
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number' |
+			| '251'   |
+		And I select current line in "List" table
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "1,000" text in "Q" field of "ItemList" table
+		And I click the button named "FormPost"
+		Then user message window does not contain messages
 		And I close all client application windows
 
 
@@ -1565,8 +1514,8 @@ Scenario:_800040 check remaining stock control when unpost/change Stock adjustme
 		Then I wait that in user messages the "Line No. [1] [High shoes 39/19SD] R4011B_FreeStocks remaining: 10 . Required: 6 . Lacking: 4 ." substring will appear in 10 seconds
 	* Delete string from StockAdjustmentAsSurplus and try to post
 		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' | 'Quantity' |
-			| 'High shoes' | '39/19SD'  | '10,000'   |
+			| 'Item'       | 'Item key' |
+			| 'High shoes' | '39/19SD'  |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
@@ -1601,6 +1550,7 @@ Scenario:_800040 check remaining stock control when unpost/change Stock adjustme
 		And I go to line in "List" table
 			| 'Description' | 'Type'    |
 			| 'Revenue'     | 'Revenue' |
+		And I select current line in "List" table	
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
 		And I close all client application windows
@@ -1618,7 +1568,7 @@ Scenario:_800042 check remaining stock control when post Physical inventory
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [2] [Dress XS/Blue] Reservation remaining: 0 . Required: 2 . Lacking: 2 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [2] [Dress XS/Blue] R4011B_FreeStocks remaining: 4 . Required: 2 . Lacking: 2 ." substring will appear in 10 seconds
 		And I click "Save" button
 		And I delete "$$NumberPhysicalInventory1$$" variable
 		And I save the value of "Number" field as "$$NumberPhysicalInventory1$$"
@@ -1656,8 +1606,8 @@ Scenario:_800043 check remaining stock control when unpost Physical inventory
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [1] [High shoes 39/19SD] R4011B_FreeStocks remaining: 10 . Required: 0 . Lacking: 10 ." substring will appear in 10 seconds
-		Then I wait that in user messages the "Line No. [2] [Bag ODS] R4011B_FreeStocks remaining: 20 . Required: 0 . Lacking: 20 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [2] [High shoes 39/19SD] R4011B_FreeStocks remaining: 10 . Required: 0 . Lacking: 10 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [1] [Bag ODS] R4011B_FreeStocks remaining: 20 . Required: 0 . Lacking: 20 ." substring will appear in 10 seconds
 	* Try change quantity (less than in the SI)
 		And I go to line in "ItemList" table
 			| 'Item'       | 'Item key' |
@@ -1669,7 +1619,7 @@ Scenario:_800043 check remaining stock control when unpost Physical inventory
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [1] [High shoes 39/19SD] R4011B_FreeStocks remaining: 10 . Required: 6 . Lacking: 4 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [2] [High shoes 39/19SD] R4011B_FreeStocks remaining: 10 . Required: 6 . Lacking: 4 ." substring will appear in 10 seconds
 	* Delete string and try to post
 		And I go to line in "ItemList" table
 			| 'Item'       | 'Item key' |
@@ -1678,7 +1628,7 @@ Scenario:_800043 check remaining stock control when unpost Physical inventory
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [1] [High shoes 39/19SD] R4011B_FreeStocks remaining: 10 . Required: 0 . Lacking: 10 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [] [High shoes 39/19SD] R4011B_FreeStocks remaining: 10 . Required: 0 . Lacking: 10 ." substring will appear in 10 seconds
 		And I close all client application windows
 	* Add one more string and check posting
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
@@ -1796,7 +1746,7 @@ Scenario:_800046 check remaining stock control when post/change Inventory transf
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Then I wait that in user messages the "Line No. [1] [Shirt 36/Red] R4011B_FreeStocks remaining: 0 . Required: 25 . Lacking: 25 ." substring will appear in 10 seconds
-		Then I wait that in user messages the "Line No. [2] [Shirt 38/Black] R4011B_FreeStocks remaining: 0 . Required: 20 . Lacking: 20 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [2] [Shirt 38/Black] R4011B_FreeStocks remaining: 4 . Required: 20 . Lacking: 16 ." substring will appear in 10 seconds
 		And I delete "$$NumberInventoryTransferOrder1$$" variable
 		And I save the value of "Number" field as "$$NumberInventoryTransferOrder1$$"
 	* Try to post Inventory transfer order (no balance to write off), status Wait
@@ -2044,6 +1994,60 @@ Scenario:_800055 check remaining stock control when unpost/change Sales order cl
 		Then I wait that in user messages the "Line No. [1] [High shoes 39/19SD] R4011B_FreeStocks remaining: 80 . Required: 0 . Lacking: 80 ." substring will appear in 10 seconds
 		Then I wait that in user messages the "Line No. [2] [Bag ODS] R4011B_FreeStocks remaining: 20 . Required: 0 . Lacking: 20 ." substring will appear in 10 seconds
 		And I close all client application windows
+
+Scenario:_800056 check remaining stock control when unpost/change Goods receipt
+	* Try unpost (balances written off by SI)
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '251'   |
+		And I select current line in "List" table
+		And I click "Clear posting" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [1] [High shoes 39/19SD] R4011B_FreeStocks remaining: 10 . Required: 0 . Lacking: 10 ." substring will appear in 10 seconds
+	* Try change quantity (less than in the SI)
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "6,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [1] [High shoes 39/19SD] R4011B_FreeStocks remaining: 10 . Required: 6 . Lacking: 4 ." substring will appear in 10 seconds
+	* Delete string and try to post
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key' |
+			| 'High shoes' | '39/19SD'  |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I click the button named "FormPost"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then I wait that in user messages the "Line No. [] [High shoes 39/19SD] R4011B_FreeStocks remaining: 10 . Required: 0 . Lacking: 10 ." substring will appear in 10 seconds
+		And I close all client application windows
+	* Add one more string and check posting
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '251'   |
+		And I select current line in "List" table
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table	
+		And I click the button named "FormPost"
+		Then user message window does not contain messages
+		And I close all client application windows
+
 
 Scenario:_800080 set/remove checkbox Negative stock control from store and check posting document (Negative stock)
 	* Remove checkbox

@@ -53,6 +53,8 @@ Scenario: _028000 preparation (Sales return order)
 				| "TaxCalculateVAT_TR" |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
+		When Create catalog BusinessUnits objects
+		When Create catalog ExpenseAndRevenueTypes objects
 	* Tax settings
 		When filling in Tax settings for company
 	* Check or create SalesOrder023001
@@ -125,24 +127,6 @@ Scenario: _028004 create document Sales return order, store does not use Goods r
 		And I click "Decoration group title collapsed picture" hyperlink
 		And I select "Approved" exact value from "Status" drop-down list
 		And I click the button named "FormPostAndClose"
-
-
-
-Scenario: _028005 check Sales return order movements the OrderBalance register (store does not use Goods receipt, based on Sales invoice)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                   | 'Store'    | 'Order'                      | 'Item key'  |
-		| '2,000'    | '$$SalesReturnOrder028004$$' | 'Store 01' | '$$SalesReturnOrder028004$$' | 'L/Green'   |
-		| '4,000'    | '$$SalesReturnOrder028004$$' | 'Store 01' | '$$SalesReturnOrder028004$$' | '36/Yellow' |
-
-Scenario: _028006 check Sales return order movements the SalesTurnovers register (store does not use Goods receipt, based on Sales invoice) (-)
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                   | 'Sales invoice'          | 'Item key'  |
-		| '-2,000'   | '$$SalesReturnOrder028004$$' | '$$SalesInvoice024001$$' | 'L/Green'   |
-		| '-4,000'   | '$$SalesReturnOrder028004$$' | '$$SalesInvoice024001$$' | '36/Yellow' |
 
 
 

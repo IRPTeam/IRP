@@ -1976,7 +1976,7 @@ Scenario:_800080 set/remove checkbox Negative stock control from store and check
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [1] [Dress XS/Blue] Reservation remaining: 0 . Required: 15 000 . Lacking: 15 000 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [1] [Dress XS/Blue] R4011B_FreeStocks remaining: 0 . Required: 15 000 . Lacking: 15 000 ." substring will appear in 10 seconds
 		And I close all client application windows
 
 

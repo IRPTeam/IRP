@@ -64,6 +64,7 @@ Function JoinDocumentsStructure(ArrayOfTables, UnjoinFields)
 	ItemList.Columns.Add("RetailSalesReceipt", New TypeDescription("DocumentRef.RetailSalesReceipt"));
 	ItemList.Columns.Add("Unit"				, New TypeDescription("CatalogRef.Units"));
 	ItemList.Columns.Add("Quantity"			, New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
+	ItemList.Columns.Add("QuantityInBaseUnit", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));	
 	ItemList.Columns.Add("TaxAmount"		, New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
 	ItemList.Columns.Add("TotalAmount"		, New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
 	ItemList.Columns.Add("NetAmount"		, New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
@@ -310,8 +311,11 @@ Function ExtractInfoFromOrderRows(QueryTable)
 		|	CAST(tmpQueryTable.RetailSalesReceipt AS Document.RetailSalesReceipt).BusinessUnit AS BusinessUnitTitle,
 		|	tmpQueryTable.Key,
 		|	tmpQueryTable.RowKey,
-		|	tmpQueryTable.Unit AS QuantityUnit,
-		|	tmpQueryTable.Quantity AS Quantity,
+//		|	tmpQueryTable.Unit AS QuantityUnit,
+		|    
+		|	0 AS Quantity,
+		|	tmpQueryTable.Quantity AS QuantityInBaseUnit,
+		|	tmpQueryTable.Unit AS BaseUnit,
 		|	ISNULL(ItemList.Price, 0) AS Price,
 		|	ISNULL(ItemList.Unit, VALUE(Catalog.Units.EmptyRef)) AS Unit,
 		|	ISNULL(ItemList.TaxAmount, 0) AS TaxAmount,
@@ -396,7 +400,10 @@ Function ExtractInfoFromOrderRows(QueryTable)
 	QueryResults = Query.ExecuteBatch();
 	
 	QueryTable_ItemList = QueryResults[2].Unload();
-	DocumentsServer.RecalculateQuantityInTable(QueryTable_ItemList);
+	//DocumentsServer.RecalculateQuantityInTable(QueryTable_ItemList);
+	For Each Row In QueryTable_ItemList Do
+		Row.Quantity = Catalogs.Units.Convert(Row.BaseUnit, Row.Unit, Row.QuantityInBaseUnit)
+	EndDo;
 	
 	QueryTable_TaxList = QueryResults[3].Unload();
 	QueryTable_SpecialOffers = QueryResults[4].Unload();

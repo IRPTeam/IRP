@@ -330,34 +330,6 @@ Scenario: Open object form "ExpensesTurnovers"
 	And I close current window
 
 	
-Scenario: Open list form "GoodsInTransitIncoming" 
-
-	Given I open "GoodsInTransitIncoming" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form GoodsInTransitIncoming" exception
-	And I close current window
-
-Scenario: Open object form "GoodsInTransitIncoming"
-
-	Given I open "GoodsInTransitIncoming" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form GoodsInTransitIncoming" exception
-	And I close current window
-
-	
-Scenario: Open list form "GoodsInTransitOutgoing" 
-
-	Given I open "GoodsInTransitOutgoing" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form GoodsInTransitOutgoing" exception
-	And I close current window
-
-Scenario: Open object form "GoodsInTransitOutgoing"
-
-	Given I open "GoodsInTransitOutgoing" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form GoodsInTransitOutgoing" exception
-	And I close current window
 
 	
 Scenario: Open list form "GoodsReceiptSchedule" 
@@ -375,49 +347,7 @@ Scenario: Open object form "GoodsReceiptSchedule"
 	And I close current window
 
 	
-Scenario: Open list form "InventoryBalance" 
-
-	Given I open "InventoryBalance" accumulation register list form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form InventoryBalance" exception
-	And I close current window
-
-Scenario: Open object form "InventoryBalance"
-
-	Given I open "InventoryBalance" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form InventoryBalance" exception
-	And I close current window
-
 	
-Scenario: Open list form "ItemsInStores" 
-
-	Given I open "ItemsInStores" accumulation register list form 
-	If the warning is displayed then 
-		Then I raise "Failed to open information register form ItemsInStores" exception
-	And I close current window
-
-Scenario: Open object form "ItemsInStores"
-
-	Given I open "ItemsInStores" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form ItemsInStores" exception
-	And I close current window
-
-	
-Scenario: Open list form "OrderBalance" 
-
-	Given I open "OrderBalance" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form OrderBalance" exception
-	And I close current window
-
-Scenario: Open object form "OrderBalance"
-
-	Given I open "OrderBalance" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form OrderBalance" exception
-	And I close current window
 
 	
 Scenario: Open list form "OrderProcurement" 
@@ -435,20 +365,6 @@ Scenario: Open object form "OrderProcurement"
 	And I close current window
 
 	
-Scenario: Open list form "OrderReservation" 
-
-	Given I open "OrderReservation" accumulation register list form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form OrderReservation" exception
-	And I close current window
-
-Scenario: Open object form "OrderReservation"
-
-	Given I open "OrderReservation" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form OrderReservation" exception
-	And I close current window
-
 	
 Scenario: Open list form "PartnerApTransactions" 
 
@@ -672,36 +588,6 @@ Scenario: Open object form "StockAdjustmentAsWriteOff"
 	Given I open "StockAdjustmentAsWriteOff" accumulation register default form
 	If the warning is displayed then
 		Then I raise "Failed to open information register form StockAdjustmentAsWriteOff" exception
-	And I close current window
-
-	
-Scenario: Open list form "StockBalance" 
-
-	Given I open "StockBalance" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form StockBalance" exception
-	And I close current window
-
-Scenario: Open object form "StockBalance"
-
-	Given I open "StockBalance" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form StockBalance" exception
-	And I close current window
-
-	
-Scenario: Open list form "StockReservation" 
-
-	Given I open "StockReservation" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form StockReservation" exception
-	And I close current window
-
-Scenario: Open object form "StockReservation"
-
-	Given I open "StockReservation" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form StockReservation" exception
 	And I close current window
 
 	

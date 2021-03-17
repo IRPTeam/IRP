@@ -576,19 +576,7 @@ Scenario: _023014 check movements by status and status history of a Sales Order 
 		And I select "Wait" exact value from "Status" drop-down list
 	And I click the button named "FormPostAndClose"
 	* Check the absence of movements Sales Order
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-		And "List" table does not contain lines
-			| 'Recorder'       | 'Order'          |
-			| '$$SalesOrder023001$$' |'$$SalesOrder023001$$'  |
-			| '$$SalesOrder023001$$' |'$$SalesOrder023001$$' |
-		And I close current window
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-		And "List" table does not contain lines
-			| 'Recorder'       |
-			| '$$SalesOrder023001$$' |
-			| '$$SalesOrder023001$$' |
-		And I close current window
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R4011B_FreeStocks"
 		And "List" table does not contain lines
 			| 'Recorder'       |
 			| '$$SalesOrder023001$$' |
@@ -613,25 +601,14 @@ Scenario: _023014 check movements by status and status history of a Sales Order 
 		And I close current window
 		And I click the button named "FormPostAndClose"
 	* Check document movements
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-		And "List" table contains lines
-			| 'Recorder'       | 'Order'          |
-			| '$$SalesOrder023001$$' |'$$SalesOrder023001$$'  |
-			| '$$SalesOrder023001$$' |'$$SalesOrder023001$$' |
 		And I close current window
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R4011B_FreeStocks"
 		And "List" table contains lines
 			| 'Recorder'       |
 			| '$$SalesOrder023001$$' |
 			| '$$SalesOrder023001$$' |
 		And I close current window
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
-		And "List" table contains lines
-			| 'Recorder'       |
-			| '$$SalesOrder023001$$' |
-			| '$$SalesOrder023001$$' |
-		And I close current window
-
+		
 Scenario: _012013 check the selection of the segment manager in the sales order
 	And I close all client application windows
 	* Open the Sales order creation form

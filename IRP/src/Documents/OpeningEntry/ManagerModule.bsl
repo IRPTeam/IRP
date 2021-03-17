@@ -4,9 +4,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure();
 	AccReg = Metadata.AccumulationRegisters;
 	Tables.Insert("AccountBalance"                  , PostingServer.CreateTable(AccReg.AccountBalance));
-	Tables.Insert("InventoryBalance"                , PostingServer.CreateTable(AccReg.InventoryBalance));
-	Tables.Insert("StockBalance"                    , PostingServer.CreateTable(AccReg.StockBalance));
-	Tables.Insert("StockReservation"                , PostingServer.CreateTable(AccReg.StockReservation));
 	Tables.Insert("AdvanceFromCustomers"            , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
 	Tables.Insert("AdvanceToSuppliers"              , PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
 	Tables.Insert("PartnerArTransactions"           , PostingServer.CreateTable(AccReg.PartnerArTransactions));
@@ -14,31 +11,10 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("ReconciliationStatement_Expense" , PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("ReconciliationStatement_Receipt" , PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("Aging"                           , PostingServer.CreateTable(AccReg.Aging));
-	
-	Tables.Insert("StockReservation_Exists"         , PostingServer.CreateTable(AccReg.StockReservation));
-	Tables.Insert("StockBalance_Exists"             , PostingServer.CreateTable(AccReg.StockBalance));
-	
-	Tables.StockReservation_Exists = 
-	AccumulationRegisters.StockReservation.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
-	
-	Tables.StockBalance_Exists = 
-	AccumulationRegisters.StockBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
-	
+		
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	OpeningEntryInventory.Ref.Company AS Company,
-		|	OpeningEntryInventory.ItemKey AS ItemKey,
-		|	OpeningEntryInventory.Store AS Store,
-		|	OpeningEntryInventory.Quantity AS Quantity,
-		|	OpeningEntryInventory.Ref.Date AS Period
-		|FROM
-		|	Document.OpeningEntry.Inventory AS OpeningEntryInventory
-		|WHERE
-		|	OpeningEntryInventory.Ref = &Ref
-		|;
-		|
-		|//[1]//////////////////////////////////////////////////////////////////////////////
+		"//[0]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	OpeningEntryAccountBalance.Ref.Company,
 		|	OpeningEntryAccountBalance.Account,
@@ -305,17 +281,14 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("Ref", Ref);
 	QueryResults = Query.ExecuteBatch();
 
-	Tables.InventoryBalance                = QueryResults[0].Unload();
-	Tables.StockBalance                    = QueryResults[0].Unload();
-	Tables.StockReservation                = QueryResults[0].Unload();
-	Tables.AccountBalance                  = QueryResults[1].Unload();
-	Tables.AdvanceFromCustomers            = QueryResults[2].Unload();
-	Tables.AdvanceToSuppliers              = QueryResults[3].Unload();
-	Tables.PartnerArTransactions           = QueryResults[4].Unload();
-	Tables.PartnerApTransactions           = QueryResults[5].Unload();
-	Tables.ReconciliationStatement_Expense = QueryResults[6].Unload();
-	Tables.ReconciliationStatement_Receipt = QueryResults[7].Unload();
-	Tables.Aging                           = QueryResults[8].Unload();
+	Tables.AccountBalance                  = QueryResults[0].Unload();
+	Tables.AdvanceFromCustomers            = QueryResults[1].Unload();
+	Tables.AdvanceToSuppliers              = QueryResults[2].Unload();
+	Tables.PartnerArTransactions           = QueryResults[3].Unload();
+	Tables.PartnerApTransactions           = QueryResults[4].Unload();
+	Tables.ReconciliationStatement_Expense = QueryResults[5].Unload();
+	Tables.ReconciliationStatement_Receipt = QueryResults[6].Unload();
+	Tables.Aging                           = QueryResults[7].Unload();
 	
 #Region NewRegistersPosting		
 	QueryArray = GetQueryTextsSecondaryTables();
@@ -326,44 +299,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// AdvanceFromCustomers
-	AdvanceFromCustomers = AccumulationRegisters.AdvanceFromCustomers.GetLockFields(DocumentDataTables.AdvanceFromCustomers);
-	DataMapWithLockFields.Insert(AdvanceFromCustomers.RegisterName, AdvanceFromCustomers.LockInfo);
-	
-	// AdvanceToSuppliers
-	AdvanceToSuppliers = AccumulationRegisters.AdvanceToSuppliers.GetLockFields(DocumentDataTables.AdvanceToSuppliers);
-	DataMapWithLockFields.Insert(AdvanceToSuppliers.RegisterName, AdvanceToSuppliers.LockInfo);
-	
-	
-	// AccountBalance
-	AccountBalance = AccumulationRegisters.AccountBalance.GetLockFields(DocumentDataTables.AccountBalance);
-	DataMapWithLockFields.Insert(AccountBalance.RegisterName, AccountBalance.LockInfo);
-	
-	// InventoryBalance
-	InventoryBalance = AccumulationRegisters.InventoryBalance.GetLockFields(DocumentDataTables.InventoryBalance);
-	DataMapWithLockFields.Insert(InventoryBalance.RegisterName, InventoryBalance.LockInfo);
-	
-	// StockBalance
-	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance);
-	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
-	// StockReservation
-	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
-	// PartnerArTransactions
-	PartnerArTransactions = AccumulationRegisters.PartnerArTransactions.GetLockFields(DocumentDataTables.PartnerArTransactions);
-	DataMapWithLockFields.Insert(PartnerArTransactions.RegisterName, PartnerArTransactions.LockInfo);
-	
-	// PartnerApTransactions
-	PartnerApTransactions = AccumulationRegisters.PartnerApTransactions.GetLockFields(DocumentDataTables.PartnerApTransactions);
-	DataMapWithLockFields.Insert(PartnerApTransactions.RegisterName, PartnerApTransactions.LockInfo);
-	
-	PostingServer.GetLockDataSource(DataMapWithLockFields, DocumentDataTables);
-	
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -374,7 +310,6 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
-	Return;
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -497,27 +432,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.AccountBalance));
-	
-	// InventoryBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.InventoryBalance,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.InventoryBalance));
-	
-	// StockBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockBalance,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.StockBalance,
-			True));
-	
-	// StockReservation
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockReservation,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.StockReservation,
-			True));
-	
+		
 	// PartnerArTransactions		
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PartnerArTransactions,
 		New Structure("RecordType, RecordSet",
@@ -572,22 +487,15 @@ Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Und
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// StockReservation
-	StockReservation = AccumulationRegisters.StockReservation.GetLockFields(DocumentDataTables.StockReservation_Exists);
-	DataMapWithLockFields.Insert(StockReservation.RegisterName, StockReservation.LockInfo);
-	
-	// StockBalance
-	StockBalance = AccumulationRegisters.StockBalance.GetLockFields(DocumentDataTables.StockBalance_Exists);
-	DataMapWithLockFields.Insert(StockBalance.RegisterName, StockBalance.LockInfo);
-	
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return;
+#Region NewRegistersPosting
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -625,6 +533,8 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
+	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
+	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	Return QueryArray;
 EndFunction
 

@@ -316,12 +316,6 @@ Scenario: _028807 create document Shipment confirmation based on Purchase return
 	And I click the button named "FormPostAndClose"
 	And I close current window
 
-Scenario: _028808 check Shipment confirmation posting (based on Purchase return) by register StockBalance
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                 | 'Line number' | 'Store'    | 'Item key' |
-		| '10,000'    | '$$ShipmentConfirmation0028807$$' | '1'           | 'Store 02' | 'L/Green'  |
-
 
 
 Scenario: _028809 check Shipment confirmation posting (based on Purchase return) by register GoodsInTransitOutgoing

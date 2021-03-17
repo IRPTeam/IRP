@@ -192,12 +192,6 @@ Scenario: _016501 create document Internal Supply Request
 			| '25,000'   | '$$InventoryTransferOrder016501$$' | 'Store 01' | '$$InternalSupplyRequest016501$$' | '36/Red'   |
 			| '20,000'   | '$$InventoryTransferOrder016501$$' | 'Store 01' | '$$InternalSupplyRequest016501$$' | '38/Black' |
 		And I close all client application windows
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                   | 'Store'    | 'Item key' |
-			| '25,000'   | '$$InventoryTransferOrder016501$$' | 'Store 03' | '36/Red'   |
-			| '20,000'   | '$$InventoryTransferOrder016501$$' | 'Store 03' | '38/Black' |
-		And I close all client application windows
 		Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
 		And "List" table contains lines
 			| 'Quantity' | 'Recorder'                   | 'Store sender' | 'Store receiver' | 'Order'                      | 'Item key' |

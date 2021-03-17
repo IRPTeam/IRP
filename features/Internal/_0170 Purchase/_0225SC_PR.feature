@@ -149,24 +149,6 @@ Scenario: _028402 check SC - PR movements
 			| ''                                    | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions'   | ''         | ''                               | ''          |
 			| ''                                    | ''            | ''                                   | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                          | 'Item key'  |
 			| ''                                    | 'Receipt'     | '$$DateShipmentConfirmation022501$$' | '1'         | 'Main Company' | 'Store 02' | '$$ShipmentConfirmation022501$$' | '36/Yellow' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document contains lines
-			| '$$ShipmentConfirmation022501$$' | ''            | ''                                   | ''          | ''           | ''          |
-			| 'Document registrations records' | ''            | ''                                   | ''          | ''           | ''          |
-			| 'Register  "Stock reservation"'  | ''            | ''                                   | ''          | ''           | ''          |
-			| ''                               | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions' | ''          |
-			| ''                               | ''            | ''                                   | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                               | 'Expense'     | '$$DateShipmentConfirmation022501$$' | '1'         | 'Store 02'   | '36/Yellow' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document contains lines
-			| '$$ShipmentConfirmation022501$$' | ''            | ''                                   | ''          | ''           | ''          |
-			| 'Document registrations records' | ''            | ''                                   | ''          | ''           | ''          |
-			| 'Register  "Stock balance"'      | ''            | ''                                   | ''          | ''           | ''          |
-			| ''                               | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions' | ''          |
-			| ''                               | ''            | ''                                   | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                               | 'Expense'     | '$$DateShipmentConfirmation022501$$' | '1'         | 'Store 02'   | '36/Yellow' |
 		And I close all client application windows
 	* PR movements
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
@@ -183,12 +165,4 @@ Scenario: _028402 check SC - PR movements
 			| ''                                    | 'Record type' | 'Period'                       | 'Resources' | 'Dimensions'   | ''         | ''                               | ''          |
 			| ''                                    | ''            | ''                             | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                          | 'Item key'  |
 			| ''                                    | 'Expense'     | '$$DatePurchaseReturn022501$$' | '1'         | 'Main Company' | 'Store 02' | '$$ShipmentConfirmation022501$$' | '36/Yellow' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document does not contain values
-			| 'Register  "Stock reservation"'             |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document does not contain values
-			| 'Register  "Stock balance"'             |
 		And I close all client application windows

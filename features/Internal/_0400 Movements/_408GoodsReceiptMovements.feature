@@ -328,3 +328,32 @@ Scenario: _0401211 check Goods receipt movements by the Register  "R4017 Procure
 			| ''                                                          | 'Expense'     | '12.02.2021 15:13:11' | '5'         | 'Main Company' | 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '36/Yellow' |
 			| ''                                                          | 'Expense'     | '12.02.2021 15:13:11' | '10'        | 'Main Company' | 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'S/Yellow'  |
 		And I close all client application windows
+
+Scenario: _0401219 Goods receipt clear posting
+	* Select Goods receipt
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '115' |
+	* Clear posting
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Goods receipt 115 dated 12.02.2021 15:10:35' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Post Goods receipt
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '115' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R4010 Actual stocks' |
+			| 'R4011 Free stocks' |
+		And I close all client application windows

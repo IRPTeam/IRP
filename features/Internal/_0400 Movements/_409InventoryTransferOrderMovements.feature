@@ -290,3 +290,34 @@ Scenario: _040358 check Inventory transfer order movements by the Register  "R40
 			| ''                                                       | 'Receipt'     | '*'      | '10'        | 'Store 02'   | 'XS/Blue'   | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' |
 			| ''                                                       | 'Receipt'     | '*'      | '15'        | 'Store 02'   | '36/Red'    | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' |
 		And I close all client application windows
+
+
+Scenario: _0403589 Inventory transfer order clear posting
+	* Select Inventory transfer order
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '21' |
+	* Clear posting
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer order 21 dated 16.02.2021 16:14:02' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Post Inventory transfer order
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '21' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R4011 Free stocks' |
+			| 'R4012 Stock Reservation' |
+			| 'R4020 Stock transfer orders' |
+		And I close all client application windows

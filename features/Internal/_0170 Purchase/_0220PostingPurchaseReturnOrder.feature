@@ -134,16 +134,6 @@ Scenario: _022001 create document Purchase return order, store use Shipment conf
 			| 'Quantity' | 'Recorder'                      | 'Line number' | 'Purchase invoice'          | 'Item key' |
 			| '-2,000'   | '$$PurchaseReturnOrder022001$$' | '1'           | '$$PurchaseInvoice018006$$' | 'L/Green'  |
 		And I close current window
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
-		And "List" table does not contain lines
-			| 'Quantity' | 'Recorder'                      | 'Line number' | 'Store'    | 'Item key' |
-			| '2,000'    | '$$PurchaseReturnOrder022001$$' | '1'           | 'Store 02' | 'L/Green'  |
-		And I close current window
-		Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-		And "List" table does not contain lines
-			| 'Quantity' | 'Recorder'                      | 'Line number' | 'Store'    | 'Item key' |
-			| '2,000'    | '$$PurchaseReturnOrder022001$$' | '1'           | 'Store 02' | 'L/Green'  |
-		And I close all client application windows
 	* Set Approved status
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 		And I go to line in "List" table
@@ -161,31 +151,6 @@ Scenario: _022001 create document Purchase return order, store use Shipment conf
 			| '$$PurchaseReturnOrder022001$$' | 'Approved' |
 		And I close current window
 		And I click the button named "FormPostAndClose"
-
-
-Scenario: _022002 check movements of the document Purchase return order in the OrderBalance register (store does not use Shipment confirmation) 
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                      | 'Line number' | 'Store'    | 'Order'                         | 'Item key' |
-		| '2,000'    | '$$PurchaseReturnOrder022001$$' | '1'           | 'Store 02' | '$$PurchaseReturnOrder022001$$' | 'L/Green'  |
-
-Scenario: _022003 check movements of the document Purchase return order in the OrderBalance register PurchaseTurnovers (store use Shipment confirmation)
-	Given I open hyperlink "e1cib/list/AccumulationRegister.PurchaseTurnovers"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                      | 'Line number' | 'Purchase invoice'          | 'Item key' |
-		| '-2,000'   | '$$PurchaseReturnOrder022001$$' | '1'           | '$$PurchaseInvoice018006$$' | 'L/Green'  |
-
-Scenario: _022004 check movements of the document Purchase return order in the OrderReservation register (store use Shipment confirmation)
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
-	And "List" table contains lines
-	| 'Quantity' | 'Recorder'                      | 'Line number' | 'Store'    | 'Item key' |
-	| '2,000'    | '$$PurchaseReturnOrder022001$$' | '1'           | 'Store 02' | 'L/Green'  |
-
-Scenario: _022005 check movements of the document Purchase return order in the StockReservation register (store use Shipment confirmation)
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table contains lines
-	| 'Quantity' | 'Recorder'                      | 'Line number' | 'Store'    | 'Item key' |
-	| '2,000'    | '$$PurchaseReturnOrder022001$$' | '1'           | 'Store 02' | 'L/Green'  |
 
 
 Scenario: _022006 create document Purchase return order, store does not use Shipment confirmation, based on Purchase invoice
@@ -240,29 +205,6 @@ Scenario: _022006 create document Purchase return order, store does not use Ship
 	And I click the button named "FormPostAndClose"
 	And I close current window
 
-Scenario: _022007 check movements of the document Purchase return order in the OrderBalance (store does not use Shipment confirmation)
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                      | 'Line number' | 'Store'    | 'Order'                         | 'Item key'  |
-		| '3,000'    | '$$PurchaseReturnOrder022006$$' | '1'           | 'Store 01' | '$$PurchaseReturnOrder022006$$' | '36/Yellow' |
-
-Scenario: _022008 check movements of the document Purchase return order in the PurchaseTurnovers (store does not use Shipment confirmation)
-	Given I open hyperlink "e1cib/list/AccumulationRegister.PurchaseTurnovers"
-	And "List" table contains lines
-	| 'Quantity' | 'Recorder'                      | 'Line number' | 'Purchase invoice'          | 'Item key'  |
-	| '-3,000'   | '$$PurchaseReturnOrder022006$$' | '1'           | '$$PurchaseInvoice018001$$' | '36/Yellow' |
-
-Scenario: _022009 check movements of the document Purchase return order in the PurchaseTurnovers (store does not use Shipment confirmation)
-	Given I open hyperlink "e1cib/list/AccumulationRegister.OrderReservation"
-	And "List" table contains lines
-	| 'Quantity' | 'Recorder'                      | 'Line number' | 'Store'    | 'Item key'  |
-	| '3,000'    | '$$PurchaseReturnOrder022006$$' | '1'           | 'Store 01' | '36/Yellow' |
-
-Scenario: _022010 check movements of the document Purchase return order in the StockReservation (store does not use Shipment confirmation)
-	Given I open hyperlink "e1cib/list/AccumulationRegister.StockReservation"
-	And "List" table contains lines
-	| 'Quantity' | 'Recorder'                      | 'Line number' | 'Store'    | 'Item key'  |
-	| '3,000'    | '$$PurchaseReturnOrder022006$$' | '1'           | 'Store 01' | '36/Yellow' |
 
 
 Scenario: _022016 check totals in the document Purchase return order
@@ -277,150 +219,6 @@ Scenario: _022016 check totals in the document Purchase return order
 		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "67,80"
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "80,00"
 
-
-
-Scenario: _022011 check the output of the document movement report for Purchase return order
-	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
-	* Check the report output for the selected document from the list
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseReturnOrder022001$$'      |
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And I select "Purchase turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseReturnOrder022001$$'  | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Document registrations records' | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Register  "Purchase turnovers"' | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Period' | 'Resources' | ''       | ''           | 'Dimensions'   | ''                          | ''         | ''         | ''        | ''                             | 'Attributes'           |
-		| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Purchase invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                               | '*'      | '-2'        | '-450,2' | '-381,54'    | 'Main Company' | '$$PurchaseInvoice018006$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | 'No'                   |
-		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'USD'                          | 'No'                   |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"'      | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Order'                         | 'Item key'                  | 'Row key'  | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Receipt'     | '*'         | '2'         | 'Store 02'   | '$$PurchaseReturnOrder022001$$' | 'L/Green'                   | '*'        | ''         | ''        | ''                             | ''                     |
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
-	* Check the report output from the selected document
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseReturnOrder022001$$'      |
-		And I select current line in "List" table
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And I select "Purchase turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseReturnOrder022001$$'  | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Document registrations records' | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Register  "Purchase turnovers"' | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Period' | 'Resources' | ''       | ''           | 'Dimensions'   | ''                          | ''         | ''         | ''        | ''                             | 'Attributes'           |
-		| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Purchase invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                               | '*'      | '-2'        | '-450,2' | '-381,54'    | 'Main Company' | '$$PurchaseInvoice018006$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | 'No'                   |
-		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'USD'                          | 'No'                   |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"'      | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Order'                         | 'Item key'                  | 'Row key'  | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Receipt'     | '*'         | '2'         | 'Store 02'   | '$$PurchaseReturnOrder022001$$' | 'L/Green'                   | '*'        | ''         | ''        | ''                             | ''                     |
-	And I close all client application windows
-
-Scenario: _02201101 clear movements Purchase Return Order and check that there is no movements on the registers 
-	* Open list form Purchase Return Order
-		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
-	* Check the report generation
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPurchaseReturnOrder022001$$'      |
-	* Clear movements document and check that there is no movement on the registers
-		And in the table "List" I click the button named "ListContextMenuUndoPosting"
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "Purchase turnovers"' |
-			| 'Register  "Order reservation"'  |
-			| 'Register  "Stock reservation"'  |
-			| 'Register  "Order balance"'      |
-		And I close all client application windows
-	* Posting the document and check movements
-		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPurchaseReturnOrder022001$$'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		And I select "Purchase turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseReturnOrder022001$$'  | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Document registrations records' | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Register  "Purchase turnovers"' | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Period' | 'Resources' | ''       | ''           | 'Dimensions'   | ''                          | ''         | ''         | ''        | ''                             | 'Attributes'           |
-		| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Purchase invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                               | '*'      | '-2'        | '-450,2' | '-381,54'    | 'Main Company' | '$$PurchaseInvoice018006$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | 'No'                   |
-		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                               | '*'      | '-2'        | '-80'    | '-67,8'      | 'Main Company' | '$$PurchaseInvoice018006$$' | 'USD'      | 'L/Green'  | '*'       | 'USD'                          | 'No'                   |
-		And I select "Order reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Expense'     | '*'      | '2'         | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"'      | ''            | ''          | ''          | ''           | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Record type' | 'Period'    | 'Resources' | 'Dimensions' | ''                              | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | ''            | ''          | 'Quantity'  | 'Store'      | 'Order'                         | 'Item key'                  | 'Row key'  | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Receipt'     | '*'         | '2'         | 'Store 02'   | '$$PurchaseReturnOrder022001$$' | 'L/Green'                   | '*'        | ''         | ''        | ''                             | ''                     |
-		And I close all client application windows
 
 
 

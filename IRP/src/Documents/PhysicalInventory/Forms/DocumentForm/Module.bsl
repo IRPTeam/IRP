@@ -47,9 +47,15 @@ EndProcedure
 #EndRegion
 
 #Region ItemsFormEvents
+
 &AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 	DocPhysicalInventoryClient.ItemListOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListAfterDeleteRow(Item)
+	DocPhysicalInventoryClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -289,3 +295,9 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+

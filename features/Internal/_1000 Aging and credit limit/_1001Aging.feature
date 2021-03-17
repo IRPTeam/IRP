@@ -915,13 +915,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 				| ''                                    | 'Expense'     | '$$DateSalesInvoice0240164$$' | '430'       | 'Main Company' | '$$SalesInvoice0240164$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 				| ''                                    | 'Expense'     | '$$DateSalesInvoice0240164$$' | '430'       | 'Main Company' | '$$SalesInvoice0240164$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 				| ''                                    | 'Expense'     | '$$DateSalesInvoice0240164$$' | '430'       | 'Main Company' | '$$SalesInvoice0240164$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-			And I select "Inventory balance" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Inventory balance"' | ''            | ''                            | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | ''            | ''                            | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | 'Expense'     | '$$DateSalesInvoice0240164$$' | '1'         | 'Main Company' | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
+
 			And I select "Aging" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -949,13 +943,6 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 				| ''                               | 'Receipt'     | '$$DateSalesInvoice0240164$$' | ''                     | ''               | ''                       | '550'            | 'Main Company' | 'Kalipso' | 'Company Kalipso' | '$$SalesInvoice0240164$$' | 'TRY'      | '' | '' |
 				| ''                               | 'Expense'     | '$$DateSalesInvoice0240164$$' | ''                     | ''               | ''                       | '430'            | 'Main Company' | 'Kalipso' | 'Company Kalipso' | '$$SalesInvoice0240164$$' | 'TRY'      | '' | '' |
 				| ''                               | 'Expense'     | '$$DateSalesInvoice0240164$$' | ''                     | ''               | '430'                    | ''               | 'Main Company' | 'Kalipso' | 'Company Kalipso' | '$$SalesInvoice0240164$$' | 'TRY'      | '' | '' |
-			And I select "Stock reservation" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Stock reservation"' | ''            | ''                            | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | ''            | ''                            | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | 'Expense'     | '$$DateSalesInvoice0240164$$' | '1'         | 'Store 01'   | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
 			And I select "Sales turnovers" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -992,13 +979,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 				| ''                                   | 'Expense'     | '$$DateSalesInvoice0240164$$' | '73,62'     | 'Main Company' | 'Kalipso' | 'Company Kalipso' | 'USD'      | '$$BankReceipt10000501$$' | 'Reporting currency'           | 'No'                   | '' | '' | '' |
 				| ''                                   | 'Expense'     | '$$DateSalesInvoice0240164$$' | '430'       | 'Main Company' | 'Kalipso' | 'Company Kalipso' | 'TRY'      | '$$BankReceipt10000501$$' | 'Local currency'               | 'No'                   | '' | '' | '' |
 				| ''                                   | 'Expense'     | '$$DateSalesInvoice0240164$$' | '430'       | 'Main Company' | 'Kalipso' | 'Company Kalipso' | 'TRY'      | '$$BankReceipt10000501$$' | 'en description is empty'      | 'No'                   | '' | '' | '' |
-			And I select "Stock balance" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Stock balance"' | ''            | ''                            | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                          | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                          | ''            | ''                            | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                          | 'Expense'     | '$$DateSalesInvoice0240164$$' | '1'         | 'Store 01'   | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
+			
 			And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -1137,13 +1118,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 				| ''                                    | 'Expense'     | '$$DateSalesInvoice0240165$$' | '380'       | 'Main Company' | '$$SalesInvoice0240165$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 				| ''                                    | 'Expense'     | '$$DateSalesInvoice0240165$$' | '380'       | 'Main Company' | '$$SalesInvoice0240165$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 				| ''                                    | 'Expense'     | '$$DateSalesInvoice0240165$$' | '380'       | 'Main Company' | '$$SalesInvoice0240165$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-			And I select "Inventory balance" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Inventory balance"' | ''            | ''                            | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | ''            | ''                            | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | 'Expense'     | '$$DateSalesInvoice0240165$$' | '1'         | 'Main Company' | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
+
 			And I select "Aging" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -1171,13 +1146,6 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 				| ''                               | 'Receipt'     | '$$DateSalesInvoice0240165$$' | ''                     | ''               | ''                       | '550'            | 'Main Company' | 'Kalipso' | 'Company Kalipso' | '$$SalesInvoice0240165$$' | 'TRY'      | '' | '' |
 				| ''                               | 'Expense'     | '$$DateSalesInvoice0240165$$' | ''                     | ''               | ''                       | '380'            | 'Main Company' | 'Kalipso' | 'Company Kalipso' | '$$SalesInvoice0240165$$' | 'TRY'      | '' | '' |
 				| ''                               | 'Expense'     | '$$DateSalesInvoice0240165$$' | ''                     | ''               | '380'                    | ''               | 'Main Company' | 'Kalipso' | 'Company Kalipso' | '$$SalesInvoice0240165$$' | 'TRY'      | '' | '' |
-			And I select "Stock reservation" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Stock reservation"' | ''            | ''                            | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | ''            | ''                            | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                              | 'Expense'     | '$$DateSalesInvoice0240165$$' | '1'         | 'Store 01'   | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
 			And I select "Sales turnovers" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -1214,13 +1182,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 				| ''                                   | 'Expense'     | '$$DateSalesInvoice0240165$$' | '65,06'     | 'Main Company' | 'Kalipso' | 'Company Kalipso' | 'USD'      | '$$CashReceipt10000505$$' | 'Reporting currency'           | 'No'                   | '' | '' | '' |
 				| ''                                   | 'Expense'     | '$$DateSalesInvoice0240165$$' | '380'       | 'Main Company' | 'Kalipso' | 'Company Kalipso' | 'TRY'      | '$$CashReceipt10000505$$' | 'Local currency'               | 'No'                   | '' | '' | '' |
 				| ''                                   | 'Expense'     | '$$DateSalesInvoice0240165$$' | '380'       | 'Main Company' | 'Kalipso' | 'Company Kalipso' | 'TRY'      | '$$CashReceipt10000505$$' | 'en description is empty'      | 'No'                   | '' | '' | '' |
-			And I select "Stock balance" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Stock balance"' | ''            | ''                            | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                          | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                          | ''            | ''                            | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-				| ''                          | 'Expense'     | '$$DateSalesInvoice0240165$$' | '1'         | 'Store 01'   | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
+			
 			And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:

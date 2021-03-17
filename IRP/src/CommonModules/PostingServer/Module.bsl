@@ -1178,72 +1178,81 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 	EndIf;
 	
 	LineNumberAndItemKeyFromItemList = GetLineNumberAndItemKeyFromItemList(Ref, TableNameWithItemKeys);
-	If Parameters.DocumentDataTables.Property("StockReservation_Exists") Then
+	
+	// R4011B_FreeStocks
+	If Parameters.Object.RegisterRecords.Find("R4011B_FreeStocks") <> Undefined Then
 		Records_InDocument = Undefined;
 		If Unposting Then
-			Records_InDocument = Parameters.Object.RegisterRecords.StockReservation.Unload();
+			Records_InDocument = Parameters.Object.RegisterRecords.R4011B_FreeStocks.Unload();
 		Else
-			PostingDataTable = Parameters.PostingDataTables[Parameters.Object.RegisterRecords.StockReservation];
-			If PostingDataTable <> Undefined Then
-				Records_InDocument = PostingDataTable.RecordSet;
-			EndIf;
+			Records_InDocument = GetQueryTableByName("R4011B_FreeStocks", Parameters, True);
 		EndIf;	
-			
-		If Records_InDocument <> Undefined 
-			And TypeOf(Records_InDocument) = Type("ValueTable") 
-			And Not Records_InDocument.Columns.Count() Then
-				Records_InDocument = PostingServer.CreateTable(Metadata.AccumulationRegisters.StockReservation);
-		EndIf;
 		
-		If Not Cancel And Records_InDocument <> Undefined 
-			And Not AccReg.StockReservation.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
-			Records_InDocument, 
-			Parameters.DocumentDataTables.StockReservation_Exists, 
-			RecordType, Unposting, AddInfo) Then
+		If Not Records_InDocument.Columns.Count() Then
+			Records_InDocument = PostingServer.CreateTable(Metadata.AccumulationRegisters.R4011B_FreeStocks);
+		EndIf;
+				
+		If Not Cancel And Not AccReg.R4011B_FreeStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, Records_InDocument, 
+			                                                    GetQueryTableByName("Exists_R4011B_FreeStocks", Parameters, True), 
+			                                                    RecordType,  Unposting, AddInfo) Then
 			Cancel = True;
 		EndIf;
 	EndIf;
 	
-	If Parameters.DocumentDataTables.Property("StockBalance_Exists") Then
+	// R4010B_ActualStocks
+	If Parameters.Object.RegisterRecords.Find("R4010B_ActualStocks") <> Undefined Then
 		Records_InDocument = Undefined;
 		If Unposting Then
-			Records_InDocument = Parameters.Object.RegisterRecords.StockBalance.Unload();
+			Records_InDocument = Parameters.Object.RegisterRecords.R4010B_ActualStocks.Unload();
 		Else
-			PostingDataTable = Parameters.PostingDataTables[Parameters.Object.RegisterRecords.StockBalance];
-			If PostingDataTable <> Undefined Then
-				Records_InDocument = PostingDataTable.RecordSet;
-			EndIf;
+			Records_InDocument = GetQueryTableByName("R4010B_ActualStocks", Parameters, True);
 		EndIf;
-		
-		If Records_InDocument <> Undefined 
-			And TypeOf(Records_InDocument) = Type("ValueTable") 
-			And Not Records_InDocument.Columns.Count() Then
-				Records_InDocument = PostingServer.CreateTable(Metadata.AccumulationRegisters.StockBalance);
+	
+		If Not Records_InDocument.Columns.Count() Then
+			Records_InDocument = PostingServer.CreateTable(Metadata.AccumulationRegisters.R4010B_ActualStocks);
 		EndIf;
-		
-		If Not Cancel And Records_InDocument <> Undefined
-			And Not AccReg.StockBalance.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
-			Records_InDocument, 
-			Parameters.DocumentDataTables.StockBalance_Exists, 
-			RecordType, Unposting, AddInfo) Then
+			
+		If Not Cancel And Not AccReg.R4010B_ActualStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, Records_InDocument, 
+			                                                      GetQueryTableByName("R4010B_ActualStocks", Parameters, True), 
+			                                                      RecordType, Unposting, AddInfo) Then
 			Cancel = True;
 		EndIf;
 	EndIf;
 EndProcedure
 
-Function CheckBalance_StockReservation(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
+Function CheckBalance_R4011B_FreeStocks(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
 	Parameters = New Structure();
-	Parameters.Insert("RegisterName" , "StockReservation");
-	Parameters.Insert("Operation"    , "Reservation");
+	Parameters.Insert("RegisterName" , "R4011B_FreeStocks");
+	Parameters.Insert("Operation"    , "R4011B_FreeStocks");
 	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);	
 EndFunction	
 
-Function CheckBalance_StockBalance(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
+Function Exists_R4011B_FreeStocks() Export
+	Return
+	"SELECT *
+	|INTO Exists_R4011B_FreeStocks
+	|FROM
+	|	AccumulationRegister.R4011B_FreeStocks AS R4011B_FreeStocks
+	|WHERE
+	|	R4011B_FreeStocks.Recorder = &Ref";
+EndFunction
+
+Function CheckBalance_R4010B_ActualStocks(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
 	Parameters = New Structure();
-	Parameters.Insert("RegisterName" , "StockBalance");
-	Parameters.Insert("Operation"    , "Write off");
-	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+	Parameters.Insert("RegisterName" , "R4010B_ActualStocks");
+	Parameters.Insert("Operation"    , "R4010B_ActualStocks");
+	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);	
 EndFunction	
+
+Function Exists_R4010B_ActualStocks() Export
+	Return
+	"SELECT *
+	|INTO Exists_R4010B_ActualStocks
+	|FROM
+	|	AccumulationRegister.R4010B_ActualStocks AS R4010B_ActualStocks
+	|WHERE
+	|	R4010B_ActualStocks.Recorder = &Ref";
+EndFunction
 
 Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
 	BalancePeriod = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod");
@@ -1451,10 +1460,14 @@ Function QueryTableIsExists(TableName, Parameters) Export
 	Return Parameters.TempTablesManager.Tables.Find(TableName) <> Undefined;
 EndFunction
 
-Function GetQueryTableByName(TableName, Parameters) Export
+Function GetQueryTableByName(TableName, Parameters, RaiseExeption = False) Export
 	VTSearch = Parameters.TempTablesManager.Tables.Find(TableName);
 	If VTSearch = Undefined Then
-		Return New ValueTable();
+		If RaiseExeption Then
+			Raise StrTemplate("Table [%1] not found in temp tables", TableName);
+		Else
+			Return New ValueTable();
+		EndIf;
 	EndIf;
 	Return VTSearch.GetData().Unload();
 EndFunction	

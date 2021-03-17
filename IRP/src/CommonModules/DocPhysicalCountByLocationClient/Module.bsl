@@ -58,7 +58,7 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 	NotifyParameters = New Structure;
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form", Form);
-	NotifyDescription = New NotifyDescription("PickupItemsEnd", DocPhysicalInventoryClient, NotifyParameters);
+	NotifyDescription = New NotifyDescription("PickupItemsEnd", DocPhysicalCountByLocationClient, NotifyParameters);
 	OpenFormParameters = New Structure;
 	StoreArray = New Array;
 	StoreArray.Add(Object.Store);

@@ -22,11 +22,11 @@ Function ItemInfo_Query(Parameters, AddInfo)
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	ItemKeys.Ref AS ItemKey,
-		|   &PriceType AS PriceType,
+		|	&PriceType AS PriceType,
 		|	ItemKeys.Item AS Item,
 		|	ItemVT.ItemPresentation AS ItemPresentation,
 		|	ItemKeys.Item.ItemType AS ItemType,
-		|	NestedSelect.QuantityBalance AS Remaining,
+		|	0 AS Remaining,
 		|	ISNULL(ItemKeys.Item.Unit, VALUE(Catalog.Units.EmptyRef)) AS Unit,
 		|	ISNULL(PriceList.Price, 0) AS Price,
 		|	0 AS Quantity,
@@ -42,41 +42,23 @@ Function ItemInfo_Query(Parameters, AddInfo)
 		|			PricesSliceLast.Price AS Price,
 		|			PricesSliceLast.Unit AS Unit
 		|		FROM
-		|			InformationRegister.PricesByItemKeys.SliceLast(
-		|					&Period,
-		|					PriceType = &PriceType
-		|						AND ItemKey.Item IN
-		|							(SELECT
-		|								ItemVT.Item
-		|							FROM
-		|								ItemVT)) AS PricesSliceLast) AS PriceList
+		|			InformationRegister.PricesByItemKeys.SliceLast(&Period, PriceType = &PriceType
+		|			AND ItemKey.Item IN
+		|				(SELECT
+		|					ItemVT.Item
+		|				FROM
+		|					ItemVT)) AS PricesSliceLast) AS PriceList
 		|		ON ItemKeys.Ref = PriceList.ItemKey
-		|			AND ItemKeys.Item.Unit = PriceList.Unit
+		|		AND ItemKeys.Item.Unit = PriceList.Unit
 		|		INNER JOIN ItemVT AS ItemVT
 		|		ON ItemKeys.Item = ItemVT.Item
-		|		LEFT JOIN (SELECT
-		|			ItemsInStoresBalance.ItemKey AS ItemKey,
-		|			ItemsInStoresBalance.QuantityBalance AS QuantityBalance
-		|		FROM
-		|			AccumulationRegister.ItemsInStores.Balance(
-		|					&Period,
-		|					Store = &Store
-		|						AND ItemKey.Item IN
-		|							(SELECT
-		|								ItemVT.Item
-		|							FROM
-		|								ItemVT)) AS ItemsInStoresBalance) AS NestedSelect
-		|		ON ItemKeys.Ref = NestedSelect.ItemKey
-		|
 		|GROUP BY
 		|	ItemKeys.Ref,
 		|	ItemKeys.Item.ItemType,
 		|	PriceList.Price,
 		|	ItemVT.ItemPresentation,
 		|	ItemKeys.Item,
-		|	ISNULL(ItemKeys.Item.Unit, VALUE(Catalog.Units.EmptyRef)),
-		|	NestedSelect.QuantityBalance
-		|
+		|	ISNULL(ItemKeys.Item.Unit, VALUE(Catalog.Units.EmptyRef))
 		|ORDER BY
 		|	ItemPresentation
 		|AUTOORDER";

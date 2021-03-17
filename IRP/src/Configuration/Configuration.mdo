@@ -699,11 +699,8 @@
   <accumulationRegisters>AccumulationRegister.GoodsInTransitIncoming</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.GoodsInTransitOutgoing</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.GoodsReceiptSchedule</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.InventoryBalance</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.ItemsInStores</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.OrderBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.OrderProcurement</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.OrderReservation</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.PartnerApTransactions</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.PartnerArTransactions</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.PlaningCashTransactions</accumulationRegisters>

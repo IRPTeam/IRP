@@ -76,7 +76,6 @@ Scenario: 950100 Basic role
 	When Create catalog IntegrationSettings objects
 	When Create information register CurrencyRates records
 	When Create information register Barcodes records
-	When Create accumulation register StockBalance records
 	When Create information register UserSettings records (Retail document)
 	When update ItemKeys
 	When Create catalog ItemKeys objects (Table)

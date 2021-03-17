@@ -121,13 +121,6 @@ Scenario: _060202 create Sales invoice with Ar details by Partner terms and chec
 			| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 			| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 			| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-			And I select "Inventory balance" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Inventory balance"' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '20'        | 'Main Company' | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
 			And I select "Taxes turnovers" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -145,13 +138,6 @@ Scenario: _060202 create Sales invoice with Ar details by Partner terms and chec
 			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''                | ''                | ''               | ''         | '' | '' |
 			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'         | 'Legal name'      | 'Basis document' | 'Currency' | '' | '' |
 			| ''                               | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '11 000'         | 'Main Company' | 'Partner Kalipso' | 'Company Kalipso' | ''               | 'TRY'      | '' | '' |
-			And I select "Stock reservation" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '20'        | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
 			And I select "Sales turnovers" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -486,13 +472,7 @@ Scenario: _060204 check the offset of the advance for Sales invoice with the typ
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Inventory balance"' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '20'        | 'Main Company' | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
+
 		And I select "Taxes turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -512,13 +492,6 @@ Scenario: _060204 check the offset of the advance for Sales invoice with the typ
 			| ''                               | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '11 000'         | 'Main Company' | 'Partner Kalipso' | 'Company Kalipso' | ''               | 'TRY'      | '' | '' |
 			| ''                               | 'Expense'     | '*'      | ''                     | ''               | ''                       | '11 000'         | 'Main Company' | 'Partner Kalipso' | 'Company Kalipso' | ''               | 'TRY'      | '' | '' |
 			| ''                               | 'Expense'     | '*'      | ''                     | ''               | '11 000'                 | ''               | 'Main Company' | 'Partner Kalipso' | 'Company Kalipso' | ''               | 'TRY'      | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                              | 'Expense'     | '*'      | '20'        | 'Store 02'   | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Sales turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -625,15 +598,7 @@ Scenario: _060205 create Purchase invoice with Ap details by Partner terms and c
 			And I save the window as "$$PurchaseInvoice060205$$"
 	* Check Purchase Invoice movements 
 		And I click "Registrations report" button
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseInvoice060205$$'      | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| 'Document registrations records' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| 'Register  "Inventory balance"'  | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '20'        | 'Main Company' | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
+
 		And I select "Purchase turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -651,13 +616,6 @@ Scenario: _060205 create Purchase invoice with Ap details by Partner terms and c
 		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''                 | ''                  | ''               | ''         | '' | '' |
 		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'          | 'Legal name'        | 'Basis document' | 'Currency' | '' | '' |
 		| ''                               | 'Receipt'     | '*'      | ''                     | '11 000'         | ''                       | ''               | 'Main Company' | 'Partner Ferron 1' | 'Company Ferron BP' | ''               | 'TRY'      | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '20'        | 'Store 01'   | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -683,13 +641,7 @@ Scenario: _060205 create Purchase invoice with Ap details by Partner terms and c
 		| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Ferron 1' | 'Company Ferron BP' | 'Vendor Ferron 1' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 		| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Ferron 1' | 'Company Ferron BP' | 'Vendor Ferron 1' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 		| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Ferron 1' | 'Company Ferron BP' | 'Vendor Ferron 1' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'            | ''            | ''          | ''                     | ''               | ''                          | ''                          | ''                  | ''                         | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                          | ''                          | ''                  | ''                         | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | ''            | ''          | 'Quantity'             | 'Store'          | 'Item key'                  | ''                          | ''                  | ''                         | ''                        | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '*'         | '20'                   | 'Store 01'       | 'L/Green'                   | ''                          | ''                  | ''                         | ''                        | ''                             | ''                     | ''                             | ''                     |
+		
 		And I close all client application windows
 	
 Scenario: _060206 create Cash payment (partner term with Ap details by partner term) and check its movements
@@ -899,15 +851,6 @@ Scenario: _060207 check the offset of the advance for Purchase invoice with the 
 			And I save the window as "$$PurchaseInvoice060207$$"
 	* Check movements PurchaseInvoice by register PartnerApTransactions
 		And I click "Registrations report" button
-		And I select "Inventory balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseInvoice060207$$'      | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| 'Document registrations records' | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| 'Register  "Inventory balance"'  | ''            | ''       | ''          | ''             | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | '20'        | 'Main Company' | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Purchase turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -927,13 +870,6 @@ Scenario: _060207 check the offset of the advance for Purchase invoice with the 
 		| ''                               | 'Receipt'     | '*'      | ''                     | '11 000'         | ''                       | ''               | 'Main Company' | 'Partner Ferron 1' | 'Company Ferron BP' | ''               | 'TRY'      | '' | '' |
 		| ''                               | 'Expense'     | '*'      | ''                     | '11 000'         | ''                       | ''               | 'Main Company' | 'Partner Ferron 1' | 'Company Ferron BP' | ''               | 'TRY'      | '' | '' |
 		| ''                               | 'Expense'     | '*'      | '11 000'               | ''               | ''                       | ''               | 'Main Company' | 'Partner Ferron 1' | 'Company Ferron BP' | ''               | 'TRY'      | '' | '' |
-		And I select "Stock reservation" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '20'        | 'Store 01'   | 'L/Green'  | '' | '' | '' | '' | '' | '' | '' | '' |
 		And I select "Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -972,13 +908,7 @@ Scenario: _060207 check the offset of the advance for Purchase invoice with the 
 		| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Ferron 1' | 'Company Ferron BP' | 'Vendor Ferron 1' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
 		| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Ferron 1' | 'Company Ferron BP' | 'Vendor Ferron 1' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
 		| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Ferron 1' | 'Company Ferron BP' | 'Vendor Ferron 1' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Stock balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Stock balance"'            | ''            | ''          | ''                     | ''               | ''                          | ''                          | ''                  | ''                         | ''                             | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                          | ''                          | ''                  | ''                         | ''                             | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | ''            | ''          | 'Quantity'             | 'Store'          | 'Item key'                  | ''                          | ''                  | ''                         | ''                             | ''                             | ''                     | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '*'         | '20'                   | 'Store 01'       | 'L/Green'                   | ''                          | ''                  | ''                         | ''                             | ''                             | ''                     | ''                             | ''                     |
+	
 	And I close all client application windows
 	
 

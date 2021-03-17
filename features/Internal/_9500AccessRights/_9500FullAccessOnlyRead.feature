@@ -76,7 +76,6 @@ Scenario: 950000 preparation (role Full access only read)
 	When Create catalog IntegrationSettings objects
 	When Create information register CurrencyRates records
 	When Create information register Barcodes records
-	When Create accumulation register StockBalance records
 	When Create information register UserSettings records (Retail document)
 	When Create catalog ItemKeys objects (Table)
 	When Create catalog Items objects (Table)

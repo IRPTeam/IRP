@@ -2980,52 +2980,6 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.InventoryBalance</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.ItemsInStores</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>InformationRegister.ItemSegments</name>
 		<right>
 			<name>Read</name>
@@ -6920,29 +6874,6 @@
 		<name>HTTPService.FileTransferService.URLTemplate.FileTransfer.Method.POST</name>
 		<right>
 			<name>Use</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.OrderReservation</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>TotalsControl</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -16443,20 +16374,6 @@
 	</object>
 	<object>
 		<name>Document.ShipmentConfirmation.Command.GenerateShipmentConfirmation</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.StockAdjustmentAsSurplus.Command.GenerateStockAdjustmentAsSurplus</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.StockAdjustmentAsWriteOff.Command.GenerateStockAdjustmentAsWriteOff</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

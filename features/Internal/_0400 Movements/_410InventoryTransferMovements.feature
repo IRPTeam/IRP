@@ -479,5 +479,5 @@ Scenario: _0402439 Inventory transfer clear posting
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-	|		| 'R4050 Stock inventory' |
+			| 'R4050 Stock inventory' |
 		And I close all client application windows

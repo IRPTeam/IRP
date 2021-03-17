@@ -101,7 +101,7 @@ Scenario: _041802 check Stock adjustment as surplus movements by the Register  "
 		Then "ResultTable" spreadsheet document is equal
 			| 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | ''            | ''                    | ''          | ''           | ''         |
 			| 'Document registrations records'                            | ''            | ''                    | ''          | ''           | ''         |
-			| 'Register  "R4010 Actual stocks"'                           | ''            | ''                    | ''          | ''           | ''         |
+			| 'Register  "R4011 Free stocks"'                             | ''            | ''                    | ''          | ''           | ''         |
 			| ''                                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
 			| ''                                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
 			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '4'         | 'Store 05'   | '36/18SD'  |

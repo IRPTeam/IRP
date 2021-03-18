@@ -520,7 +520,7 @@ Function ItemList()
 	|	PurchaseOrderItems.QuantityInBaseUnit AS Quantity,
 	|	PurchaseOrderItems.Unit,
 	|	PurchaseOrderItems.Ref.Date AS Period,
-	|	TableRowIDInfo.RowID AS RowKey,
+	|	ISNULL(TableRowIDInfo.RowID, PurchaseOrderItems.Key)  AS RowKey,
 	|	PurchaseOrderItems.BusinessUnit AS BusinessUnit,
 	|	PurchaseOrderItems.ExpenseType AS ExpenseType,
 	|	PurchaseOrderItems.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,

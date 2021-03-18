@@ -1464,21 +1464,6 @@ EndFunction
 Function ItemList()
 	Return
 	"SELECT
-	|	RowIDInfo.Ref AS Ref,
-	|	RowIDInfo.Key AS Key,
-	|	MAX(RowIDInfo.RowID) AS RowID
-	|INTO TableRowIDInfo
-	|FROM
-	|	Document.SalesOrder.RowIDInfo AS RowIDInfo
-	|WHERE
-	|	RowIDInfo.Ref = &Ref
-	|GROUP BY
-	|	RowIDInfo.Ref,
-	|	RowIDInfo.Key
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
 	|	SalesOrderItemList.Ref.Company AS Company,
 	|	SalesOrderItemList.Ref.ShipmentConfirmationsBeforeSalesInvoice AS ShipmentConfirmationsBeforeSalesInvoice,
 	|	SalesOrderItemList.Store AS Store,
@@ -1490,7 +1475,7 @@ Function ItemList()
 	|	SalesOrderItemList.Unit,
 	|	SalesOrderItemList.ItemKey.Item AS Item,
 	|	SalesOrderItemList.Ref.Date AS Period,
-	|	TableRowIDInfo.RowID AS RowKey,
+	|	SalesOrderItemList.Key AS RowKey,
 	|	SalesOrderItemList.DeliveryDate AS DeliveryDate,
 	|	SalesOrderItemList.ProcurementMethod,
 	|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS IsProcurementMethod_Stock,
@@ -1508,8 +1493,6 @@ Function ItemList()
 	|INTO ItemList
 	|FROM
 	|	Document.SalesOrder.ItemList AS SalesOrderItemList
-	|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
-	|		ON SalesOrderItemList.Key = TableRowIDInfo.Key
 	|WHERE
 	|	SalesOrderItemList.Ref = &Ref
 	|	AND &StatusInfoPosting";

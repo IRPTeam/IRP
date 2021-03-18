@@ -99,10 +99,12 @@ EndProcedure
 
 Procedure QuantityOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	Object.QuantityInBaseUnit = DocUnbundlingServer.CalculateQuantityInBaseUnit(Object.ItemKeyBundle, Object.Unit, Object.Quantity);
 EndProcedure
 
 Procedure UnitOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	Object.QuantityInBaseUnit = DocUnbundlingServer.CalculateQuantityInBaseUnit(Object.ItemKeyBundle, Object.Unit, Object.Quantity);
 EndProcedure
 
 Procedure ItemListQuantityOnChange(Object, Form, Item) Export

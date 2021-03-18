@@ -223,6 +223,11 @@ Procedure SearchByBarcode(Command, Barcode = "")
 	DocUnbundlingClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
 #Region GroupTitleDecorations
 
 &AtClient

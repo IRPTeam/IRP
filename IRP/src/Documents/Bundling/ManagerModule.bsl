@@ -19,7 +19,7 @@ EndFunction
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = Parameters.DocumentDataTables;	
 	QueryArray = GetQueryTextsMasterTables();
-	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.SetRegisters(Tables, Ref, True);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -62,10 +62,38 @@ EndProcedure
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	If Not (Parameters.Property("Unposting") And Parameters.Unposting) Then
-		Parameters.Insert("RecordType", AccumulationRecordType.Expense);
-	EndIf;
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ErrorQuantityField", "Object.Quantity");
-	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.Bundling.ItemList", AddInfo);
+		// is posting
+		FreeStocksTable   =  PostingServer.GetQueryTableByName("R4011B_FreeStocks", Parameters, True);
+		ActualStocksTable =  PostingServer.GetQueryTableByName("R4010B_ActualStocks", Parameters, True);
+		Exists_FreeStocksTable   =  PostingServer.GetQueryTableByName("Exists_R4011B_FreeStocks", Parameters, True);
+		Exists_ActualStocksTable =  PostingServer.GetQueryTableByName("Exists_R4010B_ActualStocks", Parameters, True);
+		
+		Filter = New Structure("RecordType", AccumulationRecordType.Expense);
+		
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4011B_FreeStocks"          , FreeStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4010B_ActualStocks"        , ActualStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks"   , Exists_FreeStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks" , Exists_ActualStocksTable.Copy(Filter));
+		
+		Parameters.Insert("RecordType", Filter.RecordType);
+		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.Bundling.ItemList", AddInfo);
+		
+		
+		Filter = New Structure("RecordType", AccumulationRecordType.Receipt);
+
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4011B_FreeStocks"          , FreeStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4010B_ActualStocks"        , ActualStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks"   , Exists_FreeStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks" , Exists_ActualStocksTable.Copy(Filter));
+		
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ErrorQuantityField", "Object.Quantity");
+		Parameters.Insert("RecordType", Filter.RecordType);
+		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.Bundling.ItemList", AddInfo);
+	Else
+		// is unposting
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ErrorQuantityField", "Object.Quantity");
+		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.Bundling.ItemList", AddInfo);
+	EndIf;	
 EndProcedure
 
 #EndRegion
@@ -174,8 +202,9 @@ Function Header()
 	|	Bundling.Company,
 	|	Bundling.Store,
 	|	&ItemKey,
-	|	Bundling.QuantityInBaseUnit,
-	|	
+	|	Bundling.QuantityInBaseUnit AS Quantity,
+	|	Bundling.Ref
+	|INTO Header	
 	|FROM
 	|	Document.Bundling AS Bundling
 	|WHERE
@@ -234,7 +263,7 @@ Function R4010B_ActualStocks()
 	|	ItemList.Store,
 	|	ItemList.ItemKey,
 	|	ItemList.Quantity
-	|INTO R4011B_FreeStocks
+	|INTO R4010B_ActualStocks
 	|FROM
 	|	ItemList AS ItemList
 	|WHERE
